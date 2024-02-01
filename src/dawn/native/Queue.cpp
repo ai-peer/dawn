@@ -190,6 +190,7 @@ class ErrorQueue : public QueueBase {
     }
     bool HasPendingCommands() const override { DAWN_UNREACHABLE(); }
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override { DAWN_UNREACHABLE(); }
+    MaybeError ForceImmediateFlushOfCommands() override { DAWN_UNREACHABLE(); }
     void ForceEventualFlushOfCommands() override { DAWN_UNREACHABLE(); }
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override {
         DAWN_UNREACHABLE();
