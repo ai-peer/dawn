@@ -34,6 +34,29 @@
       "parentUuid": "19c26912_9d2571d4",
       "revId": "243b86b9d9d2de658dff543252e7563c37f1a94d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64eb8a5b_2c028361",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-01T21:23:11Z",
+      "side": 1,
+      "message": "nit: maybe 4, since offset and size have to be 16 bytes aligned for UpdateSubresource1() .",
+      "range": {
+        "startLine": 42,
+        "startChar": 36,
+        "endLine": 42,
+        "endChar": 37
+      },
+      "revId": "243b86b9d9d2de658dff543252e7563c37f1a94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
