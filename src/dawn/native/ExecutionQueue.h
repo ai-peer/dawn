@@ -57,6 +57,10 @@ class ExecutionQueueBase {
     MaybeError CheckPassedSerials();
 
     // For the commands being internally recorded in backend, that were not urgent to submit, this
+    // method forces them to be submitted immediately.
+    virtual MaybeError ForceImmediateFlushOfCommands() = 0;
+
+    // For the commands being internally recorded in backend, that were not urgent to submit, this
     // method makes them to be submitted as soon as possible in next ticks.
     virtual void ForceEventualFlushOfCommands() = 0;
 

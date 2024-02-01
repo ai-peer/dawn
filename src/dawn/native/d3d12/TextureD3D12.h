@@ -92,8 +92,9 @@ class Texture final : public d3d::Texture {
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
-    MaybeError SynchronizeImportedTextureBeforeUse();
-    MaybeError SynchronizeImportedTextureAfterUse();
+    MaybeError SynchronizeTextureBeforeUse();
+
+    void NotifySwapChainPresentToPIX();
 
     void TrackUsageAndGetResourceBarrierForPass(CommandRecordingContext* commandContext,
                                                 std::vector<D3D12_RESOURCE_BARRIER>* barrier,

@@ -438,6 +438,10 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     return GetLastSubmittedCommandSerial();
 }
 
+MaybeError Queue::ForceImmediateFlushOfCommands() {
+    return {};
+}
+
 void Queue::ForceEventualFlushOfCommands() {}
 
 bool Queue::HasPendingCommands() const {

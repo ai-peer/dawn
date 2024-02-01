@@ -288,6 +288,7 @@ class Queue final : public QueueBase {
                                const void* data,
                                size_t size) override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
+    MaybeError ForceImmediateFlushOfCommands() override;
     void ForceEventualFlushOfCommands() override;
     bool HasPendingCommands() const override;
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
