@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae195065_8d327a45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:21:12Z",
+      "side": 1,
+      "message": "I\u0027m way too tired to try and untangle the bindings, but based on what I\u0027ve seen, it looks pretty good to me!\nDan is far better positioned to review the nitty-gritty details here.",
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c8978e_7e4866e2",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:21:12Z",
+      "side": 1,
+      "message": "2024\n```suggestion\n/// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a546b02f_73c69b96",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:21:12Z",
+      "side": 1,
+      "message": "I\u0027m guessing that this is the same pattern in the other writers, but given that this is declared in the .cc file, it must be private to this compilation unit. Given that, it would be nicer if this were declared in an anonymous namespace. No need to expose symbols further than we need to.\n\nHaving said that, it looks like the only usage of this hasher is with a Tint Hashmap. In which case, I\u0027d recommend the `HashCode()` member pattern.",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 0
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a0adf6_1e572a30",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:21:12Z",
+      "side": 1,
+      "message": "2024\n```suggestion\n/// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
