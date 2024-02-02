@@ -52,6 +52,24 @@
       "parentUuid": "92d56b57_1069c26b",
       "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf64910b_cff71f3a",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-02T10:59:43Z",
+      "side": 1,
+      "message": "SG! So here\u0027s a followup question: Does there need to be a separate toggle from `use_user_defined_labels_in_backend`, or should we just not set labels on backend objects if that toggle isn\u0027t set?",
+      "parentUuid": "69291fb0_6281cdef",
+      "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
