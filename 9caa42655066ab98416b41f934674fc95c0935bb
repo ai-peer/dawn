@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8752c767_b99c2a55",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-02T01:54:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d413fc6_3b25b6ac",
+      "range": {
+        "startLine": 229,
+        "startChar": 51,
+        "endLine": 229,
+        "endChar": 83
+      },
+      "revId": "9caa42655066ab98416b41f934674fc95c0935bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23b57897_40b08eb3",
