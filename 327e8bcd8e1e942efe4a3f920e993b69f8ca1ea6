@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a88ef38a_6eb8c8b6",
+        "filename": "src/tint/lang/wgsl/resolver/assignment_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T22:24:51Z",
+      "side": 1,
+      "message": "I probably shouldn\u0027t point out the painting of yoda and baby yoda along with the yoda hut lego I can see from my chair .....\n\nBut, that could work:\n\n```\nerror: cannot assign to an override\nnote: override variables are immutable\nnote: \u0027a\u0027 declared here\n```\n\nkinda thing",
+      "parentUuid": "07423b98_c0b74981",
+      "range": {
+        "startLine": 236,
+        "startChar": 44,
+        "endLine": 236,
+        "endChar": 80
+      },
+      "revId": "327e8bcd8e1e942efe4a3f920e993b69f8ca1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8d190d_392adcd5",
         "filename": "src/tint/lang/wgsl/resolver/sem_helper.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-02T21:50:08Z",
       "side": 1,
       "message": "Could be simplified, but I feel you\u0027re throwing away mildly interesting info.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 11
+      },
+      "revId": "327e8bcd8e1e942efe4a3f920e993b69f8ca1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06cf2523_b4b0f45d",
+        "filename": "src/tint/lang/wgsl/resolver/sem_helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T22:24:51Z",
+      "side": 1,
+      "message": "It ends up being redundant in every case I saw. The note is always following an error that says the thing i\u0027m removing. And, I don\u0027t care what it is when I\u0027m looking at the declaration as the declaration tells me.",
+      "parentUuid": "9b8d190d_392adcd5",
       "range": {
         "startLine": 192,
         "startChar": 0,

@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6674d6e8_d5c56242",
+        "filename": "src/tint/lang/wgsl/resolver/function_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T22:24:51Z",
+      "side": 1,
+      "message": "I liked having the `${addr_space}` before `address space` because that\u0027s the part I actually care about, the fact it\u0027s an address space is nice to know, but not really relevant. And, the `address space` is what you expected but the thing in `${addr_space}` could have been a var, or another enum, we just want it to be an address space.",
+      "parentUuid": "db48716d_9bfc69f5",
+      "range": {
+        "startLine": 1084,
+        "startChar": 76,
+        "endLine": 1084,
+        "endChar": 99
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad00ab18_427cc56c",
         "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
         "patchSetId": 1
@@ -239,6 +263,30 @@
       "side": 1,
       "message": "You could consider type constructor / converters as functions, but that\u0027s certainly doesn\u0027t fit with how we classify them in other diagnostics. We try very hard to treat them as an entirely different thing, that happens to use parentheses after an identifier / templated-identifier.",
       "parentUuid": "ed868807_778a8c16",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85bc5076_e4206680",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T22:24:51Z",
+      "side": 1,
+      "message": "We do, but should we .... that\u0027s the question I\u0027m currently pondering. Does the distinction matter in error messages.",
+      "parentUuid": "43b92c0f_916be9a8",
       "range": {
         "startLine": 2373,
         "startChar": 55,
