@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -31,12 +31,15 @@
 
 #include <cstring>
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text.h"
+#include "src/tint/utils/text/styled_text_printer.h"
+#include "src/tint/utils/text/styled_text_theme.h"
+#include "src/tint/utils/text/text_style.h"
 
-namespace tint::diag {
+namespace tint {
 namespace {
 
-bool supports_colors(FILE* f) {
+bool SupportsANSIEscape(FILE* f) {
     if (!isatty(fileno(f))) {
         return false;
     }
@@ -57,56 +60,14 @@ bool supports_colors(FILE* f) {
     return true;
 }
 
-class PrinterPosix : public Printer {
-  public:
-    PrinterPosix(FILE* f, bool colors) : file(f), use_colors(colors && supports_colors(f)) {}
-
-    void Write(const std::string& str, const Style& style) override {
-        WriteColor(style.color, style.bold);
-        fwrite(str.data(), 1, str.size(), file);
-        WriteColor(Color::kDefault, false);
-    }
-
-  private:
-    constexpr const char* ColorCode(Color color, bool bold) {
-        switch (color) {
-            case Color::kDefault:
-                return bold ? "\u001b[1m" : "\u001b[0m";
-            case Color::kBlack:
-                return bold ? "\u001b[30;1m" : "\u001b[30m";
-            case Color::kRed:
-                return bold ? "\u001b[31;1m" : "\u001b[31m";
-            case Color::kGreen:
-                return bold ? "\u001b[32;1m" : "\u001b[32m";
-            case Color::kYellow:
-                return bold ? "\u001b[33;1m" : "\u001b[33m";
-            case Color::kBlue:
-                return bold ? "\u001b[34;1m" : "\u001b[34m";
-            case Color::kMagenta:
-                return bold ? "\u001b[35;1m" : "\u001b[35m";
-            case Color::kCyan:
-                return bold ? "\u001b[36;1m" : "\u001b[36m";
-            case Color::kWhite:
-                return bold ? "\u001b[37;1m" : "\u001b[37m";
-        }
-        return "";  // unreachable
-    }
-
-    void WriteColor(Color color, bool bold) {
-        if (use_colors) {
-            auto* code = ColorCode(color, bold);
-            fwrite(code, 1, strlen(code), file);
-        }
-    }
-
-    FILE* const file;
-    const bool use_colors;
-};
-
 }  // namespace
 
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool use_colors) {
-    return std::make_unique<PrinterPosix>(out, use_colors);
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
+                                                             const StyledTextTheme& theme) {
+    if (SupportsANSIEscape(out)) {
+        return CreateANSI(out, theme);
+    }
+    return CreatePlain(out);
 }
 
-}  // namespace tint::diag
+}  // namespace tint

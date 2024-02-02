@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,23 +25,59 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/printer.h"
+#ifndef SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_
+#define SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_
 
-#include <string>
+#include <stdint.h>
+#include <optional>
 
-namespace tint::diag {
-
-Printer::~Printer() = default;
-
-StringPrinter::StringPrinter() = default;
-StringPrinter::~StringPrinter() = default;
-
-std::string StringPrinter::str() const {
-    return stream.str();
+/// Forward declarations
+namespace tint {
+class TextStyle;
 }
 
-void StringPrinter::Write(const std::string& str, const Style&) {
-    stream << str;
-}
+namespace tint {
 
-}  // namespace tint::diag
+/// StyledTextTheme holds coloring information for TextStyles
+struct StyledTextTheme {
+    /// The default theme
+    static const StyledTextTheme kDefault;
+
+    struct Color {
+        uint8_t r = 0;
+        uint8_t g = 0;
+        uint8_t b = 0;
+
+        /// Equality operator
+        bool operator==(const Color& other) const {
+            return r == other.r && g == other.g && b == other.b;
+        }
+    };
+
+    struct Attributes {
+        std::optional<Color> foreground;
+        std::optional<Color> background;
+        std::optional<bool> bold;
+        std::optional<bool> underlined;
+    };
+
+    Attributes From(TextStyle text_style) const;
+
+    Attributes severity_success;
+    Attributes severity_warning;
+    Attributes severity_failure;
+    Attributes severity_fatal;
+
+    Attributes kind_code;
+    Attributes kind_keyword;
+    Attributes kind_variable;
+    Attributes kind_type;
+    Attributes kind_function;
+    Attributes kind_enum;
+    Attributes kind_literal;
+    Attributes kind_squiggle;
+};
+
+}  // namespace tint
+
+#endif  // SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_

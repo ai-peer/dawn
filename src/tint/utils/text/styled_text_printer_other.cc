@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,36 +25,16 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/helpers/check_supported_extensions.h"
+// GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
 
-#include <string>
+#include <cstring>
 
-#include "src/tint/lang/wgsl/ast/module.h"
-#include "src/tint/utils/containers/hashset.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
-namespace tint::wgsl {
+namespace tint {
 
-bool CheckSupportedExtensions(std::string_view writer_name,
-                              const ast::Module& module,
-                              diag::List& diags,
-                              VectorRef<wgsl::Extension> supported) {
-    Hashset<wgsl::Extension, 32> set;
-    for (auto ext : supported) {
-        set.Add(ext);
-    }
-
-    for (auto* enable : module.Enables()) {
-        for (auto* ext : enable->extensions) {
-            if (!set.Contains(ext->name)) {
-                diags.AddError(diag::System::Writer, ext->source)
-                    << writer_name << " backend does not support extension '" << ext->name << "'";
-                return false;
-            }
-        }
-    }
-    return true;
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out, const StyledTextTheme&) {
+    return CreatePlain(out);
 }
 
-}  // namespace tint::wgsl
+}  // namespace tint
