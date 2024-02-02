@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025f66d2_7d6c94a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T14:23:53Z",
+      "side": 1,
+      "message": "PTAL. These read a bit clearer to me. The specific issues called out in the bug end up with:\n\n```\nout/o.wgsl:2:13 error: function call \u0027inf\u0027 seen for the first time\n    let c \u003d inf(1);\n            ^^^\n```\n\nwhich I think is better, but could maybe use more work.\n\n```\nout/o.wgsl:3:13 error: cannot use \u0027min\u0027 (a let) as a function call\n    let b \u003d min(1, 2);\n            ^^^\n\nout/o.wgsl:2:9 note: let \u0027min\u0027 declared here\n    let min \u003d 1;\n        ^^^\n```\n\nwhich I do think is better.",
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
