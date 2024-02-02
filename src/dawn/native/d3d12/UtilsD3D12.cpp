@@ -335,6 +335,10 @@ void RecordBufferTextureCopy(BufferTextureCopyDirection direction,
 }
 
 void SetDebugName(Device* device, ID3D12Object* object, const char* prefix, std::string label) {
+    if (device->IsToggleEnabled(Toggle::DisableSettingLabelsInBackend)) {
+        return;
+    }
+
     if (!object) {
         return;
     }

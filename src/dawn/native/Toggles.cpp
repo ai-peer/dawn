@@ -224,8 +224,14 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "https://crbug.com/dawn/1016", ToggleStage::Device}},
     {Toggle::UseUserDefinedLabelsInBackend,
      {"use_user_defined_labels_in_backend",
-      "Enables calls to SetLabel to be forwarded to backend-specific APIs that label objects.",
+      "Enables calls to SetLabel to be forwarded to backend-specific APIs that label objects "
+      "(without this toggle, backend objects get assigned default labels).",
       "https://crbug.com/dawn/840", ToggleStage::Device}},
+    {Toggle::DisableSettingLabelsInBackend,
+     {"disable_setting_labels_in_backend",
+      "Disables setting any labels on backend objects (regardless of the value of "
+      "`use_user_defined_labels_in_backend`).",
+      "https://crbug.com/dawn/2383", ToggleStage::Device}},
     {Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
      {"use_placeholder_fragment_in_vertex_only_pipeline",
       "Use a placeholder empty fragment shader in vertex only render pipeline. This toggle must be "

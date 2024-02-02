@@ -227,6 +227,10 @@ void SetDebugNameInternal(Device* device,
                           uint64_t objectHandle,
                           const char* prefix,
                           std::string label) {
+    if (device->IsToggleEnabled(Toggle::DisableSettingLabelsInBackend)) {
+        return;
+    }
+
     if (!objectHandle) {
         return;
     }
