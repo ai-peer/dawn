@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07423b98_c0b74981",
+        "filename": "src/tint/lang/wgsl/resolver/assignment_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:50:08Z",
+      "side": 1,
+      "message": "I\u0027m wondering if the fundamental issue with these diagnostics is that we\u0027re emphasising the variable names in the error.\n\nHere, the error isn\u0027t that you can\u0027t assign to something called `\u0027a\u0027`, The error is that overrides are immutable. The real error is that `error: cannot assign to an override`. Including the name \u0027a\u0027 is useful if you don\u0027t have the squiggles, but I *think* we\u0027re always reporting them, even in the API. Perhaps we should just drop the variable names.\n\n\nAlternatively, we could pseudo-print the variable declaration:\n\n`cannot assign to \u0027override a\u0027`\n\nBut that is also skimming over the issue. It\u0027s not that you can\u0027t assign to that particular variable. You can\u0027t assign to _any_ override.",
+      "range": {
+        "startLine": 236,
+        "startChar": 44,
+        "endLine": 236,
+        "endChar": 80
+      },
+      "revId": "327e8bcd8e1e942efe4a3f920e993b69f8ca1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8d190d_392adcd5",
+        "filename": "src/tint/lang/wgsl/resolver/sem_helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:50:08Z",
+      "side": 1,
+      "message": "Could be simplified, but I feel you\u0027re throwing away mildly interesting info.",
+      "range": {
+        "startLine": 192,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 11
+      },
+      "revId": "327e8bcd8e1e942efe4a3f920e993b69f8ca1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

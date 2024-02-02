@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db48716d_9bfc69f5",
+        "filename": "src/tint/lang/wgsl/resolver/function_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:50:08Z",
+      "side": 1,
+      "message": "The sentence now feels a bit yodaish to me with the comma.\nDo you prefer this to `unknown address space \u0027${addr_space}\u0027` ?",
+      "parentUuid": "a15abdad_51bf8aa9",
+      "range": {
+        "startLine": 1084,
+        "startChar": 76,
+        "endLine": 1084,
+        "endChar": 99
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad00ab18_427cc56c",
         "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
         "patchSetId": 1
@@ -191,6 +215,30 @@
       "side": 1,
       "message": "Even with any of those, a type constructor or converter is, essentially a function call. We just happen to give them an alternate name in some situations. So, saying `function X` I think is valid in all three of the cases you provided.",
       "parentUuid": "8df42c30_c67a15b9",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b92c0f_916be9a8",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T21:50:08Z",
+      "side": 1,
+      "message": "You could consider type constructor / converters as functions, but that\u0027s certainly doesn\u0027t fit with how we classify them in other diagnostics. We try very hard to treat them as an entirely different thing, that happens to use parentheses after an identifier / templated-identifier.",
+      "parentUuid": "ed868807_778a8c16",
       "range": {
         "startLine": 2373,
         "startChar": 55,
