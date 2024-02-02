@@ -580,6 +580,47 @@ fn main() {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(PadStructsTest, MemberNamedPad) {
+    auto* src = R"(
+struct S {
+  @align(8) pad_5 : u32,
+  @align(8) pad_3 : u32,
+  @align(8) pad :   u32,
+  @align(8) pad_1 : u32,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn main() {
+  _ = s;
+}
+)";
+    auto* expect = R"(
+@internal(disable_validation__ignore_struct_member)
+struct S {
+  pad_5 : u32,
+  pad_2 : u32,
+  pad_3 : u32,
+  pad_4 : u32,
+  pad : u32,
+  pad_6 : u32,
+  pad_1 : u32,
+  pad_7 : u32,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn main() {
+  _ = s;
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PadStructs>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(PadStructsTest, InitializerZeroArgs) {
     // Calls to a zero-argument initializer of a padded struct should not be modified.
     auto* src = R"(
