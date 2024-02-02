@@ -16,6 +16,24 @@
       "message": "Do you have some unused header tool hidden up your sleeve?",
       "revId": "9009c08f043bc439abd1d87afb8f898f1778bc19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10fd182f_6c5f5f75",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T15:04:00Z",
+      "side": 0,
+      "message": "Sublime and the clangd lsp. It highlights them in yellow and is annoying so I delete them when I see them, heh.",
+      "parentUuid": "b3771dc0_4e90ace3",
+      "revId": "9009c08f043bc439abd1d87afb8f898f1778bc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

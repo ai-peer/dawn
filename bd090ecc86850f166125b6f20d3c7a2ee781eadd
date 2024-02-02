@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb7e0c7d_2a432ae5",
+        "filename": "src/tint/lang/wgsl/resolver/function_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T15:04:00Z",
+      "side": 1,
+      "message": "yea, finding the right word here is hard. `unknown`, `undefined`?",
+      "parentUuid": "217ae46a_2a430e46",
+      "range": {
+        "startLine": 1084,
+        "startChar": 76,
+        "endLine": 1084,
+        "endChar": 99
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad00ab18_427cc56c",
         "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
         "patchSetId": 1
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "527053bd_da0171c6",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T15:04:00Z",
+      "side": 1,
+      "message": "If it doesn\u0027t exist then it can\u0027t be a type constructor or type conversion. If it was then it would have validated correctly. The only \"unknown\" thing has to be either a typo, or a user function, so I think saying function is probably a safe be. (And, a type constructor and type conversion are both just function calls, we just given them a different name)",
+      "parentUuid": "ad00ab18_427cc56c",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "241f3658_c937a8ff",
         "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
         "patchSetId": 1
@@ -94,6 +142,30 @@
       "writtenOn": "2024-02-02T14:57:43Z",
       "side": 1,
       "message": "We refer to variables by their declaration. `let`, `var`, `override`, etc. So `const` fits with the pattern.",
+      "range": {
+        "startLine": 1333,
+        "startChar": 12,
+        "endLine": 1333,
+        "endChar": 20
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4574d79a_5aef6d4f",
+        "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T15:04:00Z",
+      "side": 1,
+      "message": "Yea, I went back and forth on this one, `const \u0027a\u0027` reads strange to me, `constant \u0027a\u0027` sounded a bit better. Didn\u0027t notice `var` or I probably would have tried `variable \u0027a\u0027`. The others are already fully spelled out as words, the longer forms read a bit better?",
+      "parentUuid": "241f3658_c937a8ff",
       "range": {
         "startLine": 1333,
         "startChar": 12,
