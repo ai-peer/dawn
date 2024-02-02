@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a12909_c6da1464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-02T04:40:10Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nI\u0027ve fixed the kokoro failure. PTAL, thanks!",
+      "revId": "cfc5f18b24385dea136b27826269a9f0cc6f17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
