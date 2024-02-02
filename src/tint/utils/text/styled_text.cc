@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,23 +25,63 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text.h"
+#include <string_view>
+#include "src/tint/utils/text/styled_text_printer.h"
+#include "src/tint/utils/text/text_style.h"
 
-#include <string>
+namespace tint {
 
-namespace tint::diag {
+StyledText::StyledText() = default;
 
-Printer::~Printer() = default;
+StyledText::StyledText(const StyledText&) = default;
 
-StringPrinter::StringPrinter() = default;
-StringPrinter::~StringPrinter() = default;
-
-std::string StringPrinter::str() const {
-    return stream.str();
+StyledText::StyledText(const std::string& text) {
+    stream_ << text;
 }
 
-void StringPrinter::Write(const std::string& str, const Style&) {
-    stream << str;
+StyledText::StyledText(std::string_view text) {
+    stream_ << text;
 }
 
-}  // namespace tint::diag
+StyledText::StyledText(StyledText&&) = default;
+
+StyledText& StyledText::operator=(const StyledText& other) = default;
+
+StyledText& StyledText::operator=(std::string_view text) {
+    Clear();
+    return *this << text;
+}
+
+void StyledText::Clear() {
+    *this = StyledText{};
+}
+
+StyledText& StyledText::SetStyle(TextStyle style) {
+    if (spans_.Back().style != style) {
+        if (spans_.Back().length == 0) {
+            spans_.Back().style = style;
+        } else {
+            spans_.Push(Span{style});
+        }
+    }
+    return *this;
+}
+
+std::string StyledText::Plain() const {
+    return stream_.str();
+}
+
+void StyledText::Append(const StyledText& other) {
+    TextStyle old_style = spans_.Back().style;
+    other.Walk([&](std::string_view text, TextStyle style) { *this << style << text; });
+    SetStyle(old_style);
+}
+
+StyledText& StyledText::Repeat(char c, size_t n) {
+    stream_.repeat(c, n);
+    spans_.Back().length += n;
+    return *this;
+}
+
+}  // namespace tint

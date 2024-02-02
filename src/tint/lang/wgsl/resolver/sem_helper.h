@@ -40,6 +40,7 @@
 #include "src/tint/lang/wgsl/sem/type_expression.h"
 #include "src/tint/utils/containers/map.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
+#include "src/tint/utils/text/styled_text.h"
 
 namespace tint::resolver {
 
@@ -287,17 +288,17 @@ class SemHelper {
 
     /// @param expr the expression to describe
     /// @return a string that describes @p expr. Useful for diagnostics.
-    std::string Describe(const sem::Expression* expr) const;
+    StyledText Describe(const sem::Expression* expr) const;
 
   private:
     /// Adds the given error message to the diagnostics
-    void AddError(const std::string& msg, const Source& source) const;
+    void AddError(const StyledText& msg, const Source& source) const;
 
     /// Adds the given warning message to the diagnostics
-    void AddWarning(const std::string& msg, const Source& source) const;
+    void AddWarning(const StyledText& msg, const Source& source) const;
 
     /// Adds the given note message to the diagnostics
-    void AddNote(const std::string& msg, const Source& source) const;
+    void AddNote(const StyledText& msg, const Source& source) const;
 
     ProgramBuilder* builder_;
 };

@@ -285,19 +285,17 @@ constexpr TypeMatcher k{{$name}}Matcher {
 {{- end  }}
     return Build{{$name}}(state, ty{{range .TemplateParams}}, {{.GetName}}{{end}});
   },
-/* string */ [](MatchState*{{if .TemplateParams}} state{{end}}) -> std::string {
+/* print */ []([[maybe_unused]] MatchState* state, StyledText& out) {
 {{- range .TemplateParams }}
 {{-   template "DeclareLocalTemplateParamName" . }}
 {{- end  }}
 
 {{- if .DisplayName }}
-    StringStream ss;
-    ss{{range SplitDisplayName .DisplayName}} << {{.}}{{end}};
-    return ss.str();
+    out << TextStyle{}.Type() {{range SplitDisplayName .DisplayName}} << {{.}}{{end}};
 {{- else if .TemplateParams }}
-    return "{{.Name}}<"{{template "AppendTemplateParamNames" .TemplateParams}} + ">";
+    out << TextStyle{}.Type() << "{{.Name}}" << TextStyle{}.Code() << "<"{{template "AppendTemplateParamNames" .TemplateParams}} << ">";
 {{- else }}
-    return "{{.Name}}";
+    out << TextStyle{}.Type() << "{{.Name}}";
 {{- end  }}
   }
 };
@@ -319,18 +317,15 @@ constexpr TypeMatcher k{{$name}}Matcher {
 {{- end }}
     return nullptr;
   },
-/* string */ [](MatchState*) -> std::string {
-    StringStream ss;
-    // Note: We pass nullptr to the TypeMatcher::String() functions, as 'matcher's do not support
+/* print */ [](MatchState*, StyledText& out) {
+    // Note: We pass nullptr to the Matcher.print() functions, as matchers do not support
     // template arguments, nor can they match sub-types. As such, they have no use for the MatchState.
-    ss
-{{- range .Types -}}
-{{-   if      IsFirstIn . $.Types }} << k{{PascalCase .Name}}Matcher.string(nullptr)
-{{-   else if IsLastIn  . $.Types }} << " or " << k{{PascalCase .Name}}Matcher.string(nullptr)
-{{-   else                        }} << ", " << k{{PascalCase .Name}}Matcher.string(nullptr)
+{{  range .Types -}}
+{{-   if      IsFirstIn . $.Types }} k{{PascalCase .Name}}Matcher.print(nullptr, out);
+{{-   else if IsLastIn  . $.Types }} out << TextStyle{} << " or "; k{{PascalCase .Name}}Matcher.print(nullptr, out);
+{{-   else                        }} out << TextStyle{} << ", "; k{{PascalCase .Name}}Matcher.print(nullptr, out);
 {{-   end -}}
-{{- end -}};
-    return ss.str();
+{{- end -}}
   }
 };
 {{  end -}}
@@ -364,15 +359,14 @@ constexpr NumberMatcher k{{$class}}Matcher {
     }
   },
 {{- end }}
-/* string */ [](MatchState*) -> std::string {
-    return "
+/* print */ [](MatchState*, StyledText& out) {
+  out
 {{- range .Options -}}
-{{-   if      IsFirstIn . $.Options }}{{.Name}}
-{{-   else if IsLastIn  . $.Options }} or {{.Name}}
-{{-   else                          }}, {{.Name}}
+{{-   if      IsFirstIn . $.Options }}<< TextStyle{}.Enum() << "{{.Name}}"
+{{-   else if IsLastIn  . $.Options }}<< TextStyle{} << " or " << TextStyle{}.Enum() << "{{.Name}}"
+{{-   else                          }}<< TextStyle{} << ", " << TextStyle{}.Enum() << "{{.Name}}"
 {{-   end -}}
-{{- end -}}
-";
+{{- end -}};
   }
 };
 {{  end -}}
@@ -444,12 +438,13 @@ constexpr NumberMatcher kNumberMatchers[] = {
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-                   define "DeclareLocalTemplateParamName"                 -}}
 {{- /* ------------------------------------------------------------------ */ -}}
+  StyledText {{.Name}};
 {{-   if      IsTemplateTypeParam . }}
-  const std::string {{.Name}} = state->TypeName();
+  state->PrintType({{.Name}});
 {{-   else if IsTemplateNumberParam . }}
-  const std::string {{.Name}} = state->NumName();
+  state->PrintNum({{.Name}});
 {{-   else if IsTemplateEnumParam . }}
-  const std::string {{.Name}} = state->NumName();
+  state->PrintNum({{.Name}});
 {{-   end -}}
 {{- end -}}
 
@@ -484,9 +479,9 @@ constexpr NumberMatcher kNumberMatchers[] = {
 {{-                      define "AppendTemplateParamNames"                   -}}
 {{- /* ------------------------------------------------------------------ */ -}}
 {{-   range $i, $ := . -}}
-{{-     if $i }} + ", " + {{.Name}}
-{{-     else }} + {{.Name}}
-{{-     end -}}
+{{-     if $i }} << ", " << {{.Name}}
+{{-     else  }} << {{.Name}}
+{{-     end  -}}
 {{-   end -}}
 {{- end -}}
 
