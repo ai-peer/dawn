@@ -42,7 +42,7 @@ parser.add_argument('--no-list-files', dest='list_files', action='store_false')
 parser.set_defaults(list_files=True)
 args = parser.parse_args()
 
-def add_error(error_to_file, error, file):
+def AddError(error_to_file, error, file):
     if not error in error_to_file:
         error_to_file[error] = [file]
     else:
@@ -64,23 +64,23 @@ def find_and_print_errors(glob_pathname):
             for line in all_lines:
                 m = re.search('.*\.hlsl:[0-9]+:.*?(error.*)', line)
                 if m:
-                    add_error(error_to_file, m.groups()[0], f)
+                    AddError(error_to_file, m.groups()[0], f)
                     found_error = True
                 else:
                     m = re.search('error( X[0-9]+)*?:(.*)', line)
                     if m:
-                        add_error(error_to_file, m.group(), f)
+                        AddError(error_to_file, m.group(), f)
                         found_error = True
                     else:
                         if "exit status" in line:
-                            add_error(error_to_file, line, f)
+                            AddError(error_to_file, line, f)
                             found_error = True
                 if found_error:
                     break # Stop on first error string found
 
         if not found_error:
             # If no error message was found, add the SKIP line as it may contain the reason for skipping
-            add_error(error_to_file, first_line.strip(), f)
+            AddError(error_to_file, first_line.strip(), f)
 
     for error,files in sorted(error_to_file.items()):
         print('{} (count: {})'.format(error, len(files)))
