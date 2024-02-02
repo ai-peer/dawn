@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -29,12 +29,12 @@
 
 #include <cstring>
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <Windows.h>
 
-namespace tint::diag {
+namespace tint {
 namespace {
 
 struct ConsoleInfo {
@@ -66,58 +66,17 @@ ConsoleInfo ConsoleInfoFor(FILE* file) {
     return console;
 }
 
-class PrinterWindows : public Printer {
-  public:
-    PrinterWindows(FILE* f, bool use_colors)
-        : file(f), console(ConsoleInfoFor(use_colors ? f : nullptr)) {}
-
-    void Write(const std::string& str, const Style& style) override {
-        WriteColor(style.color, style.bold);
-        fwrite(str.data(), 1, str.size(), file);
-        WriteColor(Color::kDefault, false);
-    }
-
-  private:
-    WORD Attributes(Color color, bool bold) {
-        switch (color) {
-            case Color::kDefault:
-                return console.default_attributes;
-            case Color::kBlack:
-                return 0;
-            case Color::kRed:
-                return FOREGROUND_RED | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kGreen:
-                return FOREGROUND_GREEN | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kYellow:
-                return FOREGROUND_RED | FOREGROUND_GREEN | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kBlue:
-                return FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kMagenta:
-                return FOREGROUND_RED | FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kCyan:
-                return FOREGROUND_GREEN | FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
-            case Color::kWhite:
-                return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE |
-                       (bold ? FOREGROUND_INTENSITY : 0);
-        }
-        return 0;  // unreachable
-    }
-
-    void WriteColor(Color color, bool bold) {
-        if (console) {
-            SetConsoleTextAttribute(console.handle, Attributes(color, bold));
-            fflush(file);
-        }
-    }
-
-    FILE* const file;
-    const ConsoleInfo console;
-};
-
 }  // namespace
 
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool use_colors) {
-    return std::make_unique<PrinterWindows>(out, use_colors);
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
+                                                             const StyledTextTheme& theme) {
+    if (ConsoleInfo info = ConsoleInfoFor(out)) {
+        if (SetConsoleMode(info.handle,
+                           ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
+            return CreateANSI(out, theme);
+        }
+    }
+    return CreatePlain(out);
 }
 
-}  // namespace tint::diag
+}  // namespace tint

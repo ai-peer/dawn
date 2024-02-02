@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,36 +25,39 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/helpers/check_supported_extensions.h"
+#include "src/tint/utils/text/styled_text_printer.h"
+#include "src/tint/utils/text/text_style.h"
 
-#include <string>
+#include "gtest/gtest.h"
 
-#include "src/tint/lang/wgsl/ast/module.h"
-#include "src/tint/utils/containers/hashset.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/text/string.h"
+namespace tint {
+namespace {
 
-namespace tint::wgsl {
+#define ENABLE_PRINTER_TESTS 0  // Print styled text as part of the unit tests
+#if ENABLE_PRINTER_TESTS
 
-bool CheckSupportedExtensions(std::string_view writer_name,
-                              const ast::Module& module,
-                              diag::List& diags,
-                              VectorRef<wgsl::Extension> supported) {
-    Hashset<wgsl::Extension, 32> set;
-    for (auto ext : supported) {
-        set.Add(ext);
-    }
+using StyledTextPrinterTest = testing::Test;
 
-    for (auto* enable : module.Enables()) {
-        for (auto* ext : enable->extensions) {
-            if (!set.Contains(ext->name)) {
-                diags.AddError(diag::System::Writer, ext->source)
-                    << writer_name << " backend does not support extension '" << ext->name << "'";
-                return false;
-            }
-        }
-    }
-    return true;
+TEST_F(StyledTextPrinterTest, Themed) {
+    auto printer = StyledTextPrinter::Create(stdout);
+    printer->Print(StyledText{} << style::Plain << "Plain\n"
+                                << style::Bold << "Bold\n"
+                                << style::Underlined << "Underlined\n"
+                                << style::Success << "Success\n"
+                                << style::Warning << "Warning\n"
+                                << style::Error << "Error\n"
+                                << style::Fatal << "Fatal\n"
+                                << style::Code << "Code\n"
+                                << style::Keyword << "Keyword\n"
+                                << style::Variable << "Variable\n"
+                                << style::Type << "Type\n"
+                                << style::Function << "Function\n"
+                                << style::Enum << "Enum\n"
+                                << style::Literal << "Literal\n"
+                                << style::Squiggle << "Squiggle\n");
 }
 
-}  // namespace tint::wgsl
+#endif  // ENABLE_PRINTER_TESTS
+
+}  // namespace
+}  // namespace tint

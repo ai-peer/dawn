@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,36 +25,51 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/helpers/check_supported_extensions.h"
+#ifndef SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_
+#define SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_
 
+#include <memory>
 #include <string>
 
-#include "src/tint/lang/wgsl/ast/module.h"
-#include "src/tint/utils/containers/hashset.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/text/string.h"
+#include "src/tint/utils/text/styled_text.h"
+#include "src/tint/utils/text/styled_text_theme.h"
 
-namespace tint::wgsl {
-
-bool CheckSupportedExtensions(std::string_view writer_name,
-                              const ast::Module& module,
-                              diag::List& diags,
-                              VectorRef<wgsl::Extension> supported) {
-    Hashset<wgsl::Extension, 32> set;
-    for (auto ext : supported) {
-        set.Add(ext);
-    }
-
-    for (auto* enable : module.Enables()) {
-        for (auto* ext : enable->extensions) {
-            if (!set.Contains(ext->name)) {
-                diags.AddError(diag::System::Writer, ext->source)
-                    << writer_name << " backend does not support extension '" << ext->name << "'";
-                return false;
-            }
-        }
-    }
-    return true;
+/// Forward declarations
+namespace tint {
+class TextStyle;
 }
 
-}  // namespace tint::wgsl
+namespace tint {
+
+/// StyledTextPrinter is the interface for printing text with a style.
+class StyledTextPrinter {
+  public:
+    /// @returns a Printer using the default theme.
+    /// @param out the file to print to.
+    static std::unique_ptr<StyledTextPrinter> Create(FILE* out);
+
+    /// @returns a Printer
+    /// @param out the file to print to.
+    /// @param theme the custom theme to use.
+    static std::unique_ptr<StyledTextPrinter> Create(FILE* out, const StyledTextTheme& theme);
+
+    /// @returns a Printer
+    /// @param out the file to print to.
+    static std::unique_ptr<StyledTextPrinter> CreatePlain(FILE* out);
+
+    /// @returns a Printer that uses ANSI escape sequencecs
+    /// @param out the file to print to.
+    /// @param theme the custom theme to use.
+    static std::unique_ptr<StyledTextPrinter> CreateANSI(FILE* out, const StyledTextTheme& theme);
+
+    /// Destructor
+    virtual ~StyledTextPrinter();
+
+    /// Prints the styled text to the printer.
+    /// @param text the text to print.
+    virtual void Print(const StyledText& text) = 0;
+};
+
+}  // namespace tint
+
+#endif  // SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_

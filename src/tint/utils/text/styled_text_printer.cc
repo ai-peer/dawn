@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,31 +25,35 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
-
 #include <cstring>
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
-namespace tint::diag {
+namespace tint {
 namespace {
 
-class PrinterOther : public Printer {
+class Plain : public StyledTextPrinter {
   public:
-    explicit PrinterOther(FILE* f) : file(f) {}
+    explicit Plain(FILE* f) : file(f) {}
 
-    void Write(const std::string& str, const Style&) override {
-        fwrite(str.data(), 1, str.size(), file);
+    void Print(const StyledText& text) override {
+        auto plain = text.Plain();
+        fwrite(plain.data(), 1, plain.size(), file);
     }
 
   private:
-    FILE* file;
+    FILE* const file;
 };
 
 }  // namespace
 
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool) {
-    return std::make_unique<PrinterOther>(out);
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::CreatePlain(FILE* out) {
+    return std::make_unique<Plain>(out);
+}
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out) {
+    return Create(out, StyledTextTheme::kDefault);
 }
 
-}  // namespace tint::diag
+StyledTextPrinter::~StyledTextPrinter() = default;
+
+}  // namespace tint
