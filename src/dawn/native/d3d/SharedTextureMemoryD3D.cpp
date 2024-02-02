@@ -92,8 +92,7 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
         mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
     }
 
-    Ref<SharedFence> sharedFence;
-    DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
+    Ref<SharedFence> sharedFence = ToBackend(GetDevice()->GetQueue())->GetSharedFence();
 
     return FenceAndSignalValue{
         std::move(sharedFence),

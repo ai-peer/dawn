@@ -201,12 +201,7 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     Texture* backendTexture = ToBackend(FromAPI(texture));
     DAWN_ASSERT(backendTexture != nullptr);
 
-    Ref<SharedFence> sharedFence;
-    if (mBackendDevice->ConsumedError(
-            ToBackend(mBackendDevice->GetQueue())->GetOrCreateSharedFence(), &sharedFence)) {
-        dawn::ErrorLog() << "Could not retrieve device shared fence";
-        return;
-    }
+    Ref<SharedFence> sharedFence = ToBackend(mBackendDevice->GetQueue())->GetSharedFence();
 
     ExecutionSerial fenceValue;
     if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {

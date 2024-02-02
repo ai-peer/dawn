@@ -43,7 +43,7 @@ class Queue : public QueueBase {
     using QueueBase::QueueBase;
     ~Queue() override;
 
-    virtual ResultOrError<Ref<SharedFence>> GetOrCreateSharedFence() = 0;
+    virtual Ref<SharedFence> GetSharedFence() const = 0;
 
   private:
     virtual void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) = 0;
