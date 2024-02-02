@@ -19,8 +19,8 @@ vars = {
   'dawn_cmake_version': 'version:2@3.23.3',
   'dawn_cmake_win32_sha1': 'b106d66bcdc8a71ea2cdf5446091327bfdb1bcd7',
   'dawn_gn_version': 'git_revision:182a6eb05d15cc76d2302f7928fdb4f645d52c53',
-#ninja CIPD package version.
-#https:  // chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
+  # ninja CIPD package version.
+  # https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/ninja
   'dawn_ninja_version': 'version:2@1.11.1.chromium.6',
   'dawn_go_version': 'version:2@1.21.3',
 
@@ -29,34 +29,34 @@ vars = {
   'node_linux_x64_sha': '46795170ff5df9831955f163f6966abde581c8af',
   'node_win_x64_sha': '2cb36010af52bc5e2a2d1e3675c10361c80d8f8d',
 
-#GN variable required by  // testing that will be output in the gclient_args.gni
+  # GN variable required by //testing that will be output in the gclient_args.gni
   'generate_location_tags': False,
 
-#Fetch clang - tidy into the same bin / directory as our clang binary.
+  # Fetch clang-tidy into the same bin/ directory as our clang binary.
   'checkout_clang_tidy': False,
 
-#Fetch the rust toolchain.
-#
-#Use a custom_vars section to enable it:
-#"custom_vars" : {
-#"checkout_rust" : True,
-#}
+  # Fetch the rust toolchain.
+  #
+  # Use a custom_vars section to enable it:
+  # "custom_vars": {
+  #   "checkout_rust": True,
+  # }
   'checkout_rust': False,
 
-#Fetch configuration files required for the 'use_remoteexec' gn arg
+  # Fetch configuration files required for the 'use_remoteexec' gn arg
   'download_remoteexec_cfg': False,
-#RBE instance to use for running remote builds
+  # RBE instance to use for running remote builds
   'rbe_instance': 'projects/rbe-chrome-untrusted/instances/default_instance',
-#RBE project to download rewrapper config files for.Only needed if
-#different from the project used in 'rbe_instance'
+  # RBE project to download rewrapper config files for. Only needed if
+  # different from the project used in 'rbe_instance'
   'rewrapper_cfg_project': '',
-#reclient CIPD package
+  # reclient CIPD package
   'reclient_package': 'infra/rbe/client/',
-#reclient CIPD package version
+  # reclient CIPD package version
   'reclient_version': 're_client_version:0.114.2.81e819b-gomaip',
 
-#'magic' text to tell depot_tools that git submodules should be accepted
-#but parity with DEPS file is expected.
+  # 'magic' text to tell depot_tools that git submodules should be accepted
+  # but parity with DEPS file is expected.
   'SUBMODULE_MIGRATION': 'True'
 }
 
@@ -104,9 +104,9 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-#Dependencies required to use GN, Clang, and Rust in standalone.
-#The  // build, //tools/clang, and //tools/rust deps should all be updated
-#in unison, as there are dependencies between them.
+  # Dependencies required to use GN, Clang, and Rust in standalone.
+  # The //build, //tools/clang, and //tools/rust deps should all be updated
+  # in unison, as there are dependencies between them.
   'build': {
     'url': '{chromium_git}/chromium/src/build@c6118a585ff6b2ef9f9a3b180d57b3cbf79e1788',
     'condition': 'dawn_standalone',
@@ -128,7 +128,7 @@ deps = {
     'dep_type': 'cipd',
   },
 
-#Testing, GTest and GMock
+  # Testing, GTest and GMock
   'testing': {
     'url': '{chromium_git}/chromium/src/testing@035a9b18047370df7403758b006e6c9696d6b84d',
     'condition': 'dawn_standalone',
@@ -141,7 +141,7 @@ deps = {
     'url': '{chromium_git}/external/github.com/google/googletest@7a7231c442484be389fdf01594310349ca0e42a8',
     'condition': 'dawn_standalone',
   },
-#This is a dependency of  // testing
+  # This is a dependency of //testing
   'third_party/catapult': {
     'url': '{chromium_git}/catapult.git@dd218dfd815774289f8a81015f7a3131f72afbde',
     'condition': 'dawn_standalone',
@@ -151,7 +151,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-#Jinja2 and MarkupSafe for the code generator
+  # Jinja2 and MarkupSafe for the code generator
   'third_party/jinja2': {
     'url': '{chromium_git}/chromium/src/third_party/jinja2@e2d024354e11cc6b041b0cff032d73f0c7e43a07',
     'condition': 'dawn_standalone',
@@ -161,7 +161,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-#GLFW for tests and samples
+  # GLFW for tests and samples
   'third_party/glfw': {
     'url': '{chromium_git}/external/github.com/glfw/glfw@62e175ef9fae75335575964c845a302447c012c7',
   },
@@ -201,7 +201,7 @@ deps = {
   },
 
   'third_party/dxheaders': {
-#The non - Windows build of DXC depends on DirectX - Headers, and at a specific commit(not ToT)
+    # The non-Windows build of DXC depends on DirectX-Headers, and at a specific commit (not ToT)
     'url': '{chromium_git}/external/github.com/microsoft/DirectX-Headers@980971e835876dc0cde415e8f9bc646e64667bf7',
     'condition': 'host_os != "win"',
   },
@@ -214,13 +214,13 @@ deps = {
     'url': '{chromium_git}/external/github.com/KhronosGroup/EGL-Registry@7dea2ed79187cd13f76183c4b9100159b9e3e071',
   },
 
-#WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
+  # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
     'url': '{chromium_git}/external/github.com/gpuweb/cts@ce757c80087c4b68cce84d04f95d9fff6db5d7e6',
     'condition': 'build_with_chromium',
   },
 
-#Dependencies required to build / run Dawn NodeJS bindings
+  # Dependencies required to build / run Dawn NodeJS bindings
   'third_party/node-api-headers': {
     'url': '{github_git}/nodejs/node-api-headers.git@d68505e4055ecb630e14c26c32e5c2c65e179bba',
     'condition': 'dawn_node',
@@ -261,7 +261,7 @@ deps = {
     'dep_type': 'cipd',
   },
 
-#RBE dependencies
+  # RBE dependencies
   'buildtools/reclient': {
     'packages': [
       {
@@ -273,7 +273,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-#Misc dependencies inherited from Tint
+  # Misc dependencies inherited from Tint
   'third_party/protobuf': {
     'url': '{chromium_git}/chromium/src/third_party/protobuf@41759e11ec427e29e1a72b9401d2af3f6e02d839',
     'condition': 'dawn_standalone',
@@ -284,8 +284,8 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-#Dependencies for PartitionAlloc.
-#Doc : https:  // docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A
+  # Dependencies for PartitionAlloc.
+  # Doc: https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A
   'third_party/partition_alloc': {
     'url': '{chromium_git}/chromium/src/base/allocator/partition_allocator.git@67fd2f86eef40b1357387e2b0fc1eaf3c67d6ed7',
     'condition': 'dawn_standalone',
@@ -293,7 +293,7 @@ deps = {
 }
 
 hooks = [
-#Pull the compilers and system libraries for hermetic builds
+  # Pull the compilers and system libraries for hermetic builds
   {
     'name': 'sysroot_x86',
     'pattern': '.',
@@ -309,15 +309,15 @@ hooks = [
                '--arch=x64'],
   },
   {
-#Update the Mac toolchain if possible, this makes builders use "hermetic XCode" which is
-#is more consistent(only changes when rolling build /) and is cached.
+    # Update the Mac toolchain if possible, this makes builders use "hermetic XCode" which is
+    # is more consistent (only changes when rolling build/) and is cached.
     'name': 'mac_toolchain',
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_mac',
     'action': ['python3', 'build/mac_toolchain.py'],
   },
   {
-#Case - insensitivity for the Win SDK.Must run before win_toolchain below.
+    # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
     'name': 'ciopfs_linux',
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_win and host_os == "linux"',
@@ -329,22 +329,22 @@ hooks = [
     ]
   },
   {
-#Update the Windows toolchain if necessary.Must run before 'clang' below.
+    # Update the Windows toolchain if necessary. Must run before 'clang' below.
     'name': 'win_toolchain',
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_win',
     'action': ['python3', 'build/vs_toolchain.py', 'update', '--force'],
   },
   {
-#Note : On Win, this should run after win_toolchain, as it may use it.
+    # Note: On Win, this should run after win_toolchain, as it may use it.
     'name': 'clang',
     'pattern': '.',
     'action': ['python3', 'tools/clang/scripts/update.py'],
     'condition': 'dawn_standalone',
   },
   {
-#This is also supposed to support the same set of platforms as 'clang'
-#above.LLVM ToT support isn't provided at the moment.
+    # This is also supposed to support the same set of platforms as 'clang'
+    # above. LLVM ToT support isn't provided at the moment.
     'name': 'clang_tidy',
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_clang_tidy',
@@ -358,7 +358,7 @@ hooks = [
     'condition': 'dawn_standalone and checkout_rust',
   },
   {
-#Pull rc binaries using checked - in hashes.
+    # Pull rc binaries using checked-in hashes.
     'name': 'rc_win',
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_win and host_os == "win"',
@@ -391,7 +391,7 @@ hooks = [
                 '-s', 'build/toolchain/win/rc/mac/rc.sha1',
     ],
   },
-#Pull clang - format binaries using checked - in hashes.
+  # Pull clang-format binaries using checked-in hashes.
   {
     'name': 'clang_format_win',
     'pattern': '.',
@@ -438,7 +438,7 @@ hooks = [
                 '-s', 'buildtools/linux64/clang-format.sha1',
     ],
   },
-#Update build / util / LASTCHANGE.
+  # Update build/util/LASTCHANGE.
   {
     'name': 'lastchange',
     'pattern': '.',
@@ -446,7 +446,7 @@ hooks = [
     'action': ['python3', 'build/util/lastchange.py',
                '-o', 'build/util/LASTCHANGE'],
   },
-#TODO(https:  // crbug.com/1180257): Use CIPD for CMake on Windows.
+  # TODO(https://crbug.com/1180257): Use CIPD for CMake on Windows.
   {
     'name': 'cmake_win32',
     'pattern': '.',
@@ -471,7 +471,7 @@ hooks = [
     ],
   },
 
-#Node binaries, when dawn_node is enabled
+  # Node binaries, when dawn_node is enabled
   {
     'name': 'node_linux64',
     'pattern': '.',
@@ -524,7 +524,7 @@ hooks = [
     ],
   },
  {
-#Download remote exec cfg files
+   # Download remote exec cfg files
    'name': 'fetch_reclient_cfgs',
    'pattern': '.',
    'condition': 'download_remoteexec_cfg and dawn_standalone',
