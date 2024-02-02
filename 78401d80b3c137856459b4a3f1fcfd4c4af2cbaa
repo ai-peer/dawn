@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75f7d15_f054b611",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-02T10:39:00Z",
+      "side": 1,
+      "message": "I wonder if we should invert this CL: by default in release Dawn wouldn\u0027t set labels in backends because there\u0027s a performance cost. Graphite would benefit from this, but also any user of WebGPU in JS or Dawn in native.\n\nThen we can guide developers to set \"forward_labels_in_backend\" or something like that when they need to debug. We already have a bunch of toggles that can be used for debugging and that would just add to the list.",
+      "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
