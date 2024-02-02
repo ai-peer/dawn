@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,52 +25,41 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/diagnostic.h"
-
-#include <unordered_map>
-
-#include "src/tint/utils/diagnostic/formatter.h"
 #include "src/tint/utils/text/styled_text.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
-namespace tint::diag {
+namespace tint {
 
-namespace {
-size_t CountErrors(VectorRef<Diagnostic> diags) {
-    size_t count = 0;
-    for (auto& diag : diags) {
-        if (diag.severity >= Severity::Error) {
-            count++;
+StyledText::StyledText() = default;
+
+StyledText::StyledText(const std::string& text) {
+    stream_ << text;
+}
+
+StyledText& StyledText::SetStyle(const TextStyle& style) {
+    if (spans_.Back().style != style) {
+        if (spans_.Back().length == 0) {
+            spans_.Back().style = style;
+        } else {
+            spans_.Push(Span{style});
         }
     }
-    return count;
-}
-}  // namespace
-
-Diagnostic::Diagnostic() = default;
-Diagnostic::Diagnostic(const Diagnostic&) = default;
-Diagnostic::~Diagnostic() = default;
-Diagnostic& Diagnostic::operator=(const Diagnostic&) = default;
-
-List::List() = default;
-List::List(std::initializer_list<Diagnostic> list)
-    : entries_(list), error_count_(CountErrors(entries_)) {}
-List::List(VectorRef<Diagnostic> list)
-    : entries_(std::move(list)), error_count_(CountErrors(entries_)) {}
-
-List::List(const List& rhs) = default;
-
-List::List(List&& rhs) = default;
-
-List::~List() = default;
-
-List& List::operator=(const List& rhs) = default;
-
-List& List::operator=(List&& rhs) = default;
-
-std::string List::Str() const {
-    diag::Formatter::Style style;
-    style.print_newline_at_end = false;
-    return Formatter{style}.Format(*this).Plain();
+    return *this;
 }
 
-}  // namespace tint::diag
+void StyledText::Print(StyledTextPrinter& printer) {
+    std::string text = stream_.str();
+    size_t offset = 0;
+    for (auto& span : spans_) {
+        if (span.length) {
+            printer.Print(text.substr(offset, span.length), span.style);
+            offset += span.length;
+        }
+    }
+}
+
+std::string StyledText::Plain() const {
+    return stream_.str();
+}
+
+}  // namespace tint

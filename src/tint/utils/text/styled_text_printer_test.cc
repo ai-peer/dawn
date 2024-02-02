@@ -25,52 +25,48 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/diagnostic.h"
+#include "src/tint/utils/text/styled_text_printer.h"
+#include "src/tint/utils/text/text_style.h"
 
-#include <unordered_map>
+#include "gtest/gtest.h"
 
-#include "src/tint/utils/diagnostic/formatter.h"
-#include "src/tint/utils/text/styled_text.h"
-
-namespace tint::diag {
-
+namespace tint {
 namespace {
-size_t CountErrors(VectorRef<Diagnostic> diags) {
-    size_t count = 0;
-    for (auto& diag : diags) {
-        if (diag.severity >= Severity::Error) {
-            count++;
+
+// Actually verifying that the expected colors are printed is exceptionally
+// difficult as:
+// a) The color emission varies by OS.
+// b) The logic checks to see if the printer is writing to a terminal, making mocking hard.
+// c) Actually probing what gets written to a FILE* is notoriously tricky.
+//
+// The least we can do is to exercise the code - which is what we do here.
+// The test will print each of the colors, and can be examined with human eyeballs.
+// This can be enabled or disabled with ENABLE_PRINTER_TESTS
+#define ENABLE_PRINTER_TESTS 0
+#if ENABLE_PRINTER_TESTS
+
+using StyledTextPrinterTest = testing::Test;
+
+TEST_F(StyledTextPrinterTest, ForegroundColors) {
+    auto printer = StyledTextPrinter::Create(stdout, true);
+
+    TextStyle style;
+    for (uint8_t b = 0; b < 255; b += 8) {
+        for (uint8_t g = 0; g < 255; g += 8) {
+            for (uint8_t i = 0; i < 4; i++, b += 8) {
+                for (uint8_t r = 0; r < 255; r += 8) {
+                    style.foreground = Color{r, g, b};
+                    printer->Print("▒", style);
+                }
+                printer->Print("  ", TextStyle{});
+            }
+            printer->Print("\n", TextStyle{});
         }
+        printer->Print("\n\n", TextStyle{});
     }
-    return count;
 }
+
+#endif  // ENABLE_PRINTER_TESTS
+
 }  // namespace
-
-Diagnostic::Diagnostic() = default;
-Diagnostic::Diagnostic(const Diagnostic&) = default;
-Diagnostic::~Diagnostic() = default;
-Diagnostic& Diagnostic::operator=(const Diagnostic&) = default;
-
-List::List() = default;
-List::List(std::initializer_list<Diagnostic> list)
-    : entries_(list), error_count_(CountErrors(entries_)) {}
-List::List(VectorRef<Diagnostic> list)
-    : entries_(std::move(list)), error_count_(CountErrors(entries_)) {}
-
-List::List(const List& rhs) = default;
-
-List::List(List&& rhs) = default;
-
-List::~List() = default;
-
-List& List::operator=(const List& rhs) = default;
-
-List& List::operator=(List&& rhs) = default;
-
-std::string List::Str() const {
-    diag::Formatter::Style style;
-    style.print_newline_at_end = false;
-    return Formatter{style}.Format(*this).Plain();
-}
-
-}  // namespace tint::diag
+}  // namespace tint

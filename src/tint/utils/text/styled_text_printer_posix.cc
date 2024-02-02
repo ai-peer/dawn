@@ -25,52 +25,63 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/diagnostic.h"
+// GEN_BUILD:CONDITION(tint_build_is_linux || tint_build_is_mac)
 
-#include <unordered_map>
+#include <unistd.h>
 
-#include "src/tint/utils/diagnostic/formatter.h"
-#include "src/tint/utils/text/styled_text.h"
+#include <cstring>
 
-namespace tint::diag {
+#include "src/tint/utils/text/styled_text_printer.h"
 
+namespace tint {
 namespace {
-size_t CountErrors(VectorRef<Diagnostic> diags) {
-    size_t count = 0;
-    for (auto& diag : diags) {
-        if (diag.severity >= Severity::Error) {
-            count++;
+
+#define ESCAPE "\u001b"
+
+bool SupportsColors(FILE* f) {
+    if (!isatty(fileno(f))) {
+        return false;
+    }
+
+    const char* cterm = getenv("TERM");
+    if (cterm == nullptr) {
+        return false;
+    }
+
+    std::string term = getenv("TERM");
+    if (term != "cygwin" && term != "linux" && term != "rxvt-unicode-256color" &&
+        term != "rxvt-unicode" && term != "screen-256color" && term != "screen" &&
+        term != "tmux-256color" && term != "tmux" && term != "xterm-256color" &&
+        term != "xterm-color" && term != "xterm") {
+        return false;
+    }
+
+    return true;
+}
+
+class PrinterPosix : public StyledTextPrinter {
+  public:
+    PrinterPosix(FILE* f, bool colors) : file(f), use_colors(colors && SupportsColors(f)) {}
+
+    void Print(std::string_view text, const TextStyle& style) override {
+        if (use_colors) {
+            fwrite(text.data(), 1, text.size(), file);
+        } else {
+            fwrite(text.data(), 1, text.size(), file);
         }
     }
-    return count;
-}
+
+  private:
+    FILE* const file;
+    const bool use_colors;
+};
+
 }  // namespace
 
-Diagnostic::Diagnostic() = default;
-Diagnostic::Diagnostic(const Diagnostic&) = default;
-Diagnostic::~Diagnostic() = default;
-Diagnostic& Diagnostic::operator=(const Diagnostic&) = default;
-
-List::List() = default;
-List::List(std::initializer_list<Diagnostic> list)
-    : entries_(list), error_count_(CountErrors(entries_)) {}
-List::List(VectorRef<Diagnostic> list)
-    : entries_(std::move(list)), error_count_(CountErrors(entries_)) {}
-
-List::List(const List& rhs) = default;
-
-List::List(List&& rhs) = default;
-
-List::~List() = default;
-
-List& List::operator=(const List& rhs) = default;
-
-List& List::operator=(List&& rhs) = default;
-
-std::string List::Str() const {
-    diag::Formatter::Style style;
-    style.print_newline_at_end = false;
-    return Formatter{style}.Format(*this).Plain();
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out, bool use_colors) {
+    return std::make_unique<PrinterPosix>(out, use_colors);
 }
 
-}  // namespace tint::diag
+StyledTextPrinter::~StyledTextPrinter() = default;
+
+}  // namespace tint

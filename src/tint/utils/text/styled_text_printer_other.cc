@@ -29,17 +29,17 @@
 
 #include <cstring>
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
-namespace tint::diag {
+namespace tint {
 namespace {
 
-class PrinterOther : public Printer {
+class PrinterOther : public StyledTextPrinter {
   public:
     explicit PrinterOther(FILE* f) : file(f) {}
 
-    void Write(const std::string& str, const Style&) override {
-        fwrite(str.data(), 1, str.size(), file);
+    void Print(std::string_view text, const Style& style) override {
+        fwrite(text.data(), 1, text.size(), file);
     }
 
   private:
@@ -48,8 +48,10 @@ class PrinterOther : public Printer {
 
 }  // namespace
 
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool) {
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out, bool) {
     return std::make_unique<PrinterOther>(out);
 }
 
-}  // namespace tint::diag
+StyledTextPrinter::~StyledTextPrinter() = default;
+
+}  // namespace tint
