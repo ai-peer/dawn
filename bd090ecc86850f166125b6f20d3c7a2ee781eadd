@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8df42c30_c67a15b9",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T15:15:17Z",
+      "side": 1,
+      "message": "Not sure I buy that argument. A user can declare a type just as much as they can declare a function.\n\n```\n// Take your pick:\n// alias X \u003d i32;\n// struct X { i : i32 };\n// fn X() {}\n\nfn F() {\n  _ \u003d X();\n}\n```",
+      "parentUuid": "527053bd_da0171c6",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "241f3658_c937a8ff",
         "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
         "patchSetId": 1
@@ -166,6 +190,30 @@
       "side": 1,
       "message": "Yea, I went back and forth on this one, `const \u0027a\u0027` reads strange to me, `constant \u0027a\u0027` sounded a bit better. Didn\u0027t notice `var` or I probably would have tried `variable \u0027a\u0027`. The others are already fully spelled out as words, the longer forms read a bit better?",
       "parentUuid": "241f3658_c937a8ff",
+      "range": {
+        "startLine": 1333,
+        "startChar": 12,
+        "endLine": 1333,
+        "endChar": 20
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a027f3cb_6499d4d8",
+        "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T15:15:17Z",
+      "side": 1,
+      "message": "While the WGSL spec may technically disagree, I think most people will consider `var`, `let`, `const` and parameters as all `variables`. Users will know what a `var` is, because they typed it. I think the same applies to `const`.\n\nWe could quote it (`\u0027const\u0027`), or with the work I\u0027m currently doing, we could color it differently so that it clearly stands out from the english?",
+      "parentUuid": "4574d79a_5aef6d4f",
       "range": {
         "startLine": 1333,
         "startChar": 12,
