@@ -16,6 +16,24 @@
       "message": "It looks like a formatter has attacked this file. Please can you revert the unrelated changes?",
       "revId": "721c3c532863c8a5794e7fb0de08df2e48e004b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ab01cb9_5637d1b4",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3269634
+      },
+      "writtenOn": "2024-02-02T15:11:02Z",
+      "side": 1,
+      "message": "Sorry - I\u0027ve been in the habit of running `git cl format` because it was recommended in the [Chromium docs](https://chromium.googlesource.com/chromium/src/+/main/docs/clang_format.md).  But it seems like it\u0027s seldom desired.  Reverted the formatting changes.",
+      "parentUuid": "43ac87ed_2c0fe748",
+      "revId": "721c3c532863c8a5794e7fb0de08df2e48e004b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
