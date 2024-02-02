@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e438c4_35627a4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-02T01:36:52Z",
+      "side": 1,
+      "message": "talking with Rafael again, it seems like it only doesn\u0027t work in Cloud VMs, so for WebGPU 0-copy this should be OK since folks will be using the browser mostly on their local computer.\n\nWe\u0027ll probably want to figure out some fallback or how to detect when it doesn\u0027t work in a VM since Dawn might be used in server-side scenarios - like dawn.node or something else.\n\nI tested that 64mb buffers works https://dawn-review.googlesource.com/c/dawn/+/172920",
+      "revId": "f48767f4fc37ea7abceb6df169fd62c0991f26f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
