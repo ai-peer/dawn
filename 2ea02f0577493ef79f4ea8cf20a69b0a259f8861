@@ -16,6 +16,23 @@
       "message": "LGTM!",
       "revId": "2ea02f0577493ef79f4ea8cf20a69b0a259f8861",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b4dd2f_22019571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-02T15:07:53Z",
+      "side": 1,
+      "message": "Hmm, is at least the Vulkan backend operating on the assumption that labels are always set on backend objects? Tests are failing here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/BackendVk.cpp;l\u003d263;bpv\u003d1;bpt\u003d1?q\u003dBackendVk.cpp\u0026ss\u003dchromium",
+      "revId": "2ea02f0577493ef79f4ea8cf20a69b0a259f8861",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
