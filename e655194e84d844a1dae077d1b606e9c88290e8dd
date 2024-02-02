@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe6b481a_69725bef",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-02T21:02:08Z",
+      "side": 1,
+      "message": "thanks for adding the test!",
+      "parentUuid": "c94ad355_f0d03f60",
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78f85f25_cd8e1c84",
