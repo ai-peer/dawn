@@ -385,359 +385,373 @@ INSTANTIATE_TEST_SUITE_P(
     testing::ValuesIn(std::vector<Case>{
         {Def::kAccess, Use::kAccess, kPass},
         {Def::kAccess, Use::kAddressSpace,
-         R"(5:6 error: cannot use access 'write' as address space)"},
-        {Def::kAccess, Use::kBinaryOp, R"(5:6 error: cannot use access 'write' as value)"},
+         R"(5:6 error: cannot use 'write' (an access mode) as an address space)"},
+        {Def::kAccess, Use::kBinaryOp,
+         R"(5:6 error: cannot use 'write' (an access mode) as a value)"},
         {Def::kAccess, Use::kBuiltinValue,
-         R"(5:6 error: cannot use access 'write' as builtin value)"},
-        {Def::kAccess, Use::kCallExpr, R"(5:6 error: cannot use access 'write' as call target)"},
-        {Def::kAccess, Use::kCallStmt, R"(5:6 error: cannot use access 'write' as call target)"},
-        {Def::kAccess, Use::kFunctionReturnType, R"(5:6 error: cannot use access 'write' as type)"},
+         R"(5:6 error: cannot use 'write' (an access mode) as a builtin value)"},
+        {Def::kAccess, Use::kCallExpr,
+         R"(5:6 error: cannot use 'write' (an access mode) as a function call)"},
+        {Def::kAccess, Use::kCallStmt,
+         R"(5:6 error: cannot use 'write' (an access mode) as a function call)"},
+        {Def::kAccess, Use::kFunctionReturnType,
+         R"(5:6 error: cannot use 'write' (an access mode) as a type)"},
         {Def::kAccess, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use access 'write' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'write' (an access mode) as an interpolation sampling)"},
         {Def::kAccess, Use::kInterpolationType,
-         R"(5:6 error: cannot use access 'write' as interpolation type)"},
-        {Def::kAccess, Use::kMemberType, R"(5:6 error: cannot use access 'write' as type)"},
+         R"(5:6 error: cannot use 'write' (an access mode) as an interpolation type)"},
+        {Def::kAccess, Use::kMemberType,
+         R"(5:6 error: cannot use 'write' (an access mode) as a type)"},
         {Def::kAccess, Use::kTexelFormat,
-         R"(5:6 error: cannot use access 'write' as texel format)"},
-        {Def::kAccess, Use::kValueExpression, R"(5:6 error: cannot use access 'write' as value)"},
-        {Def::kAccess, Use::kVariableType, R"(5:6 error: cannot use access 'write' as type)"},
-        {Def::kAccess, Use::kUnaryOp, R"(5:6 error: cannot use access 'write' as value)"},
+         R"(5:6 error: cannot use 'write' (an access mode) as a texel format)"},
+        {Def::kAccess, Use::kValueExpression,
+         R"(5:6 error: cannot use 'write' (an access mode) as a value)"},
+        {Def::kAccess, Use::kVariableType,
+         R"(5:6 error: cannot use 'write' (an access mode) as a type)"},
+        {Def::kAccess, Use::kUnaryOp,
+         R"(5:6 error: cannot use 'write' (an access mode) as a value)"},
 
         {Def::kAddressSpace, Use::kAccess,
-         R"(5:6 error: cannot use address space 'workgroup' as access)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as an access mode)"},
         {Def::kAddressSpace, Use::kAddressSpace, kPass},
         {Def::kAddressSpace, Use::kBinaryOp,
-         R"(5:6 error: cannot use address space 'workgroup' as value)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a value)"},
         {Def::kAddressSpace, Use::kBuiltinValue,
-         R"(5:6 error: cannot use address space 'workgroup' as builtin value)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a builtin value)"},
         {Def::kAddressSpace, Use::kCallExpr,
-         R"(5:6 error: cannot use address space 'workgroup' as call target)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a function call)"},
         {Def::kAddressSpace, Use::kCallStmt,
-         R"(5:6 error: cannot use address space 'workgroup' as call target)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a function call)"},
         {Def::kAddressSpace, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use address space 'workgroup' as type)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a type)"},
         {Def::kAddressSpace, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use address space 'workgroup' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as an interpolation sampling)"},
         {Def::kAddressSpace, Use::kInterpolationType,
-         R"(5:6 error: cannot use address space 'workgroup' as interpolation type)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as an interpolation type)"},
         {Def::kAddressSpace, Use::kMemberType,
-         R"(5:6 error: cannot use address space 'workgroup' as type)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a type)"},
         {Def::kAddressSpace, Use::kTexelFormat,
-         R"(5:6 error: cannot use address space 'workgroup' as texel format)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a texel format)"},
         {Def::kAddressSpace, Use::kValueExpression,
-         R"(5:6 error: cannot use address space 'workgroup' as value)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a value)"},
         {Def::kAddressSpace, Use::kVariableType,
-         R"(5:6 error: cannot use address space 'workgroup' as type)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a type)"},
         {Def::kAddressSpace, Use::kUnaryOp,
-         R"(5:6 error: cannot use address space 'workgroup' as value)"},
+         R"(5:6 error: cannot use 'workgroup' (an address space) as a value)"},
 
         {Def::kBuiltinFunction, Use::kAccess,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as access)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as an access mode)"},
         {Def::kBuiltinFunction, Use::kAddressSpace,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as address space)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as an address space)"},
         {Def::kBuiltinFunction, Use::kBinaryOp,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as value
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kBuiltinFunction, Use::kBuiltinValue,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as builtin value)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a builtin value)"},
         {Def::kBuiltinFunction, Use::kCallStmt, kPass},
         {Def::kBuiltinFunction, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a type)"},
         {Def::kBuiltinFunction, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as an interpolation sampling)"},
         {Def::kBuiltinFunction, Use::kInterpolationType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as interpolation type)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as an interpolation type)"},
         {Def::kBuiltinFunction, Use::kMemberType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a type)"},
         {Def::kBuiltinFunction, Use::kTexelFormat,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as texel format)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a texel format)"},
         {Def::kBuiltinFunction, Use::kValueExpression,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as value
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kBuiltinFunction, Use::kVariableType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a type)"},
         {Def::kBuiltinFunction, Use::kUnaryOp,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as value
+         R"(5:6 error: cannot use 'workgroupBarrier' (a builtin function) as a value
 7:8 note: are you missing '()'?)"},
 
-        {Def::kBuiltinType, Use::kAccess, R"(5:6 error: cannot use type 'vec4<f32>' as access)"},
+        {Def::kBuiltinType, Use::kAccess,
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as an access mode)"},
         {Def::kBuiltinType, Use::kAddressSpace,
-         R"(5:6 error: cannot use type 'vec4<f32>' as address space)"},
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as an address space)"},
         {Def::kBuiltinType, Use::kBinaryOp,
-         R"(5:6 error: cannot use type 'vec4<f32>' as value
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kBuiltinType, Use::kBuiltinValue,
-         R"(5:6 error: cannot use type 'vec4<f32>' as builtin value)"},
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as a builtin value)"},
         {Def::kBuiltinType, Use::kCallExpr, kPass},
         {Def::kBuiltinType, Use::kFunctionReturnType, kPass},
         {Def::kBuiltinType, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use type 'vec4<f32>' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as an interpolation sampling)"},
         {Def::kBuiltinType, Use::kInterpolationType,
-         R"(5:6 error: cannot use type 'vec4<f32>' as interpolation type)"},
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as an interpolation type)"},
         {Def::kBuiltinType, Use::kMemberType, kPass},
         {Def::kBuiltinType, Use::kTexelFormat,
-         R"(5:6 error: cannot use type 'vec4<f32>' as texel format)"},
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as a texel format)"},
         {Def::kBuiltinType, Use::kValueExpression,
-         R"(5:6 error: cannot use type 'vec4<f32>' as value
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kBuiltinType, Use::kVariableType, kPass},
         {Def::kBuiltinType, Use::kUnaryOp,
-         R"(5:6 error: cannot use type 'vec4<f32>' as value
+         R"(5:6 error: cannot use 'vec4<f32>' (a type) as a value
 7:8 note: are you missing '()'?)"},
 
         {Def::kBuiltinValue, Use::kAccess,
-         R"(5:6 error: cannot use builtin value 'position' as access)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as an access mode)"},
         {Def::kBuiltinValue, Use::kAddressSpace,
-         R"(5:6 error: cannot use builtin value 'position' as address space)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as an address space)"},
         {Def::kBuiltinValue, Use::kBinaryOp,
-         R"(5:6 error: cannot use builtin value 'position' as value)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a value)"},
         {Def::kBuiltinValue, Use::kBuiltinValue, kPass},
         {Def::kBuiltinValue, Use::kCallStmt,
-         R"(5:6 error: cannot use builtin value 'position' as call target)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a function call)"},
         {Def::kBuiltinValue, Use::kCallExpr,
-         R"(5:6 error: cannot use builtin value 'position' as call target)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a function call)"},
         {Def::kBuiltinValue, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use builtin value 'position' as type)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a type)"},
         {Def::kBuiltinValue, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use builtin value 'position' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as an interpolation sampling)"},
         {Def::kBuiltinValue, Use::kInterpolationType,
-         R"(5:6 error: cannot use builtin value 'position' as interpolation type)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as an interpolation type)"},
         {Def::kBuiltinValue, Use::kMemberType,
-         R"(5:6 error: cannot use builtin value 'position' as type)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a type)"},
         {Def::kBuiltinValue, Use::kTexelFormat,
-         R"(5:6 error: cannot use builtin value 'position' as texel format)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a texel format)"},
         {Def::kBuiltinValue, Use::kValueExpression,
-         R"(5:6 error: cannot use builtin value 'position' as value)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a value)"},
         {Def::kBuiltinValue, Use::kVariableType,
-         R"(5:6 error: cannot use builtin value 'position' as type)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a type)"},
         {Def::kBuiltinValue, Use::kUnaryOp,
-         R"(5:6 error: cannot use builtin value 'position' as value)"},
+         R"(5:6 error: cannot use 'position' (a builtin value) as a value)"},
 
-        {Def::kFunction, Use::kAccess, R"(5:6 error: cannot use function 'FUNCTION' as access
+        {Def::kFunction, Use::kAccess,
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as an access mode
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kAddressSpace,
-         R"(5:6 error: cannot use function 'FUNCTION' as address space
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as an address space
 1:2 note: function 'FUNCTION' declared here)"},
-        {Def::kFunction, Use::kBinaryOp, R"(5:6 error: cannot use function 'FUNCTION' as value
+        {Def::kFunction, Use::kBinaryOp, R"(5:6 error: cannot use 'FUNCTION' (a function) as a value
 1:2 note: function 'FUNCTION' declared here
 7:8 note: are you missing '()'?)"},
         {Def::kFunction, Use::kBuiltinValue,
-         R"(5:6 error: cannot use function 'FUNCTION' as builtin value
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a builtin value
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kCallExpr, kPass},
         {Def::kFunction, Use::kCallStmt, kPass},
         {Def::kFunction, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use function 'FUNCTION' as type
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a type
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use function 'FUNCTION' as interpolation sampling
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as an interpolation sampling
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kInterpolationType,
-         R"(5:6 error: cannot use function 'FUNCTION' as interpolation type
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as an interpolation type
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kMemberType,
-         R"(5:6 error: cannot use function 'FUNCTION' as type
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a type
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kTexelFormat,
-         R"(5:6 error: cannot use function 'FUNCTION' as texel format
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a texel format
 1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kValueExpression,
-         R"(5:6 error: cannot use function 'FUNCTION' as value
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a value
 1:2 note: function 'FUNCTION' declared here
 7:8 note: are you missing '()'?)"},
         {Def::kFunction, Use::kVariableType,
-         R"(5:6 error: cannot use function 'FUNCTION' as type
+         R"(5:6 error: cannot use 'FUNCTION' (a function) as a type
 1:2 note: function 'FUNCTION' declared here)"},
-        {Def::kFunction, Use::kUnaryOp, R"(5:6 error: cannot use function 'FUNCTION' as value
+        {Def::kFunction, Use::kUnaryOp, R"(5:6 error: cannot use 'FUNCTION' (a function) as a value
 1:2 note: function 'FUNCTION' declared here
 7:8 note: are you missing '()'?)"},
 
         {Def::kInterpolationSampling, Use::kAccess,
-         R"(5:6 error: cannot use interpolation sampling 'center' as access)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as an access mode)"},
         {Def::kInterpolationSampling, Use::kAddressSpace,
-         R"(5:6 error: cannot use interpolation sampling 'center' as address space)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as an address space)"},
         {Def::kInterpolationSampling, Use::kBinaryOp,
-         R"(5:6 error: cannot use interpolation sampling 'center' as value)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a value)"},
         {Def::kInterpolationSampling, Use::kBuiltinValue,
-         R"(5:6 error: cannot use interpolation sampling 'center' as builtin value)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a builtin value)"},
         {Def::kInterpolationSampling, Use::kCallStmt,
-         R"(5:6 error: cannot use interpolation sampling 'center' as call target)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a function call)"},
         {Def::kInterpolationSampling, Use::kCallExpr,
-         R"(5:6 error: cannot use interpolation sampling 'center' as call target)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a function call)"},
         {Def::kInterpolationSampling, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use interpolation sampling 'center' as type)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a type)"},
         {Def::kInterpolationSampling, Use::kInterpolationSampling, kPass},
         {Def::kInterpolationSampling, Use::kInterpolationType,
-         R"(5:6 error: cannot use interpolation sampling 'center' as interpolation type)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as an interpolation type)"},
         {Def::kInterpolationSampling, Use::kMemberType,
-         R"(5:6 error: cannot use interpolation sampling 'center' as type)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a type)"},
         {Def::kInterpolationSampling, Use::kTexelFormat,
-         R"(5:6 error: cannot use interpolation sampling 'center' as texel format)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a texel format)"},
         {Def::kInterpolationSampling, Use::kValueExpression,
-         R"(5:6 error: cannot use interpolation sampling 'center' as value)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a value)"},
         {Def::kInterpolationSampling, Use::kVariableType,
-         R"(5:6 error: cannot use interpolation sampling 'center' as type)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a type)"},
         {Def::kInterpolationSampling, Use::kUnaryOp,
-         R"(5:6 error: cannot use interpolation sampling 'center' as value)"},
+         R"(5:6 error: cannot use 'center' (an interpolation sampling) as a value)"},
 
         {Def::kInterpolationType, Use::kAccess,
-         R"(5:6 error: cannot use interpolation type 'linear' as access)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as an access mode)"},
         {Def::kInterpolationType, Use::kAddressSpace,
-         R"(5:6 error: cannot use interpolation type 'linear' as address space)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as an address space)"},
         {Def::kInterpolationType, Use::kBinaryOp,
-         R"(5:6 error: cannot use interpolation type 'linear' as value)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a value)"},
         {Def::kInterpolationType, Use::kBuiltinValue,
-         R"(5:6 error: cannot use interpolation type 'linear' as builtin value)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a builtin value)"},
         {Def::kInterpolationType, Use::kCallStmt,
-         R"(5:6 error: cannot use interpolation type 'linear' as call target)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a function call)"},
         {Def::kInterpolationType, Use::kCallExpr,
-         R"(5:6 error: cannot use interpolation type 'linear' as call target)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a function call)"},
         {Def::kInterpolationType, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use interpolation type 'linear' as type)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a type)"},
         {Def::kInterpolationType, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use interpolation type 'linear' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as an interpolation sampling)"},
         {Def::kInterpolationType, Use::kInterpolationType, kPass},
         {Def::kInterpolationType, Use::kMemberType,
-         R"(5:6 error: cannot use interpolation type 'linear' as type)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a type)"},
         {Def::kInterpolationType, Use::kTexelFormat,
-         R"(5:6 error: cannot use interpolation type 'linear' as texel format)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a texel format)"},
         {Def::kInterpolationType, Use::kValueExpression,
-         R"(5:6 error: cannot use interpolation type 'linear' as value)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a value)"},
         {Def::kInterpolationType, Use::kVariableType,
-         R"(5:6 error: cannot use interpolation type 'linear' as type)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a type)"},
         {Def::kInterpolationType, Use::kUnaryOp,
-         R"(5:6 error: cannot use interpolation type 'linear' as value)"},
+         R"(5:6 error: cannot use 'linear' (an interpolation type) as a value)"},
 
         {Def::kParameter, Use::kBinaryOp, kPass},
         {Def::kParameter, Use::kCallStmt,
-         R"(5:6 error: cannot use parameter 'PARAMETER' as call target
+         R"(5:6 error: cannot use 'PARAMETER' (a parameter) as a function call
 1:2 note: parameter 'PARAMETER' declared here)"},
         {Def::kParameter, Use::kCallExpr,
-         R"(5:6 error: cannot use parameter 'PARAMETER' as call target
+         R"(5:6 error: cannot use 'PARAMETER' (a parameter) as a function call
 1:2 note: parameter 'PARAMETER' declared here)"},
         {Def::kParameter, Use::kValueExpression, kPass},
         {Def::kParameter, Use::kVariableType,
-         R"(5:6 error: cannot use parameter 'PARAMETER' as type
+         R"(5:6 error: cannot use 'PARAMETER' (a parameter) as a type
 1:2 note: parameter 'PARAMETER' declared here)"},
         {Def::kParameter, Use::kUnaryOp, kPass},
 
-        {Def::kStruct, Use::kAccess, R"(5:6 error: cannot use type 'STRUCT' as access
+        {Def::kStruct, Use::kAccess, R"(5:6 error: cannot use 'STRUCT' (a type) as an access mode
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kAddressSpace,
-         R"(5:6 error: cannot use type 'STRUCT' as address space
+         R"(5:6 error: cannot use 'STRUCT' (a type) as an address space
 1:2 note: struct 'STRUCT' declared here)"},
-        {Def::kStruct, Use::kBinaryOp, R"(5:6 error: cannot use type 'STRUCT' as value
+        {Def::kStruct, Use::kBinaryOp, R"(5:6 error: cannot use 'STRUCT' (a type) as a value
 1:2 note: struct 'STRUCT' declared here
 7:8 note: are you missing '()'?)"},
         {Def::kStruct, Use::kBuiltinValue,
-         R"(5:6 error: cannot use type 'STRUCT' as builtin value
+         R"(5:6 error: cannot use 'STRUCT' (a type) as a builtin value
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kFunctionReturnType, kPass},
         {Def::kStruct, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use type 'STRUCT' as interpolation sampling
+         R"(5:6 error: cannot use 'STRUCT' (a type) as an interpolation sampling
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kInterpolationType,
-         R"(5:6 error: cannot use type 'STRUCT' as interpolation type
+         R"(5:6 error: cannot use 'STRUCT' (a type) as an interpolation type
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kMemberType, kPass},
-        {Def::kStruct, Use::kTexelFormat, R"(5:6 error: cannot use type 'STRUCT' as texel format
+        {Def::kStruct, Use::kTexelFormat,
+         R"(5:6 error: cannot use 'STRUCT' (a type) as a texel format
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kValueExpression,
-         R"(5:6 error: cannot use type 'STRUCT' as value
+         R"(5:6 error: cannot use 'STRUCT' (a type) as a value
 1:2 note: struct 'STRUCT' declared here
 7:8 note: are you missing '()'?)"},
         {Def::kStruct, Use::kVariableType, kPass},
         {Def::kStruct, Use::kUnaryOp,
-         R"(5:6 error: cannot use type 'STRUCT' as value
+         R"(5:6 error: cannot use 'STRUCT' (a type) as a value
 1:2 note: struct 'STRUCT' declared here
 7:8 note: are you missing '()'?)"},
 
         {Def::kTexelFormat, Use::kAccess,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as access)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as an access mode)"},
         {Def::kTexelFormat, Use::kAddressSpace,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as address space)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as an address space)"},
         {Def::kTexelFormat, Use::kBinaryOp,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as value)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a value)"},
         {Def::kTexelFormat, Use::kBuiltinValue,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as builtin value)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a builtin value)"},
         {Def::kTexelFormat, Use::kCallExpr,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as call target)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a function call)"},
         {Def::kTexelFormat, Use::kCallStmt,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as call target)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a function call)"},
         {Def::kTexelFormat, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as type)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a type)"},
         {Def::kTexelFormat, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as an interpolation sampling)"},
         {Def::kTexelFormat, Use::kInterpolationType,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as interpolation type)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as an interpolation type)"},
         {Def::kTexelFormat, Use::kMemberType,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as type)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a type)"},
         {Def::kTexelFormat, Use::kTexelFormat, kPass},
         {Def::kTexelFormat, Use::kValueExpression,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as value)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a value)"},
         {Def::kTexelFormat, Use::kVariableType,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as type)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a type)"},
         {Def::kTexelFormat, Use::kUnaryOp,
-         R"(5:6 error: cannot use texel format 'rgba8unorm' as value)"},
+         R"(5:6 error: cannot use 'rgba8unorm' (a texel format) as a value)"},
 
-        {Def::kTypeAlias, Use::kAccess, R"(5:6 error: cannot use type 'i32' as access)"},
+        {Def::kTypeAlias, Use::kAccess,
+         R"(5:6 error: cannot use 'i32' (a type) as an access mode)"},
         {Def::kTypeAlias, Use::kAddressSpace,
-         R"(5:6 error: cannot use type 'i32' as address space)"},
+         R"(5:6 error: cannot use 'i32' (a type) as an address space)"},
         {Def::kTypeAlias, Use::kBinaryOp,
-         R"(5:6 error: cannot use type 'i32' as value
+         R"(5:6 error: cannot use 'i32' (a type) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kTypeAlias, Use::kBuiltinValue,
-         R"(5:6 error: cannot use type 'i32' as builtin value)"},
+         R"(5:6 error: cannot use 'i32' (a type) as a builtin value)"},
         {Def::kTypeAlias, Use::kCallExpr, kPass},
         {Def::kTypeAlias, Use::kFunctionReturnType, kPass},
         {Def::kTypeAlias, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use type 'i32' as interpolation sampling)"},
+         R"(5:6 error: cannot use 'i32' (a type) as an interpolation sampling)"},
         {Def::kTypeAlias, Use::kInterpolationType,
-         R"(5:6 error: cannot use type 'i32' as interpolation type)"},
+         R"(5:6 error: cannot use 'i32' (a type) as an interpolation type)"},
         {Def::kTypeAlias, Use::kMemberType, kPass},
-        {Def::kTypeAlias, Use::kTexelFormat, R"(5:6 error: cannot use type 'i32' as texel format)"},
+        {Def::kTypeAlias, Use::kTexelFormat,
+         R"(5:6 error: cannot use 'i32' (a type) as a texel format)"},
         {Def::kTypeAlias, Use::kValueExpression,
-         R"(5:6 error: cannot use type 'i32' as value
+         R"(5:6 error: cannot use 'i32' (a type) as a value
 7:8 note: are you missing '()'?)"},
         {Def::kTypeAlias, Use::kVariableType, kPass},
         {Def::kTypeAlias, Use::kUnaryOp,
-         R"(5:6 error: cannot use type 'i32' as value
+         R"(5:6 error: cannot use 'i32' (a type) as a value
 7:8 note: are you missing '()'?)"},
 
-        {Def::kVariable, Use::kAccess, R"(5:6 error: cannot use const 'VARIABLE' as access
-1:2 note: const 'VARIABLE' declared here)"},
+        {Def::kVariable, Use::kAccess,
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as an access mode
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kAddressSpace,
-         R"(5:6 error: cannot use const 'VARIABLE' as address space
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as an address space
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kBinaryOp, kPass},
         {Def::kVariable, Use::kBuiltinValue,
-         R"(5:6 error: cannot use const 'VARIABLE' as builtin value
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a builtin value
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kCallStmt,
-         R"(5:6 error: cannot use const 'VARIABLE' as call target
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a function call
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kCallExpr,
-         R"(5:6 error: cannot use const 'VARIABLE' as call target
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a function call
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use const 'VARIABLE' as type
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a type
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kInterpolationSampling,
-         R"(5:6 error: cannot use const 'VARIABLE' as interpolation sampling
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as an interpolation sampling
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kInterpolationType,
-         R"(5:6 error: cannot use const 'VARIABLE' as interpolation type
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as an interpolation type
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kMemberType,
-         R"(5:6 error: cannot use const 'VARIABLE' as type
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a type
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kTexelFormat,
-         R"(5:6 error: cannot use const 'VARIABLE' as texel format
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a texel format
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kValueExpression, kPass},
         {Def::kVariable, Use::kVariableType,
-         R"(5:6 error: cannot use const 'VARIABLE' as type
-1:2 note: const 'VARIABLE' declared here)"},
+         R"(5:6 error: cannot use 'VARIABLE' (a constant) as a type
+1:2 note: constant 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kUnaryOp, kPass},
     }));
 

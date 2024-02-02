@@ -27,8 +27,7 @@
 
 #include "src/tint/lang/wgsl/resolver/resolver.h"
 
-#include "gmock/gmock.h"
-#include "src/tint/lang/core/type/storage_texture.h"
+#include "gtest/gtest.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
 
@@ -234,7 +233,7 @@ TEST_F(ResolverAssignmentValidationTest, AssignToOverride_Fail) {
     WrapInFunction(Assign(Expr(Source{{12, 34}}, "a"), 2_i));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to override 'a'
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to 'a' (an override)
 12:34 note: 'override' variables are immutable
 56:78 note: override 'a' declared here)");
 }
@@ -248,7 +247,7 @@ TEST_F(ResolverAssignmentValidationTest, AssignToLet_Fail) {
                    Assign(Expr(Source{{12, 34}}, "a"), 2_i));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to let 'a'
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to 'a' (a let)
 12:34 note: 'let' variables are immutable
 56:78 note: let 'a' declared here)");
 }
@@ -262,9 +261,9 @@ TEST_F(ResolverAssignmentValidationTest, AssignToConst_Fail) {
                    Assign(Expr(Source{{12, 34}}, "a"), 2_i));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to const 'a'
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot assign to 'a' (a constant)
 12:34 note: 'const' variables are immutable
-56:78 note: const 'a' declared here)");
+56:78 note: constant 'a' declared here)");
 }
 
 TEST_F(ResolverAssignmentValidationTest, AssignToParam_Fail) {
@@ -276,7 +275,7 @@ TEST_F(ResolverAssignmentValidationTest, AssignToParam_Fail) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot assign to parameter 'arg'
+              R"(12:34 error: cannot assign to 'arg' (a parameter)
 12:34 note: parameters are immutable
 56:78 note: parameter 'arg' declared here)");
 }

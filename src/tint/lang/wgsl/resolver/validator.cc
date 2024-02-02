@@ -27,16 +27,12 @@
 
 #include "src/tint/lang/wgsl/resolver/validator.h"
 
-#include <algorithm>
-#include <limits>
 #include <tuple>
 #include <utility>
 
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/abstract_numeric.h"
 #include "src/tint/lang/core/type/atomic.h"
-#include "src/tint/lang/core/type/depth_multisampled_texture.h"
-#include "src/tint/lang/core/type/depth_texture.h"
 #include "src/tint/lang/core/type/multisampled_texture.h"
 #include "src/tint/lang/core/type/pointer.h"
 #include "src/tint/lang/core/type/reference.h"
@@ -48,21 +44,14 @@
 #include "src/tint/lang/wgsl/ast/assignment_statement.h"
 #include "src/tint/lang/wgsl/ast/bitcast_expression.h"
 #include "src/tint/lang/wgsl/ast/blend_src_attribute.h"
-#include "src/tint/lang/wgsl/ast/break_statement.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
-#include "src/tint/lang/wgsl/ast/continue_statement.h"
 #include "src/tint/lang/wgsl/ast/disable_validation_attribute.h"
-#include "src/tint/lang/wgsl/ast/discard_statement.h"
 #include "src/tint/lang/wgsl/ast/for_loop_statement.h"
 #include "src/tint/lang/wgsl/ast/id_attribute.h"
-#include "src/tint/lang/wgsl/ast/if_statement.h"
 #include "src/tint/lang/wgsl/ast/internal_attribute.h"
 #include "src/tint/lang/wgsl/ast/interpolate_attribute.h"
-#include "src/tint/lang/wgsl/ast/loop_statement.h"
 #include "src/tint/lang/wgsl/ast/return_statement.h"
 #include "src/tint/lang/wgsl/ast/switch_statement.h"
-#include "src/tint/lang/wgsl/ast/traverse_expressions.h"
-#include "src/tint/lang/wgsl/ast/unary_op_expression.h"
 #include "src/tint/lang/wgsl/ast/variable_decl_statement.h"
 #include "src/tint/lang/wgsl/ast/workgroup_attribute.h"
 #include "src/tint/lang/wgsl/sem/array.h"
@@ -72,7 +61,6 @@
 #include "src/tint/lang/wgsl/sem/function.h"
 #include "src/tint/lang/wgsl/sem/if_statement.h"
 #include "src/tint/lang/wgsl/sem/loop_statement.h"
-#include "src/tint/lang/wgsl/sem/materialize.h"
 #include "src/tint/lang/wgsl/sem/member_accessor_expression.h"
 #include "src/tint/lang/wgsl/sem/statement.h"
 #include "src/tint/lang/wgsl/sem/struct.h"
@@ -81,12 +69,8 @@
 #include "src/tint/lang/wgsl/sem/value_conversion.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "src/tint/lang/wgsl/sem/while_statement.h"
-#include "src/tint/utils/containers/map.h"
-#include "src/tint/utils/containers/reverse.h"
-#include "src/tint/utils/containers/transform.h"
-#include "src/tint/utils/macros/defer.h"
-#include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/math/math.h"
+#include "src/tint/utils/rtti/switch.h"
 #include "src/tint/utils/text/string.h"
 #include "src/tint/utils/text/string_stream.h"
 
@@ -390,7 +374,7 @@ bool Validator::StorageTexture(const core::type::StorageTexture* t, const Source
         case core::Access::kWrite:
             break;
         case core::Access::kUndefined:
-            AddError("storage texture missing access control", source);
+            AddError("storage texture missing access mode", source);
             return false;
     }
 
@@ -730,7 +714,7 @@ bool Validator::Var(const sem::Variable* v) const {
         // If the store type is a texture type or a sampler type, then the variable declaration must
         // not have a address space attribute. The address space will always be handle.
         AddError("variables of type '" + sem_.TypeNameOf(store_ty) +
-                     "' must not specifiy an address space",
+                     "' must not specify an address space",
                  var->source);
         return false;
     }

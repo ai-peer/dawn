@@ -2370,7 +2370,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             return BuiltinCall(expr, fn_expr->Value(), args);
         },
         [&](Default) {
-            sem_.ErrorUnexpectedExprKind(target, "call target");
+            sem_.ErrorUnexpectedExprKind(target, "a", "function call");
             return nullptr;
         });
 
@@ -3386,7 +3386,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     }
 
     if (auto access = resolved->Access(); access != core::Access::kUndefined) {
-        return CheckNotTemplated("access", ident)
+        return CheckNotTemplated("access mode", ident)
                    ? b.create<sem::BuiltinEnumExpression<core::Access>>(expr, current_statement_,
                                                                         access)
                    : nullptr;

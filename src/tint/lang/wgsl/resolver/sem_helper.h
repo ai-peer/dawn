@@ -34,12 +34,9 @@
 #include "src/tint/lang/core/interpolation_sampling.h"
 #include "src/tint/lang/core/interpolation_type.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
-#include "src/tint/lang/wgsl/resolver/dependency_graph.h"
 #include "src/tint/lang/wgsl/sem/builtin_enum_expression.h"
 #include "src/tint/lang/wgsl/sem/function_expression.h"
 #include "src/tint/lang/wgsl/sem/type_expression.h"
-#include "src/tint/utils/containers/map.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
 
 namespace tint::resolver {
 
@@ -118,7 +115,7 @@ class SemHelper {
             if (TINT_LIKELY(fn_expr)) {
                 return fn_expr;
             }
-            ErrorUnexpectedExprKind(expr, "function");
+            ErrorUnexpectedExprKind(expr, "a", "function");
         }
         return nullptr;
     }
@@ -133,7 +130,7 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "address space", core::kAddressSpaceStrings);
+            ErrorUnexpectedExprKind(expr, "an", "address space", core::kAddressSpaceStrings);
         }
         return nullptr;
     }
@@ -161,7 +158,7 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "builtin value", core::kBuiltinValueStrings);
+            ErrorUnexpectedExprKind(expr, "a", "builtin value", core::kBuiltinValueStrings);
         }
         return nullptr;
     }
@@ -176,7 +173,7 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "texel format", core::kTexelFormatStrings);
+            ErrorUnexpectedExprKind(expr, "a", "texel format", core::kTexelFormatStrings);
         }
         return nullptr;
     }
@@ -204,7 +201,7 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "access", core::kAccessStrings);
+            ErrorUnexpectedExprKind(expr, "an", "access mode", core::kAccessStrings);
         }
         return nullptr;
     }
@@ -233,7 +230,7 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "interpolation sampling",
+            ErrorUnexpectedExprKind(expr, "an", "interpolation sampling",
                                     core::kInterpolationSamplingStrings);
         }
         return nullptr;
@@ -250,7 +247,8 @@ class SemHelper {
             if (TINT_LIKELY(enum_expr)) {
                 return enum_expr;
             }
-            ErrorUnexpectedExprKind(expr, "interpolation type", core::kInterpolationTypeStrings);
+            ErrorUnexpectedExprKind(expr, "an", "interpolation type",
+                                    core::kInterpolationTypeStrings);
         }
         return nullptr;
     }
@@ -274,9 +272,11 @@ class SemHelper {
 
     /// Raises an error diagnostic that the expression @p got was not of the kind @p wanted.
     /// @param expr the expression
+    /// @param join a joining word for wanted
     /// @param wanted the expected expression kind
     /// @param suggestions suggested valid identifiers
     void ErrorUnexpectedExprKind(const sem::Expression* expr,
+                                 std::string_view join,
                                  std::string_view wanted,
                                  tint::Slice<const std::string_view> suggestions = Empty) const;
 

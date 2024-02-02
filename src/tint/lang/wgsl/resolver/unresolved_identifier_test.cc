@@ -49,7 +49,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, AddressSpace) {
         ));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved address space 'privte'
+    EXPECT_EQ(r()->error(), R"(12:34 error: address space 'privte' seen for the first time
 12:34 note: Did you mean 'private'?
 Possible values: 'function', 'pixel_local', 'private', 'push_constant', 'storage', 'uniform', 'workgroup')");
 }
@@ -59,7 +59,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, BuiltinValue) {
          ty.void_(), tint::Empty, Vector{Stage(ast::PipelineStage::kVertex)});
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved builtin value 'positon'
+    EXPECT_EQ(r()->error(), R"(12:34 error: builtin value 'positon' seen for the first time
 12:34 note: Did you mean 'position'?
 Possible values: 'frag_depth', 'front_facing', 'global_invocation_id', 'instance_index', 'local_invocation_id', 'local_invocation_index', 'num_workgroups', 'position', 'sample_index', 'sample_mask', 'subgroup_invocation_id', 'subgroup_size', 'vertex_index', 'workgroup_id')");
 }
@@ -68,7 +68,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, TexelFormat) {
     GlobalVar("v", ty("texture_storage_1d", Expr(Source{{12, 34}}, "rba8unorm"), "read"));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved texel format 'rba8unorm'
+    EXPECT_EQ(r()->error(), R"(12:34 error: texel format 'rba8unorm' seen for the first time
 12:34 note: Did you mean 'rgba8unorm'?
 Possible values: 'bgra8unorm', 'r32float', 'r32sint', 'r32uint', 'rg32float', 'rg32sint', 'rg32uint', 'rgba16float', 'rgba16sint', 'rgba16uint', 'rgba32float', 'rgba32sint', 'rgba32uint', 'rgba8sint', 'rgba8snorm', 'rgba8uint', 'rgba8unorm')");
 }
@@ -83,7 +83,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, AccessMode) {
                                              ));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved access 'reed'
+    EXPECT_EQ(r()->error(), R"(12:34 error: access mode 'reed' seen for the first time
 12:34 note: Did you mean 'read'?
 Possible values: 'read', 'read_write', 'write')");
 }
@@ -98,7 +98,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, InterpolationSampling) {
                    });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved interpolation sampling 'centre'
+    EXPECT_EQ(r()->error(), R"(12:34 error: interpolation sampling 'centre' seen for the first time
 12:34 note: Did you mean 'center'?
 Possible values: 'center', 'centroid', 'sample')");
 }
@@ -112,7 +112,7 @@ TEST_F(ResolverUnresolvedIdentifierSuggestions, InterpolationType) {
                    });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: unresolved interpolation type 'liner'
+    EXPECT_EQ(r()->error(), R"(12:34 error: interpolation type 'liner' seen for the first time
 12:34 note: Did you mean 'linear'?
 Possible values: 'flat', 'linear', 'perspective')");
 }

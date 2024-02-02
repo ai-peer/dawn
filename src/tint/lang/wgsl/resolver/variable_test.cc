@@ -25,7 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "gmock/gmock.h"
+#include "gtest/gtest.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/wgsl/resolver/resolver.h"
@@ -1330,7 +1330,7 @@ TEST_F(ResolverVariableTest, GlobalConst_UseTemplatedIdent) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(12:34 error: variable 'a' does not take template arguments
-56:78 note: const 'a' declared here)");
+56:78 note: constant 'a' declared here)");
 }
 
 TEST_F(ResolverVariableTest, GlobalOverride_UseTemplatedIdent) {

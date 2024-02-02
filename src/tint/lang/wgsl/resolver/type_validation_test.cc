@@ -1063,6 +1063,10 @@ struct DimensionParams {
     const char* name;
     bool is_valid;
 };
+std::ostream& operator<<(std::ostream& out, const DimensionParams& v) {
+    out << v.name << " valid: " << v.is_valid;
+    return out;
+}
 
 static constexpr DimensionParams Dimension_cases[] = {
     DimensionParams{"texture_storage_1d", true},
@@ -1087,7 +1091,8 @@ TEST_P(StorageTextureDimensionTest, All) {
         EXPECT_TRUE(r()->Resolve()) << r()->error();
     } else {
         EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(r()->error(), "12:34 error: unresolved type '" + std::string(params.name) + "'");
+        EXPECT_EQ(r()->error(),
+                  "12:34 error: type '" + std::string(params.name) + "' seen for the first time");
     }
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,

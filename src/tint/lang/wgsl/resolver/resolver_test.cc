@@ -1238,7 +1238,7 @@ TEST_F(ResolverTest, Expr_MemberAccessor_Type) {
     WrapInFunction(mem);
 
     EXPECT_FALSE(r()->Resolve()) << r()->error();
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use type 'f32' as value
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'f32' (a type) as a value
 12:34 note: are you missing '()'?)");
 }
 
