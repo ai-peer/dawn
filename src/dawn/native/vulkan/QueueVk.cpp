@@ -170,6 +170,14 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     });
 }
 
+MaybeError Queue::EnsureCommandsFlushed(ExecutionSerial serial) {
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+        return SubmitPendingCommands();
+    }
+    return {};
+}
+
 void Queue::ForceEventualFlushOfCommands() {
     mRecordingContext.needsSubmit |= mRecordingContext.used;
 }

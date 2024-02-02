@@ -68,6 +68,7 @@ class Queue final : public QueueBase {
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
+    MaybeError EnsureCommandsFlushed(ExecutionSerial serial) override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
     void DestroyImpl() override;

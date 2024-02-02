@@ -56,6 +56,9 @@ class ExecutionQueueBase {
     // Check for passed fences and set the new completed serial.
     MaybeError CheckPassedSerials();
 
+    // Ensures that all commands which were recorded are flushed upto the given serial.
+    virtual MaybeError EnsureCommandsFlushed(ExecutionSerial serial) = 0;
+
     // For the commands being internally recorded in backend, that were not urgent to submit, this
     // method makes them to be submitted as soon as possible in next ticks.
     virtual void ForceEventualFlushOfCommands() = 0;

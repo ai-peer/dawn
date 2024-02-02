@@ -149,6 +149,8 @@ MaybeError Queue::NextSerial() {
     Device* device = ToBackend(GetDevice());
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
 
+    // TODO(sunnyps): This seems incorrect since SubmitPendingCommands calls back into NextSerial.
+    // Audit the call-sites for NextSerial and try removing this.
     ForceEventualFlushOfCommands();
     DAWN_TRY(SubmitPendingCommands());
 
@@ -194,6 +196,14 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     }
 
     return completedSerial;
+}
+
+MaybeError Queue::EnsureCommandsFlushed(ExecutionSerial serial) {
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+        return SubmitPendingCommands();
+    }
+    return {};
 }
 
 void Queue::ForceEventualFlushOfCommands() {

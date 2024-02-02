@@ -173,6 +173,14 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     return fenceSerial;
 }
 
+MaybeError Queue::EnsureCommandsFlushed(ExecutionSerial serial) {
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+        SubmitFenceSync();
+    }
+    return {};
+}
+
 void Queue::ForceEventualFlushOfCommands() {
     mHasPendingCommands = true;
 }
