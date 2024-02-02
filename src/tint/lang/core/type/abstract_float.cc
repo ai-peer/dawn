@@ -34,7 +34,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::core::type::AbstractFloat);
 
 namespace tint::core::type {
 
-AbstractFloat::AbstractFloat() : Base(Hash(tint::TypeInfo::Of<AbstractFloat>().full_hashcode)) {}
+AbstractFloat::AbstractFloat() : Base(Hash(tint::TypeInfo::Of<AbstractFloat>().hashcode)) {}
 
 AbstractFloat::~AbstractFloat() = default;
 

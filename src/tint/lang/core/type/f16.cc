@@ -34,7 +34,7 @@ TINT_INSTANTIATE_TYPEINFO(tint::core::type::F16);
 namespace tint::core::type {
 
 F16::F16()
-    : Base(static_cast<size_t>(tint::TypeInfo::Of<F16>().full_hashcode),
+    : Base(static_cast<size_t>(tint::TypeInfo::Of<F16>().hashcode),
            core::type::Flags{
                Flag::kConstructable,
                Flag::kCreationFixedFootprint,

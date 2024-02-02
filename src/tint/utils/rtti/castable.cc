@@ -36,7 +36,6 @@ const TypeInfo tint::detail::TypeInfoOf<CastableBase>::info{
     nullptr,
     "CastableBase",
     tint::TypeInfo::HashCodeOf<CastableBase>(),
-    tint::TypeInfo::FullHashCodeOf<CastableBase>(),
 };
 
 CastableBase::CastableBase(const CastableBase&) = default;

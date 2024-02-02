@@ -75,17 +75,14 @@ static constexpr bool IsCastable =
     !(std::is_same_v<TYPES, Ignore> && ...);
 
 /// Helper macro to instantiate the TypeInfo<T> template for `CLASS`.
-#define TINT_INSTANTIATE_TYPEINFO(CLASS)                        \
-    TINT_CASTABLE_PUSH_DISABLE_WARNINGS();                      \
-    template <>                                                 \
-    const tint::TypeInfo tint::detail::TypeInfoOf<CLASS>::info{ \
-        &tint::detail::TypeInfoOf<CLASS::TrueBase>::info,       \
-        #CLASS,                                                 \
-        tint::TypeInfo::HashCodeOf<CLASS>(),                    \
-        tint::TypeInfo::FullHashCodeOf<CLASS>(),                \
-    };                                                          \
-    TINT_CASTABLE_POP_DISABLE_WARNINGS();                       \
-    static_assert(std::is_same_v<CLASS, CLASS::Base::Class>,    \
+#define TINT_INSTANTIATE_TYPEINFO(CLASS)                          \
+    TINT_CASTABLE_PUSH_DISABLE_WARNINGS();                        \
+    template <>                                                   \
+    const tint::TypeInfo tint::detail::TypeInfoOf<CLASS>::info{   \
+        &tint::detail::TypeInfoOf<CLASS::TrueBase>::info, #CLASS, \
+        tint::TypeInfo::HashCodeOf<CLASS>()};                     \
+    TINT_CASTABLE_POP_DISABLE_WARNINGS();                         \
+    static_assert(std::is_same_v<CLASS, CLASS::Base::Class>,      \
                   #CLASS " does not derive from Castable<" #CLASS "[, BASE]>")
 
 /// Bit flags that can be passed to the template parameter `FLAGS` of Is() and As().
@@ -100,25 +97,25 @@ enum CastFlags {
 /// The type of a hash code
 using HashCode = uint64_t;
 
-/// Maybe checks to see if an object with the full hashcode @p object_full_hashcode could
+/// Maybe checks to see if an object with the hashcode @p object_hashcode could
 /// potentially be of, or derive from the type with the hashcode @p query_hashcode.
 /// @param type_hashcode the hashcode of the type
-/// @param object_full_hashcode the full hashcode of the object being queried
-/// @returns true if the object with the given full hashcode could be one of the template types.
-inline bool Maybe(HashCode type_hashcode, HashCode object_full_hashcode) {
-    return (object_full_hashcode & type_hashcode) == type_hashcode;
+/// @param object_hashcode the hashcode of the object being queried
+/// @returns true if the object with the given hashcode could be one of the template types.
+inline bool Maybe(HashCode type_hashcode, HashCode object_hashcode) {
+    return (object_hashcode & type_hashcode) == type_hashcode;
 }
 
-/// MaybeAnyOf checks to see if an object with the full hashcode @p object_full_hashcode could
+/// MaybeAnyOf checks to see if an object with the hashcode @p object_hashcode could
 /// potentially be of, or derive from the types with the combined hashcode @p combined_hashcode.
 /// @param combined_hashcode the bitwise OR'd hashcodes of the types
-/// @param object_full_hashcode the full hashcode of the object being queried
-/// @returns true if the object with the given full hashcode could be one of the template types.
-inline bool MaybeAnyOf(HashCode combined_hashcode, HashCode object_full_hashcode) {
+/// @param object_hashcode the hashcode of the object being queried
+/// @returns true if the object with the given hashcode could be one of the template types.
+inline bool MaybeAnyOf(HashCode combined_hashcode, HashCode object_hashcode) {
     // Compare the object's hashcode to the bitwise-or of all the tested type's hashcodes. If
     // there's no intersection of bits in the two masks, then we can guarantee that the type is not
     // in `TO`.
-    HashCode mask = object_full_hashcode & combined_hashcode;
+    HashCode mask = object_hashcode & combined_hashcode;
     // HashCodeOf() ensures that two bits are always set for every hash, so we can quickly
     // eliminate the bitmask where only one bit is set.
     HashCode two_bits = mask & (mask - 1);
@@ -133,8 +130,6 @@ struct TypeInfo {
     const char* name;
     /// The type hash code
     const HashCode hashcode;
-    /// The type hash code bitwise-or'd with all ancestor's hashcodes.
-    const HashCode full_hashcode;
 
     /// @returns true if `type` derives from the class `TO`
     /// @param object the object type to test from, which must be, or derive from type `FROM`.
@@ -169,7 +164,7 @@ struct TypeInfo {
     /// @returns true if the class with this TypeInfo is of, or derives from the
     /// class with the given TypeInfo.
     inline bool Is(const tint::TypeInfo* type) const {
-        if (!Maybe(type->hashcode, full_hashcode)) {
+        if (!Maybe(type->hashcode, hashcode)) {
             return false;
         }
 
@@ -208,17 +203,13 @@ struct TypeInfo {
         constexpr uint32_t bit_a = (crc & 63);
         constexpr uint32_t bit_b = ((crc >> 6) & 63);
         constexpr uint32_t bit_c = (bit_a == bit_b) ? ((bit_a + 1) & 63) : bit_b;
-        return (static_cast<HashCode>(1) << bit_a) | (static_cast<HashCode>(1) << bit_c);
-    }
+        constexpr HashCode two_bits =
+            (static_cast<HashCode>(1) << bit_a) | (static_cast<HashCode>(1) << bit_c);
 
-    /// @returns the hashcode of the given type, bitwise-or'd with the hashcodes of all base
-    /// classes.
-    template <typename T>
-    static constexpr HashCode FullHashCodeOf() {
         if constexpr (std::is_same_v<T, CastableBase>) {
-            return HashCodeOf<CastableBase>();
+            return two_bits;
         } else {
-            return HashCodeOf<T>() | FullHashCodeOf<typename T::TrueBase>();
+            return two_bits | HashCodeOf<typename T::TrueBase>();
         }
     }
 
@@ -254,7 +245,7 @@ struct TypeInfo {
         } else if constexpr (kCount == 1) {
             return Is(&Of<std::tuple_element_t<0, TUPLE>>());
         } else {
-            if (MaybeAnyOf(TypeInfo::CombinedHashCodeOfTuple<TUPLE>(), full_hashcode)) {
+            if (MaybeAnyOf(TypeInfo::CombinedHashCodeOfTuple<TUPLE>(), hashcode)) {
                 // Possibly one of the types in `TUPLE`.
                 // Split the search in two, and scan each block.
                 static constexpr auto kMid = kCount / 2;
