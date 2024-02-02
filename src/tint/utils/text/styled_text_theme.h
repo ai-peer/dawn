@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,31 +25,56 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
+#ifndef SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_
+#define SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_
 
-#include <cstring>
+#include <stdint.h>
+#include <optional>
 
-#include "src/tint/utils/diagnostic/printer.h"
-
-namespace tint::diag {
-namespace {
-
-class PrinterOther : public Printer {
-  public:
-    explicit PrinterOther(FILE* f) : file(f) {}
-
-    void Write(const std::string& str, const Style&) override {
-        fwrite(str.data(), 1, str.size(), file);
-    }
-
-  private:
-    FILE* file;
-};
-
-}  // namespace
-
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool) {
-    return std::make_unique<PrinterOther>(out);
+/// Forward declarations
+namespace tint {
+class TextStyle;
 }
 
-}  // namespace tint::diag
+namespace tint {
+
+/// StyledTextTheme holds coloring information for TextStyles
+struct StyledTextTheme {
+    struct Color {
+        uint8_t r = 0;
+        uint8_t g = 0;
+        uint8_t b = 0;
+
+        /// Equality operator
+        bool operator==(const Color& other) const {
+            return r == other.r && g == other.g && b == other.b;
+        }
+    };
+
+    struct Style {
+        std::optional<Color> foreground;
+        std::optional<Color> background;
+        std::optional<bool> bold;
+        std::optional<bool> code;
+        std::optional<bool> italic;
+        std::optional<bool> underlined;
+    };
+
+    Style From(TextStyle text_style) const;
+
+    Style severity_success;
+    Style severity_warning;
+    Style severity_failure;
+    Style severity_fatal;
+
+    Style kind_variable;
+    Style kind_type;
+    Style kind_function;
+    Style kind_enum;
+    Style kind_operator;
+    Style kind_squiggle;
+};
+
+}  // namespace tint
+
+#endif  // SRC_TINT_UTILS_TEXT_STYLED_TEXT_THEME_H_

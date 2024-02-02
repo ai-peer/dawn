@@ -41,6 +41,7 @@
 #include "src/tint/lang/wgsl/reader/parser/token.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
 #include "src/tint/utils/diagnostic/formatter.h"
+#include "src/tint/utils/text/styled_text.h"
 
 namespace tint::ast {
 class BreakStatement;
@@ -328,7 +329,7 @@ class Parser {
     /// @returns the parser error string
     std::string error() const {
         diag::Formatter formatter{{false, false, false, false}};
-        return formatter.Format(builder_.Diagnostics());
+        return formatter.Format(builder_.Diagnostics()).Plain();
     }
 
     /// @returns the Program. The program builder in the parser will be reset

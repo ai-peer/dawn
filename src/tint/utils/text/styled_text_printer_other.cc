@@ -25,23 +25,33 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/printer.h"
+// GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
 
-#include <string>
+#include <cstring>
 
-namespace tint::diag {
+#include "src/tint/utils/text/styled_text_printer.h"
 
-Printer::~Printer() = default;
+namespace tint {
+namespace {
 
-StringPrinter::StringPrinter() = default;
-StringPrinter::~StringPrinter() = default;
+class PrinterOther : public StyledTextPrinter {
+  public:
+    explicit PrinterOther(FILE* f) : file(f) {}
 
-std::string StringPrinter::str() const {
-    return stream.str();
+    void Print(std::string_view text, const Style& style) override {
+        fwrite(text.data(), 1, text.size(), file);
+    }
+
+  private:
+    FILE* file;
+};
+
+}  // namespace
+
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out, bool) {
+    return std::make_unique<PrinterOther>(out);
 }
 
-void StringPrinter::Write(const std::string& str, const Style&) {
-    stream << str;
-}
+StyledTextPrinter::~StyledTextPrinter() = default;
 
-}  // namespace tint::diag
+}  // namespace tint

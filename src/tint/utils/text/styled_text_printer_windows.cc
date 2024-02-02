@@ -25,88 +25,99 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// GEN_BUILD:CONDITION(tint_build_is_linux || tint_build_is_mac)
-
-#include <unistd.h>
+// GEN_BUILD:CONDITION(tint_build_is_win)
 
 #include <cstring>
 
-#include "src/tint/utils/diagnostic/printer.h"
+#include "src/tint/utils/text/styled_text_printer.h"
 
-namespace tint::diag {
+#define WIN32_LEAN_AND_MEAN 1
+#include <Windows.h>
+
+namespace tint {
 namespace {
 
-bool supports_colors(FILE* f) {
-    if (!isatty(fileno(f))) {
-        return false;
+struct ConsoleInfo {
+    HANDLE handle = INVALID_HANDLE_VALUE;
+    WORD default_attributes = 0;
+    operator bool() const { return handle != INVALID_HANDLE_VALUE; }
+};
+
+ConsoleInfo ConsoleInfoFor(FILE* file) {
+    if (file == nullptr) {
+        return {};
     }
 
-    const char* cterm = getenv("TERM");
-    if (cterm == nullptr) {
-        return false;
+    ConsoleInfo console{};
+    if (file == stdout) {
+        console.handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    } else if (file == stderr) {
+        console.handle = GetStdHandle(STD_ERROR_HANDLE);
+    } else {
+        return {};
     }
 
-    std::string term = getenv("TERM");
-    if (term != "cygwin" && term != "linux" && term != "rxvt-unicode-256color" &&
-        term != "rxvt-unicode" && term != "screen-256color" && term != "screen" &&
-        term != "tmux-256color" && term != "tmux" && term != "xterm-256color" &&
-        term != "xterm-color" && term != "xterm") {
-        return false;
+    CONSOLE_SCREEN_BUFFER_INFO info{};
+    if (GetConsoleScreenBufferInfo(console.handle, &info) == 0) {
+        return {};
     }
 
-    return true;
+    console.default_attributes = info.wAttributes;
+    return console;
 }
 
-class PrinterPosix : public Printer {
+class PrinterWindows : public StyledTextPrinter {
   public:
-    PrinterPosix(FILE* f, bool colors) : file(f), use_colors(colors && supports_colors(f)) {}
+    PrinterWindows(FILE* f, bool use_colors)
+        : file(f), console(ConsoleInfoFor(use_colors ? f : nullptr)) {}
 
-    void Write(const std::string& str, const Style& style) override {
+    void Write(std::string_view text, const Style& style) override {
         WriteColor(style.color, style.bold);
         fwrite(str.data(), 1, str.size(), file);
         WriteColor(Color::kDefault, false);
     }
 
   private:
-    constexpr const char* ColorCode(Color color, bool bold) {
+    WORD Attributes(Color color, bool bold) {
         switch (color) {
             case Color::kDefault:
-                return bold ? "\u001b[1m" : "\u001b[0m";
+                return console.default_attributes;
             case Color::kBlack:
-                return bold ? "\u001b[30;1m" : "\u001b[30m";
+                return 0;
             case Color::kRed:
-                return bold ? "\u001b[31;1m" : "\u001b[31m";
+                return FOREGROUND_RED | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kGreen:
-                return bold ? "\u001b[32;1m" : "\u001b[32m";
+                return FOREGROUND_GREEN | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kYellow:
-                return bold ? "\u001b[33;1m" : "\u001b[33m";
+                return FOREGROUND_RED | FOREGROUND_GREEN | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kBlue:
-                return bold ? "\u001b[34;1m" : "\u001b[34m";
+                return FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kMagenta:
-                return bold ? "\u001b[35;1m" : "\u001b[35m";
+                return FOREGROUND_RED | FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kCyan:
-                return bold ? "\u001b[36;1m" : "\u001b[36m";
+                return FOREGROUND_GREEN | FOREGROUND_BLUE | (bold ? FOREGROUND_INTENSITY : 0);
             case Color::kWhite:
-                return bold ? "\u001b[37;1m" : "\u001b[37m";
+                return FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE |
+                       (bold ? FOREGROUND_INTENSITY : 0);
         }
-        return "";  // unreachable
+        return 0;  // unreachable
     }
 
     void WriteColor(Color color, bool bold) {
-        if (use_colors) {
-            auto* code = ColorCode(color, bold);
-            fwrite(code, 1, strlen(code), file);
+        if (console) {
+            SetConsoleTextAttribute(console.handle, Attributes(color, bold));
+            fflush(file);
         }
     }
 
     FILE* const file;
-    const bool use_colors;
+    const ConsoleInfo console;
 };
 
 }  // namespace
 
-std::unique_ptr<Printer> Printer::Create(FILE* out, bool use_colors) {
-    return std::make_unique<PrinterPosix>(out, use_colors);
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out, bool use_colors) {
+    return std::make_unique<PrinterWindows>(out, use_colors);
 }
 
-}  // namespace tint::diag
+}  // namespace tint
