@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065a42dd_1ff091de",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-02T14:36:10Z",
+      "side": 1,
+      "message": "It seems that this benchmark will be dominate by the cost of the queue submit. Could we maybe draw a ton of things each with a different uniform buffer per queue submit? Does Skia pool buffers together in larger uniform buffers or use a tiny one per draw?",
+      "revId": "b428fa0fd9a5ec81d9cdad54d75c8c005d14ae3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a80576_7e8c910c",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-02T14:36:10Z",
+      "side": 1,
+      "message": "nit: And OpenGLESBackend() I think?",
+      "range": {
+        "startLine": 344,
+        "startChar": 73,
+        "endLine": 344,
+        "endChar": 86
+      },
+      "revId": "b428fa0fd9a5ec81d9cdad54d75c8c005d14ae3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
