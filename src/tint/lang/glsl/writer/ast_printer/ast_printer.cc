@@ -354,7 +354,7 @@ bool ASTPrinter::Generate() {
         helpers_insertion_point += helpers_.lines.size();
     }
 
-    return !diagnostics_.contains_errors();
+    return !diagnostics_.ContainsErrors();
 }
 
 void ASTPrinter::RecordExtension(const ast::Enable* enable) {
@@ -381,8 +381,8 @@ void ASTPrinter::EmitBitcast(StringStream& out, const ast::BitcastExpression* ex
     auto* dst_type = TypeOf(expr)->UnwrapRef();
 
     if (!dst_type->is_integer_scalar_or_vector() && !dst_type->is_float_scalar_or_vector()) {
-        diagnostics_.add_error(diag::System::Writer,
-                               "Unable to do bitcast to type " + dst_type->FriendlyName());
+        diagnostics_.AddError(diag::System::Writer,
+                              "Unable to do bitcast to type " + dst_type->FriendlyName());
         return;
     }
 
@@ -1503,9 +1503,9 @@ void ASTPrinter::EmitTextureCall(StringStream& out,
             out << "imageStore";
             break;
         default:
-            diagnostics_.add_error(diag::System::Writer,
-                                   "Internal compiler error: Unhandled texture builtin '" +
-                                       std::string(builtin->str()) + "'");
+            diagnostics_.AddError(diag::System::Writer,
+                                  "Internal compiler error: Unhandled texture builtin '" +
+                                      std::string(builtin->str()) + "'");
             return;
     }
 
@@ -1728,8 +1728,8 @@ std::string ASTPrinter::generate_builtin_name(const sem::BuiltinFn* builtin) {
         case wgsl::BuiltinFn::kUnpack4X8Unorm:
             return "unpackUnorm4x8";
         default:
-            diagnostics_.add_error(diag::System::Writer,
-                                   "Unknown builtin method: " + std::string(builtin->str()));
+            diagnostics_.AddError(diag::System::Writer,
+                                  "Unknown builtin method: " + std::string(builtin->str()));
     }
 
     return "";
@@ -1908,9 +1908,9 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
         [&](const ast::Let* let) { EmitProgramConstVariable(let); },
         [&](const ast::Override*) {
             // Override is removed with SubstituteOverride
-            diagnostics_.add_error(diag::System::Writer,
-                                   "override-expressions should have been removed with the "
-                                   "SubstituteOverride transform");
+            diagnostics_.AddError(diag::System::Writer,
+                                  "override-expressions should have been removed with the "
+                                  "SubstituteOverride transform");
         },
         [&](const ast::Const*) {
             // Constants are embedded at their use
@@ -2174,7 +2174,7 @@ void ASTPrinter::EmitEntryPointFunction(const ast::Function* func) {
             out << "local_size_" << (i == 0 ? "x" : i == 1 ? "y" : "z") << " = ";
 
             if (!wgsize[i].has_value()) {
-                diagnostics_.add_error(
+                diagnostics_.AddError(
                     diag::System::Writer,
                     "override-expressions should have been removed with the SubstituteOverride "
                     "transform");
@@ -2278,8 +2278,8 @@ void ASTPrinter::EmitConstant(StringStream& out, const core::constant::Value* co
 
             auto count = a->ConstantCount();
             if (!count) {
-                diagnostics_.add_error(diag::System::Writer,
-                                       core::type::Array::kErrExpectedConstantCount);
+                diagnostics_.AddError(diag::System::Writer,
+                                      core::type::Array::kErrExpectedConstantCount);
                 return;
             }
 
@@ -2330,7 +2330,7 @@ void ASTPrinter::EmitLiteral(StringStream& out, const ast::LiteralExpression* li
                     return;
                 }
             }
-            diagnostics_.add_error(diag::System::Writer, "unknown integer literal suffix type");
+            diagnostics_.AddError(diag::System::Writer, "unknown integer literal suffix type");
         },  //
         TINT_ICE_ON_NO_MATCH);
 }
@@ -2382,8 +2382,8 @@ void ASTPrinter::EmitZeroValue(StringStream& out, const core::type::Type* type) 
 
         auto count = arr->ConstantCount();
         if (!count) {
-            diagnostics_.add_error(diag::System::Writer,
-                                   core::type::Array::kErrExpectedConstantCount);
+            diagnostics_.AddError(diag::System::Writer,
+                                  core::type::Array::kErrExpectedConstantCount);
             return;
         }
 
@@ -2394,8 +2394,8 @@ void ASTPrinter::EmitZeroValue(StringStream& out, const core::type::Type* type) 
             EmitZeroValue(out, arr->ElemType());
         }
     } else {
-        diagnostics_.add_error(diag::System::Writer,
-                               "Invalid type for zero emission: " + type->FriendlyName());
+        diagnostics_.AddError(diag::System::Writer,
+                              "Invalid type for zero emission: " + type->FriendlyName());
     }
 }
 
@@ -2670,8 +2670,8 @@ void ASTPrinter::EmitType(StringStream& out,
             } else {
                 auto count = arr->ConstantCount();
                 if (!count) {
-                    diagnostics_.add_error(diag::System::Writer,
-                                           core::type::Array::kErrExpectedConstantCount);
+                    diagnostics_.AddError(diag::System::Writer,
+                                          core::type::Array::kErrExpectedConstantCount);
                     return;
                 }
                 sizes.push_back(count.value());
@@ -2826,7 +2826,7 @@ void ASTPrinter::EmitType(StringStream& out,
     } else if (type->Is<core::type::Void>()) {
         out << "void";
     } else {
-        diagnostics_.add_error(diag::System::Writer, "unknown type in EmitType");
+        diagnostics_.AddError(diag::System::Writer, "unknown type in EmitType");
     }
 }
 
