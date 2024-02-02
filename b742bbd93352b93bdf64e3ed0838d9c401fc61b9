@@ -33,6 +33,24 @@
       "message": "Given on my understanding of the issue this CL is fixing, I was expecting there to be a test where you had a symbol called `pad` or `pad_`_n_ _outside_ the struct, and you show this does not affect the names of the members inside the struct. Two padded structs would also be good.\nPerhaps I\u0027m misunderstanding the issue?",
       "revId": "b742bbd93352b93bdf64e3ed0838d9c401fc61b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c472e3ad_f54b7454",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/pad_structs_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-02T21:52:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "752873a2_264bf010",
+      "revId": "b742bbd93352b93bdf64e3ed0838d9c401fc61b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
