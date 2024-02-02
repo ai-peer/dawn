@@ -34,6 +34,24 @@
       "parentUuid": "e75f7d15_f054b611",
       "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69291fb0_6281cdef",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-02T10:52:33Z",
+      "side": 1,
+      "message": "I totally think we can and should do a breaking change here!",
+      "parentUuid": "92d56b57_1069c26b",
+      "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
