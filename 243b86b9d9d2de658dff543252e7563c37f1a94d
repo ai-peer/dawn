@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d6e183_8e93b12c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-02T07:05:44Z",
+      "side": 1,
+      "message": "That\u0027s fine. I can still do pixel readback to check.",
+      "parentUuid": "af8980bd_4f3a160d",
+      "revId": "243b86b9d9d2de658dff543252e7563c37f1a94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64eb8a5b_2c028361",
@@ -90,6 +108,30 @@
       "writtenOn": "2024-02-02T01:58:09Z",
       "side": 1,
       "message": "I think there could also be a version that simply reuses the uniform buffer every time. In the current implementation, it will always go through some intermediate staging buffer internal to the driver when doing UpdateSubresource1 because the buffer is in use by the GPU.",
+      "range": {
+        "startLine": 230,
+        "startChar": 0,
+        "endLine": 230,
+        "endChar": 65
+      },
+      "revId": "243b86b9d9d2de658dff543252e7563c37f1a94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d6f99b_0eb3e7a2",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-02T07:05:44Z",
+      "side": 1,
+      "message": "Done. It seems using single uniform buffer or multiple uniform buffers doesn\u0027t make a perf difference on my machine.",
+      "parentUuid": "9bcc3c8a_95da64c9",
       "range": {
         "startLine": 230,
         "startChar": 0,
