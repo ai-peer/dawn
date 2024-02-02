@@ -77,6 +77,7 @@ enum class Toggle {
     DisableWorkgroupInit,
     DisableSymbolRenaming,
     UseUserDefinedLabelsInBackend,
+    DisableSettingLabelsInBackend,
     UsePlaceholderFragmentInVertexOnlyPipeline,
     FxcOptimizations,
     RecordDetailedTimingInTraceEvents,

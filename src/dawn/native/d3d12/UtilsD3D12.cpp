@@ -339,6 +339,10 @@ void SetDebugName(Device* device, ID3D12Object* object, const char* prefix, std:
         return;
     }
 
+    if (device->IsToggleEnabled(Toggle::DisableSettingLabelsInBackend)) {
+        return;
+    }
+
     if (label.empty() || !device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
         object->SetPrivateData(WKPDID_D3DDebugObjectName, strlen(prefix), prefix);
         return;

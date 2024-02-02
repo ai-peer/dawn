@@ -231,6 +231,10 @@ void SetDebugNameInternal(Device* device,
         return;
     }
 
+    if (device->IsToggleEnabled(Toggle::DisableSettingLabelsInBackend)) {
+        return;
+    }
+
     if (device->GetGlobalInfo().HasExt(InstanceExt::DebugUtils)) {
         VkDebugUtilsObjectNameInfoEXT objectNameInfo;
         objectNameInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
