@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,23 +25,36 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/utils/diagnostic/printer.h"
+#ifndef SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_
+#define SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_
 
+#include <memory>
 #include <string>
 
-namespace tint::diag {
-
-Printer::~Printer() = default;
-
-StringPrinter::StringPrinter() = default;
-StringPrinter::~StringPrinter() = default;
-
-std::string StringPrinter::str() const {
-    return stream.str();
+/// Forward declarations
+namespace tint {
+class TextStyle;
 }
 
-void StringPrinter::Write(const std::string& str, const Style&) {
-    stream << str;
-}
+namespace tint {
 
-}  // namespace tint::diag
+/// StyledTextPrinter is the interface for printing text with a style.
+class StyledTextPrinter {
+  public:
+    /// @returns a Printer
+    /// @param out the file to print to.
+    /// @param use_styles if true, the printer will use the styles if @p out is a terminal and
+    /// supports them.
+    static std::unique_ptr<StyledTextPrinter> Create(FILE* out, bool use_styles);
+
+    virtual ~StyledTextPrinter();
+
+    /// Prints the text to the printer with the given style.
+    /// @param text the string to write to the printer
+    /// @param style the style used to print @p text
+    virtual void Print(std::string_view text, const TextStyle& style) = 0;
+};
+
+}  // namespace tint
+
+#endif  // SRC_TINT_UTILS_TEXT_STYLED_TEXT_PRINTER_H_
