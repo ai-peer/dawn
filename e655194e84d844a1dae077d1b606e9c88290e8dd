@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c94ad355_f0d03f60",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-02-02T18:28:29Z",
+      "side": 1,
+      "message": "I added a test that renders from y plane to uv plane of video texture and compares pixels and the test works okay on win_dawn_rel bot.",
+      "parentUuid": "4343c910_221bb6bb",
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78f85f25_cd8e1c84",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
@@ -65,6 +83,30 @@
       "writtenOn": "2023-10-11T00:02:23Z",
       "side": 1,
       "message": "nit: GetAspectIndex(range.aspects) instead of hardcoding 0",
+      "range": {
+        "startLine": 819,
+        "startChar": 80,
+        "endLine": 819,
+        "endChar": 96
+      },
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2800ebb2_e16662e2",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-02-02T18:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78f85f25_cd8e1c84",
       "range": {
         "startLine": 819,
         "startChar": 80,
@@ -88,6 +130,30 @@
       "writtenOn": "2023-10-11T00:02:23Z",
       "side": 1,
       "message": "nit: can use GetAspectIndex(GetAspects()) to get the plane slice",
+      "range": {
+        "startLine": 1091,
+        "startChar": 27,
+        "endLine": 1091,
+        "endChar": 37
+      },
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6a341f_d07b9b2e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-02-02T18:28:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36825fa1_0ae28d00",
       "range": {
         "startLine": 1091,
         "startChar": 27,
