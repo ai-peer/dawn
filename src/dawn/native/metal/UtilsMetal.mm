@@ -555,7 +555,7 @@ NSRef<NSString> MakeDebugName(DeviceBase* device, const char* prefix, std::strin
     std::ostringstream objectNameStream;
     objectNameStream << prefix;
 
-    if (!label.empty() && device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
+    if (!label.empty()) {
         objectNameStream << "_" << label;
     }
     const std::string debugName = objectNameStream.str();
