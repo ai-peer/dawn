@@ -101,11 +101,8 @@ void Queue::DestroyImpl() {
     mCommandQueue.Reset();
 }
 
-ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
-    if (mSharedFence == nullptr) {
-        DAWN_ASSERT(!IsAlive());
-        return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);
-    }
+Ref<d3d::SharedFence> Queue::GetSharedFence() const {
+    DAWN_ASSERT(!IsAlive());
     return mSharedFence;
 }
 

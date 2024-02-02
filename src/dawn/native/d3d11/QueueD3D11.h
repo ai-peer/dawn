@@ -79,7 +79,7 @@ class Queue final : public d3d::Queue {
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
 
-    ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
+    Ref<d3d::SharedFence> GetSharedFence() const override;
     void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) override;
 
     ComPtr<ID3D11Fence> mFence;
