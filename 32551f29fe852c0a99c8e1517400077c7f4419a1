@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e6ae03_121b73fa",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-02-02T21:16:06Z",
+      "side": 1,
+      "message": "Oops yes. Done.",
+      "parentUuid": "5525f0bf_d372f4d2",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 19
+      },
+      "revId": "32551f29fe852c0a99c8e1517400077c7f4419a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef3292a5_605df950",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-02-02T21:02:08Z",
       "side": 1,
       "message": "nit: WriteTexture doesn\u0027t have to be 256-byte aligned. you can use a more relaxed alignment",
+      "range": {
+        "startLine": 1578,
+        "startChar": 28,
+        "endLine": 1578,
+        "endChar": 56
+      },
+      "revId": "32551f29fe852c0a99c8e1517400077c7f4419a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54bf5431_a70babca",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-02-02T21:16:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3292a5_605df950",
       "range": {
         "startLine": 1578,
         "startChar": 28,
