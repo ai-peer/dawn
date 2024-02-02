@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4dbdbec_aa8f7f83",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-02T22:24:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0c8978e_7e4866e2",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a546b02f_73c69b96",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31d08bc_1879b365",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-02T22:24:30Z",
+      "side": 1,
+      "message": "I updated all 3 so that they now use HashCode. Thanks for the suggestion.",
+      "parentUuid": "a546b02f_73c69b96",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 0
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06a0adf6_1e572a30",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-02T21:21:12Z",
       "side": 1,
       "message": "2024\n```suggestion\n/// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 14,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "af1879b529838a89368c0a8f605ed9c656f945e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e30a15af_b10f75fc",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-02T22:24:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06a0adf6_1e572a30",
       "range": {
         "startLine": 1,
         "startChar": 14,
