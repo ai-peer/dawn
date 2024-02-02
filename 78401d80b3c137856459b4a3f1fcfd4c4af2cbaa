@@ -70,6 +70,24 @@
       "parentUuid": "69291fb0_6281cdef",
       "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bbcc147_f45593ef",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-02T13:06:27Z",
+      "side": 1,
+      "message": "IMHO we should have a single toggle, `use_user_defined_labales_in_backend` that\u0027s defaulted to true in dcheck_always_on or equivalent and otherwise is overridable. Toggle can get defaults in Instance/Adapter/Device.cpp",
+      "parentUuid": "cf64910b_cff71f3a",
+      "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
