@@ -1,5 +1,10 @@
 #version 310 es
 
+struct PushConstants {
+  uint first_instance;
+};
+
+layout(location=0) uniform PushConstants push_constants;
 layout(location = 0) out vec4 color_1;
 struct Output {
   vec4 Position;
@@ -18,7 +23,7 @@ Output tint_symbol(uint VertexIndex, uint InstanceIndex) {
 
 void main() {
   gl_PointSize = 1.0;
-  Output inner_result = tint_symbol(uint(gl_VertexID), uint(gl_InstanceID));
+  Output inner_result = tint_symbol(uint(gl_VertexID), (uint(gl_InstanceID) + push_constants.first_instance));
   gl_Position = inner_result.Position;
   color_1 = inner_result.color;
   gl_Position.y = -(gl_Position.y);

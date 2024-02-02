@@ -1,6 +1,11 @@
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
 
+struct PushConstants {
+  uint first_instance;
+};
+
+layout(location=0) uniform PushConstants push_constants;
 layout(location = 0) in int loc0_1;
 layout(location = 1) in uint loc1_1;
 layout(location = 2) in float loc2_1;
@@ -33,7 +38,7 @@ void main() {
   gl_PointSize = 1.0;
   VertexInputs0 tint_symbol_1 = VertexInputs0(uint(gl_VertexID), loc0_1);
   VertexInputs1 tint_symbol_2 = VertexInputs1(loc2_1, loc3_1, loc5_1);
-  vec4 inner_result = tint_symbol(tint_symbol_1, loc1_1, uint(gl_InstanceID), tint_symbol_2, loc4_1);
+  vec4 inner_result = tint_symbol(tint_symbol_1, loc1_1, (uint(gl_InstanceID) + push_constants.first_instance), tint_symbol_2, loc4_1);
   gl_Position = inner_result;
   gl_Position.y = -(gl_Position.y);
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
