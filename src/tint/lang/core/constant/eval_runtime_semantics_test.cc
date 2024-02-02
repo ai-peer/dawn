@@ -65,7 +65,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Add_AFloat_Overflow) {
     EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
     EXPECT_EQ(
         error(),
-        R"(warning: '179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0 + 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0' cannot be represented as 'abstract-float')");
+        R"(warning: '1.79769e+308 + 1.79769e+308' cannot be represented as 'abstract-float')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Add_F32_Overflow) {
@@ -74,9 +74,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Add_F32_Overflow) {
     auto result = eval.Plus(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(
-        error(),
-        R"(warning: '340282346638528859811704183484516925440.0 + 340282346638528859811704183484516925440.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '3.40282e+38 + 3.40282e+38' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Sub_AInt_Overflow) {
@@ -97,7 +95,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Sub_AFloat_Overflow) {
     EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
     EXPECT_EQ(
         error(),
-        R"(warning: '-179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0 - 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0' cannot be represented as 'abstract-float')");
+        R"(warning: '-1.79769e+308 - 1.79769e+308' cannot be represented as 'abstract-float')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Sub_F32_Overflow) {
@@ -106,9 +104,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Sub_F32_Overflow) {
     auto result = eval.Minus(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(
-        error(),
-        R"(warning: '-340282346638528859811704183484516925440.0 - 340282346638528859811704183484516925440.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '-3.40282e+38 - 3.40282e+38' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Mul_AInt_Overflow) {
@@ -129,7 +125,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Mul_AFloat_Overflow) {
     EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
     EXPECT_EQ(
         error(),
-        R"(warning: '179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0 * 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0' cannot be represented as 'abstract-float')");
+        R"(warning: '1.79769e+308 * 1.79769e+308' cannot be represented as 'abstract-float')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Mul_F32_Overflow) {
@@ -138,9 +134,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Mul_F32_Overflow) {
     auto result = eval.Multiply(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(
-        error(),
-        R"(warning: '340282346638528859811704183484516925440.0 * 340282346638528859811704183484516925440.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '3.40282e+38 * 3.40282e+38' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Div_AInt_ZeroDenominator) {
@@ -176,7 +170,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Div_AFloat_ZeroDenominator) {
     auto result = eval.Divide(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 42.f);
-    EXPECT_EQ(error(), R"(warning: '42.0 / 0.0' cannot be represented as 'abstract-float')");
+    EXPECT_EQ(error(), R"(warning: '42.0000 / 0.00000' cannot be represented as 'abstract-float')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Div_F32_ZeroDenominator) {
@@ -185,7 +179,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Div_F32_ZeroDenominator) {
     auto result = eval.Divide(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 42.f);
-    EXPECT_EQ(error(), R"(warning: '42.0 / 0.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '42.0000 / 0.00000' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Div_I32_MostNegativeByMinInt) {
@@ -230,7 +224,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Mod_AFloat_ZeroDenominator) {
     auto result = eval.Modulo(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
-    EXPECT_EQ(error(), R"(warning: '42.0 % 0.0' cannot be represented as 'abstract-float')");
+    EXPECT_EQ(error(), R"(warning: '42.0000 % 0.00000' cannot be represented as 'abstract-float')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Mod_F32_ZeroDenominator) {
@@ -239,7 +233,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Mod_F32_ZeroDenominator) {
     auto result = eval.Modulo(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(error(), R"(warning: '42.0 % 0.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '42.0000 % 0.00000' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Mod_I32_MostNegativeByMinInt) {
@@ -353,7 +347,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Exp_F32_Overflow) {
     auto result = eval.exp(a->Type(), Vector{a}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(error(), R"(warning: e^1000.0 cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: e^1000.00 cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Exp2_F32_Overflow) {
@@ -361,7 +355,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Exp2_F32_Overflow) {
     auto result = eval.exp2(a->Type(), Vector{a}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(error(), R"(warning: 2^1000.0 cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: 2^1000.00 cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, ExtractBits_I32_TooManyBits) {
@@ -475,7 +469,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Pow_F32_Overflow) {
     auto result = eval.pow(a->Type(), Vector{a, b}, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), 0.f);
-    EXPECT_EQ(error(), R"(warning: '2.0 ^ 1000.0' cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: '2.00000 ^ 1000.00' cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Unpack2x16Float_OutOfRange) {
@@ -535,9 +529,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F32_TooHigh) {
     auto result = eval.Convert(create<core::type::F32>(), a, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), f32::kHighestValue);
-    EXPECT_EQ(
-        error(),
-        R"(warning: value 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0 cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: value 1.79769e+308 cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F32_TooLow) {
@@ -545,9 +537,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F32_TooLow) {
     auto result = eval.Convert(create<core::type::F32>(), a, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), f32::kLowestValue);
-    EXPECT_EQ(
-        error(),
-        R"(warning: value -179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0 cannot be represented as 'f32')");
+    EXPECT_EQ(error(), R"(warning: value -1.79769e+308 cannot be represented as 'f32')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F16_TooHigh) {
@@ -555,7 +545,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F16_TooHigh) {
     auto result = eval.Convert(create<core::type::F16>(), a, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), f16::kHighestValue);
-    EXPECT_EQ(error(), R"(warning: value 1000000.0 cannot be represented as 'f16')");
+    EXPECT_EQ(error(), R"(warning: value 1.00000e+06 cannot be represented as 'f16')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F16_TooLow) {
@@ -563,7 +553,7 @@ TEST_F(ConstEvalRuntimeSemanticsTest, Convert_F16_TooLow) {
     auto result = eval.Convert(create<core::type::F16>(), a, {});
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result.Get()->ValueAs<f32>(), f16::kLowestValue);
-    EXPECT_EQ(error(), R"(warning: value -1000000.0 cannot be represented as 'f16')");
+    EXPECT_EQ(error(), R"(warning: value -1.00000e+06 cannot be represented as 'f16')");
 }
 
 TEST_F(ConstEvalRuntimeSemanticsTest, Vec_Overflow_SingleComponent) {

@@ -2084,11 +2084,9 @@ std::vector<Case> Pack2x16floatCases() {
         C({Vec(f32(10), f32(-10.5))}, Val(u32(0xc940'4900))),
 
         E({Vec(f32(0), f32::Highest())},
-          "12:34 error: value 340282346638528859811704183484516925440.0 cannot be "
-          "represented as 'f16'"),
+          "12:34 error: value 3.40282e+38 cannot be represented as 'f16'"),
         E({Vec(f32::Lowest(), f32(0))},
-          "12:34 error: value -340282346638528859811704183484516925440.0 cannot be "
-          "represented as 'f16'"),
+          "12:34 error: value -3.40282e+38 cannot be represented as 'f16'"),
     };
 }
 INSTANTIATE_TEST_SUITE_P(  //
@@ -2917,15 +2915,13 @@ std::vector<Case> QuantizeToF16Cases() {
           Vec(0x0.034p-14_f, -0x0.034p-14_f, 0x0.068p-14_f, -0x0.068p-14_f)),
 
         // Value out of f16 range
-        E({65504.003_f}, "12:34 error: value 65504.00390625 cannot be represented as 'f16'"),
-        E({-65504.003_f}, "12:34 error: value -65504.00390625 cannot be represented as 'f16'"),
-        E({0x1.234p56_f}, "12:34 error: value 81979586966978560.0 cannot be represented as 'f16'"),
-        E({0x4.321p65_f},
-          "12:34 error: value 154788719192723947520.0 cannot be represented as 'f16'"),
-        E({Vec(65504.003_f, 0_f)},
-          "12:34 error: value 65504.00390625 cannot be represented as 'f16'"),
+        E({65504.003_f}, "12:34 error: value 65504.0 cannot be represented as 'f16'"),
+        E({-65504.003_f}, "12:34 error: value -65504.0 cannot be represented as 'f16'"),
+        E({0x1.234p56_f}, "12:34 error: value 8.19796e+16 cannot be represented as 'f16'"),
+        E({0x4.321p65_f}, "12:34 error: value 1.54789e+20 cannot be represented as 'f16'"),
+        E({Vec(65504.003_f, 0_f)}, "12:34 error: value 65504.0 cannot be represented as 'f16'"),
         E({Vec(0_f, -0x4.321p65_f)},
-          "12:34 error: value -154788719192723947520.0 cannot be represented as 'f16'"),
+          "12:34 error: value -1.54789e+20 cannot be represented as 'f16'"),
     };
 }
 INSTANTIATE_TEST_SUITE_P(  //

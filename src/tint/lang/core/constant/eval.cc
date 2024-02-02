@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <iomanip>
 #include <limits>
-#include <optional>
 #include <string>
 #include <type_traits>
 #include <utility>
@@ -39,7 +38,6 @@
 #include "src/tint/lang/core/constant/scalar.h"
 #include "src/tint/lang/core/constant/splat.h"
 #include "src/tint/lang/core/constant/value.h"
-#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/core/type/abstract_float.h"
 #include "src/tint/lang/core/type/abstract_int.h"
@@ -51,7 +49,6 @@
 #include "src/tint/lang/core/type/struct.h"
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/vector.h"
-#include "src/tint/utils/containers/map.h"
 #include "src/tint/utils/containers/transform.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/macros/compiler.h"
@@ -186,24 +183,24 @@ auto ZeroTypeDispatch(const core::type::Type* type, F&& f) {
 
 template <typename NumberT>
 std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
-    StringStream ss;
-    ss << "'" << lhs.value << " " << op << " " << rhs.value << "' cannot be represented as '"
-       << FriendlyName<NumberT>() << "'";
+    std::stringstream ss;
+    ss << std::showpoint << "'" << lhs.value << " " << op << " " << rhs.value
+       << "' cannot be represented as '" << FriendlyName<NumberT>() << "'";
     return ss.str();
 }
 
 template <typename VALUE_TY>
 std::string OverflowErrorMessage(VALUE_TY value, std::string_view target_ty) {
-    StringStream ss;
-    ss << "value " << value << " cannot be represented as "
+    std::stringstream ss;
+    ss << std::showpoint << "value " << value << " cannot be represented as "
        << "'" << target_ty << "'";
     return ss.str();
 }
 
 template <typename NumberT>
 std::string OverflowExpErrorMessage(std::string_view base, NumberT exp) {
-    StringStream ss;
-    ss << base << "^" << exp << " cannot be represented as "
+    std::stringstream ss;
+    ss << std::showpoint << base << "^" << exp << " cannot be represented as "
        << "'" << FriendlyName<NumberT>() << "'";
     return ss.str();
 }
