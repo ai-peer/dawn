@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43ac87ed_2c0fe748",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T14:42:47Z",
+      "side": 1,
+      "message": "It looks like a formatter has attacked this file. Please can you revert the unrelated changes?",
+      "revId": "721c3c532863c8a5794e7fb0de08df2e48e004b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
