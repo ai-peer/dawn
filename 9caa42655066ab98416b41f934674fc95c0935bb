@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d413fc6_3b25b6ac",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-02T01:48:34Z",
+      "side": 1,
+      "message": "nit: instead check if the last component of the name is \"f\". I think `method.chunks[-1] \u003d\u003d \"f\"`?\nNot important if it\u0027s not easy though.",
+      "range": {
+        "startLine": 229,
+        "startChar": 51,
+        "endLine": 229,
+        "endChar": 83
+      },
+      "revId": "9caa42655066ab98416b41f934674fc95c0935bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b57897_40b08eb3",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-02T01:48:34Z",
+      "side": 1,
+      "message": "This means we\u0027ll have two copies of the method with different names, what if we just fully rename to remove the \"F\" in C++?",
+      "revId": "9caa42655066ab98416b41f934674fc95c0935bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
