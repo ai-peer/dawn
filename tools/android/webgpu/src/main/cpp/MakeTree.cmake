@@ -1,0 +1,33 @@
+function(make_tree)
+  set(tree_file ${CMAKE_BINARY_DIR}/tree.txt)
+  file(WRITE ${tree_file} "")
+
+  set (indent "")
+  function(output_tree input_target)
+    get_target_property(alias ${input_target} ALIASED_TARGET)
+    if(TARGET ${alias})
+      set(input_target ${alias})
+    endif()
+    if(${input_target} IN_LIST all_dependencies)
+      file(APPEND ${tree_file} "${indent}(${input_target})\n")
+      return()
+    endif()
+    list(APPEND all_dependencies ${input_target})
+    file(APPEND ${tree_file} "${indent}${input_target}\n")
+
+    get_target_property(link_libraries ${input_target} LINK_LIBRARIES)
+    set (indent "${indent} ")
+    foreach(dependency IN LISTS link_libraries)
+      if(TARGET ${dependency})
+        output_tree(${dependency})
+      endif()
+    endforeach()
+
+    set(all_dependencies ${all_dependencies} PARENT_SCOPE)
+  endfunction()
+
+  foreach(input_target IN LISTS ARGN)
+    output_tree(${input_target})
+  endforeach()
+
+endfunction()
