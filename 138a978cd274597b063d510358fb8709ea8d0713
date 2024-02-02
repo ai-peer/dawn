@@ -16,6 +16,23 @@
       "message": "PTAL. I believe this is OK, it seems like it makes CMake give a warning if you\u0027d set TINT_BUILD_DOCS that it isn\u0027t used anymore, but it complete correctly for me.",
       "revId": "138a978cd274597b063d510358fb8709ea8d0713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478b0208_8053b697",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T15:09:46Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "138a978cd274597b063d510358fb8709ea8d0713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
