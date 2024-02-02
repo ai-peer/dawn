@@ -28,6 +28,7 @@
 #include "dawn/native/CommandValidation.h"
 
 #include <algorithm>
+#include <iostream>
 #include <limits>
 #include <sstream>
 #include <string>
