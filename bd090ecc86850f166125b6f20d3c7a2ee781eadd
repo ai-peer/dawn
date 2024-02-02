@@ -16,6 +16,92 @@
       "message": "PTAL. These read a bit clearer to me. The specific issues called out in the bug end up with:\n\n```\nout/o.wgsl:2:13 error: function call \u0027inf\u0027 seen for the first time\n    let c \u003d inf(1);\n            ^^^\n```\n\nwhich I think is better, but could maybe use more work.\n\n```\nout/o.wgsl:3:13 error: cannot use \u0027min\u0027 (a let) as a function call\n    let b \u003d min(1, 2);\n            ^^^\n\nout/o.wgsl:2:9 note: let \u0027min\u0027 declared here\n    let min \u003d 1;\n        ^^^\n```\n\nwhich I do think is better.",
       "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc4b882c_04a7d8ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T14:57:43Z",
+      "side": 1,
+      "message": "Happy with the bulk of these changes. Maybe we can split the CL up and land what we agree on?",
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217ae46a_2a430e46",
+        "filename": "src/tint/lang/wgsl/resolver/function_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T14:57:43Z",
+      "side": 1,
+      "message": "I\u0027m not keen on this as a replacement for `unresolved`. It implies order, when resolving is not ordered. It also doesn\u0027t really explain the error.\n\nWhat about `unknown address space \u0027blah\u0027`?",
+      "range": {
+        "startLine": 1084,
+        "startChar": 76,
+        "endLine": 1084,
+        "endChar": 99
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad00ab18_427cc56c",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T14:57:43Z",
+      "side": 1,
+      "message": "As we discussed in the internal chat, I don\u0027t like `function call` because we don\u0027t know it\u0027s a function. It could be a type constructor, type conversion, or function call.",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241f3658_c937a8ff",
+        "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-02T14:57:43Z",
+      "side": 1,
+      "message": "We refer to variables by their declaration. `let`, `var`, `override`, etc. So `const` fits with the pattern.",
+      "range": {
+        "startLine": 1333,
+        "startChar": 12,
+        "endLine": 1333,
+        "endChar": 20
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
