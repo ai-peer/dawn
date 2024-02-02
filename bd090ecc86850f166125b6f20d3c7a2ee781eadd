@@ -155,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed868807_778a8c16",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2373,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T18:39:56Z",
+      "side": 1,
+      "message": "Even with any of those, a type constructor or converter is, essentially a function call. We just happen to give them an alternate name in some situations. So, saying `function X` I think is valid in all three of the cases you provided.",
+      "parentUuid": "8df42c30_c67a15b9",
+      "range": {
+        "startLine": 2373,
+        "startChar": 55,
+        "endLine": 2373,
+        "endChar": 68
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "241f3658_c937a8ff",
         "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
         "patchSetId": 1
@@ -214,6 +238,30 @@
       "side": 1,
       "message": "While the WGSL spec may technically disagree, I think most people will consider `var`, `let`, `const` and parameters as all `variables`. Users will know what a `var` is, because they typed it. I think the same applies to `const`.\n\nWe could quote it (`\u0027const\u0027`), or with the work I\u0027m currently doing, we could color it differently so that it clearly stands out from the english?",
       "parentUuid": "4574d79a_5aef6d4f",
+      "range": {
+        "startLine": 1333,
+        "startChar": 12,
+        "endLine": 1333,
+        "endChar": 20
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ced5c92a_cfa8f9f0",
+        "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T18:39:56Z",
+      "side": 1,
+      "message": "Quoting would probably work, I can try that and quote the others to see how it comes out.",
+      "parentUuid": "a027f3cb_6499d4d8",
       "range": {
         "startLine": 1333,
         "startChar": 12,

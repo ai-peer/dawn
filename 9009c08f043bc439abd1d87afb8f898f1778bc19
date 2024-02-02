@@ -52,6 +52,24 @@
       "parentUuid": "10fd182f_6c5f5f75",
       "revId": "9009c08f043bc439abd1d87afb8f898f1778bc19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c489330_6a4f9f8b",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T18:39:56Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "e14e9e61_a265d71b",
+      "revId": "9009c08f043bc439abd1d87afb8f898f1778bc19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
