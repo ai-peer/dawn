@@ -54,7 +54,7 @@ TEST_P(ResolverAccessUsedWithTemplateArgs, Test) {
     GlobalVar("v", ty("texture_storage_2d", "rgba8unorm", tmpl), Group(0_u), Binding(0_u));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: access '" + std::string(GetParam()) +
+    EXPECT_EQ(r()->error(), "12:34 error: access mode '" + std::string(GetParam()) +
                                 "' does not take template arguments");
 }
 

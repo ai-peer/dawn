@@ -27,8 +27,7 @@
 
 #include "src/tint/lang/wgsl/resolver/resolver.h"
 
-#include "gmock/gmock.h"
-#include "src/tint/lang/wgsl/ast/call_statement.h"
+#include "gtest/gtest.h"
 #include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
 
 namespace tint::resolver {
@@ -143,7 +142,7 @@ TEST_F(ResolverCallValidationTest, PointerArgument_LetIdentExpr) {
          });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: cannot take the address of let 'z'");
+    EXPECT_EQ(r()->error(), "12:34 error: cannot take the address of 'z' (a 'let')");
 }
 
 TEST_F(ResolverCallValidationTest,
@@ -482,7 +481,7 @@ TEST_F(ResolverCallValidationTest, MustUseFunction) {
     EXPECT_EQ(
         r()->error(),
         R"(12:34 error: ignoring return value of function 'fn_must_use' annotated with @must_use
-56:78 note: function 'fn_must_use' declared here)");
+56:78 note: 'fn_must_use' declared here)");
 }
 
 TEST_F(ResolverCallValidationTest, MustUseBuiltin) {
@@ -505,7 +504,7 @@ TEST_F(ResolverCallValidationTest, UnexpectedFunctionTemplateArgs) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(12:34 error: function 'a' does not take template arguments
-56:78 note: function 'a' declared here)");
+56:78 note: 'a' declared here)");
 }
 
 TEST_F(ResolverCallValidationTest, UnexpectedBuiltinTemplateArgs) {

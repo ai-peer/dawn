@@ -29,7 +29,6 @@
 
 #include "src/tint/lang/wgsl/ast/builtin_texture_helper_test.h"
 #include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
-#include "src/tint/lang/wgsl/sem/value_constructor.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::resolver {
@@ -131,8 +130,8 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsFunctionUsedAsVariable)
     WrapInFunction(Decl(Var("v", Expr(Source{{56, 78}}, "mix"))));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(56:78 error: cannot use function 'mix' as value
-12:34 note: function 'mix' declared here
+    EXPECT_EQ(r()->error(), R"(56:78 error: cannot use 'mix' (a function) as a value
+12:34 note: 'mix' declared here
 56:78 note: are you missing '()'?)");
 }
 

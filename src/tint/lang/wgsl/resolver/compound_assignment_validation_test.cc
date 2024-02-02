@@ -28,7 +28,6 @@
 #include "src/tint/lang/wgsl/resolver/resolver.h"
 
 #include "gmock/gmock.h"
-#include "src/tint/lang/core/type/storage_texture.h"
 #include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
 
 namespace tint::resolver {
@@ -266,9 +265,9 @@ TEST_F(ResolverCompoundAssignmentValidationTest, LhsLet) {
     WrapInFunction(a, CompoundAssign(Expr(Source{{56, 78}}, "a"), 1_i, core::BinaryOp::kAdd));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(56:78 error: cannot assign to let 'a'
+    EXPECT_EQ(r()->error(), R"(56:78 error: cannot assign to 'a' (a 'let')
 56:78 note: 'let' variables are immutable
-12:34 note: let 'a' declared here)");
+12:34 note: 'a' declared here)");
 }
 
 TEST_F(ResolverCompoundAssignmentValidationTest, LhsLiteral) {

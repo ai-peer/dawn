@@ -28,8 +28,6 @@
 #include "src/tint/lang/wgsl/resolver/resolver.h"
 
 #include <algorithm>
-#include <cmath>
-#include <iomanip>
 #include <limits>
 #include <utility>
 
@@ -38,7 +36,6 @@
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/abstract_float.h"
 #include "src/tint/lang/core/type/abstract_int.h"
-#include "src/tint/lang/core/type/array.h"
 #include "src/tint/lang/core/type/atomic.h"
 #include "src/tint/lang/core/type/builtin_structs.h"
 #include "src/tint/lang/core/type/depth_multisampled_texture.h"
@@ -74,7 +71,6 @@
 #include "src/tint/lang/wgsl/ast/while_statement.h"
 #include "src/tint/lang/wgsl/ast/workgroup_attribute.h"
 #include "src/tint/lang/wgsl/intrinsic/ctor_conv.h"
-#include "src/tint/lang/wgsl/intrinsic/dialect.h"
 #include "src/tint/lang/wgsl/resolver/incomplete_type.h"
 #include "src/tint/lang/wgsl/resolver/uniformity.h"
 #include "src/tint/lang/wgsl/resolver/unresolved_identifier.h"
@@ -2370,7 +2366,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             return BuiltinCall(expr, fn_expr->Value(), args);
         },
         [&](Default) {
-            sem_.ErrorUnexpectedExprKind(target, "call target");
+            sem_.ErrorUnexpectedExprKind(target, "a", "function call");
             return nullptr;
         });
 
@@ -3386,7 +3382,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     }
 
     if (auto access = resolved->Access(); access != core::Access::kUndefined) {
-        return CheckNotTemplated("access", ident)
+        return CheckNotTemplated("access mode", ident)
                    ? b.create<sem::BuiltinEnumExpression<core::Access>>(expr, current_statement_,
                                                                         access)
                    : nullptr;

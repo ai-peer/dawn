@@ -25,10 +25,8 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "gmock/gmock.h"
-#include "src/tint/lang/core/type/reference.h"
+#include "gtest/gtest.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
-#include "src/tint/lang/wgsl/ast/bitcast_expression.h"
 #include "src/tint/lang/wgsl/resolver/resolver.h"
 #include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
 
@@ -62,7 +60,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfLet) {
 
     EXPECT_FALSE(r()->Resolve());
 
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of let 'l')");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of 'l' (a 'let'))");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfConst) {
@@ -75,7 +73,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfConst) {
 
     EXPECT_FALSE(r()->Resolve());
 
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of const 'c')");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of 'c' (a 'const'))");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfOverride) {
@@ -88,7 +86,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfOverride) {
 
     EXPECT_FALSE(r()->Resolve());
 
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of override 'o')");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of 'o' (an 'override'))");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfParameter) {
@@ -100,7 +98,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfParameter) {
          });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of parameter 'p')");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot take the address of 'p' (a 'parameter'))");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfHandle) {
@@ -113,7 +111,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfHandle) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot take the address of var 't' in handle address space)");
+              R"(12:34 error: cannot take the address of 't' (a 'var') in handle address space)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfFunction) {
@@ -125,8 +123,8 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfFunction) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot use function 'F' as value
-note: function 'F' declared here
+              R"(12:34 error: cannot use 'F' (a function) as a value
+note: 'F' declared here
 12:34 note: are you missing '()'?)");
 }
 
@@ -137,7 +135,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfBuiltinFunction) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot use builtin function 'max' as value
+              R"(12:34 error: cannot use 'max' (a builtin function) as a value
 12:34 note: are you missing '()'?)");
 }
 
@@ -148,7 +146,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfType) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot use type 'i32' as value
+              R"(12:34 error: cannot use 'i32' (a type) as a value
 12:34 note: are you missing '()'?)");
 }
 
@@ -161,7 +159,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfTypeAlias) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot use type 'i32' as value
+              R"(12:34 error: cannot use 'i32' (a type) as a value
 12:34 note: are you missing '()'?)");
 }
 
@@ -171,7 +169,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfAccess) {
     WrapInFunction(expr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use access 'read_write' as value)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'read_write' (an access mode) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfAddressSpace) {
@@ -180,7 +178,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfAddressSpace) {
     WrapInFunction(expr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use address space 'uniform' as value)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'uniform' (an address space) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfBuiltinValue) {
@@ -189,7 +187,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfBuiltinValue) {
     WrapInFunction(expr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use builtin value 'position' as value)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'position' (a builtin value) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfInterpolationSampling) {
@@ -199,7 +197,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfInterpolationSampling) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot use interpolation sampling 'centroid' as value)");
+              R"(12:34 error: cannot use 'centroid' (an interpolation sampling) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfInterpolationType) {
@@ -208,7 +206,8 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfInterpolationType) {
     WrapInFunction(expr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use interpolation type 'perspective' as value)");
+    EXPECT_EQ(r()->error(),
+              R"(12:34 error: cannot use 'perspective' (an interpolation type) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfTexelFormat) {
@@ -217,7 +216,7 @@ TEST_F(ResolverPtrRefValidationTest, AddressOfTexelFormat) {
     WrapInFunction(expr);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use texel format 'rgba8snorm' as value)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'rgba8snorm' (a texel format) as a value)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, AddressOfVectorComponent_MemberAccessor) {
@@ -256,7 +255,7 @@ TEST_F(ResolverPtrRefValidationTest, IndirectOfAddressOfHandle) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: cannot take the address of var 't' in handle address space)");
+              R"(12:34 error: cannot take the address of 't' (a 'var') in handle address space)");
 }
 
 TEST_F(ResolverPtrRefValidationTest, DerefOfLiteral) {

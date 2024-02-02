@@ -1063,6 +1063,10 @@ struct DimensionParams {
     const char* name;
     bool is_valid;
 };
+static std::ostream& operator<<(std::ostream& out, const DimensionParams& v) {
+    out << v.name << " valid: " << v.is_valid;
+    return out;
+}
 
 static constexpr DimensionParams Dimension_cases[] = {
     DimensionParams{"texture_storage_1d", true},
@@ -1087,7 +1091,8 @@ TEST_P(StorageTextureDimensionTest, All) {
         EXPECT_TRUE(r()->Resolve()) << r()->error();
     } else {
         EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(r()->error(), "12:34 error: unresolved type '" + std::string(params.name) + "'");
+        EXPECT_EQ(r()->error(),
+                  "12:34 error: '" + std::string(params.name) + "' unknown, expected a type");
     }
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
@@ -1511,7 +1516,7 @@ TEST_P(ResolverUntemplatedTypeUsedWithTemplateArgs, BuiltinAlias_UseWithTemplate
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: type 'A' does not take template arguments
-56:78 note: alias 'A' declared here)");
+56:78 note: 'A' declared here)");
 }
 
 INSTANTIATE_TEST_SUITE_P(BuiltinTypes,
@@ -1564,7 +1569,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, Struct_Type) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: type 'S' does not take template arguments
-56:78 note: struct 'S' declared here)");
+56:78 note: 'S' declared here)");
 }
 
 TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, Struct_Ctor) {
@@ -1576,7 +1581,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, Struct_Ctor) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(12:34 error: type 'S' does not take template arguments
-note: struct 'S' declared here)");
+note: 'S' declared here)");
 }
 
 TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, AliasedArray_Type) {
@@ -1589,7 +1594,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, AliasedArray_Type) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: type 'A' does not take template arguments
-note: alias 'A' declared here)");
+note: 'A' declared here)");
 }
 
 TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, AliasedArray_Ctor) {
@@ -1601,7 +1606,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, AliasedArray_Ctor) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(12:34 error: type 'A' does not take template arguments
-note: alias 'A' declared here)");
+note: 'A' declared here)");
 }
 
 }  // namespace TypeDoesNotTakeTemplateArgs

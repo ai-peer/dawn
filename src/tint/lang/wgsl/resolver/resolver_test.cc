@@ -1238,7 +1238,7 @@ TEST_F(ResolverTest, Expr_MemberAccessor_Type) {
     WrapInFunction(mem);
 
     EXPECT_FALSE(r()->Resolve()) << r()->error();
-    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use type 'f32' as value
+    EXPECT_EQ(r()->error(), R"(12:34 error: cannot use 'f32' (a type) as a value
 12:34 note: are you missing '()'?)");
 }
 
@@ -2411,7 +2411,8 @@ TEST_F(ResolverTest, TextureSampler_Bug1715) {  // crbug.com/tint/1715
          });
 
     ASSERT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "error: cannot take the address of var 's' in handle address space");
+    EXPECT_EQ(r()->error(),
+              "error: cannot take the address of 's' (a 'var') in handle address space");
 }
 
 TEST_F(ResolverTest, ModuleDependencyOrderedDeclarations) {
