@@ -124,6 +124,24 @@
       "parentUuid": "09108068_ed05ebd9",
       "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fccd670_4c816727",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-02T17:17:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "parentUuid": "526f430e_5608d668",
+      "revId": "78401d80b3c137856459b4a3f1fcfd4c4af2cbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
