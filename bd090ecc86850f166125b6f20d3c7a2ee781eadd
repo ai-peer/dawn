@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a15abdad_51bf8aa9",
+        "filename": "src/tint/lang/wgsl/resolver/function_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T19:57:35Z",
+      "side": 1,
+      "message": "How about now?",
+      "parentUuid": "fb7e0c7d_2a432ae5",
+      "range": {
+        "startLine": 1084,
+        "startChar": 76,
+        "endLine": 1084,
+        "endChar": 99
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad00ab18_427cc56c",
         "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
         "patchSetId": 1
@@ -262,6 +286,30 @@
       "side": 1,
       "message": "Quoting would probably work, I can try that and quote the others to see how it comes out.",
       "parentUuid": "a027f3cb_6499d4d8",
+      "range": {
+        "startLine": 1333,
+        "startChar": 12,
+        "endLine": 1333,
+        "endChar": 20
+      },
+      "revId": "bd090ecc86850f166125b6f20d3c7a2ee781eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f63f73_a5817972",
+        "filename": "src/tint/lang/wgsl/resolver/variable_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-02T19:57:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ced5c92a_cfa8f9f0",
       "range": {
         "startLine": 1333,
         "startChar": 12,
