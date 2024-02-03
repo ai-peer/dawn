@@ -444,6 +444,10 @@ bool Queue::HasPendingCommands() const {
     return false;
 }
 
+MaybeError SubmitPendingCommands() {
+    return {};
+}
+
 ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
     return true;
 }
