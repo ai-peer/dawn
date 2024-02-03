@@ -181,7 +181,10 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     SubresourceRange subresources = GetSubresourcesAffectedByCopy(textureCopy, writeSizePixel);
 
     Texture* texture = ToBackend(destination.texture);
-    DAWN_TRY(texture->SynchronizeTextureBeforeUse(&commandContext));
+
+    std::optional<Texture::ScopedTextureUse> textureUse;
+    DAWN_TRY_ASSIGN(textureUse, texture->SynchronizeTextureUse(&commandContext));
+
     return texture->Write(&commandContext, subresources, destination.origin, writeSizePixel,
                           static_cast<const uint8_t*>(data) + dataLayout.offset,
                           dataLayout.bytesPerRow, dataLayout.rowsPerImage);
