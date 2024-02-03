@@ -481,14 +481,15 @@ bool Device::IsResolveTextureBlitWithDrawSupported() const {
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  Ref<d3d::KeyedMutex> keyedMutex,
                                                   std::vector<FenceAndSignalValue> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(
-            Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
-                                         std::move(waitFences), isSwapChainTexture, isInitialized),
-            &dawnTexture)) {
+    if (ConsumedError(Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
+                                                   std::move(keyedMutex), std::move(waitFences),
+                                                   isSwapChainTexture, isInitialized),
+                      &dawnTexture)) {
         return nullptr;
     }
     return {dawnTexture};

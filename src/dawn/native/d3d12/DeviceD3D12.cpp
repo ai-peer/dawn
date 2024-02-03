@@ -39,6 +39,7 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/ExternalImageDXGIImpl.h"
+#include "dawn/native/d3d/KeyedMutex.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/BindGroupD3D12.h"
 #include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
@@ -544,9 +545,12 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  Ref<d3d::KeyedMutex> keyedMutex,
                                                   std::vector<FenceAndSignalValue> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
+    // TODO(sunnyps): Reintroduce keyed mutex support.
+    DAWN_ASSERT(keyedMutex == nullptr);
     Ref<Texture> dawnTexture;
     if (ConsumedError(
             Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
