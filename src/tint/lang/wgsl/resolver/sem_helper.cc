@@ -35,6 +35,7 @@
 #include "src/tint/lang/wgsl/sem/type_expression.h"
 #include "src/tint/lang/wgsl/sem/value_expression.h"
 #include "src/tint/utils/rtti/switch.h"
+#include "src/tint/utils/text/text_styles.h"
 
 namespace tint::resolver {
 
@@ -68,7 +69,7 @@ sem::TypeExpression* SemHelper::AsTypeExpression(sem::Expression* expr) const {
 
     auto* type = ty_expr->Type();
     if (auto* incomplete = type->As<IncompleteType>(); TINT_UNLIKELY(incomplete)) {
-        AddError("expected '<' for '" + std::string(ToString(incomplete->builtin)) + "'",
+        AddError(StyledText{} << "expected '<' for '" << incomplete->builtin << "'",
                  expr->Declaration()->source.End());
         return nullptr;
     }
@@ -76,8 +77,11 @@ sem::TypeExpression* SemHelper::AsTypeExpression(sem::Expression* expr) const {
     return ty_expr;
 }
 
-std::string SemHelper::Describe(const sem::Expression* expr) const {
-    return Switch(
+StyledText SemHelper::Describe(const sem::Expression* expr) const {
+    StyledText text;
+    TINT_DEFER(text << TextStyle{});
+
+    Switch(
         expr,  //
         [&](const sem::VariableUser* var_expr) {
             auto* variable = var_expr->Variable()->Declaration();
@@ -90,47 +94,45 @@ std::string SemHelper::Describe(const sem::Expression* expr) const {
                 [&](const ast::Parameter*) { return "parameter"; },  //
                 [&](const ast::Override*) { return "override"; },    //
                 [&](Default) { return "variable"; });
-            return std::string(kind) + " '" + name + "'";
+            text << TINT_TS_CODE_VARIABLE(kind << " " << name);
         },
         [&](const sem::ValueExpression* val_expr) {
-            auto type = val_expr->Type()->FriendlyName();
-            return "value of type '" + type + "'";
+            text << "value of type " << TINT_TS_CODE_TYPE(val_expr->Type()->FriendlyName());
         },
         [&](const sem::TypeExpression* ty_expr) {
-            auto name = ty_expr->Type()->FriendlyName();
-            return "type '" + name + "'";
+            text << "type " << TINT_TS_CODE_TYPE(ty_expr->Type()->FriendlyName());
         },
         [&](const sem::FunctionExpression* fn_expr) {
             auto* fn = fn_expr->Function()->Declaration();
-            auto name = fn->name->symbol.Name();
-            return "function '" + name + "'";
+            text << "function " << TINT_TS_CODE_FN(fn->name->symbol.Name());
         },
         [&](const sem::BuiltinEnumExpression<wgsl::BuiltinFn>* fn) {
-            return "builtin function '" + tint::ToString(fn->Value()) + "'";
+            text << "builtin function " << TINT_TS_CODE_FN(fn->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::Access>* access) {
-            return "access '" + tint::ToString(access->Value()) + "'";
+            text << "access " << TINT_TS_CODE(access->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::AddressSpace>* addr) {
-            return "address space '" + tint::ToString(addr->Value()) + "'";
+            text << "address space " << TINT_TS_CODE(addr->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::BuiltinValue>* builtin) {
-            return "builtin value '" + tint::ToString(builtin->Value()) + "'";
+            text << "builtin value " << TINT_TS_CODE(builtin->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::InterpolationSampling>* fmt) {
-            return "interpolation sampling '" + tint::ToString(fmt->Value()) + "'";
+            text << "interpolation sampling " << TINT_TS_CODE(fmt->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::InterpolationType>* fmt) {
-            return "interpolation type '" + tint::ToString(fmt->Value()) + "'";
+            text << "interpolation type " << TINT_TS_CODE(fmt->Value());
         },
         [&](const sem::BuiltinEnumExpression<core::TexelFormat>* fmt) {
-            return "texel format '" + tint::ToString(fmt->Value()) + "'";
+            text << "texel format " << TINT_TS_CODE(fmt->Value());
         },
         [&](const UnresolvedIdentifier* ui) {
             auto name = ui->Identifier()->identifier->symbol.Name();
-            return "unresolved identifier '" + name + "'";
+            text << "unresolved identifier " << TINT_TS_CODE(name);
         },  //
         TINT_ICE_ON_NO_MATCH);
+    return text;
 }
 
 void SemHelper::ErrorUnexpectedExprKind(
@@ -140,7 +142,8 @@ void SemHelper::ErrorUnexpectedExprKind(
     if (auto* ui = expr->As<UnresolvedIdentifier>()) {
         auto* ident = ui->Identifier();
         auto name = ident->identifier->symbol.Name();
-        AddError("unresolved " + std::string(wanted) + " '" + name + "'", ident->source);
+        AddError(StyledText{} << "unresolved " << wanted << " " << TINT_TS_CODE(name),
+                 ident->source);
         if (!suggestions.IsEmpty()) {
             // Filter out suggestions that have a leading underscore.
             Vector<std::string_view, 8> filtered;
@@ -149,14 +152,14 @@ void SemHelper::ErrorUnexpectedExprKind(
                     filtered.Push(str);
                 }
             }
-            StringStream msg;
+            StyledText msg;
             tint::SuggestAlternatives(name, filtered.Slice(), msg);
-            AddNote(msg.str(), ident->source);
+            AddNote(msg, ident->source);
         }
         return;
     }
 
-    AddError("cannot use " + Describe(expr) + " as " + std::string(wanted),
+    AddError(StyledText{} << "cannot use " << Describe(expr) << " as " << wanted,
              expr->Declaration()->source);
     NoteDeclarationSource(expr->Declaration());
 }
@@ -166,7 +169,7 @@ void SemHelper::ErrorExpectedValueExpr(const sem::Expression* expr) const {
     if (auto* ident = expr->Declaration()->As<ast::IdentifierExpression>()) {
         if (expr->IsAnyOf<sem::FunctionExpression, sem::TypeExpression,
                           sem::BuiltinEnumExpression<wgsl::BuiltinFn>>()) {
-            AddNote("are you missing '()'?", ident->source.End());
+            AddNote(StyledText{} << "are you missing '()'?", ident->source.End());
         }
     }
 }
@@ -188,40 +191,56 @@ void SemHelper::NoteDeclarationSource(const ast::Node* node) const {
     Switch(
         node,
         [&](const ast::Struct* n) {
-            AddNote("struct '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_TYPE("struct " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Alias* n) {
-            AddNote("alias '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_TYPE("alias " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Var* n) {
-            AddNote("var '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_VARIABLE("var " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Let* n) {
-            AddNote("let '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_VARIABLE("let " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Override* n) {
-            AddNote("override '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_VARIABLE("override " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Const* n) {
-            AddNote("const '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << TINT_TS_CODE_VARIABLE("const " << n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Parameter* n) {
-            AddNote("parameter '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << "parameter " << TINT_TS_CODE_VARIABLE(n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         },
         [&](const ast::Function* n) {
-            AddNote("function '" + n->name->symbol.Name() + "' declared here", n->source);
+            AddNote(StyledText{} << "function " << TINT_TS_CODE_FN(n->name->symbol.Name())
+                                 << " declared here",
+                    n->source);
         });
 }
 
-void SemHelper::AddError(const std::string& msg, const Source& source) const {
+void SemHelper::AddError(const StyledText& msg, const Source& source) const {
     builder_->Diagnostics().AddError(diag::System::Resolver, msg, source);
 }
 
-void SemHelper::AddWarning(const std::string& msg, const Source& source) const {
+void SemHelper::AddWarning(const StyledText& msg, const Source& source) const {
     builder_->Diagnostics().AddWarning(diag::System::Resolver, msg, source);
 }
 
-void SemHelper::AddNote(const std::string& msg, const Source& source) const {
+void SemHelper::AddNote(const StyledText& msg, const Source& source) const {
     builder_->Diagnostics().AddNote(diag::System::Resolver, msg, source);
 }
 }  // namespace tint::resolver

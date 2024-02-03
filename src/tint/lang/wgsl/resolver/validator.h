@@ -42,6 +42,7 @@
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/source.h"
 #include "src/tint/utils/math/hash.h"
+#include "src/tint/utils/text/styled_text.h"
 
 // Forward declarations
 namespace tint::ast {
@@ -128,17 +129,17 @@ class Validator {
     /// Adds the given error message to the diagnostics
     /// @param msg the error message
     /// @param source the error source
-    void AddError(const std::string& msg, const Source& source) const;
+    void AddError(const StyledText& msg, const Source& source) const;
 
     /// Adds the given warning message to the diagnostics
     /// @param msg the warning message
     /// @param source the warning source
-    void AddWarning(const std::string& msg, const Source& source) const;
+    void AddWarning(const StyledText& msg, const Source& source) const;
 
     /// Adds the given note message to the diagnostics
     /// @param msg the note message
     /// @param source the note source
-    void AddNote(const std::string& msg, const Source& source) const;
+    void AddNote(const StyledText& msg, const Source& source) const;
 
     /// Adds the given message to the diagnostics with current severity for the given rule.
     /// @param rule the diagnostic trigger rule
@@ -146,7 +147,7 @@ class Validator {
     /// @param source the diagnostic source
     /// @returns false if the diagnostic is an error for the given trigger rule
     bool AddDiagnostic(wgsl::DiagnosticRule rule,
-                       const std::string& msg,
+                       const StyledText& msg,
                        const Source& source) const;
 
     /// @returns the diagnostic filter stack

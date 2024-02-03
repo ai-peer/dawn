@@ -79,14 +79,11 @@ class StyledText {
     /// Appends the styled text of @p other to this StyledText.
     void Append(const StyledText& other);
 
-    /// repeat queues the character c to be written to the printer n times.
+    /// repeat queues the character c to be written to the StyledText n times.
     /// @param c the character to print `n` times
     /// @param n the number of times to print character `c`
     /// @returns this StyledText so calls can be chained.
-    StyledText& Repeat(char c, size_t n) {
-        stream_.repeat(c, n);
-        return *this;
-    }
+    StyledText& Repeat(char c, size_t n);
 
     template <typename VALUE>
     StyledText& operator<<(VALUE&& value) {

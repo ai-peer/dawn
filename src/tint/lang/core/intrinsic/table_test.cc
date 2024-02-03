@@ -79,7 +79,7 @@ TEST_F(IntrinsicTableTest, MismatchF32) {
     auto* i32 = create<core::type::I32>();
     auto result = table.Lookup(core::BuiltinFn::kCos, Vector{i32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchU32) {
@@ -99,7 +99,7 @@ TEST_F(IntrinsicTableTest, MismatchU32) {
     auto result =
         table.Lookup(core::BuiltinFn::kUnpack2X16Float, Vector{f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchI32) {
@@ -126,7 +126,7 @@ TEST_F(IntrinsicTableTest, MismatchI32) {
     auto result =
         table.Lookup(core::BuiltinFn::kTextureLoad, Vector{tex, f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchIU32AsI32) {
@@ -154,7 +154,7 @@ TEST_F(IntrinsicTableTest, MismatchIU32) {
     auto result =
         table.Lookup(core::BuiltinFn::kCountOneBits, Vector{f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchFIU32AsI32) {
@@ -198,7 +198,7 @@ TEST_F(IntrinsicTableTest, MismatchFIU32) {
     auto result = table.Lookup(core::BuiltinFn::kClamp, Vector{bool_, bool_, bool_},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchBool) {
@@ -219,7 +219,7 @@ TEST_F(IntrinsicTableTest, MismatchBool) {
     auto result =
         table.Lookup(core::BuiltinFn::kSelect, Vector{f32, f32, f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchPointer) {
@@ -241,7 +241,7 @@ TEST_F(IntrinsicTableTest, MismatchPointer) {
     auto result =
         table.Lookup(core::BuiltinFn::kAtomicLoad, Vector{atomicI32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchArray) {
@@ -264,7 +264,7 @@ TEST_F(IntrinsicTableTest, MismatchArray) {
     auto result =
         table.Lookup(core::BuiltinFn::kArrayLength, Vector{f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchSampler) {
@@ -293,7 +293,7 @@ TEST_F(IntrinsicTableTest, MismatchSampler) {
     auto result = table.Lookup(core::BuiltinFn::kTextureSample, Vector{tex, f32, vec2_f32},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchSampledTexture) {
@@ -417,7 +417,7 @@ TEST_F(IntrinsicTableTest, MismatchTexture) {
     auto result = table.Lookup(core::BuiltinFn::kTextureLoad, Vector{f32, vec2_i32},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchTemplateType) {
@@ -437,7 +437,7 @@ TEST_F(IntrinsicTableTest, MismatchTemplateType) {
     auto result =
         table.Lookup(core::BuiltinFn::kClamp, Vector{f32, u32, f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchOpenSizeVector) {
@@ -460,7 +460,7 @@ TEST_F(IntrinsicTableTest, MismatchOpenSizeVector) {
     auto result = table.Lookup(core::BuiltinFn::kClamp, Vector{vec2_f32, u32, vec2_f32},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchOpenSizeMatrix) {
@@ -482,7 +482,7 @@ TEST_F(IntrinsicTableTest, MismatchOpenSizeMatrix) {
     auto result =
         table.Lookup(core::BuiltinFn::kDeterminant, Vector{mat3x2_f32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, MatchDifferentArgsElementType_Builtin_ConstantEval) {
@@ -543,7 +543,7 @@ TEST_F(IntrinsicTableTest, OverloadOrderByNumberOfParameters) {
     auto result = table.Lookup(core::BuiltinFn::kTextureDimensions, Vector{bool_, bool_},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_EQ(result.Failure(),
+    ASSERT_EQ(result.Failure().Plain(),
               R"(no matching call to textureDimensions(bool, bool)
 
 27 candidate functions:
@@ -583,7 +583,7 @@ TEST_F(IntrinsicTableTest, OverloadOrderByMatchingParameter) {
     auto result = table.Lookup(core::BuiltinFn::kTextureDimensions, Vector{tex, bool_},
                                EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_EQ(result.Failure(),
+    ASSERT_EQ(result.Failure().Plain(),
               R"(no matching call to textureDimensions(texture_depth_2d, bool)
 
 27 candidate functions:
@@ -629,7 +629,7 @@ TEST_F(IntrinsicTableTest, MismatchUnaryOp) {
     auto* bool_ = create<core::type::Bool>();
     auto result = table.Lookup(core::UnaryOp::kNegation, bool_, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(), R"(no matching overload for operator - (bool)
+    EXPECT_EQ(result.Failure().Plain(), R"(no matching overload for operator - (bool)
 
 2 candidate operators:
   operator - (T) -> T  where: T is abstract-float, abstract-int, f32, i32 or f16
@@ -669,7 +669,7 @@ TEST_F(IntrinsicTableTest, MismatchBinaryOp) {
     auto result = table.Lookup(core::BinaryOp::kMultiply, f32, bool_, EvaluationStage::kConstant,
                                /* is_compound */ false);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(), R"(no matching overload for operator * (f32, bool)
+    EXPECT_EQ(result.Failure().Plain(), R"(no matching overload for operator * (f32, bool)
 
 9 candidate operators:
   operator * (T, T) -> T  where: T is abstract-float, abstract-int, f32, i32, u32 or f16
@@ -701,7 +701,7 @@ TEST_F(IntrinsicTableTest, MismatchCompoundOp) {
     auto result = table.Lookup(core::BinaryOp::kMultiply, f32, bool_, EvaluationStage::kConstant,
                                /* is_compound */ true);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(), R"(no matching overload for operator *= (f32, bool)
+    EXPECT_EQ(result.Failure().Plain(), R"(no matching overload for operator *= (f32, bool)
 
 9 candidate operators:
   operator *= (T, T) -> T  where: T is abstract-float, abstract-int, f32, i32, u32 or f16
@@ -752,7 +752,7 @@ TEST_F(IntrinsicTableTest, MismatchTypeInitializerImplicit) {
     auto result =
         table.Lookup(CtorConv::kVec3, nullptr, Vector{i32, f32, i32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(),
+    EXPECT_EQ(result.Failure().Plain(),
               R"(no matching constructor for vec3(i32, f32, i32)
 
 7 candidate constructors:
@@ -779,7 +779,7 @@ TEST_F(IntrinsicTableTest, MismatchTypeInitializerExplicit) {
     auto result =
         table.Lookup(CtorConv::kVec3, i32, Vector{i32, f32, i32}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(),
+    EXPECT_EQ(result.Failure().Plain(),
               R"(no matching constructor for vec3<i32>(i32, f32, i32)
 
 7 candidate constructors:
@@ -881,7 +881,7 @@ TEST_F(IntrinsicTableTest, MismatchTypeConversion) {
     auto* f32 = create<core::type::F32>();
     auto result = table.Lookup(CtorConv::kVec3, f32, Vector{arr}, EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    EXPECT_EQ(result.Failure(),
+    EXPECT_EQ(result.Failure().Plain(),
               R"(no matching constructor for vec3<f32>(array<u32>)
 
 7 candidate constructors:
@@ -940,7 +940,7 @@ TEST_F(IntrinsicTableTest, Err257Arguments) {  // crbug.com/1323605
     auto result =
         table.Lookup(core::BuiltinFn::kAbs, std::move(arg_tys), EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
-    ASSERT_THAT(result.Failure(), HasSubstr("no matching call"));
+    ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
 TEST_F(IntrinsicTableTest, OverloadResolution) {

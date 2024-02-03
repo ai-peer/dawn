@@ -106,10 +106,14 @@ class Validator {
     /// @returns a string with the instruction name name and error message formatted
     std::string InstError(const Instruction* inst, std::string err);
 
+    StyledText InstError(const Instruction* inst);
+
     /// Adds an error for the @p inst and highlights the instruction in the disassembly
     /// @param inst the instruction
     /// @param err the error string
     void AddError(const Instruction* inst, std::string err);
+
+    void AddError(const Instruction* inst, StyledText err);
 
     /// Adds an error for the @p inst operand at @p idx and highlights the operand in the
     /// disassembly
@@ -150,6 +154,8 @@ class Validator {
     /// @param err the message to emit
     /// @param src the source lines to highlight
     void AddError(std::string err, Source src = {});
+
+    void AddError(StyledText err, Source src = {});
 
     /// Adds a note to the diagnostics
     /// @param note the note to emit
@@ -346,7 +352,21 @@ std::string Validator::InstError(const Instruction* inst, std::string err) {
     return std::string(inst->FriendlyName()) + ": " + err;
 }
 
+StyledText Validator::InstError(const Instruction* inst) {
+    return StyledText{} << inst->FriendlyName() << ": ";
+}
+
 void Validator::AddError(const Instruction* inst, std::string err) {
+    DisassembleIfNeeded();
+    auto src = dis_.InstructionSource(inst);
+    AddError(std::move(err), src);
+
+    if (current_block_) {
+        AddNote(current_block_, "In block");
+    }
+}
+
+void Validator::AddError(const Instruction* inst, StyledText err) {
     DisassembleIfNeeded();
     auto src = dis_.InstructionSource(inst);
     AddError(std::move(err), src);
@@ -401,6 +421,14 @@ void Validator::AddNote(const Block* blk, std::string err) {
 }
 
 void Validator::AddError(std::string err, Source src) {
+    auto& diag = diagnostics_.AddError(tint::diag::System::IR, std::move(err), src);
+    if (src.range != Source::Range{{}}) {
+        diag.source.file = disassembly_file.get();
+        diag.owned_file = disassembly_file;
+    }
+}
+
+void Validator::AddError(StyledText err, Source src) {
     auto& diag = diagnostics_.AddError(tint::diag::System::IR, std::move(err), src);
     if (src.range != Source::Range{{}}) {
         diag.source.file = disassembly_file.get();
@@ -587,7 +615,7 @@ void Validator::CheckBuiltinCall(const BuiltinCall* call) {
     auto result = core::intrinsic::LookupFn(context, call->FriendlyName().c_str(), call->FuncId(),
                                             args, core::EvaluationStage::kRuntime);
     if (result != Success) {
-        AddError(call, InstError(call, result.Failure()));
+        AddError(call, InstError(call) << result.Failure());
         return;
     }
 
@@ -725,7 +753,7 @@ void Validator::CheckBinary(const Binary* b) {
             core::intrinsic::LookupBinary(context, b->Op(), b->LHS()->Type(), b->RHS()->Type(),
                                           core::EvaluationStage::kRuntime, /* is_compound */ false);
         if (overload != Success) {
-            AddError(b, InstError(b, overload.Failure()));
+            AddError(b, InstError(b) << overload.Failure());
             return;
         }
 
@@ -755,7 +783,7 @@ void Validator::CheckUnary(const Unary* u) {
         auto overload = core::intrinsic::LookupUnary(context, u->Op(), u->Val()->Type(),
                                                      core::EvaluationStage::kRuntime);
         if (overload != Success) {
-            AddError(u, InstError(u, overload.Failure()));
+            AddError(u, InstError(u) << overload.Failure());
             return;
         }
 

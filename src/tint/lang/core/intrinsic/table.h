@@ -40,6 +40,7 @@
 #include "src/tint/lang/core/unary_op.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/text/string.h"
+#include "src/tint/utils/text/styled_text.h"
 
 // Forward declarations
 namespace tint::diag {
@@ -119,11 +120,11 @@ struct Context {
 ///        abstract-numerics will have been materialized after shader creation time
 ///        (EvaluationStage::kConstant).
 /// @return the resolved builtin function overload
-Result<Overload, std::string> LookupFn(Context& context,
-                                       std::string_view function_name,
-                                       size_t function_id,
-                                       VectorRef<const core::type::Type*> args,
-                                       EvaluationStage earliest_eval_stage);
+Result<Overload, StyledText> LookupFn(Context& context,
+                                      std::string_view function_name,
+                                      size_t function_id,
+                                      VectorRef<const core::type::Type*> args,
+                                      EvaluationStage earliest_eval_stage);
 
 /// Lookup looks for the unary op overload with the given signature, raising an error
 /// diagnostic if the operator was not found.
@@ -137,10 +138,10 @@ Result<Overload, std::string> LookupFn(Context& context,
 ///        will be considered, as all abstract-numerics will have been materialized
 ///        after shader creation time (EvaluationStage::kConstant).
 /// @return the resolved unary operator overload
-Result<Overload, std::string> LookupUnary(Context& context,
-                                          core::UnaryOp op,
-                                          const core::type::Type* arg,
-                                          EvaluationStage earliest_eval_stage);
+Result<Overload, StyledText> LookupUnary(Context& context,
+                                         core::UnaryOp op,
+                                         const core::type::Type* arg,
+                                         EvaluationStage earliest_eval_stage);
 
 /// Lookup looks for the binary op overload with the given signature, raising an error
 /// diagnostic if the operator was not found.
@@ -156,12 +157,12 @@ Result<Overload, std::string> LookupUnary(Context& context,
 ///        after shader creation time (EvaluationStage::kConstant).
 /// @param is_compound true if the binary operator is being used as a compound assignment
 /// @return the resolved binary operator overload
-Result<Overload, std::string> LookupBinary(Context& context,
-                                           core::BinaryOp op,
-                                           const core::type::Type* lhs,
-                                           const core::type::Type* rhs,
-                                           EvaluationStage earliest_eval_stage,
-                                           bool is_compound);
+Result<Overload, StyledText> LookupBinary(Context& context,
+                                          core::BinaryOp op,
+                                          const core::type::Type* lhs,
+                                          const core::type::Type* rhs,
+                                          EvaluationStage earliest_eval_stage,
+                                          bool is_compound);
 
 /// Lookup looks for the value constructor or conversion overload for the given CtorConv.
 /// @param context the intrinsic context
@@ -176,12 +177,12 @@ Result<Overload, std::string> LookupBinary(Context& context,
 ///        will be considered, as all abstract-numerics will have been materialized
 ///        after shader creation time (EvaluationStage::kConstant).
 /// @return the resolved type constructor or conversion function overload
-Result<Overload, std::string> LookupCtorConv(Context& context,
-                                             std::string_view type_name,
-                                             size_t type_id,
-                                             const core::type::Type* template_arg,
-                                             VectorRef<const core::type::Type*> args,
-                                             EvaluationStage earliest_eval_stage);
+Result<Overload, StyledText> LookupCtorConv(Context& context,
+                                            std::string_view type_name,
+                                            size_t type_id,
+                                            const core::type::Type* template_arg,
+                                            VectorRef<const core::type::Type*> args,
+                                            EvaluationStage earliest_eval_stage);
 
 /// Table is a wrapper around a dialect to provide type-safe interface to the intrinsic table.
 template <typename DIALECT>
@@ -212,9 +213,9 @@ struct Table {
     ///        (EvaluationStage::kConstant).
 
     /// @return the resolved builtin function overload
-    Result<Overload, std::string> Lookup(BuiltinFn builtin_fn,
-                                         VectorRef<const core::type::Type*> args,
-                                         EvaluationStage earliest_eval_stage) {
+    Result<Overload, StyledText> Lookup(BuiltinFn builtin_fn,
+                                        VectorRef<const core::type::Type*> args,
+                                        EvaluationStage earliest_eval_stage) {
         std::string_view name = DIALECT::ToString(builtin_fn);
         size_t id = static_cast<size_t>(builtin_fn);
         return LookupFn(context, name, id, std::move(args), earliest_eval_stage);
@@ -232,9 +233,9 @@ struct Table {
     ///        after shader creation time (EvaluationStage::kConstant).
 
     /// @return the resolved unary operator overload
-    Result<Overload, std::string> Lookup(core::UnaryOp op,
-                                         const core::type::Type* arg,
-                                         EvaluationStage earliest_eval_stage) {
+    Result<Overload, StyledText> Lookup(core::UnaryOp op,
+                                        const core::type::Type* arg,
+                                        EvaluationStage earliest_eval_stage) {
         return LookupUnary(context, op, arg, earliest_eval_stage);
     }
 
@@ -252,11 +253,11 @@ struct Table {
 
     /// @param is_compound true if the binary operator is being used as a compound assignment
     /// @return the resolved binary operator overload
-    Result<Overload, std::string> Lookup(core::BinaryOp op,
-                                         const core::type::Type* lhs,
-                                         const core::type::Type* rhs,
-                                         EvaluationStage earliest_eval_stage,
-                                         bool is_compound) {
+    Result<Overload, StyledText> Lookup(core::BinaryOp op,
+                                        const core::type::Type* lhs,
+                                        const core::type::Type* rhs,
+                                        EvaluationStage earliest_eval_stage,
+                                        bool is_compound) {
         return LookupBinary(context, op, lhs, rhs, earliest_eval_stage, is_compound);
     }
 
@@ -272,10 +273,10 @@ struct Table {
     ///        after shader creation time (EvaluationStage::kConstant).
 
     /// @return the resolved type constructor or conversion function overload
-    Result<Overload, std::string> Lookup(CtorConv type,
-                                         const core::type::Type* template_arg,
-                                         VectorRef<const core::type::Type*> args,
-                                         EvaluationStage earliest_eval_stage) {
+    Result<Overload, StyledText> Lookup(CtorConv type,
+                                        const core::type::Type* template_arg,
+                                        VectorRef<const core::type::Type*> args,
+                                        EvaluationStage earliest_eval_stage) {
         std::string_view name = DIALECT::ToString(type);
         size_t id = static_cast<size_t>(type);
         return LookupCtorConv(context, name, id, template_arg, std::move(args),

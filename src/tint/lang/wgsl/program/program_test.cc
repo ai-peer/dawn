@@ -99,13 +99,13 @@ TEST_F(ProgramTest, DiagnosticsMove) {
     EXPECT_FALSE(program_a.IsValid());
     EXPECT_EQ(program_a.Diagnostics().Count(), 1u);
     EXPECT_EQ(program_a.Diagnostics().NumErrors(), 1u);
-    EXPECT_EQ(program_a.Diagnostics().begin()->message, "an error message");
+    EXPECT_EQ(program_a.Diagnostics().begin()->message.Plain(), "an error message");
 
     Program program_b(std::move(program_a));
     EXPECT_FALSE(program_b.IsValid());
     EXPECT_EQ(program_b.Diagnostics().Count(), 1u);
     EXPECT_EQ(program_b.Diagnostics().NumErrors(), 1u);
-    EXPECT_EQ(program_b.Diagnostics().begin()->message, "an error message");
+    EXPECT_EQ(program_b.Diagnostics().begin()->message.Plain(), "an error message");
 }
 
 TEST_F(ProgramTest, ReuseMovedFromVariable) {

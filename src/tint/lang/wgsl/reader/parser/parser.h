@@ -374,6 +374,12 @@ class Parser {
     /// @return `Failure::Errored::kError` so that you can combine an AddError()
     /// call and return on the same line.
     Failure::Errored AddError(const Source& source, std::string_view msg);
+    /// Appends an error at `source` with the message `msg`
+    /// @param source the source to associate the error with
+    /// @param msg the error message
+    /// @return `Failure::Errored::kError` so that you can combine an AddError()
+    /// call and return on the same line.
+    Failure::Errored AddError(const Source& source, StyledText&& msg);
     /// Appends a note at `source` with the message `msg`
     /// @param source the source to associate the error with
     /// @param msg the note message

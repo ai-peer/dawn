@@ -70,10 +70,8 @@ void StyledText::Print(StyledTextPrinter& printer) {
     std::string text = stream_.str();
     size_t offset = 0;
     for (auto& span : spans_) {
-        if (span.length) {
-            printer.Print(text.substr(offset, span.length), span.style);
-            offset += span.length;
-        }
+        printer.Print(text.substr(offset, span.length), span.style);
+        offset += span.length;
     }
 }
 
@@ -85,11 +83,14 @@ void StyledText::Append(const StyledText& other) {
     std::string text = other.stream_.str();
     size_t offset = 0;
     for (auto& span : other.spans_) {
-        if (span.length) {
-            *this << span.style << text.substr(offset, span.length);
-            offset += span.length;
-        }
+        *this << span.style << text.substr(offset, span.length);
+        offset += span.length;
     }
+}
+StyledText& StyledText::Repeat(char c, size_t n) {
+    stream_.repeat(c, n);
+    spans_.Back().length += n;
+    return *this;
 }
 
 }  // namespace tint

@@ -161,7 +161,7 @@ MaybeError OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& di
     }
 
     AddMessage(
-        diagnostic.message,
+        diagnostic.message.Plain(),
         {nullptr, nullptr, tintSeverityToMessageType(diagnostic.severity), lineNum, linePosInBytes,
          offsetInBytes, lengthInBytes, linePosInUTF16, offsetInUTF16, lengthInUTF16});
 
