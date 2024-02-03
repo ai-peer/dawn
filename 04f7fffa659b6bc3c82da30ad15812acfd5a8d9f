@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84075075_6a56801d",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-03T01:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e9a5b09_1b37726c",
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23e7a428_4d8a33ea",

@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f38950ac_f36621db",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-03T01:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "838ee1a2_6c17c305",
+      "range": {
+        "startLine": 372,
+        "startChar": 3,
+        "endLine": 377,
+        "endChar": 5
+      },
+      "revId": "f31a125e09eec468904e67f555b124c127bc6f4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc5a5ea_08d31b28",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-02T18:58:17Z",
       "side": 1,
       "message": "why do we need this mLastUsageSerial if we have the one from SharedTextureMemoryContents ?\n\noh nevermind, I see that it\u0027s for the ExternalImageDXGI path.\nCan you put a TODO about removing this and the one for d3d12 once everything is migrated to STM ?",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 509,
+        "endChar": 74
+      },
+      "revId": "f31a125e09eec468904e67f555b124c127bc6f4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4bf7a5_03e9d38b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-03T01:03:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fc5a5ea_08d31b28",
       "range": {
         "startLine": 509,
         "startChar": 0,
