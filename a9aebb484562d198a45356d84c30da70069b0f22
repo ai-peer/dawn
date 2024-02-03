@@ -134,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f3dc07_5537b6ef",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-03T13:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a95ed5_187aa296",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c5abc11_5934db7d",
@@ -444,6 +462,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8d0e74_b07de880",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-03T13:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdce5598_99119bbe",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "424a149d_cd19c5fd",
@@ -560,6 +596,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c11888_5d90f9ee",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-03T13:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fadc9c8c_81f9b6eb",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db85ee8e_38be73c3",
@@ -607,6 +661,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5570e954_0884857c",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-03T13:09:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da0956fe_d59554ce",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82aa0a4f_3c7386f7",
@@ -637,6 +715,24 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "It is done automatically in the C++ wrapper. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/api_cpp.cpp;drc\u003d4090b7d2d2cb4f3e8ef448aeaca55c75a55b41ca;l\u003d127",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "590b414d_6e72d455",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-03T13:09:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "31cfc519_6079e678",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
