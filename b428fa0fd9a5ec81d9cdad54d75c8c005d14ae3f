@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf397af7_004a5278",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-03T02:19:06Z",
+      "side": 1,
+      "message": "AFAIK, for each SkCanvas draw, Graphite collects and computes all the uniform variables the draw will use, and allocates as few fix-sized(2k) uniform buffers as necessary to accommodate them. While for the intrinsic uniform, it uses a tiny one per draw.\n\nGraphite, by design, tries to record as many draws as possible inside a render pass for more optimization and less submissions. However its clients could explicitly request to submit per draw. Take \"Images\" of MM for example, the each \"image\" it draws is a 50x50 canvas(no HW-Accel). So each rasterization task of the canvas asks for a submission.\n```\n     dawn_native.dll!dawn::native::d3d11::Queue::SubmitImpl(unsigned int commandCount, dawn::native::CommandBufferBase * const * commands) Line 54\tC++\n \tdawn_native.dll!dawn::native::QueueBase::SubmitInternal(unsigned int commandCount, dawn::native::CommandBufferBase * const * commands) Line 660\tC++\n \tdawn_native.dll!dawn::native::QueueBase::APISubmit(unsigned int commandCount, dawn::native::CommandBufferBase * const * commands) Line 270\tC++\n \tdawn_native.dll!dawn::native::NativeQueueSubmit(WGPUQueueImpl * cSelf, unsigned __int64 commandCount, WGPUCommandBufferImpl * const * commands) Line 1360\tC++\n \tdawn_proc.dll!wgpuQueueSubmit(WGPUQueueImpl * queue, unsigned __int64 commandCount, WGPUCommandBufferImpl * const * commands) Line 446\tC\n \tskia.dll!wgpu::Queue::Submit(unsigned __int64 commandCount, const wgpu::CommandBuffer * commands) Line 3242\tC++\n \tskia.dll!skgpu::graphite::DawnQueueManager::onSubmitToGpu() Line 70\tC++\n \tskia.dll!skgpu::graphite::QueueManager::submitToGpu() Line 229\tC++\n \tskia.dll!skgpu::graphite::Context::submit(skgpu::graphite::SyncToCpu syncToCpu) Line 154\tC++\n \tgpu_gles2.dll!gpu::raster::RasterDecoderImpl::GraphiteFlushAndSubmitWithRecording(std::__Cr::unique_ptr\u003cskgpu::graphite::Recording,std::__Cr::default_delete\u003cskgpu::graphite::Recording\u003e\u003e recording, skgpu::graphite::SyncToCpu sync_to_cpu) Line 787\tC++\n \tgpu_gles2.dll!gpu::raster::RasterDecoderImpl::GraphiteFlushAndSubmit(skgpu::graphite::SyncToCpu sync_to_cpu) Line 792\tC++\n \tgpu_gles2.dll!gpu::raster::RasterDecoderImpl::FlushSurface(gpu::SkiaImageRepresentation::ScopedWriteAccess * access) Line 814\tC++\n \tgpu_gles2.dll!gpu::raster::RasterDecoderImpl::DoEndRasterCHROMIUM() Line 3219\tC++\n\n\n```\nThe test currently tries to mimic this behavior to expose the same bottleneck in dawn-d3d11.\n\nIf it\u0027s meaningful, probably we can add another test param like `Submit::Single` and `Submit::Multiple` to make the test more comprehensive.",
+      "parentUuid": "065a42dd_1ff091de",
+      "revId": "b428fa0fd9a5ec81d9cdad54d75c8c005d14ae3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36a80576_7e8c910c",
         "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
         "patchSetId": 3
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-02T14:36:10Z",
       "side": 1,
       "message": "nit: And OpenGLESBackend() I think?",
+      "range": {
+        "startLine": 344,
+        "startChar": 73,
+        "endLine": 344,
+        "endChar": 86
+      },
+      "revId": "b428fa0fd9a5ec81d9cdad54d75c8c005d14ae3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d34500_a54a37e7",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-03T02:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a80576_7e8c910c",
       "range": {
         "startLine": 344,
         "startChar": 73,
