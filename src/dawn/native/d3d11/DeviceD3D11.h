@@ -85,8 +85,11 @@ class Device final : public d3d::Device {
 
     ResultOrError<FenceAndSignalValue> CreateFence(
         const d3d::ExternalImageDXGIFenceDescriptor* descriptor) override;
+
     ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> CreateExternalImageDXGIImplImpl(
         const ExternalImageDescriptor* descriptor) override;
+
+    void DisposeKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) override;
 
     uint32_t GetUAVSlotCount() const;
 

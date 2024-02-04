@@ -70,6 +70,8 @@ class Device : public DeviceBase {
         bool isSwapChainTexture,
         bool isInitialized) = 0;
 
+    virtual void DisposeKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) = 0;
+
   protected:
     void DestroyImpl() override;
 
