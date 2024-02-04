@@ -136,21 +136,18 @@ MaybeError Queue::SubmitPendingCommands() {
     Device* device = ToBackend(GetDevice());
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
 
-    if (!mPendingCommands.IsOpen() || !mPendingCommands.NeedsSubmit()) {
-        return {};
+    if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
+        DAWN_TRY(mCommandAllocatorManager->Tick(GetCompletedCommandSerial()));
+        DAWN_TRY(mPendingCommands.ExecuteCommandList(device, mCommandQueue.Get()));
     }
-
-    DAWN_TRY(mCommandAllocatorManager->Tick(GetCompletedCommandSerial()));
-    DAWN_TRY(mPendingCommands.ExecuteCommandList(device, mCommandQueue.Get()););
+    // Always advance serial to account for queue operations that aren't recorded in command buffers
+    // e.g. waiting for fences.
     return NextSerial();
 }
 
 MaybeError Queue::NextSerial() {
     Device* device = ToBackend(GetDevice());
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
-
-    ForceEventualFlushOfCommands();
-    DAWN_TRY(SubmitPendingCommands());
 
     IncrementLastSubmittedCommandSerial();
 
