@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-02-01 10:48:15PM
+# Last rolled: 2024-02-04 05:01:47AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -839,7 +839,6 @@ crbug.com/dawn/2389 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubu
 crbug.com/dawn/2389 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-32 webgpu-adapter-default webgpu-dxc-disabled win10 ] webgpu:shader,validation,parse,continuing:placement:stmt="continuing_switch_break" [ Failure ]
 crbug.com/dawn/2389 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 webgpu-adapter-default webgpu-dxc-disabled win10 ] webgpu:shader,validation,parse,continuing:placement:stmt="continuing_switch_break" [ Failure ]
 crbug.com/dawn/2389 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 webgpu-adapter-default webgpu-dxc-enabled win10 ] webgpu:shader,validation,parse,continuing:placement:stmt="continuing_switch_break" [ Failure ]
-
 
 ################################################################################
 # Flip video tests failing
