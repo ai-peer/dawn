@@ -47,7 +47,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* input, size_t size) {
     return 0;
 }
 
-extern "C" int LLVMFuzzerInitialize(int* argc, const char*** argv) {
+extern "C" int LLVMFuzzerInitialize(int* argc, char*** argv) {
     tint::cli::OptionSet opts;
 
     tint::Vector<std::string_view, 8> arguments;
