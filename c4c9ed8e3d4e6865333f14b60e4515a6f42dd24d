@@ -68,6 +68,24 @@
       "parentUuid": "6daf2fa1_46972d8f",
       "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5d9c6ef_6369e83c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-05T14:33:37Z",
+      "side": 1,
+      "message": "\u003e Thinking about this some more, I don\u0027t know how useful it would be to show the actual number. I\u0027d have no idea what the representable range of a f32 is without going to look it up.\n\nSure - but its still useful to know what the computed value is, especially if the value comes from a complex `const` expression.\n\nAdditional information in the error is a good idea, but I don\u0027t consider it a replacement for showing the exact value.",
+      "parentUuid": "5cdba81f_b7f1e481",
+      "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
