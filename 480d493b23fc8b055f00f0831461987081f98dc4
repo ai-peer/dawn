@@ -68,6 +68,24 @@
       "parentUuid": "9eeaa389_67d82b01",
       "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d84ff9_b1c8c4d2",
+        "filename": "src/tint/utils/reflection/reflection_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-05T09:13:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a09938d_45d22c41",
+      "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
