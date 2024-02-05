@@ -415,6 +415,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    bool needSynchronization = true;
     ComPtr<ID3D11Resource> d3d11Resource;
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
     switch (descriptor->GetType()) {
@@ -444,6 +445,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                 "The D3D11 device of the texture and the D3D11 device of the WebGPU device "
                 "must be same.");
             d3d11Resource.As(&dxgiKeyedMutex);
+            needSynchronization = d3d11TextureDescriptor->needSynchronization;
             break;
         }
         default: {
@@ -477,7 +479,8 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     }
 
     return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
-                                                        std::move(keyedMutex), textureDescriptor);
+                                                        std::move(keyedMutex), needSynchronization,
+                                                        textureDescriptor);
 }
 
 void Device::DisposeKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) {

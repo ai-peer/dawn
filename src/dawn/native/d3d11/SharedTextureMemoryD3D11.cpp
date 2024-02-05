@@ -110,8 +110,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     SharedTextureMemoryProperties properties;
     DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, d3d11Texture.Get()));
 
-    auto result =
-        AcquireRef(new SharedTextureMemory(device, label, properties, std::move(d3d11Resource)));
+    auto result = AcquireRef(new SharedTextureMemory(
+        device, label, properties, std::move(d3d11Resource), /*needSynchronization=*/true));
     result->Initialize();
     return result;
 }
@@ -136,8 +136,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     SharedTextureMemoryProperties properties;
     DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, descriptor->texture.Get()));
 
-    auto result =
-        AcquireRef(new SharedTextureMemory(device, label, properties, std::move(d3d11Resource)));
+    auto result = AcquireRef(new SharedTextureMemory(
+        device, label, properties, std::move(d3d11Resource), descriptor->needSynchronization));
     result->Initialize();
     return result;
 }
@@ -145,8 +145,13 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
 SharedTextureMemory::SharedTextureMemory(Device* device,
                                          const char* label,
                                          SharedTextureMemoryProperties properties,
-                                         ComPtr<ID3D11Resource> resource)
-    : d3d::SharedTextureMemory(device, label, properties), mResource(std::move(resource)) {
+                                         ComPtr<ID3D11Resource> resource,
+                                         bool needSynchronization)
+    : d3d::SharedTextureMemory(device, label, properties, needSynchronization),
+      mResource(std::move(resource)) {
+    if (!needSynchronization) {
+        return;
+    }
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
     mResource.As(&dxgiKeyedMutex);
     if (dxgiKeyedMutex) {

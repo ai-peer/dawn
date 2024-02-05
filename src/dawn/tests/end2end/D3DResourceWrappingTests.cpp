@@ -31,6 +31,7 @@
 #include <dxgi1_4.h>
 #include <wrl/client.h>
 
+#include <atomic>
 #include <memory>
 #include <mutex>
 #include <thread>
@@ -1006,7 +1007,8 @@ TEST_P(D3DExternalImageUsageTests, ExternalImageUsage) {
     externalAccessDesc.isInitialized = true;
     externalAccessDesc.usage = WGPUTextureUsage_StorageBinding;
     externalAccessDesc.waitFences.push_back(signalFence);
-    texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc));
+    ASSERT_DEVICE_ERROR(
+        texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc)));
     ASSERT_EQ(texture.Get(), nullptr);
 
     externalAccessDesc.usage = WGPUTextureUsage_TextureBinding;
@@ -1040,7 +1042,9 @@ TEST_P(D3DExternalImageUsageTests, InvalidateExternalImageOnDestroyDevice) {
     externalAccessDesc.isInitialized = true;
     externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
 
-    EXPECT_EQ(wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc)), nullptr);
+    ASSERT_DEVICE_ERROR(
+        texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc)));
+    EXPECT_EQ(texture, nullptr);
 }
 
 // Verify external image cannot be created after the target device is destroyed.
@@ -1175,13 +1179,18 @@ TEST_P(D3DExternalImageMultithreadTests, DestroyDeviceAndUseImageInParallel) {
     ASSERT_NE(texture.Get(), nullptr);
     EXPECT_TRUE(externalImage->IsValid());
 
+    std::atomic<bool> destroyFirst = false;
     std::thread thread1([&] {
         native::d3d::ExternalImageDXGIFenceDescriptor signalFence;
-        externalImage->EndAccess(texture.Get(), &signalFence);
+        if (destroyFirst.load()) {
+            ASSERT_DEVICE_ERROR(externalImage->EndAccess(texture.Get(), &signalFence));
+        } else {
+            externalImage->EndAccess(texture.Get(), &signalFence);
+        }
     });
-
     std::thread thread2([&] {
         // Destroy device, it should destroy image internally.
+        destroyFirst.store(true);
         device.Destroy();
         EXPECT_FALSE(externalImage->IsValid());
     });
