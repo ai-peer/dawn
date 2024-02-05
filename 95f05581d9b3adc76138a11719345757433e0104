@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e847ba2d_81619985",
+        "filename": "src/tint/lang/hlsl/writer/common/options.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T19:28:12Z",
+      "side": 1,
+      "message": "Is\n\n```\n/// Ensure that all the fields of Options are reflected.\nTINT_ASSERT_ALL_FIELDS_REFLECTED(Options);\n```\n\nneed for this and the 2 structs below?",
+      "revId": "95f05581d9b3adc76138a11719345757433e0104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06187075_99cf152a",
+        "filename": "src/tint/lang/hlsl/writer/common/options.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T19:28:12Z",
+      "side": 1,
+      "message": "What is BindingPoint here? It isn\u0027t a member?",
+      "revId": "95f05581d9b3adc76138a11719345757433e0104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
