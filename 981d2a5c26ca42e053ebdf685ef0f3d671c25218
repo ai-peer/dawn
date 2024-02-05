@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5980c9e0_b7bc7bc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-05T17:13:32Z",
+      "side": 1,
+      "message": "Hmm, the Windows test failure certainly appears real. The only difference I can think of is that if non-empty labels are being set in the frontend objects, the backend objects would now use those labels rather than the default labels. Would either of you be able to repro on a Windows machine? I don\u0027t have a Windows development environment.",
+      "revId": "981d2a5c26ca42e053ebdf685ef0f3d671c25218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
