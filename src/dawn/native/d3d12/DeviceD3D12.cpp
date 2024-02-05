@@ -534,6 +534,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     }
 
     return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
+                                                        /*needSynchronization=*/true,
                                                         textureDescriptor);
 }
 
