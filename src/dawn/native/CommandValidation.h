@@ -89,7 +89,8 @@ ResultOrError<Aspect> SingleAspectUsedByImageCopyTexture(const ImageCopyTexture&
 MaybeError ValidateLinearToDepthStencilCopyRestrictions(const ImageCopyTexture& dst);
 
 MaybeError ValidateImageCopyBuffer(DeviceBase const* device,
-                                   const ImageCopyBuffer& imageCopyBuffer);
+                                   const ImageCopyBuffer& imageCopyBuffer,
+                                   bool skipBytesPerRowValidation = false);
 MaybeError ValidateImageCopyTexture(DeviceBase const* device,
                                     const ImageCopyTexture& imageCopyTexture,
                                     const Extent3D& copySize);
