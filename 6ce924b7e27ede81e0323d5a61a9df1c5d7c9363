@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6418960b_385c918b",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T16:37:06Z",
+      "side": 1,
+      "message": "This should probalby came back from `PopulateRemapperAndMultiplanarOptions` (and a new name created) as that\u0027s where we do all the work to make the values correct as we need them.",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93435821_1109f835",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T16:37:06Z",
+      "side": 1,
+      "message": "Is this correct for both d3d11 and d3d12? i.e. will the `0` be used correctly?",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06f50312_d5b125c9",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T16:37:06Z",
+      "side": 1,
+      "message": "We can\u0027t skip in dawn, we want dawn to be providing all of the needed information and we create as necessary.\n\nIf duplicates aren\u0027t allowed we should be throwing a validation error.",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
