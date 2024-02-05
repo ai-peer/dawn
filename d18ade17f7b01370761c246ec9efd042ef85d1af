@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "613baa7e_be683e49",
+        "filename": "src/tint/fuzzers/random_generator.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-05T17:34:45Z",
+      "side": 1,
+      "message": "Why? The intention of this CL is to move all hashcodes to 32 bit. This is the legacy fuzzer framework I want to remove, and so I did the smallest fixup to keep this going.",
+      "parentUuid": "daf9b725_9bf4bd82",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 83
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87e1bf0d_07a5d8e4",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-05T15:39:48Z",
       "side": 1,
       "message": "Really unfortunate that we keep running into this in Tint because type names and function names use the same casing.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 10
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9f477e_6bcce5f8",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-05T17:34:45Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "87e1bf0d_07a5d8e4",
       "range": {
         "startLine": 56,
         "startChar": 4,
@@ -64,6 +112,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c5b1735_895e44ae",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/builder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-05T17:34:45Z",
+      "side": 1,
+      "message": "No, this was using a `std::unordered_map` which wanted a size_t hash. Moved it over to our hashmap so the hash type matched.",
+      "parentUuid": "767426c0_a4d48c9a",
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3389222c_ee8059cd",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-02-05T15:39:48Z",
       "side": 1,
       "message": "You mean `4` here, right?",
+      "range": {
+        "startLine": 99,
+        "startChar": 37,
+        "endLine": 99,
+        "endChar": 39
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7473dfb4_a5d0ef67",
+        "filename": "src/tint/utils/math/hash.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-05T17:34:45Z",
+      "side": 1,
+      "message": "Good spot. Done.",
+      "parentUuid": "3389222c_ee8059cd",
       "range": {
         "startLine": 99,
         "startChar": 37,
