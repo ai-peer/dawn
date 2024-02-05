@@ -50,6 +50,24 @@
       "message": "As discussed, it would be great if we could keep the full float value printed if its value can be represented as a finite `f32`. We\u0027ve had a bunch of people complain about `X cannot be represented as f32`, and actually printing the true value is useful in showing that the number exceeds the representable range.",
       "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdba81f_b7f1e481",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-05T13:44:20Z",
+      "side": 1,
+      "message": "Thinking about this some more, I don\u0027t know how useful it would be to show the actual number. I\u0027d have no idea what the representable range of a f32 is without going to look it up.\n\nIt seems like the better solution would be to change `X cannot be represented as f32` to a more informative error like `The value X is larger then the maximum value that can be stored in a f32` (or minimum depending on which direction it\u0027s going.",
+      "parentUuid": "6daf2fa1_46972d8f",
+      "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
