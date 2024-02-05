@@ -1066,6 +1066,8 @@ bool GenerateGlsl([[maybe_unused]] const tint::Program& program,
         }
 
         gen_options.texture_builtins_from_uniform = std::move(textureBuiltinsFromUniform);
+        gen_options.first_instance_offset =
+            inspector.GetEntryPoint(entry_point_name).push_constant_size;
 
         auto result = tint::glsl::writer::Generate(prg, gen_options, entry_point_name);
         if (result != tint::Success) {
