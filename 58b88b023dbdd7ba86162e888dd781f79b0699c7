@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b94bcc_8a963285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:52:37Z",
+      "side": 1,
+      "message": "I have a nit about the comment on TypeCode.\nPlease address the one-sided error.",
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe56b214_15e134b3",
