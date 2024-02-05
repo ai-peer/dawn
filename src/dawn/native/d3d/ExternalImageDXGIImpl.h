@@ -59,6 +59,7 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     ExternalImageDXGIImpl(Device* backendDevice,
                           ComPtr<IUnknown> d3dResource,
                           Ref<d3d::KeyedMutex> keyedMutex,
+                          bool needSynchronization,
                           const UnpackedPtr<TextureDescriptor>& textureDescriptor);
     ~ExternalImageDXGIImpl();
 
@@ -76,10 +77,16 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
 
     [[nodiscard]] Mutex::AutoLock GetScopedDeviceLock() const;
 
+  private:
+    ResultOrError<Ref<TextureBase>> BeginAccessImpl(
+        const ExternalImageDXGIBeginAccessDescriptor* descriptor);
+    MaybeError EndAccessImpl(WGPUTexture texture, ExternalImageDXGIFenceDescriptor* signalFence);
+
   protected:
     Ref<DeviceBase> mBackendDevice;
     ComPtr<IUnknown> mD3DResource;
     Ref<d3d::KeyedMutex> mKeyedMutex;
+    const bool mNeedSynchronization;
     wgpu::TextureUsage mUsage;
     wgpu::TextureUsage mUsageInternal = wgpu::TextureUsage::None;
     wgpu::TextureDimension mDimension;

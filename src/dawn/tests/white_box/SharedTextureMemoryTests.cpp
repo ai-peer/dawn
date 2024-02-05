@@ -2113,6 +2113,10 @@ TEST_P(SharedTextureMemoryTests, SRGBReinterpretation) {
     DAWN_SUPPRESS_TEST_IF(GetParam().mBackend->Name().find("dma buf") != std::string::npos &&
                           IsBackendValidationEnabled());
 
+    // D3D11 doesn't allow SRGBReinterpretation for a texture which is not created with
+    // D3D11_RESOURCE_MISC_SHARED.
+    DAWN_SUPPRESS_TEST_IF(GetParam().mBackend->Name().find("D3D11Texture2D") != std::string::npos);
+
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
 
     for (const auto& memories :

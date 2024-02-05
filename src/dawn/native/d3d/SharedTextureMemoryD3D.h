@@ -39,12 +39,16 @@ class SharedTextureMemory : public SharedTextureMemoryBase {
   protected:
     SharedTextureMemory(Device* device,
                         const char* label,
-                        SharedTextureMemoryProperties properties);
+                        SharedTextureMemoryProperties properties,
+                        bool needSynchronization);
 
     MaybeError BeginAccessImpl(TextureBase* texture,
                                const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
     ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
                                                      UnpackedPtr<EndAccessState>& state) override;
+
+  private:
+    const bool mNeedSynchronization;
 };
 
 }  // namespace dawn::native::d3d

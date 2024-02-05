@@ -103,7 +103,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
                                          SharedTextureMemoryProperties properties,
                                          ComPtr<ID3D12Resource> resource,
                                          Ref<d3d::KeyedMutex> keyedMutex)
-    : d3d::SharedTextureMemory(device, label, properties),
+    : d3d::SharedTextureMemory(device, label, properties, /*needSynchronization=*/true),
       mResource(std::move(resource)),
       mKeyedMutex(std::move(keyedMutex)) {}
 
