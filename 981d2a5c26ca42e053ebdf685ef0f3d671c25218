@@ -16,6 +16,24 @@
       "message": "Hmm, the Windows test failure certainly appears real. The only difference I can think of is that if non-empty labels are being set in the frontend objects, the backend objects would now use those labels rather than the default labels. Would either of you be able to repro on a Windows machine? I don\u0027t have a Windows development environment.",
       "revId": "981d2a5c26ca42e053ebdf685ef0f3d671c25218",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eedd239_ae77a2ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-05T19:26:49Z",
+      "side": 1,
+      "message": "the errors are very much buried in a mess of logs\n```\n[262/4205] webgpu:api,operation,render_pass,storeOp:render_pass_store_op,color_attachment_only:colorFormat\u003d\"rg32sint\";storeOperation\u003d\"discard\" passed 0.2705s (worker 3)\n[2060:3648:0205/082102.209:INFO:CONSOLE(0)] \"The D3D12 debug layer reported uncaught errors.\n - While handling unexpected error type Internal when allowed errors are (Validation|DeviceLost).\n    at CheckDebugLayerAndGenerateErrors (..\\..\\third_party\\dawn\\src\\dawn\\native\\d3d12\\DeviceD3D12.cpp:620)\n    at TickImpl (..\\..\\third_party\\dawn\\src\\dawn\\native\\d3d12\\DeviceD3D12.cpp:291)\n    at Tick (..\\..\\third_party\\dawn\\src\\dawn\\native\\Device.cpp:1390)\n    at SubmitInternal (..\\..\\third_party\\dawn\\src\\dawn\\native\\Queue.cpp:676)\n\nBackend messages:\n * ID3D12Device::SetPrivateData: Possible re-use of existing private data GUID for different data (size has changed). (24)\n * Device removed reason: S_OK (0x00000000)\n```\n\nI think what\u0027s happening is that now that we are passing UseUserDefinedLabelsInBackend, we are passing the labels from Javascript down to the driver.\nIt was previously just \"Dawn_Texture\" \n\nnow it is \"Dawn_Texture_\" + \"MyCustomLabel\" or\"Dawn_Texture_\" + \"MyCustomLabel2\"\n\nand, we must be reusing the same object for two seemingly different textures (similar to the issue I mentioned where we overwrite the Metal label for SharedTextureMemory) and the debug layer is grumpy about this.\n\nI think what we can do is add `D3D12_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS` to the list of message filters in `d3d12::PhysicalDevice::InitializeDebugLayerFilters` - and it *should* suppress it. D3D11 has a similar thing too, but the enum is D3D11_* instead of D3D12_*",
+      "parentUuid": "5980c9e0_b7bc7bc9",
+      "revId": "981d2a5c26ca42e053ebdf685ef0f3d671c25218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
