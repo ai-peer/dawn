@@ -69,6 +69,12 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorD3D11Texture : ExternalImageDes
     // Texture is used for creating ExternalImageDXGI with d3d11 backend. It must be an
     // ID3D11Texture2D object and created from the same ID3D11Device used in the WGPUDevice.
     Microsoft::WRL::ComPtr<IUnknown> texture;
+
+    // True if the D3D11Texture ExternalImage needs synchronization. Fences passed to BeginAccess()
+    // will be waited, and EndAccess() will provide an end access fence for client to wait on.
+    // If the texture  is created with keyed mutex, the mutex will be acquired while being used in
+    // dawn.
+    bool needSynchronization = true;
 };
 
 struct DAWN_NATIVE_EXPORT ExternalImageDXGIFenceDescriptor {

@@ -101,7 +101,16 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
                                          const char* label,
                                          SharedTextureMemoryProperties properties,
                                          ComPtr<ID3D12Resource> resource)
+<<<<<<< PATCH SET (d2bc63 D3D11: add needSynchronization flag for importing D3D11 text)
+    : d3d::SharedTextureMemory(device,
+                               label,
+                               properties,
+                               resource.Get(),
+                               /*needSynchronization=*/true),
+      mResource(std::move(resource)) {}
+=======
     : d3d::SharedTextureMemory(device, label, properties), mResource(std::move(resource)) {}
+>>>>>>> BASE      (756744 [dawn][wire] Removes InjectDevice.)
 
 void SharedTextureMemory::DestroyImpl() {
     ToBackend(GetDevice())->ReferenceUntilUnused(std::move(mResource));

@@ -39,12 +39,29 @@ class SharedTextureMemory : public SharedTextureMemoryBase {
   protected:
     SharedTextureMemory(Device* device,
                         const char* label,
+<<<<<<< PATCH SET (d2bc63 D3D11: add needSynchronization flag for importing D3D11 text)
+                        SharedTextureMemoryProperties properties,
+                        IUnknown* resource,
+                        bool needSynchronization);
+=======
                         SharedTextureMemoryProperties properties);
+>>>>>>> BASE      (756744 [dawn][wire] Removes InjectDevice.)
 
     MaybeError BeginAccessImpl(TextureBase* texture,
                                const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
     ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
                                                      UnpackedPtr<EndAccessState>& state) override;
+<<<<<<< PATCH SET (d2bc63 D3D11: add needSynchronization flag for importing D3D11 text)
+
+  private:
+    const bool mNeedSynchronization;
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    // Chrome uses 0 as acquire key.
+    static constexpr UINT64 kDXGIKeyedMutexAcquireKey = 0;
+=======
+>>>>>>> BASE      (756744 [dawn][wire] Removes InjectDevice.)
 };
 
 }  // namespace dawn::native::d3d
