@@ -556,7 +556,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Workgroup) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("threadgroup float tint_symbol_2;\n"));
+    EXPECT_THAT(gen.Result(), HasSubstr("threadgroup float* const tint_symbol_1) {\n    {\n      *(tint_symbol_1) = 0.0f;\n    }\n    threadgroup_barrier(mem_flags::mem_threadgroup);\n  }\n\n  void test_function_inner(uint local_invocation_index, threadgroup float* const tint_symbol_2) {\n    tint_zero_workgroup_memory(local_invocation_index, tint_symbol_2);\n"));
 }
 
 }  // namespace
