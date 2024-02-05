@@ -376,20 +376,16 @@ fn main() {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
+@internal(block)
 struct S {
   f : f32,
 }
 
-@internal(block)
-struct u_block {
-  inner : S,
-}
-
-var<push_constant> u : u_block;
+var<push_constant> u : S;
 
 @fragment
 fn main() {
-  let f = u.inner.f;
+  let f = u.f;
 }
 )";
 
