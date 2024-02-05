@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "90cbc034a11c608d8784cef89cc8eba9c0571adc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a441a8be_f91b2413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-05T18:39:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "90cbc034a11c608d8784cef89cc8eba9c0571adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61780ceb_695084e6",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1472,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-05T18:39:13Z",
+      "side": 1,
+      "message": "Nit: would it be possible to assert support for the extension here, so failures in the wild are more clearly detectable?",
+      "revId": "90cbc034a11c608d8784cef89cc8eba9c0571adc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
