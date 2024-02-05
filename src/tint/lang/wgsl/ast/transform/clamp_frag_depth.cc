@@ -45,6 +45,7 @@
 #include "src/tint/utils/macros/scoped_assignment.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ClampFragDepth);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ClampFragDepth::Config);
 
 namespace tint::ast::transform {
 
@@ -63,49 +64,89 @@ struct ClampFragDepth::State {
 
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
-    Transform::ApplyResult Run() {
-        // Abort on any use of push constants in the module.
+    Transform::ApplyResult Run(const DataMap& inputs) {
+        if (!ShouldRun()) {
+            return SkipTransform;
+        }
+
+        Vector<const ast::StructMember*, 8> members;
+        const ast::Variable* push_constants_var = nullptr;
+
+        // Find first push_constant.
         for (auto* global : src.AST().GlobalVariables()) {
             if (auto* var = global->As<ast::Var>()) {
                 auto* v = src.Sem().Get(var);
-                if (TINT_UNLIKELY(v->AddressSpace() == core::AddressSpace::kPushConstant)) {
-                    TINT_ICE()
-                        << "ClampFragDepth doesn't know how to handle module that already use push "
-                           "constants";
-                    return resolver::Resolve(b);
+                if (v->AddressSpace() == core::AddressSpace::kPushConstant) {
+                    push_constants_var = var;
+                    auto* str = v->Type()->UnwrapRef()->As<sem::Struct>();
+                    TINT_ASSERT(str);
+                    for (auto* member : str->Members()) {
+                        members.Push(ctx.CloneWithoutTransform(member->Declaration()));
+                    }
                 }
             }
         }
 
-        if (!ShouldRun()) {
-            return SkipTransform;
-        }
+        const Config* cfg = inputs.Get<Config>();
 
         // At least one entry-point needs clamping. Add the following to the module:
         //
         //   enable chromium_experimental_push_constant;
         //
-        //   struct FragDepthClampArgs {
+        //   struct PushConstants {
         //       min : f32,
         //       max : f32,
         //   }
-        //   var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+        //   var<push_constant> frag_depth_clamp_args : PushConstants;
         //
         //   fn clamp_frag_depth(v : f32) -> f32 {
         //       return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
         //   }
-        b.Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
 
-        b.Structure(b.Symbols().New("FragDepthClampArgs"),
-                    Vector{b.Member("min", b.ty.f32()), b.Member("max", b.ty.f32())});
+        Vector<const ast::Attribute*, 1> min_attribs, max_attribs;
+        if (cfg && cfg->viewport_min_offset) {
+            min_attribs.Push(b.MemberOffset(core::AInt(*cfg->viewport_min_offset)));
+        }
+        if (cfg && cfg->viewport_max_offset) {
+            max_attribs.Push(b.MemberOffset(core::AInt(*cfg->viewport_max_offset)));
+        }
 
-        auto args_sym = b.Symbols().New("frag_depth_clamp_args");
-        b.GlobalVar(args_sym, b.ty("FragDepthClampArgs"), core::AddressSpace::kPushConstant);
+        members.Push(b.Member("min", b.ty.f32(), min_attribs));
+        members.Push(b.Member("max", b.ty.f32(), max_attribs));
+
+        auto new_struct = b.Structure(b.Symbols().New("PushConstants"), std::move(members));
+        Symbol buffer_name;
+
+        if (!push_constants_var) {
+            b.Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
+
+            buffer_name = b.Symbols().New("push_constants");
+            b.GlobalVar(buffer_name, b.ty.Of(new_struct), core::AddressSpace::kPushConstant);
+        } else {
+            buffer_name = ctx.Clone(push_constants_var->name->symbol);
+        }
+
+        if (push_constants_var) {
+            ctx.ReplaceAll([&](const ast::Variable* var) -> const ast::Variable* {
+                if (var->type == push_constants_var->type) {
+                    if (var->As<ast::Parameter>()) {
+                        return ctx.dst->Param(ctx.Clone(var->name->symbol), b.ty.Of(new_struct),
+                                              ctx.Clone(var->attributes));
+                    } else {
+                        return ctx.dst->Var(ctx.Clone(var->name->symbol), b.ty.Of(new_struct),
+                                            ctx.Clone(var->attributes),
+                                            core::AddressSpace::kPushConstant);
+                    }
+                }
+
+                return nullptr;
+            });
+        }
 
         auto base_fn_sym = b.Symbols().New("clamp_frag_depth");
         b.Func(base_fn_sym, Vector{b.Param("v", b.ty.f32())}, b.ty.f32(),
-               Vector{b.Return(b.Call("clamp", "v", b.MemberAccessor(args_sym, "min"),
-                                      b.MemberAccessor(args_sym, "max")))});
+               Vector{b.Return(b.Call("clamp", "v", b.MemberAccessor(buffer_name, "min"),
+                                      b.MemberAccessor(buffer_name, "max")))});
 
         // If true, the currently cloned function returns frag depth directly as a scalar
         bool returns_frag_depth_as_value = false;
@@ -237,9 +278,15 @@ ClampFragDepth::ClampFragDepth() = default;
 ClampFragDepth::~ClampFragDepth() = default;
 
 ast::transform::Transform::ApplyResult ClampFragDepth::Apply(const Program& src,
-                                                             const ast::transform::DataMap&,
+                                                             const ast::transform::DataMap& inputs,
                                                              ast::transform::DataMap&) const {
-    return State{src}.Run();
+    return State{src}.Run(inputs);
 }
+
+ClampFragDepth::Config::Config(std::optional<uint32_t> viewport_min_off,
+                               std::optional<uint32_t> viewport_max_off)
+    : viewport_min_offset(viewport_min_off), viewport_max_offset(viewport_max_off) {}
+
+ClampFragDepth::Config::~Config() = default;
 
 }  // namespace tint::ast::transform
