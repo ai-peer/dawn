@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b8e95d4_df031f81",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T19:19:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81adc637_bdce66fd",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93435821_1109f835",
@@ -71,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64d1c2a_ed8e691b",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T19:19:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36130fd7_d5979246",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06f50312_d5b125c9",
@@ -102,6 +138,24 @@
       "side": 1,
       "message": "Sorry, old comment that I was supposed to remove!",
       "parentUuid": "06f50312_d5b125c9",
+      "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfcc81ff_e65adc2d",
+        "filename": "src/tint/lang/hlsl/writer/common/option_helpers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T19:19:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d6abbbc_f1ed4d0d",
       "revId": "6ce924b7e27ede81e0323d5a61a9df1c5d7c9363",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
