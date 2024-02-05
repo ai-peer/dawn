@@ -85,6 +85,30 @@
       },
       "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff89207e_179ceaeb",
+        "filename": "src/tint/utils/rtti/castable.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:46:16Z",
+      "side": 1,
+      "message": "oh, never mind.  It\u0027s ok for bit_c to equal zero. It just has to be different from bit_a.",
+      "parentUuid": "32b7fcd0_2214a730",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 77
+      },
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
