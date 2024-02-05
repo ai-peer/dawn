@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06310bef_67e9571b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:44:38Z",
+      "side": 1,
+      "message": "partial review",
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe56b214_15e134b3",
+        "filename": "src/tint/utils/rtti/castable.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:44:38Z",
+      "side": 1,
+      "message": "I seems this has a one-sided error:\nTypeCodes can have collisions. What does a collision entail? Is it a type1 or type 2 error (?)",
+      "range": {
+        "startLine": 100,
+        "startChar": 60,
+        "endLine": 101,
+        "endChar": 19
+      },
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8ccdb26_6760e547",
+        "filename": "src/tint/utils/rtti/castable.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:44:38Z",
+      "side": 1,
+      "message": "This is a non-standard GCC extension.\nBut the nice thing is if it\u0027s not supported, we\u0027ll get a compilation error.",
+      "range": {
+        "startLine": 115,
+        "startChar": 41,
+        "endLine": 115,
+        "endChar": 60
+      },
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b7fcd0_2214a730",
+        "filename": "src/tint/utils/rtti/castable.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-02-05T17:44:38Z",
+      "side": 1,
+      "message": "If bit_b \u003d\u003d 63 and bit_a \u003d\u003d 63 then the bit_c \u003d 0.\nThat violates the invariant.",
+      "range": {
+        "startLine": 119,
+        "startChar": 18,
+        "endLine": 119,
+        "endChar": 77
+      },
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
