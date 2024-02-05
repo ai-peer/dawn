@@ -57,7 +57,8 @@ class SharedTextureMemory final : public d3d::SharedTextureMemory {
     SharedTextureMemory(Device* device,
                         const char* label,
                         SharedTextureMemoryProperties properties,
-                        ComPtr<ID3D11Resource> resource);
+                        ComPtr<ID3D11Resource> resource,
+                        bool needSynchronization);
 
     void DestroyImpl() override;
 
