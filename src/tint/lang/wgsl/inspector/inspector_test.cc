@@ -258,6 +258,56 @@ TEST_F(InspectorGetEntryPointTest, DefaultWorkgroupSize) {
     EXPECT_EQ(1u, workgroup_size->z);
 }
 
+TEST_F(InspectorGetEntryPointTest, NoPushConstantSize) {
+    MakeEmptyBodyFunction("foo", Vector{
+                                     Stage(ast::PipelineStage::kFragment),
+                                 });
+
+    Inspector& inspector = Build();
+
+    auto result = inspector.GetEntryPoints();
+    ASSERT_FALSE(inspector.has_error()) << inspector.error();
+
+    ASSERT_EQ(1u, result.size());
+    EXPECT_EQ(0u, result[0].push_constant_size);
+}
+
+TEST_F(InspectorGetEntryPointTest, OnePushConstantSize) {
+    Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
+    GlobalVar("pc", core::AddressSpace::kPushConstant, ty.f32());
+    MakePlainGlobalReferenceBodyFunction("foo", "pc", ty.f32(),
+                                         Vector{
+                                             Stage(ast::PipelineStage::kFragment),
+                                         });
+
+    Inspector& inspector = Build();
+
+    auto result = inspector.GetEntryPoints();
+    ASSERT_FALSE(inspector.has_error()) << inspector.error();
+
+    ASSERT_EQ(1u, result.size());
+    EXPECT_EQ(4u, result[0].push_constant_size);
+}
+
+TEST_F(InspectorGetEntryPointTest, ThreePushConstantSize) {
+    Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
+    auto* pc_struct_type =
+        MakeStructType("PushConstantStruct", Vector{ty.i32(), ty.f32(), ty.u32()});
+    GlobalVar("pc", core::AddressSpace::kPushConstant, ty.Of(pc_struct_type));
+    MakePlainGlobalReferenceBodyFunction("foo", "pc", ty.Of(pc_struct_type),
+                                         Vector{
+                                             Stage(ast::PipelineStage::kFragment),
+                                         });
+
+    Inspector& inspector = Build();
+
+    auto result = inspector.GetEntryPoints();
+    ASSERT_FALSE(inspector.has_error()) << inspector.error();
+
+    ASSERT_EQ(1u, result.size());
+    EXPECT_EQ(12u, result[0].push_constant_size);
+}
+
 TEST_F(InspectorGetEntryPointTest, NonDefaultWorkgroupSize) {
     MakeEmptyBodyFunction("foo", Vector{
                                      Stage(ast::PipelineStage::kCompute),
