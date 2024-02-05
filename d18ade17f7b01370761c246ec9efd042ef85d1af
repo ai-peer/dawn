@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac4d1643_420cae27",
+        "filename": "src/tint/fuzzers/random_generator.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T18:59:25Z",
+      "side": 1,
+      "message": "I see, fair enough.",
+      "parentUuid": "613baa7e_be683e49",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 83
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87e1bf0d_07a5d8e4",
