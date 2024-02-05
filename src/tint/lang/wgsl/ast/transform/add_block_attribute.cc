@@ -77,8 +77,12 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
         // that such struct type can be only used as storage buffer variables' type. Also note that
         // any buffer struct type that may be nested by another type must have a fixed footprint,
         // therefore will be wrapped.
-        bool needs_wrapping = !str ||                    // Type is not a structure
-                              str->HasFixedFootprint();  // Struct has a fixed footprint
+        bool needs_wrapping =
+            !str ||  // Type is not a structure
+            (str->HasFixedFootprint() &&
+             var->AddressSpace() !=
+                 core::AddressSpace::kPushConstant);  // Struct has a fixed footprint and is not a
+                                                      // push constant
 
         if (needs_wrapping) {
             const char* kMemberName = "inner";
