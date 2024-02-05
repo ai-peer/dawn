@@ -62,9 +62,11 @@ MaybeError ValidateTextureDescriptorCanBeWrapped(const UnpackedPtr<TextureDescri
 ExternalImageDXGIImpl::ExternalImageDXGIImpl(
     Device* backendDevice,
     ComPtr<IUnknown> d3dResource,
+    bool needFence,
     const UnpackedPtr<TextureDescriptor>& textureDescriptor)
     : mBackendDevice(backendDevice),
       mD3DResource(std::move(d3dResource)),
+      mNeedFence(needFence),
       mUsage(textureDescriptor->usage),
       mDimension(textureDescriptor->dimension),
       mSize(textureDescriptor->size),
@@ -140,6 +142,13 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
         return nullptr;
     }
 
+    if (!mNeedFence && !descriptor->waitFences.empty()) {
+        bool consumed = mBackendDevice->ConsumedError(DAWN_VALIDATION_ERROR(
+            "External textures doesn't need fence, however fences are provided."));
+        DAWN_UNUSED(consumed);
+        return nullptr;
+    }
+
     TextureDescriptor textureDescriptor = {};
     textureDescriptor.usage = static_cast<wgpu::TextureUsage>(descriptor->usage);
     textureDescriptor.dimension = mDimension;
@@ -202,10 +211,12 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     DAWN_ASSERT(backendTexture != nullptr);
 
     Ref<SharedFence> sharedFence;
-    if (mBackendDevice->ConsumedError(
-            ToBackend(mBackendDevice->GetQueue())->GetOrCreateSharedFence(), &sharedFence)) {
-        dawn::ErrorLog() << "Could not retrieve device shared fence";
-        return;
+    if (mNeedFence) {
+        if (mBackendDevice->ConsumedError(
+                ToBackend(mBackendDevice->GetQueue())->GetOrCreateSharedFence(), &sharedFence)) {
+            dawn::ErrorLog() << "Could not retrieve device shared fence";
+            return;
+        }
     }
 
     ExecutionSerial fenceValue;
@@ -214,8 +225,10 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
         return;
     }
 
-    signalFence->fenceHandle = sharedFence->GetFenceHandle();
-    signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
+    if (mNeedFence) {
+        signalFence->fenceHandle = sharedFence->GetFenceHandle();
+        signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
+    }
 
     --mAccessCount;
     if (mDXGIKeyedMutexReleaser && mAccessCount == 0) {

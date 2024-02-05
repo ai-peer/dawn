@@ -414,6 +414,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    bool needFence = descriptor->GetType() == ExternalImageType::DXGISharedHandle;
     ComPtr<ID3D11Resource> d3d11Resource;
     switch (descriptor->GetType()) {
         case ExternalImageType::DXGISharedHandle: {
@@ -463,7 +464,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
+    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource), needFence,
                                                         textureDescriptor);
 }
 

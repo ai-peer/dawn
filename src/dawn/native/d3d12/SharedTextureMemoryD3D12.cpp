@@ -101,7 +101,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
                                          const char* label,
                                          SharedTextureMemoryProperties properties,
                                          ComPtr<ID3D12Resource> resource)
-    : d3d::SharedTextureMemory(device, label, properties, resource.Get()),
+    : d3d::SharedTextureMemory(device, label, properties, resource.Get(), /*needFence=*/true),
       mResource(std::move(resource)) {}
 
 void SharedTextureMemory::DestroyImpl() {
