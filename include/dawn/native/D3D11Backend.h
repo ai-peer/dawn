@@ -58,6 +58,12 @@ struct DAWN_NATIVE_EXPORT SharedTextureMemoryD3D11Texture2DDescriptor : wgpu::Ch
     // This ID3D11Texture2D object must be created from the same ID3D11Device used in the
     // WGPUDevice.
     Microsoft::WRL::ComPtr<ID3D11Texture2D> texture;
+
+    // True if the D3D11Texture ExternalImage needs synchronization. Fences passed to BeginAccess()
+    // will be waited, and EndAccess() will provide an end access fence for client to wait on.
+    // If the texture  is created with keyed mutex, the mutex will be acquired while being used in
+    // dawn.
+    bool needSynchronization = true;
 };
 
 }  // namespace dawn::native::d3d11
