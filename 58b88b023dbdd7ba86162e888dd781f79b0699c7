@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b232d584_55de004a",
+        "filename": "src/tint/utils/rtti/castable.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-05T18:01:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure the statement is incorrect. It is `used by Tint\u0027s RTTI system to determine whether two types are related by inheritance` - I\u0027m not stating _how_ it is used. The comment on `TypeCodeSet` is pretty thorough in explaining how they\u0027re used in a bloom-filter. I can shove a `@see TypeCodeSet` at the end of this comment?",
+      "parentUuid": "fe56b214_15e134b3",
+      "range": {
+        "startLine": 100,
+        "startChar": 60,
+        "endLine": 101,
+        "endChar": 19
+      },
+      "revId": "58b88b023dbdd7ba86162e888dd781f79b0699c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f8ccdb26_6760e547",
