@@ -33,6 +33,23 @@
       "message": "LGTM!",
       "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6daf2fa1_46972d8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-05T10:33:20Z",
+      "side": 1,
+      "message": "As discussed, it would be great if we could keep the full float value printed if its value can be represented as a finite `f32`. We\u0027ve had a bunch of people complain about `X cannot be represented as f32`, and actually printing the true value is useful in showing that the number exceeds the representable range.",
+      "revId": "c4c9ed8e3d4e6865333f14b60e4515a6f42dd24d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
