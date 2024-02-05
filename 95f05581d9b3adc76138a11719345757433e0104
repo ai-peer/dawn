@@ -69,6 +69,24 @@
       "parentUuid": "e847ba2d_81619985",
       "revId": "95f05581d9b3adc76138a11719345757433e0104",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fad9522_27e9e3e6",
+        "filename": "src/tint/lang/hlsl/writer/common/options.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T19:33:31Z",
+      "side": 1,
+      "message": "Oh, this should be BindingInfo!",
+      "parentUuid": "c89b44c3_b90c0166",
+      "revId": "95f05581d9b3adc76138a11719345757433e0104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
