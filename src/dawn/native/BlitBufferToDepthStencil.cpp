@@ -352,6 +352,8 @@ MaybeError BlitRG8ToDepth16Unorm(DeviceBase* device,
     return {};
 }
 
+}  // anonymous namespace
+
 MaybeError BlitR8ToStencil(DeviceBase* device,
                            CommandEncoder* commandEncoder,
                            TextureBase* dataTexture,
@@ -494,8 +496,6 @@ MaybeError BlitR8ToStencil(DeviceBase* device,
     return {};
 }
 
-}  // anonymous namespace
-
 MaybeError BlitStagingBufferToDepth(DeviceBase* device,
                                     BufferBase* buffer,
                                     const TextureDataLayout& src,
@@ -618,6 +618,9 @@ MaybeError BlitBufferToStencil(DeviceBase* device,
 
         ImageCopyTexture textureDst;
         textureDst.texture = dataTexture.Get();
+
+        // Allow internal usages since we need to skip the bytesPerRow % 256 == 0 validation
+        auto scope = commandEncoder->MakeInternalUsageScope();
         commandEncoder->APICopyBufferToTexture(&bufferSrc, &textureDst, &copyExtent);
     }
 
