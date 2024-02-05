@@ -618,6 +618,9 @@ MaybeError BlitBufferToStencil(DeviceBase* device,
 
         ImageCopyTexture textureDst;
         textureDst.texture = dataTexture.Get();
+
+        // Allow internal usages since we need to skip the bytesPerRow % 256 == 0 validation
+        auto scope = commandEncoder->MakeInternalUsageScope();
         commandEncoder->APICopyBufferToTexture(&bufferSrc, &textureDst, &copyExtent);
     }
 

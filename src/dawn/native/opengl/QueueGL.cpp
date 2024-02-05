@@ -27,6 +27,9 @@
 
 #include "dawn/native/opengl/QueueGL.h"
 
+#include "dawn/native/BlitBufferToDepthStencil.h"
+#include "dawn/native/CommandBuffer.h"
+#include "dawn/native/CommandEncoder.h"
 #include "dawn/native/opengl/BufferGL.h"
 #include "dawn/native/opengl/CommandBufferGL.h"
 #include "dawn/native/opengl/DeviceGL.h"
@@ -67,6 +70,7 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
 
 MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
                                    const void* data,
+                                   size_t dataSize,
                                    const TextureDataLayout& dataLayout,
                                    const Extent3D& writeSizePixel) {
     TextureCopy textureCopy;
@@ -74,6 +78,45 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.mipLevel = destination.mipLevel;
     textureCopy.origin = destination.origin;
     textureCopy.aspect = SelectFormatAspects(destination.texture->GetFormat(), destination.aspect);
+
+    DeviceBase* device = GetDevice();
+    if (textureCopy.aspect == Aspect::Stencil &&
+        (textureCopy.texture->GetFormat().aspects & Aspect::Depth ||
+         device->IsToggleEnabled(Toggle::UseBlitForStencilTextureWrite))) {
+        // Workaround when write to stencil is unsupported:
+        // - when the texture is stencil-only but OES_texture_stencil8 is unavailable.
+        // - when the texture is depth-stencil-combined and writing to the stencil aspect.
+
+        // The below function might create new resources. Need to lock the Device.
+        // TODO(crbug.com/dawn/1618): In future, all temp resources should be created at
+        // Command Submit time, so the locking would be removed from here at that point.
+        auto deviceLock(device->GetScopedLock());
+
+        Ref<CommandEncoderBase> commandEncoder;
+        DAWN_TRY_ASSIGN(commandEncoder, device->CreateCommandEncoder());
+
+        // Create an intermediate src buffer to upload data.
+        BufferDescriptor descriptor = {};
+        descriptor.size = Align(dataSize, 4);
+        descriptor.usage = wgpu::BufferUsage::CopySrc;
+        descriptor.mappedAtCreation = true;
+        Ref<BufferBase> intermediateBuffer;
+        DAWN_TRY_ASSIGN(intermediateBuffer, device->CreateBuffer(&descriptor));
+
+        memcpy(intermediateBuffer->GetMappedRange(0, descriptor.size), data, dataSize);
+        DAWN_TRY(intermediateBuffer->Unmap());
+
+        DAWN_TRY_CONTEXT(BlitBufferToStencil(device, commandEncoder.Get(), intermediateBuffer.Get(),
+                                             dataLayout, textureCopy, writeSizePixel),
+                         "writing to stencil aspect of %s using blit workaround.",
+                         textureCopy.texture.Get());
+
+        Ref<CommandBufferBase> commandBuffer;
+        DAWN_TRY_ASSIGN(commandBuffer, commandEncoder->Finish());
+        CommandBufferBase* commands = commandBuffer.Get();
+        APISubmit(1, &commands);
+        return {};
+    }
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(textureCopy, writeSizePixel);
     if (IsCompleteSubresourceCopiedTo(destination.texture, writeSizePixel, destination.mipLevel,
