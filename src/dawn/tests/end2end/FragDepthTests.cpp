@@ -38,9 +38,6 @@ class FragDepthTests : public DawnTest {};
 
 // Test that when writing to FragDepth the result is clamped to the viewport.
 TEST_P(FragDepthTests, FragDepthIsClampedToViewport) {
-    // TODO(dawn:1125): Add the shader transform to clamp the frag depth to the GL backend.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.5, 1.0);
@@ -91,9 +88,6 @@ TEST_P(FragDepthTests, FragDepthIsClampedToViewport) {
 // Test for the push constant logic for ClampFragDepth in Vulkan to check that changing the
 // pipeline layout doesn't invalidate the push constants that were set.
 TEST_P(FragDepthTests, ChangingPipelineLayoutDoesntInvalidateViewport) {
-    // TODO(dawn:1125): Add the shader transform to clamp the frag depth to the GL backend.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     // TODO(dawn:1805): Load ByteAddressBuffer in Pixel Shader doesn't work with NVIDIA on D3D11
     DAWN_SUPPRESS_TEST_IF(IsD3D11() && IsNvidia());
 
