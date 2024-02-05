@@ -47,6 +47,7 @@ using Microsoft::WRL::ComPtr;
 enum class Mode {
     DXGISharedHandle,
     D3D11Texture2D,
+    D3D11Texture2DNoSynchronization,
 };
 
 class Backend : public SharedTextureMemoryTestBackend {
@@ -68,13 +69,19 @@ class Backend : public SharedTextureMemoryTestBackend {
             case Mode::D3D11Texture2D: {
                 return mUseKeyedMutex ? "D3D11Texture2D KeyedMutex" : "D3D11Texture2D";
             }
+            case Mode::D3D11Texture2DNoSynchronization: {
+                return mUseKeyedMutex ? "D3D11Texture2DNoSynchronization KeyedMutex"
+                                      : "D3D11Texture2DNoSynchronization";
+            }
             case Mode::DXGISharedHandle: {
                 return mUseKeyedMutex ? "DXGISharedHandle KeyedMutex" : "DXGISharedHandle";
             }
         }
     }
 
-    bool UseSameDevice() const override { return mMode == Mode::D3D11Texture2D; }
+    bool UseSameDevice() const override {
+        return mMode == Mode::D3D11Texture2D || mMode == Mode::D3D11Texture2DNoSynchronization;
+    }
     bool SupportsConcurrentRead() const override { return !mUseKeyedMutex; }
 
     std::vector<wgpu::FeatureName> RequiredFeatures(const wgpu::Adapter& adapter) const override {
@@ -82,6 +89,10 @@ class Backend : public SharedTextureMemoryTestBackend {
             case Mode::D3D11Texture2D: {
                 return {wgpu::FeatureName::SharedTextureMemoryD3D11Texture2D,
                         wgpu::FeatureName::SharedFenceDXGISharedHandle,
+                        wgpu::FeatureName::DawnMultiPlanarFormats};
+            }
+            case Mode::D3D11Texture2DNoSynchronization: {
+                return {wgpu::FeatureName::SharedTextureMemoryD3D11Texture2D,
                         wgpu::FeatureName::DawnMultiPlanarFormats};
             }
             case Mode::DXGISharedHandle: {
@@ -94,7 +105,8 @@ class Backend : public SharedTextureMemoryTestBackend {
 
     ComPtr<ID3D11Device> MakeD3D11Device(const wgpu::Device& device) {
         switch (mMode) {
-            case Mode::D3D11Texture2D: {
+            case Mode::D3D11Texture2D:
+            case Mode::D3D11Texture2DNoSynchronization: {
                 return native::d3d11::GetD3D11Device(device.Get());
             }
             case Mode::DXGISharedHandle: {
@@ -140,14 +152,15 @@ class Backend : public SharedTextureMemoryTestBackend {
         d3dDescriptor.MiscFlags =
             D3D11_RESOURCE_MISC_SHARED_NTHANDLE |
             (mUseKeyedMutex ? D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX : D3D11_RESOURCE_MISC_SHARED);
-
         ComPtr<ID3D11Texture2D> d3d11Texture;
         HRESULT hr = d3d11Device->CreateTexture2D(&d3dDescriptor, nullptr, &d3d11Texture);
 
         switch (mMode) {
-            case Mode::D3D11Texture2D: {
+            case Mode::D3D11Texture2D:
+            case Mode::D3D11Texture2DNoSynchronization: {
                 native::d3d11::SharedTextureMemoryD3D11Texture2DDescriptor texture2DDesc;
                 texture2DDesc.texture = std::move(d3d11Texture);
+                texture2DDesc.needSynchronization = mMode == Mode::D3D11Texture2D;
 
                 wgpu::SharedTextureMemoryDescriptor desc;
                 desc.nextInChain = &texture2DDesc;
@@ -236,18 +249,25 @@ class Backend : public SharedTextureMemoryTestBackend {
                 d3dDescriptor.BindFlags = D3D11_BIND_SHADER_RESOURCE | D3D11_BIND_UNORDERED_ACCESS |
                                           D3D11_BIND_RENDER_TARGET;
                 d3dDescriptor.CPUAccessFlags = 0;
-                d3dDescriptor.MiscFlags = D3D11_RESOURCE_MISC_SHARED_NTHANDLE |
-                                          (mUseKeyedMutex ? D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX
-                                                          : D3D11_RESOURCE_MISC_SHARED);
+                if (mMode == Mode::DXGISharedHandle) {
+                    d3dDescriptor.MiscFlags =
+                        D3D11_RESOURCE_MISC_SHARED_NTHANDLE |
+                        (mUseKeyedMutex ? D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX
+                                        : D3D11_RESOURCE_MISC_SHARED);
+                } else {
+                    d3dDescriptor.MiscFlags = 0;
+                }
 
                 ComPtr<ID3D11Texture2D> d3d11Texture;
                 HRESULT hr = d3d11Device->CreateTexture2D(&d3dDescriptor, nullptr, &d3d11Texture);
 
                 std::vector<wgpu::SharedTextureMemory> perDeviceMemories;
                 switch (mMode) {
-                    case Mode::D3D11Texture2D: {
+                    case Mode::D3D11Texture2D:
+                    case Mode::D3D11Texture2DNoSynchronization: {
                         native::d3d11::SharedTextureMemoryD3D11Texture2DDescriptor texture2DDesc;
                         texture2DDesc.texture = d3d11Texture;
+                        texture2DDesc.needSynchronization = mMode == Mode::D3D11Texture2D;
 
                         wgpu::SharedTextureMemoryDescriptor desc;
                         desc.nextInChain = &texture2DDesc;
@@ -303,6 +323,8 @@ class Backend : public SharedTextureMemoryTestBackend {
         return memories;
     }
 
+    Mode mode() const { return mMode; }
+
   private:
     Backend(Mode mode, bool useKeyedMutex) : mMode(mode), mUseKeyedMutex(useKeyedMutex) {}
 
@@ -339,6 +361,9 @@ TEST_P(SharedTextureMemoryNoFeatureTests, SharedFenceImportWithoutFeature) {
 
 // Test that a shared handle can be imported, and then exported.
 TEST_P(SharedTextureMemoryTests, SharedFenceSuccessfulImportExport) {
+    DAWN_TEST_UNSUPPORTED_IF(static_cast<Backend*>(GetParam().mBackend)->mode() ==
+                             Mode::D3D11Texture2DNoSynchronization);
+
     ComPtr<ID3D11Device> d3d11Device =
         static_cast<Backend*>(GetParam().mBackend)->MakeD3D11Device(device);
 
@@ -410,6 +435,9 @@ TEST_P(SharedTextureMemoryTests, SharedFenceSuccessfulImportExport) {
 
 // Test that it is an error to import a shared fence with a null DXGISharedHandle
 TEST_P(SharedTextureMemoryTests, SharedFenceImportDXGISharedHandleMissing) {
+    DAWN_TEST_UNSUPPORTED_IF(static_cast<Backend*>(GetParam().mBackend)->mode() ==
+                             Mode::D3D11Texture2DNoSynchronization);
+
     wgpu::SharedFenceDXGISharedHandleDescriptor sharedHandleDesc;
     sharedHandleDesc.handle = nullptr;
 
@@ -423,6 +451,9 @@ TEST_P(SharedTextureMemoryTests, SharedFenceImportDXGISharedHandleMissing) {
 // Test exporting info from a shared fence with no chained struct.
 // It should be valid and the fence type is exported.
 TEST_P(SharedTextureMemoryTests, SharedFenceExportInfoNoChainedStruct) {
+    DAWN_TEST_UNSUPPORTED_IF(static_cast<Backend*>(GetParam().mBackend)->mode() ==
+                             Mode::D3D11Texture2DNoSynchronization);
+
     ComPtr<ID3D11Device> d3d11Device =
         static_cast<Backend*>(GetParam().mBackend)->MakeD3D11Device(device);
 
@@ -457,6 +488,9 @@ TEST_P(SharedTextureMemoryTests, SharedFenceExportInfoNoChainedStruct) {
 // Test exporting info from a shared fence with an invalid chained struct.
 // It should not be valid, but the fence type should still be exported.
 TEST_P(SharedTextureMemoryTests, SharedFenceExportInfoInvalidChainedStruct) {
+    DAWN_TEST_UNSUPPORTED_IF(static_cast<Backend*>(GetParam().mBackend)->mode() ==
+                             Mode::D3D11Texture2DNoSynchronization);
+
     ComPtr<ID3D11Device> d3d11Device =
         static_cast<Backend*>(GetParam().mBackend)->MakeD3D11Device(device);
 
@@ -500,17 +534,23 @@ DAWN_INSTANTIATE_PREFIXED_TEST_P(D3D,
                                  {Backend::GetInstance<Mode::DXGISharedHandle>(),
                                   Backend::GetKeyedMutexInstance<Mode::DXGISharedHandle>()});
 
-DAWN_INSTANTIATE_PREFIXED_TEST_P(D3D11,
-                                 SharedTextureMemoryNoFeatureTests,
-                                 {D3D11Backend()},
-                                 {Backend::GetInstance<Mode::D3D11Texture2D>(),
-                                  Backend::GetKeyedMutexInstance<Mode::D3D11Texture2D>()});
+DAWN_INSTANTIATE_PREFIXED_TEST_P(
+    D3D11,
+    SharedTextureMemoryNoFeatureTests,
+    {D3D11Backend()},
+    {Backend::GetInstance<Mode::D3D11Texture2D>(),
+     Backend::GetInstance<Mode::D3D11Texture2DNoSynchronization>(),
+     Backend::GetKeyedMutexInstance<Mode::D3D11Texture2D>(),
+     Backend::GetKeyedMutexInstance<Mode::D3D11Texture2DNoSynchronization>()});
 
-DAWN_INSTANTIATE_PREFIXED_TEST_P(D3D11,
-                                 SharedTextureMemoryTests,
-                                 {D3D11Backend()},
-                                 {Backend::GetInstance<Mode::D3D11Texture2D>(),
-                                  Backend::GetKeyedMutexInstance<Mode::D3D11Texture2D>()});
+DAWN_INSTANTIATE_PREFIXED_TEST_P(
+    D3D11,
+    SharedTextureMemoryTests,
+    {D3D11Backend()},
+    {Backend::GetInstance<Mode::D3D11Texture2D>(),
+     Backend::GetInstance<Mode::D3D11Texture2DNoSynchronization>(),
+     Backend::GetKeyedMutexInstance<Mode::D3D11Texture2D>(),
+     Backend::GetKeyedMutexInstance<Mode::D3D11Texture2DNoSynchronization>()});
 
 }  // anonymous namespace
 }  // namespace dawn
