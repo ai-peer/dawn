@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5993b6_e815c63a",
+        "filename": "tools/android/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-02-05T13:57:25Z",
+      "side": 1,
+      "message": "Nit: Reword it - \"Used to build Dawn as an Android Archive package via Maven\"",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a8e41a_a5e27be1",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-02-05T13:57:25Z",
+      "side": 1,
+      "message": "Should we create a bug for this to be fixed in the future and add a TODO here? \nMight be worth checking about this dep and it\u0027s exclusion with the Chrome team",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 93
+      },
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
