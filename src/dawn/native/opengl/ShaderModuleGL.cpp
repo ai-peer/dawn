@@ -421,6 +421,12 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
             r.tintOptions.first_instance_offset =
                 4 * PipelineLayout::PushConstantLocation::FirstInstance;
 
+            r.tintOptions.viewport_min_offset =
+                4 * PipelineLayout::PushConstantLocation::ViewportMin;
+
+            r.tintOptions.viewport_max_offset =
+                4 * PipelineLayout::PushConstantLocation::ViewportMax;
+
             auto result = tint::glsl::writer::Generate(program, r.tintOptions, remappedEntryPoint);
             DAWN_INVALID_IF(result != tint::Success, "An error occurred while generating GLSL:\n%s",
                             result.Failure().reason.str());

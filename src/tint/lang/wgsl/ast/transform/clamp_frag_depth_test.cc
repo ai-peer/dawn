@@ -119,15 +119,15 @@ TEST_F(ClampFragDepthTest, SingleReturnOfFragDepth) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 @fragment
@@ -153,15 +153,15 @@ TEST_F(ClampFragDepthTest, MultipleReturnOfFragDepth) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 @fragment
@@ -190,15 +190,15 @@ TEST_F(ClampFragDepthTest, OtherFunctionWithoutFragDepth) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 @fragment
@@ -230,15 +230,15 @@ TEST_F(ClampFragDepthTest, SimpleReturnOfStruct) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 struct S {
@@ -285,15 +285,15 @@ TEST_F(ClampFragDepthTest, MixOfFunctionReturningStruct) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 struct S {
@@ -352,15 +352,15 @@ TEST_F(ClampFragDepthTest, ComplexIOStruct) {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-struct FragDepthClampArgs {
+struct PushConstants {
   min : f32,
   max : f32,
 }
 
-var<push_constant> frag_depth_clamp_args : FragDepthClampArgs;
+var<push_constant> push_constants : PushConstants;
 
 fn clamp_frag_depth(v : f32) -> f32 {
-  return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
+  return clamp(v, push_constants.min, push_constants.max);
 }
 
 struct S {

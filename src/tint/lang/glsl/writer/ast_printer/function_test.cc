@@ -201,8 +201,18 @@ TEST_F(GlslASTPrinterTest_Function, Emit_Attribute_EntryPoint_WithInOut_Builtins
     EXPECT_EQ(gen.Result(), R"(#version 310 es
 precision highp float;
 
+struct PushConstants {
+  float min;
+  float max;
+};
+
+layout(location=0) uniform PushConstants push_constants;
+float clamp_frag_depth(float v) {
+  return clamp(v, push_constants.min, push_constants.max);
+}
+
 float frag_main(vec4 coord) {
-  return coord.x;
+  return clamp_frag_depth(coord.x);
 }
 
 void main() {
