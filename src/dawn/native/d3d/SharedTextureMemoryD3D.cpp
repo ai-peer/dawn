@@ -40,13 +40,24 @@ namespace dawn::native::d3d {
 
 SharedTextureMemory::SharedTextureMemory(d3d::Device* device,
                                          const char* label,
-                                         SharedTextureMemoryProperties properties)
-    : SharedTextureMemoryBase(device, label, properties) {}
+                                         SharedTextureMemoryProperties properties,
+                                         IUnknown* resource,
+                                         bool needSynchronization)
+    : SharedTextureMemoryBase(device, label, properties),
+      mNeedSynchronization(needSynchronization) {
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    resource->QueryInterface(IID_PPV_ARGS(&mDXGIKeyedMutex));
+}
 
 MaybeError SharedTextureMemory::BeginAccessImpl(
     TextureBase* texture,
     const UnpackedPtr<BeginAccessDescriptor>& descriptor) {
     DAWN_TRY(descriptor.ValidateSubset<>());
+
+    DAWN_INVALID_IF(!mNeedSynchronization && descriptor->fenceCount,
+                    "Fences are provided with SharedTextureMemory doesn't require fences.");
+
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
         SharedFenceBase* fence = descriptor->fences[i];
 
@@ -63,6 +74,14 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
                 return DAWN_VALIDATION_ERROR("Unsupported fence type %s.", exportInfo.type);
         }
     }
+
+    // Acquire keyed mutex for the first access.
+    if (mNeedSynchronization && mDXGIKeyedMutex &&
+        (HasWriteAccess() || HasExclusiveReadAccess() || GetReadAccessCount() == 1)) {
+        DAWN_TRY(CheckHRESULT(mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Acquire keyed mutex"));
+    }
+
     return {};
 }
 
@@ -70,6 +89,10 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
     TextureBase* texture,
     UnpackedPtr<EndAccessState>& state) {
     DAWN_TRY(state.ValidateSubset<>());
+    if (!mNeedSynchronization) {
+        return FenceAndSignalValue{nullptr, 0};
+    }
+
     DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::SharedFenceDXGISharedHandle),
                     "Required feature (%s) is missing.",
                     wgpu::FeatureName::SharedFenceDXGISharedHandle);

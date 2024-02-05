@@ -336,7 +336,10 @@ MaybeError SharedTextureMemoryBase::EndAccess(TextureBase* texture,
     {
         ResultOrError<FenceAndSignalValue> result = EndAccessInternal(texture, state);
         if (result.IsSuccess()) {
-            fenceList->push_back(result.AcquireSuccess());
+            auto fenceAndSignalValue = result.AcquireSuccess();
+            if (fenceAndSignalValue.object.Get()) {
+                fenceList->push_back(std::move(fenceAndSignalValue));
+            }
         } else {
             err = result.AcquireError();
         }

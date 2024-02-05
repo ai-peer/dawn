@@ -39,12 +39,22 @@ class SharedTextureMemory : public SharedTextureMemoryBase {
   protected:
     SharedTextureMemory(Device* device,
                         const char* label,
-                        SharedTextureMemoryProperties properties);
+                        SharedTextureMemoryProperties properties,
+                        IUnknown* resource,
+                        bool needSynchronization);
 
     MaybeError BeginAccessImpl(TextureBase* texture,
                                const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
     ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
                                                      UnpackedPtr<EndAccessState>& state) override;
+
+  private:
+    const bool mNeedSynchronization;
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    // Chrome uses 0 as acquire key.
+    static constexpr UINT64 kDXGIKeyedMutexAcquireKey = 0;
 };
 
 }  // namespace dawn::native::d3d
