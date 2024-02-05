@@ -50,6 +50,23 @@
       "message": "Thanks! Do you mind CR+2\u0027ing? Austin had LGTM\u0027d as well.",
       "revId": "d9018e09a266ba01f875bf810826610b9b0c2fb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0974939f_4960d404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-05T13:05:45Z",
+      "side": 1,
+      "message": "Thanks, both!",
+      "revId": "d9018e09a266ba01f875bf810826610b9b0c2fb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
