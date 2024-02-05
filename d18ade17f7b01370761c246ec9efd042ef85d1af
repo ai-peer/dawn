@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf9b725_9bf4bd82",
+        "filename": "src/tint/fuzzers/random_generator.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T15:39:48Z",
+      "side": 1,
+      "message": "Could we not have an overload of HashCombine that works with 64 bit values?",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 83
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e1bf0d_07a5d8e4",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T15:39:48Z",
+      "side": 1,
+      "message": "Really unfortunate that we keep running into this in Tint because type names and function names use the same casing.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 10
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767426c0_a4d48c9a",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/builder.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T15:39:48Z",
+      "side": 1,
+      "message": "Seems unrelated to this change?",
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3389222c_ee8059cd",
+        "filename": "src/tint/utils/math/hash.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T15:39:48Z",
+      "side": 1,
+      "message": "You mean `4` here, right?",
+      "range": {
+        "startLine": 99,
+        "startChar": 37,
+        "endLine": 99,
+        "endChar": 39
+      },
+      "revId": "d18ade17f7b01370761c246ec9efd042ef85d1af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
