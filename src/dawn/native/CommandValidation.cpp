@@ -328,9 +328,11 @@ MaybeError ValidateLinearTextureData(const TextureDataLayout& layout,
 }
 
 MaybeError ValidateImageCopyBuffer(DeviceBase const* device,
-                                   const ImageCopyBuffer& imageCopyBuffer) {
+                                   const ImageCopyBuffer& imageCopyBuffer,
+                                   bool skipBytesPerRowValidation) {
     DAWN_TRY(device->ValidateObject(imageCopyBuffer.buffer));
-    if (imageCopyBuffer.layout.bytesPerRow != wgpu::kCopyStrideUndefined) {
+    if (!skipBytesPerRowValidation &&
+        imageCopyBuffer.layout.bytesPerRow != wgpu::kCopyStrideUndefined) {
         DAWN_INVALID_IF(imageCopyBuffer.layout.bytesPerRow % kTextureBytesPerRowAlignment != 0,
                         "bytesPerRow (%u) is not a multiple of %u.",
                         imageCopyBuffer.layout.bytesPerRow, kTextureBytesPerRowAlignment);
