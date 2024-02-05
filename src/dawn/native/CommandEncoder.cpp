@@ -1589,7 +1589,10 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
-                DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
+                DAWN_TRY(ValidateImageCopyBuffer(
+                    GetDevice(), *source,
+                    /* skipBytesPerRowValidation =  */ mUsageValidationMode ==
+                        UsageValidationMode::Internal));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
                                  "validating source %s usage.", source->buffer);
 
