@@ -87,6 +87,24 @@
       "parentUuid": "c89b44c3_b90c0166",
       "revId": "95f05581d9b3adc76138a11719345757433e0104",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd0775f_37d2127a",
+        "filename": "src/tint/lang/hlsl/writer/common/options.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-05T19:42:32Z",
+      "side": 1,
+      "message": "Fixed. This compiled, of course, because both types, BindingInfo and BindingPoint, had the same members and size.",
+      "parentUuid": "7fad9522_27e9e3e6",
+      "revId": "95f05581d9b3adc76138a11719345757433e0104",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
