@@ -414,6 +414,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     // a use-after-free.
     DAWN_TRY(ValidateIsAlive());
 
+    bool needSynchronization = true;
     ComPtr<ID3D11Resource> d3d11Resource;
     switch (descriptor->GetType()) {
         case ExternalImageType::DXGISharedHandle: {
@@ -436,6 +437,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                 textureDevice.Get() != mD3d11Device.Get(),
                 "The D3D11 device of the texture and the D3D11 device of the WebGPU device "
                 "must be same.");
+            needSynchronization = d3d11TextureDescriptor->needSynchronization;
             break;
         }
         default: {
@@ -464,7 +466,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     }
 
     return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
-                                                        textureDescriptor);
+                                                        needSynchronization, textureDescriptor);
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
