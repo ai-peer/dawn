@@ -35,6 +35,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/ityp_span.h"
+#include "dawn/native/BlitBufferToDepthStencil.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
@@ -458,6 +459,53 @@ MaybeError QueueBase::WriteTextureInternal(const ImageCopyTexture* destinationOr
     DAWN_TRY(ValidateWriteTexture(&destination, dataSize, dataLayout, writeSize));
 
     if (writeSize->width == 0 || writeSize->height == 0 || writeSize->depthOrArrayLayers == 0) {
+        return {};
+    }
+
+    DeviceBase* device = GetDevice();
+    Aspect aspect = ConvertAspect(destination.texture->GetFormat(), destination.aspect);
+    if (aspect == Aspect::Stencil &&
+        device->IsToggleEnabled(Toggle::UseBlitForStencilTextureWrite)) {
+        // Workaround when write to stencil texture is unsupported.
+
+        // The below function might create new resources. Need to lock the Device.
+        // TODO(crbug.com/dawn/1618): In future, all temp resources should be created at
+        // Command Submit time, so the locking would be removed from here at that point.
+        auto deviceLock(device->GetScopedLock());
+
+        Ref<CommandEncoderBase> commandEncoder;
+        DAWN_TRY_ASSIGN(commandEncoder, device->CreateCommandEncoder());
+
+        // Create an intermediate src buffer to upload data.
+        BufferDescriptor descriptor = {};
+        descriptor.size = Align(dataSize, 4);
+        // descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+        descriptor.usage = wgpu::BufferUsage::CopySrc;
+        descriptor.mappedAtCreation = true;
+        Ref<BufferBase> intermediateBuffer;
+        DAWN_TRY_ASSIGN(intermediateBuffer, device->CreateBuffer(&descriptor));
+        // DAWN_TRY_CONTEXT(WriteBuffer(intermediateBuffer.Get(), 0, data, dataSize),
+        //     "writing to %s when using blit workaround for writing to stencil aspect of %s.",
+        //     intermediateBuffer.Get(), destination.texture);
+
+        memcpy(intermediateBuffer->GetMappedRange(0, descriptor.size), data, dataSize);
+        DAWN_TRY(intermediateBuffer->Unmap());
+
+        TextureCopy dst;
+        dst.texture = destination.texture;
+        dst.origin = destination.origin;
+        dst.mipLevel = destination.mipLevel;
+        dst.aspect = aspect;
+
+        DAWN_TRY_CONTEXT(BlitBufferToStencil(device, commandEncoder.Get(), intermediateBuffer.Get(),
+                                             dataLayout, dst, *writeSize),
+                         "writing to stencil aspect of %s using blit workaround.",
+                         dst.texture.Get());
+
+        Ref<CommandBufferBase> commandBuffer;
+        DAWN_TRY_ASSIGN(commandBuffer, commandEncoder->Finish());
+        CommandBufferBase* commands = commandBuffer.Get();
+        APISubmit(1, &commands);
         return {};
     }
 
