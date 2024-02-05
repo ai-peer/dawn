@@ -40,7 +40,8 @@ class SharedTextureMemory : public SharedTextureMemoryBase {
     SharedTextureMemory(Device* device,
                         const char* label,
                         SharedTextureMemoryProperties properties,
-                        IUnknown* resource);
+                        IUnknown* resource,
+                        bool needFence);
 
   protected:
     MaybeError BeginAccessImpl(TextureBase* texture,
@@ -49,6 +50,7 @@ class SharedTextureMemory : public SharedTextureMemoryBase {
                                                      UnpackedPtr<EndAccessState>& state) override;
 
   private:
+    const bool mNeedFence;
     // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
     // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
     ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;

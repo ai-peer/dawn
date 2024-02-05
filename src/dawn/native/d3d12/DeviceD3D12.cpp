@@ -539,7 +539,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     }
 
     return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
-                                                        textureDescriptor);
+                                                        /*needFence=*/true, textureDescriptor);
 }
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
