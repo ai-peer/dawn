@@ -53,15 +53,6 @@ namespace {
 constexpr char kFirstVertexName[] = "first_vertex";
 constexpr char kFirstInstanceName[] = "first_instance";
 
-bool ShouldRun(const Program& program) {
-    for (auto* fn : program.AST().Functions()) {
-        if (fn->PipelineStage() == PipelineStage::kVertex) {
-            return true;
-        }
-    }
-    return false;
-}
-
 }  // namespace
 
 OffsetFirstIndex::OffsetFirstIndex() = default;
@@ -70,12 +61,11 @@ OffsetFirstIndex::~OffsetFirstIndex() = default;
 Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
                                                const DataMap& inputs,
                                                DataMap&) const {
-    if (!ShouldRun(src)) {
-        return SkipTransform;
-    }
-
     const Config* cfg = inputs.Get<Config>();
     if (!cfg) {
+        return SkipTransform;
+    }
+    if (!cfg->first_vertex_offset.has_value() && !cfg->first_instance_offset.has_value()) {
         return SkipTransform;
     }
 

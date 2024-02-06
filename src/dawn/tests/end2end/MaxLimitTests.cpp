@@ -1282,6 +1282,9 @@ TEST_P(MaxVertexAttributesPipelineCreationTests, VertexIndex) {
 // Tests that maxVertexAttributes work for the creation of the render pipelines with
 // @builtin(instance_index).
 TEST_P(MaxVertexAttributesPipelineCreationTests, InstanceIndex) {
+    // TODO(crbug.com/dawn/2392): Test fails on NVidia GLES (but passes on ANGLE/Swiftshader).
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsNvidia());
+
     TestSpec spec = {};
     spec.hasInstanceIndex = true;
     DoTest(spec);
@@ -1290,6 +1293,9 @@ TEST_P(MaxVertexAttributesPipelineCreationTests, InstanceIndex) {
 // Tests that maxVertexAttributes work for the creation of the render pipelines with
 // @builtin(vertex_index) and @builtin(instance_index).
 TEST_P(MaxVertexAttributesPipelineCreationTests, VertexIndex_InstanceIndex) {
+    // TODO(crbug.com/dawn/2392): Test fails on NVidia GLES (but passes on ANGLE/Swiftshader).
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsNvidia());
+
     TestSpec spec = {};
     spec.hasVertexIndex = true;
     spec.hasInstanceIndex = true;
