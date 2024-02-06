@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ad1c07b8_6bdf6398",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-06T11:19:53Z",
+      "side": 1,
+      "message": "Ok NVM for the Dawn Gerrit config we should use chromium:buganizer-id instead of just buganizer-id. I\u0027ll do that in future CLs and we should guide contributors to do that.",
+      "parentUuid": "c8eb40ae_b8ecfeda",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "3fbdbb11fb8bd47a027a33b3805a37c7fa970a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "64ed29d1_e0a5bfa3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
