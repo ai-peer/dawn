@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c8eb40ae_b8ecfeda",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-06T11:16:11Z",
+      "side": 1,
+      "message": "I\u0027ve seen this convention used and linked successfully in Chromium. I believe the lack of link is a Gerrit configuration issue. I\u0027ll take a look at it.",
+      "parentUuid": "16d9396d_dd21f232",
+      "range": {
+        "startLine": 24,
+        "startChar": 5,
+        "endLine": 24,
+        "endChar": 13
+      },
+      "revId": "3fbdbb11fb8bd47a027a33b3805a37c7fa970a1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "64ed29d1_e0a5bfa3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
