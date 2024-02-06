@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb4ff5d2_694a87e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-06T16:14:02Z",
+      "side": 1,
+      "message": "LGTM. I wonder if eventually we will want this to be configurable though.\n\nCurrently, Chrome already does PerformPollingWork(); explicitly after handling commands - which calls ProcessEvents on the instance it cares about.\n\nIn practice, this means we might do another no-op ProcessEvents after handling WebGPU commands which is fine for now IMO. Ideally we only do it once in the future.",
+      "revId": "11ad2ead1e7b137093cdfb4101442d0be74f3faf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
