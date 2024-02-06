@@ -53,6 +53,10 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
         D3D11_MESSAGE_ID_DEVICE_DRAW_RENDERTARGETVIEW_NOT_SET,
         // D3D11 Debug layer warns SetPrivateData() with same name more than once.
         D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS,
+        // Backend textures can be reused across different frontend textures,
+        // which can result in changes to the label of the backend texture if
+        // the user has assigned distinct labels to the different frontend textures.
+        D3D11_MESSAGE_ID_SETPRIVATEDATA_CHANGINGPARAMS,
     };
 
     // Filter out info/message and only create errors from warnings or worse.
