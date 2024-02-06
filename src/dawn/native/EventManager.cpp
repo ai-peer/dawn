@@ -154,6 +154,14 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
 
 // We can replace the std::vector& when std::span is available via C++20.
 wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanoseconds timeout) {
+#if DAWN_ENABLE_ASSERTS
+    // For debug builds, we track wait refs here now to aid in debugging races.
+    std::vector<EventManager::TrackedEvent::WaitRef> waitRefs(futures.size());
+    for (auto& f : futures) {
+        waitRefs.push_back(EventManager::TrackedEvent::WaitRef{f.event.Get()});
+    }
+#endif
+
     auto begin = futures.begin();
     const auto end = futures.end();
     bool anySuccess = false;
@@ -312,8 +320,7 @@ bool EventManager::ProcessPollEvents() {
         futures.reserve(events->size());
         for (auto& [futureID, event] : *events) {
             if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
-                futures.push_back(
-                    TrackedFutureWaitInfo{futureID, TrackedEvent::WaitRef{event.Get()}, 0, false});
+                futures.push_back(TrackedFutureWaitInfo{futureID, event, 0, false});
             }
         }
     });
@@ -389,8 +396,7 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
                 // (unless it's already completed).
                 infos[i].completed = false;
                 TrackedEvent* event = it->second.Get();
-                futures.push_back(
-                    TrackedFutureWaitInfo{futureID, TrackedEvent::WaitRef{event}, i, false});
+                futures.push_back(TrackedFutureWaitInfo{futureID, event, i, false});
             }
         }
     });
@@ -468,6 +474,8 @@ void EventManager::TrackedEvent::CompleteIfSpontaneous() {
 }
 
 // EventManager::TrackedEvent::WaitRef
+
+EventManager::TrackedEvent::WaitRef::WaitRef() = default;
 
 EventManager::TrackedEvent::WaitRef::WaitRef(TrackedEvent* event) : mRef(event) {
 #if DAWN_ENABLE_ASSERTS
