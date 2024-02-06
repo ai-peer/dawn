@@ -16,6 +16,23 @@
       "message": "Still LGTM! Thank you for the iterations.",
       "revId": "b0cde7f87c437fb5d10a1b8a2f250b41fd5d6fbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a117577b_dfbb685e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-06T12:08:42Z",
+      "side": 1,
+      "message": "\\o/ Thanks!",
+      "revId": "b0cde7f87c437fb5d10a1b8a2f250b41fd5d6fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
