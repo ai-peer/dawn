@@ -216,6 +216,24 @@
       "message": "There\u0027s more needed for webgpu_dawn, you can see how we select the headers to install in Dawn here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/CMakeLists.txt;drc\u003d01f13352af32651f571f0ab22587e169c8c5225e;l\u003d109",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d12f3571_58c3f658",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-06T20:04:17Z",
+      "side": 1,
+      "message": "Quick note on this; it is Mark D\u0027s strong preference that we ship initially with only the C API, which only requires webgpu.h. We should have a discussion about this decision though.",
+      "parentUuid": "92b4b086_c828481c",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
