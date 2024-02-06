@@ -449,9 +449,6 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APISetLabel(const char* label);
     void APIDestroy();
 
-    virtual void AppendDebugLayerMessages(ErrorData* error) {}
-    virtual void AppendDeviceLostMessage(ErrorData* error) {}
-
     // It is guaranteed that the wrapped mutex will outlive the Device (if the Device is deleted
     // before the AutoLockAndHoldRef).
     [[nodiscard]] Mutex::AutoLockAndHoldRef GetScopedLockSafeForDelete();
@@ -563,6 +560,12 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureDataLayout& src,
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
+
+    // Backends can overload this method to insert logic to retrives debug layer errors or return
+    // stored debug layer errors as a DAWN_INTERNAL_ERROR.
+    virtual MaybeError CheckDebugLayerErrors();
+    // Lets backend add a "reason" to the device loss error messages.
+    virtual void AppendDeviceLostMessage(ErrorData* error);
 
     wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
