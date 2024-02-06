@@ -70,10 +70,11 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
     for (SingleShaderStage stage : IterateStages(activeStages)) {
         const ShaderModule* module = ToBackend(stages[stage].module.Get());
         GLuint shader;
-        DAWN_TRY_ASSIGN(shader, module->CompileShader(
-                                    gl, stages[stage], stage, &combinedSamplers[stage], layout,
-                                    &needsPlaceholderSampler, &mNeedsTextureBuiltinUniformBuffer,
-                                    &mBindingPointEmulatedBuiltins));
+        DAWN_TRY_ASSIGN(shader, module->CompileShader(gl, stages[stage], stage, UsesInstanceIndex(),
+                                                      &combinedSamplers[stage], layout,
+                                                      &needsPlaceholderSampler,
+                                                      &mNeedsTextureBuiltinUniformBuffer,
+                                                      &mBindingPointEmulatedBuiltins));
         gl.AttachShader(mProgram, shader);
         glShaders.push_back(shader);
     }
@@ -215,6 +216,10 @@ const Buffer* PipelineGL::GetInternalUniformBuffer() const {
 
 const BindingPointToFunctionAndOffset& PipelineGL::GetBindingPointBuiltinDataInfo() const {
     return mBindingPointEmulatedBuiltins;
+}
+
+bool PipelineGL::UsesInstanceIndex() const {
+    return false;
 }
 
 }  // namespace dawn::native::opengl

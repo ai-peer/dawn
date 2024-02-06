@@ -372,4 +372,8 @@ void RenderPipeline::ApplyNow(PersistentPipelineState& persistentPipelineState) 
     }
 }
 
+bool RenderPipeline::UsesInstanceIndex() const {
+    return RenderPipelineBase::UsesInstanceIndex();
+}
+
 }  // namespace dawn::native::opengl
