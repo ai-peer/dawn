@@ -173,6 +173,7 @@ class EventManager::TrackedEvent::WaitRef : dawn::NonCopyable {
     WaitRef(WaitRef&& rhs) = default;
     WaitRef& operator=(WaitRef&& rhs) = default;
 
+    WaitRef();
     explicit WaitRef(TrackedEvent* future);
     ~WaitRef();
 
@@ -180,14 +181,14 @@ class EventManager::TrackedEvent::WaitRef : dawn::NonCopyable {
     const TrackedEvent* operator->() const;
 
   private:
-    Ref<TrackedEvent> mRef;
+    Ref<TrackedEvent> mRef = nullptr;
 };
 
-// TrackedEvent::WaitRef plus a few extra fields needed for some implementations.
+// TrackedEvent plus a few extra fields needed for some implementations.
 // Sometimes they'll be unused, but that's OK; it simplifies code reuse.
 struct TrackedFutureWaitInfo {
     FutureID futureID;
-    EventManager::TrackedEvent::WaitRef event;
+    Ref<EventManager::TrackedEvent> event;
     // Used by EventManager::ProcessPollEvents
     size_t indexInInfos;
     // Used by EventManager::ProcessPollEvents and ::WaitAny
