@@ -69,6 +69,23 @@ class ClampFragDepth final : public Castable<ClampFragDepth, ast::transform::Tra
     /// Destructor
     ~ClampFragDepth() override;
 
+    /// Transform configuration options
+    struct Config final : public Castable<Config, ast::transform::Data> {
+        /// Constructor
+        /// @param first_vertex_off Offset of the viewportMin push constant
+        /// @param first_instance_off Offset of the viewportMax push constant
+        Config(std::optional<uint32_t> viewport_min_off, std::optional<uint32_t> viewport_max_off);
+
+        /// Destructor
+        ~Config() override;
+
+        /// Offset of the viewportMin push constant
+        std::optional<uint32_t> viewport_min_offset;
+
+        /// Offset of the viewportMax push constant
+        std::optional<uint32_t> viewport_max_offset;
+    };
+
     /// @copydoc ast::transform::Transform::Apply
     ApplyResult Apply(const Program& program,
                       const ast::transform::DataMap& inputs,
