@@ -111,6 +111,15 @@ TEST_F(OffsetFirstIndexTest, EmptyModule) {
 
 TEST_F(OffsetFirstIndexTest, BasicVertexShader) {
     auto* src = R"(
+enable chromium_experimental_push_constant;
+
+struct PushConstants {
+  first_vertex : u32,
+  first_instance : u32,
+}
+
+var<push_constant> push_constants : PushConstants;
+
 @vertex
 fn entry() -> @builtin(position) vec4<f32> {
   return vec4<f32>();
