@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5432445e_32c6550e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-06T17:35:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4b42008268a93b5fb14606b5fcee30bb711a7670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1fe78f4_ce50aa6f",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-06T17:35:38Z",
+      "side": 1,
+      "message": "now that I made uncaptured error spontaneous, do we still need a tick at all?\n\n(I probably should have attempted to remove this in my CL)",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 83
+      },
+      "revId": "4b42008268a93b5fb14606b5fcee30bb711a7670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
