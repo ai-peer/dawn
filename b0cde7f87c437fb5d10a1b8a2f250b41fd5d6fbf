@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb88efe_5716702a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-06T11:35:14Z",
+      "side": 1,
+      "message": "Still LGTM! Thank you for the iterations.",
+      "revId": "b0cde7f87c437fb5d10a1b8a2f250b41fd5d6fbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
