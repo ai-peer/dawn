@@ -572,6 +572,15 @@ void DeviceBase::Destroy() {
 
     mCaches = nullptr;
     mState = State::Destroyed;
+
+    if (!mBackendValidationErrors.empty()) {
+        dawn::ErrorLog() << "Backend validation errors were reported but not caught before device "
+                            "destruction:\n";
+        for (auto message : mBackendValidationErrors) {
+            dawn::ErrorLog() << " - " << message << "\n";
+        }
+        mBackendValidationErrors.clear();
+    }
 }
 
 void DeviceBase::APIDestroy() {
@@ -581,8 +590,6 @@ void DeviceBase::APIDestroy() {
 void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
                              InternalErrorType additionalAllowedErrors,
                              WGPUDeviceLostReason lost_reason) {
-    AppendDebugLayerMessages(error.get());
-
     InternalErrorType type = error->GetType();
     if (type != InternalErrorType::Validation) {
         // D3D device can provide additional device removed reason. We would
@@ -664,6 +671,20 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         }
     }
 }
+
+void DeviceBase::RecordBackendValidationError(std::string message) {
+#if defined(DAWN_ENABLE_ASSERTS)
+    // In debug, print the validation error and crash immediately so we might have the culprit in
+    // the call stack.
+    dawn::ErrorLog() << "A dawn backend validation error was reported:\n";
+    dawn::ErrorLog() << message;
+    dawn::BreakPoint();
+#endif  // defined(DAWN_ENABLE_ASSERTS)
+
+    mBackendValidationErrors.push_back(std::move(message));
+}
+
+void DeviceBase::AppendDeviceLostMessage(ErrorData*) {}
 
 void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
                               InternalErrorType additionalAllowedErrors) {
@@ -1433,7 +1454,22 @@ bool DeviceBase::APITick() {
 }
 
 MaybeError DeviceBase::Tick() {
-    if (IsLost() || !mQueue->HasScheduledCommands()) {
+    if (IsLost()) {
+        return {};
+    }
+
+    if (!mBackendValidationErrors.empty()) {
+        std::ostringstream s;
+        s << "Backend validation errors were reported:\n";
+        for (auto message : mBackendValidationErrors) {
+            s << " - " << message << "\n";
+        }
+        mBackendValidationErrors.clear();
+
+        return DAWN_INTERNAL_ERROR(s.str());
+    }
+
+    if (!mQueue->HasScheduledCommands()) {
         return {};
     }
 

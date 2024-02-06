@@ -170,6 +170,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     InstanceBase* GetInstance() const;
     AdapterBase* GetAdapter() const;
     PhysicalDeviceBase* GetPhysicalDevice() const;
+    QueueBase* GetQueue() const;
     virtual dawn::platform::Platform* GetPlatform() const;
 
     // Returns the Format corresponding to the wgpu::TextureFormat or an error if the format
@@ -391,7 +392,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     void EmitLog(WGPULoggingType loggingType, const char* message);
     void EmitCompilationLog(const ShaderModuleBase* module);
     void APIForceLoss(wgpu::DeviceLostReason reason, const char* message);
-    QueueBase* GetQueue() const;
+    // Records messages produced by validation layers of the backend APIs.
+    void RecordBackendValidationError(std::string message);
 
     friend class IgnoreLazyClearCountScope;
 
@@ -451,9 +453,6 @@ class DeviceBase : public RefCountedWithExternalCount {
     const std::string& GetLabel() const;
     void APISetLabel(const char* label);
     void APIDestroy();
-
-    virtual void AppendDebugLayerMessages(ErrorData* error) {}
-    virtual void AppendDeviceLostMessage(ErrorData* error) {}
 
     // It is guaranteed that the wrapped mutex will outlive the Device (if the Device is deleted
     // before the AutoLockAndHoldRef).
@@ -567,6 +566,9 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
 
+    // Lets backend add a "reason" to the device loss error messages.
+    virtual void AppendDeviceLostMessage(ErrorData* error);
+
     wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mUncapturedErrorUserdata = nullptr;
@@ -581,6 +583,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
+    std::vector<std::string> mBackendValidationErrors;
 
     Ref<AdapterBase> mAdapter;
 
