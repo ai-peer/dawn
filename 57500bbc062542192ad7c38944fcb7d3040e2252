@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "57500bbc062542192ad7c38944fcb7d3040e2252",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad04aebd_077d620e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-06T22:26:14Z",
+      "side": 1,
+      "message": "kokoro rebuild",
+      "revId": "57500bbc062542192ad7c38944fcb7d3040e2252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
