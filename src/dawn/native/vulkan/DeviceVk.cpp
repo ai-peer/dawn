@@ -311,7 +311,6 @@ MaybeError Device::TickImpl() {
     mDescriptorAllocatorsPendingDeallocation.ClearUpTo(completedSerial);
 
     DAWN_TRY(queue->SubmitPendingCommands());
-    DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
     return {};
 }
@@ -765,48 +764,8 @@ uint32_t Device::GetComputeSubgroupSize() const {
     return ToBackend(GetPhysicalDevice())->GetDefaultComputeSubgroupSize();
 }
 
-void Device::OnDebugMessage(std::string message) {
-    mDebugMessages.push_back(std::move(message));
-}
-
-MaybeError Device::CheckDebugLayerAndGenerateErrors() {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled() ||
-        mDebugMessages.empty()) {
-        return {};
-    }
-
-    auto error = DAWN_INTERNAL_ERROR("The Vulkan validation layer reported uncaught errors.");
-
-    AppendDebugLayerMessages(error.get());
-
-    return std::move(error);
-}
-
-void Device::AppendDebugLayerMessages(ErrorData* error) {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
-        return;
-    }
-
-    while (!mDebugMessages.empty()) {
-        error->AppendBackendMessage(std::move(mDebugMessages.back()));
-        mDebugMessages.pop_back();
-    }
-}
-
-void Device::CheckDebugMessagesAfterDestruction() const {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled() ||
-        mDebugMessages.empty()) {
-        return;
-    }
-
-    dawn::ErrorLog()
-        << "Some VVL messages were not handled before dawn::native::vulkan::Device destruction:";
-    for (const auto& message : mDebugMessages) {
-        dawn::ErrorLog() << " - " << message;
-    }
-
-    // Crash in debug
-    DAWN_ASSERT(false);
+const char* Device::GetDebugPrefix() const {
+    return mDebugPrefix.c_str();
 }
 
 void Device::DestroyImpl() {
@@ -869,11 +828,6 @@ void Device::DestroyImpl() {
     DAWN_ASSERT(mVkDevice != VK_NULL_HANDLE);
     fn.DestroyDevice(mVkDevice, nullptr);
     mVkDevice = VK_NULL_HANDLE;
-
-    // No additonal Vulkan commands should be done by this device after this function. Check for any
-    // remaining Vulkan Validation Layer messages that may have been added during destruction or not
-    // handled prior to destruction.
-    CheckDebugMessagesAfterDestruction();
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
