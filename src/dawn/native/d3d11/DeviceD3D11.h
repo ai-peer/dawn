@@ -146,9 +146,7 @@ class Device final : public d3d::Device {
         const SharedFenceDescriptor* descriptor) override;
 
     void DestroyImpl() override;
-    MaybeError CheckDebugLayerAndGenerateErrors();
-    void AppendDebugLayerMessages(ErrorData* error) override;
-    void AppendDeviceLostMessage(ErrorData* error) override;
+    MaybeError CheckDebugLayerErrors() override;
 
     ComPtr<ID3D11Device> mD3d11Device;
     bool mIsDebugLayerEnabled = false;

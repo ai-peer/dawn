@@ -118,10 +118,9 @@ class Device final : public DeviceBase {
 
     void SetLabelImpl() override;
 
-    void OnDebugMessage(std::string message);
-
     // Used to associate this device with validation layer messages.
-    const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
+    const char* GetDebugPrefix() const;
+    void OnDebugMessage(std::string message);
 
   private:
     Device(AdapterBase* adapter,
@@ -174,8 +173,7 @@ class Device final : public DeviceBase {
 
     ResultOrError<VulkanDeviceKnobs> CreateDevice(VkPhysicalDevice vkPhysicalDevice);
 
-    MaybeError CheckDebugLayerAndGenerateErrors();
-    void AppendDebugLayerMessages(ErrorData* error) override;
+    MaybeError CheckDebugLayerErrors() override;
     void CheckDebugMessagesAfterDestruction() const;
 
     void DestroyImpl() override;

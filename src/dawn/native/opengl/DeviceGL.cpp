@@ -47,15 +47,21 @@
 #include "dawn/native/opengl/ShaderModuleGL.h"
 #include "dawn/native/opengl/TextureGL.h"
 
+namespace dawn::native::opengl {
+
 namespace {
 
-void KHRONOS_APIENTRY OnGLDebugMessage(GLenum source,
-                                       GLenum type,
-                                       GLuint id,
-                                       GLenum severity,
-                                       GLsizei length,
-                                       const GLchar* message,
-                                       const void* userParam) {
+void KHRONOS_APIENTRY ForwardDebugCallbackToDevice(GLenum source,
+                                                   GLenum type,
+                                                   GLuint id,
+                                                   GLenum severity,
+                                                   GLsizei length,
+                                                   const GLchar* message,
+                                                   const void* userdata) {
+    if (type != GL_DEBUG_TYPE_ERROR) {
+        return;
+    }
+
     const char* sourceText;
     switch (source) {
         case GL_DEBUG_SOURCE_API:
@@ -100,21 +106,21 @@ void KHRONOS_APIENTRY OnGLDebugMessage(GLenum source,
             break;
     }
 
-    if (type == GL_DEBUG_TYPE_ERROR) {
-        dawn::WarningLog() << "OpenGL error:"
-                           << "\n    Source: " << sourceText      //
-                           << "\n    ID: " << id                  //
-                           << "\n    Severity: " << severityText  //
-                           << "\n    Message: " << message;
+    std::stringstream s;
+    s << "OpenGL error:"
+      << "\n    Source: " << sourceText      //
+      << "\n    ID: " << id                  //
+      << "\n    Severity: " << severityText  //
+      << "\n    Message: " << message;
 
-        // Abort on an error when in Debug mode.
-        DAWN_UNREACHABLE();
-    }
+    Device* device = static_cast<Device*>(const_cast<void*>(userdata));
+    device->OnDebugCallback(s.str());
 }
 
-}  // anonymous namespace
+void KHRONOS_APIENTRY
+IgnoreDebugCallback(GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void*) {}
 
-namespace dawn::native::opengl {
+}  // anonymous namespace
 
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
@@ -155,6 +161,8 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     bool hasDebugOutput = gl.IsAtLeastGL(4, 3) || gl.IsAtLeastGLES(3, 2);
 
     if (GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled() && hasDebugOutput) {
+        mUsingDebugOutput = true;
+
         gl.Enable(GL_DEBUG_OUTPUT);
         gl.Enable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
 
@@ -175,7 +183,7 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
         // Any message which is not an error or performance concern
         gl.DebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0,
                                nullptr, GL_FALSE);
-        gl.DebugMessageCallback(&OnGLDebugMessage, nullptr);
+        gl.DebugMessageCallback(&ForwardDebugCallbackToDevice, this);
     }
 
     // Set initial state.
@@ -407,6 +415,12 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
 
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
+
+    // Unregister the debug callback as it could dereference this device after it has been freed.
+    if (mUsingDebugOutput) {
+        const OpenGLFunctions& gl = GetGL();
+        gl.DebugMessageCallback(&IgnoreDebugCallback, nullptr);
+    }
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
@@ -425,6 +439,24 @@ const OpenGLFunctions& Device::GetGL() const {
     mContext->MakeCurrent();
     ToBackend(GetQueue())->OnGLUsed();
     return mGL;
+}
+
+void Device::OnDebugCallback(std::string message) {
+    mDebugMessages.push_back(std::move(message));
+}
+
+MaybeError Device::CheckDebugLayerErrors() {
+    if (mDebugMessages.empty()) {
+        return {};
+    }
+
+    auto error = DAWN_INTERNAL_ERROR("GL debug output gave these errors:");
+    for (auto& message : mDebugMessages) {
+        error->AppendBackendMessage(std::move(message));
+    }
+    mDebugMessages.clear();
+
+    return std::move(error);
 }
 
 }  // namespace dawn::native::opengl

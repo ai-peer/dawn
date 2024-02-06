@@ -29,20 +29,16 @@
 #define SRC_DAWN_NATIVE_OPENGL_DEVICEGL_H_
 
 #include <memory>
-
-#include "dawn/native/dawn_platform.h"
+#include <string>
+#include <vector>
 
 #include "dawn/common/Platform.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/QuerySet.h"
+#include "dawn/native/dawn_platform.h"
 #include "dawn/native/opengl/Forward.h"
 #include "dawn/native/opengl/GLFormat.h"
 #include "dawn/native/opengl/OpenGLFunctions.h"
-
-// Remove windows.h macros after glad's include of windows.h
-#if DAWN_PLATFORM_IS(WINDOWS)
-#include "dawn/common/windows_with_undefs.h"
-#endif
 
 using EGLImage = void*;
 
@@ -100,6 +96,8 @@ class Device final : public DeviceBase {
         virtual void MakeCurrent() = 0;
     };
 
+    void OnDebugCallback(std::string message);
+
   private:
     Device(AdapterBase* adapter,
            const UnpackedPtr<DeviceDescriptor>& descriptor,
@@ -136,6 +134,8 @@ class Device final : public DeviceBase {
     Ref<RenderPipelineBase> CreateUninitializedRenderPipelineImpl(
         const UnpackedPtr<RenderPipelineDescriptor>& descriptor) override;
 
+    MaybeError CheckDebugLayerErrors() override;
+
     ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
         const Surface* surface) const override;
 
@@ -146,6 +146,9 @@ class Device final : public DeviceBase {
 
     GLFormatTable mFormatTable;
     std::unique_ptr<Context> mContext = nullptr;
+
+    bool mUsingDebugOutput = false;
+    std::vector<std::string> mDebugMessages;
 };
 
 }  // namespace dawn::native::opengl

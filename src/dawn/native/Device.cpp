@@ -536,8 +536,27 @@ void DeviceBase::Destroy() {
         mQueue->Destroy();
     }
 
+    // Handle any leftover backend validation error after the destruction sequence so they are not
+    // silently ignored.
+    auto CheckLeftoverDebugLayerErrors = [&]() {
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            auto error = CheckDebugLayerErrors();
+            if (error.IsError()) {
+                auto errorData = error.AcquireError();
+                dawn::ErrorLog() << "Some backend validation errors were not surfaced before "
+                                    "device destruction\n"
+                                 << errorData->GetFormattedMessage();
+
+                // Crash in debug
+                DAWN_ASSERT(false);
+            }
+        }
+    };
+
     // Now that the GPU timeline is empty, destroy the backend device.
+    CheckLeftoverDebugLayerErrors();
     DestroyImpl();
+    CheckLeftoverDebugLayerErrors();
 
     mCaches = nullptr;
     mState = State::Destroyed;
@@ -550,8 +569,6 @@ void DeviceBase::APIDestroy() {
 void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
                              InternalErrorType additionalAllowedErrors,
                              WGPUDeviceLostReason lost_reason) {
-    AppendDebugLayerMessages(error.get());
-
     InternalErrorType type = error->GetType();
     if (type != InternalErrorType::Validation) {
         // D3D device can provide additional device removed reason. We would
@@ -633,6 +650,11 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         }
     }
 }
+
+MaybeError DeviceBase::CheckDebugLayerErrors() {
+    return {};
+}
+void DeviceBase::AppendDeviceLostMessage(ErrorData*) {}
 
 void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
                               InternalErrorType additionalAllowedErrors) {
@@ -1372,6 +1394,10 @@ bool DeviceBase::APITick() {
 }
 
 MaybeError DeviceBase::Tick() {
+    if (GetInstance()->IsBackendValidationEnabled()) {
+        DAWN_TRY(CheckDebugLayerErrors());
+    }
+
     if (IsLost() || !mQueue->HasScheduledCommands()) {
         return {};
     }

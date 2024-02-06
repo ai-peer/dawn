@@ -149,11 +149,7 @@ ID3D11Device5* Device::GetD3D11Device5() const {
 }
 
 MaybeError Device::TickImpl() {
-    // Check for debug layer messages before executing the command context in case we encounter an
-    // error during execution and early out as a result.
-    DAWN_TRY(CheckDebugLayerAndGenerateErrors());
-    DAWN_TRY(ToBackend(GetQueue())->SubmitPendingCommands());
-    return {};
+    return ToBackend(GetQueue())->SubmitPendingCommands();
 }
 
 void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
@@ -316,46 +312,22 @@ const DeviceInfo& Device::GetDeviceInfo() const {
     return ToBackend(GetPhysicalDevice())->GetDeviceInfo();
 }
 
-MaybeError Device::CheckDebugLayerAndGenerateErrors() {
-    if (!mIsDebugLayerEnabled) {
-        return {};
-    }
-
+MaybeError Device::CheckDebugLayerErrors() {
     ComPtr<ID3D11InfoQueue> infoQueue;
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&infoQueue),
                           "D3D11 QueryInterface ID3D11Device to ID3D11InfoQueue"));
-    uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
 
     // Check if any errors have occurred otherwise we would be creating an empty error. Note
     // that we use GetNumStoredMessagesAllowedByRetrievalFilter instead of GetNumStoredMessages
     // because we only convert WARNINGS or higher messages to dawn errors.
+    uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
     if (totalErrors == 0) {
         return {};
     }
 
     auto error = DAWN_INTERNAL_ERROR("The D3D11 debug layer reported uncaught errors.");
-
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error.get());
-
     return error;
-}
-
-void Device::AppendDebugLayerMessages(ErrorData* error) {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
-        return;
-    }
-
-    ComPtr<ID3D11InfoQueue> infoQueue;
-    if (FAILED(mD3d11Device.As(&infoQueue))) {
-        return;
-    }
-    uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
-
-    if (totalErrors == 0) {
-        return;
-    }
-
-    AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
 void Device::AppendDeviceLostMessage(ErrorData* error) {
