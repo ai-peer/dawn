@@ -75,6 +75,7 @@ class PipelineGL {
                               const PipelineLayout* layout,
                               const PerStage<ProgrammableStage>& stages);
     void DeleteProgram(const OpenGLFunctions& gl);
+    virtual bool UsesInstanceIndex() const;
 
   private:
     GLuint mProgram;
