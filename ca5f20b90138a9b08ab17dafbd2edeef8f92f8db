@@ -234,6 +234,24 @@
       "parentUuid": "92b4b086_c828481c",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "987ecab3_d140eeca",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-06T20:08:59Z",
+      "side": 1,
+      "message": "Gotcha, it makes sense for the Kotlin bindings to do just that at first,and the C++ header could be improved a TON.",
+      "parentUuid": "d12f3571_58c3f658",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
