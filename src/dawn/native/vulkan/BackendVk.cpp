@@ -545,7 +545,7 @@ bool VulkanInstance::HandleDeviceMessage(std::string deviceDebugPrefix, std::str
     std::lock_guard<std::mutex> lock(mMessageListenerDevicesMutex);
     auto it = mMessageListenerDevices.find(deviceDebugPrefix);
     if (it != mMessageListenerDevices.end()) {
-        it->second->OnDebugMessage(std::move(message));
+        it->second->RecordBackendValidationError(std::move(message));
         return true;
     }
     return false;
