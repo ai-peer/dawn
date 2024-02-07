@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "970c7f8d_665e704a",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T11:14:41Z",
+      "side": 1,
+      "message": "Push constants don\u0027t need to be in a struct?\n\n```\nvar\u003cpush_constant\u003e P : i32;\n```\n\nIs valid. Please add tests for this.",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 33
+      },
+      "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
