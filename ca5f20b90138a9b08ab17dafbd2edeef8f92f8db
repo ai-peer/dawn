@@ -55,6 +55,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0904ff2d_a81aca02",
+        "filename": "tools/android/.gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T10:48:56Z",
+      "side": 1,
+      "message": "Already included in the root `.gitignore` file.",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12dd2a0_04c887b2",
+        "filename": "tools/android/.gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T10:48:56Z",
+      "side": 1,
+      "message": "Already included in the root `.gitignore` file.",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a5993b6_e815c63a",
         "filename": "tools/android/README.md",
         "patchSetId": 4
@@ -78,6 +112,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc513d3f_9d81f7c3",
+        "filename": "tools/android/build.gradle",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T10:48:56Z",
+      "side": 1,
+      "message": "Any way to add a copyright header to these files?",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55252e61_8ae75f5d",
         "filename": "tools/android/gradlew",
         "patchSetId": 4
@@ -89,6 +140,24 @@
       "writtenOn": "2024-02-06T19:55:45Z",
       "side": 1,
       "message": "That\u0027s not ideal because it gets our repo in a mixed license mode (which is terrible for the google3 import). If these scripts are owned by google, would it be possible to relicense them similarly to all other files in Dawn? Ditto for other files.",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c245b70_2398af65",
+        "filename": "tools/android/gradlew",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T10:48:56Z",
+      "side": 1,
+      "message": "+1 to this. While we can filter out this directory in the G3 import, this will cause a bunch of headaches in the future. If you cannot, then we may need to look at adding this under the third_party directory.",
+      "parentUuid": "55252e61_8ae75f5d",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +226,23 @@
       "writtenOn": "2024-02-06T19:55:45Z",
       "side": 1,
       "message": "nit: this is already checked at [1]",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2e6ffe_f19b764e",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T10:48:56Z",
+      "side": 1,
+      "message": "We\u0027re having externals ask about shared builds. This seems useful to have in the root CMakeLists.txt. If required, conditionally with `if(BUILD_SHARED_LIBS)`",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
