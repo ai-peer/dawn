@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2168a3_c8801cec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T17:28:51Z",
+      "side": 1,
+      "message": "Would be great to get an e2e test with the `polyfill_f16_io` flag enabled and disabled.",
+      "revId": "3d97e6e844bb04f6743c748ca514515d19db028d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bb7c70_1151cb83",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T17:28:51Z",
+      "side": 1,
+      "message": "const bool?",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 12
+      },
+      "revId": "3d97e6e844bb04f6743c748ca514515d19db028d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
