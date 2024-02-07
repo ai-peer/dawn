@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d14abb76_5b0698cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T14:01:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b41f55e_051831a3",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T14:01:39Z",
+      "side": 1,
+      "message": "Nit: could be \u003d",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb3d8066_e2341f3f",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T14:01:39Z",
+      "side": 1,
+      "message": "Ibid",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97c40e43_b6749292",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T14:01:39Z",
+      "side": 1,
+      "message": "uNit: actually, all of this could be done with token pasting to avoid heap usage.",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
