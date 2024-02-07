@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "289b8a07_90117e78",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-07T01:31:34Z",
+      "side": 1,
+      "message": "(probably obsolete) This will fill the vector with default WaitRefs but then push_back more WaitRefs to the end. Use reserve() here instead (may also no longer need the WaitRef default constructor).",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19e7c532_8ca0e6bd",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-07T01:31:34Z",
+      "side": 1,
+      "message": "Making the WaitRefs tighter makes the ASSERTs happy, but isn\u0027t the real problem still here - that we can end up with two ProcessEvents trying to process the same event? The idea of the WaitRef is to be a safer version of Ref and I think it was succeeding in catching an error here.\n\nThe mutex wrapper of `mEvents` (then `mTrackers-\u003epollEvents`) used to wrap the entire lifetime of the WaitRef, instead of having a separate mProcessEventLock on the inner section. Do you remember why this changed?\nhttps://dawn-review.googlesource.com/c/dawn/+/151532/2..4\n\nWaitAny splits the critical section because it independent WaitAny calls are supposed to be able to run in parallel (WaitRef tries to catch bugs, in debug builds). But there\u0027s no such thing as independent ProcessEvents calls since they always wait the same list.",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53178596_fddec50a",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-07T01:31:34Z",
+      "side": 1,
+      "message": "This seems to no longer be referenced outside EventManager.cpp, so maybe it should be moved to .cpp in a followup.",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a4cff9_e5dcee2f",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-07T01:31:34Z",
+      "side": 1,
+      "message": "This seems to be no longer used outside EventManager (aside from some forward declarations that are unused). We should move it into the .cpp in a followup.",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
