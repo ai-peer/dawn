@@ -72,17 +72,16 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
         auto* ty = var->Type()->UnwrapRef();
         auto* str = ty->As<sem::Struct>();
 
-        // Always try to wrap the buffer type into a struct. We can not do so only if it is a struct
-        // but without a fixed footprint, i.e. contains a runtime-sized array as its member. Note
-        // that such struct type can be only used as storage buffer variables' type. Also note that
-        // any buffer struct type that may be nested by another type must have a fixed footprint,
-        // therefore will be wrapped.
-        bool needs_wrapping =
-            !str ||  // Type is not a structure
-            (str->HasFixedFootprint() &&
-             var->AddressSpace() !=
-                 core::AddressSpace::kPushConstant);  // Struct has a fixed footprint and is not a
-                                                      // push constant
+        // Non-struct types are always wrapped into structs. Struct types are wrapped if they
+        // have a fixed footprint, i.e. do not contain a runtime-sized array, and are not
+        // push constants. Structs containing runtime-sized arrays can only be used as
+        // storage buffer variables. Push constant structs do not require wrapping, since they
+        // cannot be aggregately assigned. Also note that any buffer struct type that may be
+        // nested by another type must have a fixed footprint, therefore will be wrapped.
+        bool needs_wrapping = !str ||                       // Type is not a structure
+                              (str->HasFixedFootprint() &&  // Struct has a fixed footprint
+                               var->AddressSpace() !=       // and is not a push constant
+                                   core::AddressSpace::kPushConstant);
 
         if (needs_wrapping) {
             const char* kMemberName = "inner";
