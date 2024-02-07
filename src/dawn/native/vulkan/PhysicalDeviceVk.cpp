@@ -244,7 +244,6 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
         mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
-        mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE) {
         EnableFeature(Feature::ShaderF16);
     }
@@ -689,6 +688,14 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // By default try to initialize workgroup memory with OpConstantNull according to the Vulkan
     // extension VK_KHR_zero_initialize_workgroup_memory.
     deviceToggles->Default(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension, true);
+
+    // The environment can only request to use StorageInputOutput16 when the capability is
+    // available.
+    if (GetDeviceInfo()._16BitStorageFeatures.storageInputOutput16 == VK_FALSE) {
+        deviceToggles->ForceSet(Toggle::VulkanUseStorageInputOutput16, false);
+    }
+    // By default try to use the StorageInputOutput16 capability.
+    deviceToggles->Default(Toggle::VulkanUseStorageInputOutput16, true);
 
     // Inject fragment shaders in all vertex-only pipelines.
     // TODO(crbug.com/dawn/1698): relax this requirement where the Vulkan spec allows.
