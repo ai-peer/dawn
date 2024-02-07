@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8211619e_b4085c94",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T14:51:19Z",
+      "side": 1,
+      "message": "Please can you add a comment here, or turn this to a `TINT_ICE() \u003c\u003c \"expected var\u003cpush_constant\u003e type to be struct. Was AddBlockAttribute run?\"`\n\nPlease can you also update the transform\u0027s comment to say that `AddBlockAttribute` must be run first?",
+      "parentUuid": "32811aff_235a054c",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 33
+      },
+      "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d0c2938_456f9ee9",
         "filename": "test/tint/var/uses/push_constant_and_instance_index.wgsl",
         "patchSetId": 21
@@ -61,6 +85,24 @@
       "writtenOn": "2024-02-07T14:10:32Z",
       "side": 1,
       "message": "Er, here.",
+      "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d80dbc_c056340b",
+        "filename": "test/tint/var/uses/push_constant_and_instance_index.wgsl",
+        "patchSetId": 21
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T14:51:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4d0c2938_456f9ee9",
       "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -78,6 +120,24 @@
       "writtenOn": "2024-02-07T14:09:45Z",
       "side": 1,
       "message": "*here",
+      "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7055f635_1e2f787f",
+        "filename": "test/tint/var/uses/push_constant_and_instance_index.wgsl.expected.wgsl",
+        "patchSetId": 21
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T14:51:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9d4d8eb8_035576f0",
       "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
