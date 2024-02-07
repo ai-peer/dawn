@@ -298,9 +298,8 @@ Future InstanceBase::APIRequestAdapterF(const RequestAdapterOptions* options,
     }
     auto adapters = EnumerateAdapters(options);
 
-    FutureID futureID = GetEventManager()->TrackEvent(
-        callbackInfo.mode, AcquireRef(new RequestAdapterEvent(
-                               callbackInfo, adapters.empty() ? nullptr : std::move(adapters[0]))));
+    FutureID futureID = GetEventManager()->TrackEvent(AcquireRef(new RequestAdapterEvent(
+        callbackInfo, adapters.empty() ? nullptr : std::move(adapters[0]))));
     return {futureID};
 }
 
