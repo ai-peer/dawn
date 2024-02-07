@@ -33,6 +33,24 @@
       "message": "Comment could do with updating.",
       "revId": "446bb14778a8eba857d97854055da552b4eb470a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e43d1a_d3c693af",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T14:48:57Z",
+      "side": 1,
+      "message": "Please can you do this as a followup?",
+      "parentUuid": "16d527f4_f501ee9f",
+      "revId": "446bb14778a8eba857d97854055da552b4eb470a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
