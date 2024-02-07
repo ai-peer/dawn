@@ -129,6 +129,7 @@ enum class Toggle {
     ExposeWGSLExperimentalFeatures,
     DisablePolyfillsOnIntegerDivisonAndModulo,
     EnableImmediateErrorHandling,
+    VulkanDisableStorageInputOutput16,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,

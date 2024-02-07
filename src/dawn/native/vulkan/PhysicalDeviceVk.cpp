@@ -244,7 +244,6 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
         mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
-        mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE) {
         EnableFeature(Feature::ShaderF16);
     }
