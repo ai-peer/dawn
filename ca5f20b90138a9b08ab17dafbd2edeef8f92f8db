@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cebb7cf5_51a6c0d9",
+        "filename": "tools/android/.gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0904ff2d_a81aca02",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c12dd2a0_04c887b2",
@@ -83,6 +101,24 @@
       "writtenOn": "2024-02-07T10:48:56Z",
       "side": 1,
       "message": "Already included in the root `.gitignore` file.",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c5ae0d_0613b65e",
+        "filename": "tools/android/.gitignore",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c12dd2a0_04c887b2",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05bd4ac0_750ae510",
+        "filename": "tools/android/README.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5993b6_e815c63a",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 52
+      },
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc513d3f_9d81f7c3",
@@ -123,6 +183,24 @@
       "writtenOn": "2024-02-07T10:48:56Z",
       "side": 1,
       "message": "Any way to add a copyright header to these files?",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0630b039_6ed06f81",
+        "filename": "tools/android/build.gradle",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc513d3f_9d81f7c3",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80341dad_d0441aed",
+        "filename": "tools/android/gradlew",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Replaced with instructions on how to get the scripts, if needed for a shell build (Android Studio does not require them).",
+      "parentUuid": "1c245b70_2398af65",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7bf67bc_d5febfb6",
@@ -179,6 +275,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64284a01_0ca8ae4f",
+        "filename": "tools/android/webgpu/build.gradle",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Yes; I\u0027ve been incrementing the number in development because it\u0027s useful to ensure demo apps are getting the right version; do you think it should be given an \u0027alpha\u0027 version number or similar?",
+      "parentUuid": "f7bf67bc_d5febfb6",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10427d1a_5d5be583",
@@ -192,6 +306,24 @@
       "writtenOn": "2024-02-06T19:55:45Z",
       "side": 1,
       "message": "This is missing a license header.",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a4d253_343af53f",
+        "filename": "tools/android/webgpu/src/main/cpp/BundleLibraries.cmake",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10427d1a_5d5be583",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -232,6 +364,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef34893c_a83b76d8",
+        "filename": "tools/android/webgpu/src/main/cpp/BundleLibraries.cmake",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Can you clarify which check is repeated? I am not seeing it.",
+      "parentUuid": "bce28147_a94a16e0",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f2e6ffe_f19b764e",
         "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
         "patchSetId": 4
@@ -243,6 +393,24 @@
       "writtenOn": "2024-02-07T10:48:56Z",
       "side": 1,
       "message": "We\u0027re having externals ask about shared builds. This seems useful to have in the root CMakeLists.txt. If required, conditionally with `if(BUILD_SHARED_LIBS)`",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e500b22a_a1475cd1",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Will do. Will do follow up CL because of the risk of breaking other things. I logged https://buganizer.corp.google.com/issues/324208631 to track but can\u0027t work out how to assign that bug to myself!",
+      "parentUuid": "1f2e6ffe_f19b764e",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -270,6 +438,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dfb81ce_9922c3fc",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "https://buganizer.corp.google.com/issues/320624787",
+      "parentUuid": "71a8e41a_a5e27be1",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 93
+      },
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e575d28e_a6384f46",
@@ -283,6 +475,24 @@
       "writtenOn": "2024-02-06T19:55:45Z",
       "side": 1,
       "message": "Shouldn\u0027t the build be in its own folder so this isn\u0027t an issue?",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb8599b_aa769060",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "As I need to copy the header file out of the CMAKE_SOURCE_DIR to somewhere that AGP/build.gradle can see it (in order to get bundled with \u0027prefab\u0027) I want to make sure there\u0027s no chance that we might be leaving content in this folder from an earlier build. I can\u0027t think of any destination that is guaranteed to get wiped each time that is also visible to AGP (AGP can\u0027t use CMAKE_ macros).",
+      "parentUuid": "e575d28e_a6384f46",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -336,6 +546,24 @@
       "side": 1,
       "message": "Gotcha, it makes sense for the Kotlin bindings to do just that at first,and the C++ header could be improved a TON.",
       "parentUuid": "d12f3571_58c3f658",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb03206c_0a771f03",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T13:57:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "987ecab3_d140eeca",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
