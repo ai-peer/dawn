@@ -63,6 +63,30 @@
       },
       "revId": "843d4f39edd1e7da0dfabda1717fe63e3f4379c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a93366_572fcb13",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-07T18:39:57Z",
+      "side": 1,
+      "message": "I think it should probably be like VulkanUseZeroInitializeWorkgroupMemoryExtension where it defaults to True when available, and then it can be force-set to false if desired",
+      "parentUuid": "8805413c_5af4aadb",
+      "range": {
+        "startLine": 341,
+        "startChar": 8,
+        "endLine": 341,
+        "endChar": 74
+      },
+      "revId": "843d4f39edd1e7da0dfabda1717fe63e3f4379c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
