@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33137af_1aad007c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-02-07T17:42:32Z",
+      "side": 1,
+      "message": "There\u0027s existing E2E coverage for f16 which covers the default case (no polyfill), so I just added a test that turns off the capability to test the polyfill path.",
+      "revId": "c4e9405b8ed9172f87e9148949ec813dc6f601b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
