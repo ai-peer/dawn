@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e297d4c8_01381715",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-07T22:07:39Z",
+      "side": 1,
+      "message": "\u003e We had to break the critical section in two because otherwise callbacks that call ProcessEvents would be re-entrant and dead-lock.\n\nFrom calling the callback inside the lock? They shouldn\u0027t -- callbacks are called in a separate loop after the lock is released (in WaitAny and the old ProcessPollEvents).\n\nAnd ProcessPollEvents only calls WaitImpl with timeout\u003d0 so it also shouldn\u0027t hold the lock for a long time.\n\n\u003e One alternative is that we could remove all the events that we are going to try to process in the first loop, call `WaitImpl` and then in the second round, add back any events that we didn\u0027t actually finish?\n\nI considered this, the behavior would be subtly weird, but probably not problematic if we have to do it.",
+      "parentUuid": "fb96df9a_24543b4a",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53178596_fddec50a",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 1
