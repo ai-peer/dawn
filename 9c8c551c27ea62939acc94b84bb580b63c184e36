@@ -16,6 +16,24 @@
       "message": "You need to wrap this with a condition. :)",
       "revId": "9c8c551c27ea62939acc94b84bb580b63c184e36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75efdd3_60480908",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T15:38:10Z",
+      "side": 1,
+      "message": "Doh. :) Fixed.",
+      "parentUuid": "64ad8e68_369cf6e3",
+      "revId": "9c8c551c27ea62939acc94b84bb580b63c184e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
