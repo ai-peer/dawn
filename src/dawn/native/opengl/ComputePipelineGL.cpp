@@ -47,7 +47,7 @@ void ComputePipeline::DestroyImpl() {
 
 MaybeError ComputePipeline::InitializeImpl() {
     DAWN_TRY(InitializeBase(ToBackend(GetDevice())->GetGL(), ToBackend(GetLayout()), GetAllStages(),
-                            false));
+                            false, false));
     return {};
 }
 
