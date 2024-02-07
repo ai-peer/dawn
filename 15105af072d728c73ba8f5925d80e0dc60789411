@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f35aab_c5739e57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-07T21:23:02Z",
+      "side": 1,
+      "message": "the broken code has now been updated and rolled into Chrome. should be ok now",
+      "revId": "15105af072d728c73ba8f5925d80e0dc60789411",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
