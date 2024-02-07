@@ -33,6 +33,24 @@
       "message": "Recommend adding a parameter name comment for bool literal arguments.\n\n```suggestion\n                            /* usesInstanceIndex */ false));\n```",
       "revId": "7e43f2b3af17680ac502c1fa388f2c8e969a6d64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ca5396_ac0fad38",
+        "filename": "src/dawn/native/opengl/ComputePipelineGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T15:00:50Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "eff72e79_1e69053f",
+      "revId": "7e43f2b3af17680ac502c1fa388f2c8e969a6d64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
