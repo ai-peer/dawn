@@ -44,6 +44,7 @@ if (tint_build_unittests || tint_build_benchmarks) {
 
 libtint_source_set("containers") {
   sources = [
+    "aligned_storage.h",
     "bitset.h",
     "const_propagating_ptr.h",
     "containers.cc",

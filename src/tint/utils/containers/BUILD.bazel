@@ -42,6 +42,7 @@ cc_library(
     "containers.cc",
   ],
   hdrs = [
+    "aligned_storage.h",
     "bitset.h",
     "const_propagating_ptr.h",
     "enum_set.h",
