@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38f35585_65198827",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T14:57:59Z",
+      "side": 1,
+      "message": "Done and done. (Good ideas both.)",
+      "parentUuid": "8211619e_b4085c94",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 150,
+        "endChar": 33
+      },
+      "revId": "bf93c56aa24f9fdad4d5a8e0de62635d799937c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d0c2938_456f9ee9",
