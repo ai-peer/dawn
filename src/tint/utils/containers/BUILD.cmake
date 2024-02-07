@@ -39,6 +39,7 @@
 # Kind:      lib
 ################################################################################
 tint_add_target(tint_utils_containers lib
+  utils/containers/aligned_storage.h
   utils/containers/bitset.h
   utils/containers/const_propagating_ptr.h
   utils/containers/containers.cc
