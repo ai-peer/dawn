@@ -82,6 +82,12 @@ struct Options {
     /// Offset of the firstInstance push constant.
     std::optional<int32_t> first_instance_offset;
 
+    /// Offset of the viewportMin push constant.
+    std::optional<uint32_t> viewport_min_offset;
+
+    /// Offset of the viewportMin push constant.
+    std::optional<uint32_t> viewport_max_offset;
+
     /// Options used to map WGSL textureNumLevels/textureNumSamples builtins to internal uniform
     /// buffer values. If not specified, emits corresponding GLSL builtins
     /// textureQueryLevels/textureSamples directly.
