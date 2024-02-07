@@ -41,6 +41,7 @@ namespace {
                 {%- endfor -%}
             ) {
                 auto object = reinterpret_cast<ProcTableAsClass::Object*>(self);
+                DAWN_DEBUG() << "Forward{{as_MethodSuffix(type.name, method.name)}}: " << object;
                 return object->procs->{{as_MethodSuffix(type.name, method.name)}}(self
                     {%- for arg in method.arguments -%}
                         , {{as_varName(arg.name)}}
@@ -115,16 +116,21 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
     {{as_cType(type.name)}} ProcTableAsClass::GetNew{{type.name.CamelCase()}}() {
         mObjects.emplace_back(new Object);
         mObjects.back()->procs = this;
+        DAWN_DEBUG() << "GetNew{{type.name.CamelCase()}}: " << mObjects.back().get();
         return reinterpret_cast<{{as_cType(type.name)}}>(mObjects.back().get());
     }
 {% endfor %}
 
-MockProcTable::MockProcTable() = default;
+MockProcTable::MockProcTable() {
+    DAWN_DEBUG() << "Ctor mock table: " << this;
+}
 
-MockProcTable::~MockProcTable() = default;
+MockProcTable::~MockProcTable() {
+    DAWN_DEBUG() << "Dtor mock table: " << this;
+}
 
 void MockProcTable::IgnoreAllReleaseCalls() {
     {% for type in by_category["object"] %}
-        EXPECT_CALL(*this, {{as_MethodSuffix(type.name, Name("release"))}}(_)).Times(AnyNumber());
+        EXPECT_CALL(*this, {{as_MethodSuffix(type.name, Name("release"))}}).Times(AnyNumber());
     {% endfor %}
 }
