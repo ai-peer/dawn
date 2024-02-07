@@ -380,6 +380,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7c75b8_7ad98920",
+        "filename": "tools/android/webgpu/src/main/cpp/BundleLibraries.cmake",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-07T19:20:32Z",
+      "side": 1,
+      "message": "Starting writing the answer and realized I got confused while reading stuff. Apologies, nothing to do!",
+      "parentUuid": "ef34893c_a83b76d8",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f2e6ffe_f19b764e",
@@ -511,6 +529,24 @@
       "side": 1,
       "message": "As I need to copy the header file out of the CMAKE_SOURCE_DIR to somewhere that AGP/build.gradle can see it (in order to get bundled with \u0027prefab\u0027) I want to make sure there\u0027s no chance that we might be leaving content in this folder from an earlier build. I can\u0027t think of any destination that is guaranteed to get wiped each time that is also visible to AGP (AGP can\u0027t use CMAKE_ macros).",
       "parentUuid": "e575d28e_a6384f46",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30461dd_93765a3c",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-07T19:20:32Z",
+      "side": 1,
+      "message": "Ah it\u0027s the usual problem of generated files sticking around, you can add but never remove. Ack!",
+      "parentUuid": "9fb8599b_aa769060",
       "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
