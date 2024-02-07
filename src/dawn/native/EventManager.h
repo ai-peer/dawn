@@ -72,7 +72,7 @@ class EventManager final : NonMovable {
 
     class TrackedEvent;
     // Track a TrackedEvent and give it a FutureID.
-    [[nodiscard]] FutureID TrackEvent(wgpu::CallbackMode mode, Ref<TrackedEvent>&&);
+    [[nodiscard]] FutureID TrackEvent(wgpu::CallbackMode mode, Ref<TrackedEvent> event);
     bool ProcessPollEvents();
     [[nodiscard]] wgpu::WaitStatus WaitAny(size_t count,
                                            FutureWaitInfo* infos,
@@ -139,11 +139,11 @@ class EventManager::TrackedEvent : public RefCounted {
     // clear out the EventManager on shutdown.
     // TODO(crbug.com/dawn/2067): This is a bit fragile. Is it possible to remove the ref cycle?
     using CompletionData = std::variant<QueueAndSerial, Ref<SystemEvent>>;
-
     const CompletionData& GetCompletionData() const;
 
-  protected:
     void EnsureComplete(EventCompletionType);
+
+  protected:
     void CompleteIfSpontaneous();
 
     virtual void Complete(EventCompletionType) = 0;

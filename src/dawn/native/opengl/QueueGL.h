@@ -61,6 +61,8 @@ class Queue final : public QueueBase {
     GLenum ClientWaitSync(GLsync sync, Nanoseconds timeout);
 
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override;
 
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;

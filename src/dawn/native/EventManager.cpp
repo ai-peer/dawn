@@ -291,13 +291,20 @@ void EventManager::ShutDown() {
     mEvents.reset();
 }
 
-FutureID EventManager::TrackEvent(wgpu::CallbackMode mode, Ref<TrackedEvent>&& future) {
+FutureID EventManager::TrackEvent(wgpu::CallbackMode mode, Ref<TrackedEvent> event) {
+    if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
+        if (auto* queueAndSerial = std::get_if<QueueAndSerial>(&event->GetCompletionData())) {
+            queueAndSerial->queue->RegisterSpontaneousEvent(event,
+                                                            queueAndSerial->completionSerial);
+        }
+    }
+
     FutureID futureID = mNextFutureID++;
     if (!mEvents.has_value()) {
         return futureID;
     }
 
-    mEvents->Use([&](auto events) { events->emplace(futureID, std::move(future)); });
+    mEvents->Use([&](auto events) { events->emplace(futureID, std::move(event)); });
     return futureID;
 }
 
@@ -451,7 +458,7 @@ const EventManager::TrackedEvent::CompletionData& EventManager::TrackedEvent::Ge
 }
 
 void EventManager::TrackedEvent::EnsureComplete(EventCompletionType completionType) {
-    bool alreadyComplete = mCompleted.exchange(true);
+    bool alreadyComplete = mCompleted.exchange(true, std::memory_order_acq_rel);
     if (!alreadyComplete) {
         Complete(completionType);
     }
@@ -459,7 +466,7 @@ void EventManager::TrackedEvent::EnsureComplete(EventCompletionType completionTy
 
 void EventManager::TrackedEvent::CompleteIfSpontaneous() {
     if (mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
-        bool alreadyComplete = mCompleted.exchange(true);
+        bool alreadyComplete = mCompleted.exchange(true, std::memory_order_acq_rel);
         // If it was already complete, but there was an error, we have no place
         // to report it, so DAWN_ASSERT. This shouldn't happen.
         DAWN_ASSERT(!alreadyComplete);

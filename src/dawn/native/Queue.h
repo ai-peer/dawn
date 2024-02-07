@@ -104,6 +104,10 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     // TODO(crbug.com/dawn/1413): It should be removed after ExecutionQueue for better tracking
     // of completion.
     void TrackPendingTask(std::unique_ptr<TrackTaskCallback> task);
+    // Register this event to be called spontaneously when `completionSerial` passes, if the
+    // platform supports it.
+    virtual void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                          ExecutionSerial completionSerial) = 0;
 
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();

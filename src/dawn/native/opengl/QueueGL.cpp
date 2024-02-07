@@ -131,6 +131,11 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
     }
 }
 
+void Queue::RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                     ExecutionSerial completionSerial) {
+    // GL can't spontaneously respond to queue completion.
+}
+
 void Queue::SubmitFenceSync() {
     if (!mHasPendingCommands) {
         return;

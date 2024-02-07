@@ -556,4 +556,9 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
     return true;
 }
 
+void Queue::RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                     ExecutionSerial completionSerial) {
+    // Vulkan can't spontaneously respond to queue completion.
+}
+
 }  // namespace dawn::native::vulkan

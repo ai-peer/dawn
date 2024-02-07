@@ -32,6 +32,7 @@
 
 #include "dawn/common/FutureUtils.h"
 #include "dawn/tests/DawnTest.h"
+#include "dawn/utils/SystemUtils.h"
 #include "dawn/webgpu.h"
 
 namespace dawn {
@@ -83,6 +84,7 @@ enum class WaitType {
     TimedWaitAny,
     SpinWaitAny,
     SpinProcessEvents,
+    SpinSleep,
 };
 
 enum class WaitTypeAndCallbackMode {
@@ -92,6 +94,7 @@ enum class WaitTypeAndCallbackMode {
     SpinWaitAny_AllowSpontaneous,
     SpinProcessEvents_AllowProcessEvents,
     SpinProcessEvents_AllowSpontaneous,
+    SpinSleep_AllowSpontaneous,
 };
 
 std::ostream& operator<<(std::ostream& o, WaitTypeAndCallbackMode waitMode) {
@@ -108,6 +111,8 @@ std::ostream& operator<<(std::ostream& o, WaitTypeAndCallbackMode waitMode) {
             return o << "SpinWaitAny_AllowSpontaneous";
         case WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous:
             return o << "SpinProcessEvents_AllowSpontaneous";
+        case WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous:
+            return o << "SpinSleep_AllowSpontaneous";
     }
 }
 
@@ -137,6 +142,12 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
         // Make sure these aren't used accidentally (unfortunately can't do the same for instance):
         device = nullptr;
         queue = nullptr;
+
+        if (!(IsMetal() || IsD3D12() || IsD3D11())) {
+            // Only these backends have true spontaneous events.
+            DAWN_TEST_UNSUPPORTED_IF(GetParam().mWaitTypeAndCallbackMode ==
+                                     WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous);
+        }
     }
 
     void UseSecondInstance() {
@@ -169,6 +180,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
             case WaitTypeAndCallbackMode::TimedWaitAny_AllowSpontaneous:
             case WaitTypeAndCallbackMode::SpinWaitAny_AllowSpontaneous:
             case WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous:
+            case WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous:
                 return wgpu::CallbackMode::AllowSpontaneous;
         }
     }
@@ -187,6 +199,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
                 break;
             case WaitTypeAndCallbackMode::SpinProcessEvents_AllowProcessEvents:
             case WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous:
+            case WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous:
                 break;
         }
     }
@@ -222,19 +235,8 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
             case WaitTypeAndCallbackMode::SpinProcessEvents_AllowProcessEvents:
             case WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous:
                 return TestWaitImpl(WaitType::SpinProcessEvents, loopOnlyOnce);
-        }
-    }
-
-    void TestWaitIncorrectly() {
-        switch (GetParam().mWaitTypeAndCallbackMode) {
-            case WaitTypeAndCallbackMode::TimedWaitAny_WaitAnyOnly:
-            case WaitTypeAndCallbackMode::TimedWaitAny_AllowSpontaneous:
-            case WaitTypeAndCallbackMode::SpinWaitAny_WaitAnyOnly:
-            case WaitTypeAndCallbackMode::SpinWaitAny_AllowSpontaneous:
-                return TestWaitImpl(WaitType::SpinProcessEvents);
-            case WaitTypeAndCallbackMode::SpinProcessEvents_AllowProcessEvents:
-            case WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous:
-                return TestWaitImpl(WaitType::SpinWaitAny);
+            case WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous:
+                return TestWaitImpl(WaitType::SpinSleep, loopOnlyOnce);
         }
     }
 
@@ -242,9 +244,10 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
     void TestWaitImpl(WaitType waitType, bool loopOnlyOnce = false) {
         uint64_t oldCompletedCount = mCallbacksCompletedCount;
 
+        constexpr auto kTimeLimit = std::chrono::seconds(5);
         const auto start = std::chrono::high_resolution_clock::now();
-        auto testTimeExceeded = [=]() -> bool {
-            return std::chrono::high_resolution_clock::now() - start > std::chrono::seconds(5);
+        auto TestDuration = [&]() {
+            return std::chrono::high_resolution_clock::now() - start;
         };
 
         switch (waitType) {
@@ -252,7 +255,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
                 bool emptyWait = mFutures.size() == 0;
                 // Loop at least once so we can test it with 0 futures.
                 do {
-                    ASSERT_FALSE(testTimeExceeded());
+                    ASSERT_LT(TestDuration(), kTimeLimit);
                     DAWN_ASSERT(!UsesWire());
                     wgpu::WaitStatus status;
 
@@ -279,7 +282,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
                 bool emptyWait = mFutures.size() == 0;
                 // Loop at least once so we can test it with 0 futures.
                 do {
-                    ASSERT_FALSE(testTimeExceeded());
+                    ASSERT_LT(TestDuration(), kTimeLimit);
 
                     uint64_t oldCompletionCount = mCallbacksCompletedCount;
                     FlushWire();
@@ -302,11 +305,23 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
             } break;
             case WaitType::SpinProcessEvents: {
                 do {
-                    ASSERT_FALSE(testTimeExceeded());
+                    ASSERT_LT(TestDuration(), kTimeLimit);
 
                     FlushWire();
                     testDevice.Tick();
                     testInstance.ProcessEvents();
+
+                    if (loopOnlyOnce) {
+                        break;
+                    }
+                } while (mCallbacksCompletedCount < mCallbacksIssuedCount);
+            } break;
+            case WaitType::SpinSleep: {
+                do {
+                    ASSERT_LT(TestDuration(), kTimeLimit);
+
+                    FlushWire();
+                    utils::USleep(100);
 
                     if (loopOnlyOnce) {
                         break;
@@ -415,6 +430,11 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceBeforeEvent) {
     // TODO(crbug.com/dawn/1987): Wire does not implement instance destruction correctly yet.
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
+    // Cannot call any instance methods after the instance is dropped.
+    DAWN_TEST_UNSUPPORTED_IF(IsSpontaneous() &&
+                             GetParam().mWaitTypeAndCallbackMode !=
+                                 WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous);
+
     UseSecondInstance();
     testInstance = nullptr;  // Drop the last external ref to the instance.
 
@@ -426,18 +446,25 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceBeforeEvent) {
                                    },
                                    &status});
 
-    // Callback should have been called immediately because we leaked it since there's no way to
-    // call WaitAny or ProcessEvents anymore.
-    //
-    // TODO(crbug.com/dawn/2059): Once Spontaneous is implemented, this should no longer expect the
-    // callback to be cleaned up immediately (and should expect it to happen on a future Tick).
-    ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    if (!IsSpontaneous()) {
+        // Callback should have been called immediately because we leaked it since there's no way to
+        // call WaitAny or ProcessEvents anymore.
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    } else {
+        TestWaitAll();
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+    }
 }
 
 TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
     // TODO(crbug.com/dawn/1987): Wire does not implement instance destruction correctly yet.
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
+    // Cannot call any instance methods after the instance is dropped.
+    DAWN_TEST_UNSUPPORTED_IF(IsSpontaneous() &&
+                             GetParam().mWaitTypeAndCallbackMode !=
+                                 WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous);
+
     UseSecondInstance();
 
     WGPUQueueWorkDoneStatus status = kStatusUninitialized;
@@ -448,16 +475,20 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
                                    },
                                    &status});
 
-    ASSERT_EQ(status, kStatusUninitialized);
+    if (!IsSpontaneous()) {
+        ASSERT_EQ(status, kStatusUninitialized);
 
-    testInstance = nullptr;  // Drop the last external ref to the instance.
+        // Drop the last external ref to the instance.
+        testInstance = nullptr;
+        // Callback should have been called immediately because we leaked it since there's no way to
+        // call WaitAny or ProcessEvents anymore.
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    } else {
+        testInstance = nullptr;
 
-    // Callback should have been called immediately because we leaked it since there's no way to
-    // call WaitAny or ProcessEvents anymore.
-    //
-    // TODO(crbug.com/dawn/2059): Once Spontaneous is implemented, this should no longer expect the
-    // callback to be cleaned up immediately (and should expect it to happen on a future Tick).
-    ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+        TestWaitAll();
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+    }
 }
 
 // TODO(crbug.com/dawn/1987):
@@ -475,6 +506,7 @@ DAWN_INSTANTIATE_TEST_P(EventCompletionTests,
                             WaitTypeAndCallbackMode::SpinWaitAny_AllowSpontaneous,
                             WaitTypeAndCallbackMode::SpinProcessEvents_AllowProcessEvents,
                             WaitTypeAndCallbackMode::SpinProcessEvents_AllowSpontaneous,
+                            WaitTypeAndCallbackMode::SpinSleep_AllowSpontaneous,
 
                             // TODO(crbug.com/dawn/2059): The cases with the Spontaneous flag
                             // enabled were added before we implemented all of the spontaneous

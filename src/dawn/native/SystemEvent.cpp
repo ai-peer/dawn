@@ -49,6 +49,10 @@ namespace dawn::native {
 SystemEventReceiver::SystemEventReceiver(SystemHandle primitive)
     : mPrimitive(std::move(primitive)) {}
 
+const SystemHandle& SystemEventReceiver::Get() const {
+    return mPrimitive;
+}
+
 SystemEventReceiver SystemEventReceiver::CreateAlreadySignaled() {
     SystemEventPipeSender sender;
     SystemEventReceiver receiver;

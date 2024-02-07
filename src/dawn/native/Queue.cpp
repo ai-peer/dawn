@@ -194,6 +194,10 @@ class ErrorQueue : public QueueBase {
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override {
         DAWN_UNREACHABLE();
     }
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override {
+        DAWN_UNREACHABLE();
+    }
     MaybeError WaitForIdleForDestruction() override { DAWN_UNREACHABLE(); }
 };
 

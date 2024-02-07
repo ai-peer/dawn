@@ -33,7 +33,14 @@
 
 namespace dawn::native::d3d {
 
-Queue::~Queue() = default;
+Queue::~Queue() {
+    // Unregister any outstanding trackers.
+    mSpontaneousEventTrackers.Use([&](auto trackers) {
+        for (auto& t : trackers->IterateAll()) {
+            t->Unregister();
+        }
+    });
+}
 
 ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
     ExecutionSerial completedSerial = GetCompletedCommandSerial();
@@ -66,6 +73,73 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
         mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
     }
     return didComplete;
+}
+
+Queue::SpontaneousEventTracker::SpontaneousEventTracker(SystemHandle fenceHandle)
+    : mActive(true), mFenceHandle(std::move(fenceHandle)) {
+    DAWN_CHECK(::RegisterWaitForSingleObject(mWaitHandle.GetMut(), mFenceHandle.Get(), &Callback,
+                                             this, INFINITE,
+                                             WT_EXECUTEONLYONCE | WT_EXECUTEINWAITTHREAD));
+}
+
+void Queue::SpontaneousEventTracker::Unregister() {
+    if (mActive.exchange(false, std::memory_order_acq_rel)) {
+        ::UnregisterWait(mWaitHandle.Get());
+    }
+}
+
+void Queue::SpontaneousEventTracker::AddEvent(Ref<EventManager::TrackedEvent> event) {
+    bool didEnqueue = false;
+    mEvents.Use([&](auto events) {
+        if (mActive.load(std::memory_order_acquire)) {
+            events->push_back(std::move(event));
+            didEnqueue = true;
+        }
+    });
+    if (!didEnqueue) {
+        event->EnsureComplete(EventCompletionType::Ready);
+    }
+}
+
+// static
+void Queue::SpontaneousEventTracker::Callback(void* userdata, unsigned char timedOut) {
+    DAWN_ASSERT(!timedOut);
+    auto* self = static_cast<SpontaneousEventTracker*>(userdata);
+    self->mEvents.Use([&](auto events) {
+        self->Unregister();
+        for (auto& ev : *events) {
+            ev->EnsureComplete(EventCompletionType::Ready);
+        }
+        events->clear();
+    });
+}
+
+void Queue::RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                     ExecutionSerial completionSerial) {
+    mSpontaneousEventTrackers.Use([&](auto trackers) {
+        // Clear any events that should be complete to prevent the list from growing forever.
+        ExecutionSerial completedSerial = GetCompletedCommandSerial();
+        trackers->ClearUpTo(completedSerial);
+
+        if (completionSerial <= completedSerial) {
+            // If the event we're registering has since completed, call it now.
+            event->EnsureComplete(EventCompletionType::Ready);
+            return;
+        }
+
+        if (auto tracker = trackers->FindOne(completionSerial)) {
+            (*tracker)->AddEvent(std::move(event));
+            return;
+        }
+        HANDLE fenceEvent =
+            ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
+        DAWN_CHECK(fenceEvent != nullptr);
+        SetEventOnCompletion(completionSerial, fenceEvent);
+
+        auto tracker = std::make_unique<SpontaneousEventTracker>(SystemHandle::Acquire(fenceEvent));
+        tracker->AddEvent(std::move(event));
+        trackers->Enqueue(std::move(tracker), completionSerial);
+    });
 }
 
 }  // namespace dawn::native::d3d

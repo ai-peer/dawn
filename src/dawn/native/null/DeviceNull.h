@@ -291,6 +291,8 @@ class Queue final : public QueueBase {
     void ForceEventualFlushOfCommands() override;
     bool HasPendingCommands() const override;
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override;
     MaybeError WaitForIdleForDestruction() override;
 };
 

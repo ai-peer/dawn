@@ -57,6 +57,8 @@ class Queue final : public QueueBase {
     void RecycleCompletedCommands(ExecutionSerial completedSerial);
 
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override;
 
   private:
     Queue(Device* device, const QueueDescriptor* descriptor, uint32_t family);

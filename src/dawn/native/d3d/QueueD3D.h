@@ -45,12 +45,44 @@ class Queue : public QueueBase {
 
     virtual ResultOrError<Ref<SharedFence>> GetOrCreateSharedFence() = 0;
 
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override;
+
   private:
+    // SpontaneousEventTracker is registered with the Windows OS and receives
+    // callbacks when OS events complete. These are forwarded to resolve
+    // spontaneous-mode Futures.
+    class SpontaneousEventTracker {
+      public:
+        explicit SpontaneousEventTracker(SystemHandle fenceHandle);
+
+        // Unregister the tracker with the OS. This is done inside the OS
+        // callback once it is called, or if the Queue is destructed before
+        // we receive the OS callbacks.
+        void Unregister();
+
+        // Add a spontaneous-mode tracked event to this tracker. May call
+        // the Future callback immediately if the event has already completed.
+        void AddEvent(Ref<EventManager::TrackedEvent> event);
+
+      private:
+        // Called by the OS. Unregisters the tracker and calls the
+        // spontaneous-mode Future callbacks.
+        static void Callback(void* userdata, unsigned char timedOut);
+
+        std::atomic<bool> mActive;
+        SystemHandle mFenceHandle;
+        SystemHandle mWaitHandle;
+        MutexProtected<std::vector<Ref<EventManager::TrackedEvent>>> mEvents;
+    };
+
     virtual void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) = 0;
 
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
 
     MutexProtected<SerialMap<ExecutionSerial, SystemEventReceiver>> mSystemEventReceivers;
+    MutexProtected<SerialMap<ExecutionSerial, std::unique_ptr<SpontaneousEventTracker>>>
+        mSpontaneousEventTrackers;
 };
 
 }  // namespace dawn::native::d3d

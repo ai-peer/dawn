@@ -81,6 +81,12 @@ MaybeError Queue::Initialize() {
 }
 
 void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
+    mSpontaneousEvents.Use([&](auto events) {
+        for (auto& e : events->IterateUpTo(completedSerial)) {
+            e->EnsureComplete(EventCompletionType::Ready);
+        }
+        events->ClearUpTo(completedSerial);
+    });
     mWaitingEvents.Use([&](auto events) {
         for (auto& s : events->IterateUpTo(completedSerial)) {
             std::move(s)->Signal();
@@ -273,6 +279,17 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
     std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
         {{event->GetOrCreateSystemEventReceiver(), &ready}}};
     return WaitAnySystemEvent(events.begin(), events.end(), timeout);
+}
+
+void Queue::RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                     ExecutionSerial completionSerial) {
+    mSpontaneousEvents.Use([&](auto events) {
+        if (completionSerial <= ExecutionSerial(mCompletedSerial.load())) {
+            event->EnsureComplete(EventCompletionType::Ready);
+            return;
+        }
+        events->Enqueue(std::move(event), completionSerial);
+    });
 }
 
 }  // namespace dawn::native::metal

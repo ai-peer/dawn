@@ -61,6 +61,7 @@ class SerialMap : public SerialStorage<SerialMap<Serial, Value>> {
     void Enqueue(const std::vector<Value>& values, Serial serial);
     void Enqueue(std::vector<Value>&& values, Serial serial);
 
+    Value* FindOne(Serial serial);
     std::optional<Value> TakeOne(Serial serial);
 };
 
@@ -90,6 +91,19 @@ void SerialMap<Serial, Value>::Enqueue(std::vector<Value>&& values, Serial seria
     for (Value& value : values) {
         Enqueue(std::move(value), serial);
     }
+}
+
+template <typename Serial, typename Value>
+Value* SerialMap<Serial, Value>::FindOne(Serial serial) {
+    auto it = this->mStorage.find(serial);
+    if (it == this->mStorage.end()) {
+        return nullptr;
+    }
+    auto& vec = it->second;
+    if (vec.empty()) {
+        return nullptr;
+    }
+    return &vec.back();
 }
 
 template <typename Serial, typename Value>

@@ -448,6 +448,9 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
     return true;
 }
 
+void Queue::RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                     ExecutionSerial completionSerial) {}
+
 MaybeError Queue::WaitForIdleForDestruction() {
     ToBackend(GetDevice())->ForgetPendingOperations();
     return {};

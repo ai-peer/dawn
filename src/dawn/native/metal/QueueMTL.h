@@ -54,6 +54,8 @@ class Queue final : public QueueBase {
 
     Ref<SystemEvent> CreateWorkDoneSystemEvent(ExecutionSerial serial);
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+    void RegisterSpontaneousEvent(Ref<EventManager::TrackedEvent> event,
+                                  ExecutionSerial completionSerial) override;
 
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
@@ -86,6 +88,7 @@ class Queue final : public QueueBase {
     // TODO(crbug.com/dawn/2065): If we atomically knew a conservative lower bound on the
     // mWaitingEvents serials, we could avoid taking this lock sometimes. Optimize if needed.
     // See old draft code: https://dawn-review.googlesource.com/c/dawn/+/137502/29
+    MutexProtected<SerialMap<ExecutionSerial, Ref<EventManager::TrackedEvent>>> mSpontaneousEvents;
     MutexProtected<SerialMap<ExecutionSerial, Ref<SystemEvent>>> mWaitingEvents;
 
     // A shared event that can be exported for synchronization with other users of Metal.

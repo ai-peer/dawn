@@ -247,7 +247,7 @@ MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
 }
 
 void Queue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {
-    mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event);
+    DAWN_CHECK(SUCCEEDED(mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event)));
 }
 
 }  // namespace dawn::native::d3d11
