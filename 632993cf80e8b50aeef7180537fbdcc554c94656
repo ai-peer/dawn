@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac799b1_3ea61b79",
+        "filename": "tools/android/build.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T17:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d959bd1_9260197c",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "517f5ee4_80e6f989",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-02-07T16:35:43Z",
       "side": 1,
       "message": "Again, copyright on files that can support them would be good",
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abfe3c6_145590d2",
+        "filename": "tools/android/settings.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T17:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "517f5ee4_80e6f989",
       "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb7df93_be9e85b4",
+        "filename": "tools/android/webgpu/build.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T17:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da6d6b6a_61532b98",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e68171c0_327b57df",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-02-07T16:35:43Z",
       "side": 1,
       "message": "4",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cfb4d8_c92b8f24",
+        "filename": "tools/android/webgpu/src/main/cpp/BundleLibraries.cmake",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-07T17:18:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e68171c0_327b57df",
       "range": {
         "startLine": 1,
         "startChar": 15,
