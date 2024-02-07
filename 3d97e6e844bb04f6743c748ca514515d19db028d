@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f9b243_16f2ba85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-02-07T17:41:44Z",
+      "side": 1,
+      "message": "Done in follow-up.",
+      "parentUuid": "6d2168a3_c8801cec",
+      "revId": "3d97e6e844bb04f6743c748ca514515d19db028d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37bb7c70_1151cb83",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-02-07T17:28:51Z",
       "side": 1,
       "message": "const bool?",
+      "range": {
+        "startLine": 144,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 12
+      },
+      "revId": "3d97e6e844bb04f6743c748ca514515d19db028d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a648d7_2515359e",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-02-07T17:41:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37bb7c70_1151cb83",
       "range": {
         "startLine": 144,
         "startChar": 8,
