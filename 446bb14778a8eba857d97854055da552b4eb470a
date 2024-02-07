@@ -51,6 +51,24 @@
       "parentUuid": "16d527f4_f501ee9f",
       "revId": "446bb14778a8eba857d97854055da552b4eb470a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74409570_722120ea",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T15:02:29Z",
+      "side": 1,
+      "message": "Will do (sorry, missed that).",
+      "parentUuid": "d0e43d1a_d3c693af",
+      "revId": "446bb14778a8eba857d97854055da552b4eb470a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
