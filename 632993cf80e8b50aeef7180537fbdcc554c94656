@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d959bd1_9260197c",
+        "filename": "tools/android/build.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "4",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "517f5ee4_80e6f989",
+        "filename": "tools/android/settings.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "Again, copyright on files that can support them would be good",
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da6d6b6a_61532b98",
+        "filename": "tools/android/webgpu/build.gradle",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "4",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e68171c0_327b57df",
+        "filename": "tools/android/webgpu/src/main/cpp/BundleLibraries.cmake",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "4",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260dee40_078d57a3",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "Copyright.",
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

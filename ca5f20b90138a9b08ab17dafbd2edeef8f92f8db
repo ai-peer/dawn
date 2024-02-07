@@ -415,6 +415,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9379036b_e26fea3a",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:35:43Z",
+      "side": 1,
+      "message": "SGTM. Thanks.",
+      "parentUuid": "e500b22a_a1475cd1",
+      "revId": "ca5f20b90138a9b08ab17dafbd2edeef8f92f8db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71a8e41a_a5e27be1",
