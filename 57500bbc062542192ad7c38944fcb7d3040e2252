@@ -33,6 +33,23 @@
       "message": "kokoro rebuild",
       "revId": "57500bbc062542192ad7c38944fcb7d3040e2252",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b69a4f_67ed0412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-07T13:06:19Z",
+      "side": 1,
+      "message": "kokoro rebuild",
+      "revId": "57500bbc062542192ad7c38944fcb7d3040e2252",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
