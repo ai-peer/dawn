@@ -16,6 +16,23 @@
       "message": "I think this is right. If texture-\u003eGetArrayLayers() \u003d\u003d view-\u003eGetLayerCount() then it\u0027s okay for isLayered to be true.  In this case, baseArrayLayer would have to be 0 because otherwise there\u0027d have been a validation error before this point. No test is added because the CTS tests this and the failing tests should start passing (they do locally)",
       "revId": "95845b7f9f6dfac8f9ee56a15a31c4f4783a89c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2990685_cdd2bd0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T13:53:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "95845b7f9f6dfac8f9ee56a15a31c4f4783a89c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
