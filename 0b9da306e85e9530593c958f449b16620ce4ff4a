@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "607d38cb_a25145c3",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-07T18:42:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b41f55e_051831a3",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb3d8066_e2341f3f",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c6aebcd_adcaa521",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-07T18:42:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb3d8066_e2341f3f",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97c40e43_b6749292",
@@ -82,6 +118,24 @@
       "writtenOn": "2024-02-07T14:01:39Z",
       "side": 1,
       "message": "uNit: actually, all of this could be done with token pasting to avoid heap usage.",
+      "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff82ed57_e8ea0858",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-07T18:42:50Z",
+      "side": 1,
+      "message": "I think this will increase binary size? If so, this is what binary size folks wanted to avoid. Same stuff happened for BlitTextureToBuffer, where we changed from compile time string concat to this.",
+      "parentUuid": "97c40e43_b6749292",
       "revId": "0b9da306e85e9530593c958f449b16620ce4ff4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
