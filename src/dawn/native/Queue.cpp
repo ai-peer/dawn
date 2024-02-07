@@ -327,8 +327,7 @@ Future QueueBase::APIOnSubmittedWorkDoneF(const QueueWorkDoneCallbackInfo& callb
         event = AcquireRef(new WorkDoneEvent(callbackInfo, this, GetScheduledWorkDoneSerial()));
     }
 
-    FutureID futureID =
-        GetInstance()->GetEventManager()->TrackEvent(callbackInfo.mode, std::move(event));
+    FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
 
     return {futureID};
 }
