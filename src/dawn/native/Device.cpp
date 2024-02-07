@@ -788,7 +788,7 @@ Future DeviceBase::APIPopErrorScopeF(const PopErrorScopeCallbackInfo& callbackIn
     }
 
     FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(
-        callbackInfo.mode, AcquireRef(new PopErrorScopeEvent(callbackInfo, std::move(scope))));
+        AcquireRef(new PopErrorScopeEvent(callbackInfo, std::move(scope))));
     return {futureID};
 }
 
