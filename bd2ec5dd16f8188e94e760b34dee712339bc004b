@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "271d3fd8_734c834b",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T16:50:09Z",
+      "side": 1,
+      "message": "```suggestion\n                if (TINT_UNLIKLEY(!str)) {\n```",
+      "revId": "bd2ec5dd16f8188e94e760b34dee712339bc004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
