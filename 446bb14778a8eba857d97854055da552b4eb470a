@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cc8d4ae_9046d3c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T15:21:54Z",
+      "side": 1,
+      "message": "Doing some testing, it turns out that you can aggregately assign a push constant to a variable (e.g., storage buffer). This works fine without wrapping in GLSL, but doesn\u0027t work without wrapping in SPIR-V.\n\nI\u0027m going to abort this CL, since it\u0027s not strictly necessary.",
+      "revId": "446bb14778a8eba857d97854055da552b4eb470a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d527f4_f501ee9f",
