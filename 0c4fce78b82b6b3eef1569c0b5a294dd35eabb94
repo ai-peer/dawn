@@ -16,6 +16,23 @@
       "message": "should these be on?",
       "revId": "0c4fce78b82b6b3eef1569c0b5a294dd35eabb94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66632658_7de87372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T13:53:46Z",
+      "side": 1,
+      "message": "Do these tests cover the 3D case you fixed in your other CL?\n\nLGTM",
+      "revId": "0c4fce78b82b6b3eef1569c0b5a294dd35eabb94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
