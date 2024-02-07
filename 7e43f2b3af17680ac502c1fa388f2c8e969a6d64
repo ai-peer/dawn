@@ -16,6 +16,23 @@
       "message": "Ben, Austin: PTAL. Thanks!",
       "revId": "7e43f2b3af17680ac502c1fa388f2c8e969a6d64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff72e79_1e69053f",
+        "filename": "src/dawn/native/opengl/ComputePipelineGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-07T14:54:47Z",
+      "side": 1,
+      "message": "Recommend adding a parameter name comment for bool literal arguments.\n\n```suggestion\n                            /* usesInstanceIndex */ false));\n```",
+      "revId": "7e43f2b3af17680ac502c1fa388f2c8e969a6d64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
