@@ -318,6 +318,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
     }
 
+    auto& device_info = ToBackend(GetDevice()->GetPhysicalDevice())->GetDeviceInfo();
+
     SpirvCompilationRequest req = {};
     req.stage = stage;
     auto tintProgram = GetTintProgram();
@@ -335,6 +337,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
     req.tintOptions.use_zero_initialize_workgroup_memory_extension =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension);
+    req.tintOptions.use_storage_input_output_16 =
+        device_info._16BitStorageFeatures.storageInputOutput16 == VK_TRUE;
     req.tintOptions.bindings = std::move(bindings);
     req.tintOptions.disable_image_robustness =
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseImageRobustAccess2);
