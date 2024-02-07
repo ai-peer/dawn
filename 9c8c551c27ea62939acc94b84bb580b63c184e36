@@ -34,6 +34,24 @@
       "parentUuid": "64ad8e68_369cf6e3",
       "revId": "9c8c551c27ea62939acc94b84bb580b63c184e36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3010c82d_d18b7212",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-07T16:44:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b75efdd3_60480908",
+      "revId": "9c8c551c27ea62939acc94b84bb580b63c184e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
