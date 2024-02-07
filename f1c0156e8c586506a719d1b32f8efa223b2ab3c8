@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb96df9a_24543b4a",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-07T19:23:26Z",
+      "side": 1,
+      "message": "We had to break the critical section in two because otherwise callbacks that call ProcessEvents would be re-entrant and dead-lock. Basically the issue is that `WaitImp` needs to be called outside the critical section of accessing the events, but we don\u0027t want to remove the events from the list until we have ran their callbacks.\n\nOne alternative is that we could remove all the events that we are going to try to process in the first loop, call `WaitImpl` and then in the second round, add back any events that we didn\u0027t actually finish?",
+      "parentUuid": "19e7c532_8ca0e6bd",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53178596_fddec50a",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 1
