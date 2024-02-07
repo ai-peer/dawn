@@ -87,6 +87,30 @@
       },
       "revId": "843d4f39edd1e7da0dfabda1717fe63e3f4379c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "003a3142_15b23567",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-07T18:44:05Z",
+      "side": 1,
+      "message": "and then this would be one condition:\n\n```\nreq.tintOptions.use_storage_input_output_16 \u003d\n        GetDevice()-\u003eIsToggleEnabled(Toggle::VulkanUseStorageInputOutput16);\n```",
+      "parentUuid": "a6a93366_572fcb13",
+      "range": {
+        "startLine": 341,
+        "startChar": 8,
+        "endLine": 341,
+        "endChar": 74
+      },
+      "revId": "843d4f39edd1e7da0dfabda1717fe63e3f4379c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
