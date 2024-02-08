@@ -103,6 +103,96 @@ class RequestDeviceEvent : public TrackedEvent {
 
 }  // anonymous namespace
 
+class Adapter::RequestAdapterInfoEvent final : public TrackedEvent {
+  public:
+    static constexpr EventType kType = EventType::RequestAdapterInfo;
+
+    explicit RequestAdapterInfoEvent(const WGPURequestAdapterInfoCallbackInfo& callbackInfo,
+                                     Adapter* adapter)
+        : TrackedEvent(callbackInfo.mode),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata),
+          mAdapter(adapter) {
+        DAWN_ASSERT(mAdapter != nullptr);
+        mAdapter->Reference();
+    }
+
+    ~RequestAdapterInfoEvent() override { mAdapter->Release(); }
+
+    EventType GetType() override { return kType; }
+
+    WireResult ReadyHook(FutureID futureID,
+                         WGPURequestAdapterInfoStatus status,
+                         const WGPUAdapterInfo* adapterInfo) {
+        if (mAdapter->mAdapterInfo) {
+            // If we already cached the adapter info, we don't need to do it again. This can happen
+            // if we were to call RequestAdapterInfo multiple times before the wire flushes.
+            return ReadyHook(futureID);
+        }
+
+        mStatus = status;
+        mAdapter->mAdapterInfo = {
+            .vendor = adapterInfo->vendor,
+            .architecture = adapterInfo->architecture,
+            .device = adapterInfo->device,
+            .description = adapterInfo->description,
+        };
+
+        return WireResult::Success;
+    }
+
+    WireResult ReadyHook(FutureID futureID) {
+        // We call this ReadyHook when we already have a cached adapter info (usually from a
+        // previous RequestAdapterInfo call).
+        DAWN_ASSERT(mAdapter->mAdapterInfo);
+        mStatus = WGPURequestAdapterInfoStatus_Success;
+        return WireResult::Success;
+    }
+
+  private:
+    void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        if (completionType == EventCompletionType::Shutdown) {
+            mStatus = WGPURequestAdapterInfoStatus_InstanceDropped;
+        }
+
+        WGPUAdapterInfo adapterInfo;
+        adapterInfo.nextInChain = nullptr;
+
+        if (mAdapter->mAdapterInfo) {
+            size_t vendorNameCLen = mAdapter->mAdapterInfo->vendor.length() + 1;
+            char* vendorPtr = new char[vendorNameCLen];
+            adapterInfo.vendor = vendorPtr;
+            memcpy(vendorPtr, mAdapter->mAdapterInfo->vendor.c_str(), vendorNameCLen);
+
+            size_t architectureCLen = mAdapter->mAdapterInfo->architecture.length() + 1;
+            char* architecturePtr = new char[architectureCLen];
+            adapterInfo.architecture = architecturePtr;
+            memcpy(architecturePtr, mAdapter->mAdapterInfo->architecture.c_str(), architectureCLen);
+
+            size_t deviceCLen = mAdapter->mAdapterInfo->device.length() + 1;
+            char* devicePtr = new char[deviceCLen];
+            adapterInfo.device = devicePtr;
+            memcpy(devicePtr, mAdapter->mAdapterInfo->device.c_str(), deviceCLen);
+
+            size_t descriptionCLen = mAdapter->mAdapterInfo->description.length() + 1;
+            char* descriptionPtr = new char[descriptionCLen];
+            adapterInfo.description = descriptionPtr;
+            memcpy(descriptionPtr, mAdapter->mAdapterInfo->description.c_str(), descriptionCLen);
+        }
+
+        mCallback(mStatus, &adapterInfo, mUserdata);
+    }
+
+    WGPURequestAdapterInfoCallback mCallback;
+    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
+    raw_ptr<void, DanglingUntriaged> mUserdata;
+
+    WGPURequestAdapterInfoStatus mStatus;
+
+    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
+    const raw_ptr<Adapter, DanglingUntriaged> mAdapter;
+};
+
 ObjectType Adapter::GetObjectType() const {
     return ObjectType::Adapter;
 }
@@ -221,6 +311,53 @@ void ClientAdapterPropertiesFreeMembers(WGPUAdapterProperties properties) {
 void ClientAdapterPropertiesMemoryHeapsFreeMembers(
     WGPUAdapterPropertiesMemoryHeaps memoryHeapProperties) {
     delete[] memoryHeapProperties.heapInfo;
+}
+
+void ClientAdapterInfoFreeMembers(WGPUAdapterInfo adapterInfo) {
+    delete[] adapterInfo.vendor;
+    delete[] adapterInfo.architecture;
+    delete[] adapterInfo.device;
+    delete[] adapterInfo.description;
+}
+
+void Adapter::RequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    WGPURequestAdapterInfoCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    RequestAdapterInfoF(callbackInfo);
+}
+
+WGPUFuture Adapter::RequestAdapterInfoF(const WGPURequestAdapterInfoCallbackInfo& callbackInfo) {
+    Client* client = GetClient();
+    auto [futureIDInternal, tracked] =
+        GetEventManager().TrackEvent(std::make_unique<RequestAdapterInfoEvent>(callbackInfo, this));
+    if (!tracked) {
+        return {futureIDInternal};
+    }
+
+    // If we already have a cached adapter info object, we can set it ready now.
+    if (mAdapterInfo) {
+        DAWN_CHECK(GetEventManager().SetFutureReady<RequestAdapterInfoEvent>(futureIDInternal) ==
+                   WireResult::Success);
+        return {futureIDInternal};
+    }
+
+    AdapterRequestAdapterInfoCmd cmd;
+    cmd.adapterId = GetWireId();
+    cmd.eventManagerHandle = GetEventManagerHandle();
+    cmd.future = {futureIDInternal};
+
+    client->SerializeCommand(cmd);
+    return {futureIDInternal};
+}
+
+WireResult Client::DoAdapterRequestAdapterInfoCallback(ObjectHandle eventManager,
+                                                       WGPUFuture future,
+                                                       WGPURequestAdapterInfoStatus status,
+                                                       const WGPUAdapterInfo* adapterInfo) {
+    return GetEventManager(eventManager)
+        .SetFutureReady<Adapter::RequestAdapterInfoEvent>(future.id, status, adapterInfo);
 }
 
 void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
