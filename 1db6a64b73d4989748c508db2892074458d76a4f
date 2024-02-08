@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b3ebb1_b3af4b31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-08T19:38:49Z",
+      "side": 1,
+      "message": "This is a cherry-pick of https://dawn-review.googlesource.com/c/dawn/+/173180 to M122.\n\nRequest for merge: https://g-issues.chromium.org/issues/324439761",
+      "revId": "1db6a64b73d4989748c508db2892074458d76a4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
