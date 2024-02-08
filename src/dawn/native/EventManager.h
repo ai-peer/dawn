@@ -79,6 +79,8 @@ class EventManager final : NonMovable {
                                            FutureWaitInfo* infos,
                                            Nanoseconds timeout);
 
+    const SystemHandle& GetOrCreateSharedSystemEventReceiver(Future future);
+
   private:
     bool mTimedWaitAnyEnable = false;
     size_t mTimedWaitAnyMaxCount = kTimedWaitAnyMaxCountDefault;
@@ -159,6 +161,7 @@ class EventManager::TrackedEvent : public RefCounted {
     friend class EventManager;
 
     CompletionData mCompletionData;
+    Ref<SharedSystemEventReceiver> mCompletionSystemEventReceiver = nullptr;
     // Callback has been called.
     std::atomic<bool> mCompleted = false;
 };
