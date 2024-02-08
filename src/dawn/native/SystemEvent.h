@@ -28,8 +28,8 @@
 #ifndef SRC_DAWN_NATIVE_SYSTEMEVENT_H_
 #define SRC_DAWN_NATIVE_SYSTEMEVENT_H_
 
-#include <optional>
 #include <utility>
+#include <vector>
 
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
@@ -59,6 +59,8 @@ class SystemEventReceiver final : NonCopyable {
     explicit SystemEventReceiver(SystemHandle primitive);
     SystemEventReceiver(SystemEventReceiver&&) = default;
     SystemEventReceiver& operator=(SystemEventReceiver&&) = default;
+
+    const SystemHandle& Get() const;
 
   private:
     template <typename It>
@@ -102,6 +104,12 @@ class SystemEventPipeSender final : NonCopyable {
 //   signal it by write()ing into the pipe (to make it become readable, though we won't read() it).
 std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe();
 
+struct SharedSystemEventReceiver : public RefCounted {
+    explicit SharedSystemEventReceiver(SystemEventReceiver&& rhs) : receiver(std::move(rhs)) {}
+
+    SystemEventReceiver receiver;
+};
+
 class SystemEvent : public RefCounted {
   public:
     static Ref<SystemEvent> CreateSignaled();
@@ -111,14 +119,29 @@ class SystemEvent : public RefCounted {
 
     // Lazily create a system event receiver. Immediately after this receiver
     // is signaled, IsSignaled should always return true.
-    const SystemEventReceiver& GetOrCreateSystemEventReceiver();
+    Ref<SharedSystemEventReceiver> GetOrCreateSharedSystemEventReceiver();
+    SystemEventReceiver GetOrCreateNotSharedSystemEventReceiver();
+
+    // Return a SystemEventReceiver that was acquired from GetOrCreateNotSharedSystemEventReceiver.
+    // It will be reused for future calls to get a receiver.
+    void ReturnReceiverToPool(SystemEventReceiver receiver);
 
   private:
+    std::variant<SystemEventReceiver, Ref<SharedSystemEventReceiver>>
+    GetOrCreateSystemEventReceiver(bool shared);
+
+    std::pair<SystemEventPipeSender, SystemEventReceiver> MakePipe();
+
     // mSignaled indicates whether the event has already been signaled.
     // It is stored outside the mPipe mutex so its status can quickly be checked without
     // acquiring a lock.
     std::atomic<bool> mSignaled{false};
-    MutexProtected<std::optional<std::pair<SystemEventPipeSender, SystemEventReceiver>>> mPipe;
+    struct Pipes {
+        std::vector<SystemEventPipeSender> senders;
+        std::vector<SystemEventReceiver> receivers;
+        Ref<SharedSystemEventReceiver> sharedReceiver;
+    };
+    MutexProtected<Pipes> mPipes;
 };
 
 }  // namespace dawn::native

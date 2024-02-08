@@ -53,48 +53,75 @@ class SystemEventAndReadyStateIterator {
   public:
     using WrappedIter = std::vector<TrackedFutureWaitInfo>::iterator;
 
-    // Specify required iterator traits.
-    using value_type = std::pair<const SystemEventReceiver&, bool*>;
-    using difference_type = typename WrappedIter::difference_type;
-    using iterator_category = typename WrappedIter::iterator_category;
-    using pointer = value_type*;
-    using reference = value_type&;
+    class Iterator {
+      public:
+        // Specify required iterator traits.
+        using value_type = std::pair<const SystemEventReceiver&, bool*>;
+        using difference_type = typename WrappedIter::difference_type;
+        using iterator_category = typename WrappedIter::iterator_category;
+        using pointer = value_type*;
+        using reference = value_type&;
 
-    SystemEventAndReadyStateIterator() = default;
-    SystemEventAndReadyStateIterator(const SystemEventAndReadyStateIterator&) = default;
-    SystemEventAndReadyStateIterator& operator=(const SystemEventAndReadyStateIterator&) = default;
+        Iterator() = default;
+        Iterator(const Iterator&) = default;
+        Iterator& operator=(const Iterator&) = default;
 
-    explicit SystemEventAndReadyStateIterator(WrappedIter wrappedIt) : mWrappedIt(wrappedIt) {}
+        explicit Iterator(WrappedIter wrappedIt) : mWrappedIt(wrappedIt) {}
 
-    bool operator!=(const SystemEventAndReadyStateIterator& rhs) {
-        return rhs.mWrappedIt != mWrappedIt;
-    }
-    bool operator==(const SystemEventAndReadyStateIterator& rhs) {
-        return rhs.mWrappedIt == mWrappedIt;
-    }
-    difference_type operator-(const SystemEventAndReadyStateIterator& rhs) {
-        return mWrappedIt - rhs.mWrappedIt;
+        bool operator!=(const Iterator& rhs) { return rhs.mWrappedIt != mWrappedIt; }
+        bool operator==(const Iterator& rhs) { return rhs.mWrappedIt == mWrappedIt; }
+        difference_type operator-(const Iterator& rhs) { return mWrappedIt - rhs.mWrappedIt; }
+
+        Iterator operator+(difference_type rhs) { return Iterator{mWrappedIt + rhs}; }
+
+        Iterator& operator++() {
+            ++mWrappedIt;
+            return *this;
+        }
+
+        value_type operator*() {
+            return {
+#if DAWN_PLATFORM_IS(WINDOWS)
+                std::get<Ref<SystemEvent>>(mWrappedIt->event->GetCompletionData())
+                    ->GetOrCreateSharedSystemEventReceiver()
+                    ->receiver,
+#else
+                mWrappedIt->receiverForWait,
+#endif
+                    &mWrappedIt->ready,
+            };
+        }
+
+      private:
+        WrappedIter mWrappedIt;
+    };
+
+    SystemEventAndReadyStateIterator(WrappedIter begin, WrappedIter end)
+        : mBegin(begin), mEnd(end) {
+#if !DAWN_PLATFORM_IS(WINDOWS)
+        for (auto it = mBegin; it != mEnd; ++it) {
+            it->receiverForWait = std::get<Ref<SystemEvent>>(it->event->GetCompletionData())
+                                      ->GetOrCreateNotSharedSystemEventReceiver();
+        }
+#endif
     }
 
-    SystemEventAndReadyStateIterator operator+(difference_type rhs) {
-        return SystemEventAndReadyStateIterator{mWrappedIt + rhs};
+    ~SystemEventAndReadyStateIterator() {
+#if !DAWN_PLATFORM_IS(WINDOWS)
+        for (auto it = mBegin; it != mEnd; ++it) {
+            std::get<Ref<SystemEvent>>(it->event->GetCompletionData())
+                ->ReturnReceiverToPool(std::move(it->receiverForWait));
+        }
+#endif
     }
 
-    SystemEventAndReadyStateIterator& operator++() {
-        ++mWrappedIt;
-        return *this;
-    }
+    Iterator begin() { return Iterator(mBegin); }
 
-    value_type operator*() {
-        return {
-            std::get<Ref<SystemEvent>>(mWrappedIt->event->GetCompletionData())
-                ->GetOrCreateSystemEventReceiver(),
-            &mWrappedIt->ready,
-        };
-    }
+    Iterator end() { return Iterator(mBegin); }
 
   private:
-    WrappedIter mWrappedIt;
+    WrappedIter mBegin;
+    WrappedIter mEnd;
 };
 
 // Wait/poll the queue for futures in range [begin, end). `waitSerial` should be
@@ -211,8 +238,8 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
                                            lowestWaitSerial, begin, mid, timeout);
         } else {
             if (timeout > Nanoseconds(0)) {
-                success = WaitAnySystemEvent(SystemEventAndReadyStateIterator{begin},
-                                             SystemEventAndReadyStateIterator{mid}, timeout);
+                SystemEventAndReadyStateIterator iterator(begin, mid);
+                success = WaitAnySystemEvent(iterator.begin(), iterator.end(), timeout);
             } else {
                 // Poll the completion events.
                 success = false;
