@@ -28,7 +28,9 @@
 #include "dawn/native/Adapter.h"
 
 #include <algorithm>
+#include <iomanip>
 #include <memory>
+#include <sstream>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -38,6 +40,17 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+
+namespace {
+
+// std::string FormatDevice(uint32_t deviceId) {
+//     std::ostringstream device;
+//     device << "0x" << std::setfill('0') << std::uppercase << std::internal << std::hex
+//            << std::setw(4) << deviceId;
+//     return device.str();
+// }
+
+}  // namespace
 
 namespace dawn::native {
 
@@ -244,6 +257,54 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     }
 
     return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+}
+
+void AdapterBase::APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback,
+                                   void* userdata) {
+    // FIXME
+}
+
+Future AdapterBase::APIRequestAdapterInfoF(const RequestAdapterInfoCallbackInfo& callbackInfo) {
+    struct RequestAdapterInfoEvent final : public EventManager::TrackedEvent {
+        WGPURequestAdapterInfoCallback mCallback;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> mUserdata;
+
+        RequestAdapterInfoEvent(const RequestAdapterInfoCallbackInfo& callbackInfo)
+            : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
+              mCallback(callbackInfo.callback),
+              mUserdata(callbackInfo.userdata) {
+            CompleteIfSpontaneous();
+        }
+
+        ~RequestAdapterInfoEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+        void Complete(EventCompletionType completionType) override {
+
+            // AdapterProperties properties;
+            // this.APIGetProperties(&properties);
+
+            WGPUAdapterInfo adapter_info;
+            // adapter_info.vendor = properties.vendorName;
+            // adapter_info.architecture = properties.architecture;
+
+            // std::string device = FormatDevice(properties.deviceID);
+            // size_t deviceCLen = device.length() + 1;
+            // char* ptr = new char[deviceCLen];
+            // adapter_info.device = ptr;
+            // memcpy(ptr, device.c_str(), deviceCLen);
+            // // TODO: Free memory.
+
+            // adapter_info.description = properties.name;
+
+            mCallback(adapter_info, mUserdata);
+        }
+    };
+
+    FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+        callbackInfo.mode,
+        AcquireRef(new RequestAdapterInfoEvent(callbackInfo)));
+    return {futureID};
 }
 
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
