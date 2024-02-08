@@ -210,10 +210,12 @@ ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
 Ref<PipelineCacheBase> Device::GetOrCreatePipelineCacheImpl(const CacheKey& key) {
     return PipelineCache::Create(this, key);
 }
-void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                WGPUCreateComputePipelineAsyncCallback callback,
-                                                void* userdata) {
-    ComputePipeline::InitializeAsync(std::move(computePipeline), callback, userdata);
+Ref<EventManager::TrackedEvent> Device::InitializeComputePipelineAsyncImpl(
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    Ref<CreateComputePipelineAsyncEvent> event =
+        ComputePipeline::InitializeAsync(this, std::move(computePipeline), callbackInfo);
+    return event;
 }
 void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                WGPUCreateRenderPipelineAsyncCallback callback,
