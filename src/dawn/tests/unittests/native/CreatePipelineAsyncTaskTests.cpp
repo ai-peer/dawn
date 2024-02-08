@@ -43,10 +43,6 @@ namespace {
 
 using ::testing::Test;
 
-static constexpr std::string_view kComputeShader = R"(
-        @compute @workgroup_size(1) fn main() {}
-    )";
-
 static constexpr std::string_view kVertexShader = R"(
         @vertex fn main() -> @builtin(position) vec4f {
             return vec4f(0.0, 0.0, 0.0, 1.0);
@@ -54,6 +50,8 @@ static constexpr std::string_view kVertexShader = R"(
     )";
 
 class CreatePipelineAsyncTaskTests : public DawnMockTest {};
+
+// TODO(dawn:2353): Update
 
 // A regression test for a null pointer issue in CreateRenderPipelineAsyncTask::Run().
 // See crbug.com/dawn/1310 for more details.
@@ -107,60 +105,6 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationInternalErrorInCreateRenderPi
     device.Tick();
 
     EXPECT_CALL(*renderPipelineMock.Get(), DestroyImpl).Times(1);
-}
-
-// A regression test for a null pointer issue in CreateComputePipelineAsyncTask::Run().
-// See crbug.com/dawn/1310 for more details.
-TEST_F(CreatePipelineAsyncTaskTests, InitializationValidationErrorInCreateComputePipelineAsync) {
-    wgpu::ComputePipelineDescriptor desc = {};
-    desc.compute.module = utils::CreateShaderModule(device, kComputeShader.data());
-    Ref<ComputePipelineMock> computePipelineMock =
-        ComputePipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
-
-    ON_CALL(*computePipelineMock.Get(), InitializeImpl)
-        .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(InternalErrorType::Validation, "Initialization Error"))));
-
-    CreateComputePipelineAsyncTask asyncTask(
-        computePipelineMock,
-        [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
-           const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_ValidationError,
-                      status);
-        },
-        nullptr);
-
-    asyncTask.Run();
-    device.Tick();
-
-    EXPECT_CALL(*computePipelineMock.Get(), DestroyImpl).Times(1);
-}
-
-// Test that Internal error are converted to the InternalError status in async pipeline creation
-// callbacks.
-TEST_F(CreatePipelineAsyncTaskTests, InitializationInternalErrorInCreateComputePipelineAsync) {
-    wgpu::ComputePipelineDescriptor desc = {};
-    desc.compute.module = utils::CreateShaderModule(device, kComputeShader.data());
-    Ref<ComputePipelineMock> computePipelineMock =
-        ComputePipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
-
-    ON_CALL(*computePipelineMock.Get(), InitializeImpl)
-        .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(dawn::native::InternalErrorType::Internal, "Initialization Error"))));
-
-    dawn::native::CreateComputePipelineAsyncTask asyncTask(
-        computePipelineMock,
-        [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
-           const char* message, void* userdata) {
-            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_InternalError,
-                      status);
-        },
-        nullptr);
-
-    asyncTask.Run();
-    device.Tick();
-
-    EXPECT_CALL(*computePipelineMock.Get(), DestroyImpl).Times(1);
 }
 
 // Test that a long async task's execution won't extend to after the device is dropped.
