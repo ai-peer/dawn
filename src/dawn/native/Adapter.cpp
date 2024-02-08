@@ -28,7 +28,10 @@
 #include "dawn/native/Adapter.h"
 
 #include <algorithm>
+#include <iomanip>
 #include <memory>
+#include <sstream>
+#include <string>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -38,6 +41,17 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+
+namespace {
+
+std::string FormatDevice(uint32_t deviceId) {
+    std::ostringstream device;
+    device << "0x" << std::setfill('0') << std::uppercase << std::internal << std::hex
+           << std::setw(4) << deviceId;
+    return device.str();
+}
+
+}  // namespace
 
 namespace dawn::native {
 
@@ -173,6 +187,13 @@ void APIAdapterPropertiesMemoryHeapsFreeMembers(
     delete[] memoryHeapProperties.heapInfo;
 }
 
+void APIAdapterInfoFreeMembers(WGPUAdapterInfo adapterInfo) {
+    delete[] adapterInfo.vendor;
+    delete[] adapterInfo.architecture;
+    delete[] adapterInfo.device;
+    delete[] adapterInfo.description;
+}
+
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
     return mSupportedFeatures.IsEnabled(feature);
 }
@@ -247,6 +268,90 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     }
 
     return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+}
+
+void AdapterBase::APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    WGPUAdapterInfo adapterInfo;
+
+    size_t vendorNameCLen = mPhysicalDevice->GetVendorName().length() + 1;
+    char* vendorPtr = new char[vendorNameCLen];
+    adapterInfo.vendor = vendorPtr;
+    memcpy(vendorPtr, mPhysicalDevice->GetVendorName().c_str(), vendorNameCLen);
+
+    size_t architectureCLen = mPhysicalDevice->GetArchitectureName().length() + 1;
+    char* architecturePtr = new char[architectureCLen];
+    adapterInfo.vendor = architecturePtr;
+    memcpy(architecturePtr, mPhysicalDevice->GetArchitectureName().c_str(), architectureCLen);
+
+    std::string device = FormatDevice(mPhysicalDevice->GetDeviceId());
+    size_t deviceCLen = device.length() + 1;
+    char* devicePtr = new char[deviceCLen];
+    adapterInfo.device = devicePtr;
+    memcpy(devicePtr, device.c_str(), deviceCLen);
+
+    size_t descriptionCLen = mPhysicalDevice->GetDriverDescription().length() + 1;
+    char* descriptionPtr = new char[descriptionCLen];
+    adapterInfo.description = descriptionPtr;
+    memcpy(descriptionPtr, mPhysicalDevice->GetDriverDescription().c_str(), descriptionCLen);
+
+    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
+    callback(WGPURequestAdapterInfoStatus_Success, &adapterInfo, userdata);
+}
+
+Future AdapterBase::APIRequestAdapterInfoF(const RequestAdapterInfoCallbackInfo& callbackInfo) {
+    struct RequestAdapterInfoEvent final : public EventManager::TrackedEvent {
+        Ref<PhysicalDeviceBase> mPhysicalDevice;
+        WGPURequestAdapterInfoCallback mCallback;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> mUserdata;
+
+        RequestAdapterInfoEvent(Ref<PhysicalDeviceBase> physicalDevice,
+                                const RequestAdapterInfoCallbackInfo& callbackInfo)
+            : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
+              mPhysicalDevice(physicalDevice),
+              mCallback(callbackInfo.callback),
+              mUserdata(callbackInfo.userdata) {
+            CompleteIfSpontaneous();
+        }
+
+        ~RequestAdapterInfoEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+        void Complete(EventCompletionType completionType) override {
+            if (completionType == EventCompletionType::Shutdown) {
+                mCallback(WGPURequestAdapterInfoStatus_InstanceDropped, nullptr, mUserdata);
+                return;
+            }
+
+            WGPUAdapterInfo adapterInfo;
+            size_t vendorNameCLen = mPhysicalDevice->GetVendorName().length() + 1;
+            char* vendorPtr = new char[vendorNameCLen];
+            adapterInfo.vendor = vendorPtr;
+            memcpy(vendorPtr, mPhysicalDevice->GetVendorName().c_str(), vendorNameCLen);
+
+            size_t architectureCLen = mPhysicalDevice->GetArchitectureName().length() + 1;
+            char* architecturePtr = new char[architectureCLen];
+            adapterInfo.vendor = architecturePtr;
+            memcpy(architecturePtr, mPhysicalDevice->GetArchitectureName().c_str(),
+                   architectureCLen);
+
+            std::string device = FormatDevice(mPhysicalDevice->GetDeviceId());
+            size_t deviceCLen = device.length() + 1;
+            char* devicePtr = new char[deviceCLen];
+            adapterInfo.device = devicePtr;
+            memcpy(devicePtr, device.c_str(), deviceCLen);
+
+            size_t descriptionCLen = mPhysicalDevice->GetDriverDescription().length() + 1;
+            char* descriptionPtr = new char[descriptionCLen];
+            adapterInfo.description = descriptionPtr;
+            memcpy(descriptionPtr, mPhysicalDevice->GetDriverDescription().c_str(),
+                   descriptionCLen);
+            mCallback(WGPURequestAdapterInfoStatus_Success, &adapterInfo, mUserdata);
+        }
+    };
+
+    FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+        AcquireRef(new RequestAdapterInfoEvent(mPhysicalDevice, callbackInfo)));
+    return {futureID};
 }
 
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,

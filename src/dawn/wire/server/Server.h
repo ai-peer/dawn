@@ -154,6 +154,13 @@ struct RequestAdapterUserdata : CallbackUserdata {
     ObjectId adapterObjectId;
 };
 
+struct RequestAdapterInfoUserdata : CallbackUserdata {
+    using CallbackUserdata::CallbackUserdata;
+
+    ObjectHandle eventManager;
+    WGPUFuture future;
+};
+
 struct RequestDeviceUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
@@ -226,6 +233,9 @@ class Server : public ServerBase {
                                   WGPURequestAdapterStatus status,
                                   WGPUAdapter adapter,
                                   const char* message);
+    void OnRequestAdapterInfoCallback(RequestAdapterInfoUserdata* userdata,
+                                      WGPURequestAdapterInfoStatus status,
+                                      const WGPUAdapterInfo* adapterInfo);
     void OnRequestDeviceCallback(RequestDeviceUserdata* userdata,
                                  WGPURequestDeviceStatus status,
                                  WGPUDevice device,
