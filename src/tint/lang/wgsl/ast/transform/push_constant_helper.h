@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,34 +25,40 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "dawn/native/opengl/ComputePipelineGL.h"
+#ifndef SRC_TINT_LANG_WGSL_AST_TRANSFORM_PUSH_CONSTANT_HELPER_H_
+#define SRC_TINT_LANG_WGSL_AST_TRANSFORM_PUSH_CONSTANT_HELPER_H_
 
-#include "dawn/native/opengl/DeviceGL.h"
+#include <map>
 
-namespace dawn::native::opengl {
+#include "src/tint/lang/wgsl/program/program_builder.h"
 
-// static
-Ref<ComputePipeline> ComputePipeline::CreateUninitialized(
-    Device* device,
-    const UnpackedPtr<ComputePipelineDescriptor>& descriptor) {
-    return AcquireRef(new ComputePipeline(device, descriptor));
+namespace tint::program {
+class CloneContext;
 }
+namespace tint::ast {
+struct Type;
+class StructMember;
+}  // namespace tint::ast
+namespace tint::ast::transform {
 
-ComputePipeline::~ComputePipeline() = default;
+/// A helper that manages the finding, reading, and modifying of push_constant blocks.
+/// This is used by transforms that wish to add new data to the single push_constant block
+/// which is allowed per entry point.
+class PushConstantHelper {
+  public:
+    /// Constructor
+    explicit PushConstantHelper(program::CloneContext& c);
+    ~PushConstantHelper();
 
-void ComputePipeline::DestroyImpl() {
-    ComputePipelineBase::DestroyImpl();
-    DeleteProgram(ToBackend(GetDevice())->GetGL());
-}
+    void InsertMember(const char* name, ast::Type type, uint32_t offset);
+    Symbol Run();
 
-MaybeError ComputePipeline::InitializeImpl() {
-    DAWN_TRY(InitializeBase(ToBackend(GetDevice())->GetGL(), ToBackend(GetLayout()), GetAllStages(),
-                            /* usesInstanceIndex */ false, /* usesFragDepth */ false));
-    return {};
-}
+  private:
+    std::map<uint32_t, const tint::ast::StructMember*> member_map;
+    program::CloneContext& ctx;
+    const ast::Struct* new_struct = nullptr;
+};
 
-void ComputePipeline::ApplyNow() {
-    PipelineGL::ApplyNow(ToBackend(GetDevice())->GetGL());
-}
+}  // namespace tint::ast::transform
 
-}  // namespace dawn::native::opengl
+#endif  // SRC_TINT_LANG_WGSL_AST_TRANSFORM_MANAGER_H_
