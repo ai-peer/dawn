@@ -52,6 +52,11 @@ void EGLFunctions::Init(void* (*getProc)(const char*)) {
     Initialize = reinterpret_cast<PFNEGLINITIALIZEPROC>(GetProcAddress("eglInitialize"));
     MakeCurrent = reinterpret_cast<PFNEGLMAKECURRENTPROC>(GetProcAddress("eglMakeCurrent"));
     QueryString = reinterpret_cast<PFNEGLQUERYSTRINGPROC>(GetProcAddress("eglQueryString"));
+    CreateSyncKHR = reinterpret_cast<PFNEGLCREATESYNCKHRPROC>(GetProcAddress("eglCreateSyncKHR"));
+    DestroySyncKHR =
+        reinterpret_cast<PFNEGLDESTROYSYNCKHRPROC>(GetProcAddress("eglDestroySyncKHR"));
+    ClientWaitSyncKHR =
+        reinterpret_cast<PFNEGLCLIENTWAITSYNCKHRPROC>(GetProcAddress("eglClientWaitSyncKHR"));
 }
 
 }  // namespace dawn::native::opengl
