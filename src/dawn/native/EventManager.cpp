@@ -454,6 +454,37 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
     return wgpu::WaitStatus::Success;
 }
 
+const SystemHandle& EventManager::GetOrCreateSharedSystemEventReceiver(Future future) {
+    const SystemHandle* handle = mEvents->Use([&](auto events) -> const SystemHandle* {
+        auto it = events->find(future.id);
+        if (it == events->end()) {
+            return nullptr;
+        }
+        TrackedEvent* event = it->second.Get();
+        if (!event->mCompletionSystemEventReceiver) {
+            if (auto* queueAndSerial = std::get_if<QueueAndSerial>(&event->mCompletionData)) {
+                event->mCompletionSystemEventReceiver =
+                    queueAndSerial->queue->GetOrCreateSharedSystemEventReceiver(
+                        queueAndSerial->completionSerial);
+                if (!event->mCompletionSystemEventReceiver) {
+                    return nullptr;
+                }
+            } else {
+                DAWN_ASSERT(std::holds_alternative<QueueAndSerial>(event->mCompletionData));
+                event->mCompletionSystemEventReceiver =
+                    std::get<Ref<SystemEvent>>(event->mCompletionData)
+                        ->GetOrCreateSharedSystemEventReceiver();
+            }
+        }
+        return &event->mCompletionSystemEventReceiver->receiver.Get();
+    });
+    if (handle == nullptr) {
+        static SystemHandle sNoHandle;
+        return sNoHandle;
+    }
+    return *handle;
+}
+
 // EventManager::TrackedEvent
 
 EventManager::TrackedEvent::TrackedEvent(wgpu::CallbackMode callbackMode,
