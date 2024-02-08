@@ -56,6 +56,8 @@ class AdapterBase : public RefCounted {
     void APIGetProperties(AdapterProperties* properties) const;
     bool APIHasFeature(wgpu::FeatureName feature) const;
     size_t APIEnumerateFeatures(wgpu::FeatureName* features) const;
+    void APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata);
+    Future APIRequestAdapterInfoF(const RequestAdapterInfoCallbackInfo& callbackInfo);
     void APIRequestDevice(const DeviceDescriptor* descriptor,
                           WGPURequestDeviceCallback callback,
                           void* userdata);
