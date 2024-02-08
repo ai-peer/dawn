@@ -547,9 +547,12 @@ class DeviceBase : public RefCountedWithExternalCount {
         Ref<ComputePipelineBase> computePipeline);
     Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(Ref<RenderPipelineBase> renderPipeline);
     virtual Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(const CacheKey& key);
-    virtual void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                    WGPUCreateComputePipelineAsyncCallback callback,
-                                                    void* userdata);
+    // virtual void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
+    //                                                 WGPUCreateComputePipelineAsyncCallback
+    //                                                 callback, void* userdata);
+    virtual Ref<EventManager::TrackedEvent> InitializeComputePipelineAsyncImpl(
+        Ref<ComputePipelineBase> computePipeline,
+        const CreateComputePipelineAsyncCallbackInfo& callbackInfo);
     virtual void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                                    void* userdata);

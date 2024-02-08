@@ -1225,37 +1225,112 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
     TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateComputePipelineAsync", "label",
                  utils::GetLabelForTrace(descriptor->label));
 
-    auto resultOrError = CreateUninitializedComputePipeline(descriptor);
-    // Enqueue the callback directly when an error has been found in the front-end
-    // validation.
-    if (resultOrError.IsError()) {
-        AddComputePipelineAsyncCallbackTask(resultOrError.AcquireError(), descriptor->label,
-                                            callback, userdata);
-        return;
-    }
+    // auto resultOrError = CreateUninitializedComputePipeline(descriptor);
+    // // Enqueue the callback directly when an error has been found in the front-end
+    // // validation.
+    // if (resultOrError.IsError()) {
+    //     AddComputePipelineAsyncCallbackTask(resultOrError.AcquireError(), descriptor->label,
+    //                                         callback, userdata);
+    //     return;
+    // }
 
-    Ref<ComputePipelineBase> uninitializedComputePipeline = resultOrError.AcquireSuccess();
+    // Ref<ComputePipelineBase> uninitializedComputePipeline = resultOrError.AcquireSuccess();
 
-    // Call the callback directly when we can get a cached compute pipeline object.
-    Ref<ComputePipelineBase> cachedComputePipeline =
-        GetCachedComputePipeline(uninitializedComputePipeline.Get());
-    if (cachedComputePipeline.Get() != nullptr) {
-        mCallbackTaskManager->AddCallbackTask(
-            std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
-                      ToAPI(ReturnToAPI(std::move(cachedComputePipeline))), "", userdata));
-    } else {
-        // Otherwise we will create the pipeline object in InitializeComputePipelineAsyncImpl(),
-        // where the pipeline object may be initialized asynchronously and the result will be
-        // saved to mCreatePipelineAsyncTracker.
-        InitializeComputePipelineAsyncImpl(std::move(uninitializedComputePipeline), callback,
-                                           userdata);
-    }
+    // // Call the callback directly when we can get a cached compute pipeline object.
+    // Ref<ComputePipelineBase> cachedComputePipeline =
+    //     GetCachedComputePipeline(uninitializedComputePipeline.Get());
+    // if (cachedComputePipeline.Get() != nullptr) {
+    //     mCallbackTaskManager->AddCallbackTask(
+    //         std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
+    //                   ToAPI(ReturnToAPI(std::move(cachedComputePipeline))), "", userdata));
+    // } else {
+    //     // Otherwise we will create the pipeline object in InitializeComputePipelineAsyncImpl(),
+    //     // where the pipeline object may be initialized asynchronously and the result will be
+    //     // saved to mCreatePipelineAsyncTracker.
+    //     InitializeComputePipelineAsyncImpl(std::move(uninitializedComputePipeline), callback,
+    //                                        userdata);
+    // }
+
+    static wgpu::CreateComputePipelineAsyncCallback kDefaultCallback =
+        [](WGPUCreatePipelineAsyncStatus, WGPUComputePipeline, char const*, void*) {};
+
+    // auto wrapperCallback = [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline pipeline,
+    // char const* message, void* userdata) {
+
+    // };
+
+    CreateComputePipelineAsyncCallbackInfo callbackInfo = {};
+    callbackInfo.mode = wgpu::CallbackMode::AllowProcessEvents;
+    callbackInfo.callback = callback != nullptr ? callback : kDefaultCallback;
+    // callbackInfo.callback = callback != nullptr ? wrapperCallback : kDefaultCallback;
+    callbackInfo.userdata = userdata;
+    APICreateComputePipelineAsyncF(descriptor, callbackInfo);
 }
+
 Future DeviceBase::APICreateComputePipelineAsyncF(
     const ComputePipelineDescriptor* descriptor,
     const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
-    // TODO(dawn:1987) Implement this.
-    DAWN_CHECK(false);
+    Ref<EventManager::TrackedEvent> event;
+
+    auto resultOrError = CreateUninitializedComputePipeline(descriptor);
+    if (resultOrError.IsError()) {
+        // AddComputePipelineAsyncCallbackTask(resultOrError.AcquireError(), descriptor->label,
+        //                                     callback, userdata);
+
+        // Validation error
+        event = AcquireRef(
+            new CreateComputePipelineAsyncEvent(this, callbackInfo, resultOrError.AcquireError()));
+    } else {
+        Ref<ComputePipelineBase> uninitializedComputePipeline = resultOrError.AcquireSuccess();
+
+        Ref<ComputePipelineBase> cachedComputePipeline =
+            GetCachedComputePipeline(uninitializedComputePipeline.Get());
+        if (cachedComputePipeline.Get() != nullptr) {
+            // Call the callback directly when we can get a cached compute pipeline object.
+            event = AcquireRef(new CreateComputePipelineAsyncEvent(
+                this, callbackInfo, std::move(cachedComputePipeline)));
+        } else {
+            // // Otherwise we will create the pipeline object in
+            // InitializeComputePipelineAsyncImpl(),
+            // // where the pipeline object may be initialized asynchronously and the result will be
+            // // saved to mCreatePipelineAsyncTracker.
+            // InitializeComputePipelineAsyncImpl(std::move(uninitializedComputePipeline), callback,
+            //                                    userdata);
+
+            // // Call InitializeComputePipelineAsyncImpl with overiiden version
+            // MaybeError maybeError;
+            // {
+            //     SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
+            //     maybeError = uninitializedComputePipeline->Initialize();
+            // }
+            // DAWN_HISTOGRAM_BOOLEAN(GetPlatform(), "CreateComputePipelineSuccess",
+            // maybeError.IsSuccess());
+
+            // if (maybeError.IsError()) {
+            //     // AddComputePipelineAsyncCallbackTask(
+            //     //     maybeError.AcquireError(),
+            //     uninitializedComputePipeline->GetLabel().c_str(), callback, userdata); event =
+            //     AcquireRef(new CreateComputePipelineAsyncEvent(
+            //         this,
+            //         callbackInfo,
+            //         maybeError.AcquireError()
+            //     ));
+            // } else {
+            //     // AddComputePipelineAsyncCallbackTask(std::move(computePipeline), callback,
+            //     userdata); event = AcquireRef(new CreateComputePipelineAsyncEvent(
+            //         this,
+            //         callbackInfo,
+            //         uninitializedComputePipeline
+            //     ));
+            // }
+
+            event = InitializeComputePipelineAsyncImpl(std::move(uninitializedComputePipeline),
+                                                       callbackInfo);
+        }
+    }
+
+    FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
+    return {futureID};
 }
 PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
     const PipelineLayoutDescriptor* descriptor) {
@@ -1908,24 +1983,52 @@ ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateUninitializedComputePi
     return CreateUninitializedComputePipelineImpl(Unpack(&appliedDescriptor));
 }
 
+// // This function is overwritten with the async version on the backends that supports
+// // initializing compute pipelines asynchronously.
+// // TODO: remove
+// void DeviceBase::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
+//                                                     WGPUCreateComputePipelineAsyncCallback
+//                                                     callback, void* userdata) {
+//     MaybeError maybeError;
+//     {
+//         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
+//         maybeError = computePipeline->Initialize();
+//     }
+//     DAWN_HISTOGRAM_BOOLEAN(GetPlatform(), "CreateComputePipelineSuccess",
+//     maybeError.IsSuccess());
+
+//     if (maybeError.IsError()) {
+//         AddComputePipelineAsyncCallbackTask(
+//             maybeError.AcquireError(), computePipeline->GetLabel().c_str(), callback, userdata);
+//     } else {
+//         AddComputePipelineAsyncCallbackTask(std::move(computePipeline), callback, userdata);
+//     }
+// }
+
 // This function is overwritten with the async version on the backends that supports
 // initializing compute pipelines asynchronously.
-void DeviceBase::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                    WGPUCreateComputePipelineAsyncCallback callback,
-                                                    void* userdata) {
+Ref<EventManager::TrackedEvent> DeviceBase::InitializeComputePipelineAsyncImpl(
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    Ref<EventManager::TrackedEvent> event;
+
     MaybeError maybeError;
     {
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
+        // version for backend without async pipeline creation
         maybeError = computePipeline->Initialize();
     }
     DAWN_HISTOGRAM_BOOLEAN(GetPlatform(), "CreateComputePipelineSuccess", maybeError.IsSuccess());
 
     if (maybeError.IsError()) {
-        AddComputePipelineAsyncCallbackTask(
-            maybeError.AcquireError(), computePipeline->GetLabel().c_str(), callback, userdata);
+        event = AcquireRef(
+            new CreateComputePipelineAsyncEvent(this, callbackInfo, maybeError.AcquireError()));
     } else {
-        AddComputePipelineAsyncCallbackTask(std::move(computePipeline), callback, userdata);
+        event =
+            AcquireRef(new CreateComputePipelineAsyncEvent(this, callbackInfo, computePipeline));
     }
+
+    return event;
 }
 
 // This function is overwritten with the async version on the backends
@@ -2223,6 +2326,7 @@ dawn::platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() const {
     return mWorkerTaskPool.get();
 }
 
+// TODO: remove
 void DeviceBase::AddComputePipelineAsyncCallbackTask(
     std::unique_ptr<ErrorData> error,
     const char* label,
