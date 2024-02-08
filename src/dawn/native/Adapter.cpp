@@ -29,15 +29,28 @@
 
 #include <algorithm>
 #include <memory>
+#include <string>
 #include <tuple>
 #include <utility>
 #include <vector>
 
+#include "absl/strings/str_format.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+
+namespace {
+
+std::string FormatDeviceForAdapterInfo(uint32_t deviceId) {
+    if (deviceId <= 0xffff) {
+        return absl::StrFormat("0x%04x", deviceId);
+    }
+    return absl::StrFormat("0x%08x", deviceId);
+}
+
+}  // namespace
 
 namespace dawn::native {
 
@@ -173,6 +186,13 @@ void APIAdapterPropertiesMemoryHeapsFreeMembers(
     delete[] memoryHeapProperties.heapInfo;
 }
 
+void APIAdapterInfoFreeMembers(WGPUAdapterInfo adapterInfo) {
+    delete[] adapterInfo.vendor;
+    delete[] adapterInfo.architecture;
+    delete[] adapterInfo.device;
+    delete[] adapterInfo.description;
+}
+
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
     return mSupportedFeatures.IsEnabled(feature);
 }
@@ -247,6 +267,69 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     }
 
     return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+}
+
+void AdapterBase::APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    if (callback == nullptr) {
+        return;
+    }
+    RequestAdapterInfoCallbackInfo callbackInfo = {nullptr, wgpu::CallbackMode::AllowSpontaneous,
+                                                   callback, userdata};
+    APIRequestAdapterInfoF(callbackInfo);
+}
+
+Future AdapterBase::APIRequestAdapterInfoF(const RequestAdapterInfoCallbackInfo& callbackInfo) {
+    struct RequestAdapterInfoEvent final : public EventManager::TrackedEvent {
+        Ref<PhysicalDeviceBase> mPhysicalDevice;
+        WGPURequestAdapterInfoCallback mCallback;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> mUserdata;
+
+        RequestAdapterInfoEvent(Ref<PhysicalDeviceBase> physicalDevice,
+                                const RequestAdapterInfoCallbackInfo& callbackInfo)
+            : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
+              mPhysicalDevice(physicalDevice),
+              mCallback(callbackInfo.callback),
+              mUserdata(callbackInfo.userdata) {}
+
+        ~RequestAdapterInfoEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+        void Complete(EventCompletionType completionType) override {
+            if (completionType == EventCompletionType::Shutdown) {
+                mCallback(WGPURequestAdapterInfoStatus_InstanceDropped, nullptr, mUserdata);
+                return;
+            }
+
+            WGPUAdapterInfo adapterInfo;
+            size_t vendorNameCLen = mPhysicalDevice->GetVendorName().length() + 1;
+            char* vendorPtr = new char[vendorNameCLen];
+            adapterInfo.vendor = vendorPtr;
+            memcpy(vendorPtr, mPhysicalDevice->GetVendorName().c_str(), vendorNameCLen);
+
+            size_t architectureCLen = mPhysicalDevice->GetArchitectureName().length() + 1;
+            char* architecturePtr = new char[architectureCLen];
+            adapterInfo.vendor = architecturePtr;
+            memcpy(architecturePtr, mPhysicalDevice->GetArchitectureName().c_str(),
+                   architectureCLen);
+
+            std::string device = FormatDeviceForAdapterInfo(mPhysicalDevice->GetDeviceId());
+            size_t deviceCLen = device.length() + 1;
+            char* devicePtr = new char[deviceCLen];
+            adapterInfo.device = devicePtr;
+            memcpy(devicePtr, device.c_str(), deviceCLen);
+
+            size_t descriptionCLen = mPhysicalDevice->GetDriverDescription().length() + 1;
+            char* descriptionPtr = new char[descriptionCLen];
+            adapterInfo.description = descriptionPtr;
+            memcpy(descriptionPtr, mPhysicalDevice->GetDriverDescription().c_str(),
+                   descriptionCLen);
+            mCallback(WGPURequestAdapterInfoStatus_Success, &adapterInfo, mUserdata);
+        }
+    };
+
+    FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+        AcquireRef(new RequestAdapterInfoEvent(mPhysicalDevice, callbackInfo)));
+    return {futureID};
 }
 
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,

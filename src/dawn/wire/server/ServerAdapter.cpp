@@ -32,6 +32,32 @@
 
 namespace dawn::wire::server {
 
+WireResult Server::DoAdapterRequestAdapterInfo(Known<WGPUAdapter> adapter,
+                                               ObjectHandle eventManager,
+                                               WGPUFuture future) {
+    auto userdata = MakeUserdata<RequestAdapterInfoUserdata>();
+    userdata->eventManager = eventManager;
+    userdata->future = future;
+
+    mProcs.adapterRequestAdapterInfo(adapter->handle,
+                                     ForwardToServer<&Server::OnRequestAdapterInfoCallback>,
+                                     userdata.release());
+    return WireResult::Success;
+}
+
+void Server::OnRequestAdapterInfoCallback(RequestAdapterInfoUserdata* data,
+                                          WGPURequestAdapterInfoStatus status,
+                                          const WGPUAdapterInfo* adapterInfo) {
+    ReturnAdapterRequestAdapterInfoCallbackCmd cmd = {};
+    cmd.eventManager = data->eventManager;
+    cmd.future = data->future;
+    cmd.status = status;
+    cmd.adapterInfo = adapterInfo;
+
+    SerializeCommand(cmd);
+    mProcs.adapterInfoFreeMembers(*adapterInfo);
+}
+
 WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
                                           ObjectHandle eventManager,
                                           WGPUFuture future,
