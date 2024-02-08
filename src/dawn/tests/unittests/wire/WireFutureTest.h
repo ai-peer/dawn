@@ -207,6 +207,49 @@ class WireFutureTestWithParams : public WireFutureTestWithParamsBase<Params> {
 template <typename Callback, typename CallbackInfo, auto& AsyncF, auto& FutureF>
 using WireFutureTest = WireFutureTestWithParams<Callback, CallbackInfo, AsyncF, FutureF>;
 
+template <typename Callback,
+          typename CallbackInfo,
+          auto& FutureF,
+          typename Params = WireFutureTestParam,
+          typename FutureFT = decltype(FutureF)>
+class WireFutureOnlyTestWithParams : public WireFutureTestWithParamsBase<Params> {
+  protected:
+    template <typename... Args>
+    void CallImpl(void* userdata, Args&&... args) {
+        CallbackInfo callbackInfo = {};
+        callbackInfo.mode = ToWGPUCallbackMode(this->GetParam().mCallbackMode);
+        callbackInfo.callback = mMockCb.Callback();
+        callbackInfo.userdata = mMockCb.MakeUserdata(userdata);
+        this->mFutureIDs.push_back(mFutureF(std::forward<Args>(args)..., callbackInfo).id);
+    }
+
+    // In order to tightly bound when callbacks are expected to occur, test writers only have access
+    // to the mock callback via the argument passed usually via a lamdba. The 'exp' lambda should
+    // generally be a block of expectations on the mock callback followed by one statement where we
+    // expect the callbacks to be called from. If the callbacks do not occur in the scope of the
+    // lambda, the mock will fail the test.
+    //
+    // Usage:
+    //   ExpectWireCallbackWhen([&](auto& mockCb) {
+    //       // Set scoped expectations on the mock callback.
+    //       EXPECT_CALL(mockCb, Call).Times(1);
+    //
+    //       // Call the statement where we want to ensure the callbacks occur.
+    //       FlushCallbacks();
+    //   });
+    void ExpectWireCallbacksWhen(std::function<void(testing::MockCallback<Callback>&)> exp) {
+        exp(mMockCb);
+        ASSERT_TRUE(testing::Mock::VerifyAndClearExpectations(&mMockCb));
+    }
+
+  private:
+    FutureFT mFutureF = FutureF;
+    testing::MockCallback<Callback> mMockCb;
+};
+
+template <typename Callback, typename CallbackInfo, auto& FutureF>
+using WireFutureOnlyTest = WireFutureOnlyTestWithParams<Callback, CallbackInfo, FutureF>;
+
 }  // namespace dawn::wire
 
 #endif  // SRC_DAWN_TESTS_UNITTESTS_WIRE_WIREFUTURETEST_H_
