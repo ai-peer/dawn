@@ -424,6 +424,7 @@ dawn_test("dawn_unittests") {
     "unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
     "unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
     "unittests/validation/WriteBufferTests.cpp",
+    "unittests/wire/WireAdapterInfoTests.cpp",
     "unittests/wire/WireAdapterTests.cpp",
     "unittests/wire/WireArgumentTests.cpp",
     "unittests/wire/WireBasicTests.cpp",
@@ -572,6 +573,7 @@ source_set("end2end_tests_sources") {
   sources = [
     "end2end/AdapterCreationTests.cpp",
     "end2end/AdapterEnumerationTests.cpp",
+    "end2end/AdapterInfoTests.cpp",
     "end2end/AdapterPropertiesD3DTests.cpp",
     "end2end/BasicTests.cpp",
     "end2end/BindGroupTests.cpp",
