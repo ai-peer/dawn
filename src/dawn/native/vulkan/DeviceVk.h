@@ -160,6 +160,9 @@ class Device final : public DeviceBase {
     void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
                                             WGPUCreateComputePipelineAsyncCallback callback,
                                             void* userdata) override;
+    Ref<EventManager::TrackedEvent> InitializeComputePipelineAsyncFImpl(
+        Ref<ComputePipelineBase> computePipeline,
+        const CreateComputePipelineAsyncCallbackInfo& callbackInfo) override;
     void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                            WGPUCreateRenderPipelineAsyncCallback callback,
                                            void* userdata) override;
