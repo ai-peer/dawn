@@ -54,6 +54,9 @@ class Queue final : public QueueBase {
 
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
 
+    Ref<SharedSystemEventReceiver> GetOrCreateSharedSystemEventReceiver(
+        ExecutionSerial completionSerial) override;
+
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
     ~Queue() override;
