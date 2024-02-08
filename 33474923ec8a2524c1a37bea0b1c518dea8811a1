@@ -39,6 +39,30 @@
       },
       "revId": "33474923ec8a2524c1a37bea0b1c518dea8811a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2edf5730_7415ca75",
+        "filename": "src/tint/utils/reflection/reflection.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-08T15:33:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4f43f3f6_a35f52de",
+      "range": {
+        "startLine": 134,
+        "startChar": 41,
+        "endLine": 134,
+        "endChar": 55
+      },
+      "revId": "33474923ec8a2524c1a37bea0b1c518dea8811a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
