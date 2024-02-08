@@ -55,6 +55,8 @@ class Adapter final : public ObjectWithEventsBase {
     void SetFeatures(const WGPUFeatureName* features, uint32_t featuresCount);
     void SetProperties(const WGPUAdapterProperties* properties);
     void GetProperties(WGPUAdapterProperties* properties) const;
+    void RequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata);
+    WGPUFuture RequestAdapterInfoF(const WGPURequestAdapterInfoCallbackInfo& callbackInfo);
     void RequestDevice(const WGPUDeviceDescriptor* descriptor,
                        WGPURequestDeviceCallback callback,
                        void* userdata);
@@ -66,10 +68,14 @@ class Adapter final : public ObjectWithEventsBase {
     WGPUDevice CreateDevice(const WGPUDeviceDescriptor*);
 
   private:
+    friend class Client;
+    class RequestAdapterInfoEvent;
+
     LimitsAndFeatures mLimitsAndFeatures;
     WGPUAdapterProperties mProperties;
     std::vector<WGPUMemoryHeapInfo> mMemoryHeapInfo;
     WGPUAdapterPropertiesD3D mD3DProperties;
+    std::optional<WGPUAdapterInfo> mAdapterInfo;
 
     struct RequestDeviceData {
         WGPURequestDeviceCallback callback = nullptr;
@@ -82,6 +88,7 @@ class Adapter final : public ObjectWithEventsBase {
 
 void ClientAdapterPropertiesFreeMembers(WGPUAdapterProperties);
 void ClientAdapterPropertiesMemoryHeapsFreeMembers(WGPUAdapterPropertiesMemoryHeaps);
+void ClientAdapterInfoFreeMembers(WGPUAdapterInfo);
 
 }  // namespace dawn::wire::client
 
