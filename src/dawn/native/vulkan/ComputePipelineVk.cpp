@@ -161,13 +161,20 @@ VkPipeline ComputePipeline::GetHandle() const {
     return mHandle;
 }
 
-void ComputePipeline::InitializeAsync(Ref<ComputePipelineBase> computePipeline,
-                                      WGPUCreateComputePipelineAsyncCallback callback,
-                                      void* userdata) {
+Ref<CreateComputePipelineAsyncEvent> ComputePipeline::InitializeAsync(
+    Device* device,
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
     std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
-        std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
-                                                         userdata);
-    CreateComputePipelineAsyncTask::RunAsync(std::move(asyncTask));
+        std::make_unique<CreateComputePipelineAsyncTask>(computePipeline);
+
+    Ref<CreateComputePipelineAsyncEvent> event = AcquireRef(
+        new CreateComputePipelineAsyncEvent(device, callbackInfo, std::move(computePipeline),
+                                            AcquireRef(new SystemEvent()), std::move(asyncTask)));
+
+    CreateComputePipelineAsyncTask::RunAsync(device, event.Get());
+
+    return event;
 }
 
 }  // namespace dawn::native::vulkan
