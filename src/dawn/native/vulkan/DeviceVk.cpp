@@ -215,6 +215,16 @@ void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> compute
                                                 void* userdata) {
     ComputePipeline::InitializeAsync(std::move(computePipeline), callback, userdata);
 }
+Ref<EventManager::TrackedEvent> Device::InitializeComputePipelineAsyncFImpl(
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    // ComputePipeline::InitializeAsync(std::move(computePipeline), callbackInfo.callback,
+    // callbackInfo.userdata);
+    // TODO
+
+    Ref<EventManager::TrackedEvent> event;
+    return event;
+}
 void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                WGPUCreateRenderPipelineAsyncCallback callback,
                                                void* userdata) {
