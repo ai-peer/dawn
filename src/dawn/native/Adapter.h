@@ -61,6 +61,7 @@ class AdapterBase : public RefCounted {
                           void* userdata);
     Future APIRequestDeviceF(const DeviceDescriptor* descriptor,
                              const RequestDeviceCallbackInfo& callbackInfo);
+    void APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata);
     DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
     ResultOrError<Ref<DeviceBase>> CreateDevice(const DeviceDescriptor* rawDescriptor);
 

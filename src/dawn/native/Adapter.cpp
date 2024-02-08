@@ -312,6 +312,10 @@ Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
     return {futureID};
 }
 
+void AdapterBase::APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
+    callback("", "", "", "", userdata);
+}
 const TogglesState& AdapterBase::GetTogglesState() const {
     return mTogglesState;
 }
