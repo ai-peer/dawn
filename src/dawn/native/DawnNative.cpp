@@ -139,6 +139,10 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
                             userdata);
 }
 
+void Adapter::RequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    mImpl->APIRequestAdapterInfo(callback, userdata);
+}
+
 void Adapter::ResetInternalDeviceForTesting() {
     mImpl->GetPhysicalDevice()->ResetInternalDeviceForTesting();
 }

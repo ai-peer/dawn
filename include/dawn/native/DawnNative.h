@@ -118,6 +118,8 @@ class DAWN_NATIVE_EXPORT Adapter {
         RequestDevice(static_cast<const wgpu::DeviceDescriptor*>(descriptor), callback, userdata);
     }
 
+    void RequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata);
+
     // Returns the underlying WGPUAdapter object.
     WGPUAdapter Get() const;
 

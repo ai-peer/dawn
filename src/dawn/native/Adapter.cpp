@@ -28,7 +28,9 @@
 #include "dawn/native/Adapter.h"
 
 #include <algorithm>
+#include <iomanip>
 #include <memory>
+#include <sstream>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -38,6 +40,17 @@
 #include "dawn/native/Instance.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+
+namespace {
+
+std::string FormatDevice(uint32_t deviceId) {
+    std::ostringstream device;
+    device << "0x" << std::setfill('0') << std::uppercase << std::internal << std::hex
+           << std::setw(4) << deviceId;
+    return device.str();
+}
+
+}  // namespace
 
 namespace dawn::native {
 
@@ -312,6 +325,26 @@ Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
     return {futureID};
 }
 
+void AdapterBase::APIRequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    AdapterProperties properties;
+    APIGetProperties(&properties);
+
+    WGPUAdapterInfo adapter_info;
+    adapter_info.vendor = properties.vendorName;
+    adapter_info.architecture = properties.architecture;
+
+    std::string device = FormatDevice(properties.deviceID);
+    size_t deviceCLen = device.length() + 1;
+    char* ptr = new char[deviceCLen];
+    adapter_info.device = ptr;
+    memcpy(ptr, device.c_str(), deviceCLen);
+    // TODO: Free memory.
+
+    adapter_info.description = properties.name;
+
+    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
+    callback(adapter_info, userdata);
+}
 const TogglesState& AdapterBase::GetTogglesState() const {
     return mTogglesState;
 }
