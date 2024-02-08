@@ -298,4 +298,9 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
     return didComplete;
 }
 
+Ref<SharedSystemEventReceiver> Queue::GetOrCreateSharedSystemEventReceiver(
+    ExecutionSerial completionSerial) {
+    return GetOrCreateWorkDoneSystemEvent(completionSerial)->GetOrCreateSharedSystemEventReceiver();
+}
+
 }  // namespace dawn::native::metal
