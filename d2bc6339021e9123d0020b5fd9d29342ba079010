@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce85ab7_b7de3d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-08T17:48:35Z",
+      "side": 1,
+      "message": ":-/ isn\u0027t the better solution to make fewer submits in Graphite? this feels like a hack, and it\u0027s rather intrusive",
+      "revId": "d2bc6339021e9123d0020b5fd9d29342ba079010",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
