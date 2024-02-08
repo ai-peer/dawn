@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1e360f_54be4c1f",
+        "filename": "src/tint/utils/memory/aligned_storage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-08T15:01:54Z",
+      "side": 1,
+      "message": "Do you have a link here to a bug report for this? Would be good to note the version where this was broken, and version it was fixed.",
+      "range": {
+        "startLine": 38,
+        "startChar": 52,
+        "endLine": 38,
+        "endChar": 86
+      },
+      "revId": "59db90abc430d5800bb551138eb18baf3d9bebed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
