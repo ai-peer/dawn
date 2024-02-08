@@ -33,6 +33,24 @@
       "message": "Isn\u0027t that overbroad? A bunch of them pass. Can you file an issue if you want them to be re-triaged to tighter expectations?",
       "revId": "aa44ab99926f17cdf856828b7912d13d6227fbb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcd00a98_1e07838d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-08T16:06:02Z",
+      "side": 1,
+      "message": "I feel like over broad is more maintainable than having an unreadable mess of an expectations file. I see very little value in carving out the specific cases that do pass. I don\u0027t feel strongly enough to push this though, so I\u0027m going to abandon.",
+      "parentUuid": "cf77c8ae_7517d728",
+      "revId": "aa44ab99926f17cdf856828b7912d13d6227fbb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
