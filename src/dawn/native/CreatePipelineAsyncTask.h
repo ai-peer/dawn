@@ -69,6 +69,8 @@ class CreateComputePipelineAsyncTask {
     raw_ptr<void, DanglingUntriaged> mUserdata;
     // Used to keep ShaderModuleBase::mTintProgram alive until pipeline initialization is done.
     PipelineBase::ScopedUseShaderPrograms mScopedUseShaderPrograms;
+
+    // Ref<CreateComputePipelineAsyncEvent> mTrackedEvent;
 };
 
 // CreateRenderPipelineAsyncTask defines all the inputs and outputs of

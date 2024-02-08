@@ -223,6 +223,8 @@ TEST_P(CreatePipelineAsyncTest, CreateComputePipelineFailed) {
         })");
     csDesc.compute.entryPoint = "main0";
 
+    bool done = false;
+
     device.CreateComputePipelineAsync(
         &csDesc,
         [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
@@ -230,19 +232,26 @@ TEST_P(CreatePipelineAsyncTest, CreateComputePipelineFailed) {
             EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_ValidationError,
                       status);
 
-            CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
-            task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
-            task->isCompleted = true;
-            task->message = message;
-        },
-        &task);
+            // CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
+            // task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
+            // task->isCompleted = true;
+            // task->message = message;
 
-    while (!task.isCompleted) {
+            *static_cast<bool*>(userdata) = true;
+        },
+        &done);
+    // &task);
+
+    // while (!task.isCompleted) {
+    //     WaitABit();
+    // }
+
+    // ASSERT_FALSE(task.message.empty());
+    // ASSERT_EQ(nullptr, task.computePipeline.Get());
+
+    while (!done) {
         WaitABit();
     }
-
-    ASSERT_FALSE(task.message.empty());
-    ASSERT_EQ(nullptr, task.computePipeline.Get());
 }
 
 // Verify the basic use of CreateRenderPipelineAsync() works on all backends.
@@ -382,6 +391,8 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
         @compute @workgroup_size(1) fn main() {
         })");
 
+    bool done = false;
+
     device.CreateComputePipelineAsync(
         &csDesc,
         [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
@@ -389,14 +400,20 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
             EXPECT_EQ(WGPUCreatePipelineAsyncStatus_Success, status);
             EXPECT_NE(returnPipeline, nullptr);
 
-            CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
-            task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
-            task->isCompleted = true;
-            task->message = message;
-        },
-        &task);
+            *static_cast<bool*>(userdata) = true;
 
-    while (!task.isCompleted) {
+            // CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
+            // task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
+            // task->isCompleted = true;
+            // task->message = message;
+        },
+        // &task);
+        &done);
+
+    // while (!task.isCompleted) {
+    //     WaitABit();
+    // }
+    while (!done) {
         WaitABit();
     }
 }

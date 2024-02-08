@@ -48,6 +48,12 @@ bool IsDoubleValueRepresentableAsF16(double value) {
 }  // namespace
 
 namespace dawn::native {
+// struct PipelineBase::CreateAsyncEvent : public EventManager::TrackedEvent {
+//     // WGPUBufferMapCallback mCallback;
+//     raw_ptr<void> mUserdata;
+
+// };
+
 ResultOrError<ShaderModuleEntryPoint> ValidateProgrammableStage(DeviceBase* device,
                                                                 const ShaderModuleBase* module,
                                                                 const char* entryPointName,
