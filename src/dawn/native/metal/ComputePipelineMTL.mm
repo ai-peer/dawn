@@ -123,21 +123,30 @@ bool ComputePipeline::RequiresStorageBufferLength() const {
     return mRequiresStorageBufferLength;
 }
 
-void ComputePipeline::InitializeAsync(Ref<ComputePipelineBase> computePipeline,
-                                      WGPUCreateComputePipelineAsyncCallback callback,
-                                      void* userdata) {
-    PhysicalDeviceBase* physicalDevice = computePipeline->GetDevice()->GetPhysicalDevice();
+Ref<CreateComputePipelineAsyncEvent> ComputePipeline::InitializeAsync(
+    Device* device,
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
     std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
-        std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
-                                                         userdata);
+        std::make_unique<CreateComputePipelineAsyncTask>(computePipeline);
+
     // Workaround a crash where the validation layers on AMD crash with partition alloc.
     // See crbug.com/dawn/1200.
+    PhysicalDeviceBase* physicalDevice = computePipeline->GetDevice()->GetPhysicalDevice();
     if (IsMetalValidationEnabled(physicalDevice) &&
         gpu_info::IsAMD(physicalDevice->GetVendorId())) {
-        asyncTask->Run();
-        return;
+        Ref<CreateComputePipelineAsyncEvent> event = AcquireRef(
+            new CreateComputePipelineAsyncEvent(device, callbackInfo, std::move(computePipeline)));
+        asyncTask->Run(event.Get());
+        return event;
     }
-    CreateComputePipelineAsyncTask::RunAsync(std::move(asyncTask));
+
+    Ref<CreateComputePipelineAsyncEvent> event = AcquireRef(
+        new CreateComputePipelineAsyncEvent(device, callbackInfo, std::move(computePipeline),
+                                            AcquireRef(new SystemEvent()), std::move(asyncTask)));
+
+    CreateComputePipelineAsyncTask::RunAsync(device, event.Get());
+    return event;
 }
 
 }  // namespace dawn::native::metal
