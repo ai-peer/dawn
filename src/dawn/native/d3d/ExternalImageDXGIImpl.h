@@ -58,6 +58,7 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
   public:
     ExternalImageDXGIImpl(Device* backendDevice,
                           ComPtr<IUnknown> d3dResource,
+                          ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                           const UnpackedPtr<TextureDescriptor>& textureDescriptor);
     ~ExternalImageDXGIImpl();
 
