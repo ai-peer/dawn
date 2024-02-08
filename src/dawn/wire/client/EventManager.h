@@ -50,6 +50,7 @@ enum class EventType {
     CreateRenderPipeline,
     MapAsync,
     RequestAdapter,
+    RequestAdapterInfo,
     RequestDevice,
     WorkDone,
 };
