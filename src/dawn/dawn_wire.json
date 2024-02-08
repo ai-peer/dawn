@@ -110,6 +110,11 @@
             { "name": "adapter object handle", "type": "ObjectHandle", "handle_type": "adapter"},
             { "name": "options", "type": "request adapter options", "annotation": "const*", "optional": true }
         ],
+        "adapter request adapter info": [
+            { "name": "adapter id", "type": "ObjectId", "id_type": "adapter" },
+            { "name": "event manager handle", "type": "ObjectHandle" },
+            { "name": "future", "type": "future" }
+        ],
         "adapter request device": [
             { "name": "adapter id", "type": "ObjectId", "id_type": "adapter" },
             { "name": "event manager handle", "type": "ObjectHandle" },
@@ -180,6 +185,12 @@
             { "name": "features count", "type": "uint32_t"},
             { "name": "features", "type": "feature name", "annotation": "const*", "length": "features count"}
         ],
+        "adapter request adapter info callback": [
+            { "name": "event manager", "type": "ObjectHandle" },
+            { "name": "future", "type": "future" },
+            { "name": "status", "type": "request adapter info status" },
+            { "name": "adapter info", "type": "adapter info", "annotation": "const*"}
+        ],
         "adapter request device callback": [
             { "name": "event manager", "type": "ObjectHandle" },
             { "name": "future", "type": "future" },
@@ -206,6 +217,8 @@
             "AdapterGetLimits",
             "AdapterHasFeature",
             "AdapterEnumerateFeatures",
+            "AdapterRequestAdapterInfo",
+            "AdapterRequestAdapterInfoF",
             "AdapterRequestDevice",
             "AdapterRequestDeviceF",
             "BufferMapAsync",
