@@ -192,6 +192,12 @@ struct TrackedFutureWaitInfo {
     size_t indexInInfos;
     // Used by EventManager::ProcessPollEvents and ::WaitAny
     bool ready;
+#if !DAWN_PLATFORM_IS(WINDOWS)
+    // The system event receiver which is used for waiting.
+    // Timed waits acquire an exclusive receiver and store it here to avoid
+    // extra allocations.
+    SystemEventReceiver receiverForWait = {};
+#endif
 };
 
 }  // namespace dawn::native
