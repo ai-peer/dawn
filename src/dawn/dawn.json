@@ -156,6 +156,23 @@
                 ]
             },
             {
+                "name": "request adapter info",
+                "tags": ["deprecated"],
+                "args": [
+                    {"name": "callback", "type": "request adapter info callback"},
+                    {"name": "userdata", "type": "void *"}
+                ]
+            },
+            {
+                "name": "request adapter info f",
+                "_comment": "TODO(crbug.com/dawn/2021): This is dawn/emscripten-only until we rename it to replace the old API. See bug for details.",
+                "tags": ["dawn", "emscripten"],
+                "returns": "future",
+                "args": [
+                    {"name": "callback info", "type": "request adapter info callback info"}
+                ]
+            },
+            {
                 "name": "create device",
                 "tags": ["dawn"],
                 "returns": "device",
@@ -3107,6 +3124,41 @@
                 ]
             }
 
+        ]
+    },
+
+    "adapter info": {
+        "category": "structure",
+        "extensible": "out",
+        "members": [
+            {"name": "vendor", "type": "char", "annotation": "const*", "length": "strlen", "default": "nullptr"},
+            {"name": "architecture", "type": "char", "annotation": "const*", "length": "strlen", "default": "nullptr"},
+            {"name": "device", "type": "char", "annotation": "const*", "length": "strlen", "default": "nullptr"},
+            {"name": "description", "type": "char", "annotation": "const*", "length": "strlen", "default": "nullptr"}
+        ]
+    },
+    "request adapter info callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "status", "type": "request adapter info status"},
+            {"name": "adapter info", "type": "adapter info", "annotation": "const*"},
+            {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "request adapter info callback info": {
+         "category": "structure",
+         "extensible": "in",
+         "members": [
+            {"name": "mode", "type": "callback mode"},
+            {"name": "callback", "type": "request adapter info callback"},
+            {"name": "userdata", "type": "void *"}
+         ]
+    },
+    "request adapter info status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "instance dropped"}
         ]
     },
 
