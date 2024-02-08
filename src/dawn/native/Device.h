@@ -477,6 +477,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
 
+    Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
+        Ref<ComputePipelineBase> computePipeline);
+    // void AddComputePipelineToCache(Ref<ComputePipelineBase> computePipeline);
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -543,13 +547,16 @@ class DeviceBase : public RefCountedWithExternalCount {
         ComputePipelineBase* uninitializedComputePipeline);
     Ref<RenderPipelineBase> GetCachedRenderPipeline(
         RenderPipelineBase* uninitializedRenderPipeline);
-    Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
-        Ref<ComputePipelineBase> computePipeline);
+    // Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
+    //     Ref<ComputePipelineBase> computePipeline);
     Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(Ref<RenderPipelineBase> renderPipeline);
     virtual Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(const CacheKey& key);
-    virtual void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                    WGPUCreateComputePipelineAsyncCallback callback,
-                                                    void* userdata);
+    // virtual void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
+    //                                                 WGPUCreateComputePipelineAsyncCallback
+    //                                                 callback, void* userdata);
+    virtual Ref<EventManager::TrackedEvent> InitializeComputePipelineAsyncImpl(
+        Ref<ComputePipelineBase> computePipeline,
+        const CreateComputePipelineAsyncCallbackInfo& callbackInfo);
     virtual void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                                    void* userdata);
