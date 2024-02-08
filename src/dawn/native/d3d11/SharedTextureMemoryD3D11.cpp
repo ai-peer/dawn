@@ -149,7 +149,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
     ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
     mResource.As(&dxgiKeyedMutex);
     if (dxgiKeyedMutex) {
-        mKeyedMutex = AcquireRef(new d3d::KeyedMutex(std::move(dxgiKeyedMutex)));
+        mKeyedMutex = AcquireRef(new d3d::KeyedMutex(std::move(dxgiKeyedMutex), device));
     }
 }
 

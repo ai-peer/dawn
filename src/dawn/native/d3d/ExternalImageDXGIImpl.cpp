@@ -63,6 +63,7 @@ MaybeError ValidateTextureDescriptorCanBeWrapped(const UnpackedPtr<TextureDescri
 ExternalImageDXGIImpl::ExternalImageDXGIImpl(
     Device* backendDevice,
     ComPtr<IUnknown> d3dResource,
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
     const UnpackedPtr<TextureDescriptor>& textureDescriptor)
     : mBackendDevice(backendDevice),
       mD3DResource(std::move(d3dResource)),
@@ -85,10 +86,8 @@ ExternalImageDXGIImpl::ExternalImageDXGIImpl(
                              ->internalUsage;
     }
     // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
-    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-    mD3DResource.As(&dxgiKeyedMutex);
     if (dxgiKeyedMutex) {
-        mKeyedMutex = AcquireRef(new KeyedMutex(std::move(dxgiKeyedMutex)));
+        mKeyedMutex = AcquireRef(new KeyedMutex(std::move(dxgiKeyedMutex), backendDevice));
     }
 }
 

@@ -197,12 +197,13 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
     Device* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
     ComPtr<IUnknown> d3dTexture,
+    Ref<d3d::KeyedMutex> keyedMutex,
     std::vector<FenceAndSignalValue> waitFences,
     bool isSwapChainTexture,
     bool isInitialized) {
     Ref<Texture> dawnTexture = AcquireRef(new Texture(device, descriptor));
-    DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(waitFences),
-                                                      isSwapChainTexture));
+    DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(keyedMutex),
+                                                      std::move(waitFences), isSwapChainTexture));
 
     // Importing a multi-planar format must be initialized. This is required because
     // a shared multi-planar format cannot be initialized by Dawn.
@@ -231,12 +232,14 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
     Device* device = ToBackend(memory->GetDevice());
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
-    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), {}, false));
+    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), memory->GetKeyedMutex(),
+                                                  {}, false));
     texture->mSharedTextureMemoryContents = memory->GetContents();
     return texture;
 }
 
 MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                                Ref<d3d::KeyedMutex> keyedMutex,
                                                 std::vector<FenceAndSignalValue> waitFences,
                                                 bool isSwapChainTexture) {
     ComPtr<ID3D12Resource> d3d12Texture;
@@ -253,6 +256,7 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
     // memory management.
     mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
+    mKeyedMutex = std::move(keyedMutex);
     mWaitFences = std::move(waitFences);
     mSwapChainTexture = isSwapChainTexture;
 
@@ -383,7 +387,9 @@ ResultOrError<ExecutionSerial> Texture::EndAccess() {
                         queue->GetPendingCommandContext(ExecutionQueueBase::SubmitMode::Passive));
         DAWN_UNUSED(context);
 
-        DAWN_TRY(SynchronizeTextureBeforeUse());
+        std::optional<ScopedTextureUse> textureUse;
+        DAWN_TRY_ASSIGN(textureUse, SynchronizeTextureUse());
+
         DAWN_ASSERT(mSignalFenceValue);
     }
     // Make the queue signal the fence in finite time.
@@ -428,7 +434,22 @@ DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
     }
 }
 
-MaybeError Texture::SynchronizeTextureBeforeUse() {
+Texture::ScopedTextureUse::ScopedTextureUse(ScopedTextureUse&& other) {
+    *this = std::move(other);
+}
+
+Texture::ScopedTextureUse& Texture::ScopedTextureUse::operator=(ScopedTextureUse&& other) {
+    mKeyedMutexGuard = std::move(other.mKeyedMutexGuard);
+    other.mKeyedMutexGuard = std::nullopt;
+    return *this;
+}
+
+Texture::ScopedTextureUse::ScopedTextureUse(std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard)
+    : mKeyedMutexGuard(std::move(keyedMutexGuard)) {}
+
+Texture::ScopedTextureUse::~ScopedTextureUse() = default;
+
+ResultOrError<Texture::ScopedTextureUse> Texture::SynchronizeTextureUse() {
     Device* device = ToBackend(GetDevice());
     Queue* queue = ToBackend(device->GetQueue());
 
@@ -453,7 +474,12 @@ MaybeError Texture::SynchronizeTextureBeforeUse() {
     }
 
     mSignalFenceValue = queue->GetPendingCommandSerial();
-    return {};
+
+    std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard;
+    if (mKeyedMutex != nullptr) {
+        DAWN_TRY_ASSIGN(keyedMutexGuard, mKeyedMutex->AcquireKeyedMutex());
+    }
+    return ScopedTextureUse(std::move(keyedMutexGuard));
 }
 
 void Texture::NotifySwapChainPresentToPIX() {

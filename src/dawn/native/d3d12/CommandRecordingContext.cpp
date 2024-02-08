@@ -84,8 +84,9 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,
         return {};
     }
 
+    std::vector<Texture::ScopedTextureUse> sharedTextureUses;
     for (Texture* texture : mSharedTextures) {
-        DAWN_TRY(texture->SynchronizeTextureBeforeUse());
+        DAWN_TRY_ASSIGN(std::back_inserter(sharedTextureUses), texture->SynchronizeTextureUse());
     }
 
     MaybeError error =
@@ -134,6 +135,8 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,
 
     ID3D12CommandList* d3d12CommandList = GetCommandList();
     commandQueue->ExecuteCommandLists(1, &d3d12CommandList);
+
+    sharedTextureUses.clear();
 
     mIsOpen = false;
     mNeedsSubmit = false;

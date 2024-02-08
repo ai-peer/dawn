@@ -36,9 +36,11 @@
 
 namespace dawn::native::d3d {
 
+class Device;
+
 class KeyedMutex : public RefCounted {
   public:
-    explicit KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
+    KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex, Device* device);
     ~KeyedMutex() override;
 
     class Guard : public NonCopyable {
@@ -59,6 +61,7 @@ class KeyedMutex : public RefCounted {
     void ReleaseKeyedMutex();
 
     ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    Device* mDevice;
     int mAcquireCount = 0;
 };
 
