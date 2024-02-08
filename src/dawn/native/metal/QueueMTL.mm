@@ -82,8 +82,8 @@ MaybeError Queue::Initialize() {
 
 void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
     mWaitingEvents.Use([&](auto events) {
-        for (auto& s : events->IterateUpTo(completedSerial)) {
-            std::move(s)->Signal();
+        for (auto& ev : events->IterateUpTo(completedSerial)) {
+            std::move(ev)->Signal();
         }
         events->ClearUpTo(completedSerial);
     });
@@ -247,10 +247,13 @@ void Queue::ForceEventualFlushOfCommands() {
     }
 }
 
-Ref<SystemEvent> Queue::CreateWorkDoneSystemEvent(ExecutionSerial serial) {
-    Ref<SystemEvent> completionEvent = AcquireRef(new SystemEvent());
-    mWaitingEvents.Use([&](auto events) {
-        SystemEventReceiver receiver;
+Ref<SystemEvent> Queue::GetOrCreateWorkDoneSystemEvent(ExecutionSerial serial) {
+    return mWaitingEvents.Use([&](auto events) {
+        if (auto* ev = events->FindOne(serial)) {
+            return *ev;
+        }
+        // Create a new system event.
+        Ref<SystemEvent> completionEvent = AcquireRef(new SystemEvent());
         // Now that we hold the lock, check against mCompletedSerial before inserting.
         // This serial may have just completed. If it did, mark the event complete.
         // Also check for device loss. Otherwise, we could enqueue the event
@@ -263,16 +266,36 @@ Ref<SystemEvent> Queue::CreateWorkDoneSystemEvent(ExecutionSerial serial) {
             // completion handler.
             events->Enqueue(completionEvent, serial);
         }
+        return completionEvent;
     });
-    return completionEvent;
 }
 
 ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
-    Ref<SystemEvent> event = CreateWorkDoneSystemEvent(serial);
-    bool ready = false;
-    std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
-        {{event->GetOrCreateSystemEventReceiver(), &ready}}};
-    return WaitAnySystemEvent(events.begin(), events.end(), timeout);
+    // Only get a shared SystemEventReceiver if we are polling. When waiting, there must be
+    // no other threads waiting on the same receiver.
+    bool shared = timeout == Nanoseconds(0);
+
+    auto completionEvent = GetOrCreateWorkDoneSystemEvent(serial);
+    bool didComplete;
+    if (shared) {
+        auto sharedReceiver = completionEvent->GetOrCreateSharedSystemEventReceiver();
+        bool ready = false;
+        std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
+            {{sharedReceiver->receiver, &ready}}};
+        didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
+    } else {
+        auto receiver = completionEvent->GetOrCreateNotSharedSystemEventReceiver();
+        bool ready = false;
+        std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
+            {{receiver, &ready}}};
+        didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
+        if (!didComplete) {
+            // The event did not complete. Return the not-shared receiver to the pool.
+            // It may be reused again now either as shared or not-shared.
+            completionEvent->ReturnReceiverToPool(std::move(receiver));
+        }
+    }
+    return didComplete;
 }
 
 }  // namespace dawn::native::metal

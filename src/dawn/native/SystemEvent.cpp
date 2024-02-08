@@ -49,6 +49,10 @@ namespace dawn::native {
 SystemEventReceiver::SystemEventReceiver(SystemHandle primitive)
     : mPrimitive(std::move(primitive)) {}
 
+const SystemHandle& SystemEventReceiver::Get() const {
+    return mPrimitive;
+}
+
 SystemEventReceiver SystemEventReceiver::CreateAlreadySignaled() {
     SystemEventPipeSender sender;
     SystemEventReceiver receiver;
@@ -136,32 +140,70 @@ bool SystemEvent::IsSignaled() const {
 
 void SystemEvent::Signal() {
     if (!mSignaled.exchange(true, std::memory_order_acq_rel)) {
-        mPipe.Use([](auto pipe) {
+        mPipes.Use([](auto pipes) {
             // Check if there is a pipe and the sender is valid.
             // This function may race with GetOrCreateSystemEventReceiver such that the pipe is
             // already signaled and the sender is invalid.
-            if (*pipe && pipe->value().first.IsValid()) {
-                std::move(pipe->value().first).Signal();
+            for (auto& sender : pipes->senders) {
+                if (sender.IsValid()) {
+                    std::move(sender).Signal();
+                }
             }
         });
     }
 }
 
-const SystemEventReceiver& SystemEvent::GetOrCreateSystemEventReceiver() {
-    return mPipe.Use([this](auto pipe) {
-        if (!*pipe) {
-            // Check whether the event was marked as completed. This may have happened if
-            // this function races with another thread performing Signal. If we won
-            // the race, then the pipe we just created will get signaled inside Signal.
-            // If we lost the race, then it will not be signaled and we must do it now.
-            if (IsSignaled()) {
-                *pipe = {SystemEventPipeSender{}, SystemEventReceiver::CreateAlreadySignaled()};
-            } else {
-                *pipe = CreateSystemEventPipe();
+Ref<SharedSystemEventReceiver> SystemEvent::GetOrCreateSharedSystemEventReceiver() {
+    return std::get<Ref<SharedSystemEventReceiver>>(
+        GetOrCreateSystemEventReceiver(/*shared=*/true));
+}
+
+SystemEventReceiver SystemEvent::GetOrCreateNotSharedSystemEventReceiver() {
+    return std::get<SystemEventReceiver>(GetOrCreateSystemEventReceiver(/*shared=*/false));
+}
+
+std::pair<SystemEventPipeSender, SystemEventReceiver> SystemEvent::MakePipe() {
+    // Check whether the event was marked as completed. This may have happened if
+    // this function races with another thread performing Signal. If we won
+    // the race, then the pipe we just created will get signaled inside Signal.
+    // If we lost the race, then it will not be signaled and we must do it now.
+    if (IsSignaled()) {
+        return {SystemEventPipeSender{}, SystemEventReceiver::CreateAlreadySignaled()};
+    } else {
+        return CreateSystemEventPipe();
+    }
+}
+
+std::variant<SystemEventReceiver, Ref<SharedSystemEventReceiver>>
+SystemEvent::GetOrCreateSystemEventReceiver(bool shared) {
+    return mPipes.Use(
+        [&](auto pipes) -> std::variant<SystemEventReceiver, Ref<SharedSystemEventReceiver>> {
+            if (shared && pipes->sharedReceiver) {
+                // Return the shared receiver if there is one.
+                return {pipes->sharedReceiver};
             }
-        }
-        return std::cref(pipe->value().second);
-    });
+
+            // Acquire a receiver from the list.
+            if (!pipes->receivers.empty()) {
+                SystemEventReceiver receiver = std::move(pipes->receivers.back());
+                pipes->receivers.pop_back();
+                return {std::move(receiver)};
+            }
+            // Otherwise, create a new pipe.
+            auto [sender, receiver] = MakePipe();
+            pipes->senders.push_back(std::move(sender));
+            if (!shared) {
+                // If we should not share the receiver, return it immediately.
+                return {std::move(receiver)};
+            }
+            // Otherwise, set it as the shared receiver and return it.
+            pipes->sharedReceiver = AcquireRef(new SharedSystemEventReceiver(std::move(receiver)));
+            return {pipes->sharedReceiver};
+        });
+}
+
+void SystemEvent::ReturnReceiverToPool(SystemEventReceiver receiver) {
+    mPipes.Use([&](auto pipes) { pipes->receivers.push_back(std::move(receiver)); });
 }
 
 }  // namespace dawn::native

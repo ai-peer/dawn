@@ -48,9 +48,12 @@ class Queue : public QueueBase {
   private:
     virtual void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) = 0;
 
+    Ref<SharedSystemEventReceiver> GetOrCreateSharedSystemEventReceiver(
+        ExecutionSerial completionSerial);
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
 
-    MutexProtected<SerialMap<ExecutionSerial, SystemEventReceiver>> mSystemEventReceivers;
+    MutexProtected<SerialMap<ExecutionSerial, Ref<SharedSystemEventReceiver>>>
+        mSystemEventReceivers;
 };
 
 }  // namespace dawn::native::d3d
