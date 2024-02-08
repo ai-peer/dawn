@@ -572,6 +572,22 @@ wgpu::WaitStatus InstanceBase::APIWaitAny(size_t count,
     return mEventManager.WaitAny(count, futures, Nanoseconds(timeoutNS));
 }
 
+int InstanceBase::APIGetFuturePosixFd(Future future) {
+#if DAWN_PLATFORM_IS(POSIX)
+    return mEventManager.GetOrCreateSharedSystemEventReceiver(future).Get();
+#else
+    return -1;
+#endif
+}
+
+void* InstanceBase::APIGetFutureWin32Event(Future future) {
+#if DAWN_PLATFORM_IS(WINDOWS)
+    return mEventManager.GetOrCreateSharedSystemEventReceiver(future).Get();
+#else
+    return nullptr;
+#endif
+}
+
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
     return mRuntimeSearchPaths;
 }

@@ -172,6 +172,9 @@ class InstanceBase final : public RefCountedWithExternalCount {
     [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
                                               FutureWaitInfo* futures,
                                               uint64_t timeoutNS);
+    int APIGetFuturePosixFd(Future future);
+    void* APIGetFutureWin32Event(Future future);
+
     bool APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) const;
     // Always writes the full list when features is not nullptr.
     // TODO(https://github.com/webgpu-native/webgpu-headers/issues/252): Add a count argument.
