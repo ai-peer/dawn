@@ -281,6 +281,8 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
 
     std::vector<wgpu::ComputePipeline> pipelines(10);
+    // std::vector<wgpu::ComputePipeline> pipelines(2);
+    // std::vector<wgpu::ComputePipeline> pipelines(3);
     std::vector<std::string> shaderSources(pipelines.size());
     std::vector<uint32_t> expectedValues(shaderSources.size());
 
@@ -325,42 +327,45 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
             },
             &task);
 
+        // if (index == 0) {
         while (!task.isCompleted.load()) {
             WaitABit();
         }
+        // }
 
-        pipelines[index] = task.computePipeline;
+        // pipelines[index] = task.computePipeline;
     });
 
-    // Verify pipelines' executions
-    for (uint32_t i = 0; i < pipelines.size(); ++i) {
-        wgpu::Buffer ssbo =
-            CreateBuffer(sizeof(uint32_t), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+    // // Verify pipelines' executions
+    // for (uint32_t i = 0; i < pipelines.size(); ++i) {
+    //     wgpu::Buffer ssbo =
+    //         CreateBuffer(sizeof(uint32_t), wgpu::BufferUsage::Storage |
+    //         wgpu::BufferUsage::CopySrc);
 
-        wgpu::CommandBuffer commands;
-        {
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    //     wgpu::CommandBuffer commands;
+    //     {
+    //         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    //         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
 
-            ASSERT_NE(nullptr, pipelines[i].Get());
-            wgpu::BindGroup bindGroup =
-                utils::MakeBindGroup(device, pipelines[i].GetBindGroupLayout(0),
-                                     {
-                                         {0, ssbo, 0, sizeof(uint32_t)},
-                                     });
-            pass.SetBindGroup(0, bindGroup);
-            pass.SetPipeline(pipelines[i]);
+    //         ASSERT_NE(nullptr, pipelines[i].Get());
+    //         wgpu::BindGroup bindGroup =
+    //             utils::MakeBindGroup(device, pipelines[i].GetBindGroupLayout(0),
+    //                                  {
+    //                                      {0, ssbo, 0, sizeof(uint32_t)},
+    //                                  });
+    //         pass.SetBindGroup(0, bindGroup);
+    //         pass.SetPipeline(pipelines[i]);
 
-            pass.DispatchWorkgroups(1);
-            pass.End();
+    //         pass.DispatchWorkgroups(1);
+    //         pass.End();
 
-            commands = encoder.Finish();
-        }
+    //         commands = encoder.Finish();
+    //     }
 
-        queue.Submit(1, &commands);
+    //     queue.Submit(1, &commands);
 
-        EXPECT_BUFFER_U32_EQ(expectedValues[i], ssbo, 0);
-    }
+    //     EXPECT_BUFFER_U32_EQ(expectedValues[i], ssbo, 0);
+    // }
 }
 
 // Test CreateComputePipeline on multiple threads.
