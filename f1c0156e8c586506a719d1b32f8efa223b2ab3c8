@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3499ebc1_ccd3c04a",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-08T01:36:59Z",
+      "side": 1,
+      "message": "Hmm, good point. I reverted it to be in the critical region for now then. Thanks!",
+      "parentUuid": "e297d4c8_01381715",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53178596_fddec50a",
@@ -88,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "533d7fd8_ff4ad1f0",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-08T01:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53178596_fddec50a",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57a4cff9_e5dcee2f",
@@ -101,6 +137,24 @@
       "writtenOn": "2024-02-07T01:31:34Z",
       "side": 1,
       "message": "This seems to be no longer used outside EventManager (aside from some forward declarations that are unused). We should move it into the .cpp in a followup.",
+      "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7af78b2_20ad24c8",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-08T01:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57a4cff9_e5dcee2f",
       "revId": "f1c0156e8c586506a719d1b32f8efa223b2ab3c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
