@@ -2114,6 +2114,22 @@
                 ]
             },
             {
+                "name": "get future posix fd",
+                "tags": ["dawn", "native"],
+                "returns": "int",
+                "args": [
+                    {"name": "future", "type": "future"}
+                ]
+            },
+            {
+                "name": "get future win 32 event",
+                "tags": ["dawn", "native"],
+                "returns": "void *",
+                "args": [
+                    {"name": "future", "type": "future"}
+                ]
+            },
+            {
                 "name": "request adapter",
                 "args": [
                     {"name": "options", "type": "request adapter options", "annotation": "const*", "optional": true, "no_default": true},
