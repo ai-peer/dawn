@@ -862,6 +862,13 @@ crbug.com/dawn/2423 [ android-u android-pixel-6 ] webgpu:shader,execution,expres
 crbug.com/dawn/2426 [ android-u android-pixel-6 ] webgpu:web_platform,external_texture,video:importExternalTexture* [ Failure ]
 
 ################################################################################
+# Failures on Pixel 6 related to createComputePipelineAsync wgpuFuture updates
+# KEEP
+################################################################################
+crbug.com/dawn/2353 [ android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,step:f16:inputSource="const";vectorize="undef" [ Failure ]
+crbug.com/dawn/2353 [ android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,step:f32:inputSource="const";vectorize="undef" [ Failure ]
+
+################################################################################
 # Flip video tests failing
 # Related PRs:
 #   - https://github.com/gpuweb/cts/pull/3278
