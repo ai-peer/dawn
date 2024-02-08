@@ -155,6 +155,13 @@
                 ]
             },
             {
+                "name": "request adapter info",
+                "args": [
+                    {"name": "callback", "type": "request adapter info callback"},
+                    {"name": "userdata", "type": "void *"}
+                ]
+            },
+            {
                 "name": "create device",
                 "tags": ["dawn"],
                 "returns": "device",
@@ -2957,6 +2964,17 @@
             {"value": 0, "name": "success"},
             {"value": 1, "name": "error"},
             {"value": 2, "name": "unknown"}
+        ]
+    },
+
+    "request adapter info callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "vendor", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "architecture", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "device", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "description", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "userdata", "type": "void *"}
         ]
     },
 
