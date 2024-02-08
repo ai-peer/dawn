@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d056ed4_e22c3e46",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-08T15:39:27Z",
+      "side": 1,
+      "message": "IMHO we could have:\n\n[ intel ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,sample_mask:writeMask\u003d0;* [ Failure ]\n[ intel ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,basic:writeMask\u003d0;* [ Failure ]\n\nBecause we already know it is only the writeMask\u003d0 cases that fail.\n\nI see less of a pattern on Android though, so we could have a blanket expectations for now with a separate skip block.",
+      "revId": "aa44ab99926f17cdf856828b7912d13d6227fbb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf77c8ae_7517d728",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-08T15:39:27Z",
+      "side": 1,
+      "message": "Isn\u0027t that overbroad? A bunch of them pass. Can you file an issue if you want them to be re-triaged to tighter expectations?",
+      "revId": "aa44ab99926f17cdf856828b7912d13d6227fbb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
