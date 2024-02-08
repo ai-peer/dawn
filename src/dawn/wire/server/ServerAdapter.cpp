@@ -25,12 +25,41 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <iostream>
 #include <vector>
 
 #include "dawn/wire/SupportedFeatures.h"
 #include "dawn/wire/server/Server.h"
 
 namespace dawn::wire::server {
+
+WireResult Server::DoAdapterRequestAdapterInfo(Known<WGPUAdapter> adapter,
+                                               ObjectHandle eventManager,
+                                               WGPUFuture future) {
+    auto userdata = MakeUserdata<RequestAdapterInfoUserdata>();
+    userdata->eventManager = eventManager;
+    userdata->future = future;
+
+    mProcs.adapterRequestAdapterInfo(adapter->handle,
+                                     ForwardToServer<&Server::OnRequestAdapterInfoCallback>,
+                                     userdata.release());
+    return WireResult::Success;
+}
+
+void Server::OnRequestAdapterInfoCallback(RequestAdapterInfoUserdata* data,
+                                          WGPURequestAdapterInfoStatus status,
+                                          const WGPUAdapterInfo* adapterInfo) {
+    ReturnAdapterRequestAdapterInfoCallbackCmd cmd = {};
+    cmd.eventManager = data->eventManager;
+    cmd.future = data->future;
+    cmd.status = status;
+    cmd.adapterInfo = adapterInfo;
+
+    SerializeCommand(cmd);
+    if (adapterInfo) {
+        mProcs.adapterInfoFreeMembers(*adapterInfo);
+    }
+}
 
 WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
                                           ObjectHandle eventManager,
