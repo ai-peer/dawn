@@ -25,12 +25,47 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <iostream>
 #include <vector>
 
 #include "dawn/wire/SupportedFeatures.h"
 #include "dawn/wire/server/Server.h"
 
 namespace dawn::wire::server {
+
+WireResult Server::DoAdapterRequestAdapterInfo(Known<WGPUAdapter> adapter,
+                                               ObjectHandle eventManager,
+                                               WGPUFuture future) {
+    auto userdata = MakeUserdata<RequestAdapterInfoUserdata>();
+    userdata->eventManager = eventManager;
+    userdata->future = future;
+
+    mProcs.adapterRequestAdapterInfo(adapter->handle,
+                                     ForwardToServer<&Server::OnRequestAdapterInfoCallback>,
+                                     userdata.release());
+    return WireResult::Success;
+}
+
+void Server::OnRequestAdapterInfoCallback(RequestAdapterInfoUserdata* data,
+                                          WGPURequestAdapterInfoStatus status,
+                                          const WGPUAdapterInfo* adapterInfo) {
+    std::cout << "OnRequestAdapterInfoCallback 0\r\n";
+    ReturnAdapterRequestAdapterInfoCallbackCmd cmd = {};
+    cmd.eventManager = data->eventManager;
+    cmd.future = data->future;
+    cmd.status = status;
+    cmd.adapterInfo = adapterInfo;
+
+    std::cout << "OnRequestAdapterInfoCallback 1\r\n";
+
+    std::cout << "adapterInfo: " << adapterInfo << "\r\n";
+    SerializeCommand(cmd);
+    std::cout << "OnRequestAdapterInfoCallback 2\r\n";
+    if (adapterInfo) {
+        mProcs.adapterInfoFreeMembers(*adapterInfo);
+    }
+    std::cout << "OnRequestAdapterInfoCallback 3\r\n";
+}
 
 WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
                                           ObjectHandle eventManager,
