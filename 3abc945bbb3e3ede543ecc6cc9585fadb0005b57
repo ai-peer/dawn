@@ -16,6 +16,24 @@
       "message": "Is this going to now turn it on for Chromium, and do we want that? Should this be some kind of not chromium check?",
       "revId": "3abc945bbb3e3ede543ecc6cc9585fadb0005b57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee308aa4_4080f712",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004326
+      },
+      "writtenOn": "2024-02-08T19:15:08Z",
+      "side": 1,
+      "message": "Hmm good point, there was some discussion in chat over it, I think it probably does make more sense to keep it at not chromium so I\u0027ll update it. \n\nI also don\u0027t think ANGLE at least needs the `-Wno-gcc-compat` flag, but I also don\u0027t know if it\u0027s worth separating adding each flag in its own conditional.",
+      "parentUuid": "f4254c8c_4e8fc048",
+      "revId": "3abc945bbb3e3ede543ecc6cc9585fadb0005b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
