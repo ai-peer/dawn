@@ -170,6 +170,23 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateComputePipelineAsync) {
     ValidateCreateComputePipelineAsync();
 }
 
+// Verify that callback can be nullptr.
+TEST_P(CreatePipelineAsyncTest, CreateComputePipelineAsyncNullCallback) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+        struct SSBO {
+            value : u32
+        }
+        @group(0) @binding(0) var<storage, read_write> ssbo : SSBO;
+
+        @compute @workgroup_size(1) fn main() {
+            ssbo.value = 1u;
+        })");
+
+    device.CreateComputePipelineAsync(&csDesc, nullptr, &task);
+}
+
 // This is a regression test for a bug on the member "entryPoint" of FlatComputePipelineDescriptor.
 TEST_P(CreatePipelineAsyncTest, ReleaseEntryPointAfterCreatComputePipelineAsync) {
     wgpu::ComputePipelineDescriptor csDesc;
