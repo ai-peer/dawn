@@ -192,6 +192,24 @@
       "message": "Copyright.",
       "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "960af73f_a38336aa",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-08T16:13:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "260dee40_078d57a3",
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
