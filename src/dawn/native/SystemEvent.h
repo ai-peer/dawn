@@ -60,6 +60,8 @@ class SystemEventReceiver final : NonCopyable {
     SystemEventReceiver(SystemEventReceiver&&) = default;
     SystemEventReceiver& operator=(SystemEventReceiver&&) = default;
 
+    const SystemHandle& Get() const;
+
   private:
     template <typename It>
     friend bool WaitAnySystemEvent(It begin, It end, Nanoseconds timeout);
