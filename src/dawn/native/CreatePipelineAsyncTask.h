@@ -34,6 +34,7 @@
 #include "dawn/common/Ref.h"
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/webgpu.h"
 #include "partition_alloc/pointers/raw_ptr.h"
@@ -46,29 +47,57 @@ class PipelineLayoutBase;
 class RenderPipelineBase;
 class ShaderModuleBase;
 struct FlatComputePipelineDescriptor;
+struct CreateComputePipelineAsyncEvent;
 
-// CreateComputePipelineAsyncTask defines all the inputs and outputs of
-// CreateComputePipelineAsync() tasks, which are the same among all the backends.
+// CreateComputePipelineAsyncTask represents async tasks run on a separate thread.
 class CreateComputePipelineAsyncTask {
   public:
-    CreateComputePipelineAsyncTask(Ref<ComputePipelineBase> nonInitializedComputePipeline,
-                                   WGPUCreateComputePipelineAsyncCallback callback,
-                                   void* userdata);
+    explicit CreateComputePipelineAsyncTask(Ref<ComputePipelineBase> nonInitializedComputePipeline);
     ~CreateComputePipelineAsyncTask();
 
-    void Run();
-
-    static void RunAsync(std::unique_ptr<CreateComputePipelineAsyncTask> task);
+    void Run(CreateComputePipelineAsyncEvent* event);
+    static void RunAsync(DeviceBase* device, CreateComputePipelineAsyncEvent* event);
 
   private:
-    Ref<ComputePipelineBase> mComputePipeline;
+    Ref<ComputePipelineBase> mPipeline;
+    // Used to keep ShaderModuleBase::mTintProgram alive until pipeline initialization is done.
+    PipelineBase::ScopedUseShaderPrograms mScopedUseShaderPrograms;
+};
+
+// CreateComputePipelineAsyncEvent represents the async event managed by event manager.
+// It handles the inputs and outputs of CreateComputePipelineAsync()
+// and the life time of the CreateComputePipelineAsyncTask.
+struct CreateComputePipelineAsyncEvent final : public EventManager::TrackedEvent {
     WGPUCreateComputePipelineAsyncCallback mCallback;
     // TODO(https://crbug.com/2364): The pointer is dangling in
     // webgpu_cts_with_validation_tests. We should investigate, and decide if
     // this should be fixed, or turned into a DisableDanglingPtrDetection.
     raw_ptr<void, DanglingUntriaged> mUserdata;
-    // Used to keep ShaderModuleBase::mTintProgram alive until pipeline initialization is done.
-    PipelineBase::ScopedUseShaderPrograms mScopedUseShaderPrograms;
+    // Separate ResultOrError<Ref<ComputePipelineBase>> as it cannot be assigned after construction.
+    Ref<ComputePipelineBase> mPipeline;
+    std::unique_ptr<ErrorData> mError;
+    std::unique_ptr<CreateComputePipelineAsyncTask> mTask;
+
+    // Create an event backed by the given system event (for async pipeline creation goes through
+    // the backend).
+    CreateComputePipelineAsyncEvent(DeviceBase* device,
+                                    const CreateComputePipelineAsyncCallbackInfo& callbackInfo,
+                                    Ref<ComputePipelineBase> pipelineOrError,
+                                    Ref<SystemEvent> systemEvent,
+                                    std::unique_ptr<CreateComputePipelineAsyncTask> task);
+
+    // Create an event that's ready at creation (for cached results)
+    CreateComputePipelineAsyncEvent(DeviceBase* device,
+                                    const CreateComputePipelineAsyncCallbackInfo& callbackInfo,
+                                    Ref<ComputePipelineBase> pipeline);
+    // Create an event that's ready at creation (for errors)
+    CreateComputePipelineAsyncEvent(DeviceBase* device,
+                                    const CreateComputePipelineAsyncCallbackInfo& callbackInfo,
+                                    std::unique_ptr<ErrorData> error);
+
+    ~CreateComputePipelineAsyncEvent() override;
+
+    void Complete(EventCompletionType completionType) override;
 };
 
 // CreateRenderPipelineAsyncTask defines all the inputs and outputs of
