@@ -22,6 +22,30 @@
       },
       "revId": "59db90abc430d5800bb551138eb18baf3d9bebed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e92574_d3f01bb2",
+        "filename": "src/tint/utils/memory/aligned_storage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-08T15:23:33Z",
+      "side": 1,
+      "message": "Had a quick scan, and there\u0027s hundreds of individual reports, but nothing that stands out as an authoritative bug tracker for this, unfortunately.",
+      "parentUuid": "2a1e360f_54be4c1f",
+      "range": {
+        "startLine": 38,
+        "startChar": 52,
+        "endLine": 38,
+        "endChar": 86
+      },
+      "revId": "59db90abc430d5800bb551138eb18baf3d9bebed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
