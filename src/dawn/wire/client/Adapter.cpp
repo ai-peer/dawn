@@ -37,6 +37,42 @@
 namespace dawn::wire::client {
 namespace {
 
+class RequestAdapterInfoEvent : public TrackedEvent {
+  public:
+    static constexpr EventType kType = EventType::RequestAdapterInfo;
+
+    explicit RequestAdapterInfoEvent(const WGPURequestAdapterInfoCallbackInfo& callbackInfo)
+        : TrackedEvent(callbackInfo.mode),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata) {}
+
+    EventType GetType() override { return kType; }
+
+    WireResult ReadyHook(FutureID futureID,
+                         WGPURequestAdapterInfoStatus status,
+                         const WGPUAdapterInfo* adapterInfo) {
+        mStatus = status;
+        mAdapterInfo = *adapterInfo;
+        return WireResult::Success;
+    }
+
+  private:
+    void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        if (completionType == EventCompletionType::Shutdown) {
+            mStatus = WGPURequestAdapterInfoStatus_InstanceDropped;
+        }
+        if (mCallback) {
+            mCallback(mStatus, &mAdapterInfo, mUserdata);
+        }
+    }
+
+    WGPURequestAdapterInfoCallback mCallback;
+    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
+    raw_ptr<void, DanglingUntriaged> mUserdata;
+    WGPURequestAdapterInfoStatus mStatus;
+    WGPUAdapterInfo mAdapterInfo;
+};
+
 class RequestDeviceEvent : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::RequestDevice;
@@ -235,6 +271,39 @@ void ClientAdapterPropertiesFreeMembers(WGPUAdapterProperties properties) {
 void ClientAdapterPropertiesMemoryHeapsFreeMembers(
     WGPUAdapterPropertiesMemoryHeaps memoryHeapProperties) {
     delete[] memoryHeapProperties.heapInfo;
+}
+
+void Adapter::RequestAdapterInfo(WGPURequestAdapterInfoCallback callback, void* userdata) {
+    WGPURequestAdapterInfoCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    RequestAdapterInfoF(callbackInfo);
+}
+
+WGPUFuture Adapter::RequestAdapterInfoF(const WGPURequestAdapterInfoCallbackInfo& callbackInfo) {
+    Client* client = GetClient();
+    auto [futureIDInternal, tracked] =
+        GetEventManager().TrackEvent(std::make_unique<RequestAdapterInfoEvent>(callbackInfo));
+    if (!tracked) {
+        return {futureIDInternal};
+    }
+
+    AdapterRequestAdapterInfoCmd cmd;
+    cmd.adapterId = GetWireId();
+    cmd.eventManagerHandle = GetEventManagerHandle();
+    cmd.future = {futureIDInternal};
+
+    client->SerializeCommand(cmd);
+    return {futureIDInternal};
+}
+
+WireResult Client::DoAdapterRequestAdapterInfoCallback(ObjectHandle eventManager,
+                                                       WGPUFuture future,
+                                                       WGPURequestAdapterInfoStatus status,
+                                                       const WGPUAdapterInfo* adapterInfo) {
+    return GetEventManager(eventManager)
+        .SetFutureReady<RequestAdapterInfoEvent>(future.id, status, adapterInfo);
 }
 
 void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
