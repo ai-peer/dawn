@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a00871e_55e63c55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-08T14:56:00Z",
+      "side": 1,
+      "message": "Looks good!",
+      "revId": "33474923ec8a2524c1a37bea0b1c518dea8811a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f43f3f6_a35f52de",
+        "filename": "src/tint/utils/reflection/reflection.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-08T14:56:00Z",
+      "side": 1,
+      "message": "Not for this change, but all this std::is_invocable_v stuff could be simplified by using concepts. Since we\u0027re now C++20, I think we should start exploring using concepts more in our codebase. As an example: https://godbolt.org/z/hrzczrxE4",
+      "range": {
+        "startLine": 134,
+        "startChar": 41,
+        "endLine": 134,
+        "endChar": 55
+      },
+      "revId": "33474923ec8a2524c1a37bea0b1c518dea8811a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
