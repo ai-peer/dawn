@@ -123,21 +123,33 @@ bool ComputePipeline::RequiresStorageBufferLength() const {
     return mRequiresStorageBufferLength;
 }
 
-void ComputePipeline::InitializeAsync(Ref<ComputePipelineBase> computePipeline,
-                                      WGPUCreateComputePipelineAsyncCallback callback,
-                                      void* userdata) {
-    PhysicalDeviceBase* physicalDevice = computePipeline->GetDevice()->GetPhysicalDevice();
+Ref<CreateComputePipelineAsyncEvent> ComputePipeline::InitializeAsync(
+    Device* device,
+    Ref<ComputePipelineBase> computePipeline,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    // PhysicalDeviceBase* physicalDevice = computePipeline->GetDevice()->GetPhysicalDevice();
+    // std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
+    //     std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
+    //                                                      userdata);
+    // // Workaround a crash where the validation layers on AMD crash with partition alloc.
+    // // See crbug.com/dawn/1200.
+    // if (IsMetalValidationEnabled(physicalDevice) &&
+    //     gpu_info::IsAMD(physicalDevice->GetVendorId())) {
+    //     asyncTask->Run();
+    //     return;
+    // }
+    // CreateComputePipelineAsyncTask::RunAsync(std::move(asyncTask));
+
+    // TODO(dawn:2353)
     std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
-        std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
-                                                         userdata);
-    // Workaround a crash where the validation layers on AMD crash with partition alloc.
-    // See crbug.com/dawn/1200.
-    if (IsMetalValidationEnabled(physicalDevice) &&
-        gpu_info::IsAMD(physicalDevice->GetVendorId())) {
-        asyncTask->Run();
-        return;
-    }
-    CreateComputePipelineAsyncTask::RunAsync(std::move(asyncTask));
+        std::make_unique<CreateComputePipelineAsyncTask>(computePipeline);
+
+    Ref<CreateComputePipelineAsyncEvent> event = AcquireRef(
+        new CreateComputePipelineAsyncEvent(device, callbackInfo, std::move(computePipeline),
+                                            AcquireRef(new SystemEvent()), std::move(asyncTask)));
+
+    CreateComputePipelineAsyncTask::RunAsync(device, event.Get());
+    return event;
 }
 
 }  // namespace dawn::native::metal
