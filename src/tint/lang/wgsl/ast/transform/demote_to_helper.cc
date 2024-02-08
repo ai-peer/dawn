@@ -191,6 +191,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program& src, const DataMap&,
                         //   }
                         //   let y = x + tmp;
                         auto result = b.Sym();
+<<<<<<< HEAD   (4874ce [tint][msl] Fix C++17 warning.)
                         Type result_ty;
                         const Statement* masked_call = nullptr;
                         if (builtin->Fn() == wgsl::BuiltinFn::kAtomicCompareExchangeWeak) {
@@ -235,6 +236,12 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program& src, const DataMap&,
                                 b.If(b.Not(flag),
                                      b.Block(b.Assign(result, ctx.CloneWithoutTransform(call))));
                         }
+=======
+                        auto result_ty = CreateASTTypeFor(ctx, sem_call->Type());
+                        auto* masked_call =
+                            b.If(b.Not(flag),
+                                 b.Block(b.Assign(result, ctx.CloneWithoutTransform(call))));
+>>>>>>> CHANGE (f83de0 [tint][ast] Fix DemoteToHelper with atomicCompareExchangeWea)
                         auto* result_decl = b.Decl(b.Var(result, result_ty));
                         hoist_to_decl_before.Prepare(sem_call);
                         hoist_to_decl_before.InsertBefore(stmt, result_decl);
