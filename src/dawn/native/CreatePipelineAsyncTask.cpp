@@ -41,22 +41,19 @@
 namespace dawn::native {
 
 CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
-    Ref<ComputePipelineBase> nonInitializedComputePipeline,
-    WGPUCreateComputePipelineAsyncCallback callback,
-    void* userdata)
-    : mComputePipeline(std::move(nonInitializedComputePipeline)),
-      mCallback(callback),
-      mUserdata(userdata),
-      mScopedUseShaderPrograms(mComputePipeline->UseShaderPrograms()) {
-    DAWN_ASSERT(mComputePipeline != nullptr);
-}
+    Ref<ComputePipelineBase> nonInitializedComputePipeline)
+    : mPipeline(std::move(nonInitializedComputePipeline)),
+      mScopedUseShaderPrograms(mPipeline->UseShaderPrograms()) {}
 
 CreateComputePipelineAsyncTask::~CreateComputePipelineAsyncTask() = default;
 
-void CreateComputePipelineAsyncTask::Run() {
-    const char* eventLabel = utils::GetLabelForTrace(mComputePipeline->GetLabel().c_str());
+void CreateComputePipelineAsyncTask::Run(CreateComputePipelineAsyncEvent* event) {
+    // // By this time pipeline is uninitialized yet so it must not be error.
+    // Ref<ComputePipelineBase> pipeline = event->mPipelineOrError.AcquireSuccess();
 
-    DeviceBase* device = mComputePipeline->GetDevice();
+    const char* eventLabel = utils::GetLabelForTrace(mPipeline->GetLabel().c_str());
+
+    DeviceBase* device = mPipeline->GetDevice();
     TRACE_EVENT_FLOW_END1(device->GetPlatform(), General,
                           "CreateComputePipelineAsyncTask::RunAsync", this, "label", eventLabel);
     TRACE_EVENT1(device->GetPlatform(), General, "CreateComputePipelineAsyncTask::Run", "label",
@@ -65,37 +62,131 @@ void CreateComputePipelineAsyncTask::Run() {
     MaybeError maybeError;
     {
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(device->GetPlatform(), "CreateComputePipelineUS");
-        maybeError = mComputePipeline->Initialize(std::move(mScopedUseShaderPrograms));
+        maybeError = mPipeline->Initialize(std::move(mScopedUseShaderPrograms));
     }
     DAWN_HISTOGRAM_BOOLEAN(device->GetPlatform(), "CreateComputePipelineSuccess",
                            maybeError.IsSuccess());
-    if (maybeError.IsError()) {
-        device->AddComputePipelineAsyncCallbackTask(
-            maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback, mUserdata);
-    } else {
-        device->AddComputePipelineAsyncCallbackTask(mComputePipeline, mCallback, mUserdata);
-    }
+    // if (maybeError.IsError()) {
+    //     device->AddComputePipelineAsyncCallbackTask(
+    //         maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback,
+    //         mUserdata);
+    // } else {
+    //     device->AddComputePipelineAsyncCallbackTask(mComputePipeline, mCallback, mUserdata);
+    // }
+
+    std::get<Ref<SystemEvent>>(event->GetCompletionData())->Signal();
 }
 
 void CreateComputePipelineAsyncTask::RunAsync(
-    std::unique_ptr<CreateComputePipelineAsyncTask> task) {
-    DeviceBase* device = task->mComputePipeline->GetDevice();
-
-    const char* eventLabel = utils::GetLabelForTrace(task->mComputePipeline->GetLabel().c_str());
+    // std::unique_ptr<CreateComputePipelineAsyncTask> task
+    // Ref<CreateComputePipelineAsyncEvent> event
+    DeviceBase* device,
+    CreateComputePipelineAsyncEvent* event) {
+    // Ref<ComputePipelineBase> pipeline = event->mPipelineOrError.AcquireSuccess();
+    const char* eventLabel = utils::GetLabelForTrace(event->mTask->mPipeline->GetLabel().c_str());
 
     TRACE_EVENT_FLOW_BEGIN1(device->GetPlatform(), General,
-                            "CreateComputePipelineAsyncTask::RunAsync", task.get(), "label",
+                            "CreateComputePipelineAsyncTask::RunAsync", event->mTask.get(), "label",
                             eventLabel);
 
-    // Using "taskPtr = std::move(task)" causes compilation error while it should be supported
-    // since C++14:
-    // https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-160
-    auto asyncTask = [taskPtr = task.release()] {
-        std::unique_ptr<CreateComputePipelineAsyncTask> innnerTaskPtr(taskPtr);
-        innnerTaskPtr->Run();
-    };
-
+    // // Using "taskPtr = std::move(task)" causes compilation error while it should be supported
+    // // since C++14:
+    // // https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-160
+    // auto asyncTask = [taskPtr = task.release()] {
+    //     std::unique_ptr<CreateComputePipelineAsyncTask> innnerTaskPtr(taskPtr);
+    //     innnerTaskPtr->Run();
+    // };
+    // auto asyncTask = [event = event, taskPtr = event->mTask.release()] {
+    //     std::unique_ptr<CreateComputePipelineAsyncTask> innnerTaskPtr(taskPtr);
+    //     innnerTaskPtr->Run(event);
+    // };
+    auto asyncTask = [event = event] { event->mTask->Run(event); };
+    // auto asyncTask = [&] { event->mTask->Run(event); };
     device->GetAsyncTaskManager()->PostTask(std::move(asyncTask));
+}
+
+CreateComputePipelineAsyncEvent::CreateComputePipelineAsyncEvent(
+    DeviceBase* device,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo,
+    ResultOrError<Ref<ComputePipelineBase>> pipelineOrError,
+    Ref<SystemEvent> systemEvent,
+    std::unique_ptr<CreateComputePipelineAsyncTask> task)
+    : TrackedEvent(callbackInfo.mode, std::move(systemEvent)),
+      mCallback(callbackInfo.callback),
+      mUserdata(callbackInfo.userdata),
+      mPipelineOrError(std::move(pipelineOrError)),
+      mTask(std::move(task)) {
+    // TODO
+    // TRACE_EVENT_ASYNC_BEGIN0(device->GetPlatform(), General,
+    //     "Device::APICreateComputePipelineAsync",
+    //     uint64_t(serial));
+}
+
+// Create an event that's ready at creation (for cached results, errors, etc.)
+CreateComputePipelineAsyncEvent::CreateComputePipelineAsyncEvent(
+    DeviceBase* device,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo,
+    ResultOrError<Ref<ComputePipelineBase>> pipelineOrError)
+    : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
+      //   TrackedEvent(callbackInfo.mode, device->GetQueue(), kBeginningOfGPUTime),
+      mCallback(callbackInfo.callback),
+      mUserdata(callbackInfo.userdata),
+      mPipelineOrError(std::move(pipelineOrError)) {
+    // TRACE_EVENT_ASYNC_BEGIN0(device->GetPlatform(), General,
+    //     "Device::APICreateComputePipelineAsync",
+    //     kBeginningOfGPUTime);
+}
+
+CreateComputePipelineAsyncEvent::~CreateComputePipelineAsyncEvent() {
+    EnsureComplete(EventCompletionType::Shutdown);
+}
+
+void CreateComputePipelineAsyncEvent::Complete(EventCompletionType completionType) {
+    // TODO
+
+    // if (const auto* queueAndSerial = std::get_if<QueueAndSerial>(&GetCompletionData())) {
+    //     TRACE_EVENT_ASYNC_END0(queueAndSerial->queue->GetDevice()->GetPlatform(), General,
+    //                         "Device::APICreateComputePipelineAsync",
+    //                         uint64_t(queueAndSerial->completionSerial));
+    // }
+
+    if (completionType == EventCompletionType::Shutdown) {
+        mCallback(ToAPI(wgpu::CreatePipelineAsyncStatus::InstanceDropped), nullptr, nullptr,
+                  mUserdata);
+        return;
+    }
+
+    // completionType == EventCompletionType::Ready
+
+    if (mPipelineOrError.IsError()) {
+        std::unique_ptr<ErrorData> errorData = mPipelineOrError.AcquireError();
+        wgpu::CreatePipelineAsyncStatus status;
+        switch (errorData->GetType()) {
+            case InternalErrorType::Validation:
+                status = wgpu::CreatePipelineAsyncStatus::ValidationError;
+                break;
+            default:
+                status = wgpu::CreatePipelineAsyncStatus::InternalError;
+                break;
+        }
+        mCallback(ToAPI(status), nullptr, errorData->GetFormattedMessage().c_str(), mUserdata);
+        return;
+    }
+
+    // mPipelineOrError is pipeline
+    Ref<ComputePipelineBase> pipeline = mPipelineOrError.AcquireSuccess();
+
+    DeviceBase* device = pipeline->GetDevice();
+    {
+        auto deviceLock(device->GetScopedLock());
+        if (device->GetState() == DeviceBase::State::Alive) {
+            pipeline = device->AddOrGetCachedComputePipeline(std::move(pipeline));
+        }
+    }
+    mCallback(ToAPI(wgpu::CreatePipelineAsyncStatus::Success),
+              // ToAPI(ReturnToAPI(std::move(mPipelineOrError.AcquireSuccess()))),
+              //   ToAPI(ReturnToAPI(mPipelineOrError.AcquireSuccess())),
+              ToAPI(ReturnToAPI(std::move(pipeline))), "", mUserdata);
 }
 
 CreateRenderPipelineAsyncTask::CreateRenderPipelineAsyncTask(
