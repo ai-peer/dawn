@@ -625,8 +625,6 @@ TEST_P(WaitAnyTests, UnsupportedMixedSources) {
 TEST_P(WaitAnyTests, ProcessEventsWhileManyThreadsWaitAnySameFutureSerial) {
     // Timed wait any is not available on the wire.
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-    // TODO(dawn:2397): GL backend needs to use EGL syncs to allow cross-thread waiting.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGL() || IsOpenGLES());
 
     std::mutex mutex;
     std::condition_variable cv;

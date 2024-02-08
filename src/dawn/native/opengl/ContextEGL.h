@@ -44,13 +44,15 @@ class ContextEGL : public Device::Context {
                                                              EGLDisplay display,
                                                              bool useANGLETextureSharing);
     void MakeCurrent() override;
+    EGLDisplay GetEGLDisplay() const override;
+    const EGLFunctions& GetEGL() const override;
     ~ContextEGL() override;
 
   private:
     ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLContext context)
-        : egl(functions), mDisplay(display), mContext(context) {}
+        : mEgl(functions), mDisplay(display), mContext(context) {}
 
-    const EGLFunctions egl;
+    const EGLFunctions mEgl;
     EGLDisplay mDisplay;
     EGLContext mContext;
 };
