@@ -52,8 +52,10 @@ class Queue final : public QueueBase {
     void WaitForCommandsToBeScheduled();
     void ExportLastSignaledEvent(ExternalImageMTLSharedEventDescriptor* desc);
 
-    Ref<SystemEvent> CreateWorkDoneSystemEvent(ExecutionSerial serial);
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+
+    Ref<SharedSystemEventReceiver> GetOrCreateSharedSystemEventReceiver(
+        ExecutionSerial completionSerial) override;
 
   private:
     Queue(Device* device, const QueueDescriptor* descriptor);
@@ -61,6 +63,8 @@ class Queue final : public QueueBase {
 
     MaybeError Initialize();
     void UpdateWaitingEvents(ExecutionSerial completedSerial);
+
+    Ref<SystemEvent> GetOrCreateWorkDoneSystemEvent(ExecutionSerial serial);
 
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;

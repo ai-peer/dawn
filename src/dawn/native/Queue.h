@@ -108,6 +108,16 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
+    // Returns a ref to a SharedSystemEventReceiver which will be signaled when the
+    // `completionSerial` passes. Note that this may receiver may be shared between multiple
+    // TrackedEvents. Callers should be careful to wait on a receiver only from a single thread at a
+    // time. Returns nullptr if the implementation cannot make a SystemEventReceiver for the
+    // completion serial.
+    virtual Ref<SharedSystemEventReceiver> GetOrCreateSharedSystemEventReceiver(
+        ExecutionSerial completionSerial) {
+        return nullptr;
+    }
+
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);

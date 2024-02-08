@@ -78,6 +78,8 @@ class EventManager final : NonMovable {
                                            FutureWaitInfo* infos,
                                            Nanoseconds timeout);
 
+    const SystemHandle& GetOrCreateSharedSystemEventReceiver(Future future);
+
   private:
     bool mTimedWaitAnyEnable = false;
     size_t mTimedWaitAnyMaxCount = kTimedWaitAnyMaxCountDefault;
@@ -158,6 +160,7 @@ class EventManager::TrackedEvent : public RefCounted {
     friend class EventManager;
 
     CompletionData mCompletionData;
+    Ref<SharedSystemEventReceiver> mCompletionSystemEventReceiver = nullptr;
     // Callback has been called.
     std::atomic<bool> mCompleted = false;
 };
@@ -192,6 +195,12 @@ struct TrackedFutureWaitInfo {
     size_t indexInInfos;
     // Used by EventManager::ProcessPollEvents and ::WaitAny
     bool ready;
+#if !DAWN_PLATFORM_IS(WINDOWS)
+    // The system event receiver which is used for waiting.
+    // Timed waits acquire an exclusive receiver and store it here to avoid
+    // extra allocations.
+    SystemEventReceiver receiverForWait = {};
+#endif
 };
 
 }  // namespace dawn::native
