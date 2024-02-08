@@ -1216,6 +1216,9 @@ void DawnTestBase::LoseDeviceForTesting(wgpu::Device deviceToLose) {
         .Times(1);
     resolvedDevice.ForceLoss(wgpu::DeviceLostReason::Undefined, "Device lost for testing");
     resolvedDevice.Tick();
+    // Need to call ProcessEvents, otherwise it will be an instance drop if this is the last
+    // statement of the test body.
+    GetInstance().ProcessEvents();
 }
 
 std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,

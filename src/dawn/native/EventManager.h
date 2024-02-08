@@ -152,6 +152,7 @@ class EventManager::TrackedEvent : public RefCounted {
     virtual void Complete(EventCompletionType) = 0;
 
     wgpu::CallbackMode mCallbackMode;
+    FutureID mPendingMapFutureID = kNullFutureID;
 
 #if DAWN_ENABLE_ASSERTS
     std::atomic<bool> mCurrentlyBeingWaited = false;
