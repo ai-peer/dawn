@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4254c8c_4e8fc048",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-08T19:06:05Z",
+      "side": 1,
+      "message": "Is this going to now turn it on for Chromium, and do we want that? Should this be some kind of not chromium check?",
+      "revId": "3abc945bbb3e3ede543ecc6cc9585fadb0005b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
