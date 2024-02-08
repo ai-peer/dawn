@@ -810,6 +810,12 @@ crbug.com/tint/1974 [ android-u ] webgpu:shader,execution,expression,call,builti
 crbug.com/tint/1974 [ android-u ] webgpu:shader,execution,expression,call,builtin,atomics,atomicXor:xor_workgroup:workgroupSize=2;dispatchSize=8;mapId="remap";scalarType="u32" [ Failure ]
 
 ################################################################################
+# Failures on Pixel 6 related to createComputePipelineAsync wgpuFuture updates
+################################################################################
+crbug.com/dawn/2353 [ android-pixel-6 target-cpu-64 arm ] webgpu:shader,execution,expression,call,builtin,step:f16:inputSource="const";vectorize="undef" [ Failure ]
+crbug.com/dawn/2353 [ android-pixel-6 target-cpu-64 arm ] webgpu:shader,execution,expression,call,builtin,step:f32:inputSource="const";vectorize="undef" [ Failure ]
+
+################################################################################
 # maxInterStageShaderComponents limit tests fail with CreateGraphicsPipelines fail with <Unknown VkResult> on Android Qualcomm (Pixel 4)
 ################################################################################
 crbug.com/dawn/1903 [ qualcomm ] webgpu:api,validation,capability_checks,limits,maxInterStageShaderComponents:* [ Failure ]

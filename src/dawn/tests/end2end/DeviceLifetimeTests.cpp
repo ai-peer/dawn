@@ -358,6 +358,8 @@ TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsync) {
         nullptr);
 
     device = nullptr;
+    // Need to call ProcessEvents, otherwise it will be an instance drop.
+    instance.ProcessEvents();
 }
 
 // Test that the device can be dropped inside a createPipelineAsync callback
@@ -488,6 +490,8 @@ TEST_P(DeviceLifetimeTests, DroppedWhileCreatePipelineAsyncRaceCache) {
     wgpu::ComputePipeline p = device.CreateComputePipeline(&desc);
 
     device = nullptr;
+    // Need to call ProcessEvents, otherwise it will be an instance drop.
+    instance.ProcessEvents();
 }
 
 // Test that the device can be dropped inside a createPipelineAsync callback which will race
