@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_OPENGL_EGLFUNCTIONS_H_
 
 #include <EGL/egl.h>
+#include <EGL/eglext.h>
 
 namespace dawn::native::opengl {
 
@@ -50,6 +51,9 @@ struct EGLFunctions {
     PFNEGLINITIALIZEPROC Initialize;
     PFNEGLMAKECURRENTPROC MakeCurrent;
     PFNEGLQUERYSTRINGPROC QueryString;
+    PFNEGLCREATESYNCKHRPROC CreateSyncKHR;
+    PFNEGLDESTROYSYNCKHRPROC DestroySyncKHR;
+    PFNEGLCLIENTWAITSYNCKHRPROC ClientWaitSyncKHR;
 };
 
 }  // namespace dawn::native::opengl

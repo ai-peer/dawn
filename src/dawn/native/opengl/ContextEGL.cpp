@@ -79,6 +79,10 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
         return DAWN_INTERNAL_ERROR("EGL_EXT_create_context_robustness must be supported");
     }
 
+    if (strstr(extensions, "EGL_KHR_fence_sync") == nullptr) {
+        return DAWN_INTERNAL_ERROR("EGL_KHR_fence_sync must be supported");
+    }
+
     std::vector<EGLint> attrib_list{
         EGL_CONTEXT_MAJOR_VERSION,
         major,
@@ -104,11 +108,20 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 }
 
 void ContextEGL::MakeCurrent() {
-    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    EGLBoolean success = mEgl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    DAWN_ASSERT(success == EGL_TRUE);
+}
+
+EGLDisplay ContextEGL::GetEGLDisplay() const {
+    return mDisplay;
+}
+
+const EGLFunctions& ContextEGL::GetEGL() const {
+    return mEgl;
 }
 
 ContextEGL::~ContextEGL() {
-    egl.DestroyContext(mDisplay, mContext);
+    mEgl.DestroyContext(mDisplay, mContext);
 }
 
 }  // namespace dawn::native::opengl

@@ -44,9 +44,9 @@
 #include "dawn/common/windows_with_undefs.h"
 #endif
 
-using EGLImage = void*;
-
 namespace dawn::native::opengl {
+
+struct EGLFunctions;
 
 class Device final : public DeviceBase {
   public:
@@ -63,6 +63,8 @@ class Device final : public DeviceBase {
     // Returns all the OpenGL entry points and ensures that the associated
     // Context is current.
     const OpenGLFunctions& GetGL() const;
+    const EGLFunctions& GetEGL(bool makeCurrent) const;
+    EGLDisplay GetEGLDisplay() const;
 
     const GLFormat& GetGLFormat(const Format& format);
 
@@ -98,6 +100,8 @@ class Device final : public DeviceBase {
       public:
         virtual ~Context() {}
         virtual void MakeCurrent() = 0;
+        virtual EGLDisplay GetEGLDisplay() const = 0;
+        virtual const EGLFunctions& GetEGL() const = 0;
     };
 
   private:
