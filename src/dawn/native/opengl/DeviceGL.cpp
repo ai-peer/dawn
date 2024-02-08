@@ -427,4 +427,20 @@ const OpenGLFunctions& Device::GetGL() const {
     return mGL;
 }
 
+const EGLFunctions& Device::GetEGL(bool makeCurrent) const {
+    if (makeCurrent) {
+        mContext->MakeCurrent();
+        ToBackend(GetQueue())->OnGLUsed();
+    }
+    return mContext->GetEGL();
+}
+
+const EGLExtensionSet& Device::GetEGLExtensions() const {
+    return mContext->GetExtensions();
+}
+
+EGLDisplay Device::GetEGLDisplay() const {
+    return mContext->GetEGLDisplay();
+}
+
 }  // namespace dawn::native::opengl
