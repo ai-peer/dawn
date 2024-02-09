@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8edfb63_f830a3f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-09T23:55:19Z",
+      "side": 1,
+      "message": "Note: The BaseVertex endToEnd test now passes, was failing. The ValidateWithOffset was already passing without this CL\n\nThe CTS tests pass.\n\nI wasn\u0027t sure what to do about the toggle. As it is now, the OpenGL backend turns it on. If it\u0027s on and validation is off then it generates a validation error 🤷‍♂️ if the index buffer offset is not 0. Maybe that should be a CHECK?",
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
