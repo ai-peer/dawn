@@ -106,6 +106,10 @@ type Parameter struct {
 type Overload struct {
 	// Total number of parameters for the overload
 	NumParameters int
+	// Total number of generic template types for the overload
+	NumGenericTypes int
+	// Index to the first generic template type in IntrinsicTable.TemplateTypes
+	GenericTypesOffset int
 	// Total number of template types for the overload
 	NumTemplateTypes int
 	// Total number of template numbers for the overload
@@ -155,6 +159,7 @@ type IntrinsicTableBuilder struct {
 	lut struct {
 		typeMatcherIndices       lut.LUT[int]
 		numberMatcherIndices     lut.LUT[int]
+		genericTypes 			 lut.LUT[TemplateType]
 		templateTypes            lut.LUT[TemplateType]
 		templateNumbers          lut.LUT[TemplateNumber]
 		constEvalFunctionIndices lut.LUT[string]
@@ -178,6 +183,10 @@ type overloadBuilder struct {
 	templateTypeIndex map[sem.TemplateParam]int
 	// Maps TemplateParam to index in templateNumbers
 	templateNumberIndex map[sem.TemplateParam]int
+	// Generic types used by the overload
+	genericTypes []TemplateType
+	// Index to the first generic type in IntrisicTable.TemplateTypes
+	genericTypesOffset *int
 	// Template types used by the overload
 	templateTypes []TemplateType
 	// Index to the first template type in IntrinsicTable.TemplateTypes
@@ -237,6 +246,8 @@ func (b *IntrinsicTableBuilder) newOverloadBuilder(o *sem.Overload) *overloadBui
 // Preconditions:
 // - Must be called before any LUTs are compacted.
 // Populates:
+// - b.genericTypes
+// - b.genericTypesOffset
 // - b.templateTypes
 // - b.templateTypesOffset
 // - b.templateNumbers
@@ -246,6 +257,27 @@ func (b *IntrinsicTableBuilder) newOverloadBuilder(o *sem.Overload) *overloadBui
 // - b.returnNumberMatcherIndicesOffset
 // - b.constEvalFunctionOffset
 func (b *overloadBuilder) processStage0() error {
+	b.genericTypes = make([]TemplateType, len(b.overload.GenericTypes))
+	for i, t := range b.overload.GenericTypes {
+		b.templateTypeIndex[t] = i
+		matcherIndex := -1
+		if t.Type != nil {
+			tys, nums, err := b.matcherIndices(t.Type)
+			if err != nil {
+				return err
+			}
+			if len(tys) != 1 || len(nums) != 0 {
+				panic("unexpected result of matcherIndices()")
+			}
+			matcherIndex = tys[0]
+		}
+		b.genericTypes[i] = TemplateType{
+			Name:         t.Name,
+			MatcherIndex: matcherIndex,
+		}
+	}
+	b.genericTypesOffset = b.lut.templateTypes.Add(b.genericTypes)
+
 	b.templateTypes = make([]TemplateType, len(b.overload.TemplateTypes))
 	for i, t := range b.overload.TemplateTypes {
 		b.templateTypeIndex[t] = i
@@ -342,6 +374,8 @@ func (b *overloadBuilder) processStage1() error {
 func (b *overloadBuilder) build() (Overload, error) {
 	return Overload{
 		NumParameters:                    len(b.parameterBuilders),
+		NumGenericTypes: 				  len(b.genericTypes),
+		GenericTypesOffset:				  loadOrMinusOne(b.genericTypesOffset),
 		NumTemplateTypes:                 len(b.templateTypes),
 		NumTemplateNumbers:               len(b.templateNumbers),
 		TemplateTypesOffset:              loadOrMinusOne(b.templateTypesOffset),
@@ -460,6 +494,7 @@ func BuildIntrinsicTable(s *sem.Sem) (*IntrinsicTable, error) {
 	}
 
 	// Perform the 'stage-0' processing of the overloads
+	b.lut.genericTypes = lut.New[TemplateType]()
 	b.lut.typeMatcherIndices = lut.New[int]()
 	b.lut.numberMatcherIndices = lut.New[int]()
 	b.lut.templateTypes = lut.New[TemplateType]()
