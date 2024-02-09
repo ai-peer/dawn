@@ -137,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7aec549_dbc8aa95",
+        "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T19:16:39Z",
+      "side": 1,
+      "message": "I think that should be caught by the resolver / validator anyway. I think the ICE on L49 is unreachable.",
+      "parentUuid": "685486fa_4ee56470",
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5049253_a523227e",
         "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
         "patchSetId": 5
