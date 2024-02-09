@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b16eea_72c55062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-09T17:22:08Z",
+      "side": 1,
+      "message": "Guys if you\u0027re OK for me to submit this please re-add the necessary permissions.",
+      "revId": "b994aeb184423de76566e565a10c1c27e3112f56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

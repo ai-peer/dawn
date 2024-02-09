@@ -67,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62b77ece_15e05e6f",
+        "filename": "tools/android/gradle/wrapper/gradle-wrapper.jar",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-02-09T17:22:08Z",
+      "side": 1,
+      "message": "I have removed this file too; again, it\u0027s not needed if you build from Android Studio, and there are instructions for fetching the wrapper if needed for a shell build.",
+      "parentUuid": "c6f7d5b2_f9d5284f",
+      "revId": "632993cf80e8b50aeef7180537fbdcc554c94656",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "517f5ee4_80e6f989",
         "filename": "tools/android/settings.gradle",
         "patchSetId": 5
