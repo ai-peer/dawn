@@ -32,6 +32,10 @@
 
 #include "langsvr/lsp/lsp.h"
 #include "langsvr/session.h"
+
+#include "src/tint/lang/wgsl/ls/file.h"
+#include "src/tint/utils/containers/hashmap.h"
+#include "src/tint/utils/result/result.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::wgsl::ls {
@@ -50,6 +54,54 @@ class Server {
     bool ShuttingDown() const { return shutting_down_; }
 
   private:
+    langsvr::Result<typename langsvr::lsp::TextDocumentCompletionRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentCompletionRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentDefinitionRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentDefinitionRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentDocumentSymbolRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentDocumentSymbolRequest& r);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentHoverRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentHoverRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentInlayHintRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentInlayHintRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentPrepareRenameRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentPrepareRenameRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentReferencesRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentReferencesRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentRenameRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentRenameRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentSemanticTokensFullRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentSemanticTokensFullRequest&);
+
+    langsvr::Result<typename langsvr::lsp::TextDocumentSignatureHelpRequest::Result>  //
+    Do(const langsvr::lsp::TextDocumentSignatureHelpRequest&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    Do(const langsvr::lsp::InitializedNotification&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    Do(const langsvr::lsp::SetTraceNotification&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    Do(const langsvr::lsp::TextDocumentDidOpenNotification&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    Do(const langsvr::lsp::TextDocumentDidCloseNotification&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    Do(const langsvr::lsp::TextDocumentDidChangeNotification&);
+
+    langsvr::Result<langsvr::SuccessType>  //
+    PublishDiagnostics(File& file);
+
     /// Logger is a string-stream like utility for logging to the client.
     /// Append message content with '<<'. The message is sent when the logger is destructed.
     struct Logger {
@@ -72,6 +124,8 @@ class Server {
 
     /// The LSP session.
     langsvr::Session& session_;
+    /// Map of URI to File.
+    Hashmap<std::string, std::shared_ptr<File>, 8> files_;
     /// True if the server has been asked to shutdown.
     bool shutting_down_ = false;
 };
