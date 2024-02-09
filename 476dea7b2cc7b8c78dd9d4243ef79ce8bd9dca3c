@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7de7ccd_39187bff",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-09T03:11:35Z",
+      "side": 1,
+      "message": "this assert is removed because some other thread might have been the one to remove the fence from the list, but it hasn\u0027t updated the completed serial yet",
+      "revId": "476dea7b2cc7b8c78dd9d4243ef79ce8bd9dca3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
