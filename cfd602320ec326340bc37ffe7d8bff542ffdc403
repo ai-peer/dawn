@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa236df4_30de11ef",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "It makes the list of available overloaders clearer, I think. From the list above it looks like abstracts can\u0027t be used. If you move abstract into the `T` then it looks like the template param can be an abstract which it can\u0027t. So, this also says the value _can_ be different from `T` as long as it\u0027s abstract.",
+      "parentUuid": "e021793e_f47c8afd",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfea2c80_7ff10878",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d364aad_604bef15",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "We shouldn\u0027t but we do because we haven\u0027t removed them. Notice `scalar` entries above and below this line. Having it here keeps the file consistent for when we do remove them.",
+      "parentUuid": "dfea2c80_7ff10878",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a116cdbd_644fe054",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2024-02-09T09:58:53Z",
       "side": 1,
       "message": "As mentioned above, I don\u0027t know why we have to add abstract overloads? Shouldn\u0027t the rules of concretization cover these?",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b8d7f4_83f3263f",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "Possibly, I just find it a lot less clear, this also provides the output lines which specify that `T` and `A` can be different in this case.",
+      "parentUuid": "a116cdbd_644fe054",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +165,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "164e4cb8_3ba0fe12",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "That\u0027s a lot less readable to me. Having `@templated` be explict makes the line easier to decyper vs magic `[]` and `\u003c\u003e`",
+      "parentUuid": "714eace2_48f694d4",
+      "range": {
+        "startLine": 1111,
+        "startChar": 30,
+        "endLine": 1111,
+        "endChar": 39
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7024b344_013e45cc",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
@@ -122,6 +200,24 @@
       "writtenOn": "2024-02-09T09:58:53Z",
       "side": 1,
       "message": "These should be removed from the core definition file too.",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16444397_ea717f10",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "Yes. Cleaning up the core def file is a different task. I\u0027m not sure if this was needed here or in WGSL, so I made the two files have the same content until we clean up this and and the abstract entries.",
+      "parentUuid": "7024b344_013e45cc",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +241,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "594887bf_47206a13",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "Do I run it over every individual file? Or is there a `git cl format` for go files?",
+      "parentUuid": "a79bba98_580ad236",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c2bdf76_c15cd468",
         "filename": "tools/src/tint/intrinsic/sem/sem.go",
         "patchSetId": 1
@@ -156,6 +270,30 @@
       "writtenOn": "2024-02-09T09:58:53Z",
       "side": 1,
       "message": "I\u0027d lean towards keeping \u0027template\u0027 for the explicit thing. How about \u0027inferred\u0027 for those that you can\u0027t explicitly pass?\n\n```suggestion\n\tTemplateTypes\t  []*TemplateTypeParam\n\tInferredTypes     []*TemplateTypeParam\n\tInferredNumbers   []TemplateParam\n```",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 34
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6431ded8_695ab45f",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T12:20:24Z",
+      "side": 1,
+      "message": "I\u0027ll put up a pre-CL which renames `Template` to `Inferred` and will change `Generic` to `Template`.",
+      "parentUuid": "2c2bdf76_c15cd468",
       "range": {
         "startLine": 193,
         "startChar": 0,
