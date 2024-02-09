@@ -59,6 +59,10 @@ class Server {
     // Requests
     ////////////////////////////////////////////////////////////////////////////
 
+    /// Handler for langsvr::lsp::TextDocumentCompletionRequest
+    typename langsvr::lsp::TextDocumentCompletionRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentCompletionRequest&);
+
     /// Handler for langsvr::lsp::TextDocumentDefinitionRequest
     typename langsvr::lsp::TextDocumentDefinitionRequest::ResultType  //
     Handle(const langsvr::lsp::TextDocumentDefinitionRequest&);
