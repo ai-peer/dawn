@@ -52,9 +52,53 @@ class Server {
     /// @returns true if the server has been requested to shut down.
     bool ShuttingDown() const { return shutting_down_; }
 
+    /// Handler for langsvr::lsp::TextDocumentCompletionRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentCompletionRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentCompletionRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentDefinitionRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentDefinitionRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentDefinitionRequest&);
+
     /// Handler for langsvr::lsp::TextDocumentDocumentSymbolRequest
     langsvr::Result<typename langsvr::lsp::TextDocumentDocumentSymbolRequest::Result>  //
     Handle(const langsvr::lsp::TextDocumentDocumentSymbolRequest& r);
+
+    /// Handler for langsvr::lsp::TextDocumentHoverRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentHoverRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentHoverRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentInlayHintRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentInlayHintRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentInlayHintRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentPrepareRenameRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentPrepareRenameRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentPrepareRenameRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentReferencesRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentReferencesRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentReferencesRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentRenameRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentRenameRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentRenameRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentSemanticTokensFullRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentSemanticTokensFullRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentSemanticTokensFullRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentSignatureHelpRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentSignatureHelpRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentSignatureHelpRequest&);
+
+    /// Handler for langsvr::lsp::InitializedNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::InitializedNotification&);
+
+    /// Handler for langsvr::lsp::SetTraceNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::SetTraceNotification&);
 
     /// Handler for langsvr::lsp::TextDocumentDidOpenNotification
     langsvr::Result<langsvr::SuccessType>  //

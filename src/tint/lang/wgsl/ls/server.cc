@@ -29,6 +29,7 @@
 
 #include "langsvr/session.h"
 
+#include "src/tint/lang/wgsl/ls/sem_token.h"
 #include "src/tint/lang/wgsl/ls/utils.h"
 
 namespace lsp = langsvr::lsp;
@@ -39,8 +40,43 @@ Server::Server(langsvr::Session& session) : session_(session) {
     session.Register([&](const lsp::InitializeRequest&)
                          -> langsvr::Result<typename lsp::InitializeRequest::Result> {
         lsp::InitializeResult result;
+        result.capabilities.completion_provider = [] {
+            lsp::CompletionOptions opts;
+            opts.completion_item = lsp::ServerCompletionItemOptions{};
+            return opts;
+        }();
+        result.capabilities.definition_provider = true;
         result.capabilities.document_symbol_provider = [] {
             lsp::DocumentSymbolOptions opts;
+            return opts;
+        }();
+        result.capabilities.hover_provider = true;
+        result.capabilities.inlay_hint_provider = true;
+        result.capabilities.references_provider = [] {
+            lsp::ReferenceOptions opts;
+            return opts;
+        }();
+        result.capabilities.rename_provider = [] {
+            lsp::RenameOptions opts;
+            opts.prepare_provider = true;
+            return opts;
+        }();
+        result.capabilities.semantic_tokens_provider = [] {
+            lsp::SemanticTokensOptions opts;
+            opts.full = true;
+            for (auto name : SemToken::kNames) {
+                opts.legend.token_types.push_back(name);
+            }
+            return opts;
+        }();
+        result.capabilities.text_document_sync = [] {
+            lsp::TextDocumentSyncOptions opts;
+            opts.open_close = true;
+            opts.change = lsp::TextDocumentSyncKind::kIncremental;
+            return opts;
+        }();
+        result.capabilities.signature_help_provider = [] {
+            lsp::SignatureHelpOptions opts;
             return opts;
         }();
         return result;
@@ -51,6 +87,21 @@ Server::Server(langsvr::Session& session) : session_(session) {
         return lsp::Null{};
     });
 
+    session.Register([&](const lsp::TextDocumentCompletionRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentDefinitionRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentDocumentSymbolRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentHoverRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentInlayHintRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentPrepareRenameRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentReferencesRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentRenameRequest& r) { return Handle(r); });
+    session.Register(
+        [&](const lsp::TextDocumentSemanticTokensFullRequest& r) { return Handle(r); });
+    session.Register([&](const lsp::TextDocumentSignatureHelpRequest& r) { return Handle(r); });
+
+    session.Register([&](const lsp::InitializedNotification&) { return langsvr::Success; });
+    session.Register([&](const lsp::SetTraceNotification&) { return langsvr::Success; });
+    session.Register([&](const lsp::CancelRequestNotification&) { return langsvr::Success; });
     session.Register([&](const lsp::TextDocumentDidOpenNotification& n) { return Handle(n); });
     session.Register([&](const lsp::TextDocumentDidCloseNotification& n) { return Handle(n); });
     session.Register([&](const lsp::TextDocumentDidChangeNotification& n) { return Handle(n); });

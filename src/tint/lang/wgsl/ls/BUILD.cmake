@@ -41,14 +41,23 @@ if(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
 # Condition: TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER
 ################################################################################
 tint_add_target(tint_lang_wgsl_ls lib
+  lang/wgsl/ls/completions.cc
+  lang/wgsl/ls/definition.cc
   lang/wgsl/ls/diagnostics.cc
   lang/wgsl/ls/document.cc
   lang/wgsl/ls/file.cc
   lang/wgsl/ls/file.h
+  lang/wgsl/ls/hover.cc
+  lang/wgsl/ls/inlay_hints.cc
+  lang/wgsl/ls/references.cc
+  lang/wgsl/ls/rename.cc
+  lang/wgsl/ls/sem_token.h
+  lang/wgsl/ls/sem_tokens.cc
   lang/wgsl/ls/serve.cc
   lang/wgsl/ls/serve.h
   lang/wgsl/ls/server.cc
   lang/wgsl/ls/server.h
+  lang/wgsl/ls/signature_help.cc
   lang/wgsl/ls/symbols.cc
   lang/wgsl/ls/utils.h
 )
@@ -57,12 +66,14 @@ tint_target_add_dependencies(tint_lang_wgsl_ls lib
   tint_api_common
   tint_lang_core
   tint_lang_core_constant
+  tint_lang_core_intrinsic
   tint_lang_core_ir
   tint_lang_core_type
   tint_lang_wgsl
   tint_lang_wgsl_ast
   tint_lang_wgsl_common
   tint_lang_wgsl_features
+  tint_lang_wgsl_intrinsic
   tint_lang_wgsl_program
   tint_lang_wgsl_sem
   tint_utils_containers
@@ -104,6 +115,7 @@ if(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
 # Condition: TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER
 ################################################################################
 tint_add_target(tint_lang_wgsl_ls_test test
+  lang/wgsl/ls/helpers_test.cc
   lang/wgsl/ls/helpers_test.h
   lang/wgsl/ls/symbols_test.cc
 )
