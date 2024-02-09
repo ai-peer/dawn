@@ -153,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a9dc6c_5c13be23",
+        "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T19:21:34Z",
+      "side": 1,
+      "message": "Good point. Fixed.",
+      "parentUuid": "e7aec549_dbc8aa95",
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5049253_a523227e",
