@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69896db4_c17f1a59",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T16:56:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4c76b39_81151545",
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f68f936e_ca8573b2",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-02-09T16:02:24Z",
       "side": 1,
       "message": "nit: existing",
+      "range": {
+        "startLine": 43,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 17
+      },
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f70667_a24625f4",
+        "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T16:56:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f68f936e_ca8573b2",
       "range": {
         "startLine": 43,
         "startChar": 12,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "685486fa_4ee56470",
+        "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T16:56:09Z",
+      "side": 1,
+      "message": "I could, but then I wouldn\u0027t detect multiple push_constant blocks (48). Either way is fine by me, though.",
+      "parentUuid": "2e5a09f9_5b5f7808",
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e5049253_a523227e",
         "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
         "patchSetId": 5
@@ -88,6 +148,30 @@
       "writtenOn": "2024-02-09T16:02:24Z",
       "side": 1,
       "message": "nit: double map lookup. Can be assigned to a `auto\u0026` and used in both places.",
+      "range": {
+        "startLine": 67,
+        "startChar": 22,
+        "endLine": 67,
+        "endChar": 40
+      },
+      "revId": "dfccd6b2cc44e40ea5adfea258616b394ba1f7a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b1c2c42_1f93b0c1",
+        "filename": "src/tint/lang/wgsl/ast/transform/push_constant_helper.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T16:56:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5049253_a523227e",
       "range": {
         "startLine": 67,
         "startChar": 22,
