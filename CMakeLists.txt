@@ -45,7 +45,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_DEBUG_POSTFIX "")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -383,6 +383,9 @@ function(common_compile_options TARGET)
 
       -Wno-deprecated-builtins
       -Wno-unknown-warning-option
+
+      # Breaking change between C++17 and C++20 - silence this until all uses of Dawn has migrated to 20.
+      -Wno-deprecated-this-capture
     )
 
     if (${DAWN_ENABLE_MSAN})
@@ -488,8 +491,6 @@ endif()
 if (WIN32)
     target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
-
-set(CMAKE_CXX_STANDARD "17")
 
 ################################################################################
 # Tint
