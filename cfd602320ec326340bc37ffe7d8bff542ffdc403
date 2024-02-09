@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a9a12c1_93f9ebbe",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T13:33:05Z",
+      "side": 1,
+      "message": "This change goes well beyond just the diagnostics. You\u0027re adding new overloads that everything downstream now has to understand. Instead of resolving to an overload signature with concrete parameter types, all the transforms and writers need to now handle abstract parameter types.\n\nIt\u0027s also going to impact performance - there\u0027s a bunch more overloads that have to be considered.\n\nIt also introduces a separation between what is defined in the core language and what a user can declare as a function.\n\nWe can continue debating this, but please move out of this CL.",
+      "parentUuid": "aa236df4_30de11ef",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfea2c80_7ff10878",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "We shouldn\u0027t but we do because we haven\u0027t removed them. Notice `scalar` entries above and below this line. Having it here keeps the file consistent for when we do remove them.",
       "parentUuid": "dfea2c80_7ff10878",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3b77eb_2c802d8d",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T13:33:05Z",
+      "side": 1,
+      "message": "I\u0027ll draft a change that removes them from this file. This is long overdue.",
+      "parentUuid": "2d364aad_604bef15",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -294,6 +330,30 @@
       "side": 1,
       "message": "I\u0027ll put up a pre-CL which renames `Template` to `Inferred` and will change `Generic` to `Template`.",
       "parentUuid": "2c2bdf76_c15cd468",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 34
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba0fe9fa_8ffb9e54",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T13:33:05Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "6431ded8_695ab45f",
       "range": {
         "startLine": 193,
         "startChar": 0,
