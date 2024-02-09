@@ -58,14 +58,16 @@ constexpr uint32_t kDuplicateBaseVertexInstance = 1;
 constexpr uint32_t kIndexedDraw = 2;
 constexpr uint32_t kValidationEnabled = 4;
 constexpr uint32_t kIndirectFirstInstanceEnabled = 8;
+constexpr uint32_t kUseFirstIndexToEmulateIndexBufferOffset = 16;
 
 // Equivalent to the IndirectDraw struct defined in the shader below.
 struct IndirectDraw {
     uint32_t indirectOffset;
     uint32_t numIndexBufferElementsLow;
     uint32_t numIndexBufferElementsHigh;
+    uint32_t indexOffsetAsNumElements;
 };
-static_assert(sizeof(IndirectDraw) == sizeof(uint32_t) * 3);
+static_assert(sizeof(IndirectDraw) == sizeof(uint32_t) * 4);
 static_assert(alignof(IndirectDraw) == alignof(uint32_t));
 
 // Equivalent to the BatchInfo struct defined in the shader below.
@@ -75,7 +77,7 @@ struct BatchInfo {
 };
 
 // The size, in bytes, of the IndirectDraw struct defined in the shader below.
-constexpr uint32_t kIndirectDrawByteSize = sizeof(uint32_t) * 3;
+constexpr uint32_t kIndirectDrawByteSize = sizeof(uint32_t) * 4;
 
 // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this shader in
 // various failure modes.
@@ -91,11 +93,13 @@ static const char sRenderValidationShaderSource[] = R"(
             const kIndexedDraw = 2u;
             const kValidationEnabled = 4u;
             const kIndirectFirstInstanceEnabled = 8u;
+            const kUseFirstIndexToEmulateIndexBufferOffset = 16u;
 
             struct IndirectDraw {
                 indirectOffset: u32,
                 numIndexBufferElementsLow: u32,
                 numIndexBufferElementsHigh: u32,
+                indexOffsetAsNumElements: u32,
             }
 
             struct BatchInfo {
@@ -156,6 +160,10 @@ static const char sRenderValidationShaderSource[] = R"(
 
                 for(var i = 0u; i < numInputParams; i = i + 1u) {
                     outputParams.data[outIndex + i] = inputParams.data[inIndex + i];
+                }
+
+                if (bool(batch.flags & kUseFirstIndexToEmulateIndexBufferOffset)) {
+                    outputParams.data[outIndex + kFirstIndexEntry] += batch.draws[drawIndex].indexOffsetAsNumElements;
                 }
             }
 
@@ -317,6 +325,9 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
     const uint32_t minStorageBufferOffsetAlignment =
         device->GetLimits().v1.minStorageBufferOffsetAlignment;
 
+    const bool applyIndexBufferOffsetToFirstIndex = device->IsToggleEnabled(
+        Toggle::ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation);
+
     for (auto& [config, validationInfo] : bufferInfoMap) {
         const uint64_t indirectDrawCommandSize =
             config.drawType == IndirectDrawMetadata::DrawType::Indexed ? kDrawIndexedIndirectSize
@@ -376,6 +387,10 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             }
             if (config.drawType == IndirectDrawMetadata::DrawType::Indexed) {
                 newPass.flags |= kIndexedDraw;
+
+                if (applyIndexBufferOffsetToFirstIndex) {
+                    newPass.flags |= kUseFirstIndexToEmulateIndexBufferOffset;
+                }
             }
             if (device->IsValidationEnabled()) {
                 newPass.flags |= kValidationEnabled;
@@ -424,6 +439,9 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
                     static_cast<uint32_t>(draw.numIndexBufferElements & 0xFFFFFFFF);
                 indirectDraw->numIndexBufferElementsHigh =
                     static_cast<uint32_t>((draw.numIndexBufferElements >> 32) & 0xFFFFFFFF);
+
+                // This is only used in the GL backed
+                indirectDraw->indexOffsetAsNumElements = draw.indexBufferOffsetInElements;
                 indirectDraw++;
 
                 draw.cmd->indirectBuffer = outputParamsBuffer.GetBuffer();
