@@ -108,11 +108,6 @@ ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescr
     result.reservation.generation = texture->GetWireGeneration();
     result.reservation.deviceId = FromAPI(device)->GetWireId();
     result.reservation.deviceGeneration = FromAPI(device)->GetWireGeneration();
-    // TODO(dawn:2021) Remove setting of deprecated fields once Chromium is updated.
-    result.id = texture->GetWireId();
-    result.generation = texture->GetWireGeneration();
-    result.deviceId = FromAPI(device)->GetWireId();
-    result.deviceGeneration = FromAPI(device)->GetWireGeneration();
     return result;
 }
 
