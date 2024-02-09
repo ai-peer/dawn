@@ -46,11 +46,6 @@ DAWN_WIRE_EXPORT const DawnProcTable& GetProcs();
 struct ReservedTexture {
     WGPUTexture texture;
     TextureReservation reservation;
-    // TODO(dawn:2021) Remove this once Chromium has been updated.
-    uint32_t id;
-    uint32_t generation;
-    uint32_t deviceId;
-    uint32_t deviceGeneration;
 };
 
 struct ReservedSwapChain {
