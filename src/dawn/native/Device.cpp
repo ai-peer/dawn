@@ -672,18 +672,7 @@ void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
 }
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
-    // The registered callback function and userdata pointer are stored and used by deferred
-    // callback tasks, and after setting a different callback (especially in the case of
-    // resetting) the resources pointed by such pointer may be freed. Flush all deferred
-    // callback tasks to guarantee we are never going to use the previous callback after
-    // this call.
-    FlushCallbackTaskQueue();
-    auto deviceLock(GetScopedLock());
-    if (IsLost()) {
-        return;
-    }
-    mLoggingCallback = callback;
-    mLoggingUserdata = userdata;
+    mLoggingCallback.Use([&](auto cb) { *cb = {callback, userdata}; });
 }
 
 void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
@@ -1604,12 +1593,11 @@ void DeviceBase::EmitLog(const char* message) {
 }
 
 void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-    if (mLoggingCallback != nullptr) {
-        // Use the thread-safe CallbackTaskManager routine
-        std::unique_ptr<LoggingCallbackTask> callbackTask = std::make_unique<LoggingCallbackTask>(
-            mLoggingCallback, loggingType, message, mLoggingUserdata);
-        mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
-    }
+    mLoggingCallback.Use([&](auto data) {
+        if (data->callback) {
+            data->callback(loggingType, message, data->userdata);
+        }
+    });
 }
 
 bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {

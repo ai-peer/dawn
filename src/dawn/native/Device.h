@@ -568,9 +568,12 @@ class DeviceBase : public RefCountedWithExternalCount {
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mUncapturedErrorUserdata = nullptr;
 
-    wgpu::LoggingCallback mLoggingCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mLoggingUserdata = nullptr;
+    struct LoggingCallbackData {
+        wgpu::LoggingCallback callback = nullptr;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> userdata = nullptr;
+    };
+    MutexProtected<LoggingCallbackData> mLoggingCallback;
 
     wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
