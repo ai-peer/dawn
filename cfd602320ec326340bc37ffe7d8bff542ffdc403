@@ -16,6 +16,154 @@
       "message": "PTAL. I think this is pretty close. There are 2 failing groups of unit tests, 2 tests in HLSL printer, which maybe an actual bug and a handful in VectorizeScalarMatrixInitializers where we picked different constructors?\n\nI\u0027ll look into the two failures on Monday, but wanted to kick this off in case there was anything large that needed to be changed.",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9850b827_89666209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "Great progress. Some questions about abstracts and the general .def syntax - but looks great!",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e021793e_f47c8afd",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "I don\u0027t see why we need these abstract overloads. Much like user-declared functions, the overload is matched via the rules of concretization.",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfea2c80_7ff10878",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "This is the core dialect definition file. We shouldn\u0027t have abstracts at all here.",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a116cdbd_644fe054",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "As mentioned above, I don\u0027t know why we have to add abstract overloads? Shouldn\u0027t the rules of concretization cover these?",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714eace2_48f694d4",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "If we go with \u0027inferred\u0027 for the old templates (see other comment), suggest `template`. Or perhaps something even more radical:\n\n`name` `\u003c explicit-templates \u003e` `[ inferred ]` `( params... )`\n\nExamples:\n\nExplicit `T`, inferred `A`:\n```\n@must_use @const(\"MatInitV\") ctor mat4x3\u003cT: f32_f16\u003e[A: fa](vec3\u003cA\u003e, vec3\u003cA\u003e, vec3\u003cA\u003e, vec3\u003cA\u003e) -\u003e mat4x3\u003cT\u003e\n```\n\nInferred `A`:\n```\n@must_use @const(\"MatInitV\") ctor mat4x3[T: fa_f32_f16](vec3\u003cT\u003e, vec3\u003cT\u003e, vec3\u003cT\u003e, vec3\u003cT\u003e) -\u003e mat4x3\u003cT\u003e\n```",
+      "range": {
+        "startLine": 1111,
+        "startChar": 30,
+        "endLine": 1111,
+        "endChar": 39
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7024b344_013e45cc",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "These should be removed from the core definition file too.",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79bba98_580ad236",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "gofmt please",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c2bdf76_c15cd468",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T09:58:53Z",
+      "side": 1,
+      "message": "I\u0027d lean towards keeping \u0027template\u0027 for the explicit thing. How about \u0027inferred\u0027 for those that you can\u0027t explicitly pass?\n\n```suggestion\n\tTemplateTypes\t  []*TemplateTypeParam\n\tInferredTypes     []*TemplateTypeParam\n\tInferredNumbers   []TemplateParam\n```",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 34
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
