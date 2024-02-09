@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00f098c_e32c28fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T15:12:00Z",
+      "side": 1,
+      "message": "As requested, a PushConstantHelper class was implemented in a new CL, and this one rebased/reimplemented on it.",
+      "revId": "48d6e3ce7c36759f5847a63274a60b8712d2acf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

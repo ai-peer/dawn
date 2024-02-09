@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5357a1f2_1b892239",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T15:12:00Z",
+      "side": 1,
+      "message": "Done (in parent helper CL).",
+      "parentUuid": "4034d196_7d7d23e6",
+      "range": {
+        "startLine": 83,
+        "startChar": 24,
+        "endLine": 83,
+        "endChar": 28
+      },
+      "revId": "dbf73896c25eabc096b52f56679a4ac7f276adb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f337b90_3b9231f7",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-02-08T13:17:05Z",
       "side": 1,
       "message": "Offsets [need to be in ascending order](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/resolver/resolver.cc#4371). Always appending makes things fragile, as Dawn now needs to know about transform orders again.\n\nI think it might be preferable to create a utility function that these transforms can all use, which correctly inserts the members at the right index and offset.\n\n\nPlease add tests that:\n* adds both members before an existing member in the struct.\n* adds both members either side of an existing member.\n* adds both members either side of an existing member, but in reverse order.",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 75
+      },
+      "revId": "dbf73896c25eabc096b52f56679a4ac7f276adb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8873f645_85937aad",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-09T15:12:00Z",
+      "side": 1,
+      "message": "Done (in parent helper CL).",
+      "parentUuid": "0f337b90_3b9231f7",
       "range": {
         "startLine": 110,
         "startChar": 0,
