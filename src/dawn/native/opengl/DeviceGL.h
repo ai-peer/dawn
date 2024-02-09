@@ -94,6 +94,9 @@ class Device final : public DeviceBase {
 
     float GetTimestampPeriodInNS() const override;
 
+    bool ShouldDuplicateParametersForDrawIndirect(const RenderPipelineBase*) const override;
+    bool ShouldApplyIndexBufferOffsetToFirstIndex() const override;
+
     class Context {
       public:
         virtual ~Context() {}
