@@ -276,10 +276,10 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
             DrawIndexedIndirectCmd* cmd =
                 allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
 
-            bool duplicateBaseVertexInstance =
+            bool duplicateParametersForDrawIndirect =
                 GetDevice()->ShouldDuplicateParametersForDrawIndirect(
                     mCommandBufferState.GetRenderPipeline());
-            if (IsValidationEnabled() || duplicateBaseVertexInstance) {
+            if (IsValidationEnabled() || duplicateParametersForDrawIndirect) {
                 // Later, EncodeIndirectDrawValidationCommands will allocate a scratch storage
                 // buffer which will store the validated or duplicated indirect data. The buffer
                 // and offset will be updated to point to it.
@@ -289,7 +289,8 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
 
                 mIndirectDrawMetadata.AddIndexedIndirectDraw(
                     mCommandBufferState.GetIndexFormat(), mCommandBufferState.GetIndexBufferSize(),
-                    indirectBuffer, indirectOffset, duplicateBaseVertexInstance, cmd);
+                    mCommandBufferState.GetIndexBufferOffset(), indirectBuffer, indirectOffset,
+                    duplicateParametersForDrawIndirect, cmd);
             } else {
                 cmd->indirectBuffer = indirectBuffer;
                 cmd->indirectOffset = indirectOffset;
@@ -384,7 +385,7 @@ void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
                 }
             }
 
-            mCommandBufferState.SetIndexBuffer(format, size);
+            mCommandBufferState.SetIndexBuffer(format, offset, size);
 
             SetIndexBufferCmd* cmd =
                 allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
