@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d778dd2b_4a12cffe",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T19:00:34Z",
+      "side": 1,
+      "message": "I think fixing this is a separate change, like, the line after the ones I added contains abstracts, so either that line is also wrong and should be removed, or things downstream already have to deal with abstracts.\n\nI don\u0027t understand the separation between core and what a user can define? There is nothing about user functions in here, and users functions can\u0027t have explicit template params?\n\nPerfmon didn\u0027t run for some reason, so can\u0027t tell if there is a performance difference.",
+      "parentUuid": "7a9a12c1_93f9ebbe",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfea2c80_7ff10878",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
