@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a141965b_73911247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T13:12:42Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "98d7fc6bbfdda62a9ad722e88a2fc5a8e0162f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f404bb43_3fa58aa9",
+        "filename": "src/dawn/node/binding/AsyncRunner.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T13:12:42Z",
+      "side": 1,
+      "message": "```suggestion\n    const dawn::native::Instance* const instance_;\n```",
+      "range": {
+        "startLine": 68,
+        "startChar": 43,
+        "endLine": 68,
+        "endChar": 44
+      },
+      "revId": "98d7fc6bbfdda62a9ad722e88a2fc5a8e0162f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
