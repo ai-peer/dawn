@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360824bf_06e9f3d8",
+        "filename": "tools/src/text/case.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-09T17:26:51Z",
+      "side": 1,
+      "message": "```suggestion\n// SnakeCase returns the PascalCase or camel-case string s transformed into \u0027snake_case\u0027,\n```",
+      "revId": "16078c7d9a2ef24602b921b630b53692d38e416e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
