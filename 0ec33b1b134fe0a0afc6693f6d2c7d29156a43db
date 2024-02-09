@@ -16,6 +16,46 @@
       "message": "Ben, Austin: please take another look. You can diff from the last-reviewed patch to see what was removed.",
       "revId": "0ec33b1b134fe0a0afc6693f6d2c7d29156a43db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0a49d88_3b5fb221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T19:30:12Z",
+      "side": 1,
+      "message": "Tint side LGTM, with small nit about two optionals.",
+      "revId": "0ec33b1b134fe0a0afc6693f6d2c7d29156a43db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9131317e_fcdebcc7",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-09T19:30:12Z",
+      "side": 1,
+      "message": "Given that you\u0027re checking that both of these are set in the `clamp_frag_depth.cc`, it\u0027s a less clunky API to group both in a single `std::optional`. Something like:\n\n```\n        /// Byte offsets in the push constant buffer.\n        struct PushBufferOffsets {\n            uint32_t min \u003d 0;\n            uint32_t max \u003d 0;\n        };\n        \n        /// Constructor\n        /// @param offsets the byte offsets in the push constant buffer.\n        Config(std::optional\u003cPushBufferOffsets\u003e offsets);\n        \n        /// Byte offsets in the push constant buffer. If std::nullopt, then this transform should not run.\n        std::optional\u003cPushBufferOffsets\u003e offsets;\n        \n```",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 49
+      },
+      "revId": "0ec33b1b134fe0a0afc6693f6d2c7d29156a43db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
