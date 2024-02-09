@@ -190,6 +190,7 @@ type Overload struct {
 	Decl              ast.IntrinsicDecl
 	Intrinsic         *Intrinsic
 	TemplateParams    []TemplateParam
+	GenericTypes	  []*TemplateTypeParam
 	TemplateTypes     []*TemplateTypeParam
 	TemplateNumbers   []TemplateParam
 	ReturnType        *FullyQualifiedName
