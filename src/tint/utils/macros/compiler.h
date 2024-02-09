@@ -37,22 +37,24 @@
 // MSVC
 ////////////////////////////////////////////////////////////////////////////////
 #define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW __pragma(warning(disable : 4756))
-#define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED /* currently no-op */
-#define TINT_DISABLE_WARNING_NEWLINE_EOF         /* currently no-op */
-#define TINT_DISABLE_WARNING_OLD_STYLE_CAST      /* currently no-op */
-#define TINT_DISABLE_WARNING_SIGN_CONVERSION     /* currently no-op */
-#define TINT_DISABLE_WARNING_UNREACHABLE_CODE __pragma(warning(disable : 4702))
-#define TINT_DISABLE_WARNING_WEAK_VTABLES /* currently no-op */
-#define TINT_DISABLE_WARNING_FLOAT_EQUAL  /* currently no-op */
 #define TINT_DISABLE_WARNING_DEPRECATED __pragma(warning(disable : 4996))
-#define TINT_DISABLE_WARNING_RESERVED_IDENTIFIER       /* currently no-op */
-#define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER /* currently no-op */
-#define TINT_DISABLE_WARNING_UNUSED_VALUE              /* currently no-op */
+#define TINT_DISABLE_WARNING_EXIT_TIME_DESTRUCTOR         /* currently no-op */
+#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON              /* currently no-op */
+#define TINT_DISABLE_WARNING_FLOAT_EQUAL                  /* currently no-op */
+#define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED          /* currently no-op */
+#define TINT_DISABLE_WARNING_MISSING_DEPRECATED_ATTRIBUTE /* currently no-op */
+#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE  /* currently no-op */
+#define TINT_DISABLE_WARNING_NEWLINE_EOF                  /* currently no-op */
+#define TINT_DISABLE_WARNING_OLD_STYLE_CAST               /* currently no-op */
+#define TINT_DISABLE_WARNING_RESERVED_IDENTIFIER          /* currently no-op */
+#define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER    /* currently no-op */
+#define TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR  /* currently no-op */
+#define TINT_DISABLE_WARNING_SIGN_CONVERSION              /* currently no-op */
+#define TINT_DISABLE_WARNING_UNREACHABLE_CODE __pragma(warning(disable : 4702))
 #define TINT_DISABLE_WARNING_UNUSED_PARAMETER __pragma(warning(disable : 4100))
-#define TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR /* currently no-op */
-#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON             /* currently no-op */
-#define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR             /* currently no-op */
-#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE /* currently no-op */
+#define TINT_DISABLE_WARNING_UNUSED_VALUE    /* currently no-op */
+#define TINT_DISABLE_WARNING_WEAK_VTABLES    /* currently no-op */
+#define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR /* currently no-op */
 
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
@@ -76,32 +78,36 @@
 // Clang
 ////////////////////////////////////////////////////////////////////////////////
 #define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW /* currently no-op */
+#define TINT_DISABLE_WARNING_DEPRECATED        /* currently no-op */
+#define TINT_DISABLE_WARNING_EXIT_TIME_DESTRUCTOR
+_Pragma("clang diagnostic ignored \"-Wexit-time-destructors\"")
+#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON \
+    _Pragma("clang diagnostic ignored \"-Wextra-semi-stmt\"")
+#define TINT_DISABLE_WARNING_FLOAT_EQUAL _Pragma("clang diagnostic ignored \"-Wfloat-equal\"")
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED \
     _Pragma("clang diagnostic ignored \"-Wconditional-uninitialized\"")
+#define TINT_DISABLE_WARNING_MISSING_DEPRECATED_ATTRIBUTE \
+    _Pragma("clang diagnostic ignored \"-Wdocumentation-deprecated-sync\"")
+#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE                  \
+    _Pragma("clang diagnostic ignored \"-Wsuggest-destructor-override\"") \
+        _Pragma("clang diagnostic ignored \"-Winconsistent-missing-destructor-override\"")
 #define TINT_DISABLE_WARNING_NEWLINE_EOF _Pragma("clang diagnostic ignored \"-Wnewline-eof\"")
 #define TINT_DISABLE_WARNING_OLD_STYLE_CAST _Pragma("clang diagnostic ignored \"-Wold-style-cast\"")
-#define TINT_DISABLE_WARNING_SIGN_CONVERSION \
-    _Pragma("clang diagnostic ignored \"-Wsign-conversion\"")
-#define TINT_DISABLE_WARNING_UNREACHABLE_CODE /* currently no-op */
-#define TINT_DISABLE_WARNING_WEAK_VTABLES _Pragma("clang diagnostic ignored \"-Wweak-vtables\"")
-#define TINT_DISABLE_WARNING_FLOAT_EQUAL _Pragma("clang diagnostic ignored \"-Wfloat-equal\"")
-#define TINT_DISABLE_WARNING_DEPRECATED /* currently no-op */
 #define TINT_DISABLE_WARNING_RESERVED_IDENTIFIER \
     _Pragma("clang diagnostic ignored \"-Wreserved-identifier\"")
 #define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER \
     _Pragma("clang diagnostic ignored \"-Wreserved-macro-identifier\"")
-#define TINT_DISABLE_WARNING_UNUSED_VALUE _Pragma("clang diagnostic ignored \"-Wunused-value\"")
-#define TINT_DISABLE_WARNING_UNUSED_PARAMETER \
-    _Pragma("clang diagnostic ignored \"-Wunused-parameter\"")
 #define TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR \
     _Pragma("clang diagnostic ignored \"-Wshadow-field-in-constructor\"")
-#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON \
-    _Pragma("clang diagnostic ignored \"-Wextra-semi-stmt\"")
+#define TINT_DISABLE_WARNING_SIGN_CONVERSION \
+    _Pragma("clang diagnostic ignored \"-Wsign-conversion\"")
+#define TINT_DISABLE_WARNING_UNREACHABLE_CODE /* currently no-op */
+#define TINT_DISABLE_WARNING_UNUSED_PARAMETER \
+    _Pragma("clang diagnostic ignored \"-Wunused-parameter\"")
+#define TINT_DISABLE_WARNING_UNUSED_VALUE _Pragma("clang diagnostic ignored \"-Wunused-value\"")
+#define TINT_DISABLE_WARNING_WEAK_VTABLES _Pragma("clang diagnostic ignored \"-Wweak-vtables\"")
 #define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR \
     _Pragma("clang diagnostic ignored \"-Wzero-as-null-pointer-constant\"")
-#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE                  \
-    _Pragma("clang diagnostic ignored \"-Wsuggest-destructor-override\"") \
-        _Pragma("clang diagnostic ignored \"-Winconsistent-missing-destructor-override\"")
 
 // clang-format off
 #define TINT_BEGIN_DISABLE_PROTOBUF_WARNINGS()        \
@@ -138,25 +144,27 @@
 ////////////////////////////////////////////////////////////////////////////////
 // GCC
 ////////////////////////////////////////////////////////////////////////////////
-#define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW /* currently no-op */
+#define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW    /* currently no-op */
+#define TINT_DISABLE_WARNING_DEPRECATED           /* currently no-op */
+#define TINT_DISABLE_WARNING_EXIT_TIME_DESTRUCTOR /* currently no-op */
+#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON      /* currently no-op */
+#define TINT_DISABLE_WARNING_FLOAT_EQUAL          /* currently no-op */
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED \
     _Pragma("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
-#define TINT_DISABLE_WARNING_NEWLINE_EOF               /* currently no-op */
-#define TINT_DISABLE_WARNING_OLD_STYLE_CAST            /* currently no-op */
-#define TINT_DISABLE_WARNING_SIGN_CONVERSION           /* currently no-op */
-#define TINT_DISABLE_WARNING_UNREACHABLE_CODE          /* currently no-op */
-#define TINT_DISABLE_WARNING_WEAK_VTABLES              /* currently no-op */
-#define TINT_DISABLE_WARNING_FLOAT_EQUAL               /* currently no-op */
-#define TINT_DISABLE_WARNING_DEPRECATED                /* currently no-op */
-#define TINT_DISABLE_WARNING_RESERVED_IDENTIFIER       /* currently no-op */
-#define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER /* currently no-op */
-#define TINT_DISABLE_WARNING_UNUSED_VALUE _Pragma("GCC diagnostic ignored \"-Wunused-value\"")
+#define TINT_DISABLE_WARNING_MISSING_DEPRECATED_ATTRIBUTE /* currently no-op */
+#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE  /* currently no-op */
+#define TINT_DISABLE_WARNING_NEWLINE_EOF                  /* currently no-op */
+#define TINT_DISABLE_WARNING_OLD_STYLE_CAST               /* currently no-op */
+#define TINT_DISABLE_WARNING_RESERVED_IDENTIFIER          /* currently no-op */
+#define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER    /* currently no-op */
+#define TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR  /* currently no-op */
+#define TINT_DISABLE_WARNING_SIGN_CONVERSION              /* currently no-op */
+#define TINT_DISABLE_WARNING_UNREACHABLE_CODE             /* currently no-op */
 #define TINT_DISABLE_WARNING_UNUSED_PARAMETER \
     _Pragma("GCC diagnostic ignored \"-Wunused-parameter\"")
-#define TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR /* currently no-op */
-#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON             /* currently no-op */
-#define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR             /* currently no-op */
-#define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE /* currently no-op */
+#define TINT_DISABLE_WARNING_UNUSED_VALUE _Pragma("GCC diagnostic ignored \"-Wunused-value\"")
+#define TINT_DISABLE_WARNING_WEAK_VTABLES    /* currently no-op */
+#define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR /* currently no-op */
 
 #define TINT_BEGIN_DISABLE_PROTOBUF_WARNINGS() \
     _Pragma("GCC diagnostic push") TINT_DISABLE_WARNING_UNUSED_PARAMETER TINT_REQUIRE_SEMICOLON

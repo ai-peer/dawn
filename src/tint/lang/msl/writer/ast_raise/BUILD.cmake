@@ -55,6 +55,7 @@ tint_target_add_dependencies(tint_lang_msl_writer_ast_raise lib
   tint_api_common
   tint_lang_core
   tint_lang_core_constant
+  tint_lang_core_intrinsic
   tint_lang_core_type
   tint_lang_wgsl
   tint_lang_wgsl_ast

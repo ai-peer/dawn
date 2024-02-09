@@ -141,10 +141,6 @@ Resolver::Resolver(ProgramBuilder* builder, const wgsl::AllowedFeatures& allowed
 Resolver::~Resolver() = default;
 
 bool Resolver::Resolve() {
-    if (diagnostics_.ContainsErrors()) {
-        return false;
-    }
-
     b.Sem().Reserve(b.LastAllocatedNodeID());
 
     // Pre-allocate the marked bitset with the total number of AST nodes.
@@ -2415,9 +2411,8 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         }
         auto eval_stage = overload->const_eval_fn ? core::EvaluationStage::kConstant
                                                   : core::EvaluationStage::kRuntime;
-        return b.create<sem::BuiltinFn>(
-            fn, overload->return_type, std::move(params), eval_stage, supported_stages,
-            flags.Contains(OverloadFlag::kIsDeprecated), flags.Contains(OverloadFlag::kMustUse));
+        return b.create<sem::BuiltinFn>(fn, overload->return_type, std::move(params), eval_stage,
+                                        supported_stages, overload.Get());
     });
 
     if (fn == wgsl::BuiltinFn::kTintMaterialize) {

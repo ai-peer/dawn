@@ -118,6 +118,7 @@ libtint_source_set("transform") {
     "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
+    "${tint_src_dir}/lang/core/intrinsic",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/wgsl",
     "${tint_src_dir}/lang/wgsl/ast",
