@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c2bc7f7_f4ac4683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-09T15:11:33Z",
+      "side": 1,
+      "message": "Hello Kai,\nI\u0027ve started working on this CL but before I go further, I\u0027d appreciate an early look to know if I\u0027m heading in the right direction. This future stuff is new and I\u0027m not sure I\u0027m handling it properly.",
+      "revId": "08d2bc4999b22bd0f1a3b9e890c6cb2ca66dc554",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
