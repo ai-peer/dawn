@@ -59,6 +59,10 @@ class Server {
     // Requests
     ////////////////////////////////////////////////////////////////////////////
 
+    /// Handler for langsvr::lsp::TextDocumentCompletionRequest
+    typename langsvr::lsp::TextDocumentCompletionRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentCompletionRequest&);
+
     /// Handler for langsvr::lsp::TextDocumentDefinitionRequest
     typename langsvr::lsp::TextDocumentDefinitionRequest::ResultType  //
     Handle(const langsvr::lsp::TextDocumentDefinitionRequest&);
@@ -70,6 +74,10 @@ class Server {
     /// Handler for langsvr::lsp::TextDocumentHoverRequest
     typename langsvr::lsp::TextDocumentHoverRequest::ResultType  //
     Handle(const langsvr::lsp::TextDocumentHoverRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentInlayHintRequest
+    typename langsvr::lsp::TextDocumentInlayHintRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentInlayHintRequest&);
 
     /// Handler for langsvr::lsp::TextDocumentPrepareRenameRequest
     typename langsvr::lsp::TextDocumentPrepareRenameRequest::ResultType  //
@@ -91,13 +99,13 @@ class Server {
     langsvr::Result<langsvr::SuccessType>  //
     Handle(const langsvr::lsp::CancelRequestNotification&);
 
-    /// Handler for langsvr::lsp::InitializedNotification
-    langsvr::Result<langsvr::SuccessType>  //
-    Handle(const langsvr::lsp::InitializedNotification&);
+    /// Handler for langsvr::lsp::TextDocumentSemanticTokensFullRequest
+    typename langsvr::lsp::TextDocumentSemanticTokensFullRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentSemanticTokensFullRequest&);
 
-    /// Handler for langsvr::lsp::SetTraceNotification
-    langsvr::Result<langsvr::SuccessType>  //
-    Handle(const langsvr::lsp::SetTraceNotification&);
+    /// Handler for langsvr::lsp::TextDocumentSignatureHelpRequest
+    typename langsvr::lsp::TextDocumentSignatureHelpRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentSignatureHelpRequest&);
 
     /// Handler for langsvr::lsp::TextDocumentDidOpenNotification
     langsvr::Result<langsvr::SuccessType>  //
@@ -110,6 +118,14 @@ class Server {
     /// Handler for langsvr::lsp::TextDocumentDidChangeNotification
     langsvr::Result<langsvr::SuccessType>  //
     Handle(const langsvr::lsp::TextDocumentDidChangeNotification&);
+
+    /// Handler for langsvr::lsp::InitializedNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::InitializedNotification&);
+
+    /// Handler for langsvr::lsp::SetTraceNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::SetTraceNotification&);
 
     /// Handler for langsvr::lsp::WorkspaceDidChangeConfigurationNotification
     langsvr::Result<langsvr::SuccessType>  //
