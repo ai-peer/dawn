@@ -55,6 +55,10 @@ class Server {
     bool ShuttingDown() const { return shutting_down_; }
 
   private:
+    /// Handler for langsvr::lsp::TextDocumentCompletionRequest
+    typename langsvr::lsp::TextDocumentCompletionRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentCompletionRequest&);
+
     /// Handler for langsvr::lsp::TextDocumentDefinitionRequest
     typename langsvr::lsp::TextDocumentDefinitionRequest::ResultType  //
     Handle(const langsvr::lsp::TextDocumentDefinitionRequest&);
@@ -62,6 +66,42 @@ class Server {
     /// Handler for langsvr::lsp::TextDocumentDocumentSymbolRequest
     typename langsvr::lsp::TextDocumentDocumentSymbolRequest::ResultType  //
     Handle(const langsvr::lsp::TextDocumentDocumentSymbolRequest& r);
+
+    /// Handler for langsvr::lsp::TextDocumentHoverRequest
+    typename langsvr::lsp::TextDocumentHoverRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentHoverRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentInlayHintRequest
+    typename langsvr::lsp::TextDocumentInlayHintRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentInlayHintRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentPrepareRenameRequest
+    typename langsvr::lsp::TextDocumentPrepareRenameRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentPrepareRenameRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentReferencesRequest
+    typename langsvr::lsp::TextDocumentReferencesRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentReferencesRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentRenameRequest
+    typename langsvr::lsp::TextDocumentRenameRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentRenameRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentSemanticTokensFullRequest
+    typename langsvr::lsp::TextDocumentSemanticTokensFullRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentSemanticTokensFullRequest&);
+
+    /// Handler for langsvr::lsp::TextDocumentSignatureHelpRequest
+    typename langsvr::lsp::TextDocumentSignatureHelpRequest::ResultType  //
+    Handle(const langsvr::lsp::TextDocumentSignatureHelpRequest&);
+
+    /// Handler for langsvr::lsp::InitializedNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::InitializedNotification&);
+
+    /// Handler for langsvr::lsp::SetTraceNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::SetTraceNotification&);
 
     /// Handler for langsvr::lsp::TextDocumentDidOpenNotification
     langsvr::Result<langsvr::SuccessType>  //

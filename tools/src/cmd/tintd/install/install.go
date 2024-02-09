@@ -81,6 +81,9 @@ func (c Cmd) Run(ctx context.Context, _ any) error {
 		return fmt.Errorf("could not find npm")
 	}
 
+	// Build the tintd executable
+
+
 	// Build the package
 	npmCmd := exec.Command(c.flags.npmPath, "install")
 	npmCmd.Dir = pkgDir
