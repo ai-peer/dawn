@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ceff520_f004f3d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-09T01:59:57Z",
+      "side": 1,
+      "message": "PTAL. I think this is pretty close. There are 2 failing groups of unit tests, 2 tests in HLSL printer, which maybe an actual bug and a handful in VectorizeScalarMatrixInitializers where we picked different constructors?\n\nI\u0027ll look into the two failures on Monday, but wanted to kick this off in case there was anything large that needed to be changed.",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
