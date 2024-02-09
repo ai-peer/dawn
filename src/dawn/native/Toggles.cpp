@@ -521,6 +521,14 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "waiting for the next Tick. This enables using the stack trace in which the uncaptured error "
       "occured when breaking into the uncaptured error callback.",
       "https://crbug.com/dawn/1789", ToggleStage::Device}},
+    {Toggle::ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation,
+     {"apply_index_buffer_offset_to_first_index_in_draw_indexed_indirect_validation",
+      "For OpenGL/OpenGL ES, we must apply the index buffer offset from SetIndexBuffer to the "
+      "firstIndex"
+      "parameter in indirect draw buffers. This happens in the validation since it copies and "
+      "updates"
+      "all indirect buffers.",
+      "https://crbug.com/dawn/161", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "

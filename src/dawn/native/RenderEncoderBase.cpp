@@ -271,6 +271,15 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
                      kDrawIndexedIndirectSize > indirectBuffer->GetSize() - indirectOffset),
                     "Indirect offset (%u) is out of bounds of indirect buffer %s size (%u).",
                     indirectOffset, indirectBuffer, indirectBuffer->GetSize());
+            } else {
+                DAWN_INVALID_IF(
+                    mCommandBufferState.GetIndexBufferOffset() != 0 &&
+                        GetDevice()->IsToggleEnabled(
+                            Toggle::
+                                ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation),
+                    "Index buffer offset must be zero when "
+                    "ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation is enabled "
+                    "and validation is not enabled");
             }
 
             DrawIndexedIndirectCmd* cmd =
@@ -289,7 +298,8 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
 
                 mIndirectDrawMetadata.AddIndexedIndirectDraw(
                     mCommandBufferState.GetIndexFormat(), mCommandBufferState.GetIndexBufferSize(),
-                    indirectBuffer, indirectOffset, duplicateBaseVertexInstance, cmd);
+                    mCommandBufferState.GetIndexBufferOffset(), indirectBuffer, indirectOffset,
+                    duplicateBaseVertexInstance, cmd);
             } else {
                 cmd->indirectBuffer = indirectBuffer;
                 cmd->indirectOffset = indirectOffset;
@@ -384,7 +394,7 @@ void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
                 }
             }
 
-            mCommandBufferState.SetIndexBuffer(format, size);
+            mCommandBufferState.SetIndexBuffer(format, size, offset);
 
             SetIndexBufferCmd* cmd =
                 allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
