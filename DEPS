@@ -284,6 +284,16 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
+  'third_party/jsoncpp': {
+    'url': 'git@github.com:open-source-parsers/jsoncpp.git@69098a18b9af0c47549d9a271c054d13ca92b006',
+    'condition': 'dawn_standalone',
+  },
+
+  'third_party/langsvr': {
+    'url': 'git@github.com:google/langsvr.git@03b4e0d58b426cf1cd53b08a471466eaee4f8983',
+    'condition': 'dawn_standalone',
+  },
+
   # Dependencies for PartitionAlloc.
   # Doc: https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A
   'third_party/partition_alloc': {

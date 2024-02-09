@@ -48,12 +48,14 @@ BuiltinFn::BuiltinFn(wgsl::BuiltinFn type,
                      VectorRef<Parameter*> parameters,
                      core::EvaluationStage eval_stage,
                      PipelineStageSet supported_stages,
-                     bool is_deprecated,
-                     bool must_use)
-    : Base(return_type, std::move(parameters), eval_stage, must_use),
+                     const core::intrinsic::Overload& overload)
+    : Base(return_type,
+           std::move(parameters),
+           eval_stage,
+           overload.info->flags.Contains(core::intrinsic::OverloadFlag::kMustUse)),
       fn_(type),
       supported_stages_(supported_stages),
-      is_deprecated_(is_deprecated) {}
+      overload_(overload) {}
 
 BuiltinFn::~BuiltinFn() = default;
 
