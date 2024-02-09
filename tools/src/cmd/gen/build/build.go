@@ -189,12 +189,13 @@ func populateSourceFiles(p *Project) error {
 			},
 			{
 				"exclude": [
-					"fuzzers/**"
+					"fuzzers/**",
+					"out/**"
 				]
 			}]
 	}`))
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to glob source files: %w", err)
 	}
 
 	for _, filepath := range paths {
