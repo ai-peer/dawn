@@ -66,7 +66,8 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
 
     if (options.clamp_frag_depth) {
         manager.Add<ast::transform::ClampFragDepth>();
-        data.Add<ast::transform::ClampFragDepth::Config>(0, 4);
+        data.Add<ast::transform::ClampFragDepth::Config>(
+            ast::transform::ClampFragDepth::Offsets(0, 4));
     }
 
     manager.Add<ast::transform::DisableUniformityAnalysis>();
