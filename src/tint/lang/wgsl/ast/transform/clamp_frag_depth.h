@@ -69,21 +69,22 @@ class ClampFragDepth final : public Castable<ClampFragDepth, ast::transform::Tra
     /// Destructor
     ~ClampFragDepth() override;
 
+    struct Offsets {
+        uint32_t min_depth;
+        uint32_t max_depth;
+    };
+
     /// Transform configuration options
     struct Config final : public Castable<Config, ast::transform::Data> {
         /// Constructor
-        /// @param min_depth_off Offset of the minDepth push constant
-        /// @param max_depth_off Offset of the maxDepth push constant
-        Config(std::optional<uint32_t> min_depth_off, std::optional<uint32_t> max_depth_off);
+        /// @param off Offsets of the min_depth and max_depth push constants
+        explicit Config(std::optional<Offsets> off);
 
         /// Destructor
         ~Config() override;
 
-        /// Offset of the min_depth push constant
-        std::optional<uint32_t> min_depth_offset;
-
-        /// Offset of the min_depth push constant
-        std::optional<uint32_t> max_depth_offset;
+        /// Offsets of the min_depth and max_depth push constants
+        std::optional<Offsets> offsets;
     };
 
     /// @copydoc ast::transform::Transform::Apply
