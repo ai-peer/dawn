@@ -16,6 +16,23 @@
       "message": "This is ready for another review - PTAL, thanks!",
       "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f421c0d5_9f57885c",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-10T00:12:36Z",
+      "side": 1,
+      "message": "hm.. so we\u0027re going to be building up this vector even for non-keyed mutex textures. We should ideally not push_back at all when we don\u0027t need to.\n\nBut - why have a vector of scoped usages at all? An alternative would to use a absl::flat_hash_set\u003cKeyedMutex::Guard\u003e and we emplace into that. This would use less memory than the current approach, and wouldn\u0027t require you to do the counting of how many times the keyed mutex is acquired.\n\nThinking to d3d12 though - will d3d12 need to hold onto the keyed mutex until submit? If so, it might be more consistent to put that set of guards on the CommandRecordingContext. We\u0027ll release all the guards when the pending commands are \"submitted\" (pseudo submitted because d3d11 is immediate-mode). This is similar to how the CommandRecordingContext in Vulkan stores things like - buffers it needs to transition for mapping, external textures to transition for mapping, semaphores to wait on, semaphores to signal, etc.\n\nThat means though you\u0027ll need to force a flush if someone does WriteTexture to a KeyedMutex texture - both on d3d11 and d3d12. Otherwise the keyed mutex might not get released promptly without the explicit flush.",
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
