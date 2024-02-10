@@ -36,6 +36,7 @@ using ParameterInfo = tint::core::intrinsic::ParameterInfo;
 using StringStream = tint::StringStream;
 using TemplateNumberIndex = tint::core::intrinsic::TemplateNumberIndex;
 using TemplateNumberInfo = tint::core::intrinsic::TemplateNumberInfo;
+using GenericTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeInfo = tint::core::intrinsic::TemplateTypeInfo;
 using Type = tint::core::type::Type;
@@ -174,6 +175,11 @@ constexpr OverloadInfo kOverloads[] = {
 {{-   if $o.IsDeprecated}}, OverloadFlag::kIsDeprecated{{end -}}
     ),
     /* num_parameters */ {{$o.NumParameters}},
+    /* num_generic_types */ {{$o.NumGenericTypes}},
+    /* generic_types */
+{{-   if ge $o.GenericTypesOffset 0 }} GenericTypeIndex({{$o.GenericTypesOffset}})
+{{-   else                          }} GenericTypeIndex(/* invalid */)
+{{-   end }},
     /* num_template_types */ {{$o.NumTemplateTypes}},
     /* num_template_numbers */ {{$o.NumTemplateNumbers}},
     /* template_types */

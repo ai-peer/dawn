@@ -394,6 +394,25 @@ func (r *resolver) intrinsic(
 			return fmt.Errorf("%v unexpected value for deprecated attribute", deprecated.Source)
 		}
 	}
+	if generic := a.Attributes.Take("templated"); generic != nil {
+		if len(generic.Values) != 1 {
+			return fmt.Errorf("%v only a single template argument currently supported", generic.Source)
+		}
+		for _, param := range generic.Values {
+			switch param := param.(type) {
+			case ast.TemplatedName:
+				arg, err := r.lookupNamed(&s, param)
+				if err != nil {
+					return err
+				}
+
+				switch r := arg.(type) {
+				case *sem.TemplateTypeParam:
+					overload.GenericTypes = append(overload.GenericTypes, r)
+				}
+			}
+		}
+	}
 	if len(a.Attributes) != 0 {
 		return fmt.Errorf("%v unknown attribute", a.Attributes[0].Source)
 	}

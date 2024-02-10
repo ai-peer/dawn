@@ -195,6 +195,8 @@ func (p *parser) attributes() ast.Attributes {
 					break loop
 				case tok.String:
 					values = append(values, string(t.Runes))
+				case tok.Identifier:
+					values = append(values, p.templatedBody(*t))
 				case tok.Integer:
 					i, _ := strconv.ParseInt(string(t.Runes), 10, 64)
 					values = append(values, int(i))
@@ -355,6 +357,10 @@ func (p *parser) memberName() ast.MemberName {
 
 func (p *parser) templatedName() ast.TemplatedName {
 	name := p.expect(tok.Identifier, "type name")
+	return p.templatedBody(name)
+}
+
+func (p *parser) templatedBody(name tok.Token) ast.TemplatedName {
 	m := ast.TemplatedName{Source: name.Source, Name: string(name.Runes)}
 	if p.match(tok.Lt) != nil {
 		for p.err == nil {

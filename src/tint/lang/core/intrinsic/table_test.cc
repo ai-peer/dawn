@@ -50,7 +50,7 @@ using ::testing::HasSubstr;
 
 class CoreIntrinsicTableTest : public testing::Test, public ProgramBuilder {
   public:
-    Table<Dialect> table{Types(), Symbols()};
+    Table<core::intrinsic::Dialect> table{Types(), Symbols()};
 };
 
 TEST_F(CoreIntrinsicTableTest, MatchF32) {
