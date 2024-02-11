@@ -56,6 +56,30 @@
       },
       "revId": "0ec33b1b134fe0a0afc6693f6d2c7d29156a43db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec04157_e35697fe",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-11T17:00:02Z",
+      "side": 1,
+      "message": "Done as a followup CL.\n\nTBH, I\u0027m not sure it\u0027s better, but we can discuss that in the followup.",
+      "parentUuid": "9131317e_fcdebcc7",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 49
+      },
+      "revId": "0ec33b1b134fe0a0afc6693f6d2c7d29156a43db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
