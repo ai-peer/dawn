@@ -51,6 +51,24 @@
       "parentUuid": "f421c0d5_9f57885c",
       "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11eec7e_391ab006",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T18:11:25Z",
+      "side": 1,
+      "message": "feel like maybe the scoped guard is getting in the way of a simpler solution. Couldn\u0027t we have something like:\n\n```\nabsl::flat_hash_set\u003cComPtr\u003cIDXDIKeyedMutex\u003e\u003e mAcquiredKeyedMutexes;\n\n// when we sync before use:\nComPtr\u003cIDXDIKeyedMutex\u003e keyedMutex \u003d texture-\u003eGetKeyedMutex();\nif (keyedMutex \u0026\u0026 !mAcquiredKeyedMutexes.contains(keyedMutex)) {\n  DAWN_TRY(keyedMutex-\u003eAcquireSync(...));\n  mAcquiredKeyedMutexes.insert(std::move(keyedMutex));\n}\n\n\n// on submit:\nfor (auto km : mAcquiredKeyedMutexes) {\n  km-\u003eReleaseSync(...);\n}\nmAcquiredKeyedMutexes.clear();\n```\n\nI think the command recording context would be the only place that needs to acquire the keyed mutex, so I\u0027m not super worried about needing a Guard class to ensure correct release since it shouldn\u0027t be widely used.\n\nIn the future, we **could** have a transparent comparator to do lookups against KeyedMutex::Guard using just KeyedMutex (no need to acquire to perform `.find()`) - but not sure if it is worth the complexity right now.",
+      "parentUuid": "7dd06458_fad1a00c",
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
