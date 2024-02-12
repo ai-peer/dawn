@@ -2488,6 +2488,29 @@ fn main() {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), output, 0, expected.size());
 }
 
+TEST_P(ShaderTests, ManyStructMembers) {
+    std::string shader = R"(
+struct S {
+    )";
+    shader.reserve(250000);
+    for (int i = 0; i < 16383; i++) {
+        shader += "  m" + std::to_string(i) + ": u32,\n";
+    }
+    shader +=
+        R"(
+}
+
+@group(0) @binding(0) var<storage, read_write> buffer : S;
+
+@compute @workgroup_size(1)
+fn foo() {
+  buffer = S();
+}
+)";
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "foo");
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D11Backend(),
                       D3D12Backend(),
