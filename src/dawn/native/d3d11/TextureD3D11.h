@@ -76,7 +76,7 @@ class Texture final : public d3d::Texture {
     ID3D11Resource* GetD3D11Resource() const;
 
     ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView(
-        const Format& format,
+        wgpu::TextureFormat format,
         uint32_t mipLevel,
         uint32_t baseSlice,
         uint32_t sliceCount,

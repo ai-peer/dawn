@@ -406,13 +406,14 @@ ID3D11Resource* Texture::GetD3D11Resource() const {
 }
 
 ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetView(
-    const Format& format,
+    wgpu::TextureFormat format,
     uint32_t mipLevel,
     uint32_t baseSlice,
     uint32_t sliceCount,
     uint32_t planeSlice) const {
     D3D11_RENDER_TARGET_VIEW_DESC1 rtvDesc;
-    rtvDesc.Format = d3d::DXGITextureFormat(format.format);
+    rtvDesc.Format = d3d::DXGITextureFormat(format);
+    std::cerr << "EEEE rtvDesc.Format=" << rtvDesc.Format << std::endl;
     if (IsMultisampledTexture()) {
         DAWN_ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
         DAWN_ASSERT(GetNumMipLevels() == 1);
@@ -587,19 +588,22 @@ MaybeError Texture::ClearRenderable(const ScopedCommandRecordingContext* command
                     if ((aspect & clearRange.aspects) == 0) {
                         continue;
                     }
+                    wgpu::TextureFormat format = GetFormat().IsMultiPlanar()
+                                                     ? GetFormat().GetAspectInfo(aspect).format
+                                                     : GetFormat().format;
                     ComPtr<ID3D11RenderTargetView> d3d11RTV;
                     // For the subresources of 3d textures, clearRange.baseArrayLayer must be 0 and
                     // clearRange.layerCount must be 1, the sliceCount is the depthOrArrayLayers of
                     // the subresource virtual size, which must be 1 for 2d textures. When clearing
                     // RTV, we can use the 'layer' as baseSlice and the 'depthOrArrayLayers' as
                     // sliceCount to create RTV without checking the dimension.
-                    DAWN_TRY_ASSIGN(d3d11RTV, CreateD3D11RenderTargetView(
-                                                  GetFormat(), clearRange.baseMipLevel,
-                                                  clearRange.baseArrayLayer,
-                                                  GetMipLevelSingleSubresourceVirtualSize(
-                                                      clearRange.baseMipLevel, clearRange.aspects)
-                                                      .depthOrArrayLayers,
-                                                  planeSlice));
+                    DAWN_TRY_ASSIGN(d3d11RTV,
+                                    CreateD3D11RenderTargetView(
+                                        format, clearRange.baseMipLevel, clearRange.baseArrayLayer,
+                                        GetMipLevelSingleSubresourceVirtualSize(
+                                            clearRange.baseMipLevel, clearRange.aspects)
+                                            .depthOrArrayLayers,
+                                        planeSlice));
                     commandContext->ClearRenderTargetView(d3d11RTV.Get(), d3d11ClearValue.color);
                 }
             }
@@ -1395,6 +1399,8 @@ ResultOrError<ID3D11RenderTargetView*> TextureView::GetOrCreateD3D11RenderTarget
         return mD3d11RenderTargetViews[depthSlice].Get();
     }
 
+    wgpu::TextureFormat format = GetFormat().format;
+
     // We have validated that the depthSlice in render pass's colorAttachments must be undefined for
     // 2d RTVs, which value is set to 0. For 3d RTVs, the baseArrayLayer must be 0. So here we can
     // simply use baseArrayLayer + depthSlice to specify the slice in RTVs without checking the
@@ -1402,7 +1408,7 @@ ResultOrError<ID3D11RenderTargetView*> TextureView::GetOrCreateD3D11RenderTarget
     DAWN_TRY_ASSIGN(mD3d11RenderTargetViews[depthSlice],
                     ToBackend(GetTexture())
                         ->CreateD3D11RenderTargetView(
-                            GetFormat(), GetBaseMipLevel(), GetBaseArrayLayer() + depthSlice,
+                            format, GetBaseMipLevel(), GetBaseArrayLayer() + depthSlice,
                             GetLayerCount(), GetAspectIndex(GetAspects())));
     return mD3d11RenderTargetViews[depthSlice].Get();
 }
