@@ -16,6 +16,92 @@
       "message": "Note: The BaseVertex endToEnd test now passes, was failing. The ValidateWithOffset was already passing without this CL\n\nThe CTS tests pass.\n\nI wasn\u0027t sure what to do about the toggle. As it is now, the OpenGL backend turns it on. If it\u0027s on and validation is off then it generates a validation error 🤷‍♂️ if the index buffer offset is not 0. Maybe that should be a CHECK?",
       "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "457ca573_06856238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T19:25:19Z",
+      "side": 1,
+      "message": "so one problem we have is that firstIndex is uint32_t\n\nindex buffer offset is uint64_t, so indexBufferOffset / 2 and indexBufferOffset / 4 can both overflow firstIndex.\n\nSecondly, adding `actualFirstIndex + indexBufferOffset / 2` can also overflow uint32_t.\n\nI\u0027m not sure what we can do about this.. disallow index buffers really large indexed indirect buffers such that we never overflow? Or if it does overflow - you\u0027re basically binding the index buffer off the end of it and validation will fail.",
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147fe37b_b037ea64",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T19:25:19Z",
+      "side": 1,
+      "message": "```suggestion\n                // This is only used in the GL backend\n```",
+      "range": {
+        "startLine": 443,
+        "startChar": 47,
+        "endLine": 443,
+        "endChar": 53
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fa2516_f6e269dd",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T19:25:19Z",
+      "side": 1,
+      "message": "here is where D3D12 returns `true` for ShouldDuplicate to say that we need to do this pass even if validation is disabled. I think GLES can do the same kind of idea for emulation?",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 68
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181a6531_3154cba6",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T19:25:19Z",
+      "side": 1,
+      "message": "unit: reflow the string",
+      "range": {
+        "startLine": 527,
+        "startChar": 16,
+        "endLine": 529,
+        "endChar": 15
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
