@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f3e9b6_36d10c04",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1978,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-12T14:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33b321d_5c24bd00",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfea2c80_7ff10878",
@@ -177,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c8d69c3_38c8c76a",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-12T14:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3b77eb_2c802d8d",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a116cdbd_644fe054",
@@ -208,6 +244,24 @@
       "side": 1,
       "message": "Possibly, I just find it a lot less clear, this also provides the output lines which specify that `T` and `A` can be different in this case.",
       "parentUuid": "a116cdbd_644fe054",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefade9d_090bc377",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-12T14:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03b8d7f4_83f3263f",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -294,6 +348,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b0c244_8f4dc82e",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-12T14:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16444397_ea717f10",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a79bba98_580ad236",
@@ -325,6 +397,24 @@
       "side": 1,
       "message": "Do I run it over every individual file? Or is there a `git cl format` for go files?",
       "parentUuid": "a79bba98_580ad236",
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6204cdf_5d50414b",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-12T14:44:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "594887bf_47206a13",
       "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
