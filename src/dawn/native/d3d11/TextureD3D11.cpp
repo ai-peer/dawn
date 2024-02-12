@@ -573,19 +573,7 @@ MaybeError Texture::ClearRenderable(const ScopedCommandRecordingContext* command
                 commandContext->ClearDepthStencilView(
                     d3d11DSV.Get(), clearFlags, d3d11ClearValue.depth, d3d11ClearValue.stencil);
             } else {
-                const struct {
-                    Aspect aspect;
-                    uint32_t planeSlice;
-                } kAspects[] = {
-                    {Aspect::Color | Aspect::Plane0, 0},
-                    {Aspect::Plane1, 1},
-                    {Aspect::Plane2, 2},
-                };
-
-                for (auto [aspect, planeSlice] : kAspects) {
-                    if ((aspect & clearRange.aspects) == 0) {
-                        continue;
-                    }
+                for (auto aspect : IterateEnumMask(clearRange.aspects)) {
                     wgpu::TextureFormat format = GetFormat().IsMultiPlanar()
                                                      ? GetFormat().GetAspectInfo(aspect).format
                                                      : GetFormat().format;
@@ -601,7 +589,7 @@ MaybeError Texture::ClearRenderable(const ScopedCommandRecordingContext* command
                                         GetMipLevelSingleSubresourceVirtualSize(
                                             clearRange.baseMipLevel, clearRange.aspects)
                                             .depthOrArrayLayers,
-                                        planeSlice));
+                                        GetAspectIndex(aspect)));
                     commandContext->ClearRenderTargetView(d3d11RTV.Get(), d3d11ClearValue.color);
                 }
             }
