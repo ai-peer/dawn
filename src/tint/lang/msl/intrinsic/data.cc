@@ -63,6 +63,7 @@ using ParameterInfo = tint::core::intrinsic::ParameterInfo;
 using StringStream = tint::StringStream;
 using TemplateNumberIndex = tint::core::intrinsic::TemplateNumberIndex;
 using TemplateNumberInfo = tint::core::intrinsic::TemplateNumberInfo;
+using GenericTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeInfo = tint::core::intrinsic::TemplateTypeInfo;
 using Type = tint::core::type::Type;
@@ -123,6 +124,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [0] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_generic_types */ 0,
+    /* generic_types */ GenericTypeIndex(/* invalid */),
     /* num_template_types */ 0,
     /* num_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),

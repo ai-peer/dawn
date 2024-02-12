@@ -167,6 +167,15 @@ func (i IntrinsicDecl) Format(w fmt.State, verb rune) {
 	case Converter:
 		fmt.Fprintf(w, "conv ")
 	}
+
+	for _, a := range i.Attributes {
+		if a.Name == "templated" {
+			a.Format(w, verb)
+			fmt.Fprintf(w, " ")
+			break
+		}
+	}
+
 	fmt.Fprintf(w, "%v", i.Name)
 	i.TemplateParams.Format(w, verb)
 	i.Parameters.Format(w, verb)
