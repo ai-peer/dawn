@@ -79,7 +79,8 @@ class Texture final : public d3d::Texture {
         const Format& format,
         uint32_t mipLevel,
         uint32_t baseSlice,
-        uint32_t sliceCount) const;
+        uint32_t sliceCount,
+        uint32_t planeSlice) const;
     ResultOrError<ComPtr<ID3D11DepthStencilView>> CreateD3D11DepthStencilView(
         const SubresourceRange& singleLevelRange,
         bool depthReadOnly,

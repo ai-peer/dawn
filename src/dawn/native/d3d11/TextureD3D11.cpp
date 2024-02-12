@@ -409,8 +409,9 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
     const Format& format,
     uint32_t mipLevel,
     uint32_t baseSlice,
-    uint32_t sliceCount) const {
-    D3D11_RENDER_TARGET_VIEW_DESC rtvDesc;
+    uint32_t sliceCount,
+    uint32_t planeSlice) const {
+    D3D11_RENDER_TARGET_VIEW_DESC1 rtvDesc;
     rtvDesc.Format = d3d::DXGITextureFormat(format.format);
     if (IsMultisampledTexture()) {
         DAWN_ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
@@ -418,6 +419,7 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
         DAWN_ASSERT(mipLevel == 0);
         DAWN_ASSERT(baseSlice == 0);
         DAWN_ASSERT(sliceCount == 1);
+        DAWN_ASSERT(planeSlice == 0);
         rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DMS;
     } else {
         switch (GetDimension()) {
@@ -434,6 +436,7 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
                 rtvDesc.Texture2DArray.MipSlice = mipLevel;
                 rtvDesc.Texture2DArray.FirstArraySlice = baseSlice;
                 rtvDesc.Texture2DArray.ArraySize = sliceCount;
+                rtvDesc.Texture2DArray.PlaneSlice = planeSlice;
                 break;
             case wgpu::TextureDimension::e3D:
                 rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE3D;
@@ -448,13 +451,13 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
         }
     }
 
-    ComPtr<ID3D11RenderTargetView> rtv;
+    ComPtr<ID3D11RenderTargetView1> rtv;
     DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
-                              ->GetD3D11Device()
-                              ->CreateRenderTargetView(GetD3D11Resource(), &rtvDesc, &rtv),
+                              ->GetD3D11Device5()
+                              ->CreateRenderTargetView1(GetD3D11Resource(), &rtvDesc, &rtv),
                           "CreateRenderTargetView"));
 
-    return rtv;
+    return {std::move(rtv)};
 }
 
 ResultOrError<ComPtr<ID3D11DepthStencilView>> Texture::CreateD3D11DepthStencilView(
@@ -565,7 +568,7 @@ MaybeError Texture::ClearRenderable(const ScopedCommandRecordingContext* command
                                     GetFormat(), clearRange.baseMipLevel, clearRange.baseArrayLayer,
                                     GetMipLevelSingleSubresourceVirtualSize(clearRange.baseMipLevel,
                                                                             clearRange.aspects)
-                                        .depthOrArrayLayers));
+                                        .depthOrArrayLayers, /*planeSlice=*/0));
                 commandContext->ClearRenderTargetView(d3d11RTV.Get(), d3d11ClearValue.color);
             }
         }
@@ -1208,7 +1211,7 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
     }
 
     Device* device = ToBackend(GetDevice());
-    D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
+    D3D11_SHADER_RESOURCE_VIEW_DESC1 srvDesc;
     srvDesc.Format = d3d::DXGITextureFormat(GetFormat().format);
 
     const Format& textureFormat = GetTexture()->GetFormat();
@@ -1310,6 +1313,7 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
                 srvDesc.Texture2DArray.FirstArraySlice = GetBaseArrayLayer();
                 srvDesc.Texture2DArray.MipLevels = GetLevelCount();
                 srvDesc.Texture2DArray.MostDetailedMip = GetBaseMipLevel();
+                srvDesc.Texture2DArray.PlaneSlice = GetAspectIndex(GetAspects());
                 break;
             case wgpu::TextureViewDimension::Cube:
             case wgpu::TextureViewDimension::CubeArray:
@@ -1333,10 +1337,12 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
         }
     }
 
+    ComPtr<ID3D11ShaderResourceView1> srv;
     DAWN_TRY(CheckHRESULT(
-        device->GetD3D11Device()->CreateShaderResourceView(
-            ToBackend(GetTexture())->GetD3D11Resource(), &srvDesc, &mD3d11SharedResourceView),
-        "CreateShaderResourceView"));
+        device->GetD3D11Device5()->CreateShaderResourceView1(
+            ToBackend(GetTexture())->GetD3D11Resource(), &srvDesc, &srv),
+        "CreateShaderResourceView1"));
+    mD3d11SharedResourceView = std::move(srv);
     return mD3d11SharedResourceView.Get();
 }
 
@@ -1356,11 +1362,11 @@ ResultOrError<ID3D11RenderTargetView*> TextureView::GetOrCreateD3D11RenderTarget
     // 2d RTVs, which value is set to 0. For 3d RTVs, the baseArrayLayer must be 0. So here we can
     // simply use baseArrayLayer + depthSlice to specify the slice in RTVs without checking the
     // view's dimension.
-    DAWN_TRY_ASSIGN(
-        mD3d11RenderTargetViews[depthSlice],
-        ToBackend(GetTexture())
-            ->CreateD3D11RenderTargetView(GetFormat(), GetBaseMipLevel(),
-                                          GetBaseArrayLayer() + depthSlice, GetLayerCount()));
+    DAWN_TRY_ASSIGN(mD3d11RenderTargetViews[depthSlice],
+                    ToBackend(GetTexture())
+                        ->CreateD3D11RenderTargetView(
+                            GetFormat(), GetBaseMipLevel(), GetBaseArrayLayer() + depthSlice,
+                            GetLayerCount(), GetAspectIndex(GetAspects())));
     return mD3d11RenderTargetViews[depthSlice].Get();
 }
 
