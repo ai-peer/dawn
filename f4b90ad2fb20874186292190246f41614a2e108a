@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e97610_7457666d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-12T17:39:30Z",
+      "side": 1,
+      "message": "overriding kokoro because it\u0027s the cmake-debug flaky issue Ben was looking at",
+      "revId": "f4b90ad2fb20874186292190246f41614a2e108a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
