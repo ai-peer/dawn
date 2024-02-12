@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47c536bc_d668f95b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-12T17:52:29Z",
+      "side": 1,
+      "message": "Looks like `IterateBitset` is for std::bitset?",
+      "parentUuid": "a74e4ae5_d958630f",
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7bb0044_2093c602",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
@@ -65,6 +83,30 @@
       "writtenOn": "2024-02-12T17:39:29Z",
       "side": 1,
       "message": "Does this limit in any way the versions of windows on which we can run? Ditto for RTV",
+      "range": {
+        "startLine": 1380,
+        "startChar": 11,
+        "endLine": 1380,
+        "endChar": 36
+      },
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68508f75_148ae1b3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-12T17:52:29Z",
+      "side": 1,
+      "message": "Right now, d3d11 backend already uses `ID3D11Fence` which require Windows 10 Creators Update. However `CreateSRV1` and `CreateRTV1` just require Windows 10. So this change will not raise minimums windows requirement. BTW, Chrome only supports Windows 10 and newer.\n\nhttps://support.google.com/chrome/a/answer/7100626?hl\u003den",
+      "parentUuid": "a7bb0044_2093c602",
       "range": {
         "startLine": 1380,
         "startChar": 11,
