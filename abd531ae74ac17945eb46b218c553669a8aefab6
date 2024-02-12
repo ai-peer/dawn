@@ -69,6 +69,24 @@
       "parentUuid": "7dd06458_fad1a00c",
       "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93db04aa_96c7d980",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-12T23:51:04Z",
+      "side": 1,
+      "message": "The way you suggest works for D3D12 where ~all work is submitted via command lists in one place, but with D3D11 being a more immediate-mode API, there are many sites where the keyed mutex has to be acquired (see all the ScopedTextureUses in this file).\n\nEven with D3D12, where we have a single place that keyed mutexes have to be acquired, we also want to prevent double acquires for the keyed mutex if a shared texture is imported multiple times - the KeyedMutex wrapper and its Guard helper ensure that.\n\nIMO the simplest solution that doesn\u0027t waste extra memory is probably something like this:\n\n```\nstd::optional\u003cKeyedMutex::Guard\u003e Texture::SynchronizeTextureBeforeUse(commandContext);\n\nstd::vector\u003cKeyedMutex::Guard\u003e acquiredKeyedMutexes;\n...\nfor (TextureBase* texture: ...) {\n  std::optional\u003cKeyedMutex::Guard\u003e keyedMutexGuard;\n  DAWN_TRY_ASSIGN(keyedMutexGuard, texture-\u003eAcquireKeyedMutex());\n  if (keyedMutexGuard) {\n    acquiredKeyedMutexes.emplace_back(std::move(*keyedMutexGuard));\n  }\n}\n```\n\nIt\u0027s a few more lines of code, but there are only like a few loops like this, so it seems fine to me.",
+      "parentUuid": "b11eec7e_391ab006",
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
