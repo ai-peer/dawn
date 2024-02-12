@@ -16,6 +16,63 @@
       "message": "Hi Corentin or Austin, PTAL. Thanks",
       "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d761b2_27fb5e87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-12T17:39:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a74e4ae5_d958630f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-12T17:39:29Z",
+      "side": 1,
+      "message": "Isn\u0027t it sufficient to `for (auto aspect : IterateBitset(clearRange.aspects)` and do `planeSlice \u003d GetAspectIndex(aspect)`?",
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bb0044_2093c602",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-12T17:39:29Z",
+      "side": 1,
+      "message": "Does this limit in any way the versions of windows on which we can run? Ditto for RTV",
+      "range": {
+        "startLine": 1380,
+        "startChar": 11,
+        "endLine": 1380,
+        "endChar": 36
+      },
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
