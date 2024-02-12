@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1816a34_c1dddda2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-12T20:54:11Z",
+      "side": 1,
+      "message": "Hmm, interesting. If there\u0027s no way to solve this in code, we could look at the \nspec.  We could specify that the upper 32 bits of index_buffer_offset must be zero\nin Compat. Additionally we could consider limiting Compat to allocating 8GB index \nbuffers (32 bits of 16-bit indices, I\u0027m thinking), so you would still be able to\naccess all of it with a 32-bit index_buffer_offset.",
+      "parentUuid": "457ca573_06856238",
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147fe37b_b037ea64",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 2
