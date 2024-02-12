@@ -315,6 +315,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3140c8f1_7d42086e",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-12T15:02:40Z",
+      "side": 1,
+      "message": "Let\u0027s discuss this in a bit. I think it would be preferable to keep the explicit template syntax as `\u003c\u003e`, and doing something else with the inferred types. The explicit arguments would then match the syntax of the call expression, and removing the inferred types would improve the diagnostics printed.",
+      "parentUuid": "164e4cb8_3ba0fe12",
+      "range": {
+        "startLine": 1111,
+        "startChar": 30,
+        "endLine": 1111,
+        "endChar": 39
+      },
+      "revId": "cfd602320ec326340bc37ffe7d8bff542ffdc403",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7024b344_013e45cc",
         "filename": "src/tint/lang/core/core.def",
         "patchSetId": 1
