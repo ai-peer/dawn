@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7be5e943_1883c65a",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-12T17:58:48Z",
+      "side": 1,
+      "message": "Ah yes, I meant IterateEnumMask() https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/EnumMaskIterator.h;drc\u003d35406c8d4b7301ede262aeedfc6a63e5e3cf555d;l\u003d81",
+      "parentUuid": "47c536bc_d668f95b",
+      "revId": "faa6bff2595ab677457093e2b024d0992ba71835",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7bb0044_2093c602",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 5
