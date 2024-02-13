@@ -113,10 +113,10 @@ constexpr ParameterInfo kParameters[] = {
 static_assert(ParameterIndex::CanIndex(kParameters),
               "ParameterIndex is not large enough to index kParameters");
 {{- end}}
-{{- if .TemplateTypes}}
+{{- if .ImplicitTemplateTypes}}
 
 constexpr TemplateTypeInfo kTemplateTypes[] = {
-{{- range $i, $o := .TemplateTypes }}
+{{- range $i, $o := .ImplicitTemplateTypes }}
   {
     /* [{{$i}}] */
     /* name */ "{{$o.Name}}",
@@ -131,10 +131,10 @@ constexpr TemplateTypeInfo kTemplateTypes[] = {
 static_assert(TemplateTypeIndex::CanIndex(kTemplateTypes),
               "TemplateTypeIndex is not large enough to index kTemplateTypes");
 {{- end }}
-{{- if .TemplateNumbers}}
+{{- if .ImplicitTemplateNumbers}}
 
 constexpr TemplateNumberInfo kTemplateNumbers[] = {
-{{- range $i, $o := .TemplateNumbers }}
+{{- range $i, $o := .ImplicitTemplateNumbers }}
   {
     /* [{{$i}}] */
     /* name */ "{{$o.Name}}",
@@ -174,14 +174,14 @@ constexpr OverloadInfo kOverloads[] = {
 {{-   if $o.IsDeprecated}}, OverloadFlag::kIsDeprecated{{end -}}
     ),
     /* num_parameters */ {{$o.NumParameters}},
-    /* num_template_types */ {{$o.NumTemplateTypes}},
-    /* num_template_numbers */ {{$o.NumTemplateNumbers}},
-    /* template_types */
-{{-   if ge $o.TemplateTypesOffset 0 }} TemplateTypeIndex({{$o.TemplateTypesOffset}})
+    /* num_implicit_template_types */ {{$o.NumImplicitTemplateTypes}},
+    /* num_implicit_template_numbers */ {{$o.NumImplicitTemplateNumbers}},
+    /* implicit_template_types */
+{{-   if ge $o.ImplicitTemplateTypesOffset 0 }} TemplateTypeIndex({{$o.ImplicitTemplateTypesOffset}})
 {{-   else                           }} TemplateTypeIndex(/* invalid */)
 {{-   end }},
-    /* template_numbers */
-{{-   if ge $o.TemplateNumbersOffset 0 }} TemplateNumberIndex({{$o.TemplateNumbersOffset}})
+    /* implict_template_numbers */
+{{-   if ge $o.ImplicitTemplateNumbersOffset 0 }} TemplateNumberIndex({{$o.ImplicitTemplateNumbersOffset}})
 {{-   else                             }} TemplateNumberIndex(/* invalid */)
 {{-   end }},
     /* parameters */
@@ -285,8 +285,8 @@ constexpr IntrinsicInfo kConstructorsAndConverters[] = {
 }  // anonymous namespace
 
 const core::intrinsic::TableData {{$.Name}}{
-  /* template_types */ {{if .TemplateTypes}}kTemplateTypes{{else}}Empty{{end}},
-  /* template_numbers */ {{if .TemplateNumbers}}kTemplateNumbers{{else}}Empty{{end}},
+  /* template_types */ {{if .ImplicitTemplateTypes}}kTemplateTypes{{else}}Empty{{end}},
+  /* template_numbers */ {{if .ImplicitTemplateNumbers}}kTemplateNumbers{{else}}Empty{{end}},
   /* type_matcher_indices */ {{if .TypeMatcherIndices}}kTypeMatcherIndices{{else}}Empty{{end}},
   /* number_matcher_indices */ {{if .NumberMatcherIndices}}kNumberMatcherIndices{{else}}Empty{{end}},
   /* type_matchers */ {{if .TMatchers}}kTypeMatchers{{else}}Empty{{end}},

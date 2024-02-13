@@ -154,7 +154,7 @@ Increase hashLength in %v`,
 			return nil
 		}
 	}
-	for _, t := range overload.TemplateParams {
+	for _, t := range overload.ImplicitTemplateParams {
 		next := permutate // Permutation chaining
 		switch t := t.(type) {
 		case *sem.TemplateTypeParam:

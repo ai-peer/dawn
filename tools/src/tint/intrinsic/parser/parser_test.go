@@ -256,7 +256,7 @@ func TestParser(t *testing.T) {
 				Builtins: []ast.IntrinsicDecl{{
 					Kind: ast.Builtin,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{
 							Name: "A", Type: ast.TemplatedName{
 								Name: "B",
@@ -276,7 +276,7 @@ func TestParser(t *testing.T) {
 				Builtins: []ast.IntrinsicDecl{{
 					Kind: ast.Builtin,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{Name: "T"},
 					},
 					Parameters: ast.Parameters{
@@ -394,7 +394,7 @@ func TestParser(t *testing.T) {
 				Operators: []ast.IntrinsicDecl{{
 					Kind: ast.Operator,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{
 							Name: "A", Type: ast.TemplatedName{
 								Name: "B",
@@ -414,7 +414,7 @@ func TestParser(t *testing.T) {
 				Operators: []ast.IntrinsicDecl{{
 					Kind: ast.Operator,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{Name: "T"},
 					},
 					Parameters: ast.Parameters{
@@ -518,7 +518,7 @@ func TestParser(t *testing.T) {
 				Constructors: []ast.IntrinsicDecl{{
 					Kind: ast.Constructor,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{
 							Name: "A", Type: ast.TemplatedName{
 								Name: "B",
@@ -538,7 +538,7 @@ func TestParser(t *testing.T) {
 				Constructors: []ast.IntrinsicDecl{{
 					Kind: ast.Constructor,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{Name: "T"},
 					},
 					Parameters: ast.Parameters{
@@ -642,7 +642,7 @@ func TestParser(t *testing.T) {
 				Converters: []ast.IntrinsicDecl{{
 					Kind: ast.Converter,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{
 							Name: "A", Type: ast.TemplatedName{
 								Name: "B",
@@ -662,7 +662,7 @@ func TestParser(t *testing.T) {
 				Converters: []ast.IntrinsicDecl{{
 					Kind: ast.Converter,
 					Name: "F",
-					TemplateParams: ast.TemplateParams{
+					ImplicitTemplateParams: ast.TemplateParams{
 						{Name: "T"},
 					},
 					Parameters: ast.Parameters{
