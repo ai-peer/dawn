@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8bd8aab_1fc6e596",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-13T18:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bd2b64f_210c37b9",
+      "range": {
+        "startLine": 856,
+        "startChar": 0,
+        "endLine": 867,
+        "endChar": 63
+      },
+      "revId": "637c71a2e1e5ca371f6626c488ad760047ae1251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f68fa8cc_0766a644",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-12T15:02:40Z",
       "side": 1,
       "message": "Assuming the argument to `@templated()` is a type matcher, could you not simplify this to:\n\n```\n@must_use @const @templated(f32) conv mat2x2(mat2x2\u003cf32\u003e) -\u003e mat2x2\u003cf32\u003e\n@must_use @const @templated(f16) conv mat2x2(mat2x2\u003cf16\u003e) -\u003e mat2x2\u003cf16\u003e\n@must_use @const @templated(f32) conv mat2x3(mat2x3\u003cf32\u003e) -\u003e mat2x3\u003cf32\u003e\n@must_use @const @templated(f16) conv mat2x3(mat2x3\u003cf16\u003e) -\u003e mat2x3\u003cf16\u003e\n@must_use @const @templated(f32) conv mat2x4(mat2x4\u003cf32\u003e) -\u003e mat2x4\u003cf32\u003e\n@must_use @const @templated(f16) conv mat2x4(mat2x4\u003cf16\u003e) -\u003e mat2x4\u003cf16\u003e\n@must_use @const @templated(f32) conv mat3x2(mat3x2\u003cf32\u003e) -\u003e mat3x2\u003cf32\u003e\n@must_use @const @templated(f16) conv mat3x2(mat3x2\u003cf16\u003e) -\u003e mat3x2\u003cf16\u003e\n@must_use @const @templated(f32) conv mat3x3(mat3x3\u003cf32\u003e) -\u003e mat3x3\u003cf32\u003e\n@must_use @const @templated(f16) conv mat3x3(mat3x3\u003cf16\u003e) -\u003e mat3x3\u003cf16\u003e\n@must_use @const @templated(f32) conv mat3x4(mat3x4\u003cf32\u003e) -\u003e mat3x4\u003cf32\u003e\n@must_use @const @templated(f16) conv mat3x4(mat3x4\u003cf16\u003e) -\u003e mat3x4\u003cf16\u003e\n@must_use @const @templated(f32) conv mat4x2(mat4x2\u003cf32\u003e) -\u003e mat4x2\u003cf32\u003e\n@must_use @const @templated(f16) conv mat4x2(mat4x2\u003cf16\u003e) -\u003e mat4x2\u003cf16\u003e\n@must_use @const @templated(f32) conv mat4x3(mat4x3\u003cf32\u003e) -\u003e mat4x3\u003cf32\u003e\n@must_use @const @templated(f16) conv mat4x3(mat4x3\u003cf16\u003e) -\u003e mat4x3\u003cf16\u003e\n@must_use @const @templated(f32) conv mat4x4(mat4x4\u003cf32\u003e) -\u003e mat4x4\u003cf32\u003e\n@must_use @const @templated(f16) conv mat4x4(mat4x4\u003cf16\u003e) -\u003e mat4x4\u003cf16\u003e\n```",
+      "range": {
+        "startLine": 1108,
+        "startChar": 0,
+        "endLine": 1125,
+        "endChar": 76
+      },
+      "revId": "637c71a2e1e5ca371f6626c488ad760047ae1251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a51ee8_93fd1845",
+        "filename": "src/tint/lang/core/core.def",
+        "patchSetId": 4
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-13T18:45:47Z",
+      "side": 1,
+      "message": "Using the `T` keeps it more consistent with all the other templates in the file.",
+      "parentUuid": "f68fa8cc_0766a644",
       "range": {
         "startLine": 1108,
         "startChar": 0,
