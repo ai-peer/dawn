@@ -189,6 +189,7 @@ type Intrinsic struct {
 type Overload struct {
 	Decl                    ast.IntrinsicDecl
 	Intrinsic               *Intrinsic
+	ExplicitTemplateTypes   []*TemplateTypeParam
 	ImplicitTemplateParams  []TemplateParam
 	ImplicitTemplateTypes   []*TemplateTypeParam
 	ImplicitTemplateNumbers []TemplateParam
