@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896d0ed3_50f02daa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 17
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T21:46:37Z",
+      "side": 1,
+      "message": "commit message needs updating",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 21
+      },
+      "revId": "11ed33b9581f802f1d614cd0465cbb0c737a9ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70fc975_345a7b44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T21:46:37Z",
+      "side": 1,
+      "message": "LGTM! thanks for the iterations",
+      "revId": "11ed33b9581f802f1d614cd0465cbb0c737a9ceb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
