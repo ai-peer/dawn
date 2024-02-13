@@ -675,7 +675,6 @@ absl_source_set("strings_internal") {
     "${dawn_abseil_dir}/absl/strings/internal/utf8.cc",
   ]
   public = [
-    "${dawn_abseil_dir}/absl/strings/internal/char_map.h",
     "${dawn_abseil_dir}/absl/strings/internal/escaping.h",
     "${dawn_abseil_dir}/absl/strings/internal/ostringstream.h",
     "${dawn_abseil_dir}/absl/strings/internal/resize_uninitialized.h",
