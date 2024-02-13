@@ -87,6 +87,24 @@
       "parentUuid": "b11eec7e_391ab006",
       "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b508253_0569b337",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T02:02:59Z",
+      "side": 1,
+      "message": "your proposal still puts duplicate entries in the vector though if you use the same texture twice, and we have to refcount the acquires.\n\nwhy doesn\u0027t storing a map on the command context work for D3D11? while there are many scoped uses here, we don\u0027t need to begin/end all the scopes this often to be correct. it should be sufficient for all of them to acquire the keyed mutex if it has not been already, and then when the command context is submitted, release all of them at once. I believe it only needs to be at the granularity of queue submit (or write texture)",
+      "parentUuid": "93db04aa_96c7d980",
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
