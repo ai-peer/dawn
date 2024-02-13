@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6984072d_cd7e537c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-13T17:35:00Z",
+      "side": 1,
+      "message": "For posterity: I just noticed that my update to this text was sadly overwritten when I uploaded a new PS. This is not what this CL is doing - instead, it is avoiding changing the Vulkan backend at all, i.e., it still always sets the backend labels and uses the user-defined labels for doing so based on the toggle.",
+      "revId": "97b85f7db9544f5b0753f3ea3ce938197adeb83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
