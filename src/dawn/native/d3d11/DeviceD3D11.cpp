@@ -428,6 +428,8 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
         case ExternalImageType::D3D11Texture: {
             const auto* d3d11TextureDescriptor =
                 static_cast<const d3d::ExternalImageDescriptorD3D11Texture*>(descriptor);
+            DAWN_INVALID_IF(!ToBackend(GetPhysicalDevice())->mIsSharedD3D11Device,
+                            "D3D11Device is not shared");
             DAWN_TRY(CheckHRESULT(d3d11TextureDescriptor->texture.As(&d3d11Resource),
                                   "Cannot get ID3D11Resource from texture"));
             ComPtr<ID3D11Device> textureDevice;
