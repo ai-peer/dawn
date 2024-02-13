@@ -273,14 +273,16 @@ Candidate ScoreOverload(Context& context,
     // This scoring is used to order the suggested overloads in diagnostic on overload mismatch, and
     // has no impact for a correct program.
     // The overloads with the lowest score will be displayed first (top-most).
+    constexpr int kMismatchedGenericCountPenalty = 4;
     constexpr int kMismatchedParamCountPenalty = 3;
     constexpr int kMismatchedParamTypePenalty = 2;
+    constexpr int kMismatchedGenericTypePenalty = 1;
     constexpr int kMismatchedTemplateCountPenalty = 1;
     constexpr int kMismatchedTemplateTypePenalty = 1;
     constexpr int kMismatchedTemplateNumberPenalty = 1;
 
-    size_t num_parameters = static_cast<size_t>(overload.num_parameters);
-    size_t num_arguments = static_cast<size_t>(args.Length());
+    size_t const num_parameters = static_cast<size_t>(overload.num_parameters);
+    size_t const num_arguments = static_cast<size_t>(args.Length());
 
     size_t score = 0;
 
@@ -291,9 +293,9 @@ Candidate ScoreOverload(Context& context,
 
     if (score == 0) {
         // Check that all of the template arguments provided are actually expected by the overload.
-        size_t expected_templates =
+        size_t const expected_templates =
             overload.num_implicit_template_types + overload.num_implicit_template_numbers;
-        size_t provided_templates = in_templates.Count();
+        size_t const provided_templates = in_templates.Count();
         if (provided_templates > expected_templates) {
             score += kMismatchedTemplateCountPenalty * (provided_templates - expected_templates);
         }
@@ -302,6 +304,25 @@ Candidate ScoreOverload(Context& context,
     // Make a mutable copy of the input templates so we can implicitly match more templated
     // arguments.
     TemplateState templates(in_templates);
+
+    if (templates.Count() != overload.num_explicit_template_types) {
+        score += kMismatchedGenericCountPenalty;
+    }
+    if (score == 0) {
+        for (size_t i = 0; i < overload.num_explicit_template_types; ++i) {
+            auto* matcher_idx = &context.data[overload.explicit_template_types + i].matcher_index;
+            if (matcher_idx->IsValid()) {
+                if (auto* type = templates.Type(i)) {
+                    if (Match(context, templates, overload, matcher_idx, nullptr,
+                              earliest_eval_stage)
+                            .Type(type) != nullptr) {
+                        continue;
+                    }
+                }
+                score += kMismatchedGenericTypePenalty;
+            }
+        }
+    }
 
     // Invoke the matchers for each parameter <-> argument pair.
     // If any arguments cannot be matched, then `score` will be increased.
@@ -472,22 +493,21 @@ void PrintOverload(StringStream& ss,
 
     ss << intrinsic_name;
 
-    bool print_template_type = false;
-    if (overload.num_implicit_template_types > 0) {
+    bool print_explicit_template_type = false;
+    if (overload.num_explicit_template_types > 0) {
         if (overload.flags.Contains(OverloadFlag::kIsConverter)) {
             // Print for conversions
             // e.g. vec3<T>(vec3<U>) -> vec3<f32>
-            print_template_type = true;
-        } else if ((overload.num_parameters == 0) &&
-                   overload.flags.Contains(OverloadFlag::kIsConstructor)) {
-            // Print for constructors with no params
+            print_explicit_template_type = true;
+        } else if (overload.flags.Contains(OverloadFlag::kIsConstructor)) {
+            // Print for constructors
             // e.g. vec2<T>() -> vec2<T>
-            print_template_type = true;
+            print_explicit_template_type = true;
         }
     }
-    if (print_template_type) {
+    if (print_explicit_template_type) {
         ss << "<";
-        ss << context.data[overload.implicit_template_types].name;
+        ss << context.data[overload.explicit_template_types].name;
         ss << ">";
     }
     ss << "(";
@@ -779,7 +799,8 @@ Result<Overload, std::string> LookupCtorConv(Context& context,
         StringStream ss;
         ss << "no matching constructor for " << CallSignature(type_name, args, template_arg)
            << std::endl;
-        Candidates ctor, conv;
+        Candidates ctor;
+        Candidates conv;
         for (auto candidate : candidates) {
             if (candidate.overload->flags.Contains(OverloadFlag::kIsConstructor)) {
                 ctor.Push(candidate);

@@ -394,6 +394,25 @@ func (r *resolver) intrinsic(
 			return fmt.Errorf("%v unexpected value for deprecated attribute", deprecated.Source)
 		}
 	}
+	if explicitTemplate := a.Attributes.Take("templated"); explicitTemplate != nil {
+		if len(explicitTemplate.Values) != 1 {
+			return fmt.Errorf("%v only a single template argument currently supported", explicitTemplate.Source)
+		}
+		for _, param := range explicitTemplate.Values {
+			switch param := param.(type) {
+			case ast.TemplatedName:
+				arg, err := r.lookupNamed(&s, param)
+				if err != nil {
+					return err
+				}
+
+				switch r := arg.(type) {
+				case *sem.TemplateTypeParam:
+					overload.ExplicitTemplateTypes = append(overload.ExplicitTemplateTypes, r)
+				}
+			}
+		}
+	}
 	if len(a.Attributes) != 0 {
 		return fmt.Errorf("%v unknown attribute", a.Attributes[0].Source)
 	}
@@ -413,8 +432,8 @@ func (r *resolver) intrinsic(
 	}
 
 	// Update high-water marks of template types and numbers
-	if r.s.MaxTemplateTypes < len(overload.ImplicitTemplateTypes) {
-		r.s.MaxTemplateTypes = len(overload.ImplicitTemplateTypes)
+	if r.s.MaxTemplateTypes < (len(overload.ImplicitTemplateTypes) + len(overload.ExplicitTemplateTypes)) {
+		r.s.MaxTemplateTypes = len(overload.ImplicitTemplateTypes) + len(overload.ExplicitTemplateTypes)
 	}
 	if r.s.MaxTemplateNumbers < len(overload.ImplicitTemplateNumbers) {
 		r.s.MaxTemplateNumbers = len(overload.ImplicitTemplateNumbers)
