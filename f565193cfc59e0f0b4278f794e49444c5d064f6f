@@ -60,6 +60,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3f6b58bb_4e3fc36d",
+        "filename": "src/tint/utils/templates/intrinsic_table_data.tmpl.inc",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-13T21:41:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e85f0a20_46c3cf01",
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "74872075_2b143413",
         "filename": "src/tint/utils/templates/intrinsic_table_data.tmpl.inc",
         "patchSetId": 1
@@ -115,6 +133,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "238fc047_ae48d773",
+        "filename": "tools/src/tint/intrinsic/resolver/resolve.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-13T21:41:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2018125_2a7acb13",
+      "range": {
+        "startLine": 324,
+        "startChar": 55,
+        "endLine": 324,
+        "endChar": 69
+      },
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15afc4f9_010046b9",
@@ -128,6 +170,30 @@
       "writtenOn": "2024-02-13T20:45:19Z",
       "side": 1,
       "message": "if you\u0027re going to share the tables between the implicit and explicit templates, then this should be reverted.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "934f9cfe_b6159fc2",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-13T21:41:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15afc4f9_010046b9",
       "range": {
         "startLine": 48,
         "startChar": 0,
