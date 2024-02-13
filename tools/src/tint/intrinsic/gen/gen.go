@@ -56,8 +56,8 @@ type IntrinsicTable struct {
 
 	TypeMatcherIndices        []int            // kTypeMatcherIndices table content
 	NumberMatcherIndices      []int            // kNumberMatcherIndices table content
-	TemplateTypes             []TemplateType   // kTemplateTypes table content
-	TemplateNumbers           []TemplateNumber // kTemplateNumbers table content
+	ImplicitTemplateTypes     []TemplateType   // kTemplateTypes table content
+	ImplicitTemplateNumbers   []TemplateNumber // kTemplateNumbers table content
 	Parameters                []Parameter      // kParameters table content
 	Overloads                 []Overload       // kOverloads table content
 	Builtins                  []Intrinsic      // kBuiltins table content
@@ -106,14 +106,14 @@ type Parameter struct {
 type Overload struct {
 	// Total number of parameters for the overload
 	NumParameters int
-	// Total number of template types for the overload
-	NumTemplateTypes int
-	// Total number of template numbers for the overload
-	NumTemplateNumbers int
+	// Total number of implicit template types for the overload
+	NumImplicitTemplateTypes int
+	// Total number of implicit template numbers for the overload
+	NumImplicitTemplateNumbers int
 	// Index to the first template type in IntrinsicTable.TemplateTypes
-	TemplateTypesOffset int
+	ImplicitTemplateTypesOffset int
 	// Index to the first template number in IntrinsicTable.TemplateNumbers
-	TemplateNumbersOffset int
+	ImplicitTemplateNumbersOffset int
 	// Index to the first parameter in IntrinsicTable.Parameters
 	ParametersOffset int
 	// Index into IntrinsicTable.TypeMatcherIndices, beginning the list of matchers
@@ -155,8 +155,8 @@ type IntrinsicTableBuilder struct {
 	lut struct {
 		typeMatcherIndices       lut.LUT[int]
 		numberMatcherIndices     lut.LUT[int]
-		templateTypes            lut.LUT[TemplateType]
-		templateNumbers          lut.LUT[TemplateNumber]
+		implicitTemplateTypes    lut.LUT[TemplateType]
+		implicitTemplateNumbers  lut.LUT[TemplateNumber]
 		constEvalFunctionIndices lut.LUT[string]
 		parameters               lut.LUT[Parameter]
 		overloads                lut.LUT[Overload]
@@ -181,11 +181,11 @@ type overloadBuilder struct {
 	// Template types used by the overload
 	templateTypes []TemplateType
 	// Index to the first template type in IntrinsicTable.TemplateTypes
-	templateTypesOffset *int
+	implicitTemplateTypesOffset *int
 	// Template numbers used by the overload
 	templateNumbers []TemplateNumber
 	// Index to the first template number in IntrinsicTable.TemplateNumbers
-	templateNumbersOffset *int
+	implicitTemplateNumbersOffset *int
 	// Builders for all parameters
 	parameterBuilders []parameterBuilder
 	// Index to the first parameter in IntrinsicTable.Parameters
@@ -206,7 +206,7 @@ type overloadBuilder struct {
 // layoutMatchers assigns each of the TMatchers and NMatchers a unique index.
 func (b *IntrinsicTableBuilder) layoutMatchers(s *sem.Sem) {
 	// First MaxTemplateTypes of TMatchers are template types
-	b.TMatchers = make([]sem.Named, s.MaxTemplateTypes)
+	b.TMatchers = make([]sem.Named, s.MaxImplicitTemplateTypes)
 	for _, m := range s.Types {
 		b.TMatcherIndex[m] = len(b.TMatchers)
 		b.TMatchers = append(b.TMatchers, m)
@@ -217,7 +217,7 @@ func (b *IntrinsicTableBuilder) layoutMatchers(s *sem.Sem) {
 	}
 
 	// First MaxTemplateNumbers of NMatchers are template numbers
-	b.NMatchers = make([]sem.Named, s.MaxTemplateNumbers)
+	b.NMatchers = make([]sem.Named, s.MaxImplicitTemplateNumbers)
 	for _, m := range s.EnumMatchers {
 		b.NMatcherIndex[m] = len(b.NMatchers)
 		b.NMatchers = append(b.NMatchers, m)
@@ -237,17 +237,17 @@ func (b *IntrinsicTableBuilder) newOverloadBuilder(o *sem.Overload) *overloadBui
 // Preconditions:
 // - Must be called before any LUTs are compacted.
 // Populates:
-// - b.templateTypes
-// - b.templateTypesOffset
-// - b.templateNumbers
-// - b.templateNumbersOffset
+// - b.implicitTemplateTypes
+// - b.implicitTemplateTypesOffset
+// - b.implicitTemplateNumbers
+// - b.implicitTemplateNumbersOffset
 // - b.parameterBuilders
 // - b.returnTypeMatcherIndicesOffset
 // - b.returnNumberMatcherIndicesOffset
 // - b.constEvalFunctionOffset
 func (b *overloadBuilder) processStage0() error {
-	b.templateTypes = make([]TemplateType, len(b.overload.TemplateTypes))
-	for i, t := range b.overload.TemplateTypes {
+	b.templateTypes = make([]TemplateType, len(b.overload.ImplicitTemplateTypes))
+	for i, t := range b.overload.ImplicitTemplateTypes {
 		b.templateTypeIndex[t] = i
 		matcherIndex := -1
 		if t.Type != nil {
@@ -265,10 +265,10 @@ func (b *overloadBuilder) processStage0() error {
 			MatcherIndex: matcherIndex,
 		}
 	}
-	b.templateTypesOffset = b.lut.templateTypes.Add(b.templateTypes)
+	b.implicitTemplateTypesOffset = b.lut.implicitTemplateTypes.Add(b.templateTypes)
 
-	b.templateNumbers = make([]TemplateNumber, len(b.overload.TemplateNumbers))
-	for i, t := range b.overload.TemplateNumbers {
+	b.templateNumbers = make([]TemplateNumber, len(b.overload.ImplicitTemplateNumbers))
+	for i, t := range b.overload.ImplicitTemplateNumbers {
 		b.templateNumberIndex[t] = i
 		matcherIndex := -1
 		if e, ok := t.(*sem.TemplateEnumParam); ok && e.Matcher != nil {
@@ -286,7 +286,7 @@ func (b *overloadBuilder) processStage0() error {
 			MatcherIndex: matcherIndex,
 		}
 	}
-	b.templateNumbersOffset = b.lut.templateNumbers.Add(b.templateNumbers)
+	b.implicitTemplateNumbersOffset = b.lut.implicitTemplateNumbers.Add(b.templateNumbers)
 
 	if b.overload.ReturnType != nil {
 		typeIndices, numberIndices, err := b.collectMatcherIndices(*b.overload.ReturnType)
@@ -322,8 +322,8 @@ func (b *overloadBuilder) processStage0() error {
 // Must only be called after the following LUTs have been compacted:
 // - b.lut.typeMatcherIndices
 // - b.lut.numberMatcherIndices
-// - b.lut.templateTypes
-// - b.lut.templateNumbers
+// - b.lut.implicitTemplateTypes
+// - b.lut.implicitTemplateNumbers
 // Populates:
 // - b.parametersOffset
 func (b *overloadBuilder) processStage1() error {
@@ -342,10 +342,10 @@ func (b *overloadBuilder) processStage1() error {
 func (b *overloadBuilder) build() (Overload, error) {
 	return Overload{
 		NumParameters:                    len(b.parameterBuilders),
-		NumTemplateTypes:                 len(b.templateTypes),
-		NumTemplateNumbers:               len(b.templateNumbers),
-		TemplateTypesOffset:              loadOrMinusOne(b.templateTypesOffset),
-		TemplateNumbersOffset:            loadOrMinusOne(b.templateNumbersOffset),
+		NumImplicitTemplateTypes:         len(b.templateTypes),
+		NumImplicitTemplateNumbers:       len(b.templateNumbers),
+		ImplicitTemplateTypesOffset:      loadOrMinusOne(b.implicitTemplateTypesOffset),
+		ImplicitTemplateNumbersOffset:    loadOrMinusOne(b.implicitTemplateNumbersOffset),
 		ParametersOffset:                 loadOrMinusOne(b.parametersOffset),
 		ConstEvalFunctionOffset:          loadOrMinusOne(b.constEvalFunctionOffset),
 		ReturnTypeMatcherIndicesOffset:   loadOrMinusOne(b.returnTypeMatcherIndicesOffset),
@@ -462,8 +462,8 @@ func BuildIntrinsicTable(s *sem.Sem) (*IntrinsicTable, error) {
 	// Perform the 'stage-0' processing of the overloads
 	b.lut.typeMatcherIndices = lut.New[int]()
 	b.lut.numberMatcherIndices = lut.New[int]()
-	b.lut.templateTypes = lut.New[TemplateType]()
-	b.lut.templateNumbers = lut.New[TemplateNumber]()
+	b.lut.implicitTemplateTypes = lut.New[TemplateType]()
+	b.lut.implicitTemplateNumbers = lut.New[TemplateNumber]()
 	b.lut.constEvalFunctionIndices = lut.New[string]()
 	for _, b := range overloadBuilders {
 		b.processStage0()
@@ -472,14 +472,14 @@ func BuildIntrinsicTable(s *sem.Sem) (*IntrinsicTable, error) {
 	// Compact type and number LUTs
 	b.TypeMatcherIndices = b.lut.typeMatcherIndices.Compact()
 	b.NumberMatcherIndices = b.lut.numberMatcherIndices.Compact()
-	b.TemplateTypes = b.lut.templateTypes.Compact()
-	b.TemplateNumbers = b.lut.templateNumbers.Compact()
+	b.ImplicitTemplateTypes = b.lut.implicitTemplateTypes.Compact()
+	b.ImplicitTemplateNumbers = b.lut.implicitTemplateNumbers.Compact()
 	b.ConstEvalFunctions = b.lut.constEvalFunctionIndices.Compact()
 	// Clear the compacted LUTs to prevent use-after-compaction
 	b.lut.typeMatcherIndices = nil
 	b.lut.numberMatcherIndices = nil
-	b.lut.templateTypes = nil
-	b.lut.templateNumbers = nil
+	b.lut.implicitTemplateTypes = nil
+	b.lut.implicitTemplateNumbers = nil
 	b.lut.constEvalFunctionIndices = nil
 
 	// Perform the 'stage-1' processing of the overloads
