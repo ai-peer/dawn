@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08287441_5acb51f2",
+        "filename": "tools/src/tint/intrinsic/resolver/resolve.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T21:00:26Z",
+      "side": 1,
+      "message": "I think this needs to be the high-water mark of both the implicit and explicit templates. It\u0027s used to build the `constexpr TypeMatcher kTypeMatchers[] \u003d {` table in `data.cc`.",
+      "range": {
+        "startLine": 433,
+        "startChar": 0,
+        "endLine": 440,
+        "endChar": 2
+      },
+      "revId": "1858f7d1875167420eb9358e7c08414fdf68628b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
