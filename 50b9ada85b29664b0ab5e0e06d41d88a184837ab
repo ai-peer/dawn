@@ -68,6 +68,24 @@
       "parentUuid": "46e59dfc_8e7d5782",
       "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e56a2685_5fcd3bd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T20:49:34Z",
+      "side": 1,
+      "message": "sounds fine, but you might get a faster answer to what happens if you make a chromium CL to point to this Dawn commit hash, and then run whatever tests failed originally as well as the binary size trybot.\n\nfyi, it looks like the current Dawn into chromium roll is not working.",
+      "parentUuid": "2eec524b_397ab3a0",
+      "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
