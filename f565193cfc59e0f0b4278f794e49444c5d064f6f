@@ -16,6 +16,126 @@
       "message": "PTAL.",
       "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c315875d_a8902b30",
+        "filename": "src/tint/lang/core/intrinsic/table_data.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "I was leaning towards `inferred` over `implicit`, but if we\u0027re going to have \"explicit templates\", then that\u0027s fine.",
+      "range": {
+        "startLine": 195,
+        "startChar": 24,
+        "endLine": 195,
+        "endChar": 32
+      },
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e85f0a20_46c3cf01",
+        "filename": "src/tint/utils/templates/intrinsic_table_data.tmpl.inc",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "This is declaring a table called `kImplicitTemplateTypes`, but the element types are `TemplateTypeInfo`, and this table is indexed with `TemplateTypeIndex` indices.\n\nThe reason we have all the `BlahIndex` types is to try and prevent lookup of a table with the wrong index, which is very easy to do with the number of separately indexed tables. This CL currently creates a mismatch between the table name and the index.\n\nI was thinking we\u0027d want to split the template tables into two - one for inferred and another for the explicits, but I see you use the same table in the next CL. Given that sharing a table can offer space reduction due to the compression, I\u0027d lean towards sharing the same table for inferred and explicit (like you\u0027re doing), so please keep the table name as it was.\n\n\n```suggestion\nconstexpr TemplateTypeInfo kTemplateTypes[] \u003d {\n```",
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74872075_2b143413",
+        "filename": "src/tint/utils/templates/intrinsic_table_data.tmpl.inc",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "The member name still needs renaming, like you\u0027re doing.",
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaac1343_b0127cb3",
+        "filename": "src/tint/utils/templates/intrinsic_table_data.tmpl.inc",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "And the go structs are still good.",
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2018125_2a7acb13",
+        "filename": "tools/src/tint/intrinsic/resolver/resolve.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "Would be good to rename the AST\u0027s `TemplateParams` too",
+      "range": {
+        "startLine": 324,
+        "startChar": 55,
+        "endLine": 324,
+        "endChar": 69
+      },
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15afc4f9_010046b9",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-13T20:45:19Z",
+      "side": 1,
+      "message": "if you\u0027re going to share the tables between the implicit and explicit templates, then this should be reverted.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 31
+      },
+      "revId": "f565193cfc59e0f0b4278f794e49444c5d064f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
