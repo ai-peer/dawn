@@ -33,6 +33,24 @@
       "message": "are these new bots going to be added as optional trybots? we need to include them in rolls, or mark these expectations KEEP",
       "revId": "5362bbb669d97666e8566f16c92db414d338756b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ba325ff_bb24f0ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-02-13T19:33:08Z",
+      "side": 1,
+      "message": "Assuming we\u0027re happy with the config, it will become the config that all tests run on. However, that will take a bit, so I\u0027ve marked this with KEEP.",
+      "parentUuid": "0103e4cb_437c92ef",
+      "revId": "5362bbb669d97666e8566f16c92db414d338756b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
