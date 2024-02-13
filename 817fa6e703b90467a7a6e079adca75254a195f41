@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23175afc_f7a46288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-13T16:42:21Z",
+      "side": 1,
+      "message": "That is non-trivial, since we have to rename the feature, and change all related backends. Probably we should design it carefully and then do it in right way in follow up CLs. At same time, we need a simple CL fixes the immediately crashes.",
+      "parentUuid": "05f43c16_c581b48d",
+      "revId": "817fa6e703b90467a7a6e079adca75254a195f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4174289d_4e75adb0",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 3
@@ -49,6 +67,30 @@
       "writtenOn": "2024-02-13T16:21:32Z",
       "side": 1,
       "message": "is this check effectively redundant with the check that the devices are the same, just below?",
+      "range": {
+        "startLine": 431,
+        "startChar": 12,
+        "endLine": 432,
+        "endChar": 57
+      },
+      "revId": "817fa6e703b90467a7a6e079adca75254a195f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14464ac1_f3798b16",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-13T16:42:21Z",
+      "side": 1,
+      "message": "Right now, chrome initializes ANGLE first, and then create graphite\u0027s dawn device with ANGLE\u0027s d3d11 device. Is this case, the `IsSharedD3D11Dewvice()` is true. \n\nThere could be use cases, dawn device is created first, and then someone uses the d3d11 device from the dawn device, in this case, `IsSharedD3D11Dewvice()` will be false. It prevent this use case. I think the current d3d11 backend doesn\u0027t support this case well, becasue dawn isn\u0027t ware the sharing, and it will not use d3d11 in threadsafe way. Maybe we can support that use case in future.",
+      "parentUuid": "4174289d_4e75adb0",
       "range": {
         "startLine": 431,
         "startChar": 12,
