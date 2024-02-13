@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "285247aa_69dbcba6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-02-13T14:38:58Z",
+      "side": 1,
+      "message": "Hey Corentin,\n\nAnother crack at this! Diff is https://dawn-review.googlesource.com/c/dawn/+/174780/1..6",
+      "revId": "68626b187d8539f737b60f67d1a8f57be75ca788",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
