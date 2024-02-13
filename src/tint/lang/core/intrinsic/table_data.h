@@ -46,7 +46,7 @@ struct TableData;
 namespace tint::core::intrinsic {
 
 /// An enumerator of index namespaces.
-enum class TableIndexNamespace {
+enum class TableIndexNamespace : uint8_t {
     kTemplateType,
     kTemplateNumber,
     kTypeMatcher,
@@ -141,7 +141,7 @@ using OverloadIndex = TableIndex<TableIndexNamespace::kOverload, uint16_t>;
 using ConstEvalFunctionIndex = TableIndex<TableIndexNamespace::kConstEvalFunction, uint8_t>;
 
 /// Unique flag bits for overloads
-enum class OverloadFlag {
+enum class OverloadFlag : uint8_t {
     kIsBuiltin,                 // The overload is a builtin ('fn')
     kIsOperator,                // The overload is an operator ('op')
     kIsConstructor,             // The overload is a value constructor ('ctor')
@@ -192,14 +192,14 @@ struct OverloadInfo {
     const OverloadFlags flags;
     /// Total number of parameters for the overload
     const uint8_t num_parameters;
-    /// Total number of template types for the overload
-    const uint8_t num_template_types;
-    /// Total number of template numbers for the overload
-    const uint8_t num_template_numbers;
+    /// Total number of implicit template types for the overload
+    const uint8_t num_implicit_template_types;
+    /// Total number of implicit template numbers for the overload
+    const uint8_t num_implicit_template_numbers;
     /// Index of the first template type in TableData::type_matchers
-    const TemplateTypeIndex template_types;
+    const TemplateTypeIndex implicit_template_types;
     /// Index of the first template number in TableData::number_matchers
-    const TemplateNumberIndex template_numbers;
+    const TemplateNumberIndex implicit_template_numbers;
     /// Index of the first parameter in TableData::parameters
     const ParameterIndex parameters;
     /// Index of a list of type matcher indices that are used to build the return type.
@@ -226,7 +226,7 @@ static constexpr IntrinsicInfo kNoOverloads{0, OverloadIndex(OverloadIndex::kInv
 /// * Valid   - a fixed integer value
 /// * Any     - matches any other non-invalid number
 class Number {
-    enum State {
+    enum State : uint8_t {
         kInvalid,
         kValid,
         kAny,
@@ -665,7 +665,7 @@ struct TemplateTypeMatcher {
         },
         /* string */
         [](MatchState* state) -> std::string {
-            return state->data[state->overload.template_types + INDEX].name;
+            return state->data[state->overload.implicit_template_types + INDEX].name;
         },
     };
 };
@@ -686,7 +686,7 @@ struct TemplateNumberMatcher {
         },
         /* string */
         [](MatchState* state) -> std::string {
-            return state->data[state->overload.template_numbers + INDEX].name;
+            return state->data[state->overload.implicit_template_numbers + INDEX].name;
         },
     };
 };

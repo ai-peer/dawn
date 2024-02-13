@@ -123,10 +123,10 @@ constexpr OverloadInfo kOverloads[] = {
     /* [0] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
-    /* template_types */ TemplateTypeIndex(/* invalid */),
-    /* template_numbers */ TemplateNumberIndex(/* invalid */),
+    /* num_implicit_template_types */ 0,
+    /* num_implicit_template_numbers */ 0,
+    /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
+    /* implict_template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(0),
     /* return_type_matcher_indices */ TypeMatcherIndicesIndex(/* invalid */),
     /* return_number_matcher_indices */ NumberMatcherIndicesIndex(/* invalid */),
@@ -151,8 +151,8 @@ constexpr IntrinsicInfo kBuiltins[] = {
 }  // anonymous namespace
 
 const core::intrinsic::TableData Dialect::kData{
-    /* template_types */ Empty,
-    /* template_numbers */ Empty,
+    /* implicit_template_types */ Empty,
+    /* implicit_template_numbers */ Empty,
     /* type_matcher_indices */ kTypeMatcherIndices,
     /* number_matcher_indices */ Empty,
     /* type_matchers */ kTypeMatchers,
