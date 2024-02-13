@@ -166,10 +166,6 @@ TEST_P(DepthBiasTests, PositiveBiasOnFloat) {
     // NVIDIA GPUs under Vulkan seem to be using a different scale than everyone else.
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia());
 
-    // OpenGL uses a different scale than the other APIs
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
-
     // Draw quad flat on z = 0.25 with 0.25 bias
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0, QuadAngle::Flat,
                      kPointTwoFiveBiasForPointTwoFiveZOnFloat, 0, 0);
@@ -212,9 +208,6 @@ TEST_P(DepthBiasTests, NegativeBiasOnFloat) {
 
     // NVIDIA GPUs seems to be using a different scale than everyone else
     DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia());
-
-    // OpenGL uses a different scale than the other APIs
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
 
     // Draw quad flat on z = 0.25 with -0.25 bias, depth clear of 0.125
     RunDepthBiasTest(wgpu::TextureFormat::Depth32Float, 0.125, QuadAngle::Flat,

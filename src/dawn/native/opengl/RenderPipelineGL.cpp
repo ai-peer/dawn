@@ -334,7 +334,7 @@ void RenderPipeline::ApplyNow(PersistentPipelineState& persistentPipelineState) 
 
     if (IsDepthBiasEnabled()) {
         gl.Enable(GL_POLYGON_OFFSET_FILL);
-        float depthBias = GetDepthBias();
+        float depthBias = GetDepthBias() * 0.5f;
         float slopeScale = GetDepthBiasSlopeScale();
         if (gl.PolygonOffsetClamp != nullptr) {
             gl.PolygonOffsetClamp(slopeScale, depthBias, GetDepthBiasClamp());
