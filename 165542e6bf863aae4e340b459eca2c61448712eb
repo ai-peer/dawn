@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe19792a_bec9df5d",
+        "filename": "src/tint/utils/diagnostic/source.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-13T18:53:07Z",
+      "side": 1,
+      "message": "Soon, with C++20, we\u0027ll be able to replace all this code with:\n```\nauto operator\u003c\u003d\u003e(const Location\u0026) const \u003d default;\n```",
+      "revId": "165542e6bf863aae4e340b459eca2c61448712eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
