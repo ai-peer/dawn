@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9d51d55_4fce61c7",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-13T14:40:01Z",
+      "side": 1,
+      "message": "I think this check is wrong. If `supportsSharedResourceCapabilityTier2 \u003d\u003d false`, we cannot import some video format via shared handle. I think other formats should still be fine. And at here, we don\u0027t know the texture\u0027s format before `OpenSharedResource1()` succeeds. However if `OpenSharedResource1()` succeeds, it is not necessary to check the supportsSharedResourceCapabilityTier2 anymore.",
+      "parentUuid": "b0699ef7_08cda17e",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58769891_97f3524e",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-13T07:43:12Z",
       "side": 1,
       "message": "Could we check this texture has the same underlying device as our device if !mIsSharedD3D11Device?",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "615fa20e_3ee71c10",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-13T14:40:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58769891_97f3524e",
       "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
