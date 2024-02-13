@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "5362bbb669d97666e8566f16c92db414d338756b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0103e4cb_437c92ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T19:30:34Z",
+      "side": 1,
+      "message": "are these new bots going to be added as optional trybots? we need to include them in rolls, or mark these expectations KEEP",
+      "revId": "5362bbb669d97666e8566f16c92db414d338756b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
