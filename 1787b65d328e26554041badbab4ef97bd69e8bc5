@@ -16,6 +16,57 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
       "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0699ef7_08cda17e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-13T07:43:12Z",
+      "side": 1,
+      "message": "This could be done by conditionally adding at [1] instead.",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58769891_97f3524e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-13T07:43:12Z",
+      "side": 1,
+      "message": "Could we check this texture has the same underlying device as our device if !mIsSharedD3D11Device?",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2230632_274afc13",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-13T07:43:12Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
