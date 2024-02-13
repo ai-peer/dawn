@@ -127,6 +127,7 @@ MaybeError Queue::SubmitPendingCommands() {
     if (!mPendingCommandsNeedSubmit.exchange(false, std::memory_order_acq_rel)) {
         return {};
     }
+    mPendingCommands.Use([](auto pendingCommands) { pendingCommands->OnSubmit(); });
     return NextSerial();
 }
 
@@ -210,7 +211,9 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     return completedSerial;
 }
 
-void Queue::ForceEventualFlushOfCommands() {}
+void Queue::ForceEventualFlushOfCommands() {
+    mPendingCommandsNeedSubmit.store(true, std::memory_order_release);
+}
 
 MaybeError Queue::WaitForIdleForDestruction() {
     DAWN_TRY(NextSerial());
