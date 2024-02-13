@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "529198db_61870849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-13T18:16:55Z",
+      "side": 1,
+      "message": "PTAL. This is the shape of the buffer sharing API I\u0027ve come up with. You\u0027ll notice this feature heavily copies portions of SharedTextureMemory. The feature is functionally complete and partially tested here: https://dawn-review.googlesource.com/c/dawn/+/171160. I\u0027ll continue splitting it into review sized chunks and refining things as we go.",
+      "revId": "2d9568bd96ec76f3e21f36faeae28bc238928ca3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
