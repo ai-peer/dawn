@@ -59,14 +59,16 @@ class CommandRecordingContext {
 
     void AddToTempBuffers(Ref<Buffer> tempBuffer);
 
+    MaybeError AcquireKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgikeyedMutex);
+
   private:
     ComPtr<ID3D12GraphicsCommandList> mD3d12CommandList;
     ComPtr<ID3D12GraphicsCommandList4> mD3d12CommandList4;
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
     absl::flat_hash_set<Texture*> mSharedTextures;
+    absl::flat_hash_set<ComPtr<IDXGIKeyedMutex>> mAcquiredKeyedMutexes;
     std::vector<Heap*> mHeapsPendingUsage;
-
     std::vector<Ref<Buffer>> mTempBuffers;
 };
 }  // namespace dawn::native::d3d12

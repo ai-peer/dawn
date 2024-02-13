@@ -463,8 +463,15 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
-                                                        textureDescriptor);
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+    d3d11Resource.As(&dxgiKeyedMutex);
+
+    return std::make_unique<d3d::ExternalImageDXGIImpl>(
+        this, std::move(d3d11Resource), std::move(dxgiKeyedMutex), textureDescriptor);
+}
+
+void Device::DisposeKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) {
+    // Nothing to do, the ComPtr will release the keyed mutex.
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {

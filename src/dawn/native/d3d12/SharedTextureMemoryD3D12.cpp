@@ -45,9 +45,9 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     DAWN_INVALID_IF(descriptor->handle == nullptr, "shared HANDLE is missing.");
 
     ComPtr<ID3D12Resource> d3d12Resource;
-    DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->OpenSharedHandle(descriptor->handle,
-                                                                     IID_PPV_ARGS(&d3d12Resource)),
-                          "D3D12 open shared handle"));
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+    DAWN_TRY(device->ImportSharedHandleResource(descriptor->handle, descriptor->useKeyedMutex,
+                                                d3d12Resource, dxgiKeyedMutex));
 
     D3D12_RESOURCE_DESC desc = d3d12Resource->GetDesc();
     DAWN_INVALID_IF(desc.Dimension != D3D12_RESOURCE_DIMENSION_TEXTURE2D,
@@ -91,8 +91,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                        wgpu::TextureUsage::TextureBinding | storageBindingUsage |
                        renderAttachmentUsage;
 
-    auto result =
-        AcquireRef(new SharedTextureMemory(device, label, properties, std::move(d3d12Resource)));
+    auto result = AcquireRef(new SharedTextureMemory(
+        device, label, properties, std::move(d3d12Resource), std::move(dxgiKeyedMutex)));
     result->Initialize();
     return result;
 }
@@ -100,16 +100,24 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
 SharedTextureMemory::SharedTextureMemory(Device* device,
                                          const char* label,
                                          SharedTextureMemoryProperties properties,
-                                         ComPtr<ID3D12Resource> resource)
-    : d3d::SharedTextureMemory(device, label, properties), mResource(std::move(resource)) {}
+                                         ComPtr<ID3D12Resource> resource,
+                                         ComPtr<IDXGIKeyedMutex> keyedMutex)
+    : d3d::SharedTextureMemory(device, label, properties),
+      mResource(std::move(resource)),
+      mKeyedMutex(std::move(keyedMutex)) {}
 
 void SharedTextureMemory::DestroyImpl() {
     ToBackend(GetDevice())->ReferenceUntilUnused(std::move(mResource));
     mResource = nullptr;
+    mKeyedMutex = nullptr;
 }
 
 ID3D12Resource* SharedTextureMemory::GetD3DResource() const {
     return mResource.Get();
+}
+
+IDXGIKeyedMutex* SharedTextureMemory::GetKeyedMutex() const {
+    return mKeyedMutex.Get();
 }
 
 ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(

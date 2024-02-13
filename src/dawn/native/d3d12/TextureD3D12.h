@@ -42,7 +42,6 @@
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
-
 class SharedTextureMemory;
 class CommandRecordingContext;
 class Device;
@@ -59,6 +58,7 @@ class Texture final : public d3d::Texture {
         Device* device,
         const UnpackedPtr<TextureDescriptor>& descriptor,
         ComPtr<IUnknown> d3dTexture,
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
         std::vector<FenceAndSignalValue> waitFences,
         bool isSwapChainTexture,
         bool isInitialized);
@@ -92,7 +92,7 @@ class Texture final : public d3d::Texture {
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
-    MaybeError SynchronizeTextureBeforeUse();
+    MaybeError SynchronizeTextureBeforeUse(CommandRecordingContext* commandContext);
 
     void NotifySwapChainPresentToPIX();
 
@@ -121,6 +121,7 @@ class Texture final : public d3d::Texture {
 
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                           ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                            std::vector<FenceAndSignalValue> waitFences,
                                            bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
@@ -159,6 +160,8 @@ class Texture final : public d3d::Texture {
 
     D3D12_RESOURCE_FLAGS mD3D12ResourceFlags;
     ResourceHeapAllocation mResourceAllocation;
+
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
 
     // TODO(crbug.com/1515640): Remove these once Chromium has migrated to SharedTextureMemory.
     std::vector<FenceAndSignalValue> mWaitFences;

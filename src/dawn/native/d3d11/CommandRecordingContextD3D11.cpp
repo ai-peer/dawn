@@ -246,11 +246,18 @@ void CommandRecordingContext::Release() {
         mIsOpen = false;
         mUniformBuffer = nullptr;
         mDevice = nullptr;
+
+        for (auto& dxgikeyedMutex : mAcquiredKeyedMutexes) {
+            dxgikeyedMutex->ReleaseSync(d3d::kDXGIKeyedMutexAcquireKey);
+        }
+        mAcquiredKeyedMutexes.clear();
+
         ID3D11Buffer* nullBuffer = nullptr;
         mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
                                                    &nullBuffer);
         mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
                                                    &nullBuffer);
+
         mD3D11DeviceContextState = nullptr;
         mD3D11DeviceContext4 = nullptr;
         mD3D11Device = nullptr;

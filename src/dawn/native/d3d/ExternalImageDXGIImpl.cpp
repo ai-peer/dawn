@@ -62,9 +62,11 @@ MaybeError ValidateTextureDescriptorCanBeWrapped(const UnpackedPtr<TextureDescri
 ExternalImageDXGIImpl::ExternalImageDXGIImpl(
     Device* backendDevice,
     ComPtr<IUnknown> d3dResource,
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
     const UnpackedPtr<TextureDescriptor>& textureDescriptor)
     : mBackendDevice(backendDevice),
       mD3DResource(std::move(d3dResource)),
+      mDXGIKeyedMutex(std::move(dxgiKeyedMutex)),
       mUsage(textureDescriptor->usage),
       mDimension(textureDescriptor->dimension),
       mSize(textureDescriptor->size),
