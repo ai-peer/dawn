@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "dawn/native/D3DBackend.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
@@ -125,6 +126,16 @@ MaybeError ScopedCommandRecordingContext::FlushUniformBuffer() const {
         DAWN_TRY(Get()->mUniformBuffer->Write(this, 0, Get()->mUniformBufferData.data(),
                                               Get()->mUniformBufferData.size() * sizeof(uint32_t)));
         Get()->mUniformBufferDirty = false;
+    }
+    return {};
+}
+
+MaybeError ScopedCommandRecordingContext::AcquireKeyedMutex(
+    ComPtr<IDXGIKeyedMutex> dxgikeyedMutex) const {
+    if (!Get()->mAcquiredKeyedMutexes.contains(dxgikeyedMutex)) {
+        DAWN_TRY(CheckHRESULT(dxgikeyedMutex->AcquireSync(d3d::kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Failed to acquire keyed mutex for external image"));
+        Get()->mAcquiredKeyedMutexes.emplace(std::move(dxgikeyedMutex));
     }
     return {};
 }
@@ -244,6 +255,13 @@ void CommandRecordingContext::Release() {
         mD3D11DeviceContext4 = nullptr;
         mD3D11Device = nullptr;
     }
+}
+
+void CommandRecordingContext::OnSubmit() {
+    for (auto& dxgikeyedMutex : mAcquiredKeyedMutexes) {
+        dxgikeyedMutex->ReleaseSync(d3d::kDXGIKeyedMutexAcquireKey);
+    }
+    mAcquiredKeyedMutexes.clear();
 }
 
 }  // namespace dawn::native::d3d11

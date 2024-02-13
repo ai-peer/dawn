@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "absl/container/flat_hash_set.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
@@ -78,6 +79,7 @@ class CommandRecordingContext {
     void SetInternalUniformBuffer(Ref<BufferBase> uniformBuffer);
 
     void Release();
+    void OnSubmit();
 
   private:
     template <typename Ctx, typename Traits>
@@ -99,6 +101,8 @@ class CommandRecordingContext {
     Ref<Buffer> mUniformBuffer;
     std::array<uint32_t, kMaxNumBuiltinElements> mUniformBufferData;
     bool mUniformBufferDirty = true;
+
+    absl::flat_hash_set<ComPtr<IDXGIKeyedMutex>> mAcquiredKeyedMutexes;
 
     Ref<Device> mDevice;
 };
@@ -145,6 +149,8 @@ class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
     // Write the built-in variable value to the uniform buffer.
     void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
     MaybeError FlushUniformBuffer() const;
+
+    MaybeError AcquireKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgikeyedMutex) const;
 };
 
 // For using ID3D11DeviceContext directly. It swaps and resets ID3DDeviceContextState of
