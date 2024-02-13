@@ -417,6 +417,10 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
     ComPtr<ID3D11Resource> d3d11Resource;
     switch (descriptor->GetType()) {
         case ExternalImageType::DXGISharedHandle: {
+            DAWN_INVALID_IF(!ToBackend(GetPhysicalDevice())
+                                 ->GetDeviceInfo()
+                                 .supportsSharedResourceCapabilityTier2,
+                            "D3D11 doesn't support shared resource capability tier 2.");
             const auto* sharedHandleDescriptor =
                 static_cast<const d3d::ExternalImageDescriptorDXGISharedHandle*>(descriptor);
             DAWN_TRY(CheckHRESULT(

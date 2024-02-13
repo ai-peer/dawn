@@ -192,8 +192,9 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
     EnableFeature(Feature::AdapterPropertiesD3D);
 
-    // To import multi planar textures, we need to at least tier 2 support.
-    if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
+    // To import multi planar textures, we need to at least tier 2 support. ow with shared d3d11
+    // device.
+    if (mDeviceInfo.supportsSharedResourceCapabilityTier2 || mIsSharedD3D11Device) {
         EnableFeature(Feature::DawnMultiPlanarFormats);
         EnableFeature(Feature::MultiPlanarFormatP010);
         EnableFeature(Feature::MultiPlanarRenderTargets);
