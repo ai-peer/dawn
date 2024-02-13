@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05f43c16_c581b48d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T16:25:01Z",
+      "side": 1,
+      "message": "otherwise, I think you *do* need the check discussed at [here](https://dawn-review.googlesource.com/c/dawn/+/174722/comment/b0699ef7_08cda17e/) for multiplanar formats. and that would be a poor design since it\u0027s not discoverable whether shared handle works for multiplanar until you try to do it and it fails.",
+      "parentUuid": "c6a59ae6_f33683d2",
+      "revId": "817fa6e703b90467a7a6e079adca75254a195f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4174289d_4e75adb0",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 3
