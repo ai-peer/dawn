@@ -117,6 +117,30 @@
       },
       "revId": "817fa6e703b90467a7a6e079adca75254a195f41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09898c6f_fc479399",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-13T18:03:24Z",
+      "side": 1,
+      "message": "ok, but this problem will be fixed if correctly expose the multiplanar formats instead of putting it behind `mDeviceInfo.supportsSharedResourceCapabilityTier2 || mIsSharedD3D11Device`, right? Fixed as in we don\u0027t need the check. The only thing that actually matters is the devices are the same here.\n\ndo we need the same change in d3d11::SharedTextureMemory ?",
+      "parentUuid": "14464ac1_f3798b16",
+      "range": {
+        "startLine": 431,
+        "startChar": 12,
+        "endLine": 432,
+        "endChar": 57
+      },
+      "revId": "817fa6e703b90467a7a6e079adca75254a195f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
