@@ -33,6 +33,41 @@
       "message": "did we evaluate if the problems it was originally disabled for are fixed?",
       "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46081434_676be767",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-13T20:16:49Z",
+      "side": 1,
+      "message": "+bajones, as current gardener, FYI",
+      "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eec524b_397ab3a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-13T20:16:49Z",
+      "side": 1,
+      "message": "No. It may still exceed the Android size bot\u0027s maximum APK size change. However, Ben\u0027s change did reduce the size of Tint\u0027s hashmap implementation significantly, which was a large chunk of the original delta.\n\nI would like to land this and let the roll try it. If the roll fails, we\u0027ll have a more accurate value of the size delta we can take to the PM folks.",
+      "parentUuid": "46e59dfc_8e7d5782",
+      "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
