@@ -34,12 +34,16 @@
 #                       Do not modify this file directly
 ################################################################################
 
-include(cmd/bench/BUILD.cmake)
-include(cmd/common/BUILD.cmake)
-include(cmd/fuzz/BUILD.cmake)
-include(cmd/info/BUILD.cmake)
-include(cmd/loopy/BUILD.cmake)
-include(cmd/remote_compile/BUILD.cmake)
-include(cmd/test/BUILD.cmake)
-include(cmd/tint/BUILD.cmake)
-include(cmd/tintd/BUILD.cmake)
+if(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
+################################################################################
+# Target:    tint_cmd_tintd_cmd
+# Kind:      cmd
+# Condition: TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER
+################################################################################
+tint_add_target(tint_cmd_tintd_cmd cmd
+  cmd/tintd/main.cc
+)
+
+tint_target_set_output_name(tint_cmd_tintd_cmd cmd "tintd")
+
+endif(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
