@@ -86,6 +86,24 @@
       "parentUuid": "2eec524b_397ab3a0",
       "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fffef77_05571009",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-13T22:42:45Z",
+      "side": 1,
+      "message": "Yeah, I haven\u0027t done a DEPS \"roll\" with an unlanded change in many moons, so I was kind of avoiding it.\n\nBut it looks like it\u0027s pretty easy now (assuming I\u0027m doing it right): https://chromium-review.googlesource.com/c/chromium/src/+/5291844\n\nEither way, I\u0027ll definitely wait until the actual Dawn-into-Chromium roll succeeds before landing anything.",
+      "parentUuid": "e56a2685_5fcd3bd3",
+      "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
