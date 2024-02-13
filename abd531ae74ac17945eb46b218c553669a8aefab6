@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb9d6fec_0ecbd384",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-13T15:13:55Z",
+      "side": 1,
+      "message": "FYI, I suspect releasing keyed mutex will forcing an extra command buffer flushing. So maybe tighten the keyed mutex scoped will hurt performance, especially the shared texture is used multiple times in one shared image access scope.\n\nWhat\u0027s the use cases of concurrent access? Are the concurrent accesses on different d3d11 device? Are those access on different threads?",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "51968e41_0114f735",
