@@ -35,12 +35,7 @@
 #include "src/tint/lang/core/intrinsic/table_data.h"
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/void.h"
-#include "src/tint/utils/containers/hashmap.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/macros/scoped_assignment.h"
-#include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/math/math.h"
-#include "src/tint/utils/rtti/switch.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::core::intrinsic {
@@ -296,7 +291,8 @@ Candidate ScoreOverload(Context& context,
 
     if (score == 0) {
         // Check that all of the template arguments provided are actually expected by the overload.
-        size_t expected_templates = overload.num_template_types + overload.num_template_numbers;
+        size_t expected_templates =
+            overload.num_implicit_template_types + overload.num_implicit_template_numbers;
         size_t provided_templates = in_templates.Count();
         if (provided_templates > expected_templates) {
             score += kMismatchedTemplateCountPenalty * (provided_templates - expected_templates);
@@ -332,9 +328,9 @@ Candidate ScoreOverload(Context& context,
         // `score` is incremented. If the template type *does* match a type, then the template type
         // is replaced with the first matching type. The order of types in the template matcher is
         // important here, which can be controlled with the [[precedence(N)]] decorations on the
-        // types in intrinsics.def.
-        for (size_t ot = 0; ot < overload.num_template_types; ot++) {
-            auto* matcher_idx = &context.data[overload.template_types + ot].matcher_index;
+        // types in the def file.
+        for (size_t ot = 0; ot < overload.num_implicit_template_types; ot++) {
+            auto* matcher_idx = &context.data[overload.implicit_template_types + ot].matcher_index;
             if (matcher_idx->IsValid()) {
                 if (auto* type = templates.Type(ot)) {
                     if (auto* ty = Match(context, templates, overload, matcher_idx, nullptr,
@@ -356,8 +352,9 @@ Candidate ScoreOverload(Context& context,
         // Unlike template types, numbers are not constrained, so we're just checking that the
         // inferred number matches the constraints on the overload. Increments `score` if the
         // template numbers do not match their constraint matchers.
-        for (size_t on = 0; on < overload.num_template_numbers; on++) {
-            auto* matcher_idx = &context.data[overload.template_numbers + on].matcher_index;
+        for (size_t on = 0; on < overload.num_implicit_template_numbers; on++) {
+            auto* matcher_idx =
+                &context.data[overload.implicit_template_numbers + on].matcher_index;
             if (matcher_idx->IsValid()) {
                 auto number = templates.Num(on);
                 if (!number.IsValid() ||
@@ -476,7 +473,7 @@ void PrintOverload(StringStream& ss,
     ss << intrinsic_name;
 
     bool print_template_type = false;
-    if (overload.num_template_types > 0) {
+    if (overload.num_implicit_template_types > 0) {
         if (overload.flags.Contains(OverloadFlag::kIsConverter)) {
             // Print for conversions
             // e.g. vec3<T>(vec3<U>) -> vec3<f32>
@@ -490,7 +487,7 @@ void PrintOverload(StringStream& ss,
     }
     if (print_template_type) {
         ss << "<";
-        ss << context.data[overload.template_types].name;
+        ss << context.data[overload.implicit_template_types].name;
         ss << ">";
     }
     ss << "(";
@@ -521,8 +518,8 @@ void PrintOverload(StringStream& ss,
         ss << (first ? "  where: " : ", ");
         first = false;
     };
-    for (size_t i = 0; i < overload.num_template_types; i++) {
-        auto& template_type = context.data[overload.template_types + i];
+    for (size_t i = 0; i < overload.num_implicit_template_types; i++) {
+        auto& template_type = context.data[overload.implicit_template_types + i];
         if (template_type.matcher_index.IsValid()) {
             separator();
             ss << template_type.name;
@@ -532,8 +529,8 @@ void PrintOverload(StringStream& ss,
                       .TypeName();
         }
     }
-    for (size_t i = 0; i < overload.num_template_numbers; i++) {
-        auto& template_number = context.data[overload.template_numbers + i];
+    for (size_t i = 0; i < overload.num_implicit_template_numbers; i++) {
+        auto& template_number = context.data[overload.implicit_template_numbers + i];
         if (template_number.matcher_index.IsValid()) {
             separator();
             ss << template_number.name;

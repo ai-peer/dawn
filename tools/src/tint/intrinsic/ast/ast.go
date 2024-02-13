@@ -146,13 +146,13 @@ const (
 
 // IntrinsicDecl describes a builtin or operator declaration
 type IntrinsicDecl struct {
-	Source         tok.Source
-	Kind           IntrinsicKind
-	Name           string
-	Attributes     Attributes
-	TemplateParams TemplateParams
-	Parameters     Parameters
-	ReturnType     *TemplatedName
+	Source                 tok.Source
+	Kind                   IntrinsicKind
+	Name                   string
+	Attributes             Attributes
+	ImplicitTemplateParams TemplateParams
+	Parameters             Parameters
+	ReturnType             *TemplatedName
 }
 
 // Format implements the fmt.Formatter interface
@@ -168,7 +168,7 @@ func (i IntrinsicDecl) Format(w fmt.State, verb rune) {
 		fmt.Fprintf(w, "conv ")
 	}
 	fmt.Fprintf(w, "%v", i.Name)
-	i.TemplateParams.Format(w, verb)
+	i.ImplicitTemplateParams.Format(w, verb)
 	i.Parameters.Format(w, verb)
 	if i.ReturnType != nil {
 		fmt.Fprintf(w, " -> ")
