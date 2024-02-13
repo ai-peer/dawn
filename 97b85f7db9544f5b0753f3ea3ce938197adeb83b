@@ -16,6 +16,40 @@
       "message": "For posterity: I just noticed that my update to this text was sadly overwritten when I uploaded a new PS. This is not what this CL is doing - instead, it is avoiding changing the Vulkan backend at all, i.e., it still always sets the backend labels and uses the user-defined labels for doing so based on the toggle.",
       "revId": "97b85f7db9544f5b0753f3ea3ce938197adeb83b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ef6cc7d_89b224ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-02-13T17:35:20Z",
+      "side": 1,
+      "message": "Thanks for updating and re-landing! I appreciate it, and apologize for the inconvenience.\n\nIn related good news we were also able to pretty conclusively show that this patch wasn\u0027t causing the Dawn-\u003eChromium roll to fail, so that\u0027s nice.",
+      "revId": "97b85f7db9544f5b0753f3ea3ce938197adeb83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7bb1e8e_3082ccee",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-02-13T17:35:20Z",
+      "side": 1,
+      "message": "Thank you for the explanatory comment!",
+      "revId": "97b85f7db9544f5b0753f3ea3ce938197adeb83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
