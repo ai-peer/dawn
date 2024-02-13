@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b9783f7e_be46a8bb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-13T21:36:19Z",
+      "side": 1,
+      "message": "Discussed this offline, but tl;dr - the concurrent access is needed for video capture (camera) process textures which use keyed mutex and can be shared between multiple components (renderer processes, webgl, webgpu, compositor) and there\u0027s no guarantee how long a component will hold on to a scoped access.",
+      "parentUuid": "cb9d6fec_0ecbd384",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 70
+      },
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "51968e41_0114f735",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -126,6 +150,24 @@
       "side": 1,
       "message": "your proposal still puts duplicate entries in the vector though if you use the same texture twice, and we have to refcount the acquires.\n\nwhy doesn\u0027t storing a map on the command context work for D3D11? while there are many scoped uses here, we don\u0027t need to begin/end all the scopes this often to be correct. it should be sufficient for all of them to acquire the keyed mutex if it has not been already, and then when the command context is submitted, release all of them at once. I believe it only needs to be at the granularity of queue submit (or write texture)",
       "parentUuid": "93db04aa_96c7d980",
+      "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19212587_704705fc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-13T21:36:19Z",
+      "side": 1,
+      "message": "I\u0027ve incorporated your suggestion by having Texture::SynchronizeTextureBeforeUse enqueue the keyed mutex with CommandRecordingContext which will check if the keyed mutex is already acquired, acquire it if it\u0027s not, and then release it on submit. I agree that it\u0027s quite a bit simpler this way.",
+      "parentUuid": "5b508253_0569b337",
       "revId": "abd531ae74ac17945eb46b218c553669a8aefab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
