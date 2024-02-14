@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00cd142e_c1418ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-14T00:27:41Z",
+      "side": 1,
+      "message": "For the first one, I think we resolved that if we assert/check/dcheck that maxBufferSize \u003c\u003d 8gig if ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation is true that would solve it.  \n\nFor the 2nd. The code already validates that indexBufferOffset is valid and it validates that firstIndex as is is valid. So, it already is checking that firstIndex + indexBufferOffset / elementSize don\u0027t reach past the end of the buffer\n\nI think you need \u003e 4gig buffer to overflow\n\nOn a 4gig buffer your max index_buffer_offset is 0xFFFFFFFE. That gets written as 0x7FFFFFFF to later add to firstIndex. The highest firstIndex you can set is 0x7FFFFFFF as anything higher will fail existing validation.\n\nSo, maybe we should ask for a 4gig maxBufferSize limit. I can\u0027t write a test that requires a 4gig buffer.",
+      "parentUuid": "c1816a34_c1dddda2",
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "147fe37b_b037ea64",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 2
@@ -66,6 +84,30 @@
       "writtenOn": "2024-02-12T19:25:19Z",
       "side": 1,
       "message": "```suggestion\n                // This is only used in the GL backend\n```",
+      "range": {
+        "startLine": 443,
+        "startChar": 47,
+        "endLine": 443,
+        "endChar": 53
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "933dc9a1_61bc98a9",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-14T00:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "147fe37b_b037ea64",
       "range": {
         "startLine": 443,
         "startChar": 47,
@@ -101,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d057b8d_1542d694",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-14T00:27:41Z",
+      "side": 1,
+      "message": "We can. There are several cases\n\n1. You want compat for the Web.\n\n   In this case, validation is on so we kind of get this for free\n   \n2. You want compat for Graphite\n\n   In this case, we don\u0027t want the validation because it\u0027s slow, \n   we just want to tell them don\u0027t set indexBufferOffset !\u003d 0\n   \n3. You want compat, no validation but still emu this (who wants that?)\n\n   In this case we could force validation on\n   \nI\u0027m not sure what\u0027s the \"Dawn\" thing to do here. I thought about making not making the GL version say it needs ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation and from outside we could set that flag, I just worry it would be lost (someone would forget to set it). So rather I put it in the GL backend, and then deal with it here by saying \"if validation is off then index buffer offset must be 0\"\n\nDo you have a preference?",
+      "parentUuid": "28fa2516_f6e269dd",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 68
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "181a6531_3154cba6",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 2
@@ -112,6 +178,30 @@
       "writtenOn": "2024-02-12T19:25:19Z",
       "side": 1,
       "message": "unit: reflow the string",
+      "range": {
+        "startLine": 527,
+        "startChar": 16,
+        "endLine": 529,
+        "endChar": 15
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf65127_4be625ed",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-14T00:27:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "181a6531_3154cba6",
       "range": {
         "startLine": 527,
         "startChar": 16,
