@@ -230,7 +230,7 @@ func (p *parser) builtinDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Name:       string(name.Runes),
 	}
 	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
+		f.ImplicitTemplateParams = p.templateParams()
 	}
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
@@ -250,7 +250,7 @@ func (p *parser) operatorDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Name:       string(name.Runes),
 	}
 	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
+		f.ImplicitTemplateParams = p.templateParams()
 	}
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
@@ -270,7 +270,7 @@ func (p *parser) constructorDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Name:       string(name.Runes),
 	}
 	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
+		f.ImplicitTemplateParams = p.templateParams()
 	}
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
@@ -290,7 +290,7 @@ func (p *parser) converterDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Name:       string(name.Runes),
 	}
 	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
+		f.ImplicitTemplateParams = p.templateParams()
 	}
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
