@@ -77,7 +77,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-02-08 07:09:59AM
+# Last rolled: 2024-02-14 05:07:12AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -796,8 +796,8 @@ crbug.com/dawn/2406 [ mac ] webgpu:web_platform,copyToTexture,canvas:copy_conten
 # All snapshot modes with "premultiplied" fail with precision issues on the blue channel on Win Intel.
 # KEEP
 ################################################################################
-crbug.com/dawn/2407 [ win intel ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:* [ Failure ]
-crbug.com/dawn/2407 [ win intel ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:* [ Failure ]
+crbug.com/dawn/2407 [ intel win ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:* [ Failure ]
+crbug.com/dawn/2407 [ intel win ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:* [ Failure ]
 
 ################################################################################
 # Failures in color_space_conversions on macOS, needs to be investigated.
@@ -810,7 +810,7 @@ crbug.com/dawn/0000 [ mac ] webgpu:util,texture,color_space_conversions:* [ Fail
 # The keep can be removed once this config is promoted to stable.
 # KEEP
 ################################################################################
-crbug.com/dawn/2408 [ win10 nvidia-0x2184 nvidia_ge_31.0.15.4601 ] webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes:initMethod="WriteTexture";checkMethod="PartialCopyT2B";* [ Failure ]
+crbug.com/dawn/2408 [ nvidia-0x2184 nvidia_ge_31.0.15.4601 win10 ] webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes:initMethod="WriteTexture";checkMethod="PartialCopyT2B";* [ Failure ]
 
 ################################################################################
 # Flip video tests failing
@@ -1279,7 +1279,6 @@ crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-3
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,functions,alias_analysis:two_pointers_to_struct_members:address_space="workgroup";member="b";aliased=false [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,functions,alias_analysis:two_pointers_to_struct_members:address_space="workgroup";member="b";aliased=false [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,functions,alias_analysis:two_pointers_to_struct_members_indirect:address_space="function";member="b";aliased=false [ RetryOnFailure ]
-
 
 ################################################################################
 # New flakes. Please triage:
