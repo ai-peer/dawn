@@ -134,6 +134,30 @@
       },
       "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b18161fe_3e784d78",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-14T16:12:43Z",
+      "side": 1,
+      "message": "I\u0027ll move these back to wip and see if i can figure it out.",
+      "parentUuid": "d2802d15_d296bce6",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 40
+      },
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
