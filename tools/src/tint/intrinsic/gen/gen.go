@@ -106,13 +106,17 @@ type Parameter struct {
 type Overload struct {
 	// Total number of parameters for the overload
 	NumParameters int
-	// Total number of template types for the overload
-	NumTemplateTypes int
-	// Total number of template numbers for the overload
-	NumTemplateNumbers int
+	// Total number of explicit template types for the overload
+	NumExplicitTemplateTypes int
+	// Total number of implicit template types for the overload
+	NumImplicitTemplateTypes int
+	// Total number of implicit template numbers for the overload
+	NumImplicitTemplateNumbers int
 	// Index to the first template type in IntrinsicTable.TemplateTypes
+	// This is a list of template types starting with the explicit template
+	// types, then the implicit template types
 	TemplateTypesOffset int
-	// Index to the first template number in IntrinsicTable.TemplateNumbers
+	// Index to the firsttemplate number in IntrinsicTable.TemplateNumbers
 	TemplateNumbersOffset int
 	// Index to the first parameter in IntrinsicTable.Parameters
 	ParametersOffset int
@@ -179,8 +183,10 @@ type overloadBuilder struct {
 	// Maps TemplateParam to index in templateNumbers
 	templateNumberIndex map[sem.TemplateParam]int
 	// Template types used by the overload
+	// This is a list of explicit template types followed by the implicit template types.
 	templateTypes []TemplateType
 	// Index to the first template type in IntrinsicTable.TemplateTypes
+	// This is a list of explicit template types followed by the implicit template types.
 	templateTypesOffset *int
 	// Template numbers used by the overload
 	templateNumbers []TemplateNumber
@@ -238,54 +244,59 @@ func (b *IntrinsicTableBuilder) newOverloadBuilder(o *sem.Overload) *overloadBui
 // - Must be called before any LUTs are compacted.
 // Populates:
 // - b.templateTypes
-// - b.templateTypesOffset
 // - b.templateNumbers
-// - b.templateNumbersOffset
+// - b.explicitTemplateTypesOffset
+// - b.implicitTemplateTypesOffset
+// - b.implicitTemplateNumbersOffset
 // - b.parameterBuilders
 // - b.returnTypeMatcherIndicesOffset
 // - b.returnNumberMatcherIndicesOffset
 // - b.constEvalFunctionOffset
 func (b *overloadBuilder) processStage0() error {
-	b.templateTypes = make([]TemplateType, len(b.overload.TemplateTypes))
-	for i, t := range b.overload.TemplateTypes {
-		b.templateTypeIndex[t] = i
-		matcherIndex := -1
-		if t.Type != nil {
-			tys, nums, err := b.matcherIndices(t.Type)
-			if err != nil {
-				return err
+	b.templateTypes = make([]TemplateType, 0, len(b.overload.ExplicitTemplates.Types)+len(b.overload.ImplicitTemplates.Types))
+	b.templateNumbers = make([]TemplateNumber, 0, len(b.overload.ExplicitTemplates.Numbers)+len(b.overload.ImplicitTemplates.Numbers))
+	for _, templates := range []sem.IntrinsicTemplates{
+		b.overload.ExplicitTemplates,
+		b.overload.ImplicitTemplates,
+	} {
+		for _, t := range templates.Types {
+			b.templateTypeIndex[t] = len(b.templateTypes)
+			matcherIndex := -1
+			if t.Type != nil {
+				tys, nums, err := b.matcherIndices(t.Type)
+				if err != nil {
+					return err
+				}
+				if len(tys) != 1 || len(nums) != 0 {
+					panic("unexpected result of matcherIndices()")
+				}
+				matcherIndex = tys[0]
 			}
-			if len(tys) != 1 || len(nums) != 0 {
-				panic("unexpected result of matcherIndices()")
-			}
-			matcherIndex = tys[0]
+			b.templateTypes = append(b.templateTypes, TemplateType{
+				Name:         t.Name,
+				MatcherIndex: matcherIndex,
+			})
 		}
-		b.templateTypes[i] = TemplateType{
-			Name:         t.Name,
-			MatcherIndex: matcherIndex,
+		for _, t := range templates.Numbers {
+			b.templateNumberIndex[t] = len(b.templateNumbers)
+			matcherIndex := -1
+			if e, ok := t.(*sem.TemplateEnumParam); ok && e.Matcher != nil {
+				tys, nums, err := b.matcherIndices(e.Matcher)
+				if err != nil {
+					return err
+				}
+				if len(tys) != 0 || len(nums) != 1 {
+					panic("unexpected result of matcherIndices()")
+				}
+				matcherIndex = nums[0]
+			}
+			b.templateNumbers = append(b.templateNumbers, TemplateNumber{
+				Name:         t.GetName(),
+				MatcherIndex: matcherIndex,
+			})
 		}
 	}
 	b.templateTypesOffset = b.lut.templateTypes.Add(b.templateTypes)
-
-	b.templateNumbers = make([]TemplateNumber, len(b.overload.TemplateNumbers))
-	for i, t := range b.overload.TemplateNumbers {
-		b.templateNumberIndex[t] = i
-		matcherIndex := -1
-		if e, ok := t.(*sem.TemplateEnumParam); ok && e.Matcher != nil {
-			tys, nums, err := b.matcherIndices(e.Matcher)
-			if err != nil {
-				return err
-			}
-			if len(tys) != 0 || len(nums) != 1 {
-				panic("unexpected result of matcherIndices()")
-			}
-			matcherIndex = nums[0]
-		}
-		b.templateNumbers[i] = TemplateNumber{
-			Name:         t.GetName(),
-			MatcherIndex: matcherIndex,
-		}
-	}
 	b.templateNumbersOffset = b.lut.templateNumbers.Add(b.templateNumbers)
 
 	if b.overload.ReturnType != nil {
@@ -342,8 +353,9 @@ func (b *overloadBuilder) processStage1() error {
 func (b *overloadBuilder) build() (Overload, error) {
 	return Overload{
 		NumParameters:                    len(b.parameterBuilders),
-		NumTemplateTypes:                 len(b.templateTypes),
-		NumTemplateNumbers:               len(b.templateNumbers),
+		NumExplicitTemplateTypes:         len(b.overload.ExplicitTemplates.Types),
+		NumImplicitTemplateTypes:         len(b.overload.ImplicitTemplates.Types),
+		NumImplicitTemplateNumbers:       len(b.overload.ImplicitTemplates.Numbers),
 		TemplateTypesOffset:              loadOrMinusOne(b.templateTypesOffset),
 		TemplateNumbersOffset:            loadOrMinusOne(b.templateNumbersOffset),
 		ParametersOffset:                 loadOrMinusOne(b.parametersOffset),

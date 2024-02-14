@@ -174,8 +174,9 @@ constexpr OverloadInfo kOverloads[] = {
 {{-   if $o.IsDeprecated}}, OverloadFlag::kIsDeprecated{{end -}}
     ),
     /* num_parameters */ {{$o.NumParameters}},
-    /* num_template_types */ {{$o.NumTemplateTypes}},
-    /* num_template_numbers */ {{$o.NumTemplateNumbers}},
+    /* num_explicit_template_types   */ {{$o.NumExplicitTemplateTypes}},
+    /* num_implicit_template_types   */ {{$o.NumImplicitTemplateTypes}},
+    /* num_implicit_template_numbers */ {{$o.NumImplicitTemplateNumbers}},
     /* template_types */
 {{-   if ge $o.TemplateTypesOffset 0 }} TemplateTypeIndex({{$o.TemplateTypesOffset}})
 {{-   else                           }} TemplateTypeIndex(/* invalid */)

@@ -759,21 +759,26 @@ TEST_F(WgslIntrinsicTableTest, MismatchTypeInitializerImplicit) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3(i32, f32, i32)
 
-7 candidate constructors:
+12 candidate constructors:
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(vec3<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
   vec3() -> vec3<abstract-int>
   vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
 )");
 }
 
@@ -786,21 +791,26 @@ TEST_F(WgslIntrinsicTableTest, MismatchTypeInitializerExplicit) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<i32>(i32, f32, i32)
 
-7 candidate constructors:
+12 candidate constructors:
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(vec3<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
   vec3() -> vec3<abstract-int>
   vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
 )");
 }
 
@@ -889,21 +899,26 @@ TEST_F(WgslIntrinsicTableTest, MismatchTypeConversion) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<f32>(array<u32>)
 
-7 candidate constructors:
-  vec3(vec3<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
-  vec3(T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+12 candidate constructors:
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3() -> vec3<abstract-int>
   vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3(vec3<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3(T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is abstract-int, abstract-float, f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is abstract-int, abstract-float, i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is abstract-int, abstract-float, f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is abstract-int, abstract-float, f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is abstract-int, abstract-float, f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is abstract-int, abstract-float, f32, f16, i32 or u32
 )");
 }
 

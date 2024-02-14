@@ -185,13 +185,21 @@ type Intrinsic struct {
 	Overloads []*Overload
 }
 
+type IntrinsicTemplates struct {
+	// All the template parameters
+	Params []TemplateParam
+	// Params filtered to type parameters
+	Types []*TemplateTypeParam
+	// Params filtered to number parameters
+	Numbers []TemplateParam
+}
+
 // Overload describes a single overload of a builtin or operator
 type Overload struct {
 	Decl              ast.IntrinsicDecl
 	Intrinsic         *Intrinsic
-	TemplateParams    []TemplateParam
-	TemplateTypes     []*TemplateTypeParam
-	TemplateNumbers   []TemplateParam
+	ExplicitTemplates IntrinsicTemplates
+	ImplicitTemplates IntrinsicTemplates
 	ReturnType        *FullyQualifiedName
 	Parameters        []Parameter
 	CanBeUsedInStage  StageUses
@@ -231,15 +239,15 @@ func (o Overload) Format(w fmt.State, verb rune) {
 		fmt.Fprintf(w, "op ")
 	}
 	fmt.Fprintf(w, "%v", o.Intrinsic.Name)
-	if len(o.TemplateParams) > 0 {
+	if len(o.ExplicitTemplates.Params) > 0 {
 		fmt.Fprintf(w, "<")
-		for i, t := range o.TemplateParams {
-			if i > 0 {
-				fmt.Fprint(w, ", ")
-			}
-			fmt.Fprintf(w, "%v", t)
-		}
+		formatList(w, o.ExplicitTemplates.Params)
 		fmt.Fprintf(w, ">")
+	}
+	if len(o.ImplicitTemplates.Params) > 0 {
+		fmt.Fprintf(w, "[")
+		formatList(w, o.ImplicitTemplates.Params)
+		fmt.Fprintf(w, "]")
 	}
 	fmt.Fprint(w, "(")
 	for i, p := range o.Parameters {
@@ -284,12 +292,7 @@ func (f FullyQualifiedName) Format(w fmt.State, verb rune) {
 	fmt.Fprint(w, f.Target.GetName())
 	if len(f.TemplateArguments) > 0 {
 		fmt.Fprintf(w, "<")
-		for i, t := range f.TemplateArguments {
-			if i > 0 {
-				fmt.Fprint(w, ", ")
-			}
-			fmt.Fprintf(w, "%v", t)
-		}
+		formatList(w, f.TemplateArguments)
 		fmt.Fprintf(w, ">")
 	}
 }
@@ -352,3 +355,12 @@ func (t *TemplateEnumParam) GetName() string { return t.Name }
 
 // GetName returns the name of the TemplateNumberParam
 func (t *TemplateNumberParam) GetName() string { return t.Name }
+
+func formatList[T any](w fmt.State, list []T) {
+	for i, v := range list {
+		if i > 0 {
+			fmt.Fprint(w, ", ")
+		}
+		fmt.Fprintf(w, "%v", v)
+	}
+}

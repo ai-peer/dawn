@@ -105,7 +105,7 @@ func (p *Permuter) Permute(overload *sem.Overload) ([]Permutation, error) {
 		if overload.ReturnType != nil {
 			retTys, err := state.permutateFQN(*overload.ReturnType)
 			if err != nil {
-				return fmt.Errorf("while permutating return type: %w", err)
+				return fmt.Errorf("while permuting return type: %w", err)
 			}
 			if len(retTys) != 1 {
 				return fmt.Errorf("result type not pinned")
@@ -154,7 +154,7 @@ Increase hashLength in %v`,
 			return nil
 		}
 	}
-	for _, t := range overload.TemplateParams {
+	for _, t := range overload.ImplicitTemplates.Params {
 		next := permutate // Permutation chaining
 		switch t := t.(type) {
 		case *sem.TemplateTypeParam:
@@ -163,7 +163,7 @@ Increase hashLength in %v`,
 				var err error
 				types, err = state.permutateFQN(sem.FullyQualifiedName{Target: t.Type})
 				if err != nil {
-					return nil, fmt.Errorf("while permutating template types: %w", err)
+					return nil, fmt.Errorf("while permuting template types: %w", err)
 				}
 			}
 			if len(types) == 0 {
@@ -187,7 +187,7 @@ Increase hashLength in %v`,
 				permutations, err = state.permutateFQN(sem.FullyQualifiedName{Target: t.Enum})
 			}
 			if err != nil {
-				return nil, fmt.Errorf("while permutating template numbers: %w", err)
+				return nil, fmt.Errorf("while permuting template numbers: %w", err)
 			}
 			if len(permutations) == 0 {
 				return nil, fmt.Errorf("template type %v has no permutations", t.Name)

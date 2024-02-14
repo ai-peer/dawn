@@ -46,7 +46,7 @@ struct TableData;
 namespace tint::core::intrinsic {
 
 /// An enumerator of index namespaces.
-enum class TableIndexNamespace {
+enum class TableIndexNamespace : uint8_t {
     kTemplateType,
     kTemplateNumber,
     kTypeMatcher,
@@ -95,7 +95,8 @@ struct TableIndex {
     auto operator+(U offset) const {
         static_assert(std::is_integral_v<U> && std::is_unsigned_v<U>,
                       "T must be an unsigned integer type");
-        auto new_value = value + offset;
+        using C = std::conditional_t<(sizeof(U) > sizeof(T)), U, T>;
+        C new_value = static_cast<C>(value) + static_cast<C>(offset);
         return TableIndex<N, decltype(new_value)>(new_value);
     }
 
@@ -115,6 +116,12 @@ struct TableIndex {
 
 /// Index type used to index TableData::template_types
 using TemplateTypeIndex = TableIndex<TableIndexNamespace::kTemplateType, uint8_t>;
+
+/// Index type used to index explicit-template TableData::template_types
+using ExplicitTemplateTypeIndex = TableIndex<TableIndexNamespace::kTemplateType, uint8_t>;
+
+/// Index type used to index o,plicit-template TableData::template_types
+using ImplicitTemplateTypeIndex = TableIndex<TableIndexNamespace::kTemplateType, uint8_t>;
 
 /// Index type used to index TableData::template_numbers
 using TemplateNumberIndex = TableIndex<TableIndexNamespace::kTemplateNumber, uint8_t>;
@@ -141,7 +148,7 @@ using OverloadIndex = TableIndex<TableIndexNamespace::kOverload, uint16_t>;
 using ConstEvalFunctionIndex = TableIndex<TableIndexNamespace::kConstEvalFunction, uint8_t>;
 
 /// Unique flag bits for overloads
-enum class OverloadFlag {
+enum class OverloadFlag : uint8_t {
     kIsBuiltin,                 // The overload is a builtin ('fn')
     kIsOperator,                // The overload is an operator ('op')
     kIsConstructor,             // The overload is a value constructor ('ctor')
@@ -192,11 +199,14 @@ struct OverloadInfo {
     const OverloadFlags flags;
     /// Total number of parameters for the overload
     const uint8_t num_parameters;
-    /// Total number of template types for the overload
-    const uint8_t num_template_types;
-    /// Total number of template numbers for the overload
-    const uint8_t num_template_numbers;
+    /// Total number of explicit template types for the overload
+    const uint8_t num_explicit_template_types;
+    /// Total number of implicit template types for the overload
+    const uint8_t num_implicit_template_types;
+    /// Total number of implicit template numbers for the overload
+    const uint8_t num_implicit_template_numbers;
     /// Index of the first template type in TableData::type_matchers
+    /// This is a list of explicit template types followed by the implicit template types.
     const TemplateTypeIndex template_types;
     /// Index of the first template number in TableData::number_matchers
     const TemplateNumberIndex template_numbers;
@@ -226,7 +236,7 @@ static constexpr IntrinsicInfo kNoOverloads{0, OverloadIndex(OverloadIndex::kInv
 /// * Valid   - a fixed integer value
 /// * Any     - matches any other non-invalid number
 class Number {
-    enum State {
+    enum State : uint8_t {
         kInvalid,
         kValid,
         kAny,

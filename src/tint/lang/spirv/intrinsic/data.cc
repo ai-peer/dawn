@@ -3394,8 +3394,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [0] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(272),
@@ -3407,8 +3408,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [1] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(6),
@@ -3420,8 +3422,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [2] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(56),
@@ -3433,8 +3436,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [3] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(56),
@@ -3446,8 +3450,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [4] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(176),
@@ -3459,8 +3464,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [5] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(12),
@@ -3472,8 +3478,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [6] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(61),
@@ -3485,8 +3492,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [7] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(180),
@@ -3498,8 +3506,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [8] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(61),
@@ -3511,8 +3520,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [9] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(18),
@@ -3524,8 +3534,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [10] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(66),
@@ -3537,8 +3548,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [11] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(66),
@@ -3550,8 +3562,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [12] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(184),
@@ -3563,8 +3576,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [13] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(76),
@@ -3576,8 +3590,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [14] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(188),
@@ -3589,8 +3604,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [15] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(81),
@@ -3602,8 +3618,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [16] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(192),
@@ -3615,8 +3632,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [17] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(36),
@@ -3628,8 +3646,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [18] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(196),
@@ -3641,8 +3660,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [19] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(120),
@@ -3654,8 +3674,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [20] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(41),
@@ -3667,8 +3688,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [21] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(200),
@@ -3680,8 +3702,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [22] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(124),
@@ -3693,8 +3716,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [23] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(56),
@@ -3706,8 +3730,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [24] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(6),
@@ -3719,8 +3744,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [25] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(56),
@@ -3732,8 +3758,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [26] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(71),
@@ -3745,8 +3772,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [27] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(6),
@@ -3758,8 +3786,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [28] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(61),
@@ -3771,8 +3800,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [29] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(12),
@@ -3784,8 +3814,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [30] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(61),
@@ -3797,8 +3828,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [31] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(12),
@@ -3810,8 +3842,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [32] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(66),
@@ -3823,8 +3856,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [33] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(18),
@@ -3836,8 +3870,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [34] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(66),
@@ -3849,8 +3884,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [35] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(16),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(18),
@@ -3862,8 +3898,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [36] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(188),
@@ -3875,8 +3912,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [37] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(76),
@@ -3888,8 +3926,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [38] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(192),
@@ -3901,8 +3940,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [39] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(81),
@@ -3914,8 +3954,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [40] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(86),
@@ -3927,8 +3968,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [41] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(86),
@@ -3940,8 +3982,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [42] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(91),
@@ -3953,8 +3996,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [43] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(91),
@@ -3966,8 +4010,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [44] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(204),
@@ -3979,8 +4024,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [45] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(208),
@@ -3992,8 +4038,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [46] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(128),
@@ -4005,8 +4052,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [47] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(132),
@@ -4018,8 +4066,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [48] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(136),
@@ -4031,8 +4080,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [49] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(140),
@@ -4044,8 +4094,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [50] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(293),
@@ -4057,8 +4108,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [51] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(295),
@@ -4070,8 +4122,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [52] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(144),
@@ -4083,8 +4136,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [53] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(148),
@@ -4096,8 +4150,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [54] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(152),
@@ -4109,8 +4164,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [55] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(301),
@@ -4122,8 +4178,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [56] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(303),
@@ -4135,8 +4192,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [57] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(156),
@@ -4148,8 +4206,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [58] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(3),
     /* parameters */ ParameterIndex(260),
@@ -4161,8 +4220,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [59] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(3),
     /* parameters */ ParameterIndex(263),
@@ -4174,8 +4234,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [60] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(3),
     /* parameters */ ParameterIndex(266),
@@ -4187,8 +4248,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [61] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(3),
     /* parameters */ ParameterIndex(269),
@@ -4200,8 +4262,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [62] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(160),
@@ -4213,8 +4276,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [63] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(46),
@@ -4226,8 +4290,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [64] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(46),
@@ -4239,8 +4304,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [65] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(51),
@@ -4252,8 +4318,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [66] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(51),
@@ -4265,8 +4332,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [67] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(164),
@@ -4278,8 +4346,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [68] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(168),
@@ -4291,8 +4360,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [69] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(172),
@@ -4304,8 +4374,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [70] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(36),
@@ -4317,8 +4388,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [71] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(36),
@@ -4330,8 +4402,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [72] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(41),
@@ -4343,8 +4416,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [73] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(41),
@@ -4356,8 +4430,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [74] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(120),
@@ -4369,8 +4444,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [75] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(124),
@@ -4382,8 +4458,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [76] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(5),
     /* parameters */ ParameterIndex(260),
@@ -4395,8 +4472,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [77] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(7),
     /* parameters */ ParameterIndex(260),
@@ -4408,8 +4486,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [78] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(9),
     /* parameters */ ParameterIndex(260),
@@ -4421,8 +4500,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [79] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(5),
     /* parameters */ ParameterIndex(263),
@@ -4434,8 +4514,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [80] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(7),
     /* parameters */ ParameterIndex(263),
@@ -4447,8 +4528,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [81] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(9),
     /* parameters */ ParameterIndex(263),
@@ -4460,8 +4542,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [82] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(5),
     /* parameters */ ParameterIndex(266),
@@ -4473,8 +4556,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [83] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(7),
     /* parameters */ ParameterIndex(266),
@@ -4486,8 +4570,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [84] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(9),
     /* parameters */ ParameterIndex(266),
@@ -4499,8 +4584,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [85] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(5),
     /* parameters */ ParameterIndex(269),
@@ -4512,8 +4598,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [86] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(7),
     /* parameters */ ParameterIndex(269),
@@ -4525,8 +4612,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [87] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(7),
     /* template_numbers */ TemplateNumberIndex(9),
     /* parameters */ ParameterIndex(269),
@@ -4538,8 +4626,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [88] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(212),
@@ -4551,8 +4640,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [89] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(216),
@@ -4564,8 +4654,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [90] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(220),
@@ -4577,8 +4668,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [91] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(224),
@@ -4590,8 +4682,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [92] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(228),
@@ -4603,8 +4696,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [93] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(232),
@@ -4616,8 +4710,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [94] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(236),
@@ -4629,8 +4724,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [95] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(240),
@@ -4642,8 +4738,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [96] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(244),
@@ -4655,8 +4752,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [97] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(248),
@@ -4668,8 +4766,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [98] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(252),
@@ -4681,8 +4780,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [99] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(256),
@@ -4694,8 +4794,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [100] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(128),
@@ -4707,8 +4808,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [101] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(287),
@@ -4720,8 +4822,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [102] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(289),
@@ -4733,8 +4836,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [103] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(291),
@@ -4746,8 +4850,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [104] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(293),
@@ -4759,8 +4864,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [105] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(4),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(295),
@@ -4772,8 +4878,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [106] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(297),
@@ -4785,8 +4892,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [107] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(299),
@@ -4798,8 +4906,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [108] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(301),
@@ -4811,8 +4920,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [109] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(5),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(303),
@@ -4824,8 +4934,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [110] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(128),
@@ -4837,8 +4948,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [111] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(287),
@@ -4850,8 +4962,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [112] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(289),
@@ -4863,8 +4976,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [113] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(291),
@@ -4876,8 +4990,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [114] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(293),
@@ -4889,8 +5004,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [115] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(21),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(295),
@@ -4902,8 +5018,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [116] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(22),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(297),
@@ -4915,8 +5032,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [117] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(22),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(299),
@@ -4928,8 +5046,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [118] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(22),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(301),
@@ -4941,8 +5060,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [119] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(22),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(303),
@@ -4954,8 +5074,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [120] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(128),
@@ -4967,8 +5088,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [121] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(132),
@@ -4980,8 +5102,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [122] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(136),
@@ -4993,8 +5116,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [123] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(140),
@@ -5006,8 +5130,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [124] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 4,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 4,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(0),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(144),
@@ -5019,8 +5144,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [125] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(13),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(148),
@@ -5032,8 +5158,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [126] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(13),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(152),
@@ -5045,8 +5172,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [127] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(13),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(156),
@@ -5058,8 +5186,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [128] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(36),
@@ -5071,8 +5200,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [129] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(36),
@@ -5084,8 +5214,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [130] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(41),
@@ -5097,8 +5228,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [131] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 3,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 3,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(41),
@@ -5110,8 +5242,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [132] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(120),
@@ -5123,8 +5256,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [133] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(9),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(124),
@@ -5136,8 +5270,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [134] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(24),
@@ -5149,8 +5284,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [135] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(96),
@@ -5162,8 +5298,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [136] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(30),
@@ -5175,8 +5312,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [137] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(101),
@@ -5188,8 +5326,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [138] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(106),
@@ -5201,8 +5340,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [139] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(111),
@@ -5214,8 +5354,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [140] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(24),
@@ -5227,8 +5368,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [141] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(24),
@@ -5240,8 +5382,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [142] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(30),
@@ -5253,8 +5396,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [143] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(11),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(30),
@@ -5266,8 +5410,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [144] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(106),
@@ -5279,8 +5424,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [145] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(1),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(111),
@@ -5292,8 +5438,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [146] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(25),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(275),
@@ -5305,8 +5452,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [147] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(25),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(278),
@@ -5318,8 +5466,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [148] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(23),
     /* template_numbers */ TemplateNumberIndex(4),
     /* parameters */ ParameterIndex(285),
@@ -5331,8 +5480,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [149] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(19),
     /* template_numbers */ TemplateNumberIndex(13),
     /* parameters */ ParameterIndex(116),
@@ -5344,8 +5494,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [150] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(19),
     /* template_numbers */ TemplateNumberIndex(13),
     /* parameters */ ParameterIndex(0),
@@ -5357,8 +5508,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [151] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(19),
     /* template_numbers */ TemplateNumberIndex(13),
     /* parameters */ ParameterIndex(0),
@@ -5370,8 +5522,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [152] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
-    /* num_template_types */ 2,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 2,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(19),
     /* template_numbers */ TemplateNumberIndex(13),
     /* parameters */ ParameterIndex(116),
@@ -5383,8 +5536,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [153] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(279),
@@ -5396,8 +5550,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [154] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 3,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 3,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(0),
     /* parameters */ ParameterIndex(305),
@@ -5409,8 +5564,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [155] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(307),
@@ -5422,8 +5578,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [156] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(309),
@@ -5435,8 +5592,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [157] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 2,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 2,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(280),
@@ -5448,8 +5606,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [158] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
-    /* num_template_types */ 1,
-    /* num_template_numbers */ 1,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 1,
+    /* num_implicit_template_numbers */ 1,
     /* template_types */ TemplateTypeIndex(24),
     /* template_numbers */ TemplateNumberIndex(11),
     /* parameters */ ParameterIndex(310),
@@ -5461,8 +5620,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [159] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(282),
@@ -5474,8 +5634,9 @@ constexpr OverloadInfo kOverloads[] = {
     /* [160] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
-    /* num_template_types */ 0,
-    /* num_template_numbers */ 0,
+    /* num_explicit_template_types   */ 0,
+    /* num_implicit_template_types   */ 0,
+    /* num_implicit_template_numbers */ 0,
     /* template_types */ TemplateTypeIndex(/* invalid */),
     /* template_numbers */ TemplateNumberIndex(/* invalid */),
     /* parameters */ ParameterIndex(282),
@@ -5491,334 +5652,334 @@ static_assert(OverloadIndex::CanIndex(kOverloads),
 constexpr IntrinsicInfo kBuiltins[] = {
   {
     /* [0] */
-    /* fn array_length<I : u32, A : access>(ptr<storage, struct_with_runtime_array, A>, I) -> u32 */
+    /* fn array_length[I : u32, A : access](ptr<storage, struct_with_runtime_array, A>, I) -> u32 */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(148),
   },
   {
     /* [1] */
-    /* fn atomic_and<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_and[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [2] */
-    /* fn atomic_compare_exchange<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, U, T, T) -> T */
+    /* fn atomic_compare_exchange[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, U, T, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(150),
   },
   {
     /* [3] */
-    /* fn atomic_exchange<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_exchange[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [4] */
-    /* fn atomic_iadd<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_iadd[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [5] */
-    /* fn atomic_isub<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_isub[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [6] */
-    /* fn atomic_load<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U) -> T */
+    /* fn atomic_load[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(151),
   },
   {
     /* [7] */
-    /* fn atomic_or<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_or[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [8] */
-    /* fn atomic_smax<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_smax[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [9] */
-    /* fn atomic_smin<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_smin[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [10] */
-    /* fn atomic_store<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) */
+    /* fn atomic_store[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(152),
   },
   {
     /* [11] */
-    /* fn atomic_umax<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_umax[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [12] */
-    /* fn atomic_umin<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_umin[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [13] */
-    /* fn atomic_xor<T : iu32, U : u32, S : workgroup_or_storage>(ptr<S, atomic<T>, read_write>, U, U, T) -> T */
+    /* fn atomic_xor[T : iu32, U : u32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, U, U, T) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(149),
   },
   {
     /* [14] */
-    /* fn dot<N : num, T : f32_f16>(vec<N, T>, vec<N, T>) -> T */
+    /* fn dot[N : num, T : f32_f16](vec<N, T>, vec<N, T>) -> T */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(153),
   },
   {
     /* [15] */
-    /* fn image_dref_gather<A : f32, B : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, A, B) -> vec4<f32> */
-    /* fn image_dref_gather<A : f32, B : iu32, C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, A, B, vec2<C>) -> vec4<f32> */
-    /* fn image_dref_gather<A : f32, B : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, A, B) -> vec4<f32> */
-    /* fn image_dref_gather<A : f32, B : iu32, C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, A, B, vec2<C>) -> vec4<f32> */
-    /* fn image_dref_gather<A : f32, B : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, A, B) -> vec4<f32> */
-    /* fn image_dref_gather<A : f32, B : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, A, B) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32](sampled_image<texture_depth_2d>, vec2<f32>, A, B) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32, C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, A, B, vec2<C>) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, A, B) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32, C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, A, B, vec2<C>) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32](sampled_image<texture_depth_cube>, vec3<f32>, A, B) -> vec4<f32> */
+    /* fn image_dref_gather[A : f32, B : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, A, B) -> vec4<f32> */
     /* num overloads */ 6,
     /* overloads */ OverloadIndex(128),
   },
   {
     /* [16] */
-    /* fn image_fetch<T : fiu32, C : iu32, I : iu32, S : iu32>(texture_1d<T>, C, I, S) -> vec4<T> */
-    /* fn image_fetch<T : fiu32, C : iu32, I : iu32, S : iu32>(texture_2d<T>, vec2<C>, I, S) -> vec4<T> */
-    /* fn image_fetch<T : fiu32, C : iu32, I : iu32, S : iu32>(texture_2d_array<T>, vec3<C>, I, S) -> vec4<T> */
-    /* fn image_fetch<T : fiu32, C : iu32, I : iu32, S : iu32>(texture_3d<T>, vec3<C>, I, S) -> vec4<T> */
-    /* fn image_fetch<T : fiu32, C : iu32, I : iu32, S : iu32>(texture_multisampled_2d<T>, vec2<C>, I, S) -> vec4<T> */
-    /* fn image_fetch<I : iu32, C : iu32, S : iu32>(texture_depth_2d, vec2<C>, I, S) -> vec4<f32> */
-    /* fn image_fetch<I : iu32, C : iu32, S : iu32>(texture_depth_2d_array, vec3<C>, I, S) -> vec4<f32> */
-    /* fn image_fetch<I : iu32, C : iu32, S : iu32>(texture_depth_multisampled_2d, vec2<C>, I, S) -> vec4<f32> */
+    /* fn image_fetch[T : fiu32, C : iu32, I : iu32, S : iu32](texture_1d<T>, C, I, S) -> vec4<T> */
+    /* fn image_fetch[T : fiu32, C : iu32, I : iu32, S : iu32](texture_2d<T>, vec2<C>, I, S) -> vec4<T> */
+    /* fn image_fetch[T : fiu32, C : iu32, I : iu32, S : iu32](texture_2d_array<T>, vec3<C>, I, S) -> vec4<T> */
+    /* fn image_fetch[T : fiu32, C : iu32, I : iu32, S : iu32](texture_3d<T>, vec3<C>, I, S) -> vec4<T> */
+    /* fn image_fetch[T : fiu32, C : iu32, I : iu32, S : iu32](texture_multisampled_2d<T>, vec2<C>, I, S) -> vec4<T> */
+    /* fn image_fetch[I : iu32, C : iu32, S : iu32](texture_depth_2d, vec2<C>, I, S) -> vec4<f32> */
+    /* fn image_fetch[I : iu32, C : iu32, S : iu32](texture_depth_2d_array, vec3<C>, I, S) -> vec4<f32> */
+    /* fn image_fetch[I : iu32, C : iu32, S : iu32](texture_depth_multisampled_2d, vec2<C>, I, S) -> vec4<f32> */
     /* num overloads */ 8,
     /* overloads */ OverloadIndex(120),
   },
   {
     /* [17] */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_1d<T>>, vec2<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, A, B, vec2<i32>) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32, C : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, A, B, vec2<C>) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_3d<T>>, vec2<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_cube<T>>, vec3<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<T : fiu32, A : iu32, B : iu32>(sampled_image<texture_cube_array<T>>, vec4<f32>, A, B) -> vec4<T> */
-    /* fn image_gather<A : iu32, B : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, A, B) -> vec4<f32> */
-    /* fn image_gather<A : iu32, B : iu32, C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, A, B, vec2<C>) -> vec4<f32> */
-    /* fn image_gather<A : iu32, B : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, A, B) -> vec4<f32> */
-    /* fn image_gather<A : iu32, B : iu32, C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, A, B, vec2<C>) -> vec4<f32> */
-    /* fn image_gather<A : iu32, B : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, A, B) -> vec4<f32> */
-    /* fn image_gather<A : iu32, B : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, A, B) -> vec4<f32> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_1d<T>>, vec2<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_2d<T>>, vec2<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_2d<T>>, vec2<f32>, A, B, vec2<i32>) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32, C : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, A, B, vec2<C>) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_3d<T>>, vec2<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_cube<T>>, vec3<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[T : fiu32, A : iu32, B : iu32](sampled_image<texture_cube_array<T>>, vec4<f32>, A, B) -> vec4<T> */
+    /* fn image_gather[A : iu32, B : iu32](sampled_image<texture_depth_2d>, vec2<f32>, A, B) -> vec4<f32> */
+    /* fn image_gather[A : iu32, B : iu32, C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, A, B, vec2<C>) -> vec4<f32> */
+    /* fn image_gather[A : iu32, B : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, A, B) -> vec4<f32> */
+    /* fn image_gather[A : iu32, B : iu32, C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, A, B, vec2<C>) -> vec4<f32> */
+    /* fn image_gather[A : iu32, B : iu32](sampled_image<texture_depth_cube>, vec3<f32>, A, B) -> vec4<f32> */
+    /* fn image_gather[A : iu32, B : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, A, B) -> vec4<f32> */
     /* num overloads */ 14,
     /* overloads */ OverloadIndex(62),
   },
   {
     /* [18] */
-    /* fn image_query_size<T : fiu32>(texture_1d<T>) -> u32 */
-    /* fn image_query_size<T : fiu32>(texture_2d<T>) -> vec2<u32> */
-    /* fn image_query_size<T : fiu32>(texture_2d_array<T>) -> vec3<u32> */
-    /* fn image_query_size<T : fiu32>(texture_3d<T>) -> vec3<u32> */
-    /* fn image_query_size<T : fiu32>(texture_cube<T>) -> vec2<u32> */
-    /* fn image_query_size<T : fiu32>(texture_cube_array<T>) -> vec3<u32> */
-    /* fn image_query_size<T : fiu32>(texture_multisampled_2d<T>) -> vec2<u32> */
+    /* fn image_query_size[T : fiu32](texture_1d<T>) -> u32 */
+    /* fn image_query_size[T : fiu32](texture_2d<T>) -> vec2<u32> */
+    /* fn image_query_size[T : fiu32](texture_2d_array<T>) -> vec3<u32> */
+    /* fn image_query_size[T : fiu32](texture_3d<T>) -> vec3<u32> */
+    /* fn image_query_size[T : fiu32](texture_cube<T>) -> vec2<u32> */
+    /* fn image_query_size[T : fiu32](texture_cube_array<T>) -> vec3<u32> */
+    /* fn image_query_size[T : fiu32](texture_multisampled_2d<T>) -> vec2<u32> */
     /* fn image_query_size(texture_depth_2d) -> vec2<u32> */
     /* fn image_query_size(texture_depth_2d_array) -> vec3<u32> */
     /* fn image_query_size(texture_depth_cube) -> vec2<u32> */
     /* fn image_query_size(texture_depth_cube_array) -> vec3<u32> */
     /* fn image_query_size(texture_depth_multisampled_2d) -> vec2<u32> */
-    /* fn image_query_size<F : texel_format, A : access>(texture_storage_1d<F, A>) -> u32 */
-    /* fn image_query_size<F : texel_format, A : access>(texture_storage_2d<F, A>) -> vec2<u32> */
-    /* fn image_query_size<F : texel_format, A : access>(texture_storage_2d_array<F, A>) -> vec3<u32> */
-    /* fn image_query_size<F : texel_format, A : access>(texture_storage_3d<F, A>) -> vec3<u32> */
+    /* fn image_query_size[F : texel_format, A : access](texture_storage_1d<F, A>) -> u32 */
+    /* fn image_query_size[F : texel_format, A : access](texture_storage_2d<F, A>) -> vec2<u32> */
+    /* fn image_query_size[F : texel_format, A : access](texture_storage_2d_array<F, A>) -> vec3<u32> */
+    /* fn image_query_size[F : texel_format, A : access](texture_storage_3d<F, A>) -> vec3<u32> */
     /* num overloads */ 16,
     /* overloads */ OverloadIndex(46),
   },
   {
     /* [19] */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_1d<T>, A) -> u32 */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_2d<T>, A) -> vec2<u32> */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_2d_array<T>, A) -> vec3<u32> */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_3d<T>, A) -> vec3<u32> */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_cube<T>, A) -> vec2<u32> */
-    /* fn image_query_size_lod<T : fiu32, A : iu32>(texture_cube_array<T>, A) -> vec3<u32> */
-    /* fn image_query_size_lod<A : iu32>(texture_depth_2d, A) -> vec2<u32> */
-    /* fn image_query_size_lod<A : iu32>(texture_depth_2d_array, A) -> vec3<u32> */
-    /* fn image_query_size_lod<A : iu32>(texture_depth_cube, A) -> vec2<u32> */
-    /* fn image_query_size_lod<A : iu32>(texture_depth_cube_array, A) -> vec3<u32> */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_1d<T>, A) -> u32 */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_2d<T>, A) -> vec2<u32> */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_2d_array<T>, A) -> vec3<u32> */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_3d<T>, A) -> vec3<u32> */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_cube<T>, A) -> vec2<u32> */
+    /* fn image_query_size_lod[T : fiu32, A : iu32](texture_cube_array<T>, A) -> vec3<u32> */
+    /* fn image_query_size_lod[A : iu32](texture_depth_2d, A) -> vec2<u32> */
+    /* fn image_query_size_lod[A : iu32](texture_depth_2d_array, A) -> vec3<u32> */
+    /* fn image_query_size_lod[A : iu32](texture_depth_cube, A) -> vec2<u32> */
+    /* fn image_query_size_lod[A : iu32](texture_depth_cube_array, A) -> vec3<u32> */
     /* num overloads */ 10,
     /* overloads */ OverloadIndex(100),
   },
   {
     /* [20] */
-    /* fn image_read<F : f32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_1d<F, A>, C, S) -> vec4<f32> */
-    /* fn image_read<F : i32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_1d<F, A>, C, S) -> vec4<i32> */
-    /* fn image_read<F : u32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_1d<F, A>, C, S) -> vec4<u32> */
-    /* fn image_read<F : f32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d<F, A>, vec2<C>, S) -> vec4<f32> */
-    /* fn image_read<F : i32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d<F, A>, vec2<C>, S) -> vec4<i32> */
-    /* fn image_read<F : u32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d<F, A>, vec2<C>, S) -> vec4<u32> */
-    /* fn image_read<F : f32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<f32> */
-    /* fn image_read<F : i32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<i32> */
-    /* fn image_read<F : u32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<u32> */
-    /* fn image_read<F : f32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_3d<F, A>, vec3<C>, S) -> vec4<f32> */
-    /* fn image_read<F : i32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_3d<F, A>, vec3<C>, S) -> vec4<i32> */
-    /* fn image_read<F : u32_texel_format, A : readable, C : iu32, S : iu32>(texture_storage_3d<F, A>, vec3<C>, S) -> vec4<u32> */
+    /* fn image_read[F : f32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_1d<F, A>, C, S) -> vec4<f32> */
+    /* fn image_read[F : i32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_1d<F, A>, C, S) -> vec4<i32> */
+    /* fn image_read[F : u32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_1d<F, A>, C, S) -> vec4<u32> */
+    /* fn image_read[F : f32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d<F, A>, vec2<C>, S) -> vec4<f32> */
+    /* fn image_read[F : i32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d<F, A>, vec2<C>, S) -> vec4<i32> */
+    /* fn image_read[F : u32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d<F, A>, vec2<C>, S) -> vec4<u32> */
+    /* fn image_read[F : f32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<f32> */
+    /* fn image_read[F : i32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<i32> */
+    /* fn image_read[F : u32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_2d_array<F, A>, vec3<C>, S) -> vec4<u32> */
+    /* fn image_read[F : f32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_3d<F, A>, vec3<C>, S) -> vec4<f32> */
+    /* fn image_read[F : i32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_3d<F, A>, vec3<C>, S) -> vec4<i32> */
+    /* fn image_read[F : u32_texel_format, A : readable, C : iu32, S : iu32](texture_storage_3d<F, A>, vec3<C>, S) -> vec4<u32> */
     /* num overloads */ 12,
     /* overloads */ OverloadIndex(76),
   },
   {
     /* [21] */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_1d<T>>, f32, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, f32, vec3<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube<T>>, vec3<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube_array<T>>, vec4<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube_array<T>>, vec4<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, C, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, C) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, C, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_implicit_lod<C : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_1d<T>>, f32, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, f32, vec3<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube<T>>, vec3<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube_array<T>>, vec4<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube_array<T>>, vec4<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d>, vec2<f32>, C, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32](sampled_image<texture_depth_cube>, vec3<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, C) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, C, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_implicit_lod[C : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, C) -> vec4<f32> */
     /* num overloads */ 23,
     /* overloads */ OverloadIndex(0),
   },
   {
     /* [22] */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<f32>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<f32>, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<f32>, vec2<f32>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<f32>, vec2<f32>, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, f32, vec3<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32, D : iu32>(sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>, vec3<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube<T>>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube_array<T>>, vec4<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<T : fiu32, C : iu32>(sampled_image<texture_cube_array<T>>, vec4<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, C, f32) -> vec4<f32> */
-    /* fn image_sample_explicit_lod<C : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<f32>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d<T>>, vec2<f32>, C, vec2<f32>, vec2<f32>, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<f32>, vec2<f32>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_2d_array<T>>, vec3<f32>, C, vec2<f32>, vec2<f32>, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, f32, vec3<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32, D : iu32](sampled_image<texture_3d<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>, vec3<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube<T>>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube<T>>, vec3<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube_array<T>>, vec4<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[T : fiu32, C : iu32](sampled_image<texture_cube_array<T>>, vec4<f32>, C, vec3<f32>, vec3<f32>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d>, vec2<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, C, f32, vec2<D>) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32](sampled_image<texture_depth_cube>, vec3<f32>, C, f32) -> vec4<f32> */
+    /* fn image_sample_explicit_lod[C : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, C, f32) -> vec4<f32> */
     /* num overloads */ 23,
     /* overloads */ OverloadIndex(23),
   },
   {
     /* [23] */
-    /* fn image_sample_dref_implicit_lod<C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, f32, C) -> f32 */
-    /* fn image_sample_dref_implicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, f32, C, vec2<D>) -> f32 */
-    /* fn image_sample_dref_implicit_lod<C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C) -> f32 */
-    /* fn image_sample_dref_implicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, vec2<D>) -> f32 */
-    /* fn image_sample_dref_implicit_lod<C : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, f32, C) -> f32 */
-    /* fn image_sample_dref_implicit_lod<C : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, f32, C) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, f32, C) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d>, vec2<f32>, f32, C, vec2<D>) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, vec2<D>) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32](sampled_image<texture_depth_cube>, vec3<f32>, f32, C) -> f32 */
+    /* fn image_sample_dref_implicit_lod[C : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, f32, C) -> f32 */
     /* num overloads */ 6,
     /* overloads */ OverloadIndex(134),
   },
   {
     /* [24] */
-    /* fn image_sample_dref_explicit_lod<C : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, f32, C, f32) -> f32 */
-    /* fn image_sample_dref_explicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d>, vec2<f32>, f32, C, f32, vec2<D>) -> f32 */
-    /* fn image_sample_dref_explicit_lod<C : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, f32) -> f32 */
-    /* fn image_sample_dref_explicit_lod<C : iu32, D : iu32>(sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, f32, vec2<D>) -> f32 */
-    /* fn image_sample_dref_explicit_lod<C : iu32>(sampled_image<texture_depth_cube>, vec3<f32>, f32, C, f32) -> f32 */
-    /* fn image_sample_dref_explicit_lod<C : iu32>(sampled_image<texture_depth_cube_array>, vec4<f32>, f32, C, f32) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32](sampled_image<texture_depth_2d>, vec2<f32>, f32, C, f32) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d>, vec2<f32>, f32, C, f32, vec2<D>) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, f32) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32, D : iu32](sampled_image<texture_depth_2d_array>, vec3<f32>, f32, C, f32, vec2<D>) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32](sampled_image<texture_depth_cube>, vec3<f32>, f32, C, f32) -> f32 */
+    /* fn image_sample_dref_explicit_lod[C : iu32](sampled_image<texture_depth_cube_array>, vec4<f32>, f32, C, f32) -> f32 */
     /* num overloads */ 6,
     /* overloads */ OverloadIndex(140),
   },
   {
     /* [25] */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_1d<f32_texel_format, writable>, C, vec4<f32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_1d<i32_texel_format, writable>, C, vec4<i32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_1d<u32_texel_format, writable>, C, vec4<u32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d<f32_texel_format, writable>, vec2<C>, vec4<f32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d<i32_texel_format, writable>, vec2<C>, vec4<i32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d<u32_texel_format, writable>, vec2<C>, vec4<u32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d_array<f32_texel_format, writable>, vec3<C>, vec4<f32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d_array<i32_texel_format, writable>, vec3<C>, vec4<i32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_2d_array<u32_texel_format, writable>, vec3<C>, vec4<u32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_3d<f32_texel_format, writable>, vec3<C>, vec4<f32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_3d<i32_texel_format, writable>, vec3<C>, vec4<i32>, D) */
-    /* fn image_write<C : iu32, D : iu32>(texture_storage_3d<u32_texel_format, writable>, vec3<C>, vec4<u32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_1d<f32_texel_format, writable>, C, vec4<f32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_1d<i32_texel_format, writable>, C, vec4<i32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_1d<u32_texel_format, writable>, C, vec4<u32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d<f32_texel_format, writable>, vec2<C>, vec4<f32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d<i32_texel_format, writable>, vec2<C>, vec4<i32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d<u32_texel_format, writable>, vec2<C>, vec4<u32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d_array<f32_texel_format, writable>, vec3<C>, vec4<f32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d_array<i32_texel_format, writable>, vec3<C>, vec4<i32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_2d_array<u32_texel_format, writable>, vec3<C>, vec4<u32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_3d<f32_texel_format, writable>, vec3<C>, vec4<f32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_3d<i32_texel_format, writable>, vec3<C>, vec4<i32>, D) */
+    /* fn image_write[C : iu32, D : iu32](texture_storage_3d<u32_texel_format, writable>, vec3<C>, vec4<u32>, D) */
     /* num overloads */ 12,
     /* overloads */ OverloadIndex(88),
   },
   {
     /* [26] */
-    /* fn matrix_times_matrix<T : f32_f16, K : num, C : num, R : num>(mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T> */
+    /* fn matrix_times_matrix[T : f32_f16, K : num, C : num, R : num](mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(154),
   },
   {
     /* [27] */
-    /* fn matrix_times_scalar<T : f32_f16, N : num, M : num>(mat<N, M, T>, T) -> mat<N, M, T> */
+    /* fn matrix_times_scalar[T : f32_f16, N : num, M : num](mat<N, M, T>, T) -> mat<N, M, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(155),
   },
   {
     /* [28] */
-    /* fn matrix_times_vector<T : f32_f16, N : num, M : num>(mat<N, M, T>, vec<N, T>) -> vec<M, T> */
+    /* fn matrix_times_vector[T : f32_f16, N : num, M : num](mat<N, M, T>, vec<N, T>) -> vec<M, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(156),
   },
   {
     /* [29] */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_1d<T>, S) -> sampled_image<texture_1d<T>> */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_2d<T>, S) -> sampled_image<texture_2d<T>> */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_2d_array<T>, S) -> sampled_image<texture_2d_array<T>> */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_3d<T>, S) -> sampled_image<texture_3d<T>> */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_cube<T>, S) -> sampled_image<texture_cube<T>> */
-    /* fn sampled_image<T : fiu32, S : samplers>(texture_cube_array<T>, S) -> sampled_image<texture_cube_array<T>> */
-    /* fn sampled_image<S : samplers>(texture_depth_2d, S) -> sampled_image<texture_depth_2d> */
-    /* fn sampled_image<S : samplers>(texture_depth_2d_array, S) -> sampled_image<texture_depth_2d_array> */
-    /* fn sampled_image<S : samplers>(texture_depth_cube, S) -> sampled_image<texture_depth_cube> */
-    /* fn sampled_image<S : samplers>(texture_depth_cube_array, S) -> sampled_image<texture_depth_cube_array> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_1d<T>, S) -> sampled_image<texture_1d<T>> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_2d<T>, S) -> sampled_image<texture_2d<T>> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_2d_array<T>, S) -> sampled_image<texture_2d_array<T>> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_3d<T>, S) -> sampled_image<texture_3d<T>> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_cube<T>, S) -> sampled_image<texture_cube<T>> */
+    /* fn sampled_image[T : fiu32, S : samplers](texture_cube_array<T>, S) -> sampled_image<texture_cube_array<T>> */
+    /* fn sampled_image[S : samplers](texture_depth_2d, S) -> sampled_image<texture_depth_2d> */
+    /* fn sampled_image[S : samplers](texture_depth_2d_array, S) -> sampled_image<texture_depth_2d_array> */
+    /* fn sampled_image[S : samplers](texture_depth_cube, S) -> sampled_image<texture_depth_cube> */
+    /* fn sampled_image[S : samplers](texture_depth_cube_array, S) -> sampled_image<texture_depth_cube_array> */
     /* num overloads */ 10,
     /* overloads */ OverloadIndex(110),
   },
   {
     /* [30] */
-    /* fn select<T : scalar>(bool, T, T) -> T */
-    /* fn select<N : num, T : scalar>(vec<N, bool>, vec<N, T>, vec<N, T>) -> vec<N, T> */
+    /* fn select[T : scalar](bool, T, T) -> T */
+    /* fn select[N : num, T : scalar](vec<N, bool>, vec<N, T>, vec<N, T>) -> vec<N, T> */
     /* num overloads */ 2,
     /* overloads */ OverloadIndex(146),
   },
   {
     /* [31] */
-    /* fn vector_times_matrix<T : f32_f16, N : num, M : num>(vec<N, T>, mat<M, N, T>) -> vec<M, T> */
+    /* fn vector_times_matrix[T : f32_f16, N : num, M : num](vec<N, T>, mat<M, N, T>) -> vec<M, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(157),
   },
   {
     /* [32] */
-    /* fn vector_times_scalar<T : f32_f16, N : num>(vec<N, T>, T) -> vec<N, T> */
+    /* fn vector_times_scalar[T : f32_f16, N : num](vec<N, T>, T) -> vec<N, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(158),
   },

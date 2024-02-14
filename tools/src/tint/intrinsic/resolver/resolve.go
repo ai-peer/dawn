@@ -320,19 +320,24 @@ func (r *resolver) intrinsic(
 	// Create a new scope for resolving template parameters
 	s := newScope(&r.globals)
 
+	// Construct the semantic overload
+	overload := &sem.Overload{
+		Decl:       a,
+		Intrinsic:  intrinsic,
+		Parameters: make([]sem.Parameter, len(a.Parameters)),
+	}
+
 	// Resolve the declared template parameters
-	templateParams, err := r.templateParams(&s, a.TemplateParams)
+	explicitTemplateParams, err := r.templateParams(&s, a.ExplicitTemplateParams)
 	if err != nil {
 		return err
 	}
-
-	// Construct the semantic overload
-	overload := &sem.Overload{
-		Decl:           a,
-		Intrinsic:      intrinsic,
-		Parameters:     make([]sem.Parameter, len(a.Parameters)),
-		TemplateParams: templateParams,
+	implicitTemplateParams, err := r.templateParams(&s, a.ImplicitTemplateParams)
+	if err != nil {
+		return err
 	}
+	overload.ExplicitTemplates.Params = explicitTemplateParams
+	overload.ImplicitTemplates.Params = implicitTemplateParams
 
 	// Process overload attributes
 	if stageDeco := a.Attributes.Take("stage"); stageDeco != nil {
@@ -401,23 +406,25 @@ func (r *resolver) intrinsic(
 	// Append the overload to the intrinsic
 	intrinsic.Overloads = append(intrinsic.Overloads, overload)
 
-	// Sort the template parameters by resolved type. Append these to
-	// sem.Overload.TemplateTypes or sem.Overload.TemplateNumbers based on their kind.
-	for _, param := range templateParams {
-		switch param := param.(type) {
-		case *sem.TemplateTypeParam:
-			overload.TemplateTypes = append(overload.TemplateTypes, param)
-		case *sem.TemplateEnumParam, *sem.TemplateNumberParam:
-			overload.TemplateNumbers = append(overload.TemplateNumbers, param)
+	// Bin the template parameters by resolved type.
+	// Append these to sem.Overload.TemplateTypes or sem.Overload.TemplateNumbers based on their kind.
+	for _, templates := range []*sem.IntrinsicTemplates{&overload.ExplicitTemplates, &overload.ImplicitTemplates} {
+		for _, param := range templates.Params {
+			switch param := param.(type) {
+			case *sem.TemplateTypeParam:
+				templates.Types = append(templates.Types, param)
+			case *sem.TemplateEnumParam, *sem.TemplateNumberParam:
+				templates.Numbers = append(templates.Numbers, param)
+			}
 		}
 	}
 
 	// Update high-water marks of template types and numbers
-	if r.s.MaxTemplateTypes < len(overload.TemplateTypes) {
-		r.s.MaxTemplateTypes = len(overload.TemplateTypes)
+	if n := len(overload.ExplicitTemplates.Types) + len(overload.ImplicitTemplates.Types); r.s.MaxTemplateTypes < n {
+		r.s.MaxTemplateTypes = n
 	}
-	if r.s.MaxTemplateNumbers < len(overload.TemplateNumbers) {
-		r.s.MaxTemplateNumbers = len(overload.TemplateNumbers)
+	if n := len(overload.ExplicitTemplates.Numbers) + len(overload.ImplicitTemplates.Numbers); r.s.MaxTemplateNumbers < n {
+		r.s.MaxTemplateNumbers = n
 	}
 
 	// Resolve the parameters
@@ -493,10 +500,10 @@ func (r *resolver) fullyQualifiedName(s *scope, arg ast.TemplatedName) (sem.Full
 	return fqn, nil
 }
 
-// templateParams() resolves the ast.TemplateParams into list of sem.TemplateParam.
+// templateParams() resolves the ast.TemplateParams list into a sem.TemplateParam list.
 // Each sem.TemplateParam is registered with the scope s.
-func (r *resolver) templateParams(s *scope, l ast.TemplateParams) ([]sem.TemplateParam, error) {
-	out := []sem.TemplateParam{}
+func (r *resolver) templateParams(s *scope, l []ast.TemplateParam) ([]sem.TemplateParam, error) {
+	out := make([]sem.TemplateParam, 0, len(l))
 	for _, ast := range l {
 		param, err := r.templateParam(ast)
 		if err != nil {

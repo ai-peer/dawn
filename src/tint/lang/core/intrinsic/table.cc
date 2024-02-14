@@ -35,12 +35,7 @@
 #include "src/tint/lang/core/intrinsic/table_data.h"
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/void.h"
-#include "src/tint/utils/containers/hashmap.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/macros/scoped_assignment.h"
-#include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/math/math.h"
-#include "src/tint/utils/rtti/switch.h"
+#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::core::intrinsic {
@@ -280,12 +275,13 @@ Candidate ScoreOverload(Context& context,
     // The overloads with the lowest score will be displayed first (top-most).
     constexpr int kMismatchedParamCountPenalty = 3;
     constexpr int kMismatchedParamTypePenalty = 2;
-    constexpr int kMismatchedTemplateCountPenalty = 1;
+    constexpr int kMismatchedExplicitTemplateTypePenalty = 1;
+    constexpr int kMismatchedExplicitTemplateCountPenalty = 1;
     constexpr int kMismatchedTemplateTypePenalty = 1;
     constexpr int kMismatchedTemplateNumberPenalty = 1;
 
-    size_t num_parameters = static_cast<size_t>(overload.num_parameters);
-    size_t num_arguments = static_cast<size_t>(args.Length());
+    size_t const num_parameters = static_cast<size_t>(overload.num_parameters);
+    size_t const num_arguments = static_cast<size_t>(args.Length());
 
     size_t score = 0;
 
@@ -296,16 +292,34 @@ Candidate ScoreOverload(Context& context,
 
     if (score == 0) {
         // Check that all of the template arguments provided are actually expected by the overload.
-        size_t expected_templates = overload.num_template_types + overload.num_template_numbers;
-        size_t provided_templates = in_templates.Count();
-        if (provided_templates > expected_templates) {
-            score += kMismatchedTemplateCountPenalty * (provided_templates - expected_templates);
+        size_t const expected_templates = overload.num_explicit_template_types;
+        size_t const provided_templates = in_templates.Count();
+        if (provided_templates != expected_templates) {
+            score += kMismatchedExplicitTemplateCountPenalty *
+                     (std::max(expected_templates, provided_templates) -
+                      std::min(expected_templates, provided_templates));
         }
     }
 
     // Make a mutable copy of the input templates so we can implicitly match more templated
     // arguments.
     TemplateState templates(in_templates);
+
+    if (score == 0) {
+        for (size_t i = 0; i < overload.num_explicit_template_types; ++i) {
+            auto* matcher_idx = &context.data[overload.template_types + i].matcher_index;
+            if (matcher_idx->IsValid()) {
+                if (auto* type = templates.Type(i)) {
+                    if (Match(context, templates, overload, matcher_idx, nullptr,
+                              earliest_eval_stage)
+                            .Type(type) != nullptr) {
+                        continue;
+                    }
+                }
+                score += kMismatchedExplicitTemplateTypePenalty;
+            }
+        }
+    }
 
     // Invoke the matchers for each parameter <-> argument pair.
     // If any arguments cannot be matched, then `score` will be increased.
@@ -332,17 +346,19 @@ Candidate ScoreOverload(Context& context,
         // `score` is incremented. If the template type *does* match a type, then the template type
         // is replaced with the first matching type. The order of types in the template matcher is
         // important here, which can be controlled with the [[precedence(N)]] decorations on the
-        // types in intrinsics.def.
-        for (size_t ot = 0; ot < overload.num_template_types; ot++) {
-            auto* matcher_idx = &context.data[overload.template_types + ot].matcher_index;
+        // types in the def file.
+        for (size_t i = 0,
+                    n = overload.num_implicit_template_types + overload.num_explicit_template_types;
+             i < n; i++) {
+            auto* matcher_idx = &context.data[overload.template_types + i].matcher_index;
             if (matcher_idx->IsValid()) {
-                if (auto* type = templates.Type(ot)) {
+                if (auto* type = templates.Type(i)) {
                     if (auto* ty = Match(context, templates, overload, matcher_idx, nullptr,
                                          earliest_eval_stage)
                                        .Type(type)) {
                         // Template type matched one of the types in the template type's matcher.
                         // Replace the template type with this type.
-                        templates.SetType(ot, ty);
+                        templates.SetType(i, ty);
                         continue;
                     }
                 }
@@ -356,10 +372,10 @@ Candidate ScoreOverload(Context& context,
         // Unlike template types, numbers are not constrained, so we're just checking that the
         // inferred number matches the constraints on the overload. Increments `score` if the
         // template numbers do not match their constraint matchers.
-        for (size_t on = 0; on < overload.num_template_numbers; on++) {
-            auto* matcher_idx = &context.data[overload.template_numbers + on].matcher_index;
+        for (size_t i = 0; i < overload.num_implicit_template_numbers; i++) {
+            auto* matcher_idx = &context.data[overload.template_numbers + i].matcher_index;
             if (matcher_idx->IsValid()) {
-                auto number = templates.Num(on);
+                auto number = templates.Num(i);
                 if (!number.IsValid() ||
                     !Match(context, templates, overload, nullptr, matcher_idx, earliest_eval_stage)
                          .Num(number)
@@ -475,22 +491,26 @@ void PrintOverload(StringStream& ss,
 
     ss << intrinsic_name;
 
-    bool print_template_type = false;
-    if (overload.num_template_types > 0) {
+    bool print_explicit_template_type = false;
+    if (overload.num_explicit_template_types > 0) {
         if (overload.flags.Contains(OverloadFlag::kIsConverter)) {
             // Print for conversions
             // e.g. vec3<T>(vec3<U>) -> vec3<f32>
-            print_template_type = true;
-        } else if ((overload.num_parameters == 0) &&
-                   overload.flags.Contains(OverloadFlag::kIsConstructor)) {
-            // Print for constructors with no params
+            print_explicit_template_type = true;
+        } else if (overload.flags.Contains(OverloadFlag::kIsConstructor)) {
+            // Print for constructors
             // e.g. vec2<T>() -> vec2<T>
-            print_template_type = true;
+            print_explicit_template_type = true;
         }
     }
-    if (print_template_type) {
+    if (print_explicit_template_type) {
         ss << "<";
-        ss << context.data[overload.template_types].name;
+        for (size_t i = 0; i < overload.num_explicit_template_types; i++) {
+            if (i > 0) {
+                ss << ", ";
+            }
+            ss << context.data[overload.template_types + i].name;
+        }
         ss << ">";
     }
     ss << "(";
@@ -521,7 +541,10 @@ void PrintOverload(StringStream& ss,
         ss << (first ? "  where: " : ", ");
         first = false;
     };
-    for (size_t i = 0; i < overload.num_template_types; i++) {
+
+    for (size_t i = 0,
+                n = overload.num_explicit_template_types + overload.num_implicit_template_types;
+         i < n; i++) {
         auto& template_type = context.data[overload.template_types + i];
         if (template_type.matcher_index.IsValid()) {
             separator();
@@ -532,7 +555,7 @@ void PrintOverload(StringStream& ss,
                       .TypeName();
         }
     }
-    for (size_t i = 0; i < overload.num_template_numbers; i++) {
+    for (size_t i = 0; i < overload.num_implicit_template_numbers; i++) {
         auto& template_number = context.data[overload.template_numbers + i];
         if (template_number.matcher_index.IsValid()) {
             separator();
@@ -782,7 +805,8 @@ Result<Overload, std::string> LookupCtorConv(Context& context,
         StringStream ss;
         ss << "no matching constructor for " << CallSignature(type_name, args, template_arg)
            << std::endl;
-        Candidates ctor, conv;
+        Candidates ctor;
+        Candidates conv;
         for (auto candidate : candidates) {
             if (candidate.overload->flags.Contains(OverloadFlag::kIsConstructor)) {
                 ctor.Push(candidate);
