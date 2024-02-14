@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8c62669_eeb5c46f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-14T09:03:18Z",
+      "side": 1,
+      "message": "Hello Loko,\nI\u0027ve noticed you were also working on Future stuff.\n\nI\u0027ve started working on this CL but before I go further, I\u0027d appreciate an early look to know if I\u0027m heading in the right direction. This is new to me and I\u0027m not sure I\u0027m handling it properly.",
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
