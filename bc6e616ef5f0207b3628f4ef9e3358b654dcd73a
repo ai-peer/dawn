@@ -16,6 +16,23 @@
       "message": "Thanks - I made a minor fix to ensure the CommandRecordingContext releases the keyed mutexes if there\u0027s no submit",
       "revId": "bc6e616ef5f0207b3628f4ef9e3358b654dcd73a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "245f8f11_dfa3c531",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T19:58:20Z",
+      "side": 1,
+      "message": "filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2413 about the win-clang-rel-x64 failure; will land a suppression",
+      "revId": "bc6e616ef5f0207b3628f4ef9e3358b654dcd73a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
