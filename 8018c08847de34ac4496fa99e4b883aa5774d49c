@@ -70,6 +70,24 @@
       "parentUuid": "a6037874_3e0cd91f",
       "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d79400d7_8fc8eefb",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-14T22:22:48Z",
+      "side": 1,
+      "message": "Done (Move to `opengl::Queue::WriteTextureImpl`)\n\n\u003e However, taking out this check out would mean this code would run unconditionally for the stencil -\u003e depth-stencil use case.\nMy previous comment is wrong. Stephen is right.\nNo that the blit path is moved to QueueGL, this should be fixed now.",
+      "parentUuid": "457eb00b_b5eee096",
+      "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
