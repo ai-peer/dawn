@@ -52,6 +52,24 @@
       "parentUuid": "b2122dc0_125fe6f3",
       "revId": "ae6774720444cb6f940bd6649c923aa96c757049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e7acc70_aa2880a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T19:13:01Z",
+      "side": 1,
+      "message": "Maybe we should rename it then? encoder_command_immediate_validation_errors? or pass_command_immediate_validation_errors if it\u0027s pass commands only",
+      "parentUuid": "f5334d88_ec3792fc",
+      "revId": "ae6774720444cb6f940bd6649c923aa96c757049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
