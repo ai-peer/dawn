@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0bae284_2619d8ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T01:02:46Z",
+      "side": 1,
+      "message": "separate events may refer to the same SystemEvent?",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "23775f77_a7a08241",
@@ -14,6 +37,40 @@
       "writtenOn": "2024-02-13T19:05:41Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643289f6_c8206aee",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T01:02:46Z",
+      "side": 1,
+      "message": "Could this be `shared_ptr\u003cSystemEventReceiver\u003e`, or is there a particular reason to use `RefCounted`?",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c749741_41ba9c25",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T01:02:46Z",
+      "side": 1,
+      "message": "possible future work: should we dedup AlreadySignaled receivers so we only need to have one? I originally thought that wouldn\u0027t be valid, but now I think we could do it.\n\nI also thought we had already added an optimization to SystemEventReceiver to not create an actual OS object until one was needed, but that doesn\u0027t seem to be the case. That would be nice for any CreateAlreadySignaled calls among other things.",
       "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
