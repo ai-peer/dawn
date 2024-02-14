@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "835e6526_9bc9039e",
+        "filename": "src/dawn/common/SerialMap.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T19:00:24Z",
+      "side": 1,
+      "message": "nit: `const Value* FindOne(serial) const`? The `Ref\u003c\u003e` returned wouldn\u0027t be const.",
+      "revId": "1b0f28ec95a4f384ed758ddb01024fe3235454a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
