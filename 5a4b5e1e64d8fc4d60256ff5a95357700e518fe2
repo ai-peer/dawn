@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab85db68_470830d9",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-14T22:59:57Z",
+      "side": 1,
+      "message": "I kept the rules restrictive just because it was simple. I don\u0027t have a use case case for simultaneous access in mind though. Are you aware of one?\n\nIt doesn\u0027t seem difficult to allow simultaneous access if we want it. The only restriction I can think of is when a buffer is mapped. Outside of mapping, I think we could even allow concurrent write access (on D3D12, buffers always decay to COMMON) (I will have to check the rules for other backends).",
+      "parentUuid": "82058855_934b87d5",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7395769_4bbf1b5c",
         "filename": "docs/dawn/features/shared_buffer_memory.md",
         "patchSetId": 4
