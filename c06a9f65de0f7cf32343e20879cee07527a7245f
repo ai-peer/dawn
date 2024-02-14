@@ -16,6 +16,41 @@
       "message": "LGTM, but I\u0027d like Corentin to review again and be aware of the discussion here in case he sees any gaps\n\nPeng and I discussed this and here were my takeaways:\n - Feature::DawnMultiPlanarFormats used to be just for importing of HANDLE/fd, but it has since then changed to also include de-novo creation of a multiplanar texture. These texture formats are always supported on FL11_0 so we can unconditionally say that are supported in D3D. (d3d12/metal already work this way; Vulkan checks if the formats are supported)\n\n - Import of multiplanar textures with d3d11 device doesn\u0027t need a feature because it always works so long as the devices are the same (which we validate)\n\n - Import of multiplanar DXGI HANDLE also does not need a feature exposed because assuming the caller passes a valid HANDLE, then the caller needs to have successfully created that HANDLE. That means the caller needs to have successfully exported that HANDLE - which would not be possible if the device did not have sharedResourceTier2. In short, Dawn doesn\u0027t need the feature for import operations. We would need to expose such a feature if we allowed export of multiplanar share handles, but we don\u0027t have export today.",
       "revId": "c06a9f65de0f7cf32343e20879cee07527a7245f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af14451c_00d05b65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:52:11Z",
+      "side": 1,
+      "message": "LGTM % code comments",
+      "revId": "c06a9f65de0f7cf32343e20879cee07527a7245f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd07ed51_b47728b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:52:11Z",
+      "side": 1,
+      "message": "Thanks for the explanation, LGTM with brief comments about them in the code.",
+      "parentUuid": "682269cf_05c7178a",
+      "revId": "c06a9f65de0f7cf32343e20879cee07527a7245f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

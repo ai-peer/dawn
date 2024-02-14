@@ -103,6 +103,24 @@
       "message": "[1]",
       "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee0fee9d_4d03ee68",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:52:11Z",
+      "side": 1,
+      "message": "Maybe comment why we always mark these as available.",
+      "parentUuid": "a2230632_274afc13",
+      "revId": "1787b65d328e26554041badbab4ef97bd69e8bc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
