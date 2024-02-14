@@ -34,6 +34,24 @@
       "parentUuid": "57a5b762_dcb5d7eb",
       "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6037874_3e0cd91f",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-14T19:24:32Z",
+      "side": 1,
+      "message": "\u003e However, taking out this check out would mean this code would run unconditionally for the stencil -\u003e depth-stencil use case.\n\nNo it won\u0027t. It is gated by Toggle::UseBlitForStencilTextureWrite which is only turned on for GL",
+      "parentUuid": "99900af9_7dee9fa5",
+      "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
