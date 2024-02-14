@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04259c42_05c66fb7",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-14T14:57:53Z",
+      "side": 1,
+      "message": "These should also be reverted. This is the shared table data.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 50
+      },
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6a5a993_7ddfcf38",
         "filename": "tools/src/tint/intrinsic/sem/sem.go",
         "patchSetId": 4
