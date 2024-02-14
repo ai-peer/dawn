@@ -52,6 +52,24 @@
       "parentUuid": "99900af9_7dee9fa5",
       "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "457eb00b_b5eee096",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T20:09:57Z",
+      "side": 1,
+      "message": "is this a workaround that could be done in opengl::Queue::WriteTextureImpl ?",
+      "parentUuid": "a6037874_3e0cd91f",
+      "revId": "8018c08847de34ac4496fa99e4b883aa5774d49c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
