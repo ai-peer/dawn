@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f69fbd5_77657f51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "LGTM, this looks a lot like `SharedTextureMemory` which is expected.",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f64445e_9e2687d4",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "```suggestion\nAfter creating the memory, the supported `wgpu::BufferUsage` can be queried.\n```",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4611909f_8f9e9e70",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "What about mapping?",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82058855_934b87d5",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "Even with read only access? We have this capability being added for wgpu::SharedTextureMemory.",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7395769_4bbf1b5c",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "nit: Could we break line on each sentence for nicer diffs?",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cba81c_77e8bf26",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-14T15:50:22Z",
+      "side": 1,
+      "message": "Maybe we can directly do that in Chromium?",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
