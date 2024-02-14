@@ -100,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16592f68_4ecd0bee",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T18:13:13Z",
+      "side": 1,
+      "message": "makes sense, also didn\u0027t know it came with weak refs. That\u0027s weird.",
+      "parentUuid": "9ecd8f4e_5f8f98eb",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c749741_41ba9c25",
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "yes, we do have that optimization; this waiting happens post-optimization when we check that the serial hasn\u0027t passed yet - so we do GetOrCreateSystemEventReceiver and wait on it. It\u0027s possible that the serial did pass between when we checked, and when we do GetOrCreate.\n\nBecause this should happen relatively rarely (I think), it\u0027s probably not worth dedup-ing AlreadySignaled receivers for now. There are other things we can do to make it even better on some systems - I think. Filed https://crbug.com/dawn/2410 to track this.",
       "parentUuid": "6c749741_41ba9c25",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67abd024_49fcbbae",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-14T18:13:13Z",
+      "side": 1,
+      "message": "ah I see, I was looking at the wrong layer for that optimization. SG",
+      "parentUuid": "a7d9246e_ccb50169",
       "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
