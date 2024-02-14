@@ -113,6 +113,10 @@ class TextureBase : public ApiObjectBase {
     bool IsDestroyed() const;
     void SetHasAccess(bool hasAccess);
     bool HasAccess() const;
+    void IncrementOngoingReadAccesses();
+    void DecrementOngoingReadAccesses();
+    uint32_t NumOngoingReadAccesses() const;
+
     uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice, Aspect aspect) const;
     bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
     void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
@@ -180,6 +184,7 @@ class TextureBase : public ApiObjectBase {
         bool hasAccess : 1;
         // Indicates whether the texture has been destroyed.
         bool destroyed : 1;
+        uint32_t numOngoingReadAccesses;
     };
 
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);

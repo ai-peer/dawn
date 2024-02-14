@@ -252,7 +252,11 @@ MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
                     texture->GetFormat().format);
 
     DAWN_INVALID_IF(texture->IsDestroyed(), "%s has been destroyed.", texture);
-    DAWN_INVALID_IF(texture->HasAccess(), "%s is already used to access %s.", texture, this);
+    if (!texture->IsReadOnly() || !descriptor->concurrentRead) {
+        DAWN_INVALID_IF(texture->HasAccess(), "%s is already used to access %s.", texture, this);
+    } else if (texture->IsReadOnly()) {
+        texture->IncrementOngoingReadAccesses();
+    }
 
     DAWN_INVALID_IF(mHasWriteAccess, "%s is currently accessed for writing.", this);
     DAWN_INVALID_IF(mHasExclusiveReadAccess, "%s is currently accessed for exclusive reading.",
@@ -304,6 +308,13 @@ MaybeError SharedTextureMemoryBase::EndAccess(TextureBase* texture,
     DAWN_TRY(ValidateTextureCreatedFromSelf(texture));
 
     DAWN_INVALID_IF(!texture->HasAccess(), "%s is not currently being accessed.", texture);
+
+    if (texture->IsReadOnly()) {
+        texture->DecrementOngoingReadAccesses();
+        if (texture->NumOngoingReadAccesses()) {
+            return {};
+        }
+    }
 
     if (texture->IsReadOnly()) {
         DAWN_ASSERT(!mHasWriteAccess);
