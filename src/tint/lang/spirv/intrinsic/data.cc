@@ -64,6 +64,7 @@ using ParameterInfo = tint::core::intrinsic::ParameterInfo;
 using StringStream = tint::StringStream;
 using TemplateNumberIndex = tint::core::intrinsic::TemplateNumberIndex;
 using TemplateNumberInfo = tint::core::intrinsic::TemplateNumberInfo;
+using ExplicitTemplateTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeIndex = tint::core::intrinsic::TemplateTypeIndex;
 using TemplateTypeInfo = tint::core::intrinsic::TemplateTypeInfo;
 using Type = tint::core::type::Type;
@@ -3394,6 +3395,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [0] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3407,6 +3410,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [1] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3420,6 +3425,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [2] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3433,6 +3440,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [3] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3446,6 +3455,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [4] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3459,6 +3470,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [5] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3472,6 +3485,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [6] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3485,6 +3500,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [7] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3498,6 +3515,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [8] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3511,6 +3530,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [9] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3524,6 +3545,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [10] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3537,6 +3560,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [11] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3550,6 +3575,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [12] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3563,6 +3590,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [13] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3576,6 +3605,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [14] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3589,6 +3620,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [15] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3602,6 +3635,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [16] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3615,6 +3650,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [17] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3628,6 +3665,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [18] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -3641,6 +3680,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [19] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3654,6 +3695,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [20] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3667,6 +3710,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [21] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -3680,6 +3725,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [22] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3693,6 +3740,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [23] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3706,6 +3755,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [24] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3719,6 +3770,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [25] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3732,6 +3785,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [26] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3745,6 +3800,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [27] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3758,6 +3815,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [28] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3771,6 +3830,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [29] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3784,6 +3845,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [30] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3797,6 +3860,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [31] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3810,6 +3875,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [32] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3823,6 +3890,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [33] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3836,6 +3905,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [34] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3849,6 +3920,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [35] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(16),
@@ -3862,6 +3935,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [36] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3875,6 +3950,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [37] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3888,6 +3965,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [38] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3901,6 +3980,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [39] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -3914,6 +3995,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [40] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3927,6 +4010,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [41] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -3940,6 +4025,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [42] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3953,6 +4040,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [43] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -3966,6 +4055,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [44] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3979,6 +4070,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [45] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -3992,6 +4085,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [46] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4005,6 +4100,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [47] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4018,6 +4115,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [48] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4031,6 +4130,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [49] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4044,6 +4145,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [50] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4057,6 +4160,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [51] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4070,6 +4175,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [52] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4083,6 +4190,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [53] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4096,6 +4205,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [54] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4109,6 +4220,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [55] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4122,6 +4235,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [56] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4135,6 +4250,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [57] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4148,6 +4265,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [58] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4161,6 +4280,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [59] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4174,6 +4295,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [60] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4187,6 +4310,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [61] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -4200,6 +4325,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [62] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4213,6 +4340,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [63] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4226,6 +4355,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [64] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4239,6 +4370,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [65] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4252,6 +4385,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [66] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4265,6 +4400,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [67] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4278,6 +4415,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [68] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4291,6 +4430,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [69] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4304,6 +4445,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [70] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4317,6 +4460,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [71] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4330,6 +4475,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [72] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4343,6 +4490,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [73] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4356,6 +4505,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [74] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4369,6 +4520,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [75] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4382,6 +4535,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [76] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4395,6 +4550,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [77] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4408,6 +4565,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [78] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4421,6 +4580,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [79] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4434,6 +4595,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [80] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4447,6 +4610,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [81] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4460,6 +4625,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [82] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4473,6 +4640,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [83] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4486,6 +4655,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [84] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4499,6 +4670,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [85] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4512,6 +4685,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [86] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4525,6 +4700,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [87] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(7),
@@ -4538,6 +4715,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [88] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4551,6 +4730,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [89] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4564,6 +4745,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [90] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4577,6 +4760,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [91] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4590,6 +4775,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [92] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4603,6 +4790,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [93] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4616,6 +4805,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [94] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4629,6 +4820,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [95] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4642,6 +4835,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [96] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4655,6 +4850,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [97] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4668,6 +4865,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [98] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4681,6 +4880,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [99] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -4694,6 +4895,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [100] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4707,6 +4910,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [101] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4720,6 +4925,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [102] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4733,6 +4940,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [103] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4746,6 +4955,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [104] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4759,6 +4970,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [105] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(4),
@@ -4772,6 +4985,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [106] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4785,6 +5000,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [107] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4798,6 +5015,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [108] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4811,6 +5030,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [109] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(5),
@@ -4824,6 +5045,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [110] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4837,6 +5060,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [111] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4850,6 +5075,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [112] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4863,6 +5090,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [113] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4876,6 +5105,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [114] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4889,6 +5120,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [115] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(21),
@@ -4902,6 +5135,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [116] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(22),
@@ -4915,6 +5150,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [117] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(22),
@@ -4928,6 +5165,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [118] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(22),
@@ -4941,6 +5180,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [119] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(22),
@@ -4954,6 +5195,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [120] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4967,6 +5210,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [121] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4980,6 +5225,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [122] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -4993,6 +5240,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [123] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -5006,6 +5255,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [124] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 4,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(0),
@@ -5019,6 +5270,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [125] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(13),
@@ -5032,6 +5285,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [126] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(13),
@@ -5045,6 +5300,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [127] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(13),
@@ -5058,6 +5315,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [128] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5071,6 +5330,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [129] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5084,6 +5345,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [130] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5097,6 +5360,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [131] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 3,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5110,6 +5375,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [132] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5123,6 +5390,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [133] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(9),
@@ -5136,6 +5405,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [134] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5149,6 +5420,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [135] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -5162,6 +5435,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [136] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5175,6 +5450,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [137] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -5188,6 +5465,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [138] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5201,6 +5480,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [139] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5214,6 +5495,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [140] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5227,6 +5510,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [141] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -5240,6 +5525,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [142] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5253,6 +5540,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [143] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(11),
@@ -5266,6 +5555,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [144] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5279,6 +5570,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [145] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 5,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(1),
@@ -5292,6 +5585,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [146] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(25),
@@ -5305,6 +5600,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [147] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(25),
@@ -5318,6 +5615,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [148] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(23),
@@ -5331,6 +5630,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [149] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(19),
@@ -5344,6 +5645,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [150] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 6,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(19),
@@ -5357,6 +5660,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [151] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(19),
@@ -5370,6 +5675,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [152] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 4,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 2,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(19),
@@ -5383,6 +5690,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [153] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5396,6 +5705,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [154] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 3,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5409,6 +5720,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [155] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5422,6 +5735,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [156] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5435,6 +5750,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [157] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 2,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5448,6 +5765,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [158] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 1,
     /* num_implicit_template_numbers */ 1,
     /* implicit_template_types */ TemplateTypeIndex(24),
@@ -5461,6 +5780,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [159] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
@@ -5474,6 +5795,8 @@ constexpr OverloadInfo kOverloads[] = {
     /* [160] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
+    /* num_explicit_template_types */ 0,
+    /* explicit_template_types */ ExplicitTemplateTypeIndex(/* invalid */),
     /* num_implicit_template_types */ 0,
     /* num_implicit_template_numbers */ 0,
     /* implicit_template_types */ TemplateTypeIndex(/* invalid */),
