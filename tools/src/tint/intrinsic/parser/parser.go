@@ -175,8 +175,8 @@ func (p *parser) typeDecl(decos ast.Attributes) ast.TypeDecl {
 		Attributes: decos,
 		Name:       string(name.Runes),
 	}
-	if p.peekIs(0, tok.Lt) {
-		m.TemplateParams = p.templateParams()
+	if p.peekIs(0, tok.Lbracket) || p.peekIs(0, tok.Lt) {
+		m.TemplateParams = p.typeTemplateParams()
 	}
 	return m
 }
@@ -195,6 +195,8 @@ func (p *parser) attributes() ast.Attributes {
 					break loop
 				case tok.String:
 					values = append(values, string(t.Runes))
+				case tok.Identifier:
+					values = append(values, p.templatedBody(*t))
 				case tok.Integer:
 					i, _ := strconv.ParseInt(string(t.Runes), 10, 64)
 					values = append(values, int(i))
@@ -229,9 +231,7 @@ func (p *parser) builtinDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Attributes: decos,
 		Name:       string(name.Runes),
 	}
-	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
-	}
+	f.ExplicitTemplateParams, f.ImplicitTemplateParams = p.intrinsicTemplateParams()
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
 		ret := p.templatedName()
@@ -249,9 +249,7 @@ func (p *parser) operatorDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Attributes: decos,
 		Name:       string(name.Runes),
 	}
-	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
-	}
+	f.ExplicitTemplateParams, f.ImplicitTemplateParams = p.intrinsicTemplateParams()
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
 		ret := p.templatedName()
@@ -269,9 +267,7 @@ func (p *parser) constructorDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Attributes: decos,
 		Name:       string(name.Runes),
 	}
-	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
-	}
+	f.ExplicitTemplateParams, f.ImplicitTemplateParams = p.intrinsicTemplateParams()
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
 		ret := p.templatedName()
@@ -289,9 +285,7 @@ func (p *parser) converterDecl(decos ast.Attributes) ast.IntrinsicDecl {
 		Attributes: decos,
 		Name:       string(name.Runes),
 	}
-	if p.peekIs(0, tok.Lt) {
-		f.TemplateParams = p.templateParams()
-	}
+	f.ExplicitTemplateParams, f.ImplicitTemplateParams = p.intrinsicTemplateParams()
 	f.Parameters = p.parameters()
 	if p.match(tok.Arrow) != nil {
 		ret := p.templatedName()
@@ -355,6 +349,10 @@ func (p *parser) memberName() ast.MemberName {
 
 func (p *parser) templatedName() ast.TemplatedName {
 	name := p.expect(tok.Identifier, "type name")
+	return p.templatedBody(name)
+}
+
+func (p *parser) templatedBody(name tok.Token) ast.TemplatedName {
 	m := ast.TemplatedName{Source: name.Source, Name: string(name.Runes)}
 	if p.match(tok.Lt) != nil {
 		for p.err == nil {
@@ -368,14 +366,30 @@ func (p *parser) templatedName() ast.TemplatedName {
 	return m
 }
 
-func (p *parser) templateParams() ast.TemplateParams {
-	t := ast.TemplateParams{}
-	p.expect(tok.Lt, "template parameter list")
+func (p *parser) typeTemplateParams() []ast.TemplateParam {
+	t := []ast.TemplateParam{}
+	p.expect(tok.Lt, "type template parameter list")
 	for p.err == nil && p.peekIs(0, tok.Identifier) {
 		t = append(t, p.templateParam())
 	}
-	p.expect(tok.Gt, "template parameter list")
+	p.expect(tok.Gt, "type template parameter list")
 	return t
+}
+
+func (p *parser) intrinsicTemplateParams() (explicit, implicit []ast.TemplateParam) {
+	if p.match(tok.Lt) != nil { // <...>
+		for p.err == nil && p.peekIs(0, tok.Identifier) {
+			explicit = append(explicit, p.templateParam())
+		}
+		p.expect(tok.Gt, "explicit template parameter list")
+	}
+	if p.match(tok.Lbracket) != nil { // [...]
+		for p.err == nil && p.peekIs(0, tok.Identifier) {
+			implicit = append(implicit, p.templateParam())
+		}
+		p.expect(tok.Rbracket, "implicit template parameter list")
+	}
+	return explicit, implicit
 }
 
 func (p *parser) templateParam() ast.TemplateParam {
