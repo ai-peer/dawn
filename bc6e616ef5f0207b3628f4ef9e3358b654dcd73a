@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a726b63_3eb1ac2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-14T00:02:35Z",
+      "side": 1,
+      "message": "Thanks - I made a minor fix to ensure the CommandRecordingContext releases the keyed mutexes if there\u0027s no submit",
+      "revId": "bc6e616ef5f0207b3628f4ef9e3358b654dcd73a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
