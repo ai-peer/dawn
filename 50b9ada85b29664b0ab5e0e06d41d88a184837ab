@@ -104,6 +104,24 @@
       "parentUuid": "e56a2685_5fcd3bd3",
       "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "051a1216_1040fb78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T16:43:38Z",
+      "side": 1,
+      "message": "fyi, one of the blocking bugs was crbug.com/dawn/2303\n\nit failed here:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/gpu-fyi-cq-android-arm64/17310/overview\n\nI added that bot to your CL to see what happens",
+      "parentUuid": "1fffef77_05571009",
+      "revId": "50b9ada85b29664b0ab5e0e06d41d88a184837ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
