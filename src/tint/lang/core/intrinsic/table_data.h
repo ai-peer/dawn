@@ -216,7 +216,7 @@ static constexpr IntrinsicInfo kNoOverloads{0, OverloadIndex(OverloadIndex::kInv
 /// * Valid   - a fixed integer value
 /// * Any     - matches any other non-invalid number
 class Number {
-    enum State {
+    enum State : uint8_t {
         kInvalid,
         kValid,
         kAny,

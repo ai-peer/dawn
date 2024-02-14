@@ -309,6 +309,21 @@ Candidate ScoreOverload(Context& context,
         }
     }
 
+    if (score == 0) {
+        for (size_t i = 0; i < overload.num_explicit_templates; ++i) {
+            auto& tmpl = context.data[overload.templates + i];
+            if (auto* matcher_indices = context.data[tmpl.matcher_indices]) {
+                if (auto* type = templates.Type(i)) {
+                    if (Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                            .Type(type) != nullptr) {
+                        continue;
+                    }
+                }
+                score += kMismatchedExplicitTemplateTypePenalty;
+            }
+        }
+    }
+
     // Invoke the matchers for each parameter <-> argument pair.
     // If any arguments cannot be matched, then `score` will be increased.
     // If the overload has any template types or numbers then these will be set based on the
@@ -414,11 +429,10 @@ Result<Candidate, std::string> ResolveCandidate(Context& context,
         }
         // If no arguments of this candidate ranked worse than the previous best candidate, then
         // this candidate becomes the new best candidate.
-        // If no arguments of this candidate ranked better than the previous best candidate, then
-        // this candidate is removed from the list of matches.
-        // If neither of the above apply, then we have two candidates with no clear winner, which
-        // results in an ambiguous overload error. In this situation the loop ends with
-        // `num_matched > 1`.
+        // If no arguments of this candidate ranked better than the previous best candidate,
+        // then this candidate is removed from the list of matches. If neither of the above
+        // apply, then we have two candidates with no clear winner, which results in an
+        // ambiguous overload error. In this situation the loop ends with `num_matched > 1`.
         if (some_won) {
             // One or more arguments of this candidate ranked better than the previous best
             // candidate's argument(s).
@@ -427,8 +441,8 @@ Result<Candidate, std::string> ResolveCandidate(Context& context,
                 // All arguments were at as-good or better than the previous best.
                 if (best) {
                     // Mark the previous best candidate as no longer being in the running, by
-                    // setting its score to a non-zero value. We pick 1 as this is the closest to 0
-                    // (match) as we can get.
+                    // setting its score to a non-zero value. We pick 1 as this is the closest
+                    // to 0 (match) as we can get.
                     best->score = 1;
                     num_matched--;
                 }
@@ -437,8 +451,8 @@ Result<Candidate, std::string> ResolveCandidate(Context& context,
             }
         } else {
             // No arguments ranked better than the current best.
-            // Change the score of this candidate to a non-zero value, so that it's not considered a
-            // match.
+            // Change the score of this candidate to a non-zero value, so that it's not
+            // considered a match.
             candidate.score = 1;
         }
     }
@@ -757,7 +771,8 @@ Result<Overload, std::string> LookupCtorConv(Context& context,
         StringStream ss;
         ss << "no matching constructor for " << CallSignature(type_name, template_args, args)
            << std::endl;
-        Candidates ctor, conv;
+        Candidates ctor;
+        Candidates conv;
         for (auto candidate : candidates) {
             if (candidate.overload->flags.Contains(OverloadFlag::kIsConstructor)) {
                 ctor.Push(candidate);
