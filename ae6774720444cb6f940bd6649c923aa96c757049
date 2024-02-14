@@ -34,6 +34,24 @@
       "parentUuid": "be9236eb_b84d98ab",
       "revId": "ae6774720444cb6f940bd6649c923aa96c757049",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5334d88_ec3792fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T15:22:07Z",
+      "side": 1,
+      "message": "I would like to remove this if possible. \n\nOne additional thing it does is that it makes the **render pass / compute pass** errors also happen immediately. Which - is nice for development, but is not how the errors are supposed to work, according to the spec.",
+      "parentUuid": "b2122dc0_125fe6f3",
+      "revId": "ae6774720444cb6f940bd6649c923aa96c757049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
