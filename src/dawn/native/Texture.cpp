@@ -965,6 +965,21 @@ bool TextureBase::HasAccess() const {
     return mState.hasAccess;
 }
 
+void TextureBase::IncrementOngoingReadAccesses() {
+    DAWN_ASSERT(!IsError());
+    mState.numOngoingReadAccesses++;
+}
+
+void TextureBase::DecrementOngoingReadAccesses() {
+    DAWN_ASSERT(!IsError());
+    mState.numOngoingReadAccesses--;
+}
+
+uint32_t TextureBase::NumOngoingReadAccesses() const {
+    DAWN_ASSERT(!IsError());
+    return mState.numOngoingReadAccesses;
+}
+
 uint32_t TextureBase::GetSubresourceIndex(uint32_t mipLevel,
                                           uint32_t arraySlice,
                                           Aspect aspect) const {
