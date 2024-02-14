@@ -630,6 +630,8 @@ TEST_P(WaitAnyTests, ProcessEventsWhileManyThreadsWaitAnySameFutureSerial) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     // TODO(dawn:2397): GL backend needs to use EGL syncs to allow cross-thread waiting.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL() || IsOpenGLES());
+    // TODO(dawn:2413): Failing on Windows Swiftshader.
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() && IsWindows());
 
     std::mutex mutex;
     std::condition_variable cv;
