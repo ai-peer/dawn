@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5c13e8f3_d008dbf7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 15
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T16:35:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0bae284_2619d8ef",
+      "range": {
+        "startLine": 9,
+        "startChar": 12,
+        "endLine": 9,
+        "endChar": 56
+      },
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "23775f77_a7a08241",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 15
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ecd8f4e_5f8f98eb",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T16:35:58Z",
+      "side": 1,
+      "message": "no super strong reason, but in general I think we prefer to use our own since 1. we already have it, and 2. std::shared_ptr comes with extra things we don\u0027t need here - like weak refs, etc.",
+      "parentUuid": "643289f6_c8206aee",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c749741_41ba9c25",
@@ -71,6 +113,24 @@
       "writtenOn": "2024-02-14T01:02:46Z",
       "side": 1,
       "message": "possible future work: should we dedup AlreadySignaled receivers so we only need to have one? I originally thought that wouldn\u0027t be valid, but now I think we could do it.\n\nI also thought we had already added an optimization to SystemEventReceiver to not create an actual OS object until one was needed, but that doesn\u0027t seem to be the case. That would be nice for any CreateAlreadySignaled calls among other things.",
+      "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d9246e_ccb50169",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T16:35:58Z",
+      "side": 1,
+      "message": "yes, we do have that optimization; this waiting happens post-optimization when we check that the serial hasn\u0027t passed yet - so we do GetOrCreateSystemEventReceiver and wait on it. It\u0027s possible that the serial did pass between when we checked, and when we do GetOrCreate.\n\nBecause this should happen relatively rarely (I think), it\u0027s probably not worth dedup-ing AlreadySignaled receivers for now. There are other things we can do to make it even better on some systems - I think. Filed https://crbug.com/dawn/2410 to track this.",
+      "parentUuid": "6c749741_41ba9c25",
       "revId": "1510f82914c1540cfe7ac7a76d4ed42beff5fa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
