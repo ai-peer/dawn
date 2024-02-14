@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e2d8c68_46f73d5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-14T14:14:48Z",
+      "side": 1,
+      "message": "A couple of minor things to rename, otherwise LGTM!",
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a5a993_7ddfcf38",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-14T14:14:48Z",
+      "side": 1,
+      "message": "These two members are used to generate the shared tables `constexpr TemplateTypeInfo kTemplateTypes[]` and `constexpr TemplateNumberInfo kTemplateNumbers[]`, so I think these should be:\n```suggestion\n\tTemplateTypes   []*TemplateTypeParam\n\tTemplateNumbers []TemplateParam\n```",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 40
+      },
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
