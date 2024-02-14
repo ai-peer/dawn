@@ -187,17 +187,17 @@ type Intrinsic struct {
 
 // Overload describes a single overload of a builtin or operator
 type Overload struct {
-	Decl              ast.IntrinsicDecl
-	Intrinsic         *Intrinsic
-	TemplateParams    []TemplateParam
-	TemplateTypes     []*TemplateTypeParam
-	TemplateNumbers   []TemplateParam
-	ReturnType        *FullyQualifiedName
-	Parameters        []Parameter
-	CanBeUsedInStage  StageUses
-	MustUse           bool   // True if function cannot be used as a statement
-	IsDeprecated      bool   // True if this overload is deprecated
-	ConstEvalFunction string // Name of the function used to evaluate the intrinsic at shader creation time
+	Decl                   ast.IntrinsicDecl
+	Intrinsic              *Intrinsic
+	ImplicitTemplateParams []TemplateParam
+	TemplateTypes          []*TemplateTypeParam
+	TemplateNumbers        []TemplateParam
+	ReturnType             *FullyQualifiedName
+	Parameters             []Parameter
+	CanBeUsedInStage       StageUses
+	MustUse                bool   // True if function cannot be used as a statement
+	IsDeprecated           bool   // True if this overload is deprecated
+	ConstEvalFunction      string // Name of the function used to evaluate the intrinsic at shader creation time
 }
 
 // StageUses describes the stages an overload can be used in
@@ -231,9 +231,9 @@ func (o Overload) Format(w fmt.State, verb rune) {
 		fmt.Fprintf(w, "op ")
 	}
 	fmt.Fprintf(w, "%v", o.Intrinsic.Name)
-	if len(o.TemplateParams) > 0 {
+	if len(o.ImplicitTemplateParams) > 0 {
 		fmt.Fprintf(w, "<")
-		for i, t := range o.TemplateParams {
+		for i, t := range o.ImplicitTemplateParams {
 			if i > 0 {
 				fmt.Fprint(w, ", ")
 			}

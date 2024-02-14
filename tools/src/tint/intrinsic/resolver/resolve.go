@@ -321,17 +321,17 @@ func (r *resolver) intrinsic(
 	s := newScope(&r.globals)
 
 	// Resolve the declared template parameters
-	templateParams, err := r.templateParams(&s, a.TemplateParams)
+	implicitTemplateParams, err := r.templateParams(&s, a.ImplicitTemplateParams)
 	if err != nil {
 		return err
 	}
 
 	// Construct the semantic overload
 	overload := &sem.Overload{
-		Decl:           a,
-		Intrinsic:      intrinsic,
-		Parameters:     make([]sem.Parameter, len(a.Parameters)),
-		TemplateParams: templateParams,
+		Decl:                   a,
+		Intrinsic:              intrinsic,
+		Parameters:             make([]sem.Parameter, len(a.Parameters)),
+		ImplicitTemplateParams: implicitTemplateParams,
 	}
 
 	// Process overload attributes
@@ -403,7 +403,7 @@ func (r *resolver) intrinsic(
 
 	// Sort the template parameters by resolved type. Append these to
 	// sem.Overload.TemplateTypes or sem.Overload.TemplateNumbers based on their kind.
-	for _, param := range templateParams {
+	for _, param := range implicitTemplateParams {
 		switch param := param.(type) {
 		case *sem.TemplateTypeParam:
 			overload.TemplateTypes = append(overload.TemplateTypes, param)
