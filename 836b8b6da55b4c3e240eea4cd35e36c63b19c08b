@@ -167,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8b92ad7_d7ce0c1f",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-14T16:34:44Z",
+      "side": 1,
+      "message": "#3 is folks writing Dawn native, who want as much \"WebGPU-spec-correct\" behaviour as possible, including emulating this whether validation is on or off.\n\nIf Graphite or other native developers absolutely need to avoid this for performance reasons, we could add a toggle to turn it off and require index_buffer_offset to be zero. Or perhaps they just force off the existing toggle (ApplyIndexBufferOffsetToFirstIndexInDrawIndexedIndirectValidation), if that\u0027s possible.\n\nDoes that make sense?",
+      "parentUuid": "7d057b8d_1542d694",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 68
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "181a6531_3154cba6",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 2
