@@ -324,6 +324,72 @@ TEST_P(MultithreadTests, CreateComputePipelineAsyncInParallel) {
     }
 }
 
+// Test CreateComputePipeline on multiple threads.
+TEST_P(MultithreadTests, CreateComputePipelineInParallel) {
+    // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
+    DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
+
+    std::vector<wgpu::ComputePipeline> pipelines(10);
+    std::vector<std::string> shaderSources(pipelines.size());
+    std::vector<uint32_t> expectedValues(shaderSources.size());
+
+    for (uint32_t i = 0; i < pipelines.size(); ++i) {
+        expectedValues[i] = i + 1;
+
+        std::ostringstream ss;
+        ss << R"(
+        struct SSBO {
+            value : u32
+        }
+        @group(0) @binding(0) var<storage, read_write> ssbo : SSBO;
+
+        @compute @workgroup_size(1) fn main() {
+            ssbo.value =
+        )";
+        ss << expectedValues[i];
+        ss << ";}";
+
+        shaderSources[i] = ss.str();
+    }
+
+    // Create pipelines in parallel
+    utils::RunInParallel(static_cast<uint32_t>(pipelines.size()), [&](uint32_t index) {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = utils::CreateShaderModule(device, shaderSources[index].c_str());
+        pipelines[index] = device.CreateComputePipeline(&csDesc);
+    });
+
+    // Verify pipelines' executions
+    for (uint32_t i = 0; i < pipelines.size(); ++i) {
+        wgpu::Buffer ssbo =
+            CreateBuffer(sizeof(uint32_t), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+
+        wgpu::CommandBuffer commands;
+        {
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+
+            ASSERT_NE(nullptr, pipelines[i].Get());
+            wgpu::BindGroup bindGroup =
+                utils::MakeBindGroup(device, pipelines[i].GetBindGroupLayout(0),
+                                     {
+                                         {0, ssbo, 0, sizeof(uint32_t)},
+                                     });
+            pass.SetBindGroup(0, bindGroup);
+            pass.SetPipeline(pipelines[i]);
+
+            pass.DispatchWorkgroups(1);
+            pass.End();
+
+            commands = encoder.Finish();
+        }
+
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER_U32_EQ(expectedValues[i], ssbo, 0);
+    }
+}
+
 // Test CreateRenderPipelineAsync on multiple threads.
 TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
     // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
@@ -394,6 +460,87 @@ TEST_P(MultithreadTests, CreateRenderPipelineAsyncInParallel) {
         }
 
         pipelines[index] = task.renderPipeline;
+    });
+
+    // Verify pipelines' executions
+    for (uint32_t i = 0; i < pipelines.size(); ++i) {
+        wgpu::Texture outputTexture =
+            CreateTexture(1, 1, kRenderAttachmentFormat,
+                          wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
+
+        utils::ComboRenderPassDescriptor renderPassDescriptor({outputTexture.CreateView()});
+        renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
+        renderPassDescriptor.cColorAttachments[0].clearValue = {1.f, 0.f, 0.f, 1.f};
+
+        wgpu::CommandBuffer commands;
+        {
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::RenderPassEncoder renderPassEncoder =
+                encoder.BeginRenderPass(&renderPassDescriptor);
+
+            ASSERT_NE(nullptr, pipelines[i].Get());
+
+            renderPassEncoder.SetPipeline(pipelines[i]);
+            renderPassEncoder.Draw(1);
+            renderPassEncoder.End();
+            commands = encoder.Finish();
+        }
+
+        queue.Submit(1, &commands);
+
+        EXPECT_PIXEL_RGBA8_BETWEEN(minExpectedValues[i], maxExpectedValues[i], outputTexture, 0, 0);
+    }
+}
+
+// Test CreateRenderPipeline on multiple threads.
+TEST_P(MultithreadTests, CreateRenderPipelineInParallel) {
+    // TODO(crbug.com/dawn/1766): TSAN reported race conditions in NVIDIA's vk driver.
+    DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsNvidia() && IsTsan());
+
+    constexpr uint32_t kNumThreads = 10;
+    constexpr wgpu::TextureFormat kRenderAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
+    constexpr uint8_t kColorStep = 250 / kNumThreads;
+
+    std::vector<wgpu::RenderPipeline> pipelines(kNumThreads);
+    std::vector<std::string> fragmentShaderSources(kNumThreads);
+    std::vector<utils::RGBA8> minExpectedValues(kNumThreads);
+    std::vector<utils::RGBA8> maxExpectedValues(kNumThreads);
+
+    for (uint32_t i = 0; i < kNumThreads; ++i) {
+        // Due to floating point precision, we need to use min & max values to compare the
+        // expectations.
+        auto expectedGreen = kColorStep * i;
+        minExpectedValues[i] =
+            utils::RGBA8(0, expectedGreen == 0 ? 0 : (expectedGreen - 2), 0, 255);
+        maxExpectedValues[i] =
+            utils::RGBA8(0, expectedGreen == 255 ? 255 : (expectedGreen + 2), 0, 255);
+
+        std::ostringstream ss;
+        ss << R"(
+        @fragment fn main() -> @location(0) vec4f {
+            return vec4f(0.0,
+        )";
+        ss << expectedGreen / 255.0;
+        ss << ", 0.0, 1.0);}";
+
+        fragmentShaderSources[i] = ss.str();
+    }
+
+    // Create pipelines in parallel
+    utils::RunInParallel(kNumThreads, [&](uint32_t index) {
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        @vertex fn main() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        })");
+        wgpu::ShaderModule fsModule =
+            utils::CreateShaderModule(device, fragmentShaderSources[index].c_str());
+        renderPipelineDescriptor.vertex.module = vsModule;
+        renderPipelineDescriptor.cFragment.module = fsModule;
+        renderPipelineDescriptor.cTargets[0].format = kRenderAttachmentFormat;
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
+
+        pipelines[index] = device.CreateRenderPipeline(&renderPipelineDescriptor);
     });
 
     // Verify pipelines' executions
