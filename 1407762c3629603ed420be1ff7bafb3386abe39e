@@ -110,6 +110,30 @@
       },
       "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2802d15_d296bce6",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-14T15:09:00Z",
+      "side": 1,
+      "message": "I\u0027m now getting really confused over whether the explicits are their own templates, or just names that map to the implicits. I was assuming the former, but looking at the child CL, I\u0027m not sure.",
+      "parentUuid": "a4f19411_bc4da8d1",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 40
+      },
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
