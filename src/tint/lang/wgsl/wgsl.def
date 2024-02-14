@@ -429,6 +429,15 @@ match workgroup
 @must_use @const fn atan2[T: fa_f32_f16, N: num](vec<N, T>, vec<N, T>) -> vec<N, T>
 @must_use @const fn atanh[T: fa_f32_f16](@test_value(0.5) T) -> T
 @must_use @const fn atanh[N: num, T: fa_f32_f16](@test_value(0.5) vec<N, T>) -> vec<N, T>
+
+@must_use @const fn bitcast<T: fiu32>[U: fiu32](U) -> T
+@must_use @const fn bitcast<T: vec<N, T> >[N: num, T: fiu32, U: fiu32](vec<N, U>) -> vec<N, T>
+@must_use @const fn bitcast<T: u32>(ia) -> u32
+@must_use @const fn bitcast<T: vec<N, u32> >[N: num](vec<N, ia>) -> vec<N, u32>
+@must_use @const fn bitcast<T: vec2<S> >[S: fiu32](vec4<f16>) -> vec2<S>
+@must_use @const fn bitcast<T: vec2<f16> >[S: fiu32](S) -> vec2<f16>
+@must_use @const fn bitcast<T: vec4<f16> >[S: fiu32](vec2<S>) -> vec4<f16>
+
 @must_use @const fn ceil[T: fa_f32_f16](@test_value(1.5) T) -> T
 @must_use @const fn ceil[N: num, T: fa_f32_f16](@test_value(1.5) vec<N, T>) -> vec<N, T>
 @must_use @const fn clamp[T: fia_fiu32_f16](T, T, T) -> T
@@ -749,9 +758,11 @@ fn textureStore[C: iu32](texture: texture_storage_3d<u32_texel_format, writable>
 @must_use @const("Zero") ctor f32() -> f32
 @must_use @const("Zero") ctor f16() -> f16
 @must_use @const("Zero") ctor bool() -> bool
+
 @must_use @const("Zero") ctor vec2() -> vec2<ia>
 @must_use @const("Zero") ctor vec3() -> vec3<ia>
 @must_use @const("Zero") ctor vec4() -> vec4<ia>
+
 @must_use @const("Zero") ctor vec2<T: concrete_scalar>() -> vec2<T>
 @must_use @const("Zero") ctor vec3<T: concrete_scalar>() -> vec3<T>
 @must_use @const("Zero") ctor vec4<T: concrete_scalar>() -> vec4<T>
@@ -980,6 +991,7 @@ ctor mat4x4[T: fa_f32_f16](T, T, T, T,
 
 // Conversion from vec3 to internal __packed_vec3 type.
 @must_use @const conv packedVec3<T: concrete_scalar>(vec3<T>) -> packedVec3<T>
+@must_use @const conv packedVec3[T: concrete_scalar](vec3<T>) -> packedVec3<T>
 
 ////////////////////////////////////////////////////////////////////////////////
 // Operators                                                                  //
