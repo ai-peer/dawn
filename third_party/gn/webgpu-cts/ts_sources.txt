@@ -485,6 +485,8 @@ src/webgpu/shader/execution/expression/call/builtin/cross.cache.ts
 src/webgpu/shader/execution/expression/call/builtin/cross.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/degrees.cache.ts
 src/webgpu/shader/execution/expression/call/builtin/degrees.spec.ts
+src/webgpu/shader/execution/expression/call/builtin/derivatives.cache.ts
+src/webgpu/shader/execution/expression/call/builtin/derivatives.ts
 src/webgpu/shader/execution/expression/call/builtin/determinant.cache.ts
 src/webgpu/shader/execution/expression/call/builtin/determinant.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/distance.cache.ts
