@@ -191,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56c813a8_ee7d803b",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-14T16:38:17Z",
+      "side": 1,
+      "message": "yes, I agree we should do #3. It still needs to happen for correctness. In the future, we could have some mode where all performance warnings are errors. There are tons of other places where we emulate things - like all the blits to emulate copies - that people who really really care may want to avoid.",
+      "parentUuid": "d8b92ad7_d7ce0c1f",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 68
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "181a6531_3154cba6",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 2
