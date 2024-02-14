@@ -39,6 +39,30 @@
       },
       "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f19411_bc4da8d1",
+        "filename": "tools/src/tint/intrinsic/sem/sem.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-14T14:35:10Z",
+      "side": 1,
+      "message": "I made this change, but I don\u0027t think it\u0027s right. These are used to figure out hte offsets. An Explicit version of each is added in the next CL and without the differentiated sem values I don\u0027t know what to set for the offset values.",
+      "parentUuid": "e6a5a993_7ddfcf38",
+      "range": {
+        "startLine": 193,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 40
+      },
+      "revId": "1407762c3629603ed420be1ff7bafb3386abe39e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
