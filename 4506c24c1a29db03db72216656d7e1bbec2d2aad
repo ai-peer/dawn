@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951124ac_34701cae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-15T15:55:47Z",
+      "side": 1,
+      "message": "EGL_KHR_fence_sync has 99%+ support according to gpuinfo.org, while EGL_KHR_reusable_sync is only 25%ish. Could we just rely on the former?",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6f286e_af6ab63f",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-15T15:55:47Z",
+      "side": 1,
+      "message": "Note that there is a risk in using strstr() to parse extension strings: if the extension name is a subset of another extension, it\u0027ll return a false positive. \n\nMy bad for introducing this anti-pattern, but perhaps it\u0027s a good time to introduce better parsing. We could do something like GLFW\u0027s _glfwStringInExtensionString, which ensures that the found string is correctly space-separated. There might be a more modern way of doing it using the standard library or ABSL.\n\nAlso, perhaps we could have an array of extensions we\u0027re interested in, and iterate over that rather than querying them individually.",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
