@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "270d0c3c_605559ed",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-15T16:49:04Z",
+      "side": 1,
+      "message": "Did you consider using WriteBuffer to do the initial upload, instead of map/memcpy/unmap? Would that be simpler?",
+      "revId": "d9b1b8333c00b3dc7a253c841efbb39595aa4a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
