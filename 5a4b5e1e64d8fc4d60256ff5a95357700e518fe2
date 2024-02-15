@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8615f1fb_0953153c",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-15T17:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f64445e_9e2687d4",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4611909f_8f9e9e70",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-14T15:50:22Z",
       "side": 1,
       "message": "What about mapping?",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24f8fa04_0c2440b7",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-15T17:22:29Z",
+      "side": 1,
+      "message": "Added a section below.",
+      "parentUuid": "4611909f_8f9e9e70",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -100,6 +136,24 @@
       "writtenOn": "2024-02-14T15:50:22Z",
       "side": 1,
       "message": "nit: Could we break line on each sentence for nicer diffs?",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c9d210_057a95ef",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-15T17:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7395769_4bbf1b5c",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
