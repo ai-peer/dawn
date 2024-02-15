@@ -27,6 +27,7 @@
 
 #include <sys/mman.h>
 #include <unistd.h>
+#include <mutex>
 #include <utility>
 #include <vector>
 
@@ -72,8 +73,11 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
 
         wgpu::BufferHostMappedPointer hostMappedDesc;
         hostMappedDesc.pointer = ptr;
-        hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
-        hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
+            hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        }
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = usage;
@@ -84,6 +88,7 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
         if (dawn::native::CheckIsErrorForTesting(buffer.Get())) {
             UnmapMemory();
         } else {
+            std::unique_lock<std::mutex> lock(mMutex);
             EXPECT_CALL(mDisposeCallback, Call(ptr))
                 .WillOnce(testing::InvokeWithoutArgs(UnmapMemory));
         }
@@ -92,6 +97,7 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
     }
 
   private:
+    std::mutex mMutex;
     testing::MockCallback<WGPUCallback> mDisposeCallback;
 };
 
