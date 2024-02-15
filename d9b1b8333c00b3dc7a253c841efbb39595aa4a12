@@ -34,6 +34,24 @@
       "parentUuid": "270d0c3c_605559ed",
       "revId": "d9b1b8333c00b3dc7a253c841efbb39595aa4a12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6cb0efb_081eacee",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-15T20:22:59Z",
+      "side": 1,
+      "message": "\"WriteTexture to R8 and then BlitR8ToStencil\" sounds good to me. Thanks for pointing this out. Let me try updating",
+      "parentUuid": "5652bf00_d35582f7",
+      "revId": "d9b1b8333c00b3dc7a253c841efbb39595aa4a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
