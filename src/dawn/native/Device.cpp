@@ -1150,8 +1150,12 @@ BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
     return ReturnToAPI(std::move(result));
 }
 BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
+    auto resultOrError = CreateBuffer(descriptor);
+    // Grab the scoped lock for thread-safe error handling. Creation of the buffer has
+    // some cases where it does not need a lock, so APICreateBuffer does not autolock.
+    auto deviceLock(GetScopedLock());
     Ref<BufferBase> result;
-    if (ConsumedError(CreateBuffer(descriptor), &result, InternalErrorType::OutOfMemory,
+    if (ConsumedError(std::move(resultOrError), &result, InternalErrorType::OutOfMemory,
                       "calling %s.CreateBuffer(%s).", this, descriptor)) {
         DAWN_ASSERT(result == nullptr);
         result = BufferBase::MakeError(this, descriptor);
@@ -1755,12 +1759,18 @@ ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* 
     }
 
     Ref<BufferBase> buffer;
-    DAWN_TRY_ASSIGN(buffer, CreateBufferImpl(descriptor));
+    if (descriptor.Get<BufferHostMappedPointer>() && !descriptor->mappedAtCreation) {
+        // Buffer creation from host-mapped pointer does not need the device lock.
+        DAWN_TRY_ASSIGN(buffer, CreateBufferImpl(descriptor));
+    } else {
+        // Other types of buffers, or mappedAtCreation buffers require the device lock.
+        auto deviceLock(GetScopedLock());
+        DAWN_TRY_ASSIGN(buffer, CreateBufferImpl(descriptor));
 
-    if (descriptor->mappedAtCreation) {
-        DAWN_TRY(buffer->MapAtCreation());
+        if (descriptor->mappedAtCreation) {
+            DAWN_TRY(buffer->MapAtCreation());
+        }
     }
-
     return std::move(buffer);
 }
 
