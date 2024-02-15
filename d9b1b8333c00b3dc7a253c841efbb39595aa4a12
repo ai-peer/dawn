@@ -16,6 +16,24 @@
       "message": "Did you consider using WriteBuffer to do the initial upload, instead of map/memcpy/unmap? Would that be simpler?",
       "revId": "d9b1b8333c00b3dc7a253c841efbb39595aa4a12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5652bf00_d35582f7",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-15T20:09:37Z",
+      "side": 1,
+      "message": "Hmm, actually maybe that doesn\u0027t help, since BlitBufferToStencil() is going to CopyBufferToTexture() from there. Maybe the simplest path is writeTexture() to an R8 texture, then BlitR8ToStencil() from there. Then you don\u0027t need to allocate the intermediate buffer. WDYT?",
+      "parentUuid": "270d0c3c_605559ed",
+      "revId": "d9b1b8333c00b3dc7a253c841efbb39595aa4a12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
