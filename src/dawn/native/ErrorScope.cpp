@@ -67,23 +67,56 @@ ErrorScopeStack::ErrorScopeStack() = default;
 
 ErrorScopeStack::~ErrorScopeStack() = default;
 
+const std::vector<ErrorScope>* ErrorScopeStack::GetThreadLocalStack() const {
+    return mScopes.Use([&](auto scopes) -> const std::vector<ErrorScope>* {
+        auto it = scopes->find(std::this_thread::get_id());
+        if (it == scopes->end()) {
+            return nullptr;
+        }
+        return &it->second;
+    });
+}
+
+std::vector<ErrorScope>* ErrorScopeStack::GetThreadLocalStack() {
+    return mScopes.Use([&](auto scopes) -> std::vector<ErrorScope>* {
+        auto it = scopes->find(std::this_thread::get_id());
+        if (it == scopes->end()) {
+            return nullptr;
+        }
+        return &it->second;
+    });
+}
+
 void ErrorScopeStack::Push(wgpu::ErrorFilter filter) {
-    mScopes.push_back(ErrorScope(filter));
+    // Note: operator[] will create the entry in the map if it doesn't exist.
+    auto& stack = mScopes->operator[](std::this_thread::get_id());
+    stack.push_back(ErrorScope(filter));
 }
 
 ErrorScope ErrorScopeStack::Pop() {
-    DAWN_ASSERT(!mScopes.empty());
-    ErrorScope scope = std::move(mScopes.back());
-    mScopes.pop_back();
+    std::vector<ErrorScope>* stack = GetThreadLocalStack();
+    DAWN_ASSERT(stack != nullptr);
+    DAWN_ASSERT(!stack->empty());
+    ErrorScope scope = std::move(stack->back());
+    stack->pop_back();
     return scope;
 }
 
 bool ErrorScopeStack::Empty() const {
-    return mScopes.empty();
+    const std::vector<ErrorScope>* stack = GetThreadLocalStack();
+    if (!stack) {
+        return true;
+    }
+    return stack->empty();
 }
 
 bool ErrorScopeStack::HandleError(wgpu::ErrorType type, const char* message) {
-    for (auto it = mScopes.rbegin(); it != mScopes.rend(); ++it) {
+    std::vector<ErrorScope>* stack = GetThreadLocalStack();
+    if (stack == nullptr) {
+        return false;
+    }
+
+    for (auto it = stack->rbegin(); it != stack->rend(); ++it) {
         if (it->mMatchedErrorType != type) {
             // Error filter does not match. Move on to the next scope.
             continue;
