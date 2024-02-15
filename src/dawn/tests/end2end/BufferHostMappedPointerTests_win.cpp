@@ -26,6 +26,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <windows.h>
+#include <mutex>
 #include <utility>
 
 #include "dawn/common/Log.h"
@@ -58,8 +59,11 @@ class VMBackend : public BufferHostMappedPointerTestBackend {
 
         wgpu::BufferHostMappedPointer hostMappedDesc;
         hostMappedDesc.pointer = ptr;
-        hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
-        hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
+            hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        }
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = usage;
@@ -140,8 +144,11 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
 
         wgpu::BufferHostMappedPointer hostMappedDesc;
         hostMappedDesc.pointer = ptr;
-        hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
-        hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
+            hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        }
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = usage;
@@ -152,6 +159,7 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
         if (dawn::native::CheckIsErrorForTesting(buffer.Get())) {
             DeallocMemory();
         } else {
+            std::unique_lock<std::mutex> lock(mMutex);
             EXPECT_CALL(mDisposeCallback, Call(ptr))
                 .WillOnce(testing::InvokeWithoutArgs(DeallocMemory));
         }
@@ -160,6 +168,7 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
     }
 
   private:
+    std::mutex mMutex;
     testing::MockCallback<WGPUCallback> mDisposeCallback;
 };
 
