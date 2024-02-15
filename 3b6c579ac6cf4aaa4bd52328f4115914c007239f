@@ -16,6 +16,23 @@
       "message": "PTAL - see https://issues.chromium.org/issues/41487285#comment14 for context\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5247746 is the Chromium CL that eliminates a copy on the non-zero-copy external texture path as well as the copyFromExternalImage path, but that can\u0027t be landed without these test suppressions because it relies on the external texture to do the transform and that isn\u0027t implemented yet for compute shaders.",
       "revId": "3b6c579ac6cf4aaa4bd52328f4115914c007239f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a279beb_a5fbc7a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-15T23:35:08Z",
+      "side": 1,
+      "message": "gentle ping",
+      "revId": "3b6c579ac6cf4aaa4bd52328f4115914c007239f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
