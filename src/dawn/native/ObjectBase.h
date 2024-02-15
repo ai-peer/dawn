@@ -151,7 +151,7 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     // Returns the list where this object may be tracked for future destruction. This can be
     // overrided to create hierarchical object tracking ownership:
     //   i.e. Device -[tracks]-> Texture -[tracks]-> TextureView.
-    virtual ApiObjectList* GetObjectTrackingList();
+    virtual ApiObjectList* GetObjectTrackingList() const;
 
     // Sub-classes may override this function multiple times. Whenever overriding this function,
     // however, users should be sure to call their parent's version in the new override to make
@@ -165,6 +165,10 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     virtual void SetLabelImpl();
 
     std::string mLabel;
+
+    // Tracks whether this object is alive and tracked inside an object list. This is
+    // an atomic so we can check liveness without acquiring the linked-list lock.
+    std::atomic<bool> mIsAlive;
 };
 
 template <typename T>
