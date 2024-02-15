@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/RefCounted.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -45,10 +46,10 @@ namespace dawn::native {
 
 ResultOrError<uint64_t> CountUTF16CodeUnitsFromUTF8String(const std::string_view& utf8String);
 
-class OwnedCompilationMessages : public NonCopyable {
+class OwnedCompilationMessages : public RefCounted, public NonCopyable {
   public:
     OwnedCompilationMessages();
-    ~OwnedCompilationMessages();
+    ~OwnedCompilationMessages() override;
 
     // Adds a message on line 0 (before the first line).
     void AddUnanchoredMessage(
