@@ -1304,9 +1304,8 @@ ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor
                  utils::GetLabelForTrace(descriptor->label));
 
     Ref<ShaderModuleBase> result;
-    std::unique_ptr<OwnedCompilationMessages> compilationMessages(
-        std::make_unique<OwnedCompilationMessages>());
-    if (ConsumedError(CreateShaderModule(descriptor, compilationMessages.get()), &result,
+    Ref<OwnedCompilationMessages> compilationMessages = AcquireRef(new OwnedCompilationMessages());
+    if (ConsumedError(CreateShaderModule(descriptor, compilationMessages.Get()), &result,
                       "calling %s.CreateShaderModule(%s).", this, descriptor)) {
         DAWN_ASSERT(result == nullptr);
         result = ShaderModuleBase::MakeError(this, descriptor ? descriptor->label : nullptr);
@@ -1324,8 +1323,7 @@ ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescr
                                                          const char* errorMessage) {
     Ref<ShaderModuleBase> result =
         ShaderModuleBase::MakeError(this, descriptor ? descriptor->label : nullptr);
-    std::unique_ptr<OwnedCompilationMessages> compilationMessages(
-        std::make_unique<OwnedCompilationMessages>());
+    Ref<OwnedCompilationMessages> compilationMessages = AcquireRef(new OwnedCompilationMessages());
     compilationMessages->AddUnanchoredMessage(errorMessage, wgpu::CompilationMessageType::Error);
     result->InjectCompilationMessages(std::move(compilationMessages));
     EmitCompilationLog(result.Get());
