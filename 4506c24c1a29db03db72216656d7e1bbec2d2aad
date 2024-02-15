@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17c24c07_a17fca6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-15T20:49:53Z",
+      "side": 1,
+      "message": "when I tested in an earlier patchset, it wasn\u0027t available on gles nvidia, where we are running these tests",
+      "parentUuid": "951124ac_34701cae",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c6f286e_af6ab63f",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 10
