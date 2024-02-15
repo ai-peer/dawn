@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d576dba7_e5fce099",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-15T21:12:12Z",
+      "side": 1,
+      "message": "Oh, interesting. Perhaps because it went into core in 1.5?\n\nFrom https://registry.khronos.org/EGL/specs/eglspec.1.5.pdf, appendix F:\n\nClient API interoperability:\n– Sync objects representing events whose completion can be tested or\nwaited on. Such events include fences placed in client API command\nstreams (EGL_KHR_fence_sync) and events triggered by OpenCL\nevent objects (EGL_KHR_cl_event2), and the ability to wait for sync\nobjects in the server for a client API context, allowing application code\nto continue to execute in parallel (EGL_KHR_wait_sync).",
+      "parentUuid": "17c24c07_a17fca6c",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c6f286e_af6ab63f",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 10
