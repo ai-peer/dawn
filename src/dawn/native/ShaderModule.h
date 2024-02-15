@@ -355,9 +355,10 @@ class ShaderModuleBase : public RefCountedWithExternalCountBase<ApiObjectBase>,
     int GetTintProgramRecreateCountForTesting() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
+    Future APIGetCompilationInfoF(const CompilationInfoCallbackInfo& callbackInfo);
 
     void InjectCompilationMessages(std::unique_ptr<OwnedCompilationMessages> compilationMessages);
-
+    void InjectCompilationMessages(Ref<OwnedCompilationMessages> compilationMessages);
     OwnedCompilationMessages* GetCompilationMessages() const;
 
   protected:
@@ -387,7 +388,7 @@ class ShaderModuleBase : public RefCountedWithExternalCountBase<ApiObjectBase>,
     };
     MutexProtected<TintData> mTintData;
 
-    std::unique_ptr<OwnedCompilationMessages> mCompilationMessages;
+    Ref<OwnedCompilationMessages> mCompilationMessages;
 };
 
 }  // namespace dawn::native
