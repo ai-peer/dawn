@@ -28,9 +28,11 @@
 #ifndef SRC_DAWN_NATIVE_ERRORSCOPE_H_
 #define SRC_DAWN_NATIVE_ERRORSCOPE_H_
 
+#include <map>
 #include <string>
 #include <vector>
 
+#include "dawn/common/MutexProtected.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
@@ -67,7 +69,10 @@ class ErrorScopeStack {
     bool HandleError(wgpu::ErrorType type, const char* message);
 
   private:
-    std::vector<ErrorScope> mScopes;
+    std::vector<ErrorScope>* GetThreadLocalStack();
+    const std::vector<ErrorScope>* GetThreadLocalStack() const;
+
+    MutexProtected<std::map<std::thread::id, std::vector<ErrorScope>>> mScopes;
 };
 
 }  // namespace dawn::native
