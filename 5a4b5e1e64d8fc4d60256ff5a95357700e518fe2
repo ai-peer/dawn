@@ -119,6 +119,24 @@
       "message": "Maybe we can directly do that in Chromium?",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2c913c_1288d1bd",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-15T17:13:00Z",
+      "side": 1,
+      "message": "I\u0027m not opposed to helping with that issue, but it seems like a bigger detour than I\u0027m wanting to make at the moment. For now I\u0027d like to solve the issue the same way SharedTextureMemory did (with APIIsDeviceLost()).",
+      "parentUuid": "b0cba81c_77e8bf26",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
