@@ -29,6 +29,7 @@
 #include <utility>
 
 #include "dawn/common/Log.h"
+#include "dawn/common/MutexProtected.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/tests/end2end/BufferHostMappedPointerTests.h"
 
@@ -58,8 +59,10 @@ class VMBackend : public BufferHostMappedPointerTestBackend {
 
         wgpu::BufferHostMappedPointer hostMappedDesc;
         hostMappedDesc.pointer = ptr;
-        hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
-        hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        mDisposeCallback.Use([&](auto callback) {
+            hostMappedDesc.disposeCallback = callback->Callback();
+            hostMappedDesc.userdata = callback->MakeUserdata(ptr);
+        });
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = usage;
@@ -70,6 +73,7 @@ class VMBackend : public BufferHostMappedPointerTestBackend {
         if (dawn::native::CheckIsErrorForTesting(buffer.Get())) {
             DeallocMemory();
         } else {
+            std::unique_lock<std::mutex> lock(mMutex);
             EXPECT_CALL(mDisposeCallback, Call(ptr))
                 .WillOnce(testing::InvokeWithoutArgs(DeallocMemory));
         }
@@ -78,6 +82,7 @@ class VMBackend : public BufferHostMappedPointerTestBackend {
     }
 
   private:
+    std::mutex mMutex;
     testing::MockCallback<WGPUCallback> mDisposeCallback;
 };
 
@@ -140,8 +145,11 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
 
         wgpu::BufferHostMappedPointer hostMappedDesc;
         hostMappedDesc.pointer = ptr;
-        hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
-        hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            hostMappedDesc.disposeCallback = mDisposeCallback.Callback();
+            hostMappedDesc.userdata = mDisposeCallback.MakeUserdata(ptr);
+        }
 
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.usage = usage;
@@ -152,15 +160,18 @@ class MMapBackend : public BufferHostMappedPointerTestBackend {
         if (dawn::native::CheckIsErrorForTesting(buffer.Get())) {
             DeallocMemory();
         } else {
-            EXPECT_CALL(mDisposeCallback, Call(ptr))
-                .WillOnce(testing::InvokeWithoutArgs(DeallocMemory));
+            mDisposeCallback.Use([&](auto callback) {
+                EXPECT_CALL(*callback, Call(ptr))
+                    .WillOnce(testing::InvokeWithoutArgs(DeallocMemory));
+            });
         }
 
         return std::make_pair(std::move(buffer), hostMappedDesc.pointer);
     }
 
   private:
-    testing::MockCallback<WGPUCallback> mDisposeCallback;
+    std::mutex mMutex;
+    MutexProtected<testing::MockCallback<WGPUCallback>> mDisposeCallback;
 };
 
 DAWN_INSTANTIATE_PREFIXED_TEST_P(Win,
