@@ -65,10 +65,12 @@ void ApiObjectList::Track(ApiObjectBase* object) {
     }
     std::lock_guard<std::mutex> lock(mMutex);
     mObjects.Prepend(object);
+    object->mIsAlive.store(true, std::memory_order_release);
 }
 
 bool ApiObjectList::Untrack(ApiObjectBase* object) {
     std::lock_guard<std::mutex> lock(mMutex);
+    object->mIsAlive.store(false, std::memory_order_release);
     return object->RemoveFromList();
 }
 
@@ -82,6 +84,7 @@ void ApiObjectList::Destroy() {
 
     while (!objects.empty()) {
         auto* head = objects.head();
+        static_cast<ApiObjectBase*>(head)->mIsAlive.store(false, std::memory_order_release);
         bool removed = head->RemoveFromList();
         DAWN_ASSERT(removed);
         head->value()->DestroyImpl();
@@ -130,7 +133,7 @@ void ApiObjectBase::FormatLabel(absl::FormatSink* s) const {
 void ApiObjectBase::SetLabelImpl() {}
 
 bool ApiObjectBase::IsAlive() const {
-    return IsInList();
+    return mIsAlive.load(std::memory_order_acquire);
 }
 
 void ApiObjectBase::DeleteThis() {
@@ -143,7 +146,7 @@ void ApiObjectBase::LockAndDeleteThis() {
     DeleteThis();
 }
 
-ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
+ApiObjectList* ApiObjectBase::GetObjectTrackingList() const {
     DAWN_ASSERT(GetDevice() != nullptr);
     return GetDevice()->GetObjectTrackingList(GetType());
 }

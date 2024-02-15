@@ -236,7 +236,7 @@ class TextureViewBase : public ApiObjectBase {
   private:
     TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
 
-    ApiObjectList* GetObjectTrackingList() override;
+    ApiObjectList* GetObjectTrackingList() const override;
 
     Ref<TextureBase> mTexture;
 

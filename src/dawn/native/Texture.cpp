@@ -1287,7 +1287,7 @@ Extent3D TextureViewBase::GetSingleSubresourceVirtualSize() const {
     return GetTexture()->GetMipLevelSingleSubresourceVirtualSize(GetBaseMipLevel(), GetAspects());
 }
 
-ApiObjectList* TextureViewBase::GetObjectTrackingList() {
+ApiObjectList* TextureViewBase::GetObjectTrackingList() const {
     if (mTexture != nullptr) {
         return mTexture->GetViewTrackingList();
     }
