@@ -683,6 +683,8 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/SharedTextureMemoryVk.cpp"
         "vulkan/SharedTextureMemoryVk.h"
         "vulkan/StreamImplVk.cpp"
+        "vulkan/SwapChainCache.cpp"
+        "vulkan/SwapChainCache.h"
         "vulkan/SwapChainVk.cpp"
         "vulkan/SwapChainVk.h"
         "vulkan/TextureVk.cpp"
