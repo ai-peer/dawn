@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1212c33b_5d07a977",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-16T19:48:20Z",
+      "side": 1,
+      "message": "See L64.",
+      "parentUuid": "254fddf3_7ff81d20",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82058855_934b87d5",
         "filename": "docs/dawn/features/shared_buffer_memory.md",
         "patchSetId": 4
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "probably OK for now. we\u0027re adding concurrent read for SharedTextureMemory so maybe we\u0027ll have it anyway later\n\none thing I notice here is that the begin access descriptor and end access state are basically the same as SharedTextureMemory. It would be great if a bunch of the fence/synchronization code can get shared between the two of them when implemented. We don\u0027t have the share the actual structs (because they are likely disjoint chain roots), but the actual synchronization code would be good to share.",
       "parentUuid": "ab85db68_470830d9",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4b9ea5_a29d191f",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-16T19:48:20Z",
+      "side": 1,
+      "message": "I kept the functionally initially stated: only one buffer allowed access at a time. It makes sense we could allow concurrent access in the future though.\n\nMakes sense about sharing Begin/EndAccess implementations. I will probably try creating a SharedResourceMemory base class.",
+      "parentUuid": "f029bbae_9a4991b2",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
