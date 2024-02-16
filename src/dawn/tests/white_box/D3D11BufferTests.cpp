@@ -208,6 +208,25 @@ TEST_P(D3D11BufferTests, WriteUniformBuffer) {
         CheckBuffer(d3d11Buffer->GetD3D11NonConstantBuffer(), data);
         CheckBuffer(d3d11Buffer->GetD3D11ConstantBuffer(), data);
     }
+    {
+        std::vector<uint8_t> data = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        wgpu::BufferUsage usage =
+            wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
+        wgpu::Buffer buffer = CreateBuffer(data.size() * 2, usage);
+        native::d3d11::Buffer* d3d11Buffer =
+            native::d3d11::ToBackend(native::FromAPI(buffer.Get()));
+
+        EXPECT_EQ(d3d11Buffer->GetD3D11NonConstantBuffer(), nullptr);
+        EXPECT_NE(d3d11Buffer->GetD3D11ConstantBuffer(), nullptr);
+
+        queue.WriteBuffer(buffer, 0, data.data(), data.size());
+        EXPECT_BUFFER_U8_RANGE_EQ(data.data(), buffer, 0, data.size());
+        CheckBuffer(d3d11Buffer->GetD3D11ConstantBuffer(), data);
+
+        queue.WriteBuffer(buffer, /*offset*/ 16, data.data(), data.size());
+        EXPECT_BUFFER_U8_RANGE_EQ(data.data(), buffer, /*offset*/ 16, data.size());
+        EXPECT_BUFFER_U8_RANGE_EQ(data.data(), buffer, 0, data.size());
+    }
 }
 
 // Test UAV write
