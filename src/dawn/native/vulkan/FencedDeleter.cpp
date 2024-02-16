@@ -109,7 +109,9 @@ void FencedDeleter::DeleteWhenUnused(VkSurfaceKHR surface) {
 }
 
 void FencedDeleter::DeleteWhenUnused(VkSwapchainKHR swapChain) {
-    mSwapChainsToDelete.Enqueue(swapChain, mDevice->GetQueue()->GetPendingCommandSerial());
+    // Use last submitted serial rather than pending because we need this to be
+    // flushed so that we can already create a new swap chain.
+    mSwapChainsToDelete.Enqueue(swapChain, mDevice->GetQueue()->GetLastSubmittedCommandSerial());
 }
 
 void FencedDeleter::Tick(ExecutionSerial completedSerial) {
