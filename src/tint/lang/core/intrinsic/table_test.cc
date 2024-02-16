@@ -38,7 +38,6 @@
 #include "src/tint/lang/core/type/external_texture.h"
 #include "src/tint/lang/core/type/helper_test.h"
 #include "src/tint/lang/core/type/multisampled_texture.h"
-#include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/storage_texture.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
@@ -731,20 +730,25 @@ TEST_F(CoreIntrinsicTableTest, MismatchTypeInitializerImplicit) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3(i32, f32, i32)
 
-6 candidate constructors:
+11 candidate constructors:
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is f32, f16, i32 or u32
 )");
 }
 
@@ -757,20 +761,25 @@ TEST_F(CoreIntrinsicTableTest, MismatchTypeInitializerExplicit) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<i32>(i32, f32, i32)
 
-6 candidate constructors:
+11 candidate constructors:
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is f32, f16, i32 or u32
 )");
 }
 
@@ -855,20 +864,25 @@ TEST_F(CoreIntrinsicTableTest, MismatchTypeConversion) {
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<f32>(array<u32>)
 
-6 candidate constructors:
+11 candidate constructors:
+  vec3<T>(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(vec3<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
-  vec3<T>() -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(xy: vec2<T>, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, yz: vec2<T>) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
+  vec3<T>(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
   vec3(x: T, y: T, z: T) -> vec3<T>  where: T is f32, f16, i32, u32 or bool
 
 5 candidate conversions:
-  vec3<T>(vec3<U>) -> vec3<f32>  where: T is f32, U is i32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<f16>  where: T is f16, U is f32, i32, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<i32>  where: T is i32, U is f32, f16, u32 or bool
-  vec3<T>(vec3<U>) -> vec3<u32>  where: T is u32, U is f32, f16, i32 or bool
-  vec3<T>(vec3<U>) -> vec3<bool>  where: T is bool, U is f32, f16, i32 or u32
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f32, U is i32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is f16, U is f32, i32, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is i32, U is f32, f16, u32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is u32, U is f32, f16, i32 or bool
+  vec3<T>(vec3<U>) -> vec3<T>  where: T is bool, U is f32, f16, i32 or u32
 )");
 }
 

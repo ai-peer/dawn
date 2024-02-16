@@ -328,11 +328,18 @@ func (r *resolver) intrinsic(
 	}
 
 	// Resolve the declared template parameters
-	templates, err := r.templateParams(&s, a.TemplateParams)
+	// Explicit template types can use implicit templates, so resolve implicit first
+	implicitTemplates, err := r.templateParams(&s, a.ImplicitTemplateParams)
 	if err != nil {
 		return err
 	}
-	overload.Templates = templates
+	overload.ImplicitTemplates = implicitTemplates
+
+	explicitTemplates, err := r.templateParams(&s, a.ExplicitTemplateParams)
+	if err != nil {
+		return err
+	}
+	overload.ExplicitTemplates = explicitTemplates
 
 	// Process overload attributes
 	if stageDeco := a.Attributes.Take("stage"); stageDeco != nil {
@@ -401,8 +408,12 @@ func (r *resolver) intrinsic(
 	// Append the overload to the intrinsic
 	intrinsic.Overloads = append(intrinsic.Overloads, overload)
 
+	for _, num := range overload.ExplicitTemplates.Numbers() {
+		return fmt.Errorf("%v explicit number template parameters are not supported", num.AST().Source)
+	}
+
 	// Update high-water mark of templates
-	if n := len(overload.Templates); r.s.MaxTemplates < n {
+	if n := len(overload.AllTemplates()); r.s.MaxTemplates < n {
 		r.s.MaxTemplates = n
 	}
 
