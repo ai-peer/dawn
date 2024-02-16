@@ -54,6 +54,7 @@ class BufferUploader;
 class FencedDeleter;
 class RenderPassCache;
 class ResourceMemoryAllocator;
+class SwapChainCache;
 
 class Device final : public DeviceBase {
   public:
@@ -75,6 +76,7 @@ class Device final : public DeviceBase {
 
     MutexProtected<FencedDeleter>& GetFencedDeleter() const;
     RenderPassCache* GetRenderPassCache() const;
+    SwapChainCache* GetSwapChainCache() const;
     MutexProtected<ResourceMemoryAllocator>& GetResourceMemoryAllocator() const;
     external_semaphore::Service* GetExternalSemaphoreService() const;
 
@@ -146,7 +148,7 @@ class Device final : public DeviceBase {
     ResultOrError<Ref<SwapChainBase>> CreateSwapChainImpl(
         Surface* surface,
         SwapChainBase* previousSwapChain,
-        const SwapChainDescriptor* descriptor) override;
+        const SurfaceConfiguration* config) override;
     ResultOrError<Ref<TextureBase>> CreateTextureImpl(
         const UnpackedPtr<TextureDescriptor>& descriptor) override;
     ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
@@ -193,6 +195,7 @@ class Device final : public DeviceBase {
     std::unique_ptr<MutexProtected<FencedDeleter>> mDeleter;
     std::unique_ptr<MutexProtected<ResourceMemoryAllocator>> mResourceMemoryAllocator;
     std::unique_ptr<RenderPassCache> mRenderPassCache;
+    std::unique_ptr<SwapChainCache> mSwapChainCache;
 
     std::unique_ptr<external_memory::Service> mExternalMemoryService;
     std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;

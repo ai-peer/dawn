@@ -56,6 +56,7 @@
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 #include "dawn/native/vulkan/SharedFenceVk.h"
 #include "dawn/native/vulkan/SharedTextureMemoryVk.h"
+#include "dawn/native/vulkan/SwapChainCache.h"
 #include "dawn/native/vulkan/SwapChainVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -103,6 +104,7 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
 
     mRenderPassCache = std::make_unique<RenderPassCache>(this);
     mResourceMemoryAllocator = std::make_unique<MutexProtected<ResourceMemoryAllocator>>(this);
+    mSwapChainCache = std::make_unique<SwapChainCache>(this);
 
     mExternalMemoryService = std::make_unique<external_memory::Service>(this);
 
@@ -192,11 +194,10 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     OwnedCompilationMessages* compilationMessages) {
     return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
-ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
-    Surface* surface,
-    SwapChainBase* previousSwapChain,
-    const SwapChainDescriptor* descriptor) {
-    return SwapChain::Create(this, surface, previousSwapChain, descriptor);
+ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(Surface* surface,
+                                                              SwapChainBase* previousSwapChain,
+                                                              const SurfaceConfiguration* config) {
+    return SwapChain::Create(this, surface, previousSwapChain, config);
 }
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
@@ -341,6 +342,10 @@ MutexProtected<FencedDeleter>& Device::GetFencedDeleter() const {
 
 RenderPassCache* Device::GetRenderPassCache() const {
     return mRenderPassCache.get();
+}
+
+SwapChainCache* Device::GetSwapChainCache() const {
+    return mSwapChainCache.get();
 }
 
 MutexProtected<ResourceMemoryAllocator>& Device::GetResourceMemoryAllocator() const {
@@ -856,6 +861,9 @@ void Device::DestroyImpl() {
     // The VkRenderPasses in the cache can be destroyed immediately since all commands referring
     // to them are guaranteed to be finished executing.
     mRenderPassCache = nullptr;
+
+    // The swap chain cache does not own anything, it can be destroyed immediately
+    mSwapChainCache = nullptr;
 
     // Delete all the remaining VkDevice child objects immediately since the GPU timeline is
     // finished.
