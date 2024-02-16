@@ -16,6 +16,98 @@
       "message": "Hello Loko,\nI\u0027ve noticed you were also working on Future stuff.\n\nI\u0027ve started working on this CL but before I go further, I\u0027d appreciate an early look to know if I\u0027m heading in the right direction. This is new to me and I\u0027m not sure I\u0027m handling it properly.",
       "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701738c9_9995780b",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-16T07:43:00Z",
+      "side": 1,
+      "message": "Given that this is a new API, I think we don\u0027t need this version and just go straight to the newer `F` version\u0027s signature.",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9273a459_0ff24cc7",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-16T07:43:00Z",
+      "side": 1,
+      "message": "Yea, I think we almost definitely need a `FreeMember` function for this since we are allocating a string.",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590c176b_e145ed93",
+        "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-16T07:43:00Z",
+      "side": 1,
+      "message": "I think we could just skip this entirely if we remove the \"legacy\" entry point entirely. (See comment above)",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6be261f_cef5c9ae",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-16T07:43:00Z",
+      "side": 1,
+      "message": "I think that this won\u0027t work for non-spontaneous events because the pointer to the strings will be invalidated. We probably need to copy them into this event in order for them to work. (Otherwise the pointer points to the string in the buffer where the command was deserialized which goes away each time we flush the wire.)\n\nAdding some tests in `WireAdapterTests.cpp` will also help to catch this.",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
