@@ -1054,4 +1054,9 @@ Result<SuccessType> ValidateAndDumpIfNeeded([[maybe_unused]] const Module& ir,
     return Success;
 }
 
+Result<SuccessType> ValidateAndDumpIfNeeded([[maybe_unused]] const Module& ir,
+                                            [[maybe_unused]] const char* msg) {
+    return ValidateAndDumpIfNeeded(ir, msg, {});
+}
+
 }  // namespace tint::core::ir

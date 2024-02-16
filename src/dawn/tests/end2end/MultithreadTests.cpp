@@ -900,7 +900,7 @@ TEST_P(MultithreadTextureCopyTests, CopyStencilToStencilNoRace) {
     constexpr uint32_t kWidth = 1;
     constexpr uint32_t kHeight = 1;
 
-    constexpr uint8_t kExpectedData = 177;
+    const uint8_t kExpectedData = 177;
     constexpr size_t kExpectedDataSize = sizeof(kExpectedData);
 
     LockStep<Step> lockStep(Step::Begin);

@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,29 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
-#define SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
+#include "dawn/native/vulkan/SwapChainCache.h"
+#include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/QueueVk.h"
 
-#include "gmock/gmock.h"
+namespace dawn::native::vulkan {
 
-#include "dawn/native/Device.h"
-#include "dawn/native/SwapChain.h"
+SwapChainCache::SwapChainCache(Device* device) : mDevice(device) {}
 
-namespace dawn::native {
+void SwapChainCache::RecycleSwapChain(VkSwapchainKHR swapChain, ExecutionSerial expirationSerial) {
+    std::lock_guard<std::mutex> lock(mMutex);
+    mCache.push({ swapChain, expirationSerial });
+}
 
-class SwapChainMock : public SwapChainBase {
-  public:
-    SwapChainMock(DeviceBase* device, Surface* surface, const SurfaceConfiguration* config);
-    ~SwapChainMock() override;
+std::optional<VkSwapchainKHR> SwapChainCache::AcquireRecycledSwapChain() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    ExecutionSerial completedSerial = mDevice->GetQueue()->GetCompletedCommandSerial();
+    for (; !mCache.empty(); mCache.pop()) {
+        Entry entry = mCache.front();
+        if (entry.expirationSerial > completedSerial) {
+            return entry.swapChain;
+        }
+    }
+    return {};
+}
 
-    MOCK_METHOD(void, DestroyImpl, (), (override));
-
-    MOCK_METHOD(ResultOrError<SwapChainTextureInfo>, GetCurrentTextureImpl, (), (override));
-    MOCK_METHOD(MaybeError, PresentImpl, (), (override));
-    MOCK_METHOD(void, DetachFromSurfaceImpl, (), (override));
-};
-
-}  // namespace dawn::native
-
-#endif  // SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
+}  // namespace dawn::native::vulkan
