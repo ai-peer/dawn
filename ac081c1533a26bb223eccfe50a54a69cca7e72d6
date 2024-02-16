@@ -16,6 +16,23 @@
       "message": "There are zero devices that claim f16 support but not f32 support.\n\nThere are a number devices that claim f32 support but NOT f16 support 🤷‍♂️\n\nRumor is, some of those devices falsely claim they don\u0027t support f16 but actually do.  \n\nI have no idea how to ferret out which, if any of those, to allow\n\nThe ones that do not support f16, do support f32, do not support EXT_float_blend are \"Intel HD Graphics 400/515/615\" and \"Broadcom VideoCore... \"\n\nThe ones that do not support f16, do support f32, and do support EXT_float_blend are \"PowerVR Rogue GE8100/8300/9320/8322\"\n\nIf we know either/or support f16 we could change these checks to only check for EXT_color_buffer_float.\n\nThis will work for now though I think.",
       "revId": "ac081c1533a26bb223eccfe50a54a69cca7e72d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e146ea37_2f625069",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T17:27:27Z",
+      "side": 1,
+      "message": "AFAICT, this is a GLES extension. I\u0027m not sure what the desktop GL equivalent is, but perhaps we should just put these checks in the \"if (mFunctions.GetVersion().IsES()) clause for now.\n\n(Dawn\u0027s Desktop GL support is best-effort but not a priority at the moment.)\n\nI\u0027m also not 100% sure if making validation calls in InitializeImpl is the right place, but I can\u0027t really see a better one. Austin, WDYT?",
+      "revId": "ac081c1533a26bb223eccfe50a54a69cca7e72d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
