@@ -702,6 +702,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b069d2_a676d239",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-16T08:59:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82aa0a4f_3c7386f7",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31cfc519_6079e678",
@@ -768,6 +786,24 @@
       "side": 1,
       "message": "Except as reported on Matrix I cannot get gclient to work properly :/",
       "parentUuid": "1fcbaafc_1ffefa79",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0e38c15_eed9ac9a",
+        "filename": "third_party/dxheaders",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-16T08:59:45Z",
+      "side": 1,
+      "message": "Fixed!",
+      "parentUuid": "e6420d34_2f0c9c8e",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

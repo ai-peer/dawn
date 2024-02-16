@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa220495_32337263",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-16T08:59:45Z",
+      "side": 1,
+      "message": "Fixed the unwanted submodule changes, moved surface validation test to end2end in order to get a window (like SwapChain tests do)",
+      "revId": "d40308476fca0d740cf0b1f5767c3f228e8f2d5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
