@@ -148,6 +148,15 @@ MaybeError PhysicalDevice::InitializeImpl() {
         DAWN_ASSERT(GetBackendType() == wgpu::BackendType::OpenGL);
     }
 
+    // WebGPU requires being able to render to f16 and being able to blend f16
+    // which EXT_color_buffer_half_float provides.
+    DAWN_INVALID_IF(mFunctions.IsGLExtensionSupported("GL_EXT_color_buffer_half_float"),
+                    "GL_EXT_color_buffer_half_float is required");
+
+    // WebGPU requires being able to render to f32 but does not require being able to blend f32
+    DAWN_INVALID_IF(mFunctions.IsGLExtensionSupported("GL_EXT_color_buffer_float"),
+                    "GL_EXT_color_buffer_float is required");
+
     mName = reinterpret_cast<const char*>(mFunctions.GetString(GL_RENDERER));
 
     // Workaroud to find vendor id from vendor name
