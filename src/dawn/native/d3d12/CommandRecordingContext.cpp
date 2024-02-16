@@ -33,6 +33,7 @@
 #include <string>
 #include <utility>
 
+#include "dawn/native/D3DBackend.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/CommandAllocatorManager.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
@@ -85,7 +86,7 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,
     }
 
     for (Texture* texture : mSharedTextures) {
-        DAWN_TRY(texture->SynchronizeTextureBeforeUse());
+        DAWN_TRY(texture->SynchronizeTextureBeforeUse(this));
     }
 
     MaybeError error =
@@ -137,9 +138,12 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,
 
     mIsOpen = false;
     mNeedsSubmit = false;
+
     mSharedTextures.clear();
     mHeapsPendingUsage.clear();
     mTempBuffers.clear();
+
+    ReleaseKeyedMutexes();
 
     return {};
 }
@@ -170,11 +174,15 @@ ID3D12GraphicsCommandList4* CommandRecordingContext::GetCommandList4() const {
 void CommandRecordingContext::Release() {
     mD3d12CommandList.Reset();
     mD3d12CommandList4.Reset();
+
     mIsOpen = false;
     mNeedsSubmit = false;
+
     mSharedTextures.clear();
     mHeapsPendingUsage.clear();
     mTempBuffers.clear();
+
+    ReleaseKeyedMutexes();
 }
 
 bool CommandRecordingContext::IsOpen() const {
@@ -191,6 +199,22 @@ void CommandRecordingContext::SetNeedsSubmit() {
 
 void CommandRecordingContext::AddToTempBuffers(Ref<Buffer> tempBuffer) {
     mTempBuffers.emplace_back(tempBuffer);
+}
+
+MaybeError CommandRecordingContext::AcquireKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgikeyedMutex) {
+    if (!mAcquiredKeyedMutexes.contains(dxgikeyedMutex)) {
+        DAWN_TRY(CheckHRESULT(dxgikeyedMutex->AcquireSync(d3d::kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Failed to acquire keyed mutex for external image"));
+        mAcquiredKeyedMutexes.emplace(std::move(dxgikeyedMutex));
+    }
+    return {};
+}
+
+void CommandRecordingContext::ReleaseKeyedMutexes() {
+    for (auto& dxgiKeyedMutex : mAcquiredKeyedMutexes) {
+        dxgiKeyedMutex->ReleaseSync(d3d::kDXGIKeyedMutexAcquireKey);
+    }
+    mAcquiredKeyedMutexes.clear();
 }
 
 }  // namespace dawn::native::d3d12
