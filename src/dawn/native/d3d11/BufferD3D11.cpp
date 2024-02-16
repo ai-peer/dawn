@@ -574,12 +574,13 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
 
     DAWN_ASSERT(mD3d11ConstantBuffer);
 
-    // For a full size write, UpdateSubresource1(D3D11_COPY_DISCARD) can be used to update
-    // mD3d11ConstantBuffer.
-    if (size == GetSize() && offset == 0) {
+    // If the extent of region is aligned to 16 bytes, UpdateSubresource1(D3D11_COPY_DISCARD) can be
+    // used to update mD3d11ConstantBuffer.
+    constexpr size_t kConstantBufferUpdateAlignment = 16;
+    if (IsAligned(offset, kConstantBufferUpdateAlignment) &&
+        (IsAligned(size, kConstantBufferUpdateAlignment) || (size + offset >= GetSize()))) {
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
-        constexpr size_t kConstantBufferUpdateAlignment = 16;
         size_t alignedSize = Align(size, kConstantBufferUpdateAlignment);
         DAWN_ASSERT(alignedSize <= GetAllocatedSize());
         std::unique_ptr<uint8_t[]> alignedBuffer;
