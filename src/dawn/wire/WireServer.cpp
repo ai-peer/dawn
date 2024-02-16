@@ -69,20 +69,20 @@ bool WireServer::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t gen
     return mImpl->InjectInstance(instance, {id, generation}) == WireResult::Success;
 }
 
-bool WireServer::InjectTexture(WGPUTexture texture, const TextureReservation& reservation) {
-    return mImpl->InjectTexture(texture, reservation) == WireResult::Success;
+bool WireServer::InjectTexture(WGPUTexture texture, const TextureReservation& handle) {
+    return mImpl->InjectTexture(texture, handle) == WireResult::Success;
 }
 
-bool WireServer::InjectSwapChain(WGPUSwapChain swapchain, const SwapChainReservation& reservation) {
-    return mImpl->InjectSwapChain(swapchain, reservation) == WireResult::Success;
+bool WireServer::InjectSwapChain(WGPUSwapChain swapchain, const SwapChainReservation& handle) {
+    return mImpl->InjectSwapChain(swapchain, handle) == WireResult::Success;
 }
 
-bool WireServer::InjectDevice(WGPUDevice device, const DeviceReservation& reservation) {
-    return mImpl->InjectDevice(device, reservation) == WireResult::Success;
+bool WireServer::InjectDevice(WGPUDevice device, const DeviceReservation& handle) {
+    return mImpl->InjectDevice(device, handle) == WireResult::Success;
 }
 
-bool WireServer::InjectInstance(WGPUInstance instance, const InstanceReservation& reservation) {
-    return mImpl->InjectInstance(instance, reservation) == WireResult::Success;
+bool WireServer::InjectInstance(WGPUInstance instance, const InstanceReservation& handle) {
+    return mImpl->InjectInstance(instance, handle) == WireResult::Success;
 }
 
 WGPUDevice WireServer::GetDevice(uint32_t id, uint32_t generation) {
