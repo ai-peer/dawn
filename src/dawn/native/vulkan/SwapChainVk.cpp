@@ -258,8 +258,8 @@ ResultOrError<wgpu::TextureUsage> SwapChain::GetSupportedSurfaceUsage(const Devi
 ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
                                                 Surface* surface,
                                                 SwapChainBase* previousSwapChain,
-                                                const SwapChainDescriptor* descriptor) {
-    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, descriptor));
+                                                const SurfaceConfiguration* config) {
+    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, config));
     DAWN_TRY(swapchain->Initialize(previousSwapChain));
     return swapchain;
 }
@@ -635,12 +635,13 @@ MaybeError SwapChain::PresentImpl() {
     }
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
+ResultOrError<SwapChainTextureInfo> SwapChain::GetCurrentTextureImpl() {
     return GetCurrentTextureInternal();
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReentrant) {
+ResultOrError<SwapChainTextureInfo> SwapChain::GetCurrentTextureInternal(bool isReentrant) {
     Device* device = ToBackend(GetDevice());
+    SwapChainTextureInfo swapChainTextureInfo;
 
     // Transiently create a semaphore that will be signaled when the presentation engine is done
     // with the swapchain image. Further operations on the image will wait for this semaphore.
@@ -670,14 +671,17 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(semaphore);
     }
 
+    swapChainTextureInfo.suboptimal = false;
     switch (result) {
-        // TODO(crbug.com/dawn/269): Introduce a mechanism to notify the application that
-        // the swapchain is in a suboptimal state?
         case VK_SUBOPTIMAL_KHR:
+            swapChainTextureInfo.suboptimal = true;
+            ABSL_FALLTHROUGH_INTENDED;
         case VK_SUCCESS:
+            swapChainTextureInfo.status = wgpu::SurfaceGetCurrentTextureStatus::Success;
             break;
 
         case VK_ERROR_OUT_OF_DATE_KHR: {
+            swapChainTextureInfo.status = wgpu::SurfaceGetCurrentTextureStatus::Outdated;
             // Prevent infinite recursive calls to GetCurrentTextureViewInternal when the
             // swapchains always return that they are out of date.
             if (isReentrant) {
@@ -693,6 +697,9 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
 
         // TODO(crbug.com/dawn/269): Allow losing the surface at Dawn's API level?
         case VK_ERROR_SURFACE_LOST_KHR:
+            swapChainTextureInfo.status = wgpu::SurfaceGetCurrentTextureStatus::Lost;
+            break;
+
         default:
             DAWN_TRY(CheckVkSuccess(::VkResult(result), "AcquireNextImage"));
     }
@@ -708,7 +715,8 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
 
     // In the happy path we can use the swapchain image directly.
     if (!mConfig.needsBlit) {
-        return mTexture;
+        swapChainTextureInfo.texture = mTexture;
+        return swapChainTextureInfo;
     }
 
     // The blit texture always perfectly matches what the user requested for the swapchain.
@@ -716,7 +724,8 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
     TextureDescriptor desc = GetSwapChainBaseTextureDescriptor(this);
     DAWN_TRY_ASSIGN(mBlitTexture,
                     Texture::Create(device, Unpack(&desc), VK_IMAGE_USAGE_TRANSFER_SRC_BIT));
-    return mBlitTexture;
+    swapChainTextureInfo.texture = mBlitTexture;
+    return swapChainTextureInfo;
 }
 
 void SwapChain::DetachFromSurfaceImpl() {
