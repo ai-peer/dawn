@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7592d1dd_c11d81c9",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-16T08:37:43Z",
+      "side": 1,
+      "message": "When I removed this version, I get this error in `Server::DoAdapterRequestAdapterInfo()`:\n\n```\n../../third_party/dawn/src/dawn/wire/server/ServerAdapter.cpp:42:12: error: no member named \u0027adapterRequestAdapterInfo\u0027 in \u0027DawnProcTable\u0027\n   42 |     mProcs.adapterRequestAdapterInfo(adapter-\u003ehandle,\n      |     ~~~~~~ ^\n\n```\n\nIs this expected?",
+      "parentUuid": "701738c9_9995780b",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9273a459_0ff24cc7",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 13
