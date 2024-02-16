@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "254fddf3_7ff81d20",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T06:21:08Z",
+      "side": 1,
+      "message": "maybe I\u0027m missing - I don\u0027t see the section?",
+      "parentUuid": "24f8fa04_0c2440b7",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82058855_934b87d5",
         "filename": "docs/dawn/features/shared_buffer_memory.md",
         "patchSetId": 4
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "I kept the rules restrictive just because it was simple. I don\u0027t have a use case case for simultaneous access in mind though. Are you aware of one?\n\nIt doesn\u0027t seem difficult to allow simultaneous access if we want it. The only restriction I can think of is when a buffer is mapped. Outside of mapping, I think we could even allow concurrent write access (on D3D12, buffers always decay to COMMON) (I will have to check the rules for other backends).",
       "parentUuid": "82058855_934b87d5",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f029bbae_9a4991b2",
+        "filename": "docs/dawn/features/shared_buffer_memory.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T06:21:08Z",
+      "side": 1,
+      "message": "probably OK for now. we\u0027re adding concurrent read for SharedTextureMemory so maybe we\u0027ll have it anyway later\n\none thing I notice here is that the begin access descriptor and end access state are basically the same as SharedTextureMemory. It would be great if a bunch of the fence/synchronization code can get shared between the two of them when implemented. We don\u0027t have the share the actual structs (because they are likely disjoint chain roots), but the actual synchronization code would be good to share.",
+      "parentUuid": "ab85db68_470830d9",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +225,24 @@
       "side": 1,
       "message": "I\u0027m not opposed to helping with that issue, but it seems like a bigger detour than I\u0027m wanting to make at the moment. For now I\u0027d like to solve the issue the same way SharedTextureMemory did (with APIIsDeviceLost()).",
       "parentUuid": "b0cba81c_77e8bf26",
+      "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2121a15_d52ae727",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T06:21:08Z",
+      "side": 1,
+      "message": "yea we need to fix up device lost handling for WebGPU in general first; so it\u0027s the same problem STM has",
+      "parentUuid": "fa2c913c_1288d1bd",
       "revId": "5a4b5e1e64d8fc4d60256ff5a95357700e518fe2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
