@@ -37,11 +37,12 @@ DawnMockTest::DawnMockTest() {
     dawnProcSetProcs(&dawn::native::GetProcs());
 
     auto deviceMock = AcquireRef(new ::testing::NiceMock<DeviceMock>());
-    mDeviceMock = deviceMock.Get();
     device = wgpu::Device::Acquire(ToAPI(ReturnToAPI<DeviceBase>(std::move(deviceMock))));
+    deviceMock.Get();
 }
 
 DawnMockTest::~DawnMockTest() {
+    mDeviceMock = nullptr;
     device = wgpu::Device();
     dawnProcSetProcs(nullptr);
 }
