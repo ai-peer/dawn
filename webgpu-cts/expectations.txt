@@ -77,7 +77,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-02-14 08:04:34AM
+# Last rolled: 2024-02-16 05:06:38AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -777,10 +777,10 @@ crbug.com/tint/2172 [ intel-0x9bc5 ubuntu ] webgpu:shader,execution,memory_layou
 # The keep can be removed once this config is promoted to stable.
 # KEEP
 ################################################################################
-crbug.com/dawn/2414 [ android-u android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAnd* [ Failure ]
-crbug.com/dawn/2414 [ android-u android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange* [ Failure ]
-crbug.com/dawn/2414 [ android-u android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,atomics,atomicLoad* [ Failure ]
-crbug.com/dawn/2414 [ android-u android-pixel-6 ] webgpu:shader,execution,expression,call,builtin,atomics,atomicStore* [ Failure ]
+crbug.com/dawn/2414 [ android-pixel-6 android-u ] webgpu:shader,execution,expression,call,builtin,atomics,atomicAnd* [ Failure ]
+crbug.com/dawn/2414 [ android-pixel-6 android-u ] webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange* [ Failure ]
+crbug.com/dawn/2414 [ android-pixel-6 android-u ] webgpu:shader,execution,expression,call,builtin,atomics,atomicLoad* [ Failure ]
+crbug.com/dawn/2414 [ android-pixel-6 android-u ] webgpu:shader,execution,expression,call,builtin,atomics,atomicStore* [ Failure ]
 
 ################################################################################
 # Transformed video external texture failures with compute
@@ -788,11 +788,11 @@ crbug.com/dawn/2414 [ android-u android-pixel-6 ] webgpu:shader,execution,expres
 # non-zero-copy path and that's not implemented yet for compute shaders.
 # KEEP
 ################################################################################
-crbug.com/41487285 [ win10 webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-hflip.mp4";* [ Failure ]
-crbug.com/41487285 [ win10 webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-180.mp4";* [ Failure ]
-crbug.com/41487285 [ win10 webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-270.mp4";* [ Failure ]
-crbug.com/41487285 [ win10 webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-90.mp4";* [ Failure ]
-crbug.com/41487285 [ win10 webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-vflip.mp4";* [ Failure ]
+crbug.com/41487285 [ webgpu-adapter-swiftshader win10 ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-hflip.mp4";* [ Failure ]
+crbug.com/41487285 [ webgpu-adapter-swiftshader win10 ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-180.mp4";* [ Failure ]
+crbug.com/41487285 [ webgpu-adapter-swiftshader win10 ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-270.mp4";* [ Failure ]
+crbug.com/41487285 [ webgpu-adapter-swiftshader win10 ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-90.mp4";* [ Failure ]
+crbug.com/41487285 [ webgpu-adapter-swiftshader win10 ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-vflip.mp4";* [ Failure ]
 crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-hflip.mp4";* [ Failure ]
 crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-180.mp4";* [ Failure ]
 crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-270.mp4";* [ Failure ]
