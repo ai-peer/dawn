@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "292abdf1_667c9a17",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-16T10:17:09Z",
+      "side": 1,
+      "message": "What would be the most appropriate callBackInfo.mode to set below?\n\n```\n-    mProcs.adapterRequestAdapterInfo(adapter-\u003ehandle,\n-                                     ForwardToServer\u003c\u0026Server::OnRequestAdapterInfoCallback\u003e,\n-                                     userdata.release());\n+    WGPURequestAdapterInfoCallbackInfo callbackInfo \u003d {};\n+    callbackInfo.mode \u003d WGPUCallbackMode_AllowSpontaneous; // Is this the right mode?\n+    callbackInfo.callback \u003d ForwardToServer\u003c\u0026Server::OnRequestAdapterInfoCallback\u003e;\n+    callbackInfo.userdata \u003d userdata.release();\n+\n+    mProcs.adapterRequestAdapterInfoF(adapter-\u003ehandle, callbackInfo);\n     return WireResult::Success;\n }\n```",
+      "parentUuid": "0d69a5ae_7b811f41",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9273a459_0ff24cc7",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 13
