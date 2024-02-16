@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f3fb4f6_1ca15066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-16T20:37:31Z",
+      "side": 1,
+      "message": "Sorry, can\u0027t review before vacation. Probably need @enga@chromium.org to review",
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "701738c9_9995780b",
@@ -127,6 +144,30 @@
       "side": 1,
       "message": "`AllowProcessEvents` would be the correct mode here.",
       "parentUuid": "292abdf1_667c9a17",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bda6fd_850a80d0",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-16T20:37:31Z",
+      "side": 1,
+      "message": "Having just one (called RequestAdapterInfo, no F) makes sense.\nDo be aware that there might be small breaking changes to the signature before we finish the Futures refactor though.\nAnd for a while longer there will be no API that works in both Dawn and Emscripten.",
+      "parentUuid": "7e75d1dd_f35c3d37",
       "range": {
         "startLine": 158,
         "startChar": 12,
