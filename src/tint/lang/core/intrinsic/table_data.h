@@ -185,9 +185,12 @@ struct OverloadInfo {
     const OverloadFlags flags;
     /// Total number of parameters for the overload
     const uint8_t num_parameters;
-    /// Total number of templates for the overload
+    /// Total number of explicit templates for the overload
+    const uint8_t num_explicit_templates;
+    /// Total number of implicit and explicit templates for the overload
     const uint8_t num_templates;
     /// Index of the first template type in TableData::type_matchers
+    /// This is a list of explicit template types followed by the implicit template types.
     const TemplateIndex templates;
     /// Index of the first parameter in TableData::parameters
     const ParameterIndex parameters;

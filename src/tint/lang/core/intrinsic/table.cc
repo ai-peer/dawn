@@ -266,7 +266,8 @@ Candidate ScoreOverload(Context& context,
     // The overloads with the lowest score will be displayed first (top-most).
     constexpr int kMismatchedParamCountPenalty = 3;
     constexpr int kMismatchedParamTypePenalty = 2;
-    constexpr int kMismatchedTemplateCountPenalty = 1;
+    constexpr int kMismatchedExplicitTemplateTypePenalty = 1;
+    constexpr int kMismatchedExplicitTemplateCountPenalty = 1;
     constexpr int kMismatchedTemplateTypePenalty = 1;
     constexpr int kMismatchedTemplateNumberPenalty = 1;
 
@@ -282,16 +283,34 @@ Candidate ScoreOverload(Context& context,
 
     if (score == 0) {
         // Check that all of the template arguments provided are actually expected by the overload.
-        const size_t expected_templates = overload.num_templates;
+        const size_t expected_templates = overload.num_explicit_templates;
         const size_t provided_templates = in_templates.Count();
-        if (provided_templates > expected_templates) {
-            score += kMismatchedTemplateCountPenalty * (provided_templates - expected_templates);
+        if (provided_templates != expected_templates) {
+            score += kMismatchedExplicitTemplateCountPenalty *
+                     (std::max(expected_templates, provided_templates) -
+                      std::min(expected_templates, provided_templates));
         }
     }
 
     // Make a mutable copy of the input templates so we can implicitly match more templated
     // arguments.
     TemplateState templates(in_templates);
+
+    if (score == 0) {
+        // Check that the explicit template arguments match.
+        for (size_t i = 0; i < overload.num_explicit_templates; ++i) {
+            auto& tmpl = context.data[overload.templates + i];
+            if (auto* matcher_indices = context.data[tmpl.matcher_indices]) {
+                if (auto* type = templates.Type(i)) {
+                    if (Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                            .Type(type) != nullptr) {
+                        continue;
+                    }
+                }
+                score += kMismatchedExplicitTemplateTypePenalty;
+            }
+        }
+    }
 
     // Invoke the matchers for each parameter <-> argument pair.
     // If any arguments cannot be matched, then `score` will be increased.
@@ -508,22 +527,26 @@ void PrintOverload(StringStream& ss,
 
     ss << intrinsic_name;
 
-    bool print_template_type = false;
-    if (overload.num_templates > 0) {
+    bool print_explicit_template_type = false;
+    if (overload.num_explicit_templates > 0) {
         if (overload.flags.Contains(OverloadFlag::kIsConverter)) {
             // Print for conversions
             // e.g. vec3<T>(vec3<U>) -> vec3<f32>
-            print_template_type = true;
-        } else if ((overload.num_parameters == 0) &&
-                   overload.flags.Contains(OverloadFlag::kIsConstructor)) {
-            // Print for constructors with no params
+            print_explicit_template_type = true;
+        } else if (overload.flags.Contains(OverloadFlag::kIsConstructor)) {
+            // Print for constructors
             // e.g. vec2<T>() -> vec2<T>
-            print_template_type = true;
+            print_explicit_template_type = true;
         }
     }
-    if (print_template_type) {
+    if (print_explicit_template_type) {
         ss << "<";
-        ss << context.data[overload.templates].name;
+        for (size_t i = 0; i < overload.num_explicit_templates; i++) {
+            if (i > 0) {
+                ss << ", ";
+            }
+            ss << context.data[overload.templates + i].name;
+        }
         ss << ">";
     }
     ss << "(";
