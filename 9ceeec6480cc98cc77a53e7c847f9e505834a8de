@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d830201_f834f945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T16:38:07Z",
+      "side": 1,
+      "message": "LGTM w/nits (and the lock that Austin pointed out removed).",
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60bc69db_54614818",
@@ -43,6 +60,57 @@
         "endLine": 93,
         "endChar": 49
       },
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3d913b_681e4928",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T16:38:07Z",
+      "side": 1,
+      "message": "Nit: perhaps this string should mention that it\u0027s uploading the stencil data as an R8 texture. If it\u0027s important that the messages in this function all look the same, then ignore my comment.",
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8272b1dd_1b00d6d2",
+        "filename": "src/dawn/tests/end2end/QueueTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T16:38:07Z",
+      "side": 1,
+      "message": "Nit: this is already in the unnamed namespace; don\u0027t need file-level \"static\".",
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea63d02_3a036dae",
+        "filename": "src/dawn/tests/end2end/QueueTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T16:38:07Z",
+      "side": 1,
+      "message": "Ibid.",
       "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
