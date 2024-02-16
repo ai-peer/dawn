@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bc69db_54614818",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T03:02:38Z",
+      "side": 1,
+      "message": "I think this was from a previous patchset; is it still needed?",
+      "range": {
+        "startLine": 622,
+        "startChar": 1,
+        "endLine": 623,
+        "endChar": 62
+      },
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee4b5b0f_457d85ee",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T03:02:38Z",
+      "side": 1,
+      "message": "I think this lock should already be held because it\u0027s held during APIWriteTexture",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 49
+      },
+      "revId": "9ceeec6480cc98cc77a53e7c847f9e505834a8de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
