@@ -308,6 +308,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb433ffd_d4339aa8",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-16T17:43:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "582c189e_835291a9",
+      "range": {
+        "startLine": 397,
+        "startChar": 55,
+        "endLine": 397,
+        "endChar": 67
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "181a6531_3154cba6",
