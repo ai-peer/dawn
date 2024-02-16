@@ -263,6 +263,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06d1e9e4_66aeab2c",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T02:57:01Z",
+      "side": 1,
+      "message": "sorry for the delay, LGTM\n\nwe should add tests for the very-large offset and very-large firstIndex; though I think it can be in the CTS.",
+      "parentUuid": "5478fe77_e4739238",
+      "range": {
+        "startLine": 288,
+        "startChar": 12,
+        "endLine": 291,
+        "endChar": 68
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582c189e_835291a9",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-16T02:57:01Z",
+      "side": 1,
+      "message": "uuunit: offset arg first, then size. that way it matches the order in the signature of `setIndexBuffer(buffer, format, offset, size)`",
+      "range": {
+        "startLine": 397,
+        "startChar": 55,
+        "endLine": 397,
+        "endChar": 67
+      },
+      "revId": "836b8b6da55b4c3e240eea4cd35e36c63b19c08b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "181a6531_3154cba6",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 2
