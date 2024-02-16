@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cfc134e_31d4018a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-16T17:02:27Z",
+      "side": 1,
+      "message": "(I\u0027d suggest checking for EGL_KHR_fence_sync or version 1.5.)",
+      "parentUuid": "d576dba7_e5fce099",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c6f286e_af6ab63f",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 10
