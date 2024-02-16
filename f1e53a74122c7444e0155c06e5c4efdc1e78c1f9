@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d69a5ae_7b811f41",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-16T09:03:16Z",
+      "side": 1,
+      "message": "You need to call `adapterRequestAdapterInfoF()` instead if you don\u0027t rename the `F` version. Otherwise, if you rename it, you need to call it with the proper arguments, i.e. with a `WGPURequestAdapterInfoCallbackInfo`.",
+      "parentUuid": "7592d1dd_c11d81c9",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9273a459_0ff24cc7",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 13
