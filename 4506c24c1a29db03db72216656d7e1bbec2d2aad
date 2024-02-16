@@ -69,6 +69,41 @@
       "message": "Note that there is a risk in using strstr() to parse extension strings: if the extension name is a subset of another extension, it\u0027ll return a false positive. \n\nMy bad for introducing this anti-pattern, but perhaps it\u0027s a good time to introduce better parsing. We could do something like GLFW\u0027s _glfwStringInExtensionString, which ensures that the found string is correctly space-separated. There might be a more modern way of doing it using the standard library or ABSL.\n\nAlso, perhaps we could have an array of extensions we\u0027re interested in, and iterate over that rather than querying them individually.",
       "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788418fe_f2332200",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-16T00:26:23Z",
+      "side": 1,
+      "message": "absl::StrSplit can do this (and zero-copy!)\nhttps://abseil.io/docs/cpp/guides/strings#abslstrsplit-for-splitting-strings\n\nThat said I don\u0027t think there\u0027s any risk with these extension names so we could just do it as a followup.\nhttps://registry.khronos.org/EGL/",
+      "parentUuid": "9c6f286e_af6ab63f",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2603c5ce_2c848a20",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-16T00:26:23Z",
+      "side": 1,
+      "message": "nit: comment that EGL_SYNC_FENCE_KHR has its signal scheduled on creation",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
