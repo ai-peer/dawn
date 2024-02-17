@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "434a0120_06f042fd",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-17T12:04:21Z",
+      "side": 1,
+      "message": "My MSVC fails here if kExpectedData is constexpr, hence the change above",
+      "revId": "1fc8ce7d52b29b2b595b9e6bdce620eecdd00158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
