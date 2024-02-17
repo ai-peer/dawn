@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422dd8d6_d26235fc",
+        "filename": "include/dawn/wire/WireClient.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-17T00:24:09Z",
+      "side": 1,
+      "message": "depends on if you plan to extend TextureReservation, InstanceReservation and friends, but potentially this could be:\n\n```suggestion\nstruct ReservedTexture {\n    WGPUTexture texture;\n    Handle handle;\n    Handle deviceHandle;\n    // TODO(dawn:2021) Remove this once Chromium has been updated.\n    uint32_t id;\n    uint32_t generation;\n    uint32_t deviceId;\n    uint32_t deviceGeneration;\n};\n\nstruct ReservedSwapChain {\n    WGPUSwapChain swapchain;\n    Handle handle;\n    Handle deviceHandle;\n};\n\nstruct ReservedDevice {\n    WGPUDevice device;\n    Handle handle;\n};\n\nstruct ReservedInstance {\n    WGPUInstance instance;\n    Handle handle;\n};\n```\n\nif you don\u0027t extend them, I think this is preferable so we don\u0027t need to have new struct names that are effectively the same thing.\nin any case, LGTM",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 2
+      },
+      "revId": "bb337859e97f178acc6e523e79970278d3db745b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
