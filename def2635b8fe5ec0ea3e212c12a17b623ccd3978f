@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddde5125_beee3298",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-17T12:01:29Z",
+      "side": 1,
+      "message": "SurfaceConfigurationValidationTests are now working!",
+      "revId": "def2635b8fe5ec0ea3e212c12a17b623ccd3978f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454912a4_1d831757",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-17T12:01:29Z",
+      "side": 1,
+      "message": "This was discussed with @bclayton@google.com on Matrix",
+      "revId": "def2635b8fe5ec0ea3e212c12a17b623ccd3978f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
