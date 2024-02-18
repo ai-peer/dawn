@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-02-14 08:04:34AM
+# Last rolled: 2024-02-18 07:41:10AM
 
 # Flaky on all platforms
 # KEEP
@@ -92,13 +92,21 @@ crbug.com/dawn/2083 [ intel-0x9bc5 ] webgpu:api,operation,memory_sync,texture,sa
 crbug.com/dawn/2083 [ intel-0x9bc5 ] webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary="command-buffer";first={"op":"storage","in":"render-pass-encoder"};second={"op":"b2t-copy","in":"command-encoder"} [ Failure ]
 crbug.com/dawn/2083 [ intel-0x9bc5 ] webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary="command-buffer";first={"op":"storage","in":"render-pass-encoder"};second={"op":"t2t-copy","in":"command-encoder"} [ Failure ]
 
+################################################################################
+# Transformed video external texture failures with compute
+# These are failing because external texture transforms are now used for the
+# non-zero-copy path and that's not implemented yet for compute shaders.
+# KEEP
+################################################################################
+crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-hflip.mp4";* [ Failure ]
+crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-180.mp4";* [ Failure ]
+crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-270.mp4";* [ Failure ]
+crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-90.mp4";* [ Failure ]
+crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-vflip.mp4";* [ Failure ]
+
 ### This section represents things that are probably fixable in Dawn.
 
 # snorm / stencil8 issues
-crbug.com/dawn/667 webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes_copy_depth_stencil:format="depth24plus-stencil8";copyMethod="CopyT2B";aspect="stencil-only" [ Failure ]
-crbug.com/dawn/667 webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes_copy_depth_stencil:format="depth24plus-stencil8";copyMethod="WriteTexture";aspect="stencil-only" [ Failure ]
-crbug.com/dawn/667 webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow_depth_stencil:format="depth24plus-stencil8";copyMethod="CopyT2B";aspect="stencil-only" [ Failure ]
-crbug.com/dawn/667 webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow_depth_stencil:format="depth24plus-stencil8";copyMethod="WriteTexture";aspect="stencil-only" [ Failure ]
 crbug.com/dawn/667 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="3d";readMethod="CopyToTexture";format="r8snorm" [ Failure ]
 crbug.com/dawn/667 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="3d";readMethod="CopyToTexture";format="rg8snorm" [ Failure ]
 crbug.com/dawn/667 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="3d";readMethod="CopyToTexture";format="rgba8snorm" [ Failure ]
@@ -112,9 +120,9 @@ crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,fract:f32:in
 crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,fract:f32:inputSource="const";vectorize=2 [ Failure ]
 crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,fract:f32:inputSource="const";vectorize=3 [ Failure ]
 crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,fract:f32:inputSource="const";vectorize=4 [ Failure ]
-crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,refract:f32_vec2:inputSource="const" [ Failure ]
 crbug.com/dawn/2077 webgpu:shader,execution,expression,call,builtin,unpack2x16float:unpack:inputSource="const" [ Failure ]
 crbug.com/dawn/2077 webgpu:shader,execution,expression,unary,af_assignment:f32:inputSource="const" [ Failure ]
+crbug.com/dawn/2077 [ passthrough ] webgpu:shader,execution,expression,call,builtin,refract:f32_vec2:inputSource="const" [ Failure ]
 
 # Video tests with dstColorSpace="display-p3" failing
 crbug.com/dawn/2196 webgpu:web_platform,copyToTexture,video:copy_from_video:videoName="four-colors-vp8-bt601.webm";sourceType="VideoElement";srcDoFlipYDuringCopy=false;dstColorSpace="display-p3" [ Failure ]
@@ -199,11 +207,11 @@ crbug.com/dawn/2121 webgpu:api,operation,vertex_state,index_format:primitive_res
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize="_undef_";alias=false [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize="_undef_";alias=true [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=2;alias=false [ Failure ]
-crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=2;alias=true [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=3;alias=false [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=3;alias=true [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=4;alias=false [ Failure ]
 crbug.com/dawn/2371 webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=4;alias=true [ Failure ]
+crbug.com/dawn/2371 [ passthrough ] webgpu:shader,execution,expression,call,builtin,bitcast:i32_to_f32:inputSource="const";vectorize=2;alias=true [ Failure ]
 
 # maxAnisotropy failures (OpenGL backend is not clamping maxAnisotropy)
 crbug.com/dawn/2188 webgpu:api,operation,sampling,anisotropy:anisotropic_filter_checkerboard: [ Failure ]
@@ -214,9 +222,6 @@ crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,i
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=1;interpolation={"type":"flat"} [ Failure ]
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=4;interpolation={"type":"flat"} [ Failure ]
 
-# "continuing_switch_break" test failing validation (also fails in WebGPU core)
-crbug.com/dawn/2389 webgpu:shader,validation,parse,continuing:placement:stmt="continuing_switch_break" [ Failure ]
-
 ### This section represents tests which may require CTS changes.
 
 # ANGLETextureSharing is not supported
@@ -225,7 +230,8 @@ crbug.com/dawn/2086 webgpu:api,operation,adapter,requestAdapter:requestAdapter:p
 crbug.com/dawn/2086 webgpu:api,operation,adapter,requestAdapter:requestAdapter:powerPreference="low-power";forceFallbackAdapter=true [ Failure ]
 crbug.com/dawn/2086 webgpu:util,texture,texel_data:unorm_texel_data_in_shader:format="rgba8unorm-srgb" [ Failure ]
 crbug.com/dawn/2086 webgpu:web_platform,canvas,configure:usage:* [ Failure ]
-crbug.com/dawn/2086 webgpu:web_platform,canvas,configure:viewFormats:* [ Failure ]
+crbug.com/dawn/2086 [ no-passthrough ] webgpu:web_platform,canvas,configure:viewFormats:canvasType="offscreen";format="rgba8unorm";viewFormatFeature="_undef_" [ Failure ]
+crbug.com/dawn/2086 [ passthrough ] webgpu:web_platform,canvas,configure:viewFormats:* [ Failure ]
 
 ### This section represents things that will require Compat validation
 ### These tests will never pass, but should be skipped in CTS once Compat
@@ -243,18 +249,6 @@ crbug.com/tint/1864 webgpu:shader,validation,parse,identifiers:module_const_name
 crbug.com/tint/1864 webgpu:shader,validation,parse,identifiers:module_var_name:ident="bitcast" [ Failure ]
 crbug.com/tint/1864 webgpu:shader,validation,parse,identifiers:override_name:ident="bitcast" [ Failure ]
 crbug.com/tint/1864 webgpu:shader,validation,parse,identifiers:struct_name:ident="bitcast" [ Failure ]
-
-################################################################################
-# Transformed video external texture failures with compute
-# These are failing because external texture transforms are now used for the
-# non-zero-copy path and that's not implemented yet for compute shaders.
-# KEEP
-################################################################################
-crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-hflip.mp4";* [ Failure ]
-crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-180.mp4";* [ Failure ]
-crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-270.mp4";* [ Failure ]
-crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-rotate-90.mp4";* [ Failure ]
-crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:videoName="four-colors-vp9-bt601-vflip.mp4";* [ Failure ]
 
 # Video failures also failing on WebGPU core
 crbug.com/1467566 webgpu:web_platform,copyToTexture,video:copy_from_video:videoName="four-colors-h264-bt601-hflip.mp4";sourceType="VideoElement";srcDoFlipYDuringCopy=false;dstColorSpace="display-p3" [ Failure ]
@@ -337,11 +331,13 @@ crbug.com/dawn/2168 webgpu:api,validation,error_scope:simple:errorType="out-of-m
 crbug.com/dawn/2168 webgpu:api,validation,error_scope:simple:errorType="out-of-memory";errorFilter="validation" [ Failure ]
 
 # clamp expression tests failing on NVidia
-crbug.com/dawn/2319 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,builtin,clamp:f32:* [ Failure ]
-crbug.com/dawn/2319 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,builtin,clamp:i32:* [ Failure ]
-crbug.com/dawn/2319 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,builtin,clamp:u32:* [ Failure ]
+crbug.com/dawn/2319 [ nvidia-0x2184 passthrough ] webgpu:shader,execution,expression,call,builtin,clamp:f32:* [ Failure ]
+crbug.com/dawn/2319 [ nvidia-0x2184 passthrough ] webgpu:shader,execution,expression,call,builtin,clamp:i32:* [ Failure ]
+crbug.com/dawn/2319 [ nvidia-0x2184 passthrough ] webgpu:shader,execution,expression,call,builtin,clamp:u32:* [ Failure ]
 
 # alpha_to_coverage occlusion query tests failing on Intel
+crbug.com/dawn/2248 [ intel-0x9bc5 passthrough ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="zero";alpha=0.75 [ Failure ]
+crbug.com/dawn/2248 [ intel-0x9bc5 passthrough ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="non-zero";alpha=0.5 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="non-zero";querySetOffset="non-zero";alpha=0.25 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="non-zero";querySetOffset="non-zero";alpha=0.5 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="non-zero";querySetOffset="non-zero";alpha=0.75 [ Failure ]
@@ -356,7 +352,6 @@ crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="non-zero";alpha=0 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="zero";alpha=0.25 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="zero";alpha=0.5 [ Failure ]
-crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="zero";alpha=0.75 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="direct";bufferOffset="zero";querySetOffset="zero";alpha=0 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="non-zero";querySetOffset="non-zero";alpha=0.25 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="non-zero";querySetOffset="non-zero";alpha=0.5 [ Failure ]
@@ -367,7 +362,6 @@ crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="non-zero";querySetOffset="zero";alpha=0.75 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="non-zero";querySetOffset="zero";alpha=0 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="non-zero";alpha=0.25 [ Failure ]
-crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="non-zero";alpha=0.5 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="non-zero";alpha=0.75 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="non-zero";alpha=0 [ Failure ]
 crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;renderMode="render-bundle";bufferOffset="zero";querySetOffset="zero";alpha=0.25 [ Failure ]
@@ -381,10 +375,10 @@ crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTextur
 crbug.com/dawn/2114 [ nvidia-0x2184 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
 
 # Limits issues on NVidia GL
+crbug.com/dawn/2123 [ nvidia-0x2184 passthrough ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest="atMaximum";testValueName="atLimit";async=false;bindingCombination="vertexAndFragmentWithPossibleFragmentStageOverflow";order="backward";bindGroupTest="differentGroups" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxBufferSize:createBuffer,at_over:limitTest="atMaximum";testValueName="atLimit" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBufferBindingSize:createBindGroup,at_over:limitTest="atMaximum";testValueName="atLimit";bufferPart="wholeBuffer" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBufferBindingSize:createBindGroup,at_over:limitTest="atMaximum";testValueName="overLimit";bufferPart="wholeBuffer" [ Failure ]
-crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest="atMaximum";testValueName="atLimit";async=false;bindingCombination="vertexAndFragmentWithPossibleFragmentStageOverflow";order="backward";bindGroupTest="differentGroups" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest="atMaximum";testValueName="atLimit";async=false;bindingCombination="vertexAndFragmentWithPossibleFragmentStageOverflow";order="backward";bindGroupTest="sameGroup" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest="atMaximum";testValueName="atLimit";async=false;bindingCombination="vertexAndFragmentWithPossibleFragmentStageOverflow";order="forward";bindGroupTest="differentGroups" [ Failure ]
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest="atMaximum";testValueName="atLimit";async=false;bindingCombination="vertexAndFragmentWithPossibleFragmentStageOverflow";order="forward";bindGroupTest="sameGroup" [ Failure ]
@@ -414,6 +408,11 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="private";workgroupSize=[1,1,1];batch__=9 [ Failure ]
 
 # Intel failures (undiagnosed)
+[ intel-0x9bc5 passthrough ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="uniform";vectorize=3 [ Failure ]
+[ intel-0x9bc5 passthrough ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="uniform";vectorize="_undef_" [ Failure ]
+[ intel-0x9bc5 passthrough ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_rw";vectorize=3 [ Failure ]
+[ intel-0x9bc5 passthrough ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:i32:inputSource="uniform";vectorize=4 [ Failure ]
+[ intel-0x9bc5 passthrough ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="uniform";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rgba8snorm";dstFormat="rgba8snorm";dimension="2d" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="r8snorm";dstFormat="r8snorm";dimension="1d" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="1d" [ Failure ]
@@ -435,7 +434,6 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="storage_rw";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="uniform";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="uniform";vectorize=2 [ Failure ]
-[ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="uniform";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,asin:f32:inputSource="uniform";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_r";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_r";vectorize=2 [ Failure ]
@@ -445,7 +443,6 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_rw";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_rw";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_rw";vectorize=4 [ Failure ]
-[ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="uniform";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="uniform";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="uniform";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="uniform";vectorize=4 [ Failure ]
@@ -455,7 +452,6 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_r";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_rw";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_rw";vectorize=2 [ Failure ]
-[ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_rw";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="storage_rw";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="uniform";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:u32:inputSource="uniform";vectorize=2 [ Failure ]
@@ -472,7 +468,6 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:i32:inputSource="uniform";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:i32:inputSource="uniform";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:i32:inputSource="uniform";vectorize=3 [ Failure ]
-[ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:i32:inputSource="uniform";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="storage_r";vectorize="_undef_" [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="storage_r";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="storage_r";vectorize=3 [ Failure ]
@@ -482,7 +477,6 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="storage_rw";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="storage_rw";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="uniform";vectorize="_undef_" [ Failure ]
-[ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="uniform";vectorize=2 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="uniform";vectorize=3 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,firstTrailingBit:u32:inputSource="uniform";vectorize=4 [ Failure ]
 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,ldexp:f32:inputSource="storage_r";vectorize="_undef_" [ Failure ]
@@ -508,6 +502,18 @@ crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,bu
 ################################################################################
 # New failures. Please triage:
 ################################################################################
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow:initMethod="WriteTexture";checkMethod="PartialCopyT2B";format="bc6h-rgb-float";dimension="2d" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow:initMethod="WriteTexture";checkMethod="PartialCopyT2B";format="r8snorm";dimension="2d" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow:initMethod="WriteTexture";checkMethod="PartialCopyT2B";format="rgb10a2uint";dimension="2d" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow_depth_stencil:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=0;count=3;first_instance=2;instance_count=1;indexed=false;indirect=false;vertex_buffer_offset=32;index_buffer_offset="_undef_";base_vertex="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=0;count=3;first_instance=2;instance_count=4;indexed=true;indirect=false;vertex_buffer_offset=32;index_buffer_offset=0;base_vertex=9 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=0;count=6;first_instance=2;instance_count=1;indexed=true;indirect=false;vertex_buffer_offset=0;index_buffer_offset=16;base_vertex=9 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=0;count=6;first_instance=2;instance_count=4;indexed=false;indirect=false;vertex_buffer_offset=32;index_buffer_offset="_undef_";base_vertex="_undef_" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=3;count=3;first_instance=2;instance_count=1;indexed=true;indirect=false;vertex_buffer_offset=0;index_buffer_offset=0;base_vertex=9 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=3;count=6;first_instance=2;instance_count=1;indexed=true;indirect=false;vertex_buffer_offset=32;index_buffer_offset=16;base_vertex=9 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,rendering,draw:arguments:first=3;count=6;first_instance=2;instance_count=4;indexed=true;indirect=false;vertex_buffer_offset=0;index_buffer_offset=0;base_vertex=9 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,operation,sampling,filter_mode:minFilter,* [ Failure ]
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rg32float";depthOrArrayLayers=1 [ Failure ]
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rg32float";depthOrArrayLayers=2 [ Failure ]
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rg32sint";depthOrArrayLayers=1 [ Failure ]
@@ -518,6 +524,8 @@ crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format=
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rgba8snorm";depthOrArrayLayers=2 [ Failure ]
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rgba8unorm";depthOrArrayLayers=1 [ Failure ]
 crbug.com/dawn/0000 webgpu:api,operation,storage_texture,read_only:basic:format="rgba8unorm";depthOrArrayLayers=2 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,validation,capability_checks,limits,maxTextureDimension2D:getCurrentTexture,at_over:limitTest="atDefault";testValueName="atLimit";canvasType="offscreen" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,validation,encoding,cmds,render,draw:vertex_buffer_OOB:type="drawIndexedIndirect";VBSize="exact";IBSize="exact";AStride="zero" [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="auto0";bindingType="auto1";swap=false;empty=false;computeCommand="dispatch" [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="auto0";bindingType="auto1";swap=false;empty=false;computeCommand="dispatchIndirect" [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="auto0";bindingType="auto1";swap=false;empty=true;computeCommand="dispatch" [ Failure ]
@@ -526,4 +534,29 @@ crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_gr
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="auto0";bindingType="explicit";swap=false;empty=true;computeCommand="dispatchIndirect" [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="explicit";bindingType="auto0";swap=false;empty=true;computeCommand="dispatch" [ Failure ]
 crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,compute_pass:pipelineType="explicit";bindingType="auto0";swap=false;empty=true;computeCommand="dispatchIndirect" [ Failure ]
-crbug.com/dawn/0000 webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,render_pass:* [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,render_pass:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,render_pass:pipelineType="auto0";bindingType="auto1";swap=false;empty=false;renderCommand="drawIndexed" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,validation,encoding,programmable,pipeline_bind_group_compat:default_bind_group_layouts_never_match,render_pass:pipelineType="auto0";bindingType="explicit";swap=false;empty=true;renderCommand="drawIndirect" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:api,validation,gpu_external_texture_expiration:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:depth:* [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:depth:format="depth16unorm";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:depth:format="depth24plus";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:depth:format="depth24plus-stencil8";aspect="depth-only";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:depth:format="depth32float";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:sampled_and_multisampled:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:sampled_and_multisampled:format="bc5-rg-unorm";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:sampled_and_multisampled:format="rg32uint";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,execution,expression,call,builtin,textureDimensions:sampled_and_multisampled:format="rgba8unorm-srgb";aspect="all";samples=1 [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32float";aspect="all" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32sint";aspect="all" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32uint";aspect="all" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,execution,memory_model,texture_intra_invocation_coherence:* [ Failure ]
+crbug.com/dawn/0000 [ passthrough ] webgpu:shader,execution,memory_model,texture_intra_invocation_coherence:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,validation,shader_io,group_and_binding:different_entry_points:a_stage="compute";b_stage="vertex";a_kind="uniform";b_kind="texture_storage_1d";usage="transitive" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,validation,shader_io,group_and_binding:different_entry_points:a_stage="fragment";b_stage="compute";a_kind="texture_2d";b_kind="uniform";usage="transitive" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,validation,shader_io,group_and_binding:different_entry_points:a_stage="fragment";b_stage="fragment";a_kind="storage";b_kind="texture_3d";usage="transitive" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:shader,validation,shader_io,group_and_binding:different_entry_points:a_stage="fragment";b_stage="fragment";a_kind="texture_external";b_kind="texture_storage_1d";usage="transitive" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="bgra8unorm" [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:web_platform,canvas,configure:size_zero_before_configure:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:web_platform,canvas,getCurrentTexture:* [ Failure ]
+crbug.com/dawn/0000 [ no-passthrough ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:* [ Failure ]
