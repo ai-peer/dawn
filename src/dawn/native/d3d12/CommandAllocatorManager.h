@@ -28,45 +28,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_COMMANDALLOCATORMANAGER_H_
 #define SRC_DAWN_NATIVE_D3D12_COMMANDALLOCATORMANAGER_H_
 
-#include <bitset>
-
-#include "dawn/native/d3d12/d3d12_platform.h"
-#include "partition_alloc/pointers/raw_ptr.h"
-
-#include "dawn/common/SerialQueue.h"
-#include "dawn/native/Error.h"
-#include "dawn/native/IntegerTypes.h"
-
 namespace dawn::native::d3d12 {
 
-class Queue;
-
-class CommandAllocatorManager {
-  public:
-    explicit CommandAllocatorManager(Queue* queue);
-
-    // A CommandAllocator that is reserved must be used on the next ExecuteCommandLists
-    // otherwise its commands may be reset before execution has completed on the GPU
-    ResultOrError<ID3D12CommandAllocator*> ReserveCommandAllocator();
-    MaybeError Tick(ExecutionSerial lastCompletedSerial);
-
-  private:
-    // The allocator manager is owned by the queue so the queue outlives it.
-    raw_ptr<Queue> mQueue;
-
-    // This must be at least 2 because the Device and Queue use separate command allocators
-    static constexpr unsigned int kMaxCommandAllocators = 32;
-    unsigned int mAllocatorCount;
-
-    struct IndexedCommandAllocator {
-        ComPtr<ID3D12CommandAllocator> commandAllocator;
-        unsigned int index;
-    };
-
-    ComPtr<ID3D12CommandAllocator> mCommandAllocators[kMaxCommandAllocators];
-    std::bitset<kMaxCommandAllocators> mFreeAllocators;
-    SerialQueue<ExecutionSerial, IndexedCommandAllocator> mInFlightCommandAllocators;
-};
+class CommandAllocatorManager {};
 
 }  // namespace dawn::native::d3d12
 
