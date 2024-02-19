@@ -428,6 +428,24 @@ std::enable_if_t<IsNumeric<A>, bool> operator!=(A a, Number<B> b) {
     return !(a == b);
 }
 
+/// Addition operator for Number<T>
+/// @param a the LHS number
+/// @param b the RHS number
+/// @returns a + b
+template <typename T>
+constexpr inline Number<T> operator+(Number<T> a, Number<T> b) {
+    return Number<T>{a.value + b.value};
+}
+
+/// Subtraction operator for Number<T>
+/// @param a the LHS number
+/// @param b the RHS number
+/// @returns a - b
+template <typename T>
+constexpr inline Number<T> operator-(Number<T> a, Number<T> b) {
+    return Number<T>{a.value - b.value};
+}
+
 /// Define 'TINT_HAS_OVERFLOW_BUILTINS' if the compiler provide overflow checking builtins.
 /// If the compiler does not support these builtins, then these are emulated with algorithms
 /// described in:
