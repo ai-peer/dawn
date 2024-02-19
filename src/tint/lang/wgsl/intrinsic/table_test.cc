@@ -723,7 +723,7 @@ TEST_F(WgslIntrinsicTableTest, MismatchCompoundOp) {
 TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerImplicit) {
     auto* i32 = create<core::type::I32>();
     auto* vec3i = create<core::type::Vector>(i32, 3u);
-    auto result = table.Lookup(CtorConv::kVec3, nullptr, Vector{i32, i32, i32},
+    auto result = table.Lookup(CtorConv::kVec3, Empty, Vector{i32, i32, i32},
                                core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result->return_type, vec3i);
@@ -738,8 +738,8 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerImplicit) {
 TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerExplicit) {
     auto* i32 = create<core::type::I32>();
     auto* vec3i = create<core::type::Vector>(i32, 3u);
-    auto result =
-        table.Lookup(CtorConv::kVec3, i32, Vector{i32, i32, i32}, core::EvaluationStage::kConstant);
+    auto result = table.Lookup(CtorConv::kVec3, Vector{i32}, Vector{i32, i32, i32},
+                               core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result->return_type, vec3i);
     EXPECT_TRUE(result->info->flags.Contains(OverloadFlag::kIsConstructor));
@@ -753,7 +753,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerExplicit) {
 TEST_F(WgslIntrinsicTableTest, MismatchTypeInitializerImplicit) {
     auto* i32 = create<core::type::I32>();
     auto* f32 = create<core::type::F32>();
-    auto result = table.Lookup(CtorConv::kVec3, nullptr, Vector{i32, f32, i32},
+    auto result = table.Lookup(CtorConv::kVec3, Empty, Vector{i32, f32, i32},
                                core::EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
     EXPECT_EQ(result.Failure(),
@@ -785,8 +785,8 @@ TEST_F(WgslIntrinsicTableTest, MismatchTypeInitializerImplicit) {
 TEST_F(WgslIntrinsicTableTest, MismatchTypeInitializerExplicit) {
     auto* i32 = create<core::type::I32>();
     auto* f32 = create<core::type::F32>();
-    auto result =
-        table.Lookup(CtorConv::kVec3, i32, Vector{i32, f32, i32}, core::EvaluationStage::kConstant);
+    auto result = table.Lookup(CtorConv::kVec3, Vector{i32}, Vector{i32, f32, i32},
+                               core::EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<i32>(i32, f32, i32)
@@ -818,7 +818,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerImplicitVecFromVecAbstract) {
     auto* ai = create<core::type::AbstractInt>();
     auto* vec3_ai = create<core::type::Vector>(ai, 3u);
     auto result =
-        table.Lookup(CtorConv::kVec3, nullptr, Vector{vec3_ai}, core::EvaluationStage::kConstant);
+        table.Lookup(CtorConv::kVec3, Empty, Vector{vec3_ai}, core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result->return_type, vec3_ai);
     EXPECT_TRUE(result->info->flags.Contains(OverloadFlag::kIsConstructor));
@@ -832,7 +832,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerImplicitMatFromVec) {
     auto* vec2_ai = create<core::type::Vector>(create<core::type::AbstractInt>(), 2u);
     auto* vec2_af = create<core::type::Vector>(af, 2u);
     auto* mat2x2_af = create<core::type::Matrix>(vec2_af, 2u);
-    auto result = table.Lookup(CtorConv::kMat2x2, nullptr, Vector{vec2_ai, vec2_ai},
+    auto result = table.Lookup(CtorConv::kMat2x2, Empty, Vector{vec2_ai, vec2_ai},
                                core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_TYPE(result->return_type, mat2x2_af);
@@ -846,8 +846,8 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializerImplicitMatFromVec) {
 TEST_F(WgslIntrinsicTableTest, MatchTypeInitializer_ConstantEval) {
     auto* ai = create<core::type::AbstractInt>();
     auto* vec3_ai = create<core::type::Vector>(ai, 3u);
-    auto result = table.Lookup(CtorConv::kVec3, nullptr, Vector{ai, ai, ai},
-                               core::EvaluationStage::kConstant);
+    auto result =
+        table.Lookup(CtorConv::kVec3, Empty, Vector{ai, ai, ai}, core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_NE(result->const_eval_fn, nullptr);
     EXPECT_EQ(result->return_type, vec3_ai);
@@ -862,7 +862,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeInitializer_ConstantEval) {
 TEST_F(WgslIntrinsicTableTest, MatchTypeInitializer_RuntimeEval) {
     auto* ai = create<core::type::AbstractInt>();
     auto result =
-        table.Lookup(CtorConv::kVec3, nullptr, Vector{ai, ai, ai}, core::EvaluationStage::kRuntime);
+        table.Lookup(CtorConv::kVec3, Empty, Vector{ai, ai, ai}, core::EvaluationStage::kRuntime);
     auto* i32 = create<core::type::I32>();
     auto* vec3i = create<core::type::Vector>(i32, 3u);
     ASSERT_EQ(result, Success);
@@ -882,7 +882,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeConversion) {
     auto* f32 = create<core::type::F32>();
     auto* vec3f = create<core::type::Vector>(f32, 3u);
     auto result =
-        table.Lookup(CtorConv::kVec3, i32, Vector{vec3f}, core::EvaluationStage::kConstant);
+        table.Lookup(CtorConv::kVec3, Vector{i32}, Vector{vec3f}, core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result->return_type, vec3i);
     EXPECT_FALSE(result->info->flags.Contains(OverloadFlag::kIsConstructor));
@@ -894,7 +894,8 @@ TEST_F(WgslIntrinsicTableTest, MismatchTypeConversion) {
     auto* arr = create<core::type::Array>(create<core::type::U32>(),
                                           create<core::type::RuntimeArrayCount>(), 4u, 4u, 4u, 4u);
     auto* f32 = create<core::type::F32>();
-    auto result = table.Lookup(CtorConv::kVec3, f32, Vector{arr}, core::EvaluationStage::kConstant);
+    auto result =
+        table.Lookup(CtorConv::kVec3, Vector{f32}, Vector{arr}, core::EvaluationStage::kConstant);
     ASSERT_NE(result, Success);
     EXPECT_EQ(result.Failure(),
               R"(no matching constructor for vec3<f32>(array<u32>)
@@ -928,8 +929,8 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeConversion_ConstantEval) {
     auto* vec3_ai = create<core::type::Vector>(ai, 3u);
     auto* f32 = create<core::type::F32>();
     auto* vec3f = create<core::type::Vector>(f32, 3u);
-    auto result =
-        table.Lookup(CtorConv::kVec3, af, Vector{vec3_ai}, core::EvaluationStage::kConstant);
+    auto result = table.Lookup(CtorConv::kVec3, Vector{af}, Vector{vec3_ai},
+                               core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_NE(result->const_eval_fn, nullptr);
     // NOTE: Conversions are explicit, so there's no way to have it return abstracts
@@ -946,7 +947,7 @@ TEST_F(WgslIntrinsicTableTest, MatchTypeConversion_RuntimeEval) {
     auto* vec3f = create<core::type::Vector>(create<core::type::F32>(), 3u);
     auto* vec3i = create<core::type::Vector>(create<core::type::I32>(), 3u);
     auto result =
-        table.Lookup(CtorConv::kVec3, af, Vector{vec3_ai}, core::EvaluationStage::kRuntime);
+        table.Lookup(CtorConv::kVec3, Vector{af}, Vector{vec3_ai}, core::EvaluationStage::kRuntime);
     ASSERT_EQ(result, Success);
     EXPECT_NE(result->const_eval_fn, nullptr);
     EXPECT_EQ(result->return_type, vec3f);
@@ -972,8 +973,7 @@ TEST_F(WgslIntrinsicTableTest, OverloadResolution) {
     // The first should win overload resolution.
     auto* ai = create<core::type::AbstractInt>();
     auto* i32 = create<core::type::I32>();
-    auto result =
-        table.Lookup(CtorConv::kI32, nullptr, Vector{ai}, core::EvaluationStage::kConstant);
+    auto result = table.Lookup(CtorConv::kI32, Empty, Vector{ai}, core::EvaluationStage::kConstant);
     ASSERT_EQ(result, Success);
     EXPECT_EQ(result->return_type, i32);
     EXPECT_EQ(result->parameters.Length(), 1u);
