@@ -16,6 +16,29 @@
       "message": "This solves one of perf bottlenecks, `UniformBufferUpdatePerf.D3D11_WriteBuffer_Partial_`. However, `UniformBufferUpdatePerf.D3D11_StagingBuffer_` is yet to be fixed.",
       "revId": "da6eaf6a6965b26755e941265b76529f916c4f7a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd9971e_44d64277",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-19T05:03:15Z",
+      "side": 1,
+      "message": "D3D11_COPY_DISCARD cannot be used for partial update. Since data out of the updated region will be undefined.",
+      "range": {
+        "startLine": 577,
+        "startChar": 74,
+        "endLine": 577,
+        "endChar": 92
+      },
+      "revId": "da6eaf6a6965b26755e941265b76529f916c4f7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
