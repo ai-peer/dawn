@@ -187,6 +187,12 @@ Result<SuccessType> Lower(core::ir::Module& mod) {
         }
         if (auto* call = inst->As<wgsl::ir::BuiltinCall>()) {
             switch (call->Func()) {
+                case BuiltinFn::kBitcast: {
+                    auto* replacement = b.Bitcast(call->Result(0)->Type(), call->Args()[0]);
+                    call->Result(0)->ReplaceAllUsesWith(replacement->Result(0));
+                    call->ReplaceWith(replacement);
+                    break;
+                }
                 case BuiltinFn::kWorkgroupUniformLoad: {
                     // Replace:
                     //    %value = call workgroupUniformLoad %ptr
