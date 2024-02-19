@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f2398a2_689fa30c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-19T00:36:47Z",
+      "side": 1,
+      "message": "This solves one of perf bottlenecks, `UniformBufferUpdatePerf.D3D11_WriteBuffer_Partial_`. However, `UniformBufferUpdatePerf.D3D11_StagingBuffer_` is yet to be fixed.",
+      "revId": "da6eaf6a6965b26755e941265b76529f916c4f7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
