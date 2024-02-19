@@ -39,6 +39,30 @@
       },
       "revId": "da6eaf6a6965b26755e941265b76529f916c4f7a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f2e5e95_be11a36c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-19T11:32:57Z",
+      "side": 1,
+      "message": "You are right. Actually I was also a little surprised it had passed the CQ.\nThe failure of new test case I just wrote confirms it.",
+      "parentUuid": "8bd9971e_44d64277",
+      "range": {
+        "startLine": 577,
+        "startChar": 74,
+        "endLine": 577,
+        "endChar": 92
+      },
+      "revId": "da6eaf6a6965b26755e941265b76529f916c4f7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
