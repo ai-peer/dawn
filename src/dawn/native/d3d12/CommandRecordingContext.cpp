@@ -34,7 +34,6 @@
 #include <utility>
 
 #include "dawn/native/d3d/D3DError.h"
-#include "dawn/native/d3d12/CommandAllocatorManager.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/HeapD3D12.h"
 #include "dawn/native/d3d12/ResidencyManagerD3D12.h"
@@ -48,34 +47,12 @@ void CommandRecordingContext::AddToSharedTextureList(Texture* texture) {
     mSharedTextures.insert(texture);
 }
 
-MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
-                                         CommandAllocatorManager* commandAllocationManager) {
-    DAWN_ASSERT(!IsOpen());
-    ID3D12CommandAllocator* commandAllocator;
-    DAWN_TRY_ASSIGN(commandAllocator, commandAllocationManager->ReserveCommandAllocator());
-    if (mD3d12CommandList != nullptr) {
-        MaybeError error = CheckHRESULT(mD3d12CommandList->Reset(commandAllocator, nullptr),
-                                        "D3D12 resetting command list");
-        if (error.IsError()) {
-            mD3d12CommandList.Reset();
-            DAWN_TRY(std::move(error));
-        }
-    } else {
-        ComPtr<ID3D12GraphicsCommandList> d3d12GraphicsCommandList;
-        DAWN_TRY(CheckHRESULT(
-            d3d12Device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator,
-                                           nullptr, IID_PPV_ARGS(&d3d12GraphicsCommandList)),
-            "D3D12 creating direct command list"));
-        mD3d12CommandList = std::move(d3d12GraphicsCommandList);
-        // Store a cast to ID3D12GraphicsCommandList4. This is required to use the D3D12 render
-        // pass APIs introduced in Windows build 1809.
-        mD3d12CommandList.As(&mD3d12CommandList4);
-    }
-
+void CommandRecordingContext::Open(ComPtr<ID3D12GraphicsCommandList> commandList) {
+    DAWN_ASSERT(!mIsOpen);
+    mD3d12CommandList = std::move(commandList);
+    mD3d12CommandList.As(&mD3d12CommandList4);
     mIsOpen = true;
     mNeedsSubmit = false;
-
-    return {};
 }
 
 MaybeError CommandRecordingContext::ExecuteCommandList(Device* device,

@@ -54,6 +54,8 @@ ResultOrError<Ref<Queue>> Queue::Create(Device* device, const QueueDescriptor* d
 Queue::~Queue() {}
 
 MaybeError Queue::Initialize() {
+    mFreeAllocators.set();
+
     SetLabelImpl();
 
     ID3D12Device* d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
@@ -78,8 +80,10 @@ MaybeError Queue::Initialize() {
     DAWN_TRY_ASSIGN(mSharedFence, SharedFence::Create(ToBackend(GetDevice()),
                                                       "Internal shared DXGI fence", mFence));
 
-    // TODO(dawn:1413): Consider folding the command allocator manager in this class.
-    mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
+    ComPtr<ID3D12GraphicsCommandList> commandList;
+    DAWN_TRY_ASSIGN(commandList, OpenNewCommandList());
+    mPendingCommands.Open(std::move(commandList));
+
     return {};
 }
 
@@ -136,21 +140,29 @@ MaybeError Queue::SubmitPendingCommands() {
     Device* device = ToBackend(GetDevice());
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
 
-    if (!mPendingCommands.IsOpen() || !mPendingCommands.NeedsSubmit()) {
+    if (!mPendingCommands.NeedsSubmit()) {
         return {};
     }
 
-    DAWN_TRY(mCommandAllocatorManager->Tick(GetCompletedCommandSerial()));
     DAWN_TRY(mPendingCommands.ExecuteCommandList(device, mCommandQueue.Get()));
-    return NextSerial();
+    RecycleLastCommandListAfter(GetPendingCommandSerial());
+
+    DAWN_TRY(NextSerial());
+    DAWN_TRY(RecycleUnusedCommandLists());
+
+    ComPtr<ID3D12GraphicsCommandList> commandList;
+    DAWN_TRY_ASSIGN(commandList, OpenNewCommandList());
+    mPendingCommands.Open(std::move(commandList));
+
+    return {};
 }
 
 MaybeError Queue::NextSerial() {
     Device* device = ToBackend(GetDevice());
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
-    // NextSerial should not ever be called with an open command list since the underlying command
-    // allocator could be recycled after the serial completes on the GPU.
-    DAWN_ASSERT(!mPendingCommands.IsOpen());
+    // NextSerial should not ever be called with a command list that needs submission since the
+    // underlying command allocator could be recycled after the serial completes on the GPU.
+    DAWN_ASSERT(!mPendingCommands.NeedsSubmit());
 
     IncrementLastSubmittedCommandSerial();
 
@@ -197,9 +209,7 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
 }
 
 void Queue::ForceEventualFlushOfCommands() {
-    if (mPendingCommands.IsOpen()) {
-        mPendingCommands.SetNeedsSubmit();
-    }
+    mPendingCommands.SetNeedsSubmit();
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
@@ -214,14 +224,10 @@ MaybeError Queue::WaitForIdleForDestruction() {
 }
 
 ResultOrError<CommandRecordingContext*> Queue::GetPendingCommandContext(SubmitMode submitMode) {
-    Device* device = ToBackend(GetDevice());
-    ID3D12Device* d3d12Device = device->GetD3D12Device();
+    // XXX remove the ResultOrError
+    // A pending command context is always open after startup and before shutdown.
+    DAWN_ASSERT(mPendingCommands.IsOpen());
 
-    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
-    // allocator when it is needed so we don't submit empty command lists
-    if (!mPendingCommands.IsOpen()) {
-        DAWN_TRY(mPendingCommands.Open(d3d12Device, mCommandAllocatorManager.get()));
-    }
     if (submitMode == SubmitMode::Normal) {
         mPendingCommands.SetNeedsSubmit();
     }
@@ -237,6 +243,62 @@ void Queue::SetLabelImpl() {
 
 void Queue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {
     mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event);
+}
+
+ResultOrError<ComPtr<ID3D12GraphicsCommandList>> Queue::OpenNewCommandList() {
+    DAWN_ASSERT(mLastAllocatorUsed == kNoCommandAllocator);
+
+    // If there are no free allocators, get the oldest serial in flight and wait on it
+    if (mFreeAllocators.none()) {
+        const ExecutionSerial firstSerial = mInFlightCommandAllocators.FirstSerial();
+        DAWN_TRY(WaitForSerial(firstSerial));
+        DAWN_TRY(RecycleUnusedCommandLists());
+    }
+
+    DAWN_ASSERT(mFreeAllocators.any());
+    ID3D12Device* d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
+
+    // Get the index of the first free allocator from the bitset
+    uint32_t freeIndex = *(IterateBitSet(mFreeAllocators).begin());
+    mFreeAllocators.reset(freeIndex);
+    auto& allocator = mCommandAllocators[freeIndex];
+
+    if (freeIndex >= mAllocatorCount) {
+        DAWN_ASSERT(freeIndex == mAllocatorCount);
+        mAllocatorCount++;
+
+        DAWN_TRY(
+            CheckHRESULT(d3d12Device->CreateCommandAllocator(D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                                             IID_PPV_ARGS(&allocator.allocator)),
+                         "D3D12 create command allocator"));
+        DAWN_TRY(CheckHRESULT(d3d12Device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT,
+                                                             allocator.allocator.Get(), nullptr,
+                                                             IID_PPV_ARGS(&allocator.list)),
+                              "D3D12 creating direct command list"));
+    } else {
+        MaybeError error = CheckHRESULT(allocator.list->Reset(allocator.allocator.Get(), nullptr),
+                                        "D3D12 resetting command list");
+    }
+
+    mLastAllocatorUsed = freeIndex;
+    return mCommandAllocators[mLastAllocatorUsed].list;
+}
+
+void Queue::RecycleLastCommandListAfter(ExecutionSerial serial) {
+    mInFlightCommandAllocators.Enqueue(mLastAllocatorUsed, serial);
+    mLastAllocatorUsed = kNoCommandAllocator;
+}
+
+MaybeError Queue::RecycleUnusedCommandLists() {
+    ExecutionSerial completedSerial = GetCompletedCommandSerial();
+    for (auto index : mInFlightCommandAllocators.IterateUpTo(completedSerial)) {
+        DAWN_TRY(CheckHRESULT(mCommandAllocators[index].allocator->Reset(),
+                              "D3D12 reset command allocator"));
+        mFreeAllocators.set(index);
+    }
+    mInFlightCommandAllocators.ClearUpTo(completedSerial);
+
+    return {};
 }
 
 }  // namespace dawn::native::d3d12
