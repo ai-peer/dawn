@@ -1432,7 +1432,23 @@ Eval::Result Eval::Swizzle(const core::type::Type* ty,
 Eval::Result Eval::bitcast(const core::type::Type* ty,
                            VectorRef<const Value*> args,
                            const Source& source) {
-    auto* value = args[0];
+    // handle:
+    //   bitcast<u32>(abstract-int)
+    //   bitcast<vecN<u32>>(vecN<abstract-int>)
+    auto concrete = Switch(
+        args[0]->Type(),  //
+        [&](const core::type::AbstractInt*) { return Conv(mgr.types.u32(), args, source); },
+        [&](const core::type::Vector* vec) -> Eval::Result {
+            if (vec->type()->Is<core::type::AbstractInt>()) {
+                return Conv(mgr.types.vec(mgr.types.u32(), vec->Width()), args, source);
+            }
+            return args[0];
+        },
+        [&](Default) { return args[0]; });
+    if (concrete != Success) {
+        return concrete.Failure();
+    }
+    auto* value = concrete.Get();
 
     // Target type
     auto dst_elements = ty->Elements(ty->DeepestElement(), 1u);
