@@ -154,6 +154,7 @@ MaybeError Device::TickImpl() {
     // error during execution and early out as a result.
     DAWN_TRY(CheckDebugLayerAndGenerateErrors());
     DAWN_TRY(ToBackend(GetQueue())->SubmitPendingCommands());
+    DAWN_TRY(ToBackend(GetQueue())->CheckAndMapReadyBuffers());
     return {};
 }
 

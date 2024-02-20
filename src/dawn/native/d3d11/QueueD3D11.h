@@ -30,6 +30,7 @@
 
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SerialMap.h"
+#include "dawn/common/SerialQueue.h"
 #include "dawn/native/SystemEvent.h"
 #include "dawn/native/d3d/QueueD3D.h"
 
@@ -55,6 +56,11 @@ class Queue final : public d3d::Queue {
     // Separated from creation because it creates resources, which is not valid before the
     // DeviceBase is fully created.
     MaybeError InitializePendingContext();
+
+    // Register the pending map buffer.
+    void TrackPendingMapBuffer(Ref<Buffer>& buffer, ExecutionSerial readySerial);
+    // Check all pending map buffers, and actually map the ready ones.
+    MaybeError CheckAndMapReadyBuffers();
 
   private:
     using d3d::Queue::Queue;
@@ -88,6 +94,7 @@ class Queue final : public d3d::Queue {
     Ref<SharedFence> mSharedFence;
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
+    SerialQueue<ExecutionSerial, Ref<Buffer>> mPendingMapBuffers;
 };
 
 }  // namespace dawn::native::d3d11
