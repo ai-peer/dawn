@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/opengl/UtilsEGL.h"
 
 #ifndef EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE
@@ -104,7 +105,17 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 }
 
 void ContextEGL::MakeCurrent() {
-    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    mPrevDisplay = egl.GetCurrentDisplay();
+    mPrevContext = egl.GetCurrentContext();
+    if (mPrevDisplay != mDisplay || mPrevContext != mContext) {
+        egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    }
+}
+
+void ContextEGL::MakeUnCurrent() {
+    if (mPrevDisplay != mDisplay || mPrevContext != mContext) {
+        egl.MakeCurrent(mPrevDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mPrevContext);
+    }
 }
 
 ContextEGL::~ContextEGL() {

@@ -44,6 +44,7 @@ class ContextEGL : public Device::Context {
                                                              EGLDisplay display,
                                                              bool useANGLETextureSharing);
     void MakeCurrent() override;
+    void MakeUnCurrent() override;
     ~ContextEGL() override;
 
   private:
@@ -53,6 +54,9 @@ class ContextEGL : public Device::Context {
     const EGLFunctions egl;
     EGLDisplay mDisplay;
     EGLContext mContext;
+
+    EGLDisplay mPrevDisplay;
+    EGLContext mPrevContext;
 };
 
 }  // namespace dawn::native::opengl

@@ -34,6 +34,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/opengl/ContextEGL.h"
@@ -121,7 +122,9 @@ ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(InstanceBase* instance
     DAWN_TRY(physicalDevice->InitializeGLFunctions(getProc));
     DAWN_TRY(physicalDevice->Initialize());
 
+    ErrorLog() << "blundell2: About to call MakeCurrent() directly";
     egl.MakeCurrent(display, prevDrawSurface, prevReadSurface, prevContext);
+    ErrorLog() << "blundell2: Called MakeCurrent() directly";
     return physicalDevice;
 }
 

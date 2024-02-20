@@ -62,7 +62,8 @@ class Device final : public DeviceBase {
 
     // Returns all the OpenGL entry points and ensures that the associated
     // Context is current.
-    const OpenGLFunctions& GetGL() const;
+    OpenGLFunctionsScopedWrapper GetGL() const;
+    Context* GetGLContext() const { return mContext.get(); }
 
     const GLFormat& GetGLFormat(const Format& format);
 
@@ -101,6 +102,7 @@ class Device final : public DeviceBase {
       public:
         virtual ~Context() {}
         virtual void MakeCurrent() = 0;
+        virtual void MakeUnCurrent() = 0;
     };
 
   private:
@@ -146,6 +148,7 @@ class Device final : public DeviceBase {
     void DestroyImpl() override;
 
     const OpenGLFunctions mGL;
+    Ref<Mutex> mGLContextMutex = nullptr;
 
     GLFormatTable mFormatTable;
     std::unique_ptr<Context> mContext = nullptr;

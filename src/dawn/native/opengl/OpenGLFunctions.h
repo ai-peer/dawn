@@ -35,6 +35,8 @@
 
 namespace dawn::native::opengl {
 
+class Device;
+
 struct OpenGLFunctions : OpenGLFunctionsBase {
   public:
     MaybeError Initialize(GetProcAddress getProc);
@@ -45,6 +47,26 @@ struct OpenGLFunctions : OpenGLFunctionsBase {
 
   private:
     OpenGLVersion mVersion;
+};
+
+struct OpenGLFunctionsScopedWrapper {
+  public:
+    OpenGLFunctionsScopedWrapper(const OpenGLFunctions& functions, const Device* device);
+    ~OpenGLFunctionsScopedWrapper();
+    OpenGLFunctionsScopedWrapper(OpenGLFunctionsScopedWrapper&&) = default;
+    OpenGLFunctionsScopedWrapper& operator=(OpenGLFunctionsScopedWrapper&&) = default;
+
+    const OpenGLFunctions& GetGLFunctions() const { return mFunctions; }
+
+  private:
+    OpenGLFunctions mFunctions;
+    // TODO(blundell): Call through to `mDevice` to restore previous context
+    // when this wrapper object is destroyed (note: also need to null out
+    // `mDevice` when std::move'ing this object to another object to avoid
+    // spurious calls). Note that this object can't take in Device::Context
+    // because DeviceGL.h needs to include this file. Could move
+    // OpenGLFunctionsScopedWrapper to a different file to work around that.
+    [[maybe_unused]] const Device* mDevice;
 };
 
 }  // namespace dawn::native::opengl

@@ -37,6 +37,7 @@
 
 #include "dawn/native/PerStage.h"
 #include "dawn/native/opengl/BindingPoint.h"
+#include "dawn/native/opengl/OpenGLFunctions.h"
 #include "dawn/native/opengl/opengl_platform.h"
 
 namespace dawn::native {
@@ -45,7 +46,6 @@ struct ProgrammableStage;
 
 namespace dawn::native::opengl {
 
-struct OpenGLFunctions;
 class PipelineLayout;
 class Sampler;
 class Buffer;
@@ -70,13 +70,13 @@ class PipelineGL {
     const BindingPointToFunctionAndOffset& GetBindingPointBuiltinDataInfo() const;
 
   protected:
-    void ApplyNow(const OpenGLFunctions& gl);
-    MaybeError InitializeBase(const OpenGLFunctions& gl,
+    void ApplyNow(const OpenGLFunctionsScopedWrapper& glWrapper);
+    MaybeError InitializeBase(OpenGLFunctionsScopedWrapper glWrapper,
                               const PipelineLayout* layout,
                               const PerStage<ProgrammableStage>& stages,
                               bool usesInstanceIndex,
                               bool usesFragDepth);
-    void DeleteProgram(const OpenGLFunctions& gl);
+    void DeleteProgram(const OpenGLFunctionsScopedWrapper& glWrapper);
 
   private:
     GLuint mProgram;

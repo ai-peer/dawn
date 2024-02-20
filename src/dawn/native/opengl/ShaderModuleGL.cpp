@@ -176,7 +176,10 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     BindingPointToFunctionAndOffset* bindingPointToData) const {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
 
-    const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
+    // TODO(blundell): This change keeps the wrapper alive for the duration of
+    // the function. Is that correct?
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLVersion& version = glWrapper.GetGLFunctions().GetVersion();
 
     GLSLCompilationRequest req = {};
 

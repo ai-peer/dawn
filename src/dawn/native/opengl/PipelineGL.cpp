@@ -50,11 +50,12 @@ PipelineGL::PipelineGL() : mProgram(0) {}
 
 PipelineGL::~PipelineGL() = default;
 
-MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
+MaybeError PipelineGL::InitializeBase(OpenGLFunctionsScopedWrapper glWrapper,
                                       const PipelineLayout* layout,
                                       const PerStage<ProgrammableStage>& stages,
                                       bool usesInstanceIndex,
                                       bool usesFragDepth) {
+    const auto& gl = glWrapper.GetGLFunctions();
     mProgram = gl.CreateProgram();
 
     // Compute the set of active stages.
@@ -180,8 +181,8 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
     return {};
 }
 
-void PipelineGL::DeleteProgram(const OpenGLFunctions& gl) {
-    gl.DeleteProgram(mProgram);
+void PipelineGL::DeleteProgram(const OpenGLFunctionsScopedWrapper& glWrapper) {
+    glWrapper.GetGLFunctions().DeleteProgram(mProgram);
 }
 
 const std::vector<PipelineGL::SamplerUnit>& PipelineGL::GetTextureUnitsForSampler(
@@ -199,7 +200,8 @@ GLuint PipelineGL::GetProgramHandle() const {
     return mProgram;
 }
 
-void PipelineGL::ApplyNow(const OpenGLFunctions& gl) {
+void PipelineGL::ApplyNow(const OpenGLFunctionsScopedWrapper& glWrapper) {
+    const auto& gl = glWrapper.GetGLFunctions();
     gl.UseProgram(mProgram);
     for (GLuint unit : mPlaceholderSamplerUnits) {
         DAWN_ASSERT(mPlaceholderSampler.Get() != nullptr);
