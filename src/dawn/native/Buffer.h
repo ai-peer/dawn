@@ -144,6 +144,7 @@ class BufferBase : public ApiObjectBase {
 
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
+    virtual MaybeError FinalizeMapAsync();
     virtual void UnmapImpl() = 0;
 
     virtual bool IsCPUWritableAtCreation() const = 0;

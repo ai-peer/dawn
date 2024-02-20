@@ -295,6 +295,10 @@ MaybeError Buffer::MapAtCreationImpl() {
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+    return {};
+}
+
+MaybeError Buffer::FinalizeMapAsync() {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
 
     auto commandContext = ToBackend(GetDevice()->GetQueue())
@@ -310,10 +314,12 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
 
 void Buffer::UnmapImpl() {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
-    DAWN_ASSERT(mMappedData);
-    auto commandContext = ToBackend(GetDevice()->GetQueue())
-                              ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
-    UnmapInternal(&commandContext);
+
+    if (mMappedData) {
+        auto commandContext = ToBackend(GetDevice()->GetQueue())
+                                  ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
+        UnmapInternal(&commandContext);
+    }
 }
 
 void* Buffer::GetMappedPointer() {
