@@ -53,7 +53,8 @@ ResultOrError<Ref<Buffer>> Buffer::CreateInternalBuffer(Device* device,
 
 Buffer::Buffer(Device* device, const UnpackedPtr<BufferDescriptor>& descriptor)
     : BufferBase(device, descriptor) {
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     // Allocate at least 4 bytes so clamped accesses are always in bounds.
     // Align with 4 byte to avoid out-of-bounds access issue in compute emulation for 2 byte
     // element.
@@ -132,7 +133,8 @@ void Buffer::InitializeToZero() {
 
     const uint64_t size = GetAllocatedSize();
     Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     const std::vector<uint8_t> clearValues(size, 0u);
     gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
@@ -150,14 +152,16 @@ bool Buffer::IsCPUWritableAtCreation() const {
 }
 
 MaybeError Buffer::MapAtCreationImpl() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
     mMappedData = gl.MapBufferRange(GL_ARRAY_BUFFER, 0, GetSize(), GL_MAP_WRITE_BIT);
     return {};
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     // It is an error to map an empty range in OpenGL. We always have at least a 4-byte buffer
     // so we extend the range to be 4 bytes.
@@ -194,7 +198,8 @@ void* Buffer::GetMappedPointer() {
 }
 
 void Buffer::UnmapImpl() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
     gl.UnmapBuffer(GL_ARRAY_BUFFER);
@@ -202,7 +207,9 @@ void Buffer::UnmapImpl() {
 }
 
 void Buffer::DestroyImpl() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    auto deviceLock(GetDevice()->GetScopedLock());
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     BufferBase::DestroyImpl();
     gl.DeleteBuffers(1, &mBuffer);

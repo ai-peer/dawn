@@ -30,10 +30,31 @@
 
 #include <string>
 
+#include "dawn/common/NonCopyable.h"
 #include "dawn/native/opengl/OpenGLFunctionsBase_autogen.h"
 #include "dawn/native/opengl/OpenGLVersion.h"
 
 namespace dawn::native::opengl {
+
+class Device;
+
+class OpenGLContext {
+  public:
+    struct ScopedCurrent : NonCopyable {
+        ScopedCurrent(OpenGLContext* context) : mContext(context) { mContext->MakeCurrent(); }
+        ~ScopedCurrent() { mContext->MakeUnCurrent(); }
+
+      private:
+        OpenGLContext* mContext;
+    };
+
+    virtual ~OpenGLContext() = default;
+
+  protected:
+    friend struct ScopedCurrent;
+    virtual void MakeCurrent() = 0;
+    virtual void MakeUnCurrent() = 0;
+};
 
 struct OpenGLFunctions : OpenGLFunctionsBase {
   public:
@@ -45,6 +66,18 @@ struct OpenGLFunctions : OpenGLFunctionsBase {
 
   private:
     OpenGLVersion mVersion;
+};
+
+class OpenGLFunctionsScopedWrapper : NonCopyable {
+  public:
+    OpenGLFunctionsScopedWrapper(const OpenGLFunctions& functions, const Device* device);
+    ~OpenGLFunctionsScopedWrapper();
+
+    const OpenGLFunctions& GetGLFunctions() const { return mFunctions; }
+
+  private:
+    OpenGLContext::ScopedCurrent mScopedContextCurrent;
+    OpenGLFunctions mFunctions;
 };
 
 }  // namespace dawn::native::opengl

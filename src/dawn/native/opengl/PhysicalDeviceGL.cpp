@@ -34,6 +34,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/opengl/ContextEGL.h"
@@ -110,18 +111,13 @@ ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(InstanceBase* instance
     std::unique_ptr<ContextEGL> context;
     DAWN_TRY_ASSIGN(context, ContextEGL::Create(egl, api, display, false));
 
-    EGLContext prevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
-    EGLContext prevReadSurface = egl.GetCurrentSurface(EGL_READ);
-    EGLContext prevContext = egl.GetCurrentContext();
-
-    context->MakeCurrent();
+    OpenGLContext::ScopedCurrent scopedContextCurrent(context.get());
 
     Ref<PhysicalDevice> physicalDevice =
         AcquireRef(new PhysicalDevice(instance, backendType, display));
     DAWN_TRY(physicalDevice->InitializeGLFunctions(getProc));
     DAWN_TRY(physicalDevice->Initialize());
 
-    egl.MakeCurrent(display, prevDrawSurface, prevReadSurface, prevContext);
     return physicalDevice;
 }
 

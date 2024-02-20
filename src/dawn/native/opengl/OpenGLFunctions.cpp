@@ -29,6 +29,9 @@
 
 #include <cctype>
 
+#include "dawn/common/Assert.h"
+#include "dawn/native/opengl/DeviceGL.h"
+
 namespace dawn::native::opengl {
 
 MaybeError OpenGLFunctions::Initialize(GetProcAddress getProc) {
@@ -61,5 +64,12 @@ bool OpenGLFunctions::IsAtLeastGL(uint32_t majorVersion, uint32_t minorVersion) 
 bool OpenGLFunctions::IsAtLeastGLES(uint32_t majorVersion, uint32_t minorVersion) const {
     return mVersion.IsES() && mVersion.IsAtLeast(majorVersion, minorVersion);
 }
+
+OpenGLFunctionsScopedWrapper::OpenGLFunctionsScopedWrapper(const OpenGLFunctions& functions,
+                                                           const Device* device)
+    : mScopedContextCurrent(device->GetGLContext()), mFunctions(functions) {
+}
+
+OpenGLFunctionsScopedWrapper::~OpenGLFunctionsScopedWrapper() = default;
 
 }  // namespace dawn::native::opengl

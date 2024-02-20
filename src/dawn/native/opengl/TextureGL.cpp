@@ -198,7 +198,8 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device,
 
 Texture::Texture(Device* device, const UnpackedPtr<TextureDescriptor>& descriptor)
     : Texture(device, descriptor, 0) {
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     gl.GenTextures(1, &mHandle);
     mOwnsHandle = true;
@@ -233,7 +234,8 @@ Texture::~Texture() {}
 void Texture::DestroyImpl() {
     TextureBase::DestroyImpl();
     if (mOwnsHandle) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+        OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+        const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
         gl.DeleteTextures(1, &mHandle);
         mHandle = 0;
     }
@@ -254,7 +256,8 @@ const GLFormat& Texture::GetGLFormat() const {
 MaybeError Texture::ClearTexture(const SubresourceRange& range,
                                  TextureBase::ClearValue clearValue) {
     Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
     float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
@@ -580,7 +583,8 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
     if (!RequiresCreatingNewTextureView(texture, descriptor)) {
         mHandle = ToBackend(texture)->GetHandle();
     } else {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+        OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+        const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
         if (gl.IsAtLeastGL(4, 3)) {
             gl.GenTextures(1, &mHandle);
             const Texture* textureGL = ToBackend(texture);
@@ -601,7 +605,9 @@ TextureView::~TextureView() {}
 void TextureView::DestroyImpl() {
     TextureViewBase::DestroyImpl();
     if (mOwnsHandle) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+        auto deviceLock(GetDevice()->GetScopedLock());
+        OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+        const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
         gl.DeleteTextures(1, &mHandle);
     }
 }
@@ -619,7 +625,8 @@ void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint dep
     DAWN_ASSERT(depthSlice <
                 static_cast<GLuint>(GetSingleSubresourceVirtualSize().depthOrArrayLayers));
 
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     // Use the base texture where possible to minimize the amount of copying required on GLES.
     bool useOwnView = GetFormat().format != GetTexture()->GetFormat().format &&
@@ -665,7 +672,8 @@ void TextureView::CopyIfNeeded() {
     }
 
     Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     uint32_t srcLevel = GetBaseMipLevel();
     uint32_t numLevels = GetLevelCount();
 

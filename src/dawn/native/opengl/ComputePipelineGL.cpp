@@ -42,6 +42,7 @@ ComputePipeline::~ComputePipeline() = default;
 
 void ComputePipeline::DestroyImpl() {
     ComputePipelineBase::DestroyImpl();
+    auto deviceLock(GetDevice()->GetScopedLock());
     DeleteProgram(ToBackend(GetDevice())->GetGL());
 }
 

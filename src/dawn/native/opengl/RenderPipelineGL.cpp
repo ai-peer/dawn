@@ -266,10 +266,13 @@ RenderPipeline::~RenderPipeline() = default;
 
 void RenderPipeline::DestroyImpl() {
     RenderPipelineBase::DestroyImpl();
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+
+    auto deviceLock(GetDevice()->GetScopedLock());
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     gl.DeleteVertexArrays(1, &mVertexArrayObject);
     gl.BindVertexArray(0);
-    DeleteProgram(gl);
+    DeleteProgram(std::move(glWrapper));
 }
 
 GLenum RenderPipeline::GetGLPrimitiveTopology() const {
@@ -282,7 +285,8 @@ VertexAttributeMask RenderPipeline::GetAttributesUsingVertexBuffer(VertexBufferS
 }
 
 void RenderPipeline::CreateVAOForVertexState() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     gl.GenVertexArrays(1, &mVertexArrayObject);
     gl.BindVertexArray(mVertexArrayObject);
@@ -315,8 +319,13 @@ void RenderPipeline::CreateVAOForVertexState() {
 }
 
 void RenderPipeline::ApplyNow(PersistentPipelineState& persistentPipelineState) {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
-    PipelineGL::ApplyNow(gl);
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
+    // TODO(blundell): This call crept in and causes a build error.
+    // PipelineGL::ApplyNow() should be changed back to taking in
+    // OpenGLFunctions because otherwise we'd need to std::move(glWrapper) here,
+    // which is incorrect lifetime-wise.
+    PipelineGL::ApplyNow(glWrapper);
 
     DAWN_ASSERT(mVertexArrayObject);
     gl.BindVertexArray(mVertexArrayObject);
