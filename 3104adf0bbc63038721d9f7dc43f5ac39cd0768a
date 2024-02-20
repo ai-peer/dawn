@@ -142,6 +142,24 @@
       "parentUuid": "ddea94ee_db9aa80f",
       "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5416562_2176c470",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T18:05:15Z",
+      "side": 1,
+      "message": "ok.",
+      "parentUuid": "69d5db99_2a06d529",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
