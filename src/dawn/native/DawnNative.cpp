@@ -211,6 +211,10 @@ void Instance::EnableAdapterBlocklist(bool enable) {
     mImpl->EnableAdapterBlocklist(enable);
 }
 
+void Instance::SetErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
+    mImpl->APISetErrorCallback(callback, userdata);
+}
+
 uint64_t Instance::GetDeviceCountForTesting() const {
     return mImpl->GetDeviceCountForTesting();
 }

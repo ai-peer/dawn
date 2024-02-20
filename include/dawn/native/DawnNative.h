@@ -180,6 +180,9 @@ class DAWN_NATIVE_EXPORT Instance {
     // Enable / disable the adapter blocklist.
     void EnableAdapterBlocklist(bool enable);
 
+    // Set error callback.
+    void SetErrorCallback(wgpu::ErrorCallback callback, void* userdata);
+
     uint64_t GetDeviceCountForTesting() const;
 
     // Returns the underlying WGPUInstance object.

@@ -174,6 +174,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Always writes the full list when features is not nullptr.
     // TODO(https://github.com/webgpu-native/webgpu-headers/issues/252): Add a count argument.
     size_t APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const;
+    void APISetErrorCallback(wgpu::ErrorCallback callback, void* userdata);
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);
@@ -239,6 +240,9 @@ class InstanceBase final : public RefCountedWithExternalCount {
     EventManager mEventManager;
 
     MutexProtected<absl::flat_hash_set<DeviceBase*>> mDevicesList;
+
+    wgpu::ErrorCallback mErrorCallback = nullptr;
+    raw_ptr<void, DanglingUntriaged> mErrorCallbackUserdata = nullptr;
 };
 
 }  // namespace dawn::native
