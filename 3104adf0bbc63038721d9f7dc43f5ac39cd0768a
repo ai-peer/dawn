@@ -106,6 +106,24 @@
       "parentUuid": "8dc851f7_6656affe",
       "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddea94ee_db9aa80f",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T17:50:10Z",
+      "side": 1,
+      "message": "Because someone will come along and say why is this a template, as that isn\u0027t how you usually pass an enum into a method and then have to figure out why it\u0027s built this way. They\u0027ll then get to vague claims of \"it\u0027s faster\", which then leaves them to do some experimentation to determine if it\u0027s actualy faster.\n\nI think it\u0027s more maintenance because it seems like an odd way to pass an enum into a function.",
+      "parentUuid": "4bde4f78_253ad2f2",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
