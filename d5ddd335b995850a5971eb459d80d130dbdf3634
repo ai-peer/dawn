@@ -114,6 +114,30 @@
       },
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3370337e_7f6ae68c",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002571
+      },
+      "writtenOn": "2024-02-20T19:18:54Z",
+      "side": 1,
+      "message": "oh I didn\u0027t notice that. Yes, adding another cq_tryjob_verifier for `tricium-clang-tidy` should just work. You can use location_filters to limit to files with certain extension ([example](https://screenshot.googleplex.com/6GVGZo2tjcxGr8k))",
+      "parentUuid": "cb6bc4fd_2ff0fda3",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
