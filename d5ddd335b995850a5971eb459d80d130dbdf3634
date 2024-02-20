@@ -138,6 +138,30 @@
       },
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cec27c7_b5fce24a",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-02-20T20:05:34Z",
+      "side": 1,
+      "message": "This seems like I need to define a builder now? (Getting an error about undefined builder `tricium-clang-tidy`). The only example I can find is https://source.chromium.org/chromium/chromium/src/+/main:infra/config/subprojects/chromium/try/tryserver.chromium.tricium.star;l\u003d40?q\u003dtricium-clang-tidy\u0026ss\u003dchromium do any other projects integrate clang-tidy in this way?\n\nOr, do I need to copy the orchestrator code over from the tryserver star file?",
+      "parentUuid": "3370337e_7f6ae68c",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
