@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/opengl/UtilsEGL.h"
 
 #ifndef EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE
@@ -104,7 +105,15 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 }
 
 void ContextEGL::MakeCurrent() {
+    ErrorLog() << "blundell2: About to call MakeCurrent() from context";
     egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    ErrorLog() << "blundell2: Called MakeCurrent() from context";
+}
+
+void ContextEGL::MakeUnCurrent() {
+    ErrorLog() << "blundell2: About to call MakeUnCurrent() from context";
+    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, nullptr);
+    ErrorLog() << "blundell2: Called MakeUnCurrent() from context";
 }
 
 ContextEGL::~ContextEGL() {

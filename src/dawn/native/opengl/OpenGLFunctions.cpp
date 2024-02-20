@@ -62,4 +62,10 @@ bool OpenGLFunctions::IsAtLeastGLES(uint32_t majorVersion, uint32_t minorVersion
     return mVersion.IsES() && mVersion.IsAtLeast(majorVersion, minorVersion);
 }
 
+OpenGLFunctionsScopedWrapper::OpenGLFunctionsScopedWrapper(const OpenGLFunctions& functions,
+                                                           const Device* device)
+    : mFunctions(functions), mDevice(device) {}
+
+OpenGLFunctionsScopedWrapper::~OpenGLFunctionsScopedWrapper() {}
+
 }  // namespace dawn::native::opengl

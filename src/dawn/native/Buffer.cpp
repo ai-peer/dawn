@@ -35,6 +35,7 @@
 
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/Adapter.h"
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/ChainUtils.h"
@@ -643,17 +644,22 @@ const void* BufferBase::APIGetConstMappedRange(size_t offset, size_t size) {
 }
 
 void* BufferBase::GetMappedRange(size_t offset, size_t size, bool writable) {
+    dawn::ErrorLog() << "blundell2: Calling GetMappedRange()";
     if (!CanGetMappedRange(writable, offset, size)) {
+        dawn::ErrorLog() << "blundell2: GetMappedRange() 1";
         return nullptr;
     }
 
     if (mStagingBuffer != nullptr) {
+        dawn::ErrorLog() << "blundell2: GetMappedRange() 2";
         return static_cast<uint8_t*>(mStagingBuffer->GetMappedPointer()) + offset;
     }
     if (mSize == 0) {
+        dawn::ErrorLog() << "blundell2: GetMappedRange() 3";
         return &sZeroSizedMappingData;
     }
     uint8_t* start = static_cast<uint8_t*>(GetMappedPointer());
+    dawn::ErrorLog() << "blundell2: GetMappedRange() 4, start == nullptr ? " << (start == nullptr);
     return start == nullptr ? nullptr : start + offset;
 }
 
