@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebd68fd8_e92b5fc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-20T18:30:15Z",
+      "side": 1,
+      "message": "So I see some flags, at least by name, are being conflated\n\nThere\u0027s ShouldDuplicateParametersForDrawIndirect which seems to be the flag on whether or not validation happens at all? Because validation is duplication right? Confused on what this flag means to be honest.\n\nThere\u0027s ShouldApplyIndexBufferOffsetToFirstIndex which I was adding which is whether or not, in validation, if the index buffer needs to be applied to first index\n\nThen there\u0027s duplicateBaseVertexInstance which inferred from ShouldDuplicateParametersForDrawIndirect but seems like it\u0027s really a different flag.\n\nI feel like I should maybe make ShouldDuplicateBaseVertexIndex, which for DirectX will true.  Then I should make ShouldDuplicateParametersForDrawIndirect return ShouldDuplicateBaseVertexIndex || ShouldApplyIndexBufferOffsetToFirstIndex?\n\nOr do you have some other ideas/preference?",
+      "revId": "9674d36ae2a509927ca9d0429512e399e0f9e8fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
