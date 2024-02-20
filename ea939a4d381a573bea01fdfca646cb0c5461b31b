@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947d0209_53240e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T18:54:02Z",
+      "side": 1,
+      "message": "Rendered version here: https://source.corp.google.com/h/dawn/dawn/+/refs/changes/40/175540/2:docs/tint/intrinsic_definition_files.md",
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
