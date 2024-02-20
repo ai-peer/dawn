@@ -52,6 +52,24 @@
       "parentUuid": "10c6e516_6831e4cb",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedfafd6_65a9a5cb",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T17:47:23Z",
+      "side": 1,
+      "message": "\u003e I was suggesting these shouldn\u0027t exist and we use the checked methods instead.\n\nI use it here [`[1]`](https://dawn-review.googlesource.com/c/dawn/+/175248/comment/d65c8026_c72de9b9/). Using the checked methods isn\u0027t viable here.\n\n\u003e If you iniline, you\u0027ll still need to check for over/under flow.\n\nI don\u0027t want to / need to in my place of usage.",
+      "parentUuid": "bd995e60_5b2803d0",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
