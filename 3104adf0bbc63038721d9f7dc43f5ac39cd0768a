@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6088dd0_efc3e640",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T14:40:29Z",
+      "side": 1,
+      "message": "This seems more like a parameter then a template.",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
