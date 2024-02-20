@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca4952f7_d177b9a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-02-20T21:22:18Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "a5aa9a60ab88fa64f4b0a6b84c32f1e10b9a565a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ce1514_88fb736c",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-02-20T21:22:18Z",
+      "side": 1,
+      "message": "Unfortunately, there\u0027s no way to specify that this only applies to Android U at the moment.",
+      "range": {
+        "startLine": 137,
+        "startChar": 4,
+        "endLine": 137,
+        "endChar": 25
+      },
+      "revId": "a5aa9a60ab88fa64f4b0a6b84c32f1e10b9a565a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
