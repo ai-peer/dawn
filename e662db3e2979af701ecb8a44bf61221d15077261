@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "770635ad_c7d8159e",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T14:51:00Z",
+      "side": 1,
+      "message": "This can overflow, and the one below can underflow. Should we be using the checked methods instead of adding these overloads?",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
