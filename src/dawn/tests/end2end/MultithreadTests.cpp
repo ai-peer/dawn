@@ -86,9 +86,6 @@ class MultithreadTests : public DawnTest {
         DawnTest::SetUp();
         // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-
-        // TODO(crbug.com/dawn/1679): OpenGL backend doesn't support thread safe API yet.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGL() || IsOpenGLES());
     }
 
     wgpu::Buffer CreateBuffer(uint32_t size, wgpu::BufferUsage usage) {
@@ -857,10 +854,6 @@ class MultithreadTextureCopyTests : public MultithreadTests {
   protected:
     void SetUp() override {
         MultithreadTests::SetUp();
-
-        // TODO(crbug.com/dawn/1291): These tests are failing on GLES (both native and ANGLE)
-        // when using Tint/GLSL.
-        DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
     }
 
     wgpu::Texture CreateAndWriteTexture(uint32_t width,
@@ -1194,10 +1187,6 @@ TEST_P(MultithreadTextureCopyTests, CopyBufferToStencilNoRace) {
 // This test is needed since CopyTextureForBrowser() command might internally allocate resources and
 // we need to make sure that it won't race with other threads' works.
 TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserNoRace) {
-    // TODO(crbug.com/dawn/1232): Program link error on OpenGLES backend
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
-
     enum class Step {
         Begin,
         WriteTexture,
@@ -1263,9 +1252,6 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserNoRace) {
 
 // Test that error from CopyTextureForBrowser() won't cause deadlock.
 TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserErrorNoDeadLock) {
-    // TODO(crbug.com/dawn/1232): Program link error on OpenGLES backend
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
 
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 

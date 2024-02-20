@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/opengl/UtilsEGL.h"
 
 #ifndef EGL_DISPLAY_TEXTURE_SHARE_GROUP_ANGLE
@@ -104,7 +105,39 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 }
 
 void ContextEGL::MakeCurrent() {
-    egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    mLock.lock();
+    mMakeCurrentCount ++;
+    if (mMakeCurrentCount > 1) {
+        return;
+    }
+    mPrevDisplay = egl.GetCurrentDisplay();
+    if (mPrevDisplay == EGL_NO_DISPLAY) {
+        mPrevDisplay = mDisplay;
+        mPrevContext = EGL_NO_CONTEXT;
+        mPrevDrawSurface = EGL_NO_SURFACE;
+        mPrevReadSurface = EGL_NO_SURFACE;
+    }
+    else {
+        mPrevContext = egl.GetCurrentContext();
+        mPrevDrawSurface = egl.GetCurrentSurface(EGL_DRAW);
+        mPrevReadSurface = egl.GetCurrentSurface(EGL_READ);
+    }
+    if (mPrevDisplay != mDisplay || mPrevContext != mContext ||
+        mPrevDrawSurface != EGL_NO_SURFACE || mPrevReadSurface != EGL_NO_SURFACE) {
+        egl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    }
+}
+
+void ContextEGL::MakeUnCurrent() {
+    mMakeCurrentCount --;
+    if (mMakeCurrentCount == 0) {
+        if (mPrevDisplay != mDisplay || mPrevContext != mContext ||
+            mPrevDrawSurface != EGL_NO_SURFACE || mPrevReadSurface != EGL_NO_SURFACE) {
+            egl.MakeCurrent(mPrevDisplay, mPrevDrawSurface, mPrevReadSurface, mPrevContext);
+        }
+    }
+
+    mLock.unlock();
 }
 
 ContextEGL::~ContextEGL() {

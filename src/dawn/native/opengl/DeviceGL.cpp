@@ -133,9 +133,9 @@ Device::Device(AdapterBase* adapter,
                const OpenGLFunctions& functions,
                std::unique_ptr<Context> context,
                const TogglesState& deviceToggles)
-    : DeviceBase(adapter, descriptor, deviceToggles),
-      mGL(functions),
-      mContext(std::move(context)) {}
+    : DeviceBase(adapter, descriptor, deviceToggles), mGL(functions), mContext(std::move(context)) {
+    mGLContextMutex = AcquireRef(new Mutex);
+}
 
 Device::~Device() {
     Destroy();
@@ -144,7 +144,7 @@ Device::~Device() {
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     // Directly set the context current and use mGL instead of calling GetGL as GetGL will notify
     // the (yet inexistent) queue that GL was used.
-    mContext->MakeCurrent();
+    OpenGLContext::ScopedCurrent scopedContextCurrent(mContext.get());
     const OpenGLFunctions& gl = mGL;
 
     mFormatTable = BuildGLFormatTable(GetBGRAInternalFormat(gl));
@@ -301,7 +301,8 @@ MaybeError Device::ValidateTextureCanBeWrapped(const UnpackedPtr<TextureDescript
 
 Ref<TextureBase> Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                        ::EGLImage image) {
-    const OpenGLFunctions& gl = GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     UnpackedPtr<TextureDescriptor> textureDescriptor;
     if (ConsumedError(ValidateAndUnpack(FromAPI(descriptor->cTextureDescriptor)),
@@ -345,7 +346,8 @@ Ref<TextureBase> Device::CreateTextureWrappingEGLImage(const ExternalImageDescri
 
 Ref<TextureBase> Device::CreateTextureWrappingGLTexture(const ExternalImageDescriptor* descriptor,
                                                         GLuint texture) {
-    const OpenGLFunctions& gl = GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     UnpackedPtr<TextureDescriptor> textureDescriptor;
     if (ConsumedError(ValidateAndUnpack(FromAPI(descriptor->cTextureDescriptor)),
@@ -428,10 +430,9 @@ bool Device::ShouldApplyIndexBufferOffsetToFirstIndex() const {
     return true;
 }
 
-const OpenGLFunctions& Device::GetGL() const {
-    mContext->MakeCurrent();
+OpenGLFunctionsScopedWrapper Device::GetGL() const {
     ToBackend(GetQueue())->OnGLUsed();
-    return mGL;
+    return OpenGLFunctionsScopedWrapper(mGL, this);
 }
 
 }  // namespace dawn::native::opengl

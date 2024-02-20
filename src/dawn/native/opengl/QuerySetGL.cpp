@@ -34,7 +34,8 @@ namespace dawn::native::opengl {
 QuerySet::QuerySet(Device* device, const QuerySetDescriptor* descriptor)
     : QuerySetBase(device, descriptor), mQueries(descriptor->count) {
     if (mQueries.size() > 0) {
-        const OpenGLFunctions& gl = device->GetGL();
+        OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+        const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
         gl.GenQueries(descriptor->count, mQueries.data());
     }
 }
@@ -42,7 +43,8 @@ QuerySet::QuerySet(Device* device, const QuerySetDescriptor* descriptor)
 QuerySet::~QuerySet() = default;
 
 void QuerySet::DestroyImpl() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     if (mQueries.size() > 0) {
         gl.DeleteQueries(mQueries.size(), mQueries.data());
     }

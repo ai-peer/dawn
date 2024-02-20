@@ -58,7 +58,8 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
                                   uint64_t bufferOffset,
                                   const void* data,
                                   size_t size) {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     ToBackend(buffer)->EnsureDataInitializedAsDestination(bufferOffset, size);
 
@@ -132,7 +133,8 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     } else {
         DAWN_TRY(ToBackend(destination.texture)->EnsureSubresourceContentInitialized(range));
     }
-    DoTexSubImage(ToBackend(GetDevice())->GetGL(), textureCopy, data, dataLayout, writeSizePixel);
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    DoTexSubImage(glWrapper.GetGLFunctions(), textureCopy, data, dataLayout, writeSizePixel);
     ToBackend(destination.texture)->Touch();
     return {};
 }
@@ -142,7 +144,8 @@ void Queue::OnGLUsed() {
 }
 
 GLenum Queue::ClientWaitSync(GLsync sync, Nanoseconds timeout) {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     // TODO(crbug.com/dawn/633): Remove this workaround after the deadlock issue is fixed.
     if (GetDevice()->IsToggleEnabled(Toggle::FlushBeforeClientWaitSync)) {
         gl.Flush();
@@ -186,7 +189,8 @@ void Queue::SubmitFenceSync() {
         return;
     }
 
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
     IncrementLastSubmittedCommandSerial();
     mFencesInFlight.emplace_back(sync, GetLastSubmittedCommandSerial());
@@ -204,7 +208,8 @@ MaybeError Queue::SubmitPendingCommands() {
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     const Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     ExecutionSerial fenceSerial{0};
     while (!mFencesInFlight.empty()) {
@@ -233,7 +238,8 @@ void Queue::ForceEventualFlushOfCommands() {
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     gl.Finish();
     DAWN_TRY(CheckPassedSerials());
     DAWN_ASSERT(mFencesInFlight.empty());
