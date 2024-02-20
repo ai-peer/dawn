@@ -90,6 +90,30 @@
       },
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6bc4fd_2ff0fda3",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-02-20T19:10:31Z",
+      "side": 1,
+      "message": "It didn\u0027t generate it with the clang-tidy section, only the tricium section? I was hoping to get both analyzers running. Was there something I needed to add as a cq_tryjob_verifier in order to get clang-tidy to show up as well?",
+      "parentUuid": "beec2e66_0572bc07",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
