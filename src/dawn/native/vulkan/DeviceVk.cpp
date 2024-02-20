@@ -510,13 +510,19 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         mMainQueueFamily = static_cast<uint32_t>(universalQueueFamily);
     }
 
+    VkDeviceQueueGlobalPriorityCreateInfoKHR globalPriorityCreateInfo;
+    globalPriorityCreateInfo.sType =
+        VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR;
+    globalPriorityCreateInfo.pNext = nullptr;
+    globalPriorityCreateInfo.globalPriority = VK_QUEUE_GLOBAL_PRIORITY_LOW_KHR;
+
     // Choose to create a single universal queue
     std::vector<VkDeviceQueueCreateInfo> queuesToRequest;
     float zero = 0.0f;
     {
         VkDeviceQueueCreateInfo queueCreateInfo;
         queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
-        queueCreateInfo.pNext = nullptr;
+        queueCreateInfo.pNext = &globalPriorityCreateInfo;
         queueCreateInfo.flags = 0;
         queueCreateInfo.queueFamilyIndex = static_cast<uint32_t>(mMainQueueFamily);
         queueCreateInfo.queueCount = 1;
