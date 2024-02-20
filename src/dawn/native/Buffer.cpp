@@ -194,8 +194,11 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
                 // TODO(crbug.com/dawn/831): in order to be thread safe, mutation of the
                 // state and pending map event needs to be atomic w.r.t. UnmapInternal.
                 DAWN_ASSERT((*buffer)->mState == BufferState::PendingMap);
-                (*buffer)->mState = BufferState::Mapped;
-
+                if ((*buffer)->GetDevice()->ConsumedError((*buffer)->FinalizeMapAsync())) {
+                    status = wgpu::BufferMapAsyncStatus::DeviceLost;
+                } else {
+                    (*buffer)->mState = BufferState::Mapped;
+                }
                 pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
             }
         });
@@ -835,6 +838,10 @@ void BufferBase::CallbackOnMapRequestCompleted(MapRequestID mapID,
         // This is called from a callback, and no lock will be held by default. Hence, we need to
         // lock the mutex now because this will modify the buffer's states.
         auto deviceLock(GetDevice()->GetScopedLock());
+        if (status == WGPUBufferMapAsyncStatus_Success &&
+            GetDevice()->ConsumedError(FinalizeMapAsync())) {
+            status = WGPUBufferMapAsyncStatus_DeviceLost;
+        }
         if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
             mState == BufferState::PendingMap) {
             mState = BufferState::Mapped;

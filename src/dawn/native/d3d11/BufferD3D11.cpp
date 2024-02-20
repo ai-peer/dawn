@@ -295,6 +295,10 @@ MaybeError Buffer::MapAtCreationImpl() {
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+    return {};
+}
+
+MaybeError Buffer::FinalizeMapAsync() {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
 
     auto commandContext = ToBackend(GetDevice()->GetQueue())

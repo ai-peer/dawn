@@ -123,6 +123,7 @@ class Buffer final : public BufferBase {
     MaybeError Initialize(bool mappedAtCreation,
                           const ScopedCommandRecordingContext* commandContext);
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
+    MaybeError FinalizeMapAsync() override;
     void UnmapImpl() override;
     void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;
