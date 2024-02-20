@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f621ccc_823f355c",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T19:49:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "147b2a1b_42f88c51",
+      "range": {
+        "startLine": 69,
+        "startChar": 272,
+        "endLine": 69,
+        "endChar": 275
+      },
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a4fa7b5_cde05257",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33fb90d_a170c398",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T19:49:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "7a4fa7b5_cde05257",
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16fdecbb_f5e84fbd",
@@ -71,6 +113,24 @@
       "writtenOn": "2024-02-20T19:36:40Z",
       "side": 1,
       "message": "```suggestion\nSyntax: `conv` _**type-name [**_ `[` _**implicit-template-parameters**_ `]` _**]**_`(` _**parameters**_ `) -\u003e` _**return_type**_\n```",
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab57b50_b9f0a2d8",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T19:49:05Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "16fdecbb_f5e84fbd",
       "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
