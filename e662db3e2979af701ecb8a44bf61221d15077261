@@ -16,6 +16,24 @@
       "message": "This can overflow, and the one below can underflow. Should we be using the checked methods instead of adding these overloads?",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10c6e516_6831e4cb",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T16:58:48Z",
+      "side": 1,
+      "message": "I considered this, but how would you report an overflow / underflow? UBSAN will already catch signed overflow. If you need to add / subtract these (like I need to in the test cases), you\u0027ll just end up inlining this logic - and you haven\u0027t gained any safety.",
+      "parentUuid": "770635ad_c7d8159e",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
