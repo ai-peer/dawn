@@ -16,6 +16,63 @@
       "message": "Rendered version here: https://source.corp.google.com/h/dawn/dawn/+/refs/changes/40/175540/2:docs/tint/intrinsic_definition_files.md",
       "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147b2a1b_42f88c51",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T19:36:40Z",
+      "side": 1,
+      "message": "```suggestion\nTypes may be annotated with `@precedence(N)` to prioritize which type will be picked when multiple types of a matcher match. This is typically used to ensure that abstract numerical types materialize to the concrete type with the lowest conversion rank. Types with higher precedence values will be matched first.\n```",
+      "range": {
+        "startLine": 69,
+        "startChar": 272,
+        "endLine": 69,
+        "endChar": 275
+      },
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a4fa7b5_cde05257",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T19:36:40Z",
+      "side": 1,
+      "message": "```suggestion\nAll overload declarations share the same declaration patterns, but the kind of declaration has a different prefix.\n```",
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fdecbb_f5e84fbd",
+        "filename": "docs/tint/intrinsic_definition_files.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T19:36:40Z",
+      "side": 1,
+      "message": "```suggestion\nSyntax: `conv` _**type-name [**_ `[` _**implicit-template-parameters**_ `]` _**]**_`(` _**parameters**_ `) -\u003e` _**return_type**_\n```",
+      "revId": "ea939a4d381a573bea01fdfca646cb0c5461b31b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
