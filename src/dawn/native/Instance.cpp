@@ -209,6 +209,8 @@ void InstanceBase::WillDropLastExternalRef() {
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const UnpackedPtr<InstanceDescriptor>& descriptor) {
+    mErrorCallback = [](WGPUErrorType, char const* message, void*) { dawn::ErrorLog() << message; };
+
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(mDefaultPlatform.get());
@@ -570,7 +572,11 @@ EventManager* InstanceBase::GetEventManager() {
 
 void InstanceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
     DAWN_ASSERT(error != nullptr);
-    dawn::ErrorLog() << error->GetFormattedMessage();
+    if (mErrorCallback) {
+        std::string messageStr = error->GetFormattedMessage();
+        mErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(error->GetType())),
+                       messageStr.c_str(), mErrorCallbackUserdata);
+    }
 }
 
 const X11Functions* InstanceBase::GetOrLoadX11Functions() {
@@ -683,6 +689,11 @@ size_t InstanceBase::APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* fea
         }
     }
     return mWGSLFeatures.size();
+}
+
+void InstanceBase::APISetErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
+    mErrorCallback = callback;
+    mErrorCallbackUserdata = userdata;
 }
 
 }  // namespace dawn::native

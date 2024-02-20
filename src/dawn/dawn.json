@@ -2310,6 +2310,14 @@
                 "args": [
                     {"name": "features", "type": "WGSL feature name", "annotation": "*"}
                 ]
+            },
+            {
+                "name": "set error callback",
+                "tags": ["dawn", "native"],
+                "args": [
+                    {"name": "callback", "type": "error callback"},
+                    {"name": "userdata", "type": "void *"}
+                ]
             }
         ]
     },
