@@ -52,6 +52,24 @@
       "parentUuid": "f89ccf91_e82b300a",
       "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5a7236_873d9b1f",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T16:51:34Z",
+      "side": 1,
+      "message": "It\u0027s extremely hot code, so I\u0027d argue that keeping the innermost function as lean as possible is probably worth it.\n\n[Perfmon seems to think the wins are worthwhile](https://dawn-review.googlesource.com/c/dawn/+/175246/2#message-9a0caccdd184ed1f19ba9565f4616fd920d5f6b2).\n\n\nIs the maintenance overhead really that much more than what you\u0027re proposing?",
+      "parentUuid": "54433dd0_c46a41c0",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
