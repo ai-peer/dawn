@@ -31,6 +31,8 @@
 #include <EGL/egl.h>
 
 #include <memory>
+#include <mutex>
+#include <vector>
 
 #include "dawn/native/opengl/DeviceGL.h"
 #include "dawn/native/opengl/EGLFunctions.h"
@@ -43,16 +45,27 @@ class ContextEGL : public Device::Context {
                                                              EGLenum api,
                                                              EGLDisplay display,
                                                              bool useANGLETextureSharing);
-    void MakeCurrent() override;
     ~ContextEGL() override;
 
   private:
     ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLContext context)
-        : egl(functions), mDisplay(display), mContext(context) {}
+        : egl(functions), mDisplay(display), mContext(context), mPrevDisplay(display) {}
+
+    void MakeCurrent() override;
+    void MakeUnCurrent() override;
 
     const EGLFunctions egl;
     EGLDisplay mDisplay;
     EGLContext mContext;
+
+    EGLDisplay mPrevDisplay;
+    EGLContext mPrevContext = EGL_NO_CONTEXT;
+    EGLSurface mPrevDrawSurface = EGL_NO_SURFACE;
+    EGLSurface mPrevReadSurface = EGL_NO_SURFACE;
+
+    int mMakeCurrentCount = 0;
+
+    std::recursive_mutex mLock;
 };
 
 }  // namespace dawn::native::opengl
