@@ -283,7 +283,6 @@ crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,execution,expression,ca
 crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,execution,expression,call,builtin,saturate:abstract_float:inputSource="const";* [ RetryOnFailure ]
 crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,execution,expression,call,builtin,transpose:abstract_float:inputSource="const";* [ RetryOnFailure ]
 crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="function";workgroupSize=[1,1,1];* [ RetryOnFailure ]
-crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,validation,shader_io,group_and_binding:* [ RetryOnFailure ]
 
 ################################################################################
 # Flaky multisampled sample_mask tests on Mac AMD (crbug.com/1496410 plus other flakes)
@@ -1334,8 +1333,6 @@ crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-3
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,parse,must_use:builtin_must_use:call="reflect";use=true [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,parse,must_use:builtin_must_use:call="unpack4x8unorm";use=true [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,parse,must_use:call:use="%40must_use";call="matrix_elem" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,shader_io,group_and_binding:different_entry_points:a_stage="fragment";b_stage="fragment";a_kind="storage";b_kind="texture_storage_1d";usage="direct" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,shader_io,group_and_binding:single_entry_point:stage="compute";a_kind="storage";b_kind="texture_3d";usage="direct" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,uniformity,uniformity:binary_expressions:e1="uniform_struct";e2="nonuniform_index1" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,uniformity,uniformity:function_variables:case="compound_assign_nonuniform";init="no_init" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="depth24plus-stencil8" [ RetryOnFailure ]
