@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1eef500_4923e1b6",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-20T16:03:37Z",
+      "side": 1,
+      "message": "I\u0027ve started adding a skeleton for wire adapter info tests but I get this.\n@lokokung@google.com Does that make sense to you?\n\n```\n[1/4] WireAdapterInfoTests.RequestAdapterInfoSuccess/Async (17 ms)\n[2/4] WireAdapterInfoTests.RequestAdapterInfoSuccess/WaitOnly (0 ms)\n[3/4] WireAdapterInfoTests.RequestAdapterInfoSuccess/ProcessEvents (0 ms)\n[4/4] WireAdapterInfoTests.RequestAdapterInfoSuccess/Spontaneous (TIMED OUT)\n1 test timed out:\n    WireAdapterInfoTests.RequestAdapterInfoSuccess/Spontaneous (../../third_party/dawn/src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp:125)\n```",
+      "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
