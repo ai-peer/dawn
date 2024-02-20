@@ -162,6 +162,30 @@
       },
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2aaf30_899264df",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002571
+      },
+      "writtenOn": "2024-02-20T22:22:45Z",
+      "side": 1,
+      "message": "\u003e This seems like I need to define a builder now?\n\nNo, I don\u0027t think you\u0027d need to define the builder as the builder should have been defined in chromium project already. I believe adding the following cq_tryjob_verifier would just work.\n\n```\nluci.cq_tryjob_verifier(\n    cq_group \u003d \"Dawn-CQ\",\n    builder \u003d \"chromium:try/tricium-clang-tidy\",\n    owner_whitelist \u003d [\"project-dawn-tryjob-access\"],\n    location_filters \u003d [\n        cq.location_filter(path_regexp \u003d \".+\\\\.c\"),\n        cq.location_filter(path_regexp \u003d \".+\\\\.cc\"),\n        cq.location_filter(path_regexp \u003d \".+\\\\.cpp\"),\n        cq.location_filter(path_regexp \u003d \".+\\\\.h\"),\n    ],\n    mode_allowlist \u003d [cq.MODE_ANALYZER_RUN],\n)\n```",
+      "parentUuid": "8cec27c7_b5fce24a",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
