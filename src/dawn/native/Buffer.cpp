@@ -167,11 +167,9 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
     ~MapAsyncEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
 
     void Complete(EventCompletionType completionType) override {
-        if (const auto* queueAndSerial = std::get_if<QueueAndSerial>(&GetCompletionData())) {
-            TRACE_EVENT_ASYNC_END0(queueAndSerial->queue->GetDevice()->GetPlatform(), General,
-                                   "Buffer::APIMapAsync",
-                                   uint64_t(queueAndSerial->completionSerial));
-        }
+        const auto& queueAndSerial = std::get<QueueAndSerial>(GetCompletionData());
+        TRACE_EVENT_ASYNC_END0(queueAndSerial.queue->GetDevice()->GetPlatform(), General,
+                               "Buffer::APIMapAsync", uint64_t(queueAndSerial.completionSerial));
 
         if (completionType == EventCompletionType::Shutdown) {
             mCallback(ToAPI(wgpu::BufferMapAsyncStatus::InstanceDropped), mUserdata);
@@ -179,26 +177,34 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
         }
 
         wgpu::BufferMapAsyncStatus status = wgpu::BufferMapAsyncStatus::Success;
-        Ref<MapAsyncEvent> pendingMapEvent;
+        {
+            auto deviceLock(queueAndSerial.queue->GetDevice()->GetScopedLock());
+            Ref<MapAsyncEvent> pendingMapEvent;
+            MaybeError maybeError{};
 
-        // Lock the buffer / early status. This may race with UnmapEarly which occurs
-        // when the buffer is unmapped or destroyed.
-        mBufferOrEarlyStatus.Use([&](auto bufferOrEarlyStatus) {
-            if (auto* earlyStatus =
-                    std::get_if<wgpu::BufferMapAsyncStatus>(&*bufferOrEarlyStatus)) {
-                // Assign the early status, if it was set.
-                status = *earlyStatus;
-            } else if (auto** buffer = std::get_if<BufferBase*>(&*bufferOrEarlyStatus)) {
-                // Set the buffer state to Mapped if this pending map succeeded.
-                // TODO(crbug.com/dawn/831): in order to be thread safe, mutation of the
-                // state and pending map event needs to be atomic w.r.t. UnmapInternal.
-                DAWN_ASSERT((*buffer)->mState == BufferState::PendingMap);
-                (*buffer)->mState = BufferState::Mapped;
-
-                pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
-                (*buffer)->mPendingMapFutureID = kNullFutureID;
-            }
-        });
+            // Lock the buffer / early status. This may race with UnmapEarly which occurs
+            // when the buffer is unmapped or destroyed.
+            mBufferOrEarlyStatus.Use([&](auto bufferOrEarlyStatus) {
+                if (auto* earlyStatus =
+                        std::get_if<wgpu::BufferMapAsyncStatus>(&*bufferOrEarlyStatus)) {
+                    // Assign the early status, if it was set.
+                    status = *earlyStatus;
+                } else if (auto** buffer = std::get_if<BufferBase*>(&*bufferOrEarlyStatus)) {
+                    // Set the buffer state to Mapped if this pending map succeeded.
+                    // TODO(crbug.com/dawn/831): in order to be thread safe, mutation of the
+                    // state and pending map event needs to be atomic w.r.t. UnmapInternal.
+                    DAWN_ASSERT((*buffer)->mState == BufferState::PendingMap);
+                    if (queueAndSerial.queue->GetDevice()->ConsumedError(
+                            (*buffer)->FinalizeMapAsync())) {
+                        status = wgpu::BufferMapAsyncStatus::DeviceLost;
+                    } else {
+                        (*buffer)->mState = BufferState::Mapped;
+                    }
+                    pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
+                    (*buffer)->mPendingMapFutureID = kNullFutureID;
+                }
+            });
+        }
         mCallback(ToAPI(status), mUserdata);
     }
 
@@ -207,6 +213,9 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
     // because we will still unmap the buffer. It will be as-if the application called
     // Unmap/Destroy just after the map event completed.
     void UnmapEarly(wgpu::BufferMapAsyncStatus status) {
+        const auto& queueAndSerial = std::get<QueueAndSerial>(GetCompletionData());
+        DAWN_ASSERT(queueAndSerial.queue->GetDevice()->IsLockedByCurrentThreadIfNeeded());
+
         mBufferOrEarlyStatus.Use([&](auto bufferOrEarlyStatus) { *bufferOrEarlyStatus = status; });
     }
 };
@@ -837,6 +846,10 @@ void BufferBase::CallbackOnMapRequestCompleted(MapRequestID mapID,
         // This is called from a callback, and no lock will be held by default. Hence, we need to
         // lock the mutex now because this will modify the buffer's states.
         auto deviceLock(GetDevice()->GetScopedLock());
+        if (status == WGPUBufferMapAsyncStatus_Success &&
+            GetDevice()->ConsumedError(FinalizeMapAsync())) {
+            status = WGPUBufferMapAsyncStatus_DeviceLost;
+        }
         if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
             mState == BufferState::PendingMap) {
             mState = BufferState::Mapped;
@@ -867,6 +880,10 @@ void BufferBase::MarkUsedInPendingCommands() {
 
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
     return offset == 0 && size == GetSize();
+}
+
+MaybeError BufferBase::FinalizeMapAsync() {
+    return {};
 }
 
 }  // namespace dawn::native
