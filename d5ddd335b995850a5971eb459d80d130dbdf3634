@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6b3e2b_90a0a43a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T14:58:06Z",
+      "side": 1,
+      "message": "PTAL. This is the dawn side of the tricium/clang-tidy change.",
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
