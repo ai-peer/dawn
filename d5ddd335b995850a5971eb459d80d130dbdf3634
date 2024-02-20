@@ -67,6 +67,29 @@
       "message": "I\u0027ll defer to yiwzhang since this is new service usage",
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beec2e66_0572bc07",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002571
+      },
+      "writtenOn": "2024-02-20T19:08:01Z",
+      "side": 1,
+      "message": "Can you delete this and corresponding tricium-prod.cfg? I believe registering a cq_tryjob_verifier with ANALYZER_MODE is enough to generate tricium configuration.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
