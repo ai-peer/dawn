@@ -88,6 +88,24 @@
       "parentUuid": "bedfafd6_65a9a5cb",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f305f178_ff43b8df",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T18:47:24Z",
+      "side": 1,
+      "message": "Yeah, I agree there\u0027s an increased risk of people using the operators without checking for overflow with these, so I\u0027ve just changed the test instead.\n\n\u003e We do appear to have `operator-` so maybe that\u0027s enough precedent that these don\u0027t check and just convert.\n\nThat was actually added in this CL as well. Removed both.",
+      "parentUuid": "a30107bb_6b610444",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
