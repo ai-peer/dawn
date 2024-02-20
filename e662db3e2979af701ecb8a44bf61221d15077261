@@ -106,6 +106,24 @@
       "parentUuid": "a30107bb_6b610444",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a43f9c00_41a41b08",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T18:51:12Z",
+      "side": 1,
+      "message": "The existing operator is `unary negation` not `subtraction`. Negation alreay exists and doesn\u0027t do any checks.",
+      "parentUuid": "f305f178_ff43b8df",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
