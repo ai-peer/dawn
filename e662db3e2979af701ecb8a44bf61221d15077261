@@ -70,6 +70,24 @@
       "parentUuid": "bd995e60_5b2803d0",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30107bb_6b610444",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T18:04:19Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027ve had any mathematical operators attached to `Number` previously. This is adding 2 for test purposes, but they\u0027ll probably end up getting used for non-test purposes if they exist. So, _should_ they exist, and if they exist should  they be doing overflow/underflow checks (and, yes that may mean they can\u0027t be `+` or `-`).\n\nIf we dont\u0027 care, that\u0027s fine and we can just land this, but it seems like it\u0027s an issue we\u0027ll face using these in the future.\n\nWe do appear to have `operator-` so maybe that\u0027s enough precedent that these don\u0027t check and just convert.",
+      "parentUuid": "bedfafd6_65a9a5cb",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
