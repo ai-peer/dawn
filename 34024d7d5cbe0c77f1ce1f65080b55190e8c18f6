@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9bcdc47_129eb891",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-20T08:45:47Z",
+      "side": 1,
+      "message": "Hi all,\n\nI\u0027ve verified this CL will no longer cause the previous compilation error on chromium_android.\n\nPTAL, thanks!",
+      "revId": "34024d7d5cbe0c77f1ce1f65080b55190e8c18f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
