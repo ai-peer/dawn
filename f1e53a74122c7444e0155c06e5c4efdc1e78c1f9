@@ -178,6 +178,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acae5be9_8019dc2d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-20T14:37:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b9bda6fd_850a80d0",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 164,
+        "endChar": 14
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9273a459_0ff24cc7",
@@ -214,6 +238,30 @@
       "writtenOn": "2024-02-16T07:43:00Z",
       "side": 1,
       "message": "I think we could just skip this entirely if we remove the \"legacy\" entry point entirely. (See comment above)",
+      "range": {
+        "startLine": 47,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83fbba46_cbde2e2f",
+        "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-20T14:37:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "590c176b_e145ed93",
       "range": {
         "startLine": 47,
         "startChar": 8,
