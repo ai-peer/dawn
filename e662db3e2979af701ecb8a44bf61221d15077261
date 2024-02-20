@@ -34,6 +34,24 @@
       "parentUuid": "770635ad_c7d8159e",
       "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd995e60_5b2803d0",
+        "filename": "src/tint/lang/core/number.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T17:37:30Z",
+      "side": 1,
+      "message": "Sorry, wasn\u0027t suggesting these should check for over/under flow. I was suggesting these shouldn\u0027t exist and we use the checked methods instead.\n\nIf they\u0027re only test code, it may not matter, but they will get used eventually if they exist.\n\nI\u0027m not sure what you mean by inlining and losing safety. If you iniline, you\u0027ll still need to check for over/under flow.",
+      "parentUuid": "10c6e516_6831e4cb",
+      "revId": "e662db3e2979af701ecb8a44bf61221d15077261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
