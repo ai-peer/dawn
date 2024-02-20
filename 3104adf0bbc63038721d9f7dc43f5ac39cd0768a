@@ -124,6 +124,24 @@
       "parentUuid": "4bde4f78_253ad2f2",
       "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d5db99_2a06d529",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-20T17:59:17Z",
+      "side": 1,
+      "message": "Added a template parameter comment explaining why it\u0027s not a regular parameter. I\u0027m really not keen on making this a regular parameter, because I really don\u0027t want to emit pointless conditionals for the hot path.",
+      "parentUuid": "ddea94ee_db9aa80f",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
