@@ -70,6 +70,24 @@
       "parentUuid": "54433dd0_c46a41c0",
       "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc851f7_6656affe",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-20T17:33:48Z",
+      "side": 1,
+      "message": "The perfmon result is for the early exit, but it doesn\u0027t really compare against the same thing using a parameter.\n\nI\u0027m not saying the change isn\u0027t worthwhile, the early exit makese sense, I\u0027m questoning if there is a benefit to doing it as a template parameter (which is a bit odd for what it\u0027s doing) vs just passing a parameter.",
+      "parentUuid": "0f5a7236_873d9b1f",
+      "revId": "3104adf0bbc63038721d9f7dc43f5ac39cd0768a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
