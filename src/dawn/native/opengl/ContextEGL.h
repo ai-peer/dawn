@@ -44,6 +44,7 @@ class ContextEGL : public Device::Context {
                                                              EGLDisplay display,
                                                              bool useANGLETextureSharing);
     void MakeCurrent() override;
+    void MakeUnCurrent() override;
     ~ContextEGL() override;
 
   private:

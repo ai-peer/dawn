@@ -35,6 +35,8 @@
 
 namespace dawn::native::opengl {
 
+class Device;
+
 struct OpenGLFunctions : OpenGLFunctionsBase {
   public:
     MaybeError Initialize(GetProcAddress getProc);
@@ -45,6 +47,20 @@ struct OpenGLFunctions : OpenGLFunctionsBase {
 
   private:
     OpenGLVersion mVersion;
+};
+
+struct OpenGLFunctionsScopedWrapper {
+  public:
+    OpenGLFunctionsScopedWrapper(const OpenGLFunctions& functions, const Device* device);
+    ~OpenGLFunctionsScopedWrapper();
+    OpenGLFunctionsScopedWrapper(OpenGLFunctionsScopedWrapper&&) = default;
+    OpenGLFunctionsScopedWrapper& operator=(OpenGLFunctionsScopedWrapper&&) = default;
+
+    const OpenGLFunctions& GetGLFunctions() { return mFunctions; }
+
+  private:
+    OpenGLFunctions mFunctions;
+    const Device* mDevice;
 };
 
 }  // namespace dawn::native::opengl

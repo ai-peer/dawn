@@ -90,7 +90,8 @@ GLenum WrapMode(wgpu::AddressMode mode) {
 
 Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
     : SamplerBase(device, descriptor) {
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     gl.GenSamplers(1, &mFilteringHandle);
     SetupGLSampler(mFilteringHandle, descriptor, false);
@@ -103,7 +104,8 @@ Sampler::~Sampler() = default;
 
 void Sampler::DestroyImpl() {
     SamplerBase::DestroyImpl();
-    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = ToBackend(GetDevice())->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
     gl.DeleteSamplers(1, &mFilteringHandle);
     gl.DeleteSamplers(1, &mNonFilteringHandle);
 }
@@ -112,7 +114,8 @@ void Sampler::SetupGLSampler(GLuint sampler,
                              const SamplerDescriptor* descriptor,
                              bool forceNearest) {
     Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
+    OpenGLFunctionsScopedWrapper glWrapper = device->GetGL();
+    const OpenGLFunctions& gl = glWrapper.GetGLFunctions();
 
     if (forceNearest) {
         gl.SamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
