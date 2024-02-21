@@ -51,6 +51,24 @@
       "parentUuid": "a3b017f1_1a8ce7e0",
       "revId": "48dabeb1ad6447d21c970977d4a1b444b5dfd1b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c709c665_cb2a6217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T17:39:47Z",
+      "side": 1,
+      "message": "that\u0027s fine - in general for callbacks like this they should be guaranteed to never be called again after you drop the last reference to the object. You\u0027ll have to make sure it isn\u0027t called anymore",
+      "parentUuid": "a3c97cdd_770893e6",
+      "revId": "48dabeb1ad6447d21c970977d4a1b444b5dfd1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
