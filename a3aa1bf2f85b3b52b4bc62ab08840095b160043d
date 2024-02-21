@@ -16,6 +16,46 @@
       "message": "PTAL. Reusing the HLSL transform seems like the easiest/safest route to getting this fixed.",
       "revId": "a3aa1bf2f85b3b52b4bc62ab08840095b160043d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ac181da_ed46a51f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-21T20:03:11Z",
+      "side": 1,
+      "message": "LGTM. Adding amaiorano@ to also review, as he wrote the transform.",
+      "revId": "a3aa1bf2f85b3b52b4bc62ab08840095b160043d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1f04ca_78bcc6d6",
+        "filename": "src/tint/lang/wgsl/ast/transform/remove_continue_in_switch.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-21T20:03:11Z",
+      "side": 1,
+      "message": "Worth updating the comment here.",
+      "range": {
+        "startLine": 37,
+        "startChar": 14,
+        "endLine": 38,
+        "endChar": 50
+      },
+      "revId": "a3aa1bf2f85b3b52b4bc62ab08840095b160043d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
