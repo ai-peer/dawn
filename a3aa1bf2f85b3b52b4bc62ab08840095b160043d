@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046321c2_7a0753de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-21T19:58:40Z",
+      "side": 1,
+      "message": "PTAL. Reusing the HLSL transform seems like the easiest/safest route to getting this fixed.",
+      "revId": "a3aa1bf2f85b3b52b4bc62ab08840095b160043d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
