@@ -27,6 +27,8 @@
 
 #include "dawn/native/d3d/D3DError.h"
 
+#include <windows.h>
+
 #include <iomanip>
 #include <sstream>
 #include <string>
@@ -41,6 +43,12 @@ const char* HRESULTAsString(HRESULT result) {
             return "S_OK";
         case S_FALSE:
             return "S_FALSE";
+
+        // Wait results that are not errors:
+        case WAIT_ABANDONED:
+            return "WAIT_ABAONDONED";
+        case WAIT_TIMEOUT:
+            return "WAIT_TIMEOUT";
 
         // Generic errors:
         case E_FAIL:
@@ -96,7 +104,7 @@ const char* HRESULTAsString(HRESULT result) {
 }
 
 MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
-    if (DAWN_LIKELY(SUCCEEDED(result))) {
+    if (DAWN_LIKELY(result == S_OK)) {
         return {};
     }
 
