@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04e5a9e_e0bff586",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-21T20:06:21Z",
+      "side": 1,
+      "message": "No, we need to check the PCT and the internal BGL for this because the following are both possible:\n\n1) Both pipelines use the same BGL internal but were both \u0027auto\u0027 created so different PCTs.\n\n2) Both pipelines were explicitly created so no PCTs, but actual internal BGL are different.\n\nAlso note that the helper is doing pointer equality for the intenal BGL, it\u0027s just really a helper to check the PCT also.",
+      "parentUuid": "8cf207ea_8ce34c39",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3793dbb_1257c2f5",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-02-21T12:38:47Z",
       "side": 1,
       "message": "Maybe we could put the PCT in the cache key and comparison, so that we can use the cache, it\u0027s just that it returns a new object every time. The code would be simpler but I guess that the PL could stay alive for longer than it needs to.",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d99ab03_9903f864",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1884,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-21T20:06:21Z",
+      "side": 1,
+      "message": "We considered this, but (1) we don\u0027t want the PCT in the cache key because the cache key is also used in the pipeline\u0027s cache key which is in turn used in the disk cache, and (2) the additional complexity of another wrapper class like BGL/BGLInternal + the extra indirection didn\u0027t outweigh this option as long as the performance didn\u0027t regress too much. From the table in https://dawn-review.googlesource.com/c/dawn/+/175362/comments/c37ae146_a34d2986, and the fact that the CTS is really one of the biggest users of the frontend cache, it doesn\u0027t seem to be a massive bottleneck atm. Also, unlike the CTS most applications are unlikely creating and recreating the same pipelines with \u0027auto\u0027 over and over again.",
+      "parentUuid": "a3793dbb_1257c2f5",
       "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
