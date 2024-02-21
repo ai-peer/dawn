@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc29c4f6_befb4054",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T21:42:09Z",
+      "side": 1,
+      "message": "isn\u0027t it the case that in:\n\n1) because they have different PCTs, we will not get a frontend cache hit, so they will be different frontend pointers\n2) because they are different layouts, we will not get a frontend cache hit, and they will be different frontend pointers?",
+      "parentUuid": "f04e5a9e_e0bff586",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3793dbb_1257c2f5",
