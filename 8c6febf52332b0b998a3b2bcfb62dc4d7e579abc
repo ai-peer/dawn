@@ -16,6 +16,24 @@
       "message": "The perf data on Gen9 and Gen12 can be found:\nhttps://docs.google.com/spreadsheets/d/1q92nfMMLc9MUW976Y-Txk3tzNOdp9eY1MKhqbFarJpk/edit?pli\u003d1\u0026resourcekey\u003d0-QurcuMefwg447hihiz1P7A#gid\u003d1474459215",
       "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b4cac5_4e4a1a10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-21T02:11:13Z",
+      "side": 1,
+      "message": "To update a uniform buffer on d3d11 backend, we can use\n1) `UpdateSubresource1` (WriteBuffer_Full_xxx), or\n2) `Map`+`CopySubresourceRegion`(WriteBuffer_Partial_xxx, xxxStagingBuffer_xxx)\n    2.1) SingleStagingBuffer_xxx added in this CL intends to measure `CopySubresourceRegion` only.\n\nThe perf data reveals:\n1) `UpdateSubresource1` is fast on both Gen9 and Gen12.\n2) `CopySubresourceRegion` itself is also slow on Gen12, but not on Gen9.\n3) `Map` is slow both.",
+      "parentUuid": "ba7e36af_80a47b2e",
+      "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
