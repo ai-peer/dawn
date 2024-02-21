@@ -51,6 +51,41 @@
       "parentUuid": "66f52e5e_59dc2226",
       "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37bdfe07_2239f56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-21T23:15:34Z",
+      "side": 1,
+      "message": "Okey the tricky part for this was to figure out where to store the serial and vk swapchain, since the SwapChain object itself got destructed. So I added a \"SwapChainCache\" in the vulkan::Device to take care of this.\n\nNB: There is no condition for reusing a so-called \"recycled\" swap chain for now, maybe it should be enforce to relate to the same Surface.",
+      "parentUuid": "8bcc2128_56d11f0f",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "617adc60_bb89a8ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-21T23:15:34Z",
+      "side": 1,
+      "message": "Added a SwapChainCache in vulkan backend to recycle SwapChains that are going to be destroyed.",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
