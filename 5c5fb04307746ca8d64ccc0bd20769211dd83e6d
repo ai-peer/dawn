@@ -16,6 +16,23 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "5c5fb04307746ca8d64ccc0bd20769211dd83e6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c5b6d71_994e036e",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T17:01:22Z",
+      "side": 1,
+      "message": "kokoro is complaining now because if CLANG \u0026\u0026 NDEBUG \u0026\u0026 !Has(always_inline), then DAWN_FORCE_INLINE is never defined",
+      "revId": "5c5fb04307746ca8d64ccc0bd20769211dd83e6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
