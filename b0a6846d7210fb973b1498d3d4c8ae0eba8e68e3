@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29a9156_e3375d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-21T23:05:43Z",
+      "side": 1,
+      "message": "This fixes the tests failing in the CTS under webgpu:api,operation,vertex_state,index_format:primitive_restart:*",
+      "revId": "b0a6846d7210fb973b1498d3d4c8ae0eba8e68e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
