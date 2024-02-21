@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d9ce18_55aec2a7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-21T20:15:33Z",
+      "side": 1,
+      "message": "nit. Maybe we can `Unpack` the descriptor here? I think atm `CreateBuffer` still takes the raw descriptor, but maybe eventually we could have that take the `Unpacked` version as well. (maybe in a follow up?)",
+      "range": {
+        "startLine": 1156,
+        "startChar": 4,
+        "endLine": 1163,
+        "endChar": 5
+      },
+      "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
