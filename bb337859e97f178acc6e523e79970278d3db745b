@@ -22,6 +22,30 @@
       },
       "revId": "bb337859e97f178acc6e523e79970278d3db745b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90c0e29_ad00f7dd",
+        "filename": "include/dawn/wire/WireClient.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-21T01:09:46Z",
+      "side": 1,
+      "message": "Made a bunch of changes on top of this suggestion. Will wait for another pass just to make sure this looks alright!",
+      "parentUuid": "422dd8d6_d26235fc",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 2
+      },
+      "revId": "bb337859e97f178acc6e523e79970278d3db745b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
