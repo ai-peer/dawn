@@ -34,6 +34,29 @@
       "parentUuid": "ba7e36af_80a47b2e",
       "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128d7bac_2444b084",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-21T12:36:37Z",
+      "side": 1,
+      "message": "nit: please add one line comment for each method.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
