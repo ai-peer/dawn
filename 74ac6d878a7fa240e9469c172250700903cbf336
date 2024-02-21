@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "74ac6d878a7fa240e9469c172250700903cbf336",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75567ea4_f34f0c52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T20:05:00Z",
+      "side": 1,
+      "message": "branches not needed because we will swap the actual builders with these experimental ones, right?",
+      "revId": "74ac6d878a7fa240e9469c172250700903cbf336",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
