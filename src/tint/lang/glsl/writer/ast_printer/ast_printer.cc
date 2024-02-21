@@ -72,6 +72,7 @@
 #include "src/tint/lang/wgsl/ast/transform/preserve_padding.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_initializers_to_let.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_side_effects_to_decl.h"
+#include "src/tint/lang/wgsl/ast/transform/remove_continue_in_switch.h"
 #include "src/tint/lang/wgsl/ast/transform/remove_phonies.h"
 #include "src/tint/lang/wgsl/ast/transform/renamer.h"
 #include "src/tint/lang/wgsl/ast/transform/robustness.h"
@@ -248,6 +249,8 @@ SanitizedResult Sanitize(const Program& in,
     manager.Add<Texture1DTo2D>();
 
     manager.Add<ast::transform::SimplifyPointers>();
+
+    manager.Add<ast::transform::RemoveContinueInSwitch>();
 
     data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
         ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);

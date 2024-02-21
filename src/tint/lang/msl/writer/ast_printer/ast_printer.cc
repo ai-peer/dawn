@@ -76,6 +76,7 @@
 #include "src/tint/lang/wgsl/ast/transform/preserve_padding.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_initializers_to_let.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_side_effects_to_decl.h"
+#include "src/tint/lang/wgsl/ast/transform/remove_continue_in_switch.h"
 #include "src/tint/lang/wgsl/ast/transform/remove_phonies.h"
 #include "src/tint/lang/wgsl/ast/transform/robustness.h"
 #include "src/tint/lang/wgsl/ast/transform/simplify_pointers.h"
@@ -244,6 +245,8 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
     array_length_cfg.bindpoint_to_size_index =
         std::move(options.array_length_from_uniform.bindpoint_to_size_index);
     data.Add<ast::transform::ArrayLengthFromUniform::Config>(array_length_cfg);
+
+    manager.Add<ast::transform::RemoveContinueInSwitch>();
 
     // PackedVec3 must come after ExpandCompoundAssignment.
     manager.Add<PackedVec3>();
