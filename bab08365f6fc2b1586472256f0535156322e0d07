@@ -16,6 +16,24 @@
       "message": "nit: use logging callback, not error callback",
       "revId": "bab08365f6fc2b1586472256f0535156322e0d07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8025c239_f60cc66d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-21T20:03:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb457419_8bfaba12",
+      "revId": "bab08365f6fc2b1586472256f0535156322e0d07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
