@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9047d7b0_ca12ab91",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 15
+      },
+      "lineNbr": 3023,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-21T09:21:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2b39692_56889454",
+      "range": {
+        "startLine": 3023,
+        "startChar": 12,
+        "endLine": 3023,
+        "endChar": 61
+      },
+      "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1eef500_4923e1b6",
@@ -55,6 +79,24 @@
       "side": 1,
       "message": "You need an expectation and reply block, example:\n\n```\nWGPUAdapterInfo info;\n\nEXPECT_CALL(api, OnRequestAdapterInfo(apiAdapter, NotNull(), NotNull()))\n    .WillOnce([]() {\n        // Call the callback so the test doesn\u0027t wait indefinitely.\n        api.CallAdapterRequestAdapterInfoCallback(\n            apiAdapter,\n            WGPURequestAdapterInfo_Success,\n            \u0026info\n        );\n    });\nFlushClient();\nFlushFutures();\nExpectWireCallbacksWhen([\u0026](auto\u0026 mockCb) {\n    EXPECT_CALL(mockCb, Call).Times(1);\n\n    FlushCallbacks();\n});\n```",
       "parentUuid": "a1eef500_4923e1b6",
+      "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e18e9a41_326d5d1b",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-21T09:21:40Z",
+      "side": 1,
+      "message": "`CallAdapterRequestAdapterInfoCallback` and `OnRequestAdapterInfo` are not generated in `mock_webgpu.h/.cpp` files sadly.\n\n```\n../../third_party/dawn/src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp:132:13: error: no member named \u0027CallAdapterRequestAdapterInfoCallback\u0027 in \u0027testing::StrictMock\u003cMockProcTable\u003e\u0027\n  132 |         api.CallAdapterRequestAdapterInfoCallback(apiAdapter, WGPURequestAdapterInfoStatus_Success,\n      |         ~~~ ^\n../../third_party/dawn/src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp:130:5: error: no member named \u0027gmock_OnRequestAdapterInfo\u0027 in \u0027testing::StrictMock\u003cMockProcTable\u003e\u0027\n  130 |     EXPECT_CALL(api, OnRequestAdapterInfo(apiAdapter, NotNull(), NotNull())).WillOnce(InvokeWithoutArgs([\u0026] {\n      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n```",
+      "parentUuid": "f74bfa11_2d598895",
       "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
