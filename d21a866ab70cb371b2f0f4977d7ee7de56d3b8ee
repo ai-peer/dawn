@@ -22,6 +22,30 @@
       },
       "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb2da832_4e7d2362",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T21:53:16Z",
+      "side": 1,
+      "message": "I think CreateBuffer should always take the raw one, because inside it will do ValidateAndUnpack, and then pass Unpacked\u003cBufferDescriptor\u003e down from there.\n\nI couldn\u0027t do Unpack here because there could be an error. I could do ValidateAndUnpack, but then I have to either duplicate the ConsumedError call, or drop the error and let it be generated again inside CreateBuffer. Duplicating ConsumedError is a little verbose because I need to shuffle a lot around to get it to consume the error while holding the lock. Dropping the error could be fine but I thought generating full errors was more than we needed since we will do real validation later. WDYT?",
+      "parentUuid": "16d9ce18_55aec2a7",
+      "range": {
+        "startLine": 1156,
+        "startChar": 4,
+        "endLine": 1163,
+        "endChar": 5
+      },
+      "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
