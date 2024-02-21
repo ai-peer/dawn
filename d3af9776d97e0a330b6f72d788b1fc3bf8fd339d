@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa85a13d_34ee4140",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-21T20:26:50Z",
+      "side": 1,
+      "message": "Suggest:\n, the",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01303002_8d61f38e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-21T20:26:50Z",
+      "side": 1,
+      "message": "Suggest removing the comma",
+      "range": {
+        "startLine": 11,
+        "startChar": 44,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a92384_dbc6efdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-21T20:26:50Z",
+      "side": 1,
+      "message": "Looks good, just some nits and a question about transform ordering.",
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4a83c99_cedab73f",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-21T20:26:50Z",
+      "side": 1,
+      "message": "In the HLSL backend, this transform runs right after `PromoteInitializersToLet`. Should we not do the same for both GLSL and MSL? It\u0027s probably fine, but maybe safer to be consistent across the backends as much as possible.",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 58
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
