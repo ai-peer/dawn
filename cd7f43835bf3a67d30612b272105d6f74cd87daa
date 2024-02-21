@@ -33,6 +33,24 @@
       "message": "I\u0027m facing an issue that I don\u0027t know how to solve (at least with the Vulkan backend) when calling Unconfigure then Configure again:\n\n - There cannot exist more than 1 swap chain at a time for a given window (otherwise it raises an obscure \"out of memory\" error)\n - Destroying a Swap Chain is not immediate, it is added to the task queue of the FencedDeleter so that it only gets destroyed after the remaining tasks in the queue (e.g., presenting)\n - Creating a new Swap Chain is however immediate -\u003e we have a conflict here\n\nOption A: Force flushing before the creation of a Swap Chain. I tried digging around a lot in the queue/fenceddeleter mecanism, I\u0027m not sure I got it all but I could not find a way to force flush the queue all the way to have the previous swap chain deletion be in the mCompletedSerial.\n\nOption B: Delay Swap Chain Creation. Make the creation of the new Swap Chain delayed to its correct logical serial position in the device timeline rather than being created immediately upon call to CreateSwapChain. I\u0027m not sure how to do this, and whether it will break other tings, like in particular the possibility to reuse the previous swap chain in the call to CreateSwapchainKHR.\n\nOption C: Hack. When creating a new Swap Chain, inspect the fenced deleter queue to see whether there is a swap chain deletion pending, and use it as \"old swapchain\" in the new call to CreateSwapchainKHR.\n\nAny thoughts?",
       "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bcc2128_56d11f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-21T20:08:02Z",
+      "side": 1,
+      "message": "what if we:\n - on DetachFromSurfaceImpl, save the command serial after which the old swapchain will be deleted.\n - on creation of a new swap chain, flush pending deletions, and check the completed command serial so we know whether or not it is deleted or not. if it\u0027s not deleted yet, then we can pass it as the previous swap chain.",
+      "parentUuid": "66f52e5e_59dc2226",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
