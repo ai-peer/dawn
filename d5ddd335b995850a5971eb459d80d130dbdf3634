@@ -186,6 +186,30 @@
       },
       "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d705ff36_1e1a2680",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-02-21T14:20:08Z",
+      "side": 1,
+      "message": "Ah, thank you, the `chromium:try/` was the part I was missing.",
+      "parentUuid": "ac2aaf30_899264df",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 0
+      },
+      "revId": "d5ddd335b995850a5971eb459d80d130dbdf3634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
