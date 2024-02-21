@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,69 +25,33 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_COMMON_REF_H_
-#define SRC_DAWN_COMMON_REF_H_
+#include "dawn/native/d3d/KeyedMutex.h"
 
-#include <mutex>
 #include <utility>
 
-#include "dawn/common/RefBase.h"
-#include "dawn/common/RefCounted.h"
+#include "dawn/native/D3DBackend.h"
+#include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/DeviceD3D.h"
 
-namespace dawn {
+namespace dawn::native::d3d {
 
-template <typename T>
-class WeakRef;
-
-namespace detail {
-
-class WeakRefSupportBase;
-
-template <typename T>
-struct RefCountedTraits {
-    static constexpr T* kNullValue = nullptr;
-    static void Reference(T* value) { value->Reference(); }
-    static void Release(T* value) { value->Release(); }
-};
-
-}  // namespace detail
-
-template <typename T>
-class Ref : public RefBase<T*, detail::RefCountedTraits<T>> {
-  public:
-    using RefBase<T*, detail::RefCountedTraits<T>>::RefBase;
-};
-
-template <typename T>
-Ref<T> AcquireRef(T* pointee) {
-    Ref<T> ref;
-    ref.Acquire(pointee);
-    return ref;
+KeyedMutex::KeyedMutex(Device* device, ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex)
+    : mDevice(device), mDXGIKeyedMutex(std::move(dxgiKeyedMutex)) {
+    DAWN_ASSERT(mDevice != nullptr);
+    DAWN_ASSERT(mDXGIKeyedMutex);
 }
 
-template <typename T>
-struct UnwrapRef {
-    using type = T;
-};
-template <typename T>
-struct UnwrapRef<Ref<T>> {
-    using type = T;
-};
-
-template <typename T>
-struct IsRef {
-    static constexpr bool value = false;
-};
-template <typename T>
-struct IsRef<Ref<T>> {
-    static constexpr bool value = true;
-};
-
-template <typename T, typename H>
-H AbslHashValue(H h, const Ref<T>& v) {
-    return H::combine(std::move(h), v.Get());
+KeyedMutex::~KeyedMutex() {
+    mDevice->DisposeKeyedMutex(std::move(mDXGIKeyedMutex));
 }
 
-}  // namespace dawn
+MaybeError KeyedMutex::AcquireKeyedMutex() {
+    return CheckHRESULT(mDXGIKeyedMutex->AcquireSync(d3d::kDXGIKeyedMutexAcquireKey, INFINITE),
+                        "Failed to acquire keyed mutex for external image");
+}
 
-#endif  // SRC_DAWN_COMMON_REF_H_
+void KeyedMutex::ReleaseKeyedMutex() {
+    mDXGIKeyedMutex->ReleaseSync(d3d::kDXGIKeyedMutexAcquireKey);
+}
+
+}  // namespace dawn::native::d3d
