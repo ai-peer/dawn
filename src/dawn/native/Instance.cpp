@@ -205,6 +205,9 @@ void InstanceBase::WillDropLastExternalRef() {
             backend->ClearPhysicalDevices();
         }
     }
+
+    mErrorCallback = nullptr;
+    mErrorCallbackUserdata = nullptr;
 }
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
@@ -223,6 +226,16 @@ MaybeError InstanceBase::Initialize(const UnpackedPtr<InstanceDescriptor>& descr
         mBackendValidationLevel = dawnDesc->backendValidationLevel;
         mBeginCaptureOnStartup = dawnDesc->beginCaptureOnStartup;
         mEnableAdapterBlocklist = dawnDesc->enableAdapterBlocklist;
+
+        mErrorCallback = dawnDesc->errorCallback;
+        mErrorCallbackUserdata = dawnDesc->errorCallbackUserdata;
+    }
+
+    if (!mErrorCallback) {
+        mErrorCallback = [](WGPUErrorType, char const* message, void*) {
+            dawn::ErrorLog() << message;
+        };
+        mErrorCallbackUserdata = nullptr;
     }
 
     // Default paths to search are next to the shared library, next to the executable, and
@@ -570,7 +583,11 @@ EventManager* InstanceBase::GetEventManager() {
 
 void InstanceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
     DAWN_ASSERT(error != nullptr);
-    dawn::ErrorLog() << error->GetFormattedMessage();
+    if (mErrorCallback) {
+        std::string messageStr = error->GetFormattedMessage();
+        mErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(error->GetType())),
+                       messageStr.c_str(), mErrorCallbackUserdata);
+    }
 }
 
 const X11Functions* InstanceBase::GetOrLoadX11Functions() {
