@@ -33,6 +33,24 @@
       "message": "this should probably be `logging callback` and `logging callback userdata` which is passed on `dawn instance descriptor`",
       "revId": "48dabeb1ad6447d21c970977d4a1b444b5dfd1b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c97cdd_770893e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-21T17:34:04Z",
+      "side": 1,
+      "message": "We may need to set it to null before destroying the instance to avoid dangling raw pointer problem.",
+      "parentUuid": "a3b017f1_1a8ce7e0",
+      "revId": "48dabeb1ad6447d21c970977d4a1b444b5dfd1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
