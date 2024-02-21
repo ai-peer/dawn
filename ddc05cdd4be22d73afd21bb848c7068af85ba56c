@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8d34b6_d4a0e657",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 3290411
+      },
+      "writtenOn": "2024-02-21T16:47:05Z",
+      "side": 1,
+      "message": "I feel this was missing on iOS (not sure.. but the old code wouldn\u0027t have Mac family support). But this looks the best way to do this.",
+      "revId": "ddc05cdd4be22d73afd21bb848c7068af85ba56c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4fb2cd2_8dfb4130",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 3290411
+      },
+      "writtenOn": "2024-02-21T16:47:05Z",
+      "side": 1,
+      "message": "Same here...",
+      "revId": "ddc05cdd4be22d73afd21bb848c7068af85ba56c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
