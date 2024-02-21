@@ -25,12 +25,12 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_AST_RAISE_REMOVE_CONTINUE_IN_SWITCH_H_
-#define SRC_TINT_LANG_HLSL_WRITER_AST_RAISE_REMOVE_CONTINUE_IN_SWITCH_H_
+#ifndef SRC_TINT_LANG_WGSL_AST_TRANSFORM_REMOVE_CONTINUE_IN_SWITCH_H_
+#define SRC_TINT_LANG_WGSL_AST_TRANSFORM_REMOVE_CONTINUE_IN_SWITCH_H_
 
 #include "src/tint/lang/wgsl/ast/transform/transform.h"
 
-namespace tint::hlsl::writer {
+namespace tint::ast::transform {
 
 /// This transform replaces continue statements in switch cases with setting a
 /// bool variable, and checking if the variable is set after the switch to
@@ -54,6 +54,6 @@ class RemoveContinueInSwitch final
     struct State;
 };
 
-}  // namespace tint::hlsl::writer
+}  // namespace tint::ast::transform
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_AST_RAISE_REMOVE_CONTINUE_IN_SWITCH_H_
+#endif  // SRC_TINT_LANG_WGSL_AST_TRANSFORM_REMOVE_CONTINUE_IN_SWITCH_H_
