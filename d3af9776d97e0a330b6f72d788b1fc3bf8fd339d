@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e78b28_81c64db0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-21T20:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa85a13d_34ee4140",
+      "range": {
+        "startLine": 10,
+        "startChar": 6,
+        "endLine": 10,
+        "endChar": 10
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01303002_8d61f38e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-21T20:26:50Z",
       "side": 1,
       "message": "Suggest removing the comma",
+      "range": {
+        "startLine": 11,
+        "startChar": 44,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283a71b2_cc47681f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-21T20:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01303002_8d61f38e",
       "range": {
         "startLine": 11,
         "startChar": 44,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-02-21T20:26:50Z",
       "side": 1,
       "message": "In the HLSL backend, this transform runs right after `PromoteInitializersToLet`. Should we not do the same for both GLSL and MSL? It\u0027s probably fine, but maybe safer to be consistent across the backends as much as possible.",
+      "range": {
+        "startLine": 253,
+        "startChar": 4,
+        "endLine": 253,
+        "endChar": 58
+      },
+      "revId": "d3af9776d97e0a330b6f72d788b1fc3bf8fd339d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a056b324_6b0fb02f",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-21T20:34:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4a83c99_cedab73f",
       "range": {
         "startLine": 253,
         "startChar": 4,
