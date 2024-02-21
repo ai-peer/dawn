@@ -16,6 +16,57 @@
       "message": "The following table depicts some CQ CTS runs with and without the change. For the most part, the frontend cache does not seem to make THAT much difference in the runtime, so maybe it is fine to just land this fix and defer adding a cache to the CTS. (In some cases it even looks like maybe the cache was hurting performance? But most likely those are just noise.)\n\n| *Platform*  \t| *No Caching / No Validation* \t| *No Caching / Validation*  \t| *With Caching / No Validation* \t| *With Caching / Validation* \t|\n|----------------\t|--------------------------------\t|-------------------------------\t|-----------------------------------\t|--------------------------------\t|\n| Intel/Mac      \t| (77m 47s) + (5m 54s): 83m 41s  \t| (77m 58s) + (5m 43s): 83m 41s \t| (75m 7s) + (5m 27s): 80m 33s      \t| (79m 36s) + (5m 39s): 85m 15s  \t|\n| AMD/Mac        \t| (66m 50s) + (4m 59s): 71m 49s  \t| (75m 23s) + (5m 4s): 80m 27s  \t| (67m 12s) + (5m 5s): 72m 17s      \t| (79m 49s) + (5m 3s): 84m 51s   \t|\n| Intel/Linux    \t| (30m 42s) + (4m 7s): 34m 49s   \t|                               \t| (29m 16s) + (3m 33s): 32m 50s     \t|                                \t|\n| Nvidia/Linux   \t| (22m 20s) + (3m 45s): 26m 5s   \t| (22m 31s) + (3m 58s): 26m 28s \t| (21m 42s) + (3m 58s): 25m 39s     \t| (21m 31s) + (3m 50s): 25m 21s  \t|\n| Intel/Windows  \t| (91m 28s) + (6m 53s): 98m 22s  \t|                               \t| (91m 57s) + (7m 12s): 99m 8s      \t|                                \t|\n| Nvidia/Windows \t| (33m 6s) + (6m 40s): 39m 46s   \t| (35m 3s) + (6m 50s): 41m 53s  \t| (33m 29s) + (6m 26s): 39m 55s     \t| (34m 24s) + (6m 32s): 40m 57s  \t|",
       "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f19024_e318d29e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-21T12:38:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf207ea_8ce34c39",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-21T12:38:47Z",
+      "side": 1,
+      "message": "Isn\u0027t a by pointer comparison enough here?",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3793dbb_1257c2f5",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1884,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-21T12:38:47Z",
+      "side": 1,
+      "message": "Maybe we could put the PCT in the cache key and comparison, so that we can use the cache, it\u0027s just that it returns a new object every time. The code would be simpler but I guess that the PL could stay alive for longer than it needs to.",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
