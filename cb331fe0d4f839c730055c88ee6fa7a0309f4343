@@ -1138,6 +1138,23 @@
       "message": "🟦 note: all 32 tests now pass",
       "revId": "cb331fe0d4f839c730055c88ee6fa7a0309f4343",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97dcb39_111155e1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-21T19:28:46Z",
+      "side": 0,
+      "message": "This section seems removed because the bot didn\u0027t run webgpu_cts https://ci.chromium.org/ui/p/chromium/builders/try/android-dawn-arm64-exp-rel/37/overview",
+      "revId": "cb331fe0d4f839c730055c88ee6fa7a0309f4343",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
