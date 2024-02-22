@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06879fe_816f5bae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-22T01:23:50Z",
+      "side": 1,
+      "message": "For `CopySubresourceRegion`, the driver largely uses 3D and compute kernels. The hardware state for these operations will likely be significantly different from what the application has currently bound to the pipeline requiring the driver to save and restore these commands when the application switches between copying data and doing 3D operations. The overhead could be:\n1)driver needs to save and restore 3D pipeline state before and after each operation.\n2)Pipeline is often flushed.\nNot sure why Gen12 is worse on this.",
+      "parentUuid": "a6b4cac5_4e4a1a10",
+      "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "128d7bac_2444b084",
@@ -49,6 +67,30 @@
       "writtenOn": "2024-02-21T12:36:37Z",
       "side": 1,
       "message": "nit: please add one line comment for each method.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e7fb664_9e3a7a40",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-02-22T01:23:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "128d7bac_2444b084",
       "range": {
         "startLine": 66,
         "startChar": 0,
