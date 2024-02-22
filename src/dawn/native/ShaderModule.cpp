@@ -1419,11 +1419,13 @@ Future ShaderModuleBase::APIGetCompilationInfoF(const CompilationInfoCallbackInf
             const WGPUCompilationInfo* compilationInfo = nullptr;
             if (completionType == EventCompletionType::Ready) {
                 status = WGPUCompilationInfoRequestStatus_Success;
+                DAWN_ASSERT(mShaderModule != nullptr);
                 compilationInfo = mShaderModule->mCompilationMessages->GetCompilationInfo();
             }
             if (mCallback) {
                 mCallback(status, compilationInfo, mUserdata);
             }
+            mShaderModule = nullptr;
         }
     };
     FutureID futureID = GetDevice()->GetInstance()->GetEventManager()->TrackEvent(
