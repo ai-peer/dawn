@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64018328_04854770",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "I think that would cause a cyclic dependency between `diag` and `text`. I can investigate.",
+      "parentUuid": "a7b798ed_723ffc06",
+      "range": {
+        "startLine": 794,
+        "startChar": 0,
+        "endLine": 795,
+        "endChar": 82
+      },
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1f8d1de_374c7b48",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b9c8e7c_caf0ffc4",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Because this was stale and broken. Fixed.",
+      "parentUuid": "e1f8d1de_374c7b48",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "494f0293_90b6272d",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "nit: don\u0027t need `else` with returning `if`",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "960bcf15_abfd6cde",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 4018,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Ack. Gofmt moans about this, but I kinda like the symmetry.",
+      "parentUuid": "494f0293_90b6272d",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -83,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50145501_0e6ca0dd",
+        "filename": "src/tint/lang/core/constant/eval_binary_op_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1511,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "We historically always used `\u0027`. We could use backticks, but in a plain-text world I find it looks more like a bug.",
+      "parentUuid": "c9437cee_85285686",
+      "range": {
+        "startLine": 1511,
+        "startChar": 69,
+        "endLine": 1511,
+        "endChar": 70
+      },
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "588eabaf_f530b342",
         "filename": "src/tint/lang/core/intrinsic/table.cc",
         "patchSetId": 8
@@ -94,6 +178,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "I\u0027m not sure I understand how this generates it\u0027s output. Is it assuming there is an initial `sytle::Code` appended? Otherwise, don\u0027t we end up with something like:\n\n`style::Text` \u003cname\u003e `style::Code`, `style::Type` \u003cname\u003e `style::Code`,\n\nwhere first entry doesn\u0027t get code styled, we then emit a `style::Code` at the end, which seems like it\u0027s setting the rest of the content into code style?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8936426a_f17d3896",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "This function isn\u0027t assuming an initial `Code`, as it always sets the style before writing a string. It\u0027s just guarantees that it returns with `Code` style. Added a comment.",
+      "parentUuid": "588eabaf_f530b342",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62af8635_3c225500",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "It\u0027s actually a compilation error, because `StyledText` doesn\u0027t suport `std::endl`.",
+      "parentUuid": "4e078dde_cf127c99",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffbf5eab_6b7fb462",
@@ -128,6 +248,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "```suggestion\n    /// @returns a string with the instruction name and error message formatted\n```",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a3aa2bf_589f8191",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffbf5eab_6b7fb462",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47bd15e7_d7adf126",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "154853c2_9f46ad3c",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49680fea_85ba837a",
@@ -162,6 +318,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "This one returning a string and the one below returning a StyleText seems odd, why doesn\u0027t this one return styled text as well?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bb0f86_ae38cdf1",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Just folded it into `Add[Result]Error(const Instruction* inst, ...)`",
+      "parentUuid": "49680fea_85ba837a",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -183,6 +357,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "074b0849_cb639b19",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac3daff9_92c9a7c9",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e49a71ac_fb45e997",
@@ -196,6 +388,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "Should these \"\u0027\"s be `Style::Code` ?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e3d61e1_fffc5a2d",
+        "filename": "src/tint/lang/wgsl/ast/transform/single_entry_point.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "AST transform errors shouldn\u0027t be seen, and will be killed off this year. Probably won\u0027t bother.",
+      "parentUuid": "e49a71ac_fb45e997",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +427,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f3cd61_5df45cf8",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "That\u0027s actually an avoidable performance hit and code bloat. Two string literals are merged at compile time. Using `\u003c\u003c` incurs a runtime concatenation.",
+      "parentUuid": "e9dbc32c_92d0c9d5",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca775a34_496e2532",
@@ -230,6 +458,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "Should buffer_idx and array_stride be code style?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c77bd6d_327f0c91",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "See my other comment about the AST transforms.",
+      "parentUuid": "ca775a34_496e2532",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -251,6 +497,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "865dbfb6_4fbb7f6f",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "See my other comment about the AST transforms.",
+      "parentUuid": "14cada4c_b45eec9d",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "093e84d8_0d891aa2",
@@ -264,6 +528,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "quotes to `Code` ?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72dd18e2_b3a4891c",
+        "filename": "src/tint/lang/wgsl/helpers/check_supported_extensions.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Hopefully never seen, but done.",
+      "parentUuid": "093e84d8_0d891aa2",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -285,6 +567,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb341b71_63565b6f",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t ever be seen. Going to skip over these.",
+      "parentUuid": "b1f25ca1_cb9a7e30",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6626027d_91216d0e",
@@ -298,6 +598,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "ditto",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ee1bfe_5006bfd7",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6626027d_91216d0e",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -319,6 +637,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8611fa87_42534b34",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "I\u0027ll tackle the WGSL parser as a followup. This CL is large enough as it is.",
+      "parentUuid": "acfa45f0_c351a4ee",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33ddf4f2_7d427c6b",
@@ -332,6 +668,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "code (or enum?) name and use?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7708c9ac_189e79c6",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "I\u0027ll tackle the WGSL parser as a followup. This CL is large enough as it is.",
+      "parentUuid": "33ddf4f2_7d427c6b",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -353,6 +707,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce45e248_79cc79c2",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Again, these are diagnostics that should never be seen. We can apply the markup as a followup if we want.",
+      "parentUuid": "3b9f0420_05594ff5",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc4f2881_c748bbaf",
@@ -366,6 +738,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "ditto  (and a bunch more in this file)",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b18d4f2_2b8b41a3",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1028,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dc4f2881_c748bbaf",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -387,6 +777,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bbb71b3_40d0d5f7",
+        "filename": "src/tint/lang/wgsl/reader/reader.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e3b56dd1_07ba10fd",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e12033b_04a9f032",
@@ -400,6 +808,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "Not sure where this one comes from but should `\u003cstorage\u003e` be `\u0027storage\u0027` for consistency?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73c92da_c064ffbf",
+        "filename": "src/tint/lang/wgsl/resolver/address_space_validation_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done in followup CL.",
+      "parentUuid": "9e12033b_04a9f032",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -421,6 +847,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83975621_00c508aa",
+        "filename": "src/tint/lang/wgsl/resolver/compound_assignment_validation_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17cc9406_4c9cf272",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ac81133_146366e1",
@@ -434,6 +878,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "Code instead of `\"\u0027\"` ?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67776dad_a30fc1a9",
+        "filename": "src/tint/lang/wgsl/resolver/dependency_graph.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ac81133_146366e1",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -455,6 +917,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a398114_7c981b96",
+        "filename": "src/tint/lang/wgsl/resolver/dependency_graph.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f67f77d_48f675e1",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d32d71c_da511223",
@@ -468,6 +948,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "`\u0027parameter p\u0027` ? This one seems inconsistent",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc926b1e_1019c790",
+        "filename": "src/tint/lang/wgsl/resolver/ptr_ref_validation_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Intentional. Unlike the others, you don\u0027t write `parameter`. It\u0027s not a token.",
+      "parentUuid": "7d32d71c_da511223",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -489,6 +987,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d74327a4_10b57328",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done in followup CL.",
+      "parentUuid": "f3738f42_7113819b",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6681aa8d_0405fdd6",
@@ -502,6 +1018,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "Should this have a `text \u003c\u003c style::Plain` in order to reset from whatever style was applied above?\n\nOr, some way to save and restore the styling?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8c0ed5_f070c5f6",
+        "filename": "src/tint/lang/wgsl/resolver/sem_helper.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "See `TINT_DEFER(text \u003c\u003c style::Plain);` at the top of the function. A defer is preferable, because an early return can easily be added in the future.",
+      "parentUuid": "6681aa8d_0405fdd6",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -523,6 +1057,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44f19e80_592006b0",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24904eec_36d14d63",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "429e8540_ca95b06d",
@@ -540,6 +1092,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5ec533_bd1cc46b",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "See other comment. This is a pointless performance hit, and code bloat.",
+      "parentUuid": "429e8540_ca95b06d",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e134a76_34bf5cbf",
@@ -553,6 +1123,30 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "```suggestion\n                                       \u003c\u003c \"or sampler types must provide an address space\";\n```",
+      "range": {
+        "startLine": 660,
+        "startChar": 4,
+        "endLine": 661,
+        "endChar": 69
+      },
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b7fb310_f4ded326",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "1e134a76_34bf5cbf",
       "range": {
         "startLine": 660,
         "startChar": 4,
@@ -586,6 +1180,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ef2749_8b36edf8",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1893,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e546a69e_cd7b220a",
+      "range": {
+        "startLine": 1892,
+        "startChar": 0,
+        "endLine": 1893,
+        "endChar": 34
+      },
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bfee67b_3495d0ba",
@@ -599,6 +1217,30 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "```suggestion\n                \u003c\u003c \"a struct that contains a runtime array cannot be nested inside another struct\";\n```",
+      "range": {
+        "startLine": 2190,
+        "startChar": 19,
+        "endLine": 2191,
+        "endChar": 42
+      },
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adce1728_c088934b",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2191,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bfee67b_3495d0ba",
       "range": {
         "startLine": 2190,
         "startChar": 19,
@@ -626,6 +1268,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8c83eb5_b48a0e5a",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2242,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43bf180d_4767e100",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3dc8699_b3982730",
@@ -643,6 +1303,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbcd1bf8_4c314ca8",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2715,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3dc8699_b3982730",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d6b860e_86d95ac8",
@@ -656,6 +1334,24 @@
       "writtenOn": "2024-02-22T22:06:55Z",
       "side": 1,
       "message": "This one changed, why print out the `undefined` ?",
+      "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ee1933_c025360a",
+        "filename": "src/tint/lang/wgsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T23:20:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d6b860e_86d95ac8",
       "revId": "1f75fc89f8fda7966db762a968f6f10b13ca37ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
