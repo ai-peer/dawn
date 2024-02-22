@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7adee08_5db15e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-22T02:37:43Z",
+      "side": 1,
+      "message": "very interesting that CopySubresourceRegion uses a compute kernel. I would have expected it to be able to use the copy engine. Good to know though!",
+      "parentUuid": "d06879fe_816f5bae",
+      "revId": "8c6febf52332b0b998a3b2bcfb62dc4d7e579abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "128d7bac_2444b084",
