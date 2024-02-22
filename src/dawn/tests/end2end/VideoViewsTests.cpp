@@ -1472,8 +1472,19 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         }
         auto destVideoWGPUTexture = destVideoTexture->wgpuTexture;
 
+        // Create a non-subsample-sized depth texture, and use it for render all planes.
+        wgpu::Texture depthTexture = [this]() {
+            wgpu::Extent3D size = {kYUVAImageDataWidthInTexels, kYUVAImageDataHeightInTexels, 1};
+            wgpu::TextureDescriptor desc;
+            desc.size = size;
+            desc.format = wgpu::TextureFormat::Depth24PlusStencil8;
+            desc.usage = wgpu::TextureUsage::RenderAttachment;
+            return device.CreateTexture(&desc);
+        }();
+
         // Perform plane operations for texting by creating render passes and comparing textures.
         auto PerformPlaneOperations = [this](int planeIndex, wgpu::Texture destVideoWGPUTexture,
+                                             wgpu::Texture depthTexture,
                                              wgpu::Texture planeTextureWithData, bool hasAlpha) {
             auto kSubsampleFactor = planeIndex == kYUVAChromaPlaneIndex ? 2 : 1;
 
@@ -1491,6 +1502,10 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
             renderPipelineDescriptor.cTargets[0].format = GetPlaneFormat(planeIndex);
             wgpu::RenderPipeline renderPipeline =
                 device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+            renderPipelineDescriptor.EnableDepthStencil();
+            wgpu::RenderPipeline renderPipelineWithDepth =
+                device.CreateRenderPipeline(&renderPipelineDescriptor);
             wgpu::Sampler sampler = device.CreateSampler();
 
             // Create plane texture view from the multiplanar video texture.
@@ -1502,11 +1517,12 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
             // Render pass operations for reading the source data from planeTexture view into
             // planeTextureView created from the multiplanar video texture.
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            utils::ComboRenderPassDescriptor renderPass({planeTextureView});
+            utils::ComboRenderPassDescriptor renderPass({planeTextureView},
+                                                        depthTexture.CreateView());
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
-            pass.SetPipeline(renderPipeline);
+            pass.SetPipeline(renderPipelineWithDepth);
             pass.SetBindGroup(
-                0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                0, utils::MakeBindGroup(device, renderPipelineWithDepth.GetBindGroupLayout(0),
                                         {{0, sampler}, {1, planeTextureWithData.CreateView()}}));
             pass.Draw(6);
             pass.End();
@@ -1540,14 +1556,15 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         };
 
         // Perform operations for the Y plane.
-        PerformPlaneOperations(kYUVALumaPlaneIndex, destVideoWGPUTexture, plane0Texture, hasAlpha);
+        PerformPlaneOperations(kYUVALumaPlaneIndex, destVideoWGPUTexture, depthTexture,
+                               plane0Texture, hasAlpha);
         // Perform operations for the UV plane.
-        PerformPlaneOperations(kYUVAChromaPlaneIndex, destVideoWGPUTexture, plane1Texture,
-                               hasAlpha);
+        PerformPlaneOperations(kYUVAChromaPlaneIndex, destVideoWGPUTexture, depthTexture,
+                               plane1Texture, hasAlpha);
         if (hasAlpha) {
             // Perform operations for the UV plane.
-            PerformPlaneOperations(kYUVAAlphaPlaneIndex, destVideoWGPUTexture, plane2Texture,
-                                   hasAlpha);
+            PerformPlaneOperations(kYUVAAlphaPlaneIndex, destVideoWGPUTexture, depthTexture,
+                                   plane2Texture, hasAlpha);
         }
 
         mBackend->DestroyVideoTextureForTest(std::move(destVideoTexture));
