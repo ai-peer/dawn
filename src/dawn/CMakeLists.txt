@@ -90,15 +90,8 @@ install_if_enabled(dawncpp_headers)
 # Dawn C++ wrapper
 ###############################################################################
 
-DawnJSONGenerator(
-    TARGET "cpp"
-    PRINT_NAME "Dawn C++ wrapper"
-    RESULT_VARIABLE "DAWNCPP_GEN_SOURCES"
-)
-
 add_library(dawncpp)
 common_compile_options(dawncpp)
-target_sources(dawncpp PRIVATE ${DAWNCPP_GEN_SOURCES})
 target_link_libraries(dawncpp PUBLIC dawncpp_headers)
 install_if_enabled(dawncpp)
 
