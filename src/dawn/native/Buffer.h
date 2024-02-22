@@ -39,6 +39,7 @@
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/SharedBufferMemory.h"
 #include "dawn/native/UsageValidationMode.h"
 
 #include "dawn/native/dawn_platform.h"
@@ -101,6 +102,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void MarkUsedInPendingCommands();
+    void SetHasAccess(bool hasAccess);
 
     virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
@@ -137,6 +139,9 @@ class BufferBase : public ApiObjectBase {
     uint64_t mAllocatedSize = 0;
 
     ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
+
+    // The shared buffer memory state the buffer was created from. May be null.
+    Ref<SharedBufferMemoryContents> mSharedBufferMemoryContents;
 
   private:
     std::function<void()> PrepareMappingCallback(MapRequestID mapID,
@@ -181,6 +186,8 @@ class BufferBase : public ApiObjectBase {
     struct MapAsyncEvent;
     FutureID mPendingMapFutureID = kNullFutureID;
     Ref<MapAsyncEvent> mPendingMapEvent;
+
+    bool mSharedMemoryHasAccess = false;
 };
 
 }  // namespace dawn::native
