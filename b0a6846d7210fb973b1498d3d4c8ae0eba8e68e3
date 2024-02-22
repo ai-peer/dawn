@@ -16,6 +16,23 @@
       "message": "This fixes the tests failing in the CTS under webgpu:api,operation,vertex_state,index_format:primitive_restart:*",
       "revId": "b0a6846d7210fb973b1498d3d4c8ae0eba8e68e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4008650c_fd1f304e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-02-22T16:25:56Z",
+      "side": 1,
+      "message": "LGTM, but you may have found an ANGLE bug. Feel free to disable those end2end tests with IsANGLED3D11().",
+      "revId": "b0a6846d7210fb973b1498d3d4c8ae0eba8e68e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
