@@ -32,10 +32,12 @@
 #include "absl/container/flat_hash_set.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/d3d/KeyedMutex.h"
 #include "dawn/native/d3d12/BufferD3D12.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
+
 class CommandAllocatorManager;
 class Device;
 class Heap;
@@ -59,16 +61,21 @@ class CommandRecordingContext {
 
     void AddToTempBuffers(Ref<Buffer> tempBuffer);
 
+    MaybeError AcquireKeyedMutex(Ref<d3d::KeyedMutex> keyedMutex);
+
   private:
+    void ReleaseKeyedMutexes();
+
     ComPtr<ID3D12GraphicsCommandList> mD3d12CommandList;
     ComPtr<ID3D12GraphicsCommandList4> mD3d12CommandList4;
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
     absl::flat_hash_set<Texture*> mSharedTextures;
+    absl::flat_hash_set<Ref<d3d::KeyedMutex>> mAcquiredKeyedMutexes;
     std::vector<Heap*> mHeapsPendingUsage;
-
     std::vector<Ref<Buffer>> mTempBuffers;
 };
+
 }  // namespace dawn::native::d3d12
 
 #endif  // SRC_DAWN_NATIVE_D3D12_COMMANDRECORDINGCONTEXT_H_
