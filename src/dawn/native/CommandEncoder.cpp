@@ -134,30 +134,61 @@ class RenderPassValidationState final : public NonMovable {
             implicitPrefixStr = "implicit ";
         }
 
-        Extent3D attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+        Extent3D renderSize = attachment->GetSingleSubresourceVirtualSize();
+        Extent3D attachmentValidationSize = attachment->GetTexture()->GetBaseSize();
 
-        if (HasAttachment()) {
-            DAWN_INVALID_IF(attachmentSize.width != mWidth || attachmentSize.height != mHeight,
+        if (attachmentType == AttachmentType::DepthStencilAttachment) {
+            // render size. D3D requires depth buffer size mush be equal to the color attachment
+            // texture's base size (plane 0). Vulkan, Metal and GL requires buffer size equal or
+            // bigger than render size. To make dawn works with all backends, dawn requires
+            // depth attachment's size equal to the the color attachment texture's base size.
+            DAWN_INVALID_IF(attachmentValidationSize.width != mAttachmentValidationWidth ||
+                                attachmentValidationSize.height != mAttachmentValidationHeight,
                             "The %s %s size (width: %u, height: %u) does not match the size of the "
                             "other attachments (width: %u, height: %u).",
-                            attachmentTypeStr, attachment, attachmentSize.width,
-                            attachmentSize.height, mWidth, mHeight);
+                            attachmentTypeStr, attachment, attachmentValidationSize.width,
+                            attachmentValidationSize.height, mAttachmentValidationWidth,
+                            mAttachmentValidationHeight);
 
             // Skip the sampleCount validation for resolve target
-            DAWN_INVALID_IF(attachmentType != AttachmentType::ResolveTarget &&
-                                attachment->GetTexture()->GetSampleCount() != mSampleCount,
+            DAWN_INVALID_IF(attachment->GetTexture()->GetSampleCount() != mSampleCount,
                             "The %s %s %ssample count (%u) does not match the sample count of the "
                             "other attachments (%u).",
                             attachmentTypeStr, attachment, implicitPrefixStr,
                             attachment->GetTexture()->GetSampleCount(), mSampleCount);
         } else {
-            mWidth = attachmentSize.width;
-            mHeight = attachmentSize.height;
-            mSampleCount = mImplicitSampleCount > 1 ? mImplicitSampleCount
-                                                    : attachment->GetTexture()->GetSampleCount();
-            DAWN_ASSERT(mWidth != 0);
-            DAWN_ASSERT(mHeight != 0);
-            DAWN_ASSERT(mSampleCount != 0);
+            if (HasAttachment()) {
+                DAWN_INVALID_IF(
+                    attachmentValidationSize.width != mAttachmentValidationWidth ||
+                        attachmentValidationSize.height != mAttachmentValidationHeight,
+                    "The %s %s size (width: %u, height: %u) does not match the size of the "
+                    "other attachments (width: %u, height: %u).",
+                    attachmentTypeStr, attachment, attachmentValidationSize.width,
+                    attachmentValidationSize.height, mAttachmentValidationWidth,
+                    mAttachmentValidationHeight);
+
+                // Skip the sampleCount validation for resolve target
+                DAWN_INVALID_IF(
+                    attachmentType != AttachmentType::ResolveTarget &&
+                        attachment->GetTexture()->GetSampleCount() != mSampleCount,
+                    "The %s %s %ssample count (%u) does not match the sample count of the "
+                    "other attachments (%u).",
+                    attachmentTypeStr, attachment, implicitPrefixStr,
+                    attachment->GetTexture()->GetSampleCount(), mSampleCount);
+            } else {
+                mRenderWidth = renderSize.width;
+                mRenderHeight = renderSize.height;
+                mAttachmentValidationWidth = attachmentValidationSize.width;
+                mAttachmentValidationHeight = attachmentValidationSize.height;
+                mSampleCount = mImplicitSampleCount > 1
+                                   ? mImplicitSampleCount
+                                   : attachment->GetTexture()->GetSampleCount();
+                DAWN_ASSERT(mRenderWidth != 0);
+                DAWN_ASSERT(mRenderHeight != 0);
+                DAWN_ASSERT(mAttachmentValidationWidth != 0);
+                DAWN_ASSERT(mAttachmentValidationHeight != 0);
+                DAWN_ASSERT(mSampleCount != 0);
+            }
         }
 
         RecordedAttachment record;
@@ -186,13 +217,13 @@ class RenderPassValidationState final : public NonMovable {
     bool HasAttachment() const { return mRecords->size() != 0; }
 
     bool IsValidState() const {
-        return ((mWidth > 0) && (mHeight > 0) && (mSampleCount > 0) &&
+        return ((mRenderWidth > 0) && (mRenderHeight > 0) && (mSampleCount > 0) &&
                 (mImplicitSampleCount == 0 || mImplicitSampleCount == mSampleCount));
     }
 
-    uint32_t GetWidth() const { return mWidth; }
+    uint32_t GetRenderWidth() const { return mRenderWidth; }
 
-    uint32_t GetHeight() const { return mHeight; }
+    uint32_t GetRenderHeight() const { return mRenderHeight; }
 
     uint32_t GetSampleCount() const { return mSampleCount; }
 
@@ -204,11 +235,14 @@ class RenderPassValidationState final : public NonMovable {
 
   private:
     // The attachment's width, height and sample count.
-    uint32_t mWidth = 0;
-    uint32_t mHeight = 0;
+    uint32_t mRenderWidth = 0;
+    uint32_t mRenderHeight = 0;
     uint32_t mSampleCount = 0;
     // The implicit multisample count used by MSAA render to single sampled.
     uint32_t mImplicitSampleCount = 0;
+
+    uint32_t mAttachmentValidationWidth = 0;
+    uint32_t mAttachmentValidationHeight = 0;
 
     // The records of the attachments that were validated in render pass.
     StackVector<RecordedAttachment, kMaxColorAttachments> mRecords;
@@ -1238,8 +1272,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 }
             }
 
-            cmd->width = validationState.GetWidth();
-            cmd->height = validationState.GetHeight();
+            cmd->width = validationState.GetRenderWidth();
+            cmd->height = validationState.GetRenderHeight();
 
             cmd->occlusionQuerySet = descriptor->occlusionQuerySet;
 
@@ -1293,8 +1327,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     if (success) {
         Ref<RenderPassEncoder> passEncoder = RenderPassEncoder::Create(
             device, descriptor, this, &mEncodingContext, std::move(usageTracker),
-            std::move(attachmentState), validationState.GetWidth(), validationState.GetHeight(),
-            depthReadOnly, stencilReadOnly, passEndCallback);
+            std::move(attachmentState), validationState.GetRenderWidth(),
+            validationState.GetRenderHeight(), depthReadOnly, stencilReadOnly, passEndCallback);
 
         mEncodingContext.EnterPass(passEncoder.Get());
 
