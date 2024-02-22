@@ -50,6 +50,24 @@
       "message": "so overall, this is probably the right thing to do. as in, CheckHRESULT should be checking for S_OK, and any other error codes you want to consider as fine should be handled explicitly.\n\nBut I\u0027m wary that this change might impact error handling all over Dawn, so it\u0027s a bit risky. How about you explicitly handle WAIT_ABANDONED / WAIT_TIMEOUT when we AcquireKeyedMutex, and then have the CheckHRESULT as a separate change. If there\u0027s unintended fallout, it\u0027ll be easy to revert just this bit.",
       "revId": "4b3e8d86d663c109b7f581d4d97899a4a98fda47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061ee1bc_4da54919",
+        "filename": "src/dawn/native/d3d/D3DError.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-02-22T22:17:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9c3491e_665fe976",
+      "revId": "4b3e8d86d663c109b7f581d4d97899a4a98fda47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
