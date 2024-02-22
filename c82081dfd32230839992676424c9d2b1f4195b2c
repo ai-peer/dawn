@@ -16,6 +16,91 @@
       "message": "Add more Surface tests",
       "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2daaf44b_9e28b7bb",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "No need to check for this, the device is not optional in that structure so it is an error from the application to leave it null.",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fdfc646_0f6843cd",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "Why do we get the size and do nothing with it?",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d213a40_8e4fedb7",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "nit: leftover debug.",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e9d461d_1d2ae3a9",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "`git cl format` :)",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5dd16e7_7aed9ba7",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "Other things to test:\n - View formats being compatible or not with the format.\n - The usage with / without the SurfaceCapabilities extension (with trying a usage that\u0027s not allowed, if there\u0027s one).\n - Present mode, alpha mode not supported, if there is one.\n - Width, height 0, or above the max.\n \n We could have a TODO and do it in a follow-up.",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

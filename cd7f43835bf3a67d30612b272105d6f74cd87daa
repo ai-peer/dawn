@@ -86,6 +86,58 @@
       "message": "Added a SwapChainCache in vulkan backend to recycle SwapChains that are going to be destroyed.",
       "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b054f9_ea72f0be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "Sorry I finally got around to this. Isn\u0027t Vulkan\u0027s oldSwapchain in the VkSwapChainCreateInfoKHR structure supposed to avoid this issue?",
+      "parentUuid": "37bdfe07_2239f56a",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15cb6672_c7793cc0",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "Why was this needed? It seems like another build fix that could be separated.",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f43bab44_2bcd867a",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T17:50:08Z",
+      "side": 1,
+      "message": "Can this be separated? It seems to be a build fix (for some obscure MSVC reason?) that\u0027s totally unrelated to swapchains.",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
