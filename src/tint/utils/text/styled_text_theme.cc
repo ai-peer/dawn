@@ -107,6 +107,13 @@ const StyledTextTheme StyledTextTheme::kDefault{
         /* bold */ std::nullopt,
         /* underlined */ std::nullopt,
     },
+    /* kind_attribute */
+    StyledTextTheme::Attributes{
+        /* foreground */ Color{156, 220, 254},
+        /* background */ std::nullopt,
+        /* bold */ std::nullopt,
+        /* underlined */ std::nullopt,
+    },
     /* kind_squiggle */
     StyledTextTheme::Attributes{
         /* foreground */ Color{0, 200, 255},
@@ -161,6 +168,8 @@ StyledTextTheme::Attributes StyledTextTheme::Get(TextStyle text_style) const {
             apply(kind_enum);
         } else if (text_style.IsLiteral()) {
             apply(kind_literal);
+        } else if (text_style.IsAttribute()) {
+            apply(kind_attribute);
         }
     }
     if (text_style.IsSquiggle()) {
