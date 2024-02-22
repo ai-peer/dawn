@@ -1998,9 +1998,6 @@ TEST_P(VideoViewsExtendedUsagesTests, CreateTextureFailsWithViewFormats) {
 
 // Tests sampling a YUV multi-planar texture.
 TEST_P(VideoViewsExtendedUsagesTests, SamplingMultiPlanarYUVTexture) {
-    // TODO(crbug.com/dawn/1998): Failure on Intel's Vulkan device.
-    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
-
     auto texture = CreateMultiPlanarTexture(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
