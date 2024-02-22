@@ -149,52 +149,39 @@ class SystemEventAndReadyStateIterator {
 // have completion data of type QueueAndSerial.
 // Returns true if at least one future is ready. If no futures are ready or the wait
 // timed out, returns false.
-bool WaitQueueSerialsImpl(DeviceBase* device,
-                          QueueBase* queue,
-                          ExecutionSerial waitSerial,
-                          std::vector<TrackedFutureWaitInfo>::iterator begin,
-                          std::vector<TrackedFutureWaitInfo>::iterator end,
-                          Nanoseconds timeout) {
+ResultOrError<bool> WaitQueueSerialsImpl(DeviceBase* device,
+                                         QueueBase* queue,
+                                         ExecutionSerial waitSerial,
+                                         std::vector<TrackedFutureWaitInfo>::iterator begin,
+                                         std::vector<TrackedFutureWaitInfo>::iterator end,
+                                         Nanoseconds timeout) {
     bool success = false;
-    if (device->ConsumedError([&]() -> MaybeError {
-            if (waitSerial > queue->GetLastSubmittedCommandSerial()) {
-                // Serial has not been submitted yet. Submit it now.
-                // TODO(dawn:1413): This doesn't need to be a full tick. It just needs to
-                // flush work up to `waitSerial`. This should be done after the
-                // ExecutionQueue / ExecutionContext refactor.
-                auto guard = device->GetScopedLock();
-                queue->ForceEventualFlushOfCommands();
-                DAWN_TRY(device->Tick());
-            }
-            // Check the completed serial.
-            ExecutionSerial completedSerial = queue->GetCompletedCommandSerial();
-            if (completedSerial < waitSerial) {
-                if (timeout > Nanoseconds(0)) {
-                    // Wait on the serial if it hasn't passed yet.
-                    DAWN_TRY_ASSIGN(success, queue->WaitForQueueSerial(waitSerial, timeout));
-                }
-                // Update completed serials.
-                DAWN_TRY(queue->CheckPassedSerials());
-                completedSerial = queue->GetCompletedCommandSerial();
-            }
-            // Poll futures for completion.
-            for (auto it = begin; it != end; ++it) {
-                ExecutionSerial serial =
-                    std::get<QueueAndSerial>(it->event->GetCompletionData()).completionSerial;
-                if (serial <= completedSerial) {
-                    success = true;
-                    it->ready = true;
-                }
-            }
-            return {};
-        }())) {
-        // There was an error. Pending submit may have failed or waiting for fences
-        // may have lost the device. The device is lost inside ConsumedError.
-        // Mark all futures as ready.
-        for (auto it = begin; it != end; ++it) {
+    if (waitSerial > queue->GetLastSubmittedCommandSerial()) {
+        // Serial has not been submitted yet. Submit it now.
+        auto guard = device->GetScopedLock();
+        DAWN_TRY(queue->EnsureCommandsFlushed(waitSerial));
+        DAWN_ASSERT(waitSerial <= queue->GetLastSubmittedCommandSerial());
+    }
+    // Check the completed serial.
+    ExecutionSerial completedSerial = queue->GetCompletedCommandSerial();
+    if (completedSerial < waitSerial) {
+        auto guard = device->GetScopedLock();
+        if (timeout > Nanoseconds(0)) {
+            // Wait on the serial if it hasn't passed yet.
+            DAWN_TRY_ASSIGN(success, queue->WaitForQueueSerial(waitSerial, timeout));
+        }
+        // Update completed serials.
+        DAWN_TRY(queue->CheckPassedSerials());
+        completedSerial = queue->GetCompletedCommandSerial();
+    }
+    // Poll futures for completion.
+    for (auto it = begin; it != end; ++it) {
+        ExecutionSerial serial =
+            std::get<QueueAndSerial>(it->event->GetCompletionData()).completionSerial;
+        if (serial <= completedSerial) {
+            success = true;
             it->ready = true;
         }
-        success = true;
     }
     return success;
 }
@@ -254,8 +241,24 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
 
         bool success;
         if (waitDevice) {
-            success = WaitQueueSerialsImpl(waitDevice, std::get<QueueAndSerial>(first).queue.Get(),
-                                           lowestWaitSerial, begin, mid, timeout);
+            auto result =
+                WaitQueueSerialsImpl(waitDevice, std::get<QueueAndSerial>(first).queue.Get(),
+                                     lowestWaitSerial, begin, mid, timeout);
+            if (result.IsError()) {
+                // There was an error. Pending submit may have failed or waiting for fences
+                // may have lost the device. The device is lost inside ConsumedError.
+                // Mark all futures as ready.
+                success = true;
+                for (auto it = begin; it != mid; ++it) {
+                    it->ready = true;
+                }
+                auto guard = waitDevice->GetScopedLock();
+                DAWN_UNUSED(waitDevice->ConsumedError(result.AcquireError(),
+                                                      "waiting on %d futures with %s",
+                                                      std::distance(begin, mid), waitDevice));
+            } else {
+                success = result.AcquireSuccess();
+            }
         } else {
             if (timeout > Nanoseconds(0)) {
                 success = WaitAnySystemEvent(SystemEventAndReadyStateIterator{begin},
