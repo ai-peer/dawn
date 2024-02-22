@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca536fe7_8ce8023b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T13:36:24Z",
+      "side": 1,
+      "message": "Can\u0027t we cache the BGLs as well for this reason, so we can do pointer comparison instead of LayoutEqual?",
+      "parentUuid": "cea59f3c_385f81c6",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a3793dbb_1257c2f5",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
