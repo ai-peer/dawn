@@ -47,7 +47,12 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
         mShader->Reference();
     }
 
-    ~CompilationInfoEvent() override { mShader->Release(); }
+    ~CompilationInfoEvent() override {
+        if (mShader) {
+            mShader->Release();
+            mShader = nullptr;
+        }
+    }
 
     EventType GetType() override { return kType; }
 
@@ -92,6 +97,10 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
         }
         if (mCallback) {
             mCallback(mStatus, mCompilationInfo, mUserdata);
+        }
+        if (mShader) {
+            mShader->Release();
+            mShader = nullptr;
         }
     }
 
