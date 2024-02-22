@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0a9dcb_34954376",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T14:33:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16d9ce18_55aec2a7",
@@ -44,6 +61,23 @@
         "endLine": 1163,
         "endChar": 5
       },
+      "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35d375b_0eb9bbfd",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests_apple.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-22T14:33:33Z",
+      "side": 1,
+      "message": "unit: we could use MutexGuard since it is just for this member.",
       "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
