@@ -25,38 +25,50 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_
-#define SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_
+#include <gtest/gtest.h>
+#include <vector>
+#include "dawn/tests/DawnTest.h"
+#include "dawn/utils/WGPUHelpers.h"
 
-#include "dawn/native/D3D12Backend.h"
-#include "dawn/native/Error.h"
-#include "dawn/native/SharedBufferMemory.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+using ::testing::HasSubstr;
 
-namespace dawn::native::d3d12 {
-class Device;
+namespace dawn {
 
-class SharedBufferMemory final : public SharedBufferMemoryBase {
-  public:
-    static ResultOrError<Ref<SharedBufferMemory>> Create(
-        Device* device,
-        const char* label,
-        const SharedBufferMemoryD3D12ResourceDescriptor* descriptor);
-
-    ID3D12Resource* GetD3DResource() const;
-
-  private:
-    SharedBufferMemory(Device* device,
-                       const char* label,
-                       SharedBufferMemoryProperties properties,
-                       ComPtr<ID3D12Resource> resource);
-
-    ResultOrError<Ref<BufferBase>> CreateBufferImpl(
-        const UnpackedPtr<BufferDescriptor>& descriptor) override;
-
-    ComPtr<ID3D12Resource> mResource;
+class SharedBufferMemoryTests : public DawnTest {
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        return {wgpu::FeatureName::SharedBufferMemoryD3D12Resource};
+    }
 };
 
-}  // namespace dawn::native::d3d12
+// Test that it is an error to import shared buffer memory when the device is destroyed
+TEST_P(SharedBufferMemoryTests, ImportSharedBufferMemoryNoChain) {
+    wgpu::SharedBufferMemoryDescriptor desc;
+    ASSERT_DEVICE_ERROR_MSG(
+        wgpu::SharedBufferMemory memory = device.ImportSharedBufferMemory(&desc),
+        HasSubstr("chain"));
+}
 
-#endif  // SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_
+// Test that it is an error importing shared buffer memory when the device is destroyed
+TEST_P(SharedBufferMemoryTests, ImportSharedBufferMemoryDeviceDestroy) {
+    device.Destroy();
+
+    wgpu::SharedBufferMemoryDescriptor desc;
+    ASSERT_DEVICE_ERROR_MSG(
+        wgpu::SharedBufferMemory memory = device.ImportSharedBufferMemory(&desc),
+        HasSubstr("lost"));
+}
+
+TEST_P(SharedBufferMemoryTests, GetPropertiesErrorMemory) {
+    wgpu::SharedBufferMemoryDescriptor desc;
+    ASSERT_DEVICE_ERROR(wgpu::SharedBufferMemory memory = device.ImportSharedBufferMemory(&desc));
+
+    wgpu::SharedBufferMemoryProperties properties;
+    memory.GetProperties(&properties);
+
+    EXPECT_EQ(properties.usage, wgpu::BufferUsage::None);
+    EXPECT_EQ(properties.size, 0u);
+}
+
+DAWN_INSTANTIATE_TEST(SharedBufferMemoryTests, D3D12Backend());
+
+}  // namespace dawn
