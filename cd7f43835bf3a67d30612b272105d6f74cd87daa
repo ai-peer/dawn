@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa4220f_4c1d68c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-22T17:54:06Z",
+      "side": 1,
+      "message": "IIUC, the problem was for unconfigure, followed by configure. In this case, the old swap chain is already in the deletion queue, and when doing configure, it\u0027s necessary to  make sure it\u0027s not deleted yet before passing it as the old swapchain.",
+      "parentUuid": "60b054f9_ea72f0be",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15cb6672_c7793cc0",
