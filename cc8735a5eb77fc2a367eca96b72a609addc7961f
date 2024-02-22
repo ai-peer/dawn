@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5f6f4ac_cafa0ff8",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-22T20:10:18Z",
+      "side": 1,
+      "message": "good point\nI think we can avoid tracking the events in the event manager if they are spontaneous and already completed. This will fix the problem for our spontaneous already-completed events (legacy get compilation info is where I saw this).\n\nFor other kinds of spontaneous events, I think we still have the problem since they\u0027ll get spontaneously after being enqueued into the list. And, if the application doesn\u0027t WaitAny the future or ProcessEvents, it\u0027ll never be removed from the list.\n\nThat said, we don\u0027t support that kind of spontaneous event right now in native (and not possible in wire), so I think we can fix that part of the problem later.\n\nin short - I\u0027ll try to just not track events at all if spontaneous already complete. and I think it should be sufficient for now",
+      "parentUuid": "818e6b10_a5240ebd",
+      "range": {
+        "startLine": 1428,
+        "startChar": 12,
+        "endLine": 1428,
+        "endChar": 36
+      },
+      "revId": "cc8735a5eb77fc2a367eca96b72a609addc7961f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "771f2467_d304e358",
         "filename": "src/dawn/wire/client/ShaderModule.cpp",
         "patchSetId": 4
