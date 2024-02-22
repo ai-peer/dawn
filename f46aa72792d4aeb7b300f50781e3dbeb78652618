@@ -99,6 +99,24 @@
       "parentUuid": "f74bfa11_2d598895",
       "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efeb31ff_c33aad62",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-22T01:20:20Z",
+      "side": 1,
+      "message": "Ah.. ok I see the issue now... Because we are passing these structs instead of the raw callbacks in the newer APIs, we need to do some massaging of the generated code... i.e. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;l\u003d913?q\u003dhas_callback_arguments\u0026ss\u003dchromium%2Fchromium%2Fsrc probably needs to be changed.\n\nTo unblock you, lets go ahead and just implement both the older API and the newer one! I will follow up with some infra changes and make sure that this can work separately. You can additionally add the `\"tags\": [\"deprecated\"]` on the old function signature as well to indicate that users shouldn\u0027t use it. Sorry about that!",
+      "parentUuid": "e18e9a41_326d5d1b",
+      "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
