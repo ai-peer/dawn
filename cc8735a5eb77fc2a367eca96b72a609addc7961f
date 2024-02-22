@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818e6b10_a5240ebd",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1428,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-22T19:50:04Z",
+      "side": 1,
+      "message": "Hmm, I assume that this is due to the fact that `CompleteIfSpontaneous` doesn\u0027t remove the event from the list of tracked events in the `EventManager`... Would it be possible to fix that instead? That would be a safer approach in the future to make sure things are cleaned up asap.",
+      "range": {
+        "startLine": 1428,
+        "startChar": 12,
+        "endLine": 1428,
+        "endChar": 36
+      },
+      "revId": "cc8735a5eb77fc2a367eca96b72a609addc7961f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771f2467_d304e358",
+        "filename": "src/dawn/wire/client/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-22T19:50:04Z",
+      "side": 1,
+      "message": "Whats wrong with keeping this one in the dtor? In almost all cases, these events should be destroyed after they are completed.",
+      "range": {
+        "startLine": 102,
+        "startChar": 8,
+        "endLine": 105,
+        "endChar": 9
+      },
+      "revId": "cc8735a5eb77fc2a367eca96b72a609addc7961f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
