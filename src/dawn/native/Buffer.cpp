@@ -489,6 +489,10 @@ MaybeError BufferBase::MapAtCreationInternal() {
 MaybeError BufferBase::ValidateCanUseOnQueueNow() const {
     DAWN_ASSERT(!IsError());
 
+    if (mSharedBufferMemoryContents != nullptr && !mSharedMemoryHasAccess) {
+        return DAWN_VALIDATION_ERROR("%s used in submit without shared memory access.", this);
+    }
+
     switch (mState) {
         case BufferState::Destroyed:
             return DAWN_VALIDATION_ERROR("%s used in submit while destroyed.", this);
@@ -863,6 +867,10 @@ void BufferBase::MarkUsedInPendingCommands() {
     ExecutionSerial serial = GetDevice()->GetQueue()->GetPendingCommandSerial();
     DAWN_ASSERT(serial >= mLastUsageSerial);
     mLastUsageSerial = serial;
+}
+
+void BufferBase::SetHasAccess(bool hasAccess) {
+    mSharedMemoryHasAccess = hasAccess;
 }
 
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
