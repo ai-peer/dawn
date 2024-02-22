@@ -1069,11 +1069,6 @@ class MultiGeneratorFromDawnJSON(Generator):
                            'src/dawn/wire/webgpu_dawn_wire_proc.cpp',
                            [RENDER_PARAMS_BASE, params_dawn_wire]))
 
-        if 'cpp' in targets:
-            renders.append(
-                FileRender('api_cpp.cpp', 'src/dawn/' + api + '_cpp.cpp',
-                           [RENDER_PARAMS_BASE, params_dawn]))
-
         if 'webgpu_headers' in targets:
             params_upstream = parse_json(loaded_json,
                                          enabled_tags=['upstream', 'native'],
@@ -1101,11 +1096,6 @@ class MultiGeneratorFromDawnJSON(Generator):
                     'api_cpp_chained_struct.h',
                     'emscripten-bits/system/include/webgpu/webgpu_cpp_chained_struct.h',
                     [RENDER_PARAMS_BASE, params_emscripten]))
-            # system/lib/webgpu
-            renders.append(
-                FileRender('api_cpp.cpp',
-                           'emscripten-bits/system/lib/webgpu/webgpu_cpp.cpp',
-                           [RENDER_PARAMS_BASE, params_emscripten]))
             # Snippets to paste into existing Emscripten files
             renders.append(
                 FileRender('api_struct_info.json',
