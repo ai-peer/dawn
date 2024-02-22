@@ -90,6 +90,8 @@ struct StyledTextTheme {
     Attributes kind_enum;
     /// The theme's attributes for a literal token. This is applied on top #kind_code.
     Attributes kind_literal;
+    /// The theme's attributes for a attribute token. This is applied on top #kind_code.
+    Attributes kind_attribute;
 
     /// The theme's attributes for a squiggle-highlight.
     Attributes kind_squiggle;
