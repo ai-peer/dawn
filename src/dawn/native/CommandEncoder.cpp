@@ -135,13 +135,20 @@ class RenderPassValidationState final : public NonMovable {
         }
 
         Extent3D attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+        Extent3D textureSize = attachment->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
+            attachment->GetBaseMipLevel(), Aspect::Color);
 
         if (HasAttachment()) {
-            DAWN_INVALID_IF(attachmentSize.width != mWidth || attachmentSize.height != mHeight,
+            // Validate depth attachment's size against the first texture plane size.
+            uint32_t width =
+                attachmentType != AttachmentType::DepthStencilAttachment ? mWidth : mTextureWidth;
+            uint32_t height =
+                attachmentType != AttachmentType::DepthStencilAttachment ? mHeight : mTextureHeight;
+            DAWN_INVALID_IF(attachmentSize.width != width || attachmentSize.height != height,
                             "The %s %s size (width: %u, height: %u) does not match the size of the "
                             "other attachments (width: %u, height: %u).",
                             attachmentTypeStr, attachment, attachmentSize.width,
-                            attachmentSize.height, mWidth, mHeight);
+                            attachmentSize.height, width, height);
 
             // Skip the sampleCount validation for resolve target
             DAWN_INVALID_IF(attachmentType != AttachmentType::ResolveTarget &&
@@ -153,10 +160,14 @@ class RenderPassValidationState final : public NonMovable {
         } else {
             mWidth = attachmentSize.width;
             mHeight = attachmentSize.height;
+            mTextureWidth = textureSize.width;
+            mTextureHeight = textureSize.height;
             mSampleCount = mImplicitSampleCount > 1 ? mImplicitSampleCount
                                                     : attachment->GetTexture()->GetSampleCount();
             DAWN_ASSERT(mWidth != 0);
             DAWN_ASSERT(mHeight != 0);
+            DAWN_ASSERT(mTextureWidth != 0);
+            DAWN_ASSERT(mTextureHeight != 0);
             DAWN_ASSERT(mSampleCount != 0);
         }
 
@@ -206,6 +217,8 @@ class RenderPassValidationState final : public NonMovable {
     // The attachment's width, height and sample count.
     uint32_t mWidth = 0;
     uint32_t mHeight = 0;
+    uint32_t mTextureWidth = 0;
+    uint32_t mTextureHeight = 0;
     uint32_t mSampleCount = 0;
     // The implicit multisample count used by MSAA render to single sampled.
     uint32_t mImplicitSampleCount = 0;
