@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "218b2937_ec938edc",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-22T00:39:01Z",
+      "side": 1,
+      "message": "To clarify a bit:\n\nFor (2), what I was referring to were cases where we have different pipelines with the same explicit layout. We do not cache `BGL`s, only `BGLInternal`s, so the two `BGL`s will actually be different pointers, so frontend pointer inequality in this case does not necessarily imply incompatibility.\n\nWe also cannot just check pointer equality of the `BGLInternal`s because of (1) where although we don\u0027t cache `PipelineLayout`s, we do reuse `BGLInternal`s in each newly created `PipelineLayout` which would result in pointer equality if we didn\u0027t consider the PCT. \n\nThose two cases make it necessary to check both the PCT and the `BGLInternal` pointer equality to determine compatibility.",
+      "parentUuid": "cc29c4f6_befb4054",
+      "revId": "5fac462290c0562d086904d23276b6d3a5bc9148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3793dbb_1257c2f5",
