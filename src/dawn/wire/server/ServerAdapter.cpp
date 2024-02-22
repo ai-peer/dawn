@@ -57,6 +57,11 @@ WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
     desc.deviceLostCallbackInfo.callback = ForwardToServer<&Server::OnDeviceLost>;
     desc.deviceLostCallbackInfo.userdata = deviceLostUserdata.release();
 
+    // TODO(dawn:2021) Remove this additional call to SetDeviceLostCallback once the generated mock
+    // functions are updated.
+    mProcs.deviceSetDeviceLostCallback(device->handle, desc.deviceLostCallbackInfo.callback,
+                                       desc.deviceLostCallbackInfo.userdata);
+
     mProcs.adapterRequestDevice(adapter->handle, &desc,
                                 ForwardToServer<&Server::OnRequestDeviceCallback>,
                                 userdata.release());

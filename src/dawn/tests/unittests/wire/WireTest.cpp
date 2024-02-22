@@ -35,6 +35,7 @@
 
 using testing::_;
 using testing::AnyNumber;
+using testing::AtMost;
 using testing::Exactly;
 using testing::Invoke;
 using testing::Mock;
@@ -130,6 +131,11 @@ void WireTest::SetUp() {
     // Create the device for testing.
     apiDevice = api.GetNewDevice();
     WGPUDeviceDescriptor deviceDesc = {};
+    deviceDesc.deviceLostCallbackInfo.callback = deviceLostCallback.Callback();
+    deviceDesc.deviceLostCallbackInfo.userdata = deviceLostCallback.MakeUserdata(this);
+    EXPECT_CALL(deviceLostCallback, Call).Times(AtMost(1));
+    deviceDesc.uncapturedErrorCallback = uncapturedErrorCallback.Callback();
+    deviceDesc.uncapturedErrorUserdata = uncapturedErrorCallback.MakeUserdata(this);
     MockCallback<WGPURequestDeviceCallback> deviceCb;
     wgpuAdapterRequestDevice(adapter.Get(), &deviceDesc, deviceCb.Callback(),
                              deviceCb.MakeUserdata(this));
