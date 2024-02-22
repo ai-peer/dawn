@@ -1424,6 +1424,7 @@ Future ShaderModuleBase::APIGetCompilationInfoF(const CompilationInfoCallbackInf
             if (mCallback) {
                 mCallback(status, compilationInfo, mUserdata);
             }
+            mShaderModule = nullptr;
         }
     };
     FutureID futureID = GetDevice()->GetInstance()->GetEventManager()->TrackEvent(
