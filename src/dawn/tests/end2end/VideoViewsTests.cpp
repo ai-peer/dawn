@@ -1415,7 +1415,7 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
     // textures don't support copy operations yet, the test renders from the luma/chroma texture
     // views into another R/RG textures which are then compared with for rendered data.
     template <typename T>
-    void RenderToMultiplanarVideoTexture() {
+    void RenderToMultiplanarVideoTexture(bool hasDepth) {
         // Create plane texture initialized with data.
         auto CreatePlaneTexWithData = [this](int planeIndex, bool hasAlpha) -> wgpu::Texture {
             auto kSubsampleFactor = planeIndex == kYUVAChromaPlaneIndex ? 2 : 1;
@@ -1472,14 +1472,24 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         }
         auto destVideoWGPUTexture = destVideoTexture->wgpuTexture;
 
-        // Perform plane operations for texting by creating render passes and comparing textures.
-        auto PerformPlaneOperations = [this](int planeIndex, wgpu::Texture destVideoWGPUTexture,
-                                             wgpu::Texture planeTextureWithData, bool hasAlpha) {
-            auto kSubsampleFactor = planeIndex == kYUVAChromaPlaneIndex ? 2 : 1;
+        // Create a full size depth texture, and use it for render all planes.
+        wgpu::Texture depthTexture = hasDepth ? [this]() {
+            wgpu::Extent3D size = {kYUVAImageDataWidthInTexels, kYUVAImageDataHeightInTexels, 1};
+            wgpu::TextureDescriptor desc;
+            desc.size = size;
+            desc.format = wgpu::TextureFormat::Depth24PlusStencil8;
+            desc.usage = wgpu::TextureUsage::RenderAttachment;
+            return device.CreateTexture(&desc);
+        }()
+                                              : wgpu::Texture();
 
-            utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
-            renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
-            renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+        // Perform plane operations for texting by creating render passes and comparing textures.
+        auto PerformPlaneOperations = [this, destVideoWGPUTexture, hasDepth, depthTexture](
+                                          int planeIndex, wgpu::Texture planeTextureWithData,
+                                          bool hasAlpha) {
+            auto kSubsampleFactor = planeIndex == kYUVAChromaPlaneIndex ? 2 : 1;
+            auto vsModule = GetTestVertexShaderModule();
+            auto fsModule = utils::CreateShaderModule(device, R"(
                 @group(0) @binding(0) var sampler0 : sampler;
                 @group(0) @binding(1) var texture : texture_2d<f32>;
 
@@ -1487,11 +1497,6 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
                 fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
                     return textureSample(texture, sampler0, texCoord);
                 })");
-            renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
-            renderPipelineDescriptor.cTargets[0].format = GetPlaneFormat(planeIndex);
-            wgpu::RenderPipeline renderPipeline =
-                device.CreateRenderPipeline(&renderPipelineDescriptor);
-            wgpu::Sampler sampler = device.CreateSampler();
 
             // Create plane texture view from the multiplanar video texture.
             wgpu::TextureViewDescriptor planeViewDesc;
@@ -1499,21 +1504,45 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
             planeViewDesc.aspect = GetPlaneAspect(planeIndex);
             wgpu::TextureView planeTextureView = destVideoWGPUTexture.CreateView(&planeViewDesc);
 
-            // Render pass operations for reading the source data from planeTexture view into
-            // planeTextureView created from the multiplanar video texture.
-            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            utils::ComboRenderPassDescriptor renderPass({planeTextureView});
-            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
-            pass.SetPipeline(renderPipeline);
-            pass.SetBindGroup(
-                0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
-                                        {{0, sampler}, {1, planeTextureWithData.CreateView()}}));
-            pass.Draw(6);
-            pass.End();
+            wgpu::Sampler sampler = device.CreateSampler();
 
-            // Another render pass for reading the planeTextureView into a texture of the plane's
-            // format (i.e. R8/R16Unorm for Y and RG8/RG16Unorm for UV). This is needed as
-            // multiplanar textures do not support copy operations.
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            {
+                utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+                renderPipelineDescriptor.vertex.module = vsModule;
+                renderPipelineDescriptor.cFragment.module = fsModule;
+                renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+                renderPipelineDescriptor.cTargets[0].format = GetPlaneFormat(planeIndex);
+                if (hasDepth) {
+                    renderPipelineDescriptor.EnableDepthStencil(
+                        wgpu::TextureFormat::Depth24PlusStencil8);
+                }
+                wgpu::RenderPipeline renderPipeline =
+                    device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+                // Render pass operations for reading the source data from planeTexture view into
+                // planeTextureView created from the multiplanar video texture.
+                utils::ComboRenderPassDescriptor renderPass(
+                    {planeTextureView}, hasDepth ? depthTexture.CreateView() : wgpu::TextureView());
+                wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+                pass.SetPipeline(renderPipeline);
+                pass.SetBindGroup(0, utils::MakeBindGroup(
+                                         device, renderPipeline.GetBindGroupLayout(0),
+                                         {{0, sampler}, {1, planeTextureWithData.CreateView()}}));
+                pass.Draw(6);
+                pass.End();
+            }
+
+            utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+            renderPipelineDescriptor.vertex.module = vsModule;
+            renderPipelineDescriptor.cFragment.module = fsModule;
+            renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+            renderPipelineDescriptor.cTargets[0].format = GetPlaneFormat(planeIndex);
+            wgpu::RenderPipeline renderPipeline =
+                device.CreateRenderPipeline(&renderPipelineDescriptor);
+            // Another render pass for reading the planeTextureView into a texture of the
+            // plane's format (i.e. R8/R16Unorm for Y and RG8/RG16Unorm for UV). This is needed
+            // as multiplanar textures do not support copy operations.
             utils::BasicRenderPass basicRenderPass = utils::CreateBasicRenderPass(
                 device, kYUVAImageDataWidthInTexels / kSubsampleFactor,
                 kYUVAImageDataHeightInTexels / kSubsampleFactor, GetPlaneFormat(planeIndex));
@@ -1540,14 +1569,12 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         };
 
         // Perform operations for the Y plane.
-        PerformPlaneOperations(kYUVALumaPlaneIndex, destVideoWGPUTexture, plane0Texture, hasAlpha);
+        PerformPlaneOperations(kYUVALumaPlaneIndex, plane0Texture, hasAlpha);
         // Perform operations for the UV plane.
-        PerformPlaneOperations(kYUVAChromaPlaneIndex, destVideoWGPUTexture, plane1Texture,
-                               hasAlpha);
+        PerformPlaneOperations(kYUVAChromaPlaneIndex, plane1Texture, hasAlpha);
         if (hasAlpha) {
             // Perform operations for the UV plane.
-            PerformPlaneOperations(kYUVAAlphaPlaneIndex, destVideoWGPUTexture, plane2Texture,
-                                   hasAlpha);
+            PerformPlaneOperations(kYUVAAlphaPlaneIndex, plane2Texture, hasAlpha);
         }
 
         mBackend->DestroyVideoTextureForTest(std::move(destVideoTexture));
@@ -1766,9 +1793,20 @@ TEST_P(VideoViewsRenderTargetTests, RenderAttachmentSizeValidation) {
 TEST_P(VideoViewsRenderTargetTests, RenderToMultiplanarVideoTexture) {
     if (GetFormat() == wgpu::TextureFormat::R8BG8Biplanar420Unorm ||
         GetFormat() == wgpu::TextureFormat::R8BG8A8Triplanar420Unorm) {
-        RenderToMultiplanarVideoTexture<uint8_t>();
+        RenderToMultiplanarVideoTexture<uint8_t>(/*hasDepth=*/false);
     } else if (GetFormat() == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
-        RenderToMultiplanarVideoTexture<uint16_t>();
+        RenderToMultiplanarVideoTexture<uint16_t>(/*hasDepth=*/false);
+    } else {
+        DAWN_UNREACHABLE();
+    }
+}
+
+TEST_P(VideoViewsRenderTargetTests, RenderToMultiplanarVideoTextureWithDepth) {
+    if (GetFormat() == wgpu::TextureFormat::R8BG8Biplanar420Unorm ||
+        GetFormat() == wgpu::TextureFormat::R8BG8A8Triplanar420Unorm) {
+        RenderToMultiplanarVideoTexture<uint8_t>(/*hasDepth=*/true);
+    } else if (GetFormat() == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
+        RenderToMultiplanarVideoTexture<uint16_t>(/*hasDepth=*/true);
     } else {
         DAWN_UNREACHABLE();
     }
