@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c420f73_38949b06",
+        "filename": "src/tint/utils/text/styled_text.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7414a42d_a3525a3a",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "696c034f_316b7b20",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "```suggestion\n    /// repeat queues the character @p c to be written to the StyledText @p n times.\n```",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1933ed5d_8a8ecccc",
+        "filename": "src/tint/utils/text/styled_text.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "696c034f_316b7b20",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b61e2bf4_8b5d2d8f",
+        "filename": "src/tint/utils/text/styled_text.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c27343c_9683311b",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4261d76a_d57562fd",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "```suggestion\n    FILE* const file_;\n```",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea418838_5bed2a6a",
+        "filename": "src/tint/utils/text/styled_text_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4261d76a_d57562fd",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b587104_4461b926",
+        "filename": "src/tint/utils/text/styled_text_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s really worth it. Stuff will explode either way.",
+      "parentUuid": "eb41c3db_645f7a3e",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fe85807_cf554168",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "This seems like it would fit better in the `styled_text_printer_other.cc` file as this and the one in that file both deal with themes which plain doesn\u0027t",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "259126d3_26d35989",
+        "filename": "src/tint/utils/text/styled_text_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "`styled_text_printer_other.cc` is only compiled if:\n\n`// GEN_BUILD:CONDITION((!tint_build_is_linux) \u0026\u0026 (!tint_build_is_mac) \u0026\u0026 (!tint_build_is_win))`\n\nSo, common stuff can\u0027t go in there.",
+      "parentUuid": "9fe85807_cf554168",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0d9d900_c5f6526d",
+        "filename": "src/tint/utils/text/styled_text_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ffa924f_345e446d",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0d51630_55812a68",
@@ -133,6 +259,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "```suggestion\n    /// @returns a Printer the emits non-styled text\n```",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4880ea4_d113ba8f",
+        "filename": "src/tint/utils/text/styled_text_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0d51630_55812a68",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +298,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddd31a6a_8b11b2bc",
+        "filename": "src/tint/utils/text/styled_text_printer_ansi.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "No, the strings won\u0027t be merged as two separate variables.",
+      "parentUuid": "1deffe93_1a6b1d53",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d486820_1f5008c1",
@@ -171,6 +333,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "922aafaa_fe31cf57",
+        "filename": "src/tint/utils/text/styled_text_printer_other.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "For us, it doesn\u0027t. It\u0027s just a backup implementation for externals, if they\u0027re building on something... different.",
+      "parentUuid": "0d486820_1f5008c1",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "149da421_e7cccce5",
@@ -184,6 +364,30 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "Why store the bool in an optional instead of just setting the bool value?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d8fab2_c7b75428",
+        "filename": "src/tint/utils/text/styled_text_theme.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Because the `Attributes` are overlayed on one another. See the `This is applied on top #kind_code.` comments.",
+      "parentUuid": "149da421_e7cccce5",
       "range": {
         "startLine": 63,
         "startChar": 0,
@@ -213,6 +417,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36ec18ea_b66fc1d1",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "If we need to grow it to 32 bits, then we have N different places to update. I prefer having one definition for the bits.",
+      "parentUuid": "3ce1f085_254c4ef7",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5303b816_23a74277",
         "filename": "src/tint/utils/text/text_style.h",
         "patchSetId": 1
@@ -224,6 +446,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "What does it mean if I add a TextStyle with `kKindLiteral` to a style with `kKindEnum` ?",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430e69d6_45c33ebd",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Good question. Masked out the kind of the RHS. Added a comment.",
+      "parentUuid": "5303b816_23a74277",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -247,6 +487,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78659f01_72ce23c5",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Because it\u0027s a mix of bitset and enumerators. And yes, I\u0027m concerned about performance and memory. There\u0027s not much that needs to be recorded for a span (given that it all fits in a u16).",
+      "parentUuid": "55a84ce6_93ba5c1e",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97afc4fc_85307852",
         "filename": "src/tint/utils/text/text_style.h",
         "patchSetId": 1
@@ -258,6 +516,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "Unused?",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d491bdc9_68ad58fa",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97afc4fc_85307852",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -275,6 +551,24 @@
       "writtenOn": "2024-02-22T20:42:09Z",
       "side": 1,
       "message": "Unused?",
+      "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e0ff01_bf22e0fd",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-22T22:45:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c95be3d_d47cf916",
       "revId": "1b678ef9c5aa6ed75d030746f7d14c363ede999f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
