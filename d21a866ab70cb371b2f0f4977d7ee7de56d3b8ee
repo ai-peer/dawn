@@ -80,6 +80,24 @@
       "message": "unit: we could use MutexGuard since it is just for this member.",
       "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c52faa5_4f6a05c6",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests_apple.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-22T17:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35d375b_0eb9bbfd",
+      "revId": "d21a866ab70cb371b2f0f4977d7ee7de56d3b8ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
