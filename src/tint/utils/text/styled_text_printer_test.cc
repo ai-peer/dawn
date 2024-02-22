@@ -54,6 +54,7 @@ TEST_F(StyledTextPrinterTest, Themed) {
                                 << style::Function << "Function\n"
                                 << style::Enum << "Enum\n"
                                 << style::Literal << "Literal\n"
+                                << style::Attribute << "Attribute\n"
                                 << style::Squiggle << "Squiggle\n");
 }
 
