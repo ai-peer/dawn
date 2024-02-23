@@ -27,10 +27,8 @@
 
 // GEN_BUILD:CONDITION(tint_build_is_win)
 
-#include <cstring>
-
-#include "src/tint/utils/macros/defer.h"
-#include "src/tint/utils/text/styled_text_printer.h"
+#include "src/tint/utils/system/env.h"
+#include "src/tint/utils/system/terminal.h"
 
 #define WIN32_LEAN_AND_MEAN 1
 #include <Windows.h>
@@ -57,15 +55,36 @@ HANDLE ConsoleHandleFrom(FILE* file) {
 
 }  // namespace
 
-std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
-                                                             const StyledTextTheme& theme) {
+std::optional<bool> TerminalSupportsColors(FILE* out) {
+    if (!GetEnvVar("WT_SESSION").empty()) {
+        // Windows terminal does not support querying the palette
+        // See: https://github.com/microsoft/terminal/issues/10639
+        return std::nullopt;
+    }
+
     if (HANDLE handle = ConsoleHandleFrom(out); handle != INVALID_HANDLE_VALUE) {
-        SetConsoleOutputCP(CP_UTF8);
-        if (SetConsoleMode(handle, ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
-            return CreateANSI(out, theme);
+        if (HANDLE screen_buffer = CreateConsoleScreenBuffer(GENERIC_READ, FILE_SHARE_READ,
+                                                             /* lpSecurityAttributes */ nullptr,
+                                                             CONSOLE_TEXTMODE_BUFFER, nullptr)) {
+            TINT_DEFER(CloseHandle(screen_buffer));
+            CONSOLE_SCREEN_BUFFER_INFOEX info{};
+            info.cbSize = sizeof(info);
+            if (GetConsoleScreenBufferInfoEx(screen_buffer, &info)) {
+                COLORREF background = info.ColorTable[(info.wAttributes & 0xf0) >> 4];
+                float r = static_cast<float>((background >> 0) & 0xff) / 255.0f;
+                float g = static_cast<float>((background >> 8) & 0xff) / 255.0f;
+                float b = static_cast<float>((background >> 16) & 0xff) / 255.0f;
+                return (0.2126f * r + 0.7152f * g + 0.0722f * b) < 0.5f;
+            }
         }
     }
-    return CreatePlain(out);
+
+    // Unknown
+    return std::nullopt;
+}
+
+bool TerminalIsDark(FILE* out) {
+    return ConsoleHandleFrom(out) != INVALID_HANDLE_VALUE;
 }
 
 }  // namespace tint

@@ -27,45 +27,23 @@
 
 // GEN_BUILD:CONDITION(tint_build_is_win)
 
-#include <cstring>
+#include "src/tint/utils/system/env.h"
 
-#include "src/tint/utils/macros/defer.h"
-#include "src/tint/utils/text/styled_text_printer.h"
-
-#define WIN32_LEAN_AND_MEAN 1
-#include <Windows.h>
+#include <stdlib.h>
+#include <string_view>
 
 namespace tint {
-namespace {
 
-HANDLE ConsoleHandleFrom(FILE* file) {
-    HANDLE handle = INVALID_HANDLE_VALUE;
-    if (file == stdout) {
-        handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    } else if (file == stderr) {
-        handle = GetStdHandle(STD_ERROR_HANDLE);
-    } else {
-        return INVALID_HANDLE_VALUE;
+std::string GetEnvVar(std::string_view name) {
+    // Use _dupenv_s to avoid unsafe warnings about std::getenv
+    char* value = nullptr;
+    _dupenv_s(&value, nullptr, name.data());
+    if (value) {
+        std::string result = value;
+        free(value);
+        return result;
     }
-
-    CONSOLE_SCREEN_BUFFER_INFO info{};
-    if (GetConsoleScreenBufferInfo(handle, &info) == 0) {
-        return INVALID_HANDLE_VALUE;
-    }
-    return handle;
-}
-
-}  // namespace
-
-std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
-                                                             const StyledTextTheme& theme) {
-    if (HANDLE handle = ConsoleHandleFrom(out); handle != INVALID_HANDLE_VALUE) {
-        SetConsoleOutputCP(CP_UTF8);
-        if (SetConsoleMode(handle, ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
-            return CreateANSI(out, theme);
-        }
-    }
-    return CreatePlain(out);
+    return "";
 }
 
 }  // namespace tint
