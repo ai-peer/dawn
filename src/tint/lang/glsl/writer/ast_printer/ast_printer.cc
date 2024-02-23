@@ -272,8 +272,9 @@ bool ASTPrinter::Generate() {
             "GLSL", builder_.AST(), diagnostics_,
             Vector{
                 wgsl::Extension::kChromiumDisableUniformityAnalysis,
-                wgsl::Extension::kChromiumInternalDualSourceBlending,
                 wgsl::Extension::kChromiumExperimentalPushConstant,
+                wgsl::Extension::kChromiumInternalDualSourceBlending,
+                wgsl::Extension::kChromiumInternalGraphite,
                 wgsl::Extension::kF16,
             })) {
         return false;
@@ -2025,6 +2026,9 @@ void ASTPrinter::EmitHandleVariable(const ast::Var* var, const sem::Variable* se
                 break;
             case core::TexelFormat::kRgba32Float:
                 out << "rgba32f";
+                break;
+            case core::TexelFormat::kR8Unorm:
+                out << "r8";
                 break;
             case core::TexelFormat::kUndefined:
                 TINT_ICE() << "invalid texel format";
