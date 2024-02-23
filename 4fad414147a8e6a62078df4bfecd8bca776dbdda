@@ -22,6 +22,30 @@
       },
       "revId": "4fad414147a8e6a62078df4bfecd8bca776dbdda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5387996_dade690a",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 3317440
+      },
+      "writtenOn": "2024-02-23T23:51:43Z",
+      "side": 1,
+      "message": "I based it on the way angle does it:\nhttps://github.com/google/angle/blob/main/src/libANGLE/renderer/vulkan/RendererVk.cpp#L1826\n\nbut it makes no difference to me. I couldn\u0027t see any clear standards for this. So I\u0027m happy with whatever you guys want.",
+      "parentUuid": "5671277f_d92d696e",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 33
+      },
+      "revId": "4fad414147a8e6a62078df4bfecd8bca776dbdda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
