@@ -73,6 +73,8 @@ class EventManager final : NonMovable {
     class TrackedEvent;
     // Track a TrackedEvent and give it a FutureID.
     [[nodiscard]] FutureID TrackEvent(Ref<TrackedEvent>&&);
+    void SetFutureReady(FutureID futureID);
+
     // Returns true if future ProcessEvents is needed.
     bool ProcessPollEvents();
     [[nodiscard]] wgpu::WaitStatus WaitAny(size_t count,
@@ -145,8 +147,6 @@ class EventManager::TrackedEvent : public RefCounted {
 
   protected:
     void EnsureComplete(EventCompletionType);
-    void CompleteIfSpontaneous();
-
     virtual void Complete(EventCompletionType) = 0;
 
     wgpu::CallbackMode mCallbackMode;
