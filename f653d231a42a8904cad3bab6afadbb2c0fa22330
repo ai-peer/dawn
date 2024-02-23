@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c07cf8c3_794bc8d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-02-23T10:11:39Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\nThis CL try to fix the issue shown in https://bugs.chromium.org/p/tint/issues/detail?id\u003d1883#c10.",
+      "revId": "f653d231a42a8904cad3bab6afadbb2c0fa22330",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
