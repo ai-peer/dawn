@@ -275,6 +275,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99289117_670a475a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "Hmm sorry, looking at this and thinking about it a bit more... Would it be alright if we wait until next week to discuss this a little when Kai is back. I\u0027m actually a bit concerned about the lifetime of these things along with the structs from `ShaderModule::GetCompilationInfo` now...",
+      "parentUuid": "65187e63_3ca39b65",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "590c176b_e145ed93",
         "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
         "patchSetId": 13
@@ -381,6 +405,30 @@
       "side": 1,
       "message": "Does the latest patch look good to you?",
       "parentUuid": "eafb609c_cb596bf0",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44603337_f95a68f5",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "There\u0027s still some issues, but as I mentioned above, let me discuss this a bit with Kai next week.. Sorry about that! D:",
+      "parentUuid": "35af3ddc_05d65ae9",
       "range": {
         "startLine": 64,
         "startChar": 4,

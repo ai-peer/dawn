@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44f131b2_6d610cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "I also landed some changes in https://dawn-review.googlesource.com/c/dawn/+/175784 that I would recommend syncing up to.",
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13663622_b07772cb",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "Can be updated if we do something like in [1]",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 37
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf9d8ae2_efbfd7b7",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "This should be able to to just call `APIRequestAdapterInfoF({nullptr, WGPUCallbackMode_AllowProcessEvents, callback, userdata})` or something like that.",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 75
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88bf46ed_dbe749ef",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-23T21:51:24Z",
+      "side": 1,
+      "message": "nit. [1] Might be able to save the number of allocations by doing something like https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;l\u003d146;bpv\u003d0;bpt\u003d0",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 347,
+        "endChar": 36
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
