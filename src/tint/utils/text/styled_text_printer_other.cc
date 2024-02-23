@@ -27,8 +27,6 @@
 
 // GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
 
-#include <cstring>
-
 #include "src/tint/utils/text/styled_text_printer.h"
 
 namespace tint {
