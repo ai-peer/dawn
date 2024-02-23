@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b27f7e6_b24af967",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-23T15:13:03Z",
+      "side": 1,
+      "message": "Can we wait for an answer from Rafael on the issue (I ping that again)? This is extremely surprising and the validation would make things incorrect on backends that are not D3D11.",
+      "revId": "829f61ad7a01f9973bef437c1befbfbc6e808be9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
