@@ -117,6 +117,24 @@
       "parentUuid": "e18e9a41_326d5d1b",
       "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6055d46f_cd8e2450",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterInfoTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-23T11:27:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efeb31ff_c33aad62",
+      "revId": "f46aa72792d4aeb7b300f50781e3dbeb78652618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -227,6 +227,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f6ca961_e43d8f6e",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-23T11:27:39Z",
+      "side": 1,
+      "message": "Are you sure we still need this?",
+      "parentUuid": "9273a459_0ff24cc7",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "590c176b_e145ed93",
         "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
         "patchSetId": 13
@@ -309,6 +333,30 @@
       "side": 1,
       "message": "\u003e I think that this won\u0027t work for non-spontaneous events because the pointer to the strings will be invalidated. We probably need to copy them into this event in order for them to work. (Otherwise the pointer points to the string in the buffer where the command was deserialized which goes away each time we flush the wire.)\n\nI\u0027m not sure to understand what do you mean sorry.",
       "parentUuid": "c6be261f_cef5c9ae",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35af3ddc_05d65ae9",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-23T11:27:39Z",
+      "side": 1,
+      "message": "Does the latest patch look good to you?",
+      "parentUuid": "eafb609c_cb596bf0",
       "range": {
         "startLine": 64,
         "startChar": 4,
