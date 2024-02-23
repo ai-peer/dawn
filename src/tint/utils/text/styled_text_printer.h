@@ -62,6 +62,11 @@ class StyledTextPrinter {
     /// @param theme the custom theme to use.
     static std::unique_ptr<StyledTextPrinter> CreateANSI(FILE* out, const StyledTextTheme& theme);
 
+    /// Attempts to detect whether the terminal at @p out is dark.
+    /// @returns true if the terminal is dark, false if the terminal is light, or nullopt if
+    /// unknown.
+    static std::optional<bool> IsTerminalDark(FILE* out);
+
     /// Destructor
     virtual ~StyledTextPrinter();
 
