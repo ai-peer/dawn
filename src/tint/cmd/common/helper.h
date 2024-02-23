@@ -82,12 +82,15 @@ struct LoadProgramOptions {
     bool use_ir = false;
     tint::spirv::reader::Options spirv_reader_options;
 #endif
+    /// The text printer to use for output
+    StyledTextPrinter* printer = nullptr;
 };
 
 /// Loads the source and program information for the given file.
 /// If the file cannot be loaded then an error is printed and the program is aborted before
 /// returning.
 /// @param opts the loading options
+/// @param printer the styled text printer to use
 ProgramInfo LoadProgramInfo(const LoadProgramOptions& opts);
 
 /// @param stage the pipeline stage

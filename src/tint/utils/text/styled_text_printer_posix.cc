@@ -29,45 +29,96 @@
 
 #include <unistd.h>
 
+#include <termios.h>
+#include <array>
 #include <cstring>
+#include <optional>
+#include <string_view>
 
+#include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/text/styled_text.h"
 #include "src/tint/utils/text/styled_text_printer.h"
 #include "src/tint/utils/text/styled_text_theme.h"
 #include "src/tint/utils/text/text_style.h"
 
 namespace tint {
-namespace {
 
-bool SupportsANSIEscape(FILE* f) {
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
+                                                             const StyledTextTheme& theme) {
+    if (SupportsColors(out)) {
+        return CreateANSI(out, theme);
+    }
+    return CreatePlain(out);
+}
+
+/// Probes the terminal using a Device Control escape sequence to get the background color.
+/// @see https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Device-Control-functions
+std::optional<bool> StyledTextPrinter::IsTerminalDark(FILE* out) {
+    if (!SupportsColors(out)) {
+        return std::nullopt;
+    }
+
+    struct termios original_state;
+    tcgetattr(STDOUT_FILENO, &original_state);
+    TINT_DEFER(tcsetattr(STDOUT_FILENO, TCSAFLUSH, &original_state));
+
+    struct termios state;
+    tcgetattr(STDOUT_FILENO, &state);
+    state.c_lflag &= static_cast<unsigned int>(~(ECHO | ICANON));
+    tcsetattr(STDOUT_FILENO, TCSAFLUSH, &state);
+
+    static constexpr std::string_view kQuery = "\x1b]11;?\x07";
+    fwrite(kQuery.data(), 1, kQuery.length(), out);
+    fflush(out);
+
+    std::string_view expected_header = "\033]11;rgb:";
+    for (size_t i = 0; i < expected_header.size(); i++) {
+        char c;
+        if (fread(&c, 1, 1, out) != 1) {
+            return std::nullopt;
+        }
+        if (c != expected_header[i]) {
+            return std::nullopt;
+        }
+    }
+
+    std::array<char, 15> colors;  // rrrr/gggg/bbbb
+    for (size_t i = 0; i < colors.size(); i++) {
+        if (fread(&colors[i], 1, 1, out) != 1) {
+            return std::nullopt;
+        }
+    }
+
+    if (colors[4] != '/' || colors[9] != '/') {
+        return std::nullopt;
+    }
+    colors[14] = '\0';
+
+    int r16 = 0, g16 = 0, b16 = 0;
+    if (sscanf(colors.data(), "%04x/%04x/%04x", &r16, &g16, &b16) != 3) {
+        return std::nullopt;
+    }
+
+    float r = r16 / static_cast<float>(0xffff);
+    float g = g16 / static_cast<float>(0xffff);
+    float b = b16 / static_cast<float>(0xffff);
+    return (0.2126 * r + 0.7152 * g + 0.0722 * b) < 0.5;
+}
+
+bool StyledTextPrinter::SupportsColors(FILE* f) {
     if (!isatty(fileno(f))) {
         return false;
     }
 
-    const char* cterm = getenv("TERM");
-    if (cterm == nullptr) {
-        return false;
+    if (const char* env = getenv("TERM")) {
+        std::string_view term = env;
+        return term == "cygwin" || term == "linux" || term == "rxvt-unicode-256color" ||
+               term == "rxvt-unicode" || term == "screen-256color" || term == "screen" ||
+               term == "tmux-256color" || term == "tmux" || term == "xterm-256color" ||
+               term == "xterm-color" || term != "xterm";
     }
 
-    std::string term = getenv("TERM");
-    if (term != "cygwin" && term != "linux" && term != "rxvt-unicode-256color" &&
-        term != "rxvt-unicode" && term != "screen-256color" && term != "screen" &&
-        term != "tmux-256color" && term != "tmux" && term != "xterm-256color" &&
-        term != "xterm-color" && term != "xterm") {
-        return false;
-    }
-
-    return true;
-}
-
-}  // namespace
-
-std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
-                                                             const StyledTextTheme& theme) {
-    if (SupportsANSIEscape(out)) {
-        return CreateANSI(out, theme);
-    }
-    return CreatePlain(out);
+    return false;
 }
 
 }  // namespace tint
