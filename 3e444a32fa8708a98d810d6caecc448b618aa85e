@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faeea499_cab4de5e",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-23T01:35:33Z",
+      "side": 1,
+      "message": "eventually, this will use the future-version right? we\u0027re just using legacy version because the implementation of the wire server uses the legacy version?",
+      "revId": "3e444a32fa8708a98d810d6caecc448b618aa85e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
