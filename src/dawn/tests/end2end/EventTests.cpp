@@ -451,16 +451,20 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
                                    },
                                    &status});
 
-    ASSERT_EQ(status, kStatusUninitialized);
+    // For spontaneous cases, the callback would fire on the call. Otherwise it should only fire
+    // when the instance is dropped.
+    if (IsSpontaneous()) {
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+    } else {
+        ASSERT_EQ(status, kStatusUninitialized);
+    }
 
     testInstance = nullptr;  // Drop the last external ref to the instance.
-
-    // Callback should have been called immediately because we leaked it since there's no way to
-    // call WaitAny or ProcessEvents anymore.
-    //
-    // TODO(crbug.com/dawn/2059): Once Spontaneous is implemented, this should no longer expect the
-    // callback to be cleaned up immediately (and should expect it to happen on a future Tick).
-    ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    if (!IsSpontaneous()) {
+        // Callback should have been called immediately because we leaked it since there's no way to
+        // call WaitAny or ProcessEvents anymore.
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    }
 }
 
 // TODO(crbug.com/dawn/1987):
