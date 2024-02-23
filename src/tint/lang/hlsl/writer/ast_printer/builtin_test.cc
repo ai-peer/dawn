@@ -1103,7 +1103,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Trunc_Scalar_f32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(float tint_trunc(float param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 [numthreads(1, 1, 1)]
@@ -1124,7 +1124,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Trunc_Vector_f32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(float3 tint_trunc(float3 param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 [numthreads(1, 1, 1)]
@@ -1147,7 +1147,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Trunc_Scalar_f16) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(float16_t tint_trunc(float16_t param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 [numthreads(1, 1, 1)]
@@ -1170,7 +1170,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Trunc_Vector_f16) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(vector<float16_t, 3> tint_trunc(vector<float16_t, 3> param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 [numthreads(1, 1, 1)]
