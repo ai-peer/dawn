@@ -45,6 +45,7 @@ group("fuzzers") {
 group("libs") {
   deps = [
     "src/dawn/native:webgpu_dawn",
+    "src/dawn/wire:webgpu_dawn_wire",
     "src/tint:libs",
   ]
 }

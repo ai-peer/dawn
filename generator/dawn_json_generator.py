@@ -1060,6 +1060,15 @@ class MultiGeneratorFromDawnJSON(Generator):
                            'src/dawn/native/webgpu_dawn_native_proc.cpp',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
+        if 'webgpu_dawn_wire_proc' in targets:
+            params_dawn_wire = parse_json(loaded_json,
+                                          enabled_tags=['dawn', 'deprecated'],
+                                          disabled_tags=['native'])
+            renders.append(
+                FileRender('dawn/wire/api_dawn_wire_proc.cpp',
+                           'src/dawn/wire/webgpu_dawn_wire_proc.cpp',
+                           [RENDER_PARAMS_BASE, params_dawn_wire]))
+
         if 'cpp' in targets:
             renders.append(
                 FileRender('api_cpp.cpp', 'src/dawn/' + api + '_cpp.cpp',

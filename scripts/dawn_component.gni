@@ -75,10 +75,21 @@ template("dawn_component") {
     prefix = ""
   }
 
+  define_prefixes = []
+  if (defined(invoker.DEFINE_PREFIX)) {
+    define_prefixes = [ invoker.DEFINE_PREFIX ]
+  }
+  if (defined(invoker.DEFINE_PREFIXES)) {
+    define_prefixes += invoker.DEFINE_PREFIXES
+  }
+
   # The config that will apply to dependents of the shared library so they know
   # they should "import" the symbols
   config("${prefix}shared_public_config") {
-    defines = [ "${invoker.DEFINE_PREFIX}_SHARED_LIBRARY" ]
+    defines = []
+    foreach(prefix, define_prefixes) {
+      defines += [ "${prefix}_SHARED_LIBRARY" ]
+    }
 
     # Executable needs an rpath to find our shared libraries on OSX and Linux
     if (is_mac) {
@@ -126,7 +137,9 @@ template("dawn_component") {
     if (!defined(defines)) {
       defines = []
     }
-    defines += [ "${invoker.DEFINE_PREFIX}_IMPLEMENTATION" ]
+    foreach(prefix, define_prefixes) {
+      defines += [ "${prefix}_IMPLEMENTATION" ]
+    }
 
     # Chromium adds a config that uses a special linker script that removes
     # all symbols except JNI ones. Remove this config so that our

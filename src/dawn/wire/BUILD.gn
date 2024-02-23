@@ -75,84 +75,103 @@ group("abseil") {
   }
 }
 
+wire_sources = get_target_outputs(":gen") + [
+                 "BufferConsumer.h",
+                 "BufferConsumer_impl.h",
+                 "ChunkedCommandHandler.cpp",
+                 "ChunkedCommandHandler.h",
+                 "ChunkedCommandSerializer.cpp",
+                 "ChunkedCommandSerializer.h",
+                 "ObjectHandle.cpp",
+                 "ObjectHandle.h",
+                 "SupportedFeatures.cpp",
+                 "SupportedFeatures.h",
+                 "Wire.cpp",
+                 "WireClient.cpp",
+                 "WireDeserializeAllocator.cpp",
+                 "WireDeserializeAllocator.h",
+                 "WireResult.h",
+                 "WireServer.cpp",
+                 "client/Adapter.cpp",
+                 "client/Adapter.h",
+                 "client/ApiObjects.h",
+                 "client/Buffer.cpp",
+                 "client/Buffer.h",
+                 "client/Client.cpp",
+                 "client/Client.h",
+                 "client/ClientDoers.cpp",
+                 "client/ClientInlineMemoryTransferService.cpp",
+                 "client/Device.cpp",
+                 "client/Device.h",
+                 "client/EventManager.cpp",
+                 "client/EventManager.h",
+                 "client/Instance.cpp",
+                 "client/Instance.h",
+                 "client/LimitsAndFeatures.cpp",
+                 "client/LimitsAndFeatures.h",
+                 "client/ObjectBase.cpp",
+                 "client/ObjectBase.h",
+                 "client/ObjectStore.cpp",
+                 "client/ObjectStore.h",
+                 "client/QuerySet.cpp",
+                 "client/QuerySet.h",
+                 "client/Queue.cpp",
+                 "client/Queue.h",
+                 "client/RequestTracker.h",
+                 "client/ShaderModule.cpp",
+                 "client/ShaderModule.h",
+                 "client/Surface.cpp",
+                 "client/Surface.h",
+                 "client/SwapChain.cpp",
+                 "client/SwapChain.h",
+                 "client/Texture.cpp",
+                 "client/Texture.h",
+                 "server/ObjectStorage.h",
+                 "server/Server.cpp",
+                 "server/Server.h",
+                 "server/ServerAdapter.cpp",
+                 "server/ServerBuffer.cpp",
+                 "server/ServerDevice.cpp",
+                 "server/ServerInlineMemoryTransferService.cpp",
+                 "server/ServerInstance.cpp",
+                 "server/ServerQueue.cpp",
+                 "server/ServerShaderModule.cpp",
+               ]
+
+wire_deps = [
+  ":gen",
+  "${dawn_root}/src/dawn/common",
+  "${dawn_root}/src/tint/lang/wgsl/features",
+]
+
+wire_public_deps = [
+  ":abseil",
+  ":headers",  # Make headers publicly visible
+  "${dawn_root}/src/dawn/partition_alloc:raw_ptr",
+]
+
 dawn_component("wire") {
   DEFINE_PREFIX = "DAWN_WIRE"
-
-  deps = [
-    ":gen",
-    "${dawn_root}/src/dawn/common",
-    "${dawn_root}/src/tint/lang/wgsl/features",
-  ]
-
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
-  sources = get_target_outputs(":gen")
-  sources += [
-    "BufferConsumer.h",
-    "BufferConsumer_impl.h",
-    "ChunkedCommandHandler.cpp",
-    "ChunkedCommandHandler.h",
-    "ChunkedCommandSerializer.cpp",
-    "ChunkedCommandSerializer.h",
-    "ObjectHandle.cpp",
-    "ObjectHandle.h",
-    "SupportedFeatures.cpp",
-    "SupportedFeatures.h",
-    "Wire.cpp",
-    "WireClient.cpp",
-    "WireDeserializeAllocator.cpp",
-    "WireDeserializeAllocator.h",
-    "WireResult.h",
-    "WireServer.cpp",
-    "client/Adapter.cpp",
-    "client/Adapter.h",
-    "client/ApiObjects.h",
-    "client/Buffer.cpp",
-    "client/Buffer.h",
-    "client/Client.cpp",
-    "client/Client.h",
-    "client/ClientDoers.cpp",
-    "client/ClientInlineMemoryTransferService.cpp",
-    "client/Device.cpp",
-    "client/Device.h",
-    "client/EventManager.cpp",
-    "client/EventManager.h",
-    "client/Instance.cpp",
-    "client/Instance.h",
-    "client/LimitsAndFeatures.cpp",
-    "client/LimitsAndFeatures.h",
-    "client/ObjectBase.cpp",
-    "client/ObjectBase.h",
-    "client/ObjectStore.cpp",
-    "client/ObjectStore.h",
-    "client/QuerySet.cpp",
-    "client/QuerySet.h",
-    "client/Queue.cpp",
-    "client/Queue.h",
-    "client/RequestTracker.h",
-    "client/ShaderModule.cpp",
-    "client/ShaderModule.h",
-    "client/Surface.cpp",
-    "client/Surface.h",
-    "client/SwapChain.cpp",
-    "client/SwapChain.h",
-    "client/Texture.cpp",
-    "client/Texture.h",
-    "server/ObjectStorage.h",
-    "server/Server.cpp",
-    "server/Server.h",
-    "server/ServerAdapter.cpp",
-    "server/ServerBuffer.cpp",
-    "server/ServerDevice.cpp",
-    "server/ServerInlineMemoryTransferService.cpp",
-    "server/ServerInstance.cpp",
-    "server/ServerQueue.cpp",
-    "server/ServerShaderModule.cpp",
-  ]
+  sources = wire_sources
+  deps = wire_deps
+  public_deps = wire_public_deps
+}
 
-  # Make headers publicly visible
-  public_deps = [
-    ":abseil",
-    ":headers",
-    "${dawn_root}/src/dawn/partition_alloc:raw_ptr",
+dawn_json_generator("webgpu_dawn_wire_proc_gen") {
+  target = "webgpu_dawn_wire_proc"
+  outputs = [ "src/dawn/wire/webgpu_dawn_wire_proc.cpp" ]
+}
+
+dawn_component("webgpu_dawn_wire") {
+  DEFINE_PREFIXES = [
+    "WGPU",
+    "DAWN_WIRE",
   ]
+  output_name = "webgpu_dawn_wire"
+  configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+
+  sources = wire_sources + get_target_outputs(":webgpu_dawn_wire_proc_gen")
+  deps = wire_deps + [ ":webgpu_dawn_wire_proc_gen" ]
+  public_deps = wire_public_deps
 }

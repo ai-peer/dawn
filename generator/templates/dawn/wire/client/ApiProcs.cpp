@@ -70,9 +70,6 @@ namespace dawn::wire::client {
         {% for method in type.methods %}
             {% set Suffix = as_MethodSuffix(type.name, method.name) %}
 
-            {% if Suffix in client_handwritten_commands %}
-                static
-            {% endif %}
             {{as_cReturnType(method.return_type)}} Client{{Suffix}}(
                 {{-cType}} cSelf
                 {%- for arg in method.arguments -%}
