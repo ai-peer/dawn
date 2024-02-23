@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "435454edf99482a1f50d3bc2f4e0a84c35fc6e52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "508c8124_43858dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-23T14:50:45Z",
+      "side": 1,
+      "message": "Nice codebase gardening, thank you!",
+      "revId": "435454edf99482a1f50d3bc2f4e0a84c35fc6e52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b9e474_838ab1e9",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-23T14:50:45Z",
+      "side": 1,
+      "message": "That works to not specify the size??? Wow nice!",
+      "revId": "435454edf99482a1f50d3bc2f4e0a84c35fc6e52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
