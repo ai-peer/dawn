@@ -2389,9 +2389,9 @@ bool ASTPrinter::EmitTruncCall(StringStream& out,
     // See crbug.com/tint/1883
     return CallBuiltinHelper(  //
         out, expr, builtin, [&](TextBuffer* b, const std::vector<std::string>& params) {
-            // value < 0 ? ceil(value) : floor(value)
-            Line(b) << "return " << params[0] << " < 0 ? ceil(" << params[0] << ") : floor("
-                    << params[0] << ");";
+            // value < 0 ? -floor(abs(value)) : floor(abs(value))
+            Line(b) << "return " << params[0] << " < 0 ? -floor(abs(" << params[0]
+                    << ")) : floor(abs(" << params[0] << "));";
             return true;
         });
 }
