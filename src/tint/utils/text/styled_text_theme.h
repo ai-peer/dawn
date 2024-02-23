@@ -67,6 +67,11 @@ struct StyledTextTheme {
     /// @returns Attributes from the text style @p text_style
     Attributes Get(TextStyle text_style) const;
 
+    /// The theme's attributes for a compare-match
+    Attributes compare_match;
+    /// The theme's attributes for a compare-mismatch
+    Attributes compare_mismatch;
+
     /// The theme's attributes for a success severity
     Attributes severity_success;
     /// The theme's attributes for a warning severity
