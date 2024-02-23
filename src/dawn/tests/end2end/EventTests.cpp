@@ -451,16 +451,22 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
                                    },
                                    &status});
 
-    ASSERT_EQ(status, kStatusUninitialized);
+    // For spontaneous cases, it is possible that since there is no work to be done, the serial can
+    // already be caught up and hence the callback fires immediately.
+    bool callbackFired = IsSpontaneous() && status == WGPUQueueWorkDoneStatus_Success;
+    if (!callbackFired) {
+        ASSERT_EQ(status, kStatusUninitialized);
+    }
 
     testInstance = nullptr;  // Drop the last external ref to the instance.
-
-    // Callback should have been called immediately because we leaked it since there's no way to
-    // call WaitAny or ProcessEvents anymore.
-    //
-    // TODO(crbug.com/dawn/2059): Once Spontaneous is implemented, this should no longer expect the
-    // callback to be cleaned up immediately (and should expect it to happen on a future Tick).
-    ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    if (!callbackFired) {
+        // Any outstanding callback should have been called now because we leaked it since there's
+        // no way to call WaitAny or ProcessEvents anymore.
+        // TODO(crbug.com/dawn/2059): Once Spontaneous is implemented, this should no longer expect
+        // the callback to be cleaned up immediately (and should expect it to happen on a future
+        // Tick).
+        ASSERT_EQ(status, WGPUQueueWorkDoneStatus_InstanceDropped);
+    }
 }
 
 // TODO(crbug.com/dawn/1987):
