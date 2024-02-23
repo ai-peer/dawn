@@ -31,7 +31,21 @@
 namespace tint {
 
 const StyledTextTheme StyledTextTheme::kDefault{
-    /* severity_success */ StyledTextTheme::Attributes{
+    /* compare_match */ StyledTextTheme::Attributes{
+        /* foreground */ std::nullopt,
+        /* background */ Color{20, 100, 20},
+        /* bold */ std::nullopt,
+        /* underlined */ std::nullopt,
+    },
+    /* compare_mismatch */
+    StyledTextTheme::Attributes{
+        /* foreground */ std::nullopt,
+        /* background */ Color{120, 20, 20},
+        /* bold */ std::nullopt,
+        /* underlined */ std::nullopt,
+    },
+    /* severity_success */
+    StyledTextTheme::Attributes{
         /* foreground */ Color{0, 200, 0},
         /* background */ std::nullopt,
         /* bold */ std::nullopt,
@@ -143,37 +157,49 @@ StyledTextTheme::Attributes StyledTextTheme::Get(TextStyle text_style) const {
         }
     };
 
-    if (text_style.IsSuccess()) {
-        apply(severity_success);
-    } else if (text_style.IsWarning()) {
-        apply(severity_warning);
-    } else if (text_style.IsError()) {
-        apply(severity_failure);
-    } else if (text_style.IsFatal()) {
-        apply(severity_fatal);
-    }
-
-    if (text_style.IsCode()) {
-        apply(kind_code);
-
-        if (text_style.IsKeyword()) {
-            apply(kind_keyword);
-        } else if (text_style.IsVariable()) {
-            apply(kind_variable);
-        } else if (text_style.IsType()) {
-            apply(kind_type);
-        } else if (text_style.IsFunction()) {
-            apply(kind_function);
-        } else if (text_style.IsEnum()) {
-            apply(kind_enum);
-        } else if (text_style.IsLiteral()) {
-            apply(kind_literal);
-        } else if (text_style.IsAttribute()) {
-            apply(kind_attribute);
+    if (text_style.HasSeverity()) {
+        if (text_style.IsSuccess()) {
+            apply(severity_success);
+        } else if (text_style.IsWarning()) {
+            apply(severity_warning);
+        } else if (text_style.IsError()) {
+            apply(severity_failure);
+        } else if (text_style.IsFatal()) {
+            apply(severity_fatal);
         }
     }
-    if (text_style.IsSquiggle()) {
-        apply(kind_squiggle);
+
+    if (text_style.HasKind()) {
+        if (text_style.IsCode()) {
+            apply(kind_code);
+
+            if (text_style.IsKeyword()) {
+                apply(kind_keyword);
+            } else if (text_style.IsVariable()) {
+                apply(kind_variable);
+            } else if (text_style.IsType()) {
+                apply(kind_type);
+            } else if (text_style.IsFunction()) {
+                apply(kind_function);
+            } else if (text_style.IsEnum()) {
+                apply(kind_enum);
+            } else if (text_style.IsLiteral()) {
+                apply(kind_literal);
+            } else if (text_style.IsAttribute()) {
+                apply(kind_attribute);
+            }
+        }
+        if (text_style.IsSquiggle()) {
+            apply(kind_squiggle);
+        }
+    }
+
+    if (text_style.HasCompare()) {
+        if (text_style.IsMatch()) {
+            apply(compare_match);
+        } else {
+            apply(compare_mismatch);
+        }
     }
 
     if (text_style.IsBold()) {
