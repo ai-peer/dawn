@@ -16,6 +16,144 @@
       "message": "@amaiorano@google.com, @jrprice@google.com PTAL!",
       "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42ef3396_aeb6b40e",
+        "filename": "src/tint/utils/text/string_stream.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "A bit concerned about the need for copy ctor/assignment. I think it\u0027s because `StyledText` holds a `StringStream`, and it\u0027s copyable, but can we avoid making `StyledText` copyable?",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 38
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20eb4ab_0a2f2d35",
+        "filename": "src/tint/utils/text/styled_text_printer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "With only a single function, this feels like a good candidate for `StyledTextPrinter` to be a value type containing a `std::function\u003cvoid(const StyledText\u0026)\u003e` that gets bound to a lambda capturing the members being passed into the Create functions that implement the printing. This would reduce the inheritance boilerplate, as well as potentially be more performant in the cases where the print functions fit in the std::function small buffer, avoiding heap allocations (and no `std::unique_ptr`).",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 51
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2dcc9f8_5f998084",
+        "filename": "src/tint/utils/text/styled_text_printer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand what this macro is for. Do we not want to test this always?",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 28
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9804d392_875c40a2",
+        "filename": "src/tint/utils/text/styled_text_printer_windows.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "This looks unused, can we remove? If so, we probably don\u0027t need this struct at all, and can just return HANDLE in the function below.",
+      "range": {
+        "startLine": 42,
+        "startChar": 9,
+        "endLine": 42,
+        "endChar": 28
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc1870d6_9eac1973",
+        "filename": "src/tint/utils/text/styled_text_printer_windows.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "suggest renaming to info",
+      "range": {
+        "startLine": 51,
+        "startChar": 16,
+        "endLine": 51,
+        "endChar": 23
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcfa6c28_64b1fb13",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-23T19:23:26Z",
+      "side": 1,
+      "message": "This seems like an odd use of the plus operator, especially as it\u0027s not immediately obvious that this only ORs in the severity of the rhs. Our AI friend suggests renaming to \"WithSeverity\", which I think is a better idea.",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
