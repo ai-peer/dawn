@@ -29,45 +29,169 @@
 
 #include <unistd.h>
 
+#include <termios.h>
+#include <array>
+#include <chrono>
+#include <cstdint>
+#include <cstdio>
 #include <cstring>
+#include <optional>
+#include <string_view>
+#include <utility>
 
+#include "src/tint/utils/macros/defer.h"
+#include "src/tint/utils/rtti/switch.h"
 #include "src/tint/utils/text/styled_text.h"
 #include "src/tint/utils/text/styled_text_printer.h"
 #include "src/tint/utils/text/styled_text_theme.h"
 #include "src/tint/utils/text/text_style.h"
 
 namespace tint {
-namespace {
 
-bool SupportsANSIEscape(FILE* f) {
+std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
+                                                             const StyledTextTheme& theme) {
+    if (SupportsColors(out)) {
+        return CreateANSI(out, theme);
+    }
+    return CreatePlain(out);
+}
+
+/// Probes the terminal using a Device Control escape sequence to get the background color.
+/// @see https://invisible-island.net/xterm/ctlseqs/ctlseqs.html#h2-Device-Control-functions
+std::optional<bool> StyledTextPrinter::IsTerminalDark(FILE* out) {
+    if (!SupportsColors(out)) {
+        return std::nullopt;
+    }
+
+    // Get the file descriptor for 'out'
+    int out_fd = fileno(out);
+    if (out_fd == -1) {
+        return std::nullopt;
+    }
+
+    // Store the current attributes for 'out', restore it before returning
+    termios original_state{};
+    tcgetattr(out_fd, &original_state);
+    TINT_DEFER(tcsetattr(out_fd, TCSADRAIN, &original_state));
+
+    // Prevent echoing.
+    termios state = original_state;
+    state.c_lflag &= ~static_cast<tcflag_t>(ECHO | ICANON);
+    state.c_cc[VMIN] = 1;
+    state.c_cc[VTIME] = 0;
+    tcsetattr(out_fd, TCSADRAIN, &state);
+
+    // Emit the device control escape sequence to query the terminal colors.
+    static constexpr std::string_view kQuery = "\x1b]11;?\x07";
+    fwrite(kQuery.data(), 1, kQuery.length(), out);
+    fflush(out);
+
+    // Timeout for attempting to read the response.
+    static constexpr auto kTimeout = std::chrono::milliseconds(5);
+
+    // Record the start time.
+    auto start = std::chrono::steady_clock::now();
+
+    // Helpers for parsing the response.
+    std::optional<char> peek;
+    auto read = [&]() -> std::optional<char> {
+        if (peek) {
+            TINT_DEFER(peek.reset());
+            return peek;
+        }
+        while ((std::chrono::steady_clock::now() - start) < kTimeout) {
+            char c;
+            if (fread(&c, 1, 1, stdin) == 1) {
+                return c;
+            }
+        }
+        return std::nullopt;
+    };
+
+    auto match = [&](std::string_view str) {
+        for (char c : str) {
+            if (c != read()) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    struct Hex {
+        uint32_t num = 0;  // The parsed hex number
+        uint32_t len = 0;  // Number of hex digits parsed
+    };
+    auto hex = [&] {
+        uint32_t num = 0;
+        uint32_t len = 0;
+        while (auto c = read()) {
+            if (c >= '0' && c <= '9') {
+                num = num * 16 + static_cast<uint32_t>(*c - '0');
+                len++;
+            } else if (c >= 'a' && c <= 'z') {
+                num = num * 16 + 10 + static_cast<uint32_t>(*c - 'a');
+                len++;
+            } else if (c >= 'A' && c <= 'Z') {
+                num = num * 16 + 10 + static_cast<uint32_t>(*c - 'A');
+                len++;
+            } else {
+                peek = c;
+                break;
+            }
+        }
+        return Hex{num, len};
+    };
+
+    if (!match("\033]11;rgb:")) {
+        return std::nullopt;
+    }
+
+    auto r_i = hex();
+    if (!match("/")) {
+        return std::nullopt;
+    }
+    auto g_i = hex();
+    if (!match("/")) {
+        return std::nullopt;
+    }
+    auto b_i = hex();
+
+    if (r_i.len != g_i.len || g_i.len != b_i.len) {
+        return std::nullopt;
+    }
+
+    uint32_t max = 0;
+    switch (r_i.len) {
+        case 2:  // rr/gg/bb
+            max = 0xff;
+            break;
+        case 4:  // rrrr/gggg/bbbb
+            max = 0xffff;
+            break;
+        default:
+            return std::nullopt;
+    }
+
+    float r = static_cast<float>(r_i.num) / static_cast<float>(max);
+    float g = static_cast<float>(g_i.num) / static_cast<float>(max);
+    float b = static_cast<float>(b_i.num) / static_cast<float>(max);
+    return (0.2126f * r + 0.7152f * g + 0.0722f * b) < 0.5f;
+}
+
+bool StyledTextPrinter::SupportsColors(FILE* f) {
     if (!isatty(fileno(f))) {
         return false;
     }
 
-    const char* cterm = getenv("TERM");
-    if (cterm == nullptr) {
-        return false;
+    if (const char* env = getenv("TERM")) {
+        std::string_view term = env;
+        return term == "cygwin" || term == "linux" || term == "rxvt-unicode-256color" ||
+               term == "rxvt-unicode" || term == "screen-256color" || term == "screen" ||
+               term == "tmux-256color" || term == "tmux" || term == "xterm-256color" ||
+               term == "xterm-color" || term != "xterm";
     }
 
-    std::string term = getenv("TERM");
-    if (term != "cygwin" && term != "linux" && term != "rxvt-unicode-256color" &&
-        term != "rxvt-unicode" && term != "screen-256color" && term != "screen" &&
-        term != "tmux-256color" && term != "tmux" && term != "xterm-256color" &&
-        term != "xterm-color" && term != "xterm") {
-        return false;
-    }
-
-    return true;
-}
-
-}  // namespace
-
-std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
-                                                             const StyledTextTheme& theme) {
-    if (SupportsANSIEscape(out)) {
-        return CreateANSI(out, theme);
-    }
-    return CreatePlain(out);
+    return false;
 }
 
 }  // namespace tint
