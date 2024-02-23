@@ -209,7 +209,7 @@ fn compute_main() {
 // [hlsl-dxc] flags: --hlsl_shader_model 64
 
 {{- /* Check and emit f16 */ -}}
-{{-   else if OverloadUsesF16 $overload}}
+{{-   else if OverloadUsesType $overload "f16"}}
 // flags: --hlsl_shader_model 62
 
 {{    end -}}
@@ -231,8 +231,13 @@ enable chromium_experimental_subgroups;
 {{    end -}}
 
 {{- /* Check and emit f16 */ -}}
-{{-   if OverloadUsesF16 $overload}}
+{{-   if OverloadUsesType $overload "f16"}}
 enable f16;
+{{    end -}}
+
+{{- /* Check and emit f16 */ -}}
+{{-   if OverloadUsesType $overload "r8unorm"}}
+enable chromium_internal_graphite;
 {{    end -}}
 
 {{- end -}}
