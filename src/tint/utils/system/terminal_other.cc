@@ -25,47 +25,18 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// GEN_BUILD:CONDITION(tint_build_is_win)
+// GEN_BUILD:CONDITION((!tint_build_is_linux) && (!tint_build_is_mac) && (!tint_build_is_win))
 
-#include <cstring>
-
-#include "src/tint/utils/macros/defer.h"
-#include "src/tint/utils/text/styled_text_printer.h"
-
-#define WIN32_LEAN_AND_MEAN 1
-#include <Windows.h>
+#include "src/tint/utils/system/terminal.h"
 
 namespace tint {
-namespace {
 
-HANDLE ConsoleHandleFrom(FILE* file) {
-    HANDLE handle = INVALID_HANDLE_VALUE;
-    if (file == stdout) {
-        handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    } else if (file == stderr) {
-        handle = GetStdHandle(STD_ERROR_HANDLE);
-    } else {
-        return INVALID_HANDLE_VALUE;
-    }
-
-    CONSOLE_SCREEN_BUFFER_INFO info{};
-    if (GetConsoleScreenBufferInfo(handle, &info) == 0) {
-        return INVALID_HANDLE_VALUE;
-    }
-    return handle;
+bool TerminalSupportsColors(FILE*) {
+    return false;
 }
 
-}  // namespace
-
-std::unique_ptr<StyledTextPrinter> StyledTextPrinter::Create(FILE* out,
-                                                             const StyledTextTheme& theme) {
-    if (HANDLE handle = ConsoleHandleFrom(out); handle != INVALID_HANDLE_VALUE) {
-        SetConsoleOutputCP(CP_UTF8);
-        if (SetConsoleMode(handle, ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING)) {
-            return CreateANSI(out, theme);
-        }
-    }
-    return CreatePlain(out);
+std::optional<bool> TerminalIsDark(FILE*) {
+    return std::nullopt;
 }
 
 }  // namespace tint
