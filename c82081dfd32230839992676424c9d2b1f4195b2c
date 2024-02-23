@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "735c7ebb_c9fa26f3",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-23T16:29:07Z",
+      "side": 1,
+      "message": "nit: unused.",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7fdfc646_0f6843cd",
         "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
         "patchSetId": 33

@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7dd262_097f8a7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-23T16:29:07Z",
+      "side": 1,
+      "message": "Ah thanks, I should have at least looked at the file before commenting. Right now the logic seems incorrect though because with multiple surfaces getting unconfigured the cache might return a swapchain from another surface. Maybe we can suppress the test in this CL so we can land it without the cache, then figure out the cache thing later.",
+      "parentUuid": "caa4220f_4c1d68c0",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15cb6672_c7793cc0",
