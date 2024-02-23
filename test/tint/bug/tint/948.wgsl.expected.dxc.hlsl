@@ -1,5 +1,5 @@
 float tint_trunc(float param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 cbuffer cbuffer_x_20 : register(b9, space2) {

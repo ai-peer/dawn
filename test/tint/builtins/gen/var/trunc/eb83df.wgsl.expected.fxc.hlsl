@@ -1,5 +1,5 @@
 float tint_trunc(float param_0) {
-  return param_0 < 0 ? ceil(param_0) : floor(param_0);
+  return param_0 < 0 ? -floor(abs(param_0)) : floor(abs(param_0));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
