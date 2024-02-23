@@ -1511,8 +1511,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Unary) {
     EXPECT_EQ(r()->error(), R"(12:34 error: no matching overload for 'operator ! (abstract-int)'
 
 2 candidate operators:
-  'operator ! (bool) -> bool'
-  'operator ! (vecN<bool>) -> vecN<bool>'
+  'operator ! (bool  ✗ ) -> bool'
+  'operator ! (vecN<bool>  ✗ ) -> vecN<bool>'
 )");
 }
 
@@ -1528,8 +1528,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Unary) {
     EXPECT_EQ(r()->error(), R"(12:34 error: no matching overload for 'operator ! (abstract-int)'
 
 2 candidate operators:
-  'operator ! (bool) -> bool'
-  'operator ! (vecN<bool>) -> vecN<bool>'
+  'operator ! (bool  ✗ ) -> bool'
+  'operator ! (vecN<bool>  ✗ ) -> vecN<bool>'
 )");
 }
 
@@ -1577,7 +1577,7 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Binary) {
               R"(12:34 error: no matching overload for 'operator && (bool, abstract-int)'
 
 1 candidate operator:
-  'operator && (bool, bool) -> bool'
+  'operator && (bool  ✓ , bool  ✗ ) -> bool'
 )");
 }
 
@@ -1621,7 +1621,7 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Binary) {
               R"(12:34 error: no matching overload for 'operator || (bool, abstract-int)'
 
 1 candidate operator:
-  'operator || (bool, bool) -> bool'
+  'operator || (bool  ✓ , bool  ✗ ) -> bool'
 )");
 }
 
@@ -1675,8 +1675,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Materialize) {
               R"(12:34 error: no matching overload for 'operator == (abstract-float, i32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1726,8 +1726,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Materialize) {
               R"(12:34 error: no matching overload for 'operator == (abstract-float, i32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1787,8 +1787,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Index) {
               R"(12:34 error: no matching overload for 'operator == (i32, f32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1844,8 +1844,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Index) {
               R"(12:34 error: no matching overload for 'operator == (i32, f32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1898,8 +1898,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Bitcast) {
     EXPECT_EQ(r()->error(), R"(12:34 error: no matching overload for 'operator == (f32, i32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1948,8 +1948,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Bitcast) {
     EXPECT_EQ(r()->error(), R"(12:34 error: no matching overload for 'operator == (f32, i32)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -1974,21 +1974,21 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_Init) {
               R"(12:34 error: no matching constructor for 'vec2<f32>(abstract-float, bool)'
 
 8 candidate constructors:
-  'vec2<T>(x: T, y: T) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2<T>(T) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(T) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2<T>(vec2<T>) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(vec2<T>) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(x: T  ✓ , y: T  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(T  ✓ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(vec2<T>  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >() -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(x: T  ✓ , y: T  ✗ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(T  ✓ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
   'vec2() -> vec2<abstract-int>'
-  'vec2<T>() -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(x: T, y: T) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(vec2<T>  ✗ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 
 5 candidate conversions:
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'f32', 'U' is 'abstract-int', 'abstract-float', 'i32', 'f16', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'f16', 'U' is 'abstract-int', 'abstract-float', 'f32', 'i32', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'i32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'u32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'bool', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'u32'
+  'vec2<T  ✓ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'U' is 'abstract-int', 'abstract-float', 'i32', 'f16', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'f16', 'U' is 'abstract-int', 'abstract-float', 'f32', 'i32', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'i32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'u32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'bool', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'u32'
 )");
 }
 
@@ -2006,21 +2006,21 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_Init) {
               R"(12:34 error: no matching constructor for 'vec2<f32>(abstract-float, bool)'
 
 8 candidate constructors:
-  'vec2<T>(x: T, y: T) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2<T>(T) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(T) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2<T>(vec2<T>) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(vec2<T>) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(x: T  ✓ , y: T  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(T  ✓ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >(vec2<T>  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2<T  ✓ >() -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(x: T  ✓ , y: T  ✗ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(T  ✓ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
   'vec2() -> vec2<abstract-int>'
-  'vec2<T>() -> vec2<T>'  where: 'T' is 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'vec2(x: T, y: T) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'vec2(vec2<T>  ✗ ) -> vec2<T>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 
 5 candidate conversions:
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'f32', 'U' is 'abstract-int', 'abstract-float', 'i32', 'f16', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'f16', 'U' is 'abstract-int', 'abstract-float', 'f32', 'i32', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'i32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'u32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'u32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'bool'
-  'vec2<T>(vec2<U>) -> vec2<T>'  where: 'T' is 'bool', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'u32'
+  'vec2<T  ✓ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'f32', 'U' is 'abstract-int', 'abstract-float', 'i32', 'f16', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'f16', 'U' is 'abstract-int', 'abstract-float', 'f32', 'i32', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'i32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'u32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'u32', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'bool'
+  'vec2<T  ✗ >(vec2<U>  ✗ ) -> vec2<T>'  where: 'T' is 'bool', 'U' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32' or 'u32'
 )");
 }
 
@@ -2083,8 +2083,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_ArrayInit) {
         R"(error: no matching overload for 'operator == (array<abstract-int, 1>, abstract-int)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✗ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -2102,8 +2102,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_ArrayInit) {
         R"(error: no matching overload for 'operator == (array<abstract-int, 1>, abstract-int)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✗ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -2152,8 +2152,8 @@ TEST_F(ConstEvalTest, ShortCircuit_And_Error_BuiltinCall) {
               R"(12:34 error: no matching overload for 'operator == (i32, abstract-float)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
@@ -2198,8 +2198,8 @@ TEST_F(ConstEvalTest, ShortCircuit_Or_Error_BuiltinCall) {
               R"(12:34 error: no matching overload for 'operator == (i32, abstract-float)'
 
 2 candidate operators:
-  'operator == (T, T) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
-  'operator == (vecN<T>, vecN<T>) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (T  ✓ , T  ✗ ) -> bool'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
+  'operator == (vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<bool>'  where: 'T' is 'abstract-int', 'abstract-float', 'f32', 'f16', 'i32', 'u32' or 'bool'
 )");
 }
 
