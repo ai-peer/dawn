@@ -44,9 +44,13 @@ class TextStyle {
 
     /// Bit patterns
 
-    static constexpr Bits kStyleMask /*          */ = 0b0000'0000'0000'1111;
+    static constexpr Bits kStyleMask /*          */ = 0b0000'0000'0000'0011;
     static constexpr Bits kStyleUnderlined /*    */ = 0b0000'0000'0000'0001;
     static constexpr Bits kStyleBold /*          */ = 0b0000'0000'0000'0010;
+
+    static constexpr Bits kCompareMask /*        */ = 0b0000'0000'0000'1100;
+    static constexpr Bits kCompareMatch /*       */ = 0b0000'0000'0000'0100;
+    static constexpr Bits kCompareMismatch /*    */ = 0b0000'0000'0000'1000;
 
     static constexpr Bits kSeverityMask /*       */ = 0b0000'0000'1111'0000;
     static constexpr Bits kSeverityDefault /*    */ = 0b0000'0000'0000'0000;
@@ -71,11 +75,17 @@ class TextStyle {
     bool IsBold() const { return (bits & kStyleBold) != 0; }
     bool IsUnderlined() const { return (bits & kStyleUnderlined) != 0; }
 
+    bool HasCompare() const { return (bits & kCompareMask) != 0; }
+    bool IsMatch() const { return (bits & kCompareMask) == kCompareMatch; }
+    bool IsMismatch() const { return (bits & kCompareMask) == kCompareMismatch; }
+
+    bool HasSeverity() const { return (bits & kSeverityMask) != 0; }
     bool IsSuccess() const { return (bits & kSeverityMask) == kSeveritySuccess; }
     bool IsWarning() const { return (bits & kSeverityMask) == kSeverityWarning; }
     bool IsError() const { return (bits & kSeverityMask) == kSeverityError; }
     bool IsFatal() const { return (bits & kSeverityMask) == kSeverityFatal; }
 
+    bool HasKind() const { return (bits & kKindMask) != 0; }
     bool IsCode() const { return (bits & kKindCode) != 0; }
     bool IsKeyword() const { return (bits & kKindMask) == kKindKeyword; }
     bool IsVariable() const { return (bits & kKindMask) == kKindVariable; }
@@ -93,9 +103,21 @@ class TextStyle {
     bool operator!=(TextStyle other) const { return bits != other.bits; }
 
     /// @returns the combination of this TextStyle and @p other.
-    /// The kind of @p other is ignored.
+    /// If both this TextStyle and @p other have a compare style, severity style or kind style, then
+    /// the style collision will resolve by using the style of @p other.
     TextStyle operator+(TextStyle other) const {
-        return TextStyle{Bits(bits | (other.bits & ~kKindMask))};
+        Bits out = other.bits;
+        out |= bits & kStyleMask;
+        if (HasCompare() && !other.HasCompare()) {
+            out |= bits & kCompareMask;
+        }
+        if (HasSeverity() && !other.HasSeverity()) {
+            out |= bits & kSeverityMask;
+        }
+        if (HasKind() && !other.HasKind()) {
+            out |= bits & kKindMask;
+        }
+        return TextStyle{out};
     }
 
     /// The style bit pattern
@@ -112,6 +134,10 @@ static constexpr TextStyle Plain = TextStyle{};
 static constexpr TextStyle Bold = TextStyle{TextStyle::kStyleBold};
 /// Underlined renders text with an underline
 static constexpr TextStyle Underlined = TextStyle{TextStyle::kStyleUnderlined};
+/// Underlined renders text with the compare-match style
+static constexpr TextStyle Match = TextStyle{TextStyle::kCompareMatch};
+/// Underlined renders text with the compare-mismatch style
+static constexpr TextStyle Mismatch = TextStyle{TextStyle::kCompareMismatch};
 /// Success renders text with the styling for a successful status
 static constexpr TextStyle Success = TextStyle{TextStyle::kSeveritySuccess};
 /// Warning renders text with the styling for a warning status
