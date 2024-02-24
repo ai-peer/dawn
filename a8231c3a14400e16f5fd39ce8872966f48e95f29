@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d94771ab_f9431649",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:17:07Z",
+      "side": 1,
+      "message": "This will definitely need a rework, but let\u0027s figure out later.",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a486f56f_723e5126",
         "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
         "patchSetId": 34
