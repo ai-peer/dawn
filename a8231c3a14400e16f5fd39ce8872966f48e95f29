@@ -16,6 +16,97 @@
       "message": "Adding a couple more tests, removing MSVC fixes",
       "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2745683b_653cc0e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a486f56f_723e5126",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "This can be left to 0 unless we want to test viewformats.",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df987023_f96b9573",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "IMHO we could just try a couple known configurations in a test somewhere, that\u0027s enough to get the coverage for the check.",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "493ea21b_37d06dbf",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "nit: ZeroWidth",
+      "range": {
+        "startLine": 238,
+        "startChar": 43,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5c69163_c5b696f1",
+        "filename": "src/dawn/tests/end2end/SurfaceTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "nit: suppression is removed, so we can remove both the suppression and the comment?",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

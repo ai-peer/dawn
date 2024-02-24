@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "202b4beb_57da22ff",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-24T22:16:41Z",
+      "side": 1,
+      "message": "We don\u0027t do nullptr checks anywhere and there are nullable annotation everywhere in the C header, IMO let\u0027s not add the overhead of null checking every object. The swapchain is unlikely to get in a bad state because we call GetCurrentDevice-\u003eGetAdapter just below so that will cause a crash with nullptr.",
+      "parentUuid": "0ae55ea6_233326ce",
+      "revId": "c82081dfd32230839992676424c9d2b1f4195b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "735c7ebb_c9fa26f3",
         "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
         "patchSetId": 33
