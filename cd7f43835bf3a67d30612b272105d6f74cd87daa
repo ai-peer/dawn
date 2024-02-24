@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e75c70_788e3a3c",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-24T11:00:00Z",
+      "side": 1,
+      "message": "Oh I thought I commented this in the diff: my MSVC complains about \u0026kExpectedData (L912 below) if kExpectedData is a constexpr because it means taking the address of a literal to them, which they refuse.\n\nI\u0027ll move this with the other MSVC-specific issue; btw do you have a doc with advice about the best git workflow to use with Gerrit? It is already cumbersome to always amend the same commit while keeping my own local history, especially if my working branch must be different from the commit I push here (e.g., because of these MSVC specific things, or because I use CMake for tests). Rebasing is painful, git worktree doesn\u0027t work because of submodules, etc. so I think I\u0027m not doing it right overall",
+      "parentUuid": "15cb6672_c7793cc0",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f43bab44_2bcd867a",
@@ -172,6 +190,24 @@
       "writtenOn": "2024-02-22T17:50:08Z",
       "side": 1,
       "message": "Can this be separated? It seems to be a build fix (for some obscure MSVC reason?) that\u0027s totally unrelated to swapchains.",
+      "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e3c444_cac59883",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-24T11:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f43bab44_2bcd867a",
       "revId": "cd7f43835bf3a67d30612b272105d6f74cd87daa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
