@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd74fcb4_aa2060ba",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-24T02:13:52Z",
+      "side": 1,
+      "message": "nit: check callback mode first, then compute isReady. don\u0027t need to check isReady for non-spontaneous futures",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46ffb165_ef1eff95",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-24T02:13:52Z",
+      "side": 1,
+      "message": "I think checking mEvents here is racy with instance WillDropLastExternalRef.\n\nsince spontaneous events do autoremoval, we probably need to make it mutex\u003coptional\u003c\u003e\u003e instead of optional\u003cmutex\u003c\u003e\u003e",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ece2bab_b44c1ab5",
+        "filename": "src/dawn/tests/end2end/EventTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-24T02:13:52Z",
+      "side": 1,
+      "message": "isn\u0027t it possible to enter this condition if the callback didn\u0027t fire yet, but then once inside, the callback fires and races with this assert?\n\ngiven we will have a different expectation below for spontaneous callbacks, maybe we should handle the spontaneous case separately here as well.",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
