@@ -299,6 +299,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9702aad_c614a074",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-26T13:32:34Z",
+      "side": 1,
+      "message": "Sure!",
+      "parentUuid": "99289117_670a475a",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "590c176b_e145ed93",
         "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
         "patchSetId": 13

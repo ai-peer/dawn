@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7a4b02d_b102ed3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-26T13:32:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44f131b2_6d610cda",
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13663622_b07772cb",
@@ -64,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86de9f8_0f402d01",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-26T13:32:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf9d8ae2_efbfd7b7",
+      "range": {
+        "startLine": 274,
+        "startChar": 4,
+        "endLine": 298,
+        "endChar": 75
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88bf46ed_dbe749ef",
@@ -77,6 +119,30 @@
       "writtenOn": "2024-02-23T21:51:24Z",
       "side": 1,
       "message": "nit. [1] Might be able to save the number of allocations by doing something like https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;l\u003d146;bpv\u003d0;bpt\u003d0",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 347,
+        "endChar": 36
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fbe557_b2be6caf",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-26T13:32:34Z",
+      "side": 1,
+      "message": "I consulted cwallez@ before and he doesn\u0027t believe this change is necessary since the relevant code path is rarely used.",
+      "parentUuid": "88bf46ed_dbe749ef",
       "range": {
         "startLine": 326,
         "startChar": 12,
