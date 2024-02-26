@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "468600b4_c57695da",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:40:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8983dab9_ffdf866b",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c0f0d2e_8ba91f92",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-02-26T09:30:55Z",
       "side": 1,
       "message": "Maybe we could try the SRGB vs RGB version instead of exactly the same format. Could be a TODO + follow-up.",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "947829de_58a6b8f0",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:40:43Z",
+      "side": 1,
+      "message": "Added a TODO",
+      "parentUuid": "9c0f0d2e_8ba91f92",
       "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
