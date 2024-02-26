@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44f5cc1_6f5a77f7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-26T18:30:35Z",
+      "side": 1,
+      "message": "Done. But for metal and d3d. I cannot find shared articles.  But there are verified with the dawn tests.",
+      "parentUuid": "552ab3d7_e04263be",
+      "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca882e10_9c7daad2",
