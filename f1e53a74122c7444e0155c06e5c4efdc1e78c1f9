@@ -323,6 +323,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac67594d_a9524e30",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-26T21:55:55Z",
+      "side": 1,
+      "message": "I messed up writing down the proposed signature on GitHub. Corrected here:\nhttps://github.com/webgpu-native/webgpu-headers/issues/266#issuecomment-1965349425\nDoes that resolve the concerns?\n\nIt\u0027s still a little funny with the lifetimes: you have to heap allocate the WGPUAdapterInfo, unless you Wait the future while the stack allocation is alive. Probably OK?\n\n---\n\nGetCompilationInfo is unresolved: https://github.com/webgpu-native/webgpu-headers/issues/272",
+      "parentUuid": "e9702aad_c614a074",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "590c176b_e145ed93",
         "filename": "src/dawn/tests/end2end/AdapterInfoTests.cpp",
         "patchSetId": 13
