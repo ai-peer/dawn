@@ -16,6 +16,24 @@
       "message": "PTAL. The primary input we\u0027re targeting for SharedBufferMemory for use with WebNN is an ID3D12Resource.",
       "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "658b9688_1f677e7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-26T21:46:23Z",
+      "side": 1,
+      "message": "it\u0027ll be useful to understand how the whole picture is going to work:\n - how is the ID3D12Resource allocated?\n - similar to my question about fences, why can\u0027t we use HANDLE like we do for SharedTextureMemory, and cache the import operation?\n - how will it work for cross-adapter resources?",
+      "parentUuid": "af8d5289_7f23cedf",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
