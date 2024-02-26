@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cb2c1f8_a91d1580",
+        "filename": "src/tint/lang/wgsl/ast/transform/single_entry_point.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T14:40:16Z",
+      "side": 1,
+      "message": "There seems to be a good number of cases where we don\u0027t actually specify a `Source`. Perhaps we should make this paramter defaulted to `\u003d Source{}` and avoid the noise?",
+      "range": {
+        "startLine": 58,
+        "startChar": 58,
+        "endLine": 58,
+        "endChar": 66
+      },
+      "revId": "712ae6712c08f7e7a4c002ecd7ab1c638c0e3d43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
