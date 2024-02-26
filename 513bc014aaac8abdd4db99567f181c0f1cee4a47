@@ -22,6 +22,30 @@
       },
       "revId": "513bc014aaac8abdd4db99567f181c0f1cee4a47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711364b5_d6a0ca4c",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-26T15:12:52Z",
+      "side": 1,
+      "message": "Yup - been working [on this](https://dawn-review.googlesource.com/c/dawn/+/176460) this morning.",
+      "parentUuid": "0a113bc8_dae0661e",
+      "range": {
+        "startLine": 311,
+        "startChar": 46,
+        "endLine": 311,
+        "endChar": 100
+      },
+      "revId": "513bc014aaac8abdd4db99567f181c0f1cee4a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
