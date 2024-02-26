@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce761b5d_4b98dcf2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-26T18:13:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff5e17a4_4b7c8344",
+      "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca882e10_9c7daad2",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-26T12:41:19Z",
       "side": 1,
       "message": "The addition of a depth texture should be conditional and have its own tests. We can add an argument to the enclosing method. Likewise we should test rendering to multiple chrominances and to chrominance + oversize color.",
+      "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "816a199d_aa33cc61",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-26T18:13:51Z",
+      "side": 1,
+      "message": "Partial done.\n\nDo you mean test validation failed cases?",
+      "parentUuid": "ca882e10_9c7daad2",
       "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
