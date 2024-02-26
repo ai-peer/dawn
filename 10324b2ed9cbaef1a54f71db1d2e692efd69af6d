@@ -34,6 +34,24 @@
       "parentUuid": "af8d5289_7f23cedf",
       "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccd53a7_bbd1fbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-26T23:31:13Z",
+      "side": 1,
+      "message": "\u003e how is the ID3D12Resource allocated?\n\nFor our WebNN use case, the ID3D12Resource is allocated and managed by WebNN. Specifically, these appear to be standard Default, Upload and Readback buffers. These originate from WebNN\u0027s MLBuffer type, which is WIP [1].\n\n[1] https://chromium-review.googlesource.com/c/chromium/src/+/5101781\n\n\u003e why can\u0027t we use HANDLE like we do for SharedTextureMemory, and cache the import operation?\n\nFeedback I\u0027ve gotten is that there\u0027s some small performance overhead and the minor inconvenience going to/from HANDLE. We do prefer to import an ID3D12Resource*, however if you feel strongly we should use a HANDLE, we can use that instead.\n\n\u003e how will it work for cross-adapter resources?\n\nIt won\u0027t. We\u0027ll need to verify that the parent WebNN device and the Dawn device are the same upon import, otherwise we have to just return an error. For WebNN, we don\u0027t anticipate needing cross-adapter functionality and instead plan to move resources such that they would always be on same device device that Dawn is using.",
+      "parentUuid": "658b9688_1f677e7f",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
