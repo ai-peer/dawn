@@ -492,7 +492,7 @@ void PrintCandidates(StyledText& ss,
                      VectorRef<const core::type::Type*> template_args,
                      VectorRef<const core::type::Type*> args) {
     for (auto& candidate : candidates) {
-        ss << "  ";
+        ss << " • ";
         PrintCandidate(ss, context, candidate, intrinsic_name, template_args, args);
         ss << "\n";
     }
@@ -565,6 +565,7 @@ void PrintCandidate(StyledText& ss,
         ss << ">";
     }
 
+    bool all_params_match = true;
     ss << "(";
     for (size_t i = 0; i < overload.num_parameters; i++) {
         const auto& parameter = context.data[overload.parameters + i];
@@ -575,6 +576,7 @@ void PrintCandidate(StyledText& ss,
             matched = Match(context, templates, overload, matcher_indices, earliest_eval_stage)
                           .Type(args[i]);
         }
+        all_params_match = all_params_match && matched;
 
         if (i > 0) {
             ss << ", ";
@@ -601,22 +603,43 @@ void PrintCandidate(StyledText& ss,
 
     bool first = true;
     auto separator = [&] {
-        ss << style::Plain(first ? "  where: " : ", ");
+        ss << style::Plain(first ? " where:\n     " : "\n     ");
         first = false;
     };
+
+    if (all_params_match && template_args.Length() > overload.num_explicit_templates) {
+        separator();
+        ss << style::Mismatch(" ✗ ")
+           << style::Plain(" overload expects ", static_cast<int>(overload.num_explicit_templates),
+                           " template argument", overload.num_explicit_templates != 1 ? "s" : "");
+    }
 
     for (size_t i = 0; i < overload.num_templates; i++) {
         auto& tmpl = context.data[overload.templates + i];
         if (auto* matcher_indices = context.data[tmpl.matcher_indices]) {
-            auto matcher =
-                Match(context, templates, overload, matcher_indices, earliest_eval_stage);
-
             separator();
+            bool matched = false;
+            if (tmpl.kind == TemplateInfo::Kind::kType) {
+                matched = Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                              .Type(templates.Type(i));
+            } else {
+                matched = Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                              .Num(templates.Num(i))
+                              .IsValid();
+            }
+            if (matched) {
+                ss << style::Match(" ✓ ") << style::Plain(" ");
+            } else {
+                ss << style::Mismatch(" ✗ ") << style::Plain(" ");
+            }
+
             ss << style::Type(tmpl.name) << style::Plain(" is ");
             if (tmpl.kind == TemplateInfo::Kind::kType) {
-                matcher.PrintType(ss);
+                Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                    .PrintType(ss);
             } else {
-                matcher.PrintNum(ss);
+                Match(context, templates, overload, matcher_indices, earliest_eval_stage)
+                    .PrintNum(ss);
             }
         }
     }
