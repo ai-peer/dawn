@@ -418,6 +418,30 @@
       },
       "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d584bf81_a0c45490",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T15:37:46Z",
+      "side": 1,
+      "message": "I still have the same concerns, but again, let\u0027s just go with this and see how things shake out.",
+      "parentUuid": "d0a800c9_25f7e2e9",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

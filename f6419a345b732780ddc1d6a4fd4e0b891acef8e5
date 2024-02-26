@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6869c929_0c5a7bc5",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T15:37:46Z",
+      "side": 1,
+      "message": "Can we sort these so that the bit values increase from `0001` to `1111`?",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 71,
+        "endChar": 76
+      },
+      "revId": "f6419a345b732780ddc1d6a4fd4e0b891acef8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99f65b8_5da7b7b8",
+        "filename": "src/tint/utils/text/text_style_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T15:37:46Z",
+      "side": 1,
+      "message": "These tests help to demonstrate what I find might confuse us. It seems that if we have an Error, then adding a Warning to it should not be allowed, as it\u0027s probably a programmer mistake.",
+      "range": {
+        "startLine": 63,
+        "startChar": 1,
+        "endLine": 66,
+        "endChar": 77
+      },
+      "revId": "f6419a345b732780ddc1d6a4fd4e0b891acef8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
