@@ -46,6 +46,30 @@
       },
       "revId": "712ae6712c08f7e7a4c002ecd7ab1c638c0e3d43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1afe262_7611d0a4",
+        "filename": "src/tint/lang/wgsl/ast/transform/single_entry_point.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T15:40:01Z",
+      "side": 1,
+      "message": "I was wondering if that\u0027s why you did it. Sounds good.",
+      "parentUuid": "f05281a9_73755d6f",
+      "range": {
+        "startLine": 58,
+        "startChar": 58,
+        "endLine": 58,
+        "endChar": 66
+      },
+      "revId": "712ae6712c08f7e7a4c002ecd7ab1c638c0e3d43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
