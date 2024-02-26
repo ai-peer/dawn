@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ba04ec7_b94dda63",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-26T17:10:28Z",
+      "side": 1,
+      "message": "The 9th bit represents `Code`, which is used by all the tokens. Squiggle could come before the tokens, I suppose, but `kKindMask` must come first.",
+      "parentUuid": "6869c929_0c5a7bc5",
+      "range": {
+        "startLine": 62,
+        "startChar": 3,
+        "endLine": 71,
+        "endChar": 76
+      },
+      "revId": "f6419a345b732780ddc1d6a4fd4e0b891acef8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d99f65b8_5da7b7b8",
         "filename": "src/tint/utils/text/text_style_test.cc",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2024-02-26T15:37:46Z",
       "side": 1,
       "message": "These tests help to demonstrate what I find might confuse us. It seems that if we have an Error, then adding a Warning to it should not be allowed, as it\u0027s probably a programmer mistake.",
+      "range": {
+        "startLine": 63,
+        "startChar": 1,
+        "endLine": 66,
+        "endChar": 77
+      },
+      "revId": "f6419a345b732780ddc1d6a4fd4e0b891acef8e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe3954c_bb6c8197",
+        "filename": "src/tint/utils/text/text_style_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-26T17:10:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d99f65b8_5da7b7b8",
       "range": {
         "startLine": 63,
         "startChar": 1,
