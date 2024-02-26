@@ -176,7 +176,6 @@ crbug.com/dawn/2120 webgpu:api,operation,rendering,draw:arguments:first=3;count=
 crbug.com/dawn/2120 webgpu:api,operation,rendering,draw:arguments:first=3;count=6;first_instance=0;instance_count=4;indexed=true;indirect=true;vertex_buffer_offset=32;index_buffer_offset=16;base_vertex=9 [ Failure ]
 
 # copyTextureToTexture failures
-crbug.com/dawn/2208 webgpu:api,operation,command_buffer,copyTextureToTexture:copy_depth_stencil:format="depth24plus-stencil8" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="r8snorm";dstFormat="r8snorm";dimension="2d" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="r8snorm";dstFormat="r8snorm";dimension="3d" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="2d" [ Failure ]
