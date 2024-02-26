@@ -345,6 +345,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c50abf_e61097b1",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Ok, I discussed with Austin a bit and added comments regarding how I think we need to do it! Note that I need to fix the `GetCompilationInfo` equivalent to match what I am suggesting here, so don\u0027t use that as an example. I tried to include explicit code snippets to help, so lmk if you have any other questions!\n\nBasically though, the gist is that we should be allocating memory for each return value to make it work properly.",
+      "parentUuid": "e9702aad_c614a074",
+      "range": {
+        "startLine": 316,
+        "startChar": 12,
+        "endLine": 316,
+        "endChar": 88
+      },
+      "revId": "f1e53a74122c7444e0155c06e5c4efdc1e78c1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "590c176b_e145ed93",

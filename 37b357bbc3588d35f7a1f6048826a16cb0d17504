@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15fd23c3_4067ddff",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13663622_b07772cb",
+      "range": {
+        "startLine": 191,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 37
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf9d8ae2_efbfd7b7",
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "I consulted cwallez@ before and he doesn\u0027t believe this change is necessary since the relevant code path is rarely used.",
       "parentUuid": "88bf46ed_dbe749ef",
+      "range": {
+        "startLine": 326,
+        "startChar": 12,
+        "endLine": 347,
+        "endChar": 36
+      },
+      "revId": "37b357bbc3588d35f7a1f6048826a16cb0d17504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e98720a_934a1f83",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "02fbe557_b2be6caf",
       "range": {
         "startLine": 326,
         "startChar": 12,

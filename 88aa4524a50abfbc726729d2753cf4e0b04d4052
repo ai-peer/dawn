@@ -16,6 +16,138 @@
       "message": "a",
       "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d758e5_56e2f694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Thanks for the patience!",
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a877bb3c_a8f3ef6a",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "[2] This won\u0027t work because you are only copying the pointers, so this needs to be (note that we are copying into `std::strings`:\n\n```\nmAdapter-\u003emAdapterInfo \u003d {\n    .vendor \u003d adapterInfo-\u003evendor,\n    .architecture \u003d adapterInfo-\u003earchitecture,\n    .device \u003d adapterInfo-\u003edevice,\n    .description \u003d adapterInfo-\u003edescription,\n};\n```",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 10
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "896dc7e0_955a2f7e",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Removable",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 50
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f28ef79_6679f2d0",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "[2] And this needs to be:\n\n```\nWGPUAdapterInfo adapterInfo;\nsize_t vendorNameCLen \u003d mAdapter-\u003emAdapterInfo-\u003evendor.length() + 1;\nchar* vendorPtr \u003d new char[vendorNameCLen];\nadapterInfo.vendor \u003d vendorPtr;\nmemcpy(vendorPtr, mAdapter-\u003emAdapterInfo-\u003evendor.c_str(), vendorNameCLen);\n\nsize_t architectureCLen \u003d mAdapter-\u003emAdapterInfo-\u003earchitecture.length() + 1;\nchar* architecturePtr \u003d new char[architectureCLen];\nadapterInfo.vendor \u003d architecturePtr;\nmemcpy(architecturePtr, mAdapter-\u003emAdapterInfo-\u003earchitecture.c_str(), architectureCLen);\n\nsize_t deviceCLen \u003d mAdapter-\u003emAdapterInfo-\u003edevice.length();\nchar* devicePtr \u003d new char[deviceCLen];\nadapterInfo.device \u003d devicePtr;\nmemcpy(devicePtr, mAdapter-\u003emAdapterInfo-\u003edevice.c_str(), deviceCLen);\n\nsize_t descriptionCLen \u003d mAdapter-\u003emAdapterInfo-\u003edescription.length() + 1;\nchar* descriptionPtr \u003d new char[descriptionCLen];\nadapterInfo.description \u003d descriptionPtr;\nmemcpy(descriptionPtr, mAdapter-\u003emAdapterInfo-\u003edescription.c_str(), descriptionCLen);\n\nmCallback(mStatus, \u0026adapterInfo, mUserdata);\n```",
+      "range": {
+        "startLine": 160,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a2f09e_8347256d",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Don\u0027t need this anymore.",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c132ce_6a617004",
+        "filename": "src/dawn/wire/client/Adapter.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T21:59:20Z",
+      "side": 1,
+      "message": "Ok, so I talked with Austin about this also and it\u0027ll need to be fixed for `GetCompilationInfo` also (I\u0027ll send a fix out for that shortly), but this can\u0027t actually cache like this. So instead we should have something like this and [2].\n\n```\nstruct AdapterInfo {\n    std::string vendor;\n    std::string architecture;\n    std::string device;\n    std::string description;\n};\nstd::optional\u003cAdapterInfo\u003e mAdapterInfo;\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 48
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
