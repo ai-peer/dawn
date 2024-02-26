@@ -50,6 +50,24 @@
       "message": "Is this missing a word?",
       "revId": "4d66feb45bd22860c7100c5a9cbcce4d9a64d5a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb4dc82_f74fb611",
+        "filename": "src/tint/lang/wgsl/ast/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T20:44:20Z",
+      "side": 1,
+      "message": "That \"or \" shouldn\u0027t be there.",
+      "parentUuid": "1d34efda_27c1565b",
+      "revId": "4d66feb45bd22860c7100c5a9cbcce4d9a64d5a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
