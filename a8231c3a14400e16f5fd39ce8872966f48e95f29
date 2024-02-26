@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad15165_9ba8e549",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:21:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d94771ab_f9431649",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a486f56f_723e5126",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca586ed_f31e7ea5",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a486f56f_723e5126",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df987023_f96b9573",
@@ -82,6 +118,24 @@
       "writtenOn": "2024-02-24T22:16:41Z",
       "side": 1,
       "message": "IMHO we could just try a couple known configurations in a test somewhere, that\u0027s enough to get the coverage for the check.",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2276427_5caeaf85",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:21:10Z",
+      "side": 1,
+      "message": "Ok! Then I think ValidViewFormat+InvalidViewFormat tests cover the relevant code paths.",
+      "parentUuid": "df987023_f96b9573",
       "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bf2647d_192a1840",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "493ea21b_37d06dbf",
+      "range": {
+        "startLine": 238,
+        "startChar": 43,
+        "endLine": 238,
+        "endChar": 52
+      },
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5c69163_c5b696f1",
@@ -122,6 +200,24 @@
       "writtenOn": "2024-02-24T22:16:41Z",
       "side": 1,
       "message": "nit: suppression is removed, so we can remove both the suppression and the comment?",
+      "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14f6b889_2253b9a4",
+        "filename": "src/dawn/tests/end2end/SurfaceTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-26T09:21:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c69163_c5b696f1",
       "revId": "a8231c3a14400e16f5fd39ce8872966f48e95f29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
