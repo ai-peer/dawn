@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5e17a4_4b7c8344",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-26T12:41:19Z",
+      "side": 1,
+      "message": "Based on all the links you provided, it seems that the Chrominance plane must be matched with a combination of other chrominance planes of the same size, or full-size D/S or color planes. It seems that the logic should be:\n\n```\nExtent3D renderSize \u003d attachment-\u003eGetSingleSubresourceVirtualSize();\nExtent3D attachmentValidationSize \u003d renderSize;\nif (plane \u003d\u003d plane1 or plane2) {\n  // FAT COMMENT explaining why we do this.\n  attachmentValidationSize \u003d the size for plane 0;\n}\n\nif (HasAttachment()) {\n  validate attachmentValidationSize \u003d\u003d mAttachmentValidationSize\n  mRenderSize \u003d min(mRenderSize, renderSize);\n} else {\n  mRenderSize \u003d renderSize;\n  mAttachmentValidationSize \u003d attachmentValidationSize;\n}\n\n\nGetWidth -\u003e GetRenderWidth\nGetHeight -\u003e GetRenderHeight\n```\n\nOr if we can only render chrominance on its own or with just a DS, then we need to have validation for that.",
+      "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca882e10_9c7daad2",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1476,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-26T12:41:19Z",
+      "side": 1,
+      "message": "The addition of a depth texture should be conditional and have its own tests. We can add an argument to the enclosing method. Likewise we should test rendering to multiple chrominances and to chrominance + oversize color.",
+      "revId": "c8d97b8e4d6aa1b208fe0be673595ff028eef6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
