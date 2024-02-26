@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8d5289_7f23cedf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-26T21:18:04Z",
+      "side": 1,
+      "message": "PTAL. The primary input we\u0027re targeting for SharedBufferMemory for use with WebNN is an ID3D12Resource.",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
