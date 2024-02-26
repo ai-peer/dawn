@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac03230_aee06dcd",
+        "filename": "src/dawn/native/ExecutionQueue.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T22:05:01Z",
+      "side": 1,
+      "message": "nit. Maybe `CompletedSerial` instead? The wording is a bit odd otherwise?",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
