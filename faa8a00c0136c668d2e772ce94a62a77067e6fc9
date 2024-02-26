@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aeb9c53_fb884133",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-02-26T23:07:05Z",
+      "side": 1,
+      "message": "Isn\u0027t a bug that these weren\u0027t remove automatically. If they\u0027re passing the CTS roll should have removed them. Otherwise either they aren\u0027t passing or there\u0027s a bug in the roller. Right?",
+      "revId": "faa8a00c0136c668d2e772ce94a62a77067e6fc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
