@@ -94,6 +94,30 @@
       },
       "revId": "4fad414147a8e6a62078df4bfecd8bca776dbdda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0613e23_1649c2a6",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 3317440
+      },
+      "writtenOn": "2024-02-26T18:01:33Z",
+      "side": 1,
+      "message": "I can\u0027t figure out why this is failing submit and it will take me a lot of time to ramp up on this project. Could someone on your team take over getting this merged?",
+      "parentUuid": "98a83055_2cd6bf29",
+      "range": {
+        "startLine": 466,
+        "startChar": 0,
+        "endLine": 466,
+        "endChar": 33
+      },
+      "revId": "4fad414147a8e6a62078df4bfecd8bca776dbdda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
