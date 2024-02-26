@@ -22,6 +22,30 @@
       },
       "revId": "712ae6712c08f7e7a4c002ecd7ab1c638c0e3d43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05281a9_73755d6f",
+        "filename": "src/tint/lang/wgsl/ast/transform/single_entry_point.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-26T15:25:00Z",
+      "side": 1,
+      "message": "That is what it used to be, but I decided that forcing you to emit an empty Source is a deterrent against accidentally forgetting to add one. A bunch of  `AddError()`s probably should be an ICE, which doesn\u0027t take a Source.",
+      "parentUuid": "5cb2c1f8_a91d1580",
+      "range": {
+        "startLine": 58,
+        "startChar": 58,
+        "endLine": 58,
+        "endChar": 66
+      },
+      "revId": "712ae6712c08f7e7a4c002ecd7ab1c638c0e3d43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
