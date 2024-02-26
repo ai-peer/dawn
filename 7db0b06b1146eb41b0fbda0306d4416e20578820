@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b8b3d1_aad80f64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-26T15:52:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7db0b06b1146eb41b0fbda0306d4416e20578820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc4749b0_dd347658",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-26T15:52:32Z",
+      "side": 1,
+      "message": "Maybe we could have a TODO to undo this once error handling is thread safe. Ditto in other places.",
+      "revId": "7db0b06b1146eb41b0fbda0306d4416e20578820",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
