@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a113bc8_dae0661e",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T14:34:46Z",
+      "side": 1,
+      "message": "This pattern of switching to one style for the next token, then going back to the previous (or plain) style is probably going to happen a lot. Perhaps if style::Function has an operator() that takes a `string_view` and this is what gets that style (so it\u0027s scoped). This would then become:\n\n```\nAddError(Source{}) \u003c\u003c \"function \" \u003c\u003c style::Function(Name(func.Get())))\n  \u003c\u003c \" added to module multiple times\";\n```",
+      "range": {
+        "startLine": 311,
+        "startChar": 46,
+        "endLine": 311,
+        "endChar": 100
+      },
+      "revId": "513bc014aaac8abdd4db99567f181c0f1cee4a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
