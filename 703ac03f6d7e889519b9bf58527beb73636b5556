@@ -370,6 +370,30 @@
       },
       "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de51bf47_5ba2f6b3",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T14:35:45Z",
+      "side": 1,
+      "message": "We discussed this offline quite a bit, and although I still do not think `operator+` is the way to go, I\u0027m ready to land as is, and to evaluate this design based on usage.",
+      "parentUuid": "af661c2e_9c4451d1",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
