@@ -94,6 +94,30 @@
       },
       "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00645543_fb616d0b",
+        "filename": "src/dawn/native/ExecutionQueue.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-26T23:14:22Z",
+      "side": 1,
+      "message": "Hmm I guess I\u0027m ok with `OnSerialCompleted` also then, but it makes it sounds like a callback? Some other options: `MarkSerialAsCompleted`, `CompletedUpTo`? Not sure? I\u0027m not too opinionated on this so fine to leave it however.",
+      "parentUuid": "28c4a12d_943fea8e",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
