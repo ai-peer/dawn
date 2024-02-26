@@ -46,6 +46,30 @@
       },
       "revId": "513bc014aaac8abdd4db99567f181c0f1cee4a47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55bf6086_f65f01c5",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-26T15:45:09Z",
+      "side": 1,
+      "message": "Excellent!",
+      "parentUuid": "711364b5_d6a0ca4c",
+      "range": {
+        "startLine": 311,
+        "startChar": 46,
+        "endLine": 311,
+        "endChar": 100
+      },
+      "revId": "513bc014aaac8abdd4db99567f181c0f1cee4a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
