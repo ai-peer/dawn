@@ -394,6 +394,30 @@
       },
       "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a800c9_25f7e2e9",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-26T15:13:36Z",
+      "side": 1,
+      "message": "I\u0027ve pulled later changes down to this CL. PTAL.",
+      "parentUuid": "de51bf47_5ba2f6b3",
+      "range": {
+        "startLine": 95,
+        "startChar": 14,
+        "endLine": 95,
+        "endChar": 23
+      },
+      "revId": "703ac03f6d7e889519b9bf58527beb73636b5556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
