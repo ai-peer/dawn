@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55bfb5a5_f9808be6",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-27T19:08:27Z",
+      "side": 1,
+      "message": "I think Chrome graphite doesn\u0027t have this use case. And I haven\u0027t test it yet. Not sure if `ID3D11DeviceContext::ResolveSubresource()` will require src and dst must be in the same size for the plane0.",
+      "parentUuid": "e34ef706_09c90574",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "323a3a3c_9df7ef39",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 15
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-27T17:20:17Z",
       "side": 1,
       "message": "```suggestion\n        // Perform plane operations for testing by creating render passes and comparing textures.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6092bd3_1b6ba127",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-27T19:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "323a3a3c_9df7ef39",
       "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b8e7f2_468ccdd3",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-27T19:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83c3cde1_2c3eb165",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5b9ed25_6e59085e",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36623964_1a43cbe5",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-27T19:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5b9ed25_6e59085e",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9260ed9a_41280eb0",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-02-27T17:20:17Z",
       "side": 1,
       "message": "```suggestion\n        // Create a depth texture with same size as chroma texture view. It should produce an error to use it with the chroma plane as a luminance-size texture is expected.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d5c007_d074cbd2",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-27T19:08:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9260ed9a_41280eb0",
       "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
