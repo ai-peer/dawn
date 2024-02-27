@@ -16,6 +16,24 @@
       "message": "Nit: comment is wrong",
       "revId": "c181c4f6a6fb867e023b5ebb3ee3c31c9f76c557",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9392e5_5f5a4b58",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-27T19:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04e23d9c_f63767d8",
+      "revId": "c181c4f6a6fb867e023b5ebb3ee3c31c9f76c557",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
