@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2488acd3_6b338d3c",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T09:53:54Z",
+      "side": 1,
+      "message": "I wonder if we could eventually have an ityp::atomic that wraps std::atomic for ityps given that we have a small number of these uses. It would also have the compare_exchange_weak loop to do the atomic_max.",
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "678479c5_f7d31be7",
