@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd56b696_996ea210",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-27T19:13:59Z",
+      "side": 1,
+      "message": "It looks good, but a few comments.",
+      "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2a4ed0_3d207d8f",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-27T19:13:59Z",
+      "side": 1,
+      "message": "As discussed in chat, it would be great if we could take advantage of ADL here to avoid typing out `style::` when passing args to the stream insertion operator.",
+      "range": {
+        "startLine": 1851,
+        "startChar": 19,
+        "endLine": 1851,
+        "endChar": 26
+      },
+      "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727bac32_6c74ba48",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-27T19:13:59Z",
+      "side": 1,
+      "message": "I think `ScopedTextStyle` would be a better name for this. It would also makes the API for operator() more clear, I think.",
+      "range": {
+        "startLine": 142,
+        "startChar": 7,
+        "endLine": 142,
+        "endChar": 20
+      },
+      "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
