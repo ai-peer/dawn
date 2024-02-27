@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a6e8a50_53e15f14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34ef706_09c90574",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "Is this only for DS, or also for non-chrominance textures? I wonder about what happens when the chrominance is used as multisample resolve as well.\n\nThere\u0027s so many corner cases to check :/ We need to be careful because all this is accessible from the renderer process so it needs to be secure. I wish we didn\u0027t have to do that but some other Chromium projects need MultiPlanarRenderTargets to be available to users of the WebGPU command buffer.\n\nSo for now we could have the most basic check of combining with color and validation when the chrominance is used as a resolve target.",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "323a3a3c_9df7ef39",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1496,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "```suggestion\n        // Perform plane operations for testing by creating render passes and comparing textures.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c3cde1_2c3eb165",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "```suggestion\n            // Perform operations for the alpha plane.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b9ed25_6e59085e",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1850,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "```suggestion\n        // Create a depth texture with same size as luma texture view. It should be possible to use it with both the luminance and the subsampled chroma plane.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9260ed9a_41280eb0",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T17:20:17Z",
+      "side": 1,
+      "message": "```suggestion\n        // Create a depth texture with same size as chroma texture view. It should produce an error to use it with the chroma plane as a luminance-size texture is expected.\n```",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
