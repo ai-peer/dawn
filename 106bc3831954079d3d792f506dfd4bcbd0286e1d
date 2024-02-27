@@ -62,6 +62,30 @@
       },
       "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabce374_e2235866",
+        "filename": "src/tint/utils/text/text_style.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-27T19:51:54Z",
+      "side": 1,
+      "message": "Good idea. Done.",
+      "parentUuid": "727bac32_6c74ba48",
+      "range": {
+        "startLine": 142,
+        "startChar": 7,
+        "endLine": 142,
+        "endChar": 20
+      },
+      "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
