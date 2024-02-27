@@ -128,6 +128,30 @@
       },
       "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55882dda_7853017a",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-27T20:42:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6c9c59e_87869455",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 389,
+        "endChar": 0
+      },
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
