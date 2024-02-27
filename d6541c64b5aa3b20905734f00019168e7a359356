@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a20456c_27d7d8a0",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-27T16:21:30Z",
+      "side": 1,
+      "message": "I think I\u0027ll hold off and try to fix this now then.",
+      "parentUuid": "99619542_4153537d",
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2488acd3_6b338d3c",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-02-27T02:49:37Z",
       "side": 1,
       "message": "Does the order of loading these two matter? I think it doesn\u0027t because it doesn\u0027t introduce any new race conditions, but it might be worth commenting about.",
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c374ab1_c1b92a14",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-27T16:21:30Z",
+      "side": 1,
+      "message": "technically the order probably does, but we\u0027re currently using that only for a dawn::native internal API which answers the question of \"should you keep calling ProcessEvents / Tick to flush all callbacks\"?\n\nwhich eventually *should* get removed. I\u0027ll perhaps rename this though to make it clear that it might not give you a precise answer if you\u0027re checking it while other submissions are happening. Or - I\u0027ll add an ASSERT that you have the global device lock in order to call it.",
+      "parentUuid": "678479c5_f7d31be7",
       "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +221,30 @@
       "side": 1,
       "message": "Slight preference to rename this as well, maybe SetSerialDidComplete or AdvanceCompletedSerial(To)",
       "parentUuid": "00645543_fb616d0b",
+      "range": {
+        "startLine": 91,
+        "startChar": 9,
+        "endLine": 91,
+        "endChar": 26
+      },
+      "revId": "d6541c64b5aa3b20905734f00019168e7a359356",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942e5740_4901f196",
+        "filename": "src/dawn/native/ExecutionQueue.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-27T16:21:30Z",
+      "side": 1,
+      "message": "\"SetSerialDidComplete\" SGTM",
+      "parentUuid": "d8ffafb7_342ef4a4",
       "range": {
         "startLine": 91,
         "startChar": 9,
