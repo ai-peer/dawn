@@ -16,6 +16,80 @@
       "message": "Thanks for all the comments Loko. I\u0027ve addressed all of them.\nNow, I have some trybot tests failing which I can\u0027t reproduce locally sadly:\n\n```\n$ ./out/Debug/dawn_end2end_tests --gtest_filter\u003d*AdapterInfoTests*\nInfo: Testing configuration\n---------------------\nUseWire: false\nImplicit device synchronization: disabled\nRun suppressed tests: false\nBackendValidation: disabled\nBeginCaptureOnStartup: false\n\nSystem adapters: \n - \"Apple M1 Pro\" - \"Metal driver on macOS Version 14.3.1 (Build 23D60) [Selected]\"\n   type: Integrated GPU, backend: Metal, compatibilityMode: false\n   vendorId: 0x106B, deviceId: 0x0000\n   vendorName: apple, architecture: common-3\n - \"SwiftShader Device (LLVM 10.0.0)\" - \"SwiftShader driver 5.0.0 [Selected]\"\n   type: CPU, backend: Vulkan, compatibilityMode: false\n   vendorId: 0x1AE0, deviceId: 0xC0DE\n   vendorName: google, architecture: swiftshader\n - \"Null backend\" - \" [Selected]\"\n   type: CPU, backend: Null, compatibilityMode: false\n   vendorId: 0x0000, deviceId: 0x0000\n\nIMPORTANT DEBUGGING NOTE: batches of tests are run inside their\nown process. For debugging a test inside a debugger, use the\n--gtest_filter\u003d\u003cyour_test_name\u003e flag along with\n--single-process-tests.\nUsing sharding settings from environment. This is shard 0/1\nUsing 1 parallel jobs.\nWarning:  Unused argument: --single-process-tests\nWarning:  Unused argument: --test-launcher-output\u003d/var/folders/v7/ws9m3q151hdb_pfby31y1lx0005z_t/T/scoped_dir0w9Pld/orDipB/test_results.xml\nWarning:  Unused argument: --test-launcher-retries-left\u003d0\nInfo: Testing configuration\n---------------------\nUseWire: false\nImplicit device synchronization: disabled\nRun suppressed tests: false\nBackendValidation: disabled\nBeginCaptureOnStartup: false\n\nSystem adapters: \n - \"Apple M1 Pro\" - \"Metal driver on macOS Version 14.3.1 (Build 23D60) [Selected]\"\n   type: Integrated GPU, backend: Metal, compatibilityMode: false\n   vendorId: 0x106B, deviceId: 0x0000\n   vendorName: apple, architecture: common-3\n - \"SwiftShader Device (LLVM 10.0.0)\" - \"SwiftShader driver 5.0.0 [Selected]\"\n   type: CPU, backend: Vulkan, compatibilityMode: false\n   vendorId: 0x1AE0, deviceId: 0xC0DE\n   vendorName: google, architecture: swiftshader\n - \"Null backend\" - \" [Selected]\"\n   type: CPU, backend: Null, compatibilityMode: false\n   vendorId: 0x0000, deviceId: 0x0000\n\nNote: Google Test filter \u003d Legacy/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro:Legacy/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0:Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__WaitAnyOnly:Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowProcessEvents:Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowSpontaneous:Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__WaitAnyOnly:Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowProcessEvents:Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowSpontaneous\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 8 tests from 2 test suites.\n[----------] Global test environment set-up.\n[----------] 2 tests from Legacy/AdapterInfoTests\n[ RUN      ] Legacy/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro\n[       OK ] Legacy/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro (2 ms)\n[ RUN      ] Legacy/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0\n[       OK ] Legacy/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0 (2 ms)\n[----------] 2 tests from Legacy/AdapterInfoTests (5 ms total)\n\n[----------] 6 tests from Future/AdapterInfoTests\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__WaitAnyOnly\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__WaitAnyOnly (0 ms)\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowProcessEvents\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowProcessEvents (0 ms)\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowSpontaneous\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowSpontaneous (0 ms)\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__WaitAnyOnly\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__WaitAnyOnly (1 ms)\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowProcessEvents\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowProcessEvents (1 ms)\n[ RUN      ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowSpontaneous\n[       OK ] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowSpontaneous (1 ms)\n[----------] 6 tests from Future/AdapterInfoTests (7 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 8 tests from 2 test suites ran. (15 ms total)\n[  PASSED  ] 8 tests.\n[1/8] Legacy/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro (2 ms)\n[2/8] Legacy/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0 (2 ms)\n[3/8] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__WaitAnyOnly (0 ms)\n[4/8] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowProcessEvents (0 ms)\n[5/8] Future/AdapterInfoTests.RequestAdapterInfo/Metal_Apple_M1_Pro_FutureCallbackMode_CallbackMode__AllowSpontaneous (0 ms)\n[6/8] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__WaitAnyOnly (1 ms)\n[7/8] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowProcessEvents (1 ms)\n[8/8] Future/AdapterInfoTests.RequestAdapterInfo/Vulkan_SwiftShader_Device__LLVM_10_0_0__FutureCallbackMode_CallbackMode__AllowSpontaneous (1 ms)\nSUCCESS: all tests passed.\nTests took 0 seconds.\n```",
       "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32820f6d_450e2c7e",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-27T21:31:55Z",
+      "side": 1,
+      "message": "Should we add the deprecated version? I guess so we can match Emscripten until futures are done?",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a68a77_bc62099e",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-27T21:31:55Z",
+      "side": 1,
+      "message": "The signatures should match the one described here:\nhttps://github.com/webgpu-native/webgpu-headers/issues/266#issuecomment-1947364479\nwhere the WGPUAdapterInfo object is passed into wgpuAdapterRequestAdapterInfo instead of being passed out to the callback. And we need wgpuAdapterInfoFreeMembers in the public API.\n\nI haven\u0027t fully reviewed because this is going to change some of the lifetime stuff.",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e1fa6d4_db19e78f",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-27T21:31:55Z",
+      "side": 1,
+      "message": "nit: give this a more specific name like FormatDeviceForAdapterInfo",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aed4860_4c448cd8",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-02-27T21:31:55Z",
+      "side": 1,
+      "message": "absl lets us do this much more simply:\n`absl::StrFormat(\"0x%04X\", deviceId)`\nthough on some systems (where the GPU is not a PCI device), the device ID may actually be 32 bits, so probably select between that and:\n`absl::StrFormat(\"0x%08X\", deviceId)`\ndepending on whether `deviceId \u003e 0xffff`.",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
