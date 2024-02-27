@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb927fb_0ea2f2f3",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-02-27T19:52:22Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll see if I can do that as a followup.",
+      "parentUuid": "fd2a4ed0_3d207d8f",
+      "range": {
+        "startLine": 1851,
+        "startChar": 19,
+        "endLine": 1851,
+        "endChar": 26
+      },
+      "revId": "106bc3831954079d3d792f506dfd4bcbd0286e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "727bac32_6c74ba48",
