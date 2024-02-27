@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d746e386_beee170a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-02-27T23:33:10Z",
+      "side": 1,
+      "message": "[Unresolving this issue to make sure the discussion doesn\u0027t get lost]\n\n\u003e Overall though, I\u0027m surprised that we won\u0027t ever need cross-adapter functionality. Aren\u0027t there devices where the NPU and GPU are entirely separate adapters? You won\u0027t be able to keep resources on the same adapter in that scenario.\n\nFor same adapter sharing between Dawn and Chromium, I think `ID3D12Resource` should be sufficient.  \n\nWe\u0027ve had requests from developers to have WebNN respect the \"high performance\" request. Since the power preference adapter returned by `IDXGIFactory6::EnumAdapterByGpuPreference` can change over the course of the application\u0027s lifetime, it\u0027s important that it happen in one, central Chromium component. This way, developers will get the same high/lower power adapter whether they ask WebGPU or WebNN. \n\nFor now, we can decide to only allow same power preference adapters for WebGPU/WebNN interop. If not, we can have WebNN move resources to the correct adapter before calling Dawn or have Dawn move the resource itself. Unless I am missing something, we should be able to use `ID3D12Resource` as the sharing currency for SharedBufferMemory in either case.  \n\nIn case you\u0027re wondering, `ID3D11Device::OpenSharedResource` does not work with buffers. So WebGPU\u003c-\u003eWebNN interop will not work when WebGPU is in compat mode.",
+      "parentUuid": "0d762181_08a72703",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6c9c59e_87869455",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
