@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0635172d_974f7300",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-27T21:12:14Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t believe this should be a concern - I intend to maintain a ComPtr reference to the ID3D12Resource within Dawn, which would ensure the underlying memory of the ID3D12Resource cannot be destroyed or reallocated externally. Does that makes sense?\n\u003e \n\nIf the resource is a placed resource, the whoever allocated it orignally (WebNN) might **think** it has dropped all references and reallocate a new resource in its place. But actually, Dawn still is holding a reference. Now these two resources alias which is no good.\n\n\u003e Yes, NPUs and GPUs can be separate devices. I admit I don\u0027t fully understand the tradeoffs and I\u0027m just parroting Rafael\u0027s opinion here. Direct quote from RC: \"Since WebGPU does not support \"high performance\" adapters, I was going to have WebNN take care of moving data to the correct adapter and have WebGPU be none the wiser to the fact that the imported buffer originally came from another adapter.\"\n\u003e \n\u003e It seems like if this does ever become an issue we can just always add support to also import a HANDLE (like SharedTextureMemoryD3D11 does).\n\nI don\u0027t feel too strongly about using HANDLE or not if there is only a import single path. However, if we **know** we\u0027re going to need HANDLE in the future, then we may as well implement that now and have a single import path. If we end up having both ID3D12Resource and HANDLE, then I think we should delete the ID3D12Resource path in the future. It would be good to not go through the pain of deprecating and deleting it if we can avoid it. Lower overhead of ID3D12Resource isn\u0027t that compelling to me because the point of wgpu::SharedBufferMemory is that it lets you cache the cost of import and then never pay for it again.\n\nBut I guess it\u0027s hard to say how exactly things will be, and the details with NPU/GPU aren\u0027t so fleshed out yet, so this is fine for now.",
+      "parentUuid": "63946b40_2bd018b0",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6c9c59e_87869455",
