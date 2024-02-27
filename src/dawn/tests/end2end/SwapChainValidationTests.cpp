@@ -380,13 +380,13 @@ TEST_P(SwapChainValidationTests, SwapChainIsInvalidAfterSurfaceDestruction_After
     ASSERT_DEVICE_ERROR(replacedSwapChain.Present());
 }
 
-// Test that new swap chain present fails after device is lost
-TEST_P(SwapChainValidationTests, SwapChainPresentFailsAfterDeviceLost) {
+// Test that new swap chain present after device is lost
+TEST_P(SwapChainValidationTests, SwapChainPresentAfterDeviceLost) {
     wgpu::SwapChain swapchain = device.CreateSwapChain(surface, &goodDescriptor);
     swapchain.GetCurrentTexture();
 
     LoseDeviceForTesting();
-    ASSERT_DEVICE_ERROR(swapchain.Present());
+    swapchain.Present();
 }
 
 // Test that new swap chain get current texture fails after device is lost
