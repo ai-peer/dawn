@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0f8d1c3_912ee765",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-27T02:13:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd74fcb4_aa2060ba",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46ffb165_ef1eff95",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec343df5_b2e25211",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-27T02:13:49Z",
+      "side": 1,
+      "message": "Done. I updated the usage in `TrackEvent` as well for the same reason.",
+      "parentUuid": "46ffb165_ef1eff95",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ece2bab_b44c1ab5",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-02-24T02:13:52Z",
       "side": 1,
       "message": "isn\u0027t it possible to enter this condition if the callback didn\u0027t fire yet, but then once inside, the callback fires and races with this assert?\n\ngiven we will have a different expectation below for spontaneous callbacks, maybe we should handle the spontaneous case separately here as well.",
+      "revId": "81074fe60b91bb425ee336137413c218932bb881",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1cdb31_6de5534f",
+        "filename": "src/dawn/tests/end2end/EventTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-27T02:13:49Z",
+      "side": 1,
+      "message": "Good point! Updated.",
+      "parentUuid": "9ece2bab_b44c1ab5",
       "revId": "81074fe60b91bb425ee336137413c218932bb881",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
