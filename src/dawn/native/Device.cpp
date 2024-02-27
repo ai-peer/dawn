@@ -581,7 +581,7 @@ void DeviceBase::APIDestroy() {
 
 void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
                              InternalErrorType additionalAllowedErrors,
-                             WGPUDeviceLostReason lost_reason) {
+                             WGPUDeviceLostReason lostReason) {
     AppendDebugLayerMessages(error.get());
 
     InternalErrorType type = error->GetType();
@@ -634,13 +634,14 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
 
     const std::string messageStr = error->GetFormattedMessage();
     if (type == InternalErrorType::DeviceLost) {
+        mLostMessage = messageStr;
         // The device was lost, schedule the application callback's executation.
         // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
         // possible deadlock.
         if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mDeviceLostCallback, lost_reason,
+            mCallbackTaskManager->AddCallbackTask([callback = mDeviceLostCallback, lostReason,
                                                    messageStr, userdata = mDeviceLostUserdata] {
-                callback(lost_reason, messageStr.c_str(), userdata);
+                callback(lostReason, messageStr.c_str(), userdata);
             });
             mDeviceLostCallback = nullptr;
         }
@@ -810,7 +811,13 @@ MaybeError DeviceBase::ValidateObject(const ApiObjectBase* object) const {
 }
 
 MaybeError DeviceBase::ValidateIsAlive() const {
-    DAWN_INVALID_IF(mState != State::Alive, "%s is lost.", this);
+    if (DAWN_UNLIKELY(mState != State::Alive)) {
+        if (!mLostMessage.empty()) {
+            return DAWN_VALIDATION_ERROR("%s is lost because: %s", this, mLostMessage);
+        } else {
+            return DAWN_VALIDATION_ERROR("%s is lost.", this);
+        }
+    }
     return {};
 }
 

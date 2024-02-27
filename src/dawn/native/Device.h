@@ -616,6 +616,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     absl::flat_hash_set<std::string> mWarnings;
 
     State mState = State::BeingCreated;
+    // The message that was generated when the device was lost.
+    std::string mLostMessage;
 
     PerObjectType<ApiObjectList> mObjectLists;
 
