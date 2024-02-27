@@ -16,6 +16,23 @@
       "message": "PTAL! also addressed corentin\u0027s comment from the previous iteration of this CL",
       "revId": "a64944d1875900c70481b5ad483e0e53e0871a55",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abd0b0a_f61893dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-27T09:22:50Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "a64944d1875900c70481b5ad483e0e53e0871a55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
