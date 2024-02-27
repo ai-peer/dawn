@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63946b40_2bd018b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-27T19:40:48Z",
+      "side": 1,
+      "message": "\u003e Is there a way to validate the the ID3D12Resource is not a placed resource? I don\u0027t see a safe and easy way to make such an import work because then Dawn will need to make sure some external suballocator doesn\u0027t reallocate the resource.\n\nI don\u0027t believe this should be a concern - I intend to maintain a ComPtr reference to the ID3D12Resource within Dawn, which would ensure the underlying memory of the ID3D12Resource cannot be destroyed or reallocated externally. Does that makes sense?\n\n\u003e Aside from that, I think it would be OK to use an ID3D12Resource if we plan on validating the device is the same. The benefit of share handle is that it doesn\u0027t let you share placed resources, so we have that guarantee.\n\nWe will validate the ID3D12Resource device matches the Dawn device.\n\n\u003e Overall though, I\u0027m surprised that we won\u0027t ever need cross-adapter functionality. Aren\u0027t there devices where the NPU and GPU are entirely separate adapters? You won\u0027t be able to keep resources on the same adapter in that scenario.\n\nYes, NPUs and GPUs can be separate devices. I admit I don\u0027t fully understand the tradeoffs and I\u0027m just parroting Rafael\u0027s opinion here. Direct quote from RC: \"Since WebGPU does not support \"high performance\" adapters, I was going to have WebNN take care of moving data to the correct adapter and have WebGPU be none the wiser to the fact that the imported buffer originally came from another adapter.\"\n\nIt seems like if this does ever become an issue we can just always add support to also import a HANDLE (like SharedTextureMemoryD3D11 does).",
+      "parentUuid": "0d762181_08a72703",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6c9c59e_87869455",
