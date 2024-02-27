@@ -68,6 +68,24 @@
       "parentUuid": "1d34efda_27c1565b",
       "revId": "4d66feb45bd22860c7100c5a9cbcce4d9a64d5a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72e1e2b0_caa39f94",
+        "filename": "src/tint/lang/wgsl/ast/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-27T15:11:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb4dc82_f74fb611",
+      "revId": "4d66feb45bd22860c7100c5a9cbcce4d9a64d5a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
