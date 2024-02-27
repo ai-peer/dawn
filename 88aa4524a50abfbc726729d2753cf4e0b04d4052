@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b66ae37_9a4f8f79",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-27T12:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a877bb3c_a8f3ef6a",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 140,
+        "endChar": 10
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "896dc7e0_955a2f7e",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-02-26T21:59:20Z",
       "side": 1,
       "message": "Removable",
+      "range": {
+        "startLine": 151,
+        "startChar": 8,
+        "endLine": 151,
+        "endChar": 50
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6482944_73bb590c",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-27T12:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "896dc7e0_955a2f7e",
       "range": {
         "startLine": 151,
         "startChar": 8,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f1f26c_7d451859",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-27T12:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f28ef79_6679f2d0",
+      "range": {
+        "startLine": 160,
+        "startChar": 8,
+        "endLine": 162,
+        "endChar": 9
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6a2f09e_8347256d",
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd8b589_98416b63",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-27T12:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a2f09e_8347256d",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 50
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22c132ce_6a617004",
@@ -140,6 +236,30 @@
       "writtenOn": "2024-02-26T21:59:20Z",
       "side": 1,
       "message": "Ok, so I talked with Austin about this also and it\u0027ll need to be fixed for `GetCompilationInfo` also (I\u0027ll send a fix out for that shortly), but this can\u0027t actually cache like this. So instead we should have something like this and [2].\n\n```\nstruct AdapterInfo {\n    std::string vendor;\n    std::string architecture;\n    std::string device;\n    std::string description;\n};\nstd::optional\u003cAdapterInfo\u003e mAdapterInfo;\n```",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 48
+      },
+      "revId": "88aa4524a50abfbc726729d2753cf4e0b04d4052",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "329fe2a5_de4e12a4",
+        "filename": "src/dawn/wire/client/Adapter.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-27T12:10:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22c132ce_6a617004",
       "range": {
         "startLine": 78,
         "startChar": 4,
