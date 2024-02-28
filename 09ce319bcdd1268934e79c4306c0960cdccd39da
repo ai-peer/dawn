@@ -16,6 +16,24 @@
       "message": "You would also need to import `TestSharedWorker` and use it in `runCtsTest`. See how I dit it in https://github.com/gpuweb/cts/pull/3435/files#diff-e2aed720beddc3282c6d147d564ba4ac7c685771fd7d8f03423bc8740c504425",
       "revId": "09ce319bcdd1268934e79c4306c0960cdccd39da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb8942c_e9dbbceb",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-28T14:46:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab1e8c02_0269cd95",
+      "revId": "09ce319bcdd1268934e79c4306c0960cdccd39da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
