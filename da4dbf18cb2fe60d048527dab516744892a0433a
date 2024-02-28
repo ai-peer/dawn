@@ -34,6 +34,24 @@
       "parentUuid": "ac327cdf_3275ff7d",
       "revId": "da4dbf18cb2fe60d048527dab516744892a0433a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "959e465d_3e219fe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-02-28T19:54:29Z",
+      "side": 1,
+      "message": "Nop. Everything is good.",
+      "parentUuid": "d4b68d13_6d248c46",
+      "revId": "da4dbf18cb2fe60d048527dab516744892a0433a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
