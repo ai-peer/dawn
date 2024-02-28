@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a27d5a_bdab1401",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-28T14:37:23Z",
+      "side": 1,
+      "message": "This was supposed to be dawn:2143\n\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d2143",
+      "range": {
+        "startLine": 21,
+        "startChar": 5,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "f5abb823f98d0ab55b31b63453d46188b7f9e5a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
