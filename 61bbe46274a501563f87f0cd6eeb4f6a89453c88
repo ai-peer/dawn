@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7783e6a_ecd94c41",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004686
+      },
+      "writtenOn": "2024-02-28T20:11:53Z",
+      "side": 1,
+      "message": "Drive my comment when looking at related skia change, https://skia-review.googlesource.com/c/skia/+/817378.\n\nMaybe I\u0027m misunderstanding the specs, but my read of at least the Vulkan spec says that the framebuffers attachment size just needs to be less than or equal to the width,height of the VkImage in vkCreateImageInfo. The depth attachment needs to be at least the size of the color attachment.\n\nWith this understanding, I believe Vulkan would allow you to use a smaller DS attachment when rendering the uv planes right? So is it the intention of this change to require all backend APIs to use a larger DS than necessary just because D3D11 requires it to be at least the size of the full texture (i.e. size of plane 0)?",
+      "range": {
+        "startLine": 142,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 89
+      },
+      "revId": "61bbe46274a501563f87f0cd6eeb4f6a89453c88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
