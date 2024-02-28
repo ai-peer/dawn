@@ -34,6 +34,24 @@
       "parentUuid": "a67469cb_a97274e0",
       "revId": "15bcb5e7e5144c95794e306be134dc8a47415fcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "241cb55c_ae54cee2",
+        "filename": "src/tint/lang/core/type/invalid.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-02-28T16:08:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0c7284ac_40aa2a97",
+      "revId": "15bcb5e7e5144c95794e306be134dc8a47415fcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
