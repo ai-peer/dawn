@@ -88,6 +88,24 @@
       "parentUuid": "282a7685_04183dec",
       "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5d4b702_d55ef921",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-28T18:22:28Z",
+      "side": 1,
+      "message": "You\u0027re right, I always forget that the actual difference between `emplace` and `try_emplace` is that the latter avoids constructing the value if the key already exists. Nevermind.",
+      "parentUuid": "acc991f1_dbba241f",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
