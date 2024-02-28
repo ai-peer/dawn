@@ -46,6 +46,30 @@
       },
       "revId": "61bbe46274a501563f87f0cd6eeb4f6a89453c88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04cd21db_b1cb7108",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004686
+      },
+      "writtenOn": "2024-02-28T20:51:29Z",
+      "side": 1,
+      "message": "thanks for the info Peng, just wanted to confirm the plan was to force larger sizes across all backends.",
+      "parentUuid": "07c298b8_4f74e9b1",
+      "range": {
+        "startLine": 142,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 89
+      },
+      "revId": "61bbe46274a501563f87f0cd6eeb4f6a89453c88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
