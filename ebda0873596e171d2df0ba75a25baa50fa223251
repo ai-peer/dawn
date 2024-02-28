@@ -52,6 +52,24 @@
       "parentUuid": "671a69d8_76a6e09d",
       "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "282a7685_04183dec",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-02-28T18:11:44Z",
+      "side": 1,
+      "message": "It\u0027s the usage that confuses me. Even with this I didn\u0027t realize Add _woudln\u0027t_ add in this case. The naming usage here is what confuses me most. `MaybeAdd`? `GetOrAdd` ?",
+      "parentUuid": "671a69d8_76a6e09d",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
