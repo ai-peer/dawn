@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67469cb_a97274e0",
+        "filename": "src/tint/lang/core/type/invalid.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-28T15:39:53Z",
+      "side": 1,
+      "message": "This seems a bit odd living in core/type. Could it be hidden inside the intrinsic folder somewhere such that we can never accidentally add an Invalid type somewhere?",
+      "revId": "15bcb5e7e5144c95794e306be134dc8a47415fcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
