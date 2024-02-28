@@ -99,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9e7788_e748e4e3",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-28T11:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e1fa6d4_db19e78f",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1aed4860_4c448cd8",
@@ -112,6 +130,24 @@
       "writtenOn": "2024-02-27T21:31:55Z",
       "side": 1,
       "message": "absl lets us do this much more simply:\n`absl::StrFormat(\"0x%04X\", deviceId)`\nthough on some systems (where the GPU is not a PCI device), the device ID may actually be 32 bits, so probably select between that and:\n`absl::StrFormat(\"0x%08X\", deviceId)`\ndepending on whether `deviceId \u003e 0xffff`.",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f4309e_73b8c9f5",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-28T11:20:39Z",
+      "side": 1,
+      "message": "Thank you!",
+      "parentUuid": "1aed4860_4c448cd8",
       "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
