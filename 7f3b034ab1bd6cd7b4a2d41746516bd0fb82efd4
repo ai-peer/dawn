@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04c01ba9_e32728ef",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-28T01:59:57Z",
+      "side": 1,
+      "message": "Let\u0027s either validate that it isn\u0027t supported, or add the test to see whether or not it works. Even if Graphite doesn\u0027t use it, we expose multiplanar render targets to the Renderer process. That means we need to be 100% security safe because a compromised renderer might send arbitrary commands.",
+      "parentUuid": "55bfb5a5_f9808be6",
+      "revId": "7f3b034ab1bd6cd7b4a2d41746516bd0fb82efd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "323a3a3c_9df7ef39",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 15

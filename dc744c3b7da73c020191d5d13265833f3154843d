@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc80f3c_3bb3f83e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-28T01:59:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dc744c3b7da73c020191d5d13265833f3154843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e186a80_2a328177",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-28T01:59:57Z",
+      "side": 1,
+      "message": "nit: more clear to say `if (attachmentType \u003d\u003d AttachmentType::DepthStencilAttachment) { ...` then swap the branches?\n\nIf depth-stencil, do special depth-stencil validation, otherwise do normal validation",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 154,
+        "endChar": 72
+      },
+      "revId": "dc744c3b7da73c020191d5d13265833f3154843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdef08c_fbb98207",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-28T01:59:57Z",
+      "side": 1,
+      "message": "nit: expand this message to clarify to the user that for depthStencil attachments, they need to be full size when a subsampled plane is a color attachment - instead of matching the render size",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 65
+      },
+      "revId": "dc744c3b7da73c020191d5d13265833f3154843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
