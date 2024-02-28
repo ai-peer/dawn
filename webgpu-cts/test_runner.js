@@ -35,7 +35,7 @@ import { parseQuery } from '../third_party/webgpu-cts/src/common/internal/query/
 import { parseSearchParamLikeWithCTSOptions } from '../third_party/webgpu-cts/src/common/runtime/helper/options.js';
 import { setDefaultRequestAdapterOptions } from '../third_party/webgpu-cts/src/common/util/navigator_gpu.js';
 
-import { TestWorker } from '../third_party/webgpu-cts/src/common/runtime/helper/test_worker.js';
+import { TestDedicatedWorker } from '../third_party/webgpu-cts/src/common/runtime/helper/test_worker.js';
 
 // The Python-side websockets library has a max payload size of 72638. Set the
 // max allowable logs size in a single payload to a bit less than that.
@@ -178,7 +178,7 @@ if (!isWindows) {
 async function runCtsTest(queryString, use_worker) {
   const { queries, options } = parseSearchParamLikeWithCTSOptions(queryString);
   const workerEnabled = use_worker || options.worker;
-  const worker = workerEnabled ? new TestWorker(options) : undefined;
+  const worker = workerEnabled ? new TestDedicatedWorker(options) : undefined;
 
   const loader = new DefaultTestFileLoader();
   const filterQuery = parseQuery(queries[0]);
