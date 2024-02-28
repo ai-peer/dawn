@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48cc2b5d_3ad48007",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-02-28T06:27:44Z",
+      "side": 1,
+      "message": "See thread in https://dawn-review.googlesource.com/c/dawn/+/173982/comment/a1eef500_4923e1b6/ But also I am working on a fix for this which I can hopefully send out tomorrow... If I land that one first then we don\u0027t need the deprecated one.",
+      "parentUuid": "32820f6d_450e2c7e",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1a68a77_bc62099e",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 32
