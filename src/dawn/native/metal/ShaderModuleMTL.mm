@@ -167,7 +167,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                             // the array length uniform transform. This is used to compute the
                             // size of variable length arrays in storage buffers.
                             arrayLengthFromUniform.bindpoint_to_size_index.emplace(
-                                dstBindingPoint, dstBindingPoint.binding);
+                                srcBindingPoint, dstBindingPoint.binding);
                             break;
                         case wgpu::BufferBindingType::Undefined:
                             DAWN_UNREACHABLE();
@@ -227,7 +227,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
 
             // Use the ShaderIndex as the indices for the buffer size lookups in the array
             // length uniform transform.
-            arrayLengthFromUniform.bindpoint_to_size_index.emplace(dstBindingPoint,
+            arrayLengthFromUniform.bindpoint_to_size_index.emplace(srcBindingPoint,
                                                                    dstBindingPoint.binding);
         }
     }
