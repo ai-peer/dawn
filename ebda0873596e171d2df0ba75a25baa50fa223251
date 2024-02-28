@@ -70,6 +70,24 @@
       "parentUuid": "671a69d8_76a6e09d",
       "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc991f1_dbba241f",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-28T18:15:10Z",
+      "side": 1,
+      "message": "\u003e Driveby comment: renaming Add to TryAdd would probably help make this contract more clear, similar to std::unordered_map::try_emplace\n\nhttps://en.cppreference.com/w/cpp/container/unordered_map/emplace\n\n\u003e Returns a pair consisting of an iterator to the inserted element, `or the already-existing element if no insertion happened`\n\nSo, it\u0027s quite like `emplace` in that it returns the old thing if there\u0027s already an entry with the key, or the new thing if it wasn\u0027t.",
+      "parentUuid": "282a7685_04183dec",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
