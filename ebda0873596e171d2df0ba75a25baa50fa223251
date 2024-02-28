@@ -16,6 +16,24 @@
       "message": "This is a much more confusing way to write what was there before as it requires an understanding that `Add` will replace and if it replaces it will return the thing that was replaced.",
       "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "671a69d8_76a6e09d",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-28T18:06:15Z",
+      "side": 1,
+      "message": "That\u0027s the documented contract of the function, intentionally designed that way so you don\u0027t have to do two lookups in the map (one to find, one to add). It\u0027s by design, and I encourage people to use it where they can.",
+      "parentUuid": "b9eb9974_9a32588d",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
