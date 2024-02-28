@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2bb398_add72921",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-28T15:05:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "34055782_86a300ef",
+      "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71a623c2_4509bd89",
