@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34055782_86a300ef",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-28T14:59:16Z",
+      "side": 1,
+      "message": "I\u0027d prefer someone did that in a followup. I\u0027d like to get the CTS rolling consistently so would prefer to do the smallest number of changes to unblock the roll.",
+      "parentUuid": "dbc99464_ec4adb6e",
+      "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71a623c2_4509bd89",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2024-02-28T14:56:27Z",
       "side": 1,
       "message": "Should it be `await sharedWorker.run(rec, name, expectations);`?",
+      "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be9d7df_df0a636c",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-28T14:59:16Z",
+      "side": 1,
+      "message": "Good catch, followed the other CL and didn\u0027t notice this was different.",
+      "parentUuid": "71a623c2_4509bd89",
       "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
