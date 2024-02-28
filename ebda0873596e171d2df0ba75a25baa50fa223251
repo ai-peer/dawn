@@ -34,6 +34,24 @@
       "parentUuid": "b9eb9974_9a32588d",
       "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22268fe3_4497c7c3",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-28T18:11:09Z",
+      "side": 1,
+      "message": "Driveby comment: renaming `Add` to `TryAdd` would probably help make this contract more clear, similar to [`std::unordered_map::try_emplace`](https://en.cppreference.com/w/cpp/container/unordered_map/try_emplace)",
+      "parentUuid": "671a69d8_76a6e09d",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
