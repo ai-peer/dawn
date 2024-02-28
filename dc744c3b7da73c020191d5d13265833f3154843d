@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d754ed_44ab7605",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-28T15:09:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e186a80_2a328177",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 154,
+        "endChar": 72
+      },
+      "revId": "dc744c3b7da73c020191d5d13265833f3154843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cdef08c_fbb98207",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-02-28T01:59:57Z",
       "side": 1,
       "message": "nit: expand this message to clarify to the user that for depthStencil attachments, they need to be full size when a subsampled plane is a color attachment - instead of matching the render size",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 65
+      },
+      "revId": "dc744c3b7da73c020191d5d13265833f3154843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039864f0_80032784",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-02-28T15:09:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cdef08c_fbb98207",
       "range": {
         "startLine": 166,
         "startChar": 0,
