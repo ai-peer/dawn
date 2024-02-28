@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc99464_ec4adb6e",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-28T14:56:27Z",
+      "side": 1,
+      "message": "Shall we get rid of `workerEnabled` as well since `use_worker` is marked as MAINTENANCE_TODO above?",
+      "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a623c2_4509bd89",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 4
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-02-28T14:56:27Z",
+      "side": 1,
+      "message": "Should it be `await sharedWorker.run(rec, name, expectations);`?",
+      "revId": "6aa3819e42d6e4a0365c8cba7c4b5ba324d52b6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
