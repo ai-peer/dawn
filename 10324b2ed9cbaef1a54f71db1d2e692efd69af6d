@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc90506b_aecaa59d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-02-28T19:32:07Z",
+      "side": 1,
+      "message": "\u003e Like Austin said, ID3D12Resource is sufficient for same-adapter sharing, but it doesn\u0027t enforce that the resource is a committed resource, and other users could decide to reuse the same memory. That\u0027s why HANDLE would be slightly preferred, but either way.\n\nAfter some further discussion on our side we do acknowledge the memory synchronization risk, however we feel using ID3D12Resource* provides more flexibility for our usage and remains our preference. I\u0027ll merge this shortly if there are no objections.",
+      "parentUuid": "9f8a110f_c541fea6",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6c9c59e_87869455",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
