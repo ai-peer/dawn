@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9eb9974_9a32588d",
+        "filename": "src/tint/lang/msl/writer/common/option_helpers.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-28T18:00:33Z",
+      "side": 1,
+      "message": "This is a much more confusing way to write what was there before as it requires an understanding that `Add` will replace and if it replaces it will return the thing that was replaced.",
+      "revId": "ebda0873596e171d2df0ba75a25baa50fa223251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
