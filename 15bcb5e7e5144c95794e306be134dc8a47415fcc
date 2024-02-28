@@ -16,6 +16,24 @@
       "message": "This seems a bit odd living in core/type. Could it be hidden inside the intrinsic folder somewhere such that we can never accidentally add an Invalid type somewhere?",
       "revId": "15bcb5e7e5144c95794e306be134dc8a47415fcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c7284ac_40aa2a97",
+        "filename": "src/tint/lang/core/type/invalid.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-28T16:04:49Z",
+      "side": 1,
+      "message": "I\u0027m planning on using it in other places where an error can be raised but we can still produce a \"complete\" program (don\u0027t need to deal with nullptrs everywhere). \n\nExamples include `tintd` (language server), so resolving doesn\u0027t have to stop at the first error. IR transforms and IR-\u003eProgram (so the incomplete AST can be printed).",
+      "parentUuid": "a67469cb_a97274e0",
+      "revId": "15bcb5e7e5144c95794e306be134dc8a47415fcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
