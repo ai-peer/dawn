@@ -34,6 +34,24 @@
       "parentUuid": "339f590a_4057b3cd",
       "revId": "84726a2f45764b814f37e127d5612070685b7fc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4aa368a2_1dde3851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-29T22:19:10Z",
+      "side": 1,
+      "message": "Added a `fetch_cmake` variable instead and will use that from the recipe, as you suggested.",
+      "parentUuid": "4372e3b5_78906782",
+      "revId": "84726a2f45764b814f37e127d5612070685b7fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
