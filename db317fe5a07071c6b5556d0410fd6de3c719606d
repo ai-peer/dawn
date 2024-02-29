@@ -52,6 +52,24 @@
       "parentUuid": "87d66dda_ba6a9998",
       "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e070478e_7dde1162",
+        "filename": "src/tint/utils/text/styled_text_printer_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-29T19:52:39Z",
+      "side": 1,
+      "message": "It\u0027s easier for callers to select from the values of an enum (like a command line flag) than it is to conditionally dispatch to different static methods. The ANSI implementations are going to sit in the same .cc file, as it\u0027s not a target-dependent build condition. Having the switch in the implementation file seems (to me) preferable than forcing the caller to conditionally dispatch.",
+      "parentUuid": "c214740e_52b49139",
+      "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
