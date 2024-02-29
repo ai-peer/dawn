@@ -34,6 +34,24 @@
       "parentUuid": "7c8dcb83_63a8988b",
       "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c214740e_52b49139",
+        "filename": "src/tint/utils/text/styled_text_printer_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T19:46:15Z",
+      "side": 1,
+      "message": "The enum, for the moemnt, is basically a bool. The argument still stands, these are distinct printers and both just happen to use ANSI for some bits. Even if we have others, I\u0027m guessing they\u0027d be distinct as well.",
+      "parentUuid": "87d66dda_ba6a9998",
+      "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
