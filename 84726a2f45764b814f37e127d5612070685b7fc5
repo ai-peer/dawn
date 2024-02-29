@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "339f590a_4057b3cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T21:40:12Z",
+      "side": 1,
+      "message": "should we do this all the time? we can set gclient vars like here:\nhttps://source.chromium.org/chromium/chromium/tools/build/+/main:recipes/recipes/dawn/gn.py;l\u003d52?q\u003ddawn%2Fgn.py to tell it to checkout cmake",
+      "revId": "84726a2f45764b814f37e127d5612070685b7fc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
