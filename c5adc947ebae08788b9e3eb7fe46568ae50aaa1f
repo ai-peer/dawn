@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d4f15d_2f5cddec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Accounting for Austin\u0027s feedback\n\nThanks a lot! :)",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2783653b_460dac06",
@@ -69,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91f5de5_522e9a25",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 35
+      },
+      "lineNbr": 3323,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2783653b_460dac06",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9e953ce_9939a790",
@@ -82,6 +117,30 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "unit: call this `GetName` as well so it\u0027s not confusing with ObjectBase::GetLabel.\nThen, your implementation of AbslFormatConvert can call GetName instead.\n\nI know that AdapterBase doesn\u0027t inherit from ObjectBase, but calling it \"label\" makes it look like it\u0027s the user-defined one.",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 31
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd029fb_7c8e4cec",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9e953ce_9939a790",
       "range": {
         "startLine": 82,
         "startChar": 23,
@@ -115,6 +174,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53140c4f_a6bfa2ef",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dedc983a_de97ea5b",
+      "range": {
+        "startLine": 219,
+        "startChar": 11,
+        "endLine": 219,
+        "endChar": 55
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ce97d53_fb1b59dd",
@@ -132,6 +215,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b975a7c5_55822f92",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ce97d53_fb1b59dd",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "439b521e_071e9032",
@@ -145,6 +246,30 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "doesn\u0027t exist (I think).\n\nIt could go somewhere in `src/dawn/native/utils/` as it will likely be useful",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 75
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25e1a7a5_2bbd14b0",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Moved to WGPUHelpers",
+      "parentUuid": "439b521e_071e9032",
       "range": {
         "startLine": 521,
         "startChar": 0,
@@ -178,6 +303,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0642c73d_c895a86d",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88957535_bea2ebca",
+      "range": {
+        "startLine": 606,
+        "startChar": 6,
+        "endLine": 608,
+        "endChar": 15
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2775a320_1fd50618",
@@ -191,6 +340,24 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d6c93f_d544cd84",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2775a320_1fd50618",
       "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -212,6 +379,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3890d5e1_84f2634b",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9e138f5_d8ee12de",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c9ad40b_9d3ddc0a",
@@ -225,6 +410,24 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2d7d42_9e4d2e0e",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c9ad40b_9d3ddc0a",
       "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -246,6 +449,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7b56c2_53d9cd0e",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cdd27e7_49eb6b98",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9098040_48c2d342",
@@ -259,6 +480,30 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "nit: you only use mViewFormatSet inside this ASSERT. Better then to not store it as a member variable and have a small helper here like ComputeViewFormatSet() to use inside the ASSERT",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 85
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5601e014_8173b84b",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9098040_48c2d342",
       "range": {
         "startLine": 231,
         "startChar": 0,
@@ -294,6 +539,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb9566a7_84bc8b9d",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Not sure neither TBH but I copied this entire comment line from where it was before (in the swap chain validation). BTW why is BGRA8Unorm the only supported format in native use of Dawn in practice?",
+      "parentUuid": "1e3e34a5_9ac83c0e",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 80
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a147c2_9b061b32",
         "filename": "src/dawn/native/vulkan/SwapChainCache.cpp",
         "patchSetId": 35
@@ -305,6 +574,24 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "could we return `VK_NULL_HANDLE` instead? then no need for std::optional",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b20d08_7a797e9c",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68a147c2_9b061b32",
       "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -322,6 +609,24 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "nit: let\u0027s put a TODO here about needing to lock the fenced deleter. If someone does something on another thread that makes Dawn flush the deleter, it could race and we end up using a deleted swap chain.\n\nThe bug about thread safety is crbug.com/dawn/1662\n\nProbably what we should ultimately do is actually steal the object out of the fenced deleter entirely. That way it has a single owner, and there\u0027s no chance of it getting deleted from under us. Did not realize this earlier, but we can fix it in a follow-up if you\u0027d like.\nIf the changes don\u0027t fit nicely into fenced deleter (the need to key on Surface*), then we can probably split the deletion queue of VkSwapchainKHR out to a separate utility.",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fe3595d_6a15c7ec",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Added a TODO:1662!",
+      "parentUuid": "7693b8dc_8f8f7472",
       "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -349,6 +654,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1849d5f2_3e09e83b",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Yep let\u0027s leave this whole swap chain cache to a follow up. My feeling is that we\u0027ll eventually have a backend-specific specialisation of SurfaceBase and that the Vulkan specialization will thus be able to store its previous swap chain individually rather than using a global cache.",
+      "parentUuid": "03e6d6c2_5182a4e9",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b32f9ead_60ab2d65",
@@ -362,6 +691,30 @@
       "writtenOn": "2024-02-29T06:13:46Z",
       "side": 1,
       "message": "nope :-/",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20780128_970f4b6b",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-29T08:50:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b32f9ead_60ab2d65",
       "range": {
         "startLine": 41,
         "startChar": 0,
