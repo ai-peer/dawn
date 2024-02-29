@@ -16,6 +16,24 @@
       "message": "Instead of the bool, it seems like it would fit better if there was a `CreateANSI8Bit` and `CreateANSI24Bit` constructors which then just builds the rigth printer.\n\nSeems like the only things the printers share are ESCAPE and `Equals`?",
       "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d66dda_ba6a9998",
+        "filename": "src/tint/utils/text/styled_text_printer_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-29T19:44:22Z",
+      "side": 1,
+      "message": "It\u0027s not a bool - it\u0027s an enum. We might need other flavors too.\nI can merge common code if it looks useful to do so",
+      "parentUuid": "7c8dcb83_63a8988b",
+      "revId": "db317fe5a07071c6b5556d0410fd6de3c719606d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
