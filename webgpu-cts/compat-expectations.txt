@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-02-28 07:54:35PM
+# Last rolled: 2024-02-29 11:33:58AM
 
 # Flaky on all platforms
 # KEEP
@@ -385,7 +385,7 @@ crbug.com/dawn/2125 [ nvidia-0x2184 ] webgpu:shader,execution,zero_init:compute,
 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba8snorm";dstFormat="rgba8snorm";dimension="2d" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba8snorm";dstFormat="rgba8snorm";dimension="3d" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="1d";readMethod="CopyToTexture";format="rg8snorm" [ Failure ]
-[ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="1d";readMethod="CopyToTexture";format="rgba8snorm" [ Failure ]
+[ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="1d";readMethod="CopyToTexture";format="rgba8snorm" [ RetryOnFailure ]
 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="r8snorm" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="rg8snorm" [ Failure ]
 [ intel-0x9bc5 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToTexture";format="rgba8snorm" [ Failure ]
@@ -486,11 +486,3 @@ crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimen
 crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32float";aspect="all" [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32sint";aspect="all" [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,textureDimensions:storage:format="rg32uint";aspect="all" [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="ComplexStruct";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="SimpleStruct";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="array%3Cu32,%204%3E";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="bool";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="mat3x2f";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="u32";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="vec4u";wgsize=[16,16] [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,execution,memory_model,texture_intra_invocation_coherence:* [ Failure ]
