@@ -248,7 +248,7 @@ deps = {
   },
 
   'tools/cmake': {
-    'condition': 'dawn_node and (host_os == "mac" or host_os == "linux")',
+    'condition': 'host_os == "mac" or host_os == "linux"',
     'packages': [{
       'package': 'infra/3pp/tools/cmake/${{platform}}',
       'version': Var('dawn_cmake_version'),
@@ -476,7 +476,7 @@ hooks = [
   {
     'name': 'cmake_win32',
     'pattern': '.',
-    'condition': 'dawn_node and host_os == "win"',
+    'condition': 'host_os == "win"',
     'action': [ 'python3',
                 'third_party/depot_tools/download_from_google_storage.py',
                 '--no_resume',
@@ -490,7 +490,7 @@ hooks = [
   {
     'name': 'cmake_win32_extract',
     'pattern': '.',
-    'condition': 'dawn_node and host_os == "win"',
+    'condition': 'host_os == "win"',
     'action': [ 'python3',
                 'scripts/extract.py',
                 'tools/cmake-win32.zip',
