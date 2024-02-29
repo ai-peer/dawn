@@ -283,12 +283,15 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
 }
 
 // Reorder callbacks to enforce callback ordering required by the spec.
-// Returns an iterator just past the last ready callback.
-auto PrepareReadyCallbacks(std::vector<TrackedFutureWaitInfo>& futures) {
+// Remove all unready ones from the futures vector.
+void PrepareReadyCallbacks(std::vector<TrackedFutureWaitInfo>& futures) {
     // Partition the futures so the following sort looks at fewer elements.
     auto endOfReady =
         std::partition(futures.begin(), futures.end(),
                        [](const TrackedFutureWaitInfo& future) { return future.ready; });
+
+    // Release any ref to unready events.
+    futures.erase(endOfReady, futures.end());
 
     // Enforce the following rules from https://gpuweb.github.io/gpuweb/#promise-ordering:
     // 1. For some GPUQueue q, if p1 = q.onSubmittedWorkDone() is called before
@@ -299,12 +302,10 @@ auto PrepareReadyCallbacks(std::vector<TrackedFutureWaitInfo>& futures) {
     //
     // To satisfy the rules, we need only put lower future ids before higher future
     // ids. Lower future ids were created first.
-    std::sort(futures.begin(), endOfReady,
+    std::sort(futures.begin(), futures.end(),
               [](const TrackedFutureWaitInfo& a, const TrackedFutureWaitInfo& b) {
                   return a.futureID < b.futureID;
               });
-
-    return endOfReady;
 }
 
 }  // namespace
@@ -409,7 +410,7 @@ bool EventManager::ProcessPollEvents() {
 
     std::vector<TrackedFutureWaitInfo> futures;
     wgpu::WaitStatus waitStatus;
-    auto readyEnd = mEvents.Use([&](auto events) {
+    bool needFutureProcessEvents = mEvents.Use([&](auto events) {
         // Iterate all events and record poll events and spontaneous events since they are both
         // allowed to be completed in the ProcessPoll call. Note that spontaneous events are allowed
         // to trigger anywhere which is why we include them in the call.
@@ -421,33 +422,37 @@ bool EventManager::ProcessPollEvents() {
             }
         }
 
-        // If there wasn't anything to wait on, we can skip the wait and just return the end.
+        // If there wasn't anything to wait on, we can skip the wait and just return false.
         if (futures.size() == 0) {
-            return futures.end();
+            return false;
         }
 
         waitStatus = WaitImpl(futures, Nanoseconds(0));
         if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            // Return the beginning to indicate that nothing completed.
-            return futures.begin();
+            // Nothing is completed. Clear all WaitRefs to release refs.
+            futures.clear();
+            return true;
         }
         DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
+        size_t beforeSize = futures.size();
         // Enforce callback ordering.
-        auto readyEnd = PrepareReadyCallbacks(futures);
+        PrepareReadyCallbacks(futures);
 
         // For all the futures we are about to complete, first ensure they're untracked.
-        for (auto it = futures.begin(); it != readyEnd; ++it) {
+        for (auto it = futures.begin(); it != futures.end(); ++it) {
             (*events)->erase(it->futureID);
         }
-        return readyEnd;
+
+        // If any refs were erased from futures, it means we still have unready events.
+        return beforeSize > futures.size();
     });
 
     // Finally, call callbacks.
-    for (auto it = futures.begin(); it != readyEnd; ++it) {
+    for (auto it = futures.begin(); it != futures.end(); ++it) {
         it->event->EnsureComplete(EventCompletionType::Ready);
     }
-    return readyEnd != futures.end();
+    return needFutureProcessEvents;
 }
 
 wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nanoseconds timeout) {
@@ -511,18 +516,18 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
     }
 
     // Enforce callback ordering
-    auto readyEnd = PrepareReadyCallbacks(futures);
+    PrepareReadyCallbacks(futures);
 
     // For any futures that we're about to complete, first ensure they're untracked. It's OK if
     // something actually isn't tracked anymore (because it completed elsewhere while waiting.)
     mEvents.Use([&](auto events) {
-        for (auto it = futures.begin(); it != readyEnd; ++it) {
+        for (auto it = futures.begin(); it != futures.end(); ++it) {
             (*events)->erase(it->futureID);
         }
     });
 
     // Finally, call callbacks and update return values.
-    for (auto it = futures.begin(); it != readyEnd; ++it) {
+    for (auto it = futures.begin(); it != futures.end(); ++it) {
         // Set completed before calling the callback.
         infos[it->indexInInfos].completed = true;
         it->event->EnsureComplete(EventCompletionType::Ready);
