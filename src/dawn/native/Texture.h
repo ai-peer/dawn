@@ -84,6 +84,7 @@ class TextureBase : public ApiObjectBase {
     static Ref<TextureBase> MakeError(DeviceBase* device, const TextureDescriptor* descriptor);
 
     ObjectType GetType() const override;
+    void FormatLabel(absl::FormatSink* s) const override;
 
     wgpu::TextureDimension GetDimension() const;
     wgpu::TextureViewDimension GetCompatibilityTextureBindingViewDimension() const;
