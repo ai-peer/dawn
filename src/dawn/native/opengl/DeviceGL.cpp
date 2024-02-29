@@ -191,6 +191,9 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
 
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
+    if (gl.IsAtLeastGL(4, 6) || gl.IsGLExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
+        gl.GetIntegerv(GL_MAX_TEXTURE_MAX_ANISOTROPY, &mMaxTextureMaxAnisotropy);
+    }
     return DeviceBase::Initialize(std::move(queue));
 }
 
@@ -432,6 +435,10 @@ const OpenGLFunctions& Device::GetGL() const {
     mContext->MakeCurrent();
     ToBackend(GetQueue())->OnGLUsed();
     return mGL;
+}
+
+int Device::GetMaxTextureMaxAnisotropy() const {
+    return mMaxTextureMaxAnisotropy;
 }
 
 }  // namespace dawn::native::opengl
