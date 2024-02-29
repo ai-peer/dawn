@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "4f13041ee36cbf48572ea263ed88d24ee9da7a85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7561037_d2a11d99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T22:31:30Z",
+      "side": 1,
+      "message": "(no-autosubmit)\n\nyou\u0027re going to re-add the builders to the rolls? otherwise it\u0027ll just get removed again",
+      "revId": "4f13041ee36cbf48572ea263ed88d24ee9da7a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
