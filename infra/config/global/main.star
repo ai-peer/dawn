@@ -169,14 +169,14 @@ luci.notifier(
 
 # Recipes
 
-def get_builder_executable():
+def get_builder_executable(use_gn):
     """Get standard executable for builders
 
     Returns:
       A luci.recipe
     """
     return luci.recipe(
-        name = "dawn/gn",
+        name = "dawn/gn" if use_gn else "dawn/cmake",
         cipd_package = "infra/recipe_bundles/chromium.googlesource.com/chromium/tools/build",
         cipd_version = "refs/heads/main",
     )
@@ -319,7 +319,7 @@ def add_ci_builder(name, os, clang, debug, cpu, fuzzer):
         bucket = "ci",
         schedule = schedule_ci,
         triggered_by = triggered_by_ci,
-        executable = get_builder_executable(),
+        executable = get_builder_executable(use_gn = 'cmake' not in name),
         properties = properties_ci,
         dimensions = dimensions_ci,
         caches = get_default_caches(os, clang),
@@ -349,7 +349,7 @@ def add_try_builder(name, os, clang, debug, cpu, fuzzer):
     luci.builder(
         name = name,
         bucket = "try",
-        executable = get_builder_executable(),
+        executable = get_builder_executable(use_gn = 'cmake' not in name),
         properties = properties_try,
         dimensions = dimensions_try,
         caches = get_default_caches(os, clang),
@@ -374,6 +374,73 @@ def add_tricium_builder():
         },
         service_account = "dawn-try-builder@chops-service-accounts.iam.gserviceaccount.com",
     )
+
+def dawn_cmake_standalone_builder(name, clang, debug, cpu):
+    """Adds both the CI and Try standalone builders as appropriate for the CMake build
+
+    Args:
+      name: builder's name in string form
+      clang: is this builder running clang
+      debug: is this builder generating debug builds
+      cpu: string representing the target CPU architecture
+
+    """
+    os = get_os_from_arg(name)
+
+    add_ci_builder(name, os, clang, debug, cpu, False)
+    add_try_builder(name, os, clang, debug, cpu, False)
+
+    config = ""
+    if clang:
+        config = "clang"
+    elif os.category == os_category.WINDOWS:
+        config = "msvc"
+
+    category = ""
+    category += os.console_name
+
+    if os.category != os_category.MAC:
+        category += "|" + config
+        if config != "msvc":
+            category += "|dbg" if debug else "|rel"
+
+    short_name = "dbg" if debug else "rel"
+    if os.category != os_category.MAC:
+        if config != "msvc":
+            short_name = cpu
+
+    luci.console_view_entry(
+        console_view = "ci",
+        builder = "ci/" + name,
+        category = category,
+        short_name = short_name,
+    )
+
+    luci.list_view_entry(
+        list_view = "try",
+        builder = "try/" + name,
+    )
+
+    luci.cq_tryjob_verifier(
+        cq_group = "Dawn-CQ",
+        builder = "dawn:try/" + name,
+        location_filters = [
+            cq.location_filter(path_regexp = ".*"),
+            cq.location_filter(
+                path_regexp = "\\.github/.+",
+                exclude = True,
+            ),
+        ],
+    )
+
+    # These builders run fine unbranched on branch CLs, so add them to the
+    # branch groups as well.
+    for milestone in ACTIVE_MILESTONES.keys():
+        luci.cq_tryjob_verifier(
+            cq_group = "Dawn-CQ-" + milestone,
+            builder = "dawn:try/" + name,
+        )
+
 
 def dawn_standalone_builder(name, clang, debug, cpu, fuzzer = False):
     """Adds both the CI and Try standalone builders as appropriate
@@ -648,6 +715,8 @@ dawn_standalone_builder("win-clang-rel-x86", True, False, "x86")
 dawn_standalone_builder("win-msvc-dbg-x64", False, True, "x64")
 dawn_standalone_builder("win-msvc-rel-x64", False, False, "x64")
 dawn_standalone_builder("cron-linux-clang-rel-x64", True, False, "x64", True)
+
+dawn_cmake_standalone_builder("cmake-linux-clang-dbg-x64", True, True, "x64")
 
 chromium_dawn_tryjob("linux")
 chromium_dawn_tryjob("mac")
