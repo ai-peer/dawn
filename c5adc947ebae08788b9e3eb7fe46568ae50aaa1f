@@ -563,6 +563,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e24e3dd_8140ea5a",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-29T09:12:42Z",
+      "side": 1,
+      "message": "IMHO these various similar comments could be turned into TODOs to investigate what\u0027s actually supported.",
+      "parentUuid": "bb9566a7_84bc8b9d",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 80
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68a147c2_9b061b32",
         "filename": "src/dawn/native/vulkan/SwapChainCache.cpp",
         "patchSetId": 35
