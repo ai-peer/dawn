@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a151ac_954b3a28",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "nit, maybe `kPlain` instead of `kDisabled` to match the what we called it in other places?",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fdcd89_2df47a7f",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "nit `TINT_DARK_BACKGROUND_COLOR` ? Unless this is a common key name should we prefix it?",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870ac577_cf3fdd58",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "Does `TINT_DEFER` somehow run after the value is determined for `return`? Oh, Defer is function based, not block based, yea?",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d06e83_828004d8",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "What is this magic, maybe add a comment where these numbers come from",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb79ac8a_6f0af0ad",
+        "filename": "src/tint/utils/system/terminal_windows.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "ditto magic",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968fd1d3_02d464f0",
+        "filename": "src/tint/utils/text/styled_text_printer_windows.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-29T15:39:20Z",
+      "side": 1,
+      "message": "not needed?",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
