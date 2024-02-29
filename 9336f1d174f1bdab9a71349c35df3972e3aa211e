@@ -191,6 +191,24 @@
       "message": "not needed?",
       "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca7c137_5a5bd384",
+        "filename": "src/tint/utils/text/styled_text_printer_windows.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-29T16:53:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "968fd1d3_02d464f0",
+      "revId": "9336f1d174f1bdab9a71349c35df3972e3aa211e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
