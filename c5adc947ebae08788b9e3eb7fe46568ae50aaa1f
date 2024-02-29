@@ -35,6 +35,343 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c9b4b65_34aa63c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "some nits, but LGTM! a bunch of these things I\u0027d be OK fixing in follow-up CLs",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2783653b_460dac06",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 35
+      },
+      "lineNbr": 3323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "wgpuSurfaceSetLabel appears in the webgpu.h header, so I don\u0027t think we need the dawn only tag.\n\nhttps://github.com/webgpu-native/webgpu-headers/blob/main/webgpu.h#L1766",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e953ce_9939a790",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "unit: call this `GetName` as well so it\u0027s not confusing with ObjectBase::GetLabel.\nThen, your implementation of AbslFormatConvert can call GetName instead.\n\nI know that AdapterBase doesn\u0027t inherit from ObjectBase, but calling it \"label\" makes it look like it\u0027s the user-defined one.",
+      "range": {
+        "startLine": 82,
+        "startChar": 23,
+        "endLine": 82,
+        "endChar": 31
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dedc983a_de97ea5b",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "nit: I think we can use the `IsSubset` helper.\n\n`!IsSubset(config-\u003eusage, validUsage)`",
+      "range": {
+        "startLine": 219,
+        "startChar": 11,
+        "endLine": 219,
+        "endChar": 55
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce97d53_fb1b59dd",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "should we log the error somewhere?\n\n`mInstance-\u003eConsumedError` could be used",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "439b521e_071e9032",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "doesn\u0027t exist (I think).\n\nIt could go somewhere in `src/dawn/native/utils/` as it will likely be useful",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 75
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88957535_bea2ebca",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "I think `mInstance-\u003eConsumedError` which will at least log the error.\n\nBy the way, if you did want to drop the error silently, you need to do `AcquireError()`. MaybeError will ASSERT that it was acquired in its destructor",
+      "range": {
+        "startLine": 606,
+        "startChar": 6,
+        "endLine": 608,
+        "endChar": 15
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2775a320_1fd50618",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e138f5_d8ee12de",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c9ad40b_9d3ddc0a",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdd27e7_49eb6b98",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "ditto, mInstance-\u003eConsumedError",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9098040_48c2d342",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "nit: you only use mViewFormatSet inside this ASSERT. Better then to not store it as a member variable and have a small helper here like ComputeViewFormatSet() to use inside the ASSERT",
+      "range": {
+        "startLine": 231,
+        "startChar": 0,
+        "endLine": 231,
+        "endChar": 85
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e3e34a5_9ac83c0e",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "nit: not sure how the general webgpu.h tracking bug relates to this being the only supported format. could you clarify the comment?",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 80
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68a147c2_9b061b32",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "could we return `VK_NULL_HANDLE` instead? then no need for std::optional",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7693b8dc_8f8f7472",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "nit: let\u0027s put a TODO here about needing to lock the fenced deleter. If someone does something on another thread that makes Dawn flush the deleter, it could race and we end up using a deleted swap chain.\n\nThe bug about thread safety is crbug.com/dawn/1662\n\nProbably what we should ultimately do is actually steal the object out of the fenced deleter entirely. That way it has a single owner, and there\u0027s no chance of it getting deleted from under us. Did not realize this earlier, but we can fix it in a follow-up if you\u0027d like.\nIf the changes don\u0027t fit nicely into fenced deleter (the need to key on Surface*), then we can probably split the deletion queue of VkSwapchainKHR out to a separate utility.",
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e6d6c2_5182a4e9",
+        "filename": "src/dawn/native/vulkan/SwapChainCache.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "keying on Surface* is a little sketchy because it could get deleted, then a new one could be reallocated in its place. You could perhaps number them with a uint64_t allocated from a global atomic\u003cuint64_t\u003e - or use WeakRef. The atomic would be cheaper though.\n\nCan fix this in a follow-up though.",
+      "range": {
+        "startLine": 73,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b32f9ead_60ab2d65",
+        "filename": "src/dawn/tests/end2end/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-29T06:13:46Z",
+      "side": 1,
+      "message": "nope :-/",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8983dab9_ffdf866b",
