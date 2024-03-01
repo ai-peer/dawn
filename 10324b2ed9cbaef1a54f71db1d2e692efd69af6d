@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a2a3978_f2a1b359",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-03-01T00:33:42Z",
+      "side": 1,
+      "message": "\u003e Like Austin said, ID3D12Resource is sufficient for same-adapter sharing, but it doesn\u0027t enforce that the resource is a committed resource, and other users could decide to reuse the same memory. That\u0027s why HANDLE would be slightly preferred, but either way.\n\nYes, there could bugs where the memory underlying a placed resource given to Dawn is accidentally given to another resource. But a similar bug happens if WebNN accidentally read/writes a committed resource given to Dawn without proper synchronization with its command queue.\n\nOne advantage of using ID3D12Resource is WebNN could decide to give Dawn a resource backed by a cross adapter heap on UMA devices. The only way to allocate such a resource as a buffer is to first allocate the cross adapter heap and then create a placed resource in the heap. Here, there is a handle to the heap but not to the placed resource. See https://learn.microsoft.com/en-us/windows/win32/direct3d12/shared-heaps.\n\n\u003e Isn\u0027t it the case that if WebGPU-WebNN is to be used, the MLContext must be created with a gpu device as argument?\n\nThe spec does have text that lets you provide a WebGPU device to the constructor of a WebNN context. However, people have been wanting the `MLBuffer` datatype to be more pervasive and be allowed to be created even if you request a context that is a \"gpu\" context.  I think that should be manageable in Chromium if we have one component own the adapter selection for everything else. Could be SharedContextState or Dawn itself; I do not feel strongly either way.",
+      "parentUuid": "dc90506b_aecaa59d",
+      "revId": "10324b2ed9cbaef1a54f71db1d2e692efd69af6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6c9c59e_87869455",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
