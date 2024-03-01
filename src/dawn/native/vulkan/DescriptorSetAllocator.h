@@ -63,8 +63,7 @@ class DescriptorSetAllocator : public ObjectBase {
 
     MaybeError AllocateDescriptorPool();
 
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<const BindGroupLayout, DanglingUntriaged> mLayout;
+    raw_ptr<const BindGroupLayout> mLayout;
 
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     SetIndex mMaxSets;
