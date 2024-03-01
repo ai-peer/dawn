@@ -63,8 +63,7 @@ class IndirectDrawMetadata : public NonCopyable {
         // This is a pointer to the command that should be populated with the validated
         // indirect scratch buffer. It is only valid up until the encoded command buffer
         // is submitted.
-        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-        raw_ptr<DrawIndirectCmd, DanglingUntriaged> cmd;
+        raw_ptr<DrawIndirectCmd> cmd;
     };
 
     struct IndirectValidationBatch {
@@ -114,8 +113,7 @@ class IndirectDrawMetadata : public NonCopyable {
         Indexed,
     };
     struct IndexedIndirectConfig {
-        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-        raw_ptr<BufferBase, DanglingUntriaged> inputIndirectBuffer;
+        raw_ptr<BufferBase> inputIndirectBuffer;
         bool duplicateBaseVertexInstance;
         DrawType drawType;
 
