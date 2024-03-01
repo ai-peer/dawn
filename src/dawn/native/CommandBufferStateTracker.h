@@ -105,13 +105,9 @@ class CommandBufferStateTracker {
     uint64_t mIndexBufferSize = 0;
     uint64_t mIndexBufferOffset = 0;
 
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<PipelineLayoutBase, DanglingUntriaged> mLastPipelineLayout = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<PipelineBase, DanglingUntriaged> mLastPipeline = nullptr;
-
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<const RequiredBufferSizes, DanglingUntriaged> mMinBufferSizes = nullptr;
+    raw_ptr<PipelineLayoutBase> mLastPipelineLayout = nullptr;
+    raw_ptr<PipelineBase> mLastPipeline = nullptr;
+    raw_ptr<const RequiredBufferSizes> mMinBufferSizes = nullptr;
 };
 
 }  // namespace dawn::native
