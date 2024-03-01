@@ -27,6 +27,8 @@
 
 #include "dawn/native/BuddyAllocator.h"
 
+#include <utility>
+
 #include "dawn/common/Assert.h"
 #include "dawn/common/Math.h"
 
@@ -44,7 +46,11 @@ BuddyAllocator::BuddyAllocator(uint64_t maxSize) : mMaxBlockSize(maxSize) {
 
 BuddyAllocator::~BuddyAllocator() {
     if (mRoot) {
-        DeleteBlock(mRoot);
+        mFreeLists.clear();
+
+        BuddyBlock* rootBlock = mRoot;
+        mRoot = nullptr;
+        DeleteBlock(rootBlock);
     }
 }
 
@@ -248,7 +254,9 @@ void BuddyAllocator::Deallocate(uint64_t offset) {
 
         // The buddies were inserted in a specific order but
         // could be deleted in any order.
-        DeleteBlock(curr->pBuddy);
+        BuddyBlock* buddy = curr->pBuddy;
+        curr->pBuddy = nullptr;
+        DeleteBlock(buddy);
         DeleteBlock(curr);
 
         // Parent is now free.
@@ -268,7 +276,9 @@ void BuddyAllocator::DeleteBlock(BuddyBlock* block) {
 
     if (block->mState == BlockState::Split) {
         // Delete the pair in same order we inserted.
-        DeleteBlock(block->split.pLeft->pBuddy);
+        BuddyBlock* buddy = block->split.pLeft->pBuddy;
+        block->split.pLeft->pBuddy = nullptr;
+        DeleteBlock(buddy);
         DeleteBlock(block->split.pLeft);
     }
     delete block;
