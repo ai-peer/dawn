@@ -609,6 +609,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efe5de5_def5b932",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-01T08:10:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1897fb16_a9255314",
+      "range": {
+        "startLine": 61,
+        "startChar": 61,
+        "endLine": 61,
+        "endChar": 80
+      },
+      "revId": "c5adc947ebae08788b9e3eb7fe46568ae50aaa1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68a147c2_9b061b32",
