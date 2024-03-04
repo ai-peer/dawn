@@ -143,7 +143,7 @@ MaybeError ComputePipeline::InitializeImpl() {
 }
 
 void ComputePipeline::SetLabelImpl() {
-    SetDebugName(ToBackend(GetDevice()), mHandle, "Dawn_ComputePipeline", GetLabel());
+    // SetDebugName(ToBackend(GetDevice()), mHandle, "Dawn_ComputePipeline", GetLabel());
 }
 
 ComputePipeline::~ComputePipeline() = default;

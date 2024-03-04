@@ -622,7 +622,7 @@ MaybeError RenderPipeline::InitializeImpl() {
 }
 
 void RenderPipeline::SetLabelImpl() {
-    SetDebugName(ToBackend(GetDevice()), mHandle, "Dawn_RenderPipeline", GetLabel());
+    // SetDebugName(ToBackend(GetDevice()), mHandle, "Dawn_RenderPipeline", GetLabel());
 }
 
 VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeVertexInputDesc(
