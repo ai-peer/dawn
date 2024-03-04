@@ -121,6 +121,7 @@ RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag, 
 void RenderBundleEncoder::DestroyImpl() {
     RenderEncoderBase::DestroyImpl();
     mBundleEncodingContext.Destroy();
+    mCommandBufferState.End();
 }
 
 // static
@@ -168,6 +169,8 @@ ResultOrError<Ref<RenderBundleBase>> RenderBundleEncoder::FinishImpl(
         DAWN_TRY(ValidateProgrammableEncoderEnd());
         DAWN_TRY(ValidateFinish(usages));
     }
+
+    mCommandBufferState.End();
 
     return AcquireRef(new RenderBundleBase(this, descriptor, AcquireAttachmentState(),
                                            IsDepthReadOnly(), IsStencilReadOnly(),
