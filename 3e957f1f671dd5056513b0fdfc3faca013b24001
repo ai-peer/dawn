@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2be165b_86f3021c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-04T01:47:51Z",
+      "side": 1,
+      "message": "I dug into the intel driver source a little bit to better understand UpdateSubresource VS CopySubresourceRegion. Here is the [doc](https://docs.google.com/document/d/1MljsHhmcy9rA3u6lEjLtsNPKLiR6yBnsHLr1M0yMwd8/edit?usp\u003dsharing) for the findings so far. Please take a look, thanks!",
+      "revId": "3e957f1f671dd5056513b0fdfc3faca013b24001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
