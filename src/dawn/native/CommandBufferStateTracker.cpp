@@ -100,7 +100,7 @@ using WritableBindingAliasingResult = std::variant<std::monostate, BufferAliasin
 
 template <typename Return>
 Return FindStorageBufferBindingAliasing(const PipelineLayoutBase* pipelineLayout,
-                                        const PerBindGroup<BindGroupBase*>& bindGroups,
+                                        const PerBindGroup<Ref<BindGroupBase>>& bindGroups,
                                         const PerBindGroup<std::vector<uint32_t>>& dynamicOffsets) {
     // If true, returns detailed validation error info. Otherwise simply returns if any binding
     // aliasing is found.
@@ -356,8 +356,8 @@ MaybeError CommandBufferStateTracker::ValidateNoDifferentTextureViewsOnSameTextu
     absl::flat_hash_map<const TextureBase*, VectorOfTextureViews> textureToViews;
 
     for (BindGroupIndex groupIndex :
-         IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
-        BindGroupBase* bindGroup = mBindgroups[groupIndex];
+         IterateBitSet(mLastPipeline->GetLayout()->GetBindGroupLayoutsMask())) {
+        BindGroupBase* bindGroup = mBindgroups[groupIndex].Get();
         BindGroupLayoutInternalBase* bgl = bindGroup->GetLayout();
 
         for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
@@ -523,12 +523,13 @@ void CommandBufferStateTracker::RecomputeLazyAspects(ValidationAspects aspects) 
     if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
         bool matches = true;
 
-        for (BindGroupIndex i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+        PipelineLayoutBase* pipelineLayout = mLastPipeline->GetLayout();
+        for (BindGroupIndex i : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
             if (mBindgroups[i] == nullptr ||
-                !mLastPipelineLayout->GetFrontendBindGroupLayout(i)->IsLayoutEqual(
+                !mLastPipeline->GetLayout()->GetFrontendBindGroupLayout(i)->IsLayoutEqual(
                     mBindgroups[i]->GetFrontendLayout()) ||
                 FindFirstUndersizedBuffer(mBindgroups[i]->GetUnverifiedBufferSizes(),
-                                          (*mMinBufferSizes)[i])
+                                          mLastPipeline->GetMinBufferSizes()[i])
                     .has_value()) {
                 matches = false;
                 break;
@@ -537,7 +538,7 @@ void CommandBufferStateTracker::RecomputeLazyAspects(ValidationAspects aspects) 
 
         if (matches) {
             // Continue checking if there is writable storage buffer binding aliasing or not
-            if (FindStorageBufferBindingAliasing<bool>(mLastPipelineLayout, mBindgroups,
+            if (FindStorageBufferBindingAliasing<bool>(pipelineLayout, mBindgroups,
                                                        mDynamicOffsets)) {
                 matches = false;
             }
@@ -613,13 +614,14 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                                      uint8_t(firstMissing), GetRenderPipeline());
     }
 
+    DAWN_ASSERT(HasPipeline());
+    PipelineLayoutBase* pipelineLayout = mLastPipeline->GetLayout();
     if (aspects[VALIDATION_ASPECT_BIND_GROUPS]) {
-        for (BindGroupIndex i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
-            DAWN_ASSERT(HasPipeline());
-
+        for (BindGroupIndex i : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
             DAWN_INVALID_IF(mBindgroups[i] == nullptr, "No bind group set at group index %u.", i);
 
-            BindGroupLayoutBase* requiredBGL = mLastPipelineLayout->GetFrontendBindGroupLayout(i);
+            BindGroupLayoutBase* requiredBGL =
+                mLastPipeline->GetLayout()->GetFrontendBindGroupLayout(i);
             BindGroupLayoutBase* currentBGL = mBindgroups[i]->GetFrontendLayout();
 
             DAWN_INVALID_IF(
@@ -631,7 +633,7 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                 "created by the pipeline. Either use the bind group layout returned by calling "
                 "getBindGroupLayout(%u) on the pipeline when creating the bind group, or "
                 "provide an explicit pipeline layout when creating the pipeline.",
-                mLastPipeline, mBindgroups[i], i, currentBGL, i);
+                mLastPipeline.Get(), mBindgroups[i].Get(), i, currentBGL, i);
 
             DAWN_INVALID_IF(
                 requiredBGL->GetPipelineCompatibilityToken() == PipelineCompatibilityToken(0) &&
@@ -642,17 +644,18 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                 "compatible. Use an explicit bind group layout when creating bind groups and "
                 "an explicit pipeline layout when creating pipelines to share bind groups "
                 "between pipelines.",
-                mBindgroups[i], i, currentBGL, mLastPipeline);
+                mBindgroups[i].Get(), i, currentBGL, mLastPipeline.Get());
 
             DAWN_INVALID_IF(
                 requiredBGL->GetInternalBindGroupLayout() !=
                     currentBGL->GetInternalBindGroupLayout(),
                 "Bind group layout %s of pipeline layout %s does not match layout %s of bind "
                 "group %s set at group index %u.",
-                requiredBGL, mLastPipelineLayout, currentBGL, mBindgroups[i], i);
+                requiredBGL, pipelineLayout, currentBGL, mBindgroups[i].Get(), i);
 
+            const RequiredBufferSizes& minBufferSizes = mLastPipeline->GetMinBufferSizes();
             std::optional<uint32_t> packedIndex = FindFirstUndersizedBuffer(
-                mBindgroups[i]->GetUnverifiedBufferSizes(), (*mMinBufferSizes)[i]);
+                mBindgroups[i]->GetUnverifiedBufferSizes(), minBufferSizes[i]);
             if (packedIndex.has_value()) {
                 // Find the binding index for this packed index.
                 BindingIndex bindingIndex{std::numeric_limits<uint32_t>::max()};
@@ -674,13 +677,13 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
 
                 uint64_t bufferSize =
                     mBindgroups[i]->GetUnverifiedBufferSizes()[packedIndex.value()];
-                uint64_t minBufferSize = (*mMinBufferSizes)[i][packedIndex.value()];
+                uint64_t minBufferSize = minBufferSizes[i][packedIndex.value()];
 
                 const auto& layout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
                 return DAWN_VALIDATION_ERROR(
                     "%s bound with size %u at group %u, binding %u is too small. The pipeline (%s) "
                     "requires a buffer binding which is at least %u bytes.%s",
-                    buffer, bufferSize, i, bindingNumber, mLastPipeline, minBufferSize,
+                    buffer, bufferSize, i, bindingNumber, mLastPipeline.Get(), minBufferSize,
                     (layout.type == wgpu::BufferBindingType::Uniform
                          ? " This binding is a uniform buffer binding. It is padded to a multiple "
                            "of 16 bytes, and as a result may be larger than the associated data in "
@@ -690,7 +693,7 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
         }
 
         auto result = FindStorageBufferBindingAliasing<WritableBindingAliasingResult>(
-            mLastPipelineLayout, mBindgroups, mDynamicOffsets);
+            pipelineLayout, mBindgroups, mDynamicOffsets);
 
         if (std::holds_alternative<BufferAliasing>(result)) {
             const auto& a = std::get<BufferAliasing>(result);
@@ -698,8 +701,8 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                 "Writable storage buffer binding aliasing found between %s set at bind group index "
                 "%u, binding index %u, and %s set at bind group index %u, binding index %u, with "
                 "overlapping ranges (offset: %u, size: %u) and (offset: %u, size: %u) in %s.",
-                mBindgroups[a.e0.bindGroupIndex], a.e0.bindGroupIndex, a.e0.bindingIndex,
-                mBindgroups[a.e1.bindGroupIndex], a.e1.bindGroupIndex, a.e1.bindingIndex,
+                mBindgroups[a.e0.bindGroupIndex].Get(), a.e0.bindGroupIndex, a.e0.bindingIndex,
+                mBindgroups[a.e1.bindGroupIndex].Get(), a.e1.bindGroupIndex, a.e1.bindingIndex,
                 a.e0.offset, a.e0.size, a.e1.offset, a.e1.size,
                 mBindgroups[a.e0.bindGroupIndex]
                     ->GetBindingAsBufferBinding(a.e0.bindingIndex)
@@ -713,8 +716,8 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                 "with subresources (base mipmap level: %u, mip level count: %u, base array layer: "
                 "%u, array layer count: %u) and (base mipmap level: %u, mip level count: %u, base "
                 "array layer: %u, array layer count: %u) in %s.",
-                mBindgroups[a.e0.bindGroupIndex], a.e0.bindGroupIndex, a.e0.bindingIndex,
-                mBindgroups[a.e1.bindGroupIndex], a.e1.bindGroupIndex, a.e1.bindingIndex,
+                mBindgroups[a.e0.bindGroupIndex].Get(), a.e0.bindGroupIndex, a.e0.bindingIndex,
+                mBindgroups[a.e1.bindGroupIndex].Get(), a.e1.bindGroupIndex, a.e1.bindingIndex,
                 a.e0.baseMipLevel, a.e0.mipLevelCount, a.e0.baseArrayLayer, a.e0.arrayLayerCount,
                 a.e1.baseMipLevel, a.e1.mipLevelCount, a.e1.baseArrayLayer, a.e1.arrayLayerCount,
                 mBindgroups[a.e0.bindGroupIndex]
@@ -776,8 +779,6 @@ void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot, uint64_t 
 
 void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
     mLastPipeline = pipeline;
-    mLastPipelineLayout = pipeline != nullptr ? pipeline->GetLayout() : nullptr;
-    mMinBufferSizes = pipeline != nullptr ? &pipeline->GetMinBufferSizes() : nullptr;
 
     mAspects.set(VALIDATION_ASPECT_PIPELINE);
 
@@ -786,7 +787,7 @@ void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {
 }
 
 BindGroupBase* CommandBufferStateTracker::GetBindGroup(BindGroupIndex index) const {
-    return mBindgroups[index];
+    return mBindgroups[index].Get();
 }
 
 const std::vector<uint32_t>& CommandBufferStateTracker::GetDynamicOffsets(
@@ -800,16 +801,16 @@ bool CommandBufferStateTracker::HasPipeline() const {
 
 RenderPipelineBase* CommandBufferStateTracker::GetRenderPipeline() const {
     DAWN_ASSERT(HasPipeline() && mLastPipeline->GetType() == ObjectType::RenderPipeline);
-    return static_cast<RenderPipelineBase*>(mLastPipeline);
+    return static_cast<RenderPipelineBase*>(mLastPipeline.Get());
 }
 
 ComputePipelineBase* CommandBufferStateTracker::GetComputePipeline() const {
     DAWN_ASSERT(HasPipeline() && mLastPipeline->GetType() == ObjectType::ComputePipeline);
-    return static_cast<ComputePipelineBase*>(mLastPipeline);
+    return static_cast<ComputePipelineBase*>(mLastPipeline.Get());
 }
 
 PipelineLayoutBase* CommandBufferStateTracker::GetPipelineLayout() const {
-    return mLastPipelineLayout;
+    return mLastPipeline->GetLayout();
 }
 
 wgpu::IndexFormat CommandBufferStateTracker::GetIndexFormat() const {

@@ -33,9 +33,11 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
+#include "dawn/native/BindGroup.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
+#include "dawn/native/Pipeline.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
@@ -94,7 +96,7 @@ class CommandBufferStateTracker {
 
     ValidationAspects mAspects;
 
-    PerBindGroup<BindGroupBase*> mBindgroups = {};
+    PerBindGroup<Ref<BindGroupBase>> mBindgroups = {};
     PerBindGroup<std::vector<uint32_t>> mDynamicOffsets = {};
 
     VertexBufferMask mVertexBuffersUsed;
@@ -105,13 +107,7 @@ class CommandBufferStateTracker {
     uint64_t mIndexBufferSize = 0;
     uint64_t mIndexBufferOffset = 0;
 
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<PipelineLayoutBase, DanglingUntriaged> mLastPipelineLayout = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<PipelineBase, DanglingUntriaged> mLastPipeline = nullptr;
-
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<const RequiredBufferSizes, DanglingUntriaged> mMinBufferSizes = nullptr;
+    Ref<PipelineBase> mLastPipeline;
 };
 
 }  // namespace dawn::native
