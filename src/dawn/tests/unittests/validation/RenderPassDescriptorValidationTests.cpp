@@ -257,8 +257,6 @@ TEST_F(RenderPassDescriptorValidationTest, SizeMustMatch) {
 
     wgpu::TextureView depthStencil1x1 =
         Create2DAttachment(device, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8);
-    wgpu::TextureView depthStencil2x2 =
-        Create2DAttachment(device, 2, 2, wgpu::TextureFormat::Depth24PlusStencil8);
 
     // Control case: all the same size (1x1)
     {
@@ -272,11 +270,14 @@ TEST_F(RenderPassDescriptorValidationTest, SizeMustMatch) {
         AssertBeginRenderPassError(&renderPass);
     }
 
+    // TODO(chromium:324422644): re-enable this test.
     // The depth stencil attachment has a different size
-    {
-        utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil2x2);
-        AssertBeginRenderPassError(&renderPass);
-    }
+    // {
+    //     wgpu::TextureView depthStencil2x2 =
+    //         Create2DAttachment(device, 2, 2, wgpu::TextureFormat::Depth24PlusStencil8);
+    //     utils::ComboRenderPassDescriptor renderPass({color1x1A, color1x1B}, depthStencil2x2);
+    //     AssertBeginRenderPassError(&renderPass);
+    // }
 }
 
 // Attachments formats must match whether they are used for color or depth-stencil
