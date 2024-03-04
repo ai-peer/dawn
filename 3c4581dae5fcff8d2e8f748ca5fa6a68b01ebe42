@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78f71dd_d0c8842b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-04T21:18:46Z",
+      "side": 1,
+      "message": "LGTM but tests need updates",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e199ea6f_258c4d49",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-04T21:18:46Z",
+      "side": 1,
+      "message": "assorted thoughts: We could also show something like `[default Queue of [Device \"devicelabel\"]]` but I\u0027m guessing that wouldn\u0027t be very useful since device labels probably aren\u0027t very widely used.\n\nWhat is the printing implementation for devices? It doesn\u0027t inherit ObjectBase so I\u0027m guessing we don\u0027t print `[Device (unlabeled)]` with this CL. I don\u0027t think very many messages print the device at all? One I can think of is device-mismatch errors probably, where it could be useful to encourage labeling. Though the most common case of that error will probably be reinitializing a device and using old resources, in which case the label will probably be the same on the new and old devices... which would be a little extra confusing.",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53264cb0_92170b9b",
