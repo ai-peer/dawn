@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f99ec7_d5c1ff2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-03-04T16:44:07Z",
+      "side": 1,
+      "message": "Note: alternatively, Corentin is suppressing the test failures here: https://dawn-review.googlesource.com/c/dawn/+/177621\n\nIf that works, I\u0027ll abandon this revert.",
+      "revId": "622d7018e9261049c189c6da8008f53ce7c6532d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
