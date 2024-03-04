@@ -698,7 +698,7 @@ source_set("end2end_tests_sources") {
     }
   }
 
-  if (is_mac || is_ios || is_linux) {
+  if (is_posix) {
     sources += [ "end2end/BufferHostMappedPointerTests_posix.cpp" ]
   }
   if (is_win) {
