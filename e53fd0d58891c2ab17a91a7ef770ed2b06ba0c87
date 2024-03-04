@@ -46,6 +46,30 @@
       },
       "revId": "e53fd0d58891c2ab17a91a7ef770ed2b06ba0c87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97f1a9f_fee9a903",
+        "filename": "src/tint/lang/wgsl/reader/parser/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-04T21:45:29Z",
+      "side": 0,
+      "message": "Ack, thanks for the explanation.",
+      "parentUuid": "b75d0c17_2f0e4e45",
+      "range": {
+        "startLine": 1018,
+        "startChar": 0,
+        "endLine": 1019,
+        "endChar": 38
+      },
+      "revId": "e53fd0d58891c2ab17a91a7ef770ed2b06ba0c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
