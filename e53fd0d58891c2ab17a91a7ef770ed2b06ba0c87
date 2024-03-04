@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f56fe9c_cdd416bc",
+        "filename": "src/tint/lang/wgsl/reader/parser/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-04T21:24:22Z",
+      "side": 0,
+      "message": "It sounds like there was a reason this was inside the loop:\nhttps://dawn-review.googlesource.com/c/dawn/+/135461\n\nIs there a reason that you don\u0027t consider it an issue any more? Looks like fuzzers hit it previously.",
+      "range": {
+        "startLine": 1018,
+        "startChar": 0,
+        "endLine": 1019,
+        "endChar": 38
+      },
+      "revId": "e53fd0d58891c2ab17a91a7ef770ed2b06ba0c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
