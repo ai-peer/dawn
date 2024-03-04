@@ -289,7 +289,9 @@ Future InstanceBase::APIRequestAdapterF(const RequestAdapterOptions* options,
             : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
               mCallback(callbackInfo.callback),
               mUserdata(callbackInfo.userdata),
-              mAdapter(std::move(adapter)) {}
+              mAdapter(std::move(adapter)) {
+            CompleteIfSpontaneous();
+        }
 
         ~RequestAdapterEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
 

@@ -31,7 +31,6 @@
 #include <functional>
 #include <memory>
 
-#include "dawn/common/FutureUtils.h"
 #include "dawn/common/NonCopyable.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
@@ -179,7 +178,6 @@ class BufferBase : public ApiObjectBase {
     size_t mMapSize = 0;
 
     struct MapAsyncEvent;
-    FutureID mPendingMapFutureID = kNullFutureID;
     Ref<MapAsyncEvent> mPendingMapEvent;
 };
 

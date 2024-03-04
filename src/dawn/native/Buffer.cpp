@@ -162,6 +162,7 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
           mUserdata(callbackInfo.userdata) {
         TRACE_EVENT_ASYNC_BEGIN0(device->GetPlatform(), General, "Buffer::APIMapAsync",
                                  uint64_t(kBeginningOfGPUTime));
+        CompleteIfSpontaneous();
     }
 
     ~MapAsyncEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
@@ -196,7 +197,6 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
                 (*buffer)->mState = BufferState::Mapped;
 
                 pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
-                (*buffer)->mPendingMapFutureID = kNullFutureID;
             }
         });
         mCallback(ToAPI(status), mUserdata);
@@ -206,8 +206,12 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
     // This can race with Complete such that the early status is ignored, but this is OK
     // because we will still unmap the buffer. It will be as-if the application called
     // Unmap/Destroy just after the map event completed.
+    // TODO(crbug.com/dawn/831): However, CompleteIfSpontaneous may race with Complete
+    // and hit an ASSERT that it was already completed. This would be resolved when
+    // mapping is thread-safe.
     void UnmapEarly(wgpu::BufferMapAsyncStatus status) {
         mBufferOrEarlyStatus.Use([&](auto bufferOrEarlyStatus) { *bufferOrEarlyStatus = status; });
+        CompleteIfSpontaneous();
     }
 };
 
@@ -627,9 +631,6 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
     }
 
     FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
-    if (!earlyStatus) {
-        mPendingMapFutureID = futureID;
-    }
     return {futureID};
 }
 
@@ -703,10 +704,7 @@ void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
         // state and pending map event needs to be atomic w.r.t. MapAsyncEvent::Complete.
         Ref<MapAsyncEvent> pendingMapEvent = std::move(mPendingMapEvent);
         if (pendingMapEvent != nullptr) {
-            DAWN_ASSERT(mPendingMapFutureID != kNullFutureID);
             pendingMapEvent->UnmapEarly(static_cast<wgpu::BufferMapAsyncStatus>(callbackStatus));
-            GetInstance()->GetEventManager()->SetFutureReady(mPendingMapFutureID);
-            mPendingMapFutureID = kNullFutureID;
         } else {
             GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
                 PrepareMappingCallback(mLastMapID, callbackStatus));
