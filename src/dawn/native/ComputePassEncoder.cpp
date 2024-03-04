@@ -160,6 +160,7 @@ void ComputePassEncoder::DestroyImpl() {
     // Ensure that the pass has exited. This is done for passes only since validation requires
     // they exit before destruction while bundles do not.
     mEncodingContext->EnsurePassExited(this);
+    mCommandBufferState.End();
 }
 
 ObjectType ComputePassEncoder::GetType() const {
@@ -188,6 +189,8 @@ void ComputePassEncoder::APIEnd() {
             "encoding %s.End().", this)) {
         mEncodingContext->ExitComputePass(this, mUsageTracker.AcquireResourceUsage());
     }
+
+    mCommandBufferState.End();
 }
 
 void ComputePassEncoder::APIDispatchWorkgroups(uint32_t workgroupCountX,
