@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4858b44b_a7d7bdfe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-04T21:54:08Z",
+      "side": 1,
+      "message": "nit: explain what changed in the commit message",
+      "revId": "d43e47eacb173f86857cf56512c4750c88d32c75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c690a9_334c0eda",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-04T21:54:08Z",
+      "side": 1,
+      "message": "I was under the impression from chat that we would check Toggle::AllowUnsafeApis - but this is fine too since its temporary. You won\u0027t have the same issue on mac?",
+      "revId": "d43e47eacb173f86857cf56512c4750c88d32c75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
