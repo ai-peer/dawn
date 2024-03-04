@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08ad42a_f7e995b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-03-04T16:43:00Z",
+      "side": 1,
+      "message": "PTAL! Also, suggestions on other identifiers that could be added to other objects like the format for the texture object are welcome. A lot of the ones that I thought of (like buffer size) felt like they would add noise without actively aiding in identifying the object, and errors that have to do with the attribute in question will typically include it.",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
