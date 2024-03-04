@@ -16,6 +16,24 @@
       "message": "Tests that don\u0027t pass are all related to this SwapChainCache mechanism that is not satisfying anyways... It\u0027s getting more and more tempting to start creating backend specific subclasses of SurfaceBase",
       "revId": "bb809e46f3235500985df3eda5e4ea5f259b1789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bab9fce3_ea86172a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-04T16:43:28Z",
+      "side": 1,
+      "message": "Let\u0027s do that later, we already have a LOT of things going on in this CL that would be good to land. I\u0027m thinking we could make the FencedDeleter in the Vulkan backend hold on to vulkan::SwapChain objects and tell them \"I\u0027m done with you\" for example.",
+      "parentUuid": "d1b39037_30401703",
+      "revId": "bb809e46f3235500985df3eda5e4ea5f259b1789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
