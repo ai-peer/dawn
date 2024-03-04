@@ -16,6 +16,40 @@
       "message": "PTAL! Also, suggestions on other identifiers that could be added to other objects like the format for the texture object are welcome. A lot of the ones that I thought of (like buffer size) felt like they would add noise without actively aiding in identifying the object, and errors that have to do with the attribute in question will typically include it.",
       "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ececee_204fcd9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-04T16:45:09Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53264cb0_92170b9b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-04T16:45:09Z",
+      "side": 1,
+      "message": "nit: Maybe we could put the size as well.",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
