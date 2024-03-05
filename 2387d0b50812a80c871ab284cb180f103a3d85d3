@@ -86,6 +86,24 @@
       "parentUuid": "16387109_2fce6191",
       "revId": "2387d0b50812a80c871ab284cb180f103a3d85d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e910b8f3_3c073d6a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-05T09:05:50Z",
+      "side": 1,
+      "message": "Why is it a problem? DestroyObjectRegressionTests.LastRefInCommandEncoder should call Device::DestroyObjects that calls DestroyImpl() on all the encoders before destroying the actual objects. If we clear the CommandBufferStateTracker on DestroyImpl as well, it should work?",
+      "parentUuid": "682e1043_efe4cfdc",
+      "revId": "2387d0b50812a80c871ab284cb180f103a3d85d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
