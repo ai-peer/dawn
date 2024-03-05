@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afc69afe_a94e7399",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-05T18:20:08Z",
+      "side": 1,
+      "message": "Actually, I would much rather we be explicit about all the args since now we have two different sets of args between the gn and cmake builds.",
+      "parentUuid": "fa25a168_cd3b93bc",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 0
+      },
+      "revId": "987141e3e519f0462cbb8cd03525205855aa73d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cfae1a48_90e267c7",
         "filename": "infra/config/global/main.star",
         "patchSetId": 7
