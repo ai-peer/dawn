@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "496799c6_def8498e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-05T02:55:01Z",
+      "side": 1,
+      "message": "Not passing all tests yet, asking questions about [1]",
+      "revId": "3d4eb2ee1c5262a3cad94234491e75792a411bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97aa242f_ad587450",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1901,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-05T02:55:01Z",
+      "side": 1,
+      "message": "[1] Question for failing `webgpu:api,validation,state,device_lost,destroy:createComputePipelineAsync:*`\n\nFailing for the last bit \n\"// Destroy the device, and expect it to be lost.\"\n\"// After device destroy, creation should still resolve successfully.\"\n\nhttps://github.com/gpuweb/cts/blob/main/src/webgpu/api/validation/state/device_lost/destroy.spec.ts#L518-L532\n\nI\u0027m not sure what to do to fit those requirements. APICreateComputePipelineAsyncF always return a future with a event. and I think `CreateComputePipelineAsyncEvent::Complete` looks good to all device lost cases?",
+      "revId": "3d4eb2ee1c5262a3cad94234491e75792a411bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
