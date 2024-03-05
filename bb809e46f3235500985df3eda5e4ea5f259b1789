@@ -34,6 +34,24 @@
       "parentUuid": "d1b39037_30401703",
       "revId": "bb809e46f3235500985df3eda5e4ea5f259b1789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b93ab6_63dcbc9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-05T23:15:31Z",
+      "side": 1,
+      "message": "The error reported by validation layers seems to be that the recycled swapchain uses a different vkSurface than the new one (but creating the new swap chan still fails if we don\u0027t specify an old swap chain because both surfaces refer to the same window).\n\nI can only see this from LUCI test logs btw, could not enable validation layers locally for some reason :/\n\nI tried adding the surface to the swapchain cache as well, and store in the fenced deleter a shared_ptr to the vkSurface instead of the raw vkSurface so that when recycling the vkSurface we can preempt if from the fenced deleter.\n\nI\u0027m thinking now maybe the easiest route for now would be to just not unconfigure the surface when Unconfigure is called (i.e. not destroy the SwapChain). This way we are always in a case that was already possible before (rebuilding a swap chain from a previous one). No need for the cache then.\n\nI tried that then, but it did not fix the crash case I have locally, which is that when reconfiguring an already configured surface with a different present mode, especially in the SurfaceConfigurationValidationTests.AnyCombinationOfCapabilities test. Weirdly though, this test runs fine when ran alone, but fails as soon as I run another test first (e.g., SurfaceConfigurationValidationTests.AtLeastOneSupportedConfiguration)",
+      "parentUuid": "bab9fce3_ea86172a",
+      "revId": "bb809e46f3235500985df3eda5e4ea5f259b1789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
