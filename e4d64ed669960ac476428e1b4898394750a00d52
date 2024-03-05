@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1167959d_e4c48392",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-03-05T14:51:52Z",
+      "side": 1,
+      "message": "Can you file a bug for this so we can re-enable the warning?",
+      "revId": "e4d64ed669960ac476428e1b4898394750a00d52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
