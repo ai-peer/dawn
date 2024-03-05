@@ -34,6 +34,24 @@
       "parentUuid": "1167959d_e4c48392",
       "revId": "e4d64ed669960ac476428e1b4898394750a00d52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec03a991_6bd92933",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-03-05T15:00:49Z",
+      "side": 1,
+      "message": "Does that mean if this and fully covered are enabled one of them would always fire?",
+      "parentUuid": "1a0cd66a_db85516a",
+      "revId": "e4d64ed669960ac476428e1b4898394750a00d52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
