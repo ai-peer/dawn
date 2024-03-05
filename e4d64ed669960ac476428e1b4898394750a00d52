@@ -52,6 +52,24 @@
       "parentUuid": "1a0cd66a_db85516a",
       "revId": "e4d64ed669960ac476428e1b4898394750a00d52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca61d8f2_3486c2b7",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-05T15:18:25Z",
+      "side": 1,
+      "message": "Yes, we would need to always cover all cases AND add a default case:\nhttps://godbolt.org/z/v7h5dr79x",
+      "parentUuid": "ec03a991_6bd92933",
+      "revId": "e4d64ed669960ac476428e1b4898394750a00d52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
