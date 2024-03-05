@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39e396c2_ce739b9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-05T16:36:28Z",
+      "side": 1,
+      "message": "LGTM but don\u0027t know if Dan is happy yet.",
+      "revId": "30b3762a2aa9e5cca1de0b0df9b3e4a0a534af7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
