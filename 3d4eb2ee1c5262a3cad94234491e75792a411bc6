@@ -51,6 +51,24 @@
       "parentUuid": "97aa242f_ad587450",
       "revId": "3d4eb2ee1c5262a3cad94234491e75792a411bc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e1a3305_d4ec4990",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1901,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-05T18:40:29Z",
+      "side": 1,
+      "message": "Oh good to know we can create an error pipeline. Thanks.",
+      "parentUuid": "0cadde47_135831f7",
+      "revId": "3d4eb2ee1c5262a3cad94234491e75792a411bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
