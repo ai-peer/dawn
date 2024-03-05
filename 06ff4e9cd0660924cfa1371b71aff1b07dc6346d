@@ -16,6 +16,29 @@
       "message": "Not passing all tests yet, asking questions about [1]",
       "revId": "06ff4e9cd0660924cfa1371b71aff1b07dc6346d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7c0cfe_ef7a5cd3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-05T18:17:01Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 1241,
+        "startChar": 4,
+        "endLine": 1246,
+        "endChar": 5
+      },
+      "revId": "06ff4e9cd0660924cfa1371b71aff1b07dc6346d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
