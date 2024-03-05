@@ -68,6 +68,24 @@
       "parentUuid": "65974e34_420d1f7b",
       "revId": "2387d0b50812a80c871ab284cb180f103a3d85d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682e1043_efe4cfdc",
+        "filename": "src/dawn/native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-05T05:35:12Z",
+      "side": 1,
+      "message": "We can see the tests in DestroyObjectTests.cpp and I\u0027ve added another one to test bind groups.",
+      "parentUuid": "16387109_2fce6191",
+      "revId": "2387d0b50812a80c871ab284cb180f103a3d85d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
