@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa25a168_cd3b93bc",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-05T17:57:46Z",
+      "side": 1,
+      "message": "hm.. maybe we should use **properties in the method args?\nThen, it would be OK to omit some of the args when you invoke dawn_standalone_builder or dawn_cmake_standalone_builder. If we let None be implicitly False",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 0
+      },
+      "revId": "987141e3e519f0462cbb8cd03525205855aa73d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfae1a48_90e267c7",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-05T17:57:46Z",
+      "side": 1,
+      "message": "ditto, use **properties in the method args?",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 0
+      },
+      "revId": "987141e3e519f0462cbb8cd03525205855aa73d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
