@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "872b8b96_4fdb6b26",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-03-05T15:30:27Z",
+      "side": 1,
+      "message": "FYI I was able to fix them eventually.\n\n@lokokung@google.com Did you land the fix you were talking about in your previous message? If so, what shall I remove/clean?",
+      "parentUuid": "e8483dd4_00ae03bd",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1a68a77_bc62099e",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 32
@@ -102,6 +126,24 @@
       "writtenOn": "2024-02-27T21:31:55Z",
       "side": 1,
       "message": "The signatures should match the one described here:\nhttps://github.com/webgpu-native/webgpu-headers/issues/266#issuecomment-1947364479\nwhere the WGPUAdapterInfo object is passed into wgpuAdapterRequestAdapterInfo instead of being passed out to the callback. And we need wgpuAdapterInfoFreeMembers in the public API.\n\nI haven\u0027t fully reviewed because this is going to change some of the lifetime stuff.",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "653407f0_05b798a6",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-03-05T15:30:27Z",
+      "side": 1,
+      "message": "It seems like the signatures design is not finalized yet. Am I reading it correctly? If not, what should I implement?",
+      "parentUuid": "a1a68a77_bc62099e",
       "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
