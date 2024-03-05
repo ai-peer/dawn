@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68dc337_aa41b0fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-03-05T18:52:34Z",
+      "side": 1,
+      "message": "Tests updated",
+      "parentUuid": "a78f71dd_d0c8842b",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e199ea6f_258c4d49",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b768c24a_f8188148",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-03-05T18:52:34Z",
+      "side": 1,
+      "message": "We don\u0027t print `[Device (unlabeled)]`, no, but I think that\u0027s probably not a big deal for the reasons you cite. I\u0027m also not sure that updating the Queue label much will make a big difference, again for the reasons you talked about.\n\nOne thing I\u0027ve always wanted to consider, though it would be outside the scope of this CL, is to give unlabeled objects an arbitrary ID (explicitly not a pointer address) so that you get at least some basic differentiation for things like `[Texture \"Foo\"] from [Device (#02)] is not compatible with [Device (#4C)]` or something similar.",
+      "parentUuid": "e199ea6f_258c4d49",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53264cb0_92170b9b",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 1
@@ -82,6 +118,24 @@
       "writtenOn": "2024-03-04T16:45:09Z",
       "side": 1,
       "message": "nit: Maybe we could put the size as well.",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e736ff_866061a4",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-03-05T18:52:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53264cb0_92170b9b",
       "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
