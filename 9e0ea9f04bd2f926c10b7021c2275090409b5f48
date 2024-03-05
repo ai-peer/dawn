@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8483dd4_00ae03bd",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-03-05T10:29:39Z",
+      "side": 1,
+      "message": "I\u0027ve rebased it but I\u0027m still seeing the compilation errors raised in https://dawn-review.googlesource.com/c/dawn/+/173982/comments/64be7b74_7cdbd7b3 earlier",
+      "parentUuid": "48cc2b5d_3ad48007",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1a68a77_bc62099e",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 32
