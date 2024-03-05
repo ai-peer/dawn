@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcb7ee9f_73c8af00",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-05T19:04:14Z",
+      "side": 1,
+      "message": "I did! This was it: https://dawn-review.googlesource.com/c/dawn/+/177060\n\nYou should be able to remove the deprecated one entirely now! Though you will need to bring back your initial changes to the `WireFutureTest.h` file. Let me know if you run into any trouble there!",
+      "parentUuid": "872b8b96_4fdb6b26",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1a68a77_bc62099e",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 32
