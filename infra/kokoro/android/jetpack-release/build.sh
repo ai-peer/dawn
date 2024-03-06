@@ -34,7 +34,24 @@ set -e # Fail on any error
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
 cd  $SCRIPT_DIR/../../../../tools/android
 
-./gradlew publishToMavenLocal
+
+sudo add-apt-repository ppa:cwchien/gradle
+sudo apt-get update
+# yes | sudo apt install openjdk-17-jdk-headless
+# sudo update-alternatives --get-selections | grep "/bin/jinfo"
+# export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+# source ~/.bashrc
+# yes | sudo update-java-alternatives --set java-17-openjdk-amd64
+apt-get install -y openjdk-17-jdk
+export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
+sudo apt-get install gradle-8.3
+sudo update-alternatives --set gradle /usr/lib/gradle/8.3/bin/gradle
+
+# gradle wrapper --gradle-version 8.0.2
+# # gradle wrapper
+# # ./gradlew --version
+# ./gradlew publishToMavenLocal
+gradle publishToMavenLocal
 
 if [[ $? -ne 0 ]]
 then
