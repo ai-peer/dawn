@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cee0263_8e28e9c6",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T17:54:25Z",
+      "side": 1,
+      "message": "I\u0027ve gone and back on this. I decided to omit it because it should be fairly obvious from the call site, and it\u0027s likely to repeat many times in the overload list.",
+      "parentUuid": "e885e381_8f526568",
+      "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9066113_31112fb3",
         "filename": "third_party/langsvr",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-06T17:32:34Z",
       "side": 1,
       "message": "This seems unrelated",
+      "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee587c2_3a666733",
+        "filename": "third_party/langsvr",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T17:54:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9066113_31112fb3",
       "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
