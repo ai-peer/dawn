@@ -32,9 +32,32 @@
 set -e # Fail on any error
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
-cd  $SCRIPT_DIR/../../../../tools/android
+ROOT_DIR="$( cd "${SCRIPT_DIR}/../../../.." >/dev/null 2>&1 && pwd )"
 
-./gradlew publishToMavenLocal
+cd $ROOT_DIR
+apt-get install pkg-config
+python3 tools/fetch_dawn_dependencies.py -ns --use-test-deps
+
+if [[ $? -ne 0 ]]
+then
+    echo "FAILURE in fetching deps"
+    exit 1
+fi
+
+cd tools/android
+
+# Use specified JDK version.  Default is JDK11
+sudo add-apt-repository ppa:cwchien/gradle
+sudo apt-get update
+apt-get install -y openjdk-17-jdk
+export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
+
+# gradle 8.0+ is expected for android library
+sudo apt-get install gradle-8.3
+sudo update-alternatives --set gradle /usr/lib/gradle/8.3/bin/gradle
+
+# Compile .aar
+gradle publishToMavenLocal
 
 if [[ $? -ne 0 ]]
 then
@@ -42,4 +65,6 @@ then
     exit 1
 fi
 
+echo "**********Published AAR*************"
+echo $PWD
 echo "Successfully built webgpu aar"
