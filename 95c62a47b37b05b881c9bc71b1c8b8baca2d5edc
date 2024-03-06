@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a75013_f470f52d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-03-06T22:03:36Z",
+      "side": 1,
+      "message": "CommitDate: 2024-03-06 12:55:25 -0800 WGPUFuture][native] fix duplicate WaitRef to unready events in ProcessPollEvents",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fb058b_475ab2a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-03-06T22:03:36Z",
+      "side": 1,
+      "message": "CommitDate: 2024-03-06 12:55:25 -0800",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "518f7197_66807ae7",
@@ -31,6 +65,41 @@
       "writtenOn": "2024-03-06T21:22:19Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "518f7197_66807ae7",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac65d32_cadb67b9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-03-06T22:03:36Z",
+      "side": 1,
+      "message": "CommitDate: 2024-03-06 12:55:25 -0800",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a8adaa_1ac3789c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-03-06T22:03:36Z",
+      "side": 1,
+      "message": "Done\n\nCommitDate: 2024-03-06 12:55:25 -0800\n\nBug: dawn:1987\nChange-Id: I15c5dd8aa263b8c911a2caabcbb45ceeea542eaf",
       "parentUuid": "518f7197_66807ae7",
       "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
