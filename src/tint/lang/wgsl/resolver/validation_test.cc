@@ -1018,7 +1018,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfTrueInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1032,7 +1032,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1043,7 +1043,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1058,7 +1058,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfInIfInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1072,7 +1072,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfTrueMultipleStmtsInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1087,7 +1087,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseMultipleStmtsInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1101,7 +1101,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseIfInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1116,7 +1116,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfNonEmptyElseInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1131,7 +1131,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseNonEmptyTrueInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
@@ -1145,7 +1145,7 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfInContinuingNotLast) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "12:34 error: 'break' must not be used to exit from a continuing block. Use 'breakif' instead."
               "Use `break-if` instead.");
 }
 
