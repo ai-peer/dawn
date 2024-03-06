@@ -137,6 +137,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffec2c9_ffca462e",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-03-06T08:30:45Z",
+      "side": 1,
+      "message": "I was able to remove the deprecated one entirely in latest patchset. Thank you!",
+      "parentUuid": "fcb7ee9f_73c8af00",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 14
+      },
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1a68a77_bc62099e",
