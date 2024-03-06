@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0575c5_2aa8e7c8",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 7
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-06T00:52:41Z",
+      "side": 1,
+      "message": "Discussed offline, will keep as-is.",
+      "parentUuid": "afc69afe_a94e7399",
+      "range": {
+        "startLine": 385,
+        "startChar": 2,
+        "endLine": 391,
+        "endChar": 0
+      },
+      "revId": "987141e3e519f0462cbb8cd03525205855aa73d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfae1a48_90e267c7",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-03-05T17:57:46Z",
       "side": 1,
       "message": "ditto, use **properties in the method args?",
+      "range": {
+        "startLine": 463,
+        "startChar": 0,
+        "endLine": 470,
+        "endChar": 0
+      },
+      "revId": "987141e3e519f0462cbb8cd03525205855aa73d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050ec6f5_dde33870",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 7
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-06T00:52:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfae1a48_90e267c7",
       "range": {
         "startLine": 463,
         "startChar": 0,
