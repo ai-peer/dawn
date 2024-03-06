@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fee324ac_dae8b479",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-06T00:08:35Z",
+      "side": 1,
+      "message": "I was thinking the same thing. That would be nice. We might even already have a bug for it, not sure.",
+      "parentUuid": "b768c24a_f8188148",
+      "revId": "3c4581dae5fcff8d2e8f748ca5fa6a68b01ebe42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53264cb0_92170b9b",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 1
