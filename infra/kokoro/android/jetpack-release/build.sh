@@ -32,9 +32,21 @@
 set -e # Fail on any error
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
-cd  $SCRIPT_DIR/../../../../tools/android
+cd $SCRIPT_DIR/../../../../tools
+python fetch_dawn_dependencies.py --use-test-deps
+cd android
 
-./gradlew publishToMavenLocal
+# Use specified JDK version.  Default is JDK11
+sudo add-apt-repository ppa:cwchien/gradle
+sudo apt-get update
+apt-get install -y openjdk-17-jdk
+export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
+
+# gradle 8.0+ is expected for android library
+sudo apt-get install gradle-8.3
+sudo update-alternatives --set gradle /usr/lib/gradle/8.3/bin/gradle
+
+gradle publishToMavenLocal
 
 if [[ $? -ne 0 ]]
 then
