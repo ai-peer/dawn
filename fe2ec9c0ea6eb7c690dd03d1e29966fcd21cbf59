@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626b13dc_8e68623a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T11:54:04Z",
+      "side": 1,
+      "message": "Do they? It\u0027s a cross-invocation load and subtraction(s). I struggle with the concept that they directly affect values in other invocations.\nI guess I have the same objection to `kWorkgroupUniformLoad` being included in `HasSideEffects()`, [which I see was added in this CL](https://dawn-review.googlesource.com/c/dawn/+/114862/15/src/tint/sem/builtin.cc).\n\nPerhaps the definition of \"side-effects\" needs refining. It currently has the comment:\n\n```\n/// Determines if the given `f` may have side-effects (i.e. writes to at least one of its inputs)\n/// @returns true if intrinsic may have side-effects\n```\n\nWhich is not particularly explicit in its definition.\n\nIt seems what we\u0027re trying to describe here is functions that have an observable impact on other instructions (aside from their result value). I hadn\u0027t really considered uniformity to play a part in this definition.\n\nEither way, we should the function\u0027s comment to be more descriptive - and possibly rename the helper.\n\nAlternatively to including uniformity in \"side-effects\", we could have another function for describing whether the function must be called in uniform control flow (aside: this is something that could and probably should be declared in the .def files via an attribute).",
+      "range": {
+        "startLine": 11,
+        "startChar": 16,
+        "endLine": 11,
+        "endChar": 61
+      },
+      "revId": "fe2ec9c0ea6eb7c690dd03d1e29966fcd21cbf59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e8413c8_64590977",
+        "filename": "src/tint/lang/wgsl/builtin_fn.cc.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T11:54:04Z",
+      "side": 1,
+      "message": "There is also src/tint/lang/core/builtin_fn.cc.tmpl",
+      "revId": "fe2ec9c0ea6eb7c690dd03d1e29966fcd21cbf59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
