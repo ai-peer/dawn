@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "518f7197_66807ae7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-06T20:18:42Z",
+      "side": 1,
+      "message": "nit: update description",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582c5b47_dbd0e3cc",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-06T20:18:42Z",
+      "side": 1,
+      "message": "We shouldn\u0027t add this because it adds an escape hatch from the WaitRef tracking.\nInstead, I think `completeable` can be a vector of WaitRef.",
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645d1f64_74dc27dc",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-06T20:18:42Z",
+      "side": 1,
+      "message": "completeable -\u003e completable",
+      "range": {
+        "startLine": 412,
+        "startChar": 35,
+        "endLine": 412,
+        "endChar": 47
+      },
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e5926c_2eacce8c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-06T20:18:42Z",
+      "side": 1,
+      "message": "nit: Give this a more specific name like `needFutureProcessEvents` you had in PS2.",
+      "range": {
+        "startLine": 414,
+        "startChar": 9,
+        "endLine": 414,
+        "endChar": 15
+      },
+      "revId": "95c62a47b37b05b881c9bc71b1c8b8baca2d5edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
