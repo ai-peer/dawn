@@ -16,6 +16,97 @@
       "message": "PTAL, thanks!",
       "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f8e4b5_904ff2aa",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-06T13:50:34Z",
+      "side": 1,
+      "message": "Maybe mFreeLists.clear() would be sufficient? (and faster in non-BackupRefPtr mode)",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb448fe1_86316605",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-06T13:50:34Z",
+      "side": 1,
+      "message": "Does DeleteBlock(std::move(mRoot)) work instead of the three step thing? Ditto below.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 31
+      },
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a07cf6_4f008dd9",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-06T13:50:34Z",
+      "side": 1,
+      "message": "ditto std::move",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa612882_bc33e798",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-06T13:50:34Z",
+      "side": 1,
+      "message": "Why is this one necessary?",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8244fff_cd4af669",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-06T13:50:34Z",
+      "side": 1,
+      "message": "ditto std::move",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
