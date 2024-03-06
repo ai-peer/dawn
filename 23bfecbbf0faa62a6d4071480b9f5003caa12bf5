@@ -69,6 +69,24 @@
       "parentUuid": "48f17f24_6fc6820f",
       "revId": "23bfecbbf0faa62a6d4071480b9f5003caa12bf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500086d5_1b342f4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-06T19:38:38Z",
+      "side": 1,
+      "message": "Got it. So the plan is to change the implementation to that in https://dawn-review.googlesource.com/c/dawn/+/165527, and land this seperate CL one first.",
+      "parentUuid": "06dc92e2_d7d30606",
+      "revId": "23bfecbbf0faa62a6d4071480b9f5003caa12bf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
