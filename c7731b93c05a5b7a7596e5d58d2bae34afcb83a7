@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f57a61ce_8b5a5a74",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T17:55:01Z",
+      "side": 1,
+      "message": "Done, as I\u0027m on the fence and you expressed a preference for having it. You pushed me off the fence.",
+      "parentUuid": "4cee0263_8e28e9c6",
+      "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9066113_31112fb3",
