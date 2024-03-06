@@ -34,6 +34,10 @@ set -e # Fail on any error
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
 cd  $SCRIPT_DIR/../../../../tools/android
 
+gradle wrapper
+./gradlew --version
+./gradlew wrapper --gradle-version 8.0 --distribution-type all
+./gradlew --version
 ./gradlew publishToMavenLocal
 
 if [[ $? -ne 0 ]]
