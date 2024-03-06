@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e885e381_8f526568",
+        "filename": "src/tint/lang/core/intrinsic/table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-06T17:32:34Z",
+      "side": 1,
+      "message": "nit: maybe add `got \u003cnum\u003e arguments` on the end?",
+      "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9066113_31112fb3",
+        "filename": "third_party/langsvr",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-06T17:32:34Z",
+      "side": 1,
+      "message": "This seems unrelated",
+      "revId": "c7731b93c05a5b7a7596e5d58d2bae34afcb83a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
