@@ -32,9 +32,36 @@
 set -e # Fail on any error
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd )"
-cd  $SCRIPT_DIR/../../../../tools/android
+cd /tmpfs/src/git
+# Install depot tools
+git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+export PATH=$PWD/depot_tools:$PATH
 
-./gradlew publishToMavenLocal
+cd $SCRIPT_DIR/../../../..
+
+# run gclient to fetch the dependencies
+cp scripts/standalone.gclient .gclient
+gclient sync
+
+if [[ $? -ne 0 ]]
+then
+    echo "FAILURE in fetching deps"
+    exit 1
+fi
+cd tools/android
+
+# Use specified JDK version.  Default is JDK11
+sudo add-apt-repository ppa:cwchien/gradle
+sudo apt-get update
+apt-get install -y openjdk-17-jdk
+export JAVA_HOME="$(update-java-alternatives -l | grep "1.17" | head -n 1 | tr -s " " | cut -d " " -f 3)"
+
+# gradle 8.0+ is expected for android library
+sudo apt-get install gradle-8.3
+sudo update-alternatives --set gradle /usr/lib/gradle/8.3/bin/gradle
+
+# Compile .aar
+gradle publishToMavenLocal
 
 if [[ $? -ne 0 ]]
 then
