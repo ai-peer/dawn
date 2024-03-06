@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb281b0_4f751956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-06T08:17:06Z",
+      "side": 1,
+      "message": "Switching to recycling the whole SwapChain object in the Surface object. This is much closer to the behavior that we get with the old SwapChain API, and gets rid of the SwapChainCache in the Vulkan driver.\n\nPassing all tests locally on my machine (I was finally able to activate Vulkan validation layer btw)",
+      "revId": "4b3d8eec0d0b6a46247826a4fa382b4211af6cf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
