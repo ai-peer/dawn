@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "50aa8e1d444c167180abd39cbe5fd1e7ec32bdd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480d9582_a4df2e31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-06T16:45:44Z",
+      "side": 1,
+      "message": "Looks fine, Ben for any golang improvements.",
+      "revId": "50aa8e1d444c167180abd39cbe5fd1e7ec32bdd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
