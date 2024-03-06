@@ -33,6 +33,23 @@
       "message": "Looks fine, Ben for any golang improvements.",
       "revId": "50aa8e1d444c167180abd39cbe5fd1e7ec32bdd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02bbcf8_8cff2e01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-06T17:02:11Z",
+      "side": 1,
+      "message": "I\u0027d be happy with the default to off, but LGTM.",
+      "revId": "50aa8e1d444c167180abd39cbe5fd1e7ec32bdd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
