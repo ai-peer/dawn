@@ -775,6 +775,7 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
     if (!IsSubresourceContentInitialized(range)) {
         // If subresource has not been initialized, clear it to black as it could
         // contain dirty bits from recycled memory
+        SynchronizeTextureBeforeUse(commandContext);
         DAWN_TRY(ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
         SetIsSubresourceContentInitialized(true, range);
         GetDevice()->IncrementLazyClearCountForTesting();
