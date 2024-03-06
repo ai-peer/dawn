@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7214953d_3ae4510f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-03-06T20:34:50Z",
+      "side": 1,
+      "message": "const regexp \u003d /(.*?)Licensed under the Apache License,[\\s\\S\\n]+?limitations under the License./g;\n// const regexp \u003d /(.*?)Redistribution and use in source and binary forms,[\\s\\S\\n]+?POSSIBILITY OF SUCH DAMAGE./g;\n\nconst newHeaderLines \u003d `Redistribution and use in source and binary forms, with or without\nmodification, are permitted provided that the following conditions are met:",
+      "revId": "cc2516ac15ebeb6c3c07a427a76d6b57832d3154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
