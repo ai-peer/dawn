@@ -86,6 +86,24 @@
       "message": "Could we get some comprehensive test plan in a comment here so we can discuss it in this review?",
       "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4e073e_014a119c",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-07T20:45:53Z",
+      "side": 1,
+      "message": "Resolving and added a comment at the test plan.",
+      "parentUuid": "f797e26e_74ed476c",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

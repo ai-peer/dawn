@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a712340_e907d6b5",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-07T20:45:53Z",
+      "side": 1,
+      "message": "Test plan is here.",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
