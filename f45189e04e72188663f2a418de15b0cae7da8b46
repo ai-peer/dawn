@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "027bdba3_a812db4f",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-07T19:23:47Z",
+      "side": 1,
+      "message": "Done. Seems like we can just have a state for no access and then set the state to unmapped on BeginAccess.",
+      "parentUuid": "ec65b7f8_6a516029",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea8b6ead_94cd7809",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-07T11:29:42Z",
       "side": 1,
       "message": "Is that always the case? Shouldn\u0027t we have an `isCleared` like in SharedTextureMemory?",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28165cdb_11cf0c6e",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-07T19:23:47Z",
+      "side": 1,
+      "message": "My thinking was that if Dawn receives an externally created buffer, then whoever created it should be responsible for the data at the time it\u0027s imported. I\u0027m fine with adding IsInitialized as the SharedTextureMemory chains do, but I don\u0027t think we (WebNN) have a planned usage.",
+      "parentUuid": "ea8b6ead_94cd7809",
       "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
