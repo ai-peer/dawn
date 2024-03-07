@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "280732ef_3f984c25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-07T22:42:05Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f62a2c6_b4265069",
@@ -72,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee74fc9b_abbbfdf3",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-07T22:42:05Z",
+      "side": 1,
+      "message": "I see. Usually, the users should have make sure the buffer is used in a thread safe way. But users are not sure which thread the `Complete()` could be called on. So we have to protect data in the `BufferBase`. And unfortunately, a global device lock is used for protecting all resources. Ideally, we should have at least one lock per resource for this purpose. But it is out of scope of this CL.",
+      "parentUuid": "0c14a084_9c4478f8",
+      "range": {
+        "startLine": 182,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 27
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31070274_12376754",
@@ -108,6 +149,30 @@
       "writtenOn": "2024-03-06T14:58:28Z",
       "side": 1,
       "message": "FYI. I think you can use `DAWN_TRY((*buffer)-\u003eFinalizeMapAsync());` here. \nFor example:\n```\nauto error \u003d mBufferOrEarlyStatus.Use([\u0026](auto bufferOrEarlyStatus)\n    -\u003e MaybeError {\n    DAWN_TRY(...);    \n    return {}\n}; \nstd::ignore \u003d device-\u003eConsumedErrorUnlocked(std::move(error));\n```",
+      "range": {
+        "startLine": 198,
+        "startChar": 20,
+        "endLine": 198,
+        "endChar": 63
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b8cb00e_c3721b68",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-07T22:42:05Z",
+      "side": 1,
+      "message": "Please ignore this one",
+      "parentUuid": "5a3fed98_8ab604c8",
       "range": {
         "startLine": 198,
         "startChar": 20,
@@ -212,6 +277,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "74e5e177_65115f8c",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-07T22:42:05Z",
+      "side": 1,
+      "message": "Please ignore this one",
+      "parentUuid": "8903d6a7_e27f7b4f",
+      "range": {
+        "startLine": 210,
+        "startChar": 56,
+        "endLine": 210,
+        "endChar": 69
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e256211d_3fd7cf46",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
@@ -246,6 +335,30 @@
       "writtenOn": "2024-03-06T14:58:28Z",
       "side": 1,
       "message": "It is better to only call `ConsumedError()` with the lock, but not `FinialieMapAsync()`. Maybe using a helper `DeviceBase::ConsumedErrorUnlocked()`.",
+      "range": {
+        "startLine": 852,
+        "startChar": 39,
+        "endLine": 852,
+        "endChar": 55
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3bcd56_2af6e31a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-07T22:42:05Z",
+      "side": 1,
+      "message": "Please ignore this one",
+      "parentUuid": "ddd87ec6_68700cbe",
       "range": {
         "startLine": 852,
         "startChar": 39,
