@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec65b7f8_6a516029",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-07T11:29:42Z",
+      "side": 1,
+      "message": "It\u0027d be nice to fold this in the state so there is a single condition for this very hot function.",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea8b6ead_94cd7809",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-07T11:29:42Z",
+      "side": 1,
+      "message": "Is that always the case? Shouldn\u0027t we have an `isCleared` like in SharedTextureMemory?",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f797e26e_74ed476c",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-07T11:29:42Z",
+      "side": 1,
+      "message": "Could we get some comprehensive test plan in a comment here so we can discuss it in this review?",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
