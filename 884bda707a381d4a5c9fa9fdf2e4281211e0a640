@@ -126,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7e0a043_9910ec42",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-03-07T11:28:56Z",
+      "side": 1,
+      "message": "One possible alternative in the spirit of Corentin \"move\" would be:\n```\nDeleteBlock(mRoot.ExtractAsDangling());\n```\nwhich transfert the value from `mRoot` to the returned value (e.g. mRoot becomes null).\n\nSee:\nhttps://source.chromium.org/chromium/chromium/src/+/main:docs/dangling_ptr_guide.md;l\u003d190-193\n\n---\n\nAn even better solution (if possible) would be to use `std::unique_ptr` for owning pointers.",
+      "parentUuid": "7fbeb9d1_355ac607",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 31
+      },
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5a07cf6_4f008dd9",
         "filename": "src/dawn/native/BuddyAllocator.cpp",
         "patchSetId": 6
