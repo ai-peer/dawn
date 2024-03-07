@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c14a084_9c4478f8",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-03-07T09:54:35Z",
+      "side": 1,
+      "message": "Yes, from what I can see the lambda below accesses buffer\u0027s `mState` \u0026 `FinalizeMapAsync`, device\u0027s `ConsumedError`. `mBufferOrEarlyStatus.Use` is not enough because there are some places that access the same members without `mBufferOrEarlyStatus.Use` scope. Those places use device lock so we need to use the same device lock here.\n\nAnd you are correct that this function doesn\u0027t already have any device lock held since it will invoke a callback to user\u0027s code.",
+      "parentUuid": "215ae653_be6fd22e",
+      "range": {
+        "startLine": 182,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 27
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31070274_12376754",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
