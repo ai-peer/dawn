@@ -16,6 +16,24 @@
       "message": "note: I\u0027m not 100% if one day we\u0027ll have to re-cache these on the CommandBufferStateTracker to avoid pointer chasing (for micro optimizations).",
       "revId": "91a0358034d157271dde7148a419891563360ca0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "054434c5_fed2c355",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-07T03:19:04Z",
+      "side": 0,
+      "message": "Done\n\nThey have been added back in the latest patch set.",
+      "parentUuid": "779c9bf3_02983f50",
+      "revId": "91a0358034d157271dde7148a419891563360ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
