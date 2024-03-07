@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c8c0f4_598fff48",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-07T08:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5f8e4b5_904ff2aa",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb448fe1_86316605",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-03-06T13:50:34Z",
       "side": 1,
       "message": "Does DeleteBlock(std::move(mRoot)) work instead of the three step thing? Ditto below.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 31
+      },
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa370953_9e28e32d",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-07T08:02:51Z",
+      "side": 1,
+      "message": "No. I\u0027ve tested that std::move(mRoot) cannot set mRoot to nullptr so we will still meet the dangling pointer issue.",
+      "parentUuid": "cb448fe1_86316605",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -88,6 +130,24 @@
       "writtenOn": "2024-03-06T13:50:34Z",
       "side": 1,
       "message": "Why is this one necessary?",
+      "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c4cc7e_d1562a0a",
+        "filename": "src/dawn/native/BuddyAllocator.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-07T08:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa612882_bc33e798",
       "revId": "884bda707a381d4a5c9fa9fdf2e4281211e0a640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
