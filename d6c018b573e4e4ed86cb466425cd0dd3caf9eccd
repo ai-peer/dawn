@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b08d7b27_5c07f553",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-03-07T18:24:53Z",
+      "side": 1,
+      "message": "Due to a bug in the autoroller, this run incorrectly removed expectations for\nwin10/NV and android-u. I\u0027ve cloned this CL and manually reverted the \nexpectations here: https://dawn-review.googlesource.com/c/dawn/+/178261",
+      "revId": "d6c018b573e4e4ed86cb466425cd0dd3caf9eccd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
