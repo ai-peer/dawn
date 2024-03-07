@@ -139,6 +139,74 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "702f060c_b3fd8a3a",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-07T22:37:13Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f9448d3_f283536f",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-07T22:37:13Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a070d357_321ce1e1",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-07T22:37:13Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "416a69e2_c2a9305d",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-07T22:37:13Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c3fded10_03205a65",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
