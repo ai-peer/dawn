@@ -110,6 +110,7 @@ bool PhysicalDevice::IsDepthStencilFormatSupported(VkFormat format) const {
 MaybeError PhysicalDevice::InitializeImpl() {
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
+    mVkDriverVersion = mDeviceInfo.properties.driverVersion;
     mDriverVersion = DecodeVulkanDriverVersion(mDeviceInfo.properties.vendorID,
                                                mDeviceInfo.properties.driverVersion);
     const std::string driverVersionStr = mDriverVersion.ToString();
@@ -339,6 +340,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 
     EnableFeature(Feature::SurfaceCapabilities);
     EnableFeature(Feature::TransientAttachments);
+    EnableFeature(Feature::AdapterPropertiesVk);
 
     // Enable ChromiumExperimentalSubgroups feature if:
     // 1. Vulkan API version is 1.1 or later, and
@@ -856,6 +858,9 @@ void PhysicalDevice::PopulateBackendProperties(UnpackedPtr<AdapterProperties>& p
                 heapInfo[memoryType.heapIndex].properties |= wgpu::HeapProperty::HostUncached;
             }
         }
+    }
+    if (auto* vkProperties = properties.Get<AdapterPropertiesVk>()) {
+        vkProperties->driverVersion = mVkDriverVersion;
     }
 }
 
