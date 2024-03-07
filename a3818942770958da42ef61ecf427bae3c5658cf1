@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5e0895_7c4105be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-07T18:09:28Z",
+      "side": 1,
+      "message": "some minor comments",
+      "revId": "a3818942770958da42ef61ecf427bae3c5658cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8846521b_9dfe189c",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-07T18:09:28Z",
+      "side": 1,
+      "message": "nit: \"k\" is our usual prefix for constants. This should probably just be a function like \"GenerateMatMulFloatHeader\" now",
+      "range": {
+        "startLine": 46,
+        "startChar": 12,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "a3818942770958da42ef61ecf427bae3c5658cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "517a401e_1539083f",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-07T18:09:28Z",
+      "side": 1,
+      "message": "nit: may be easier to hoist defining these constants to the top of the string, before the R\"(...)\" block, that way you don\u0027t deal with this funny indentation.\n\n```\nss \u003c\u003c \"const kTileSize \u003d \" \u003c\u003c kTileSize \u003c\u003c \"u;\\n\";\nss \u003c\u003c \"const kWorkgroupSizeX \u003d \" \u003c\u003c kWorkgroupSizeX \u003c\u003c \"u;\\n\";\nss \u003c\u003c \"const kWorkgroupSizeY \u003d \" \u003c\u003c kWorkgroupSizeY \u003c\u003c \"u;\\n\";\nss \u003c\u003c ....\nss \u003c\u003c R\"( ... rest of the shader\n\n)\";\n```",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 11
+      },
+      "revId": "a3818942770958da42ef61ecf427bae3c5658cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ff36f7_c90abc7a",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-07T18:09:28Z",
+      "side": 1,
+      "message": "I think some tests / build / presubmit will get grumpy with you since now these strings are not constants - they\u0027ll need a global constructor / destructor which is disallowed.\n\nThere\u0027s no real reason these strings need to be constants though, so you can also make this a function, and call it where it gets referenced in shared module creation.",
+      "range": {
+        "startLine": 217,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 24
+      },
+      "revId": "a3818942770958da42ef61ecf427bae3c5658cf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
