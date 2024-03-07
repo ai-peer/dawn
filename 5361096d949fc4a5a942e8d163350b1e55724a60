@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30c76a7_0cd34b06",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-03-07T22:30:44Z",
+      "side": 1,
+      "message": "Admittedly, I\u0027m not 100% sure this is necessary. https://dawn-review.googlesource.com/c/dawn/+/178261/1/webgpu-cts/expectations.txt#b1457 is an instance of the roller trying to remove an experimental expectation that wasn\u0027t in a KEEP section, but there are also plenty of other experimental expectations in non-KEEP sections in that CL that were fine.",
+      "range": {
+        "startLine": 10,
+        "startChar": 29,
+        "endLine": 10,
+        "endChar": 41
+      },
+      "revId": "5361096d949fc4a5a942e8d163350b1e55724a60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
