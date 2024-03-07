@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "215ae653_be6fd22e",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-07T02:18:33Z",
+      "side": 1,
+      "message": "Per [1], I think so, but not sure. Probably, @lehoangquyen@chromium.org can help clarify this.",
+      "parentUuid": "4f62a2c6_b4265069",
+      "range": {
+        "startLine": 182,
+        "startChar": 17,
+        "endLine": 182,
+        "endChar": 27
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31070274_12376754",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
@@ -157,6 +181,29 @@
         "startChar": 56,
         "endLine": 210,
         "endChar": 69
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e256211d_3fd7cf46",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-07T02:18:33Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 848,
+        "startChar": 0,
+        "endLine": 850,
+        "endChar": 54
       },
       "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
