@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "906f5685_e3007037",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004831
+      },
+      "writtenOn": "2024-03-08T16:54:28Z",
+      "side": 1,
+      "message": "Not 100% sure how all the dawn code / review stuff works. I copied the implementation of https://dawn-review.googlesource.com/c/dawn/+/170563 which works from chrome and the added dawn tests pass locally.\n\nI used `git cl upload` to upload which seems to have worked although it wiped out my commit message changes. Does it replace the gerrit commit message with your local commit message always?",
+      "revId": "9b9cd7bbfad3feb8faa7a304181bf275b334b77b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
