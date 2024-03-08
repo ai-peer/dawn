@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad92efdf_d5039b34",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-08T05:07:01Z",
+      "side": 1,
+      "message": "The reason I called this one `_ALIAS` is because this is how it\u0027s identified in clang: https://github.com/llvm/llvm-project/blob/main/clang/include/clang/Basic/DiagnosticGroups.td#L723-L724",
+      "range": {
+        "startLine": 93,
+        "startChar": 55,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "a312ed8ddf4a5c701b779f20e0ef9688fb85bac2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
