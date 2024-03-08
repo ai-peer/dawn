@@ -85,6 +85,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
     VkPhysicalDevice mVkPhysicalDevice;
     Ref<VulkanInstance> mVulkanInstance;
     VulkanDeviceInfo mDeviceInfo = {};
+    uint32_t mVkDriverVersion = 0;
 
     uint32_t mDefaultComputeSubgroupSize = 0;
 };
