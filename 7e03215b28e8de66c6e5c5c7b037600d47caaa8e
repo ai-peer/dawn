@@ -437,6 +437,30 @@
       },
       "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c20f31ee_40ea3f24",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-08T08:52:04Z",
+      "side": 1,
+      "message": "Immediately un-mapping a buffer without waiting for the callback, can ran into it. Simply like this:\n```\nMapAsync(buffer, callback);\nUnmap(buffer);\n```\nIt\u0027s okay before the CL, but not now, as we postpone the `MapInternal`.",
+      "parentUuid": "bc13e402_0b77d89c",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 22
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
