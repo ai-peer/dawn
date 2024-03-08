@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5921cf1_0ff71db2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T10:02:20Z",
+      "side": 1,
+      "message": "LGTM still, thank you!",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05578ac5_0c34f4ee",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T10:02:20Z",
+      "side": 1,
+      "message": "optional nit: SetHasAccess with a bool seemed slightly better still because the Buffer state transitions seem to be an internal detail a bit. Here the SharedTextureMemory sets to Unmapped, when mapping should be something internal to the buffer. (or not if we allow already pre-mapped SharedBufferMemory??)",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3933a2aa_b31b5f84",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T10:02:20Z",
+      "side": 1,
+      "message": "```suggestion\n// - Validate that calling BeginAccess twice produces an error.\n// - Check using a non-mappable buffers between multiple devices.\n// - Check using the mappable buffers between multiple devices\n// - Check validation that isInitialized must be true (for now).\n```",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a712340_e907d6b5",
@@ -14,6 +65,24 @@
       "writtenOn": "2024-03-07T20:45:53Z",
       "side": 1,
       "message": "Test plan is here.",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed7695d_fc17447e",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T10:02:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9a712340_e907d6b5",
       "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

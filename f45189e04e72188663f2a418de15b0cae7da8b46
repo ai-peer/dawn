@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "495a4d26_74c1568a",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T10:02:20Z",
+      "side": 1,
+      "message": "It would be best to add it, and we can require it to be true for now.",
+      "parentUuid": "28165cdb_11cf0c6e",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f797e26e_74ed476c",
         "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
         "patchSetId": 10
