@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81bf2165_0586c5cf",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-08T00:08:01Z",
+      "side": 1,
+      "message": "this skip needs to be done differently.\n\nSee how I did it in these two places:\n\nhttps://dawn-review.googlesource.com/c/dawn/+/178381/comment/90fe685b_9d27e811/\nhttps://dawn-review.googlesource.com/c/dawn/+/178381/comment/6728e34b_a7c9fadf/\n\nBecause this test harness isn\u0027t particularly smart, GetRequiredFeatures is not supposed to return features that aren\u0027t supported. You should check whether or not they are supported before adding them to the list.\n\nThen, the skip should occur in the SetUp function",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 0
+      },
+      "revId": "c0ef7d97758c2fb4bb9ce995ae06f6df21546003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
