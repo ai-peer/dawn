@@ -16,6 +16,24 @@
       "message": "I think we used `__APPLE__` in case there was a day that someone wanted to run tint on iOS, but I\u0027m not aware of that being a thing, so LGTM",
       "revId": "438fbdace5a61de773b35d02c4992edec11523b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d46350_b2934dce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-08T20:34:36Z",
+      "side": 1,
+      "message": "I guess we\u0027ll add `TINT_IS_APPLE` if that becomes a thing.",
+      "parentUuid": "5e4a505a_6830242e",
+      "revId": "438fbdace5a61de773b35d02c4992edec11523b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
