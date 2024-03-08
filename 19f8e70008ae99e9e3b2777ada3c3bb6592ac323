@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2e3bf6_7f5303e3",
+        "filename": "src/tint/utils/traits/traits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-08T05:05:06Z",
+      "side": 1,
+      "message": "Btw, there is precendent for this, as can be seen on cppreference for `std::void_t` here: https://en.cppreference.com/w/cpp/types/void_t in the example used to detect validity of an expression:\n\n```\n// primary template handles types that do not support pre-increment:\ntemplate\u003cclass, class \u003d void\u003e\nstruct has_pre_increment_member : std::false_type {};\n \n// specialization recognizes types that do support pre-increment:\ntemplate\u003cclass T\u003e\nstruct has_pre_increment_member\u003cT,\n           std::void_t\u003cdecltype( ++std::declval\u003cT\u0026\u003e() )\u003e\n       \u003e : std::true_type {};\n```\n\nHere we can see that operator++ is being applied to `std::declval\u003cT\u0026\u003e`.",
+      "range": {
+        "startLine": 270,
+        "startChar": 65,
+        "endLine": 270,
+        "endChar": 66
+      },
+      "revId": "19f8e70008ae99e9e3b2777ada3c3bb6592ac323",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
