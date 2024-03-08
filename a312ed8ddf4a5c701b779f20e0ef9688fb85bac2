@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b88484b_c5c29f25",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-08T14:17:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59837fb7_c4c07981",
+      "range": {
+        "startLine": 93,
+        "startChar": 55,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "a312ed8ddf4a5c701b779f20e0ef9688fb85bac2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f708db7f_24256507",
@@ -61,6 +85,30 @@
       "writtenOn": "2024-03-08T12:29:27Z",
       "side": 1,
       "message": "Looks like you might need to clang-format",
+      "range": {
+        "startLine": 116,
+        "startChar": 57,
+        "endLine": 116,
+        "endChar": 58
+      },
+      "revId": "a312ed8ddf4a5c701b779f20e0ef9688fb85bac2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d5868d_97829cde",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-08T14:17:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f708db7f_24256507",
       "range": {
         "startLine": 116,
         "startChar": 57,
