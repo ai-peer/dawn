@@ -216,6 +216,30 @@
       },
       "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3858034_208f19a1",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-03-08T19:41:18Z",
+      "side": 1,
+      "message": "Since the bug repros on beta versions of Windows (that will soon become release version), please remove the Windows version checks and just check the driver version.",
+      "parentUuid": "62153727_a8263667",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 0
+      },
+      "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
