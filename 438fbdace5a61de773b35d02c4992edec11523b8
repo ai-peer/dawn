@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4a505a_6830242e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-08T20:29:41Z",
+      "side": 1,
+      "message": "I think we used `__APPLE__` in case there was a day that someone wanted to run tint on iOS, but I\u0027m not aware of that being a thing, so LGTM",
+      "revId": "438fbdace5a61de773b35d02c4992edec11523b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
