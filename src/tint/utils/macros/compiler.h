@@ -90,6 +90,8 @@
     _Pragma("clang diagnostic ignored \"-Wreserved-identifier\"")
 #define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER \
     _Pragma("clang diagnostic ignored \"-Wreserved-macro-identifier\"")
+#define TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER_ALIAS \
+    _Pragma("clang diagnostic ignored \"-Wreserved-id-macro\"")
 #define TINT_DISABLE_WARNING_UNUSED_VALUE _Pragma("clang diagnostic ignored \"-Wunused-value\"")
 #define TINT_DISABLE_WARNING_UNUSED_PARAMETER \
     _Pragma("clang diagnostic ignored \"-Wunused-parameter\"")
@@ -111,6 +113,7 @@
     TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE  \
     TINT_DISABLE_WARNING_RESERVED_IDENTIFIER          \
     TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER    \
+    TINT_DISABLE_WARNING_RESERVED_MACRO_IDENTIFIER_ALIAS \
     TINT_DISABLE_WARNING_SHADOW_FIELD_IN_CONSTRUCTOR  \
     TINT_DISABLE_WARNING_SIGN_CONVERSION              \
     TINT_DISABLE_WARNING_UNUSED_PARAMETER             \
