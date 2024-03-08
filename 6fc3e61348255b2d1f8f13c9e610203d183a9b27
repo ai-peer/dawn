@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54e38d71_b110831a",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-08T19:53:52Z",
+      "side": 1,
+      "message": "Makes sense to me. Reverted to SetHasAccess().",
+      "parentUuid": "05578ac5_0c34f4ee",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3933a2aa_b31b5f84",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-03-08T10:02:20Z",
       "side": 1,
       "message": "```suggestion\n// - Validate that calling BeginAccess twice produces an error.\n// - Check using a non-mappable buffers between multiple devices.\n// - Check using the mappable buffers between multiple devices\n// - Check validation that isInitialized must be true (for now).\n```",
+      "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f94a2bc_10535fa3",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-08T19:53:52Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "3933a2aa_b31b5f84",
       "revId": "6fc3e61348255b2d1f8f13c9e610203d183a9b27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

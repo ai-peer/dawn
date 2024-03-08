@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b9727ef_5935e991",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-08T19:53:52Z",
+      "side": 1,
+      "message": "I missed a detail during my first reply - initialization already is a parameter, but as with SharedTextureMemory it\u0027s part of BeginAccessDescriptor.\n\nI\u0027m thinking SetIsDataInitialized needs to be removed here and initialization will be explicitly handled by BeginAccess.",
+      "parentUuid": "495a4d26_74c1568a",
+      "revId": "f45189e04e72188663f2a418de15b0cae7da8b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f797e26e_74ed476c",
         "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
         "patchSetId": 10
