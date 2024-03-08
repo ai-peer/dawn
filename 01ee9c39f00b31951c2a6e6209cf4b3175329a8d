@@ -283,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d526223a_a95cf64c",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-08T14:12:05Z",
+      "side": 1,
+      "message": "You are right. If device lock ins null, the callback is also in the main thread(Tick()). Thanks for the reminder.",
+      "parentUuid": "0537d412_94bf6337",
+      "range": {
+        "startLine": 197,
+        "startChar": 44,
+        "endLine": 197,
+        "endChar": 57
+      },
+      "revId": "01ee9c39f00b31951c2a6e6209cf4b3175329a8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d595807_b176a63f",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 3
