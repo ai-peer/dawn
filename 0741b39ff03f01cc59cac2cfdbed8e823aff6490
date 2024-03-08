@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edcc9e00_021b0fb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T17:00:50Z",
+      "side": 1,
+      "message": "No additional comments on top of Austin\u0027s",
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7044f7c2_8a603c83",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-08T17:00:50Z",
+      "side": 1,
+      "message": "```suggestion\n        DAWN_ASSERT(GetDevice()-\u003eIsLockedByCurrentThreadIfNeeded());\n\n```",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 0
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
