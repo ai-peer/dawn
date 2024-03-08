@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "d028368cdae17133e7c5df31ecf96bf4da62b3be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "549b277d_226ff8f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-08T06:15:49Z",
+      "side": 1,
+      "message": "Hi reviewers,\n\nI cannot open the Kokoro log. Can you help me?",
+      "revId": "d028368cdae17133e7c5df31ecf96bf4da62b3be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
