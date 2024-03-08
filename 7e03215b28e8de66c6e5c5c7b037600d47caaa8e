@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59ab4357_ec24764e",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-08T06:33:09Z",
+      "side": 1,
+      "message": "nit: change this to just std::get which will assert internally",
+      "range": {
+        "startLine": 170,
+        "startChar": 8,
+        "endLine": 171,
+        "endChar": 36
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f62a2c6_b4265069",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
@@ -208,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a2707b2_b6ee5a8b",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-08T06:33:09Z",
+      "side": 1,
+      "message": "IMO we should keep these variables here since they are for frontend state, and FinalizeMapAsync is purely a backend thing",
+      "parentUuid": "4d8624b4_00f2ec17",
+      "range": {
+        "startLine": 202,
+        "startChar": 24,
+        "endLine": 202,
+        "endChar": 64
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92067773_485f6ed2",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
@@ -364,6 +411,29 @@
         "startChar": 39,
         "endLine": 852,
         "endChar": 55
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc13e402_0b77d89c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-08T06:33:09Z",
+      "side": 1,
+      "message": "what changed such that there may be no data now?",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 22
       },
       "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
