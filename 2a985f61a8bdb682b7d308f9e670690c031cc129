@@ -54,6 +54,40 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fb446b2e_64287239",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-03-09T08:48:47Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "2a985f61a8bdb682b7d308f9e670690c031cc129",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "676db939_8bd3aba1",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-03-09T08:48:47Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "2a985f61a8bdb682b7d308f9e670690c031cc129",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "771687f7_715cf70f",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
