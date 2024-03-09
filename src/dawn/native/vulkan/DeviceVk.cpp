@@ -61,7 +61,38 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
+#include "renderdoc_app.h"
+#include <iostream>
+
 namespace dawn::native::vulkan {
+
+namespace {
+void onExit() {
+    int a = 0;
+    (void)a;
+}
+
+
+RENDERDOC_API_1_1_2* GetRenderDocAPI()
+{
+    static RENDERDOC_API_1_1_2 *rdoc_api = NULL;
+    if (rdoc_api) {
+        return rdoc_api;
+    }
+
+    // At init, on windows
+    if(HMODULE mod = GetModuleHandleA("renderdoc.dll"))
+    {
+        pRENDERDOC_GetAPI RENDERDOC_GetAPI =
+            (pRENDERDOC_GetAPI)GetProcAddress(mod, "RENDERDOC_GetAPI");
+        int ret = RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_1_2, (void **)&rdoc_api);
+        assert(ret == 1);
+    }
+
+    return rdoc_api;
+}
+
+}
 
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
@@ -78,6 +109,12 @@ Device::Device(AdapterBase* adapter,
     : DeviceBase(adapter, descriptor, deviceToggles), mDebugPrefix(GetNextDeviceDebugPrefix()) {}
 
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
+    static bool init = false;
+    if (!init) {
+        atexit(onExit);
+        init = true;
+    }
+
     // Copy the adapter's device info to the device so that we can change the "knobs"
     mDeviceInfo = ToBackend(GetPhysicalDevice())->GetDeviceInfo();
 
@@ -138,6 +175,13 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     }
 
     SetLabelImpl();
+
+    auto rdoc = GetRenderDocAPI();
+    if (rdoc) {
+        std::cerr << "Starting frame capture" << std::endl;
+        auto instance = ToBackend(GetPhysicalDevice())->GetVulkanInstance()->GetVkInstance();
+        rdoc->StartFrameCapture(RENDERDOC_DEVICEPOINTER_FROM_VKINSTANCE(instance), nullptr);
+    }
 
     ToBackend(GetPhysicalDevice())->GetVulkanInstance()->StartListeningForDeviceMessages(this);
 

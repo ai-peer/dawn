@@ -63,6 +63,9 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
+#include "renderdoc_app.h"
+#include <iostream>
+
 namespace dawn::native::d3d11 {
 namespace {
 
@@ -107,6 +110,25 @@ void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
     infoQueue->ClearStoredMessages();
 }
 
+RENDERDOC_API_1_1_2* GetRenderDocAPI()
+{
+    static RENDERDOC_API_1_1_2 *rdoc_api = NULL;
+    if (rdoc_api) {
+        return rdoc_api;
+    }
+
+    // At init, on windows
+    if(HMODULE mod = GetModuleHandleA("renderdoc.dll"))
+    {
+        pRENDERDOC_GetAPI RENDERDOC_GetAPI =
+            (pRENDERDOC_GetAPI)GetProcAddress(mod, "RENDERDOC_GetAPI");
+        int ret = RENDERDOC_GetAPI(eRENDERDOC_API_Version_1_1_2, (void **)&rdoc_api);
+        assert(ret == 1);
+    }
+
+    return rdoc_api;
+}
+
 }  // namespace
 
 // static
@@ -121,6 +143,12 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     DAWN_TRY_ASSIGN(mD3d11Device, ToBackend(GetPhysicalDevice())->CreateD3D11Device());
     DAWN_ASSERT(mD3d11Device != nullptr);
+
+    auto rdoc = GetRenderDocAPI();
+    if (rdoc) {
+        std::cerr << "Starting frame capture" << std::endl;
+        rdoc->StartFrameCapture(mD3d11Device.Get(), nullptr);
+    }
 
     mIsDebugLayerEnabled = IsDebugLayerEnabled(mD3d11Device);
 
