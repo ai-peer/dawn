@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include <utility>
+#include <csignal>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"

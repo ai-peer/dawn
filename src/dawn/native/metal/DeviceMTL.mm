@@ -55,6 +55,7 @@
 #include "dawn/platform/tracing/TraceEvent.h"
 
 #include <type_traits>
+#include <iostream>
 
 namespace dawn::native::metal {
 
@@ -155,9 +156,31 @@ Device::Device(AdapterBase* adapter,
 
 Device::~Device() {
     Destroy();
+    std::cerr << "~Device" << std::endl;
 }
 
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
+#if 1
+    if (@available(macOS 10.13, iOS 11.0, tvOS 11.0, *)) {
+        // TODO: add newer Metal interface as well
+        MTLCaptureManager* captureManager = [MTLCaptureManager sharedCaptureManager];
+        if (!captureManager.isCapturing) {
+            MTLCaptureDescriptor* captureDescriptor = [[MTLCaptureDescriptor alloc] init];
+            captureDescriptor.captureObject = *mMtlDevice;
+#if 0
+            captureDescriptor.destination = MTLCaptureDestinationGPUTraceDocument;
+            NSURL *tempUrl = [NSURL fileURLWithPath:NSTemporaryDirectory()];
+            captureDescriptor.outputURL = [NSURL URLWithString:@"capture.gputrace" relativeToURL:tempUrl];
+#endif
+            NSError *error;
+            if (![captureManager startCaptureWithDescriptor: captureDescriptor error:&error])
+            {
+                NSLog(@"Failed to start capture, error %@", error);
+            }
+        }
+     }
+#endif
+
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
 
@@ -364,6 +387,17 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
 
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
+
+    if (@available(macOS 10.13, iOS 11.0, tvOS 11.0, *)) {
+        // TODO: add newer Metal interface as well
+        MTLCaptureManager* captureManager = [MTLCaptureManager sharedCaptureManager];
+        if (!captureManager.isCapturing) {
+            return;
+        }
+
+        [captureManager stopCapture];
+    }
+
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
     // - It may be called if the device is explicitly destroyed with APIDestroy.
     //   This case is NOT thread-safe and needs proper synchronization with other
