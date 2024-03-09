@@ -39,6 +39,30 @@
       },
       "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79621161_2d1aa02e",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-09T01:51:07Z",
+      "side": 1,
+      "message": "Frankly I am not clear how this could be, however it would run the error.\n```\n../../src/dawn/native/Buffer.cpp(216,21): error: call to non-static member function without an object argument\n  216 |         DAWN_ASSERT(GetDevice()-\u003eIsLockedByCurrentThreadIfNeeded());\n      |                     ^~~~~~~~~\n```",
+      "parentUuid": "7044f7c2_8a603c83",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 0
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
