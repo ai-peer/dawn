@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e3baea_c34e5733",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-09T02:18:20Z",
+      "side": 1,
+      "message": "LGTM with nits",
+      "revId": "cad9c99d86111980b70ef4337cfbfcf74b7966c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc712820_d4504f43",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-09T02:18:20Z",
+      "side": 1,
+      "message": "nit: no need to store it as a variable if you can get it directly from mDeviceInfo",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 60
+      },
+      "revId": "cad9c99d86111980b70ef4337cfbfcf74b7966c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed16678_e0c979a1",
+        "filename": "src/dawn/tests/end2end/AdapterPropertiesVkTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-09T02:18:20Z",
+      "side": 1,
+      "message": "```suggestion\n// Test that it is possible to query the vk properties, and it is populated with a valid data.\n```",
+      "range": {
+        "startLine": 38,
+        "startChar": 41,
+        "endLine": 38,
+        "endChar": 44
+      },
+      "revId": "cad9c99d86111980b70ef4337cfbfcf74b7966c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32527b32_34a8cdbc",
+        "filename": "src/dawn/tests/end2end/AdapterPropertiesVkTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-09T02:18:20Z",
+      "side": 1,
+      "message": "```suggestion\nDAWN_INSTANTIATE_TEST(AdapterPropertiesVkTest, VulkanBackend());\n```",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 39
+      },
+      "revId": "cad9c99d86111980b70ef4337cfbfcf74b7966c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
