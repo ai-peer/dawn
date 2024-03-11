@@ -32,6 +32,7 @@
 #include <memory>
 
 #include "dawn/common/FutureUtils.h"
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
@@ -70,14 +71,6 @@ static constexpr wgpu::BufferUsage kReadOnlyShaderBufferUsages =
 
 class BufferBase : public ApiObjectBase {
   public:
-    enum class BufferState {
-        Unmapped,
-        PendingMap,
-        Mapped,
-        MappedAtCreation,
-        HostMappedPersistent,
-        Destroyed,
-    };
     static Ref<BufferBase> MakeError(DeviceBase* device, const BufferDescriptor* descriptor);
 
     ObjectType GetType() const override;
@@ -139,6 +132,17 @@ class BufferBase : public ApiObjectBase {
     ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
 
   private:
+    enum class BufferState {
+        Unmapped,
+        PendingMap,
+        Mapped,
+        MappedAtCreation,
+        HostMappedPersistent,
+        Destroyed,
+    };
+
+    void DeleteThis() override;
+
     std::function<void()> PrepareMappingCallback(MapRequestID mapID,
                                                  WGPUBufferMapAsyncStatus status);
 
@@ -149,17 +153,20 @@ class BufferBase : public ApiObjectBase {
     virtual bool IsCPUWritableAtCreation() const = 0;
     MaybeError CopyFromStagingBuffer();
 
-    MaybeError ValidateMapAsync(wgpu::MapMode mode,
+    MaybeError ValidateMapAsync(BufferState state,
+                                wgpu::MapMode mode,
                                 size_t offset,
                                 size_t size,
                                 WGPUBufferMapAsyncStatus* status) const;
     MaybeError ValidateUnmap() const;
+    MaybeError ValidateDestroy() const;
     bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
-    void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
+    void UnmapInternal(BufferState state, WGPUBufferMapAsyncStatus callbackStatus);
 
     const uint64_t mSize = 0;
     const wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
-    BufferState mState;
+
+    std::atomic<BufferState> mState;
     bool mIsDataInitialized = false;
 
     // mStagingBuffer is used to implement mappedAtCreation for
@@ -177,10 +184,14 @@ class BufferBase : public ApiObjectBase {
     wgpu::MapMode mMapMode = wgpu::MapMode::None;
     size_t mMapOffset = 0;
     size_t mMapSize = 0;
+    std::atomic<std::thread::id> mMapOwner = std::thread::id();
 
-    struct MapAsyncEvent;
-    FutureID mPendingMapFutureID = kNullFutureID;
-    Ref<MapAsyncEvent> mPendingMapEvent;
+    class MapAsyncEvent;
+    struct PendingMap {
+        FutureID id;
+        Ref<MapAsyncEvent> event;
+    };
+    MutexProtected<PendingMap> mPendingMap;
 };
 
 }  // namespace dawn::native
