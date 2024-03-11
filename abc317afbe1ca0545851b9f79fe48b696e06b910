@@ -240,6 +240,30 @@
       },
       "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3bc0cc_a5621874",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-11T05:02:13Z",
+      "side": 1,
+      "message": "However such failures are only seen on Win11 and never seen on Win10, so I think we just need the workaround on Win11. What do you think?",
+      "parentUuid": "a3858034_208f19a1",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 0
+      },
+      "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
