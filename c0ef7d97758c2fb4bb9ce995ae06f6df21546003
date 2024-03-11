@@ -22,6 +22,30 @@
       },
       "revId": "c0ef7d97758c2fb4bb9ce995ae06f6df21546003",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2c6b4a_a4eb95f2",
+        "filename": "src/dawn/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-11T22:39:41Z",
+      "side": 1,
+      "message": "Thanks.  Should be fixed in the next patch.",
+      "parentUuid": "81bf2165_0586c5cf",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 589,
+        "endChar": 0
+      },
+      "revId": "c0ef7d97758c2fb4bb9ce995ae06f6df21546003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
