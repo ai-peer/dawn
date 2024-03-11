@@ -94,6 +94,7 @@ function(tint_default_compile_options TARGET)
     -Wno-c++98-compat-pedantic
     -Wno-format-pedantic
     -Wno-gnu-zero-variadic-macro-arguments
+    -Wno-missing-variable-declarations
     -Wno-poison-system-directories
     -Wno-return-std-move-in-c++11
     -Wno-undefined-var-template
