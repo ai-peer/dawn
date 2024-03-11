@@ -485,6 +485,30 @@
       },
       "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6a2196_a6d2daf6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-11T21:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c20f31ee_40ea3f24",
+      "range": {
+        "startLine": 318,
+        "startChar": 4,
+        "endLine": 318,
+        "endChar": 22
+      },
+      "revId": "7e03215b28e8de66c6e5c5c7b037600d47caaa8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

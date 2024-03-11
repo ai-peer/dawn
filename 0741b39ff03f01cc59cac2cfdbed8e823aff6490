@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2f969ec_2f18d808",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-11T21:38:34Z",
+      "side": 1,
+      "message": "this variable is unused",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7044f7c2_8a603c83",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 5

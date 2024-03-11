@@ -331,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a46a38cb_6b53bc08",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-11T21:38:34Z",
+      "side": 1,
+      "message": "I\u0027d like to find a way to keep this simpler because it\u0027s already quite complex.\n\nI have another suggestion. How about we keep these changes local to the D3D11 backend? Instead, we can have d3d11::Buffer::MapAsyncImpl put the buffer in a `SerialQueue\u003cRef\u003cBuffer\u003e\u003e` stored on `d3d11::Queue`.\n\nThen, d3d11::Device::TickImpl can both submit any pending commands AND call Map on all d3d11 buffers that should no longer be in use based on the completed command serial. This is actually quite nice as well since it will process multiple mappable buffers all at once.",
+      "parentUuid": "217fa07e_b2b0a4c2",
+      "range": {
+        "startLine": 197,
+        "startChar": 44,
+        "endLine": 197,
+        "endChar": 57
+      },
+      "revId": "01ee9c39f00b31951c2a6e6209cf4b3175329a8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d595807_b176a63f",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 3
