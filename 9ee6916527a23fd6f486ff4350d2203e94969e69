@@ -33,6 +33,24 @@
       "message": "sorry the for the delay, so LGTM to unblock things\n\nLooking at the callers of EnsureSubresourceContentInitialized though, they should all already be calling SynchronizeTextureBeforeUse - is something missing it?\nIMO we should move the Synchronize call out to the callers and not have it here.\n\nSecondly, it would be great to add a simple regression test in Dawn that would have caught the problem.",
       "revId": "9ee6916527a23fd6f486ff4350d2203e94969e69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8d65dd_eb51d12d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-03-11T23:40:48Z",
+      "side": 1,
+      "message": "Huh, I guess I missed the existing SynchronizeTextureBeforeUse calls when looking at the code. And the Chrome test failures were resolved by adding missing waitUntilScheduled calls so this CL can be dropped since we don\u0027t have any concrete cases where the synchronization is missing.",
+      "parentUuid": "c8e2a983_51849f2b",
+      "revId": "9ee6916527a23fd6f486ff4350d2203e94969e69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
