@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18d00bc0_25a3e900",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-11T15:58:25Z",
+      "side": 1,
+      "message": "This CL depends on this other one landing first: https://chromium-review.googlesource.com/c/chromium/tools/build/+/5357448",
+      "revId": "2391ac58321b7edf4ee83bfdec850936fbc0fd97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
