@@ -63,6 +63,30 @@
       },
       "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "822255fa_37c0981b",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-11T13:16:43Z",
+      "side": 1,
+      "message": "Ah yes this is not a method of BufferBase. IMHO we can remove the assert given that we lock that mBufferOrEarlyStatus for use below.",
+      "parentUuid": "79621161_2d1aa02e",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 0
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
