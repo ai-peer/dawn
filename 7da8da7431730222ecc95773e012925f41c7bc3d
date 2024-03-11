@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64e7999f_5aa8921b",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-11T21:00:07Z",
+      "side": 1,
+      "message": "Hmm, I still think logically, it might make more sense for the `AsyncTask` to own a `Ref\u003cAsyncEvent\u003e` instead of the other way around? I think it could also allow us to get rid of the arguments to `Run` and `RunAsync`?\n\nI\u0027m also not entirely sure why `RunAsync` needed to be static actually... Briefly looking at its usages I think we might be able to just keep it a member? Not sure though.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 39
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480d310a_727d335e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-11T21:00:07Z",
+      "side": 1,
+      "message": "Hmm, I understand that this way saves repeated calls to `TrackEvent`, but it also results in a lot of nesting... Wondering it it would be easier to just have more early returns?",
+      "range": {
+        "startLine": 1241,
+        "startChar": 4,
+        "endLine": 1263,
+        "endChar": 5
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
