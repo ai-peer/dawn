@@ -264,6 +264,30 @@
       },
       "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d45a64bb_8c3dec55",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-11T13:12:49Z",
+      "side": 1,
+      "message": "It\u0027d be nice to tightly scope the workaround to the version of Windows that exhibits the issue, unless you mean that the Beta versions of Windows will also roll to Windows 10.",
+      "parentUuid": "fd3bc0cc_a5621874",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 0
+      },
+      "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
