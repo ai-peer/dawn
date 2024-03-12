@@ -1,6 +1,74 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70182887_c3011682",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 61
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "almost done but I skipped src/dawn/native/Device.cpp and have to go",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b4b84c_2aeab9d1",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "Breaking change here. We probably need to support both for the moment (use the new one if it\u0027s set, use the old one if not, crash if both are set).\n\nThough if no one is using the old .deviceLostCallback API yet then we can go ahead and break it (in which case we should still be able to remove .mode from DeviceLostCallbackInfo, see below)",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e23bfa16_c59f5ff6",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "I suppose we haven\u0027t discussed this, but for consistency I think these would go together in an info struct as well.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f05c13b_83ec1cac",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "Nothing can be using this API yet so any breakage would only come up during a migration from .deviceLostCallback to .deviceLostCallbackInfo.\n\nIf we include this now then we have to break again later to remove it. Seems better to remove it as part of the breaking change. (Even if we still need to maintain some internal paths to handle the ProcessEvents mode from the deprecated .deviceLostCallback.)",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "291d774f_a8ba7911",
@@ -54,6 +122,239 @@
       "writtenOn": "2024-03-12T19:09:16Z",
       "side": 1,
       "message": "Oops, will remove this stale TODO in next PS.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f5d1f4_337b51f8",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "nit (we have a bunch of others to fix up): all `mUserdata`s come from outside the library and are expected to be dangling. I believe we should use `DisableDanglingPtrDetection` for them. (It\u0027s unfortunate we have to have dangling pointers even in Dawn\u0027s C++ API because C API sits in between, but I don\u0027t know what we would do about it.)\n\nIf not doing this now, add the standard TODO though.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad49ad5_38bb7678",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "If the device lost event is in the list, then won\u0027t this just always return false as long as the device is alive? Which will cause Chrome to keep polling periodically as long as a device is alive.\n\nDevice lost events are CPU-triggered, so maybe we could filter them out of the `futures` vector construction above as long as they\u0027re not ready yet..?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "352c7972_f7946f5e",
+        "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "IDK what Detected vs Released means but maybe this should have a different string? And maybe print the docs link too, and idk if it should DAWN_CHECK like the other one",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c96ef1_d8bb3a74",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "Need to also check that it\u0027s not nullptr then?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940129ef_068a9c1b",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "What does this do if no callback is set? (maybe add a comment)",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75997e4b_8b5d9e81",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "same",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f66ebb1_77484a87",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "```suggestion\n    // Ensure callbacks are not serialized as part of the command, as they cannot be passed between\n```",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91386e26_390dad9c",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "I think this TODO belongs at line 240?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f746a99_f5dfff2a",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "nit: can this be constexpr or const?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f3b659_230b05d7",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "Logic here is a little hard to follow, maybe something like this? Not a lot better but it makes it clear we ignore the descriptor if the callback is null.\n\n```suggestion\n    WGPUDeviceLostCallbackInfo deviceLostCallbackInfo \u003d kDefaultCallbackInfo;\n    if (descriptor \u0026\u0026 deviceLostCallbackInfo.callback !\u003d nullptr) {\n        deviceLostCallbackInfo \u003d descriptor-\u003edeviceLostCallbackInfo;\n        if (deviceLostCallbackInfo.mode \u003d\u003d WGPUCallbackMode_WaitAnyOnly) {\n            // TODO(dawn:2458) Update this when we have WGPUCallbackMode_Undefined.\n            deviceLostCallbackInfo.mode \u003d WGPUCallbackMode_AllowSpontaneous;\n        }\n    }\n\n    if (descriptor) {\n        mErrorCallback \u003d descriptor-\u003euncapturedErrorCallback;\n        mErrorUserdata \u003d descriptor-\u003euncapturedErrorUserdata;\n    }\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 5
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954051bf_7ff549b9",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "I think the mode should be overwritten here too.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde49c79_97ab6730",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "TODO?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5d1b78f_2a84e88a",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-12T23:57:01Z",
+      "side": 1,
+      "message": "DisableDanglingPtrDetection",
+      "range": {
+        "startLine": 109,
+        "startChar": 22,
+        "endLine": 109,
+        "endChar": 39
+      },
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
