@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25bca343_51bde175",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 32
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-03-12T17:32:07Z",
+      "side": 1,
+      "message": "https://github.com/webgpu-native/webgpu-headers/issues/266#issuecomment-1984569003 says \"Should we try to fix the JS API?\". What does this mean?",
+      "parentUuid": "7c38e80f_6b3d3f09",
+      "revId": "9e0ea9f04bd2f926c10b7021c2275090409b5f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e1fa6d4_db19e78f",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 32
