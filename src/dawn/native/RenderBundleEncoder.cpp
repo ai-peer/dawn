@@ -122,6 +122,7 @@ void RenderBundleEncoder::DestroyImpl() {
     mCommandBufferState.End();
     RenderEncoderBase::DestroyImpl();
     mBundleEncodingContext.Destroy();
+    mEncodingContext = nullptr;
 }
 
 // static
