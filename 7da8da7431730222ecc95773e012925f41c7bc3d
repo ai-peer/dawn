@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e1a6b2b_a75161f3",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "webgpu.h question:\nshould we be passing messages when status is success?",
+      "range": {
+        "startLine": 135,
+        "startChar": 59,
+        "endLine": 135,
+        "endChar": 73
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64e7999f_5aa8921b",
         "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
         "patchSetId": 27
@@ -26,6 +49,76 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fdbb864_90778152",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "I\u0027m wondering - can we merge Event and Task together ?\n\n```\nclass CreateComputePipelineAsyncEvent {\n  mCallback;\n  mUserdata;\n  mPipeline;\n  mError;\n  \n  CreateComputePipelineAsyncEvent(...);\n\n  InitializeAsync(DeviceBase* device) {\n    TRACE(..);\n    device-\u003eGetAsyncTaskManager()-\u003ePostTask([event \u003d Ref\u003cEvent\u003e(this)]() {\n      event-\u003eInitialize();\n    });\n  }\n\n  void Initialize() {\n    mPipeline-\u003eInitialize();\n  }\n\n  Complete(type) override {\n     ...\n  }\n}\n```\n\n?",
+      "parentUuid": "64e7999f_5aa8921b",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 39
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e847a6f_9da951a4",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "you could make it std::optional\u003cResultOrError\u003c...\u003e\u003e\n\nbut also it looks like the error case does Pipeline::MakeError - so you do actually need both of them. Perhaps update the comment to reflect this.",
+      "range": {
+        "startLine": 78,
+        "startChar": 3,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea55d3b7_8cb60cb2",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "is it also for error pipelines?",
+      "range": {
+        "startLine": 90,
+        "startChar": 47,
+        "endLine": 90,
+        "endChar": 68
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "480d310a_727d335e",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 27
@@ -42,6 +135,121 @@
         "startChar": 4,
         "endLine": 1263,
         "endChar": 5
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1faee0_bacc177e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "may as well return directly\n\n```suggestion\n    if (maybeError.IsError()) {\n        return AcquireRef(new CreateComputePipelineAsyncEvent(\n            this, callbackInfo, maybeError.AcquireError(), computePipeline-\u003eGetLabel().c_str()));\n    } else {\n        return AcquireRef(new CreateComputePipelineAsyncEvent(this, callbackInfo, computePipeline));\n    }\n```",
+      "range": {
+        "startLine": 1934,
+        "startChar": 0,
+        "endLine": 1942,
+        "endChar": 17
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1317a49_8cffa696",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "why virtual?",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 11
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d7d23e_96b8cdef",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "```suggestion\n    FutureID mFutureID \u003d kNullFutureID;\n```",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 49
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d15ccd5_555ee645",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "return directly\n```suggestion\n    return ComputePipeline::InitializeAsync(this, std::move(computePipeline), callbackInfo);\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 17
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1abf97_9655a28c",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T18:04:03Z",
+      "side": 1,
+      "message": "it\u0027s probably better to call this next to LoseDeviceForTesting, instead of inside of it - that way we are more explicit about when the callback gets called.",
+      "range": {
+        "startLine": 1219,
+        "startChar": 1,
+        "endLine": 1221,
+        "endChar": 34
       },
       "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
