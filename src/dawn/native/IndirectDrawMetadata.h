@@ -114,8 +114,7 @@ class IndirectDrawMetadata : public NonCopyable {
         Indexed,
     };
     struct IndexedIndirectConfig {
-        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-        raw_ptr<BufferBase, DanglingUntriaged> inputIndirectBuffer;
+        raw_ptr<BufferBase> inputIndirectBuffer;
         bool duplicateBaseVertexInstance;
         DrawType drawType;
 

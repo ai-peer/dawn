@@ -55,6 +55,7 @@ DawnNativeTest::DawnNativeTest() {
 DawnNativeTest::~DawnNativeTest() {
     device = wgpu::Device();
     dawnProcSetProcs(nullptr);
+    instance = nullptr;
 }
 
 void DawnNativeTest::SetUp() {
