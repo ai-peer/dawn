@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480be14e_4c1caa87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-12T20:51:40Z",
+      "side": 1,
+      "message": "Question about what looks like an unrelated bit.",
+      "revId": "36798d2ccc4c3f972f7cfb95214647ad887695e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4707663_6e643e7b",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-12T20:51:40Z",
+      "side": 1,
+      "message": "Had to read a few man pages but htis checks out.  :-)",
+      "revId": "36798d2ccc4c3f972f7cfb95214647ad887695e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
