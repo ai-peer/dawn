@@ -61,6 +61,7 @@ class Adapter final : public ObjectWithEventsBase {
     // Unimplementable. Only availale in dawn_native.
     WGPUInstance GetInstance() const;
     WGPUDevice CreateDevice(const WGPUDeviceDescriptor*);
+    void GetFormatCapabilities(WGPUTextureFormat format, WGPUFormatCapabilities* capabilities);
 
   private:
     LimitsAndFeatures mLimitsAndFeatures;
@@ -71,6 +72,7 @@ class Adapter final : public ObjectWithEventsBase {
 
 void ClientAdapterPropertiesFreeMembers(WGPUAdapterProperties);
 void ClientAdapterPropertiesMemoryHeapsFreeMembers(WGPUAdapterPropertiesMemoryHeaps);
+void ClientDrmFormatCapabilitiesFreeMembers(WGPUDrmFormatCapabilities capabilities);
 
 }  // namespace dawn::wire::client
 
