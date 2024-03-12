@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-07 09:12:31AM
+# Last rolled: 2024-03-12 03:13:53PM
 
 # Flaky on all platforms
 # KEEP
@@ -539,3 +539,11 @@ crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,binary,
 crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,af_matrix_scalar_multiplication:matrix_scalar:inputSource="const";cols=4;rows=4 [ RetryOnFailure ]
 crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,cross:abstract_float:* [ RetryOnFailure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,builtin,cross:f32:inputSource="storage_rw" [ RetryOnFailure ]
+
+################################################################################
+# New failures. Please triage:
+################################################################################
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,af_matrix_addition:matrix:inputSource="const";cols=4;rows=3 [ Failure ]
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,af_matrix_addition:matrix:inputSource="const";cols=4;rows=4 [ Failure ]
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,af_matrix_matrix_multiplication:matrix_matrix:inputSource="const";common_dim=2;x_rows=4;y_cols=4 [ Failure ]
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,af_matrix_matrix_multiplication:matrix_matrix:inputSource="const";common_dim=3;x_rows=4;y_cols=4 [ Failure ]
