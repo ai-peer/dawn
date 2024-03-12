@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "af01eb9f5bf75921ecf889e4b707edb771e6dcd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9256ee_d90f14dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-12T10:47:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "af01eb9f5bf75921ecf889e4b707edb771e6dcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50530daf_f2019edb",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-12T10:47:08Z",
+      "side": 1,
+      "message": "This is never used to actually access the buffer. I wonder if we could store an intptr, or some form of BufferId that\u0027s a serial auto-incremented per device. It would avoid the need to move the references around in ~IndirectDrawMetadata.",
+      "revId": "af01eb9f5bf75921ecf889e4b707edb771e6dcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
