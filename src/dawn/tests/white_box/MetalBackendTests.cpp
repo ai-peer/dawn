@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn & Tint Authors
+// Copyright 2020 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,37 +25,41 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// MetalBackend.cpp: contains the definition of symbols exported by MetalBackend.h so that they
-// can be compiled twice: once export (shared library), once not exported (static library)
+#include "dawn/tests/DawnTest.h"
 
 #include "dawn/native/MetalBackend.h"
 
-#include "dawn/native/metal/DeviceMTL.h"
-#include "dawn/native/metal/QueueMTL.h"
-#include "dawn/native/metal/TextureMTL.h"
+namespace dawn::native {
+namespace {
 
-namespace dawn::native::metal {
+using namespace metal;
 
-ExternalImageDescriptorIOSurface::ExternalImageDescriptorIOSurface()
-    : ExternalImageDescriptor(ExternalImageType::IOSurface) {}
-
-ExternalImageDescriptorIOSurface::~ExternalImageDescriptorIOSurface() = default;
-
-void IOSurfaceEndAccess(WGPUTexture cTexture,
-                        ExternalImageIOSurfaceEndAccessDescriptor* descriptor) {
-    Texture* texture = ToBackend(FromAPI(cTexture));
-    auto device = texture->GetDevice();
-    auto deviceLock(device->GetScopedLock());
-    texture->IOSurfaceEndAccess(descriptor);
-}
-
-void WaitForCommandsToBeScheduled(WGPUDevice device) {
-    if (device == nullptr) {
-        return;
+class MetalBackendTests : public DawnTest {
+  private:
+    void SetUp() override {
+        DawnTest::SetUp();
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     }
-    Device* backendDevice = ToBackend(FromAPI(device));
-    auto deviceLock(backendDevice->GetScopedLock());
-    ToBackend(backendDevice->GetQueue())->WaitForCommandsToBeScheduled();
+};
+
+// Test WaitForCommandsToBeScheduled() call without any crash.
+TEST_P(MetalBackendTests, WaitForCommandsToBeScheduledOK) {
+    WaitForCommandsToBeScheduled(device.Get());
 }
 
-}  // namespace dawn::native::metal
+// Test WaitForCommandsToBeScheduled() call on nullptr without any crash.
+TEST_P(MetalBackendTests, WaitForCommandsToBeScheduledOnNullPtr) {
+    WaitForCommandsToBeScheduled(nullptr);
+}
+
+// Test WaitForCommandsToBeScheduled() won't crash even if the device is destroyed.
+TEST_P(MetalBackendTests, WaitForCommandsToBeScheduledOnDestroyedDevice) {
+    auto device2 = CreateDevice();
+    device2.Destroy();
+    WaitForCommandsToBeScheduled(device2.Get());
+}
+
+DAWN_INSTANTIATE_TEST(MetalBackendTests, MetalBackend());
+
+}  // anonymous namespace
+}  // namespace dawn::native
