@@ -207,4 +207,8 @@ MaybeError PhysicalDeviceBase::ResetInternalDeviceForTestingImpl() {
         "ResetInternalDeviceForTesting should only be used with the D3D12 backend.");
 }
 
+void PhysicalDeviceBase::GetBackendFormatCapabilities(
+    wgpu::TextureFormat format,
+    UnpackedPtr<FormatCapabilities>& capabilities) const {}
+
 }  // namespace dawn::native

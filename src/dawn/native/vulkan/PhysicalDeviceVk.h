@@ -81,6 +81,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
                                VkExternalSemaphoreHandleTypeFlagBits handleType) const;
 
     void PopulateBackendProperties(UnpackedPtr<AdapterProperties>& properties) const override;
+    void GetBackendFormatCapabilities(wgpu::TextureFormat format,
+                                      UnpackedPtr<FormatCapabilities>& capabilities) const override;
 
     VkPhysicalDevice mVkPhysicalDevice;
     Ref<VulkanInstance> mVulkanInstance;
