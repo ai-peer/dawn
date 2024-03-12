@@ -33,6 +33,47 @@
       "message": "u-nit: This is a bit surprising because the vast majority of Dawn and WebGPU\u0027s APIs assume that the arguments are non-null. (it is considered a programming error and not something to shield against).",
       "revId": "be52f8c56d749bfbd28a8577e627c72bb8bcbcbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff47e9d_af35f203",
+        "filename": "src/dawn/native/metal/MetalBackend.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T15:49:08Z",
+      "side": 1,
+      "message": "agree we shouldn\u0027t guard against null",
+      "parentUuid": "1cd4c2a4_e2187cae",
+      "revId": "be52f8c56d749bfbd28a8577e627c72bb8bcbcbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9afbfcfb_02bef925",
+        "filename": "src/dawn/tests/white_box/MetalBackendTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T15:49:08Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "be52f8c56d749bfbd28a8577e627c72bb8bcbcbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
