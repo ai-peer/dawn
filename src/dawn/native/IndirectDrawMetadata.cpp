@@ -137,7 +137,17 @@ IndirectDrawMetadata::IndirectDrawMetadata(const CombinedLimits& limits)
     : mMaxBatchOffsetRange(ComputeMaxIndirectValidationBatchOffsetRange(limits)),
       mMaxDrawCallsPerBatch(ComputeMaxDrawCallsPerIndirectValidationBatch(limits)) {}
 
-IndirectDrawMetadata::~IndirectDrawMetadata() = default;
+IndirectDrawMetadata::~IndirectDrawMetadata() {
+    std::vector<Ref<BufferBase>> indirectBuffers(mIndexedIndirectBufferValidationInfo.size());
+    size_t i = 0;
+    // As key.inputIndirectBuffer == value.mIndirectBuffer.Get(), we have to ensure
+    // value.mIndirectBuffer is always released after the key is released.
+    for (auto& [key, value] : mIndexedIndirectBufferValidationInfo) {
+        indirectBuffers[i] = std::move(value.mIndirectBuffer);
+        ++i;
+    }
+    mIndexedIndirectBufferValidationInfo.clear();
+}
 
 IndirectDrawMetadata::IndirectDrawMetadata(IndirectDrawMetadata&&) = default;
 
