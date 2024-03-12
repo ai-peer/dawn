@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "291d774f_a8ba7911",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-12T19:09:16Z",
+      "side": 1,
+      "message": "I suspect we may have re-entrancy issues here and at [1] for spontaneous mode.",
+      "range": {
+        "startLine": 529,
+        "startChar": 12,
+        "endLine": 529,
+        "endChar": 82
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c24630_e31aba7c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-12T19:09:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313f4aef_89977685",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-12T19:09:16Z",
+      "side": 1,
+      "message": "Oops, will remove this stale TODO in next PS.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
