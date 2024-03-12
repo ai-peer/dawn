@@ -22,6 +22,30 @@
       },
       "revId": "c82d5c92a7d726381989ae25a454180e38eebf3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0b84b08_aa31e79b",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-12T21:18:37Z",
+      "side": 0,
+      "message": "Because yet another tty I tried didn\u0027t emit this last byte, causing it to timeout.",
+      "parentUuid": "8580ee3f_e6b17a6a",
+      "range": {
+        "startLine": 166,
+        "startChar": 38,
+        "endLine": 166,
+        "endChar": 44
+      },
+      "revId": "c82d5c92a7d726381989ae25a454180e38eebf3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
