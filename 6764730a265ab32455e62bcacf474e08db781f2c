@@ -33,6 +33,23 @@
       "message": "yay",
       "revId": "6764730a265ab32455e62bcacf474e08db781f2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6cb86e_e5be5bcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000283
+      },
+      "writtenOn": "2024-03-12T19:49:31Z",
+      "side": 1,
+      "message": "Thanks :) This will fix ANGLE\u0027s component build",
+      "revId": "6764730a265ab32455e62bcacf474e08db781f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
