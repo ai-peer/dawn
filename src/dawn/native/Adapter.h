@@ -63,6 +63,7 @@ class AdapterBase : public RefCounted {
                              const RequestDeviceCallbackInfo& callbackInfo);
     DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
     ResultOrError<Ref<DeviceBase>> CreateDevice(const DeviceDescriptor* rawDescriptor);
+    void APIGetFormatCapabilities(wgpu::TextureFormat format, FormatCapabilities* capabilities);
 
     void SetUseTieredLimits(bool useTieredLimits);
 

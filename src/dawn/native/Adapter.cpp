@@ -173,6 +173,10 @@ void APIAdapterPropertiesMemoryHeapsFreeMembers(
     delete[] memoryHeapProperties.heapInfo;
 }
 
+void APIDrmFormatCapabilitiesFreeMembers(WGPUDrmFormatCapabilities capabilities) {
+    delete[] capabilities.properties;
+}
+
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
     return mSupportedFeatures.IsEnabled(feature);
 }
@@ -317,6 +321,19 @@ Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
     FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
         AcquireRef(new RequestDeviceEvent(callbackInfo, CreateDevice(descriptor))));
     return {futureID};
+}
+
+void AdapterBase::APIGetFormatCapabilities(wgpu::TextureFormat format,
+                                           FormatCapabilities* capabilities) {
+    DAWN_ASSERT(capabilities != nullptr);
+    InstanceBase* instance = mPhysicalDevice->GetInstance();
+
+    UnpackedPtr<FormatCapabilities> unpacked;
+    if (instance->ConsumedError(ValidateAndUnpack(capabilities), &unpacked)) {
+        return;
+    }
+
+    mPhysicalDevice->GetBackendFormatCapabilities(format, unpacked);
 }
 
 const TogglesState& AdapterBase::GetTogglesState() const {

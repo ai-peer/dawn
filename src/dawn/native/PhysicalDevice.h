@@ -110,6 +110,10 @@ class PhysicalDeviceBase : public RefCounted {
     // Populate backend properties. Ownership of allocations written are owned by the caller.
     virtual void PopulateBackendProperties(UnpackedPtr<AdapterProperties>& properties) const = 0;
 
+    // Get backend format properties. Ownership of allocations written are owned by the caller.
+    virtual void GetBackendFormatCapabilities(wgpu::TextureFormat format,
+                                              UnpackedPtr<FormatCapabilities>& capabilities) const;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;
