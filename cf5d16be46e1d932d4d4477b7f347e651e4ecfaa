@@ -16,6 +16,24 @@
       "message": "Is the specific naming up for discussion? If so I would like to propose `//third_party/intel/cmd-throttle-policy-extension`, so that the top level directory in `third_party` is \"intel\".",
       "revId": "cf5d16be46e1d932d4d4477b7f347e651e4ecfaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e149376f_42455005",
+        "filename": "DEPS",
+        "patchSetId": 20
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-12T10:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd205e96_7b6ef93d",
+      "revId": "cf5d16be46e1d932d4d4477b7f347e651e4ecfaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
