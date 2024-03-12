@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13157f71_e7a7efd1",
+        "filename": "src/dawn/native/metal/MetalBackend.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-03-12T16:57:47Z",
+      "side": 1,
+      "message": "Done. Removed this check.",
+      "parentUuid": "1ff47e9d_af35f203",
+      "revId": "be52f8c56d749bfbd28a8577e627c72bb8bcbcbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9afbfcfb_02bef925",
@@ -66,6 +84,30 @@
       "writtenOn": "2024-03-12T15:49:08Z",
       "side": 1,
       "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "be52f8c56d749bfbd28a8577e627c72bb8bcbcbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be950d5_ec1994c3",
+        "filename": "src/dawn/tests/white_box/MetalBackendTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-03-12T16:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9afbfcfb_02bef925",
       "range": {
         "startLine": 1,
         "startChar": 13,
