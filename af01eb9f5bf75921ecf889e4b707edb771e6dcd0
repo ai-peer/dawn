@@ -50,6 +50,24 @@
       "message": "This is never used to actually access the buffer. I wonder if we could store an intptr, or some form of BufferId that\u0027s a serial auto-incremented per device. It would avoid the need to move the references around in ~IndirectDrawMetadata.",
       "revId": "af01eb9f5bf75921ecf889e4b707edb771e6dcd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57672e28_a3ae1958",
+        "filename": "src/dawn/native/IndirectDrawMetadata.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-12T16:22:45Z",
+      "side": 1,
+      "message": "yea, casting and keying on uintptr_t SGTM\n\na serial is OK too but then we need an extra member stored on the buffer.",
+      "parentUuid": "50530daf_f2019edb",
+      "revId": "af01eb9f5bf75921ecf889e4b707edb771e6dcd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
