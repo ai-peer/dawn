@@ -173,6 +173,8 @@ TEST_P(SurfaceConfigurationValidationTests, AnyCombinationOfCapabilities) {
     // TODO(dawn:2320): This test crashes width SwiftShader (NB: fixing
     // SurfaceTests.ReconfigureBasic should fix this test as well)
     DAWN_SUPPRESS_TEST_IF(IsSwiftshader());
+    // TODO(dawn:2320): Crashes with implicit sync.
+    DAWN_SUPPRESS_TEST_IF(IsImplicitDeviceSyncEnabled());
 
     wgpu::Surface surface = CreateTestSurface();
 
