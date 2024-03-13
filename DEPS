@@ -223,7 +223,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@561ab2a7cb4a9013d48d086515b882eda2bd14f5',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@022bbf5bb747543dbb9aae5cfdf9e05cda950fdb',
     'condition': 'build_with_chromium',
   },
 
