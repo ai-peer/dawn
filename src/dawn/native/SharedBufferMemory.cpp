@@ -32,6 +32,7 @@
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/Queue.h"
 
 namespace dawn::native {
 
@@ -44,6 +45,14 @@ class ErrorSharedBufferMemory : public SharedBufferMemoryBase {
 
     ResultOrError<Ref<BufferBase>> CreateBufferImpl(
         const UnpackedPtr<BufferDescriptor>& descriptor) override {
+        DAWN_UNREACHABLE();
+    }
+    MaybeError BeginAccessImpl(BufferBase* buffer,
+                               const UnpackedPtr<BeginAccessDescriptor>& descriptor) override {
+        DAWN_UNREACHABLE();
+    }
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(BufferBase* buffer,
+                                                     UnpackedPtr<EndAccessState>& state) override {
         DAWN_UNREACHABLE();
     }
 };
@@ -145,13 +154,136 @@ SharedBufferMemoryContents* SharedBufferMemoryBase::GetContents() const {
     return mContents.Get();
 }
 
+MaybeError SharedBufferMemoryBase::ValidateBufferCreatedFromSelf(BufferBase* buffer) {
+    auto* contents = buffer->GetSharedBufferMemoryContents();
+    DAWN_INVALID_IF(contents == nullptr, "%s was not created from %s.", buffer, this);
+
+    auto* sharedBufferMemory =
+        buffer->GetSharedBufferMemoryContents()->GetSharedBufferMemory().Promote().Get();
+    DAWN_INVALID_IF(sharedBufferMemory != this, "%s created from %s cannot be used with %s.",
+                    buffer, sharedBufferMemory, this);
+    return {};
+}
+
 bool SharedBufferMemoryBase::APIBeginAccess(BufferBase* buffer,
                                             const BeginAccessDescriptor* descriptor) {
-    return false;
+    if (GetDevice()->ConsumedError(BeginAccess(buffer, descriptor), "calling %s.BeginAccess(%s).",
+                                   this, buffer)) {
+        return false;
+    }
+    return true;
+}
+
+MaybeError SharedBufferMemoryBase::BeginAccess(BufferBase* buffer,
+                                               const BeginAccessDescriptor* rawDescriptor) {
+    UnpackedPtr<BeginAccessDescriptor> descriptor;
+    DAWN_TRY_ASSIGN(descriptor, ValidateAndUnpack(rawDescriptor));
+
+    DAWN_TRY(GetDevice()->ValidateIsAlive());
+    DAWN_TRY(GetDevice()->ValidateObject(buffer));
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        DAWN_TRY(GetDevice()->ValidateObject(descriptor->fences[i]));
+    }
+
+    // Validate there is not another ongoing access and then set the current access.
+    // This is done first because BeginAccess should acquire access regardless of whether or
+    // not the internals generate an error.
+    DAWN_INVALID_IF(mCurrentAccess != nullptr,
+                    "Cannot begin access with %s on %s which is currently accessed by %s.", buffer,
+                    this, mCurrentAccess.Get());
+
+    DAWN_INVALID_IF(buffer->HasAccess(), "%s is already used to access %s.", buffer, this);
+
+    DAWN_TRY(ValidateBufferCreatedFromSelf(buffer));
+
+    DAWN_TRY(BeginAccessImpl(buffer, descriptor));
+
+    // Append begin fences first. Fences should be tracked regardless of whether later errors occur.
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        mContents->mPendingFences->push_back(
+            {descriptor->fences[i], descriptor->signaledValues[i]});
+    }
+
+    DAWN_ASSERT(!buffer->IsError());
+    buffer->SetHasAccess(true);
+    if (descriptor->initialized) {
+        buffer->SetIsDataInitialized();
+    }
+    mCurrentAccess = buffer;
+
+    return {};
 }
 
 bool SharedBufferMemoryBase::APIEndAccess(BufferBase* buffer, EndAccessState* state) {
-    return false;
+    if (GetDevice()->ConsumedError(EndAccess(buffer, state), "calling %s.EndAccess(%s).", this,
+                                   buffer)) {
+        return false;
+    }
+    return true;
+}
+
+MaybeError SharedBufferMemoryBase::EndAccess(BufferBase* buffer, EndAccessState* state) {
+    DAWN_TRY(GetDevice()->ValidateObject(buffer));
+    DAWN_TRY(ValidateBufferCreatedFromSelf(buffer));
+
+    DAWN_INVALID_IF(mCurrentAccess != buffer,
+                    "Cannot end access with %s on %s which is currently accessed by %s.", buffer,
+                    this, mCurrentAccess.Get());
+
+    DAWN_INVALID_IF(!buffer->HasAccess(), "%s is not currently being accessed.", buffer);
+
+    DAWN_INVALID_IF(buffer->APIGetMapState() != wgpu::BufferMapState::Unmapped,
+                    "%s is currently mapped or pending map.", buffer);
+
+    PendingFenceList fenceList;
+    mContents->AcquirePendingFences(&fenceList);
+
+    // Call the error-generating part of the EndAccess implementation. This is separated out because
+    // writing the output state must happen regardless of whether or not EndAccessInternal
+    // succeeds.
+    MaybeError err;
+    {
+        ResultOrError<FenceAndSignalValue> result = EndAccessInternal(buffer, state);
+        if (result.IsSuccess()) {
+            fenceList->push_back(result.AcquireSuccess());
+        } else {
+            err = result.AcquireError();
+        }
+    }
+
+    // Copy the fences to the output state.
+    if (size_t fenceCount = fenceList->size()) {
+        auto* fences = new SharedFenceBase*[fenceCount];
+        uint64_t* signaledValues = new uint64_t[fenceCount];
+        for (size_t i = 0; i < fenceCount; ++i) {
+            fences[i] = fenceList[i].object.Detach();
+            signaledValues[i] = fenceList[i].signaledValue;
+        }
+
+        state->fenceCount = fenceCount;
+        state->fences = fences;
+        state->signaledValues = signaledValues;
+    } else {
+        state->fenceCount = 0;
+        state->fences = nullptr;
+        state->signaledValues = nullptr;
+    }
+
+    state->initialized = buffer->IsDataInitialized();
+    buffer->SetHasAccess(false);
+    mCurrentAccess = nullptr;
+
+    return err;
+}
+
+ResultOrError<FenceAndSignalValue> SharedBufferMemoryBase::EndAccessInternal(
+    BufferBase* buffer,
+    EndAccessState* rawState) {
+    UnpackedPtr<EndAccessState> state;
+    DAWN_TRY_ASSIGN(state, ValidateAndUnpack(rawState));
+    // Ensure that commands are submitted before exporting fences with the last usage serial.
+    DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(mCurrentAccess->GetLastUsageSerial()));
+    return EndAccessImpl(buffer, state);
 }
 
 bool SharedBufferMemoryBase::APIIsDeviceLost() {
@@ -164,6 +296,11 @@ SharedBufferMemoryContents::SharedBufferMemoryContents(
 
 const WeakRef<SharedBufferMemoryBase>& SharedBufferMemoryContents::GetSharedBufferMemory() const {
     return mSharedBufferMemory;
+}
+
+void SharedBufferMemoryContents::AcquirePendingFences(PendingFenceList* fences) {
+    *fences = mPendingFences;
+    mPendingFences->clear();
 }
 
 void APISharedBufferMemoryEndAccessStateFreeMembers(WGPUSharedBufferMemoryEndAccessState cState) {
