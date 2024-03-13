@@ -16,6 +16,24 @@
       "message": "Do you have an example of what this looks like on output? What do multi-line structs look like when this gets extended?",
       "revId": "2a490e4d332323588b7cb52d837282cab03c9f82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85434996_a4d3fbe1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:35:13Z",
+      "side": 1,
+      "message": "There are no diagnostics that use the source range of the whole module-scope declaration (we have good test coverage for these - we\u0027d see tests be updated). We\u0027re consistent in using the `decl-\u003ename-\u003esource`.",
+      "parentUuid": "42489778_a9d8b7f3",
+      "revId": "2a490e4d332323588b7cb52d837282cab03c9f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
