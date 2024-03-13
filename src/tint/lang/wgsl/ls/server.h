@@ -32,6 +32,9 @@
 
 #include "langsvr/lsp/lsp.h"
 #include "langsvr/session.h"
+
+#include "src/tint/lang/wgsl/ls/file.h"
+#include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::wgsl::ls {
@@ -49,6 +52,23 @@ class Server {
     /// @returns true if the server has been requested to shut down.
     bool ShuttingDown() const { return shutting_down_; }
 
+    /// Handler for langsvr::lsp::TextDocumentDidOpenNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::TextDocumentDidOpenNotification&);
+
+    /// Handler for langsvr::lsp::TextDocumentDidCloseNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::TextDocumentDidCloseNotification&);
+
+    /// Handler for langsvr::lsp::TextDocumentDidChangeNotification
+    langsvr::Result<langsvr::SuccessType>  //
+    Handle(const langsvr::lsp::TextDocumentDidChangeNotification&);
+
+    /// Publishes the tint::Program diagnostics to the server via a
+    /// TextDocumentPublishDiagnosticsNotification.
+    langsvr::Result<langsvr::SuccessType>  //
+    PublishDiagnostics(File& file);
+
   private:
     /// Logger is a string-stream like utility for logging to the client.
     /// Append message content with '<<'. The message is sent when the logger is destructed.
@@ -59,7 +79,7 @@ class Server {
         /// @return this logger
         template <typename T>
         Logger& operator<<(T&& value) {
-            msg << value;
+            msg << std::forward<T>(value);
             return *this;
         }
 
@@ -72,6 +92,8 @@ class Server {
 
     /// The LSP session.
     langsvr::Session& session_;
+    /// Map of URI to File.
+    Hashmap<std::string, std::shared_ptr<File>, 8> files_;
     /// True if the server has been asked to shutdown.
     bool shutting_down_ = false;
 };
