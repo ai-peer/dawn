@@ -49,6 +49,7 @@ tint_add_target(tint_lang_wgsl_ls lib
   lang/wgsl/ls/serve.h
   lang/wgsl/ls/server.cc
   lang/wgsl/ls/server.h
+  lang/wgsl/ls/symbols.cc
   lang/wgsl/ls/utils.h
 )
 
@@ -94,5 +95,56 @@ if(TINT_BUILD_WGSL_READER)
     tint_lang_wgsl_reader
   )
 endif(TINT_BUILD_WGSL_READER)
+
+endif(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
+if(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
+################################################################################
+# Target:    tint_lang_wgsl_ls_test
+# Kind:      test
+# Condition: TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER
+################################################################################
+tint_add_target(tint_lang_wgsl_ls_test test
+  lang/wgsl/ls/helpers_test.h
+  lang/wgsl/ls/symbols_test.cc
+)
+
+tint_target_add_dependencies(tint_lang_wgsl_ls_test test
+  tint_lang_core
+  tint_lang_core_constant
+  tint_lang_core_type
+  tint_lang_wgsl
+  tint_lang_wgsl_ast
+  tint_lang_wgsl_program
+  tint_lang_wgsl_sem
+  tint_utils_containers
+  tint_utils_diagnostic
+  tint_utils_ice
+  tint_utils_id
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_reflection
+  tint_utils_result
+  tint_utils_rtti
+  tint_utils_symbol
+  tint_utils_text
+  tint_utils_traits
+)
+
+tint_target_add_external_dependencies(tint_lang_wgsl_ls_test test
+  "gtest"
+)
+
+if(TINT_BUILD_TINTD)
+  tint_target_add_external_dependencies(tint_lang_wgsl_ls_test test
+    "langsvr"
+  )
+endif(TINT_BUILD_TINTD)
+
+if(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
+  tint_target_add_dependencies(tint_lang_wgsl_ls_test test
+    tint_lang_wgsl_ls
+  )
+endif(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)
 
 endif(TINT_BUILD_TINTD AND TINT_BUILD_WGSL_READER)

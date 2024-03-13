@@ -52,6 +52,10 @@ class Server {
     /// @returns true if the server has been requested to shut down.
     bool ShuttingDown() const { return shutting_down_; }
 
+    /// Handler for langsvr::lsp::TextDocumentDocumentSymbolRequest
+    langsvr::Result<typename langsvr::lsp::TextDocumentDocumentSymbolRequest::Result>  //
+    Handle(const langsvr::lsp::TextDocumentDocumentSymbolRequest& r);
+
     /// Handler for langsvr::lsp::TextDocumentDidOpenNotification
     langsvr::Result<langsvr::SuccessType>  //
     Handle(const langsvr::lsp::TextDocumentDidOpenNotification&);

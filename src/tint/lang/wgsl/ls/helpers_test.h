@@ -1,3 +1,4 @@
+
 // Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
@@ -25,46 +26,48 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef SRC_TINT_LANG_WGSL_LS_HELPERS_TEST_H_
+#define SRC_TINT_LANG_WGSL_LS_HELPERS_TEST_H_
+
+#include <vector>
+
+#include "gtest/gtest.h"
+
 #include "src/tint/lang/wgsl/ls/server.h"
-
-#include "langsvr/session.h"
-
-#include "src/tint/lang/wgsl/ls/utils.h"
-
-namespace lsp = langsvr::lsp;
 
 namespace tint::wgsl::ls {
 
-Server::Server(langsvr::Session& session) : session_(session) {
-    session.Register([&](const lsp::InitializeRequest&)
-                         -> langsvr::Result<typename lsp::InitializeRequest::Result> {
-        lsp::InitializeResult result;
-        result.capabilities.document_symbol_provider = [] {
-            lsp::DocumentSymbolOptions opts;
-            return opts;
-        }();
-        return result;
-    });
+template <typename BASE>
+class LsTestImpl : public BASE {
+  public:
+    LsTestImpl() {
+        session_.SetSender([&](std::string_view msg) -> langsvr::Result<langsvr::SuccessType> {
+            replies_.push_back(std::string(msg));
+            return langsvr::Success;
+        });
+    }
 
-    session.Register([&](const lsp::ShutdownRequest&) {
-        shutting_down_ = true;
-        return lsp::Null{};
-    });
+    std::string OpenDocument(std::string_view wgsl) {
+        std::string uri = "document-" + std::to_string(next_document_id_++) + ".wgsl";
+        langsvr::lsp::TextDocumentDidOpenNotification notification{};
+        notification.text_document.text = wgsl;
+        notification.text_document.uri = uri;
+        auto res = server_.Handle(notification);
+        EXPECT_EQ(res, langsvr::Success);
+        return uri;
+    }
 
-    session.Register([&](const lsp::TextDocumentDidOpenNotification& n) { return Handle(n); });
-    session.Register([&](const lsp::TextDocumentDidCloseNotification& n) { return Handle(n); });
-    session.Register([&](const lsp::TextDocumentDidChangeNotification& n) { return Handle(n); });
-    session.Register(
-        [&](const lsp::WorkspaceDidChangeConfigurationNotification&) { return langsvr::Success; });
-}
+    langsvr::Session session_{};
+    Server server_{session_};
+    int next_document_id_ = 0;
+    std::vector<std::string> replies_;
+};
 
-Server::~Server() = default;
+using LsTest = LsTestImpl<testing::Test>;
 
-Server::Logger::~Logger() {
-    lsp::WindowLogMessageNotification n;
-    n.type = lsp::MessageType::kLog;
-    n.message = msg.str();
-    (void)session.Send(n);
-}
+template <typename T>
+using LsTestWithParam = LsTestImpl<testing::TestWithParam<T>>;
 
 }  // namespace tint::wgsl::ls
+
+#endif  // SRC_TINT_LANG_WGSL_LS_HELPERS_TEST_H_
