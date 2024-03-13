@@ -3,6 +3,148 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca752744_c1642b7c",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "```suggestion\n    // Get a string version of the GUID_DEVCLASS_DISPLAY so we don\u0027t need to hardcode it.\n    std::array\u003cwchar_t, 40\u003e displayDevClassGUID;\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7261ea89_9e5f10ab",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "```suggestion\n    // Two step retrieval of a device list with buffer sizing and actually filling the buffer.\n    // The buffer will contain a list of null-terminated strings, with an extra null at the end.\n    ULONG deviceIDListSize \u003d 0;\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b25576_50768f18",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "nit: this could be from adapter.GetVendorId() so the code is potentially more reusable in the future.",
+      "range": {
+        "startLine": 99,
+        "startChar": 19,
+        "endLine": 99,
+        "endChar": 23
+      },
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8736baab_2bafe328",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "WDYT of the following:\n\n```\nwchar_t* currentDeviceID \u003d deviceIDList.data();\nwhile (true) {\n  // No more items in the list.\n  size_t itemLength \u003d wcslen(currentDeviceID);\n  if (itemLength \u003d\u003d 0) {\n    return false;\n  }\n\n  // Item is not for this device, go to the next item.\n  if (wcsstr(currentDeviceID, stream.str().c_str()) \u003d\u003d nullptr) {\n    currentDeviceID +\u003d itemLength + 1;\n    continue;\n  }\n\n  // Found the device, copy the whole device id out.\n  wcscpy_s(deviceInfo-\u003edeviceID, MAX_DEVICE_ID_LEN, currentDeviceID);\n  return true;\n}\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c42f2a95_4f27cea5",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "nit: likewise a few comments could help.",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f3adf88_bc2a26c9",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "Why do we need a second step given that we already queried DEVPKEY_Device_DriverInfPath? Or is it that there is an indirection in the registry?",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3534a3af_1d46d22b",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "```suggestion\n    // Go through all the enumerated modules and find the loaded driver module\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507ac5b1_41d6512e",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "If driverFilename is not null as checked above, isn\u0027t it safe to assume the current character is \\ and size \u003e 0? So we can just do a ++ right after the null check.",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69836432_5c86b71a",
         "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
         "patchSetId": 21
@@ -37,6 +179,57 @@
       "writtenOn": "2024-03-13T00:29:11Z",
       "side": 1,
       "message": "```suggestion\n#endif  // SRC_DAWN_NATIVE_D3D12_INTELEXTENSIOND3D12_H_\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e4f7af_28e9efbe",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf7dcde_e6e5bd05",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be in SetupBackendDeviceToggles instead and a single condition like this?\n\n```\nif (GetOrLoadIntelExtension() \u003d\u003d nullptr) {\n  deviceToggles-\u003eForceSet(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy, false);\n}\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb7fdc7_37430a5d",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 21
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:53:09Z",
+      "side": 1,
+      "message": "Could you also update tools/fetch_dependencies.py?",
       "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
