@@ -47,7 +47,8 @@ class SharedBufferMemoryTestBackend {
     virtual std::vector<wgpu::FeatureName> RequiredFeatures(const wgpu::Adapter& device) const = 0;
 
     // Create one basic shared buffer memory. It should support most operations.
-    virtual wgpu::SharedBufferMemory CreateSharedBufferMemory(const wgpu::Device& device) = 0;
+    virtual wgpu::SharedBufferMemory CreateSharedBufferMemory(const wgpu::Device& device,
+                                                              uint32_t initializationData = 0) = 0;
 };
 
 using Backend = SharedBufferMemoryTestBackend*;

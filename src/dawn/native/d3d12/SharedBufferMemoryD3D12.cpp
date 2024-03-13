@@ -25,11 +25,18 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "dawn/native/d3d12/SharedBufferMemoryD3D12.h"
+
 #include <utility>
 
+#include "dawn/native/Buffer.h"
+#include "dawn/native/ChainUtils.h"
+#include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/SharedFenceD3D.h"
+#include "dawn/native/d3d/UtilsD3D.h"
 #include "dawn/native/d3d12/BufferD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/SharedBufferMemoryD3D12.h"
+#include "dawn/native/d3d12/QueueD3D12.h"
 
 namespace dawn::native::d3d12 {
 
@@ -65,13 +72,21 @@ ResultOrError<Ref<SharedBufferMemory>> SharedBufferMemory::Create(
 
     wgpu::BufferUsage usages = wgpu::BufferUsage::None;
 
-    if (desc.Flags & D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS) {
-        usages |=
-            wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
-    } else if (heapProperties.Type == D3D12_HEAP_TYPE_UPLOAD) {
-        usages |= wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-    } else if (heapProperties.Type == D3D12_HEAP_TYPE_READBACK) {
-        usages |= wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    switch (heapProperties.Type) {
+        case D3D12_HEAP_TYPE_UPLOAD:
+            usages |= wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+            break;
+        case D3D12_HEAP_TYPE_READBACK:
+            usages |= wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+            break;
+        case D3D12_HEAP_TYPE_DEFAULT:
+            usages |= wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+            if (desc.Flags & D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS) {
+                usages |= wgpu::BufferUsage::Storage;
+            }
+            break;
+        default:
+            DAWN_UNREACHABLE();
     }
 
     SharedBufferMemoryProperties properties;
@@ -91,6 +106,45 @@ ResultOrError<Ref<BufferBase>> SharedBufferMemory::CreateBufferImpl(
 
 ID3D12Resource* SharedBufferMemory::GetD3DResource() const {
     return mResource.Get();
+}
+
+MaybeError SharedBufferMemory::BeginAccessImpl(
+    BufferBase* buffer,
+    const UnpackedPtr<BeginAccessDescriptor>& descriptor) {
+    DAWN_TRY(descriptor.ValidateSubset<>());
+    for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        SharedFenceBase* fence = descriptor->fences[i];
+
+        SharedFenceExportInfo exportInfo;
+        DAWN_TRY(fence->ExportInfo(&exportInfo));
+        switch (exportInfo.type) {
+            case wgpu::SharedFenceType::DXGISharedHandle:
+                DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::SharedFenceDXGISharedHandle),
+                                "Required feature (%s) is missing.",
+                                wgpu::FeatureName::SharedFenceDXGISharedHandle);
+                break;
+            default:
+                return DAWN_VALIDATION_ERROR("Unsupported fence type %s.", exportInfo.type);
+        }
+    }
+
+    return {};
+}
+
+ResultOrError<FenceAndSignalValue> SharedBufferMemory::EndAccessImpl(
+    BufferBase* buffer,
+    UnpackedPtr<EndAccessState>& state) {
+    DAWN_TRY(state.ValidateSubset<>());
+    DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::SharedFenceDXGISharedHandle),
+                    "Required feature (%s) is missing.",
+                    wgpu::FeatureName::SharedFenceDXGISharedHandle);
+
+    Ref<d3d::SharedFence> sharedFence;
+    DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
+
+    return FenceAndSignalValue{
+        std::move(sharedFence),
+        static_cast<uint64_t>(buffer->GetSharedBufferMemoryContents()->GetLastUsageSerial())};
 }
 
 }  // namespace dawn::native::d3d12
