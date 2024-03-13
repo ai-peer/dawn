@@ -150,6 +150,11 @@ MaybeError SharedResourceMemory::BeginAccess(Resource* resource,
                             this);
             mHasWriteAccess = true;
         }
+    } else if constexpr (std::is_same_v<Resource, BufferBase>) {
+        DAWN_INVALID_IF(mCurrentAccess != nullptr,
+                        "Cannot begin access with %s on %s which is currently accessed by %s.",
+                        resource, this, mCurrentAccess.Get());
+        mCurrentAccess = resource;
     }
 
     DAWN_TRY(BeginAccessImpl(resource, descriptor));
@@ -233,6 +238,14 @@ MaybeError SharedResourceMemory::EndAccess(Resource* resource,
             DAWN_ASSERT(mReadAccessCount == 0);
             mHasWriteAccess = false;
         }
+    } else if constexpr (std::is_same_v<Resource, BufferBase>) {
+        DAWN_INVALID_IF(
+            static_cast<BufferBase*>(resource)->APIGetMapState() != wgpu::BufferMapState::Unmapped,
+            "%s is currently mapped or pending map.", resource);
+        DAWN_INVALID_IF(mCurrentAccess != resource,
+                        "Cannot end access with %s on %s which is currently accessed by %s.",
+                        resource, this, mCurrentAccess.Get());
+        mCurrentAccess = nullptr;
     }
 
     PendingFenceList fenceList;

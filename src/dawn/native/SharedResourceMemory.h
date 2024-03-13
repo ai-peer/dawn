@@ -137,6 +137,7 @@ class SharedResourceMemory : public ApiObjectBase, public WeakRefSupport<SharedR
     bool mHasExclusiveReadAccess = false;
     int mReadAccessCount = 0;
     Ref<SharedResourceMemoryContents> mContents;
+    Ref<SharedResource> mCurrentAccess;
 };
 
 // SharedResourceMemoryContents is a separate object because it needs to live as long as

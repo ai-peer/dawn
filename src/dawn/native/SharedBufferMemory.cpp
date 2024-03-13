@@ -32,6 +32,7 @@
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/Queue.h"
 
 namespace dawn::native {
 
@@ -42,10 +43,20 @@ class ErrorSharedBufferMemory : public SharedBufferMemoryBase {
     ErrorSharedBufferMemory(DeviceBase* device, const SharedBufferMemoryDescriptor* descriptor)
         : SharedBufferMemoryBase(device, descriptor, ObjectBase::kError) {}
 
+    Ref<SharedResourceMemoryContents> CreateContents() override { DAWN_UNREACHABLE(); }
     ResultOrError<Ref<BufferBase>> CreateBufferImpl(
         const UnpackedPtr<BufferDescriptor>& descriptor) override {
         DAWN_UNREACHABLE();
     }
+    MaybeError BeginAccessImpl(BufferBase* buffer,
+                               const UnpackedPtr<BeginAccessDescriptor>& descriptor) override {
+        DAWN_UNREACHABLE();
+    }
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(BufferBase* buffer,
+                                                     UnpackedPtr<EndAccessState>& state) override {
+        DAWN_UNREACHABLE();
+    }
+    void DestroyImpl() override {}
 };
 
 }  // namespace
