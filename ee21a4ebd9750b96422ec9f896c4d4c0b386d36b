@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f0319c2_f6b2ae39",
+        "filename": "infra/kokoro/android/jetpack-release/build.sh",
+        "patchSetId": 49
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T00:00:01Z",
+      "side": 1,
+      "message": "Pulling dependencies like this can be extremely fragile, and is a major cause of non-hermetic builds. As a followup I\u0027d recommend creating a docker image for your toolchains. I can give you pointers on how to do this.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "ee21a4ebd9750b96422ec9f896c4d4c0b386d36b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
