@@ -16,6 +16,23 @@
       "message": "thanks!",
       "revId": "2494c01e144b0569e0a2aa43272ba583b1f68fc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4c5f54_3cb26bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T23:35:07Z",
+      "side": 1,
+      "message": "fun. there are timeouts on Mac AMD.\nI thinks it\u0027s because the not-very-optimized variants are just super slow.\nI\u0027ll skip it for now.\n\n[161/428] MatrixVectorMultiplyPerf.Run/Metal_AMD_Radeon_Pro_555X__e_disable_robustness_Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Subgroups_1_Swizzle_0 (11889 ms)\n[162/428] MatrixVectorMultiplyPerf.Run/Metal_AMD_Radeon_Pro_555X__e_disable_robustness_Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Subgroups_1_Swizzle_1 (2763 ms)\n[163/428] MatrixVectorMultiplyPerf.Run/Metal_AMD_Radeon_Pro_555X__e_disable_robustness_Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Subgroups_0_Swizzle_0 (TIMED OUT)",
+      "revId": "2494c01e144b0569e0a2aa43272ba583b1f68fc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
