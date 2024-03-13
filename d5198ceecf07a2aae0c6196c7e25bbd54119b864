@@ -16,6 +16,23 @@
       "message": "More fun stuff to fix for our special LUCI machines.",
       "revId": "d5198ceecf07a2aae0c6196c7e25bbd54119b864",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91503b4_3b08d363",
+        "filename": "src/tint/utils/file/tmpfile_windows.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T22:19:57Z",
+      "side": 1,
+      "message": "the previous code uses \"b\" which if I understand the docs is binary mode.\n\nshould you have `_O_BINARY` here then?",
+      "revId": "d5198ceecf07a2aae0c6196c7e25bbd54119b864",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
