@@ -46,6 +46,30 @@
       },
       "revId": "c82d5c92a7d726381989ae25a454180e38eebf3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10165faf_082edd02",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-13T13:52:56Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "d0b84b08_aa31e79b",
+      "range": {
+        "startLine": 166,
+        "startChar": 38,
+        "endLine": 166,
+        "endChar": 44
+      },
+      "revId": "c82d5c92a7d726381989ae25a454180e38eebf3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
