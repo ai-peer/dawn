@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69836432_5c86b71a",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T00:29:11Z",
+      "side": 1,
+      "message": "instead of two sets of #ifdefs, is it possible to have two separate .cpp files?\n\nWe choose which one to build depending on `is_win \u0026\u0026 !dawn_is_winuwp` in the GN build files.\n\nThen, the null implementation of the IntelExtension can simply be:\n```\nstd::unique_ptr\u003cIntelExtension\u003e IntelExtension::Create(const PhysicalDevice\u0026) {\n  return nullptr;\n}\n```\n\nand the actual implementation can have everything here, with no #ifdefs",
+      "range": {
+        "startLine": 400,
+        "startChar": 1,
+        "endLine": 406,
+        "endChar": 26
+      },
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26961ab6_a1270aea",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T00:29:11Z",
+      "side": 1,
+      "message": "```suggestion\n#endif  // SRC_DAWN_NATIVE_D3D12_INTELEXTENSIOND3D12_H_\n```",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
