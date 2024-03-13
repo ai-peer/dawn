@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d9989f_0ef50ded",
+        "filename": "src/dawn/tests/perf_tests/MatrixVectorMultiplyPerf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T22:06:46Z",
+      "side": 1,
+      "message": "Done, though I moved it up a bit higher in the file, closer to where the code for the loads happen.",
+      "parentUuid": "0ed99086_a2f301e1",
+      "range": {
+        "startLine": 331,
+        "startChar": 8,
+        "endLine": 331,
+        "endChar": 12
+      },
+      "revId": "d00a9ebdd8b91749dd6c1a168c4382dc5719a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a8e502c_92580eee",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d24fc8e_5f2adba4",
+        "filename": "src/dawn/tests/perf_tests/MatrixVectorMultiplyPerf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T22:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a8e502c_92580eee",
+      "range": {
+        "startLine": 335,
+        "startChar": 65,
+        "endLine": 335,
+        "endChar": 79
+      },
+      "revId": "d00a9ebdd8b91749dd6c1a168c4382dc5719a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0bc5512_76c879f1",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-03-12T20:28:17Z",
       "side": 1,
       "message": "nit: could use a comment.\n\n64u here is the linear workgroup size.\n4 here is from the fact we use 4-element vectors as the store type for floats, and we pack 4 u8\u0027s into a single u32.\n```suggestion\n            // 64 is the linear workgroup size.\n            // 4 is from the fact we use 4-element vectors as the store type for\n            // floats, and we pack 4 u8\u0027s into a single u32.\n            pass.DispatchWorkgroups(GetParam().mRows / (64u * 4u));\n```",
+      "range": {
+        "startLine": 361,
+        "startChar": 56,
+        "endLine": 361,
+        "endChar": 59
+      },
+      "revId": "d00a9ebdd8b91749dd6c1a168c4382dc5719a0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b5322e3_12ed1e45",
+        "filename": "src/dawn/tests/perf_tests/MatrixVectorMultiplyPerf.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T22:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0bc5512_76c879f1",
       "range": {
         "startLine": 361,
         "startChar": 56,
