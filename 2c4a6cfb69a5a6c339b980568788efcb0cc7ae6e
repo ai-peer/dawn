@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "474f1d39_02e3a285",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T20:21:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "648305d1_8eb200c1",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec32e026_2d376920",
@@ -106,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fef46308_1fc9475e",
+        "filename": "src/tint/cmd/tintd/vscode/wgsl.tmLanguage.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T20:21:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "41a1c883_51dbf4a8",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60d5fc28_629ca54c",
@@ -137,6 +173,24 @@
       "side": 1,
       "message": "I\u0027m trying to keep the directory names matching the namespaces. `tint::wgsl::ls` is already quite long. I don\u0027t want it much longer than that.",
       "parentUuid": "60d5fc28_629ca54c",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc22d97_6f4f2331",
+        "filename": "src/tint/lang/wgsl/ls/BUILD.cmake",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T20:21:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5b428772_2e830efd",
       "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -176,6 +230,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2eb3c45_04c5f7b8",
+        "filename": "src/tint/lang/wgsl/ls/serve.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T20:21:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1d8e3af7_64d84469",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83dbd443_e48d8cd7",
@@ -207,6 +279,24 @@
       "side": 1,
       "message": "This is the LSP-protocol way of sending log messages from the server to the client. In VSCode these appear in the `OUTPUT` tab.\n\n`LOG` is for debugging protocol level issues, which dumps all the raw protocol crap to a file so you can dig through it. `LOG` is just for _everything-is-broken_ level debugging.",
       "parentUuid": "83dbd443_e48d8cd7",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "432a67a4_40ce651a",
+        "filename": "src/tint/lang/wgsl/ls/server.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T20:21:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "744a3d38_a293fbc0",
       "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
