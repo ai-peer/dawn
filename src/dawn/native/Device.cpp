@@ -2099,6 +2099,10 @@ bool DeviceBase::IsToggleEnabled(Toggle toggle) const {
     return mToggles.IsEnabled(toggle);
 }
 
+const TogglesState& DeviceBase::GetTogglesState() const {
+    return mToggles;
+}
+
 void DeviceBase::ForceSetToggleForTesting(Toggle toggle, bool isEnabled) {
     mToggles.ForceSet(toggle, isEnabled);
 }
