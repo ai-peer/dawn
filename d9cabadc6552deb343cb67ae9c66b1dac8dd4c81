@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec36633_4d9eb643",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:28:56Z",
+      "side": 1,
+      "message": "Too many things named the same thing, what is the relationship between this `tintd` and the `src/tint/cmd/tintd`",
+      "revId": "d9cabadc6552deb343cb67ae9c66b1dac8dd4c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
