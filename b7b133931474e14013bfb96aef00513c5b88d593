@@ -16,6 +16,29 @@
       "message": "LGTM!",
       "revId": "b7b133931474e14013bfb96aef00513c5b88d593",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4701c99_54c3385b",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T17:07:39Z",
+      "side": 1,
+      "message": "nit: cast to uintptr_t instead of casting to BufferBase*\n\n```suggestion\n                reinterpret_cast\u003cuintptr_t\u003e(currentPass-\u003einputIndirectBuffer) \u003d\u003d\n                    config.inputIndirectBufferPtr \u0026\u0026\n```",
+      "range": {
+        "startLine": 380,
+        "startChar": 1,
+        "endLine": 381,
+        "endChar": 83
+      },
+      "revId": "b7b133931474e14013bfb96aef00513c5b88d593",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
