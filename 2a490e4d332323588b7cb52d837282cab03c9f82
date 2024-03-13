@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42489778_a9d8b7f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:31:26Z",
+      "side": 1,
+      "message": "Do you have an example of what this looks like on output? What do multi-line structs look like when this gets extended?",
+      "revId": "2a490e4d332323588b7cb52d837282cab03c9f82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
