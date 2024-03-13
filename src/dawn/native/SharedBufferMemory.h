@@ -28,10 +28,12 @@
 #ifndef SRC_DAWN_NATIVE_SHAREDBUFFERMEMORY_H_
 #define SRC_DAWN_NATIVE_SHAREDBUFFERMEMORY_H_
 
+#include "dawn/common/StackContainer.h"
 #include "dawn/common/WeakRef.h"
 #include "dawn/common/WeakRefSupport.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
+#include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/SharedFence.h"
 #include "dawn/native/dawn_platform.h"
@@ -49,6 +51,7 @@ class SharedBufferMemoryBase : public ApiObjectBase, public WeakRefSupport<Share
   public:
     using BeginAccessDescriptor = SharedBufferMemoryBeginAccessDescriptor;
     using EndAccessState = SharedBufferMemoryEndAccessState;
+    using PendingFenceList = StackVector<FenceAndSignalValue, 1>;
 
     static SharedBufferMemoryBase* MakeError(DeviceBase* device,
                                              const SharedBufferMemoryDescriptor* descriptor);
@@ -88,20 +91,51 @@ class SharedBufferMemoryBase : public ApiObjectBase, public WeakRefSupport<Share
     virtual Ref<SharedBufferMemoryContents> CreateContents();
 
     ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* rawDescriptor);
+    MaybeError BeginAccess(BufferBase* buffer, const BeginAccessDescriptor* rawDescriptor);
+    MaybeError EndAccess(BufferBase* buffer, EndAccessState* state);
+    ResultOrError<FenceAndSignalValue> EndAccessInternal(BufferBase* buffer,
+                                                         EndAccessState* rawState);
 
     virtual ResultOrError<Ref<BufferBase>> CreateBufferImpl(
         const UnpackedPtr<BufferDescriptor>& descriptor) = 0;
+    // BeginAccessImpl validates the operation is valid on the backend, and performs any
+    // backend specific operations. It does NOT need to acquire begin fences; that is done in the
+    // frontend in BeginAccess.
+    virtual MaybeError BeginAccessImpl(BufferBase* buffer,
+                                       const UnpackedPtr<BeginAccessDescriptor>& descriptor) = 0;
+    // EndAccessImpl validates the operation is valid on the backend, and returns the end fence.
+    // It should also write out any backend specific state in chained out structs of EndAccessState.
+    virtual ResultOrError<FenceAndSignalValue> EndAccessImpl(
+        BufferBase* buffer,
+        UnpackedPtr<EndAccessState>& state) = 0;
 
+    // Validate that the buffer was created from this SharedBufferMemory.
+    MaybeError ValidateBufferCreatedFromSelf(BufferBase* buffer);
+
+    bool mHasWriteAccess = false;
     Ref<SharedBufferMemoryContents> mContents;
+    Ref<BufferBase> mCurrentAccess;
 };
 
+// SharedBufferMemoryContents is a separate object because it needs to live as long as
+// the SharedBufferMemory or any buffers created from the SharedBufferMemory. This
+// allows state and objects needed by the buffer to persist after the
+// SharedBufferMemory itself has been dropped.
 class SharedBufferMemoryContents : public RefCounted {
   public:
+    using PendingFenceList = SharedBufferMemoryBase::PendingFenceList;
+
     explicit SharedBufferMemoryContents(WeakRef<SharedBufferMemoryBase> sharedBufferMemory);
+
+    void AcquirePendingFences(PendingFenceList* fences);
 
     const WeakRef<SharedBufferMemoryBase>& GetSharedBufferMemory() const;
 
   private:
+    friend class SharedBufferMemoryBase;
+
+    PendingFenceList mPendingFences;
+
     WeakRef<SharedBufferMemoryBase> mSharedBufferMemory;
 };
 
