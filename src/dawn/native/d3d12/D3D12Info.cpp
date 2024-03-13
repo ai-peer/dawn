@@ -157,16 +157,6 @@ ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const PhysicalDevice& physicalDe
     DAWN_ASSERT(shaderModelMinor < 10);
     info.shaderModel = 10 * shaderModelMajor + shaderModelMinor;
 
-    // Profiles are always <stage>s_<minor>_<major> so we build the s_<minor>_major and add
-    // it to each of the stage's suffix.
-    std::wstring profileSuffix = L"s_M_n";
-    profileSuffix[2] = wchar_t('0' + shaderModelMajor);
-    profileSuffix[4] = wchar_t('0' + shaderModelMinor);
-
-    info.shaderProfiles[SingleShaderStage::Vertex] = L"v" + profileSuffix;
-    info.shaderProfiles[SingleShaderStage::Fragment] = L"p" + profileSuffix;
-    info.shaderProfiles[SingleShaderStage::Compute] = L"c" + profileSuffix;
-
     info.supportsShaderF16 =
         driverShaderModel >= D3D_SHADER_MODEL_6_2 && featureOptions4.Native16BitShaderOpsSupported;
 

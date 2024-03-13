@@ -159,7 +159,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         req.bytecode.dxcLibrary = device->GetDxcLibrary().Get();
         req.bytecode.dxcCompiler = device->GetDxcCompiler().Get();
         req.bytecode.compilerVersion = dxcVersionInfo.DxcCompilerVersion;
-        req.bytecode.dxcShaderProfile = device->GetDeviceInfo().shaderProfiles[stage];
+        req.bytecode.dxcShaderProfile = device->GetDxcShaderProfiles()[stage];
     } else {
         req.bytecode.compiler = d3d::Compiler::FXC;
         req.bytecode.d3dCompile = device->GetFunctions()->d3dCompile;

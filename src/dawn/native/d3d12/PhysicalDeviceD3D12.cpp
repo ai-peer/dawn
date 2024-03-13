@@ -710,6 +710,13 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     if (gpu_info::IsIntel(vendorId) && !deviceToggles->IsEnabled(Toggle::UseDXC)) {
         deviceToggles->Default(Toggle::D3D12PolyfillReflectVec2F32, true);
     }
+
+    // Shader model 6.6 causes unexpected result on Intel Gen12 GPUs.
+    // See https://crbug.com/tint/2189 for more information.
+    if (gpu_info::IsIntelGen12HP(vendorId, deviceId) ||
+        gpu_info::IsIntelGen12LP(vendorId, deviceId)) {
+        deviceToggles->Default(Toggle::D3D12DontUseShaderModel66OrHigher, true);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(

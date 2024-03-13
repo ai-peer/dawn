@@ -45,7 +45,6 @@ struct D3D12DeviceInfo {
     // shaderModel indicates the maximum supported shader model, for example, the value 62
     // indicates that current driver supports the maximum shader model is shader model 6.2.
     uint32_t shaderModel;
-    PerStage<std::wstring> shaderProfiles;
     bool supportsSharedResourceCapabilityTier1;
     bool supportsPacked4x8IntegerDotProduct;
     bool supportsPackUnpack4x8Intrinsics;
