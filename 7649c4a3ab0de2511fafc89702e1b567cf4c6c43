@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "535e2238_917ba27c",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T17:03:45Z",
+      "side": 1,
+      "message": "do we need to change whether `supportsPackUnpack4x8Intrinsics` is exposed? it needs shader model 6.6",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 85
+      },
+      "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "562e6536_eb05eb0b",
         "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
         "patchSetId": 1
