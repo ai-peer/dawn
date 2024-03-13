@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "878a525b_39922909",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T10:14:58Z",
+      "side": 1,
+      "message": "Can\u0027t the reset of mEncodingContext be done by adding a single ~ProgrammableEncoder instead of these 3 destructors?",
+      "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
