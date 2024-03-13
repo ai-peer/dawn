@@ -22,6 +22,30 @@
       },
       "revId": "ee21a4ebd9750b96422ec9f896c4d4c0b386d36b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25664905_60e8c3b5",
+        "filename": "infra/kokoro/android/jetpack-release/build.sh",
+        "patchSetId": 49
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-03-13T12:24:17Z",
+      "side": 1,
+      "message": "Sure, will update it in the next CL.",
+      "parentUuid": "3f0319c2_f6b2ae39",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 12
+      },
+      "revId": "ee21a4ebd9750b96422ec9f896c4d4c0b386d36b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
