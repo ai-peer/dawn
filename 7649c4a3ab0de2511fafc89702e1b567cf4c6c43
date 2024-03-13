@@ -33,6 +33,40 @@
       "message": "Please take a look, thanks! This CL add a toggle to forbid D3D12 using shader model 6.6 by default on Intel Gen12 devices, to workaround some shader issues.",
       "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8447fe69_0a78084d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:07:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "562e6536_eb05eb0b",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T11:07:13Z",
+      "side": 1,
+      "message": "Can we have driver version range checks, and an explanation of what the driver does wrong?",
+      "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
