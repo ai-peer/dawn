@@ -71,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "463c3e0f_4d63c0c7",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fdbb864_90778152",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 39
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e847a6f_9da951a4",
@@ -84,6 +108,30 @@
       "writtenOn": "2024-03-12T18:04:03Z",
       "side": 1,
       "message": "you could make it std::optional\u003cResultOrError\u003c...\u003e\u003e\n\nbut also it looks like the error case does Pipeline::MakeError - so you do actually need both of them. Perhaps update the comment to reflect this.",
+      "range": {
+        "startLine": 78,
+        "startChar": 3,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d57a17b0_cd0a215c",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e847a6f_9da951a4",
       "range": {
         "startLine": 78,
         "startChar": 3,
@@ -117,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2bfc49_35063cb5",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "We have a separate constructor for error below now.",
+      "parentUuid": "ea55d3b7_8cb60cb2",
+      "range": {
+        "startLine": 90,
+        "startChar": 47,
+        "endLine": 90,
+        "endChar": 68
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "480d310a_727d335e",
@@ -130,6 +202,30 @@
       "writtenOn": "2024-03-11T21:00:07Z",
       "side": 1,
       "message": "Hmm, I understand that this way saves repeated calls to `TrackEvent`, but it also results in a lot of nesting... Wondering it it would be easier to just have more early returns?",
+      "range": {
+        "startLine": 1241,
+        "startChar": 4,
+        "endLine": 1263,
+        "endChar": 5
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c262425_03aa1861",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1263,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done (using a lambda function)",
+      "parentUuid": "480d310a_727d335e",
       "range": {
         "startLine": 1241,
         "startChar": 4,
@@ -163,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "201dbd20_3c46074b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1942,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done (removing `else`)",
+      "parentUuid": "db1faee0_bacc177e",
+      "range": {
+        "startLine": 1934,
+        "startChar": 0,
+        "endLine": 1942,
+        "endChar": 17
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1317a49_8cffa696",
@@ -176,6 +296,30 @@
       "writtenOn": "2024-03-12T18:04:03Z",
       "side": 1,
       "message": "why virtual?",
+      "range": {
+        "startLine": 170,
+        "startChar": 4,
+        "endLine": 170,
+        "endChar": 11
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "614a6c7f_68d750fb",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "`device` in `DawnMockTest` is a DeviceBase pointer casted from DeviceMock thus need Polymorphism\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/native/mocks/DawnMockTest.cpp;l\u003d41?q\u003dDawnMockTest.cpp\u0026ss\u003dchromium",
+      "parentUuid": "c1317a49_8cffa696",
       "range": {
         "startLine": 170,
         "startChar": 4,
@@ -209,6 +353,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5404cb7_76731204",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 27
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74d7d23e_96b8cdef",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 155,
+        "endChar": 49
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d15ccd5_555ee645",
@@ -232,6 +400,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "659d4564_6302d8bb",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done (and other backend)",
+      "parentUuid": "2d15ccd5_555ee645",
+      "range": {
+        "startLine": 236,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 17
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab1abf97_9655a28c",
@@ -245,6 +437,30 @@
       "writtenOn": "2024-03-12T18:04:03Z",
       "side": 1,
       "message": "it\u0027s probably better to call this next to LoseDeviceForTesting, instead of inside of it - that way we are more explicit about when the callback gets called.",
+      "range": {
+        "startLine": 1219,
+        "startChar": 1,
+        "endLine": 1221,
+        "endChar": 34
+      },
+      "revId": "7da8da7431730222ecc95773e012925f41c7bc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a715759d_0f247c60",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1221,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-13T23:25:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab1abf97_9655a28c",
       "range": {
         "startLine": 1219,
         "startChar": 1,
