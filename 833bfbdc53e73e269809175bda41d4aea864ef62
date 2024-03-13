@@ -16,6 +16,24 @@
       "message": "Humm.\nThis is usually handled by `src/tint/utils/system/env_windows.cc`. Shoving windows-specific crap in the fallback-platform file seems... backwards.\n\nI think I\u0027d lean towards a `_CRT_SECURE_NO_WARNINGS` based solution.",
       "revId": "833bfbdc53e73e269809175bda41d4aea864ef62",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ecdb58_3dd1d022",
+        "filename": "src/tint/utils/system/env_other.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-13T18:07:53Z",
+      "side": 1,
+      "message": "As discussed offline, I\u0027m just going to skip building \"_other.cc\" on Windows in our LUCI build (as we did in Kokoro) as it\u0027s not worth fixing this.",
+      "parentUuid": "cf09c348_70b243c3",
+      "revId": "833bfbdc53e73e269809175bda41d4aea864ef62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
