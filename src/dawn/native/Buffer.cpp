@@ -384,6 +384,10 @@ uint64_t BufferBase::GetAllocatedSize() const {
     return mAllocatedSize;
 }
 
+SharedBufferMemoryContents* BufferBase::GetSharedBufferMemoryContents() const {
+    return mSharedBufferMemoryContents.Get();
+}
+
 wgpu::BufferUsage BufferBase::GetUsage() const {
     DAWN_ASSERT(!IsError());
     return mUsage;
@@ -763,7 +767,7 @@ MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
         case BufferState::HostMappedPersistent:
             return DAWN_VALIDATION_ERROR("Host-mapped %s cannot be mapped again.", this);
         case BufferState::SharedMemoryNoAccess:
-            return DAWN_VALIDATION_ERROR("%s used in submit without shared memory access.", this);
+            return DAWN_VALIDATION_ERROR("%s used without shared memory access.", this);
         case BufferState::Unmapped:
             break;
     }
@@ -877,12 +881,16 @@ void BufferBase::MarkUsedInPendingCommands() {
     mLastUsageSerial = serial;
 }
 
-ExecutionSerial BufferBase::GetLastUsageSerial() const {
-    return mLastUsageSerial;
-}
-
 void BufferBase::SetHasAccess(bool hasAccess) {
     mState = hasAccess ? BufferState::Unmapped : BufferState::SharedMemoryNoAccess;
+}
+
+bool BufferBase::HasAccess() const {
+    return mState != BufferState::SharedMemoryNoAccess;
+}
+
+ExecutionSerial BufferBase::GetLastUsageSerial() const {
+    return mLastUsageSerial;
 }
 
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
