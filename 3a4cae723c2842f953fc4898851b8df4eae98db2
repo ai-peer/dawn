@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ac09b2_299aa36e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T15:41:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3a4cae723c2842f953fc4898851b8df4eae98db2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce1515cf_8b1a41f8",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-13T15:41:07Z",
+      "side": 1,
+      "message": "Leftover comment?",
+      "revId": "3a4cae723c2842f953fc4898851b8df4eae98db2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
