@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d94b858_c35adb31",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T03:43:52Z",
+      "side": 1,
+      "message": "Outdated.",
+      "parentUuid": "e2f969ec_2f18d808",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7044f7c2_8a603c83",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Ah yes this is not a method of BufferBase. IMHO we can remove the assert given that we lock that mBufferOrEarlyStatus for use below.",
       "parentUuid": "79621161_2d1aa02e",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 218,
+        "endChar": 0
+      },
+      "revId": "0741b39ff03f01cc59cac2cfdbed8e823aff6490",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b1ec6b_4a1a4636",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T03:43:52Z",
+      "side": 1,
+      "message": "Outdated.",
+      "parentUuid": "822255fa_37c0981b",
       "range": {
         "startLine": 216,
         "startChar": 2,
