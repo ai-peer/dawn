@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cd998ff_723146a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T11:47:35Z",
+      "side": 1,
+      "message": "😊Thanks for being with me!",
+      "parentUuid": "0289b8b8_cb89a41f",
+      "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8c84ee_f7317be2",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-13T11:16:38Z",
       "side": 1,
       "message": "IMHO this whole function could be like:\n\n```\nmMapReadySerial \u003d mLastUsageSerial;\nif (mMapReadSerial \u003e completedSerial) {\n  TrackPendingBuffer\n} else {\n  FinalizeMap\n}\n```",
+      "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e958d076_5c287061",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T11:47:35Z",
+      "side": 1,
+      "message": "Sounds fair!",
+      "parentUuid": "cd8c84ee_f7317be2",
       "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4f00d64_7dfd46f9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T11:47:35Z",
+      "side": 1,
+      "message": "Cool!",
+      "parentUuid": "c53515f2_605467e2",
+      "range": {
+        "startLine": 304,
+        "startChar": 1,
+        "endLine": 305,
+        "endChar": 1
+      },
+      "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "287553c7_b6f7f0a9",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-03-13T11:16:38Z",
       "side": 1,
       "message": "Or if this was the FinalizeMap for a previous mapAsync that was cancelled.",
+      "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37955b95_22c17ee2",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-13T11:47:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "287553c7_b6f7f0a9",
       "revId": "f3cc289b4e452bfd815d8e19631b51024ca28e91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
