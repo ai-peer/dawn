@@ -33,6 +33,24 @@
       "message": "Leftover comment?",
       "revId": "3a4cae723c2842f953fc4898851b8df4eae98db2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee1b117e_0f6a97e2",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T15:43:39Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "ce1515cf_8b1a41f8",
+      "revId": "3a4cae723c2842f953fc4898851b8df4eae98db2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
