@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "616f867b_bb64d544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "Just to make sure `ls` is the internal CMake package name, but the actual command is called `langsrv` and not `ls`, yea?",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec32e026_2d376920",
+        "filename": "src/tint/cmd/tintd/vscode/extension.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "```suggestion\n// This method is called when your extension is activated\n```",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8f0991_089ed014",
+        "filename": "src/tint/cmd/tintd/vscode/wgsl.tmLanguage.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "Is this the same as the one David did last year?",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d5fc28_629ca54c",
+        "filename": "src/tint/lang/wgsl/ls/BUILD.cmake",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "This maybe better as `lang/wgsl/lang_server/...`. The longer `lang_server` is a lot clearer then just `ls`",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69529183_2c768618",
+        "filename": "src/tint/lang/wgsl/ls/serve.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "Why are these compile time instead of flags?",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83dbd443_e48d8cd7",
+        "filename": "src/tint/lang/wgsl/ls/server.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-13T19:25:18Z",
+      "side": 1,
+      "message": "Is this `Logger` different from the `LOG` in the other file? What does logger mean here, is this just like, extra logging information, or is this the main communication channel?",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
