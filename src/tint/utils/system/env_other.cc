@@ -35,10 +35,22 @@
 namespace tint {
 
 std::string GetEnvVar(std::string_view name) {
+#if _MSC_VER
+    // Use _dupenv_s on MSVC to avoid _CRT_SECURE_NO_WARNINGS with std::getenv
+    char* val = nullptr;
+    size_t len = 0;
+    if (_dupenv_s(&val, &len, name.data()) != 0) {
+        std::string result = val;
+        free(val);
+        return result;
+    }
+    return "";
+#else
     if (auto* val = std::getenv(name.data())) {
         return val;
     }
     return "";
+#endif
 }
 
 }  // namespace tint
