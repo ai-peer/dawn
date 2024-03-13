@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "648305d1_8eb200c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "`ls` is the language server package under `lang/wgsl`. The command (the language server executable) is called `tintd`.",
+      "parentUuid": "616f867b_bb64d544",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec32e026_2d376920",
         "filename": "src/tint/cmd/tintd/vscode/extension.js",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-13T19:25:18Z",
       "side": 1,
       "message": "```suggestion\n// This method is called when your extension is activated\n```",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9afc89f_4b7015ff",
+        "filename": "src/tint/cmd/tintd/vscode/extension.js",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec32e026_2d376920",
       "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41a1c883_51dbf4a8",
+        "filename": "src/tint/cmd/tintd/vscode/wgsl.tmLanguage.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "No, I don\u0027t _think_ he\u0027s written a `tmLanguage.json`. I could be wrong though.\nI\u0027ve thrown this together as an initial start.",
+      "parentUuid": "0d8f0991_089ed014",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60d5fc28_629ca54c",
         "filename": "src/tint/lang/wgsl/ls/BUILD.cmake",
         "patchSetId": 8
@@ -65,6 +119,24 @@
       "writtenOn": "2024-03-13T19:25:18Z",
       "side": 1,
       "message": "This maybe better as `lang/wgsl/lang_server/...`. The longer `lang_server` is a lot clearer then just `ls`",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b428772_2e830efd",
+        "filename": "src/tint/lang/wgsl/ls/BUILD.cmake",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "I\u0027m trying to keep the directory names matching the namespaces. `tint::wgsl::ls` is already quite long. I don\u0027t want it much longer than that.",
+      "parentUuid": "60d5fc28_629ca54c",
       "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1d8e3af7_64d84469",
+        "filename": "src/tint/lang/wgsl/ls/serve.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "Because they\u0027re for debugging protocol-level stuff. I could hook it up as extension flags, but if the protocol is broken, you\u0027re probably not going to even be able to receive the flags.",
+      "parentUuid": "69529183_2c768618",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83dbd443_e48d8cd7",
         "filename": "src/tint/lang/wgsl/ls/server.h",
         "patchSetId": 8
@@ -99,6 +189,24 @@
       "writtenOn": "2024-03-13T19:25:18Z",
       "side": 1,
       "message": "Is this `Logger` different from the `LOG` in the other file? What does logger mean here, is this just like, extra logging information, or is this the main communication channel?",
+      "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "744a3d38_a293fbc0",
+        "filename": "src/tint/lang/wgsl/ls/server.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:52:02Z",
+      "side": 1,
+      "message": "This is the LSP-protocol way of sending log messages from the server to the client. In VSCode these appear in the `OUTPUT` tab.\n\n`LOG` is for debugging protocol level issues, which dumps all the raw protocol crap to a file so you can dig through it. `LOG` is just for _everything-is-broken_ level debugging.",
+      "parentUuid": "83dbd443_e48d8cd7",
       "revId": "2c4a6cfb69a5a6c339b980568788efcb0cc7ae6e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
