@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05fd5873_d773c9a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-13T00:46:10Z",
+      "side": 1,
+      "message": "we\u0027ll watch the CI console to make sure there\u0027s no bad fallout\nhttps://ci.chromium.org/p/dawn/g/ci/console",
+      "revId": "46abbaf9162271bbd8cfefd0ee79ce16e15e4b75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
