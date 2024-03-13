@@ -16,6 +16,29 @@
       "message": "Still LGTM, thanks!",
       "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43c06115_7c1d8e37",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-13T14:27:15Z",
+      "side": 1,
+      "message": "nit: Is this `mMapReadySerial` really needed? Can we just use `mLastUsageSerial`?",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 20
+      },
+      "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
