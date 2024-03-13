@@ -241,7 +241,7 @@ group("abseil") {
   # When build_with_chromium=true we need to include "//third_party/abseil-cpp:absl" while
   # it's beneficial to be more specific with standalone Dawn, especially when it comes to
   # including it as a dependency in other projects (such as Skia).
-  if (build_with_chromium) {
+  if (build_with_chromium || is_component_build) {
     public_deps = [ "$dawn_abseil_dir:absl" ]
   } else {
     public_deps = [ "${dawn_abseil_dir}/absl/strings:strings" ]
