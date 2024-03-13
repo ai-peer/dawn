@@ -28,10 +28,14 @@
 #ifndef SRC_DAWN_NATIVE_SHAREDBUFFERMEMORY_H_
 #define SRC_DAWN_NATIVE_SHAREDBUFFERMEMORY_H_
 
+#include <stack>
+
+#include "dawn/common/StackContainer.h"
 #include "dawn/common/WeakRef.h"
 #include "dawn/common/WeakRefSupport.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
+#include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/SharedFence.h"
 #include "dawn/native/dawn_platform.h"
@@ -49,6 +53,7 @@ class SharedBufferMemoryBase : public ApiObjectBase, public WeakRefSupport<Share
   public:
     using BeginAccessDescriptor = SharedBufferMemoryBeginAccessDescriptor;
     using EndAccessState = SharedBufferMemoryEndAccessState;
+    using PendingFenceList = StackVector<FenceAndSignalValue, 1>;
 
     static SharedBufferMemoryBase* MakeError(DeviceBase* device,
                                              const SharedBufferMemoryDescriptor* descriptor);
@@ -88,20 +93,46 @@ class SharedBufferMemoryBase : public ApiObjectBase, public WeakRefSupport<Share
     virtual Ref<SharedBufferMemoryContents> CreateContents();
 
     ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* rawDescriptor);
+    MaybeError BeginAccess(BufferBase* buffer, const BeginAccessDescriptor* rawDescriptor);
+    MaybeError EndAccess(BufferBase* buffer, EndAccessState* state, bool* didEnd);
+    ResultOrError<FenceAndSignalValue> EndAccessInternal(BufferBase* buffer,
+                                                         EndAccessState* rawState);
 
     virtual ResultOrError<Ref<BufferBase>> CreateBufferImpl(
         const UnpackedPtr<BufferDescriptor>& descriptor) = 0;
+    virtual MaybeError BeginAccessImpl(BufferBase* buffer,
+                                       const UnpackedPtr<BeginAccessDescriptor>& descriptor) = 0;
+    virtual ResultOrError<FenceAndSignalValue> EndAccessImpl(
+        BufferBase* buffer,
+        UnpackedPtr<EndAccessState>& state) = 0;
 
+    // Validate that the buffer was created from this SharedBufferMemory.
+    MaybeError ValidateBufferCreatedFromSelf(BufferBase* buffer);
+
+    bool mHasWriteAccess = false;
     Ref<SharedBufferMemoryContents> mContents;
+    Ref<BufferBase> mCurrentAccess;
 };
 
 class SharedBufferMemoryContents : public RefCounted {
   public:
+    using PendingFenceList = SharedBufferMemoryBase::PendingFenceList;
+
     explicit SharedBufferMemoryContents(WeakRef<SharedBufferMemoryBase> sharedBufferMemory);
+
+    void AcquirePendingFences(PendingFenceList* fences);
+
+    void SetLastUsageSerial(ExecutionSerial lastUsageSerial);
+    ExecutionSerial GetLastUsageSerial() const;
 
     const WeakRef<SharedBufferMemoryBase>& GetSharedBufferMemory() const;
 
   private:
+    friend class SharedBufferMemoryBase;
+
+    PendingFenceList mPendingFences;
+    ExecutionSerial mLastUsageSerial{0};
+
     WeakRef<SharedBufferMemoryBase> mSharedBufferMemory;
 };
 
