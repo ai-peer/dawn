@@ -33,6 +33,24 @@
       "message": "the previous code uses \"b\" which if I understand the docs is binary mode.\n\nshould you have `_O_BINARY` here then?",
       "revId": "d5198ceecf07a2aae0c6196c7e25bbd54119b864",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289c6495_c54ee251",
+        "filename": "src/tint/utils/file/tmpfile_windows.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-13T22:39:05Z",
+      "side": 1,
+      "message": "Yeah, I decided not to bother with it, since I don\u0027t think there\u0027s any reason to create in binary mode. We don\u0027t even write to the file.",
+      "parentUuid": "c91503b4_3b08d363",
+      "revId": "d5198ceecf07a2aae0c6196c7e25bbd54119b864",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
