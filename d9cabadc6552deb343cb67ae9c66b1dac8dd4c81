@@ -16,6 +16,24 @@
       "message": "Too many things named the same thing, what is the relationship between this `tintd` and the `src/tint/cmd/tintd`",
       "revId": "d9cabadc6552deb343cb67ae9c66b1dac8dd4c81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1098807d_65c10430",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-13T19:59:21Z",
+      "side": 1,
+      "message": "`src/tint/cmd/tintd` is the language server executable, that talks LSP over stdin / stdout. A user does not run that directly, as it\u0027s not a command line tool. The `tintd` executable is part of the language-server package which is included in a VSCode extension.\n\nThis is a command line tool for locally installing the `tintd` extension into VSCode, via a symlink. Run via `tools/run tintd install`. I have named this `tintd` because I intend to add more sub-commands, like `tools/run tintd publish` to publish the extension on the VSCode marketplace.",
+      "parentUuid": "2ec36633_4d9eb643",
+      "revId": "d9cabadc6552deb343cb67ae9c66b1dac8dd4c81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
