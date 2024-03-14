@@ -56,6 +56,11 @@ MaybeError ValidateStorageTextureFormat(DeviceBase* device,
     DAWN_TRY_ASSIGN(format, device->GetInternalFormat(storageTextureFormat));
     DAWN_ASSERT(format != nullptr);
 
+    DAWN_INVALID_IF(format->format == wgpu::TextureFormat::BGRA8Unorm &&
+                        !device->HasFeature(Feature::BGRA8UnormStorage),
+                    "BGRA8Unorm storage textures are not supported if optional feature "
+                    "bgra8unorm-storage is not supported.");
+
     DAWN_INVALID_IF(!format->supportsStorageUsage,
                     "Texture format (%s) does not support storage textures.", storageTextureFormat);
 
