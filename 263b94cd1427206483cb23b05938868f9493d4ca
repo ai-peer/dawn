@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b1902d_b7a985a0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-14T23:48:32Z",
+      "side": 1,
+      "message": "So it looks like you\u0027ve manually globbed all the parameterized cases under the tests queries. We _can_ do this, but I\u0027ve had push back on this before, because it\u0027s over generalizing. As this is not in a `KEEP` block, the roller will glob all ancestors up the tree automatically, [assuming the majority of the parmeterized cases fail](https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cts/expectations/update.go#737) - however the majority doesn\u0027t fail - only `srgb` and `display-p3`.\n\nThe WebGPU CTS query syntax understands parameterized cases, so the CTS runner can glob with as many or as few named parameters as you like - however the `typ` (the python expectation system) doesn\u0027t - it sees all expectations as a string. With `typ` you have the ability to use a `*`, but it **must** come at the very end of the stringified query name. For these, the color space is at the end of the string, so `*` is not useful.",
+      "range": {
+        "startLine": 939,
+        "startChar": 130,
+        "endLine": 939,
+        "endChar": 150
+      },
+      "revId": "263b94cd1427206483cb23b05938868f9493d4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
