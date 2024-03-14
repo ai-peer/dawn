@@ -863,6 +863,11 @@ crbug.com/tint/2130 [ intel-0x9bc5 win10 ] webgpu:shader,execution,robust_access
 crbug.com/dawn/2142 [ nvidia-0x2184 webgpu-dxc-enabled win10 ] webgpu:shader,execution,expression,call,builtin,tanh:f32:* [ Failure ]
 
 ################################################################################
+# Skip incorrect bgra8unorm storage validation tests
+################################################################################
+crbug.com/dawn/2464 webgpu:api,validation,texture,bgra8unorm_storage:create_shader_module_without_bgra8unorm_storage:* [ Skip ]
+
+################################################################################
 # Intel F16 failures with Vulkan
 ################################################################################
 crbug.com/tint/2169 [ amd-0x67ef ventura ] webgpu:shader,execution,expression,call,builtin,ldexp:f16:inputSource="storage_r";vectorize=3 [ Failure ]
