@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "199ed938_5d269a33",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-14T23:48:05Z",
+      "side": 1,
+      "message": "I think only device lost error will resolve and return a pipeline, other error just reject so no need to reference mPipeline. If device lost, the resolved pipeline is guaranteed generated in CreateComputePipelineAsyncEvent::Complete",
+      "parentUuid": "ac7ec9be_b283c423",
+      "range": {
+        "startLine": 97,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 43
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "480ca3e5_3d97733a",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca9fe41b_9faf81ed",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-14T23:48:05Z",
+      "side": 1,
+      "message": "Made an attempt putting into the member function ComputePipelineBase::InitializeAsyncImpl (It takes CreateComputePipelineAsyncCallbackInfo so cannot be merged into PipelineBase)\nEnds in some random assert failure test failures for different backend.\nI don\u0027t know what Ref issue it triggers 😞.\n\nThis looks like some code refectoring that\u0027s good but not must anyway. Leave as is.",
+      "parentUuid": "480ca3e5_3d97733a",
+      "range": {
+        "startLine": 1933,
+        "startChar": 0,
+        "endLine": 1933,
+        "endChar": 79
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e0f6b35_3a37eefe",
         "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
         "patchSetId": 35
@@ -60,6 +108,30 @@
       "writtenOn": "2024-03-14T20:58:17Z",
       "side": 1,
       "message": "nit. Is this still needed?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8be667_95a8dfc6",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-14T23:48:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e0f6b35_3a37eefe",
       "range": {
         "startLine": 36,
         "startChar": 0,
