@@ -6408,6 +6408,29 @@
       "message": "🟦 note: expectation is fully covered by previous expectations",
       "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd50552_facfdd4f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-14T23:05:52Z",
+      "side": 0,
+      "message": "note: This got removed because the roller doesn\u0027t believe it exists:\nhttps://dawn-review.googlesource.com/c/dawn/+/179280/comment/9d595d6b_6ba920ff/\n\n`worker_webgpu` does not exist in `third_party/gn/webgpu-cts/test_list.txt`,",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 135
+      },
+      "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
