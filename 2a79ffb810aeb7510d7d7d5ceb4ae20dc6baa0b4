@@ -69,6 +69,24 @@
       "parentUuid": "579f969e_e2725b47",
       "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124b6594_e7508d61",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-14T07:33:57Z",
+      "side": 1,
+      "message": "And we need to keep the ref in the children classes because of RenderBundleEncoder which has its own EncodingContext. Gotcha.",
+      "parentUuid": "0ab9521c_a435e950",
+      "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
