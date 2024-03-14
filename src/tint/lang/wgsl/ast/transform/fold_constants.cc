@@ -43,6 +43,76 @@ using namespace tint::core::fluent_types;  // NOLINT
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::FoldConstants);
 
 namespace tint::ast::transform {
+namespace {
+
+bool expand(const core::constant::Value* value) {
+    return tint::Switch(  //
+        value,            //
+        [&](const core::constant::ScalarBase*) { return true; },
+        [&](const core::constant::Splat* splat) { return expand(splat->Index(0)); },
+        [&](const core::constant::Composite* comp) {
+            return Switch(
+                comp->Type(),  //
+                [&](const core::type::Vector*) { return true; },
+                [&](const core::type::Matrix*) { return true; },
+                [&](const core::type::Struct*) { return false; },
+                [&](const core::type::Array*) { return true; },  //
+                TINT_ICE_ON_NO_MATCH);
+        });
+}
+
+const ast::Expression* expr_for_value(ProgramBuilder* b,
+                                      program::CloneContext* ctx,
+                                      const core::constant::Value* value) {
+    return tint::Switch(  //
+        value,            //
+        [&](const core::constant::ScalarBase* sb) {
+            return tint::Switch(  //
+                sb,               //
+                [&](const core::constant::Scalar<bool>* bool_) {
+                    return b->Expr(bool_->ValueOf());
+                },
+                [&](const core::constant::Scalar<f16>* f16) {
+                    return b->Expr(core::f16(f16->ValueOf()));
+                },
+                [&](const core::constant::Scalar<f32>* f32) {
+                    return b->Expr(core::f32(f32->ValueOf()));
+                },
+                [&](const core::constant::Scalar<i32>* i32) {
+                    return b->Expr(core::i32(i32->ValueOf()));
+                },
+                [&](const core::constant::Scalar<u32>* u32) {
+                    return b->Expr(core::u32(u32->ValueOf()));
+                },
+                TINT_ICE_ON_NO_MATCH);
+        },
+        [&](const core::constant::Splat* splat) {
+            return b->Call(FoldConstants::CreateASTTypeFor(*ctx, splat->Type()),
+                           expr_for_value(b, ctx, splat->Index(0)));
+        },
+        [&](const core::constant::Composite* comp) {
+            return Switch(
+                comp->Type(),  //
+                [&](const core::type::Vector* vec) {
+                    return b->Call(FoldConstants::CreateASTTypeFor(
+                        *ctx, vec->type()));  //, const core::type::Type *ty))
+                },
+                [&](const core::type::Matrix* mat) {
+                    ctx.Replace(expr, [&]() -> const ast::Expression* {
+                        return b.Call(mat, comp->elements);
+                    });
+                },
+
+                [&](const core::type::Array* arr) {
+                    ctx.Replace(expr, [&]() -> const ast::Expression* {
+                        return b.Call(arr, comp->elements);
+                    });
+                },
+                TINT_ICE_ON_NO_MATCH);
+        }, );
+}
+
+}  // namespace
 
 FoldConstants::FoldConstants() = default;
 
@@ -71,69 +141,9 @@ Transform::ApplyResult FoldConstants::Apply(const Program& src, const DataMap&, 
             continue;
         }
 
-        tint::Switch(  //
-            cv,        //
-            [&](const core::constant::ScalarBase*) {
-                tint::Switch(  //
-                    cv,        //
-                    [&](const core::constant::Scalar<bool>* bool_) {
-                        ctx.Replace(expr, [&]() -> const ast::Expression* {
-                            return b.Expr(bool_->ValueOf());
-                        });
-                    },
-                    [&](const core::constant::Scalar<f16>* f16) {
-                        ctx.Replace(expr, [&]() -> const ast::Expression* {
-                            return b.Expr(core::f16(f16->ValueOf()));
-                        });
-                    },
-                    [&](const core::constant::Scalar<f32>* f32) {
-                        ctx.Replace(expr, [&]() -> const ast::Expression* {
-                            return b.Expr(core::f32(f32->ValueOf()));
-                        });
-                    },
-                    [&](const core::constant::Scalar<i32>* i32) {
-                        ctx.Replace(expr, [&]() -> const ast::Expression* {
-                            return b.Expr(core::i32(i32->ValueOf()));
-                        });
-                    },
-                    [&](const core::constant::Scalar<u32>* u32) {
-                        ctx.Replace(expr, [&]() -> const ast::Expression* {
-                            return b.Expr(core::u32(u32->ValueOf()));
-                        });
-                    },
-                    TINT_ICE_ON_NO_MATCH);
-                // },
-                // [&](const core::constant::Splat* splat) {
-                //     ctx.Replace(expr, [&]() -> const ast::Expression* {
-                //         return b.Call(CreateASTTypeFor(ctx, splat->Type()), splat->Index(0));
-                //     });
-            }
-            // [&](const core::constant::Composite* comp) {
-            //     return Switch(
-            //         cv->Type(),  //
-            //         [&](const core::type::Vector* vec) {
-            //             ctx.Replace(expr, [&]() -> const ast::Expression* {
-            //                 return b.Call(vec, comp->elements);
-            //             });
-            //         },
-            //         [&](const core::type::Matrix* mat) {
-            //             ctx.Replace(expr, [&]() -> const ast::Expression* {
-            //                 return b.Call(mat, comp->elements);
-            //             });
-            //         },
-            //         [&](const core::type::Struct* str) {
-            //             ctx.Replace(expr, [&]() -> const ast::Expression* {
-            //                 return b.Call(str, comp->elements);
-            //             });
-            //         },
-            //         [&](const core::type::Array* arr) {
-            //             ctx.Replace(expr, [&]() -> const ast::Expression* {
-            //                 return b.Call(arr, comp->elements);
-            //             });
-            //         },
-            //         TINT_ICE_ON_NO_MATCH);
-            // },
-        );
+        if (expand(cv)) {
+            ctx.Replace(expr, [&]() { return expr_for_value(&b, &ctx, cv); });
+        }
     }
 
     ctx.Clone();
