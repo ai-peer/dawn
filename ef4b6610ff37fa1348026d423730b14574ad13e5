@@ -137,6 +137,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d308a78_4fb5c3ec",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-14T01:40:32Z",
+      "side": 1,
+      "message": "if you unmap immediately after map, like:\n\nMapBufferAsync(buffer, callback);\nUnmap(buffer);\n\n\nThen, I think we don\u0027t want to actually map the buffer. We want to cancel so the map never occurs.",
+      "parentUuid": "c1575e39_9e24db81",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 20
+      },
+      "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a2c4aaa4_5ce1f6c9",
