@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87393f49_f0bc8cc6",
+        "filename": "tools/src/cmd/tests/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-14T16:40:12Z",
+      "side": 1,
+      "message": "übernit: you can drop the `0` here.\n```suggestion\n\t\tif len(arg) \u003e 1 \u0026\u0026 arg[:2] \u003d\u003d \"--\" {\n```",
+      "range": {
+        "startLine": 178,
+        "startChar": 25,
+        "endLine": 178,
+        "endChar": 26
+      },
+      "revId": "5f7f0cec073febd872b738a16a2dfc58ef0f8606",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
