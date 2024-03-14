@@ -22,6 +22,30 @@
       },
       "revId": "263b94cd1427206483cb23b05938868f9493d4ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84812094_f3aa0574",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-14T23:57:08Z",
+      "side": 1,
+      "message": "ok, I\u0027m learning here. :-)\n\nSomething I was surprised by is that the *passing* cases are not noted at all in the expectations file.  So I can\u0027t actually see if there are passing cases that should not be swept up in the pattern.\n\nI\u0027ll look again tomorrow.",
+      "parentUuid": "b9b1902d_b7a985a0",
+      "range": {
+        "startLine": 939,
+        "startChar": 130,
+        "endLine": 939,
+        "endChar": 150
+      },
+      "revId": "263b94cd1427206483cb23b05938868f9493d4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
