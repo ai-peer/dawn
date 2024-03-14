@@ -16,6 +16,24 @@
       "message": "This is now a dangling block?",
       "revId": "cd96e08a11ee096562971f26bedab58a29529e58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b30beb69_647c849c",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-14T21:32:56Z",
+      "side": 1,
+      "message": "Fixed in the parent CL, PTAL.",
+      "parentUuid": "bd8fb12d_73f93d8b",
+      "revId": "cd96e08a11ee096562971f26bedab58a29529e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
