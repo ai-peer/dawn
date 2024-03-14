@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7ec9be_b283c423",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T20:58:17Z",
+      "side": 1,
+      "message": "Do we need to override `mPipeline` here to be an error pipeline as well?",
+      "range": {
+        "startLine": 97,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 43
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480ca3e5_3d97733a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T20:58:17Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m looking at this now and I\u0027m wondering if we should just move this virtual overload into the pipeline class directly instead of proxying through the device?\n\nWhat I\u0027m thinking:\n```\nvirtual Ref\u003cEventManager::TrackedEvent\u003e\nnative::PipelineBase::InitializeAsyncImpl() {\n  // Default just initialize synchronously?\n}\n\n\nRef\u003cEventManager::TrackedEvent\u003e\nnative::backend::ComputePipeline::InitializeAsyncImpl() override {\n  // Do stuff?\n}\n```",
+      "range": {
+        "startLine": 1933,
+        "startChar": 0,
+        "endLine": 1933,
+        "endChar": 79
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0f6b35_3a37eefe",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T20:58:17Z",
+      "side": 1,
+      "message": "nit. Is this still needed?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "482ba286c41cd9ede9a4fd823a57be8210eb223e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
