@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f4dca56_e9ac85cf",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 1495,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T21:16:34Z",
+      "side": 1,
+      "message": "If I don\u0027t default it right now, it\u0027s breaking because then `DeviceDescriptor` is no longer default constructable. See https://ci.chromium.org/ui/p/chromium/builders/try/linux-dawn-rel/31320/overview for example of the failure.",
+      "parentUuid": "0f05c13b_83ec1cac",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a885614_8a51ba26",
@@ -214,6 +232,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "If the device lost event is in the list, then won\u0027t this just always return false as long as the device is alive? Which will cause Chrome to keep polling periodically as long as a device is alive.\n\nDevice lost events are CPU-triggered, so maybe we could filter them out of the `futures` vector construction above as long as they\u0027re not ready yet..?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432e2aed_deba519c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T21:16:34Z",
+      "side": 1,
+      "message": "So in the block above, when `WaitImpl` returns `TimedOut`, we actually return `false` already if we are just polling and the only events left are not ready, i.e. `DeviceLost` events. That\u0027s the main reason I added the comment as well because it means that right now, the `native::Instance::ProcessEvents` is actually still relying on `Device::Tick` to return `true` when we are doing work on the queue. Unfortunately though, this means that `SystemEvent` driven events don\u0027t currently have a good way to surface that there\u0027s still pending work and that Chrome should keep polling...\n\nOne idea I have right now is to add an additional alternative to the `GetCompletionData` that differentiates an event that polling should wait for verses an event that polling should just ignore... Thoughts?",
+      "parentUuid": "3ad49ad5_38bb7678",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -373,6 +409,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "I think the mode should be overwritten here too.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4145f101_1b3fb5ab",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T21:16:34Z",
+      "side": 1,
+      "message": "Hmm.. I\u0027m not sure if that\u0027s feasible atm... I think that it\u0027s fine as it is because anyone using this is almost certainly not passing a mode into the descriptor?",
+      "parentUuid": "954051bf_7ff549b9",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
