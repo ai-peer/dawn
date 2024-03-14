@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf44867d_90d4728c",
+        "filename": "src/dawn/native/d3d12/D3D12Info.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-14T11:32:38Z",
+      "side": 1,
+      "message": "Done, rework the CL to distinguish D3D12 backend highest supported shader model and adapter actual applied shader model version.",
+      "parentUuid": "535e2238_917ba27c",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 85
+      },
+      "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "562e6536_eb05eb0b",
@@ -88,6 +112,24 @@
       "writtenOn": "2024-03-13T11:07:13Z",
       "side": 1,
       "message": "Can we have driver version range checks, and an explanation of what the driver does wrong?",
+      "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74effeaf_6f1c1462",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-14T11:32:38Z",
+      "side": 1,
+      "message": "I am afraid the tint:2189 issue is effecting the latest driver (and likely some of the future driver version), so maybe driver range check is unavailable for now.\n\nIn the latest CL this workaround is moved to `SetupBackendAdapterToggles` as it is now an adapter toggle, and more detailed comment added.",
+      "parentUuid": "562e6536_eb05eb0b",
       "revId": "7649c4a3ab0de2511fafc89702e1b567cf4c6c43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

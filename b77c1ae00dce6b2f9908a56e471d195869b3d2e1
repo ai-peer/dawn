@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f001ea71_58dbfa29",
+        "filename": "src/dawn/native/d3d12/D3D12Info.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-14T11:32:38Z",
+      "side": 0,
+      "message": "With these modification I try to make `D3D12DeviceInfo` only keep raw query result (e.g. highest supported shader model version) from D3D12 APIs, and move the feature-specific logics (e.g. shader model version comparison, or compounding multiple condition) to where they are actually used.\nThis also make it possible to check highest shader model and per-adapter applied shader model separately.",
+      "revId": "b77c1ae00dce6b2f9908a56e471d195869b3d2e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
