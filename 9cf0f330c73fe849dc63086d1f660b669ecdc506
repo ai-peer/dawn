@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c38845_7098ddca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-14T16:01:55Z",
+      "side": 1,
+      "message": "Forcing Kokoro+1, it is the usual MSL flake.",
+      "revId": "9cf0f330c73fe849dc63086d1f660b669ecdc506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
