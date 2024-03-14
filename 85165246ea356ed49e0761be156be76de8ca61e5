@@ -6479,6 +6479,30 @@
       },
       "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf0ba4bd_ff35f141",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-14T23:42:10Z",
+      "side": 0,
+      "message": "I\u0027m not sure - I think it\u0027s this thing:\nhttps://source.chromium.org/chromium/chromium/src/+/main:content/test/gpu/gpu_tests/webgpu_cts_integration_test_base.py;l\u003d29?q\u003dWORKER_TEST_GLOBS\n\nI believe at this point we should be able to make it use the tag system: [no-worker] vs [worker]. worker_webgpu was from way before we were using the harness and didn\u0027t have tags.",
+      "parentUuid": "c22dd173_66a651e9",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 135
+      },
+      "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
