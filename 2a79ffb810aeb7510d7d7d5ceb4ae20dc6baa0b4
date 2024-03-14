@@ -51,6 +51,24 @@
       "parentUuid": "878a525b_39922909",
       "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab9521c_a435e950",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-14T02:01:56Z",
+      "side": 1,
+      "message": "ah, that\u0027s annoying. LGTM though",
+      "parentUuid": "579f969e_e2725b47",
+      "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
