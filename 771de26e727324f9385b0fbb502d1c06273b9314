@@ -119,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b12d89_b85dd791",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T00:08:53Z",
+      "side": 1,
+      "message": "Fine to defer! But what I imagined was to add the pipelines to the cache at places like [3].",
+      "parentUuid": "c29fce09_093596e5",
+      "range": {
+        "startLine": 145,
+        "startChar": 4,
+        "endLine": 150,
+        "endChar": 5
+      },
+      "revId": "771de26e727324f9385b0fbb502d1c06273b9314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad1a4276_458bb142",

@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure how to deal with these tests. They are testing CreateComputePipelineAsyncTask behavior but they are deleted. \n\nI tried to keep them as is and created the new `CreateComputePipelineAsyncEvent`, but seems we don\u0027t have mockEventManager etc. I did a quick try using the event manager from native instance to TrackEvent. but the test reporting mock leak (The event manager from native instance stays). So I didn\u0027t put that code here but simply remove these tests. Would like to hear your thoughts on this and update tomorrow",
       "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efbcec5e_306a7e15",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-14T00:08:53Z",
+      "side": 0,
+      "message": "I think it should be possible to have similar tests by calling `Device.APICreateComputePipelineAsync(F)` and injecting the `ComputePipelineMock` via an expectation on `Device::CreateUninitializedComputePipelineImpl`. Then with the same expectation on `InitializeImpl`, I think waiting on the respective future, or ticking the device should test the effective same code path.",
+      "parentUuid": "99c1e896_8863cc57",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
