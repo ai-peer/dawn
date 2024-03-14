@@ -129,6 +129,9 @@ crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createComput
 crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createRenderPipelineAsync:valid=false;awaitLost=false [ Failure ]
 crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createRenderPipelineAsync:valid=false;awaitLost=true [ Failure ]
 
+# Skip incorrect bgra8unorm storage validation tests
+crbug.com/dawn/2464 webgpu:api,validation,texture,bgra8unorm_storage:create_shader_module_without_bgra8unorm_storage:* [ Skip ]
+
 # interpolation "flat" failures
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0,1];sampleCount=1;interpolation={"type":"flat"} [ Failure ]
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0,1];sampleCount=4;interpolation={"type":"flat"} [ Failure ]
