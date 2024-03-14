@@ -282,7 +282,11 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInShaders) {
         for (wgpu::TextureFormat format : kWGPUTextureFormatSupportedAsSPIRVImageFormats) {
             std::string computeShader =
                 CreateComputeShaderWithStorageTexture(storageTextureBindingType, format);
-            if (utils::TextureFormatSupportsStorageTexture(format, device,
+            // Special case for wgpu::TextureFormat::BGRA8Unorm because it is always considered a
+            // valid storage format in WGSL shader, regardless of whether the device has
+            // Feature::BGRA8UnormStorage or not.
+            if (format == wgpu::TextureFormat::BGRA8Unorm ||
+                utils::TextureFormatSupportsStorageTexture(format, device,
                                                            UseCompatibilityMode())) {
                 utils::CreateShaderModule(device, computeShader.c_str());
             } else {
@@ -302,15 +306,6 @@ class BGRA8UnormStorageTextureInShaderValidationTests : public StorageTextureVal
         return dawnAdapter.CreateDevice(&descriptor);
     }
 };
-
-// Test that 'bgra8unorm' is a valid storage texture format if 'bgra8unorm-storage' is enabled.
-TEST_F(BGRA8UnormStorageTextureInShaderValidationTests, BGRA8UnormAsStorageInShader) {
-    for (wgpu::StorageTextureAccess storageTextureBindingType : kSupportedStorageTextureAccess) {
-        std::string computeShader = CreateComputeShaderWithStorageTexture(
-            storageTextureBindingType, wgpu::TextureFormat::BGRA8Unorm);
-        utils::CreateShaderModule(device, computeShader.c_str());
-    }
-}
 
 // Verify that declaring a storage texture format that is not supported in WebGPU causes validation
 // error.
