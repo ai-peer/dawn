@@ -34,6 +34,24 @@
       "parentUuid": "99c1e896_8863cc57",
       "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db7d8493_30c308c5",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncTaskTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-14T19:00:24Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "efbcec5e_306a7e15",
+      "revId": "043f42e314106e13742dc46aa3602723a84dc56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
