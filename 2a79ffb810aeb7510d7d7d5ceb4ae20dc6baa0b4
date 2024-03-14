@@ -33,6 +33,24 @@
       "message": "Can\u0027t the reset of mEncodingContext be done by adding a single ~ProgrammableEncoder instead of these 3 destructors?",
       "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579f969e_e2725b47",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-14T01:50:38Z",
+      "side": 1,
+      "message": "The destructor of the inherited class is always called before the one of the base class, so `mEncodingContext` (in the base class, ProgrammablePaseEncoder) should be cleared before `Ref\u003cCommandEncoder\u003e`(in the inherited classes, e.g. ComputePassEncoder) is destroyed.",
+      "parentUuid": "878a525b_39922909",
+      "revId": "2a79ffb810aeb7510d7d7d5ceb4ae20dc6baa0b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
