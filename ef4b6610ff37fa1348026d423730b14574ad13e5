@@ -163,6 +163,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "493a0989_b4d6dd02",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-14T01:44:52Z",
+      "side": 1,
+      "message": "Ack. I though dawn validation will catch it, and this `UnmapImpl()` will not be reached for this case.",
+      "parentUuid": "0d308a78_4fb5c3ec",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 20
+      },
+      "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a2c4aaa4_5ce1f6c9",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 8
