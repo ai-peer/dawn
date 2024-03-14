@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "772d2685_ba2372ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-14T06:07:40Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd5bfccb_55e66fe0",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-14T06:07:40Z",
+      "side": 1,
+      "message": "I really wouldn\u0027t re-invent this yet another buffer pool. Actually I once tried re-using `DynamicUploader` in a previous [CL](https://dawn-review.googlesource.com/c/dawn/+/167180/3/src/dawn/native/d3d11/BufferD3D11.cpp#591), but gave up. D3D11 buffers have to be unmapped before being submitted to GPU. As multiple small-size `UploadHandle`s can share a mutual ring buffer, we couldn\u0027t map/unmap for a `UploadHandle` without affecting the others. Another problem is that it could lead to `ScopedCommandRecordingContext` re-entrancy like this.\n```\n\tdawn::HandleAssertionFailure [0x00007FF6675D3456+176] (o:\\third_party\\dawn\\src\\dawn\\common\\Assert.cpp:80)\n\tdawn::native::d3d11::ScopedCommandRecordingContext::ScopedCommandRecordingContext [0x00007FF667276FB3+111] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandRecordingContextD3D11.cpp:48)\n\tdawn::native::d3d11::Queue::GetScopedPendingCommandContext [0x00007FF66727E7F6+54] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\QueueD3D11.cpp:87)\n\tdawn::native::d3d11::Device::GetScopedPendingCommandContext [0x00007FF667278643+31] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\DeviceD3D11.cpp:157)\n\tdawn::native::d3d11::Buffer::MapAtCreationImpl [0x00007FF667270C4A+74] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:292)\n\tdawn::native::BufferBase::MapAtCreationInternal [0x00007FF6671CCA19+141] (o:\\third_party\\dawn\\src\\dawn\\native\\Buffer.cpp:466)\n\tdawn::native::BufferBase::MapAtCreation [0x00007FF6671CC83A+58] (o:\\third_party\\dawn\\src\\dawn\\native\\Buffer.cpp:422)\n\tdawn::native::DeviceBase::CreateBuffer [0x00007FF6671FD99B+393] (o:\\third_party\\dawn\\src\\dawn\\native\\Device.cpp:1635)\n\tdawn::native::DynamicUploader::AllocateInternal [0x00007FF66720C248+830] (o:\\third_party\\dawn\\src\\dawn\\native\\DynamicUploader.cpp:108)\n\tdawn::native::DynamicUploader::Allocate [0x00007FF66720C6CE+58] (o:\\third_party\\dawn\\src\\dawn\\native\\DynamicUploader.cpp:142)\n\tdawn::native::d3d11::Buffer::WriteInternal [0x00007FF667271E03+757] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:599)\n\tdawn::native::d3d11::Buffer::ClearInternal [0x00007FF667270960+214] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:499)\n\tdawn::native::d3d11::Buffer::Initialize [0x00007FF667270602+1170] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:249)\n\tdawn::native::d3d11::Buffer::Create [0x00007FF6672700E6+146] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:158)\n\tdawn::native::d3d11::Device::CreateBufferImpl [0x00007FF6672789AB+43] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\DeviceD3D11.cpp:189)\n\tdawn::native::DeviceBase::CreateBuffer [0x00007FF6671FD935+291] (o:\\third_party\\dawn\\src\\dawn\\native\\Device.cpp:1632)\n\tdawn::native::DeviceBase::APICreateBuffer [0x00007FF6671FD62B+73] (o:\\third_party\\dawn\\src\\dawn\\native\\Device.cpp:1080)\n\tdawn::native::NativeDeviceCreateBuffer [0x00007FF6671A3211+65] (o:\\fake\\prefix\\gen\\third_party\\dawn\\src\\dawn\\native\\ProcTable.cpp:685)\n\twgpu::Device::CreateBuffer [0x00007FF66719EA83+19] (o:\\fake\\prefix\\gen\\third_party\\dawn\\src\\dawn\\webgpu_cpp.cpp:3024)\n\tdawn::utils::CreateBufferFromData [0x00007FF6675D70DD+116] (o:\\third_party\\dawn\\src\\dawn\\utils\\WGPUHelpers.cpp:117)\n\tdawn::`anonymous namespace\u0027::SamplerFilterAnisotropicTest_SlantedPlaneMipmap_Test::TestBody [0x00007FF666F08D87+919] (o:\\third_party\\dawn\\src\\dawn\\tests\\end2end\\SamplerFilterAnisotropicTests.cpp:300)\n\ttesting::Test::Run [0x00007FF66718E60F+235] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:2677)\n```\n\nI am all ears if any other alternatives.",
+      "range": {
+        "startLine": 553,
+        "startChar": 0,
+        "endLine": 584,
+        "endChar": 5
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
