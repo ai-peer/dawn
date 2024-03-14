@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03dbdf88_cf3e32ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-14T23:26:43Z",
+      "side": 1,
+      "message": "I\u0027d be interested on your feedback about whether I did this correctly.\nthanks!",
+      "revId": "a1109ca71c83d57ede02dbc60fbbf850b87dfe4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
