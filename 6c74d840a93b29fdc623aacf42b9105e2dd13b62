@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acda88a8_d647e40a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-14T20:57:44Z",
+      "side": 1,
+      "message": "mac-dawn-rel on patchset 2 timeout\nhttps://cas-viewer.appspot.com/projects/chromium-swarm/instances/default_instance/blobs/33c3565002ef9e4a4de9fea19c77e4cd3eccab8d6d7b1304d67a9747e34fa80a/757330?filename\u003dbenchmark_log.txt \n\nOn Metal AMD matrix-vector perf test",
+      "revId": "6c74d840a93b29fdc623aacf42b9105e2dd13b62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
