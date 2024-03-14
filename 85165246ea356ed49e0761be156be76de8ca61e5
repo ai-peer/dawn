@@ -6431,6 +6431,30 @@
       },
       "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fbde01f_c0bdec27",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-14T23:25:12Z",
+      "side": 0,
+      "message": "hm.. everything in third_party/dawn/webgpu-cts/worker_test_globs.txt also gets a worker_webgpu variant. we should figure out how to make this work better, but LGTM for now.",
+      "parentUuid": "cdd50552_facfdd4f",
+      "range": {
+        "startLine": 387,
+        "startChar": 0,
+        "endLine": 387,
+        "endChar": 135
+      },
+      "revId": "85165246ea356ed49e0761be156be76de8ca61e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
