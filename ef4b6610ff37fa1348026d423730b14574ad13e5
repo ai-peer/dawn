@@ -39,6 +39,53 @@
       },
       "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c051cc_8823f70f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-14T00:47:24Z",
+      "side": 1,
+      "message": "Without `mMapReadySerial`, Could we change [2] to   `mLastUsageSerial \u003d kMaxExecutionSerial;`? It seems not correct.",
+      "parentUuid": "43c06115_7c1d8e37",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 20
+      },
+      "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c4aaa4_5ce1f6c9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-14T00:47:24Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 42
+      },
+      "revId": "ef4b6610ff37fa1348026d423730b14574ad13e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
