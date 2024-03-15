@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49eac008_e9485a77",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T17:47:52Z",
+      "side": 1,
+      "message": "this will have reentrancy problems with spontaneous mode.\n\nI think we can put TODO(dawn:2451)",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a8ac24_aeb6a945",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T17:47:52Z",
+      "side": 1,
+      "message": "maybe instead of checking the device here, it is sufficient to have a case `InternalErrorType::DeviceLost` in the switch below.\n\nIt should cover both cases of when:\n 1. Device is lost inside Initialize()\n 2. Device is already lost when we start the request, and we pass in DAWN_DEVICE_LOST_ERROR to the event.",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a0aa09_905913b9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T17:47:52Z",
+      "side": 1,
+      "message": "why can\u0027t we pass a null callback?\n\nthe implementation of Complete can no-op if it is null.",
+      "range": {
+        "startLine": 1242,
+        "startChar": 0,
+        "endLine": 1242,
+        "endChar": 78
+      },
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a32892_47888513",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T17:47:52Z",
+      "side": 1,
+      "message": "nit: comment describing this case, like you have the other cases",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cb992fd_c99887a7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T17:47:52Z",
+      "side": 1,
+      "message": "```suggestion\n    return AcquireRef(new CreateComputePipelineAsyncEvent(this, callbackInfo, std::move(computePipeline)));\n```",
+      "range": {
+        "startLine": 1947,
+        "startChar": 78,
+        "endLine": 1947,
+        "endChar": 93
+      },
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
