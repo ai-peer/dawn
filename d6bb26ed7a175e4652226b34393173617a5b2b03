@@ -46,6 +46,30 @@
       },
       "revId": "d6bb26ed7a175e4652226b34393173617a5b2b03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db317702_27654405",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-15T16:27:38Z",
+      "side": 1,
+      "message": "Sure, but I\u0027m curious to know _why_ the roller didn\u0027t simplify these. It normally would.",
+      "parentUuid": "507f10d8_3dd8fdc4",
+      "range": {
+        "startLine": 899,
+        "startChar": 59,
+        "endLine": 899,
+        "endChar": 72
+      },
+      "revId": "d6bb26ed7a175e4652226b34393173617a5b2b03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
