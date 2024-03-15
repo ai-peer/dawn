@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f32f998b_4fe9ed01",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1630,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-15T19:58:47Z",
+      "side": 1,
+      "message": "Temporary breakage: \nBug: https://github.com/gpuweb/cts/issues/3514\nFix: https://github.com/gpuweb/cts/pull/3515",
+      "range": {
+        "startLine": 1616,
+        "startChar": 0,
+        "endLine": 1630,
+        "endChar": 208
+      },
+      "revId": "9f2361fe5418d61e8fdaea067ec547d64cff9b64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
