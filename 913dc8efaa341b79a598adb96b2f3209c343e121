@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "913dc8efaa341b79a598adb96b2f3209c343e121",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1571b8_d6165147",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-15T10:17:08Z",
+      "side": 1,
+      "message": "Thanks for Corentin\u0027s fix to CTS expectation, this CL now can pass the trybot. Please take a look, thanks",
+      "revId": "913dc8efaa341b79a598adb96b2f3209c343e121",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
