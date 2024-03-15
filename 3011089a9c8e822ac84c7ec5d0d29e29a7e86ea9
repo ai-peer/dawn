@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d291257a_1b760b68",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-15T19:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49eac008_e9485a77",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a8ac24_aeb6a945",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-15T17:47:52Z",
       "side": 1,
       "message": "maybe instead of checking the device here, it is sufficient to have a case `InternalErrorType::DeviceLost` in the switch below.\n\nIt should cover both cases of when:\n 1. Device is lost inside Initialize()\n 2. Device is already lost when we start the request, and we pass in DAWN_DEVICE_LOST_ERROR to the event.",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f8037e_f68a4430",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-15T19:57:50Z",
+      "side": 1,
+      "message": "I remember there\u0027s tests failing if we only have a switch case DeviceLost under (I forgot which one)\n\nBut having a device-\u003eIsLost() check here covers more case than having a switch below:\n- If mError is `InternalErrorType::DeviceLost`, it means device is lost eariler, so deivce is still lost when reach here.\n- If mError is not `InternalErrorType::DeviceLost`, and device is lost before signaling `Complete`, I think only having a switch below would miss this one.",
+      "parentUuid": "a8a8ac24_aeb6a945",
       "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d1caa3_c8761c05",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1242,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-15T19:57:50Z",
+      "side": 1,
+      "message": "Done (Add a test)",
+      "parentUuid": "f4a0aa09_905913b9",
+      "range": {
+        "startLine": 1242,
+        "startChar": 0,
+        "endLine": 1242,
+        "endChar": 78
+      },
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3a32892_47888513",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b6a7de_9a1bae90",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1256,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-15T19:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3a32892_47888513",
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cb992fd_c99887a7",
@@ -88,6 +166,30 @@
       "writtenOn": "2024-03-15T17:47:52Z",
       "side": 1,
       "message": "```suggestion\n    return AcquireRef(new CreateComputePipelineAsyncEvent(this, callbackInfo, std::move(computePipeline)));\n```",
+      "range": {
+        "startLine": 1947,
+        "startChar": 78,
+        "endLine": 1947,
+        "endChar": 93
+      },
+      "revId": "3011089a9c8e822ac84c7ec5d0d29e29a7e86ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b740cb3a_881c0f41",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-15T19:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cb992fd_c99887a7",
       "range": {
         "startLine": 1947,
         "startChar": 78,
