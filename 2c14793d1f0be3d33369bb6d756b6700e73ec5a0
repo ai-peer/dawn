@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "182b58a7_6e94787f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T21:22:11Z",
+      "side": 1,
+      "message": "Note: the *real* fix is in the next CL. Essentially we are exposing experimental subgroups because it requires 6.0, but we are only turning on DXC for 6.1+. This inconsistency means we allow subgroup ops when using FXC which of course won\u0027t work.\n\nGiven that the next CL turns on DXC for potentially a lot more clients, I\u0027m doing it separately in case we need to revert.",
+      "revId": "2c14793d1f0be3d33369bb6d756b6700e73ec5a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
