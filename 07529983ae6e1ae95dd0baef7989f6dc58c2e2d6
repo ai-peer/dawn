@@ -223,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ef4962_f6ce5656",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:22:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5fac84c2_1c824653",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3534a3af_1d46d22b",
@@ -423,6 +441,24 @@
       "side": 1,
       "message": "I\u0027d like to defer the load of Intel extension DLLs (in `GetOrLoadIntelExtension()`) until we create `DeviceD3D12` with toggles, what do you think?",
       "parentUuid": "2cf7dcde_e6e5bd05",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab8262e_4d172906",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:22:23Z",
+      "side": 1,
+      "message": "How expensive is it to load the Intel extension? It seems to be a couple file and registry key reads and then iterating the list of modules.",
+      "parentUuid": "14a9b73d_c01df9a6",
       "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
