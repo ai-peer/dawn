@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b2cb2c8_96c1cd57",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T10:34:07Z",
+      "side": 0,
+      "message": "I\u0027m a bit surprised that this test used to pass because the validation was only for BGRA8Unorm but not the rest of the formats. Is there other validation that the format supports storage when used in shaders?\n\nWe could keep this test but instead of checking for an error if the format doesn\u0027t support storage, we could check that no error is produced.",
+      "revId": "2eaa86faf8ad263e938583eb552a382c88a735ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
