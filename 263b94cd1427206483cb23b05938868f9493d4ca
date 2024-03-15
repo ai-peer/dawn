@@ -46,6 +46,30 @@
       },
       "revId": "263b94cd1427206483cb23b05938868f9493d4ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a30587e_9455c2f1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T15:53:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84812094_f3aa0574",
+      "range": {
+        "startLine": 939,
+        "startChar": 130,
+        "endLine": 939,
+        "endChar": 150
+      },
+      "revId": "263b94cd1427206483cb23b05938868f9493d4ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
