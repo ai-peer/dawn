@@ -117,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "962bc53a_efa83b1b",
+        "filename": "src/tint/lang/wgsl/ls/diagnostics_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3246c03_a90324cf",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fce0f15f_a327f3d6",
@@ -134,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505b3c1c_4b4da518",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fce0f15f_a327f3d6",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfdfefda_1f8bb064",
@@ -147,6 +183,24 @@
       "writtenOn": "2024-03-15T17:05:07Z",
       "side": 1,
       "message": "nit: \"A\" instead of \"An\"",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9d59018_d9c73eb7",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfdfefda_1f8bb064",
       "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -268,6 +322,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "510914a6_6231d3e8",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f71ff57f_c2183171",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "956bf5ef_c7115141",
@@ -303,6 +381,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fdf3f61_13d26741",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc0f54f_8d79d9ca",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5b4f540_a596946c",
@@ -334,6 +430,24 @@
       "side": 1,
       "message": "It is - see `src/tint/lang/wgsl/ls/document.cc`.",
       "parentUuid": "a5b4f540_a596946c",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecc5d860_c54f6b37",
+        "filename": "src/tint/lang/wgsl/ls/server.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-03-15T18:07:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "57335c2b_d2faf596",
       "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
