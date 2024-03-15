@@ -29,6 +29,7 @@
 
 #include <algorithm>
 #include <cstdlib>
+#include <cstdint>
 #include <limits>
 #include <memory>
 #include <utility>
