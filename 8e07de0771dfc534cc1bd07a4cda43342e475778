@@ -16,6 +16,29 @@
       "message": "I took a second crack at this.",
       "revId": "8e07de0771dfc534cc1bd07a4cda43342e475778",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5216191a_4509aa46",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-15T16:03:10Z",
+      "side": 1,
+      "message": "This is the sort of thing that `typ` should be saying collides with the expectations on L1684. The only reason it doesn\u0027t is that it doesn\u0027t check collisions for query hierarchies, only if the query exactly matches.\n\nThe CTS roller on the other hand uses the results to check for the collisions, and can tell that `[ nvidia-0x2184 nvidia_ge_31.0.15.4601 win10 ]` does not intersect `[ nvidia-0x2184 webgpu-adapter-swiftshader win10 ]`",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 186
+      },
+      "revId": "8e07de0771dfc534cc1bd07a4cda43342e475778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
