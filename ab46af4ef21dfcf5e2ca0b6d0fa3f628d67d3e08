@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e02c58b4_fd962686",
+        "filename": "src/tint/lang/wgsl/ls/file.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T18:49:55Z",
+      "side": 1,
+      "message": "heh. Interesting.",
+      "revId": "ab46af4ef21dfcf5e2ca0b6d0fa3f628d67d3e08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
