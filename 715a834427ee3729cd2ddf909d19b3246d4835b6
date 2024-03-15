@@ -16,6 +16,23 @@
       "message": "Hi Rafael,\n\nThanks for your latest comments in https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2308. I\u0027ve updated this CL, PTAL, thanks!",
       "revId": "715a834427ee3729cd2ddf909d19b3246d4835b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd9745ef_2c909ef1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:39:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "715a834427ee3729cd2ddf909d19b3246d4835b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
