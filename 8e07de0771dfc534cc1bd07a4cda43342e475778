@@ -39,6 +39,30 @@
       },
       "revId": "8e07de0771dfc534cc1bd07a4cda43342e475778",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1742d996_713e5fb3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T16:34:37Z",
+      "side": 1,
+      "message": "ok, I think I understand.\nSo the imprecision in typ ends up allowing this to go through, which is good.  Kind of two wrongs make a right?",
+      "parentUuid": "5216191a_4509aa46",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 186
+      },
+      "revId": "8e07de0771dfc534cc1bd07a4cda43342e475778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
