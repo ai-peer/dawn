@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1261b6bf_6f6154eb",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:25:57Z",
+      "side": 1,
+      "message": "oh, and lastly, we should have some simple tests like in AdapterPropertiesVkTests.cpp",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8a5a675_ebb2636b",
         "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.h",
         "patchSetId": 3
