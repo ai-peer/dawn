@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06d6af25_ffb955e6",
+        "filename": "generator/templates/dawn/wire/server/ServerDoers.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:41:47Z",
+      "side": 1,
+      "message": "In general in protocols it\u0027s better to be extremely strict on what\u0027s accepted as it catches bugs much faster. Is there an alternative why to do this?",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "164429d5_94978784",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 62
@@ -49,6 +66,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcad996f_8799aea4",
+        "filename": "src/dawn/dawn_wire.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:41:47Z",
+      "side": 1,
+      "message": "nit: These are Instance handles so we might as well call this member that? Maybe even handle_type it (The client::Instance would have a raw_ptr to its EventManager that lives in the client). Right now it is weird because it looks as if EventManager is a WebGPU object supported in the wire, but it\u0027s not.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99a39ce6_7eb2492b",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 62
@@ -89,6 +123,40 @@
         "endLine": 292,
         "endChar": 68
       },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e103a8_30fc37e8",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:41:47Z",
+      "side": 1,
+      "message": "Is that a future change? We don\u0027t pass the device to the callback at the moment.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09dbb4b_4bcf12df",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 62
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:41:47Z",
+      "side": 1,
+      "message": "Would a DestroyImpl() like in dawn/native work? It would be marginally better instead of intercepting all the Release() calls.",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

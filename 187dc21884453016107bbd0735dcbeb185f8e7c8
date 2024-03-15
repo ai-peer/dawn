@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c54a80_e81e1cb5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 61
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-15T12:41:47Z",
+      "side": 1,
+      "message": "Also isn\u0027t requestAdapter supposed to return an error device on failure? (not sure that\u0027s even a thing). Even with this change there are problems that could happen because the Server checks that handles are allocated in order. Imagine the following scenario:\n\n```\nClient                            Server\n\nCreate client::Device 1 (with invalid desc)\nrequestAdapter for Device 1\nCreate client::Device 2 (with valid desc)\nrequestAdapter for Device 2\n\n                                 process requestAdapter for device 1\n                                 error! device 1 is not added to KnownObjects\n                                 process requestAdapter for device 2\n                                 FatalError! ID 2 is past lastAllocated+1 (which is 1)\n```\n\nWe don\u0027t need to fix this now though a DISABLED_ test would be nice.",
+      "parentUuid": "a7dae2ae_b5ae5015",
+      "range": {
+        "startLine": 12,
+        "startChar": 45,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "70182887_c3011682",
