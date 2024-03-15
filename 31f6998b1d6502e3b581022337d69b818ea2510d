@@ -67,6 +67,24 @@
       "message": "@jiawei.shao@intel.com, what is the rationale for revisiting this?  I thought we agreed not use the driver throttling policy extension.",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae6fd410_307253a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T20:49:18Z",
+      "side": 1,
+      "message": "Overall, we\u0027re concerned about power usage and whether this can even be generally acceptable for webpages. But, we\u0027d like to at least have a way to enable it behind flags / field trial so that we can test and evaluate the impact.",
+      "parentUuid": "1029fa8c_19e6ed2a",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
