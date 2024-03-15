@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "164429d5_94978784",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "do we still need this TODO since the legacy version is the deprecated device lost callback (vs callback info) ?",
+      "range": {
+        "startLine": 1499,
+        "startChar": 100,
+        "endLine": 1499,
+        "endChar": 119
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2013388_3ce8e57d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be a new callback type that takes the device as the argument?\nditto for uncaptured error",
+      "range": {
+        "startLine": 1500,
+        "startChar": 0,
+        "endLine": 1500,
+        "endChar": 87
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a39ce6_7eb2492b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "same question: legacy code can use .deviceLostCallback; no need to have back compat for new deviceLostCallbackInfo path?",
+      "range": {
+        "startLine": 273,
+        "startChar": 13,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28a84340_f50dc9fc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "nit: change to one member that is UncapturedErrorCallbackInfo ?",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 68
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

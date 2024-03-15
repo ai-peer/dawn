@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7dae2ae_b5ae5015",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 61
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "hmmmm...  Server::OnRequestDeviceCallback does `DeviceObjects().Free(data-\u003edeviceObjectId);` when it fails. If we *don\u0027t* do that - then does this problem also get resolved?",
+      "range": {
+        "startLine": 12,
+        "startChar": 45,
+        "endLine": 15,
+        "endChar": 23
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "70182887_c3011682",
@@ -170,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a4d0cdd_8713dc95",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "about calling back into Dawn.\n\nIMO let\u0027s put a TODO about figuring this out.",
+      "parentUuid": "09311b67_0c100b41",
+      "range": {
+        "startLine": 529,
+        "startChar": 12,
+        "endLine": 529,
+        "endChar": 82
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94c24630_e31aba7c",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 61
@@ -249,6 +296,24 @@
       "writtenOn": "2024-03-14T21:16:34Z",
       "side": 1,
       "message": "So in the block above, when `WaitImpl` returns `TimedOut`, we actually return `false` already if we are just polling and the only events left are not ready, i.e. `DeviceLost` events. That\u0027s the main reason I added the comment as well because it means that right now, the `native::Instance::ProcessEvents` is actually still relying on `Device::Tick` to return `true` when we are doing work on the queue. Unfortunately though, this means that `SystemEvent` driven events don\u0027t currently have a good way to surface that there\u0027s still pending work and that Chrome should keep polling...\n\nOne idea I have right now is to add an additional alternative to the `GetCompletionData` that differentiates an event that polling should wait for verses an event that polling should just ignore... Thoughts?",
+      "parentUuid": "3ad49ad5_38bb7678",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58295f7_a8915e79",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T01:22:27Z",
+      "side": 1,
+      "message": "If we return false here, doesn\u0027t that mean we wrongly report that the application can stop calling ProcessEvents()?\n\nmaybe we can tag using the uppermost bit of device lost futures ? Then we can filter them out and not poll them",
       "parentUuid": "3ad49ad5_38bb7678",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
