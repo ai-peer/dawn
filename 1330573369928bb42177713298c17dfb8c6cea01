@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8be96c0_50c5badd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-15T07:26:49Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nThe `cmake-mac-dbg` and `cmake-mac-rel` bots don\u0027t work well, could you take a look?",
+      "revId": "1330573369928bb42177713298c17dfb8c6cea01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
