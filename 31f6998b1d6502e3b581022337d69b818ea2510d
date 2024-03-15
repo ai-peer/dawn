@@ -50,6 +50,23 @@
       "message": "Note, since Chrome\u0027s Area Tech Leads have lgtm\u0027d it, I\u0027ve just filed crbug.com/329776405 (restricted view) about setting up the Git mirror for https://github.com/GameTechDev/CmdThrottlePolicy on chromium.googlesource.com so it can be referenced via DEPS and .gitmodules.",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1029fa8c_19e6ed2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-03-15T20:36:20Z",
+      "side": 1,
+      "message": "@jiawei.shao@intel.com, what is the rationale for revisiting this?  I thought we agreed not use the driver throttling policy extension.",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
