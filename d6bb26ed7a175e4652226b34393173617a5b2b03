@@ -22,6 +22,30 @@
       },
       "revId": "d6bb26ed7a175e4652226b34393173617a5b2b03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "507f10d8_3dd8fdc4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T16:21:39Z",
+      "side": 1,
+      "message": "Sure, but we don\u0027t have to shoot for minimality do we?\nIf more variations of this failure arrive, then I hope the next person to do triage will find this batch and group them together.",
+      "parentUuid": "d25e8a42_efa5adfc",
+      "range": {
+        "startLine": 899,
+        "startChar": 59,
+        "endLine": 899,
+        "endChar": 72
+      },
+      "revId": "d6bb26ed7a175e4652226b34393173617a5b2b03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
