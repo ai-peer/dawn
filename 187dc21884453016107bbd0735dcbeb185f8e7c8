@@ -58,6 +58,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f75a7ad6_485595ac",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Good point! Added it back for now.",
+      "parentUuid": "15b4b84c_2aeab9d1",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e23bfa16_c59f5ff6",
@@ -71,6 +89,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "I suppose we haven\u0027t discussed this, but for consistency I think these would go together in an info struct as well.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db2ef4c_bc0a83c0",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 61
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e23bfa16_c59f5ff6",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -127,6 +163,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdc611d_8650dd7b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a885614_8a51ba26",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bee2adb0_272fbdf7",
@@ -140,6 +194,24 @@
       "writtenOn": "2024-03-13T00:34:27Z",
       "side": 1,
       "message": "nit: Same thought about userdata here",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4b8a1ac_b16c7720",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bee2adb0_272fbdf7",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -215,6 +287,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "079f24a0_20066359",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "09311b67_0c100b41",
+      "range": {
+        "startLine": 529,
+        "startChar": 12,
+        "endLine": 529,
+        "endChar": 82
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94c24630_e31aba7c",
@@ -228,6 +324,24 @@
       "writtenOn": "2024-03-12T19:09:16Z",
       "side": 1,
       "message": "[1]",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "334c73a1_b3b29db7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "94c24630_e31aba7c",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -249,6 +363,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58da1ccb_7c6a74d2",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "313f4aef_89977685",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9f5d1f4_337b51f8",
@@ -262,6 +394,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "nit (we have a bunch of others to fix up): all `mUserdata`s come from outside the library and are expected to be dangling. I believe we should use `DisableDanglingPtrDetection` for them. (It\u0027s unfortunate we have to have dangling pointers even in Dawn\u0027s C++ API because C API sits in between, but I don\u0027t know what we would do about it.)\n\nIf not doing this now, add the standard TODO though.",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c640ea_3bae4dc4",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Added standard TODO for now.",
+      "parentUuid": "a9f5d1f4_337b51f8",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -336,6 +486,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0000489_69e1e9f7",
+        "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Oops sorry this was leftover from debugging... heh...",
+      "parentUuid": "352c7972_f7946f5e",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1c96ef1_d8bb3a74",
@@ -349,6 +517,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "Need to also check that it\u0027s not nullptr then?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28cc4b94_e21e2971",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1c96ef1_d8bb3a74",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -370,6 +556,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85148aa8_eaf3aaa2",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "I think this was a remnant from before I defaulted the callback mode in order to make this a non-breaking change, so removed.",
+      "parentUuid": "940129ef_068a9c1b",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75997e4b_8b5d9e81",
@@ -383,6 +587,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "same",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a347e156_1c24b07f",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Ditto to above.",
+      "parentUuid": "75997e4b_8b5d9e81",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -404,6 +626,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6717060_cec3b136",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f66ebb1_77484a87",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91386e26_390dad9c",
@@ -417,6 +657,24 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "I think this TODO belongs at line 240?",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8768beaf_29f9f7dd",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91386e26_390dad9c",
       "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -438,6 +696,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e56a77f_a2aa3fa6",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f746a99_f5dfff2a",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3f3b659_230b05d7",
@@ -451,6 +727,30 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "Logic here is a little hard to follow, maybe something like this? Not a lot better but it makes it clear we ignore the descriptor if the callback is null.\n\n```suggestion\n    WGPUDeviceLostCallbackInfo deviceLostCallbackInfo \u003d kDefaultCallbackInfo;\n    if (descriptor \u0026\u0026 deviceLostCallbackInfo.callback !\u003d nullptr) {\n        deviceLostCallbackInfo \u003d descriptor-\u003edeviceLostCallbackInfo;\n        if (deviceLostCallbackInfo.mode \u003d\u003d WGPUCallbackMode_WaitAnyOnly) {\n            // TODO(dawn:2458) Update this when we have WGPUCallbackMode_Undefined.\n            deviceLostCallbackInfo.mode \u003d WGPUCallbackMode_AllowSpontaneous;\n        }\n    }\n\n    if (descriptor) {\n        mErrorCallback \u003d descriptor-\u003euncapturedErrorCallback;\n        mErrorUserdata \u003d descriptor-\u003euncapturedErrorUserdata;\n    }\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 5
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7465f6_fb1cbc2b",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3f3b659_230b05d7",
       "range": {
         "startLine": 236,
         "startChar": 0,
@@ -513,6 +813,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7096d5a9_77446e8a",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cde49c79_97ab6730",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5d1b78f_2a84e88a",
@@ -526,6 +844,30 @@
       "writtenOn": "2024-03-12T23:57:01Z",
       "side": 1,
       "message": "DisableDanglingPtrDetection",
+      "range": {
+        "startLine": 109,
+        "startChar": 22,
+        "endLine": 109,
+        "endChar": 39
+      },
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "505090db_a4f6ca09",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 61
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-15T01:43:17Z",
+      "side": 1,
+      "message": "Leaving the TODO for now.",
+      "parentUuid": "b5d1b78f_2a84e88a",
       "range": {
         "startLine": 109,
         "startChar": 22,
