@@ -1,0 +1,198 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "065a1481_c4aab566",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "Main request is adding test coverage for the other severities.",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54cbda6d_df9863f6",
+        "filename": "src/tint/lang/wgsl/ls/BUILD.bazel",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "nit: remove the trailing spaces in this file.",
+      "range": {
+        "startLine": 125,
+        "startChar": 1,
+        "endLine": 125,
+        "endChar": 6
+      },
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05072ae4_37f9c29d",
+        "filename": "src/tint/lang/wgsl/ls/diagnostics_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "Please also test the other severities: kInformation, kWarning",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fce0f15f_a327f3d6",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "please include src/tint/utils/diagnostic/source.h if that\u0027s where Source and Source::File, Source::Range, etc. come from.\n\nIWYU",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdfefda_1f8bb064",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "nit: \"A\" instead of \"An\"",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "329afc93_44a49439",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "Do you mean \"the symbol declared at the location...\" ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 39,
+        "endLine": 60,
+        "endChar": 69
+      },
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75aa7403_35d388b8",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "the text range for the definition of the symbol used at location @p l in the file.  ?\n\ni.e. it\u0027s a *use* of the symbol?\n\nCan it also be the declaration too?",
+      "range": {
+        "startLine": 66,
+        "startChar": 21,
+        "endLine": 66,
+        "endChar": 61
+      },
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71ff57f_c2183171",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "prefer std::numeric_limits\u003csize_t\u003e::max()\n\nBut you\u0027d also need to include \u003climits\u003e",
+      "range": {
+        "startLine": 73,
+        "startChar": 26,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "956bf5ef_c7115141",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "Perf concern: Would it be worth building an array of start locations of nodes and using binary search? (or similar?)",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b4f540_a596946c",
+        "filename": "src/tint/lang/wgsl/ls/server.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T17:05:07Z",
+      "side": 1,
+      "message": "nit: this is not used in this CL.",
+      "revId": "a9af8ab0f3dcbe1dbaaf418a83261e1ce384b6d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
