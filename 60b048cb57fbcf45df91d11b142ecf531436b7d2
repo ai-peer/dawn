@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c4fbfa_f6920bbd",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f8d4079_9548d90b",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bed5b4b2_328edfec",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-15T16:24:54Z",
       "side": 1,
       "message": "this should gain a check that wgpu::FeatureName::FormatCapabilities is available",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52579d8a_91a7b57a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bed5b4b2_328edfec",
       "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11911d38_19027afa",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b7f549_202943ef",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1261b6bf_6f6154eb",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-03-15T16:25:57Z",
       "side": 1,
       "message": "oh, and lastly, we should have some simple tests like in AdapterPropertiesVkTests.cpp",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99bb4047_3596f881",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1261b6bf_6f6154eb",
       "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fe6597_c432d57f",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a5a675_ebb2636b",
+      "range": {
+        "startLine": 84,
+        "startChar": 9,
+        "endLine": 84,
+        "endChar": 37
+      },
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da267768_25c865a8",
@@ -105,6 +201,30 @@
       "writtenOn": "2024-03-15T16:24:54Z",
       "side": 1,
       "message": "nit: give it a more obvious name like `ColorVulkanImageFormat`",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ba6dee_9b289a2e",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-15T22:34:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da267768_25c865a8",
       "range": {
         "startLine": 51,
         "startChar": 9,
