@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f8d4079_9548d90b",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:24:54Z",
+      "side": 1,
+      "message": "based on github discussion, we should have a feature for both the base format caps and the drm format caps",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bed5b4b2_328edfec",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:24:54Z",
+      "side": 1,
+      "message": "this should gain a check that wgpu::FeatureName::FormatCapabilities is available",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b7f549_202943ef",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:24:54Z",
+      "side": 1,
+      "message": "and then validation that if the DRM one is chained, the DRM format is also available\n\nsimilar to:\n```\nif (unpacked.Get\u003cAdapterPropertiesVk\u003e() !\u003d nullptr \u0026\u0026\n        !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterPropertiesVk)) {\n        instance-\u003eConsumedError(\n            DAWN_VALIDATION_ERROR(\"Feature AdapterPropertiesVk is not available.\"));\n    }\n\n```",
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a5a675_ebb2636b",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:24:54Z",
+      "side": 1,
+      "message": "nit: call it \"Populate\" like `PopulateBackendProperties`",
+      "range": {
+        "startLine": 84,
+        "startChar": 9,
+        "endLine": 84,
+        "endChar": 37
+      },
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da267768_25c865a8",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T16:24:54Z",
+      "side": 1,
+      "message": "nit: give it a more obvious name like `ColorVulkanImageFormat`",
+      "range": {
+        "startLine": 51,
+        "startChar": 9,
+        "endLine": 51,
+        "endChar": 26
+      },
+      "revId": "60b048cb57fbcf45df91d11b142ecf531436b7d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
