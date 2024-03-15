@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824bb5bf_4ccaf358",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-15T21:31:26Z",
+      "side": 1,
+      "message": "make this wrapper take wgpu::ComputePipeline instead of WGPUComputePipeline\n\n\nthen use the `ToAPI(ReturnToAPI(...))` only when you actually call the callback.\n\nThe callback gets an *owned* reference to the pipeline. It is moved from mPipeline to the application. The way you\u0027re doing it here actually leaks the WGPUComputePipeline if no callback is passed.\n\n\nI\u0027m not sure the wrapper is worth it though. You can just guard all the calls to mCallback below with `if(mCallback)`",
+      "revId": "b60c4e643d22d99c5343d79fa9f5611fb8f302b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
