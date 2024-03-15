@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d639ba88_0f73730b",
+        "filename": "src/tint/lang/wgsl/ls/definition.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T18:47:13Z",
+      "side": 1,
+      "message": "nit: should this be auto* ?\n\nAh, not because it\u0027s a shared_ptr",
+      "revId": "899b15fe52a090a20d8495774c7651903f9bf2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ceda33c_a7be2016",
+        "filename": "src/tint/lang/wgsl/ls/definition_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-15T18:47:13Z",
+      "side": 1,
+      "message": "I\u0027m glad you have this use-after-declaration case.",
+      "revId": "899b15fe52a090a20d8495774c7651903f9bf2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
