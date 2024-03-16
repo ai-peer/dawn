@@ -495,6 +495,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed74938d_c893271f",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-16T00:21:54Z",
+      "side": 1,
+      "message": "Sorry, I was rushing and wrote the wrong thing. Should have been:\n\n\u003e If the device lost event is in the list, then won\u0027t this just always return needFutureProcessEvents\u003d*true* as long as the device is alive?\n\nbecause the device lost futures will always be sitting between readyEnd and futures.end().\n\nAnyway, I see now why you changed the TimedOut case. But I think it will cause a difference in behavior in `dawn::native::InstanceProcessEvents` which is the thing that Chrome uses - Chrome wants to keep checking periodically as long as there\u0027s potential for forward progress.\n\n\u003e One idea I have right now is to add an additional alternative to the GetCompletionData that differentiates an event that polling should wait for verses an event that polling should just ignore... Thoughts?\n\nSomething like this makes sense to me because we DO need to do all the normal handling on DeviceLost events if they *are* ready. It is still a SystemEvent, but maybe like:\n```cpp\nusing CompletionData \u003d std::variant\u003c\n  QueueAndSerial,\n  struct { bool makesForwardProgress; Ref\u003cSystemEvent\u003e\u003e event; }\u003e;\n```\n?",
+      "parentUuid": "f58295f7_a8915e79",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "352c7972_f7946f5e",
         "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
         "patchSetId": 61

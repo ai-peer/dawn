@@ -83,6 +83,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0f87afb_2a7dc0d6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-16T00:21:54Z",
+      "side": 1,
+      "message": "nit: The default callback should probably be AllowSpontaneous. Just a little easier for debugging because you can breakpoint in it.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99a39ce6_7eb2492b",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 62
@@ -99,6 +116,29 @@
         "startChar": 13,
         "endLine": 275,
         "endChar": 25
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857bfe2a_f8b96114",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-16T00:21:54Z",
+      "side": 1,
+      "message": "nit: Set `deviceLostCallbackInfo` in aggregate because IMO we want to initialize all fields here, not use any defaults from `kDefaultDeviceLostCallbackInfo` (especially with my other comment to change the default there).\n\n```suggestion\n        deviceLostCallbackInfo \u003d {\n            wgpu::CallbackMode::AllowProcessEvents,\n            descriptor-\u003edeviceLostCallback,\n            descriptor-\u003edeviceLostUserdata,\n        };\n```",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 73
       },
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -140,6 +180,23 @@
       "writtenOn": "2024-03-15T12:41:47Z",
       "side": 1,
       "message": "Is that a future change? We don\u0027t pass the device to the callback at the moment.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8352657_28b5c50a",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-16T00:21:54Z",
+      "side": 1,
+      "message": "This should also handle the deprecated API (I think Blink needs it).",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
