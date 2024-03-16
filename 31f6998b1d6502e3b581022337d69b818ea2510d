@@ -85,6 +85,23 @@
       "parentUuid": "1029fa8c_19e6ed2a",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ad45f1_26b88e23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-16T06:43:00Z",
+      "side": 1,
+      "message": "Note: DEPS and .gitmodules can now point to Chromium\u0027s mirror of the Github repo:\n\nhttps://chromium.googlesource.com/external/github.com/GameTechDev/CmdThrottlePolicy/\n\nThanks.",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
