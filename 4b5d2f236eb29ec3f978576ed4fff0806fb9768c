@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5737aee_c11d7b70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-18T13:04:49Z",
+      "side": 1,
+      "message": "Hi Austin (Nicolette: FYI on this initial one :),\n\nSending out the feature addition on its own to give you a chance to weigh in a couple initial questions:\n\n* Bikeshed on the name - Do you prefer \"static\" or \"immutable\"?\n* Support over the wire - I put as false here. AFAICT there wouldn\u0027t be any problems in supporting over the wire, but we also don\u0027t need it for Graphite, so ... ?\n\nThanks!",
+      "revId": "4b5d2f236eb29ec3f978576ed4fff0806fb9768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
