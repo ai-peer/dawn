@@ -123,6 +123,24 @@
       "parentUuid": "1128d71d_8fd5f69e",
       "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f57e0ff_b5813493",
+        "filename": "src/tint/lang/spirv/writer/raise/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-03-18T18:24:50Z",
+      "side": 1,
+      "message": "Ah, I thought it was being generated. We may want to add that analysis at some point, so a bug is probably a good idea.",
+      "parentUuid": "0ea6bd14_d6239952",
+      "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
