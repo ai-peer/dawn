@@ -16,6 +16,92 @@
       "message": "@penghuang@chromium.org Thank you for the reviewing!",
       "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adc346b_d3b52da2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:24:30Z",
+      "side": 1,
+      "message": "LGTM with some nits.",
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2ceb76_fd3a771b",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:24:30Z",
+      "side": 1,
+      "message": "nit: `auto it \u003d `?",
+      "range": {
+        "startLine": 575,
+        "startChar": 4,
+        "endLine": 575,
+        "endChar": 9
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6181dde_e37c0c75",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:24:30Z",
+      "side": 1,
+      "message": "nit: `++it` here?",
+      "range": {
+        "startLine": 592,
+        "startChar": 86,
+        "endLine": 592,
+        "endChar": 87
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee60624_a1f05789",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:24:30Z",
+      "side": 1,
+      "message": "nit: also check `(*it)-\u003eIsFinishedUseInPendingCommands()`, since `mStagingBuffers` is sorted by last usage, if one buffer is not finished, all buffers after it should be unfinished as well.",
+      "range": {
+        "startLine": 592,
+        "startChar": 15,
+        "endLine": 592,
+        "endChar": 85
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
