@@ -138,6 +138,24 @@
       "parentUuid": "ae6fd410_307253a8",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6378d20f_9fa2e74b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-03-18T17:44:14Z",
+      "side": 1,
+      "message": "\u003e But, we\u0027d like to at least have a way to enable it behind flags / field trial so that we can test and evaluate the impact.\n\nOut of curiosity, what metrics are you going to use to evaluate? I ask because \"power usage\" is not an easy metric to measure in the wild. Users can be getting \"great performance\" but poor power usage if you disable the driver\u0027s throttling policy.",
+      "parentUuid": "7b0e106a_bc6cfbb5",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
