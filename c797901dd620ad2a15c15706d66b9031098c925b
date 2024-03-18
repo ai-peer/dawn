@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "747cd7f2_bb06d5df",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-18T08:28:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d8a4c056_8dd58de7",
+      "range": {
+        "startLine": 557,
+        "startChar": 13,
+        "endLine": 557,
+        "endChar": 22
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c308eeeb_e569f6e0",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-16T04:53:35Z",
       "side": 1,
       "message": "should be `!\u003d`?",
+      "range": {
+        "startLine": 558,
+        "startChar": 47,
+        "endLine": 558,
+        "endChar": 48
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4650ad4f_7c7076e6",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-18T08:28:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c308eeeb_e569f6e0",
       "range": {
         "startLine": 558,
         "startChar": 47,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37213535_bbfba8eb",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-18T08:28:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7f1a3bf2_6b240cc3",
+      "range": {
+        "startLine": 559,
+        "startChar": 0,
+        "endLine": 574,
+        "endChar": 9
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76577d18_fa468e27",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-03-16T04:53:35Z",
       "side": 1,
       "message": "I suggest purging the buffer with smallest LastUsageSerial instead of the max size.",
+      "range": {
+        "startLine": 581,
+        "startChar": 12,
+        "endLine": 581,
+        "endChar": 45
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47eb55c_aab74e83",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-18T08:28:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "76577d18_fa468e27",
       "range": {
         "startLine": 581,
         "startChar": 12,
@@ -146,6 +242,30 @@
       "writtenOn": "2024-03-16T04:53:35Z",
       "side": 1,
       "message": "skip above code for finding a cached staging buffer, if requested bufferSize is larger than the kMaxSize.",
+      "range": {
+        "startLine": 601,
+        "startChar": 8,
+        "endLine": 601,
+        "endChar": 30
+      },
+      "revId": "c797901dd620ad2a15c15706d66b9031098c925b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4899141_19191236",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-18T08:28:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d1d2b5a0_9a3b6580",
       "range": {
         "startLine": 601,
         "startChar": 8,
