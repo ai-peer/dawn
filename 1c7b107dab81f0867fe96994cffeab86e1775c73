@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a567a9d6_b120ed2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-18T14:29:54Z",
+      "side": 1,
+      "message": "Note that for Linux, we have 26 bots in the pool, and this has been working fine with the 6 new cmake-linux-* builders. For Windows, we have 25 bots available, and we\u0027ve only added 2 new builders, so we should be good.",
+      "revId": "1c7b107dab81f0867fe96994cffeab86e1775c73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
