@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dfaf27b_b789f486",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-18T18:21:38Z",
+      "side": 1,
+      "message": "I think we need to hold off making any more substantial changes to the CTS and runner until we can get the CTS rolling again. I\u0027m still bisecting the failures and have started reverting changes that I\u0027ve identified as causing breakages.\n\nI\u0027ll revisit this when we\u0027re healthy again. Sorry for the delay.",
+      "revId": "fa1f58dc1acb455ad069353a638e912a8a5e67d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
