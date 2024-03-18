@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14074137_944eaa17",
+        "filename": "src/tint/lang/wgsl/resolver/address_space_layout_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-18T14:21:15Z",
+      "side": 0,
+      "message": "Why remove all the sources? Seems like a separate issue then the rest of this CL?",
+      "revId": "a3802dfc90329ef3077c37ddc562a91422f65d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

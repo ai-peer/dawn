@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2e4545_b90b3b9e",
+        "filename": "src/tint/cmd/info/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-18T14:21:15Z",
+      "side": 1,
+      "message": "nit: blank line to separate the include sections",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7e05c3_490232ee",
+        "filename": "src/tint/lang/core/type/struct_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-18T14:21:15Z",
+      "side": 1,
+      "message": "Not a fan of quotes on every line here, previously it was valid WGSL, now it\u0027s just text strings.",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b4bae0_82a3a94c",
+        "filename": "src/tint/lang/wgsl/resolver/address_space_layout_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-18T14:21:15Z",
+      "side": 1,
+      "message": "Why is this ident needed now?",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
