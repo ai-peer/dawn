@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed74d765_4f995c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:41:12Z",
+      "side": 1,
+      "message": "one more nit.",
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf2ceb76_fd3a771b",
@@ -53,6 +70,29 @@
         "startChar": 4,
         "endLine": 575,
         "endChar": 9
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2883b81_e983a5f3",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-18T14:41:12Z",
+      "side": 1,
+      "message": "nit: Do we only change the last usage here? If yes, we just need to move the buffer to the back of the vector, and the above `std::sort` is not necessary.",
+      "range": {
+        "startLine": 581,
+        "startChar": 8,
+        "endLine": 581,
+        "endChar": 44
       },
       "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
