@@ -483,6 +483,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cba00eb1_9001b5e0",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-18T21:42:09Z",
+      "side": 1,
+      "message": "I think you can still achieve this in `SetupBackendDeviceToggles`\n\n\nyou can do:\n\n```\nif (deviceToggles-\u003eIsEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy) \u0026\u0026\n    GetOrLoadIntelExtension() \u003d\u003d nullptr) {\n  deviceToggles-\u003eForceSet(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy, false);\n}\n```\n\nFor example, we do something similar like:\n```\n    // Polyfill reflect builtin for vec2\u003cf32\u003e on Intel device if using FXC.\n    // See https://crbug.com/tint/1798 for more information.\n    if (gpu_info::IsIntel(vendorId) \u0026\u0026 !deviceToggles-\u003eIsEnabled(Toggle::UseDXC)) {\n        deviceToggles-\u003eDefault(Toggle::D3D12PolyfillReflectVec2F32, true);\n    }\n```",
+      "parentUuid": "6bd16ede_c6c77a98",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb7fdc7_37430a5d",
         "filename": "third_party/CMakeLists.txt",
         "patchSetId": 21
