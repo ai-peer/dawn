@@ -69,6 +69,24 @@
       "parentUuid": "5996704d_6a957d64",
       "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1f88ad_0da1f227",
+        "filename": "src/tint/lang/spirv/writer/raise/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T17:55:56Z",
+      "side": 1,
+      "message": "Fix what? Do we consider an `unreachable` that is actually statically reachable valid in Tint IR? Not sure we\u0027ve discussed this case (we clearly didn\u0027t add validation to reject it, but that doesn\u0027t mean that it should be valid).",
+      "parentUuid": "6bc12a12_cfdcd0df",
+      "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
