@@ -51,6 +51,24 @@
       "parentUuid": "829edf85_eeded64b",
       "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bc12a12_cfdcd0df",
+        "filename": "src/tint/lang/spirv/writer/raise/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-18T17:33:40Z",
+      "side": 1,
+      "message": "But wasn\u0027t it a valid test before? Shouldn\u0027t we fix it otherwise it\u0027s an invalid unreachable entry?",
+      "parentUuid": "5996704d_6a957d64",
+      "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
