@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5803a3_80ba81ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-18T20:53:29Z",
+      "side": 1,
+      "message": "Yeah no problem.",
+      "parentUuid": "57b7bdd4_bea4662f",
+      "revId": "63d5418faa5cbd8761cb1876126e07fc1f46aff0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45487185_aea9c87a",
@@ -67,6 +85,30 @@
       "side": 1,
       "message": "\u003e \"capabilties\" is a possible misspelling of \"capabilities\".\n\nPlease fix.",
       "parentUuid": "de4a5dcd_7561a93e",
+      "range": {
+        "startLine": 35,
+        "startChar": 20,
+        "endLine": 35,
+        "endChar": 31
+      },
+      "revId": "63d5418faa5cbd8761cb1876126e07fc1f46aff0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c95d5e_757e7c7f",
+        "filename": "src/dawn/tests/end2end/AdapterFormatCapabilitiesVkTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-18T20:53:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45487185_aea9c87a",
       "range": {
         "startLine": 35,
         "startChar": 20,
