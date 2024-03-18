@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4fbdbbd_98d551eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3258471
+      },
+      "writtenOn": "2024-03-18T20:33:48Z",
+      "side": 1,
+      "message": "It looks like none of the devices on CQ actually have the required drm vulkan extension, so the feature will always be unavailable. I just updated the test so that it should expect the API to succeed/fail if the feature is available/unavailable.\n\nAlso made the API return a bool to indicate success to make it testable, and since the enum change isn\u0027t been implemented yet:\nhttps://github.com/webgpu-native/webgpu-headers/issues/115#issuecomment-1710833736",
+      "revId": "63d5418faa5cbd8761cb1876126e07fc1f46aff0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
