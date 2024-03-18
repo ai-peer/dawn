@@ -465,6 +465,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bd16ede_c6c77a98",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-18T05:00:47Z",
+      "side": 1,
+      "message": "The cost is loading an unused DLL to the memory and I am suggested not to do so, so I\u0027d prefer not loading the DLL (in initializing physical device) until we really want (when the toggle is on in the creation of device).\n\nWhat do you think?",
+      "parentUuid": "fab8262e_4d172906",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb7fdc7_37430a5d",
         "filename": "third_party/CMakeLists.txt",
         "patchSetId": 21

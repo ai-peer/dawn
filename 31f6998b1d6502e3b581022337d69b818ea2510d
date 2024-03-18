@@ -102,6 +102,42 @@
       "message": "Note: DEPS and .gitmodules can now point to Chromium\u0027s mirror of the Github repo:\n\nhttps://chromium.googlesource.com/external/github.com/GameTechDev/CmdThrottlePolicy/\n\nThanks.",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b1d0733_b1c87a1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-18T05:00:47Z",
+      "side": 1,
+      "message": "Thanks Ken!",
+      "parentUuid": "b6ad45f1_26b88e23",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b0e106a_bc6cfbb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-18T05:00:47Z",
+      "side": 1,
+      "message": "@rafael.cintron@microsoft.com\n\n\u003e What is the rationale for revisiting this?\n\nWe find the extension is really useful on many performance issues (e.g. ONNX Runtime WebGPU backend on old drivers) so we decide to have it in Dawn behind a toggle for more experiments.\n\n\u003e I thought we agreed not use the driver throttling policy extension.\n\nIn fact our team never promised to abandon this CL.",
+      "parentUuid": "ae6fd410_307253a8",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
