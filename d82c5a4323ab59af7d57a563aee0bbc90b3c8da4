@@ -16,6 +16,80 @@
       "message": "I still need to add tests, but this seems to be passing the e2e tests for me at this point. Wanted to send it out early to see if there was anything that needed to change.",
       "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caea82f7_4cf16eb6",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T21:23:06Z",
+      "side": 1,
+      "message": "We probably need to do this inside a `TraverseExpressions` call to deal with problematic constant expressions that are nested inside a larger non-constant expression.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073c65c2_a92e7bdd",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T21:23:06Z",
+      "side": 1,
+      "message": "Probably need to recurse into the LHS expression.",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3c3ada_129995ff",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T21:23:06Z",
+      "side": 1,
+      "message": "Probably need to recurse into the LHS expression.",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884782ef_ae7ea3ca",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T21:23:06Z",
+      "side": 1,
+      "message": "Probably need to recurse into the LHS expression.",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
