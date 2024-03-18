@@ -33,6 +33,24 @@
       "message": "Why is this unreachable, there is no false block, so doesn\u0027t it get here if %2 is false?",
       "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5996704d_6a957d64",
+        "filename": "src/tint/lang/spirv/writer/raise/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-18T14:43:07Z",
+      "side": 1,
+      "message": "Good spot, added a false block that also returns.",
+      "parentUuid": "829edf85_eeded64b",
+      "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
