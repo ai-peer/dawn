@@ -68,15 +68,16 @@ class TextStyle {
     static constexpr Bits kSeverityError /*      */ = 0b0000'0000'0011'0000;
     static constexpr Bits kSeverityFatal /*      */ = 0b0000'0000'0100'0000;
 
-    static constexpr Bits kKindMask /*           */ = 0b0000'1111'0000'0000;
+    static constexpr Bits kKindMask /*           */ = 0b0001'1111'0000'0000;
     static constexpr Bits kKindCode /*           */ = 0b0000'0001'0000'0000;
-    static constexpr Bits kKindKeyword /*        */ = 0b0000'0011'0000'0000;
-    static constexpr Bits kKindVariable /*       */ = 0b0000'0101'0000'0000;
-    static constexpr Bits kKindType /*           */ = 0b0000'0111'0000'0000;
-    static constexpr Bits kKindFunction /*       */ = 0b0000'1001'0000'0000;
-    static constexpr Bits kKindEnum /*           */ = 0b0000'1011'0000'0000;
-    static constexpr Bits kKindLiteral /*        */ = 0b0000'1101'0000'0000;
-    static constexpr Bits kKindAttribute /*      */ = 0b0000'1111'0000'0000;
+    static constexpr Bits kKindKeyword /*        */ = 0b0000'0011'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindVariable /*       */ = 0b0000'0101'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindType /*           */ = 0b0000'0111'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindFunction /*       */ = 0b0000'1001'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindEnum /*           */ = 0b0000'1011'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindLiteral /*        */ = 0b0000'1101'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindAttribute /*      */ = 0b0000'1111'0000'0000;  // includes kKindCode
+    static constexpr Bits kKindComment /*        */ = 0b0001'0001'0000'0000;  // includes kKindCode
     static constexpr Bits kKindSquiggle /*       */ = 0b0000'0010'0000'0000;
 
     /// Getters
@@ -103,6 +104,7 @@ class TextStyle {
     bool IsEnum() const { return (bits & kKindMask) == kKindEnum; }
     bool IsLiteral() const { return (bits & kKindMask) == kKindLiteral; }
     bool IsAttribute() const { return (bits & kKindMask) == kKindAttribute; }
+    bool IsComment() const { return (bits & kKindMask) == kKindComment; }
     bool IsSquiggle() const { return (bits & kKindMask) == kKindSquiggle; }
 
     /// Equality operator
@@ -198,6 +200,8 @@ static constexpr TextStyle Enum = TextStyle{TextStyle::kKindEnum};
 static constexpr TextStyle Literal = TextStyle{TextStyle::kKindLiteral};
 /// Attribute renders text with a 'code' style that represents an 'attribute' token
 static constexpr TextStyle Attribute = TextStyle{TextStyle::kKindAttribute};
+/// Comment renders text with a 'code' style that represents an 'comment' token
+static constexpr TextStyle Comment = TextStyle{TextStyle::kKindComment};
 /// Squiggle renders text with a squiggle-highlight style (`^^^^^`)
 static constexpr TextStyle Squiggle = TextStyle{TextStyle::kKindSquiggle};
 
