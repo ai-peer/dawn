@@ -87,6 +87,24 @@
       "parentUuid": "6bc12a12_cfdcd0df",
       "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1128d71d_8fd5f69e",
+        "filename": "src/tint/lang/spirv/writer/raise/merge_return_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-03-18T18:00:07Z",
+      "side": 1,
+      "message": "I don\u0027t think an `unreachable` this is reachable should be in the IR. (Sorry, by fix, it seemed like the test that was there previously before the `false` block was added was generating invalid code, and we should keep that code and fix the generation to `exit_if` instead of `unreachable`-ing?",
+      "parentUuid": "ab1f88ad_0da1f227",
+      "revId": "b3cd4490a8b934b3653f023152e9a192ca98747d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
