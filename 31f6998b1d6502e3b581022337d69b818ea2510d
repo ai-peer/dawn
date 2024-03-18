@@ -156,6 +156,24 @@
       "parentUuid": "7b0e106a_bc6cfbb5",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92938bf3_c768fa89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-18T21:53:49Z",
+      "side": 1,
+      "message": "I don\u0027t think there are specifics yet. To be clear, I don\u0027t think we\u0027re just going to turn this on and see what happens. With this we can at least locally experiment with applications by setting command line flags, and figure out if there is a testing strategy that works. We do have some power metrics testing in Chromium tests (zmo@ would know more). It\u0027s also useful for running benchmarks with less noise and more consistent results.",
+      "parentUuid": "6378d20f_9fa2e74b",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
