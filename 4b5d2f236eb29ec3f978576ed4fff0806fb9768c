@@ -16,6 +16,47 @@
       "message": "Hi Austin (Nicolette: FYI on this initial one :),\n\nSending out the feature addition on its own to give you a chance to weigh in a couple initial questions:\n\n* Bikeshed on the name - Do you prefer \"static\" or \"immutable\"?\n* Support over the wire - I put as false here. AFAICT there wouldn\u0027t be any problems in supporting over the wire, but we also don\u0027t need it for Graphite, so ... ?\n\nThanks!",
       "revId": "4b5d2f236eb29ec3f978576ed4fff0806fb9768c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91bbaf5_f7e1776d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-18T20:13:43Z",
+      "side": 1,
+      "message": "Let\u0027s support it in the wire for completeness. It shouldn\u0027t need custom implementation because the autogen will handle it.\n\nAnother possible name is \"constant sampler\". I think that \"static sampler\" as a name is fine unless others have strong opinions.",
+      "parentUuid": "a5737aee_c11d7b70",
+      "revId": "4b5d2f236eb29ec3f978576ed4fff0806fb9768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8897d8a_c7adbc41",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-18T20:13:43Z",
+      "side": 1,
+      "message": "\"as part of the bind group layout\"",
+      "range": {
+        "startLine": 313,
+        "startChar": 54,
+        "endLine": 313,
+        "endChar": 62
+      },
+      "revId": "4b5d2f236eb29ec3f978576ed4fff0806fb9768c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
