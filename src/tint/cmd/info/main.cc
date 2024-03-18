@@ -28,6 +28,8 @@
 
 #include <iostream>
 
+#include "src/tint/utils/text/styled_text_printer.h"
+
 #if TINT_BUILD_SPV_READER
 #include "spirv-tools/libspirv.hpp"
 #endif  // TINT_BUILD_SPV_READER
@@ -142,17 +144,14 @@ void EmitJson(const tint::Program& program) {
         std::cout << std::endl;
         std::cout << "{" << std::endl;
 
-        std::cout << "\"name\": \"" << entry_point.name << "\""
-                  << "," << std::endl;
+        std::cout << "\"name\": \"" << entry_point.name << "\"" << "," << std::endl;
         std::cout << "\"stage\": \"" << tint::cmd::EntryPointStageToString(entry_point.stage)
-                  << "\""
-                  << "," << std::endl;
+                  << "\"" << "," << std::endl;
 
         if (entry_point.workgroup_size) {
             std::cout << "\"workgroup_size\": [";
             std::cout << entry_point.workgroup_size->x << ", " << entry_point.workgroup_size->y
-                      << ", " << entry_point.workgroup_size->z << "]"
-                      << "," << std::endl;
+                      << ", " << entry_point.workgroup_size->z << "]" << "," << std::endl;
         }
 
         std::cout << "\"input_variables\": [";
@@ -164,9 +163,7 @@ void EmitJson(const tint::Program& program) {
             input_first = false;
             stage_var(var);
         }
-        std::cout << std::endl
-                  << "]"
-                  << "," << std::endl;
+        std::cout << std::endl << "]" << "," << std::endl;
 
         std::cout << "\"output_variables\": [";
         bool output_first = true;
@@ -177,9 +174,7 @@ void EmitJson(const tint::Program& program) {
             output_first = false;
             stage_var(var);
         }
-        std::cout << std::endl
-                  << "]"
-                  << "," << std::endl;
+        std::cout << std::endl << "]" << "," << std::endl;
 
         std::cout << "\"overrides\": [";
 
@@ -202,9 +197,7 @@ void EmitJson(const tint::Program& program) {
                       << std::endl;
             std::cout << "}";
         }
-        std::cout << std::endl
-                  << "]"
-                  << "," << std::endl;
+        std::cout << std::endl << "]" << "," << std::endl;
 
         std::cout << "\"bindings\": [";
         auto bindings = inspector.GetResourceBindings(entry_point.name);
@@ -293,6 +286,7 @@ void EmitJson(const tint::Program& program) {
 }
 
 void EmitText(const tint::Program& program) {
+    auto printer = tint::StyledTextPrinter::Create(stdout);
     tint::inspector::Inspector inspector(program);
     if (!inspector.GetUsedExtensionNames().empty()) {
         std::cout << "Extensions:" << std::endl;
@@ -320,7 +314,7 @@ void EmitText(const tint::Program& program) {
                 continue;
             }
             const auto* s = ty->As<tint::core::type::Struct>();
-            std::cout << s->Layout() << std::endl << std::endl;
+            printer->Print(s->Layout() << "\n\n");
         }
     }
 }
