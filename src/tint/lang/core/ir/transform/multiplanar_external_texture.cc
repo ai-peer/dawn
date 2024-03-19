@@ -296,6 +296,11 @@ struct State {
                               {sym.Register("gammaEncodeParams"), GammaTransferParams()},
                               {sym.Register("gamutConversionMatrix"), ty.mat3x3<f32>()},
                               {sym.Register("coordTransformationMatrix"), ty.mat3x2<f32>()},
+                              {sym.Register("visibleRectMin"), ty.vec2<f32>()},
+                              {sym.Register("visibleRectMax"), ty.vec2<f32>()},
+                              {sym.Register("plane0Size"), ty.vec2<u32>()},
+                              {sym.Register("plane1Size"), ty.vec2<u32>()},
+                              {sym.Register("displayVisibleSize"), ty.vec2<u32>()},
                           });
         }
         return external_texture_params_struct;
@@ -360,27 +365,53 @@ struct State {
         //                               plane1 : texture_2d<f32>,
         //                               coords : vec2i,
         //                               params : ExternalTextureParams) -> vec4f {
-        //     var rgb : vec3f;
-        //     var alpha : f32;
+        //     let toTexel = mat3x3<f32>(vec3<f32>(f32(params.plane0Size.x), 0.0f, 0.0f),
+        //                               vec3<f32>(0.0f, f32(params.plane0Size.y), 0.0f),
+        //                               vec3<f32>(0.0f, 0.0f, 1.0f));
+        //
+        //     let toNormalize = mat3x3<f32>(vec3<f32>((1.0f / f32(params.displayVisibleSize.x)),
+        //     0.0f, 0.0f),
+        //                                   vec3<f32>(0.0f, (1.0f /
+        //                                   f32(params.displayVisibleSize.y)), 0.0f),
+        //                                   vec3<f32>(0.0f, 0.0f, 1.0f));
+        //
+        //     let loadTransformationMatrix = (toNormalize *
+        //                                      (toTexel *
+        //                                        mat3x3<f32>(vec3<f32>(params.coordTransformationMatrix[0],
+        //                                        0.0f),
+        //                                                    vec3<f32>(params.coordTransformationMatrix[1],
+        //                                                    0.0f),
+        //                                                    vec3<f32>(params.coordTransformationMatrix[2],
+        //                                                    1.0f))));
+        //
+        //     let modifiedCoords = (loadTransformationMatrix * vec3<f32>(vec2<f32>(coord), 1));
+        //     let plane0_clamped = clamp(vec2<i32>(modifiedCoords.xy),
+        //                                vec2<i32>((params.visibleRectMin *
+        //                                vec2<f32>(params.plane0Size))),
+        //                                (vec2<i32>((params.visibleRectMax *
+        //                                vec2<f32>(params.plane0Size))) - vec2<i32>(1, 1)));
+        //
+        //     var color : vec4<f32>;
         //     if ((params.numPlanes == 1)) {
-        //       let texel = textureLoad(plane0, coord, 0);
-        //       rgb = texel.rgb;
-        //       alpha = texel.a;
+        //       color = textureLoad(plane0, plane0_clamped, 0).rgba;
         //     } else {
-        //       let y = textureLoad(plane0, coord, 0).r;
-        //       let coord_uv = (coord >> vec2u(1));
-        //       let uv = textureLoad(plane1, coord_uv, 0).rg;
-        //       rgb = vec4f(y, uv, 1) * params.yuvToRgbConversionMatrix;
-        //       alpha = 1.0;
-        //     }
+        //       let coord1 = vec2<i32>((vec2<f32>(plane0_clamped) * (vec2<f32>(params.plane1Size) /
+        //       vec2<f32>(params.plane0Size)))); let plane1_clamped = clamp(vec2<i32>(coord1),
+        //                                  vec2<i32>((params.visibleRectMin *
+        //                                  vec2<f32>(params.plane1Size))),
+        //                                  (vec2<i32>((params.visibleRectMax *
+        //                                  vec2<f32>(params.plane1Size))) - vec2<i32>(1, 1)));
         //
-        //     if (params.doYuvToRgbConversionOnly == 0) {
-        //       rgb = gammaCorrection(rgb, params.gammaDecodeParams);
-        //       rgb = params.gamutConversionMatrix * rgb;
-        //       rgb = gammaCorrection(rgb, params.gammaEncodeParams);
+        //       color = vec4<f32>((vec4<f32>(textureLoad(plane0, plane0_clamped, 0).r,
+        //                                    textureLoad(plane1, plane1_clamped, 0).rg, 1) *
+        //                                    params.yuvToRgbConversionMatrix), 1);
         //     }
-        //
-        //     return vec4f(rgb, alpha);
+        //     if ((params.doYuvToRgbConversionOnly == 0)) {
+        //       color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
+        //       color = vec4<f32>((params.gamutConversionMatrix * color.rgb), color.a);
+        //       color = vec4<f32>(gammaCorrection(color.rgb, params.gammaEncodeParams), color.a);
+        //     }
+        //     return color;
         //   }
         texture_load_external = b.Function("tint_TextureLoadExternal", ty.vec4<f32>());
         auto* plane_0 = b.FunctionParam("plane_0", SampledTexture());
@@ -392,8 +423,68 @@ struct State {
             auto* vec2f = ty.vec2<f32>();
             auto* vec3f = ty.vec3<f32>();
             auto* vec4f = ty.vec4<f32>();
+            auto* vec2i = ty.vec2<i32>();
+            auto* mat3x3 = ty.mat3x3<f32>();
             auto* yuv_to_rgb_conversion_only = b.Access(ty.u32(), params, 1_u);
             auto* yuv_to_rgb_conversion = b.Access(ty.mat3x4<f32>(), params, 2_u);
+            auto* transformation_matrix = b.Access(ty.mat3x2<f32>(), params, 6_u);
+            auto* visible_rect_min = b.Access(ty.vec2<f32>(), params, 7_u);
+            auto* visible_rect_max = b.Access(ty.vec2<f32>(), params, 8_u);
+            auto* plane0_size = b.Access(ty.vec2<u32>(), params, 9_u);
+            auto* plane1_size = b.Access(ty.vec2<u32>(), params, 10_u);
+            auto* plane0_width = b.Access(ty.u32(), plane0_size, 0_u);
+            auto* plane0_height = b.Access(ty.u32(), plane0_size, 1_u);
+            auto* display_visible_size = b.Access(ty.vec2<u32>(), params, 11_u);
+            auto* display_visible_width = b.Access(ty.u32(), display_visible_size, 0_u);
+            auto* display_visible_height = b.Access(ty.u32(), display_visible_size, 1_u);
+
+            auto* to_texel_matrix_column_0 =
+                b.Construct(vec3f, b.Convert(ty.f32(), plane0_width), 0_f, 0_f);
+            auto* to_texel_matrix_column_1 =
+                b.Construct(vec3f, 0_f, b.Convert(ty.f32(), plane0_height), 0_f);
+            auto* to_texel_matrix_column_2 = b.Construct(vec3f, 0_f, 0_f, 1_f);
+            auto* to_texel_matrix = b.Construct(mat3x3, to_texel_matrix_column_0,
+                                                to_texel_matrix_column_1, to_texel_matrix_column_2);
+
+            auto* to_normalized_matrix_column_0 = b.Construct(
+                vec3f, b.Divide(ty.f32(), 1_f, b.Convert(ty.f32(), display_visible_width)), 0_f,
+                0_f);
+            auto* to_normalized_matrix_column_1 = b.Construct(
+                vec3f, 0_f, b.Divide(ty.f32(), 1_f, b.Convert(ty.f32(), display_visible_height)),
+                0_f);
+            auto* to_normalized_matrix_column_2 = b.Construct(vec3f, 0_f, 0_f, 1_f);
+
+            auto* to_normalized =
+                b.Construct(mat3x3, to_normalized_matrix_column_0, to_normalized_matrix_column_1,
+                            to_normalized_matrix_column_2);
+
+            auto* transformation_matrix_column_0 =
+                b.Construct(vec3f, b.Access(vec2f, transformation_matrix, 0_u), 0_f);
+            auto* transformation_matrix_column_1 =
+                b.Construct(vec3f, b.Access(vec2f, transformation_matrix, 1_u), 0_f);
+            auto* transformation_matrix_column_2 =
+                b.Construct(vec3f, b.Access(vec2f, transformation_matrix, 2_u), 1_f);
+
+            auto* transformation_matrix_3x3 =
+                b.Construct(mat3x3, transformation_matrix_column_0, transformation_matrix_column_1,
+                            transformation_matrix_column_2);
+
+            auto* load_transform_matrix =
+                b.Multiply(mat3x3, to_normalized,
+                           b.Multiply(mat3x3, to_texel_matrix, transformation_matrix_3x3));
+
+            auto* modified_coords =
+                b.Multiply(vec3f, load_transform_matrix, b.Construct(vec3f, coords, 1_f));
+
+            auto* coord = b.Convert(vec2i, b.Swizzle(vec2f, modified_coords, {0_u, 1_u}));
+            auto* plane0_coord_min = b.Convert(
+                vec2i, b.Multiply(vec2f, visible_rect_min, b.Convert(vec2f, plane0_size)));
+            auto* plane0_visible_rect_max =
+                b.Multiply(vec2f, visible_rect_max, b.Convert(vec2f, plane0_size));
+            auto* plane0_coord_max = b.Convert(
+                vec2i, b.Subtract(vec2f, plane0_visible_rect_max, b.Splat(vec2f, 1_f, 2u)));
+            auto* plane0_clamped =
+                b.Call(vec2i, core::BuiltinFn::kClamp, coord, plane0_coord_min, plane0_coord_max);
 
             auto* rgb_result = b.InstructionResult(vec3f);
             auto* alpha_result = b.InstructionResult(ty.f32());
@@ -402,7 +493,8 @@ struct State {
             if_planes_eq_1->SetResults(rgb_result, alpha_result);
             b.Append(if_planes_eq_1->True(), [&] {
                 // Load the texel from the first plane and split into separate rgb and a values.
-                auto* texel = b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_0, coords, 0_u);
+                auto* texel =
+                    b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_0, plane0_clamped, 0_u);
                 auto* rgb = b.Swizzle(vec3f, texel, {0u, 1u, 2u});
                 auto* a = b.Access(ty.f32(), texel, 3_u);
                 b.ExitIf(if_planes_eq_1, rgb, a);
@@ -410,14 +502,29 @@ struct State {
             b.Append(if_planes_eq_1->False(), [&] {
                 // Load the y value from the first plane.
                 auto* y = b.Access(
-                    ty.f32(), b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_0, coords, 0_u),
+                    ty.f32(),
+                    b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_0, plane0_clamped, 0_u),
                     0_u);
 
                 // Load the uv value from the second plane.
-                auto* coord_uv =
-                    b.ShiftRight(ty.vec2<u32>(), coords, b.Splat(ty.vec2<u32>(), 1_u, 2u));
+                auto* plane0_size_f = b.Convert(vec2f, plane0_size);
+                auto* plane1_size_f = b.Convert(vec2f, plane1_size);
+                auto* plane1_scale = b.Divide(vec2f, plane0_size_f, plane1_size_f);
+                auto* coord1 = b.Convert(
+                    vec2i, b.Multiply(vec2f, b.Convert(vec2f, plane0_clamped), plane1_scale));
+
+                auto* plane1_coord_min = b.Convert(
+                    vec2i, b.Multiply(vec2f, visible_rect_min, b.Convert(vec2f, plane1_size)));
+                auto* plane1_visible_rect_max =
+                    b.Multiply(vec2f, visible_rect_max, b.Convert(vec2f, plane1_size));
+                auto* plane1_coord_max = b.Convert(
+                    vec2i, b.Subtract(vec2f, plane1_visible_rect_max, b.Splat(vec2f, 1_f, 2u)));
+
+                auto* plane1_clamped = b.Call(vec2i, core::BuiltinFn::kClamp, coord1,
+                                              plane1_coord_min, plane1_coord_max);
                 auto* uv = b.Swizzle(
-                    vec2f, b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_1, coord_uv, 0_u),
+                    vec2f,
+                    b.Call(vec4f, core::BuiltinFn::kTextureLoad, plane_1, plane1_clamped, 0_u),
                     {0u, 1u});
 
                 // Convert the combined yuv value into rgb and set the alpha to 1.0.
@@ -462,35 +569,33 @@ struct State {
         //                            smp : sampler,
         //                            coord : vec2f,
         //                            params : ExternalTextureParams) -> vec4f {
-        //     let modified_coords = params.coordTransformationMatrix * vec3f(coord, 1);
-        //     let plane0_dims = vec2f(textureDimensions(plane0));
-        //     let plane0_half_texel = vec2f(0.5) / plane0_dims;
-        //     let plane0_clamped = clamp(modified_coords, plane0_half_texel,
-        //                                (1 - plane0_half_texel));
-        //     let plane1_dims = vec2f(textureDimensions(plane1));
-        //     let plane1_half_texel = vec2f(0.5) / plane1_dims;
-        //     let plane1_clamped = clamp(modified_coords, plane1_half_texel,
-        //                          (1 - plane1_half_texel));
-        //     var rgb : vec3f;
-        //     var alpha : f32;
+        //     let modifiedCoords = (params.coordTransformationMatrix * vec3<f32>(coord, 1));
+        //     let plane0_half_texel = (vec2<f32>(0.5) / vec2<f32>(params.plane0Size));
+        //     let plane0_clamped = clamp(modifiedCoords,
+        //                                params.visibleRectMin + plane0_half_texel,
+        //                                params.visibleRectMax - plane0_half_texel);
+        //     var color : vec4<f32>;
+        //
         //     if ((params.numPlanes == 1)) {
-        //       let texel = textureSampleLevel(plane0, smp, plane0_clamped, 0);
-        //       rgb = texel.rgb;
-        //       alpha = texel.a;
+        //       color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgba;
         //     } else {
-        //       let y = textureSampleLevel(plane0, smp, plane0_clamped, 0).r;
-        //       let uv = textureSampleLevel(plane1, smp, plane1_clamped, 0).rg;
-        //       rgb = vec4f(y, uv, 1.0) * params.yuvToRgbConversionMatrix;
-        //       alpha = 1.0;
+        //       let plane1_half_texel = (vec2<f32>(0.5) / vec2<f32>(params.plane1Size));
+        //       let plane1_clamped = clamp(modifiedCoords,
+        //                                  params.visibleRectMin + plane1_half_texel,
+        //                                  params.visibleRectMax - plane1_half_texel);
+        //       color = vec4<f32>(
+        //                  vec4<f32>(textureSampleLevel(plane0, smp, plane0_clamped, 0).r,
+        //                            textureSampleLevel(plane1, smp, plane1_clamped, 0).rg, 1) *
+        //                  params.yuvToRgbConversionMatrix), 1);
         //     }
         //
-        //     if (params.doYuvToRgbConversionOnly == 0) {
-        //       rgb = gammaCorrection(rgb, params.gammaDecodeParams);
-        //       rgb = params.gamutConversionMatrix * rgb;
-        //       rgb = gammaCorrection(rgb, params.gammaEncodeParams);
+        //     if ((params.doYuvToRgbConversionOnly == 0)) {
+        //       color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
+        //       color = vec4<f32>((params.gamutConversionMatrix * color.rgb), color.a);
+        //       color = vec4<f32>(gammaCorrection(color.rgb, params.gammaEncodeParams), color.a);
         //     }
         //
-        //     return vec4f(rgb, alpha);
+        //     return color;
         //   }
         texture_sample_external = b.Function("tint_TextureSampleExternal", ty.vec4<f32>());
         auto* plane_0 = b.FunctionParam("plane_0", SampledTexture());
@@ -506,21 +611,19 @@ struct State {
             auto* yuv_to_rgb_conversion_only = b.Access(ty.u32(), params, 1_u);
             auto* yuv_to_rgb_conversion = b.Access(ty.mat3x4<f32>(), params, 2_u);
             auto* transformation_matrix = b.Access(ty.mat3x2<f32>(), params, 6_u);
+            auto* visible_rect_min = b.Access(ty.vec2<f32>(), params, 7_u);
+            auto* visible_rect_max = b.Access(ty.vec2<f32>(), params, 8_u);
+            auto* plane0_size = b.Access(ty.vec2<u32>(), params, 9_u);
+            auto* plane1_size = b.Access(ty.vec2<u32>(), params, 10_u);
 
             auto* modified_coords =
                 b.Multiply(vec2f, transformation_matrix, b.Construct(vec3f, coords, 1_f));
-            auto* plane0_dims = b.Convert(
-                vec2f, b.Call(ty.vec2<u32>(), core::BuiltinFn::kTextureDimensions, plane_0));
-            auto* plane0_half_texel = b.Divide(vec2f, b.Splat(vec2f, 0.5_f, 2u), plane0_dims);
-            auto* plane0_clamped =
-                b.Call(vec2f, core::BuiltinFn::kClamp, modified_coords, plane0_half_texel,
-                       b.Subtract(vec2f, 1_f, plane0_half_texel));
-            auto* plane1_dims = b.Convert(
-                vec2f, b.Call(ty.vec2<u32>(), core::BuiltinFn::kTextureDimensions, plane_1));
-            auto* plane1_half_texel = b.Divide(vec2f, b.Splat(vec2f, 0.5_f, 2u), plane1_dims);
-            auto* plane1_clamped =
-                b.Call(vec2f, core::BuiltinFn::kClamp, modified_coords, plane1_half_texel,
-                       b.Subtract(vec2f, 1_f, plane1_half_texel));
+            auto* plane0_half_texel =
+                b.Divide(vec2f, b.Splat(vec2f, 0.5_f, 2u), b.Convert(vec2f, plane0_size));
+            auto* plane0_sample_rect_min = b.Add(vec2f, visible_rect_min, plane0_half_texel);
+            auto* plane0_sample_rect_max = b.Subtract(vec2f, visible_rect_max, plane0_half_texel);
+            auto* plane0_clamped = b.Call(vec2f, core::BuiltinFn::kClamp, modified_coords,
+                                          plane0_sample_rect_min, plane0_sample_rect_max);
 
             auto* rgb_result = b.InstructionResult(vec3f);
             auto* alpha_result = b.InstructionResult(ty.f32());
@@ -541,6 +644,13 @@ struct State {
                                    b.Call(vec4f, core::BuiltinFn::kTextureSampleLevel, plane_0,
                                           sampler, plane0_clamped, 0_f),
                                    0_u);
+                auto* plane1_half_texel =
+                    b.Divide(vec2f, b.Splat(vec2f, 0.5_f, 2u), b.Convert(vec2f, plane1_size));
+                auto* plane1_sample_rect_min = b.Add(vec2f, visible_rect_min, plane1_half_texel);
+                auto* plane1_sample_rect_max =
+                    b.Subtract(vec2f, visible_rect_max, plane1_half_texel);
+                auto* plane1_clamped = b.Call(vec2f, core::BuiltinFn::kClamp, modified_coords,
+                                              plane1_sample_rect_min, plane1_sample_rect_max);
 
                 // Sample the uv value from the second plane.
                 auto* uv = b.Swizzle(vec2f,

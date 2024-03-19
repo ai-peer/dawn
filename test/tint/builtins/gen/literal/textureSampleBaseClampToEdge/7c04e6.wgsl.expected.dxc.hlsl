@@ -16,11 +16,16 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float2 visibleRectMin;
+  float2 visibleRectMax;
+  uint2 plane0Size;
+  uint2 plane1Size;
+  uint2 displayVisibleSize;
 };
 
 Texture2D<float4> ext_tex_plane_1 : register(t2, space1);
 cbuffer cbuffer_ext_tex_params : register(b3, space1) {
-  uint4 ext_tex_params[13];
+  uint4 ext_tex_params[15];
 };
 Texture2D<float4> arg_0 : register(t0, space1);
 SamplerState arg_1 : register(s1, space1);
@@ -34,20 +39,14 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 
 float4 textureSampleExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, SamplerState smp, float2 coord, ExternalTextureParams params) {
   float2 modifiedCoords = mul(float3(coord, 1.0f), params.coordTransformationMatrix);
-  uint3 tint_tmp;
-  plane0.GetDimensions(0, tint_tmp.x, tint_tmp.y, tint_tmp.z);
-  float2 plane0_dims = float2(tint_tmp.xy);
-  float2 plane0_half_texel = ((0.5f).xx / plane0_dims);
-  float2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
-  uint3 tint_tmp_1;
-  plane1.GetDimensions(0, tint_tmp_1.x, tint_tmp_1.y, tint_tmp_1.z);
-  float2 plane1_dims = float2(tint_tmp_1.xy);
-  float2 plane1_half_texel = ((0.5f).xx / plane1_dims);
-  float2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
+  float2 plane0_half_texel = ((0.5f).xx / float2(params.plane0Size));
+  float2 plane0_clamped = clamp(modifiedCoords, (params.visibleRectMin + plane0_half_texel), (params.visibleRectMax - plane0_half_texel));
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
     color = plane0.SampleLevel(smp, plane0_clamped, 0.0f).rgba;
   } else {
+    float2 plane1_half_texel = ((0.5f).xx / float2(params.plane1Size));
+    float2 plane1_clamped = clamp(modifiedCoords, (params.visibleRectMin + plane1_half_texel), (params.visibleRectMax - plane1_half_texel));
     color = float4(mul(params.yuvToRgbConversionMatrix, float4(plane0.SampleLevel(smp, plane0_clamped, 0.0f).r, plane1.SampleLevel(smp, plane1_clamped, 0.0f).rg, 1.0f)), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
@@ -98,7 +97,17 @@ float3x2 ext_tex_params_load_8(uint offset) {
 ExternalTextureParams ext_tex_params_load(uint offset) {
   const uint scalar_offset_17 = ((offset + 0u)) / 4;
   const uint scalar_offset_18 = ((offset + 4u)) / 4;
-  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
+  const uint scalar_offset_19 = ((offset + 200u)) / 4;
+  uint4 ubo_load_3 = ext_tex_params[scalar_offset_19 / 4];
+  const uint scalar_offset_20 = ((offset + 208u)) / 4;
+  uint4 ubo_load_4 = ext_tex_params[scalar_offset_20 / 4];
+  const uint scalar_offset_21 = ((offset + 216u)) / 4;
+  uint4 ubo_load_5 = ext_tex_params[scalar_offset_21 / 4];
+  const uint scalar_offset_22 = ((offset + 224u)) / 4;
+  uint4 ubo_load_6 = ext_tex_params[scalar_offset_22 / 4];
+  const uint scalar_offset_23 = ((offset + 232u)) / 4;
+  uint4 ubo_load_7 = ext_tex_params[scalar_offset_23 / 4];
+  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u)), asfloat(((scalar_offset_19 & 2) ? ubo_load_3.zw : ubo_load_3.xy)), asfloat(((scalar_offset_20 & 2) ? ubo_load_4.zw : ubo_load_4.xy)), ((scalar_offset_21 & 2) ? ubo_load_5.zw : ubo_load_5.xy), ((scalar_offset_22 & 2) ? ubo_load_6.zw : ubo_load_6.xy), ((scalar_offset_23 & 2) ? ubo_load_7.zw : ubo_load_7.xy)};
   return tint_symbol_2;
 }
 

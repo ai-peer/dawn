@@ -1,3 +1,11 @@
+int2 tint_ftoi(float2 v) {
+  return ((v < (2147483520.0f).xx) ? ((v < (-2147483648.0f).xx) ? (-2147483648).xx : int2(v)) : (2147483647).xx);
+}
+
+int2 tint_clamp(int2 e, int2 low, int2 high) {
+  return min(max(e, low), high);
+}
+
 struct GammaTransferParams {
   float G;
   float A;
@@ -16,11 +24,16 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float2 visibleRectMin;
+  float2 visibleRectMax;
+  uint2 plane0Size;
+  uint2 plane1Size;
+  uint2 displayVisibleSize;
 };
 
 Texture2D<float4> ext_tex_plane_1 : register(t1, space1);
 cbuffer cbuffer_ext_tex_params : register(b2, space1) {
-  uint4 ext_tex_params[13];
+  uint4 ext_tex_params[15];
 };
 Texture2D<float4> arg_0 : register(t0, space1);
 
@@ -32,12 +45,18 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, uint2 coord, ExternalTextureParams params) {
-  uint2 coord1 = (coord >> (1u).xx);
+  float3x3 toTexel = float3x3(float3(float(params.plane0Size.x), 0.0f, 0.0f), float3(0.0f, float(params.plane0Size.y), 0.0f), float3(0.0f, 0.0f, 1.0f));
+  float3x3 toNormalize = float3x3(float3((1.0f / float(params.displayVisibleSize.x)), 0.0f, 0.0f), float3(0.0f, (1.0f / float(params.displayVisibleSize.y)), 0.0f), float3(0.0f, 0.0f, 1.0f));
+  float3x3 loadTransformationMatrix = mul(mul(float3x3(float3(params.coordTransformationMatrix[0], 0.0f), float3(params.coordTransformationMatrix[1], 0.0f), float3(params.coordTransformationMatrix[2], 1.0f)), toTexel), toNormalize);
+  float3 modifiedCoords = mul(float3(float2(coord), 1.0f), loadTransformationMatrix);
+  int2 plane0_clamped = tint_clamp(tint_ftoi(modifiedCoords.xy), tint_ftoi((params.visibleRectMin * float2(params.plane0Size))), (tint_ftoi((params.visibleRectMax * float2(params.plane0Size))) - (1).xx));
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = plane0.Load(uint3(coord, uint(0))).rgba;
+    color = plane0.Load(int3(plane0_clamped, 0)).rgba;
   } else {
-    color = float4(mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(uint3(coord, uint(0))).r, plane1.Load(uint3(coord1, uint(0))).rg, 1.0f)), 1.0f);
+    int2 coord1 = tint_ftoi((float2(plane0_clamped) * (float2(params.plane1Size) / float2(params.plane0Size))));
+    int2 plane1_clamped = tint_clamp(int2(coord1), tint_ftoi((params.visibleRectMin * float2(params.plane1Size))), (tint_ftoi((params.visibleRectMax * float2(params.plane1Size))) - (1).xx));
+    color = float4(mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(int3(plane0_clamped, 0)).r, plane1.Load(int3(plane1_clamped, 0)).rg, 1.0f)), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = float4(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -87,7 +106,17 @@ float3x2 ext_tex_params_load_8(uint offset) {
 ExternalTextureParams ext_tex_params_load(uint offset) {
   const uint scalar_offset_17 = ((offset + 0u)) / 4;
   const uint scalar_offset_18 = ((offset + 4u)) / 4;
-  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
+  const uint scalar_offset_19 = ((offset + 200u)) / 4;
+  uint4 ubo_load_3 = ext_tex_params[scalar_offset_19 / 4];
+  const uint scalar_offset_20 = ((offset + 208u)) / 4;
+  uint4 ubo_load_4 = ext_tex_params[scalar_offset_20 / 4];
+  const uint scalar_offset_21 = ((offset + 216u)) / 4;
+  uint4 ubo_load_5 = ext_tex_params[scalar_offset_21 / 4];
+  const uint scalar_offset_22 = ((offset + 224u)) / 4;
+  uint4 ubo_load_6 = ext_tex_params[scalar_offset_22 / 4];
+  const uint scalar_offset_23 = ((offset + 232u)) / 4;
+  uint4 ubo_load_7 = ext_tex_params[scalar_offset_23 / 4];
+  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u)), asfloat(((scalar_offset_19 & 2) ? ubo_load_3.zw : ubo_load_3.xy)), asfloat(((scalar_offset_20 & 2) ? ubo_load_4.zw : ubo_load_4.xy)), ((scalar_offset_21 & 2) ? ubo_load_5.zw : ubo_load_5.xy), ((scalar_offset_22 & 2) ? ubo_load_6.zw : ubo_load_6.xy), ((scalar_offset_23 & 2) ? ubo_load_7.zw : ubo_load_7.xy)};
   return tint_symbol_2;
 }
 
