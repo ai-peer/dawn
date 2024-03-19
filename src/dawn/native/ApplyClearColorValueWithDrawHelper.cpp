@@ -27,6 +27,7 @@
 
 #include "dawn/native/ApplyClearColorValueWithDrawHelper.h"
 
+#include <iostream>
 #include <limits>
 #include <string>
 #include <utility>
@@ -72,7 +73,7 @@ const char* GetTextureComponentTypeString(DeviceBase* device, wgpu::TextureForma
         case TextureComponentType::Uint:
             return "u32";
         case TextureComponentType::Float:
-            break;
+            return "f32";
     }
     DAWN_UNREACHABLE();
 }
@@ -117,6 +118,8 @@ fn main() -> OutputColor {
                          << R"(
 return outputColor;
 })";
+
+    std::cerr << "EEEE ======================= \n" << fragmentShaderStream.str() << std::endl;
 
     return fragmentShaderStream.str();
 }
@@ -240,8 +243,9 @@ ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
 }
 
 // Helper functions for applying big integer clear values with draw
-bool ShouldApplyClearBigIntegerColorValueWithDraw(
-    const RenderPassColorAttachment& colorAttachmentInfo) {
+bool ShouldApplyClearWithDraw(const RenderPassColorAttachment& colorAttachmentInfo,
+                              bool clearWithDraw,
+                              bool clearWithDrawBigInt) {
     if (colorAttachmentInfo.view == nullptr) {
         return false;
     }
@@ -250,6 +254,11 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
         return false;
     }
 
+    if (clearWithDraw) {
+        return true;
+    }
+
+    DAWN_ASSERT(clearWithDrawBigInt);
     // We should only apply this workaround on 32-bit signed and unsigned integer formats.
     const Format& format = colorAttachmentInfo.view->GetFormat();
     switch (format.format) {
@@ -301,7 +310,9 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
 }
 
 KeyOfApplyClearColorValueWithDrawPipelines GetKeyOfApplyClearColorValueWithDrawPipelines(
-    const RenderPassDescriptor* renderPassDescriptor) {
+    const RenderPassDescriptor* renderPassDescriptor,
+    bool clearWithDraw,
+    bool clearWithDrawForBigInt) {
     KeyOfApplyClearColorValueWithDrawPipelines key;
     key.colorAttachmentCount = renderPassDescriptor->colorAttachmentCount;
 
@@ -314,7 +325,7 @@ KeyOfApplyClearColorValueWithDrawPipelines GetKeyOfApplyClearColorValueWithDrawP
             key.colorTargetFormats[i] = attachment.view->GetFormat().format;
         }
 
-        if (ShouldApplyClearBigIntegerColorValueWithDraw(attachment)) {
+        if (ShouldApplyClearWithDraw(attachment, clearWithDraw, clearWithDrawForBigInt)) {
             key.colorTargetsToApplyClearColorValue.set(i);
         }
     }
@@ -357,16 +368,16 @@ bool KeyOfApplyClearColorValueWithDrawPipelinesEqualityFunc::operator()(
     return true;
 }
 
-bool ShouldApplyClearBigIntegerColorValueWithDraw(
-    const DeviceBase* device,
-    const RenderPassDescriptor* renderPassDescriptor) {
-    if (!device->IsToggleEnabled(Toggle::ApplyClearBigIntegerColorValueWithDraw)) {
+bool ShouldApplyClearWithDraw(const RenderPassDescriptor* renderPassDescriptor,
+                              bool clearWithDraw,
+                              bool clearWithDrawForBigInt) {
+    if (!clearWithDraw && !clearWithDrawForBigInt) {
         return false;
     }
 
     for (uint32_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
-        if (ShouldApplyClearBigIntegerColorValueWithDraw(
-                renderPassDescriptor->colorAttachments[i])) {
+        if (ShouldApplyClearWithDraw(renderPassDescriptor->colorAttachments[i], clearWithDraw,
+                                     clearWithDrawForBigInt)) {
             return true;
         }
     }
@@ -374,13 +385,20 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
     return false;
 }
 
-MaybeError ApplyClearBigIntegerColorValueWithDraw(
-    RenderPassEncoder* renderPassEncoder,
-    const RenderPassDescriptor* renderPassDescriptor) {
+MaybeError MaybeApplyClearWithDraw(RenderPassEncoder* renderPassEncoder,
+                                   const RenderPassDescriptor* renderPassDescriptor) {
     DeviceBase* device = renderPassEncoder->GetDevice();
 
-    KeyOfApplyClearColorValueWithDrawPipelines key =
-        GetKeyOfApplyClearColorValueWithDrawPipelines(renderPassDescriptor);
+    bool clearWithDraw = device->IsToggleEnabled(Toggle::PerformColorClearWithDraw);
+    bool clearWithDrawForBigInt =
+        device->IsToggleEnabled(Toggle::ApplyClearBigIntegerColorValueWithDraw);
+
+    if (!ShouldApplyClearWithDraw(renderPassDescriptor, clearWithDraw, clearWithDrawForBigInt)) {
+        return {};
+    }
+
+    KeyOfApplyClearColorValueWithDrawPipelines key = GetKeyOfApplyClearColorValueWithDrawPipelines(
+        renderPassDescriptor, clearWithDraw, clearWithDrawForBigInt);
 
     RenderPipelineBase* pipeline = nullptr;
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateApplyClearValueWithDrawPipeline(device, key));

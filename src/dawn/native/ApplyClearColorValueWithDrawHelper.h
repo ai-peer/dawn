@@ -60,11 +60,8 @@ using ApplyClearColorValueWithDrawPipelinesCache =
                         KeyOfApplyClearColorValueWithDrawPipelinesHashFunc,
                         KeyOfApplyClearColorValueWithDrawPipelinesEqualityFunc>;
 
-bool ShouldApplyClearBigIntegerColorValueWithDraw(const DeviceBase* device,
-                                                  const RenderPassDescriptor* renderPassDescriptor);
-
-MaybeError ApplyClearBigIntegerColorValueWithDraw(RenderPassEncoder* renderPassEncoder,
-                                                  const RenderPassDescriptor* renderPassDescriptor);
+MaybeError MaybeApplyClearWithDraw(RenderPassEncoder* renderPassEncoder,
+                                   const RenderPassDescriptor* renderPassDescriptor);
 
 }  // namespace dawn::native
 
