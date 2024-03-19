@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2db0a98a_d23d2051",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T11:55:12Z",
+      "side": 1,
+      "message": "I wasn\u0027t going to worry about those with the first pass at this, do you think they\u0027d be a significant fraction of the expressions? The change would be above in `Replace` if there is no `Replacement` then walk the expression looking for other replacements.",
+      "parentUuid": "caea82f7_4cf16eb6",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "073c65c2_a92e7bdd",
         "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
         "patchSetId": 7
@@ -54,6 +78,24 @@
       "writtenOn": "2024-03-18T21:23:06Z",
       "side": 1,
       "message": "Probably need to recurse into the LHS expression.",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129c40f7_c374d2a1",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T11:55:12Z",
+      "side": 1,
+      "message": "Ah, I was thinking it wasn\u0027t possible to have a const on the LHS, but now realizing the IndexAccessExpression could have a const inside it and it could be on the LHS. Will update.",
+      "parentUuid": "073c65c2_a92e7bdd",
       "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
