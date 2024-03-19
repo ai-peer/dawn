@@ -174,6 +174,24 @@
       "parentUuid": "6378d20f_9fa2e74b",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e5386ea_9a5585f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-19T03:18:04Z",
+      "side": 1,
+      "message": "I\u0027ve updated the URL in the latest patch set. PTAL, thanks!",
+      "parentUuid": "5b1d0733_b1c87a1b",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

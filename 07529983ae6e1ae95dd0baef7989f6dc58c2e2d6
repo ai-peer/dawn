@@ -501,6 +501,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d85251d2_334e60ae",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-03-19T03:18:04Z",
+      "side": 1,
+      "message": "I have to use `mutate` to achieve this as `GetOrLoadIntelExtension()` is not a `const` function.\n\nPTAL, thanks!",
+      "parentUuid": "cba00eb1_9001b5e0",
+      "revId": "07529983ae6e1ae95dd0baef7989f6dc58c2e2d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb7fdc7_37430a5d",
         "filename": "third_party/CMakeLists.txt",
         "patchSetId": 21
