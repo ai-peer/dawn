@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38cf474_90c7c6d0",
+        "filename": "src/tint/lang/wgsl/ls/hover.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-19T14:17:40Z",
+      "side": 1,
+      "message": "nit: should this use SwitchMustMatchCase?",
+      "revId": "750cbe021db93df8c7886f603f25a8fbd8a4ed59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e3de947_6aabb5b3",
+        "filename": "src/tint/lang/wgsl/ls/hover_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-19T14:17:40Z",
+      "side": 1,
+      "message": "nit: usability question. Should the storage class (and access modes for storage buffer) be part of this hover advice?\nFor buffers, should binding info be part of it too?\n\nHappy to defer for later, but wanted to suggest it.",
+      "range": {
+        "startLine": 109,
+        "startChar": 55,
+        "endLine": 109,
+        "endChar": 62
+      },
+      "revId": "750cbe021db93df8c7886f603f25a8fbd8a4ed59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
