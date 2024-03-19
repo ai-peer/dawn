@@ -77,7 +77,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-15 06:17:47PM
+# Last rolled: 2024-03-19 08:36:23AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -228,7 +228,6 @@ crbug.com/dawn/2327 [ intel-0x3e9b mac ] webgpu:shader,execution,zero_init:compu
 crbug.com/tint/2200 [ nvidia-0x2184 target-cpu-64 webgpu-adapter-default webgpu-dxc-enabled win10 ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="private";workgroupSize=[1,1,1];batch__=22 [ Failure ]
 crbug.com/tint/2200 [ nvidia-0x2184 target-cpu-64 webgpu-adapter-default webgpu-dxc-enabled win10 ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="private";workgroupSize=[1,1,1];batch__=25 [ RetryOnFailure ]
 crbug.com/tint/2200 [ nvidia-0x2184 target-cpu-64 webgpu-adapter-default webgpu-dxc-enabled win10 ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="private";workgroupSize=[1,1,1];batch__=6 [ RetryOnFailure ]
-
 
 ################################################################################
 # D3D12 create command queue failed with DXGI_ERROR_DEVICE_REMOVED. Skipped because these tests likely cause downstream flakes.
@@ -1741,16 +1740,16 @@ crbug.com/dawn/0000 [ amd-0x67ef dawn-backend-validation target-cpu-64 ventura w
 crbug.com/dawn/0000 [ amd-0x67ef dawn-no-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,call,builtin,unpack2x16snorm:* [ Failure ]
 crbug.com/dawn/0000 [ amd-0x67ef dawn-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="bool";wgsize=[1,128] [ Failure ]
 crbug.com/dawn/0000 [ amd-0x67ef dawn-no-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,call,builtin,workgroupUniformLoad:types:type="bool";wgsize=[1,128] [ Failure ]
-crbug.com/dawn/0000 [ amd-0x67ef dawn-backend-validation target-cpu-64 sonoma webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
-crbug.com/dawn/0000 [ amd-0x67ef dawn-no-backend-validation target-cpu-64 sonoma webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
+crbug.com/dawn/0000 [ amd-0x67ef dawn-backend-validation sonoma target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
+crbug.com/dawn/0000 [ amd-0x67ef dawn-no-backend-validation sonoma target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ amd-0x67ef dawn-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ amd-0x67ef dawn-no-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ android-t arm dawn-backend-validation target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ android-t arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ android-u arm dawn-backend-validation target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ android-u arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
-crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation target-cpu-64 sonoma webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
-crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-no-backend-validation target-cpu-64 sonoma webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
+crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation sonoma target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
+crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-no-backend-validation sonoma target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-no-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x3e9b sonoma target-cpu-64 webgpu-adapter-default ] webgpu:shader,execution,expression,unary,address_of_and_indirection:* [ Failure ]
