@@ -265,9 +265,28 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         0, 1, 0,  //
     };
 
+    mat2x3 loadTransformMatrix = {
+        1, 0, 0, 0, 1, 0,
+    };
+
+    Extent3D frameSize = descriptor->plane0->GetSingleSubresourceVirtualSize();
+    float originToCenterOffsetX = static_cast<float>(frameSize.width / 2);
+    float originToCenterOffsetY = static_cast<float>(frameSize.height / 2);
+
     // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
     // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, -0.5, -0.5);
+
+    // Transform display video frame origin from top-left to center
+    if (descriptor->rotation == wgpu::ExternalTextureRotation::Rotate90Degrees ||
+        descriptor->rotation == wgpu::ExternalTextureRotation::Rotate270Degrees) {
+        loadTransformMatrix =
+            Translate(loadTransformMatrix, -originToCenterOffsetY, -originToCenterOffsetX);
+    } else {
+        loadTransformMatrix =
+            Translate(loadTransformMatrix, static_cast<float>(originToCenterOffsetX) * -1.0,
+                      static_cast<float>(originToCenterOffsetY) * -1.0);
+    }
 
     // Texture applies rotation first and do mirrored(horizontal flip) next.
     // Do reverse order here to mapping final uv coordinate to origin texture.
@@ -278,6 +297,7 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     // mirrored issue by delegate flipY operation to mirrored and remove flipY attribute in future.
     if (descriptor->flipY || descriptor->mirrored) {
         coordTransformMatrix = Scale(coordTransformMatrix, -1, 1);
+        loadTransformMatrix = Scale(loadTransformMatrix, -1, 1);
     }
 
     // Apply rotations as needed.
@@ -288,17 +308,26 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
             coordTransformMatrix = Mul(mat2x3{0, +1, 0,   // x' = y
                                               -1, 0, 0},  // y' = -x
                                        coordTransformMatrix);
+            loadTransformMatrix = Mul(mat2x3{0, +1, 0,   // x' = y
+                                             -1, 0, 0},  // y' = -x
+                                      loadTransformMatrix);
             break;
         case wgpu::ExternalTextureRotation::Rotate180Degrees:
             coordTransformMatrix = Mul(mat2x3{-1, 0, 0,   // x' = -x
                                               0, -1, 0},  // y' = -y
                                        coordTransformMatrix);
+            loadTransformMatrix = Mul(mat2x3{-1, 0, 0,   // x' = -x
+                                             0, -1, 0},  // y' = -y
+                                      loadTransformMatrix);
             break;
         case wgpu::ExternalTextureRotation::Rotate270Degrees:
 
             coordTransformMatrix = Mul(mat2x3{0, -1, 0,   // x' = -y
                                               +1, 0, 0},  // y' = x
                                        coordTransformMatrix);
+            loadTransformMatrix = Mul(mat2x3{0, -1, 0,   // x' = -y
+                                             +1, 0, 0},  // y' = x
+                                      loadTransformMatrix);
             break;
     }
 
@@ -306,23 +335,22 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     // After translation, coordinates range from [0 .. 1] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, 0.5, 0.5);
 
+    loadTransformMatrix =
+        Translate(loadTransformMatrix, originToCenterOffsetX, originToCenterOffsetY);
+
     // Calculate scale factors and offsets from the specified visibleSize.
-    DAWN_ASSERT(descriptor->visibleSize.width > 0);
-    DAWN_ASSERT(descriptor->visibleSize.height > 0);
-    uint32_t frameWidth = descriptor->plane0->GetSingleSubresourceVirtualSize().width;
-    uint32_t frameHeight = descriptor->plane0->GetSingleSubresourceVirtualSize().height;
-    float xScale =
-        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(frameWidth);
-    float yScale =
-        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(frameHeight);
-    float xOffset =
-        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(frameWidth);
-    float yOffset =
-        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(frameHeight);
+    DAWN_ASSERT(mVisibleSize.width > 0);
+    DAWN_ASSERT(mVisibleSize.height > 0);
+    float xScale = static_cast<float>(mVisibleSize.width) / static_cast<float>(frameSize.width);
+    float yScale = static_cast<float>(mVisibleSize.height) / static_cast<float>(frameSize.height);
+    float xOffset = static_cast<float>(mVisibleOrigin.x) / static_cast<float>(frameSize.width);
+    float yOffset = static_cast<float>(mVisibleOrigin.y) / static_cast<float>(frameSize.height);
 
     // Finally, scale and translate based on the visible rect. This applies cropping.
     coordTransformMatrix = Scale(coordTransformMatrix, xScale, yScale);
     coordTransformMatrix = Translate(coordTransformMatrix, xOffset, yOffset);
+
+    loadTransformMatrix = Translate(loadTransformMatrix, mVisibleOrigin.x, mVisibleOrigin.y);
 
     // Transpose the mat2x3 into column vectors for use by WGSL.
     params.coordTransformMatrix[0] = coordTransformMatrix[0];
@@ -331,6 +359,19 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     params.coordTransformMatrix[3] = coordTransformMatrix[4];
     params.coordTransformMatrix[4] = coordTransformMatrix[2];
     params.coordTransformMatrix[5] = coordTransformMatrix[5];
+
+    params.loadTransformMatrix[0] = loadTransformMatrix[0];
+    params.loadTransformMatrix[1] = loadTransformMatrix[3];
+    params.loadTransformMatrix[2] = loadTransformMatrix[1];
+    params.loadTransformMatrix[3] = loadTransformMatrix[4];
+    params.loadTransformMatrix[4] = loadTransformMatrix[2];
+    params.loadTransformMatrix[5] = loadTransformMatrix[5];
+
+    // Pass visible origin and visible size info for clamping.
+    params.minVisibleCoord[0] = mVisibleOrigin.x;
+    params.minVisibleCoord[1] = mVisibleOrigin.y;
+    params.maxVisibleCoord[0] = mVisibleOrigin.x + mVisibleSize.width;
+    params.maxVisibleCoord[1] = mVisibleOrigin.y + mVisibleSize.height;
 
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));

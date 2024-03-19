@@ -295,6 +295,9 @@ struct MultiplanarExternalTexture::State {
             b.Member("gammaEncodeParams", b.ty("GammaTransferParams")),
             b.Member("gamutConversionMatrix", b.ty.mat3x3<f32>()),
             b.Member("coordTransformationMatrix", b.ty.mat3x2<f32>()),
+            b.Member("loadTransformMatrix", b.ty.mat3x2<f32>()),
+            b.Member("minVisibleCoord", b.ty.vec2<u32>()),
+            b.Member("maxVisibleCoord", b.ty.vec2<u32>()),
         };
 
         params_struct_sym = b.Symbols().New("ExternalTextureParams");
@@ -352,7 +355,6 @@ struct MultiplanarExternalTexture::State {
                 stmts.Push(b.Decl(b.Let(
                     "modifiedCoords", b.Mul(b.MemberAccessor("params", "coordTransformationMatrix"),
                                             b.Call<vec3<f32>>("coord", 1_a)))));
-
                 stmts.Push(b.Decl(
                     b.Let("plane0_dims",
                           b.Call(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane0", 0_a)))));
@@ -379,12 +381,21 @@ struct MultiplanarExternalTexture::State {
                 plane_1_call = b.Call("textureSampleLevel", "plane1", "smp", "plane1_clamped", 0_a);
                 break;
             case wgsl::BuiltinFn::kTextureLoad:
+                // Apply transforms to textureLoad for ExternalTexture. Change coords to normalized
+                // coords first, apply the transform and then transform back to exact coords.
+                stmts.Push(b.Decl(b.Let(
+                    "modifiedCoords", b.Mul(b.MemberAccessor("params", "loadTransformMatrix"),
+                                            b.Call<vec3<f32>>(b.Call<vec2<f32>>("coord"), 1_a)))));
+                stmts.Push(b.Decl(
+                    b.Let("clampedCoord0", b.Call("clamp", b.Call<vec2<u32>>("modifiedCoords"),
+                                                  b.MemberAccessor("params", "minVisibleCoord"),
+                                                  b.MemberAccessor("params", "maxVisibleCoord")))));
                 // textureLoad(plane0, coord, 0);
-                single_plane_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                single_plane_call = b.Call("textureLoad", "plane0", "clampedCoord0", 0_a);
                 // textureLoad(plane0, coord, 0);
-                plane_0_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                plane_0_call = b.Call("textureLoad", "plane0", "clampedCoord0", 0_a);
                 // let coord1 = coord >> 1;
-                stmts.Push(b.Decl(b.Let("coord1", b.Shr("coord", b.Call<vec2<u32>>(1_a)))));
+                stmts.Push(b.Decl(b.Let("coord1", b.Shr("clampedCoord0", b.Call<vec2<u32>>(1_a)))));
                 // textureLoad(plane1, coord1, 0);
                 plane_1_call = b.Call("textureLoad", "plane1", "coord1", 0_a);
                 break;
