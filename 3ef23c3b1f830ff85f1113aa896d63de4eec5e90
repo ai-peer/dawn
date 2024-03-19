@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ebbd88_81411240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2024-03-19T18:34:33Z",
+      "side": 1,
+      "message": "Links to the github mirror lgtm.",
+      "revId": "3ef23c3b1f830ff85f1113aa896d63de4eec5e90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
