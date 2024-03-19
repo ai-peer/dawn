@@ -265,6 +265,13 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         0, 1, 0,  //
     };
 
+    Extent3D frameSize = descriptor->plane0->GetSingleSubresourceVirtualSize();
+    Extent3D plane1Size = {1, 1, 1};
+
+    if (params.numPlanes == 2) {
+        plane1Size = descriptor->plane1->GetSingleSubresourceVirtualSize();
+    }
+
     // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
     // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, -0.5, -0.5);
@@ -307,18 +314,12 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     coordTransformMatrix = Translate(coordTransformMatrix, 0.5, 0.5);
 
     // Calculate scale factors and offsets from the specified visibleSize.
-    DAWN_ASSERT(descriptor->visibleSize.width > 0);
-    DAWN_ASSERT(descriptor->visibleSize.height > 0);
-    uint32_t frameWidth = descriptor->plane0->GetSingleSubresourceVirtualSize().width;
-    uint32_t frameHeight = descriptor->plane0->GetSingleSubresourceVirtualSize().height;
-    float xScale =
-        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(frameWidth);
-    float yScale =
-        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(frameHeight);
-    float xOffset =
-        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(frameWidth);
-    float yOffset =
-        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(frameHeight);
+    DAWN_ASSERT(mVisibleSize.width > 0);
+    DAWN_ASSERT(mVisibleSize.height > 0);
+    float xScale = static_cast<float>(mVisibleSize.width) / static_cast<float>(frameSize.width);
+    float yScale = static_cast<float>(mVisibleSize.height) / static_cast<float>(frameSize.height);
+    float xOffset = static_cast<float>(mVisibleOrigin.x) / static_cast<float>(frameSize.width);
+    float yOffset = static_cast<float>(mVisibleOrigin.y) / static_cast<float>(frameSize.height);
 
     // Finally, scale and translate based on the visible rect. This applies cropping.
     coordTransformMatrix = Scale(coordTransformMatrix, xScale, yScale);
@@ -331,6 +332,16 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     params.coordTransformMatrix[3] = coordTransformMatrix[4];
     params.coordTransformMatrix[4] = coordTransformMatrix[2];
     params.coordTransformMatrix[5] = coordTransformMatrix[5];
+
+    // Pass visible origin and visible size info for clamping.
+    params.visibleOrigin[0] = mVisibleOrigin.x;
+    params.visibleOrigin[1] = mVisibleOrigin.y;
+    params.visibleSize[0] = mVisibleSize.width;
+    params.visibleSize[1] = mVisibleSize.height;
+    params.plane0Size[0] = frameSize.width;
+    params.plane0Size[1] = frameSize.height;
+    params.plane1Size[0] = plane1Size.width;
+    params.plane1Size[1] = plane1Size.height;
 
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 25
+; Bound: 26
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
@@ -29,6 +29,10 @@
                OpMemberName %ExternalTextureParams_std140 6 "coordTransformationMatrix_0"
                OpMemberName %ExternalTextureParams_std140 7 "coordTransformationMatrix_1"
                OpMemberName %ExternalTextureParams_std140 8 "coordTransformationMatrix_2"
+               OpMemberName %ExternalTextureParams_std140 9 "visibleOrigin"
+               OpMemberName %ExternalTextureParams_std140 10 "visibleSize"
+               OpMemberName %ExternalTextureParams_std140 11 "plane0Size"
+               OpMemberName %ExternalTextureParams_std140 12 "plane1Size"
                OpName %ext_tex_params "ext_tex_params"
                OpName %Sampler "Sampler"
                OpName %randomTexture "randomTexture"
@@ -59,6 +63,10 @@
                OpMemberDecorate %ExternalTextureParams_std140 6 Offset 176
                OpMemberDecorate %ExternalTextureParams_std140 7 Offset 184
                OpMemberDecorate %ExternalTextureParams_std140 8 Offset 192
+               OpMemberDecorate %ExternalTextureParams_std140 9 Offset 200
+               OpMemberDecorate %ExternalTextureParams_std140 10 Offset 208
+               OpMemberDecorate %ExternalTextureParams_std140 11 Offset 216
+               OpMemberDecorate %ExternalTextureParams_std140 12 Offset 224
                OpDecorate %ext_tex_params NonWritable
                OpDecorate %ext_tex_params DescriptorSet 0
                OpDecorate %ext_tex_params Binding 4
@@ -79,18 +87,19 @@
     %v3float = OpTypeVector %float 3
 %mat3v3float = OpTypeMatrix %v3float 3
     %v2float = OpTypeVector %float 2
-%ExternalTextureParams_std140 = OpTypeStruct %uint %uint %mat3v4float %GammaTransferParams %GammaTransferParams %mat3v3float %v2float %v2float %v2float
+     %v2uint = OpTypeVector %uint 2
+%ExternalTextureParams_std140 = OpTypeStruct %uint %uint %mat3v4float %GammaTransferParams %GammaTransferParams %mat3v3float %v2float %v2float %v2float %v2uint %v2uint %v2uint %v2uint
 %ext_tex_params_block_std140 = OpTypeStruct %ExternalTextureParams_std140
 %_ptr_Uniform_ext_tex_params_block_std140 = OpTypePointer Uniform %ext_tex_params_block_std140
 %ext_tex_params = OpVariable %_ptr_Uniform_ext_tex_params_block_std140 Uniform
-         %18 = OpTypeSampler
-%_ptr_UniformConstant_18 = OpTypePointer UniformConstant %18
-    %Sampler = OpVariable %_ptr_UniformConstant_18 UniformConstant
+         %19 = OpTypeSampler
+%_ptr_UniformConstant_19 = OpTypePointer UniformConstant %19
+    %Sampler = OpVariable %_ptr_UniformConstant_19 UniformConstant
 %randomTexture = OpVariable %_ptr_UniformConstant_3 UniformConstant
 %depthTexture = OpVariable %_ptr_UniformConstant_3 UniformConstant
        %void = OpTypeVoid
-         %21 = OpTypeFunction %void
-%unused_entry_point = OpFunction %void None %21
-         %24 = OpLabel
+         %22 = OpTypeFunction %void
+%unused_entry_point = OpFunction %void None %22
+         %25 = OpLabel
                OpReturn
                OpFunctionEnd

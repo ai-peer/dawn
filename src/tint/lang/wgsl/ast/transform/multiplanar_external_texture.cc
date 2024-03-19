@@ -295,7 +295,10 @@ struct MultiplanarExternalTexture::State {
             b.Member("gammaEncodeParams", b.ty("GammaTransferParams")),
             b.Member("gamutConversionMatrix", b.ty.mat3x3<f32>()),
             b.Member("coordTransformationMatrix", b.ty.mat3x2<f32>()),
-        };
+            b.Member("visibleOrigin", b.ty.vec2<u32>()),
+            b.Member("visibleSize", b.ty.vec2<u32>()),
+            b.Member("plane0Size", b.ty.vec2<u32>()),
+            b.Member("plane1Size", b.ty.vec2<u32>())};
 
         params_struct_sym = b.Symbols().New("ExternalTextureParams");
 
@@ -349,23 +352,27 @@ struct MultiplanarExternalTexture::State {
         const CallExpression* plane_1_call = nullptr;
         switch (call_type) {
             case wgsl::BuiltinFn::kTextureSampleBaseClampToEdge:
-                stmts.Push(b.Decl(b.Let(
+                stmts.Push(b.Decl(b.Var(
                     "modifiedCoords", b.Mul(b.MemberAccessor("params", "coordTransformationMatrix"),
                                             b.Call<vec3<f32>>("coord", 1_a)))));
-
+                stmts.Push(b.Decl(b.Let(
+                    "scale", b.Div(b.Call<vec2<f32>>(b.MemberAccessor("params", "visibleSize")),
+                                   b.Call<vec2<f32>>(b.MemberAccessor("params", "plane0Size"))))));
+                stmts.Push(b.Decl(b.Let(
+                    "offset", b.Div(b.Call<vec2<f32>>(b.MemberAccessor("params", "visibleOrigin")),
+                                    b.Call<vec2<f32>>(b.MemberAccessor("params", "plane0Size"))))));
+                b.Assign("modifiedCoords", b.Mul("modifiedCoords", "scale"));
+                b.Assign("modifiedCoords", b.Add("modifiedCoords", "offset"));
                 stmts.Push(b.Decl(
-                    b.Let("plane0_dims",
-                          b.Call(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane0", 0_a)))));
-                stmts.Push(b.Decl(
-                    b.Let("plane0_half_texel", b.Div(b.Call<vec2<f32>>(0.5_a), "plane0_dims"))));
+                    b.Let("plane0_half_texel",
+                          b.Div(b.Call<vec2<f32>>(0.5_a),
+                                b.Call<vec2<f32>>(b.MemberAccessor("params", "plane0Size"))))));
                 stmts.Push(b.Decl(
                     b.Let("plane0_clamped", b.Call("clamp", "modifiedCoords", "plane0_half_texel",
                                                    b.Sub(1_a, "plane0_half_texel")))));
-                stmts.Push(b.Decl(
-                    b.Let("plane1_dims",
-                          b.Call(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane1", 0_a)))));
-                stmts.Push(b.Decl(
-                    b.Let("plane1_half_texel", b.Div(b.Call<vec2<f32>>(0.5_a), "plane1_dims"))));
+                stmts.Push(b.Decl(b.Let(
+                    "plane1_half_texel",
+                    b.Div(b.Call<vec2<f32>>(0.5_a), b.MemberAccessor("params", "plane1Size")))));
                 stmts.Push(b.Decl(
                     b.Let("plane1_clamped", b.Call("clamp", "modifiedCoords", "plane1_half_texel",
                                                    b.Sub(1_a, "plane1_half_texel")))));
@@ -379,12 +386,43 @@ struct MultiplanarExternalTexture::State {
                 plane_1_call = b.Call("textureSampleLevel", "plane1", "smp", "plane1_clamped", 0_a);
                 break;
             case wgsl::BuiltinFn::kTextureLoad:
+                // Transform for textureLoad is applied on exact coords. Modify
+                // coordTransformationMatrix to fit this.
+                stmts.Push(b.Decl(b.Let(
+                    "loadTransformationMatrix",
+                    b.Call<mat3x2<f32>>(
+                        b.IndexAccessor(b.MemberAccessor("params", "coordTransformationMatrix"),
+                                        0_i),
+                        b.IndexAccessor(b.MemberAccessor("params", "coordTransformationMatrix"),
+                                        1_i),
+                        b.Mul(b.IndexAccessor(
+                                  b.MemberAccessor("params", "coordTransformationMatrix"), 2_i),
+                              b.Call<vec2<f32>>(b.MemberAccessor("params", "plane0Size")))))));
+
+                // Apply transforms to textureLoad for ExternalTexture. This maps textureLoad
+                // coords, which is display size coords, to the real frame coords, which is coded
+                // size coords.
+                stmts.Push(b.Decl(b.Var(
+                    "modifiedCoords", b.Mul("loadTransformationMatrix",
+                                            b.Call<vec3<f32>>(b.Call<vec2<f32>>("coord"), 1_a)))));
+
+                // Do visible rect related ops here because it is defined based on coded size and it
+                // only works for coded size coords.
+                stmts.Push(b.Assign("modifiedCoords",
+                                    b.Add("modifiedCoords", b.Call<vec2<f32>>(b.MemberAccessor(
+                                                                "params", "visibleOrigin")))));
+                stmts.Push(b.Decl(b.Let(
+                    "clampedCoord0", b.Call("clamp", b.Call<vec2<u32>>("modifiedCoords"),
+                                            b.MemberAccessor("params", "visibleOrigin"),
+                                            b.Sub(b.Add(b.MemberAccessor("params", "visibleOrigin"),
+                                                        b.MemberAccessor("params", "visibleSize")),
+                                                  b.Call<vec2<u32>>(1_a, 1_a))))));
                 // textureLoad(plane0, coord, 0);
-                single_plane_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                single_plane_call = b.Call("textureLoad", "plane0", "clampedCoord0", 0_a);
                 // textureLoad(plane0, coord, 0);
-                plane_0_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                plane_0_call = b.Call("textureLoad", "plane0", "clampedCoord0", 0_a);
                 // let coord1 = coord >> 1;
-                stmts.Push(b.Decl(b.Let("coord1", b.Shr("coord", b.Call<vec2<u32>>(1_a)))));
+                stmts.Push(b.Decl(b.Let("coord1", b.Shr("clampedCoord0", b.Call<vec2<u32>>(1_a)))));
                 // textureLoad(plane1, coord1, 0);
                 plane_1_call = b.Call("textureLoad", "plane1", "coord1", 0_a);
                 break;

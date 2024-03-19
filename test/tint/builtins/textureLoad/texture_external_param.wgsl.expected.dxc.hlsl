@@ -1,3 +1,11 @@
+uint2 tint_ftou(float2 v) {
+  return ((v < (4294967040.0f).xx) ? ((v < (0.0f).xx) ? (0u).xx : uint2(v)) : (4294967295u).xx);
+}
+
+uint2 tint_clamp(uint2 e, uint2 low, uint2 high) {
+  return min(max(e, low), high);
+}
+
 struct GammaTransferParams {
   float G;
   float A;
@@ -16,11 +24,15 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  uint2 visibleOrigin;
+  uint2 visibleSize;
+  uint2 plane0Size;
+  uint2 plane1Size;
 };
 
 Texture2D<float4> ext_tex_plane_1 : register(t1, space1);
 cbuffer cbuffer_ext_tex_params : register(b2, space1) {
-  uint4 ext_tex_params[13];
+  uint4 ext_tex_params[15];
 };
 Texture2D<float4> arg_0 : register(t0, space1);
 
@@ -32,12 +44,16 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, int2 coord, ExternalTextureParams params) {
-  int2 coord1 = (coord >> (1u).xx);
+  float3x2 loadTransformationMatrix = float3x2(params.coordTransformationMatrix[0], params.coordTransformationMatrix[1], (params.coordTransformationMatrix[2] * float2(params.plane0Size)));
+  float2 modifiedCoords = mul(float3(float2(coord), 1.0f), loadTransformationMatrix);
+  modifiedCoords = (modifiedCoords + float2(params.visibleOrigin));
+  uint2 clampedCoord0 = tint_clamp(tint_ftou(modifiedCoords), params.visibleOrigin, ((params.visibleOrigin + params.visibleSize) - (1u).xx));
+  uint2 coord1 = (clampedCoord0 >> (1u).xx);
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = plane0.Load(int3(coord, 0)).rgba;
+    color = plane0.Load(uint3(clampedCoord0, uint(0))).rgba;
   } else {
-    color = float4(mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(int3(coord, 0)).r, plane1.Load(int3(coord1, 0)).rg, 1.0f)), 1.0f);
+    color = float4(mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(uint3(clampedCoord0, uint(0))).r, plane1.Load(uint3(coord1, uint(0))).rg, 1.0f)), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = float4(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -91,7 +107,15 @@ float3x2 ext_tex_params_load_8(uint offset) {
 ExternalTextureParams ext_tex_params_load(uint offset) {
   const uint scalar_offset_17 = ((offset + 0u)) / 4;
   const uint scalar_offset_18 = ((offset + 4u)) / 4;
-  ExternalTextureParams tint_symbol_3 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
+  const uint scalar_offset_19 = ((offset + 200u)) / 4;
+  uint4 ubo_load_3 = ext_tex_params[scalar_offset_19 / 4];
+  const uint scalar_offset_20 = ((offset + 208u)) / 4;
+  uint4 ubo_load_4 = ext_tex_params[scalar_offset_20 / 4];
+  const uint scalar_offset_21 = ((offset + 216u)) / 4;
+  uint4 ubo_load_5 = ext_tex_params[scalar_offset_21 / 4];
+  const uint scalar_offset_22 = ((offset + 224u)) / 4;
+  uint4 ubo_load_6 = ext_tex_params[scalar_offset_22 / 4];
+  ExternalTextureParams tint_symbol_3 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u)), ((scalar_offset_19 & 2) ? ubo_load_3.zw : ubo_load_3.xy), ((scalar_offset_20 & 2) ? ubo_load_4.zw : ubo_load_4.xy), ((scalar_offset_21 & 2) ? ubo_load_5.zw : ubo_load_5.xy), ((scalar_offset_22 & 2) ? ubo_load_6.zw : ubo_load_6.xy)};
   return tint_symbol_3;
 }
 
