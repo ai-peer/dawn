@@ -1,9 +1,17 @@
 #version 310 es
 
-vec3 tint_select(vec3 param_0, vec3 param_1, bvec3 param_2) {
+uvec2 tint_select(uvec2 param_0, uvec2 param_1, bvec2 param_2) {
+    return uvec2(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1]);
+}
+
+vec3 tint_select_1(vec3 param_0, vec3 param_1, bvec3 param_2) {
     return vec3(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1], param_2[2] ? param_1[2] : param_0[2]);
 }
 
+
+uvec2 tint_ftou(vec2 v) {
+  return tint_select(uvec2(4294967295u), tint_select(uvec2(v), uvec2(0u), lessThan(v, vec2(0.0f))), lessThan(v, vec2(4294967040.0f)));
+}
 
 struct GammaTransferParams {
   float G;
@@ -26,6 +34,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -42,6 +54,10 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -54,16 +70,20 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
   bvec3 cond = lessThan(abs(v), vec3(params.D));
   vec3 t = (sign(v) * ((params.C * abs(v)) + params.F));
   vec3 f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3(params.G)) + params.E));
-  return tint_select(f, t, cond);
+  return tint_select_1(f, t, cond);
 }
 
 vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uvec2 coord, ExternalTextureParams params) {
-  uvec2 coord1 = (coord >> uvec2(1u));
+  mat3x2 loadTransformationMatrix = mat3x2(params.coordTransformationMatrix[0], params.coordTransformationMatrix[1], (params.coordTransformationMatrix[2] * vec2(params.plane0Size)));
+  vec2 modifiedCoords = (loadTransformationMatrix * vec3(vec2(coord), 1.0f));
+  modifiedCoords = (modifiedCoords + vec2(params.visibleOrigin));
+  uvec2 clampedCoord0 = clamp(tint_ftou(modifiedCoords), params.visibleOrigin, ((params.visibleOrigin + params.visibleSize) - uvec2(1u)));
+  uvec2 coord1 = (clampedCoord0 >> uvec2(1u));
   vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = texelFetch(plane0_1, ivec2(coord), 0).rgba;
+    color = texelFetch(plane0_1, ivec2(clampedCoord0), 0).rgba;
   } else {
-    color = vec4((vec4(texelFetch(plane0_1, ivec2(coord), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
+    color = vec4((vec4(texelFetch(plane0_1, ivec2(clampedCoord0), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = vec4(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -76,7 +96,7 @@ vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uve
 uniform highp sampler2D arg_0_1;
 uniform highp sampler2D ext_tex_plane_1_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.visibleOrigin, val.visibleSize, val.plane0Size, val.plane1Size, val.pad_2, val.pad_3);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
@@ -106,10 +126,18 @@ void main() {
 precision highp float;
 precision highp int;
 
-vec3 tint_select(vec3 param_0, vec3 param_1, bvec3 param_2) {
+uvec2 tint_select(uvec2 param_0, uvec2 param_1, bvec2 param_2) {
+    return uvec2(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1]);
+}
+
+vec3 tint_select_1(vec3 param_0, vec3 param_1, bvec3 param_2) {
     return vec3(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1], param_2[2] ? param_1[2] : param_0[2]);
 }
 
+
+uvec2 tint_ftou(vec2 v) {
+  return tint_select(uvec2(4294967295u), tint_select(uvec2(v), uvec2(0u), lessThan(v, vec2(0.0f))), lessThan(v, vec2(4294967040.0f)));
+}
 
 struct GammaTransferParams {
   float G;
@@ -132,6 +160,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -148,6 +180,10 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -160,16 +196,20 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
   bvec3 cond = lessThan(abs(v), vec3(params.D));
   vec3 t = (sign(v) * ((params.C * abs(v)) + params.F));
   vec3 f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3(params.G)) + params.E));
-  return tint_select(f, t, cond);
+  return tint_select_1(f, t, cond);
 }
 
 vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uvec2 coord, ExternalTextureParams params) {
-  uvec2 coord1 = (coord >> uvec2(1u));
+  mat3x2 loadTransformationMatrix = mat3x2(params.coordTransformationMatrix[0], params.coordTransformationMatrix[1], (params.coordTransformationMatrix[2] * vec2(params.plane0Size)));
+  vec2 modifiedCoords = (loadTransformationMatrix * vec3(vec2(coord), 1.0f));
+  modifiedCoords = (modifiedCoords + vec2(params.visibleOrigin));
+  uvec2 clampedCoord0 = clamp(tint_ftou(modifiedCoords), params.visibleOrigin, ((params.visibleOrigin + params.visibleSize) - uvec2(1u)));
+  uvec2 coord1 = (clampedCoord0 >> uvec2(1u));
   vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = texelFetch(plane0_1, ivec2(coord), 0).rgba;
+    color = texelFetch(plane0_1, ivec2(clampedCoord0), 0).rgba;
   } else {
-    color = vec4((vec4(texelFetch(plane0_1, ivec2(coord), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
+    color = vec4((vec4(texelFetch(plane0_1, ivec2(clampedCoord0), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = vec4(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -182,7 +222,7 @@ vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uve
 uniform highp sampler2D arg_0_1;
 uniform highp sampler2D ext_tex_plane_1_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.visibleOrigin, val.visibleSize, val.plane0Size, val.plane1Size, val.pad_2, val.pad_3);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
@@ -205,10 +245,18 @@ void main() {
 }
 #version 310 es
 
-vec3 tint_select(vec3 param_0, vec3 param_1, bvec3 param_2) {
+uvec2 tint_select(uvec2 param_0, uvec2 param_1, bvec2 param_2) {
+    return uvec2(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1]);
+}
+
+vec3 tint_select_1(vec3 param_0, vec3 param_1, bvec3 param_2) {
     return vec3(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1], param_2[2] ? param_1[2] : param_0[2]);
 }
 
+
+uvec2 tint_ftou(vec2 v) {
+  return tint_select(uvec2(4294967295u), tint_select(uvec2(v), uvec2(0u), lessThan(v, vec2(0.0f))), lessThan(v, vec2(4294967040.0f)));
+}
 
 struct GammaTransferParams {
   float G;
@@ -231,6 +279,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -247,6 +299,10 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -259,16 +315,20 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
   bvec3 cond = lessThan(abs(v), vec3(params.D));
   vec3 t = (sign(v) * ((params.C * abs(v)) + params.F));
   vec3 f = (sign(v) * (pow(((params.A * abs(v)) + params.B), vec3(params.G)) + params.E));
-  return tint_select(f, t, cond);
+  return tint_select_1(f, t, cond);
 }
 
 vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uvec2 coord, ExternalTextureParams params) {
-  uvec2 coord1 = (coord >> uvec2(1u));
+  mat3x2 loadTransformationMatrix = mat3x2(params.coordTransformationMatrix[0], params.coordTransformationMatrix[1], (params.coordTransformationMatrix[2] * vec2(params.plane0Size)));
+  vec2 modifiedCoords = (loadTransformationMatrix * vec3(vec2(coord), 1.0f));
+  modifiedCoords = (modifiedCoords + vec2(params.visibleOrigin));
+  uvec2 clampedCoord0 = clamp(tint_ftou(modifiedCoords), params.visibleOrigin, ((params.visibleOrigin + params.visibleSize) - uvec2(1u)));
+  uvec2 coord1 = (clampedCoord0 >> uvec2(1u));
   vec4 color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = texelFetch(plane0_1, ivec2(coord), 0).rgba;
+    color = texelFetch(plane0_1, ivec2(clampedCoord0), 0).rgba;
   } else {
-    color = vec4((vec4(texelFetch(plane0_1, ivec2(coord), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
+    color = vec4((vec4(texelFetch(plane0_1, ivec2(clampedCoord0), 0).r, texelFetch(plane1_1, ivec2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = vec4(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -281,7 +341,7 @@ vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, uve
 uniform highp sampler2D arg_0_1;
 uniform highp sampler2D ext_tex_plane_1_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.visibleOrigin, val.visibleSize, val.plane0Size, val.plane1Size, val.pad_2, val.pad_3);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {

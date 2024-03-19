@@ -39,7 +39,11 @@ struct ExternalTextureParams_tint_packed_vec3 {
   /* 0x0060 */ GammaTransferParams gammaEncodeParams;
   /* 0x0080 */ tint_array<tint_packed_vec3_f32_array_element, 3> gamutConversionMatrix;
   /* 0x00b0 */ float3x2 coordTransformationMatrix;
-  /* 0x00c8 */ tint_array<int8_t, 8> tint_pad_2;
+  /* 0x00c8 */ uint2 visibleOrigin;
+  /* 0x00d0 */ uint2 visibleSize;
+  /* 0x00d8 */ uint2 plane0Size;
+  /* 0x00e0 */ uint2 plane1Size;
+  /* 0x00e8 */ tint_array<int8_t, 8> tint_pad_2;
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
@@ -55,6 +59,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  uint2 visibleOrigin;
+  uint2 visibleSize;
+  uint2 plane0Size;
+  uint2 plane1Size;
 };
 
 ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint_packed_vec3 in) {
@@ -66,6 +74,10 @@ ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint
   result.gammaEncodeParams = in.gammaEncodeParams;
   result.gamutConversionMatrix = tint_unpack_vec3_in_composite(in.gamutConversionMatrix);
   result.coordTransformationMatrix = in.coordTransformationMatrix;
+  result.visibleOrigin = in.visibleOrigin;
+  result.visibleSize = in.visibleSize;
+  result.plane0Size = in.plane0Size;
+  result.plane1Size = in.plane1Size;
   return result;
 }
 
@@ -81,12 +93,16 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<float, access::sample> plane1, int2 coord, ExternalTextureParams params) {
-  int2 const coord1 = (coord >> uint2(1u));
+  float3x2 const loadTransformationMatrix = float3x2(params.coordTransformationMatrix[0], params.coordTransformationMatrix[1], (params.coordTransformationMatrix[2] * float2(params.plane0Size)));
+  float2 modifiedCoords = (loadTransformationMatrix * float3(float2(coord), 1.0f));
+  modifiedCoords = (modifiedCoords + float2(params.visibleOrigin));
+  uint2 const clampedCoord0 = clamp(uint2(modifiedCoords), params.visibleOrigin, ((params.visibleOrigin + params.visibleSize) - uint2(1u)));
+  uint2 const coord1 = (clampedCoord0 >> uint2(1u));
   float4 color = 0.0f;
   if ((params.numPlanes == 1u)) {
-    color = plane0.read(uint2(coord), 0).rgba;
+    color = plane0.read(uint2(clampedCoord0), 0).rgba;
   } else {
-    color = float4((float4(plane0.read(uint2(coord), 0)[0], plane1.read(uint2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
+    color = float4((float4(plane0.read(uint2(clampedCoord0), 0)[0], plane1.read(uint2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix), 1.0f);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = float4(gammaCorrection(color.rgb, params.gammaDecodeParams), color[3]);
