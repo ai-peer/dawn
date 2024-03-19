@@ -16,6 +16,23 @@
       "message": "PTAL. Now with tests and expectations.",
       "revId": "9495e290c7c9fd9199fccf3e3826491b3a2e5539",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba50d407_0e30020e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-19T20:25:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9495e290c7c9fd9199fccf3e3826491b3a2e5539",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
