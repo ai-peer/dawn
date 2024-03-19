@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19e6c65_53c803e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-19T14:25:56Z",
+      "side": 1,
+      "message": "This is to help me find why a few of our cmake-win builds are failing to use the right path for the Win10 SDK, like in [this build](https://ci.chromium.org/ui/p/dawn/builders/try/cmake-win-msvc-dbg-x64/b8753108326935799809/overview).",
+      "revId": "a8a8679ddff18f63e05b5ae7b7c037c6dd694016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
