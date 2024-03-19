@@ -49,6 +49,10 @@ struct ExternalTextureParams {
     std::array<float, 8> gammaEncodingParams = {};
     std::array<float, 12> gamutConversionMatrix = {};
     std::array<float, 6> coordTransformMatrix = {};
+    std::array<uint32_t, 2> visibleOrigin = {};
+    std::array<uint32_t, 2> visibleSize = {};
+    std::array<uint32_t, 2> plane0Size = {};
+    std::array<uint32_t, 2> plane1Size = {};
 };
 
 MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,

@@ -25,6 +25,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };
@@ -41,6 +45,10 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
+  uvec2 visibleOrigin;
+  uvec2 visibleSize;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
   uint pad_2;
   uint pad_3;
 };

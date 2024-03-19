@@ -37,6 +37,10 @@ struct ExternalTextureParams_tint_packed_vec3 {
   GammaTransferParams gammaEncodeParams;
   tint_array<tint_packed_vec3_f32_array_element, 3> gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  uint2 visibleOrigin;
+  uint2 visibleSize;
+  uint2 plane0Size;
+  uint2 plane1Size;
 };
 
 struct ExternalTextureParams {
@@ -47,6 +51,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  uint2 visibleOrigin;
+  uint2 visibleSize;
+  uint2 plane0Size;
+  uint2 plane1Size;
 };
 
 void textureDimensions_cdc6c9(texture2d<float, access::sample> tint_symbol_1, device uint2* const tint_symbol_2) {

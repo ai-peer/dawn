@@ -39,7 +39,9 @@ struct ExternalTextureParams_tint_packed_vec3 {
   /* 0x0060 */ GammaTransferParams gammaEncodeParams;
   /* 0x0080 */ tint_array<tint_packed_vec3_f32_array_element, 3> gamutConversionMatrix;
   /* 0x00b0 */ float3x2 coordTransformationMatrix;
-  /* 0x00c8 */ tint_array<int8_t, 8> tint_pad_2;
+  /* 0x00c8 */ float3x2 loadTransformMatrix;
+  /* 0x00e0 */ uint2 minVisibleCoord;
+  /* 0x00e8 */ uint2 maxVisibleCoord;
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
@@ -55,6 +57,9 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float3x2 loadTransformMatrix;
+  uint2 minVisibleCoord;
+  uint2 maxVisibleCoord;
 };
 
 ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint_packed_vec3 in) {
@@ -66,6 +71,9 @@ ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint
   result.gammaEncodeParams = in.gammaEncodeParams;
   result.gamutConversionMatrix = tint_unpack_vec3_in_composite(in.gamutConversionMatrix);
   result.coordTransformationMatrix = in.coordTransformationMatrix;
+  result.loadTransformMatrix = in.loadTransformMatrix;
+  result.minVisibleCoord = in.minVisibleCoord;
+  result.maxVisibleCoord = in.maxVisibleCoord;
   return result;
 }
 
