@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "e9e6dcc89a1176a8b82cc181188877c2105d4ae9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb9c695d_0bc5001b",
+        "filename": "docs/dawn/features/static_samplers.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-19T14:31:02Z",
+      "side": 1,
+      "message": "kokoro rerun",
+      "revId": "e9e6dcc89a1176a8b82cc181188877c2105d4ae9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
