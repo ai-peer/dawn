@@ -53,10 +53,10 @@ static const char kVSSource[] = R"(
 @vertex
 fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
     var pos = array(
-        vec2f( 0.0, -1.0),
+        vec2f(-1.0, -1.0),
         vec2f( 1.0, -1.0),
-        vec2f( 0.0,  1.0),
-        vec2f( 0.0,  1.0),
+        vec2f(-1.0,  1.0),
+        vec2f(-1.0,  1.0),
         vec2f( 1.0, -1.0),
         vec2f( 1.0,  1.0));
         return vec4f(pos[VertexIndex], 0.0, 1.0);
@@ -72,7 +72,7 @@ const char* GetTextureComponentTypeString(DeviceBase* device, wgpu::TextureForma
         case TextureComponentType::Uint:
             return "u32";
         case TextureComponentType::Float:
-            break;
+            return "f32";
     }
     DAWN_UNREACHABLE();
 }
@@ -117,7 +117,6 @@ fn main() -> OutputColor {
                          << R"(
 return outputColor;
 })";
-
     return fragmentShaderStream.str();
 }
 
@@ -170,6 +169,31 @@ ResultOrError<RenderPipelineBase*> GetOrCreateApplyClearValueWithDrawPipeline(
     renderPipelineDesc.vertex = vertex;
     renderPipelineDesc.fragment = &fragment;
     renderPipelineDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+    renderPipelineDesc.primitive.frontFace = wgpu::FrontFace::CCW;
+    renderPipelineDesc.primitive.cullMode = wgpu::CullMode::None;
+    renderPipelineDesc.multisample.count = key.sampleCount;
+    DepthStencilState depthStencilState = {};
+    if (key.depthStencilFormat != wgpu::TextureFormat::Undefined) {
+        depthStencilState.format = key.depthStencilFormat;
+        // Disable depth test and write
+        depthStencilState.depthWriteEnabled = false;
+        depthStencilState.depthCompare = wgpu::CompareFunction::Always;
+
+        // Disable stencil test and write
+        depthStencilState.stencilFront.compare = wgpu::CompareFunction::Always;
+        depthStencilState.stencilFront.failOp = wgpu::StencilOperation::Keep;
+        depthStencilState.stencilFront.depthFailOp = wgpu::StencilOperation::Keep;
+        depthStencilState.stencilFront.passOp = wgpu::StencilOperation::Keep;
+
+        depthStencilState.stencilBack.compare = wgpu::CompareFunction::Always;
+        depthStencilState.stencilBack.failOp = wgpu::StencilOperation::Keep;
+        depthStencilState.stencilBack.depthFailOp = wgpu::StencilOperation::Keep;
+        depthStencilState.stencilBack.passOp = wgpu::StencilOperation::Keep;
+
+        depthStencilState.stencilReadMask = 0x0;
+        depthStencilState.stencilWriteMask = 0x0;
+        renderPipelineDesc.depthStencil = &depthStencilState;
+    }
     fragment.targetCount = key.colorAttachmentCount;
     fragment.targets = colorTargets.data();
 
@@ -239,9 +263,10 @@ ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
     return std::move(outputBuffer);
 }
 
-// Helper functions for applying big integer clear values with draw
-bool ShouldApplyClearBigIntegerColorValueWithDraw(
-    const RenderPassColorAttachment& colorAttachmentInfo) {
+// Helper functions for applying clear or big integer clear values with draw
+bool ShouldApplyClearWithDrawForAttachment(const RenderPassColorAttachment& colorAttachmentInfo,
+                                           bool clearWithDraw,
+                                           bool clearWithDrawBigInt) {
     if (colorAttachmentInfo.view == nullptr) {
         return false;
     }
@@ -250,6 +275,11 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
         return false;
     }
 
+    if (clearWithDraw) {
+        return true;
+    }
+
+    DAWN_ASSERT(clearWithDrawBigInt);
     // We should only apply this workaround on 32-bit signed and unsigned integer formats.
     const Format& format = colorAttachmentInfo.view->GetFormat();
     switch (format.format) {
@@ -300,8 +330,27 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
     return true;
 }
 
+bool ShouldApplyClearWithDrawForRenderPass(const RenderPassDescriptor* renderPassDescriptor,
+                                           bool clearWithDraw,
+                                           bool clearWithDrawForBigInt) {
+    if (!clearWithDraw && !clearWithDrawForBigInt) {
+        return false;
+    }
+
+    for (uint32_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
+        if (ShouldApplyClearWithDrawForAttachment(renderPassDescriptor->colorAttachments[i],
+                                                  clearWithDraw, clearWithDrawForBigInt)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 KeyOfApplyClearColorValueWithDrawPipelines GetKeyOfApplyClearColorValueWithDrawPipelines(
-    const RenderPassDescriptor* renderPassDescriptor) {
+    const RenderPassDescriptor* renderPassDescriptor,
+    bool clearWithDraw,
+    bool clearWithDrawForBigInt) {
     KeyOfApplyClearColorValueWithDrawPipelines key;
     key.colorAttachmentCount = renderPassDescriptor->colorAttachmentCount;
 
@@ -312,12 +361,24 @@ KeyOfApplyClearColorValueWithDrawPipelines GetKeyOfApplyClearColorValueWithDrawP
     for (auto [i, attachment] : Enumerate(colorAttachments)) {
         if (attachment.view != nullptr) {
             key.colorTargetFormats[i] = attachment.view->GetFormat().format;
+            if (key.sampleCount == 0) {
+                key.sampleCount = attachment.view->GetTexture()->GetSampleCount();
+            } else {
+                DAWN_ASSERT(key.sampleCount == attachment.view->GetTexture()->GetSampleCount());
+            }
         }
 
-        if (ShouldApplyClearBigIntegerColorValueWithDraw(attachment)) {
+        if (ShouldApplyClearWithDrawForAttachment(attachment, clearWithDraw,
+                                                  clearWithDrawForBigInt)) {
             key.colorTargetsToApplyClearColorValue.set(i);
         }
     }
+    if (renderPassDescriptor->depthStencilAttachment &&
+        renderPassDescriptor->depthStencilAttachment->view != nullptr) {
+        key.depthStencilFormat =
+            renderPassDescriptor->depthStencilAttachment->view->GetFormat().format;
+    }
+
     return key;
 }
 
@@ -334,6 +395,10 @@ size_t KeyOfApplyClearColorValueWithDrawPipelinesHashFunc::operator()(
     for (wgpu::TextureFormat format : key.colorTargetFormats) {
         HashCombine(&hash, format);
     }
+
+    HashCombine(&hash, key.sampleCount);
+
+    HashCombine(&hash, key.depthStencilFormat);
 
     return hash;
 }
@@ -354,33 +419,26 @@ bool KeyOfApplyClearColorValueWithDrawPipelinesEqualityFunc::operator()(
             return false;
         }
     }
-    return true;
+
+    return key1.sampleCount == key2.sampleCount &&
+           key1.depthStencilFormat == key2.depthStencilFormat;
 }
 
-bool ShouldApplyClearBigIntegerColorValueWithDraw(
-    const DeviceBase* device,
-    const RenderPassDescriptor* renderPassDescriptor) {
-    if (!device->IsToggleEnabled(Toggle::ApplyClearBigIntegerColorValueWithDraw)) {
-        return false;
-    }
-
-    for (uint32_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
-        if (ShouldApplyClearBigIntegerColorValueWithDraw(
-                renderPassDescriptor->colorAttachments[i])) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-MaybeError ApplyClearBigIntegerColorValueWithDraw(
-    RenderPassEncoder* renderPassEncoder,
-    const RenderPassDescriptor* renderPassDescriptor) {
+MaybeError MaybeApplyClearWithDraw(RenderPassEncoder* renderPassEncoder,
+                                   const RenderPassDescriptor* renderPassDescriptor) {
     DeviceBase* device = renderPassEncoder->GetDevice();
 
-    KeyOfApplyClearColorValueWithDrawPipelines key =
-        GetKeyOfApplyClearColorValueWithDrawPipelines(renderPassDescriptor);
+    bool clearWithDraw = device->IsToggleEnabled(Toggle::ColorClearWithDraw);
+    bool clearWithDrawForBigInt =
+        device->IsToggleEnabled(Toggle::ApplyClearBigIntegerColorValueWithDraw);
+
+    if (!ShouldApplyClearWithDrawForRenderPass(renderPassDescriptor, clearWithDraw,
+                                               clearWithDrawForBigInt)) {
+        return {};
+    }
+
+    KeyOfApplyClearColorValueWithDrawPipelines key = GetKeyOfApplyClearColorValueWithDrawPipelines(
+        renderPassDescriptor, clearWithDraw, clearWithDrawForBigInt);
 
     RenderPipelineBase* pipeline = nullptr;
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateApplyClearValueWithDrawPipeline(device, key));
