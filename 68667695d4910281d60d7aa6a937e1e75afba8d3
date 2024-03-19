@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "68667695d4910281d60d7aa6a937e1e75afba8d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a402fbe_64f10e2a",
+        "filename": "src/dawn/native/RenderBundle.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-19T15:32:54Z",
+      "side": 1,
+      "message": "do we need need to clear the info in both the destructor and DestroyImpl ? I think just one of them should be sufficient - so we could clear it only on DestroyImpl for all of RenderBundleBase / RenderBundleEncoder / RenderPassEncoder",
+      "revId": "68667695d4910281d60d7aa6a937e1e75afba8d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
