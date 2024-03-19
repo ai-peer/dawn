@@ -221,6 +221,7 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     // └         ┘
     // The matrix is transposed at the end.
     using mat2x3 = std::array<float, 6>;
+    using mat3x3 = std::array<float, 9>;
 
     // Multiplies the two mat2x3 matrices, by treating the RHS matrix as a mat3x3 where the last row
     // is [0, 0, 1].
@@ -252,6 +253,43 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         };
     };
 
+    auto Mul3x3 = [&](const mat3x3& lhs, const mat3x3& rhs) {
+        auto& a = lhs[0];
+        auto& b = lhs[1];
+        auto& c = lhs[2];
+        auto& d = lhs[3];
+        auto& e = lhs[4];
+        auto& f = lhs[5];
+        auto& g = lhs[6];
+        auto& h = lhs[7];
+        auto& i = lhs[8];
+        auto& j = rhs[0];
+        auto& k = rhs[1];
+        auto& l = rhs[2];
+        auto& m = rhs[3];
+        auto& n = rhs[4];
+        auto& o = rhs[5];
+        auto& p = rhs[6];
+        auto& q = rhs[7];
+        auto& r = rhs[8];
+        // ┌         ┐   ┌         ┐
+        // │ a, b, c │   │ j, k, l │
+        // │ d, e, f │ x │ m, n, o │
+        // | g, h, i |   │ p, q, r │
+        // └         ┘   └         ┘
+        return mat3x3{
+            a * j + b * m + c * p,  //
+            a * k + b * n + c * q,  //
+            a * l + b * o + c * r,  //
+            d * j + e * m + f * p,  //
+            d * k + e * n + f * q,  //
+            d * l + e * o + f * r,  //
+            g * j + h * m + i * p,  //
+            g * k + h * n + i * q,  //
+            g * l + h * o + i * r,  //
+        };
+    };
+
     auto Scale = [&](const mat2x3& m, float x, float y) {
         return Mul(mat2x3{x, 0, 0, 0, y, 0}, m);
     };
@@ -264,6 +302,13 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         1, 0, 0,  //
         0, 1, 0,  //
     };
+
+    Extent3D frameSize = descriptor->plane0->GetSingleSubresourceVirtualSize();
+    Extent3D plane1Size = {1, 1, 1};
+
+    if (params.numPlanes == 2) {
+        plane1Size = descriptor->plane1->GetSingleSubresourceVirtualSize();
+    }
 
     // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
     // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
@@ -307,22 +352,58 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     coordTransformMatrix = Translate(coordTransformMatrix, 0.5, 0.5);
 
     // Calculate scale factors and offsets from the specified visibleSize.
-    DAWN_ASSERT(descriptor->visibleSize.width > 0);
-    DAWN_ASSERT(descriptor->visibleSize.height > 0);
-    uint32_t frameWidth = descriptor->plane0->GetSingleSubresourceVirtualSize().width;
-    uint32_t frameHeight = descriptor->plane0->GetSingleSubresourceVirtualSize().height;
-    float xScale =
-        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(frameWidth);
-    float yScale =
-        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(frameHeight);
-    float xOffset =
-        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(frameWidth);
-    float yOffset =
-        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(frameHeight);
+    DAWN_ASSERT(mVisibleSize.width > 0);
+    DAWN_ASSERT(mVisibleSize.height > 0);
+    float xScale = static_cast<float>(mVisibleSize.width) / static_cast<float>(frameSize.width);
+    float yScale = static_cast<float>(mVisibleSize.height) / static_cast<float>(frameSize.height);
+    float xOffset = static_cast<float>(mVisibleOrigin.x) / static_cast<float>(frameSize.width);
+    float yOffset = static_cast<float>(mVisibleOrigin.y) / static_cast<float>(frameSize.height);
 
     // Finally, scale and translate based on the visible rect. This applies cropping.
     coordTransformMatrix = Scale(coordTransformMatrix, xScale, yScale);
     coordTransformMatrix = Translate(coordTransformMatrix, xOffset, yOffset);
+
+    // Calculate load transformation matrix by using
+    // toTexels * expanedCoordTransformMatrix * toNormalized
+    mat3x3 expandedCoordTransformMatrix = {coordTransformMatrix[0],
+                                           coordTransformMatrix[1],
+                                           coordTransformMatrix[2],
+                                           coordTransformMatrix[3],
+                                           coordTransformMatrix[4],
+                                           coordTransformMatrix[5],
+                                           0,
+                                           0,
+                                           1};
+
+    mat3x3 toTexels = {static_cast<float>(frameSize.width),
+                       0,
+                       0,
+                       0,
+                       static_cast<float>(frameSize.height),
+                       0,
+                       0,
+                       0,
+                       1};
+
+    bool orientationChanged =
+        descriptor->rotation == wgpu::ExternalTextureRotation::Rotate90Degrees ||
+        descriptor->rotation == wgpu::ExternalTextureRotation::Rotate270Degrees;
+
+    uint32_t displayVisibleWidth = orientationChanged ? mVisibleSize.height : mVisibleSize.width;
+    uint32_t displayVisibleHeight = orientationChanged ? mVisibleSize.width : mVisibleSize.height;
+
+    mat3x3 toNormalized = {1.0f / static_cast<float>(displayVisibleWidth),
+                           0,
+                           0,
+                           0,
+                           1.0f / static_cast<float>(displayVisibleHeight),
+                           0,
+                           0,
+                           0,
+                           1};
+
+    mat3x3 loadTransformMatrix =
+        Mul3x3(toTexels, Mul3x3(expandedCoordTransformMatrix, toNormalized));
 
     // Transpose the mat2x3 into column vectors for use by WGSL.
     params.coordTransformMatrix[0] = coordTransformMatrix[0];
@@ -331,6 +412,45 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     params.coordTransformMatrix[3] = coordTransformMatrix[4];
     params.coordTransformMatrix[4] = coordTransformMatrix[2];
     params.coordTransformMatrix[5] = coordTransformMatrix[5];
+
+    params.loadTransformMatrix[0] = loadTransformMatrix[0];
+    params.loadTransformMatrix[1] = loadTransformMatrix[3];
+    params.loadTransformMatrix[2] = loadTransformMatrix[1];
+    params.loadTransformMatrix[3] = loadTransformMatrix[4];
+    params.loadTransformMatrix[4] = loadTransformMatrix[2];
+    params.loadTransformMatrix[5] = loadTransformMatrix[5];
+
+    // clamped rect for sample and load
+    float plane0HalfTexelX = 0.5 / static_cast<float>(frameSize.width);
+    float plane0HalfTexelY = 0.5 / static_cast<float>(frameSize.height);
+    float plane1HalfTexelX = 0.5 / static_cast<float>(plane1Size.width);
+    float plane1HalfTexelY = 0.5 / static_cast<float>(plane1Size.height);
+
+    float normVisibleRectMinX = xOffset;
+    float normVisibleRectMinY = yOffset;
+    float normVisibleRectMaxX = xOffset + xScale;
+    float normVisibleRectMaxY = yOffset + yScale;
+
+    params.samplePlane0RectMin[0] = normVisibleRectMinX + plane0HalfTexelX;
+    params.samplePlane0RectMin[1] = normVisibleRectMinY + plane0HalfTexelY;
+    params.samplePlane0RectMax[0] = normVisibleRectMaxX - plane0HalfTexelX;
+    params.samplePlane0RectMax[1] = normVisibleRectMaxY - plane0HalfTexelY;
+    params.samplePlane1RectMin[0] = normVisibleRectMinX + plane1HalfTexelX;
+    params.samplePlane1RectMin[1] = normVisibleRectMinY + plane1HalfTexelY;
+    params.samplePlane1RectMax[0] = normVisibleRectMaxX - plane1HalfTexelX;
+    params.samplePlane1RectMax[1] = normVisibleRectMaxY - plane1HalfTexelY;
+
+    params.loadPlane0RectMin[0] = normVisibleRectMinX * static_cast<float>(frameSize.width);
+    params.loadPlane0RectMin[1] = normVisibleRectMinY * static_cast<float>(frameSize.height);
+    params.loadPlane0RectMax[0] = normVisibleRectMaxX * static_cast<float>(frameSize.width) - 1.0;
+    params.loadPlane0RectMax[1] = normVisibleRectMaxY * static_cast<float>(frameSize.height) - 1.0;
+    params.loadPlane1RectMin[0] = normVisibleRectMinX * static_cast<float>(plane1Size.width);
+    params.loadPlane1RectMin[1] = normVisibleRectMinY * static_cast<float>(plane1Size.height);
+    params.loadPlane1RectMax[0] = normVisibleRectMaxX * static_cast<float>(plane1Size.width) - 1.0;
+    params.loadPlane1RectMax[1] = normVisibleRectMaxY * static_cast<float>(plane1Size.height) - 1.0;
+
+    params.plane1CoordFactor[0] = plane1Size.width / frameSize.width;
+    params.plane1CoordFactor[1] = plane1Size.height / frameSize.height;
 
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));
