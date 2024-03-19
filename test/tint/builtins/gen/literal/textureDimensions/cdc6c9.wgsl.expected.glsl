@@ -21,8 +21,13 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformationMatrix;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 struct ExternalTextureParams_std140 {
@@ -37,8 +42,15 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformationMatrix_0;
+  vec2 loadTransformationMatrix_1;
+  vec2 loadTransformationMatrix_2;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
@@ -93,8 +105,13 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformationMatrix;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 struct ExternalTextureParams_std140 {
@@ -109,8 +126,15 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformationMatrix_0;
+  vec2 loadTransformationMatrix_1;
+  vec2 loadTransformationMatrix_2;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
@@ -158,8 +182,13 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformationMatrix;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 struct ExternalTextureParams_std140 {
@@ -174,8 +203,15 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformationMatrix_0;
+  vec2 loadTransformationMatrix_1;
+  vec2 loadTransformationMatrix_2;
+  vec2 plane0VisibleRectMin;
+  vec2 plane0VisibleRectMax;
+  vec2 plane1VisibleRectMin;
+  vec2 plane1VisibleRectMax;
+  uvec2 plane0Size;
+  uvec2 plane1Size;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
