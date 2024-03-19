@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0479852f_75fbe000",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-19T12:59:36Z",
+      "side": 1,
+      "message": "I\u0027m wondering - could you not just use the `CloneContext.ReplaceAll([\u0026](const ast::Expression*){ ... })`\nThat will visit all the expressions in the program, and will call the outermost first. If you replace the expression, it won\u0027t recurse into the children.\nIsn\u0027t that exactly what you want here?",
+      "parentUuid": "2db0a98a_d23d2051",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "073c65c2_a92e7bdd",
         "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
         "patchSetId": 7
