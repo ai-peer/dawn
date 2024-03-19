@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9412fa44_7645740d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-19T03:01:53Z",
+      "side": 1,
+      "message": "```\n[ RUN      ] MultithreadTests.Buffers_MapInParallel/D3D11_Intel_R__UHD_Graphics_770\nError: Assertion failure at ..\\..\\src\\dawn\\common\\SerialQueue.h:69 (Enqueue): this-\u003eEmpty() || this-\u003emStorage.back().first \u003c\u003d serial\n```\nStumbled on this ASSERT locally.\n\nFixing it: https://dawn-review.googlesource.com/c/dawn/+/179900",
+      "range": {
+        "startLine": 306,
+        "startChar": 7,
+        "endLine": 306,
+        "endChar": 91
+      },
+      "revId": "2bd2ef7ff5ae00de459b5849ced0e31b34d5f438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
