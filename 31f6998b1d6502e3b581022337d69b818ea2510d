@@ -192,6 +192,24 @@
       "parentUuid": "5b1d0733_b1c87a1b",
       "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a9fc03_b5d2ee8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-03-19T14:43:20Z",
+      "side": 1,
+      "message": "@enga@chromium.org, \"experimenting locally\" is different from \"field trials\", which you said earlier and implies running experiments on users in the wild. I\u0027m all for experimenting locally.\n\nFor local testing, I recommend using `ID3D12Device::SetStablePowerState`, and `ID3D12Device6::SetBackgroundProcessingMode`. Both require you to put Windows into \"developer mode\".\n\n`SetStablePowerState` disables the dynamic frequency scheduling talked about in the change description and gives you repeatable measurements. The setting is global to the system so you can call it in a program that\u0027s running off to the side while you do measurement.\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-setstablepowerstate\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device6-setbackgroundprocessingmode",
+      "parentUuid": "92938bf3_c768fa89",
+      "revId": "31f6998b1d6502e3b581022337d69b818ea2510d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
