@@ -153,6 +153,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -206,6 +209,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @internal(disable_validation__binding_point_collision) @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -222,12 +228,14 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<u32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -286,6 +294,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -341,6 +352,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -425,6 +439,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -510,6 +527,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -526,12 +546,14 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -542,12 +564,14 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
 }
 
 fn textureLoadExternal_1(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<u32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -605,6 +629,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -619,12 +646,14 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -635,12 +664,14 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
 }
 
 fn textureLoadExternal_1(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<u32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -699,6 +730,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -739,12 +773,14 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
 }
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -799,6 +835,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -835,12 +874,14 @@ fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp
 }
 
 fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord : vec2<i32>, params : ExternalTextureParams) -> vec4<f32> {
-  let coord1 = (coord >> vec2<u32>(1));
+  let modifiedCoords = (params.loadTransformMatrix * vec3<f32>(vec2<f32>(coord), 1));
+  let clampedCoord0 = clamp(vec2<u32>(modifiedCoords), params.minVisibleCoord, params.maxVisibleCoord);
+  let coord1 = (clampedCoord0 >> vec2<u32>(1));
   var color : vec4<f32>;
   if ((params.numPlanes == 1)) {
-    color = textureLoad(plane0, coord, 0).rgba;
+    color = textureLoad(plane0, clampedCoord0, 0).rgba;
   } else {
-    color = vec4<f32>((vec4<f32>(textureLoad(plane0, coord, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
+    color = vec4<f32>((vec4<f32>(textureLoad(plane0, clampedCoord0, 0).r, textureLoad(plane1, coord1, 0).rg, 1) * params.yuvToRgbConversionMatrix), 1);
   }
   if ((params.doYuvToRgbConversionOnly == 0)) {
     color = vec4<f32>(gammaCorrection(color.rgb, params.gammaDecodeParams), color.a);
@@ -905,6 +946,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1016,6 +1060,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1109,6 +1156,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1202,6 +1252,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1297,6 +1350,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1401,6 +1457,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1506,6 +1565,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1607,6 +1669,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1696,6 +1761,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<u32> {
@@ -1748,6 +1816,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1844,6 +1915,9 @@ struct ExternalTextureParams {
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
   coordTransformationMatrix : mat3x2<f32>,
+  loadTransformMatrix : mat3x2<f32>,
+  minVisibleCoord : vec2<u32>,
+  maxVisibleCoord : vec2<u32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;

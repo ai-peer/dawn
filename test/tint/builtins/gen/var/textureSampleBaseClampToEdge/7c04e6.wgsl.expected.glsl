@@ -26,8 +26,9 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformMatrix;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 struct ExternalTextureParams_std140 {
@@ -42,8 +43,11 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformMatrix_0;
+  vec2 loadTransformMatrix_1;
+  vec2 loadTransformMatrix_2;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
@@ -83,7 +87,7 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), mat3x2(val.loadTransformMatrix_0, val.loadTransformMatrix_1, val.loadTransformMatrix_2), val.minVisibleCoord, val.maxVisibleCoord);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
@@ -139,8 +143,9 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformMatrix;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 struct ExternalTextureParams_std140 {
@@ -155,8 +160,11 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformMatrix_0;
+  vec2 loadTransformMatrix_1;
+  vec2 loadTransformMatrix_2;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
@@ -196,7 +204,7 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), mat3x2(val.loadTransformMatrix_0, val.loadTransformMatrix_1, val.loadTransformMatrix_2), val.minVisibleCoord, val.maxVisibleCoord);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
@@ -245,8 +253,9 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat3x2 coordTransformationMatrix;
-  uint pad_2;
-  uint pad_3;
+  mat3x2 loadTransformMatrix;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 struct ExternalTextureParams_std140 {
@@ -261,8 +270,11 @@ struct ExternalTextureParams_std140 {
   vec2 coordTransformationMatrix_0;
   vec2 coordTransformationMatrix_1;
   vec2 coordTransformationMatrix_2;
-  uint pad_2;
-  uint pad_3;
+  vec2 loadTransformMatrix_0;
+  vec2 loadTransformMatrix_1;
+  vec2 loadTransformMatrix_2;
+  uvec2 minVisibleCoord;
+  uvec2 maxVisibleCoord;
 };
 
 layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
@@ -302,7 +314,7 @@ vec4 textureSampleExternal(highp sampler2D plane0_smp, highp sampler2D plane1_sm
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
-  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
+  return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), mat3x2(val.loadTransformMatrix_0, val.loadTransformMatrix_1, val.loadTransformMatrix_2), val.minVisibleCoord, val.maxVisibleCoord);
 }
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {

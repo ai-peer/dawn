@@ -16,11 +16,14 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float3x2 loadTransformMatrix;
+  uint2 minVisibleCoord;
+  uint2 maxVisibleCoord;
 };
 
 Texture2D<float4> ext_tex_plane_1 : register(t2, space1);
 cbuffer cbuffer_ext_tex_params : register(b3, space1) {
-  uint4 ext_tex_params[13];
+  uint4 ext_tex_params[15];
 };
 Texture2D<float4> arg_0 : register(t0, space1);
 SamplerState arg_1 : register(s1, space1);
@@ -98,7 +101,11 @@ float3x2 ext_tex_params_load_8(uint offset) {
 ExternalTextureParams ext_tex_params_load(uint offset) {
   const uint scalar_offset_17 = ((offset + 0u)) / 4;
   const uint scalar_offset_18 = ((offset + 4u)) / 4;
-  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
+  const uint scalar_offset_19 = ((offset + 224u)) / 4;
+  uint4 ubo_load_3 = ext_tex_params[scalar_offset_19 / 4];
+  const uint scalar_offset_20 = ((offset + 232u)) / 4;
+  uint4 ubo_load_4 = ext_tex_params[scalar_offset_20 / 4];
+  ExternalTextureParams tint_symbol_2 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u)), ext_tex_params_load_8((offset + 200u)), ((scalar_offset_19 & 2) ? ubo_load_3.zw : ubo_load_3.xy), ((scalar_offset_20 & 2) ? ubo_load_4.zw : ubo_load_4.xy)};
   return tint_symbol_2;
 }
 
