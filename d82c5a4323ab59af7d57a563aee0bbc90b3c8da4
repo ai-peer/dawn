@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daeebe16_b96f1e7b",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T14:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0479852f_75fbe000",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 9
+      },
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "073c65c2_a92e7bdd",
@@ -124,6 +148,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d62d37_c8b566a4",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T14:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "129c40f7_c374d2a1",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef3c3ada_129995ff",
@@ -141,6 +183,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4fa2e5b_9dbc930c",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T14:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3c3ada_129995ff",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "884782ef_ae7ea3ca",
@@ -154,6 +214,24 @@
       "writtenOn": "2024-03-18T21:23:06Z",
       "side": 1,
       "message": "Probably need to recurse into the LHS expression.",
+      "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922f1c8a_0dc87c4c",
+        "filename": "src/tint/lang/wgsl/ast/transform/fold_constants.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-19T14:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "884782ef_ae7ea3ca",
       "revId": "d82c5a4323ab59af7d57a563aee0bbc90b3c8da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
