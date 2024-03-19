@@ -309,6 +309,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "r8unorm_storage.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::StaticSamplers,
+     {"Support setting samplers statically as part of bind group layout",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "static_samplers.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace
