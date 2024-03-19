@@ -129,6 +129,7 @@ Ref<RenderPassEncoder> RenderPassEncoder::MakeError(DeviceBase* device,
 }
 
 RenderPassEncoder::~RenderPassEncoder() {
+    mIndirectDrawMetadata.ClearIndexedIndirectBufferValidationInfo();
     mEncodingContext = nullptr;
 }
 

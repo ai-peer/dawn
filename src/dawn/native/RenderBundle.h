@@ -56,6 +56,7 @@ class RenderBundleBase final : public ApiObjectBase {
                      bool stencilReadOnly,
                      RenderPassResourceUsage resourceUsage,
                      IndirectDrawMetadata indirectDrawMetadata);
+    ~RenderBundleBase() override;
 
     static Ref<RenderBundleBase> MakeError(DeviceBase* device, const char* label);
 

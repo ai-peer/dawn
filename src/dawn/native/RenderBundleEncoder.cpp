@@ -119,6 +119,7 @@ RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag, 
       mBundleEncodingContext(device, this) {}
 
 RenderBundleEncoder::~RenderBundleEncoder() {
+    mIndirectDrawMetadata.ClearIndexedIndirectBufferValidationInfo();
     mEncodingContext = nullptr;
 }
 
