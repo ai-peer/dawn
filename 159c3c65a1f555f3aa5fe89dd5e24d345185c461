@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "817fb8e9_42ed0010",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-19T06:07:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cf2ceb76_fd3a771b",
+      "range": {
+        "startLine": 575,
+        "startChar": 4,
+        "endLine": 575,
+        "endChar": 9
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2883b81_e983a5f3",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-03-18T14:41:12Z",
       "side": 1,
       "message": "nit: Do we only change the last usage here? If yes, we just need to move the buffer to the back of the vector, and the above `std::sort` is not necessary.",
+      "range": {
+        "startLine": 581,
+        "startChar": 8,
+        "endLine": 581,
+        "endChar": 44
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0ff2b0_ac287b9b",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-19T06:07:41Z",
+      "side": 1,
+      "message": "Probably we still need to sort. The last usage serial of this buffer could be updated many times as its client may use it later in several submits. Similarly the last usage serial of existing staging buffers could become different from what was acquired here.",
+      "parentUuid": "d2883b81_e983a5f3",
       "range": {
         "startLine": 581,
         "startChar": 8,
@@ -134,6 +182,54 @@
       "writtenOn": "2024-03-18T14:24:30Z",
       "side": 1,
       "message": "nit: also check `(*it)-\u003eIsFinishedUseInPendingCommands()`, since `mStagingBuffers` is sorted by last usage, if one buffer is not finished, all buffers after it should be unfinished as well.",
+      "range": {
+        "startLine": 592,
+        "startChar": 15,
+        "endLine": 592,
+        "endChar": 85
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42908997_5a7c99e7",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-19T06:07:41Z",
+      "side": 1,
+      "message": "Below `erase` updates `it`, so no need to increase it here.\n```\n  it \u003d mStagingBuffers.erase(it);\n```",
+      "parentUuid": "a6181dde_e37c0c75",
+      "range": {
+        "startLine": 592,
+        "startChar": 86,
+        "endLine": 592,
+        "endChar": 87
+      },
+      "revId": "159c3c65a1f555f3aa5fe89dd5e24d345185c461",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f16d1da_66a928a6",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-19T06:07:41Z",
+      "side": 1,
+      "message": "Makes sense!",
+      "parentUuid": "2ee60624_a1f05789",
       "range": {
         "startLine": 592,
         "startChar": 15,
