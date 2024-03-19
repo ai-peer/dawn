@@ -37,6 +37,11 @@ struct ExternalTextureParams_tint_packed_vec3 {
   GammaTransferParams gammaEncodeParams;
   tint_array<tint_packed_vec3_f32_array_element, 3> gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float2 visibleRectMin;
+  float2 visibleRectMax;
+  uint2 plane0Size;
+  uint2 plane1Size;
+  uint2 displayVisibleSize;
 };
 
 struct ExternalTextureParams {
@@ -47,5 +52,10 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float3x2 coordTransformationMatrix;
+  float2 visibleRectMin;
+  float2 visibleRectMax;
+  uint2 plane0Size;
+  uint2 plane1Size;
+  uint2 displayVisibleSize;
 };
 
