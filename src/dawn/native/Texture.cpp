@@ -1175,6 +1175,38 @@ SharedTextureMemoryContents* TextureBase::GetSharedTextureMemoryContents() const
     return mSharedTextureMemoryContents.Get();
 }
 
+void TextureBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump, const char* prefix) const {
+    // Do not emit for destroyed textures or textures that wrap external shared texture memory.
+    if (!IsAlive() || GetSharedTextureMemoryContents() != nullptr) {
+        return;
+    }
+    std::string name = absl::StrFormat("%s/texture_%p", prefix, static_cast<const void*>(this));
+    dump->AddScalar(name.c_str(), MemoryDump::kNameSize, MemoryDump::kUnitsBytes,
+                    GetEstimatedByteSize());
+    dump->AddString(name.c_str(), "label", GetLabel());
+    dump->AddString(name.c_str(), "dimensions", GetSizeLabel());
+    dump->AddString(name.c_str(), "format", absl::StrFormat("%s", GetFormat().format));
+}
+
+uint64_t TextureBase::GetEstimatedByteSize() const {
+    uint64_t byteSize = 0;
+    uint8_t aspectSelector = 0x1;
+    uint8_t allAspects = static_cast<uint8_t>(ConvertAspect(*mFormat, wgpu::TextureAspect::All));
+    while (aspectSelector <= static_cast<uint8_t>(Aspect::CombinedDepthStencil)) {
+        if (Aspect singleAspect = static_cast<Aspect>(allAspects & aspectSelector);
+            singleAspect != Aspect::None) {
+            const AspectInfo& info = mFormat->GetAspectInfo(singleAspect);
+            for (uint32_t i = 0; i < GetNumMipLevels(); i++) {
+                auto mipVirtualSize = GetMipLevelSingleSubresourceVirtualSize(i, singleAspect);
+                byteSize += mSampleCount * mipVirtualSize.width * mipVirtualSize.height *
+                            mipVirtualSize.depthOrArrayLayers * info.block.byteSize;
+            }
+        }
+        aspectSelector <<= 1;
+    }
+    return byteSize;
+}
+
 void TextureBase::APIDestroy() {
     Destroy();
 }

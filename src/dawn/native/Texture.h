@@ -151,6 +151,8 @@ class TextureBase : public ApiObjectBase {
 
     SharedTextureMemoryContents* GetSharedTextureMemoryContents() const;
 
+    void DumpMemoryStatistics(dawn::native::MemoryDump* dump, const char* prefix) const;
+
     // Dawn API
     TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
     TextureViewBase* APICreateErrorView(const TextureViewDescriptor* descriptor = nullptr);
@@ -187,6 +189,8 @@ class TextureBase : public ApiObjectBase {
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
 
     std::string GetSizeLabel() const;
+
+    uint64_t GetEstimatedByteSize() const;
 
     wgpu::TextureDimension mDimension;
     wgpu::TextureViewDimension
