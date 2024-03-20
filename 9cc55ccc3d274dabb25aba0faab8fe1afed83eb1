@@ -46,6 +46,30 @@
       },
       "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9816fbe_353f8c65",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-20T13:39:37Z",
+      "side": 1,
+      "message": "\u003e How long have we soak-tested this change?\nI forgot to answer this question. It has been [2 days](https://dawn-review.googlesource.com/c/dawn/+/179800).",
+      "parentUuid": "ab09cb4a_5e7caf23",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
