@@ -345,6 +345,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     State GetState() const;
     bool IsLost() const;
     ApiObjectList* GetObjectTrackingList(ObjectType type);
+    const ApiObjectList* GetObjectTrackingList(ObjectType type) const;
 
     std::vector<const char*> GetTogglesUsed() const;
     const tint::wgsl::AllowedFeatures& GetWGSLAllowedFeatures() const;
@@ -442,15 +443,20 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
 
+<<<<<<< PATCH SET (896289 Chromium memory instrumentation support in Dawn)
+    void DumpMemoryStatistics(dawn::native::MemoryDump* dump) const;
+=======
     Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
         Ref<ComputePipelineBase> computePipeline);
     Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(Ref<RenderPipelineBase> renderPipeline);
+>>>>>>> BASE      (68ed0f [WGPUFuture] Implement CreateRenderPipelineAsyncF)
 
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
 
     void ForceSetToggleForTesting(Toggle toggle, bool isEnabled);
+    void ForceEnableFeatureForTesting(Feature feature);
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
