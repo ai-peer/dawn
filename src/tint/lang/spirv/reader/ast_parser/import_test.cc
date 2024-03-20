@@ -67,7 +67,7 @@ TEST_F(SpvParserImportTest, Import_NonSemantic_IgnoredImport) {
     p->DeliberatelyInvalidSpirv();
 }
 
-TEST_F(SpvParserImportTest, DISABLED_Import_NonSemantic_IgnoredExtInsts) {
+TEST_F(SpvParserImportTest, Import_NonSemantic_IgnoredExtInsts) {
     // TODO(crbug.com/tint/1789): The NonSemantic.ClspvReflection.1 instruction
     // set grammar has changed
     // but the corresponding feature in Clspv has not yet landed.
