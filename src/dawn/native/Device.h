@@ -338,6 +338,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     State GetState() const;
     bool IsLost() const;
     ApiObjectList* GetObjectTrackingList(ObjectType type);
+    const ApiObjectList* GetObjectTrackingList(ObjectType type) const;
 
     std::vector<const char*> GetTogglesUsed() const;
     const tint::wgsl::AllowedFeatures& GetWGSLAllowedFeatures() const;
@@ -440,11 +441,14 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
 
+    void DumpMemoryStatistics(dawn::native::MemoryDump* dump) const;
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
 
     void ForceSetToggleForTesting(Toggle toggle, bool isEnabled);
+    void ForceEnableFeatureForTesting(Feature feature);
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
