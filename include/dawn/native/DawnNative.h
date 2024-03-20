@@ -281,6 +281,18 @@ DAWN_NATIVE_EXPORT std::vector<const ToggleInfo*> AllToggleInfos();
 // name of an feature supported in Dawn.
 DAWN_NATIVE_EXPORT const FeatureInfo* GetFeatureInfo(wgpu::FeatureName feature);
 
+class DAWN_NATIVE_EXPORT MemoryDump {
+  public:
+    MemoryDump() = default;
+    virtual ~MemoryDump() = default;
+    virtual void AddScalar(const char* name,
+                           const char* key,
+                           const char* units,
+                           uint64_t value) = 0;
+    virtual void AddString(const char* name, const char* key, const std::string& value) = 0;
+};
+DAWN_NATIVE_EXPORT void DumpMemoryStatistics(WGPUDevice device, MemoryDump* dump);
+
 }  // namespace dawn::native
 
 #endif  // INCLUDE_DAWN_NATIVE_DAWNNATIVE_H_

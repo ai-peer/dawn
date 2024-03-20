@@ -98,11 +98,19 @@ class ApiObjectList {
     // Destroys and removes all the objects tracked in the list.
     void Destroy();
 
+    template <typename F>
+    void ForEach(F fn) const {
+        std::lock_guard<std::mutex> lock(mMutex);
+        for (const auto* node = mObjects.head(); node != mObjects.end(); node = node->next()) {
+            fn(node->value());
+        }
+    }
+
   private:
     // Boolean used to mark the list so that on subsequent calls to Untrack, we don't need to
     // reaquire the lock, and Track on new objects immediately destroys them.
     bool mMarkedDestroyed = false;
-    std::mutex mMutex;
+    mutable std::mutex mMutex;
     LinkedList<ApiObjectBase> mObjects;
 };
 

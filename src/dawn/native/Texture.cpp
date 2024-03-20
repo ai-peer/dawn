@@ -1210,6 +1210,25 @@ wgpu::TextureUsage TextureBase::APIGetUsage() const {
     return mUsage;
 }
 
+uint64_t TextureBase::GetEstimatedByteSize() const {
+    uint64_t byteSize = 0;
+    uint8_t aspectSelector = 0x1;
+    uint8_t allAspects = static_cast<uint8_t>(ConvertAspect(*mFormat, wgpu::TextureAspect::All));
+    while (aspectSelector <= static_cast<uint8_t>(Aspect::CombinedDepthStencil)) {
+        if (Aspect singleAspect = static_cast<Aspect>(allAspects & aspectSelector);
+            singleAspect != Aspect::None) {
+            const AspectInfo& info = mFormat->GetAspectInfo(singleAspect);
+            for (uint32_t i = 0; i < GetNumMipLevels(); i++) {
+                auto mipVirtualSize = GetMipLevelSingleSubresourceVirtualSize(i, singleAspect);
+                byteSize += mipVirtualSize.width * mipVirtualSize.height *
+                            mipVirtualSize.depthOrArrayLayers * info.block.byteSize;
+            }
+        }
+        aspectSelector <<= 1;
+    }
+    return byteSize;
+}
+
 // TextureViewBase
 
 TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescriptor* descriptor)

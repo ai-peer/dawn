@@ -70,6 +70,7 @@
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/native/utils/WGPUHelpers.h"
+#include "dawn/native/webgpu_absl_format.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -843,6 +844,10 @@ bool DeviceBase::IsLost() const {
 }
 
 ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
+    return &mObjectLists[type];
+}
+
+const ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) const {
     return &mObjectLists[type];
 }
 
@@ -2424,6 +2429,27 @@ Mutex::AutoLock DeviceBase::GetScopedLock() {
 
 bool DeviceBase::IsLockedByCurrentThreadIfNeeded() const {
     return mMutex == nullptr || mMutex->IsLockedByCurrentThread();
+}
+
+void DeviceBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump) const {
+    GetObjectTrackingList(ObjectType::Texture)->ForEach([&](const ApiObjectBase* texture) {
+        if (static_cast<const TextureBase*>(texture)->GetSharedTextureMemoryContents() == nullptr) {
+            std::string name =
+                absl::StrFormat("dawn/device_%p/texture_%p", static_cast<const void*>(this),
+                                static_cast<const void*>(texture));
+            dump->AddScalar(name.c_str(), "size", "bytes",
+                            static_cast<const TextureBase*>(texture)->GetEstimatedByteSize());
+            dump->AddString(name.c_str(), "label", absl::StrFormat("%s", texture));
+        }
+    });
+    GetObjectTrackingList(ObjectType::Buffer)->ForEach([&](const ApiObjectBase* buffer) {
+        std::string name =
+            absl::StrFormat("dawn/device_%p/buffer_%p", static_cast<const void*>(this),
+                            static_cast<const void*>(buffer));
+        dump->AddScalar(name.c_str(), "size", "bytes",
+                        static_cast<const BufferBase*>(buffer)->GetAllocatedSize());
+        dump->AddString(name.c_str(), "label", absl::StrFormat("%s", buffer));
+    });
 }
 
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)

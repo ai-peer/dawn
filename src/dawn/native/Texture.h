@@ -164,6 +164,8 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureFormat APIGetFormat() const;
     wgpu::TextureUsage APIGetUsage() const;
 
+    uint64_t GetEstimatedByteSize() const;
+
   protected:
     TextureBase(DeviceBase* device, const UnpackedPtr<TextureDescriptor>& descriptor);
     ~TextureBase() override;

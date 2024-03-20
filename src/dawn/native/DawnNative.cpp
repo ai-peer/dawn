@@ -303,4 +303,8 @@ const FeatureInfo* GetFeatureInfo(wgpu::FeatureName feature) {
     return &kFeatureNameAndInfoList[FromAPI(feature)];
 }
 
+void DumpMemoryStatistics(WGPUDevice device, MemoryDump* dump) {
+    FromAPI(device)->DumpMemoryStatistics(dump);
+}
+
 }  // namespace dawn::native
