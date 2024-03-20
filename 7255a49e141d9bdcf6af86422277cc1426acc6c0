@@ -16,6 +16,24 @@
       "message": "I\u0027m OOO for a week, but I\u0027m really surprised that this test passes as long as the formats are expressible in WGSL. Adding Austin for futher review.",
       "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea7c532b_4523334a",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-20T19:28:44Z",
+      "side": 1,
+      "message": "Ping enga@",
+      "parentUuid": "7969933f_8472aba6",
+      "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
