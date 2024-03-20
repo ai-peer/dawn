@@ -56,6 +56,7 @@ MaybeError PhysicalDeviceBase::Initialize() {
     EnableFeature(Feature::DawnInternalUsages);
     EnableFeature(Feature::ImplicitDeviceSynchronization);
     EnableFeature(Feature::FormatCapabilities);
+    EnableFeature(Feature::StaticSamplers);
     InitializeSupportedFeaturesImpl();
 
     DAWN_TRY_CONTEXT(
@@ -169,10 +170,12 @@ FeatureValidationResult PhysicalDeviceBase::ValidateFeatureSupportedWithToggles(
     const TogglesState& toggles) const {
     auto validateNameResult = ValidateFeatureName(feature);
     if (validateNameResult.IsError()) {
+        //DAWN_ASSERT(false);
         return FeatureValidationResult(validateNameResult.AcquireError()->GetMessage());
     }
 
     if (!mSupportedFeatures.IsEnabled(feature)) {
+        DAWN_ASSERT(false);
         return FeatureValidationResult(
             absl::StrFormat("Requested feature %s is not supported.", feature));
     }
@@ -182,6 +185,7 @@ FeatureValidationResult PhysicalDeviceBase::ValidateFeatureSupportedWithToggles(
     if (featureInfo->featureState == FeatureInfo::FeatureState::Experimental) {
         // AllowUnsafeAPIs toggle is by default disabled if not explicitly enabled.
         if (!toggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+          DAWN_ASSERT(false);
             return FeatureValidationResult(absl::StrFormat(
                 "Feature %s is guarded by toggle allow_unsafe_apis.", featureInfo->name));
         }

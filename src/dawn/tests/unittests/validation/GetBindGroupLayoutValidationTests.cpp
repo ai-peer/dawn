@@ -425,6 +425,50 @@ TEST_F(GetBindGroupLayoutTests, ComputePipeline) {
     EXPECT_THAT(bgl, BindGroupLayoutCacheEq(pipeline.GetBindGroupLayout(0)));
 }
 
+// TODO(blundell): Add description
+TEST_F(GetBindGroupLayoutTests, StaticSamplerNotSupportedWithoutFeatureEnabled) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+}
+
+class GetBindGroupLayoutWithStaticSamplersTests : public GetBindGroupLayoutTests {
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::StaticSamplers};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// TODO(blundell): Add description
+TEST_F(GetBindGroupLayoutWithStaticSamplersTests, StaticSamplerSupportedWhenFeatureEnabled) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    device.CreateBindGroupLayout(&desc);
+}
+
 // Test that the binding type matches the shader.
 TEST_F(GetBindGroupLayoutTests, BindingType) {
     DAWN_SKIP_TEST_IF(UsesWire());
