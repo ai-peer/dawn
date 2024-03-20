@@ -94,6 +94,30 @@
       },
       "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e73d8bd_b9aebe7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-20T15:01:31Z",
+      "side": 1,
+      "message": "Yes, let\u0027s wait till next week.",
+      "parentUuid": "781ee8d2_5974b966",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
