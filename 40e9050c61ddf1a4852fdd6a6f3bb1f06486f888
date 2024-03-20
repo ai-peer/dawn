@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "40e9050c61ddf1a4852fdd6a6f3bb1f06486f888",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceffb347_68fa4af0",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/import_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-20T17:33:11Z",
+      "side": 1,
+      "message": "Should probably remove this comment too.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 52
+      },
+      "revId": "40e9050c61ddf1a4852fdd6a6f3bb1f06486f888",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
