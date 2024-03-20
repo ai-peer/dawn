@@ -22,6 +22,30 @@
       },
       "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab09cb4a_5e7caf23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-20T13:39:00Z",
+      "side": 1,
+      "message": "I think that monitoring builds in experimental mode won\u0027t tell us much about resource exhaustion, just whether or not they are actually passing or failing when they run.\n\nJust for some comparison:\n* gn try/mac pool has [13 bots](https://ci.chromium.org/ui/p/dawn/builders/try/mac-rel) (MacOS 10.14 and 11)\n* cmake try/mac pool has [10 bots](https://ci.chromium.org/ui/p/dawn/builders/try/cmake-mac-rel) (Mac OS 11, 12, 13)\n\n* gn [ci/mac pool](https://ci.chromium.org/ui/p/dawn/builders/ci/mac-rel) has 7 bots (MacOS 10.14 and 11)\n* cmake [try/mac pool](https://ci.chromium.org/ui/p/dawn/builders/ci/cmake-mac-rel) has 9 bots.\n\nNote that although we have 3 fewers bots in the try pool, we have 2 more in the ci pool, and the cts-roller uses the ci pool. So at least the cts-roller should be fine. For try bots, we\u0027ll see if we hit exhaustion when running try bots against our CLs.\n\nThe experimental cmake-mac builds have been successful for [the past couple days](https://ci.chromium.org/ui/p/dawn/builders?q\u003dcmake-mac\u0026numOfBuilds\u003d100).",
+      "parentUuid": "c14dade1_4c50b0ef",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
