@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c14dade1_4c50b0ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-20T13:21:42Z",
+      "side": 1,
+      "message": "How long have we soak-tested this change?\nCan we monitor for at least a week before making it non-experimental?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
