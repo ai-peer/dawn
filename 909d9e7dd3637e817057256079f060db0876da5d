@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "268ac784_93371d6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-20T12:50:29Z",
+      "side": 1,
+      "message": "Hi folks,\n\nHere\u0027s an initial CL adding the ability to set a static sampler in a sampler binding layout. Before we go further however, I have a question: Is having Sampler instances in static samplers actually what we need? i.e., our only use case is YCbCr, and I have an impression (but could be wrong here) that for YCbCr what Dawn would save under the hood in the Vulkan backend would actually be the YCbCr info itself rather than a Vulkan sampler instance that would correspond to the Dawn sampler instance passed in the static sampler?\n\nIn other words, what will we actually need to pass for setting YCbCr samplers as part of sampler binding layout? We should make sure that the general-purpose setup we\u0027re doing here actually paves the way for that.",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
