@@ -382,6 +382,7 @@ dawn_test("dawn_unittests") {
     "unittests/validation/ComputeValidationTests.cpp",
     "unittests/validation/CopyCommandsValidationTests.cpp",
     "unittests/validation/CopyTextureForBrowserTests.cpp",
+    "unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
     "unittests/validation/DebugMarkerValidationTests.cpp",
     "unittests/validation/DeviceValidationTests.cpp",
     "unittests/validation/DrawIndirectValidationTests.cpp",
