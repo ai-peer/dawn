@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fe1c48d_1a04faf4",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-03-20T19:12:55Z",
+      "side": 1,
+      "message": "nit/bikeshed: I have a slight preference for ClearColorWithDraw, but I\u0027ll leave it up to Dawn OWNERS for the name they like",
+      "range": {
+        "startLine": 140,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 22
+      },
+      "revId": "34f91a45385a6a8d134a7c27cdf98bb449043297",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
