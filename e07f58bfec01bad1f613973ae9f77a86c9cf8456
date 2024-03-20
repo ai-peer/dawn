@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de0f78db_4e381756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-20T06:52:33Z",
+      "side": 1,
+      "message": "I have file a tracker issue, dawn:2470, to track SM6.6 related Intel devices issues, and refer the toggle to the tracker.\nPlease take a look, thanks!",
+      "revId": "e07f58bfec01bad1f613973ae9f77a86c9cf8456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
