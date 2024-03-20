@@ -70,6 +70,30 @@
       },
       "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781ee8d2_5974b966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-20T13:54:07Z",
+      "side": 1,
+      "message": "\u003e I think that monitoring builds in experimental mode won\u0027t tell us much about resource exhaustion\n\nWhy? The last link you gave shows the resource exhaustion failures in purple.\n\n\u003e So at least the cts-roller should be fine. For try bots, we\u0027ll see if we hit exhaustion when running try bots against our CLs.\n\nWe can find out the same information without impacting the team by just waiting a bit, no? There\u0027s no rush here.",
+      "parentUuid": "c9816fbe_353f8c65",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 14
+      },
+      "revId": "9cc55ccc3d274dabb25aba0faab8fe1afed83eb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
