@@ -534,13 +534,14 @@ MaybeError RenderPipeline::InitializeShaders() {
     return {};
 }
 
-void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
-                                     WGPUCreateRenderPipelineAsyncCallback callback,
-                                     void* userdata) {
-    std::unique_ptr<CreateRenderPipelineAsyncTask> asyncTask =
-        std::make_unique<CreateRenderPipelineAsyncTask>(std::move(renderPipeline), callback,
-                                                        userdata);
-    CreateRenderPipelineAsyncTask::RunAsync(std::move(asyncTask));
+Ref<CreateRenderPipelineAsyncEvent> RenderPipeline::InitializeAsync(
+    Device* device,
+    Ref<RenderPipelineBase> renderPipeline,
+    const CreateRenderPipelineAsyncCallbackInfo& callbackInfo) {
+    Ref<CreateRenderPipelineAsyncEvent> event = AcquireRef(new CreateRenderPipelineAsyncEvent(
+        device, callbackInfo, std::move(renderPipeline), AcquireRef(new SystemEvent())));
+    event->InitializeAsync();
+    return event;
 }
 
 }  // namespace dawn::native::d3d11
