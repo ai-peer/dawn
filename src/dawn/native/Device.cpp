@@ -52,6 +52,7 @@
 #include "dawn/native/ErrorInjector.h"
 #include "dawn/native/ErrorScope.h"
 #include "dawn/native/ExternalTexture.h"
+#include "dawn/native/Format.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/InternalPipelineStore.h"
 #include "dawn/native/ObjectType_autogen.h"
@@ -70,6 +71,7 @@
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/native/utils/WGPUHelpers.h"
+#include "dawn/native/webgpu_absl_format.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -843,6 +845,10 @@ bool DeviceBase::IsLost() const {
 }
 
 ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) {
+    return &mObjectLists[type];
+}
+
+const ApiObjectList* DeviceBase::GetObjectTrackingList(ObjectType type) const {
     return &mObjectLists[type];
 }
 
@@ -2428,6 +2434,16 @@ Mutex::AutoLock DeviceBase::GetScopedLock() {
 
 bool DeviceBase::IsLockedByCurrentThreadIfNeeded() const {
     return mMutex == nullptr || mMutex->IsLockedByCurrentThread();
+}
+
+void DeviceBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump) const {
+    std::string prefix = absl::StrFormat("device_%p", static_cast<const void*>(this));
+    GetObjectTrackingList(ObjectType::Texture)->ForEach([&](const ApiObjectBase* texture) {
+        static_cast<const TextureBase*>(texture)->DumpMemoryStatistics(dump, prefix.c_str());
+    });
+    GetObjectTrackingList(ObjectType::Buffer)->ForEach([&](const ApiObjectBase* buffer) {
+        static_cast<const BufferBase*>(buffer)->DumpMemoryStatistics(dump, prefix.c_str());
+    });
 }
 
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
