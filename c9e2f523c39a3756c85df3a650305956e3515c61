@@ -16,6 +16,24 @@
       "message": "I don\u0027t get why These test expectations are getting: \"does not match any tests in the webgpu_cts test suite\" when they just fail in previous run\nhttps://ci.chromium.org/ui/p/chromium/builders/try/android-dawn-arm64-rel/9314/overview",
       "revId": "c9e2f523c39a3756c85df3a650305956e3515c61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cd1b5c_bc4b0b77",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 44
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-21T02:41:24Z",
+      "side": 1,
+      "message": "Turns out in the LUCI page it renders `\"_undef_\"` as italic style `\"undef\"`. I copied from it resulting in a missmatch. (Facepalm)",
+      "parentUuid": "d31a30c7_93f2df90",
+      "revId": "c9e2f523c39a3756c85df3a650305956e3515c61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
