@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fde7557_c53f8c00",
+        "filename": "src/dawn/native/CreatePipelineAsyncEvent.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-21T23:04:03Z",
+      "side": 1,
+      "message": "nit. Maybe just group these with the `AddOrGetCachedPipeline` implementations with the pipeline type. So that render pipeline stuff is together and compute pipeline stuff is together.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 33
+      },
+      "revId": "1fc59def894aa46faac6fa2347609661d23df218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
