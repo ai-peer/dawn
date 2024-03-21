@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4041983d_63133ef0",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-21T21:47:02Z",
+      "side": 1,
+      "message": "It sounds like this should be `\u003e\u003d 0` instead? I\u0027m guessing 8935 is the first broken version.",
+      "revId": "faacec34e9e3fa9d4a187bc68b9cec134d00e44f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19dbd1b_8a84eafa",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-21T21:47:02Z",
+      "side": 1,
+      "message": "Similarly not sure if this should be `\u003c\u003d 0`. Is 9684 the last broken, or the first fixed?",
+      "revId": "faacec34e9e3fa9d4a187bc68b9cec134d00e44f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
