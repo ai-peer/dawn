@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "520d110e_dd91e342",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-21T22:39:02Z",
+      "side": 1,
+      "message": "Yes, this is to fix a device lost test IIRC",
+      "parentUuid": "46e57035_6e846168",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "3a2f32ff624ea338fad09c46a7c8ec6a29b8f18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed1d8314_22b2f6e4",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-21T21:59:36Z",
       "side": 1,
       "message": "Fine for now, but add a TODO for these tests for a follow up. I think that this test should eventually be updated to:\n\n1) Call the new API using a `CallbackInfo`\n2) Use spontaneous mode\n3) Shouldn\u0027t need the last `ProcessEvents` call once that\u0027s all done because the device should be tracking all the pipeline events, and when it\u0027s last external ref is gone, it should call `SetFutureReady` on all of them with device lost.",
+      "range": {
+        "startLine": 361,
+        "startChar": 4,
+        "endLine": 362,
+        "endChar": 29
+      },
+      "revId": "3a2f32ff624ea338fad09c46a7c8ec6a29b8f18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570fc16a_707f3f67",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-21T22:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed1d8314_22b2f6e4",
       "range": {
         "startLine": 361,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e27cbde_854da06f",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-21T22:39:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "692d58d0_494c7a50",
+      "range": {
+        "startLine": 475,
+        "startChar": 4,
+        "endLine": 477,
+        "endChar": 34
+      },
+      "revId": "3a2f32ff624ea338fad09c46a7c8ec6a29b8f18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e04da97_9c667e7a",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-03-21T21:59:36Z",
       "side": 1,
       "message": "Hmm interesting that these are failing now... Do you know if they are actually directly related to the change? Or did the change expose something entirely different?",
+      "range": {
+        "startLine": 819,
+        "startChar": 0,
+        "endLine": 821,
+        "endChar": 155
+      },
+      "revId": "3a2f32ff624ea338fad09c46a7c8ec6a29b8f18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a65d8c3_581d2599",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 45
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-03-21T22:39:02Z",
+      "side": 1,
+      "message": "These tests call `CreateComputePipelineAsync` so is likely related. It is pretty obvious these tests are very likely to time out.(~3 out of 4)\nBut they themselves are pretty flaky (According to the luci similiar failure page).\nAnd they seem to pass on pixel 4. So just suppress them first.",
+      "parentUuid": "5e04da97_9c667e7a",
       "range": {
         "startLine": 819,
         "startChar": 0,
