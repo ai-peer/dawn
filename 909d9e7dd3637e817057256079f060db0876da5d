@@ -70,6 +70,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e99ba45_1fb43bcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-21T17:17:50Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a495b547_a8d5f271",
@@ -83,6 +100,30 @@
       "writtenOn": "2024-03-21T17:15:27Z",
       "side": 1,
       "message": "nit question for my knowledge: Is there a reason this and similar comment docs wrap at a lower line length than the test or class definitions?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daeecc0a_e56d2609",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-21T17:17:50Z",
+      "side": 1,
+      "message": "My editor wraps at 80 but I think Dawn style is something else (presumably 100), although I can\u0027t find the Dawn style guide online immediately.",
+      "parentUuid": "a495b547_a8d5f271",
       "range": {
         "startLine": 65,
         "startChar": 0,
