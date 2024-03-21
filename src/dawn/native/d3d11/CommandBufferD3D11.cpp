@@ -379,7 +379,6 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                                  ->Write(commandContext, dst.offset + offset, data, size));
                     return {};
                 };
-
                 DAWN_TRY(ToBackend(src.texture)
                              ->Read(commandContext, subresources, src.origin, copy->copySize,
                                     dst.bytesPerRow, dst.rowsPerImage, callback));
