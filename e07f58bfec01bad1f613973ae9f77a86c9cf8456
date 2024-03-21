@@ -16,6 +16,23 @@
       "message": "I have file a tracker issue, dawn:2470, to track SM6.6 related Intel devices issues, and refer the toggle to the tracker.\nPlease take a look, thanks!",
       "revId": "e07f58bfec01bad1f613973ae9f77a86c9cf8456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9187d428_3085e45c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-03-21T02:39:49Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "e07f58bfec01bad1f613973ae9f77a86c9cf8456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
