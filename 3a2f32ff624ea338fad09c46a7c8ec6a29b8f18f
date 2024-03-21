@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be842262_fd59a7e5",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 45
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-21T22:54:32Z",
+      "side": 1,
+      "message": "Hmm, to clarify, I mean right now we don\u0027t hold the lock here, so it\u0027s possible that we are not lost when the check at line 126 happens, so we skip this logic, but then the device gets lost afterwards, say at line 138 or something.\n\nI think that this might be a larger issue that just here though... I think all the device related callbacks that need to verify if the device is lost have a potential race right now... Maybe just a comment here that details that we are aware this could race?",
+      "parentUuid": "520d110e_dd91e342",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 126,
+        "endChar": 27
+      },
+      "revId": "3a2f32ff624ea338fad09c46a7c8ec6a29b8f18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed1d8314_22b2f6e4",
         "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
         "patchSetId": 45
