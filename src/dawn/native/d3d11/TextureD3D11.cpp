@@ -932,6 +932,11 @@ MaybeError Texture::ReadStaging(const ScopedCommandRecordingContext* commandCont
     const uint32_t bytesPerRow = blockInfo.byteSize * (size.width / blockInfo.width);
     const uint32_t rowsPerImage = size.height / blockInfo.height;
 
+    HANDLE hEvent = CreateEvent(nullptr, false, false, nullptr);
+    commandContext->Flush1(D3D11_CONTEXT_TYPE_3D, hEvent);
+    DWORD result = WaitForSingleObject(hEvent, INFINITE);
+    DAWN_ASSERT(result == WAIT_OBJECT_0);
+    CloseHandle(hEvent);
     if (GetDimension() == wgpu::TextureDimension::e2D) {
         for (uint32_t layer = 0; layer < subresources.layerCount; ++layer) {
             // Copy the staging texture to the buffer.

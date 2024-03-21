@@ -95,6 +95,14 @@ class Queue final : public d3d::Queue {
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
     SerialMap<ExecutionSerial, Ref<Buffer>> mPendingMapBuffers;
+
+    // Events has been used with EnqueueSetEvent().
+    std::deque<HANDLE> mPendingEvents;
+    // Free event objects for reusing
+    std::vector<HANDLE> mAvailableEvents;
+
+    std::deque<ComPtr<ID3D11Query>> mPendingQueries;
+    std::vector<ComPtr<ID3D11Query>> mAvailableQueries;
 };
 
 }  // namespace dawn::native::d3d11

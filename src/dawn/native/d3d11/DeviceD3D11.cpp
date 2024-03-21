@@ -128,6 +128,8 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     // TODO(dawn:1741): Handle the case where ID3D11Device5 is not available.
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mD3d11Device5), "D3D11: getting ID3D11Device5"));
 
+    DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mDxgiDevice3), "D3D11: getting IDXGIDevice3"));
+
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
 
@@ -147,6 +149,10 @@ ID3D11Device* Device::GetD3D11Device() const {
 
 ID3D11Device5* Device::GetD3D11Device5() const {
     return mD3d11Device5.Get();
+}
+
+IDXGIDevice3* Device::GetDXGIDevice3() const {
+    return mDxgiDevice3.Get();
 }
 
 MaybeError Device::TickImpl() {
