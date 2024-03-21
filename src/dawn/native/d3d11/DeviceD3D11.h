@@ -51,6 +51,7 @@ class Device final : public d3d::Device {
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
+    IDXGIDevice3* GetDXGIDevice3() const;
 
     const DeviceInfo& GetDeviceInfo() const;
 
@@ -157,6 +158,7 @@ class Device final : public d3d::Device {
     ComPtr<ID3D11Device> mD3d11Device;
     bool mIsDebugLayerEnabled = false;
     ComPtr<ID3D11Device5> mD3d11Device5;
+    ComPtr<IDXGIDevice3> mDxgiDevice3;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
 
     // TODO(dawn:1704): decide when to clear the cached implicit pixel local storage attachments.
