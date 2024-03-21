@@ -444,6 +444,136 @@ fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
     }
 }
 
+// DO NOT SUBMIT
+TEST_P(ShaderF16Tests, NVIDIA_F16_Crash_Test) {
+    const char* computeShader = R"(
+enable f16;
+
+
+
+
+struct Output {
+  @size(2) value : f16
+};
+@group(0) @binding(0) var<storage, read_write> outputs : array<Output, 32>;
+
+
+
+const values = array(
+  ((0.0h)+(-65504.0h)),
+  ((0.0h)+(-65504.0h)),
+  ((5.960464477539063e-8h)+(-65504.0h)),
+  ((0.00006097555160522461h)+(-65504.0h)),
+  ((0.00006103515625h)+(-65504.0h)),
+  ((0.125h)+(-65504.0h)),
+  ((1.0h)+(-65504.0h)),
+  ((10.0h)+(-65504.0h)),
+  ((65504.0h)+(-65504.0h)),
+  ((-10.0h)+(-10.0h)),
+  ((-1.0h)+(-10.0h)),
+  ((-0.125h)+(-10.0h)),
+  ((-0.00006103515625h)+(-10.0h)),
+  ((-0.00006097555160522461h)+(-10.0h)),
+  ((-5.960464477539063e-8h)+(-10.0h)),
+  ((0.0h)+(-10.0h)),
+  ((0.0h)+(-10.0h)),
+  ((5.960464477539063e-8h)+(-10.0h)),
+  ((0.00006097555160522461h)+(-10.0h)),
+  ((0.00006103515625h)+(-10.0h)),
+  ((0.125h)+(-10.0h)),
+  ((1.0h)+(-10.0h)),
+  ((10.0h)+(-10.0h)),
+  ((65504.0h)+(-10.0h)),
+  ((-10.0h)+(-1.0h)),
+  ((-1.0h)+(-1.0h)),
+  ((-0.125h)+(-1.0h)),
+  ((-0.00006103515625h)+(-1.0h)),
+  ((-0.00006097555160522461h)+(-1.0h)),
+  ((-5.960464477539063e-8h)+(-1.0h)),
+  ((0.0h)+(-1.0h)),
+  ((0.0h)+(-1.0h))
+);
+
+@compute @workgroup_size(1)
+fn main() {
+  outputs[0].value = -1.0h;
+    outputs[1].value = values[1];
+    outputs[2].value = values[2];
+    outputs[3].value = values[3];
+    outputs[4].value = values[4];
+    outputs[5].value = values[5];
+    outputs[6].value = values[6];
+    outputs[7].value = values[7];
+    outputs[8].value = values[8];
+    outputs[9].value = values[9];
+    outputs[10].value = values[10];
+    outputs[11].value = values[11];
+    outputs[12].value = values[12];
+    outputs[13].value = values[13];
+    outputs[14].value = values[14];
+    outputs[15].value = values[15];
+    outputs[16].value = values[16];
+    outputs[17].value = values[17];
+    outputs[18].value = values[18];
+    outputs[19].value = values[19];
+    outputs[20].value = values[20];
+    outputs[21].value = values[21];
+    outputs[22].value = values[22];
+    outputs[23].value = values[23];
+    outputs[24].value = values[24];
+    outputs[25].value = values[25];
+    outputs[26].value = values[26];
+    outputs[27].value = values[27];
+    outputs[28].value = values[28];
+    outputs[29].value = values[29];
+    outputs[30].value = values[30];
+    outputs[31].value = values[31];
+}
+
+    )";
+
+    const bool shouldShaderF16FeatureSupportedByDevice =
+        // Required when creating device
+        GetParam().mRequireShaderF16Feature &&
+        // Adapter support the feature
+        IsShaderF16SupportedOnAdapter() &&
+        // Proper toggle, use_dxc if d3d12
+        UseDxcEnabledOrNonD3D12();
+    const bool deviceSupportShaderF16Feature = device.HasFeature(wgpu::FeatureName::ShaderF16);
+    EXPECT_EQ(deviceSupportShaderF16Feature, shouldShaderF16FeatureSupportedByDevice);
+
+    if (!deviceSupportShaderF16Feature) {
+        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader));
+        return;
+    }
+
+    wgpu::BufferDescriptor bufferDesc;
+    bufferDesc.size = 64u;
+    bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+    wgpu::Buffer bufferOut = device.CreateBuffer(&bufferDesc);
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = utils::CreateShaderModule(device, computeShader);
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {
+                                                         {0, bufferOut},
+                                                     });
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.DispatchWorkgroups(1);
+    pass.End();
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U16_EQ(0xBC00, bufferOut, 0);
+}
+
+
 // DawnTestBase::CreateDeviceImpl always enables allow_unsafe_apis toggle.
 DAWN_INSTANTIATE_TEST_P(ShaderF16Tests,
                         {
