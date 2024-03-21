@@ -68,6 +68,29 @@
       "message": "Austin informed me offline that he\u0027s handling P0 matters today so there will likely be a delay in reviewing. No worries as this CL is definitely not P0 :).",
       "revId": "909d9e7dd3637e817057256079f060db0876da5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a495b547_a8d5f271",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1004687
+      },
+      "writtenOn": "2024-03-21T17:15:27Z",
+      "side": 1,
+      "message": "nit question for my knowledge: Is there a reason this and similar comment docs wrap at a lower line length than the test or class definitions?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
