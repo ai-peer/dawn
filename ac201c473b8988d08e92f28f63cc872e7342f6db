@@ -34,6 +34,24 @@
       "parentUuid": "6311777e_ec66b781",
       "revId": "ac201c473b8988d08e92f28f63cc872e7342f6db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63131b33_7cdf8750",
+        "filename": "src/tint/lang/wgsl/ls/sem_tokens.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-22T20:26:23Z",
+      "side": 1,
+      "message": "Done: https://dawn-review.googlesource.com/c/dawn/+/180486/",
+      "parentUuid": "9f7de3da_aa8c7622",
+      "revId": "ac201c473b8988d08e92f28f63cc872e7342f6db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
