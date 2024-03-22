@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c9bd11_9c9a2eab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-22T02:17:45Z",
+      "side": 1,
+      "message": "PTAL. The corresponding CTS test is in https://github.com/gpuweb/cts/pull/3544",
+      "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
