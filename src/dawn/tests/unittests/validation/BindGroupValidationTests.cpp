@@ -1753,6 +1753,62 @@ TEST_F(BindGroupLayoutValidationTest, MultisampledTextureSampleType) {
                                });
 }
 
+class BindGroupLayoutWithStaticSamplersValidationTest : public BindGroupLayoutValidationTest {
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::StaticSamplers};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest, CreateBindGroupWithStaticSamplerSupported) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&desc);
+
+    wgpu::BindGroupDescriptor descriptor;
+    wgpu::BindGroupEntry entry = {};
+    descriptor.layout = layout;
+    descriptor.entryCount = 1;
+    descriptor.entries = &entry;
+
+    device.CreateBindGroup(&descriptor);
+}
+
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest,
+       SamplerInBindGroupWithStaticSamplerInLayoutCausesError) {
+    DAWN_SKIP_TEST_IF(UsesWire());
+
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&desc);
+
+    wgpu::SamplerDescriptor samplerDesc;
+    samplerDesc.minFilter = wgpu::FilterMode::Linear;
+    ASSERT_DEVICE_ERROR(
+        utils::MakeBindGroup(device, layout, {{0, device.CreateSampler(&samplerDesc)}}));
+}
+
 constexpr uint32_t kBindingSize = 8;
 
 class SetBindGroupValidationTest : public ValidationTest {
