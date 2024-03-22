@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-19 06:19:16PM
+# Last rolled: 2024-03-22 10:28:30PM
 
 # Flaky on all platforms
 # KEEP
@@ -108,12 +108,6 @@ crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importEx
 
 # copyToTexture,canvas color_space_conversion failures
 crbug.com/dawn/2377 [ nvidia-0x2184 ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:srcColorSpace="display-p3";dstColorSpace="srgb";dstColorFormat="rg16float";dstPremultiplied=false;srcDoFlipYDuringCopy=false [ RetryOnFailure ]
-
-# Device Lost issue (only fails in Telemetry, not in browser standalone)
-crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createComputePipelineAsync:valid=false;awaitLost=false [ Failure ]
-crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createComputePipelineAsync:valid=false;awaitLost=true [ Failure ]
-crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createRenderPipelineAsync:valid=false;awaitLost=false [ Failure ]
-crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createRenderPipelineAsync:valid=false;awaitLost=true [ Failure ]
 
 # interpolation "flat" failures
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0,1];sampleCount=1;interpolation={"type":"flat"} [ Failure ]
@@ -517,6 +511,8 @@ crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,bu
 ################################################################################
 # New failures. Please triage:
 ################################################################################
+crbug.com/dawn/0000 webgpu:shader,execution,expression,access,array,index:runtime_sized:elementType="vec3f";indexType="i32" [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,execution,expression,access,array,index:runtime_sized:elementType="vec3f";indexType="u32" [ Failure ]
 crbug.com/dawn/0000 webgpu:web_platform,copyToTexture,video:copy_from_video:videoName="four-colors-vp9-bt601-rotate-270.mp4";sourceType="VideoFrame";srcDoFlipYDuringCopy=false;dstColorSpace="srgb" [ Failure ]
 crbug.com/dawn/0000 webgpu:web_platform,copyToTexture,video:copy_from_video:videoName="four-colors-vp9-bt601-rotate-270.mp4";sourceType="VideoFrame";srcDoFlipYDuringCopy=true;dstColorSpace="srgb" [ Failure ]
 crbug.com/dawn/0000 webgpu:web_platform,copyToTexture,video:copy_from_video:videoName="four-colors-vp9-bt601-rotate-90.mp4";sourceType="VideoFrame";srcDoFlipYDuringCopy=false;dstColorSpace="srgb" [ Failure ]
