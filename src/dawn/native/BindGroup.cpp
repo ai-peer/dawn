@@ -226,12 +226,24 @@ MaybeError ValidateStorageTextureBinding(DeviceBase* device,
 MaybeError ValidateSamplerBinding(const DeviceBase* device,
                                   const BindGroupEntry& entry,
                                   const SamplerBindingLayout& layout) {
-    DAWN_INVALID_IF(entry.sampler == nullptr, "Binding entry sampler not set.");
+    bool hasStaticSampler = layout.nextInChain != nullptr;
+
+    if (hasStaticSampler) {
+        DAWN_INVALID_IF(entry.sampler != nullptr,
+                        "Binding entry sampler set for layout that specifies a static sampler");
+    } else {
+        DAWN_INVALID_IF(entry.sampler == nullptr, "Binding entry sampler not set.");
+    }
 
     DAWN_INVALID_IF(entry.textureView != nullptr || entry.buffer != nullptr,
                     "Expected only sampler to be set for binding entry.");
 
     DAWN_INVALID_IF(entry.nextInChain != nullptr, "nextInChain must be nullptr.");
+
+    // Validate the sampler provided in `entry` if not using a static sampler.
+    if (hasStaticSampler) {
+        return {};
+    }
 
     DAWN_TRY(device->ValidateObject(entry.sampler));
 

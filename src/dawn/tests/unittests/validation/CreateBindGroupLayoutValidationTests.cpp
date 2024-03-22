@@ -28,6 +28,8 @@
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 
 #include "dawn/native/BindGroupLayout.h"
+#include "dawn/utils/WGPUHelpers.h"
+#include "dawn/webgpu_cpp.h"
 
 namespace dawn {
 namespace {
@@ -77,7 +79,16 @@ TEST_F(CreateBindGroupLayoutWithStaticSamplersTests, StaticSamplerSupportedWhenF
     desc.entryCount = 1;
     desc.entries = &binding;
 
-    device.CreateBindGroupLayout(&desc);
+    auto layout = device.CreateBindGroupLayout(&desc);
+
+    wgpu::TextureDescriptor textureDesc;
+    textureDesc.size = {1, 1, 1};
+    textureDesc.usage = wgpu::TextureUsage::TextureBinding;
+
+    textureDesc.format = wgpu::TextureFormat::Depth24Plus;
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+
+    utils::MakeBindGroup(device, layout, {{0, texture.CreateView()}});
 }
 
 }  // anonymous namespace
