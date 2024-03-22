@@ -33,6 +33,24 @@
       "message": "huh, I\u0027ve never seen this before.",
       "revId": "34aeb7dc4c2d07ea16fd01cf01323b8b88526312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2570a23c_cf15c573",
+        "filename": "src/tint/lang/wgsl/ls/sem_tokens_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-22T18:15:55Z",
+      "side": 1,
+      "message": "The first argument is the name appended to the parameterized test cases. Its optional.",
+      "parentUuid": "bf7399e5_5ab5e1f8",
+      "revId": "34aeb7dc4c2d07ea16fd01cf01323b8b88526312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
