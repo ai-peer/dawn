@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d801094d_72f18cb9",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-22T16:37:45Z",
+      "side": 1,
+      "message": "I see why we pass this bool in - so we can share code with ShouldApply and GetKey.\n\nBut it\u0027s kind of unclear to read. It would probably be more clear if the code were structured like:\n\n```\nfor (...) {\n  if (IsClearOp(attachment) {\n    continue;\n  }\n  if (IsToggleEnabled(ClearWithDraw)) {\n    return true;\n  }\n  if (IsToggleEnabled(ClearDrawWithBigInt) \u0026\u0026 NeedsBigIntClear(attachment)) {\n    return true;\n  }\n}\nreturn false;\n```\n\nbut I see that you\u0027d like to share code with the key computation, so some helpers are factored out.\n\n\nHow about we do the following:\n - Remove all the ShouldApply stuff\n - Return a std::optional when generating the key. If we should not apply, then we return std::nullopt\n\nThis way I think the code can be more straightforward.",
+      "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b517d63e_6957ba62",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-22T16:37:45Z",
+      "side": 1,
+      "message": "prefer to pass the Device and check the toggles explicitly instead of relying on the bools. It\u0027s easy to pass them in the wrong order.",
+      "range": {
+        "startLine": 334,
+        "startChar": 43,
+        "endLine": 335,
+        "endChar": 70
+      },
+      "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6047b34_63d6b397",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-22T16:37:45Z",
+      "side": 1,
+      "message": "why did we move the `if ShouldApply` check into `MaybeApply`?\n\nit would be more clear if it were phrased as it was previously - `if (ShouldApply) Apply(...)`",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1374,
+        "endChar": 12
+      },
+      "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
