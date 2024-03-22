@@ -16,6 +16,23 @@
       "message": "Thank you!",
       "revId": "cc18521d1ef91bdcfdef211a403ffa3af191e1fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e564e5_3c11b9dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-22T20:34:26Z",
+      "side": 1,
+      "message": "Oh wait a second.\n\nSizeof(array\u003cE\u003e)\nis\n\nNRuntime × roundUp(AlignOf(E),SizeOf(E))\n\nwhere NRuntime is the runtime-determined number of elements of T\n\nAnd the entire sizeof(array\u003cE\u003e) has to fit in the buffer size.\n\nAnd note that StrideOf the array is roundUp(AlignOf(E),SizeOf(E))\n\nSo NRuntime has to be small enough so that an entire stride\u0027s worth.\n\nSo this looks like the wrong fix.",
+      "revId": "cc18521d1ef91bdcfdef211a403ffa3af191e1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
