@@ -16,6 +16,46 @@
       "message": "PTAL. The corresponding CTS test is in https://github.com/gpuweb/cts/pull/3544",
       "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18518719_0eed50d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-22T10:07:28Z",
+      "side": 1,
+      "message": "+2 with a request for a unit test",
+      "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e453f95_1b52f433",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-22T10:07:28Z",
+      "side": 1,
+      "message": "Please can we have a tint unit test that exercises this?",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
