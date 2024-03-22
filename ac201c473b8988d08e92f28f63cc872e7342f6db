@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6311777e_ec66b781",
+        "filename": "src/tint/lang/wgsl/ls/sem_tokens.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-22T18:02:29Z",
+      "side": 1,
+      "message": "nit: it\u0027s good practice to provide method comments.",
+      "revId": "ac201c473b8988d08e92f28f63cc872e7342f6db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
