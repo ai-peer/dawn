@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7bbeee_8e34bc90",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-03-22T01:14:37Z",
+      "side": 1,
+      "message": "Both 8935 and 9684 are good versions, so we just to enable the toggle on the version \u003e 8935 and \u003c 9684. I will update the comment using \"\u003e\" and \"\u003c\" to make it clear.",
+      "parentUuid": "4041983d_63133ef0",
+      "revId": "faacec34e9e3fa9d4a187bc68b9cec134d00e44f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a19dbd1b_8a84eafa",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-21T21:47:02Z",
       "side": 1,
       "message": "Similarly not sure if this should be `\u003c\u003d 0`. Is 9684 the last broken, or the first fixed?",
+      "revId": "faacec34e9e3fa9d4a187bc68b9cec134d00e44f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a95e9f5_4f20781b",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-03-22T01:14:37Z",
+      "side": 1,
+      "message": "9684 is the first fixed.",
+      "parentUuid": "a19dbd1b_8a84eafa",
       "revId": "faacec34e9e3fa9d4a187bc68b9cec134d00e44f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
