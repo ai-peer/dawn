@@ -206,6 +206,54 @@ fn main() {
               got.data.Get<ArrayLengthFromUniform::Result>()->used_size_indices);
 }
 
+TEST_F(ArrayLengthFromUniformTest, ArrayWithTailPadding) {
+    auto* src = R"(
+struct SB {
+  x : i32,
+  arr : array<vec3f>,
+};
+
+@group(0) @binding(0) var<storage, read> sb : SB;
+
+@compute @workgroup_size(1)
+fn main() {
+  var len : u32 = arrayLength(&sb.arr);
+}
+)";
+
+    auto* expect = R"(
+struct TintArrayLengths {
+  array_lengths : array<vec4<u32>, 1u>,
+}
+
+@group(0) @binding(30) var<uniform> tint_array_lengths : TintArrayLengths;
+
+struct SB {
+  x : i32,
+  arr : array<vec3f>,
+}
+
+@group(0) @binding(0) var<storage, read> sb : SB;
+
+@compute @workgroup_size(1)
+fn main() {
+  var len : u32 = (((tint_array_lengths.array_lengths[0u][0u] - 16u) + 4u) / 16u);
+}
+)";
+
+    ArrayLengthFromUniform::Config cfg({0, 30u});
+    cfg.bindpoint_to_size_index.emplace(BindingPoint{0, 0}, 0);
+
+    DataMap data;
+    data.Add<ArrayLengthFromUniform::Config>(std::move(cfg));
+
+    auto got = Run<Unshadow, SimplifyPointers, ArrayLengthFromUniform>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+    EXPECT_EQ(std::unordered_set<uint32_t>({0}),
+              got.data.Get<ArrayLengthFromUniform::Result>()->used_size_indices);
+}
+
 // Should output the same as BasicInStruct because SimplifyPointers outputs the same AST for
 // explicit and implicit pointer dereference.
 TEST_F(ArrayLengthFromUniformTest, BasicInStruct_ViaPointerDot) {

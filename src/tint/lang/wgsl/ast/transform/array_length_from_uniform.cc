@@ -218,20 +218,20 @@ struct ArrayLengthFromUniform::State {
         auto* total_storage_buffer_size = b.IndexAccessor(vec_expr, u32(vec_index));
 
         // Calculate actual array length
-        //                total_storage_buffer_size - array_offset
-        // array_length = ----------------------------------------
-        //                             array_stride
+        //                total_storage_buffer_size + (element_stride - element_size) - array_offset
+        // array_length = --------------------------------------------------------------------------
+        //                                               array_stride
         const Expression* total_size = total_storage_buffer_size;
         if (TINT_UNLIKELY(global->Type()->Is<core::type::Pointer>())) {
             TINT_ICE() << "storage buffer variable should not be a pointer. "
                           "These should have been removed by the SimplifyPointers transform";
             return nullptr;
         }
+
         auto* storage_buffer_type = global->Type()->UnwrapRef();
         const core::type::Array* array_type = nullptr;
         if (auto* str = storage_buffer_type->As<core::type::Struct>()) {
-            // The variable is a struct, so subtract the byte offset of the
-            // array member.
+            // The variable is a struct, so subtract the byte offset of the array member.
             auto* array_member_sem = str->Members().Back();
             array_type = array_member_sem->Type()->As<core::type::Array>();
             total_size = b.Sub(total_storage_buffer_size, u32(array_member_sem->Offset()));
@@ -242,6 +242,15 @@ struct ArrayLengthFromUniform::State {
                           "&struct_var.array_member";
             return nullptr;
         }
+
+        // If the array element stride is greater than the element size, then we need to add the
+        // difference before doing the divide, otherwise the last element will not be included in
+        // the calculation.
+        auto* elem_type = array_type->ElemType();
+        if (auto tail_padding = array_type->Stride() - elem_type->Size(); tail_padding) {
+            total_size = b.Add(total_size, u32(tail_padding));
+        }
+
         return b.Div(total_size, u32(array_type->Stride()));
     }
 
