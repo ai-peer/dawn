@@ -262,6 +262,19 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     req.maxSubgroupSizeForFullSubgroups = maxSubgroupSizeForFullSubgroups;
 
     req.tintOptions.disable_robustness = !device->IsRobustnessEnabled();
+    req.tintOptions.ignore_robustness_function =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessFunction);
+    req.tintOptions.ignore_robustness_private =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessPrivate);
+    req.tintOptions.ignore_robustness_push_constant =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessPushConstant);
+    req.tintOptions.ignore_robustness_storage =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessStorage);
+    req.tintOptions.ignore_robustness_uniform =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessUniform);
+    req.tintOptions.ignore_robustness_workgroup =
+        device->IsToggleEnabled(Toggle::IgnoreRobustnessWorkgroup);
+
     req.tintOptions.buffer_size_ubo_index = kBufferLengthBufferSlot;
     req.tintOptions.fixed_sample_mask = sampleMask;
     req.tintOptions.disable_workgroup_init = false;

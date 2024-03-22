@@ -163,6 +163,28 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
         // Robustness must come before BuiltinPolyfill and CanonicalizeEntryPointIO
         // Robustness must come before ArrayLengthFromUniform
         manager.Add<ast::transform::Robustness>();
+        ast::transform::Robustness::Config config = {};
+
+        if (options.ignore_robustness_function) {
+            config.function_action = ast::transform::Robustness::Action::kIgnore;
+        }
+        if (options.ignore_robustness_private) {
+            config.private_action = ast::transform::Robustness::Action::kIgnore;
+        }
+        if (options.ignore_robustness_push_constant) {
+            config.push_constant_action = ast::transform::Robustness::Action::kIgnore;
+        }
+        if (options.ignore_robustness_storage) {
+            config.storage_action = ast::transform::Robustness::Action::kIgnore;
+        }
+        if (options.ignore_robustness_uniform) {
+            config.uniform_action = ast::transform::Robustness::Action::kIgnore;
+        }
+        if (options.ignore_robustness_workgroup) {
+            config.workgroup_action = ast::transform::Robustness::Action::kIgnore;
+        }
+
+        data.Add<ast::transform::Robustness::Config>(config);
     }
 
     {  // Builtin polyfills

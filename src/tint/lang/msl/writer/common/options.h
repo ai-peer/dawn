@@ -139,6 +139,24 @@ struct Options {
     /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
     bool disable_robustness = false;
 
+    /// Set to `true` to ignore robustness for variables in the 'function' address space.
+    bool ignore_robustness_function = false;
+
+    /// Set to `true` to ignore robustness for variables in the 'private' address space.
+    bool ignore_robustness_private = false;
+
+    /// Set to `true` to ignore robustness for variables in the 'push_constant' address space.
+    bool ignore_robustness_push_constant = false;
+
+    /// Set to `true` to ignore robustness for variables in the 'storage' address space.
+    bool ignore_robustness_storage = false;
+
+    /// Set to `true` to ignore robustness for variables in the 'uniform' address space.
+    bool ignore_robustness_uniform = false;
+
+    /// Set to `true` to ignore robustness for variables in the 'workgroup' address space.
+    bool ignore_robustness_workgroup = false;
+
     /// Set to `true` to disable workgroup memory zero initialization
     bool disable_workgroup_init = false;
 
@@ -170,6 +188,12 @@ struct Options {
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(Options,
                  disable_robustness,
+                 ignore_robustness_function,
+                 ignore_robustness_private,
+                 ignore_robustness_push_constant,
+                 ignore_robustness_storage,
+                 ignore_robustness_uniform,
+                 ignore_robustness_workgroup,
                  disable_workgroup_init,
                  emit_vertex_point_size,
                  disable_polyfill_integer_div_mod,
