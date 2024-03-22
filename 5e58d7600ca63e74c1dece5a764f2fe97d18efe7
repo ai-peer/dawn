@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83339e96_998ed224",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-22T17:23:47Z",
+      "side": 1,
+      "message": "actually, scratch this suggestion. the StaticSampler struct chained off of SamplerBindingLayout holds an unowned reference to the `sampler`. Even if we use UnpackedPtr\n\nBut - we\u0027re going to need an owned reference (later for the polyfill, or for passing it to the backend). So we should probably just do our own thing inside `CreateBindGroupLayoutInfo`, and store the sampler directly as a Ref\u003cSamplerBase\u003e",
+      "parentUuid": "d06a8f86_b1f0e32e",
+      "revId": "5e58d7600ca63e74c1dece5a764f2fe97d18efe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddd9c8db_bfd43fa2",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 2
