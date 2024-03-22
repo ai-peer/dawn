@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fba70f7_20152667",
+        "filename": "src/tint/lang/wgsl/ls/inlay_hints.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-22T18:11:48Z",
+      "side": 1,
+      "message": "I just read up on inlay hints. This is a cool feature.\nAnd you make good use of it here!",
+      "revId": "34aeb7dc4c2d07ea16fd01cf01323b8b88526312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7399e5_5ab5e1f8",
+        "filename": "src/tint/lang/wgsl/ls/sem_tokens_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-22T18:11:48Z",
+      "side": 1,
+      "message": "huh, I\u0027ve never seen this before.",
+      "revId": "34aeb7dc4c2d07ea16fd01cf01323b8b88526312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
