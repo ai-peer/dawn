@@ -106,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4f8252c_b34603b7",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-22T16:45:03Z",
+      "side": 1,
+      "message": "probably can be moved to BindGroupValidationTests.cpp",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e1d8165_e65a5777",
         "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
         "patchSetId": 4
