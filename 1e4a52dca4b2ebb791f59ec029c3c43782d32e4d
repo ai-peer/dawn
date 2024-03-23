@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b99acfb3_73116235",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 68
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Note I added these... I **think** it\u0027s fine? Needed them for consistency and also to make cases where the device lost happens when we failed requestDevice to be clear.",
+      "range": {
+        "startLine": 1528,
+        "startChar": 12,
+        "endLine": 1529,
+        "endChar": 51
+      },
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

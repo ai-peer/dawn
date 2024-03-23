@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "188b1296_307b79dc",
+        "filename": "generator/templates/dawn/wire/server/ServerDoers.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06d6af25_ffb955e6",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "164429d5_94978784",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-03-15T01:22:27Z",
       "side": 1,
       "message": "do we still need this TODO since the legacy version is the deprecated device lost callback (vs callback info) ?",
+      "range": {
+        "startLine": 1499,
+        "startChar": 100,
+        "endLine": 1499,
+        "endChar": 119
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c71a5ec_93bc9f9c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "This is still needed because without setting a default value on the `callback mode`, we can\u0027t default construct the `DeviceDescriptor` which would break some users that have:\n\n```\nwgpu::DeviceDescriptor desc \u003d {};\n```",
+      "parentUuid": "164429d5_94978784",
       "range": {
         "startLine": 1499,
         "startChar": 100,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3eff0dce_5b6d373a",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2013388_3ce8e57d",
+      "range": {
+        "startLine": 1500,
+        "startChar": 0,
+        "endLine": 1500,
+        "endChar": 87
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcad996f_8799aea4",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-03-15T12:41:47Z",
       "side": 1,
       "message": "nit: These are Instance handles so we might as well call this member that? Maybe even handle_type it (The client::Instance would have a raw_ptr to its EventManager that lives in the client). Right now it is weird because it looks as if EventManager is a WebGPU object supported in the wire, but it\u0027s not.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb4585aa_b21ae4b6",
+        "filename": "src/dawn/dawn_wire.json",
+        "patchSetId": 62
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Won\u0027t change in this CL, but can handle in a follow up!",
+      "parentUuid": "dcad996f_8799aea4",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f90f16cc_8fc4ccde",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "I am hesitant to make it `AllowSpontaneous` by default because a common use-case right now is creating a device without passing a device lost callback, and then setting it after via `SetDeviceLostCallback`. Since the callback mode is effectively immutable for events atm, this would drastically change the behavior of the device lost callback in existing code.",
+      "parentUuid": "b0f87afb_2a7dc0d6",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a39ce6_7eb2492b",
@@ -111,6 +213,30 @@
       "writtenOn": "2024-03-15T01:22:27Z",
       "side": 1,
       "message": "same question: legacy code can use .deviceLostCallback; no need to have back compat for new deviceLostCallbackInfo path?",
+      "range": {
+        "startLine": 273,
+        "startChar": 13,
+        "endLine": 275,
+        "endChar": 25
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce681386_46f85cbe",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99a39ce6_7eb2492b",
       "range": {
         "startLine": 273,
         "startChar": 13,
@@ -144,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6cd01ee_606d949d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857bfe2a_f8b96114",
+      "range": {
+        "startLine": 282,
+        "startChar": 0,
+        "endLine": 283,
+        "endChar": 73
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28a84340_f50dc9fc",
@@ -157,6 +307,30 @@
       "writtenOn": "2024-03-15T01:22:27Z",
       "side": 1,
       "message": "nit: change to one member that is UncapturedErrorCallbackInfo ?",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 292,
+        "endChar": 68
+      },
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0a067f_395c0da3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28a84340_f50dc9fc",
       "range": {
         "startLine": 291,
         "startChar": 4,
@@ -184,6 +358,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "862acef0_44634358",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e103a8_30fc37e8",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8352657_28b5c50a",
@@ -201,6 +393,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "266360bb_c028f013",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8352657_28b5c50a",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f09dbb4b_4bcf12df",
@@ -214,6 +424,24 @@
       "writtenOn": "2024-03-15T12:41:47Z",
       "side": 1,
       "message": "Would a DestroyImpl() like in dawn/native work? It would be marginally better instead of intercepting all the Release() calls.",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33ff2b6_4da00da6",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 62
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-23T01:43:16Z",
+      "side": 1,
+      "message": "Gave this some thought, but I wasn\u0027t able to change this without introducing an internal and external ref count for the use case. Leaving this as is for now.",
+      "parentUuid": "f09dbb4b_4bcf12df",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
