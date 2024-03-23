@@ -202,6 +202,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4c2e792_b9c07633",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-23T01:57:13Z",
+      "side": 1,
+      "message": "Good point. I think we should make it spontaneous when we remove SetDeviceLostCallback though, maybe a TODO? (if you don\u0027t have one - haven\u0027t reviewed the latest patchset)",
+      "parentUuid": "f90f16cc_8fc4ccde",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99a39ce6_7eb2492b",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 62
