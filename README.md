@@ -51,7 +51,7 @@ Developer documentation:
 
 User documentation: (TODO, figure out what overlaps with the webgpu.h docs)
 
-1
+2
 
 ## License
 
