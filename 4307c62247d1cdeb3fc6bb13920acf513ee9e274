@@ -33,6 +33,24 @@
       "message": "Why isn\u0027t `ASSERT_DEVICE_ERROR` enough here?",
       "revId": "4307c62247d1cdeb3fc6bb13920acf513ee9e274",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd6e830a_c2b28c4d",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-24T14:14:43Z",
+      "side": 1,
+      "message": "This comes from upstream, this diff line is only about `CreateSwapChain`!",
+      "parentUuid": "fa120626_13cfd965",
+      "revId": "4307c62247d1cdeb3fc6bb13920acf513ee9e274",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
