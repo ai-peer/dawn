@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe844d1_0ec6cea0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-24T13:15:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4307c62247d1cdeb3fc6bb13920acf513ee9e274",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa120626_13cfd965",
+        "filename": "src/dawn/tests/end2end/SwapChainValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-24T13:15:23Z",
+      "side": 1,
+      "message": "Why isn\u0027t `ASSERT_DEVICE_ERROR` enough here?",
+      "revId": "4307c62247d1cdeb3fc6bb13920acf513ee9e274",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
