@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88aef80e_4183ae24",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-25T22:07:05Z",
+      "side": 1,
+      "message": "`RenderPassLoadOpTests` should cover `clear_color_with_draw`. `RenderPassLoadOpTests` will fail without the fix.",
+      "parentUuid": "f4ad8f83_9f56b0fd",
+      "revId": "6c92cd7eafd47ab8919e3c1fa4606cf09ceceb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf6230c_15ae4393",
         "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
         "patchSetId": 11
