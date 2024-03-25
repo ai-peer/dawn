@@ -176,6 +176,30 @@
       },
       "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0bc7fd7_ebef2ca4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T22:02:38Z",
+      "side": 1,
+      "message": "ok, thanks - I think the comment helps make it clear.",
+      "parentUuid": "74ba2bea_392595f8",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1374,
+        "endChar": 12
+      },
+      "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4ad8f83_9f56b0fd",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T22:02:38Z",
+      "side": 1,
+      "message": "That\u0027s unfortunate. Could you add some regression test that would have caught this problem? It can be in a follow-up if you prefer.",
+      "parentUuid": "d53a10c4_4b0fd8c9",
+      "revId": "6c92cd7eafd47ab8919e3c1fa4606cf09ceceb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf6230c_15ae4393",
         "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
         "patchSetId": 11
