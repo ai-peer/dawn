@@ -33,6 +33,7 @@
 #include <vector>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Ref.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
@@ -61,6 +62,10 @@ enum class BindingInfoType { Buffer, Sampler, Texture, StorageTexture, ExternalT
 struct BindingInfo {
     BindingNumber binding;
     wgpu::ShaderStage visibility;
+
+    // Set if (a) this binding info holds a sampler binding layout and (b) the
+    // client specified a static sampler on that sampler binding layout.
+    Ref<SamplerBase> staticSampler;
 
     std::variant<BufferBindingLayout,
                  SamplerBindingLayout,

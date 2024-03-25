@@ -397,6 +397,15 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
         bindingInfo.bindingLayout = binding->buffer;
     } else if (binding->sampler.type != wgpu::SamplerBindingType::Undefined) {
         bindingInfo.bindingLayout = binding->sampler;
+        auto samplerLayout = Unpack(&binding->sampler);
+
+        // If there is a static sampler, have the BindingInfo take an owning
+        // reference to its sampler object, as the one in `samplerLayout` is
+        // owned by the client.
+        auto staticSampler = samplerLayout.Get<StaticSampler>();
+        if (staticSampler) {
+            bindingInfo.staticSampler = staticSampler->sampler;
+        }
     } else if (binding->texture.sampleType != wgpu::TextureSampleType::Undefined) {
         TextureBindingLayout bindingLayout = binding->texture.WithTrivialFrontendDefaults();
         if (binding->texture.viewDimension == wgpu::TextureViewDimension::Undefined) {
