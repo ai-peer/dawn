@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90563cdf_f52f3fd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-03-25T18:50:53Z",
+      "side": 1,
+      "message": "Based on https://dawn-review.googlesource.com/c/dawn/+/180762\nwith updated expectations",
+      "revId": "b3b604f75bbc11044d143074d51c7f6c8b8fa29c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
