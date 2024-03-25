@@ -10,5 +10,3 @@ global:Change-Owner                     	Change Owner
 mdb:chrome-active-sheriffs              	mdb/chrome-active-sheriffs
 mdb:chrome-git-admins                   	mdb/chrome-git-admins
 mdb:chrome-release                      	mdb/chrome-release
-mdb:kokoro                              	mdb/kokoro
-mdb:kokoro-dedicated                    	mdb/kokoro-dedicated
