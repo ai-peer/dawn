@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9e74e67_68862392",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T22:39:41Z",
+      "side": 1,
+      "message": "LGTM - though can you try running the TSAN bot to make sure it works? There were some TSAN failures when we landed the original CL. You can do this by clicking \"Choose Tryjobs\" then selecting \"dawn-try-linux-tsan-rel\"\n\nI tried doing this.. and it looks like there\u0027s a compile failure. Likely you\u0027ll hit the same problem on other bots as well. I get it when I cherry-pick your CL and try to build. Not your CL\u0027s problem - our generated code is just exceeding some limit now. I\u0027m trying to fix it in https://dawn-review.googlesource.com/c/dawn/+/180880",
+      "revId": "4307c62247d1cdeb3fc6bb13920acf513ee9e274",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa120626_13cfd965",
