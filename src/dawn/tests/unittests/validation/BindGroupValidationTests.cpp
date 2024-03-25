@@ -1753,6 +1753,82 @@ TEST_F(BindGroupLayoutValidationTest, MultisampledTextureSampleType) {
                                });
 }
 
+// Tests that chaining an arbitrary struct onto a sampler binding layout raises
+// an error.
+TEST_F(BindGroupLayoutValidationTest, SamplerBindingLayoutInvalidChainedStruct) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::ExternalTextureBindingLayout invalidChainedStruct = {};
+    binding.sampler.nextInChain = &invalidChainedStruct;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+}
+
+// Tests that creating a bind group layout with a valid static sampler raises an error
+// if the required feature is not enabled.
+TEST_F(BindGroupLayoutValidationTest, StaticSamplerNotSupportedWithoutFeatureEnabled) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    staticSampler.sampler = device.CreateSampler();
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+}
+
+class BindGroupLayoutWithStaticSamplersValidationTest : public BindGroupLayoutValidationTest {
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::StaticSamplers};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Tests that creating a bind group layout with a static sampler that does not
+// have a sampler object attached raises an error.
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest, StaticSamplerWithoutSamplerObject) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+}
+
+// Tests that creating a bind group layout with a valid static sampler succeeds if the
+// required feature is enabled.
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest, StaticSamplerSupportedWhenFeatureEnabled) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    staticSampler.sampler = device.CreateSampler();
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    device.CreateBindGroupLayout(&desc);
+}
+
 constexpr uint32_t kBindingSize = 8;
 
 class SetBindGroupValidationTest : public ValidationTest {
