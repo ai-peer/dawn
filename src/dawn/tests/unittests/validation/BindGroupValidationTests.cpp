@@ -1837,6 +1837,81 @@ TEST_F(BindGroupLayoutWithStaticSamplersValidationTest, StaticSamplerWithInvalid
     ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
 }
 
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest, CreateBindGroupWithStaticSamplerSupported) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    staticSampler.sampler = device.CreateSampler();
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&desc);
+
+    wgpu::BindGroupDescriptor descriptor;
+    wgpu::BindGroupEntry entry = {};
+    descriptor.layout = layout;
+    descriptor.entryCount = 1;
+    descriptor.entries = &entry;
+
+    device.CreateBindGroup(&descriptor);
+}
+
+// Tests that bind group layout creation takes its own reference to sampler
+// objects passed in static samplers rather than directly using the client's
+// passed-in reference.
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest,
+       CreateBindGroupLayoutTakesOwnRefToSamplerFromStaticSampler) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    staticSampler.sampler = device.CreateSampler();
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&desc);
+
+    // If `layout` is using the client's sampler pointer directly, nulling it
+    // out will cause bind group creation to crash.
+    staticSampler.sampler = nullptr;
+
+    wgpu::BindGroupDescriptor descriptor;
+    wgpu::BindGroupEntry entry = {};
+    descriptor.layout = layout;
+    descriptor.entryCount = 1;
+    descriptor.entries = &entry;
+
+    device.CreateBindGroup(&descriptor);
+}
+
+TEST_F(BindGroupLayoutWithStaticSamplersValidationTest,
+       SamplerInBindGroupWithStaticSamplerInLayoutCausesError) {
+    wgpu::BindGroupLayoutEntry binding = {};
+    binding.binding = 0;
+    binding.sampler.type = wgpu::SamplerBindingType::Filtering;
+    wgpu::StaticSampler staticSampler = {};
+    staticSampler.sampler = device.CreateSampler();
+    binding.sampler.nextInChain = &staticSampler;
+
+    wgpu::BindGroupLayoutDescriptor desc = {};
+    desc.entryCount = 1;
+    desc.entries = &binding;
+
+    wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&desc);
+
+    wgpu::SamplerDescriptor samplerDesc;
+    samplerDesc.minFilter = wgpu::FilterMode::Linear;
+    ASSERT_DEVICE_ERROR(
+        utils::MakeBindGroup(device, layout, {{0, device.CreateSampler(&samplerDesc)}}));
+}
+
 constexpr uint32_t kBindingSize = 8;
 
 class SetBindGroupValidationTest : public ValidationTest {

@@ -225,13 +225,25 @@ MaybeError ValidateStorageTextureBinding(DeviceBase* device,
 
 MaybeError ValidateSamplerBinding(const DeviceBase* device,
                                   const BindGroupEntry& entry,
-                                  const SamplerBindingLayout& layout) {
-    DAWN_INVALID_IF(entry.sampler == nullptr, "Binding entry sampler not set.");
+                                  const SamplerBindingLayout& layout,
+                                  const Ref<SamplerBase>& staticSampler) {
+    if (staticSampler) {
+        DAWN_INVALID_IF(entry.sampler != nullptr,
+                        "Binding entry sampler %s set for layout that specifies a static sampler",
+                        entry.sampler);
+    } else {
+        DAWN_INVALID_IF(entry.sampler == nullptr, "Binding entry sampler not set.");
+    }
 
     DAWN_INVALID_IF(entry.textureView != nullptr || entry.buffer != nullptr,
                     "Expected only sampler to be set for binding entry.");
 
     DAWN_INVALID_IF(entry.nextInChain != nullptr, "nextInChain must be nullptr.");
+
+    // Validate the sampler provided in `entry` if not using a static sampler.
+    if (staticSampler) {
+        return {};
+    }
 
     DAWN_TRY(device->ValidateObject(entry.sampler));
 
@@ -384,10 +396,11 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                 return {};
             },
             [&](const SamplerBindingLayout& layout) -> MaybeError {
-                DAWN_TRY_CONTEXT(ValidateSamplerBinding(device, entry, layout),
-                                 "validating entries[%u] as a Sampler."
-                                 "\nExpected entry layout: %s",
-                                 i, layout);
+                DAWN_TRY_CONTEXT(
+                    ValidateSamplerBinding(device, entry, layout, bindingInfo.staticSampler),
+                    "validating entries[%u] as a Sampler."
+                    "\nExpected entry layout: %s",
+                    i, layout);
                 return {};
             }));
     }
