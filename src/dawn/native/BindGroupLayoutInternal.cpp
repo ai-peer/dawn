@@ -397,6 +397,16 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
         bindingInfo.bindingLayout = binding->buffer;
     } else if (binding->sampler.type != wgpu::SamplerBindingType::Undefined) {
         bindingInfo.bindingLayout = binding->sampler;
+        auto samplerLayout = Unpack(&binding->sampler);
+        auto staticSampler = samplerLayout.Get<StaticSampler>();
+        if (staticSampler) {
+#if 0
+          StaticSampler owningRef = {};
+          owningRef.sampler = staticSampler->sampler;
+          binding->sampler.nextInChain = owningRef;
+#endif
+            bindingInfo.staticSampler = staticSampler->sampler;
+        }
     } else if (binding->texture.sampleType != wgpu::TextureSampleType::Undefined) {
         TextureBindingLayout bindingLayout = binding->texture.WithTrivialFrontendDefaults();
         if (binding->texture.viewDimension == wgpu::TextureViewDimension::Undefined) {
