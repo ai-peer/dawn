@@ -56,6 +56,30 @@
       },
       "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "767d6787_c0c1804c",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-25T15:10:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e453f95_1b52f433",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 13
+      },
+      "revId": "35531b88847709930a20a985f66fc5d69dc0b065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
