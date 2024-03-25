@@ -6,6 +6,4 @@ cria:project-dawn-committers            	cria/project-dawn-committers
 cria:project-dawn-tryjob-access         	cria/project-dawn-tryjob-access
 d88594eff8d639cb82d00cdda77f3ec69a8463a0	dawn-scoped@luci-project-accounts.iam.gserviceaccount.com
 global:Change-Owner                     	Change Owner
-mdb:kokoro                              	mdb/kokoro
-mdb:kokoro-dedicated                    	mdb/kokoro-dedicated
 
