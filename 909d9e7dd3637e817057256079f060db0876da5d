@@ -104,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ebbd238_61995636",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c69712c_25abd58a",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78daa4b1_062d8f4d",
@@ -117,6 +135,24 @@
       "writtenOn": "2024-03-22T17:22:44Z",
       "side": 1,
       "message": "nit: add validation that entry-\u003esampler is not invalid (device-\u003eValidateObject(..))",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39413985_122b9124",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "I initially interpreted this to mean validating the sampler object attached to the static sampler, which I\u0027ve done. However, did you also mean adding this validation for `\u0026entry-\u003esampler` itself? FWIW that doesn\u0027t compile as it\u0027s not the right type for `ValidateObject()`, but it\u0027s entirely possible that I\u0027m missing something about your suggestion there.",
+      "parentUuid": "78daa4b1_062d8f4d",
       "revId": "909d9e7dd3637e817057256079f060db0876da5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2da650_bc01b665",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4f8252c_b34603b7",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e1d8165_e65a5777",
@@ -151,6 +205,24 @@
       "writtenOn": "2024-03-22T16:42:47Z",
       "side": 1,
       "message": "it should work on the wire",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c482640_bddf6210",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e1d8165_e65a5777",
       "revId": "909d9e7dd3637e817057256079f060db0876da5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -226,6 +298,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef81273f_0cc4d215",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dcf4610_9de50bd9",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 31
+      },
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cad55367_66bd1f88",
@@ -239,6 +335,24 @@
       "writtenOn": "2024-03-22T16:42:47Z",
       "side": 1,
       "message": "ditto - should work on the wire",
+      "revId": "909d9e7dd3637e817057256079f060db0876da5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91be0960_17af3080",
+        "filename": "src/dawn/tests/unittests/validation/CreateBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T14:09:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cad55367_66bd1f88",
       "revId": "909d9e7dd3637e817057256079f060db0876da5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
