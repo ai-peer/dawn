@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d53a10c4_4b0fd8c9",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-25T21:48:38Z",
+      "side": 1,
+      "message": "I think so. Without it, only half of the texture is cleared.",
+      "parentUuid": "28cd014c_e17e713a",
+      "revId": "6c92cd7eafd47ab8919e3c1fa4606cf09ceceb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebf6230c_15ae4393",
         "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
         "patchSetId": 11
@@ -31,6 +49,30 @@
       "writtenOn": "2024-03-25T21:16:44Z",
       "side": 1,
       "message": "a lot of these are defaults, except for stencilRead/WriteMask. You could avoid setting all of it potentially? do you need to change the stencil masks? They shouldn\u0027t matter since all the stencil operations are Keep.",
+      "range": {
+        "startLine": 179,
+        "startChar": 8,
+        "endLine": 195,
+        "endChar": 49
+      },
+      "revId": "6c92cd7eafd47ab8919e3c1fa4606cf09ceceb9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b144c406_66c1b1e2",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-25T21:48:38Z",
+      "side": 1,
+      "message": "Removed. They were added when I was debugging the rendering issue.\nDone",
+      "parentUuid": "ebf6230c_15ae4393",
       "range": {
         "startLine": 179,
         "startChar": 8,
