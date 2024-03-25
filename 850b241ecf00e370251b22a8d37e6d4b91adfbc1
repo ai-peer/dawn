@@ -218,6 +218,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "688cbe95_8d7ab453",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4c2e792_b9c07633",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a39ce6_7eb2492b",
@@ -478,6 +496,24 @@
       "side": 1,
       "message": "Wouldn\u0027t that be easy to introduce by making a Reference/Release on Device() that shadows the ObjectBase:: methods (or is -Wshadow an issue here)? It seems like it would be much more efficient in general than a virtual method and simpler because there is no need to deal with reentrancy etc.",
       "parentUuid": "b33ff2b6_4da00da6",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f975b5ef_abb1037e",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 62
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done! Still needed to deal with some re-entrancy stuff but just made the base function return the ref count.",
+      "parentUuid": "d7b5b7b8_ca6358fa",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

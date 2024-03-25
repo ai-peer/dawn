@@ -101,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1c9a8ed_1ec3fc5a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "So the one thing I was trying to solve with this was avoiding creating the device lost event in the `DeviceBase` ctor, or at least the tracking of it in the `ctor`. This is particularly important because otherwise, we will have the device lost event preceed the request device event in some cases given we attempt construction of the device and pass it into the ctor of the `RequestDeviceEvent`.\n\nI think this is solvable by exposing a getter on `DeviceBase`, say `Ref\u003cTrackedEvent\u003e GetDeviceLostEvent()` or something like `void TrackDeviceLostEvent()`, and calling those after tracking the `RequestDeviceEvent`, but I wasn\u0027t convinced it was easier to follow that just having one helper that creates both a device and a `DeviceLostEvent` that matches the resulting `Device`. It\u0027s also a bit annoying if we fail `Device::Initialize` because we would\u0027ve already created the `DeviceLostEvent` via the ctor but still return an error which could cause duplicate `DeviceLostEvent`s at [1].\n\nAlso, since the `DeviceLostEvent` needs a ref to the `Device`, we would either need to set `DeviceBase::mDeviceLostEvent` in `DeviceLostEvent` ctor, or set `DeviceLostEvent::mDevice` in `DeviceBase` ctor. Either one will have a bit of magic involved.\n\nNot sure if this is compelling enough, but would be down to chat about it offline a bit more if you think there could be a better way!",
+      "parentUuid": "a295707b_3f496205",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
@@ -112,6 +130,24 @@
       "writtenOn": "2024-03-25T16:22:48Z",
       "side": 1,
       "message": "Is this every used outside of APIRequest/CreateDevice methods? It could be made private.",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d72e44f9_877c91ae",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "186a6e8c_31e37248",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -133,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5200244b_6bf4e360",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "I think it does?",
+      "parentUuid": "75198e7b_b8bb7c72",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76a94f1a_80050916",
@@ -146,6 +200,24 @@
       "writtenOn": "2024-03-25T16:22:48Z",
       "side": 1,
       "message": "Maybe add a TODO to remove this virtual when we make a mock for the adapter?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "474e26f0_f2a5941f",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76a94f1a_80050916",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +239,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b182c60_96cae124",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f5be360_060fc360",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a5e07e9_99d96b5d",
@@ -180,6 +270,24 @@
       "writtenOn": "2024-03-25T16:22:48Z",
       "side": 1,
       "message": "```suggestion\n    // Handle the event now if it\u0027s spontaneous and ready.\n```",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b481fd93_11d1816c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5e07e9_99d96b5d",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -203,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b84fa90c_9d776709",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Actually, I think either would work, I think I just had this because pretty much anywhere that would call this has a `Ref\u003cTrackedEvent\u003e`, not a raw pointer, so it was just easier to pass that directly than explicitly call `Get()` at the call site. WDYT?",
+      "parentUuid": "aba7313f_faada137",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4d8b882_a2e202fb",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 68
@@ -214,6 +340,24 @@
       "writtenOn": "2024-03-25T16:22:48Z",
       "side": 1,
       "message": "Can we detail the reason for this change?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9018aa29_dd653369",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Ah I think it\u0027s not needed anymore.",
+      "parentUuid": "f4d8b882_a2e202fb",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -237,6 +381,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcaecea3_40d8e264",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "IIUC, isn\u0027t it impossible for the user to start referring to the pipeline before it\u0027s created? The user only gets the pipeline when the async callback happens? Or are you suggesting a case where a user is injecting something and doing something bad?",
+      "parentUuid": "275e6f95_8496e9de",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19288091_7912e008",
         "filename": "src/dawn/wire/server/ServerAdapter.cpp",
         "patchSetId": 68
@@ -248,6 +410,24 @@
       "writtenOn": "2024-03-25T16:22:48Z",
       "side": 1,
       "message": "Another question related to eventManager, can\u0027t the server store it in the KnownAdapter since it is always going to be the ID of the instance for that adapter?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b17567f_9ca5e406",
+        "filename": "src/dawn/wire/server/ServerAdapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-25T23:53:28Z",
+      "side": 1,
+      "message": "Hmm that might be possible... But again I\u0027ll defer such change to a follow up since that might be true for multiple future related `Doers` atm...",
+      "parentUuid": "19288091_7912e008",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
