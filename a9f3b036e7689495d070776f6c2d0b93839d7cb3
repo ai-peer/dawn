@@ -46,6 +46,30 @@
       },
       "revId": "a9f3b036e7689495d070776f6c2d0b93839d7cb3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2833b190_1bbeb9a0",
+        "filename": "src/tint/utils/diagnostic/source.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-25T09:17:48Z",
+      "side": 1,
+      "message": "After consideration - the implementation is nearly always what you want for IDE and diagnostics, so I\u0027ve updated the docs to match the implementation.",
+      "parentUuid": "3e9e2aa2_8341022f",
+      "range": {
+        "startLine": 207,
+        "startChar": 17,
+        "endLine": 207,
+        "endChar": 89
+      },
+      "revId": "a9f3b036e7689495d070776f6c2d0b93839d7cb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
