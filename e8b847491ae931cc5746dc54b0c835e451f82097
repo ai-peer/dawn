@@ -128,6 +128,30 @@
       },
       "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c893ace_58cbf84b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:16:44Z",
+      "side": 1,
+      "message": "now we can change it to:\n\n```\nif (std::optional\u003cKeyOfApplyClearColorValueWithDrawPipelines\u003e key \u003d GetKeyOf(...)) {\n  DAWN_TRY(Apply(key, ...));\n}\n```",
+      "parentUuid": "017b6541_02ab2187",
+      "range": {
+        "startLine": 1364,
+        "startChar": 0,
+        "endLine": 1374,
+        "endChar": 12
+      },
+      "revId": "e8b847491ae931cc5746dc54b0c835e451f82097",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
