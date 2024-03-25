@@ -34,6 +34,24 @@
       "parentUuid": "7969933f_8472aba6",
       "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a530636_90b504a5",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T14:42:23Z",
+      "side": 1,
+      "message": "Looked at this, the test tries to use format tokens that aren\u0027t in the WGSL spec. IMHO we should remove testing of that and just test formats that can be expressed as WGSL tokens.",
+      "parentUuid": "ea7c532b_4523334a",
+      "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
