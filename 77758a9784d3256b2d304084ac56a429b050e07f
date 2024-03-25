@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c2494c_d908c3c6",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T17:43:12Z",
+      "side": 1,
+      "message": "This test indeed crashed before the production revisions when I added a `DAWN_ASSERT(staticSampler-\u003esampler)` to the validation code that I had in `ValidateSamplerBinding()`. Nonetheless, it seems a little clunky. If you have any more elegant suggestions, I\u0027m definitely up for it. I guess the real issue is that this is more of an end2end test in nature, but I can\u0027t do that yet because I\u0027m not yet actually using static samplers.",
+      "revId": "77758a9784d3256b2d304084ac56a429b050e07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

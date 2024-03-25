@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e7b8c6_c2b34627",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T17:43:12Z",
+      "side": 1,
+      "message": "Done. Was this what you had in mind?",
+      "parentUuid": "83339e96_998ed224",
+      "revId": "5e58d7600ca63e74c1dece5a764f2fe97d18efe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddd9c8db_bfd43fa2",
@@ -66,6 +84,30 @@
       "writtenOn": "2024-03-22T16:56:15Z",
       "side": 1,
       "message": "```suggestion\n                        \"Binding entry sampler %s set for layout that specifies a static sampler\", entry.sampler);\n```\n\nbut, you should probably first check if `entry.sampler` is even valid, so move this code after [1]\n\n\nAnd that means, we should probably have a test that passes an invalid sampler (use a descriptor that fails validation) in as a binding entry when the layout is static. and make sure it still errors as expected / doesn\u0027t do bad things",
+      "range": {
+        "startLine": 233,
+        "startChar": 46,
+        "endLine": 233,
+        "endChar": 47
+      },
+      "revId": "5e58d7600ca63e74c1dece5a764f2fe97d18efe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a942250_4f560fab",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-25T17:43:12Z",
+      "side": 1,
+      "message": "I\u0027m now validating the passed-in sampler when creating the bind group layout (in [1]) and added a test there of passing an invalid sampler. Do you see additional validation of `staticSampler` to do here? I need to add validation against the type in the layout, but I figure it makes more sense to do that when creating the bind group layout? (I\u0027ll just need to move out the below code that does that to make it callable from there).\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/179704",
+      "parentUuid": "ddd9c8db_bfd43fa2",
       "range": {
         "startLine": 233,
         "startChar": 46,
