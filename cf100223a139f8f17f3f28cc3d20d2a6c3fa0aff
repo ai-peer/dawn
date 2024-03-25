@@ -16,6 +16,115 @@
       "message": "@cwallez@chromium.org @enga@chromium.org PTAL, thanks!",
       "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe5bf1c_3245c9b9",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:57:39Z",
+      "side": 1,
+      "message": "Why sort if we\u0027re just looking for the first one buffer that meets our requirements? Sort+Find is O(n lg(n)) + O(n). Just finding it would be O(n).\n\nThat said, can\u0027t we just keep mStagingBuffers always sorted?\n\nLet\u0027s say mStagingBuffers is sorted from lowest to greatest last usage serial.\n\nOnce a staging buffer is acquired, it\u0027s last usage serial is the pending command usage serial - which should now be the greatest last usage serial. So, we acquire a staging buffer, and when it is done being used, it is moved to the end of the list.\n\nThat means, this could be something like:\n\n```\nExecutionSerial completedSerial \u003d GetCompletedCommandSerial();\nauto it \u003d mStagingBuffers.begin();\nwhile (it !\u003d mStagingBuffers.end()) {\n  if (it-\u003eGetLastUsageSerial() \u003e completedSerial) {\n    // This buffer, and none after it are ready.\n    // Advance to the end and stop the search. \n    it \u003d mStagingBuffers.end();\n    break;\n  }\n\n  if (it-\u003eGetSize() \u003e\u003d bufferSize) {\n    // this buffer is large enough. Stop searching and remove.\n    buffer \u003d *it;\n    mStagingBuffers.erase(it);\n    buffer-\u003eMarkUsedInPendingCommands();\n    break;\n  }\n  ++it;\n}\n\n\n// later..\n\n// when the buffer is done being used..\nmStagingBuffers.push_back(buffer);\n```",
+      "range": {
+        "startLine": 569,
+        "startChar": 4,
+        "endLine": 575,
+        "endChar": 20
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c3a73c0_68a3af91",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:57:39Z",
+      "side": 1,
+      "message": "these commands could be pending, but they may also be submitted commands that haven\u0027t completed yet, so the name \"IsFinishedUseInPendingCommands\" may not be best.\n\nIMO it\u0027s better to just use the getter for the last usage serial, and get the queue\u0027s completed serial and compare them here. This makes it much more clear what we\u0027re checking. No need for the IsFinishedUseInPendingCommands getter.",
+      "range": {
+        "startLine": 577,
+        "startChar": 62,
+        "endLine": 577,
+        "endChar": 92
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf4afeb9_2eaa4912",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:57:39Z",
+      "side": 1,
+      "message": "I don\u0027t love that we return the buffer to the client, and keep it in mStagingBuffers with an ASSERT that the previous client has dropped the ref to the buffer. IMO we should be removing it, and restoring it back into the list when it is done being used.\n\nWe only call GetStagingBuffer in one place. So the usage could be like:\n```\n    StagingBuffer stagingBuffer;\n    DAWN_TRY_ASSIGN(stagingBuffer, ToBackend(GetDevice())-\u003eAcquireStagingBuffer(commandContext, size));\n\n    DAWN_TRY(stagingBuffer-\u003eWriteInternal(commandContext, 0, data, size));\n\n    ToBackend(GetDevice())-\u003eReturnStagingBuffer(std::move(stagingBuffer));\n```",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 58
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1373b44a_66549593",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:57:39Z",
+      "side": 1,
+      "message": "nit: `return buffer;`\n\nThen, the else case can be dedented.",
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5c1b304_cf885a46",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-25T21:57:39Z",
+      "side": 1,
+      "message": "```suggestion\n        // Create a new staging buffer as no existing one can be re-used.\n```",
+      "range": {
+        "startLine": 585,
+        "startChar": 45,
+        "endLine": 585,
+        "endChar": 51
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
