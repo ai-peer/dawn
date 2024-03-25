@@ -462,6 +462,24 @@
       "parentUuid": "f09dbb4b_4bcf12df",
       "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b5b7b8_ca6358fa",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 62
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Wouldn\u0027t that be easy to introduce by making a Reference/Release on Device() that shadows the ObjectBase:: methods (or is -Wshadow an issue here)? It seems like it would be much more efficient in general than a virtual method and simpler because there is no need to deal with reentrancy etc.",
+      "parentUuid": "b33ff2b6_4da00da6",
+      "revId": "850b241ecf00e370251b22a8d37e6d4b91adfbc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

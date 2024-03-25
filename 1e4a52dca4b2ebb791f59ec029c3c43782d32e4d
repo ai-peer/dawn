@@ -63,6 +63,193 @@
       },
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f2ce3e8_3d3c6482",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a295707b_3f496205",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "I have a slight preference to have something like the following as it makes it less magic where `mDeviceLostEvent` is set:\n\nstatic Ref\u003cDeviceBase::DeviceLostEvent\u003e DeviceBase::CreateLostEvent(descriptor);\n\nThen at [1], only in the error case, do: `eventManager-\u003eTrackEvent(CreateLostEvent(desc))`.\n\nAnd then in the DeviceBase constructor set `mDeviceLostEvent` to `CreateLostEvent` and track it.",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "186a6e8c_31e37248",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Is this every used outside of APIRequest/CreateDevice methods? It could be made private.",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75198e7b_b8bb7c72",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this set the `mUncapturedErrorCallbackInfo` to the one in the descriptor if there is one?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a94f1a_80050916",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Maybe add a TODO to remove this virtual when we make a mock for the adapter?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f5be360_060fc360",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "```suggestion\n    // TODO(dawn:1702) Make this private and move the class in the implementation file when we mock the adapter.\n```",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5e07e9_99d96b5d",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "```suggestion\n    // Handle the event now if it\u0027s spontaneous and ready.\n```",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba7313f_faada137",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "nit: Why not `TrackedEvent* event`? We never use the ref. Is it to ensure that the caller holds a ref so the event doesn\u0027t get destroyed during this function call? Can we document that?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d8b882_a2e202fb",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Can we detail the reason for this change?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "275e6f95_8496e9de",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Won\u0027t this cause potential crashes when a pipeline ID is reverved for CreatePipelinAsync if the client starts referring to the pipeline before it is done being created (dawn::native would try to use a nullptr pipeline and crash).",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19288091_7912e008",
+        "filename": "src/dawn/wire/server/ServerAdapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-25T16:22:48Z",
+      "side": 1,
+      "message": "Another question related to eventManager, can\u0027t the server store it in the KnownAdapter since it is always going to be the ID of the instance for that adapter?",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
