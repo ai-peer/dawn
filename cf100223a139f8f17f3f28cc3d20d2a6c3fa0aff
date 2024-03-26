@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fcf74c7_62587e50",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 575,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-26T08:17:42Z",
+      "side": 1,
+      "message": "Good point! As such the buffer returning must be explicit and in order.",
+      "parentUuid": "efe5bf1c_3245c9b9",
+      "range": {
+        "startLine": 569,
+        "startChar": 4,
+        "endLine": 575,
+        "endChar": 20
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c3a73c0_68a3af91",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-03-25T21:57:39Z",
       "side": 1,
       "message": "these commands could be pending, but they may also be submitted commands that haven\u0027t completed yet, so the name \"IsFinishedUseInPendingCommands\" may not be best.\n\nIMO it\u0027s better to just use the getter for the last usage serial, and get the queue\u0027s completed serial and compare them here. This makes it much more clear what we\u0027re checking. No need for the IsFinishedUseInPendingCommands getter.",
+      "range": {
+        "startLine": 577,
+        "startChar": 62,
+        "endLine": 577,
+        "endChar": 92
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "133ff3dd_78ee0caa",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-26T08:17:42Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "6c3a73c0_68a3af91",
       "range": {
         "startLine": 577,
         "startChar": 62,
@@ -104,6 +152,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "add4d6d9_92a01973",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-26T08:17:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1373b44a_66549593",
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7bad6d5_0697b635",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-26T08:17:42Z",
+      "side": 1,
+      "message": "Makes sense, thanks!",
+      "parentUuid": "cf4afeb9_2eaa4912",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 58
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5c1b304_cf885a46",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-03-25T21:57:39Z",
       "side": 1,
       "message": "```suggestion\n        // Create a new staging buffer as no existing one can be re-used.\n```",
+      "range": {
+        "startLine": 585,
+        "startChar": 45,
+        "endLine": 585,
+        "endChar": 51
+      },
+      "revId": "cf100223a139f8f17f3f28cc3d20d2a6c3fa0aff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3c85ad0_2960a00b",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-26T08:17:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5c1b304_cf885a46",
       "range": {
         "startLine": 585,
         "startChar": 45,
