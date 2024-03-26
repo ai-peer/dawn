@@ -60,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ed7ee7a_fe30995e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-03-26T20:22:35Z",
+      "side": 1,
+      "message": "What will happen, if `it` is the last element before the element is erased?\n```suggestion\n    if (buffer) {\n```",
+      "range": {
+        "startLine": 588,
+        "startChar": 0,
+        "endLine": 588,
+        "endChar": 38
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e7376af_4530e703",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 11
