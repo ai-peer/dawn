@@ -129,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98f163f6_5b65cc91",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8f2ce3e8_3d3c6482",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a295707b_3f496205",
@@ -160,6 +178,24 @@
       "side": 1,
       "message": "So the one thing I was trying to solve with this was avoiding creating the device lost event in the `DeviceBase` ctor, or at least the tracking of it in the `ctor`. This is particularly important because otherwise, we will have the device lost event preceed the request device event in some cases given we attempt construction of the device and pass it into the ctor of the `RequestDeviceEvent`.\n\nI think this is solvable by exposing a getter on `DeviceBase`, say `Ref\u003cTrackedEvent\u003e GetDeviceLostEvent()` or something like `void TrackDeviceLostEvent()`, and calling those after tracking the `RequestDeviceEvent`, but I wasn\u0027t convinced it was easier to follow that just having one helper that creates both a device and a `DeviceLostEvent` that matches the resulting `Device`. It\u0027s also a bit annoying if we fail `Device::Initialize` because we would\u0027ve already created the `DeviceLostEvent` via the ctor but still return an error which could cause duplicate `DeviceLostEvent`s at [1].\n\nAlso, since the `DeviceLostEvent` needs a ref to the `Device`, we would either need to set `DeviceBase::mDeviceLostEvent` in `DeviceLostEvent` ctor, or set `DeviceLostEvent::mDevice` in `DeviceBase` ctor. Either one will have a bit of magic involved.\n\nNot sure if this is compelling enough, but would be down to chat about it offline a bit more if you think there could be a better way!",
       "parentUuid": "a295707b_3f496205",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57f9361_40912603",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "\u003e So the one thing I was trying to solve with this was avoiding creating the device lost event in the DeviceBase ctor, or at least the tracking of it in the ctor. This is particularly important because otherwise, we will have the device lost event preceed the request device event in some cases given we attempt construction of the device and pass it into the ctor of the RequestDeviceEvent.\n\nIf I understand correctly the problem is that the order of the callbacks on the client-side would be DeviceLostEvent, RequestDevice, which could be confusing for applications? Given that the device is never created (so DeviceLostEvent gets a nullptr WGPUDevice argument) maybe that\u0027s ok?\n\nOtherwise what you suggested with a getter seems simpler IMHO as it makes things very clear in the handling of error / success cases.\n\n\u003e Also, since the DeviceLostEvent needs a ref to the Device, we would either need to set DeviceBase::mDeviceLostEvent in DeviceLostEvent ctor, or set DeviceLostEvent::mDevice in DeviceBase ctor. Either one will have a bit of magic involved.\n\nMaking the device pass itself to the `DeviceLostEvent` constructor seems ok? That\u0027s a fairly common pattern. Happy to chat offline, I might be missing things.",
+      "parentUuid": "c1c9a8ed_1ec3fc5a",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -230,6 +266,24 @@
       "side": 1,
       "message": "I think it does?",
       "parentUuid": "75198e7b_b8bb7c72",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56422ac_5626ac66",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "Whoops.",
+      "parentUuid": "5200244b_6bf4e360",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -393,6 +447,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85c5c3ff_6a3b44fb",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "I have a slight preference to make the function signature have the semantic of what the function actually needs, and it only needs a pointer, not a ref.",
+      "parentUuid": "b84fa90c_9d776709",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3a27e7ce_545d86fd",
         "filename": "src/dawn/wire/client/Adapter.cpp",
         "patchSetId": 68
@@ -492,6 +564,24 @@
       "side": 1,
       "message": "I think the latter. Server has to be resilient to arbitrary inputs because of the IPC security boundary (which we fuzz).",
       "parentUuid": "bcaecea3_40d8e264",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10b1b191_a18d3b28",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "Yeah that was the latter, the server needs to be resilient to malicious command streams.",
+      "parentUuid": "d2f8fc81_644f1b6b",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

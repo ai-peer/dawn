@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a9d8cb8_0814ae26",
+        "filename": "src/dawn/wire/client/ObjectBase.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:14:01Z",
+      "side": 1,
+      "message": "I believe that all the changes to this function, but the addition of the return value can be removed.",
+      "revId": "2313cdb651d34bd144fc760e9c1f7684dd350d22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
