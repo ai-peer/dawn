@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420ea1e5_682e7b4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-03-26T19:16:19Z",
+      "side": 1,
+      "message": "There is no Kokoro anymore?\nCool, I can CQ without waiting for Kokoro result!",
+      "revId": "f48cb94dc2989ac4727a1f834fac177c0748ac0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
