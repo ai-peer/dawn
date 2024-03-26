@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0bf2b1_598e9cb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T16:26:09Z",
+      "side": 1,
+      "message": "some more nits, but mostly LGTM",
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf1d9aa_f22fd211",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T16:26:09Z",
+      "side": 1,
+      "message": "nit: we could factor MarkUsedInPendingCommands out to the caller after GetStagingBuffer. Then we don\u0027t need to do it multiple times in this function\n\nThen, later, we don\u0027t need\n\n```\nif (it !\u003d mStagingBuffers.end()) {\n  buffer-\u003eMarkUsedInPendingCommands();\n  return buffer;\n}\n```\n\nwe can just return out of the loop immediately when we find a suitable buffer.\nThat also means it can be a simple for-loop instead of while-loop.\nSorry I didn\u0027t realize this earlier.\n\n```\nfor (auto it \u003d begin(); it !\u003d end(); ++it) {\n  if (it-\u003eserial \u003e completedSerial) {\n    break;\n  }\n  if (it-\u003esize \u003e\u003d bufferSize) {\n    auto buffer \u003d *it;\n    erase(it);\n    return buffer;\n  }\n}\n\nDAWN_TRY_ASSIGN(buffer, Buffer::Create(...));\n```",
+      "range": {
+        "startLine": 565,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 44
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7376af_4530e703",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T16:26:09Z",
+      "side": 1,
+      "message": "nit: with the above change, we can make this a more normal for-loop:\n\n`for (auto it \u003d begin(); it !\u003d end() \u0026\u0026 ...) {`",
+      "range": {
+        "startLine": 599,
+        "startChar": 4,
+        "endLine": 600,
+        "endChar": 10
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e68036_35e97caa",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T16:26:09Z",
+      "side": 1,
+      "message": "nit: you\u0027ll need to check against kMaxSize, or the large buffers will be added back into the pool",
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9edc6319_b8b057b9",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T16:26:09Z",
+      "side": 1,
+      "message": "I believe you still need to explicitly move it even if the arg is an r-value reference. Making it an r-value reference only requires it is passed in as an r-value reference. Once we are inside the function body, the reference has a name - and thus it will be copied if you forward it without `std::move`\n\n```suggestion\n    mStagingBuffers.push_back(std::move(buffer));\n```",
+      "range": {
+        "startLine": 614,
+        "startChar": 30,
+        "endLine": 614,
+        "endChar": 36
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
