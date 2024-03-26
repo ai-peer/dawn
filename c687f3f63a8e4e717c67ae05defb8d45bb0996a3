@@ -34,6 +34,24 @@
       "parentUuid": "e0e692e0_ffe40a91",
       "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6f7c36_772b5447",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-26T18:22:39Z",
+      "side": 1,
+      "message": "Yes, sorry, I didn\u0027t mean to suggest using target-specific flags for DXC - just that you use a SSoT for the flags.",
+      "parentUuid": "79a80ce6_e7aa352b",
+      "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
