@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f5dfa7a_5f6b3c5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T15:50:48Z",
+      "side": 1,
+      "message": "high level - is there a way we can share the begin/end fence logic and stuff with SharedTextureMemory? Seems like quite a bit of duplication right now.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8e01720_43d9cbb1",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 10
@@ -31,6 +48,29 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "```suggestion\n    return mState !\u003d BufferState::SharedMemoryNoAccess;\n```",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93389a65_6d8d1cc6",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T15:50:48Z",
+      "side": 1,
+      "message": "```suggestion\n    return mState !\u003d BufferState::SharedMemoryNoAccess;\n```",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 893,
+        "endChar": 70
+      },
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +293,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d767a87a_cd26bc04",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T15:50:48Z",
+      "side": 1,
+      "message": "why can\u0027t we use ComPtr ?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c7c2271_fed5956b",
         "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
         "patchSetId": 10
@@ -264,6 +327,29 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "We could probably support Uniform here, and maybe even Vertex/Index/Undirect/QueryResolve",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7c6937_a91a48cf",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T15:50:48Z",
+      "side": 1,
+      "message": "it can never be anything else, like \"D3D12_HEAP_TYPE_CUSTOM\" ?\n\nwe could validate it is not CUSTOM\n\nor, is it better to rely on D3D12_CPU_PAGE_PROPERTY / D3D12_MEMORY_POOL ?",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 31
+      },
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
