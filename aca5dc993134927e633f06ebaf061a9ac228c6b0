@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4e827f_15195249",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-26T14:10:27Z",
+      "side": 1,
+      "message": "note: tests moved to `lang/wgsl/writer/writer_test.cc`",
+      "revId": "aca5dc993134927e633f06ebaf061a9ac228c6b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
