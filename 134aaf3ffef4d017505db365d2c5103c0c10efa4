@@ -33,6 +33,24 @@
       "message": "For convenience, a `sudo apt-get install` one-liner might be helpful.\n\n`sudo apt-get install libxrandr-dev libxinerama-dev libxcursor-dev mesa-common-dev libx11-xcb-dev pkg-config nodejs npm`",
       "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99c48bb_e3cec811",
+        "filename": "docs/building.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T16:20:30Z",
+      "side": 1,
+      "message": "Maybe mention that nodejs and npm are just for dawn.node, and that remove the mention of libx11-xcb-dev in src/dawn/node/README.md.",
+      "parentUuid": "91c1f18e_653d266f",
+      "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
