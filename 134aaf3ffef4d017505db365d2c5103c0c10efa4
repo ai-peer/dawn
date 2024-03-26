@@ -51,6 +51,24 @@
       "parentUuid": "91c1f18e_653d266f",
       "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8760f1_55841503",
+        "filename": "docs/building.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-26T16:40:13Z",
+      "side": 1,
+      "message": "I\u0027m actually a little surprised by the need for nodejs - isn\u0027t that bundled in third_party already?\nI think the run cts tooling has been using that for some time now, but might not have always been the case.",
+      "parentUuid": "f99c48bb_e3cec811",
+      "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
