@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a331716a_18212a78",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Removed in favor of just using buffer\u0027s lastUsageSerial.",
+      "parentUuid": "e8e01720_43d9cbb1",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc8d86a5_409272ac",
@@ -75,6 +93,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc6216f4_c98a4e29",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93389a65_6d8d1cc6",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 893,
+        "endChar": 70
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d691b3f5_dc117ea0",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc8d86a5_409272ac",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "679c5fe2_9f035a1c",
@@ -88,6 +148,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "Why is some of the validation done here and some in BeginAccess? We could do like in SharedTextureMemory and just handle it all in BeginAccess.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ab9bff_f15ee0eb",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "679c5fe2_9f035a1c",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a8da1a_f6733627",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d1e10f4_439b744a",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df67f598_1cd17434",
@@ -122,6 +218,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "This should be done after all validation otherwise we might acquire the fences when returning an error, which will make them leak.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d25b89_3d58c758",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df67f598_1cd17434",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55896542_2c782bd2",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46585302_4ec20950",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c82cf86_638824d0",
@@ -156,6 +288,30 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "At that point the buffer will have been validated to not be an error.",
+      "range": {
+        "startLine": 276,
+        "startChar": 25,
+        "endLine": 276,
+        "endChar": 45
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3698d11_f31968c3",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c82cf86_638824d0",
       "range": {
         "startLine": 276,
         "startChar": 25,
@@ -189,6 +345,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aafdfbf_195a1d90",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3698c5ce_5782af8d",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 52
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7eb9a3a3_c64fdd6c",
@@ -202,6 +382,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "We need to ensure commands are flushed, for example if there\u0027s a pending WriteBuffer that hasn\u0027t been submitted yet.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25240273_3b1ce1a7",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eb9a3a3_c64fdd6c",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +421,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c4c0e2d_d2d434ff",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccda8413_12ad1f76",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f4683d9_b9a44017",
@@ -236,6 +452,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "Can you update the STM version to be private? It doesn\u0027t seem to need to be public.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05aca67f_60da4baf",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4683d9_b9a44017",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -257,6 +491,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22056402_6e127567",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a4c3201_dc5c2374",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c08be5ce_5b92ce3a",
@@ -274,6 +526,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d8f9cf_1b5deaa4",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c08be5ce_5b92ce3a",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65d8a8ba_4cb8f16d",
@@ -287,6 +557,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "What about using a ComPtr instead of this manual memory management?",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b8f9fd_21d33b1a",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65d8a8ba_4cb8f16d",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -314,6 +602,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62a19ccf_a9ab9b2e",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "We can. Fixed.",
+      "parentUuid": "d767a87a_cd26bc04",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 0
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7c2271_fed5956b",
@@ -331,6 +643,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb94bc6_2c1dd1ba",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "That works. We can add all the translated D3D12_RESOURCE_STATE_GENERIC_READ states.",
+      "parentUuid": "2c7c2271_fed5956b",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d7c6937_a91a48cf",
@@ -344,6 +674,30 @@
       "writtenOn": "2024-03-26T15:50:48Z",
       "side": 1,
       "message": "it can never be anything else, like \"D3D12_HEAP_TYPE_CUSTOM\" ?\n\nwe could validate it is not CUSTOM\n\nor, is it better to rely on D3D12_CPU_PAGE_PROPERTY / D3D12_MEMORY_POOL ?",
+      "range": {
+        "startLine": 98,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 31
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eca9272b_42ed907d",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "I think we can just disallow CUSTOM. I\u0027m not aware of a usage for now.",
+      "parentUuid": "7d7c6937_a91a48cf",
       "range": {
         "startLine": 98,
         "startChar": 8,
@@ -401,6 +755,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "Isn\u0027t the goal of the structure of the tests that most of these would be in the shared test file? See how SharedTextureMemory does it.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a586a25_91255965",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-26T19:14:34Z",
+      "side": 1,
+      "message": "That\u0027s fair. I\u0027ll try to move more tests into the shared file.",
+      "parentUuid": "f2dbf743_9b361fe3",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
