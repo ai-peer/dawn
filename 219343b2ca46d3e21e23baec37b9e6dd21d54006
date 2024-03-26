@@ -52,6 +52,24 @@
       "parentUuid": "87bab2ec_9691af0c",
       "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "687b6655_8da34a4f",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T15:25:30Z",
+      "side": 1,
+      "message": "I hadn\u0027t considered this option, but I think I agree it\u0027s a better API.",
+      "parentUuid": "99da5976_e6c18c60",
+      "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
