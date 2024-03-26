@@ -67,6 +67,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52f7698b_5a296c97",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 68
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "The fact that it\u0027s redundant is a little annoying, especially because it arises from the API not quite matching JS. We could solve it by:\n- Not calling it when requestDevice fails\n- Undoing https://github.com/webgpu-native/webgpu-headers/issues/173 and going back to SetDeviceLostCallback, BUT address the problem there by doing what JS promises do: call the callback if the device is already lost when you set it. This seems like a pain though.\n\nProbably the best option is to do what you\u0027ve done here, but I wanted to write that down.",
+      "parentUuid": "62d55632_0ad92ff9",
+      "range": {
+        "startLine": 1528,
+        "startChar": 12,
+        "endLine": 1529,
+        "endChar": 51
+      },
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f2943b_c0a3e6e8",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "nit: `deviceLostEvent`",
+      "range": {
+        "startLine": 202,
+        "startChar": 10,
+        "endLine": 202,
+        "endChar": 15
+      },
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f2ce3e8_3d3c6482",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 68
@@ -294,6 +341,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f66de2c_afc8af33",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "I think in a PollEvents call that clears the last progressing events, hasIncompleteEvents will be true and hasProgressingEvents will be true, but it would be more correct to return false. Probably not a huge deal though.",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aba7313f_faada137",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 68
@@ -323,6 +387,23 @@
       "side": 1,
       "message": "Actually, I think either would work, I think I just had this because pretty much anywhere that would call this has a `Ref\u003cTrackedEvent\u003e`, not a raw pointer, so it was just easier to pass that directly than explicitly call `Get()` at the call site. WDYT?",
       "parentUuid": "aba7313f_faada137",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a27e7ce_545d86fd",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "set mDevice \u003d nullptr after releasing",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -393,6 +474,24 @@
       "side": 1,
       "message": "IIUC, isn\u0027t it impossible for the user to start referring to the pipeline before it\u0027s created? The user only gets the pipeline when the async callback happens? Or are you suggesting a case where a user is injecting something and doing something bad?",
       "parentUuid": "275e6f95_8496e9de",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f8fc81_644f1b6b",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "I think the latter. Server has to be resilient to arbitrary inputs because of the IPC security boundary (which we fuzz).",
+      "parentUuid": "bcaecea3_40d8e264",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

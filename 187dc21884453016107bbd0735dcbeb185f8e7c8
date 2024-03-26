@@ -571,6 +571,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab539a2d_7900f77d",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 61
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-26T00:17:04Z",
+      "side": 1,
+      "message": "No opinion about using the payload.",
+      "parentUuid": "6e90d8f1_81474ebb",
+      "revId": "187dc21884453016107bbd0735dcbeb185f8e7c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "352c7972_f7946f5e",
