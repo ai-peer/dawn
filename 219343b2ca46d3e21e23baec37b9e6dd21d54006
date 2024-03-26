@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7151e2d_84fab1bc",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T10:15:01Z",
+      "side": 1,
+      "message": "Note: we could alternatively extend `bind group layout entry` similar to how we do for `external texture binding layout` so that we don\u0027t set the `sampler binding type` which is redundant with the sampler itself.",
+      "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
