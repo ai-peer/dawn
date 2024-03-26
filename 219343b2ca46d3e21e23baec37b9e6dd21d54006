@@ -16,6 +16,24 @@
       "message": "Note: we could alternatively extend `bind group layout entry` similar to how we do for `external texture binding layout` so that we don\u0027t set the `sampler binding type` which is redundant with the sampler itself.",
       "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87bab2ec_9691af0c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-26T10:40:49Z",
+      "side": 1,
+      "message": "Thanks! This feels like it intersects with the discussion on the next CL of how to store the static sampler for later usage [1] - if we did it this way, it seems like it could then be natural to add a `StaticSampler`(*) struct that is its own variant in `BindingInfo`?\n\nThis also feels like it intersects with the discussion on that CL of not passing bind group entries for static samplers [2] - if we did it this way, then that check would just boil down to \"if the layout entry at a given index is of type `StaticSampler`, there shouldn\u0027t be any bind group entry at that index\"?\n\nThe downside of doing it this way would be if there\u0027s a significant amount of code/logic that would have to be duplicated between the usage of`SamplerBindingLayout` and the usage of the new `StaticSamplerBindingLayout`. I don\u0027t have intuition there.\n\nCorentin, Austin: WDYT?\n\n(*) Name to be bikeshed - `StaticSamplerBindingLayout` feels misleading because we couldn\u0027t directly store the struct from the client itself as we do for e.g. `SamplerBindingLayout` but would need to create something new to have an owning ref to the static sampler object IIUC.\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/180384/comment/400f32da_9bb0e8a0/\n[2] https://dawn-review.googlesource.com/c/dawn/+/180384/comment/67da0c98_d0b52d4e/",
+      "parentUuid": "d7151e2d_84fab1bc",
+      "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
