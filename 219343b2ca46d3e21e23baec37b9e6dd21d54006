@@ -34,6 +34,24 @@
       "parentUuid": "d7151e2d_84fab1bc",
       "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99da5976_e6c18c60",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T11:16:42Z",
+      "side": 1,
+      "message": "Yeah if we did this, there would be an additional variant for the static sampler, and that would be used for the validation that a sampler isn\u0027t passed.\n\nI\u0027m not sure that there would be that much duplication of code to handle the new binding type but I\u0027m not 100% sure. Overall I have a slight preference for making this change but don\u0027t want to block things on it.",
+      "parentUuid": "87bab2ec_9691af0c",
+      "revId": "219343b2ca46d3e21e23baec37b9e6dd21d54006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
