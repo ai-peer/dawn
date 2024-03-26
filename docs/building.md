@@ -69,6 +69,12 @@ The following packages are needed to build Dawn. (Package names are the Ubuntu n
 * `nodejs`
 * `npm`
 
+```sh
+sudo apt-get install libxrandr-dev libxinerama-dev libxcursor-dev mesa-common-dev libx11-xcb-dev pkg-config nodejs npm
+```
+
+Note, `nodejs` and `npm` are only needed if building `dawn.node`.
+
 
 ## Build Dawn
 
