@@ -16,6 +16,24 @@
       "message": "The dawn CMakeLists does this:\n\n```\n    if (${DAWN_ENABLE_MSAN})\n      target_compile_options(${TARGET} PUBLIC -fsanitize\u003dmemory)\n      target_link_options(${TARGET} PUBLIC -fsanitize\u003dmemory)\n    elseif (${DAWN_ENABLE_ASAN})\n      target_compile_options(${TARGET} PUBLIC -fsanitize\u003daddress)\n      target_link_options(${TARGET} PUBLIC -fsanitize\u003daddress)\n    elseif (${DAWN_ENABLE_TSAN})\n      target_compile_options(${TARGET} PUBLIC -fsanitize\u003dthread)\n      target_link_options(${TARGET} PUBLIC -fsanitize\u003dthread)\n    elseif (${DAWN_ENABLE_UBSAN})\n      target_compile_options(${TARGET} PUBLIC -fsanitize\u003dundefined -fsanitize\u003dfloat-divide-by-zero)\n      target_link_options(${TARGET} PUBLIC -fsanitize\u003dundefined -fsanitize\u003dfloat-divide-by-zero)\n    endif()\n```\n\nNote that this is a prioritized, but mutually exclusive set of flags. While unlikely, the mismatch might cause hard-to-trace UB.\n\nI think it would probably be better to change the dawn CMakeLists to set a new variable with the sanitizer flags in use, and use that here. Something like:\n\n\n```\n    if (${DAWN_ENABLE_MSAN})\n      set(DAWN_SANITIZER_OPTIONS -fsanitize\u003dmemory)\n    elseif (${DAWN_ENABLE_ASAN})\n      set(DAWN_SANITIZER_OPTIONS -fsanitize\u003daddress)\n    elseif (${DAWN_ENABLE_TSAN})\n      set(DAWN_SANITIZER_OPTIONS -fsanitize\u003dthread)\n    elseif (${DAWN_ENABLE_UBSAN})\n      set(DAWN_SANITIZER_OPTIONS -fsanitize\u003dundefined -fsanitize\u003dfloat-divide-by-zero)\n    endif()\n\n\n    # Use this in both the root CMakeLists.txt and in this third_party one.\n    if (${DAWN_SANITIZER_OPTIONS})\n      target_compile_options(${TARGET} PUBLIC ${DAWN_SANITIZER_OPTIONS})\n      target_link_options(${TARGET} PUBLIC ${DAWN_SANITIZER_OPTIONS})\n    endif()\n   \n```",
       "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a80ce6_e7aa352b",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-26T18:20:53Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right about the mismatch in the root CMakeLists for our Tint targets, I can fix that. However, I\u0027m not sure I can set target options for `dxc` and `dxcompiler`, as the DXC (actually LLVM) CMake config wants you to set `LLVM_USE_SANITIZER` to the very specific way that is spelled below (note the use of semicolon, and capitalized first letters).",
+      "parentUuid": "e0e692e0_ffe40a91",
+      "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
