@@ -16,6 +16,149 @@
       "message": "Thanks! Sending back out for feedback although trybots just got started on it as (a) it\u0027s the end of my workday, and (b) the tests passed locally.",
       "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67da0c98_d0b52d4e",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "so I realized - I don\u0027t think we should even be calling ValidateSamplerBinding down below for a static sampler (more on that at [3]).\n\nRight now, your test for CreateBindGroup passes an empty wgpu::BindGroupEntry for the static sampler entry. I think the way we\u0027d want it to work is that you don\u0027t have to pass anything *at all* for the static sampler binding.\n\nThat means just below, it should be something like:\n\n```suggestion\n        descriptor-\u003eentryCount !\u003d layout-\u003eGetUnexpandedBindingCount() - layout-\u003eGetStaticSamplerCount(),\n```\n\nand then [2] will also need updating.\n\nBasically, CreateBindGroup only needs to pass entries that are not already statically present in the layout.",
+      "range": {
+        "startLine": 321,
+        "startChar": 0,
+        "endLine": 321,
+        "endChar": 70
+      },
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72132269_b8e95c74",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "nit: update `EntriesToString` so it pretty-prints the sampler too - probably by updating the printing for BindingInfo [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/third_party/dawn/third_party/angle/third_party/dawn/src/dawn/native/webgpu_absl_format.cpp;l\u003d124)",
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc6f6822_109d417a",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "[3] if we even get here, that means the application passed some entry (could have been a buffer, texture view, etc.) when there is already a static sampler here. So really, we should validate that nothing is present. We shouldn\u0027t be validating the entry itself.\n\n```suggestion\n            [\u0026](const SamplerBindingLayout\u0026 layout) -\u003e MaybeError {\n                DAWN_INVALID_IF(layout.staticSampler,\n                                \"entries[%u] is specified when the layout (%s) \"\n                                \"has a static sampler (%s).\", i, layout,\n                                layout.staticSampler);\n```",
+      "range": {
+        "startLine": 398,
+        "startChar": 0,
+        "endLine": 398,
+        "endChar": 67
+      },
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8925cb9_ccc806ae",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 408,
+        "startChar": 0,
+        "endLine": 414,
+        "endChar": 0
+      },
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b05e072a_bb365a56",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "update this to hash the static sampler\n\n`recorder.Record(staticSampler-\u003eGetContentHash())`\n\nThis and BindGroupLayoutInternalBase::EqualityFunc::operator() are used for the frontend cache.\n\nDawn caches these \"immutable\" objects so that when you create the same thing redundantly, you get a ref to the other already-created object.\n\nWe should add some tests that it caches as expected.\nCheck out dawn/tests/unittests/validation/ObjectCachingTests.cpp\n\nSome tests I can think of:\n\n1. Make a BGL `a` with no static sampler. Make a BGL `b` with otherwise the same entries, but make the sampler a static sampler. They should have different pointers, and `IsLayoutEqual(a, b)` should be false.\n2. make two BGLs with the same entries, including a static sampler. The BGL pointers should be the same.\n3. Make sampler `s1`.\n   Create BGL `b` with static sampler `s1`.\n   Get a raw pointer to `s1`. (`sUnsafePtr \u003d s1.Get()`).\n   Drop `s1` on the floor. (internally it is referenced by `b`).\n   Make sampler `s2` with the same params as `s1`.\n   Check that `s2.Get() \u003d\u003d sUnsafePtr`.\n   ^^ technically this can also pass if `s1` was actually deleted, and `s2` got created at the same address - but this kind of test is probably sufficient.",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 71
+      },
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "400f32da_9bb0e8a0",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "I think we should make our own struct which holds both the static sampler and `SamplerBindingLayout`. We only want to pay the space for the static sampler if we indeed are using a sampler binding layout. Since sampling binding layout is the smallest struct, we can add the static sampler in for \"free\" to the variant.\n\nlike:\n```\nstruct MyOtherStruct {\n  SamplerBindingLayout layout;\n  Ref\u003cSamplerBase\u003e staticSampler;\n};\n\n\nstruct BindingInfo {\n   ...\n   std::variant\u003c..., MyOtherStruct, ...\u003e bindingLayout;\n}\n```",
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53991447_a63a5fb8",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-26T00:09:49Z",
+      "side": 1,
+      "message": "nit: small comment above the test",
+      "revId": "313d9130d3daf5ac843620f9295261d17758e58f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
