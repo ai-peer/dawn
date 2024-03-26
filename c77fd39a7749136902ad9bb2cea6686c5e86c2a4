@@ -1,0 +1,322 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e01720_43d9cbb1",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "nit: I believe this could be updated in SharedTextureMemory::EndAccess",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8d86a5_409272ac",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "```suggestion\n    return mState !\u003d BufferState::SharedMemoryNoAccess;\n```",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679c5fe2_9f035a1c",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "Why is some of the validation done here and some in BeginAccess? We could do like in SharedTextureMemory and just handle it all in BeginAccess.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d1e10f4_439b744a",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df67f598_1cd17434",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "This should be done after all validation otherwise we might acquire the fences when returning an error, which will make them leak.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46585302_4ec20950",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "The buffer will have been validated to not be an error so that condition can be removed.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c82cf86_638824d0",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "At that point the buffer will have been validated to not be an error.",
+      "range": {
+        "startLine": 276,
+        "startChar": 25,
+        "endLine": 276,
+        "endChar": 45
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3698c5ce_5782af8d",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "These could be at the start of EndAccessImpl.",
+      "range": {
+        "startLine": 283,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 52
+      },
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eb9a3a3_c64fdd6c",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "We need to ensure commands are flushed, for example if there\u0027s a pending WriteBuffer that hasn\u0027t been submitted yet.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccda8413_12ad1f76",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "Since we are copying code from SharedTextureMemory, can we also copy the useful comments with it? 😊",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f4683d9_b9a44017",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "Can you update the STM version to be private? It doesn\u0027t seem to need to be public.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a4c3201_dc5c2374",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "Ditto for the comment.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c08be5ce_5b92ce3a",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "I don\u0027t think that this is needed, because the buffer already stores the last usage serial and we can query it in EndAccess. So the SharedBufferMemoryContents would only contain the mPendingFences and the WeakRef.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d8a8ba_4cb8f16d",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "What about using a ComPtr instead of this manual memory management?",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7c2271_fed5956b",
+        "filename": "src/dawn/native/d3d12/SharedBufferMemoryD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "We could probably support Uniform here, and maybe even Vertex/Index/Undirect/QueryResolve",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2afe040b_bb6978e0",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "nit: Maybe we could test calling EndAccess on the incorrect buffer. And then calling EndAccess on the correct on would return the proper fences.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "123414c3_448e38b5",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "We could test usage of a buffer for storage / copySrc / copyDst and other potential usages.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2dbf743_9b361fe3",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-26T12:52:32Z",
+      "side": 1,
+      "message": "Isn\u0027t the goal of the structure of the tests that most of these would be in the shared test file? See how SharedTextureMemory does it.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
