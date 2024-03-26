@@ -69,6 +69,24 @@
       "parentUuid": "f99c48bb_e3cec811",
       "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd5b88d_38d5c489",
+        "filename": "docs/building.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-26T17:00:39Z",
+      "side": 1,
+      "message": "Done.\n\nThese were what I needed to install last time I setup my desktop, it\u0027s possible some aren\u0027t needed, but whoever goes through the process next can trim the list down if needed.",
+      "parentUuid": "5e8760f1_55841503",
+      "revId": "134aaf3ffef4d017505db365d2c5103c0c10efa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
