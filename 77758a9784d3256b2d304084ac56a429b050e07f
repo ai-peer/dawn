@@ -34,6 +34,24 @@
       "parentUuid": "78c2494c_d908c3c6",
       "revId": "77758a9784d3256b2d304084ac56a429b050e07f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31a6c0e_df891b6d",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1882,
+      "author": {
+        "id": 1004687
+      },
+      "writtenOn": "2024-03-26T02:23:19Z",
+      "side": 1,
+      "message": "This also bugs me but nothing is jumping out as a more eloquent solution to me right now either unfortunately",
+      "parentUuid": "994dcbb4_9cc0d13e",
+      "revId": "77758a9784d3256b2d304084ac56a429b050e07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
