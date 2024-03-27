@@ -153,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9909aefc_46a0da60",
+        "filename": "generator/templates/art/api_kotlin_constants.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T14:48:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ada0f31d_048a70bc",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ef1386_5d5c4cdd",
@@ -184,6 +202,24 @@
       "side": 1,
       "message": "They\u0027re not type safe at the moment so it would be misleading to wrap them in a class that might imply they\u0027re something other than plain ints. There\u0027s been some discussion in the design about how to do type safe enums in Kotlin, I\u0027ll address that soon. I opened a bug b/331597870 to track.",
       "parentUuid": "53ef1386_5d5c4cdd",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16736c10_2d2b62ab",
+        "filename": "generator/templates/art/api_kotlin_enum.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T14:48:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "921cc42a_1638e064",
       "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
