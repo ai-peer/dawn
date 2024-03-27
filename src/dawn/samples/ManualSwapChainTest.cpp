@@ -78,10 +78,11 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 #include "dawn/webgpu_cpp.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "webgpu/webgpu_glfw.h"
 
 struct WindowData {
-    GLFWwindow* window = nullptr;
+    raw_ptr<GLFWwindow> window = nullptr;
     uint64_t serial = 0;
 
     float clearCycle = 1.0f;
