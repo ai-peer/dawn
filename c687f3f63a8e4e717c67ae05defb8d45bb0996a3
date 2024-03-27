@@ -70,6 +70,24 @@
       "parentUuid": "cd6f7c36_772b5447",
       "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81cbe67a_63036d8e",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-03-27T15:02:55Z",
+      "side": 1,
+      "message": "Modified root CMakeLists to make it possible to enable more than one sanitizer, as it possible with DXC.",
+      "parentUuid": "1d092bf2_ce76ec65",
+      "revId": "c687f3f63a8e4e717c67ae05defb8d45bb0996a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
