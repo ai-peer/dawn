@@ -31,6 +31,7 @@
 #include <memory>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/wire/Wire.h"
 
@@ -66,8 +67,8 @@ struct ReservedInstance {
 };
 
 struct DAWN_WIRE_EXPORT WireClientDescriptor {
-    CommandSerializer* serializer;
-    client::MemoryTransferService* memoryTransferService = nullptr;
+    raw_ptr<CommandSerializer> serializer;
+    raw_ptr<client::MemoryTransferService> memoryTransferService = nullptr;
 };
 
 class DAWN_WIRE_EXPORT WireClient : public CommandHandler {

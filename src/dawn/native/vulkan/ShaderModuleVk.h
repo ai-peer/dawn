@@ -34,6 +34,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/common/HashUtils.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
@@ -66,7 +67,7 @@ class ShaderModule final : public ShaderModuleBase {
   public:
     struct ModuleAndSpirv {
         VkShaderModule module;
-        const uint32_t* spirv;
+        raw_ptr<const uint32_t> spirv;
         size_t wordCount;
         std::string remappedEntryPoint;
     };

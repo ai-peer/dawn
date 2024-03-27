@@ -33,6 +33,7 @@
 #include <sstream>
 #include <string>
 
+#include "base/memory/raw_ref.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
@@ -111,7 +112,7 @@ class WireHelperDirect : public WireHelper {
                                     const WGPUSwapChainDescriptor* descriptor) override {
         DAWN_ASSERT(backendDevice == apiDevice);
         WGPUSwapChain cSwapChain =
-            mProcs.deviceCreateSwapChain(backendDevice, backendSurface, descriptor);
+            mProcs->deviceCreateSwapChain(backendDevice, backendSurface, descriptor);
         return wgpu::SwapChain::Acquire(cSwapChain);
     }
 
@@ -122,7 +123,7 @@ class WireHelperDirect : public WireHelper {
     bool FlushServer() override { return true; }
 
   private:
-    const DawnProcTable& mProcs;
+    const raw_ref<const DawnProcTable> mProcs;
 };
 
 class WireHelperProxy : public WireHelper {
@@ -167,7 +168,7 @@ class WireHelperProxy : public WireHelper {
                                     WGPUDevice apiDevice,
                                     const WGPUSwapChainDescriptor* descriptor) override {
         WGPUSwapChain cSwapChain =
-            mBackendProcs.deviceCreateSwapChain(backendDevice, backendSurface, descriptor);
+            mBackendProcs->deviceCreateSwapChain(backendDevice, backendSurface, descriptor);
 
         auto reservation = mWireClient->ReserveSwapChain(apiDevice, descriptor);
         mWireServer->InjectSwapChain(cSwapChain, reservation.handle, reservation.deviceHandle);
@@ -186,7 +187,7 @@ class WireHelperProxy : public WireHelper {
     bool FlushServer() override { return mS2cBuf->Flush(); }
 
   private:
-    const DawnProcTable& mBackendProcs;
+    const raw_ref<const DawnProcTable> mBackendProcs;
     std::unique_ptr<dawn::utils::TerribleCommandBuffer> mC2sBuf;
     std::unique_ptr<dawn::utils::TerribleCommandBuffer> mS2cBuf;
     std::unique_ptr<WireServerTraceLayer> mWireServerTraceLayer;
