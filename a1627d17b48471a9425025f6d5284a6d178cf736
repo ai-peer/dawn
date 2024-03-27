@@ -51,6 +51,24 @@
       "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
       "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1fbe0e1_387fbc15",
+        "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-27T20:52:47Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "11c93046_0e2c6134",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
