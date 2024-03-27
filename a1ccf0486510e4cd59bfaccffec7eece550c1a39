@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53579ab6_31aede18",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:43:01Z",
+      "side": 1,
+      "message": "note that for c and cpp we use `as_cppName` and `as_cName` so maybe this could be `as_ktName`?",
+      "range": {
+        "startLine": 981,
+        "startChar": 13,
+        "endLine": 981,
+        "endChar": 29
+      },
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee7fa7c9_7ac9f2b1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:43:01Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a4eb8a8_01e55a4d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:43:01Z",
+      "side": 1,
+      "message": "Boths of these could be in dawn.json\u0027s metadata that\u0027s passed at [1]",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26a2f10_3acdcc5f",
+        "filename": "generator/templates/art/api_kotlin_constants.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:43:01Z",
+      "side": 1,
+      "message": "Q: Why is it in art/ and not kotlin/?",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ef1386_5d5c4cdd",
+        "filename": "generator/templates/art/api_kotlin_enum.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:43:01Z",
+      "side": 1,
+      "message": "Why aren\u0027t these enum classes in Kotlin?",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
