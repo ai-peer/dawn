@@ -66,7 +66,7 @@ class ShaderModule final : public ShaderModuleBase {
   public:
     struct ModuleAndSpirv {
         VkShaderModule module;
-        const uint32_t* spirv;
+        raw_ptr<const uint32_t> spirv;
         size_t wordCount;
         std::string remappedEntryPoint;
     };
