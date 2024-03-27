@@ -107,6 +107,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "090e8574_15c381fe",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T12:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bf478dab_e951ddc2",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d77beeb4_43197a9f",
@@ -190,6 +214,30 @@
       "writtenOn": "2024-01-10T14:00:06Z",
       "side": 1,
       "message": "The original workload would complete too quick by GPU with the introduction of upload buffer emulation of this CL. The change here makes it unfriendly to the new change and slow to complete.",
+      "range": {
+        "startLine": 720,
+        "startChar": 12,
+        "endLine": 721,
+        "endChar": 21
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba4c60f_bd1185b6",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T12:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cea761c8_bd02972e",
       "range": {
         "startLine": 720,
         "startChar": 12,

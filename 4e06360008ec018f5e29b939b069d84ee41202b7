@@ -362,6 +362,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "03dc82d0_04181dd1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T12:51:40Z",
+      "side": 1,
+      "message": "According to my investigation in driver, this CL is still needed for Intel Gen12. To be less intrusive, I split out the most changes from `Buffer` to a separate class `BufferUpload`.",
+      "parentUuid": "b727870c_6f1b3b8b",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
