@@ -34,10 +34,13 @@
 #include "dawn/native/vulkan/VulkanInfo.h"
 
 namespace dawn::native::vulkan {
-
 namespace {
 
-#if DAWN_NO_SANITIZE_VK_FN
+#if DAWN_COMPILER_IS(CLANG)
+#define NO_SANITIZE __attribute__((no_sanitize("function")))
+#else
+#define NO_SANITIZE
+#endif
 
 template <typename F>
 struct AsVkNoSanitizeFn;
@@ -59,8 +62,7 @@ struct AsVkNoSanitizeFn<R(VKAPI_PTR*)(Args...)> {
     }
 
   private:
-    __attribute__((no_sanitize("function"))) static R Call(void(VKAPI_PTR* addr)(),
-                                                           Args&&... args) {
+    NO_SANITIZE static R Call(void(VKAPI_PTR* addr)(), Args&&... args) {
         return reinterpret_cast<R(VKAPI_PTR*)(Args...)>(addr)(std::forward<Args>(args)...);
     }
 };
@@ -68,15 +70,6 @@ template <typename F>
 auto AsVkFn(void(VKAPI_PTR* addr)()) {
     return AsVkNoSanitizeFn<F>{}(addr);
 }
-
-#else
-
-template <typename F>
-F AsVkFn(void(VKAPI_PTR* addr)()) {
-    return reinterpret_cast<F>(addr);
-}
-
-#endif
 
 }  // anonymous namespace
 

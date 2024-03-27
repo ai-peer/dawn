@@ -42,12 +42,6 @@ namespace dawn::native::vulkan {
 struct VulkanGlobalInfo;
 struct VulkanDeviceInfo;
 
-#if defined(UNDEFINED_SANITIZER) && DAWN_COMPILER_IS(CLANG)
-#define DAWN_NO_SANITIZE_VK_FN 1
-#else
-#define DAWN_NO_SANITIZE_VK_FN 0
-#endif
-
 template <typename F>
 struct VkFnImpl;
 
@@ -56,11 +50,7 @@ struct VkFnImpl;
 // for more information.
 template <typename R, typename... Args>
 struct VkFnImpl<R(VKAPI_PTR*)(Args...)> {
-#if DAWN_NO_SANITIZE_VK_FN
     using type = std::function<R(Args...)>;
-#else
-    using type = R(VKAPI_PTR*)(Args...);
-#endif
 };
 
 template <typename F>
