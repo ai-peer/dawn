@@ -340,6 +340,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95593b71_6b1824ba",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T23:02:24Z",
+      "side": 1,
+      "message": "I could do a combination of the factory function and what I had in PS 69? I think that would make things a bit clearer w.r.t Corentin\u0027s comment?",
+      "parentUuid": "2ec67647_91bc7f8a",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
