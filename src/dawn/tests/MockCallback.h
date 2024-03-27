@@ -35,6 +35,7 @@
 
 #include "dawn/common/Assert.h"
 #include "gmock/gmock.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace testing {
 
@@ -75,8 +76,9 @@ class MockCallback<R (*)(Args...)> : public ::testing::MockFunction<R(Args...)> 
 
   private:
     struct MockAndUserdata {
-        MockCallback* mock;
-        void* userdata;
+        // RAW_PTR_EXCLUSION: Automatically excluded because of #reinterpret-cast-trivial-type rule.
+        RAW_PTR_EXCLUSION MockCallback* mock;
+        RAW_PTR_EXCLUSION void* userdata;
     };
 
     static R CallUnboundCallback(Args... args) {

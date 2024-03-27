@@ -34,6 +34,7 @@
 #include "dawn/tests/DawnTest.h"
 #include "dawn/webgpu.h"
 #include "gmock/gmock.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace dawn {
 namespace {
@@ -197,7 +198,9 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
 
     wgpu::Future OnSubmittedWorkDone(WGPUQueueWorkDoneStatus expectedStatus) {
         struct Userdata {
-            EventCompletionTests* self;
+            // RAW_PTR_EXCLUSION: Automatically excluded because of #reinterpret-cast-trivial-type
+            // rule.
+            RAW_PTR_EXCLUSION EventCompletionTests* self;
             WGPUQueueWorkDoneStatus expectedStatus;
         };
         Userdata* userdata = new Userdata{this, expectedStatus};
