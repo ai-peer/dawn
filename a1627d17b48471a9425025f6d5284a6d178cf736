@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11c93046_0e2c6134",
+        "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-27T19:15:02Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
