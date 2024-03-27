@@ -16,6 +16,23 @@
       "message": "Most functional feedback is addressed. Will work on tests now.",
       "revId": "2578eb5b4c6f5fa1921000d4c0b44d5554243474",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34eda919_a6f3c721",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:06:55Z",
+      "side": 1,
+      "message": "Actually for this and EndAccess, for both STM and SBM we could do:\n\n```\nreturn !GetDevice()-\u003eConsumedError(...);\n```\n\nLet\u0027s do it in a follow-up.",
+      "revId": "2578eb5b4c6f5fa1921000d4c0b44d5554243474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
