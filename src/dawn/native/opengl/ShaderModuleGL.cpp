@@ -40,6 +40,7 @@
 #include "dawn/native/opengl/PipelineLayoutGL.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 #include "tint/tint.h"
 
@@ -85,8 +86,9 @@ opengl::CombinedSampler* AppendCombinedSampler(opengl::CombinedSamplerInfo* info
 
 using InterstageLocationAndName = std::pair<uint32_t, std::string>;
 
+// RAW_PTR_EXCLUSION: Automatically excluded because of #macro rule.
 #define GLSL_COMPILATION_REQUEST_MEMBERS(X)                                                      \
-    X(const tint::Program*, inputProgram)                                                        \
+    X(RAW_PTR_EXCLUSION const tint::Program*, inputProgram)                                      \
     X(std::string, entryPointName)                                                               \
     X(SingleShaderStage, stage)                                                                  \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \

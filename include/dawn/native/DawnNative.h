@@ -34,6 +34,7 @@
 #include "dawn/native/dawn_native_export.h"
 #include "dawn/webgpu_cpp.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace dawn::platform {
 class Platform;
@@ -126,7 +127,8 @@ class DAWN_NATIVE_EXPORT Adapter {
     void ResetInternalDeviceForTesting();
 
   private:
-    AdapterBase* mImpl = nullptr;
+    // RAW_PTR_EXCLUSION: Automatically excluded because of #global-scope rule.
+    RAW_PTR_EXCLUSION AdapterBase* mImpl = nullptr;
 };
 
 enum BackendValidationLevel { Full, Partial, Disabled };
