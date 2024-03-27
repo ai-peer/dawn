@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "ff8074d70f20053ed46fb17ad6bef20b71477200",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afabc02d_e276b336",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T11:28:57Z",
+      "side": 1,
+      "message": "```suggestion\n#   DawnGenerator. We should also use the path utilities in install_if_enabled.\n```",
+      "revId": "ff8074d70f20053ed46fb17ad6bef20b71477200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
