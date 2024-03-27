@@ -122,21 +122,6 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
     if (entry->sampler.type != wgpu::SamplerBindingType::Undefined) {
         bindingMemberCount++;
         DAWN_TRY(ValidateSamplerBindingType(entry->sampler.type));
-
-        UnpackedPtr<SamplerBindingLayout> samplerLayout;
-        DAWN_TRY_ASSIGN(samplerLayout, ValidateAndUnpack(&entry->sampler));
-
-        auto staticSampler = samplerLayout.Get<StaticSampler>();
-        if (staticSampler) {
-            DAWN_INVALID_IF(!device->HasFeature(Feature::StaticSamplers),
-                            "Static samplers used without the %s feature enabled.",
-                            device->GetPhysicalDevice()
-                                ->GetInstance()
-                                ->GetFeatureInfo(ToAPI(Feature::StaticSamplers))
-                                ->name);
-
-            DAWN_TRY(device->ValidateObject(staticSampler->sampler));
-        }
     }
 
     if (entry->texture.sampleType != wgpu::TextureSampleType::Undefined) {
@@ -199,6 +184,19 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
             default:
                 DAWN_UNREACHABLE();
         }
+    }
+
+    if (auto* staticSamplerBindingLayout = entry.Get<StaticSamplerBindingLayout>()) {
+        bindingMemberCount++;
+
+        DAWN_INVALID_IF(!device->HasFeature(Feature::StaticSamplers),
+                        "Static samplers used without the %s feature enabled.",
+                        device->GetPhysicalDevice()
+                            ->GetInstance()
+                            ->GetFeatureInfo(ToAPI(Feature::StaticSamplers))
+                            ->name);
+
+        DAWN_TRY(device->ValidateObject(staticSamplerBindingLayout->sampler));
     }
 
     if (auto* externalTextureBindingLayout = entry.Get<ExternalTextureBindingLayout>()) {
@@ -410,6 +408,8 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
             bindingLayout.viewDimension = wgpu::TextureViewDimension::e2D;
         }
         bindingInfo.bindingLayout = bindingLayout;
+    } else if (auto* staticSamplerBindingLayout = binding.Get<StaticSamplerBindingLayout>()) {
+        // TODO(crbug.com/dawn/2463): Populate BindingInfo for this entry.
     } else {
         DAWN_UNREACHABLE();
     }
