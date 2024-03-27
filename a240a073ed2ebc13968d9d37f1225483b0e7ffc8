@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2903a339_7740e27f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-27T13:23:38Z",
+      "side": 1,
+      "message": "Failed due to an expectation collision not detected by typ.\nFix: https://dawn-review.googlesource.com/c/dawn/+/181160",
+      "revId": "a240a073ed2ebc13968d9d37f1225483b0e7ffc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
