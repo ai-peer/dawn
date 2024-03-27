@@ -92,7 +92,7 @@ class span {
     Index size() const { return mSize; }
 
   private:
-    raw_ptr<Value> mData;
+    raw_ptr<Value, AllowPtrArithmetic> mData;
     Index mSize;
 };
 
