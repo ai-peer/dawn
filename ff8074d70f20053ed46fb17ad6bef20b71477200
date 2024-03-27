@@ -33,6 +33,24 @@
       "message": "```suggestion\n#   DawnGenerator. We should also use the path utilities in install_if_enabled.\n```",
       "revId": "ff8074d70f20053ed46fb17ad6bef20b71477200",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3da4380a_841de049",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T13:08:06Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "afabc02d_e276b336",
+      "revId": "ff8074d70f20053ed46fb17ad6bef20b71477200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
