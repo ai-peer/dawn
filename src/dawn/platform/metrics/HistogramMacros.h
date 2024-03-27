@@ -35,6 +35,7 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/dawn_platform_export.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 // Short timings - up to 10 seconds.
 #define DAWN_HISTOGRAM_TIMES(platform, name, sample_ms) \
@@ -177,6 +178,7 @@ enum class ScopedHistogramTiming { kMicrosecondTimes, kMediumTimes, kLongTimes }
     SCOPED_DAWN_HISTOGRAM_TIMER_UNIQUE(platform, name, timing, key)
 
 // This is a helper macro used by other macros and shouldn't be used directly.
+// RAW_PTR_EXCLUSION: |platform_| automatically excluded because of #macro rule.
 #define SCOPED_DAWN_HISTOGRAM_TIMER_UNIQUE(platform, name, timing, key)                     \
     using PlatformType##key = std::decay_t<std::remove_pointer_t<decltype(&*platform)>>;    \
     class [[nodiscard]] ScopedHistogramTimer##key {                                         \
@@ -206,7 +208,7 @@ enum class ScopedHistogramTiming { kMicrosecondTimes, kMediumTimes, kLongTimes }
         }                                                                                   \
                                                                                             \
       private:                                                                              \
-        Platform* platform_;                                                                \
+        RAW_PTR_EXCLUSION Platform* platform_;                                              \
         double constructed_;                                                                \
     } scoped_histogram_timer_##key(platform)
 
