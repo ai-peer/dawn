@@ -37,8 +37,6 @@ namespace dawn::native::vulkan {
 
 namespace {
 
-#if DAWN_NO_SANITIZE_VK_FN
-
 template <typename F>
 struct AsVkNoSanitizeFn;
 
@@ -68,15 +66,6 @@ template <typename F>
 auto AsVkFn(void(VKAPI_PTR* addr)()) {
     return AsVkNoSanitizeFn<F>{}(addr);
 }
-
-#else
-
-template <typename F>
-F AsVkFn(void(VKAPI_PTR* addr)()) {
-    return reinterpret_cast<F>(addr);
-}
-
-#endif
 
 }  // anonymous namespace
 
