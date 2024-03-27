@@ -28,11 +28,11 @@
 #include <queue>
 #include <vector>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/tests/perf_tests/DawnPerfTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 // This is for developers only to ensure the triangle color drawn is as expected.
 // #define PIXEL_CHECK 1

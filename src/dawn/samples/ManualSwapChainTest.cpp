@@ -71,7 +71,6 @@
 #include <vector>
 
 #include "GLFW/glfw3.h"
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/dawn_proc.h"
@@ -79,6 +78,7 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 #include "dawn/webgpu_cpp.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "webgpu/webgpu_glfw.h"
 
 struct WindowData {

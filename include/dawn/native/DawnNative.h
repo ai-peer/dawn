@@ -30,10 +30,10 @@
 
 #include <vector>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/dawn_proc_table.h"
 #include "dawn/native/dawn_native_export.h"
 #include "dawn/webgpu_cpp.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::platform {
 class Platform;

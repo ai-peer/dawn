@@ -30,7 +30,7 @@
 
 #include <cstdint>
 
-#include "base/memory/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 

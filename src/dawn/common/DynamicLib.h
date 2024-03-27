@@ -31,8 +31,8 @@
 #include <string>
 #include <type_traits>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/Assert.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn {
 

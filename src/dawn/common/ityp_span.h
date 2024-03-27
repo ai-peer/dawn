@@ -30,9 +30,9 @@
 
 #include <type_traits>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/UnderlyingType.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::ityp {
 

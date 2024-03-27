@@ -30,8 +30,8 @@
 
 #include <memory>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/wire/Wire.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 struct DawnProcTable;
 

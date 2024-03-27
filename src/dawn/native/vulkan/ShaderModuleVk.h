@@ -34,7 +34,6 @@
 #include <string>
 #include <utility>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/HashUtils.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"

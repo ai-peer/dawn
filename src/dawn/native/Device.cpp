@@ -33,7 +33,6 @@
 #include <utility>
 
 #include "absl/container/flat_hash_set.h"
-#include "base/memory/raw_ptr.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/Version_autogen.h"
 #include "dawn/native/AsyncTask.h"

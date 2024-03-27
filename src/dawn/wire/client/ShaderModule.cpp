@@ -29,7 +29,6 @@
 
 #include <memory>
 
-#include "base/memory/raw_ptr.h"
 #include "dawn/wire/client/Client.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
