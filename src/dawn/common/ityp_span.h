@@ -32,6 +32,7 @@
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/UnderlyingType.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::ityp {
 
@@ -91,7 +92,7 @@ class span {
     Index size() const { return mSize; }
 
   private:
-    Value* mData;
+    raw_ptr<Value, AllowPtrArithmetic> mData;
     Index mSize;
 };
 

@@ -100,7 +100,7 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
     raw_ptr<void, DanglingUntriaged> mUserdata;
 
     WGPUCompilationInfoRequestStatus mStatus;
-    const WGPUCompilationInfo* mCompilationInfo = nullptr;
+    raw_ptr<const WGPUCompilationInfo> mCompilationInfo = nullptr;
 
     // Strong reference to the buffer so that when we call the callback we can pass the buffer.
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
