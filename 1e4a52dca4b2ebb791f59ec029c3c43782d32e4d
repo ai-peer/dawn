@@ -322,6 +322,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ec67647_91bc7f8a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T22:56:44Z",
+      "side": 1,
+      "message": "That\u0027s a lot closer to what I had in PS 69. Maybe take a look at that and lmk what you think? The downside of creating the event before the call to `CreateDevice` is that in theory, the event\u0027s Device ref could be immutable after creation since we already know the result of `CreateDevice`. Inverting it just means we need to set it after the device is created but I don\u0027t see an inherent benefit to either way, i.e. mutating it after creation, or just creating the correct one in the first place.",
+      "parentUuid": "fb196328_20163810",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
