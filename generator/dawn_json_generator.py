@@ -790,6 +790,8 @@ def as_cppType(name):
     else:
         return name.CamelCase()
 
+def make_kotlin_safe(name):
+    return '_' + name if '0' <= name[0] <= '9' else name
 
 def as_jsEnumValue(value):
     if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
@@ -975,7 +977,8 @@ def make_base_render_params(metadata):
             'convert_cType_to_cppType': convert_cType_to_cppType,
             'as_varName': as_varName,
             'decorate': decorate,
-            'as_formatType': as_formatType
+            'as_formatType': as_formatType,
+            'make_kotlin_safe': make_kotlin_safe
         }
 
 
@@ -986,7 +989,7 @@ class MultiGeneratorFromDawnJSON(Generator):
     def add_commandline_arguments(self, parser):
         allowed_targets = [
             'dawn_headers', 'cpp_headers', 'cpp', 'proc', 'mock_api', 'wire',
-            'native_utils', 'dawn_lpmfuzz_cpp', 'dawn_lpmfuzz_proto'
+            'native_utils', 'dawn_lpmfuzz_cpp', 'dawn_lpmfuzz_proto', 'kotlin'
         ]
 
         parser.add_argument('--dawn-json',
@@ -1332,6 +1335,20 @@ class MultiGeneratorFromDawnJSON(Generator):
                     'dawn/fuzzers/lpmfuzz/DawnLPMConstants.h',
                     'src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_autogen.h',
                     lpm_params))
+
+        if 'kotlin' in targets:
+            params_kotlin = parse_json(loaded_json,
+                                       enabled_tags=['dawn', 'native'])
+
+            params_kotlin['kotlin_package'] = 'android.dawn'
+            kotlin_path = params_kotlin['kotlin_package'].replace('.', '/')
+
+            for enum in params_kotlin['by_category']['bitmask'] + params_kotlin['by_category']['enum']:
+                renders.append(FileRender('art/api_kotlin_enum.kt', 'java/' + kotlin_path + '/' +
+                               enum.name.CamelCase() + '.kt',
+                               [RENDER_PARAMS_BASE, params_kotlin, {'enum': enum}]))
+            renders.append(FileRender('art/api_kotlin_constants.kt', 'java/' + kotlin_path + '/Constants.kt',
+                                      [RENDER_PARAMS_BASE, params_kotlin]))
 
         return renders
 
