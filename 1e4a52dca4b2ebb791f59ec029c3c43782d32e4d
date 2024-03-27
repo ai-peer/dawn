@@ -268,6 +268,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc3f6362_a0bb5c49",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T15:47:09Z",
+      "side": 1,
+      "message": "IIUC, the difference between this and the getter is that right now we have:\n\n```\n    result \u003d CreateDevice(...);\n    if (result.IsSuccess()) {\n        Ref\u003cDeviceBase\u003e device \u003d result.AcquireSuccess();\n\n        // device-\u003emLostDeviceEvent gets set inside here!\n        FutureID futureID \u003d mPhysicalDevice-\u003eGetInstance()-\u003eGetEventManager()-\u003eTrackEvent(\n            AcquireRef(new RequestDeviceEvent(\n                callbackInfo, mPhysicalDevice,\n                DeviceBase::DeviceLostEvent::Create(device.Get(), descriptor), std::move(device))));\n        return {futureID};\n    } else {\n        FutureID futureID \u003d mPhysicalDevice-\u003eGetInstance()-\u003eGetEventManager()-\u003eTrackEvent(\n            AcquireRef(new RequestDeviceEvent(\n                callbackInfo, mPhysicalDevice,\n                DeviceBase::DeviceLostEvent::Create(nullptr, descriptor), std::move(result))));\n        return {futureID};\n    }\n```\n\nthe getter would look like:\n\n```\n// DeviceBase ctor does:\n  mLostEvent \u003d DeviceLostEvent::Create(this, descriptor);\n\n// APIRequestDeviceF does\n\n    result \u003d CreateDevice(...);\n    if (result.IsSuccess()) {\n        Ref\u003cDeviceBase\u003e device \u003d result.AcquireSuccess();\n        FutureID futureID \u003d mPhysicalDevice-\u003eGetInstance()-\u003eGetEventManager()-\u003eTrackEvent(device-\u003eGetLostEvent());\n        return {futureID};\n    } else {\n        FutureID futureID \u003d mPhysicalDevice-\u003eGetInstance()-\u003eGetEventManager()-\u003eTrackEvent(\n            AcquireRef(new RequestDeviceEvent(\n                callbackInfo, mPhysicalDevice,\n                DeviceBase::DeviceLostEvent::Create(nullptr, descriptor), std::move(result))));\n        return {futureID};\n    }\n```\n\n\nIMO I do like the getter too. It also matches were the mLostEvent is set up for the DeviceBase mock constructor - so a lot more consistent",
+      "parentUuid": "147aa545_1d3c8658",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68

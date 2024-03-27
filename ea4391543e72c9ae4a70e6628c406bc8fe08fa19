@@ -3,6 +3,92 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2d26a12_944c38d6",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 70
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T15:47:09Z",
+      "side": 1,
+      "message": "possible to rewrite this function using spontaneous APIRequestDeviceF ? reduces one place where we track the event.",
+      "range": {
+        "startLine": 200,
+        "startChar": 3,
+        "endLine": 215,
+        "endChar": 42
+      },
+      "revId": "ea4391543e72c9ae4a70e6628c406bc8fe08fa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "544ed4cf_d204a005",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 70
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T15:47:09Z",
+      "side": 1,
+      "message": "making the arg \u0026\u0026 doesn\u0027t mean you don\u0027t need to move it to avoid copy. It only means you have to call the function with an rvalue.\n\n```suggestion\n              mPhysicalDevice(std::move(physicalDevice)),\n              mDeviceLostEvent(std::move(deviceLostEvent)),\n```",
+      "range": {
+        "startLine": 298,
+        "startChar": 14,
+        "endLine": 299,
+        "endChar": 48
+      },
+      "revId": "ea4391543e72c9ae4a70e6628c406bc8fe08fa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ec6b07_6c5dd892",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 70
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T15:47:09Z",
+      "side": 1,
+      "message": "this lambda may not be necessary.\n\n```\nif (completionType \u003d\u003d EventCompletionType::Shutdown) {\n  status \u003d ... ;\n  device \u003d ... ;\n  message \u003d ... ;\n} else if (mDeviceOrError.IsError()) {\n  status \u003d ... ;\n  device \u003d ... ;\n  message \u003d ... ;\n} else {\n  status \u003d ... ;\n  device \u003d ... ;\n  message \u003d ... ;\n}\n\nmCallback(...);\nif (device \u003d\u003d nullptr) {\n   ...\n}\n```",
+      "revId": "ea4391543e72c9ae4a70e6628c406bc8fe08fa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4483b8_23808ecf",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 70
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T15:47:09Z",
+      "side": 1,
+      "message": "am I correct in that this will assign mDeviceLostEvent inside `Create`, and then it will assign it again after `Create` returns?",
+      "range": {
+        "startLine": 409,
+        "startChar": 4,
+        "endLine": 409,
+        "endChar": 46
+      },
+      "revId": "ea4391543e72c9ae4a70e6628c406bc8fe08fa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70d2421d_eb3bbb00",
         "filename": "src/dawn/wire/client/Device.h",
         "patchSetId": 70
