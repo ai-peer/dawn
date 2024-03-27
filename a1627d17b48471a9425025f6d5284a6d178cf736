@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76ea09ba_441a515e",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-27T20:04:51Z",
+      "side": 1,
+      "message": "Can we add a capability for \"ref\" so that the validator would only accept it when the calling environment explicitly allows for it? This would help address one of my main concerns about leaking ref into the core IR.\n\nNot too hard to add later though if you want to get this in now.",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11c93046_0e2c6134",
         "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
         "patchSetId": 10
