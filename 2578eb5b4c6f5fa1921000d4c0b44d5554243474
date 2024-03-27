@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "529f5182_e547d965",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-27T23:12:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5daec57_36f7cda7",
+      "revId": "2578eb5b4c6f5fa1921000d4c0b44d5554243474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34eda919_a6f3c721",

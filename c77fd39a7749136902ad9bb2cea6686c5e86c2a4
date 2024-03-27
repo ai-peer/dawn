@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11034240_c1738b67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-27T23:12:45Z",
+      "side": 1,
+      "message": "I did try to make a SharedResourceMemory superclass, but imo it adds a lot of boilerplate and there isn\u0027t really that much shared code that can be eliminated. The primary things we can share are generic object validation and the fence import/export loops. Much of it seems very similar, but really operates on a different object type and can\u0027t be easily condensed.",
+      "parentUuid": "5f5dfa7a_5f6b3c5d",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8e01720_43d9cbb1",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 10
@@ -562,6 +580,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3d984f_eb1f5a19",
+        "filename": "src/dawn/native/SharedBufferMemory.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-27T23:12:45Z",
+      "side": 1,
+      "message": "My mistake. It\u0027s definitely done now.",
+      "parentUuid": "1be9e9bc_84be83c3",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65d8a8ba_4cb8f16d",
@@ -739,6 +775,24 @@
       "writtenOn": "2024-03-26T12:52:32Z",
       "side": 1,
       "message": "nit: Maybe we could test calling EndAccess on the incorrect buffer. And then calling EndAccess on the correct on would return the proper fences.",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "708bf6c6_2e5cd838",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-27T23:12:45Z",
+      "side": 1,
+      "message": "Added test EndAccessOnDifferentBuffer",
+      "parentUuid": "2afe040b_bb6978e0",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
