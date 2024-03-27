@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dc97665_3187bf8b",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-27T21:01:51Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing something, but how does the lack of `ref` in `core.def` cause the validator to produce an error when `ref` is used?\n\nWith the changes in this CL, it looks like a core transform could create a `ir::Var` with a `ref` result, and pass that to `Load` / `Access` etc, without any validation error triggering.",
+      "parentUuid": "71396eca_a71f37cf",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11c93046_0e2c6134",
         "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
         "patchSetId": 10
