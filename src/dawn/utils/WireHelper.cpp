@@ -33,7 +33,6 @@
 #include <sstream>
 #include <string>
 
-#include "base/memory/raw_ref.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
@@ -44,6 +43,7 @@
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
 #include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ref.h"
 
 namespace dawn::utils {
 
