@@ -16,6 +16,24 @@
       "message": "I am attempting presubmit following a rebase to origin/main. If I get spurious errors this time I will attempt a force submit.",
       "revId": "324460f41ec0fceed75de764423130ffc49f7e6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1129b10f_ac5c06b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-27T18:17:21Z",
+      "side": 1,
+      "message": "Let\u0027s not force submit, I think we even disabled it on the Gerrit config level.",
+      "parentUuid": "92077312_61f4078f",
+      "revId": "324460f41ec0fceed75de764423130ffc49f7e6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
