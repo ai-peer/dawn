@@ -62,7 +62,17 @@
 #include "dawn/native/vulkan/VulkanError.h"
 
 namespace dawn::native::vulkan {
+namespace {
 
+template <typename F>
+struct NoopDrawFunction;
+
+template <typename R, typename... Args>
+struct NoopDrawFunction<R(VKAPI_PTR*)(Args...)> {
+    static R VKAPI_PTR Fun(Args...) { dawn::WarningLog() << "vkCmdDraw skipped"; }
+};
+
+}  // namespace
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
                                           const UnpackedPtr<DeviceDescriptor>& descriptor,
@@ -99,6 +109,14 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
         DAWN_TRY(functions->LoadDeviceProcs(mVkDevice, mDeviceInfo));
 
         mDeleter = std::make_unique<MutexProtected<FencedDeleter>>(this);
+    }
+
+    if (IsToggleEnabled(Toggle::SkipDraw)) {
+        // Chrome skips draw for some tests.
+        functions->CmdDraw = NoopDrawFunction<PFN_vkCmdDraw>::Fun;
+        functions->CmdDrawIndexed = NoopDrawFunction<PFN_vkCmdDrawIndexed>::Fun;
+        functions->CmdDrawIndirect = NoopDrawFunction<PFN_vkCmdDrawIndirect>::Fun;
+        functions->CmdDrawIndexedIndirect = NoopDrawFunction<PFN_vkCmdDrawIndexedIndirect>::Fun;
     }
 
     mRenderPassCache = std::make_unique<RenderPassCache>(this);
