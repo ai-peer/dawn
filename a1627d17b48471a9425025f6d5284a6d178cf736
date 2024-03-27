@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "71396eca_a71f37cf",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-27T20:50:47Z",
+      "side": 1,
+      "message": "I considered this, but assuming you don\u0027t accidentally add `ref` types to `core.def`, how would you accidentally end up accepting ref types without a validation error?",
+      "parentUuid": "76ea09ba_441a515e",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11c93046_0e2c6134",
         "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
         "patchSetId": 10
