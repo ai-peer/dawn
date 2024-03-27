@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "776f2f60_07a7e6a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Sure. With this work, the last Gen9 UniformBufferUpdatePerf hotspot `*WriteBuffer_PartialSize_*` can be solved.",
+      "parentUuid": "e481f1cf_7d850e68",
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbf1d9aa_f22fd211",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-03-26T16:26:09Z",
       "side": 1,
       "message": "nit: we could factor MarkUsedInPendingCommands out to the caller after GetStagingBuffer. Then we don\u0027t need to do it multiple times in this function\n\nThen, later, we don\u0027t need\n\n```\nif (it !\u003d mStagingBuffers.end()) {\n  buffer-\u003eMarkUsedInPendingCommands();\n  return buffer;\n}\n```\n\nwe can just return out of the loop immediately when we find a suitable buffer.\nThat also means it can be a simple for-loop instead of while-loop.\nSorry I didn\u0027t realize this earlier.\n\n```\nfor (auto it \u003d begin(); it !\u003d end(); ++it) {\n  if (it-\u003eserial \u003e completedSerial) {\n    break;\n  }\n  if (it-\u003esize \u003e\u003d bufferSize) {\n    auto buffer \u003d *it;\n    erase(it);\n    return buffer;\n  }\n}\n\nDAWN_TRY_ASSIGN(buffer, Buffer::Create(...));\n```",
+      "range": {
+        "startLine": 565,
+        "startChar": 0,
+        "endLine": 565,
+        "endChar": 44
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "658ae0bd_2021b342",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Looks better, done!",
+      "parentUuid": "dbf1d9aa_f22fd211",
       "range": {
         "startLine": 565,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19a44683_08025556",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Makes sense, thanks! The code line is no longer needed in the latest PS.",
+      "parentUuid": "4ed7ee7a_fe30995e",
+      "range": {
+        "startLine": 588,
+        "startChar": 0,
+        "endLine": 588,
+        "endChar": 38
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e7376af_4530e703",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-03-26T16:26:09Z",
       "side": 1,
       "message": "nit: with the above change, we can make this a more normal for-loop:\n\n`for (auto it \u003d begin(); it !\u003d end() \u0026\u0026 ...) {`",
+      "range": {
+        "startLine": 599,
+        "startChar": 4,
+        "endLine": 600,
+        "endChar": 10
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95352730_6644f237",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e7376af_4530e703",
       "range": {
         "startLine": 599,
         "startChar": 4,
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbd7e5cf_1dc8209e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Good catch, thanks!",
+      "parentUuid": "d9e68036_35e97caa",
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9edc6319_b8b057b9",
@@ -134,6 +242,30 @@
       "writtenOn": "2024-03-26T16:26:09Z",
       "side": 1,
       "message": "I believe you still need to explicitly move it even if the arg is an r-value reference. Making it an r-value reference only requires it is passed in as an r-value reference. Once we are inside the function body, the reference has a name - and thus it will be copied if you forward it without `std::move`\n\n```suggestion\n    mStagingBuffers.push_back(std::move(buffer));\n```",
+      "range": {
+        "startLine": 614,
+        "startChar": 30,
+        "endLine": 614,
+        "endChar": 36
+      },
+      "revId": "2340026594e0690e7e714aa9da595317bafe42b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b377e60_3ffc80f9",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-03-27T03:02:36Z",
+      "side": 1,
+      "message": "Thanks for the catch!",
+      "parentUuid": "9edc6319_b8b057b9",
       "range": {
         "startLine": 614,
         "startChar": 30,
