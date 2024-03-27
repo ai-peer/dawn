@@ -30,6 +30,7 @@
 
 #include "dawn/common/RefBase.h"
 #include "gmock/gmock.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace dawn {
 namespace {
@@ -99,7 +100,8 @@ struct RefTracker {
     bool operator!=(const RefTracker& other) const { return mId != other.mId; }
 
     Id mId;
-    Events* mEvents;
+    // RAW_PTR_EXCLUSION: Automatically excluded because of #global-scope rule.
+    RAW_PTR_EXCLUSION Events* mEvents;
 };
 
 struct RefTrackerTraits {
