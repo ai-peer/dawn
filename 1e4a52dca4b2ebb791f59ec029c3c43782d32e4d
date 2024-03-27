@@ -286,6 +286,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca9444f6_4a96ee90",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T18:09:52Z",
+      "side": 1,
+      "message": "In general, yea that\u0027s what it would look like with the minor exception that we cannot create the lost event in the `DeviceBase` ctor because we can create a `DeviceBase` and then fail `Initialize` which would cause duplicate device lost events. (That\u0027s what I meant about needing the getter to be lazy). So basically the getter would create the device exactly in the same place that we are creating the device lost for the device via the explicit factory function. Which is why I decided that the getter doesn\u0027t really provide anything at that point.\n\n(Note that we would get device lost duplicates because we are using the event dtors to make sure they are cleaned up and as long as they are created, then the dtors would run.)",
+      "parentUuid": "bc3f6362_a0bb5c49",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
