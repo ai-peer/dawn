@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81da6172_0e68de01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-27T10:30:57Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nSending this out for early feedback to make sure it\u0027s what you were envisioning while the trybots run on it (tests pass locally). Thanks!",
+      "revId": "f4b41158717b8d950d36bcd4bcc743120e305f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
