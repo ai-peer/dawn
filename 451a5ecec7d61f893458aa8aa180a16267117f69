@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e823d67_a74cc08d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-03-27T15:20:16Z",
+      "side": 1,
+      "message": "Can you please ensure that the gradle version is in sync with the build script for the release here - https://dawn.googlesource.com/dawn/+/refs/heads/main/infra/kokoro/android/jetpack-release/build.sh#67",
+      "revId": "451a5ecec7d61f893458aa8aa180a16267117f69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
