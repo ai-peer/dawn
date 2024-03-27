@@ -135,7 +135,7 @@ enum BackendValidationLevel { Full, Partial, Disabled };
 struct DAWN_NATIVE_EXPORT DawnInstanceDescriptor : wgpu::ChainedStruct {
     DawnInstanceDescriptor();
     uint32_t additionalRuntimeSearchPathsCount = 0;
-    raw_ptr<const char* const> additionalRuntimeSearchPaths;
+    raw_ptr<const char* const, AllowPtrArithmetic> additionalRuntimeSearchPaths;
     raw_ptr<dawn::platform::Platform> platform = nullptr;
 
     BackendValidationLevel backendValidationLevel = BackendValidationLevel::Disabled;
