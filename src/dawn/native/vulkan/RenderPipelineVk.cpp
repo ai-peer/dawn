@@ -393,7 +393,8 @@ MaybeError RenderPipeline::InitializeImpl() {
                                                                 clampFragDepth, emitPointSize,
                                                                 /* fullSubgroups */ {}));
         // Record cache key for each shader since it will become inaccessible later on.
-        StreamIn(&mCacheKey, stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
+        StreamIn(&mCacheKey,
+                 stream::Iterable(moduleAndSpirv.spirv.get(), moduleAndSpirv.wordCount));
 
         VkPipelineShaderStageCreateInfo* shaderStage = &shaderStages[stageCount];
         shaderStage->module = moduleAndSpirv.module;
