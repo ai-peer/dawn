@@ -16,6 +16,24 @@
       "message": "I believe that all the changes to this function, but the addition of the return value can be removed.",
       "revId": "2313cdb651d34bd144fc760e9c1f7684dd350d22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc881a0_e50f5b5d",
+        "filename": "src/dawn/wire/client/ObjectBase.cpp",
+        "patchSetId": 69
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a9d8cb8_0814ae26",
+      "revId": "2313cdb651d34bd144fc760e9c1f7684dd350d22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

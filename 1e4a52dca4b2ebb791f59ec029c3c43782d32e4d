@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d2aaf59_64492c79",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 68
+      },
+      "lineNbr": 1529,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "52f7698b_5a296c97",
+      "range": {
+        "startLine": 1528,
+        "startChar": 12,
+        "endLine": 1529,
+        "endChar": 51
+      },
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8f2943b_c0a3e6e8",
@@ -102,6 +126,30 @@
       "writtenOn": "2024-03-26T00:17:04Z",
       "side": 1,
       "message": "nit: `deviceLostEvent`",
+      "range": {
+        "startLine": 202,
+        "startChar": 10,
+        "endLine": 202,
+        "endChar": 15
+      },
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb39a1a_2819c08f",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8f2943b_c0a3e6e8",
       "range": {
         "startLine": 202,
         "startChar": 10,
@@ -196,6 +244,24 @@
       "side": 1,
       "message": "\u003e So the one thing I was trying to solve with this was avoiding creating the device lost event in the DeviceBase ctor, or at least the tracking of it in the ctor. This is particularly important because otherwise, we will have the device lost event preceed the request device event in some cases given we attempt construction of the device and pass it into the ctor of the RequestDeviceEvent.\n\nIf I understand correctly the problem is that the order of the callbacks on the client-side would be DeviceLostEvent, RequestDevice, which could be confusing for applications? Given that the device is never created (so DeviceLostEvent gets a nullptr WGPUDevice argument) maybe that\u0027s ok?\n\nOtherwise what you suggested with a getter seems simpler IMHO as it makes things very clear in the handling of error / success cases.\n\n\u003e Also, since the DeviceLostEvent needs a ref to the Device, we would either need to set DeviceBase::mDeviceLostEvent in DeviceLostEvent ctor, or set DeviceLostEvent::mDevice in DeviceBase ctor. Either one will have a bit of magic involved.\n\nMaking the device pass itself to the `DeviceLostEvent` constructor seems ok? That\u0027s a fairly common pattern. Happy to chat offline, I might be missing things.",
       "parentUuid": "c1c9a8ed_1ec3fc5a",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "147aa545_1d3c8658",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Changed to using a factory func on `DeviceLostEvent`. I\u0027m honestly not sure if much changed though? Just some shuffling around where the code is? The setting of `DeviceBase::mDeviceLostEvent` is still buried in the factory function atm. I guess the up-side is that it\u0027s documented more in `Device.h`? I could add an explicit `DeviceBase::SetDeviceLostEvent`, but I don\u0027t see much value in that since it only happens once exactly when the `DeviceLostEvent` is created... Plus it would have to be public which just makes it feel more cluttered?\n\nI also tried the getter way, but since the getter would need to happen lazily anyways, it honestly looked identical to this?",
+      "parentUuid": "b57f9361_40912603",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -410,6 +476,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "866fe478_2574d22c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Yea I realized this also when I implemented it, but since it would only be once, i.e. the next call would return false I just left it as is. I added a comment for now. I think a decent amount of extra logic would be needed to return false that one call earlier, so we could do it later on if performance is actually an issue.",
+      "parentUuid": "0f66de2c_afc8af33",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aba7313f_faada137",
@@ -463,6 +547,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7baf61fe_1c7778a1",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85c5c3ff_6a3b44fb",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a27e7ce_545d86fd",
@@ -476,6 +578,24 @@
       "writtenOn": "2024-03-26T00:17:04Z",
       "side": 1,
       "message": "set mDevice \u003d nullptr after releasing",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "113f101a_94dbcc64",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a27e7ce_545d86fd",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -582,6 +702,24 @@
       "side": 1,
       "message": "Yeah that was the latter, the server needs to be resilient to malicious command streams.",
       "parentUuid": "d2f8fc81_644f1b6b",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3877288_2fb22bfe",
+        "filename": "src/dawn/wire/server/ObjectStorage.h",
+        "patchSetId": 68
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-27T00:08:28Z",
+      "side": 1,
+      "message": "Ok, I changed the client-side code a bit to track whether we successfully created the device and during the dtor it should properly clean up the allocations now. Lmk what you guys think.",
+      "parentUuid": "10b1b191_a18d3b28",
       "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
