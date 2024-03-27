@@ -101,6 +101,20 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
         mDeleter = std::make_unique<MutexProtected<FencedDeleter>>(this);
     }
 
+    if (IsToggleEnabled(Toggle::SkipDraw)) {
+        // Chrome skips draw for some tests.
+        functions->CmdDraw = [](auto...) { dawn::WarningLog() << "vkCmdDraw skipped"; };
+        functions->CmdDrawIndexed = [](auto...) {
+            dawn::WarningLog() << "vkCmdDrawIndexed skipped";
+        };
+        functions->CmdDrawIndirect = [](auto...) {
+            dawn::WarningLog() << "vkCmdDrawIndirect skipped";
+        };
+        functions->CmdDrawIndexedIndirect = [](auto...) {
+            dawn::WarningLog() << "vkCmdDrawIndexedIndirect skipped";
+        };
+    }
+
     mRenderPassCache = std::make_unique<RenderPassCache>(this);
     mResourceMemoryAllocator = std::make_unique<MutexProtected<ResourceMemoryAllocator>>(this);
 
