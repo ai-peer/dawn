@@ -33,6 +33,7 @@
 
 #include "dawn/dawn_proc_table.h"
 #include "dawn/wire/Wire.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire {
 
@@ -66,8 +67,8 @@ struct ReservedInstance {
 };
 
 struct DAWN_WIRE_EXPORT WireClientDescriptor {
-    CommandSerializer* serializer;
-    client::MemoryTransferService* memoryTransferService = nullptr;
+    raw_ptr<CommandSerializer> serializer;
+    raw_ptr<client::MemoryTransferService> memoryTransferService = nullptr;
 };
 
 class DAWN_WIRE_EXPORT WireClient : public CommandHandler {
