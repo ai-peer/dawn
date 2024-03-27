@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b277f52_479beddf",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T14:32:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53579ab6_31aede18",
+      "range": {
+        "startLine": 981,
+        "startChar": 13,
+        "endLine": 981,
+        "endChar": 29
+      },
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee7fa7c9_7ac9f2b1",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6593cd8b_251c3a5c",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T14:32:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee7fa7c9_7ac9f2b1",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a4eb8a8_01e55a4d",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-03-27T13:43:01Z",
       "side": 1,
       "message": "Boths of these could be in dawn.json\u0027s metadata that\u0027s passed at [1]",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad48dcf5_77d76248",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1343,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T14:32:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a4eb8a8_01e55a4d",
       "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ada0f31d_048a70bc",
+        "filename": "generator/templates/art/api_kotlin_constants.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T14:32:22Z",
+      "side": 1,
+      "message": "ART is Android Runtime which will include Kotlin and Java support; we could have two sorts of templates here. I can rename if you like though.",
+      "parentUuid": "d26a2f10_3acdcc5f",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53ef1386_5d5c4cdd",
         "filename": "generator/templates/art/api_kotlin_enum.kt",
         "patchSetId": 3
@@ -88,6 +166,24 @@
       "writtenOn": "2024-03-27T13:43:01Z",
       "side": 1,
       "message": "Why aren\u0027t these enum classes in Kotlin?",
+      "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921cc42a_1638e064",
+        "filename": "generator/templates/art/api_kotlin_enum.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T14:32:22Z",
+      "side": 1,
+      "message": "They\u0027re not type safe at the moment so it would be misleading to wrap them in a class that might imply they\u0027re something other than plain ints. There\u0027s been some discussion in the design about how to do type safe enums in Kotlin, I\u0027ll address that soon. I opened a bug b/331597870 to track.",
+      "parentUuid": "53ef1386_5d5c4cdd",
       "revId": "a1ccf0486510e4cd59bfaccffec7eece550c1a39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
