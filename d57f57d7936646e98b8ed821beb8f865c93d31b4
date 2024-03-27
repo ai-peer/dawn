@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2702b2a8_2fa3007a",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-27T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b2631e8_8c3c113a",
+      "range": {
+        "startLine": 194,
+        "startChar": 24,
+        "endLine": 197,
+        "endChar": 34
+      },
+      "revId": "d57f57d7936646e98b8ed821beb8f865c93d31b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "28fc801e_4ae797da",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-03-27T12:50:57Z",
       "side": 1,
       "message": "not sure why the previous code was like that, but this could be \"else if\" instead of \"else { if {\"",
+      "range": {
+        "startLine": 91,
+        "startChar": 3,
+        "endLine": 92,
+        "endChar": 11
+      },
+      "revId": "d57f57d7936646e98b8ed821beb8f865c93d31b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d0a5db7_593ac51b",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-27T14:07:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28fc801e_4ae797da",
       "range": {
         "startLine": 91,
         "startChar": 3,
