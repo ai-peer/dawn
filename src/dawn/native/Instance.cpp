@@ -232,7 +232,7 @@ MaybeError InstanceBase::Initialize(const UnpackedPtr<InstanceDescriptor>& descr
         mEnableAdapterBlocklist = dawnDesc->enableAdapterBlocklist;
 
         mLoggingCallback = dawnDesc->loggingCallback;
-        mLoggingCallbackUserdata = dawnDesc->loggingCallbackUserdata;
+        mLoggingCallbackUserdata = dawnDesc->loggingCallbackUserdata.get();
     }
 
     if (!mLoggingCallback) {
