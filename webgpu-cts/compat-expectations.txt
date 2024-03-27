@@ -74,7 +74,9 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-25 01:00:23PM
+# Last rolled: 2024-03-27 12:42:50AM
+
+worker_webgpu:* [ Skip ]
 
 # Flaky on all platforms
 # KEEP
@@ -503,14 +505,6 @@ crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTex
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="r8snorm";dstFormat="r8snorm";dimension="3d" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="2d" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="3d" [ Failure ]
-
-################################################################################
-# Failures due to splitting off worker tests (crbug.com/330501141)
-# KEEP
-################################################################################
-crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
-crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
-crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
 
 ################################################################################
 # New flakes. Please triage:
