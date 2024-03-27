@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd30455_00ee0e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-27T12:43:58Z",
+      "side": 1,
+      "message": "+Austin as well\n\nThis looks very nice TBH. The next CL is a bit of a beast (adding a StaticSampler BindingInfo variant and adjusting all the usages of BindingInfoType), but I\u0027m working my way through it. After that we\u0027ll be very well set up here I think.",
+      "revId": "d57f57d7936646e98b8ed821beb8f865c93d31b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
