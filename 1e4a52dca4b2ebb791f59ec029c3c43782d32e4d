@@ -304,6 +304,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb196328_20163810",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-27T22:39:15Z",
+      "side": 1,
+      "message": "what if we create the lost event first (without tracking) and then pass it in as an argument to CreateDevice? this way of create device fails. we still hold a ref to the event outside of create device.\n\n```\nev \u003d CreateLostEvent\nresult \u003d CreateDevice(desc, EV)\nif (result is error) \n  ev-\u003eSetError(result.AcquireError())\nreturn TrackEvent(ev)\n```\n\nonly one lost event is ever created this way",
+      "parentUuid": "ca9444f6_4a96ee90",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
