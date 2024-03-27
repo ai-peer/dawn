@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c090212b_5d6b3a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-27T15:45:00Z",
+      "side": 1,
+      "message": "Presubmit error requires a run of \u0027git cl format --python\u0027, but this does not actually result in changes.",
+      "revId": "e3157126c28a2b7cca450bab281f5e1ab4644e47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
