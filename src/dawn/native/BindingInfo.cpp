@@ -41,6 +41,9 @@ BindingInfoType GetBindingInfoType(const BindingInfo& info) {
         [](const TextureBindingLayout&) -> BindingInfoType { return BindingInfoType::Texture; },
         [](const StorageTextureBindingLayout&) -> BindingInfoType {
             return BindingInfoType::StorageTexture;
+        },
+        [](const StaticSamplerHolderBindingLayout&) -> BindingInfoType {
+            return BindingInfoType::StaticSampler;
         });
 }
 

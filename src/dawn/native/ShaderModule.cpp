@@ -907,8 +907,13 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                 info.bindingInfo.emplace<ExternalTextureBindingInfo>();
                 break;
             }
-            default:
-                return DAWN_VALIDATION_ERROR("Unknown binding type in Shader");
+            // TODO(blundell): Figure this out.
+            case BindingInfoType::StaticSampler: {
+                DAWN_ASSERT(false);
+                break;
+                default:
+                    return DAWN_VALIDATION_ERROR("Unknown binding type in Shader");
+            }
         }
 
         BindingNumber bindingNumber(resource.binding);
