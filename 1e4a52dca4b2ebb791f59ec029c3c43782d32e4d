@@ -376,6 +376,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c9f1e6b_455a4a79",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-28T16:31:28Z",
+      "side": 1,
+      "message": "so synthesizing what I understand..\n\nAt the end of the day, the lost event and the device need to reference each other.\n- Device refs the lost event because it always has one. Need to set it ready when the device is lost.\n- Lost event refs the device because the device is passed to the lost callback.\n\nSo we have to create one first, and then afterward, set the pointer on the other one. Either:\n - `device \u003d CreateDevice(); ev \u003d Event(device); device-\u003emEvent \u003d ev;`\n    this is effectively what the current patchset 72 does\n - `ev \u003d Event(); device \u003d CreateDevice(ev); ev-\u003emDevice \u003d device;` \n\nI sorta prefer creating the event first, and then setting the event\u0027s device after.\nthe reason being is that we can think of it like the event starts in a state where it assumes creation failed, and then transitions to a state where a particular device may be lost.\n\nthe device on the other hand doesn\u0027t necessarily have those types of states. it\u0027s supposed to always have a lost event.\n\nI\u0027m ok if we try to flip the order around later though. I understand that it\u0027s already quite complicated",
+      "parentUuid": "a08c2ef8_d3ba488c",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
