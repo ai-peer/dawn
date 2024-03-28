@@ -33,6 +33,24 @@
       "message": "I\u0027m running into a D3D12 Debug Layer error on one of my new tests. It turns out to use a shared buffer with CreateConstantBufferView (i.e. wgpu::BufferUsage::Uniform) , then then size must be 256-aligned [1].\n\nIt seems like allowing BufferUsage::Uniform would be desirable. I was thinking we could keep things as they are and only add BufferUsage::Uniform on creation to the WebGPU buffer if the ID3D12Resource does have the correct size alignment. WDYT?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/BindGroupD3D12.cpp;l\u003d92",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a7fa755_f739dd45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-28T23:25:57Z",
+      "side": 1,
+      "message": "hm, I think that would be kind of unfortunate because whether or not it supports uniform usage would be really surprising from call-to-call.\n\nWhat if we align-down the size to the required alignment? Would be interesting if you pass small buffer - because then you can get a size 0 buffer. But then it would always support uniform usage, assuming it is nonzero in size.\n\nValidate and require the alignment on creation?",
+      "parentUuid": "06546bc6_10a4d084",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
