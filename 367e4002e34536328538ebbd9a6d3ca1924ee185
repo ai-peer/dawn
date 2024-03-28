@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82cd7de4_b4d96f4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-28T17:55:40Z",
+      "side": 1,
+      "message": "This CL is a bit of a beast, but I don\u0027t see how to carve it up into pieces because once you add the new variant you need to handle it everywhere in order to get things to build. I put in implementations of the variant handling in the places that seemed straightforward, but many of the places were outside of my domain of expertise - I put TODOs in those. Of course, I might well have gotten some of the ones that I actually filled in wrong as well!\n\nI think that there are tests that I can add to this CL even with just the functionality that\u0027s there now (e.g., of caching), but I\u0027m sending this out for feedback before going further.\n\nThanks!",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
