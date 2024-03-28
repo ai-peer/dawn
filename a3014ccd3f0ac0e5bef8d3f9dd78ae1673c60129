@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4f2d94_6add5eb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-03-28T22:25:06Z",
+      "side": 1,
+      "message": "After this CL I\u0027m getting the following error building the Android Library \n\ndawn/src/dawn/native/CMakeFiles/dawn_native.dir/opengl/UtilsGL.cpp.o -MF dawn/src/dawn/native/CMakeFiles/dawn_native.dir/opengl/UtilsGL.cpp.o.d -o dawn/src/dawn/native/CMakeFiles/dawn_native.dir/opengl/UtilsGL.cpp.o -c /Users/jimblackler/code/dawn/src/dawn/native/opengl/UtilsGL.cpp\n\n/Users/jimblackler/code/dawn/tools/android/webgpu/.cxx/RelWithDebInfo/1o5o5dn1/arm64-v8a/dawn/gen/src/dawn/native/wgpu_structs_autogen.h:13:11: error: use of undeclared identifier \u0027wgpu\u0027\n    using wgpu::ChainedStructOut;\n          ^",
+      "revId": "a3014ccd3f0ac0e5bef8d3f9dd78ae1673c60129",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
