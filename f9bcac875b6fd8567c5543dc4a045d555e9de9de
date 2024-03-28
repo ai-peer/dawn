@@ -33,6 +33,87 @@
       "message": "Is include/ a directory we do not want to rewrite?",
       "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c1fb15_7397379c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:53:06Z",
+      "side": 1,
+      "message": "Yes, we want to exclude:\n- `include/*`\n- `src/tint/*`\n- `stc/dawn/samples/*`",
+      "parentUuid": "16cb0a07_a8b011ad",
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72dfdc51_4941d86b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:53:06Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa557e32_0726113d",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:53:06Z",
+      "side": 1,
+      "message": "Could you exclude `include/dawn`, this is a public directory developers don\u0027t have access to the private  `partition_alloc`.",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 45
+      },
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c09116_7baf4c94",
+        "filename": "src/dawn/samples/ManualSwapChainTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:53:06Z",
+      "side": 1,
+      "message": "Could you exclude `dawn/samples` ?\n\nThose are examples for developers. They don\u0027t have access to `partition_alloc`.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 41
+      },
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
