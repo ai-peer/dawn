@@ -358,6 +358,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a08c2ef8_d3ba488c",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T14:30:46Z",
+      "side": 1,
+      "message": "It seems there is not definitely cleaner solution, so either way LGTM. I added one small suggestion but don\u0027t want to block further.",
+      "parentUuid": "95593b71_6b1824ba",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "186a6e8c_31e37248",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 68
