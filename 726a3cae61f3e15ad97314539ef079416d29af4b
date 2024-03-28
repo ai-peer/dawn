@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f13ba83_3abf11ca",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3538,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-03-28T14:33:19Z",
+      "side": 1,
+      "message": "We typically use structs for this with an `operator\u003c\u003c` overload to print out a nice name for them. Why use a tuple?",
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
