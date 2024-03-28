@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de3ff978_6fe20f3c",
+        "filename": "src/tint/lang/core/ir/transform/helper_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-28T15:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6afd2eac_f768976d",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 52
+      },
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "884f3cde_31d24c61",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-28T15:14:53Z",
       "side": 1,
       "message": "I don\u0027t think we should ever allow ref types for function parameters or return type, even when the capability is enabled.",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 9
+      },
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d0d37c9_c6c28cd3",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-28T15:45:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "884f3cde_31d24c61",
       "range": {
         "startLine": 492,
         "startChar": 0,
@@ -96,6 +144,24 @@
       "side": 1,
       "message": "(operator \u003c\u003c is specialized by gtest, it\u0027ll print each of the tuple fields with `\u003c\u003c`)",
       "parentUuid": "9595d977_e78669e1",
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c0ac6d8_f2e1fe33",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3538,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-28T15:45:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6027e7fd_a390dd7f",
       "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
