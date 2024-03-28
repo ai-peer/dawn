@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0201ab5c_eeab6603",
+        "filename": "infra/kokoro/android/jetpack-release/build.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-03-28T19:34:47Z",
+      "side": 0,
+      "message": "I don\u0027t think you want to delete the android ones as they\u0027re still being used (I think)",
+      "revId": "70d792919d7c3e505fcb6c9abaaa23980f6a4fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
