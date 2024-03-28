@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ff8927_650b4eea",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-28T15:56:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "936e166b_f31c84fd",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11c93046_0e2c6134",
