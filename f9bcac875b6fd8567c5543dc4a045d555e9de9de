@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16cb0a07_a8b011ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-28T07:29:13Z",
+      "side": 1,
+      "message": "Is include/ a directory we do not want to rewrite?",
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
