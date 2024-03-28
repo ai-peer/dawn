@@ -78,6 +78,9 @@ PipelineLayout::PipelineLayout(Device* device,
                     [&](const StorageTextureBindingLayout&) {
                         mIndexInfo[stage][group][bindingIndex] = textureIndex;
                         textureIndex++;
+                    },
+                    [&](const StaticSamplerHolderBindingLayout&) {
+                        // TODO(blundell): What to do here?
                     });
             }
         }
