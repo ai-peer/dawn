@@ -53,6 +53,10 @@ D3D12_DESCRIPTOR_RANGE_TYPE WGPUBindingInfoToDescriptorRangeType(const BindingIn
                     DAWN_UNREACHABLE();
             }
         },
+        [](const StaticSamplerHolderBindingLayout&) -> D3D12_DESCRIPTOR_RANGE_TYPE {
+            // TODO(crbug.com/dawn/2463): Is this correct?
+            return D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER;
+        },
         [](const SamplerBindingLayout&) -> D3D12_DESCRIPTOR_RANGE_TYPE {
             return D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER;
         },
@@ -120,6 +124,12 @@ BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor
         // don't need to set DESCRIPTORS_VOLATILE for any binding types.
         range.Flags = MatchVariant(
             bindingInfo.bindingLayout,
+            [](const StaticSamplerHolderBindingLayout&) -> D3D12_DESCRIPTOR_RANGE_FLAGS {
+                // TODO(crbug.com/dawn/2463): Is this correct?
+                // Sampler descriptor ranges don't support DATA_* flags at all since samplers do not
+                // point to data.
+                return D3D12_DESCRIPTOR_RANGE_FLAG_NONE;
+            },
             [](const SamplerBindingLayout&) -> D3D12_DESCRIPTOR_RANGE_FLAGS {
                 // Sampler descriptor ranges don't support DATA_* flags at all since samplers do not
                 // point to data.

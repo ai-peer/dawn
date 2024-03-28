@@ -228,7 +228,8 @@ MaybeError BindGroupTracker::Apply() {
                         return {};
                     },
                     [](const TextureBindingLayout&) -> MaybeError { return {}; },
-                    [](const SamplerBindingLayout&) -> MaybeError { return {}; }));
+                    [](const SamplerBindingLayout&) -> MaybeError { return {}; },
+                    [](const StaticSamplerHolderBindingLayout&) -> MaybeError { return {}; }));
             }
         }
 
@@ -364,6 +365,10 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                     case wgpu::BufferBindingType::Undefined:
                         DAWN_UNREACHABLE();
                 }
+                return {};
+            },
+            [&](const StaticSamplerHolderBindingLayout&) -> MaybeError {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
                 return {};
             },
             [&](const SamplerBindingLayout&) -> MaybeError {
@@ -502,6 +507,9 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
                     case wgpu::BufferBindingType::Undefined:
                         DAWN_UNREACHABLE();
                 }
+            },
+            [&](const StaticSamplerHolderBindingLayout&) {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
             },
             [&](const SamplerBindingLayout&) {
                 ID3D11SamplerState* nullSampler = nullptr;

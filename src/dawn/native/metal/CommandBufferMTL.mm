@@ -624,6 +624,9 @@ class BindGroupTracker : public BindGroupTrackerBase<true, uint64_t> {
                                          atIndex:computeIndex];
                     }
                 },
+                [&](const StaticSamplerHolderBindingLayout&) {
+                    // TODO(crbug.com/dawn/2463): Fill in as needed
+                },
                 [&](const TextureBindingLayout&) {
                     auto textureView = ToBackend(group->GetBindingAsTextureView(bindingIndex));
                     if (hasVertStage) {

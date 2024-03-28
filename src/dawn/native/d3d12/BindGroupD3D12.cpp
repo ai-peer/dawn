@@ -194,6 +194,9 @@ BindGroup::BindGroup(Device* device,
                         DAWN_UNREACHABLE();
                 }
             },
+            [](const StaticSamplerHolderBindingLayout&) {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
+            },
             // No-op as samplers will be later initialized by CreateSamplers().
             [](const SamplerBindingLayout&) {});
     }
