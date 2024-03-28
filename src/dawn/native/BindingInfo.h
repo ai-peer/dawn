@@ -33,6 +33,7 @@
 #include <vector>
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Ref.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
@@ -56,7 +57,23 @@ static constexpr BindingIndex kMaxBindingsPerPipelineLayoutTyped =
 // TODO(enga): Figure out a good number for this.
 static constexpr uint32_t kMaxOptimalBindingsPerGroup = 32;
 
-enum class BindingInfoType { Buffer, Sampler, Texture, StorageTexture, ExternalTexture };
+enum class BindingInfoType {
+    Buffer,
+    Sampler,
+    Texture,
+    StorageTexture,
+    ExternalTexture,
+    StaticSampler
+};
+
+struct StaticSamplerHolderBindingLayout {
+    Ref<SamplerBase> sampler;
+};
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const StaticSamplerHolderBindingLayout& value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
 
 struct BindingInfo {
     BindingNumber binding;
@@ -65,7 +82,8 @@ struct BindingInfo {
     std::variant<BufferBindingLayout,
                  SamplerBindingLayout,
                  TextureBindingLayout,
-                 StorageTextureBindingLayout>
+                 StorageTextureBindingLayout,
+                 StaticSamplerHolderBindingLayout>
         bindingLayout;
 };
 
