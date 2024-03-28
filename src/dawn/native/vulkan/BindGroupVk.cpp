@@ -104,6 +104,7 @@ BindGroup::BindGroup(Device* device,
                 write.pImageInfo = &writeImageInfo[numWrites];
                 return true;
             },
+            [&](const StaticSamplerHolderBindingLayout&) -> bool { return true; },
             [&](const TextureBindingLayout&) -> bool {
                 TextureView* view = ToBackend(GetBindingAsTextureView(bindingIndex));
 
