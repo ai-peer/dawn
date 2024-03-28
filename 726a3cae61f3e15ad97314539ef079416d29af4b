@@ -34,6 +34,24 @@
       "parentUuid": "8f13ba83_3abf11ca",
       "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6027e7fd_a390dd7f",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3538,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-28T14:49:23Z",
+      "side": 1,
+      "message": "(operator \u003c\u003c is specialized by gtest, it\u0027ll print each of the tuple fields with `\u003c\u003c`)",
+      "parentUuid": "9595d977_e78669e1",
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
