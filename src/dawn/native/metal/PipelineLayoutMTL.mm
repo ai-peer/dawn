@@ -78,6 +78,9 @@ PipelineLayout::PipelineLayout(Device* device,
                     [&](const StorageTextureBindingLayout&) {
                         mIndexInfo[stage][group][bindingIndex] = textureIndex;
                         textureIndex++;
+                    },
+                    [&](const StaticSamplerHolderBindingLayout&) {
+                        // TODO(crbug.com/dawn/2463): Fill in as needed
                     });
             }
         }

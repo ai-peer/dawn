@@ -228,7 +228,8 @@ MaybeError BindGroupTracker::Apply() {
                         return {};
                     },
                     [](const TextureBindingLayout&) -> MaybeError { return {}; },
-                    [](const SamplerBindingLayout&) -> MaybeError { return {}; }));
+                    [](const SamplerBindingLayout&) -> MaybeError { return {}; },
+                    [](const StaticSamplerHolderBindingLayout&) -> MaybeError { return {}; }));
             }
         }
 
@@ -366,20 +367,25 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                 }
                 return {};
             },
-            [&](const SamplerBindingLayout&) -> MaybeError {
-                Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
-                ID3D11SamplerState* d3d11SamplerState = sampler->GetD3D11SamplerState();
-                if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                    deviceContext->VSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
-                }
-                if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                    deviceContext->PSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
-                }
-                if (bindingVisibility & wgpu::ShaderStage::Compute) {
-                    deviceContext->CSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
-                }
+            [&](const StaticSamplerHolderBindingLayout&)
+                -> MaybeError {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
                 return {};
-            },
+            }[&](const SamplerBindingLayout&)
+                       ->MaybeError {
+                           Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
+                           ID3D11SamplerState* d3d11SamplerState = sampler->GetD3D11SamplerState();
+                           if (bindingVisibility & wgpu::ShaderStage::Vertex) {
+                               deviceContext->VSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                           }
+                           if (bindingVisibility & wgpu::ShaderStage::Fragment) {
+                               deviceContext->PSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                           }
+                           if (bindingVisibility & wgpu::ShaderStage::Compute) {
+                               deviceContext->CSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                           }
+                           return {};
+                       },
             [&](const TextureBindingLayout&) -> MaybeError {
                 TextureView* view = ToBackend(group->GetBindingAsTextureView(bindingIndex));
                 ComPtr<ID3D11ShaderResourceView> srv;
@@ -502,6 +508,9 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
                     case wgpu::BufferBindingType::Undefined:
                         DAWN_UNREACHABLE();
                 }
+            },
+            [&](const StaticSamplerHolderBindingLayout&) {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
             },
             [&](const SamplerBindingLayout&) {
                 ID3D11SamplerState* nullSampler = nullptr;

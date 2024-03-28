@@ -33,6 +33,16 @@
 
 namespace dawn::native {
 
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const StaticSamplerHolderBindingLayout& value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    static const auto* const fmt = new absl::ParsedFormat<'s'>("{ type: %s }");
+    // TODO(blundell): Figure out how to put in sampler.
+    s->Append(absl::StrFormat(*fmt, "foo"));
+    return {true};
+}
+
 BindingInfoType GetBindingInfoType(const BindingInfo& info) {
     return MatchVariant(
         info.bindingLayout,
@@ -41,6 +51,9 @@ BindingInfoType GetBindingInfoType(const BindingInfo& info) {
         [](const TextureBindingLayout&) -> BindingInfoType { return BindingInfoType::Texture; },
         [](const StorageTextureBindingLayout&) -> BindingInfoType {
             return BindingInfoType::StorageTexture;
+        },
+        [](const StaticSamplerHolderBindingLayout&) -> BindingInfoType {
+            return BindingInfoType::StaticSampler;
         });
 }
 

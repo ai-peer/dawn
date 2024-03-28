@@ -356,6 +356,11 @@ bool operator!=(const BindingInfo& a, const BindingInfo& b) {
             const SamplerBindingLayout& layoutB = std::get<SamplerBindingLayout>(b.bindingLayout);
             return layoutA.type != layoutB.type;
         },
+        [&](const StaticSamplerHolderBindingLayout& layoutA) -> bool {
+            const StaticSamplerHolderBindingLayout& layoutB =
+                std::get<StaticSamplerHolderBindingLayout>(b.bindingLayout);
+            return layoutA.sampler != layoutB.sampler;
+        },
         [&](const TextureBindingLayout& layoutA) -> bool {
             const TextureBindingLayout& layoutB = std::get<TextureBindingLayout>(b.bindingLayout);
             return layoutA.sampleType != layoutB.sampleType ||
@@ -504,6 +509,14 @@ bool SortBindingsCompare(const UnpackedPtr<BindGroupLayoutEntry>& a,
             }
             break;
         }
+        case BindingInfoType::StaticSampler: {
+            const auto& aLayout = std::get<StaticSamplerHolderBindingLayout>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<StaticSamplerHolderBindingLayout>(bInfo.bindingLayout);
+            if (aLayout.sampler != bLayout.sampler) {
+                return aLayout.sampler < bLayout.sampler;
+            }
+            break;
+        }
         case BindingInfoType::ExternalTexture:
             DAWN_UNREACHABLE();
             break;
@@ -632,6 +645,9 @@ size_t BindGroupLayoutInternalBase::ComputeContentHash() {
             [&](const StorageTextureBindingLayout& layout) {
                 recorder.Record(BindingInfoType::StorageTexture, layout.access, layout.format,
                                 layout.viewDimension);
+            },
+            [&](const StaticSamplerHolderBindingLayout& layout) {
+                recorder.Record(BindingInfoType::StaticSampler, layout.sampler->GetContentHash());
             });
     }
 
