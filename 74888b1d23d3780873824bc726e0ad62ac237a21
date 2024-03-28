@@ -16,6 +16,23 @@
       "message": "I believe all feedback has been addressed. Lmk if more is needed. Would prefer addressing any significant changes in a follow up CL.",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06546bc6_10a4d084",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-28T23:09:31Z",
+      "side": 1,
+      "message": "I\u0027m running into a D3D12 Debug Layer error on one of my new tests. It turns out to use a shared buffer with CreateConstantBufferView (i.e. wgpu::BufferUsage::Uniform) , then then size must be 256-aligned [1].\n\nIt seems like allowing BufferUsage::Uniform would be desirable. I was thinking we could keep things as they are and only add BufferUsage::Uniform on creation to the WebGPU buffer if the ID3D12Resource does have the correct size alignment. WDYT?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/BindGroupD3D12.cpp;l\u003d92",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
