@@ -90,6 +90,8 @@ BindingInfoType TintResourceTypeToBindingInfoType(
         case tint::inspector::ResourceBinding::ResourceType::kExternalTexture:
             return BindingInfoType::ExternalTexture;
 
+            // TODO(crbug.com/dawn/2463): Does this need to be extended for
+            // static samplers?
         default:
             DAWN_UNREACHABLE();
             return BindingInfoType::Buffer;
@@ -905,6 +907,10 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
 
             case BindingInfoType::ExternalTexture: {
                 info.bindingInfo.emplace<ExternalTextureBindingInfo>();
+                break;
+            }
+            case BindingInfoType::StaticSampler: {
+                // TODO(crbug.com/dawn/2463): Fill in as needed
                 break;
             }
             default:

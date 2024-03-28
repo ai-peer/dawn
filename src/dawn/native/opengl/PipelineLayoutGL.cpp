@@ -67,6 +67,9 @@ PipelineLayout::PipelineLayout(Device* device,
                             DAWN_UNREACHABLE();
                     }
                 },
+                [&](const StaticSamplerHolderBindingLayout&) {
+                    // TODO(crbug.com/dawn/2463): Fill this in as needed.
+                },
                 [&](const SamplerBindingLayout&) {
                     mIndexInfo[group][bindingIndex] = samplerIndex;
                     samplerIndex++;

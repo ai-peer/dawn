@@ -389,6 +389,10 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                                  "\nExpected entry layout: %s",
                                  i, layout);
                 return {};
+            },
+            [&](const StaticSamplerHolderBindingLayout& layout) -> MaybeError {
+                // Validation was done at the time of pipeline creation.
+                return {};
             }));
     }
 
