@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7f6ebd1_55da7139",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T16:37:12Z",
+      "side": 1,
+      "message": "The rewriter detected it was used in some reinterpret_cast here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/StackContainer.h;l\u003d50-51;drc\u003d9910d3be894c8f142c977ba1023f30a656bc13fc;bpv\u003d0;bpt\u003d1\n\nSo, the rewriter doesn\u0027t know if if is safe to rewrite, because it might mutate the private pointer without calling the public function. Then the refcount might be wrong.\n\nIf the StackVector is correctly implemented (e.g. calling constructor/destructor and not touching the private values), then it should be okay using raw_ptr here.",
+      "parentUuid": "6204f683_a13eee27",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be8092c1_1ba3bf0d",
         "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 2
@@ -262,6 +280,30 @@
       "side": 1,
       "message": "Why do we need to exclude for globals?",
       "parentUuid": "5f3e4270_0e0f9746",
+      "range": {
+        "startLine": 103,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f4bd074_c07c94fe",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T16:37:12Z",
+      "side": 1,
+      "message": "Except if I am missing something, I don\u0027t believe it is needed to exclude globals per se.\n\nGlobal\u0027s memory is in the data or bss segment. The implementation of raw_ptr \"knows\" the memory is not managed by partition_alloc. It won\u0027t do much, and will fallback gracefully.\n\nI think I would agree using raw_ptr anyway, for consistency. If we can.",
+      "parentUuid": "5973df12_1e64e4d5",
       "range": {
         "startLine": 103,
         "startChar": 61,
