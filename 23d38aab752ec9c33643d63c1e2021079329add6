@@ -77,6 +77,132 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b97238b0_318cdeb1",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "We should avoid rewriting the include/ directory IMHO",
+      "parentUuid": "49a40c04_fc417d3d",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6204f683_a13eee27",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "Why? It should be possible to do a raw_ptr here.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be8092c1_1ba3bf0d",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "We can do a raw_ptr here.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8ea8156_fb3cb6d1",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "This could be a raw_ptr, or the class marked StackAllocated.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf005508_70335503",
+        "filename": "src/dawn/tests/MockCallback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "ditto these could be a raw_ptr.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd496de_219567a0",
+        "filename": "src/dawn/tests/end2end/EventTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "We could do a raw_ptr here.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad81b5d_0d32a2f5",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f3e4270_0e0f9746",
         "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
         "patchSetId": 2
@@ -88,6 +214,30 @@
       "writtenOn": "2024-03-28T09:12:29Z",
       "side": 1,
       "message": "Note: This [global](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/RefBaseTests.cpp;l\u003d106;drc\u003d9910d3be894c8f142c977ba1023f30a656bc13fc;bpv\u003d1;bpt\u003d1).",
+      "range": {
+        "startLine": 103,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5973df12_1e64e4d5",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:19:16Z",
+      "side": 1,
+      "message": "Why do we need to exclude for globals?",
+      "parentUuid": "5f3e4270_0e0f9746",
       "range": {
         "startLine": 103,
         "startChar": 61,
