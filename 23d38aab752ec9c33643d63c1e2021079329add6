@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c83b729_84e8ba18",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:58:48Z",
+      "side": 1,
+      "message": "Could you explain the goal is to enforce using raw_ptr via the clang-plugin?",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b3413ac5_286cab3a",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-03-27T20:54:50Z",
       "side": 1,
       "message": "PTAL",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "349fc38e_05198743",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T08:58:48Z",
+      "side": 1,
+      "message": "Thank you!\n+R Corentin: Could you please take a look?\n\nBots are red because of the previous patch, but I think they could be merged independently. Could you rebase on top of origin/main.",
       "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
