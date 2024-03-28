@@ -376,6 +376,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     State GetState() const;
     bool IsLost() const;
     ApiObjectList* GetObjectTrackingList(ObjectType type);
+    const ApiObjectList* GetObjectTrackingList(ObjectType type) const;
 
     std::vector<const char*> GetTogglesUsed() const;
     const tint::wgsl::AllowedFeatures& GetWGSLAllowedFeatures() const;
@@ -477,6 +478,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     // turned on. Thus it should only be wrapped inside DAWN_ASSERT() macro. i.e.
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
+
+    void DumpMemoryStatistics(dawn::native::MemoryDump* dump) const;
 
   protected:
     // Constructor used only for mocking and testing.
