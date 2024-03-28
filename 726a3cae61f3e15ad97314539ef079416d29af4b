@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6afd2eac_f768976d",
+        "filename": "src/tint/lang/core/ir/transform/helper_test.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-28T15:14:53Z",
+      "side": 1,
+      "message": "This means that all unit tests for all core transforms will allow ref types in the output, which is a lot more permissive then we really want. It\u0027d be great it we could make this a more explicit opt-in, although with the variadic argument list that would require a second overload of `Run()`.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 52
+      },
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884f3cde_31d24c61",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-03-28T15:14:53Z",
+      "side": 1,
+      "message": "I don\u0027t think we should ever allow ref types for function parameters or return type, even when the capability is enabled.",
+      "range": {
+        "startLine": 492,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 9
+      },
+      "revId": "726a3cae61f3e15ad97314539ef079416d29af4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f13ba83_3abf11ca",
         "filename": "src/tint/lang/core/ir/validator_test.cc",
         "patchSetId": 1
