@@ -50,6 +50,52 @@
       "message": "Thank you!\n+R Corentin: Could you please take a look?\n\nBots are red because of the previous patch, but I think they could be merged independently. Could you rebase on top of origin/main.",
       "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49a40c04_fc417d3d",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T09:12:29Z",
+      "side": 1,
+      "message": "Note: I tried to find where was the global object, unsuccessfully.\nProbably well hidden, or maybe a bug in the rewriter.",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f3e4270_0e0f9746",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-28T09:12:29Z",
+      "side": 1,
+      "message": "Note: This [global](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/RefBaseTests.cpp;l\u003d106;drc\u003d9910d3be894c8f142c977ba1023f30a656bc13fc;bpv\u003d1;bpt\u003d1).",
+      "range": {
+        "startLine": 103,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
