@@ -816,6 +816,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4535e3b2_aa101f90",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-28T20:14:32Z",
+      "side": 1,
+      "message": "Added more tests. We\u0027ve got coverage for CopySrc, CopyDst, MapWrite, MapRead, Storage and Uniform usages.",
+      "parentUuid": "123414c3_448e38b5",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2dbf743_9b361fe3",
         "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
         "patchSetId": 10
@@ -845,6 +863,24 @@
       "side": 1,
       "message": "That\u0027s fair. I\u0027ll try to move more tests into the shared file.",
       "parentUuid": "f2dbf743_9b361fe3",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2adc1a8e_dd4c5d2d",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-28T20:14:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a586a25_91255965",
       "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
