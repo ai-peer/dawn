@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "936e166b_f31c84fd",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 539,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-03-28T11:52:10Z",
+      "side": 1,
+      "message": "You\u0027re right - there are a few ways you can use ref types without hitting the intrinsic table. Created https://dawn-review.googlesource.com/c/dawn/+/181361 to add validation for this.",
+      "parentUuid": "6dc97665_3187bf8b",
+      "revId": "a1627d17b48471a9425025f6d5284a6d178cf736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11c93046_0e2c6134",
         "filename": "src/tint/lang/wgsl/writer/raise/ptr_to_ref_test.cc",
         "patchSetId": 10
