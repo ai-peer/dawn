@@ -954,8 +954,10 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(
-    TextureBase* texture,
+    SharedResource* resource,
     const UnpackedPtr<BeginAccessDescriptor>& descriptor) {
+    TextureBase* texture = static_cast<TextureBase*>(resource);
+
     // TODO(dawn/2276): support concurrent read access.
     DAWN_INVALID_IF(descriptor->concurrentRead, "Vulkan backend doesn't support concurrent read.");
 
@@ -980,8 +982,10 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
 
 #if DAWN_PLATFORM_IS(FUCHSIA) || DAWN_PLATFORM_IS(LINUX)
 ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
-    TextureBase* texture,
+    SharedResource* resource,
     UnpackedPtr<EndAccessState>& state) {
+    TextureBase* texture = static_cast<TextureBase*>(resource);
+
     wgpu::SType type;
     DAWN_TRY_ASSIGN(type,
                     (state.ValidateBranches<Branch<SharedTextureMemoryVkImageLayoutEndState>>()));
@@ -1051,7 +1055,7 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
 #else  // DAWN_PLATFORM_IS(FUCHSIA) || DAWN_PLATFORM_IS(LINUX)
 
 ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
-    TextureBase* texture,
+    SharedResource*,
     UnpackedPtr<EndAccessState>& state) {
     return DAWN_VALIDATION_ERROR("No shared fence features supported.");
 }

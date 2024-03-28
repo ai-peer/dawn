@@ -166,7 +166,7 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(
-    TextureBase* texture,
+    SharedResource* resource,
     const UnpackedPtr<BeginAccessDescriptor>& descriptor) {
     DAWN_TRY(descriptor.ValidateSubset<>());
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
@@ -189,8 +189,10 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
 }
 
 ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
-    TextureBase* texture,
+    SharedResource* resource,
     UnpackedPtr<EndAccessState>& state) {
+    TextureBase* texture = static_cast<TextureBase*>(resource);
+
     DAWN_TRY(state.ValidateSubset<>());
     DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::SharedFenceMTLSharedEvent),
                     "Required feature (%s) is missing.",
@@ -209,7 +211,8 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
 
         return FenceAndSignalValue{
             std::move(fence),
-            static_cast<uint64_t>(texture->GetSharedTextureMemoryContents()->GetLastUsageSerial())};
+            static_cast<uint64_t>(
+                texture->GetSharedResourceMemoryContents()->GetLastUsageSerial())};
     }
     DAWN_UNREACHABLE();
 }
