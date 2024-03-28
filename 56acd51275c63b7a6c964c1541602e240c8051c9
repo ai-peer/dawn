@@ -16,6 +16,23 @@
       "message": "Still need to add a few more tests.",
       "revId": "56acd51275c63b7a6c964c1541602e240c8051c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ae6e8b4_929db4f0",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 1870,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-28T22:45:19Z",
+      "side": 1,
+      "message": "nit: make the same change for shared texture memory",
+      "revId": "56acd51275c63b7a6c964c1541602e240c8051c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

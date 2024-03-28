@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "043d7427_fbaf828f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-28T22:45:19Z",
+      "side": 1,
+      "message": "I started trying this in https://dawn-review.googlesource.com/c/dawn/+/181441 - though I didn\u0027t finish all the renames.\n\nIf it works, I think it\u0027s worth it since the ordering of how we validate and acquire fences can be pretty subtle. It would be really preferable to not duplicate it.",
+      "parentUuid": "11034240_c1738b67",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8e01720_43d9cbb1",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 10
