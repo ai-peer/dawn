@@ -16,6 +16,24 @@
       "message": "After this CL I get a build error building Android under CMake. My workstation is OS X.\n\n\u003e Task :webgpu:configureCMakeRelWithDebInfo[arm64-v8a]\nC/C++: CMake Error at /Users/jimblackler/code/dawn/generator/CMakeLists.txt:82 (message):\nC/C++:   Dawn: Failed to get the dependencies for Dawn version based utilities.\nC/C++:   Base args are\nC/C++:   \u0027/Users/jimblackler/code/dawn/generator/dawn_version_generator.py;--template-dir;/Users/jimblackler/code/dawn/generator/templates;--root-dir;/Users/jimblackler/code/dawn;--output-dir;/Users/jimblackler/code/dawn/tools/android/webgpu/.cxx/RelWithDebInfo/1o5o5dn1/arm64-v8a/dawn/gen;--dawn-dir;/Users/jimblackler/code/dawn;--jinja2-path;/Users/jimblackler/code/dawn/third_party/jinja2;--markupsafe-path;/Users/jimblackler/code/dawn/third_party/markupsafe\u0027.\nC/C++: Call Stack (most recent call first):\nC/C++:   /Users/jimblackler/code/dawn/src/dawn/common/CMakeLists.txt:28 (DawnGenerator)\n\n\u003e Task :webgpu:configureCMakeRelWithDebInfo[arm64-v8a] FAILED",
       "revId": "179e84a618cb13324646616ababc81be8c3ac85a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84fd4cf7_e0caf636",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T15:59:46Z",
+      "side": 1,
+      "message": "Does nuking the CMake build directory and remaking one help?",
+      "parentUuid": "2b9b6292_1c636bfb",
+      "revId": "179e84a618cb13324646616ababc81be8c3ac85a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
