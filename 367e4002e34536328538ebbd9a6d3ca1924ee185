@@ -35,6 +35,142 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "151f3a87_a699fa7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "It looks good but we should add tests for things like, using a static sampler and not specifying the binding when creating the bindgroup (control case) and specifying a sampler (error case). Likewise we should check that a static sampler is valid to use with a WGSL regular sampler (I believe this isn\u0027t the case in the current patchset).",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa45b3c9_3a552b42",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "This should return an error as we get here in the case where a binding was provided for a StaticSampler binding, which is incorrect.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7996a816_545869cf",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "`s-\u003eAppend(absl::StrFormat(\"{type: StaticSampleBindingLayout, sampler: %s}\", value.sampler))` should work. Not sure if that matches the formatting for the other binding types though.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cb15dd_3339a03a",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "nit: this can go in src/dawn/native/webgpu_absl_format.h and .cpp",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa43ff35_3beec387",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "u-nit: slight preference to place on separate lines, for example by adding a // to force clang-format to respect a newline.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e112886_c83c7f2a",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "It doesn\u0027t, but later we need to allow StaticSampler to match a Sampler binding type from the shader.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "736c0f1e_869a1e0c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "That\u0027d never happen until we add some form of static sampler declaration to WGSL, so we can leave that to the defaulted case.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f592070_9c5f60bc",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-28T20:22:52Z",
+      "side": 1,
+      "message": "Probably, but maybe we could add DAWN_UNREACHABLE() and a TODO to implement on the Vulkan backend. Ditto in other backends.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d5d7bdf_4a05868b",
