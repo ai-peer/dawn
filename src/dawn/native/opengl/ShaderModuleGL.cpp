@@ -40,6 +40,7 @@
 #include "dawn/native/opengl/PipelineLayoutGL.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 #include "tint/tint.h"
 
@@ -86,7 +87,7 @@ opengl::CombinedSampler* AppendCombinedSampler(opengl::CombinedSamplerInfo* info
 using InterstageLocationAndName = std::pair<uint32_t, std::string>;
 
 #define GLSL_COMPILATION_REQUEST_MEMBERS(X)                                                      \
-    X(const tint::Program*, inputProgram)                                                        \
+    X(raw_ptr<const tint::Program>, inputProgram)                                                \
     X(std::string, entryPointName)                                                               \
     X(SingleShaderStage, stage)                                                                  \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
