@@ -27,7 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import json, os, sys
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 from generator_lib import Generator, run_generator, FileRender
 
@@ -47,6 +47,7 @@ class Metadata:
         self.copyright_year = metadata.get('copyright_year', None)
         self.kotlin_package = 'android.dawn'
         self.kotlin_path = self.kotlin_package.replace('.', '/')
+        self.kotlin_jni_path = self.kotlin_package.replace('.', '_')
 
 class Name:
     def __init__(self, name, native=False):
@@ -792,6 +793,54 @@ def as_cppType(name):
         return name.CamelCase()
 
 
+def to_kotlin_type(name):
+    return {
+        'bool': 'Boolean',
+        'char': 'Char',
+        'double': 'Double',
+        'float': 'Float',
+        'int': 'Int',
+        'int16_t': 'short',
+        'int32_t': 'Int',
+        'size_t': 'Long',
+        'uint16_t': 'Short',
+        'uint32_t': 'Int',
+        'uint64_t': 'Long',
+        'uint8_t': 'Byte',
+        'void *': 'ByteArray',
+        'void const *': 'ByteArray',
+        'void': 'Unit'
+    }[name]
+
+
+def to_kotlin_type_multi(name):
+    return {
+        'char': 'String',
+        'double': 'DoubleArray',
+        'float': 'FloatArray',
+        'uint8_t': 'ByteArray',
+        'uint32_t': 'IntArray',
+        'uint64_t': 'LongArray',
+        'void': 'ByteArray'
+    }[name]
+
+
+def to_jni_type(name):
+    return {
+        'bool': 'jboolean',
+        'float': 'jfloat',
+        'int32_t': 'jint',
+        'size_t': 'jlong',
+        'uint32_t': 'jint',
+        'uint64_t': 'jlong',
+        'void': 'void'
+    }.get(name or None)
+
+
+def as_ktName(name):
+    return '_' + name if '0' <= name[0] <= '9' else name
+
+
 def as_ktName(name):
     return '_' + name if '0' <= name[0] <= '9' else name
 
@@ -981,6 +1030,9 @@ def make_base_render_params(metadata):
             'as_varName': as_varName,
             'decorate': decorate,
             'as_formatType': as_formatType,
+            'to_kotlin_type': to_kotlin_type,
+            'to_kotlin_type_multi': to_kotlin_type_multi,
+            'to_jni_type': to_jni_type,
             'as_ktName': as_ktName
         }
 
@@ -1342,14 +1394,90 @@ class MultiGeneratorFromDawnJSON(Generator):
         if 'kotlin' in targets:
             params_kotlin = parse_json(loaded_json,
                                        enabled_tags=['dawn', 'native'])
+            by_category = params_kotlin['by_category']
+
+            for structure in by_category['structure']:
+                structure.members = [
+                    member for member in structure.members if not [
+                        1 for other in structure.members if other.length == member
+                    ]
+                ]
+
+            by_category['structure'] = [
+                structure for structure in by_category['structure']
+                if (len(structure.chain_roots) < 2 and all(
+                    member.annotation != 'const*const*'
+                    for member in structure.members))
+            ]
+
+            def can_handle(method):
+                return (method.return_type.name.get()
+                        not in ['future', 'void *', 'void const *']
+                        and method.return_type.category != 'function pointer'
+                        and not any(argument.annotation == '*' or
+                                    (argument.annotation == 'value'
+                                     and argument.type.category == 'structure')
+                                    for argument in method.arguments))
+
+            for object in by_category['object']:
+                object.methods = [
+                    method for method in object.methods if can_handle(method)
+                ]
+
+            by_category['function'] = [
+                function for function in by_category['function']
+                if can_handle(function)
+            ]
+
+            chain_children = defaultdict(list)
+            for structure in by_category['structure']:
+                for chain_root in structure.chain_roots:
+                    chain_children[chain_root.name.get()].append(structure)
+            params_kotlin['chain_children'] = chain_children
+
+            for structure in by_category['structure']:
+                renders.append(
+                    FileRender(
+                        'art/api_kotlin_structure.kt',
+                        'java/' + metadata.kotlin_path + '/' +
+                        structure.name.CamelCase() + '.kt', [
+                            RENDER_PARAMS_BASE, params_kotlin, {
+                                'structure': structure
+                            }
+                        ]))
+            for object in by_category['object']:
+                renders.append(
+                    FileRender(
+                        'art/api_kotlin_object.kt',
+                        'java/' + metadata.kotlin_path + '/' +
+                        object.name.CamelCase() + '.kt',
+                        [RENDER_PARAMS_BASE, params_kotlin, {
+                            'object': object
+                        }]))
+            for function_pointer in by_category['function pointer']:
+                renders.append(
+                    FileRender(
+                        'art/api_kotlin_function_pointer.kt',
+                        'java/' + metadata.kotlin_path + '/' +
+                        function_pointer.name.CamelCase() + '.kt', [
+                            RENDER_PARAMS_BASE, params_kotlin, {
+                                'function_pointer': function_pointer
+                            }
+                        ]))
+            renders.append(
+                FileRender('art/api_kotlin_object.kt',
+                           'java/' + metadata.kotlin_path + '/Functions.kt',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/api_jni_native.cpp', 'cpp/Native.cpp',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
 
             for enum in (params_kotlin['by_category']['bitmask'] +
                          params_kotlin['by_category']['enum']):
                 renders.append(
                     FileRender(
-                        'art/api_kotlin_enum.kt',
-                        'java/' + metadata.kotlin_path + '/' +
-                        enum.name.CamelCase() + '.kt',
+                        'art/api_kotlin_enum.kt', 'java/' + metadata.kotlin_path +
+                        '/' + enum.name.CamelCase() + '.kt',
                         [RENDER_PARAMS_BASE, params_kotlin, {
                             'enum': enum
                         }]))

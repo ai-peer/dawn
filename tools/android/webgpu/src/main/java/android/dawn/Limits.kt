@@ -1,0 +1,37 @@
+package android.dawn
+
+class Limits(
+    var maxTextureDimension1D: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxTextureDimension2D: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxTextureDimension3D: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxTextureArrayLayers: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxBindGroups: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxBindGroupsPlusVertexBuffers: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxBindingsPerBindGroup: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxDynamicUniformBuffersPerPipelineLayout: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxDynamicStorageBuffersPerPipelineLayout: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxSampledTexturesPerShaderStage: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxSamplersPerShaderStage: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxStorageBuffersPerShaderStage: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxStorageTexturesPerShaderStage: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxUniformBuffersPerShaderStage: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxUniformBufferBindingSize: Long = Constants.LIMIT_U64_UNDEFINED,
+    var maxStorageBufferBindingSize: Long = Constants.LIMIT_U64_UNDEFINED,
+    var minUniformBufferOffsetAlignment: Int = Constants.LIMIT_U32_UNDEFINED,
+    var minStorageBufferOffsetAlignment: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxVertexBuffers: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxBufferSize: Long = Constants.LIMIT_U64_UNDEFINED,
+    var maxVertexAttributes: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxVertexBufferArrayStride: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxInterStageShaderComponents: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxInterStageShaderVariables: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxColorAttachments: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxColorAttachmentBytesPerSample: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeWorkgroupStorageSize: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeInvocationsPerWorkgroup: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeWorkgroupSizeX: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeWorkgroupSizeY: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeWorkgroupSizeZ: Int = Constants.LIMIT_U32_UNDEFINED,
+    var maxComputeWorkgroupsPerDimension: Int = Constants.LIMIT_U32_UNDEFINED
+) {
+}
