@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4685a4_c4a1c395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-29T00:17:15Z",
+      "side": 1,
+      "message": "PTAL, needs manual review because it was a nontrivial cherry-pick (needed the deviceId/vendorId variables)",
+      "revId": "8428ac121f080de306c92d8a47d2f42a3bacd171",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
