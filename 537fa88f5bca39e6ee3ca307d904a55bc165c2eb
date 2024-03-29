@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "537fa88f5bca39e6ee3ca307d904a55bc165c2eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04871ad4_9d37323d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:27:14Z",
+      "side": 1,
+      "message": "Why do we need to set them to null here instead of the function that causes the device to be lost?",
+      "revId": "537fa88f5bca39e6ee3ca307d904a55bc165c2eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
