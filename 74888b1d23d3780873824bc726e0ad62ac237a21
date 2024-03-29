@@ -51,6 +51,24 @@
       "parentUuid": "06546bc6_10a4d084",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52ab99c_5f54ca2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T00:04:17Z",
+      "side": 1,
+      "message": "The align-down thing isn\u0027t going to work because the actual D3D12 error I\u0027m getting is about an out of range access. We get an error if we access outside [resourceAddress + size - 1], so aligning the size down will always result in the error.\n\nSeems a bit heavy-handed to disallow all non-aligned buffers just for this one case though, but it would work.\n\nThe allowed usages are decided on ImportSharedBufferMemory. Unfortunately the earliest the developer will find that wgpu::BufferUsage::Uniform isn\u0027t allowed on a non-aligned buffer is on CreateBuffer after ImportSharedBufferMemory. We could have specific error message if they try to include the Uniform usage on a non-aligned buffer during CreateBuffer. This is my preference, but it might be confusing to a developer who doesn\u0027t provide a BufferDescriptor and opts for the default descriptor.",
+      "parentUuid": "0a7fa755_f739dd45",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
