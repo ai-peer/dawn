@@ -35,6 +35,7 @@
 
 #include "dawn/common/Assert.h"
 #include "gmock/gmock.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace testing {
 
@@ -75,8 +76,8 @@ class MockCallback<R (*)(Args...)> : public ::testing::MockFunction<R(Args...)> 
 
   private:
     struct MockAndUserdata {
-        MockCallback* mock;
-        void* userdata;
+        raw_ptr<MockCallback> mock;
+        raw_ptr<void> userdata;
     };
 
     static R CallUnboundCallback(Args... args) {

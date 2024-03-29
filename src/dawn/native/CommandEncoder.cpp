@@ -58,6 +58,7 @@
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -65,7 +66,7 @@ namespace {
 
 // Record the subresource range of a attachment used in render pass for checking overlaps.
 struct RecordedAttachment {
-    const TextureBase* texture;
+    raw_ptr<const TextureBase> texture;
     uint32_t mipLevel;
     // For 3d color attachment, it's the attachment's depthSlice.
     uint32_t depthOrArrayLayer;
