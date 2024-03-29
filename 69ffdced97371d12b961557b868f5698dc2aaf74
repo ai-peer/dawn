@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5446dc53_8b610b63",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-29T02:10:58Z",
+      "side": 1,
+      "message": "I want to simplify this but it\u0027s a little annoying to do so right now because the parsing fix has not relanded yet. It is waiting on Brian\u0027s CL to split the worker tests into separate steps, after which I hope I can land it.\n\nIn particular, I\u0027m pretty sure `use_worker` is dead and should be removed, and `TestWorker` should be deprecated and removed too.\n\nI realized that the code in CTS should be simplified too. I\u0027ll incorporate that in my reland.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 78
+      },
+      "revId": "69ffdced97371d12b961557b868f5698dc2aaf74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
