@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c95dc6_d9ee0373",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T07:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa557e32_0726113d",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 45
+      },
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18c09116_7baf4c94",
@@ -106,6 +130,30 @@
       "writtenOn": "2024-03-28T08:53:06Z",
       "side": 1,
       "message": "Could you exclude `dawn/samples` ?\n\nThose are examples for developers. They don\u0027t have access to `partition_alloc`.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 41
+      },
+      "revId": "f9bcac875b6fd8567c5543dc4a045d555e9de9de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16fb34f2_1b4302a3",
+        "filename": "src/dawn/samples/ManualSwapChainTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T07:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18c09116_7baf4c94",
       "range": {
         "startLine": 85,
         "startChar": 0,
