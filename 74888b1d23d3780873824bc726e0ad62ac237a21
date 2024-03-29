@@ -87,6 +87,24 @@
       "parentUuid": "f52ab99c_5f54ca2a",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef7b9c7b_13a6d284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T00:30:52Z",
+      "side": 1,
+      "message": "But doesn\u0027t that leave the developer unable access a portion of their buffer? I\u0027d end up creating a D3D12_CONSTANT_BUFFER_VIEW_DESC with SizeInBytes less than the actual size, which sounds like it would have undefined behavior on OOB access. Dawn validation isn\u0027t a problem here, it\u0027s the D3D12 debug layer.",
+      "parentUuid": "e851c96c_7669f378",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
