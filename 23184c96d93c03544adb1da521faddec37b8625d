@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de5b063_c9a53065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T03:50:16Z",
+      "side": 1,
+      "message": "I finished this over at https://dawn-review.googlesource.com/c/dawn/+/181501. Not sure if there\u0027s an etiquette to CL stealing, but FYI you were only a few lines away from finishing. Happy to take over or let you continue.",
+      "revId": "23184c96d93c03544adb1da521faddec37b8625d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
