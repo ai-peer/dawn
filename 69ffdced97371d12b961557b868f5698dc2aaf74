@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f37eea_58281163",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-29T02:27:18Z",
+      "side": 1,
+      "message": "Please add `Bug: chromium:330596242`",
+      "revId": "69ffdced97371d12b961557b868f5698dc2aaf74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b74a31b1_547402f8",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-03-29T02:27:18Z",
+      "side": 1,
+      "message": "... I think I just figured out why I couldn\u0027t land that change... it\u0027s because this was causing ALL tests to be run on workers because it\u0027s truthy when options.worker was `\u00270\u0027`.\n\nThe actual failures we got are weird, but it explains why the effects were so global.",
+      "range": {
+        "startLine": 180,
+        "startChar": 38,
+        "endLine": 180,
+        "endChar": 52
+      },
+      "revId": "69ffdced97371d12b961557b868f5698dc2aaf74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5446dc53_8b610b63",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 13
