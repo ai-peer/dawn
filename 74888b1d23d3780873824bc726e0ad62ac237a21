@@ -105,6 +105,24 @@
       "parentUuid": "e851c96c_7669f378",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17da562_34cda949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T16:32:52Z",
+      "side": 1,
+      "message": "maybe I\u0027m not understanding - but yea, the idea would be you can\u0027t access the end of the buffer. We make the buffer appear smaller, and limit the portion of it you can bind. The size accessed in the shader is validated against what is bound - so I think it wouldn\u0027t be possible to OOB access. It would be as-if the buffer were simpler smaller than it really is.\n\nBut this isn\u0027t so ideal either. I\u0027m not sure what is best. I\u0027m thinking either we disallow Uniform usage (most applications will be using STORAGE or COPY, I think..?) Or we require the size to be a multiple of 256 when importing an ID3D12Resource.",
+      "parentUuid": "ef7b9c7b_13a6d284",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
