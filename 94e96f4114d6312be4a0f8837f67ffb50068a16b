@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82ed1e90_09f976b1",
+        "filename": "src/dawn/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T22:34:37Z",
+      "side": 1,
+      "message": "remove this static cast now",
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f3f140_0ff13789",
+        "filename": "src/dawn/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T22:34:37Z",
+      "side": 1,
+      "message": "remove this static cast now",
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dde3134d_7e2fd2b6",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T22:34:37Z",
+      "side": 1,
+      "message": "```suggestion\n                Ref\u003cSharedTextureMemoryBase\u003e memory \u003d\n                    mSharedResourceMemoryContents-\u003eGetSharedResourceMemory().Promote().Cast\u003cRef\u003cSharedTextureMemoryBase\u003e\u003e();\n```",
+      "range": {
+        "startLine": 1041,
+        "startChar": 54,
+        "endLine": 1042,
+        "endChar": 88
+      },
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
