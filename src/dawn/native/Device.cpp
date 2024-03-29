@@ -689,9 +689,6 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     // this call.
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
-    if (IsLost()) {
-        return;
-    }
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
@@ -706,9 +703,6 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     // this call.
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
-    if (IsLost()) {
-        return;
-    }
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
