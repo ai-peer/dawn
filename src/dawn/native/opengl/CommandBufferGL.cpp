@@ -308,6 +308,9 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
 
                     gl.BindBufferRange(target, index, buffer, offset, binding.size);
                 },
+                [&](const StaticSamplerHolderBindingLayout&) {
+                    // TODO(crbug.com/dawn/2463): Fill this in as needed.
+                },
                 [&](const SamplerBindingLayout&) {
                     Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
                     GLuint samplerIndex = indices[bindingIndex];

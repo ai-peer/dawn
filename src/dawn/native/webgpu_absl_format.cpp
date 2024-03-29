@@ -126,6 +126,10 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
                                       BindingInfoType::Sampler, layout));
         },
+        [&](const StaticSamplerHolderBindingLayout& layout) {
+            s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
+                                      BindingInfoType::StaticSampler, layout));
+        },
         [&](const TextureBindingLayout& layout) {
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
                                       BindingInfoType::Texture, layout));
@@ -177,6 +181,15 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
         s->Append(" (defaulted)");
     }
     s->Append("]");
+    return {true};
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const StaticSamplerHolderBindingLayout& value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    // TODO(blundell): Figure out how to put in sampler.
+    s->Append(absl::StrFormat("{type: StaticSamplerBindingLayout, sampler: %s}", "foo"));
     return {true};
 }
 
@@ -412,6 +425,9 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
             break;
         case BindingInfoType::ExternalTexture:
             s->Append("externalTexture");
+            break;
+        case BindingInfoType::StaticSampler:
+            s->Append("staticSampler");
             break;
     }
     return {true};

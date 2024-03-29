@@ -84,6 +84,9 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                 [&](const SamplerBindingLayout&) {
                     mIndexInfo[group][bindingIndex] = samplerIndex++;
                 },
+                [&](const StaticSamplerHolderBindingLayout&) {
+                    // TODO(crbug.com/dawn/2463): Fill in as needed
+                },
                 [&](const TextureBindingLayout&) {
                     mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
                 },
