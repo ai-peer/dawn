@@ -904,6 +904,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b748580_2e46fe2b",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "Great, thanks!",
+      "parentUuid": "4535e3b2_aa101f90",
+      "revId": "c77fd39a7749136902ad9bb2cea6686c5e86c2a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2dbf743_9b361fe3",

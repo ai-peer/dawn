@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a7daa43_1845be5b",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need to wait for the map to complete here, even being in the process of being mapped should be an error.",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7030f786_df51508f",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "```suggestion\n// Ensure mapping cannot occur before calling BeginAccess.\n```",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2807a333_d7b538a0",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "```suggestion\n// Validate that calling EndAccess on a different buffer created from the same Shared is invalid.\n```",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eec0d9a_dd3fc15a",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "039023e3_204ad45e",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a test that after this access the buffer is marked initialized, then we import with initialized \u003d false and immediately export, that should give us an export with initialized:false.",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd7aae7_e61a1dd7",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:44:42Z",
+      "side": 1,
+      "message": "why * 8?",
+      "range": {
+        "startLine": 192,
+        "startChar": 37,
+        "endLine": 192,
+        "endChar": 41
+      },
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
