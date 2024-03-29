@@ -31,7 +31,6 @@
 #include <memory>
 
 #include "dawn/wire/Wire.h"
-#include "partition_alloc/pointers/raw_ptr.h"
 
 struct DawnProcTable;
 
@@ -43,9 +42,9 @@ class MemoryTransferService;
 }  // namespace server
 
 struct DAWN_WIRE_EXPORT WireServerDescriptor {
-    raw_ptr<const DawnProcTable> procs;
-    raw_ptr<CommandSerializer> serializer;
-    raw_ptr<server::MemoryTransferService> memoryTransferService = nullptr;
+    const DawnProcTable* procs;
+    CommandSerializer* serializer;
+    server::MemoryTransferService* memoryTransferService = nullptr;
 };
 
 class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
@@ -138,7 +137,7 @@ class DAWN_WIRE_EXPORT MemoryTransferService {
                                            size_t size) = 0;
 
       protected:
-        raw_ptr<void> mTargetData = nullptr;
+        void* mTargetData = nullptr;
         size_t mDataLength = 0;
 
       private:

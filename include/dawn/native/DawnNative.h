@@ -33,7 +33,6 @@
 #include "dawn/dawn_proc_table.h"
 #include "dawn/native/dawn_native_export.h"
 #include "dawn/webgpu_cpp.h"
-#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::platform {
 class Platform;
@@ -135,15 +134,15 @@ enum BackendValidationLevel { Full, Partial, Disabled };
 struct DAWN_NATIVE_EXPORT DawnInstanceDescriptor : wgpu::ChainedStruct {
     DawnInstanceDescriptor();
     uint32_t additionalRuntimeSearchPathsCount = 0;
-    raw_ptr<const char* const, AllowPtrArithmetic> additionalRuntimeSearchPaths;
-    raw_ptr<dawn::platform::Platform> platform = nullptr;
+    const char* const* additionalRuntimeSearchPaths;
+    dawn::platform::Platform* platform = nullptr;
 
     BackendValidationLevel backendValidationLevel = BackendValidationLevel::Disabled;
     bool beginCaptureOnStartup = false;
     bool enableAdapterBlocklist = false;
 
     WGPULoggingCallback loggingCallback = nullptr;
-    raw_ptr<void> loggingCallbackUserdata = nullptr;
+    void* loggingCallbackUserdata = nullptr;
 
     // Equality operators, mostly for testing. Note that this tests
     // strict pointer-pointer equality if the struct contains member pointers.
@@ -193,7 +192,7 @@ class DAWN_NATIVE_EXPORT Instance {
     void DisconnectDawnPlatform();
 
   private:
-    raw_ptr<InstanceBase> mImpl = nullptr;
+    InstanceBase* mImpl = nullptr;
 };
 
 // Backend-agnostic API for dawn_native
@@ -250,7 +249,7 @@ enum ExternalImageType {
 // Common properties of external images
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptor {
   public:
-    raw_ptr<const WGPUTextureDescriptor> cTextureDescriptor;  // Must match image creation params
+    const WGPUTextureDescriptor* cTextureDescriptor;  // Must match image creation params
     bool isInitialized;  // Whether the texture is initialized on import
     ExternalImageType GetType() const;
 
