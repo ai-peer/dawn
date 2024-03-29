@@ -123,6 +123,24 @@
       "parentUuid": "ef7b9c7b_13a6d284",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3b3088_e7b6d676",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "I think we are under the impression that there\u0027s a use case for a shared buffer with BufferUsage::Uniform. I\u0027m just going to list out the options here and ask @rafael.cintron@microsoft.com to chime in because we all need to be in agreement.\n\n1) Leave the code as-is. We can import a SharedBufferMemory from any ID3D12Resource, however if we try to create a wgpu::Buffer from that SharedBufferMemory with BufferUsage::Uniform in the descriptor, an error describing the alignment issue is emitted if the memory is not aligned to D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT.\n\n2) Always allow BufferUsage::Uniform. Requires that we emit an error when creating an SharedBufferMemory from any DEFAULT-heap allocated buffer that is not aligned to D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT.\n\n3) Never allow BufferUsage::Uniform. Simple, but then we can\u0027t share a buffer with BufferUsage::Uniform.",
+      "parentUuid": "c17da562_34cda949",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

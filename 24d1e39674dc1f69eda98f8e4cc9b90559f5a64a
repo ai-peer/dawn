@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "308d1d05_6e011218",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "1a7daa43_1845be5b",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7030f786_df51508f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-29T13:44:42Z",
       "side": 1,
       "message": "```suggestion\n// Ensure mapping cannot occur before calling BeginAccess.\n```",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2450723c_1a4e485e",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7030f786_df51508f",
       "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef03566_3994ffb0",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2807a333_d7b538a0",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eec0d9a_dd3fc15a",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-03-29T13:44:42Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43545575_0c281cce",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6eec0d9a_dd3fc15a",
       "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a80ddc8_2a1c9329",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "Added test UninitializedBufferRemainsUninitialized.",
+      "parentUuid": "039023e3_204ad45e",
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acd7aae7_e61a1dd7",
@@ -99,6 +189,30 @@
       "writtenOn": "2024-03-29T13:44:42Z",
       "side": 1,
       "message": "why * 8?",
+      "range": {
+        "startLine": 192,
+        "startChar": 37,
+        "endLine": 192,
+        "endChar": 41
+      },
+      "revId": "24d1e39674dc1f69eda98f8e4cc9b90559f5a64a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c222fdfe_41f29bc7",
+        "filename": "src/dawn/tests/white_box/SharedBufferMemoryTests_win.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "This *8 isn\u0027t needed. Removed.",
+      "parentUuid": "acd7aae7_e61a1dd7",
       "range": {
         "startLine": 192,
         "startChar": 37,

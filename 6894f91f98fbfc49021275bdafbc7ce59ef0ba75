@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f75537_b589f06d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T21:58:25Z",
+      "side": 1,
+      "message": "This CL still requires a refactor after SharedResourceMemory gets merged.",
+      "revId": "6894f91f98fbfc49021275bdafbc7ce59ef0ba75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
