@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f93c87cc_79fe5114",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:20:05Z",
+      "side": 1,
+      "message": "LGTM but it will need a couple tests still",
+      "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8774fac0_cbb08e75",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T13:20:05Z",
+      "side": 1,
+      "message": "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting\n\nSo maybe \"entries[%u] is provided when the layout contains a static sampler for that binding.\"",
+      "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
