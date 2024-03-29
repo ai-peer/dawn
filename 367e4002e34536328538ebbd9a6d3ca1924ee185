@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b05c3cdb_adb4124c",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T16:27:05Z",
+      "side": 1,
+      "message": "(so I think basically add \"dawn/native/Sampler.h\") at the top",
+      "parentUuid": "885c5c81_95eacee9",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27cb15dd_3339a03a",
         "filename": "src/dawn/native/BindingInfo.h",
         "patchSetId": 7
@@ -418,6 +436,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "1e13e938_f4be0a70",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df46392c_692cb30e",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T16:27:05Z",
+      "side": 1,
+      "message": "yea I think we might need to remove some of the UNREACHABLE depending on what the frontend transform does, but this seems fine for now",
+      "parentUuid": "b642a431_ac92cfbd",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
