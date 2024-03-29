@@ -735,7 +735,7 @@ Future DeviceBase::APIPopErrorScopeF(const PopErrorScopeCallbackInfo& callbackIn
         // TODO(crbug.com/dawn/2021) Remove the old callback type.
         WGPUPopErrorScopeCallback mCallback;
         WGPUErrorCallback mOldCallback;
-        void* mUserdata;
+        raw_ptr<void> mUserdata;
         std::optional<ErrorScope> mScope;
 
         PopErrorScopeEvent(const PopErrorScopeCallbackInfo& callbackInfo,
