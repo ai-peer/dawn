@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "885c5c81_95eacee9",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T15:18:13Z",
+      "side": 1,
+      "message": "Probably the definition of Sampler is not visible in this file so the template is like \"wth is a SamplerBase??\".",
+      "parentUuid": "e34c7cc2_17725ae7",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27cb15dd_3339a03a",
         "filename": "src/dawn/native/BindingInfo.h",
         "patchSetId": 7
