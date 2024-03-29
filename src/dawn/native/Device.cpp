@@ -689,6 +689,13 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     // this call.
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
+    // Clearing the callback and userdata is allowed because in Chromium they should be cleared
+    // after Dawn device is destroyed and before Dawn wire server is destroyed.
+    if (callback == nullptr) {
+        mUncapturedErrorCallback = nullptr;
+        mUncapturedErrorUserdata = nullptr;
+        return;
+    }
     if (IsLost()) {
         return;
     }
@@ -706,6 +713,13 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     // this call.
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
+    // Clearing the callback and userdata is allowed because in Chromium they should be cleared
+    // after Dawn device is destroyed and before Dawn wire server is destroyed.
+    if (callback == nullptr) {
+        mDeviceLostCallback = nullptr;
+        mDeviceLostUserdata = nullptr;
+        return;
+    }
     if (IsLost()) {
         return;
     }
