@@ -389,6 +389,12 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                                  "\nExpected entry layout: %s",
                                  i, layout);
                 return {};
+            },
+            [&](const StaticSamplerHolderBindingLayout& layout) -> MaybeError {
+                return DAWN_VALIDATION_ERROR(
+                    "Entry given at entries[%u], which has static sampler layout type and should "
+                    "not have bind group entry.",
+                    i);
             }));
     }
 
