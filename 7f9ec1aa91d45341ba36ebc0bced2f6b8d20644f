@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e86aa8_b94f0ecc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T14:51:40Z",
+      "side": 1,
+      "message": "We should check that a WGSL shader that says `@group(0) @binding(0) var s : sampler;` is valid to use to create a pipeline with a PipelineLayout that has a static sampler at group 0, binding 0.",
+      "parentUuid": "ecb8c33b_59461ae3",
+      "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8774fac0_cbb08e75",

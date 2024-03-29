@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b30715bf_d7cbcd00",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T14:51:40Z",
+      "side": 1,
+      "message": "The error means that absl didn\u0027t know how to format `value.sampler`. Maybe add `.Get()` after the `sampler` so it\u0027s a pointer to a sampler and not a `Ref\u003cSamplerBase\u003e`.",
+      "parentUuid": "d410de5e_5a2fd963",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27cb15dd_3339a03a",
         "filename": "src/dawn/native/BindingInfo.h",
         "patchSetId": 7
@@ -244,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6785313d_62a69915",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T14:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b8e7304_6b8a2ae5",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "736c0f1e_869a1e0c",
@@ -279,6 +315,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3262c07b_5b58419f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T14:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e528120d_fbfb3103",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f592070_9c5f60bc",
@@ -310,6 +364,24 @@
       "side": 1,
       "message": "Done for all backends. I applied this to all of the handling that I added of the new variant in the backends - let me know if this seems over-aggressive in any case. In any case I figure that if there is anything that *is* over-aggressive with the frontend implementation, I would hit it as I build out and add tests of that implementation.",
       "parentUuid": "6f592070_9c5f60bc",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b642a431_ac92cfbd",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-03-29T14:51:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1e13e938_f4be0a70",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
