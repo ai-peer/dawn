@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e34c7cc2_17725ae7",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T15:14:18Z",
+      "side": 1,
+      "message": "I had tried that as well (see error below). Perhaps the \"%s\" needs to be something else in this case?\n\n../../third_party/dawn/src/dawn/native/webgpu_absl_format.cpp:191:31: error: \u0027FormatSpecTemplate\u003cvoid\u003e\u0027 is unavailable: Format specified does not match the arguments passed.\n  191 |     s-\u003eAppend(absl::StrFormat(\"{type: StaticSamplerBindingLayout, sampler: %s}\", value.sampler.Get()));\n      |                               ^\n../../third_party/abseil-cpp/absl/strings/internal/str_format/bind.h:141:3: note: \u0027FormatSpecTemplate\u003cvoid\u003e\u0027 has been explicitly marked unavailable here\n  141 |   FormatSpecTemplate(const char* s)  // NOLINT\n      |   ^",
+      "parentUuid": "b30715bf_d7cbcd00",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27cb15dd_3339a03a",
         "filename": "src/dawn/native/BindingInfo.h",
         "patchSetId": 7
