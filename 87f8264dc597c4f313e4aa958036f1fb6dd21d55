@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ac1254a4_f7a24e3f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T20:54:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192ecf44_a0530d66",
+      "revId": "87f8264dc597c4f313e4aa958036f1fb6dd21d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6a448f45_f010b105",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b91c0977_62d40c87",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T20:54:13Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "3a3ed987_2d7496a6",
+      "revId": "87f8264dc597c4f313e4aa958036f1fb6dd21d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8c18f64_aa47101e",
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a137b92_457c04f1",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T20:54:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8c18f64_aa47101e",
+      "revId": "87f8264dc597c4f313e4aa958036f1fb6dd21d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05eb91be_f0c37f1e",
@@ -82,6 +136,30 @@
       "writtenOn": "2024-03-29T16:22:36Z",
       "side": 1,
       "message": "the static_cast changes in RefBase.h are allow implicit conversion here from SharedResourceMemory to SharedTextureMemory.\n\nWe probably should make it explicit. Maybe give RefBase a Cast function?\n\nSomething like\n\n```\n    template \u003ctypename Other\u003e\n    Other Cast() \u0026\u0026 {\n        Other other;\n        CastImpl(this, other);\n        return other;\n    }\n\n  private:\n    template \u003ctypename U, typename UTraits, typename \u003d typename\nstd::is_convertible\u003cU, T\u003e::type\u003e\n    static void CastImpl(RefBase\u003cT, Traits\u003e* ref, RefBase\u003cU, UTraits\u003e* other) {\n        other-\u003eAcquire(static_cast\u003cU\u003e(ref-\u003eDetach()));\n    }\n```",
+      "range": {
+        "startLine": 1041,
+        "startChar": 16,
+        "endLine": 1042,
+        "endChar": 87
+      },
+      "revId": "87f8264dc597c4f313e4aa958036f1fb6dd21d55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d97365_5849105d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-29T20:54:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05eb91be_f0c37f1e",
       "range": {
         "startLine": 1041,
         "startChar": 16,
