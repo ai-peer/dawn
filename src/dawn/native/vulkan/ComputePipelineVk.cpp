@@ -115,7 +115,7 @@ MaybeError ComputePipeline::InitializeImpl() {
 
     // Record cache key information now since the createInfo is not stored.
     StreamIn(&mCacheKey, createInfo, layout,
-             stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
+             stream::Iterable(moduleAndSpirv.spirv.get(), moduleAndSpirv.wordCount));
 
     // Try to see if we have anything in the blob cache.
     platform::metrics::DawnHistogramTimer cacheTimer(GetDevice()->GetPlatform());
