@@ -317,7 +317,7 @@ ResultOrError<UnpackedPtr<BufferDescriptor>> ValidateBufferDescriptor(
 // Buffer
 
 BufferBase::BufferBase(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor)
-    : ApiObjectBase(device, descriptor->label),
+    : SharedResource(device, descriptor->label),
       mSize(descriptor->size),
       mUsage(AddInternalUsages(device, descriptor->usage)),
       mState(descriptor.Get<BufferHostMappedPointer>() ? BufferState::HostMappedPersistent
@@ -328,7 +328,7 @@ BufferBase::BufferBase(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& 
 BufferBase::BufferBase(DeviceBase* device,
                        const BufferDescriptor* descriptor,
                        ObjectBase::ErrorTag tag)
-    : ApiObjectBase(device, tag, descriptor->label),
+    : SharedResource(device, tag, descriptor->label),
       mSize(descriptor->size),
       mUsage(descriptor->usage),
       mState(descriptor->mappedAtCreation ? BufferState::MappedAtCreation : BufferState::Unmapped) {
@@ -883,6 +883,26 @@ ExecutionSerial BufferBase::GetLastUsageSerial() const {
 
 void BufferBase::SetHasAccess(bool hasAccess) {
     mState = hasAccess ? BufferState::Unmapped : BufferState::SharedMemoryNoAccess;
+}
+
+bool BufferBase::HasAccess() const {
+    return mState != BufferState::SharedMemoryNoAccess;
+}
+
+bool BufferBase::IsReadOnly() const {
+    return false;
+}
+
+bool BufferBase::IsDestroyed() const {
+    return mState == BufferState::Destroyed;
+}
+
+void BufferBase::SetInitialized(bool initialized) {
+    mIsDataInitialized = initialized;
+}
+
+bool BufferBase::IsInitialized() const {
+    return mIsDataInitialized;
 }
 
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {

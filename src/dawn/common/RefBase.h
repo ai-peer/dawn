@@ -107,13 +107,13 @@ class RefBase {
 
     template <typename U, typename UTraits, typename = typename std::is_convertible<U, T>::type>
     RefBase(RefBase<U, UTraits>&& other) {
-        mValue = other.Detach();
+        mValue = static_cast<T>(other.Detach());
     }
 
     template <typename U, typename UTraits, typename = typename std::is_convertible<U, T>::type>
     RefBase<T, Traits>& operator=(RefBase<U, UTraits>&& other) {
         Release(mValue);
-        mValue = other.Detach();
+        mValue = static_cast<T>(other.Detach());
         return *this;
     }
 
