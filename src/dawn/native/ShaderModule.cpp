@@ -907,6 +907,9 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                 info.bindingInfo.emplace<ExternalTextureBindingInfo>();
                 break;
             }
+            case BindingInfoType::StaticSampler: {
+                return DAWN_VALIDATION_ERROR("Static samplers not supported in WGSL");
+            }
             default:
                 return DAWN_VALIDATION_ERROR("Unknown binding type in Shader");
         }
