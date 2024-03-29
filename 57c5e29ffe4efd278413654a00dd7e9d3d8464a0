@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91058471_fa2efb95",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 72
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-29T22:26:45Z",
+      "side": 1,
+      "message": "Changed, so please take another look.",
+      "parentUuid": "1dcbfd0f_b8e4ec2b",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 42
+      },
+      "revId": "57c5e29ffe4efd278413654a00dd7e9d3d8464a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e4fe1b7_f19c6cd1",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-03-28T14:30:46Z",
       "side": 1,
       "message": "Could be a follow-up but I believe that we should be able to always reserve the DeviceID in the server when receiving the RequestAdapter, which means that we can always call free here, irrespective of whether a device was actually created. This would remove the change in ServerAdapter to Free the device, as it is the client that does it.",
+      "revId": "57c5e29ffe4efd278413654a00dd7e9d3d8464a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3acabae_bcac30b5",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 72
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-29T22:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e4fe1b7_f19c6cd1",
       "revId": "57c5e29ffe4efd278413654a00dd7e9d3d8464a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

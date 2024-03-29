@@ -392,6 +392,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc22f59_00eed339",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 68
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-03-29T22:26:45Z",
+      "side": 1,
+      "message": "I decided to just try to pass it through the ctor through everything. A bit more boilerplate, but hopefully this solution satisfies all the comments.",
+      "parentUuid": "7c9f1e6b_455a4a79",
+      "revId": "1e4a52dca4b2ebb791f59ec029c3c43782d32e4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "186a6e8c_31e37248",
