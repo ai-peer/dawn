@@ -69,6 +69,24 @@
       "parentUuid": "0a7fa755_f739dd45",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e851c96c_7669f378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-29T00:16:48Z",
+      "side": 1,
+      "message": "Align-down meaning if you get a 452-byte buffer, we tell you that it is only 256-bytes big.\n\nThus, it\u0027s invalid to bind the buffer to a uniform buffer binding that is 257-bytes or larger.\n\nSo the buffer you get appears to be smaller and the rest of Dawn\u0027s validation treats it as smaller.",
+      "parentUuid": "f52ab99c_5f54ca2a",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
