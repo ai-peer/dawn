@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0f60921_33844ffd",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "Removed change.",
+      "parentUuid": "c9f49638_cfc4db01",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6204f683_a13eee27",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 2
@@ -160,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69a4395f_40eeb3f3",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "OK I see std::vector should be calling calling constructor/destructor correctly so I will use raw_ptr here.",
+      "parentUuid": "b7f6ebd1_55da7139",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be8092c1_1ba3bf0d",
         "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 2
@@ -171,6 +213,24 @@
       "writtenOn": "2024-03-28T15:19:16Z",
       "side": 1,
       "message": "We can do a raw_ptr here.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1391df_83fedb17",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be8092c1_1ba3bf0d",
       "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25303402_1413cb36",
+        "filename": "src/dawn/platform/metrics/HistogramMacros.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "Used raw_ptr.",
+      "parentUuid": "d8ea8156_fb3cb6d1",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf005508_70335503",
         "filename": "src/dawn/tests/MockCallback.h",
         "patchSetId": 2
@@ -205,6 +283,24 @@
       "writtenOn": "2024-03-28T15:19:16Z",
       "side": 1,
       "message": "ditto these could be a raw_ptr.",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dbc228a_80bcbd24",
+        "filename": "src/dawn/tests/MockCallback.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf005508_70335503",
       "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -226,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e41631f_6774e729",
+        "filename": "src/dawn/tests/end2end/EventTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd496de_219567a0",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad81b5d_0d32a2f5",
@@ -239,6 +353,24 @@
       "writtenOn": "2024-03-28T15:19:16Z",
       "side": 1,
       "message": "ditto",
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c682b8b_afd28612",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "As explained below I will keep global-scope exclusions.",
+      "parentUuid": "fad81b5d_0d32a2f5",
       "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -304,6 +436,30 @@
       "side": 1,
       "message": "Except if I am missing something, I don\u0027t believe it is needed to exclude globals per se.\n\nGlobal\u0027s memory is in the data or bss segment. The implementation of raw_ptr \"knows\" the memory is not managed by partition_alloc. It won\u0027t do much, and will fallback gracefully.\n\nI think I would agree using raw_ptr anyway, for consistency. If we can.",
       "parentUuid": "5973df12_1e64e4d5",
+      "range": {
+        "startLine": 103,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3858d2e6_22b9a636",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-03-29T08:20:10Z",
+      "side": 1,
+      "message": "The problem is with the destructor.\nhttps://source.chromium.org/chromium/chromium/src/+/main:tools/clang/rewrite_raw_ptr_fields/tests/gen-global-scope-test.cc;l\u003d15?q\u003dtests%2Fgen-global-scope-test.cc#:~:text\u003d//%20Chromium%20is%20built,the%20fields%20below.\n\nSo I will keep this.",
+      "parentUuid": "4f4bd074_c07c94fe",
       "range": {
         "startLine": 103,
         "startChar": 61,
