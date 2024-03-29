@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3678b73_eee86a22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-29T09:36:24Z",
+      "side": 1,
+      "message": "Reading TSAN log, the problem is in ~Surface, especially where I do this:\n\n```\nmRecycledSwapChain-\u003eAPIRelease();\nmRecycledSwapChain \u003d nullptr;\n```\n\nThe \"\u003d nullptr\" line triggers the error and so I realize it does a little more than I thought. Is it because mRecycledSwapChain  being a Ref, setting it to nullptr automatically calls APIRelease on the objects it references, so that these two lines are redundant? Or is it that there is a different way than \"\u003d nullptr\" to reset the Ref to something that does not point to any valid value?\n\n\nPS: Austin, I think the line you suggested to add TSAN to tests did not work: \"builder \"chromium/try/dawn-try-linux-tsan-rel\" is included but not defined in the LUCI project\"",
+      "revId": "dd5d0119271f12fdbebd20ff0c71881d4eaf06a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
