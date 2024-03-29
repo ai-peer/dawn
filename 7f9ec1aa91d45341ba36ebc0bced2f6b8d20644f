@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb8c33b_59461ae3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Thank you! I\u0027m working on tests next, had wanted to get the production code in line and get that back out to you to look at in parallel :). If you have any suggestions on the formatting of the Sampler object, that\u0027s still a minor outstanding question.\n\nOne thing I didn\u0027t quite grok: What did you mean by \"we should check that a static sampler is valid to use with a WGSL regular sampler\"?",
+      "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8774fac0_cbb08e75",
@@ -31,6 +48,24 @@
       "writtenOn": "2024-03-29T13:20:05Z",
       "side": 1,
       "message": "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting\n\nSo maybe \"entries[%u] is provided when the layout contains a static sampler for that binding.\"",
+      "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96add6e6_bbe55bcd",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8774fac0_cbb08e75",
       "revId": "7f9ec1aa91d45341ba36ebc0bced2f6b8d20644f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

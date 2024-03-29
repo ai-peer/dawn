@@ -86,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4f0d44_8c7a8c5e",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa45b3c9_3a552b42",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7996a816_545869cf",
@@ -99,6 +117,24 @@
       "writtenOn": "2024-03-28T20:22:52Z",
       "side": 1,
       "message": "`s-\u003eAppend(absl::StrFormat(\"{type: StaticSampleBindingLayout, sampler: %s}\", value.sampler))` should work. Not sure if that matches the formatting for the other binding types though.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d410de5e_5a2fd963",
+        "filename": "src/dawn/native/BindingInfo.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Thanks! The formatting matches (I found this code in the generated code for the other ones). However, I was and am having trouble inputting the sampler:\n\n../../third_party/dawn/src/dawn/native/webgpu_absl_format.cpp:194:31: error: \u0027FormatSpecTemplate\u003cvoid\u003e\u0027 is unavailable: Format specified does not match the arguments passed.\n  194 |     s-\u003eAppend(absl::StrFormat(\"{type: StaticSamplerBindingLayout, sampler: %s}\", value.sampler));\n      |                               ^\n../../third_party/abseil-cpp/absl/strings/internal/str_format/bind.h:141:3: note: \u0027FormatSpecTemplate\u003cvoid\u003e\u0027 has been explicitly marked unavailable here\n  141 |   FormatSpecTemplate(const char* s)  // NOLINT",
+      "parentUuid": "7996a816_545869cf",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8abd3f28_8db0764a",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27cb15dd_3339a03a",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa43ff35_3beec387",
@@ -133,6 +187,24 @@
       "writtenOn": "2024-03-28T20:22:52Z",
       "side": 1,
       "message": "u-nit: slight preference to place on separate lines, for example by adding a // to force clang-format to respect a newline.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c37096e_45ab471c",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa43ff35_3beec387",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +228,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b8e7304_6b8a2ae5",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Thanks! Took out this comment for now - I figure that we\u0027ll add in the latter when we get to that point of functionality buildout.",
+      "parentUuid": "0e112886_c83c7f2a",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "736c0f1e_869a1e0c",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 7
@@ -167,6 +257,24 @@
       "writtenOn": "2024-03-28T20:22:52Z",
       "side": 1,
       "message": "That\u0027d never happen until we add some form of static sampler declaration to WGSL, so we can leave that to the defaulted case.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e528120d_fbfb3103",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Thanks! Put it as its own more-specific error, but let me know if you prefer it to just go to the default.",
+      "parentUuid": "736c0f1e_869a1e0c",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +298,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e13e938_f4be0a70",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done for all backends. I applied this to all of the handling that I added of the new variant in the backends - let me know if this seems over-aggressive in any case. In any case I figure that if there is anything that *is* over-aggressive with the frontend implementation, I would hit it as I build out and add tests of that implementation.",
+      "parentUuid": "6f592070_9c5f60bc",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d5d7bdf_4a05868b",
         "filename": "src/dawn/native/vulkan/BindGroupVk.cpp",
         "patchSetId": 7
@@ -201,6 +327,24 @@
       "writtenOn": "2024-03-28T17:59:02Z",
       "side": 1,
       "message": "I missed annotating this one but it\u0027s also a stub.",
+      "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79690cc7_dd989354",
+        "filename": "src/dawn/native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-03-29T14:34:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d5d7bdf_4a05868b",
       "revId": "367e4002e34536328538ebbd9a6d3ca1924ee185",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
