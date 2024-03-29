@@ -147,6 +147,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f191ee31_02d12e01",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-29T15:24:58Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a0f60921_33844ffd",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 51
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6204f683_a13eee27",
@@ -538,6 +562,30 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "3858d2e6_22b9a636",
+      "range": {
+        "startLine": 103,
+        "startChar": 61,
+        "endLine": 103,
+        "endChar": 73
+      },
+      "revId": "23d38aab752ec9c33643d63c1e2021079329add6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35033600_71a646dc",
+        "filename": "src/dawn/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-03-29T15:24:58Z",
+      "side": 1,
+      "message": "Note: @keishi@chromium.org, the chrome plugin might not emit errors anymore, thanks to this [change](https://source.chromium.org/chromium/chromium/src/+/main:tools/clang/plugins/FindBadConstructsConsumer.cpp;l\u003d773-782).",
+      "parentUuid": "d7831b13_6305f60b",
       "range": {
         "startLine": 103,
         "startChar": 61,
