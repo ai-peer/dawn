@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85d5f60e_cbd691c4",
+        "filename": "src/dawn/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-30T03:25:25Z",
+      "side": 1,
+      "message": "oh I meant to restore it to the original code: `mValue \u003d other.Detach();`\n\n\nOriginally, the `static_cast` was only necessary to handle converting from SharedResourceMemory to SharedTextureMemoryBase at [1]. However, implicitly allowing it was not ideal, so I suggested adding the `Cast` function which you\u0027re now explicitly using.\n\nNow that you have the explicit `Cast` call, we shouldn\u0027t need these `static_cast` anymore since we\u0027re no longer invoking the move constructor with a different Ref type.",
+      "parentUuid": "5bf3a3b3_8959301f",
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66f3f140_0ff13789",
         "filename": "src/dawn/common/RefBase.h",
         "patchSetId": 3

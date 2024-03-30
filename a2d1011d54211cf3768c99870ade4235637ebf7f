@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af65ea98_667fdc5a",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1041,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-03-30T03:25:25Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a2d1011d54211cf3768c99870ade4235637ebf7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
