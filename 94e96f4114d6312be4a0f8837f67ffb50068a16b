@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bf3a3b3_8959301f",
+        "filename": "src/dawn/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-30T01:02:28Z",
+      "side": 1,
+      "message": "I\u0027m getting a number of errors if I change this to `other.Detach()-\u003etemplate Cast\u003cT\u003e();`\n\nno member named \u0027Cast\u0027 in \u0027RequestDeviceEvent\u0027\t\nno member named \u0027Cast\u0027 in \u0027PopErrorScopeEvent\u0027\nno member named \u0027Cast\u0027 in \u0027ErrorComputePipeline\u0027\netc.",
+      "parentUuid": "82ed1e90_09f976b1",
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66f3f140_0ff13789",
         "filename": "src/dawn/common/RefBase.h",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2024-03-29T22:34:37Z",
       "side": 1,
       "message": "remove this static cast now",
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105a41cb_0e457d0e",
+        "filename": "src/dawn/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-30T01:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f3f140_0ff13789",
       "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +84,30 @@
       "writtenOn": "2024-03-29T22:34:37Z",
       "side": 1,
       "message": "```suggestion\n                Ref\u003cSharedTextureMemoryBase\u003e memory \u003d\n                    mSharedResourceMemoryContents-\u003eGetSharedResourceMemory().Promote().Cast\u003cRef\u003cSharedTextureMemoryBase\u003e\u003e();\n```",
+      "range": {
+        "startLine": 1041,
+        "startChar": 54,
+        "endLine": 1042,
+        "endChar": 88
+      },
+      "revId": "94e96f4114d6312be4a0f8837f67ffb50068a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5df9925_fa88e353",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1042,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-03-30T01:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dde3134d_7e2fd2b6",
       "range": {
         "startLine": 1041,
         "startChar": 54,
