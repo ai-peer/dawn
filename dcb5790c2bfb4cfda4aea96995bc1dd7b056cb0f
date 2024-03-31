@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfad14c_c28af024",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-03-31T09:05:37Z",
+      "side": 1,
+      "message": "Deactivate some config validation on windows vulkan nvidia CQ builders (like SwapChain tests do).\nTry reenabling swift shader tests",
+      "revId": "dcb5790c2bfb4cfda4aea96995bc1dd7b056cb0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
