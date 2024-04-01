@@ -152,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb357795_febc9808",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T16:05:50Z",
+      "side": 1,
+      "message": "I believe some clang warning might get triggered by the unused variable now, it\u0027s ok to just call the method and ignore the result.",
+      "parentUuid": "8029596c_26fca72d",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da52715_075829c7",
