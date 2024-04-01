@@ -52,6 +52,24 @@
       "parentUuid": "ea7c532b_4523334a",
       "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735b185a_e600c3f5",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-01T20:06:26Z",
+      "side": 1,
+      "message": "Are you saying we should remove formats not in the [Texel Formats for Storage Textures](https://gpuweb.github.io/gpuweb/wgsl/#storage-texel-formats) table?\n\ni.e. formats below https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/utils/TextureUtils.cpp;l\u003d845?q\u003dtextureutils.cpp\u0026ss\u003dchromium\n\nbecause this dawn api test shouldn\u0027t test these that should be tested in tint wgsl tests?",
+      "parentUuid": "3a530636_90b504a5",
+      "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
