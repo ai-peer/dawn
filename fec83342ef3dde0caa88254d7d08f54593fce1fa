@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "fec83342ef3dde0caa88254d7d08f54593fce1fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3e8226_2ae867b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T09:37:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fec83342ef3dde0caa88254d7d08f54593fce1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48815800_46150806",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T09:37:11Z",
+      "side": 1,
+      "message": "How does this fix the issue?",
+      "revId": "fec83342ef3dde0caa88254d7d08f54593fce1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
