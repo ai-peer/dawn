@@ -198,7 +198,7 @@ MaybeError ResidencyManager::EnsureCanAllocate(uint64_t allocationSize,
     uint64_t bytesEvicted;
     DAWN_TRY_ASSIGN(bytesEvicted,
                     EnsureCanMakeResident(allocationSize, GetMemorySegmentInfo(memorySegment)));
-    DAWN_UNUSED(bytesEvicted);
+    std::ignore = bytesEvicted;
 
     return {};
 }
@@ -312,7 +312,7 @@ MaybeError ResidencyManager::MakeAllocationsResident(MemorySegmentInfo* segment,
                                                      ID3D12Pageable** allocations) {
     uint64_t bytesEvicted;
     DAWN_TRY_ASSIGN(bytesEvicted, EnsureCanMakeResident(sizeToMakeResident, segment));
-    DAWN_UNUSED(bytesEvicted);
+    std::ignore = bytesEvicted;
 
     // Note that MakeResident is a synchronous function and can add a significant
     // overhead to command recording. In the future, it may be possible to decrease this

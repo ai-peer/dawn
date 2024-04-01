@@ -825,7 +825,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 bool cleared;
                 DAWN_TRY_ASSIGN(cleared, dstBuffer->EnsureDataInitializedAsDestination(
                                              commandContext, copy->destinationOffset, copy->size));
-                DAWN_UNUSED(cleared);
+                std::ignore = cleared;
 
                 srcBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopySrc);
                 dstBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
@@ -1069,7 +1069,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 DAWN_TRY_ASSIGN(
                     cleared, destination->EnsureDataInitializedAsDestination(
                                  commandContext, destinationOffset, queryCount * sizeof(uint64_t)));
-                DAWN_UNUSED(cleared);
+                std::ignore = cleared;
 
                 // Resolving unavailable queries is undefined behaviour on D3D12, we only can
                 // resolve the available part of sparse queries. In order to resolve the
@@ -1163,7 +1163,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 bool cleared;
                 DAWN_TRY_ASSIGN(cleared, dstBuffer->EnsureDataInitializedAsDestination(
                                              commandContext, offset, size));
-                DAWN_UNUSED(cleared);
+                std::ignore = cleared;
                 dstBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
                 commandList->CopyBufferRegion(
                     dstBuffer->GetD3D12Resource(), offset,

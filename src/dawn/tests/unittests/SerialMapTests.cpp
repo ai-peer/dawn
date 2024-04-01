@@ -46,7 +46,7 @@ TEST(SerialMap, BasicTest) {
 
     // Iterating on empty map 1) works 2) doesn't produce any values
     for (int value : map.IterateAll()) {
-        DAWN_UNUSED(value);
+        std::ignore = value;
         ASSERT_TRUE(false);
     }
 
@@ -69,7 +69,7 @@ TEST(SerialMap, BasicTest) {
     ASSERT_TRUE(map.Empty());
 
     for (int value : map.IterateAll()) {
-        DAWN_UNUSED(value);
+        std::ignore = value;
         ASSERT_TRUE(false);
     }
 }

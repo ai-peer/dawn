@@ -177,7 +177,7 @@
 
     //* Returns the required transfer size for `record` in addition to the transfer structure.
     DAWN_DECLARE_UNUSED size_t {{Return}}{{name}}GetExtraRequiredSize(const {{Return}}{{name}}{{Cmd}}& record) {
-        DAWN_UNUSED(record);
+        std::ignore = record;
         size_t result = 0;
 
         //* Gather how much space will be needed for the extension chain.
@@ -247,7 +247,7 @@
             , const ObjectIdProvider& provider
         {%- endif -%}
     ) {
-        DAWN_UNUSED(buffer);
+        std::ignore = buffer;
         //* Handle special transfer members of methods.
         {% if is_cmd %}
             transfer->commandId = {{Return}}WireCmd::{{name}};
@@ -343,7 +343,7 @@
             , const ObjectIdResolver& resolver
         {%- endif -%}
     ) {
-        DAWN_UNUSED(allocator);
+        std::ignore = allocator;
 
         {% if is_cmd %}
             DAWN_ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});

@@ -40,7 +40,7 @@ TEST(RangeTests, Empty) {
         if ((0)) {
             continue;
         }
-        DAWN_UNUSED(i);
+        std::ignore = i;
         FAIL();
     }
     for (auto i : Range(0, 0)) {
@@ -48,7 +48,7 @@ TEST(RangeTests, Empty) {
         if ((0)) {
             continue;
         }
-        DAWN_UNUSED(i);
+        std::ignore = i;
         FAIL();
     }
 }

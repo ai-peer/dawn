@@ -292,8 +292,8 @@ MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
 
 bool SharedTextureMemoryBase::APIEndAccess(TextureBase* texture, EndAccessState* state) {
     bool didEnd = false;
-    DAWN_UNUSED(GetDevice()->ConsumedError(EndAccess(texture, state, &didEnd),
-                                           "calling %s.EndAccess(%s).", this, texture));
+    std::ignore = GetDevice()->ConsumedError(EndAccess(texture, state, &didEnd),
+                                             "calling %s.EndAccess(%s).", this, texture);
     return didEnd;
 }
 

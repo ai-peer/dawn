@@ -132,7 +132,7 @@ DrawCallParam MakeParam(Ts... args) {
         0,  // Avoid making a 0-sized array.
         AssignParam(std::get<Ts>(paramTuple), args)...,
     };
-    DAWN_UNUSED(unused);
+    std::ignore = unused;
 
     return DrawCallParam{
         std::get<Pipeline>(paramTuple),     std::get<VertexBuffer>(paramTuple),

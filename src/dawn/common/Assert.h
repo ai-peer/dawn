@@ -29,6 +29,7 @@
 #define SRC_DAWN_COMMON_ASSERT_H_
 
 #include <cstdlib>
+#include <tuple>
 
 #include "dawn/common/Compiler.h"
 
@@ -88,7 +89,7 @@
 #else  // DAWN_COMPILER_IS(*)
 #define DAWN_ASSERT_CALLSITE_HELPER(file, func, line, condition) \
     do {                                                         \
-        DAWN_UNUSED(sizeof(condition));                          \
+        std::ignore = sizeof(condition);                         \
     } while (DAWN_ASSERT_LOOP_CONDITION)
 #endif  // DAWN_COMPILER_IS(*)
 

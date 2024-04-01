@@ -960,7 +960,7 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
     // the combined aspect without checking for disjoint support.
     // TODO(dawn:1548): Support multi-planar images with the DISJOINT feature and potentially allow
     // acting on planes individually? Always using Color is valid even for disjoint images.
-    DAWN_UNUSED(supportsDisjoint);
+    std::ignore = supportsDisjoint;
     DAWN_ASSERT(!GetFormat().IsMultiPlanar() || mCombinedAspect == Aspect::Color);
 
     mExternalState = ExternalState::PendingAcquire;

@@ -356,8 +356,8 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
     }
 
     if (mPendingMapRequest) {
-        DAWN_UNUSED(GetEventManager().SetFutureReady<MapAsyncEvent>(
-            futureIDInternal, WGPUBufferMapAsyncStatus_MappingAlreadyPending));
+        std::ignore = GetEventManager().SetFutureReady<MapAsyncEvent>(
+            futureIDInternal, WGPUBufferMapAsyncStatus_MappingAlreadyPending);
         return {futureIDInternal};
     }
 

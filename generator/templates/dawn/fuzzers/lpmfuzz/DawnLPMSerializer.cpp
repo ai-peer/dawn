@@ -140,7 +140,7 @@ namespace dawn::wire {
         {{WGPU}}{{ name }}{{ Cmd }} *mutable_record = const_cast<{{WGPU}}{{ name }}{{ Cmd }} *>(record);
 
         //* Some commands don't set any members.
-        DAWN_UNUSED(mutable_record);
+        std::ignore = mutable_record;
 
         //* Clear the entire structure to make optional handling simpler.
         memset(mutable_record, 0, sizeof({{WGPU}}{{ name }}{{ Cmd }}));

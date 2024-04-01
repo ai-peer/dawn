@@ -69,7 +69,7 @@ TEST_F(BitSetIteratorTest, EmptySet) {
     // causing an unreachable code warning in MSVC
     bool sawBit = false;
     for (uint32_t bit : IterateBitSet(mStateBits)) {
-        DAWN_UNUSED(bit);
+        std::ignore = bit;
         sawBit = true;
     }
     EXPECT_FALSE(sawBit);
@@ -137,7 +137,7 @@ TEST_F(EnumBitSetIteratorTest, EmptySet) {
     // causing an unreachable code warning in MSVC
     bool sawBit = false;
     for (TestEnum bit : IterateBitSet(mStateBits)) {
-        DAWN_UNUSED(bit);
+        std::ignore = bit;
         sawBit = true;
     }
     EXPECT_FALSE(sawBit);
@@ -203,7 +203,7 @@ TEST_F(ITypBitsetIteratorTest, EmptySet) {
     // causing an unreachable code warning in MSVC
     bool sawBit = false;
     for (IntegerT bit : IterateBitSet(mStateBits)) {
-        DAWN_UNUSED(bit);
+        std::ignore = bit;
         sawBit = true;
     }
     EXPECT_FALSE(sawBit);

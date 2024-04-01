@@ -750,7 +750,7 @@ Ref<TextureBase> Device::CreateTextureWrappingVulkanImage(
         !descriptor->isInitialized) {
         bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
             "External textures with multiplanar formats must be initialized."));
-        DAWN_UNUSED(consumed);
+        std::ignore = consumed;
         return nullptr;
     }
 

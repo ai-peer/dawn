@@ -689,7 +689,7 @@ void BufferBase::APIUnmap() {
     if (GetDevice()->ConsumedError(ValidateUnmap(), "calling %s.Unmap().", this)) {
         return;
     }
-    DAWN_UNUSED(GetDevice()->ConsumedError(Unmap(), "calling %s.Unmap().", this));
+    std::ignore = GetDevice()->ConsumedError(Unmap(), "calling %s.Unmap().", this);
 }
 
 MaybeError BufferBase::Unmap() {

@@ -58,9 +58,9 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(const PhysicalDevice* physicalDe
     VkInstance instance = physicalDevice->GetVulkanInstance()->GetVkInstance();
 
     // May not be used in the platform-specific switches below.
-    DAWN_UNUSED(info);
-    DAWN_UNUSED(fn);
-    DAWN_UNUSED(instance);
+    std::ignore = info;
+    std::ignore = fn;
+    std::ignore = instance;
 
     switch (surface->GetType()) {
 #if defined(DAWN_ENABLE_BACKEND_METAL)
