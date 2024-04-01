@@ -16,6 +16,80 @@
       "message": "@cwallez@chromium.org @enga@chromium.org PTAL, thanks!",
       "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c420630_106348d3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T14:38:40Z",
+      "side": 1,
+      "message": "u-nit: we could use `new (std::nothrow)` and return an OOM if the buffer is nullptr. See https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Buffer.cpp;drc\u003d3062636e503c9014077e322385a54db385f173f6;l\u003d99 for the helper we use internally.",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94250444_85a0c8e7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T14:38:40Z",
+      "side": 1,
+      "message": "```suggestion\n    if (size \u003d\u003d 0) {\n```",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd7e7e0_b9acf68b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T14:38:40Z",
+      "side": 1,
+      "message": "nit: `UploadBuffer` but also it could be declared in the .cpp since it is basically an implementation detail.",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8730603_0f678160",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T14:38:40Z",
+      "side": 1,
+      "message": "This first step to split things works, but we\u0027ll likely need to get to a place where d3d11::Buffer contains one or multiple \"backings\" like `UniformBacking`, `UploadOnlyBacking`, `GenericBacking` etc, which would allow more generic logic to fallback from one to another, and would untangle the complicated conditions around constant vs non-constant vs upload in BufferD3D11.cpp",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
