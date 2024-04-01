@@ -168,17 +168,18 @@ struct SubmittedWorkDone : TrackTaskCallback {
                      uint64_t(mSerial));
         mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
         mCallback = nullptr;
+        mUserdata = nullptr;
     }
     void HandleDeviceLossImpl() override {
         DAWN_ASSERT(mCallback != nullptr);
         mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
         mCallback = nullptr;
+        mUserdata = nullptr;
     }
     void HandleShutDownImpl() override { HandleDeviceLossImpl(); }
 
     WGPUQueueWorkDoneCallback mCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 };
 
 class ErrorQueue : public QueueBase {
