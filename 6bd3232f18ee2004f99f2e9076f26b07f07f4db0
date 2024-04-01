@@ -170,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "933c18c6_29b22c91",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T16:08:15Z",
+      "side": 1,
+      "message": "Ah, thanks for the catch.",
+      "parentUuid": "bb357795_febc9808",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da52715_075829c7",
