@@ -34,6 +34,29 @@
       "parentUuid": "0b2cb2c8_96c1cd57",
       "revId": "2eaa86faf8ad263e938583eb552a382c88a735ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4ad69c_6ff23ac0",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-01T20:41:29Z",
+      "side": 0,
+      "message": "we should change this test to test(s) that if you enable the BGRA8Unorm storage feature:\n - you can get the auto bind group layout (without errors)\n - you can make a pipeline layout explicitly with the bgra8unorm storage format, successfully, and you can pass that layout to CreatePipeline successfully (shader + bgl match).\n\nand make sure we have tests that check if the feature is disabled, ^those things are validation errors\n\n\nessentially, BGRA8Unorm storage in the _shader module_ is OK. Once you use that with a pipeline (either with an explicit or an implicit layout), then it should be an error.",
+      "range": {
+        "startLine": 306,
+        "startChar": 0,
+        "endLine": 313,
+        "endChar": 1
+      },
+      "revId": "2eaa86faf8ad263e938583eb552a382c88a735ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
