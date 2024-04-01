@@ -16,6 +16,23 @@
       "message": "LGTM, nice!",
       "revId": "7e3191684a74d99dad942a9cc15fb0bfa0bc8af5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d5eefc_b75b0590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-01T16:51:14Z",
+      "side": 1,
+      "message": "yay TSAN bot passed too!",
+      "revId": "7e3191684a74d99dad942a9cc15fb0bfa0bc8af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
