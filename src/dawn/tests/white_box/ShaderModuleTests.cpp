@@ -375,7 +375,9 @@ TEST_P(ShaderModuleTests, CreateComputePipelineAsync) {
         EXPECT_LE(shaderModule->GetExternalRefCountForTesting(), 2ull);
         EXPECT_NE(shaderModule->GetExternalRefCountForTesting(), 0ull);
     } else {
-        EXPECT_EQ(shaderModule->GetExternalRefCountForTesting(), 1ull);
+        // Now we are creating CreateComputePipelineAsyncEvent with SystemEvent for all conditions,
+        // The extra mScopedUseShaderPrograms exists.
+        EXPECT_EQ(shaderModule->GetExternalRefCountForTesting(), 2ull);
         do {
             WaitABit();
         } while (!task.isCompleted);
