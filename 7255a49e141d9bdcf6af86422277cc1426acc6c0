@@ -70,6 +70,24 @@
       "parentUuid": "3a530636_90b504a5",
       "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2793a1f_a658a839",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-01T20:09:46Z",
+      "side": 1,
+      "message": "yes, because this test should be testing that we correctly validate storage capabilities for a foramt. However, if we use unsupported formats, we\u0027ll be getting a different error. It won\u0027t be about storage, it\u0027ll be Tint saying \"idk what this format is\"",
+      "parentUuid": "735b185a_e600c3f5",
+      "revId": "7255a49e141d9bdcf6af86422277cc1426acc6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
