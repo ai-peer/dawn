@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eddb121_bc4daeb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T15:35:14Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ff62d5_82a1f1a6",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T15:35:14Z",
+      "side": 1,
+      "message": "Non-static-sampler is going to confuse JS developers, how about:\n\n```suggestion\n                    \"Number of entries (%u) did not match the expected number of entries (%u) for %s.\"\n```",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a83772c1_c4739268",
@@ -37,6 +71,23 @@
         "endLine": 1919,
         "endChar": 30
       },
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54aa75a_a0fd4529",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-01T15:35:14Z",
+      "side": 1,
+      "message": "note: for this test it should be sufficient to create the pipeline. Unittests don\u0027t actually run on the GPU so we can\u0027t know that the sampler was actually bound in SetBindGroup. So my suggestion is to end the test with just `device.CreateComputePipeline(\u0026pipelineDesc);`",
       "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
