@@ -200,7 +200,7 @@ void PhysicalDeviceBase::SetSupportedFeaturesForTesting(
 }
 
 void PhysicalDeviceBase::ResetInternalDeviceForTesting() {
-    mInstance->ConsumedError(ResetInternalDeviceForTestingImpl());
+    std::ignore = mInstance->ConsumedError(ResetInternalDeviceForTestingImpl());
 }
 
 MaybeError PhysicalDeviceBase::ResetInternalDeviceForTestingImpl() {
