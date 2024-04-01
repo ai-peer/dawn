@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-28 06:49:31AM
+# Last rolled: 2024-04-01 07:18:40AM
 
 # Flaky on all platforms
 # KEEP
@@ -513,4 +513,5 @@ crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,bu
 ################################################################################
 # New failures. Please triage:
 ################################################################################
+crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,bitcast:ai_to_f32:* [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,validation,functions,restrictions:function_parameter_types:case="invalid_ptr8" [ Failure ]
