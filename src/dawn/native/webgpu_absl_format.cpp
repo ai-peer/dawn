@@ -39,6 +39,7 @@
 #include "dawn/native/PerStage.h"
 #include "dawn/native/ProgrammableEncoder.h"
 #include "dawn/native/RenderPipeline.h"
+#include "dawn/native/Sampler.h"
 #include "dawn/native/ShaderModule.h"
 #include "dawn/native/Subresource.h"
 #include "dawn/native/Surface.h"
@@ -126,6 +127,10 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
                                       BindingInfoType::Sampler, layout));
         },
+        [&](const StaticSamplerHolderBindingLayout& layout) {
+            s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
+                                      BindingInfoType::StaticSampler, layout));
+        },
         [&](const TextureBindingLayout& layout) {
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
                                       BindingInfoType::Texture, layout));
@@ -177,6 +182,15 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
         s->Append(" (defaulted)");
     }
     s->Append("]");
+    return {true};
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const StaticSamplerHolderBindingLayout& value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    s->Append(
+        absl::StrFormat("{type: StaticSamplerBindingLayout, sampler: %s}", value.sampler.Get()));
     return {true};
 }
 
@@ -412,6 +426,9 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
             break;
         case BindingInfoType::ExternalTexture:
             s->Append("externalTexture");
+            break;
+        case BindingInfoType::StaticSampler:
+            s->Append("staticSampler");
             break;
     }
     return {true};
