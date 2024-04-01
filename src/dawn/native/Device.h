@@ -41,6 +41,7 @@
 #include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
+#include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ErrorSink.h"
 #include "dawn/native/ExecutionQueue.h"
@@ -398,9 +399,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     dawn::platform::WorkerTaskPool* GetWorkerTaskPool() const;
 
     // Enqueue a successfully-create async pipeline creation callback.
-    void AddComputePipelineAsyncCallbackTask(Ref<ComputePipelineBase> pipeline,
-                                             WGPUCreateComputePipelineAsyncCallback callback,
-                                             void* userdata);
+    // TODO(dawn:2353): Remove.
     void AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipeline,
                                             WGPUCreateRenderPipelineAsyncCallback callback,
                                             void* userdata);
@@ -408,10 +407,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // If the device is lost, then further errors should not be reported to
     // the application. Instead of an error, a successful callback is enqueued, using
     // an error pipeline created with `label`.
-    void AddComputePipelineAsyncCallbackTask(std::unique_ptr<ErrorData> error,
-                                             const char* label,
-                                             WGPUCreateComputePipelineAsyncCallback callback,
-                                             void* userdata);
+    // TODO(dawn:2353): Remove.
     void AddRenderPipelineAsyncCallbackTask(std::unique_ptr<ErrorData> error,
                                             const char* label,
                                             WGPUCreateRenderPipelineAsyncCallback callback,
@@ -440,6 +436,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
 
+    Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
+        Ref<ComputePipelineBase> computePipeline);
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -449,6 +448,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    void InitializeComputePipelineAsyncEventSyncBody(CreateComputePipelineAsyncEvent* event);
 
     // Device lost event needs to be protected for now because mock device needs it.
     // TODO(dawn:1702) Make this private and move the class in the implementation file when we mock
@@ -511,13 +512,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
         ComputePipelineBase* uninitializedComputePipeline);
     Ref<RenderPipelineBase> GetCachedRenderPipeline(
         RenderPipelineBase* uninitializedRenderPipeline);
-    Ref<ComputePipelineBase> AddOrGetCachedComputePipeline(
-        Ref<ComputePipelineBase> computePipeline);
     Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(Ref<RenderPipelineBase> renderPipeline);
     virtual Ref<PipelineCacheBase> GetOrCreatePipelineCacheImpl(const CacheKey& key);
-    virtual void InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                    WGPUCreateComputePipelineAsyncCallback callback,
-                                                    void* userdata);
+    virtual void InitializeComputePipelineAsyncImpl(Ref<CreateComputePipelineAsyncEvent> event);
     virtual void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                                    void* userdata);
