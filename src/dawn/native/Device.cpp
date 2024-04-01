@@ -1802,7 +1802,8 @@ void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* descripto
 
     UnpackedPtr<TextureDescriptor> unpacked;
     if (!ConsumedError(ValidateAndUnpack(&rawDescriptor), &unpacked)) {
-        DAWN_UNUSED(ConsumedError(ValidateTextureDescriptor(this, unpacked, allowMultiPlanar)));
+        [[maybe_unused]] bool hadError =
+            ConsumedError(ValidateTextureDescriptor(this, unpacked, allowMultiPlanar));
     }
 }
 
