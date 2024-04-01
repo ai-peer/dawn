@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3258de2_511253b4",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ff62d5_82a1f1a6",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a83772c1_c4739268",
@@ -65,6 +83,30 @@
       "writtenOn": "2024-04-01T15:31:34Z",
       "side": 1,
       "message": "nit: this descriptor is unused (you\u0027re using utils::MakeBindGroup instead)",
+      "range": {
+        "startLine": 1917,
+        "startChar": 2,
+        "endLine": 1919,
+        "endChar": 30
+      },
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad96ff88_9579435c",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1919,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a83772c1_c4739268",
       "range": {
         "startLine": 1917,
         "startChar": 2,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8029596c_26fca72d",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2661,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a54aa75a_a0fd4529",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da52715_075829c7",
@@ -105,6 +165,54 @@
       "writtenOn": "2024-04-01T15:31:34Z",
       "side": 1,
       "message": "unit: not necessary to assign the pipeline a name since you never use it.\n\n```suggestion\n    )\");\n    ASSERT_DEVICE_ERROR(device.CreateComputePipeline(\u0026pipelineDesc));\n```",
+      "range": {
+        "startLine": 2699,
+        "startChar": 8,
+        "endLine": 2701,
+        "endChar": 73
+      },
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c439f6_191e0fcb",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8da52715_075829c7",
+      "range": {
+        "startLine": 2699,
+        "startChar": 8,
+        "endLine": 2701,
+        "endChar": 73
+      },
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6779f2c_c3c55ad3",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 2701,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8da52715_075829c7",
       "range": {
         "startLine": 2699,
         "startChar": 8,
@@ -134,6 +242,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a507f9b_7eb2d3ad",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "As discussed offline, that\u0027s the test against `otherBgl` here.",
+      "parentUuid": "b4808191_aaf8a32a",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "170a14f8_b7ae1382",
         "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
         "patchSetId": 15
@@ -145,6 +271,24 @@
       "writtenOn": "2024-04-01T15:31:34Z",
       "side": 1,
       "message": "also test two different types of static samplers - i.e. if the actual parameters of the samplers are different, then the two bind group layouts should be different. So the actual contents of the sampler become part of the hash/equality comparison, not just whether or not it is static or not.",
+      "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aa001e6_331eb42d",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-01T15:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "170a14f8_b7ae1382",
       "revId": "6bd3232f18ee2004f99f2e9076f26b07f07f4db0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
