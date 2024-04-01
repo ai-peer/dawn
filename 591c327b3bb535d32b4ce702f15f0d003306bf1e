@@ -3,6 +3,142 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1406f43e_03281f21",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c36edca6_97ca8bec",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6cff2a_9e9f235e",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62363a5b_5669d65a",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc477e2_11fc32d0",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecda3d93_f56da1e9",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe3a0be_3649e832",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf256dd0_103f4ac8",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-04-01T07:18:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "591c327b3bb535d32b4ce702f15f0d003306bf1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "842d6519_2e3fcda9",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
