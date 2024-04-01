@@ -50,6 +50,24 @@
       "message": "How does this fix the issue?",
       "revId": "fec83342ef3dde0caa88254d7d08f54593fce1fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f0c2e8e_eb90f39d",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-01T10:11:03Z",
+      "side": 1,
+      "message": "`userdata` is a local variable and should not be a `raw_ptr` (the type of mMapUserdata). `uerdata` being in `raw_ptr` will cause dangling pointer issue when the `std::function` object (`std::bind(callback, actualStatus, userdata)`) is destroyed.",
+      "parentUuid": "48815800_46150806",
+      "revId": "fec83342ef3dde0caa88254d7d08f54593fce1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
