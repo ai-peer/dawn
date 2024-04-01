@@ -242,10 +242,26 @@ ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
     const TextureViewDescriptor* descriptor) {
     return TextureView::Create(texture, descriptor);
 }
-void Device::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> computePipeline,
-                                                WGPUCreateComputePipelineAsyncCallback callback,
-                                                void* userdata) {
-    ComputePipeline::InitializeAsync(std::move(computePipeline), callback, userdata);
+void Device::InitializeComputePipelineAsyncImpl(Ref<CreateComputePipelineAsyncEvent> event) {
+    PhysicalDeviceBase* physicalDevice = GetPhysicalDevice();
+    if (IsMetalValidationEnabled(physicalDevice) &&
+        gpu_info::IsAMD(physicalDevice->GetVendorId())) {
+        MaybeError maybeError;
+        {
+            SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
+            maybeError = event->mPipeline->Initialize();
+        }
+        DAWN_HISTOGRAM_BOOLEAN(GetPlatform(), "CreateComputePipelineSuccess",
+                               maybeError.IsSuccess());
+
+        if (maybeError.IsError()) {
+            event->mError = maybeError.AcquireError();
+        }
+        GetInstance()->GetEventManager()->SetFutureReady(event->mFutureID);
+        return;
+    }
+
+    event->InitializeAsync();
 }
 void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                                WGPUCreateRenderPipelineAsyncCallback callback,
