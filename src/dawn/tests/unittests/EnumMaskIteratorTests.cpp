@@ -55,8 +55,11 @@ static_assert(EnumBitmaskSize<TestAspect>::value == 3);
 
 TEST(EnumMaskIteratorTests, None) {
     for (TestAspect aspect : IterateEnumMask(static_cast<TestAspect>(0))) {
+        if (sizeof(aspect) != sizeof(aspect)) {
+            // Suppress "loop will run at most once" error
+            continue;
+        }
         FAIL();
-        DAWN_UNUSED(aspect);
     }
 }
 
