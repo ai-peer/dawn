@@ -124,9 +124,11 @@ MaybeError ComputePipeline::InitializeImpl() {
         // Cache misses, need to get pipeline cached blob and store.
         cacheTimer.RecordMicroseconds("D3D12.CreateComputePipelineState.CacheMiss");
         ComPtr<ID3DBlob> d3dBlob;
-        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
-                              "D3D12 compute pipeline state get cached blob"));
-        device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
+        if (!device->GetInstance()->ConsumedError(
+                CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+                             "D3D12 compute pipeline state get cached blob"))) {
+            device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
+        }
     } else {
         cacheTimer.RecordMicroseconds("D3D12.CreateComputePipelineState.CacheHit");
     }
