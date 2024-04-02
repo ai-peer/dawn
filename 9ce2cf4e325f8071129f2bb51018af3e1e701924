@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5384273_994c3e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-02T00:52:20Z",
+      "side": 1,
+      "message": "Sometimes this is less verbose, and sometimes it\u0027s a bit more verbose.\n\nOverall, I like not having our own macros for things that are available in C++17 though",
+      "revId": "9ce2cf4e325f8071129f2bb51018af3e1e701924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
