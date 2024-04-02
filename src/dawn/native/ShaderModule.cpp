@@ -33,6 +33,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/MatchVariant.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/ChainUtils.h"
@@ -1178,6 +1179,11 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
             layout->GetBindGroupLayout(pair.sampler.group);
         const BindingInfo& samplerInfo =
             samplerBGL->GetBindingInfo(samplerBGL->GetBindingIndex(pair.sampler.binding));
+        // TODO(blundell): How is this getting in here and what should we be
+        // doing here?
+        if (std::holds_alternative<StaticSamplerHolderBindingLayout>(samplerInfo.bindingLayout)) {
+            continue;
+        }
         const SamplerBindingLayout& samplerLayout =
             std::get<SamplerBindingLayout>(samplerInfo.bindingLayout);
         if (samplerLayout.type != wgpu::SamplerBindingType::Filtering) {

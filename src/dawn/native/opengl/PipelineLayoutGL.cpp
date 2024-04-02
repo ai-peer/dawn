@@ -70,7 +70,11 @@ PipelineLayout::PipelineLayout(Device* device,
                 [&](const StaticSamplerHolderBindingLayout&) {
                     // Static samplers are implemented in the frontend on
                     // GL.
-                    DAWN_UNREACHABLE();
+                    // DAWN_UNREACHABLE();
+                    // TODO(blundell): What to do here? Without incrementing
+                    // samplerIndex here, we hit an out-of-bounds error later.
+                    mIndexInfo[group][bindingIndex] = samplerIndex;
+                    samplerIndex++;
                 },
                 [&](const SamplerBindingLayout&) {
                     mIndexInfo[group][bindingIndex] = samplerIndex;
