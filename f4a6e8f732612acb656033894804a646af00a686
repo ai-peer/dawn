@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e147a9b0_585de246",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-02T16:36:05Z",
+      "side": 1,
+      "message": "+Austin\n\nI got this working for GLES/Swiftshader (happened to be the first backend I narrowed down to). The tests are ported from SamplerTests.cpp - I can potentially massage tests of static sampling into that file instead.\n\nAustin/Corentin, do the GL backend changes look like what you would expect for the \"frontend\" implementation? I hadn\u0027t realized that this would be more like the \"frontend of the backends\" so to speak.",
+      "revId": "f4a6e8f732612acb656033894804a646af00a686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
