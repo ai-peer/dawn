@@ -308,10 +308,23 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
 
                     gl.BindBufferRange(target, index, buffer, offset, binding.size);
                 },
-                [&](const StaticSamplerHolderBindingLayout&) {
+                [&](const StaticSamplerHolderBindingLayout& layout) {
                     // Static samplers are implemented in the frontend on
                     // GL.
-                    DAWN_UNREACHABLE();
+                    // DAWN_UNREACHABLE();
+                    Sampler* sampler = ToBackend(layout.sampler.Get());
+                    GLuint samplerIndex = indices[bindingIndex];
+
+                    for (PipelineGL::SamplerUnit unit :
+                         mPipeline->GetTextureUnitsForSampler(samplerIndex)) {
+                        // Only use filtering for certain texture units, because int
+                        // and uint texture are only complete without filtering
+                        if (unit.shouldUseFiltering) {
+                            gl.BindSampler(unit.unit, sampler->GetFilteringHandle());
+                        } else {
+                            gl.BindSampler(unit.unit, sampler->GetNonFilteringHandle());
+                        }
+                    }
                 },
                 [&](const SamplerBindingLayout&) {
                     Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
