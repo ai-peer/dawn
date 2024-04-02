@@ -2743,5 +2743,30 @@ TEST_F(ResolverTest, MaxNestDepthOfCompositeType_ArraysOfStruct_Invalid) {
     EXPECT_EQ(r()->error(), "12:34 error: array has nesting depth of 256, maximum is 255");
 }
 
+TEST_F(ResolverTest, PointerToHandleTexture) {
+    Func("helper",
+         Vector{
+             Param(
+                 Source{{12, 34}}, "sl",
+                 ty.ptr<function>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32()))),
+         },
+         ty.void_(), {});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a texture");
+}
+
+TEST_F(ResolverTest, PointerToHandleSampler) {
+    Func("helper",
+         Vector{
+             Param(Source{{12, 34}}, "sl",
+                   ty.ptr<function>(ty.sampler(core::type::SamplerKind::kSampler))),
+         },
+         ty.void_(), {});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a sampler");
+}
+
 }  // namespace
 }  // namespace tint::resolver
