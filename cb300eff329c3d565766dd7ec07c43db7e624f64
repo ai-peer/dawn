@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e915f44_7b28b6e5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-02T12:56:54Z",
+      "side": 1,
+      "message": "Cool, done!",
+      "parentUuid": "5c420630_106348d3",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94250444_85a0c8e7",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-01T14:38:40Z",
       "side": 1,
       "message": "```suggestion\n    if (size \u003d\u003d 0) {\n```",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4807508_4bfa879e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-02T12:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94250444_85a0c8e7",
       "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,48 @@
       "writtenOn": "2024-04-01T14:38:40Z",
       "side": 1,
       "message": "This first step to split things works, but we\u0027ll likely need to get to a place where d3d11::Buffer contains one or multiple \"backings\" like `UniformBacking`, `UploadOnlyBacking`, `GenericBacking` etc, which would allow more generic logic to fallback from one to another, and would untangle the complicated conditions around constant vs non-constant vs upload in BufferD3D11.cpp",
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1bfa45_e4216d55",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-02T12:56:54Z",
+      "side": 1,
+      "message": "Nice, didn\u0027t realize it could be in the cpp. Done!",
+      "parentUuid": "ecd7e7e0_b9acf68b",
+      "range": {
+        "startLine": 176,
+        "startChar": 6,
+        "endLine": 176,
+        "endChar": 18
+      },
+      "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7010ac98_a8d7a76b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-02T12:56:54Z",
+      "side": 1,
+      "message": "Insightful. Probably we will need to do that when adding `BufferMapExtendedUsages` support.",
+      "parentUuid": "c8730603_0f678160",
       "revId": "cb300eff329c3d565766dd7ec07c43db7e624f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
