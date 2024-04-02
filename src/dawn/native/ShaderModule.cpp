@@ -1178,6 +1178,10 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
             layout->GetBindGroupLayout(pair.sampler.group);
         const BindingInfo& samplerInfo =
             samplerBGL->GetBindingInfo(samplerBGL->GetBindingIndex(pair.sampler.binding));
+        if (std::holds_alternative<StaticSamplerHolderBindingLayout>(samplerInfo.bindingLayout)) {
+            // TODO(blundell): Get sampler type to do validation.
+            continue;
+        }
         const SamplerBindingLayout& samplerLayout =
             std::get<SamplerBindingLayout>(samplerInfo.bindingLayout);
         if (samplerLayout.type != wgpu::SamplerBindingType::Filtering) {
