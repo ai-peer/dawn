@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d4aeed0_325739eb",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T20:35:26Z",
+      "side": 1,
+      "message": "`tools/bin` used to hold the built go binaries, but that was changed a _long_ time ago. Did you check out an ancient CL or something?\n\nThis should not be necessary. Please revert.",
+      "parentUuid": "2f2e106d_0d323ce2",
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "370b43bb_58d7738e",
