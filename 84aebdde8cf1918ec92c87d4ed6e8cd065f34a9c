@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90c8295_d313a3ee",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-04-02T20:36:29Z",
+      "side": 1,
+      "message": "It doesn\u0027t harm anything does it? We just ignore a file that, in theory, shouldn\u0027t exist, but sometimes, apparently, can.",
+      "parentUuid": "6d4aeed0_325739eb",
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "370b43bb_58d7738e",
