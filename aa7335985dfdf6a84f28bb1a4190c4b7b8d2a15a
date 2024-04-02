@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "453ce603_06f765f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-02T09:50:29Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nI\u0027m doing TDD for this one and just wanted to confirm my test setup before I get too far in having it drive the implementation. I copied over SamplerTests.cpp and just changed the setup to have the sampler be set in the BGL rather than as part of the BindGroup (SamplerTests.cpp just gets the BGL from the created pipeline itself and then passes the sampler in the BindGroup). The concrete relevant code is lines 152-165 - the rest is all straight from SamplerTests.cpp.\n\nDoes this make sense as an end2end test to drive bringup of the frontend impl? Just want to make sure I don\u0027t mistakenly go off into the weeds!",
+      "revId": "aa7335985dfdf6a84f28bb1a4190c4b7b8d2a15a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
