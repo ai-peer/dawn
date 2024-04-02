@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3894ad2_657df8a2",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T19:25:11Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "370b43bb_58d7738e",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-04-02T19:21:50Z",
       "side": 1,
       "message": "PTAL.",
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a0dce3_4f8e921a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T19:25:11Z",
+      "side": 1,
+      "message": "+2 except for the .gitignore.",
       "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
