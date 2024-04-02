@@ -49,6 +49,7 @@
 /tools/golang
 /tools/memory
 /tools/rust
+/tools/bin/cts
 /out
 
 # Tint test validation cache file

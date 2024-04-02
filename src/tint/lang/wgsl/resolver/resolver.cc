@@ -847,6 +847,14 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param,
     }
 
     if (auto* ptr = ty->As<core::type::Pointer>()) {
+        if (ptr->StoreType()->Is<core::type::Texture>()) {
+            AddError(param->source) << "pointer can not be formed to a texture";
+            return nullptr;
+        } else if (ptr->StoreType()->Is<core::type::Sampler>()) {
+            AddError(param->source) << "pointer can not be formed to a sampler";
+            return nullptr;
+        }
+
         // For MSL, we push module-scope variables into the entry point as pointer
         // parameters, so we also need to handle their store type.
         if (!ApplyAddressSpaceUsageToType(ptr->AddressSpace(),
