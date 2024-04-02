@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b78d4a7_75b15087",
+        "filename": "src/tint/cmd/info/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T13:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f2e4545_b90b3b9e",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e7e05c3_490232ee",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "952f19d4_49f1c604",
+        "filename": "src/tint/lang/core/type/struct_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T13:45:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e7e05c3_490232ee",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03b4bae0_82a3a94c",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-03-18T14:21:15Z",
       "side": 1,
       "message": "Why is this ident needed now?",
+      "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fbed891_67f7740e",
+        "filename": "src/tint/lang/wgsl/resolver/address_space_layout_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T13:45:47Z",
+      "side": 1,
+      "message": "Source is on the structure name, not the entire structure.",
+      "parentUuid": "03b4bae0_82a3a94c",
       "revId": "b6002cee69649a2b1ec0f90438f3a675805f6de3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -16,6 +16,24 @@
       "message": "Why remove all the sources? Seems like a separate issue then the rest of this CL?",
       "revId": "a3802dfc90329ef3077c37ddc562a91422f65d14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e21dadd8_2d07f62e",
+        "filename": "src/tint/lang/wgsl/resolver/address_space_layout_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T13:45:47Z",
+      "side": 0,
+      "message": "We have a policy to not include `Source` in tests if that source is not used - that way you can tell whether it should appear in the test\u0027s expected diagnostics or not.",
+      "parentUuid": "14074137_944eaa17",
+      "revId": "a3802dfc90329ef3077c37ddc562a91422f65d14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
