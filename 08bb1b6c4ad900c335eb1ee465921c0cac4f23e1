@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4043b0ff_58769dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004687
+      },
+      "writtenOn": "2024-04-02T02:31:27Z",
+      "side": 1,
+      "message": "General structure LGTM! 😊",
+      "revId": "08bb1b6c4ad900c335eb1ee465921c0cac4f23e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67bf58ef_61ab6177",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1004687
+      },
+      "writtenOn": "2024-04-02T02:31:27Z",
+      "side": 1,
+      "message": "nit: Is there a reason this is here?\n```suggestion\n            [\u0026](const SamplerBindingLayout\u0026) {},\n```",
+      "range": {
+        "startLine": 163,
+        "startChar": 50,
+        "endLine": 163,
+        "endChar": 52
+      },
+      "revId": "08bb1b6c4ad900c335eb1ee465921c0cac4f23e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
