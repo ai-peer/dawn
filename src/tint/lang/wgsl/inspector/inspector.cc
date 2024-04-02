@@ -27,6 +27,7 @@
 
 #include "src/tint/lang/wgsl/inspector/inspector.h"
 
+#include <algorithm>
 #include <unordered_set>
 #include <utility>
 
@@ -1025,37 +1026,87 @@ void Inspector::GetOriginatingResources(std::array<const ast::Expression*, N> ex
 }
 
 std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::string& ep_name) {
-    std::vector<LevelSampleInfo> res;
-
-    std::unordered_set<BindingPoint> seen = {};
-
-    auto sample_type_for_call_and_type = [](wgsl::BuiltinFn builtin, const core::type::Type* ty) {
+    auto type_fn = [](wgsl::BuiltinFn builtin, const core::type::Type* ty) {
         if (builtin == wgsl::BuiltinFn::kTextureNumLevels) {
-            return TextureQueryType::kTextureNumLevels;
+            return TextureBuiltinType::kTextureNumLevels;
         }
         if (builtin == wgsl::BuiltinFn::kTextureLoad) {
             if (!ty->UnwrapRef()
                      ->IsAnyOf<core::type::MultisampledTexture,
                                core::type::DepthMultisampledTexture>()) {
-                return TextureQueryType::kTextureNumLevels;
+                return TextureBuiltinType::kTextureNumLevels;
             }
         }
 
-        return TextureQueryType::kTextureNumSamples;
+        return TextureBuiltinType::kTextureNumSamples;
     };
 
-    Hashmap<const sem::Function*, Hashmap<const ast::Parameter*, TextureQueryType, 4>, 8>
+    auto filter_fn = [](wgsl::BuiltinFn builtin) {
+        return builtin == wgsl::BuiltinFn::kTextureNumLevels ||
+               builtin == wgsl::BuiltinFn::kTextureNumSamples ||
+               builtin == wgsl::BuiltinFn::kTextureLoad;
+    };
+
+    auto usages = GetTextureUsage(ep_name, filter_fn, type_fn);
+
+    auto t = [](const TextureUsageInfo& info) -> LevelSampleInfo {
+        return {
+            info.type == TextureBuiltinType::kTextureNumSamples
+                ? TextureQueryType::kTextureNumSamples
+                : TextureQueryType::kTextureNumLevels,
+            info.group,
+            info.binding,
+        };
+    };
+
+    std::vector<LevelSampleInfo> res;
+    std::transform(usages.begin(), usages.end(), std::back_inserter(res), t);
+    return res;
+}
+
+std::vector<Inspector::LoadInfo> Inspector::GetTextureLoads(const std::string& ep_name) {
+    auto type_fn = [](wgsl::BuiltinFn builtin, const core::type::Type* ty) {
+        return TextureBuiltinType::kTextureLoad;
+    };
+
+    auto filter_fn = [](wgsl::BuiltinFn builtin) {
+        return builtin == wgsl::BuiltinFn::kTextureLoad;
+    };
+
+    auto usages = GetTextureUsage(ep_name, filter_fn, type_fn);
+
+    auto t = [](const TextureUsageInfo& info) -> LoadInfo {
+        return {
+            info.group,
+            info.binding,
+        };
+    };
+
+    std::vector<LoadInfo> res;
+    std::transform(usages.begin(), usages.end(), std::back_inserter(res), t);
+    return res;
+}
+
+std::vector<Inspector::TextureUsageInfo> Inspector::GetTextureUsage(
+    const std::string& ep_name,
+    std::function<bool(wgsl::BuiltinFn)> filter_fn,
+    std::function<TextureBuiltinType(wgsl::BuiltinFn, const core::type::Type*)> type_fn) {
+    std::vector<TextureUsageInfo> res;
+
+    std::unordered_set<BindingPoint> seen = {};
+
+    Hashmap<const sem::Function*, Hashmap<const ast::Parameter*, TextureBuiltinType, 4>, 8>
         fn_to_data;
 
-    auto record_function_param = [&fn_to_data](const sem::Function* func,
-                                               const ast::Parameter* param, TextureQueryType type) {
-        fn_to_data.GetOrAddZero(func).Add(param, type);
-    };
+    auto record_function_param =
+        [&fn_to_data](const sem::Function* func, const ast::Parameter* param,
+                      TextureBuiltinType type) { fn_to_data.GetOrAddZero(func).Add(param, type); };
 
-    auto save_if_needed = [&res, &seen](const sem::GlobalVariable* global, TextureQueryType type) {
+    auto save_if_needed = [&res, &seen](const sem::GlobalVariable* global,
+                                        TextureBuiltinType type) {
         auto binding = global->Attributes().binding_point.value();
         if (seen.insert(binding).second) {
-            res.emplace_back(LevelSampleInfo{type, binding.group, binding.binding});
+            res.emplace_back(TextureUsageInfo{type, binding.group, binding.binding});
         }
     };
 
@@ -1094,9 +1145,7 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
             tint::Switch(
                 call->Target(),
                 [&](const sem::BuiltinFn* builtin) {
-                    if (builtin->Fn() != wgsl::BuiltinFn::kTextureNumLevels &&
-                        builtin->Fn() != wgsl::BuiltinFn::kTextureNumSamples &&
-                        builtin->Fn() != wgsl::BuiltinFn::kTextureLoad) {
+                    if (!filter_fn(builtin->Fn())) {
                         return;
                     }
 
@@ -1104,7 +1153,7 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
                     auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
                     TINT_ASSERT(texture_sem);
 
-                    auto type = sample_type_for_call_and_type(builtin->Fn(), texture_sem->Type());
+                    auto type = type_fn(builtin->Fn(), texture_sem->Type());
 
                     tint::Switch(
                         texture_sem,  //

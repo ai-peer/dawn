@@ -39,6 +39,7 @@
 #include "src/tint/api/common/override_id.h"
 
 #include "src/tint/lang/core/builtin_value.h"
+#include "src/tint/lang/wgsl/builtin_fn.h"
 #include "src/tint/lang/wgsl/inspector/entry_point.h"
 #include "src/tint/lang/wgsl/inspector/resource_binding.h"
 #include "src/tint/lang/wgsl/inspector/scalar.h"
@@ -181,6 +182,19 @@ class Inspector {
     /// `textureNumLevels` so the binding point will always be one or the other.
     std::vector<LevelSampleInfo> GetTextureQueries(const std::string& ep);
 
+    /// Information on textureLoad calls by a given texture binding point
+    struct LoadInfo {
+        /// The group number
+        uint32_t group = 0;
+        /// The binding number
+        uint32_t binding = 0;
+    };
+
+    /// @param ep the entry point ot get the information for
+    /// @returns a vector of information for textures which call textureLoad. Each
+    /// binding point will only be returned once regardless of the number of calls made.
+    std::vector<LoadInfo> GetTextureLoads(const std::string& ep);
+
   private:
     const Program& program_;
     diag::List diagnostics_;
@@ -289,6 +303,34 @@ class Inspector {
     /// @param func the function of the entry point. Must be non-nullptr and true for IsEntryPoint()
     /// @returns the entry point information
     EntryPoint GetEntryPoint(const tint::ast::Function* func);
+
+    /// The information needed to be supplied.
+    enum class TextureBuiltinType : uint8_t {
+        /// Texture Num Levels
+        kTextureNumLevels,
+        /// Texture Num Samples
+        kTextureNumSamples,
+        /// Texture Load
+        kTextureLoad,
+    };
+
+    /// Information on level and sample calls by a given texture binding point
+    struct TextureUsageInfo {
+        /// The type of function
+        TextureBuiltinType type = TextureBuiltinType::kTextureNumLevels;
+        /// The group number
+        uint32_t group = 0;
+        /// The binding number
+        uint32_t binding = 0;
+    };
+
+    /// @param ep the entry point ot get the information for
+    /// @returns a vector of information for textures which call texture functions
+    /// Each binding point will only be returned once regardless of the number of calls made.
+    std::vector<TextureUsageInfo> GetTextureUsage(
+        const std::string& ep,
+        std::function<bool(wgsl::BuiltinFn)> filter_fn,
+        std::function<TextureBuiltinType(wgsl::BuiltinFn, const core::type::Type*)> type_fn);
 };
 
 }  // namespace tint::inspector
