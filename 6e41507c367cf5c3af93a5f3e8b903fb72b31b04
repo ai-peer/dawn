@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a221d1b_cc8b620b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-02T01:45:58Z",
+      "side": 1,
+      "message": "PTAL. Restored and rewritten with a clean cherry-pick over the first cherry-pick.",
+      "revId": "6e41507c367cf5c3af93a5f3e8b903fb72b31b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
