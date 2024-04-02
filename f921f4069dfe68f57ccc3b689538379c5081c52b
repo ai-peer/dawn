@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a92cbe3_902c41e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-02T19:22:31Z",
+      "side": 1,
+      "message": "Too slow! https://dawn-review.googlesource.com/c/dawn/+/181900",
+      "revId": "f921f4069dfe68f57ccc3b689538379c5081c52b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
