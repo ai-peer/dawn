@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1f5b8433_d7868bb0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-04-02T07:23:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f37eea_58281163",
+      "revId": "69ffdced97371d12b961557b868f5698dc2aaf74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b74a31b1_547402f8",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 13
@@ -54,6 +72,30 @@
       "writtenOn": "2024-03-29T02:10:58Z",
       "side": 1,
       "message": "I want to simplify this but it\u0027s a little annoying to do so right now because the parsing fix has not relanded yet. It is waiting on Brian\u0027s CL to split the worker tests into separate steps, after which I hope I can land it.\n\nIn particular, I\u0027m pretty sure `use_worker` is dead and should be removed, and `TestWorker` should be deprecated and removed too.\n\nI realized that the code in CTS should be simplified too. I\u0027ll incorporate that in my reland.",
+      "range": {
+        "startLine": 181,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 78
+      },
+      "revId": "69ffdced97371d12b961557b868f5698dc2aaf74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f885329e_6a0c5567",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 13
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-04-02T07:23:03Z",
+      "side": 1,
+      "message": "IIUC, I\u0027ll merge this CL and then you\u0027ll clean this part.",
+      "parentUuid": "5446dc53_8b610b63",
       "range": {
         "startLine": 181,
         "startChar": 0,
