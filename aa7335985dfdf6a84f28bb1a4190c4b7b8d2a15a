@@ -16,6 +16,24 @@
       "message": "Hi Corentin,\n\nI\u0027m doing TDD for this one and just wanted to confirm my test setup before I get too far in having it drive the implementation. I copied over SamplerTests.cpp and just changed the setup to have the sampler be set in the BGL rather than as part of the BindGroup (SamplerTests.cpp just gets the BGL from the created pipeline itself and then passes the sampler in the BindGroup). The concrete relevant code is lines 152-165 - the rest is all straight from SamplerTests.cpp.\n\nDoes this make sense as an end2end test to drive bringup of the frontend impl? Just want to make sure I don\u0027t mistakenly go off into the weeds!",
       "revId": "aa7335985dfdf6a84f28bb1a4190c4b7b8d2a15a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "659ac17d_cd2bdf95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-02T12:21:26Z",
+      "side": 1,
+      "message": "BTW, I\u0027m working through technical details of the test setup (getting the bind group layout correct, specifying the pipeline layout explicitly when creating the pipeline, ...). To save you cycles, I don\u0027t need you to look at that level at this point - just looking for validation that the test makes sense at a high-level as an exercise of static sampler functionality. Thanks!",
+      "parentUuid": "453ce603_06f765f0",
+      "revId": "aa7335985dfdf6a84f28bb1a4190c4b7b8d2a15a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
