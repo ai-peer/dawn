@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b7d676e_04610155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-02T19:07:44Z",
+      "side": 1,
+      "message": "LGTM. Just minor nits.",
+      "revId": "cfaa53ffa3bcc7cd1960f9f2091c4f8377c2f6ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5697de35_2f24a4ef",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-02T19:07:44Z",
+      "side": 1,
+      "message": "nit: not necessary, right?",
+      "range": {
+        "startLine": 177,
+        "startChar": 42,
+        "endLine": 177,
+        "endChar": 52
+      },
+      "revId": "cfaa53ffa3bcc7cd1960f9f2091c4f8377c2f6ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76aa086_8af6600c",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-02T19:07:44Z",
+      "side": 1,
+      "message": "nit:\n```suggestion\n                                               /*allowUploadBufferEmulation\u003d*/false));\n```",
+      "range": {
+        "startLine": 564,
+        "startChar": 47,
+        "endLine": 564,
+        "endChar": 77
+      },
+      "revId": "cfaa53ffa3bcc7cd1960f9f2091c4f8377c2f6ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "290b475d_38e03eb2",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-02T19:07:44Z",
+      "side": 1,
+      "message": "```suggestion\n                                           /*allowUploadBufferEmulation\u003d*/false));\n```",
+      "range": {
+        "startLine": 585,
+        "startChar": 43,
+        "endLine": 585,
+        "endChar": 73
+      },
+      "revId": "cfaa53ffa3bcc7cd1960f9f2091c4f8377c2f6ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
