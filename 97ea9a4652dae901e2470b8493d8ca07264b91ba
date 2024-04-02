@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f22c4402_e170e785",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-02T11:54:44Z",
+      "side": 1,
+      "message": "Hmm, this check is failing on the Win-MSVC bots [1]. AFAICT both D3D11 and D3D12 have distinct address modes for ClampToEdge and Repeat [1][2], and if I\u0027m reading the code correctly, the `BindGroupLayoutEq()` check should take this into account [4]. Austin/Corentin: Do you see anything I\u0027m missing?\n\n[1] https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8751778121630703649/+/u/Run_the_Dawn_unittests/stdout\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/SamplerD3D11.cpp;l\u003d42?q\u003dD3D11TextureAddressMode\u0026ss\u003dchromium\n[3] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/SamplerD3D12.cpp;l\u003d38-47?q\u003dSamplerD3D12.\u0026ss\u003dchromium\n[4] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Sampler.cpp;l\u003d143?q\u003dSampler.cpp\u0026ss\u003dchromium",
+      "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
