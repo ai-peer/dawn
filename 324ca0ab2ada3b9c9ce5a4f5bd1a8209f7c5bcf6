@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec503082_0c6ff53e",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-02T18:09:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3424c05f_82845522",
+      "range": {
+        "startLine": 300,
+        "startChar": 48,
+        "endLine": 300,
+        "endChar": 62
+      },
+      "revId": "324ca0ab2ada3b9c9ce5a4f5bd1a8209f7c5bcf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4cd31f2_55ea6a3c",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-04-02T17:48:21Z",
       "side": 1,
       "message": "maybe just CreateBindGroupLayout actually. No need to make the pipeline. the BGL should be an error, and then of course the pipeline layout and pipeline will be errors after that.",
+      "range": {
+        "startLine": 320,
+        "startChar": 48,
+        "endLine": 320,
+        "endChar": 80
+      },
+      "revId": "324ca0ab2ada3b9c9ce5a4f5bd1a8209f7c5bcf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e681a049_cf0e86bb",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-02T18:09:08Z",
+      "side": 1,
+      "message": "Done (Add a CreateBindGroupLayout test. Still keep `CreatePipelineWithExplicitLayout` when the feature is required)",
+      "parentUuid": "d4cd31f2_55ea6a3c",
       "range": {
         "startLine": 320,
         "startChar": 48,
