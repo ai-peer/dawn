@@ -71,9 +71,11 @@ void CreateComputePipelineAsyncTask::Run() {
                            maybeError.IsSuccess());
     if (maybeError.IsError()) {
         device->AddComputePipelineAsyncCallbackTask(
-            maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback, mUserdata);
+            maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback,
+            mUserdata.ExtractAsDangling());
     } else {
-        device->AddComputePipelineAsyncCallbackTask(mComputePipeline, mCallback, mUserdata);
+        device->AddComputePipelineAsyncCallbackTask(
+            mComputePipeline, mCallback, mUserdata.ExtractAsDangling());
     }
 }
 
@@ -129,9 +131,11 @@ void CreateRenderPipelineAsyncTask::Run() {
                            maybeError.IsSuccess());
     if (maybeError.IsError()) {
         device->AddRenderPipelineAsyncCallbackTask(
-            maybeError.AcquireError(), mRenderPipeline->GetLabel().c_str(), mCallback, mUserdata);
+            maybeError.AcquireError(), mRenderPipeline->GetLabel().c_str(), mCallback,
+            mUserdata.ExtractAsDangling());
     } else {
-        device->AddRenderPipelineAsyncCallbackTask(mRenderPipeline, mCallback, mUserdata);
+        device->AddRenderPipelineAsyncCallbackTask(
+            mRenderPipeline, mCallback, mUserdata.ExtractAsDangling());
     }
 }
 
