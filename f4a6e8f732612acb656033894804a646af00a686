@@ -51,6 +51,24 @@
       "parentUuid": "e147a9b0_585de246",
       "revId": "f4a6e8f732612acb656033894804a646af00a686",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed3fac3a_1eb9ef87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-02T17:38:09Z",
+      "side": 1,
+      "message": "(didn\u0027t really look at tests yet, just responding to this thread)\n\nSo it\u0027s not exactly what I expected, but this solution is pretty simple. I imagine the solution is pretty similar in the other backends as well.\n\nWhat I expected was that in ExtractAndExpandBglEntries we would do something like convert the static sampler binding layouts to normal sampler binding layouts (and store the static sampler elsewhere in the BGL).\nThen, in DeviceBase::CreateBindGroup, after validation, we would patch up the descriptor the application passed in to include a new entry which has the sampler from the BGL in it.\nThen.. all the backends would take the normal sampler route and the static sampler path could remain UNREACHABLE.\n^^ details of all that TBD.\n\nThat said, given how simple your solution is, if it continues to be that simple in the other backends, maybe it\u0027s better..? essentially - we polyfill in the backend, not in the frontend. Because the backend polyfill is so straightforward.",
+      "parentUuid": "18ec8693_aaa4ef4c",
+      "revId": "f4a6e8f732612acb656033894804a646af00a686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
