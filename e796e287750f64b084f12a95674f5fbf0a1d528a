@@ -33,6 +33,23 @@
       "message": "LGTM too",
       "revId": "e796e287750f64b084f12a95674f5fbf0a1d528a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "119e3b47_6ab2b170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 74
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-02T05:37:01Z",
+      "side": 1,
+      "message": "I don\u0027t think I have opinions about anything that has changed since my earlier reviews, so deferring to the other LGTMs",
+      "revId": "e796e287750f64b084f12a95674f5fbf0a1d528a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
