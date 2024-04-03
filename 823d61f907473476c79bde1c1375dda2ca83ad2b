@@ -22,6 +22,30 @@
       },
       "revId": "823d61f907473476c79bde1c1375dda2ca83ad2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf855202_245fe0fc",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T09:27:02Z",
+      "side": 1,
+      "message": "Sorry, these are valid - there\u0027s no parameterized cases for these. Ignore me!",
+      "parentUuid": "f2aacd06_8a378fc5",
+      "range": {
+        "startLine": 574,
+        "startChar": 119,
+        "endLine": 574,
+        "endChar": 120
+      },
+      "revId": "823d61f907473476c79bde1c1375dda2ca83ad2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
