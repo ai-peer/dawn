@@ -68,10 +68,7 @@ struct State {
     void Process() {
         // Find the builtins that need replacing.
         Vector<core::ir::CoreBuiltinCall*, 4> worklist;
-        for (auto* inst : ir.instructions.Objects()) {
-            if (!inst->Alive()) {
-                continue;
-            }
+        for (auto* inst : ir.Instructions()) {
             if (auto* builtin = inst->As<core::ir::CoreBuiltinCall>()) {
                 switch (builtin->Func()) {
                     case core::BuiltinFn::kArrayLength:

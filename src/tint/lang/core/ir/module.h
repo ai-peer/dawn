@@ -39,6 +39,7 @@
 #include "src/tint/lang/core/ir/value.h"
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/utils/containers/const_propagating_ptr.h"
+#include "src/tint/utils/containers/filtered_iterator.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/source.h"
 #include "src/tint/utils/id/generation_id.h"
@@ -55,6 +56,11 @@ class Module {
 
     /// Map of value to name
     Hashmap<const Value*, Symbol, 32> value_to_name_;
+
+    /// A predicate function that returns true if the instruction is alive.
+    struct InstructionIsAlive {
+        bool operator()(const Instruction* instruction) const { return instruction->Alive(); }
+    };
 
   public:
     /// Constructor
@@ -101,6 +107,17 @@ class Module {
 
     /// @return the type manager for the module
     const core::type::Manager& Types() const { return constant_values.types; }
+
+    /// @returns a iterable of all the alive instructions
+    FilteredIterable<InstructionIsAlive, BlockAllocator<Instruction>::View> Instructions() {
+        return {instructions.Objects()};
+    }
+
+    /// @returns a iterable of all the alive instructions
+    FilteredIterable<InstructionIsAlive, BlockAllocator<Instruction>::ConstView> Instructions()
+        const {
+        return {instructions.Objects()};
+    }
 
     /// The block allocator
     BlockAllocator<Block> blocks;
