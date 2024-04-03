@@ -76,8 +76,9 @@ class RequestDeviceEvent : public TrackedEvent {
         if (mStatus != WGPURequestDeviceStatus_Success && mDevice != nullptr) {
             // If there was an error, we may need to reclaim the device allocation, otherwise the
             // device is returned to the user who owns it.
-            mDevice->GetClient()->Free(mDevice.get());
-            mDevice = nullptr;
+            Device* device = mDevice.ExtractAsDangling();
+            Client* client = device->GetClient();
+            client->Free(device);
         }
         if (mCallback) {
             mCallback(mStatus, ToAPI(mDevice), mMessage ? mMessage->c_str() : nullptr, mUserdata);
@@ -85,8 +86,7 @@ class RequestDeviceEvent : public TrackedEvent {
     }
 
     WGPURequestDeviceCallback mCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     // Note that the message is optional because we want to return nullptr when it wasn't set
     // instead of a pointer to an empty string.
@@ -97,8 +97,7 @@ class RequestDeviceEvent : public TrackedEvent {
     // throughout the duration of a RequestDeviceEvent because the Event essentially takes
     // ownership of it until either an error occurs at which point the Event cleans it up, or it
     // returns the device to the user who then takes ownership as the Event goes away.
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<Device, DanglingUntriaged> mDevice = nullptr;
+    raw_ptr<Device> mDevice = nullptr;
 };
 
 }  // anonymous namespace
