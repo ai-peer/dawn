@@ -2748,6 +2748,7 @@ TEST_F(ResolverTest, PointerToHandleTextureParameter) {
     Func("helper",
          Vector{
              Param("sl", ty.ptr<function>(
+                             Source{{12, 34}},
                              ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32()))),
          },
          ty.void_(), {});
@@ -2758,16 +2759,19 @@ TEST_F(ResolverTest, PointerToHandleTextureParameter) {
 
 TEST_F(ResolverTest, PointerToHandleTextureReturn) {
     Func("helper", {},
-         ty.ptr<function>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())), {});
+         ty.ptr<function>(Source{{12, 34}},
+                          ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())),
+         {});
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "error: function return type must be a constructible type");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a texture");
 }
 
 TEST_F(ResolverTest, PointerToHandleSamplerParameter) {
     Func("helper",
          Vector{
-             Param("sl", ty.ptr<function>(ty.sampler(core::type::SamplerKind::kSampler))),
+             Param("sl", ty.ptr<function>(Source{{12, 34}},
+                                          ty.sampler(core::type::SamplerKind::kSampler))),
          },
          ty.void_(), {});
 
@@ -2777,7 +2781,8 @@ TEST_F(ResolverTest, PointerToHandleSamplerParameter) {
 
 TEST_F(ResolverTest, PointerToHandleTextureParameterAlias) {
     auto* my_ty = Alias(
-        "MyTy", ty.ptr<private_>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
+        "MyTy", ty.ptr<private_>(Source{{12, 34}},
+                                 ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
     Func("helper",
          Vector{
              Param("sl", ty.Of(my_ty)),
@@ -2789,7 +2794,8 @@ TEST_F(ResolverTest, PointerToHandleTextureParameterAlias) {
 }
 
 TEST_F(ResolverTest, PointerToHandleSamplerParameterAlias) {
-    auto* my_ty = Alias("MyTy", ty.ptr<private_>(ty.sampler(core::type::SamplerKind::kSampler)));
+    auto* my_ty = Alias(
+        "MyTy", ty.ptr<private_>(Source{{12, 34}}, ty.sampler(core::type::SamplerKind::kSampler)));
     Func("helper",
          Vector{
              Param("sl", ty.Of(my_ty)),
@@ -2802,62 +2808,58 @@ TEST_F(ResolverTest, PointerToHandleSamplerParameterAlias) {
 
 TEST_F(ResolverTest, PointerToHandleTextureVar) {
     GlobalVar("s",
-              ty.ptr<private_>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())),
+              ty.ptr<private_>(Source{{12, 34}},
+                               ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())),
               core::AddressSpace::kPrivate, Group(0_a), Binding(0_a));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        "error: ptr<private, texture_1d<f32>, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a texture");
 }
 
 TEST_F(ResolverTest, PointerToHandleSamplerVar) {
-    GlobalVar("s", ty.ptr<private_>(ty.sampler(core::type::SamplerKind::kSampler)), Group(0_a),
-              core::AddressSpace::kPrivate, Binding(0_a));
+    GlobalVar("s",
+              ty.ptr<private_>(Source{{12, 34}}, ty.sampler(core::type::SamplerKind::kSampler)),
+              Group(0_a), core::AddressSpace::kPrivate, Binding(0_a));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "error: ptr<private, sampler, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a sampler");
 }
 
 TEST_F(ResolverTest, PointerToHandleTextureVarAlias) {
     auto* my_ty = Alias(
-        "MyTy", ty.ptr<private_>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
+        "MyTy", ty.ptr<private_>(Source{{12, 34}},
+                                 ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
     GlobalVar("s", ty.Of(my_ty), core::AddressSpace::kPrivate, Group(0_a), Binding(0_a));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        "error: ptr<private, texture_1d<f32>, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a texture");
 }
 
 TEST_F(ResolverTest, PointerToHandleSamplerVarAlias) {
-    auto* my_ty = Alias("MyTy", ty.ptr<private_>(ty.sampler(core::type::SamplerKind::kSampler)));
+    auto* my_ty = Alias(
+        "MyTy", ty.ptr<private_>(Source{{12, 34}}, ty.sampler(core::type::SamplerKind::kSampler)));
 
     GlobalVar("s", ty.Of(my_ty), Group(0_a), core::AddressSpace::kPrivate, Binding(0_a));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "error: ptr<private, sampler, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a sampler");
 }
 
 TEST_F(ResolverTest, PointerToHandleTextureAlias) {
     Alias("MyTy",
-          ty.ptr<private_>(ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
+          ty.ptr<private_>(Source{{12, 34}},
+                           ty.sampled_texture(core::type::TextureDimension::k1d, ty.f32())));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        "error: ptr<private, texture_1d<f32>, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a texture");
 }
 
 TEST_F(ResolverTest, PointerToHandleSamplerAlias) {
-    Alias(Source{{56, 78}}, Ident(Source{{12, 23}}, "MyTy"),
-          ty.ptr<private_>(ty.sampler(core::type::SamplerKind::kSampler)));
+    Alias("MyTy",
+          ty.ptr<private_>(Source{{12, 34}}, ty.sampler(core::type::SamplerKind::kSampler)));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "error: ptr<private, sampler, read_write> cannot be used as the type of a var");
+    EXPECT_EQ(r()->error(), "12:34 error: pointer can not be formed to a sampler");
 }
 
 }  // namespace
