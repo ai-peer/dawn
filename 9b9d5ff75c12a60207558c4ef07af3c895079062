@@ -16,6 +16,24 @@
       "message": "I wasn\u0027t sure whether to make a refactor like this, which is to make `GetTextureUsage` (based on `GetTextureQueries`) and then make GetTextureQueries and `GetTextureLoads` from this OR, change `GetTextureQueries` to `GetTextureUsage` and update the code that\u0027s using it. In particular, the code that categorizes `textureLoad` if multisampled as `textureNumLevels` in `GetTextureQueries` is not commented so I have no clue why that\u0027s considered a `textureNumLevels`.\n\nI also wasn\u0027t sure if I should create the enum TextureBuiltinType or just use wgsl::BuiltinFn but for now I just copied this pattern.\n\nI also only made 1 test because I didn\u0027t want to throw a bunch of work away if this is not the correct direction.\n\nNote: The plan for this code is to validate out calls to `textureLoad` for depth textures. I think that means `texture_depth???` and not a depth format texture bound as `texture_2d\u003cf32\u003e`\n\nMy thought was, given the list of texture group/bindings used with `textureLoad` I\u0027d iterate over the texture bindings and reject if one of them is a `texture_depth???` binding.  On the other hand I see from the tree walker that WGSL also has this info so maybe I should add that info. Instead binding+group it would be the type (as in `ty-\u003eUnwrapRef()`). Then I wouldn\u0027t have to iterate over the result in dawn.\n\nLooking forward to your feedback.",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fed9d4c_772c81ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-03T13:52:45Z",
+      "side": 1,
+      "message": "The `textureLoad` is marked that way because it\u0027s treated the same way in the backend transform. It could be changed with a new enum entry added if we desired.\n\nJust to make sure I understand what this is for. In compat the `texture_depth_*` items are not allowed to be used in `textureLoad` queries. So, you\u0027re attempting to retrieve all the things used in a `textureLoad` and then determining if they\u0027re a `texture_depth_*` type such that dawn can then throw a validation error?\n\nDoes this always need to be done for the GLSL backend?",
+      "parentUuid": "0531d38a_96522997",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
