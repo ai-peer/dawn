@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a488f22_4bf71488",
+        "filename": "src/tint/utils/containers/filtered_iterator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T20:09:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "e5eff635535e42c765b6decfe6d7203c3a746b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d29829c_a228485d",
@@ -48,6 +65,24 @@
       "writtenOn": "2024-04-03T19:42:16Z",
       "side": 1,
       "message": "unused?",
+      "revId": "e5eff635535e42c765b6decfe6d7203c3a746b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6ad749_62ae9739",
+        "filename": "src/tint/utils/memory/block_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T20:09:52Z",
+      "side": 1,
+      "message": "Used. See [1]",
+      "parentUuid": "8d29829c_a228485d",
       "revId": "e5eff635535e42c765b6decfe6d7203c3a746b2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
