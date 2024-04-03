@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9c8078_a065b1df",
+        "filename": "src/tint/lang/wgsl/resolver/resolver_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2811,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-03T16:48:10Z",
+      "side": 1,
+      "message": "I think these errors need to be updated to the \"pointer can not be formed\" ones now.",
+      "revId": "6dd9afa8b677c874fa64271926d531966d68d8b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
