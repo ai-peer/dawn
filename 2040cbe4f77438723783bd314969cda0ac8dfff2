@@ -52,6 +52,24 @@
       "parentUuid": "c005344a_4f776147",
       "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5be49717_2eeb3f1d",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T22:24:48Z",
+      "side": 1,
+      "message": "I prefer to optimise for the common path. How about I rename `instructions` to `instruction_allocator`?",
+      "parentUuid": "fa9ff72d_d7945ae5",
+      "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
