@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eefb769_531f2fb3",
+        "filename": "generator/templates/dawn_proc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T16:23:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "633b99fe_84dfe0a5",
+      "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4901fa06_9a915ba1",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-03T16:15:20Z",
       "side": 1,
       "message": "no cmake files for this?",
+      "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d273c513_f671896e",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T16:23:14Z",
+      "side": 1,
+      "message": "Nope, in CMake we magically directly use what the script tells us is the list of outputs for the generator so no change is needed.",
+      "parentUuid": "4901fa06_9a915ba1",
       "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
