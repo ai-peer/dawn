@@ -69,6 +69,24 @@
       "parentUuid": "18ec8693_aaa4ef4c",
       "revId": "f4a6e8f732612acb656033894804a646af00a686",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ddc89da_0bd4e9f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T12:01:04Z",
+      "side": 1,
+      "message": "Thanks, Austin! I now have insight into what you were thinking. I explored that solution this morning, didn\u0027t get it all quite working, but did see that there is a bit of messiness from my POV in that in DeviceBase::CreateBindGroup() we need to create a new BindGroupDescriptor as we can\u0027t overwrite the `entries` field in BindGroupDescriptor [1]. Corentin mentioned that that codepoint can be hot.\n\nWhat I\u0027m planning on doing is cleaning up the tests here and getting this CL ready to go with the feature being currently supported only on GL in order to get a checkpoint into the codebase. Then before I go OOO I\u0027ll see if I can dig into the real Vulkan backend. I can pick up on the other implementations when I\u0027m back and/or the tests and GL impl will hopefully be in the codebase in case someone else wants to work on those implementations in the meantime.\n\nLet me know if any of that doesn\u0027t make sense to you!\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:out/android-Debug/gen/third_party/dawn/emscripten-bits/system/include/webgpu/webgpu_cpp.h;l\u003d1619?q\u003dBindGroupDescriptor\u0026ss\u003dchromium",
+      "parentUuid": "ed3fac3a_1eb9ef87",
+      "revId": "f4a6e8f732612acb656033894804a646af00a686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
