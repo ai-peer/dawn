@@ -47,7 +47,7 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
         mShader->Reference();
     }
 
-    ~CompilationInfoEvent() override { mShader->Release(); }
+    ~CompilationInfoEvent() override { mShader.ExtractAsDangling()->Release(); }
 
     EventType GetType() override { return kType; }
 
@@ -96,15 +96,13 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
     }
 
     WGPUCompilationInfoCallback mCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     WGPUCompilationInfoRequestStatus mStatus;
     const WGPUCompilationInfo* mCompilationInfo = nullptr;
 
     // Strong reference to the buffer so that when we call the callback we can pass the buffer.
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    const raw_ptr<ShaderModule, DanglingUntriaged> mShader;
+    raw_ptr<ShaderModule> mShader;
 };
 
 ObjectType ShaderModule::GetObjectType() const {

@@ -67,8 +67,7 @@ class WorkDoneEvent : public TrackedEvent {
     }
 
     WGPUQueueWorkDoneCallback mCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     WGPUQueueWorkDoneStatus mStatus = WGPUQueueWorkDoneStatus_Success;
 };
