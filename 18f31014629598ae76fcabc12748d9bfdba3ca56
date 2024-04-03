@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "236ba690_939f2348",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T13:18:30Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "18f31014629598ae76fcabc12748d9bfdba3ca56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425a9c8e_b9af2f57",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T13:18:30Z",
+      "side": 1,
+      "message": "u-nit: `EXPECT_NE`",
+      "revId": "18f31014629598ae76fcabc12748d9bfdba3ca56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

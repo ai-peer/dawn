@@ -139,6 +139,24 @@
       "parentUuid": "12a20006_c2a3e406",
       "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa63200f_37d3cdb7",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-03T13:18:30Z",
+      "side": 1,
+      "message": "The logic looks good, IMHO we could land with a suppression and file an issue about it. I could take a quick look on Windows to see if I can reproduce after that.",
+      "parentUuid": "813242e6_fd6e377c",
+      "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
