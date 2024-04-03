@@ -92,6 +92,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b16ad9c4_db037492",
+        "filename": ".gitignore",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-03T17:37:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d7e32294_57f9498a",
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "370b43bb_58d7738e",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -161,6 +179,30 @@
       "side": 1,
       "message": "In trying to write tests in places other then function params this validated out in other ways. I\u0027ll add a few more tests and see if this needs to be extended.",
       "parentUuid": "b4e6242a_97ce7171",
+      "range": {
+        "startLine": 850,
+        "startChar": 0,
+        "endLine": 856,
+        "endChar": 9
+      },
+      "revId": "84aebdde8cf1918ec92c87d4ed6e8cd065f34a9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe92af91_9a854031",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-03T17:37:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6165180a_dddcacc4",
       "range": {
         "startLine": 850,
         "startChar": 0,
