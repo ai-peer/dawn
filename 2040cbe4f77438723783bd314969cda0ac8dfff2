@@ -16,6 +16,24 @@
       "message": "Maybe `LiveInstructions` ?",
       "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c005344a_4f776147",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T20:13:56Z",
+      "side": 1,
+      "message": "Aside from the validator, when would you want anything other than alive instructions?",
+      "parentUuid": "49f87dfa_9b4f0430",
+      "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
