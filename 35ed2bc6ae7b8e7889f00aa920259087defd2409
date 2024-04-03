@@ -34,6 +34,24 @@
       "parentUuid": "cea52db7_925d5d12",
       "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cdcca89_3f79668b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-03T23:47:16Z",
+      "side": 1,
+      "message": "Thanks for catching that. I tried locally built chrome_public_apk and run cts on a pixel-8, android-u, no luck seeing a failure. (the `android-dawn-arm64-rel` bot is pixel-6, android-t though)\n\nAlso tried the cmd from the swarm page but stuck at a python line asking for some strings (not yet dive in to look at) `vpython3 content/test/gpu/run_gpu_integration_test.py webgpu_cts --show-stdout --browser\u003dandroid-chromium --passthrough -v --stable-jobs --extra-browser-args\u003d\"--enable-logging\u003dstderr --js-flags\u003d--expose-gc --force_high_performance_gpu --enforce-browser-version --use-webgpu-power-preference\u003ddefault-high-performance\" --jobs\u003d1 --total-shards\u003d36 --shard-index\u003d24`\n\nHow would you try to repro and triage this?",
+      "parentUuid": "46ae5c61_d12514f8",
+      "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
