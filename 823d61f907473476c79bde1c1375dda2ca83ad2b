@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2aacd06_8a378fc5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-03T09:21:31Z",
+      "side": 1,
+      "message": "In the future, please append a `*` for these. [They\u0027re not valid queries as according to the CTS](https://github.com/gpuweb/cts/blob/main/docs/terms.md#queries) (which the roller matches), and so the roller will not match them to tests, likely resulting in their removal next roll.",
+      "range": {
+        "startLine": 574,
+        "startChar": 119,
+        "endLine": 574,
+        "endChar": 120
+      },
+      "revId": "823d61f907473476c79bde1c1375dda2ca83ad2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
