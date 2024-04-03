@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f508de4f_82281b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-03T19:42:16Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "e5eff635535e42c765b6decfe6d7203c3a746b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d29829c_a228485d",
+        "filename": "src/tint/utils/memory/block_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-03T19:42:16Z",
+      "side": 1,
+      "message": "unused?",
+      "revId": "e5eff635535e42c765b6decfe6d7203c3a746b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
