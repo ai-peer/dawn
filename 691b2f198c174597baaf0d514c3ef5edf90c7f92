@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633b99fe_84dfe0a5",
+        "filename": "generator/templates/dawn_proc.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-03T16:15:20Z",
+      "side": 1,
+      "message": "we should put a comment next to the webgpu_dawn build target in the .gn - to remind us that if we rename the library, we should make sure this comment is correct",
+      "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4901fa06_9a915ba1",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-03T16:15:20Z",
+      "side": 1,
+      "message": "no cmake files for this?",
+      "revId": "691b2f198c174597baaf0d514c3ef5edf90c7f92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
