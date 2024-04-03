@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41c5c06_e0cbdf5d",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T17:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236ba690_939f2348",
+      "revId": "18f31014629598ae76fcabc12748d9bfdba3ca56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "425a9c8e_b9af2f57",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-03T13:18:30Z",
       "side": 1,
       "message": "u-nit: `EXPECT_NE`",
+      "revId": "18f31014629598ae76fcabc12748d9bfdba3ca56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a31053d2_8d343453",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T17:13:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "425a9c8e_b9af2f57",
       "revId": "18f31014629598ae76fcabc12748d9bfdba3ca56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

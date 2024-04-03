@@ -157,6 +157,24 @@
       "parentUuid": "813242e6_fd6e377c",
       "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f575ec34_f6715096",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T17:13:15Z",
+      "side": 1,
+      "message": "Thanks! Going ahead with that. I suppressed the test on Windows as it wasn\u0027t obvious to me whether there are tighter conditions I can use - if there are let me know and I\u0027m happy to tighten it in a followup.",
+      "parentUuid": "fa63200f_37d3cdb7",
+      "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
