@@ -216,10 +216,7 @@ void ReplaceWorkgroupBarrier(core::ir::Module& mod, core::ir::CoreBuiltinCall* c
 }  // namespace
 
 Result<SuccessType> Raise(core::ir::Module& mod) {
-    for (auto* inst : mod.instructions.Objects()) {
-        if (!inst->Alive()) {
-            continue;
-        }
+    for (auto* inst : mod.Instructions()) {
         if (auto* call = inst->As<core::ir::CoreBuiltinCall>()) {
             switch (call->Func()) {
                 case core::BuiltinFn::kWorkgroupBarrier:
