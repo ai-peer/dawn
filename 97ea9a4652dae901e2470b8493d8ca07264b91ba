@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "182221e6_91e72c8d",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T12:03:05Z",
+      "side": 1,
+      "message": "Thanks, changed this to `otherBinding.binding \u003d 0;` while debugging the test just to remove that as any element of uncertainty.",
+      "parentUuid": "966a5045_17f76855",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 24
+      },
+      "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f22c4402_e170e785",
         "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
         "patchSetId": 18
@@ -95,6 +119,24 @@
       "side": 1,
       "message": "I looked at this for a bit and didn\u0027t see anything :-/\n\nAddress modes in the backend shouldn\u0027t matter for the cache. What matters is the frontend state.\n\nI\u0027d start making sure:\n - `staticSamplerBinding.sampler` and `otherStaticSamplerBinding.sampler` are indeed distinct\n - start logging the hashes in `GetOrCreateBindGroupLayout` and the comparisons downstream of BindGroupLayoutInternalBase::IsLayoutEqual. If you\u0027re getting a hash conflict, then surely the comparison at [5] _should_ return true if the samplers are different.\n - verify the unpacked bindings preserve the sampler in the chained struct.\n   Notably, at [6], we first ExtractAndExpandBglEntries, then sort them, then call CreateBindGroupLayoutInfo on those sorted entries to build mBindingInfo. Maybe something is getting lost..?",
       "parentUuid": "f22c4402_e170e785",
+      "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "813242e6_fd6e377c",
+        "filename": "src/dawn/tests/unittests/validation/ObjectCachingTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-03T12:03:05Z",
+      "side": 1,
+      "message": "Thanks! I added checks that those two pointer values are distinct and they indeed are different (i.e., the checks didn\u0027t go off in the test runs). Didn\u0027t get to the other logging yet, will need to tackle that next.",
+      "parentUuid": "12a20006_c2a3e406",
       "revId": "97ea9a4652dae901e2470b8493d8ca07264b91ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
