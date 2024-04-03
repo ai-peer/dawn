@@ -72,18 +72,19 @@ class PopErrorScopeEvent final : public TrackedEvent {
             mMessage = std::nullopt;
         }
         if (mOldCallback) {
-            mOldCallback(mType, mMessage ? mMessage->c_str() : nullptr, mUserdata);
+            mOldCallback(mType, mMessage ? mMessage->c_str() : nullptr,
+                         mUserdata.ExtractAsDangling());
         }
         if (mCallback) {
-            mCallback(mStatus, mType, mMessage ? mMessage->c_str() : nullptr, mUserdata);
+            mCallback(mStatus, mType, mMessage ? mMessage->c_str() : nullptr,
+                      mUserdata.ExtractAsDangling());
         }
     }
 
     // TODO(crbug.com/dawn/2021) Remove the old callback type.
     WGPUPopErrorScopeCallback mCallback;
     WGPUErrorCallback mOldCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     WGPUPopErrorScopeStatus mStatus = WGPUPopErrorScopeStatus_Success;
     WGPUErrorType mType = WGPUErrorType_Unknown;
@@ -135,22 +136,21 @@ class CreatePipelineEventBase : public TrackedEvent {
             mPipeline = nullptr;
         }
         if (mCallback) {
-            mCallback(mStatus, ToAPI(mPipeline), mMessage ? mMessage->c_str() : nullptr, mUserdata);
+            mCallback(mStatus, ToAPI(mPipeline.ExtractAsDangling()),
+                      mMessage ? mMessage->c_str() : nullptr, mUserdata.ExtractAsDangling());
         }
     }
 
     using Callback = decltype(std::declval<CallbackInfo>().callback);
     Callback mCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     // Note that the message is optional because we want to return nullptr when it wasn't set
     // instead of a pointer to an empty string.
     WGPUCreatePipelineAsyncStatus mStatus = WGPUCreatePipelineAsyncStatus_Success;
     std::optional<std::string> mMessage;
 
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<Pipeline, DanglingUntriaged> mPipeline = nullptr;
+    raw_ptr<Pipeline> mPipeline = nullptr;
 };
 
 using CreateComputePipelineEvent =

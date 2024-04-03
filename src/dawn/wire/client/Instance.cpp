@@ -87,13 +87,13 @@ class RequestAdapterEvent : public TrackedEvent {
             mAdapter = nullptr;
         }
         if (mCallback) {
-            mCallback(mStatus, ToAPI(mAdapter), mMessage ? mMessage->c_str() : nullptr, mUserdata);
+            mCallback(mStatus, ToAPI(mAdapter.ExtractAsDangling()),
+                      mMessage ? mMessage->c_str() : nullptr, mUserdata.ExtractAsDangling());
         }
     }
 
     WGPURequestAdapterCallback mCallback;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mUserdata;
+    raw_ptr<void> mUserdata;
 
     // Note that the message is optional because we want to return nullptr when it wasn't set
     // instead of a pointer to an empty string.
@@ -104,8 +104,7 @@ class RequestAdapterEvent : public TrackedEvent {
     // throughout the duration of a RequestAdapterEvent because the Event essentially takes
     // ownership of it until either an error occurs at which point the Event cleans it up, or it
     // returns the adapter to the user who then takes ownership as the Event goes away.
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<Adapter, DanglingUntriaged> mAdapter = nullptr;
+    raw_ptr<Adapter> mAdapter = nullptr;
 };
 
 WGPUWGSLFeatureName ToWGPUFeature(tint::wgsl::LanguageFeature f) {
