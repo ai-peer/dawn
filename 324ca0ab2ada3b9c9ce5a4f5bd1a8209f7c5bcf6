@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b397e9b_d286e0bd",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-03T20:55:11Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/182000",
+      "parentUuid": "f273fad9_1acafa1b",
+      "revId": "324ca0ab2ada3b9c9ce5a4f5bd1a8209f7c5bcf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3424c05f_82845522",
