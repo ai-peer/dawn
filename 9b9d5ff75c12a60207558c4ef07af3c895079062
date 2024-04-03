@@ -34,6 +34,24 @@
       "parentUuid": "0531d38a_96522997",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af3a2cd5_a7893fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-04-03T16:23:22Z",
+      "side": 1,
+      "message": "It needs to be done in validation when running in compat mode so the check will be in src/dawn/native and be like\n\n```\nif (in-compat-mode \u0026\u0026 depth-texture-is-used-with-texture-load) { error }\n```\n\nProbably in `RenderPipeline.cpp` in `ValidateRenderPipelineDescriptor` and a similar one for compute pipelines",
+      "parentUuid": "5fed9d4c_772c81ff",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
