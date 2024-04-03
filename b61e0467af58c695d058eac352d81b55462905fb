@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0270d1_4ac2a6fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-04-03T20:18:24Z",
+      "side": 1,
+      "message": "Points at cherry-picked patch landed in DXC mirror here: https://chromium-review.googlesource.com/c/external/github.com/microsoft/DirectXShaderCompiler/+/5419225",
+      "revId": "b61e0467af58c695d058eac352d81b55462905fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
