@@ -27,6 +27,7 @@
 
 #include <array>
 #include <cmath>
+#include <vector>
 
 #include "dawn/tests/DawnTest.h"
 
@@ -39,6 +40,28 @@ namespace dawn {
 namespace {
 
 constexpr static unsigned int kRTSize = 64;
+
+const char* kBasicFS = R"(
+            @group(0) @binding(0) var sampler0 : sampler;
+            @group(0) @binding(1) var texture0 : texture_2d<f32>;
+
+            @fragment
+            fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
+                return textureSample(texture0, sampler0, FragCoord.xy / vec2(2.0, 2.0));
+            })";
+
+const char* kPassThroughUserFunctionsFS = R"(
+            @group(0) @binding(0) var sampler0 : sampler;
+            @group(0) @binding(1) var texture0 : texture_2d<f32>;
+
+            fn foo(t : texture_2d<f32>, s : sampler, FragCoord : vec4f) -> vec4f {
+                return textureSample(t, s, FragCoord.xy / vec2(2.0, 2.0));
+            }
+
+            @fragment
+            fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
+                return foo(texture0, sampler0, FragCoord);
+            })";
 
 struct AddressModeTestCase {
     wgpu::AddressMode mMode;
@@ -103,7 +126,7 @@ class SamplerTest : public DawnTest {
         mTextureView = texture.CreateView();
     }
 
-    void InitShaders(const char* frag_shader) {
+    void InitShaders(const char* frag_shader, wgpu::BindGroupLayout bgl = nullptr) {
         auto vsModule = utils::CreateShaderModule(device, R"(
             @vertex
             fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
@@ -120,30 +143,45 @@ class SamplerTest : public DawnTest {
         auto fsModule = utils::CreateShaderModule(device, frag_shader);
 
         utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+
+        if (bgl) {
+            wgpu::PipelineLayout pl = utils::MakePipelineLayout(device, {bgl});
+            pipelineDescriptor.layout = pl;
+        }
+
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cTargets[0].format = mRenderPass.colorFormat;
 
         mPipeline = device.CreateRenderPipeline(&pipelineDescriptor);
-        mBindGroupLayout = mPipeline.GetBindGroupLayout(0);
     }
 
-    void TestAddressModes(AddressModeTestCase u, AddressModeTestCase v, AddressModeTestCase w) {
+    wgpu::Sampler CreateSampler(AddressModeTestCase u,
+                                AddressModeTestCase v,
+                                AddressModeTestCase w) {
         wgpu::Sampler sampler;
-        {
-            wgpu::SamplerDescriptor descriptor = {};
-            descriptor.minFilter = wgpu::FilterMode::Nearest;
-            descriptor.magFilter = wgpu::FilterMode::Nearest;
-            descriptor.mipmapFilter = wgpu::MipmapFilterMode::Nearest;
-            descriptor.addressModeU = u.mMode;
-            descriptor.addressModeV = v.mMode;
-            descriptor.addressModeW = w.mMode;
-            sampler = device.CreateSampler(&descriptor);
-        }
+        wgpu::SamplerDescriptor descriptor = {};
+        descriptor.minFilter = wgpu::FilterMode::Nearest;
+        descriptor.magFilter = wgpu::FilterMode::Nearest;
+        descriptor.mipmapFilter = wgpu::MipmapFilterMode::Nearest;
+        descriptor.addressModeU = u.mMode;
+        descriptor.addressModeV = v.mMode;
+        descriptor.addressModeW = w.mMode;
+        return device.CreateSampler(&descriptor);
+    }
 
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, mBindGroupLayout, {{0, sampler}, {1, mTextureView}});
+    wgpu::BindGroup CreateBindGroup(AddressModeTestCase u,
+                                    AddressModeTestCase v,
+                                    AddressModeTestCase w) {
+        wgpu::Sampler sampler = CreateSampler(u, v, w);
+        return utils::MakeBindGroup(device, mPipeline.GetBindGroupLayout(0),
+                                    {{0, sampler}, {1, mTextureView}});
+    }
 
+    void TestAddressModes(AddressModeTestCase u,
+                          AddressModeTestCase v,
+                          AddressModeTestCase w,
+                          wgpu::BindGroup bindGroup) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&mRenderPass.renderPassInfo);
@@ -171,25 +209,17 @@ class SamplerTest : public DawnTest {
     }
 
     utils::BasicRenderPass mRenderPass;
-    wgpu::BindGroupLayout mBindGroupLayout;
     wgpu::RenderPipeline mPipeline;
     wgpu::TextureView mTextureView;
 };
 
 // Test drawing a rect with a checkerboard texture with different address modes.
 TEST_P(SamplerTest, AddressMode) {
-    InitShaders(R"(
-            @group(0) @binding(0) var sampler0 : sampler;
-            @group(0) @binding(1) var texture0 : texture_2d<f32>;
-
-            @fragment
-            fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
-                return textureSample(texture0, sampler0, FragCoord.xy / vec2(2.0, 2.0));
-            })");
+    InitShaders(kBasicFS);
     for (auto u : addressModes) {
         for (auto v : addressModes) {
             for (auto w : addressModes) {
-                TestAddressModes(u, v, w);
+                TestAddressModes(u, v, w, CreateBindGroup(u, v, w));
             }
         }
     }
@@ -197,28 +227,101 @@ TEST_P(SamplerTest, AddressMode) {
 
 // Test that passing texture and sampler objects through user-defined functions works correctly.
 TEST_P(SamplerTest, PassThroughUserFunctionParameters) {
-    InitShaders(R"(
-            @group(0) @binding(0) var sampler0 : sampler;
-            @group(0) @binding(1) var texture0 : texture_2d<f32>;
-
-            fn foo(t : texture_2d<f32>, s : sampler, FragCoord : vec4f) -> vec4f {
-                return textureSample(t, s, FragCoord.xy / vec2(2.0, 2.0));
-            }
-
-            @fragment
-            fn main(@builtin(position) FragCoord : vec4f) -> @location(0) vec4f {
-                return foo(texture0, sampler0, FragCoord);
-            })");
+    InitShaders(kPassThroughUserFunctionsFS);
     for (auto u : addressModes) {
         for (auto v : addressModes) {
             for (auto w : addressModes) {
-                TestAddressModes(u, v, w);
+                TestAddressModes(u, v, w, CreateBindGroup(u, v, w));
             }
         }
     }
 }
 
 DAWN_INSTANTIATE_TEST(SamplerTest,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+class StaticSamplerTest : public SamplerTest {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures = {};
+        if (SupportsFeatures({wgpu::FeatureName::StaticSamplers})) {
+            requiredFeatures.push_back(wgpu::FeatureName::StaticSamplers);
+        }
+        return requiredFeatures;
+    }
+
+    void SetUp() override {
+        SamplerTest::SetUp();
+
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::StaticSamplers}));
+    }
+
+    wgpu::BindGroupLayout CreateBindGroupLayoutWithStaticSampler(AddressModeTestCase u,
+                                                                 AddressModeTestCase v,
+                                                                 AddressModeTestCase w) {
+        wgpu::Sampler sampler = CreateSampler(u, v, w);
+        std::vector<wgpu::BindGroupLayoutEntry> entries;
+
+        wgpu::BindGroupLayoutEntry binding = {};
+        binding.binding = 0;
+        binding.visibility = wgpu::ShaderStage::Fragment;
+        wgpu::StaticSamplerBindingLayout staticSamplerBinding = {};
+        staticSamplerBinding.sampler = sampler;
+        binding.nextInChain = &staticSamplerBinding;
+        entries.push_back(binding);
+
+        wgpu::BindGroupLayoutEntry binding1 = {};
+        binding1.binding = 1;
+        binding1.visibility = wgpu::ShaderStage::Fragment;
+        binding1.texture.sampleType = wgpu::TextureSampleType::Float;
+        entries.push_back(binding1);
+
+        wgpu::BindGroupLayoutDescriptor desc = {};
+        desc.entryCount = 2;
+        desc.entries = entries.data();
+
+        return device.CreateBindGroupLayout(&desc);
+    }
+
+    wgpu::BindGroup CreateBindGroupWithStaticSampler(wgpu::BindGroupLayout bgl) {
+        return utils::MakeBindGroup(device, bgl, {{1, mTextureView}});
+    }
+};
+
+// Test drawing a rect with a checkerboard texture using a static sampler with different address
+// modes.
+TEST_P(StaticSamplerTest, AddressMode) {
+    for (auto u : addressModes) {
+        for (auto v : addressModes) {
+            for (auto w : addressModes) {
+                auto bgl = CreateBindGroupLayoutWithStaticSampler(u, v, w);
+                InitShaders(kBasicFS, bgl);
+                TestAddressModes(u, v, w, CreateBindGroupWithStaticSampler(bgl));
+            }
+        }
+    }
+}
+
+// Test that passing texture and static sampler objects through user-defined functions works
+// correctly.
+TEST_P(StaticSamplerTest, PassThroughUserFunctionParameters) {
+    for (auto u : addressModes) {
+        for (auto v : addressModes) {
+            for (auto w : addressModes) {
+                auto bgl = CreateBindGroupLayoutWithStaticSampler(u, v, w);
+                InitShaders(kPassThroughUserFunctionsFS, bgl);
+                TestAddressModes(u, v, w, CreateBindGroupWithStaticSampler(bgl));
+            }
+        }
+    }
+}
+
+DAWN_INSTANTIATE_TEST(StaticSamplerTest,
                       D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
