@@ -16,6 +16,23 @@
       "message": "FYI I am waiting on the Dawn-\u003eChromium roll to succeed, then I\u0027ll fix up any remaining merge conflicts and land this. (Since it\u0027s a big change I want it to be easier to track any failures related.)",
       "revId": "9da6c6ed7584f358b047f44e0eed91fc29f18e09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75489a09_e2edfd2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 77
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-04T21:48:06Z",
+      "side": 1,
+      "message": "Looks like the flaky failures are fixed, I assume the changes in src/dawn/native/Device.cpp between PS 74 and 75 were the fix?\n\nPS 74..77 LGTM (though can\u0027t tell why the src/dawn/wire/client/ObjectBase.cpp change needed to be un-reverted)",
+      "revId": "9da6c6ed7584f358b047f44e0eed91fc29f18e09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
