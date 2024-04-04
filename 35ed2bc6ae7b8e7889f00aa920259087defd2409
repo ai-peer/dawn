@@ -88,6 +88,24 @@
       "parentUuid": "fee6e87f_87362eb4",
       "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34e8760_71486d42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-04T20:06:39Z",
+      "side": 1,
+      "message": "This running on the swarming bot looks great. Found at https://dawn.googlesource.com/dawn/+/HEAD/webgpu-cts/README.md#running-a-local-cts-build-on-swarming\n\nMy problem is it keeps saying `Cannot find browser of type android-chromium. `: https://chromium-swarm.appspot.com/task?id\u003d68c38207196fe410\n\nI\u0027m using the same build cmd and args as above (Only difference is my build folder is out/Android). I built chrome_public_apk successfully before so I should have gclient sync checked out android component correctly.",
+      "parentUuid": "4d42b30d_21fde21f",
+      "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
