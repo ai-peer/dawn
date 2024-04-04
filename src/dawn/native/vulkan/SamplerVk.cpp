@@ -143,6 +143,10 @@ VkSampler Sampler::GetHandle() const {
     return mHandle;
 }
 
+const VkSampler& Sampler::GetHandleAsRef() const {
+    return mHandle;
+}
+
 void Sampler::SetLabelImpl() {
     SetDebugName(ToBackend(GetDevice()), mHandle, "Dawn_Sampler", GetLabel());
 }

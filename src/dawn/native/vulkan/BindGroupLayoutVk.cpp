@@ -142,7 +142,12 @@ MaybeError BindGroupLayout::Initialize() {
             // Now store a pointer to (the pointer to) the underlying Vulkan
             // platform sampler in the Vk binding for Vulkan to read and copy
             // during VkLayout creation below.
-            vkBinding.pImmutableSamplers = &*immutableSamplers.back();
+
+            // vkBinding.pImmutableSamplers = &*immutableSamplers.back();
+            //  Builds but crashes (naturally).
+            // vkBinding.pImmutableSamplers = &*sampler->GetHandle();
+            //  Fails to build.
+            vkBinding.pImmutableSamplers = &*sampler->GetHandleAsRef();
         } else {
             vkBinding.pImmutableSamplers = nullptr;
         }
