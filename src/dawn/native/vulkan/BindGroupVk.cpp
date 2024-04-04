@@ -105,11 +105,9 @@ BindGroup::BindGroup(Device* device,
                 return true;
             },
             [&](const StaticSamplerHolderBindingLayout& layout) -> bool {
-                // TODO(crbug.com/dawn/2463): Replace this implementation with a
-                // true native implementation.
-                Sampler* sampler = ToBackend(layout.sampler.Get());
-                writeImageInfo[numWrites].sampler = sampler->GetHandle();
-                write.pImageInfo = &writeImageInfo[numWrites];
+                // Static samplers are bound into the Vulkan layout as immutable
+                // samplers at BindGroupLayout creation time. There is no work
+                // to be done at BindGroup creation time.
                 return true;
             },
             [&](const TextureBindingLayout&) -> bool {
