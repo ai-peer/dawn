@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0206dd6c_8062870a",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-04T11:55:01Z",
+      "side": 1,
+      "message": "Would we need to go through these hoops if vulkan::Sampler::GetHandle returned a const VkSampler\u0026 ?",
+      "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab48a9d_f148d13e",
+        "filename": "src/dawn/native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-04T11:55:01Z",
+      "side": 1,
+      "message": "nit: Maybe rename to \"shouldWriteDescriptor\" as the semantic is no longer whether the whole set is valid or not.",
+      "range": {
+        "startLine": 82,
+        "startChar": 13,
+        "endLine": 82,
+        "endChar": 33
+      },
+      "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
