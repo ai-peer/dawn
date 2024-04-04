@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494d5696_b2d3b6dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-04T17:10:50Z",
+      "side": 1,
+      "message": "Hi Corentin, +2 is removed. Could you please +2 again? Thanks",
+      "revId": "8f142b2712018b5ccdf238bad1764112fde027e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
