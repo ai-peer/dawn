@@ -141,6 +141,24 @@
       "parentUuid": "c17da562_34cda949",
       "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8889b6e_e29fbb75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-04-04T17:30:06Z",
+      "side": 1,
+      "message": "After talking with Rafael I\u0027ve decided to remove the ability to create a buffer with Uniform usage. I\u0027ve removed the old uniform test and added a new one to ensure it\u0027s caught specifically by validation. I\u0027ve also added information about the restriction to the feature doc.",
+      "parentUuid": "ff3b3088_e7b6d676",
+      "revId": "74888b1d23d3780873824bc726e0ad62ac237a21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
