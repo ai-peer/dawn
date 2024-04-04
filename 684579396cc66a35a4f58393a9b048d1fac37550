@@ -34,6 +34,40 @@
       "parentUuid": "cc3be171_e92412fb",
       "revId": "684579396cc66a35a4f58393a9b048d1fac37550",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3c6104b_6b68d593",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-04T21:38:53Z",
+      "side": 1,
+      "message": "LGTM, minor comment",
+      "revId": "684579396cc66a35a4f58393a9b048d1fac37550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f50b1ab_4c6ae0dd",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-04T21:38:53Z",
+      "side": 1,
+      "message": "Why add a new mCurrentAccess vs using the existing counters?\n\nWe could consider every access a write access for buffers since we don\u0027t differentiate or allow concurrent read right now.\n\nIf you add this member, we should unify it so it\u0027s not a buffer-only thing. we can have:\n\n```\nRef\u003cSharedResource\u003e mExclusiveAccess; // exclusive read or write access\nbool mIsExclusiveWrite; // true if the exclusive access is a write access \nint mReadAccessCount; // count of concurrent readers. mExclusiveAccess should be null\n```",
+      "revId": "684579396cc66a35a4f58393a9b048d1fac37550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
