@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2edfb4_4bba51ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-04T17:28:57Z",
+      "side": 1,
+      "message": "LGTM but I don\u0027t have +2 permissions for Dawn.",
+      "revId": "8f9ebe7755cf3e6a060ed255f6727230aa95ae14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
