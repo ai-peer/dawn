@@ -16,6 +16,23 @@
       "message": "Short and sweet",
       "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b04c15a7_c1386f0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-04-04T17:41:52Z",
+      "side": 1,
+      "message": "@vantablack@google.com can you please pick this up from here? Next steps: \n1, Test this CL locally. \n2. Move it into the right dir so that it makes into the webgpu_cts running in Dawn\u0027s CI.",
+      "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
