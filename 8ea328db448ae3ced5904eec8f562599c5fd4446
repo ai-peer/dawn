@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36c6b10_82258427",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-04T17:31:37Z",
+      "side": 1,
+      "message": "ah, we never fixed this pain point.\n\nTry:\n\n`vkBinding.pImmutableSamplers \u003d AsVkArray(\u0026sampler-\u003eGetHandleAsRef());`",
+      "range": {
+        "startLine": 150,
+        "startChar": 43,
+        "endLine": 150,
+        "endChar": 71
+      },
+      "revId": "8ea328db448ae3ced5904eec8f562599c5fd4446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
