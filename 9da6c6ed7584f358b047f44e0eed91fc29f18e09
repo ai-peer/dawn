@@ -33,6 +33,24 @@
       "message": "Looks like the flaky failures are fixed, I assume the changes in src/dawn/native/Device.cpp between PS 74 and 75 were the fix?\n\nPS 74..77 LGTM (though can\u0027t tell why the src/dawn/wire/client/ObjectBase.cpp change needed to be un-reverted)",
       "revId": "9da6c6ed7584f358b047f44e0eed91fc29f18e09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14cfd3d7_064194de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 77
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-04T21:51:26Z",
+      "side": 1,
+      "message": "Yup! The flakiness was caused by the un-reverted changes because when returning `mRefcount` after the `Free` in the block above, we could cause a UAF. Thanks Austin for helping me to catch that!",
+      "parentUuid": "75489a09_e2edfd2a",
+      "revId": "9da6c6ed7584f358b047f44e0eed91fc29f18e09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
