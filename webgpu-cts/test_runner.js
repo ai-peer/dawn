@@ -34,6 +34,7 @@ import { Logger } from '../third_party/webgpu-cts/src/common/internal/logging/lo
 import { parseQuery } from '../third_party/webgpu-cts/src/common/internal/query/parseQuery.js';
 import { parseSearchParamLikeWithCTSOptions } from '../third_party/webgpu-cts/src/common/runtime/helper/options.js';
 import { setDefaultRequestAdapterOptions } from '../third_party/webgpu-cts/src/common/util/navigator_gpu.js';
+import { unreachable } from '../third_party/webgpu-cts/src/common/util/util.js';
 
 import { TestWorker, TestDedicatedWorker, TestSharedWorker, TestServiceWorker } from '../third_party/webgpu-cts/src/common/runtime/helper/test_worker.js';
 
@@ -187,10 +188,11 @@ async function runCtsTest(queryString) {
   if (currentOptionsKey !== lastOptionsKey) {
     lastOptionsKey = currentOptionsKey;
     testWorker =
+      options.worker === null ? null :
       options.worker === 'dedicated' ? new TestDedicatedWorker(options) :
       options.worker === 'shared' ? new TestSharedWorker(options) :
       options.worker === 'service' ? new TestServiceWorker(options) :
-      null;
+      unreachable();
   }
 
   const loader = new DefaultTestFileLoader();
