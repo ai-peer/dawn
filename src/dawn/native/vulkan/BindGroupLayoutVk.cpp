@@ -37,6 +37,7 @@
 #include "dawn/native/vulkan/DescriptorSetAllocator.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/SamplerVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
@@ -106,6 +107,19 @@ MaybeError BindGroupLayout::Initialize() {
     ityp::vector<BindingIndex, VkDescriptorSetLayoutBinding> bindings;
     bindings.reserve(GetBindingCount());
 
+    // The Vk binding for an entry with a static sampler needs to store a
+    // pointer to the pointer to the underlying VkSampler for that static
+    // sampler. This is somewhat tricky, as that address needs to remain valid
+    // until until the actual creation of the VkLayout following the loop that
+    // populates `bindings`, as that is when Vulkan copies the immutable sampler
+    // pointers. To that end, this vector will hold the VkSamplers for static
+    // samplers in this layout. We populate the vector throughout the loop but
+    // ensure that the vector will not be resized during the loop by reserving
+    // the necessary space up front. This is critical for correctness, as what
+    // we are storing in the Vk bindings is the addresses of the appropriate
+    // VkSampler* entries in the vector.
+    std::vector<VkSampler_T*> immutableSamplers;
+    immutableSamplers.reserve(GetStaticSamplerCount());
     for (const auto& [_, bindingIndex] : GetBindingMap()) {
         const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
@@ -114,7 +128,16 @@ MaybeError BindGroupLayout::Initialize() {
         vkBinding.descriptorType = VulkanDescriptorType(bindingInfo);
         vkBinding.descriptorCount = 1;
         vkBinding.stageFlags = VulkanShaderStageFlags(bindingInfo.visibility);
-        vkBinding.pImmutableSamplers = nullptr;
+
+        if (std::holds_alternative<StaticSamplerHolderBindingLayout>(bindingInfo.bindingLayout)) {
+            auto samplerLayout =
+                std::get<StaticSamplerHolderBindingLayout>(bindingInfo.bindingLayout);
+            auto sampler = ToBackend(samplerLayout.sampler);
+            immutableSamplers.push_back(sampler->GetHandle().GetHandle());
+            vkBinding.pImmutableSamplers = &immutableSamplers.back();
+        } else {
+            vkBinding.pImmutableSamplers = nullptr;
+        }
 
         bindings.emplace_back(vkBinding);
     }

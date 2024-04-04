@@ -42,6 +42,7 @@ class Sampler final : public SamplerBase {
     static ResultOrError<Ref<Sampler>> Create(Device* device, const SamplerDescriptor* descriptor);
 
     VkSampler GetHandle() const;
+    const VkSampler* GetPointerToHandle() const;
 
   private:
     ~Sampler() override;
