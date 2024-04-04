@@ -70,6 +70,24 @@
       "parentUuid": "1cdcca89_3f79668b",
       "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d42b30d_21fde21f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-04T02:14:36Z",
+      "side": 1,
+      "message": "given that it\u0027s flaky, you might need to run a larger group of tests to get it to repro. that could mean something like:\n\nwith 4 jobs, there\u0027s too many threads doing too many things, and that causes things to be slow. this would be surprising though because then we should see the problem without futures\n\nafter a lot of tests run, we get into a situation where extra memory piles up and makes things slow? like maybe we\u0027re not clearing out the set of completed futures and there\u0027s a large list that stays alive. if the list is really big, polling it becomes slow too\n\nor there is some deadlock? like polling the futures, and adding/completing futures deadlocks because of lock acquisition order (potentially).",
+      "parentUuid": "fee6e87f_87362eb4",
+      "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
