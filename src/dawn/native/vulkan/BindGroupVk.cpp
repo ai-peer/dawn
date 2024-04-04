@@ -104,11 +104,12 @@ BindGroup::BindGroup(Device* device,
                 write.pImageInfo = &writeImageInfo[numWrites];
                 return true;
             },
-            [&](const StaticSamplerHolderBindingLayout&) -> bool {
-                // Static samplers are implemented in the frontend.
-                // TODO(crbug.com/dawn/2463): Implement static samplers in the backend
-                // on Vulkan.
-                DAWN_UNREACHABLE();
+            [&](const StaticSamplerHolderBindingLayout& layout) -> bool {
+                // TODO(crbug.com/dawn/2463): Replace this implementation with a
+                // true native implementation.
+                Sampler* sampler = ToBackend(layout.sampler.Get());
+                writeImageInfo[numWrites].sampler = sampler->GetHandle();
+                write.pImageInfo = &writeImageInfo[numWrites];
                 return true;
             },
             [&](const TextureBindingLayout&) -> bool {
