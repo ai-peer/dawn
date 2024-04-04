@@ -52,6 +52,24 @@
       "parentUuid": "46ae5c61_d12514f8",
       "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee6e87f_87362eb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-04T01:25:37Z",
+      "side": 1,
+      "message": "Managed to repro via the following on Linux workstation:\n\n```\nvpython3 tools/mb/mb.py isolate out/Release telemetry_gpu_integration_test_android_chrome\n```\n\n```\n./tools/luci-go/isolate archive -cas-instance chromium-swarm -i out/Release/telemetry_gpu_integration_test_android_chrome.isolate\n```\n^Use the resulting digest from this call in the next one.\n\n```\n./tools/luci-go/swarming trigger -S https://chromium-swarm.appspot.com -d \"pool\u003dchromium.tests.gpu\" -d \"os\u003dAndroid\" -d \"device_os\u003dT\" -d \"device_abi\u003darm64-v8a\" -d \"device_os_flavor\u003dgoogle\" -digest cd9cdf0956154becc2396aadec3a6ed19bf386750b7f37381ee64b1f2c343c81/814 -- vpython3 testing/test_env.py testing/scripts/run_gpu_integration_test_as_googletest.py content/test/gpu/run_gpu_integration_test.py --isolated-script-test-output\u003d${ISOLATED_OUTDIR}/output.json webgpu_cts --browser\u003dandroid-chromium --passthrough -v --stable-jobs --show-stdout --extra-browser-args\u003d\"--enable-logging\u003dstderr --js-flags\u003d--expose-gc --force_high_performance_gpu --enable-dawn-features\u003dallow_unsafe_apis --use-webgpu-power-preference\u003ddefault-high-performance --enable-webgpu-developer-features\" --total-shards\u003d1 --shard-index\u003d0 --jobs\u003d1 --test-filter\u003d\"webgpu:shader,execution,expression,access,matrix,index:*\"\n```\nSee https://chromium-swarm.appspot.com/task?id\u003d68bf830c355a0910\n\nNote that I ran it again after and it didn\u0027t repro, so might need to get lucky with the run? But overall the runs are fairly quick. Might be able to specify some args to make it run multiple times too? Not sure off the top of my head.\n\ngn args:\n```\ndcheck_always_on \u003d true\ndebuggable_apks \u003d false\nffmpeg_branding \u003d \"Chrome\"\nis_component_build \u003d false\nis_debug \u003d true\nproprietary_codecs \u003d true\nsymbol_level \u003d 1\ntarget_cpu \u003d \"arm64\"\ntarget_os \u003d \"android\"\nuse_remoteexec \u003d true\n```",
+      "parentUuid": "1cdcca89_3f79668b",
+      "revId": "35ed2bc6ae7b8e7889f00aa920259087defd2409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
