@@ -16,6 +16,23 @@
       "message": "Thanks for the quick reviews!",
       "revId": "5a75764525a0ebd217cd46a8e7356bdf6f772b9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a9f8b8_07cb26b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-04T08:04:40Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "5a75764525a0ebd217cd46a8e7356bdf6f772b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
