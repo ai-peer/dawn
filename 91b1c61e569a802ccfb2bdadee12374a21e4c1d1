@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d939c04_d2e8c969",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1182,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-04T07:46:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64836040_6249f142",
+      "revId": "91b1c61e569a802ccfb2bdadee12374a21e4c1d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5606ef7_346577a1",
@@ -82,6 +100,24 @@
       "writtenOn": "2024-04-03T17:53:53Z",
       "side": 1,
       "message": "u-nit: We could have a BindSampler lambda defined in this function that\u0027s used for both static and dynamic samplers, so that we don\u0027t forget to update the code for static samplers if the code for regular samplers changes.",
+      "revId": "91b1c61e569a802ccfb2bdadee12374a21e4c1d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacf2343_8609861c",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-04T07:46:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5606ef7_346577a1",
       "revId": "91b1c61e569a802ccfb2bdadee12374a21e4c1d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
