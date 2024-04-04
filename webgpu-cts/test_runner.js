@@ -115,7 +115,7 @@ async function setupWebsocket(port) {
 
 async function runCtsTestViaSocket(event) {
   let input = JSON.parse(event.data);
-  runCtsTest(input['q'], input['w']);
+  runCtsTest(input['q']);
 }
 
 dataCache.setStore({
@@ -174,19 +174,24 @@ if (!isWindows) {
   globalTestConfig.unrollConstEvalLoops = true;
 }
 
-// MAINTENANCE_TODO(gman): remove use_worker since you can use worker=1 instead
-async function runCtsTest(queryString, use_worker) {
+let lastOptionsKey, testWorker;
+
+async function runCtsTest(queryString) {
   const { queries, options } = parseSearchParamLikeWithCTSOptions(queryString);
-  const workerEnabled = use_worker || options.worker;
-  const worker = workerEnabled ? new TestWorker(options) : undefined;
-  const dedicatedWorker =
-    options.worker === "dedicated"
-      ? new TestDedicatedWorker(options)
-      : undefined;
-  const sharedWorker =
-    options.worker === "shared" ? new TestSharedWorker(options) : undefined;
-  const serviceWorker =
-    options.worker === "service" ? new TestServiceWorker(options) : undefined;
+
+  // Set up a worker with the options passed into the test, avoiding creating
+  // a new worker if one was already set up for the last test.
+  // In practice, the options probably won't change between tests in a single
+  // invocation of run_gpu_integration_test.py, but this handles if they do.
+  const currentOptionsKey = JSON.stringify(options);
+  if (currentOptionsKey !== lastOptionsKey) {
+    lastOptionsKey = currentOptionsKey;
+    testWorker =
+      options.worker === 'dedicated' ? new TestDedicatedWorker(options) :
+      options.worker === 'shared' ? new TestSharedWorker(options) :
+      options.worker === 'service' ? new TestServiceWorker(options) :
+      null;
+  }
 
   const loader = new DefaultTestFileLoader();
   const filterQuery = parseQuery(queries[0]);
@@ -223,14 +228,8 @@ async function runCtsTest(queryString, use_worker) {
     const [rec, res] = log.record(name);
 
     beginHeartbeatScope();
-    if (worker) {
-      await worker.run(rec, name, expectations);
-    } else if (dedicatedWorker) {
-      await dedicatedWorker.run(rec, name, expectations);
-    } else if (sharedWorker) {
-      await sharedWorker.run(rec, name, expectations);
-    } else if (serviceWorker) {
-      await serviceWorker.run(rec, name, expectations);
+    if (testWorker) {
+      await testWorker.run(rec, name, expectations);
     } else {
       await testcase.run(rec, expectations);
     }
@@ -304,5 +303,4 @@ function sendMessageInfraFailure(message) {
   }));
 }
 
-window.runCtsTest = runCtsTest;
 window.setupWebsocket = setupWebsocket
