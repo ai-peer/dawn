@@ -150,6 +150,7 @@ src/unittests/texture_ok.spec.ts
 src/webgpu/examples.spec.ts
 src/webgpu/listing.ts
 src/webgpu/multisample_info.ts
+src/webgpu/print_environment.spec.ts
 src/webgpu/api/operation/labels.spec.ts
 src/webgpu/api/operation/onSubmittedWorkDone.spec.ts
 src/webgpu/api/operation/reflection.spec.ts
