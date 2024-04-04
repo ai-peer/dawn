@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f3b9097_48dc5004",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 565,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-04-04T15:04:09Z",
+      "side": 1,
+      "message": "This also fails on Pixel 4\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Android%20arm%20Release%20(Pixel%204)/44444/overview",
+      "range": {
+        "startLine": 565,
+        "startChar": 48,
+        "endLine": 565,
+        "endChar": 115
+      },
+      "revId": "0685da51aae01de67e2a288363c27de46480a38a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d691476_651fe88d",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 1
