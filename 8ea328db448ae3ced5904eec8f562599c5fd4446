@@ -22,6 +22,30 @@
       },
       "revId": "8ea328db448ae3ced5904eec8f562599c5fd4446",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2b60f98_02bc7dc1",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-04T17:33:43Z",
+      "side": 1,
+      "message": "see:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/SwapChainVk.cpp;l\u003d607;drc\u003df85e2931070f20b81171b91298bda280ca337a09;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "f36c6b10_82258427",
+      "range": {
+        "startLine": 150,
+        "startChar": 43,
+        "endLine": 150,
+        "endChar": 71
+      },
+      "revId": "8ea328db448ae3ced5904eec8f562599c5fd4446",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
