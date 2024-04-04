@@ -43,6 +43,8 @@ class Sampler final : public SamplerBase {
 
     VkSampler GetHandle() const;
 
+    const VkSampler& GetHandleAsRef() const;
+
   private:
     ~Sampler() override;
     void DestroyImpl() override;
