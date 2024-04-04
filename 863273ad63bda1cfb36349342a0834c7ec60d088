@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "551b20e3_e874cd13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-04T13:20:31Z",
+      "side": 1,
+      "message": "Thanks, Corentin!\n\nThe MSVC bots are not happy, e.g. [1]. They were not happy in the same way with the polyfilled impl [2], so this isn\u0027t about the \"native\" impl as such. My guess is that this is the same underlying issue as the object caching deduping issue? i.e., we\u0027re indeed not taking the `addressModeU` differences between the samplers into account and thus (re)using an incorrect sampler?\n\n[1] https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8751591465374327921/+/u/Run_the_Dawn_end2end_tests_with_SwiftShader/stdout\n[2] https://dawn-review.googlesource.com/c/dawn/+/182260",
+      "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0206dd6c_8062870a",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-04-04T11:55:01Z",
       "side": 1,
       "message": "Would we need to go through these hoops if vulkan::Sampler::GetHandle returned a const VkSampler\u0026 ?",
+      "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e51d40_0ccfa87e",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-04T13:20:31Z",
+      "side": 1,
+      "message": "I had had the same thought and played around with it locally, but couldn\u0027t find a permutation that got it to build. It feels like these hoops indeed shouldn\u0027t be necessary. I might be missing something straightforward, LMK:\n\nhttps://dawn-review.googlesource.com/c/dawn/+/182361",
+      "parentUuid": "0206dd6c_8062870a",
       "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
