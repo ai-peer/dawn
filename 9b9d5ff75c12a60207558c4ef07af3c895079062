@@ -52,6 +52,24 @@
       "parentUuid": "5fed9d4c_772c81ff",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c53845_92318527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-04T17:50:59Z",
+      "side": 1,
+      "message": "Before digging into this, we had one more clarification. You\u0027d mentioned `texture_2d` isn\u0027t included here, but it sounded like from other chat messages that it should be? Like, Dawn can pretend a `texture_2d` is a  depth texture. So, this validation has to be on the Dawn side because only dawn knows about the hidden depth texture_2d textures?\n\nIs that correct, and if so, does this need to be updated to handle `texture_2d` textures?",
+      "parentUuid": "af3a2cd5_a7893fab",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
