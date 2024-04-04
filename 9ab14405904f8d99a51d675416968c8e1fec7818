@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0231986f_9c0b8a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2024-04-04T20:22:45Z",
+      "side": 1,
+      "message": "I suspect this CL may be blocking the Dawn-\u003eChromium roll.\n\ne.g., https://ci.chromium.org/ui/p/chromium/builders/try/android-binary-size/1842408/overview\n\n----\n\nFAILED: 39db5830-5a63-4084-a282-c11dbe68e769 \"./gen/chrome/android/check_chrome_64_static_initializers.stamp\" ACTION //chrome/android:check_chrome_64_static_initializers(//build/toolchain/android:android_clang_arm64)\nstdout:\nExpected 4 static initializers, but found 5.\n\n----\n\n# 0x75b3804 ./gen/third_party/dawn/src/dawn/dawn_proc.cpp:27 _GLOBAL__sub_I_dawn_proc.cpp\nShowing source lines that appear in the symbol (via objdump).\n; static DawnProcTable procs \u003d kNullProcs;",
+      "revId": "9ab14405904f8d99a51d675416968c8e1fec7818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
