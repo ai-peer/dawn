@@ -16,6 +16,23 @@
       "message": "This is good to go assuming trybots are happy! Will add other folks as FYI once trybots are green.",
       "revId": "1838fefac8156a1a6ae6aea51323306b36b34e98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8746fc9_73df9d03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-04T08:27:26Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "1838fefac8156a1a6ae6aea51323306b36b34e98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
