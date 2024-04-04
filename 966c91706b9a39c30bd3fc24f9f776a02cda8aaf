@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aede6bd_9b59ec31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-04T09:29:38Z",
+      "side": 1,
+      "message": "Dawn -\u003e Chromium roller is failing with this one CL:\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5419874\n\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8751662631744423169/+/u/compile/stdout\n\n```\n FAILED: 8e4ae7a9-eb0b-4e7d-9d59-36ab6d7cf130 \"./gen/third_party/dawn/dawn_lpmfuzz_proto.json_tarball\" ACTION //third_party/dawn/src/dawn/fuzzers:dawn_lpmfuzz_proto__json_tarball(//build/toolchain/linux:clang_x64)\n stderr:\n Traceback (most recent call last):\n   File \"../../third_party/dawn/generator/dawn_json_generator.py\", line 1374, in \u003cmodule\u003e\n     sys.exit(run_generator(MultiGeneratorFromDawnJSON()))\n   File \"/b/s/w/ir/cache/builder/src/third_party/dawn/generator/generator_lib.py\", line 362, in run_generator\n     outputs \u003d _do_renders(renders, args.template_dir)\n   File \"/b/s/w/ir/cache/builder/src/third_party/dawn/generator/generator_lib.py\", line 210, in _do_renders\n     content \u003d env.get_template(render.template).render(**params)\n   File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/environment.py\", line 1301, in render\n     self.environment.handle_exception()\n   File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/environment.py\", line 936, in handle_exception\n     raise rewrite_traceback_stack(source\u003dsource)\n   File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto\", line 172, in top-level template code\n     {% endfor %}\n   File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/runtime.py\", line 777, in _invoke\n     rv \u003d self._func(*arguments)\n   File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto\", line 164, in template\n     {% for member in members %}\n   File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/runtime.py\", line 777, in _invoke\n     rv \u003d self._func(*arguments)\n   File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto\", line 152, in template\n     {{ lift_float_array_proto_member(member, count) }}\n   File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/utils.py\", line 83, in from_obj\n     if hasattr(obj, \"jinja_pass_arg\"):\n jinja2.exceptions.UndefinedError: \u0027unreachable_code\u0027 is undefined\n\n```",
+      "revId": "966c91706b9a39c30bd3fc24f9f776a02cda8aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
