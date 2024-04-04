@@ -16,6 +16,23 @@
       "message": "Added Java file omitted in error. PTAL.",
       "revId": "0bb10e192381438af6ecc0b7f747968b3dbdaabb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5dd357_d1aa5391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-04T13:30:15Z",
+      "side": 1,
+      "message": "Corentin, could you kindly review? I am looking into adding us to tools/android/OWNERS so we can submit library only changes after team only review, but we don\u0027t all have @chromium.org accounts yet.",
+      "revId": "0bb10e192381438af6ecc0b7f747968b3dbdaabb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
