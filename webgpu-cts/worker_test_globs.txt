@@ -16,3 +16,5 @@ webgpu:api,operation,render_pass,storeop2:*
 webgpu:api,operation,onSubmittedWorkDone:*
 webgpu:api,validation,buffer,destroy:*
 webgpu:api,validation,buffer,mapping:*
+webgpu:idl,*
+webgpu:web_platform,*
