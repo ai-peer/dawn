@@ -70,6 +70,24 @@
       "parentUuid": "fa9ff72d_d7945ae5",
       "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2677d8e_9be90020",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-04T14:12:30Z",
+      "side": 1,
+      "message": "I think that would work. Curious what jrprice@ thinks.",
+      "parentUuid": "5be49717_2eeb3f1d",
+      "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
