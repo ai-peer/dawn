@@ -282,8 +282,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 
     bool norm16TextureFormatsSupported = true;
     for (const auto& norm16Format :
-         {VK_FORMAT_R16_UNORM, VK_FORMAT_R16G16_UNORM, VK_FORMAT_R16G16B16A16_UNORM,
-          VK_FORMAT_R16_SNORM, VK_FORMAT_R16G16_SNORM, VK_FORMAT_R16G16B16A16_SNORM}) {
+         {VK_FORMAT_R16_UNORM, VK_FORMAT_R16G16_UNORM, VK_FORMAT_R16G16B16A16_UNORM}) {
         VkFormatProperties norm16Properties;
         mVulkanInstance->GetFunctions().GetPhysicalDeviceFormatProperties(
             mVkPhysicalDevice, norm16Format, &norm16Properties);
