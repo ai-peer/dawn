@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11f92b95_c1575e7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-05T23:16:19Z",
+      "side": 1,
+      "message": "see supersize report\n\nhttps://chrome-supersize.firebaseapp.com/viewer.html?load_url\u003dhttps%3A%2F%2Fstorage.googleapis.com%2Fchromium-binary-size-trybot-results%2Fandroid-binary-size%2F2024%2F04%2F05%2F1844387%2Fsupersize_diff.sizediff#focus\u003d6",
+      "revId": "65ca66d9f99d2108121ba3a68f8f641156745121",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
