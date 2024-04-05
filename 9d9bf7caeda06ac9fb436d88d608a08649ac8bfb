@@ -16,6 +16,23 @@
       "message": "This is blocked on a CTS roll, but PTAL",
       "revId": "9d9bf7caeda06ac9fb436d88d608a08649ac8bfb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea9bbba_1d124198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000530
+      },
+      "writtenOn": "2024-04-05T20:40:30Z",
+      "side": 1,
+      "message": "LGTM, but someone else will have to +2.",
+      "revId": "9d9bf7caeda06ac9fb436d88d608a08649ac8bfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
