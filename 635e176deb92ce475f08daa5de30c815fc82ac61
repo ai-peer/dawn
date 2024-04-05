@@ -46,6 +46,30 @@
       },
       "revId": "635e176deb92ce475f08daa5de30c815fc82ac61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d92fca3_6fbea0fc",
+        "filename": "src/dawn/native/PhysicalDevice.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-05T22:14:21Z",
+      "side": 1,
+      "message": "Oh, hmm I missed that! Thanks for the clarification!",
+      "parentUuid": "04656cbe_e5118868",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 203,
+        "endChar": 36
+      },
+      "revId": "635e176deb92ce475f08daa5de30c815fc82ac61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
