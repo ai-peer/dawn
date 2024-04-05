@@ -43,6 +43,13 @@ class Sampler final : public SamplerBase {
 
     VkSampler GetHandle() const;
 
+    // Some clients need a reference to the handle rather than a copy of it as
+    // (a) they need to pass the address into Vulkan as a pointer to the Vulkan
+    // platform sampler object, and (b) they need that address to hold the data
+    // beyond the lifetime of the local variable storing the return value of
+    // this call.
+    VkSampler& GetReferenceToHandle();
+
   private:
     ~Sampler() override;
     void DestroyImpl() override;
