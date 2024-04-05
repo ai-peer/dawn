@@ -27,6 +27,7 @@
 
 // GEN_BUILD:CONDITION(tint_build_is_linux || tint_build_is_mac)
 
+#include <sys/select.h>
 #include <unistd.h>
 
 #include <termios.h>
