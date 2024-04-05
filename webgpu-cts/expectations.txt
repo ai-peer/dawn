@@ -1688,6 +1688,11 @@ crbug.com/dawn/2275 [ dawn-backend-validation win10 ] webgpu:api,operation,rende
 crbug.com/332878144 [ win webgpu-adapter-swiftshader graphite-enabled ] webgpu:web_platform,external_texture,video:importExternalTexture,* [ Failure ]
 
 ################################################################################
+# Some flaky tests with nvidia + graphite on Windows
+################################################################################
+crbug.com/331237795 [ win webgpu-adapter-default graphite-enabled nvidia-0x2184 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ RetryOnFailure ]
+
+################################################################################
 # New flakes. Please triage:
 ################################################################################
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:api,operation,render_pipeline,overrides:multi_entry_points:isAsync=true [ RetryOnFailure ]
