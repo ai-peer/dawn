@@ -68,6 +68,24 @@
       "message": "Why add a new mCurrentAccess vs using the existing counters?\n\nWe could consider every access a write access for buffers since we don\u0027t differentiate or allow concurrent read right now.\n\nIf you add this member, we should unify it so it\u0027s not a buffer-only thing. we can have:\n\n```\nRef\u003cSharedResource\u003e mExclusiveAccess; // exclusive read or write access\nbool mIsExclusiveWrite; // true if the exclusive access is a write access \nint mReadAccessCount; // count of concurrent readers. mExclusiveAccess should be null\n```",
       "revId": "684579396cc66a35a4f58393a9b048d1fac37550",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "550c9459_3f5ea34d",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-04-05T21:32:52Z",
+      "side": 1,
+      "message": "I switched over to an enum that tracks the current access state, which I feel is worthwhile over inferring from two different variables.",
+      "parentUuid": "9f50b1ab_4c6ae0dd",
+      "revId": "684579396cc66a35a4f58393a9b048d1fac37550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
