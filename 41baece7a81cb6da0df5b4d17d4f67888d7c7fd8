@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23710785_ba38fd28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-05T02:54:31Z",
+      "side": 1,
+      "message": "This is blocked on a CTS roll, but PTAL",
+      "revId": "41baece7a81cb6da0df5b4d17d4f67888d7c7fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3cd290_bd903eee",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-05T02:54:31Z",
+      "side": 1,
+      "message": "gen_listings_and_webworkers generates a bunch of new files - one for each .spec.ts. E.g. if there\u0027s a `webgpu/a/b/c.spec.ts`\nthen we generate: `webgpu/webworker/a/b/c.worker.js`",
+      "revId": "41baece7a81cb6da0df5b4d17d4f67888d7c7fd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
