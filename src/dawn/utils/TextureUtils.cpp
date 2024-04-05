@@ -200,7 +200,7 @@ bool IsRenderableFormat(const wgpu::Device& device, wgpu::TextureFormat textureF
     }
 
     if (IsNorm16TextureFormat(textureFormat)) {
-        return device.HasFeature(wgpu::FeatureName::Norm16TextureFormats);
+        return device.HasFeature(wgpu::FeatureName::Unorm16TextureFormats);
     }
 
     switch (textureFormat) {
@@ -226,7 +226,7 @@ bool TextureFormatSupportsMultisampling(const wgpu::Device& device,
     }
 
     if (IsNorm16TextureFormat(textureFormat)) {
-        return device.HasFeature(wgpu::FeatureName::Norm16TextureFormats);
+        return device.HasFeature(wgpu::FeatureName::Unorm16TextureFormats);
     }
 
     switch (textureFormat) {
@@ -273,7 +273,7 @@ bool TextureFormatSupportsResolveTarget(const wgpu::Device& device,
         case wgpu::TextureFormat::RG16Snorm:
         case wgpu::TextureFormat::RGBA16Unorm:
         case wgpu::TextureFormat::RGBA16Snorm:
-            return device.HasFeature(wgpu::FeatureName::Norm16TextureFormats);
+            return device.HasFeature(wgpu::FeatureName::Unorm16TextureFormats);
 
         default:
             return false;
