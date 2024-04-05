@@ -33,6 +33,24 @@
       "message": "change the name to \"unorm\", and not \"norm\" ?",
       "revId": "9bb6aa8a13ba4440b9c0bc6dcbab9d11e76c2e6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68df4e85_d1f17f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-05T16:39:24Z",
+      "side": 1,
+      "message": "We cannot rename it in one steps. It will break chromium build. I need to do following steps:\n1. this CL.\n2. Add Feature::Unorm16TextureFormats, and make Norm16TextureFormats as an alias of Unorm16TextureFormats\n3. Change chrome and skia code to use Unorm16TextureFormats\n4. Remove the Norm16TextureFormats in dawn,",
+      "parentUuid": "97d8ba2c_c901aa90",
+      "revId": "9bb6aa8a13ba4440b9c0bc6dcbab9d11e76c2e6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
