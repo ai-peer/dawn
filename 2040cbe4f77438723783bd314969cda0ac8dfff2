@@ -124,6 +124,24 @@
       "parentUuid": "c2677d8e_9be90020",
       "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff6649d_6d977241",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-05T10:15:16Z",
+      "side": 1,
+      "message": "Put this in a new `allocators` structure instead, which also holds the `Value` block allocator.",
+      "parentUuid": "2813aa4e_8053448c",
+      "revId": "2040cbe4f77438723783bd314969cda0ac8dfff2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
