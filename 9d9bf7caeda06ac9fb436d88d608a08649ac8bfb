@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b198bd_9ab2027b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-05T02:55:47Z",
+      "side": 1,
+      "message": "This is blocked on a CTS roll, but PTAL",
+      "revId": "9d9bf7caeda06ac9fb436d88d608a08649ac8bfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
