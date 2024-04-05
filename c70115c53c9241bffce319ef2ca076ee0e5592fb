@@ -56,6 +56,30 @@
       },
       "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972d35f1_905bce3b",
+        "filename": "tools/android/webgpu/src/test/java/android/dawn/EnumsTest.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-05T12:32:33Z",
+      "side": 1,
+      "message": "I don\u0027t mind either way, it should probably be Dawn team\u0027s call (unless AndroidX considerations force our hand). android.dawn came out of a conversation between me and Corentin.",
+      "parentUuid": "e21d0687_aea91ed2",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
