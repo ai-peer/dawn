@@ -82,7 +82,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-03-28 06:49:31AM
+# Last rolled: 2024-04-05 08:45:23AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -610,7 +610,7 @@ crbug.com/dawn/2479 [ linux nvidia webgpu-shared-worker ] webgpu:api,validation,
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappedAtCreation: [ Failure ]
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:getMappedRange,state,unmapped: [ Failure ]
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
-crbug.com/dawn/2478 [ linux intel ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
+crbug.com/dawn/2478 [ intel linux ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
 crbug.com/dawn/2478 [ linux webgpu-no-worker ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
 crbug.com/dawn/2478 [ linux webgpu-no-worker ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
 crbug.com/dawn/2478 [ mac ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
@@ -1685,7 +1685,7 @@ crbug.com/dawn/2275 [ dawn-backend-validation win10 ] webgpu:api,operation,rende
 ################################################################################
 # Cannot readback Multiplanar d3d11 textures and then upload to swiftshader
 ################################################################################
-crbug.com/332878144 [ win webgpu-adapter-swiftshader graphite-enabled ] webgpu:web_platform,external_texture,video:importExternalTexture,* [ Failure ]
+crbug.com/332878144 [ graphite-enabled webgpu-adapter-swiftshader win ] webgpu:web_platform,external_texture,video:importExternalTexture,* [ Failure ]
 
 ################################################################################
 # New flakes. Please triage:
