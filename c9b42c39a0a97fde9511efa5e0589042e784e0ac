@@ -52,6 +52,24 @@
       "parentUuid": "170b02e5_3309efc7",
       "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d2bc21_7cf2e95a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-05T22:34:11Z",
+      "side": 1,
+      "message": "As discussed offline, will blocklist the OpenGLES backend on Android in Chrome for now: https://chromium-review.googlesource.com/c/chromium/src/+/5426402.",
+      "parentUuid": "75fd7599_00acb0ba",
+      "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
