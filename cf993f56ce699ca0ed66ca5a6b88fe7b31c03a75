@@ -16,6 +16,23 @@
       "message": "THank you!",
       "revId": "cf993f56ce699ca0ed66ca5a6b88fe7b31c03a75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7701a150_22d9bc17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-05T12:25:35Z",
+      "side": 1,
+      "message": "Actually I forgot to check before the previous comment. Contributions to the Dawn/Tint repo require signing the CLA. Could you do it? https://dawn.googlesource.com/dawn/+/HEAD/CONTRIBUTING.md#contributor-license-agreement",
+      "revId": "cf993f56ce699ca0ed66ca5a6b88fe7b31c03a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
