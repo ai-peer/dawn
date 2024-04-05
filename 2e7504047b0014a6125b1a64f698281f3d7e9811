@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4feb1ca6_7e49f706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-05T11:34:39Z",
+      "side": 1,
+      "message": "Simplified further based on feedback from Corentin - PTAL!",
+      "revId": "2e7504047b0014a6125b1a64f698281f3d7e9811",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

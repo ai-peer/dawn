@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "428c752c_70da3556",
+        "filename": "src/dawn/native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-05T11:34:39Z",
+      "side": 1,
+      "message": "Per Corentin\u0027s offline feedback, made this even simpler by changing both GetHandle() functions to return const ref.",
+      "parentUuid": "0bd45d82_f3cc5182",
+      "revId": "863273ad63bda1cfb36349342a0834c7ec60d088",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cab48a9d_f148d13e",
         "filename": "src/dawn/native/vulkan/BindGroupVk.cpp",
         "patchSetId": 5
