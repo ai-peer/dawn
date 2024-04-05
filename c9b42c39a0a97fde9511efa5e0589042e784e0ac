@@ -34,6 +34,24 @@
       "parentUuid": "734b6eec_a960f863",
       "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75fd7599_00acb0ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-05T17:25:26Z",
+      "side": 1,
+      "message": "I didn\u0027t add any code to do so. Should we? It\u0027s only usable in Compat, which is protected by --enable-webgpu-developer-features.\n\nUnless you\u0027re worried about initializing it causing problems for other backends?",
+      "parentUuid": "170b02e5_3309efc7",
+      "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
