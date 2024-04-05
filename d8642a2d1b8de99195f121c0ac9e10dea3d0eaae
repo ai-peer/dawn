@@ -16,6 +16,23 @@
       "message": "Some bots are still running but I think everything should be good here now. PTAL!",
       "revId": "d8642a2d1b8de99195f121c0ac9e10dea3d0eaae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07deae67_4c72d0d3",
+        "filename": "src/dawn/native/vulkan/SamplerVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-04-05T09:00:14Z",
+      "side": 1,
+      "message": "This can\u0027t be a const ref as it stands because the compiler complains about AsVkArray() not taking in a const pointer [1]. I didn\u0027t try to play with that as part of this CL at this time as I\u0027d had enough fiddling for the time being ;), but let me you know if you think it should be part of this CL to try to sort that out.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/vulkan_platform.h;l\u003d124?q\u003dvulkan_platform.h\u0026ss\u003dchromium",
+      "revId": "d8642a2d1b8de99195f121c0ac9e10dea3d0eaae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
