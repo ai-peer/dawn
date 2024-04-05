@@ -16,6 +16,24 @@
       "message": "Austin, could you take another look?\n\nI\u0027ve disabled the problematic gl_tests in Chrome (https://issues.chromium.org/issues/332947916) here: https://chromium-review.googlesource.com/c/chromium/src/+/5425105\n\nWith the text in the CL description added, a manual roll passed the binary size check here: https://chromium-review.googlesource.com/c/chromium/src/+/5425356?tab\u003dchecks\n\nI\u0027ll do the manual roll once this lands. +bclayton FYI",
       "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "170b02e5_3309efc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-05T16:52:20Z",
+      "side": 1,
+      "message": "double checking - do we blocklist the GLES backend by default somewhere?\n\nI don\u0027t see it around [here](https://source.chromium.org/chromium/chromium/src/+/main:gpu/config/webgpu_blocklist_impl.cc;l\u003d33;drc\u003dd7d69375c25df2dc3980e6a4edc5d032ec940efc;bpv\u003d1;bpt\u003d1)",
+      "parentUuid": "734b6eec_a960f863",
+      "revId": "c9b42c39a0a97fde9511efa5e0589042e784e0ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
