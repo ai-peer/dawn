@@ -637,7 +637,7 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
 
     // For a full size write, UpdateSubresource1(D3D11_COPY_DISCARD) can be used to update
     // mD3d11ConstantBuffer.
-    if (size == GetSize() && offset == 0) {
+    if (size >= GetSize() && offset == 0) {
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
         constexpr size_t kConstantBufferUpdateAlignment = 16;
