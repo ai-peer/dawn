@@ -352,13 +352,13 @@ bool operator!=(const BindingInfo& a, const BindingInfo& b) {
                    layoutA.hasDynamicOffset != layoutB.hasDynamicOffset ||
                    layoutA.minBindingSize != layoutB.minBindingSize;
         },
-        [&](const SamplerBindingLayout& layoutA) -> bool {
-            const SamplerBindingLayout& layoutB = std::get<SamplerBindingLayout>(b.bindingLayout);
+        [&](const SamplerBindingInfo& layoutA) -> bool {
+            const SamplerBindingInfo& layoutB = std::get<SamplerBindingInfo>(b.bindingLayout);
             return layoutA.type != layoutB.type;
         },
-        [&](const StaticSamplerHolderBindingLayout& layoutA) -> bool {
-            const StaticSamplerHolderBindingLayout& layoutB =
-                std::get<StaticSamplerHolderBindingLayout>(b.bindingLayout);
+        [&](const StaticSamplerBindingInfo& layoutA) -> bool {
+            const StaticSamplerBindingInfo& layoutB =
+                std::get<StaticSamplerBindingInfo>(b.bindingLayout);
             return layoutA.sampler != layoutB.sampler;
         },
         [&](const TextureBindingInfo& layoutA) -> bool {
@@ -395,7 +395,7 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
     if (binding->buffer.type != wgpu::BufferBindingType::Undefined) {
         bindingInfo.bindingLayout = BufferBindingInfo(binding->buffer);
     } else if (binding->sampler.type != wgpu::SamplerBindingType::Undefined) {
-        bindingInfo.bindingLayout = binding->sampler;
+        bindingInfo.bindingLayout = SamplerBindingInfo(binding->sampler);
     } else if (binding->texture.sampleType != wgpu::TextureSampleType::Undefined) {
         TextureBindingLayout bindingLayout = binding->texture.WithTrivialFrontendDefaults();
         if (binding->texture.viewDimension == wgpu::TextureViewDimension::Undefined) {
@@ -410,9 +410,7 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
         }
         bindingInfo.bindingLayout = StorageTextureBindingInfo(bindingLayout);
     } else if (auto* staticSamplerBindingLayout = binding.Get<StaticSamplerBindingLayout>()) {
-        StaticSamplerHolderBindingLayout bindingLayout;
-        bindingLayout.sampler = staticSamplerBindingLayout->sampler;
-        bindingInfo.bindingLayout = bindingLayout;
+        bindingInfo.bindingLayout = StaticSamplerBindingInfo(*staticSamplerBindingLayout);
     } else {
         DAWN_UNREACHABLE();
     }
@@ -476,8 +474,8 @@ bool SortBindingsCompare(const UnpackedPtr<BindGroupLayoutEntry>& a,
             break;
         }
         case BindingInfoType::Sampler: {
-            const auto& aLayout = std::get<SamplerBindingLayout>(aInfo.bindingLayout);
-            const auto& bLayout = std::get<SamplerBindingLayout>(bInfo.bindingLayout);
+            const auto& aLayout = std::get<SamplerBindingInfo>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<SamplerBindingInfo>(bInfo.bindingLayout);
             if (aLayout.type != bLayout.type) {
                 return aLayout.type < bLayout.type;
             }
@@ -512,8 +510,8 @@ bool SortBindingsCompare(const UnpackedPtr<BindGroupLayoutEntry>& a,
             break;
         }
         case BindingInfoType::StaticSampler: {
-            const auto& aLayout = std::get<StaticSamplerHolderBindingLayout>(aInfo.bindingLayout);
-            const auto& bLayout = std::get<StaticSamplerHolderBindingLayout>(bInfo.bindingLayout);
+            const auto& aLayout = std::get<StaticSamplerBindingInfo>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<StaticSamplerBindingInfo>(bInfo.bindingLayout);
             if (aLayout.sampler != bLayout.sampler) {
                 return aLayout.sampler < bLayout.sampler;
             }
@@ -637,7 +635,7 @@ size_t BindGroupLayoutInternalBase::ComputeContentHash() {
                 recorder.Record(BindingInfoType::Buffer, layout.hasDynamicOffset, layout.type,
                                 layout.minBindingSize);
             },
-            [&](const SamplerBindingLayout& layout) {
+            [&](const SamplerBindingInfo& layout) {
                 recorder.Record(BindingInfoType::Sampler, layout.type);
             },
             [&](const TextureBindingInfo& layout) {
@@ -648,7 +646,7 @@ size_t BindGroupLayoutInternalBase::ComputeContentHash() {
                 recorder.Record(BindingInfoType::StorageTexture, layout.access, layout.format,
                                 layout.viewDimension);
             },
-            [&](const StaticSamplerHolderBindingLayout& layout) {
+            [&](const StaticSamplerBindingInfo& layout) {
                 recorder.Record(BindingInfoType::StaticSampler, layout.sampler->GetContentHash());
             });
     }
