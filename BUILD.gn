@@ -67,6 +67,12 @@ group("cmds") {
   }
 }
 
+if (is_android) {
+  group("android") {
+    deps = [ "tools/android" ]
+  }
+}
+
 group("all") {
   testonly = true
   deps = [
@@ -76,6 +82,9 @@ group("all") {
     ":libs",
     ":tests",
   ]
+  if (is_android) {
+    deps += [ ":android" ]
+  }
 }
 
 if (enable_rust) {

@@ -1,0 +1,91 @@
+# Copyright 2024 The Dawn & Tint Authors
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("//build/config/android/rules.gni")
+
+dawn_json_generator("kotlin_gen") {
+  target = "kotlin"
+  outputs = [
+    "AdapterType.kt",
+    "AddressMode.kt",
+    "AlphaMode.kt",
+    "BackendType.kt",
+    "BlendFactor.kt",
+    "BlendOperation.kt",
+    "BufferBindingType.kt",
+    "BufferMapAsyncStatus.kt",
+    "BufferMapState.kt",
+    "BufferUsage.kt",
+    "CallbackMode.kt",
+    "ColorWriteMask.kt",
+    "CompareFunction.kt",
+    "CompilationInfoRequestStatus.kt",
+    "CompilationMessageType.kt",
+    "Constants.kt",
+    "CreatePipelineAsyncStatus.kt",
+    "CullMode.kt",
+    "DeviceLostReason.kt",
+    "ErrorFilter.kt",
+    "ErrorType.kt",
+    "ExternalTextureRotation.kt",
+    "FeatureName.kt",
+    "FilterMode.kt",
+    "FrontFace.kt",
+    "HeapProperty.kt",
+    "IndexFormat.kt",
+    "LoadOp.kt",
+    "LoggingType.kt",
+    "MapMode.kt",
+    "MipmapFilterMode.kt",
+    "PopErrorScopeStatus.kt",
+    "PowerPreference.kt",
+    "PresentMode.kt",
+    "PrimitiveTopology.kt",
+    "QueryType.kt",
+    "QueueWorkDoneStatus.kt",
+    "RequestAdapterStatus.kt",
+    "RequestDeviceStatus.kt",
+    "SamplerBindingType.kt",
+    "ShaderStage.kt",
+    "SharedFenceType.kt",
+    "StencilOperation.kt",
+    "StorageTextureAccess.kt",
+    "StoreOp.kt",
+    "SType.kt",
+    "TextureAspect.kt",
+    "TextureDimension.kt",
+    "TextureFormat.kt",
+    "TextureSampleType.kt",
+    "TextureUsage.kt",
+    "TextureViewDimension.kt",
+    "Util.java",
+    "VertexFormat.kt",
+    "VertexStepMode.kt",
+    "WaitStatus.kt",
+    "WGSLFeatureName.kt",
+  ]
+}
