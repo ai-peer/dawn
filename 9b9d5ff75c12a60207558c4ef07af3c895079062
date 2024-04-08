@@ -70,6 +70,24 @@
       "parentUuid": "af3a2cd5_a7893fab",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e188ecc_2a8d072f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-04-08T19:43:28Z",
+      "side": 1,
+      "message": "I don\u0027t think we care about `texture_2d`. I know it works in WebGL1 for 11+ years. Like here\u0027s a demo from 2011 that uses a depth texture as `texture_2d` (press `d` 3 times). https://webglsamples.org/field/field.html\n\nCompat\u0027s goal is to be WebGL1/2++ so it would be strange if compat didn\u0027t support this and people were forced to stay in WebGL to get the feature. I don\u0027t think anything in the chat suggests using a depth texture as `texture_2d` doesn\u0027t work. The spec says, as long as TEXTURE_COMPARE_MODE is none then it works. setting a sampler to have a comparison mode makes it a `sampler_comparison` not a `sampler`. A `sampler_comparison` is only compatible with `texture_depth???` textures, not `texture_2d`.",
+      "parentUuid": "43c53845_92318527",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
