@@ -98,11 +98,8 @@ class Device final : public ObjectWithEventsBase {
     WGPUErrorCallback mErrorCallback = nullptr;
     WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
     WGPULoggingCallback mLoggingCallback = nullptr;
-    bool mDidRunLostCallback = false;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mErrorUserdata = nullptr;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
+    raw_ptr<void> mErrorUserdata = nullptr;
+    raw_ptr<void> mDeviceLostUserdata = nullptr;
     raw_ptr<void> mLoggingUserdata = nullptr;
 
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:

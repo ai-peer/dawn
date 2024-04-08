@@ -242,9 +242,10 @@ void Device::HandleLogging(WGPULoggingType loggingType, const char* message) {
 }
 
 void Device::HandleDeviceLost(WGPUDeviceLostReason reason, const char* message) {
-    if (mDeviceLostCallback && !mDidRunLostCallback) {
-        mDidRunLostCallback = true;
-        mDeviceLostCallback(reason, message, mDeviceLostUserdata);
+    if (mDeviceLostCallback) {
+        WGPUDeviceLostCallback callback = mDeviceLostCallback;
+        mDeviceLostCallback = nullptr;
+        callback(reason, message, mDeviceLostUserdata.ExtractAsDangling());
     }
 }
 
