@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26294df9_684576be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-08T08:56:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c470c98c_adced83b",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-08T08:56:23Z",
+      "side": 1,
+      "message": "No change was done for `mErrorUserdata`, was it a false positive?",
+      "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
