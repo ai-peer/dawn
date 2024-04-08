@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43dbc7a3_d6258aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-08T13:48:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6567ca1bbc106fd799dfb56fca25f96bf9942f62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b35d06_ebef9dee",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-08T13:48:15Z",
+      "side": 1,
+      "message": "Seems to be an unrelated fix?",
+      "revId": "6567ca1bbc106fd799dfb56fca25f96bf9942f62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
