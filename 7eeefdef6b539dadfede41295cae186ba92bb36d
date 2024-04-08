@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fcd46d_60aa942f",
+        "filename": "src/tint/utils/system/terminal_posix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-08T10:26:34Z",
+      "side": 0,
+      "message": "We need to keep unistd as well\n\n```\n/b/s/w/ir/cache/builder/clang/bin/clang++ -DTINT_BUILD_GLSL_VALIDATOR\u003d1 -DTINT_BUILD_GLSL_WRITER\u003d1 -DTINT_BUILD_HLSL_WRITER\u003d1 -DTINT_BUILD_IR_BINARY\u003d1 -DTINT_BUILD_IS_LINUX\u003d1 -DTINT_BUILD_IS_MAC\u003d0 -DTINT_BUILD_IS_WIN\u003d0 -DTINT_BUILD_MSL_WRITER\u003d1 -DTINT_BUILD_SPV_READER\u003d1 -DTINT_BUILD_SPV_WRITER\u003d1 -DTINT_BUILD_SYNTAX_TREE_WRITER\u003d0 -DTINT_BUILD_TINTD\u003d0 -DTINT_BUILD_WGSL_READER\u003d1 -DTINT_BUILD_WGSL_WRITER\u003d1 -DTINT_HASH_SEED\u003d0x991f24005a2ae628 -I/b/s/w/ir/cache/uncached/dawn -I/b/s/w/ir/cache/uncached/dawn/include -g -fPIC -fno-exceptions -fno-rtti -Wno-deprecated-builtins -Wno-unknown-warning-option -Wno-switch-default -fsanitize\u003dundefined -fsanitize\u003dfloat-divide-by-zero -pedantic-errors -Wall -Werror -Wextra -Wno-documentation-unknown-command -Wno-padded -Wno-switch-enum -Wno-unknown-pragmas -fstandalone-debug -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-format-pedantic -Wno-gnu-zero-variadic-macro-arguments -Wno-poison-system-directories -Wno-return-std-move-in-c++11 -Wno-undefined-var-template -Wno-unsafe-buffer-usage -Wno-used-but-marked-unused -Weverything -std\u003dgnu++17 -MD -MT src/tint/CMakeFiles/tint_utils_system.dir/utils/system/terminal_posix.cc.o -MF src/tint/CMakeFiles/tint_utils_system.dir/utils/system/terminal_posix.cc.o.d -o src/tint/CMakeFiles/tint_utils_system.dir/utils/system/terminal_posix.cc.o -c /b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:52:17: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n   52 |     if (!isatty(STDIN_FILENO) || !TerminalSupportsColors(out)) {\n      |                 ^\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:94:16: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n   94 |         FD_SET(STDIN_FILENO, \u0026rfds);\n      |                ^\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:94:16: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:98:26: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n   98 |         int res \u003d select(STDIN_FILENO + 1, \u0026rfds, nullptr, nullptr, \u0026tv);\n      |                          ^\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:99:36: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n   99 |         return res \u003e 0 \u0026\u0026 FD_ISSET(STDIN_FILENO, \u0026rfds);\n      |                                    ^\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:99:36: error: use of undeclared identifier \u0027STDIN_FILENO\u0027\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:110:17: error: invalid argument type \u0027void\u0027 to unary expression\n  110 |             if (!poll_stdin()) {\n      |                 ^~~~~~~~~~~~~\n/b/s/w/ir/cache/uncached/dawn/src/tint/utils/system/terminal_posix.cc:207:10: error: use of undeclared identifier \u0027isatty\u0027\n  207 |     if (!isatty(fileno(f))) {\n      |          ^\n```",
+      "revId": "7eeefdef6b539dadfede41295cae186ba92bb36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
