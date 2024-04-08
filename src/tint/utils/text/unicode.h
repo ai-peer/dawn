@@ -82,11 +82,44 @@ std::pair<CodePoint, size_t> Decode(const uint8_t* ptr, size_t len);
 ///          If the next code point cannot be decoded then returns [0,0].
 std::pair<CodePoint, size_t> Decode(std::string_view utf8_string);
 
+/// Encodes a code point to the utf8 string buffer.
+/// @param code_point the code point to encode.
+/// @param ptr the pointer to the utf8 string buffer, or nullptr to return the number of code units
+/// that will be written.
+/// @returns the number of code units (bytes) written if @p ptr is not null, or the number of code
+/// units that would have been written if @p ptr is null.
+size_t Encode(CodePoint code_point, uint8_t* ptr);
+
 /// @returns true if all the utf-8 code points in the string are ASCII
 /// (code-points 0x00..0x7f).
 bool IsASCII(std::string_view);
 
 }  // namespace utf8
+
+namespace utf16 {
+
+/// Decodes the first code point in the utf16 string.
+/// @param ptr the pointer to the first byte of the utf16 sequence
+/// @param len the maximum number of code units to read
+/// @returns a pair of CodePoint and width in code units (16-bit integers).
+///          If the next code point cannot be decoded then returns [0,0].
+std::pair<CodePoint, size_t> Decode(const uint16_t* ptr, size_t len);
+
+/// Decodes the first code point in the utf16 string.
+/// @param utf16_string the string view that contains the utf16 sequence
+/// @returns a pair of CodePoint and width in code units (16-bit integers).
+///          If the next code point cannot be decoded then returns [0,0].
+std::pair<CodePoint, size_t> Decode(std::string_view utf16_string);
+
+/// Encodes a code point to the utf16 string buffer.
+/// @param code_point the code point to encode.
+/// @param ptr the pointer to the utf16 string buffer, or nullptr to return the number of code units
+/// that will be written.
+/// @returns the number of code units (16-bit integers) written if @p ptr is not null, or the number
+/// of code units that would have been written if @p ptr is null.
+size_t Encode(CodePoint code_point, uint16_t* ptr);
+
+}  // namespace utf16
 
 }  // namespace tint
 
