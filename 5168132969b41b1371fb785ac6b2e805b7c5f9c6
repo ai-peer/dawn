@@ -50,6 +50,24 @@
       "message": "No change was done for `mErrorUserdata`, was it a false positive?",
       "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299b5d91_02de623c",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-08T16:07:44Z",
+      "side": 1,
+      "message": "I think mErrorUserdata needs to be cleared out in ~Device()",
+      "parentUuid": "c470c98c_adced83b",
+      "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
