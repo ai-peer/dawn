@@ -16,6 +16,41 @@
       "message": "LGTM, but let me request some additional machines get the experimental OS before this goes in.",
       "revId": "becbb583d397fc2e257aebeeba8dbe6f1632ec18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16f87f5_f602b8f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-09T21:06:46Z",
+      "side": 1,
+      "message": "Removing the +2 since I think you\u0027ll have to add the builder to the list of known ones in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/infra/config/global/main.star ? I\u0027m only seeing the Intel experimental builder atm.",
+      "revId": "becbb583d397fc2e257aebeeba8dbe6f1632ec18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "866355f7_3d662219",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-09T21:06:46Z",
+      "side": 1,
+      "message": "Additional machines requested in b/333586066. It normally takes an hour or two for the upgrade to go through, so it should be fine to submit this since it will have to go through the Dawn CQ.",
+      "parentUuid": "ec34ad8e_1513f17e",
+      "revId": "becbb583d397fc2e257aebeeba8dbe6f1632ec18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
