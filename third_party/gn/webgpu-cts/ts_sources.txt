@@ -378,6 +378,7 @@ src/webgpu/shader/execution/shadow.spec.ts
 src/webgpu/shader/execution/stage.spec.ts
 src/webgpu/shader/execution/zero_init.spec.ts
 src/webgpu/shader/execution/expression/expression.ts
+src/webgpu/shader/execution/expression/precedence.spec.ts
 src/webgpu/shader/execution/expression/access/array/index.spec.ts
 src/webgpu/shader/execution/expression/access/matrix/index.spec.ts
 src/webgpu/shader/execution/expression/access/vector/components.spec.ts
@@ -606,6 +607,7 @@ src/webgpu/shader/execution/expression/call/builtin/textureLoad.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/textureNumLayers.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/textureNumLevels.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/textureNumSamples.spec.ts
+src/webgpu/shader/execution/expression/call/builtin/texture_utils.ts
 src/webgpu/shader/execution/expression/call/builtin/textureSample.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/textureSampleBias.spec.ts
 src/webgpu/shader/execution/expression/call/builtin/textureSampleCompare.spec.ts
@@ -713,12 +715,14 @@ src/webgpu/shader/validation/decl/util.ts
 src/webgpu/shader/validation/decl/ptr_spelling.spec.ts
 src/webgpu/shader/validation/decl/var.spec.ts
 src/webgpu/shader/validation/decl/var_access_mode.spec.ts
+src/webgpu/shader/validation/expression/precedence.spec.ts
 src/webgpu/shader/validation/expression/access/vector.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/const_override_validation.ts
 src/webgpu/shader/validation/expression/binary/add_sub_mul.spec.ts
 src/webgpu/shader/validation/expression/binary/and_or_xor.spec.ts
 src/webgpu/shader/validation/expression/binary/bitwise_shift.spec.ts
 src/webgpu/shader/validation/expression/binary/comparison.spec.ts
+src/webgpu/shader/validation/expression/binary/div_rem.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/abs.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/acos.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/acosh.spec.ts
@@ -776,6 +780,7 @@ src/webgpu/shader/validation/expression/call/builtin/shader_stage_utils.ts
 src/webgpu/shader/validation/expression/call/builtin/sign.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/sin.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/sinh.spec.ts
+src/webgpu/shader/validation/expression/call/builtin/smoothstep.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/sqrt.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/step.spec.ts
 src/webgpu/shader/validation/expression/call/builtin/tan.spec.ts
