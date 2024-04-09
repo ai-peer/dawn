@@ -177,7 +177,11 @@ class Device::DeviceLostEvent : public TrackedEvent {
         mDevice->Reference();
     }
 
-    ~DeviceLostEvent() override { mDevice->Release(); }
+    ~DeviceLostEvent() override {
+        Device* device = mDevice.ExtractAsDangling();
+        device->mDeviceLostInfo.userdata = nullptr;
+        device->Release();
+    }
 
     EventType GetType() override { return kType; }
 
@@ -215,8 +219,7 @@ class Device::DeviceLostEvent : public TrackedEvent {
     std::optional<std::string> mMessage;
 
     // Strong reference to the device so that when we call the callback we can pass the device.
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<Device, DanglingUntriaged> mDevice;
+    raw_ptr<Device> mDevice;
 };
 
 Device::Device(const ObjectBaseParams& params,
