@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac7aba5b_444db828",
+        "filename": "src/tint/lang/wgsl/ls/file.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-09T16:23:36Z",
+      "side": 1,
+      "message": "Nit: I think the \"zero-based langsvr::...\" is swapped with the \"one-based tint::Source...\" bit in this comment.\n\n```suggestion\n    /// @return the one-based tint::Source::Position @p loc in utf-8 code points converted to a\n    /// zero-based langsvr::lsp::Position in utf-16 code points.\n```",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 62
+      },
+      "revId": "924b6274d87c6e6cff4ec36b2eab6d1cb5fa0a06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
