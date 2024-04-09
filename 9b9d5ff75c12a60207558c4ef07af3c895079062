@@ -88,6 +88,24 @@
       "parentUuid": "43c53845_92318527",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad34db4a_c242d9ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-09T14:33:44Z",
+      "side": 1,
+      "message": "If texture_2d doesn\u0027t matter, does this mean we can do this inside Tint in a transform? Is there any information that needs to come from Dawn?",
+      "parentUuid": "8e188ecc_2a8d072f",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
