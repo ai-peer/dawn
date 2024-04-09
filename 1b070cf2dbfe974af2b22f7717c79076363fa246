@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b325ad29_f4684eb0",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T07:28:10Z",
+      "side": 1,
+      "message": "I believe that we should always call the device lost info at some point, so setting userdata to null, or using ExtractAsDangling in CompleteImpl could be enough? Then here we could do mDevice.ExtractAsDangling()-\u003eRelease();",
+      "revId": "1b070cf2dbfe974af2b22f7717c79076363fa246",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
