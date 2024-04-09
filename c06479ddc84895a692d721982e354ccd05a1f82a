@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ed770f1_63b5d357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T11:38:02Z",
+      "side": 1,
+      "message": "PTAL the whole stack! It\u0027s some CLs that have been sitting in my Gerrit for a while.",
+      "revId": "c06479ddc84895a692d721982e354ccd05a1f82a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
