@@ -237,6 +237,31 @@ class ObjectBase {
     {%- endif -%}
 {%- endmacro %}
 
+//* This rendering macro should ONLY be used for callback info type functions.
+{% macro render_cpp_callback_info_template_method_declaration(type, method, dfn=False) %}
+    {% set CppType = as_cppType(type.name) %}
+    {% set OriginalMethodName = method.name.CamelCase() %}
+    {% set MethodName = OriginalMethodName[:-1] if method.name.chunks[-1] == "2" else OriginalMethodName %}
+    {% set MethodName = CppType + "::" + MethodName if dfn else MethodName %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug/dawn/2509: Remove name handling once old APIs are deprecated.
+    {% set CallbackInfoType = (method.arguments|last).type %}
+    {% set CallbackType = (CallbackInfoType.members|first).type %}
+    {% set TemplatedCallbackName = "Templated" + as_cppType(CallbackType.name)[:-1] %}
+    {% set SfinaeArg = " = std::enable_if_t<std::is_convertible_v<F, " + TemplatedCallbackName + "<T>*>>" if not dfn else "" %}
+    template <typename F, typename T, typename{{SfinaeArg}}>
+    {{as_cppType(method.return_type.name)}} {{MethodName}}(
+        {%- for arg in method.arguments if arg.type.category != "callback info" -%}
+            {%- if arg.type.category == "object" and arg.annotation == "value" -%}
+                {{as_cppType(arg.type.name)}} const& {{as_varName(arg.name)}}{{ ", "}}
+            {%- else -%}
+                {{as_annotated_cppType(arg)}}{{ ", "}}
+            {%- endif -%}
+        {%- endfor -%}
+    {{as_cppType(types["callback mode"].name)}} mode, F callback, T userdata) const
+{%- endmacro %}
+
+//* This rendering macro should NOT be used for callback info type functions.
 {% macro render_cpp_method_declaration(type, method, dfn=False) %}
     {% set CppType = as_cppType(type.name) %}
     {% set OriginalMethodName = method.name.CamelCase() %}
@@ -281,6 +306,52 @@ class ObjectBase {
     struct {{as_cppType(type.name)}};
 {% endfor %}
 
+// Templated callback types for C++ API
+{% for type in by_category["callback function"] %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug/dawn/2509: Remove name handling once old APIs are deprecated.
+    {% set OriginalCallbackName = as_cppType(type.name) %}
+    {% set CallbackName = OriginalCallbackName[:-1] if type.name.chunks[-1] == "2" else OriginalCallbackName %}
+    {% set Name = "Templated" + CallbackName %}
+    template <typename T>
+    using {{Name}} = void (
+        {%- for arg in type.arguments -%}
+            {{as_annotated_cppType(arg)}}{{", "}}
+        {%- endfor -%}
+    T userdata);
+{% endfor %}
+
+{% macro render_cpp_callback_info_template_method_impl(type, method) %}
+    {{render_cpp_callback_info_template_method_declaration(type, method, dfn=True)}} {
+        {% set CallbackInfoType = (method.arguments|last).type %}
+        {% set CallbackType = (CallbackInfoType.members|first).type %}
+        {{as_cType(CallbackInfoType.name)}} callbackInfo = {};
+        callbackInfo.mode = static_cast<{{as_cType(types["callback mode"].name)}}>(mode);
+        callbackInfo.callback = &detail::{{as_cppType(CallbackType.name)[:-1]}}Wrapper<T>;
+        callbackInfo.userdata1 = reinterpret_cast<void*>(userdata);
+        callbackInfo.userdata2 = reinterpret_cast<void*>(+callback);
+        auto result = {{as_cMethod(type.name, method.name)}}(Get(){{", "}}
+            {%- for arg in method.arguments if arg.type.category != "callback info" -%}{{render_c_actual_arg(arg)}}{{", "}}
+            {%- endfor -%}
+        callbackInfo);
+        return {{convert_cType_to_cppType(method.return_type, 'value', 'result') | indent(8)}};
+    }
+{%- endmacro %}
+
+{% macro render_cpp_method_impl(type, method) %}
+    {{render_cpp_method_declaration(type, method, dfn=True)}} {
+        {% for arg in method.arguments if arg.type.has_free_members_function and arg.annotation == '*' %}
+            *{{as_varName(arg.name)}} = {{as_cppType(arg.type.name)}}();
+        {% endfor %}
+        {% if method.return_type.name.concatcase() == "void" %}
+            {{render_cpp_to_c_method_call(type, method)}};
+        {% else %}
+            auto result = {{render_cpp_to_c_method_call(type, method)}};
+            return {{convert_cType_to_cppType(method.return_type, 'value', 'result') | indent(8)}};
+        {% endif %}
+    }
+{%- endmacro %}
+
 {% for type in by_category["object"] %}
     {% set CppType = as_cppType(type.name) %}
     {% set CType = as_cType(type.name) %}
@@ -290,7 +361,11 @@ class ObjectBase {
         using ObjectBase::operator=;
 
         {% for method in type.methods %}
-            inline {{render_cpp_method_declaration(type, method)}};
+            {% if has_callbackInfoStruct(method) %}
+                {{render_cpp_callback_info_template_method_declaration(type, method)|indent}};
+            {% else %}
+                inline {{render_cpp_method_declaration(type, method)}};
+            {% endif %}
         {% endfor %}
 
       private:
@@ -300,6 +375,43 @@ class ObjectBase {
     };
 
 {% endfor %}
+
+// C++ Templated callback helpers
+namespace detail {
+{% for type in by_category["callback function"] %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug/dawn/2509: Remove name handling once old APIs are deprecated.
+    {% set OriginalCallbackName = as_cppType(type.name) %}
+    {% set CallbackName = OriginalCallbackName[:-1] if type.name.chunks[-1] == "2" else OriginalCallbackName %}
+    {% set Name = "Templated" + CallbackName %}
+    template <typename T>
+    void {{CallbackName}}Wrapper(
+        {%- for arg in type.arguments -%}
+            {{as_annotated_cType(arg)}}{{", "}}
+        {%- endfor -%}
+    void* userdata, void* callback) {
+        auto cb = reinterpret_cast<{{Name}}<T>*>(callback);
+        (*cb)(
+            {%- for arg in type.arguments -%}
+                {{convert_cType_to_cppType(arg.type, arg.annotation, as_varName(arg.name))}}{{", "}}
+            {%- endfor -%}
+        static_cast<T>(userdata));
+    }
+    template <typename Lambda>
+    void {{CallbackName}}LambdaWrapper(
+        {%- for arg in type.arguments -%}
+            {{as_annotated_cType(arg)}}{{", "}}
+        {%- endfor -%}
+    void*, void* lambda) {
+        std::unique_ptr<Lambda> l(reinterpret_cast<Lambda*>(lambda));
+        (*l)(
+            {%- for arg in type.arguments -%}
+                {{convert_cType_to_cppType(arg.type, arg.annotation, as_varName(arg.name))}}{{ ", " if not loop.last else "" }}
+            {%- endfor -%}
+        );
+    }
+{% endfor %}
+}  // namespace detail
 
 // ChainedStruct
 {% set c_prefix = metadata.c_prefix %}
@@ -462,17 +574,11 @@ static_assert(offsetof(ChainedStruct, sType) == offsetof({{c_prefix}}ChainedStru
     // {{CppType}} implementation
 
     {% for method in type.methods %}
-        {{render_cpp_method_declaration(type, method, dfn=True)}} {
-            {% for arg in method.arguments if arg.type.has_free_members_function and arg.annotation == '*' %}
-                *{{as_varName(arg.name)}} = {{as_cppType(arg.type.name)}}();
-            {% endfor %}
-            {% if method.return_type.name.concatcase() == "void" %}
-                {{render_cpp_to_c_method_call(type, method)}};
-            {% else %}
-                auto result = {{render_cpp_to_c_method_call(type, method)}};
-                return {{convert_cType_to_cppType(method.return_type, 'value', 'result') | indent(8)}};
-            {% endif %}
-        }
+        {% if has_callbackInfoStruct(method) %}
+            {{render_cpp_callback_info_template_method_impl(type, method)}}
+        {% else %}
+            {{render_cpp_method_impl(type, method)}}
+        {% endif %}
     {% endfor %}
     void {{CppType}}::{{c_prefix}}AddRef({{CType}} handle) {
         if (handle != nullptr) {
