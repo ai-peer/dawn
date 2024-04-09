@@ -68,6 +68,24 @@
       "parentUuid": "c470c98c_adced83b",
       "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a029139_d54985c8",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-09T04:50:39Z",
+      "side": 1,
+      "message": "I\u0027ve rebased the CL with quite big changes (`mErrorUserdata` is gone in latest Dawn).\n\nPTAL, thanks!",
+      "parentUuid": "299b5d91_02de623c",
+      "revId": "5168132969b41b1371fb785ac6b2e805b7c5f9c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
