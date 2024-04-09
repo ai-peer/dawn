@@ -325,6 +325,54 @@ Future InstanceBase::APIRequestAdapterF(const RequestAdapterOptions* options,
     return {futureID};
 }
 
+Future InstanceBase::APIRequestAdapter2(const RequestAdapterOptions* options,
+                                        const WGPURequestAdapterCallbackInfo2& callbackInfo) {
+    struct RequestAdapter2Event final : public EventManager::TrackedEvent {
+        WGPURequestAdapterCallback2 mCallback;
+        raw_ptr<void> mUserdata1;
+        raw_ptr<void> mUserdata2;
+        Ref<AdapterBase> mAdapter;
+
+        RequestAdapter2Event(const WGPURequestAdapterCallbackInfo2& callbackInfo,
+                             Ref<AdapterBase> adapter)
+            : TrackedEvent(static_cast<wgpu::CallbackMode>(callbackInfo.mode),
+                           TrackedEvent::Completed{}),
+              mCallback(callbackInfo.callback),
+              mUserdata1(callbackInfo.userdata1),
+              mUserdata2(callbackInfo.userdata2),
+              mAdapter(std::move(adapter)) {}
+
+        ~RequestAdapter2Event() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+        void Complete(EventCompletionType completionType) override {
+            if (completionType == EventCompletionType::Shutdown) {
+                mCallback(WGPURequestAdapterStatus_InstanceDropped, nullptr, nullptr,
+                          mUserdata1.ExtractAsDangling(), mUserdata2.ExtractAsDangling());
+                return;
+            }
+
+            WGPUAdapter adapter = ToAPI(ReturnToAPI(std::move(mAdapter)));
+            if (adapter == nullptr) {
+                mCallback(WGPURequestAdapterStatus_Unavailable, nullptr, "No supported adapters",
+                          mUserdata1.ExtractAsDangling(), mUserdata2.ExtractAsDangling());
+            } else {
+                mCallback(WGPURequestAdapterStatus_Success, adapter, nullptr,
+                          mUserdata1.ExtractAsDangling(), mUserdata2.ExtractAsDangling());
+            }
+        }
+    };
+
+    static constexpr RequestAdapterOptions kDefaultOptions = {};
+    if (options == nullptr) {
+        options = &kDefaultOptions;
+    }
+    auto adapters = EnumerateAdapters(options);
+
+    FutureID futureID = GetEventManager()->TrackEvent(AcquireRef(new RequestAdapter2Event(
+        callbackInfo, adapters.empty() ? nullptr : std::move(adapters[0]))));
+    return {futureID};
+}
+
 Ref<AdapterBase> InstanceBase::CreateAdapter(Ref<PhysicalDeviceBase> physicalDevice,
                                              FeatureLevel featureLevel,
                                              const DawnTogglesDescriptor* requiredAdapterToggles,
@@ -357,7 +405,8 @@ std::vector<Ref<AdapterBase>> InstanceBase::EnumerateAdapters(
     const RequestAdapterOptions* options) {
     static constexpr RequestAdapterOptions kDefaultOptions = {};
     if (options == nullptr) {
-        // Default path that returns all WebGPU core adapters on the system with default toggles.
+        // Default path that returns all WebGPU core adapters on the system with default
+        // toggles.
         return EnumerateAdapters(&kDefaultOptions);
     }
 
