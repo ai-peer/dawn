@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c31cb9f_d496330d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-09T05:15:44Z",
+      "side": 1,
+      "message": "(Pls ignore the bots failure, most of them should be fixed by https://github.com/gpuweb/cts/pull/3605. \nBut Android platform is a real failure and seems the tranformation is not applied.)\n\nPTAL, thanks!",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
