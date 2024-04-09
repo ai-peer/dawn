@@ -125,6 +125,20 @@ static T& AsNonConstReference(const T& value) {
     struct {{as_cppType(type.name)}};
 {% endfor %}
 
+// Templated callback types for C++ API
+{% for type in by_category["callback function"] %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug/dawn/2509: Remove name handling once old APIs are deprecated.
+    {% set OriginalCallbackName = as_cppType(type.name) %}
+    {% set CallbackName = OriginalCallbackName[:-1] if type.name.chunks[-1] == "2" else OriginalCallbackName %}
+    {% set Name = "Templated" + CallbackName %}
+    template <typename T>
+    using {{Name}} = void (
+        {%- for arg in type.arguments -%}
+            {{as_annotated_cppType(arg)}}{{", "}}
+        {%- endfor -%}
+    T userdata);
+{% endfor %}
 
 // Special class for booleans in order to allow implicit conversions.
 {% set BoolCppType = as_cppType(types["bool"].name) %}
@@ -291,6 +305,30 @@ class ObjectBase {
         {%- endfor -%}
     )
 {%- endmacro -%}
+
+// C++ Templated callback helpers
+namespace detail {
+{% for type in by_category["callback function"] %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug/dawn/2509: Remove name handling once old APIs are deprecated.
+    {% set OriginalCallbackName = as_cppType(type.name) %}
+    {% set CallbackName = OriginalCallbackName[:-1] if type.name.chunks[-1] == "2" else OriginalCallbackName %}
+    {% set Name = "Templated" + CallbackName %}
+    template <typename T>
+    void {{CallbackName}}Wrapper(
+        {%- for arg in type.arguments -%}
+            {{as_annotated_cType(arg)}}{{", "}}
+        {%- endfor -%}
+    void* userdata, void* callback) {
+        auto cb = reinterpret_cast<{{Name}}<T>*>(callback);
+        (*cb)(
+            {%- for arg in type.arguments -%}
+                {{convert_cType_to_cppType(arg.type, arg.annotation, as_varName(arg.name))}}{{", "}}
+            {%- endfor -%}
+        static_cast<T>(userdata));
+    }
+{% endfor %}
+}  // namespace detail
 
 // Free Functions
 

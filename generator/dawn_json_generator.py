@@ -161,6 +161,14 @@ class BitmaskType(Type):
         self.is_wire_transparent = True
 
 
+class CallbackFunctionType(Type):
+
+    def __init__(self, is_enabled, name, json_data):
+        Type.__init__(self, name, json_data)
+        self.return_type = None
+        self.arguments = []
+
+
 class FunctionPointerType(Type):
     def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
@@ -496,6 +504,7 @@ def parse_json(json, enabled_tags, disabled_tags=None):
             disabled_tags, json_data)
     category_to_parser = {
         'bitmask': BitmaskType,
+        'callback function': CallbackFunctionType,
         'enum': EnumType,
         'native': NativeType,
         'function pointer': FunctionPointerType,
@@ -542,6 +551,9 @@ def parse_json(json, enabled_tags, disabled_tags=None):
                 no_cpp=True)
             types[name] = func_decl
             by_category['function'].append(func_decl)
+
+    for callback_function in by_category['callback function']:
+        link_function_pointer(callback_function, types)
 
     for function_pointer in by_category['function pointer']:
         link_function_pointer(function_pointer, types)
