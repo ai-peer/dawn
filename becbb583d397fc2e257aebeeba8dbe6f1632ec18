@@ -87,6 +87,24 @@
       "parentUuid": "866355f7_3d662219",
       "revId": "becbb583d397fc2e257aebeeba8dbe6f1632ec18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92bbed36_3238c6af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-09T21:38:10Z",
+      "side": 1,
+      "message": "We\u0027re up to 19 machines now https://chromium-swarm.appspot.com/botlist?f\u003dhidpi%3A1\u0026f\u003ddisplay_attached%3A1\u0026f\u003dgpu%3A1002%3A67ef\u0026f\u003dos%3AMac-14.3.1\u0026f\u003dcpu%3Ax86-64\u0026f\u003dpool%3Achromium.tests.gpu so you should be good.",
+      "parentUuid": "bfc69611_edfa037c",
+      "revId": "becbb583d397fc2e257aebeeba8dbe6f1632ec18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

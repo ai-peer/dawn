@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68db2830_c0d24e15",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-09T21:38:10Z",
+      "side": 1,
+      "message": "You have to also run `//infra/config/global/main.star` for things to regenerate. I\u0027m surprised presubmit didn\u0027t complain.",
+      "range": {
+        "startLine": 797,
+        "startChar": 28,
+        "endLine": 797,
+        "endChar": 48
+      },
+      "revId": "115e4fb93545fdd6d8d28a24b4f75bd19ddebf57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
