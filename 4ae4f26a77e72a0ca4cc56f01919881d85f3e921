@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f6bd717_8db9e197",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-09T16:56:27Z",
+      "side": 1,
+      "message": "I noticed there is an existing issue where we might leak the object.\n\nIf pipeline is non-null, and mCallback is null, then we never call a callback, so we never pass the pipeline back to the application.\n\nProbably this needs an else case.\n```\nelse {\n  pipeline-\u003eRelease();\n}\n```\n\nditto for the other objects too\n\n\nyou could write the whole thing to be something like:\n\n```\n// no changes to the code for this part\nif (status !\u003d Success) {\n  mPipeline-\u003eGetClient()-\u003eFree(mPipeline.get());\n  mPipeline \u003d nullptr;\n}\n\n// handle passing the pipeline to the callback, or releasing it.\nif (mCallback) {\n  mCallback(..., ToAPI(mPipeline.ExtractAsDangling()), ...);\n} else {\n  mPipeline.ExtractAsDangling()-\u003eRelease();\n}\n```\n\n\nwe can also fix the leak in a separate CL if you\u0027d like",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 9
+      },
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a92aab6e_12d4eb76",
         "filename": "src/dawn/wire/client/Instance.cpp",
         "patchSetId": 1
