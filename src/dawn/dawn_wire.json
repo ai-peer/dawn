@@ -235,6 +235,7 @@
             "InstanceHasWGSLLanguageFeature",
             "InstanceRequestAdapter",
             "InstanceRequestAdapterF",
+            "InstanceRequestAdapter2",
             "ShaderModuleGetCompilationInfo",
             "ShaderModuleGetCompilationInfoF",
             "QuerySetGetType",
