@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c285be_d445191c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T10:23:39Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b513a8c4_6cc887e3",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T10:23:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92aab6e_12d4eb76",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T10:23:39Z",
+      "side": 1,
+      "message": "```suggestion\n            adapter-\u003eGetClient()-\u003eFree(adapter);\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 1
+      },
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
