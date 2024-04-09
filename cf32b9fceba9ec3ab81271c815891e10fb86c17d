@@ -33,6 +33,23 @@
       "message": "We do essentially the same computations for loadTransformMatrix and coordTransformMatrix. It seems loadTransformMatrix \u003d Scale(coordTransformMatrix, mVisibleSize)?\n\nThis this would have the translation of xOffset/yOffset, then we can transform the clamp into a min() that\u0027s done before the transformation. We first clamp to the visible size, then perform the transform that will add the offset.",
       "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8616370d_5850896e",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T10:19:47Z",
+      "side": 1,
+      "message": "We also need to fix textureDimensions() to use mVisibleSize. IMHO we should add a size : vec2\u003cu32\u003e to the ExternalTextureParams and use that for both textureDimensions and clamping the coordinates for loading.",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
