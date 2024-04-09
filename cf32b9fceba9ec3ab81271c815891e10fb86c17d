@@ -16,6 +16,23 @@
       "message": "(Pls ignore the bots failure, most of them should be fixed by https://github.com/gpuweb/cts/pull/3605. \nBut Android platform is a real failure and seems the tranformation is not applied.)\n\nPTAL, thanks!",
       "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c55e5e4_053d57f3",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-09T10:16:50Z",
+      "side": 1,
+      "message": "We do essentially the same computations for loadTransformMatrix and coordTransformMatrix. It seems loadTransformMatrix \u003d Scale(coordTransformMatrix, mVisibleSize)?\n\nThis this would have the translation of xOffset/yOffset, then we can transform the clamp into a min() that\u0027s done before the transformation. We first clamp to the visible size, then perform the transform that will add the offset.",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
