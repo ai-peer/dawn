@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "723a46d9_691ba1f1",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-09T01:35:43Z",
+      "side": 1,
+      "message": "Yes, just a tiny fix in passing to save a potentially unnecessary d3d11 call.",
+      "parentUuid": "66b35d06_ebef9dee",
+      "revId": "6567ca1bbc106fd799dfb56fca25f96bf9942f62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ab54d1f_0ff49cf7",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 3
@@ -48,6 +66,30 @@
       "writtenOn": "2024-04-08T14:12:51Z",
       "side": 1,
       "message": "nit: why `Buffer::WriteInternal()` can be called with size bigger than the size of buffer? could you please explain (add a comment here)?",
+      "range": {
+        "startLine": 640,
+        "startChar": 8,
+        "endLine": 640,
+        "endChar": 25
+      },
+      "revId": "6567ca1bbc106fd799dfb56fca25f96bf9942f62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31fbb80_ad22d566",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-09T01:35:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3ab54d1f_0ff49cf7",
       "range": {
         "startLine": 640,
         "startChar": 8,
