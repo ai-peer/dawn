@@ -116,6 +116,15 @@ typedef uint32_t {{API}}Bool;
     ) {{API}}_FUNCTION_ATTRIBUTE;
 {% endfor %}
 
+// Callback function pointers
+{% for type in by_category["callback function"] %}
+    typedef {{as_cType(type.return_type.name)}} (*{{as_cType(type.name)}})(
+        {%- for arg in type.arguments -%}
+            {{ "struct " if arg.type.category == "structure" else "" }}{{as_annotated_cType(arg)}}{{", "}}
+        {%- endfor -%}
+    void* userdata1, void* userdata2) {{API}}_FUNCTION_ATTRIBUTE;
+{% endfor %}
+
 typedef struct {{API}}ChainedStruct {
     struct {{API}}ChainedStruct const * next;
     {{API}}SType sType;
@@ -146,6 +155,18 @@ typedef struct {{API}}ChainedStructOut {
                 {{as_annotated_cType(member)}};
             {% endif-%}
         {% endfor %}
+    } {{as_cType(type.name)}} {{API}}_STRUCTURE_ATTRIBUTE;
+
+{% endfor %}
+{% for type in by_category["callback info"] %}
+    typedef struct {{as_cType(type.name)}} {
+        {{as_cType(types["callback mode"].name)}} mode;
+        {% for member in type.members %}
+            //* Only callback function types are allowed in callback info structs.
+            {{assert(member.type.category == "callback function")}}{{as_annotated_cType(member)}};
+        {% endfor %}
+        void* userdata1;
+        void* userdata2;
     } {{as_cType(type.name)}} {{API}}_STRUCTURE_ATTRIBUTE;
 
 {% endfor %}
