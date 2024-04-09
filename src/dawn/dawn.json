@@ -81,6 +81,14 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "request adapter callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "request adapter status"},
+            {"name": "adapter", "type": "adapter", "optional": true},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
     "request adapter callback info": {
          "category": "structure",
          "extensible": "in",
@@ -650,6 +658,12 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "buffer map callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "buffer map async status"}
+        ]
+    },
     "buffer map callback info": {
         "category": "structure",
         "extensible": "in",
@@ -912,6 +926,13 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "compilation info callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "compilation info request status"},
+            {"name": "compilation info", "type": "compilation info", "annotation": "const*"}
+        ]
+    },
     "compilation info callback info": {
         "category": "structure",
         "extensible": "in",
@@ -1124,6 +1145,14 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "create compute pipeline async callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "create pipeline async status"},
+            {"name": "pipeline", "type": "compute pipeline", "optional": true},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+        ]
+    },
     "create compute pipeline async callback info": {
         "category": "structure",
         "extensible": "in",
@@ -1153,6 +1182,14 @@
             {"name": "pipeline", "type": "render pipeline", "optional": true},
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "create render pipeline async callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "create pipeline async status"},
+            {"name": "pipeline", "type": "render pipeline", "optional": true},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
         ]
     },
     "create render pipeline async callback info": {
@@ -1570,6 +1607,14 @@
             {"name": "type", "type": "error type"},
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"},
             {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "pop error scope callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "pop error scope status"},
+            {"name": "type", "type": "error type"},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
         ]
     },
     "pop error scope callback info": {
@@ -2764,6 +2809,12 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "queue work done callback 2": {
+        "category": "callback function",
+        "args": [
+            {"name": "status", "type": "queue work done status"}
+        ]
+    },
     "queue work done callback info": {
         "category": "structure",
         "extensible": "in",
@@ -3197,6 +3248,15 @@
             {"name": "device", "type": "device", "optional": true},
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "request device callback 2": {
+        "category": "callback function",
+        "_comment": "crbug.com/1234617: Revisit optional status of device once requestDevice can return lost devices",
+        "args": [
+            {"name": "status", "type": "request device status"},
+            {"name": "device", "type": "device", "optional": true},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
         ]
     },
     "request device callback info": {
