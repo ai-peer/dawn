@@ -106,6 +106,24 @@
       "parentUuid": "8e188ecc_2a8d072f",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8195527f_4747d365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-04-09T22:10:30Z",
+      "side": 1,
+      "message": "No, this is something that is supposed to happen in dawn. You should be able to write code like this\n\n```js\nconst module \u003d device.createShaderModule({ code: `\n\n  @group(0) @binding(0) var td: texture_depth_2d;\n  @group(0) @binding(0) var t2d: texture_2d\u003cf32\u003e;\n  @group(0) @binding(1) var s: sampler;\n  \n  @vertex fn codeThatUsesTextureLoadWithDepth() {\n    let v \u003d textureLoad(td, vec2i(0), 0);\n  }\n\n  @vertex fn codeThatDoesNotUseTextureLoadWithDepth() {\n    let v \u003d textureSample(t2d, s, vec2f(0));\n  }\n\n  `,\n});\n\ndevice.createRenderPipleine({\n  vertex: {\n    module,\n    entryPoint: compatibilityMode\n       ? \u0027codeThatDoesNotUseTextureLoadWithDepth\u0027\n       : \u0027codeThatUsesTextureLoadWithDepth\u0027,\n  },\n  ...\n```",
+      "parentUuid": "ad34db4a_c242d9ca",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
