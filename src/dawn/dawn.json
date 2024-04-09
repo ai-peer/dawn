@@ -2765,6 +2765,14 @@
             {"name": "userdata", "type": "void *"}
         ]
     },
+    "queue work done callback 2": {
+        "category": "function pointer",
+        "args": [
+            {"name": "status", "type": "queue work done status"},
+            {"name": "userdata1", "type": "void *"},
+            {"name": "userdata2", "type": "void *"}
+        ]
+    },
     "queue work done callback info": {
         "category": "structure",
         "extensible": "in",
