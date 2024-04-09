@@ -51,7 +51,7 @@ Napi::Value CreateGPU(const Napi::CallbackInfo& info) {
 
     std::tuple<std::vector<std::string>> args;
     auto res = wgpu::interop::FromJS(info, args);
-    if (res != wgpu::interop::Success) {
+    if (!res) {
         Napi::Error::New(env, res.error).ThrowAsJavaScriptException();
         return env.Undefined();
     }
