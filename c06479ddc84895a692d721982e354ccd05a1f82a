@@ -16,6 +16,23 @@
       "message": "PTAL the whole stack! It\u0027s some CLs that have been sitting in my Gerrit for a while.",
       "revId": "c06479ddc84895a692d721982e354ccd05a1f82a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0656da87_4ea6c6cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-09T23:56:45Z",
+      "side": 1,
+      "message": "Hmm, maybe I don\u0027t have enough context for these changes... But aside from the SPIR-V changes, what is the reason we need internal versions of the layouts?\n\nIIUC, the only one that seems to be significantly different from the mirrored count-part is the `StaticSampleBindingLayout` because it uses a `Ref`, but I **think** the structs we use inside Dawn already implicitly adds a `Ref` because we are using the C++ apis?",
+      "revId": "c06479ddc84895a692d721982e354ccd05a1f82a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
