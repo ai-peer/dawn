@@ -33,6 +33,24 @@
       "message": "Hmm, maybe I don\u0027t have enough context for these changes... But aside from the SPIR-V changes, what is the reason we need internal versions of the layouts?\n\nIIUC, the only one that seems to be significantly different from the mirrored count-part is the `StaticSampleBindingLayout` because it uses a `Ref`, but I **think** the structs we use inside Dawn already implicitly adds a `Ref` because we are using the C++ apis?",
       "revId": "c06479ddc84895a692d721982e354ccd05a1f82a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64f17eb6_3387230f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-10T15:54:48Z",
+      "side": 1,
+      "message": "The rational isn\u0027t immediately clear and I mostly finished this because I remember I really wanted to do it and CLs were sitting around as WIP. Reasons to do this:\n\n - Removed the chain from structures.\n - Will be used to unpack the whole layout with extensions\n - Unify the representationss of ShaderModule and BindGroupLayout as it\u0027s basically the same thing.\n - Eventually they could share the std::variant (for BG creation speed I\u0027m thinking we should duplicate the BGL info into frontend and backend variants. ExternalTexture would live in the frontend side of the BGL so we can get rid of that additional map of ExternalTextures that has caused numerous problems.",
+      "parentUuid": "0656da87_4ea6c6cf",
+      "revId": "c06479ddc84895a692d721982e354ccd05a1f82a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
