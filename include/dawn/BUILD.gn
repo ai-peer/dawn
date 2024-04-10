@@ -39,6 +39,7 @@ dawn_json_generator("headers_gen") {
   outputs = [
     "include/dawn/dawn_proc_table.h",
     "include/dawn/webgpu.h",
+    "include/dawn/wire/client/webgpu.h",
   ]
 }
 
@@ -62,14 +63,43 @@ dawn_json_generator("cpp_headers_gen") {
   ]
 }
 
+dawn_json_generator("wire_client_cpp_headers_gen") {
+  target = "wire_client_cpp_headers"
+  outputs = [ "include/dawn/wire/client/webgpu_cpp.h" ]
+}
+
 source_set("cpp_headers") {
   public_deps = [
     ":cpp_headers_gen",
     ":headers",
   ]
+  public = [
+    "${dawn_root}/include/webgpu/webgpu_enum_class_bitmasks.h",
+    "${target_gen_dir}/../webgpu/webgpu_cpp_chained_struct.h",
+    "${target_gen_dir}/webgpu_cpp.h",
+    "${target_gen_dir}/webgpu_cpp_print.h",
+  ]
+  if (is_component_build) {
+    sources = [ "${dawn_root}/src/dawn/SingleCppChecker.cpp" ]
+  }
+}
 
-  sources = get_target_outputs(":cpp_headers_gen")
-  sources += [ "${dawn_root}/include/webgpu/webgpu_enum_class_bitmasks.h" ]
+source_set("wire_client_cpp_headers") {
+  public_deps = [
+    ":cpp_headers_gen",
+    ":headers",
+    ":wire_client_cpp_headers_gen",
+  ]
+  public = [
+    "${dawn_root}/include/webgpu/webgpu_enum_class_bitmasks.h",
+    "${target_gen_dir}/../webgpu/webgpu_cpp_chained_struct.h",
+    "${target_gen_dir}/webgpu_cpp_print.h",
+    "${target_gen_dir}/wire/client/webgpu_cpp.h",
+  ]
+  sources = [ "${target_gen_dir}/webgpu_cpp.h" ]
+  if (is_component_build) {
+    sources += [ "${dawn_root}/src/dawn/SingleCppChecker.cpp" ]
+  }
 }
 
 ###############################################################################

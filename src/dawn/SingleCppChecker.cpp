@@ -25,35 +25,12 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_WIRE_CLIENT_SURFACE_H_
-#define SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+// This is a helper file that is included in the cpp_headers and wire_client_cpp_headers
+// GN source sets. It makes it such that depending on both targets results in a duplicate
+// symbol error.
 
-#include "dawn/webgpu.h"
-#include "dawn/wire/client/ObjectBase.h"
+namespace dawn {
 
-namespace dawn::wire::client {
+int singleCppChecker = 0;
 
-class Device;
-
-class Surface final : public ObjectBase {
-  public:
-    explicit Surface(const ObjectBaseParams& params);
-    ~Surface() override;
-
-    ObjectType GetObjectType() const override;
-
-    void Configure(WGPUSurfaceConfiguration const* config);
-
-    WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
-
-    void GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
-
-    void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
-
-  private:
-    WGPUTextureDescriptor mTextureDescriptor;
-};
-
-}  // namespace dawn::wire::client
-
-#endif  // SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+}
