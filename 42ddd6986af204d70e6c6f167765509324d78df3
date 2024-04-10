@@ -34,6 +34,24 @@
       "parentUuid": "82eb5c39_e08a3116",
       "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dcf0019_338503d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-10T17:21:42Z",
+      "side": 1,
+      "message": "One of the CI bots associated with this trybot has (tons of) dawn end2end test failures as well:\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Android%20arm64%20Experimental%20Release%20%28Pixel%206%29\n\nI\u0027m going to try a manual run with this patch applied (as soon as the previous roll lands), but I\u0027m pretty sure this bot will fail, unless those end2end tests actually aren\u0027t run on this trybot.",
+      "parentUuid": "bf923d54_6bab9460",
+      "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
