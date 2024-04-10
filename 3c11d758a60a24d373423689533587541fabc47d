@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51d050a3_09a97990",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T20:53:14Z",
+      "side": 1,
+      "message": "Updated it to be a ChainedStruct on SamplerDescriptor following RequestAdapterOptionsLUID and having necessary feature validation. I\u0027m not sure there should be any validation tests at this stage.\n\nPlease take a look.",
+      "parentUuid": "f4977249_c019abd4",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cdb1724_03489ddc",
@@ -55,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6dc3979c_ae37c6f2",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T20:53:14Z",
+      "side": 1,
+      "message": "Sounds good! I followed that in RequestAdapterOptionsLUID and added it on top of `VulkanBackend.h`.",
+      "parentUuid": "2f373b20_e8c8955b",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8b73e70_1da8811c",
         "filename": "src/dawn/native/Sampler.cpp",
         "patchSetId": 3
@@ -84,6 +120,24 @@
       "side": 1,
       "message": "Adding validation that the extension is present here would work imho, but we would store the actual YCbCr information only inside vulkan::Sampler::Initialize.",
       "parentUuid": "c8b73e70_1da8811c",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a5d69c_093e5f6f",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T20:53:14Z",
+      "side": 1,
+      "message": "That makes more sense that what I had initially thought. I\u0027ve updated it to be member on VulkanBackend.h and will look into implementing it in `vulkan::Sampler::Initialize` in follow-up.",
+      "parentUuid": "9fd43b26_80e48972",
       "revId": "3c11d758a60a24d373423689533587541fabc47d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
