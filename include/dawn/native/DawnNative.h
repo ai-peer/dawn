@@ -104,10 +104,10 @@ class DAWN_NATIVE_EXPORT Adapter {
     explicit operator bool() const;
 
     // Create a device on this adapter. On an error, nullptr is returned.
-    WGPUDevice CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor);
+    WGPUDevice CreateDevice(const ::wgpu::DeviceDescriptor* deviceDescriptor);
     WGPUDevice CreateDevice(const WGPUDeviceDescriptor* deviceDescriptor = nullptr);
 
-    void RequestDevice(const wgpu::DeviceDescriptor* descriptor,
+    void RequestDevice(const ::wgpu::DeviceDescriptor* descriptor,
                        WGPURequestDeviceCallback callback,
                        void* userdata);
     void RequestDevice(const WGPUDeviceDescriptor* descriptor,
@@ -116,7 +116,7 @@ class DAWN_NATIVE_EXPORT Adapter {
     void RequestDevice(std::nullptr_t descriptor,
                        WGPURequestDeviceCallback callback,
                        void* userdata) {
-        RequestDevice(static_cast<const wgpu::DeviceDescriptor*>(descriptor), callback, userdata);
+        RequestDevice(static_cast<const ::wgpu::DeviceDescriptor*>(descriptor), callback, userdata);
     }
 
     // Returns the underlying WGPUAdapter object.
@@ -169,7 +169,7 @@ class DAWN_NATIVE_EXPORT Instance {
     // after options.
     std::vector<Adapter> EnumerateAdapters(const WGPURequestAdapterOptions* options) const;
     std::vector<Adapter> EnumerateAdapters(
-        const wgpu::RequestAdapterOptions* options = nullptr) const;
+        const ::wgpu::RequestAdapterOptions* options = nullptr) const;
 
     const ToggleInfo* GetToggleInfo(const char* toggleName);
 
@@ -282,7 +282,7 @@ DAWN_NATIVE_EXPORT std::vector<const ToggleInfo*> AllToggleInfos();
 
 // Used to query the details of an feature. Return nullptr if featureName is not a valid
 // name of an feature supported in Dawn.
-DAWN_NATIVE_EXPORT const FeatureInfo* GetFeatureInfo(wgpu::FeatureName feature);
+DAWN_NATIVE_EXPORT const FeatureInfo* GetFeatureInfo(::wgpu::FeatureName feature);
 
 class DAWN_NATIVE_EXPORT MemoryDump {
   public:
