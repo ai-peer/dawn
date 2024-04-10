@@ -16,6 +16,24 @@
       "message": "Personally I find having this here a lot clearer in what is happening. It isn\u0027t obvious _why_ the `expression` didn\u0027t match.",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f4afd57_4f007f4e",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-10T13:57:39Z",
+      "side": 0,
+      "message": "Why do you care whether it didn\u0027t match because of a semicolon or anything else? We generally don\u0027t look ahead specifically for semicolon elsewhere?\n`expression()` either matches or it doesn\u0027t - the end result is exactly the same here.",
+      "parentUuid": "262229c5_4b010d43",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
