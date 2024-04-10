@@ -70,6 +70,24 @@
       "parentUuid": "94efca2a_915e2d22",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "191bb151_377b8ac7",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-10T14:24:12Z",
+      "side": 0,
+      "message": "I don\u0027t disagree fixing the no-matched case is the right thing to do. I just prefer having this check here to makes it clear there is no expression and early out.",
+      "parentUuid": "f6686391_41ffb26f",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
