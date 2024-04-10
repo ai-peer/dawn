@@ -34,6 +34,24 @@
       "parentUuid": "5cb4cf57_74e13b40",
       "revId": "8bc8dbf4b11b70c4f7cc0fd0fb981f870bb5fc0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "608618bf_05d3273d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-10T22:04:42Z",
+      "side": 1,
+      "message": "There\u0027s roughly 14x more tests now, so the increase seems reasonable. The difference in time is probably due to a combination of lack of parallelization on Android and tests being slower on Android.\n\nFor example, on Mac M2, we have:\n\n```\n[2699/2705] webgpu:web_platform,worker,worker:shared_worker: was skipped 0.0097s (worker 1)\n[2700/2705] webgpu:web_platform,worker,worker:service_worker: was skipped 0.0099s (worker 4)\n[2701/2705] webgpu:web_platform,worker,worker:dedicated_worker: passed 0.0393s (worker 3)\n```\n\nwhile on Pixel 4 we have:\n\n```\n[2699/2705] webgpu:web_platform,worker,worker:dedicated_worker: passed 0.2807s (worker 1)\n[2700/2705] webgpu:web_platform,worker,worker:service_worker: was skipped 0.0622s (worker 1)\n[2701/2705] webgpu:web_platform,worker,worker:shared_worker: was skipped 0.0662s (worker 1)\n```\n\nSo both actually running tests and skipping them are significantly slower on Pixel 4.",
+      "parentUuid": "4ca98f4c_0ecb51fa",
+      "revId": "8bc8dbf4b11b70c4f7cc0fd0fb981f870bb5fc0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
