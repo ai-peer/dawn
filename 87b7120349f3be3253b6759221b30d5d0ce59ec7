@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae1d391_578c2f35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-10T12:49:50Z",
+      "side": 1,
+      "message": "Fixed merge conflict.",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
