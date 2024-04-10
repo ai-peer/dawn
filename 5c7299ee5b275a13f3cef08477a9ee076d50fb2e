@@ -34,6 +34,24 @@
       "parentUuid": "262229c5_4b010d43",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94efca2a_915e2d22",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-10T13:58:46Z",
+      "side": 0,
+      "message": "Because most places don\u0027t have an optional thing like return does. I think of it as `return;` or `return expr;`.",
+      "parentUuid": "0f4afd57_4f007f4e",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
