@@ -29,13 +29,15 @@
 
 #include <cmath>
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/native/vulkan/SamplerVk.h"
 
 namespace dawn::native {
 
-MaybeError ValidateSamplerDescriptor(DeviceBase*, const SamplerDescriptor* descriptor) {
+MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
 
     DAWN_INVALID_IF(std::isnan(descriptor->lodMinClamp) || std::isnan(descriptor->lodMaxClamp),
@@ -70,6 +72,22 @@ MaybeError ValidateSamplerDescriptor(DeviceBase*, const SamplerDescriptor* descr
     DAWN_TRY(ValidateAddressMode(descriptor->addressModeV));
     DAWN_TRY(ValidateAddressMode(descriptor->addressModeW));
     DAWN_TRY(ValidateCompareFunction(descriptor->compare));
+
+    UnpackedPtr<SamplerDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
+
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(type, unpacked.ValidateBranches<Branch<SamplerDescriptorVk>>());
+
+    switch (type) {
+        // case wgpu::SType::SamplerDescriptorVk:
+        //     DAWN_INVALID_IF(!device->HasFeature(Feature::StaticSamplers), "%s is not enabled.",
+        //                     wgpu::FeatureName::StaticSamplers);
+        //     return vulkan::Sampler::CreateYCbCrInfo(descriptor->label,
+        //                                       unpacked.Get<SamplerDescriptorVk>());
+        default:
+            DAWN_UNREACHABLE();
+    }
 
     return {};
 }

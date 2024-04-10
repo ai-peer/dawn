@@ -41,6 +41,8 @@ class Sampler final : public SamplerBase {
   public:
     static ResultOrError<Ref<Sampler>> Create(Device* device, const SamplerDescriptor* descriptor);
 
+    static MaybeError CreateYCbCrInfo(const char* label, const SamplerDescriptorVk* descriptor);
+
     const VkSampler& GetHandle() const;
 
   private:

@@ -83,6 +83,11 @@ ResultOrError<Ref<Sampler>> Sampler::Create(Device* device, const SamplerDescrip
     return sampler;
 }
 
+// static
+MaybeError CreateYCbCrInfo(const char* label, const SamplerDescriptorVk* descriptor) {
+    DAWN_UNREACHABLE();
+}
+
 MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     VkSamplerCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
