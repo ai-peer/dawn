@@ -16,6 +16,29 @@
       "message": "Ben PTAL again!",
       "revId": "81533c92ba4f12e6a1ae89a9dfd7a6ea732d3330",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9657e280_1d6df239",
+        "filename": "src/dawn/node/Module.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-10T09:03:52Z",
+      "side": 1,
+      "message": "`res` is only used in the if block. Suggest using if statement with initializer. \n```suggestion\n    if (auto res \u003d wgpu::interop::FromJS(info, args); !res) {\n        Napi::Error::New(env, res.error).ThrowAsJavaScriptException();\n```",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 15
+      },
+      "revId": "81533c92ba4f12e6a1ae89a9dfd7a6ea732d3330",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
