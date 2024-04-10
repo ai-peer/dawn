@@ -100,6 +100,7 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_AdapterPropertiesVk:
         case WGPUFeatureName_R8UnormStorage:
         case WGPUFeatureName_StaticSamplers:
+        case WGPUFeatureName_ShaderModuleCompilationOptions:
             return true;
     }
 

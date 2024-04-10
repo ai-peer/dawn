@@ -324,6 +324,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "static_samplers.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::ShaderModuleCompilationOptions,
+     {"Support overriding default shader module compilation options.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "shader_module_compilation_options.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace
