@@ -31,10 +31,11 @@
     #error "Do not include this header. Emscripten already provides headers needed for {{metadata.api}}."
     #endif
 {% endif %}
-#ifndef {{API}}_CPP_H_
-#define {{API}}_CPP_H_
+{% set INCLUDE_GUARD_PREFIX = "" if not c_namespace else c_namespace.SNAKE_CASE() + "_" %}
+#ifndef {{INCLUDE_GUARD_PREFIX}}{{API}}_CPP_H_
+#define {{INCLUDE_GUARD_PREFIX}}{{API}}_CPP_H_
 
-#include "{{api}}/{{api}}.h"
+#include "{{c_header}}"
 #include "{{api}}/{{api}}_cpp_chained_struct.h"
 #include "{{api}}/{{api}}_enum_class_bitmasks.h"
 #include <cmath>
@@ -81,7 +82,7 @@ namespace {{metadata.namespace}} {
     {%- endmacro -%}
 
     {%- macro render_cpp_to_c_method_call(type, method) -%}
-        {{as_cMethod(type.name, method.name)}}(Get()
+        {{as_cMethodNamespaced(type.name, method.name, c_namespace)}}(Get()
             {%- for arg in method.arguments -%},{{" "}}{{render_c_actual_arg(arg)}}
             {%- endfor -%}
         )
@@ -285,7 +286,7 @@ namespace {{metadata.namespace}} {
     {% endfor %}
 
     {%- macro render_function_call(function) -%}
-        {{as_cMethod(None, function.name)}}(
+        {{as_cMethodNamespaced(None, function.name, c_namespace)}}(
             {%- for arg in function.arguments -%}
                 {% if not loop.first %}, {% endif %}{{render_c_actual_arg(arg)}}
             {%- endfor -%}
@@ -391,7 +392,7 @@ namespace {{metadata.namespace}} {
                         this->{{member.name.camelCase()}} != nullptr
                     {%- endfor -%}
                 ) {
-                    {{as_cMethod(type.name, Name("free members"))}}(
+                    {{as_cMethodNamespaced(type.name, Name("free members"), c_namespace)}}(
                         *reinterpret_cast<{{as_cType(type.name)}}*>(this));
                 }
             }
@@ -463,12 +464,12 @@ namespace {{metadata.namespace}} {
         {% endfor %}
         void {{CppType}}::{{c_prefix}}AddRef({{CType}} handle) {
             if (handle != nullptr) {
-                {{as_cMethod(type.name, Name("add ref"))}}(handle);
+                {{as_cMethodNamespaced(type.name, Name("add ref"), c_namespace)}}(handle);
             }
         }
         void {{CppType}}::{{c_prefix}}Release({{CType}} handle) {
             if (handle != nullptr) {
-                {{as_cMethod(type.name, Name("release"))}}(handle);
+                {{as_cMethodNamespaced(type.name, Name("release"), c_namespace)}}(handle);
             }
         }
         static_assert(sizeof({{CppType}}) == sizeof({{CType}}), "sizeof mismatch for {{CppType}}");
@@ -499,4 +500,4 @@ struct hash<{{metadata.namespace}}::{{BoolCppType}}> {
 };
 }  // namespace std
 
-#endif // {{API}}_CPP_H_
+#endif // {{INCLUDE_GUARD_PREFIX}}{{API}}_CPP_H_
