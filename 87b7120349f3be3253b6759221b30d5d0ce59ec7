@@ -39,6 +39,30 @@
       },
       "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef11d35_c3fe5a1d",
+        "filename": "src/dawn/native/vulkan/BufferVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-10T14:59:54Z",
+      "side": 1,
+      "message": "In CMake we specify our C++ standard as C++17. Default initializers for bitfields is a C++20 feature.",
+      "parentUuid": "7e20e331_4968fba1",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
