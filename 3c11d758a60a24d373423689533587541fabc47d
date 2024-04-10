@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4977249_c019abd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T15:11:42Z",
+      "side": 1,
+      "message": "Hi Austin and Corentin, just sending this out as WIP for some questions before going further into storing the YCbCrInfo on the sampler and testing.",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdb1724_03489ddc",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T15:11:42Z",
+      "side": 1,
+      "message": "Does this also need a wgpu::Feature?",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b73e70_1da8811c",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-10T15:11:42Z",
+      "side": 1,
+      "message": "Am I in the right direction with this idea? We validate for SamplerDescriptorVk during SamplerDescriptor validation and then once validated we want to create YCbCrInfo for the vulkan::Sampler.\n\nThis didn\u0027t compile here as I guess SamplerDescriptor validation happens before the sampler is created and we want to store the info on the sampler.",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
