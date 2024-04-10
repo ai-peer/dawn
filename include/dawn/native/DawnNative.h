@@ -33,7 +33,8 @@
 
 #include "dawn/dawn_proc_table.h"
 #include "dawn/native/dawn_native_export.h"
-#include "dawn/webgpu_cpp.h"
+#include "dawn/webgpu_cpp_forward.h"
+#include "webgpu/webgpu_cpp_chained_struct.h"
 
 namespace dawn::platform {
 class Platform;
