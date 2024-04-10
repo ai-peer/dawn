@@ -70,6 +70,24 @@
       "parentUuid": "608618bf_05d3273d",
       "revId": "8bc8dbf4b11b70c4f7cc0fd0fb981f870bb5fc0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbdb97f2_ec29c332",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-10T22:14:24Z",
+      "side": 1,
+      "message": "We have plenty of Pixel 4 capacity, although you may want to consider increasing the shard count in the future.",
+      "parentUuid": "75c77004_8e409a1b",
+      "revId": "8bc8dbf4b11b70c4f7cc0fd0fb981f870bb5fc0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
