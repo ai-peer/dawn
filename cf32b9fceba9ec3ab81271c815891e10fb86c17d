@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5f3f54b_c885a9fa",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-10T02:07:22Z",
+      "side": 1,
+      "message": "\u003eIt seems loadTransformMatrix \u003d Scale(coordTransformMatrix, mVisibleSize)?\n\nA little bit different. Developers provide exact coord(which should be in visible rect) for `textureLoad()` so we don\u0027t need to do the scale compute that coordTransformMatrix has.\n\n(And I\u0027m a bit worry about float precision during computation. But that seems not that important? not sure.)\n\n\nSo maybe we could do things like:\n- Pass a transformMatrix in ExternalTextureParams but only handles rotation/mirror\n- Pass visible size and visible origin in ExternalTextureParams\n- Pass frame size in ExternalTextureParams.\n\nSo we could use shader to do the final cropping steps instead of pre-baked it.\n\nIf we do this,\n- For TextureSampleClampToEdge()\n  - multiply transform matrix\n  - do scale based on framesize and visible size\n  - do translate based on visible origin and frame size.\n\n- For textureLoad(), we need to do\n  - multiply transform matrix\n  - do translate with visible origin.\n  \nWDYT?",
+      "parentUuid": "6c55e5e4_053d57f3",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8616370d_5850896e",
         "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-09T10:19:47Z",
       "side": 1,
       "message": "We also need to fix textureDimensions() to use mVisibleSize. IMHO we should add a size : vec2\u003cu32\u003e to the ExternalTextureParams and use that for both textureDimensions and clamping the coordinates for loading.",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "871fe434_1111cbe7",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-10T02:07:22Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "8616370d_5850896e",
       "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
