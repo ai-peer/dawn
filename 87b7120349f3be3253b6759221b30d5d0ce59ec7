@@ -63,6 +63,30 @@
       },
       "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27ea543_ca9d7577",
+        "filename": "src/dawn/native/vulkan/BufferVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-10T15:09:24Z",
+      "side": 1,
+      "message": "Acknowledged. Thanks.",
+      "parentUuid": "3ef11d35_c3fe5a1d",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
