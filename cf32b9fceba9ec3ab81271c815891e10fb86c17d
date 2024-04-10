@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6701b052_437d2730",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-10T08:19:40Z",
+      "side": 1,
+      "message": "\u003eIt seems loadTransformMatrix \u003d Scale(coordTransformMatrix, mVisibleSize)?\n\nOk, I think I\u0027m also wrong about this. For example, a video frame [240, 480] size, with rotation 180. After applying rotation, it got the matrix:\n- for norm coord, mat2x3|-1, 0, 1, 0, -1, 1 |\n                  \n- for non norm coord , mat2x3 |-1, 0, 240 0, -1, 480|\n                       \nThese two matrix doesn\u0027t have linear transformation. But a simple rules here is that replace the last columns of norm matrix by multiplied frame size will get the non norm coord matrix.",
+      "parentUuid": "d5f3f54b_c885a9fa",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8616370d_5850896e",
         "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
         "patchSetId": 2
