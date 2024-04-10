@@ -190,6 +190,7 @@ TEST_F(CreatePipelineAsyncTaskTests, LongAsyncTaskFinishesBeforeDeviceIsDropped)
 
     CreateRenderPipelineAsyncTask::RunAsync(std::move(asyncTask));
 
+    mDeviceMock = nullptr;
     device = nullptr;
     // Dropping the device should force the async task to finish.
     EXPECT_TRUE(done);

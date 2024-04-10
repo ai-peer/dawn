@@ -42,6 +42,7 @@ DawnMockTest::DawnMockTest() {
 }
 
 DawnMockTest::~DawnMockTest() {
+    mDeviceMock = nullptr;
     device = wgpu::Device();
     dawnProcSetProcs(nullptr);
 }
