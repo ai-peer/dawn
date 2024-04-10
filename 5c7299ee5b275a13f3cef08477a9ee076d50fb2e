@@ -52,6 +52,24 @@
       "parentUuid": "0f4afd57_4f007f4e",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6686391_41ffb26f",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-10T14:19:54Z",
+      "side": 0,
+      "message": "Okay? I don\u0027t feel that justifies keep the code the way it was.\n\nWe have a call to `expression()` that can match, no-match or error (`expect_blah` is match or error). We were ignoring the no-match case. We got away with that because `Return(source, nullptr)` is equivalent to `Return(source)`, but given we have two overloads here, it\u0027s preferable to call the explicit one (some builder functions will assert pointers are not null instead).\n\nTo correctly handle the no-match case, and the semicolon check is completely redundant. Worse still it **gives the impression** it does something that `expression()` wouldn\u0027t handle.\n\nGiven the surrounding code, I don\u0027t feel like this is particularly confusing.",
+      "parentUuid": "94efca2a_915e2d22",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
