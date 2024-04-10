@@ -106,11 +106,13 @@ crbug.com/41487285 [ linux ] webgpu:web_platform,external_texture,video:importEx
 
 ################################################################################
 # Failures due to splitting off worker tests (crbug.com/330501141)
-# KEEP
 ################################################################################
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
+crbug.com/dawn/2478 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
+crbug.com/dawn/2478 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
 crbug.com/dawn/2478 [ linux nvidia ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
+crbug.com/dawn/2478 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
 
 ### This section represents things that are probably fixable in Dawn.
 
@@ -477,6 +479,18 @@ crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTex
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="2d" [ Failure ]
 crbug.com/dawn/2208 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg8snorm";dstFormat="rg8snorm";dimension="3d" [ Failure ]
 
+# Also failing on core (non-compat)
+crbug.com/tint/2225 webgpu:shader,execution,expression,unary,i32_conversion:abstract_float:* [ Failure ]
+crbug.com/tint/2225 webgpu:shader,execution,expression,unary,u32_conversion:abstract_float:* [ Failure ]
+crbug.com/tint/2218 webgpu:shader,validation,expression,binary,div_rem:scalar_vector_out_of_range:* [ Failure ]
+crbug.com/tint/2219 webgpu:shader,validation,decl,context_dependent_resolution:builtin_value_names:* [ Failure ]
+crbug.com/tint/2219 webgpu:shader,validation,decl,context_dependent_resolution:interpolation_sampling_names:* [ Failure ]
+crbug.com/tint/2219 webgpu:shader,validation,decl,context_dependent_resolution:interpolation_type_names:* [ Failure ]
+
+# Fine derivative tests don't work on compat
+crbug.com/tint/2226 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,dpdxFine:* [ Failure ]
+crbug.com/tint/2226 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,dpdyFine:* [ Failure ]
+
 ################################################################################
 # New flakes. Please triage:
 ################################################################################
@@ -490,8 +504,3 @@ crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,bu
 ################################################################################
 # New failures. Please triage:
 ################################################################################
-crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
-crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
-crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
-crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,dpdxFine:* [ Failure ]
-crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,dpdyFine:* [ Failure ]
