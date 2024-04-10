@@ -124,6 +124,24 @@
       "parentUuid": "ad34db4a_c242d9ca",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8fbf37a_60d2bea9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-10T13:48:16Z",
+      "side": 1,
+      "message": "That seems fine? Dawn would pass in a `compat` flag to the tint backend writer. That writer already run `singleEntryPoint` so it would strip out one or the other of those two entry points. Then the writer, if it sees a `texture_depth` usedd with a `textureLoad` during validation would fail?",
+      "parentUuid": "8195527f_4747d365",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
