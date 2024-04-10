@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f373b20_e8c8955b",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-10T15:47:29Z",
+      "side": 1,
+      "message": "If we made that descriptor only appear in `VulkanBackend.h` we could use the actual Vulkan type instead of a `\"void const *\"` (see how it is done for `RequestAdapterOptionsLUID`). Also slight preference for `\"sampler y cb cr vulkan descriptor\"` for the name and maybe something slightly shorter for the member name?\n\nWe probably need a wgpu::FeatureName for it, IDK if it is present on all Vulkan systems, and it\u0027s certainly not present in other APIs.",
+      "parentUuid": "0cdb1724_03489ddc",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8b73e70_1da8811c",
         "filename": "src/dawn/native/Sampler.cpp",
         "patchSetId": 3
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-10T15:11:42Z",
       "side": 1,
       "message": "Am I in the right direction with this idea? We validate for SamplerDescriptorVk during SamplerDescriptor validation and then once validated we want to create YCbCrInfo for the vulkan::Sampler.\n\nThis didn\u0027t compile here as I guess SamplerDescriptor validation happens before the sampler is created and we want to store the info on the sampler.",
+      "revId": "3c11d758a60a24d373423689533587541fabc47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fd43b26_80e48972",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-10T15:47:29Z",
+      "side": 1,
+      "message": "Adding validation that the extension is present here would work imho, but we would store the actual YCbCr information only inside vulkan::Sampler::Initialize.",
+      "parentUuid": "c8b73e70_1da8811c",
       "revId": "3c11d758a60a24d373423689533587541fabc47d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
