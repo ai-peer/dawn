@@ -39,6 +39,7 @@ dawn_json_generator("headers_gen") {
   outputs = [
     "include/dawn/dawn_proc_table.h",
     "include/dawn/webgpu.h",
+    "include/dawn/wire/client/webgpu.h",
   ]
 }
 
@@ -57,6 +58,7 @@ dawn_json_generator("cpp_headers_gen") {
   target = "cpp_headers"
   outputs = [
     "include/dawn/webgpu_cpp.h",
+    "include/dawn/wire/client/webgpu_cpp.h",
     "include/dawn/webgpu_cpp_print.h",
     "include/webgpu/webgpu_cpp_chained_struct.h",
   ]

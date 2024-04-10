@@ -943,8 +943,8 @@ def make_base_render_params(metadata):
         assert not type_name.native and not value_name.native
         return c_prefix + type_name.CamelCase() + '_' + value_name.CamelCase()
 
-    def as_cMethod(type_name, method_name):
-        c_method = c_prefix.lower()
+    def as_cMethod(type_name, method_name, extra_prefix=''):
+        c_method = c_prefix.lower() + extra_prefix
         if type_name != None:
             assert not type_name.native
             c_method += type_name.CamelCase()
@@ -1045,6 +1045,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('api.h', 'include/dawn/' + api + '.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
             renders.append(
+                FileRender('dawn/wire/client/api.h',
+                           'include/dawn/wire/client/' + api + '.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+            renders.append(
                 FileRender('dawn_proc_table.h',
                            'include/dawn/' + prefix + '_proc_table.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
@@ -1052,6 +1056,10 @@ class MultiGeneratorFromDawnJSON(Generator):
         if 'cpp_headers' in targets:
             renders.append(
                 FileRender('api_cpp.h', 'include/dawn/' + api + '_cpp.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+            renders.append(
+                FileRender('dawn/wire/client/api_cpp.h',
+                           'include/dawn/wire/client/' + api + '_cpp.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
 
             renders.append(
