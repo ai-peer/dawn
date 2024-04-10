@@ -63,7 +63,8 @@ MaybeError ComputePipeline::InitializeImpl() {
     // Tint does matrix multiplication expecting row major matrices
     compileFlags |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
 
-    if (!device->IsToggleEnabled(Toggle::D3DDisableIEEEStrictness)) {
+    if (programmableStage.module->GetStrictMath().value_or(
+            !device->IsToggleEnabled(Toggle::D3DDisableIEEEStrictness))) {
         compileFlags |= D3DCOMPILE_IEEE_STRICTNESS;
     }
 

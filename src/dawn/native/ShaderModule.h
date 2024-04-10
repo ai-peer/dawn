@@ -347,6 +347,8 @@ class ShaderModuleBase : public RefCountedWithExternalCountBase<ApiObjectBase>,
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
+    std::optional<bool> GetStrictMath() const;
+
     using ScopedUseTintProgram = APIRef<ShaderModuleBase>;
     ScopedUseTintProgram UseTintProgram();
 
@@ -376,6 +378,8 @@ class ShaderModuleBase : public RefCountedWithExternalCountBase<ApiObjectBase>,
     Type mType;
     std::vector<uint32_t> mOriginalSpirv;
     std::string mWgsl;
+
+    std::optional<bool> mStrictMath;
 
     EntryPointMetadataTable mEntryPoints;
     PerStage<std::string> mDefaultEntryPointNames;
