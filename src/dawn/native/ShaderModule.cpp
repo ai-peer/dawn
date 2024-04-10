@@ -1053,14 +1053,15 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     // A WGSL (or SPIR-V, if enabled) subdescriptor is required, and a Dawn-specific SPIR-V options
 // descriptor is allowed when using SPIR-V.
 #if TINT_BUILD_SPV_READER
-    DAWN_TRY_ASSIGN(
-        moduleType,
-        (descriptor.ValidateBranches<
-            Branch<ShaderModuleWGSLDescriptor>,
-            Branch<ShaderModuleSPIRVDescriptor, DawnShaderModuleSPIRVOptionsDescriptor>>()));
+    DAWN_TRY_ASSIGN(moduleType,
+                    (descriptor.ValidateBranches<
+                        Branch<ShaderModuleWGSLDescriptor, ShaderModuleCompilationOptions>,
+                        Branch<ShaderModuleSPIRVDescriptor, DawnShaderModuleSPIRVOptionsDescriptor,
+                               ShaderModuleCompilationOptions>>()));
 #else
     DAWN_TRY_ASSIGN(moduleType,
-                    (descriptor.ValidateBranches<Branch<ShaderModuleWGSLDescriptor>>()));
+                    (descriptor.ValidateBranches<
+                        Branch<ShaderModuleWGSLDescriptor, ShaderModuleCompilationOptions>>()));
 #endif
     DAWN_ASSERT(moduleType != wgpu::SType::Invalid);
 
@@ -1104,6 +1105,11 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
             DAWN_UNREACHABLE();
     }
     DAWN_ASSERT(wgslDesc != nullptr);
+
+    DAWN_INVALID_IF(descriptor.Get<ShaderModuleCompilationOptions>() != nullptr &&
+                        !device->HasFeature(Feature::ShaderModuleCompilationOptions),
+                    "Shader module compilation options used without %s enabled.",
+                    wgpu::FeatureName::ShaderModuleCompilationOptions);
 
     auto tintFile = std::make_unique<tint::Source::File>("", wgslDesc->code);
 
@@ -1282,6 +1288,10 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
     } else {
         DAWN_ASSERT(false);
     }
+
+    if (const auto* compileOptions = descriptor.Get<ShaderModuleCompilationOptions>()) {
+        mStrictMath = compileOptions->strictMath;
+    }
 }
 
 ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
@@ -1325,6 +1335,10 @@ ShaderModuleEntryPoint ShaderModuleBase::ReifyEntryPointName(const char* entryPo
     return entryPoint;
 }
 
+std::optional<bool> ShaderModuleBase::GetStrictMath() const {
+    return mStrictMath;
+}
+
 const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& entryPoint) const {
     DAWN_ASSERT(HasEntryPoint(entryPoint));
     return *mEntryPoints.at(entryPoint);
@@ -1335,12 +1349,14 @@ size_t ShaderModuleBase::ComputeContentHash() {
     recorder.Record(mType);
     recorder.Record(mOriginalSpirv);
     recorder.Record(mWgsl);
+    recorder.Record(mStrictMath);
     return recorder.GetContentHash();
 }
 
 bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
                                                 const ShaderModuleBase* b) const {
-    return a->mType == b->mType && a->mOriginalSpirv == b->mOriginalSpirv && a->mWgsl == b->mWgsl;
+    return a->mType == b->mType && a->mOriginalSpirv == b->mOriginalSpirv && a->mWgsl == b->mWgsl &&
+           a->mStrictMath == b->mStrictMath;
 }
 
 ShaderModuleBase::ScopedUseTintProgram ShaderModuleBase::UseTintProgram() {
