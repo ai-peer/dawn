@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f3cddf_c253fbac",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-10T21:19:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure about some of the wording.\nmaybe:\n\"is to defined not %s\" -\u003e \"is to defined and not %s\"",
+      "range": {
+        "startLine": 398,
+        "startChar": 50,
+        "endLine": 398,
+        "endChar": 68
+      },
+      "revId": "4f1af8d44886c2e32b04b87edd9e7d2b3a0eca3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
