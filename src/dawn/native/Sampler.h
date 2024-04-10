@@ -38,6 +38,10 @@
 
 namespace dawn::native {
 
+namespace vulkan {
+struct SamplerYCbCrVulkanDescriptor;
+}
+
 class DeviceBase;
 
 MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor* descriptor);
