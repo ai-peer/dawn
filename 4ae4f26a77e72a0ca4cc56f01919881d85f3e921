@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44c7316a_982d5389",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-10T06:31:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b513a8c4_6cc887e3",
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f6bd717_8db9e197",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e119266a_dc5dae94",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-10T06:31:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f6bd717_8db9e197",
+      "range": {
+        "startLine": 142,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 9
+      },
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a92aab6e_12d4eb76",
@@ -88,6 +130,30 @@
       "writtenOn": "2024-04-09T10:23:39Z",
       "side": 1,
       "message": "```suggestion\n            adapter-\u003eGetClient()-\u003eFree(adapter);\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 1
+      },
+      "revId": "4ae4f26a77e72a0ca4cc56f01919881d85f3e921",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d61a739_b1cc42bf",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-10T06:31:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a92aab6e_12d4eb76",
       "range": {
         "startLine": 87,
         "startChar": 0,
