@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c34b68d6_e5ffa061",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-10T23:56:15Z",
+      "side": 1,
+      "message": "Relevant tests have passed already.",
+      "revId": "52104ec7c89c1755c6b2e3d565f991bb9147832d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
