@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "7dbabea85abad314f38d479579ae4e731069dbdb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf878a7_e5fc8d53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-10T13:37:07Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7dbabea85abad314f38d479579ae4e731069dbdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31d40f8b_a8aec49a",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-10T13:37:07Z",
+      "side": 1,
+      "message": "Not for this CL necesserily, but since this is in the header we could add the static assert somewhere in detail and do static_assert(detail::MatchesCType\u003c..., ...\u003e);",
+      "revId": "7dbabea85abad314f38d479579ae4e731069dbdb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
