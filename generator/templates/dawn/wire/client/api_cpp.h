@@ -1,4 +1,4 @@
-//* Copyright 2023 The Dawn & Tint Authors
+//* Copyright 2024 The Dawn & Tint Authors
 //*
 //* Redistribution and use in source and binary forms, with or without
 //* modification, are permitted provided that the following conditions are met:
@@ -24,36 +24,39 @@
 //* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 //* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//*
+//*
 {% include 'BSD_LICENSE' %}
 {% set API = metadata.api.upper() %}
-{% if 'dawn' in enabled_tags %}
-    #ifdef __EMSCRIPTEN__
-    #error "Do not include this header. Emscripten already provides headers needed for {{metadata.api}}."
-    #endif
-{% endif %}
-#ifndef {{API}}_CPP_CHAINED_STRUCT_H_
-#define {{API}}_CPP_CHAINED_STRUCT_H_
+{% set api = API.lower() %}
+#ifndef DAWN_WIRE_CLIENT_{{API}}_CPP_H_
+#define DAWN_WIRE_CLIENT_{{API}}_CPP_H_
 
-#include <cstddef>
-#include <cstdint>
+#include "dawn/wire/client/{{api}}.h"
 
-// This header file declares the ChainedStruct structures separately from the {{metadata.api}}
-// headers so that dependencies can directly extend structures without including the larger header
-// which exposes capabilities that may require correctly set proc tables.
-namespace {{metadata.namespace}} {
+{% for function in by_category["function"] %}
+    #define {{as_cMethod(None, function.name)}} {{as_cMethod(None, function.name, 'DawnWireClient')}}
+{% endfor %}
 
-    enum class SType : uint32_t;
+{% for type in by_category["object"] if len(c_methods(type)) > 0 %}
+    {% for method in c_methods(type) %}
+        #define {{as_cMethod(type.name, method.name)}} {{as_cMethod(type.name, method.name, 'DawnWireClient')}}
+    {% endfor %}
+{% endfor %}
 
-    struct ChainedStruct {
-        ChainedStruct const * nextInChain = nullptr;
-        SType sType = SType(0u);
-    };
+#ifdef {{API}}_CPP_H_
+#error "{{api}}_cpp.h must not be included before dawn/wire/client/{{api}}.h"
+#endif
+#include "{{api}}/{{api}}_cpp.h"
 
-    struct ChainedStructOut {
-        ChainedStructOut * nextInChain = nullptr;
-        SType sType = SType(0u);
-    };
+{% for function in by_category["function"] %}
+    #undef {{as_cMethod(None, function.name)}}
+{% endfor %}
 
-}  // namespace {{metadata.namespace}}}
+{% for type in by_category["object"] if len(c_methods(type)) > 0 %}
+    {% for method in c_methods(type) %}
+        #undef {{as_cMethod(type.name, method.name)}}
+    {% endfor %}
+{% endfor %}
 
-#endif // {{API}}_CPP_CHAINED_STRUCT_H_
+#endif  // DAWN_WIRE_CLIENT_{{API}}_CPP_H_
