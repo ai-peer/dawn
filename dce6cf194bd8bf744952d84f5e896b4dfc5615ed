@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e7e4dd_31bf4808",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:35:21Z",
+      "side": 1,
+      "message": "Minor comments, LGTM overall!",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedeb905_35424982",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:35:21Z",
+      "side": 1,
+      "message": "note: not for this CL, but we could have a .Has\u003cT\u003e() on UnpackedPtr to avoid needing to actually get the variable for such validation.",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6c74e83_a69318ec",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:35:21Z",
+      "side": 1,
+      "message": "nit: We don\u0027t need to validate static samplers here IMHO, we\u0027ll have validation in BGL creation that wgpu::SamplerBindingType::YCbCr can only be static. Creating the sampler would be valid, but then you can only use it as a static sampler.",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d94f654f_369fdae8",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:35:21Z",
+      "side": 1,
+      "message": "It might be worth adding some test files for the YCbCr sampler work. We\u0027d start with adding validation tests that the feature is required. \n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/third_party/dawn/src/dawn/tests/end2end/AdapterPropertiesVkTests.cpp shows how to add a new test file. Without a special fixture we can test what happens when the extension is not present, and with a fixture like https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/third_party/dawn/src/dawn/tests/end2end/QueryTests.cpp;drc\u003d3252383e3842a722e39f404882a1ae10f5fdbace;l\u003d641 we can enable the extension and test with it.\n\nThe reason why it would be an new test file is that we\u0027d need to use vulkan.h eventually in it to create the YCbCr info and so we\u0027d conditionally compile the test only when dawn_enable_vulkan.",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2427822_9769ad98",
+        "filename": "src/dawn/native/Sampler.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:35:21Z",
+      "side": 1,
+      "message": "nit: unused in the header",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
