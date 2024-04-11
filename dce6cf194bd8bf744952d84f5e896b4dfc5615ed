@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f00941_2db8ab08",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 3696,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-11T23:30:21Z",
+      "side": 1,
+      "message": "Yeah, I figured we needed this for camel casing Cb and Cr. The spaces might help here distinguish Cb vs Cr order which is quite confusing.",
+      "parentUuid": "38283b21_28f02a84",
+      "range": {
+        "startLine": 3696,
+        "startChar": 45,
+        "endLine": 3696,
+        "endChar": 52
+      },
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bedeb905_35424982",
@@ -99,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a72051ed_408255cf",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-11T23:30:21Z",
+      "side": 1,
+      "message": "That sounds good! Acknowledged.",
+      "parentUuid": "bedeb905_35424982",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6c74e83_a69318ec",
@@ -112,6 +154,24 @@
       "writtenOn": "2024-04-11T09:35:21Z",
       "side": 1,
       "message": "nit: We don\u0027t need to validate static samplers here IMHO, we\u0027ll have validation in BGL creation that wgpu::SamplerBindingType::YCbCr can only be static. Creating the sampler would be valid, but then you can only use it as a static sampler.",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c20318_a5e1f562",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-11T23:30:21Z",
+      "side": 1,
+      "message": "Ah okay, yeah I wasn\u0027t sure about it and then erred on the side of adding it rather than not. I\u0027ve removed this validation check.",
+      "parentUuid": "d6c74e83_a69318ec",
       "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -135,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02ad49fd_a04566f4",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-11T23:30:21Z",
+      "side": 1,
+      "message": "Thanks for the pointers!! I added a file each for end2end and validation test which don\u0027t do much other than just check if feature is available or not and validate if sampler should be created or not.",
+      "parentUuid": "d94f654f_369fdae8",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2427822_9769ad98",
         "filename": "src/dawn/native/Sampler.h",
         "patchSetId": 7
@@ -146,6 +224,24 @@
       "writtenOn": "2024-04-11T09:35:21Z",
       "side": 1,
       "message": "nit: unused in the header",
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bdccebc_6d6f3af5",
+        "filename": "src/dawn/native/Sampler.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-11T23:30:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2427822_9769ad98",
       "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
