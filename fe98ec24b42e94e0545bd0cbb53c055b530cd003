@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "fe98ec24b42e94e0545bd0cbb53c055b530cd003",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df7f51b_141d83c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:22:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fe98ec24b42e94e0545bd0cbb53c055b530cd003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8944722b_cd47e481",
+        "filename": "src/dawn/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T09:22:33Z",
+      "side": 1,
+      "message": "Maybe we could have an ASSERT in the handlers that they are detached before they are destroyed. Otherwise we are very likely to miss doing this for other tests we add in the future.",
+      "revId": "fe98ec24b42e94e0545bd0cbb53c055b530cd003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
