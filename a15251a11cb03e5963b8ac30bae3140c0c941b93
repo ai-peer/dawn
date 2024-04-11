@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "a15251a11cb03e5963b8ac30bae3140c0c941b93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc0b4b7_0697bdfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T07:42:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a15251a11cb03e5963b8ac30bae3140c0c941b93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba9dbe09_e04dd481",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T07:42:53Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a helper function that\u0027s DropDevice or something so we don\u0027t need to remember to destroy devices in that order if we add new tests later.",
+      "revId": "a15251a11cb03e5963b8ac30bae3140c0c941b93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
