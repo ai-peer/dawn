@@ -106,6 +106,24 @@
       "parentUuid": "191bb151_377b8ac7",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27c291a9_11628daa",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-11T20:59:18Z",
+      "side": 0,
+      "message": "I don\u0027t find the comment useful, mostly because it will get out of date. I\u0027m not planning on blocking the CL over this I find it better the other way, but that\u0027s just my preference.",
+      "parentUuid": "88a30c6b_5a4db5bb",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
