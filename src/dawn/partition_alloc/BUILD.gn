@@ -23,7 +23,7 @@ if (defined(dawn_partition_alloc_dir)) {
   # is_clang || !is_win is the one used by partition_alloc.
   is_clang_or_gcc = is_clang || !is_win
 
-  if (is_clang_or_gcc) {
+  if (is_clang_or_gcc && use_custom_libcxx) {
     group("partition_alloc") {
       public_deps = [ "${dawn_partition_alloc_dir}:partition_alloc" ]
     }
