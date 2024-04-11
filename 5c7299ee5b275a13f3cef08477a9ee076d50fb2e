@@ -88,6 +88,24 @@
       "parentUuid": "f6686391_41ffb26f",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a30c6b_5a4db5bb",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-11T15:21:26Z",
+      "side": 0,
+      "message": "Added a comment as a hopeful compromise.",
+      "parentUuid": "191bb151_377b8ac7",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
