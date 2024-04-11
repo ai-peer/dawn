@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38283b21_28f02a84",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 3696,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T16:16:09Z",
+      "side": 1,
+      "message": "It is a dawn.json-ism to format names correctly so codegen templates later know how to do CamelCase vs. SNAKE_CASE etc. (consider for example enums used to be CamelCase in C++ but SNAKE_CASE in C a couple years ago). If we choose only CamelCase in dawn.json then RGBAUnorm could be interpreted as R_G_B_A or RGBA_UNORM or whatever other split.",
+      "parentUuid": "70aa2925_ab9ed69f",
+      "range": {
+        "startLine": 3696,
+        "startChar": 45,
+        "endLine": 3696,
+        "endChar": 52
+      },
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bedeb905_35424982",
         "filename": "src/dawn/native/Sampler.cpp",
         "patchSetId": 7
