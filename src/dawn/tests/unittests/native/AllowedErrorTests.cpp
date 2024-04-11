@@ -76,7 +76,10 @@ class AllowedErrorTests : public DawnMockTest {
                                           mDeviceErrorCb.MakeUserdata(this));
     }
 
-    ~AllowedErrorTests() override { device = nullptr; }
+    ~AllowedErrorTests() override {
+        mDeviceMock = nullptr;
+        device = nullptr;
+    }
 
   protected:
     // Device mock callbacks used throughout the tests.
