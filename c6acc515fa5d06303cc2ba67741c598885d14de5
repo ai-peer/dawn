@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f8d155_d20f6b76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-11T00:00:21Z",
+      "side": 1,
+      "message": "This ended up colliding with https://dawn-review.googlesource.com/c/dawn/+/183360 - please let the gardener know before triaging expectations since the gardener is also likely to do it",
+      "revId": "c6acc515fa5d06303cc2ba67741c598885d14de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd00e81_297debeb",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1589,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-11T00:00:21Z",
+      "side": 1,
+      "message": "Not important but FYI I believe if you collapse down expectations in this way the CTS roller will just blow them back up again on the next roll",
+      "revId": "c6acc515fa5d06303cc2ba67741c598885d14de5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
