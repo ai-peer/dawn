@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb77c52_f33e68ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-11T04:10:27Z",
+      "side": 1,
+      "message": "PS3 generated a lot of churn from rewriting some sections and adding no-worker tags (due to https://dawn-review.googlesource.com/c/dawn/+/181080) but I\u0027ve reviewed it and it all looks correct",
+      "revId": "3c0ad4c1b5fcd3e5cd6363c53a197327e0f154a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
