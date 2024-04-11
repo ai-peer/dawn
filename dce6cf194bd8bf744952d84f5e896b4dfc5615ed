@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70aa2925_ab9ed69f",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 3696,
+      "author": {
+        "id": 1004687
+      },
+      "writtenOn": "2024-04-11T16:00:31Z",
+      "side": 1,
+      "message": "nit: Is there a reason there are spaces b/w `y cb cr`? I just ask because it\u0027s typically YCbCr, or for camelCase variables, Ycbcr. This could be just some Dawn-ism though that I\u0027m not familiar with, so I defer to you to make the final call :D",
+      "range": {
+        "startLine": 3696,
+        "startChar": 45,
+        "endLine": 3696,
+        "endChar": 52
+      },
+      "revId": "dce6cf194bd8bf744952d84f5e896b4dfc5615ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bedeb905_35424982",
         "filename": "src/dawn/native/Sampler.cpp",
         "patchSetId": 7
