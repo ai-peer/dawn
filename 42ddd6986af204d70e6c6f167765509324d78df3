@@ -88,6 +88,24 @@
       "parentUuid": "1cd8fe2e_691d2589",
       "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3899a119_74c1d590",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-04-11T17:45:51Z",
+      "side": 1,
+      "message": "\u003e can I just add android-a to these txt files or does validate_tag_consistency.py have to be updated first?\n\nI believe we don\u0027t validate tag consistency on WebGPU expectation files since they\u0027re in a separate repo (the headers are already out of sync with what\u0027s in Chromium).\n\nIt\u0027s unfortunate that newer versions of Android U [show up as A](https://chromium-swarm.appspot.com/bot?id\u003dlin-29-e505--device1) instead of U. I suspect we\u0027ll try to put a workaround in place, so `android-a` probably won\u0027t be a long-term tag, but it won\u0027t hurt to have it around in the meantime.",
+      "parentUuid": "462c0a98_4cbfd189",
+      "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
