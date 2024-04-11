@@ -124,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "617a2632_9f972daf",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-11T17:02:00Z",
+      "side": 1,
+      "message": "Added TODO, and filed tracking bug about strictness",
+      "parentUuid": "20b9582d_f9a9ee38",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84a77dbd_0a596167",
