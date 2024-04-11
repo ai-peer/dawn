@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023554e2_113ee18d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-11T16:11:28Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "5e491e62b7b0849b3356afd85024969df1a4de4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
