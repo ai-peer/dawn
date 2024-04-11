@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "500b755e_4483ec78",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T15:28:12Z",
+      "side": 1,
+      "message": "Oh and WebGPU defaults to fastMath, so strictMath: false. Which backend defaults to strict / no-fast-math?",
+      "parentUuid": "f7e1e13b_ce22a37c",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84a77dbd_0a596167",
         "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
         "patchSetId": 4
