@@ -311,6 +311,9 @@ Ref<TextureBase> Device::CreateTextureWrappingEGLImage(const ExternalImageDescri
     const OpenGLFunctions& gl = GetGL();
 
     UnpackedPtr<TextureDescriptor> textureDescriptor;
+    if (gl.IsGLExtensionSupported("GL_OES_EGL_image")) {
+        return nullptr;
+    }
     if (ConsumedError(ValidateAndUnpack(FromAPI(descriptor->cTextureDescriptor)),
                       &textureDescriptor)) {
         return nullptr;

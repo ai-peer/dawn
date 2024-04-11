@@ -49,9 +49,8 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 
     DAWN_TRY(CheckEGL(egl, egl.Initialize(display, &major, &minor), "eglInitialize"));
 
-    // We use EGLImage unconditionally, which only became core in 1.5.
-    DAWN_INVALID_IF(major < 1 || (major == 1 && minor < 5),
-                    "EGL version (%u.%u) must be at least 1.5", major, minor);
+    DAWN_INVALID_IF(major < 1 || (major == 1 && minor < 4),
+                    "EGL version (%u.%u) must be at least 1.4", major, minor);
 
     // Since we're creating a surfaceless context, the only thing we really care
     // about is the RENDERABLE_TYPE.

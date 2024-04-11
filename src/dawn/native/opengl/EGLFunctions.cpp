@@ -36,8 +36,6 @@ void EGLFunctions::Init(void* (*getProc)(const char*)) {
     CreateContext = reinterpret_cast<PFNEGLCREATECONTEXTPROC>(GetProcAddress("eglCreateContext"));
     CreatePbufferSurface =
         reinterpret_cast<PFNEGLCREATEPBUFFERSURFACEPROC>(GetProcAddress("eglCreatePbufferSurface"));
-    CreatePlatformWindowSurface = reinterpret_cast<PFNEGLCREATEPLATFORMWINDOWSURFACEPROC>(
-        GetProcAddress("eglCreatePlatformWindowSurface"));
     DestroyContext =
         reinterpret_cast<PFNEGLDESTROYCONTEXTPROC>(GetProcAddress("eglDestroyContext"));
     GetConfigs = reinterpret_cast<PFNEGLGETCONFIGSPROC>(GetProcAddress("eglGetConfigs"));
