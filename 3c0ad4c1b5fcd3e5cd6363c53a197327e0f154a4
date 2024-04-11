@@ -34,6 +34,24 @@
       "parentUuid": "fdb77c52_f33e68ce",
       "revId": "3c0ad4c1b5fcd3e5cd6363c53a197327e0f154a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44284c4d_73472dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-11T04:27:11Z",
+      "side": 1,
+      "message": "\u003e I\u0027ve reviewed it and it all looks correct\n\nOn second thought perhaps not. We don\u0027t handle the tags from android-dawn-arm64-exp-rel because they produce `android-a` which is not in the expectations file, so instead the roller uses `android` and then merges the expectations with others. Not ideal probably.\n\nI\u0027m going to let the scheduled autoroller do its thing which will take care of the aforementioned unrelated churn and try this again tomorrow, with `android-a` in the allowed tags.",
+      "parentUuid": "37e360d8_7b94380d",
+      "revId": "3c0ad4c1b5fcd3e5cd6363c53a197327e0f154a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
