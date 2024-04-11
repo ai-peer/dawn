@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83d18a2_c923f3bd",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-11T03:10:59Z",
+      "side": 1,
+      "message": "I find I cannot run `git cl upload` with this CL. I can only upload CLs with `--bypass-hooks`. Here is the error message I get, could you take a look?\n\n** Presubmit ERRORS: 1 **\nlucicfg validate \"infra/config/global/main.star\"\nlucicfg.bat validate infra/config/global/main.star -log-level warning (0.57s) failed\nError: failed to send RPC to LUCI Config - failed to call LUCI Config: rpc error: code \u003d PermissionDenied desc \u003d \"user:jiawei.shao@intel.com\" does not have permission to validate config set \"projects/dawn\"",
+      "revId": "5e491e62b7b0849b3356afd85024969df1a4de4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
