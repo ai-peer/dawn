@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7e1e13b_ce22a37c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-11T15:25:03Z",
+      "side": 1,
+      "message": "problem is that Dawn\u0027s defaults are currently inconsistent.\n\nMetal defaults to fastMath. D3D defaults to no strictness. If we can get strictness disabled by default, then we can do that; but it\u0027s not the case yet.",
+      "parentUuid": "e62c8536_a3fcb64c",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84a77dbd_0a596167",
         "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
         "patchSetId": 4
