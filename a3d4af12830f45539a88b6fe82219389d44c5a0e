@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc444fe8_4d8c5341",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T15:17:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e62c8536_a3fcb64c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T15:17:56Z",
+      "side": 1,
+      "message": "Maybe we can have a default to true here? And potentially call it relaxedMath/fastMath so that the default of false matches the default without the options. This with the other comment could make it so we don\u0027t need the std::optional.",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a77dbd_0a596167",
+        "filename": "src/dawn/native/d3d11/ComputePipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T15:17:56Z",
+      "side": 1,
+      "message": "Maybe we can remove that toggle if there is a shader module option. Or we could change it into ForceFastMath that overrides the option provided.",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
