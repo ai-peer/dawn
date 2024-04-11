@@ -70,6 +70,24 @@
       "parentUuid": "0dcf0019_338503d6",
       "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "462c0a98_4cbfd189",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-11T04:39:43Z",
+      "side": 1,
+      "message": "It didn\u0027t work. This tryjob generates the `android-a` tag which the txt files don\u0027t allow, so the roller uses `android` instead and generates conflicting expectations. @bsheedy@google.com can I just add `android-a` to these txt files or does `validate_tag_consistency.py` have to be updated first?\n\nThere was also a bunch of churn due to unrelated things so I will wait for that to get sorted out by the usual scheduled roll and then try again with the tag fixes.",
+      "parentUuid": "1cd8fe2e_691d2589",
+      "revId": "42ddd6986af204d70e6c6f167765509324d78df3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
