@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0961473c_a772635f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T16:21:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e62c8536_a3fcb64c",
@@ -85,6 +102,24 @@
       "side": 1,
       "message": "D3D defaults to strict math because FXC compilation bugs, and we haven\u0027t figured out if DXC is safe to default to no strictness yet.",
       "parentUuid": "500b755e_4483ec78",
+      "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b9582d_f9a9ee38",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-11T16:21:22Z",
+      "side": 1,
+      "message": "Got it, maybe we can have a TODO to remove the std::optional when we feel like we can disable strictness on DXC. FXC can just always override in its options.",
+      "parentUuid": "08d2bc58_23cf4c1f",
       "revId": "a3d4af12830f45539a88b6fe82219389d44c5a0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
