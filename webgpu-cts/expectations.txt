@@ -1617,9 +1617,6 @@ crbug.com/tint/2225 webgpu:shader,execution,expression,unary,u32_conversion:abst
 
 ################################################################################
 # Test bugs with f16, fixed in <https://github.com/gpuweb/cts/pull/3634>.
-# Needs "keep" to avoid "Mac-13.3.1 | Mac-14.3.1" from overspecializing these
-# expectations. Should be manually removed after the next roll.
-# KEEP
 ################################################################################
 crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,select:arguments:test="f16" [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,select:arguments:test="vec_f16" [ Failure ]
