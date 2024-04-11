@@ -33,6 +33,24 @@
       "message": "it seems something needs to update",
       "revId": "c6f50efe60f054707f19aacc771db71e207e095e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88614c0c_2148e382",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-11T09:37:23Z",
+      "side": 1,
+      "message": "fixed!",
+      "parentUuid": "6c052342_64d0a6e5",
+      "revId": "c6f50efe60f054707f19aacc771db71e207e095e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
