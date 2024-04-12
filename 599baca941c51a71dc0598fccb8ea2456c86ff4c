@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa05110_30efbc7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-12T02:17:36Z",
+      "side": 1,
+      "message": "note to self, do not do this, it doesn\u0027t work (it only formats compat-expectations.txt because that one comes second and overwrites the first one)",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 13,
+        "endChar": 72
+      },
+      "revId": "599baca941c51a71dc0598fccb8ea2456c86ff4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
