@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "610489a19300da3a4d6a78bcf976e3b10d217e74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684be9ae_e53de8f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T13:41:26Z",
+      "side": 1,
+      "message": "LGTM, though IMHO we could also eventually remove wire support from the samples. It was historically used for testing, but now we have real test suites ;)",
+      "revId": "610489a19300da3a4d6a78bcf976e3b10d217e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
