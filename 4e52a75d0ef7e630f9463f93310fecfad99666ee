@@ -16,6 +16,24 @@
       "message": "There doesn\u0027t seem to be related flakes in recent runs after the fix for the event/futureID race exposed by TSAN build:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/android-dawn-arm64-rel/10013/test-results?sortby\u003d\u0026groupby\u003d\nhttps://ci.chromium.org/ui/p/chromium/builders/try/android-dawn-arm64-rel/10035/test-results?sortby\u003d\u0026groupby\u003d\n\nthe isolate run on swarming still fails with --jobs\u003d4:\nhttps://chromium-swarm.appspot.com/task?id\u003d68ec2240cf7f7b10\n\nThe failing reason isn\u0027t timeout but `websockets.exceptions.ConnectionClosedOK: received 1001 (going away); then sent 1001 (going away)`\n\nI don\u0027t know if the swarming still works correctly and could fairly reflect what\u0027s on bot though. (Like do they have the same timeout limit?)\n\nLet me know if we can try reland, or any more ideas to try investigating",
       "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7ca18d_a78e68ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-12T18:12:19Z",
+      "side": 1,
+      "message": "Things likely ruled out:\n* memory piles up: I tried logging the size of futures/completable in EventManager.cpp. For the flaky tests the vector size is \u003c 5 so that\u0027s unlikely the reason.\n* cache related: commented out the add/find cache code but no change.",
+      "parentUuid": "bdd17932_8c337e43",
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
