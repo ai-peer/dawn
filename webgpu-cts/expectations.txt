@@ -630,6 +630,9 @@ crbug.com/dawn/2478 [ mac ] webgpu:api,validation,buffer,mapping:mapAsync,state,
 crbug.com/dawn/2478 [ win10 ] webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
 crbug.com/dawn/2478 [ win10 ] webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
 crbug.com/dawn/2478 [ win10 ] webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
+crbug.com/dawn/2478 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-shared-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,* [ RetryOnFailure ]
+crbug.com/dawn/2478 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-dedicated-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,mappedAtCreation: [ RetryOnFailure ]
+crbug.com/dawn/2478 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-service-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,mappedAtCreation: [ RetryOnFailure ]
 
 ################################################################################
 # video tests fail on SwiftShader. Due to multiplanar formatted textures not
@@ -1395,6 +1398,13 @@ crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,smoothstep:
 crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,smoothstep:arguments:test="mixed_f16_afloat" [ Failure ]
 
 ################################################################################
+# Triaged but uncategorized expectations
+################################################################################
+crbug.com/dawn/2497 [ android-t arm dawn-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
+crbug.com/dawn/2497 [ android-t arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
+crbug.com/dawn/2497 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
+
+################################################################################
 # Derivative tests
 ################################################################################
 crbug.com/tint/2226 [ dawn-backend-validation intel-0x3e9b mac target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,dpdyFine:* [ Failure ]
@@ -1578,9 +1588,6 @@ crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-3
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default webgpu-dedicated-worker ] webgpu:api,operation,rendering,basic:large_draw:indexed=true;indirect=true [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default webgpu-service-worker ] webgpu:api,operation,rendering,basic:large_draw:indexed=true;indirect=true [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-64 webgpu-adapter-default webgpu-dxc-disabled webgpu-no-worker win10 ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="rgba32float" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-shared-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,* [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-dedicated-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,mappedAtCreation: [ RetryOnFailure ]
-crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 target-cpu-64 ubuntu webgpu-adapter-default webgpu-service-worker ] webgpu:api,validation,buffer,mapping:getMappedRange,subrange,mappedAtCreation: [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 webgpu-adapter-default webgpu-dxc-disabled webgpu-no-worker win10 ] webgpu:shader,execution,expression,unary,i32_conversion:f32:inputSource="const";vectorize="_undef_" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-64 webgpu-adapter-default webgpu-dxc-disabled webgpu-no-worker win10 ] webgpu:shader,execution,expression,unary,i32_conversion:f32:inputSource="const";vectorize="_undef_" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,shader_io,compute_builtins:inputs:method="mixed";dispatch="direct";groupSize={"x":3,"y":7,"z":5};numGroups={"x":13,"y":9,"z":11} [ RetryOnFailure ]
@@ -1611,9 +1618,6 @@ crbug.com/dawn/0000 [ android-t arm dawn-backend-validation target-cpu-64 webgpu
 crbug.com/dawn/0000 [ android-t arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,determinant:f16:inputSource="storage_rw";dim=4 [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,ldexp:f32:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,ldexp:f32:* [ Failure ]
-crbug.com/dawn/0000 [ android-t arm dawn-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
-crbug.com/dawn/0000 [ android-t arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
-crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:* [ Failure ]
 crbug.com/dawn/0000 [ android-t arm dawn-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,constructor,non_zero:matrix_elements:* [ Failure ]
 crbug.com/dawn/0000 [ android-t arm dawn-no-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,constructor,non_zero:matrix_elements:* [ Failure ]
 crbug.com/dawn/0000 [ android-t arm dawn-backend-validation target-cpu-64 webgpu-adapter-default webgpu-no-worker ] webgpu:shader,execution,expression,unary,af_arithmetic:negation:inputSource="const";vectorize="_undef_" [ Failure ]
