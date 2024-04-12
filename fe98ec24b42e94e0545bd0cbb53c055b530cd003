@@ -50,6 +50,24 @@
       "message": "Maybe we could have an ASSERT in the handlers that they are detached before they are destroyed. Otherwise we are very likely to miss doing this for other tests we add in the future.",
       "revId": "fe98ec24b42e94e0545bd0cbb53c055b530cd003",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb19891_ff4467da",
+        "filename": "src/dawn/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-12T02:10:44Z",
+      "side": 1,
+      "message": "Oh it\u0027s hard to do so because the command serializer of the handler (`CommandSerializer`) is not always a `TerribleCommandBuffer`. In fact we only need to detach the handlers for `TerribleCommandBuffer`, not  all `CommandSerializer`.",
+      "parentUuid": "8944722b_cd47e481",
+      "revId": "fe98ec24b42e94e0545bd0cbb53c055b530cd003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
