@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8cda38d_9a536586",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T09:11:30Z",
+      "side": 1,
+      "message": "PTAL! Also a fix for an earlier commit got mistakenly amended on this one.",
+      "revId": "84f9226ff0149e8a71dd43c65888b43bfb3760e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
