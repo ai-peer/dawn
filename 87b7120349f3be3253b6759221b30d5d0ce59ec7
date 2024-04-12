@@ -35,6 +35,74 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c08827_711fe380",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T17:30:01Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc16fe4_a49b29ff",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T17:30:01Z",
+      "side": 1,
+      "message": "u-nit: this can declared just before use, or we can pass reinterpret_cast\u003cvoid**\u003e(\u0026memory) to vkMapMemory.",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09e83f7c_fb80566c",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T17:30:01Z",
+      "side": 1,
+      "message": "We might be able to collect these on the queue or device object to batch the flushes, which are probably a syscall each. Unless we can expect drivers to do the batching for us? Can we have a TODO for that?",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a49e854b_bad80546",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-12T17:30:01Z",
+      "side": 1,
+      "message": "Would there be a cost to always mapping host-visible memory so we don\u0027t need to do map and unmap all the time, nor the computation to map only the small region for host-coherent memory?",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e20e331_4968fba1",
