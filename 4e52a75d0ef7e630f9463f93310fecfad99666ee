@@ -34,6 +34,24 @@
       "parentUuid": "bdd17932_8c337e43",
       "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fe9522_00503974",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-12T18:23:41Z",
+      "side": 1,
+      "message": "Well just tried a isolate swarming run with dawn main branch and also fails\nhttps://chromium-swarm.appspot.com/task?id\u003d68ec5260e29f5810\n\nFailing log is a bit different:\nmain: `py_utils.TimeoutException: Timed out while waiting 60s for IsJavaScriptExpressionTrue.`\nvs\ncl: `websockets.exceptions.ConnectionClosedOK: received 1001 (going away); then sent 1001 (going away)`",
+      "parentUuid": "bc7ca18d_a78e68ff",
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
