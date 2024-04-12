@@ -140,11 +140,6 @@ void MatrixVectorMultiplyPerf::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(GetParam().mSubgroups &&
                              !SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalSubgroups}));
 
-    // TODO(crbug.com/dawn/2462): Fails compilation with
-    //      error X3004: undeclared identifier 'WaveReadLaneAt'
-    // on D3D12 when using subgroups. Suppress while we figure out why FXC is used.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && GetParam().mSubgroups);
-
     // TODO(crbug.com/dawn/2508): Fails due to an OS/driver upgrade on Linux/Intel.
     DAWN_SUPPRESS_TEST_IF(IsLinux() && IsIntel() && IsVulkan() && IsMesa("23.2.1") &&
                           GetParam().mStoreType == StoreType::F32);
