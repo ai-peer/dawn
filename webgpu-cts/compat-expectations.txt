@@ -75,7 +75,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-04-12 05:25:15AM
+# Last rolled: 2024-04-14 07:12:46AM
 
 # Flaky on all platforms
 # KEEP
@@ -378,7 +378,6 @@ crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries
 # getCurrentTexture failures
 crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:* [ Failure ]
 crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:resize:* [ Failure ]
-crbug.com/dawn/2114 [ nvidia-0x2184 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
 
 # copyToTexture,canvas color_space_conversion failure on NVidia
 crbug.com/dawn/2377 [ nvidia-0x2184 ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:srcColorSpace="display-p3";dstColorSpace="srgb";dstColorFormat="rg16float";dstPremultiplied=false;srcDoFlipYDuringCopy=false [ RetryOnFailure ]
