@@ -1,4 +1,4 @@
-# Copyright 2018 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,79 +25,21 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import("//build/config/rust.gni")
-import("scripts/dawn_overrides_with_defaults.gni")
-import("scripts/tint_overrides_with_defaults.gni")
+import("//build/config/android/rules.gni")
 
-group("benchmarks") {
-  testonly = true
-  deps = [ "src/tint:benchmarks" ]
+assert(is_android)
+assert(enable_java_templates)
+
+dist_aar("dawn_aar") {
+  output = "$target_gen_dir/foo.aar"
+  android_manifest = "AndroidManifest.xml"
+  #native_libraries = "webgpu/build/intermediates/library_and_local_jars_jni/release/jni"
+
 }
 
-group("fuzzers") {
-  testonly = true
-  deps = [
-    "src/dawn/fuzzers",
-    "src/tint:fuzzers",
+group("android") {
+  deps = [ 
+     ":dawn_aar",
   ]
 }
 
-group("libs") {
-  deps = [
-    "src/dawn/native:webgpu_dawn",
-    "src/tint:libs",
-  ]
-}
-
-group("tests") {
-  testonly = true
-  deps = [
-    "src/dawn/tests",
-    "src/tint:tests",
-  ]
-}
-
-group("cmds") {
-  deps = [
-    "src/dawn/samples",
-    "src/tint:cmds",
-  ]
-  if (target_cpu == "x64" && (is_win || is_linux || is_mac)) {
-    deps += [ "third_party/gn/dxc:dxc" ]
-  }
-}
-
-if (is_android) {
-  group("android") {
-    deps = [
-      "tools/android",
-    ]
-  }
-}
-
-group("all") {
-  testonly = true
-  deps = [
-    ":benchmarks",
-    ":cmds",
-    ":fuzzers",
-    ":libs",
-    ":tests",
-  ]
-  if (is_android) {
-    deps += [ ":android" ]
-  }
-}
-
-if (enable_rust) {
-  group("rust_build_tests") {
-    testonly = true
-    deps = [ "//build/rust/tests" ]
-  }
-}
-
-# This target is built when no specific target is specified on the command line.
-group("default") {
-  testonly = true
-  deps = [ ":all" ]
-}
