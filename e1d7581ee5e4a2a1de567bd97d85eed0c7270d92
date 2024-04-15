@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0883299_e9dc16d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-04-15T07:35:33Z",
+      "side": 1,
+      "message": "Wow, it means Dawn is now free of DanglingUntriaged!\n🎉 Thank you very much @jiawei.shao@intel.com !",
+      "revId": "e1d7581ee5e4a2a1de567bd97d85eed0c7270d92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
