@@ -29,6 +29,7 @@
 
 #include <algorithm>
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -118,6 +119,23 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     } else {
         createInfo.anisotropyEnable = VK_FALSE;
         createInfo.maxAnisotropy = 1;
+    }
+
+    if (auto* vulkanYCbCrDescriptor =
+            Unpack(descriptor).Get<vulkan::SamplerYCbCrVulkanDescriptor>()) {
+        mYCbCrInfo = vulkanYCbCrDescriptor->vulkanYCbCrInfo;
+        VkSamplerYcbcrConversion vkSamplerYcbcrConversion = VK_NULL_HANDLE;
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &mYCbCrInfo, nullptr,
+                                                    &*vkSamplerYcbcrConversion),
+            "CreateSamplerYcbcrConversion"));
+
+        VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+        samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
+        samplerYCbCrInfo.pNext = nullptr;
+        samplerYCbCrInfo.conversion = vkSamplerYcbcrConversion;
+
+        createInfo.pNext = &samplerYCbCrInfo;
     }
 
     DAWN_TRY(CheckVkSuccess(

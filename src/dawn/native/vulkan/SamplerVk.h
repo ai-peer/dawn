@@ -53,6 +53,7 @@ class Sampler final : public SamplerBase {
     void SetLabelImpl() override;
 
     VkSampler mHandle = VK_NULL_HANDLE;
+    VkSamplerYcbcrConversionCreateInfo mYCbCrInfo = {};
 };
 
 }  // namespace dawn::native::vulkan
