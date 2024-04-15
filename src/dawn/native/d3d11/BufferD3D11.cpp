@@ -590,7 +590,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     // Map the buffer if it is possible, so WriteInternal() can write the mapped memory directly.
     ScopedMap scopedMap;
     DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this));
-
     if (scopedMap.GetMappedData()) {
         memcpy(scopedMap.GetMappedData() + offset, data, size);
         // The WebGPU uniform buffer is not mappable.
@@ -678,8 +677,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     DAWN_TRY(Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()),
                                   /*sourceOffset=*/0,
                                   /*size=*/size, this, offset));
-    ToBackend(GetDevice())->ReturnStagingBuffer(std::move(stagingBuffer));
-
     return {};
 }
 
