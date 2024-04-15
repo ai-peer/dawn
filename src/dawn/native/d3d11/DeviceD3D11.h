@@ -104,12 +104,10 @@ class Device final : public d3d::Device {
     ResultOrError<Ref<BufferBase>> GetStagingBuffer(
         const ScopedCommandRecordingContext* commandContext,
         uint64_t size);
-    void ReturnStagingBuffer(Ref<BufferBase>&& buffer);
 
   private:
     using Base = d3d::Device;
     using Base::Base;
-    static constexpr uint64_t kMaxStagingBufferSize = 512 * 1024;
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -165,8 +163,7 @@ class Device final : public d3d::Device {
     std::array<Ref<TextureViewBase>, kMaxPLSSlots> mImplicitPixelLocalStorageAttachmentTextureViews;
 
     // The cached staging buffers.
-    std::vector<Ref<BufferBase>> mStagingBuffers;
-    uint64_t mTotalStagingBufferSize = 0;
+    Ref<BufferBase> mStagingBuffer;
 };
 
 }  // namespace dawn::native::d3d11

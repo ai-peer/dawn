@@ -587,20 +587,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         return {};
     }
 
-    // Map the buffer if it is possible, so WriteInternal() can write the mapped memory directly.
-    ScopedMap scopedMap;
-    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this));
-
-    if (scopedMap.GetMappedData()) {
-        memcpy(scopedMap.GetMappedData() + offset, data, size);
-        // The WebGPU uniform buffer is not mappable.
-        DAWN_ASSERT(!mD3d11ConstantBuffer);
-        return {};
-    }
-
-    // UpdateSubresource can only be used to update non-mappable buffers.
-    DAWN_ASSERT(!IsMappable(GetUsage()));
-
     if (mD3d11NonConstantBuffer) {
         D3D11_BOX box;
         box.left = static_cast<UINT>(offset);
@@ -678,8 +664,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     DAWN_TRY(Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()),
                                   /*sourceOffset=*/0,
                                   /*size=*/size, this, offset));
-    ToBackend(GetDevice())->ReturnStagingBuffer(std::move(stagingBuffer));
-
     return {};
 }
 
