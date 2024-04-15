@@ -1,5 +1,23 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef0b7bd5_6dca9eb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-15T07:56:31Z",
+      "side": 1,
+      "message": "@kainino@chromium.org - I was actually trying to test https://dawn-review.googlesource.com/c/dawn/+/183382. Fortunately this had completed, but a negative vote would have been safer here.",
+      "revId": "a8593e14aa9e81f577ad8939f91ec31141589d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
