@@ -124,6 +124,24 @@
       "parentUuid": "88a30c6b_5a4db5bb",
       "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2109563d_682d6008",
+        "filename": "src/tint/lang/wgsl/reader/parser/parser.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-15T15:03:43Z",
+      "side": 0,
+      "message": "Removed the comment.",
+      "parentUuid": "27c291a9_11628daa",
+      "revId": "5c7299ee5b275a13f3cef08477a9ee076d50fb2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
