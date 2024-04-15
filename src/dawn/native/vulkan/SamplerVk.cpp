@@ -29,10 +29,15 @@
 
 #include <algorithm>
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
+
+#if DAWN_PLATFORM_IS(ANDROID)
+#include <android/hardware_buffer.h>
+#endif  // DAWN_PLATFORM_IS(ANDROID)
 
 namespace dawn::native::vulkan {
 
@@ -118,6 +123,32 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     } else {
         createInfo.anisotropyEnable = VK_FALSE;
         createInfo.maxAnisotropy = 1;
+    }
+
+    auto* vulkanYCbCrDescriptor = Unpack(descriptor).Get<vulkan::SamplerYCbCrVulkanDescriptor>();
+    if (device->HasFeature(Feature::YCbCrVulkanSamplers) && vulkanYCbCrDescriptor) {
+        VkSamplerYcbcrConversionCreateInfo vulkanYCbCrInfo = vulkanYCbCrDescriptor->vulkanYCbCrInfo;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+        VkExternalFormatANDROID vulkanExternalFormat = {};
+        vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+        vulkanExternalFormat.pNext = nullptr;
+        vulkanExternalFormat.externalFormat = 0;
+
+        vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &vulkanYCbCrInfo,
+                                                    nullptr, &*mSamplerYCbCrConversion),
+            "CreateSamplerYcbcrConversion"));
+
+        VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+        samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
+        samplerYCbCrInfo.pNext = nullptr;
+        samplerYCbCrInfo.conversion = mSamplerYCbCrConversion;
+
+        createInfo.pNext = &samplerYCbCrInfo;
     }
 
     DAWN_TRY(CheckVkSuccess(
