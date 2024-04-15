@@ -70,6 +70,24 @@
       "parentUuid": "e0fe9522_00503974",
       "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe073e4_8b0de3f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-15T19:19:37Z",
+      "side": 1,
+      "message": "I\u0027m doubting if isolate swarming run can reflect the real try bot status. One guess is that the time out config is different. As both isolate build with main \u0026 with CL times out. Also some docs of the swarming cmd seem outdated and I tweaked to get to run so I don\u0027t think it worth stick to that.\n\nAnd tryjobs are now without flakes anymore, so I\u0027m asking for a review and I think we can try relanding this CL.\n\nTo look at what\u0027s changing after the origin CL, you can view diff vs Patchset 1",
+      "parentUuid": "c5040851_2f72ea5c",
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
