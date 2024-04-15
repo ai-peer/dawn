@@ -56,6 +56,10 @@ class YCbCrSamplerTest : public DawnTest {
 TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWhenFeatureEnabled) {
     wgpu::SamplerDescriptor samplerDesc = {};
     native::vulkan::SamplerYCbCrVulkanDescriptor samplerYCbCrDesc = {};
+    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
+
     samplerDesc.nextInChain = &samplerYCbCrDesc;
 
     device.CreateSampler(&samplerDesc);

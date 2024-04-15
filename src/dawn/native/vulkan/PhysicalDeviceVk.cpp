@@ -213,6 +213,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
 void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
     EnableFeature(Feature::StaticSamplers);
+    EnableFeature(Feature::YCbCrVulkanSamplers);
 
     // Initialize supported extensions
     if (mDeviceInfo.features.textureCompressionBC == VK_TRUE) {
