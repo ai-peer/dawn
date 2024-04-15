@@ -380,7 +380,6 @@ void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
 
     mImplicitPixelLocalStorageAttachmentTextureViews = {};
-    mStagingBuffers.clear();
 
     Base::DestroyImpl();
 }
@@ -552,7 +551,13 @@ ResultOrError<TextureViewBase*> Device::GetOrCreateCachedImplicitPixelLocalStora
 ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
     const ScopedCommandRecordingContext* commandContext,
     uint64_t size) {
+    static constexpr uint64_t kMaxStagingBufferSize = 512 * 1024;
     constexpr uint64_t kMinStagingBufferSize = 4 * 1024;
+
+    if (mStagingBuffer && size <= mStagingBuffer->GetSize()) {
+        return mStagingBuffer;
+    }
+
     uint64_t bufferSize = Align(size, kMinStagingBufferSize);
     BufferDescriptor descriptor;
     descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
@@ -560,52 +565,15 @@ ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
     descriptor.mappedAtCreation = false;
     descriptor.label = "DawnDeviceStagingBuffer";
     Ref<BufferBase> buffer;
-    // We don't cache the buffer if it's too large.
-    if (bufferSize > kMaxStagingBufferSize) {
-        DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext,
-                                               /*allowUploadBufferEmulation=*/false));
-        return buffer;
-    }
-
-    ExecutionSerial completedSerial = GetQueue()->GetCompletedCommandSerial();
-    for (auto it = mStagingBuffers.begin(); it != mStagingBuffers.end(); ++it) {
-        if ((*it)->GetLastUsageSerial() > completedSerial) {
-            // This buffer, and none after it are ready. Advance to the end and stop the search.
-            break;
-        }
-
-        if ((*it)->GetSize() >= bufferSize) {
-            // this buffer is large enough. Stop searching and remove.
-            buffer = *it;
-            mStagingBuffers.erase(it);
-            return buffer;
-        }
-    }
-
-    // Create a new staging buffer as no existing one can be re-used.
     DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext,
                                            /*allowUploadBufferEmulation=*/false));
-    mTotalStagingBufferSize += bufferSize;
 
-    // Purge the old staging buffers if the total size is too large.
-    constexpr uint64_t kMaxTotalSize = 16 * 1024 * 1024;
-    for (auto it = mStagingBuffers.begin(); it != mStagingBuffers.end() &&
-                                            mTotalStagingBufferSize > kMaxTotalSize &&
-                                            (*it)->GetLastUsageSerial() <= completedSerial;) {
-        mTotalStagingBufferSize -= (*it)->GetSize();
-        it = mStagingBuffers.erase(it);
+    // We don't cache the buffer if it's too large.
+    if (bufferSize <= kMaxStagingBufferSize) {
+        mStagingBuffer = buffer;
     }
 
     return buffer;
-}
-
-void Device::ReturnStagingBuffer(Ref<BufferBase>&& buffer) {
-    DAWN_ASSERT(mStagingBuffers.empty() ||
-                mStagingBuffers.back()->GetLastUsageSerial() <= buffer->GetLastUsageSerial());
-    // Only the cached buffers can be re-used.
-    if (buffer->GetSize() <= kMaxStagingBufferSize) {
-        mStagingBuffers.push_back(std::move(buffer));
-    }
 }
 
 }  // namespace dawn::native::d3d11
