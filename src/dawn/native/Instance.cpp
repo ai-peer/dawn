@@ -210,6 +210,8 @@ void InstanceBase::WillDropLastExternalRef() {
         }
     }
 
+    SetPlatform(nullptr);
+
     mLoggingCallback = nullptr;
     mLoggingCallbackUserdata = nullptr;
 }
