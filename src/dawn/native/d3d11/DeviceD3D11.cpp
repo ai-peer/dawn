@@ -567,13 +567,7 @@ ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
         return buffer;
     }
 
-    ExecutionSerial completedSerial = GetQueue()->GetCompletedCommandSerial();
     for (auto it = mStagingBuffers.begin(); it != mStagingBuffers.end(); ++it) {
-        if ((*it)->GetLastUsageSerial() > completedSerial) {
-            // This buffer, and none after it are ready. Advance to the end and stop the search.
-            break;
-        }
-
         if ((*it)->GetSize() >= bufferSize) {
             // this buffer is large enough. Stop searching and remove.
             buffer = *it;
@@ -589,9 +583,8 @@ ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
 
     // Purge the old staging buffers if the total size is too large.
     constexpr uint64_t kMaxTotalSize = 16 * 1024 * 1024;
-    for (auto it = mStagingBuffers.begin(); it != mStagingBuffers.end() &&
-                                            mTotalStagingBufferSize > kMaxTotalSize &&
-                                            (*it)->GetLastUsageSerial() <= completedSerial;) {
+    for (auto it = mStagingBuffers.begin();
+         it != mStagingBuffers.end() && mTotalStagingBufferSize > kMaxTotalSize;) {
         mTotalStagingBufferSize -= (*it)->GetSize();
         it = mStagingBuffers.erase(it);
     }
