@@ -71,12 +71,14 @@ class PopErrorScopeEvent final : public TrackedEvent {
             mStatus = WGPUPopErrorScopeStatus_InstanceDropped;
             mMessage = std::nullopt;
         }
-        void* userdata = mUserdata.ExtractAsDangling();
+
+        // Exactly 1 callback is guaranteed to be set. See constructor check.
         if (mOldCallback) {
-            mOldCallback(mType, mMessage ? mMessage->c_str() : nullptr, userdata);
-        }
-        if (mCallback) {
-            mCallback(mStatus, mType, mMessage ? mMessage->c_str() : nullptr, userdata);
+            mOldCallback(mType, mMessage ? mMessage->c_str() : nullptr,
+                         mUserdata.ExtractAsDangling());
+        } else {
+            mCallback(mStatus, mType, mMessage ? mMessage->c_str() : nullptr,
+                      mUserdata.ExtractAsDangling());
         }
     }
 
