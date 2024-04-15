@@ -27,7 +27,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import json, os, sys
-from collections import namedtuple
+from collections import namedtuple, defaultdict
 
 from generator_lib import Generator, run_generator, FileRender
 
@@ -795,6 +795,15 @@ def as_cppType(name):
 def as_ktName(name):
     return '_' + name if '0' <= name[0] <= '9' else name
 
+def basic_constructor(structure):
+    # Returns True if the structure can be created with no parameters, e.g. all of its members have
+    # defaults or are optional, and the same applies to its ancestors (chain roots).
+    if structure.category != 'structure':
+        return False
+    if not all(basic_constructor(structure) for structure in structure.chain_roots):
+        return False
+    return all((member.optional or member.default_value or member.annotation == "const*")
+            for member in structure.members)
 
 def as_jsEnumValue(value):
     if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
@@ -989,7 +998,8 @@ def make_base_render_params(metadata):
             'as_varName': as_varName,
             'decorate': decorate,
             'as_formatType': as_formatType,
-            'as_ktName': as_ktName
+            'as_ktName': as_ktName,
+            'basic_constructor': basic_constructor
         }
 
 
@@ -1367,6 +1377,46 @@ class MultiGeneratorFromDawnJSON(Generator):
         if 'kotlin' in targets:
             params_kotlin = parse_json(loaded_json,
                                        enabled_tags=['dawn', 'native'])
+            by_category = params_kotlin['by_category']
+
+            # The 'length' members are removed as Kotlin can infer that from the container.
+            # 'length' members are identified when some *other* member specifies its name as the
+            # length parameter.
+            for structure in by_category['structure']:
+                structure.members = [
+                    member for member in structure.members if not [
+                        1 for other in structure.members if other.length == member
+                    ]
+                ]
+
+            by_category['structure'] = [
+                structure for structure in by_category['structure']
+                # Kotlin uses chain_roots for parent classes (for example so a
+                # SurfaceDescriptorFromAndroidNativeWindow can be passed to a method expecting a
+                # SurfaceDescriptor) but can currently only handle a single parent class.
+                if (len(structure.chain_roots) < 2 and
+                    # Kotlin cannot currently handle 'out' parameters.
+                    all(member.annotation != 'const*const*' for member in structure.members))
+            ]
+
+            # A structure may need to know which other structures listed it as a chain root, e.g.
+            # to know whether to mark the generated class 'open'.
+            chain_children = defaultdict(list)
+            for structure in by_category['structure']:
+                for chain_root in structure.chain_roots:
+                    chain_children[chain_root.name.get()].append(structure)
+            params_kotlin['chain_children'] = chain_children
+
+            for structure in by_category['structure']:
+                renders.append(
+                    FileRender(
+                        'art/api_kotlin_structure.kt',
+                        'java/' + metadata.kotlin_path + '/' +
+                        structure.name.CamelCase() + '.kt', [
+                            RENDER_PARAMS_BASE, params_kotlin, {
+                                'structure': structure
+                            }
+                        ]))
 
             for enum in (params_kotlin['by_category']['bitmask'] +
                          params_kotlin['by_category']['enum']):
