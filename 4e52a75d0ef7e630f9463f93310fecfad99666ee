@@ -88,6 +88,69 @@
       "parentUuid": "c5040851_2f72ea5c",
       "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a7ca02_d7703f6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-15T20:04:53Z",
+      "side": 1,
+      "message": "LGTM; two small comments",
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86fa25ea_1634b4a4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-15T20:04:53Z",
+      "side": 1,
+      "message": "do we need `InitializeComputePipelineAsyncEventSyncBody` at all, or can every caller call `event-\u003eInitialize()` instead? the function bodies look almost identical (though you may need to factor things into Initialize and InitializeAsyncInternal to make the trace labels correct)",
+      "range": {
+        "startLine": 2037,
+        "startChar": 0,
+        "endLine": 2051,
+        "endChar": 1
+      },
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77e0105_077ddf34",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-15T20:04:53Z",
+      "side": 1,
+      "message": "I don\u0027t think we really need to comment about this. It\u0027s now effectively the same as the other case.",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 0
+      },
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
