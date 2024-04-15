@@ -678,8 +678,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     DAWN_TRY(Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()),
                                   /*sourceOffset=*/0,
                                   /*size=*/size, this, offset));
-    ToBackend(GetDevice())->ReturnStagingBuffer(std::move(stagingBuffer));
-
     return {};
 }
 
