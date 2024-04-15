@@ -75,7 +75,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-04-12 05:25:15AM
+# Last rolled: 2024-04-16 01:40:13AM
 
 # Flaky on all platforms
 # KEEP
@@ -533,3 +533,8 @@ crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,binary,a
 crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,cross:abstract_float:* [ RetryOnFailure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,binary,af_matrix_addition:matrix:inputSource="const";cols=4;rows=4 [ RetryOnFailure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,expression,call,builtin,cross:f32:inputSource="storage_rw" [ RetryOnFailure ]
+
+################################################################################
+# New failures. Please triage:
+################################################################################
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,fwidthFine:* [ Failure ]
