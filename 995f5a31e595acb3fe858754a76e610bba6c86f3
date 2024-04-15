@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6990f4_8d5e0d2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-15T14:57:47Z",
+      "side": 1,
+      "message": "Tried to simplify the math to make it more obviously correct. In my experience this is how to get to algorithm that don\u0027t need endless tweaking. For math, less is definitely more.",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff4e2eda_31ebe9a3",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-15T14:57:47Z",
+      "side": 1,
+      "message": "The clamping here seems incorrect because it clamps to half a texel inside of the whole texture instead of half a texel inside the visible rect.\n\nWhat should happen here is:\n\n```\nvar modifiedCoords \u003d params.samplingCoordTransform * vec3f(coord, 1);\nvar plane0ClampedCoords \u003d clamp(modifiedCoords, params.plane0VisibleRectMin, params.plane0VisibleRectMax);\n\nif (params.numPlanes \u003d\u003d 1) {\n  color \u003d sample with plane0ClampedCoords\n} else {\n  var plane1ClampedCoords \u003d clamp(modifiedCoords, params.plane1VisibleRectMin, params.plane1VisibleRectMax);\n  color \u003d sample with plane0ClampedCoords and plane1ClampedCoords\n}\n```\n\nIn ExternalTexture.cpp the bounds can be computed by doing:\n\n```\nmat2x3 coordTransformMatrix // the one we had before this change.\nvec2 visibleRectBounds0 \u003d Mul(coordTransformMatrix, vec2(0, 0));\nvec2 visibleRectBounds1 \u003d Mul(coordTransformMatrix, vec2(1, 1));\nvec2 visibleRectBoundsMin \u003d Min(visibleRectBounds0, visibleRectBounds1);\nvec2 visibleRectBoundsMax \u003d Max(visibleRectBounds0, visibleRectBounds1);\n\nvec2 plane0HalfTexel \u003d Div(vec2(1, 1), vec2(plane1 subresource size));\nvec2 plane0VisibleRectMin \u003d Add(visibleRectBoundsMin, plane0HalfTexel);\nvec2 plane0VisibleRectMax \u003d Sub(visibleRectBoundsMax, plane0HalfTexel);\n\n// Ditto for plane1\n```\n\nCan we have a basic test for a dual plane setup that would have found this issue, including a parametrization for flipY and rotation?",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2789eae_30647671",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-15T14:57:47Z",
+      "side": 1,
+      "message": "The code here would look very similar to the one in textureSample but with it\u0027s own matrix, and integer clamping bounds.\n\nI still don\u0027t understand why the loadMatrix cannot be computed easily from the sampleMatrix.\n\nThe bounds for loading would be the `visibleRectBoundsMin/Max` computed above (up to an off-by-one error)",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
