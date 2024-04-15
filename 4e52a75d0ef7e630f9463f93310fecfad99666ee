@@ -130,6 +130,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed4c35c_2dc78fc0",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 2051,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-15T21:32:50Z",
+      "side": 1,
+      "message": "Done. (device backends either call `event-\u003eInitializeSync()` or `event-\u003eInitializeAsync()`, hiding initialize details in event impl)",
+      "parentUuid": "86fa25ea_1634b4a4",
+      "range": {
+        "startLine": 2037,
+        "startChar": 0,
+        "endLine": 2051,
+        "endChar": 1
+      },
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d77e0105_077ddf34",
@@ -143,6 +167,30 @@
       "writtenOn": "2024-04-15T20:04:53Z",
       "side": 1,
       "message": "I don\u0027t think we really need to comment about this. It\u0027s now effectively the same as the other case.",
+      "range": {
+        "startLine": 378,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 0
+      },
+      "revId": "4e52a75d0ef7e630f9463f93310fecfad99666ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ab006a_d910dfa8",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-15T21:32:50Z",
+      "side": 1,
+      "message": "Done. (Put the same expectation outside the if branch)",
+      "parentUuid": "d77e0105_077ddf34",
       "range": {
         "startLine": 378,
         "startChar": 0,
