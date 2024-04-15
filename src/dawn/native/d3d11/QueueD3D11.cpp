@@ -48,10 +48,12 @@ ResultOrError<Ref<Queue>> Queue::Create(Device* device, const QueueDescriptor* d
 
 MaybeError Queue::Initialize() {
     // Create the fence.
-    DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
-                              ->GetD3D11Device5()
-                              ->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
-                          "D3D11: creating fence"));
+    HRESULT hr = ToBackend(GetDevice())
+                     ->GetD3D11Device5()
+                     ->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence));
+    if (FAILED(hr)) {
+        return {};
+    }
 
     // Create the fence event.
     mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
@@ -100,7 +102,7 @@ void Queue::DestroyImpl() {
 }
 
 ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
-    if (mSharedFence == nullptr) {
+    if (mFence && mSharedFence == nullptr) {
         DAWN_ASSERT(!IsAlive());
         return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);
     }
@@ -213,6 +215,12 @@ bool Queue::HasPendingCommands() const {
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
+    if (!mFence) {
+        // If fence is not supported, we always return the last submitted command serial, since
+        // D3D11 can handle synchronization by itself.
+        return GetLastSubmittedCommandSerial();
+    }
+
     ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
@@ -263,6 +271,7 @@ MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
         return {};
     }
 
+    DAWN_ASSERT(mFence);
     DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
                           "D3D11 set event on completion"));
     WaitForSingleObject(mFenceEvent, INFINITE);
@@ -270,6 +279,7 @@ MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
 }
 
 void Queue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {
+    DAWN_ASSERT(mFence);
     mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event);
 }
 
