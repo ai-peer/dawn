@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e263844_81928168",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-16T19:26:58Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa38ed16_04ccbb7e",
@@ -37,6 +54,47 @@
         "endLine": 112,
         "endChar": 55
       },
+      "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f99647d_9b35159a",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-16T19:26:58Z",
+      "side": 1,
+      "message": "Can be done like [1]. But I think these are for the CreatePipelineAsyncEvent class which should be using the same name? It\u0027s the actual call to Compute/RenderPipelineBase::Initialize that should have different metrics name.",
+      "parentUuid": "fa38ed16_04ccbb7e",
+      "range": {
+        "startLine": 112,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 55
+      },
+      "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e36d6e15_bff2a94f",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-16T19:26:58Z",
+      "side": 1,
+      "message": "(Thanks for the message, reminds me to check that this hasn\u0027t been updated, will do so)",
       "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
