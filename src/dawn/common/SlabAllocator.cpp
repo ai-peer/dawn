@@ -79,12 +79,7 @@ SlabAllocatorImpl::SlabAllocatorImpl(Index blocksPerSlab,
       mIndexLinkNodeOffset(Align(objectSize, alignof(IndexLinkNode))),
       mBlockStride(Align(mIndexLinkNodeOffset + u32_sizeof<IndexLinkNode>, objectAlignment)),
       mBlocksPerSlab(blocksPerSlab),
-      mTotalAllocationSize(
-          // required allocation size
-          static_cast<size_t>(mSlabBlocksOffset) + mBlocksPerSlab * mBlockStride +
-          // Pad the allocation size by mAllocationAlignment so that the aligned allocation still
-          // fulfills the required size.
-          mAllocationAlignment) {
+      mTotalAllocationSize(static_cast<size_t>(mSlabBlocksOffset) + mBlocksPerSlab * mBlockStride) {
     DAWN_ASSERT(IsPowerOfTwo(mAllocationAlignment));
 }
 
@@ -234,10 +229,9 @@ void SlabAllocatorImpl::GetNewSlab() {
 
     // TODO(crbug.com/dawn/824): Use aligned_alloc when possible. It should be available with
     // C++17 but on macOS it also requires macOS 10.15 to work.
-    char* allocation = new char[mTotalAllocationSize];
-    char* alignedPtr = AlignPtr(allocation, mAllocationAlignment);
-
-    char* dataStart = alignedPtr + mSlabBlocksOffset;
+    char* allocation =
+        static_cast<char*>(aligned_alloc(mTotalAllocationSize, mAllocationAlignment));
+    char* dataStart = allocation + mSlabBlocksOffset;
 
     IndexLinkNode* node = NodeFromObject(dataStart);
     for (uint32_t i = 0; i < mBlocksPerSlab; ++i) {
@@ -247,7 +241,7 @@ void SlabAllocatorImpl::GetNewSlab() {
     IndexLinkNode* lastNode = OffsetFrom(node, mBlocksPerSlab - 1);
     lastNode->nextIndex = kInvalidIndex;
 
-    mAvailableSlabs.Prepend(new (alignedPtr) Slab(allocation, node));
+    mAvailableSlabs.Prepend(new (allocation) Slab(allocation, node));
 }
 
 }  // namespace dawn
