@@ -16,6 +16,24 @@
       "message": "@kainino@chromium.org - I was actually trying to test https://dawn-review.googlesource.com/c/dawn/+/183382. Fortunately this had completed, but a negative vote would have been safer here.",
       "revId": "a8593e14aa9e81f577ad8939f91ec31141589d0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad1ddbc7_a924fb87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-16T20:50:29Z",
+      "side": 1,
+      "message": "Ah, sorry. Looked like a real roll attempt so I thought it was just not needed anymore.",
+      "parentUuid": "ef0b7bd5_6dca9eb7",
+      "revId": "a8593e14aa9e81f577ad8939f91ec31141589d0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
