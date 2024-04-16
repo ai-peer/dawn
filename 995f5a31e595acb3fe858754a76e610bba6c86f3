@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b550bdb6_e2f88f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-16T06:23:26Z",
+      "side": 1,
+      "message": "a",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff4e2eda_31ebe9a3",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "411c07f7_f1912103",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-16T06:23:26Z",
+      "side": 1,
+      "message": "Thanks for catching this!\n\nI think we have a basic test here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/ExternalTextureTests.cpp with mirror and rotation.\n\nBut I think it might lacks sampling border test cases.",
+      "parentUuid": "ff4e2eda_31ebe9a3",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2789eae_30647671",
         "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
         "patchSetId": 5
@@ -48,6 +83,24 @@
       "writtenOn": "2024-04-15T14:57:47Z",
       "side": 1,
       "message": "The code here would look very similar to the one in textureSample but with it\u0027s own matrix, and integer clamping bounds.\n\nI still don\u0027t understand why the loadMatrix cannot be computed easily from the sampleMatrix.\n\nThe bounds for loading would be the `visibleRectBoundsMin/Max` computed above (up to an off-by-one error)",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88698b77_33c5294a",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-16T06:23:26Z",
+      "side": 1,
+      "message": "\u003eI still don\u0027t understand why the loadMatrix cannot be computed easily from the sampleMatrix.\n\nMaybe how we handled rotation caused this. We handled rotation by using -1 * coord and x, y switching. So the last column of the matrix is the offset to make negative coords to positive. And I don\u0027t think we have simple way to change the last column of sampleMatrix only by computing.",
+      "parentUuid": "c2789eae_30647671",
       "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
