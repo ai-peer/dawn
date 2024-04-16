@@ -30,6 +30,10 @@
 #include "dawn/native/VulkanBackend.h"
 #include "dawn/tests/DawnTest.h"
 
+#if DAWN_PLATFORM_IS(ANDROID)
+#include <android/hardware_buffer.h>
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
 namespace dawn {
 namespace {
 
@@ -56,6 +60,19 @@ class YCbCrSamplerTest : public DawnTest {
 TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWhenFeatureEnabled) {
     wgpu::SamplerDescriptor samplerDesc = {};
     native::vulkan::SamplerYCbCrVulkanDescriptor samplerYCbCrDesc = {};
+    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    // VkExternalFormatANDROID vulkanExternalFormat = {};
+    // vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+    // vulkanExternalFormat.pNext = nullptr;
+    // vulkanExternalFormat.externalFormat = 0;
+
+    // samplerYCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
     samplerDesc.nextInChain = &samplerYCbCrDesc;
 
     device.CreateSampler(&samplerDesc);

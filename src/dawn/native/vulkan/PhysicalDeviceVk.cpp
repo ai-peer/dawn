@@ -264,6 +264,11 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::DepthClipControl);
     }
 
+    if (mDeviceInfo.HasExt(DeviceExt::SamplerYCbCrConversion) &&
+        mDeviceInfo.HasExt(DeviceExt::ExternalMemoryAndroidHardwareBuffer)) {
+        EnableFeature(Feature::YCbCrVulkanSamplers);
+    }
+
     VkFormatProperties rg11b10Properties;
     mVulkanInstance->GetFunctions().GetPhysicalDeviceFormatProperties(
         mVkPhysicalDevice, VK_FORMAT_B10G11R11_UFLOAT_PACK32, &rg11b10Properties);
