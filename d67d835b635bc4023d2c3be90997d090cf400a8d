@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04b30247_4f80f2da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-16T21:18:09Z",
+      "side": 1,
+      "message": "WDYT?\n\nThis is my attempt to NOT need a new namespace for the wire client version of the c++ api. Would like to try it and if it doesn\u0027t work out, can move it into a new namespace",
+      "revId": "d67d835b635bc4023d2c3be90997d090cf400a8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
