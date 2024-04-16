@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965d34b0_713ac47c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-16T18:10:12Z",
+      "side": 1,
+      "message": "The waterfall looks okay after compute pipeline async future landed.\nSplit the template refactor so that gerrit can recognize file renaming.",
+      "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
