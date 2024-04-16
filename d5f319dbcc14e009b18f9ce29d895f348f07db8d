@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e18c6211_ffce9abc",
+        "filename": "AndroidManifest.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-04-16T15:33:34Z",
+      "side": 1,
+      "message": "As discussed we don\u0027t need this. Building .aar should automatically generate this file.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 11
+      },
+      "revId": "d5f319dbcc14e009b18f9ce29d895f348f07db8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3943fca1_1b0f37f8",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-04-16T15:33:34Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "range": {
+        "startLine": 41,
+        "startChar": 10,
+        "endLine": 41,
+        "endChar": 11
+      },
+      "revId": "d5f319dbcc14e009b18f9ce29d895f348f07db8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
