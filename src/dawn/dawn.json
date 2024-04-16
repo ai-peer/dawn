@@ -367,7 +367,8 @@
             {"value": 0, "name": "undefined", "jsrepr": "undefined", "valid": false},
             {"value": 1, "name": "filtering"},
             {"value": 2, "name": "non filtering"},
-            {"value": 3, "name": "comparison"}
+            {"value": 3, "name": "comparison"},
+            {"value": 4, "name": "y cb cr", "tags": ["dawn"]}
         ]
     },
     "sampler binding layout": {

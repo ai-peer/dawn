@@ -254,6 +254,12 @@ MaybeError ValidateSamplerBinding(const DeviceBase* device,
                             "binding.",
                             entry.sampler);
             break;
+        case wgpu::SamplerBindingType::YCbCr:
+            DAWN_INVALID_IF(!entry.sampler->IsYCbCr(),
+                            "Non-ycbcr sampler %s is incompatible with ycbcr sampler "
+                            "binding.",
+                            entry.sampler);
+            break;
         default:
             DAWN_UNREACHABLE();
             break;
