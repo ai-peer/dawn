@@ -16,6 +16,29 @@
       "message": "The waterfall looks okay after compute pipeline async future landed.\nSplit the template refactor so that gerrit can recognize file renaming.",
       "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa38ed16_04ccbb7e",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-16T19:22:00Z",
+      "side": 1,
+      "message": "nit. Any change we could parameterize these strings as well? Probably fine without also, but would be nice to be able to easily differentiate between compute/render pipelines for these.",
+      "range": {
+        "startLine": 112,
+        "startChar": 31,
+        "endLine": 112,
+        "endChar": 55
+      },
+      "revId": "ac93c37fd2326382c0d699794b6be777e6810561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
