@@ -16,6 +16,74 @@
       "message": "PTAL, thanks!",
       "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ee7a39_3ad03fd5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-16T10:08:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bb92d49_0ea0fe8b",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-16T10:08:00Z",
+      "side": 1,
+      "message": "Nice simplification!",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3005c214_48fe30ac",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-16T10:08:00Z",
+      "side": 1,
+      "message": "Why do we test -4 to -0? Isn\u0027t -4 and -3 sufficient?",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61947a93_c1907d3a",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-16T10:08:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
