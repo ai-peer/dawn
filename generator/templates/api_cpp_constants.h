@@ -31,23 +31,21 @@
     #error "Do not include this header. Emscripten already provides headers needed for {{metadata.api}}."
     #endif
 {% endif %}
-#ifndef {{API}}_CPP_H_
-#define {{API}}_CPP_H_
 
-#include "dawn/{{api}}_cpp_constants.h"
-#include "dawn/{{api}}_cpp_enums.h"
-#include "dawn/{{api}}_cpp_structs.h"
-#include "dawn/{{api}}_cpp_impl.h"
+#ifndef {{API}}_CPP_CONSTANTS_H_
+#define {{API}}_CPP_CONSTANTS_H_
+
+#include "{{api}}/{{api}}.h"
 
 namespace {{metadata.namespace}} {
 
-    {% for typeDef in by_category["typedef"] %}
-        // {{as_cppType(typeDef.name)}} is deprecated.
-        // Use {{as_cppType(typeDef.type.name)}} instead.
-        using {{as_cppType(typeDef.name)}} = {{as_cppType(typeDef.type.name)}};
-
+    {% set c_prefix = metadata.c_prefix %}
+    {% for constant in by_category["constant"] %}
+        {% set type = as_cppType(constant.type.name) %}
+        {% set value = c_prefix + "_" +  constant.name.SNAKE_CASE() %}
+        static constexpr {{type}} k{{as_cppType(constant.name)}} = {{ value }};
     {% endfor %}
 
-}  // namespace {{metadata.namespace}}
+}  // {{metadata.namespace}}
 
-#endif // {{API}}_CPP_H_
+#endif  // {{API}}_CPP_CONSTANTS_H_

@@ -57,6 +57,11 @@ dawn_json_generator("cpp_headers_gen") {
   target = "cpp_headers"
   outputs = [
     "include/dawn/webgpu_cpp.h",
+    "include/dawn/webgpu_cpp_constants.h",
+    "include/dawn/webgpu_cpp_enums.h",
+    "include/dawn/webgpu_cpp_structs.h",
+    "include/dawn/webgpu_cpp_objects.h",
+    "include/dawn/webgpu_cpp_impl.h",
     "include/dawn/webgpu_cpp_print.h",
     "include/webgpu/webgpu_cpp_chained_struct.h",
   ]

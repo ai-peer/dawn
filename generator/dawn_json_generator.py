@@ -1055,6 +1055,26 @@ class MultiGeneratorFromDawnJSON(Generator):
                            [RENDER_PARAMS_BASE, params_dawn]))
 
             renders.append(
+                FileRender('api_cpp_constants.h', 'include/dawn/' + api + '_cpp_constants.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+
+            renders.append(
+                FileRender('api_cpp_enums.h', 'include/dawn/' + api + '_cpp_enums.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+
+            renders.append(
+                FileRender('api_cpp_structs.h', 'include/dawn/' + api + '_cpp_structs.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+
+            renders.append(
+                FileRender('api_cpp_objects.h', 'include/dawn/' + api + '_cpp_objects.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+
+            renders.append(
+                FileRender('api_cpp_impl.h', 'include/dawn/' + api + '_cpp_impl.h',
+                           [RENDER_PARAMS_BASE, params_dawn]))
+
+            renders.append(
                 FileRender('api_cpp_print.h',
                            'include/dawn/' + api + '_cpp_print.h',
                            [RENDER_PARAMS_BASE, params_dawn]))
