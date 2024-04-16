@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8723bbcd_6e963768",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-16T06:42:22Z",
+      "side": 1,
+      "message": "a",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff4e2eda_31ebe9a3",
@@ -101,6 +118,24 @@
       "side": 1,
       "message": "\u003eI still don\u0027t understand why the loadMatrix cannot be computed easily from the sampleMatrix.\n\nMaybe how we handled rotation caused this. We handled rotation by using -1 * coord and x, y switching. So the last column of the matrix is the offset to make negative coords to positive. And I don\u0027t think we have simple way to change the last column of sampleMatrix only by computing.",
       "parentUuid": "c2789eae_30647671",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d6a5a2_3c66f630",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-16T06:42:22Z",
+      "side": 1,
+      "message": "And we don\u0027t need to apply `scale` for the loading coord.",
+      "parentUuid": "88698b77_33c5294a",
       "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
