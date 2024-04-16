@@ -138,6 +138,24 @@
       "parentUuid": "88698b77_33c5294a",
       "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0e6c18_536b7ef2",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-16T08:12:49Z",
+      "side": 1,
+      "message": "These are linear transforms. We want to get from [0, 1]x[0, 1] to [0, width]x[0, height]. That\u0027s just a scaling. `sampleTransform` work with normalized coordinates as input and output so we need to do:\n\n```\nloadXform \u003d toTexelSpace * sampleXform * toNormalized\n```\n\nWhere both `toTexelSpace` and `toNormalized` are scaling matrices. `toTexelSpace` goes from `[0, 1]^2 to [0, width]x[0, height]` (so ScaleMatrix(plane0Width, plane0Height)) and `toNormalized` is going from `[0, apparentVisibleWidth]x[0, apparentVisibleHeight]` to `[0, 1]^2` so a Scale with the inverse of the apparent visible size.\n\nNote that I used the word apparent, because this is visibleSize, but with the two coordinates swapped if the rotation is 90 or 270.",
+      "parentUuid": "c0d6a5a2_3c66f630",
+      "revId": "995f5a31e595acb3fe858754a76e610bba6c86f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
