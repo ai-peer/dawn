@@ -1,0 +1,101 @@
+# Copyright 2024 The Dawn & Tint Authors
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("//generator/dawn_generator.gni")
+
+dawn_json_generator("kotlin_gen") {
+  target = "kotlin"
+  outputs = [
+    "java/android/dawn/AdapterType.kt",
+    "java/android/dawn/AddressMode.kt",
+    "java/android/dawn/AlphaMode.kt",
+    "java/android/dawn/BackendType.kt",
+    "java/android/dawn/BlendFactor.kt",
+    "java/android/dawn/BlendOperation.kt",
+    "java/android/dawn/BufferBindingType.kt",
+    "java/android/dawn/BufferMapAsyncStatus.kt",
+    "java/android/dawn/BufferMapState.kt",
+    "java/android/dawn/BufferUsage.kt",
+    "java/android/dawn/CallbackMode.kt",
+    "java/android/dawn/ColorWriteMask.kt",
+    "java/android/dawn/CompareFunction.kt",
+    "java/android/dawn/CompilationInfoRequestStatus.kt",
+    "java/android/dawn/CompilationMessageType.kt",
+    "java/android/dawn/CompositeAlphaMode.kt",
+    "java/android/dawn/Constants.kt",
+    "java/android/dawn/CreatePipelineAsyncStatus.kt",
+    "java/android/dawn/CullMode.kt",
+    "java/android/dawn/DeviceLostReason.kt",
+    "java/android/dawn/ErrorFilter.kt",
+    "java/android/dawn/ErrorType.kt",
+    "java/android/dawn/ExternalTextureRotation.kt",
+    "java/android/dawn/FeatureName.kt",
+    "java/android/dawn/FilterMode.kt",
+    "java/android/dawn/FrontFace.kt",
+    "java/android/dawn/HeapProperty.kt",
+    "java/android/dawn/IndexFormat.kt",
+    "java/android/dawn/LoadOp.kt",
+    "java/android/dawn/LoggingType.kt",
+    "java/android/dawn/MapMode.kt",
+    "java/android/dawn/MipmapFilterMode.kt",
+    "java/android/dawn/PopErrorScopeStatus.kt",
+    "java/android/dawn/PowerPreference.kt",
+    "java/android/dawn/PresentMode.kt",
+    "java/android/dawn/PrimitiveTopology.kt",
+    "java/android/dawn/QueryType.kt",
+    "java/android/dawn/QueueWorkDoneStatus.kt",
+    "java/android/dawn/RequestAdapterStatus.kt",
+    "java/android/dawn/RequestDeviceStatus.kt",
+    "java/android/dawn/SamplerBindingType.kt",
+    "java/android/dawn/ShaderStage.kt",
+    "java/android/dawn/SharedFenceType.kt",
+    "java/android/dawn/StencilOperation.kt",
+    "java/android/dawn/StorageTextureAccess.kt",
+    "java/android/dawn/StoreOp.kt",
+    "java/android/dawn/SType.kt",
+    "java/android/dawn/SurfaceGetCurrentTextureStatus.kt",
+    "java/android/dawn/TextureAspect.kt",
+    "java/android/dawn/TextureDimension.kt",
+    "java/android/dawn/TextureFormat.kt",
+    "java/android/dawn/TextureSampleType.kt",
+    "java/android/dawn/TextureUsage.kt",
+    "java/android/dawn/TextureViewDimension.kt",
+    "java/android/dawn/VertexFormat.kt",
+    "java/android/dawn/VertexStepMode.kt",
+    "java/android/dawn/WaitStatus.kt",
+    "java/android/dawn/WGSLFeatureName.kt",
+  ]
+}
+
+action("run_tests") {
+  script = "gradle wrapper & gradlew build & gradlew :webgpu:testDebugUnitTest --tests 'android.dawn.*'"
+  outputs = [ "$target_gen_dir/" ]
+}
+
+group("android") {
+  deps = [ ":kotlin_gen"]
+}
