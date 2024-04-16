@@ -128,11 +128,6 @@ namespace dawn::wire::client {
         void Client{{as_MethodSuffix(type.name, Name("add ref"))}}({{cType}} cObj) {
             reinterpret_cast<{{Type}}*>(cObj)->AddRef();
         }
-
-        //* TODO(dawn:2234): Deprecated. Remove once no longer user.
-        void Client{{as_MethodSuffix(type.name, Name("reference"))}}({{cType}} cObj) {
-            Client{{as_MethodSuffix(type.name, Name("add ref"))}}(cObj);
-        }
     {% endfor %}
 
     namespace {
