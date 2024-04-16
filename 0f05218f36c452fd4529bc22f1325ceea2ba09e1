@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17f60e7_335152a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-16T21:59:15Z",
+      "side": 1,
+      "message": "Added some tests - PTAL again!",
+      "parentUuid": "120906f6_b179ccd2",
+      "revId": "0f05218f36c452fd4529bc22f1325ceea2ba09e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78c4ccf2_78ebfbea",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-03-28T23:22:37Z",
       "side": 1,
       "message": "probably change this to:\n\n```suggestion\n    MutexProtected\u003cLinkedList\u003cApiObjectBase\u003e\u003e mObjects;\n```",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 114,
+        "endChar": 39
+      },
+      "revId": "0f05218f36c452fd4529bc22f1325ceea2ba09e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e329d12f_d677cbf4",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-16T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c4ccf2_78ebfbea",
       "range": {
         "startLine": 113,
         "startChar": 4,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f8d59f9_935b6bda",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1197,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-16T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6820380_f2a142a7",
+      "range": {
+        "startLine": 1195,
+        "startChar": 3,
+        "endLine": 1197,
+        "endChar": 43
+      },
+      "revId": "0f05218f36c452fd4529bc22f1325ceea2ba09e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "971f69b9_a23487c8",
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f6eace_61c898e2",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1201,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-16T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "971f69b9_a23487c8",
+      "range": {
+        "startLine": 1200,
+        "startChar": 16,
+        "endLine": 1201,
+        "endChar": 87
+      },
+      "revId": "0f05218f36c452fd4529bc22f1325ceea2ba09e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7ea4e7d_d53177bc",
@@ -117,6 +207,30 @@
       "writtenOn": "2024-03-28T23:22:37Z",
       "side": 1,
       "message": "nit: call it \"ComputeEstimatedByteSize()\" so it doesn\u0027t sound super cheap",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 193,
+        "endChar": 33
+      },
+      "revId": "0f05218f36c452fd4529bc22f1325ceea2ba09e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa0250f_d12f6b05",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-16T21:59:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7ea4e7d_d53177bc",
       "range": {
         "startLine": 193,
         "startChar": 13,
