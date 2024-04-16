@@ -161,7 +161,6 @@ void initRender() {
     descriptor.cAttributes[2].format = wgpu::VertexFormat::Float32x2;
 
     descriptor.cFragment.module = fsModule;
-    descriptor.EnableDepthStencil(wgpu::TextureFormat::Depth24PlusStencil8);
     descriptor.cTargets[0].format = GetPreferredSwapChainTextureFormat();
 
     renderPipeline = device.CreateRenderPipeline(&descriptor);
@@ -343,7 +342,6 @@ int main(int argc, const char* argv[]) {
     init();
 
     while (!ShouldQuit()) {
-        ProcessEvents();
         frame();
         dawn::utils::USleep(16000);
     }
