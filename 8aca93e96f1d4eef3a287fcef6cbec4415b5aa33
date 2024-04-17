@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8450b033_6a432187",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-17T18:27:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61fc7706_4f1ed36a",
+      "revId": "8aca93e96f1d4eef3a287fcef6cbec4415b5aa33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a73cff83_63a73c97",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-17T14:03:37Z",
       "side": 1,
       "message": "Why a pointer instead of a reference for `const Vector\u003cconst ast::Expression*, 8\u003e\u0026 args` ?",
+      "revId": "8aca93e96f1d4eef3a287fcef6cbec4415b5aa33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70c07294_283ca48b",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-17T18:27:03Z",
+      "side": 1,
+      "message": "Done (Some chromium coding pattern thing attacked me and I was confused for a moment)",
+      "parentUuid": "a73cff83_63a73c97",
       "revId": "8aca93e96f1d4eef3a287fcef6cbec4415b5aa33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
