@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e1875b_e0570abb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T21:50:47Z",
+      "side": 1,
+      "message": "Actually, I\u0027m a little confused about what Corentin wrote when he said\n\n\u003e That can be an additional wgpu::SamplerBindingType that\u0027s YCbCr and only available in Dawn. We\u0027d validate that they can only be used with static samplers in BGL creation.\n\nWhen you CreateBindGroup with a static ycbcr sampler, you don\u0027t specify an entry for the static sampler at all. Why do we need this binding type?\nThe BindGroupLayout can already tell whether the binding isa YCBCR one by checking the `StaticSamplerHolderBindingLayout::sampler::IsYcbcr`",
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52fee5b6_91ff9086",
