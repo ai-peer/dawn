@@ -86,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ad5207_3d3499eb",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-17T02:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3005c214_48fe30ac",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61947a93_c1907d3a",
@@ -103,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "013383d2_d6c5f6ec",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-17T02:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61947a93_c1907d3a",
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eadcd2f9_919061f3",
@@ -116,6 +152,30 @@
       "writtenOn": "2024-04-16T15:32:28Z",
       "side": 1,
       "message": "need KEEP\n```suggestion\n# Tests on maxInterStageShaderVariables and maxInterStageShaderComponents need  to be updated to match the latest WebGPU SPEC\nKEEP\n```",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 125
+      },
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "755119b8_cbe5e30f",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-17T02:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eadcd2f9_919061f3",
       "range": {
         "startLine": 234,
         "startChar": 0,
@@ -149,6 +209,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac8dbae_0e1c7bee",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-17T02:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4863acaa_b8a1a348",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 47
+      },
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7afb079_4d29e955",
@@ -162,6 +246,30 @@
       "writtenOn": "2024-04-16T15:32:28Z",
       "side": 1,
       "message": "delete this?",
+      "range": {
+        "startLine": 941,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 125
+      },
+      "revId": "479c552b88d049cc6e2a345b3e30702c6cf3e530",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb95ccd3_bc2508b4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-17T02:05:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7afb079_4d29e955",
       "range": {
         "startLine": 941,
         "startChar": 0,
