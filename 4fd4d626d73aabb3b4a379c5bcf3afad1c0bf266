@@ -16,6 +16,46 @@
       "message": "Please take a look.",
       "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52fee5b6_91ff9086",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T21:34:25Z",
+      "side": 1,
+      "message": "instead of adding to dawn.json, you can define an internal enum and use it here\n\nFor example, see [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/dawn_platform.h;l\u003d95?q\u003dkInternal%20f:dawn%20f:native\u0026ss\u003dchromium%2Fchromium%2Fsrc) for  kInternalStorageBufferBinding, kInternalResolveAttachmentSampleType, etc.",
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47b83f14_107868b4",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T21:34:25Z",
+      "side": 1,
+      "message": "this one you don\u0027t have to worry about because it\u0027s to create the default pipeline layout via shader reflection.\n\nShaders can\u0027t specify that the sampler is ycbcr (or static even), so the static sampler case should be unreachable.",
+      "range": {
+        "startLine": 243,
+        "startChar": 1,
+        "endLine": 245,
+        "endChar": 57
+      },
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
