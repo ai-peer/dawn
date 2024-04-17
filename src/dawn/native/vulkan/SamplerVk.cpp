@@ -29,6 +29,7 @@
 
 #include <algorithm>
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -120,6 +121,35 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
         createInfo.maxAnisotropy = 1;
     }
 
+    VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+    auto* vulkanYCbCrDescriptor = Unpack(descriptor).Get<vulkan::SamplerYCbCrVulkanDescriptor>();
+    if (device->HasFeature(Feature::YCbCrVulkanSamplers) && vulkanYCbCrDescriptor) {
+        VkSamplerYcbcrConversionCreateInfo vulkanYCbCrInfo = vulkanYCbCrDescriptor->vulkanYCbCrInfo;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+        if (vulkanYCbCrInfo.pNext) {
+            VkExternalFormatANDROID vkExternalFormat = vulkanYCbCrInfo.pNext;
+            DAWN_INVALID_IF(vkExternalFormat.sType != VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
+                            "VkSamplerYcbcrConversionCreateInfo cannot have pNext of sType (%u).",
+                            vkExternalFormat.sType);
+            DAWN_INVALID_IF((vkExternalFormat.externalFormat == 0 &&
+                             vulkanYCbCrInfo.format == VK_FORMAT_UNDEFINED),
+                            "Both VkFormat and VkExternalFormatANDROID are undefined.")
+        }
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &vulkanYCbCrInfo,
+                                                    nullptr, &*mSamplerYCbCrConversion),
+            "CreateSamplerYcbcrConversion"));
+
+        samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
+        samplerYCbCrInfo.pNext = nullptr;
+        samplerYCbCrInfo.conversion = mSamplerYCbCrConversion;
+
+        createInfo.pNext = &samplerYCbCrInfo;
+    }
+
     DAWN_TRY(CheckVkSuccess(
         device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateSampler"));
@@ -133,6 +163,10 @@ Sampler::~Sampler() = default;
 
 void Sampler::DestroyImpl() {
     SamplerBase::DestroyImpl();
+    if (mSamplerYCbCrConversion != VK_NULL_HANDLE) {
+        ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mSamplerYCbCrConversion);
+        mSamplerYCbCrConversion = VK_NULL_HANDLE;
+    }
     if (mHandle != VK_NULL_HANDLE) {
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
         mHandle = VK_NULL_HANDLE;
