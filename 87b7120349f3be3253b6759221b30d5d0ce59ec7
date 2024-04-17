@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05324b18_8b688c83",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-17T13:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbc16fe4_a49b29ff",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09e83f7c_fb80566c",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa68466_ecf6a0fd",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-17T13:50:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09e83f7c_fb80566c",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a49e854b_bad80546",
@@ -99,6 +135,24 @@
       "writtenOn": "2024-04-12T17:30:01Z",
       "side": 1,
       "message": "Would there be a cost to always mapping host-visible memory so we don\u0027t need to do map and unmap all the time, nor the computation to map only the small region for host-coherent memory?",
+      "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22edd8b_db9dbe85",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-17T13:50:13Z",
+      "side": 1,
+      "message": "For frequently updated buffers, keeping them persistently mapped instead of mapping/unmapping each time is best practice to avoid the mapping overhead. Doing it for writeBuffer means also persistently mapping eg. a vertex buffer where data is only written once, unless we have some strategy to avoid that (eg. map/unmap on first writeBuffer, move to persistent mapping if the buffer is written to again). For Arm GPUs, simply persistently mapping all buffers should be fine, but I don\u0027t know what the case is for other vendors. I\u0027ve added it as a TODO.",
+      "parentUuid": "a49e854b_bad80546",
       "revId": "87b7120349f3be3253b6759221b30d5d0ce59ec7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
