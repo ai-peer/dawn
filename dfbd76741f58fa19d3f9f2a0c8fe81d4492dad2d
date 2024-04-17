@@ -16,6 +16,80 @@
       "message": "Please take a look. (the bots seem to be having some issues)",
       "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8adb3f_d0ca1c02",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T04:58:14Z",
+      "side": 1,
+      "message": "I believe you also need check the feature, and enable it on the physical device.\n\nYou can query, VkPhysicalDeviceSamplerYcbcrConversionFeatures::samplerYcbcrConversion, and then you can also chain and set it to VK_TRUE when we make the VkDevice.",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5357d167_0a32d8e3",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T04:58:14Z",
+      "side": 1,
+      "message": "you need to make sure mSamplerYCbCrConversion is deleted.\nNot sure if you need to enqueue it for deferred deletion, or you can delete it immediately. The spec doesn\u0027t say.\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkDestroySamplerYcbcrConversionKHR.html\n\nNote that for VkSampler, it says \"All submitted commands that refer to sampler must have completed execution\"\n\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkDestroySampler.html#VUID-vkDestroySampler-sampler-01082",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 1
+      },
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8168dc1_dbb66371",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T04:58:14Z",
+      "side": 1,
+      "message": "will need to get the Destroy version of the proc too",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6d4fd6_8e3a48ce",
+        "filename": "src/dawn/tests/end2end/YCbCrSamplerTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T04:58:14Z",
+      "side": 1,
+      "message": "you\u0027ll need to add new validation for this test to pass; I don\u0027t think Dawn validates it right now",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
