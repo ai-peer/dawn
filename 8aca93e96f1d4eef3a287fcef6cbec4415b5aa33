@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61fc7706_4f1ed36a",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-17T14:03:37Z",
+      "side": 1,
+      "message": "```suggestion\n// Note: the following tests for various texture method behavior is mainly\n```",
+      "revId": "8aca93e96f1d4eef3a287fcef6cbec4415b5aa33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a73cff83_63a73c97",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-17T14:03:37Z",
+      "side": 1,
+      "message": "Why a pointer instead of a reference for `const Vector\u003cconst ast::Expression*, 8\u003e\u0026 args` ?",
+      "revId": "8aca93e96f1d4eef3a287fcef6cbec4415b5aa33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
