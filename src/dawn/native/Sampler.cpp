@@ -99,7 +99,12 @@ SamplerBase::SamplerBase(DeviceBase* device,
       mLodMinClamp(descriptor->lodMinClamp),
       mLodMaxClamp(descriptor->lodMaxClamp),
       mCompareFunction(descriptor->compare),
-      mMaxAnisotropy(descriptor->maxAnisotropy) {}
+      mMaxAnisotropy(descriptor->maxAnisotropy) {
+    if (device->HasFeature(Feature::YCbCrVulkanSamplers) &&
+        Unpack(descriptor).Get<vulkan::SamplerYCbCrVulkanDescriptor>()) {
+        mIsYCbCr = true;
+    }
+}
 
 SamplerBase::SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor)
     : SamplerBase(device, descriptor, kUntrackedByDevice) {
@@ -131,6 +136,10 @@ bool SamplerBase::IsComparison() const {
 bool SamplerBase::IsFiltering() const {
     return mMinFilter == wgpu::FilterMode::Linear || mMagFilter == wgpu::FilterMode::Linear ||
            mMipmapFilter == wgpu::MipmapFilterMode::Linear;
+}
+
+bool SamplerBase::IsYCbCr() const {
+    return mIsYCbCr;
 }
 
 size_t SamplerBase::ComputeContentHash() {
