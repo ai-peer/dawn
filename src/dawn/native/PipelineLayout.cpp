@@ -241,6 +241,8 @@ ResultOrError<Ref<PipelineLayoutBase>> PipelineLayoutBase::CreateDefault(
                 entry.buffer.minBindingSize = bindingInfo.minBindingSize;
             },
             [&](const SamplerBindingInfo& bindingInfo) {
+                // TODO(hitawala): Should bindingInfo have SamplerBindingType field and check for
+                // that here directly and set right type?
                 if (bindingInfo.isComparison) {
                     entry.sampler.type = wgpu::SamplerBindingType::Comparison;
                 } else {
