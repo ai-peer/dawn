@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks",
       "revId": "33c33b7e61d8705cb55dfc429ffd41672b6bfeb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76191e29_50ab1f7f",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T15:13:07Z",
+      "side": 1,
+      "message": "why reuse this buffer? The docs suggest it will result in more copies if you update it multiple times\n\n\u003e When there is contention for the resource, UpdateSubresource will perform 2 copies of the source data. First, the data is copied by the CPU to a temporary storage space accessible by the command buffer. This copy happens before the method returns. A second copy is then performed by the GPU to copy the source data into non-mappable memory. This second copy happens asynchronously because it is executed by GPU when the command buffer is flushed.",
+      "revId": "33c33b7e61d8705cb55dfc429ffd41672b6bfeb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
