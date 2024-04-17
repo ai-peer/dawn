@@ -113,6 +113,13 @@ interop::Interface<interop::GPUSupportedLimits> GPUAdapter::getLimits(Napi::Env 
     return interop::GPUSupportedLimits::Create<GPUSupportedLimits>(env, wgpuLimits);
 }
 
+interop::Interface<interop::GPUAdapterInfo> GPUAdapter::getInfo(Napi::Env env) {
+    WGPUAdapterProperties adapterProperties = {};
+    adapter_.GetProperties(&adapterProperties);
+
+    return interop::GPUAdapterInfo::Create<GPUAdapterInfo>(env, adapterProperties);
+}
+
 bool GPUAdapter::getIsFallbackAdapter(Napi::Env) {
     WGPUAdapterProperties adapterProperties = {};
     adapter_.GetProperties(&adapterProperties);
