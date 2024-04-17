@@ -497,15 +497,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
             EnableFeature(Feature::TextureCompressionBC);
         }
 #elif DAWN_PLATFORM_IS(MACOS)
-        if (@available(macOS 10.15, *)) {
-            if ([*mDevice supportsFamily:MTLGPUFamilyMac1]) {
-                EnableFeature(Feature::TextureCompressionBC);
-            }
-        } else {
-            if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
-                EnableFeature(Feature::TextureCompressionBC);
-            }
-        }
+        EnableFeature(Feature::TextureCompressionBC);
 #endif
 
 #if DAWN_PLATFORM_IS(IOS) && \
