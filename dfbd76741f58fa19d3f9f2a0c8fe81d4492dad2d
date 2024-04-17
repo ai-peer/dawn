@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa656f59_fb873bee",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-17T21:59:32Z",
+      "side": 1,
+      "message": "Thanks! This sounds good. I updated to add VkPhysicalDeviceSamplerYcbcrConversionFeatures on VulkanInfo and also add to featuresChain for info and usedKnobs. \n\nI\u0027m still unsure which order the checks are performed, but in my head its like this:\n1) DeviceVk::CreateDevice checks for HasFeature (set/enabled by Chrome) and DeviceExt is present; and sets knob and adds it to chain.\n2) PhysicalDeviceVk checks for DeviceExt and knob and then enables feature on PhysicalDevice.\n\nWhat\u0027s the difference between Device and PhysicalDevice?",
+      "parentUuid": "4709a211_b055169c",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5357d167_0a32d8e3",
         "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
         "patchSetId": 10
@@ -66,6 +84,30 @@
       "writtenOn": "2024-04-17T04:58:14Z",
       "side": 1,
       "message": "you need to make sure mSamplerYCbCrConversion is deleted.\nNot sure if you need to enqueue it for deferred deletion, or you can delete it immediately. The spec doesn\u0027t say.\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkDestroySamplerYcbcrConversionKHR.html\n\nNote that for VkSampler, it says \"All submitted commands that refer to sampler must have completed execution\"\n\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkDestroySampler.html#VUID-vkDestroySampler-sampler-01082",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 1
+      },
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0053526_6638044f",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-17T21:59:32Z",
+      "side": 1,
+      "message": "Added to call the GetFencedDeleter-\u003eDeletewhenUnused on mSamplerYCbCrConversion as well.",
+      "parentUuid": "5357d167_0a32d8e3",
       "range": {
         "startLine": 154,
         "startChar": 4,
@@ -93,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2989a355_9f0187d1",
+        "filename": "src/dawn/native/vulkan/VulkanFunctions.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-17T21:59:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8168dc1_dbb66371",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e6d4fd6_8e3a48ce",
@@ -106,6 +166,24 @@
       "writtenOn": "2024-04-17T04:58:14Z",
       "side": 1,
       "message": "you\u0027ll need to add new validation for this test to pass; I don\u0027t think Dawn validates it right now",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aeddd98_b99bd65a",
+        "filename": "src/dawn/tests/end2end/YCbCrSamplerTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-17T21:59:32Z",
+      "side": 1,
+      "message": "Added some validation to SamplerVk to check for sType and format.",
+      "parentUuid": "5e6d4fd6_8e3a48ce",
       "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
