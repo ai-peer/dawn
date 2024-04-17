@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "d2db4c050e79d8a0f3054d4382326e6b907e2753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5077d4fb_97cacbad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-17T23:55:12Z",
+      "side": 1,
+      "message": "LGTM but might be missing one thing",
+      "revId": "d2db4c050e79d8a0f3054d4382326e6b907e2753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1774113_67233883",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-17T23:55:12Z",
+      "side": 1,
+      "message": "Missing `WGPU_BREAKING_REFERENCE_ADDREF` for https://chromium-review.googlesource.com/c/chromium/src/+/5462360 ?",
+      "revId": "d2db4c050e79d8a0f3054d4382326e6b907e2753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
