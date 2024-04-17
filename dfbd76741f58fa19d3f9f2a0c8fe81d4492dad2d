@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4709a211_b055169c",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-17T05:01:01Z",
+      "side": 1,
+      "message": "for example, see [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;l\u003d482?q\u003dDeviceVk.cpp%20f:dawn) where we enable the float16 features on the VkDevice, and [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/PhysicalDeviceVk.cpp;l\u003d256?q\u003dstorageBuffer16BitAccess%20f:dawn%20f:PhysicalDevice\u0026sq\u003d) where we check if the feature is available",
+      "parentUuid": "7a8adb3f_d0ca1c02",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5357d167_0a32d8e3",
         "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
         "patchSetId": 10
