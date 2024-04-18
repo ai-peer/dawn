@@ -254,6 +254,13 @@ MaybeError ValidateSamplerBinding(const DeviceBase* device,
                             "binding.",
                             entry.sampler);
             break;
+        case kInternalYCbCrSamplerBindingType:
+            // TODO(crbug.com/dawn/2476): Add validation test for this.
+            DAWN_INVALID_IF(!entry.sampler->IsYCbCr(),
+                            "Non-ycbcr sampler %s is incompatible with ycbcr sampler "
+                            "binding.",
+                            entry.sampler);
+            break;
         default:
             DAWN_UNREACHABLE();
             break;
