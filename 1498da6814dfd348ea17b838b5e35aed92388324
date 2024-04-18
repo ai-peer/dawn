@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "942d4412_932a351d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T15:36:48Z",
+      "side": 1,
+      "message": "WDYT?\n\nThis is my attempt to NOT need a new namespace for the wire client version of the c++ api. It seems to work in Chromium. There are some risks to not using a new namespace which I\u0027ve tried to mitigate",
+      "revId": "1498da6814dfd348ea17b838b5e35aed92388324",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
