@@ -16,6 +16,29 @@
       "message": "Please take a look.",
       "revId": "308273b036d762b856612fabbc2c9fa452e99729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5861fa0_a1fb7102",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T18:29:06Z",
+      "side": 1,
+      "message": "don\u0027t cast to this until you check the stype.\n\nUse  VkBaseInStructure for iteration instead",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 0
+      },
+      "revId": "308273b036d762b856612fabbc2c9fa452e99729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
