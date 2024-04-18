@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecbb4326_e6d1b87a",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T21:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ce854b8_418d533f",
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30f8aab5_2357e883",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-04-18T19:49:06Z",
       "side": 1,
       "message": "do we need the check here? It\u0027s already called by WaitAny",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a55cad_d40aa97e",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T21:05:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30f8aab5_2357e883",
       "range": {
         "startLine": 98,
         "startChar": 4,
@@ -102,6 +144,30 @@
       "side": 1,
       "message": "ok, this is fine then, but I think we still shouldn\u0027t call CheckPassedSerials inside WaitForQueueSerial\n\nwe want the points at which the completed serial is updated be fairly clear and explicit",
       "parentUuid": "88755fe4_e135de95",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d8d764b_3fbfaa7c",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T21:05:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e09fe5e_0df05c99",
       "range": {
         "startLine": 108,
         "startChar": 3,
