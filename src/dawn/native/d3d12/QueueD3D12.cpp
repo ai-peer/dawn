@@ -178,7 +178,7 @@ bool Queue::HasPendingCommands() const {
     return mPendingCommands.NeedsSubmit();
 }
 
-ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
+ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerialsImpl() {
     ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
