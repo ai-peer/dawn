@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe4e05f_598cdfc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T13:47:18Z",
+      "side": 1,
+      "message": "Not 100% sure why it fails in Skia:\n\n/opt/s/w/ir/ccache_mac/bin/ccache clang++ -MD -MF obj/third_party/externals/dawn/src/dawn/common/libcommon.AlignedAlloc.o.d -DSK_TRIVIAL_ABI\u003d\\[\\[clang::trivial_abi\\]\\] -DDAWN_ENABLE_ASSERTS -DDAWN_ENABLE_BACKEND_METAL -DDAWN_ENABLE_BACKEND_NULL -DDAWN_ENABLE_ERROR_INJECTION -Igen/third_party/externals/dawn/src -I../../../../../../skia/third_party/externals/dawn/src -Igen/third_party/externals/dawn/include -I../../../../../../skia/third_party/externals/dawn/include -I../../../../../../skia/third_party/externals/dawn/src/dawn/partition_alloc -Wno-attributes -ffp-contract\u003doff -fstrict-aliasing -fPIC -fvisibility\u003dhidden -isysroot /opt/s/w/ir/cache/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -target arm64-apple-macos11 -g -gdwarf-4 -DREBUILD_IF_CHANGED_xcode_build_version\u003d12c33 -O1 -std\u003dc++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -c ../../../../../../skia/third_party/externals/dawn/src/dawn/common/AlignedAlloc.cpp -o obj/third_party/externals/dawn/src/dawn/common/libcommon.AlignedAlloc.o\n../../../../../../skia/third_party/externals/dawn/src/dawn/common/AlignedAlloc.cpp:51:12: error: no member named \u0027aligned_alloc\u0027 in namespace \u0027std\u0027; did you mean simply \u0027aligned_alloc\u0027?\n    return std::aligned_alloc(alignment, size);\n           ^~~~~~~~~~~~~~~~~~\n           aligned_alloc\n/opt/s/w/ir/cache/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/malloc/_malloc.h:50:10: note: \u0027aligned_alloc\u0027 declared here\nvoid    *aligned_alloc(size_t __alignment, size_t __size) __result_use_check __alloc_size(2) __OSX_AVAILABLE(10.15) __IOS_AVAILABLE(13.0) __TVOS_AVAILABLE(13.0) __WATCHOS_AVAILABLE(6.0);\n         ^\n1 error generated.",
+      "revId": "0ac8c652c3568082ef6bcf6f3a1042a6ffad9bbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
