@@ -35,6 +35,25 @@ namespace dawn::native::d3d {
 
 Queue::~Queue() = default;
 
+ResultOrError<SystemEventReceiver> Queue::GetSystemEventReceiver() {
+    if (!mAvailableEventReceivers.empty()) {
+        auto receiver = std::move(mAvailableEventReceivers.back());
+        mAvailableEventReceivers.pop_back();
+        return receiver;
+    }
+    HANDLE fenceEvent =
+        ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
+    DAWN_INVALID_IF(fenceEvent == nullptr, "CreateEvent failed");
+    return SystemEventReceiver(SystemHandle::Acquire(fenceEvent));
+}
+
+void Queue::ReturnSystemEventReceiver(SystemEventReceiver&& receiver) {
+    if (mAvailableEventReceivers.size() < kMaxEventReceivers) {
+        ResetEvent(receiver.GetPrimitive().Get());
+        mAvailableEventReceivers.push_back(std::move(receiver));
+    }
+}
+
 ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
     ExecutionSerial completedSerial = GetCompletedCommandSerial();
     if (serial <= completedSerial) {
@@ -46,13 +65,8 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
         // Anytime we may create an event, clear out any completed receivers so the list doesn't
         // grow forever.
         mSystemEventReceivers->ClearUpTo(completedSerial);
-
-        HANDLE fenceEvent =
-            ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
-        DAWN_INVALID_IF(fenceEvent == nullptr, "CreateEvent failed");
-        SetEventOnCompletion(serial, fenceEvent);
-
-        receiver = SystemEventReceiver(SystemHandle::Acquire(fenceEvent));
+        DAWN_TRY_ASSIGN(receiver, GetSystemEventReceiver())
+        SetEventOnCompletion(serial, receiver->GetPrimitive().Get());
     }
 
     bool ready = false;
@@ -64,6 +78,8 @@ ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanosecond
         // Return the SystemEventReceiver to the pool of receivers so it can be re-waited in the
         // future.
         mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
+    } else {
+        ReturnSystemEventReceiver(std::move(*recevier));
     }
     return didComplete;
 }
