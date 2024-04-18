@@ -108,7 +108,7 @@ TEST_F(RequestDeviceValidationTest, HigherIsBetter) {
     descriptor.requiredLimits = &limits;
 
     wgpu::SupportedLimits supportedLimits;
-    EXPECT_TRUE(adapter.GetLimits(&supportedLimits));
+    EXPECT_EQ(adapter.GetLimits(&supportedLimits), wgpu::Status::Success);
 
     // If we can support better than the default, test below the max.
     if (supportedLimits.limits.maxBindGroups > 4u) {
@@ -161,7 +161,7 @@ TEST_F(RequestDeviceValidationTest, LowerIsBetter) {
     descriptor.requiredLimits = &limits;
 
     wgpu::SupportedLimits supportedLimits;
-    EXPECT_TRUE(adapter.GetLimits(&supportedLimits));
+    EXPECT_EQ(adapter.GetLimits(&supportedLimits), wgpu::Status::Success);
 
     // Test below the min.
     limits.limits.minUniformBufferOffsetAlignment =

@@ -36,7 +36,7 @@
 
 namespace dawn::wire::client {
 
-WGPUBool ClientGetInstanceFeatures(WGPUInstanceFeatures* features);
+WGPUStatus ClientGetInstanceFeatures(WGPUInstanceFeatures* features);
 WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor);
 
 class Instance final : public ObjectWithEventsBase {

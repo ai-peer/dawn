@@ -89,18 +89,22 @@ MaybeError SharedResourceMemory::ValidateResourceCreatedFromSelf(SharedResource*
     return {};
 }
 
-bool SharedResourceMemory::APIBeginAccess(
+wgpu::SharedAccessStatus SharedResourceMemory::APIBeginAccess(
     TextureBase* texture,
     const SharedTextureMemoryBeginAccessDescriptor* descriptor) {
-    return !GetDevice()->ConsumedError(BeginAccess(texture, descriptor),
-                                       "calling %s.BeginAccess(%s).", this, texture);
+    return GetDevice()->ConsumedError(BeginAccess(texture, descriptor),
+                                      "calling %s.BeginAccess(%s).", this, texture)
+               ? wgpu::SharedAccessStatus::Error
+               : wgpu::SharedAccessStatus::Acquired;
 }
 
-bool SharedResourceMemory::APIBeginAccess(
+wgpu::SharedAccessStatus SharedResourceMemory::APIBeginAccess(
     BufferBase* buffer,
     const SharedBufferMemoryBeginAccessDescriptor* descriptor) {
-    return !GetDevice()->ConsumedError(BeginAccess(buffer, descriptor),
-                                       "calling %s.BeginAccess(%s).", this, buffer);
+    return GetDevice()->ConsumedError(BeginAccess(buffer, descriptor),
+                                      "calling %s.BeginAccess(%s).", this, buffer)
+               ? wgpu::SharedAccessStatus::Error
+               : wgpu::SharedAccessStatus::Acquired;
 }
 
 template <typename Resource, typename BeginAccessDescriptor>
@@ -175,20 +179,22 @@ MaybeError SharedResourceMemory::BeginAccess(Resource* resource,
     return {};
 }
 
-bool SharedResourceMemory::APIEndAccess(TextureBase* texture,
-                                        SharedTextureMemoryEndAccessState* state) {
+wgpu::SharedAccessStatus SharedResourceMemory::APIEndAccess(
+    TextureBase* texture,
+    SharedTextureMemoryEndAccessState* state) {
     bool didEnd = false;
     [[maybe_unused]] bool hadError = GetDevice()->ConsumedError(
         EndAccess(texture, state, &didEnd), "calling %s.EndAccess(%s).", this, texture);
-    return didEnd;
+    return didEnd ? wgpu::SharedAccessStatus::Released : wgpu::SharedAccessStatus::Error;
 }
 
-bool SharedResourceMemory::APIEndAccess(BufferBase* buffer,
-                                        SharedBufferMemoryEndAccessState* state) {
+wgpu::SharedAccessStatus SharedResourceMemory::APIEndAccess(
+    BufferBase* buffer,
+    SharedBufferMemoryEndAccessState* state) {
     bool didEnd = false;
     [[maybe_unused]] bool hadError = GetDevice()->ConsumedError(
         EndAccess(buffer, state, &didEnd), "calling %s.EndAccess(%s).", this, buffer);
-    return didEnd;
+    return didEnd ? wgpu::SharedAccessStatus::Released : wgpu::SharedAccessStatus::Error;
 }
 
 MaybeError SharedResourceMemory::BeginAccessImpl(

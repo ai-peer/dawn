@@ -101,7 +101,7 @@ std::vector<const char*> Adapter::GetSupportedFeatures() const {
     return supportedFeaturesSet.GetEnabledFeatureNames();
 }
 
-bool Adapter::GetLimits(WGPUSupportedLimits* limits) const {
+wgpu::Status Adapter::GetLimits(WGPUSupportedLimits* limits) const {
     return mImpl->APIGetLimits(FromAPI(limits));
 }
 

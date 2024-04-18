@@ -703,12 +703,14 @@ TEST_P(SharedTextureMemoryNoFeatureTests, CreationWithoutFeature) {
         beginDesc.concurrentRead = false;
         beginDesc.initialized = true;
 
-        ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(texture, &beginDesc)),
-                                HasSubstr("is invalid"));
+        ASSERT_DEVICE_ERROR_MSG(
+            EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Error),
+            HasSubstr("is invalid"));
 
         wgpu::SharedTextureMemoryEndAccessState endState = {};
-        ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.EndAccess(texture, &endState)),
-                                HasSubstr("is invalid"));
+        ASSERT_DEVICE_ERROR_MSG(
+            EXPECT_EQ(memory.EndAccess(texture, &endState), wgpu::SharedAccessStatus::Error),
+            HasSubstr("is invalid"));
     }
 }
 
@@ -757,7 +759,8 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
     beginDesc.concurrentRead = false;
     beginDesc.initialized = true;
     // That the begin access does not succeed since the device is destroyed.
-    EXPECT_FALSE(memory.BeginAccess(memory.CreateTexture(), &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(memory.CreateTexture(), &beginDesc),
+              wgpu::SharedAccessStatus::Error);
 }
 
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
@@ -791,7 +794,7 @@ TEST_P(SharedTextureMemoryTests, ImportSharedFenceDeviceDestroyed) {
     beginDesc.concurrentRead = false;
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
-    EXPECT_TRUE(memory.BeginAccess(texture, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
 
     // Use the texture so there is a fence to export on end access.
     wgpu::SharedTextureMemoryProperties properties;
@@ -816,7 +819,7 @@ TEST_P(SharedTextureMemoryTests, ImportSharedFenceDeviceDestroyed) {
     // End access to export a fence.
     wgpu::SharedTextureMemoryEndAccessState endState = {};
     auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
-    EXPECT_TRUE(memory.EndAccess(texture, &endState));
+    EXPECT_EQ(memory.EndAccess(texture, &endState), wgpu::SharedAccessStatus::Released);
 
     // Destroy the device.
     device.Destroy();
@@ -834,7 +837,7 @@ TEST_P(SharedTextureMemoryTests, ImportSharedFenceDeviceDestroyed) {
     backendBeginState = GetParam().mBackend->ChainBeginState(&beginDesc, endState);
 
     // Begin access should fail.
-    EXPECT_FALSE(memory.BeginAccess(texture, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Error);
 }
 
 // Test calling GetProperties with an error memory. The properties are filled with 0/None/Undefined.
@@ -1071,9 +1074,10 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccess) {
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     // It should be an error to BeginAccess twice in a row.
-    EXPECT_TRUE(memory.BeginAccess(texture, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(texture, &beginDesc)),
-                            HasSubstr("is already used to access"));
+    EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is already used to access"));
 }
 
 // Test that it is an error to call BeginAccess concurrently on a write texture
@@ -1089,9 +1093,10 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteRead) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(writeTexture, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture, &beginDesc)),
-                            HasSubstr("is currently accessed for writing"));
+    EXPECT_EQ(memory.BeginAccess(writeTexture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(readTexture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for writing"));
 }
 
 // Test that it is an error to call BeginAccess concurrently on a write texture
@@ -1110,10 +1115,11 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteConcurren
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(writeTexture, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(writeTexture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
     beginDesc.concurrentRead = true;
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture, &beginDesc)),
-                            HasSubstr("is currently accessed for writing"));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(readTexture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for writing"));
 }
 
 // Test that it is an error to call BeginAccess concurrently on a read texture
@@ -1129,9 +1135,10 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadWrite) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(readTexture, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture, &beginDesc)),
-                            HasSubstr("is currently accessed for exclusive reading"));
+    EXPECT_EQ(memory.BeginAccess(readTexture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(writeTexture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for exclusive reading"));
 }
 
 // Test that it is an error to call BeginAccess concurrently on a read texture
@@ -1150,10 +1157,11 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(readTexture, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(readTexture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
     beginDesc.concurrentRead = false;
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture, &beginDesc)),
-                            HasSubstr("is currently accessed for reading."));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(writeTexture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for reading."));
 }
 
 // Test that it is an error to call BeginAccess concurrently on two write textures on a single
@@ -1169,9 +1177,10 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteWrite) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(writeTexture1, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture2, &beginDesc)),
-                            HasSubstr("is currently accessed for writing"));
+    EXPECT_EQ(memory.BeginAccess(writeTexture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(writeTexture2, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for writing"));
 }
 
 // Test that it is valid to call BeginAccess concurrently on two read textures on a single
@@ -1187,9 +1196,10 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadRead) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture2, &beginDesc)),
-                            HasSubstr("is currently accessed for exclusive reading"));
+    EXPECT_EQ(memory.BeginAccess(readTexture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(readTexture2, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for exclusive reading"));
 }
 
 // Test that it is valid to call BeginAccess concurrently on two read textures on a single
@@ -1208,13 +1218,13 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
-    EXPECT_TRUE(memory.BeginAccess(readTexture2, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(readTexture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
+    EXPECT_EQ(memory.BeginAccess(readTexture2, &beginDesc), wgpu::SharedAccessStatus::Acquired);
 
     wgpu::SharedTextureMemoryEndAccessState endState1 = {};
-    EXPECT_TRUE(memory.EndAccess(readTexture1, &endState1));
+    EXPECT_EQ(memory.EndAccess(readTexture1, &endState1), wgpu::SharedAccessStatus::Released);
     wgpu::SharedTextureMemoryEndAccessState endState2 = {};
-    EXPECT_TRUE(memory.EndAccess(readTexture2, &endState2));
+    EXPECT_EQ(memory.EndAccess(readTexture2, &endState2), wgpu::SharedAccessStatus::Released);
 }
 
 // Test that it is valid to call BeginAccess concurrently on read textures on a single
@@ -1232,10 +1242,11 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     beginDesc.concurrentRead = true;
-    EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(readTexture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
     beginDesc.concurrentRead = false;
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture2, &beginDesc)),
-                            HasSubstr("is currently accessed for reading."));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(readTexture2, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for reading."));
 }
 
 // Test that it is valid to call BeginAccess concurrently on read textures on a single
@@ -1253,10 +1264,11 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadConcurrent
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     beginDesc.concurrentRead = false;
-    EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(readTexture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
     beginDesc.concurrentRead = true;
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture2, &beginDesc)),
-                            HasSubstr("is currently accessed for exclusive reading."));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(readTexture2, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is currently accessed for exclusive reading."));
 }
 
 // Test that it is valid to call BeginAccess concurrently on write textures with concurrentRead is
@@ -1274,8 +1286,9 @@ TEST_P(SharedTextureMemoryTests, ConcurrentWrite) {
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     beginDesc.concurrentRead = true;
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture, &beginDesc)),
-                            HasSubstr("Concurrent reading read-write"));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.BeginAccess(writeTexture, &beginDesc), wgpu::SharedAccessStatus::Error),
+        HasSubstr("Concurrent reading read-write"));
 }
 
 // Test that it is an error to call EndAccess twice in a row on the same memory.
@@ -1288,15 +1301,16 @@ TEST_P(SharedTextureMemoryTests, DoubleEndAccess) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(texture, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(texture, &beginDesc), wgpu::SharedAccessStatus::Acquired);
 
     wgpu::SharedTextureMemoryEndAccessState endState = {};
     auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
-    EXPECT_TRUE(memory.EndAccess(texture, &endState));
+    EXPECT_EQ(memory.EndAccess(texture, &endState), wgpu::SharedAccessStatus::Released);
 
     // Invalid to end access a second time.
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.EndAccess(texture, &endState)),
-                            HasSubstr("is not currently being accessed"));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.EndAccess(texture, &endState), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is not currently being accessed"));
 }
 
 // Test that it is an error to call EndAccess on a texture that was not the one BeginAccess was
@@ -1311,12 +1325,13 @@ TEST_P(SharedTextureMemoryTests, BeginThenEndOnDifferentTexture) {
     beginDesc.initialized = true;
     auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
-    EXPECT_TRUE(memory.BeginAccess(texture1, &beginDesc));
+    EXPECT_EQ(memory.BeginAccess(texture1, &beginDesc), wgpu::SharedAccessStatus::Acquired);
 
     wgpu::SharedTextureMemoryEndAccessState endState = {};
     auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.EndAccess(texture2, &endState)),
-                            HasSubstr("is not currently being accessed"));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.EndAccess(texture2, &endState), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is not currently being accessed"));
 }
 
 // Test that it is an error to call EndAccess without a preceding BeginAccess.
@@ -1326,8 +1341,9 @@ TEST_P(SharedTextureMemoryTests, EndAccessWithoutBegin) {
 
     wgpu::SharedTextureMemoryEndAccessState endState = {};
     auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.EndAccess(texture, &endState)),
-                            HasSubstr("is not currently being accessed"));
+    ASSERT_DEVICE_ERROR_MSG(
+        EXPECT_EQ(memory.EndAccess(texture, &endState), wgpu::SharedAccessStatus::Error),
+        HasSubstr("is not currently being accessed"));
 }
 
 // Test that it is an error to use the texture on the queue without a preceding BeginAccess.

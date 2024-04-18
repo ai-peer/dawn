@@ -124,14 +124,14 @@ WGPUWGSLFeatureName ToWGPUFeature(tint::wgsl::LanguageFeature f) {
 
 // Free-standing API functions
 
-WGPUBool ClientGetInstanceFeatures(WGPUInstanceFeatures* features) {
+WGPUStatus ClientGetInstanceFeatures(WGPUInstanceFeatures* features) {
     if (features->nextInChain != nullptr) {
-        return false;
+        return WGPUStatus_Error;
     }
 
     features->timedWaitAnyEnable = false;
     features->timedWaitAnyMaxCount = kTimedWaitAnyMaxCountDefault;
-    return true;
+    return WGPUStatus_Success;
 }
 
 WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {

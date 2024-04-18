@@ -104,12 +104,13 @@ void WireTest::SetUp() {
                 properties->architecture = "";
                 properties->name = "";
                 properties->driverDescription = "";
+                return WGPUStatus_Success;
             })));
 
         EXPECT_CALL(api, AdapterGetLimits(apiAdapter, NotNull()))
             .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
                 *limits = {};
-                return true;
+                return WGPUStatus_Success;
             })));
 
         EXPECT_CALL(api, AdapterEnumerateFeatures(apiAdapter, nullptr))
@@ -155,7 +156,7 @@ void WireTest::SetUp() {
             EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
                 .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
                     *limits = {};
-                    return true;
+                    return WGPUStatus_Success;
                 })));
 
             EXPECT_CALL(api, DeviceEnumerateFeatures(apiDevice, nullptr))

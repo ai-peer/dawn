@@ -105,7 +105,8 @@ ObjectType SharedTextureMemoryBase::GetType() const {
     return ObjectType::SharedTextureMemory;
 }
 
-void SharedTextureMemoryBase::APIGetProperties(SharedTextureMemoryProperties* properties) const {
+wgpu::Status SharedTextureMemoryBase::APIGetProperties(
+    SharedTextureMemoryProperties* properties) const {
     properties->usage = mProperties.usage;
     properties->size = mProperties.size;
     properties->format = mProperties.format;
@@ -113,8 +114,9 @@ void SharedTextureMemoryBase::APIGetProperties(SharedTextureMemoryProperties* pr
     UnpackedPtr<SharedTextureMemoryProperties> unpacked;
     if (GetDevice()->ConsumedError(ValidateAndUnpack(properties), &unpacked,
                                    "calling %s.GetProperties", this)) {
-        return;
+        return wgpu::Status::Error;
     }
+    return wgpu::Status::Success;
 }
 
 TextureBase* SharedTextureMemoryBase::APICreateTexture(const TextureDescriptor* descriptor) {
