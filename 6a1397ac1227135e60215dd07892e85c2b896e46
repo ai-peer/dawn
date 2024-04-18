@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a6a902_49c5e6c8",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T18:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ca5d3da_588ff533",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 50
+      },
+      "revId": "6a1397ac1227135e60215dd07892e85c2b896e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c44f0cc_5e9d7366",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-04-18T16:28:23Z",
       "side": 1,
       "message": "here, instead of clearing, you probably want to IterateUpTo and move them into the available list.",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 58
+      },
+      "revId": "6a1397ac1227135e60215dd07892e85c2b896e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef2267a_efeec24f",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T18:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c44f0cc_5e9d7366",
       "range": {
         "startLine": 65,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a63108_940630b1",
+        "filename": "src/dawn/native/d3d/QueueD3D.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T18:35:23Z",
+      "side": 1,
+      "message": "They will be used by subclasses in follow CLs.",
+      "parentUuid": "0fdd4fa2_b17071ba",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 12
+      },
+      "revId": "6a1397ac1227135e60215dd07892e85c2b896e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efadecd4_c61762cc",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-04-18T16:28:23Z",
       "side": 1,
       "message": "this should be MutexProtected,\n\nor put the vector and SerialMap inside a wrapper struct - and make that struct MutexProtected",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 62
+      },
+      "revId": "6a1397ac1227135e60215dd07892e85c2b896e46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb459d94_70dde19a",
+        "filename": "src/dawn/native/d3d/QueueD3D.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T18:35:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efadecd4_c61762cc",
       "range": {
         "startLine": 61,
         "startChar": 0,
