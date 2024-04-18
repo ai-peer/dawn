@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce854b8_418d533f",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T19:49:06Z",
+      "side": 1,
+      "message": "compute the `count` you can append without exceeding the max.\n\nthen\n\n```\navailableEventReceivers-\u003einsert(\n  availableEventReceivers-\u003eend(),\n  std::make_move_iterator(receivers.begin()),\n  std::make_move_iterator(receivers.begin() + count));\n```\n\nthis way there\u0027s no loop, fewer size checks, and fewer vector resizes",
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f8aab5_2357e883",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T19:49:06Z",
+      "side": 1,
+      "message": "do we need the check here? It\u0027s already called by WaitAny",
+      "range": {
+        "startLine": 98,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 5
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57a4633_3277d7eb",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T19:49:06Z",
+      "side": 1,
+      "message": "why move the recycling here?\n\nI think it\u0027s a bit better to only handle recycling events when we actually need a new one (in/around GetSystemEventReceiver).\n\nSerials are checked fairly often relative to how often SystemEvents get created. CheckAndUpdateCompletedSerials can be cheaper, and we bundle the recycling logic along with the more expensive waiting operations.",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
