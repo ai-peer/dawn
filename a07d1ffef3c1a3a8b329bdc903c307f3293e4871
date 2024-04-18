@@ -34,6 +34,24 @@
       "parentUuid": "d182072b_93383c4f",
       "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e30ab6d_f6a5d4de",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T21:06:49Z",
+      "side": 0,
+      "message": "It is better in a follow up CL.",
+      "parentUuid": "d73d27be_3e2fbe06",
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
