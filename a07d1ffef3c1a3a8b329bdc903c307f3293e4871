@@ -62,6 +62,30 @@
       },
       "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88755fe4_e135de95",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T20:00:36Z",
+      "side": 1,
+      "message": "In follow-up CL, I plan to signal an event and enqueue it into mSystemEventReceivers for every queue submit. So  `d3d11::Queue::CheckAndUpdateCompletedSerials()` will gather all events in `mSystemEventReceivers `, and call `WaitAnySystemEvent()`, to query which event is ready. And `d3d::Queue::WaitForQueueSerial()` can get event for a serial as well.\nIn this case, `WaitAnyF()` may never be called.",
+      "parentUuid": "b57a4633_3277d7eb",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
