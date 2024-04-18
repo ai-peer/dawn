@@ -86,6 +86,30 @@
       },
       "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e09fe5e_0df05c99",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T20:18:11Z",
+      "side": 1,
+      "message": "ok, this is fine then, but I think we still shouldn\u0027t call CheckPassedSerials inside WaitForQueueSerial\n\nwe want the points at which the completed serial is updated be fairly clear and explicit",
+      "parentUuid": "88755fe4_e135de95",
+      "range": {
+        "startLine": 108,
+        "startChar": 3,
+        "endLine": 118,
+        "endChar": 0
+      },
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
