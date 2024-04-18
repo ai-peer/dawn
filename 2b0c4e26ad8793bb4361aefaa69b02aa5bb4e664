@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d172657b_bb9a6771",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2065,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-18T12:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0660fcb0_73a74d54",
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13bda244_de22749d",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b984bbe_f0f77d4c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2071,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-18T12:25:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13bda244_de22749d",
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a209c67_9d97ec9d",
@@ -82,6 +118,30 @@
       "writtenOn": "2024-04-18T09:46:14Z",
       "side": 1,
       "message": "nit: this validation is already done in SharedTextureMemory::BeginAccessImpl so we can remove it?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b617b3a_09015bde",
+        "filename": "src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-18T12:25:15Z",
+      "side": 1,
+      "message": "I am afraid not. This should be a backend specific validation, just like [SharedTextureMemoryVkImageLayoutBeginState](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/SharedTextureMemoryVk.cpp;l\u003d964).",
+      "parentUuid": "5a209c67_9d97ec9d",
       "range": {
         "startLine": 135,
         "startChar": 0,
