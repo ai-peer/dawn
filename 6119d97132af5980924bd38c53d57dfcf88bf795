@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90dcf951_5a246561",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T10:13:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6119d97132af5980924bd38c53d57dfcf88bf795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a891b9_3704bb41",
+        "filename": "generator/templates/dawn/wire/server/ServerDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T10:13:20Z",
+      "side": 1,
+      "message": "note: We tried to keep \"api.name.UPPERCASE\" or something to allow for WebNN to use the generators at some point. But maybe we could undo all these changes now that they are never going to be in Dawn.",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "6119d97132af5980924bd38c53d57dfcf88bf795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
