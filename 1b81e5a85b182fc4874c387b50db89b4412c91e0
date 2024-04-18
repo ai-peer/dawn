@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7189fdf_1bdc28ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:50:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1b81e5a85b182fc4874c387b50db89b4412c91e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c264a1c_ad8f5176",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:50:35Z",
+      "side": 1,
+      "message": "We can\u0027t test this in this CL but can we make sure we have a test for this validation in one of the follow-ups?",
+      "revId": "1b81e5a85b182fc4874c387b50db89b4412c91e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b94d479_69cf1c87",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:50:35Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need to check for the feature here as it is validated earlier that if the YCbCr descriptor is chained, then the feature must be enabled.",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 8
+      },
+      "revId": "1b81e5a85b182fc4874c387b50db89b4412c91e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
