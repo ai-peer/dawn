@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab15e3b5_7e38a8eb",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T13:43:46Z",
+      "side": 1,
+      "message": "Let\u0027s precompute this in ExternalTexture.cpp instead of doing the matrix multiplies each texel.",
+      "range": {
+        "startLine": 235,
+        "startChar": 2,
+        "endLine": 237,
+        "endChar": 238
+      },
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d412b64_991be646",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T13:43:46Z",
+      "side": 1,
+      "message": "Why is this:\n\n`clamp(modifiedCoords.xy, params.visibleRectMin * plane0size, params.visibleRectMax * plane0 size)` instead of precomputed the per-plame rect bounds for loading as suggested in the other commetn?",
+      "range": {
+        "startLine": 239,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 213
+      },
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef4692f_9695dfd5",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T13:43:46Z",
+      "side": 1,
+      "message": "This can be precomputed and put in the uniform buffer.",
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
