@@ -16,6 +16,23 @@
       "message": "Addressed feedback.",
       "revId": "7f91acf0d25dd9abe3969f4caed9e1ac070fd583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a43e937_1a1dc33f",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T15:43:24Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "7f91acf0d25dd9abe3969f4caed9e1ac070fd583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

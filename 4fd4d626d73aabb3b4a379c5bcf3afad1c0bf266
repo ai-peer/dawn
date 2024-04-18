@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd12c066_bb240a91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T15:43:24Z",
+      "side": 1,
+      "message": "still confused Corentin, ValidateSamplerBinding is called from [1] when we already know the binding layout is SamplerBindingLayout, not StaticSamplerHolderBindingLayout\n\nif we want to make sure you cannot give a YCbCr sampler in a sampler bind group entry, then instead of a new binding type, we should be checking at the top of `ValidateSamplerBinding` that `!entry.sampler-\u003eIsYCbCr()` ?",
+      "parentUuid": "ea9481aa_54d9f018",
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52fee5b6_91ff9086",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 4
