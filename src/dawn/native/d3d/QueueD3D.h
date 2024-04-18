@@ -51,11 +51,12 @@ class Queue : public QueueBase {
     ResultOrError<SystemEventReceiver> GetSystemEventReceiver();
     MaybeError ReturnSystemEventReceivers(std::vector<SystemEventReceiver> receivers);
 
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+
   private:
     virtual void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) = 0;
     virtual ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerialsImpl() = 0;
 
-    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     // Available event receivers which can be reused.
     static constexpr size_t kMaxEventReceivers = 32;
