@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8133b737_75d12cc4",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-18T14:38:46Z",
+      "side": 1,
+      "message": "Yes, I can do that in a follow-up. I\u0027ve added a TODO here for now.",
+      "parentUuid": "7c264a1c_ad8f5176",
+      "revId": "1b81e5a85b182fc4874c387b50db89b4412c91e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b94d479_69cf1c87",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-04-18T09:50:35Z",
       "side": 1,
       "message": "nit: we don\u0027t need to check for the feature here as it is validated earlier that if the YCbCr descriptor is chained, then the feature must be enabled.",
+      "range": {
+        "startLine": 103,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 8
+      },
+      "revId": "1b81e5a85b182fc4874c387b50db89b4412c91e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d409347_07baa6a7",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-18T14:38:46Z",
+      "side": 1,
+      "message": "Ah right, removed.",
+      "parentUuid": "4b94d479_69cf1c87",
       "range": {
         "startLine": 103,
         "startChar": 8,
