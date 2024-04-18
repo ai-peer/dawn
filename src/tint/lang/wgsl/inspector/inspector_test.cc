@@ -3931,11 +3931,7 @@ fn main() {
     Inspector& inspector = Initialize(shader);
     auto info = inspector.GetTextureQueries("main");
 
-    ASSERT_EQ(1u, info.size());
-
-    EXPECT_EQ(Inspector::TextureQueryType::kTextureNumSamples, info[0].type);
-    EXPECT_EQ(2u, info[0].group);
-    EXPECT_EQ(3u, info[0].binding);
+    ASSERT_EQ(0u, info.size());
 }
 
 TEST_F(InspectorTextureTest, TextureLoadMultipleInEP) {
@@ -3952,14 +3948,11 @@ fn main() {
     Inspector& inspector = Initialize(shader);
     auto info = inspector.GetTextureQueries("main");
 
-    ASSERT_EQ(2u, info.size());
+    ASSERT_EQ(1u, info.size());
 
     EXPECT_EQ(Inspector::TextureQueryType::kTextureNumLevels, info[0].type);
     EXPECT_EQ(2u, info[0].group);
     EXPECT_EQ(3u, info[0].binding);
-    EXPECT_EQ(Inspector::TextureQueryType::kTextureNumSamples, info[1].type);
-    EXPECT_EQ(1u, info[1].group);
-    EXPECT_EQ(4u, info[1].binding);
 }
 
 TEST_F(InspectorTextureTest, TextureInSubfunction) {
