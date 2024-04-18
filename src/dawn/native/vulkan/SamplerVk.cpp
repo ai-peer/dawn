@@ -127,12 +127,16 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
         const VkSamplerYcbcrConversionCreateInfo& vulkanYCbCrInfo =
             vulkanYCbCrDescriptor->vulkanYCbCrInfo;
 #if DAWN_PLATFORM_IS(ANDROID)
-        const VkExternalFormatANDROID* vkExternalFormat =
+        const VkExternalFormatANDROID* chain =
             static_cast<const VkExternalFormatANDROID*>(vulkanYCbCrInfo.pNext);
-        if (vkExternalFormat) {
-            DAWN_INVALID_IF((vkExternalFormat->externalFormat == 0 &&
-                             vulkanYCbCrInfo.format == VK_FORMAT_UNDEFINED),
-                            "Both VkFormat and VkExternalFormatANDROID are undefined.");
+        while (chain != nullptr) {
+            if (chain->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
+                DAWN_INVALID_IF(
+                    (chain->externalFormat == 0 && vulkanYCbCrInfo.format == VK_FORMAT_UNDEFINED),
+                    "Both VkFormat and VkExternalFormatANDROID are undefined.");
+                break;
+            }
+            chain = chain->pNext;
         }
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 
