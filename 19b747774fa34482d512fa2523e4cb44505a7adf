@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8aa701_82bcf258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T08:02:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47518cd6_444ab024",
+        "filename": "src/dawn/native/CreatePipelineAsyncEvent.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T08:02:38Z",
+      "side": 1,
+      "message": "The include of DawnNative doesn\u0027t make a lot of sense here becaue clang tidy wants it for wgpu::CreatePipelineAsyncStatus which is in webgpu_cpp.h. Instead we could replace all of them with WGPUCreatePipelineAsyncStatus_Foo (feel free to just remove the include and defer this to Shrek which just added them).",
+      "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa0a941_3f158261",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncEventTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T08:02:38Z",
+      "side": 1,
+      "message": "ditto, we should remove this DawnNative",
+      "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
