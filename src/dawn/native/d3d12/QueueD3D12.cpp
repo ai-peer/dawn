@@ -184,6 +184,8 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
         return ExecutionSerial(0);
     }
 
+    DAWN_TRY(RecycleSystemEventReceivers(completedSerial));
+
     return completedSerial;
 }
 

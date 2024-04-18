@@ -221,6 +221,8 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
 
     DAWN_TRY(CheckAndMapReadyBuffers(completedSerial));
 
+    DAWN_TRY(RecycleSystemEventReceivers(completedSerial));
+
     return completedSerial;
 }
 
