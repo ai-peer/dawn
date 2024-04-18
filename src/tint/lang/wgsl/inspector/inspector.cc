@@ -1029,14 +1029,11 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
 
     std::unordered_set<BindingPoint> seen = {};
 
-    auto sample_type_for_call_and_type = [](wgsl::BuiltinFn builtin, const core::type::Type* ty,
-                                            const Vector<const ast::Expression*, 8>& args) {
+    auto sample_type_for_call_and_type = [](wgsl::BuiltinFn builtin, const core::type::Type* ty) {
         if (builtin == wgsl::BuiltinFn::kTextureNumLevels) {
             return TextureQueryType::kTextureNumLevels;
         }
-        if (builtin == wgsl::BuiltinFn::kTextureDimensions && args.Length() > 1) {
-            // When textureDimension takes level as the input,
-            // it requires calls to textureNumLevels to clamp mip levels.
+        if (builtin == wgsl::BuiltinFn::kTextureDimensions) {
             return TextureQueryType::kTextureNumLevels;
         }
         if (builtin == wgsl::BuiltinFn::kTextureLoad) {
@@ -1047,6 +1044,7 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
             }
         }
 
+        TINT_ASSERT(builtin == wgsl::BuiltinFn::kTextureNumSamples);
         return TextureQueryType::kTextureNumSamples;
     };
 
@@ -1101,7 +1099,10 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
                 call->Target(),
                 [&](const sem::BuiltinFn* builtin) {
                     if (builtin->Fn() != wgsl::BuiltinFn::kTextureNumLevels &&
-                        builtin->Fn() != wgsl::BuiltinFn::kTextureDimensions &&
+                        // When textureDimension takes level as the input,
+                        // it requires calls to textureNumLevels to clamp mip levels.
+                        !(builtin->Fn() == wgsl::BuiltinFn::kTextureDimensions &&
+                          call->Declaration()->args.Length() > 1) &&
                         builtin->Fn() != wgsl::BuiltinFn::kTextureNumSamples &&
                         builtin->Fn() != wgsl::BuiltinFn::kTextureLoad) {
                         return;
@@ -1111,8 +1112,7 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
                     auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
                     TINT_ASSERT(texture_sem);
 
-                    auto type = sample_type_for_call_and_type(builtin->Fn(), texture_sem->Type(),
-                                                              call->Declaration()->args);
+                    auto type = sample_type_for_call_and_type(builtin->Fn(), texture_sem->Type());
 
                     tint::Switch(
                         texture_sem,  //
