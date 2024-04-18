@@ -49,7 +49,7 @@ enum class Mode {
     D3D11Texture2D,
 };
 
-class Backend : public SharedTextureMemoryTestBackend {
+class Backend : public SharedTextureMemoryTestWinBackend {
   public:
     template <Mode kMode>
     static Backend* GetInstance() {
