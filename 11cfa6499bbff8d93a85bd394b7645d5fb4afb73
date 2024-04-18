@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddfef87c_ee70dfa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-04-18T14:56:31Z",
+      "side": 1,
+      "message": "I\u0027d like to hear back from the code owners about why this pass exists, and whether it could affect correctness.\nI understand you\u0027ve seen signals that it may be just an optimization.",
+      "revId": "11cfa6499bbff8d93a85bd394b7645d5fb4afb73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
