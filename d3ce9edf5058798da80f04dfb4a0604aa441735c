@@ -35,6 +35,63 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8f2125_959d00aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T10:05:08Z",
+      "side": 1,
+      "message": "LGTM too, some nits",
+      "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e00384_93afb3c3",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T10:05:08Z",
+      "side": 1,
+      "message": "nit: No need to check for the feature, that was already validated. So this can be:\n\n```\nif (auto* ulkanYCbCrDescriptor \u003d Unpack(descriptor).Get\u003cvulkan::SamplerYCbCrVulkanDescriptor\u003e()) {\n do stuff\n}\n```",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 59
+      },
+      "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2544678_a4b1c442",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T10:05:08Z",
+      "side": 1,
+      "message": "nit: This does a copy of the struct, maybe it could be const\u0026?",
+      "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4937d41d_f411ea95",
