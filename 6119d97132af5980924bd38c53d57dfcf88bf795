@@ -39,6 +39,30 @@
       },
       "revId": "6119d97132af5980924bd38c53d57dfcf88bf795",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a733150b_67b39dd3",
+        "filename": "generator/templates/dawn/wire/server/ServerDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-18T20:24:11Z",
+      "side": 1,
+      "message": "Replaced with the helper method instead.",
+      "parentUuid": "a8a891b9_3704bb41",
+      "range": {
+        "startLine": 83,
+        "startChar": 32,
+        "endLine": 83,
+        "endChar": 36
+      },
+      "revId": "6119d97132af5980924bd38c53d57dfcf88bf795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
