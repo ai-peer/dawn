@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23d5e66_5e9bba81",
+        "filename": "src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T12:36:11Z",
+      "side": 0,
+      "message": "I checked that the previous work needed to make this happen was landed: https://dawn-review.googlesource.com/c/dawn/+/171800",
+      "revId": "0d928647e28e68f015f4b796ae3f5843da350496",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
