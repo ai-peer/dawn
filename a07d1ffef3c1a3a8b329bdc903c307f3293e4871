@@ -16,6 +16,24 @@
       "message": "probably you want to add a Destroy method or ClearEvents method on d3d::Queue, and call it here (and d3d12 as well). That way we more eagerly clear out the events instead of waiting for ~Queue",
       "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73d27be_3e2fbe06",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-18T21:06:02Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "d182072b_93383c4f",
+      "revId": "a07d1ffef3c1a3a8b329bdc903c307f3293e4871",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
