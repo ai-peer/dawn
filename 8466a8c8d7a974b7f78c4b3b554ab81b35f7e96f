@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ad5eda_444721ab",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T16:39:37Z",
+      "side": 1,
+      "message": "for full correctness, I think we still need to iterate the chain and check for the stype. it may not necessarily be the first one\n\n```\nwhile (auto* chain \u003d vulkanYCbCrInfo.pNext; chain !\u003d nullptr; chain \u003d chain-\u003epNext) {\n  if (chain-\u003esType \u003d\u003d VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {\n    const VkExternalFormatANDROID* vkExternalFormat \u003d\n      static_cast\u003cconst VkExternalFormatANDROID*\u003e(chain);\n    DAWN_INVALID_IF((vkExternalFormat-\u003eexternalFormat \u003d\u003d 0 \u0026\u0026\n                             vulkanYCbCrInfo.format \u003d\u003d VK_FORMAT_UNDEFINED),\n                            \"Both VkFormat and VkExternalFormatANDROID are undefined.\");\n  }\n}\n```",
+      "revId": "8466a8c8d7a974b7f78c4b3b554ab81b35f7e96f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
