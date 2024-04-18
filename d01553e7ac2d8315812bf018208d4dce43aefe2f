@@ -16,6 +16,24 @@
       "message": "Sorry, took a while for me to review because whenever there\u0027s generated files, I just end up checking the CL out to build it and see the results heh...\n\nI think that the approach seems sound, but I am wondering if it would be a bit easier to follow the code if we had something like:\n\nclient/webgpu_cpp.h\n```\n#define WIRE_CLIENT true\n```\n\nwebgpu_cpp_h\n```\n#include \"dawn/wire/webgpu.h\"\n\n#idndef WIRE_CLIENT\n#define WIRE_CLIENT false\n#endif\n\n// At wgpu* callsites:\nif constexpr (WIRE_CLIENT) {\n    wgpuDawnWireClient*();\n} else {\n    wgpu*();\n}\n```\n\nNot sure if that would even work?... So I\u0027m not particularly partial about either approach, especially since this alternative would require implicitly always depending on some of the wire headers even in native. But the one thing we could get with this approach is an easier trace since we aren\u0027t just replacing function names with macros?",
       "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01c8f35_c31f9e3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T20:24:10Z",
+      "side": 1,
+      "message": "the thing I don\u0027t like about that suggestion is that it requires putting other stuff inside the webgpu_cpp.h header. I wanted to do it in a way that left the normal header clean.\n\nSo if no macro approach, I think I\u0027d more rather just duplicate all cpp header contents. that way there\u0027s no macros, but we have a lot of code duplication",
+      "parentUuid": "8ab319a7_12c5738a",
+      "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
