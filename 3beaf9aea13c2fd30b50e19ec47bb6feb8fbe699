@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8190e6_ab27cbf7",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-04-18T16:10:50Z",
+      "side": 1,
+      "message": "nit: typo in documentation (\"to for\")\n```suggestion\n                # Kotlin uses chain_roots to for parent classes (for example so a\n```",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea8ede1_4db6bfe9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-04-18T16:10:50Z",
+      "side": 1,
+      "message": "Can I double-check that this text comparison is safe?  Type-safe, whitespace-safe, and \"const*const*\" is the only thing to filter out?",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa11c01_04f52ca4",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-04-18T16:10:50Z",
+      "side": 1,
+      "message": "We explicitly consider 0xFFFFFFFF for Int.  Should we explicitly consider 0xFFFFFFFFFFFFFFFF for Long?",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
