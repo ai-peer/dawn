@@ -330,13 +330,13 @@ namespace {{metadata.namespace}} {
                 // Can be chained in {{as_cppType(root.name)}}
             {% endfor %}
             struct {{as_cppType(type.name)}} : ChainedStruct{{Out}} {
-                {{as_cppType(type.name)}}() {
+                inline {{as_cppType(type.name)}}() {
                     sType = SType::{{type.name.CamelCase()}};
                 }
         {% else %}
             struct {{as_cppType(type.name)}} {
                 {% if type.has_free_members_function %}
-                    {{as_cppType(type.name)}}() = default;
+                    inline {{as_cppType(type.name)}}() = default;
                 {% endif %}
         {% endif %}
             {% if type.has_free_members_function %}
