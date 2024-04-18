@@ -69,6 +69,24 @@
       "parentUuid": "255e5a35_57e98617",
       "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808aaaf6_0105dbf3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-18T20:56:16Z",
+      "side": 1,
+      "message": "I think each of the calls will get emitted to UMA, so maybe we want to emit this at Device destruction time?",
+      "parentUuid": "a7bb9a5f_87070298",
+      "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
