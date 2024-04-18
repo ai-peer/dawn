@@ -29,13 +29,20 @@
 
 #include <utility>
 
+#include "dawn/common/FutureUtils.h"
+#include "dawn/common/Ref.h"
 #include "dawn/native/AsyncTask.h"
 #include "dawn/native/ComputePipeline.h"
+#include "dawn/native/DawnNative.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/ErrorData.h"
 #include "dawn/native/EventManager.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/RenderPipeline.h"
+#include "dawn/native/SystemEvent.h"
+#include "dawn/native/dawn_platform_autogen.h"
 #include "dawn/native/utils/WGPUHelpers.h"
+#include "dawn/native/wgpu_structs_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
