@@ -1086,6 +1086,8 @@ Ref<ComputePipelineBase> DeviceBase::AddOrGetCachedComputePipeline(
 Ref<RenderPipelineBase> DeviceBase::AddOrGetCachedRenderPipeline(
     Ref<RenderPipelineBase> renderPipeline) {
     auto [pipeline, _] = mCaches->renderPipelines.Insert(renderPipeline.Get());
+    DAWN_HISTOGRAM_COUNTS_10000(GetPlatform(), "MaxPipelineCompiledCount",
+                                mCaches->renderPipelines.Size());
     return std::move(pipeline);
 }
 
