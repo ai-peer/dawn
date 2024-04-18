@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82c39dea_6ab65a06",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T01:14:29Z",
+      "side": 1,
+      "message": "PhysicalDevice is the underlying object which represents the connection to the GPU itself, and may be shared between multiple devices. It discovers and reports features and capabilities, etc. When we say EnableFeature, it means more like \"mark this feature available\"\n\nDeviceVk creates holds the actual VkDevice. The actual device may enable a subset of the capabilities (which might allow the driver to optimize things if certain capabilities are never used).",
+      "parentUuid": "aa656f59_fb873bee",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5357d167_0a32d8e3",
         "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
         "patchSetId": 10
@@ -108,6 +126,30 @@
       "side": 1,
       "message": "Added to call the GetFencedDeleter-\u003eDeletewhenUnused on mSamplerYCbCrConversion as well.",
       "parentUuid": "5357d167_0a32d8e3",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 158,
+        "endChar": 1
+      },
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80440b5_3235a0dc",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T01:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0053526_6638044f",
       "range": {
         "startLine": 154,
         "startChar": 4,
@@ -184,6 +226,24 @@
       "side": 1,
       "message": "Added some validation to SamplerVk to check for sType and format.",
       "parentUuid": "5e6d4fd6_8e3a48ce",
+      "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc35dc1_73a13f12",
+        "filename": "src/dawn/tests/end2end/YCbCrSamplerTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T01:14:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aeddd98_b99bd65a",
       "revId": "dfbd76741f58fa19d3f9f2a0c8fe81d4492dad2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

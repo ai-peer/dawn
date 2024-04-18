@@ -16,6 +16,46 @@
       "message": "Addressed feedback, PTAL.",
       "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd054578_dd009b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T01:14:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4937d41d_f411ea95",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T01:14:29Z",
+      "side": 1,
+      "message": "this might be slightly too strict. There can technically be other chains too. like \"VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM\"\n\nI think it would be sufficient to iterate the pnext chain, and if you see VkExternalFormatANDROID, validate that both the externalFormat and the vulkanYCbCrInfo.format are not 0/undefined.\n\nSecondly, I don\u0027t think the check needs to be behind the #ifdef. It should be fine on all OSes",
+      "range": {
+        "startLine": 133,
+        "startChar": 12,
+        "endLine": 135,
+        "endChar": 53
+      },
+      "revId": "d3ce9edf5058798da80f04dfb4a0604aa441735c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
