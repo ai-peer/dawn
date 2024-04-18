@@ -16,6 +16,80 @@
       "message": "PTAL",
       "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c366272_f2f1757e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:46:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0660fcb0_73a74d54",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2065,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:46:14Z",
+      "side": 1,
+      "message": "```suggestion\n    \"shared texture memory D3D swapchain begin state\": {\n```",
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bda244_de22749d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2071,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:46:14Z",
+      "side": 1,
+      "message": "nit: Maybe default to false.",
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a209c67_9d97ec9d",
+        "filename": "src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T09:46:14Z",
+      "side": 1,
+      "message": "nit: this validation is already done in SharedTextureMemory::BeginAccessImpl so we can remove it?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
