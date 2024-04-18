@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1966b30_9475b0f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-18T21:52:04Z",
+      "side": 1,
+      "message": "I introduced this weird bug that somehow make the textureDimension cts tests passed because textureNumSamples coincidentally equals textureNumLevels in these tests. (facepalm)",
+      "revId": "2bf3d8a95c256e076f0951b0493a3e6fb3d0b2f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
