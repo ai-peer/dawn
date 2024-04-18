@@ -854,18 +854,6 @@ source_set("sources") {
         "vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.h",
       ]
     }
-
-    if (build_with_chromium && is_fuchsia) {
-      # Necessary to ensure that the Vulkan libraries will be in the
-      # final Fuchsia package.
-      data_deps = [
-        "//third_party/fuchsia-sdk:vulkan_base",
-        "//third_party/fuchsia-sdk:vulkan_validation",
-
-        # NOTE: The line below is a work around for http://crbug.com/1001081
-        "//third_party/fuchsia-sdk/sdk:trace_engine",
-      ]
-    }
     if (dawn_is_winuwp) {
       defines += [ "DAWN_IS_WINUWP" ]
     }
