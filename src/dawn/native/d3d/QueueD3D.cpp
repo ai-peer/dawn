@@ -119,5 +119,4 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     return completedSerial;
 }
 
-
 }  // namespace dawn::native::d3d
