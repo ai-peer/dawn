@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c26aaefe_c9f18692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T12:12:23Z",
+      "side": 1,
+      "message": "We need to make sure that you cannot give a YCbCr sampler in a sampler bind group entry. They can only be used through static samplers. Adding a new SamplerBindingType::YCbCr helps do that because in the BG creation we switch over the sampler binding type already.",
+      "parentUuid": "d71b8861_14dec8f7",
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52fee5b6_91ff9086",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 4
