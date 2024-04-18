@@ -51,6 +51,24 @@
       "parentUuid": "3f610757_e1fab147",
       "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7bb9a5f_87070298",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T20:50:58Z",
+      "side": 1,
+      "message": "question about histograms in Chrome (the macro just delegates to Chrome)\n\nisn\u0027t this going to log a histogram for: 1, 2, 3, 4, 5, ......., Count ? since it\u0027ll log every time a pipeline is added? That doesn\u0027t seem like what we want.\n\nOr, does Chrome overwrite results with the most recent one?",
+      "parentUuid": "255e5a35_57e98617",
+      "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
