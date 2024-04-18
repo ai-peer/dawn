@@ -142,6 +142,16 @@ class SharedTextureMemoryTestVulkanBackend : public SharedTextureMemoryTestBacke
         const wgpu::SharedTextureMemoryEndAccessState& endState) override;
 };
 
+class SharedTextureMemoryTestWinBackend : public SharedTextureMemoryTestBackend {
+  public:
+    std::unique_ptr<BackendBeginState> ChainInitialBeginState(
+        wgpu::SharedTextureMemoryBeginAccessDescriptor* beginDesc) override;
+
+    std::unique_ptr<BackendBeginState> ChainBeginState(
+        wgpu::SharedTextureMemoryBeginAccessDescriptor* beginDesc,
+        const wgpu::SharedTextureMemoryEndAccessState& endState) override;
+};
+
 inline std::ostream& operator<<(std::ostream& o, SharedTextureMemoryTestBackend* backend) {
     o << backend->Name();
     return o;

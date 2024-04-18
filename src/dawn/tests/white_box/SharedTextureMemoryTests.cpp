@@ -48,6 +48,10 @@ struct BackendEndStateVk : public SharedTextureMemoryTestBackend::BackendEndStat
     wgpu::SharedTextureMemoryVkImageLayoutEndState imageLayouts{};
 };
 
+struct BackendBeginStateWin : public SharedTextureMemoryTestBackend::BackendBeginState {
+    wgpu::SharedTextureMemoryD3DSwapchainBeginState isSwapchain{};
+};
+
 }  // anonymous namespace
 
 std::unique_ptr<SharedTextureMemoryTestBackend::BackendBeginState>
@@ -80,6 +84,23 @@ SharedTextureMemoryTestVulkanBackend::ChainBeginState(
     state->imageLayouts.oldLayout = vkEndState->oldLayout;
     state->imageLayouts.newLayout = vkEndState->newLayout;
     beginDesc->nextInChain = &state->imageLayouts;
+    return state;
+}
+
+std::unique_ptr<SharedTextureMemoryTestBackend::BackendBeginState>
+SharedTextureMemoryTestWinBackend::ChainInitialBeginState(
+    wgpu::SharedTextureMemoryBeginAccessDescriptor* beginDesc) {
+    auto state = std::make_unique<BackendBeginStateWin>();
+    beginDesc->nextInChain = &state->isSwapchain;
+    return state;
+}
+
+std::unique_ptr<SharedTextureMemoryTestBackend::BackendBeginState>
+SharedTextureMemoryTestWinBackend::ChainBeginState(
+    wgpu::SharedTextureMemoryBeginAccessDescriptor* beginDesc,
+    const wgpu::SharedTextureMemoryEndAccessState& endState) {
+    auto state = std::make_unique<BackendBeginStateWin>();
+    beginDesc->nextInChain = &state->isSwapchain;
     return state;
 }
 

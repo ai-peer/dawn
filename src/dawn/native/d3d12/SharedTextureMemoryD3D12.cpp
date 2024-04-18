@@ -132,6 +132,16 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
     DAWN_INVALID_IF(descriptor->concurrentRead, "D3D12 backend doesn't support concurrent read.");
 
     DAWN_TRY(d3d::SharedTextureMemory::BeginAccessImpl(texture, descriptor));
+
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(
+        type, (descriptor.ValidateBranches<Branch<SharedTextureMemoryD3DSwapchainBeginState>>()));
+    DAWN_ASSERT(type == wgpu::SType::SharedTextureMemoryD3DSwapchainBeginState);
+
+    auto d3dSwapchainBeginState = descriptor.Get<SharedTextureMemoryD3DSwapchainBeginState>();
+    DAWN_ASSERT(d3dSwapchainBeginState != nullptr);
+    ToBackend(texture)->SetIsSwapchainTexture(d3dSwapchainBeginState->isSwapchain);
+
     // Reset state to COMMON. BeginAccess contains a list of fences to wait on after
     // which the texture's usage will complete on the GPU.
     // All textures created from SharedTextureMemory must have
