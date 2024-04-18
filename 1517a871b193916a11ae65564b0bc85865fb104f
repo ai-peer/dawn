@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1a464d9_b8def5e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-04-18T19:03:48Z",
+      "side": 1,
+      "message": "Now points at commit from: https://chromium-review.googlesource.com/c/external/github.com/microsoft/DirectXShaderCompiler/+/5464347",
+      "revId": "1517a871b193916a11ae65564b0bc85865fb104f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
