@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "385ed2b5_5d76d3cf",
+        "filename": "src/dawn/native/CreatePipelineAsyncEvent.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-04-18T14:13:53Z",
+      "side": 1,
+      "message": "Got it.\n\nThese clang-tidy warnings happen to be blocking some other work (reasons), so I\u0027ll take a shot at fixing this myself.",
+      "parentUuid": "47518cd6_444ab024",
+      "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fa0a941_3f158261",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-04-18T08:02:38Z",
       "side": 1,
       "message": "ditto, we should remove this DawnNative",
+      "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711004b4_0b7ea4bf",
+        "filename": "src/dawn/tests/unittests/native/CreatePipelineAsyncEventTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-04-18T14:13:53Z",
+      "side": 1,
+      "message": "This one is a bit more work. I\u0027d like to defer this for later.",
+      "parentUuid": "2fa0a941_3f158261",
       "revId": "19b747774fa34482d512fa2523e4cb44505a7adf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
