@@ -67,6 +67,24 @@
       "message": "Missing `WGPU_BREAKING_REFERENCE_ADDREF` for https://chromium-review.googlesource.com/c/chromium/src/+/5462360 ?",
       "revId": "d2db4c050e79d8a0f3054d4382326e6b907e2753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665bb319_93bc53c3",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-18T13:56:09Z",
+      "side": 1,
+      "message": "It\u0027s the 5th time I mess up my git-fu this week :(",
+      "parentUuid": "d1774113_67233883",
+      "revId": "d2db4c050e79d8a0f3054d4382326e6b907e2753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
