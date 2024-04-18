@@ -150,6 +150,30 @@
       },
       "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb7af30_f0cffe3f",
+        "filename": "src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-18T16:35:01Z",
+      "side": 1,
+      "message": "shouldn\u0027t it be optional to pass SharedTextureMemoryD3DSwapchainBeginState?\n\nin d3d::SharedTextureMemory::BeginAccessImpl, we do validate with DAWN_TRY(descriptor.ValidateSubset\u003cSharedTextureMemoryD3DSwapchainBeginState\u003e());\n\nThat you either have no chain, or you have SharedTextureMemoryD3DSwapchainBeginState.\n\nHere, we should do something like:\n\n```\nif (auto* beginState \u003d descriptor.Get\u003cSharedTextureMemoryD3DSwapchainBeginState\u003e()) {\n  ToBackend(texture)-\u003eSetIsSwapchainTexture(beginState-\u003eisSwapchain);\n}\n```",
+      "parentUuid": "9b617b3a_09015bde",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
