@@ -39,6 +39,30 @@
       },
       "revId": "308273b036d762b856612fabbc2c9fa452e99729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8743f28_ef2fdc2b",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-18T21:07:36Z",
+      "side": 1,
+      "message": "Thanks for catching, updated to use VkBaseInStructure.",
+      "parentUuid": "a5861fa0_a1fb7102",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 132,
+        "endChar": 0
+      },
+      "revId": "308273b036d762b856612fabbc2c9fa452e99729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
