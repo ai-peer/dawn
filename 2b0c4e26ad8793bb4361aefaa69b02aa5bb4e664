@@ -174,6 +174,30 @@
       },
       "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3972edfa_a6151122",
+        "filename": "src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-19T01:29:44Z",
+      "side": 1,
+      "message": "You\u0027re right. My misunderstanding. Thanks for the correction.",
+      "parentUuid": "1eb7af30_f0cffe3f",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 0
+      },
+      "revId": "2b0c4e26ad8793bb4361aefaa69b02aa5bb4e664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
