@@ -52,6 +52,24 @@
       "parentUuid": "a01c8f35_c31f9e3f",
       "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a6f11f_fe534375",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T15:21:27Z",
+      "side": 1,
+      "message": "ok, in the latest patchset, I made a duplicate header.\n\nI also made a new header for forward declaring everything which is useful when files don\u0027t need the full contents.\nmay add more headers like this in the future. webgpu_cpp_print for example just needs the enums, not everything else.",
+      "parentUuid": "358cffde_6fc0b367",
+      "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
