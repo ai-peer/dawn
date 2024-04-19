@@ -105,6 +105,24 @@
       "parentUuid": "808aaaf6_0105dbf3",
       "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068cf5d1_58387a0d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T16:28:03Z",
+      "side": 1,
+      "message": "no strong opinions about errors. I\u0027d imagine Graphite should reach a state where there are zero, or minimal rare errors.\n\nDid we check that destruction is OK? Not sure when Graphite destroys its device - if it\u0027s when the browser is shutting down, does Chrome actually emit the UMA?\n\nLGTM otherwise",
+      "parentUuid": "1e6300f6_bf494aa0",
+      "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

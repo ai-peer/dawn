@@ -16,6 +16,75 @@
       "message": "Addressed some feedback, please take another look.",
       "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f709f4ed_f460b318",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T16:28:03Z",
+      "side": 1,
+      "message": "It\u0027s only necessary to load once\n\n```suggestion\n    if (uint32_t count \u003d mUniqueRenderPipelineCounter.load(std::memory_order_acquire)) {\n        DAWN_HISTOGRAM_COUNTS_100(GetPlatform(), \"UniqueRenderPipelineCreatedCount\",\n                                  count);\n    }\n```",
+      "range": {
+        "startLine": 577,
+        "startChar": 4,
+        "endLine": 580,
+        "endChar": 5
+      },
+      "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b3e881_3702349f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T16:28:03Z",
+      "side": 1,
+      "message": "this can be relaxed\n```suggestion\n    mUniqueRenderPipelineCounter.fetch_add(1, std::memory_order_relaxed);\n```",
+      "range": {
+        "startLine": 1473,
+        "startChar": 46,
+        "endLine": 1473,
+        "endChar": 71
+      },
+      "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839ee5e3_bbe4e455",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T16:28:03Z",
+      "side": 1,
+      "message": "this can be relaxed\n```suggestion\n    mUniqueRenderPipelineCounter.fetch_add(1, std::memory_order_relaxed);\n```",
+      "range": {
+        "startLine": 2162,
+        "startChar": 46,
+        "endLine": 2162,
+        "endChar": 71
+      },
+      "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
