@@ -572,6 +572,13 @@ void DeviceBase::Destroy() {
         return;
     }
 
+    // Log only if pipelines have been created.
+    if (mUniqueRenderPipelineCounter.load(std::memory_order_acquire) > 1) {
+        // Log all the unique render pipelines created during this Device's lifetime.
+        DAWN_HISTOGRAM_COUNTS_100(GetPlatform(), "UniqueRenderPipelineCreatedCount",
+                                  mUniqueRenderPipelineCounter.load(std::memory_order_acquire));
+    }
+
     // This function may be called re-entrantly inside APITick(). Tick triggers callbacks
     // inside which the application may destroy the device. Thus, we should be careful not
     // to delete objects that are needed inside Tick after callbacks have been called.
@@ -1458,6 +1465,9 @@ Future DeviceBase::APICreateRenderPipelineAsyncF(
             this, callbackInfo, std::move(cachedRenderPipeline))));
     }
 
+    // New unique pipeline will be created, increment the counter.
+    mUniqueRenderPipelineCounter.fetch_add(1, std::memory_order_acq_rel);
+
     // New pipeline: create an event backed by system event that is really async.
     Ref<CreateRenderPipelineAsyncEvent> event = AcquireRef(new CreateRenderPipelineAsyncEvent(
         this, callbackInfo, std::move(uninitializedRenderPipeline), AcquireRef(new SystemEvent())));
@@ -2143,6 +2153,8 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
         if (cachedRenderPipeline != nullptr) {
             return cachedRenderPipeline;
         }
+        // New unique pipeline will be created, increment the counter.
+        mUniqueRenderPipelineCounter.fetch_add(1, std::memory_order_acq_rel);
     }
 
     MaybeError maybeError;
