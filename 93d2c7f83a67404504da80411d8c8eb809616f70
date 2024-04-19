@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e1231c2_e2da3729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-19T23:59:08Z",
+      "side": 1,
+      "message": "this raced, with https://dawn-review.googlesource.com/c/dawn/+/184301 so the rename wasn\u0027t done fully, leading to compile errors. reverting and we can reland",
+      "revId": "93d2c7f83a67404504da80411d8c8eb809616f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
