@@ -335,6 +335,8 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     GLenum target = view->GetGLTarget();
                     GLuint viewIndex = indices[bindingIndex];
 
+                    printf("\n\n  !!! %u\n\n", gl.GetError());
+
                     for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
                         gl.ActiveTexture(GL_TEXTURE0 + unit);
                         gl.BindTexture(target, handle);
@@ -364,6 +366,8 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                         gl.TexParameteri(target, GL_TEXTURE_MAX_LEVEL,
                                          view->GetBaseMipLevel() + view->GetLevelCount() - 1);
                     }
+
+                    printf("\n\n  !!!!!!! %u\n\n", gl.GetError());
 
                     // Some texture builtin function data needs emulation to update into the
                     // internal uniform buffer.

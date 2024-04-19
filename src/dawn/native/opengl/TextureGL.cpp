@@ -140,15 +140,15 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
         return true;
     }
 
-    // TODO(dawn:2131): remove once compatibility texture binding view dimension is fully
-    // implemented.
-    switch (textureViewDescriptor->dimension) {
-        case wgpu::TextureViewDimension::Cube:
-        case wgpu::TextureViewDimension::CubeArray:
-            return true;
-        default:
-            break;
-    }
+    // // TODO(dawn:2131): remove once compatibility texture binding view dimension is fully
+    // // implemented.
+    // switch (textureViewDescriptor->dimension) {
+    //     case wgpu::TextureViewDimension::Cube:
+    //     case wgpu::TextureViewDimension::CubeArray:
+    //         return true;
+    //     default:
+    //         break;
+    // }
 
     return false;
 }
@@ -678,6 +678,8 @@ void TextureView::CopyIfNeeded() {
         gl.BindTexture(mTarget, mHandle);
         AllocateTexture(gl, mTarget, texture->GetSampleCount(), numLevels, GetInternalFormat(),
                         size);
+        // AllocateTexture(gl, mTarget, texture->GetSampleCount(), srcLevel + numLevels,
+        //                 GetInternalFormat(), size);
         mOwnsHandle = true;
     }
 
