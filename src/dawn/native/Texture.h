@@ -55,7 +55,8 @@ MaybeError ValidateTextureDescriptor(
     const DeviceBase* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar = AllowMultiPlanarTextureFormat::No,
-    std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage = std::nullopt);
+    std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage = std::nullopt,
+    bool allowMultipleArray = false);
 MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
                                          const TextureBase* texture,
                                          const TextureViewDescriptor* descriptor);
