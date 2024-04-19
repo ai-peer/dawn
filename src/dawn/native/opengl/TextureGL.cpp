@@ -52,7 +52,20 @@ GLenum TargetForTexture(const UnpackedPtr<TextureDescriptor>& descriptor) {
         case wgpu::TextureDimension::e2D:
             if (descriptor->size.depthOrArrayLayers > 1) {
                 DAWN_ASSERT(descriptor->sampleCount == 1);
-                return GL_TEXTURE_2D_ARRAY;
+                auto textureBindingViewDimension = wgpu::TextureViewDimension::Undefined;
+                if (auto* subDesc = descriptor.Get<TextureBindingViewDimensionDescriptor>()) {
+                    textureBindingViewDimension = subDesc->textureBindingViewDimension;
+                }
+                switch (textureBindingViewDimension) {
+                    case wgpu::TextureViewDimension::e2DArray:
+                        return GL_TEXTURE_2D_ARRAY;
+                    case wgpu::TextureViewDimension::Cube:
+                        return GL_TEXTURE_CUBE_MAP;
+                    case wgpu::TextureViewDimension::CubeArray:
+                        return GL_TEXTURE_CUBE_MAP_ARRAY;
+                    default:
+                        DAWN_UNREACHABLE();
+                }
             } else {
                 if (descriptor->sampleCount > 1) {
                     return GL_TEXTURE_2D_MULTISAMPLE;
@@ -140,15 +153,15 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
         return true;
     }
 
-    // TODO(dawn:2131): remove once compatibility texture binding view dimension is fully
-    // implemented.
-    switch (textureViewDescriptor->dimension) {
-        case wgpu::TextureViewDimension::Cube:
-        case wgpu::TextureViewDimension::CubeArray:
-            return true;
-        default:
-            break;
-    }
+    // // TODO(dawn:2131): remove once compatibility texture binding view dimension is fully
+    // // implemented.
+    // switch (textureViewDescriptor->dimension) {
+    //     case wgpu::TextureViewDimension::Cube:
+    //     case wgpu::TextureViewDimension::CubeArray:
+    //         return true;
+    //     default:
+    //         break;
+    // }
 
     return false;
 }
@@ -164,6 +177,7 @@ void AllocateTexture(const OpenGLFunctions& gl,
     // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTextureView.xhtml
     switch (target) {
         case GL_TEXTURE_2D_ARRAY:
+        case GL_TEXTURE_CUBE_MAP_ARRAY:
         case GL_TEXTURE_3D:
             gl.TexStorage3D(target, levels, internalFormat, size.width, size.height,
                             size.depthOrArrayLayers);
@@ -647,10 +661,20 @@ void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint dep
     }
 
     DAWN_ASSERT(handle != 0);
-    if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
-        gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
-    } else {
-        gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
+
+    switch (textarget) {
+        case GL_TEXTURE_2D_ARRAY:
+        case GL_TEXTURE_CUBE_MAP_ARRAY:
+        case GL_TEXTURE_3D:
+            gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
+            break;
+        case GL_TEXTURE_CUBE_MAP: {
+            GLenum cubeTexTarget = GL_TEXTURE_CUBE_MAP_POSITIVE_X + arrayLayer;
+            gl.FramebufferTexture2D(target, attachment, cubeTexTarget, handle, mipLevel);
+        } break;
+        default:
+            gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
+            break;
     }
 }
 
@@ -678,6 +702,8 @@ void TextureView::CopyIfNeeded() {
         gl.BindTexture(mTarget, mHandle);
         AllocateTexture(gl, mTarget, texture->GetSampleCount(), numLevels, GetInternalFormat(),
                         size);
+        // AllocateTexture(gl, mTarget, texture->GetSampleCount(), srcLevel + numLevels,
+        //                 GetInternalFormat(), size);
         mOwnsHandle = true;
     }
 
