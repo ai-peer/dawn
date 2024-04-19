@@ -16,6 +16,23 @@
       "message": "Thanks for the explanation and updates!",
       "revId": "d050376eb65cea34c714b7e427cbfdc495c56fb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c44e262_fc32c868",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-04-19T13:59:19Z",
+      "side": 1,
+      "message": "The failing test is due to `writeBuffer` now sometimes being done on the CPU, meaning no pending GPU work is scheduled. The buffer mapping tests do:\n\n```\nqueue.writeBuffer(buffer)\nbuffer.mapAsync()\nbuffer.mapAsync()\n```\n\nAnd assume that the second `mapAsync` will occur when the first `mapAsync` is pending. However, if `queue.writeBuffer` has already completed when the first `mapAsync` is called, the first `mapAsync` will complete immediately (the buffer is ready to be mapped). Then, the second `mapAsync` will get a validation error as the buffer is already mapped (as opposed to having a pending mapping).\n\nThis can be worked around by pretending we scheduled GPU work in `UploadData` by calling `MarkUsedInPendingCommands`. However this:\n1. Should not be necessary as the buffer isn\u0027t actually used in any pending commands.\n2. Doing this unnecessarily can negatively affect performance (eg. trying to do `writeBuffer` again will now assume the buffer is in-use and can\u0027t take the fast path even though that isn\u0027t true).",
+      "revId": "d050376eb65cea34c714b7e427cbfdc495c56fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
