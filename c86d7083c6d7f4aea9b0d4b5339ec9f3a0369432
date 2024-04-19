@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae70cabe_71cadbd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-19T09:39:26Z",
+      "side": 1,
+      "message": "CL updated by moving calculations into ExternalTexture.cpp. PTAL, thanks!",
+      "revId": "c86d7083c6d7f4aea9b0d4b5339ec9f3a0369432",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

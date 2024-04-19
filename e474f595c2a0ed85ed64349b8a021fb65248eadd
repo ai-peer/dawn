@@ -33,6 +33,24 @@
       "message": "Something came up and I can\u0027t finish the review but something in that direction would be better, with more stuff precomputed in ExternalTexture.cpp https://dawn-review.googlesource.com/c/dawn/+/184600",
       "revId": "e474f595c2a0ed85ed64349b8a021fb65248eadd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28cee56b_8a1e1aeb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-19T09:39:26Z",
+      "side": 1,
+      "message": "Ok. I\u0027ll update in that direction. Let\u0027s precompute all uniform things.",
+      "parentUuid": "06990d4c_b2d0d219",
+      "revId": "e474f595c2a0ed85ed64349b8a021fb65248eadd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
