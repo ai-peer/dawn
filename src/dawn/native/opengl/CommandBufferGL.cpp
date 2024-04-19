@@ -738,7 +738,7 @@ MaybeError CommandBuffer::Execute() {
                                           copySize.height, glFormat, glType, offset);
                             break;
                         }
-                        // Implementation for 2D array is the same as 3D.
+                        // Implementation for 2D array and cube map is the same as 3D.
                         [[fallthrough]];
                     }
 
@@ -1502,7 +1502,19 @@ void DoTexSubImage(const OpenGLFunctions& gl,
             if (texture->GetArrayLayers() == 1 && Is1DOr2D(texture->GetDimension())) {
                 gl.TexSubImage2D(target, destination.mipLevel, x, y, width, height, adjustedFormat,
                                  format.type, data);
+            } else if (target == GL_TEXTURE_CUBE_MAP) {
+                DAWN_ASSERT(texture->GetArrayLayers() == 6);
+                const uint8_t* pointer = static_cast<const uint8_t*>(data);
+                uint32_t baseLayer = destination.origin.z;
+                for (uint32_t l = 0; l < copySize.depthOrArrayLayers; ++l) {
+                    GLenum cubeMapTarget = GL_TEXTURE_CUBE_MAP_POSITIVE_X + baseLayer + l;
+                    gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, height,
+                                     adjustedFormat, format.type, pointer);
+                    pointer += dataLayout.rowsPerImage * dataLayout.bytesPerRow;
+                }
             } else {
+                DAWN_ASSERT(target == GL_TEXTURE_3D || target == GL_TEXTURE_2D_ARRAY ||
+                            target == GL_TEXTURE_CUBE_MAP_ARRAY);
                 gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, dataLayout.rowsPerImage * blockInfo.height);
                 gl.TexSubImage3D(target, destination.mipLevel, x, y, z, width, height,
                                  copySize.depthOrArrayLayers, adjustedFormat, format.type, data);
@@ -1518,7 +1530,23 @@ void DoTexSubImage(const OpenGLFunctions& gl,
                                      format.type, d);
                     d += dataLayout.bytesPerRow;
                 }
+            } else if (target == GL_TEXTURE_CUBE_MAP) {
+                DAWN_ASSERT(texture->GetArrayLayers() == 6);
+                const uint8_t* pointer = static_cast<const uint8_t*>(data);
+                uint32_t baseLayer = destination.origin.z;
+                for (uint32_t l = 0; l < copySize.depthOrArrayLayers; ++l) {
+                    const uint8_t* d = pointer;
+                    GLenum cubeMapTarget = GL_TEXTURE_CUBE_MAP_POSITIVE_X + baseLayer + l;
+                    for (y = destination.origin.y; y < destination.origin.y + height; ++y) {
+                        gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, 1,
+                                         adjustedFormat, format.type, d);
+                        d += dataLayout.bytesPerRow;
+                    }
+                    pointer += dataLayout.rowsPerImage * dataLayout.bytesPerRow;
+                }
             } else {
+                DAWN_ASSERT(target == GL_TEXTURE_3D || target == GL_TEXTURE_2D_ARRAY ||
+                            target == GL_TEXTURE_CUBE_MAP_ARRAY);
                 const uint8_t* slice = static_cast<const uint8_t*>(data);
                 for (; z < destination.origin.z + copySize.depthOrArrayLayers; ++z) {
                     const uint8_t* d = slice;
