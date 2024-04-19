@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a91193f_2c76cddc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-19T05:39:41Z",
+      "side": 1,
+      "message": "Hi Reviewers,\n\nI cannot reproduce the compilation error on the Skia bots with my own Mac M1. I can only change `std::aligned_alloc` into `aligned_alloc` according to the error message on the Skia bot (thanks Corentin). Could you help me test if this CL can pass on the Skia bot?\n\n```\n/opt/s/w/ir/ccache_mac/bin/ccache clang++ -MD -MF obj/third_party/externals/dawn/src/dawn/common/libcommon.AlignedAlloc.o.d -DSK_TRIVIAL_ABI\u003d[[clang::trivial_abi]] -DDAWN_ENABLE_ASSERTS -DDAWN_ENABLE_BACKEND_METAL -DDAWN_ENABLE_BACKEND_NULL -DDAWN_ENABLE_ERROR_INJECTION -Igen/third_party/externals/dawn/src -I../../../../../../skia/third_party/externals/dawn/src -Igen/third_party/externals/dawn/include -I../../../../../../skia/third_party/externals/dawn/include -I../../../../../../skia/third_party/externals/dawn/src/dawn/partition_alloc -Wno-attributes -ffp-contract\u003doff -fstrict-aliasing -fPIC -fvisibility\u003dhidden -isysroot /opt/s/w/ir/cache/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk -target arm64-apple-macos11 -g -gdwarf-4 -DREBUILD_IF_CHANGED_xcode_build_version\u003d12c33 -O1 -std\u003dc++17 -fvisibility-inlines-hidden -fno-exceptions -fno-rtti -c ../../../../../../skia/third_party/externals/dawn/src/dawn/common/AlignedAlloc.cpp -o obj/third_party/externals/dawn/src/dawn/common/libcommon.AlignedAlloc.o\n../../../../../../skia/third_party/externals/dawn/src/dawn/common/AlignedAlloc.cpp:51:12: error: no member named \u0027aligned_alloc\u0027 in namespace \u0027std\u0027; did you mean simply \u0027aligned_alloc\u0027?\nreturn std::aligned_alloc(alignment, size);\n^~\naligned_alloc\n/opt/s/w/ir/cache/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk/usr/include/malloc/_malloc.h:50:10: note: \u0027aligned_alloc\u0027 declared here\nvoid *aligned_alloc(size_t __alignment, size_t __size) __result_use_check __alloc_size(2) __OSX_AVAILABLE(10.15) __IOS_AVAILABLE(13.0) __TVOS_AVAILABLE(13.0) __WATCHOS_AVAILABLE(6.0);\n^\n1 error generated.\n```",
+      "revId": "b5da50b9b0c683c594603854fe4cc268da0e786b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
