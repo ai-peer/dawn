@@ -676,8 +676,8 @@ void TextureView::CopyIfNeeded() {
     if (mHandle == 0) {
         gl.GenTextures(1, &mHandle);
         gl.BindTexture(mTarget, mHandle);
-        AllocateTexture(gl, mTarget, texture->GetSampleCount(), numLevels, GetInternalFormat(),
-                        size);
+        AllocateTexture(gl, mTarget, texture->GetSampleCount(), srcLevel + numLevels,
+                        GetInternalFormat(), size);
         mOwnsHandle = true;
     }
 

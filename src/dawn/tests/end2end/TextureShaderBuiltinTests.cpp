@@ -271,8 +271,6 @@ TEST_P(TextureShaderBuiltinTests, BaseMipLevelTextureView) {
 
 // Testing that baseMipLevel is handled correctly for texture_cube.
 TEST_P(TextureShaderBuiltinTests, BaseMipLevelTextureViewCube) {
-    // TODO(dawn:2442): fix texture_cube base mip level bug.
-    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
     constexpr uint32_t kCubeLayers = 6;
     constexpr uint32_t kMipLevels = 3;
     wgpu::Texture texCube =
@@ -288,11 +286,9 @@ TEST_P(TextureShaderBuiltinTests, BaseMipLevelTextureViewCube) {
     const uint32_t textureWidthLevel0 = 1 << kMipLevels;
     const uint32_t textureWidthLevel1 = textureWidthLevel0 >> 1;
     const uint32_t textureWidthLevel2 = textureWidthLevel1 >> 1;
-    const uint32_t expected[] = {
-        textureWidthLevel1,
-        textureWidthLevel1,
-        textureWidthLevel2,
-    };
+    const uint32_t expected[] = {textureWidthLevel1, textureWidthLevel1, textureWidthLevel2,
+
+                                 2};
 
     wgpu::BufferDescriptor bufferDesc;
     bufferDesc.size = sizeof(expected);
@@ -309,6 +305,8 @@ TEST_P(TextureShaderBuiltinTests, BaseMipLevelTextureViewCube) {
         dstBuf[0] = textureDimensions(tex_cube).x;
         dstBuf[1] = textureDimensions(tex_cube, 0).x;
         dstBuf[2] = textureDimensions(tex_cube, 1).x;
+
+        dstBuf[3] = textureNumLevels(tex_cube);
     }
     )";
     // clang-format on
