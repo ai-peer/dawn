@@ -16,6 +16,40 @@
       "message": "PTAL! This is for gardening.",
       "revId": "d5c75d838cf2452c39c93d9db0dba1df05fbb38c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "937d56aa_5b59f7b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000493
+      },
+      "writtenOn": "2024-04-19T07:31:11Z",
+      "side": 1,
+      "message": "LGTM with nit",
+      "revId": "d5c75d838cf2452c39c93d9db0dba1df05fbb38c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d59f309_73c9a716",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1000493
+      },
+      "writtenOn": "2024-04-19T07:31:11Z",
+      "side": 1,
+      "message": "```suggestion\n            // This family is no longer supported in the macOS 10.15 SDK but still exists so\n```",
+      "revId": "d5c75d838cf2452c39c93d9db0dba1df05fbb38c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
