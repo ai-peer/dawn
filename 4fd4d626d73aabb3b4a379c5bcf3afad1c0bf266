@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca2c0ab7_60c4f394",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-19T07:37:10Z",
+      "side": 1,
+      "message": "Either way would work, though I guess right now the code checks layout.type instead of sampler.type so it\u0027s not achieving the validation we want. I wonder if we could change the validation to be something like:\n\n```\nDAWN_TRY(ValidateSampleBindingTypeCompatibility(layout.type, sampler-\u003eGetBindingType()))\n\nMaybeError ValidateSampleBindingTypeCompatibility(layoutType, samplerType) {\n  if (layoutType \u003d\u003d samplerType) {\n    return {};\n  }\n\n  if (layoutType \u003d\u003d Filtering \u0026\u0026 samplerType \u003d\u003d NonFiltering) {\n    return {};\n  }\n\n  return DAWN_VALIDATION_ERROR(\"The sampler\u0027s binding type (%s) is not compatiblity with the layout entry\u0027s binding type (%s).\", samplerType, layoutType);\n}\n```\n\nWDYT?",
+      "parentUuid": "dd12c066_bb240a91",
+      "revId": "4fd4d626d73aabb3b4a379c5bcf3afad1c0bf266",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52fee5b6_91ff9086",
         "filename": "src/dawn/native/BindGroup.cpp",
         "patchSetId": 4
