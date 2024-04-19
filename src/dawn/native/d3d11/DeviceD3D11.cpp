@@ -451,8 +451,9 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
 
     UnpackedPtr<TextureDescriptor> textureDescriptor;
     DAWN_TRY_ASSIGN(textureDescriptor, ValidateAndUnpack(FromAPI(descriptor->cTextureDescriptor)));
-    DAWN_TRY(
-        ValidateTextureDescriptor(this, textureDescriptor, AllowMultiPlanarTextureFormat::Yes));
+    DAWN_TRY(ValidateTextureDescriptor(this, textureDescriptor, AllowMultiPlanarTextureFormat::Yes,
+                                       /*allowedSharedTextureMemoryUsage=*/std::nullopt,
+                                       /*allowMultipleLayer=*/true));
 
     DAWN_TRY_CONTEXT(d3d::ValidateTextureDescriptorCanBeWrapped(textureDescriptor),
                      "validating that a D3D11 external image can be wrapped with %s",
