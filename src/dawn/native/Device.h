@@ -565,6 +565,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     struct Caches;
     std::unique_ptr<Caches> mCaches;
 
+    std::atomic<uint32_t> mUniqueRenderPipelineCounter = 0;
+
     Ref<BindGroupLayoutBase> mEmptyBindGroupLayout;
     Ref<PipelineLayoutBase> mEmptyPipelineLayout;
 
