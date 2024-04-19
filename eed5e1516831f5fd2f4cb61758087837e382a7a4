@@ -87,6 +87,24 @@
       "parentUuid": "a7bb9a5f_87070298",
       "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e6300f6_bf494aa0",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1089,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-19T16:01:00Z",
+      "side": 1,
+      "message": "Thanks for clarifying! I updated to have a counter and increment it in both sync and async creation places. Also updated to have the UMA emitted at destruction time only if there was even a single pipeline created (some histogram tests were failing here maybe because of Device destruction they had expectation mismatches.)\n\nI think we should still count if pipeline creation fails especially if there was a lot of work done before failing? If not, I could update for sync to check based on IsSuccess but not sure about async.",
+      "parentUuid": "808aaaf6_0105dbf3",
+      "revId": "eed5e1516831f5fd2f4cb61758087837e382a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
