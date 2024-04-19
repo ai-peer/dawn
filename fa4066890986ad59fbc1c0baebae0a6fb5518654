@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94d8051f_9f4b9c83",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-19T08:11:01Z",
+      "side": 1,
+      "message": "TBH I would have done it the other way where the D3D12/D3D11 backends call d3d::Queue::RecycleSystemEvents. There is nothing in this function that handles checking and updating completed serials (except that we proxy the call to the backend.)",
+      "revId": "fa4066890986ad59fbc1c0baebae0a6fb5518654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
