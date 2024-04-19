@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9bb463_8eb4cc6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-19T17:34:56Z",
+      "side": 1,
+      "message": "lgtm % comments",
+      "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f709f4ed_f460b318",
@@ -54,6 +71,30 @@
       "writtenOn": "2024-04-19T16:28:03Z",
       "side": 1,
       "message": "this can be relaxed\n```suggestion\n    mUniqueRenderPipelineCounter.fetch_add(1, std::memory_order_relaxed);\n```",
+      "range": {
+        "startLine": 1473,
+        "startChar": 46,
+        "endLine": 1473,
+        "endChar": 71
+      },
+      "revId": "6068b853e1d15bb74ead35716519081b20bfe7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b714cf_f2f3ccba",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-04-19T17:34:56Z",
+      "side": 1,
+      "message": "Although it it\u0027s relaxed, the value obtained in Destroy() might not be correct, right? std::memory_order_release is more appropriate, no?",
+      "parentUuid": "90b3e881_3702349f",
       "range": {
         "startLine": 1473,
         "startChar": 46,
