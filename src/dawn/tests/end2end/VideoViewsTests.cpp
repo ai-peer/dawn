@@ -2153,6 +2153,19 @@ TEST_P(VideoViewsExtendedUsagesTests, CreateTextureSucceeds) {
     EXPECT_NE(texture, nullptr);
 }
 
+TEST_P(VideoViewsExtendedUsagesTests, CreateTextureWithLayer) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = 4;
+    descriptor.size.height = 4;
+    descriptor.mipLevelCount = 1;
+    descriptor.format = GetFormat();
+    descriptor.size.depthOrArrayLayers = 2;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding;
+    auto texture = device.CreateTexture(&descriptor);
+    EXPECT_NE(texture, nullptr);
+}
+
 // Test that creating multi-planar texture should fail if the specified descriptor is mipmapped.
 TEST_P(VideoViewsExtendedUsagesTests, CreateTextureFailsIfMipmapped) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
@@ -2179,12 +2192,6 @@ TEST_P(VideoViewsExtendedUsagesTests, CreateTextureFailsIfNot2D) {
     descriptor.size.height = 4;
     descriptor.format = GetFormat();
     descriptor.usage = wgpu::TextureUsage::TextureBinding;
-    ASSERT_DEVICE_ERROR_MSG(device.CreateTexture(&descriptor),
-                            testing::HasSubstr("must be non-mipmapped & 2D"));
-
-    // Texture must not be array.
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.depthOrArrayLayers = 2;
     ASSERT_DEVICE_ERROR_MSG(device.CreateTexture(&descriptor),
                             testing::HasSubstr("must be non-mipmapped & 2D"));
 }
