@@ -738,7 +738,7 @@ MaybeError CommandBuffer::Execute() {
                                           copySize.height, glFormat, glType, offset);
                             break;
                         }
-                        // Implementation for 2D array is the same as 3D.
+                        // Implementation for 2D array and cube map is the same as 3D.
                         [[fallthrough]];
                     }
 
@@ -1502,7 +1502,21 @@ void DoTexSubImage(const OpenGLFunctions& gl,
             if (texture->GetArrayLayers() == 1 && Is1DOr2D(texture->GetDimension())) {
                 gl.TexSubImage2D(target, destination.mipLevel, x, y, width, height, adjustedFormat,
                                  format.type, data);
+            } else if (target == GL_TEXTURE_CUBE_MAP) {
+                uint32_t layers = texture->GetArrayLayers();
+                DAWN_ASSERT(layers == 6);
+                // Iterate over all layers, doing a single blit for each.
+                const uint8_t* pointer = static_cast<const uint8_t*>(data);
+                for (uint32_t layer = 0; layer < layers; ++layer) {
+                    uint32_t offset = layer * dataLayout.rowsPerImage * dataLayout.bytesPerRow;
+                    GLenum cubeMapTarget = GL_TEXTURE_CUBE_MAP_POSITIVE_X + layer;
+                    gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, height,
+                                     adjustedFormat, format.type, pointer + offset);
+                }
             } else {
+                // GL_TEXTURE_3D, GL_TEXTURE_2D_ARRAY, or GL_TEXTURE_CUBE_MAP_ARRAY
+                DAWN_ASSERT(target == GL_TEXTURE_3D || target == GL_TEXTURE_2D_ARRAY ||
+                            target == GL_TEXTURE_CUBE_MAP_ARRAY);
                 gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, dataLayout.rowsPerImage * blockInfo.height);
                 gl.TexSubImage3D(target, destination.mipLevel, x, y, z, width, height,
                                  copySize.depthOrArrayLayers, adjustedFormat, format.type, data);
