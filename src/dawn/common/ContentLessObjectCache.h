@@ -253,6 +253,12 @@ class ContentLessObjectCache {
         return mCache.empty();
     }
 
+    // Returns number of elements in the cache.
+    size_t Size() {
+        std::lock_guard<std::mutex> lock(mMutex);
+        return mCache.size();
+    }
+
   private:
     friend struct CacheKeyFuncs::EqualityFunc;
 
