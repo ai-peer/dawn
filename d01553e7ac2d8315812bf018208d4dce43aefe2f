@@ -70,6 +70,24 @@
       "parentUuid": "358cffde_6fc0b367",
       "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6ed0b1_8d8b5308",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-20T01:40:18Z",
+      "side": 1,
+      "message": "ok I\u0027ve changed this to define the structs and objects inside a new namespace, and then aliased them into the wgpu namespace.\n\nit works for Blink at this time, but it doesn\u0027t allow for a lot of code sharing. tbh that\u0027s probably OK for now, and we might not be able to share much at the end of the day. I couldn\u0027t get the linker to do what I wanted with other approaches (which was sort of expected), and the build targets in Chrome were not easily separable.\n\nhere\u0027s the WIP chromium CL which just needs some fixes for fuchsia now.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5460722?tab\u003dchecks",
+      "parentUuid": "09a6f11f_fe534375",
+      "revId": "d01553e7ac2d8315812bf018208d4dce43aefe2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
