@@ -133,8 +133,6 @@ MaybeError SharedResourceMemory::BeginAccess(Resource* resource,
         if (static_cast<TextureBase*>(resource)->IsReadOnly()) {
             if (descriptor->concurrentRead) {
                 DAWN_ASSERT(!mExclusiveAccess);
-                DAWN_INVALID_IF(!descriptor->initialized, "Concurrent reading an uninitialized %s.",
-                                resource);
                 ++mReadAccessCount;
                 mSharedResourceAccessState = SharedResourceAccessState::SimultaneousRead;
 
