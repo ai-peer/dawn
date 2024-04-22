@@ -377,6 +377,7 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
 
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
+
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
     // - It may be called if the device is explicitly destroyed with APIDestroy.
     //   This case is NOT thread-safe and needs proper synchronization with other
