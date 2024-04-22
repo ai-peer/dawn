@@ -46,6 +46,30 @@
       },
       "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebb4aeaa_79df5d3e",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-22T13:51:31Z",
+      "side": 0,
+      "message": "Currently in Dawn, why is exclusive reading an uninitialized texture okay? However it\u0027s not allowed for concurrent reading. I am not quite clear about this.\n\nFrom chromium\u0027s view, it\u0027s hard to hint a read access as exclusive or concurrent. Take a video frame SI for example, when Chromium begins to draw it on its HTMLVideoElement, the read access of the video frame SI is needed. However Chromium doesn\u0027t know if this read access should be concurrent or exclusive, as the video frame will be likely, or not imported into WebGPU for read concurrently. As a result, I am preferring concurrent read regardless in my Chromium CL [here](https://chromium-review.googlesource.com/c/chromium/src/+/5456006/7/gpu/command_buffer/service/shared_image/d3d_image_backing.cc#776). Let me know if my understanding is not right.\n\nBTW, what\u0027s the purpose of exclusive read. Generally, read should be by nature not exclusive.",
+      "parentUuid": "567c1947_12ab8046",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
