@@ -256,6 +256,7 @@ class TextureView final : public TextureViewBase {
 
     VkImageView mHandle = VK_NULL_HANDLE;
     VkImageView mHandleForBGRA8UnormStorage = VK_NULL_HANDLE;
+    VkSamplerYcbcrConversion mSamplerYCbCrConversion = VK_NULL_HANDLE;
     std::vector<VkImageView> mHandlesFor2DViewOn3D;
 };
 

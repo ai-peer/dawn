@@ -46,6 +46,11 @@
 #include "dawn/native/ValidationUtils_autogen.h"
 
 namespace dawn::native {
+
+namespace vulkan {
+struct YCbCrVulkanDescriptor;
+}
+
 namespace {
 
 MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
@@ -588,13 +593,12 @@ MaybeError ValidateTextureDescriptor(
 MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
                                          const TextureBase* texture,
                                          const TextureViewDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr.");
-
     // Parent texture should have been already validated.
     DAWN_ASSERT(texture);
     DAWN_ASSERT(!texture->IsError());
 
     DAWN_TRY(ValidateTextureViewDimension(descriptor->dimension));
+    // TODO(crbug.com/dawn/2476): Add necessary validation for validating external format.
     DAWN_TRY(ValidateTextureFormat(descriptor->format));
     DAWN_TRY(ValidateTextureAspect(descriptor->aspect));
 
@@ -602,6 +606,7 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     const Format* viewFormat;
     DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(descriptor->format));
 
+    // TODO(crbug.com/dawn/2476): What would be the aspect on external format?
     const auto aspect = SelectFormatAspects(format, descriptor->aspect);
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "Texture format (%s) does not have the texture view's selected aspect (%s).",
@@ -625,8 +630,16 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
         "texture's mip level count (%u).",
         descriptor->baseMipLevel, descriptor->mipLevelCount, texture->GetNumMipLevels());
 
+    // TODO(crbug.com/dawn/2476): Add necessary validations to CanViewTextureAs for external format.
     DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
     DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
+
+    if (Unpack(descriptor).Get<vulkan::YCbCrVulkanDescriptor>()) {
+        DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
+                        wgpu::FeatureName::YCbCrVulkanSamplers);
+        // TODO(crbug.com/dawn/2476): Validate ycbcr info here matches with that in sampler
+        // descriptor?
+    }
 
     return {};
 }
@@ -666,6 +679,8 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
         }
     }
 
+    // TODO(crbug.com/dawn/2476): Add external format validation. Do we need to validate aspects and
+    // SelectFormatAspects too?
     if (desc.format == wgpu::TextureFormat::Undefined) {
         const Format& format = texture->GetFormat();
 
@@ -702,6 +717,7 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
         }
     }
 
+    // TODO(crbug.com/dawn/2476): Does mipLevelCount also change with external formats?
     if (desc.mipLevelCount == wgpu::kMipLevelCountUndefined) {
         desc.mipLevelCount = texture->GetNumMipLevels() - desc.baseMipLevel;
     }

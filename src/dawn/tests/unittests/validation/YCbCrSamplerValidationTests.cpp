@@ -29,9 +29,46 @@
 
 #include "dawn/native/VulkanBackend.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
+#include "dawn/utils/WGPUHelpers.h"
 
 namespace dawn {
 namespace {
+
+constexpr uint32_t kWidth = 32u;
+constexpr uint32_t kHeight = 32u;
+constexpr uint32_t kDefaultMipLevels = 6u;
+constexpr wgpu::TextureFormat kDefaultTextureFormat = wgpu::TextureFormat::RGBA8Unorm;
+
+wgpu::Texture Create2DArrayTexture(wgpu::Device& device,
+                                   uint32_t arrayLayerCount,
+                                   uint32_t width = kWidth,
+                                   uint32_t height = kHeight,
+                                   uint32_t mipLevelCount = kDefaultMipLevels,
+                                   uint32_t sampleCount = 1) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = width;
+    descriptor.size.height = height;
+    descriptor.size.depthOrArrayLayers = arrayLayerCount;
+    descriptor.sampleCount = sampleCount;
+    descriptor.format = kDefaultTextureFormat;
+    descriptor.mipLevelCount = mipLevelCount;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
+    return device.CreateTexture(&descriptor);
+}
+
+wgpu::TextureViewDescriptor CreateDefaultViewDescriptor(wgpu::TextureViewDimension dimension) {
+    wgpu::TextureViewDescriptor descriptor;
+    descriptor.format = kDefaultTextureFormat;
+    descriptor.dimension = dimension;
+    descriptor.baseMipLevel = 0;
+    if (dimension != wgpu::TextureViewDimension::e1D) {
+        descriptor.mipLevelCount = kDefaultMipLevels;
+    }
+    descriptor.baseArrayLayer = 0;
+    descriptor.arrayLayerCount = 1;
+    return descriptor;
+}
 
 class YCbCrSamplerValidationTest : public ValidationTest {
     void SetUp() override {
@@ -48,6 +85,24 @@ TEST_F(YCbCrSamplerValidationTest, YCbCrSamplerNotSupportedWithoutFeatureEnabled
     samplerDesc.nextInChain = &samplerYCbCrDesc;
 
     ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
+}
+
+// Test creating texture view on a 2D non-array texture
+TEST_F(YCbCrSamplerValidationTest, YCbCrTextureViewNotSupportedWithoutFeatureEnabled) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor base2DTextureViewDescriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+
+    // It is OK to create a 2D texture view on a 2D texture.
+    {
+        wgpu::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
+        descriptor.arrayLayerCount = 1;
+        native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
+        descriptor.nextInChain = &samplerYCbCrDesc;
+
+        ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+    }
 }
 
 class YCbCrSamplerWithFeatureValidationTest : public YCbCrSamplerValidationTest {
@@ -69,6 +124,26 @@ TEST_F(YCbCrSamplerWithFeatureValidationTest, YCbCrSamplerSupportedWhenFeatureEn
     samplerDesc.nextInChain = &samplerYCbCrDesc;
 
     device.CreateSampler(&samplerDesc);
+}
+
+// Test creating texture view on a 2D non-array texture
+TEST_F(YCbCrSamplerWithFeatureValidationTest, YCbCrTextureViewSupportedWhenFeatureEnabled) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor base2DTextureViewDescriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+
+    // It is OK to create a 2D texture view on a 2D texture.
+    {
+        wgpu::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
+        descriptor.arrayLayerCount = 1;
+        native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
+        samplerYCbCrDesc.vulkanYCbCrInfo.sType =
+            VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+        descriptor.nextInChain = &samplerYCbCrDesc;
+
+        texture.CreateView(&descriptor);
+    }
 }
 
 }  // anonymous namespace
