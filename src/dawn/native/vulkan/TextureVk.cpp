@@ -1759,6 +1759,42 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     usageInfo.usage = VulkanImageUsage(usage, GetFormat());
     createInfo.pNext = &usageInfo;
 
+    VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+    if (auto* vulkanYCbCrDescriptor = Unpack(descriptor).Get<vulkan::YCbCrVulkanDescriptor>()) {
+        const VkSamplerYcbcrConversionCreateInfo& vulkanYCbCrInfo =
+            vulkanYCbCrDescriptor->vulkanYCbCrInfo;
+#if DAWN_PLATFORM_IS(ANDROID)
+        const VkBaseInStructure* chain =
+            static_cast<const VkBaseInStructure*>(vulkanYCbCrInfo.pNext);
+        while (chain != nullptr) {
+            if (chain->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
+                const VkExternalFormatANDROID* vkExternalFormat =
+                    reinterpret_cast<const VkExternalFormatANDROID*>(chain);
+                DAWN_INVALID_IF((vkExternalFormat->externalFormat == 0 &&
+                                 vulkanYCbCrInfo.format == VK_FORMAT_UNDEFINED),
+                                "Both VkFormat and VkExternalFormatANDROID are undefined.");
+                break;
+            }
+            chain = chain->pNext;
+        }
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+        // TODO(crbug.com/dawn/2476): Validate sampler is also ycbcr!
+        // TODO(crbug.com/dawn/2476): Validate ycbcr info here matches with that in sampler
+        // descriptor!
+
+        DAWN_TRY(CheckVkSuccess(
+            device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &vulkanYCbCrInfo,
+                                                    nullptr, &*mSamplerYCbCrConversion),
+            "CreateSamplerYcbcrConversion for vkImageView"));
+
+        samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
+        samplerYCbCrInfo.pNext = nullptr;
+        samplerYCbCrInfo.conversion = mSamplerYCbCrConversion;
+
+        createInfo.pNext = &samplerYCbCrInfo;
+    }
+
     DAWN_TRY(CheckVkSuccess(
         device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateImageView"));
