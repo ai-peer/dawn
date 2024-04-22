@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a0e1b5_9a284f67",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-22T21:04:30Z",
+      "side": 1,
+      "message": "This transform assumes no multi-result instructions, so we probably need to check for that.",
+      "revId": "94b6db039d699f86360bc4157557ded3f209d7ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
