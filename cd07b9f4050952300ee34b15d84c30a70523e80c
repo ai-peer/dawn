@@ -22,6 +22,30 @@
       },
       "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567c1947_12ab8046",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-22T13:01:38Z",
+      "side": 0,
+      "message": "Dawn does lazy clearing for uninitialized textures, so what looks like a concurrent read here could in fact be doing a write. I don\u0027t know what the logic in Chromium, but is should definitely not attempt to do concurrent reads with an uninitialized SI. The fix should be in Chromium.",
+      "parentUuid": "cd008eb8_d61287b7",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
