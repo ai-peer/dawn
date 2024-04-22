@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54f48c46_17b2ee67",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T15:47:36Z",
+      "side": 0,
+      "message": "I wonder if instead we could keep this code mostly the same, so we can do DAWN_INVALID_IF, but provide a wrapper around integer values that may be undefined.\n\n\n```\n    DAWN_INVALID_IF(\n        copyExtent.depthOrArrayLayers \u003e 1 \u0026\u0026 (layout.bytesPerRow \u003d\u003d wgpu::kCopyStrideUndefined ||\n                                              layout.rowsPerImage \u003d\u003d wgpu::kCopyStrideUndefined),\n        \"Copy depth (%u) is \u003e 1, but bytesPerRow (%u) or rowsPerImage (%u) are not specified.\",\n        copyExtent.depthOrArrayLayers,\n        WrapUndefined(layout.bytesPerRow, wgpu::kCopyStrideUndefined),\n        WrapUndefined(layout.rowsPerImage, wgpu::kCopyStrideUndefined));\n```\n\nwhere `WrapUndefined` is something like:\n```\n\ntemplate \u003ctypename T\u003e\nstruct UndefinedWrapper {\n    std::optional\u003cT\u003e value;\n}\n\ntemplate \u003ctypename T\u003e\nauto WrapUndefined(T value, T undefinedValue) {\n  return value \u003d\u003d undefinedValue ? {} : UndefinedWrapper { value };\n}\n\n```\n\n\nand in webgpu_absl_convert.h we define:\n\n```\ntemplate \u003ctypename T\u003e\nabsl::FormatConvertResult\u003cabsl::FormatConversionCharSet::kNumeric\u003e AbslFormatConvert(\n    const dawn::UndefinedWrapper\u003cT\u003e\u0026 value,\n    const absl::FormatConversionSpec\u0026 spec,\n    absl::FormatSink* s) {\n    if (!value.value) {\n        s-\u003eAppend(\"undefined\");\n    } else {\n        s-\u003eAppend(absl::StrFormat(\"%u\", static_cast\u003cT\u003e(*value.value)));\n    }\n    return {true};\n}\n```",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 80
+      },
+      "revId": "b476146a257fbb8ee3b3a4982e16404fc335aa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
