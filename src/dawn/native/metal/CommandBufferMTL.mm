@@ -198,6 +198,11 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
                 descriptor.colorAttachments[i].loadAction = MTLLoadActionLoad;
                 break;
 
+            case wgpu::LoadOp::ExpandResolveTexture:
+                // The loading is done on upper layer. See BlitColorToColorWithDraw.cpp
+                descriptor.colorAttachments[i].loadAction = MTLLoadActionDontCare;
+                break;
+
             case wgpu::LoadOp::Undefined:
                 DAWN_UNREACHABLE();
                 break;
@@ -279,6 +284,7 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
                     descriptor.depthAttachment.loadAction = MTLLoadActionLoad;
                     break;
 
+                case wgpu::LoadOp::ExpandResolveTexture:
                 case wgpu::LoadOp::Undefined:
                     DAWN_UNREACHABLE();
                     break;
@@ -314,6 +320,7 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
                     descriptor.stencilAttachment.loadAction = MTLLoadActionLoad;
                     break;
 
+                case wgpu::LoadOp::ExpandResolveTexture:
                 case wgpu::LoadOp::Undefined:
                     DAWN_UNREACHABLE();
                     break;
@@ -380,6 +387,11 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
 
                 case wgpu::LoadOp::Load:
                     mtlAttachment.loadAction = MTLLoadActionLoad;
+                    break;
+
+                case wgpu::LoadOp::ExpandResolveTexture:
+                    // The loading is done on upper layer. See BlitColorToColorWithDraw.cpp
+                    mtlAttachment.loadAction = MTLLoadActionDontCare;
                     break;
 
                 case wgpu::LoadOp::Undefined:
