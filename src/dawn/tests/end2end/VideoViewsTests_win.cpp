@@ -122,6 +122,7 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
 
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> CreateVideoTextureForTest(
         wgpu::TextureFormat format,
+        uint32_t layerCount,
         wgpu::TextureUsage usage,
         bool isCheckerboard,
         bool initialized) override {
@@ -130,14 +131,14 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
         textureDesc.dimension = wgpu::TextureDimension::e2D;
         textureDesc.usage = usage;
         textureDesc.size = {VideoViewsTestsBase::kYUVAImageDataWidthInTexels,
-                            VideoViewsTestsBase::kYUVAImageDataHeightInTexels, 1};
+                            VideoViewsTestsBase::kYUVAImageDataHeightInTexels, layerCount};
 
         // Create a DX11 texture with data then wrap it in a shared handle.
         D3D11_TEXTURE2D_DESC d3dDescriptor;
         d3dDescriptor.Width = VideoViewsTestsBase::kYUVAImageDataWidthInTexels;
         d3dDescriptor.Height = VideoViewsTestsBase::kYUVAImageDataHeightInTexels;
         d3dDescriptor.MipLevels = 1;
-        d3dDescriptor.ArraySize = 1;
+        d3dDescriptor.ArraySize = layerCount;
         d3dDescriptor.Format = GetDXGITextureFormat(format);
         d3dDescriptor.SampleDesc.Count = 1;
         d3dDescriptor.SampleDesc.Quality = 0;
@@ -146,26 +147,35 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
         d3dDescriptor.CPUAccessFlags = 0;
         d3dDescriptor.MiscFlags = D3D11_RESOURCE_MISC_SHARED_NTHANDLE | D3D11_RESOURCE_MISC_SHARED;
 
-        D3D11_SUBRESOURCE_DATA subres;
-        subres.SysMemPitch = VideoViewsTestsBase::kYUVAImageDataWidthInTexels;
-
-        std::variant<std::vector<uint8_t>, std::vector<uint16_t>> initialData;
-        if (format == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
-            initialData = VideoViewsTestsBase::GetTestTextureData<uint16_t>(
-                /*isMultiPlane*/ true, isCheckerboard, /*hasAlpha*/ false);
-            subres.pSysMem = std::get<1>(initialData).data();
-            subres.SysMemPitch *= 2;
-        } else {
-            initialData = VideoViewsTestsBase::GetTestTextureData<uint8_t>(
-                /*isMultiPlane*/ true, isCheckerboard,
-                /*hasAlpha*/ false);
-            subres.pSysMem = std::get<0>(initialData).data();
-        }
-
         ComPtr<ID3D11Texture2D> d3d11Texture;
-        HRESULT hr = mD3d11Device->CreateTexture2D(
-            &d3dDescriptor, (initialized ? &subres : nullptr), &d3d11Texture);
+        HRESULT hr = mD3d11Device->CreateTexture2D(&d3dDescriptor, nullptr, &d3d11Texture);
         DAWN_ASSERT(hr == S_OK);
+
+        ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+        mD3d11Device->GetImmediateContext(&d3d11DeviceContext);
+
+        if (initialized) {
+            D3D11_SUBRESOURCE_DATA subres = {};
+            std::vector<uint8_t> initialData8;
+            std::vector<uint16_t> initialData16;
+            if (format == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
+                initialData16 = VideoViewsTestsBase::GetTestTextureData<uint16_t>(
+                    /*isMultiPlane*/ true, isCheckerboard, /*hasAlpha*/ false);
+                subres.pSysMem = initialData16.data();
+                subres.SysMemPitch = VideoViewsTestsBase::kYUVAImageDataWidthInTexels * 2;
+            } else {
+                initialData8 = VideoViewsTestsBase::GetTestTextureData<uint8_t>(
+                    /*isMultiPlane*/ true, isCheckerboard,
+                    /*hasAlpha*/ false);
+                subres.pSysMem = initialData8.data();
+                subres.SysMemPitch = VideoViewsTestsBase::kYUVAImageDataWidthInTexels;
+            }
+
+            for (uint32_t layer = 0; layer < layerCount; ++layer) {
+                d3d11DeviceContext->UpdateSubresource(d3d11Texture.Get(), layer, nullptr,
+                                                      subres.pSysMem, subres.SysMemPitch, 0);
+            }
+        }
 
         ComPtr<IDXGIResource1> dxgiResource;
         hr = d3d11Texture.As(&dxgiResource);
@@ -190,14 +200,12 @@ class VideoViewsTestBackendWin : public VideoViewsTestBackend {
         hr = d3d11Fence->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, &fenceSharedHandle);
         DAWN_ASSERT(hr == S_OK);
 
-        ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
-        mD3d11Device->GetImmediateContext(&d3d11DeviceContext);
-
         ComPtr<ID3D11DeviceContext4> d3d11DeviceContext4;
         hr = d3d11DeviceContext.As(&d3d11DeviceContext4);
         DAWN_ASSERT(hr == S_OK);
+
         // D3D11 texture should be initialized upon CreateTexture2D, but we need to make Dawn/D3D12
-        // wait on the initializtaion. The fence starts with 0 signaled, but that won't capture the
+        // wait on the initialization. The fence starts with 0 signaled, but that won't capture the
         // initialization above, so signal explicitly with 1 and make Dawn wait on it.
         hr = d3d11DeviceContext4->Signal(d3d11Fence.Get(), 1);
         DAWN_ASSERT(hr == S_OK);
@@ -256,6 +264,11 @@ std::vector<BackendTestConfig> VideoViewsTestBackend::Backends() {
 std::vector<Format> VideoViewsTestBackend::Formats() {
     return {wgpu::TextureFormat::R8BG8Biplanar420Unorm,
             wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm};
+}
+
+// static
+std::vector<LayerCount> VideoViewsTestBackend::LayerCounts() {
+    return {1, 2};
 }
 
 // static

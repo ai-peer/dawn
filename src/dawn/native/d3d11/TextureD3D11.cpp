@@ -158,19 +158,17 @@ MaybeError ValidateTextureCanBeWrapped(ID3D11Resource* d3d11Resource,
     DAWN_INVALID_IF(
         (dawnDescriptor->size.width != d3dDescriptor.Width) ||
             (dawnDescriptor->size.height != d3dDescriptor.Height) ||
-            (dawnDescriptor->size.depthOrArrayLayers != 1),
-        "D3D11 texture size (Width: %u, Height: %u, DepthOrArraySize: 1) doesn't match Dawn "
+            (dawnDescriptor->size.depthOrArrayLayers != d3dDescriptor.ArraySize),
+        "D3D11 texture size (Width: %u, Height: %u, DepthOrArraySize: %u) doesn't match Dawn "
         "descriptor size (width: %u, height: %u, depthOrArrayLayers: %u).",
-        d3dDescriptor.Width, d3dDescriptor.Height, dawnDescriptor->size.width,
-        dawnDescriptor->size.height, dawnDescriptor->size.depthOrArrayLayers);
+        d3dDescriptor.Width, d3dDescriptor.Height, d3dDescriptor.ArraySize,
+        dawnDescriptor->size.width, dawnDescriptor->size.height,
+        dawnDescriptor->size.depthOrArrayLayers);
 
     const DXGI_FORMAT dxgiFormatFromDescriptor = d3d::DXGITextureFormat(dawnDescriptor->format);
     DAWN_INVALID_IF(dxgiFormatFromDescriptor != d3dDescriptor.Format,
                     "D3D11 texture format (%x) is not compatible with Dawn descriptor format (%s).",
                     d3dDescriptor.Format, dawnDescriptor->format);
-
-    DAWN_INVALID_IF(d3dDescriptor.ArraySize != 1, "D3D12 texture array size (%u) is not 1.",
-                    d3dDescriptor.ArraySize);
 
     DAWN_INVALID_IF(d3dDescriptor.MipLevels != 1,
                     "D3D11 texture number of miplevels (%u) is not 1.", d3dDescriptor.MipLevels);
