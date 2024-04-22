@@ -175,6 +175,24 @@
       "parentUuid": "03806306_4d73aef4",
       "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8e603a2_e3498070",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-22T18:44:47Z",
+      "side": 1,
+      "message": "What is the expected behavior for tint here?\nFor glsl I think you don\u0027t need the mip level when the textureSize takes a multisampled texture as input: https://registry.khronos.org/OpenGL-Refpages/es3.1/html/textureSize.xhtml?",
+      "parentUuid": "9ec01306_28a9e7bb",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
