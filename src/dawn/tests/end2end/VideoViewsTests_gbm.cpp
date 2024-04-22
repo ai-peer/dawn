@@ -151,6 +151,7 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
 
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> CreateVideoTextureForTest(
         wgpu::TextureFormat format,
+        uint32_t layerCount,
         wgpu::TextureUsage usage,
         bool isCheckerboard,
         bool initialized) override {
@@ -256,6 +257,11 @@ std::vector<BackendTestConfig> VideoViewsTestBackend::Backends() {
 std::vector<Format> VideoViewsTestBackend::Formats() {
     // TODO(dawn:551): Support sharing P010 video surfaces.
     return {wgpu::TextureFormat::R8BG8Biplanar420Unorm};
+}
+
+// static
+std::vector<LayerCount> VideoViewsTestBackend::LayerCounts() {
+    return {1};
 }
 
 // static
