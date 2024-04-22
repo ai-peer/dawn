@@ -1939,7 +1939,7 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
 void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* descriptorOrig) {
     AllowMultiPlanarTextureFormat allowMultiPlanar;
     if (HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
-        allowMultiPlanar = AllowMultiPlanarTextureFormat::Yes;
+        allowMultiPlanar = AllowMultiPlanarTextureFormat::SingleLayerOnly;
     } else {
         allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
     }
@@ -2276,7 +2276,7 @@ ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescripto
     if (IsValidationEnabled()) {
         AllowMultiPlanarTextureFormat allowMultiPlanar;
         if (HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
-            allowMultiPlanar = AllowMultiPlanarTextureFormat::Yes;
+            allowMultiPlanar = AllowMultiPlanarTextureFormat::SingleLayerOnly;
         } else {
             allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
         }

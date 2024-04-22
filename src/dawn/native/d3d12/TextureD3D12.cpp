@@ -141,11 +141,12 @@ MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
     DAWN_INVALID_IF(
         (dawnDescriptor->size.width != d3dDescriptor.Width) ||
             (dawnDescriptor->size.height != d3dDescriptor.Height) ||
-            (dawnDescriptor->size.depthOrArrayLayers != 1),
-        "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: 1) doesn't match Dawn "
+            (dawnDescriptor->size.depthOrArrayLayers != d3dDescriptor.DepthOrArraySize),
+        "D3D12 texture size (Width: %u, Height: %u, DepthOrArraySize: %u) doesn't match Dawn "
         "descriptor size (width: %u, height: %u, depthOrArrayLayers: %u).",
-        d3dDescriptor.Width, d3dDescriptor.Height, dawnDescriptor->size.width,
-        dawnDescriptor->size.height, dawnDescriptor->size.depthOrArrayLayers);
+        d3dDescriptor.Width, d3dDescriptor.Height, d3dDescriptor.DepthOrArraySize,
+        dawnDescriptor->size.width, dawnDescriptor->size.height,
+        dawnDescriptor->size.depthOrArrayLayers);
 
     const DXGI_FORMAT dxgiFormatFromDescriptor = d3d::DXGITextureFormat(dawnDescriptor->format);
     DAWN_INVALID_IF(dxgiFormatFromDescriptor != d3dDescriptor.Format,
@@ -154,9 +155,6 @@ MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
 
     DAWN_INVALID_IF(d3dDescriptor.MipLevels != 1,
                     "D3D12 texture number of miplevels (%u) is not 1.", d3dDescriptor.MipLevels);
-
-    DAWN_INVALID_IF(d3dDescriptor.DepthOrArraySize != 1, "D3D12 texture array size (%u) is not 1.",
-                    d3dDescriptor.DepthOrArraySize);
 
     // Shared textures cannot be multi-sample so no need to check those.
     DAWN_ASSERT(d3dDescriptor.SampleDesc.Count == 1);
