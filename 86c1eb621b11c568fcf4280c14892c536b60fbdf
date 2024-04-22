@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2c030a_69603e45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002442
+      },
+      "writtenOn": "2024-04-22T17:11:00Z",
+      "side": 1,
+      "message": "DO NOT SUBMIT: need to support/verify enforcing CQ in chumpdetector plugin without a tree status",
+      "revId": "86c1eb621b11c568fcf4280c14892c536b60fbdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
