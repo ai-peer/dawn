@@ -70,6 +70,30 @@
       },
       "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e7b4294_d519bee9",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-22T14:03:56Z",
+      "side": 0,
+      "message": "Dawn can lazy clear a texture which is being read accessed exclusively. However for a concurrent read access, the texture is read only. It could being accessed by multiple devices. Clearing it while it is being reading by other devices, could cause undefined behavior. So the texture must be initialized before accessing it.",
+      "parentUuid": "ebb4aeaa_79df5d3e",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
