@@ -201,6 +201,7 @@ tint_add_target(tint_lang_core_ir_transform_fuzz fuzz
   lang/core/ir/transform/std140_fuzz.cc
   lang/core/ir/transform/value_to_let_fuzz.cc
   lang/core/ir/transform/vectorize_scalar_matrix_constructors_fuzz.cc
+  lang/core/ir/transform/zero_init_workgroup_memory_fuzz.cc
 )
 
 tint_target_add_dependencies(tint_lang_core_ir_transform_fuzz fuzz
