@@ -339,6 +339,10 @@ wgpu::TextureFormat VideoViewsTestsBase::GetFormat() const {
     return GetParam().mFormat;
 }
 
+uint32_t VideoViewsTestsBase::GetLayerCount() const {
+    return GetParam().mLayerCount;
+}
+
 wgpu::TextureFormat VideoViewsTestsBase::GetPlaneFormat(int plane) const {
     switch (GetFormat()) {
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
@@ -398,6 +402,9 @@ class VideoViewsTests : public VideoViewsTestsBase {
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
         DAWN_TEST_UNSUPPORTED_IF(!IsFormatSupported());
+        DAWN_TEST_UNSUPPORTED_IF(GetLayerCount() != 1 && !IsD3D11());
+        // Creating multiple layer textures with initialization data fail with Microsoft WARP.
+        DAWN_TEST_UNSUPPORTED_IF(GetLayerCount() != 1 && IsWARP());
 
         mBackend = VideoViewsTestBackend::Create();
         mBackend->OnSetUp(device.Get());
@@ -418,7 +425,7 @@ namespace {
 // Create video texture uninitialized.
 TEST_P(VideoViewsTests, CreateVideoTextureWithoutInitializedData) {
     ASSERT_DEVICE_ERROR(std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-                            mBackend->CreateVideoTextureForTest(GetFormat(),
+                            mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
                                                                 wgpu::TextureUsage::TextureBinding,
                                                                 /*isCheckerboard*/ false,
                                                                 /*initialized*/ false));
@@ -429,7 +436,8 @@ TEST_P(VideoViewsTests, CreateVideoTextureWithoutInitializedData) {
 // an RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleYtoR) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -439,6 +447,9 @@ TEST_P(VideoViewsTests, SampleYtoR) {
     }
     wgpu::TextureViewDescriptor viewDesc;
     viewDesc.format = GetPlaneFormat(0);
+    viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
     viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView textureView = platformTexture->wgpuTexture.CreateView(&viewDesc);
 
@@ -488,7 +499,8 @@ TEST_P(VideoViewsTests, SampleYtoR) {
 // RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleUVtoRG) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -499,7 +511,11 @@ TEST_P(VideoViewsTests, SampleUVtoRG) {
 
     wgpu::TextureViewDescriptor viewDesc;
     viewDesc.format = GetPlaneFormat(1);
+    viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
     viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+
     wgpu::TextureView textureView = platformTexture->wgpuTexture.CreateView(&viewDesc);
 
     utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
@@ -548,7 +564,8 @@ TEST_P(VideoViewsTests, SampleUVtoRG) {
 // contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVtoRGB) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -563,11 +580,17 @@ TEST_P(VideoViewsTests, SampleYUVtoRGB) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
@@ -626,7 +649,8 @@ TEST_P(VideoViewsTests, SampleYUVtoRGB) {
 // contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVAtoRGBA) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -642,16 +666,25 @@ TEST_P(VideoViewsTests, SampleYUVAtoRGBA) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
     wgpu::TextureViewDescriptor alphaViewDesc;
     alphaViewDesc.format = GetPlaneFormat(2);
+    alphaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    alphaViewDesc.baseArrayLayer = 0;
+    alphaViewDesc.arrayLayerCount = 1;
     alphaViewDesc.aspect = wgpu::TextureAspect::Plane2Only;
     wgpu::TextureView alphaTextureView = platformTexture->wgpuTexture.CreateView(&alphaViewDesc);
 
@@ -715,7 +748,8 @@ TEST_P(VideoViewsTests, SampleYUVAtoRGBA) {
 // entire contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVtoRGBMultipleSamplers) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -730,11 +764,17 @@ TEST_P(VideoViewsTests, SampleYUVtoRGBMultipleSamplers) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
@@ -796,7 +836,8 @@ TEST_P(VideoViewsTests, SampleYUVtoRGBMultipleSamplers) {
 // entire contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVAtoRGBAMultipleSamplers) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -811,16 +852,25 @@ TEST_P(VideoViewsTests, SampleYUVAtoRGBAMultipleSamplers) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
     wgpu::TextureViewDescriptor alphaViewDesc;
     alphaViewDesc.format = GetPlaneFormat(2);
+    alphaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    alphaViewDesc.baseArrayLayer = 0;
+    alphaViewDesc.arrayLayerCount = 1;
     alphaViewDesc.aspect = wgpu::TextureAspect::Plane2Only;
     wgpu::TextureView alphaTextureView = platformTexture->wgpuTexture.CreateView(&alphaViewDesc);
 
@@ -908,7 +958,8 @@ TEST_P(VideoViewsValidationTests, ExplicitCreation) {
 // Test YUV texture view creation rules.
 TEST_P(VideoViewsValidationTests, CreateYUVViewValidation) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -922,6 +973,9 @@ TEST_P(VideoViewsValidationTests, CreateYUVViewValidation) {
     }
 
     wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
 
     // Success case: Per plane view formats unspecified.
     {
@@ -1010,7 +1064,8 @@ TEST_P(VideoViewsValidationTests, CreateYUVViewValidation) {
 // Test YUVA texture view creation rules.
 TEST_P(VideoViewsValidationTests, CreateYUVAViewValidation) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     ASSERT_NE(platformTexture.get(), nullptr);
@@ -1024,6 +1079,9 @@ TEST_P(VideoViewsValidationTests, CreateYUVAViewValidation) {
     }
 
     wgpu::TextureViewDescriptor viewDesc = {};
+    viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
 
     // Success case: Per plane view formats unspecified.
     {
@@ -1133,12 +1191,14 @@ TEST_P(VideoViewsValidationTests, CreateYUVAViewValidation) {
 // Test copying from one multi-planar format into another fails.
 TEST_P(VideoViewsValidationTests, T2TCopyAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture1 =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture2 =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
@@ -1162,12 +1222,14 @@ TEST_P(VideoViewsValidationTests, T2TCopyAllAspectsFails) {
 // Test copying from one multi-planar format into another per plane fails.
 TEST_P(VideoViewsValidationTests, T2TCopyPlaneAspectFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture1 =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture2 =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
@@ -1204,7 +1266,8 @@ TEST_P(VideoViewsValidationTests, T2TCopyPlaneAspectFails) {
 // Test copying from a multi-planar format to a buffer fails.
 TEST_P(VideoViewsValidationTests, T2BCopyAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     wgpu::Texture srcTexture = platformTexture->wgpuTexture;
@@ -1230,7 +1293,8 @@ TEST_P(VideoViewsValidationTests, T2BCopyAllAspectsFails) {
 // Test copying from multi-planar format per plane to a buffer fails.
 TEST_P(VideoViewsValidationTests, T2BCopyPlaneAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     wgpu::Texture srcTexture = platformTexture->wgpuTexture;
@@ -1268,7 +1332,8 @@ TEST_P(VideoViewsValidationTests, T2BCopyPlaneAspectsFails) {
 // Test copying from a buffer to a multi-planar format fails.
 TEST_P(VideoViewsValidationTests, B2TCopyAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     wgpu::Texture dstTexture = platformTexture->wgpuTexture;
@@ -1294,7 +1359,8 @@ TEST_P(VideoViewsValidationTests, B2TCopyAllAspectsFails) {
 // Test copying from a buffer to a multi-planar format per plane fails.
 TEST_P(VideoViewsValidationTests, B2TCopyPlaneAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
     wgpu::Texture dstTexture = platformTexture->wgpuTexture;
@@ -1335,11 +1401,15 @@ TEST_P(VideoViewsValidationTests, SamplingMultiPlanarTexture) {
 
     // R8BG8Biplanar420Unorm is allowed to be sampled, if plane 0 or plane 1 is selected.
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
     wgpu::TextureViewDescriptor desc = {};
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
 
     desc.aspect = wgpu::TextureAspect::Plane0Only;
     utils::MakeBindGroup(device, layout, {{0, platformTexture->wgpuTexture.CreateView(&desc)}});
@@ -1355,7 +1425,7 @@ TEST_P(VideoViewsValidationTests, RenderAttachmentInvalid) {
     // multi-planar formats are NOT allowed to be renderable by default and require
     // Feature::MultiPlanarRenderTargets.
     ASSERT_DEVICE_ERROR(auto platformTexture = mBackend->CreateVideoTextureForTest(
-                            GetFormat(), wgpu::TextureUsage::RenderAttachment,
+                            GetFormat(), GetLayerCount(), wgpu::TextureUsage::RenderAttachment,
                             /*isCheckerboard*/ true,
                             /*initialized*/ true));
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
@@ -1364,7 +1434,8 @@ TEST_P(VideoViewsValidationTests, RenderAttachmentInvalid) {
 // Tests writing into a multi-planar format fails.
 TEST_P(VideoViewsValidationTests, WriteTextureAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
@@ -1386,7 +1457,8 @@ TEST_P(VideoViewsValidationTests, WriteTextureAllAspectsFails) {
 // Tests writing into a multi-planar format per plane fails.
 TEST_P(VideoViewsValidationTests, WriteTexturePlaneAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
+        mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                            wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
                                             /*initialized*/ true);
 
@@ -1478,7 +1550,7 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         std::vector<wgpu::Texture> destVideoWGPUTextures;
         for (auto& destVideoTexture : destVideoTextures) {
             destVideoTexture = mBackend->CreateVideoTextureForTest(
-                GetFormat(),
+                GetFormat(), GetLayerCount(),
                 wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
                 /*isCheckerboard*/ false,
                 /*initialized*/ true);
@@ -1549,6 +1621,9 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
             // Create plane texture view from the multiplanar video texture.
             wgpu::TextureViewDescriptor planeViewDesc;
             planeViewDesc.format = GetPlaneFormat(planeIndex);
+            planeViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+            planeViewDesc.baseArrayLayer = 0;
+            planeViewDesc.arrayLayerCount = 1;
             planeViewDesc.aspect = GetPlaneAspect(planeIndex);
             std::vector<wgpu::TextureView> planeTextureViews;
             for (auto& destVideoWGPUTexture : destVideoWGPUTextures) {
@@ -1686,7 +1761,8 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
 
         // Create a video texture to be rendered into with multiplanar format.
         auto destVideoTexture = mBackend->CreateVideoTextureForTest(
-            GetFormat(), wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
+            GetFormat(), GetLayerCount(),
+            wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
             /*isCheckerboard*/ false,
             /*initialized*/ true);
         ASSERT_NE(destVideoTexture.get(), nullptr);
@@ -1699,12 +1775,18 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
         // Create luma plane texture view from multiplanar video texture.
         wgpu::TextureViewDescriptor lumaViewDesc;
         lumaViewDesc.format = GetPlaneFormat(kYUVALumaPlaneIndex);
+        lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+        lumaViewDesc.baseArrayLayer = 0;
+        lumaViewDesc.arrayLayerCount = 1;
         lumaViewDesc.aspect = GetPlaneAspect(kYUVALumaPlaneIndex);
         wgpu::TextureView lumaTextureView = destVideoWGPUTexture.CreateView(&lumaViewDesc);
 
         // Create chroma plane texture view from multiplanar video texture.
         wgpu::TextureViewDescriptor chromaViewDesc;
         chromaViewDesc.format = GetPlaneFormat(kYUVAChromaPlaneIndex);
+        chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+        chromaViewDesc.baseArrayLayer = 0;
+        chromaViewDesc.arrayLayerCount = 1;
         chromaViewDesc.aspect = GetPlaneAspect(kYUVAChromaPlaneIndex);
         wgpu::TextureView chromaTextureView = destVideoWGPUTexture.CreateView(&chromaViewDesc);
 
@@ -1785,10 +1867,10 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
 TEST_P(VideoViewsRenderTargetTests, RenderAttachmentValid) {
     // multi-planar formats should be allowed to be renderable with
     // Feature::MultiPlanarRenderTargets.
-    auto platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::RenderAttachment,
-                                            /*isCheckerboard*/ true,
-                                            /*initialized*/ true);
+    auto platformTexture = mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                                               wgpu::TextureUsage::RenderAttachment,
+                                                               /*isCheckerboard*/ true,
+                                                               /*initialized*/ true);
 
     ASSERT_NE(platformTexture.get(), nullptr);
     if (!platformTexture->CanWrapAsWGPUTexture()) {
@@ -1801,10 +1883,10 @@ TEST_P(VideoViewsRenderTargetTests, RenderAttachmentValid) {
 
 // Tests validating attachment sizes with a multi-plane format.
 TEST_P(VideoViewsRenderTargetTests, RenderAttachmentSizeValidation) {
-    auto platformTexture =
-        mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::RenderAttachment,
-                                            /*isCheckerboard*/ true,
-                                            /*initialized*/ true);
+    auto platformTexture = mBackend->CreateVideoTextureForTest(GetFormat(), GetLayerCount(),
+                                                               wgpu::TextureUsage::RenderAttachment,
+                                                               /*isCheckerboard*/ true,
+                                                               /*initialized*/ true);
 
     ASSERT_NE(platformTexture.get(), nullptr);
     if (!platformTexture->CanWrapAsWGPUTexture()) {
@@ -1815,12 +1897,18 @@ TEST_P(VideoViewsRenderTargetTests, RenderAttachmentSizeValidation) {
     // Create luma texture view from the video texture.
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
 
     // Create chroma texture view from the video texture.
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
 
@@ -2237,11 +2325,17 @@ TEST_P(VideoViewsExtendedUsagesTests, SamplingMultiPlanarYUVTexture) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = texture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = texture.CreateView(&chromaViewDesc);
 
@@ -2310,16 +2404,25 @@ TEST_P(VideoViewsExtendedUsagesTests, SamplingMultiPlanarYUVATexture) {
 
     wgpu::TextureViewDescriptor lumaViewDesc;
     lumaViewDesc.format = GetPlaneFormat(0);
+    lumaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    lumaViewDesc.baseArrayLayer = 0;
+    lumaViewDesc.arrayLayerCount = 1;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = texture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
     chromaViewDesc.format = GetPlaneFormat(1);
+    chromaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    chromaViewDesc.baseArrayLayer = 0;
+    chromaViewDesc.arrayLayerCount = 1;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = texture.CreateView(&chromaViewDesc);
 
     wgpu::TextureViewDescriptor alphaViewDesc;
     alphaViewDesc.format = GetPlaneFormat(2);
+    alphaViewDesc.dimension = wgpu::TextureViewDimension::e2D;
+    alphaViewDesc.baseArrayLayer = 0;
+    alphaViewDesc.arrayLayerCount = 1;
     alphaViewDesc.aspect = wgpu::TextureAspect::Plane2Only;
     wgpu::TextureView alphaTextureView = texture.CreateView(&alphaViewDesc);
 
@@ -2541,20 +2644,23 @@ TEST_P(VideoViewsExtendedUsagesTests, T2TCopyPlaneAspectFails) {
 
 DAWN_INSTANTIATE_TEST_B(VideoViewsTests,
                         VideoViewsTestBackend::Backends(),
-                        VideoViewsTestBackend::Formats());
+                        VideoViewsTestBackend::Formats(),
+                        VideoViewsTestBackend::LayerCounts());
 DAWN_INSTANTIATE_TEST_B(VideoViewsValidationTests,
                         VideoViewsTestBackend::Backends(),
-                        VideoViewsTestBackend::Formats());
+                        VideoViewsTestBackend::Formats(),
+                        VideoViewsTestBackend::LayerCounts());
 DAWN_INSTANTIATE_TEST_B(VideoViewsRenderTargetTests,
                         VideoViewsTestBackend::Backends(),
-                        VideoViewsTestBackend::Formats());
-
+                        VideoViewsTestBackend::Formats(),
+                        VideoViewsTestBackend::LayerCounts());
 DAWN_INSTANTIATE_TEST_B(VideoViewsExtendedUsagesTests,
                         {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
                          OpenGLESBackend(), VulkanBackend()},
                         {wgpu::TextureFormat::R8BG8Biplanar420Unorm,
                          wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm,
-                         wgpu::TextureFormat::R8BG8A8Triplanar420Unorm});
+                         wgpu::TextureFormat::R8BG8A8Triplanar420Unorm},
+                        {1u, 2u});
 
 }  // anonymous namespace
 }  // namespace dawn
