@@ -276,13 +276,19 @@ MaybeError ValidateLinearTextureData(const TextureDataLayout& layout,
     DAWN_ASSERT(copyExtent.height % blockInfo.height == 0);
     uint32_t heightInBlocks = copyExtent.height / blockInfo.height;
 
-    // TODO(dawn:563): Right now kCopyStrideUndefined will be formatted as a large value in the
-    // validation message. Investigate ways to make it print as a more readable symbol.
-    DAWN_INVALID_IF(
-        copyExtent.depthOrArrayLayers > 1 && (layout.bytesPerRow == wgpu::kCopyStrideUndefined ||
-                                              layout.rowsPerImage == wgpu::kCopyStrideUndefined),
-        "Copy depth (%u) is > 1, but bytesPerRow (%u) or rowsPerImage (%u) are not specified.",
-        copyExtent.depthOrArrayLayers, layout.bytesPerRow, layout.rowsPerImage);
+    if (copyExtent.depthOrArrayLayers > 1 && (layout.bytesPerRow == wgpu::kCopyStrideUndefined ||
+                                              layout.rowsPerImage == wgpu::kCopyStrideUndefined)) {
+        auto IntegerToStringOrCopyStrideUndefined = [](uint32_t value) {
+            if (value == wgpu::kCopyStrideUndefined) {
+                return std::string("undefined");
+            }
+            return std::to_string(value);
+        };
+        return DAWN_VALIDATION_ERROR(
+            "Copy depth (%u) is > 1, but bytesPerRow (%s) or rowsPerImage (%s) are not specified.",
+            copyExtent.depthOrArrayLayers, IntegerToStringOrCopyStrideUndefined(layout.bytesPerRow),
+            IntegerToStringOrCopyStrideUndefined(layout.rowsPerImage));
+    }
 
     DAWN_INVALID_IF(heightInBlocks > 1 && layout.bytesPerRow == wgpu::kCopyStrideUndefined,
                     "HeightInBlocks (%u) is > 1, but bytesPerRow is not specified.",
