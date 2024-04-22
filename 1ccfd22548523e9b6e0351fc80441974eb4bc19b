@@ -193,6 +193,24 @@
       "parentUuid": "9ec01306_28a9e7bb",
       "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d170de0e_73d37ebf",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-22T18:52:33Z",
+      "side": 1,
+      "message": "For `textureLoad` a `level` is not accepted when using `texture_multisampled*` https://www.w3.org/TR/WGSL/#textureload",
+      "parentUuid": "e8e603a2_e3498070",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
