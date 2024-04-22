@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54282cfb_01b9ac79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-22T18:26:17Z",
+      "side": 1,
+      "message": "Please take a look.\n\nFYI: Nicolette, Colin, Kyle.",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c33d13b_dfed35d3",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-22T18:26:17Z",
+      "side": 1,
+      "message": "Hi, I think this is one crucial piece of validation that I\u0027m still thinking about. I\u0027m not sure how to go about this as the SamplerDescriptor is passed only when creating sampler. I\u0027m wondering if we should hold onto the SamplerDescriptor in Sampler and expose Sampler over Device to validate here?\n\nAnother option (although not ideal) would be to ensure Skia validates it instead and makes sure the info passed in when creating TextureView is always same as that for creating samplers.\n\nI\u0027ve added few more TODOs (and questions) for external format validations that should be done once I add in the new TextureFormat::External.",
+      "range": {
+        "startLine": 1782,
+        "startChar": 8,
+        "endLine": 1784,
+        "endChar": 22
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
