@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd008eb8_d61287b7",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-22T05:22:14Z",
+      "side": 0,
+      "message": "The ongoing CL [5456006: Use wgpu::SharedTextureMemory on D3D](https://chromium-review.googlesource.com/c/chromium/src/+/5456006) would run into the fail of \n`WebGPUMailboxTest.AssociateMailboxCmd`, as we are using `AllowUnclearedAccess::kYes` in [WebGPUDecoderImpl](https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;drc\u003d59c007a7ad2f034baeffab754f3f5bf109b69cda;l\u003d1937). \nThis validation check is specific to concurrent reads, but not to exclusive reads. Unfortunately the ongoing CL has to always use concurrent read.\n\n\n```\n \tdawn_native.dll!dawn::native::SharedResourceMemory::BeginAccess\u003cdawn::native::TextureBase,dawn::native::SharedTextureMemoryBeginAccessDescriptor\u003e(dawn::native::TextureBase * resource, const dawn::native::SharedTextureMemoryBeginAccessDescriptor * rawDescriptor) Line 136\tC++\n \tdawn_native.dll!dawn::native::SharedResourceMemory::APIBeginAccess(dawn::native::TextureBase * texture, const dawn::native::SharedTextureMemoryBeginAccessDescriptor * descriptor) Line 95\tC++\n \tdawn_native.dll!dawn::native::NativeSharedTextureMemoryBeginAccess(WGPUSharedTextureMemoryImpl * cSelf, WGPUTextureImpl * texture, const WGPUSharedTextureMemoryBeginAccessDescriptor * descriptor) Line 2122\tC++\n \tdawn_proc.dll!ThreadDispatchSharedTextureMemoryBeginAccess(WGPUSharedTextureMemoryImpl * sharedTextureMemory, WGPUTextureImpl * texture, const WGPUSharedTextureMemoryBeginAccessDescriptor * descriptor) Line 1564\tC++\n \tdawn_proc.dll!wgpuSharedTextureMemoryBeginAccess(WGPUSharedTextureMemoryImpl * sharedTextureMemory, WGPUTextureImpl * texture, const WGPUSharedTextureMemoryBeginAccessDescriptor * descriptor) Line 938\tC++\n \tgpu_gles2.dll!wgpu::SharedTextureMemory::BeginAccess(const wgpu::Texture \u0026 texture, const wgpu::SharedTextureMemoryBeginAccessDescriptor * descriptor) Line 6121\tC++\n \tgpu_gles2.dll!gpu::D3DImageBacking::BeginAccessDawn(const wgpu::Device \u0026 device, wgpu::BackendType backend_type, wgpu::TextureUsage wgpu_usage) Line 775\tC++\n \tgpu_gles2.dll!gpu::DawnD3DImageRepresentation::BeginAccess(wgpu::TextureUsage usage) Line 87\tC++\n \tgpu_gles2.dll!gpu::DawnImageRepresentation::BeginAccess(wgpu::TextureUsage usage, const gfx::Rect \u0026 update_rect) Line 845\tC++\n \tgpu_gles2.dll!gpu::DawnImageRepresentation::BeginScopedAccess(wgpu::TextureUsage usage, gpu::SharedImageRepresentation::AllowUnclearedAccess allow_uncleared, const gfx::Rect \u0026 update_rect) Line 815\tC++\n \tgpu_gles2.dll!gpu::DawnImageRepresentation::BeginScopedAccess(wgpu::TextureUsage usage, gpu::SharedImageRepresentation::AllowUnclearedAccess allow_uncleared) Line 802\tC++\n \tgpu_gles2.dll!gpu::webgpu::`anonymous namespace\u0027::WebGPUDecoderImpl::AssociateMailboxDawn(const gpu::Mailbox \u0026 mailbox, gpu::webgpu::MailboxFlags flags, const wgpu::Device \u0026 device, wgpu::BackendType backendType, wgpu::TextureUsage usage, std::__Cr::vector\u003cwgpu::TextureFormat,std::__Cr::allocator\u003cwgpu::TextureFormat\u003e\u003e view_formats) Line 1943\tC++\n \tgpu_gles2.dll!gpu::webgpu::`anonymous namespace\u0027::WebGPUDecoderImpl::HandleAssociateMailboxImmediate(unsigned int immediate_data_size, const volatile void * cmd_data) Line 2053\tC++\n \tgpu_gles2.dll!gpu::webgpu::`anonymous namespace\u0027::WebGPUDecoderImpl::DoCommands(unsigned int num_commands, const volatile void * buffer, int num_entries, int * entries_processed) Line 1841\tC++\n \tgl_tests.exe!gpu::WebGPUMailboxTest::ExecuteImmediateCmd\u003cgpu::webgpu::cmds::AssociateMailboxImmediate\u003e(gpu::webgpu::WebGPUDecoder * decoder, const gpu::webgpu::cmds::AssociateMailboxImmediate \u0026 cmd, unsigned __int64 data_size) Line 187\tC++\n\u003e\tgl_tests.exe!gpu::WebGPUMailboxTest_AssociateMailboxCmd_Test::TestBody::\u003clambda_0\u003e::operator()(gpu::webgpu::WebGPUDecoder * decoder, gpu::webgpu::ReservedTexture reservation, scoped_refptr\u003cgpu::ClientSharedImage\u003e shared_image) Line 303\tC++\n\n```",
+      "range": {
+        "startLine": 136,
+        "startChar": 1,
+        "endLine": 137,
+        "endChar": 42
+      },
+      "revId": "cd07b9f4050952300ee34b15d84c30a70523e80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
