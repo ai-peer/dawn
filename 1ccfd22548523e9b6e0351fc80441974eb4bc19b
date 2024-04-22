@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cd18453_45aafd63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-22T14:55:49Z",
+      "side": 1,
+      "message": "Is this `1` arg instead of `0` arg? There is still the texture argument?",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3315c62_2311a489",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-22T14:55:49Z",
+      "side": 1,
+      "message": "Does `with 0 arg` mean without a level? With only the `texture`?",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24bbe42d_5b171d40",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3934,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-22T14:55:49Z",
+      "side": 1,
+      "message": "Instead of making this just `0` can we add a second test where this would correctly trigger? Without this, we aren\u0027t testing this case anymore",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258303c1_af8e0648",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-22T14:55:49Z",
+      "side": 1,
+      "message": "Ditto, can we make this pass instead of just making this `1`?",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
