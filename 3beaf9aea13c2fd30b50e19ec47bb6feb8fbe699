@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e08b25b2_692df12c",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-22T09:59:06Z",
+      "side": 1,
+      "message": "\u003e nit: typo in documentation (\"to for\")\n\u003e ```suggestion\n\u003e                 # Kotlin uses chain_roots to for parent classes (for example so a\n\u003e ```",
+      "parentUuid": "3d8190e6_ab27cbf7",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ea8ede1_4db6bfe9",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 2
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0736b33_12fcb5e9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-22T09:59:06Z",
+      "side": 1,
+      "message": "It\u0027s a good question. I\u0027ve been basing the code on a manual appraisal of https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/dawn.json (i.e. \u0027eyeballing\u0027) rather than any formal spec. If there is such a spec I don\u0027t have it. That is the only form \"const*const*\" that appears in dawn.json. Is it wise to consider other forms even thought we don\u0027t see them? I\u0027m not sure.",
+      "parentUuid": "8ea8ede1_4db6bfe9",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baa11c01_04f52ca4",
         "filename": "generator/templates/art/api_kotlin_types.kt",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2024-04-18T16:10:50Z",
       "side": 1,
       "message": "We explicitly consider 0xFFFFFFFF for Int.  Should we explicitly consider 0xFFFFFFFFFFFFFFFF for Long?",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56ce3f47_70ac628c",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-22T09:59:06Z",
+      "side": 1,
+      "message": "I have added that and the nullptr too to be consistent between int64_t and int32_t.\n\nI\u0027ve been generally been adding these conversions on an \u0027as needed\u0027 basis hence why it hasn\u0027t come up (no -1 defaults for int64 values for whatever reason).\n\nWe need to come up with some more exhaustive testing plan.",
+      "parentUuid": "baa11c01_04f52ca4",
       "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
