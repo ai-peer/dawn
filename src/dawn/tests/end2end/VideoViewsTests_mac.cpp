@@ -60,9 +60,13 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
   private:
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> CreateVideoTextureForTest(
         wgpu::TextureFormat format,
+        uint32_t layerCount,
         wgpu::TextureUsage usage,
         bool isCheckerboard,
         bool initialized) override {
+        if (layerCount != 1) {
+            return {};
+        }
         IOSurfaceRef surface =
             CreateMultiPlanarIOSurface(format, VideoViewsTestsBase::kYUVAImageDataWidthInTexels,
                                        VideoViewsTestsBase::kYUVAImageDataHeightInTexels);
@@ -168,6 +172,11 @@ std::vector<Format> VideoViewsTestBackend::Formats() {
     return {wgpu::TextureFormat::R8BG8Biplanar420Unorm,
             wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm,
             wgpu::TextureFormat::R8BG8A8Triplanar420Unorm};
+}
+
+// static
+std::vector<LayerCount> VideoViewsTestBackend::LayerCounts() {
+    return {1};
 }
 
 // static
