@@ -172,7 +172,8 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemoryBase::CreateTexture(
 
     // Validate the texture descriptor, and require its usage to be a subset of the shared texture
     // memory's usage.
-    DAWN_TRY(ValidateTextureDescriptor(GetDevice(), descriptor, AllowMultiPlanarTextureFormat::Yes,
+    DAWN_TRY(ValidateTextureDescriptor(GetDevice(), descriptor,
+                                       AllowMultiPlanarTextureFormat::SingleLayerOnly,
                                        mProperties.usage));
 
     Ref<TextureBase> texture;

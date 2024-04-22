@@ -37,12 +37,14 @@
 namespace dawn {
 
 using Format = wgpu::TextureFormat;
-DAWN_TEST_PARAM_STRUCT(Params, Format);
+using LayerCount = uint32_t;
+DAWN_TEST_PARAM_STRUCT(Params, Format, LayerCount);
 
 class VideoViewsTestBackend {
   public:
     static std::vector<BackendTestConfig> Backends();
     static std::vector<Format> Formats();
+    static std::vector<LayerCount> LayerCounts();
     static std::unique_ptr<VideoViewsTestBackend> Create();
 
     virtual ~VideoViewsTestBackend();
@@ -64,6 +66,7 @@ class VideoViewsTestBackend {
         wgpu::Texture wgpuTexture;
     };
     virtual std::unique_ptr<PlatformTexture> CreateVideoTextureForTest(wgpu::TextureFormat format,
+                                                                       uint32_t layerCount,
                                                                        wgpu::TextureUsage usage,
                                                                        bool isCheckerboard,
                                                                        bool initialized) = 0;
@@ -126,6 +129,7 @@ class VideoViewsTestsBase : public DawnTestWithParams<Params> {
     bool IsSnorm16TextureFormatsSupported() const;
     wgpu::ShaderModule GetTestVertexShaderModule() const;
     wgpu::TextureFormat GetFormat() const;
+    uint32_t GetLayerCount() const;
     wgpu::TextureFormat GetPlaneFormat(int plane) const;
     wgpu::TextureAspect GetPlaneAspect(int plane) const;
     bool IsFormatSupported() const;

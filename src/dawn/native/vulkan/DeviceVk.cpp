@@ -745,7 +745,7 @@ Ref<TextureBase> Device::CreateTextureWrappingVulkanImage(
         return nullptr;
     }
     if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor,
-                                                AllowMultiPlanarTextureFormat::Yes))) {
+                                                AllowMultiPlanarTextureFormat::SingleLayerOnly))) {
         return nullptr;
     }
     if (ConsumedError(ValidateVulkanImageCanBeWrapped(this, textureDescriptor),

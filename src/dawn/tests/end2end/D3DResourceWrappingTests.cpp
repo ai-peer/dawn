@@ -65,7 +65,9 @@ std::ostream& operator<<(std::ostream& o, const ExternalImageType& t) {
     return o;
 }
 
-DAWN_TEST_PARAM_STRUCT(D3D12ResourceTestParams, ExternalImageType);
+using LayerCount = uint32_t;
+
+DAWN_TEST_PARAM_STRUCT(D3D12ResourceTestParams, ExternalImageType, LayerCount);
 
 class D3DResourceTestBase : public DawnTestWithParams<D3D12ResourceTestParams> {
   protected:
@@ -88,7 +90,7 @@ class D3DResourceTestBase : public DawnTestWithParams<D3D12ResourceTestParams> {
 
         baseDawnDescriptor.dimension = wgpu::TextureDimension::e2D;
         baseDawnDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
-        baseDawnDescriptor.size = {kTestWidth, kTestHeight, 1};
+        baseDawnDescriptor.size = {kTestWidth, kTestHeight, GetLayerCount()};
         baseDawnDescriptor.sampleCount = 1;
         baseDawnDescriptor.mipLevelCount = 1;
         baseDawnDescriptor.usage =
@@ -98,7 +100,7 @@ class D3DResourceTestBase : public DawnTestWithParams<D3D12ResourceTestParams> {
         baseD3dDescriptor.Width = kTestWidth;
         baseD3dDescriptor.Height = kTestHeight;
         baseD3dDescriptor.MipLevels = 1;
-        baseD3dDescriptor.ArraySize = 1;
+        baseD3dDescriptor.ArraySize = GetLayerCount();
         baseD3dDescriptor.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
         baseD3dDescriptor.SampleDesc.Count = 1;
         baseD3dDescriptor.SampleDesc.Quality = 0;
@@ -117,6 +119,8 @@ class D3DResourceTestBase : public DawnTestWithParams<D3D12ResourceTestParams> {
     bool IsD3D11Texture() const {
         return GetParam().mExternalImageType == ExternalImageType::kD3D11Texture;
     }
+
+    uint32_t GetLayerCount() const { return GetParam().mLayerCount; }
 
     ComPtr<ID3D11Device> CreateD3D11Device() {
         // Create the D3D11 device/contexts that will be used in subsequent tests
@@ -332,7 +336,7 @@ TEST_P(D3DExternalImageValidation, InvalidMipLevelCount) {
 
 // Test an error occurs if the descriptor depth isn't 1
 TEST_P(D3DExternalImageValidation, InvalidDepth) {
-    baseDawnDescriptor.size.depthOrArrayLayers = 2;
+    baseDawnDescriptor.size.depthOrArrayLayers = GetLayerCount() * 2;
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
@@ -410,7 +414,7 @@ TEST_P(D3DExternalImageValidation, InvalidNumD3DMipLevels) {
 
 // Test an error occurs if the number of array levels is greater than 1.
 TEST_P(D3DExternalImageValidation, InvalidD3DArraySize) {
-    baseD3dDescriptor.ArraySize = 2;
+    baseD3dDescriptor.ArraySize = GetLayerCount() * 2;
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
@@ -441,19 +445,25 @@ class D3DExternalImageUsageTests : public D3DResourceTestBase {
     void ClearImage(wgpu::Texture wrappedTexture,
                     const wgpu::Color& clearColor,
                     wgpu::Device wgpuDevice) {
-        wgpu::TextureView wrappedView = wrappedTexture.CreateView();
+        for (uint32_t layer = 0; layer < GetLayerCount(); ++layer) {
+            wgpu::TextureViewDescriptor viewDesc = {};
+            viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+            viewDesc.baseArrayLayer = layer;
+            viewDesc.arrayLayerCount = 1;
+            wgpu::TextureView wrappedView = wrappedTexture.CreateView(&viewDesc);
 
-        // Submit a clear operation
-        utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
-        renderPassDescriptor.cColorAttachments[0].clearValue = clearColor;
+            // Submit a clear operation
+            utils::ComboRenderPassDescriptor renderPassDescriptor({wrappedView}, {});
+            renderPassDescriptor.cColorAttachments[0].clearValue = clearColor;
 
-        wgpu::CommandEncoder encoder = wgpuDevice.CreateCommandEncoder();
-        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDescriptor);
-        pass.End();
+            wgpu::CommandEncoder encoder = wgpuDevice.CreateCommandEncoder();
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDescriptor);
+            pass.End();
 
-        wgpu::CommandBuffer commands = encoder.Finish();
-        wgpu::Queue queue = wgpuDevice.GetQueue();
-        queue.Submit(1, &commands);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            wgpu::Queue queue = wgpuDevice.GetQueue();
+            queue.Submit(1, &commands);
+        }
     }
 
     void CreateSharedD3D11Texture(const D3D11_TEXTURE2D_DESC& d3dDescriptor,
@@ -1102,22 +1112,28 @@ TEST_P(D3DExternalImageUsageTests, SRGBReinterpretation) {
     WrapSharedHandle(&textureDesc, &baseD3dDescriptor, &texture, &d3d11Texture, &externalImage);
     ASSERT_NE(texture.Get(), nullptr);
 
-    // Submit a clear operation to sRGB value rgb(234, 51, 35).
-    {
-        utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView(&viewDesc)}, {});
-        renderPassDescriptor.cColorAttachments[0].clearValue = {234.0 / 255.0, 51.0 / 255.0,
-                                                                35.0 / 255.0, 1.0};
-        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        encoder.BeginRenderPass(&renderPassDescriptor).End();
+    for (uint32_t layer = 0; layer < GetLayerCount(); ++layer) {
+        viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+        viewDesc.baseArrayLayer = layer;
+        viewDesc.arrayLayerCount = 1;
+        // Submit a clear operation to sRGB value rgb(234, 51, 35).
+        {
+            utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView(&viewDesc)},
+                                                                  {});
+            renderPassDescriptor.cColorAttachments[0].clearValue = {234.0 / 255.0, 51.0 / 255.0,
+                                                                    35.0 / 255.0, 1.0};
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            encoder.BeginRenderPass(&renderPassDescriptor).End();
 
-        wgpu::CommandBuffer commands = encoder.Finish();
-        queue.Submit(1, &commands);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            queue.Submit(1, &commands);
+        }
+
+        // Expect the contents to be approximately rgb(246 124 104)
+        EXPECT_PIXEL_RGBA8_BETWEEN(            //
+            utils::RGBA8(245, 123, 103, 255),  //
+            utils::RGBA8(247, 125, 105, 255), texture, 0, 0);
     }
-
-    // Expect the contents to be approximately rgb(246 124 104)
-    EXPECT_PIXEL_RGBA8_BETWEEN(            //
-        utils::RGBA8(245, 123, 103, 255),  //
-        utils::RGBA8(247, 125, 105, 255), texture, 0, 0);
 }
 
 class D3DExternalImageMultithreadTests : public D3DExternalImageUsageTests {
@@ -1285,16 +1301,20 @@ TEST_P(D3DExternalImageD3D11TextureValidation, InvalidD3D11Texture) {
 
 DAWN_INSTANTIATE_TEST_P(D3DExternalImageValidation,
                         {D3D11Backend(), D3D12Backend()},
-                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture});
+                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture},
+                        {1u, 2u});
 DAWN_INSTANTIATE_TEST_P(D3DExternalImageUsageTests,
                         {D3D11Backend(), D3D12Backend()},
-                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture});
+                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture},
+                        {1u, 2u});
 DAWN_INSTANTIATE_TEST_P(D3DExternalImageMultithreadTests,
                         {D3D11Backend(), D3D12Backend()},
-                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture});
+                        {ExternalImageType::kSharedHandle, ExternalImageType::kD3D11Texture},
+                        {1u, 2u});
 DAWN_INSTANTIATE_TEST_P(D3DExternalImageD3D11TextureValidation,
                         {D3D11Backend()},
-                        {ExternalImageType::kD3D11Texture});
+                        {ExternalImageType::kD3D11Texture},
+                        {1u, 2u});
 
 }  // anonymous namespace
 }  // namespace dawn
