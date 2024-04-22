@@ -512,7 +512,8 @@ MaybeError ValidateTextureDescriptor(
     const DeviceBase* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar,
-    std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage) {
+    std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage,
+    bool allowMultipleLayer) {
     wgpu::TextureUsage usage = descriptor->usage;
     if (auto* internalUsageDesc = descriptor.Get<DawnTextureInternalUsageDescriptor>()) {
         DAWN_INVALID_IF(
@@ -528,11 +529,12 @@ MaybeError ValidateTextureDescriptor(
     if (format->IsMultiPlanar()) {
         switch (allowMultiPlanar) {
             case AllowMultiPlanarTextureFormat::Yes:
-                DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D ||
-                                    descriptor->mipLevelCount != 1 ||
-                                    descriptor->size.depthOrArrayLayers != 1,
-                                "Multiplanar texture must be non-mipmapped & 2D in order to be "
-                                "created directly.");
+                DAWN_INVALID_IF(
+                    descriptor->dimension != wgpu::TextureDimension::e2D ||
+                        descriptor->mipLevelCount != 1 ||
+                        (descriptor->size.depthOrArrayLayers != 1 && !allowMultipleLayer),
+                    "Multiplanar texture must be non-mipmapped & 2D in order to be "
+                    "created directly.");
                 break;
             case AllowMultiPlanarTextureFormat::No:
                 return DAWN_VALIDATION_ERROR(
