@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "b25d6f5fa168e48b7f6e2e117e83d415919f249a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd993ba_b2076f22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-22T12:59:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b25d6f5fa168e48b7f6e2e117e83d415919f249a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
