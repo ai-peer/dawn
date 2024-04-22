@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de9a807_3db8b6fc",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-22T06:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6701b052_437d2730",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8616370d_5850896e",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Agree.",
       "parentUuid": "8616370d_5850896e",
+      "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7138f9e_0f9718e1",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-22T06:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "871fe434_1111cbe7",
       "revId": "cf32b9fceba9ec3ab81271c815891e10fb86c17d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

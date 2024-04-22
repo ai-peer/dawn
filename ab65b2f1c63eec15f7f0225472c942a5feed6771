@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "430f34ed_0c81714d",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-22T06:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab15e3b5_7e38a8eb",
+      "range": {
+        "startLine": 235,
+        "startChar": 2,
+        "endLine": 237,
+        "endChar": 238
+      },
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d412b64_991be646",
@@ -84,6 +108,24 @@
       "writtenOn": "2024-04-18T13:43:46Z",
       "side": 1,
       "message": "This can be precomputed and put in the uniform buffer.",
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed542a74_800f6702",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-22T06:54:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ef4692f_9695dfd5",
       "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
