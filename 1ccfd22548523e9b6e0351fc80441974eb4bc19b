@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f77ba547_c3f1f1a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-22T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cd18453_45aafd63",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3315c62_2311a489",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-22T14:55:49Z",
       "side": 1,
       "message": "Does `with 0 arg` mean without a level? With only the `texture`?",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5785e0_925a9bff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-22T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3315c62_2311a489",
       "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "191bd1b3_cdcdcb7c",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3934,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-22T18:17:14Z",
+      "side": 1,
+      "message": "I think `TextureLoadInEP` already covers that. (TextureLoad won\u0027t trigger when it\u0027s multisampled texture or depth multisampled texture)",
+      "parentUuid": "24bbe42d_5b171d40",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "258303c1_af8e0648",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-04-22T14:55:49Z",
       "side": 1,
       "message": "Ditto, can we make this pass instead of just making this `1`?",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03806306_4d73aef4",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-22T18:17:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "258303c1_af8e0648",
       "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
