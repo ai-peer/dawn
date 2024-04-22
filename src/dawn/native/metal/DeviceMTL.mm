@@ -162,6 +162,10 @@ Device::~Device() {
 }
 
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
+    if (GetPhysicalDevice()->GetInstance()->IsBeginCaptureOnStartupEnabled()) {
+        StartCapture(ToAPI(this));
+    }
+
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
 
@@ -377,6 +381,11 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
 
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
+
+    if (GetPhysicalDevice()->GetInstance()->IsBeginCaptureOnStartupEnabled()) {
+        StopCapture();
+    }
+
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
     // - It may be called if the device is explicitly destroyed with APIDestroy.
     //   This case is NOT thread-safe and needs proper synchronization with other
