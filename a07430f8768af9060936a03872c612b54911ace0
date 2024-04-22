@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25b7f0fc_c842a6f1",
+        "filename": "src/dawn/tests/end2end/YCbCrSamplerTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 0,
+      "message": "nit: maybe rename in a separate CL, or simply rename later - since the diff is hard to interpret",
+      "revId": "a07430f8768af9060936a03872c612b54911ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -20,6 +20,103 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93bfaa20_517663ec",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "I think we can probably use \"Color\" ?\n\nnote in https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageSubresourceRange.html\n\n\u003e When creating a VkImageView, if sampler Y′CBCR conversion is enabled in the sampler, the aspectMask of a subresourceRange used by the VkImageView must be VK_IMAGE_ASPECT_COLOR_BIT.",
+      "range": {
+        "startLine": 609,
+        "startChar": 0,
+        "endLine": 609,
+        "endChar": 78
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9fd554_12123c54",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "nit: generally, the pattern is that we ValidateAndUnpack at the caller, and then pass the unpacked one in.\n\nSee  DeviceBase::CreateTexture as an example",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 66
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d582481_48228cca",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "I think SelectFormatAspects will either return Aspect::Color as discussed above, or it\u0027ll return None if the aspect is not present.\n\nNone will get validated out later [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.cpp;l\u003d606;drc\u003d2ff98034571a86f5a65dbbc4912017a0a5e76f59;bpv\u003d0;bpt\u003d1)",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ab7e27e_ca3debdf",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "I don\u0027t think so, but I believe importing SharedTextureMemory with multiple mips is already validated out. So by construction, this should already always be 1.",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73db75c4_b6b14a5f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "we should factor this part out with the Sampler code since it appears to be the same",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c33d13b_dfed35d3",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 8
@@ -36,6 +133,53 @@
         "startChar": 8,
         "endLine": 1784,
         "endChar": 22
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff0a8b2_5717d2d5",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "I believe the validation wouldn\u0027t go here. As described in my [issue comment](https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2476#c27) we\u0027ll use shader reflection and static analysis to determine the set of textureView/sampler pairs. Then, we\u0027ll validate before draws that the textureView/sampler combinations are indeed matching.\n\nBut yes, you\u0027ll definitely need to save off the info so we can do this validation.\nIt might be a good idea then to have a cache of `VkSamplerYcbcrConversion`. That way, both the texture view and sampler can store a RefcountedVkHandle\u003cVkSamplerYcbcrConversion\u003e point to the same object if they are indeed identical. Then, the validation they are compatible is a fast pointer comparison. The cache can happen orthogonal to the rest of this work though. You can have a slow value-by-value comparison of them for now.",
+      "parentUuid": "4c33d13b_dfed35d3",
+      "range": {
+        "startLine": 1782,
+        "startChar": 8,
+        "endLine": 1784,
+        "endChar": 22
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a876319c_43a36451",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-22T22:10:41Z",
+      "side": 1,
+      "message": "make sure this gets deleted",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 70
       },
       "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
