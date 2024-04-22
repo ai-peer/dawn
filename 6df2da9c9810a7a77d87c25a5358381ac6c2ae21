@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91794c7a_14167188",
+        "filename": "src/tint/lang/wgsl/ast/transform/array_length_from_uniform_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-22T20:33:20Z",
+      "side": 1,
+      "message": "I think this would miss the case where the array is inside a struct and the `let` decl captures a pointer to that struct.\n```\nlet p_str \u003d \u0026my_struct;\nlet len \u003d arrayLength(\u0026p_str.array);\n```\nMaybe simpler to just reject all let pointers instead of checking their types?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 21
+      },
+      "revId": "6df2da9c9810a7a77d87c25a5358381ac6c2ae21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "269e427c_955af7d0",
+        "filename": "src/tint/lang/wgsl/ast/transform/array_length_from_uniform_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-22T20:33:20Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to check that there are no existing bindings that would clash with `ubo_binding`?",
+      "revId": "6df2da9c9810a7a77d87c25a5358381ac6c2ae21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
