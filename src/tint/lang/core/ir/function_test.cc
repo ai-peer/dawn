@@ -138,5 +138,23 @@ TEST_F(IR_FunctionTest, CloneWithExits) {
     EXPECT_EQ(new_f, new_f->Block()->Front()->As<Return>()->Func());
 }
 
+TEST_F(IR_FunctionTest, Parameters) {
+    auto* f = b.Function("my_func", mod.Types().void_());
+
+    auto* param1 = b.FunctionParam("a", mod.Types().i32());
+    auto* param2 = b.FunctionParam("b", mod.Types().f32());
+    auto* param3 = b.FunctionParam("b", mod.Types().f32());
+
+    f->SetParams({param1, param2});
+    EXPECT_EQ(param1->Function(), f);
+    EXPECT_EQ(param2->Function(), f);
+    EXPECT_EQ(param3->Function(), nullptr);
+
+    f->SetParams({param1, param3});
+    EXPECT_EQ(param1->Function(), f);
+    EXPECT_EQ(param2->Function(), nullptr);
+    EXPECT_EQ(param3->Function(), f);
+}
+
 }  // namespace
 }  // namespace tint::core::ir
