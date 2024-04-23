@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bce95fb9_bc5fbc5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2024-04-23T20:29:15Z",
+      "side": 1,
+      "message": "PTAL. Pretty simplistic approach but it allows Dawn to pass https://github.com/gpuweb/cts/pull/3699. Probably shouldn\u0027t merge until https://github.com/gpuweb/gpuweb/pull/4593 lands.",
+      "revId": "2506516c7a147a2738fccb8857801b0933032183",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
