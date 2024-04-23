@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bf9c03a_1528b080",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-23T18:08:45Z",
+      "side": 1,
+      "message": "Could you also skip these in compat-expectations.txt? They\u0027re also causing a lot of timeouts there.",
+      "revId": "c4e2ae1e32a8ff23bd14848f1660f6b373dec203",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
