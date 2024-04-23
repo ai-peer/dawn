@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f044a06_455bf512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:57:20Z",
+      "side": 1,
+      "message": "LGTM as well",
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eaf6a66_aa4ee549",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:57:20Z",
+      "side": 1,
+      "message": "```suggestion\n        // TODO(dawn:1704): Consider supporting ExpandResolveTexture + PLS\n```",
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac17e8a2_271f2baa",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:57:20Z",
+      "side": 1,
+      "message": "Do we want to enable this on non-tilers? It works but would be more expensive.",
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baf8b286_3da84948",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:57:20Z",
+      "side": 1,
+      "message": "nit: Maybe mention that the loading is inserted at the start of the render pass so we don\u0027t care about the initial value in the tile cache. Ditto for the other such comment.",
+      "range": {
+        "startLine": 202,
+        "startChar": 19,
+        "endLine": 202,
+        "endChar": 53
+      },
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
