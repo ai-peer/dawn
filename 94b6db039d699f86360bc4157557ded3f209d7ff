@@ -16,6 +16,24 @@
       "message": "This transform assumes no multi-result instructions, so we probably need to check for that.",
       "revId": "94b6db039d699f86360bc4157557ded3f209d7ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebd897c_24702250",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T12:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a0e1b5_9a284f67",
+      "revId": "94b6db039d699f86360bc4157557ded3f209d7ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
