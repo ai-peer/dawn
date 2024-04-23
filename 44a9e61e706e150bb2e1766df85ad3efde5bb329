@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05e58dd_0a6263fb",
+        "filename": "src/tint/lang/wgsl/writer/raise/value_to_let.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T15:39:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "3cc218a8_fa92bc16",
+      "revId": "44a9e61e706e150bb2e1766df85ad3efde5bb329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5744e30_fcc1902c",
@@ -32,6 +50,30 @@
       "side": 1,
       "message": "\u003e \"upto\" is a possible misspelling of \"up to\".\n\nPlease fix.",
       "parentUuid": "c54042e5_c1ac7cce",
+      "range": {
+        "startLine": 108,
+        "startChar": 56,
+        "endLine": 108,
+        "endChar": 60
+      },
+      "revId": "44a9e61e706e150bb2e1766df85ad3efde5bb329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d411ed3_eb1126fb",
+        "filename": "src/tint/lang/wgsl/writer/raise/value_to_let.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T15:39:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5744e30_fcc1902c",
       "range": {
         "startLine": 108,
         "startChar": 56,
@@ -59,6 +101,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51c3e2fd_c4098ddf",
+        "filename": "src/tint/lang/wgsl/writer/raise/value_to_let.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T15:39:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "beb8d488_16a5d4af",
+      "revId": "44a9e61e706e150bb2e1766df85ad3efde5bb329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80dd9f1e_19f6b6d1",
@@ -72,6 +132,24 @@
       "writtenOn": "2024-03-26T18:22:12Z",
       "side": 1,
       "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "44a9e61e706e150bb2e1766df85ad3efde5bb329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b47b2b_2e77079b",
+        "filename": "src/tint/lang/wgsl/writer/raise/value_to_let_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T15:39:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "80dd9f1e_19f6b6d1",
       "revId": "44a9e61e706e150bb2e1766df85ad3efde5bb329",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
