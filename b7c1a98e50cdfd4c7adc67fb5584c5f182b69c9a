@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464e3fd7_edfad75c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 0,
+      "message": "I believe you can delete `CreateImplicitMSAARenderTextureViewFor` now.\n\nAdmittedly I\u0027m still a bit curious at how things would look if we did just a little bit of caching here - since the current implementation makes no attempt at that. For N render passes, we have N live textures which last all the way from encoding till submit completes - that\u0027s quite a long time!",
+      "range": {
+        "startLine": 1200,
+        "startChar": 0,
+        "endLine": 1200,
+        "endChar": 83
+      },
+      "revId": "b7c1a98e50cdfd4c7adc67fb5584c5f182b69c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

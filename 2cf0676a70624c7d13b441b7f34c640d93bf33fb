@@ -1,0 +1,268 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ac0153_44aeeff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e9af54_2ee8ef90",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "nit: perhaps include the storeOp in your example too. Previously we would always Discard for the application, but now they can control it more",
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b39191_f24ba558",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n            {\"value\": 3, \"name\": \"expand resolve texture\", \"tags\": [\"dawn\"]}\n```",
+      "range": {
+        "startLine": 2517,
+        "startChar": 0,
+        "endLine": 2517,
+        "endChar": 58
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "663b82c9_52f739da",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"%s is used while %s is not enabled.\",\n```\n\nDon\u0027t need \"LoadOp\" or \"feature\" - it gets printed in the stringification of the enum",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 79
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e02b2f3_26f278de",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"The color attachment %s\u0027s sample count (%u) is not supported by %s.\",\n```\n\nDon\u0027t need \"LoadOp\" - it gets printed in the stringification of the enum",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 99
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662fc679_e9a02fd8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"%s is used without resolve target.\",\n```",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 66
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25faf927_5d83fef5",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"Resolve target (%s) was not created with %s, which is required for %s\",\n                    colorAttachment.resolveTarget, wgpu::TextureUsage::TextureBinding,\n```",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 0
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddda8d86_08677c55",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"The color attachment (%s) format (%s) does not support being used with \"\n                    \"%s. The format does not support resolve.\",\n                    colorAttachment.view, colorAttachment.view-\u003eGetFormat().format,\n```",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 0
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df5a33d_34204aa1",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"%s is not supported on depth/stencil attachment\",\n```",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 645,
+        "endChar": 79
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68609309_126db0ea",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n            \"with %s. (Currently) colorAttachmentCount \u003d 1 is supported.\",\n```",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 812,
+        "endChar": 83
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f41994_22e841e1",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "```suggestion\n        DAWN_INVALID_IF(pls !\u003d nullptr, \"For now pixel local storage is invalid to use with LoadOp %s.\",\n```",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 90
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb372e0_48f10ed5",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T03:06:05Z",
+      "side": 1,
+      "message": "nit: we have a lot of old usages of underscores, but official gtest style is to not have underscores in test names",
+      "range": {
+        "startLine": 1540,
+        "startChar": 35,
+        "endLine": 1540,
+        "endChar": 49
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
