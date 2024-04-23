@@ -16,6 +16,24 @@
       "message": "you haven\u0027t modified the SharedTextureMemory path which is soon to replace ExternalImageDXGI - we should probably do that as well",
       "revId": "a07430f8768af9060936a03872c612b54911ace0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ac5e0e7_47b26220",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-23T18:34:44Z",
+      "side": 0,
+      "message": "I think we can do it in follow-up CLs.",
+      "parentUuid": "76d3f1a3_8e1d0055",
+      "revId": "a07430f8768af9060936a03872c612b54911ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
