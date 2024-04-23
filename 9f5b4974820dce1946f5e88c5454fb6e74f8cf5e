@@ -51,6 +51,24 @@
       "parentUuid": "4af367ac_9f82b7a6",
       "revId": "9f5b4974820dce1946f5e88c5454fb6e74f8cf5e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46c1127e_955501e6",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T14:44:03Z",
+      "side": 1,
+      "message": "I commented on the chromium cl [here](https://chromium-review.googlesource.com/c/chromium/src/+/5456006/comment/7a05a7e2_bd04e3da/) about where your change dropped the internal usages. We need to preserve those.",
+      "parentUuid": "46596737_f94a9883",
+      "revId": "9f5b4974820dce1946f5e88c5454fb6e74f8cf5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
