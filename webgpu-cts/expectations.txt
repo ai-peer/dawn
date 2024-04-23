@@ -145,16 +145,6 @@ crbug.com/1421045 [ nvidia-0x2184 ubuntu ] webgpu:api,validation,capability_chec
 crbug.com/1448651 [ amd-0x67ef ] webgpu:api,operation,rendering,color_target_state:blending,GPUBlendComponent:* [ Skip ]
 
 ################################################################################
-# Various failures when configuring a canvas context on Android
-# Skipped instead of just Crash / Failure because of the number of failures
-# And the destabilizing effect they seem to have on subsequent tests.
-# KEEP
-################################################################################
-crbug.com/dawn/1965 [ android ] webgpu:web_platform,canvas,configure:format:* [ Skip ]
-crbug.com/dawn/1965 [ android ] webgpu:web_platform,canvas,configure:usage:* [ Skip ]
-crbug.com/dawn/1965 [ android ] webgpu:web_platform,canvas,configure:viewFormats:* [ Skip ]
-
-################################################################################
 # maxBufferSize test causing instability
 # KEEP
 ################################################################################
