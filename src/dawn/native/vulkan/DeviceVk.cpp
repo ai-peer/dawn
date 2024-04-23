@@ -399,7 +399,6 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
     VkPhysicalDeviceFeatures2 features2 = {};
     features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
     features2.pNext = nullptr;
-    PNextChainBuilder featuresChain(&features2);
 
     // Required for core WebGPU features.
     usedKnobs.features.depthBiasClamp = VK_TRUE;
@@ -418,7 +417,7 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
 
         // Always request all the features from VK_EXT_subgroup_size_control when available.
         usedKnobs.subgroupSizeControlFeatures = mDeviceInfo.subgroupSizeControlFeatures;
-        featuresChain.Add(&usedKnobs.subgroupSizeControlFeatures);
+        PNextChainAppend(&features2, &usedKnobs.subgroupSizeControlFeatures);
     }
 
     if (mDeviceInfo.HasExt(DeviceExt::ZeroInitializeWorkgroupMemory)) {
@@ -429,14 +428,14 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         // variable is explicitly initialized with OpConstantNull.
         usedKnobs.zeroInitializeWorkgroupMemoryFeatures =
             mDeviceInfo.zeroInitializeWorkgroupMemoryFeatures;
-        featuresChain.Add(&usedKnobs.zeroInitializeWorkgroupMemoryFeatures);
+        PNextChainAppend(&features2, &usedKnobs.zeroInitializeWorkgroupMemoryFeatures);
     }
 
     if (mDeviceInfo.HasExt(DeviceExt::ShaderIntegerDotProduct)) {
         DAWN_ASSERT(usedKnobs.HasExt(DeviceExt::ShaderIntegerDotProduct));
 
         usedKnobs.shaderIntegerDotProductFeatures = mDeviceInfo.shaderIntegerDotProductFeatures;
-        featuresChain.Add(&usedKnobs.shaderIntegerDotProductFeatures);
+        PNextChainAppend(&features2, &usedKnobs.shaderIntegerDotProductFeatures);
     }
 
     if (mDeviceInfo.features.samplerAnisotropy == VK_TRUE) {
@@ -482,10 +481,10 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
             usedKnobs._16BitStorageFeatures.storageInputOutput16 = VK_TRUE;
         }
 
-        featuresChain.Add(&usedKnobs.shaderFloat16Int8Features,
-                          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR);
-        featuresChain.Add(&usedKnobs._16BitStorageFeatures,
-                          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
+        PNextChainAppend(&features2, &usedKnobs.shaderFloat16Int8Features,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR);
+        PNextChainAppend(&features2, &usedKnobs._16BitStorageFeatures,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
     }
 
     if (HasFeature(Feature::DualSourceBlending)) {
@@ -500,7 +499,7 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
         DAWN_ASSERT(usedKnobs.HasExt(DeviceExt::Robustness2));
 
         usedKnobs.robustness2Features = mDeviceInfo.robustness2Features;
-        featuresChain.Add(&usedKnobs.robustness2Features);
+        PNextChainAppend(&features2, &usedKnobs.robustness2Features);
     }
 
     if (HasFeature(Feature::ChromiumExperimentalSubgroupUniformControlFlow)) {
@@ -511,15 +510,15 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice vkPhysica
 
         usedKnobs.shaderSubgroupUniformControlFlowFeatures =
             mDeviceInfo.shaderSubgroupUniformControlFlowFeatures;
-        featuresChain.Add(&usedKnobs.shaderSubgroupUniformControlFlowFeatures);
+        PNextChainAppend(&features2, &usedKnobs.shaderSubgroupUniformControlFlowFeatures);
     }
 
     if (HasFeature(Feature::YCbCrVulkanSamplers) &&
         mDeviceInfo.HasExt(DeviceExt::SamplerYCbCrConversion) &&
         mDeviceInfo.HasExt(DeviceExt::ExternalMemoryAndroidHardwareBuffer)) {
         usedKnobs.samplerYCbCrConversionFeatures.samplerYcbcrConversion = VK_TRUE;
-        featuresChain.Add(&usedKnobs.samplerYCbCrConversionFeatures,
-                          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES);
+        PNextChainAppend(&features2, &usedKnobs.samplerYCbCrConversionFeatures,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES);
     }
 
     // Find a universal queue family

@@ -49,13 +49,12 @@ bool GetFormatModifierProps(const VulkanFunctions& fn,
     std::vector<VkDrmFormatModifierPropertiesEXT> formatModifierPropsVector;
     VkFormatProperties2 formatProps = {};
     formatProps.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
-    PNextChainBuilder formatPropsChain(&formatProps);
 
     VkDrmFormatModifierPropertiesListEXT formatModifierPropsList = {};
     formatModifierPropsList.drmFormatModifierCount = 0;
     formatModifierPropsList.pDrmFormatModifierProperties = nullptr;
-    formatPropsChain.Add(&formatModifierPropsList,
-                         VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT);
+    PNextChainAppend(&formatProps, &formatModifierPropsList,
+                     VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT);
 
     fn.GetPhysicalDeviceFormatProperties2(vkPhysicalDevice, format, &formatProps);
 
@@ -193,18 +192,17 @@ class ServiceImplementationDmaBuf : public ServiceImplementation {
         imageFormatInfo.tiling = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
         imageFormatInfo.usage = usage;
         imageFormatInfo.flags = 0;
-        PNextChainBuilder imageFormatInfoChain(&imageFormatInfo);
 
         VkPhysicalDeviceExternalImageFormatInfo externalImageFormatInfo = {};
         externalImageFormatInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT;
-        imageFormatInfoChain.Add(&externalImageFormatInfo,
-                                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO);
+        PNextChainAppend(&imageFormatInfo, &externalImageFormatInfo,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO);
 
         VkPhysicalDeviceImageDrmFormatModifierInfoEXT drmModifierInfo = {};
         drmModifierInfo.drmFormatModifier = dmaBufDescriptor->drmModifier;
         drmModifierInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
-        imageFormatInfoChain.Add(
-            &drmModifierInfo, VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT);
+        PNextChainAppend(&imageFormatInfo, &drmModifierInfo,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT);
 
         // For mutable vkimage of multi-planar format, we also need to make sure the each
         // plane's view format can be supported.
@@ -217,17 +215,16 @@ class ServiceImplementationDmaBuf : public ServiceImplementation {
             imageFormatListInfo.viewFormatCount = 2;
             imageFormatListInfo.pViewFormats = viewFormats.data();
             imageFormatInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
-            imageFormatInfoChain.Add(&imageFormatListInfo,
-                                     VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
+            PNextChainAppend(&imageFormatInfo, &imageFormatListInfo,
+                             VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
         }
 
         VkImageFormatProperties2 imageFormatProps = {};
         imageFormatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
-        PNextChainBuilder imageFormatPropsChain(&imageFormatProps);
 
         VkExternalImageFormatProperties externalImageFormatProps = {};
-        imageFormatPropsChain.Add(&externalImageFormatProps,
-                                  VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES);
+        PNextChainAppend(&imageFormatProps, &externalImageFormatProps,
+                         VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES);
 
         VkResult result = VkResult::WrapUnsafe(mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
             vkPhysicalDevice, &imageFormatInfo, &imageFormatProps));
@@ -286,20 +283,19 @@ class ServiceImplementationDmaBuf : public ServiceImplementation {
         memoryAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
         memoryAllocateInfo.allocationSize = importParams.allocationSize;
         memoryAllocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
-        PNextChainBuilder memoryAllocateInfoChain(&memoryAllocateInfo);
 
         VkImportMemoryFdInfoKHR importMemoryFdInfo;
         importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
         importMemoryFdInfo.fd = handle;
-        memoryAllocateInfoChain.Add(&importMemoryFdInfo,
-                                    VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
+        PNextChainAppend(&memoryAllocateInfo, &importMemoryFdInfo,
+                         VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
 
         VkMemoryDedicatedAllocateInfo memoryDedicatedAllocateInfo;
         if (importParams.dedicatedAllocation) {
             memoryDedicatedAllocateInfo.image = image;
             memoryDedicatedAllocateInfo.buffer = VkBuffer{};
-            memoryAllocateInfoChain.Add(&memoryDedicatedAllocateInfo,
-                                        VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+            PNextChainAppend(&memoryAllocateInfo, &memoryDedicatedAllocateInfo,
+                             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
         }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
@@ -330,12 +326,10 @@ class ServiceImplementationDmaBuf : public ServiceImplementation {
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
         createInfo.tiling = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
 
-        PNextChainBuilder createInfoChain(&createInfo);
-
         VkExternalMemoryImageCreateInfo externalMemoryImageCreateInfo = {};
         externalMemoryImageCreateInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT;
-        createInfoChain.Add(&externalMemoryImageCreateInfo,
-                            VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
+        PNextChainAppend(&createInfo, &externalMemoryImageCreateInfo,
+                         VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
 
         VkSubresourceLayout planeLayouts[ExternalImageDescriptorDmaBuf::kMaxPlanes];
         for (uint32_t plane = 0u; plane < planeCount; ++plane) {
@@ -356,8 +350,8 @@ class ServiceImplementationDmaBuf : public ServiceImplementation {
             // VkImageView can be plane's format which might differ from the image's format.
             createInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
         }
-        createInfoChain.Add(&explicitCreateInfo,
-                            VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT);
+        PNextChainAppend(&createInfo, &explicitCreateInfo,
+                         VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT);
 
         // Create a new VkImage with tiling equal to the DRM format modifier.
         VkImage image;

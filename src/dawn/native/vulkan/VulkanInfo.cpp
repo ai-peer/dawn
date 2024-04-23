@@ -245,88 +245,84 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const PhysicalDevice& device) {
         VkPhysicalDeviceFeatures2 features2 = {};
         features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
         features2.pNext = nullptr;
-        PNextChainBuilder featuresChain(&features2);
 
         VkPhysicalDeviceProperties2 properties2 = {};
         properties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
 
-        PNextChainBuilder propertiesChain(&properties2);
-
-        propertiesChain.Add(&info.propertiesMaintenance3,
-                            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES);
+        PNextChainAppend(&properties2, &info.propertiesMaintenance3,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES);
 
         if (info.extensions[DeviceExt::ShaderFloat16Int8]) {
-            featuresChain.Add(&info.shaderFloat16Int8Features,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR);
+            PNextChainAppend(&features2, &info.shaderFloat16Int8Features,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR);
         }
 
         if (info.extensions[DeviceExt::_16BitStorage]) {
-            featuresChain.Add(&info._16BitStorageFeatures,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
+            PNextChainAppend(&features2, &info._16BitStorageFeatures,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
         }
 
         if (info.extensions[DeviceExt::SubgroupSizeControl]) {
-            featuresChain.Add(&info.subgroupSizeControlFeatures,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT);
-            propertiesChain.Add(
-                &info.subgroupSizeControlProperties,
+            PNextChainAppend(&features2, &info.subgroupSizeControlFeatures,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT);
+            PNextChainAppend(
+                &properties2, &info.subgroupSizeControlProperties,
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT);
         }
 
         if (info.extensions[DeviceExt::DriverProperties]) {
-            propertiesChain.Add(&info.driverProperties,
-                                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES);
+            PNextChainAppend(&properties2, &info.driverProperties,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES);
         }
 
         if (info.extensions[DeviceExt::ShaderIntegerDotProduct]) {
-            featuresChain.Add(
-                &info.shaderIntegerDotProductFeatures,
+            PNextChainAppend(
+                &features2, &info.shaderIntegerDotProductFeatures,
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR);
 
-            propertiesChain.Add(
-                &info.shaderIntegerDotProductProperties,
+            PNextChainAppend(
+                &properties2, &info.shaderIntegerDotProductProperties,
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR);
         }
 
         if (info.extensions[DeviceExt::DepthClipEnable]) {
-            featuresChain.Add(&info.depthClipEnableFeatures,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT);
+            PNextChainAppend(&features2, &info.depthClipEnableFeatures,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT);
         }
 
         if (info.extensions[DeviceExt::Maintenance4]) {
-            propertiesChain.Add(&info.propertiesMaintenance4,
-                                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES);
+            PNextChainAppend(&properties2, &info.propertiesMaintenance4,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES);
         }
 
         if (info.extensions[DeviceExt::ZeroInitializeWorkgroupMemory]) {
-            featuresChain.Add(
-                &info.zeroInitializeWorkgroupMemoryFeatures,
+            PNextChainAppend(
+                &features2, &info.zeroInitializeWorkgroupMemoryFeatures,
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES);
         }
 
         if (info.extensions[DeviceExt::Robustness2]) {
-            featuresChain.Add(&info.robustness2Features,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT);
+            PNextChainAppend(&features2, &info.robustness2Features,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT);
         }
 
         if (info.extensions[DeviceExt::SamplerYCbCrConversion]) {
-            featuresChain.Add(&info.samplerYCbCrConversionFeatures,
-                              VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES);
+            PNextChainAppend(&features2, &info.samplerYCbCrConversionFeatures,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES);
         }
 
         // Check subgroup features and properties
-        propertiesChain.Add(&info.subgroupProperties,
-                            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES);
+        PNextChainAppend(&properties2, &info.subgroupProperties,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES);
         if (info.extensions[DeviceExt::ShaderSubgroupUniformControlFlow]) {
-            featuresChain.Add(
-                &info.shaderSubgroupUniformControlFlowFeatures,
+            PNextChainAppend(
+                &features2, &info.shaderSubgroupUniformControlFlowFeatures,
                 VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR);
         }
 
         if (info.extensions[DeviceExt::ExternalMemoryHost]) {
-            propertiesChain.Add(
-                &info.externalMemoryHostProperties,
-                VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT);
+            PNextChainAppend(&properties2, &info.externalMemoryHostProperties,
+                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT);
         }
 
         // Use vkGetPhysicalDevice{Features,Properties}2 if required to gather information about

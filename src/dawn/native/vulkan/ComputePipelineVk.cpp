@@ -99,8 +99,6 @@ MaybeError ComputePipeline::InitializeImpl() {
 
     createInfo.stage.pSpecializationInfo = nullptr;
 
-    PNextChainBuilder stageExtChain(&createInfo.stage);
-
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT subgroupSizeInfo = {};
     uint32_t computeSubgroupSize = device->GetComputeSubgroupSize();
     // If experimental full subgroups is required, pipeline is created with varying subgroup size
@@ -108,8 +106,8 @@ MaybeError ComputePipeline::InitializeImpl() {
     if (computeSubgroupSize != 0u && !IsFullSubgroupsRequired()) {
         DAWN_ASSERT(device->GetDeviceInfo().HasExt(DeviceExt::SubgroupSizeControl));
         subgroupSizeInfo.requiredSubgroupSize = computeSubgroupSize;
-        stageExtChain.Add(
-            &subgroupSizeInfo,
+        PNextChainAppend(
+            &createInfo.stage, &subgroupSizeInfo,
             VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT);
     }
 

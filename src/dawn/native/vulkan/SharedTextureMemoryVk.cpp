@@ -134,14 +134,12 @@ ResultOrError<VkImage> CreateExternalVkImage(
     createInfo.pQueueFamilyIndices = nullptr;
     createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
-    PNextChainBuilder createInfoChain(&createInfo);
-
     VkExternalMemoryImageCreateInfo externalMemoryImageCreateInfo = {};
     externalMemoryImageCreateInfo.handleTypes = externalMemoryHandleTypeFlagBits;
-    createInfoChain.Add(&externalMemoryImageCreateInfo,
-                        VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
+    PNextChainAppend(&createInfo, &externalMemoryImageCreateInfo,
+                     VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
 
-    (createInfoChain.Add(additionalChains), ...);
+    (PNextChainAppend(&createInfo, additionalChains), ...);
 
     // Create the VkImage.
     VkImage vkImage;
@@ -160,22 +158,19 @@ MaybeError CheckExternalImageFormatSupport(
     VkPhysicalDeviceImageFormatInfo2* imageFormatInfo,
     VkExternalMemoryHandleTypeFlagBits externalMemoryHandleTypeFlagBits,
     AdditionalChains*... additionalChains) {
-    PNextChainBuilder imageFormatInfoChain(imageFormatInfo);
-
     VkPhysicalDeviceExternalImageFormatInfo externalImageFormatInfo = {};
     externalImageFormatInfo.handleType = externalMemoryHandleTypeFlagBits;
-    imageFormatInfoChain.Add(&externalImageFormatInfo,
-                             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO);
+    PNextChainAppend(imageFormatInfo, &externalImageFormatInfo,
+                     VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO);
 
-    (imageFormatInfoChain.Add(additionalChains), ...);
+    (PNextChainAppend(imageFormatInfo, additionalChains), ...);
 
     VkImageFormatProperties2 imageFormatProps = {};
     imageFormatProps.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2;
-    PNextChainBuilder imageFormatPropsChain(&imageFormatProps);
 
     VkExternalImageFormatProperties externalImageFormatProps = {};
-    imageFormatPropsChain.Add(&externalImageFormatProps,
-                              VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES);
+    PNextChainAppend(&imageFormatProps, &externalImageFormatProps,
+                     VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES);
 
     DAWN_TRY_CONTEXT(
         CheckVkSuccess(device->fn.GetPhysicalDeviceImageFormatProperties2(
@@ -198,9 +193,7 @@ template <typename... AdditionalChains>
 ResultOrError<VkDeviceMemory> AllocateDeviceMemory(Device* device,
                                                    VkMemoryAllocateInfo* memoryAllocateInfo,
                                                    AdditionalChains*... additionalChains) {
-    PNextChainBuilder memoryAllocateInfoChain(memoryAllocateInfo);
-
-    (memoryAllocateInfoChain.Add(additionalChains), ...);
+    (PNextChainAppend(memoryAllocateInfo, additionalChains), ...);
 
     VkDeviceMemory vkDeviceMemory;
     DAWN_TRY(CheckVkSuccess(device->fn.AllocateMemory(device->GetVkDevice(), memoryAllocateInfo,
@@ -517,12 +510,9 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
 
     // Query the properties to find the appropriate VkFormat and memory type.
     {
-        PNextChainBuilder bufferPropertiesChain(&bufferProperties);
-
         VkAndroidHardwareBufferFormatPropertiesANDROID bufferFormatProperties;
-        bufferPropertiesChain.Add(
-            &bufferFormatProperties,
-            VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID);
+        PNextChainAppend(&bufferProperties, &bufferFormatProperties,
+                         VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID);
 
         DAWN_TRY(CheckVkSuccess(device->fn.GetAndroidHardwareBufferPropertiesANDROID(
                                     vkDevice, aHardwareBuffer, &bufferProperties),

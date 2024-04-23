@@ -137,20 +137,19 @@ class ServiceImplementationZicronHandle : public ServiceImplementation {
         allocateInfo.pNext = nullptr;
         allocateInfo.allocationSize = importParams.allocationSize;
         allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
-        PNextChainBuilder allocateInfoChain(&allocateInfo);
 
         VkImportMemoryZirconHandleInfoFUCHSIA importMemoryHandleInfo;
         importMemoryHandleInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA;
         importMemoryHandleInfo.handle = handle;
-        allocateInfoChain.Add(&importMemoryHandleInfo,
-                              VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA);
+        PNextChainAppend(&allocateInfo, &importMemoryHandleInfo,
+                         VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA);
 
         VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
         if (importParams.dedicatedAllocation) {
             dedicatedAllocateInfo.image = image;
             dedicatedAllocateInfo.buffer = VkBuffer{};
-            allocateInfoChain.Add(&dedicatedAllocateInfo,
-                                  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+            PNextChainAppend(&allocateInfo, &dedicatedAllocateInfo,
+                             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
         }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
@@ -173,9 +172,8 @@ class ServiceImplementationZicronHandle : public ServiceImplementation {
         externalMemoryImageCreateInfo.handleTypes =
             VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA;
 
-        PNextChainBuilder createInfoChain(&createInfo);
-        createInfoChain.Add(&externalMemoryImageCreateInfo,
-                            VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
+        PNextChainAppend(&createInfo, &externalMemoryImageCreateInfo,
+                         VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
 
         DAWN_ASSERT(IsSampleCountSupported(mDevice, createInfo));
 

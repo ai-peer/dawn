@@ -67,24 +67,20 @@ class ServiceImplementationAHardwareBuffer : public ServiceImplementation {
             .flags = flags,
         };
 
-        PNextChainBuilder formatInfoChain(&formatInfo);
-
         VkPhysicalDeviceExternalImageFormatInfo externalFormatInfo = {
             .handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID,
         };
-        formatInfoChain.Add(&externalFormatInfo,
-                            VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR);
+        PNextChainAppend(&formatInfo, &externalFormatInfo,
+                         VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO_KHR);
 
         VkImageFormatProperties2 formatProperties = {
             .sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR,
             .pNext = nullptr,
         };
 
-        PNextChainBuilder formatPropertiesChain(&formatProperties);
-
         VkExternalImageFormatProperties externalFormatProperties;
-        formatPropertiesChain.Add(&externalFormatProperties,
-                                  VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR);
+        PNextChainAppend(&formatProperties, &externalFormatProperties,
+                         VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES_KHR);
 
         VkResult result = VkResult::WrapUnsafe(mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
             ToBackend(mDevice->GetPhysicalDevice())->GetVkPhysicalDevice(), &formatInfo,
@@ -123,12 +119,9 @@ class ServiceImplementationAHardwareBuffer : public ServiceImplementation {
             .pNext = nullptr,
         };
 
-        PNextChainBuilder bufferPropertiesChain(&bufferProperties);
-
         VkAndroidHardwareBufferFormatPropertiesANDROID bufferFormatProperties;
-        bufferPropertiesChain.Add(
-            &bufferFormatProperties,
-            VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID);
+        PNextChainAppend(&bufferProperties, &bufferFormatProperties,
+                         VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID);
 
         DAWN_TRY(CheckVkSuccess(
             mDevice->fn.GetAndroidHardwareBufferPropertiesANDROID(
@@ -162,20 +155,18 @@ class ServiceImplementationAHardwareBuffer : public ServiceImplementation {
             .memoryTypeIndex = importParams.memoryTypeIndex,
         };
 
-        PNextChainBuilder allocateInfoChain(&allocateInfo);
-
         VkImportAndroidHardwareBufferInfoANDROID importMemoryAHBInfo = {
             .buffer = handle,
         };
-        allocateInfoChain.Add(&importMemoryAHBInfo,
-                              VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID);
+        PNextChainAppend(&allocateInfo, &importMemoryAHBInfo,
+                         VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID);
 
         VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
         if (importParams.dedicatedAllocation) {
             dedicatedAllocateInfo.image = image;
             dedicatedAllocateInfo.buffer = VkBuffer{};
-            allocateInfoChain.Add(&dedicatedAllocateInfo,
-                                  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+            PNextChainAppend(&allocateInfo, &dedicatedAllocateInfo,
+                             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
         }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
@@ -192,13 +183,11 @@ class ServiceImplementationAHardwareBuffer : public ServiceImplementation {
         createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
-        PNextChainBuilder createInfoChain(&createInfo);
-
         VkExternalMemoryImageCreateInfo externalMemoryImageCreateInfo = {
             .handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID,
         };
-        createInfoChain.Add(&externalMemoryImageCreateInfo,
-                            VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
+        PNextChainAppend(&createInfo, &externalMemoryImageCreateInfo,
+                         VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
 
         DAWN_ASSERT(IsSampleCountSupported(mDevice, createInfo));
 

@@ -289,14 +289,13 @@ std::vector<VkDrmFormatModifierPropertiesEXT> GetFormatModifierProps(
     VkFormat format) {
     VkFormatProperties2 formatProps = {};
     formatProps.sType = VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2;
-    PNextChainBuilder formatPropsChain(&formatProps);
 
     // Obtain the list of Linux DRM format modifiers compatible with a VkFormat
     VkDrmFormatModifierPropertiesListEXT formatModifierPropsList = {};
     formatModifierPropsList.drmFormatModifierCount = 0;
     formatModifierPropsList.pDrmFormatModifierProperties = nullptr;
-    formatPropsChain.Add(&formatModifierPropsList,
-                         VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT);
+    PNextChainAppend(&formatProps, &formatModifierPropsList,
+                     VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT);
 
     fn.GetPhysicalDeviceFormatProperties2(vkPhysicalDevice, format, &formatProps);
 
