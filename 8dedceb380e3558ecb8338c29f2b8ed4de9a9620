@@ -34,6 +34,24 @@
       "parentUuid": "1d0f614e_9acde74e",
       "revId": "8dedceb380e3558ecb8338c29f2b8ed4de9a9620",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b9168c_47a46ce8",
+        "filename": "src/tint/utils/bytes/buffer_reader_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-23T14:09:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24ca6f18_ae620481",
+      "revId": "8dedceb380e3558ecb8338c29f2b8ed4de9a9620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
