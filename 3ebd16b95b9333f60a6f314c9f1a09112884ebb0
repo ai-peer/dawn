@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9fde76_27dd4d56",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T11:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eaf6a66_aa4ee549",
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac17e8a2_271f2baa",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f77198_9db0a631",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T11:21:29Z",
+      "side": 1,
+      "message": "I don\u0027t think it would be expensive? The fullscreen quad draw is not free but is it really expensive? Nevertheless, Graphite will want to do that regardless of tiler or not anw,",
+      "parentUuid": "ac17e8a2_271f2baa",
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baf8b286_3da84948",
@@ -65,6 +101,30 @@
       "writtenOn": "2024-04-23T10:57:20Z",
       "side": 1,
       "message": "nit: Maybe mention that the loading is inserted at the start of the render pass so we don\u0027t care about the initial value in the tile cache. Ditto for the other such comment.",
+      "range": {
+        "startLine": 202,
+        "startChar": 19,
+        "endLine": 202,
+        "endChar": 53
+      },
+      "revId": "3ebd16b95b9333f60a6f314c9f1a09112884ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80b94b2_7ecab351",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T11:21:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baf8b286_3da84948",
       "range": {
         "startLine": 202,
         "startChar": 19,
