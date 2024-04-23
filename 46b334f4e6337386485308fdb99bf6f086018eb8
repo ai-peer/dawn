@@ -1,0 +1,231 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9271230_13dfdc09",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "This could be an `@property defaultable` on structures that\u0027s computed on the topologically sorted list here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;drc\u003d410f2d0f31c100c0ae956246bdbac6c75f24478b;l\u003d562\n\nBasically we could have Structure.compute_metadata() function that\u0027s guaranteeed to be called in topological order so dependents already have their metadata computed.\n\nLikewise this could be where we set a metadata field on the RecordMember is_length to know to skip them.",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85712b5e_9f9f794f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "Why is const* special cased? Can we assert() that all const* have a default to nullptr for example? And all lengths default to 0?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd24907a_d987cc91",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b631dea6_07c97573",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "We could have a separate function to compute the kotlin params instead of doing it inline in this already ginormous function. See [1]",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5741d0f7_54ceacde",
+        "filename": "generator/templates/art/api_kotlin_structure.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "I don\u0027t know that using class inheritance for chained struct is the right approach. The extension chains are used to mimic Javascript\u0027s ability to just add new keys to dictionaries. Instead imho we should flatten all the chained structs into the chain root. Chained struct members should all have default values that are equivalent to not being set. (plus if we really need to we could make the extension members be getter/setters so we know if they have been set)\n\nThis makes me think that Dawn has a lot of stuff that we don\u0027t want to expose to kotlin. Maybe we could add a new tag \"kotlin\" that\u0027s used to tag things we want to add (and we\u0027d remove \"dawn\" or \"native\" tagged things).",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f814f7a_e264446e",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "For methods in the future, it might be useful to separate the declaration of the type from the declaration of the default value.",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6814d7cf_8785656c",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "Maybe document that this takes a RecordMember? //* can be used to make comments that will be stripped from the template.",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace855c8_4379f240",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "Aren\u0027t all things with default values automatically tagged as optional in dawn_json_generator?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9175e3c_104ca544",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "I don\u0027t think we have non-null default values for strings. (and ever will)",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6117ccac_f60253d0",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "`unreachable()`?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94871883_99225fda",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "Where is `construct` defined???",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eefef4a4_a5c0eb43",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "what\u0027s ~ doing?",
+      "range": {
+        "startLine": 65,
+        "startChar": 34,
+        "endLine": 65,
+        "endChar": 36
+      },
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41bec80d_bff4c95a",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "Do we ever want to expose void* members to Kotlin other than for buffer mapping?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

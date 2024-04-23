@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44efc5bd_0aff8929",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "There is documentation here https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/codegen.md though it doesn\u0027t mention const*const* for the annotation.",
+      "parentUuid": "c0736b33_12fcb5e9",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baa11c01_04f52ca4",
         "filename": "generator/templates/art/api_kotlin_types.kt",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I have added that and the nullptr too to be consistent between int64_t and int32_t.\n\nI\u0027ve been generally been adding these conversions on an \u0027as needed\u0027 basis hence why it hasn\u0027t come up (no -1 defaults for int64 values for whatever reason).\n\nWe need to come up with some more exhaustive testing plan.",
       "parentUuid": "baa11c01_04f52ca4",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c4ef51_21a422ad",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:30:30Z",
+      "side": 1,
+      "message": "We could add an \"unreachable()\" function builtin to use in templates (or assert() as well). We already have one that we use here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;drc\u003d410f2d0f31c100c0ae956246bdbac6c75f24478b;l\u003d1318 but could put it in the basic params.",
+      "parentUuid": "56ce3f47_70ac628c",
       "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
