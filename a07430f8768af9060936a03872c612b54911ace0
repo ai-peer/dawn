@@ -70,6 +70,24 @@
       "parentUuid": "bad5c27a_5cbff448",
       "revId": "a07430f8768af9060936a03872c612b54911ace0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f88d0b5_1592d681",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T21:11:26Z",
+      "side": 0,
+      "message": "it\u0027s important that Dawn has tests the exercise the APIs that we expose - that\u0027s just standard practice",
+      "parentUuid": "2a746e76_96091a8e",
+      "revId": "a07430f8768af9060936a03872c612b54911ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

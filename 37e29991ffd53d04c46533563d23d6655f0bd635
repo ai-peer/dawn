@@ -331,6 +331,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6d7581c_196c534c",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T21:11:26Z",
+      "side": 1,
+      "message": "in this case, how about you validate that mnulti-layer textures are read only?\n\nbecause readonly textures decay back to common state, the state transitions are simpler. Then it\u0027s less important to test using different layers with different usages.",
+      "parentUuid": "1b8570d3_32610e11",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff56fe15_e3f40f34",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 5

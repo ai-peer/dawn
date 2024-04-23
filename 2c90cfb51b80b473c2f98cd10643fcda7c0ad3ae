@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cd000e_63b8ccd3",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T21:11:26Z",
+      "side": 1,
+      "message": "I think we should test Dimension::e2DArray, baseArrayLayer \u003d 0, and arrayLayerCount \u003d GetLayerCount(); as well.\n\nYou can sample each layer in the shader and output multiple color targets for the YUV data. Same for the other tests",
+      "range": {
+        "startLine": 783,
+        "startChar": 6,
+        "endLine": 785,
+        "endChar": 41
+      },
+      "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
