@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c63ba44_cfc1fe7f",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T15:06:39Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 189,
+        "startChar": 17,
+        "endLine": 190,
+        "endChar": 17
+      },
+      "revId": "13db1510b734135304fb834cd8a816f31578773f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7ec21ad_05f3a953",
         "filename": "src/dawn/common/ContentLessObjectCache.h",
         "patchSetId": 3
@@ -31,6 +54,30 @@
       "writtenOn": "2024-04-23T14:43:39Z",
       "side": 1,
       "message": "This should probably be updated as absl flat_hash_set doesn\u0027t use buckets internally.",
+      "range": {
+        "startLine": 285,
+        "startChar": 31,
+        "endLine": 287,
+        "endChar": 76
+      },
+      "revId": "13db1510b734135304fb834cd8a816f31578773f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7ddd1b_eef94e26",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T15:06:39Z",
+      "side": 1,
+      "message": "and at [1]. I\u0027ll just use 0 for the initial capacity - that\u0027s what absl defaults to.\n\nI think the stack vector size should be ok. at least in the current absl implemenation, they describe [here](https://github.com/abseil/abseil-cpp/blob/41136ed173b64fbe4ef55838bcc24c6b81dead5e/absl/container/internal/raw_hash_set.h#L140C1-L147C29) that every find/insert should do on average 0.125 equality comparisons. So for us that on average 0.25 weakref promotions",
+      "parentUuid": "e7ec21ad_05f3a953",
       "range": {
         "startLine": 285,
         "startChar": 31,
