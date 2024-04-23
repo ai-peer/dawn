@@ -209,11 +209,11 @@ class VulkanImageWrappingTestBackendOpaqueFD : public VulkanImageWrappingTestBac
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = nullptr;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
-        PNextChainBuilder createChain(&createInfo);
 
         VkExternalMemoryImageCreateInfoKHR externalInfo;
         externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
-        createChain.Add(&externalInfo, VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR);
+        PNextChainAppend(&createInfo, &externalInfo,
+                         VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_KHR);
 
         return deviceVk->fn.CreateImage(deviceVk->GetVkDevice(), &createInfo, nullptr, &**image);
     }
@@ -236,19 +236,20 @@ class VulkanImageWrappingTestBackendOpaqueFD : public VulkanImageWrappingTestBac
         allocateInfo.pNext = nullptr;
         allocateInfo.allocationSize = requirements.size;
         allocateInfo.memoryTypeIndex = static_cast<uint32_t>(bestType);
-        PNextChainBuilder allocateChain(&allocateInfo);
 
         // Import memory from file descriptor
         VkExportMemoryAllocateInfoKHR externalInfo;
         externalInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
-        allocateChain.Add(&externalInfo, VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR);
+        PNextChainAppend(&allocateInfo, &externalInfo,
+                         VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_KHR);
 
         // Use a dedicated memory allocation if testing that path.
         VkMemoryDedicatedAllocateInfo dedicatedInfo;
         if (GetParam().useDedicatedAllocation) {
             dedicatedInfo.image = handle;
             dedicatedInfo.buffer = VkBuffer{};
-            allocateChain.Add(&dedicatedInfo, VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+            PNextChainAppend(&allocateInfo, &dedicatedInfo,
+                             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
         }
 
         *allocationSize = allocateInfo.allocationSize;

@@ -135,19 +135,19 @@ class ServiceImplementationOpaqueFD : public ServiceImplementation {
         allocateInfo.pNext = nullptr;
         allocateInfo.allocationSize = importParams.allocationSize;
         allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
-        PNextChainBuilder allocateInfoChain(&allocateInfo);
 
         VkImportMemoryFdInfoKHR importMemoryFdInfo;
         importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
         importMemoryFdInfo.fd = handle;
-        allocateInfoChain.Add(&importMemoryFdInfo, VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
+        PNextChainAppend(&allocateInfo, &importMemoryFdInfo,
+                         VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
 
         VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
         if (importParams.dedicatedAllocation) {
             dedicatedAllocateInfo.image = image;
             dedicatedAllocateInfo.buffer = VkBuffer{};
-            allocateInfoChain.Add(&dedicatedAllocateInfo,
-                                  VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+            PNextChainAppend(&allocateInfo, &dedicatedAllocateInfo,
+                             VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
         }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
@@ -169,9 +169,8 @@ class ServiceImplementationOpaqueFD : public ServiceImplementation {
         externalMemoryImageCreateInfo.pNext = nullptr;
         externalMemoryImageCreateInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
 
-        PNextChainBuilder createInfoChain(&createInfo);
-        createInfoChain.Add(&externalMemoryImageCreateInfo,
-                            VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
+        PNextChainAppend(&createInfo, &externalMemoryImageCreateInfo,
+                         VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO);
 
         DAWN_ASSERT(IsSampleCountSupported(mDevice, createInfo));
 

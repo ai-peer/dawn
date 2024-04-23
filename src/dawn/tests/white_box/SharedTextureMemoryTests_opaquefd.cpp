@@ -71,8 +71,7 @@ auto CreateSharedTextureMemoryHelperImpl(native::vulkan::Device* deviceVk,
     createInfo.pQueueFamilyIndices = nullptr;
     createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
-    PNextChainBuilder createInfoChain(&createInfo);
-    (createInfoChain.Add(additionalChains), ...);
+    (PNextChainAppend(&createInfo, additionalChains), ...);
 
     VkImage vkImage;
     EXPECT_EQ(deviceVk->fn.CreateImage(deviceVk->GetVkDevice(), &createInfo, nullptr, &*vkImage),

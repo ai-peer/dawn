@@ -825,9 +825,6 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
     // frontend already based on the minimum supported formats in the Vulkan spec
     VkImageCreateInfo createInfo = {};
     FillVulkanCreateInfoSizesAndType(*this, &createInfo);
-
-    PNextChainBuilder createInfoChain(&createInfo);
-
     createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     createInfo.format = VulkanImageFormat(device, GetFormat().format);
     createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
@@ -862,7 +859,8 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
     // See https://github.com/gpuweb/gpuweb/issues/4426.
     if (requiresViewFormatsList && device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList) &&
         !(createInfo.usage & VK_IMAGE_USAGE_STORAGE_BIT)) {
-        createInfoChain.Add(&imageFormatListInfo, VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
+        PNextChainAppend(&createInfo, &imageFormatListInfo,
+                         VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
         viewFormats.push_back(VulkanImageFormat(device, GetFormat().format));
         for (FormatIndex i : IterateBitSet(GetViewFormats())) {
             const Format& viewFormat = device->GetValidInternalFormat(i);
@@ -970,9 +968,6 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
 
     VkImageCreateInfo baseCreateInfo = {};
     FillVulkanCreateInfoSizesAndType(*this, &baseCreateInfo);
-
-    PNextChainBuilder createInfoChain(&baseCreateInfo);
-
     baseCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     baseCreateInfo.format = format;
     baseCreateInfo.usage = usage;
@@ -990,8 +985,8 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
     if (GetViewFormats().any()) {
         baseCreateInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
         if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
-            createInfoChain.Add(&imageFormatListInfo,
-                                VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
+            PNextChainAppend(&baseCreateInfo, &imageFormatListInfo,
+                             VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO);
             for (FormatIndex i : IterateBitSet(GetViewFormats())) {
                 const Format& viewFormat = device->GetValidInternalFormat(i);
                 viewFormats.push_back(VulkanImageFormat(device, viewFormat.format));

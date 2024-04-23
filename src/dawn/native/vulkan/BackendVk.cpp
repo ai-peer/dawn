@@ -481,8 +481,6 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
     createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionNames.size());
     createInfo.ppEnabledExtensionNames = extensionNames.data();
 
-    PNextChainBuilder createInfoChain(&createInfo);
-
     // Register the debug callback for instance creation so we receive message for any errors
     // (validation or other).
     VkDebugUtilsMessengerCreateInfoEXT utilsMessengerCreateInfo;
@@ -495,8 +493,8 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
         utilsMessengerCreateInfo.pfnUserCallback = OnInstanceCreationDebugUtilsCallback;
         utilsMessengerCreateInfo.pUserData = nullptr;
 
-        createInfoChain.Add(&utilsMessengerCreateInfo,
-                            VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT);
+        PNextChainAppend(&createInfo, &utilsMessengerCreateInfo,
+                         VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT);
     }
 
     // Try to turn on synchronization validation if the instance was created with backend
@@ -511,7 +509,8 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
         validationFeatures.disabledValidationFeatureCount = 0;
         validationFeatures.pDisabledValidationFeatures = nullptr;
 
-        createInfoChain.Add(&validationFeatures, VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT);
+        PNextChainAppend(&createInfo, &validationFeatures,
+                         VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT);
     }
 
     DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
