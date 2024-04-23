@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c043d4_5792d5bd",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "this only changes the behavior for multi-planar formats. The non-multiplanar format now always allows multiple layer textures. That is OK if there\u0027s a test for it, but there are none. So either disallow multi-layer imports for all wrapped single-planar formats, or add a test to make sure it works",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4445d27_e7ba8e01",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "what about d3d12 doesn\u0027t work? they have similar import paths",
+      "range": {
+        "startLine": 405,
+        "startChar": 0,
+        "endLine": 405,
+        "endChar": 69
+      },
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749fd629_f5806a14",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "on all of these tests, you\u0027re only testing the 0th layer. To be sure this works, including all the transitions, we\u0027ll need to:\n - test that both layers can be used\n - test that multiple layers can be used simultaneously\n - test that multiple layers can be used independently - like sample from one, and render to the other. OR validate that this type of thing is disallowed.",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a41c8f4_ab090121",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "is this needed if LayerCounts() returns {1} ?",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633a93fa_a5056b5d",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "is this needed if LayerCounts() returns {1} ?",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e1e4b0f_28062831",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T02:02:43Z",
+      "side": 1,
+      "message": "stray comment",
+      "range": {
+        "startLine": 149,
+        "startChar": 0,
+        "endLine": 149,
+        "endChar": 39
+      },
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
