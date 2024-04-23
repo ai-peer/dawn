@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "992f02a1_b1e4c4fe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "nit: multi-planar. And also maybe explain what produces multi-planar multi-layer textures?",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7c043d4_5792d5bd",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 5
@@ -14,6 +31,40 @@
       "writtenOn": "2024-04-23T02:02:43Z",
       "side": 1,
       "message": "this only changes the behavior for multi-planar formats. The non-multiplanar format now always allows multiple layer textures. That is OK if there\u0027s a test for it, but there are none. So either disallow multi-layer imports for all wrapped single-planar formats, or add a test to make sure it works",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e95c373_9df84141",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "My understanding from reading the linked issue was that this CL was for swapchain textures that aren\u0027t multiplanar. Or did I miss something?",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eac1332_fa439c09",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "u-nit: this could be an enum similar to `AllowMultiPlanarTextureFormat`.",
       "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -43,6 +94,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2777d231_3112f07e",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "When does this happen? On D3D12? It might be easy-ish to support on that backend se we should at least have a TODO to eventually support it.",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "749fd629_f5806a14",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 5
@@ -54,6 +122,40 @@
       "writtenOn": "2024-04-23T02:02:43Z",
       "side": 1,
       "message": "on all of these tests, you\u0027re only testing the 0th layer. To be sure this works, including all the transitions, we\u0027ll need to:\n - test that both layers can be used\n - test that multiple layers can be used simultaneously\n - test that multiple layers can be used independently - like sample from one, and render to the other. OR validate that this type of thing is disallowed.",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3723c0_4d7668e2",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2641,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "There is no test to import a layer that\u0027s not 0, not a test to use two different layers as two different usages in the same render pass.",
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff56fe15_e3f40f34",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 2663,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "Why hardcode 1, 2 here insteead of VideoViewTestBackend::LayerCounts()?\n\nOr we could hardcode 1, 2 everywhere but ask the backends if they support importing multilayer textures.",
       "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +213,23 @@
         "endLine": 149,
         "endChar": 39
       },
+      "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7752a461_303ea642",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T09:43:22Z",
+      "side": 1,
+      "message": "nit: stray comment.",
       "revId": "37e29991ffd53d04c46533563d23d6655f0bd635",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
