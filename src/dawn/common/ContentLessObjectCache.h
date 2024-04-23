@@ -229,7 +229,7 @@ class ContentLessObjectCache {
     }
 
     std::mutex mMutex;
-    absl::flat_hash_set<detail::ContentLessObjectCacheKey<RefCountedT>,
+    absl::flat_hash_set<detail::WeakRefAndHash<RefCountedT>,
                         typename CacheKeyFuncs::HashFunc,
                         typename CacheKeyFuncs::EqualityFunc>
         mCache;
