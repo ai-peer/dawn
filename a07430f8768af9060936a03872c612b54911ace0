@@ -34,6 +34,24 @@
       "parentUuid": "76d3f1a3_8e1d0055",
       "revId": "a07430f8768af9060936a03872c612b54911ace0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad5c27a_5cbff448",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T20:23:35Z",
+      "side": 0,
+      "message": "Given that that CL to use SharedTextureMemory in Chrome is already out and in review, the switch is happening soon. It\u0027s better we implement this sooner than later.\n\nIn fact I\u0027d prefer we implement multi-layer imports only in SharedTextureMemory if we\u0027re only going to do one path, because ExternalImageDXGI is going to be deleted.",
+      "parentUuid": "8ac5e0e7_47b26220",
+      "revId": "a07430f8768af9060936a03872c612b54911ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
