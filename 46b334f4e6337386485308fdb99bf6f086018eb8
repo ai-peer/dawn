@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ece27b7_db826a61",
+        "filename": "generator/templates/art/api_kotlin_structure.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-23T09:53:16Z",
+      "side": 1,
+      "message": "\u003e I don\u0027t know that using class inheritance for chained struct is the right approach. The extension chains are used to mimic Javascript\u0027s ability to just add new keys to dictionaries. Instead imho we should flatten all the chained structs into the chain root. Chained struct members should all have default values that are equivalent to not being set. (plus if we really need to we could make the extension members be getter/setters so we know if they have been set)\n\nOne issue is that (for example) Instance.createSurface takes a parameter of type SurfaceDescriptor. However to activate an Android surface we need to supply a SurfaceDescriptorFromAndroidNativeWindow. If we flatten we\u0027d have to provide a version of the method for each parameter type that has SurfaceDescriptor as a chain root.\n\n\u003e This makes me think that Dawn has a lot of stuff that we don\u0027t want to expose to kotlin. Maybe we could add a new tag \"kotlin\" that\u0027s used to tag things we want to add (and we\u0027d remove \"dawn\" or \"native\" tagged things).\n\nYes I plan to do exactly that.",
+      "parentUuid": "5741d0f7_54ceacde",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f814f7a_e264446e",
         "filename": "generator/templates/art/api_kotlin_types.kt",
         "patchSetId": 4
