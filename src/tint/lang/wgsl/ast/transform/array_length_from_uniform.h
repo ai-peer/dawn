@@ -33,7 +33,6 @@
 
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/lang/wgsl/ast/transform/transform.h"
-#include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::ast::transform {
 
@@ -71,9 +70,6 @@ class ArrayLengthFromUniform final : public Castable<ArrayLengthFromUniform, Tra
     /// Configuration options for the ArrayLengthFromUniform transform.
     struct Config final : public Castable<Config, Data> {
         /// Constructor
-        Config();
-
-        /// Constructor
         /// @param ubo_bp the binding point to use for the generated uniform buffer.
         explicit Config(BindingPoint ubo_bp);
 
@@ -92,9 +88,6 @@ class ArrayLengthFromUniform final : public Castable<ArrayLengthFromUniform, Tra
 
         /// The mapping from binding point to the index for the buffer size lookup.
         std::unordered_map<BindingPoint, uint32_t> bindpoint_to_size_index;
-
-        /// Reflection for this class
-        TINT_REFLECT(Config, ubo_binding, bindpoint_to_size_index);
     };
 
     /// Information produced about what the transform did.
