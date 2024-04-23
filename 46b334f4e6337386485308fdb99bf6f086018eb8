@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1e0fbe8_ce4bfd73",
+        "filename": "generator/templates/art/api_kotlin_structure.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:11:55Z",
+      "side": 1,
+      "message": "\u003e One issue is that (for example) Instance.createSurface takes a parameter of type SurfaceDescriptor. However to activate an Android surface we need to supply a SurfaceDescriptorFromAndroidNativeWindow. If we flatten we\u0027d have to provide a version of the method for each parameter type that has SurfaceDescriptor as a chain root.\n\nI\u0027m not sure I understand. All the chained structures would get flattened in the descriptor. So in this case the generated kotlin would look like (excuse the pseudo kotlin):\n\n```\nclass SurfaceDescriptor {\n  var window : ANativeWindow;\n  var window : XWindowID; // Ok I see the issue ^^\n}\n```\n\nThough in this case since we are targeting Android in the multiple inheritance cases we would always have only one struct with the \"kotlin\" tag I belive.\n\nThe problem seems to be that chains are used both for \"dictionary extension\" and some limited form of inheritance. Maybe we should tag in the dawn.json which ones are used for inheritance and which ones are additions to the dictionary. Not sure.",
+      "parentUuid": "1ece27b7_db826a61",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f814f7a_e264446e",
         "filename": "generator/templates/art/api_kotlin_types.kt",
         "patchSetId": 4
