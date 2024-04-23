@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9b92d7f_d10c0d14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T20:00:40Z",
+      "side": 1,
+      "message": "(refreshing myself)\nbased on https://crbug.com/dawn/2437, we need to support 1.4 now",
+      "parentUuid": "4cfc134e_31d4018a",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c6f286e_af6ab63f",
         "filename": "src/dawn/native/opengl/ContextEGL.cpp",
         "patchSetId": 10
@@ -120,6 +138,24 @@
       "writtenOn": "2024-02-16T00:26:23Z",
       "side": 1,
       "message": "nit: comment that EGL_SYNC_FENCE_KHR has its signal scheduled on creation",
+      "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df687478_331230d1",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T20:00:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2603c5ce_2c848a20",
       "revId": "4506c24c1a29db03db72216656d7e1bbec2d2aad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
