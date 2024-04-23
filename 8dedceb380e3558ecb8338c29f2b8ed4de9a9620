@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0f614e_9acde74e",
+        "filename": "src/tint/utils/bytes/buffer_reader_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-23T13:42:23Z",
+      "side": 1,
+      "message": "Why did this change from an `\u0026\u0026`?",
+      "revId": "8dedceb380e3558ecb8338c29f2b8ed4de9a9620",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
