@@ -52,6 +52,24 @@
       "parentUuid": "8ac5e0e7_47b26220",
       "revId": "a07430f8768af9060936a03872c612b54911ace0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a746e76_96091a8e",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-23T20:47:40Z",
+      "side": 0,
+      "message": "Actually, support importing multiple layer textures is a simple work if we don\u0027t need to test everything. Why not just have it and so we can enable all related test in chrome?",
+      "parentUuid": "bad5c27a_5cbff448",
+      "revId": "a07430f8768af9060936a03872c612b54911ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
