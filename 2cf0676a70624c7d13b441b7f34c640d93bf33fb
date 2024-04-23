@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d852e8_f78e001c",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1e9af54_2ee8ef90",
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32b39191_f24ba558",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-04-23T03:06:05Z",
       "side": 1,
       "message": "```suggestion\n            {\"value\": 3, \"name\": \"expand resolve texture\", \"tags\": [\"dawn\"]}\n```",
+      "range": {
+        "startLine": 2517,
+        "startChar": 0,
+        "endLine": 2517,
+        "endChar": 58
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39442f1f_524afbbe",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2517,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32b39191_f24ba558",
       "range": {
         "startLine": 2517,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5960b42a_aba6f45a",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "663b82c9_52f739da",
+      "range": {
+        "startLine": 484,
+        "startChar": 0,
+        "endLine": 484,
+        "endChar": 79
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e02b2f3_26f278de",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-04-23T03:06:05Z",
       "side": 1,
       "message": "```suggestion\n                    \"The color attachment %s\u0027s sample count (%u) is not supported by %s.\",\n```\n\nDon\u0027t need \"LoadOp\" - it gets printed in the stringification of the enum",
+      "range": {
+        "startLine": 490,
+        "startChar": 0,
+        "endLine": 490,
+        "endChar": 99
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "493c8701_5624a1d4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e02b2f3_26f278de",
       "range": {
         "startLine": 490,
         "startChar": 0,
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0a696f_21022be0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "662fc679_e9a02fd8",
+      "range": {
+        "startLine": 494,
+        "startChar": 0,
+        "endLine": 494,
+        "endChar": 66
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25faf927_5d83fef5",
@@ -140,6 +254,30 @@
       "writtenOn": "2024-04-23T03:06:05Z",
       "side": 1,
       "message": "```suggestion\n                    \"Resolve target (%s) was not created with %s, which is required for %s\",\n                    colorAttachment.resolveTarget, wgpu::TextureUsage::TextureBinding,\n```",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 501,
+        "endChar": 0
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d0da678_61f30324",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25faf927_5d83fef5",
       "range": {
         "startLine": 499,
         "startChar": 0,
@@ -173,6 +311,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a52d90e2_49709b0a",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddda8d86_08677c55",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 507,
+        "endChar": 0
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2df5a33d_34204aa1",
@@ -186,6 +348,30 @@
       "writtenOn": "2024-04-23T03:06:05Z",
       "side": 1,
       "message": "```suggestion\n                    \"%s is not supported on depth/stencil attachment\",\n```",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 645,
+        "endChar": 79
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c98a8f8_e06cfcd9",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df5a33d_34204aa1",
       "range": {
         "startLine": 645,
         "startChar": 0,
@@ -219,6 +405,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7979ecf4_c6350633",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68609309_126db0ea",
+      "range": {
+        "startLine": 812,
+        "startChar": 0,
+        "endLine": 812,
+        "endChar": 83
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75f41994_22e841e1",
@@ -242,6 +452,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4808795d_7eb4f483",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75f41994_22e841e1",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 90
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbb372e0_48f10ed5",
@@ -255,6 +489,30 @@
       "writtenOn": "2024-04-23T03:06:05Z",
       "side": 1,
       "message": "nit: we have a lot of old usages of underscores, but official gtest style is to not have underscores in test names",
+      "range": {
+        "startLine": 1540,
+        "startChar": 35,
+        "endLine": 1540,
+        "endChar": 49
+      },
+      "revId": "2cf0676a70624c7d13b441b7f34c640d93bf33fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b610e339_7421f1b0",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1540,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-04-23T10:27:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb372e0_48f10ed5",
       "range": {
         "startLine": 1540,
         "startChar": 35,
