@@ -22,6 +22,30 @@
       },
       "revId": "b476146a257fbb8ee3b3a4982e16404fc335aa19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8093ecba_1a8ffe05",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-23T06:56:35Z",
+      "side": 0,
+      "message": "Done\n\nThis looks much better! Thanks for your suggestion!",
+      "parentUuid": "54f48c46_17b2ee67",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 285,
+        "endChar": 80
+      },
+      "revId": "b476146a257fbb8ee3b3a4982e16404fc335aa19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
