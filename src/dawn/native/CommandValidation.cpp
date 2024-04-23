@@ -566,9 +566,11 @@ MaybeError ValidateCanUseAs(const TextureBase* texture,
                             texture, texture->GetUsage(), usage);
             break;
         case UsageValidationMode::Internal:
-            DAWN_INVALID_IF(!(texture->GetInternalUsage() & usage),
-                            "%s internal usage (%s) doesn't include %s.", texture,
-                            texture->GetInternalUsage(), usage);
+            if (!texture->GetSharedResourceMemoryContents()) {
+                DAWN_INVALID_IF(!(texture->GetInternalUsage() & usage),
+                                "%s internal usage (%s) doesn't include %s.", texture,
+                                texture->GetInternalUsage(), usage);
+            }
             break;
     }
     return {};
