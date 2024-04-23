@@ -86,6 +86,9 @@ class Disassembler {
     /// @returns the string representation
     std::string AsString() const { return out_.str(); }
 
+    /// @returns the id of @p node
+    std::string IdOf(const Value* node);
+
     /// @param inst the instruction to retrieve
     /// @returns the source for the instruction
     Source InstructionSource(const Instruction* inst) {
@@ -179,7 +182,6 @@ class Disassembler {
     StringStream& Indent();
 
     size_t IdOf(const Block* blk);
-    std::string IdOf(const Value* node);
     std::string NameOf(const If* inst);
     std::string NameOf(const Loop* inst);
     std::string NameOf(const Switch* inst);

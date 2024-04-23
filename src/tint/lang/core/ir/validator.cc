@@ -510,8 +510,21 @@ void Validator::CheckRootBlock(const Block* blk) {
 void Validator::CheckFunction(const Function* func) {
     CheckBlock(func->Block());
 
-    // References not allowed on function signatures even with Capability::kAllowRefTypes
     for (auto* param : func->Params()) {
+        if (!param->Alive()) {
+            AddError(param) << "destroyed parameter found in function parameter list";
+            return;
+        }
+        if (!param->Function()) {
+            AddError(param) << "function parameter has nullptr parent function";
+            return;
+        } else if (param->Function() != func) {
+            AddError(param) << "function parameter has incorrect parent function (%"
+                            << dis_.IdOf(param->Function()) << ")";
+            return;
+        }
+
+        // References not allowed on function signatures even with Capability::kAllowRefTypes
         if (HoldsType<type::Reference>(param->Type())) {
             AddError(param) << "references are not permitted as parameter types";
         }
