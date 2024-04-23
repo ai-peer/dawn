@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41700b02_523e36ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "Getting closer I think",
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99890101_972f1159",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "Both of these can still be mat3x2 since the last row is 0, 0 , 1",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 26
+      },
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83cf71e5_1cecd20e",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "nit: we could do an early return:\n\n```\nif (clamp(FragCoord, vec2(1, 1), vec2(3, 3)) !\u003d FragCoord) {\n  return vec4f(0);\n}\n```",
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a69840d_3153280c",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1473,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "nit: we could have some rotations too",
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17b6d1ca_4dfdfd1d",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "note: To not worry about this, using a phony assignment for sampler would work as well.",
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a6c414_b33013e8",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T10:05:59Z",
+      "side": 1,
+      "message": "I feel like I\u0027m still missing something. Should the following be sufficient for clamping?\n\n```\nmodifiedCoords \u003d clamp(coord, vec2(0, 0), displayVisibleSize);\n// Added a round here, to avoid potential precision issues. I have other ideas on how to get rid of it in the future.\nlet transformedCoords \u003d round(params.loadTransformationMatrix * vec3(coord, 1));\nlet plane0Coords \u003d vec2\u003ci32\u003e(transformedCoords);\n\n\nlet plane1Coords \u003d vec2\u003ci32\u003e(transformedCoords * factor);\n```\n\nBecause we start with a clamp to the displayVisibleSize, we know that all transformed coordinates will be in bounds.",
+      "revId": "97ef0d82ca1a62f0c82bb7c18b9fabb0434cb6de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
