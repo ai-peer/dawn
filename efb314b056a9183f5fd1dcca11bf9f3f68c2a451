@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad1074b_6bce49dc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-23T00:37:28Z",
+      "side": 1,
+      "message": "I think you can actually reference these as chromium:12345\n\n(and changing the commit message should largely preserve CQ results and not rerun all the tests)",
+      "range": {
+        "startLine": 9,
+        "startChar": 5,
+        "endLine": 9,
+        "endChar": 52
+      },
+      "revId": "efb314b056a9183f5fd1dcca11bf9f3f68c2a451",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
