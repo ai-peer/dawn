@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e39478d_f4540b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T14:43:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "13db1510b734135304fb834cd8a816f31578773f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ec21ad_05f3a953",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-23T14:43:39Z",
+      "side": 1,
+      "message": "This should probably be updated as absl flat_hash_set doesn\u0027t use buckets internally.",
+      "range": {
+        "startLine": 285,
+        "startChar": 31,
+        "endLine": 287,
+        "endChar": 76
+      },
+      "revId": "13db1510b734135304fb834cd8a816f31578773f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
