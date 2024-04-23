@@ -85,6 +85,21 @@ TEST_P(QueueWriteBufferTests, ZeroSized) {
     EXPECT_BUFFER_U32_EQ(initialValue, buffer, 0);
 }
 
+TEST_P(QueueWriteBufferTests, ZeroSizedCopy) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+    descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+    uint32_t initialValue = 0x42;
+    queue.WriteBuffer(buffer, 0, &initialValue, sizeof(initialValue));
+
+    queue.WriteBuffer(buffer, 0, nullptr, 0);
+
+    // The content of the buffer isn't changed
+    EXPECT_BUFFER_U32_EQ(initialValue, buffer, 0);
+}
+
 // Call WriteBuffer at offset 0 via a u32 twice. Test that data is updated accoordingly.
 TEST_P(QueueWriteBufferTests, SetTwice) {
     wgpu::BufferDescriptor descriptor;
