@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "655b1fb0_85429ee3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-23T14:31:43Z",
+      "side": 1,
+      "message": "Probably this is not the right solution. Just bring this up to you for brainstorming. Really appreciate your perspective on this!",
+      "revId": "9f5b4974820dce1946f5e88c5454fb6e74f8cf5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4af367ac_9f82b7a6",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-04-23T14:31:43Z",
+      "side": 1,
+      "message": "My Chromium [CL](https://chromium-review.googlesource.com/c/chromium/src/+/5456006) ran into the CQ fail below:\n`wpt_internal/webgpu/web_platform/reftests/canvas_composite_alpha_bgra8unorm_opaque_copy.https.html`\n\n```\nstderr\n[5548:2204:0423/000839.836:ERROR:webgpu_texture_alpha_clearer.cc(130)] WebGPUTextureAlphaClearer errored:[Texture (unlabeled 20x20 px, TextureFormat::BGRA8Unorm)] internal usage (TextureUsage::CopyDst) doesn\u0027t include TextureUsage::RenderAttachment.\n - While validating colorAttachments[0].\n - While encoding [CommandEncoder (unlabeled)].BeginRenderPass([null]).\n```\n\nThis log comes from this [line](https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/platform/graphics/gpu/webgpu_texture_alpha_clearer.cc;drc\u003dacb2c8a6b0da68797767c1a078e896acb1f9168b;l\u003d130).\n\nFor SharedTextureMemory, it seems hard to properly pass internal texture usages from blink.",
+      "revId": "9f5b4974820dce1946f5e88c5454fb6e74f8cf5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
