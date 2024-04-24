@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e016d5a2_c5eef825",
+        "filename": "src/tint/lang/wgsl/ast/transform/binding_remapper_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T18:49:31Z",
+      "side": 1,
+      "message": "Hmm, aren\u0027t we going to get a bunch of false-positives around remapped access modes making variable usages invalid? e.g. a read-write storage buffer being remapped to read-only will make any writes to that storage buffer invalid.",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 5
+      },
+      "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
