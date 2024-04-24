@@ -163,6 +163,11 @@ class Validator {
     /// @returns the diagnostic
     diag::Diagnostic& AddError(const Block* blk);
 
+    /// Adds an error for the @p param and highlights the parameter in the disassembly
+    /// @param param the parameter
+    /// @returns the diagnostic
+    diag::Diagnostic& AddError(const BlockParam* param);
+
     /// Adds an error for the @p func and highlights the function in the disassembly
     /// @param func the function
     /// @returns the diagnostic
@@ -423,6 +428,12 @@ diag::Diagnostic& Validator::AddError(const Block* blk) {
     return AddError(src);
 }
 
+diag::Diagnostic& Validator::AddError(const BlockParam* param) {
+    DisassembleIfNeeded();
+    auto src = dis_.BlockParamSource(param);
+    return AddError(src);
+}
+
 diag::Diagnostic& Validator::AddError(const Function* func) {
     DisassembleIfNeeded();
     auto src = dis_.FunctionSource(func);
@@ -532,6 +543,19 @@ void Validator::CheckFunction(const Function* func) {
 
 void Validator::CheckBlock(const Block* blk) {
     TINT_SCOPED_ASSIGNMENT(current_block_, blk);
+
+    if (auto* mb = blk->As<MultiInBlock>()) {
+        for (auto* param : mb->Params()) {
+            if (!param->Alive()) {
+                AddError(param) << "destroyed parameter found in block parameter list";
+                return;
+            }
+            if (param->Block() != mb) {
+                AddError(param) << "block parameter has incorrect parent block";
+                return;
+            }
+        }
+    }
 
     if (!blk->Terminator()) {
         AddError(blk) << "block: does not end in a terminator instruction";
