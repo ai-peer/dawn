@@ -22,6 +22,30 @@
       },
       "revId": "84376876041835006eb462b66e3336af82a3c267",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a64ff3_a0a1e9a0",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T15:28:25Z",
+      "side": 1,
+      "message": "Done. Had to publicize a Disassembler function to get the name.\n\nAlso added validation for a `nullptr` parent function.",
+      "parentUuid": "c0b5c361_01cd9b69",
+      "range": {
+        "startLine": 519,
+        "startChar": 55,
+        "endLine": 519,
+        "endChar": 80
+      },
+      "revId": "84376876041835006eb462b66e3336af82a3c267",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
