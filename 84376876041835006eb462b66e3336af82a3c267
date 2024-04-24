@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b5c361_01cd9b69",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T08:19:49Z",
+      "side": 1,
+      "message": "nit: might be useful to include the function name that it actually belongs to",
+      "range": {
+        "startLine": 519,
+        "startChar": 55,
+        "endLine": 519,
+        "endChar": 80
+      },
+      "revId": "84376876041835006eb462b66e3336af82a3c267",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
