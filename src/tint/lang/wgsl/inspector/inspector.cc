@@ -1029,17 +1029,6 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
 
     std::unordered_set<BindingPoint> seen = {};
 
-    auto sample_type_for_call_and_type = [](wgsl::BuiltinFn builtin) {
-        if (builtin == wgsl::BuiltinFn::kTextureNumLevels ||
-            builtin == wgsl::BuiltinFn::kTextureDimensions ||
-            builtin == wgsl::BuiltinFn::kTextureLoad) {
-            return TextureQueryType::kTextureNumLevels;
-        }
-
-        TINT_ASSERT(builtin == wgsl::BuiltinFn::kTextureNumSamples);
-        return TextureQueryType::kTextureNumSamples;
-    };
-
     Hashmap<const sem::Function*, Hashmap<const ast::Parameter*, TextureQueryType, 4>, 8>
         fn_to_data;
 
@@ -1090,35 +1079,67 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
             tint::Switch(
                 call->Target(),
                 [&](const sem::BuiltinFn* builtin) {
-                    if (builtin->Fn() != wgsl::BuiltinFn::kTextureNumLevels &&
-                        builtin->Fn() != wgsl::BuiltinFn::kTextureNumSamples &&
-                        builtin->Fn() != wgsl::BuiltinFn::kTextureLoad &&
-                        // When textureDimension takes level as the input,
-                        // it requires calls to textureNumLevels to clamp mip levels.
-                        !(builtin->Fn() == wgsl::BuiltinFn::kTextureDimensions &&
-                          call->Declaration()->args.Length() > 1)) {
-                        return;
-                    }
+                    TextureQueryType type;
+                    const sem::Variable* texture_sem;
+                    auto queryTextureBuiltin = [&]() {
+                        TINT_ASSERT(texture_sem);
+                        tint::Switch(
+                            texture_sem,  //
+                            [&](const sem::GlobalVariable* global) {
+                                save_if_needed(global, type);
+                            },
+                            [&](const sem::Parameter* param) {
+                                record_function_param(fn, param->Declaration(), type);
+                            },
+                            TINT_ICE_ON_NO_MATCH);
+                    };
 
-                    auto* texture_expr = call->Declaration()->args[0];
-                    auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
-                    TINT_ASSERT(texture_sem);
-                    if (builtin->Fn() == wgsl::BuiltinFn::kTextureLoad &&
-                        texture_sem->Type()
-                            ->UnwrapRef()
-                            ->IsAnyOf<core::type::MultisampledTexture,
-                                      core::type::DepthMultisampledTexture>()) {
-                        return;
+                    switch (builtin->Fn()) {
+                        case wgsl::BuiltinFn::kTextureNumLevels: {
+                            type = TextureQueryType::kTextureNumLevels;
+                            auto* texture_expr = call->Declaration()->args[0];
+                            texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                            queryTextureBuiltin();
+                            break;
+                        }
+                        case wgsl::BuiltinFn::kTextureDimensions: {
+                            type = TextureQueryType::kTextureNumLevels;
+                            if (call->Declaration()->args.Length() <= 1) {
+                                // When textureDimension only takes a texture as the input,
+                                // it doesn't require calls to textureNumLevels to clamp mip levels.
+                                return;
+                            }
+                            auto* texture_expr = call->Declaration()->args[0];
+                            texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                            queryTextureBuiltin();
+                            break;
+                        }
+                        case wgsl::BuiltinFn::kTextureLoad: {
+                            type = TextureQueryType::kTextureNumLevels;
+                            auto* texture_expr = call->Declaration()->args[0];
+                            texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                            TINT_ASSERT(texture_sem);
+                            if (texture_sem->Type()
+                                    ->UnwrapRef()
+                                    ->IsAnyOf<core::type::MultisampledTexture,
+                                              core::type::DepthMultisampledTexture>()) {
+                                // When textureLoad takes a multisampled texture as the input,
+                                // it doens't require to query the mip level.
+                                return;
+                            }
+                            queryTextureBuiltin();
+                            break;
+                        }
+                        case wgsl::BuiltinFn::kTextureNumSamples: {
+                            type = TextureQueryType::kTextureNumSamples;
+                            auto* texture_expr = call->Declaration()->args[0];
+                            texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                            queryTextureBuiltin();
+                            break;
+                        }
+                        default:
+                            return;
                     }
-
-                    auto type = sample_type_for_call_and_type(builtin->Fn());
-                    tint::Switch(
-                        texture_sem,  //
-                        [&](const sem::GlobalVariable* global) { save_if_needed(global, type); },
-                        [&](const sem::Parameter* param) {
-                            record_function_param(fn, param->Declaration(), type);
-                        },
-                        TINT_ICE_ON_NO_MATCH);
                 },
                 [&](const sem::Function* func) {
                     // A function call, check to see if any params needed to be tracked back to a
