@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a2cc3ce_986abcf6",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-24T23:32:39Z",
+      "side": 1,
+      "message": "The list of files will change when dawn.json changes; can this take a wildcard?",
+      "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
