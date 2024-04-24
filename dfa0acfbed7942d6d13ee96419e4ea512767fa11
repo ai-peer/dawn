@@ -33,6 +33,24 @@
       "message": "Do these need to update to `new_func`?",
       "revId": "dfa0acfbed7942d6d13ee96419e4ea512767fa11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f5e5c0_98eeb8ba",
+        "filename": "src/tint/lang/core/ir/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T15:27:45Z",
+      "side": 1,
+      "message": "Good shout. Done.",
+      "parentUuid": "ec4358d6_4d67bfe0",
+      "revId": "dfa0acfbed7942d6d13ee96419e4ea512767fa11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
