@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44cdee38_833e6541",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T08:21:21Z",
+      "side": 1,
+      "message": "nit: again, it might be useful to include the block this belongs to",
+      "range": {
+        "startLine": 554,
+        "startChar": 56,
+        "endLine": 554,
+        "endChar": 78
+      },
+      "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
