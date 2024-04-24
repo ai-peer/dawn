@@ -86,5 +86,23 @@ TEST_F(IR_MultiInBlockTest, CloneEmpty) {
     EXPECT_EQ(0u, new_blk->Params().Length());
 }
 
+TEST_F(IR_MultiInBlockTest, Parameters) {
+    auto* blk = b.MultiInBlock();
+
+    auto* param1 = b.BlockParam("a", mod.Types().i32());
+    auto* param2 = b.BlockParam("b", mod.Types().f32());
+    auto* param3 = b.BlockParam("b", mod.Types().f32());
+
+    blk->SetParams({param1, param2});
+    EXPECT_EQ(param1->Block(), blk);
+    EXPECT_EQ(param2->Block(), blk);
+    EXPECT_EQ(param3->Block(), nullptr);
+
+    blk->SetParams({param1, param3});
+    EXPECT_EQ(param1->Block(), blk);
+    EXPECT_EQ(param2->Block(), nullptr);
+    EXPECT_EQ(param3->Block(), blk);
+}
+
 }  // namespace
 }  // namespace tint::core::ir
