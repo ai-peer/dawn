@@ -37,7 +37,43 @@
 namespace dawn {
 namespace {
 
-class YCbCrSamplerTest : public DawnTest {
+constexpr uint32_t kWidth = 32u;
+constexpr uint32_t kHeight = 32u;
+constexpr uint32_t kDefaultMipLevels = 6u;
+constexpr wgpu::TextureFormat kDefaultTextureFormat = wgpu::TextureFormat::RGBA8Unorm;
+
+wgpu::Texture Create2DArrayTexture(wgpu::Device& device,
+                                   uint32_t arrayLayerCount,
+                                   uint32_t width = kWidth,
+                                   uint32_t height = kHeight,
+                                   uint32_t mipLevelCount = kDefaultMipLevels,
+                                   uint32_t sampleCount = 1) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size.width = width;
+    descriptor.size.height = height;
+    descriptor.size.depthOrArrayLayers = arrayLayerCount;
+    descriptor.sampleCount = sampleCount;
+    descriptor.format = kDefaultTextureFormat;
+    descriptor.mipLevelCount = mipLevelCount;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
+    return device.CreateTexture(&descriptor);
+}
+
+wgpu::TextureViewDescriptor CreateDefaultViewDescriptor(wgpu::TextureViewDimension dimension) {
+    wgpu::TextureViewDescriptor descriptor;
+    descriptor.format = kDefaultTextureFormat;
+    descriptor.dimension = dimension;
+    descriptor.baseMipLevel = 0;
+    if (dimension != wgpu::TextureViewDimension::e1D) {
+        descriptor.mipLevelCount = kDefaultMipLevels;
+    }
+    descriptor.baseArrayLayer = 0;
+    descriptor.arrayLayerCount = 1;
+    return descriptor;
+}
+
+class YCbCrInfoTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
@@ -56,27 +92,27 @@ class YCbCrSamplerTest : public DawnTest {
     }
 };
 
-// Test that it is possible to create the sampler with ycbcr sampler descriptor.
-TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWhenFeatureEnabled) {
+// Test that it is possible to create the sampler with ycbcr vulkan descriptor.
+TEST_P(YCbCrInfoTest, YCbCrSamplerValidWhenFeatureEnabled) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
-    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
-    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
 
-    samplerDesc.nextInChain = &samplerYCbCrDesc;
+    samplerDesc.nextInChain = &yCbCrDesc;
 
     device.CreateSampler(&samplerDesc);
 }
 
-// Test that it is possible to create the sampler with ycbcr sampler descriptor with only vulkan
+// Test that it is possible to create the sampler with ycbcr vulkan descriptor with only vulkan
 // format set.
-TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWithOnlyVkFormat) {
+TEST_P(YCbCrInfoTest, YCbCrSamplerValidWithOnlyVkFormat) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
-    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
-    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
 
 #if DAWN_PLATFORM_IS(ANDROID)
     VkExternalFormatANDROID vulkanExternalFormat = {};
@@ -85,23 +121,23 @@ TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWithOnlyVkFormat) {
     // format is set as VK_FORMAT.
     vulkanExternalFormat.externalFormat = 0;
 
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 
-    samplerDesc.nextInChain = &samplerYCbCrDesc;
+    samplerDesc.nextInChain = &yCbCrDesc;
 
     device.CreateSampler(&samplerDesc);
 }
 
-// Test that it is possible to create the sampler with ycbcr sampler descriptor with only external
+// Test that it is possible to create the sampler with ycbcr vulkan descriptor with only external
 // format set.
-TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWithOnlyExternalFormat) {
+TEST_P(YCbCrInfoTest, YCbCrSamplerValidWithOnlyExternalFormat) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
-    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
     // format is set as externalFormat.
-    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
 
 #if DAWN_PLATFORM_IS(ANDROID)
     VkExternalFormatANDROID vulkanExternalFormat = {};
@@ -109,22 +145,22 @@ TEST_P(YCbCrSamplerTest, YCbCrSamplerValidWithOnlyExternalFormat) {
     vulkanExternalFormat.pNext = nullptr;
     vulkanExternalFormat.externalFormat = 5;
 
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 
-    samplerDesc.nextInChain = &samplerYCbCrDesc;
+    samplerDesc.nextInChain = &yCbCrDesc;
 
     device.CreateSampler(&samplerDesc);
 }
 
-// Test that it is not possible to create the sampler with ycbcr sampler descriptor and no format
+// Test that it is NOT possible to create the sampler with ycbcr vulkan descriptor and no format
 // set.
-TEST_P(YCbCrSamplerTest, YCbCrSamplerInvalidWithNoFormat) {
+TEST_P(YCbCrInfoTest, YCbCrSamplerInvalidWithNoFormat) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor samplerYCbCrDesc = {};
-    samplerYCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
-    samplerYCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
 
 #if DAWN_PLATFORM_IS(ANDROID)
     VkExternalFormatANDROID vulkanExternalFormat = {};
@@ -132,15 +168,119 @@ TEST_P(YCbCrSamplerTest, YCbCrSamplerInvalidWithNoFormat) {
     vulkanExternalFormat.pNext = nullptr;
     vulkanExternalFormat.externalFormat = 0;
 
-    samplerYCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 
-    samplerDesc.nextInChain = &samplerYCbCrDesc;
+    samplerDesc.nextInChain = &yCbCrDesc;
 
     ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
 }
 
-DAWN_INSTANTIATE_TEST(YCbCrSamplerTest, VulkanBackend());
+// Test that it is possible to create texture view with ycbcr vulkan descriptor.
+TEST_P(YCbCrInfoTest, YCbCrTextureViewValidWhenFeatureEnabled) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor descriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+    descriptor.arrayLayerCount = 1;
+
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+
+    descriptor.nextInChain = &yCbCrDesc;
+
+    texture.CreateView(&descriptor);
+}
+
+// Test that it is possible to create texture view with ycbcr vulkan descriptor with only vulkan
+// format set.
+TEST_P(YCbCrInfoTest, YCbCrTextureViewValidWithOnlyVkFormat) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor descriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+    descriptor.arrayLayerCount = 1;
+
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    VkExternalFormatANDROID vulkanExternalFormat = {};
+    vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+    vulkanExternalFormat.pNext = nullptr;
+    // format is set as VK_FORMAT.
+    vulkanExternalFormat.externalFormat = 0;
+
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+    descriptor.nextInChain = &yCbCrDesc;
+
+    texture.CreateView(&descriptor);
+}
+
+// Test that it is possible to create texture view with ycbcr vulkan descriptor with only external
+// format set.
+TEST_P(YCbCrInfoTest, YCbCrTextureViewValidWithOnlyExternalFormat) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor descriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+    descriptor.arrayLayerCount = 1;
+
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    // format is set as externalFormat.
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    VkExternalFormatANDROID vulkanExternalFormat = {};
+    vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+    vulkanExternalFormat.pNext = nullptr;
+    vulkanExternalFormat.externalFormat = 5;
+
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+    descriptor.nextInChain = &yCbCrDesc;
+
+    texture.CreateView(&descriptor);
+}
+
+// Test that it is NOT possible to create texture view with ycbcr vulkan descriptor and no format
+// set.
+TEST_P(YCbCrInfoTest, YCbCrTextureViewInvalidWithNoFormat) {
+    wgpu::Texture texture = Create2DArrayTexture(device, 1);
+
+    wgpu::TextureViewDescriptor descriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+    descriptor.arrayLayerCount = 1;
+
+    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    yCbCrDesc.vulkanYCbCrInfo.pNext = nullptr;
+    yCbCrDesc.vulkanYCbCrInfo.format = VK_FORMAT_UNDEFINED;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    VkExternalFormatANDROID vulkanExternalFormat = {};
+    vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+    vulkanExternalFormat.pNext = nullptr;
+    vulkanExternalFormat.externalFormat = 0;
+
+    yCbCrDesc.vulkanYCbCrInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+    descriptor.nextInChain = &yCbCrDesc;
+
+    ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+}
+
+DAWN_INSTANTIATE_TEST(YCbCrInfoTest, VulkanBackend());
 
 }  // anonymous namespace
 }  // namespace dawn
