@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50639ff4_f7a31632",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-24T14:55:48Z",
+      "side": 1,
+      "message": "Is the concern here to catch things with side effects and make sure the execute?",
+      "revId": "55466def16cca2ca1e4a3ccc8d32508fd310dea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
