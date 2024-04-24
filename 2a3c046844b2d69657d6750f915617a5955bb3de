@@ -22,6 +22,30 @@
       },
       "revId": "2a3c046844b2d69657d6750f915617a5955bb3de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e87395e_bf147b91",
+        "filename": "src/tint/lang/spirv/writer/raise/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T16:28:29Z",
+      "side": 1,
+      "message": "The logic isn\u0027t quite that easy. Constants are not instruction results, they just exist. So they don\u0027t have a block. Function parameters don\u0027t have blocks either.\n\nAside from that, the partial access logic above here would also be broken if we had a value declaration at module-scope, since it would try to insert an `access` instruction into the root block. So there\u0027s more changes needed to support that case then just picking the right place to declare the variable.\n\nI\u0027ve added an assertion to explicitly guard against that hypothetical future. I imagine if we ever do support module-scope lets, we\u0027d handle it here by just folding them away and using their (presumably constant) initializer as the source.",
+      "parentUuid": "505cc126_47b7c708",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 55
+      },
+      "revId": "2a3c046844b2d69657d6750f915617a5955bb3de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
