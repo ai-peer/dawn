@@ -16,6 +16,24 @@
       "message": "Check the block is set corrrectly",
       "revId": "d3f9e054e5f4d25beeac2bfbff9f9d4db8f9ec34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c677b66_9dd99b4e",
+        "filename": "src/tint/lang/core/ir/multi_in_block_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T15:28:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fff7269_4386660f",
+      "revId": "d3f9e054e5f4d25beeac2bfbff9f9d4db8f9ec34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
