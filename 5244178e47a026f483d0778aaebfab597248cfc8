@@ -46,6 +46,30 @@
       },
       "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f35d6d7f_d049453e",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-04-24T15:39:52Z",
+      "side": 1,
+      "message": "Similar:\n\n```\nAddNote(param-\u003eBlock()) \u003c\u003c \"from here\";\n```",
+      "parentUuid": "55d1fe84_fcc54905",
+      "range": {
+        "startLine": 554,
+        "startChar": 56,
+        "endLine": 554,
+        "endChar": 78
+      },
+      "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
