@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "097287d0_bf9b60be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-24T14:23:40Z",
+      "side": 1,
+      "message": "Need to update hte Clone test to make sure the function is correct.",
+      "revId": "dfa0acfbed7942d6d13ee96419e4ea512767fa11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4358d6_4d67bfe0",
+        "filename": "src/tint/lang/core/ir/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-24T14:23:40Z",
+      "side": 1,
+      "message": "Do these need to update to `new_func`?",
+      "revId": "dfa0acfbed7942d6d13ee96419e4ea512767fa11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
