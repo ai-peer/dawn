@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d3882cd_eb2a9244",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T22:23:17Z",
+      "side": 1,
+      "message": "the same goes for the mip levels too. you\u0027re making textures with 6 mip levels, and a view of all 6 mip levels. I went to check the vulkan spec and saw this:\n\n\n\u003e Images created with one of the formats that require a sampler Y′CBCR conversion, have further restrictions on their limits and capabilities compared to images created with other formats. Creation of images with a format requiring Y′CBCR conversion may not be supported unless other parameters meet all of the constraints:\n - imageType is VK_IMAGE_TYPE_2D\n - mipLevels is 1\n - arrayLayers is 1, unless the ycbcrImageArrays feature is enabled, or otherwise indicated by VkImageFormatProperties::maxArrayLayers, as returned by vkGetPhysicalDeviceImageFormatProperties\n - samples is VK_SAMPLE_COUNT_1_BIT\n\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html\n\nWe can only make an image that requires Y′CBCR conversion through SharedTextureMemory - and shared texture memory already requires 2D, single mip single layer textures. So we should be good on that front.\n\nThe Vulkan spec doesn\u0027t really say (or I couldn\u0027t find it) exactly whether creating a VkImageView with Ycbcr with multiple mips/layers is allowed when the original image *does not* require ycbcr conversion. Just an FYI but later I think we should either: \n - verify you can make an RGBA8unorm texture with multiple subresources, and then make an image view of various subsets of those subresources.\n - or ^validate that is not allowed. which could be as simple as saying that if ycbcr, the source texture must have a single subresource, and the view dimension must be 2d",
+      "parentUuid": "73b73df9_ebf4f5d9",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b743d73e_0e53b111",
         "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
         "patchSetId": 9

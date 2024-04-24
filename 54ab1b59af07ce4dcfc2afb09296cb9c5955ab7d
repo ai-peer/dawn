@@ -16,6 +16,46 @@
       "message": "Addressed feedback, PTAL.",
       "revId": "54ab1b59af07ce4dcfc2afb09296cb9c5955ab7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "971f4baf_04de3228",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T22:23:17Z",
+      "side": 1,
+      "message": "some additional things I found in the Vulkan spec, but still LGTM. we could address those things in future changes if yo\u0027d like",
+      "revId": "54ab1b59af07ce4dcfc2afb09296cb9c5955ab7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae58a1c_15fcb185",
+        "filename": "src/dawn/tests/end2end/YCbCrSamplerTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T22:23:17Z",
+      "side": 1,
+      "message": "unnecessary array texture here too",
+      "range": {
+        "startLine": 45,
+        "startChar": 14,
+        "endLine": 45,
+        "endChar": 34
+      },
+      "revId": "54ab1b59af07ce4dcfc2afb09296cb9c5955ab7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
