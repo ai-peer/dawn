@@ -22,6 +22,30 @@
       },
       "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2213fa2_8e3060b0",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-24T14:45:31Z",
+      "side": 1,
+      "message": "Added a test for sample the texture as 2d array. But it fails with Nvidia, AMD and WARP GPUS. Looks like they have bug for sampling multiplanar + 2d array textures. I think Intel is fine (bot task https://chromium-swarm.appspot.com/task?id\u003d6927057c6c1ca910\u0026w\u003dtrue).\n\nDone",
+      "parentUuid": "22cd000e_63b8ccd3",
+      "range": {
+        "startLine": 783,
+        "startChar": 6,
+        "endLine": 785,
+        "endChar": 41
+      },
+      "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
