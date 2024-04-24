@@ -22,6 +22,30 @@
       },
       "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55d1fe84_fcc54905",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T15:29:07Z",
+      "side": 1,
+      "message": "Done, again had to publicize the relevant disassembler helper.\n\nAnd also added the nullptr parent block validation.",
+      "parentUuid": "44cdee38_833e6541",
+      "range": {
+        "startLine": 554,
+        "startChar": 56,
+        "endLine": 554,
+        "endChar": 78
+      },
+      "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
