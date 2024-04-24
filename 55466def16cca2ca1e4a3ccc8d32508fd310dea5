@@ -34,6 +34,24 @@
       "parentUuid": "50639ff4_f7a31632",
       "revId": "55466def16cca2ca1e4a3ccc8d32508fd310dea5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "791cbac3_56c562a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T16:05:04Z",
+      "side": 1,
+      "message": "note: Even if we separated out side-effecting from non-side-effecting, I feel `IRToProgram` shouldn\u0027t be responsible for dropping unused variables. That should be done as a dead-code removal pass.",
+      "parentUuid": "676c1453_eb5a4ccd",
+      "revId": "55466def16cca2ca1e4a3ccc8d32508fd310dea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
