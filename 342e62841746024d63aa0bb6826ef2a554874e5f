@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd7ad77c_4d2e6c65",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 609,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "Sounds good, updated to move the TODO on SelectFormatAspects which should be updated once format is added.",
+      "parentUuid": "93bfaa20_517663ec",
+      "range": {
+        "startLine": 609,
+        "startChar": 0,
+        "endLine": 609,
+        "endChar": 78
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d9fd554_12123c54",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-04-22T22:10:41Z",
       "side": 1,
       "message": "nit: generally, the pattern is that we ValidateAndUnpack at the caller, and then pass the unpacked one in.\n\nSee  DeviceBase::CreateTexture as an example",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 66
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e8eb5d_4751d4be",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "Thanks for pointing this, I\u0027ll do this in a separate change - https://dawn-review.googlesource.com/c/dawn/+/185460",
+      "parentUuid": "2d9fd554_12123c54",
       "range": {
         "startLine": 638,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90dee7d6_0e91eec8",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 682,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "Thanks, that sounds good! Moved the TODO to SelectFormatAspects.",
+      "parentUuid": "5d582481_48228cca",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab7e27e_ca3debdf",
@@ -98,6 +164,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "868040ea_66f0f2ac",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "That sounds good! Removed this as validation is already present.",
+      "parentUuid": "7ab7e27e_ca3debdf",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73db75c4_b6b14a5f",
@@ -111,6 +195,24 @@
       "writtenOn": "2024-04-22T22:10:41Z",
       "side": 1,
       "message": "we should factor this part out with the Sampler code since it appears to be the same",
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c8f3491_76bc7655",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "That makes sense, updated to be in UtilsVulkan.h",
+      "parentUuid": "73db75c4_b6b14a5f",
       "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -164,6 +266,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97ba6478_74003a96",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "Ah, I had forgotten about that to be done there. Thanks for reminding! I\u0027ve updated to move the TODO in CommandBufferStateTracker.cpp. I plan to add the necessary validation there in follow-up (along with storing the info in Sampler and necessary tests). And then future follow-ups for caching :)\n\nFor the validation there, we get the TextureView from the mBindgroups-\u003eGetBindingAsTextureView. But for Sampler can I directly use mBindgroups-\u003eGetBindingAsSampler or do I go around mBindgroups-\u003eGetFrontendLayout (BindGroupLayoutBase) as it is set on layout and then go over to InternalLayoutBase -\u003e BindingInfo -\u003e StaticSamplerHolderBindingLayout -\u003e Sampler.",
+      "parentUuid": "eff0a8b2_5717d2d5",
+      "range": {
+        "startLine": 1782,
+        "startChar": 8,
+        "endLine": 1784,
+        "endChar": 22
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a876319c_43a36451",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 8
@@ -175,6 +301,30 @@
       "writtenOn": "2024-04-22T22:10:41Z",
       "side": 1,
       "message": "make sure this gets deleted",
+      "range": {
+        "startLine": 259,
+        "startChar": 0,
+        "endLine": 259,
+        "endChar": 70
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da33664_ccf09527",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T14:54:47Z",
+      "side": 1,
+      "message": "Oops yes, updated to delete in DestroyImpl.",
+      "parentUuid": "a876319c_43a36451",
       "range": {
         "startLine": 259,
         "startChar": 0,
