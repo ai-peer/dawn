@@ -46,6 +46,30 @@
       },
       "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8992d17_6e8b56b5",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T21:28:32Z",
+      "side": 1,
+      "message": "Did we verify it is fixed on newer drivers? Given that it fails so consistently, I\u0027m worried this is not well supported.\n\nWhat happens if the binding is plain texture_2d\u003cf32\u003e, and you bind a view to it that has baseArrayLayer\u003d1 ?\n\nMaybe this is OK, but binding the whole array does not work",
+      "parentUuid": "a2213fa2_8e3060b0",
+      "range": {
+        "startLine": 783,
+        "startChar": 6,
+        "endLine": 785,
+        "endChar": 41
+      },
+      "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
