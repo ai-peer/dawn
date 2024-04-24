@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0819976e_3b196e34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-24T16:47:36Z",
+      "side": 1,
+      "message": "Sorry for the post-landing review.",
+      "revId": "bc99356b1de0296043aebab79b9451d025c273c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23ed75f4_c62e1db1",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1099,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-24T16:47:36Z",
+      "side": 1,
+      "message": "As discussed, it would be nice to simplify this logic by having a top-level switch on the builtin Fn. Any common code in the different cases could be factored out into helpers.",
+      "revId": "bc99356b1de0296043aebab79b9451d025c273c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
