@@ -290,6 +290,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f80e2c4_b793fcfc",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1784,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T21:24:16Z",
+      "side": 1,
+      "message": "I believe you\u0027ll need to hop through the layout, unless on BindGroup creation, you grab the sampler from the layout and store it in mBindingData. This is probably a good idea so we can do the validation with fewer indirections - but could be done as a separate optimization if complicated.",
+      "parentUuid": "97ba6478_74003a96",
+      "range": {
+        "startLine": 1782,
+        "startChar": 8,
+        "endLine": 1784,
+        "endChar": 22
+      },
+      "revId": "342e62841746024d63aa0bb6826ef2a554874e5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a876319c_43a36451",
         "filename": "src/dawn/native/vulkan/TextureVk.h",
         "patchSetId": 8

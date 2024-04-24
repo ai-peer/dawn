@@ -16,6 +16,69 @@
       "message": "Addressed some feedback, please take another look.",
       "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8440140_35c05dfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T21:24:16Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b9494b_17832d91",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T21:24:16Z",
+      "side": 1,
+      "message": "is the fact that you\u0027re using an array texture relevant? it looks like you always call Create2DArrayTexture with arrayLayerCount\u003d1\n\nif use of arrays is important, you should have some tests which create the texture with more than one array layer, and then create a view of \n - all the array layers\n - just one layer at baseArrayLayer \u003d 0\n - just one layer at baseArrayLayer \u003d 1",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b743d73e_0e53b111",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-24T21:24:16Z",
+      "side": 1,
+      "message": "nit: in all of these, you probably mean binding validation, not texture view creation",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 21
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
