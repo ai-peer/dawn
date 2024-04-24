@@ -22,6 +22,30 @@
       },
       "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5712933a_1c38b0a0",
+        "filename": "src/tint/lang/wgsl/ast/transform/binding_remapper_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T18:56:17Z",
+      "side": 1,
+      "message": "That\u0027s a good point - but a little odd that we don\u0027t see this already with the writers that use this transform.",
+      "parentUuid": "e016d5a2_c5eef825",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 5
+      },
+      "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
