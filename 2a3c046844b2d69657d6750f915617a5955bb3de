@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505cc126_47b7c708",
+        "filename": "src/tint/lang/spirv/writer/raise/var_for_dynamic_index.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T08:38:24Z",
+      "side": 1,
+      "message": "There\u0027s a big assumption here between `constant \u003d\u003d module-scope`, `non-constant \u003d\u003d function-scope`. I\u0027m not sure that\u0027ll always be the case (i.e. lets might become root-block things one day).\n\nI think you could just as easily express this logic as `if (source_object-\u003eBlock() \u003d\u003d ir.root_block) {`",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 55
+      },
+      "revId": "2a3c046844b2d69657d6750f915617a5955bb3de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
