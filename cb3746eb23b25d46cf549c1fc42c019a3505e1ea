@@ -33,6 +33,40 @@
       "message": "still lgtm",
       "revId": "cb3746eb23b25d46cf549c1fc42c019a3505e1ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f52cb49_cb98b11b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-24T17:19:58Z",
+      "side": 1,
+      "message": "LGTM w/comment or abstraction",
+      "revId": "cb3746eb23b25d46cf549c1fc42c019a3505e1ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724f69a6_e850ad0b",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-24T17:19:58Z",
+      "side": 1,
+      "message": "FYI, the idea behind this Context base class is that eventually we will support glX on Desktop GL, where we won\u0027t have an any EGL support. So IWBN to keep EGL-isms out of the base class. Ideally, we would abstract the sync primitives also, with an EGL and glX implementation (probably via GL_ARB_sync on the desktop side).\n\nIf you\u0027re up to doing the abstraction now, that\u0027d be awesome. If you\u0027d rather land this as-is, please add a comment that the EGL-isms should be abstracted out in the future.",
+      "revId": "cb3746eb23b25d46cf549c1fc42c019a3505e1ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
