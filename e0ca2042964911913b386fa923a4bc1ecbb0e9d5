@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e1ebf4a_4189dec6",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T12:15:46Z",
+      "side": 1,
+      "message": "These guys were missing, hidden by the use of `default`.",
+      "revId": "e0ca2042964911913b386fa923a4bc1ecbb0e9d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d48e0c69_6ff35529",
+        "filename": "src/tint/lang/core/ir/binary/ir.proto",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T12:15:46Z",
+      "side": 1,
+      "message": "note: it\u0027s normally a strict rule with protobufs that you *don\u0027t* change numbers like this. However, we\u0027re not serializing to any storage right now, so we can do this without issue.",
+      "range": {
+        "startLine": 250,
+        "startChar": 37,
+        "endLine": 250,
+        "endChar": 38
+      },
+      "revId": "e0ca2042964911913b386fa923a4bc1ecbb0e9d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
