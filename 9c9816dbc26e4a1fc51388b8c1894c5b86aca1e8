@@ -94,6 +94,30 @@
       },
       "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce088af_2a7416a4",
+        "filename": "src/tint/lang/wgsl/ast/transform/binding_remapper_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T19:10:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ee44141_c013b06a",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 5
+      },
+      "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
