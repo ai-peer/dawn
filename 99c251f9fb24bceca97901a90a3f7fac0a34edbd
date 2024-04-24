@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e46734b5_5a151977",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-04-24T15:38:42Z",
+      "side": 1,
+      "message": "Instead of using `dis_.IdOf` could this be:\n\n```\nAddError(param) \u003c\u003c \"function parameter has incorrect parent function\";\nAddNote(param-\u003eFunction()) \u003c\u003c \"from here\"\n```\n\nThen we don\u0027t have to expose IdOf and it keeps the disassembler stuff contained in the adding of errors and notes.",
+      "revId": "99c251f9fb24bceca97901a90a3f7fac0a34edbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
