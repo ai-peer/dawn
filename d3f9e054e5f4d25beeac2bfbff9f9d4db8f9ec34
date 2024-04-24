@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fff7269_4386660f",
+        "filename": "src/tint/lang/core/ir/multi_in_block_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-24T14:27:59Z",
+      "side": 1,
+      "message": "Check the block is set corrrectly",
+      "revId": "d3f9e054e5f4d25beeac2bfbff9f9d4db8f9ec34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
