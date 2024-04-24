@@ -70,6 +70,30 @@
       },
       "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71c4218_cfb1c6e5",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-24T16:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f35d6d7f_d049453e",
+      "range": {
+        "startLine": 554,
+        "startChar": 56,
+        "endLine": 554,
+        "endChar": 78
+      },
+      "revId": "5244178e47a026f483d0778aaebfab597248cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
