@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7f899f_6d76929d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-24T16:43:08Z",
+      "side": 1,
+      "message": "Interesting. I didn\u0027t think Pixel 6 would run, since all Mali derivatives I\u0027ve run into so far only support EGL 1.4, and Dawn currently requires EGL 1.5.\n\nThanks for suppressing these.",
+      "revId": "4db76df115d87b7219821787c1fafcda3c491fb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
