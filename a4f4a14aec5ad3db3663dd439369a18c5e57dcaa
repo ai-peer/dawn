@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b73df9_ebf4f5d9",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T22:01:43Z",
+      "side": 1,
+      "message": "Ah no, the array texture is irrelevant here. Update to remove the unnecessary params and rename method.",
+      "parentUuid": "03b9494b_17832d91",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b743d73e_0e53b111",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-04-24T21:24:16Z",
       "side": 1,
       "message": "nit: in all of these, you probably mean binding validation, not texture view creation",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 21
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80428c25_eedbaa53",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-24T22:01:43Z",
+      "side": 1,
+      "message": "Right, updated.",
+      "parentUuid": "b743d73e_0e53b111",
       "range": {
         "startLine": 139,
         "startChar": 0,
