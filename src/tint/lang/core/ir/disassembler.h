@@ -32,6 +32,7 @@
 
 #include "src/tint/lang/core/ir/binary.h"
 #include "src/tint/lang/core/ir/block.h"
+#include "src/tint/lang/core/ir/block_param.h"
 #include "src/tint/lang/core/ir/call.h"
 #include "src/tint/lang/core/ir/if.h"
 #include "src/tint/lang/core/ir/loop.h"
@@ -89,6 +90,9 @@ class Disassembler {
     /// @returns the id of @p node
     std::string IdOf(const Value* node);
 
+    /// @returns the id of @p node
+    size_t IdOf(const Block* blk);
+
     /// @param inst the instruction to retrieve
     /// @returns the source for the instruction
     Source InstructionSource(const Instruction* inst) {
@@ -106,6 +110,12 @@ class Disassembler {
     /// @param blk the block to retrieve
     /// @returns the source for the block
     Source BlockSource(const Block* blk) { return block_to_src_.GetOr(blk, Source{}); }
+
+    /// @param param the block parameter to retrieve
+    /// @returns the source for the parameter
+    Source BlockParamSource(const BlockParam* param) {
+        return block_param_to_src_.GetOr(param, Source{});
+    }
 
     /// @param func the function to retrieve
     /// @returns the source for the function
@@ -126,6 +136,11 @@ class Disassembler {
     /// @param blk the block to store
     /// @param src the source location
     void SetSource(const Block* blk, Source src) { block_to_src_.Add(blk, src); }
+
+    /// Stores the given @p src location for @p param block parameter
+    /// @param param the block parameter to store
+    /// @param src the source location
+    void SetSource(const BlockParam* param, Source src) { block_param_to_src_.Add(param, src); }
 
     /// Stores the given @p src location for @p func function
     /// @param func the function to store
@@ -162,6 +177,8 @@ class Disassembler {
 
         void Store(const Block* blk) { dis_->SetSource(blk, MakeSource()); }
 
+        void Store(const BlockParam* param) { dis_->SetSource(param, MakeSource()); }
+
         void Store(const Function* func) { dis_->SetSource(func, MakeSource()); }
 
         void Store(const FunctionParam* param) { dis_->SetSource(param, MakeSource()); }
@@ -181,7 +198,6 @@ class Disassembler {
 
     StringStream& Indent();
 
-    size_t IdOf(const Block* blk);
     std::string NameOf(const If* inst);
     std::string NameOf(const Loop* inst);
     std::string NameOf(const Switch* inst);
@@ -196,7 +212,6 @@ class Disassembler {
     void EmitValueWithType(const Instruction* val);
     void EmitValueWithType(const Value* val);
     void EmitValue(const Value* val);
-    void EmitValueList(tint::Slice<const ir::Value* const> values);
     void EmitBinary(const Binary* b);
     void EmitUnary(const Unary* b);
     void EmitTerminator(const Terminator* b);
@@ -221,6 +236,7 @@ class Disassembler {
     uint32_t current_output_start_pos_ = 0;
 
     Hashmap<const Block*, Source, 8> block_to_src_;
+    Hashmap<const BlockParam*, Source, 8> block_param_to_src_;
     Hashmap<const Instruction*, Source, 8> instruction_to_src_;
     Hashmap<IndexedValue, Source, 8> operand_to_src_;
     Hashmap<IndexedValue, Source, 8> result_to_src_;
