@@ -70,6 +70,30 @@
       },
       "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ee44141_c013b06a",
+        "filename": "src/tint/lang/wgsl/ast/transform/binding_remapper_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-24T19:08:22Z",
+      "side": 1,
+      "message": "I mean the writer fuzzers - but I now see they all take a writer `Options` as a fuzzed input, then splat over it with `options.bindings \u003d GenerateBindings(program);`.\n\nI\u0027ll change this fuzzer to reject any options with a bindings change.",
+      "parentUuid": "b20e7fa1_c5975657",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 5
+      },
+      "revId": "9c9816dbc26e4a1fc51388b8c1894c5b86aca1e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
