@@ -67,6 +67,11 @@ Result ValidateUsingDXC(const std::string& dxc_path,
                         const EntryPointList& entry_points,
                         bool require_16bit_types,
                         uint32_t hlsl_shader_model);
+Result ValidateUsingDXC2(const std::string& dxc_path,
+    const std::string& source,
+    const EntryPointList& entry_points,
+    bool require_16bit_types,
+    uint32_t hlsl_shader_model);
 
 #ifdef _WIN32
 /// Hlsl attempts to compile the shader with FXC, verifying that the shader

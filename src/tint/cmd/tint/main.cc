@@ -996,13 +996,19 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
         PrintHash(hash);
     }
 
+    #ifdef WIN32
+    constexpr const char* default_dxc_path = "dxcompiler.dll";
+    #else
+    constexpr const char* default_dxc_path = "libdxcompiler.so";
+    #endif
+
     if ((options.validate || must_validate_dxc || must_validate_fxc) &&
         (options.skip_hash.count(hash) == 0)) {
         tint::hlsl::validate::Result dxc_res;
         bool dxc_found = false;
         if (options.validate || must_validate_dxc) {
             auto dxc = tint::Command::LookPath(
-                options.dxc_path.empty() ? "dxc" : std::string(options.dxc_path));
+                options.dxc_path.empty() ? default_dxc_path : std::string(options.dxc_path));
             if (dxc.Found()) {
                 dxc_found = true;
 

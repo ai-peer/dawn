@@ -75,6 +75,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Clang
 ////////////////////////////////////////////////////////////////////////////////
+#define TINT_DISABLE_WARNING_EVERYTHING _Pragma("clang diagnostic ignored \"-Weverything\"")
 #define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW /* currently no-op */
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED \
     _Pragma("clang diagnostic ignored \"-Wconditional-uninitialized\"")
@@ -121,6 +122,15 @@
 
 #define TINT_END_DISABLE_PROTOBUF_WARNINGS() \
     _Pragma("clang diagnostic pop")          \
+    TINT_REQUIRE_SEMICOLON
+
+#define TINT_BEGIN_DISABLE_ALL_WARNINGS() \
+    _Pragma("clang diagnostic push")      \
+    TINT_DISABLE_WARNING_EVERYTHING       \
+    TINT_REQUIRE_SEMICOLON
+
+#define TINT_END_DISABLE_ALL_WARNINGS() \
+    _Pragma("clang diagnostic pop")     \
     TINT_REQUIRE_SEMICOLON
 
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
