@@ -1002,7 +1002,8 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
         bool dxc_found = false;
         if (options.validate || must_validate_dxc) {
             auto dxc = tint::Command::LookPath(
-                options.dxc_path.empty() ? "dxc" : std::string(options.dxc_path));
+                //options.dxc_path.empty() ? "dxc" : std::string(options.dxc_path));
+                options.dxc_path.empty() ? "dxcompiler.dll" : std::string(options.dxc_path));
             if (dxc.Found()) {
                 dxc_found = true;
 
@@ -1016,7 +1017,8 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
                     }
                 }
 
-                dxc_res = tint::hlsl::validate::ValidateUsingDXC(
+                //dxc_res = tint::hlsl::validate::ValidateUsingDXC(
+                dxc_res = tint::hlsl::validate::ValidateUsingDXC2(
                     dxc.Path(), result->hlsl, result->entry_points, dxc_require_16bit_types,
                     hlsl_shader_model);
             } else if (must_validate_dxc) {
