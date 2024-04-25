@@ -95,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa8a8f9_4387a069",
+        "filename": "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-25T08:48:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ced515a_86550a21",
+      "range": {
+        "startLine": 239,
+        "startChar": 1,
+        "endLine": 239,
+        "endChar": 213
+      },
+      "revId": "ab65b2f1c63eec15f7f0225472c942a5feed6771",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ef4692f_9695dfd5",
