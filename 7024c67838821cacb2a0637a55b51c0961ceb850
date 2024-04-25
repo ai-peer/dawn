@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "7024c67838821cacb2a0637a55b51c0961ceb850",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad43c798_c713ffee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-25T21:34:02Z",
+      "side": 1,
+      "message": "maybe you want GetInternalUsage in addition or instead?",
+      "revId": "7024c67838821cacb2a0637a55b51c0961ceb850",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
