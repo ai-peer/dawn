@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c23ab3_f85679ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T13:13:16Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "54ab1b59af07ce4dcfc2afb09296cb9c5955ab7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84152a62_ecccd120",
+        "filename": "src/dawn/native/Subresource.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T13:13:16Z",
+      "side": 1,
+      "message": "I don\u0027t think that this would happen in this part of the code, we\u0027d probably add a new format in Format.cpp/.h that describes that it only has a color aspect. Though we can keep the TODO for now, and remove it when we actually get to implementing TextureFormat::External.",
+      "revId": "54ab1b59af07ce4dcfc2afb09296cb9c5955ab7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ae58a1c_15fcb185",
