@@ -120,14 +120,9 @@ TEST(StackContainer, BufferAlignment) {
     aligned16->push_back(AlignedData<16>());
     EXPECT_ALIGNED(&aligned16[0], 16);
 
-#if !DAWN_COMPILER_IS(GCC) || defined(__x86_64__) || defined(__i386__)
-    // It seems that non-X86 gcc doesn't respect greater than 16 byte alignment.
-    // See http://gcc.gnu.org/bugzilla/show_bug.cgi?id=33721 for details.
-    // TODO(sbc): Re-enable this if GCC starts respecting higher alignments.
     StackVector<AlignedData<256>, 1> aligned256;
     aligned256->push_back(AlignedData<256>());
     EXPECT_ALIGNED(&aligned256[0], 256);
-#endif
 }
 
 }  // anonymous namespace
