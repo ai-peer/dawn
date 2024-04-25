@@ -54,6 +54,10 @@
 #define TINT_DISABLE_WARNING_ZERO_AS_NULLPTR             /* currently no-op */
 #define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE /* currently no-op */
 
+#define TINT_BEGIN_DISABLE_ALL_WARNINGS() __pragma(warning(push, 0)) TINT_REQUIRE_SEMICOLON
+
+#define TINT_END_DISABLE_ALL_WARNINGS() __pragma(warning(pop)) TINT_REQUIRE_SEMICOLON
+
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
     __pragma(warning(push))                  \
@@ -123,6 +127,15 @@
     _Pragma("clang diagnostic pop")          \
     TINT_REQUIRE_SEMICOLON
 
+#define TINT_BEGIN_DISABLE_ALL_WARNINGS() \
+    _Pragma("clang diagnostic push")      \
+    _Pragma("clang diagnostic ignored \"-Weverything\"")       \
+    TINT_REQUIRE_SEMICOLON
+
+#define TINT_END_DISABLE_ALL_WARNINGS() \
+    _Pragma("clang diagnostic pop")     \
+    TINT_REQUIRE_SEMICOLON
+
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
     _Pragma("clang diagnostic push")         \
     TINT_CONCAT(TINT_DISABLE_WARNING_, name) \
@@ -163,6 +176,12 @@
     _Pragma("GCC diagnostic push") TINT_DISABLE_WARNING_UNUSED_PARAMETER TINT_REQUIRE_SEMICOLON
 #define TINT_END_DISABLE_PROTOBUF_WARNINGS() _Pragma("GCC diagnostic pop") TINT_REQUIRE_SEMICOLON
 
+#define TINT_BEGIN_DISABLE_ALL_WARNINGS()                                      \
+    _Pragma("GCC diagnostic push") _Pragma("GCC diagnostic ignored \"-Wall\"") \
+        _Pragma("GCC diagnostic ignored \"-Wextra\"") TINT_REQUIRE_SEMICOLON
+
+#define TINT_END_DISABLE_ALL_WARNINGS() _Pragma("GCC diagnostic pop") TINT_REQUIRE_SEMICOLON
+
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
     _Pragma("GCC diagnostic push")           \
@@ -179,6 +198,8 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Other
 ////////////////////////////////////////////////////////////////////////////////
+#define TINT_BEGIN_DISABLE_ALL_WARNINGS() TINT_REQUIRE_SEMICOLON
+#define TINT_END_DISABLE_ALL_WARNINGS TINT_REQUIRE_SEMICOLON
 #define TINT_BEGIN_DISABLE_WARNING(name) TINT_REQUIRE_SEMICOLON
 #define TINT_END_DISABLE_WARNING(name) TINT_REQUIRE_SEMICOLON
 #define TINT_BEGIN_DISABLE_PROTOBUF_WARNINGS() TINT_REQUIRE_SEMICOLON
