@@ -54,14 +54,28 @@ TEST(SerialMap, BasicTest) {
     map.Enqueue(2, 0);
     map.Enqueue(std::move(3), 1);
 
-    // Iterating over a non-empty map produces the expected result
-    std::vector<int> expectedValues = {1, 2, 3};
-    for (int value : map.IterateAll()) {
-        EXPECT_EQ(expectedValues.front(), value);
-        ASSERT_FALSE(expectedValues.empty());
-        expectedValues.erase(expectedValues.begin());
+    {
+        // Iterating over a non-empty map produces the expected result
+        std::vector<int> expectedValues = {1, 2, 3};
+        for (int value : map.IterateAll()) {
+            EXPECT_EQ(expectedValues.front(), value);
+            ASSERT_FALSE(expectedValues.empty());
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
     }
-    ASSERT_TRUE(expectedValues.empty());
+
+    {
+        // Iterating over a non-empty map produces the expected result
+        std::vector<std::pair<uint64_t, int>> expectedValues = {{0, 1}, {0, 2}, {1, 3}};
+        for (auto [serial, value] : map) {
+            EXPECT_EQ(expectedValues.front().first, serial);
+            EXPECT_EQ(expectedValues.front().second, value);
+            ASSERT_FALSE(expectedValues.empty());
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
+    }
 
     // Clear works and makes the map empty and iteration does nothing.
     map.Clear();
@@ -83,14 +97,28 @@ TEST(SerialMap, EnqueueOrder) {
     map.Enqueue(5, 2);
     map.Enqueue(2, 0);
 
-    // Iterating over a non-empty map produces the expected result
-    std::vector<int> expectedValues = {1, 2, 3, 4, 5};
-    for (int value : map.IterateAll()) {
-        EXPECT_EQ(expectedValues.front(), value);
-        ASSERT_FALSE(expectedValues.empty());
-        expectedValues.erase(expectedValues.begin());
+    {
+        // Iterating over a non-empty map produces the expected result
+        std::vector<int> expectedValues = {1, 2, 3, 4, 5};
+        for (int value : map.IterateAll()) {
+            EXPECT_EQ(expectedValues.front(), value);
+            ASSERT_FALSE(expectedValues.empty());
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
     }
-    ASSERT_TRUE(expectedValues.empty());
+    {
+        // Iterating over a non-empty map produces the expected result
+        std::vector<std::pair<uint64_t, int>> expectedValues = {
+            {0, 1}, {0, 2}, {1, 3}, {2, 4}, {2, 5}};
+        for (auto [serial, value] : map) {
+            EXPECT_EQ(expectedValues.front().first, serial);
+            EXPECT_EQ(expectedValues.front().second, value);
+            ASSERT_FALSE(expectedValues.empty());
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
+    }
 }
 
 // Test enqueuing vectors works
@@ -105,13 +133,26 @@ TEST(SerialMap, EnqueueVectors) {
     map.Enqueue(std::move(vector2), 0);
     map.Enqueue(vector3, 1);
 
-    std::vector<int> expectedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
-    for (int value : map.IterateAll()) {
-        EXPECT_EQ(expectedValues.front(), value);
-        ASSERT_FALSE(expectedValues.empty());
-        expectedValues.erase(expectedValues.begin());
+    {
+        std::vector<int> expectedValues = {1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        for (int value : map.IterateAll()) {
+            EXPECT_EQ(expectedValues.front(), value);
+            ASSERT_FALSE(expectedValues.empty());
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
     }
-    ASSERT_TRUE(expectedValues.empty());
+    {
+        std::vector<std::pair<uint64_t, int>> expectedValues = {
+            {0, 1}, {0, 2}, {0, 3}, {0, 4}, {0, 5}, {0, 6}, {0, 7}, {0, 8}, {1, 9}, {1, 0}};
+        for (auto [serial, value] : map) {
+            ASSERT_FALSE(expectedValues.empty());
+            EXPECT_EQ(expectedValues.front().first, serial);
+            EXPECT_EQ(expectedValues.front().second, value);
+            expectedValues.erase(expectedValues.begin());
+        }
+        ASSERT_TRUE(expectedValues.empty());
+    }
 }
 
 // Test IterateUpTo
