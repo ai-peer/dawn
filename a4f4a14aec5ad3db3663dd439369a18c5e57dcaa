@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58bfe808_97f1ad7b",
+        "filename": "src/dawn/tests/unittests/validation/YCbCrSamplerValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-04-25T17:26:14Z",
+      "side": 1,
+      "message": "Sounds good, I\u0027ve added a todo here for this validation/testing and an handle it in follow-up. I\u0027ve updated the mip levels to 1 for now.",
+      "parentUuid": "0d3882cd_eb2a9244",
+      "range": {
+        "startLine": 42,
+        "startChar": 14,
+        "endLine": 42,
+        "endChar": 34
+      },
+      "revId": "a4f4a14aec5ad3db3663dd439369a18c5e57dcaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b743d73e_0e53b111",
