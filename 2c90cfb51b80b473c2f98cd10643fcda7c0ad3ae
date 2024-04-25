@@ -70,6 +70,30 @@
       },
       "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a46196b5_45feabba",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-25T17:26:36Z",
+      "side": 1,
+      "message": "I tried with the latest driver. It doesn\u0027t fix the issue. And both d3d11 and d3d12 have the same issue.\n\n* Intel works fine.\n* Nvidia:\n  texure2d view - OK\n  texture2darray view with one layer - OK\n  texture2darray view with more than one layer - fail\n\n* AMD:\n   texture2d view for the 0th layer - OK\n   texture2d view for non-0th layers - fail\n   texture2darray view - fail\n  \n* WARP:\n   texture2d view - fail\n   texture2darray view - fail",
+      "parentUuid": "e8992d17_6e8b56b5",
+      "range": {
+        "startLine": 783,
+        "startChar": 6,
+        "endLine": 785,
+        "endChar": 41
+      },
+      "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
