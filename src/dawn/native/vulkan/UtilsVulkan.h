@@ -31,10 +31,11 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/StackAllocated.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/dawn_platform.h"
-#include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace dawn::native {
 struct ProgrammableStage;
@@ -68,7 +69,7 @@ struct VulkanFunctions;
 //     featuresChain.Add(&featuresExtensions.subgroupSizeControl,
 //                       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT);
 //
-struct PNextChainBuilder {
+struct PNextChainBuilder : public StackAllocated {
     // Constructor takes the address of a Vulkan structure instance, and
     // walks its pNext chain to record the current location of its tail.
     //
@@ -104,6 +105,7 @@ struct PNextChainBuilder {
     }
 
   private:
+    // The current tail of the chain.
     raw_ptr<VkBaseOutStructure> mCurrent;
 };
 

@@ -37,6 +37,8 @@
 
 #include "absl/container/flat_hash_set.h"
 #include "dawn/common/ContentLessObjectCache.h"
+#include "dawn/common/NonMovable.h"
+#include "dawn/common/StackAllocated.h"
 #include "dawn/common/Mutex.h"
 #include "dawn/native/CacheKey.h"
 #include "dawn/native/Commands.h"
@@ -619,16 +621,13 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
     const RenderPipelineDescriptor& descriptor,
     RenderPipelineDescriptor* outDescriptor);
 
-class IgnoreLazyClearCountScope : public NonMovable {
+class IgnoreLazyClearCountScope : public NonMovable, public StackAllocated {
   public:
     explicit IgnoreLazyClearCountScope(DeviceBase* device);
     ~IgnoreLazyClearCountScope();
 
   private:
-    // Disable heap allocation
-    void* operator new(size_t) = delete;
-
-    raw_ptr<DeviceBase> mDevice;
+    DeviceBase* mDevice;
     size_t mLazyClearCountForTesting;
 };
 
