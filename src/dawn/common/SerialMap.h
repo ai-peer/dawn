@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_COMMON_SERIALMAP_H_
 #define SRC_DAWN_COMMON_SERIALMAP_H_
 
+#include <algorithm>
 #include <map>
 #include <optional>
 #include <utility>
@@ -44,9 +45,17 @@ template <typename SerialT, typename ValueT>
 struct SerialStorageTraits<SerialMap<SerialT, ValueT>> {
     using Serial = SerialT;
     using Value = ValueT;
-    using Storage = std::map<Serial, std::vector<Value>>;
+    using Storage = std::multimap<Serial, Value>;
     using StorageIterator = typename Storage::iterator;
     using ConstStorageIterator = typename Storage::const_iterator;
+
+    static StorageIterator FindUpTo(Storage& storage, Serial serial) {
+        return storage.upper_bound(serial);
+    }
+
+    static ConstStorageIterator FindUpTo(const Storage& storage, Serial serial) {
+        return storage.upper_bound(serial);
+    }
 };
 
 // SerialMap stores a map from Serial to Value.
@@ -68,12 +77,12 @@ class SerialMap : public SerialStorage<SerialMap<Serial, Value>> {
 
 template <typename Serial, typename Value>
 void SerialMap<Serial, Value>::Enqueue(const Value& value, Serial serial) {
-    this->mStorage[serial].emplace_back(value);
+    this->mStorage.insert({serial, value});
 }
 
 template <typename Serial, typename Value>
 void SerialMap<Serial, Value>::Enqueue(Value&& value, Serial serial) {
-    this->mStorage[serial].emplace_back(std::move(value));
+    this->mStorage.insert({serial, std::move(value)});
 }
 
 template <typename Serial, typename Value>
@@ -98,15 +107,8 @@ std::optional<Value> SerialMap<Serial, Value>::TakeOne(Serial serial) {
     if (it == this->mStorage.end()) {
         return std::nullopt;
     }
-    auto& vec = it->second;
-    if (vec.empty()) {
-        return std::nullopt;
-    }
-    Value value = std::move(vec.back());
-    vec.pop_back();
-    if (vec.empty()) {
-        this->mStorage.erase(it);
-    }
+    Value value = std::move(it->second);
+    this->mStorage.erase(it);
     return value;
 }
 
