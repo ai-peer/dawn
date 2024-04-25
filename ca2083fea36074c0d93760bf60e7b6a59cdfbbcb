@@ -52,6 +52,24 @@
       "parentUuid": "216a643a_4d9e698a",
       "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb71125_305b305d",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3377038
+      },
+      "writtenOn": "2024-04-25T18:27:27Z",
+      "side": 1,
+      "message": "To Corentin\u0027s point above,I interpreted the exclusion of wildcards as an explicit decision.\n\n```\n  # To make sure the list is in sync between the generator and the\n  # build files, we write it to a file and ask the generator to assert it is\n  # correct.\n```\n\nWhile awkward, it comes with increased confidence that everything is correctly building",
+      "parentUuid": "fae5fe92_c9205bdd",
+      "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
