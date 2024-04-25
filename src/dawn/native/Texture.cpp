@@ -1066,7 +1066,7 @@ bool TextureBase::IsMultisampledTexture() const {
 }
 
 bool TextureBase::IsReadOnly() const {
-    return IsSubset(mUsage, kReadOnlyTextureUsages);
+    return IsSubset(mInternalUsage, kReadOnlyTextureUsages);
 }
 
 bool TextureBase::CoversFullSubresource(uint32_t mipLevel,
