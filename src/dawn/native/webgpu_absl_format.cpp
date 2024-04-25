@@ -34,6 +34,7 @@
 #include "dawn/native/Adapter.h"
 #include "dawn/native/AttachmentState.h"
 #include "dawn/native/BindingInfo.h"
+#include "dawn/native/CommandValidation.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/ObjectBase.h"
@@ -649,6 +650,89 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
             s->Append("f32");
             break;
     }
+    return {true};
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    SyncScopeResourceInternalUsageBit value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    s->Append("InternalUsage::");
+    if (!static_cast<bool>(value)) {
+        // 0 is often explicitly declared as None.
+        s->Append("none");
+        return {true};
+    }
+
+    bool moreThanOneBit = !HasZeroOrOneBits(value);
+    if (moreThanOneBit) {
+        s->Append("(");
+    }
+
+    bool first = true;
+    if (value & SyncScopeResourceInternalUsageBit::Input) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("input");
+        value &= ~SyncScopeResourceInternalUsageBit::Input;
+    }
+    if (value & SyncScopeResourceInternalUsageBit::Constant) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("constant");
+        value &= ~SyncScopeResourceInternalUsageBit::Constant;
+    }
+    if (value & SyncScopeResourceInternalUsageBit::Storage) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("storage");
+        value &= ~SyncScopeResourceInternalUsageBit::Storage;
+    }
+    if (value & SyncScopeResourceInternalUsageBit::StorageRead) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("storage-read");
+        value &= ~SyncScopeResourceInternalUsageBit::StorageRead;
+    }
+    if (value & SyncScopeResourceInternalUsageBit::Attachment) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("attachment");
+        value &= ~SyncScopeResourceInternalUsageBit::Attachment;
+    }
+    if (value & SyncScopeResourceInternalUsageBit::AttachmentRead) {
+        if (!first) {
+            s->Append("|");
+        }
+        first = false;
+        s->Append("attachment-read");
+        value &= ~SyncScopeResourceInternalUsageBit::AttachmentRead;
+    }
+
+    if (static_cast<bool>(value)) {
+        if (!first) {
+            s->Append("|");
+        }
+        s->Append(absl::StrFormat(
+            "InternalUsage::%x",
+            static_cast<typename std::underlying_type<SyncScopeResourceInternalUsageBit>::type>(
+                value)));
+    }
+
+    if (moreThanOneBit) {
+        s->Append(")");
+    }
+
     return {true};
 }
 

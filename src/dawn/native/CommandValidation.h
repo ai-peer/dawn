@@ -42,6 +42,16 @@ namespace dawn::native {
 
 enum class BufferSizeType { Size, AllocatedSize };
 
+enum class SyncScopeResourceInternalUsageBit : uint8_t {
+    None = 0,
+    Input = 1,
+    Constant = 1 << 1,
+    Storage = 1 << 2,
+    StorageRead = 1 << 3,
+    Attachment = 1 << 4,
+    AttachmentRead = 1 << 5,
+};
+
 class QuerySetBase;
 struct SyncScopeResourceUsage;
 struct TexelBlockInfo;
@@ -130,5 +140,10 @@ MaybeError ValidatePLSInfo(
     ityp::span<size_t, StorageAttachmentInfoForValidation> storageAttachments);
 
 }  // namespace dawn::native
+
+template <>
+struct wgpu::IsWGPUBitmask<dawn::native::SyncScopeResourceInternalUsageBit> {
+    static constexpr bool enable = true;
+};
 
 #endif  // SRC_DAWN_NATIVE_COMMANDVALIDATION_H_

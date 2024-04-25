@@ -238,6 +238,12 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     const absl::FormatConversionSpec& spec,
     absl::FormatSink* s);
 
+enum class SyncScopeResourceInternalUsageBit : uint8_t;
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    SyncScopeResourceInternalUsageBit value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
+
 template <typename I, typename T>
 absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
     const ityp::span<I, T>& values,
