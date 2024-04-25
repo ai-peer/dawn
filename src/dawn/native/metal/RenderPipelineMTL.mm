@@ -37,6 +37,7 @@
 #include "dawn/native/metal/TextureMTL.h"
 #include "dawn/native/metal/UtilsMetal.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
+#include "dawn/platform/tracing/TraceEvent.h"
 
 namespace dawn::native::metal {
 
@@ -367,6 +368,8 @@ RenderPipeline::RenderPipeline(DeviceBase* dev, const UnpackedPtr<RenderPipeline
 RenderPipeline::~RenderPipeline() = default;
 
 MaybeError RenderPipeline::InitializeImpl() {
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "RenderPipelineMTL::InitializeImpl", "label",
+                 GetLabel());
     mMtlPrimitiveTopology = MTLPrimitiveTopology(GetPrimitiveTopology());
     mMtlFrontFace = MTLFrontFace(GetFrontFace());
     mMtlCullMode = ToMTLCullMode(GetCullMode());

@@ -392,7 +392,8 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
                                         uint32_t sampleMask,
                                         const RenderPipeline* renderPipeline,
                                         std::optional<uint32_t> maxSubgroupSizeForFullSubgroups) {
-    TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::CreateFunction");
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::CreateFunction", "label",
+                 GetLabel());
 
     DAWN_ASSERT(!IsError());
     DAWN_ASSERT(out);
