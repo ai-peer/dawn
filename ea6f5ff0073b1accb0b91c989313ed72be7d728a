@@ -33,6 +33,24 @@
       "message": "I guess this is not the right fix.\n\nIt messes up Graphite\u0027s existing concurrent read use\n\n```\n[5863:259:0424/210802.116651:ERROR:dawn_context_provider.cc(582)] Concurrent reading read-write [Texture \"IOSurface(DisplayRead|Scanout|OopRasterization|RasterWrite)\"].\n - While calling [SharedTextureMemory (unlabeled)].BeginAccess([Texture \"IOSurface(DisplayRead|Scanout|OopRasterization|RasterWrite)\"]).\n```",
       "revId": "ea6f5ff0073b1accb0b91c989313ed72be7d728a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b0f00f_7545c388",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-25T05:50:52Z",
+      "side": 1,
+      "message": "I found a better fix\nhttps://dawn-review.googlesource.com/c/dawn/+/185723",
+      "parentUuid": "9ee1d079_e4db883b",
+      "revId": "ea6f5ff0073b1accb0b91c989313ed72be7d728a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
