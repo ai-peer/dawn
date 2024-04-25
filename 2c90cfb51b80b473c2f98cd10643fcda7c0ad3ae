@@ -94,6 +94,30 @@
       },
       "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd54771_96dcddce",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-25T21:58:42Z",
+      "side": 1,
+      "message": "well, that seems like a problem. Do the D3D validation layers say anything?\nIs Dawn doing something wrong, or is this not actually supported by the backend?\n\nYou said:\n\u003e Chrome uses decode swapchain to present video frames stored in one texture with multiple layers. However something, it may fallback to use graphite to sample the texture layers. So we need to import this texture into dawn.\n\nIf it\u0027s not supported, then we can\u0027t fall back in this way.\nWhat does Ganesh do?",
+      "parentUuid": "a46196b5_45feabba",
+      "range": {
+        "startLine": 783,
+        "startChar": 6,
+        "endLine": 785,
+        "endChar": 41
+      },
+      "revId": "2c90cfb51b80b473c2f98cd10643fcda7c0ad3ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
