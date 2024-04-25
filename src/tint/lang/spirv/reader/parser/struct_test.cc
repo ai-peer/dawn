@@ -91,12 +91,12 @@ tint_symbol_2 = struct @align(4) {
 }
 
 %1 = func(%2:tint_symbol_2):void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
@@ -134,12 +134,12 @@ tint_symbol_2 = struct @align(4) {
 }
 
 %1 = func(%2:tint_symbol_2, %3:tint_symbol_2):tint_symbol_2 {
-  %b1 = block {
+  $B1: {
     ret %2
   }
 }
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
@@ -189,12 +189,12 @@ tint_symbol_9 = struct @align(4) {
 }
 
 %1 = func(%2:tint_symbol_9):void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
@@ -237,12 +237,12 @@ tint_symbol_4 = struct @align(4) {
 }
 
 %1 = func(%2:tint_symbol_4):void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }

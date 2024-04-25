@@ -65,17 +65,17 @@ TEST_F(SpirvParserTest, Constant_Bool) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:bool):void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:void = call %2, true
     %6:void = call %2, false
     %7:void = call %2, false
@@ -126,17 +126,17 @@ TEST_F(SpirvParserTest, Constant_I32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:i32):void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:void = call %2, 0i
     %6:void = call %2, 1i
     %7:void = call %2, -1i
@@ -186,17 +186,17 @@ TEST_F(SpirvParserTest, Constant_U32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:u32):void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:void = call %2, 0u
     %6:void = call %2, 1u
     %7:void = call %2, 4294967295u
@@ -249,17 +249,17 @@ TEST_F(SpirvParserTest, Constant_F16) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:f16):void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:void = call %2, 0.0h
     %6:void = call %2, 1.0h
     %7:void = call %2, 65504.0h
@@ -313,17 +313,17 @@ TEST_F(SpirvParserTest, Constant_F32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:f32):void {
-  %b2 = block {
+  $B2: {
     ret
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:void = call %2, 0.0f
     %6:void = call %2, 1.0f
     %7:void = call %2, 340282346638528859811704183484516925440.0f
@@ -372,17 +372,17 @@ TEST_F(SpirvParserTest, Constant_Vec2Bool) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:vec2<bool>):vec2<bool> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:vec2<bool> = call %2, vec2<bool>(true, false)
     %6:vec2<bool> = call %2, vec2<bool>(false)
     ret
@@ -428,17 +428,17 @@ TEST_F(SpirvParserTest, Constant_Vec3I32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:vec3<i32>):vec3<i32> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:vec3<i32> = call %2, vec3<i32>(0i, 1i, -1i)
     %6:vec3<i32> = call %2, vec3<i32>(0i)
     ret
@@ -485,17 +485,17 @@ TEST_F(SpirvParserTest, Constant_Vec4F32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:vec4<f32>):vec4<f32> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:vec4<f32> = call %2, vec4<f32>(0.0f, 1.0f, 340282346638528859811704183484516925440.0f, -340282346638528859811704183484516925440.0f)
     %6:vec4<f32> = call %2, vec4<f32>(0.0f)
     ret
@@ -543,17 +543,17 @@ TEST_F(SpirvParserTest, Constant_Mat2x4F32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:mat2x4<f32>):mat2x4<f32> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:mat2x4<f32> = call %2, mat2x4<f32>(vec4<f32>(0.0f), vec4<f32>(1.0f))
     %6:mat2x4<f32> = call %2, mat2x4<f32>(vec4<f32>(0.0f))
     ret
@@ -604,17 +604,17 @@ TEST_F(SpirvParserTest, Constant_Mat3x2F16) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:mat3x2<f16>):mat3x2<f16> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:mat3x2<f16> = call %2, mat3x2<f16>(vec2<f16>(0.0h), vec2<f16>(1.0h), vec2<f16>(65504.0h))
     %6:mat3x2<f16> = call %2, mat3x2<f16>(vec2<f16>(0.0h))
     ret
@@ -662,17 +662,17 @@ TEST_F(SpirvParserTest, Constant_Array_I32_4) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:array<i32, 4>):array<i32, 4> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:array<i32, 4> = call %2, array<i32, 4>(0i, 1i, -1i, 2147483647i)
     %6:array<i32, 4> = call %2, array<i32, 4>(0i)
     ret
@@ -725,17 +725,17 @@ TEST_F(SpirvParserTest, Constant_Array_Array_F32) {
 )",
               R"(
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:array<array<f32, 4>, 2>):array<array<f32, 4>, 2> {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:array<array<f32, 4>, 2> = call %2, array<array<f32, 4>, 2>(array<f32, 4>(0.0f, 1.0f, 340282346638528859811704183484516925440.0f, -340282346638528859811704183484516925440.0f), array<f32, 4>(-340282346638528859811704183484516925440.0f, 340282346638528859811704183484516925440.0f, 1.0f, 0.0f))
     %6:array<array<f32, 4>, 2> = call %2, array<array<f32, 4>, 2>(array<f32, 4>(0.0f))
     ret
@@ -786,17 +786,17 @@ tint_symbol_2 = struct @align(4) {
 }
 
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:tint_symbol_2):tint_symbol_2 {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:tint_symbol_2 = call %2, tint_symbol_2(42i, -1.0f)
     %6:tint_symbol_2 = call %2, tint_symbol_2(0i, 0.0f)
     ret
@@ -861,17 +861,17 @@ tint_symbol_5 = struct @align(4) {
 }
 
 %main = @compute @workgroup_size(1, 1, 1) func():void {
-  %b1 = block {
+  $B1: {
     ret
   }
 }
 %2 = func(%3:tint_symbol_5):tint_symbol_5 {
-  %b2 = block {
+  $B2: {
     ret %3
   }
 }
 %4 = func():void {
-  %b3 = block {
+  $B3: {
     %5:tint_symbol_5 = call %2, tint_symbol_5(array<tint_symbol_2, 2>(tint_symbol_2(42i, -1.0f), tint_symbol_2(-1i, 42.0f)), array<tint_symbol_2, 2>(tint_symbol_2(-1i, 42.0f), tint_symbol_2(42i, -1.0f)))
     %6:tint_symbol_5 = call %2, tint_symbol_5(array<tint_symbol_2, 2>(tint_symbol_2(0i, 0.0f)))
     ret
