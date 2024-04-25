@@ -16,6 +16,125 @@
       "message": "Updated. PTAL, thanks!",
       "revId": "1771de475675c378937b1be4ea917eff61a11745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371d67ef_2c0596dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "LGTM, please remember that we need to also handle textureDimensions at some point.\n\nAustin PTAL, I\u0027ll do a small followup on ExternalTexture after this lands.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a503be5d_5e7a4d46",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "Computations here LGTM. Note that I\u0027ll probably do a small CL afterwards to refactor the file a tiny bit.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "258ffe44_ddd1fbba",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "nit: leftover commented out code.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f80d8800_6ceb6236",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "We could have an enum for this one to make it easier to know what case it is when looking at the test name (otherwise I believe it will just output 0 or 1)",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2821f822_79d6dfd0",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 1475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "IMHO we could handle the mirrored at the end (or start?) of the function for all the cases.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79c00c9e_b4805a2d",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "nit: bad reflow in the git cl format, can you fix it?\n\nBut also the comment needs to be updated as we now do the clamping before doing the transform.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a805a207_d22459f2",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T09:28:12Z",
+      "side": 1,
+      "message": "The coords are already a u32 here, which is pretty convenient because we no longer need a clamp, but just a max.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
