@@ -51,6 +51,49 @@
 
 namespace dawn::native {
 
+namespace {
+
+SyncScopeResourceInternalUsageBit ToResourceInternalUsage(wgpu::BufferUsage syncScopeBufferUsage) {
+    SyncScopeResourceInternalUsageBit internalUsageBits = SyncScopeResourceInternalUsageBit::None;
+    if (syncScopeBufferUsage &
+        (wgpu::BufferUsage::Index | wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Indirect)) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Input;
+    }
+    if (syncScopeBufferUsage & wgpu::BufferUsage::Uniform) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Constant;
+    }
+    if (syncScopeBufferUsage & (wgpu::BufferUsage::Storage)) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Storage;
+    }
+    if (syncScopeBufferUsage & kReadOnlyStorageBuffer) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::StorageRead;
+    }
+    return internalUsageBits;
+}
+
+SyncScopeResourceInternalUsageBit ToResourceInternalUsage(
+    wgpu::TextureUsage syncScopeTextureUsage) {
+    SyncScopeResourceInternalUsageBit internalUsageBits = SyncScopeResourceInternalUsageBit::None;
+    if (syncScopeTextureUsage & wgpu::TextureUsage::TextureBinding) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Constant;
+    }
+    if (syncScopeTextureUsage & (wgpu::TextureUsage::StorageBinding | kWriteOnlyStorageTexture)) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Storage;
+    }
+    if (syncScopeTextureUsage & kReadOnlyStorageTexture) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::StorageRead;
+    }
+    if (syncScopeTextureUsage & wgpu::TextureUsage::RenderAttachment) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::Attachment;
+    }
+    if (syncScopeTextureUsage & kReadOnlyRenderAttachment) {
+        internalUsageBits |= SyncScopeResourceInternalUsageBit::AttachmentRead;
+    }
+    return internalUsageBits;
+}
+
+}  // namespace
+
 // Performs validation of the "synchronization scope" rules of WebGPU.
 MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
     // Buffers can only be used as single-write or multiple read.
@@ -62,7 +105,7 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
         DAWN_INVALID_IF(!readOnly && !singleUse,
                         "%s usage (%s) includes writable usage and another usage in the same "
                         "synchronization scope.",
-                        scope.buffers[i], usage);
+                        scope.buffers[i], ToResourceInternalUsage(usage));
     }
 
     // Check that every single subresource is used as either a single-write usage or a
@@ -87,7 +130,7 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
                 return DAWN_VALIDATION_ERROR(
                     "%s usage (%s) includes writable usage and another usage in the same "
                     "synchronization scope.",
-                    scope.textures[i], syncInfo.usage);
+                    scope.textures[i], ToResourceInternalUsage(syncInfo.usage));
             }));
     }
     return {};
