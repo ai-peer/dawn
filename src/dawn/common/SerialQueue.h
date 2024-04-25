@@ -28,6 +28,8 @@
 #ifndef SRC_DAWN_COMMON_SERIALQUEUE_H_
 #define SRC_DAWN_COMMON_SERIALQUEUE_H_
 
+#include <algorithm>
+#include <deque>
 #include <utility>
 #include <vector>
 
@@ -42,10 +44,20 @@ template <typename SerialT, typename ValueT>
 struct SerialStorageTraits<SerialQueue<SerialT, ValueT>> {
     using Serial = SerialT;
     using Value = ValueT;
-    using SerialPair = std::pair<Serial, std::vector<Value>>;
-    using Storage = std::vector<SerialPair>;
+    using SerialPair = std::pair<Serial, Value>;
+    using Storage = std::deque<SerialPair>;
     using StorageIterator = typename Storage::iterator;
     using ConstStorageIterator = typename Storage::const_iterator;
+
+    static StorageIterator FindUpTo(Storage& storage, Serial serial) {
+        return std::upper_bound(storage.begin(), storage.end(), serial,
+                                [](Serial a, const SerialPair& b) { return a < b.first; });
+    }
+
+    static ConstStorageIterator FindUpTo(const Storage& storage, Serial serial) {
+        return std::upper_bound(storage.begin(), storage.end(), serial,
+                                [](Serial a, const SerialPair& b) { return a < b.first; });
+    }
 };
 
 // SerialQueue stores an associative list mapping a Serial to Value.
@@ -67,35 +79,29 @@ class SerialQueue : public SerialStorage<SerialQueue<Serial, Value>> {
 template <typename Serial, typename Value>
 void SerialQueue<Serial, Value>::Enqueue(const Value& value, Serial serial) {
     DAWN_ASSERT(this->Empty() || this->mStorage.back().first <= serial);
-
-    if (this->Empty() || this->mStorage.back().first < serial) {
-        this->mStorage.emplace_back(serial, std::vector<Value>{});
-    }
-    this->mStorage.back().second.push_back(value);
+    this->mStorage.emplace_back(serial, value);
 }
 
 template <typename Serial, typename Value>
 void SerialQueue<Serial, Value>::Enqueue(Value&& value, Serial serial) {
     DAWN_ASSERT(this->Empty() || this->mStorage.back().first <= serial);
-
-    if (this->Empty() || this->mStorage.back().first < serial) {
-        this->mStorage.emplace_back(serial, std::vector<Value>{});
-    }
-    this->mStorage.back().second.push_back(std::move(value));
+    this->mStorage.emplace_back(serial, std::move(value));
 }
 
 template <typename Serial, typename Value>
 void SerialQueue<Serial, Value>::Enqueue(const std::vector<Value>& values, Serial serial) {
     DAWN_ASSERT(values.size() > 0);
-    DAWN_ASSERT(this->Empty() || this->mStorage.back().first <= serial);
-    this->mStorage.emplace_back(serial, values);
+    for (const auto& value : values) {
+        Enqueue(value, serial);
+    }
 }
 
 template <typename Serial, typename Value>
 void SerialQueue<Serial, Value>::Enqueue(std::vector<Value>&& values, Serial serial) {
     DAWN_ASSERT(values.size() > 0);
-    DAWN_ASSERT(this->Empty() || this->mStorage.back().first <= serial);
-    this->mStorage.emplace_back(serial, std::move(values));
+    for (const auto& value : values) {
+        Enqueue(std::move(value), serial);
+    }
 }
 
 }  // namespace dawn
