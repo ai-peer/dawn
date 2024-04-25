@@ -16,6 +16,23 @@
       "message": "PTAL. Pretty simplistic approach but it allows Dawn to pass https://github.com/gpuweb/cts/pull/3699. Probably shouldn\u0027t merge until https://github.com/gpuweb/gpuweb/pull/4593 lands.",
       "revId": "2506516c7a147a2738fccb8857801b0933032183",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b87ad00d_976f99ac",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-25T23:40:08Z",
+      "side": 1,
+      "message": "It is a little unfortunate that this validation requires this std::set (or an O(n^2) check if not), but I don\u0027t see a great way to do better (e.g. we could set a flag on the command buffer object that it can\u0027t be used again, but this is kinda messy) so lgtm",
+      "revId": "2506516c7a147a2738fccb8857801b0933032183",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
