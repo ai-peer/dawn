@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7de72816_12e8df16",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-25T19:14:34Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem like it\u0027s simplifying things. It\u0027s duplicated the code into each of the case blocks, `texture_expr`, `texture_sem` and other bits seem to be the same over all blocks? The `type` seems to be declared uninitialized at 1082, and used in the lambda, so if a blocks forgets to set it, we\u0027ll end up using an uninitialized value.",
+      "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
