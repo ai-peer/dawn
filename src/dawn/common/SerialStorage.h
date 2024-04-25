@@ -49,60 +49,47 @@ class SerialStorage {
     using ConstStorageIterator = typename SerialStorageTraits<Derived>::ConstStorageIterator;
 
   public:
-    class Iterator {
+    using Iterator = StorageIterator;
+    using ConstIterator = ConstStorageIterator;
+
+    class ValueIterator : public Iterator {
       public:
-        explicit Iterator(StorageIterator start);
-        Iterator& operator++();
-
-        bool operator==(const Iterator& other) const;
-        bool operator!=(const Iterator& other) const;
-        Value& operator*() const;
-
-      private:
-        StorageIterator mStorageIterator;
-        // Special case the mSerialIterator when it should be equal to mStorageIterator.begin()
-        // otherwise we could ask mStorageIterator.begin() when mStorageIterator is mStorage.end()
-        // which is invalid. mStorageIterator.begin() is tagged with a nullptr.
-        raw_ptr<Value, AllowPtrArithmetic> mSerialIterator;
+        Value& operator*() const { return Iterator::operator*().second; }
     };
 
-    class ConstIterator {
+    class ConstValueIterator : public ConstIterator {
       public:
-        explicit ConstIterator(ConstStorageIterator start);
-        ConstIterator& operator++();
-
-        bool operator==(const ConstIterator& other) const;
-        bool operator!=(const ConstIterator& other) const;
-        const Value& operator*() const;
-
-      private:
-        ConstStorageIterator mStorageIterator;
-        raw_ptr<const Value, AllowPtrArithmetic> mSerialIterator;
+        const Value& operator*() const { return ConstIterator::operator*().second; }
     };
 
     class BeginEnd {
       public:
-        BeginEnd(StorageIterator start, StorageIterator end);
+        BeginEnd(StorageIterator start, StorageIterator end) : mStartIt(start), mEndIt(end) {}
 
-        Iterator begin() const;
-        Iterator end() const;
+        const ValueIterator& begin() const { return mStartIt; }
+        const ValueIterator& end() const { return mEndIt; }
 
       private:
-        StorageIterator mStartIt;
-        StorageIterator mEndIt;
+        ValueIterator mStartIt;
+        ValueIterator mEndIt;
     };
 
     class ConstBeginEnd {
       public:
-        ConstBeginEnd(ConstStorageIterator start, ConstStorageIterator end);
+        ConstBeginEnd(StorageIterator start, StorageIterator end) : mStartIt(start), mEndIt(end) {}
 
-        ConstIterator begin() const;
-        ConstIterator end() const;
+        const ConstValueIterator& begin() const { return mStartIt; }
+        const ConstValueIterator& end() const { return mStartIt; }
 
       private:
-        ConstStorageIterator mStartIt;
-        ConstStorageIterator mEndIt;
+        ConstValueIterator mStartIt;
+        ConstValueIterator mEndIt;
     };
+
+    Iterator begin() { return mStorage.begin(); }
+    Iterator end() { return mStorage.end(); }
+    ConstIterator begin() const { return mStorage.begin(); }
+    ConstIterator end() const { return mStorage.end(); }
 
     // Derived classes may specialize constraits for elements stored
     // Ex.) SerialQueue enforces that the serial must be given in (not strictly)
@@ -188,147 +175,12 @@ typename SerialStorage<Derived>::Serial SerialStorage<Derived>::LastSerial() con
 template <typename Derived>
 typename SerialStorage<Derived>::ConstStorageIterator SerialStorage<Derived>::FindUpTo(
     Serial serial) const {
-    auto it = mStorage.begin();
-    while (it != mStorage.end() && it->first <= serial) {
-        it++;
-    }
-    return it;
+    return SerialStorageTraits<Derived>::FindUpTo(mStorage, serial);
 }
 
 template <typename Derived>
 typename SerialStorage<Derived>::StorageIterator SerialStorage<Derived>::FindUpTo(Serial serial) {
-    auto it = mStorage.begin();
-    while (it != mStorage.end() && it->first <= serial) {
-        it++;
-    }
-    return it;
-}
-
-// SerialStorage::BeginEnd
-
-template <typename Derived>
-SerialStorage<Derived>::BeginEnd::BeginEnd(typename SerialStorage<Derived>::StorageIterator start,
-                                           typename SerialStorage<Derived>::StorageIterator end)
-    : mStartIt(start), mEndIt(end) {}
-
-template <typename Derived>
-typename SerialStorage<Derived>::Iterator SerialStorage<Derived>::BeginEnd::begin() const {
-    return SerialStorage::Iterator(mStartIt);
-}
-
-template <typename Derived>
-typename SerialStorage<Derived>::Iterator SerialStorage<Derived>::BeginEnd::end() const {
-    return SerialStorage::Iterator(mEndIt);
-}
-
-// SerialStorage::Iterator
-
-template <typename Derived>
-SerialStorage<Derived>::Iterator::Iterator(typename SerialStorage<Derived>::StorageIterator start)
-    : mStorageIterator(start), mSerialIterator(nullptr) {}
-
-template <typename Derived>
-typename SerialStorage<Derived>::Iterator& SerialStorage<Derived>::Iterator::operator++() {
-    Value* vectorData = mStorageIterator->second.data();
-
-    if (mSerialIterator == nullptr) {
-        mSerialIterator = vectorData + 1;
-    } else {
-        mSerialIterator++;
-    }
-
-    if (mSerialIterator >= vectorData + mStorageIterator->second.size()) {
-        mSerialIterator = nullptr;
-        mStorageIterator++;
-    }
-
-    return *this;
-}
-
-template <typename Derived>
-bool SerialStorage<Derived>::Iterator::operator==(
-    const typename SerialStorage<Derived>::Iterator& other) const {
-    return other.mStorageIterator == mStorageIterator && other.mSerialIterator == mSerialIterator;
-}
-
-template <typename Derived>
-bool SerialStorage<Derived>::Iterator::operator!=(
-    const typename SerialStorage<Derived>::Iterator& other) const {
-    return !(*this == other);
-}
-
-template <typename Derived>
-typename SerialStorage<Derived>::Value& SerialStorage<Derived>::Iterator::operator*() const {
-    if (mSerialIterator == nullptr) {
-        return *mStorageIterator->second.begin();
-    }
-    return *mSerialIterator;
-}
-
-// SerialStorage::ConstBeginEnd
-
-template <typename Derived>
-SerialStorage<Derived>::ConstBeginEnd::ConstBeginEnd(
-    typename SerialStorage<Derived>::ConstStorageIterator start,
-    typename SerialStorage<Derived>::ConstStorageIterator end)
-    : mStartIt(start), mEndIt(end) {}
-
-template <typename Derived>
-typename SerialStorage<Derived>::ConstIterator SerialStorage<Derived>::ConstBeginEnd::begin()
-    const {
-    return {mStartIt};
-}
-
-template <typename Derived>
-typename SerialStorage<Derived>::ConstIterator SerialStorage<Derived>::ConstBeginEnd::end() const {
-    return {mEndIt};
-}
-
-// SerialStorage::ConstIterator
-
-template <typename Derived>
-SerialStorage<Derived>::ConstIterator::ConstIterator(
-    typename SerialStorage<Derived>::ConstStorageIterator start)
-    : mStorageIterator(start), mSerialIterator(nullptr) {}
-
-template <typename Derived>
-typename SerialStorage<Derived>::ConstIterator&
-SerialStorage<Derived>::ConstIterator::operator++() {
-    const Value* vectorData = mStorageIterator->second.data();
-
-    if (mSerialIterator == nullptr) {
-        mSerialIterator = vectorData + 1;
-    } else {
-        mSerialIterator++;
-    }
-
-    if (mSerialIterator >= vectorData + mStorageIterator->second.size()) {
-        mSerialIterator = nullptr;
-        mStorageIterator++;
-    }
-
-    return *this;
-}
-
-template <typename Derived>
-bool SerialStorage<Derived>::ConstIterator::operator==(
-    const typename SerialStorage<Derived>::ConstIterator& other) const {
-    return other.mStorageIterator == mStorageIterator && other.mSerialIterator == mSerialIterator;
-}
-
-template <typename Derived>
-bool SerialStorage<Derived>::ConstIterator::operator!=(
-    const typename SerialStorage<Derived>::ConstIterator& other) const {
-    return !(*this == other);
-}
-
-template <typename Derived>
-const typename SerialStorage<Derived>::Value& SerialStorage<Derived>::ConstIterator::operator*()
-    const {
-    if (mSerialIterator == nullptr) {
-        return *mStorageIterator->second.begin();
-    }
-    return *mSerialIterator;
+    return SerialStorageTraits<Derived>::FindUpTo(mStorage, serial);
 }
 
 }  // namespace dawn
