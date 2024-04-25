@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "485475e9a251c8a233a071c53961358e50ca5637",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42cee427_9698aed8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T14:23:56Z",
+      "side": 1,
+      "message": "To be honest I don\u0027t think that showing the spec\u0027s internal usages is more clear: developers are used to things like TextureUsage::Storage as that\u0027s what they use in the API. However they don\u0027t use the spec\u0027s internal usage.\n\nWhat about translating some of the usages as BufferUsage::Storage(read-only) for example?",
+      "revId": "485475e9a251c8a233a071c53961358e50ca5637",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f1fe66_8736a9e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T14:23:56Z",
+      "side": 1,
+      "message": "To be honest I don\u0027t think that showing the spec\u0027s internal usages is more clear: developers are used to things like TextureUsage::Storage as that\u0027s what they use in the API. However they don\u0027t use the spec\u0027s internal usage.\n\nWhat about translating some of the usages as BufferUsage::Storage(read-only) for example?",
+      "revId": "485475e9a251c8a233a071c53961358e50ca5637",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
