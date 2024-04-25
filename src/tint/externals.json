@@ -6,7 +6,12 @@
     "abseil": {
         "IncludePatterns": [
             "absl/**"
-        ],
+        ]
+    },
+    "dxc-include": {
+        "IncludePatterns": [
+            "dxc/**"
+        ]
     },
     "google-benchmark": {
         "IncludePatterns": [
