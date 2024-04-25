@@ -16,6 +16,24 @@
       "message": "The list of files will change when dawn.json changes; can this take a wildcard?",
       "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "216a643a_4d9e698a",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-04-25T14:00:26Z",
+      "side": 1,
+      "message": "Agreed, I would prefer not to take this approach (although @vantablack@google.com and I had a conversation on this offline and this is a common practice for other output files in the [codebase](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/third_party/angle/third_party/dawn/src/dawn/common/BUILD.gn;l\u003d223?q\u003dBUILD.gn\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2F)) Trevor, did you get a chance to discuss a better alternative with the dawn folks? If not, maybe @cwallez@chromium.org could pitch in.",
+      "parentUuid": "7a2cc3ce_986abcf6",
+      "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
