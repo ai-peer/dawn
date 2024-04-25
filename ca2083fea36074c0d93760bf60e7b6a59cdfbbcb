@@ -34,6 +34,24 @@
       "parentUuid": "7a2cc3ce_986abcf6",
       "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae5fe92_c9205bdd",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-04-25T14:31:48Z",
+      "side": 1,
+      "message": "Unfortunately due to limitations in Ninja / GN we have to make the list of outputs explicit: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/generator_lib.gni;drc\u003dcc2516ac15ebeb6c3c07a427a76d6b57832d3154;l\u003d116\n\nThe good thing is that `gn gen` will break if someone forgets to add to the list, so it will be kept in sync over time.",
+      "parentUuid": "216a643a_4d9e698a",
+      "revId": "ca2083fea36074c0d93760bf60e7b6a59cdfbbcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
