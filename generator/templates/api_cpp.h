@@ -335,7 +335,11 @@ static_assert(offsetof(ChainedStruct, sType) == offsetof({{c_prefix}}ChainedStru
             {{as_cppType(type.name)}}& operator=(const {{as_cppType(type.name)}}&) = delete;
             inline {{as_cppType(type.name)}}({{as_cppType(type.name)}}&&);
             inline {{as_cppType(type.name)}}& operator=({{as_cppType(type.name)}}&&);
+        {% else %}
+            inline operator {{as_cType(type.name)}}&() noexcept;
         {% endif %}
+        inline operator const {{as_cType(type.name)}}&() const noexcept;
+
         {% if type.extensible %}
             ChainedStruct{{Out}} {{const}} * nextInChain = nullptr;
         {% endif %}
@@ -408,6 +412,15 @@ static_assert(offsetof(ChainedStruct, sType) == offsetof({{c_prefix}}ChainedStru
             {% for member in type.members %}
                 detail::AsNonConstReference(value.{{member.name.camelCase()}}) = defaultValue.{{member.name.camelCase()}};
             {% endfor %}
+        }
+    {% endif %}
+
+    {{CppType}}::operator const {{as_cType(type.name)}}&() const noexcept {
+        return *reinterpret_cast<const {{as_cType(type.name)}}*>(this);
+    }
+    {% if not type.has_free_members_function %}
+        {{CppType}}::operator {{as_cType(type.name)}}&() noexcept {
+            return *reinterpret_cast<{{as_cType(type.name)}}*>(this);
         }
     {% endif %}
 
