@@ -261,6 +261,24 @@
       "parentUuid": "860f04a9_f2981e9f",
       "revId": "1771de475675c378937b1be4ea917eff61a11745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f8dd81_819409fa",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-26T07:45:23Z",
+      "side": 1,
+      "message": "The test is a bit tighten than spec required because we know our shader logic tends to clamp to border always. Still verified this behaviour.",
+      "parentUuid": "b8adbd96_dc9f9754",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
