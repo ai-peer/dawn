@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "622a4369_9b2c8338",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T22:10:17Z",
+      "side": 1,
+      "message": "nit: we\u0027re not fully hiding them, maybe something like `Pretty-print resource usages in resource tracking errors`",
+      "revId": "d30694857c1ed3f2aacc2279f9507f7944b70f39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b6f65b60_d4b71130",
