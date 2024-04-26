@@ -52,6 +52,24 @@
       "parentUuid": "08f89562_17a89938",
       "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6fd8ee_d29ddd5d",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T20:32:34Z",
+      "side": 0,
+      "message": "(And if it were a member then you could just initialize it with `{ nullptr, SType::{{type.name.CamelCase()}} }` I think)",
+      "parentUuid": "4c5c4dbd_b584ac04",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
