@@ -46,6 +46,30 @@
       },
       "revId": "dd90a3a11b3353a7542efe380d7712628a8f385e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc2e7ac_4b66f786",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-26T21:11:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d8394b8e_c0f86349",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 89
+      },
+      "revId": "dd90a3a11b3353a7542efe380d7712628a8f385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
