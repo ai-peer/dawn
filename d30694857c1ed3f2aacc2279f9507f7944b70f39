@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f65b60_d4b71130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T22:06:16Z",
+      "side": 1,
+      "message": "This will be much clearer!",
+      "revId": "d30694857c1ed3f2aacc2279f9507f7944b70f39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b61bee7_04bcdf4f",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T22:06:16Z",
+      "side": 1,
+      "message": "aside: I\u0027d like the naming here to match the wording we use in the spec, but I\u0027m looking at the spec wording and I think it might need some improvement first. I\u0027ll consider that and maybe then update this to match later.",
+      "revId": "d30694857c1ed3f2aacc2279f9507f7944b70f39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a3c6cc_6315311c",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T22:06:16Z",
+      "side": 1,
+      "message": "missing parenthesis",
+      "range": {
+        "startLine": 94,
+        "startChar": 77,
+        "endLine": 94,
+        "endChar": 79
+      },
+      "revId": "d30694857c1ed3f2aacc2279f9507f7944b70f39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
