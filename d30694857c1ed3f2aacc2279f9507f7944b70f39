@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f33fdfdd_a1d908e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-26T22:11:53Z",
+      "side": 1,
+      "message": "LGTM2 after Kai\u0027s comment",
+      "revId": "d30694857c1ed3f2aacc2279f9507f7944b70f39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9b61bee7_04bcdf4f",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 3
