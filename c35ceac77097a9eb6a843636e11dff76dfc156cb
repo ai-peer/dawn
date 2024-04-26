@@ -70,6 +70,24 @@
       "parentUuid": "4c5c4dbd_b584ac04",
       "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6880537_0bdd6e40",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-26T20:38:43Z",
+      "side": 0,
+      "message": "yes, I think we can make it have the same layout\n\nthe problem is that then to chain ityou would have to do.\n\n```\nwgpu::MyStruct s;\nmyRoot.nextInChain \u003d reinterpret_cast\u003cwgpu::ChainedStruct*\u003e(\u0026s);\n```\n\nwhich is a little unfortunate\nor we make .nextInChain be `void*` which is also a little unfortunate because then iteration is a pain.\n\n\nwe call in \"nextInChain\" because IDK that\u0027s what we wanted to call it.\nbut for C reasons, you access it at .chain.next",
+      "parentUuid": "bf6fd8ee_d29ddd5d",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
