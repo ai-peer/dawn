@@ -85,6 +85,24 @@
       "parentUuid": "724f69a6_e850ad0b",
       "revId": "cb3746eb23b25d46cf549c1fc42c019a3505e1ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d389aff8_a23db314",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-26T15:53:07Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "81e0f8e2_de327d2b",
+      "revId": "cb3746eb23b25d46cf549c1fc42c019a3505e1ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
