@@ -84,7 +84,7 @@ class WeakRefSupport : public detail::WeakRefSupportBase {
     DAWN_NO_SANITIZE("cfi-derived-cast")
 #endif
     WeakRefSupport()
-        : WeakRefSupportBase(AcquireRef(new detail::WeakRefData(static_cast<T*>(this)))) {}
+        : WeakRefSupportBase(AcquireRef(new detail::WeakRefData(static_cast<RefCounted*>(this)))) {}
 };
 
 }  // namespace dawn
