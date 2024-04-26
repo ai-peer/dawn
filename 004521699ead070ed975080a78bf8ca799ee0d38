@@ -16,6 +16,23 @@
       "message": "Hi Austin, PTAL. Thanks",
       "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f64c8ab_efdf5cf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-26T17:58:25Z",
+      "side": 1,
+      "message": "I\u0027m questionable about this change because the purpose of std::vector is so that all the values in the list are stored contiguously. with std::deque, it\u0027s more like a doubly-linked-list with separate allocations holding the nodes. And with std::multimap, it is also separate allocations per node - as opposed to one allocation for all the values under a given serial",
+      "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
