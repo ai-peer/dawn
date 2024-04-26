@@ -33,6 +33,24 @@
       "message": "I\u0027m questionable about this change because the purpose of std::vector is so that all the values in the list are stored contiguously. with std::deque, it\u0027s more like a doubly-linked-list with separate allocations holding the nodes. And with std::multimap, it is also separate allocations per node - as opposed to one allocation for all the values under a given serial",
       "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20fa1be3_89363855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-26T18:54:58Z",
+      "side": 1,
+      "message": "Based on [1], std::deque should be implemented with a sequence of individually allocated fixed-size arrays, Not like std::list. \nAnd we can still use `std::vector`, but I think it is better to just use `std::vector\u003cSerial,Value\u003e` instead of `std::vector\u003cSerial, std::vector\u003cValue\u003e\u003e`. It may need more memory for some cases, but it doesn\u0027t need a heap allocation per serial, and all data is continuous, and it is good for CPU cache.\n\nThe complexity (efficiency) of common operations on deques is as follows:\n - Random access - constant O(1).\n - Insertion or removal of elements at the end or beginning - constant O(1).\n - Insertion or removal of elements - linear O(n).\n \n[1] https://en.cppreference.com/w/cpp/container/deque\n\n\nFor SerialMap, it is used at three places. \n - d3d::Queue::mSystemEventReceivers: In most case, one serial will only has one receiver. using a std::vertex per key is not necessary.\n - d3d11::Queue::mPendingMapBuffers: With Jie\u0027s CL (using system memory for staging buffer). This map is not used for most cases.\n - QueueBase::mTasksInFlight: the original approach cloud be better better (depends on how many items per key), but we can use `std::flat_multimap` if c++23 is used and to avoid one allocation per node. or we can use std::pmr [2].\n \n[2] https://en.cppreference.com/w/cpp/memory/polymorphic_allocator",
+      "parentUuid": "5f64c8ab_efdf5cf3",
+      "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
