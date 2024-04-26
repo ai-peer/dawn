@@ -51,6 +51,24 @@
       "parentUuid": "5f64c8ab_efdf5cf3",
       "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed209180_b8ed1d0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-26T20:02:49Z",
+      "side": 1,
+      "message": "deque might be O(1), but it\u0027s still extra indirections and allocations:\n\u003e which means indexed access to deque must perform two pointer dereferences, compared to vector\u0027s indexed access which performs only one.\n\nSerialQueue is used a lot, and it can hold a lot of values - especially as things get deleted and enqueued for deletion. I think the number of values is often much greater than the number of serials.\nSo deque\u003cpair\u003cSerial, Value\u003e\u003e not only adds a lot of indirections, but it will close to double the memory usage. Serial is a 64 bit number, and Value is often a pointer",
+      "parentUuid": "20fa1be3_89363855",
+      "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
