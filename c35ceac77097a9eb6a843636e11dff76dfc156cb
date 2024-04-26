@@ -88,6 +88,24 @@
       "parentUuid": "bf6fd8ee_d29ddd5d",
       "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2564050f_a2e91cbe",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T21:38:57Z",
+      "side": 0,
+      "message": "... Right, I remember now, on both accounts.\n\nWe could have a method that returns the reinterpreted pointer, or require pointing to the nextInChain member, or... do some conversion magic to allow assigning ExtensionStruct* into a ChainedStruct* (https://godbolt.org/z/6dW3Eea4e not great but works)\n\nWhat you have is probably better though.",
+      "parentUuid": "e6880537_0bdd6e40",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
