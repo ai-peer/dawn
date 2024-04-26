@@ -50,6 +50,24 @@
       "message": "To be honest I don\u0027t think that showing the spec\u0027s internal usages is more clear: developers are used to things like TextureUsage::Storage as that\u0027s what they use in the API. However they don\u0027t use the spec\u0027s internal usage.\n\nWhat about translating some of the usages as BufferUsage::Storage(read-only) for example?",
       "revId": "485475e9a251c8a233a071c53961358e50ca5637",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5d7249_0647248c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-04-26T05:37:44Z",
+      "side": 1,
+      "message": "I\u0027ve updated the CL to address this comment. PTAL, thanks!",
+      "parentUuid": "e7f1fe66_8736a9e1",
+      "revId": "485475e9a251c8a233a071c53961358e50ca5637",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
