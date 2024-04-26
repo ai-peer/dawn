@@ -16,6 +16,24 @@
       "message": "Do we really need this constructor? What if we just got rid of it, and moved the `sType` defaulting to the declaration instead of the constructor?",
       "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08f89562_17a89938",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-26T20:10:11Z",
+      "side": 0,
+      "message": "sType is in the wgpu::ChainedStruct base class though",
+      "parentUuid": "6aa74617_1e9fec55",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
