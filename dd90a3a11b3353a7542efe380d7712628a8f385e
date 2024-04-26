@@ -22,6 +22,30 @@
       },
       "revId": "dd90a3a11b3353a7542efe380d7712628a8f385e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8394b8e_c0f86349",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-26T21:10:59Z",
+      "side": 1,
+      "message": "the transform will error if the vertex formats don\u0027t match perfectly. getting that right is really complicated, and this matches the old fuzzer.",
+      "parentUuid": "b3823306_14fe7248",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 89
+      },
+      "revId": "dd90a3a11b3353a7542efe380d7712628a8f385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
