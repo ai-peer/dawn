@@ -34,6 +34,24 @@
       "parentUuid": "6aa74617_1e9fec55",
       "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c5c4dbd_b584ac04",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T20:30:28Z",
+      "side": 0,
+      "message": "Ohh, right. Kinda had the C pattern in my head where ChainedStruct is a member and not a base class. Too bad.\n\nThough... if ChainedStruct _were_ a member instead of a base class, would it have the same layout as the C struct, so reinterpret casts would be safe(r) for chain structs? Right now it looks like we are actually assuming they are safe - we assert the members line up, but don\u0027t assert anything about sType and nextInChain?:\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/webview-Debug/gen/third_party/dawn/include/dawn/webgpu_cpp.h;l\u003d3408;drc\u003da0253e388931252decd5b6bc6fa098b06c03a95a\n\n(I also noticed we call it .nextInChain in C++ but .next in C for some reason)",
+      "parentUuid": "08f89562_17a89938",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

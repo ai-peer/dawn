@@ -34,6 +34,24 @@
       "parentUuid": "a1de1909_9ad48522",
       "revId": "f2e089a7a02ba4be1e68b7d8e75c61c8a0de859c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "045873e8_05297789",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T20:30:28Z",
+      "side": 1,
+      "message": "Yes, pretty sure you don\u0027t need `\u003d nullptr`. I guess it would be nice to include so it\u0027s clearer there isn\u0027t an uninitialized value though.",
+      "parentUuid": "cd3b14f4_06c23043",
+      "revId": "f2e089a7a02ba4be1e68b7d8e75c61c8a0de859c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
