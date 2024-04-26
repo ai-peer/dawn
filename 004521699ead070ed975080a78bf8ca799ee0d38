@@ -69,6 +69,24 @@
       "parentUuid": "20fa1be3_89363855",
       "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4f28fbd_84ab611a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-04-26T21:07:11Z",
+      "side": 1,
+      "message": "Then we can use `std::vector\u003cstd::pair\u003cSerial, Value\u003e\u003e`, just `enqueue()` and `dequeue()` will be slight expensive than `std::deque`. BTW, the change uses `std::upper_bound` which is a binary search, it should be faster.\n\nWithout the change, it is complex to make `for (const auto [serial, value] : serialMap)` work. Probably it is better to just not use `SerialMap` for `d3d::Queue::mSystemEventReceivers`. Probably I will just change it to a `std::map` instead, WDYT?",
+      "parentUuid": "ed209180_b8ed1d0d",
+      "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
