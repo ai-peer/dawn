@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3823306_14fe7248",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-26T20:57:28Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand this. Looking at the tests we have for vertex pulling, the outputs always seem to be vanilla WGSL (e.g. no validation overrides or custom extensions). So shouldn\u0027t the output always pass WGSL validation?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 89
+      },
+      "revId": "dd90a3a11b3353a7542efe380d7712628a8f385e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
