@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d055cb22_c7711313",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-26T03:11:02Z",
+      "side": 1,
+      "message": "Ah, thanks for reminding me that external texture could be used in textureDimension.\nI\u0027ll use a seperate CL to address it if you don\u0027t plan to do it in the followup CL (Mainly opt the loadMatrix math I think)",
+      "parentUuid": "371d67ef_2c0596dc",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a503be5d_5e7a4d46",
         "filename": "src/dawn/native/ExternalTexture.cpp",
         "patchSetId": 21
@@ -133,6 +151,24 @@
       "writtenOn": "2024-04-25T09:28:12Z",
       "side": 1,
       "message": "The coords are already a u32 here, which is pretty convenient because we no longer need a clamp, but just a max.",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "860f04a9_f2981e9f",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-26T03:11:02Z",
+      "side": 1,
+      "message": "It reminds me that current OOB test is too strict. It requires, (-1, -1) to clamped to bottomLeft always and (LargerThanWidth , LargerThanHeight) clamp to topRight always. But according to spec, it requires(https://www.w3.org/TR/WGSL/#textureload):\n- The data for some texel within bounds of the texture\n\n- A vector (0,0,0,0) or (0,0,0,1) of the appropriate type for non-depth textures\n\n- 0.0 for depth textures",
+      "parentUuid": "a805a207_d22459f2",
       "revId": "1771de475675c378937b1be4ea917eff61a11745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
