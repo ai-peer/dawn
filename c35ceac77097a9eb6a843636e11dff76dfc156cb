@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa74617_1e9fec55",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T20:06:36Z",
+      "side": 0,
+      "message": "Do we really need this constructor? What if we just got rid of it, and moved the `sType` defaulting to the declaration instead of the constructor?",
+      "revId": "c35ceac77097a9eb6a843636e11dff76dfc156cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

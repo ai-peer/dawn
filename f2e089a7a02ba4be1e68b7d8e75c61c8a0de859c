@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1de1909_9ad48522",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-26T20:06:36Z",
+      "side": 1,
+      "message": "Just to verify something, I looked this up and AFAIU: members not specified in a designated initializer (like nextInChain in your example) will be default initialized, which for pointers is `{}` which is nullptr.",
+      "revId": "f2e089a7a02ba4be1e68b7d8e75c61c8a0de859c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
