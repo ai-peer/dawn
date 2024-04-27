@@ -33,6 +33,7 @@
 #include <memory>
 
 #include "dawn/common/MutexProtected.h"
+#include "dawn/common/SerialMap.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/SystemEvent.h"
 #include "dawn/native/d3d/QueueD3D.h"
@@ -67,13 +68,16 @@ class Queue final : public d3d::Queue {
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
     MaybeError WaitForIdleForDestruction() override;
 
-    void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) override;
+    void SetEventOnCompletion(ExecutionSerial serial, HANDLE event);
 
     MaybeError OpenPendingCommands();
     void RecycleLastCommandListAfter(ExecutionSerial serial);
     MaybeError RecycleUnusedCommandLists();
+
+    MaybeError RecycleSystemEventReceivers(ExecutionSerial completeSerial);
 
     // Dawn API
     void SetLabelImpl() override;
@@ -100,6 +104,8 @@ class Queue final : public d3d::Queue {
     std::bitset<kMaxCommandAllocators> mFreeAllocators;
     uint32_t mLastAllocatorUsed = kNoCommandAllocator;
     SerialQueue<ExecutionSerial, uint32_t> mInFlightCommandAllocators;
+
+    MutexProtected<SerialMap<ExecutionSerial, SystemEventReceiver>> mSystemEventReceivers;
 };
 
 }  // namespace dawn::native::d3d12
