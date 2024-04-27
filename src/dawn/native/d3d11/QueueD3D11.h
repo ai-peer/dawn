@@ -28,6 +28,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 
+#include <deque>
+#include <vector>
+
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SerialMap.h"
 #include "dawn/native/SystemEvent.h"
@@ -80,11 +83,12 @@ class Queue final : public d3d::Queue {
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
     MaybeError WaitForIdleForDestruction() override;
 
     ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
-    void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) override;
 
+    MaybeError RecycleSystemEventReceivers(size_t completedEvents);
     // Check all pending map buffers, and actually map the ready ones.
     MaybeError CheckAndMapReadyBuffers(ExecutionSerial completedSerial);
 
@@ -93,6 +97,13 @@ class Queue final : public d3d::Queue {
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
     SerialMap<ExecutionSerial, Ref<Buffer>> mPendingMapBuffers;
+
+    struct SerialEventReceiverPair {
+        ExecutionSerial serial;
+        SystemEventReceiver receiver;
+    };
+    // Events associated with submitted commands. They are in old to recent order.
+    MutexProtected<std::deque<SerialEventReceiverPair>> mPendingEvents;
 };
 
 }  // namespace dawn::native::d3d11
