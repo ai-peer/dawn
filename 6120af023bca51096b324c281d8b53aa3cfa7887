@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "664cec6d_d1da2609",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1470,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-27T01:10:19Z",
+      "side": 1,
+      "message": "Compressed cube fix and test will come in a later CL.",
+      "revId": "6120af023bca51096b324c281d8b53aa3cfa7887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
