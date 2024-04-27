@@ -30,6 +30,7 @@
 #include <limits>
 #include <utility>
 
+#include "dawn/native/WaitAnySystemEvent.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/CommandBufferD3D11.h"
@@ -205,29 +206,79 @@ bool Queue::HasPendingCommands() const {
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
-    if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
-        // GetCompletedValue returns UINT64_MAX if the device was removed.
-        // Try to query the failure reason.
-        ID3D11Device* d3d11Device = ToBackend(GetDevice())->GetD3D11Device();
-        DAWN_TRY(CheckHRESULT(d3d11Device->GetDeviceRemovedReason(),
-                              "ID3D11Device::GetDeviceRemovedReason"));
-        // Otherwise, return a generic device lost error.
-        return DAWN_DEVICE_LOST_ERROR("Device lost");
+    if (!mPendingEvents.empty()) {
+        StackVector<HANDLE, 8> handles;
+        handles->reserve(mPendingEvents.size());
+        // Gether events in reversed order.
+        for (auto it = mPendingEvents.rbegin(); it != mPendingEvents.rend(); ++it) {
+            handles->push_back(it->receiver.GetPrimitive().Get());
+        }
+        DWORD result = WaitForMultipleObjects(handles->size(), handles->data(), /*bWaitAll=*/false,
+                                              /*dwMilliseconds=*/0);
+        DAWN_INTERNAL_ERROR_IF(result == WAIT_FAILED, "WaitForMultipleObjects() failed");
+        if (result != WAIT_TIMEOUT) {
+            DAWN_CHECK(result >= WAIT_OBJECT_0 && result < WAIT_OBJECT_0 + mPendingEvents.size());
+            const size_t completedEvents = mPendingEvents.size() - (result - WAIT_OBJECT_0);
+            std::vector<SystemEventReceiver> receivers;
+            receivers.reserve(completedEvents);
+            for (auto it = mPendingEvents.begin(); it != mPendingEvents.begin() + completedEvents;
+                 ++it) {
+                receivers.emplace_back(std::move(it->receiver));
+            }
+            mPendingEvents.erase(mPendingEvents.begin(), mPendingEvents.begin() + completedEvents);
+
+            DAWN_TRY(ReturnSystemEventReceivers(std::move(receivers)));
+        }
     }
 
-    if (completedSerial <= GetCompletedCommandSerial()) {
-        return ExecutionSerial(0);
-    }
+    ExecutionSerial completedSerial(uint64_t(GetLastSubmittedCommandSerial()) -
+                                    mPendingEvents.size());
 
     DAWN_TRY(CheckAndMapReadyBuffers(completedSerial));
-
-    DAWN_TRY(RecycleSystemEventReceivers(completedSerial));
 
     return completedSerial;
 }
 
 void Queue::ForceEventualFlushOfCommands() {}
+
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    ExecutionSerial completedSerial = GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        return true;
+    }
+
+    if (serial > GetLastSubmittedCommandSerial()) {
+        return DAWN_FORMAT_INTERNAL_ERROR(
+            "Wait a serial(%llu) which is greater than last submitted command serial(%llu).",
+            uint64_t(serial), uint64_t(GetLastSubmittedCommandSerial()));
+    }
+
+    DAWN_ASSERT(!mPendingEvents.empty());
+    DAWN_ASSERT(serial >= mPendingEvents.front().serial);
+    DAWN_ASSERT(serial <= mPendingEvents.back().serial);
+    auto it = std::lower_bound(
+        mPendingEvents.begin(), mPendingEvents.end(), serial,
+        [](const SerialEventReceiverPair& a, const ExecutionSerial& b) { return a.serial < b; });
+    DAWN_ASSERT(it != mPendingEvents.end());
+    DAWN_ASSERT(it->serial == serial);
+
+    DWORD result = WaitForSingleObject(it->receiver.GetPrimitive().Get(), ToMilliseconds(timeout));
+    DAWN_INTERNAL_ERROR_IF(result == WAIT_FAILED, "WaitForSingleObject() failed");
+
+    if (result == WAIT_OBJECT_0) {
+        // Events before |it| should be signalled as well.
+        std::vector<SystemEventReceiver> receivers;
+        ++it;
+        for (auto iit = mPendingEvents.begin(); iit != it; ++iit) {
+            receivers.emplace_back(std::move(iit->receiver));
+        }
+        mPendingEvents.erase(mPendingEvents.begin(), it);
+        DAWN_TRY(ReturnSystemEventReceivers(std::move(receivers)));
+        return true;
+    }
+
+    return false;
+}
 
 MaybeError Queue::WaitForIdleForDestruction() {
     DAWN_TRY(NextSerial());
@@ -239,14 +290,22 @@ MaybeError Queue::WaitForIdleForDestruction() {
 
 MaybeError Queue::NextSerial() {
     IncrementLastSubmittedCommandSerial();
-
+    ExecutionSerial lastSubmittedSerial = GetLastSubmittedCommandSerial();
+    // TODO(penghuang): only signal fence when it is needed.
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
-                 uint64_t(GetLastSubmittedCommandSerial()));
+                 uint64_t(lastSubmittedSerial));
 
     auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
-    DAWN_TRY(
-        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                     "D3D11 command queue signal fence"));
+    DAWN_TRY(CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(lastSubmittedSerial)),
+                          "D3D11 command queue signal fence"));
+
+    SystemEventReceiver receiver;
+    DAWN_TRY_ASSIGN(receiver, GetSystemEventReceiver());
+    commandContext.Flush1(D3D11_CONTEXT_TYPE_ALL, receiver.GetPrimitive().Get());
+
+    DAWN_ASSERT(mPendingEvents.empty() ||
+                uint64_t(mPendingEvents.back().serial) + 1 == uint64_t(lastSubmittedSerial));
+    mPendingEvents.push_back({lastSubmittedSerial, std::move(receiver)});
 
     return {};
 }
