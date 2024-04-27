@@ -29,11 +29,13 @@
 
 #include <limits>
 #include <utility>
+#include <vector>
 
 #include "dawn/common/Math.h"
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/WaitAnySystemEvent.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/CommandBufferD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
@@ -194,6 +196,31 @@ void Queue::ForceEventualFlushOfCommands() {
     mPendingCommands.SetNeedsSubmit();
 }
 
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    ExecutionSerial completedSerial = GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        return true;
+    }
+
+    auto receiver = mSystemEventReceivers->TakeOne(serial);
+    if (!receiver) {
+        DAWN_TRY_ASSIGN(receiver, GetSystemEventReceiver());
+        SetEventOnCompletion(serial, receiver->GetPrimitive().Get());
+    }
+
+    bool ready = false;
+    std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
+        {{*receiver, &ready}}};
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+    bool didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
+    // Return the SystemEventReceiver to the pool of receivers so it can be re-waited in the
+    // future.
+    // The caller should call CheckPassedSerials() which will clear passed system events.
+    mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
+
+    return didComplete;
+}
+
 MaybeError Queue::WaitForIdleForDestruction() {
     // Immediately forget about all pending commands
     mPendingCommands.Release();
@@ -278,6 +305,20 @@ MaybeError Queue::RecycleUnusedCommandLists() {
         mFreeAllocators.set(index);
     }
     mInFlightCommandAllocators.ClearUpTo(completedSerial);
+
+    return {};
+}
+
+MaybeError Queue::RecycleSystemEventReceivers(ExecutionSerial completedSerial) {
+    std::vector<SystemEventReceiver> receivers;
+    mSystemEventReceivers.Use([&](auto systemEventReceivers) {
+        for (auto& receiver : systemEventReceivers->IterateUpTo(completedSerial)) {
+            receivers.emplace_back(std::move(receiver));
+        }
+        systemEventReceivers->ClearUpTo(completedSerial);
+    });
+
+    DAWN_TRY(ReturnSystemEventReceivers(std::move(receivers)));
 
     return {};
 }
