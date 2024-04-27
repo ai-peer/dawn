@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98dd4c5_c2c0d258",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-27T01:46:56Z",
+      "side": 1,
+      "message": "For init structs, this doesn\u0027t make sense - I think it will generate a syntax error (for example two commas in a row). I\u0027d say remove this case and assert no_default is false in the `else` case?",
+      "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc9a2e7_1e2dad38",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-27T01:46:56Z",
+      "side": 1,
+      "message": "Just for readability or is this actually necessary to make the preprocessor happy?",
+      "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
