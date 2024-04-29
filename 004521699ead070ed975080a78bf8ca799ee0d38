@@ -87,6 +87,24 @@
       "parentUuid": "ed209180_b8ed1d0d",
       "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa89952_537d2af0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-29T16:33:18Z",
+      "side": 1,
+      "message": "sure let\u0027s do a targeted change for mSystemEventReceivers to avoid impacting the other serial trackers",
+      "parentUuid": "f4f28fbd_84ab611a",
+      "revId": "004521699ead070ed975080a78bf8ca799ee0d38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
