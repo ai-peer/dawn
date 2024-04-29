@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69af4f8a_81d0fcbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-29T16:33:39Z",
+      "side": 1,
+      "message": "The diff is very unhelpful, but all I changed was wrapping in a class and using `b` and `ty`.",
+      "revId": "37fadce6b0aab0b4e0c7c4d80091e48bb3f12615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
