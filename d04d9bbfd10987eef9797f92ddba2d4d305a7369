@@ -106,6 +106,24 @@
       "parentUuid": "c09cbf77_1fd4ea17",
       "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49236b18_3dbfeb03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-29T18:42:49Z",
+      "side": 1,
+      "message": "I\u0027d expect HLSL to be consumed by an HLSL frontend, and MSL. I\u0027d assume the WGSL generated can be consumed by Tint and the IR as it\u0027s a _tint_ format. The fact it\u0027s advertised as a format is what would make me think it\u0027s stable and ingestable.\n\nI\u0027m not sure how seeing `--format none` and `--dump-ir` would be any different from how you find other flags with `--help`.",
+      "parentUuid": "68a8af38_65d8ab3c",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
