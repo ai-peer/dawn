@@ -88,6 +88,24 @@
       "parentUuid": "676e76c2_455470b4",
       "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68a8af38_65d8ab3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-04-29T18:33:34Z",
+      "side": 1,
+      "message": "Why? Tint doesn\u0027t ingest HLSL, MSL or GLSL? Nothing makes the claim that the output is stable, nor that anything is expected to be able to consume it.\nThe only way to discover this is with --help, which will include it at:\n\n```\n--format \u003cnone|spirv|spvasm|wgsl|msl|hlsl|glsl|ir\u003e\n                             Output format.\n                             If not provided, will be inferred from output filename extension:\n                               .spvasm -\u003e spvasm\n                               .spv    -\u003e spirv\n                               .wgsl   -\u003e wgsl\n                               .metal  -\u003e msl\n                               .hlsl   -\u003e hlsl\n -f                          short name for --format\n```\n\nFor development, it\u0027s one hell of a lot more convenient than the multi-flag thing that people would have to look up. It would also work with the testing infrastructure without bodges, if one day you were to add test expectations for SPIRV -\u003e IR or WGSL -\u003e IR.",
+      "parentUuid": "c09cbf77_1fd4ea17",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
