@@ -47,7 +47,7 @@ template <typename T = testing::Test>
 class IRBinaryRoundtripTestBase : public IRTestParamHelper<T> {
   public:
     std::pair<std::string, std::string> Roundtrip() {
-        auto pre = Disassemble(this->mod);
+        auto pre = Disassemble(this->mod).Plain();
         auto encoded = Encode(this->mod);
         if (encoded != Success) {
             return {pre, encoded.Failure().reason.Str()};
@@ -56,7 +56,7 @@ class IRBinaryRoundtripTestBase : public IRTestParamHelper<T> {
         if (decoded != Success) {
             return {pre, decoded.Failure().reason.Str()};
         }
-        auto post = Disassemble(decoded.Get());
+        auto post = Disassemble(decoded.Get()).Plain();
         return {pre, post};
     }
 };
@@ -541,9 +541,8 @@ TEST_F(IRBinaryRoundtripTest, Swizzle) {
     auto* x = b.FunctionParam<vec4<f32>>("x");
     auto* fn = b.Function("Function", ty.vec3<f32>());
     fn->SetParams({x});
-    b.Append(fn->Block(), [&] {
-        b.Return(fn, b.Swizzle<vec3<f32>>(x, Vector<uint32_t, 3>{1, 0, 2}));
-    });
+    b.Append(fn->Block(),
+             [&] { b.Return(fn, b.Swizzle<vec3<f32>>(x, Vector<uint32_t, 3>{1, 0, 2})); });
     RUN_TEST();
 }
 
