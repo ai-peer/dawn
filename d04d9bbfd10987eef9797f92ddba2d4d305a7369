@@ -34,6 +34,24 @@
       "parentUuid": "59226ba6_4c75ae29",
       "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3fb029_89b8aafb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-29T18:09:54Z",
+      "side": 1,
+      "message": "My concern with `--format ir` is that it makes it look like the IR is a supported format, when, really it isn\u0027t. `--dump-ir --format none` makes it a lot clearer that this is an internal thing, not a format you\u0027re generating.",
+      "parentUuid": "b40eaaa9_d3fe3db5",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
