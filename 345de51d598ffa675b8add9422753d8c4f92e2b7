@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3471fa_308978f0",
+        "filename": "src/tint/lang/core/ir/ice.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-29T21:16:51Z",
+      "side": 1,
+      "message": "Isn\u0027t this the kind of place where we /would/ want syntax highlighting, if viewing from a terminal (which is often where we will see it)? I guess we don\u0027t know where the ICE message is going to be used at this point?",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65676142_bc772803",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-29T21:16:51Z",
+      "side": 1,
+      "message": "Again, it\u0027d be great if we could get styled text for validation failures when on a terminal, but maybe also not possible here?",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
