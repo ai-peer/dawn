@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59226ba6_4c75ae29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-04-29T16:47:10Z",
+      "side": 1,
+      "message": "This is basically the same as `--dump-ir --format none` isn\u0027t it? (this is what format none was added for, heh)",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
