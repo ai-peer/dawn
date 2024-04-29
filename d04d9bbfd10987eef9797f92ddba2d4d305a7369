@@ -124,6 +124,24 @@
       "parentUuid": "68a8af38_65d8ab3c",
       "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7584c4fc_902cc062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-29T21:08:11Z",
+      "side": 1,
+      "message": "The biggest difference here is that with `--format ir` we show the IR *after* running AST transforms. For example, right now I can\u0027t use `--dump-ir` if my WGSL contains `override` declarations, even if I pass the `--overrides` flag to invoke `SubstituteOverrides`. But with `--format ir` I can, because transforms are run first.\n\nIt seems vaguely useful to be able to see what the IR looks like after running other transforms using the command-line exe (e.g. \"what does my post-robustness IR look like, so I can think about how to implement range analysis\").\n\nI do understand Dan\u0027s concern, but I\u0027m not super worried. If somebody misinterprets our intent and tries to use the protobuf format as an input for a real use case and then we break them, that\u0027s on them :shrug:",
+      "parentUuid": "49236b18_3dbfeb03",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
