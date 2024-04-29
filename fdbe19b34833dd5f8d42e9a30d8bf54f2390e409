@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a83e463_6575a4ca",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-29T17:49:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d98dd4c5_c2c0d258",
+      "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcc9a2e7_1e2dad38",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-27T01:46:56Z",
       "side": 1,
       "message": "Just for readability or is this actually necessary to make the preprocessor happy?",
+      "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e280117_c774e714",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-29T17:49:12Z",
+      "side": 1,
+      "message": "real commas will make it think I\u0027m passing more args. couldn\u0027t get parentheses to work.\n\none alternative is:\n```\n#define WGPU_RENDER_PASS_DESCRIPTOR_DEFAULT_MEMBERS... stuff\n#define WGPU_RENDER_PASS_DESCRIPTOR_INIT WGPU_MAKE_INIT_STRUCT(WGPU_RENDER_PASS_DESCRIPTOR_DEFAULT_MEMBERS)\n```\n\nbut I didn\u0027t like this because then your editor pops up both WGPU_RENDER_PASS_DESCRIPTOR_DEFAULT_MEMBERS and WGPU_RENDER_PASS_DESCRIPTOR_INIT and it\u0027s not clear which one to use.",
+      "parentUuid": "fcc9a2e7_1e2dad38",
       "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
