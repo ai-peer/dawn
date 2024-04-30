@@ -69,6 +69,24 @@
       "parentUuid": "fcc9a2e7_1e2dad38",
       "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a94957c_005abfba",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T01:48:54Z",
+      "side": 1,
+      "message": "Ahh that makes sense. I wouldn\u0027t have thought about the fact that macro parsing doesn\u0027t care that they\u0027re inside the braces. Can\u0027t think of any better alternatives.",
+      "parentUuid": "6e280117_c774e714",
+      "revId": "fdbe19b34833dd5f8d42e9a30d8bf54f2390e409",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
