@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c783c6_460c24d1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e08b25b2_692df12c",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ea8ede1_4db6bfe9",
@@ -89,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca578d8e_313949f5",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1374,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44efc5bd_0aff8929",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baa11c01_04f52ca4",
@@ -138,6 +174,24 @@
       "side": 1,
       "message": "We could add an \"unreachable()\" function builtin to use in templates (or assert() as well). We already have one that we use here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_json_generator.py;drc\u003d410f2d0f31c100c0ae956246bdbac6c75f24478b;l\u003d1318 but could put it in the basic params.",
       "parentUuid": "56ce3f47_70ac628c",
+      "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86a40fc_ba7943ac",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7c4ef51_21a422ad",
       "revId": "3beaf9aea13c2fd30b50e19ec47bb6feb8fbe699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

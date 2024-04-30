@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43b9c86_aef49233",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9271230_13dfdc09",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85712b5e_9f9f794f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-23T09:30:30Z",
       "side": 1,
       "message": "Why is const* special cased? Can we assert() that all const* have a default to nullptr for example? And all lengths default to 0?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b0745f_cb6056d6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Logic changed so no longer required.",
+      "parentUuid": "85712b5e_9f9f794f",
       "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6693f14d_c8a7bc03",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fd24907a_d987cc91",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b631dea6_07c97573",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-04-23T09:30:30Z",
       "side": 1,
       "message": "We could have a separate function to compute the kotlin params instead of doing it inline in this already ginormous function. See [1]",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9e141a_afaa7492",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b631dea6_07c97573",
       "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6900089c_cca518e7",
+        "filename": "generator/templates/art/api_kotlin_structure.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "I have changed the technique to remove use of inheritance altogether, as detailed in an email \"Chained structures in the Kotlin API\".",
+      "parentUuid": "e1e0fbe8_ce4bfd73",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f814f7a_e264446e",
@@ -158,6 +248,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84e782eb_eed0bcc6",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Currently they always appear together hence a single method (due to the complexity of the logic which I\u0027d rather not mirror).",
+      "parentUuid": "4f814f7a_e264446e",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7c241b_444da8f6",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6814d7cf_8785656c",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace855c8_4379f240",
         "filename": "generator/templates/art/api_kotlin_types.kt",
         "patchSetId": 4
@@ -169,6 +295,24 @@
       "writtenOn": "2024-04-23T09:30:30Z",
       "side": 1,
       "message": "Aren\u0027t all things with default values automatically tagged as optional in dawn_json_generator?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a736d8_05ac858f",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "No, it would make things simpler if they were. I guess there\u0027s a subtle distinction though (fields that take default values can\u0027t always be reset to null).",
+      "parentUuid": "ace855c8_4379f240",
       "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +334,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42bc48f5_eff88534",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9175e3c_104ca544",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6117ccac_f60253d0",
@@ -207,6 +369,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbffeaa6_635f88c7",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6117ccac_f60253d0",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94871883_99225fda",
@@ -220,6 +400,24 @@
       "writtenOn": "2024-04-23T09:30:30Z",
       "side": 1,
       "message": "Where is `construct` defined???",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b59329d_2aab8970",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Might be code lint. Removed.",
+      "parentUuid": "94871883_99225fda",
       "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -247,6 +445,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca654dfc_ed1a365f",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "It\u0027s a quick way of coercing default_value to a string if it\u0027s a number (obviously the check fails). I\u0027ll change it to something longer but more explicit.",
+      "parentUuid": "eefef4a4_a5c0eb43",
+      "range": {
+        "startLine": 65,
+        "startChar": 34,
+        "endLine": 65,
+        "endChar": 36
+      },
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41bec80d_bff4c95a",
@@ -260,6 +482,24 @@
       "writtenOn": "2024-04-23T09:30:30Z",
       "side": 1,
       "message": "Do we ever want to expose void* members to Kotlin other than for buffer mapping?",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe04b94_3f4d2177",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-04-30T08:21:44Z",
+      "side": 1,
+      "message": "Refactored to remove the members/args that use this (since there is nothing useful the Kotlin side could do with the data anyway; these cases will all have to be converted tp something usable if required).",
+      "parentUuid": "41bec80d_bff4c95a",
       "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
