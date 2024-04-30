@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5865cf01_16fa25c4",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-30T22:18:04Z",
+      "side": 1,
+      "message": "nit. I know this is just from before, but since we are differentiating between monitored and non-monitored maybe we could just make it explicit and have `\"D3D11: creating monitored fence\"`?",
+      "range": {
+        "startLine": 102,
+        "startChar": 30,
+        "endLine": 102,
+        "endChar": 44
+      },
+      "revId": "66b20624ca46debc3154b5dc5ab481a974075108",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c84c9e_a7bd2c8a",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-30T22:18:04Z",
+      "side": 1,
+      "message": "nit. Gather",
+      "range": {
+        "startLine": 347,
+        "startChar": 15,
+        "endLine": 347,
+        "endChar": 21
+      },
+      "revId": "66b20624ca46debc3154b5dc5ab481a974075108",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

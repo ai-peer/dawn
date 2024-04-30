@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dad96608_a9894e4d",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-04-30T22:18:04Z",
+      "side": 1,
+      "message": "Hmm, I agree with Austin here that it would be pretty nice to reuse `WaitAnySystemEvent`. I think maybe what we could do to facilitate it is to separate out the `bool*` from the pair and instead pass 2 iterables into `WaitAnySystemEvent`, one that is like a `vector\u003cSystemEventReceiver\u003e` and another optional one that is like `vector\u003cbool*\u003e` or something similar? (And also return an `optional\u003csize_t\u003e` like Austin suggested.)\n\nWe could probably also template the default size of the `StackVector` so that you could use 8 instead of the default 4.\n\nI am fine to do this in a follow up though since you would probably need to update the other call-sites of the helper.",
+      "parentUuid": "0f9c481d_6f5e9689",
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d2336b4e_3cb71842",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 6
