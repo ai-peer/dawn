@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be31146_ec046ab6",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-30T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bce0b233_c1233293",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "304cac4b_035e1f24",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5d7656_08b1121b",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-30T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "304cac4b_035e1f24",
+      "range": {
+        "startLine": 1510,
+        "startChar": 17,
+        "endLine": 1513,
+        "endChar": 44
+      },
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46df6282_a5e67b9c",
@@ -71,6 +113,30 @@
       "writtenOn": "2024-04-30T19:56:25Z",
       "side": 1,
       "message": "Same here; something like:\n\n```suggestion\n            } else if (target \u003d\u003d GL_TEXTURE_CUBE_MAP) {\n                DAWN_ASSERT(texture-\u003eGetArrayLayers() \u003d\u003d 6);\n                const uint8_t* pointer \u003d static_cast\u003cconst uint8_t*\u003e(data);\n                uint32_t baseLayer \u003d destination.origin.z;\n                for (uint32_t l \u003d 0; l \u003c copySize.depthOrArrayLayers; ++l) {\n                    const uint8_t* d \u003d pointer;\n                    GLenum cubeMapTarget \u003d GL_TEXTURE_CUBE_MAP_POSITIVE_X + baseLayer + l;\n                    for (y \u003d destination.origin.y; y \u003c destination.origin.y + height; ++y) {\n                        gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, 1,\n                                         adjustedFormat, format.type, d);\n                        d +\u003d dataLayout.bytesPerRow;\n                    }\n                    pointer +\u003d dataLayout.rowsPerImage * dataLayout.bytesPerRow;\n                }\n```",
+      "range": {
+        "startLine": 1534,
+        "startChar": 12,
+        "endLine": 1547,
+        "endChar": 17
+      },
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3fc05dd_c1afab7b",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-30T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46df6282_a5e67b9c",
       "range": {
         "startLine": 1534,
         "startChar": 12,
@@ -112,6 +178,24 @@
       "side": 1,
       "message": "BTW, Texture has a GetCompatibilityTextureBindingViewDimension() that should retrieve the correct value (and apply the default if the value is not specified):\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.h;l\u003d91?q\u003dGetCompatibilityTextureBindingViewDimension\u0026ss\u003dchromium\n\nYou could pass the result of that call to TargetForTextureViewDimension().",
       "parentUuid": "093a7a32_67758361",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae300ed_a9b50314",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-30T21:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4857e3d_8db298ed",
       "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
