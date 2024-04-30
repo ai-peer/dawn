@@ -215,6 +215,11 @@ class Validator {
     /// @param src the source lines to highlight
     diag::Diagnostic& AddNote(Source src = {});
 
+    /// Adds a note to the diagnostics highlighting where the value was declared, if it has a source
+    /// location.
+    /// @param value the value
+    void AddDeclarationNote(const Value* value);
+
     /// @param v the value to get the name for
     /// @returns the name for the given value
     StyledText NameOf(const Value* v);
@@ -352,11 +357,27 @@ class Validator {
     void QueueInstructions(const Instruction* inst);
 
     /// Begins validation of the block @p blk, and its instructions.
+    /// BeginBlock() pushes a new scope for values.
     /// Must be paired with a call to EndBlock().
     void BeginBlock(const Block* blk);
 
-    /// Ends validation of the block opened with BeginBlock().
+    /// Ends validation of the block opened with BeginBlock() and closes the block's scope for
+    /// values.
     void EndBlock();
+
+    /// ScopeStack holds a stack of values that are currently in scope
+    struct ScopeStack {
+        void Push() { stack_.Push({}); }
+        void Pop() { stack_.Pop(); }
+        void Add(const Value* value) { stack_.Back().Add(value); }
+        bool Contains(const Value* value) {
+            return stack_.Any([&](auto& v) { return v.Contains(value); });
+        }
+        bool IsEmpty() const { return stack_.IsEmpty(); }
+
+      private:
+        Vector<Hashset<const Value*, 8>, 4> stack_;
+    };
 
     const Module& mod_;
     Capabilities capabilities_;
@@ -366,6 +387,7 @@ class Validator {
     Hashset<const Instruction*, 4> visited_instructions_;
     Vector<const ControlInstruction*, 8> control_stack_;
     Vector<const Block*, 8> block_stack_;
+    ScopeStack scope_stack_;
     Vector<std::function<void()>, 16> tasks_;
 };
 
@@ -382,7 +404,10 @@ Disassembly& Validator::Disassembly() {
 }
 
 Result<SuccessType> Validator::Run() {
+    scope_stack_.Push();
     TINT_DEFER({
+        scope_stack_.Pop();
+        TINT_ASSERT(scope_stack_.IsEmpty());
         TINT_ASSERT(tasks_.IsEmpty());
         TINT_ASSERT(control_stack_.IsEmpty());
         TINT_ASSERT(block_stack_.IsEmpty());
@@ -394,6 +419,7 @@ Result<SuccessType> Validator::Run() {
             AddError(func) << "function " << NameOf(func.Get())
                            << " added to module multiple times";
         }
+        scope_stack_.Add(func);
     }
 
     for (auto& func : mod_.functions) {
@@ -508,6 +534,35 @@ diag::Diagnostic& Validator::AddNote(Source src) {
     return diag;
 }
 
+void Validator::AddDeclarationNote(const Value* value) {
+    tint::Switch(
+        value,  //
+        [&](const InstructionResult* res) {
+            if (auto* inst = res->Instruction()) {
+                auto results = inst->Results();
+                for (size_t i = 0; i < results.Length(); i++) {
+                    if (results[i] == value) {
+                        AddNote(res->Instruction(), i) << NameOf(value) << " declared here";
+                        return;
+                    }
+                }
+            }
+        },
+        [&](const FunctionParam* param) {
+            auto src = Disassembly().FunctionParamSource(param);
+            if (src.file) {
+                AddNote(src) << NameOf(value) << " declared here";
+            }
+        },
+        [&](const BlockParam* param) {
+            auto src = Disassembly().BlockParamSource(param);
+            if (src.file) {
+                AddNote(src) << NameOf(value) << " declared here";
+            }
+        },
+        [&](const Function* fn) { AddNote(fn) << NameOf(value) << " declared here"; });
+}
+
 StyledText Validator::NameOf(const Value* value) {
     return Disassembly().NameOf(value);
 }
@@ -542,10 +597,15 @@ void Validator::CheckRootBlock(const Block* blk) {
             continue;
         }
         CheckInstruction(var);
+        scope_stack_.Add(var->Result(0));
     }
 }
 
 void Validator::CheckFunction(const Function* func) {
+    // Scope holds the parameters and block
+    scope_stack_.Push();
+    TINT_DEFER(scope_stack_.Pop());
+
     for (auto* param : func->Params()) {
         if (!param->Alive()) {
             AddError(param) << "destroyed parameter found in function parameter list";
@@ -564,6 +624,8 @@ void Validator::CheckFunction(const Function* func) {
         if (HoldsType<type::Reference>(param->Type())) {
             AddError(param) << "references are not permitted as parameter types";
         }
+
+        scope_stack_.Add(param);
     }
     if (HoldsType<type::Reference>(func->ReturnType())) {
         AddError(func) << "references are not permitted as return types";
@@ -585,6 +647,7 @@ void Validator::QueueBlock(const Block* blk) {
 }
 
 void Validator::BeginBlock(const Block* blk) {
+    scope_stack_.Push();
     block_stack_.Push(blk);
 
     if (auto* mb = blk->As<MultiInBlock>()) {
@@ -601,6 +664,7 @@ void Validator::BeginBlock(const Block* blk) {
                 AddNote(param->Block()) << "parent block declared here";
                 return;
             }
+            scope_stack_.Add(param);
         }
     }
 
@@ -628,6 +692,7 @@ void Validator::BeginBlock(const Block* blk) {
 }
 
 void Validator::EndBlock() {
+    scope_stack_.Pop();
     block_stack_.Pop();
 }
 
@@ -682,6 +747,9 @@ void Validator::CheckInstruction(const Instruction* inst) {
             AddError(inst, i) << "operand missing usage";
         } else if (auto fn = op->As<Function>(); fn && !all_functions_.Contains(fn)) {
             AddError(inst, i) << NameOf(op) << " is not part of the module";
+        } else if (!op->Is<Constant>() && !scope_stack_.Contains(op)) {
+            AddError(inst, i) << NameOf(op) << " is not in scope";
+            AddDeclarationNote(op);
         }
 
         if (!capabilities_.Contains(Capability::kAllowRefTypes)) {
@@ -709,6 +777,10 @@ void Validator::CheckInstruction(const Instruction* inst) {
         [&](const Unary* u) { CheckUnary(u); },                            //
         [&](const Var* var) { CheckVar(var); },                            //
         [&](const Default) { AddError(inst) << "missing validation"; });
+
+    for (auto* result : results) {
+        scope_stack_.Add(result);
+    }
 }
 
 void Validator::CheckVar(const Var* var) {
