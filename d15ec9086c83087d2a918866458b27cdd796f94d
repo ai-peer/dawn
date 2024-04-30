@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2473a65_d8ace841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:52:09Z",
+      "side": 1,
+      "message": "overall LGTM; someone else should review too",
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78c5cec4_9e41d9e4",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:52:09Z",
+      "side": 1,
+      "message": "nit: I think it should simply fail. It shouldn\u0027t try to fall back to UnmonitoredQueue.\n\nWe should explicitly check support and set the toggle accordingly (setting the toggle can be another CL)\n\nsecondly, it\u0027s more clear if the code path is `if(UseUnmonitored) CreateUnmonitored)` instead of checking `!UseUnmonitored` - the double negative is confusing.",
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec4fcea_7508f75e",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:52:09Z",
+      "side": 1,
+      "message": "if there was a timeout, that means the last submitted serial did NOT complete. So this should be returning 0, or GetCompletedCommandSerial since nothing finished.\n\nSecondly, on timeout, you want to check the next batch of 64 handles - and keep checking the next batch until you find a batch that completes.",
+      "range": {
+        "startLine": 359,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 13
+      },
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb01372_8584526b",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:52:09Z",
+      "side": 1,
+      "message": "nit: space between serial and (%llu)",
+      "range": {
+        "startLine": 398,
+        "startChar": 20,
+        "endLine": 398,
+        "endChar": 32
+      },
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c74908f6_c7335f96",
+        "filename": "src/dawn/tests/end2end/QueueTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 937,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:52:09Z",
+      "side": 1,
+      "message": "also WaitAnyTests and FutureTests in \nthird_party/dawn/src/dawn/tests/end2end/EventTests.cpp",
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
