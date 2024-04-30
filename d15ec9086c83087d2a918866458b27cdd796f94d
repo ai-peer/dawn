@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dec16713_8d2b1033",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T20:58:18Z",
+      "side": 1,
+      "message": "sorry. check `DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES`",
+      "parentUuid": "c74f36f1_b2fd5ad7",
+      "revId": "d15ec9086c83087d2a918866458b27cdd796f94d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ec4fcea_7508f75e",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 7
