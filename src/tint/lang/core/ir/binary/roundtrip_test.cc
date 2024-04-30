@@ -29,7 +29,7 @@
 
 #include "src/tint/lang/core/ir/binary/decode.h"
 #include "src/tint/lang/core/ir/binary/encode.h"
-#include "src/tint/lang/core/ir/disassembler.h"
+#include "src/tint/lang/core/ir/disassembly.h"
 #include "src/tint/lang/core/type/depth_multisampled_texture.h"
 #include "src/tint/lang/core/type/depth_texture.h"
 #include "src/tint/lang/core/type/external_texture.h"
@@ -541,9 +541,8 @@ TEST_F(IRBinaryRoundtripTest, Swizzle) {
     auto* x = b.FunctionParam<vec4<f32>>("x");
     auto* fn = b.Function("Function", ty.vec3<f32>());
     fn->SetParams({x});
-    b.Append(fn->Block(), [&] {
-        b.Return(fn, b.Swizzle<vec3<f32>>(x, Vector<uint32_t, 3>{1, 0, 2}));
-    });
+    b.Append(fn->Block(),
+             [&] { b.Return(fn, b.Swizzle<vec3<f32>>(x, Vector<uint32_t, 3>{1, 0, 2})); });
     RUN_TEST();
 }
 
