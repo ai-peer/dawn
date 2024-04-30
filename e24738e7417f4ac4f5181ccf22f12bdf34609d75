@@ -256,6 +256,40 @@
       "message": "I\u0027m not sure if there are any remaining breaking changes to callback signatures, but if there are then we should call this something like \"unstable\" or \"do not use\".\n\nThat said I think the only thing left is some changes to which enum values we pass in which cases. Were we planning on just dealing with that later? Can\u0027t remember what we said.",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29ca3ced_cad9e95f",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T19:18:06Z",
+      "side": 1,
+      "message": "can we write APIRequestAdapterF using APIRequestAdapter2 ?",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a57b186_7883df93",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T19:18:06Z",
+      "side": 1,
+      "message": "ditto - can you write RequestAdapterF using RequestAdapter2 ?",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
