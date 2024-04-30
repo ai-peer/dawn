@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb770b36_449fcc0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-30T07:44:23Z",
+      "side": 1,
+      "message": "Makes all bots happy!\nenga@, would you mind to take a look again? I think the +1 has been removed and the main logic doesn\u0027t change from patch set 22. (Test logic updates + tint related expected file changes.)",
+      "revId": "11b8a02a5c4c0aff1663e3cabccc79f575dec28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

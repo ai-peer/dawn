@@ -279,6 +279,24 @@
       "parentUuid": "b8adbd96_dc9f9754",
       "revId": "1771de475675c378937b1be4ea917eff61a11745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da6393d_ff4e6c76",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 21
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-04-30T07:44:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53f8dd81_819409fa",
+      "revId": "1771de475675c378937b1be4ea917eff61a11745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
