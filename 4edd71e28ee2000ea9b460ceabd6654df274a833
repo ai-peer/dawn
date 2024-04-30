@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e84eba7f_fbd3d902",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T19:56:25Z",
+      "side": 1,
+      "message": "Thanks for looking into this!",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce0b233_c1233293",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T19:56:25Z",
+      "side": 1,
+      "message": "```suggestion\n// Use textureGather as a workaround.\n```\n\nor\n\n```suggestion\n// Use textureGather to work around.\n```",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304cac4b_035e1f24",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T19:56:25Z",
+      "side": 1,
+      "message": "Nit: could you increment the pointer, rather than multiplying?\n\n```suggestion\n                    GLenum cubeMapTarget \u003d GL_TEXTURE_CUBE_MAP_POSITIVE_X + baseLayer + l;\n                    gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, height,\n                                     adjustedFormat, format.type, pointer);\n                    pointer +\u003d dataLayout.rowsPerImage * dataLayout.bytesPerRow;\n```",
+      "range": {
+        "startLine": 1510,
+        "startChar": 17,
+        "endLine": 1513,
+        "endChar": 44
+      },
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46df6282_a5e67b9c",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T19:56:25Z",
+      "side": 1,
+      "message": "Same here; something like:\n\n```suggestion\n            } else if (target \u003d\u003d GL_TEXTURE_CUBE_MAP) {\n                DAWN_ASSERT(texture-\u003eGetArrayLayers() \u003d\u003d 6);\n                const uint8_t* pointer \u003d static_cast\u003cconst uint8_t*\u003e(data);\n                uint32_t baseLayer \u003d destination.origin.z;\n                for (uint32_t l \u003d 0; l \u003c copySize.depthOrArrayLayers; ++l) {\n                    const uint8_t* d \u003d pointer;\n                    GLenum cubeMapTarget \u003d GL_TEXTURE_CUBE_MAP_POSITIVE_X + baseLayer + l;\n                    for (y \u003d destination.origin.y; y \u003c destination.origin.y + height; ++y) {\n                        gl.TexSubImage2D(cubeMapTarget, destination.mipLevel, x, y, width, 1,\n                                         adjustedFormat, format.type, d);\n                        d +\u003d dataLayout.bytesPerRow;\n                    }\n                    pointer +\u003d dataLayout.rowsPerImage * dataLayout.bytesPerRow;\n                }\n```",
+      "range": {
+        "startLine": 1534,
+        "startChar": 12,
+        "endLine": 1547,
+        "endChar": 17
+      },
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "093a7a32_67758361",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T19:56:25Z",
+      "side": 1,
+      "message": "Instead of special-casing the layer \u003e\u003d 2 case, would it be possible to use TargetForTextureViewDimension (below) in all cases, and remove this function entirely? I think the view dimension alone should give the correct answer in all cases.",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
