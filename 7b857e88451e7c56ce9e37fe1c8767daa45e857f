@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a2c61f_48ece86c",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-04-30T19:02:10Z",
+      "side": 1,
+      "message": "(I don\u0027t think this whole `gl.GetVersion().IsDesktop()` is tested by any config. But I think we don\u0027t really care gl desktop now though.)",
+      "revId": "7b857e88451e7c56ce9e37fe1c8767daa45e857f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
