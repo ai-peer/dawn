@@ -119,7 +119,17 @@ bool ExecutableExists(const std::string& path) {
     return s.st_mode & S_IXUSR;
 }
 
+std::string GetCWD() {
+    auto* cwd = get_current_dir_name();
+    std::string result = cwd;
+    free(cwd);
+    return result;
+}
+
 std::string FindExecutable(const std::string& name) {
+    if (auto in_cwd = GetCWD() + "/" + name; ExecutableExists(in_cwd)) {
+        return in_cwd;
+    }
     if (ExecutableExists(name)) {
         return name;
     }
