@@ -277,6 +277,19 @@ Device::Device(const ObjectBaseParams& params,
     if (descriptor && descriptor->uncapturedErrorCallbackInfo.callback != nullptr) {
         mUncapturedErrorCallbackInfo = descriptor->uncapturedErrorCallbackInfo;
     }
+
+    for (auto* chain = descriptor->nextInChain; chain; chain = chain->next) {
+        if (chain->sType == WGPUSType_DawnLoggingDescriptor) {
+            auto* loggingDesc = reinterpret_cast<const WGPUDawnLoggingDescriptor*>(chain);
+            mLoggingCallback = loggingDesc->callback;
+            mLoggingUserdata = loggingDesc->userdata;
+        }
+    }
+
+    if (!mLoggingCallback) {
+        mLoggingCallback = DefaultWGPULoggingCallback;
+        mLoggingUserdata = nullptr;
+    }
 }
 
 Device::~Device() {
