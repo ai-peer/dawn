@@ -58,6 +58,8 @@
 
 #include <sstream>
 
+#include "dawn/webgpu.h"
+
 namespace dawn {
 
 // Log levels mostly used to signal intent where the log message is produced and used to route
@@ -102,6 +104,8 @@ LogMessage ErrorLog();
 // information
 LogMessage DebugLog(const char* file, const char* function, int line);
 #define DAWN_DEBUG() ::dawn::DebugLog(__FILE__, __func__, __LINE__)
+
+void DefaultWGPULoggingCallback(WGPULoggingType type, const char* message, void*);
 
 }  // namespace dawn
 

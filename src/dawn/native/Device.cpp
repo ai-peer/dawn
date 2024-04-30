@@ -334,6 +334,15 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
         mUncapturedErrorCallbackInfo = descriptor->uncapturedErrorCallbackInfo;
     }
 
+    if (const auto* loggingDesc = descriptor.Get<DawnLoggingDescriptor>()) {
+        mLoggingCallback = loggingDesc->callback;
+        mLoggingUserdata = loggingDesc->userdata;
+    }
+    if (!mLoggingCallback) {
+        mLoggingCallback = DefaultWGPULoggingCallback;
+        mLoggingUserdata = nullptr;
+    }
+
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
 
