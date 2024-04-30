@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "04f382bcc5b68ae55afd1996e09269b3a9c3393c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a3e3afb_c59c783b",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1003921
+      },
+      "writtenOn": "2024-04-30T18:04:45Z",
+      "side": 1,
+      "message": "In some sense, this is the API call that allows the mis-ordering to occur. If the entire chain had to be presented to the builder at the time of its construction (line 486) then things would fall into place on their own. So it is the mutability provided by .Add() that allows things to fall out of order.\n\nIn order to emulate this you might try re-arranging things so that PNextChainBuilder construction is immediately followed by the .Add() calls without intervening declarations. Unfortunately, that involves repeating the tests, or initially ignoring them like:\n\n```\n    const VkDebugUtilsMessengerCreateInfoEXT utilsMessengerCreateInfo \u003d {\n     .flags \u003d 0,\n     .messageSeverity \u003d VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT |                                             VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT;\n     .messageType \u003d VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT |                                           VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT;\n     .pfnUserCallback \u003d OnInstanceCreationDebugUtilsCallback;\n     .pUserData \u003d nullptr;\n    };\n    \n    const VkValidationFeatureEnableEXT kEnableSynchronizationValidation \u003d\n        VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT;\n\n    const VkValidationFeaturesEXT validationFeatures \u003d {\n        .enabledValidationFeatureCount \u003d 1;\n        .pEnabledValidationFeatures \u003d \u0026kEnableSynchronizationValidation;\n        .disabledValidationFeatureCount \u003d 0;\n        .pDisabledValidationFeatures \u003d nullptr;       \n    }\u0027\n\n    PNextChainBuilder createInfoChain(\u0026createInfo);\n    if (usedKnobs.HasExt(InstanceExt::DebugUtils)) {\n       createInfoChain.Add(\u0026utilsMessengerCreateInfo,\n                           VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT);\n    }\n    if (instance-\u003eIsBackendValidationEnabled() \u0026\u0026\n        usedKnobs.HasExt(InstanceExt::ValidationFeatures)) {\n       createInfoChain.Add(\u0026validationFeatures, VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT);\n    }\n ```",
+      "range": {
+        "startLine": 499,
+        "startChar": 24,
+        "endLine": 499,
+        "endChar": 27
+      },
+      "revId": "04f382bcc5b68ae55afd1996e09269b3a9c3393c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
