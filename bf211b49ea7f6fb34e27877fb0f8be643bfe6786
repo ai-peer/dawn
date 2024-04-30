@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c26ca78_4e1203e5",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T19:31:12Z",
+      "side": 1,
+      "message": "nearest is the deafult",
+      "range": {
+        "startLine": 793,
+        "startChar": 0,
+        "endLine": 794,
+        "endChar": 58
+      },
+      "revId": "bf211b49ea7f6fb34e27877fb0f8be643bfe6786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a6b302_fe613d0d",
+        "filename": "src/dawn/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T19:31:12Z",
+      "side": 1,
+      "message": "baseArrayLayer/count should default to 0/6 for Cube",
+      "range": {
+        "startLine": 801,
+        "startChar": 0,
+        "endLine": 802,
+        "endChar": 56
+      },
+      "revId": "bf211b49ea7f6fb34e27877fb0f8be643bfe6786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
