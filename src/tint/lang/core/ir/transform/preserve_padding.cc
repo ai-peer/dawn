@@ -59,23 +59,18 @@ struct State {
 
     /// Process the module.
     void Process() {
-        // Find host-visible stores of types that contain padding bytes.
+        // Find and replace host-visible stores of types that contain padding bytes.
         Vector<Store*, 8> worklist;
         for (auto inst : ir.Instructions()) {
             if (auto* store = inst->As<Store>()) {
                 auto* ptr = store->To()->Type()->As<core::type::Pointer>();
                 if (ptr->AddressSpace() == core::AddressSpace::kStorage &&
                     ContainsPadding(ptr->StoreType())) {
-                    worklist.Push(store);
+                    auto* replacement = MakeStore(store->To(), store->From());
+                    store->ReplaceWith(replacement);
+                    store->Destroy();
                 }
             }
-        }
-
-        // Replace the stores we found with calls to helper functions that decompose the accesses.
-        for (auto* store : worklist) {
-            auto* replacement = MakeStore(store->To(), store->From());
-            store->ReplaceWith(replacement);
-            store->Destroy();
         }
     }
 
