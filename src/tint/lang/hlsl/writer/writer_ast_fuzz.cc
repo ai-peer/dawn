@@ -28,8 +28,17 @@
 // GEN_BUILD:CONDITION(tint_build_wgsl_reader)
 
 #include "src/tint/cmd/fuzz/wgsl/fuzz.h"
+#include "src/tint/lang/hlsl/validate/validate.h"
 #include "src/tint/lang/hlsl/writer/writer.h"
 #include "src/tint/lang/wgsl/ast/module.h"
+#include "src/tint/utils/command/command.h"
+
+#include <string>
+#include <unordered_map>
+
+namespace tint::fuzz {
+std::unordered_map<std::string, std::string>& FuzzerOptions();
+}
 
 namespace tint::hlsl::writer {
 namespace {
@@ -39,7 +48,37 @@ void ASTFuzzer(const tint::Program& program, Options options) {
         return;
     }
 
-    [[maybe_unused]] auto res = tint::hlsl::writer::Generate(program, options);
+    auto res = tint::hlsl::writer::Generate(program, options);
+    if (res == Success) {
+        const char* dxc_path = validate::kDxcDLLName;
+        bool must_validate = false;
+        auto fuzzer_options = tint::fuzz::FuzzerOptions();
+        if (auto it = fuzzer_options.find("dxc"); it != fuzzer_options.end()) {
+            must_validate = true;
+            dxc_path = it->second.c_str();
+        }
+
+        bool validated = false;
+        auto dxc = tint::Command::LookPath(dxc_path);
+        if (dxc.Found()) {
+            uint32_t hlsl_shader_model = 60;
+            bool require_16bit_types = false;
+            auto enable_list = program.AST().Enables();
+            for (auto* enable : enable_list) {
+                if (enable->HasExtension(tint::wgsl::Extension::kF16)) {
+                    hlsl_shader_model = 62;
+                    require_16bit_types = true;
+                    break;
+                }
+            }
+
+            auto validate_res = validate::ValidateUsingDXC(dxc.Path(), res->hlsl, res->entry_points,
+                                                           require_16bit_types, hlsl_shader_model);
+            validated = !validate_res.failed;
+        }
+
+        TINT_ASSERT(!must_validate || validated);
+    }
 }
 
 }  // namespace

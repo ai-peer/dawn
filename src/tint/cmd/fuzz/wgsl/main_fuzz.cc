@@ -26,6 +26,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <iostream>
+#include <string>
+#include <unordered_map>
 
 #include "src/tint/cmd/fuzz/wgsl/fuzz.h"
 #include "src/tint/utils/cli/cli.h"
@@ -35,8 +37,17 @@
 namespace {
 
 tint::fuzz::wgsl::Options options;
+std::unordered_map<std::string, std::string> fuzzer_options;
 
 }  // namespace
+
+namespace tint::fuzz {
+/// Returns global fuzzer options. This is a hack to allow fuzzers to retrieve options set on the
+/// command line.
+std::unordered_map<std::string, std::string>& FuzzerOptions() {
+    return fuzzer_options;
+}
+}  // namespace tint::fuzz
 
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t* input, size_t size) {
     if (size > 0) {
@@ -76,6 +87,7 @@ extern "C" int LLVMFuzzerInitialize(int* argc, char*** argv) {
         opts.Add<tint::cli::BoolOption>("concurrent", "runs the fuzzers concurrently");
     auto& opt_verbose =
         opts.Add<tint::cli::BoolOption>("verbose", "prints the name of each fuzzer before running");
+    auto& opt_dxc = opts.Add<tint::cli::StringOption>("dxc", "path to DXC DLL");
 
     tint::cli::ParseOptions parse_opts;
     parse_opts.ignore_unknown = true;
@@ -93,5 +105,8 @@ extern "C" int LLVMFuzzerInitialize(int* argc, char*** argv) {
     options.filter = opt_filter.value.value_or("");
     options.run_concurrently = opt_concurrent.value.value_or(false);
     options.verbose = opt_verbose.value.value_or(false);
+    if (opt_dxc.value) {
+        fuzzer_options["dxc"] = *opt_dxc.value;
+    }
     return 0;
 }
