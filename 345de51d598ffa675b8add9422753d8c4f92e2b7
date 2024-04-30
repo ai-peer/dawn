@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc3e696e_efc05568",
+        "filename": "src/tint/lang/core/ir/ice.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-04-30T10:04:19Z",
+      "side": 1,
+      "message": "`InternalCompilerError` is no longer tied to the diagnostic system, and currently only deals with plain strings. It could be made to use `StyledText`, but I don\u0027t know how much effort we want to put into something that should never happen in production.",
+      "parentUuid": "6f3471fa_308978f0",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65676142_bc772803",
         "filename": "src/tint/lang/core/ir/validator.cc",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-29T21:16:51Z",
       "side": 1,
       "message": "Again, it\u0027d be great if we could get styled text for validation failures when on a terminal, but maybe also not possible here?",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c574ee8_47b0c623",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-04-30T10:04:19Z",
+      "side": 1,
+      "message": "Ack - there\u0027s more work needed here to display the styled text in the validation error messages. I intend to do it as a followup.",
+      "parentUuid": "65676142_bc772803",
       "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
