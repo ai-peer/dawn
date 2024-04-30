@@ -142,6 +142,24 @@
       "parentUuid": "49236b18_3dbfeb03",
       "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a958a898_daa7020d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-04-30T13:35:16Z",
+      "side": 1,
+      "message": "We could always change when `--dump-ir` is run to happen after transforms are executed. How dump works is up to us. But it sounds like everyone wants `--format ir` so ... ok.",
+      "parentUuid": "7584c4fc_902cc062",
+      "revId": "d04d9bbfd10987eef9797f92ddba2d4d305a7369",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
