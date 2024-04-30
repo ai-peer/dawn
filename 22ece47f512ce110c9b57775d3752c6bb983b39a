@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "934bc510_09b2947c",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-04-30T10:04:11Z",
+      "side": 1,
+      "message": "Done. It\u0027s unfortunately required right now because it uses `tint::wgsl::reader::ProgramToLoweredIR()` [which is conditionally built](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/reader/program_to_ir/BUILD.cfg) with `tint_build_wgsl_reader`",
+      "parentUuid": "a8c09464_97bc9522",
+      "revId": "22ece47f512ce110c9b57775d3752c6bb983b39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52c2c12a_a214aa0e",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-04-29T21:08:11Z",
       "side": 1,
       "message": "Nit: `GenerateIr()` already prints the error.",
+      "revId": "22ece47f512ce110c9b57775d3752c6bb983b39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c29177_e1b8f1eb",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1360,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-04-30T10:04:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52c2c12a_a214aa0e",
       "revId": "22ece47f512ce110c9b57775d3752c6bb983b39a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
