@@ -96,6 +96,24 @@
       "message": "Instead of special-casing the layer \u003e\u003d 2 case, would it be possible to use TargetForTextureViewDimension (below) in all cases, and remove this function entirely? I think the view dimension alone should give the correct answer in all cases.",
       "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4857e3d_8db298ed",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-04-30T20:01:20Z",
+      "side": 1,
+      "message": "BTW, Texture has a GetCompatibilityTextureBindingViewDimension() that should retrieve the correct value (and apply the default if the value is not specified):\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.h;l\u003d91?q\u003dGetCompatibilityTextureBindingViewDimension\u0026ss\u003dchromium\n\nYou could pass the result of that call to TargetForTextureViewDimension().",
+      "parentUuid": "093a7a32_67758361",
+      "revId": "4edd71e28ee2000ea9b460ceabd6654df274a833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
