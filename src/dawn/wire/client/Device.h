@@ -113,8 +113,9 @@ class Device final : public ObjectWithEventsBase {
     DeviceLostInfo mDeviceLostInfo;
 
     WGPUUncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
-    WGPULoggingCallback mLoggingCallback = nullptr;
-    raw_ptr<void> mLoggingUserdata = nullptr;
+    WGPULoggingCallback2 mLoggingCallback = nullptr;
+    raw_ptr<void> mLoggingUserdata1 = nullptr;
+    raw_ptr<void> mLoggingUserdata2 = nullptr;
 
     raw_ptr<Queue> mQueue = nullptr;
 

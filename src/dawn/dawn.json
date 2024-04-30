@@ -226,6 +226,17 @@
             {"name": "disabled toggles", "type": "char", "annotation": "const*const*", "length": "disabled toggle count"}
         ]
     },
+    "dawn logging descriptor": {
+        "tags": ["dawn"],
+        "category": "structure",
+        "chained": "in",
+        "chain roots": ["instance descriptor", "device descriptor"],
+        "members": [
+            {"name": "callback", "type": "logging callback 2"},
+            {"name": "userdata 1", "type": "void *"},
+            {"name": "userdata 2", "type": "void *"}
+        ]
+    },
     "dawn load cache data function": {
         "tags": ["dawn", "native"],
         "category": "function pointer",
@@ -1650,6 +1661,16 @@
             {"name": "type", "type": "logging type"},
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"},
             {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "logging callback 2": {
+        "category": "function pointer",
+        "tags": ["dawn"],
+        "args": [
+            {"name": "type", "type": "logging type"},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "userdata1", "type": "void *"},
+            {"name": "userdata2", "type": "void *"}
         ]
     },
     "error filter": {
@@ -3720,6 +3741,7 @@
             {"value": 1024, "name": "dawn WGSL blocklist", "tags": ["dawn", "native"]},
             {"value": 1025, "name": "drm format capabilities", "tags": ["dawn"]},
             {"value": 1026, "name": "shader module compilation options", "tags": ["dawn"]},
+            {"value": 1027, "name": "dawn logging descriptor", "tags": ["dawn"]},
 
             {"value": 1100, "name": "shared texture memory vk image descriptor", "tags": ["dawn", "native"]},
             {"value": 1101, "name": "shared texture memory vk dedicated allocation descriptor", "tags": ["dawn", "native"]},

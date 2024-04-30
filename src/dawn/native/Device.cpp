@@ -334,6 +334,17 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
         mUncapturedErrorCallbackInfo = descriptor->uncapturedErrorCallbackInfo;
     }
 
+    if (const auto* loggingDesc = descriptor.Get<DawnLoggingDescriptor>()) {
+        mLoggingCallback = loggingDesc->callback;
+        mLoggingUserdata1 = loggingDesc->userdata1;
+        mLoggingUserdata2 = loggingDesc->userdata2;
+    }
+    if (!mLoggingCallback) {
+        mLoggingCallback = DefaultWGPULoggingCallback;
+        mLoggingUserdata1 = nullptr;
+        mLoggingUserdata2 = nullptr;
+    }
+
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
 
@@ -768,8 +779,12 @@ void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
     std::lock_guard<std::shared_mutex> lock(mLoggingMutex);
-    mLoggingCallback = callback;
-    mLoggingUserdata = userdata;
+    mLoggingUserdata2 = reinterpret_cast<void*>(callback);
+    mLoggingUserdata1 = userdata;
+    mLoggingCallback = [](WGPULoggingType type, const char* message, void* userdata1,
+                          void* userdata2) {
+        reinterpret_cast<WGPULoggingCallback>(userdata2)(type, message, userdata1);
+    };
 }
 
 void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
@@ -1857,7 +1872,7 @@ void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
     // the logging callback or they will deadlock.
     std::shared_lock<std::shared_mutex> lock(mLoggingMutex);
     if (mLoggingCallback) {
-        mLoggingCallback(loggingType, message, mLoggingUserdata);
+        mLoggingCallback(loggingType, message, mLoggingUserdata1, mLoggingUserdata2);
     }
 }
 
