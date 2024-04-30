@@ -16,6 +16,132 @@
       "message": "Hi Austin, PTAL. Thanks",
       "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff57fb03_60b40dd3",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "I think we should keep the existing implementation if monitored fences are supported.\n\nI think you should have two d3d11 queue classes.\n\n```\n// new virtual base class\nclass d3d11::Queue : public d3d::Queue {\n public:\n  virtual void NextSerial() \u003d 0; \n\n  // other existing stuff\n};\n```\n\n`Queue::Create` choses an implementation - MonitoredQueue or UnmonitoredQueue based on what type of fence is supported.\n\n`d3d11::MonitoredQueue : public Queue` and `d3d11::UnmonitoredQueue : public Queue`\n\nThese classes can be defined purely in the .cpp file. Users of the code only need to use d3d11::Queue directly\n\nMonitoredQueue:\n - CheckAndUpdateCompletedSerials does what it does today\n - WaitForQueueSerial does what it does today\n - NextSerial does what it does today\n \nUnmonitoredQueue:\n - NextSerial checks if it needs to do a fence signal, does it if necessary (shared texture memory is used).\n   calls Flush1(..) and tracks the event\n - WaitForQueueSerial does what you have in the new code\n - CheckAndUpdateCompletedSerials checks the events the way you have it in the new code",
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a2132cc_db275499",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "it would be great if you could reuse WaitAnySystemEvent instead.\n\nyou can change it to return a std::optional\u003csize_t\u003e instead of a bool. Then, it can return the index of the first event that completed.",
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2336b4e_3cb71842",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "you can\u0027t pass more handles than MAXIMUM_WAIT_OBJECTS (which is 64).\n\nSo you\u0027ll need to iterate in batches of at most 64",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 99
+      },
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20cd82e9_9c72b827",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "this is based on the strong assumption there is exactly 1 event per serial. It would be more robust if instead you index into mPendingEvents and return the serial exactly",
+      "range": {
+        "startLine": 246,
+        "startChar": 0,
+        "endLine": 246,
+        "endChar": 98
+      },
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba4a0354_9b284747",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "This new code depends on the serials to be strictly order. Probably you want to put `GetScopedPendingCommandContext` before the serial incrementing - or races can cause the serials to be out of order",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 74
+      },
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97159166_1dcda24e",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T00:56:35Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised we\u0027re both signaling the fence, and flushing the event every time.\n\nI expected something more like:\n\n```\nif (needsSignalFence) {\n  context.Signal(..);\n}\nif (needsFlushEvent) {\n  context.Flush(...);\n}\n```\n\nwhere we have needsSignalFence is true if SharedTextureMemory is used, or if monitored fences are supported\n\nand needsFlushEvent is true if monitored fences are not supported",
+      "range": {
+        "startLine": 325,
+        "startChar": 0,
+        "endLine": 334,
+        "endChar": 0
+      },
+      "revId": "d881e79c427f1b918ab1d823d15800ca6d1eef0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
