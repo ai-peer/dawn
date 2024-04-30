@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e1a1113_cfdf8619",
+        "filename": "src/tint/lang/core/ir/ice.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-30T15:08:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "dc3e696e_efc05568",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65676142_bc772803",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Ack - there\u0027s more work needed here to display the styled text in the validation error messages. I intend to do it as a followup.",
       "parentUuid": "65676142_bc772803",
+      "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9512ffe_de9988bf",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-04-30T15:08:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4c574ee8_47b0c623",
       "revId": "345de51d598ffa675b8add9422753d8c4f92e2b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
