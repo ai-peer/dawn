@@ -32,12 +32,13 @@
 #include <string>
 #include <utility>
 
-#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/intrinsic/table.h"
 #include "src/tint/lang/core/ir/access.h"
 #include "src/tint/lang/core/ir/binary.h"
 #include "src/tint/lang/core/ir/bitcast.h"
+#include "src/tint/lang/core/ir/block_param.h"
 #include "src/tint/lang/core/ir/break_if.h"
+#include "src/tint/lang/core/ir/constant.h"
 #include "src/tint/lang/core/ir/construct.h"
 #include "src/tint/lang/core/ir/continue.h"
 #include "src/tint/lang/core/ir/convert.h"
@@ -48,7 +49,9 @@
 #include "src/tint/lang/core/ir/exit_loop.h"
 #include "src/tint/lang/core/ir/exit_switch.h"
 #include "src/tint/lang/core/ir/function.h"
+#include "src/tint/lang/core/ir/function_param.h"
 #include "src/tint/lang/core/ir/if.h"
+#include "src/tint/lang/core/ir/instruction_result.h"
 #include "src/tint/lang/core/ir/let.h"
 #include "src/tint/lang/core/ir/load.h"
 #include "src/tint/lang/core/ir/load_vector_element.h"
@@ -72,8 +75,10 @@
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"
+#include "src/tint/utils/containers/hashset.h"
 #include "src/tint/utils/containers/reverse.h"
 #include "src/tint/utils/containers/transform.h"
+#include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/macros/scoped_assignment.h"
 #include "src/tint/utils/rtti/switch.h"
 #include "src/tint/utils/text/styled_text.h"
@@ -209,6 +214,11 @@ class Validator {
     /// @param src the source lines to highlight
     diag::Diagnostic& AddNote(Source src = {});
 
+    /// Adds a note to the diagnostics highlighting where the value was declared, if it has a source
+    /// location.
+    /// @param value the value
+    void AddDeclarationNote(const Value* value);
+
     /// @param v the value to get the name for
     /// @returns the name for the given value
     StyledText NameOf(const Value* v);
@@ -338,7 +348,19 @@ class Validator {
     /// @returns the vector pointer type for the given instruction operand
     const core::type::Type* GetVectorPtrElementType(const Instruction* inst, size_t idx);
 
-  private:
+    /// ScopeStack holds a stack of values that are currently in scope
+    struct ScopeStack {
+        void Push() { stack_.Push({}); }
+        void Pop() { stack_.Pop(); }
+        void Add(const Value* value) { stack_.Back().Add(value); }
+        bool Contains(const Value* value) {
+            return stack_.Any([&](auto& v) { return v.Contains(value); });
+        }
+
+      private:
+        Vector<Hashset<const Value*, 8>, 4> stack_ = {{}};  // Construct with root block
+    };
+
     const Module& mod_;
     Capabilities capabilities_;
     std::optional<ir::Disassembly> disassembly_;  // Use Disassembly()
@@ -347,6 +369,7 @@ class Validator {
     Hashset<const Function*, 4> all_functions_;
     Hashset<const Instruction*, 4> visited_instructions_;
     Vector<const ControlInstruction*, 8> control_stack_;
+    ScopeStack scope_stack_;
 };
 
 Validator::Validator(const Module& mod, Capabilities capabilities)
@@ -354,7 +377,7 @@ Validator::Validator(const Module& mod, Capabilities capabilities)
 
 Validator::~Validator() = default;
 
-ir::Disassembly& Validator::Disassembly() {
+Disassembly& Validator::Disassembly() {
     if (!disassembly_) {
         disassembly_.emplace(Disassemble(mod_));
     }
@@ -369,6 +392,7 @@ Result<SuccessType> Validator::Run() {
             AddError(func) << "function " << NameOf(func.Get())
                            << " added to module multiple times";
         }
+        scope_stack_.Add(func);
     }
 
     for (auto& func : mod_.functions) {
@@ -484,6 +508,35 @@ diag::Diagnostic& Validator::AddNote(Source src) {
     return diag;
 }
 
+void Validator::AddDeclarationNote(const Value* value) {
+    tint::Switch(
+        value,  //
+        [&](const InstructionResult* res) {
+            if (auto* inst = res->Instruction()) {
+                auto results = inst->Results();
+                for (size_t i = 0; i < results.Length(); i++) {
+                    if (results[i] == value) {
+                        AddNote(res->Instruction(), i) << NameOf(value) << " declared here";
+                        return;
+                    }
+                }
+            }
+        },
+        [&](const FunctionParam* param) {
+            auto src = Disassembly().FunctionParamSource(param);
+            if (src.file) {
+                AddNote(src) << NameOf(value) << " declared here";
+            }
+        },
+        [&](const BlockParam* param) {
+            auto src = Disassembly().BlockParamSource(param);
+            if (src.file) {
+                AddNote(src) << NameOf(value) << " declared here";
+            }
+        },
+        [&](const Function* fn) { AddNote(fn) << NameOf(value) << " declared here"; });
+}
+
 StyledText Validator::NameOf(const Value* value) {
     return Disassembly().NameOf(value);
 }
@@ -517,12 +570,11 @@ void Validator::CheckRootBlock(const Block* blk) {
             continue;
         }
         CheckInstruction(var);
+        scope_stack_.Add(var->Result(0));
     }
 }
 
 void Validator::CheckFunction(const Function* func) {
-    CheckBlock(func->Block());
-
     for (auto* param : func->Params()) {
         if (!param->Alive()) {
             AddError(param) << "destroyed parameter found in function parameter list";
@@ -541,10 +593,16 @@ void Validator::CheckFunction(const Function* func) {
         if (HoldsType<type::Reference>(param->Type())) {
             AddError(param) << "references are not permitted as parameter types";
         }
+
+        scope_stack_.Add(param);
     }
     if (HoldsType<type::Reference>(func->ReturnType())) {
         AddError(func) << "references are not permitted as return types";
     }
+
+    scope_stack_.Push();
+    CheckBlock(func->Block());
+    scope_stack_.Pop();
 }
 
 void Validator::CheckBlock(const Block* blk) {
@@ -564,6 +622,7 @@ void Validator::CheckBlock(const Block* blk) {
                 AddNote(param->Block()) << "parent block declared here";
                 return;
             }
+            scope_stack_.Add(param);
         }
     }
 
@@ -624,10 +683,13 @@ void Validator::CheckInstruction(const Instruction* inst) {
         // for `nullptr` here.
         if (!op->Alive()) {
             AddError(inst, i) << "operand is not alive";
-        }
-
-        if (!op->HasUsage(inst, i)) {
+        } else if (!op->HasUsage(inst, i)) {
             AddError(inst, i) << "operand missing usage";
+        } else if (auto fn = op->As<Function>(); fn && !all_functions_.Contains(fn)) {
+            AddError(inst, i) << NameOf(op) << " is not part of the module";
+        } else if (!op->Is<Constant>() && !scope_stack_.Contains(op)) {
+            AddError(inst, i) << NameOf(op) << " is not in scope";
+            AddDeclarationNote(op);
         }
 
         if (!capabilities_.Contains(Capability::kAllowRefTypes)) {
@@ -655,6 +717,10 @@ void Validator::CheckInstruction(const Instruction* inst) {
         [&](const Unary* u) { CheckUnary(u); },                            //
         [&](const Var* var) { CheckVar(var); },                            //
         [&](const Default) { AddError(inst) << "missing validation"; });
+
+    for (auto* result : results) {
+        scope_stack_.Add(result);
+    }
 }
 
 void Validator::CheckVar(const Var* var) {
@@ -713,10 +779,6 @@ void Validator::CheckBuiltinCall(const BuiltinCall* call) {
 }
 
 void Validator::CheckUserCall(const UserCall* call) {
-    if (!all_functions_.Contains(call->Target())) {
-        AddError(call, UserCall::kFunctionOperandOffset) << "call target is not part of the module";
-    }
-
     if (call->Target()->Stage() != Function::PipelineStage::kUndefined) {
         AddError(call, UserCall::kFunctionOperandOffset)
             << "call target must not have a pipeline stage";
@@ -907,9 +969,14 @@ void Validator::CheckIf(const If* if_) {
     control_stack_.Push(if_);
     TINT_DEFER(control_stack_.Pop());
 
+    scope_stack_.Push();
     CheckBlock(if_->True());
+    scope_stack_.Pop();
+
     if (!if_->False()->IsEmpty()) {
+        scope_stack_.Push();
         CheckBlock(if_->False());
+        scope_stack_.Pop();
     }
 }
 
@@ -918,12 +985,25 @@ void Validator::CheckLoop(const Loop* l) {
     TINT_DEFER(control_stack_.Pop());
 
     if (!l->Initializer()->IsEmpty()) {
+        scope_stack_.Push();
         CheckBlock(l->Initializer());
     }
+
+    scope_stack_.Push();
     CheckBlock(l->Body());
 
     if (!l->Continuing()->IsEmpty()) {
+        scope_stack_.Push();
         CheckBlock(l->Continuing());
+    }
+
+    // Pop scopes
+    if (!l->Continuing()->IsEmpty()) {
+        scope_stack_.Pop();
+    }
+    scope_stack_.Pop();
+    if (!l->Initializer()->IsEmpty()) {
+        scope_stack_.Pop();
     }
 }
 
@@ -932,7 +1012,9 @@ void Validator::CheckSwitch(const Switch* s) {
     TINT_DEFER(control_stack_.Pop());
 
     for (auto& cse : s->Cases()) {
+        scope_stack_.Push();
         CheckBlock(cse.block);
+        scope_stack_.Pop();
     }
 }
 
