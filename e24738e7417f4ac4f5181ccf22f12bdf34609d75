@@ -1,0 +1,261 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57852178_1ec8b8af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "Sorry for the delay.",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d40b4e_821e2094",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "nit: usual syntax is `TODO(crbug.com/dawn/2509):` or `TODO(dawn:2509):`",
+      "range": {
+        "startLine": 954,
+        "startChar": 2,
+        "endLine": 954,
+        "endChar": 28
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4698de0_b87feca4",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "Normally this shouldn\u0027t be needed because we typedef all our structs so they don\u0027t need `struct` in front. Is it needed here in particular for some reason?",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 71
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9716ee1e_ce7c2d75",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "I don\u0027t think callback infos should ever be extensible? (It would be kind of inconsistent, and I would expect any extension point for a function to be in another struct other than the callback info)",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46dbdfa4_fd9a5f44",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ecc1e7_3197143a",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "Curious why you needed F and T to be separate, instead of just having TemplatedCallbackName\u003cT\u003e like in the gist. Needed for type inference to work better in some cases I\u0027m guessing?",
+      "range": {
+        "startLine": 252,
+        "startChar": 14,
+        "endLine": 252,
+        "endChar": 59
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be9d1836_de000019",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 312,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd7e39d_9030ad68",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "Should these be in the `detail` namespace since they\u0027re meant to be inferred? Or public namespace because they\u0027re named in a public API?\n\nActually I kind of wonder if we could inline the full function type here instead of adding the `Templated{{CallbackName}}` definitions at all...\n\nNot important to solve now, could be a followup.",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "117089ee_8b8fe0a2",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "[1] these would be flipped",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b20171_324223af",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 383,
+        "startChar": 8,
+        "endLine": 383,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc93af64_5364c74a",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s more intuitive to have keep these in the usual order [callback, userdata]. (Call site at [1])",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdb7dad_11b063eb",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "I think this is not yet used?",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907d6e3d_42dd851f",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-04-30T04:40:43Z",
+      "side": 1,
+      "message": "I\u0027m not sure if there are any remaining breaking changes to callback signatures, but if there are then we should call this something like \"unstable\" or \"do not use\".\n\nThat said I think the only thing left is some changes to which enum values we pass in which cases. Were we planning on just dealing with that later? Can\u0027t remember what we said.",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
