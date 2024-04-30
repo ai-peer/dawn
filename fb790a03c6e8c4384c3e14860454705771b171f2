@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d91742_e0eae719",
+        "filename": "src/dawn/common/StackAllocated.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-04-30T16:22:49Z",
+      "side": 1,
+      "message": "nit: prefer to file a bug instead of leaving a TODO with your name in the code",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "fb790a03c6e8c4384c3e14860454705771b171f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
