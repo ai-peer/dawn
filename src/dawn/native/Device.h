@@ -549,8 +549,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     UncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
 
     std::shared_mutex mLoggingMutex;
-    wgpu::LoggingCallback mLoggingCallback = nullptr;
-    raw_ptr<void> mLoggingUserdata = nullptr;
+    wgpu::LoggingCallback2 mLoggingCallback = nullptr;
+    raw_ptr<void> mLoggingUserdata1 = nullptr;
+    raw_ptr<void> mLoggingUserdata2 = nullptr;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 

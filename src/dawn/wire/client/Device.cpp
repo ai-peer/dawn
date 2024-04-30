@@ -270,12 +270,28 @@ Device::Device(const ObjectBaseParams& params,
             mDeviceLostInfo.oldCallback = descriptor->deviceLostCallback;
             mDeviceLostInfo.userdata = descriptor->deviceLostUserdata;
         }
+
+        mUncapturedErrorCallbackInfo = descriptor->uncapturedErrorCallbackInfo;
+
+        for (auto* chain = descriptor->nextInChain; chain; chain = chain->next) {
+            if (chain->sType == WGPUSType_DawnLoggingDescriptor) {
+                auto* loggingDesc = reinterpret_cast<const WGPUDawnLoggingDescriptor*>(chain);
+                mLoggingCallback = loggingDesc->callback;
+                mLoggingUserdata1 = loggingDesc->userdata1;
+                mLoggingUserdata2 = loggingDesc->userdata2;
+            }
+        }
     }
     mDeviceLostInfo.event = std::make_unique<DeviceLostEvent>(deviceLostCallbackInfo, this);
 
-    mUncapturedErrorCallbackInfo = kDefaultUncapturedErrorCallbackInfo;
-    if (descriptor && descriptor->uncapturedErrorCallbackInfo.callback != nullptr) {
-        mUncapturedErrorCallbackInfo = descriptor->uncapturedErrorCallbackInfo;
+    if (!mUncapturedErrorCallbackInfo.callback) {
+        mUncapturedErrorCallbackInfo = kDefaultUncapturedErrorCallbackInfo;
+    }
+
+    if (!mLoggingCallback) {
+        mLoggingCallback = DefaultWGPULoggingCallback;
+        mLoggingUserdata1 = nullptr;
+        mLoggingUserdata2 = nullptr;
     }
 }
 
@@ -330,7 +346,7 @@ void Device::HandleError(WGPUErrorType errorType, const char* message) {
 void Device::HandleLogging(WGPULoggingType loggingType, const char* message) {
     if (mLoggingCallback) {
         // Since client always run in single thread, calling the callback directly is safe.
-        mLoggingCallback(loggingType, message, mLoggingUserdata);
+        mLoggingCallback(loggingType, message, mLoggingUserdata1, mLoggingUserdata2);
     }
 }
 
@@ -365,8 +381,14 @@ void Device::SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* e
 }
 
 void Device::SetLoggingCallback(WGPULoggingCallback callback, void* userdata) {
-    mLoggingCallback = callback;
-    mLoggingUserdata = userdata;
+    mLoggingUserdata2 = reinterpret_cast<void*>(callback);
+    mLoggingUserdata1 = userdata;
+    mLoggingCallback = [](WGPULoggingType type, const char* message, void* userdata1,
+                          void* userdata2) {
+        if (userdata2) {
+            reinterpret_cast<WGPULoggingCallback>(userdata2)(type, message, userdata1);
+        }
+    };
 }
 
 void Device::SetDeviceLostCallback(WGPUDeviceLostCallback callback, void* userdata) {

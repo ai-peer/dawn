@@ -211,7 +211,8 @@ void InstanceBase::WillDropLastExternalRef() {
     }
 
     mLoggingCallback = nullptr;
-    mLoggingCallbackUserdata = nullptr;
+    mLoggingUserdata1 = nullptr;
+    mLoggingUserdata2 = nullptr;
 }
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
@@ -231,28 +232,27 @@ MaybeError InstanceBase::Initialize(const UnpackedPtr<InstanceDescriptor>& descr
         mBeginCaptureOnStartup = dawnDesc->beginCaptureOnStartup;
         mEnableAdapterBlocklist = dawnDesc->enableAdapterBlocklist;
 
-        mLoggingCallback = dawnDesc->loggingCallback;
-        mLoggingCallbackUserdata = dawnDesc->loggingCallbackUserdata;
+        mLoggingUserdata2 = reinterpret_cast<void*>(dawnDesc->loggingCallback);
+        mLoggingUserdata1 = dawnDesc->loggingCallbackUserdata;
+        mLoggingCallback = [](WGPULoggingType type, const char* message, void* userdata1,
+                              void* userdata2) {
+            if (userdata2) {
+                reinterpret_cast<WGPULoggingCallback>(userdata2)(type, message, userdata1);
+            }
+        };
+    }
+
+    if (const auto* loggingDesc = descriptor.Get<DawnLoggingDescriptor>()) {
+        DAWN_ASSERT(!mLoggingCallback);
+        mLoggingCallback = loggingDesc->callback;
+        mLoggingUserdata1 = loggingDesc->userdata1;
+        mLoggingUserdata2 = loggingDesc->userdata2;
     }
 
     if (!mLoggingCallback) {
-        mLoggingCallback = [](WGPULoggingType type, char const* message, void*) {
-            switch (static_cast<wgpu::LoggingType>(type)) {
-                case wgpu::LoggingType::Verbose:
-                    dawn::DebugLog() << message;
-                    break;
-                case wgpu::LoggingType::Info:
-                    dawn::InfoLog() << message;
-                    break;
-                case wgpu::LoggingType::Warning:
-                    dawn::WarningLog() << message;
-                    break;
-                case wgpu::LoggingType::Error:
-                    dawn::ErrorLog() << message;
-                    break;
-            }
-        };
-        mLoggingCallbackUserdata = nullptr;
+        mLoggingCallback = DefaultWGPULoggingCallback;
+        mLoggingUserdata1 = nullptr;
+        mLoggingUserdata2 = nullptr;
     }
 
     // Default paths to search are next to the shared library, next to the executable, and
@@ -484,7 +484,8 @@ bool InstanceBase::ConsumedErrorAndWarnOnce(MaybeError maybeErr) {
     }
     std::string message = maybeErr.AcquireError()->GetFormattedMessage();
     if (mWarningMessages.insert(message).second && mLoggingCallback) {
-        mLoggingCallback(WGPULoggingType_Warning, message.c_str(), mLoggingCallbackUserdata);
+        mLoggingCallback(WGPULoggingType_Warning, message.c_str(), mLoggingUserdata1,
+                         mLoggingUserdata2);
     }
     return true;
 }
@@ -592,7 +593,8 @@ void InstanceBase::ConsumeError(std::unique_ptr<ErrorData> error,
     DAWN_ASSERT(error != nullptr);
     if (mLoggingCallback) {
         std::string messageStr = error->GetFormattedMessage();
-        mLoggingCallback(WGPULoggingType_Error, messageStr.c_str(), mLoggingCallbackUserdata);
+        mLoggingCallback(WGPULoggingType_Error, messageStr.c_str(), mLoggingUserdata1,
+                         mLoggingUserdata2);
     }
 }
 

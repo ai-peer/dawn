@@ -32,6 +32,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Platform.h"
+#include "dawn/webgpu_cpp.h"
 
 #if DAWN_PLATFORM_IS(ANDROID)
 #include <android/log.h>
@@ -156,6 +157,24 @@ LogMessage DebugLog(const char* file, const char* function, int line) {
     LogMessage message = DebugLog();
     message << file << ":" << line << "(" << function << ")";
     return message;
+}
+
+void DefaultWGPULoggingCallback(WGPULoggingType type, const char* message, void*, void*) {
+    switch (static_cast<wgpu::LoggingType>(type)) {
+        case wgpu::LoggingType::Verbose:
+            dawn::DebugLog() << message;
+            return;
+        case wgpu::LoggingType::Info:
+            dawn::InfoLog() << message;
+            return;
+        case wgpu::LoggingType::Warning:
+            dawn::WarningLog() << message;
+            return;
+        case wgpu::LoggingType::Error:
+            dawn::ErrorLog() << message;
+            return;
+    }
+    DAWN_UNREACHABLE();
 }
 
 }  // namespace dawn

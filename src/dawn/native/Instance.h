@@ -203,8 +203,9 @@ class InstanceBase final : public ErrorSink, public RefCountedWithExternalCount 
     bool mEnableAdapterBlocklist = false;
     BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
-    wgpu::LoggingCallback mLoggingCallback = nullptr;
-    raw_ptr<void> mLoggingCallbackUserdata = nullptr;
+    wgpu::LoggingCallback2 mLoggingCallback = nullptr;
+    raw_ptr<void> mLoggingUserdata1 = nullptr;
+    raw_ptr<void> mLoggingUserdata2 = nullptr;
 
     std::unique_ptr<dawn::platform::Platform> mDefaultPlatform;
     raw_ptr<dawn::platform::Platform> mPlatform = nullptr;
