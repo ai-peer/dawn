@@ -48,9 +48,9 @@ class InternalCompilerError {
     InternalCompilerError(const char* file, size_t line);
 
     /// Destructor.
-    /// Adds the internal compiler error message to the diagnostics list, and then
-    /// calls the InternalCompilerErrorReporter if one is set.
-    ~InternalCompilerError();
+    /// Adds the internal compiler error message to the diagnostics list, calls the
+    /// InternalCompilerErrorReporter if one is set, then calls abort().
+    [[noreturn]] ~InternalCompilerError();
 
     /// Appends `arg` to the ICE message.
     /// @param arg the argument to append to the ICE message
