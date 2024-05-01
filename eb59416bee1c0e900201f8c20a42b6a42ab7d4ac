@@ -52,6 +52,24 @@
       "parentUuid": "f14828db_7f0fc79b",
       "revId": "eb59416bee1c0e900201f8c20a42b6a42ab7d4ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b13f6cc_1eee8088",
+        "filename": "src/tint/utils/command/command_posix.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-01T19:56:39Z",
+      "side": 1,
+      "message": "Fair enough, will fix.",
+      "parentUuid": "369c8888_7ea4377b",
+      "revId": "eb59416bee1c0e900201f8c20a42b6a42ab7d4ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
