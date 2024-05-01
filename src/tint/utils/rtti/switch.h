@@ -31,7 +31,6 @@
 #include <tuple>
 #include <utility>
 
-#include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/defer.h"
 #include "src/tint/utils/memory/aligned_storage.h"
 #include "src/tint/utils/rtti/castable.h"
@@ -70,10 +69,8 @@ struct SwitchMustMatchCase {
 ///     [&](TypeB*) { /* ... */ },
 ///     TINT_ICE_ON_NO_MATCH);
 /// ```
-#define TINT_ICE_ON_NO_MATCH    \
-    tint::SwitchMustMatchCase { \
-        __FILE__, __LINE__      \
-    }
+#define TINT_ICE_ON_NO_MATCH \
+    tint::SwitchMustMatchCase { __FILE__, __LINE__ }
 
 }  // namespace tint
 
@@ -205,6 +202,17 @@ using SwitchCaseReturnType = typename SwitchCaseReturnTypeImpl<
     CASE,
     std::is_same_v<std::decay_t<CASE>, SwitchMustMatchCase>>::type;
 
+/// Raises an ICE error that a Switch() was passed a nullptr object and there was no default case
+[[noreturn]] void ICENoSwitchPassedNullptr(const char* file, unsigned int line);
+
+/// Raises an ICE error that a Switch() with a TINT_ICE_ON_NO_MATCH matched no cases.
+/// @param file the file holding the Switch()
+/// @param line the line of the TINT_ICE_ON_NO_MATCH
+/// @type_name the type name of the object passed to Switch()
+[[noreturn]] void ICENoSwitchCasesMatched(const char* file,
+                                          unsigned int line,
+                                          const char* type_name);
+
 }  // namespace tint::detail
 
 namespace tint {
@@ -280,7 +288,7 @@ inline auto Switch(T* object, ARGS&&... args) {
     if (!object) {  // Object is nullptr, so no cases can match
         if constexpr (kHasMustMatchCase) {
             const SwitchMustMatchCase& info = (args, ...);
-            tint::InternalCompilerError(info.file, info.line) << "Switch() passed nullptr";
+            detail::ICENoSwitchPassedNullptr(info.file, info.line);
             if constexpr (kHasReturnType) {
                 return ReturnType{};
             } else {
@@ -317,8 +325,7 @@ inline auto Switch(T* object, ARGS&&... args) {
         using CaseFunc = std::decay_t<decltype(case_fn)>;
         bool success = false;
         if constexpr (std::is_same_v<CaseFunc, SwitchMustMatchCase>) {
-            tint::InternalCompilerError(case_fn.file, case_fn.line)
-                << "Switch() matched no cases. Type: " << type_info.name;
+            detail::ICENoSwitchCasesMatched(case_fn.file, case_fn.line, type_info.name);
         } else {
             using CaseType = tint::detail::SwitchCaseType<CaseFunc>;
             if constexpr (std::is_same_v<CaseType, Default>) {
