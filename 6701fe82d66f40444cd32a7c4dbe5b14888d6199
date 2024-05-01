@@ -52,6 +52,24 @@
       "parentUuid": "d0baa0cd_5e40c54f",
       "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333c1a93_2380f9a9",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-01T21:15:23Z",
+      "side": 1,
+      "message": "Thanks for the suggestions.\nIn addition I put a optional texture_sem which only get passed in kTextureLoad case, otherwise it will get it inside the `queryTexturebuiltin` lambda.\nDoes it look better now?",
+      "parentUuid": "2dc680c9_ce174368",
+      "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
