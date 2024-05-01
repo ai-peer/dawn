@@ -16,6 +16,29 @@
       "message": "PTAL. Thanks",
       "revId": "39ea6f8ed18f449522db77e455bea124f062a6be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a419c7d9_789b6570",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-01T17:04:00Z",
+      "side": 1,
+      "message": "you should set the default for `D3D11UseUnmonitoredFence` in  `PhysicalDevice::SetupBackendAdapterToggles` based on the device info - instead of checking this here.\n\nThen, this code can be unchanged.\n\nNot sure we really need the else case for when neither fence type is supported. Is it very common? We could simply let creating the queue fail; it is an error either way.",
+      "range": {
+        "startLine": 86,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 42
+      },
+      "revId": "39ea6f8ed18f449522db77e455bea124f062a6be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
