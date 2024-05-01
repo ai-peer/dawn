@@ -27,6 +27,7 @@
 
 #include "src/tint/utils/ice/ice.h"
 
+#include <iostream>
 #include <memory>
 #include <string>
 
@@ -49,8 +50,17 @@ InternalCompilerError::InternalCompilerError(const char* file, size_t line)
 InternalCompilerError::~InternalCompilerError() {
     if (ice_reporter) {
         ice_reporter(*this);
+    } else {
+        std::cerr << Error() << std::endl << std::endl;
     }
+
     debugger::Break();
+
+#if defined(_MSC_VER) && !defined(__clang__)
+    abort();
+#else
+    __builtin_trap();
+#endif
 }
 
 std::string InternalCompilerError::Error() const {

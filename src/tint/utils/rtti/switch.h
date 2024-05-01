@@ -251,6 +251,7 @@ namespace tint {
 template <typename RETURN_TYPE = tint::detail::Infer, typename T = CastableBase, typename... ARGS>
 inline auto Switch(T* object, ARGS&&... args) {
     TINT_BEGIN_DISABLE_WARNING(UNUSED_VALUE);
+    TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
 
     using ArgsTuple = std::tuple<ARGS...>;
     static constexpr int kMustMatchCaseIndex =
@@ -362,6 +363,7 @@ inline auto Switch(T* object, ARGS&&... args) {
         }
     }
 
+    TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
     TINT_END_DISABLE_WARNING(UNUSED_VALUE);
 }
 
