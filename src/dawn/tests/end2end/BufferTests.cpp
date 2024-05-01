@@ -104,6 +104,9 @@ class BufferMappingTests : public DawnTestWithParams<BufferMappingTestParams> {
                     WaitABit();
                 }
                 break;
+            case wgpu::CallbackMode::Undefined:
+            default:
+                FAIL() << "Invalid callback mode.";
         }
     }
 
@@ -500,6 +503,9 @@ TEST_P(BufferMappingTests, MapWrite_ManySimultaneous) {
                     WaitABit();
                 }
                 break;
+            case wgpu::CallbackMode::Undefined:
+            default:
+                FAIL() << "Invalid callback mode.";
         }
     }
 
@@ -594,6 +600,9 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
                     WaitABit();
                 }
                 break;
+            case wgpu::CallbackMode::Undefined:
+            default:
+                FAIL() << "Invalid callback mode.";
         }
     }
 

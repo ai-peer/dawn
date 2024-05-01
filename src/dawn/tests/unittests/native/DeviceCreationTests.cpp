@@ -305,6 +305,9 @@ class DeviceCreationFutureTest
             case wgpu::CallbackMode::AllowProcessEvents:
                 wgpuInstance.ProcessEvents();
                 break;
+            case wgpu::CallbackMode::Undefined:
+            default:
+                FAIL() << "Invalid callback mode.";
         }
     }
 };

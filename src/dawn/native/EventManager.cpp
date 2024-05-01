@@ -344,6 +344,11 @@ bool EventManager::IsShutDown() const {
 }
 
 FutureID EventManager::TrackEvent(Ref<TrackedEvent>&& event) {
+    if (!ValidateCallbackMode(ToAPI(event->mCallbackMode))) {
+        DAWN_ASSERT(false);
+        return kNullFutureID;
+    }
+
     FutureID futureID = mNextFutureID++;
     event->mFutureID = futureID;
 

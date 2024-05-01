@@ -101,6 +101,9 @@ class AdapterCreationTest : public ::testing::TestWithParam<std::optional<wgpu::
             case wgpu::CallbackMode::AllowProcessEvents:
                 inst.ProcessEvents();
                 break;
+            case wgpu::CallbackMode::Undefined:
+            default:
+                FAIL() << "Invalid callback mode.";
         }
     }
 
