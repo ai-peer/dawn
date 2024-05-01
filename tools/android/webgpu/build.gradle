@@ -84,3 +84,5 @@ project.afterEvaluate {
         }
     }
 }
+
+apply from: 'sourceSets.gradle'
