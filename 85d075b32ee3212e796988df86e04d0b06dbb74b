@@ -70,6 +70,30 @@
       },
       "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8e980e_d7451993",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-01T19:13:59Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/186643",
+      "parentUuid": "2fafbee7_84ab395d",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 5
+      },
+      "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
