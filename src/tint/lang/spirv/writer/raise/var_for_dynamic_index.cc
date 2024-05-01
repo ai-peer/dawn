@@ -243,7 +243,7 @@ struct State {
             }
 
             // Replace all uses of the old access instruction with the loaded result.
-            access->Result(0)->ReplaceAllUsesWith(load->Result(0));
+            load->SetResults(Vector{access->DetachResult()});
             access->ReplaceWith(load);
             access->Destroy();
         }

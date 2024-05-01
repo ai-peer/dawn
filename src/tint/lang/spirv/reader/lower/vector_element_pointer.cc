@@ -133,7 +133,7 @@ struct State {
                 [&](core::ir::Load* load) {
                     auto* lve = b.LoadVectorElement(object, index);
                     lve->InsertBefore(load);
-                    load->Result(0)->ReplaceAllUsesWith(lve->Result(0));
+                    lve->SetResults(Vector{load->DetachResult()});
                     to_destroy.Push(load);
                 },
                 [&](core::ir::Store* store) {
