@@ -206,11 +206,13 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::PixelLocalStorageCoherent);
     }
 
-    // Always expose SharedTextureMemoryDXGISharedHandle, since the d3d11 should be able to
-    // import shared handles which are exported from d3d device.
-    EnableFeature(Feature::SharedTextureMemoryDXGISharedHandle);
     EnableFeature(Feature::SharedTextureMemoryD3D11Texture2D);
-    EnableFeature(Feature::SharedFenceDXGISharedHandle);
+    if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
+        EnableFeature(Feature::SharedTextureMemoryDXGISharedHandle);
+    }
+    if (mDeviceInfo.supportsMonitoredFence || mDeviceInfo.supportsNonMonitoredFence) {
+        EnableFeature(Feature::SharedFenceDXGISharedHandle);
+    }
 
     UINT formatSupport = 0;
     HRESULT hr = mD3D11Device->CheckFormatSupport(DXGI_FORMAT_B8G8R8A8_UNORM, &formatSupport);
