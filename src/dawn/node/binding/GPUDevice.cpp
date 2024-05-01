@@ -184,6 +184,7 @@ GPUDevice::GPUDevice(Napi::Env env,
                 case WGPUDeviceLostReason_Destroyed:
                 case WGPUDeviceLostReason_InstanceDropped:
                 case WGPUDeviceLostReason_Undefined:
+                case WGPUDeviceLostReason_Unknown:
                     r = interop::GPUDeviceLostReason::kDestroyed;
                     break;
             }
