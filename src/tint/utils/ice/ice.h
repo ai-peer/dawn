@@ -48,9 +48,9 @@ class InternalCompilerError {
     InternalCompilerError(const char* file, size_t line);
 
     /// Destructor.
-    /// Adds the internal compiler error message to the diagnostics list, and then
-    /// calls the InternalCompilerErrorReporter if one is set.
-    ~InternalCompilerError();
+    /// Adds the internal compiler error message to the diagnostics list, calls the
+    /// InternalCompilerErrorReporter if one is set, then calls abort().
+    [[noreturn]] ~InternalCompilerError();
 
     /// Appends `arg` to the ICE message.
     /// @param arg the argument to append to the ICE message
@@ -111,28 +111,6 @@ void SetInternalCompilerErrorReporter(InternalCompilerErrorReporter* reporter);
     do {                                                 \
         if (TINT_UNLIKELY(!(condition))) {               \
             TINT_ICE() << "TINT_ASSERT(" #condition ")"; \
-        }                                                \
-    } while (false)
-
-/// TINT_ASSERT_OR_RETURN() is a macro for checking the expression is true, triggering a
-/// TINT_ICE if it is not and returning from the calling function.
-/// The ICE message contains the callsite's file and line.
-#define TINT_ASSERT_OR_RETURN(condition)                 \
-    do {                                                 \
-        if (TINT_UNLIKELY(!(condition))) {               \
-            TINT_ICE() << "TINT_ASSERT(" #condition ")"; \
-            return;                                      \
-        }                                                \
-    } while (false)
-
-/// TINT_ASSERT_OR_RETURN_VALUE() is a macro for checking the expression is true, triggering a
-/// TINT_ICE if it is not and returning a value from the calling function.
-/// The ICE message contains the callsite's file and line.
-#define TINT_ASSERT_OR_RETURN_VALUE(condition, value)    \
-    do {                                                 \
-        if (TINT_UNLIKELY(!(condition))) {               \
-            TINT_ICE() << "TINT_ASSERT(" #condition ")"; \
-            return value;                                \
         }                                                \
     } while (false)
 
