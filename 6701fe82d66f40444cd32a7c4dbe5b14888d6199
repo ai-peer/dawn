@@ -34,6 +34,24 @@
       "parentUuid": "7de72816_12e8df16",
       "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc680c9_ce174368",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-05-01T19:57:16Z",
+      "side": 1,
+      "message": "In fact, maybe you could pass \"call\" to the lambda hand refactor the -\u003eDeclaration()-\u003eargs[0] and GetVal(texture_expr)-\u003eRootIdentifier() out of all but one of them. There would be a bit of duplicated code in the kTextureLoad case, though.",
+      "parentUuid": "d0baa0cd_5e40c54f",
+      "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
