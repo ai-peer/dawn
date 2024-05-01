@@ -48,7 +48,6 @@ EShLanguage PipelineStageToEshLanguage(tint::ast::PipelineStage stage) {
             return EShLangCompute;
         default:
             TINT_UNREACHABLE();
-            return EShLangVertex;
     }
 }
 

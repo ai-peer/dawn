@@ -43,7 +43,6 @@ MultiInBlock::~MultiInBlock() = default;
 
 MultiInBlock* MultiInBlock::Clone(CloneContext&) {
     TINT_UNREACHABLE() << "blocks must be cloned with CloneInto";
-    return nullptr;
 }
 
 void MultiInBlock::CloneInto(CloneContext& ctx, Block* out) {

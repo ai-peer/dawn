@@ -411,7 +411,6 @@ struct State {
             default:
                 TINT_UNIMPLEMENTED() << "extractBits polyfill level";
         }
-        return nullptr;
     }
 
     /// Polyfill a `firstLeadingBit()` builtin call.
@@ -565,7 +564,6 @@ struct State {
             default:
                 TINT_UNIMPLEMENTED() << "insertBits polyfill level";
         }
-        return nullptr;
     }
 
     /// Polyfill a `saturate()` builtin call.

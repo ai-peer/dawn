@@ -231,7 +231,6 @@ struct State {
                     return b.Constant(u32(SpvScopeDevice));
                 default:
                     TINT_UNREACHABLE() << "unhandled atomic address space";
-                    return nullptr;
             }
         }();
         auto* memory_semantics = b.Constant(u32(SpvMemorySemanticsMaskNone));
