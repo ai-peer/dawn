@@ -22,6 +22,30 @@
       },
       "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d365ac_7d7032f7",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-01T18:51:18Z",
+      "side": 1,
+      "message": "I actually much prefer this solution, as the validate module is also used by the CLI, and this part of the API and global variable would be unused in that case. I think it makes more sense for this global to live in the fuzzer module.",
+      "parentUuid": "8f8d9ca6_733d8a10",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 5
+      },
+      "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
