@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c58dd62_01bf3236",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-01T00:54:14Z",
+      "side": 1,
+      "message": "Creating a non-monitored fence on an adapter which supports monitored fence is not allowed always. To make tests work, I have to create monitored fence temporarily. In follow up cls, we will check adaptor\u0027s capabilities, and create right fence accordingly.",
+      "range": {
+        "startLine": 312,
+        "startChar": 45,
+        "endLine": 312,
+        "endChar": 49
+      },
+      "revId": "a1468c8b72198ed799213d31da40161a0c716579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
