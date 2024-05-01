@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c9807d_8f7cde63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-01T22:04:45Z",
+      "side": 1,
+      "message": "I\u0027m surprised that no compilers complain about `TINT_ASSERT_OR_RETURN` and `TINT_ASSERT_OR_RETURN_VALUE`, since their `return` statements are unreachable. Presumably we can safely get rid of those two macros now?",
+      "revId": "b1e04a7f0aacad82c7bebd931e5625762c7bf2f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
