@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "435aab44_a5e88b2f",
+        "filename": "src/dawn/native/d3d11/DeviceInfoD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-01T17:09:05Z",
+      "side": 1,
+      "message": "might as well have the caller pass in IDXGIAdapter4",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 0
+      },
+      "revId": "39ea6f8ed18f449522db77e455bea124f062a6be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a419c7d9_789b6570",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 4
