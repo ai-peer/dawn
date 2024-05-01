@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19e5284_eebdb3e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-01T21:10:13Z",
+      "side": 1,
+      "message": "Much nicer, thanks for the rebase.\nAs discussed offline - not 100% sure about the implcitness of the validation, but happy to iterate.",
+      "revId": "30914ac7c3792085f7c1ea912da8ab23a5d81b13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
