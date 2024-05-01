@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c3df76_a7cb162c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3377038
+      },
+      "writtenOn": "2024-05-01T22:36:42Z",
+      "side": 1,
+      "message": "I accidentally absolutely mangled this.\n\nI somehow voltroned two commits together into one with `git cl upload`.\n\nShould be corrected now. Although the commit history is now unnecessarily messy.",
+      "revId": "c7854c744a0af11e05708393f3081319edb2ca24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
