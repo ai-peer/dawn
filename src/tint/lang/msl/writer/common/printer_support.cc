@@ -124,18 +124,10 @@ SizeAndAlign MslPackedTypeSizeAndAlign(const core::type::Type* ty) {
 
         // https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf
         // 2.1 Scalar Data Types
-        [&](const core::type::U32*) {
-            return SizeAndAlign{4, 4};
-        },
-        [&](const core::type::I32*) {
-            return SizeAndAlign{4, 4};
-        },
-        [&](const core::type::F32*) {
-            return SizeAndAlign{4, 4};
-        },
-        [&](const core::type::F16*) {
-            return SizeAndAlign{2, 2};
-        },
+        [&](const core::type::U32*) { return SizeAndAlign{4, 4}; },
+        [&](const core::type::I32*) { return SizeAndAlign{4, 4}; },
+        [&](const core::type::F32*) { return SizeAndAlign{4, 4}; },
+        [&](const core::type::F16*) { return SizeAndAlign{2, 2}; },
 
         [&](const core::type::Vector* vec) {
             auto num_els = vec->Width();
@@ -156,7 +148,6 @@ SizeAndAlign MslPackedTypeSizeAndAlign(const core::type::Type* ty) {
                 }
             }
             TINT_UNREACHABLE() << "Unhandled vector element type " << el_ty->TypeInfo().name;
-            return SizeAndAlign{};
         },
 
         [&](const core::type::Matrix* mat) {
@@ -199,14 +190,12 @@ SizeAndAlign MslPackedTypeSizeAndAlign(const core::type::Type* ty) {
             }
 
             TINT_UNREACHABLE() << "Unhandled matrix element type " << el_ty->TypeInfo().name;
-            return SizeAndAlign{};
         },
 
         [&](const core::type::Array* arr) {
             if (TINT_UNLIKELY(!arr->IsStrideImplicit())) {
                 TINT_ICE()
                     << "arrays with explicit strides should not exist past the SPIR-V reader";
-                return SizeAndAlign{};
             }
             if (arr->Count()->Is<core::type::RuntimeArrayCount>()) {
                 return SizeAndAlign{arr->Stride(), arr->Align()};
@@ -215,7 +204,6 @@ SizeAndAlign MslPackedTypeSizeAndAlign(const core::type::Type* ty) {
                 return SizeAndAlign{arr->Stride() * count.value(), arr->Align()};
             }
             TINT_ICE() << core::type::Array::kErrExpectedConstantCount;
-            return SizeAndAlign{};
         },
 
         [&](const core::type::Struct* str) {

@@ -118,7 +118,6 @@ class Parser {
             default:
                 TINT_UNIMPLEMENTED()
                     << "unhandled SPIR-V storage class: " << static_cast<uint32_t>(sc);
-                return core::AddressSpace::kUndefined;
         }
     }
 
@@ -156,7 +155,6 @@ class Parser {
                 return core::BuiltinValue::kWorkgroupId;
             default:
                 TINT_UNIMPLEMENTED() << "unhandled SPIR-V BuiltIn: " << static_cast<uint32_t>(b);
-                return core::BuiltinValue::kUndefined;
         }
     }
 
@@ -189,7 +187,6 @@ class Parser {
                     } else {
                         TINT_UNREACHABLE()
                             << "unsupported floating point type width: " << float_ty->width();
-                        return ty_.void_();
                     }
                 }
                 case spvtools::opt::analysis::Type::kVector: {
@@ -214,7 +211,6 @@ class Parser {
                 }
                 default:
                     TINT_UNIMPLEMENTED() << "unhandled SPIR-V type: " << type->str();
-                    return ty_.void_();
             }
         });
     }
@@ -233,7 +229,6 @@ class Parser {
         TINT_ASSERT_OR_RETURN_VALUE(!length.words.empty(), ty_.void_());
         if (length.words[0] != spvtools::opt::analysis::Array::LengthInfo::kConstant) {
             TINT_UNIMPLEMENTED() << "specialized array lengths";
-            return ty_.void_();
         }
 
         // Get the value from the constant used for the element count.
@@ -253,7 +248,6 @@ class Parser {
     const core::type::Type* EmitStruct(const spvtools::opt::analysis::Struct* struct_ty) {
         if (struct_ty->NumberOfComponents() == 0) {
             TINT_ICE() << "empty structures are not supported";
-            return ty_.void_();
         }
 
         // Build a list of struct members.
@@ -305,7 +299,6 @@ class Parser {
 
                         default:
                             TINT_UNIMPLEMENTED() << "unhandled member decoration: " << deco[0];
-                            break;
                     }
                 }
             }
@@ -338,7 +331,6 @@ class Parser {
                 return b_.Constant(Constant(c));
             }
             TINT_UNREACHABLE() << "missing value for result ID " << id;
-            return nullptr;
         });
     }
 
@@ -370,7 +362,6 @@ class Parser {
                 return b_.ConstantValue(f32(f->GetFloat()));
             } else {
                 TINT_UNREACHABLE() << "unsupported floating point type width";
-                return nullptr;
             }
         }
         if (auto* v = constant->AsVectorConstant()) {
@@ -402,7 +393,6 @@ class Parser {
             return ir_.constant_values.Composite(Type(s->type()), std::move(elements));
         }
         TINT_UNIMPLEMENTED() << "unhandled constant type";
-        return nullptr;
     }
 
     /// Register an IR value for a SPIR-V result ID.
@@ -638,7 +628,6 @@ class Parser {
                     break;
                 default:
                     TINT_UNIMPLEMENTED() << "unhandled decoration " << d;
-                    break;
             }
         }
 
