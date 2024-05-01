@@ -83,6 +83,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a09265f5_cb862876",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-01T00:33:22Z",
+      "side": 1,
+      "message": "(looked it up)\n\nhttps://github.com/webgpu-native/webgpu-headers/issues/199#issuecomment-1710784711\n\n\u003e Make the callback info structs extensible. Change CallbackMode to an enum because now we don’t need extensibility and it only has 3 options (None, AllowProcessEvents, AllowSpontaneous).",
+      "parentUuid": "9716ee1e_ce7c2d75",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46dbdfa4_fd9a5f44",
         "filename": "generator/templates/api_cpp.h",
         "patchSetId": 12
