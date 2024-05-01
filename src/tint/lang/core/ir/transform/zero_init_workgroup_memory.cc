@@ -35,6 +35,10 @@
 #include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/utils/containers/reverse.h"
 
+// MSVC 14.34 can crash with an internal compiler error in Vector::Sort(), when optimizations are
+// enabled.
+TINT_MSVC_ONLY(TINT_BEGIN_DISABLE_OPTIMIZATIONS();)
+
 using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
 
