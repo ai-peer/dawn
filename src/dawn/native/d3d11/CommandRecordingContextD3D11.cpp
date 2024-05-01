@@ -142,6 +142,10 @@ MaybeError ScopedCommandRecordingContext::AcquireKeyedMutex(Ref<d3d::KeyedMutex>
     return {};
 }
 
+void ScopedCommandRecordingContext::RequireFence() const {
+    Get()->mRequireFence = true;
+}
+
 ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
     CommandRecordingContextGuard&& guard)
     : ScopedCommandRecordingContext(std::move(guard)),
@@ -273,6 +277,12 @@ void CommandRecordingContext::ReleaseKeyedMutexes() {
         keyedMutex->ReleaseKeyedMutex();
     }
     mAcquiredKeyedMutexes.clear();
+}
+
+bool CommandRecordingContext::ResetRequireFence() {
+    bool requireFence = mRequireFence;
+    mRequireFence = false;
+    return requireFence;
 }
 
 }  // namespace dawn::native::d3d11
