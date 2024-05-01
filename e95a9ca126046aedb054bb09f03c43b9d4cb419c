@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bfa225f_7b69f452",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-01T20:55:37Z",
+      "side": 1,
+      "message": "Why was this validation moved here?",
+      "revId": "e95a9ca126046aedb054bb09f03c43b9d4cb419c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
