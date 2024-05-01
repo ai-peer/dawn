@@ -970,14 +970,24 @@ class Builder {
     }
 
     /// Creates a user function call instruction
+    /// @param result the instruction result to use
+    /// @param func the function to call
+    /// @param args the call arguments
+    /// @returns the instruction
+    template <typename... ARGS>
+    ir::UserCall* Call(InstructionResult* result, ir::Function* func, ARGS&&... args) {
+        return Append(ir.allocators.instructions.Create<ir::UserCall>(
+            result, func, Values(std::forward<ARGS>(args)...)));
+    }
+
+    /// Creates a user function call instruction
     /// @param type the return type of the call
     /// @param func the function to call
     /// @param args the call arguments
     /// @returns the instruction
     template <typename... ARGS>
     ir::UserCall* Call(const core::type::Type* type, ir::Function* func, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::UserCall>(
-            InstructionResult(type), func, Values(std::forward<ARGS>(args)...)));
+        return Call(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
     /// Creates a user function call instruction
@@ -988,8 +998,20 @@ class Builder {
     template <typename TYPE, typename... ARGS>
     ir::UserCall* Call(ir::Function* func, ARGS&&... args) {
         auto* type = ir.Types().Get<TYPE>();
-        return Append(ir.allocators.instructions.Create<ir::UserCall>(
-            InstructionResult(type), func, Values(std::forward<ARGS>(args)...)));
+        return Call(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
+    }
+
+    /// Creates a core builtin call instruction
+    /// @param result the instruction result to use
+    /// @param func the builtin function to call
+    /// @param args the call arguments
+    /// @returns the instruction
+    template <typename... ARGS>
+    ir::CoreBuiltinCall* Call(core::ir::InstructionResult* result,
+                              core::BuiltinFn func,
+                              ARGS&&... args) {
+        return Append(ir.allocators.instructions.Create<ir::CoreBuiltinCall>(
+            result, func, Values(std::forward<ARGS>(args)...)));
     }
 
     /// Creates a core builtin call instruction
@@ -999,8 +1021,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::CoreBuiltinCall* Call(const core::type::Type* type, core::BuiltinFn func, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::CoreBuiltinCall>(
-            InstructionResult(type), func, Values(std::forward<ARGS>(args)...)));
+        return Call(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
     /// Creates a core builtin call instruction
@@ -1011,11 +1032,22 @@ class Builder {
     template <typename TYPE, typename... ARGS>
     ir::CoreBuiltinCall* Call(core::BuiltinFn func, ARGS&&... args) {
         auto* type = ir.Types().Get<TYPE>();
-        return Append(ir.allocators.instructions.Create<ir::CoreBuiltinCall>(
-            InstructionResult(type), func, Values(std::forward<ARGS>(args)...)));
+        return Call(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
-    /// Creates a core builtin call instruction
+    /// Creates a builtin call instruction
+    /// @param result the instruction result to use
+    /// @param func the builtin function to call
+    /// @param args the call arguments
+    /// @returns the instruction
+    template <typename KLASS, typename FUNC, typename... ARGS>
+    tint::traits::EnableIf<tint::traits::IsTypeOrDerived<KLASS, ir::BuiltinCall>, KLASS*>
+    Call(InstructionResult* result, FUNC func, ARGS&&... args) {
+        return Append(ir.allocators.instructions.Create<KLASS>(
+            result, func, Values(std::forward<ARGS>(args)...)));
+    }
+
+    /// Creates a builtin call instruction
     /// @param type the return type of the call
     /// @param func the builtin function to call
     /// @param args the call arguments
@@ -1023,8 +1055,7 @@ class Builder {
     template <typename KLASS, typename FUNC, typename... ARGS>
     tint::traits::EnableIf<tint::traits::IsTypeOrDerived<KLASS, ir::BuiltinCall>, KLASS*>
     Call(const core::type::Type* type, FUNC func, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<KLASS>(
-            InstructionResult(type), func, Values(std::forward<ARGS>(args)...)));
+        return Call<KLASS>(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
     /// Creates a value conversion instruction to the template type T
