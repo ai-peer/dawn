@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "692e3de6_61aa452b",
+        "filename": "src/dawn/native/d3d11/DeviceInfoD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-01T18:47:52Z",
+      "side": 1,
+      "message": "didn\u0027t seem that necessary to change this. Could have passed in IDXGIAdapter4 so there are less inputs that could impact the result.",
+      "range": {
+        "startLine": 38,
+        "startChar": 43,
+        "endLine": 38,
+        "endChar": 80
+      },
+      "revId": "00fc1639d96c05cfc2cc4cce8fda963b32ea0654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
