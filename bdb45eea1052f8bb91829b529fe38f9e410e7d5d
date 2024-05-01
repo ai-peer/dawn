@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407da554_e1f83ec1",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-01T21:10:58Z",
+      "side": 1,
+      "message": "What\u0027s the reason for not using `scope_stack.h`?",
+      "revId": "bdb45eea1052f8bb91829b529fe38f9e410e7d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a9d15d_7339b64b",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-01T21:10:58Z",
+      "side": 1,
+      "message": "Is this not taken care of with the code in `CheckInstruction()`?",
+      "revId": "bdb45eea1052f8bb91829b529fe38f9e410e7d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
