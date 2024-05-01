@@ -80,7 +80,7 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
 }  // namespace
 
 PhysicalDevice::PhysicalDevice(Backend* backend,
-                               ComPtr<IDXGIAdapter3> hardwareAdapter,
+                               ComPtr<IDXGIAdapter4> hardwareAdapter,
                                ComPtr<ID3D11Device> d3d11Device)
     : Base(backend, std::move(hardwareAdapter), wgpu::BackendType::D3D11),
       mIsSharedD3D11Device(!!d3d11Device),
@@ -169,7 +169,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
     }
 
     mFeatureLevel = mD3D11Device->GetFeatureLevel();
-    DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(GetHardwareAdapter(), mD3D11Device));
+    DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(mHardwareAdapter, mD3D11Device));
 
     // Base::InitializeImpl() cannot distinguish between discrete and integrated GPUs, so we need to
     // overwrite it.
@@ -206,11 +206,13 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::PixelLocalStorageCoherent);
     }
 
-    // Always expose SharedTextureMemoryDXGISharedHandle, since the d3d11 should be able to
-    // import shared handles which are exported from d3d device.
-    EnableFeature(Feature::SharedTextureMemoryDXGISharedHandle);
     EnableFeature(Feature::SharedTextureMemoryD3D11Texture2D);
-    EnableFeature(Feature::SharedFenceDXGISharedHandle);
+    if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
+        EnableFeature(Feature::SharedTextureMemoryDXGISharedHandle);
+    }
+    if (mDeviceInfo.supportsMonitoredFence || mDeviceInfo.supportsNonMonitoredFence) {
+        EnableFeature(Feature::SharedFenceDXGISharedHandle);
+    }
 
     UINT formatSupport = 0;
     HRESULT hr = mD3D11Device->CheckFormatSupport(DXGI_FORMAT_B8G8R8A8_UNORM, &formatSupport);
@@ -316,6 +318,7 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // D3D11 can only clear RTV with float values.
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
+    deviceToggles->Default(Toggle::D3D11UseUnmonitoredFence, !mDeviceInfo.supportsMonitoredFence);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
