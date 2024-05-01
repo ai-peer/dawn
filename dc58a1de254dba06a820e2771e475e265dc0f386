@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2242624_1aa3db52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-01T16:23:38Z",
+      "side": 1,
+      "message": "Great job!",
+      "revId": "dc58a1de254dba06a820e2771e475e265dc0f386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f367746_a8247b15",
+        "filename": "src/tint/lang/hlsl/validate/validate.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-01T16:23:38Z",
+      "side": 1,
+      "message": "übernit: you shouldn\u0027t need the `{` `}`",
+      "revId": "dc58a1de254dba06a820e2771e475e265dc0f386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
