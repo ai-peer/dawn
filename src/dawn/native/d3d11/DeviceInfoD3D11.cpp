@@ -34,7 +34,7 @@
 
 namespace dawn::native::d3d11 {
 
-ResultOrError<DeviceInfo> GatherDeviceInfo(IDXGIAdapter3* adapter,
+ResultOrError<DeviceInfo> GatherDeviceInfo(const ComPtr<IDXGIAdapter3>& adapter,
                                            const ComPtr<ID3D11Device>& device) {
     DeviceInfo info = {};
 
@@ -64,10 +64,17 @@ ResultOrError<DeviceInfo> GatherDeviceInfo(IDXGIAdapter3* adapter,
     info.supportsSharedResourceCapabilityTier2 =
         featureOptions5.SharedResourceTier >= D3D11_SHARED_RESOURCE_TIER_2;
 
-    DXGI_ADAPTER_DESC adapterDesc;
-    DAWN_TRY(CheckHRESULT(adapter->GetDesc(&adapterDesc), "IDXGIAdapter3::GetDesc"));
-    info.dedicatedVideoMemory = adapterDesc.DedicatedVideoMemory;
-    info.sharedSystemMemory = adapterDesc.SharedSystemMemory;
+    ComPtr<IDXGIAdapter4> adapter4;
+    // IDXGIAdapter4 is supported since Windows 8 and Platform Update for Windows 7.
+    DAWN_TRY(CheckHRESULT(adapter.As(&adapter4), "Get IDXGIAdapter4 failed"));
+
+    DXGI_ADAPTER_DESC3 adapterDesc3;
+    DAWN_TRY(CheckHRESULT(adapter4->GetDesc3(&adapterDesc3), "IDXGIAdapter3::GetDesc3()"));
+    info.dedicatedVideoMemory = adapterDesc3.DedicatedVideoMemory;
+    info.sharedSystemMemory = adapterDesc3.SharedSystemMemory;
+    info.supportsMonitoredFence = adapterDesc3.Flags & DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES;
+    info.supportsNonMonitoredFence =
+        adapterDesc3.Flags & DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES;
 
     return std::move(info);
 }
