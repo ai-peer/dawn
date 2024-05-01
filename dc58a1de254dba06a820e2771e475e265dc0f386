@@ -33,6 +33,24 @@
       "message": "übernit: you shouldn\u0027t need the `{` `}`",
       "revId": "dc58a1de254dba06a820e2771e475e265dc0f386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eeceaa5_3ba8ec6c",
+        "filename": "src/tint/lang/hlsl/validate/validate.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-01T17:36:54Z",
+      "side": 1,
+      "message": "True, I\u0027ll submit as is to avoid the long CQ time again, but will fix in the future.",
+      "parentUuid": "5f367746_a8247b15",
+      "revId": "dc58a1de254dba06a820e2771e475e265dc0f386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
