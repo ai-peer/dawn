@@ -38,6 +38,8 @@
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/CommandBufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
+#include "dawn/native/d3d11/DeviceInfoD3D11.h"
+#include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/SharedFenceD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -78,8 +80,10 @@ class UnmonitoredQueue final : public Queue {
 };
 
 ResultOrError<Ref<Queue>> Queue::Create(Device* device, const QueueDescriptor* descriptor) {
+    const auto& deviceInfo = ToBackend(device->GetPhysicalDevice())->GetDeviceInfo();
     // TODO(crbug.com/335553337): Choose monitored or unmonitored queue by device capabilities
-    if (device->IsToggleEnabled(Toggle::D3D11UseUnmonitoredFence)) {
+    if (device->IsToggleEnabled(Toggle::D3D11UseUnmonitoredFence) ||
+        !deviceInfo.supportsMonitoredFence) {
         Ref<UnmonitoredQueue> unmonitoredQueue =
             AcquireRef(new UnmonitoredQueue(device, descriptor));
         DAWN_TRY(unmonitoredQueue->Initialize());
@@ -92,10 +96,24 @@ ResultOrError<Ref<Queue>> Queue::Create(Device* device, const QueueDescriptor* d
 }
 
 MaybeError Queue::Initialize(bool isMonitored) {
+    const auto& deviceInfo = ToBackend(GetDevice()->GetPhysicalDevice())->GetDeviceInfo();
     // Create the fence.
     D3D11_FENCE_FLAG flags = D3D11_FENCE_FLAG_SHARED;
     if (!isMonitored) {
-        flags |= D3D11_FENCE_FLAG_NON_MONITORED;
+        if (deviceInfo.supportsNonMonitoredFence) {
+            flags |= D3D11_FENCE_FLAG_NON_MONITORED;
+            // For adapters that support both monitored and non-monitored fences, non-monitored
+            // fences are only supported when created with the D3D12_FENCE_FLAG_SHARED and
+            // D3D12_FENCE_FLAG_SHARED_CROSS_ADAPTER flags
+            // https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_6/ne-dxgi1_6-dxgi_adapter_flag3
+            if (deviceInfo.supportsMonitoredFence) {
+                flags |= D3D11_FENCE_FLAG_SHARED_CROSS_ADAPTER;
+            }
+        } else {
+            return DAWN_INTERNAL_ERROR("D3D11: non-monitored fence is not supported");
+        }
+    } else {
+        DAWN_ASSERT(deviceInfo.supportsMonitoredFence);
     }
     DAWN_TRY(CheckHRESULT(
         ToBackend(GetDevice())->GetD3D11Device5()->CreateFence(0, flags, IID_PPV_ARGS(&mFence)),
