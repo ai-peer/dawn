@@ -2599,6 +2599,119 @@ note: # Disassembly
 )");
 }
 
+TEST_F(IR_ValidatorTest, NextIterationOutsideOfLoop) {
+    auto* f = b.Function("my_func", ty.void_());
+    b.Append(f->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Body(), [&] { b.ExitLoop(loop); });
+        b.NextIteration(loop);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_NE(res, Success);
+    EXPECT_EQ(res.Failure().reason.Str(),
+              R"(:8:5 error: next_iteration: called outside of associated loop
+    next_iteration  # -> $B2
+    ^^^^^^^^^^^^^^
+
+:2:3 note: in block
+  $B1: {
+  ^^^
+
+note: # Disassembly
+%my_func = func():void {
+  $B1: {
+    loop [b: $B2] {  # loop_1
+      $B2: {  # body
+        exit_loop  # loop_1
+      }
+    }
+    next_iteration  # -> $B2
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidatorTest, ContinuingUseValueBeforeNextIteration) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* value = b.Let("value", 1_i);
+    b.Append(f->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Body(), [&] {
+            b.Append(value);
+            b.Append(b.If(true)->True(), [&] { b.NextIteration(loop); });
+            b.ExitLoop(loop);
+        });
+        b.Append(loop->Continuing(), [&] {
+            b.Let("use", value);
+            b.NextIteration(loop);
+        });
+        b.Return(f);
+    });
+
+    ASSERT_EQ(ir::Validate(mod), Success);
+}
+
+TEST_F(IR_ValidatorTest, ContinuingUseValueAfterNextIteration) {
+    auto* f = b.Function("my_func", ty.void_());
+    auto* value = b.Let("value", 1_i);
+    b.Append(f->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Body(), [&] {
+            b.Append(b.If(true)->True(), [&] { b.NextIteration(loop); });
+            b.Append(value);
+            b.ExitLoop(loop);
+        });
+        b.Append(loop->Continuing(), [&] {
+            b.Let("use", value);
+            b.NextIteration(loop);
+        });
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_NE(res, Success);
+    EXPECT_EQ(res.Failure().reason.Str(),
+              R"(:14:24 error: let: %value cannot be used in continuing block as it is declared after the first next_iteration
+        %use:i32 = let %value
+                       ^^^^^^
+
+:4:7 note: in block
+      $B2: {  # body
+      ^^^
+
+:10:9 note: %value declared here
+        %value:i32 = let 1i
+        ^^^^^^^^^^
+
+:7:13 note: loop body's first next_iteration instruction
+            next_iteration  # -> $B2
+            ^^^^^^^^^^^^^^
+
+note: # Disassembly
+%my_func = func():void {
+  $B1: {
+    loop [b: $B2, c: $B3] {  # loop_1
+      $B2: {  # body
+        if true [t: $B4] {  # if_1
+          $B4: {  # true
+            next_iteration  # -> $B2
+          }
+        }
+        %value:i32 = let 1i
+        exit_loop  # loop_1
+      }
+      $B3: {  # continuing
+        %use:i32 = let %value
+        next_iteration  # -> $B2
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
 TEST_F(IR_ValidatorTest, ExitLoop) {
     auto* loop = b.Loop();
     loop->Continuing()->Append(b.NextIteration(loop));
