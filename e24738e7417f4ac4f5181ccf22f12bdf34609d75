@@ -101,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37583b7e_486bb823",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-01T20:50:18Z",
+      "side": 1,
+      "message": "Ahh I forgot about that, thanks for checking.\n\nIn that case we should make it extensible now (either make callback infos extensible unconditionally, or assert that dawn.json defines them as extensible)",
+      "parentUuid": "a09265f5_cb862876",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46dbdfa4_fd9a5f44",
         "filename": "generator/templates/api_cpp.h",
         "patchSetId": 12
