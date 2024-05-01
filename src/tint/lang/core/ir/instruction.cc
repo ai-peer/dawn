@@ -73,4 +73,11 @@ void Instruction::Remove() {
     Block()->Remove(this);
 }
 
+InstructionResult* Instruction::DetachResult() {
+    TINT_ASSERT_OR_RETURN_VALUE(Results().Length() == 1u, nullptr);
+    auto* result = Results()[0];
+    SetResults({});
+    return result;
+}
+
 }  // namespace tint::core::ir
