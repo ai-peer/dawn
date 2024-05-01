@@ -251,6 +251,7 @@ namespace tint {
 template <typename RETURN_TYPE = tint::detail::Infer, typename T = CastableBase, typename... ARGS>
 inline auto Switch(T* object, ARGS&&... args) {
     TINT_BEGIN_DISABLE_WARNING(UNUSED_VALUE);
+    TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
 
     using ArgsTuple = std::tuple<ARGS...>;
     static constexpr int kMustMatchCaseIndex =
@@ -314,6 +315,7 @@ inline auto Switch(T* object, ARGS&&... args) {
     // If the case function is called and it returns a value, then this is copy constructed to the
     // `result` pointer.
     auto try_case = [&](auto&& case_fn) {
+        TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
         using CaseFunc = std::decay_t<decltype(case_fn)>;
         bool success = false;
         if constexpr (std::is_same_v<CaseFunc, SwitchMustMatchCase>) {
@@ -341,6 +343,7 @@ inline auto Switch(T* object, ARGS&&... args) {
             }
         }
         return success;
+        TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
     };
 
     // Use a logical-or fold expression to try each of the cases in turn, until one matches the
@@ -362,6 +365,7 @@ inline auto Switch(T* object, ARGS&&... args) {
         }
     }
 
+    TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
     TINT_END_DISABLE_WARNING(UNUSED_VALUE);
 }
 
