@@ -45,6 +45,30 @@
       },
       "revId": "17dffc859ea0be085c1de42dcc4c00bded46739e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fcc665c_6068e1d4",
+        "filename": "src/tint/lang/core/ir/transform/preserve_padding.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-01T15:32:45Z",
+      "side": 1,
+      "message": "You\u0027re right, I thought the `end()` was fixed for these range-based loops, but it appears that\u0027s not the case for these iterators. I should really learn C++ some day.",
+      "parentUuid": "e9f9d4a9_e644b790",
+      "range": {
+        "startLine": 64,
+        "startChar": 8,
+        "endLine": 64,
+        "endChar": 45
+      },
+      "revId": "17dffc859ea0be085c1de42dcc4c00bded46739e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
