@@ -183,8 +183,11 @@ GPUDevice::GPUDevice(Napi::Env env,
                     break;
                 case WGPUDeviceLostReason_Destroyed:
                 case WGPUDeviceLostReason_InstanceDropped:
+                    UNREACHABLE("WGPUDeviceLostReason_InstanceDropped");
+                    break;
                 case WGPUDeviceLostReason_Undefined:
-                    r = interop::GPUDeviceLostReason::kDestroyed;
+                case WGPUDeviceLostReason_Unknown:
+                    r = interop::GPUDeviceLostReason::kUnknown;
                     break;
             }
             auto* self = static_cast<GPUDevice*>(userdata);
