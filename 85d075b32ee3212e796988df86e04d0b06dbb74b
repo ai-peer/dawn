@@ -94,6 +94,30 @@
       },
       "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c360d6d1_b6754e43",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-01T20:47:23Z",
+      "side": 1,
+      "message": "Reworked on top of your CL.",
+      "parentUuid": "3b8e980e_d7451993",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 5
+      },
+      "revId": "85d075b32ee3212e796988df86e04d0b06dbb74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
