@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "205a3689_b0310b54",
+        "filename": "src/tint/utils/command/command_posix.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-01T18:44:14Z",
+      "side": 1,
+      "message": "Should we skip over this if `name` starts with a `/` ?",
+      "revId": "eb59416bee1c0e900201f8c20a42b6a42ab7d4ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
