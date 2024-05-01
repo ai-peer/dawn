@@ -30,12 +30,13 @@
 #include <utility>
 
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/PlatformFunctionsD3D11.h"
 
 namespace dawn::native::d3d11 {
 
-ResultOrError<DeviceInfo> GatherDeviceInfo(IDXGIAdapter3* adapter,
-                                           const ComPtr<ID3D11Device>& device) {
+ResultOrError<DeviceInfo> GatherDeviceInfo(const PhysicalDevice* physicalDevice,
+                                           ID3D11Device* device) {
     DeviceInfo info = {};
 
     D3D11_FEATURE_DATA_D3D11_OPTIONS2 options2;
@@ -64,10 +65,14 @@ ResultOrError<DeviceInfo> GatherDeviceInfo(IDXGIAdapter3* adapter,
     info.supportsSharedResourceCapabilityTier2 =
         featureOptions5.SharedResourceTier >= D3D11_SHARED_RESOURCE_TIER_2;
 
-    DXGI_ADAPTER_DESC adapterDesc;
-    DAWN_TRY(CheckHRESULT(adapter->GetDesc(&adapterDesc), "IDXGIAdapter3::GetDesc"));
-    info.dedicatedVideoMemory = adapterDesc.DedicatedVideoMemory;
-    info.sharedSystemMemory = adapterDesc.SharedSystemMemory;
+    DXGI_ADAPTER_DESC3 adapterDesc3;
+    DAWN_TRY(CheckHRESULT(physicalDevice->GetHardwareAdapter()->GetDesc3(&adapterDesc3),
+                          "IDXGIAdapter4::GetDesc3()"));
+    info.dedicatedVideoMemory = adapterDesc3.DedicatedVideoMemory;
+    info.sharedSystemMemory = adapterDesc3.SharedSystemMemory;
+    info.supportsMonitoredFence = adapterDesc3.Flags & DXGI_ADAPTER_FLAG3_SUPPORT_MONITORED_FENCES;
+    info.supportsNonMonitoredFence =
+        adapterDesc3.Flags & DXGI_ADAPTER_FLAG3_SUPPORT_NON_MONITORED_FENCES;
 
     return std::move(info);
 }
