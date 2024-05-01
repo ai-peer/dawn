@@ -70,6 +70,10 @@ EventManager::~EventManager() {
 }
 
 std::pair<FutureID, bool> EventManager::TrackEvent(std::unique_ptr<TrackedEvent> event) {
+    if (!ValidateCallbackMode(event->GetCallbackMode())) {
+        return {kNullFutureID, false};
+    }
+
     FutureID futureID = mNextFutureID++;
 
     switch (mState) {
