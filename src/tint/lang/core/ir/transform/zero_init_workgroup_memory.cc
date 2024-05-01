@@ -120,6 +120,10 @@ struct State {
         }
     }
 
+    // MSVC 14.34 can crash with an internal compiler error in Vector::Sort(), only when
+    // optimizations are enabled.
+    TINT_MSVC_ONLY(TINT_BEGIN_DISABLE_OPTIMIZATIONS();)
+
     /// Process an entry point function to zero-initialize the workgroup variables that it uses.
     /// @param func the entry point function
     void ProcessEntryPoint(Function* func) {
@@ -179,6 +183,8 @@ struct State {
             b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
         });
     }
+
+    TINT_MSVC_ONLY(TINT_END_DISABLE_OPTIMIZATIONS();)
 
     /// Get the set of workgroup variables transitively referenced by @p func.
     /// @param func the function
