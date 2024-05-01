@@ -42,7 +42,6 @@ Block::~Block() = default;
 
 Block* Block::Clone(CloneContext&) {
     TINT_UNREACHABLE() << "blocks must be cloned with CloneInto";
-    return nullptr;
 }
 
 void Block::CloneInto(CloneContext& ctx, Block* out) {

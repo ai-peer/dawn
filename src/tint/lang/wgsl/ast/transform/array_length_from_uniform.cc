@@ -171,7 +171,6 @@ struct ArrayLengthFromUniform::State {
                                     return sem.Get(unary->expr);  // Follow the object
                                 default:
                                     TINT_ICE() << "unexpected unary op: " << unary->op;
-                                    return nullptr;
                             }
                         },
                         TINT_ICE_ON_NO_MATCH);
@@ -224,7 +223,6 @@ struct ArrayLengthFromUniform::State {
         if (TINT_UNLIKELY(global->Type()->Is<core::type::Pointer>())) {
             TINT_ICE() << "storage buffer variable should not be a pointer. "
                           "These should have been removed by the SimplifyPointers transform";
-            return nullptr;
         }
         auto* storage_buffer_type = global->Type()->UnwrapRef();
         const core::type::Array* array_type = nullptr;
@@ -239,7 +237,6 @@ struct ArrayLengthFromUniform::State {
         } else {
             TINT_ICE() << "expected form of arrayLength argument to be &array_var or "
                           "&struct_var.array_member";
-            return nullptr;
         }
         return b.Div(total_size, u32(array_type->Stride()));
     }

@@ -31,7 +31,6 @@
 #include <tuple>
 
 #include "gmock/gmock.h"
-#include "gtest/gtest-spi.h"
 
 #include "src/tint/utils/containers/predicates.h"
 #include "src/tint/utils/macros/compiler.h"
@@ -2108,7 +2107,7 @@ TEST(TintVectorTest, ostream) {
 
 TEST(TintVectorTest, AssertOOBs) {
     TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
-    EXPECT_FATAL_FAILURE(
+    EXPECT_DEATH(
         {
             Vector vec{1};
             [[maybe_unused]] int i = vec[1];
@@ -2121,7 +2120,7 @@ TEST(TintVectorTest, AssertOOBs) {
 TEST(TintVectorTest, AssertPushWhileIterating) {
     TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
     using V = Vector<int, 4>;
-    EXPECT_FATAL_FAILURE(
+    EXPECT_DEATH(
         {
             V vec;
             vec.Push(1);
@@ -2138,7 +2137,7 @@ TEST(TintVectorTest, AssertPushWhileIterating) {
 TEST(TintVectorTest, AssertPopWhileIterating) {
     TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
     using V = Vector<int, 4>;
-    EXPECT_FATAL_FAILURE(
+    EXPECT_DEATH(
         {
             V vec;
             vec.Push(1);
@@ -2155,7 +2154,7 @@ TEST(TintVectorTest, AssertPopWhileIterating) {
 TEST(TintVectorTest, AssertClearWhileIterating) {
     TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
     using V = Vector<int, 4>;
-    EXPECT_FATAL_FAILURE(
+    EXPECT_DEATH(
         {
             V vec;
             vec.Push(1);
@@ -2451,7 +2450,7 @@ TEST(TintVectorRefTest, ostream) {
 }
 
 TEST(TintVectorRefTest, AssertOOBs) {
-    EXPECT_FATAL_FAILURE(
+    EXPECT_DEATH(
         {
             Vector vec{1};
             const VectorRef<int> vec_ref(vec);
