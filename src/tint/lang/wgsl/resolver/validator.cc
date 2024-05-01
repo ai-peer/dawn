@@ -1220,7 +1220,6 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
                     if (TINT_UNLIKELY(!location.has_value())) {
                         TINT_ICE() << "@location has no value";
-                        return false;
                     }
 
                     return LocationAttribute(loc_attr, ty, stage, source);
@@ -1230,7 +1229,6 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
                     if (TINT_UNLIKELY(!blend_src.has_value())) {
                         TINT_ICE() << "@blend_src has no value";
-                        return false;
                     }
 
                     return BlendSrcAttribute(blend_src_attr, stage);
@@ -1250,7 +1248,6 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
                     if (TINT_UNLIKELY(!color.has_value())) {
                         TINT_ICE() << "@color has no value";
-                        return false;
                     }
 
                     return ColorAttribute(col_attr, ty, stage, source, is_input);
@@ -2039,7 +2036,6 @@ bool Validator::ArrayConstructor(const ast::CallExpression* ctor,
 
     if (TINT_UNLIKELY(!c->Is<core::type::ConstantArrayCount>())) {
         TINT_ICE() << "Invalid ArrayCount found";
-        return false;
     }
 
     const auto count = c->As<core::type::ConstantArrayCount>()->value;
@@ -2552,7 +2548,6 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
         rhs = compound->rhs;
     } else {
         TINT_ICE() << "invalid assignment statement";
-        return false;
     }
 
     if (lhs->Is<ast::PhonyExpression>()) {
