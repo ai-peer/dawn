@@ -80,6 +80,10 @@ MaybeError ValidateSamplerDescriptor(DeviceBase* device, const SamplerDescriptor
         DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
                         wgpu::FeatureName::YCbCrVulkanSamplers);
     }
+    if (unpacked.Get<YCbCrVkDescriptor>()) {
+        DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
+                        wgpu::FeatureName::YCbCrVulkanSamplers);
+    }
 
     return {};
 }
@@ -101,6 +105,9 @@ SamplerBase::SamplerBase(DeviceBase* device,
       mCompareFunction(descriptor->compare),
       mMaxAnisotropy(descriptor->maxAnisotropy) {
     if (Unpack(descriptor).Get<vulkan::YCbCrVulkanDescriptor>()) {
+        mIsYCbCr = true;
+    }
+    if (Unpack(descriptor).Get<YCbCrVkDescriptor>()) {
         mIsYCbCr = true;
     }
 }

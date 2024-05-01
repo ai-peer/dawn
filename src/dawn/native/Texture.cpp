@@ -639,6 +639,10 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
         DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
                         wgpu::FeatureName::YCbCrVulkanSamplers);
     }
+    if (descriptor.Get<YCbCrVkDescriptor>()) {
+        DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
+                        wgpu::FeatureName::YCbCrVulkanSamplers);
+    }
 
     return {};
 }
