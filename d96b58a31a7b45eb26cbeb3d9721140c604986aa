@@ -22,6 +22,30 @@
       },
       "revId": "d96b58a31a7b45eb26cbeb3d9721140c604986aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd106dc6_a8bfcff7",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-01T17:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "497feb11_77ab4e4c",
+      "range": {
+        "startLine": 282,
+        "startChar": 30,
+        "endLine": 282,
+        "endChar": 47
+      },
+      "revId": "d96b58a31a7b45eb26cbeb3d9721140c604986aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
