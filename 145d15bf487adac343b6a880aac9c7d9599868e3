@@ -16,6 +16,24 @@
       "message": "LGTM2 (once the test failures are fixed or skipped, natch).\n\nThanks for the changes!",
       "revId": "145d15bf487adac343b6a880aac9c7d9599868e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "620a0e17_c4ed9480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-01T21:28:24Z",
+      "side": 1,
+      "message": "Fixed (now we can just use target for DoTexSubImage)",
+      "parentUuid": "1dc75449_345771f7",
+      "revId": "145d15bf487adac343b6a880aac9c7d9599868e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
