@@ -86,8 +86,8 @@ struct State {
         }
 
         // Construct the matrix from the column vectors and replace the original instruction.
-        auto* replacement = b.Construct(mat, std::move(columns))->Result(0);
-        construct->Result(0)->ReplaceAllUsesWith(replacement);
+        auto* replacement = b.Construct(mat, std::move(columns));
+        replacement->SetResults(Vector{construct->DetachResult()});
         construct->Destroy();
     }
 };

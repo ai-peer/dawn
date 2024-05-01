@@ -79,10 +79,7 @@ struct State {
 
         // Helper to replace the instruction with a new one.
         auto replace = [&](core::ir::Instruction* inst) {
-            if (auto name = ir.NameOf(binary)) {
-                ir.SetName(inst->Result(0), name);
-            }
-            binary->Result(0)->ReplaceAllUsesWith(inst->Result(0));
+            inst->SetResults(Vector{binary->DetachResult()});
             binary->ReplaceWith(inst);
             binary->Destroy();
         };
@@ -158,10 +155,7 @@ struct State {
 
         // Reconstruct the result matrix from the converted columns.
         auto* construct = b.Construct(out_mat, std::move(args));
-        if (auto name = ir.NameOf(convert)) {
-            ir.SetName(construct->Result(0), name);
-        }
-        convert->Result(0)->ReplaceAllUsesWith(construct->Result(0));
+        construct->SetResults(Vector{convert->DetachResult()});
         convert->ReplaceWith(construct);
         convert->Destroy();
     }
