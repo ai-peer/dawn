@@ -16,6 +16,29 @@
       "message": "Adding Antonio to spread the uniformity love around the team more before Ben leaves.",
       "revId": "4948b945e01978fb971cf11604569dc0a950b9eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0502ea4a_fc07675d",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1886,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-02T14:21:33Z",
+      "side": 1,
+      "message": "nit: not introduced in this change, but suggest `style::Variable(NameFor(ident))` instead of the manual `\"\u0027\"`.",
+      "range": {
+        "startLine": 1886,
+        "startChar": 63,
+        "endLine": 1886,
+        "endChar": 67
+      },
+      "revId": "4948b945e01978fb971cf11604569dc0a950b9eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
