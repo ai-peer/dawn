@@ -50,6 +50,23 @@
       "message": "Brandon, can you hit \u0027submit\u0027 for me? I don\u0027t have permission in dawn\u0027s gerrit. Thanks! 😊",
       "revId": "46ebf48f7503a35f19ae3ae1982ed431b7b8e74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67e4ce0e_f0b92e8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-05-02T20:44:12Z",
+      "side": 1,
+      "message": "Sure!",
+      "revId": "46ebf48f7503a35f19ae3ae1982ed431b7b8e74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
