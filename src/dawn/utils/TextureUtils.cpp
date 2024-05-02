@@ -193,7 +193,11 @@ bool IsDepthOrStencilFormat(wgpu::TextureFormat textureFormat) {
 bool IsMultiPlanarFormat(wgpu::TextureFormat textureFormat) {
     switch (textureFormat) {
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
         case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
             return true;
         default:
@@ -309,6 +313,95 @@ bool TextureFormatSupportsReadWriteStorageTexture(wgpu::TextureFormat format) {
 
 bool IsStencilOnlyFormat(wgpu::TextureFormat textureFormat) {
     return textureFormat == wgpu::TextureFormat::Stencil8;
+}
+
+wgpu::TextureSubsampling GetMultiPlaneTextureSubsampling(wgpu::TextureFormat textureFormat) {
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+            return wgpu::TextureSubsampling::e420;
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+            return wgpu::TextureSubsampling::e422;
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
+            return wgpu::TextureSubsampling::e444;
+        default:
+            DAWN_UNREACHABLE();
+            return wgpu::TextureSubsampling::Undefined;
+    }
+}
+
+uint32_t GetMultiPlaneTextureBitsPerPlane(wgpu::TextureFormat textureFormat) {
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
+        case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+            return 8;
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
+            return 16;
+        default:
+            DAWN_UNREACHABLE();
+            return 0;
+    }
+}
+
+uint32_t GetMultiPlaneTextureNumPlanes(wgpu::TextureFormat textureFormat) {
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
+            return 2;
+        case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+            return 3;
+        default:
+            DAWN_UNREACHABLE();
+            return 0;
+    }
+}
+
+uint32_t GetMultiPlaneTextureBytesPerElement(wgpu::TextureFormat textureFormat, size_t plane) {
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
+        case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+            return plane == 1 ? 2 : 1;
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
+            return plane == 1 ? 4 : 2;
+        default:
+            DAWN_UNREACHABLE();
+            return 0;
+    }
+}
+
+uint32_t GetMultiPlaneTextureSubsamplingFactorPerPlane(wgpu::TextureFormat textureFormat,
+                                                       size_t plane,
+                                                       bool isHorizontal) {
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+            return plane == 1 ? 2 : 1;
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+            return plane == 1 && isHorizontal ? 2 : 1;
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
+            return 1;
+        default:
+            DAWN_UNREACHABLE();
+            return 0;
+    }
 }
 
 uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat) {
@@ -441,7 +534,11 @@ uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat) {
 
         // Block size of a multi-planar format depends on aspect.
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
         case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
 
         case wgpu::TextureFormat::Undefined:
@@ -566,7 +663,11 @@ uint32_t GetTextureFormatBlockWidth(wgpu::TextureFormat textureFormat) {
 
         // Block size of a multi-planar format depends on aspect.
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
         case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
 
         case wgpu::TextureFormat::Undefined:
@@ -691,7 +792,11 @@ uint32_t GetTextureFormatBlockHeight(wgpu::TextureFormat textureFormat) {
 
         // Block size of a multi-planar format depends on aspect.
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar422Unorm:
+        case wgpu::TextureFormat::R8BG8Biplanar444Unorm:
         case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar422Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar444Unorm:
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
 
         case wgpu::TextureFormat::Undefined:
