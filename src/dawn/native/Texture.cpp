@@ -903,16 +903,21 @@ Extent3D TextureBase::GetSize(Aspect aspect) const {
         case Aspect::Plane1: {
             DAWN_ASSERT(GetFormat().IsMultiPlanar());
             auto planeSize = mBaseSize;
-            switch (GetFormat().format) {
-                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
-                case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
-                case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+            switch (GetFormat().subSampling) {
+                case TextureSubsampling::e420:
                     if (planeSize.width > 1) {
                         planeSize.width >>= 1;
                     }
                     if (planeSize.height > 1) {
                         planeSize.height >>= 1;
                     }
+                    break;
+                case TextureSubsampling::e422:
+                    if (planeSize.width > 1) {
+                        planeSize.width >>= 1;
+                    }
+                    break;
+                case TextureSubsampling::e444:
                     break;
                 default:
                     DAWN_UNREACHABLE();
