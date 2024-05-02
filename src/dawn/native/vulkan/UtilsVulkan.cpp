@@ -327,23 +327,49 @@ ResultOrError<VkDrmFormatModifierPropertiesEXT> GetFormatModifierProps(
     return DAWN_VALIDATION_ERROR("DRM format modifier %u not supported.", modifier);
 }
 
-MaybeError ValidateCanCreateSamplerYCbCrConversion(
-    const VkSamplerYcbcrConversionCreateInfo& vulkanYCbCrInfo) {
-#if DAWN_PLATFORM_IS(ANDROID)
-    const VkBaseInStructure* chain = static_cast<const VkBaseInStructure*>(vulkanYCbCrInfo.pNext);
-    while (chain != nullptr) {
-        if (chain->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
-            const VkExternalFormatANDROID* vkExternalFormat =
-                reinterpret_cast<const VkExternalFormatANDROID*>(chain);
-            DAWN_INVALID_IF((vkExternalFormat->externalFormat == 0 &&
-                             vulkanYCbCrInfo.format == VK_FORMAT_UNDEFINED),
-                            "Both VkFormat and VkExternalFormatANDROID are undefined.");
-            break;
-        }
-        chain = chain->pNext;
-    }
-#endif  // DAWN_PLATFORM_IS(ANDROID)
+MaybeError ValidateCanCreateSamplerYCbCrConversion(const YCbCrVkDescriptor* yCbCrDescriptor) {
+    uint64_t externalFormat = yCbCrDescriptor->externalFormat;
+    VkFormat vulkanFormat = static_cast<VkFormat>(yCbCrDescriptor->vkFormat);
+    DAWN_INVALID_IF((externalFormat == 0 && vulkanFormat == VK_FORMAT_UNDEFINED),
+                    "Both VkFormat and VkExternalFormatANDROID are undefined.");
     return {};
+}
+
+VkSamplerYcbcrConversionCreateInfo CreateSamplerYCbCrConversionCreateInfo(
+    const YCbCrVkDescriptor* yCbCrDescriptor) {
+    VkComponentMapping vulkanComponent;
+    vulkanComponent.r = static_cast<VkComponentSwizzle>(yCbCrDescriptor->vkComponentSwizzleRed);
+    vulkanComponent.g = static_cast<VkComponentSwizzle>(yCbCrDescriptor->vkComponentSwizzleGreen);
+    vulkanComponent.b = static_cast<VkComponentSwizzle>(yCbCrDescriptor->vkComponentSwizzleBlue);
+    vulkanComponent.a = static_cast<VkComponentSwizzle>(yCbCrDescriptor->vkComponentSwizzleAlpha);
+
+    VkSamplerYcbcrConversionCreateInfo vulkanYCbCrCreateInfo;
+    vulkanYCbCrCreateInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    vulkanYCbCrCreateInfo.pNext = nullptr;
+    vulkanYCbCrCreateInfo.format = static_cast<VkFormat>(yCbCrDescriptor->vkFormat);
+    vulkanYCbCrCreateInfo.ycbcrModel =
+        static_cast<VkSamplerYcbcrModelConversion>(yCbCrDescriptor->vkYCbCrModel);
+    vulkanYCbCrCreateInfo.ycbcrRange =
+        static_cast<VkSamplerYcbcrRange>(yCbCrDescriptor->vkYCbCrRange);
+    vulkanYCbCrCreateInfo.components = vulkanComponent;
+    vulkanYCbCrCreateInfo.xChromaOffset =
+        static_cast<VkChromaLocation>(yCbCrDescriptor->vkXChromaOffset);
+    vulkanYCbCrCreateInfo.yChromaOffset =
+        static_cast<VkChromaLocation>(yCbCrDescriptor->vkYChromaOffset);
+    vulkanYCbCrCreateInfo.chromaFilter = static_cast<VkFilter>(yCbCrDescriptor->vkFilter);
+    vulkanYCbCrCreateInfo.forceExplicitReconstruction =
+        static_cast<VkBool32>(yCbCrDescriptor->forceReconstruction);
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    VkExternalFormatANDROID vulkanExternalFormat;
+    vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+    vulkanExternalFormat.pNext = nullptr;
+    vulkanExternalFormat.externalFormat = static_cast<uint64_t>(yCbCrDescriptor->externalFormat);
+
+    vulkanYCbCrCreateInfo.pNext = &vulkanExternalFormat;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+    return vulkanYCbCrCreateInfo;
 }
 
 }  // namespace dawn::native::vulkan
