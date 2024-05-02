@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a68acbd_ac796c47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "splitting actual deps and dev deps?\nmight be able to prevent go get from doing a network thing\n\nagain talk to ian",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e99786_d7b7b032",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "`go get ./...` fetches all the things and puts them in GOPATH\nso ideally want to put that in some builder cache. that means updating the builder recipes. defaults to ~/go/pkg/mod/...\n\nshouldn\u0027t need to vendor anything, but Ben is vague about what it is",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1f7d122_68b74db4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "golang doesn\u0027t have inheritance, but it has the ability to add an unnamed member into a structure, which can be used to extended structure....\n\ngo supports generics now...\n\n\nput opaque `extras: interface{}` or `extras: any`\nthere are some annotations about whether you should  emit something if empty. if you update it to have extra things, you might need to say, \"if empty, omit it\"\nlooking at the existing yaml lib..\nomitempty is supported - you can add random extras that get omitted\nhttps://pkg.go.dev/github.com/goccy/go-yaml#CustomUnmarshaler may be useful",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91cf897_50334906",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "go has a builtin template thing. whether it is good or not is debatable. Ben extended it for doing function calls inside the template. used for a lot of tint. everything that is a .tmpl is go template syntax with additional bells and whistles. used for some Tint src files, build files (cmake, gn, bazel)\nextended template with https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/template/template.go#83\n\ntemplate can include other templates\ncan you get dependency graph?\nno - evaluated as it runs.\nyou could log it and read the logs after\ncould glob all the templates to pass all to GN for convience\ncould write a regex scanner to find the imports potentially",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dd77533_90866c26",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "technically we are already doing the naughty thing. depending on things.\nBut Ben says the LUCI project also has random third party deps\nbut none of the stuff there is used in production code",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1833cddb_075a11b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "technically we are already doing the naughty thing. depending on things.\nBut Ben says the LUCI project also has random third party deps\nbut none of the stuff there is used in production code\n\nfor go.mod and replace rule",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5904f9_c833c0cb",
+        "filename": "go.mod",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:10:23Z",
+      "side": 1,
+      "message": "talk to go/iancottrell",
+      "revId": "6659a2a441c8299f4a77533fa6527e1e5cd13718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
