@@ -77,63 +77,64 @@ struct State {
         auto* rhs_ty = rhs->Type();
         auto* ty = binary->Result(0)->Type();
 
-        // Helper to replace the instruction with a new one.
-        auto replace = [&](core::ir::Instruction* inst) {
-            inst->SetResults(Vector{binary->DetachResult()});
-            binary->ReplaceWith(inst);
-            binary->Destroy();
-        };
-
-        // Helper to replace the instruction with a column-wise operation.
-        auto column_wise = [&](auto op) {
-            auto* mat = ty->As<core::type::Matrix>();
-            Vector<core::ir::Value*, 4> args;
-            for (uint32_t col = 0; col < mat->columns(); col++) {
-                b.InsertBefore(binary, [&] {
+        b.InsertBefore(binary, [&] {
+            // Helper to replace the instruction with a column-wise operation.
+            auto column_wise = [&](auto op) {
+                auto* mat = ty->As<core::type::Matrix>();
+                Vector<core::ir::Value*, 4> args;
+                for (uint32_t col = 0; col < mat->columns(); col++) {
                     auto* lhs_col = b.Access(mat->ColumnType(), lhs, u32(col));
                     auto* rhs_col = b.Access(mat->ColumnType(), rhs, u32(col));
                     auto* add = b.Binary(op, mat->ColumnType(), lhs_col, rhs_col);
                     args.Push(add->Result(0));
-                });
-            }
-            replace(b.Construct(ty, std::move(args)));
-        };
-
-        switch (binary->Op()) {
-            case core::BinaryOp::kAdd:
-                column_wise(core::BinaryOp::kAdd);
-                break;
-            case core::BinaryOp::kSubtract:
-                column_wise(core::BinaryOp::kSubtract);
-                break;
-            case core::BinaryOp::kMultiply:
-                // Select the SPIR-V intrinsic that corresponds to the operation being performed.
-                if (lhs_ty->Is<core::type::Matrix>()) {
-                    if (rhs_ty->Is<core::type::Scalar>()) {
-                        replace(b.Call<spirv::ir::BuiltinCall>(
-                            ty, spirv::BuiltinFn::kMatrixTimesScalar, lhs, rhs));
-                    } else if (rhs_ty->Is<core::type::Vector>()) {
-                        replace(b.Call<spirv::ir::BuiltinCall>(
-                            ty, spirv::BuiltinFn::kMatrixTimesVector, lhs, rhs));
-                    } else if (rhs_ty->Is<core::type::Matrix>()) {
-                        replace(b.Call<spirv::ir::BuiltinCall>(
-                            ty, spirv::BuiltinFn::kMatrixTimesMatrix, lhs, rhs));
-                    }
-                } else {
-                    if (lhs_ty->Is<core::type::Scalar>()) {
-                        replace(b.Call<spirv::ir::BuiltinCall>(
-                            ty, spirv::BuiltinFn::kMatrixTimesScalar, rhs, lhs));
-                    } else if (lhs_ty->Is<core::type::Vector>()) {
-                        replace(b.Call<spirv::ir::BuiltinCall>(
-                            ty, spirv::BuiltinFn::kVectorTimesMatrix, lhs, rhs));
-                    }
                 }
-                break;
+                b.ConstructWithResult(binary->DetachResult(), std::move(args));
+            };
 
-            default:
-                TINT_UNREACHABLE() << "unhandled matrix arithmetic instruction";
-                break;
-        }
+            switch (binary->Op()) {
+                case core::BinaryOp::kAdd:
+                    column_wise(core::BinaryOp::kAdd);
+                    break;
+                case core::BinaryOp::kSubtract:
+                    column_wise(core::BinaryOp::kSubtract);
+                    break;
+                case core::BinaryOp::kMultiply:
+                    // Select the SPIR-V intrinsic that corresponds to the operation being
+                    // performed.
+                    if (lhs_ty->Is<core::type::Matrix>()) {
+                        if (rhs_ty->Is<core::type::Scalar>()) {
+                            b.Call<spirv::ir::BuiltinCall>(binary->DetachResult(),
+                                                           spirv::BuiltinFn::kMatrixTimesScalar,
+                                                           lhs, rhs);
+                        } else if (rhs_ty->Is<core::type::Vector>()) {
+                            b.Call<spirv::ir::BuiltinCall>(binary->DetachResult(),
+                                                           spirv::BuiltinFn::kMatrixTimesVector,
+                                                           lhs, rhs);
+                        } else if (rhs_ty->Is<core::type::Matrix>()) {
+                            b.Call<spirv::ir::BuiltinCall>(binary->DetachResult(),
+                                                           spirv::BuiltinFn::kMatrixTimesMatrix,
+                                                           lhs, rhs);
+                        }
+                    } else {
+                        if (lhs_ty->Is<core::type::Scalar>()) {
+                            b.Call<spirv::ir::BuiltinCall>(binary->DetachResult(),
+                                                           spirv::BuiltinFn::kMatrixTimesScalar,
+                                                           rhs, lhs);
+                        } else if (lhs_ty->Is<core::type::Vector>()) {
+                            b.Call<spirv::ir::BuiltinCall>(binary->DetachResult(),
+                                                           spirv::BuiltinFn::kVectorTimesMatrix,
+                                                           lhs, rhs);
+                        }
+                    }
+                    break;
+
+                default:
+                    TINT_UNREACHABLE() << "unhandled matrix arithmetic instruction";
+                    break;
+            }
+        });
+
+        binary->Destroy();
     }
 
     /// Replace a matrix convert instruction.
@@ -143,20 +144,19 @@ struct State {
         auto* in_mat = arg->Type()->As<core::type::Matrix>();
         auto* out_mat = convert->Result(0)->Type()->As<core::type::Matrix>();
 
-        // Extract and convert each column separately.
-        Vector<core::ir::Value*, 4> args;
-        for (uint32_t c = 0; c < out_mat->columns(); c++) {
-            b.InsertBefore(convert, [&] {
+        b.InsertBefore(convert, [&] {
+            // Extract and convert each column separately.
+            Vector<core::ir::Value*, 4> args;
+            for (uint32_t c = 0; c < out_mat->columns(); c++) {
                 auto* col = b.Access(in_mat->ColumnType(), arg, u32(c));
                 auto* new_col = b.Convert(out_mat->ColumnType(), col);
                 args.Push(new_col->Result(0));
-            });
-        }
+            }
 
-        // Reconstruct the result matrix from the converted columns.
-        auto* construct = b.Construct(out_mat, std::move(args));
-        construct->SetResults(Vector{convert->DetachResult()});
-        convert->ReplaceWith(construct);
+            // Reconstruct the result matrix from the converted columns.
+            b.ConstructWithResult(convert->DetachResult(), std::move(args));
+        });
+
         convert->Destroy();
     }
 };
