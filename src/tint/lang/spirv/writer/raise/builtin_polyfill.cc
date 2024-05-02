@@ -259,10 +259,8 @@ struct State {
                 compare->InsertBefore(builtin);
 
                 // Construct the atomicCompareExchange result structure.
-                call = b.Construct(
-                    core::type::CreateAtomicCompareExchangeResult(ty, ir.symbols, int_ty),
-                    Vector{original, compare->Result(0)});
-                call->SetResults(Vector{builtin->DetachResult()});
+                call = b.ConstructWithResult(builtin->DetachResult(),
+                                             Vector{original, compare->Result(0)});
                 break;
             }
             case core::BuiltinFn::kAtomicExchange:
@@ -832,9 +830,8 @@ struct State {
         texture_call->InsertBefore(builtin);
 
         // Extract the third component to get the number of array layers.
-        auto* extract = b.Access(ty.u32(), texture_call->Result(0), 2_u);
+        auto* extract = b.AccessWithResult(builtin->DetachResult(), texture_call->Result(0), 2_u);
         extract->InsertBefore(builtin);
-        extract->SetResults(Vector{builtin->DetachResult()});
         builtin->Destroy();
     }
 
@@ -855,9 +852,8 @@ struct State {
             el->InsertBefore(builtin);
             scalar_call->InsertBefore(builtin);
         }
-        auto* construct = b.Construct(vec, std::move(args));
+        auto* construct = b.ConstructWithResult(builtin->DetachResult(), std::move(args));
         construct->InsertBefore(builtin);
-        construct->SetResults(Vector{builtin->DetachResult()});
         builtin->Destroy();
     }
 };
