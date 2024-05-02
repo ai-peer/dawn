@@ -202,9 +202,10 @@ wgpu::SharedFence SharedTextureMemoryTestBackend::ImportFenceTo(const wgpu::Devi
 }
 
 std::vector<wgpu::SharedTextureMemory> SharedTextureMemoryTestBackend::CreateSharedTextureMemories(
-    wgpu::Device& device) {
+    wgpu::Device& device,
+    int layerCount) {
     std::vector<wgpu::SharedTextureMemory> memories;
-    for (auto& memory : CreatePerDeviceSharedTextureMemories({device})) {
+    for (auto& memory : CreatePerDeviceSharedTextureMemories({device}, layerCount)) {
         DAWN_ASSERT(memory.size() == 1u);
         memories.push_back(std::move(memory[0]));
     }
@@ -240,9 +241,10 @@ wgpu::Texture CreateReadTexture(wgpu::SharedTextureMemory memory) {
 }
 
 std::vector<wgpu::SharedTextureMemory>
-SharedTextureMemoryTestBackend::CreateSinglePlanarSharedTextureMemories(wgpu::Device& device) {
+SharedTextureMemoryTestBackend::CreateSinglePlanarSharedTextureMemories(wgpu::Device& device,
+                                                                        int layerCount) {
     std::vector<wgpu::SharedTextureMemory> out;
-    for (auto& memory : CreateSharedTextureMemories(device)) {
+    for (auto& memory : CreateSharedTextureMemories(device, layerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -258,9 +260,10 @@ SharedTextureMemoryTestBackend::CreateSinglePlanarSharedTextureMemories(wgpu::De
 std::vector<std::vector<wgpu::SharedTextureMemory>>
 SharedTextureMemoryTestBackend::CreatePerDeviceSharedTextureMemoriesFilterByUsage(
     const std::vector<wgpu::Device>& devices,
-    wgpu::TextureUsage requiredUsage) {
+    wgpu::TextureUsage requiredUsage,
+    int layerCount) {
     std::vector<std::vector<wgpu::SharedTextureMemory>> out;
-    for (auto& memories : CreatePerDeviceSharedTextureMemories(devices)) {
+    for (auto& memories : CreatePerDeviceSharedTextureMemories(devices, layerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memories[0].GetProperties(&properties);
 
@@ -292,7 +295,11 @@ wgpu::Device SharedTextureMemoryTests::CreateDevice() {
 
 void SharedTextureMemoryTests::UseInRenderPass(wgpu::Device& deviceObj, wgpu::Texture& texture) {
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
+    wgpu::TextureViewDescriptor desc;
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
+    utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView(&desc)});
     passDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
     passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
 
@@ -382,7 +389,11 @@ wgpu::CommandBuffer SharedTextureMemoryTests::MakeFourColorsClearCommandBuffer(
     wgpu::RenderPipeline pipeline = deviceObj.CreateRenderPipeline(&pipelineDesc);
 
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
+    wgpu::TextureViewDescriptor desc;
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
+    utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView(&desc)});
     passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
 
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
@@ -428,8 +439,12 @@ wgpu::CommandBuffer SharedTextureMemoryTests::MakeFourColorsComputeCommandBuffer
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
     pass.SetPipeline(pipeline);
+    wgpu::TextureViewDescriptor desc;
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
     pass.SetBindGroup(0, utils::MakeBindGroup(deviceObj, pipeline.GetBindGroupLayout(0),
-                                              {{0, texture.CreateView()}}));
+                                              {{0, texture.CreateView(&desc)}}));
     pass.DispatchWorkgroups(texture.GetWidth(), texture.GetHeight());
     pass.End();
     return encoder.Finish();
@@ -524,11 +539,16 @@ SharedTextureMemoryTests::MakeCheckBySamplingCommandBuffer(wgpu::Device& deviceO
 
     wgpu::RenderPipeline pipeline = deviceObj.CreateRenderPipeline(&pipelineDesc);
 
+    wgpu::TextureViewDescriptor desc;
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
+
     wgpu::BindGroup bindGroup = utils::MakeBindGroup(deviceObj, pipeline.GetBindGroupLayout(0),
-                                                     {{0, texture.CreateView()}});
+                                                     {{0, texture.CreateView(&desc)}});
 
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor passDescriptor({colorTarget.CreateView()});
+    utils::ComboRenderPassDescriptor passDescriptor({colorTarget.CreateView(&desc)});
     passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
 
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
@@ -581,12 +601,17 @@ SharedTextureMemoryTests::MakeCheckBySamplingTwoTexturesCommandBuffer(wgpu::Text
 
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDesc);
 
+    wgpu::TextureViewDescriptor desc;
+    desc.dimension = wgpu::TextureViewDimension::e2D;
+    desc.baseArrayLayer = 0;
+    desc.arrayLayerCount = 1;
+
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                             {{0, texture0.CreateView()}, {1, texture1.CreateView()}});
+                             {{0, texture0.CreateView(&desc)}, {1, texture1.CreateView(&desc)}});
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    utils::ComboRenderPassDescriptor passDescriptor({colorTarget.CreateView()});
+    utils::ComboRenderPassDescriptor passDescriptor({colorTarget.CreateView(&desc)});
     passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
 
     wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
@@ -686,7 +711,8 @@ TEST_P(SharedTextureMemoryNoFeatureTests, CreationWithoutFeature) {
     // Create external texture memories with an error filter.
     // We should see a message that the feature is not enabled.
     device.PushErrorScope(wgpu::ErrorFilter::Validation);
-    const auto& memories = GetParam().mBackend->CreateSharedTextureMemories(device);
+    const auto& memories =
+        GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount);
 
     MockCallback<WGPUErrorCallback> popErrorScopeCallback;
     EXPECT_CALL(popErrorScopeCallback,
@@ -750,7 +776,7 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
         wgpu::SharedTextureMemoryDescriptor desc;
         memory = device.ImportSharedTextureMemory(&desc);
     } else {
-        memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+        memory = GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     }
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
@@ -763,7 +789,8 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after destroying the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     EXPECT_FALSE(memory.IsDeviceLost());
     device.Destroy();
@@ -773,7 +800,8 @@ TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after losing the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     EXPECT_FALSE(memory.IsDeviceLost());
     LoseDeviceForTesting(device);
@@ -783,7 +811,8 @@ TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
 // Test importing a shared fence when the device is destroyed
 TEST_P(SharedTextureMemoryTests, ImportSharedFenceDeviceDestroyed) {
     // Create a shared texture memory and texture
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     wgpu::Texture texture = memory.CreateTexture();
 
     // Begin access to use the texture
@@ -853,7 +882,7 @@ TEST_P(SharedTextureMemoryTests, GetPropertiesErrorMemory) {
 // Tests that a SharedTextureMemory supports expected texture usages.
 TEST_P(SharedTextureMemoryTests, TextureUsages) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -899,7 +928,8 @@ TEST_P(SharedTextureMemoryTests, TextureUsages) {
 // Test calling GetProperties with an invalid chained struct. An error is
 // generated, but the properties are still populated.
 TEST_P(SharedTextureMemoryTests, GetPropertiesInvalidChain) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::ChainedStructOut otherStruct;
     wgpu::SharedTextureMemoryProperties properties1;
@@ -919,7 +949,7 @@ TEST_P(SharedTextureMemoryTests, GetPropertiesInvalidChain) {
 // Test that texture usages must be a subset of the shared texture memory's usage.
 TEST_P(SharedTextureMemoryTests, UsageValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -953,7 +983,7 @@ TEST_P(SharedTextureMemoryTests, UsageValidation) {
 // Test that it is an error if the texture format doesn't match the shared texture memory.
 TEST_P(SharedTextureMemoryTests, FormatValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -972,7 +1002,7 @@ TEST_P(SharedTextureMemoryTests, FormatValidation) {
 // Test that it is an error if the texture size doesn't match the shared texture memory.
 TEST_P(SharedTextureMemoryTests, SizeValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -999,7 +1029,7 @@ TEST_P(SharedTextureMemoryTests, SizeValidation) {
 // Test that it is an error if the texture mip level count is not 1.
 TEST_P(SharedTextureMemoryTests, MipLevelValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1019,7 +1049,7 @@ TEST_P(SharedTextureMemoryTests, MipLevelValidation) {
 // Test that it is an error if the texture sample count is not 1.
 TEST_P(SharedTextureMemoryTests, SampleCountValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1039,7 +1069,7 @@ TEST_P(SharedTextureMemoryTests, SampleCountValidation) {
 // Test that it is an error if the texture dimension is not 2D.
 TEST_P(SharedTextureMemoryTests, DimensionValidation) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1060,7 +1090,8 @@ TEST_P(SharedTextureMemoryTests, DimensionValidation) {
 
 // Test that it is an error to call BeginAccess twice in a row on the same texture and memory.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccess) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     wgpu::Texture texture = memory.CreateTexture();
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
@@ -1077,7 +1108,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccess) {
 // Test that it is an error to call BeginAccess concurrently on a write texture
 // followed by a read texture on a single SharedTextureMemory.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteRead) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture = CreateWriteTexture(memory);
     wgpu::Texture readTexture = CreateReadTexture(memory);
@@ -1098,7 +1130,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteConcurren
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
 
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture = CreateWriteTexture(memory);
     wgpu::Texture readTexture = CreateReadTexture(memory);
@@ -1117,7 +1150,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteConcurren
 // Test that it is an error to call BeginAccess concurrently on a read texture
 // followed by a write texture on a single SharedTextureMemory.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadWrite) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture = CreateWriteTexture(memory);
     wgpu::Texture readTexture = CreateReadTexture(memory);
@@ -1138,7 +1172,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
 
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture = CreateWriteTexture(memory);
     wgpu::Texture readTexture = CreateReadTexture(memory);
@@ -1157,7 +1192,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
 // Test that it is an error to call BeginAccess concurrently on two write textures on a single
 // SharedTextureMemory.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteWrite) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture1 = CreateWriteTexture(memory);
     wgpu::Texture writeTexture2 = CreateWriteTexture(memory);
@@ -1175,7 +1211,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteWrite) {
 // Test that it is valid to call BeginAccess concurrently on two read textures on a single
 // SharedTextureMemory.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadRead) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture readTexture1 = CreateReadTexture(memory);
     wgpu::Texture readTexture2 = CreateReadTexture(memory);
@@ -1196,7 +1233,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
 
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture readTexture1 = CreateReadTexture(memory);
     wgpu::Texture readTexture2 = CreateReadTexture(memory);
@@ -1220,7 +1258,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentReadRead) {
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture readTexture1 = CreateReadTexture(memory);
     wgpu::Texture readTexture2 = CreateReadTexture(memory);
@@ -1241,7 +1280,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesConcurrentRead
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadConcurrentRead) {
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture readTexture1 = CreateReadTexture(memory);
     wgpu::Texture readTexture2 = CreateReadTexture(memory);
@@ -1263,7 +1303,8 @@ TEST_P(SharedTextureMemoryTests, ConcurrentWrite) {
     // TODO(dawn/2276): support concurrent read access.
     DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
 
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::Texture writeTexture = CreateWriteTexture(memory);
 
@@ -1278,7 +1319,8 @@ TEST_P(SharedTextureMemoryTests, ConcurrentWrite) {
 
 // Test that it is an error to call EndAccess twice in a row on the same memory.
 TEST_P(SharedTextureMemoryTests, DoubleEndAccess) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     wgpu::Texture texture = memory.CreateTexture();
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
@@ -1300,7 +1342,8 @@ TEST_P(SharedTextureMemoryTests, DoubleEndAccess) {
 // Test that it is an error to call EndAccess on a texture that was not the one BeginAccess was
 // called on.
 TEST_P(SharedTextureMemoryTests, BeginThenEndOnDifferentTexture) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     wgpu::Texture texture1 = memory.CreateTexture();
     wgpu::Texture texture2 = memory.CreateTexture();
 
@@ -1319,7 +1362,8 @@ TEST_P(SharedTextureMemoryTests, BeginThenEndOnDifferentTexture) {
 
 // Test that it is an error to call EndAccess without a preceding BeginAccess.
 TEST_P(SharedTextureMemoryTests, EndAccessWithoutBegin) {
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
     wgpu::Texture texture = memory.CreateTexture();
 
     wgpu::SharedTextureMemoryEndAccessState endState = {};
@@ -1332,7 +1376,8 @@ TEST_P(SharedTextureMemoryTests, EndAccessWithoutBegin) {
 TEST_P(SharedTextureMemoryTests, UseWithoutBegin) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
-    wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemory memory =
+        GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
     wgpu::SharedTextureMemoryProperties properties;
     memory.GetProperties(&properties);
@@ -1365,7 +1410,8 @@ TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
     // NOTE: UseInRenderPass()/UseInCopy() do not currently support multiplanar
     // formats.
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSinglePlanarSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSinglePlanarSharedTextureMemories(device,
+                                                                      GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1392,7 +1438,7 @@ TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
 // Test that if the texture is uninitialized, it is cleared on first use.
 TEST_P(SharedTextureMemoryTests, UninitializedTextureIsCleared) {
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1508,7 +1554,8 @@ TEST_P(SharedTextureMemoryTests, UninitializedOnEndAccess) {
     // TODO(crbug.com/dawn/2263): Fix this and change the below to
     // CreateSharedTextureMemories().
     for (wgpu::SharedTextureMemory memory :
-         GetParam().mBackend->CreateSinglePlanarSharedTextureMemories(device)) {
+         GetParam().mBackend->CreateSinglePlanarSharedTextureMemories(device,
+                                                                      GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
 
@@ -1541,7 +1588,12 @@ TEST_P(SharedTextureMemoryTests, UninitializedOnEndAccess) {
             memory.BeginAccess(texture, &beginDesc);
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
+
+            wgpu::TextureViewDescriptor desc;
+            desc.dimension = wgpu::TextureViewDimension::e2D;
+            desc.baseArrayLayer = 0;
+            desc.arrayLayerCount = 1;
+            utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView(&desc)});
             passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
 
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&passDescriptor);
@@ -1563,7 +1615,7 @@ TEST_P(SharedTextureMemoryTests, CopyToTextureThenSample) {
 
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::TextureBinding, GetParam().mLayerCount)) {
         wgpu::Texture texture = memories[0].CreateTexture();
 
         wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
@@ -1632,7 +1684,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeAfterBeginAccess) {
 
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         wgpu::Texture texture = memories[0].CreateTexture();
 
         wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
@@ -1682,7 +1735,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeBeforeBeginAccess) {
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         // Create two textures from each memory.
         wgpu::Texture textures[] = {memories[0].CreateTexture(), memories[1].CreateTexture()};
 
@@ -1731,7 +1785,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenTextureDestroyBeforeEndAccessThenSamp
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         // Create two textures from each memory.
         wgpu::Texture textures[] = {memories[0].CreateTexture(), memories[1].CreateTexture()};
 
@@ -1781,7 +1836,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenTextureDestroyBeforeEndAccessThenSamp
 TEST_P(SharedTextureMemoryTests, RenderThenDropAllMemoriesThenSample) {
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (auto memories : GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         // Create two textures from each memory.
         wgpu::Texture textures[] = {memories[0].CreateTexture(), memories[1].CreateTexture()};
 
@@ -1839,7 +1895,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThe
         std::vector<wgpu::Device> devices = {CreateDevice(), CreateDevice()};
         auto perDeviceMemories =
             GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-                devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding);
+                devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+                GetParam().mLayerCount);
         DAWN_TEST_UNSUPPORTED_IF(perDeviceMemories.empty());
 
         const auto& memories = perDeviceMemories[0];
@@ -1901,7 +1958,8 @@ TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite
     std::vector<wgpu::Device> devices = {device, CreateDevice(), CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memories[0].GetProperties(&properties);
 
@@ -1939,7 +1997,11 @@ TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite
         wgpu::CommandBuffer clearToGrayCommandBuffer0;
         {
             wgpu::CommandEncoder encoder = devices[0].CreateCommandEncoder();
-            utils::ComboRenderPassDescriptor passDescriptor({textures[0].CreateView()});
+            wgpu::TextureViewDescriptor desc;
+            desc.dimension = wgpu::TextureViewDimension::e2D;
+            desc.baseArrayLayer = 0;
+            desc.arrayLayerCount = 1;
+            utils::ComboRenderPassDescriptor passDescriptor({textures[0].CreateView(&desc)});
             passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
             passDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
             passDescriptor.cColorAttachments[0].clearValue = {0.5, 0.5, 0.5, 1.0};
@@ -2041,7 +2103,8 @@ TEST_P(SharedTextureMemoryTests, SameDeviceWriteThenConcurrentReadThenWrite) {
 
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             {device}, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
+             {device}, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         auto memory = memories[0];
         wgpu::SharedTextureMemoryProperties properties;
         memory.GetProperties(&properties);
@@ -2077,7 +2140,11 @@ TEST_P(SharedTextureMemoryTests, SameDeviceWriteThenConcurrentReadThenWrite) {
         wgpu::CommandBuffer clearToGrayCommandBuffer0;
         {
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-            utils::ComboRenderPassDescriptor passDescriptor({textures[0].CreateView()});
+            wgpu::TextureViewDescriptor desc;
+            desc.dimension = wgpu::TextureViewDimension::e2D;
+            desc.baseArrayLayer = 0;
+            desc.arrayLayerCount = 1;
+            utils::ComboRenderPassDescriptor passDescriptor({textures[0].CreateView(&desc)});
             passDescriptor.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
             passDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
             passDescriptor.cColorAttachments[0].clearValue = {0.5, 0.5, 0.5, 1.0};
@@ -2176,11 +2243,13 @@ TEST_P(SharedTextureMemoryTests, SRGBReinterpretation) {
 
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc)) {
+             devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,
+             GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memories[1].GetProperties(&properties);
 
         wgpu::TextureDescriptor textureDesc = {};
+
         textureDesc.format = properties.format;
         textureDesc.size = properties.size;
         textureDesc.usage = wgpu::TextureUsage::RenderAttachment;
@@ -2200,6 +2269,9 @@ TEST_P(SharedTextureMemoryTests, SRGBReinterpretation) {
         // Create the texture on device 1.
         wgpu::Texture texture = memories[1].CreateTexture(&textureDesc);
 
+        viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+        viewDesc.baseArrayLayer = 0;
+        viewDesc.arrayLayerCount = 1;
         // Submit a clear operation to sRGB value rgb(234, 51, 35).
         utils::ComboRenderPassDescriptor renderPassDescriptor({texture.CreateView(&viewDesc)}, {});
         renderPassDescriptor.cColorAttachments[0].clearValue = {234.0 / 255.0, 51.0 / 255.0,
@@ -2257,7 +2329,8 @@ TEST_P(SharedTextureMemoryTests, WriteStorageThenReadSample) {
 
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         // Create the textures on each SharedTextureMemory.
         wgpu::Texture texture0 = memories[0].CreateTexture();
         wgpu::Texture texture1 = memories[1].CreateTexture();
@@ -2312,7 +2385,8 @@ TEST_P(SharedTextureMemoryTests, WriteTextureThenReadSample) {
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
-             devices, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding)) {
+             devices, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding,
+             GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
         memories[0].GetProperties(&properties);
 
