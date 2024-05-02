@@ -16,6 +16,23 @@
       "message": "This should be more efficient than `ReplaceAllUsesWith` (WDYT, perfmon?), it\u0027s more concise code, removes the need to remember to `ClearResults()`, and lets you use the IR builder instead of directly using the instruction allocators.",
       "revId": "a2ddc43c2775ab6b968b84bed6db15cfe5eecad5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed301b96_78d9ef3a",
+        "filename": "src/tint/lang/core/ir/transform/binary_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-02T14:46:25Z",
+      "side": 1,
+      "message": "nit: remove",
+      "revId": "a2ddc43c2775ab6b968b84bed6db15cfe5eecad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
