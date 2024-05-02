@@ -487,6 +487,7 @@ class Parser {
                                            execution_mode.GetSingleWordInOperand(3),
                                            execution_mode.GetSingleWordInOperand(4));
                     break;
+                case spv::ExecutionMode::DepthReplacing:
                 case spv::ExecutionMode::OriginUpperLeft:
                     break;
                 default:
