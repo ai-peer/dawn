@@ -1003,6 +1003,10 @@ class MultiGeneratorFromDawnJSON(Generator):
             'native_utils', 'dawn_lpmfuzz_cpp', 'dawn_lpmfuzz_proto', 'kotlin'
         ]
 
+        parser.add_argument('--webgpu-json',
+                            required=True,
+                            type=str,
+                            help='The WEBGPU JSON definition to use.')
         parser.add_argument('--dawn-json',
                             required=True,
                             type=str,
@@ -1024,6 +1028,9 @@ class MultiGeneratorFromDawnJSON(Generator):
             + ', '.join(allowed_targets))
 
     def get_file_renders(self, args):
+        with open(args.webgpu_json) as f:
+            print(json.loads(f.read()))
+
         with open(args.dawn_json) as f:
             loaded_json = json.loads(f.read())
 
@@ -1387,7 +1394,7 @@ class MultiGeneratorFromDawnJSON(Generator):
         return renders
 
     def get_dependencies(self, args):
-        deps = [os.path.abspath(args.dawn_json)]
+        deps = [os.path.abspath(args.webgpu_yml), os.path.abspath(args.dawn_json)]
         if args.wire_json != None:
             deps += [os.path.abspath(args.wire_json)]
         if args.lpm_json != None:

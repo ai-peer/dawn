@@ -82,6 +82,8 @@ template("dawn_json_generator") {
     # The base arguments for the generator: from this dawn.json, generate this
     # target using templates in this directory.
     args = [
+      "--webgpu-json",
+      rebase_path("${dawn_root}/third_party/webgpu-headers/webgpu.yml", root_build_dir),
       "--dawn-json",
       rebase_path("${dawn_root}/src/dawn/dawn.json", root_build_dir),
       "--wire-json",

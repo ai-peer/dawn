@@ -1,13 +1,17 @@
 module dawn.googlesource.com/dawn
 
-go 1.18
+go 1.21
+
+replace github.com/webgpu-native/webgpu-headers => ./third_party/webgpu-headers
 
 require (
 	cloud.google.com/go/storage v1.33.0
 	github.com/andygrunwald/go-gerrit v0.0.0-20230508072829-423d372345aa
 	github.com/ben-clayton/webidlparser v0.0.0-20210923100217-8ba896ded094
+	github.com/chromedp/cdproto v0.0.0-20231011050154-1d073bb38998
 	github.com/chromedp/chromedp v0.9.3
 	github.com/fatih/color v1.13.0
+	github.com/goccy/go-yaml v1.11.3
 	github.com/google/go-cmp v0.5.9
 	github.com/mattn/go-colorable v0.1.12
 	github.com/mattn/go-isatty v0.0.16
@@ -15,9 +19,11 @@ require (
 	github.com/sergi/go-diff v1.3.1
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/tidwall/jsonc v0.3.2
+	github.com/webgpu-native/webgpu-headers v0.0.0
 	go.chromium.org/luci v0.0.0-20230311013728-313c8e2205bc
 	golang.org/x/net v0.17.0
 	golang.org/x/oauth2 v0.10.0
+	golang.org/x/term v0.14.0
 	google.golang.org/api v0.132.0
 	google.golang.org/grpc v1.56.3
 	google.golang.org/protobuf v1.31.0
@@ -28,7 +34,6 @@ require (
 	cloud.google.com/go/compute v1.20.1 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/iam v1.1.0 // indirect
-	github.com/chromedp/cdproto v0.0.0-20231011050154-1d073bb38998 // indirect
 	github.com/chromedp/sysutil v1.0.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/gobwas/httphead v0.1.0 // indirect
@@ -52,15 +57,20 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mzohreva/GoGraphviz v0.0.0-20180226085351-533f4a37d9c6 // indirect
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
+	github.com/santhosh-tekuri/jsonschema/v5 v5.3.1 // indirect
 	github.com/texttheater/golang-levenshtein v1.0.1 // indirect
+	github.com/tidwall/gjson v1.17.1 // indirect
+	github.com/tidwall/match v1.1.1 // indirect
+	github.com/tidwall/pretty v1.2.1 // indirect
+	github.com/tidwall/sjson v1.2.5 // indirect
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tklauser/numcpus v0.4.0 // indirect
+	github.com/wI2L/jsondiff v0.5.2 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	golang.org/x/crypto v0.14.0 // indirect
-	golang.org/x/sync v0.3.0 // indirect
+	golang.org/x/sync v0.7.0 // indirect
 	golang.org/x/sys v0.14.0 // indirect
-	golang.org/x/term v0.14.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/appengine v1.6.8-0.20221117013220-504804fb50de // indirect
