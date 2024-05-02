@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b73a5e_6a38bb49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:56:47Z",
+      "side": 1,
+      "message": "so I can download the things, but not sure if this is even allowed by policy.\n\nneed to fix path for windows.",
+      "revId": "7c20204115386625e71a2a7e3e953626e67fcbb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "337a581e_b65dace2",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T18:56:47Z",
+      "side": 1,
+      "message": "see some runs in\n\nhttps://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8749026922294255297/+/u/gclient_runhooks/stdout\n\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8749026922294255601/+/u/gclient_runhooks__with_patch_/stdout\n\nhttps://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8749026922294255569/+/u/gclient_runhooks__with_patch_/stdout",
+      "revId": "7c20204115386625e71a2a7e3e953626e67fcbb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
