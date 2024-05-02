@@ -2303,7 +2303,7 @@
         ]
     },
     "filter mode": {
-        "category": "enum",
+        "category": "enas;dkfjas;um",
         "values": [
             {"value": 0, "name": "undefined", "jsrepr": "undefined"},
             {"value": 1, "name": "nearest"},
