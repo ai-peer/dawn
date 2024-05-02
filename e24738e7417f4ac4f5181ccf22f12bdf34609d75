@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4cdffbe_99a805ca",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:13:30Z",
+      "side": 1,
+      "message": "TIL! We don\u0027t follow google3 style directly, but the public google style guide (which is usually the same) does allow the new style:\nhttps://google.github.io/styleguide/cppguide.html#TODO_Comments\nThe Chromium style guide still references the old style, but I don\u0027t think there\u0027s any reason for that.\nhttps://chromium.googlesource.com/chromium/src/+/main/styleguide/c++/c++-dos-and-donts.md#comment-style",
+      "parentUuid": "14a24f80_45e28d55",
+      "range": {
+        "startLine": 954,
+        "startChar": 2,
+        "endLine": 954,
+        "endChar": 28
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4698de0_b87feca4",
@@ -179,6 +203,24 @@
       "side": 1,
       "message": "In this PS I removed it atm, will add it back, but to clarify, how would C++ users pass extensions? Since we flatten out the structs members as arguments to the APIs, it\u0027s not as clear how we would pass the extensions?",
       "parentUuid": "37583b7e_486bb823",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14f19e4c_732de9c1",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:13:30Z",
+      "side": 1,
+      "message": "Probably with an additional overload somehow that, for example:\n- uses a non-flattened struct instead of flattened args\n- takes an extra struct arg that\u0027s empty and extensible\n- takes nextInChain directly as an arg",
+      "parentUuid": "8250f91c_55d80eb1",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -542,6 +584,24 @@
       "side": 1,
       "message": "I think the only other breaking change would be adding the `message` field to some of the other callbacks? (This one already has it so I don\u0027t think anything needs to change?)\n\nFor the enums, I was imagining we could probably mark ones for deprecation, then use like `default` or other handling in the callsites to prevent breaking anything else.",
       "parentUuid": "907d6e3d_42dd851f",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a3f45ec_acf5e074",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:13:30Z",
+      "side": 1,
+      "message": "Adding back nextInChain will also be a breaking change, though since we\u0027re moving everything to the C++ API right now it\u0027s probably much of a problem. We could just keep it in for this CL so we don\u0027t have to worry, but I think it\u0027s fine.",
+      "parentUuid": "b601a692_94e22206",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
