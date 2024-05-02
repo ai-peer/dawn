@@ -1,0 +1,652 @@
+copyright: |
+  Copyright 2017 The Dawn & Tint Authors
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions are met:
+
+  1. Redistributions of source code must retain the above copyright notice, this
+      list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright notice,
+      this list of conditions and the following disclaimer in the documentation
+      and/or other materials provided with the distribution.
+
+  3. Neither the name of the copyright holder nor the names of its
+      contributors may be used to endorse or promote products derived from
+      this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+  DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+  DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+name: dawn
+enum_prefix: '0x0005'
+constants: []
+typedefs: []
+enums:
+  - name: WGSL_feature_name
+    extended: true
+    doc: Dawn WGSL feature name extensions
+    entries:
+      - name: chromium_testing_unimplemented
+        doc: TODO
+      - name: chromium_testing_unsafe_experimental
+        doc: TODO
+      - name: chromium_testing_experimental
+        doc: TODO
+      - name: chromium_testing_shipped_with_killswitch
+        doc: TODO
+      - name: chromium_testing_shipped
+        doc: TODO
+
+  - name: blend_factor
+    extended: true
+    doc: TODO
+    entries:
+      - name: src1
+        doc: TODO
+      - name: one_minus_src1
+        doc: TODO
+      - name: src1_alpha
+        doc: TODO
+      - name: one_minus_src1_alpha
+        doc: TODO
+
+  - name: alpha_mode
+    doc: TODO
+    entries:
+      - name: opaque
+        doc: TODO
+      - name: premultiplied
+        doc: TODO
+      - name: unpremultiplied
+        doc: TODO
+
+  - name: callback_mode
+    doc: TODO
+    entries:
+      - name: wait_any_only
+        doc: TODO
+      - name: allow_process_events
+        doc: TODO
+      - name: allow_spontaneous
+        doc: TODO
+
+  - name: wait_status
+    doc: TODO
+    entries:
+      - name: success
+        doc: TODO
+      - name: timed_out
+        doc: TODO
+      - name: unsupported_timeout
+        doc: TODO
+      - name: unsupported_count
+        doc: TODO
+      - name: unsupported_mixed_sources
+        doc: TODO
+      - name: unknown
+        doc: TODO
+
+  - name: s_type
+    extended: true
+    doc: TODO
+    entries:
+      - name: surface_descriptor_from_windows_core_window
+        doc: TODO
+      - name: external_texture_binding_entry
+        doc: TODO
+      - name: external_texture_binding_layout
+        doc: TODO
+      - name: surface_descriptor_from_windows_swap_chain_panel
+        doc: TODO
+      - name: depth_stencil_state_depth_write_defined_dawn
+        doc: TODO
+      - name: dawn_texture_internal_usage_descriptor
+        doc: TODO
+      - name: dawn_encoder_internal_usage_descriptor
+        doc: TODO
+      - name: dawn_instance_descriptor
+        doc: TODO
+      - name: dawn_cache_device_descriptor
+        doc: TODO
+      - name: dawn_adapter_properties_power_preference
+        doc: TODO
+      - name: dawn_buffer_descriptor_error_info_from_wire_client
+        doc: TODO
+      - name: dawn_toggles_descriptor
+        doc: TODO
+      - name: dawn_shader_module_SPIRV_options_descriptor
+        doc: TODO
+      - name: request_adapter_options_LUID
+        doc: TODO
+      - name: request_adapter_options_get_GL_proc
+        doc: TODO
+      - name: request_adapter_options_D3D11_device
+        doc: TODO
+      - name: dawn_multisample_state_render_to_single_sampled
+        doc: TODO
+      - name: dawn_render_pass_color_attachment_render_to_single_sampled
+        doc: TODO
+      - name: render_pass_pixel_local_storage
+        doc: TODO
+      - name: pipeline_layout_pixel_local_storage
+        doc: TODO
+      - name: buffer_host_mapped_pointer
+        doc: TODO
+      - name: dawn_experimental_subgroup_limits
+        doc: TODO
+      - name: adapter_properties_memory_heaps
+        doc: TODO
+      - name: adapter_properties_D3D
+        doc: TODO
+      - name: adapter_properties_vk
+        doc: TODO
+      - name: dawn_compute_pipeline_full_subgroups
+        doc: TODO
+      - name: dawn_wire_WGSL_control
+        doc: TODO
+      - name: dawn_WGSL_blocklist
+        doc: TODO
+      - name: drm_format_capabilities
+        doc: TODO
+      - name: shader_module_compilation_options
+        doc: TODO
+      - name: shared_texture_memory_vk_image_descriptor
+        doc: TODO
+      - name: shared_texture_memory_vk_dedicated_allocation_descriptor
+        doc: TODO
+      - name: shared_texture_memory_a_hardware_buffer_descriptor
+        doc: TODO
+      - name: shared_texture_memory_dma_buf_descriptor
+        doc: TODO
+      - name: shared_texture_memory_opaque_FD_descriptor
+        doc: TODO
+      - name: shared_texture_memory_zircon_handle_descriptor
+        doc: TODO
+      - name: shared_texture_memory_DXGI_shared_handle_descriptor
+        doc: TODO
+      - name: shared_texture_memory_D3D11_texture_2D_descriptor
+        doc: TODO
+      - name: shared_texture_memory_IO_surface_descriptor
+        doc: TODO
+      - name: shared_texture_memory_EGL_image_descriptor
+        doc: TODO
+      - name: shared_texture_memory_initialized_begin_state
+        doc: TODO
+      - name: shared_texture_memory_initialized_end_state
+        doc: TODO
+      - name: shared_texture_memory_vk_image_layout_begin_state
+        doc: TODO
+      - name: shared_texture_memory_vk_image_layout_end_state
+        doc: TODO
+      - name: shared_texture_memory_D3D_swapchain_begin_state
+        doc: TODO
+      - name: shared_fence_vk_semaphore_opaque_FD_descriptor
+        doc: TODO
+      - name: shared_fence_vk_semaphore_opaque_FD_export_info
+        doc: TODO
+      - name: shared_fence_vk_semaphore_sync_FD_descriptor
+        doc: TODO
+      - name: shared_fence_vk_semaphore_sync_FD_export_info
+        doc: TODO
+      - name: shared_fence_vk_semaphore_zircon_handle_descriptor
+        doc: TODO
+      - name: shared_fence_vk_semaphore_zircon_handle_export_info
+        doc: TODO
+      - name: shared_fence_DXGI_shared_handle_descriptor
+        doc: TODO
+      - name: shared_fence_DXGI_shared_handle_export_info
+        doc: TODO
+      - name: shared_fence_MTL_shared_event_descriptor
+        doc: TODO
+      - name: shared_fence_MTL_shared_event_export_info
+        doc: TODO
+      - name: shared_buffer_memory_D3D12_resource_descriptor
+        doc: TODO
+      - name: static_sampler_binding_layout
+        doc: TODO
+      - name: y_cb_cr_vulkan_descriptor
+        doc: TODO
+
+bitflags:
+  - name: heap_property
+    doc: TODO
+    entries:
+      - name: undefined
+        doc: TODO
+      - name: device_local
+        doc: TODO
+      - name: host_visible
+        doc: TODO
+      - name: host_coherent
+        doc: TODO
+      - name: host_uncached
+        doc: TODO
+      - name: host_cached
+        doc: TODO
+
+  - name: texture_usage
+    extended: true
+    doc: TODO
+    entries:
+      - name: transient_attachment
+        value: 32
+        doc: TODO
+      - name: storage_attachment
+        value: 64
+        doc: TODO
+
+function_types:
+  - name: callback
+    doc: TODO
+
+structs:
+  - name: future
+    type: standalone
+    doc: TODO
+    members:
+      - name: id
+        type: uint64
+        doc: TODO
+
+  - name: copy_texture_for_browser_options
+    type: base_in
+    doc: TODO
+    members:
+      - name: flip_y
+        type: bool
+        doc: TODO
+      - name: needs_color_space_conversion
+        type: bool
+        doc: TODO
+      - name: src_alpha_mode
+        type: enum.alpha_mode
+        doc: TODO
+      - name: src_transfer_function_parameters
+        type: float32
+        doc: TODO
+      - name: conversion_matrix
+        type: float32
+        pointer: immutable
+        doc: TODO
+      - name: dst_transfer_function_parameters
+        type: float32
+        doc: TODO
+        pointer: immutable
+      - name: dst_alpha_mode
+        type: enum.alpha_mode
+        doc: TODO
+      - name: internal_usage
+        type: bool
+        doc: TODO
+
+  - name: request_adapter_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.request_adapter_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: request_device_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.request_device_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: create_render_pipeline_async_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.create_render_pipeline_async_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: create_compute_pipeline_async_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.create_compute_pipeline_async_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: device_lost_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.device_lost_callback_new
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: uncaptured_error_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.error_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: pop_error_scope_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.pop_error_scope_callback
+        doc: TODO
+      - name: old_callback
+        type: function_type.error_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: queue_work_done_callback_info
+    type: base_in
+    doc: TODO
+    members:
+      - name: mode
+        type: enum.callback_mode
+        doc: TODO
+      - name: callback
+        type: function_type.queue_work_done_callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: render_pass_pixel_local_storage
+    type: extension_in
+    doc: TODO
+    members:
+      - name: total_pixel_local_storage_size
+        type: uint64
+        doc: TODO
+      - name: storage_attachments
+        type: array<struct.render_pass_storage_attachment>
+        pointer: immutable
+        doc: TODO
+
+  - name: render_pass_storage_attachment
+    type: base_in
+    doc: TODO
+    members:
+      - name: offset
+        type: uint64
+        doc: TODO
+      - name: storage
+        type: object.texture_view
+        doc: TODO
+      - name: load_op
+        type: enum.load_op
+        doc: TODO
+      - name: store_op
+        type: enum.store_op
+        doc: TODO
+      - name: clear_value
+        type: struct.color
+        doc: TODO
+
+
+  - name: adapter_properties_D3D
+    type: extension_out
+    doc: TODO
+    members:
+      - name: shader_model
+        type: uint32
+        doc: TODO
+
+  - name: adapter_properties_vk
+    type: extension_out
+    doc: TODO
+    members:
+      - name: driver_version
+        type: uint32
+        doc: TODO
+
+  - name: dawn_adapter_properties_power_preference
+    type: extension_out
+    doc: TODO
+    members:
+      - name: power_preference
+        type: enum.power_preference
+        doc: TODO
+
+  - name: buffer_host_mapped_pointer
+    type: extension_in
+    doc: TODO
+    members:
+      - name: pointer
+        type: c_void
+        pointer: mutable
+        doc: TODO
+      - name: dispose_callback
+        type: function_type.callback
+        doc: TODO
+      - name: userdata
+        type: c_void
+        pointer: mutable
+        doc: TODO
+
+  - name: memory_heap_info
+    type: standalone
+    doc: TODO
+    members:
+      - name: properties
+        type: bitflag.heap_property
+        doc: TODO
+      - name: size
+        type: uint64
+        doc: TODO
+
+  - name: adapter_properties_memory_heaps
+    type: extension_out
+    doc: TODO
+    members:
+      - name: heap_info
+        type: array<struct.memory_heap_info>
+        pointer: immutable
+        doc: TODO
+
+  - name: depth_stencil_state_depth_write_defined_dawn
+    type: extension_in
+    doc: TODO
+    members:
+      - name: depth_write_defined
+        type: bool
+        doc: TODO
+
+functions: []
+objects:
+  - name: instance
+    extended: true
+    doc: Dawn instance extensions
+    methods:
+      - name: request_adapter_f
+        doc: |
+          TODO(crbug.com/dawn/2021): This is dawn/emscripten-only until we rename it to replace the old API. See bug for details.
+        returns:
+          doc: TODO
+          type: struct.future
+        args:
+          - name: options
+            type: struct.request_adapter_otions
+            optional: true
+            pointer: immutable
+            doc: TODO
+          - name: callback_info
+            type: struct.request_adapter_callback_info
+            doc: TODO
+
+  - name: adapter
+    extended: true
+    doc: Dawn adapter extensions
+    methods:
+      - name: get_instance
+        doc: Get the instance the adapter was created from
+        returns:
+          doc: The instance
+          type: object.instance
+
+      - name: request_device_f
+        doc: |
+          TODO(crbug.com/dawn/2021): This is dawn/emscripten-only until we rename it to replace the old API. See bug for details.
+        returns:
+          doc: TODO
+          type: struct.future
+        args:
+          - name: options
+            type: struct.device_descriptor
+            optional: true
+            pointer: immutable
+            doc: TODO
+          - name: callback_info
+            type: struct.request_device_callback_info
+            doc: TODO
+
+      - name: get_format_capabilities
+        doc: TODO
+        returns:
+          doc: TODO
+          type: bool
+        args:
+          - name: format
+            type: enum.texture_format
+            doc: TODO
+          - name: capabilities
+            type: struct.format_capabilities
+            pointer: mutable
+            doc: TODO
+
+  - name: device
+    extended: true
+    doc: TODO
+    methods:
+      - name: create_error_buffer
+        doc: TODO
+        returns:
+          doc: TODO
+          type: object.buffer
+        args:
+          - name: descriptor
+            type: struct.buffer_descriptor
+            pointer: immutable
+            doc: TODO
+
+      - name: validate_texture_descriptor
+        doc: TODO
+        args:
+          - name: descriptor
+            type: struct.texture_descriptor
+            pointer: immutable
+            doc: TODO
+
+      - name: tick
+        doc: TODO
+
+      - name: inject_error
+        doc: TODO
+        args:
+          - name: type
+            type: enum.error_type
+            doc: TODO
+          - name: message
+            type: string
+            doc: TODO
+
+      - name: force_loss
+        doc: TODO
+        args:
+          - name: type
+            type: enum.device_lost_reason
+            doc: TODO
+          - name: message
+            type: string
+            doc: TODO
+
+  - name: compute_pass_encoder
+    extended: true
+    doc: TODO
+    methods:
+      - name: write_timestamp
+        doc: TODO
+        args:
+          - name: query_set
+            type: object.query_set
+            doc: TODO
+          - name: query_index
+            type: uint32
+            doc: TODO
+
+  - name: render_pass_encoder
+    extended: true
+    doc: TODO
+    methods:
+      - name: write_timestamp
+        doc: TODO
+        args:
+          - name: query_set
+            type: object.query_set
+            doc: TODO
+          - name: query_index
+            type: uint32
+            doc: TODO
+
+      - name: pixel_local_storage_barrier
+        doc: TODO
