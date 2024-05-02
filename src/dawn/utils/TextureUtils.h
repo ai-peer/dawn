@@ -290,6 +290,14 @@ bool TextureFormatSupportsMultisampling(const wgpu::Device& device,
 bool TextureFormatSupportsResolveTarget(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat);
 
+wgpu::TextureSubsampling GetMultiPlaneTextureSubsampling(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureBitsPerPlane(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureNumPlanes(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureBytesPerElement(wgpu::TextureFormat textureFormat, size_t plane);
+uint32_t GetMultiPlaneTextureSubsamplingFactorPerPlane(wgpu::TextureFormat textureFormat,
+                                                       size_t plane,
+                                                       bool isHorizontal);
+
 uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat);
 uint32_t GetTextureFormatBlockWidth(wgpu::TextureFormat textureFormat);
 uint32_t GetTextureFormatBlockHeight(wgpu::TextureFormat textureFormat);
