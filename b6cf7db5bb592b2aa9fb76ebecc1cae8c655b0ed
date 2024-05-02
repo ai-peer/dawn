@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27c46abe_dfdecfad",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:28:02Z",
+      "side": 1,
+      "message": "There should be no jsrepr for this item. The default would be the JS code `\"unknown\"` which is correct; this jsrepr will make it the JS code `unknown` (which parses as a variable name).",
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "97165fa1_1f40464b",
         "filename": "src/dawn/node/binding/GPUDevice.cpp",
         "patchSetId": 4
@@ -31,6 +48,30 @@
       "writtenOn": "2024-05-02T16:15:29Z",
       "side": 1,
       "message": "I think you can use `interop::GPUDeviceLostReason::kUnknown` here",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5593db_6be9460b",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:28:02Z",
+      "side": 1,
+      "message": "+1, and while we\u0027re here, WGPUDeviceLostReason_InstanceDropped should either map to the `UNREACHABLE` case or to `interop::GPUDeviceLostReason::kUnknown`. I think `UNREACHABLE`.",
+      "parentUuid": "97165fa1_1f40464b",
       "range": {
         "startLine": 187,
         "startChar": 0,
