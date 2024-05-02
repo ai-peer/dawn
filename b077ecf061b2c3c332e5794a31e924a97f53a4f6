@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a45025ad_07646ce1",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:24:31Z",
+      "side": 1,
+      "message": "I think we only want to reserve 0, not define a name for it. Any particular reason we need it?",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec4a15c3_e0a95994",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:24:31Z",
+      "side": 1,
+      "message": "DAWN_ASSERT tells the compiler this will be unreachable so in release may completely skip this check. Normally for this I\u0027d say use DAWN_CHECK, except...\n\nI think we are supposed to fail gracefully in this case by always returning kNullFutureID. There should be \"implementation-defined logging\" in this case too. (If that\u0027s not really possible right now, add a TODO)",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f93c015c_a7ad246a",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-02T22:24:31Z",
+      "side": 1,
+      "message": "Same comment here about implementation defined logging",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
