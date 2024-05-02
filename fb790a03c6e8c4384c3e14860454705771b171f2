@@ -22,6 +22,30 @@
       },
       "revId": "fb790a03c6e8c4384c3e14860454705771b171f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69295ef5_f1795013",
+        "filename": "src/dawn/common/StackAllocated.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-02T16:29:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55d91742_e0eae719",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "fb790a03c6e8c4384c3e14860454705771b171f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
