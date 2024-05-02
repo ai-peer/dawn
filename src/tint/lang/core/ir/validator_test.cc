@@ -1197,7 +1197,7 @@ TEST_F(IR_ValidatorTest, If_ConditionIsBool) {
 
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
-    EXPECT_EQ(res.Failure().reason.Str(), R"(:3:8 error: if: condition must be a `bool` type
+    EXPECT_EQ(res.Failure().reason.Str(), R"(:3:8 error: if: condition type must be 'bool'
     if 1i [t: $B2, f: $B3] {  # if_1
        ^^
 
@@ -1813,7 +1813,7 @@ TEST_F(IR_ValidatorTest, Unary_ResultTypeNotMatchValueType) {
     ASSERT_NE(res, Success);
     EXPECT_EQ(
         res.Failure().reason.Str(),
-        R"(:3:5 error: unary: unary instruction result type (f32) does not match overload result type (i32)
+        R"(:3:5 error: unary: result value type 'f32' does not match complement result type 'i32'
     %2:f32 = complement 2i
     ^^^^^^^^^^^^^^^^^^^^^^
 
