@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b8e843d_e5b653ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-05-02T13:51:30Z",
+      "side": 1,
+      "message": "LGTM w/fix",
+      "revId": "53af2b772bee6011c1d0e213ec1aed20d168150b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2b0375_7060282c",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1082,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-05-02T13:51:30Z",
+      "side": 1,
+      "message": "Nit: do you still need the capture \u0026 here? If not, suggest you remove it and move the lambda outside of the loop/switch. That might also silence the compilers that are complaining about a shadowed parameter.",
+      "revId": "53af2b772bee6011c1d0e213ec1aed20d168150b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
