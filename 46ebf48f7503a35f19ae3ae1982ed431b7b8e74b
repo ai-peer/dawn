@@ -16,6 +16,23 @@
       "message": "Brandon, PTAL\n\nI also don\u0027t have CQ and Submit privileges in dawn/ (though I do in chromium), so I need help with button pushing 😊",
       "revId": "46ebf48f7503a35f19ae3ae1982ed431b7b8e74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "732dd7ad_cd0b7477",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-05-02T18:12:49Z",
+      "side": 1,
+      "message": "LGTM\n\nCCing cwallez@, enga@ as an FYI",
+      "revId": "46ebf48f7503a35f19ae3ae1982ed431b7b8e74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
