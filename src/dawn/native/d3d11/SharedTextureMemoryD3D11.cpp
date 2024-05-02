@@ -42,12 +42,12 @@ namespace dawn::native::d3d11 {
 
 namespace {
 
-ResultOrError<SharedTextureMemoryProperties> PropertiesFromD3D11Texture(
-    Device* device,
-    ID3D11Texture2D* d3d11Texture) {
+ResultOrError<SharedTextureMemoryProperties>
+PropertiesFromD3D11Texture(Device* device, ID3D11Texture2D* d3d11Texture, bool isSharedWithHandle) {
     D3D11_TEXTURE2D_DESC desc;
     d3d11Texture->GetDesc(&desc);
-    DAWN_INVALID_IF(desc.ArraySize != 1, "Resource ArraySize (%d) was not 1", desc.ArraySize);
+    DAWN_INVALID_IF(isSharedWithHandle && desc.ArraySize != 1,
+                    "Resource shared with HANDLE, the ArraySize (%d) was not 1", desc.ArraySize);
     DAWN_INVALID_IF(desc.MipLevels != 1, "Resource MipLevels (%d) was not 1", desc.MipLevels);
     DAWN_INVALID_IF(desc.SampleDesc.Count != 1, "Resource SampleDesc.Count (%d) was not 1",
                     desc.SampleDesc.Count);
@@ -108,7 +108,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
         CheckHRESULT(d3d11Resource.As(&d3d11Texture), "Cannot get ID3D11Texture2D from texture"));
 
     SharedTextureMemoryProperties properties;
-    DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, d3d11Texture.Get()));
+    DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, d3d11Texture.Get(),
+                                                           /*isSharedWithHandle=*/true));
 
     auto result =
         AcquireRef(new SharedTextureMemory(device, label, properties, std::move(d3d11Resource)));
@@ -134,7 +135,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                     device);
 
     SharedTextureMemoryProperties properties;
-    DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, descriptor->texture.Get()));
+    DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, descriptor->texture.Get(),
+                                                           /*isSharedWithHandle=*/false));
 
     auto result =
         AcquireRef(new SharedTextureMemory(device, label, properties, std::move(d3d11Resource)));
