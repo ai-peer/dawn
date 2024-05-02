@@ -966,11 +966,7 @@ void Validator::CheckBinary(const Binary* b) {
     if (b->LHS() && b->RHS()) {
         auto symbols = SymbolTable::Wrap(mod_.symbols);
         auto type_mgr = type::Manager::Wrap(mod_.Types());
-        intrinsic::Context context{
-            b->TableData(),
-            type_mgr,
-            symbols,
-        };
+        intrinsic::Context context{b->TableData(), type_mgr, symbols};
 
         auto overload =
             core::intrinsic::LookupBinary(context, b->Op(), b->LHS()->Type(), b->RHS()->Type(),
@@ -982,11 +978,10 @@ void Validator::CheckBinary(const Binary* b) {
 
         if (auto* result = b->Result(0)) {
             if (overload->return_type != result->Type()) {
-                StringStream err;
-                err << "binary instruction result type (" << result->Type()->FriendlyName()
-                    << ") does not match overload result type ("
-                    << overload->return_type->FriendlyName() << ")";
-                AddError(b) << err.str();
+                AddError(b) << "result value type " << style::Type(result->Type()->FriendlyName())
+                            << " does not match "
+                            << style::Instruction(Disassembly().NameOf(b->Op())) << " result type "
+                            << style::Type(overload->return_type->FriendlyName());
             }
         }
     }
@@ -997,11 +992,7 @@ void Validator::CheckUnary(const Unary* u) {
     if (u->Val()) {
         auto symbols = SymbolTable::Wrap(mod_.symbols);
         auto type_mgr = type::Manager::Wrap(mod_.Types());
-        intrinsic::Context context{
-            u->TableData(),
-            type_mgr,
-            symbols,
-        };
+        intrinsic::Context context{u->TableData(), type_mgr, symbols};
 
         auto overload = core::intrinsic::LookupUnary(context, u->Op(), u->Val()->Type(),
                                                      core::EvaluationStage::kRuntime);
@@ -1012,11 +1003,10 @@ void Validator::CheckUnary(const Unary* u) {
 
         if (auto* result = u->Result(0)) {
             if (overload->return_type != result->Type()) {
-                StringStream err;
-                err << "unary instruction result type (" << result->Type()->FriendlyName()
-                    << ") does not match overload result type ("
-                    << overload->return_type->FriendlyName() << ")";
-                AddError(u) << err.str();
+                AddError(u) << "result value type " << style::Type(result->Type()->FriendlyName())
+                            << " does not match "
+                            << style::Instruction(Disassembly().NameOf(u->Op())) << " result type "
+                            << style::Type(overload->return_type->FriendlyName());
             }
         }
     }
@@ -1026,7 +1016,8 @@ void Validator::CheckIf(const If* if_) {
     CheckOperandNotNull(if_, if_->Condition(), If::kConditionOperandOffset);
 
     if (if_->Condition() && !if_->Condition()->Type()->Is<core::type::Bool>()) {
-        AddError(if_, If::kConditionOperandOffset) << "condition must be a `bool` type";
+        AddError(if_, If::kConditionOperandOffset)
+            << "condition type must be " << style::Type("bool");
     }
 
     tasks_.Push([this] { control_stack_.Pop(); });
@@ -1114,9 +1105,9 @@ void Validator::CheckExit(const Exit* e) {
 
     for (size_t i = 0; i < results.Length(); ++i) {
         if (results[i] && args[i] && results[i]->Type() != args[i]->Type()) {
-            AddError(e, i) << "argument type (" << results[i]->Type()->FriendlyName()
-                           << ") does not match control instruction type ("
-                           << args[i]->Type()->FriendlyName() << ")";
+            AddError(e, i) << "argument type " << style::Type(results[i]->Type()->FriendlyName())
+                           << " does not match control instruction type "
+                           << style::Type(args[i]->Type()->FriendlyName());
             AddNote(e->ControlInstruction()) << "control instruction";
         }
     }
