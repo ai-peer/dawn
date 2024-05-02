@@ -266,6 +266,22 @@ static constexpr std::array<wgpu::TextureFormat, 2> kDepthAndStencilFormats = {
     wgpu::TextureFormat::Depth32FloatStencil8,
 };
 
+class SubsamplingFactor {
+  public:
+    constexpr SubsamplingFactor(uint32_t horizontal_factor, uint32_t vertical_factor)
+        : horizontal_factor_(horizontal_factor), vertical_factor_(vertical_factor) {}
+
+    SubsamplingFactor(const SubsamplingFactor&) = delete;
+    SubsamplingFactor& operator=(const SubsamplingFactor&) = delete;
+
+    constexpr uint32_t horizontal() const { return horizontal_factor_; }
+    constexpr uint32_t vertical() const { return vertical_factor_; }
+
+  private:
+    uint32_t horizontal_factor_ = 1;
+    uint32_t vertical_factor_ = 1;
+};
+
 bool TextureFormatSupportsStorageTexture(wgpu::TextureFormat format,
                                          const wgpu::Device& device,
                                          bool isCompatibilityMode);
@@ -289,6 +305,13 @@ bool TextureFormatSupportsMultisampling(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat);
 bool TextureFormatSupportsResolveTarget(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat);
+
+wgpu::TextureSubsampling GetMultiPlaneTextureSubsampling(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureBitDepth(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureNumPlanes(wgpu::TextureFormat textureFormat);
+uint32_t GetMultiPlaneTextureBytesPerElement(wgpu::TextureFormat textureFormat, size_t plane);
+SubsamplingFactor GetMultiPlaneTextureSubsamplingFactor(wgpu::TextureFormat textureFormat,
+                                                        size_t plane);
 
 uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat);
 uint32_t GetTextureFormatBlockWidth(wgpu::TextureFormat textureFormat);
