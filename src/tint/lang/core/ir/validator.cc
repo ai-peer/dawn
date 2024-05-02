@@ -1302,7 +1302,7 @@ Result<SuccessType> ValidateAndDumpIfNeeded([[maybe_unused]] const Module& ir,
     std::cout << "=========================================================" << std::endl;
     std::cout << "== IR dump before " << msg << ":" << std::endl;
     std::cout << "=========================================================" << std::endl;
-    std::cout << Disassemble(ir);
+    std::cout << Disassemble(ir).Plain();
 #endif
 
 #ifndef NDEBUG
