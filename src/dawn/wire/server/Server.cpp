@@ -61,6 +61,30 @@ Server::~Server() {
     DestroyAllObjects(mProcs);
 }
 
+WireResult Server::InjectBuffer(WGPUBuffer buffer,
+                                const Handle& handle,
+                                const Handle& deviceHandle) {
+    DAWN_ASSERT(buffer != nullptr);
+    Known<WGPUDevice> device;
+    WIRE_TRY(DeviceObjects().Get(deviceHandle.id, &device));
+    if (device->generation != deviceHandle.generation) {
+        return WireResult::FatalError;
+    }
+
+    Known<WGPUBuffer> data;
+    WIRE_TRY(BufferObjects().Allocate(&data, handle));
+
+    data->handle = buffer;
+    data->generation = handle.generation;
+    data->state = AllocationState::Allocated;
+
+    // The Buffer is externally owned so it shouldn't be destroyed when we receive a destroy
+    // message from the client. Add a reference to counterbalance the eventual release.
+    mProcs.bufferReference(buffer);
+
+    return WireResult::Success;
+}
+
 WireResult Server::InjectTexture(WGPUTexture texture,
                                  const Handle& handle,
                                  const Handle& deviceHandle) {
