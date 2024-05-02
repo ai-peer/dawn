@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ec5c08_c8ce36e4",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-02T08:08:39Z",
+      "side": 1,
+      "message": "The utils `ScopeStack` is a key-value map. Here we want a stack of sets.",
+      "parentUuid": "407da554_e1f83ec1",
+      "revId": "bdb45eea1052f8bb91829b529fe38f9e410e7d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7a9d15d_7339b64b",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-01T21:10:58Z",
       "side": 1,
       "message": "Is this not taken care of with the code in `CheckInstruction()`?",
+      "revId": "bdb45eea1052f8bb91829b529fe38f9e410e7d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a3cd72_0cd00140",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-02T08:08:39Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. I had changed this to `CheckVar()` to avoid the dynamic cast, but then found `CheckInstruction()` does more stuff. Done.",
+      "parentUuid": "a7a9d15d_7339b64b",
       "revId": "bdb45eea1052f8bb91829b529fe38f9e410e7d5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
