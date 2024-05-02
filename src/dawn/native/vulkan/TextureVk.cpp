@@ -1761,14 +1761,13 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
     createInfo.pNext = &usageInfo;
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
-    if (auto* vulkanYCbCrDescriptor = descriptor.Get<vulkan::YCbCrVulkanDescriptor>()) {
-        // TODO(crbug.com/dawn/2476): Validate mSamplerYcbcrConversionCreateInfo matches with that
-        // in SamplerDescriptor.
-        mSamplerYcbcrConversionCreateInfo = vulkanYCbCrDescriptor->vulkanYCbCrInfo;
-        DAWN_TRY(ValidateCanCreateSamplerYCbCrConversion(mSamplerYcbcrConversionCreateInfo));
+    if (auto* yCbCrDescriptor = descriptor.Get<YCbCrVkDescriptor>()) {
+        DAWN_TRY(ValidateCanCreateSamplerYCbCrConversion(yCbCrDescriptor));
+        mYcbcrConversionCreateInfo = CreateSamplerYCbCrConversionCreateInfo(yCbCrDescriptor);
+
         DAWN_TRY(CheckVkSuccess(device->fn.CreateSamplerYcbcrConversion(
-                                    device->GetVkDevice(), &mSamplerYcbcrConversionCreateInfo,
-                                    nullptr, &*mSamplerYCbCrConversion),
+                                    device->GetVkDevice(), &mYcbcrConversionCreateInfo, nullptr,
+                                    &*mSamplerYCbCrConversion),
                                 "CreateSamplerYcbcrConversion for vkImageView"));
 
         samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
