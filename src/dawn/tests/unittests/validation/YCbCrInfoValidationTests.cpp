@@ -28,7 +28,6 @@
 #include <vulkan/vulkan.h>
 #include <vector>
 
-#include "dawn/native/VulkanBackend.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
@@ -79,7 +78,7 @@ class YCbCrInfoWithoutFeatureValidationTest : public ValidationTest {
 // if the required feature is not enabled.
 TEST_F(YCbCrInfoWithoutFeatureValidationTest, YCbCrSamplerNotSupported) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     samplerDesc.nextInChain = &yCbCrDesc;
 
     ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
@@ -93,7 +92,7 @@ TEST_F(YCbCrInfoWithoutFeatureValidationTest, YCbCrTextureViewNotSupported) {
     wgpu::TextureViewDescriptor descriptor =
         CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
     descriptor.arrayLayerCount = 1;
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     descriptor.nextInChain = &yCbCrDesc;
 
     ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
@@ -114,8 +113,7 @@ class YCbCrInfoWithFeatureValidationTest : public YCbCrInfoWithoutFeatureValidat
 // required feature is enabled.
 TEST_F(YCbCrInfoWithFeatureValidationTest, YCbCrSamplerSupported) {
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
-    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     samplerDesc.nextInChain = &yCbCrDesc;
 
     device.CreateSampler(&samplerDesc);
@@ -129,8 +127,7 @@ TEST_F(YCbCrInfoWithFeatureValidationTest, CreateBindGroupWithYCbCrSamplerSuppor
     wgpu::StaticSamplerBindingLayout staticSamplerBinding = {};
 
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
-    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     samplerDesc.nextInChain = &yCbCrDesc;
 
     staticSamplerBinding.sampler = device.CreateSampler(&samplerDesc);
@@ -164,8 +161,7 @@ TEST_F(YCbCrInfoWithFeatureValidationTest, CreateBindGroupWithSamplerAndStaticSa
     wgpu::StaticSamplerBindingLayout staticSamplerBinding = {};
 
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
-    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     samplerDesc.nextInChain = &yCbCrDesc;
 
     staticSamplerBinding.sampler = device.CreateSampler(&samplerDesc);
@@ -199,8 +195,7 @@ TEST_F(YCbCrInfoWithFeatureValidationTest, BindGroupCreationForSamplerBindingTyp
     wgpu::StaticSamplerBindingLayout staticSamplerBinding = {};
 
     wgpu::SamplerDescriptor samplerDesc = {};
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
-    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     samplerDesc.nextInChain = &yCbCrDesc;
 
     staticSamplerBinding.sampler = device.CreateSampler(&samplerDesc);
@@ -227,8 +222,7 @@ TEST_F(YCbCrInfoWithFeatureValidationTest, YCbCrTextureViewSupported) {
     wgpu::TextureViewDescriptor descriptor =
         CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
     descriptor.arrayLayerCount = 1;
-    native::vulkan::YCbCrVulkanDescriptor yCbCrDesc = {};
-    yCbCrDesc.vulkanYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO;
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
     descriptor.nextInChain = &yCbCrDesc;
 
     texture.CreateView(&descriptor);
