@@ -1077,6 +1077,16 @@ class Builder {
             InstructionResult(to), Value(std::forward<VAL>(val))));
     }
 
+    /// Creates a value constructor instruction with an existing instruction result
+    /// @param result the instruction result to use
+    /// @param args the arguments to the constructor
+    /// @returns the instruction
+    template <typename... ARGS>
+    ir::Construct* ConstructWithResult(InstructionResult* result, ARGS&&... args) {
+        return Append(ir.allocators.instructions.Create<ir::Construct>(
+            result, Values(std::forward<ARGS>(args)...)));
+    }
+
     /// Creates a value constructor instruction to the template type T
     /// @param args the arguments to the constructor
     /// @returns the instruction
@@ -1092,8 +1102,17 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::Construct* Construct(const core::type::Type* type, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::Construct>(
-            InstructionResult(type), Values(std::forward<ARGS>(args)...)));
+        return ConstructWithResult(InstructionResult(type), Values(std::forward<ARGS>(args)...));
+    }
+
+    /// Creates a load instruction with an existing result
+    /// @param result the instruction result to use
+    /// @param from the expression being loaded from
+    /// @returns the instruction
+    template <typename VAL>
+    ir::Load* Load(InstructionResult* result, VAL&& from) {
+        auto* value = Value(std::forward<VAL>(from));
+        return Append(ir.allocators.instructions.Create<ir::Load>(result, value));
     }
 
     /// Creates a load instruction
@@ -1102,8 +1121,7 @@ class Builder {
     template <typename VAL>
     ir::Load* Load(VAL&& from) {
         auto* value = Value(std::forward<VAL>(from));
-        return Append(ir.allocators.instructions.Create<ir::Load>(
-            InstructionResult(value->Type()->UnwrapPtrOrRef()), value));
+        return Load(InstructionResult(value->Type()->UnwrapPtrOrRef()), value);
     }
 
     /// Creates a store instruction
@@ -1133,6 +1151,22 @@ class Builder {
                                                                                 value_val));
     }
 
+    /// Creates a load vector element instruction with an existing instruction result
+    /// @param result the instruction result to use
+    /// @param from the vector pointer expression being loaded from
+    /// @param index the new vector element index
+    /// @returns the instruction
+    template <typename FROM, typename INDEX>
+    ir::LoadVectorElement* LoadVectorElement(InstructionResult* result,
+                                             FROM&& from,
+                                             INDEX&& index) {
+        CheckForNonDeterministicEvaluation<FROM, INDEX>();
+        auto* from_val = Value(std::forward<FROM>(from));
+        auto* index_val = Value(std::forward<INDEX>(index));
+        return Append(
+            ir.allocators.instructions.Create<ir::LoadVectorElement>(result, from_val, index_val));
+    }
+
     /// Creates a load vector element instruction
     /// @param from the vector pointer expression being loaded from
     /// @param index the new vector element index
@@ -1143,8 +1177,7 @@ class Builder {
         auto* from_val = Value(std::forward<FROM>(from));
         auto* index_val = Value(std::forward<INDEX>(index));
         auto* res = InstructionResult(VectorPtrElementType(from_val->Type()));
-        return Append(
-            ir.allocators.instructions.Create<ir::LoadVectorElement>(res, from_val, index_val));
+        return LoadVectorElement(res, from_val, index_val);
     }
 
     /// Creates a new `var` declaration
@@ -1382,6 +1415,19 @@ class Builder {
         return FunctionParam(type);
     }
 
+    /// Creates a new `Access` with an existing instruction result
+    /// @param result the instruction result to use
+    /// @param object the object being accessed
+    /// @param indices the access indices
+    /// @returns the instruction
+    template <typename OBJ, typename... ARGS>
+    ir::Access* AccessWithResult(InstructionResult* result, OBJ&& object, ARGS&&... indices) {
+        CheckForNonDeterministicEvaluation<OBJ, ARGS...>();
+        auto* obj_val = Value(std::forward<OBJ>(object));
+        return Append(ir.allocators.instructions.Create<ir::Access>(
+            result, obj_val, Values(std::forward<ARGS>(indices)...)));
+    }
+
     /// Creates a new `Access`
     /// @param type the return type
     /// @param object the object being accessed
@@ -1389,10 +1435,8 @@ class Builder {
     /// @returns the instruction
     template <typename OBJ, typename... ARGS>
     ir::Access* Access(const core::type::Type* type, OBJ&& object, ARGS&&... indices) {
-        CheckForNonDeterministicEvaluation<OBJ, ARGS...>();
-        auto* obj_val = Value(std::forward<OBJ>(object));
-        return Append(ir.allocators.instructions.Create<ir::Access>(
-            InstructionResult(type), obj_val, Values(std::forward<ARGS>(indices)...)));
+        return AccessWithResult(InstructionResult(type), std::forward<OBJ>(object),
+                                Values(std::forward<ARGS>(indices)...));
     }
 
     /// Creates a new `Access`

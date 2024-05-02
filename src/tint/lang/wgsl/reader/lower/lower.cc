@@ -199,8 +199,7 @@ Result<SuccessType> Lower(core::ir::Module& mod) {
                     //    call workgroupBarrier
                     b.InsertBefore(call, [&] {
                         b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
-                        auto* load = b.Load(call->Args()[0]);
-                        load->SetResults(Vector{call->DetachResult()});
+                        b.Load(call->DetachResult(), call->Args()[0]);
                         b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
                     });
                     break;
