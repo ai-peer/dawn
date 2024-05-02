@@ -122,14 +122,14 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     }
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
-    if (auto* vulkanYCbCrDescriptor = Unpack(descriptor).Get<vulkan::YCbCrVulkanDescriptor>()) {
-        const VkSamplerYcbcrConversionCreateInfo& vulkanYCbCrInfo =
-            vulkanYCbCrDescriptor->vulkanYCbCrInfo;
-        DAWN_TRY(ValidateCanCreateSamplerYCbCrConversion(vulkanYCbCrInfo));
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &vulkanYCbCrInfo,
-                                                    nullptr, &*mSamplerYCbCrConversion),
-            "CreateSamplerYcbcrConversion"));
+    if (auto* yCbCrDescriptor = Unpack(descriptor).Get<YCbCrVkDescriptor>()) {
+        DAWN_TRY(ValidateCanCreateSamplerYCbCrConversion(yCbCrDescriptor));
+        mYcbcrConversionCreateInfo = CreateSamplerYCbCrConversionCreateInfo(yCbCrDescriptor);
+
+        DAWN_TRY(CheckVkSuccess(device->fn.CreateSamplerYcbcrConversion(
+                                    device->GetVkDevice(), &mYcbcrConversionCreateInfo, nullptr,
+                                    &*mSamplerYCbCrConversion),
+                                "CreateSamplerYcbcrConversion"));
 
         samplerYCbCrInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO;
         samplerYCbCrInfo.pNext = nullptr;
