@@ -16,6 +16,24 @@
       "message": "DO NOT SUBMIT: need to support/verify enforcing CQ in chumpdetector plugin without a tree status",
       "revId": "86c1eb621b11c568fcf4280c14892c536b60fbdf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88dd90a1_23bdf256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002442
+      },
+      "writtenOn": "2024-05-02T17:17:58Z",
+      "side": 1,
+      "message": "cl/627991544 on prod, submitting",
+      "parentUuid": "6e2c030a_69603e45",
+      "revId": "86c1eb621b11c568fcf4280c14892c536b60fbdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
