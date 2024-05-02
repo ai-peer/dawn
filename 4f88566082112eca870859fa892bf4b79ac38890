@@ -16,6 +16,24 @@
       "message": "This is supposed to be checking `continue`, not `next_iteration`. The former is a branch to the continuing block, the latter is a branch to the body.\n\nWe previously discussed making `next_iteration` invalid inside the body, but never got around to validating it.",
       "revId": "4f88566082112eca870859fa892bf4b79ac38890",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4043eec1_4f682112",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-02T10:01:53Z",
+      "side": 1,
+      "message": "Argh, I\u0027ve entirely paged out all the IR terms. Fixed.",
+      "parentUuid": "fb68fa09_e9f0cf97",
+      "revId": "4f88566082112eca870859fa892bf4b79ac38890",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
