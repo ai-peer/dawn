@@ -670,6 +670,16 @@ hooks = [
               '--quiet',
               ],
  },
+ {
+  'name': 'go get',
+  'condition': 'host_os != win',
+  'action': ['tools/golang/bin/go', 'get', './tools/...']
+ },
+ {
+  'name': 'go get',
+  'condition': 'host_os == win',
+  'action': ['tools/golang/bin/go.exe', 'get', './tools/...']
+ },
 ]
 
 recursedeps = [
