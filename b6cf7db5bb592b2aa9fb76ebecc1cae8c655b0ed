@@ -16,6 +16,29 @@
       "message": "PTAL THANK YOU",
       "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97165fa1_1f40464b",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-02T16:15:29Z",
+      "side": 1,
+      "message": "I think you can use `interop::GPUDeviceLostReason::kUnknown` here",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
