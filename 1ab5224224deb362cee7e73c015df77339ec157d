@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac0c412_91d0f656",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Note for myself for next PS, maybe I can just roll this into the declaration macro?",
+      "range": {
+        "startLine": 237,
+        "startChar": 0,
+        "endLine": 243,
+        "endChar": 15
+      },
+      "revId": "1ab5224224deb362cee7e73c015df77339ec157d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

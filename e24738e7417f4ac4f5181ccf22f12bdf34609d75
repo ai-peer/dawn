@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a24f80_45e28d55",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 954,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "I think that\u0027s the old syntax. The new style guide (https://engdoc.corp.google.com/eng/doc/devguide/codehealth/development/practices/todo.md?cl\u003dhead) suggests this instead, (although I think I used \u0027:\u0027 instead of \u0027-\u0027 in the initial change incorrectly).",
+      "parentUuid": "71d40b4e_821e2094",
+      "range": {
+        "startLine": 954,
+        "startChar": 2,
+        "endLine": 954,
+        "endChar": 28
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4698de0_b87feca4",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "Normally this shouldn\u0027t be needed because we typedef all our structs so they don\u0027t need `struct` in front. Is it needed here in particular for some reason?",
+      "range": {
+        "startLine": 123,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 71
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01f08e2a_be84d2f6",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Hmm not sure, I just got this from what we already had for `function pointer` types. Removing it from here doesn\u0027t seem to break anything though so done!\n\n(I didn\u0027t remove the other one in this CL for now, can do that in a follow up since I don\u0027t want to accidentally break something via that.)",
+      "parentUuid": "a4698de0_b87feca4",
       "range": {
         "startLine": 123,
         "startChar": 12,
@@ -119,6 +167,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8250f91c_55d80eb1",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "In this PS I removed it atm, will add it back, but to clarify, how would C++ users pass extensions? Since we flatten out the structs members as arguments to the APIs, it\u0027s not as clear how we would pass the extensions?",
+      "parentUuid": "37583b7e_486bb823",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46dbdfa4_fd9a5f44",
         "filename": "generator/templates/api_cpp.h",
         "patchSetId": 12
@@ -130,6 +196,30 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 247,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51c5e0b_91b6546a",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "See comment above",
+      "parentUuid": "46dbdfa4_fd9a5f44",
       "range": {
         "startLine": 247,
         "startChar": 8,
@@ -163,6 +253,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a121a0_3aee4892",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "I need to use `F` also because otherwise, it will only work with function pointers and non-capturing lambdas that match the signature will not work. By using the `F` and the `enable_if` we can catch both cases.",
+      "parentUuid": "93ecc1e7_3197143a",
+      "range": {
+        "startLine": 252,
+        "startChar": 14,
+        "endLine": 252,
+        "endChar": 59
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be9d1836_de000019",
@@ -176,6 +290,30 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 312,
+        "startChar": 8,
+        "endLine": 312,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33c4562_a0d248a2",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "be9d1836_de000019",
       "range": {
         "startLine": 312,
         "startChar": 8,
@@ -203,6 +341,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a98ad08_5f66a2f4",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcd7e39d_9030ad68",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "117089ee_8b8fe0a2",
@@ -216,6 +372,24 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "[1] these would be flipped",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e599d36d_7ee16ea0",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "117089ee_8b8fe0a2",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -243,6 +417,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52ff2d3d_b1bc2637",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "c1b20171_324223af",
+      "range": {
+        "startLine": 383,
+        "startChar": 8,
+        "endLine": 383,
+        "endChar": 29
+      },
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc93af64_5364c74a",
@@ -256,6 +454,24 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "nit: I think it\u0027s more intuitive to have keep these in the usual order [callback, userdata]. (Call site at [1])",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eabb987_e18ad63b",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc93af64_5364c74a",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -277,6 +493,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e2c7a2e_b3587980",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebdb7dad_11b063eb",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "907d6e3d_42dd851f",
@@ -290,6 +524,24 @@
       "writtenOn": "2024-04-30T04:40:43Z",
       "side": 1,
       "message": "I\u0027m not sure if there are any remaining breaking changes to callback signatures, but if there are then we should call this something like \"unstable\" or \"do not use\".\n\nThat said I think the only thing left is some changes to which enum values we pass in which cases. Were we planning on just dealing with that later? Can\u0027t remember what we said.",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b601a692_94e22206",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "I think the only other breaking change would be adding the `message` field to some of the other callbacks? (This one already has it so I don\u0027t think anything needs to change?)\n\nFor the enums, I was imagining we could probably mark ones for deprecation, then use like `default` or other handling in the callsites to prevent breaking anything else.",
+      "parentUuid": "907d6e3d_42dd851f",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -311,6 +563,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13c92c54_2db4fece",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29ca3ced_cad9e95f",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a57b186_7883df93",
@@ -324,6 +594,24 @@
       "writtenOn": "2024-04-30T19:18:06Z",
       "side": 1,
       "message": "ditto - can you write RequestAdapterF using RequestAdapter2 ?",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba7a0fe_5c43dd4c",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-02T21:16:27Z",
+      "side": 1,
+      "message": "Can\u0027t for the wire one atm until after we update Chromium side to overwrite the new proc for the wire. (Using the `userdata count` to redirect to different server callas atm.)",
+      "parentUuid": "2a57b186_7883df93",
       "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
