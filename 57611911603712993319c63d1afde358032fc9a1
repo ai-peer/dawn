@@ -34,6 +34,24 @@
       "parentUuid": "feb5ab92_472fae35",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aacc0009_40a33f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-03T17:09:56Z",
+      "side": 1,
+      "message": "The comment on the function says:\n`/// @returns true if the given string is a valid WGSL identifier.`\n\nTint assumes UTF-8 throughout, and [a valid identifier for WGSL is described here](https://www.w3.org/TR/WGSL/#identifiers).\n\n\u003e do we have test coverage for non-ASCII identifiers\n\nNo. We have existing test coverage for various interesting ASCII cases. But I don\u0027t want to spend too much time on this as: (a) this is non-production code. (b) James is actively reimplementing this code for the new IR path. The new code should get the additional UTF-8 test cases.\n\n\u003e this function used? \n\nYes.",
+      "parentUuid": "feb5ab92_472fae35",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
