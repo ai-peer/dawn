@@ -51,6 +51,24 @@
       "message": "Will this just be used for CI or also be developers looking to do things with Dawn? These developers might not all have an x64 system.",
       "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa257532_82fbf070",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T13:57:42Z",
+      "side": 1,
+      "message": "Hmm, good point. The original focus was to get this working for the CMake build, that was failing on Ubuntu 22.04. However, this change adds `use_sysroot \u003d true` to `.gn`, which means it will attempt to use the sysroot on all GN builds, IIUC. Brian\u0027s original change added DEPS entries for all supported platforms. So I see two options:\n\n1. We do as Brian originally did, and add entries to download sysroot for all supported platforms. This would make GN builds always use the hermetic sysroot everywhere.\n\nor\n\n2. We don\u0027t add `use_sysroot \u003d true` to `.gn`, and add a condition here to only download this for our CMake CI build.\n\nThoughts?",
+      "parentUuid": "65432409_7fc35ac5",
+      "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
