@@ -16,6 +16,24 @@
       "message": "note: you should be able to use just `42241514`; even if it\u0027s interpreted as a dawn bug id that\u0027s fine, for example https://crbug.com/dawn/42241514 works",
       "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17ce36e2_7461ab85",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:41:55Z",
+      "side": 1,
+      "message": "it didn\u0027t make the link in the gerrit ui with that syntax\n\nI suppose we should ask someone about fixing that",
+      "parentUuid": "8a7e042f_89c731fd",
+      "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
