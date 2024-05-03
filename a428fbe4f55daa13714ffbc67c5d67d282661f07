@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "679fc2a9_a0a66106",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Yeah it should I guess, wasn\u0027t sure because of the new struct. Updated.",
+      "parentUuid": "4485a757_dc158bab",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22f4176b_f253cb5a",
@@ -110,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3aec36_2ac13e79",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f4176b_f253cb5a",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 83
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "423b9b62_a14f3f00",
@@ -123,6 +165,30 @@
       "writtenOn": "2024-05-03T19:03:38Z",
       "side": 1,
       "message": "```suggestion\n    uint64_t mExternalFormat \u003d 0u;\n```",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 29
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "509af262_8baa3cfd",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "423b9b62_a14f3f00",
       "range": {
         "startLine": 262,
         "startChar": 0,
@@ -158,6 +224,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b8c896a_0463fa0a",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Thanks I updated to merge the methods and use DAWN_TRY_ASSIGN.\n\nI kept the VkSamplerYcbcrConversion setup out of it as wasn\u0027t sure whether there would be scope issues while setting pNext on the structs.",
+      "parentUuid": "a0ce4017_45b79bd0",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 74
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baa3baf2_51d63389",
         "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 8
@@ -169,6 +259,30 @@
       "writtenOn": "2024-05-03T19:03:38Z",
       "side": 1,
       "message": "call this one \"vkChromaFilter\" to match?",
+      "range": {
+        "startLine": 359,
+        "startChar": 80,
+        "endLine": 359,
+        "endChar": 88
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fe6093_d1a52b82",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa3baf2_51d63389",
       "range": {
         "startLine": 359,
         "startChar": 80,
@@ -192,6 +306,30 @@
       "writtenOn": "2024-05-03T19:03:38Z",
       "side": 1,
       "message": "nit: forceExplicitReconstruction, to match",
+      "range": {
+        "startLine": 361,
+        "startChar": 47,
+        "endLine": 361,
+        "endChar": 66
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d6b592_aa09197d",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T20:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3bd1c69_984577e5",
       "range": {
         "startLine": 361,
         "startChar": 47,
