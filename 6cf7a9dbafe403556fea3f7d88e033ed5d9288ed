@@ -16,6 +16,46 @@
       "message": "Dear reviewers, please feel free to comment if you have any further suggession, It seems I don\u0027t have +2 permission for dawn project, so if this is okey for you, please help me submit it, thanks!",
       "revId": "6cf7a9dbafe403556fea3f7d88e033ed5d9288ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2405a8a7_0032c3e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T20:58:31Z",
+      "side": 1,
+      "message": "LGTM, one more nit",
+      "revId": "6cf7a9dbafe403556fea3f7d88e033ed5d9288ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63fcb655_2c560086",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T20:58:31Z",
+      "side": 1,
+      "message": "instead, list the Undefined case, and have it be unreachable\n\nthen, delete the default case",
+      "range": {
+        "startLine": 922,
+        "startChar": 16,
+        "endLine": 923,
+        "endChar": 39
+      },
+      "revId": "6cf7a9dbafe403556fea3f7d88e033ed5d9288ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
