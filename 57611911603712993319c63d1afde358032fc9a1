@@ -16,6 +16,24 @@
       "message": "The old code didn\u0027t support UTF-8... do we have test coverage for non-ASCII identifiers? Is this function used? Now I am more confused :)",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99754d63_ee851cf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2024-05-03T17:08:14Z",
+      "side": 1,
+      "message": "Oh... this would only affect the SPIR-V Reader, so the gap in coverage would be in reading SPIR-V programs with non-ASCII identifiers. Which makes sense, because most other languages that compile to SPIR-V probably don\u0027t support UTF8 identifiers?",
+      "parentUuid": "feb5ab92_472fae35",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
