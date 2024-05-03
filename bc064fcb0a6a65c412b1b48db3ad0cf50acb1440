@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "972b2178_8ffc568a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T00:54:44Z",
+      "side": 1,
+      "message": "Once this lands, we can land my CL to tell CMake to use the sysroot: https://chromium-review.googlesource.com/c/chromium/tools/build/+/5513143\n\nAfter that lands, we can land a follow-up CL to switch to 22.04.",
+      "revId": "bc064fcb0a6a65c412b1b48db3ad0cf50acb1440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d698faa_447cad66",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T00:54:44Z",
+      "side": 1,
+      "message": "We might want to add `fetch_cmake` to this condition, so that we only download this for the cmake build. Thoughts on this @enga@chromium.org?",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 71
+      },
+      "revId": "bc064fcb0a6a65c412b1b48db3ad0cf50acb1440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33f4236_45465419",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T00:54:44Z",
+      "side": 1,
+      "message": "Let\u0027s only keep this section, as we currently only build Linux x64 with CMake.",
+      "range": {
+        "startLine": 206,
+        "startChar": 1,
+        "endLine": 218,
+        "endChar": 4
+      },
+      "revId": "bc064fcb0a6a65c412b1b48db3ad0cf50acb1440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
