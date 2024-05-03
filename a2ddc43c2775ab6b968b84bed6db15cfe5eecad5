@@ -33,6 +33,24 @@
       "message": "nit: remove",
       "revId": "a2ddc43c2775ab6b968b84bed6db15cfe5eecad5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df8af0a_508bd7ca",
+        "filename": "src/tint/lang/core/ir/transform/binary_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-03T21:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed301b96_78d9ef3a",
+      "revId": "a2ddc43c2775ab6b968b84bed6db15cfe5eecad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
