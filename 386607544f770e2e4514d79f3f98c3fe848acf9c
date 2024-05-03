@@ -16,6 +16,24 @@
       "message": "```suggestion\n                case WGPUDeviceLostReason_Destroyed:\n                    r \u003d interop::GPUDeviceLostReason::kDestroyed;\n                    break;\n```",
       "revId": "386607544f770e2e4514d79f3f98c3fe848acf9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e54617_f0a1af13",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-03T05:30:03Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "619306a4_cfc9da81",
+      "revId": "386607544f770e2e4514d79f3f98c3fe848acf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
