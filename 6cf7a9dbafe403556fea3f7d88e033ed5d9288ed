@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5458de33_173d3a8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T20:11:38Z",
+      "side": 1,
+      "message": "Dear reviewers, please feel free to comment if you have any further suggession, It seems I don\u0027t have +2 permission for dawn project, so if this is okey for you, please help me submit it, thanks!",
+      "revId": "6cf7a9dbafe403556fea3f7d88e033ed5d9288ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
