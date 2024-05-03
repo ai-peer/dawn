@@ -16,6 +16,24 @@
       "message": "Maybe add a comment saying these are just ignored?",
       "revId": "c8c720e804d5bda0aa200e3828b73032522f419c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a44f70ac_cdf42c79",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-03T15:40:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "739164b4_5d194fc8",
+      "revId": "c8c720e804d5bda0aa200e3828b73032522f419c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
