@@ -52,6 +52,24 @@
       "parentUuid": "feb5ab92_472fae35",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d665883_5c31fba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2024-05-03T17:11:04Z",
+      "side": 1,
+      "message": "GLSL, only `[A-Za-z0-9_]`: https://learnwebgl.brown37.net/12_shader_language/glsl_data_types.html#variables\n\nHLSL, \"ASCII string\": https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-hlsl-variable-syntax\n\nUnless we are trying to round-trip WGSL -\u003e SPIR-V -\u003e WGSL, we may not need to worry about UTF8 codepoints here.",
+      "parentUuid": "99754d63_ee851cf9",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
