@@ -52,6 +52,24 @@
       "parentUuid": "17ce36e2_7461ab85",
       "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4410cb5_5b87ce19",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:53:12Z",
+      "side": 1,
+      "message": "I think we always wrote \"dawn\" to get it to link in the UI\n\nbut you could write just 1234 and it would still do the bug update",
+      "parentUuid": "955a03bb_3878275a",
+      "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
