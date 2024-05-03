@@ -498,11 +498,12 @@ std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapter
         DAWN_UNREACHABLE();
     };
 
-    std::sort(adapters.begin(), adapters.end(),
-              [&](const Ref<AdapterBase>& a, const Ref<AdapterBase>& b) -> bool {
-                  return std::tuple(ComputeAdapterTypeRank(a), ComputeBackendTypeRank(a)) <
-                         std::tuple(ComputeAdapterTypeRank(b), ComputeBackendTypeRank(b));
-              });
+    // `stable_sort` to preserve the order returned by the backend for adapters of the same type.
+    std::stable_sort(adapters.begin(), adapters.end(),
+                     [&](const Ref<AdapterBase>& a, const Ref<AdapterBase>& b) -> bool {
+                         return std::tuple(ComputeAdapterTypeRank(a), ComputeBackendTypeRank(a)) <
+                                std::tuple(ComputeAdapterTypeRank(b), ComputeBackendTypeRank(b));
+                     });
 
     return adapters;
 }
