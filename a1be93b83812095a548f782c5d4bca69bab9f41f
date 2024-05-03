@@ -34,6 +34,24 @@
       "parentUuid": "754dafd0_700f2bf4",
       "revId": "a1be93b83812095a548f782c5d4bca69bab9f41f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9419a891_2b8ab371",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-03T09:33:57Z",
+      "side": 1,
+      "message": "Will be addressed by:\nhttps://dawn-review.googlesource.com/c/dawn/+/186900",
+      "parentUuid": "4d7f7fb4_c9e43630",
+      "revId": "a1be93b83812095a548f782c5d4bca69bab9f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
