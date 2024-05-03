@@ -16,6 +16,41 @@
       "message": "Review: Austin, Corentin\nFYI: Colin, Nicolette, Kyle and Vasiliy\n\nI can extend wgpu::YCbCVkDescriptor to have VkFormatFeatureFlags too once agreed.",
       "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb267f1_19f32374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-03T15:36:44Z",
+      "side": 1,
+      "message": "Thanks, Saif! Let\u0027s definitely hold off on adding VkFormatFeatureFlags until we confirm whether we\u0027ll mirror all the flags or just add explicit bits of state to the Dawn struct.",
+      "parentUuid": "90b06a46_bab6ad6b",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "153e6732_b6104c62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-03T15:36:44Z",
+      "side": 1,
+      "message": "\\o/",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
