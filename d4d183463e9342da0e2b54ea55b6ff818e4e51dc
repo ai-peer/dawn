@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d89fda71_ba657e7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-03T15:53:01Z",
+      "side": 1,
+      "message": "Looks like you\u0027ve added updated gitlinks by accident.",
+      "revId": "d4d183463e9342da0e2b54ea55b6ff818e4e51dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
