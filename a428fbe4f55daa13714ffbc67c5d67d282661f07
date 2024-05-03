@@ -248,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1a60635_d4935196",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T21:01:33Z",
+      "side": 1,
+      "message": "I was thinking the android chained struct could be contained entirely in \nCreateSamplerYCbCrConversion. Perhaps you don\u0027t need to return the VkSamplerYcbcrConversionCreateInfo at all. Saving YCbCrVkDescriptor as a member should have exactly the same information.",
+      "parentUuid": "4b8c896a_0463fa0a",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 74
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baa3baf2_51d63389",
         "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
         "patchSetId": 8
