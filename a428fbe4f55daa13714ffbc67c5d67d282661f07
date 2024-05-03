@@ -51,6 +51,155 @@
       "message": "\\o/",
       "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c804ece_d681345d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4485a757_dc158bab",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "shouldn\u0027t this get covered by the feature check? the feature shouldn\u0027t be available on other OSes",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f4176b_f253cb5a",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "shouldn\u0027t this get covered by the feature check? the feature shouldn\u0027t be available on other OSes",
+      "range": {
+        "startLine": 640,
+        "startChar": 0,
+        "endLine": 640,
+        "endChar": 83
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423b9b62_a14f3f00",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "```suggestion\n    uint64_t mExternalFormat \u003d 0u;\n```",
+      "range": {
+        "startLine": 262,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 29
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ce4017_45b79bd0",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "nit: may as well combine this with the validate call and return ResultOrError\u003cVkSamplerYcbcrConversionCreateInfo\u003e. You always call them together\n\nthen you can DAWN_TRY_ASSIGN(mResult, CreateSamplerYCbCrConversionCreateInfo(...))\n\n\neven better - both the view and the sampler have the same contents:\n```\nVkSamplerYcbcrConversion mSamplerYCbCrConversion \u003d VK_NULL_HANDLE;\nVkSamplerYcbcrConversionCreateInfo mYcbcrConversionCreateInfo \u003d {};\nuint64_t mExternalFormat;\n```\n\nYou can have your helper both create the VkSamplerYcbcrConversion and return all these things in a struct together. Then the texture view and sampler can share more code",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 74
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa3baf2_51d63389",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "call this one \"vkChromaFilter\" to match?",
+      "range": {
+        "startLine": 359,
+        "startChar": 80,
+        "endLine": 359,
+        "endChar": 88
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bd1c69_984577e5",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T19:03:38Z",
+      "side": 1,
+      "message": "nit: forceExplicitReconstruction, to match",
+      "range": {
+        "startLine": 361,
+        "startChar": 47,
+        "endLine": 361,
+        "endChar": 66
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
