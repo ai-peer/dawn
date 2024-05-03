@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d125541a_949b164e",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-03T09:56:04Z",
+      "side": 1,
+      "message": "(unsure about this)\nNote: It looks like BindingPoint.h depends on tint. So `gn --check` asked for the dependency to be declared.",
+      "range": {
+        "startLine": 702,
+        "startChar": 6,
+        "endLine": 702,
+        "endChar": 48
+      },
+      "revId": "7831b259571262f96eb133ddde7bec037e8cda67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
