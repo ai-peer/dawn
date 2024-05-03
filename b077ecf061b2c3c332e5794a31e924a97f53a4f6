@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "047f510b_997f7394",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T18:41:04Z",
+      "side": 1,
+      "message": "if you must have undefined, I think you can say \"valid: false\", and use the autogen\u0027ed ValidateCallbackMode function from ValidationUtils_autogen.h",
+      "parentUuid": "a45025ad_07646ce1",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec4a15c3_e0a95994",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 2
