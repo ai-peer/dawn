@@ -122,6 +122,30 @@
       },
       "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cdf1c85_a4d076b7",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T05:01:16Z",
+      "side": 1,
+      "message": "InstanceDropped can be unreachable (because the node bindings keep the instance alive)\nbut, the Destroyed case should not be unreachable.\nDestroyed can happen when the application explicitly calls device.Destroy()",
+      "parentUuid": "2418e7aa_ee9097e3",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
