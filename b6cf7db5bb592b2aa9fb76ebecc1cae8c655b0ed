@@ -146,6 +146,30 @@
       },
       "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f13e64_6a0e051b",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-03T05:09:27Z",
+      "side": 1,
+      "message": "Has been modified to `InstanceDropped` and the Bug link has been updated (the issue tracker has been migrated)",
+      "parentUuid": "8cdf1c85_a4d076b7",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
