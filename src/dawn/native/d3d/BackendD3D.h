@@ -65,7 +65,7 @@ class Backend : public BackendConnection {
 
     MaybeError Initialize(std::unique_ptr<PlatformFunctions> functions);
 
-    IDXGIFactory4* GetFactory() const;
+    IDXGIFactory4* GetFactory();
 
     MaybeError EnsureDxcLibrary();
     MaybeError EnsureDxcCompiler();
