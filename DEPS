@@ -135,6 +135,24 @@ deps = {
     'dep_type': 'cipd',
   },
 
+  # Linux sysroots for hermetic builds instead of relying on whatever is
+  # available from the system used for compilation. Only applicable to
+  # dawn_standalone since Chromium has its own sysroot copy.
+   'build/linux/debian_bullseye_amd64-sysroot': {
+    'bucket': 'chrome-linux-sysroot',
+    'condition': 'dawn_standalone and checkout_linux and checkout_x64',
+    'dep_type': 'gcs',
+    'objects': [
+      {
+        'object_name': '5df5be9357b425cdd70d92d4697d07e7d55d7a923f037c22dc80a78e85842d2c',
+        'sha256sum': '5df5be9357b425cdd70d92d4697d07e7d55d7a923f037c22dc80a78e85842d2c',
+        'size_bytes': 123084324,
+        'generation': 1714159395960299,
+      },
+    ],
+  },
+
+
   # Testing, GTest and GMock
   'testing': {
     'url': '{chromium_git}/chromium/src/testing@035a9b18047370df7403758b006e6c9696d6b84d',
