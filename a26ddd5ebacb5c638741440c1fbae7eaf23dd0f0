@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "650a70b2_712df096",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "Thanks for the review, we need these formats for `VideoToolboxVideoDecoder`, it will use all these four formats in `media/gpu/mac/video_toolbox_decompression_session_manager.mm` in CL (https://chromium-review.googlesource.com/c/chromium/src/+/5493433).\n\nIf we don\u0027t add these format to dawn, when `Skia Graphite` is enabled, these video will not able to playback.",
+      "parentUuid": "82235c1d_5b9cb2be",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66f47150_8ce4cfc9",
         "filename": "docs/dawn/features/multi_planar_formats.md",
         "patchSetId": 6
@@ -65,6 +83,24 @@
       "writtenOn": "2024-05-03T09:18:24Z",
       "side": 1,
       "message": "Can we detail what dual-res means here? ditto below. I assumed that it was 2x2x the size of plan0, but it\u0027s actually 1x0.5x?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f076e93e_1c0c80f7",
+        "filename": "docs/dawn/features/multi_planar_formats.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f47150_8ce4cfc9",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +118,24 @@
       "writtenOn": "2024-05-03T09:18:24Z",
       "side": 1,
       "message": "nit: this isn\u0027t used anywhere in the .json so it could be removed?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9d23a4_4a16fdf2",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 4009,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "This is used to generate `wgpu::TextureSubsampling` defination we used everywhere.",
+      "parentUuid": "ed85fa6c_9969a2bc",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8eb2cc2_8ff55429",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3b14c15_25b4f5a8",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50940cd0_63cd4c70",
@@ -133,6 +205,24 @@
       "writtenOn": "2024-05-03T09:18:24Z",
       "side": 1,
       "message": "Existing nit: instead of having if isCheckerboard every time, we could compute Y/U/V 1 to 4 once with either a single color or a checkerboard, then is them in the initialization of the data.",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6975ab1d_d6b9dd37",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "I think enumeration may indeed lead to more redundant code, but it will make the code look clearer and maintainable.",
+      "parentUuid": "50940cd0_63cd4c70",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +244,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5891140_4de5f7d9",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7da01af_e25627c6",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db01ff23_419bc054",
@@ -167,6 +275,24 @@
       "writtenOn": "2024-05-03T09:18:24Z",
       "side": 1,
       "message": "nit: PerPlane isn\u0027t really needed since we require passing the plane. Also maybe it would be better to return a struct with width/heightSubsampling",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79ac7e5_7769feb3",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T14:10:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db01ff23_419bc054",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
