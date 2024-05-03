@@ -124,6 +124,24 @@
       "parentUuid": "8ccfcae7_bfe73802",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5a5459_ac9bd7a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-03T17:20:19Z",
+      "side": 1,
+      "message": "This code predates the WGSL specification defining the valid identifier unicode code points, and _long_ before Tint had any UTF-8 support. It\u0027s probably some of the oldest code in the codebase, and unfortunately hasn\u0027t had much love over the years.\n\nThe good news is that James is rewriting it all!",
+      "parentUuid": "901fc2dd_ead4c82b",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
