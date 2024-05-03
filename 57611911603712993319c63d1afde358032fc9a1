@@ -70,6 +70,24 @@
       "parentUuid": "99754d63_ee851cf9",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56186e22_9ec12a84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2024-05-03T17:12:28Z",
+      "side": 1,
+      "message": "Ah, our messages crossed in the mail. Gotcha.\n\nSeems unlikely that we need to support UTF8 unless we care about round-tripping WGSL through SPIR-V, but I guess it\u0027s better to support it than not.",
+      "parentUuid": "1d665883_5c31fba5",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
