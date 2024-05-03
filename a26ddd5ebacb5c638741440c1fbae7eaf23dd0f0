@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb64cf01_5dc8dc1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T19:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650a70b2_712df096",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66f47150_8ce4cfc9",
@@ -158,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e46df51_d747d48d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 4009,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T19:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59b5676e_ee27b70b",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0cac2e2_8d032fe1",
@@ -189,6 +225,24 @@
       "side": 1,
       "message": "I would still prefer to use `wgpu::TextureSubsampling` for more clearity instead of having `uint8_t chromaWidthShift` and `uint8_t chromaHeightShift`.\n\nFor now, the only place dawn needs to know about how to handle subSampling is: `src/dawn/native/Texture.cpp#L907`.",
       "parentUuid": "e0cac2e2_8d032fe1",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d13fdb1_2ce80c89",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T19:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea8d887c_ea7cccc2",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -259,6 +313,24 @@
       "side": 1,
       "message": "I think enumeration may indeed lead to more redundant code, but it will make the code look clearer and maintainable.",
       "parentUuid": "50940cd0_63cd4c70",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c9a6ff_a542647f",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T19:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6975ab1d_d6b9dd37",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

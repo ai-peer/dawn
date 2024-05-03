@@ -22,6 +22,30 @@
       },
       "revId": "39ce53146ea2e7bc2d31f411f095c57cc5fd0581",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "173d0080_0cec21a7",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2024-05-03T19:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf6c79f_d3414cb8",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 34
+      },
+      "revId": "39ce53146ea2e7bc2d31f411f095c57cc5fd0581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
