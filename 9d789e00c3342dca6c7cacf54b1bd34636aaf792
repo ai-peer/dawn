@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a5d040_527ac008",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1003681
+      },
+      "writtenOn": "2024-05-03T18:55:39Z",
+      "side": 1,
+      "message": "fwict UWP would use dloadhelper.lib but we\u0027re explicitly not UWP here so delayimp.lib should always work",
+      "revId": "9d789e00c3342dca6c7cacf54b1bd34636aaf792",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
