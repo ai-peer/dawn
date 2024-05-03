@@ -282,6 +282,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb88946_57155ffe",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:23:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "84e782eb_eed0bcc6",
+      "revId": "46b334f4e6337386485308fdb99bf6f086018eb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ace855c8_4379f240",
