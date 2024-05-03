@@ -87,6 +87,24 @@
       "parentUuid": "aa257532_82fbf070",
       "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82129857_83841ffa",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T14:30:22Z",
+      "side": 1,
+      "message": "Agreed, and done.",
+      "parentUuid": "29776865_85b3cf22",
+      "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
