@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b26fa430_026d1120",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:39:23Z",
+      "side": 1,
+      "message": "Nice, LGTM!",
+      "revId": "46b11b3dd81cd9518b9729ec34382f7e5111fa67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5efbd781_2ff6df31",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:39:23Z",
+      "side": 1,
+      "message": "nit: extra comma.",
+      "revId": "46b11b3dd81cd9518b9729ec34382f7e5111fa67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
