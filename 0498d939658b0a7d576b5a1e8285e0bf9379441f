@@ -69,6 +69,24 @@
       "parentUuid": "65432409_7fc35ac5",
       "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29776865_85b3cf22",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T14:27:04Z",
+      "side": 1,
+      "message": "I think I have a slight preference for using the sysroot in all configurations. Adding something just or CMake CI builds seems like it would be more brittle WDYT?",
+      "parentUuid": "aa257532_82fbf070",
+      "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
