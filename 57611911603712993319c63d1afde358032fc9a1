@@ -88,6 +88,24 @@
       "parentUuid": "1d665883_5c31fba5",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccfcae7_bfe73802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-03T17:14:03Z",
+      "side": 1,
+      "message": "\u003e Unless we are trying to round-trip WGSL -\u003e SPIR-V -\u003e WGSL, we may not need to worry about UTF8 codepoints here.\n\nI think it\u0027s preferable to stick to what the SPIR-V specification supports, and try not to depend on what flavor-of-the-month other compilers produce. Again - what Tint really cares about is that the string is a valid WGSL identifier, which is exactly what this CL checks for. Attempting to check for some subset of ASCII characters is probably a similar amount of code.",
+      "parentUuid": "1d665883_5c31fba5",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
