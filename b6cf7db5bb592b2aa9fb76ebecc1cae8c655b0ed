@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44808b04_63ea6f7e",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1534,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-03T01:55:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "27c46abe_dfdecfad",
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97165fa1_1f40464b",
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "+1, and while we\u0027re here, WGPUDeviceLostReason_InstanceDropped should either map to the `UNREACHABLE` case or to `interop::GPUDeviceLostReason::kUnknown`. I think `UNREACHABLE`.",
       "parentUuid": "97165fa1_1f40464b",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2418e7aa_ee9097e3",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-03T01:55:11Z",
+      "side": 1,
+      "message": "I\u0027ve modified the code here and it\u0027s currently being compiled and tested in the tryjobs queue",
+      "parentUuid": "ac5593db_6be9460b",
       "range": {
         "startLine": 187,
         "startChar": 0,
