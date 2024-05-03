@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d953fa8c_5af357e0",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-03T13:16:01Z",
+      "side": 1,
+      "message": "Nevermind, I see that this CL also adds sysroot to our GN build.",
+      "parentUuid": "1d698faa_447cad66",
+      "range": {
+        "startLine": 208,
+        "startChar": 5,
+        "endLine": 208,
+        "endChar": 71
+      },
+      "revId": "bc064fcb0a6a65c412b1b48db3ad0cf50acb1440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f33f4236_45465419",
