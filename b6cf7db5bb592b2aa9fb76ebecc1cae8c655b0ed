@@ -170,6 +170,30 @@
       },
       "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b79ba417_70306ad6",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T05:23:04Z",
+      "side": 1,
+      "message": "maybe I wasn\u0027t clear - suggested an edit. because device.Destroy can be triggered by the application, we shouldn\u0027t make it unreachable.",
+      "parentUuid": "65f13e64_6a0e051b",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 50
+      },
+      "revId": "b6cf7db5bb592b2aa9fb76ebecc1cae8c655b0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

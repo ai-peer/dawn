@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619306a4_cfc9da81",
+        "filename": "src/dawn/node/binding/GPUDevice.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T05:23:04Z",
+      "side": 1,
+      "message": "```suggestion\n                case WGPUDeviceLostReason_Destroyed:\n                    r \u003d interop::GPUDeviceLostReason::kDestroyed;\n                    break;\n```",
+      "revId": "386607544f770e2e4514d79f3f98c3fe848acf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
