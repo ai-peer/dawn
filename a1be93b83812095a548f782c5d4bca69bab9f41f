@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754dafd0_700f2bf4",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T08:06:59Z",
+      "side": 1,
+      "message": "Note: we should add StackAllocated.h to the GN and CMake build files.",
+      "revId": "a1be93b83812095a548f782c5d4bca69bab9f41f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
