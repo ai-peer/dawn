@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c0ae6d1_6ecb054f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-03T18:18:08Z",
+      "side": 1,
+      "message": "LGTM with one requested addition.",
+      "revId": "8ceaf7f7246b2517e91715c06cf3656761045eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3848ae6_fb650ee2",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2667,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-03T18:18:08Z",
+      "side": 1,
+      "message": "This one should be `NextIteration`. Since you\u0027ve added `CheckContinue()` in this CL, can we also check that is inside the body block, and not either the initializer or continuing block?",
+      "revId": "8ceaf7f7246b2517e91715c06cf3656761045eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
