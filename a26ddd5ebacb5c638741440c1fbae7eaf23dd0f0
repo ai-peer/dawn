@@ -33,6 +33,142 @@
       "message": "+blundell review.",
       "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82235c1d_5b9cb2be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "LGTM overall. However looking at the issue I\u0027m not 100% sure why we need these formats. Is it so that Graphite is able to read these hardware-decoded videos?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f47150_8ce4cfc9",
+        "filename": "docs/dawn/features/multi_planar_formats.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "Can we detail what dual-res means here? ditto below. I assumed that it was 2x2x the size of plan0, but it\u0027s actually 1x0.5x?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed85fa6c_9969a2bc",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 4009,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "nit: this isn\u0027t used anywhere in the .json so it could be removed?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0cac2e2_8d032fe1",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "IMHO at this point we can have `uint8_t chromaWidthShift` and the same for the height instead of an enum so that the rest of Dawn doesn\u0027t need to know what 4:2:2 and 4:2:0 mean.",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b14c15_25b4f5a8",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "Do we really need to check for Metal given that it\u0027s the only backend that exposes the feature for now? Filtering should already happen before this function is called IIRC.",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50940cd0_63cd4c70",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "Existing nit: instead of having if isCheckerboard every time, we could compute Y/U/V 1 to 4 once with either a single color or a checkerboard, then is them in the initialization of the data.",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7da01af_e25627c6",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "The name is a bit weird since we don\u0027t use the plane at all, GetMultiPlaneTextureBitDepth?",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db01ff23_419bc054",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T09:18:24Z",
+      "side": 1,
+      "message": "nit: PerPlane isn\u0027t really needed since we require passing the plane. Also maybe it would be better to return a struct with width/heightSubsampling",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
