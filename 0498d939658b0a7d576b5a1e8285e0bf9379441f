@@ -34,6 +34,23 @@
       "parentUuid": "7f55926e_95942684",
       "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65432409_7fc35ac5",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-03T13:35:16Z",
+      "side": 1,
+      "message": "Will this just be used for CI or also be developers looking to do things with Dawn? These developers might not all have an x64 system.",
+      "revId": "0498d939658b0a7d576b5a1e8285e0bf9379441f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
