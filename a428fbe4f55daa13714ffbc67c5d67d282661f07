@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b06a46_bab6ad6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-03T13:50:55Z",
+      "side": 1,
+      "message": "Review: Austin, Corentin\nFYI: Colin, Nicolette, Kyle and Vasiliy\n\nI can extend wgpu::YCbCVkDescriptor to have VkFormatFeatureFlags too once agreed.",
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
