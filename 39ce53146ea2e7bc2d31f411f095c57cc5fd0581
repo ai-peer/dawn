@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf6c79f_d3414cb8",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T17:54:53Z",
+      "side": 1,
+      "message": "nit: style in Dawn is to use camelCase, and to prefix member variables with \"m\"\n\nso mHorizontalFactor and mVerticalFactor\n\n\n\nBut, I think we can make this simpler without getters.\n\nIt can be a normal struct, with public members\n\n`const uint32_t horizontalFactor`\n`const uint32_t verticalVector`\n\nthat way you don\u0027t even need the getter - and it\u0027s clear that the values are immutable - no need to be private.",
+      "range": {
+        "startLine": 276,
+        "startChar": 0,
+        "endLine": 282,
+        "endChar": 34
+      },
+      "revId": "39ce53146ea2e7bc2d31f411f095c57cc5fd0581",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59b5676e_ee27b70b",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 4009,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-03T17:54:53Z",
+      "side": 1,
+      "message": "because it\u0027s not exposed in the public API (no other methods take it, and it\u0027s not returned) - you can make an internal Dawn enum instead of putting it in the .json\n\nperhaps in src/dawn/native/Format.h",
+      "parentUuid": "1c9d23a4_4a16fdf2",
+      "revId": "a26ddd5ebacb5c638741440c1fbae7eaf23dd0f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0cac2e2_8d032fe1",
         "filename": "src/dawn/native/Format.h",
         "patchSetId": 6
