@@ -106,6 +106,24 @@
       "parentUuid": "1d665883_5c31fba5",
       "revId": "57611911603712993319c63d1afde358032fc9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "901fc2dd_ead4c82b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2024-05-03T17:16:19Z",
+      "side": 1,
+      "message": "+1, makes sense to me. Was mostly just surprised that the behavior changed.",
+      "parentUuid": "8ccfcae7_bfe73802",
+      "revId": "57611911603712993319c63d1afde358032fc9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
