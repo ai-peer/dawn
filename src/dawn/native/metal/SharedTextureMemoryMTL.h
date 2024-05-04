@@ -70,7 +70,8 @@ class SharedTextureMemory final : public SharedTextureMemoryBase {
         const UnpackedPtr<TextureDescriptor>& descriptor) override;
     MaybeError BeginAccessImpl(TextureBase* texture,
                                const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
-    ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(ExecutionSerial lastUsageSerial,
+                                                     TextureBase* texture,
                                                      UnpackedPtr<EndAccessState>& state) override;
     MaybeError CreateMtlTextures();
 

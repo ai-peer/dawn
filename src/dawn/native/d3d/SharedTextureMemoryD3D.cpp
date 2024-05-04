@@ -67,6 +67,7 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
 }
 
 ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
+    ExecutionSerial lastUsageSerial,
     TextureBase* texture,
     UnpackedPtr<EndAccessState>& state) {
     DAWN_TRY(state.ValidateSubset<>());
@@ -77,9 +78,7 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
     Ref<SharedFence> sharedFence;
     DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
 
-    return FenceAndSignalValue{
-        std::move(sharedFence),
-        static_cast<uint64_t>(texture->GetSharedResourceMemoryContents()->GetLastUsageSerial())};
+    return FenceAndSignalValue{std::move(sharedFence), static_cast<uint64_t>(lastUsageSerial)};
 }
 
 }  // namespace dawn::native::d3d

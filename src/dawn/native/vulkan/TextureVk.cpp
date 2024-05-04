@@ -1043,6 +1043,7 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
 
 void Texture::TransitionEagerlyForExport(CommandRecordingContext* recordingContext) {
     mExternalState = ExternalState::EagerlyTransitioned;
+    mLastSharedTextureMemoryUsageSerial = GetDevice()->GetQueue()->GetPendingCommandSerial();
 
     // Get any usage, ideally the last one to do nothing
     DAWN_ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
