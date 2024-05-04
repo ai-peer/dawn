@@ -417,8 +417,7 @@ void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContex
         SharedTextureMemoryBase::PendingFenceList fences;
         SharedResourceMemoryContents* contents = GetSharedResourceMemoryContents();
         if (contents != nullptr) {
-            contents->AcquirePendingFences(&fences);
-            contents->SetLastUsageSerial(GetDevice()->GetQueue()->GetPendingCommandSerial());
+            contents->AcquirePendingFences(this, &fences);
         }
 
         if (!mWaitEvents.empty() || !fences->empty()) {
@@ -439,6 +438,7 @@ void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContex
                                         value:fence.signaledValue];
         }
     }
+    mLastSharedTextureMemoryUsageSerial = GetDevice()->GetQueue()->GetPendingCommandSerial();
 }
 
 void Texture::IOSurfaceEndAccess(ExternalImageIOSurfaceEndAccessDescriptor* descriptor) {

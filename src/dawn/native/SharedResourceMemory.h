@@ -51,7 +51,11 @@ class SharedResource : public ApiObjectBase {
 
     SharedResourceMemoryContents* GetSharedResourceMemoryContents() const;
 
-    virtual void SetHasAccess(bool hasAccess) = 0;
+    // Pause access on the resource, and return the last usage serial.
+    virtual ExecutionSerial PauseAccess() = 0;
+    // Resume access on the resource after it had been paused.
+    virtual void ResumeAccess() = 0;
+    // Check whether the resource may be accessed.
     virtual bool HasAccess() const = 0;
     virtual bool IsDestroyed() const = 0;
     virtual void SetInitialized(bool initialized) = 0;
@@ -110,7 +114,8 @@ class SharedResourceMemory : public ApiObjectBase, public WeakRefSupport<SharedR
     MaybeError EndAccess(Resource* resource, EndAccessState* state, bool* didEnd);
 
     template <typename Resource, typename EndAccessState>
-    ResultOrError<FenceAndSignalValue> EndAccessInternal(Resource* resource,
+    ResultOrError<FenceAndSignalValue> EndAccessInternal(ExecutionSerial lastUsageSerial,
+                                                         Resource* resource,
                                                          EndAccessState* rawState);
 
     // BeginAccessImpl validates the operation is valid on the backend, and performs any
@@ -125,9 +130,11 @@ class SharedResourceMemory : public ApiObjectBase, public WeakRefSupport<SharedR
     // EndAccessImpl validates the operation is valid on the backend, and returns the end fence.
     // It should also write out any backend specific state in chained out structs of EndAccessState.
     virtual ResultOrError<FenceAndSignalValue> EndAccessImpl(
+        ExecutionSerial lastUsageSerial,
         TextureBase* texture,
         UnpackedPtr<SharedTextureMemoryEndAccessState>& state);
     virtual ResultOrError<FenceAndSignalValue> EndAccessImpl(
+        ExecutionSerial lastUsageSerial,
         BufferBase* buffer,
         UnpackedPtr<SharedBufferMemoryEndAccessState>& state);
 
@@ -145,12 +152,7 @@ class SharedResourceMemoryContents : public RefCounted {
 
     explicit SharedResourceMemoryContents(WeakRef<SharedResourceMemory> sharedResourceMemory);
 
-    void AcquirePendingFences(PendingFenceList* fences);
-
-    // Set the last usage serial. This indicates when the SharedFence exported
-    // from APIEndAccess will complete.
-    void SetLastUsageSerial(ExecutionSerial lastUsageSerial);
-    ExecutionSerial GetLastUsageSerial() const;
+    void AcquirePendingFences(const SharedResource* resource, PendingFenceList* fences);
 
     const WeakRef<SharedResourceMemory>& GetSharedResourceMemory() const;
 
@@ -161,8 +163,9 @@ class SharedResourceMemoryContents : public RefCounted {
   private:
     friend class SharedResourceMemory;
 
-    PendingFenceList mPendingFences;
-    ExecutionSerial mLastUsageSerial{0};
+    // Store a map of SharedResource to pending fences on the SharedResourceMemoryContents
+    // instead of the SharedResource to avoid bloating non-SharedResourceMemory objects.
+    absl::flat_hash_map<uintptr_t /*SharedResource*/, PendingFenceList> mPendingFences;
 
     SharedResourceAccessState mSharedResourceAccessState = SharedResourceAccessState::NotAccessed;
     int mReadAccessCount = 0;

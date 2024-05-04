@@ -367,7 +367,7 @@ MaybeError Queue::SubmitPendingCommands() {
         SharedResourceMemoryContents* contents = texture->GetSharedResourceMemoryContents();
         if (contents != nullptr) {
             SharedTextureMemoryBase::PendingFenceList fences;
-            contents->AcquirePendingFences(&fences);
+            contents->AcquirePendingFences(texture, &fences);
 
             for (const auto& fence : fences) {
                 // All semaphores are binary semaphores.
