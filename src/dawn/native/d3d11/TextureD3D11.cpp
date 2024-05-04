@@ -504,8 +504,7 @@ MaybeError Texture::SynchronizeTextureBeforeUse(
     const ScopedCommandRecordingContext* commandContext) {
     if (auto* contents = GetSharedResourceMemoryContents()) {
         SharedTextureMemoryBase::PendingFenceList fences;
-        contents->AcquirePendingFences(&fences);
-        contents->SetLastUsageSerial(GetDevice()->GetQueue()->GetPendingCommandSerial());
+        contents->AcquirePendingFences(this, &fences);
         for (const auto& fence : fences) {
             DAWN_TRY(CheckHRESULT(
                 commandContext->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
@@ -516,7 +515,7 @@ MaybeError Texture::SynchronizeTextureBeforeUse(
     if (mKeyedMutex != nullptr) {
         DAWN_TRY(commandContext->AcquireKeyedMutex(mKeyedMutex));
     }
-    mLastUsageSerial = GetDevice()->GetQueue()->GetPendingCommandSerial();
+    mLastSharedTextureMemoryUsageSerial = GetDevice()->GetQueue()->GetPendingCommandSerial();
     return {};
 }
 
@@ -1144,13 +1143,14 @@ MaybeError Texture::CopyInternal(const ScopedCommandRecordingContext* commandCon
 
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
     // TODO(dawn:1705): submit pending commands if deferred context is used.
-    if (mLastUsageSerial) {
+    if (mLastSharedTextureMemoryUsageSerial) {
         // Make the queue signal the fence in finite time.
-        DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(*mLastUsageSerial));
+        DAWN_TRY(
+            GetDevice()->GetQueue()->EnsureCommandsFlushed(mLastSharedTextureMemoryUsageSerial));
     }
-    // Explicitly call reset() since std::move() on optional doesn't make it std::nullopt.
-    mLastUsageSerial.reset();
-    return GetDevice()->GetQueue()->GetLastSubmittedCommandSerial();
+    ExecutionSerial ret = mLastSharedTextureMemoryUsageSerial;
+    mLastSharedTextureMemoryUsageSerial = ExecutionSerial{0};
+    return mLastSharedTextureMemoryUsageSerial;
 }
 
 ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(

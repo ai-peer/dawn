@@ -1625,6 +1625,99 @@ TEST_P(SharedTextureMemoryTests, CopyToTextureThenSample) {
     }
 }
 
+// Test that BeginAccess, followed by EndAccess when the texture isn't used at all,
+// doesn't export any new fences from Dawn.
+// We render write to the texture on device 0, and concurrent read on device 1.
+// One read will actually read. The other read will noop. The second should see no fences
+// exported.
+TEST_P(SharedTextureMemoryTests, BeginEndWithoutUse) {
+    std::vector<wgpu::Device> devices = {device, CreateDevice()};
+
+    for (const auto& memories :
+         GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
+             devices, wgpu::TextureUsage::TextureBinding)) {
+        wgpu::Texture texture = memories[0].CreateTexture();
+
+        wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
+        beginDesc.concurrentRead = false;
+        beginDesc.initialized = false;
+        auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
+        memories[0].BeginAccess(texture, &beginDesc);
+
+        // Create a texture of the same size to use as the source content.
+        wgpu::TextureDescriptor texDesc;
+        texDesc.format = texture.GetFormat();
+        texDesc.size = {texture.GetWidth(), texture.GetHeight()};
+        texDesc.usage =
+            texture.GetUsage() | wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
+        wgpu::Texture srcTex = devices[0].CreateTexture(&texDesc);
+
+        // Populate the source texture.
+        wgpu::CommandBuffer commandBuffer = MakeFourColorsClearCommandBuffer(devices[0], srcTex);
+        devices[0].GetQueue().Submit(1, &commandBuffer);
+
+        // Copy from the source texture into `texture`.
+        {
+            wgpu::CommandEncoder encoder = devices[0].CreateCommandEncoder();
+            auto src = utils::CreateImageCopyTexture(srcTex);
+            auto dst = utils::CreateImageCopyTexture(texture);
+            encoder.CopyTextureToTexture(&src, &dst, &texDesc.size);
+            commandBuffer = encoder.Finish();
+        }
+        devices[0].GetQueue().Submit(1, &commandBuffer);
+
+        wgpu::SharedTextureMemoryEndAccessState endState = {};
+        auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
+        memories[0].EndAccess(texture, &endState);
+
+        // Import fences and texture to the the other device.
+        std::vector<wgpu::SharedFence> sharedFences(endState.fenceCount);
+        for (size_t i = 0; i < endState.fenceCount; ++i) {
+            sharedFences[i] = GetParam().mBackend->ImportFenceTo(devices[1], endState.fences[i]);
+        }
+        beginDesc.fenceCount = endState.fenceCount;
+        beginDesc.fences = sharedFences.data();
+        beginDesc.signaledValues = endState.signaledValues;
+        beginDesc.concurrentRead = true;
+        beginDesc.initialized = endState.initialized;
+        backendBeginState = GetParam().mBackend->ChainBeginState(&beginDesc, endState);
+
+        // Create one texture for sampling, and one for doing nothing.
+        texDesc.usage = wgpu::TextureUsage::TextureBinding;
+        wgpu::Texture sampledTexture = memories[1].CreateTexture(&texDesc);
+        wgpu::Texture noopTexture = memories[1].CreateTexture(&texDesc);
+
+        memories[1].BeginAccess(sampledTexture, &beginDesc);
+        memories[1].BeginAccess(noopTexture, &beginDesc);
+
+        // Sample the texture, and end access.
+        wgpu::Texture colorTarget;
+        std::tie(commandBuffer, colorTarget) =
+            MakeCheckBySamplingCommandBuffer(devices[1], sampledTexture);
+        devices[1].GetQueue().Submit(1, &commandBuffer);
+        wgpu::SharedTextureMemoryEndAccessState endState1;
+        memories[1].EndAccess(sampledTexture, &endState1);
+
+        // None of the fences should be the same as the imported fences.
+        for (size_t i = 0; i < endState1.fenceCount; ++i) {
+            for (size_t j = 0; j < sharedFences.size(); ++j) {
+                EXPECT_NE(endState1.fences[i].Get(), sharedFences[j].Get());
+            }
+        }
+
+        // End access on the noop texture.
+        wgpu::SharedTextureMemoryEndAccessState endState2;
+        memories[1].EndAccess(noopTexture, &endState2);
+
+        // All of the fences should be identical. We test that the order is the
+        // same too, which is more strict than necessary.
+        EXPECT_EQ(endState2.fenceCount, sharedFences.size());
+        for (size_t i = 0; i < endState2.fenceCount; ++i) {
+            EXPECT_EQ(endState2.fences[i].Get(), sharedFences[i].Get());
+        }
+    }
+}
+
 // Test rendering to a texture memory on one device, then sampling it using another device.
 // Encode the commands after performing BeginAccess.
 TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeAfterBeginAccess) {
