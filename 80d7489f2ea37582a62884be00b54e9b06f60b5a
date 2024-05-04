@@ -70,6 +70,24 @@
       "parentUuid": "955a03bb_3878275a",
       "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb817fb_baef000b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-04T00:08:50Z",
+      "side": 1,
+      "message": "this one didn\u0027t update the bug either. maybe the \"chromium\" prefix prevents it..?",
+      "parentUuid": "a4410cb5_5b87ce19",
+      "revId": "80d7489f2ea37582a62884be00b54e9b06f60b5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
