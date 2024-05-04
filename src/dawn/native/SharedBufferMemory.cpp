@@ -52,7 +52,8 @@ class ErrorSharedBufferMemory : public SharedBufferMemoryBase {
                                const UnpackedPtr<BeginAccessDescriptor>& descriptor) override {
         DAWN_UNREACHABLE();
     }
-    ResultOrError<FenceAndSignalValue> EndAccessImpl(BufferBase* buffer,
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(ExecutionSerial lastUsageSerial,
+                                                     BufferBase* buffer,
                                                      UnpackedPtr<EndAccessState>& state) override {
         DAWN_UNREACHABLE();
     }
@@ -143,7 +144,7 @@ ResultOrError<Ref<BufferBase>> SharedBufferMemoryBase::CreateBuffer(
     Ref<BufferBase> buffer;
     DAWN_TRY_ASSIGN(buffer, CreateBufferImpl(descriptor));
     // Access is not allowed until BeginAccess has been called.
-    buffer->SetHasAccess(false);
+    buffer->PauseAccess();
     return buffer;
 }
 
