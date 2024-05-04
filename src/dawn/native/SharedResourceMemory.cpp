@@ -165,12 +165,12 @@ MaybeError SharedResourceMemory::BeginAccess(Resource* resource,
     DAWN_TRY(BeginAccessImpl(resource, descriptor));
 
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
-        mContents->mPendingFences->push_back(
+        mContents->mPendingFences[reinterpret_cast<uintptr_t>(resource)]->push_back(
             {descriptor->fences[i], descriptor->signaledValues[i]});
     }
 
     DAWN_ASSERT(!resource->IsError());
-    resource->SetHasAccess(true);
+    resource->ResumeAccess();
     resource->SetInitialized(descriptor->initialized);
     return {};
 }
@@ -204,12 +204,14 @@ MaybeError SharedResourceMemory::BeginAccessImpl(
 }
 
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessImpl(
+    ExecutionSerial lastUsageSerial,
     TextureBase* texture,
     UnpackedPtr<SharedTextureMemoryEndAccessState>& state) {
     DAWN_UNREACHABLE();
 }
 
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessImpl(
+    ExecutionSerial lastUsageSerial,
     BufferBase* buffer,
     UnpackedPtr<SharedBufferMemoryEndAccessState>& state) {
     DAWN_UNREACHABLE();
@@ -261,19 +263,21 @@ MaybeError SharedResourceMemory::EndAccess(Resource* resource,
     }
 
     PendingFenceList fenceList;
-    mContents->AcquirePendingFences(&fenceList);
+    mContents->AcquirePendingFences(resource, &fenceList);
 
     DAWN_ASSERT(!resource->IsError());
-    resource->SetHasAccess(false);
+    ExecutionSerial lastUsageSerial = resource->PauseAccess();
 
     *didEnd = true;
 
-    // Call the error-generating part of the EndAccess implementation. This is separated out because
-    // writing the output state must happen regardless of whether or not EndAccessInternal
-    // succeeds.
+    // If the last usage serial is non-zero, the texture was used.
+    // Call the error-generating part of the EndAccess implementation to export a fence.
+    // This is separated out because writing the output state must happen regardless of whether
+    // or not EndAccessInternal succeeds.
     MaybeError err;
-    {
-        ResultOrError<FenceAndSignalValue> result = EndAccessInternal(resource, state);
+    if (lastUsageSerial != ExecutionSerial{0}) {
+        ResultOrError<FenceAndSignalValue> result =
+            EndAccessInternal(lastUsageSerial, resource, state);
         if (result.IsSuccess()) {
             fenceList->push_back(result.AcquireSuccess());
         } else {
@@ -304,13 +308,14 @@ MaybeError SharedResourceMemory::EndAccess(Resource* resource,
 
 template <typename Resource, typename EndAccessState>
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessInternal(
+    ExecutionSerial lastUsageSerial,
     Resource* resource,
     EndAccessState* rawState) {
     UnpackedPtr<EndAccessState> state;
     DAWN_TRY_ASSIGN(state, ValidateAndUnpack(rawState));
     // Ensure that commands are submitted before exporting fences with the last usage serial.
-    DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(mContents->GetLastUsageSerial()));
-    return EndAccessImpl(resource, state);
+    DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(lastUsageSerial));
+    return EndAccessImpl(lastUsageSerial, resource, state);
 }
 
 // SharedResourceMemoryContents
@@ -323,17 +328,11 @@ const WeakRef<SharedResourceMemory>& SharedResourceMemoryContents::GetSharedReso
     return mSharedResourceMemory;
 }
 
-void SharedResourceMemoryContents::AcquirePendingFences(PendingFenceList* fences) {
-    *fences = mPendingFences;
-    mPendingFences->clear();
-}
-
-void SharedResourceMemoryContents::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
-    mLastUsageSerial = lastUsageSerial;
-}
-
-ExecutionSerial SharedResourceMemoryContents::GetLastUsageSerial() const {
-    return mLastUsageSerial;
+void SharedResourceMemoryContents::AcquirePendingFences(const SharedResource* resource,
+                                                        PendingFenceList* fences) {
+    auto& pendingFences = mPendingFences[reinterpret_cast<uintptr_t>(resource)];
+    *fences = pendingFences;
+    pendingFences->clear();
 }
 
 }  // namespace dawn::native
