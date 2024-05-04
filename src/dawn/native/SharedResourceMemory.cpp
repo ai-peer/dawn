@@ -27,6 +27,7 @@
 
 #include "dawn/native/SharedResourceMemory.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "dawn/native/Buffer.h"
@@ -165,12 +166,22 @@ MaybeError SharedResourceMemory::BeginAccess(Resource* resource,
     DAWN_TRY(BeginAccessImpl(resource, descriptor));
 
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
+        // Add the fences to mPendingFences if they are not already contained in the list.
+        // This loop is O(n*m), but there shouldn't be very many fences.
+        auto it = std::find_if(mContents->mPendingFences->begin(), mContents->mPendingFences->end(),
+                               [&](const auto& fence) {
+                                   return fence.object.Get() == descriptor->fences[i] &&
+                                          fence.signaledValue == descriptor->signaledValues[i];
+                               });
+        if (it != mContents->mPendingFences->end()) {
+            continue;
+        }
         mContents->mPendingFences->push_back(
             {descriptor->fences[i], descriptor->signaledValues[i]});
     }
 
     DAWN_ASSERT(!resource->IsError());
-    resource->SetHasAccess(true);
+    resource->ResumeAccess();
     resource->SetInitialized(descriptor->initialized);
     return {};
 }
@@ -204,12 +215,14 @@ MaybeError SharedResourceMemory::BeginAccessImpl(
 }
 
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessImpl(
+    ExecutionSerial lastUsageSerial,
     TextureBase* texture,
     UnpackedPtr<SharedTextureMemoryEndAccessState>& state) {
     DAWN_UNREACHABLE();
 }
 
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessImpl(
+    ExecutionSerial lastUsageSerial,
     BufferBase* buffer,
     UnpackedPtr<SharedBufferMemoryEndAccessState>& state) {
     DAWN_UNREACHABLE();
@@ -261,19 +274,26 @@ MaybeError SharedResourceMemory::EndAccess(Resource* resource,
     }
 
     PendingFenceList fenceList;
-    mContents->AcquirePendingFences(&fenceList);
+    // The state transitions to NotAccessed if the exclusive access ends, or the last concurrent
+    // read ends. When this occurs, acquiring any pending fences that may remain. This occurs if
+    // the accesses never acquired them.
+    if (mContents->mSharedResourceAccessState == SharedResourceAccessState::NotAccessed) {
+        mContents->AcquirePendingFences(&fenceList);
+    }
 
     DAWN_ASSERT(!resource->IsError());
-    resource->SetHasAccess(false);
+    ExecutionSerial lastUsageSerial = resource->PauseAccess();
 
     *didEnd = true;
 
-    // Call the error-generating part of the EndAccess implementation. This is separated out because
-    // writing the output state must happen regardless of whether or not EndAccessInternal
-    // succeeds.
+    // If the last usage serial is non-zero, the texture was used.
+    // Call the error-generating part of the EndAccess implementation to export a fence.
+    // This is separated out because writing the output state must happen regardless of whether
+    // or not EndAccessInternal succeeds.
     MaybeError err;
-    {
-        ResultOrError<FenceAndSignalValue> result = EndAccessInternal(resource, state);
+    if (lastUsageSerial != kBeginningOfGPUTime) {
+        ResultOrError<FenceAndSignalValue> result =
+            EndAccessInternal(lastUsageSerial, resource, state);
         if (result.IsSuccess()) {
             fenceList->push_back(result.AcquireSuccess());
         } else {
@@ -304,13 +324,14 @@ MaybeError SharedResourceMemory::EndAccess(Resource* resource,
 
 template <typename Resource, typename EndAccessState>
 ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessInternal(
+    ExecutionSerial lastUsageSerial,
     Resource* resource,
     EndAccessState* rawState) {
     UnpackedPtr<EndAccessState> state;
     DAWN_TRY_ASSIGN(state, ValidateAndUnpack(rawState));
     // Ensure that commands are submitted before exporting fences with the last usage serial.
-    DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(mContents->GetLastUsageSerial()));
-    return EndAccessImpl(resource, state);
+    DAWN_TRY(GetDevice()->GetQueue()->EnsureCommandsFlushed(lastUsageSerial));
+    return EndAccessImpl(lastUsageSerial, resource, state);
 }
 
 // SharedResourceMemoryContents
@@ -326,14 +347,6 @@ const WeakRef<SharedResourceMemory>& SharedResourceMemoryContents::GetSharedReso
 void SharedResourceMemoryContents::AcquirePendingFences(PendingFenceList* fences) {
     *fences = mPendingFences;
     mPendingFences->clear();
-}
-
-void SharedResourceMemoryContents::SetLastUsageSerial(ExecutionSerial lastUsageSerial) {
-    mLastUsageSerial = lastUsageSerial;
-}
-
-ExecutionSerial SharedResourceMemoryContents::GetLastUsageSerial() const {
-    return mLastUsageSerial;
 }
 
 }  // namespace dawn::native
