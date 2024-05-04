@@ -113,7 +113,8 @@ class TextureBase : public SharedResource {
     wgpu::TextureUsage GetInternalUsage() const;
 
     // SharedResource implementation
-    void SetHasAccess(bool hasAccess) override;
+    ExecutionSerial PauseAccess() override;
+    void ResumeAccess() override;
     bool HasAccess() const override;
     bool IsDestroyed() const override;
     bool IsInitialized() const override;
@@ -175,6 +176,8 @@ class TextureBase : public SharedResource {
     void DestroyImpl() override;
     void AddInternalUsage(wgpu::TextureUsage usage);
     void SetSharedResourceMemoryContentsForTesting(Ref<SharedResourceMemoryContents> contents);
+
+    ExecutionSerial mLastSharedTextureMemoryUsageSerial{0};
 
   private:
     struct TextureState {
