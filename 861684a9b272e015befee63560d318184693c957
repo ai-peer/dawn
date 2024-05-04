@@ -16,6 +16,23 @@
       "message": "Addressed feedback, PTAL.",
       "revId": "861684a9b272e015befee63560d318184693c957",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dc6bb4d_ff343c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-04T00:06:47Z",
+      "side": 1,
+      "message": "(note: the issue with the cmake builders has been reverted)",
+      "revId": "861684a9b272e015befee63560d318184693c957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
