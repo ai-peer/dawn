@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-05-03 07:34:56AM
+# Last rolled: 2024-05-05 07:28:21AM
 
 # Flaky on all platforms
 # KEEP
@@ -313,7 +313,6 @@ crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries
 # getCurrentTexture failures
 crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:* [ Failure ]
 crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:resize:* [ Failure ]
-crbug.com/dawn/2114 [ nvidia-0x2184 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
 
 # copyToTexture,canvas color_space_conversion failure on NVidia
 crbug.com/dawn/2377 [ nvidia-0x2184 ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:srcColorSpace="display-p3";dstColorSpace="srgb";dstColorFormat="rg16float";dstPremultiplied=false;srcDoFlipYDuringCopy=false [ RetryOnFailure ]
@@ -476,4 +475,5 @@ crbug.com/dawn/0000 webgpu:shader,validation,decl,var:address_space_access_mode:
 crbug.com/dawn/0000 webgpu:shader,validation,decl,var:address_space_access_mode:address_space="uniform";access_mode="";trailing_comma=true [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,validation,decl,var:address_space_access_mode:address_space="workgroup";access_mode="";trailing_comma=true [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,validation,parse,diagnostic:duplicate_attribute_same_location:* [ Failure ]
+crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:api,operation,adapter,requestDevice:limit,better_than_supported:limit="maxInterStageShaderVariables" [ Failure ]
 crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,builtin,fwidthFine:* [ Failure ]
