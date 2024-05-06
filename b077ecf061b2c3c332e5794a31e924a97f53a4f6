@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0eacd00_3bf85d94",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-06T22:30:50Z",
+      "side": 1,
+      "message": "DAWN_ASSERT may also prevent release builds from returning kNullFutureID though. DAWN_ASSERT(false) in release tells the compiler it can assume this code is never executed so it could optimize out the entire if-block.\n\nI think we have to remove the assert entirely (or add a new thing which I\u0027d call `DAWN_DCHECK` and use that).",
+      "parentUuid": "b632591e_85418519",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f93c015c_a7ad246a",
         "filename": "src/dawn/wire/client/EventManager.cpp",
         "patchSetId": 2
