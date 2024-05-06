@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03bdf6fd_adcacf03",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T19:19:10Z",
+      "side": 1,
+      "message": "FYI I filed crbug.com/338601189 specifically about the vulkan parts",
+      "revId": "b6955fedccec43d4ab690ff22379fc55e751a962",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
