@@ -327,8 +327,9 @@ ResultOrError<VkDrmFormatModifierPropertiesEXT> GetFormatModifierProps(
     return DAWN_VALIDATION_ERROR("DRM format modifier %u not supported.", modifier);
 }
 
-ResultOrError<VkSamplerYcbcrConversionCreateInfo> CreateSamplerYCbCrConversionCreateInfo(
-    const YCbCrVkDescriptor* yCbCrDescriptor) {
+MaybeError CreateSamplerYCbCrConversionCreateInfo(const YCbCrVkDescriptor* yCbCrDescriptor,
+                                                  Device* device,
+                                                  VkSamplerYcbcrConversion& ycbcrConversion) {
     uint64_t externalFormat = yCbCrDescriptor->externalFormat;
     VkFormat vulkanFormat = static_cast<VkFormat>(yCbCrDescriptor->vkFormat);
     DAWN_INVALID_IF((externalFormat == 0 && vulkanFormat == VK_FORMAT_UNDEFINED),
@@ -357,7 +358,24 @@ ResultOrError<VkSamplerYcbcrConversionCreateInfo> CreateSamplerYCbCrConversionCr
     vulkanYCbCrCreateInfo.forceExplicitReconstruction =
         static_cast<VkBool32>(yCbCrDescriptor->forceExplicitReconstruction);
 
-    return vulkanYCbCrCreateInfo;
+#if DAWN_PLATFORM_IS(ANDROID)
+    VkExternalFormatANDROID vulkanExternalFormat;
+    // Chain VkExternalFormatANDROID only if needed.
+    if (externalFormat != 0) {
+        vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
+        vulkanExternalFormat.pNext = nullptr;
+        vulkanExternalFormat.externalFormat = externalFormat;
+
+        vulkanYCbCrCreateInfo.pNext = &vulkanExternalFormat;
+    }
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+
+    DAWN_TRY(CheckVkSuccess(
+        device->fn.CreateSamplerYcbcrConversion(device->GetVkDevice(), &vulkanYCbCrCreateInfo,
+                                                nullptr, &*ycbcrConversion),
+        "CreateSamplerYcbcrConversion"));
+
+    return {};
 }
 
 }  // namespace dawn::native::vulkan
