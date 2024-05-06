@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f713cae9_f78f523b",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "Removed trailing underscores as per our convention for these PIMPL classes.",
+      "parentUuid": "fb53e06d_570d475c",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81d53ee4_ee0ae0aa",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e77d4a5_3c0a11b6",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "It\u0027s a fair point, I\u0027ve moved this into `ProcessEntryPointOutputs` and added a hash set to prevent them from being processed twice.",
+      "parentUuid": "81d53ee4_ee0ae0aa",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f740ed0_d6622435",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-05-06T18:23:04Z",
       "side": 1,
       "message": "Maybe add a note here that this has to be done after `ProcessEntryPointOutputs` because the attributes are copied out during the processing to the entry point variables?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3cac199_f7386ac6",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f740ed0_d6622435",
       "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb4eecf0_db7dffcb",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "There\u0027s a difference between \"accepted with nothing to do\" and \"not accepted\". But I\u0027ve turned this into a `if/else if/else` to cover the three cases.",
+      "parentUuid": "fcc60c8b_a2462d3d",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56892e24_ceda4fcb",
         "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
         "patchSetId": 12
@@ -99,6 +171,24 @@
       "writtenOn": "2024-05-06T18:23:04Z",
       "side": 1,
       "message": "```suggestion\n                    // If we\u0027re dealing with sample_mask, extract the scalar from the array.\n```",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a9ba3d_a9adcc46",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56892e24_ceda4fcb",
       "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e2c846_f667a469",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "No, we early-exit from this function if there are no referenced output variables (at the top).",
+      "parentUuid": "a317685b_678e1a4c",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2a7f89c_9e0ab568",
@@ -133,6 +241,24 @@
       "writtenOn": "2024-05-06T18:23:04Z",
       "side": 1,
       "message": "Just match an `As\u003ccore::ir::UserCall\u003e` as it\u0027s the only one handled?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c78c4e_44147fd8",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:49Z",
+      "side": 1,
+      "message": "Well, `Return` is also accepted (we just don\u0027t do anything with it), and then we want to ICE on anything else instead of silently accepting it.\n\nBut maybe the `Switch()` was overkill, so I\u0027ve turned it into an `if/else if/else` for those three cases.",
+      "parentUuid": "d2a7f89c_9e0ab568",
       "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
