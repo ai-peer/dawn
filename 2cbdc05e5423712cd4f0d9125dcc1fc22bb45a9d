@@ -104,6 +104,24 @@
       "parentUuid": "ccffedc6_93557f9c",
       "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ebb973_3b81be97",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T17:20:23Z",
+      "side": 1,
+      "message": "Thank you",
+      "parentUuid": "1be617ca_0e5f008f",
+      "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
