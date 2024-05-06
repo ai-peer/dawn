@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded18318_922b5987",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-06T15:43:24Z",
+      "side": 1,
+      "message": "Done. Note that I actually wanted to use `ValidationUtils_autogen.h` also, but it\u0027s actually under `native` only so I don\u0027t think the wire-side has easy access to it, hence adding the function in `common/FutureUtils` for now. Maybe we could move the validation into common in the future?",
+      "parentUuid": "047f510b_997f7394",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec4a15c3_e0a95994",
@@ -53,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b632591e_85418519",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-06T15:43:24Z",
+      "side": 1,
+      "message": "Yea, the intention is that in release it should just skip and return `kNullFutureID`. Added TODOs for logging though.",
+      "parentUuid": "ec4a15c3_e0a95994",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f93c015c_a7ad246a",
@@ -66,6 +102,24 @@
       "writtenOn": "2024-05-02T22:24:31Z",
       "side": 1,
       "message": "Same comment here about implementation defined logging",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3ac476_0665b617",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-06T15:43:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f93c015c_a7ad246a",
       "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
