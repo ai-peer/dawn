@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24867fd3_722c6b81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-06T18:33:12Z",
+      "side": 1,
+      "message": "Looks like this is needed for Dawn -\u003e Tint (Kokoro build)",
+      "revId": "ee4427c8599e165f68691101d1210b1e7168bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
