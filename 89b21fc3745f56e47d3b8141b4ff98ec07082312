@@ -51,6 +51,24 @@
       "parentUuid": "d1364543_b8b1cfb7",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e558ef92_52b3c5eb",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-06T21:45:40Z",
+      "side": 1,
+      "message": "The thing Austin described is basically what we currently do for WGPULimits/WGPURequiredLimits/WGPUSupportedLimits. However we said we were going to try to change that:\nhttps://github.com/webgpu-native/webgpu-headers/issues/260#issuecomment-1910891166\n\nWe haven\u0027t proven that out to make sure it works. There\u0027s at least one odd consequence of that, which is that if you put it in the middle of a chain, then whatever struct comes next needs to be passed as a non-const pointer. I think this will be fine though.",
+      "parentUuid": "97a82ce6_0148332f",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
