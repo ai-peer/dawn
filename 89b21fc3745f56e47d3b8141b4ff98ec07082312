@@ -87,6 +87,24 @@
       "parentUuid": "e558ef92_52b3c5eb",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecd9b7a_562f4994",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-06T23:24:36Z",
+      "side": 1,
+      "message": "Oh right, I noticed that and then forgot about it while looking for that github issue.\n\nIn that case yeah, this is probably good (better than introducing another copy of the GPULimits pattern we\u0027re trying to get rid of).\n\nI would say add a DAWN_CHECK or validation error that the next pointer here is always nullptr and maybe a test for it.",
+      "parentUuid": "7fce32a2_ce2eb383",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
