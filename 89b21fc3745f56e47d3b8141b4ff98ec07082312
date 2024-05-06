@@ -33,6 +33,24 @@
       "message": "Is there anything problematic about using YCbCrVkDescriptor here when it\u0027s listed as\n\n\"chained\": \"in\",\n\"chain roots\": [\"sampler descriptor\", \"texture view descriptor\"],\n\n?",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a82ce6_0148332f",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T18:17:11Z",
+      "side": 1,
+      "message": "@kainino@chromium.org for an API/webgpu.h perspective here.\n\nI believe what you have would \"work\" but it may be a bit odd API structure? Should we instead of a separate y cb cr info standalone struct, and then:\n```\nstruct WGPUYCbCrInfo {\n // not chained\n // ...\n};\nstruct WGPUYCbCrVkDescriptor {\n  WGPUChainedStruct chain;\n  WGPUYCbCrInfo ycbcrInfo;\n};\nstruct WGPUYCbCrVkProperties {\n  WGPUChainedStructOut chain;\n  WGPUYCbCrInfo suggestedYcbcrInfo;\n};\n```\n?\n\nThe downside of this is that it\u0027s potentially a lot of extra \".\" to actually pass your info.\n\n\n```\nWGPUTextureViewDescriptor viewDesc;\nWGPUYCbCrVkDescriptor ycbcrDesc;\nviewDesc.chain.next \u003d \u0026ycbcrDesc;\nycbcrDesc.ycbcrInfo.vkYCbCrModel \u003d ...;\nycbcrDesc.ycbcrInfo.vkYCbCrRange \u003d ...;\n```\n\nAlternatively, you might argue that Colin\u0027s current structure is better - since it outputs directly the input descriptor you can use for creation.",
+      "parentUuid": "d1364543_b8b1cfb7",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
