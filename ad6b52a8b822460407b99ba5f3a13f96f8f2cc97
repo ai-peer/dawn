@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49902e05_67fc93aa",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "Ack, opened crbug.com/339069164.",
+      "parentUuid": "cb1ea0c0_64d02678",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dea771ce_2e7cf31c",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-06T14:56:07Z",
       "side": 1,
       "message": "Can we expand this a bit with the reasoning why it isn\u0027t in the module?\n\n```\n/// Note: while this could be cached in the module there would need to be a lot\n/// of tracing for cache invalidation (adding/removing a module-scoped var, adding \n/// a reference to one inside a function, adding a function, etc). Due to the\n/// required overhead of this tracking, and that we expect the usage of this\n/// transform to be limited, we\u0027ve opted for re-generating in each spot needed\n/// instead of having a global cache.\n```\n\nOr, something like that?",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20b0b91_dcabcbc1",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dea771ce_2e7cf31c",
       "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b0ab82_75670c49",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a870f017_bf3af722",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1003a1a4_8df7fff5",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-05-06T14:56:07Z",
       "side": 1,
       "message": "```suggestion\n    /// @returns the set of, possibly filtered, transitively reference module-scope variables\n```",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c33f76d0_df678d54",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1003a1a4_8df7fff5",
       "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7dd4aa3_024b63ce",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59ce8e3c_b2482993",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7b88ae9_043c4b65",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-05-06T14:56:07Z",
       "side": 1,
       "message": "Maybe one more here where the root block has vars which are referenced by other functions but the checked function has no usages.",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a286bd06_615412ab",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T22:41:33Z",
+      "side": 1,
+      "message": "This was sort of covered by `DirectUse_MultipleFunctions` (where two functions referenced different subsets of variables), but I\u0027ve added another than doesn\u0027t reference anything.",
+      "parentUuid": "d7b88ae9_043c4b65",
       "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
