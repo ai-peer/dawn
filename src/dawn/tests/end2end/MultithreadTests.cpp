@@ -178,12 +178,11 @@ TEST_P(MultithreadTests, Device_DroppedInCallback_OnAnotherThread) {
         // Drop the last ref inside a callback.
         additionalDevice.PushErrorScope(wgpu::ErrorFilter::Validation);
         additionalDevice.PopErrorScope(
-            [](WGPUErrorType type, const char*, void* userdataPtr) {
-                auto userdata = static_cast<UserData*>(userdataPtr);
-                userdata->device2ndRef = nullptr;
-                userdata->isCompleted = true;
-            },
-            &userData);
+            wgpu::CallbackMode::AllowProcessEvents,
+            [&userData](wgpu::PopErrorScopeStatus, wgpu::ErrorType, const char*) {
+                userData.device2ndRef = nullptr;
+                userData.isCompleted = true;
+            });
         // main ref dropped.
         additionalDevice = nullptr;
 
@@ -1330,12 +1329,12 @@ TEST_P(MultithreadTextureCopyTests, CopyTextureForBrowserErrorNoDeadLock) {
 
         std::atomic<bool> errorThrown(false);
         device.PopErrorScope(
-            [](WGPUErrorType type, char const* message, void* userdata) {
-                EXPECT_EQ(type, WGPUErrorType_Validation);
-                auto error = static_cast<std::atomic<bool>*>(userdata);
-                *error = true;
-            },
-            &errorThrown);
+            wgpu::CallbackMode::AllowProcessEvents,
+            [&errorThrown](wgpu::PopErrorScopeStatus status, wgpu::ErrorType type, char const*) {
+                EXPECT_EQ(status, wgpu::PopErrorScopeStatus::Success);
+                EXPECT_EQ(type, wgpu::ErrorType::Validation);
+                errorThrown = true;
+            });
         instance.ProcessEvents();
         EXPECT_TRUE(errorThrown.load());
 
