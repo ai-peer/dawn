@@ -16,6 +16,57 @@
       "message": "Please take a look.",
       "revId": "7a2a4091996a2cb30365cd1bf5e9ffa25525afbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0774e0c8_56ff646c",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T21:41:57Z",
+      "side": 1,
+      "message": "nit: set mYCbCrVkDescriptor.nextInChain to nullptr just in case something else was there.",
+      "revId": "7a2a4091996a2cb30365cd1bf5e9ffa25525afbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc71fe2b_ca38de25",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T21:41:57Z",
+      "side": 1,
+      "message": "nit: minor preference to use DAWN_TRY_ASSIGN instead of the mutable reference arg",
+      "revId": "7a2a4091996a2cb30365cd1bf5e9ffa25525afbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b04b650d_68ad4ce8",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1770,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T21:41:57Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "7a2a4091996a2cb30365cd1bf5e9ffa25525afbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
