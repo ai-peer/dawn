@@ -70,6 +70,24 @@
       "parentUuid": "2dc680c9_ce174368",
       "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e0ee807_33238670",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:30:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "333c1a93_2380f9a9",
+      "revId": "6701fe82d66f40444cd32a7c4dbe5b14888d6199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
