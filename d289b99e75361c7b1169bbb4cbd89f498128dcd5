@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3ddc99db_f0458771",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T19:25:57Z",
+      "side": 0,
+      "message": "Exactly! And all backends (until this commit) only set one of these two formats in capabilities.",
+      "parentUuid": "6e6ae806_3ed50ba0",
+      "revId": "d289b99e75361c7b1169bbb4cbd89f498128dcd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7168caca_01aca88c",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 2
