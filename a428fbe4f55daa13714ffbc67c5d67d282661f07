@@ -270,6 +270,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23bb7bd1_1cb3a3aa",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-06T14:45:05Z",
+      "side": 1,
+      "message": "This sounds good, I can do it in a follow-up.",
+      "parentUuid": "f1a60635_d4935196",
+      "range": {
+        "startLine": 338,
+        "startChar": 0,
+        "endLine": 338,
+        "endChar": 74
+      },
+      "revId": "a428fbe4f55daa13714ffbc67c5d67d282661f07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baa3baf2_51d63389",
