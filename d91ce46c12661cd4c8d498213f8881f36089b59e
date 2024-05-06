@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e533119b_a5de6baf",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T16:11:30Z",
+      "side": 1,
+      "message": "fyi, eventually we\u0027ll need to move this to be outside of the normal group. We can build the test target here, and anything it needs (like gradlew), but shouldn\u0027t actually execute the tests",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 17
+      },
+      "revId": "d91ce46c12661cd4c8d498213f8881f36089b59e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37d0d0cd_318890d5",
+        "filename": "tools/android/gradle_script.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T16:11:30Z",
+      "side": 1,
+      "message": "nit: preferable to call the [`dawn_json_generator` template](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/dawn_generator.gni;l\u003d78?q\u003df:dawn%20dawn_json_generator%20f:.gni%3F%20-f:angle) in GN instead of adding a new way to invoke it.\n\nThen, you can run_tests depend on it.",
+      "revId": "d91ce46c12661cd4c8d498213f8881f36089b59e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
