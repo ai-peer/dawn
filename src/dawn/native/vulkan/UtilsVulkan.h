@@ -179,8 +179,9 @@ ResultOrError<VkDrmFormatModifierPropertiesEXT> GetFormatModifierProps(
     VkFormat format,
     uint64_t modifier);
 
-ResultOrError<VkSamplerYcbcrConversionCreateInfo> CreateSamplerYCbCrConversionCreateInfo(
-    const YCbCrVkDescriptor* yCbCrDescriptor);
+MaybeError CreateSamplerYCbCrConversionCreateInfo(const YCbCrVkDescriptor* yCbCrDescriptor,
+                                                  Device* device,
+                                                  VkSamplerYcbcrConversion& ycbcrConversion);
 
 }  // namespace dawn::native::vulkan
 
