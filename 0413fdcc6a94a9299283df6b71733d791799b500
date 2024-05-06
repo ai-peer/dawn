@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a507e9_c7b46981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T20:55:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0413fdcc6a94a9299283df6b71733d791799b500",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824dcf3a_be90cf0f",
+        "filename": "src/dawn/tests/unittests/wire/WireInjectBufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T20:55:05Z",
+      "side": 1,
+      "message": "Could we have a couple tests like the ones for texture injection where we check that the reflection (buffer.GetUsage/GetSize()) returns the descriptor\u0027s data even if it is utter garbage?",
+      "revId": "0413fdcc6a94a9299283df6b71733d791799b500",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
