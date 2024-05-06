@@ -33,6 +33,24 @@
       "message": "Could we have a couple tests like the ones for texture injection where we check that the reflection (buffer.GetUsage/GetSize()) returns the descriptor\u0027s data even if it is utter garbage?",
       "revId": "0413fdcc6a94a9299283df6b71733d791799b500",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ffa53f3_f426c4b0",
+        "filename": "src/dawn/tests/unittests/wire/WireInjectBufferTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2024-05-06T21:53:16Z",
+      "side": 1,
+      "message": "Which texture injection test are you referring to? Maybe I\u0027m misunderstanding, but isn\u0027t WireInjectBufferTests.ReservedBufferReflection doing exactly that?",
+      "parentUuid": "824dcf3a_be90cf0f",
+      "revId": "0413fdcc6a94a9299283df6b71733d791799b500",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
