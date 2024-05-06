@@ -69,6 +69,24 @@
       "parentUuid": "97a82ce6_0148332f",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fce32a2_ce2eb383",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T22:07:06Z",
+      "side": 1,
+      "message": "Note that Colin\u0027s thing is slightly different from the limits because in this case, the const chain that we\u0027re putting in the output is not actually part of the chian. It a member of an out chained struct instead.\n\nIt looks like:\n```c\ntypedef struct WGPUSharedTextureMemoryVkProperties {\n  WGPUChainedStructOut chain;\n  // use this info to make a ycbcr texture view\n  const WGPUYCbCrVkDescriptor ycbcrDescriptor;\n} WGPUSharedTextureMemoryVkProperties;\n\n// Usage:\n\nWGPUSharedTextureMemoryVkProperties vkProperties;\nWGPUSharedTextureMemoryProperties properties;\nproperties.chain.next \u003d \u0026vkProperties.chain;\n\nstm.GetPropreties(\u0026properties);\n\nt \u003d stm.CreateTexture();\nv \u003d t.CreateView(\u0026vkProperties.ycbcrDescriptor);\n```\nIt is not:\n```c\nWGPUYCbCrVkDescriptor ycbcrDescriptor;\nWGPUSharedTextureMemoryVkProperties vkProperties;\nWGPUSharedTextureMemoryProperties properties;\nvkProperties.chain.next \u003d \u0026ycbcrDescriptor.chain;\nproperties.chain.next \u003d \u0026vkProperties.chain;\n```\n\nWith the current code, the const-ness of `ycbcrDescriptor`\u0027s chain (ycbcrDescriptor.chain.next is const) is not a problem if you have more shared texture memory properties you want to chain onto `vkProperties`.\n\n\nSo I think... what Colin has is fine! Especially since we would like to remove the repetitive pattern that Kai describes with the limits.\n\nOne thing we should probably document, Colin, is that some of the info in the output descriptor is *required*, and some of it is *suggested*. IMO it would be unescessary to make a new struct with new names just to denote this distinction, and that documentation is sufficient, but open to other opinions.",
+      "parentUuid": "e558ef92_52b3c5eb",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
