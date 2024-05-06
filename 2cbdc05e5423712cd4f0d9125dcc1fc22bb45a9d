@@ -68,6 +68,24 @@
       "parentUuid": "03ceb7b4_f3e26078",
       "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccffedc6_93557f9c",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T17:00:34Z",
+      "side": 1,
+      "message": "Having it off by defaults helps folks integrating Dawn in their project to not have to dig how to turn werror off. It is also useful while developing IMHO as it lets you write garbage code as an intermediate state. Finally turning it on is a one time set up for developers of Dawn/Tint if they want it.",
+      "parentUuid": "ce9a2d37_9772dfac",
+      "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
