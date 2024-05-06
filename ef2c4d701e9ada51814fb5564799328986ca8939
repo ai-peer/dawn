@@ -39,6 +39,30 @@
       },
       "revId": "ef2c4d701e9ada51814fb5564799328986ca8939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e04f15_0c33e5ae",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1453,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-06T21:18:29Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "50c580b0_38634784",
+      "range": {
+        "startLine": 1448,
+        "startChar": 1,
+        "endLine": 1453,
+        "endChar": 0
+      },
+      "revId": "ef2c4d701e9ada51814fb5564799328986ca8939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
