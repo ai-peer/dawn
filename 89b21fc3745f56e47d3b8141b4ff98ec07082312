@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300c3009_866ac372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-06T14:56:17Z",
+      "side": 1,
+      "message": "Austin: for review\nSaif, Nicolette: FYI\n\nThanks!",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1364543_b8b1cfb7",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-06T14:56:17Z",
+      "side": 1,
+      "message": "Is there anything problematic about using YCbCrVkDescriptor here when it\u0027s listed as\n\n\"chained\": \"in\",\n\"chain roots\": [\"sampler descriptor\", \"texture view descriptor\"],\n\n?",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
