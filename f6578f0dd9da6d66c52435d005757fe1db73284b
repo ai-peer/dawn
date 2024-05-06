@@ -16,6 +16,24 @@
       "message": "nit: this one does not assert, and native does; make them consistent?\n\nbut also dawn::ErrorLog() would work for now and later we can redirect to the instance logging callback (so keep the TODO)",
       "revId": "f6578f0dd9da6d66c52435d005757fe1db73284b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e41f17_7f3c2095",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-06T17:49:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eecedde0_3966e691",
+      "revId": "f6578f0dd9da6d66c52435d005757fe1db73284b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
