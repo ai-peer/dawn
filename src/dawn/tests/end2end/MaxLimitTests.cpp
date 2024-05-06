@@ -220,14 +220,16 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
         bufDesc.usage = usage | wgpu::BufferUsage::CopyDst;
         wgpu::Buffer buffer = device.CreateBuffer(&bufDesc);
 
-        WGPUErrorType oomResult;
-        device.PopErrorScope([](WGPUErrorType type, const char*,
-                                void* userdata) { *static_cast<WGPUErrorType*>(userdata) = type; },
-                             &oomResult);
+        wgpu::ErrorType oomResult;
+        device.PopErrorScope(
+            wgpu::CallbackMode::AllowProcessEvents,
+            [](wgpu::PopErrorScopeStatus, wgpu::ErrorType type, const char*,
+               wgpu::ErrorType* typeOut) { *typeOut = type; },
+            &oomResult);
         instance.ProcessEvents();
         FlushWire();
         // Max buffer size is smaller than the max buffer binding size.
-        DAWN_TEST_UNSUPPORTED_IF(oomResult == WGPUErrorType_OutOfMemory);
+        DAWN_TEST_UNSUPPORTED_IF(oomResult == wgpu::ErrorType::OutOfMemory);
 
         wgpu::BufferDescriptor resultBufDesc;
         resultBufDesc.size = 8;
