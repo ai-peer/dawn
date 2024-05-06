@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3524ef2_e8a6d771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-06T14:34:20Z",
+      "side": 1,
+      "message": "Note that this doesn\u0027t handle gl_PerVertex stuff yet which will require extra work.",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
