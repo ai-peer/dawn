@@ -122,7 +122,8 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         // also errors that surface only on the BeginAccess() call.
         device.PushErrorScope(wgpu::ErrorFilter::Validation);
         auto texture = sharedTextureMemory.CreateTexture(&textureDesc);
-        device.PopErrorScope([](WGPUErrorType type, const char*, void* userdataPtr) {}, nullptr);
+        device.PopErrorScope(wgpu::CallbackMode::AllowProcessEvents,
+                             [](wgpu::PopErrorScopeStatus, wgpu::ErrorType, const char*) {});
 
         // Invoke BeginAccess() on the texture to ensure that it can be used by
         // the test. We will end the access when the texture is destroyed
@@ -151,7 +152,8 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         device.PushErrorScope(wgpu::ErrorFilter::Validation);
         platformTextureIOSurface->mSharedTextureMemory.EndAccess(platformTexture->wgpuTexture,
                                                                  &endAccessState);
-        device.PopErrorScope([](WGPUErrorType type, const char*, void* userdataPtr) {}, nullptr);
+        device.PopErrorScope(wgpu::CallbackMode::AllowProcessEvents,
+                             [](wgpu::PopErrorScopeStatus, wgpu::ErrorType, const char*) {});
     }
 
     WGPUDevice mWGPUDevice = nullptr;
