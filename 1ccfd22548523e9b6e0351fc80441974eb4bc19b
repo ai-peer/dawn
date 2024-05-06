@@ -229,6 +229,24 @@
       "parentUuid": "d170de0e_73d37ebf",
       "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92c7b81_f83d73a8",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3951,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-06T20:50:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f204345_019fc71c",
+      "revId": "1ccfd22548523e9b6e0351fc80441974eb4bc19b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
