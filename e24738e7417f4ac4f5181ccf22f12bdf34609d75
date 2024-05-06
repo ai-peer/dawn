@@ -225,6 +225,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec19e29_1ec43495",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-06T15:43:35Z",
+      "side": 1,
+      "message": "Ok sg! made them extensible again, but will add C++ overload for chains and stuff when we actually have them.",
+      "parentUuid": "14f19e4c_732de9c1",
+      "revId": "e24738e7417f4ac4f5181ccf22f12bdf34609d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46dbdfa4_fd9a5f44",
