@@ -34,6 +34,24 @@
       "parentUuid": "fb770b36_449fcc0f",
       "revId": "11b8a02a5c4c0aff1663e3cabccc79f575dec28c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37080943_023300d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-05-06T01:57:29Z",
+      "side": 1,
+      "message": "Yes, the errors are caused by:\n1. A error in dawn end2end test, caused by assign entryPoint with returned string.c_str() directly. Failed on mac and linux\n2. Delete expectation files when using tools to generate expectation tint files. The case work on my local machine but failed on bots.",
+      "parentUuid": "94e3d404_7511fa39",
+      "revId": "11b8a02a5c4c0aff1663e3cabccc79f575dec28c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
