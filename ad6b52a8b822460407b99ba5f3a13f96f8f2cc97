@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3aae9b5_8082615e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "lgtm + nits",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb1ea0c0_64d02678",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "feels like `UniqueVector` could use some kind of `Append(UniqueVector)` call which joins the two lists. (not as part of this CL, just seems like a pattern we could cleanup)",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dea771ce_2e7cf31c",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "Can we expand this a bit with the reasoning why it isn\u0027t in the module?\n\n```\n/// Note: while this could be cached in the module there would need to be a lot\n/// of tracing for cache invalidation (adding/removing a module-scoped var, adding \n/// a reference to one inside a function, adding a function, etc). Due to the\n/// required overhead of this tracking, and that we expect the usage of this\n/// transform to be limited, we\u0027ve opted for re-generating in each spot needed\n/// instead of having a global cache.\n```\n\nOr, something like that?",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a870f017_bf3af722",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "Can you add what `true` means here? If the predicate is true, I\u0027m assuming it\u0027s something like \u0027if `true` the var is added to the cache.\u0027",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1003a1a4_8df7fff5",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @returns the set of, possibly filtered, transitively reference module-scope variables\n```",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ce8e3c_b2482993",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7b88ae9_043c4b65",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:56:07Z",
+      "side": 1,
+      "message": "Maybe one more here where the root block has vars which are referenced by other functions but the checked function has no usages.",
+      "revId": "ad6b52a8b822460407b99ba5f3a13f96f8f2cc97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
