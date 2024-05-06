@@ -33,6 +33,57 @@
       "message": "(note: the issue with the cmake builders has been reverted)",
       "revId": "861684a9b272e015befee63560d318184693c957",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d1160c_1cc596db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T09:39:00Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "861684a9b272e015befee63560d318184693c957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465b4c9f_77b36e1f",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T09:39:00Z",
+      "side": 1,
+      "message": "Why is a cast needed here? externalFormat is declared as a uint64_t in the dawn.json file.",
+      "revId": "861684a9b272e015befee63560d318184693c957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909f0639_12b36bf4",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-06T09:39:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "861684a9b272e015befee63560d318184693c957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
