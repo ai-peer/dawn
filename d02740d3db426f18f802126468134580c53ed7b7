@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "d02740d3db426f18f802126468134580c53ed7b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425347da_8d1b73c5",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T22:33:39Z",
+      "side": 1,
+      "message": "maybe we can link directly to the target that uses dawn native with the procs linke directly\n\ncan be done later",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 48
+      },
+      "revId": "d02740d3db426f18f802126468134580c53ed7b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
