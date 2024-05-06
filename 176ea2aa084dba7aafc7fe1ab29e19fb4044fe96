@@ -16,6 +16,125 @@
       "message": "Note that this doesn\u0027t handle gl_PerVertex stuff yet which will require extra work.",
       "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb53e06d_570d475c",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "nit: some names have a `_` tail and some don\u0027t?\n\n```suggestion\n        function_parameter_map_{};\n```",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81d53ee4_ee0ae0aa",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "Out of curiousity, why doesn\u0027t this happen in `ProcessEntryPointOutputs` where we can use the `referenced_output_vars_.TransitiveReferences(ep)` to get the outputs that are used by the entry point?\n\nOh, so we don\u0027t double process any given `var`, yea? Maybe a comment to that effect? `We only want to process a given var once, even if used in multiple entry points, so we collect them up ahead of time` or something?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f740ed0_d6622435",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "Maybe add a note here that this has to be done after `ProcessEntryPointOutputs` because the attributes are copied out during the processing to the entry point variables?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc60c8b_a2462d3d",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "This seems like it would be simpler as a:\n\n```\nif (auto* a \u003d use.instruction.As\u003ccore::ir::Access\u003e()) {\n  ReplaceOutputPointerAddressSpace(a-\u003eResult(0));\n}\n```\n\nsince that\u0027s the only case used?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56892e24_ceda4fcb",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "```suggestion\n                    // If we\u0027re dealing with sample_mask, extract the scalar from the array.\n```",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a317685b_678e1a4c",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "Is it possible for `output_descriptors` to be empty?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a7f89c_9e0ab568",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T18:23:04Z",
+      "side": 1,
+      "message": "Just match an `As\u003ccore::ir::UserCall\u003e` as it\u0027s the only one handled?",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
