@@ -266,6 +266,39 @@ class ObjectBase {
     {{as_cppType(types["callback mode"].name)}} mode, F callback, T userdata) const
 {%- endmacro %}
 
+//* This rendering macro should ONLY be used for callback info type functions.
+{% macro render_cpp_callback_info_lambda_method_declaration(type, method, dfn=False) %}
+    {% set CppType = as_cppType(type.name) %}
+    {% set OriginalMethodName = method.name.CamelCase() %}
+    {% set MethodName = OriginalMethodName[:-1] if method.name.chunks[-1] == "2" else OriginalMethodName %}
+    {% set MethodName = CppType + "::" + MethodName if dfn else MethodName %}
+    //* Stripping the 2 at the end of the callback functions for now until we can deprecate old ones.
+    //* TODO: crbug.com/dawn/2509 - Remove name handling once old APIs are deprecated.
+    {% set CallbackInfoType = (method.arguments|last).type %}
+    {% set CallbackType = (CallbackInfoType.members|first).type %}
+    {% set SfinaeArg = " = std::enable_if_t<std::is_convertible_v<F, Cb*>>" if not dfn else "" %}
+    template <typename F,
+              typename Cb
+                {%- if not dfn -%}
+                    {{" "}}= std::function<void(
+                        {%- for arg in CallbackType.arguments -%}
+                            {%- if not loop.first %}, {% endif -%}
+                            {{as_annotated_cppType(arg)}}
+                        {%- endfor -%}
+                    )
+                {%- endif -%},
+              typename{{SfinaeArg}}>
+    {{as_cppType(method.return_type.name)}} {{MethodName}}(
+        {%- for arg in method.arguments if arg.type.category != "callback info" -%}
+            {%- if arg.type.category == "object" and arg.annotation == "value" -%}
+                {{as_cppType(arg.type.name)}} const& {{as_varName(arg.name)}}{{ ", "}}
+            {%- else -%}
+                {{as_annotated_cppType(arg)}}{{ ", "}}
+            {%- endif -%}
+        {%- endfor -%}
+    {{as_cppType(types["callback mode"].name)}} mode, F callback) const
+{%- endmacro %}
+
 //* This rendering macro should NOT be used for callback info type functions.
 {% macro render_cpp_method_declaration(type, method, dfn=False) %}
     {% set CppType = as_cppType(type.name) %}
@@ -364,6 +397,7 @@ class ObjectBase {
         {% for method in type.methods %}
             {% if has_callbackInfoStruct(method) %}
                 {{render_cpp_callback_info_template_method_declaration(type, method)|indent}};
+                {{render_cpp_callback_info_lambda_method_declaration(type, method)|indent}};
             {% else %}
                 inline {{render_cpp_method_declaration(type, method)}};
             {% endif %}
