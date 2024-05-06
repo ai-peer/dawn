@@ -50,6 +50,24 @@
       "message": "What about flipping this to be on by default and making turning it off an option. It seems like folks will be more inclined to build with it on, which is what we want, but then have an escape hatch to turn it off.",
       "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce9a2d37_9772dfac",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-06T16:54:52Z",
+      "side": 1,
+      "message": "This is what SPIRV-Tools does https://github.com/KhronosGroup/SPIRV-Tools/blob/main/CMakeLists.txt#L111",
+      "parentUuid": "03ceb7b4_f3e26078",
+      "revId": "2cbdc05e5423712cd4f0d9125dcc1fc22bb45a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
