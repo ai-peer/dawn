@@ -55,10 +55,14 @@ VkPresentModeKHR ToVulkanPresentMode(wgpu::PresentMode mode) {
     switch (mode) {
         case wgpu::PresentMode::Fifo:
             return VK_PRESENT_MODE_FIFO_KHR;
+        case wgpu::PresentMode::FifoRelaxed:
+            return VK_PRESENT_MODE_FIFO_RELAXED_KHR;
         case wgpu::PresentMode::Immediate:
             return VK_PRESENT_MODE_IMMEDIATE_KHR;
         case wgpu::PresentMode::Mailbox:
             return VK_PRESENT_MODE_MAILBOX_KHR;
+        case wgpu::PresentMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
