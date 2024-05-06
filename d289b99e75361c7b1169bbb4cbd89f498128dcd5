@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6ae806_3ed50ba0",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T19:16:37Z",
+      "side": 0,
+      "message": "just checking, this is basically already covered by [1], right?",
+      "revId": "d289b99e75361c7b1169bbb4cbd89f498128dcd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7168caca_01aca88c",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-06T19:16:37Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "d289b99e75361c7b1169bbb4cbd89f498128dcd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
