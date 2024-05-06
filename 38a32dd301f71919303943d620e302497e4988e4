@@ -16,6 +16,24 @@
       "message": "The `WithResult` prefix is kinda annoying but I don\u0027t see another way to do this.",
       "revId": "38a32dd301f71919303943d620e302497e4988e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3725faf8_2c041384",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-06T14:28:52Z",
+      "side": 1,
+      "message": "Seems Ok to me. Should we use it in all the cases which take an InstructionResult as the first param in order to be consistent? It\u0027s a little odd that sometimes it\u0027s there and sometimes it isn\u0027t.",
+      "parentUuid": "260ed184_0b073dca",
+      "revId": "38a32dd301f71919303943d620e302497e4988e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
