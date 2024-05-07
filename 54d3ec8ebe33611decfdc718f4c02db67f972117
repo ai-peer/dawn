@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1467ae6e_9b58c639",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T21:30:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7b8743df_ad1ad381",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 28
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d6c0af7_c88d1ea4",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Ah, I think I misunderstood what you said in that meeting. Yeah, the explicit template argument is still required.\n\nI thought you\u0027d said that we wouldn\u0027t be able to use the IR builder at all for backend intrinsics with this pattern.",
       "parentUuid": "0d6c0af7_c88d1ea4",
+      "range": {
+        "startLine": 110,
+        "startChar": 40,
+        "endLine": 110,
+        "endChar": 64
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bcfd77_01b230ed",
+        "filename": "src/tint/lang/spirv/writer/raise/expand_implicit_splats.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T21:30:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c5ee4a2e_49eca3f2",
       "range": {
         "startLine": 110,
         "startChar": 40,
