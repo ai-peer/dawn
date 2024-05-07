@@ -126,6 +126,12 @@ config("tint_public_config") {
     defines += [ "TINT_BUILD_IS_LINUX=0" ]
   }
 
+  if (tint_build_ir_binary) {
+    defines += [ "TINT_BUILD_IR_BINARY=1" ]
+  } else {
+    defines += [ "TINT_BUILD_IR_BINARY=0" ]
+  }
+
   include_dirs = [
     "${tint_root_dir}/",
     "${tint_root_dir}/include/",
