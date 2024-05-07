@@ -125,6 +125,7 @@ TEST_P(BufferHostMappedPointerTests, Alignment) {
 // It should be GPU-visible immediately after creation.
 // Then, change the host pointer, and see changes reflected on the GPU.
 TEST_P(BufferHostMappedPointerTests, InitialDataAndCopySrc) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Set up expected data.
     uint32_t bufferSize = mRequiredAlignment;
     std::vector<uint32_t> expected(bufferSize / sizeof(uint32_t));

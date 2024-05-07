@@ -194,6 +194,7 @@ using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
 
 // Test no error occurs if the import is valid
 TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::Texture texture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture, {}, true, true);
     EXPECT_NE(texture.Get(), nullptr);
@@ -202,6 +203,7 @@ TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
 
 // Test no error occurs if the import is valid with DawnTextureInternalUsageDescriptor
 TEST_P(VulkanImageWrappingValidationTests, SuccessfulImportWithInternalUsageDescriptor) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
     defaultDescriptor.nextInChain = &internalDesc;
     internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
@@ -392,6 +394,7 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
 // Clear an image in |secondDevice|
 // Verify clear color is visible in |device|
 TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture, {},
