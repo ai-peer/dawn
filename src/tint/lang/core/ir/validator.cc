@@ -1150,7 +1150,10 @@ void Validator::CheckReturn(const Return* ret) {
         if (!ret->Value()) {
             AddError(ret) << "expected return value";
         } else if (ret->Value()->Type() != func->ReturnType()) {
-            AddError(ret) << "return value type does not match function return type";
+            AddError(ret) << "return value type "
+                          << style::Type(ret->Value()->Type()->FriendlyName())
+                          << " does not match function return type "
+                          << style::Type(func->ReturnType()->FriendlyName());
         }
     }
 }
@@ -1230,8 +1233,12 @@ void Validator::CheckStore(const Store* s) {
                     << "store target operand is not a memory view";
                 return;
             }
-            if (from->Type() != mv->StoreType()) {
-                AddError(s, Store::kFromOperandOffset) << "value type does not match store type";
+            auto* value_type = from->Type();
+            auto* store_type = mv->StoreType();
+            if (value_type != store_type) {
+                AddError(s, Store::kFromOperandOffset)
+                    << "value type " << style::Type(value_type->FriendlyName())
+                    << " does not match store type " << style::Type(store_type->FriendlyName());
             }
         }
     }
