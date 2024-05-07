@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b8743df_ad1ad381",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:00:52Z",
+      "side": 1,
+      "message": "Actually for many of those places (including this one), the `Destroy()` is technically happening too early. Here we are inside an insertion callback for the thing we are destroying, so if we tried to create another instruction afterwards it would fail. I\u0027ve just moved a bunch of `Destroy()` calls to remove that potential hazard.\n\n`DetachResultAndDestroy()` would make things more concise in some places, but I think I\u0027d rather avoid having a pattern that makes it too easy to eagerly destroy an instruction that you might not quite be done with.",
+      "parentUuid": "e646bfc7_a337e0cb",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 28
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d6c0af7_c88d1ea4",
         "filename": "src/tint/lang/spirv/writer/raise/expand_implicit_splats.cc",
         "patchSetId": 5
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-07T08:30:29Z",
       "side": 1,
       "message": "I thought you said I had already written magic to make the explict template argument redundant?",
+      "range": {
+        "startLine": 110,
+        "startChar": 40,
+        "endLine": 110,
+        "endChar": 64
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ee4a2e_49eca3f2",
+        "filename": "src/tint/lang/spirv/writer/raise/expand_implicit_splats.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:00:52Z",
+      "side": 1,
+      "message": "Ah, I think I misunderstood what you said in that meeting. Yeah, the explicit template argument is still required.\n\nI thought you\u0027d said that we wouldn\u0027t be able to use the IR builder at all for backend intrinsics with this pattern.",
+      "parentUuid": "0d6c0af7_c88d1ea4",
       "range": {
         "startLine": 110,
         "startChar": 40,
