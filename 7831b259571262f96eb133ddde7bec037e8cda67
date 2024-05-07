@@ -63,6 +63,30 @@
       },
       "revId": "7831b259571262f96eb133ddde7bec037e8cda67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aac7e83_5dddb8f0",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-07T13:50:23Z",
+      "side": 1,
+      "message": "Done.\n\n---\n\n\u003e But also I\u0027m suprised it\u0027s not exposed by tint/api:api?\n\n`tint/api:api` has no `public_deps`. Only private `deps`.\n\n```\nIt\u0027s usually best to depend directly on the destination target.\nIn some cases, the destination target is considered a subcomponent\nof an intermediate target. In this case, the intermediate target\nshould depend publicly on the destination to forward the ability\nto include headers.\n\nDependency chain (there may also be others):\n  //src/dawn/native:sources --\u003e\n  //src/tint/api:api --[private]--\u003e\n  //src/tint/api/common:common\n```\n\nI can propose forwarding some dependencies of tint/api if you believe it would make sense to open.",
+      "parentUuid": "ba87babd_ca2079eb",
+      "range": {
+        "startLine": 702,
+        "startChar": 6,
+        "endLine": 702,
+        "endChar": 48
+      },
+      "revId": "7831b259571262f96eb133ddde7bec037e8cda67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
