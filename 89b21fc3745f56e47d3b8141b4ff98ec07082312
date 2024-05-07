@@ -141,6 +141,24 @@
       "parentUuid": "dfc6b4ea_7e5c2562",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219e5e85_2864ae9d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-07T15:59:40Z",
+      "side": 1,
+      "message": "probably document it in //docs/dawn/features/y_cb_cr_vulkan_samplers.md\n\n(and yes, I think that is where Kai is referring to as \"here\")",
+      "parentUuid": "b5873720_990b2003",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
