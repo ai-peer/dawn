@@ -194,6 +194,7 @@ using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
 
 // Test no error occurs if the import is valid
 TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::Texture texture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture, {}, true, true);
     EXPECT_NE(texture.Get(), nullptr);
@@ -202,6 +203,7 @@ TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
 
 // Test no error occurs if the import is valid with DawnTextureInternalUsageDescriptor
 TEST_P(VulkanImageWrappingValidationTests, SuccessfulImportWithInternalUsageDescriptor) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
     defaultDescriptor.nextInChain = &internalDesc;
     internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
@@ -392,6 +394,7 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
 // Clear an image in |secondDevice|
 // Verify clear color is visible in |device|
 TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture, {},
@@ -419,6 +422,7 @@ TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
 // This is intended to verify that waiting on the signalFd for one external texture does not affect
 // those of other external textures.
 TEST_P(VulkanImageWrappingUsageTests, ClearTwoImagesAcrossDevices) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     static_assert(kTestTexturesCount >= 2);
 
     std::vector<wgpu::Texture> wrappedTextures;
@@ -451,6 +455,7 @@ TEST_P(VulkanImageWrappingUsageTests, ClearTwoImagesAcrossDevices) {
 // Clear an image in |secondDevice|
 // Verify clear color is not visible in |device| if we import the texture as not cleared
 TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture, {},
@@ -478,6 +483,7 @@ TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
 // Issue a copy of the imported texture inside |device| to |copyDstTexture|
 // Verify the clear color from |secondDevice| is visible in |copyDstTexture|
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture, {},
@@ -516,6 +522,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
 // If texture destination isn't synchronized, |secondDevice| could copy color B
 // into the texture first, then |device| writes color A
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |device|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture, {}, VK_IMAGE_LAYOUT_UNDEFINED,
@@ -560,6 +567,7 @@ TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
 // Issue a copy of the imported texture inside |device| to |copyDstBuffer|
 // Verify the clear color from |secondDevice| is visible in |copyDstBuffer|
 TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Import the image on |secondDevice|
     wgpu::Texture wrappedTexture =
         WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture, {},
