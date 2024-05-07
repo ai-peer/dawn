@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc859601_b52a3004",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:00:52Z",
+      "side": 1,
+      "message": "might be worth mentioning that `pred` is not held by the class - this is useful info for the caller as the lambda can capture by reference instead of copy.\nYou\u0027d also probably get better performance if you inlined the constructor and used `F\u0026\u0026` as the predicate type, so the compiler can inline the lambda.\n\nImpressive AI generated suggestion:\n\n```suggestion\n    /// @param pred an optional predicate function for filtering variables. The\n    /// predicate is not stored by the class, so it can be a lambda that\n    /// captures by reference.\n```",
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0434e99d_180edcfc",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:00:52Z",
+      "side": 1,
+      "message": "nit: Be aware that resizing this is going to be _expensive_. One of the downsides of using a small-vector is that moves are typically more expensive than a regular vector. `UniqueVector` holds two containers that need to be moved. If this appears in a profile, you could use a `BlockAllocator\u003cVarSet\u003e` to allocate `VarSet` pointers for both the map values of `block_to_direct_vars` and `transitive_references_` which would reduce the shuffling.",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1420c262_f610840e",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:00:52Z",
+      "side": 1,
+      "message": "```suggestion\n    Hashmap\u003cBlock*, VarSet, 64\u003e block_to_direct_vars_;\n```",
+      "range": {
+        "startLine": 80,
+        "startChar": 32,
+        "endLine": 80,
+        "endChar": 52
+      },
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
