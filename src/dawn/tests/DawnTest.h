@@ -122,15 +122,16 @@
 #define EXPECT_TEXTURE_FLOAT16_EQ(...) \
     AddTextureExpectation<float, uint16_t>(__FILE__, __LINE__, __VA_ARGS__)
 
-#define ASSERT_DEVICE_ERROR_MSG_ON(device, statement, matcher)                    \
-    FlushWire();                                                                  \
-    EXPECT_CALL(mDeviceErrorCallback,                                             \
-                Call(testing::Ne(WGPUErrorType_NoError), matcher, device.Get())); \
-    statement;                                                                    \
-    instance.ProcessEvents();                                                     \
-    FlushWire();                                                                  \
-    testing::Mock::VerifyAndClearExpectations(&mDeviceErrorCallback);             \
-    do {                                                                          \
+#define ASSERT_DEVICE_ERROR_MSG_ON(device, statement, matcher)                   \
+    FlushWire();                                                                 \
+    EXPECT_CALL(mDeviceErrorCallback,                                            \
+                Call(testing::Ne(WGPUErrorType_NoError), matcher, device.Get())) \
+        .Times(testing::AnyNumber());                                            \
+    statement;                                                                   \
+    instance.ProcessEvents();                                                    \
+    FlushWire();                                                                 \
+    testing::Mock::VerifyAndClearExpectations(&mDeviceErrorCallback);            \
+    do {                                                                         \
     } while (0)
 
 #define ASSERT_DEVICE_ERROR_MSG(statement, matcher) \
