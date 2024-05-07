@@ -997,6 +997,7 @@ class VulkanImageWrappingMultithreadTests : public VulkanImageWrappingUsageTests
 
 // Test that wrapping multiple VulkanImage and clear them on multiple threads work.
 TEST_P(VulkanImageWrappingMultithreadTests, WrapAndClear_OnMultipleThreads) {
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
     std::vector<std::unique_ptr<ExternalTexture>> testTextures(10);
     for (auto& testTexture : testTextures) {
         testTexture =

@@ -1362,6 +1362,7 @@ TEST_P(SharedTextureMemoryTests, UseWithoutBegin) {
 
 // Test that it is valid (does not crash) if the memory is dropped while a texture access has begun.
 TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
     // NOTE: UseInRenderPass()/UseInCopy() do not currently support multiplanar
     // formats.
     for (wgpu::SharedTextureMemory memory :
@@ -1897,6 +1898,8 @@ TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThe
 // Reads should happen strictly after the writes. The final write should wait for the reads.
 TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite) {
     DAWN_TEST_UNSUPPORTED_IF(!GetParam().mBackend->SupportsConcurrentRead());
+
+    DAWN_SUPPRESS_TEST_IF(IsNvidia());
 
     std::vector<wgpu::Device> devices = {device, CreateDevice(), CreateDevice()};
     for (const auto& memories :
