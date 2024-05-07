@@ -95,25 +95,6 @@ bool RequiresCreatingNewTextureView(
         return false;
     }
 
-    if (texture->GetArrayLayers() != textureViewDescriptor->arrayLayerCount ||
-        (texture->GetArrayLayers() == 1 && texture->GetDimension() == wgpu::TextureDimension::e2D &&
-         textureViewDescriptor->dimension == wgpu::TextureViewDimension::e2DArray)) {
-        // If the view has a different number of array layers, we need a new view.
-        // And, if the original texture is a 2D texture with one array layer, we need a new
-        // view to view it as a 2D array texture.
-        return true;
-    }
-
-    if (ToBackend(texture)->GetGLFormat().format == GL_DEPTH_STENCIL &&
-        (texture->GetUsage() & wgpu::TextureUsage::TextureBinding) != 0 &&
-        textureViewDescriptor->aspect == wgpu::TextureAspect::StencilOnly) {
-        // We need a separate view for one of the depth or stencil planes
-        // because each glTextureView needs it's own handle to set
-        // GL_DEPTH_STENCIL_TEXTURE_MODE. Choose the stencil aspect for the
-        // extra handle since it is likely sampled less often.
-        return true;
-    }
-
     return false;
 }
 
