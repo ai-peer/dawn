@@ -56,7 +56,7 @@ class PlatformTextureIOSurface : public VideoViewsTestBackend::PlatformTexture {
 
 class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
   public:
-    void OnSetUp(WGPUDevice device) override { mWGPUDevice = device; }
+    void OnSetUp(const wgpu::Device& device) override { mWGPUDevice = device; }
 
   private:
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> CreateVideoTextureForTest(
@@ -110,7 +110,7 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         wgpu::SharedTextureMemoryDescriptor desc;
         desc.nextInChain = &ioSurfaceDesc;
 
-        auto device = wgpu::Device(mWGPUDevice);
+        auto device = mWGPUDevice;
         auto sharedTextureMemory = device.ImportSharedTextureMemory(&desc);
 
         // Some tests create a texture that is invalid in some way and verify
@@ -138,7 +138,7 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
 
     void DestroyVideoTextureForTest(
         std::unique_ptr<VideoViewsTestBackend::PlatformTexture>&& platformTexture) override {
-        auto device = wgpu::Device(mWGPUDevice);
+        auto device = mWGPUDevice;
         auto platformTextureIOSurface =
             static_cast<PlatformTextureIOSurface*>(platformTexture.get());
         wgpu::SharedTextureMemoryEndAccessState endAccessState;
@@ -154,7 +154,7 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         device.PopErrorScope([](WGPUErrorType type, const char*, void* userdataPtr) {}, nullptr);
     }
 
-    WGPUDevice mWGPUDevice = nullptr;
+    wgpu::Device mWGPUDevice = nullptr;
 };
 
 }  // anonymous namespace
