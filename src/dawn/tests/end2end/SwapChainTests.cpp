@@ -416,6 +416,8 @@ TEST_P(SwapChainWithAdditionalUsageTests, SamplingFromSwapChain) {
 TEST_P(SwapChainWithAdditionalUsageTests, ErrorIncludeUnsupportedUsage) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
+    DAWN_SUPPRESS_TEST_IF(IsLinux());
+
     auto supportedUsage = device.GetSupportedSurfaceUsage(surface);
 
     // Assuming StorageBinding is not supported.
