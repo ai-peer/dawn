@@ -176,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d293db_2d9fc22b",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:01:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "48f55dad_79dd6717",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56892e24_ceda4fcb",
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "Well, `Return` is also accepted (we just don\u0027t do anything with it), and then we want to ICE on anything else instead of silently accepting it.\n\nBut maybe the `Switch()` was overkill, so I\u0027ve turned it into an `if/else if/else` for those three cases.",
       "parentUuid": "d2a7f89c_9e0ab568",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abba8316_427285fb",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1c78c4e_44147fd8",
       "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

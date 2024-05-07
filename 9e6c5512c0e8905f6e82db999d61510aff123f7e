@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5446302_46817e65",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "350bb349_e5a21dcc",
+      "range": {
+        "startLine": 147,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 13
+      },
+      "revId": "9e6c5512c0e8905f6e82db999d61510aff123f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f607bf2a_d66c1677",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-07T11:31:33Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 362,
+        "startChar": 18,
+        "endLine": 366,
+        "endChar": 17
+      },
+      "revId": "9e6c5512c0e8905f6e82db999d61510aff123f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fca8239_37b1958c",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f607bf2a_d66c1677",
       "range": {
         "startLine": 362,
         "startChar": 18,
