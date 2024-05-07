@@ -105,6 +105,24 @@
       "parentUuid": "7fce32a2_ce2eb383",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc6b4ea_7e5c2562",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-07T12:04:55Z",
+      "side": 1,
+      "message": "SGTM, thanks for the discussion!",
+      "parentUuid": "eecd9b7a_562f4994",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
