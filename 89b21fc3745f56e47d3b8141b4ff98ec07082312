@@ -159,6 +159,24 @@
       "parentUuid": "b5873720_990b2003",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b980e7_8e49f401",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-07T20:31:21Z",
+      "side": 1,
+      "message": "Yes, when it\u0027s passed as part of SharedTextureMemoryVkProperties specifically.",
+      "parentUuid": "219e5e85_2864ae9d",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
