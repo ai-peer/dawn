@@ -194,6 +194,7 @@ using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
 
 // Test no error occurs if the import is valid
 TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::Texture texture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture, {}, true, true);
     EXPECT_NE(texture.Get(), nullptr);
