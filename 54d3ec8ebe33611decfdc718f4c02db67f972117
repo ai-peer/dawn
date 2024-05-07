@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e646bfc7_a337e0cb",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T08:30:29Z",
+      "side": 1,
+      "message": "It seems like the vast majority of places call `DetachResult()` then `Destroy()`. Candidate for a `DetachResultAndDestroy()` ?",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 28
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6c0af7_c88d1ea4",
+        "filename": "src/tint/lang/spirv/writer/raise/expand_implicit_splats.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T08:30:29Z",
+      "side": 1,
+      "message": "I thought you said I had already written magic to make the explict template argument redundant?",
+      "range": {
+        "startLine": 110,
+        "startChar": 40,
+        "endLine": 110,
+        "endChar": 64
+      },
+      "revId": "54d3ec8ebe33611decfdc718f4c02db67f972117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
