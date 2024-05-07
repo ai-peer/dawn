@@ -33,6 +33,41 @@
       "message": "CMake is kinda gross isn\u0027t it",
       "revId": "a6109753cd4f1671734efd79d16de1a80f3b2134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b757ab5c_ae488a76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-07T15:57:37Z",
+      "side": 1,
+      "message": "Recent versions are ok TBH, it\u0027s just that we support old versions.",
+      "parentUuid": "9cf54319_1b8aab12",
+      "revId": "a6109753cd4f1671734efd79d16de1a80f3b2134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb17642_be4edf03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-07T15:57:37Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a6109753cd4f1671734efd79d16de1a80f3b2134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
