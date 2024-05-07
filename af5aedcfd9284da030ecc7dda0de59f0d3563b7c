@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d22e28dd_4f27edab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-07T19:07:12Z",
+      "side": 1,
+      "message": "All 6 builds have passed!",
+      "parentUuid": "a3435764_6b92ccec",
+      "revId": "af5aedcfd9284da030ecc7dda0de59f0d3563b7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c056a059_a8613ef5",
