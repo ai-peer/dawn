@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8b34946_c3974dce",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:00:43Z",
+      "side": 1,
+      "message": "Added the note and moved to inline.\nLeft as a `std::function` for now (hopefully a good compiler will see through the type-erasure of `std::function` when inlined?), partly because I couldn\u0027t figure out a nice way of defaulting the type for the functor when it\u0027s optional.",
+      "parentUuid": "fc859601_b52a3004",
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0434e99d_180edcfc",
         "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
         "patchSetId": 15
@@ -59,6 +77,54 @@
         "startChar": 32,
         "endLine": 80,
         "endChar": 52
+      },
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "070cd348_85650a8f",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1420c262_f610840e",
+      "range": {
+        "startLine": 80,
+        "startChar": 32,
+        "endLine": 80,
+        "endChar": 52
+      },
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d80fd4_66aaac80",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T15:00:43Z",
+      "side": 1,
+      "message": "Ack, thanks will keep an eye out for this.",
+      "parentUuid": "0434e99d_180edcfc",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 31
       },
       "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
