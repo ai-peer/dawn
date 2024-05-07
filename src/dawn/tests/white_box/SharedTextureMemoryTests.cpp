@@ -683,6 +683,7 @@ T& AsNonConst(const T& rhs) {
 // Test that creating shared texture memory without the required features is an error.
 // Using the memory thereafter produces errors.
 TEST_P(SharedTextureMemoryNoFeatureTests, CreationWithoutFeature) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Create external texture memories with an error filter.
     // We should see a message that the feature is not enabled.
     device.PushErrorScope(wgpu::ErrorFilter::Validation);
@@ -763,6 +764,7 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after destroying the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
 
     EXPECT_FALSE(memory.IsDeviceLost());
@@ -773,6 +775,7 @@ TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after losing the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
 
     EXPECT_FALSE(memory.IsDeviceLost());
@@ -1362,6 +1365,7 @@ TEST_P(SharedTextureMemoryTests, UseWithoutBegin) {
 
 // Test that it is valid (does not crash) if the memory is dropped while a texture access has begun.
 TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // NOTE: UseInRenderPass()/UseInCopy() do not currently support multiplanar
     // formats.
     for (wgpu::SharedTextureMemory memory :

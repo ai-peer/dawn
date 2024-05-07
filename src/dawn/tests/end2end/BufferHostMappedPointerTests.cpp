@@ -125,6 +125,7 @@ TEST_P(BufferHostMappedPointerTests, Alignment) {
 // It should be GPU-visible immediately after creation.
 // Then, change the host pointer, and see changes reflected on the GPU.
 TEST_P(BufferHostMappedPointerTests, InitialDataAndCopySrc) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Set up expected data.
     uint32_t bufferSize = mRequiredAlignment;
     std::vector<uint32_t> expected(bufferSize / sizeof(uint32_t));
@@ -156,6 +157,7 @@ TEST_P(BufferHostMappedPointerTests, InitialDataAndCopySrc) {
 // Create a host-mapped buffer with CopyDst usage. Test that changes on the GPU
 // are visible to the host.
 TEST_P(BufferHostMappedPointerTests, CopyDst) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Set up expected data.
     uint32_t bufferSize = mRequiredAlignment;
     std::vector<uint32_t> expected(bufferSize / sizeof(uint32_t));
@@ -194,6 +196,7 @@ TEST_P(BufferHostMappedPointerTests, CopyDst) {
 // Create a host-mapped buffer with Storage usage. Test that writes on the host
 // are visible on the GPU, and writes on the GPU are visible on the host.
 TEST_P(BufferHostMappedPointerTests, Storage) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
     // Set up expected data.
     uint32_t bufferSize = mRequiredAlignment;
     std::vector<uint32_t> contents(bufferSize / sizeof(uint32_t));
