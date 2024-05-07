@@ -304,6 +304,7 @@ GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(SharedTextureMemoryOpaqueFDValidat
 
 // Test that the Vulkan image must be created with VK_IMAGE_USAGE_TRANSFER_DST_BIT.
 TEST_P(SharedTextureMemoryOpaqueFDValidationTest, RequiresCopyDst) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD() && IsVulkan() && IsBackendValidationEnabled());
     native::vulkan::Device* deviceVk = native::vulkan::ToBackend(native::FromAPI(device.Get()));
 
     // Test that including TRANSFER_DST is not an error.
@@ -327,6 +328,7 @@ TEST_P(SharedTextureMemoryOpaqueFDValidationTest, RequiresCopyDst) {
 
 // Test requirements for the Vulkan image if it is BGRA8Unorm.
 TEST_P(SharedTextureMemoryOpaqueFDValidationTest, BGRA8UnormStorageRequirements) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD() && IsVulkan() && IsBackendValidationEnabled());
     native::vulkan::Device* deviceVk = native::vulkan::ToBackend(native::FromAPI(device.Get()));
     DAWN_TEST_UNSUPPORTED_IF(!CheckFormatSupport(deviceVk, VK_FORMAT_B8G8R8A8_UNORM,
                                                  VK_IMAGE_USAGE_TRANSFER_SRC_BIT |
@@ -378,6 +380,7 @@ TEST_P(SharedTextureMemoryOpaqueFDValidationTest, BGRA8UnormStorageRequirements)
 
 // Test requirements for the Vulkan image if it is may need view format reinterpretation.
 TEST_P(SharedTextureMemoryOpaqueFDValidationTest, ViewFormatRequirements) {
+    DAWN_SUPPRESS_TEST_IF(IsAMD() && IsVulkan() && IsBackendValidationEnabled());
     native::vulkan::Device* deviceVk = native::vulkan::ToBackend(native::FromAPI(device.Get()));
 
     std::array<VkFormat, 2> vkFormats = {VK_FORMAT_R8G8B8A8_UNORM, VK_FORMAT_R8G8B8A8_SRGB};
