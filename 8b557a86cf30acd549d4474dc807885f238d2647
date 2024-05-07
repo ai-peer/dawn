@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "481c642d_4785b57c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-07T23:28:58Z",
+      "side": 1,
+      "message": "It\u0027s not technically done since we want to eventually plumb through the properly logging callback. Updated the TODO to be more specific.",
+      "parentUuid": "162e7e88_e0fca5c1",
+      "revId": "8b557a86cf30acd549d4474dc807885f238d2647",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a607b3df_403fc396",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4558e9da_729e91e6",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-07T23:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a607b3df_403fc396",
+      "revId": "8b557a86cf30acd549d4474dc807885f238d2647",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "472d3242_2acc8422",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-05-06T22:30:50Z",
       "side": 1,
       "message": "same",
+      "revId": "8b557a86cf30acd549d4474dc807885f238d2647",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2edf2ef_468ff5b6",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-07T23:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "472d3242_2acc8422",
       "revId": "8b557a86cf30acd549d4474dc807885f238d2647",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -125,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e2c0f3_43380eb6",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-07T23:28:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0eacd00_3bf85d94",
+      "revId": "b077ecf061b2c3c332e5794a31e924a97f53a4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f93c015c_a7ad246a",
