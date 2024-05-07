@@ -95,14 +95,15 @@ bool RequiresCreatingNewTextureView(
         return false;
     }
 
-    if (texture->GetArrayLayers() != textureViewDescriptor->arrayLayerCount ||
-        (texture->GetArrayLayers() == 1 && texture->GetDimension() == wgpu::TextureDimension::e2D &&
-         textureViewDescriptor->dimension == wgpu::TextureViewDimension::e2DArray)) {
-        // If the view has a different number of array layers, we need a new view.
-        // And, if the original texture is a 2D texture with one array layer, we need a new
-        // view to view it as a 2D array texture.
-        return true;
-    }
+    // if (texture->GetArrayLayers() != textureViewDescriptor->arrayLayerCount ||
+    //     (texture->GetArrayLayers() == 1 && texture->GetDimension() == wgpu::TextureDimension::e2D
+    //     &&
+    //      textureViewDescriptor->dimension == wgpu::TextureViewDimension::e2DArray)) {
+    //     // If the view has a different number of array layers, we need a new view.
+    //     // And, if the original texture is a 2D texture with one array layer, we need a new
+    //     // view to view it as a 2D array texture.
+    //     return true;
+    // }
 
     if (ToBackend(texture)->GetGLFormat().format == GL_DEPTH_STENCIL &&
         (texture->GetUsage() & wgpu::TextureUsage::TextureBinding) != 0 &&
