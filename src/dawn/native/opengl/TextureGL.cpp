@@ -580,6 +580,10 @@ GLenum TextureView::GetGLTarget() const {
     return mTarget;
 }
 
+bool TextureView::GetIfUseCopy() const {
+    return mUseCopy;
+}
+
 void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint depthSlice) {
     DAWN_ASSERT(depthSlice <
                 static_cast<GLuint>(GetSingleSubresourceVirtualSize().depthOrArrayLayers));

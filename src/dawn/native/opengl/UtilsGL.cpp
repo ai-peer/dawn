@@ -134,14 +134,14 @@ void CopyImageSubData(const OpenGLFunctions& gl,
                 case Aspect::Plane2:
                     DAWN_UNREACHABLE();
             }
-            if (srcTarget == GL_TEXTURE_2D) {
+            if (srcTarget == GL_TEXTURE_2D || srcTarget == GL_TEXTURE_2D_MULTISAMPLE) {
                 gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, glAttachment, srcTarget, srcHandle,
                                         srcLevel);
             } else {
                 gl.FramebufferTextureLayer(GL_READ_FRAMEBUFFER, glAttachment, srcHandle, srcLevel,
                                            src.z + layer);
             }
-            if (dstTarget == GL_TEXTURE_2D) {
+            if (dstTarget == GL_TEXTURE_2D || dstTarget == GL_TEXTURE_2D_MULTISAMPLE) {
                 gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment, dstTarget, dstHandle,
                                         dstLevel);
             } else if (dstTarget == GL_TEXTURE_CUBE_MAP) {

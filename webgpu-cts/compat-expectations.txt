@@ -158,9 +158,6 @@ crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,i
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=1;interpolation={"type":"flat"} [ Failure ]
 crbug.com/dawn/2376 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=4;interpolation={"type":"flat"} [ Failure ]
 
-# textureDimensions() failures, failing in textureNumLevels()
-crbug.com/dawn/2442 webgpu:shader,execution,expression,call,builtin,textureDimensions:sampled_and_multisampled:format="depth24plus-stencil8";aspect="stencil-only";samples=1 [ Failure ]
-
 # bitcast ai_to_f32 failures; precision issue?
 crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,bitcast:ai_to_f32:* [ Failure ]
 

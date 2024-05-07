@@ -356,9 +356,16 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                                     break;
                             }
                         }
-                        gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL, view->GetBaseMipLevel());
-                        gl.TexParameteri(target, GL_TEXTURE_MAX_LEVEL,
-                                         view->GetBaseMipLevel() + view->GetLevelCount() - 1);
+                        if (view->GetIfUseCopy()) {
+                            gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL, 0);
+                            gl.TexParameteri(target, GL_TEXTURE_MAX_LEVEL,
+                                             view->GetLevelCount() - 1);
+                        } else {
+                            gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL,
+                                             view->GetBaseMipLevel());
+                            gl.TexParameteri(target, GL_TEXTURE_MAX_LEVEL,
+                                             view->GetBaseMipLevel() + view->GetLevelCount() - 1);
+                        }
                     }
 
                     // Some texture builtin function data needs emulation to update into the
@@ -1451,6 +1458,8 @@ void DoTexSubImage(const OpenGLFunctions& gl,
                     pointer += dataLayout.rowsPerImage * dataLayout.bytesPerRow;
                 }
             } else {
+                DAWN_ASSERT(target == GL_TEXTURE_3D || target == GL_TEXTURE_2D_ARRAY ||
+                            target == GL_TEXTURE_CUBE_MAP_ARRAY);
                 gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, dataLayout.rowsPerImage * blockInfo.height);
                 gl.CompressedTexSubImage3D(target, destination.mipLevel, x, y, z, width, height,
                                            copySize.depthOrArrayLayers, format.internalFormat,
