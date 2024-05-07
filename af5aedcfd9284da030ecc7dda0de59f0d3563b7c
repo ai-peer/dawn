@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec423b89_3d0eee30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-07T17:27:28Z",
+      "side": 1,
+      "message": "This fixes the cmake-linux-* builds that broke and required this revert: https://chromium-review.googlesource.com/c/chromium/tools/build/+/5513632",
+      "revId": "af5aedcfd9284da030ecc7dda0de59f0d3563b7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
