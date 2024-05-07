@@ -42,7 +42,25 @@ namespace tint::core::ir {
 class Module;
 }
 
+#if TINT_BUILD_IR_BINARY
+namespace tint::core::ir::binary::pb {
+class Module;
+}
+#endif
+
 namespace tint::fuzz::ir {
+
+#if TINT_BUILD_IR_BINARY
+/// Options for Run()
+struct Options {
+    /// If not empty, only run the fuzzers with the given substring.
+    std::string filter;
+    /// If true, the fuzzers will be run concurrently on separate threads.
+    bool run_concurrently = false;
+    /// If true, print the fuzzer name to stdout before running.
+    bool verbose = false;
+};
+#endif
 
 /// IRFuzzer describes a fuzzer function that takes a IR module as input
 struct IRFuzzer {
@@ -83,6 +101,13 @@ struct IRFuzzer {
 /// Registers the fuzzer function with the IR fuzzer executable.
 /// @param fuzzer the fuzzer
 void Register([[maybe_unused]] const IRFuzzer& fuzzer);
+
+#if TINT_BUILD_IR_BINARY
+/// Runs all the registered IR fuzzers with the supplied IR Module protobuf
+/// @param module IR Module encoded as a protobuf
+/// @param options the options for running the fuzzers
+void Run(const tint::core::ir::binary::pb::Module& mod_pb, const Options& options);
+#endif
 
 /// TINT_IR_MODULE_FUZZER registers the fuzzer function.
 #define TINT_IR_MODULE_FUZZER(FUNCTION) \
