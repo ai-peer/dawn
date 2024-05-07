@@ -39,6 +39,30 @@
       },
       "revId": "d02740d3db426f18f802126468134580c53ed7b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a8eb45_82e037b1",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-07T10:24:09Z",
+      "side": 1,
+      "message": "I tried but using dawn::utils prevents that since it links against dawn_proc. I decided to leave it for later when we could add some tiny utilities just for samples.",
+      "parentUuid": "425347da_8d1b73c5",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 83,
+        "endChar": 48
+      },
+      "revId": "d02740d3db426f18f802126468134580c53ed7b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

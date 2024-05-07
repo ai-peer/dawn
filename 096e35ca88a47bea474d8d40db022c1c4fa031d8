@@ -22,6 +22,30 @@
       },
       "revId": "096e35ca88a47bea474d8d40db022c1c4fa031d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0215eda_90c61593",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-07T10:24:09Z",
+      "side": 0,
+      "message": "Logging was useful when samples were used for testing, but don\u0027t seem as important right now. Adding device loss back though.",
+      "parentUuid": "1078aa84_a8c98e67",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 241,
+        "endChar": 0
+      },
+      "revId": "096e35ca88a47bea474d8d40db022c1c4fa031d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
