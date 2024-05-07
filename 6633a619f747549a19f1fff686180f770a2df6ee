@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba993b95_cd7c1d31",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-07T21:30:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a3d73b3_a1b66db5",
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0434e99d_180edcfc",
