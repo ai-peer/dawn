@@ -123,6 +123,24 @@
       "parentUuid": "eecd9b7a_562f4994",
       "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5873720_990b2003",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1892,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-07T13:46:40Z",
+      "side": 1,
+      "message": "Actually, a couple questions:\n\n* Austin, where does it make sense to do that documentation?\n* Kai, when you mention \"add[ing] a DAWN_CHECK or validation error that the next pointer here is always nullptr\", by \"here\" you mean on the passed-in WGPUYCbCrVkDescriptor, correct?",
+      "parentUuid": "dfc6b4ea_7e5c2562",
+      "revId": "89b21fc3745f56e47d3b8141b4ff98ec07082312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
