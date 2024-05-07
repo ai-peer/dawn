@@ -1412,6 +1412,10 @@ void ASTPrinter::EmitTextureCall(StringStream& out,
                 }
             }
             out << ")";
+
+            // // temp test for + base_mip_level
+            // out << " << 1";
+
             // textureSize() on array samplers returns the array size in the
             // final component, so strip it out.
             if (texture_type->dim() == core::type::TextureDimension::k2dArray ||

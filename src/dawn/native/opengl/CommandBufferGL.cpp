@@ -356,7 +356,14 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                                     break;
                             }
                         }
-                        gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL, view->GetBaseMipLevel());
+                        // gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL, view->GetBaseMipLevel());
+                        //
+                        if (view->GetIfUseCopy()) {
+                            gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL, 0);
+                        } else {
+                            gl.TexParameteri(target, GL_TEXTURE_BASE_LEVEL,
+                                             view->GetBaseMipLevel());
+                        }
                         gl.TexParameteri(target, GL_TEXTURE_MAX_LEVEL,
                                          view->GetBaseMipLevel() + view->GetLevelCount() - 1);
                     }
@@ -427,6 +434,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
         uint32_t data;
         switch (field) {
             case BindPointFunction::kTextureNumLevels:
+                // printf("\n\n levelCount = %u\n\n", view->GetLevelCount());
                 data = view->GetLevelCount();
                 break;
             case BindPointFunction::kTextureNumSamples:

@@ -206,6 +206,8 @@ struct TextureBuiltinsFromUniform::State {
                 // Read builtin value from uniform buffer.
                 auto* builtin_value = GetUniformValue(std::get<BindingPoint>(pair.value));
                 ctx.Replace(call, builtin_value);
+                // ctx.Replace(call, b.Expr(b.Add(builtin_value, core::u32(1))));
+                // ctx.Replace(call, b.Expr(core::u32(2)));
             } else {
                 // Otherwise this value comes from a function param
                 auto* param = std::get<const ast::Parameter*>(pair.value);

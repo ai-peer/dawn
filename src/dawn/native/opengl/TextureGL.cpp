@@ -580,6 +580,10 @@ GLenum TextureView::GetGLTarget() const {
     return mTarget;
 }
 
+bool TextureView::GetIfUseCopy() const {
+    return mUseCopy;
+}
+
 void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint depthSlice) {
     DAWN_ASSERT(depthSlice <
                 static_cast<GLuint>(GetSingleSubresourceVirtualSize().depthOrArrayLayers));
@@ -639,6 +643,8 @@ void TextureView::CopyIfNeeded() {
     if (mGenID == texture->GetGenID()) {
         return;
     }
+
+    // printf("\n\n\n!!!!! copy needed\n\n\n");
 
     Device* device = ToBackend(GetDevice());
     const OpenGLFunctions& gl = device->GetGL();

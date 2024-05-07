@@ -1103,6 +1103,8 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetTextureQueries(const std::
                             break;
                         }
                         case wgsl::BuiltinFn::kTextureDimensions: {
+                            // For GL: query baseMipLevel if texture mUseCopy
+
                             if (call->Declaration()->args.Length() <= 1) {
                                 // When textureDimension only takes a texture as the input,
                                 // it doesn't require calls to textureNumLevels to clamp mip levels.
