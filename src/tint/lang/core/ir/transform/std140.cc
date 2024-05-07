@@ -35,6 +35,7 @@
 #include "src/tint/lang/core/type/array.h"
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/struct.h"
+#include "src/tint/utils/text/string_stream.h"
 
 using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
@@ -125,10 +126,10 @@ struct State {
     /// @param type the type to rewrite
     /// @returns the new type
     const core::type::Type* RewriteType(const core::type::Type* type) {
-        return rewritten_types.GetOrAdd(type, [&]() -> const core::type::Type* {
+        return rewritten_types.GetOrAdd(type, [&] {
             return tint::Switch(
                 type,
-                [&](const core::type::Array* arr) -> const core::type::Type* {
+                [&](const core::type::Array* arr) {
                     // Create a new array with element type potentially rewritten.
                     return ty.array(RewriteType(arr->ElemType()), arr->ConstantCount().value());
                 },
@@ -182,6 +183,32 @@ struct State {
                     }
                     return new_str;
                 },
+                [&](const core::type::Matrix* mat) -> const core::type::Type* {
+                    if (!NeedsDecomposing(mat)) {
+                        return mat;
+                    }
+                    StringStream name;
+                    name << "mat" << mat->columns() << "x" << mat->rows() << "_"
+                         << mat->ColumnType()->type()->FriendlyName() << "_std140";
+                    Vector<core::type::StructMember*, 4> members;
+                    // Decompose these matrices into a separate member for each column.
+                    auto* col = mat->ColumnType();
+                    uint32_t offset = 0;
+                    for (uint32_t i = 0; i < mat->columns(); i++) {
+                        StringStream ss;
+                        ss << "col" << std::to_string(i);
+                        members.Push(ty.Get<core::type::StructMember>(
+                            sym.New(ss.str()), col, i, offset, col->Align(), col->Size(),
+                            core::type::StructMemberAttributes{}));
+                        offset += col->Align();
+                    }
+
+                    // Create a new struct with the rewritten members.
+                    return ty.Get<core::type::Struct>(
+                        sym.New(name.str()), std::move(members), col->Align(),
+                        col->Align() * mat->columns(),
+                        (col->Align() * (mat->columns() - 1)) + col->Size());
+                },
                 [&](Default) {
                     // This type cannot contain a matrix, so no changes needed.
                     return type;
@@ -189,17 +216,38 @@ struct State {
         });
     }
 
-    /// Load a decomposed matrix from a structure.
+    /// Load a decomposed matrix that was inlined into an existing structure.
     /// @param mat the matrix type
     /// @param root the root value being accessed into
     /// @param indices the access indices that get to the first column of the decomposed matrix
     /// @returns the loaded matrix
-    Value* LoadMatrix(const core::type::Matrix* mat, Value* root, Vector<Value*, 4> indices) {
+    Value* LoadInlinedMatrix(const core::type::Matrix* mat,
+                             Value* root,
+                             Vector<Value*, 4> indices) {
         // Load each column vector from the struct and reconstruct the original matrix type.
         Vector<Value*, 4> args;
         auto first_column = indices.Back()->As<Constant>()->Value()->ValueAs<uint32_t>();
         for (uint32_t i = 0; i < mat->columns(); i++) {
             indices.Back() = b.Constant(u32(first_column + i));
+            auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), root, indices);
+            args.Push(b.Load(access->Result(0))->Result(0));
+        }
+        return b.Construct(mat, std::move(args))->Result(0);
+    }
+
+    /// Load a decomposed matrix that uses a dedicated structure.
+    /// @param mat the matrix type
+    /// @param root the root value being accessed into
+    /// @param indices the access indices that get to the decomposed matrix
+    /// @returns the loaded matrix
+    Value* LoadNonInlinedMatrix(const core::type::Matrix* mat,
+                                Value* root,
+                                Vector<Value*, 4> indices) {
+        // Load each column vector from the struct and reconstruct the original matrix type.
+        Vector<Value*, 4> args;
+        indices.Push(nullptr);
+        for (uint32_t i = 0; i < mat->columns(); i++) {
+            indices.Back() = b.Constant(u32(i));
             auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), root, indices);
             args.Push(b.Load(access->Result(0))->Result(0));
         }
@@ -283,11 +331,13 @@ struct State {
                     auto* current_type = access->Object()->Type()->UnwrapPtr();
                     Vector<Value*, 4> indices;
                     for (auto idx : access->Indices()) {
+                        bool parent_is_struct = false;
                         if (auto* str = current_type->As<core::type::Struct>()) {
                             uint32_t old_index = idx->As<Constant>()->Value()->ValueAs<uint32_t>();
                             uint32_t new_index = *member_index_map.Get(str->Members()[old_index]);
                             indices.Push(b.Constant(u32(new_index)));
                             current_type = str->Element(old_index);
+                            parent_is_struct = true;
                         } else {
                             indices.Push(idx);
                             current_type = current_type->Elements().type;
@@ -298,7 +348,10 @@ struct State {
                         // pointers.
                         if (auto* mat = current_type->As<core::type::Matrix>();
                             mat && NeedsDecomposing(mat)) {
-                            replacement = LoadMatrix(mat, replacement, std::move(indices));
+                            replacement =
+                                parent_is_struct
+                                    ? LoadInlinedMatrix(mat, replacement, std::move(indices))
+                                    : LoadNonInlinedMatrix(mat, replacement, std::move(indices));
                             indices.Clear();
                         }
                     }
