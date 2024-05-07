@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baabfa03_2c9b758c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-07T08:16:19Z",
+      "side": 1,
+      "message": "(I lost your CR:+1 in the rebase)\nCould you PTAL again?",
+      "revId": "ae7025aca65e8bc28abe8af62883529af1b7b261",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
