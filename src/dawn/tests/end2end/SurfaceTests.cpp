@@ -55,6 +55,7 @@ class SurfaceTests : public DawnTest {
         // However, IsIntel() and IsMesa() don't work with the null backend.
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsNull());
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsVulkan() && IsIntel() && IsMesa("23.2"));
+        DAWN_SUPPRESS_TEST_IF(IsLinux() && IsVulkan() && IsAMD() && IsMesa("23.2"));
 
         glfwSetErrorCallback([](int code, const char* message) {
             ErrorLog() << "GLFW error " << code << " " << message;
