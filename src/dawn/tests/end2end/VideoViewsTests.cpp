@@ -75,6 +75,17 @@ std::vector<wgpu::FeatureName> VideoViewsTestsBase::GetRequiredFeatures() {
         requiredFeatures.push_back(wgpu::FeatureName::SharedFenceMTLSharedEvent);
     }
 
+    // Required for the Win tests.
+    if (SupportsFeatures({wgpu::FeatureName::SharedTextureMemoryD3D11Texture2D})) {
+        requiredFeatures.push_back(wgpu::FeatureName::SharedTextureMemoryD3D11Texture2D);
+    }
+    if (SupportsFeatures({wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle})) {
+        requiredFeatures.push_back(wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle);
+    }
+    if (SupportsFeatures({wgpu::FeatureName::SharedFenceDXGISharedHandle})) {
+        requiredFeatures.push_back(wgpu::FeatureName::SharedFenceDXGISharedHandle);
+    }
+
     mIsMultiPlanarFormatP010Supported =
         SupportsFeatures({wgpu::FeatureName::MultiPlanarFormatP010});
     if (mIsMultiPlanarFormatP010Supported) {
@@ -513,7 +524,7 @@ class VideoViewsTests : public VideoViewsTestsBase {
         DAWN_TEST_UNSUPPORTED_IF(!IsFormatSupported());
 
         mBackend = VideoViewsTestBackend::Create();
-        mBackend->OnSetUp(device.Get());
+        mBackend->OnSetUp(device);
     }
 
     void TearDown() override {
