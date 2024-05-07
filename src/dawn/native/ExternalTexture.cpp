@@ -272,41 +272,49 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         plane1Size = descriptor->plane1->GetSingleSubresourceVirtualSize();
     }
 
-    // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
-    // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
+    bool skip_rotation = false;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    skip_rotation = true;
+#endif
+
+    // Offset the coordinates so the center texel is at the origin, so we can apply rotations
+    // and y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, -0.5, -0.5);
 
     // Texture applies rotation first and do mirrored(horizontal flip) next.
     // Do reverse order here to mapping final uv coordinate to origin texture.
-    // TODO(crbug.com/1514732): VideoFrame metadata defines horizontal flip (mirrored) and rotation.
-    // The vertical flip (which is flipY) could be achieved by rotate 180 + mirrored. Deprecate
-    // flipY attribute to align with VideoFrame metadata. Chrome is the only place to use this
-    // attribute and pass mirrored to descriptor->flipY and this is incorrect. Workaround to fix
-    // mirrored issue by delegate flipY operation to mirrored and remove flipY attribute in future.
+    // TODO(crbug.com/1514732): VideoFrame metadata defines horizontal flip (mirrored) and
+    // rotation. The vertical flip (which is flipY) could be achieved by rotate 180 + mirrored.
+    // Deprecate flipY attribute to align with VideoFrame metadata. Chrome is the only place to
+    // use this attribute and pass mirrored to descriptor->flipY and this is incorrect.
+    // Workaround to fix mirrored issue by delegate flipY operation to mirrored and remove flipY
+    // attribute in future.
     if (descriptor->flipY || descriptor->mirrored) {
         coordTransformMatrix = Scale(coordTransformMatrix, -1, 1);
     }
+    if (!skip_rotation) {
+        // Apply rotations as needed.
+        switch (descriptor->rotation) {
+            case wgpu::ExternalTextureRotation::Rotate0Degrees:
+                break;
+            case wgpu::ExternalTextureRotation::Rotate90Degrees:
+                coordTransformMatrix = Mul(mat2x3{0, +1, 0,   // x' = y
+                                                  -1, 0, 0},  // y' = -x
+                                           coordTransformMatrix);
+                break;
+            case wgpu::ExternalTextureRotation::Rotate180Degrees:
+                coordTransformMatrix = Mul(mat2x3{-1, 0, 0,   // x' = -x
+                                                  0, -1, 0},  // y' = -y
+                                           coordTransformMatrix);
+                break;
+            case wgpu::ExternalTextureRotation::Rotate270Degrees:
 
-    // Apply rotations as needed.
-    switch (descriptor->rotation) {
-        case wgpu::ExternalTextureRotation::Rotate0Degrees:
-            break;
-        case wgpu::ExternalTextureRotation::Rotate90Degrees:
-            coordTransformMatrix = Mul(mat2x3{0, +1, 0,   // x' = y
-                                              -1, 0, 0},  // y' = -x
-                                       coordTransformMatrix);
-            break;
-        case wgpu::ExternalTextureRotation::Rotate180Degrees:
-            coordTransformMatrix = Mul(mat2x3{-1, 0, 0,   // x' = -x
-                                              0, -1, 0},  // y' = -y
-                                       coordTransformMatrix);
-            break;
-        case wgpu::ExternalTextureRotation::Rotate270Degrees:
-
-            coordTransformMatrix = Mul(mat2x3{0, -1, 0,   // x' = -y
-                                              +1, 0, 0},  // y' = x
-                                       coordTransformMatrix);
-            break;
+                coordTransformMatrix = Mul(mat2x3{0, -1, 0,   // x' = -y
+                                                  +1, 0, 0},  // y' = x
+                                           coordTransformMatrix);
+                break;
+        }
     }
 
     // Offset the coordinates so the bottom-left texel is at origin.
