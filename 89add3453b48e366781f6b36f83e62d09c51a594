@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84de4f28_c58158e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-07T10:42:12Z",
+      "side": 1,
+      "message": "PTAL! The MLDrift changes rolled in Chromium, so if this gets reverted this time, it will be for a different reason.",
+      "revId": "89add3453b48e366781f6b36f83e62d09c51a594",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
