@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350bb349_e5a21dcc",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:31:33Z",
+      "side": 1,
+      "message": "```suggestion\n            } else if (!use.instruction-\u003eIsAnyOf\u003ccore::ir::Load, core::ir::LoadVectorElement,\n                                                 core::ir::Store, core::ir::StoreVectorElement\u003e()) {\n                TINT_UNREACHABLE() \u003c\u003c \"unexpected instruction type: \"\n                                   \u003c\u003c (use.instruction ? use.instruction-\u003eTypeInfo().name : \"nullptr\");\n            }\n```\n\n(may require clang-formatting)",
+      "range": {
+        "startLine": 147,
+        "startChar": 14,
+        "endLine": 152,
+        "endChar": 13
+      },
+      "revId": "9e6c5512c0e8905f6e82db999d61510aff123f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f607bf2a_d66c1677",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:31:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 362,
+        "startChar": 18,
+        "endLine": 366,
+        "endChar": 17
+      },
+      "revId": "9e6c5512c0e8905f6e82db999d61510aff123f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

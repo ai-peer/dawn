@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48f55dad_79dd6717",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T11:31:33Z",
+      "side": 1,
+      "message": "I actually found the original easier to read, but this new version would likely be more performant. One unfortunate loss is that the `TINT_ICE_ON_NO_MATCH` would error with the actual type of `use.instruction`, and we lost this. Adding a suggestion to regain this.",
+      "parentUuid": "eb4eecf0_db7dffcb",
+      "revId": "176ea2aa084dba7aafc7fe1ab29e19fb4044fe96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56892e24_ceda4fcb",
         "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
         "patchSetId": 12
