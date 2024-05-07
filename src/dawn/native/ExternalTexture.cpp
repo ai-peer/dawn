@@ -272,21 +272,21 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         plane1Size = descriptor->plane1->GetSingleSubresourceVirtualSize();
     }
 
-    // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
-    // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
+    // Offset the coordinates so the center texel is at the origin, so we can apply rotations
+    // and y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, -0.5, -0.5);
 
     // Texture applies rotation first and do mirrored(horizontal flip) next.
     // Do reverse order here to mapping final uv coordinate to origin texture.
-    // TODO(crbug.com/1514732): VideoFrame metadata defines horizontal flip (mirrored) and rotation.
-    // The vertical flip (which is flipY) could be achieved by rotate 180 + mirrored. Deprecate
-    // flipY attribute to align with VideoFrame metadata. Chrome is the only place to use this
-    // attribute and pass mirrored to descriptor->flipY and this is incorrect. Workaround to fix
-    // mirrored issue by delegate flipY operation to mirrored and remove flipY attribute in future.
+    // TODO(crbug.com/1514732): VideoFrame metadata defines horizontal flip (mirrored) and
+    // rotation. The vertical flip (which is flipY) could be achieved by rotate 180 + mirrored.
+    // Deprecate flipY attribute to align with VideoFrame metadata. Chrome is the only place to
+    // use this attribute and pass mirrored to descriptor->flipY and this is incorrect.
+    // Workaround to fix mirrored issue by delegate flipY operation to mirrored and remove flipY
+    // attribute in future.
     if (descriptor->flipY || descriptor->mirrored) {
         coordTransformMatrix = Scale(coordTransformMatrix, -1, 1);
     }
-
     // Apply rotations as needed.
     switch (descriptor->rotation) {
         case wgpu::ExternalTextureRotation::Rotate0Degrees:
