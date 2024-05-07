@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a3d73b3_a1b66db5",
+        "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-07T18:13:00Z",
+      "side": 1,
+      "message": "Unfortunately I don\u0027t think most compilers would be able to optimize away the `std::function`.\n\nThe easiest way I can think to do this with perfect forwarding is:\n\n```\n    /// Constructor.\n    /// @param ir the module\n    /// @param pred an optional predicate functions for filtering variables, each with the signature\n    /// `bool(const Var*)`. If any of these return `false` then the variable will not be considered.\n    /// Note: @p pred is not stored by the class, so can be a lambda that captures by reference.\n    template \u003ctypename... F\u003e\n    explicit ReferencedModuleVars(Module\u0026 ir, F\u0026\u0026... pred) : ir_(ir) {\n        // Loop over module-scope variables, recording the blocks that they are referenced from.\n        for (auto inst : *ir_.root_block) {\n            if (auto* var \u003d inst-\u003eAs\u003cVar\u003e()) {\n                if ((std::forward\u003cF\u003e(pred)(var) \u0026\u0026 ...)) {\n                    var-\u003eResult(0)-\u003eForEachUse([\u0026](const Usage\u0026 use) {\n                        block_to_direct_vars_.GetOrAddZero(use.instruction-\u003eBlock()).Add(var);\n                    });\n                }\n            }\n        }\n    }\n```",
+      "parentUuid": "c8b34946_c3974dce",
+      "revId": "6633a619f747549a19f1fff686180f770a2df6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0434e99d_180edcfc",
         "filename": "src/tint/lang/core/ir/transform/common/referenced_module_vars.h",
         "patchSetId": 15
