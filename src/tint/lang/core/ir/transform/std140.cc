@@ -281,6 +281,7 @@ struct State {
                 [&](Access* access) {
                     // Modify the access indices to take decomposed matrices into account.
                     auto* current_type = access->Object()->Type()->UnwrapPtr();
+                    bool outer_type_is_array = false;
                     Vector<Value*, 4> indices;
                     for (auto idx : access->Indices()) {
                         if (auto* str = current_type->As<core::type::Struct>()) {
@@ -293,14 +294,19 @@ struct State {
                             current_type = current_type->Elements().type;
                         }
 
-                        // If we've hit a matrix that was decomposed, load the whole matrix.
-                        // Any additional accesses will extract columns instead of producing
-                        // pointers.
-                        if (auto* mat = current_type->As<core::type::Matrix>();
-                            mat && NeedsDecomposing(mat)) {
-                            replacement = LoadMatrix(mat, replacement, std::move(indices));
-                            indices.Clear();
+                        if (!outer_type_is_array) {
+                            // RewriteType() does not rewrite an array-of-matrix, so we need to
+                            // match the same predicate pattern here.
+                            if (auto* mat = current_type->As<core::type::Matrix>();
+                                mat && NeedsDecomposing(mat)) {
+                                // If we've hit a matrix that was decomposed, load the whole
+                                // matrix. Any additional accesses will extract columns instead
+                                // of producing pointers.
+                                replacement = LoadMatrix(mat, replacement, std::move(indices));
+                                indices.Clear();
+                            }
                         }
+                        outer_type_is_array = current_type->Is<core::type::Array>();
                     }
 
                     if (!indices.IsEmpty()) {
