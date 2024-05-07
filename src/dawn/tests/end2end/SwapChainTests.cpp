@@ -53,6 +53,7 @@ class SwapChainTests : public DawnTest {
         // TODO(crbug.com/dawn/2492): Crashing on Ubuntu 22 (Mesa 23.2.1) + Intel UHD 630. Crash
         // happens in SetUp code, so we cannot skip individual tests.
         DAWN_TEST_UNSUPPORTED_IF(IsLinux() && IsIntel() && IsVulkan() && IsMesa("23.2.1"));
+        DAWN_TEST_UNSUPPORTED_IF(IsLinux() && IsAMD() && IsVulkan() && IsMesa("23.2.1"));
 
         glfwSetErrorCallback([](int code, const char* message) {
             ErrorLog() << "GLFW error " << code << " " << message;
@@ -214,6 +215,8 @@ TEST_P(SwapChainTests, ResizingSwapChainOnly) {
 TEST_P(SwapChainTests, ResizingWindowOnly) {
     // TODO(crbug.com/1503912): Failing new ValidateImageAcquireWait in Vulkan Validation Layer.
     DAWN_SUPPRESS_TEST_IF(IsBackendValidationEnabled() && IsWindows() && IsVulkan() && IsIntel());
+
+    DAWN_SUPPRESS_TEST_IF(IsAMD());
 
     wgpu::SwapChain swapchain = CreateSwapChain(surface, &baseDescriptor);
 
