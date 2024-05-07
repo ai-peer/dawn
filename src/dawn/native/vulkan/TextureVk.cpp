@@ -526,6 +526,7 @@ VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
 
         // R8BG8A8Triplanar420Unorm format is only supported on macOS.
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+        case wgpu::TextureFormat::External:
         case wgpu::TextureFormat::Undefined:
             break;
     }
