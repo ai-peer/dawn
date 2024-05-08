@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e143fe0_0025c2b7",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-08T14:02:45Z",
+      "side": 1,
+      "message": "Is it expected or a bug in validation code? If it is expected, could you please try adding more `ASSERT_DEVICE_ERROR_MSG_ON(..)` accordingly?",
+      "parentUuid": "5110d5d3_45bfde4a",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
