@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "209a9a5b_ee6c6c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-08T21:28:27Z",
+      "side": 1,
+      "message": "Will land tomorrow once it\u0027s confirmed that the builders are happy with the sysroot-related changes.",
+      "revId": "c75ccd0ada5823cd7d3ec2a9b00c8cce7cf7e059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
