@@ -33,6 +33,24 @@
       "message": "We\u0027ll probably need the other ones eventually as well.",
       "revId": "354461c148d5dba3777a040c731215b938246368",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dab80ea2_68a7109a",
+        "filename": "generator/templates/art/api_kotlin_enum.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-08T11:41:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f8d33b7a_d3267d48",
+      "revId": "354461c148d5dba3777a040c731215b938246368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
