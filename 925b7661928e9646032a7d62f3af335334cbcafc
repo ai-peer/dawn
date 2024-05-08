@@ -35,6 +35,64 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89043613_9cbd1103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "lgtm % nits",
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84edf2a0_f5c3ec30",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "nit: Can we make it so that the defaults are already set and we don\u0027t have to call PauseAccess()? I assume the mState and related fields touched by PauseAccess are only relevant for shared resource memory use?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 26
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5ff4d3b5_48e58115",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/SharedBufferMemory.cpp",
+              "range": {
+                "startLine": 146,
+                "startChar": 0,
+                "endLine": 148,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaa1f638_376baee7",
@@ -53,6 +111,134 @@
         "startChar": 36,
         "endLine": 278,
         "endChar": 45
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f246191b_d2cf2efd",
+        "filename": "src/dawn/native/SharedResourceMemory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "nit: IMO Pause/ResumeAccess is confusing because we also have Begin/EndAccess elsewhere - maybe this should be something like OnBegin/EndAccess or just Begin/EndAccess?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8b8ed3_76eaab33",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "nit: kBeginningOfGPUTime",
+      "range": {
+        "startLine": 180,
+        "startChar": 56,
+        "endLine": 180,
+        "endChar": 57
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ded6220b_a4895f78",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/Texture.h",
+              "range": {
+                "startLine": 180,
+                "startChar": 0,
+                "endLine": 181,
+                "endChar": 0
+              },
+              "replacement": "    ExecutionSerial mLastSharedTextureMemoryUsageSerial{kBeginningOfGPUTime};\n"
+            }
+          ]
+        }
+      ],
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "863f151e_a5e11a39",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "nit: I have a slight preference for Texture/Buffer/Resource* being the first parameter and the lastUsageSerial being the second - but I\u0027ll leave it up to you. Intuitively the first parameter is the subject of the method verb so that\u0027s the rationale.",
+      "range": {
+        "startLine": 46,
+        "startChar": 53,
+        "endLine": 46,
+        "endChar": 85
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "6d72ac79_23405898",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/d3d/SharedTextureMemoryD3D.h",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 48,
+                "endChar": 0
+              },
+              "replacement": "    ResultOrError\u003cFenceAndSignalValue\u003e EndAccessImpl(TextureBase* texture,\n                                                     ExecutionSerial lastUsageSerial,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55292760_b8f66300",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-08T23:05:34Z",
+      "side": 1,
+      "message": "nit: it might be worthwhile to check this happens even if there are some operations that use noopTexture like sampling / copying from it?",
+      "range": {
+        "startLine": 1723,
+        "startChar": 12,
+        "endLine": 1723,
+        "endChar": 91
       },
       "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
