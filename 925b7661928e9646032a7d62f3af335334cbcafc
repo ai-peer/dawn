@@ -16,6 +16,29 @@
       "message": "PTAL\n+corentin: in case you have a chance to see this before vacation - otherwise I\u0027ll find additional reviewers\n\nfixing test failures in https://chromium-review.googlesource.com/c/chromium/src/+/5519127",
       "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa1f638_376baee7",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-08T02:27:46Z",
+      "side": 1,
+      "message": "nit. acquire",
+      "range": {
+        "startLine": 278,
+        "startChar": 36,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
