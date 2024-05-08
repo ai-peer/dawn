@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "161b8d8e_da0d5ebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-08T11:05:57Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "354461c148d5dba3777a040c731215b938246368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d33b7a_d3267d48",
+        "filename": "generator/templates/art/api_kotlin_enum.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-08T11:05:57Z",
+      "side": 1,
+      "message": "We\u0027ll probably need the other ones eventually as well.",
+      "revId": "354461c148d5dba3777a040c731215b938246368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
