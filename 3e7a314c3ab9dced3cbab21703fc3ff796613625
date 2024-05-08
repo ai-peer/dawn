@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5110d5d3_45bfde4a",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-08T13:47:22Z",
+      "side": 1,
+      "message": "There could be more than 1 validation errors raise from [1].",
+      "parentUuid": "224b8f72_74e86f34",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
@@ -65,6 +83,24 @@
       "writtenOn": "2024-05-08T11:00:01Z",
       "side": 1,
       "message": "I believe all of these tests should be covered by SharedTextureMemoryTests.cpp so we could just remove this file.",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae837fb_d5463ef8",
+        "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-08T13:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dc24e0f_ea407f8b",
       "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
