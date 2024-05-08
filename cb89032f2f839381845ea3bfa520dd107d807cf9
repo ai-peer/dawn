@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f990c07_ffa93d97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-08T19:13:26Z",
+      "side": 1,
+      "message": "Updates DEPS to patch landed in https://chromium-review.googlesource.com/c/external/github.com/microsoft/DirectXShaderCompiler/+/5525429 for M124/6367",
+      "revId": "cb89032f2f839381845ea3bfa520dd107d807cf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
