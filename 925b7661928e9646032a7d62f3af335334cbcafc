@@ -117,6 +117,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f29fdb19_dde545e3",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-09T19:51:08Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "51bc0937_8deea542",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 26
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaa1f638_376baee7",
@@ -378,6 +402,30 @@
       "side": 1,
       "message": "I think it really must be a noop. If we do actual operations, then we will need to have acquired the pending fences.\n\nAnd then, that means we will export a new fence point to the last read - instead of forwarding along the unused begin fences",
       "parentUuid": "55292760_b8f66300",
+      "range": {
+        "startLine": 1723,
+        "startChar": 12,
+        "endLine": 1723,
+        "endChar": 91
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae044315_99e33c7f",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-09T19:51:08Z",
+      "side": 1,
+      "message": "Ah ok - we\u0027re checking that the final EndAccess just forwards the original fences - nvm then!",
+      "parentUuid": "b940353f_6173331c",
       "range": {
         "startLine": 1723,
         "startChar": 12,
