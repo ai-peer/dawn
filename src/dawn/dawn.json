@@ -39,6 +39,12 @@
         "copyright_year": "2019"
     },
 
+    "INTERNAL__USING_DAWN_WEBGPU": {
+        "category": "structure",
+        "tags": ["emscripten"],
+        "members": []
+    },
+
     "create instance": {
         "category": "function",
         "returns": "instance",
