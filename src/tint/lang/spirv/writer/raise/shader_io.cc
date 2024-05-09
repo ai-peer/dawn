@@ -130,7 +130,8 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
                 io.attributes.location,
                 io.attributes.blend_src,
                 io.attributes.builtin,
-                io.attributes.interpolation,
+                (io.attributes.interpolation.has_value() ? *io.attributes.interpolation
+                                                         : core::Interpolation{}),
                 io.attributes.invariant,
             });
             ir.root_block->Append(var);

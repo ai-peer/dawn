@@ -253,8 +253,8 @@ class State {
             }
             if (auto loc = param->Location()) {
                 attrs.Push(b.Location(AInt(loc->value)));
-                if (auto interp = loc->interpolation) {
-                    attrs.Push(b.Interpolate(interp->type, interp->sampling));
+                if (loc->interpolation.type != core::InterpolationType::kUndefined) {
+                    attrs.Push(b.Interpolate(loc->interpolation.type, loc->interpolation.sampling));
                 }
             }
             if (param->Invariant()) {
@@ -306,8 +306,8 @@ class State {
         }
         if (auto loc = fn->ReturnLocation()) {
             ret_attrs.Push(b.Location(AInt(loc->value)));
-            if (auto interp = loc->interpolation) {
-                ret_attrs.Push(b.Interpolate(interp->type, interp->sampling));
+            if (loc->interpolation.type != core::InterpolationType::kUndefined) {
+                ret_attrs.Push(b.Interpolate(loc->interpolation.type, loc->interpolation.sampling));
             }
         }
         if (fn->ReturnInvariant()) {

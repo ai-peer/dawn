@@ -88,8 +88,8 @@ TEST_F(IR_FunctionParamTest, Clone) {
     EXPECT_TRUE(new_fp->Location().has_value());
     auto loc = new_fp->Location();
     EXPECT_EQ(1u, loc->value);
-    EXPECT_EQ(core::InterpolationType::kFlat, loc->interpolation->type);
-    EXPECT_EQ(core::InterpolationSampling::kCentroid, loc->interpolation->sampling);
+    EXPECT_EQ(core::InterpolationType::kFlat, loc->interpolation.type);
+    EXPECT_EQ(core::InterpolationSampling::kCentroid, loc->interpolation.sampling);
 
     EXPECT_TRUE(new_fp->BindingPoint().has_value());
     auto bp = new_fp->BindingPoint();

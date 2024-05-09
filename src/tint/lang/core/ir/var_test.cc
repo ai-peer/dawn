@@ -105,9 +105,8 @@ TEST_F(IR_VarTest, Clone) {
     EXPECT_TRUE(attrs.builtin.has_value());
     EXPECT_EQ(core::BuiltinValue::kFragDepth, attrs.builtin.value());
 
-    EXPECT_TRUE(attrs.interpolation.has_value());
-    EXPECT_EQ(core::InterpolationType::kFlat, attrs.interpolation->type);
-    EXPECT_EQ(core::InterpolationSampling::kCentroid, attrs.interpolation->sampling);
+    EXPECT_EQ(core::InterpolationType::kFlat, attrs.interpolation.type);
+    EXPECT_EQ(core::InterpolationSampling::kCentroid, attrs.interpolation.sampling);
 
     EXPECT_TRUE(attrs.invariant);
 }

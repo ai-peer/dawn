@@ -114,8 +114,8 @@ TEST_F(IR_FunctionTest, Clone) {
     EXPECT_TRUE(new_f->ReturnLocation().has_value());
     auto loc = new_f->ReturnLocation().value();
     EXPECT_EQ(1u, loc.value);
-    EXPECT_EQ(core::InterpolationType::kFlat, loc.interpolation->type);
-    EXPECT_EQ(core::InterpolationSampling::kCentroid, loc.interpolation->sampling);
+    EXPECT_EQ(core::InterpolationType::kFlat, loc.interpolation.type);
+    EXPECT_EQ(core::InterpolationSampling::kCentroid, loc.interpolation.sampling);
 
     EXPECT_TRUE(new_f->ReturnInvariant());
 
