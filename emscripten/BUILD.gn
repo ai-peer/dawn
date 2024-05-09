@@ -1,0 +1,92 @@
+# Copyright 2024 The Dawn & Tint Authors
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/generator/dawn_generator.gni")
+
+dawn_json_generator("emscripten_headers_gen") {
+  target = "emscripten_headers"
+  outputs = [
+    "emscripten/include/webgpu/webgpu.h",
+    "emscripten/include/webgpu/webgpu_cpp.h",
+    "emscripten/include/webgpu/webgpu_cpp_chained_struct.h",
+  ]
+}
+
+dawn_json_generator("emscripten_js_gen") {
+  target = "emscripten_js"
+  outputs = [
+    "emscripten/webgpu_struct_info.json",
+    "emscripten/library_webgpu_enum_tables.js",
+  ]
+}
+
+generated_file("emscripten_library_webgpu_generated_struct_info") {
+  # FIXME: Need deps on webgpu_struct_info_generated{32,64}.json
+
+  data = [
+    "snippets/library_webgpu_struct_info_part1.txt",
+    "webgpu_struct_info_generated32.json",
+    "snippets/library_webgpu_struct_info_part2.txt",
+    "webgpu_struct_info_generated64.json",
+    "snippets/library_webgpu_struct_info_part3.txt",
+  ]
+
+  contents = ""
+  foreach(f, data) {
+    contents = string_join("", [contents, read_file(f, "string")])
+  }
+
+  output_conversion = "string"
+  outputs = [
+    "${target_gen_dir}/library_webgpu_generated_struct_info.js",
+  ]
+}
+
+config("emscripten_webgpu_config") {
+  include_dirs = [
+    "${target_gen_dir}/include",
+  ]
+  ldflags = [
+      # These will be processed in order, so library_webgpu.js must come last.
+      # It will assert this, and also that -sUSE_WEBGPU is not enabled.
+      "--js-library=" + rebase_path("${target_gen_dir}/library_webgpu_enum_tables.js"),
+      "--js-library=" + rebase_path("${target_gen_dir}/library_webgpu_generated_struct_info.js"),
+      "--js-library=" + rebase_path("library_webgpu.js"),
+  ]
+}
+
+source_set("emscripten_webgpu") {
+  public_configs = [":emscripten_webgpu_config"]
+  deps = [
+    ":emscripten_headers_gen",
+    ":emscripten_js_gen",
+    ":emscripten_library_webgpu_generated_struct_info",
+  ]
+  sources = get_target_outputs(":emscripten_headers_gen")
+}

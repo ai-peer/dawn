@@ -1,0 +1,21 @@
+);
+
+// Make sure we aren't inheriting any of the webgpu.h struct info from
+// Emscripten's copy.
+for (const k of Object.keys(C_STRUCTS)) {
+    if (k.startsWith('WGPU')) {
+        delete C_STRUCTS[k];
+    }
+}
+
+const WGPU_STRUCTS = (MEMORY64 ? structInfo64 : structInfo32).structs;
+for (const [k, v] of Object.entries(WGPU_STRUCTS)) {
+    C_STRUCTS[k] = v;
+}
+if (!('WGPUINTERNAL__USING_DAWN_WEBGPU' in C_STRUCTS)) {
+    throw new Error('struct_info generation error - need webgpu.h from Dawn, got it from Emscripten');
+}
+C_STRUCTS.__HAVE_DAWN_WEBGPU_STRUCT_INFO = true;
+
+null;
+}}}
