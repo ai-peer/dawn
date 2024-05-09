@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "src/tint/lang/core/ir/disassembly.h"
 #include "src/tint/lang/spirv/writer/writer.h"
 
 #include "src/tint/cmd/fuzz/ir/fuzz.h"
@@ -43,8 +44,10 @@ void IRFuzzer(core::ir::Module& module, Options options) {
     auto& spirv = output->spirv;
     if (auto res = validate::Validate(Slice(spirv.data(), spirv.size()), SPV_ENV_VULKAN_1_1);
         res != Success) {
-        TINT_ICE() << "Output of SPIR-V writer failed to validate with SPIR-V Tools\n"
-                   << res.Failure();
+        TINT_ICE() << "output of SPIR-V writer failed to validate with SPIR-V Tools\n"
+                   << res.Failure() << "\n\n"
+                   << "IR:\n"
+                   << core::ir::Disassemble(module).Plain();
     }
 }
 
