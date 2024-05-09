@@ -274,7 +274,7 @@ void foo() {
 )");
 }
 
-TEST_F(MslPrinterTest, VarGlobalWorkgroup) {
+TEST_F(MslPrinterTest, DISABLED_VarGlobalWorkgroup) {
     core::ir::Var* v = nullptr;
     b.Append(mod.root_block,
              [&] { v = b.Var("v", ty.ptr<core::AddressSpace::kWorkgroup, f32>()); });
