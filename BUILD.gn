@@ -72,12 +72,24 @@ group("android") {
   deps = [ "tools/android" ]
 }
 
+group("dawn_emscripten") {
+  # Without a copy of Emscripten, we can only generate a few files.
+  deps = [
+    "dawn_emscripten:emscripten_headers_gen",
+    "dawn_emscripten:emscripten_js_gen",
+  ]
+  if (dawn_emscripten_dir != "") {
+    deps += [ "dawn_emscripten:emscripten_webgpu" ]
+  }
+}
+
 group("all") {
   testonly = true
   deps = [
     ":android",
     ":benchmarks",
     ":cmds",
+    ":dawn_emscripten",
     ":fuzzers",
     ":libs",
     ":tests",
