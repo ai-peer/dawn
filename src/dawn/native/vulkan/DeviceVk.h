@@ -42,6 +42,7 @@
 #include "dawn/native/vulkan/CommandRecordingContext.h"
 #include "dawn/native/vulkan/DescriptorSetAllocator.h"
 #include "dawn/native/vulkan/Forward.h"
+#include "dawn/native/vulkan/InternalPipelineStoreVk.h"
 #include "dawn/native/vulkan/VulkanFunctions.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 
@@ -124,6 +125,8 @@ class Device final : public DeviceBase {
     // Used to associate this device with validation layer messages.
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
 
+    InternalPipelineStore* GetInternalPipelineStoreVk();
+
   private:
     Device(AdapterBase* adapter,
            const UnpackedPtr<DeviceDescriptor>& descriptor,
@@ -205,6 +208,8 @@ class Device final : public DeviceBase {
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                    VkDeviceMemory* outAllocation,
                                    std::vector<VkSemaphore>* outWaitSemaphores);
+
+    std::unique_ptr<InternalPipelineStore> mInternalPipelineStoreVk;
 };
 
 }  // namespace dawn::native::vulkan

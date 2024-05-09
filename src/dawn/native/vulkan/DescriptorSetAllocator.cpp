@@ -94,6 +94,11 @@ DescriptorSetAllocator::~DescriptorSetAllocator() {
 }
 
 ResultOrError<DescriptorSetAllocation> DescriptorSetAllocator::Allocate(BindGroupLayout* layout) {
+    return Allocate(layout->GetHandle());
+}
+
+ResultOrError<DescriptorSetAllocation> DescriptorSetAllocator::Allocate(
+    VkDescriptorSetLayout layout) {
     if (mAvailableDescriptorPoolIndices.empty()) {
         DAWN_TRY(AllocateDescriptorPool(layout));
     }
@@ -148,7 +153,7 @@ void DescriptorSetAllocator::FinishDeallocation(ExecutionSerial completedSerial)
     mPendingDeallocations.ClearUpTo(completedSerial);
 }
 
-MaybeError DescriptorSetAllocator::AllocateDescriptorPool(BindGroupLayout* layout) {
+MaybeError DescriptorSetAllocator::AllocateDescriptorPool(VkDescriptorSetLayout layout) {
     VkDescriptorPoolCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;
     createInfo.pNext = nullptr;
@@ -164,7 +169,7 @@ MaybeError DescriptorSetAllocator::AllocateDescriptorPool(BindGroupLayout* layou
                                                             nullptr, &*descriptorPool),
                             "CreateDescriptorPool"));
 
-    std::vector<VkDescriptorSetLayout> layouts(mMaxSets, layout->GetHandle());
+    std::vector<VkDescriptorSetLayout> layouts(mMaxSets, layout);
 
     VkDescriptorSetAllocateInfo allocateInfo;
     allocateInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO;

@@ -547,25 +547,37 @@ MaybeError RenderPipeline::InitializeImpl() {
     // Get a VkRenderPass that matches the attachment formats for this pipeline, load/store ops
     // don't matter so set them all to LoadOp::Load / StoreOp::Store. Whether the render pass
     // has resolve target and whether depth/stencil attachment is read-only also don't matter,
-    // so set them both to false.
+    // so set them both to false. Except when the render pass has ExpandResolveTexture load op then
+    // they matter.
     VkRenderPass renderPass = VK_NULL_HANDLE;
+    RenderPassCacheQuery renderPassQuery;
     {
-        RenderPassCacheQuery query;
+        wgpu::LoadOp colorLoadOp = wgpu::LoadOp::Load;
+        bool hasResolveTarget = false;
+        if (GetAttachmentState()->HasExpandResolveLoadOp()) {
+            // TODO(crbug.com/dawn/1710): Only one attachment is allowed for now.
+            // ExpandResolveTexture will use 2 subpasses in a render pass so we have to create
+            // an appropriate query.
+            DAWN_ASSERT(GetColorAttachmentsMask().count() == 1);
+            colorLoadOp = wgpu::LoadOp::ExpandResolveTexture;
+            hasResolveTarget = true;
+        }
 
         for (auto i : IterateBitSet(GetColorAttachmentsMask())) {
-            query.SetColor(i, GetColorAttachmentFormat(i), wgpu::LoadOp::Load, wgpu::StoreOp::Store,
-                           false);
+            renderPassQuery.SetColor(i, GetColorAttachmentFormat(i), colorLoadOp,
+                                     wgpu::StoreOp::Store, hasResolveTarget);
         }
 
         if (HasDepthStencilAttachment()) {
-            query.SetDepthStencil(GetDepthStencilFormat(), wgpu::LoadOp::Load, wgpu::StoreOp::Store,
-                                  false, wgpu::LoadOp::Load, wgpu::StoreOp::Store, false);
+            renderPassQuery.SetDepthStencil(GetDepthStencilFormat(), wgpu::LoadOp::Load,
+                                            wgpu::StoreOp::Store, false, wgpu::LoadOp::Load,
+                                            wgpu::StoreOp::Store, false);
         }
 
-        query.SetSampleCount(GetSampleCount());
+        renderPassQuery.SetSampleCount(GetSampleCount());
 
-        StreamIn(&mCacheKey, query);
-        DAWN_TRY_ASSIGN(renderPass, device->GetRenderPassCache()->GetRenderPass(query));
+        StreamIn(&mCacheKey, renderPassQuery);
+        DAWN_TRY_ASSIGN(renderPass, device->GetRenderPassCache()->GetRenderPass(renderPassQuery));
     }
 
     // The create info chains in a bunch of things created on the stack here or inside state
@@ -588,7 +600,7 @@ MaybeError RenderPipeline::InitializeImpl() {
     createInfo.pDynamicState = &dynamic;
     createInfo.layout = ToBackend(GetLayout())->GetHandle();
     createInfo.renderPass = renderPass;
-    createInfo.subpass = 0;
+    createInfo.subpass = GetRenderPassMainSubpassIndex(renderPassQuery);
     createInfo.basePipelineHandle = VkPipeline{};
     createInfo.basePipelineIndex = -1;
 
