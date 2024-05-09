@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27dbf87d_ad8a9e42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-09T20:47:25Z",
+      "side": 1,
+      "message": "PTAL.\n\nI _think_ this is a bit nicer? The checking against `kUndefined` is a bit unfortunate.",
+      "revId": "baaff75a3ce0c76d40e2d2e9b6029e4551514a6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
