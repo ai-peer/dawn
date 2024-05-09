@@ -88,6 +88,24 @@
       "parentUuid": "2f191106_4a37d65f",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a16e7539_f5db6d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003806
+      },
+      "writtenOn": "2024-05-09T16:19:22Z",
+      "side": 1,
+      "message": "\u003e https://vulkan.gpuinfo.org/listfeaturesextensions.php?extension\u003dVK_EXT_multisampled_render_to_single_sampled\u0026platform\u003dandroid\n\nFWIW, gpuinfo shows reports from the dawn of time (before the ext existed), so percentages are not really that valid. Added to that is the fact that it takes Android drivers 1-2 years before an extension can come out (at best), it really means you should expect 2023+ phones to have the extension. Phones releasing now are all pretty much expected to have the extension.\n\n---\n\n\u003e giving Dawn both single sampled texture and MSAA texture and expect single sampled texture to be copied to MSAA texture\n\nThat\u0027s an unfortunately inefficient design. Modelling that around MSRTSS would have been much better for tilers.\n\nAnd as for IMRs, I believe it would actually be better to _not_ do MSRTSS and let MSAA data be stored and loaded directly (instead of copied from the single-sampled texture), with the single sampled texture simply being the resolve attachment. That would save you one copy (from single- to multi-sampled texture), since the driver is going to do that separately before loading the MSAA data anyway.",
+      "parentUuid": "22dfbc74_1a92ca46",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
