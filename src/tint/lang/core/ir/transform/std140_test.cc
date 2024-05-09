@@ -264,10 +264,14 @@ MyStruct = struct @align(8), @block {
   a:mat3x2<f32> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -276,11 +280,11 @@ $B1: {  # root
 
 %foo = func():mat3x2<f32> {
   $B2: {
-    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 0u
+    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 0u
     %4:vec2<f32> = load %3
-    %5:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %5:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 1u
     %6:vec2<f32> = load %5
-    %7:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %7:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 2u
     %8:vec2<f32> = load %7
     %9:mat3x2<f32> = construct %4, %6, %8
     ret %9
@@ -335,10 +339,14 @@ MyStruct = struct @align(8), @block {
   a:mat3x2<f32> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -347,7 +355,7 @@ $B1: {  # root
 
 %foo = func():vec2<f32> {
   $B2: {
-    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 1u
     %4:vec2<f32> = load %3
     ret %4
   }
@@ -403,10 +411,14 @@ MyStruct = struct @align(8), @block {
   a:mat3x2<f32> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -415,11 +427,11 @@ $B1: {  # root
 
 %foo = func(%column:i32):vec2<f32> {
   $B2: {
-    %4:ptr<uniform, vec2<f32>, read> = access %buffer, 0u
+    %4:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 0u
     %5:vec2<f32> = load %4
-    %6:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %6:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 1u
     %7:vec2<f32> = load %6
-    %8:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %8:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 2u
     %9:vec2<f32> = load %8
     %10:mat3x2<f32> = construct %5, %7, %9
     %11:vec2<f32> = access %10, %column
@@ -475,10 +487,14 @@ MyStruct = struct @align(8), @block {
   a:mat3x2<f32> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -487,7 +503,7 @@ $B1: {  # root
 
 %foo = func():f32 {
   $B2: {
-    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %3:ptr<uniform, vec2<f32>, read> = access %buffer, 0u, 1u
     %4:f32 = load_vector_element %3, 1u
     ret %4
   }
@@ -539,10 +555,14 @@ MyStruct = struct @align(8), @block {
   a:mat3x2<f32> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -558,12 +578,13 @@ $B1: {  # root
 }
 %convert_MyStruct = func(%input:MyStruct_std140):MyStruct {
   $B3: {
-    %7:vec2<f32> = access %input, 0u
-    %8:vec2<f32> = access %input, 1u
-    %9:vec2<f32> = access %input, 2u
-    %10:mat3x2<f32> = construct %7, %8, %9
-    %11:MyStruct = construct %10
-    ret %11
+    %7:mat3x2_f32_std140 = access %input, 0u
+    %8:vec2<f32> = access %7, 0u
+    %9:vec2<f32> = access %7, 1u
+    %10:vec2<f32> = access %7, 2u
+    %11:mat3x2<f32> = construct %8, %9, %10
+    %12:MyStruct = construct %11
+    ret %12
   }
 }
 )";
@@ -625,10 +646,14 @@ Outer = struct @align(8), @block {
   arr:array<Inner, 4> @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Inner_std140 = struct @align(8) {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 Outer_std140 = struct @align(8), @block {
@@ -679,12 +704,13 @@ $B1: {  # root
 }
 %convert_Inner = func(%input_1:Inner_std140):Inner {  # %input_1: 'input'
   $B8: {
-    %19:vec2<f32> = access %input_1, 0u
-    %20:vec2<f32> = access %input_1, 1u
-    %21:vec2<f32> = access %input_1, 2u
-    %22:mat3x2<f32> = construct %19, %20, %21
-    %23:Inner = construct %22
-    ret %23
+    %19:mat3x2_f32_std140 = access %input_1, 0u
+    %20:vec2<f32> = access %19, 0u
+    %21:vec2<f32> = access %19, 1u
+    %22:vec2<f32> = access %19, 2u
+    %23:mat3x2<f32> = construct %20, %21, %22
+    %24:Inner = construct %23
+    ret %24
   }
 }
 )";
@@ -746,10 +772,14 @@ Outer = struct @align(8), @block {
   inner:Inner @offset(0)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Inner_std140 = struct @align(8) {
-  a_col0:vec2<f32> @offset(0)
-  a_col1:vec2<f32> @offset(8)
-  a_col2:vec2<f32> @offset(16)
+  a:mat3x2_f32_std140 @offset(0)
 }
 
 Outer_std140 = struct @align(8), @block {
@@ -770,12 +800,13 @@ $B1: {  # root
 }
 %convert_Inner = func(%input:Inner_std140):Inner {
   $B3: {
-    %8:vec2<f32> = access %input, 0u
-    %9:vec2<f32> = access %input, 1u
-    %10:vec2<f32> = access %input, 2u
-    %11:mat3x2<f32> = construct %8, %9, %10
-    %12:Inner = construct %11
-    ret %12
+    %8:mat3x2_f32_std140 = access %input, 0u
+    %9:vec2<f32> = access %8, 0u
+    %10:vec2<f32> = access %8, 1u
+    %11:vec2<f32> = access %8, 2u
+    %12:mat3x2<f32> = construct %9, %10, %11
+    %13:Inner = construct %12
+    ret %13
   }
 }
 )";
@@ -838,10 +869,14 @@ Outer = struct @align(16), @block {
   inner:Inner @offset(32)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Outer_std140 = struct @align(16), @block {
-  m_col0:vec2<f32> @offset(0)
-  m_col1:vec2<f32> @offset(8)
-  m_col2:vec2<f32> @offset(16)
+  m:mat3x2_f32_std140 @offset(0)
   inner:Inner @offset(32)
 }
 
@@ -858,13 +893,14 @@ $B1: {  # root
 }
 %convert_Outer = func(%input:Outer_std140):Outer {
   $B3: {
-    %7:vec2<f32> = access %input, 0u
-    %8:vec2<f32> = access %input, 1u
-    %9:vec2<f32> = access %input, 2u
-    %10:mat3x2<f32> = construct %7, %8, %9
-    %11:Inner = access %input, 3u
-    %12:Outer = construct %10, %11
-    ret %12
+    %7:mat3x2_f32_std140 = access %input, 0u
+    %8:vec2<f32> = access %7, 0u
+    %9:vec2<f32> = access %7, 1u
+    %10:vec2<f32> = access %7, 2u
+    %11:mat3x2<f32> = construct %8, %9, %10
+    %12:Inner = access %input, 1u
+    %13:Outer = construct %11, %12
+    ret %13
   }
 }
 )";
@@ -959,11 +995,15 @@ Outer = struct @align(8), @block {
   d:i32 @offset(168)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Inner_std140 = struct @align(8) {
   a:i32 @offset(0)
-  m_col0:vec2<f32> @offset(8)
-  m_col1:vec2<f32> @offset(16)
-  m_col2:vec2<f32> @offset(24)
+  m:mat3x2_f32_std140 @offset(8)
   b:i32 @offset(32)
 }
 
@@ -981,11 +1021,11 @@ $B1: {  # root
   $B2: {
     %3:ptr<uniform, array<Inner_std140, 4>, read> = access %buffer, 1u
     %4:ptr<uniform, Inner_std140, read> = access %3, 2u
-    %5:ptr<uniform, vec2<f32>, read> = access %4, 1u
+    %5:ptr<uniform, vec2<f32>, read> = access %4, 1u, 0u
     %6:vec2<f32> = load %5
-    %7:ptr<uniform, vec2<f32>, read> = access %4, 2u
+    %7:ptr<uniform, vec2<f32>, read> = access %4, 1u, 1u
     %8:vec2<f32> = load %7
-    %9:ptr<uniform, vec2<f32>, read> = access %4, 3u
+    %9:ptr<uniform, vec2<f32>, read> = access %4, 1u, 2u
     %10:vec2<f32> = load %9
     %11:mat3x2<f32> = construct %6, %8, %10
     %12:vec2<f32> = access %11, 2u
@@ -1028,13 +1068,14 @@ $B1: {  # root
 %convert_Inner = func(%input:Inner_std140):Inner {
   $B7: {
     %32:i32 = access %input, 0u
-    %33:vec2<f32> = access %input, 1u
-    %34:vec2<f32> = access %input, 2u
-    %35:vec2<f32> = access %input, 3u
-    %36:mat3x2<f32> = construct %33, %34, %35
-    %37:i32 = access %input, 4u
-    %38:Inner = construct %32, %36, %37
-    ret %38
+    %33:mat3x2_f32_std140 = access %input, 1u
+    %34:vec2<f32> = access %33, 0u
+    %35:vec2<f32> = access %33, 1u
+    %36:vec2<f32> = access %33, 2u
+    %37:mat3x2<f32> = construct %34, %35, %36
+    %38:i32 = access %input, 2u
+    %39:Inner = construct %32, %37, %38
+    ret %39
   }
 }
 )";
@@ -1134,11 +1175,15 @@ Outer = struct @align(8), @block {
   d:i32 @offset(168)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Inner_std140 = struct @align(8) {
   a:i32 @offset(0)
-  m_col0:vec2<f32> @offset(8)
-  m_col1:vec2<f32> @offset(16)
-  m_col2:vec2<f32> @offset(24)
+  m:mat3x2_f32_std140 @offset(8)
   b:i32 @offset(32)
 }
 
@@ -1156,11 +1201,11 @@ $B1: {  # root
   $B2: {
     %3:ptr<uniform, array<Inner_std140, 4>, read> = access %buffer, 1u
     %4:ptr<uniform, Inner_std140, read> = access %3, 2u
-    %5:ptr<uniform, vec2<f32>, read> = access %4, 1u
+    %5:ptr<uniform, vec2<f32>, read> = access %4, 1u, 0u
     %6:vec2<f32> = load %5
-    %7:ptr<uniform, vec2<f32>, read> = access %4, 2u
+    %7:ptr<uniform, vec2<f32>, read> = access %4, 1u, 1u
     %8:vec2<f32> = load %7
-    %9:ptr<uniform, vec2<f32>, read> = access %4, 3u
+    %9:ptr<uniform, vec2<f32>, read> = access %4, 1u, 2u
     %10:vec2<f32> = load %9
     %11:mat3x2<f32> = construct %6, %8, %10
     %12:vec2<f32> = access %11, 2u
@@ -1203,13 +1248,14 @@ $B1: {  # root
 %convert_Inner = func(%input:Inner_std140):Inner {
   $B7: {
     %32:i32 = access %input, 0u
-    %33:vec2<f32> = access %input, 1u
-    %34:vec2<f32> = access %input, 2u
-    %35:vec2<f32> = access %input, 3u
-    %36:mat3x2<f32> = construct %33, %34, %35
-    %37:i32 = access %input, 4u
-    %38:Inner = construct %32, %36, %37
-    ret %38
+    %33:mat3x2_f32_std140 = access %input, 1u
+    %34:vec2<f32> = access %33, 0u
+    %35:vec2<f32> = access %33, 1u
+    %36:vec2<f32> = access %33, 2u
+    %37:mat3x2<f32> = construct %34, %35, %36
+    %38:i32 = access %input, 2u
+    %39:Inner = construct %32, %37, %38
+    ret %39
   }
 }
 )";
@@ -1308,11 +1354,15 @@ Outer = struct @align(8), @block {
   d:i32 @offset(168)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 Inner_std140 = struct @align(8) {
   a:i32 @offset(0)
-  m_col0:vec2<f32> @offset(8)
-  m_col1:vec2<f32> @offset(16)
-  m_col2:vec2<f32> @offset(24)
+  m:mat3x2_f32_std140 @offset(8)
   b:i32 @offset(32)
 }
 
@@ -1330,11 +1380,11 @@ $B1: {  # root
   $B2: {
     %6:ptr<uniform, array<Inner_std140, 4>, read> = access %buffer, 1u
     %7:ptr<uniform, Inner_std140, read> = access %6, %arr_idx
-    %8:ptr<uniform, vec2<f32>, read> = access %7, 1u
+    %8:ptr<uniform, vec2<f32>, read> = access %7, 1u, 0u
     %9:vec2<f32> = load %8
-    %10:ptr<uniform, vec2<f32>, read> = access %7, 2u
+    %10:ptr<uniform, vec2<f32>, read> = access %7, 1u, 1u
     %11:vec2<f32> = load %10
-    %12:ptr<uniform, vec2<f32>, read> = access %7, 3u
+    %12:ptr<uniform, vec2<f32>, read> = access %7, 1u, 2u
     %13:vec2<f32> = load %12
     %14:mat3x2<f32> = construct %9, %11, %13
     %15:vec2<f32> = access %14, %col_idx
@@ -1377,13 +1427,14 @@ $B1: {  # root
 %convert_Inner = func(%input:Inner_std140):Inner {
   $B7: {
     %35:i32 = access %input, 0u
-    %36:vec2<f32> = access %input, 1u
-    %37:vec2<f32> = access %input, 2u
-    %38:vec2<f32> = access %input, 3u
-    %39:mat3x2<f32> = construct %36, %37, %38
-    %40:i32 = access %input, 4u
-    %41:Inner = construct %35, %39, %40
-    ret %41
+    %36:mat3x2_f32_std140 = access %input, 1u
+    %37:vec2<f32> = access %36, 0u
+    %38:vec2<f32> = access %36, 1u
+    %39:vec2<f32> = access %36, 2u
+    %40:mat3x2<f32> = construct %37, %38, %39
+    %41:i32 = access %input, 2u
+    %42:Inner = construct %35, %40, %41
+    ret %42
   }
 }
 )";
@@ -1458,12 +1509,16 @@ MyStruct = struct @align(128), @block {
   b:i32 @offset(128)
 }
 
+mat4x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+  col3:vec2<f32> @offset(24)
+}
+
 MyStruct_std140 = struct @align(128), @block {
   a:i32 @offset(0)
-  m_col0:vec2<f32> @offset(64)
-  m_col1:vec2<f32> @offset(72)
-  m_col2:vec2<f32> @offset(80)
-  m_col3:vec2<f32> @offset(88)
+  m:mat4x2_f32_std140 @offset(64)
   b:i32 @offset(128)
 }
 
@@ -1476,17 +1531,17 @@ $B1: {  # root
     %3:ptr<uniform, i32, read> = access %buffer, 0u
     %4:i32 = load %3
     %a:i32 = let %4
-    %6:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %6:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 0u
     %7:vec2<f32> = load %6
-    %8:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %8:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 1u
     %9:vec2<f32> = load %8
-    %10:ptr<uniform, vec2<f32>, read> = access %buffer, 3u
+    %10:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 2u
     %11:vec2<f32> = load %10
-    %12:ptr<uniform, vec2<f32>, read> = access %buffer, 4u
+    %12:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 3u
     %13:vec2<f32> = load %12
     %14:mat4x2<f32> = construct %7, %9, %11, %13
     %m:mat4x2<f32> = let %14
-    %16:ptr<uniform, i32, read> = access %buffer, 5u
+    %16:ptr<uniform, i32, read> = access %buffer, 2u
     %17:i32 = load %16
     %b:i32 = let %17
     ret
@@ -1541,11 +1596,15 @@ MyStruct = struct @align(16), @block {
   a:mat4x3<f32> @offset(0)
 }
 
+mat4x3_f32_std140 = struct @align(16) {
+  col0:vec3<f32> @offset(0)
+  col1:vec3<f32> @offset(16)
+  col2:vec3<f32> @offset(32)
+  col3:vec3<f32> @offset(48)
+}
+
 MyStruct_std140 = struct @align(16), @block {
-  a_col0:vec3<f32> @offset(0)
-  a_col1:vec3<f32> @offset(16)
-  a_col2:vec3<f32> @offset(32)
-  a_col3:vec3<f32> @offset(48)
+  a:mat4x3_f32_std140 @offset(0)
 }
 
 $B1: {  # root
@@ -1554,13 +1613,13 @@ $B1: {  # root
 
 %foo = func():mat4x3<f32> {
   $B2: {
-    %3:ptr<uniform, vec3<f32>, read> = access %buffer, 0u
+    %3:ptr<uniform, vec3<f32>, read> = access %buffer, 0u, 0u
     %4:vec3<f32> = load %3
-    %5:ptr<uniform, vec3<f32>, read> = access %buffer, 1u
+    %5:ptr<uniform, vec3<f32>, read> = access %buffer, 0u, 1u
     %6:vec3<f32> = load %5
-    %7:ptr<uniform, vec3<f32>, read> = access %buffer, 2u
+    %7:ptr<uniform, vec3<f32>, read> = access %buffer, 0u, 2u
     %8:vec3<f32> = load %7
-    %9:ptr<uniform, vec3<f32>, read> = access %buffer, 3u
+    %9:ptr<uniform, vec3<f32>, read> = access %buffer, 0u, 3u
     %10:vec3<f32> = load %9
     %11:mat4x3<f32> = construct %4, %6, %8, %10
     ret %11
@@ -1741,11 +1800,15 @@ MyStruct = struct @align(16), @block {
   b:mat3x2<f32> @offset(64)
 }
 
+mat3x2_f32_std140 = struct @align(8) {
+  col0:vec2<f32> @offset(0)
+  col1:vec2<f32> @offset(8)
+  col2:vec2<f32> @offset(16)
+}
+
 MyStruct_std140 = struct @align(16), @block {
   a:mat4x4<f32> @offset(0)
-  b_col0:vec2<f32> @offset(64)
-  b_col1:vec2<f32> @offset(72)
-  b_col2:vec2<f32> @offset(80)
+  b:mat3x2_f32_std140 @offset(64)
 }
 
 $B1: {  # root
@@ -1778,11 +1841,11 @@ $B1: {  # root
 }
 %load_mat_b = func():vec2<f32> {
   $B5: {
-    %16:ptr<uniform, vec2<f32>, read> = access %buffer, 1u
+    %16:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 0u
     %17:vec2<f32> = load %16
-    %18:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %18:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 1u
     %19:vec2<f32> = load %18
-    %20:ptr<uniform, vec2<f32>, read> = access %buffer, 3u
+    %20:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 2u
     %21:vec2<f32> = load %20
     %22:mat3x2<f32> = construct %17, %19, %21
     %23:vec2<f32> = access %22, 0u
@@ -1799,7 +1862,7 @@ $B1: {  # root
 }
 %load_vec_b = func():f32 {
   $B7: {
-    %29:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %29:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 1u
     %30:vec2<f32> = load %29
     %31:f32 = access %30, 1u
     ret %31
@@ -1814,7 +1877,7 @@ $B1: {  # root
 }
 %lve_b = func():f32 {
   $B9: {
-    %36:ptr<uniform, vec2<f32>, read> = access %buffer, 2u
+    %36:ptr<uniform, vec2<f32>, read> = access %buffer, 1u, 1u
     %37:f32 = load_vector_element %36, 1u
     ret %37
   }
@@ -1822,12 +1885,13 @@ $B1: {  # root
 %convert_MyStruct = func(%input:MyStruct_std140):MyStruct {
   $B10: {
     %39:mat4x4<f32> = access %input, 0u
-    %40:vec2<f32> = access %input, 1u
-    %41:vec2<f32> = access %input, 2u
-    %42:vec2<f32> = access %input, 3u
-    %43:mat3x2<f32> = construct %40, %41, %42
-    %44:MyStruct = construct %39, %43
-    ret %44
+    %40:mat3x2_f32_std140 = access %input, 1u
+    %41:vec2<f32> = access %40, 0u
+    %42:vec2<f32> = access %40, 1u
+    %43:vec2<f32> = access %40, 2u
+    %44:mat3x2<f32> = construct %41, %42, %43
+    %45:MyStruct = construct %39, %44
+    ret %45
   }
 }
 )";
@@ -1900,19 +1964,35 @@ MyStruct = struct @align(8), @block {
   d:mat4x4<f16> @offset(56)
 }
 
+mat2x2_f16_std140 = struct @align(4) {
+  col0:vec2<f16> @offset(0)
+  col1:vec2<f16> @offset(4)
+}
+
+mat2x4_f16_std140 = struct @align(8) {
+  col0_1:vec4<f16> @offset(0)
+  col1_1:vec4<f16> @offset(8)
+}
+
+mat4x3_f16_std140 = struct @align(8) {
+  col0_2:vec3<f16> @offset(0)
+  col1_2:vec3<f16> @offset(8)
+  col2:vec3<f16> @offset(16)
+  col3:vec3<f16> @offset(24)
+}
+
+mat4x4_f16_std140 = struct @align(8) {
+  col0_3:vec4<f16> @offset(0)
+  col1_3:vec4<f16> @offset(8)
+  col2_1:vec4<f16> @offset(16)
+  col3_1:vec4<f16> @offset(24)
+}
+
 MyStruct_std140 = struct @align(8), @block {
-  a_col0:vec2<f16> @offset(0)
-  a_col1:vec2<f16> @offset(4)
-  b_col0:vec4<f16> @offset(8)
-  b_col1:vec4<f16> @offset(16)
-  c_col0:vec3<f16> @offset(24)
-  c_col1:vec3<f16> @offset(32)
-  c_col2:vec3<f16> @offset(40)
-  c_col3:vec3<f16> @offset(48)
-  d_col0:vec4<f16> @offset(56)
-  d_col1:vec4<f16> @offset(64)
-  d_col2:vec4<f16> @offset(72)
-  d_col3:vec4<f16> @offset(80)
+  a:mat2x2_f16_std140 @offset(0)
+  b:mat2x4_f16_std140 @offset(8)
+  c:mat4x3_f16_std140 @offset(24)
+  d:mat4x4_f16_std140 @offset(56)
 }
 
 $B1: {  # root
@@ -1924,20 +2004,20 @@ $B1: {  # root
     %3:MyStruct_std140 = load %buffer
     %4:MyStruct = call %convert_MyStruct, %3
     %struct:MyStruct = let %4
-    %7:ptr<uniform, vec4<f16>, read> = access %buffer, 8u
+    %7:ptr<uniform, vec4<f16>, read> = access %buffer, 3u, 0u
     %8:vec4<f16> = load %7
-    %9:ptr<uniform, vec4<f16>, read> = access %buffer, 9u
+    %9:ptr<uniform, vec4<f16>, read> = access %buffer, 3u, 1u
     %10:vec4<f16> = load %9
-    %11:ptr<uniform, vec4<f16>, read> = access %buffer, 10u
+    %11:ptr<uniform, vec4<f16>, read> = access %buffer, 3u, 2u
     %12:vec4<f16> = load %11
-    %13:ptr<uniform, vec4<f16>, read> = access %buffer, 11u
+    %13:ptr<uniform, vec4<f16>, read> = access %buffer, 3u, 3u
     %14:vec4<f16> = load %13
     %15:mat4x4<f16> = construct %8, %10, %12, %14
     %mat:mat4x4<f16> = let %15
-    %17:ptr<uniform, vec3<f16>, read> = access %buffer, 5u
+    %17:ptr<uniform, vec3<f16>, read> = access %buffer, 2u, 1u
     %18:vec3<f16> = load %17
     %col:vec3<f16> = let %18
-    %20:ptr<uniform, vec4<f16>, read> = access %buffer, 2u
+    %20:ptr<uniform, vec4<f16>, read> = access %buffer, 1u, 0u
     %21:f16 = load_vector_element %20, 3u
     %el:f16 = let %21
     ret
@@ -1945,24 +2025,28 @@ $B1: {  # root
 }
 %convert_MyStruct = func(%input:MyStruct_std140):MyStruct {
   $B3: {
-    %24:vec2<f16> = access %input, 0u
-    %25:vec2<f16> = access %input, 1u
-    %26:mat2x2<f16> = construct %24, %25
-    %27:vec4<f16> = access %input, 2u
-    %28:vec4<f16> = access %input, 3u
-    %29:mat2x4<f16> = construct %27, %28
-    %30:vec3<f16> = access %input, 4u
-    %31:vec3<f16> = access %input, 5u
-    %32:vec3<f16> = access %input, 6u
-    %33:vec3<f16> = access %input, 7u
-    %34:mat4x3<f16> = construct %30, %31, %32, %33
-    %35:vec4<f16> = access %input, 8u
-    %36:vec4<f16> = access %input, 9u
-    %37:vec4<f16> = access %input, 10u
-    %38:vec4<f16> = access %input, 11u
-    %39:mat4x4<f16> = construct %35, %36, %37, %38
-    %40:MyStruct = construct %26, %29, %34, %39
-    ret %40
+    %24:mat2x2_f16_std140 = access %input, 0u
+    %25:vec2<f16> = access %24, 0u
+    %26:vec2<f16> = access %24, 1u
+    %27:mat2x2<f16> = construct %25, %26
+    %28:mat2x4_f16_std140 = access %input, 1u
+    %29:vec4<f16> = access %28, 0u
+    %30:vec4<f16> = access %28, 1u
+    %31:mat2x4<f16> = construct %29, %30
+    %32:mat4x3_f16_std140 = access %input, 2u
+    %33:vec3<f16> = access %32, 0u
+    %34:vec3<f16> = access %32, 1u
+    %35:vec3<f16> = access %32, 2u
+    %36:vec3<f16> = access %32, 3u
+    %37:mat4x3<f16> = construct %33, %34, %35, %36
+    %38:mat4x4_f16_std140 = access %input, 3u
+    %39:vec4<f16> = access %38, 0u
+    %40:vec4<f16> = access %38, 1u
+    %41:vec4<f16> = access %38, 2u
+    %42:vec4<f16> = access %38, 3u
+    %43:mat4x4<f16> = construct %39, %40, %41, %42
+    %44:MyStruct = construct %27, %31, %37, %43
+    ret %44
   }
 }
 )";
@@ -2017,17 +2101,21 @@ S = struct @align(16), @block {
   b:array<mat4x3<f32>, 3> @offset(48)
 }
 
-mat4x3_f32_std140 = struct @align(16) {
+mat3x3_f32_std140 = struct @align(16) {
   col0:vec3<f32> @offset(0)
   col1:vec3<f32> @offset(16)
   col2:vec3<f32> @offset(32)
+}
+
+mat4x3_f32_std140 = struct @align(16) {
+  col0_1:vec3<f32> @offset(0)
+  col1_1:vec3<f32> @offset(16)
+  col2_1:vec3<f32> @offset(32)
   col3:vec3<f32> @offset(48)
 }
 
 S_std140 = struct @align(16), @block {
-  a_col0:vec3<f32> @offset(0)
-  a_col1:vec3<f32> @offset(16)
-  a_col2:vec3<f32> @offset(32)
+  a:mat3x3_f32_std140 @offset(0)
   b:array<mat4x3_f32_std140, 3> @offset(48)
 }
 
@@ -2037,7 +2125,7 @@ $B1: {  # root
 
 %F = func():f32 {
   $B2: {
-    %3:ptr<uniform, vec3<f32>, read> = access %u, 3u, 0u, 0u
+    %3:ptr<uniform, vec3<f32>, read> = access %u, 1u, 0u, 0u
     %4:f32 = load_vector_element %3, 0u
     ret %4
   }
@@ -2108,24 +2196,26 @@ S2 = struct @align(16), @block {
   b:S1 @offset(48)
 }
 
-mat4x3_f32_std140 = struct @align(16) {
+mat3x3_f32_std140 = struct @align(16) {
   col0:vec3<f32> @offset(0)
   col1:vec3<f32> @offset(16)
   col2:vec3<f32> @offset(32)
+}
+
+mat4x3_f32_std140 = struct @align(16) {
+  col0_1:vec3<f32> @offset(0)
+  col1_1:vec3<f32> @offset(16)
+  col2_1:vec3<f32> @offset(32)
   col3:vec3<f32> @offset(48)
 }
 
 S1_std140 = struct @align(16) {
-  c_col0:vec3<f32> @offset(0)
-  c_col1:vec3<f32> @offset(16)
-  c_col2:vec3<f32> @offset(32)
+  c:mat3x3_f32_std140 @offset(0)
   d:array<mat4x3_f32_std140, 3> @offset(48)
 }
 
 S2_std140 = struct @align(16), @block {
-  a_col0:vec3<f32> @offset(0)
-  a_col1:vec3<f32> @offset(16)
-  a_col2:vec3<f32> @offset(32)
+  a:mat3x3_f32_std140 @offset(0)
   b:S1_std140 @offset(48)
 }
 
@@ -2135,7 +2225,7 @@ $B1: {  # root
 
 %F = func():f32 {
   $B2: {
-    %3:ptr<uniform, vec3<f32>, read> = access %u, 3u, 3u, 0u, 0u
+    %3:ptr<uniform, vec3<f32>, read> = access %u, 1u, 1u, 0u, 0u
     %4:f32 = load_vector_element %3, 0u
     ret %4
   }
@@ -2202,15 +2292,23 @@ S2 = struct @align(16), @block {
   b:S1 @offset(48)
 }
 
+mat3x3_f32_std140 = struct @align(16) {
+  col0:vec3<f32> @offset(0)
+  col1:vec3<f32> @offset(16)
+  col2:vec3<f32> @offset(32)
+}
+
+mat2x2_f32_std140 = struct @align(8) {
+  col0_1:vec2<f32> @offset(0)
+  col1_1:vec2<f32> @offset(8)
+}
+
 S1_std140 = struct @align(8) {
-  c_col0:vec2<f32> @offset(0)
-  c_col1:vec2<f32> @offset(8)
+  c:mat2x2_f32_std140 @offset(0)
 }
 
 S2_std140 = struct @align(16), @block {
-  a_col0:vec3<f32> @offset(0)
-  a_col1:vec3<f32> @offset(16)
-  a_col2:vec3<f32> @offset(32)
+  a:mat3x3_f32_std140 @offset(0)
   b:S1_std140 @offset(48)
 }
 
@@ -2220,7 +2318,7 @@ $B1: {  # root
 
 %F = func():f32 {
   $B2: {
-    %3:ptr<uniform, vec2<f32>, read> = access %u, 3u, 0u
+    %3:ptr<uniform, vec2<f32>, read> = access %u, 1u, 0u, 0u
     %4:f32 = load_vector_element %3, 0u
     ret %4
   }
