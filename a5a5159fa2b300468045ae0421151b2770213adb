@@ -52,6 +52,24 @@
       "parentUuid": "5283bc7f_549a1051",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f191106_4a37d65f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-09T16:05:07Z",
+      "side": 1,
+      "message": "btw, I guess your original question is why don\u0027t we use VK_EXT_multisampled_render_to_single_sampled to implement DawnLoadResolveTexture.\n- first is that it is not available everywhere.\n- Second its semantics is not the same as DawnLoadResolveTexture. VK_EXT_multisampled_render_to_single_sampled is \"giving dawn a single sampled texture, expect it to use multimsapling transparently\". Whereas DawnLoadResolveTexture is about \"giving Dawn both single sampled texture and MSAA texture and expect single sampled texture to be copied to MSAA texture\". We could use VK_EXT_multisampled_render_to_single_sampled and completely ignore the MSAA texture provided but it would work incorrectly if they want to store the MSAA texture.",
+      "parentUuid": "5283bc7f_549a1051",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
