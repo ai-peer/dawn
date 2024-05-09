@@ -30,7 +30,10 @@
 //* Emscripten's library_webgpu.js.
 //* https://github.com/emscripten-core/emscripten/blob/main/src/library_webgpu.js
 //*
-    {% for type in by_category["enum"] if not type.json_data.get("emscripten_no_enum_table") %}
+{{'{{{'}}
+    globalThis.__HAVE_DAWN_WEBGPU_ENUM_TABLES = true;
+    globalThis.WEBGPU_ENUM_TABLES = `
+        {% for type in by_category["enum"] if not type.json_data.get("emscripten_no_enum_table") %}
         {{type.name.CamelCase()}}: {% if type.contiguousFromZero -%}
             [
                 {% for value in type.values %}
@@ -46,3 +49,7 @@
         {%- endif -%}
         ,
     {% endfor %}
+`;
+
+    null;
+{{'}}}'}}
