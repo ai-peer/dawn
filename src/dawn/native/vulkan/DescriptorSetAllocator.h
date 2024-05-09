@@ -53,6 +53,7 @@ class DescriptorSetAllocator : public ObjectBase {
         absl::flat_hash_map<VkDescriptorType, uint32_t> descriptorCountPerType);
 
     ResultOrError<DescriptorSetAllocation> Allocate(BindGroupLayout* layout);
+    ResultOrError<DescriptorSetAllocation> Allocate(VkDescriptorSetLayout layout);
     void Deallocate(DescriptorSetAllocation* allocationInfo);
     void FinishDeallocation(ExecutionSerial completedSerial);
 
@@ -61,7 +62,7 @@ class DescriptorSetAllocator : public ObjectBase {
                            absl::flat_hash_map<VkDescriptorType, uint32_t> descriptorCountPerType);
     ~DescriptorSetAllocator() override;
 
-    MaybeError AllocateDescriptorPool(BindGroupLayout* layout);
+    MaybeError AllocateDescriptorPool(VkDescriptorSetLayout layout);
 
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     SetIndex mMaxSets;
