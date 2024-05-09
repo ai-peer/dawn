@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cbac3f_2110b5a9",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-09T19:28:13Z",
+      "side": 1,
+      "message": "I\u0027m thinking about aliasing all of these in `mock_api.h` thoughts?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 86
+      },
+      "revId": "d46ed044cd30d30bd1230090b601da32297cfdf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

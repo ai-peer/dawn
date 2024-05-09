@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "585e4a28_20b003eb",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-09T19:28:13Z",
+      "side": 0,
+      "message": "I completely removed this test because I\u0027m pretty sure that the spec doesn\u0027t actually have this guarantee?",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 1
+      },
+      "revId": "5d3cb57981f7d8cc98b9f08c9a90e4eb935834af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
