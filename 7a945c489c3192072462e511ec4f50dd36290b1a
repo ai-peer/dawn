@@ -52,6 +52,24 @@
       "parentUuid": "6f923826_5c5de9bd",
       "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3bc2921_e17e8cd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-09T06:12:04Z",
+      "side": 1,
+      "message": "Thanks for letting me know this information.\n\nI also found some code that needs to be modified in Emscripten and webgpu-headers. I have initiated two PRs.\n\nhttps://github.com/webgpu-native/webgpu-headers/pull/288\n\nhttps://github.com/emscripten-core/emscripten/pull/21914",
+      "parentUuid": "dbab743b_bdb63d72",
+      "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
