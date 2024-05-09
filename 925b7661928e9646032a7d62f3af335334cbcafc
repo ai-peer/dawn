@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51bc0937_8deea542",
+        "filename": "src/dawn/native/SharedBufferMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "at least right now we have the normal buffer state, and the shared resource memory access/no-access state in a single enum so its quick to validate\n\nto make it already set, we\u0027d have to pass some args all the way through CreateBufferImpl to the backend overrides, to the constructor. Didn\u0027t seem worth it to me",
+      "parentUuid": "84edf2a0_f5c3ec30",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 26
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eaa1f638_376baee7",
         "filename": "src/dawn/native/SharedResourceMemory.cpp",
         "patchSetId": 8
@@ -106,6 +130,30 @@
       "writtenOn": "2024-05-08T02:27:46Z",
       "side": 1,
       "message": "nit. acquire",
+      "range": {
+        "startLine": 278,
+        "startChar": 36,
+        "endLine": 278,
+        "endChar": 45
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f378bbe_93010b89",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eaa1f638_376baee7",
       "range": {
         "startLine": 278,
         "startChar": 36,
@@ -129,6 +177,30 @@
       "writtenOn": "2024-05-08T23:05:34Z",
       "side": 1,
       "message": "nit: IMO Pause/ResumeAccess is confusing because we also have Begin/EndAccess elsewhere - maybe this should be something like OnBegin/EndAccess or just Begin/EndAccess?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 36
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6635abd2_78861cac",
+        "filename": "src/dawn/native/SharedResourceMemory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "renamed to OnBeginAccess / OnEndAccess",
+      "parentUuid": "f246191b_d2cf2efd",
       "range": {
         "startLine": 54,
         "startChar": 0,
@@ -180,6 +252,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61357a3e_09cd73aa",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c8b8ed3_76eaab33",
+      "range": {
+        "startLine": 180,
+        "startChar": 56,
+        "endLine": 180,
+        "endChar": 57
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "863f151e_a5e11a39",
@@ -221,6 +317,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f86d53_3f6d8e2c",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "863f151e_a5e11a39",
+      "range": {
+        "startLine": 46,
+        "startChar": 53,
+        "endLine": 46,
+        "endChar": 85
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55292760_b8f66300",
@@ -234,6 +354,30 @@
       "writtenOn": "2024-05-08T23:05:34Z",
       "side": 1,
       "message": "nit: it might be worthwhile to check this happens even if there are some operations that use noopTexture like sampling / copying from it?",
+      "range": {
+        "startLine": 1723,
+        "startChar": 12,
+        "endLine": 1723,
+        "endChar": 91
+      },
+      "revId": "925b7661928e9646032a7d62f3af335334cbcafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b940353f_6173331c",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T16:25:27Z",
+      "side": 1,
+      "message": "I think it really must be a noop. If we do actual operations, then we will need to have acquired the pending fences.\n\nAnd then, that means we will export a new fence point to the last read - instead of forwarding along the unused begin fences",
+      "parentUuid": "55292760_b8f66300",
       "range": {
         "startLine": 1723,
         "startChar": 12,
