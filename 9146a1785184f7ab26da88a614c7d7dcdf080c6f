@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77db9d1_f6074a63",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-09T14:49:32Z",
+      "side": 1,
+      "message": "Can we ever actually get here with valid input? We only process uniform buffers and instructions derived from them.\nSo maybe just `TINT_ASSERT` (if anything)?",
+      "revId": "9146a1785184f7ab26da88a614c7d7dcdf080c6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
