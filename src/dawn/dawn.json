@@ -3328,12 +3328,22 @@
     },
 
     "dawn multisample state render to single sampled": {
-        "tags": ["dawn"],
+        "tags": ["dawn", "deprecated"],
         "category": "structure",
         "chained": "in",
         "chain roots": ["multisample state"],
         "members": [
             {"name": "enabled", "type": "bool", "default": "false"}
+        ]
+    },
+
+    "dawn multisample resolve state": {
+        "tags": ["dawn"],
+        "category": "structure",
+        "chained": "in",
+        "chain roots": ["multisample state"],
+        "members": [
+            {"name": "expand resolve load op enabled", "type": "bool", "default": "false"}
         ]
     },
 
@@ -3731,7 +3741,7 @@
             {"value": 1010, "name": "request adapter options LUID", "tags": ["dawn", "native"]},
             {"value": 1011, "name": "request adapter options get GL proc", "tags": ["dawn", "native"]},
             {"value": 1012, "name": "request adapter options D3D11 device", "tags": ["dawn", "native"]},
-            {"value": 1013, "name": "dawn multisample state render to single sampled", "tags": ["dawn"]},
+            {"value": 1013, "name": "dawn multisample state render to single sampled", "tags": ["dawn", "deprecated"]},
             {"value": 1014, "name": "dawn render pass color attachment render to single sampled", "tags": ["dawn"]},
             {"value": 1015, "name": "render pass pixel local storage", "tags": ["dawn"]},
             {"value": 1016, "name": "pipeline layout pixel local storage", "tags": ["dawn"]},
@@ -3745,6 +3755,7 @@
             {"value": 1024, "name": "dawn WGSL blocklist", "tags": ["dawn", "native"]},
             {"value": 1025, "name": "drm format capabilities", "tags": ["dawn"]},
             {"value": 1026, "name": "shader module compilation options", "tags": ["dawn"]},
+            {"value": 1027, "name": "dawn multisample resolve state", "tags": ["dawn"]},
 
             {"value": 1100, "name": "shared texture memory vk image descriptor", "tags": ["dawn", "native"]},
             {"value": 1101, "name": "shared texture memory vk dedicated allocation descriptor", "tags": ["dawn", "native"]},
