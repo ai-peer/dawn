@@ -45,6 +45,7 @@ build_with_angle = false
 # The paths to Dawn's dependencies
 dawn_abseil_dir = "//third_party/abseil-cpp"
 dawn_angle_dir = "//third_party/angle"
+dawn_emsdk_dir = ""
 dawn_jinja2_dir = "//third_party/jinja2"
 dawn_glfw_dir = "//third_party/glfw"
 dawn_googletest_dir = "//third_party/googletest"
