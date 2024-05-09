@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "944e9034_debf9e44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-09T06:26:27Z",
+      "side": 1,
+      "message": "Nice! This is great!",
+      "revId": "538a5026c59a56e3141608bf0d53a07227ee97f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eda9f6f4_4872b763",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-09T06:26:27Z",
+      "side": 1,
+      "message": "IIUC, this is the only call that requires `instance` to be passed to `GetSurfaceCapabilities` throughout the frontend. Would it be possible to move this into `vulkan/PhysicalDeviceVk.h` (or something similar) like with the `AHBFunctions`?",
+      "range": {
+        "startLine": 140,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "e12ff6f8_315abf63",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/Instance.h",
+              "range": {
+                "startLine": 140,
+                "startChar": 0,
+                "endLine": 141,
+                "endChar": 0
+              },
+              "replacement": "    const X11Functions* GetOrLoadX11Functions() const;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "538a5026c59a56e3141608bf0d53a07227ee97f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
