@@ -71,6 +71,7 @@ struct RenderPassCacheQuery {
     PerColorAttachment<wgpu::TextureFormat> colorFormats;
     PerColorAttachment<wgpu::LoadOp> colorLoadOp;
     PerColorAttachment<wgpu::StoreOp> colorStoreOp;
+    bool hasExpandResolveLoadOp = false;
 
     bool hasDepthStencil = false;
     wgpu::TextureFormat depthStencilFormat;
@@ -83,6 +84,8 @@ struct RenderPassCacheQuery {
 
     uint32_t sampleCount;
 };
+
+uint32_t GetRenderPassMainSubpassIndex(const RenderPassCacheQuery& query);
 
 // Caches VkRenderPasses so that we don't create duplicate ones for every RenderPipeline or
 // render pass. We always arrange the order of attachments in "color-depthstencil-resolve" order
