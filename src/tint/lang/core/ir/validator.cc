@@ -448,6 +448,7 @@ Result<SuccessType> Validator::Run() {
 }
 
 diag::Diagnostic& Validator::AddError(const Instruction* inst) {
+    diagnostics_.ReserveAdditional(2);  // Ensure diagnostics don't resize alive after AddNote()
     auto src = Disassembly().InstructionSource(inst);
     auto& diag = AddError(src) << inst->FriendlyName() << ": ";
 
@@ -458,6 +459,7 @@ diag::Diagnostic& Validator::AddError(const Instruction* inst) {
 }
 
 diag::Diagnostic& Validator::AddError(const Instruction* inst, size_t idx) {
+    diagnostics_.ReserveAdditional(2);  // Ensure diagnostics don't resize alive after AddNote()
     auto src =
         Disassembly().OperandSource(Disassembly::IndexedValue{inst, static_cast<uint32_t>(idx)});
     auto& diag = AddError(src) << inst->FriendlyName() << ": ";
@@ -469,6 +471,7 @@ diag::Diagnostic& Validator::AddError(const Instruction* inst, size_t idx) {
 }
 
 diag::Diagnostic& Validator::AddResultError(const Instruction* inst, size_t idx) {
+    diagnostics_.ReserveAdditional(2);  // Ensure diagnostics don't resize alive after AddNote()
     auto src =
         Disassembly().ResultSource(Disassembly::IndexedValue{inst, static_cast<uint32_t>(idx)});
     auto& diag = AddError(src) << inst->FriendlyName() << ": ";
