@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,51 +25,30 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_BLITCOLORTOCOLORWITHDRAW_H_
-#define SRC_DAWN_NATIVE_BLITCOLORTOCOLORWITHDRAW_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_RESOLVETEXTURELOADINGUTILSVK_H_
+#define SRC_DAWN_NATIVE_VULKAN_RESOLVETEXTURELOADINGUTILSVK_H_
 
-#include "absl/container/flat_hash_map.h"
+#include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
 
 namespace dawn::native {
 
-class DeviceBase;
-class RenderPassEncoder;
-struct RenderPassDescriptor;
-class TextureViewBase;
+struct BeginRenderPassCmd;
 
-struct BlitColorToColorWithDrawPipelineKey {
-    wgpu::TextureFormat colorFormat;
-    wgpu::TextureFormat depthStencilFormat;
-    uint32_t sampleCount = 1;
+namespace vulkan {
 
-    struct HashFunc {
-        size_t operator()(const BlitColorToColorWithDrawPipelineKey& key) const;
-    };
-
-    struct EqualityFunc {
-        bool operator()(const BlitColorToColorWithDrawPipelineKey& a,
-                        const BlitColorToColorWithDrawPipelineKey& b) const;
-    };
-};
-
-template <typename PipelineType>
-using BlitColorToColorWithDrawPipelinesCache =
-    absl::flat_hash_map<BlitColorToColorWithDrawPipelineKey,
-                        PipelineType,
-                        BlitColorToColorWithDrawPipelineKey::HashFunc,
-                        BlitColorToColorWithDrawPipelineKey::EqualityFunc>;
+class Device;
 
 // This function performs the ExpandResolveTexture load operation for the render pass by blitting
 // the resolve target to the MSAA attachment.
 //
 // The function assumes that the render pass is already started. It won't break the render pass,
 // just performing a draw call to blit.
-// This is only valid if the device's IsResolveTextureBlitWithDrawSupported() is true.
-MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
-                                        RenderPassEncoder* renderEncoder,
-                                        const RenderPassDescriptor* renderPassDescriptor);
+MaybeError ExpandResolveTextureWithDrawInSubpass(Device* device,
+                                                 VkCommandBuffer commandBuffer,
+                                                 const BeginRenderPassCmd* renderPass);
 
+}  // namespace vulkan
 }  // namespace dawn::native
 
-#endif  // SRC_DAWN_NATIVE_BLITCOLORTOCOLORWITHDRAW_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_RESOLVETEXTURELOADINGUTILSVK_H_
