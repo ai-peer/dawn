@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "867d43dc_2afb80b2",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-09T02:00:42Z",
+      "side": 1,
+      "message": "This should work, I believe. However it seems too specific. `CreateVideoTextureForTest` is backend specific, so we\u0027d better expect something general here. Looking into it in [mac](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/VideoViewsTests_mac.cpp;drc\u003d9445a34c5b4e87f00f4e82eb2729baabec9d7a6b;l\u003d123), the same problem once showed up. The decision was to swallow one, and raise the other. Maybe we can simply follow it, or work out a better one.",
+      "parentUuid": "922ed2de_22c1a70d",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
