@@ -323,7 +323,7 @@ class Impl {
 
             // Note, interpolated is only valid when paired with Location, so it will only be set
             // when the location is set.
-            std::optional<core::Interpolation> interpolation;
+            core::Interpolation interpolation;
             for (auto* attr : ast_func->return_type_attributes) {
                 tint::Switch(
                     attr,  //
@@ -358,7 +358,7 @@ class Impl {
 
             // Note, interpolated is only valid when paired with Location, so it will only be set
             // when the location is set.
-            std::optional<core::Interpolation> interpolation;
+            core::Interpolation interpolation;
             for (auto* attr : p->attributes) {
                 tint::Switch(
                     attr,  //

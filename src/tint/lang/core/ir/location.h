@@ -28,8 +28,6 @@
 #ifndef SRC_TINT_LANG_CORE_IR_LOCATION_H_
 #define SRC_TINT_LANG_CORE_IR_LOCATION_H_
 
-#include <optional>
-
 #include "src/tint/lang/core/interpolation.h"
 
 namespace tint::core::ir {
@@ -39,7 +37,7 @@ struct Location {
     /// The location value
     uint32_t value = 0;
     /// The interpolation settings
-    std::optional<core::Interpolation> interpolation;
+    core::Interpolation interpolation;
 };
 
 }  // namespace tint::core::ir

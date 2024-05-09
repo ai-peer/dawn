@@ -614,9 +614,9 @@ struct Encoder {
     // Attributes
     ////////////////////////////////////////////////////////////////////////////
     void Location(pb::Location& location_out, const ir::Location& location_in) {
-        if (auto interpolation_in = location_in.interpolation) {
+        if (location_in.interpolation.type != core::InterpolationType::kUndefined) {
             auto& interpolation_out = *location_out.mutable_interpolation();
-            Interpolation(interpolation_out, *interpolation_in);
+            Interpolation(interpolation_out, location_in.interpolation);
         }
         location_out.set_value(location_in.value);
     }

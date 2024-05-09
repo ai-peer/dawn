@@ -1522,8 +1522,8 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithoutPolyfill) {
 
     auto* in1 = b.FunctionParam("in1", ty.f16());
     auto* in2 = b.FunctionParam("in2", ty.vec4<f16>());
-    in1->SetLocation(1, std::nullopt);
-    in1->SetLocation(2, std::nullopt);
+    in1->SetLocation(1, {});
+    in1->SetLocation(2, {});
     auto* func = b.Function("main", outputs, core::ir::Function::PipelineStage::kFragment);
     func->SetParams({in1, in2});
     b.Append(func->Block(), [&] {  //
@@ -1616,8 +1616,8 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithPolyfill) {
 
     auto* in1 = b.FunctionParam("in1", ty.f16());
     auto* in2 = b.FunctionParam("in2", ty.vec4<f16>());
-    in1->SetLocation(1, std::nullopt);
-    in1->SetLocation(2, std::nullopt);
+    in1->SetLocation(1, {});
+    in1->SetLocation(2, {});
     auto* func = b.Function("main", outputs, core::ir::Function::PipelineStage::kFragment);
     func->SetParams({in1, in2});
     b.Append(func->Block(), [&] {  //

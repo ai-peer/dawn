@@ -2003,32 +2003,32 @@ class Printer {
             module_.PushAnnot(spv::Op::OpDecorate,
                               {id, U32Operand(SpvDecorationIndex), *attrs.blend_src});
         }
-        if (attrs.interpolation) {
-            switch (attrs.interpolation->type) {
-                case core::InterpolationType::kLinear:
-                    module_.PushAnnot(spv::Op::OpDecorate,
-                                      {id, U32Operand(SpvDecorationNoPerspective)});
-                    break;
-                case core::InterpolationType::kFlat:
-                    module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationFlat)});
-                    break;
-                case core::InterpolationType::kPerspective:
-                case core::InterpolationType::kUndefined:
-                    break;
-            }
-            switch (attrs.interpolation->sampling) {
-                case core::InterpolationSampling::kCentroid:
-                    module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationCentroid)});
-                    break;
-                case core::InterpolationSampling::kSample:
-                    module_.PushCapability(SpvCapabilitySampleRateShading);
-                    module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationSample)});
-                    break;
-                case core::InterpolationSampling::kCenter:
-                case core::InterpolationSampling::kUndefined:
-                    break;
-            }
+
+        switch (attrs.interpolation.type) {
+            case core::InterpolationType::kLinear:
+                module_.PushAnnot(spv::Op::OpDecorate,
+                                  {id, U32Operand(SpvDecorationNoPerspective)});
+                break;
+            case core::InterpolationType::kFlat:
+                module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationFlat)});
+                break;
+            case core::InterpolationType::kPerspective:
+            case core::InterpolationType::kUndefined:
+                break;
         }
+        switch (attrs.interpolation.sampling) {
+            case core::InterpolationSampling::kCentroid:
+                module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationCentroid)});
+                break;
+            case core::InterpolationSampling::kSample:
+                module_.PushCapability(SpvCapabilitySampleRateShading);
+                module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationSample)});
+                break;
+            case core::InterpolationSampling::kCenter:
+            case core::InterpolationSampling::kUndefined:
+                break;
+        }
+
         if (attrs.builtin) {
             module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationBuiltIn),
                                                     Builtin(*attrs.builtin, addrspace)});

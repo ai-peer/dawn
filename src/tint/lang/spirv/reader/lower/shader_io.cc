@@ -247,7 +247,7 @@ struct State {
             } else if (attributes.location) {
                 core::ir::Location loc;
                 loc.value = attributes.location.value();
-                loc.interpolation = attributes.interpolation;
+                loc.interpolation = *attributes.interpolation;
                 wrapper->SetReturnLocation(std::move(loc));
             }
 

@@ -136,8 +136,8 @@ struct State {
                 core::type::StructMemberAttributes attributes;
                 if (auto loc = param->Location()) {
                     attributes.location = loc->value;
-                    if (loc->interpolation && func->Stage() == Function::PipelineStage::kFragment) {
-                        attributes.interpolation = *loc->interpolation;
+                    if (func->Stage() == Function::PipelineStage::kFragment) {
+                        attributes.interpolation = loc->interpolation;
                     }
                     param->ClearLocation();
                 } else if (auto builtin = param->Builtin()) {
@@ -174,8 +174,8 @@ struct State {
             core::type::StructMemberAttributes attributes;
             if (auto loc = func->ReturnLocation()) {
                 attributes.location = loc->value;
-                if (loc->interpolation && func->Stage() == Function::PipelineStage::kVertex) {
-                    attributes.interpolation = *loc->interpolation;
+                if (func->Stage() == Function::PipelineStage::kVertex) {
+                    attributes.interpolation = loc->interpolation;
                 }
                 func->ClearReturnLocation();
             } else if (auto builtin = func->ReturnBuiltin()) {
