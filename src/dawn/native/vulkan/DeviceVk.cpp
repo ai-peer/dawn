@@ -117,6 +117,8 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
         mDeleter = std::make_unique<MutexProtected<FencedDeleter>>(this);
     }
 
+    mInternalPipelineStoreVk = std::make_unique<InternalPipelineStore>(this);
+
     if (IsToggleEnabled(Toggle::VulkanSkipDraw)) {
         // Chrome skips draw for some tests.
         functions->CmdDraw = NoopDrawFunction<PFN_vkCmdDraw>::Fun;
@@ -677,12 +679,13 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
     DAWN_INVALID_IF(!mExternalSemaphoreService->Supported(),
                     "External semaphore usage not supported");
 
-    DAWN_INVALID_IF(!mExternalMemoryService->SupportsImportMemory(
-                        descriptor->GetType(), VulkanImageFormat(this, textureDescriptor->format),
-                        VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL,
-                        VulkanImageUsage(usage, GetValidInternalFormat(textureDescriptor->format)),
-                        VK_IMAGE_CREATE_ALIAS_BIT_KHR),
-                    "External memory usage not supported");
+    DAWN_INVALID_IF(
+        !mExternalMemoryService->SupportsImportMemory(
+            descriptor->GetType(), VulkanImageFormat(this, textureDescriptor->format),
+            VK_IMAGE_TYPE_2D, VK_IMAGE_TILING_OPTIMAL,
+            VulkanImageUsage(this, usage, GetValidInternalFormat(textureDescriptor->format)),
+            VK_IMAGE_CREATE_ALIAS_BIT_KHR),
+        "External memory usage not supported");
 
     // Import the external image's memory
     external_memory::MemoryImportParams importParams;
@@ -837,6 +840,10 @@ void Device::CheckDebugMessagesAfterDestruction() const {
     DAWN_ASSERT(false);
 }
 
+InternalPipelineStore* Device::GetInternalPipelineStoreVk() {
+    return mInternalPipelineStoreVk.get();
+}
+
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
 
@@ -885,6 +892,9 @@ void Device::DestroyImpl() {
     // The VkRenderPasses in the cache can be destroyed immediately since all commands referring
     // to them are guaranteed to be finished executing.
     mRenderPassCache = nullptr;
+
+    // Destroy internal vulkan pipelines
+    mInternalPipelineStoreVk = nullptr;
 
     // Delete all the remaining VkDevice child objects immediately since the GPU timeline is
     // finished.

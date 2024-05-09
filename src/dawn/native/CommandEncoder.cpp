@@ -935,9 +935,11 @@ MaybeError ApplyExpandResolveTextureLoadOp(DeviceBase* device,
         return {};
     }
 
-    // TODO(dawn:1710): support loading resolve texture on platforms that don't support reading
-    // it in fragment shader such as vulkan.
-    DAWN_ASSERT(device->IsResolveTextureBlitWithDrawSupported());
+    // If backend doesn't support blit resolve to MSAA attachment, then it will need to handle it
+    // internally.
+    if (!device->IsResolveTextureBlitWithDrawSupported()) {
+        return {};
+    }
 
     // Read implicit resolve texture in fragment shader and copy to the implicit MSAA attachment.
     return ExpandResolveTextureWithDraw(device, renderPassEncoder, renderPassDescriptor);
@@ -1258,6 +1260,10 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 usageTracker.TextureViewUsedAs(colorTarget, wgpu::TextureUsage::RenderAttachment);
 
                 if (resolveTarget != nullptr) {
+                    if (descColorAttachment.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+                        usageTracker.TextureViewUsedAs(resolveTarget,
+                                                       kResolveAttachmentLoadingUsage);
+                    }
                     usageTracker.TextureViewUsedAs(resolveTarget,
                                                    wgpu::TextureUsage::RenderAttachment);
                 }

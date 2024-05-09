@@ -154,6 +154,11 @@ VkAccessFlags VulkanAccessFlags(wgpu::TextureUsage usage, const Format& format) 
         flags |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
     }
 
+    if (usage & kResolveAttachmentLoadingUsage) {
+        // The texture is read as subpass input in fragment shader
+        flags |= VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;
+    }
+
     if (usage & kPresentAcquireTextureUsage) {
         // The present acquire usage is only used internally by the swapchain and is never used in
         // combination with other usages.
@@ -234,6 +239,10 @@ VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage,
             flags |= VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         }
     }
+    if (usage & kResolveAttachmentLoadingUsage) {
+        // The texture is read as subpass input in fragment shader
+        flags |= VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    }
     if (usage & (wgpu::TextureUsage::RenderAttachment | kReadOnlyRenderAttachment)) {
         if (format.HasDepthOrStencil()) {
             flags |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT |
@@ -302,8 +311,21 @@ VkImageMemoryBarrier BuildMemoryBarrier(const Texture* texture,
     barrier.pNext = nullptr;
     barrier.srcAccessMask = VulkanAccessFlags(lastUsage, format);
     barrier.dstAccessMask = VulkanAccessFlags(usage, format);
-    barrier.oldLayout = VulkanImageLayout(format, lastUsage);
-    barrier.newLayout = VulkanImageLayout(format, usage);
+
+    // special case: the texture is used as input attachment for first subpass for loading resolve
+    // texture. Then the main subpass will use it as resolve attachment. If it is old usage, then
+    // the old layout is RenderAttachment's layout. If it is new usage then the new layout is
+    // TextureBinding's layout.
+    if (lastUsage == kResolveTextureLoadAndStoreUsages) {
+        barrier.oldLayout = VulkanImageLayout(format, wgpu::TextureUsage::RenderAttachment);
+    } else {
+        barrier.oldLayout = VulkanImageLayout(format, lastUsage);
+    }
+    if (usage == kResolveTextureLoadAndStoreUsages) {
+        barrier.newLayout = VulkanImageLayout(format, wgpu::TextureUsage::TextureBinding);
+    } else {
+        barrier.newLayout = VulkanImageLayout(format, usage);
+    }
     barrier.image = texture->GetHandle();
     barrier.subresourceRange.aspectMask = VulkanAspectMask(range.aspects);
     barrier.subresourceRange.baseMipLevel = range.baseMipLevel;
@@ -574,7 +596,9 @@ ResultOrError<wgpu::TextureFormat> FormatFromVkFormat(const Device* device, VkFo
 
 // Converts the Dawn usage flags to Vulkan usage flags. Also needs the format to choose
 // between color and depth attachment usages.
-VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& format) {
+VkImageUsageFlags VulkanImageUsage(DeviceBase* device,
+                                   wgpu::TextureUsage usage,
+                                   const Format& format) {
     VkImageUsageFlags flags = 0;
 
     if (usage & wgpu::TextureUsage::CopySrc) {
@@ -601,6 +625,11 @@ VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& forma
         } else {
             flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
         }
+    }
+
+    if (usage & (wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding) &&
+        device->HasFeature(Feature::DawnLoadResolveTexture)) {
+        flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
     }
 
     // Choosing Vulkan image usages should not know about kReadOnlyRenderAttachment because that's
@@ -834,7 +863,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
     createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     createInfo.format = VulkanImageFormat(device, GetFormat().format);
     createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-    createInfo.usage = VulkanImageUsage(GetInternalUsage(), GetFormat()) | extraUsages;
+    createInfo.usage = VulkanImageUsage(device, GetInternalUsage(), GetFormat()) | extraUsages;
     createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
     createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
@@ -954,7 +983,7 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
                                            external_memory::Service* externalMemoryService) {
     Device* device = ToBackend(GetDevice());
     VkFormat format = VulkanImageFormat(device, GetFormat().format);
-    VkImageUsageFlags usage = VulkanImageUsage(GetInternalUsage(), GetFormat());
+    VkImageUsageFlags usage = VulkanImageUsage(device, GetInternalUsage(), GetFormat());
 
     [[maybe_unused]] bool supportsDisjoint;
     DAWN_INVALID_IF(
@@ -1759,7 +1788,7 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
 
     VkImageViewUsageCreateInfo usageInfo = {};
     usageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO;
-    usageInfo.usage = VulkanImageUsage(usage, GetFormat());
+    usageInfo.usage = VulkanImageUsage(device, usage, GetFormat());
     createInfo.pNext = &usageInfo;
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
