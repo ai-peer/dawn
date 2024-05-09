@@ -16,6 +16,24 @@
       "message": "might be missing some context - why did we decide to not use VK_EXT_multisampled_render_to_single_sampled on Vulkan?\n\nthe docs say the extension is much more efficient on some hardware",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5283bc7f_549a1051",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-09T15:07:59Z",
+      "side": 1,
+      "message": "No we don\u0027t drop VK_EXT_multisampled_render_to_single_sampled. It\u0027s just that we don\u0027t need to implement MSAARenderToSingleSampled using 2 subpasses anymore. So I think we should drop the DawnMultisampleStateRenderToSingleSampled chained struct. That struct was originally intended for 2 subpasses implementation in vulkan where the render pipeline has to be compatible with the render pass with 2 subpasses.\n\nIn short:\n- DawnMultisampleStateRenderToSingleSampled will be implemented using VK_EXT_multisampled_render_to_single_sampled directly, there is no need for pipeline \u0026 render pass\u0027 compatibility anymore.\n- DawnLoadResolveTexture will be implemented in vulkan using 2 subpasses. And it needs pipeline compatibility info such as the new struct. Because VK_EXT_multisampled_render_to_single_sampled is not supported on all hardwares, so still need this feature implementation as an alternative.",
+      "parentUuid": "ce3662ef_1a37d655",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
