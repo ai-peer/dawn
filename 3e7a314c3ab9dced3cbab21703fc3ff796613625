@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8651d57f_7392a310",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-09T06:40:34Z",
+      "side": 1,
+      "message": "Sounds fair. Win and Mac can have the same error handling and semantics. we\u0027d better keep them in sync. We can either have Win swallow one error, or add an extra expect of \"[object] is invalid\" and remove the swallow for Mac. Which would you prefer?",
+      "parentUuid": "3f67df92_03df9b0c",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
