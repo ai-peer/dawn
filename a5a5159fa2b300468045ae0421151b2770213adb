@@ -124,6 +124,24 @@
       "parentUuid": "a16e7539_f5db6d9c",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dddf4f6_fb2a5eee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-09T16:45:03Z",
+      "side": 1,
+      "message": "btw, my lowend device is samsung A05s. Released last year. It has Adreno 610 GPU. Weird that it doesn\u0027t support VK_EXT_multisampled_render_to_single_sampled.",
+      "parentUuid": "d010a2f8_11d8c065",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
