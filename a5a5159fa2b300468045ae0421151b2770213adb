@@ -70,6 +70,24 @@
       "parentUuid": "5283bc7f_549a1051",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22dfbc74_1a92ca46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-09T16:10:32Z",
+      "side": 1,
+      "message": "Well the second thing is not really an issue, I guess if VK_EXT_multisampled_render_to_single_sampled is used, we can just copy the resolve texture to MSAA texture at the end of the render pass if they want to store.",
+      "parentUuid": "2f191106_4a37d65f",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
