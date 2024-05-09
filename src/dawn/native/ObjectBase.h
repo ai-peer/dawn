@@ -31,6 +31,7 @@
 #include <mutex>
 #include <string>
 
+#include "absl/base/config.h"
 #include "dawn/common/LinkedList.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/Ref.h"
@@ -38,7 +39,9 @@
 #include "dawn/native/Forward.h"
 
 namespace absl {
+ABSL_NAMESPACE_BEGIN
 class FormatSink;
+ABSL_NAMESPACE_END
 }
 
 namespace dawn::native {
