@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f67df92_03df9b0c",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T06:10:34Z",
+      "side": 1,
+      "message": "I think it might not be too specific. all backends will eventually use shared texture memory - and that means that they will likely all have the same error handling and semantics. and in Dawn, that means all future calls using an error object will say \"[object] is invalid\".\n\nI suppose I am also ok with ASSERT_DEVICE_ERRORS, but I think it\u0027s a bit better to start with something narrow, and expand it as needed. that way we know there aren\u0027t other unexpected errors happening.",
+      "parentUuid": "2ae16d6f_00ad2896",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
