@@ -1139,37 +1139,38 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('api.h', 'webgpu-headers/' + api + '.h',
                            [RENDER_PARAMS_BASE, params_upstream]))
 
-        if 'emscripten_bits' in targets:
+        if 'emscripten_headers' in targets:
             assert api == 'webgpu'
             params_emscripten = parse_json(loaded_json,
                                            enabled_tags=['emscripten'])
-            # system/include/webgpu
             renders.append(
-                FileRender('api.h',
-                           'emscripten-bits/system/include/webgpu/webgpu.h',
+                FileRender('api.h', 'emscripten/include/webgpu/webgpu.h',
                            [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
-                FileRender(
-                    'api_cpp.h',
-                    'emscripten-bits/system/include/webgpu/webgpu_cpp.h', [
-                        RENDER_PARAMS_BASE, params_emscripten, {
-                            'c_header': api + '/' + api + '.h',
-                            'c_namespace': None,
-                        }
-                    ]))
+                FileRender('api_cpp.h',
+                           'emscripten/include/webgpu/webgpu_cpp.h', [
+                               RENDER_PARAMS_BASE, params_emscripten, {
+                                   'c_header': api + '/' + api + '.h',
+                                   'c_namespace': None,
+                               }
+                           ]))
             renders.append(
                 FileRender(
                     'api_cpp_chained_struct.h',
-                    'emscripten-bits/system/include/webgpu/webgpu_cpp_chained_struct.h',
+                    'emscripten/include/webgpu/webgpu_cpp_chained_struct.h',
                     [RENDER_PARAMS_BASE, params_emscripten]))
-            # Snippets to paste into existing Emscripten files
+
+        if 'emscripten_js' in targets:
+            assert api == 'webgpu'
+            params_emscripten = parse_json(loaded_json,
+                                           enabled_tags=['emscripten'])
             renders.append(
-                FileRender('api_struct_info.json',
-                           'emscripten-bits/webgpu_struct_info.json',
+                FileRender('emscripten/webgpu_struct_info.json',
+                           'emscripten/webgpu_struct_info.json',
                            [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
-                FileRender('library_api_enum_tables.js',
-                           'emscripten-bits/library_webgpu_enum_tables.js',
+                FileRender('emscripten/library_webgpu_enum_tables.js',
+                           'emscripten/library_webgpu_enum_tables.js',
                            [RENDER_PARAMS_BASE, params_emscripten]))
 
         if 'mock_api' in targets:
