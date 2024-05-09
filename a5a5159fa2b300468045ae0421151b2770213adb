@@ -34,6 +34,24 @@
       "parentUuid": "ce3662ef_1a37d655",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25fee186_e629366f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T15:55:09Z",
+      "side": 1,
+      "message": "wow.. https://vulkan.gpuinfo.org/listfeaturesextensions.php?extension\u003dVK_EXT_multisampled_render_to_single_sampled\u0026platform\u003dandroid says it is supported on 3.82% of devices. that\u0027s really unfortunate.",
+      "parentUuid": "5283bc7f_549a1051",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
