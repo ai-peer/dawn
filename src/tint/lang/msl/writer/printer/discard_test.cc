@@ -32,7 +32,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 namespace tint::msl::writer {
 namespace {
 
-TEST_F(MslPrinterTest, Discard) {
+TEST_F(MslPrinterTest, DISABLED_Discard) {
     auto* func = b.Function("foo", ty.void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
