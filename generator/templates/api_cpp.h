@@ -28,7 +28,7 @@
 {% set api = API.lower() %}
 {% if 'dawn' in enabled_tags %}
     #ifdef __EMSCRIPTEN__
-    #error "Do not include this header. Emscripten already provides headers needed for {{metadata.api}}."
+    #error "This header is for native Dawn. Use Dawn's or Emscripten's Emscripten bindings instead."
     #endif
 {% endif %}
 {% set PREFIX = "" if not c_namespace else c_namespace.SNAKE_CASE() + "_" %}
