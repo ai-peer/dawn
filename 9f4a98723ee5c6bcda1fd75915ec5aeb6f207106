@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edee17dc_0cf35660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-05-09T16:58:41Z",
+      "side": 1,
+      "message": "\u003e absl says that it does not officially support forward declaration\nof its classes.\n\nHuh, wonder why that is? LGTM in any case.",
+      "revId": "9f4a98723ee5c6bcda1fd75915ec5aeb6f207106",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
