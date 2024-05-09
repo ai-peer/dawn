@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c3e42bb_d54cde72",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-05-09T01:04:36Z",
+      "side": 1,
+      "message": "They are:\n```\n    Function call: Call(1, 000001F92FF83910 pointing to \"The texture usage (TextureUsage::RenderAttachment) includes TextureUsage::RenderAttachment, which is incompatible with the non-renderable format (TextureFormat::R8BG8Biplanar420Unorm).\\n - While calling [SharedTextureMemory (unlabeled)].CreateTexture([TextureDescriptor]).\\n\", 000001F91D6941D0)\n\n\n    Function call: Call(1, 0000027285784500 pointing to \"[Invalid Texture] is invalid.\\n - While calling [SharedTextureMemory (unlabeled)].BeginAccess([Invalid Texture]).\\n\", 000002728612B670)\n\n```",
+      "parentUuid": "339b01d9_f740d800",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
