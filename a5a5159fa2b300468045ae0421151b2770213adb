@@ -106,6 +106,24 @@
       "parentUuid": "22dfbc74_1a92ca46",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d010a2f8_11d8c065",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-09T16:27:22Z",
+      "side": 1,
+      "message": "My \"very\" low end test android phone (samsung released last year) doesn\u0027t seem to have this extension.\n\n@syoussefi, we have two separate extensions: MSRTSS and DawnLoadResolveTexture. The latter is where client gives us both MSAA texture and resolve texture and expects the resolve texture to be loaded to MSAA texture. Note it is intended for those devices that don\u0027t support VK_EXT_multisampled_render_to_single_sampled including other backends (metal, d3d, etc) and skia wants to control the MSAA texture allocations.\n\nThe former MSAARTSS extension is still around, and it will utilise VK_EXT_multisampled_render_to_single_sampled.",
+      "parentUuid": "a16e7539_f5db6d9c",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
