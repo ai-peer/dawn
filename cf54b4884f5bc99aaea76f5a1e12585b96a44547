@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d72020_6c86334b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-09T19:56:44Z",
+      "side": 1,
+      "message": "PTAL. Does this, basically, cover what you were looking for in the attached issue?",
+      "revId": "cf54b4884f5bc99aaea76f5a1e12585b96a44547",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
