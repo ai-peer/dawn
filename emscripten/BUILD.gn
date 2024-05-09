@@ -1,0 +1,151 @@
+# Copyright 2024 The Dawn & Tint Authors
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+import("../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/generator/dawn_generator.gni")
+
+dawn_json_generator("emscripten_headers_gen") {
+  target = "emscripten_headers"
+  outputs = [
+    "emscripten/include/webgpu/webgpu.h",
+    "emscripten/include/webgpu/webgpu_cpp.h",
+    "emscripten/include/webgpu/webgpu_cpp_chained_struct.h",
+  ]
+}
+
+dawn_json_generator("emscripten_js_gen") {
+  target = "emscripten_js"
+  outputs = [
+    "emscripten/webgpu_struct_info.json",
+    "emscripten/library_webgpu_enum_tables.js",
+  ]
+}
+
+# When Emscripten is available, we can use one of its helper scripts to generate
+# the two helper files needed for our "fork" of library_webgpu.js. Those
+# helpers, and their tree of generated dependencies, are:
+#
+# - library_webgpu_enum_tables.js
+# - library_webgpu_generated_struct_info.js
+#   which is constructed by concatenating:
+#     - Some glue "snippets" from txt files
+#     - webgpu_generated_struct_info{32,64}.json
+#       which are generated using an Emscripten tool "gen_struct_info.py", from:
+#         - webgpu.h (generated from dawn.json)
+#         - webgpu_struct_info.json (generated from dawn.json)
+if (dawn_emsdk_dir != "") {
+  template("webgpu_gen_struct_info") {
+    action(target_name) {
+      forward_variables_from(invoker, "*")
+
+      deps = [
+        ":emscripten_headers_gen",  # for webgpu.h
+        ":emscripten_js_gen",  # for webgpu_struct_info.json
+      ]
+
+      # FIXME this points at skia
+      #script = "../../emsdk/upstream/emscripten/tools/gen_struct_info.py"
+      script = "${dawn_emsdk_dir}/upstream/emscripten/tools/gen_struct_info.py"
+      args = [
+        # Input file
+        rebase_path(sources[0], root_build_dir),
+
+        # Include dir where webgpu/webgpu.h can be found
+        "-I=" + rebase_path(target_gen_dir, root_build_dir) + "/include",
+
+        # Output file
+        "-o=" + rebase_path(outputs[0], root_build_dir),
+      ]
+      if (wasm64) {
+        args += [ "--wasm64" ]
+      }
+    }
+  }
+
+  webgpu_gen_struct_info("emscripten_webgpu_generated_struct_info32") {
+    sources = [ "${target_gen_dir}/webgpu_struct_info.json" ]
+    outputs = [ "${target_gen_dir}/webgpu_generated_struct_info32.json" ]
+    wasm64 = false
+  }
+
+  webgpu_gen_struct_info("emscripten_webgpu_generated_struct_info64") {
+    sources = [ "${target_gen_dir}/webgpu_struct_info.json" ]
+    outputs = [ "${target_gen_dir}/webgpu_generated_struct_info64.json" ]
+    wasm64 = true
+  }
+
+  action("emscripten_library_webgpu_generated_struct_info") {
+    deps = [
+      ":emscripten_webgpu_generated_struct_info32",
+      ":emscripten_webgpu_generated_struct_info64",
+    ]
+
+    source_files = [
+      # The order of these files is important.
+      "snippets/library_webgpu_struct_info_part1.txt",
+      "${target_gen_dir}/webgpu_generated_struct_info32.json",
+      "snippets/library_webgpu_struct_info_part2.txt",
+      "${target_gen_dir}/webgpu_generated_struct_info64.json",
+      "snippets/library_webgpu_struct_info_part3.txt",
+    ]
+
+    sources = source_files
+    outputs = [ "${target_gen_dir}/library_webgpu_generated_struct_info.js" ]
+
+    script = "concat.py"
+    args = []
+    foreach(source, [ outputs[0] ] + sources) {
+      args += [ rebase_path(source, root_build_dir) ]
+    }
+  }
+
+  config("emscripten_webgpu_config") {
+    include_dirs = [ "${target_gen_dir}/include" ]
+    ldflags = [
+      # These will be processed in order, so library_webgpu.js must come last.
+      # It will assert this, and also that -sUSE_WEBGPU is not enabled.
+      "--js-library=" +
+          rebase_path("${target_gen_dir}/library_webgpu_enum_tables.js"),
+      "--js-library=" + rebase_path(
+              "${target_gen_dir}/library_webgpu_generated_struct_info.js"),
+      "--js-library=" + rebase_path("library_webgpu.js"),
+    ]
+  }
+
+  # Use this as a dependency of a WASM build target to use Dawn's Emscripten
+  # bindings in the build.
+  source_set("emscripten_webgpu") {
+    public_configs = [ ":emscripten_webgpu_config" ]
+    deps = [
+      ":emscripten_headers_gen",
+      ":emscripten_js_gen",
+      ":emscripten_library_webgpu_generated_struct_info",
+    ]
+    sources = get_target_outputs(":emscripten_headers_gen")
+  }
+}
