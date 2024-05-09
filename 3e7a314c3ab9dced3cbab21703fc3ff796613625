@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "922ed2de_22c1a70d",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T01:10:05Z",
+      "side": 1,
+      "message": "at [2], could you first do something like:\n\n```\nEXPECT_CALL(mDeviceErrorCallback,                                            \\\n                Call(testing::Ne(WGPUErrorType_NoError), testing::HasSubstr(\"is invalid\"), device.Get())) \\\n        .Times(testing::AnyNumber());                                            \\\n```\n\nfollowed by the existing call to `ASSERT_DEVICE_ERROR_MSG`?\n\n\nThat way we only change the expectations for that one callsite, and we only speciifcally allow \"is invalid\" errors to happen multiple times.",
+      "parentUuid": "3c3e42bb_d54cde72",
+      "revId": "3e7a314c3ab9dced3cbab21703fc3ff796613625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dc24e0f_ea407f8b",
         "filename": "src/dawn/tests/end2end/D3DResourceWrappingTests.cpp",
         "patchSetId": 2
