@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3662ef_1a37d655",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T14:56:07Z",
+      "side": 1,
+      "message": "might be missing some context - why did we decide to not use VK_EXT_multisampled_render_to_single_sampled on Vulkan?\n\nthe docs say the extension is much more efficient on some hardware",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
