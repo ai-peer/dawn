@@ -39,6 +39,12 @@
         "copyright_year": "2019"
     },
 
+    "INTERNAL__USING_DAWN_WEBGPU": {
+        "category": "structure",
+        "tags": ["emscripten"],
+        "members": []
+    },
+
     "create instance": {
         "category": "function",
         "returns": "instance",
@@ -589,7 +595,8 @@
         ]
     },
     "bool": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "i"
     },
     "buffer": {
         "category": "object",
@@ -1705,7 +1712,8 @@
         ]
     },
     "double": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "d"
     },
     "error callback": {
         "category": "function pointer",
@@ -2474,7 +2482,8 @@
         ]
     },
     "float": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "f"
     },
     "format capabilities": {
       "category": "structure",
@@ -4426,32 +4435,40 @@
       "category": "native"
     },
     "void": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "v"
     },
     "void *": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "p"
     },
     "void const *": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "p"
     },
     "int": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "i"
     },
     "int32_t": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "i"
     },
     "size_t": {
         "category": "native",
+        "wasm type": "p",
         "wire transparent": false
     },
     "uint16_t": {
         "category": "native"
     },
     "uint32_t": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "i"
     },
     "uint64_t": {
-        "category": "native"
+        "category": "native",
+        "wasm type": "j"
     },
     "uint8_t": {
         "category": "native"
