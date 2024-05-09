@@ -572,7 +572,7 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
         imageFormatInfo.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2;
         imageFormatInfo.format = vkFormat;
         imageFormatInfo.type = VK_IMAGE_TYPE_2D;
-        imageFormatInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+        imageFormatInfo.tiling = VK_IMAGE_TILING_LINEAR;
         imageFormatInfo.usage = vkUsageFlags;
         imageFormatInfo.flags = 0;
 

@@ -250,7 +250,7 @@ TEST_P(SharedTextureMemoryTests, CPUWriteThenGPURead) {
         .height = 4,
         .layers = 1,
         .format = AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM,
-        .usage = AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN,
+        .usage = AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN | AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE,
     };
     AHardwareBuffer* aHardwareBuffer;
     EXPECT_EQ(AHardwareBuffer_allocate(&aHardwareBufferDesc, &aHardwareBuffer), 0);
