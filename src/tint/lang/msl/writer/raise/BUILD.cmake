@@ -43,6 +43,8 @@ if(TINT_BUILD_MSL_WRITER)
 tint_add_target(tint_lang_msl_writer_raise lib
   lang/msl/writer/raise/builtin_polyfill.cc
   lang/msl/writer/raise/builtin_polyfill.h
+  lang/msl/writer/raise/module_scope_vars.cc
+  lang/msl/writer/raise/module_scope_vars.h
   lang/msl/writer/raise/raise.cc
   lang/msl/writer/raise/raise.h
 )
@@ -89,6 +91,7 @@ if(TINT_BUILD_MSL_WRITER)
 ################################################################################
 tint_add_target(tint_lang_msl_writer_raise_test test
   lang/msl/writer/raise/builtin_polyfill_test.cc
+  lang/msl/writer/raise/module_scope_vars_test.cc
 )
 
 tint_target_add_dependencies(tint_lang_msl_writer_raise_test test
