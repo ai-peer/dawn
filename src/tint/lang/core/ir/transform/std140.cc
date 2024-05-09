@@ -69,9 +69,6 @@ struct State {
     /// Map from original type to a new type with decomposed matrices.
     Hashmap<const core::type::Type*, const core::type::Type*, 4> rewritten_types{};
 
-    /// Map from struct member to its new index.
-    Hashmap<const core::type::StructMember*, uint32_t, 4> member_index_map{};
-
     /// Map from a type to a helper function that will convert its rewritten form back to it.
     Hashmap<const core::type::Struct*, Function*, 4> convert_helpers{};
 
@@ -154,33 +151,13 @@ struct State {
                     uint32_t member_index = 0;
                     Vector<const core::type::StructMember*, 4> new_members;
                     for (auto* member : str->Members()) {
-                        if (auto* mat = NeedsDecomposing(member->Type())) {
-                            // Decompose these matrices into a separate member for each column.
-                            member_index_map.Add(member, member_index);
-                            auto* col = mat->ColumnType();
-                            uint32_t offset = member->Offset();
-                            for (uint32_t i = 0; i < mat->columns(); i++) {
-                                StringStream ss;
-                                ss << member->Name().Name() << "_col" << std::to_string(i);
-                                new_members.Push(ty.Get<core::type::StructMember>(
-                                    sym.New(ss.str()), col, member_index, offset, col->Align(),
-                                    col->Size(), core::type::StructMemberAttributes{}));
-                                offset += col->Align();
-                                member_index++;
-                            }
+                        auto* new_member_ty = RewriteType(member->Type());
+                        new_members.Push(ty.Get<core::type::StructMember>(
+                            member->Name(), new_member_ty, member_index, member->Offset(),
+                            member->Align(), member->Size(), core::type::StructMemberAttributes{}));
+                        member_index++;
+                        if (new_member_ty != member->Type()) {
                             needs_rewrite = true;
-                        } else {
-                            // For all other types, recursively rewrite them as necessary.
-                            auto* new_member_ty = RewriteType(member->Type());
-                            new_members.Push(ty.Get<core::type::StructMember>(
-                                member->Name(), new_member_ty, member_index, member->Offset(),
-                                member->Align(), member->Size(),
-                                core::type::StructMemberAttributes{}));
-                            member_index_map.Add(member, member_index);
-                            member_index++;
-                            if (new_member_ty != member->Type()) {
-                                needs_rewrite = true;
-                            }
                         }
                     }
 
@@ -234,16 +211,16 @@ struct State {
     /// Reconstructs a column-decomposed matrix.
     /// @param mat the matrix type
     /// @param root the root value being accessed into
-    /// @param indices the access indices that index the first column of the matrix.
+    /// @param indices the access indices that index the decomposed matrix structure.
     /// @returns the loaded matrix
     Value* RebuildMatrix(const core::type::Matrix* mat, Value* root, VectorRef<Value*> indices) {
         // Recombine each column vector from the struct and reconstruct the original matrix type.
         bool is_ptr = root->Type()->Is<core::type::Pointer>();
         Vector<Value*, 4> column_indices(std::move(indices));
         Vector<Value*, 4> args;
-        auto first_column = indices.Back()->As<Constant>()->Value()->ValueAs<uint32_t>();
+        column_indices.Push(nullptr);
         for (uint32_t i = 0; i < mat->columns(); i++) {
-            column_indices.Back() = b.Constant(u32(first_column + i));
+            column_indices.Back() = b.Constant(u32(i));
             if (is_ptr) {
                 auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), root, column_indices);
                 args.Push(b.Load(access)->Result(0));
@@ -274,22 +251,14 @@ struct State {
                     auto* input = b.FunctionParam("input", input_str);
                     func->SetParams({input});
                     b.Append(func->Block(), [&] {
-                        uint32_t index = 0;
                         Vector<Value*, 4> args;
+                        args.Reserve(str->Members().Length());
                         for (auto* member : str->Members()) {
-                            if (auto* mat = NeedsDecomposing(member->Type())) {
-                                args.Push(
-                                    RebuildMatrix(mat, input, Vector{b.Constant(u32(index))}));
-                                index += mat->columns();
-                            } else {
-                                // Extract and convert the member.
-                                auto* type = input_str->Element(index);
-                                auto* extract = b.Access(type, input, u32(index));
-                                args.Push(Convert(extract->Result(0), member->Type()));
-                                index++;
-                            }
+                            // Extract and convert the member.
+                            auto* access_type = RewriteType(member->Type());
+                            auto* extract = b.Access(access_type, input, u32(member->Index()));
+                            args.Push(Convert(extract->Result(0), member->Type()));
                         }
-
                         // Construct and return the original struct.
                         b.Return(func, b.Construct(str, std::move(args)));
                     });
@@ -315,7 +284,7 @@ struct State {
                 if (!NeedsDecomposing(mat)) {
                     return source;
                 }
-                return RebuildMatrix(mat, source, Vector{b.Constant(u32(0))});
+                return RebuildMatrix(mat, source, Empty);
             },
             [&](Default) { return source; });
     }
@@ -329,10 +298,8 @@ struct State {
                 inst,  //
                 [&](Access* access) {
                     auto* object_ty = access->Object()->Type()->As<core::type::MemoryView>();
-                    if (!object_ty || object_ty->AddressSpace() != core::AddressSpace::kUniform) {
-                        // Access to non-uniform memory views does not require transformation.
-                        return;
-                    }
+                    TINT_ASSERT(object_ty &&
+                                object_ty->AddressSpace() == core::AddressSpace::kUniform);
 
                     if (!replacement->Type()->Is<core::type::MemoryView>()) {
                         // The replacement is a value, in which case the decomposed matrix has
@@ -349,48 +316,26 @@ struct State {
                     auto* current_type = object_ty->StoreType();
                     Vector<Value*, 4> indices;
 
-                    if (NeedsDecomposing(current_type)) {
-                        // Decomposed matrices are indexed using their first column vector
-                        indices.Push(b.Constant(0_u));
-                    }
-
-                    for (size_t i = 0, n = access->Indices().Length(); i < n; i++) {
-                        auto* idx = access->Indices()[i];
-
+                    for (auto* idx : access->Indices()) {
                         if (auto* mat = NeedsDecomposing(current_type)) {
-                            // Access chain passes through decomposed matrix.
-                            if (auto* const_idx = idx->As<Constant>()) {
-                                // Column vector index is a constant.
-                                // Instead of loading the whole matrix, fold the access of the
-                                // matrix and the constant column index into an single access of
-                                // column vector member.
-                                auto* base_idx = indices.Back()->As<Constant>();
-                                indices.Back() =
-                                    b.Constant(u32(base_idx->Value()->ValueAs<uint32_t>() +
-                                                   const_idx->Value()->ValueAs<uint32_t>()));
-                                current_type = mat->ColumnType();
-                                i++;  // We've already consumed the column access
-                            } else {
+                            // Decomposed matrix.
+                            if (!idx->Is<Constant>()) {
                                 // Column vector index is dynamic.
                                 // Reconstruct the whole matrix and index that.
                                 replacement = RebuildMatrix(mat, replacement, std::move(indices));
                                 indices.Clear();
                                 indices.Push(idx);
                                 current_type = mat->ColumnType();
+                                continue;
                             }
-                        } else if (auto* str = current_type->As<core::type::Struct>()) {
-                            // Remap member index
-                            uint32_t old_index = idx->As<Constant>()->Value()->ValueAs<uint32_t>();
-                            uint32_t new_index = *member_index_map.Get(str->Members()[old_index]);
-                            current_type = str->Element(old_index);
-                            indices.Push(b.Constant(u32(new_index)));
+                        }
+
+                        indices.Push(idx);
+                        if (auto* str = current_type->As<core::type::Struct>()) {
+                            current_type =
+                                str->Element(idx->As<Constant>()->Value()->ValueAs<uint32_t>());
                         } else {
-                            indices.Push(idx);
                             current_type = current_type->Elements().type;
-                            if (NeedsDecomposing(current_type)) {
-                                // Decomposed matrices are indexed using their first column vector
-                                indices.Push(b.Constant(0_u));
-                            }
                         }
                     }
 
