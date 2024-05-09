@@ -34,6 +34,24 @@
       "parentUuid": "b4f97f09_261ac385",
       "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbab743b_bdb63d72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-09T05:58:50Z",
+      "side": 1,
+      "message": "there\u0027s also an internal usage of the old enum that you won\u0027t be able to change.\nI have a CL in progress to rename it!",
+      "parentUuid": "6f923826_5c5de9bd",
+      "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
