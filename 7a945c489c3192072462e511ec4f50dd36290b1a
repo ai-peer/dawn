@@ -16,6 +16,24 @@
       "message": "Hello, is there any more detailed error messages in tryjobs or autoroll? Because I am an external contributor, there are some error messages that are only available within Google that I cannot see.\n\nAlso, do I need to modify the code in `WithTrivialFrontendDefaults()` or `dawn_json_generator.py`? \n\nCould you please provide some guidance?\n\nThank you.",
       "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f923826_5c5de9bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3418012
+      },
+      "writtenOn": "2024-05-09T02:45:55Z",
+      "side": 1,
+      "message": "I seem to have found a breakthrough, I will try to modify all other usages (including emscripten, webgpu-headers, etc.) before submitting this CL.",
+      "parentUuid": "b4f97f09_261ac385",
+      "revId": "7a945c489c3192072462e511ec4f50dd36290b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
