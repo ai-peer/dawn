@@ -33,6 +33,23 @@
       "message": "THere are other TODOs tagged with dawn:2234 can you also take care of these?",
       "revId": "65d232adfab25bdede071aa14251b457023a7fb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402f2fa8_8cb162a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-10T18:06:27Z",
+      "side": 1,
+      "message": "Might be a good idea to ping the gardener as a heads up of this change before landing this. Just in case it breaks any rolls.",
+      "revId": "65d232adfab25bdede071aa14251b457023a7fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
