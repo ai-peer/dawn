@@ -1341,7 +1341,7 @@
             },
             {
                 "name": "create swap chain",
-                "tags": ["dawn", "emscripten"],
+                "tags": ["art", "dawn", "emscripten"],
                 "returns": "swap chain",
                 "args": [
                     {"name": "surface", "type": "surface"},
@@ -1439,7 +1439,7 @@
             {
                 "name": "tick",
                 "no autolock": true,
-                "tags": ["dawn"]
+                "tags": ["art", "dawn"]
             },
             {
                 "name": "set uncaptured error callback",
@@ -1477,7 +1477,7 @@
                 "name": "pop error scope",
                 "no autolock": true,
                 "args": [
-                    {"name": "old callback", "type": "error callback"},
+                    {"name": "callback", "type": "error callback"},
                     {"name": "userdata", "type": "void *"}
                 ]
             },
@@ -3588,7 +3588,7 @@
         "category": "structure",
         "chained": "in",
         "chain roots": ["surface descriptor"],
-        "tags": ["native"],
+        "tags": ["art", "native"],
         "members": [
             {"name": "window", "type": "void", "annotation": "*"}
         ]
@@ -3670,7 +3670,7 @@
     },
     "swap chain": {
         "category": "object",
-        "tags": ["dawn", "emscripten"],
+        "tags": ["art", "dawn", "emscripten"],
         "methods": [
             {"name": "get current texture view", "returns": "texture view"},
             {"name": "get current texture", "returns": "texture", "tags": ["dawn"]},
@@ -3679,7 +3679,7 @@
     },
     "swap chain descriptor": {
         "category": "structure",
-        "tags": ["dawn", "emscripten"],
+        "tags": ["art", "dawn", "emscripten"],
         "extensible": "in",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
