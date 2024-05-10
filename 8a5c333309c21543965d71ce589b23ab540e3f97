@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d133f66f_a420956d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-05-10T14:56:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "165dd7f1_4f002cd4",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6036887_787f5776",
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "It is Unit, it\u0027s Kotlin\u0027s equivalent of Void. https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/",
       "parentUuid": "6aea6aa1_313823bd",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2428a22e_78f9f84b",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-05-10T14:56:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4e4ccec_73f289f0",
       "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

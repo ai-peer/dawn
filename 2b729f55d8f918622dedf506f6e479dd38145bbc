@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fbf64b9_350dd6fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-05-10T14:56:20Z",
+      "side": 1,
+      "message": "LGTM, thanks Jim\n\n+Austin for Approve, since Corentin\u0027s OOO",
+      "revId": "2b729f55d8f918622dedf506f6e479dd38145bbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
