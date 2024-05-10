@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd85a555_777c1289",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "what are the actual outputs? GN needs the actual files",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 34
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4162184e_9aea99d4",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "what are the actual outputs? GN needs the actual files",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 34
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6ee38c2_9502fe3d",
+        "filename": "tools/android/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "I don\u0027t think you should include the test dependency here. If this runs the tests, but there are no actual outputs - when GN builds after other builds have run, it\u0027s going to say \"this target isn\u0027t dirty\" and do absolutely nothing instead of running the tests.\n\nFor now, I don\u0027t think you should run any tests until you actually run it via the recipe - or it won\u0027t do what you expect",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 26
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "711b26b5_6693eac7",
+        "filename": "tools/android/build_kotlin_tests.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "you\u0027re writing this into the tree - it will leave the tree dirty",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 9
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a039bdf3_c7085d95",
+        "filename": "tools/android/build_kotlin_tests.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "generally, you shouldn\u0027t be relying on the current working directory.\nfor example with dawn_json_generator, we pass in explicit paths.\nYou can pass an arg like.\n\n`rebase_path(\"${dawn_root}/tools/android\", root_build_dir)`\n\nand then invoke `gradle wrapper -p my_path`",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 45
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ab7d84_506d4125",
+        "filename": "tools/android/build_kotlin_tests.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "after reading some docs, I\u0027m confused as to why we need both `gradlew` and `gradle`.\n\n`gradlew` facilitates downloading gradle if you don\u0027t have it. Then it invokes gradle and the task.\n\nHowever, we already are assuming we have gradle! Why do we need to make a `gradlew` ?\n\nlocally, I just did a `gradle build -p path/to/tools/android/` and it worked fine.\n\nIt seems like we should do either one of the following:\n - add a dependency on `gradlew` so that anyone can build this if they don\u0027t have gradle. This sounds useful on the bots that don\u0027t currently have gradle installed.\n - have the bots download gradle, and only invoke gradle - no gradlew",
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253fbbb5_2d38c027",
+        "filename": "tools/android/build_kotlin_tests.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T23:25:11Z",
+      "side": 1,
+      "message": "when this errors, the logs don\u0027t print the console well.\nyou might want:\n\n```\nsubprocess.run([\"gradle\", \"wrapper\"], cwd\u003d\"../../tools/android\", shell\u003dTrue, check\u003dTrue)\nsubprocess.run([\"./gradlew\", \"build\"], cwd\u003d\"../../tools/android\", shell\u003dTrue, check\u003dTrue)\n```\ninstead.\n\nthat said, it\u0027s executing inside the tools/android dir, and gradlew is written into the tree - that also doesn\u0027t seem right.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "b393218f9614911e8f3a94c7430faf3837996568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
