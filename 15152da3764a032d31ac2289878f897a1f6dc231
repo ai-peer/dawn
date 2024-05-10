@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bf16f28_04636bc6",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T17:11:18Z",
+      "side": 0,
+      "message": "shouldn\u0027t we validate this against `SharedTextureMemory::mProperties` ?\ncan\u0027t simply delete it because there are non-d3d11texture2d textures as well",
+      "revId": "15152da3764a032d31ac2289878f897a1f6dc231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
