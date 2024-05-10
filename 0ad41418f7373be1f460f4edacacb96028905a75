@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88104f30_1b9a3cac",
+        "filename": "src/tint/lang/core/ir/loop.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-10T17:51:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eb5a7db7_1ac45b8f",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b50e728_e189dbfe",
@@ -37,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9dc25005_fa5c457b",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-10T17:51:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b50e728_e189dbfe",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "54751ae4_b9247c1a",
         "filename": "src/tint/lang/core/ir/module.cc",
         "patchSetId": 2
@@ -48,6 +84,24 @@
       "writtenOn": "2024-05-10T11:45:03Z",
       "side": 1,
       "message": "I see recursion, I fear stack overflows. This is unlikely to overflow before other places in the codebase, so no action needed right now. Might be good to get in the practice of writing this sort of thing without recursion though.",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab9dc855_eb6f507d",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-10T17:51:39Z",
+      "side": 1,
+      "message": "I\u0027ve reworked it to be non-recursive. PTAL.",
+      "parentUuid": "54751ae4_b9247c1a",
       "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
