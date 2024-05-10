@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3180d5d0_66031bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-10T09:02:37Z",
+      "side": 1,
+      "message": "The reverted CL is a week old. How did this become an urgent issue?\n\nIn a revert it\u0027s helpful to link to a bug, CB output or some other resource to let the author know what the error was.",
+      "revId": "f00b249b9bf48837aa452e99a73a695c6340bb53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
