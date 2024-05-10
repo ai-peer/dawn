@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b947c13b_35dc525c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-05-10T12:18:38Z",
+      "side": 1,
+      "message": "I think you also need to add ANGLE here https://dawn.googlesource.com/dawn/+/af4037ca4adff476dc7887d390d00d7e2802abe6/src/dawn/common/BUILD.gn#239",
+      "revId": "3cb5d69bb05534208745773a35e846849a900b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
