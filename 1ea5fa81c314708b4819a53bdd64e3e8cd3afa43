@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a04f976f_28f13fdf",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-10T19:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f9c4eec_fef61040",
+      "range": {
+        "startLine": 532,
+        "startChar": 11,
+        "endLine": 541,
+        "endChar": 22
+      },
+      "revId": "1ea5fa81c314708b4819a53bdd64e3e8cd3afa43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ac660cd_f4dad7e7",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-10T17:11:18Z",
       "side": 1,
       "message": "update comment to describe the layers",
+      "range": {
+        "startLine": 638,
+        "startChar": 0,
+        "endLine": 638,
+        "endChar": 99
+      },
+      "revId": "1ea5fa81c314708b4819a53bdd64e3e8cd3afa43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1499759_4820fda3",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-10T19:07:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ac660cd_f4dad7e7",
       "range": {
         "startLine": 638,
         "startChar": 0,
