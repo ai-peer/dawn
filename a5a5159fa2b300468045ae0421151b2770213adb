@@ -178,6 +178,24 @@
       "parentUuid": "36e504d9_45de7373",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4996c3a_f020f036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-10T16:13:36Z",
+      "side": 1,
+      "message": "btw, even if VK_EXT_multisampled_render_to_single_sampled is/will be prominent on android, there are other platforms also using Vulkan such as linux, chromeos. Skia team is using 2 subpasses to implement \"load resolve texture\" on those in their vulkan backend. And they would be upset if Dawn backend doesn\u0027t support equivalent functionality. I think adding this extra \"DawnMultisampleResolveState\" requirement to DawnLoadResolveTexture is no harm.",
+      "parentUuid": "8eaf2687_f4706815",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
