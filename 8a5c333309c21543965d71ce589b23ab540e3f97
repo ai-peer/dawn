@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54a3b768_39015985",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-10T14:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e0c575f_bde770ca",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9c6803d_1797d2c4",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-10T13:55:20Z",
       "side": 1,
       "message": "Is it correct that we\u0027re still generating to \u0027java/\u0027 and not to \u0027kotlin/\u0027?",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165dd7f1_4f002cd4",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-10T14:18:10Z",
+      "side": 1,
+      "message": "Yes it\u0027s the most common convention. https://handstandsam.com/2020/04/12/where-should-i-put-kotlin-code-in-an-android-project. If we do switch (which reading that article may be possible) I\u0027d rather do it in a follow up CL. I logged a bug b/339821506",
+      "parentUuid": "c9c6803d_1797d2c4",
       "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8849b5d6_980919af",
+        "filename": "generator/templates/art/api_kotlin_structure.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-10T14:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6036887_787f5776",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aea6aa1_313823bd",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-10T13:55:20Z",
       "side": 1,
       "message": "Just sanity-checking here, it looks like you\u0027re choosing between \"Long\" and \"Unit\", is \"unit\" correct or should it be \"uint\"?",
+      "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e4ccec_73f289f0",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-10T14:18:10Z",
+      "side": 1,
+      "message": "It is Unit, it\u0027s Kotlin\u0027s equivalent of Void. https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/",
+      "parentUuid": "6aea6aa1_313823bd",
       "revId": "8a5c333309c21543965d71ce589b23ab540e3f97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
