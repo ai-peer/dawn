@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5ed356_daf63e0c",
+        "filename": "src/tint/lang/msl/writer/printer/discard_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-10T00:11:07Z",
+      "side": 1,
+      "message": "Add a TODO as to why this is DISABLED?",
+      "revId": "2b092ae25f75f4749881e12747fa28cd8fbb5188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b11a48c_97a460bb",
+        "filename": "src/tint/lang/msl/writer/printer/var_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-10T00:11:07Z",
+      "side": 1,
+      "message": "Add TODO as to why DISABLED",
+      "revId": "2b092ae25f75f4749881e12747fa28cd8fbb5188",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
