@@ -33,6 +33,24 @@
       "message": "This one should be `NextIteration`. Since you\u0027ve added `CheckContinue()` in this CL, can we also check that is inside the body block, and not either the initializer or continuing block?",
       "revId": "8ceaf7f7246b2517e91715c06cf3656761045eab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edf141c6_aa00921f",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2667,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-10T16:25:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3848ae6_fb650ee2",
+      "revId": "8ceaf7f7246b2517e91715c06cf3656761045eab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
