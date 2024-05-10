@@ -116,6 +116,30 @@
       },
       "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a74aa041_d57b02d8",
+        "filename": "tools/android/webgpu/src/test/java/android/dawn/EnumsTest.kt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T15:43:47Z",
+      "side": 1,
+      "message": "IMO android.dawn is preferable as well.",
+      "parentUuid": "972d35f1_905bce3b",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 20
+      },
+      "revId": "c70115c53c9241bffce319ef2ca076ee0e5592fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
