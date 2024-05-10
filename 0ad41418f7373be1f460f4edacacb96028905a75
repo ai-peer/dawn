@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5a7db7_1ac45b8f",
+        "filename": "src/tint/lang/core/ir/loop.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-10T00:09:10Z",
+      "side": 1,
+      "message": "Heh, this kind of `const` infectiveness is why a lot of the stuff in the MSL printer ended up non-const.",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b50e728_e189dbfe",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-10T00:09:10Z",
+      "side": 1,
+      "message": "nit: Move this up to the top, we usually put anon namespaces right at the beginning of the file.",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
