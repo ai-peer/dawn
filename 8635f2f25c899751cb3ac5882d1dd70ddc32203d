@@ -16,6 +16,24 @@
       "message": "I thought it wasn\u0027t supposed to do the `../..` thing anymore?",
       "revId": "8635f2f25c899751cb3ac5882d1dd70ddc32203d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d615f989_fbff45e0",
+        "filename": "test/tint/array/assign_to_private_var.wgsl.expected.ir.msl",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-10T11:47:43Z",
+      "side": 1,
+      "message": "This is a GN vs CMake thing. GN has `__FILE__` relative to the build output directory, CMake relative to the project root.\n\nFun.",
+      "parentUuid": "ea3d31f6_6a3b70eb",
+      "revId": "8635f2f25c899751cb3ac5882d1dd70ddc32203d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
