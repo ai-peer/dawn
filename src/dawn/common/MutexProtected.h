@@ -92,7 +92,8 @@ class Guard {
     friend class MutexProtected<NonConstT, Guard>;
 
     typename Traits::LockType mLock;
-    raw_ptr<T> mObj;
+    // RAW_PTR_EXCLUSION: Performance reasons (based on analysis of MotionMark).
+    RAW_PTR_EXCLUSION T* mObj;
 };
 
 }  // namespace detail
