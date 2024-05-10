@@ -710,7 +710,9 @@ TEST_F(IRBinaryRoundtripTest, LoopBlockParams) {
         auto* z = b.BlockParam<u32>("z");
         auto* w = b.BlockParam<bool>("w");
         loop->Continuing()->SetParams({z, w});
-        b.Append(loop->Continuing(), [&] { b.BreakIf(loop, false, 3_i, 4_f); });
+        b.Append(loop->Continuing(), [&] {
+            b.BreakIf(loop, false, /* next_iter */ b.Values(3_i, 4_f), /* exit */ Empty);
+        });
         b.Return(fn);
     });
     RUN_TEST();
