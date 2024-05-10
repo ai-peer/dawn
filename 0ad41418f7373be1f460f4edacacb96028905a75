@@ -33,6 +33,23 @@
       "message": "nit: Move this up to the top, we usually put anon namespaces right at the beginning of the file.",
       "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54751ae4_b9247c1a",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-10T11:45:03Z",
+      "side": 1,
+      "message": "I see recursion, I fear stack overflows. This is unlikely to overflow before other places in the codebase, so no action needed right now. Might be good to get in the practice of writing this sort of thing without recursion though.",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
