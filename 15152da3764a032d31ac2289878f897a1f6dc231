@@ -34,6 +34,24 @@
       "parentUuid": "0bf16f28_04636bc6",
       "revId": "15152da3764a032d31ac2289878f897a1f6dc231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8cd5aaa_461f52f0",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-10T19:24:57Z",
+      "side": 0,
+      "message": "BTW, mProperties.size.depthOrArtrayLayers should be 1 for other backends.\n\nVulkan: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/SharedTextureMemoryVk.cpp;l\u003d227-232\n\nD3D12:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/SharedTextureMemoryD3D12.cpp;l\u003d74;drc\u003dd23075f3066f6aab6fd5f8446ea5dde3ebff1097;bpv\u003d1;bpt\u003d1\n\nMetal:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/SharedTextureMemoryMTL.mm;l\u003d128;bpv\u003d1;bpt\u003d0",
+      "parentUuid": "88bacbce_03681ca4",
+      "revId": "15152da3764a032d31ac2289878f897a1f6dc231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
