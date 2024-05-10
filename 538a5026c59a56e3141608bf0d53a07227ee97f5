@@ -57,6 +57,30 @@
       ],
       "revId": "538a5026c59a56e3141608bf0d53a07227ee97f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac801488_b7e78105",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-10T19:29:35Z",
+      "side": 1,
+      "message": "tried to do this, but unfortunately InstanceBase::APICreateSurface needs the X11Functions, and at that point, we don\u0027t have a specific physical device to use",
+      "parentUuid": "eda9f6f4_4872b763",
+      "range": {
+        "startLine": 140,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 48
+      },
+      "revId": "538a5026c59a56e3141608bf0d53a07227ee97f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
