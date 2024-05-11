@@ -50,6 +50,24 @@
       "message": "Might be a good idea to ping the gardener as a heads up of this change before landing this. Just in case it breaks any rolls.",
       "revId": "65d232adfab25bdede071aa14251b457023a7fb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1af569_37e56727",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-05-11T08:39:17Z",
+      "side": 1,
+      "message": "Done\n\nI\u0027ve removed `textureReference()` in `shared_image_representation_unittest` and the macro `WGPU_BREAKING_REFERENCE_ADDREF`:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5532905",
+      "parentUuid": "7796ee22_e7478dcc",
+      "revId": "65d232adfab25bdede071aa14251b457023a7fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
