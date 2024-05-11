@@ -209,6 +209,24 @@
       "message": "Hopefully this won\u0027t add too much overhead. If it does, we\u0027ll need to add an additional webgpu.h usage just for this case.",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b57c54e_2424d436",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1003806
+      },
+      "writtenOn": "2024-05-11T14:59:53Z",
+      "side": 1,
+      "message": "We opportunistically set this whenever we can in ANGLE (on color, not depth/stencil), seems to be harmless.\n\nFor depth/stencil, we set it for renderbuffers when MSRTT (because that has a dedicated way). For textures, we don\u0027t because luckily EXT_multisampled_render_to_texture2 allows us to autoinvalidate depth/stencil and thus never need to unresolve. I\u0027m saying this to say that I don\u0027t know if there\u0027s a downside to this for depth/stencil.",
+      "parentUuid": "0141e77c_a5057a13",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
