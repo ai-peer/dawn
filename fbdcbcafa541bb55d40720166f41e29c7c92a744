@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11c8bc8b_366879b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T15:00:15Z",
+      "side": 1,
+      "message": "LGTM too, sorry it took me this long to get to this CL. I was on-off for a while. One small comment.",
+      "revId": "fbdcbcafa541bb55d40720166f41e29c7c92a744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81961fa3_53802c56",
+        "filename": "src/dawn/native/SharedResourceMemory.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T15:00:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we max the signaledValues here?",
+      "revId": "fbdcbcafa541bb55d40720166f41e29c7c92a744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
