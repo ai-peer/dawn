@@ -16,6 +16,23 @@
       "message": "PTAL\nWe are trying to fix a regression with MotionMark.\nhttps://pinpoint-dot-chromeperf.appspot.com/job/12c5571a010000\nBy counting the time raw_ptr ref count manipulation occurs in the benchmarks we identified the hotspots.\nhttps://docs.google.com/spreadsheets/d/1gZYdSd_rnmQVNS6rujxwNz0ujpYT2Ty3WEQ6GR8hwiI/edit\nAnd this CL excludes them from raw_ptr.",
       "revId": "ea3323361c556fc20358d788adfa87f14410413c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c14e72fe_2244ff08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T15:43:23Z",
+      "side": 1,
+      "message": "It\u0027s good to know that all these pointers are \"hot\" when running MotionMark, but what gains do we get rewriting this? Dawn is pretty security-sensitive so it would be great to keep the raw_ptr. We could also try to optimize the hotspots another way potentially.",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
