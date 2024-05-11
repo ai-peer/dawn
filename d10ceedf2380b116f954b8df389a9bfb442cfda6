@@ -3,6 +3,142 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "081b6a5c_114672a3",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "nit: if we keep a Ref\u003cvulkan::Pipline\u003e in the Vulkan backend, then this could be replaced with Ref\u003cPipelineType\u003e instead.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f33b8caa_71d54fe0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "u-nit: maybe we could have a validation test for this.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d264e31_a1c4b626",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "This a slightly weird, maybe it could be device-\u003eUseResolveTextureBlitForLoadOp and comment that some backends need to handle it internally, instead that they must (otherwise they\u0027d just not expose the extension)",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404e2860_2323f468",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Can\u0027t we use PipelineVK.h/.cpp to create the pipeline instead of copying a LOT of code around to create a Vulkan pipeline? This would also make it much easier to rely on caches etc. Right now everytime we will make a change to how some commands are done in the Vulkan backend, we\u0027ll also need to change the duplicate utility file.\n\nI understand that this is currently needed because we use hardcoded SPIR-V but IMHO we should instead augment Tint with minimal support for input attachments (since we\u0027ll need them for PLS anyway) and then use WGSL + wgpu::RenderPipelineDescriptor etc to compile the Vulkan pipeline.\n\nWe\u0027ll also need to add some input attachment descriptor type for internal use in the pipeline layout in the Vulkan backend.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "618baba5_03ee807c",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Note, I still need to review this in detail.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33914551_61ea4915",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "nit: slight preference for creating the SupbassDesc on the stack and then copying it to the vector so that we avoid pointers that might be invalidated later if there\u0027s another push_back for any other reason.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5352a73_a747acc4",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Maybe this could be returned by GetRenderPass and stored in the so that computations around multi-subpass happen only once.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48dfd656_a89e4701",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Maybe we could have a `ColorAttachmentMask GetExpandedResolveMask()` in `RenderPipelineBase` and add that mask to the query. It would still allow considering that all load/store ops are the same and simplify the code here and renderpasscache a bit.\n\nOut of curiiosity, what about render bundle compatibility with render passes that use ExpandToResolve? It looks like it might already work but maybe I\u0027m missing something.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7700ec12_f78f5d54",
         "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
         "patchSetId": 5
@@ -14,6 +150,63 @@
       "writtenOn": "2024-05-11T02:11:42Z",
       "side": 1,
       "message": "FYI, ANGLE has code to generate this based on the color attachment locations and format in UtilsVk.cpp",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a283bd9_63e56279",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "This is very hot code and I would like to keep it as streamlined as possible. Also in the future it will change to use VkImageLayout directly. What about making `VulkanImageLayout(kResolveTextureLoadAndStoreUsages)` return RenderAttachment, then doing the following in `ExpandResolveTextureWithDrawInSubpass`\n\n```\nattachment-\u003eTransitionUsageNow(TextureBinding);\ndo the load etc.\n```\n\nThen the code in EncodeRenderPass will automatically do the transition to the render attachment layout.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec51bfc_d191e0d6",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Did you mean `IsSubset(RenderAttachment | TextureBinding, usage)`?",
+      "range": {
+        "startLine": 631,
+        "startChar": 8,
+        "endLine": 631,
+        "endChar": 92
+      },
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0141e77c_a5057a13",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-11T14:51:55Z",
+      "side": 1,
+      "message": "Hopefully this won\u0027t add too much overhead. If it does, we\u0027ll need to add an additional webgpu.h usage just for this case.",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
