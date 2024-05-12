@@ -233,6 +233,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae10572_b9a1d674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-12T17:58:46Z",
+      "side": 1,
+      "message": "I understand the thinking. I admit the memory recycling could have been done better But for a while we only used that feature with memoryless textures, hence the need for proper memory reclycing wasn\u0027t really prioritized. If we had implemented a memory recycling, skia still would have wanted some controls of it (via memory report, cache eviction, budget control, etc). That seems like it\u0027s better to give them total control like DawnLoadResolveTexture instead.\n\nThe former DawnMultisampleResolveState should be true like VK_EXT_multisampled_render_to_single_sampled. i.e no extra memory is needed (even hidden one in Dawn).",
+      "parentUuid": "2ae49222_84996ea5",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c8a4af_dd565239",
@@ -246,6 +264,30 @@
       "writtenOn": "2024-05-10T18:00:03Z",
       "side": 1,
       "message": "I think the struct name should be something like:\n\n`MultisampleStateExpandResolveTextureDawn` with a single `enabled` boolean.\n - `DawnMultisampleResolveState` seems like it could have other types of things inside. Not sure if you\u0027re expecting that, but I think they would likely need to be separate ext structs\n - See https://github.com/webgpu-native/webgpu-headers/pull/270 about naming, but we decided implementations should use suffixes, not prefixes. It means we should also add _Dawn suffixes to the new enums, eventually\n - single `enabled` boolean is fine - unless you expect to add other members here?\n \n \nThat said, did you consider chaining the extension struct on the color target state instead? This may be more appropriate since the load from resolve texture happens per-color target",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 269
+      },
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9d0118_996fae9f",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-12T17:58:46Z",
+      "side": 1,
+      "message": "Having an extension struct on the color target state would also work. But do you think it is necessary? For vulkan\u0027s implementation, the relevant information the render pipeline needs to decide is whether the main subpass is 0 or 1. That can be deduced from a single extension struct telling the render pass has expand load op or not.\n\nFor other backend, this struct is not used at all. Unless we envision a future graphics api where we have to implement in an unconventional way.",
+      "parentUuid": "56c8a4af_dd565239",
       "range": {
         "startLine": 7,
         "startChar": 0,
@@ -275,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "406d5448_d3e37c15",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3330,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-12T17:58:46Z",
+      "side": 1,
+      "message": "The MSAARenderToSingleSampled feature is not deprecated, only the render pipeline\u0027s extension struct `DawnMultisampleStateRenderToSingleSampled` is being deprecated. Since I don\u0027t see it\u0027s being needed anymore. We don\u0027t need to implement MSAARenderToSingleSampled using 2 subpasses in vulkan. Note: the `MSAARenderToSingleSampled` feature is no longer advertised by any backend currently. Graphite still has code using it. Skia team prefer to keep it so that they can use the real VK_EXT_multisampled_render_to_single_sampled in vulkan once it is implemented in that backend.\n\nI would prefer deprecating the code in Dawn first before removing the using code from Graphite. Since otherwise, if we remove the deprecated struct immediately now, this CL won\u0027t be able to be rolled into Chromium or Skia repo due to compilation errors.",
+      "parentUuid": "d1cac948_b2d7ca28",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b7dcd05_17a11178",
         "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
         "patchSetId": 1
@@ -286,6 +346,24 @@
       "writtenOn": "2024-05-11T13:55:42Z",
       "side": 1,
       "message": "Maybe we could also have a test with two color attachments and only the second one is expanded. This would require addressing Austin\u0027s comment about the extension being better inside the ColorState.",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6293cb_db79bafb",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1590,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-12T17:58:46Z",
+      "side": 1,
+      "message": "Currently the feature spec only allows one attachment with ExpandResolveTexture load op to make the implementation simple for now. There is already a test that verifies only one attachment is allowed. We might expand the support to multiple attachments in future.\n\nBtw, I think having the Expand load op in first or last attachment won\u0027t matter for a render pipeline. For render pipeline\u0027s compatibility, only important thing to decide is its subpass being 0 or 1 (which can be deduced by a binary flag telling the render pass has expand load op in any attachment or not).",
+      "parentUuid": "1b7dcd05_17a11178",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
