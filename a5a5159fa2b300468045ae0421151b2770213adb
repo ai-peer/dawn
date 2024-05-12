@@ -251,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7a7e2a_b7f0fd34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-12T18:01:21Z",
+      "side": 1,
+      "message": "Edit: I meant the MSAARenderToSingleSampled feature should be true to VK_EXT_multisampled_render_to_single_sampled, no extra memory needed.",
+      "parentUuid": "0ae10572_b9a1d674",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56c8a4af_dd565239",
