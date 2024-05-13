@@ -506,6 +506,9 @@ wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension
         case wgpu::TextureDimension::e3D:
             return wgpu::TextureViewDimension::e3D;
     }
+
+    // (crbug.com/339704108): fix for fuzzer.
+    return wgpu::TextureViewDimension::Undefined;
 }
 
 }  // anonymous namespace
