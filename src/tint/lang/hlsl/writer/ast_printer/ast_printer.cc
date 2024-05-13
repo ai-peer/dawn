@@ -4549,8 +4549,9 @@ bool ASTPrinter::EmitStructType(TextBuffer* b, const core::type::Struct* str) {
                 }
                 post += " : " + name;
             }
-            if (auto interpolation = attributes.interpolation) {
-                auto mod = interpolation_to_modifiers(interpolation->type, interpolation->sampling);
+            if (attributes.interpolation.type != core::InterpolationType::kUndefined) {
+                auto mod = interpolation_to_modifiers(attributes.interpolation.type,
+                                                      attributes.interpolation.sampling);
                 if (mod.empty()) {
                     diagnostics_.AddError(Source{}) << "unsupported interpolation";
                     return false;

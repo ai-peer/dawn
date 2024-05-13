@@ -260,12 +260,12 @@ class Parser {
             core::type::StructMemberAttributes attributes;
             auto interpolation = [&]() -> core::Interpolation& {
                 // Create the interpolation field with the default values on first call.
-                if (!attributes.interpolation.has_value()) {
+                if (attributes.interpolation.type == core::InterpolationType::kUndefined) {
                     attributes.interpolation =
                         core::Interpolation{core::InterpolationType::kPerspective,
                                             core::InterpolationSampling::kCenter};
                 }
-                return attributes.interpolation.value();
+                return attributes.interpolation;
             };
 
             // Handle member decorations that affect layout or attributes.
@@ -606,11 +606,11 @@ class Parser {
         core::ir::IOAttributes io_attributes;
         auto interpolation = [&]() -> core::Interpolation& {
             // Create the interpolation field with the default values on first call.
-            if (!io_attributes.interpolation.has_value()) {
+            if (io_attributes.interpolation.type == core::InterpolationType::kUndefined) {
                 io_attributes.interpolation = core::Interpolation{
                     core::InterpolationType::kPerspective, core::InterpolationSampling::kCenter};
             }
-            return io_attributes.interpolation.value();
+            return io_attributes.interpolation;
         };
         for (auto* deco :
              spirv_context_->get_decoration_mgr()->GetDecorationsFor(inst.result_id(), false)) {

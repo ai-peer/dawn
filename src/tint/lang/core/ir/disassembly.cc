@@ -210,12 +210,12 @@ void Disassembly::EmitBindingPoint(BindingPoint p) {
 
 void Disassembly::EmitLocation(Location loc) {
     out_ << StyleAttribute("@location") << "(" << loc.value << ")";
-    if (loc.interpolation.has_value()) {
+    if (loc.interpolation.type != core::InterpolationType::kUndefined) {
         out_ << ", " << StyleAttribute("@interpolate") << "(";
-        out_ << StyleEnum(loc.interpolation->type);
-        if (loc.interpolation->sampling != core::InterpolationSampling::kUndefined) {
+        out_ << StyleEnum(loc.interpolation.type);
+        if (loc.interpolation.sampling != core::InterpolationSampling::kUndefined) {
             out_ << ", ";
-            out_ << StyleEnum(loc.interpolation->sampling);
+            out_ << StyleEnum(loc.interpolation.sampling);
         }
         out_ << ")";
     }
@@ -496,8 +496,8 @@ void Disassembly::EmitInstruction(const Instruction* inst) {
                 out_ << " " << StyleAttribute("@blend_src") << "("
                      << v->Attributes().blend_src.value() << ")";
             }
-            if (v->Attributes().interpolation.has_value()) {
-                auto& interp = v->Attributes().interpolation.value();
+            if (v->Attributes().interpolation.type != core::InterpolationType::kUndefined) {
+                auto& interp = v->Attributes().interpolation;
                 out_ << " " << StyleAttribute("@interpolate") << "(" << interp.type;
                 if (interp.sampling != core::InterpolationSampling::kUndefined) {
                     out_ << ", " << interp.sampling;
@@ -831,8 +831,8 @@ void Disassembly::EmitStructDecl(const core::type::Struct* str) {
             out_ << ", " << StyleAttribute("@location") << "("
                  << StyleLiteral(member->Attributes().location.value()) << ")";
         }
-        if (member->Attributes().interpolation.has_value()) {
-            auto& interp = member->Attributes().interpolation.value();
+        if (member->Attributes().interpolation.type != core::InterpolationType::kUndefined) {
+            auto& interp = member->Attributes().interpolation;
             out_ << ", " << StyleAttribute("@interpolate") << "(" << StyleEnum(interp.type);
             if (interp.sampling != core::InterpolationSampling::kUndefined) {
                 out_ << ", " << StyleEnum(interp.sampling);

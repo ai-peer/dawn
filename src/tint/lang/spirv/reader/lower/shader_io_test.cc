@@ -44,9 +44,8 @@ class SpirvReader_ShaderIOTest : public core::ir::transform::TransformTest {
         attrs.builtin = builtin;
         return attrs;
     }
-    core::type::StructMemberAttributes LocationAttrs(
-        uint32_t location,
-        std::optional<core::Interpolation> interpolation = std::nullopt) {
+    core::type::StructMemberAttributes LocationAttrs(uint32_t location,
+                                                     core::Interpolation interpolation = {}) {
         core::type::StructMemberAttributes attrs;
         attrs.location = location;
         attrs.interpolation = interpolation;

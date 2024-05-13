@@ -2824,8 +2824,9 @@ bool ASTPrinter::EmitStructType(TextBuffer* b, const core::type::Struct* str) {
             out << " [[color(" + std::to_string(color.value()) + ")]]";
         }
 
-        if (auto interpolation = attributes.interpolation) {
-            auto name = InterpolationToAttribute(interpolation->type, interpolation->sampling);
+        if (attributes.interpolation.type != core::InterpolationType::kUndefined) {
+            auto name = InterpolationToAttribute(attributes.interpolation.type,
+                                                 attributes.interpolation.sampling);
             if (name.empty()) {
                 diagnostics_.AddError(Source{}) << "unknown interpolation attribute";
                 return false;

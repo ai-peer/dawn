@@ -1273,8 +1273,9 @@ class Printer : public tint::TextGenerator {
                 }
             }
 
-            if (auto interpolation = attributes.interpolation) {
-                auto name = InterpolationToAttribute(interpolation->type, interpolation->sampling);
+            if (attributes.interpolation.type != core::InterpolationType::kUndefined) {
+                auto name = InterpolationToAttribute(attributes.interpolation.type,
+                                                     attributes.interpolation.sampling);
                 if (name.empty()) {
                     TINT_IR_ICE(ir_) << "unknown interpolation attribute";
                 }

@@ -80,7 +80,7 @@ struct State {
                                        /* index */ std::nullopt,
                                        /* color */ std::nullopt,
                                        /* builtin */ core::BuiltinValue::kPointSize,
-                                       /* interpolation */ std::nullopt,
+                                       /* interpolation */ {},
                                        /* invariant */ false,
                                    });
         }
@@ -124,7 +124,7 @@ struct State {
                 for (auto* member : str->Members()) {
                     auto name = str->Name().Name() + "_" + member->Name().Name();
                     auto attributes = member->Attributes();
-                    if (attributes.interpolation &&
+                    if (attributes.interpolation.type != core::InterpolationType::kUndefined &&
                         func->Stage() != Function::PipelineStage::kFragment) {
                         attributes.interpolation = {};
                     }
@@ -136,8 +136,9 @@ struct State {
                 core::type::StructMemberAttributes attributes;
                 if (auto loc = param->Location()) {
                     attributes.location = loc->value;
-                    if (loc->interpolation && func->Stage() == Function::PipelineStage::kFragment) {
-                        attributes.interpolation = *loc->interpolation;
+                    if (loc->interpolation.type != core::InterpolationType::kUndefined &&
+                        func->Stage() == Function::PipelineStage::kFragment) {
+                        attributes.interpolation = loc->interpolation;
                     }
                     param->ClearLocation();
                 } else if (auto builtin = param->Builtin()) {
@@ -163,7 +164,8 @@ struct State {
             for (auto* member : str->Members()) {
                 auto name = str->Name().Name() + "_" + member->Name().Name();
                 auto attributes = member->Attributes();
-                if (attributes.interpolation && func->Stage() != Function::PipelineStage::kVertex) {
+                if (attributes.interpolation.type != core::InterpolationType::kUndefined &&
+                    func->Stage() != Function::PipelineStage::kVertex) {
                     attributes.interpolation = {};
                 }
                 backend->AddOutput(ir.symbols.Register(name), member->Type(), attributes);
@@ -174,8 +176,9 @@ struct State {
             core::type::StructMemberAttributes attributes;
             if (auto loc = func->ReturnLocation()) {
                 attributes.location = loc->value;
-                if (loc->interpolation && func->Stage() == Function::PipelineStage::kVertex) {
-                    attributes.interpolation = *loc->interpolation;
+                if (loc->interpolation.type != core::InterpolationType::kUndefined &&
+                    func->Stage() == Function::PipelineStage::kVertex) {
+                    attributes.interpolation = loc->interpolation;
                 }
                 func->ClearReturnLocation();
             } else if (auto builtin = func->ReturnBuiltin()) {

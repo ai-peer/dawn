@@ -214,7 +214,7 @@ struct StructMemberAttributes {
     /// The value of a `@builtin` attribute
     std::optional<core::BuiltinValue> builtin;
     /// The values of a `@interpolate` attribute
-    std::optional<core::Interpolation> interpolation;
+    core::Interpolation interpolation;
     /// True if the member was annotated with `@invariant`
     bool invariant = false;
 };

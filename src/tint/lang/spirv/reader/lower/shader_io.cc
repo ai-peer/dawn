@@ -210,7 +210,8 @@ struct State {
                         // Location values increment from the base location value on the variable.
                         member_attributes.location = base_loc.value() + member->Index();
                     }
-                    if (!member_attributes.interpolation) {
+                    if (member_attributes.interpolation.type ==
+                        core::InterpolationType::kUndefined) {
                         member_attributes.interpolation = var_attributes.interpolation;
                     }
 
@@ -388,7 +389,7 @@ struct State {
                     // Location values increment from the base location value on the variable.
                     member_attributes.location = base_loc.value() + member->Index();
                 }
-                if (!member_attributes.interpolation) {
+                if (member_attributes.interpolation.type == core::InterpolationType::kUndefined) {
                     member_attributes.interpolation = attributes.interpolation;
                 }
                 // TODO(crbug.com/tint/745): Remove the const_cast.
