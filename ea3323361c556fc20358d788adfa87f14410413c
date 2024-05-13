@@ -51,6 +51,24 @@
       "parentUuid": "c14e72fe_2244ff08",
       "revId": "ea3323361c556fc20358d788adfa87f14410413c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "106f27ed_eafa6293",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003911
+      },
+      "writtenOn": "2024-05-13T07:21:30Z",
+      "side": 1,
+      "message": "Yes, we\u0027d love to protect as many pointers as we can, but it\u0027s not like we have too much choice here. Metrics owners (incl. benchmark owners) put their foot down to ensure that the performance overhead is minimal. The rule that we, MiraclePtr team, have been always following is \"rewrite everything (on heap) unless it degrades perf\" and this CL follows the spirit of that rule.",
+      "parentUuid": "9ee0fd2b_fabfe91b",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
