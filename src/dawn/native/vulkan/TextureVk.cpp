@@ -526,6 +526,7 @@ VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
 
         // R8BG8A8Triplanar420Unorm format is only supported on macOS.
         case wgpu::TextureFormat::R8BG8A8Triplanar420Unorm:
+        case wgpu::TextureFormat::External:
         case wgpu::TextureFormat::Undefined:
             break;
     }
@@ -1768,6 +1769,12 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
     if (auto* yCbCrVkDescriptor = descriptor.Get<YCbCrVkDescriptor>()) {
         mYCbCrVkDescriptor = *yCbCrVkDescriptor;
         mYCbCrVkDescriptor.nextInChain = nullptr;
+
+        if (GetFormat().format != wgpu::TextureFormat::External) {
+            return DAWN_VALIDATION_ERROR("%u format is not supported with YCbCr samplers.",
+                                         GetFormat().format);
+        }
+
         DAWN_TRY_ASSIGN(mSamplerYCbCrConversion,
                         CreateSamplerYCbCrConversionCreateInfo(mYCbCrVkDescriptor, device));
 
