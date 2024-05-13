@@ -160,6 +160,24 @@
       "parentUuid": "f8fbf37a_60d2bea9",
       "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b013cadc_3e0cad3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-13T15:39:27Z",
+      "side": 1,
+      "message": "The WGSL meeting decision was to validation as soon as possible, so `createShaderModule` if we can.\n\n(Can you move this from WIP to non-WIP so Gerrit will send emails for comments, otherwise they\u0027re very easy to miss)",
+      "parentUuid": "ae0e8eeb_41e003aa",
+      "revId": "9b9d5ff75c12a60207558c4ef07af3c895079062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
