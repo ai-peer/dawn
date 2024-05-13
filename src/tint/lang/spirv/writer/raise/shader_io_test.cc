@@ -156,7 +156,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Struct) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kFrontFacing,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -168,7 +168,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Struct) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ true,
                                      },
                                  },
@@ -180,7 +180,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Struct) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -308,7 +308,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Mixed) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ true,
                                      },
                                  },
@@ -320,7 +320,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Mixed) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -522,7 +522,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ReturnValue_Struct) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ true,
                                      },
                                  },
@@ -534,7 +534,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ReturnValue_Struct) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -622,33 +622,32 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_ShaderIOTest, ReturnValue_DualSourceBlending) {
-    auto* str_ty =
-        ty.Struct(mod.symbols.New("Output"), {
-                                                 {
-                                                     mod.symbols.New("color1"),
-                                                     ty.f32(),
-                                                     core::type::StructMemberAttributes{
-                                                         /* location */ 0u,
-                                                         /* index */ 0u,
-                                                         /* color */ std::nullopt,
-                                                         /* builtin */ std::nullopt,
-                                                         /* interpolation */ std::nullopt,
-                                                         /* invariant */ false,
-                                                     },
-                                                 },
-                                                 {
-                                                     mod.symbols.New("color2"),
-                                                     ty.f32(),
-                                                     core::type::StructMemberAttributes{
-                                                         /* location */ 0u,
-                                                         /* index */ 1u,
-                                                         /* color */ std::nullopt,
-                                                         /* builtin */ std::nullopt,
-                                                         /* interpolation */ std::nullopt,
-                                                         /* invariant */ false,
-                                                     },
-                                                 },
-                                             });
+    auto* str_ty = ty.Struct(mod.symbols.New("Output"), {
+                                                            {
+                                                                mod.symbols.New("color1"),
+                                                                ty.f32(),
+                                                                core::type::StructMemberAttributes{
+                                                                    /* location */ 0u,
+                                                                    /* index */ 0u,
+                                                                    /* color */ std::nullopt,
+                                                                    /* builtin */ std::nullopt,
+                                                                    /* interpolation */ {},
+                                                                    /* invariant */ false,
+                                                                },
+                                                            },
+                                                            {
+                                                                mod.symbols.New("color2"),
+                                                                ty.f32(),
+                                                                core::type::StructMemberAttributes{
+                                                                    /* location */ 0u,
+                                                                    /* index */ 1u,
+                                                                    /* color */ std::nullopt,
+                                                                    /* builtin */ std::nullopt,
+                                                                    /* interpolation */ {},
+                                                                    /* invariant */ false,
+                                                                },
+                                                            },
+                                                        });
 
     auto* ep = b.Function("foo", str_ty);
     ep->SetStage(core::ir::Function::PipelineStage::kFragment);
@@ -720,7 +719,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedByVertexAndFragment) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -732,7 +731,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedByVertexAndFragment) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -861,7 +860,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedWithBuffer) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -873,7 +872,7 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedWithBuffer) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -956,7 +955,7 @@ TEST_F(SpirvWriter_ShaderIOTest, SampleMask) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -968,7 +967,7 @@ TEST_F(SpirvWriter_ShaderIOTest, SampleMask) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kSampleMask,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -1200,7 +1199,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ClampFragDepth) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -1212,7 +1211,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ClampFragDepth) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kFragDepth,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -1297,7 +1296,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ClampFragDepth_MultipleFragmentShaders) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -1309,7 +1308,7 @@ TEST_F(SpirvWriter_ShaderIOTest, ClampFragDepth_MultipleFragmentShaders) {
                                          /* index */ std::nullopt,
                                          /* color */ std::nullopt,
                                          /* builtin */ core::BuiltinValue::kFragDepth,
-                                         /* interpolation */ std::nullopt,
+                                         /* interpolation */ {},
                                          /* invariant */ false,
                                      },
                                  },
@@ -1502,7 +1501,7 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithoutPolyfill) {
                                                           /* index */ std::nullopt,
                                                           /* color */ std::nullopt,
                                                           /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
+                                                          /* interpolation */ {},
                                                           /* invariant */ false,
                                                       },
                                                   },
@@ -1514,7 +1513,7 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithoutPolyfill) {
                                                           /* index */ std::nullopt,
                                                           /* color */ std::nullopt,
                                                           /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
+                                                          /* interpolation */ {},
                                                           /* invariant */ false,
                                                       },
                                                   },
@@ -1522,8 +1521,8 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithoutPolyfill) {
 
     auto* in1 = b.FunctionParam("in1", ty.f16());
     auto* in2 = b.FunctionParam("in2", ty.vec4<f16>());
-    in1->SetLocation(1, std::nullopt);
-    in1->SetLocation(2, std::nullopt);
+    in1->SetLocation(1, {});
+    in1->SetLocation(2, {});
     auto* func = b.Function("main", outputs, core::ir::Function::PipelineStage::kFragment);
     func->SetParams({in1, in2});
     b.Append(func->Block(), [&] {  //
@@ -1596,7 +1595,7 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithPolyfill) {
                                                           /* index */ std::nullopt,
                                                           /* color */ std::nullopt,
                                                           /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
+                                                          /* interpolation */ {},
                                                           /* invariant */ false,
                                                       },
                                                   },
@@ -1608,7 +1607,7 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithPolyfill) {
                                                           /* index */ std::nullopt,
                                                           /* color */ std::nullopt,
                                                           /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
+                                                          /* interpolation */ {},
                                                           /* invariant */ false,
                                                       },
                                                   },
@@ -1616,8 +1615,8 @@ TEST_F(SpirvWriter_ShaderIOTest, F16_IO_WithPolyfill) {
 
     auto* in1 = b.FunctionParam("in1", ty.f16());
     auto* in2 = b.FunctionParam("in2", ty.vec4<f16>());
-    in1->SetLocation(1, std::nullopt);
-    in1->SetLocation(2, std::nullopt);
+    in1->SetLocation(1, {});
+    in1->SetLocation(2, {});
     auto* func = b.Function("main", outputs, core::ir::Function::PipelineStage::kFragment);
     func->SetParams({in1, in2});
     b.Append(func->Block(), [&] {  //

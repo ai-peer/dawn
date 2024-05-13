@@ -94,8 +94,8 @@ class FunctionParam : public Castable<FunctionParam, Value> {
 
     /// Sets the location
     /// @param loc the location value
-    /// @param interpolation if the location interpolation settings
-    void SetLocation(uint32_t loc, std::optional<core::Interpolation> interpolation) {
+    /// @param interpolation the location interpolation settings
+    void SetLocation(uint32_t loc, core::Interpolation interpolation) {
         location_ = {loc, interpolation};
     }
 
