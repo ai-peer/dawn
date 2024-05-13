@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a61ee22f_223fffb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-13T14:40:36Z",
+      "side": 1,
+      "message": "K, this should be fixed after merging the shader_io change.",
+      "revId": "b63bebb669ffa3d074cfad1f65ebc41a74285ec8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
