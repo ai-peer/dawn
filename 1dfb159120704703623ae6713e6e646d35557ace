@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd55f7b_3b6c2fb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-13T15:59:17Z",
+      "side": 1,
+      "message": "I realize that the bug that you\u0027re fixing is mine, but it looks like interpolation is in fact optional in Tint IR based on the code that our shader IO transform generates. So I\u0027m not sure whether this is the right direction any more...",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc483795_2d48c77f",
+        "filename": "src/tint/lang/core/ir/transform/shader_io.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-13T15:59:17Z",
+      "side": 1,
+      "message": "Hmm, now I\u0027ve confused myself. It looks like `interpolation` is /not/ always required when we location is present, since we explicitly remove it in these cases.",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f037420_0e206a49",
+        "filename": "src/tint/lang/core/ir/var.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-13T15:59:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure about removing the `std::optional\u003c\u003e` here. Unlike with `ir::Location`, the interpolation /is/ still optional here (because we could be dealing with a builtin instead).\n\nPerhaps we should actually be using `ir::Location` in this struct instead of separate fields for location and interpolation, for consistency sake.",
+      "fixSuggestions": [
+        {
+          "fixId": "c4bf2b6e_219ea0af",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/var.h",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "    std::optional\u003ccore::Interpolation\u003e interpolation;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f231a1d_b2201ab3",
+        "filename": "src/tint/lang/core/type/struct.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-13T15:59:17Z",
+      "side": 1,
+      "message": "Likewise, here interpolation /is/ still optional, since it\u0027s not nested inside the location.\n\nAgain, we could maybe consider using the `ir::Location` struct to combine the two fields together. Though that requires more work here, since we\u0027re not in the `ir` namespace.\n\nAs an aside, I\u0027d also love it if we could unify this struct with the `IOAttributes` one we use in `ir::Var` (and then also use it for `ir::FunctionaParam`). It\u0027d make it much easier to move IO attributes around like we have to do in all of these shader IO transforms.",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
