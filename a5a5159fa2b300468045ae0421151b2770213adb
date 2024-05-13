@@ -318,6 +318,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eea81a4_6c5b4397",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-13T18:13:15Z",
+      "side": 1,
+      "message": "Done changing to `MultisampleStateExpandResolveTextureDawn`.",
+      "parentUuid": "0b9d0118_996fae9f",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 269
+      },
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1cac948_b2d7ca28",
         "filename": "src/dawn/dawn.json",
         "patchSetId": 1
