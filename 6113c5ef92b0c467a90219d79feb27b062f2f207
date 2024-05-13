@@ -16,6 +16,23 @@
       "message": "Thanks! Austin, PTAL.\n\nI will make sure to add the test that Kai outlined in the followup CL where I do the implementation.",
       "revId": "6113c5ef92b0c467a90219d79feb27b062f2f207",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec2b8737_1cd92da0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-13T14:39:07Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "6113c5ef92b0c467a90219d79feb27b062f2f207",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
