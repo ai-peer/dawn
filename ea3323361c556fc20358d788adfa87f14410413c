@@ -69,6 +69,75 @@
       "parentUuid": "9ee0fd2b_fabfe91b",
       "revId": "ea3323361c556fc20358d788adfa87f14410413c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d997368_0513fec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-13T09:39:18Z",
+      "side": 1,
+      "message": "Thank you for the explanation, LGTM! (ideally with the exclusion removed for Buffer.h)",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f328b3fa_906d001c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-13T09:39:18Z",
+      "side": 1,
+      "message": "You mention being blocked on launching BRP in the renderer process, but Dawn is in the GPU process. I assume that you\u0027re trying to launch in the GPU process?\n\nThank you for the explanation. I think all of the exclusion here are very safe by construction of Dawn, the only one that\u0027s a bit weird is Buffer::mUserdata which doesn\u0027t seem like it would be a hot spot.",
+      "parentUuid": "106f27ed_eafa6293",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a36448e3_7b714ba7",
+        "filename": "src/dawn/common/LinkedList.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-13T09:39:18Z",
+      "side": 1,
+      "message": "In general it would be nice to explain why the pointers are safe to exclude and why they are performance sensitive, but the Dawn team can take care of that.",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d86898_77b13597",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-13T09:39:18Z",
+      "side": 1,
+      "message": "We could make this class inherit from both NonMovable and StackAllocated similar to InternalUsageScope in src/dawn/native/CommandEncoder.h this would make it fairly clear that the pointer cannot outlive the MutexProtected and we could update the comment with that reasoning (so it\u0027s not just a performance thing). But the Dawn team can take care of doing that change.",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
