@@ -37,24 +37,38 @@
 namespace dawn {
 namespace {
 
-constexpr uint32_t kWidth = 32u;
-constexpr uint32_t kHeight = 32u;
 constexpr uint32_t kDefaultMipLevels = 6u;
 constexpr uint32_t kDefaultLayerCount = 1u;
-constexpr uint32_t kDefaultSampleCount = 1u;
-constexpr wgpu::TextureFormat kDefaultTextureFormat = wgpu::TextureFormat::RGBA8Unorm;
+constexpr wgpu::TextureFormat kDefaultTextureFormat = wgpu::TextureFormat::External;
 
-wgpu::Texture Create2DTexture(wgpu::Device& device) {
-    wgpu::TextureDescriptor descriptor;
-    descriptor.dimension = wgpu::TextureDimension::e2D;
-    descriptor.size.width = kWidth;
-    descriptor.size.height = kHeight;
-    descriptor.size.depthOrArrayLayers = kDefaultLayerCount;
-    descriptor.sampleCount = kDefaultSampleCount;
-    descriptor.format = kDefaultTextureFormat;
-    descriptor.mipLevelCount = kDefaultMipLevels;
-    descriptor.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
-    return device.CreateTexture(&descriptor);
+wgpu::Texture Create2DTexture(wgpu::Device& device,
+                              wgpu::TextureFormat format = kDefaultTextureFormat) {
+#if DAWN_PLATFORM_IS(ANDROID)
+    constexpr uint32_t kWidth = 32u;
+    constexpr uint32_t kHeight = 32u;
+    AHardwareBuffer_Desc aHardwareBufferDesc = {
+        .width = kWidth,
+        .height = kHeight,
+        .layers = 1,
+        .format = AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM,
+        .usage = AHARDWAREBUFFER_USAGE_CPU_WRITE_OFTEN,
+    };
+    AHardwareBuffer* aHardwareBuffer;
+    EXPECT_EQ(AHardwareBuffer_allocate(&aHardwareBufferDesc, &aHardwareBuffer), 0);
+
+    // Get actual desc for allocated buffer so we know the stride for cpu data.
+    AHardwareBuffer_describe(aHardwareBuffer, &aHardwareBufferDesc);
+
+    wgpu::SharedTextureMemoryAHardwareBufferDescriptor stmAHardwareBufferDesc;
+    stmAHardwareBufferDesc.handle = aHardwareBuffer;
+
+    wgpu::SharedTextureMemoryDescriptor desc;
+    desc.nextInChain = &stmAHardwareBufferDesc;
+
+    wgpu::SharedTextureMemory memory = device.ImportSharedTextureMemory(&desc);
+    return memory.CreateTexture();
+#endif
+    return {};
 }
 
 wgpu::TextureViewDescriptor CreateDefaultViewDescriptor(wgpu::TextureViewDimension dimension) {
@@ -138,8 +152,24 @@ TEST_P(YCbCrInfoTest, YCbCrSamplerInvalidWithNoFormat) {
     ASSERT_DEVICE_ERROR(device.CreateSampler(&samplerDesc));
 }
 
+// Test that it is invalid to create texture view with formats other than External.
+TEST_P(YCbCrInfoTest, YCbCrTextureViewInvalidWithoutWgpuFormatExternal) {
+    wgpu::Texture texture = Create2DTexture(device);
+
+    wgpu::TextureViewDescriptor descriptor =
+        CreateDefaultViewDescriptor(wgpu::TextureViewDimension::e2D);
+    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    descriptor.arrayLayerCount = 1;
+
+    wgpu::YCbCrVkDescriptor yCbCrDesc = {};
+    yCbCrDesc.vkFormat = VK_FORMAT_R8G8B8A8_UNORM;
+    descriptor.nextInChain = &yCbCrDesc;
+
+    ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+}
+
 // Test that it is possible to create texture view with ycbcr vulkan descriptor.
-TEST_P(YCbCrInfoTest, YCbCrTextureViewValidWhenFeatureEnabled) {
+TEST_P(YCbCrInfoTest, YCbCrTextureViewValidWithWgpuFormatExternal) {
     wgpu::Texture texture = Create2DTexture(device);
 
     wgpu::TextureViewDescriptor descriptor =
