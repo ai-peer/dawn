@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ef4a2a_d42e03ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-13T17:35:58Z",
+      "side": 1,
+      "message": "Whatever we choose, we should make sure it\u0027s consistent. This CL changed the IR bits but left the struct member attribute and the code got very confusing when it was sometimes optional and sometimes not (leading to incorrect code gen afterwards).",
+      "parentUuid": "6bd55f7b_3b6c2fb0",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc483795_2d48c77f",
@@ -72,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4d47bbe_f0b82dc2",
+        "filename": "src/tint/lang/core/ir/var.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-13T17:35:58Z",
+      "side": 1,
+      "message": "We should keep them consistent. If it\u0027s optional in one place, it needs to be optional everywhere as otherwise the conversions get annoying.",
+      "parentUuid": "3f037420_0e206a49",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f231a1d_b2201ab3",
         "filename": "src/tint/lang/core/type/struct.h",
         "patchSetId": 5
@@ -83,6 +119,24 @@
       "writtenOn": "2024-05-13T15:59:17Z",
       "side": 1,
       "message": "Likewise, here interpolation /is/ still optional, since it\u0027s not nested inside the location.\n\nAgain, we could maybe consider using the `ir::Location` struct to combine the two fields together. Though that requires more work here, since we\u0027re not in the `ir` namespace.\n\nAs an aside, I\u0027d also love it if we could unify this struct with the `IOAttributes` one we use in `ir::Var` (and then also use it for `ir::FunctionaParam`). It\u0027d make it much easier to move IO attributes around like we have to do in all of these shader IO transforms.",
+      "revId": "1dfb159120704703623ae6713e6e646d35557ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5042dc81_8ef1c85c",
+        "filename": "src/tint/lang/core/type/struct.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-13T17:35:58Z",
+      "side": 1,
+      "message": "So, I think the answer to this is:\n\n1- Abandon this CL\n2- close the attached bug as won\u0027t fix\n3- File an issue to unify IOAttributes and StructMember attributes\n4- File an issue to make `ir/var.h` use `ir/location.h` for interpolation and location\n5- Move ir/location to core/type/location and make struct members use that as well.\n\nWe keep the interpolation as a `std::optional` and can decide if that means we can get rid of the kUndefined value for interpolationType and interpolationSampling.\n\nThoughts?",
+      "parentUuid": "0f231a1d_b2201ab3",
       "revId": "1dfb159120704703623ae6713e6e646d35557ace",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
