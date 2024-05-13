@@ -87,6 +87,10 @@ MaybeError ValidateCanViewTextureAs(const DeviceBase* device,
         return {};
     }
 
+    if (format.format == wgpu::TextureFormat::External) {
+        return {};
+    }
+
     const FormatSet& compatibleViewFormats = texture->GetViewFormats();
     if (compatibleViewFormats[viewFormat]) {
         // Validation of this list is done on texture creation, so we don't need to
@@ -601,7 +605,6 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     DAWN_ASSERT(!texture->IsError());
 
     DAWN_TRY(ValidateTextureViewDimension(descriptor->dimension));
-    // TODO(crbug.com/dawn/2476): Add necessary validation for TextureFormat::External.
     DAWN_TRY(ValidateTextureFormat(descriptor->format));
     DAWN_TRY(ValidateTextureAspect(descriptor->aspect));
 
@@ -609,6 +612,10 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     const Format* viewFormat;
     DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(descriptor->format));
 
+    DAWN_INVALID_IF(format.format == wgpu::TextureFormat::External &&
+                        descriptor->aspect != wgpu::TextureAspect::All,
+                    "YCbCr sampler with External format does not have view selected aspect (%s)",
+                    descriptor->aspect);
     const auto aspect = SelectFormatAspects(format, descriptor->aspect);
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "Texture format (%s) does not have the texture view's selected aspect (%s).",
@@ -632,15 +639,18 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
         "texture's mip level count (%u).",
         descriptor->baseMipLevel, descriptor->mipLevelCount, texture->GetNumMipLevels());
 
-    // TODO(crbug.com/dawn/2476): Add necessary validations to CanViewTextureAs for
-    // TextureFormat::External.
-    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
-    DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
-
     if (descriptor.Get<YCbCrVkDescriptor>()) {
         DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
                         wgpu::FeatureName::YCbCrVulkanSamplers);
+        DAWN_INVALID_IF(viewFormat->format != wgpu::TextureFormat::External,
+                        "TextureView format (%s) is not TextureFormat::External.",
+                        viewFormat->format);
+        DAWN_INVALID_IF(format.format != wgpu::TextureFormat::External,
+                        "Texture format (%s) is not TextureFormat::External.", format.format);
     }
+
+    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
+    DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
 
     return {};
 }
