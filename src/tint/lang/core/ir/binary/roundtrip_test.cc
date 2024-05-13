@@ -152,7 +152,7 @@ TEST_F(IRBinaryRoundtripTest, Fn_ReturnBuiltin) {
 
 TEST_F(IRBinaryRoundtripTest, Fn_ReturnLocation) {
     auto* fn = b.Function("Function", ty.void_());
-    fn->SetReturnLocation(42, std::nullopt);
+    fn->SetReturnLocation(42, {});
     b.ir.SetName(fn, "Function");
     RUN_TEST();
 }

@@ -47,7 +47,7 @@ struct IOAttributes {
     /// The value of a `@builtin` attribute.
     std::optional<core::BuiltinValue> builtin;
     /// The values of a `@interpolate` attribute.
-    std::optional<core::Interpolation> interpolation;
+    core::Interpolation interpolation;
     /// True if the variable is annotated with `@invariant`.
     bool invariant = false;
 };
