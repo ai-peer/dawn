@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "1f4e946126834ebad6fb51a6ab274e1750dd7103",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d85de56_83831afc",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2639,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-13T14:55:08Z",
+      "side": 1,
+      "message": "in webgpu.h, we said we wouldn\u0027t explicitly name this enum",
+      "range": {
+        "startLine": 2639,
+        "startChar": 0,
+        "endLine": 2639,
+        "endChar": 46
+      },
+      "revId": "1f4e946126834ebad6fb51a6ab274e1750dd7103",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
