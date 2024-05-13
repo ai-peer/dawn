@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebc4c63_d03d521e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-13T14:56:17Z",
+      "side": 1,
+      "message": "Still +2",
+      "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc14a10_20b07f2b",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-13T14:56:17Z",
+      "side": 1,
+      "message": "This is a slightly bonkers algorithm, but I think it\u0027s sound!\nI\u0027d have done this is two passes - one to produce an edge list, another to identify the roots, then do a simple stack walk. I think this is probably faster. Nice.",
+      "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9af053ac_b5962a15",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-13T14:56:17Z",
+      "side": 1,
+      "message": "`Pop()` returns the popped value, so this can be simplified.",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "44d3f60e_33c77c63",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/module.cc",
+              "range": {
+                "startLine": 72,
+                "startChar": 0,
+                "endLine": 74,
+                "endChar": 0
+              },
+              "replacement": "                ordered_functions.Push(function_stack.Pop());\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

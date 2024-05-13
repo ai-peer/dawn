@@ -104,6 +104,24 @@
       "parentUuid": "54751ae4_b9247c1a",
       "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf93d51f_ad997409",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-13T14:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab9dc855_eb6f507d",
+      "revId": "0ad41418f7373be1f460f4edacacb96028905a75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
