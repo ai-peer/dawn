@@ -108,6 +108,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c22be2f0_2381dbd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-05-13T11:07:36Z",
+      "side": 1,
+      "message": "Thanks. We do have BRP enabled for the GPU process already but we caught this performance regression while doing work for \"BRP in the renderer process\".\n\nOur tool did show `raw_ptr\u003cstd::variant\u003cdawn::native::BufferBase *, wgpu::BufferMapAsyncStatus\u003e\u003e` getting assigned a lot for the \"Canvas Arc\" sub-benchmark but it wasn\u0027t at the very top so I have reverted the change.",
+      "parentUuid": "f328b3fa_906d001c",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a36448e3_7b714ba7",
         "filename": "src/dawn/common/LinkedList.h",
         "patchSetId": 9
