@@ -33,6 +33,24 @@
       "message": "It\u0027s good to know that all these pointers are \"hot\" when running MotionMark, but what gains do we get rewriting this? Dawn is pretty security-sensitive so it would be great to keep the raw_ptr. We could also try to optimize the hotspots another way potentially.",
       "revId": "ea3323361c556fc20358d788adfa87f14410413c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ee0fd2b_fabfe91b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002561
+      },
+      "writtenOn": "2024-05-13T03:04:07Z",
+      "side": 1,
+      "message": "We would like as much BRP coverage as possible but we are currently blocked launching BRP to the renderer process for benchmark performance. And so we are currently kind of doing whatever we can that might help the benchmark.\n\nIs there ones that you think are important we keep raw_ptr?\n\nThese ones are definite hot spots so I would like to unrewrite them.\nGuard::mObj\nCommandAllocator::mCurrentPtr\nLinkedListIterator::current_\nLinkedListIterator::next_",
+      "parentUuid": "c14e72fe_2244ff08",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
