@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7058c3d_d90cf92b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T08:32:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81785cca_2c177be5",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T08:32:26Z",
+      "side": 1,
+      "message": "Could we have a regression test for this, either in the CTS or in Dawn?",
+      "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad438de6_9cd0614b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T08:32:26Z",
+      "side": 1,
+      "message": "u-nit: we could add this initialization on the class member itself in Texture.h",
+      "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
