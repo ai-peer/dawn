@@ -39,6 +39,30 @@
       },
       "revId": "4d7862410a030d1a6fa2fd37fa572c5884bfc4d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1acd8583_db7e2aea",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-14T22:50:32Z",
+      "side": 1,
+      "message": "Done (set to fail `ValidateTextureViewFormatCompatibility` which happens before `ValidateTextureDimension`)",
+      "parentUuid": "007eef8f_c525088a",
+      "range": {
+        "startLine": 1147,
+        "startChar": 27,
+        "endLine": 1147,
+        "endChar": 68
+      },
+      "revId": "4d7862410a030d1a6fa2fd37fa572c5884bfc4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
