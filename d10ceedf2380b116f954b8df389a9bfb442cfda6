@@ -196,6 +196,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "584f19be_37de6e69",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-14T19:17:10Z",
+      "side": 1,
+      "message": "Just want to make sure I understood your suggestions correctly:\n1. Are you suggesting that we should add a new `subpassInput` type to Tint?\n2. Or you want to use PLS for expand resolve texture?\n\nIf it\u0027s 1 then I\u0027m not sure how it would be of use for PLS in future. If it\u0027s 2 then it\u0027s overkill isn\u0027t it?",
+      "parentUuid": "1704778e_dcb12077",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "618baba5_03ee807c",
         "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
         "patchSetId": 5
