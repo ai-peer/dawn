@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee3fd334_1e17e1ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T22:27:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4d7862410a030d1a6fa2fd37fa572c5884bfc4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007eef8f_c525088a",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T22:27:10Z",
+      "side": 1,
+      "message": "Some linting rule should be triggered by this. Try making the texture an error by making it 0 sized for example?",
+      "range": {
+        "startLine": 1147,
+        "startChar": 27,
+        "endLine": 1147,
+        "endChar": 68
+      },
+      "revId": "4d7862410a030d1a6fa2fd37fa572c5884bfc4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
