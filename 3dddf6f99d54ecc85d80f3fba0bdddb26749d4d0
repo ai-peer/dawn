@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5cdbc19_5e1aeb85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:48:41Z",
+      "side": 1,
+      "message": "Looks good! Some minor changes requested",
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e7a236_c9ca9793",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:48:41Z",
+      "side": 1,
+      "message": "I\u0027d suggest `.tirb`, `.tib` or something. No need to include `pb` in the name, as we\u0027re not expecting anyone to know or care about the format - and it might change.\nThis should also be consistent with the other places below (`ir_bin`).",
+      "fixSuggestions": [
+        {
+          "fixId": "16073b6b_904a547b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 302,
+                "startChar": 0,
+                "endLine": 303,
+                "endChar": 0
+              },
+              "replacement": "    if (tint::HasSuffix(filename, \".tirb\")) {\n"
+            },
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "    WGSL_READER_ONLY(IR_BINARY_ONLY(format_enum_names.Emplace(Format::kIrBin, \"tirb\")));\n"
+            },
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 339,
+                "startChar": 0,
+                "endLine": 340,
+                "endChar": 0
+              },
+              "replacement": "  .tirb   -\u003e ir binary protobuf)\"\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72cb0f84_ab53f66e",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:48:41Z",
+      "side": 1,
+      "message": "The condition on this is `#if TINT_BUILD_WGSL_READER \u0026\u0026 TINT_BUILD_IR_BINARY`, but the description for the flag is only `#if TINT_BUILD_IR_BINARY`. I suggest adding a new define based on the combination of these, and using that for the body of the file.",
+      "fixSuggestions": [
+        {
+          "fixId": "83de5d89_bb191837",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 326,
+                "startChar": 0,
+                "endLine": 327,
+                "endChar": 0
+              },
+              "replacement": "    IR_BINARY_ONLY(format_enum_names.Emplace(Format::kIrBin, \"ir_bin\"));\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43de93aa_6f16385b",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:48:41Z",
+      "side": 1,
+      "message": "C++ performs string concatenation when you have a sequence of string literals. Because of this, I believe you can drop the `std::string`, and just wrap the new string with `IR_BINARY_ONLY(...)`",
+      "fixSuggestions": [
+        {
+          "fixId": "03360c18_e3fc7156",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 329,
+                "startChar": 0,
+                "endLine": 331,
+                "endChar": 0
+              },
+              "replacement": "    auto\u0026 fmt \u003d options.Add\u003cEnumOption\u003cFormat\u003e\u003e(\n        \"format\",\n        R\"(Output format.\n"
+            },
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 337,
+                "startChar": 0,
+                "endLine": 339,
+                "endChar": 0
+              },
+              "replacement": "        IR_BINARY_ONLY(R\"(\n"
+            },
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 340,
+                "startChar": 0,
+                "endLine": 345,
+                "endChar": 0
+              },
+              "replacement": "                       ),\n        format_enum_names, ShortName{\"f\"});\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccbc0da9_46f16b79",
+        "filename": "src/tint/lang/core/ir/binary/encode.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:48:41Z",
+      "side": 1,
+      "message": "tut tut to myself for not commenting this method. Would be great to add comments for both of these methods.",
+      "fixSuggestions": [
+        {
+          "fixId": "f08e03ce_42c53860",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/binary/encode.h",
+              "range": {
+                "startLine": 43,
+                "startChar": 0,
+                "endLine": 43,
+                "endChar": 0
+              },
+              "replacement": "// Encode the module into a binary representation.\n"
+            },
+            {
+              "path": "src/tint/lang/core/ir/binary/encode.h",
+              "range": {
+                "startLine": 45,
+                "startChar": 0,
+                "endLine": 45,
+                "endChar": 0
+              },
+              "replacement": "// Encode the module into a human readable debug representation.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
