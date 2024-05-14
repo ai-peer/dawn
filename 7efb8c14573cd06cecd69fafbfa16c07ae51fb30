@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be92ea1_19b41fa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T23:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50272bcd_84e5d408",
+      "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "035e3190_904f047d",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-14T22:27:39Z",
       "side": 1,
       "message": "nit: You could move this common loop up to the util.",
+      "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e344fad_2b4a3e21",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T23:08:52Z",
+      "side": 1,
+      "message": "Done (again templated on the module type to get const vs non-const).",
+      "parentUuid": "035e3190_904f047d",
       "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
