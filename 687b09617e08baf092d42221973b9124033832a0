@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e665c68_b815eda7",
+        "filename": "src/dawn/tests/end2end/MultithreadTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-14T00:57:29Z",
+      "side": 1,
+      "message": "this wrapper struct isn\u0027t even necessary now, because the lambda can capture all the args easily",
+      "range": {
+        "startLine": 171,
+        "startChar": 8,
+        "endLine": 174,
+        "endChar": 19
+      },
+      "revId": "687b09617e08baf092d42221973b9124033832a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
