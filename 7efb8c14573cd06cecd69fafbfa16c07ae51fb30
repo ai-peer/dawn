@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50272bcd_84e5d408",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T21:37:34Z",
+      "side": 1,
+      "message": "I think this is roughly what you suggested, please LMK if there\u0027s a better way.",
+      "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
