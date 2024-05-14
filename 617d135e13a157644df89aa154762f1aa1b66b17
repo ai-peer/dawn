@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07217427_5500baa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-05-14T14:06:18Z",
+      "side": 1,
+      "message": "Good find. However, eventually we\u0027re going to want to remove these copy paths entirely. This may be another thing we\u0027ll need to validate out in Compat.\n\nLet\u0027s hold off on landing this for now.",
+      "revId": "617d135e13a157644df89aa154762f1aa1b66b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
