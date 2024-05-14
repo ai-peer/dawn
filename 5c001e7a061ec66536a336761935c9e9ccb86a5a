@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a54e268b_8968ee3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-14T15:25:06Z",
+      "side": 1,
+      "message": "Austin: for review\nSaif, Nicolette: FYI\n\nThanks!",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c008e00_a0d9f13d",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-14T15:25:06Z",
+      "side": 1,
+      "message": "I think that it would be cleaner to add this to `properties` and pass it through in the above call, but I\u0027m not yet experienced enough in playing with the chained structs to determine how to create/chain the SharedTextureMemoryVkProperties such that it will end up with the lifetime of `SharedTextureMemory::mProperties` as needed rather than dangling when it falls out of scope here. Do you have feedback on that front?",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a6addba_8f9458e3",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-14T15:25:06Z",
+      "side": 1,
+      "message": "`vKChromaFilter` and `forceExplicitReconstruction` don\u0027t correspond to info from the AHB. Do you think it\u0027s better to leave them as whatever the client set them to or to clear them? Once we have a decision there, I can enforce the semantics here.",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
