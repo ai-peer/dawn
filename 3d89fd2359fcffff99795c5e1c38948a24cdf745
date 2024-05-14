@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e851b5_d2c75c66",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-14T19:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81785cca_2c177be5",
+      "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad438de6_9cd0614b",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-14T08:32:26Z",
       "side": 1,
       "message": "u-nit: we could add this initialization on the class member itself in Texture.h",
+      "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3956a1f_b4e43cfd",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-14T19:26:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad438de6_9cd0614b",
       "revId": "3d89fd2359fcffff99795c5e1c38948a24cdf745",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
