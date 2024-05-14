@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda55acd_74afc5f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T23:15:23Z",
+      "side": 1,
+      "message": "I think this is the simplest approach that doesn\u0027t rely on a transform. It\u0027s pretty straightforward, gets the job done, and doesn\u0027t overly complicate the printer (IMHO). We can certainly still consider moving this logic out to a transform in the future, but for now this gives us correct emission and unblocks progress.",
+      "revId": "b54bc8bc28b6c305971e183bdddb8a5e75bef153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
