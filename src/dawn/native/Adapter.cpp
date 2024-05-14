@@ -299,7 +299,7 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
 Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
                                       const RequestDeviceCallbackInfo& callbackInfo) {
     return APIRequestDevice2(
-        descriptor, {nullptr, ToAPI(callbackInfo.mode),
+        descriptor, {ToAPI(callbackInfo.nextInChain), ToAPI(callbackInfo.mode),
                      [](WGPURequestDeviceStatus status, WGPUDevice device, char const* message,
                         void* callback, void* userdata) {
                          auto cb = reinterpret_cast<WGPURequestDeviceCallback>(callback);
