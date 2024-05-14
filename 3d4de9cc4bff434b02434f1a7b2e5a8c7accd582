@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bcf8cd3_8c88b30d",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T21:34:37Z",
+      "side": 1,
+      "message": "Yeah it\u0027s not the most intuitive piece of code but it does the trick.",
+      "parentUuid": "dfc14a10_20b07f2b",
+      "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9af053ac_b5962a15",
@@ -72,6 +90,30 @@
           ]
         }
       ],
+      "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aec1107d_b4baacda",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-14T21:34:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9af053ac_b5962a15",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 37
+      },
       "revId": "3d4de9cc4bff434b02434f1a7b2e5a8c7accd582",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
