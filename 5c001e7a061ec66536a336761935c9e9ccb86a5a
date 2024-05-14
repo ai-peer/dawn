@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "939b38ae_f763ded7",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-14T15:41:35Z",
+      "side": 1,
+      "message": "Thanks Colin for adding the externalFormat! I was just adding TextureFormat::External and somehow ended up reaching this TODO [yesterday](https://dawn-review.googlesource.com/c/dawn/+/187361?checksPatchset\u003d10\u0026tab\u003dchecks) but not hitting this validation yet as my test does not create video but just AHB. Can this validation be removed/relaxed as for video from chrome the vkFormat can be undefined?",
+      "range": {
+        "startLine": 549,
+        "startChar": 8,
+        "endLine": 549,
+        "endChar": 53
+      },
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c008e00_a0d9f13d",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 2
