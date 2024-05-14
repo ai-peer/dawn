@@ -1,0 +1,56 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f99f3d5_535231ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:37:25Z",
+      "side": 1,
+      "message": "That was easier than I was expecting. Nicely done!",
+      "revId": "50ace9aa84d5ee6f98df8181790393a5dd883a0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020469d1_268a9127",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:37:25Z",
+      "side": 1,
+      "message": "Not asking for a change, but my brain struggles with `want_view` coming after the type comparison. I\u0027m probably just tired though.",
+      "fixSuggestions": [
+        {
+          "fixId": "b3991a04_6b859305",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/validator.cc",
+              "range": {
+                "startLine": 998,
+                "startChar": 0,
+                "endLine": 999,
+                "endChar": 0
+              },
+              "replacement": "        ok \u003d want_view \u0026\u0026 ty \u003d\u003d want-\u003eUnwrapPtrOrRef();\n"
+            }
+          ]
+        }
+      ],
+      "revId": "50ace9aa84d5ee6f98df8181790393a5dd883a0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
