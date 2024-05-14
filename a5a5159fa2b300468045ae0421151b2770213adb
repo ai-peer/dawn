@@ -340,6 +340,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "920366a4_eb615d0a",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T12:25:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3eea81a4_6c5b4397",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 269
+      },
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1cac948_b2d7ca28",
@@ -375,6 +399,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1c3ff3_5bebe2de",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T12:25:44Z",
+      "side": 1,
+      "message": "Ok makes sense to remove as a follow-up when the code is removed from Skia.",
+      "parentUuid": "406d5448_d3e37c15",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b7dcd05_17a11178",
@@ -406,6 +448,24 @@
       "side": 1,
       "message": "Currently the feature spec only allows one attachment with ExpandResolveTexture load op to make the implementation simple for now. There is already a test that verifies only one attachment is allowed. We might expand the support to multiple attachments in future.\n\nBtw, I think having the Expand load op in first or last attachment won\u0027t matter for a render pipeline. For render pipeline\u0027s compatibility, only important thing to decide is its subpass being 0 or 1 (which can be deduced by a binary flag telling the render pass has expand load op in any attachment or not).",
       "parentUuid": "1b7dcd05_17a11178",
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc0cd6b5_089bf70b",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1590,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T12:25:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a6293cb_db79bafb",
       "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
