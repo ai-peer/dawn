@@ -164,10 +164,14 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemoryBase::CreateTexture(
         "SharedTextureMemory size (%s) doesn't match descriptor size (%s).", &mProperties.size,
         &descriptor->size);
 
-    // Validate that the texture format exactly matches the shared texture memory's format.
-    DAWN_INVALID_IF(descriptor->format != mProperties.format,
-                    "SharedTextureMemory format (%s) doesn't match descriptor format (%s).",
-                    mProperties.format, descriptor->format);
+    // Skip this validation for external formats as the client may or may not pass
+    // VK_FORMAT_UNDEFINED which is used to `mProperties.format`.
+    if (descriptor->format != wgpu::TextureFormat::External) {
+        // Validate that the texture format exactly matches the shared texture memory's format.
+        DAWN_INVALID_IF(descriptor->format != mProperties.format,
+                        "SharedTextureMemory format (%s) doesn't match descriptor format (%s).",
+                        mProperties.format, descriptor->format);
+    }
 
     // Validate the texture descriptor, and require its usage to be a subset of the shared texture
     // memory's usage.
