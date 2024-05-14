@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "604de46e_9942ceac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-14T10:19:44Z",
+      "side": 1,
+      "message": "Do you mean we should autogen the spirv using a script or we should include the shader on front end side?\n\n- If the former then we can do that. I put TODO there but if you think it\u0027s necessary, we could do that now. Is there any easy way or an example of existing shader generating step in Dawn\u0027s gn or cmake?\n- If the latter then it\u0027s because the wgsl doesn\u0027t seem to have input attachment yet and front end Bindgroup doesn\u0027t have a concept of input attachment specific to vulkan. But yes, we could add the support to wgsl as Corentine suggested.",
+      "parentUuid": "27259c02_f4ce5320",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "081b6a5c_114672a3",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5ed3e86_5359c35b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-14T10:19:44Z",
+      "side": 1,
+      "message": "This is untestable currently anw since we disallow a multiplanar texture\u0027s view to be used as resolve target https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandEncoder.cpp;drc\u003d9da3eaf710d7c5ae6c81f2a6af42b078ecab3b40;l\u003d170",
+      "parentUuid": "f33b8caa_71d54fe0",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d264e31_a1c4b626",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -82,6 +118,24 @@
       "writtenOn": "2024-05-11T14:51:55Z",
       "side": 1,
       "message": "Can\u0027t we use PipelineVK.h/.cpp to create the pipeline instead of copying a LOT of code around to create a Vulkan pipeline? This would also make it much easier to rely on caches etc. Right now everytime we will make a change to how some commands are done in the Vulkan backend, we\u0027ll also need to change the duplicate utility file.\n\nI understand that this is currently needed because we use hardcoded SPIR-V but IMHO we should instead augment Tint with minimal support for input attachments (since we\u0027ll need them for PLS anyway) and then use WGSL + wgpu::RenderPipelineDescriptor etc to compile the Vulkan pipeline.\n\nWe\u0027ll also need to add some input attachment descriptor type for internal use in the pipeline layout in the Vulkan backend.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b2d681_2e77fbad",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-14T10:19:44Z",
+      "side": 1,
+      "message": "Ok we could add support to wgsl. Let me think about this. Though I think in order to that we need to add some internal flags to RenderPipelineDescriptor which would end up only being useful for vulkan backend. Which seems odd to be handled on front-end side.\n\nAnw the pipeline setup code here even though look like being copied from PipelineVk, most of them are just default initialization. I think it\u0027s unlikely that any change to how Vulkan commands work outside would affect this code. The pipeline here doesn\u0027t need any info from outside except the attachments\u0027 formats and size.",
+      "parentUuid": "404e2860_2323f468",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
