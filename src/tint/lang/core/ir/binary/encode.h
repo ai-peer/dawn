@@ -28,10 +28,12 @@
 #ifndef SRC_TINT_LANG_CORE_IR_BINARY_ENCODE_H_
 #define SRC_TINT_LANG_CORE_IR_BINARY_ENCODE_H_
 
+#include <string>
+
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/result/result.h"
 
-// Forward declarartion
+// Forward declaration
 namespace tint::core::ir {
 class Module;
 }  // namespace tint::core::ir
@@ -39,6 +41,8 @@ class Module;
 namespace tint::core::ir::binary {
 
 Result<Vector<std::byte, 0>> Encode(const Module& module);
+
+Result<std::string> EncodeDebug(const Module& module);
 
 }  // namespace tint::core::ir::binary
 
