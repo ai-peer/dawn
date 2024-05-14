@@ -46,6 +46,30 @@
       },
       "revId": "5d3cb57981f7d8cc98b9f08c9a90e4eb935834af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45565a02_69bdc5fb",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-14T00:51:05Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "85d7027f_bf6308b6",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 239,
+        "endChar": 1
+      },
+      "revId": "5d3cb57981f7d8cc98b9f08c9a90e4eb935834af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
