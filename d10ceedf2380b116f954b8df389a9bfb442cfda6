@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c611e09_5725eafd",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T12:35:10Z",
+      "side": 1,
+      "message": "Then why do we add validation here that can never fail? I feel like I\u0027m missing something.",
+      "parentUuid": "b5ed3e86_5359c35b",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d264e31_a1c4b626",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Ok we could add support to wgsl. Let me think about this. Though I think in order to that we need to add some internal flags to RenderPipelineDescriptor which would end up only being useful for vulkan backend. Which seems odd to be handled on front-end side.\n\nAnw the pipeline setup code here even though look like being copied from PipelineVk, most of them are just default initialization. I think it\u0027s unlikely that any change to how Vulkan commands work outside would affect this code. The pipeline here doesn\u0027t need any info from outside except the attachments\u0027 formats and size.",
       "parentUuid": "404e2860_2323f468",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1704778e_dcb12077",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T12:35:10Z",
+      "side": 1,
+      "message": "The creation of the pipeline is one thing, but there\u0027s also render pass querying, shadermodule creation (that\u0027s not cached), descriptor set layout and descriptor set allocation / writing, etc. It\u0027s really better to use Dawn re-entrantly when possible so we can take advantage of all the automatic handling that\u0027s already done in the backends. (even if adding stuff to Tint / the pipeline layout will be some effort, but we are likely interested in using it for things like PLS in the future as well)",
+      "parentUuid": "27b2d681_2e77fbad",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
