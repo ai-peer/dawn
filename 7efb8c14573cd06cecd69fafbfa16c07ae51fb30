@@ -16,6 +16,23 @@
       "message": "I think this is roughly what you suggested, please LMK if there\u0027s a better way.",
       "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035e3190_904f047d",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-14T22:27:39Z",
+      "side": 1,
+      "message": "nit: You could move this common loop up to the util.",
+      "revId": "7efb8c14573cd06cecd69fafbfa16c07ae51fb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
