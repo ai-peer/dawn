@@ -724,7 +724,9 @@ class BufferMappingCallbackTests : public BufferMappingTests {
             return {0};
         } else {
             return queueObj.OnSubmittedWorkDone(
-                {nullptr, *GetParam().mFutureCallbackMode, callback, userdata});
+                *GetParam().mFutureCallbackMode, [=](wgpu::QueueWorkDoneStatus status) {
+                    callback(static_cast<WGPUQueueWorkDoneStatus>(status), userdata);
+                });
         }
     }
 
