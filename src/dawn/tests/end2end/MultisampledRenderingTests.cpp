@@ -1587,6 +1587,290 @@ TEST_P(DawnLoadResolveTextureTest, DrawThenLoad) {
     VerifyResolveTarget(kGreen, singleSampledTexture);
 }
 
+// Test using ExpandResolveTexture load op for non-zero indexed attachment.
+TEST_P(DawnLoadResolveTextureTest, DrawThenLoadNonZeroIndexedAttachment) {
+    auto multiSampledTexture = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView = multiSampledTexture.CreateView();
+
+    auto singleSampledTexture =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView = singleSampledTexture.CreateView();
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithNonZeroLocationOutputForTest(
+        /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
+        /*enableExpandResolveLoadOp=*/false);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+
+    // In first render pass we draw a green triangle. StoreOp=Discard to discard the MSAA texture's
+    // content.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {nullptr, multiSampledTextureView}, {nullptr, singleSampledTextureView},
+            wgpu::LoadOp::Clear, wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
+    }
+
+    // In second render pass, we only use LoadOp::ExpandResolveTexture with no draw call.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {nullptr, multiSampledTextureView}, {nullptr, singleSampledTextureView},
+            wgpu::LoadOp::ExpandResolveTexture, wgpu::LoadOp::Load,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+        wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+        renderPassEncoder.End();
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kGreen, singleSampledTexture);
+}
+
+// Test rendering into 2 attachments. The 1st attachment will use
+// LoadOp::ExpandResolveTexture.
+TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor0) {
+    auto multiSampledTexture1 = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView1 = multiSampledTexture1.CreateView();
+
+    auto multiSampledTexture2 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
+                                                                 /*transientAttachment=*/false,
+                                                                 /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView2 = multiSampledTexture2.CreateView();
+
+    auto singleSampledTexture1 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView1 = singleSampledTexture1.CreateView();
+
+    auto singleSampledTexture2 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView2 = singleSampledTexture2.CreateView();
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithTwoOutputsForTest(
+        /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
+        /*enableExpandResolveLoadOp=*/false);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+
+    // In first render pass:
+    // - we draw a red triangle to attachment0. StoreOp=Discard to discard the MSAA texture's
+    // content.
+    // - we draw a green triangle to attachment1. StoreOp=Store.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Store;
+
+        std::array<float, 8> kUniformData = {
+            static_cast<float>(kRed.r),   static_cast<float>(kRed.g),
+            static_cast<float>(kRed.b),   static_cast<float>(kRed.a),
+            static_cast<float>(kGreen.r), static_cast<float>(kGreen.g),
+            static_cast<float>(kGreen.b), static_cast<float>(kGreen.a)};
+        constexpr uint32_t kSize = sizeof(kUniformData);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    // In second render pass:
+    // - we only use LoadOp::ExpandResolveTexture for attachment0 with no draw call.
+    // - we only use LoadOp::Load for attachment1 with no draw call.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].loadOp = wgpu::LoadOp::Load;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+        wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+        renderPassEncoder.End();
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kRed, singleSampledTexture1);
+    VerifyResolveTarget(kGreen, singleSampledTexture2);
+}
+
+// Test rendering into 2 attachments. The 2nd attachment will use
+// LoadOp::ExpandResolveTexture.
+TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor1) {
+    auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
+                                                                 /*transientAttachment=*/false,
+                                                                 /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView1 = multiSampledTexture1.CreateView();
+
+    auto multiSampledTexture2 = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView2 = multiSampledTexture2.CreateView();
+
+    auto singleSampledTexture1 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView1 = singleSampledTexture1.CreateView();
+
+    auto singleSampledTexture2 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView2 = singleSampledTexture2.CreateView();
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithTwoOutputsForTest(
+        /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
+        /*enableExpandResolveLoadOp=*/false);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+
+    // In first render pass:
+    // - we draw a red triangle to attachment0. StoreOp=Store.
+    // - we draw a green triangle to attachment1. StoreOp=Discard.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+
+        std::array<float, 8> kUniformData = {
+            static_cast<float>(kRed.r),   static_cast<float>(kRed.g),
+            static_cast<float>(kRed.b),   static_cast<float>(kRed.a),
+            static_cast<float>(kGreen.r), static_cast<float>(kGreen.g),
+            static_cast<float>(kGreen.b), static_cast<float>(kGreen.a)};
+        constexpr uint32_t kSize = sizeof(kUniformData);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    // In second render pass:
+    // - we only use LoadOp::Load for attachment0 with no draw call.
+    // - we only use LoadOp::ExpandResolveTexture for attachment1 with no draw call.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+        wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+        renderPassEncoder.End();
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kRed, singleSampledTexture1);
+    VerifyResolveTarget(kGreen, singleSampledTexture2);
+}
+
+// Test rendering into 2 attachments. The both attachments will use
+// LoadOp::ExpandResolveTexture.
+TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor0AndColor1) {
+    auto multiSampledTexture1 = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView1 = multiSampledTexture1.CreateView();
+
+    auto multiSampledTexture2 = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView2 = multiSampledTexture2.CreateView();
+
+    auto singleSampledTexture1 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView1 = singleSampledTexture1.CreateView();
+
+    auto singleSampledTexture2 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView2 = singleSampledTexture2.CreateView();
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithTwoOutputsForTest(
+        /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
+        /*enableExpandResolveLoadOp=*/false);
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+
+    // In first render pass:
+    // - we draw a red triangle to attachment0. StoreOp=Discard.
+    // - we draw a green triangle to attachment1. StoreOp=Discard.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+
+        std::array<float, 8> kUniformData = {
+            static_cast<float>(kRed.r),   static_cast<float>(kRed.g),
+            static_cast<float>(kRed.b),   static_cast<float>(kRed.a),
+            static_cast<float>(kGreen.r), static_cast<float>(kGreen.g),
+            static_cast<float>(kGreen.b), static_cast<float>(kGreen.a)};
+        constexpr uint32_t kSize = sizeof(kUniformData);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    // In second render pass:
+    // - we only use LoadOp::ExpandResolveTexture for attachment0 with no draw call.
+    // - we only use LoadOp::ExpandResolveTexture for attachment1 with no draw call.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/false);
+        renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+        wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+        renderPassEncoder.End();
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    VerifyResolveTarget(kRed, singleSampledTexture1);
+    VerifyResolveTarget(kGreen, singleSampledTexture2);
+}
+
 // Test ExpandResolveTexture load op rendering with depth test works correctly.
 TEST_P(DawnLoadResolveTextureTest, DrawWithDepthTest) {
     auto multiSampledTexture = CreateTextureForRenderAttachment(
