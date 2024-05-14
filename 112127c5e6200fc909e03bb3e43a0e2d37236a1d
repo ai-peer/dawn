@@ -16,6 +16,23 @@
       "message": "PTAL - I have no test though",
       "revId": "112127c5e6200fc909e03bb3e43a0e2d37236a1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca6c2416_fa0d1bed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-14T08:14:12Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "112127c5e6200fc909e03bb3e43a0e2d37236a1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
