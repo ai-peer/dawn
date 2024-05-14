@@ -123,6 +123,8 @@ int Run(const fuzzing::Program& program, bool (*AdapterSupported)(const dawn::na
 
     mCommandBuffer->Flush();
 
+    dawn::native::InstanceProcessEvents(sInstance->Get());
+
     // Note: Deleting the server will release all created objects.
     // Deleted devices will wait for idle on destruction.
     mCommandBuffer->SetHandler(nullptr);
