@@ -116,6 +116,10 @@ void SharedTextureMemoryBase::APIGetProperties(SharedTextureMemoryProperties* pr
                                    "calling %s.GetProperties", this)) {
         return;
     }
+    if (GetDevice()->ConsumedError(GetChainedProperties(unpacked),
+                                   "calling %s.GetChainedProperties", this)) {
+        return;
+    }
 }
 
 TextureBase* SharedTextureMemoryBase::APICreateTexture(const TextureDescriptor* descriptor) {

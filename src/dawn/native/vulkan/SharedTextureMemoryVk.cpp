@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/SystemHandle.h"
@@ -511,6 +512,7 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     }
 
     VkFormat vkFormat;
+    YCbCrVkDescriptor yCbCrAHBInfo;
     VkAndroidHardwareBufferPropertiesANDROID bufferProperties = {
         .sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
     };
@@ -528,6 +530,22 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                                 "vkGetAndroidHardwareBufferPropertiesANDROID"));
 
         vkFormat = bufferFormatProperties.format;
+
+        // Populate the YCbCr info.
+        yCbCrAHBInfo.externalFormat = bufferFormatProperties.externalFormat;
+        yCbCrAHBInfo.vkFormat = bufferFormatProperties.format;
+        yCbCrAHBInfo.vkYCbCrModel = bufferFormatProperties.suggestedYcbcrModel;
+        yCbCrAHBInfo.vkYCbCrRange = bufferFormatProperties.suggestedYcbcrRange;
+        yCbCrAHBInfo.vkComponentSwizzleRed =
+            bufferFormatProperties.samplerYcbcrConversionComponents.r;
+        yCbCrAHBInfo.vkComponentSwizzleGreen =
+            bufferFormatProperties.samplerYcbcrConversionComponents.g;
+        yCbCrAHBInfo.vkComponentSwizzleBlue =
+            bufferFormatProperties.samplerYcbcrConversionComponents.b;
+        yCbCrAHBInfo.vkComponentSwizzleAlpha =
+            bufferFormatProperties.samplerYcbcrConversionComponents.a;
+        yCbCrAHBInfo.vkXChromaOffset = bufferFormatProperties.suggestedXChromaOffset;
+        yCbCrAHBInfo.vkYChromaOffset = bufferFormatProperties.suggestedYChromaOffset;
 
         // TODO(dawn:1745): Support external formats.
         // https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#memory-external-android-hardware-buffer-external-formats
@@ -548,6 +566,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     // Create the SharedTextureMemory object.
     Ref<SharedTextureMemory> sharedTextureMemory =
         SharedTextureMemory::Create(device, label, properties, VK_QUEUE_FAMILY_FOREIGN_EXT);
+
+    sharedTextureMemory->mYCbCrAHBInfo = yCbCrAHBInfo;
 
     // Reflect properties to reify them.
     sharedTextureMemory->APIGetProperties(&properties);
@@ -1049,5 +1069,24 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
 }
 
 #endif  // DAWN_PLATFORM_IS(FUCHSIA) || DAWN_PLATFORM_IS(LINUX)
+
+MaybeError SharedTextureMemory::GetChainedProperties(
+    UnpackedPtr<SharedTextureMemoryProperties>& properties) const {
+    auto vkProperties = properties.Get<SharedTextureMemoryVkProperties>();
+
+    if (!vkProperties) {
+        return {};
+    }
+
+    auto yCbCrInfo = vkProperties->yCbCrInfo;
+    if (yCbCrInfo.nextInChain) {
+        return DAWN_VALIDATION_ERROR(
+            "yCBCrInfo field of SharedTextureMemoryVkProperties has a chained struct");
+    }
+
+    vkProperties->yCbCrInfo = mYCbCrAHBInfo;
+
+    return {};
+}
 
 }  // namespace dawn::native::vulkan
