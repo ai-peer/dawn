@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca7b3450_bdccd59b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-14T12:38:12Z",
+      "side": 1,
+      "message": "You are right. This validation seems redundant (for now). Maybe should be an assert.",
+      "parentUuid": "6c611e09_5725eafd",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d264e31_a1c4b626",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
