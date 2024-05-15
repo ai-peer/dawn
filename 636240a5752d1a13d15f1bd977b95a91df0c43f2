@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7159e338_4c3884f1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T16:05:10Z",
+      "side": 1,
+      "message": "nit: `pointer member from a struct value`",
+      "revId": "636240a5752d1a13d15f1bd977b95a91df0c43f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
