@@ -281,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ade2d7_8452bdf7",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T20:36:40Z",
+      "side": 1,
+      "message": "Acknowledged. Yea, I\u0027d interpreted reverse-dependency order to mean leaves up.",
+      "parentUuid": "aca44f82_273f0d97",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19c61934_7d089e3c",
