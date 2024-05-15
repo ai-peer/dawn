@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a5599b_4df466d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-15T14:19:15Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "5772b6eba9e4bdbc16c5d67c919552bb999a2a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96a5e3ed_7e502121",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-15T14:19:15Z",
+      "side": 1,
+      "message": "Tick shouldn\u0027t be used, and instead Instance::ProcessEvents can achieve the same thing. We want to eventually remove Device::Tick. Where do you need to use it atm?",
+      "revId": "5772b6eba9e4bdbc16c5d67c919552bb999a2a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f820989_74513956",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3715,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-15T14:19:15Z",
+      "side": 1,
+      "message": "Note that in the future only surface will be needed, not the swapchain.",
+      "revId": "5772b6eba9e4bdbc16c5d67c919552bb999a2a47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
