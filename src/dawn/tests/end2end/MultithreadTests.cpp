@@ -208,13 +208,11 @@ TEST_P(MultithreadTests, Buffers_MapInParallel) {
         // Create buffer and request mapping.
         buffer = CreateBuffer(kSize, wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc);
 
-        buffer.MapAsync(
-            wgpu::MapMode::Write, 0, kSize,
-            [](WGPUBufferMapAsyncStatus status, void* userdata) {
-                EXPECT_EQ(WGPUBufferMapAsyncStatus_Success, status);
-                (*static_cast<std::atomic<bool>*>(userdata)) = true;
-            },
-            &mapCompleted);
+        buffer.MapAsync(wgpu::MapMode::Write, 0, kSize, wgpu::CallbackMode::AllowProcessEvents,
+                        [&mapCompleted](wgpu::MapAsyncStatus status, const char*) {
+                            ASSERT_EQ(status, wgpu::MapAsyncStatus::Success);
+                            mapCompleted = true;
+                        });
 
         // Wait for the mapping to complete
         while (!mapCompleted.load()) {
