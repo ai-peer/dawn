@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e735435f_82316ab8",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-15T15:48:23Z",
+      "side": 1,
+      "message": "ah.. we haven\u0027t had a lot of output structs yet so we\u0027re still figuring out how to best express this in the API. So the higher order bit is that we don\u0027t want to expose this for other SharedTextureMemory backings - like dma buf.\n\nFor additional properties, I think it should be be different structs. \nFor now, could we change SharedTextureMemoryVkProperties to SharedTextureMemoryAHardwareBufferProperties ? IIRC all the properties we\u0027re adding are ahardwarebuffer-related (including the format features; comes from VkAndroidHardwareBufferFormatPropertiesANDROID).\n\nThen, we would gate usage of `SharedTextureMemoryAHardwareBufferProperties` on the AHardwareBufferSTM feature",
+      "parentUuid": "9b771329_6e4d7835",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a6addba_8f9458e3",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
         "patchSetId": 2
