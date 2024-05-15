@@ -664,6 +664,10 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
                              size_t size,
                              WGPUBufferMapCallback callback,
                              void* userdata) {
+    GetInstance()->EmitDeprecationWarning(
+        "Old MapAsync APIs are deprecated. If using C please pass a CallbackInfo "
+        "struct that has two userdatas. Otherwise, if using C++, please use templated helpers.");
+
     // Check for an existing pending map first because it just
     // rejects the callback and doesn't produce a validation error.
     if (mState == BufferState::PendingMap) {
@@ -716,6 +720,10 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
                                 size_t offset,
                                 size_t size,
                                 const BufferMapCallbackInfo& callbackInfo) {
+    GetInstance()->EmitDeprecationWarning(
+        "Old MapAsync APIs are deprecated. If using C please pass a CallbackInfo "
+        "struct that has two userdatas. Otherwise, if using C++, please use templated helpers.");
+
     // TODO(crbug.com/dawn/2052): Once we always return a future, change this to log to the instance
     // (note, not raise a validation error to the device) and return the null future.
     DAWN_ASSERT(callbackInfo.nextInChain == nullptr);
