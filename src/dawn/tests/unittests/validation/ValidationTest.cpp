@@ -259,9 +259,8 @@ void ValidationTest::FlushWire() {
 
 void ValidationTest::WaitForAllOperations(const wgpu::Device& waitDevice) {
     bool done = false;
-    waitDevice.GetQueue().OnSubmittedWorkDone(
-        [](WGPUQueueWorkDoneStatus, void* userdata) { *static_cast<bool*>(userdata) = true; },
-        &done);
+    waitDevice.GetQueue().OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents,
+                                              [&done](wgpu::QueueWorkDoneStatus) { done = true; });
 
     // Force the currently submitted operations to completed.
     while (!done) {
