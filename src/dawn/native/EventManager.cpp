@@ -354,22 +354,27 @@ FutureID EventManager::TrackEvent(Ref<TrackedEvent>&& event) {
     FutureID futureID = mNextFutureID++;
     event->mFutureID = futureID;
 
+    // Determine whether the event is already ready.
+    bool isReady = false;
+    const auto& completionData = event->GetCompletionData();
+    if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+        isReady = std::get<Ref<SystemEvent>>(completionData)->IsSignaled();
+    }
+    if (std::holds_alternative<QueueAndSerial>(completionData)) {
+        const auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+        isReady =
+            queueAndSerial.completionSerial <= queueAndSerial.queue->GetCompletedCommandSerial();
+        // For queue based events, if the event is not yet ready, the queue needs to track it also
+        // so that it can set it to be ready later on.
+        if (!isReady) {
+            queueAndSerial.queue->TrackFuture(futureID, queueAndSerial.completionSerial);
+        }
+    }
+
     // Handle the event now if it's spontaneous and ready.
-    if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
-        bool isReady = false;
-        auto completionData = event->GetCompletionData();
-        if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
-            isReady = std::get<Ref<SystemEvent>>(completionData)->IsSignaled();
-        }
-        if (std::holds_alternative<QueueAndSerial>(completionData)) {
-            auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
-            isReady = queueAndSerial.completionSerial <=
-                      queueAndSerial.queue->GetCompletedCommandSerial();
-        }
-        if (isReady) {
-            event->EnsureComplete(EventCompletionType::Ready);
-            return futureID;
-        }
+    if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous && isReady) {
+        event->EnsureComplete(EventCompletionType::Ready);
+        return futureID;
     }
 
     mEvents.Use([&](auto events) {
@@ -413,6 +418,21 @@ void EventManager::SetFutureReady(TrackedEvent* event) {
             (*events)->erase(event->mFutureID);
         });
         event->EnsureComplete(EventCompletionType::Ready);
+    }
+}
+
+void EventManager::SetFutureReady(FutureID futureID) {
+    Ref<TrackedEvent> event;
+    mEvents.Use([&](auto events) {
+        if (!events->has_value()) {
+            return;
+        }
+        if (auto it = (*events)->find(futureID); it != (*events)->end()) {
+            event = it->second;
+        }
+    });
+    if (event) {
+        SetFutureReady(event.Get());
     }
 }
 
@@ -583,6 +603,10 @@ EventManager::TrackedEvent::~TrackedEvent() {
 const EventManager::TrackedEvent::CompletionData& EventManager::TrackedEvent::GetCompletionData()
     const {
     return mCompletionData;
+}
+
+FutureID EventManager::TrackedEvent::GetFutureID() const {
+    return mFutureID;
 }
 
 void EventManager::TrackedEvent::EnsureComplete(EventCompletionType completionType) {
