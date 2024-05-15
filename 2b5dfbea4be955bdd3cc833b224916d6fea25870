@@ -16,6 +16,24 @@
       "message": "We should explicitly validate the allowed view dimensions. Is Cube allowed? What about 1D?",
       "revId": "2b5dfbea4be955bdd3cc833b224916d6fea25870",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20840c7_bfaaed33",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-05-15T07:54:03Z",
+      "side": 1,
+      "message": "Other validations ensure that a renderable texture view cannot be 1D or Cube here, 1D texture view cannot be created with usage RenderAttachment, and Cube texture view requires arrayLayerCount must be 6.\n\nBut I agree we should validate the allowed dimensions, which seems more clear.",
+      "parentUuid": "957a2c84_5389b3d2",
+      "revId": "2b5dfbea4be955bdd3cc833b224916d6fea25870",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
