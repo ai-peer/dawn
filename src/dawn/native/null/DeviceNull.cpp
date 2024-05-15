@@ -329,7 +329,6 @@ MaybeError Device::SubmitPendingOperations() {
     mPendingOperations.clear();
 
     DAWN_TRY(GetQueue()->CheckPassedSerials());
-    GetQueue()->IncrementLastSubmittedCommandSerial();
 
     return {};
 }
@@ -389,6 +388,7 @@ void Buffer::DoWriteBuffer(uint64_t bufferOffset, const void* data, size_t size)
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+    GetDevice()->GetQueue()->IncrementLastSubmittedCommandSerial();
     return {};
 }
 
@@ -430,6 +430,7 @@ MaybeError Queue::SubmitImpl(uint32_t, CommandBufferBase* const*) {
     Device* device = ToBackend(GetDevice());
 
     DAWN_TRY(device->SubmitPendingOperations());
+    IncrementLastSubmittedCommandSerial();
 
     return {};
 }
