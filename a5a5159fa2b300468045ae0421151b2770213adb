@@ -364,6 +364,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0efa35e_984b60a7",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-15T16:40:24Z",
+      "side": 1,
+      "message": "I think I was wrong about MultisampleStateExpandResolveTextureDawn chained struct to MultisampleState. It should be per color target as you said, because in vulkan at pipeline creation, we need to know exactly which attachment uses ExpandResolveTexture in order to query the correct render pass having appropriate input attachments.\n\nI will create a CL to change the chained struct to per color target. Luckily skia hasn\u0027t used it yet.",
+      "parentUuid": "920366a4_eb615d0a",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 269
+      },
+      "revId": "a5a5159fa2b300468045ae0421151b2770213adb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1cac948_b2d7ca28",
