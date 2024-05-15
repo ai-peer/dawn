@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8b93d5_3df17f2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-15T02:40:00Z",
+      "side": 1,
+      "message": "LGTM; let\u0027s wait till the Dawn-\u003eChromium roll succeeds though before landing this\n\nI want to avoid it getting reverted again; just in case\nmade a roll here: https://chromium-review.googlesource.com/c/chromium/src/+/5541133",
+      "revId": "666fc790f9682df4f20ef14a5b54bc23b36b5a4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
