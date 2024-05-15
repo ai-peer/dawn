@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e3ee1cc_a5043e66",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce53ebb7_97607ac3",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41657c06_0aaa920b",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-15T15:44:14Z",
       "side": 1,
       "message": "We\u0027ve done this at least twice, maybe file a followup to add a `ir.blocks_to_functions()` to build the initial map?",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47a1ec7_773f4750",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Opened crbug.com/340919973",
+      "parentUuid": "41657c06_0aaa920b",
       "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "980592c8_cefda5cd",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97fe992b_94a837de",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58c80f72_435b10df",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-15T15:44:14Z",
       "side": 1,
       "message": "Oh, that\u0027s smart. So you create all the pointers and then just use the usages afterwards so you don\u0027t have to look at the instructions.",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12acab05_b544a422",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "58c80f72_435b10df",
       "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bbda93a_7a24f99f",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09d2da6f_5d1c82f3",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9b5b4a4_12e40adf",
@@ -103,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17939987_7f4ac999",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9b5b4a4_12e40adf",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "487c70a9_d345bdf1",
@@ -116,6 +224,24 @@
       "writtenOn": "2024-05-15T15:44:14Z",
       "side": 1,
       "message": "```suggestion\n    /// @returns the parameter for the structure\n```",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c138b047_67486fde",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "487c70a9_d345bdf1",
       "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aca44f82_273f0d97",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "No, we go top down so that we have already created the struct in the caller when we update the callee.\n\nI tried to describe this in my comment above (the starts with \"Process functions in reverse-dependency order.\"), but I appreciate that \"dependency order\" is not well defined. Added \"root to leaves\" to that comment to try and make it clearer.",
+      "parentUuid": "b37006fa_e811012c",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19c61934_7d089e3c",
         "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
         "patchSetId": 5
@@ -150,6 +294,24 @@
       "writtenOn": "2024-05-15T15:44:14Z",
       "side": 1,
       "message": "```suggestion\n    /// Get a pointer from the module-scope variable replacement structure. Inserts the access chain instruction before the provided `inst`\n```",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf236396_4c185973",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c61934_7d089e3c",
       "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
