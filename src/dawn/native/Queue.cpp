@@ -353,12 +353,19 @@ Future QueueBase::APIOnSubmittedWorkDone2(const WGPUQueueWorkDoneCallbackInfo2& 
             // Note: if the callback is spontaneous, it'll get called in here.
             event = AcquireRef(new WorkDoneEvent(callbackInfo, this, validationEarlyStatus));
         } else {
+            // Technically we only need to wait for previously submitted work but
+            // OnSubmittedWorkDone is also used to make sure ALL queue work is finished in tests, so
+            // we also wait for pending commands (this is non-observable outside of tests so it's ok
+            // to do deviate a bit from the spec).
+            ForceEventualFlushOfCommands();
+
             event = AcquireRef(new WorkDoneEvent(callbackInfo, this, GetScheduledWorkDoneSerial()));
         }
     }
 
     FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
-
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
+                 uint64_t(GetPendingCommandSerial()));
     return {futureID};
 }
 
@@ -389,6 +396,10 @@ void QueueBase::TrackPendingTask(std::unique_ptr<TrackTaskCallback> task) {
     mTasksInFlight->Enqueue(std::move(task), GetPendingCommandSerial());
 }
 
+void QueueBase::TrackEvent(FutureID futureID, ExecutionSerial serial) {
+    mEventsInFlight->Enqueue(futureID, serial);
+}
+
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
     // If a user calls Queue::Submit inside a task, for example in a Buffer::MapAsync callback,
     // then the device will be ticked, which in turns ticks the queue, causing reentrance here.
@@ -410,6 +421,17 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     for (auto& task : tasks) {
         task->SetFinishedSerial(finishedSerial);
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+    }
+
+    std::vector<Ref<EventManager::TrackedEvent>> events;
+    mEventsInFlight.Use([&](auto eventsInFlight) {
+        for (auto& event : eventsInFlight->IterateUpTo(finishedSerial)) {
+            events.push_back(std::move(event));
+        }
+        eventsInFlight->ClearUpTo(finishedSerial);
+    });
+    for (auto& event : events) {
+        GetInstance()->GetEventManager()->SetFutureReady(event.Get());
     }
 }
 
