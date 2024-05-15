@@ -75,6 +75,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b56f1e5_3192c4ce",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-15T14:42:59Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly about the specific extension and I am happy to change this, since other then our own tooling, I don\u0027t expect anything to ingest it.\n\nFor context, .binpb is the recommended extension from the Protocol Buffer docs. But I don\u0027t feel particular beholden to that, since they even admit there isn\u0027t great adherence to that convention.",
+      "parentUuid": "d5e7a236_c9ca9793",
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72cb0f84_ab53f66e",
         "filename": "src/tint/cmd/tint/main.cc",
         "patchSetId": 1
