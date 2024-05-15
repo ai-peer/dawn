@@ -232,6 +232,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6cb56b3_166b5ae6",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-15T15:20:57Z",
+      "side": 1,
+      "message": "I was thinking about 1). For Vulkan PLS it would be useful see https://docs.google.com/document/d/1djJwQLJcVGnDXOA7nhsweppim-hhbqglB4JNyfZcRqQ/edit where there is some pass with self-dependency between storage and input attachments. +CC James, would it be ok to add some input attachment in Tint just for Dawn internal use and other Tint transforms (no plan to expose it to WGSL in the wild)?",
+      "parentUuid": "584f19be_37de6e69",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "618baba5_03ee807c",
         "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
         "patchSetId": 5
