@@ -196,6 +196,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a731c8_403d01ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003911
+      },
+      "writtenOn": "2024-05-15T12:26:44Z",
+      "side": 1,
+      "message": "\u003e IMO we should be consistent about the policy about unrewriting to T* if it impacts MotionMark unless we decide on the email thread that we should do something different.\n\nAgreed! @keishi@chromium.org please un-rewrite if the regression still remains after this CL rolls into Chromium.\n\n\n\u003e Actually - what we could even do is cast all the void* userdata to uintptr_t as soon as they come into Dawn, and store that instead. This way it\u0027s clear we never dereference it. Then, cast it back to void* when calling the embedder\u0027s callback.\n\n\nIf it\u0027s later cast back and used, this would be a bad pattern. The moment raw_ptr count goes to 0, the memory is free to be re-used. Assigning it later to a raw_ptr will be ineffective and give us a false impression of safety. It\u0027s better keep them as pointers, preferably as raw_ptr except (very few) cases where performance prevents us (which should be document with a comment).",
+      "parentUuid": "cfe283c0_2b407920",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a36448e3_7b714ba7",
