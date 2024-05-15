@@ -93,6 +93,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30adde0e_0aa37bcf",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-15T17:55:35Z",
+      "side": 1,
+      "message": "I also agree with the the fact that we are not wedded to using protobuf here, so the format may need to change in the future.",
+      "parentUuid": "2b56f1e5_3192c4ce",
+      "revId": "3dddf6f99d54ecc85d80f3fba0bdddb26749d4d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72cb0f84_ab53f66e",
         "filename": "src/tint/cmd/tint/main.cc",
         "patchSetId": 1
