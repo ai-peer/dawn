@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "25c8222d_a5d848a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003911
+      },
+      "writtenOn": "2024-05-15T01:32:05Z",
+      "side": 1,
+      "message": "\u003e You mention being blocked on launching BRP in the renderer process, but Dawn is in the GPU process. I assume that you\u0027re trying to launch in the GPU process?\n\nThe story is a tad complicated. We were told to use MotionMork as a gatekeeper on whether to ship to Renderer (we already shipped to GPU a while back). As long as the benchmark shows non-zero regression, it takes quite a bit of effort to determine whether it comes from GPU or Renderer. Since we were asked to run the benchmark continuously, even after we ship, we can\u0027t afford non-automated steps.\n\nHaving said that, a tradeoff can be considered if there is a good reason for it. I started an email thread about it, please share your opinion there.\n\n\u003e Ah yes, this is a new code path taken by the GPU process as we are finching using Skia-Graphite-Dawn on macOS instead of Skia-Ganesh\n\nWhat\u0027s the final verdict, should this be raw_ptr or T* then?",
+      "parentUuid": "09967efe_4cd04518",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a36448e3_7b714ba7",
