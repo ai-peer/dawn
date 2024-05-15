@@ -413,6 +413,21 @@ void EventManager::SetFutureReady(TrackedEvent* event) {
     }
 }
 
+void EventManager::SetFutureReady(FutureID futureID) {
+    Ref<TrackedEvent> event;
+    mEvents.Use([&](auto events) {
+        if (!events->has_value()) {
+            return;
+        }
+        if (auto it = (*events)->find(futureID); it != (*events)->end()) {
+            event = it->second;
+        }
+    });
+    if (event) {
+        SetFutureReady(event.Get());
+    }
+}
+
 bool EventManager::ProcessPollEvents() {
     DAWN_ASSERT(!IsShutDown());
 
@@ -580,6 +595,10 @@ EventManager::TrackedEvent::~TrackedEvent() {
 const EventManager::TrackedEvent::CompletionData& EventManager::TrackedEvent::GetCompletionData()
     const {
     return mCompletionData;
+}
+
+FutureID EventManager::TrackedEvent::GetFutureID() const {
+    return mFutureID;
 }
 
 void EventManager::TrackedEvent::EnsureComplete(EventCompletionType completionType) {
