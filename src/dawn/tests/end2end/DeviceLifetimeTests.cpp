@@ -50,17 +50,10 @@ TEST_P(DeviceLifetimeTests, DroppedWhileQueueOnSubmittedWorkDone) {
     queue.Submit(1, &commandBuffer);
 
     // Ask for an onSubmittedWorkDone callback and drop the device.
-    queue.OnSubmittedWorkDone(
-        [](WGPUQueueWorkDoneStatus status, void*) {
-            // There is a bug in DeviceBase::Destroy(). If all submitted work is done when
-            // OnSubmittedWorkDone() is being called, the callback will be resolved with
-            // DeviceLost, otherwise the callback will be resolved with Success.
-            // TODO(dawn:1640): fix DeviceBase::Destroy() to always reslove the callback
-            // with success.
-            EXPECT_TRUE(status == WGPUQueueWorkDoneStatus_Success ||
-                        status == WGPUQueueWorkDoneStatus_DeviceLost);
-        },
-        nullptr);
+    queue.OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents,
+                              [](wgpu::QueueWorkDoneStatus status) {
+                                  EXPECT_EQ(status, wgpu::QueueWorkDoneStatus::Success);
+                              });
 
     device = nullptr;
 }
@@ -72,28 +65,14 @@ TEST_P(DeviceLifetimeTests, DroppedInsideQueueOnSubmittedWorkDone) {
     wgpu::CommandBuffer commandBuffer = encoder.Finish();
     queue.Submit(1, &commandBuffer);
 
-    struct Userdata {
-        wgpu::Device device;
-        bool done;
-    };
     // Ask for an onSubmittedWorkDone callback and drop the device inside the callback.
-    Userdata data = Userdata{std::move(device), false};
-    queue.OnSubmittedWorkDone(
-        [](WGPUQueueWorkDoneStatus status, void* userdata) {
-            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
-            static_cast<Userdata*>(userdata)->device = nullptr;
-            static_cast<Userdata*>(userdata)->done = true;
-        },
-        &data);
+    queue.OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents,
+                              [this](wgpu::QueueWorkDoneStatus status) {
+                                  EXPECT_EQ(status, wgpu::QueueWorkDoneStatus::Success);
+                                  this->device = nullptr;
+                              });
 
-    while (!data.done) {
-        // WaitABit no longer can call tick since we've moved the device from the fixture into the
-        // userdata.
-        if (data.device) {
-            data.device.Tick();
-        }
-        WaitABit();
-    }
+    WaitForAllOperations();
 }
 
 // Test that the device can be dropped while a popErrorScope callback is in flight.
@@ -116,7 +95,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhilePopErrorScope) {
     }
 }
 
-// Test that the device can be dropped inside an onSubmittedWorkDone callback.
+// Test that the device can be dropped inside an popErrorScope callback.
 TEST_P(DeviceLifetimeTests, DroppedInsidePopErrorScope) {
     struct Userdata {
         wgpu::Device device;
