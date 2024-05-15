@@ -166,40 +166,44 @@ static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 }  // anonymous namespace
 
 struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
-    // MapAsyncEvent stores a raw pointer to the buffer so that it can
-    // update the buffer's map state when it completes.
-    // If the map completes early (error, unmap, destroy), then the buffer
-    // is no longer needed and we store the early status instead.
-    // The raw pointer is safe because the early status is set to destroyed
-    // before the buffer is dropped.
-    // Note: this could be an atomic + spin lock on a sentinel enum if the mutex
-    // cost is high.
+    // MapAsyncEvent stores a raw pointer to the buffer so that it can update the buffer's map state
+    // when it completes. If the map completes early (error, unmap, destroy), then the buffer is no
+    // longer needed and we store the early status instead. The raw pointer is safe because the
+    // early status is set to destroyed before the buffer is dropped. Note: this could be an atomic
+    // + spin lock on a sentinel enum if the mutex cost is high.
     MutexProtected<std::variant<BufferBase*, wgpu::BufferMapAsyncStatus>> mBufferOrEarlyStatus;
 
-    WGPUBufferMapCallback mCallback;
-    raw_ptr<void> mUserdata;
+    WGPUBufferMapCallback2 mCallback;
+    raw_ptr<void> mUserdata1;
+    raw_ptr<void> mUserdata2;
 
     // Create an event backed by the given queue execution serial.
     MapAsyncEvent(DeviceBase* device,
                   BufferBase* buffer,
-                  const BufferMapCallbackInfo& callbackInfo,
+                  const WGPUBufferMapCallbackInfo2& callbackInfo,
                   ExecutionSerial serial)
-        : TrackedEvent(callbackInfo.mode, device->GetQueue(), serial),
+        : TrackedEvent(static_cast<wgpu::CallbackMode>(callbackInfo.mode),
+                       device->GetQueue(),
+                       serial),
           mBufferOrEarlyStatus(buffer),
           mCallback(callbackInfo.callback),
-          mUserdata(callbackInfo.userdata) {
+          mUserdata1(callbackInfo.userdata1),
+          mUserdata2(callbackInfo.userdata2) {
         TRACE_EVENT_ASYNC_BEGIN0(device->GetPlatform(), General, "Buffer::APIMapAsync",
                                  uint64_t(serial));
     }
 
     // Create an event that's ready at creation (for errors, etc.)
     MapAsyncEvent(DeviceBase* device,
-                  const BufferMapCallbackInfo& callbackInfo,
+                  const WGPUBufferMapCallbackInfo2& callbackInfo,
                   wgpu::BufferMapAsyncStatus earlyStatus)
-        : TrackedEvent(callbackInfo.mode, device->GetQueue(), kBeginningOfGPUTime),
+        : TrackedEvent(static_cast<wgpu::CallbackMode>(callbackInfo.mode),
+                       device->GetQueue(),
+                       kBeginningOfGPUTime),
           mBufferOrEarlyStatus(earlyStatus),
           mCallback(callbackInfo.callback),
-          mUserdata(callbackInfo.userdata) {
+          mUserdata1(callbackInfo.userdata1),
+          mUserdata2(callbackInfo.userdata2) {
         TRACE_EVENT_ASYNC_BEGIN0(device->GetPlatform(), General, "Buffer::APIMapAsync",
                                  uint64_t(kBeginningOfGPUTime));
     }
@@ -213,8 +217,11 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
                                    uint64_t(queueAndSerial->completionSerial));
         }
 
+        void* userdata1 = mUserdata1.ExtractAsDangling();
+        void* userdata2 = mUserdata2.ExtractAsDangling();
+
         if (completionType == EventCompletionType::Shutdown) {
-            mCallback(ToAPI(wgpu::BufferMapAsyncStatus::InstanceDropped), mUserdata);
+            mCallback(ToAPI(wgpu::BufferMapAsyncStatus::InstanceDropped), userdata1, userdata2);
             return;
         }
 
@@ -238,7 +245,7 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
                 pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
             }
         });
-        mCallback(ToAPI(status), mUserdata);
+        mCallback(ToAPI(status), userdata1, userdata2);
     }
 
     // Set the buffer early status because it was unmapped early due to Unmap or Destroy.
@@ -588,6 +595,19 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
                                 size_t offset,
                                 size_t size,
                                 const BufferMapCallbackInfo& callbackInfo) {
+    return APIMapAsync2(mode, offset, size,
+                        {ToAPI(callbackInfo.nextInChain), ToAPI(callbackInfo.mode),
+                         [](WGPUBufferMapAsyncStatus status, void* callback, void* userdata) {
+                             auto cb = reinterpret_cast<WGPUBufferMapCallback>(callback);
+                             cb(status, userdata);
+                         },
+                         reinterpret_cast<void*>(callbackInfo.callback), callbackInfo.userdata});
+}
+
+Future BufferBase::APIMapAsync2(wgpu::MapMode mode,
+                                size_t offset,
+                                size_t size,
+                                const WGPUBufferMapCallbackInfo2& callbackInfo) {
     // TODO(crbug.com/dawn/2052): Once we always return a future, change this to log to the instance
     // (note, not raise a validation error to the device) and return the null future.
     DAWN_ASSERT(callbackInfo.nextInChain == nullptr);

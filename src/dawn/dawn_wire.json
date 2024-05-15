@@ -216,6 +216,7 @@
             "AdapterRequestDevice2",
             "BufferMapAsync",
             "BufferMapAsyncF",
+            "BufferMapAsync2",
             "BufferGetConstMappedRange",
             "BufferGetMappedRange",
             "BufferGetMapState",
