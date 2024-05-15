@@ -34,6 +34,7 @@
 #include "dawn/common/SerialMap.h"
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/ExecutionQueue.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
@@ -107,6 +108,8 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     // of completion.
     void TrackPendingTask(std::unique_ptr<TrackTaskCallback> task);
 
+    void TrackEvent(FutureID futureID, ExecutionSerial serial);
+
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
@@ -152,6 +155,7 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     MaybeError SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
     MutexProtected<SerialMap<ExecutionSerial, std::unique_ptr<TrackTaskCallback>>> mTasksInFlight;
+    MutexProtected<SerialMap<ExecutionSerial, FutureID>> mEventsInFlight;
 };
 
 }  // namespace dawn::native
