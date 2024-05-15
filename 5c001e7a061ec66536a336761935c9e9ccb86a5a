@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c713aa03_af9bb858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-15T15:37:31Z",
+      "side": 1,
+      "message": "Thanks, Austin! QQ in response.",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ef4dffb_b08655ab",
@@ -136,6 +153,24 @@
       "writtenOn": "2024-05-15T15:28:12Z",
       "side": 1,
       "message": "we should validate here that the Ycbcr feature is enabled on the device",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b771329_6e4d7835",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-15T15:37:31Z",
+      "side": 1,
+      "message": "I was wondering about whether to validate that here - if we add more SharedTextureMemoryVk properties, a client could query for reasons other than wanting the YCbCr info, right?",
+      "parentUuid": "518d175c_ea094f9e",
       "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
