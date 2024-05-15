@@ -40,17 +40,7 @@ namespace {
 
 using testing::_;
 using testing::Exactly;
-using testing::MockCallback;
-
-class MockQueueWorkDoneCallback {
-  public:
-    MOCK_METHOD(void, Call, (WGPUQueueWorkDoneStatus status, void* userdata));
-};
-
-static std::unique_ptr<MockQueueWorkDoneCallback> mockQueueWorkDoneCallback;
-static void ToMockQueueWorkDone(WGPUQueueWorkDoneStatus status, void* userdata) {
-    mockQueueWorkDoneCallback->Call(status, userdata);
-}
+using testing::MockCppCallback;
 
 static const int fakeUserData = 0;
 
@@ -59,12 +49,10 @@ class DeviceLostTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-        mockQueueWorkDoneCallback = std::make_unique<MockQueueWorkDoneCallback>();
     }
 
     void TearDown() override {
         instance.ProcessEvents();  // Flush all callbacks.
-        mockQueueWorkDoneCallback = nullptr;
         DawnTest::TearDown();
     }
 
@@ -95,6 +83,8 @@ class DeviceLostTest : public DawnTest {
     void ExpectObjectIsError(const T& object) {
         EXPECT_TRUE(dawn::native::CheckIsErrorForTesting(object.Get()));
     }
+
+    MockCppCallback<void (*)(wgpu::QueueWorkDoneStatus)> mWorkDoneCb;
 };
 
 // Test that DeviceLostCallback is invoked when LostForTestimg is called
@@ -411,22 +401,20 @@ TEST_P(DeviceLostTest, CommandEncoderFinishFails) {
     ExpectObjectIsError(encoder.Finish());
 }
 
-// Test that QueueOnSubmittedWorkDone after device is lost.
+// Test QueueOnSubmittedWorkDone after device is lost.
 TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneAfterDeviceLost) {
     LoseDeviceForTesting();
 
-    // callback should have device lost status
-    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
-        .Times(1);
-    queue.OnSubmittedWorkDone(ToMockQueueWorkDone, nullptr);
+    // Callback should have success status
+    EXPECT_CALL(mWorkDoneCb, Call(wgpu::QueueWorkDoneStatus::Success));
+    queue.OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents, mWorkDoneCb.Callback());
 }
 
-// Test that QueueOnSubmittedWorkDone when the device is lost after calling OnSubmittedWorkDone
+// Test QueueOnSubmittedWorkDone when the device is lost after calling OnSubmittedWorkDone
 TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneBeforeLossFails) {
-    // callback should have device lost status
-    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
-        .Times(1);
-    queue.OnSubmittedWorkDone(ToMockQueueWorkDone, nullptr);
+    // Callback should have success status
+    EXPECT_CALL(mWorkDoneCb, Call(wgpu::QueueWorkDoneStatus::Success));
+    queue.OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents, mWorkDoneCb.Callback());
 
     LoseDeviceForTesting();
 }
