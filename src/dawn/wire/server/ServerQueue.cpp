@@ -49,8 +49,9 @@ WireResult Server::DoQueueOnSubmittedWorkDone(Known<WGPUQueue> queue,
     userdata->eventManager = eventManager;
     userdata->future = future;
 
-    mProcs.queueOnSubmittedWorkDone(queue->handle, ForwardToServer<&Server::OnQueueWorkDone>,
-                                    userdata.release());
+    mProcs.queueOnSubmittedWorkDone2(
+        queue->handle, {nullptr, WGPUCallbackMode_AllowProcessEvents,
+                        ForwardToServer2<&Server::OnQueueWorkDone>, userdata.release(), nullptr});
     return WireResult::Success;
 }
 
