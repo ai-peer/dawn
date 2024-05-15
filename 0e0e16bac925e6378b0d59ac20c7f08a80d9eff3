@@ -16,6 +16,24 @@
       "message": "```suggestion\n    /// Emit @p param value, taking its address if it\u0027s not an actual pointer.\n```",
       "revId": "0e0e16bac925e6378b0d59ac20c7f08a80d9eff3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "356a805d_3090058b",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-15T20:34:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19c9c606_4095187c",
+      "revId": "0e0e16bac925e6378b0d59ac20c7f08a80d9eff3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
