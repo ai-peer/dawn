@@ -246,6 +246,7 @@
             "QuerySetGetCount",
             "QueueOnSubmittedWorkDone",
             "QueueOnSubmittedWorkDoneF",
+            "QueueOnSubmittedWorkDone2",
             "QueueWriteBuffer",
             "QueueWriteTexture",
             "SurfaceGetCapabilities",
