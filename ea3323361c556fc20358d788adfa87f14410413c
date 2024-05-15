@@ -178,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe283c0_2b407920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-15T04:57:20Z",
+      "side": 1,
+      "message": "Actually - what we could even do is cast all the `void* userdata` to `uintptr_t` as soon as they come into Dawn, and store that instead. This way it\u0027s clear we never dereference it. Then, cast it back to `void*` when calling the embedder\u0027s callback.",
+      "parentUuid": "ff14c52a_a453efee",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a36448e3_7b714ba7",
