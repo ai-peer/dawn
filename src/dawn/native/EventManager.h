@@ -43,6 +43,7 @@
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/SystemEvent.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -74,6 +75,7 @@ class EventManager final : NonMovable {
     // Track a TrackedEvent and give it a FutureID.
     FutureID TrackEvent(Ref<TrackedEvent>&&);
     void SetFutureReady(TrackedEvent* event);
+    void SetFutureReady(FutureID futureID);
 
     // Returns true if future ProcessEvents is needed.
     bool ProcessPollEvents();
@@ -147,6 +149,7 @@ class EventManager::TrackedEvent : public RefCounted {
     using CompletionData = std::variant<QueueAndSerial, Ref<SystemEvent>>;
 
     const CompletionData& GetCompletionData() const;
+    FutureID GetFutureID() const;
 
   protected:
     void EnsureComplete(EventCompletionType);
