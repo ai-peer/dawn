@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2e6302e_3c4c4b0e",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-15T15:10:27Z",
+      "side": 1,
+      "message": "\u003e Are you suggesting that we should add a new subpassInput type to Tint?\nI meant I could do that but want to make sure I follow do the right path. With Tint `subpassInput` I\u0027m confused on why it would be useful for PLS.",
+      "parentUuid": "584f19be_37de6e69",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "618baba5_03ee807c",
         "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
         "patchSetId": 5
