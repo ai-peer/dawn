@@ -353,12 +353,21 @@ Future QueueBase::APIOnSubmittedWorkDone2(const WGPUQueueWorkDoneCallbackInfo2& 
             // Note: if the callback is spontaneous, it'll get called in here.
             event = AcquireRef(new WorkDoneEvent(callbackInfo, this, validationEarlyStatus));
         } else {
-            event = AcquireRef(new WorkDoneEvent(callbackInfo, this, GetScheduledWorkDoneSerial()));
+            // Technically we only need to wait for previously submitted work but
+            // OnSubmittedWorkDone is also used to make sure ALL queue work is finished in tests, so
+            // we also wait for pending commands (this is non-observable outside of tests so it's ok
+            // to do deviate a bit from the spec).
+            ForceEventualFlushOfCommands();
+
+            ExecutionSerial serial = GetScheduledWorkDoneSerial();
+            event = AcquireRef(new WorkDoneEvent(callbackInfo, this, serial));
+            mEventsInFlight->Enqueue(event, serial);
         }
     }
 
     FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
-
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
+                 uint64_t(GetPendingCommandSerial()));
     return {futureID};
 }
 
@@ -410,6 +419,17 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     for (auto& task : tasks) {
         task->SetFinishedSerial(finishedSerial);
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+    }
+
+    std::vector<Ref<EventManager::TrackedEvent>> events;
+    mEventsInFlight.Use([&](auto eventsInFlight) {
+        for (auto& event : eventsInFlight->IterateUpTo(finishedSerial)) {
+            events.push_back(std::move(event));
+        }
+        eventsInFlight->ClearUpTo(finishedSerial);
+    });
+    for (auto& event : events) {
+        GetInstance()->GetEventManager()->SetFutureReady(event.Get());
     }
 }
 
