@@ -1652,11 +1652,8 @@ void DawnTestBase::WaitForAllOperations() {
     // Callback might be invoked on another thread that calls the same WaitABit() method, not
     // necessarily the current thread. So we need to use atomic here.
     std::atomic<bool> done(false);
-    device.GetQueue().OnSubmittedWorkDone(
-        [](WGPUQueueWorkDoneStatus, void* userdata) {
-            *static_cast<std::atomic<bool>*>(userdata) = true;
-        },
-        &done);
+    device.GetQueue().OnSubmittedWorkDone(wgpu::CallbackMode::AllowProcessEvents,
+                                          [&done](wgpu::QueueWorkDoneStatus) { done = true; });
     while (!done.load()) {
         WaitABit();
     }
