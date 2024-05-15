@@ -160,6 +160,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff14c52a_a453efee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-15T04:53:47Z",
+      "side": 1,
+      "message": "IMO we should be consistent about the policy about unrewriting to T* if it impacts MotionMark unless we decide on the email thread that we should do something different.\n\nfwiw, for this userdata pointer, I think it\u0027s not very security sensitive for Dawn. Dawn never dereferences this pointer. The embedder passes it and a callback to us, we save it, and then we pass the userdata back to the embedder as an argument to the embedder\u0027s callback.",
+      "parentUuid": "25c8222d_a5d848a1",
+      "revId": "ea3323361c556fc20358d788adfa87f14410413c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a36448e3_7b714ba7",
