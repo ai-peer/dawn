@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b00c7e00_79808be4",
+        "filename": "test/tint/statements/decrement/workgroup.wgsl.expected.ir.msl",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:50:24Z",
+      "side": 1,
+      "message": "I thought we were validating the generated MSL? Does this actually work, `i` is a pointer, so we need some deref\u0027ing in here for the test to pass, but I\u0027d have assumed it would fail MSL validation?",
+      "revId": "073dd59e44c05aa0d4ea029424a5089f92dc5301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
