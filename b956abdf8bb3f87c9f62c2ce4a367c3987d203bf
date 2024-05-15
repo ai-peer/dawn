@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce53ebb7_97607ac3",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "```suggestion\n    /// A map from a function to the value which is used to access the module-scoped value.\n```\n\nOr something? The `variable structure value` I found confusing and hard to decypher",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41657c06_0aaa920b",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "We\u0027ve done this at least twice, maybe file a followup to add a `ir.blocks_to_functions()` to build the initial map?",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fe992b_94a837de",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "Should we have a note somewhere that this assumes there is only one entry-point in the module and unused module-scoped variables have already been stripped?",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58c80f72_435b10df",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "Oh, that\u0027s smart. So you create all the pointers and then just use the usages afterwards so you don\u0027t have to look at the instructions.",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d2da6f_5d1c82f3",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "```suggestion\n        // Add the module-scoped variable structure to the function signature and add the value representing that new parameter value into the map\n```\n\nor something similar?",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b5b4a4_12e40adf",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "Oh, so this does work with multiple entry points, you just may end up with stuff that isnt\u0027 used  ... interesting. (maybe make comment say that instead of what I said above ...?)",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "487c70a9_d345bdf1",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @returns the parameter for the structure\n```",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b37006fa_e811012c",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "Just to understand, I thought this was working from the leaves up? So, we\u0027re updating a leaf, and we haven\u0027t done the parent yet, how does this `function_to_struct_value` work?",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c61934_7d089e3c",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-15T15:44:14Z",
+      "side": 1,
+      "message": "```suggestion\n    /// Get a pointer from the module-scope variable replacement structure. Inserts the access chain instruction before the provided `inst`\n```",
+      "revId": "b956abdf8bb3f87c9f62c2ce4a367c3987d203bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
