@@ -366,7 +366,8 @@ Future QueueBase::APIOnSubmittedWorkDone2(const WGPUQueueWorkDoneCallbackInfo2& 
     }
 
     FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
-
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Queue::APIOnSubmittedWorkDone", "serial",
+                 uint64_t(GetPendingCommandSerial()));
     return {futureID};
 }
 
@@ -397,6 +398,10 @@ void QueueBase::TrackPendingTask(std::unique_ptr<TrackTaskCallback> task) {
     mTasksInFlight->Enqueue(std::move(task), GetPendingCommandSerial());
 }
 
+void QueueBase::TrackFuture(FutureID futureID, ExecutionSerial serial) {
+    mFuturesInFlight->Enqueue(futureID, serial);
+}
+
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
     // If a user calls Queue::Submit inside a task, for example in a Buffer::MapAsync callback,
     // then the device will be ticked, which in turns ticks the queue, causing reentrance here.
@@ -418,6 +423,17 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     for (auto& task : tasks) {
         task->SetFinishedSerial(finishedSerial);
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+    }
+
+    std::vector<FutureID> futureIDs;
+    mFuturesInFlight.Use([&](auto futuresInFlight) {
+        for (FutureID futureID : futuresInFlight->IterateUpTo(finishedSerial)) {
+            futureIDs.push_back(futureID);
+        }
+        futuresInFlight->ClearUpTo(finishedSerial);
+    });
+    for (FutureID futureID : futureIDs) {
+        GetInstance()->GetEventManager()->SetFutureReady(futureID);
     }
 }
 
