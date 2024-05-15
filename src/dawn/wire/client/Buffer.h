@@ -63,6 +63,10 @@ class Buffer final : public ObjectWithEventsBase {
                          size_t offset,
                          size_t size,
                          const WGPUBufferMapCallbackInfo& callbackInfo);
+    WGPUFuture MapAsync2(WGPUMapModeFlags mode,
+                         size_t offset,
+                         size_t size,
+                         const WGPUBufferMapCallbackInfo2& callbackInfo);
     void* GetMappedRange(size_t offset, size_t size);
     const void* GetConstMappedRange(size_t offset, size_t size);
     void Unmap();
@@ -78,6 +82,7 @@ class Buffer final : public ObjectWithEventsBase {
   private:
     friend class Client;
     class MapAsyncEvent;
+    class MapAsyncEvent2;
 
     // Prepares the callbacks to be called and potentially calls them
     void SetFutureStatus(WGPUBufferMapAsyncStatus status);
