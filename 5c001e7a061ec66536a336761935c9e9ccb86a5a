@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d866ff05_caa9a811",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T14:34:26Z",
+      "side": 1,
+      "message": "Thanks! Done.",
+      "parentUuid": "2ef4dffb_b08655ab",
+      "range": {
+        "startLine": 120,
+        "startChar": 47,
+        "endLine": 120,
+        "endChar": 67
+      },
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "939b38ae_f763ded7",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 2
@@ -107,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "702acf07_6b9c3742",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T14:34:26Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "2d54cc86_1fe4529d",
+      "range": {
+        "startLine": 549,
+        "startChar": 8,
+        "endLine": 549,
+        "endChar": 53
+      },
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c008e00_a0d9f13d",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 2
@@ -136,6 +184,24 @@
       "side": 1,
       "message": "I think it\u0027s actually OK - in general we don\u0027t store the chains within Dawn. Chains are there as an extension mechanism for the application to pass things in/out in an ABI-stable way. They get annoying to work with once inside the implementation, so it\u0027s more useful to leave it unpacked. Secondly, it\u0027s only useful for Vulkan here so better to keep it in the Vulkan backend than on the base properties struct.",
       "parentUuid": "3c008e00_a0d9f13d",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "300a6308_ff7791f3",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T14:34:26Z",
+      "side": 1,
+      "message": "Thanks, makes sense!",
+      "parentUuid": "aedca451_0359cd0f",
       "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +259,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e25ea8_97947564",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1079,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T14:34:26Z",
+      "side": 1,
+      "message": "Thanks, done!",
+      "parentUuid": "e735435f_82316ab8",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a6addba_8f9458e3",
@@ -224,6 +308,24 @@
       "side": 1,
       "message": "I\u0027m not sure; I hadn\u0027t realized the info reported back was not the same.\n\nGiven that what we\u0027re exporting here isn\u0027t necessarily always a *requirement* but more a suggestion (suggestedYcbcrModel, suggestedYcbcrRange, etc.) I think we should report the best-possible default. In general for WebGPU, we choose defaults by looking at:\n - default should generally be cheap (application should opt into more work/overhead)\n - default should be useful and work\n\nlooking at the vulkan [spec](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkSamplerYcbcrConversionCreateInfoKHR.html), I\u0027d look at:\n\n\u003e Setting forceExplicitReconstruction to VK_TRUE may have a performance penalty on implementations where explicit reconstruction is not the default mode of operation.\n\n\u003e If format supports VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT the forceExplicitReconstruction value behaves as if it was set to VK_TRUE.\n\n\u003e If the potential format features of the sampler Y′CBCR conversion do not support VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT, chromaFilter must not be VK_FILTER_LINEAR\n\nso I think that means:\n - forceExplicitReconstruction is false, unless it has VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT. Then it is true.\n - chrome filter is NEAREST. (nearest is generally always cheaper, and the default mode in WebGPU). And linear is not always supported anyway. application should check the format features (that you will likely be adding separately)",
       "parentUuid": "5a6addba_8f9458e3",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f02e0d76_b932990f",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T14:34:26Z",
+      "side": 1,
+      "message": "Actually as I look more closely I think that we should do with `vkChromaFilter` is set it based on the format features like [1]. Then we don\u0027t even need to expose the format features outward as Skia can just check `vkChromaFilter` directly \\o/. My understanding is that the client could still choose to use NEAREST if they want to since it\u0027s always supported - this just indicates that LINEAR *can* be used.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/skia_utils.cc;l\u003d405-409?q\u003dVK_FILTER_NEAREST\u0026ss\u003dchromium",
+      "parentUuid": "ef37a2f0_77f5c758",
       "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
