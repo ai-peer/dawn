@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12d8b1ee_bfc96cbd",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "The not being able to lookup format information sounds tricky. I know that we do want to expose the format to Chromium so that it can be set and passed down to Skia. Would that be impacted? Not sure if Skia also needs to know. We also probably want to use it in Chromium for format conversions etc.\n\nDid you mean SharedResourceMemoryContents? I\u0027m also unsure how much work replace would involve. I\u0027d personally prefer format here as I\u0027m more familiarized with the flow with such formats than them being internal, and the nuances of how they can/cannot be used so would need more understanding.\n\nMaybe renaming it to `ExternalAndroid` or `ExternalAndroidVk` would make it more clear that this is only for Android?",
+      "parentUuid": "fff4eb2e_acabe72d",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -54,6 +78,30 @@
       "writtenOn": "2024-05-16T17:48:57Z",
       "side": 1,
       "message": "should we skip this part of the format is external? we need to rely on the backend populating the correct usages",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6515bd9_a649028a",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "We could skip it. Updated.",
+      "parentUuid": "ee22bf23_f5d2dbd3",
       "range": {
         "startLine": 90,
         "startChar": 2,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb466f39_5a39eb13",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Ah, I added this for making the end2end tests work as the vkFormat from video in Chrome would be Undefined and we should set it properly to External.\n\nBut for test AHB returns the RGBA format [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/SharedTextureMemoryVk.cpp;drc\u003d1762328886136518b56961f8388d90472dc2c973;l\u003d530) which got set and passed, so I wanted to skip this validation. Maybe I should `\u0026\u0026 IsUsedForTesting()` or something and only skip it then. Is there way to check for that?",
+      "parentUuid": "957d2190_a46d5a3e",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c87669f_bdf2b4da",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 13
@@ -100,6 +172,30 @@
       "writtenOn": "2024-05-16T17:48:57Z",
       "side": 1,
       "message": "this would allow any viewFormat through - shouldn\u0027t it validate the view is also external?\n\n\noh, I see you have the check at [1]. I think it could be here instead",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 54
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4609d7c5_8cd11f63",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Sounds good, updated.",
+      "parentUuid": "0c87669f_bdf2b4da",
       "range": {
         "startLine": 90,
         "startChar": 8,
@@ -123,6 +219,30 @@
       "writtenOn": "2024-05-16T17:48:57Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 647,
+        "endChar": 44
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edbb22b2_36a2290d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba990db9_bbbb50c3",
       "range": {
         "startLine": 645,
         "startChar": 0,
@@ -158,6 +278,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc96ee2a_d3097b37",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t really get this. Should I just check for `|| desc.format \u003d\u003d TextureFormat::External`.. I think the aspects else block should automatically handle it and set it correctly right?",
+      "parentUuid": "4a7e5ea7_292e9dd7",
+      "range": {
+        "startLine": 693,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 73
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7bf6a90_134ee968",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 13
@@ -181,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11a88b0c_d90b7e14",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Interesting, I\u0027ll update to follow this.",
+      "parentUuid": "c7bf6a90_134ee968",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 72
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1b9afb0_332857f5",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 13
@@ -192,6 +360,30 @@
       "writtenOn": "2024-05-16T17:48:57Z",
       "side": 1,
       "message": "I expected this to check that the format is external, only if YCbCrVkDescriptor::externalFormat is non-zero",
+      "range": {
+        "startLine": 1782,
+        "startChar": 0,
+        "endLine": 1787,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd16a835_acced20d",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-16T19:24:38Z",
+      "side": 1,
+      "message": "Ah yes, this should be checked only when it is non-zero. I\u0027ll update this.",
+      "parentUuid": "c1b9afb0_332857f5",
       "range": {
         "startLine": 1782,
         "startChar": 0,
