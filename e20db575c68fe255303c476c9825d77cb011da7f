@@ -178,6 +178,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7cdfb85_17dafa96",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:54:32Z",
+      "side": 1,
+      "message": "I think you can just say something like:\n\n```\n- An `input_attachment` is in the `handle` address space\n```\n\n`handle` is defined in the WGSL spec so I think just saying that is enough. It implies you\u0027d write it `var a: input_attachment\u003cf32\u003e` because `handle` can\u0027t be typed directly into a WGSL program. (and tells us how to validate it, heh)",
+      "parentUuid": "e5336982_d7b9acd7",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "633b33b6_8612e14d",
         "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
         "patchSetId": 1
