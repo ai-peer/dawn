@@ -103,15 +103,17 @@ D3D12_RESOURCE_STATES D3D12TextureUsage(wgpu::TextureUsage usage, const Format& 
 D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::TextureUsage usage, const Format& format) {
     D3D12_RESOURCE_FLAGS flags = D3D12_RESOURCE_FLAG_NONE;
 
-    if (usage & wgpu::TextureUsage::StorageBinding) {
-        flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
-    }
-
-    if (usage & wgpu::TextureUsage::RenderAttachment) {
-        if (format.HasDepthOrStencil()) {
-            flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
-        } else {
+    // Always set the depth stencil flags on depth stencil format textures since some formats like
+    // D24_UNORM_S8_UINT don't support copying for lazy clear. Also, setting depth stencil flags
+    // precludes setting other resource flags like render target or unordered access.
+    if (format.HasDepthOrStencil()) {
+        flags |= D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
+    } else {
+        if (usage & wgpu::TextureUsage::RenderAttachment) {
             flags |= D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+        }
+        if (usage & wgpu::TextureUsage::StorageBinding) {
+            flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
         }
     }
 
@@ -413,12 +415,17 @@ D3D12_RESOURCE_FLAGS Texture::GetD3D12ResourceFlags() const {
 DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
     DAWN_ASSERT(GetFormat().aspects & aspect);
 
-    switch (GetFormat().format) {
+    wgpu::TextureFormat format = GetFormat().format;
+    switch (format) {
         case wgpu::TextureFormat::Depth24PlusStencil8:
         case wgpu::TextureFormat::Depth32FloatStencil8:
         case wgpu::TextureFormat::Stencil8:
             switch (aspect) {
                 case Aspect::Depth:
+                    // The depth24 part of a D24_UNORM_S8_UINT texture cannot be copied with D3D and
+                    // is also not supported by WebGPU.
+                    // See https://gpuweb.github.io/gpuweb/#depth-formats
+                    DAWN_ASSERT(format == wgpu::TextureFormat::Depth32FloatStencil8);
                     return DXGI_FORMAT_R32_FLOAT;
                 case Aspect::Stencil:
                     return DXGI_FORMAT_R8_UINT;
@@ -978,7 +985,8 @@ TextureView::TextureView(TextureBase* texture, const UnpackedPtr<TextureViewDesc
             case wgpu::TextureFormat::Depth16Unorm:
                 mSrvDesc.Format = DXGI_FORMAT_R16_UNORM;
                 break;
-            case wgpu::TextureFormat::Stencil8: {
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth24PlusStencil8: {
                 Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
@@ -1009,7 +1017,6 @@ TextureView::TextureView(TextureBase* texture, const UnpackedPtr<TextureViewDesc
                 }
                 break;
             }
-            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8: {
                 Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
                 DAWN_ASSERT(aspects != Aspect::None);
