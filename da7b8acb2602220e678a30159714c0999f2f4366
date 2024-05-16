@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d92dd722_17aa9783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-16T19:40:03Z",
+      "side": 1,
+      "message": "LGTM with one requested change.",
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d0ac957_984862bb",
@@ -14,6 +31,57 @@
       "writtenOn": "2024-05-16T19:04:27Z",
       "side": 1,
       "message": "übernit: To save duplication and to reduce risk of accidental diffs, perhaps we could do:\n\n```\nscript \u003d \"${tint_src_dir}/cmd/fuzz/wgsl/generate_wgsl_corpus.py\"\nsources \u003d [ \"${script}\" ]\n```\n\nSame thing below.",
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c124a13_4c649632",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-16T19:40:03Z",
+      "side": 1,
+      "message": "Looks like duplicated code here?\n\nScarily accurate AI suggested fix attached.",
+      "range": {
+        "startLine": 1286,
+        "startChar": 0,
+        "endLine": 1294,
+        "endChar": 5
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "00b0c11a_b6c5e151",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 1291,
+                "startChar": 0,
+                "endLine": 1297,
+                "endChar": 0
+              },
+              "replacement": "    if (auto val \u003d tint::core::ir::Validate(ir.Get()); val !\u003d tint::Success) {\n"
+            },
+            {
+              "path": "src/tint/cmd/tint/main.cc",
+              "range": {
+                "startLine": 1300,
+                "startChar": 0,
+                "endLine": 1301,
+                "endChar": 0
+              },
+              "replacement": "    return ir;\n"
+            }
+          ]
+        }
+      ],
       "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
