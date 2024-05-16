@@ -16,6 +16,190 @@
       "message": "Please take a look.",
       "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fff4eb2e_acabe72d",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "mmm..... I wonder what we fill for all these values. \n\nyou have Cap::None, so it\u0027s not renderable. Don\u0027t need to specify the RenderTarget values.\n\n\nI would expect SampleTypeBit probably to be Float/UnfilterableFloat. Which one depends on the properties from the AHardwareBuffer though.\n\n\nI\u0027m wondering if it would be better to not put External in the format table at all.\nInstead.. we do something like store a `Format` in the SharedTextureMemoryContents (texture refs STMContents), and then have TextureBase::mFormat refer to that format.\n\nthis might make more sense because I imagine different external formats will have different capabilities. Doing this though, you might need to update a bunch of replace to take a pair of (wgpu::TextureFormat, dawn::native::Format) - that way you have the format information available if it was external. You\u0027ll no longer be able to look up the format information from the External enum",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee22bf23_f5d2dbd3",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "should we skip this part of the format is external? we need to rely on the backend populating the correct usages",
+      "range": {
+        "startLine": 90,
+        "startChar": 2,
+        "endLine": 101,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "957d2190_a46d5a3e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "ok so this says, if you use External, then it just matches whatever the STM has. otherwise if you pass a format it needs to match exactly\n\nwhy not always have them always match exactly?",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c87669f_bdf2b4da",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "this would allow any viewFormat through - shouldn\u0027t it validate the view is also external?\n\n\noh, I see you have the check at [1]. I think it could be here instead",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 54
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba990db9_bbbb50c3",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 645,
+        "startChar": 0,
+        "endLine": 647,
+        "endChar": 44
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7e5ea7_292e9dd7",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "default the format to external if the texture\u0027s format is external?",
+      "range": {
+        "startLine": 693,
+        "startChar": 0,
+        "endLine": 693,
+        "endChar": 73
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7bf6a90_134ee968",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "Yes, I think so - but then you should also remove usages if they\u0027re not available by looking at VkAndroidHardwareBufferFormatPropertiesANDROID::formatFeatures (this is what Chrome does too)\n\nannoyingly, according to the docs, you\u0027re **not** supposed to look at VkAndroidHardwareBufferFormatPropertiesANDROID::formatFeatures if the format is not external.",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 505,
+        "endChar": 72
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b9afb0_332857f5",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1787,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T17:48:57Z",
+      "side": 1,
+      "message": "I expected this to check that the format is external, only if YCbCrVkDescriptor::externalFormat is non-zero",
+      "range": {
+        "startLine": 1782,
+        "startChar": 0,
+        "endLine": 1787,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
