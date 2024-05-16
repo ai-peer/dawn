@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9be9c12d_12e28777",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-16T19:24:16Z",
+      "side": 1,
+      "message": "It\u0027s only allowed in fragment stage.",
+      "parentUuid": "57ee3989_7dfce40c",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "180e9bc2_e7593e81",
         "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
         "patchSetId": 1
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "458cf99a_1d8b0919",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-16T19:24:16Z",
+      "side": 1,
+      "message": "It\u0027s only allowed for uniform variable similar to texture_2d. So I guess only `var`?",
+      "parentUuid": "7f8e761f_fbb40a20",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "633b33b6_8612e14d",
         "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
         "patchSetId": 1
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4db67c97_26150879",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-16T19:24:16Z",
+      "side": 1,
+      "message": "vec4\u003cT\u003e inputAttachmentLoad(input_attachment\u003cT\u003e)",
+      "parentUuid": "633b33b6_8612e14d",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "490d511e_e871aba9",
         "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
         "patchSetId": 1
@@ -99,6 +153,24 @@
       "writtenOn": "2024-05-16T19:16:24Z",
       "side": 1,
       "message": "Is `input_attachment_index` required? Should it be part of the type if it\u0027s always required, so something like:\n\n```\n@group(0) @binding(0) var input_tex : input_attachment\u003cf32, 0\u003e\n```\n\n?",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412884fe_d598242d",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-16T19:24:16Z",
+      "side": 1,
+      "message": "What is the benefit of making it a part of type? In GLSL, it\u0027s part of layout. e.g.\n```\nlayout(set \u003d 0, binding \u003d 0, input_attachment_index\u003d0) uniform subpassInput input_tex;\n```",
+      "parentUuid": "490d511e_e871aba9",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
