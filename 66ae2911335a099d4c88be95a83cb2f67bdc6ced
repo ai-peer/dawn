@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "675b8bac_164a135b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-05-16T18:36:48Z",
+      "side": 1,
+      "message": "For M124/6367. Makes DEPS point at commit from:\nhttps://chromium-review.googlesource.com/c/external/github.com/microsoft/DirectXShaderCompiler/+/5545820",
+      "revId": "66ae2911335a099d4c88be95a83cb2f67bdc6ced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
