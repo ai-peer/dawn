@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d2cfccd_94b087c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-16T10:34:17Z",
+      "side": 1,
+      "message": "I do wonder if the MSL printer could / should use references instead of pointers. It means you don\u0027t have to worry about `\u0026` or `*`, and the compiler knows that the pointers are never null.",
+      "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
