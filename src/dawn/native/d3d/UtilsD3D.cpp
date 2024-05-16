@@ -322,13 +322,13 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
 
         case wgpu::TextureFormat::Depth16Unorm:
             return DXGI_FORMAT_D16_UNORM;
-        case wgpu::TextureFormat::Depth32Float:
-        case wgpu::TextureFormat::Depth24Plus:
-            return DXGI_FORMAT_D32_FLOAT;
         // DXGI_FORMAT_D24_UNORM_S8_UINT is the smallest format supported on D3D12 that has stencil.
         case wgpu::TextureFormat::Stencil8:
-            return DXGI_FORMAT_D24_UNORM_S8_UINT;
         case wgpu::TextureFormat::Depth24PlusStencil8:
+        case wgpu::TextureFormat::Depth24Plus:
+            return DXGI_FORMAT_D24_UNORM_S8_UINT;
+        case wgpu::TextureFormat::Depth32Float:
+            return DXGI_FORMAT_D32_FLOAT;
         case wgpu::TextureFormat::Depth32FloatStencil8:
             return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 
