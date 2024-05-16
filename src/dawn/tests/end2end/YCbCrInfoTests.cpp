@@ -41,6 +41,41 @@ constexpr uint32_t kDefaultMipLevels = 1u;
 constexpr uint32_t kDefaultLayerCount = 1u;
 constexpr wgpu::TextureFormat kDefaultTextureFormat = wgpu::TextureFormat::External;
 
+#if DAWN_PLATFORM_IS(ANDROID)
+VkAndroidHardwareBufferFormatPropertiesANDROID CreateAHardwareBufferProperties(
+    wgpu::Device& device) {
+    AHardwareBuffer_Desc aHardwareBufferDesc = {
+        .width = 32u,
+        .height = 32u,
+        .layers = 1,
+        .format = AHARDWAREBUFFER_FORMAT_R8G8B8A8_UNORM,
+        .usage = AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE,
+    };
+    AHardwareBuffer* aHardwareBuffer;
+    EXPECT_EQ(AHardwareBuffer_allocate(&aHardwareBufferDesc, &aHardwareBuffer), 0);
+
+    // Get actual desc for allocated buffer so we know the stride for cpu data.
+    AHardwareBuffer_describe(aHardwareBuffer, &aHardwareBufferDesc);
+
+    VkDevice vkDevice = device->GetVkDevice();
+
+    VkAndroidHardwareBufferPropertiesANDROID bufferProperties = {
+        .sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
+    };
+
+    VkAndroidHardwareBufferFormatPropertiesANDROID bufferFormatProperties;
+    PNextChainBuilder bufferPropertiesChain(&bufferProperties);
+    bufferPropertiesChain.Add(&bufferFormatProperties,
+                              VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID);
+
+    DAWN_TRY(CheckVkSuccess(device->fn.GetAndroidHardwareBufferPropertiesANDROID(
+                                vkDevice, aHardwareBuffer, &bufferProperties),
+                            "vkGetAndroidHardwareBufferPropertiesANDROID"));
+
+    return bufferFormatProperties;
+}
+#endif
+
 wgpu::Texture Create2DTexture(wgpu::Device& device,
                               wgpu::TextureFormat format = kDefaultTextureFormat) {
 #if DAWN_PLATFORM_IS(ANDROID)
@@ -152,6 +187,49 @@ TEST_P(YCbCrInfoTest, YCbCrSamplerValidWithOnlyExternalFormat) {
 
     device.CreateSampler(&samplerDesc);
 }
+
+#if DAWN_PLATFORM_IS(ANDROID)
+// Test that it is possible to create the sampler with ycbcr vulkan descriptor with only external
+// format set.
+TEST_P(YCbCrInfoTest, YCbCrSamplerValidWithAHBPropsAndOnlyExternalFormat) {
+    wgpu::SamplerDescriptor samplerDesc = {};
+
+    VkAndroidHardwareBufferFormatPropertiesANDROID bufferFormatProperties =
+        CreateAHardwareBufferProperties(device);
+
+    wgpu::YCbCrVkDescriptor yCbCrAHBInfo = {};
+
+    // Populate the YCbCr info.
+    yCbCrAHBInfo.externalFormat = bufferFormatProperties.externalFormat;
+    // format is set as externalFormat.
+    yCbCrAHBInfo.vkFormat = VK_FORMAT_UNDEFINED;
+    yCbCrAHBInfo.vkYCbCrModel = bufferFormatProperties.suggestedYcbcrModel;
+    yCbCrAHBInfo.vkYCbCrRange = bufferFormatProperties.suggestedYcbcrRange;
+    yCbCrAHBInfo.vkComponentSwizzleRed = bufferFormatProperties.samplerYcbcrConversionComponents.r;
+    yCbCrAHBInfo.vkComponentSwizzleGreen =
+        bufferFormatProperties.samplerYcbcrConversionComponents.g;
+    yCbCrAHBInfo.vkComponentSwizzleBlue = bufferFormatProperties.samplerYcbcrConversionComponents.b;
+    yCbCrAHBInfo.vkComponentSwizzleAlpha =
+        bufferFormatProperties.samplerYcbcrConversionComponents.a;
+    yCbCrAHBInfo.vkXChromaOffset = bufferFormatProperties.suggestedXChromaOffset;
+    yCbCrAHBInfo.vkYChromaOffset = bufferFormatProperties.suggestedYChromaOffset;
+
+    uint32_t formatFeatures = bufferFormatProperties.formatFeatures;
+    yCbCrAHBInfo.vkChromaFilter =
+        (formatFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT)
+            ? VK_FILTER_LINEAR
+            : VK_FILTER_NEAREST;
+    yCbCrAHBInfo.forceExplicitReconstruction =
+        formatFeatures &
+        VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT;
+    // format is set as externalFormat.
+    // yCbCrDesc.vkFormat = VK_FORMAT_UNDEFINED;
+    // yCbCrDesc.externalFormat = 5;
+    samplerDesc.nextInChain = &yCbCrAHBInfo;
+
+    device.CreateSampler(&samplerDesc);
+}
+#endif
 
 // Test that it is NOT possible to create the sampler with ycbcr vulkan descriptor and no format
 // set.
