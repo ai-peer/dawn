@@ -502,6 +502,7 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     SharedTextureMemoryProperties properties;
     properties.size = {aHardwareBufferDesc.width, aHardwareBufferDesc.height,
                        aHardwareBufferDesc.layers};
+    // Should properties have these usages with TextureFormat::External?
     properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
     if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER) {
         properties.usage |= wgpu::TextureUsage::RenderAttachment;
