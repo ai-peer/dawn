@@ -34,6 +34,24 @@
       "parentUuid": "1d2cfccd_94b087c2",
       "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e50f844_623b332a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-16T18:35:08Z",
+      "side": 1,
+      "message": "I\u0027m curious. Why are there unused ones?",
+      "parentUuid": "f2614eee_d345066e",
+      "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
