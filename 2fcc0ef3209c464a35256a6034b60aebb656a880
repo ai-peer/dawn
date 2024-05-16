@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc97cc5_7f7dcfc8",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-16T22:00:31Z",
+      "side": 1,
+      "message": "Won\u0027t that already be the case since format.HasDepthOrStencil() will return true for Depth24Plus. Also, this CL doesn\u0027t change the mapping for Depth24Plus - it will still be D32_FLOAT.",
+      "parentUuid": "d4dcc88e_6d7f26ca",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a46aec5_dd719d5c",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5094a61_b0bfa959",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-16T22:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a46aec5_dd719d5c",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 37
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1c3fc09_401e0dc9",
@@ -60,6 +108,24 @@
       "writtenOn": "2024-05-16T20:13:31Z",
       "side": 1,
       "message": "may want to include a comment about why - depth24 not copyable",
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cbe3f64_859cecf2",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-16T22:00:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1c3fc09_401e0dc9",
       "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
