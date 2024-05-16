@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639e986d_a0d5c710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-16T12:52:03Z",
+      "side": 1,
+      "message": "I thought about submitting this piecemeal but really it\u0027s a holistic thing; if any part of this is missing the library can\u0027t be used to make working Dawn ART apps.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
