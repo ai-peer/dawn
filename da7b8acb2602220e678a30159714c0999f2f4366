@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14764a53_88fac027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-16T20:50:54Z",
+      "side": 1,
+      "message": "Implemented review comments, still investigating why *-rel bots are angry",
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d0ac957_984862bb",
@@ -31,6 +48,24 @@
       "writtenOn": "2024-05-16T19:04:27Z",
       "side": 1,
       "message": "übernit: To save duplication and to reduce risk of accidental diffs, perhaps we could do:\n\n```\nscript \u003d \"${tint_src_dir}/cmd/fuzz/wgsl/generate_wgsl_corpus.py\"\nsources \u003d [ \"${script}\" ]\n```\n\nSame thing below.",
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d24bc7b2_fea6fcec",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-16T20:50:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d0ac957_984862bb",
       "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +117,30 @@
           ]
         }
       ],
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9521d0e9_c92eb6b7",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-16T20:50:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c124a13_4c649632",
+      "range": {
+        "startLine": 1286,
+        "startChar": 0,
+        "endLine": 1294,
+        "endChar": 5
+      },
       "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
