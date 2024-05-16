@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c410cf3f_ddfb1867",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:29:03Z",
+      "side": 1,
+      "message": "Can you add this, and the below answers into the doc?",
+      "parentUuid": "9be9c12d_12e28777",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "180e9bc2_e7593e81",
         "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
         "patchSetId": 1
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "It\u0027s only allowed for uniform variable similar to texture_2d. So I guess only `var`?",
       "parentUuid": "7f8e761f_fbb40a20",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf4f3380_9be2d99a",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:29:03Z",
+      "side": 1,
+      "message": "So, this is like texture in that it\u0027s an opaque handle? If so, then it would be the `handle` address space",
+      "parentUuid": "458cf99a_1d8b0919",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +207,24 @@
       "side": 1,
       "message": "What is the benefit of making it a part of type? In GLSL, it\u0027s part of layout. e.g.\n```\nlayout(set \u003d 0, binding \u003d 0, input_attachment_index\u003d0) uniform subpassInput input_tex;\n```",
       "parentUuid": "490d511e_e871aba9",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bbebf08_1fd558c5",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:29:03Z",
+      "side": 1,
+      "message": "I\u0027m not sure, it just seems like if it\u0027s always required it might make sense? But then, it\u0027s part of the type which could have other side effects.",
+      "parentUuid": "412884fe_d598242d",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
