@@ -70,6 +70,24 @@
       "parentUuid": "9e50f844_623b332a",
       "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca79db0_562e3671",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-16T18:46:49Z",
+      "side": 1,
+      "message": "Ah, because the functions get shared by entry points. Gotcha.",
+      "parentUuid": "b906192c_aa1ea08b",
+      "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
