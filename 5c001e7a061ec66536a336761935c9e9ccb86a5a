@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83cb838c_ef8a2a3e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T15:54:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d866ff05_caa9a811",
+      "range": {
+        "startLine": 120,
+        "startChar": 47,
+        "endLine": 120,
+        "endChar": 67
+      },
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "939b38ae_f763ded7",
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "Done.",
       "parentUuid": "2d54cc86_1fe4529d",
+      "range": {
+        "startLine": 549,
+        "startChar": 8,
+        "endLine": 549,
+        "endChar": 53
+      },
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c26a9a42_1cb2506f",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T15:54:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "702acf07_6b9c3742",
       "range": {
         "startLine": 549,
         "startChar": 8,
@@ -326,6 +374,24 @@
       "side": 1,
       "message": "Actually as I look more closely I think that we should do with `vkChromaFilter` is set it based on the format features like [1]. Then we don\u0027t even need to expose the format features outward as Skia can just check `vkChromaFilter` directly \\o/. My understanding is that the client could still choose to use NEAREST if they want to since it\u0027s always supported - this just indicates that LINEAR *can* be used.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/skia_utils.cc;l\u003d405-409?q\u003dVK_FILTER_NEAREST\u0026ss\u003dchromium",
       "parentUuid": "ef37a2f0_77f5c758",
+      "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d450cdb_6a4bc092",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T15:54:56Z",
+      "side": 1,
+      "message": "that sounds great",
+      "parentUuid": "f02e0d76_b932990f",
       "revId": "5c001e7a061ec66536a336761935c9e9ccb86a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
