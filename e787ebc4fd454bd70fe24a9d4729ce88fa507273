@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ce1c087_11535203",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T11:45:38Z",
+      "side": 1,
+      "message": "Aha, I see. The string supplied to DeviceBase::ConsumedError() in APIGetProperties() is context, while the string being supplied to DAWN_INVALID_IF() here is the error itself. That clears up my confusion. Updated the error message here to match conventions.",
+      "parentUuid": "3c5a6f92_95931602",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d12bf60_3749d6bf",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
         "patchSetId": 1
@@ -83,6 +101,24 @@
       "writtenOn": "2024-05-16T10:02:36Z",
       "side": 1,
       "message": "Interesting, I don\u0027t know that we have getters with chained structures before this one, but https://github.com/webgpu-native/webgpu-headers/issues/115 doesn\u0027t seem to describe if the whole call should fail or not. +CC Kai for this.\n\nNo need to do any changes to this CL though. We\u0027ll revisit later depending on the resolution to the issue linked above.",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df35e7ae_eab18aea",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T11:45:38Z",
+      "side": 1,
+      "message": "FYI: I followed what I perceived to be precedent here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/white_box/SharedTextureMemoryTests.cpp;l\u003d1003-1022?q\u003dSharedTextureMemoryTests.cp\u0026ss\u003dchromium",
+      "parentUuid": "1d12bf60_3749d6bf",
       "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
