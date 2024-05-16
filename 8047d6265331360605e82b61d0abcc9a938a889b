@@ -50,6 +50,23 @@
       "message": "flipY could be removed from both here and descriptor. See TODOs above.",
       "revId": "8047d6265331360605e82b61d0abcc9a938a889b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd410dd3_7ab2511f",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-05-16T14:23:28Z",
+      "side": 1,
+      "message": "Maybe move this to the load related metadata part? I think it is not related to rotation and other transform.",
+      "revId": "8047d6265331360605e82b61d0abcc9a938a889b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
