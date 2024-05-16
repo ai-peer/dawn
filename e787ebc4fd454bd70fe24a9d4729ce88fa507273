@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94221dfb_e5659682",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-16T10:02:36Z",
+      "side": 1,
+      "message": "+CC Kai for webgpu-headers conventions.\n\nLGTM",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9256752f_303095d7",
@@ -31,6 +48,41 @@
       "writtenOn": "2024-05-16T09:50:23Z",
       "side": 1,
       "message": "To date, I\u0027ve structured error messages as sentences e.g. \"The \u003cfoo\u003e has \u003cbar\u003e\". However, Austin\u0027s message here [1] made me think that they should actually be structured as phrases that are assumed to be following \"while\", i.e. that the actual error message will end up being \"I had an error while \u003cerror_msg\u003e\". Accordingly, I\u0027ve structured this one that way. Insight on which way to go here?\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/188240/comment/2ef4dffb_b08655ab/",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5a6f92_95931602",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-16T10:02:36Z",
+      "side": 1,
+      "message": "We have some conventions for error messages here: https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md it\u0027s mostly for WebGPU developer facing messages (this AHB code path is way more internal) but in general it tries to explain what happens, and not what should happen.",
+      "parentUuid": "9256752f_303095d7",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d12bf60_3749d6bf",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-16T10:02:36Z",
+      "side": 1,
+      "message": "Interesting, I don\u0027t know that we have getters with chained structures before this one, but https://github.com/webgpu-native/webgpu-headers/issues/115 doesn\u0027t seem to describe if the whole call should fail or not. +CC Kai for this.\n\nNo need to do any changes to this CL though. We\u0027ll revisit later depending on the resolution to the issue linked above.",
       "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
