@@ -1261,13 +1261,14 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
         // TYPELESS as a single-plane shader-accessible view.
         switch (textureFormat.format) {
             case wgpu::TextureFormat::Depth32Float:
-            case wgpu::TextureFormat::Depth24Plus:
                 srvDesc.Format = DXGI_FORMAT_R32_FLOAT;
                 break;
             case wgpu::TextureFormat::Depth16Unorm:
                 srvDesc.Format = DXGI_FORMAT_R16_UNORM;
                 break;
-            case wgpu::TextureFormat::Stencil8: {
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::Depth24PlusStencil8: {
                 Aspect aspects = GetAspects();
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
@@ -1289,7 +1290,6 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
                 }
                 break;
             }
-            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8: {
                 Aspect aspects = GetAspects();
                 DAWN_ASSERT(aspects != Aspect::None);
