@@ -52,6 +52,24 @@
       "parentUuid": "f2614eee_d345066e",
       "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b906192c_aa1ea08b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-16T18:39:11Z",
+      "side": 1,
+      "message": "In production flows there shouldn\u0027t be, but in Tint E2E test land you can have multiple entry points in the same module and they may not all use all of module-scope variables.",
+      "parentUuid": "9e50f844_623b332a",
+      "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
