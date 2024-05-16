@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "abf520cb_21a962bb",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T22:02:12Z",
+      "side": 1,
+      "message": "but `usage \u0026 wgpu::TextureUsage::RenderAttachment` ? usage comes from the application. they may not pass RenderAttachment",
+      "parentUuid": "1dc97cc5_7f7dcfc8",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a46aec5_dd719d5c",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
