@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4dcc88e_6d7f26ca",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T20:13:31Z",
+      "side": 1,
+      "message": "we should always add in `D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL` for depth24 textures. with a comment to explain that they can\u0027t be copied so we need to make sure we can render to it for lazy clear",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a46aec5_dd719d5c",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T20:13:31Z",
+      "side": 1,
+      "message": "type name is short enough to not use auto\n\n```suggestion\n    wgpu::TextureFormat format \u003d GetFormat().format;\n```",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 37
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c3fc09_401e0dc9",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-16T20:13:31Z",
+      "side": 1,
+      "message": "may want to include a comment about why - depth24 not copyable",
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
