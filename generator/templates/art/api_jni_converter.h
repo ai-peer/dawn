@@ -24,17 +24,11 @@
 //* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 //* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-package {{ kotlin_package }}
+#include "dawn/webgpu.h"
 
-@JvmInline
-value class {{ enum.name.CamelCase() }}(@get:JvmName("getValue") val v: Int) {
-    {% if enum.category == 'bitmask' %}
-        infix fun or(b: {{ enum.name.CamelCase() }}) = {{ enum.name.CamelCase() }}(this.v or b.v)
-    {% endif %}
-    companion object {
-        {% for value in enum.values %}
-            val {{ as_ktName(value.name.CamelCase()) }} =
-                {{- enum.name.CamelCase() }}({{ '{:#010x}'.format(value.value) }})
-        {% endfor %}
-    }
-}
+// Converts Kotlin objects representing Dawn structures into native structures that can be passed
+// into the native Dawn API.
+
+{% for structure in by_category['structure'] %}
+    const void convert(JNIEnv *env, jobject obj, {{ as_cType(structure.name) }}* converted);
+{% endfor %}
