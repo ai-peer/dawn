@@ -27,49 +27,51 @@
 
 //* Outputs a declaration for an argument (type RecordMember), including a default defintion if
 //* required.
-{%- macro kotlin_declaration(arg) -%}
+{%- macro kotlin_declaration(arg, definition) -%}
     {%- set type = arg.type %}
     {%- set optional = arg.optional %}
     {%- set default_value = arg.default_value %}
-    {%- set no_default = arg.json_data is defined and arg.json_data.get('no_default', false) %}
+    {%- set no_default = arg.json_data is defined and arg.json_data.get("no_default", false) %}
     {%- if arg.length == 'strlen' -%}
         String{{ '?' if optional or default_value == 'nullptr' }}
-        {%- if default_value or optional -%}
+        {%- if definition and (default_value or optional) -%}
             = null
         {%- endif %}
     {%- elif arg.length and arg.constant_length != 1 %}
-        {%- if type.category in ['function pointer', 'structure'] -%}
-            Array<{{ type.name.CamelCase() }}> = arrayOf()
-        {%- elif type.category == 'object' -%}
-            Array<Any> = arrayOf()
+        {%- if type.category in ['function pointer', 'object', 'structure'] -%}
+            Array<{{ type.name.CamelCase() }}>{{ ' = arrayOf()' if definition }}
         {%- elif type.category in ['bitmask', 'enum'] -%}
-            IntArray = intArrayOf()
+            IntArray{{ ' = intArrayOf()' if definition }}
         {%- elif type.name.get() == 'bool' -%}
-            BooleanArray = booleanArrayOf()
+            BooleanArray{{ ' = booleanArrayOf()' if definition }}
         {%- elif type.name.get() == 'float' -%}
-            FloatArray = floatArrayOf()
+            FloatArray{{ ' = floatArrayOf()' if definition }}
         {%- elif type.name.get() == 'double' -%}
-            DoubleArray = doubleArrayOf()
-        {%- elif type.name.get() in ['int8_t', 'uint8_t', 'void'] -%}
-            ByteArray = byteArrayOf()
+            DoubleArray{{ ' = doubleArrayOf()' if definition }}
+        {%- elif type.name.get() == 'void' -%}
+            java.nio.ByteBuffer{{ ' = java.nio.ByteBuffer.allocateDirect(0)' if definition }}
+        {%- elif type.name.get() in ['int8_t', 'uint8_t'] -%}
+            ByteArray{{ ' = byteArrayOf()' if definition }}
         {%- elif type.name.get() in ['int16_t', 'uint16_t'] -%}
-            ShortArray = shortArrayOf()
+            ShortArray{{ ' = shortArrayOf()' if definition }}
         {%- elif type.name.get() in ['int', 'int32_t', 'uint32_t'] -%}
-            IntArray = intArrayOf()
+            IntArray{{ ' = intArrayOf()' if definition }}
         {%- elif type.name.get() in ['int64_t', 'uint64_t', 'size_t'] -%}
-            LongArray = longArrayOf()
+            LongArray{{ ' = longArrayOf()' if definition }}
         {%- else -%}
             {{ unreachable_code() }}
         {% endif %}
     {%- elif type.category in ['function pointer', 'object'] %}
-        Any
-        {%- if optional or default_value %}? = null{% endif %}
+        {{- type.name.CamelCase() }}
+        {%- if optional or default_value %}?{{ ' = null' if definition }}{% endif %}
     {%- elif type.category == 'structure' %}
         {{- type.name.CamelCase() }}{{ '?' if optional }}
-        {%- if type.has_basic_constructor and not no_default -%}
-            = {{ type.name.CamelCase() }}()
-        {%- elif optional -%}
-            = null
+        {%- if definition -%}
+            {%- if type.has_basic_constructor and not no_default -%}
+                = {{ type.name.CamelCase() }}()
+            {%- elif optional -%}
+                = null
+            {%- endif %}
         {%- endif %}
     {%- elif type.category in ['bitmask', 'enum'] -%}
         {{ type.name.CamelCase() }}
