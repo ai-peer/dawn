@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da05ede2_f179ba7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-16T10:29:41Z",
+      "side": 1,
+      "message": "LGTM, very nice!",
+      "revId": "f620e4eac63e39a0eacbfd5d75c11a9c6d327ce9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc1168d3_e971813a",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-16T10:29:41Z",
+      "side": 1,
+      "message": "nit: We could default the pipeline key to have `wgpu::TextureFormat::Undefined` in `colorTargetFormats` such that `colorAttachmentCount` is no longer needed.",
+      "revId": "f620e4eac63e39a0eacbfd5d75c11a9c6d327ce9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
