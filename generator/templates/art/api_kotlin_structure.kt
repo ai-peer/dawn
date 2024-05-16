@@ -34,7 +34,7 @@ class {{ structure.name.CamelCase() }}(
         {%- if member.type.category in ['bitmask', 'enum'] -%}
             @get:JvmName("get{{ member.name.CamelCase() }}")
         {% endif %}
-        var {{ member.name.camelCase() }}: {{ kotlin_declaration(member) }},
+        var {{ member.name.camelCase() }}: {{ kotlin_declaration(member, true) }},
     {% endfor %}
     {% for structure in chain_children[structure.name.get()] %}
         var {{ structure.name.camelCase() }}: {{ structure.name.CamelCase() }}? = null,
