@@ -262,6 +262,24 @@
       "parentUuid": "412884fe_d598242d",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2dee37c_9f6e2cbb",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:40:40Z",
+      "side": 1,
+      "message": "Acknowledged. Fair enough, closing this one and we\u0027ll go with attribute.",
+      "parentUuid": "349a55c3_eee0d522",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
