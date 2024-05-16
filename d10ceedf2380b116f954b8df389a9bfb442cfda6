@@ -250,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c799196_3a489558",
+        "filename": "src/dawn/native/vulkan/InternalPipelineStoreVk.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-16T18:19:38Z",
+      "side": 1,
+      "message": "Discussed offline and yes, I think it would be reasonable to add the extra type/attribute/builtins to Tint as part of the `chromium_internal_graphite` extension (or a new extension if preferred, since it wouldn\u0027t be used on non-SPIR-V backends). Happy to provide guidance on how to implement this in Tint.",
+      "parentUuid": "c6cb56b3_166b5ae6",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "618baba5_03ee807c",
         "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
         "patchSetId": 5
