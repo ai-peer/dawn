@@ -175,8 +175,9 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         // DXGI_FORMAT_D24_UNORM_S8_UINT is the smallest format supported on D3D12 that has stencil,
         // for which the typeless equivalent is DXGI_FORMAT_R24G8_TYPELESS.
         case wgpu::TextureFormat::Stencil8:
-            return DXGI_FORMAT_R24G8_TYPELESS;
         case wgpu::TextureFormat::Depth24PlusStencil8:
+            return DXGI_FORMAT_R24G8_TYPELESS;
+
         case wgpu::TextureFormat::Depth32FloatStencil8:
             return DXGI_FORMAT_R32G8X24_TYPELESS;
 
@@ -327,8 +328,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
             return DXGI_FORMAT_D32_FLOAT;
         // DXGI_FORMAT_D24_UNORM_S8_UINT is the smallest format supported on D3D12 that has stencil.
         case wgpu::TextureFormat::Stencil8:
-            return DXGI_FORMAT_D24_UNORM_S8_UINT;
         case wgpu::TextureFormat::Depth24PlusStencil8:
+            return DXGI_FORMAT_D24_UNORM_S8_UINT;
         case wgpu::TextureFormat::Depth32FloatStencil8:
             return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
 

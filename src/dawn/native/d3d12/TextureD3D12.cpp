@@ -413,12 +413,17 @@ D3D12_RESOURCE_FLAGS Texture::GetD3D12ResourceFlags() const {
 DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
     DAWN_ASSERT(GetFormat().aspects & aspect);
 
-    switch (GetFormat().format) {
+    wgpu::TextureFormat format = GetFormat().format;
+    switch (format) {
         case wgpu::TextureFormat::Depth24PlusStencil8:
         case wgpu::TextureFormat::Depth32FloatStencil8:
         case wgpu::TextureFormat::Stencil8:
             switch (aspect) {
                 case Aspect::Depth:
+                    // The depth24 part of a D24_UNORM_S8_UINT texture cannot be copied with D3D and
+                    // is also not supported by WebGPU.
+                    // See https://gpuweb.github.io/gpuweb/#depth-formats
+                    DAWN_ASSERT(format == wgpu::TextureFormat::Depth32FloatStencil8);
                     return DXGI_FORMAT_R32_FLOAT;
                 case Aspect::Stencil:
                     return DXGI_FORMAT_R8_UINT;
@@ -978,7 +983,8 @@ TextureView::TextureView(TextureBase* texture, const UnpackedPtr<TextureViewDesc
             case wgpu::TextureFormat::Depth16Unorm:
                 mSrvDesc.Format = DXGI_FORMAT_R16_UNORM;
                 break;
-            case wgpu::TextureFormat::Stencil8: {
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth24PlusStencil8: {
                 Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
@@ -1009,7 +1015,6 @@ TextureView::TextureView(TextureBase* texture, const UnpackedPtr<TextureViewDesc
                 }
                 break;
             }
-            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8: {
                 Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
                 DAWN_ASSERT(aspects != Aspect::None);
