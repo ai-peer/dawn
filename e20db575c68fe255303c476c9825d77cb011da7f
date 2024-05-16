@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ee3989_7dfce40c",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "Are there any entry point restrictions for this? Like, does it work in all of `compute`, `vertex` and `fragment`?",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "180e9bc2_e7593e81",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "```suggestion\n- A new `input_attachment` type that\u0027s only allowed on module-scoped variable declarations.\n```",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8e761f_fbb40a20",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "Can this only be attached to a `var` of type `input_attachment` or is it attached to something else?",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba8bb5d_82900fad",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "So this accepts a value? If so, maybe something like:\n\n```suggestion\n- A new `input_attachment_index(n)` attribute where `n` is a `u32` or `i32` with a positive value. Unlike `binding` which specifies the binding point in a BindGroup, this attribute specifies the index of the input attachment in the render pass. descriptor.\n```",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "633b33b6_8612e14d",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "What\u0027s the signature? `\u003csometype\u003e inputAttachmentLoad(input_attachment)` ? What is `\u003csometype\u003e`?",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "490d511e_e871aba9",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-16T19:16:24Z",
+      "side": 1,
+      "message": "Is `input_attachment_index` required? Should it be part of the type if it\u0027s always required, so something like:\n\n```\n@group(0) @binding(0) var input_tex : input_attachment\u003cf32, 0\u003e\n```\n\n?",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
