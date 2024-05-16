@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ff9cc2_5ee27ee4",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-05-16T22:34:42Z",
+      "side": 1,
+      "message": "changed it to always add D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL for any depth-stencil format",
+      "parentUuid": "abf520cb_21a962bb",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 61
+      },
+      "revId": "2fcc0ef3209c464a35256a6034b60aebb656a880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a46aec5_dd719d5c",
