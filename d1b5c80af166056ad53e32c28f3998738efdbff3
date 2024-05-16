@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "748177b1_0db93bf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-05-16T07:17:31Z",
+      "side": 1,
+      "message": "Sorry that there is still one `Reference()` in Dawn.\nPTAL, thanks!",
+      "revId": "d1b5c80af166056ad53e32c28f3998738efdbff3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
