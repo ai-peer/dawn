@@ -16,6 +16,24 @@
       "message": "I do wonder if the MSL printer could / should use references instead of pointers. It means you don\u0027t have to worry about `\u0026` or `*`, and the compiler knows that the pointers are never null.",
       "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2614eee_d345066e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-16T18:16:44Z",
+      "side": 1,
+      "message": "I did consider that again. The `ModuleScopeVars` transform does put pointers inside structures though, which we can\u0027t reasonably replace with references since the unused ones will be `nullptr` (or uninitialized).",
+      "parentUuid": "1d2cfccd_94b087c2",
+      "revId": "bafcb6ddd35bc3ff98fc290ab116c58d4286bb26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
