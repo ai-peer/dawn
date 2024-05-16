@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04854389_3e48fe4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T09:50:23Z",
+      "side": 1,
+      "message": "Trybots just started going on the added test, but I wanted to get your feedback on a question about how to structure the error message. Thanks!",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9256752f_303095d7",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-16T09:50:23Z",
+      "side": 1,
+      "message": "To date, I\u0027ve structured error messages as sentences e.g. \"The \u003cfoo\u003e has \u003cbar\u003e\". However, Austin\u0027s message here [1] made me think that they should actually be structured as phrases that are assumed to be following \"while\", i.e. that the actual error message will end up being \"I had an error while \u003cerror_msg\u003e\". Accordingly, I\u0027ve structured this one that way. Insight on which way to go here?\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/188240/comment/2ef4dffb_b08655ab/",
+      "revId": "e787ebc4fd454bd70fe24a9d4729ce88fa507273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
