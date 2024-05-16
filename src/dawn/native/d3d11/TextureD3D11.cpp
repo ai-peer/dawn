@@ -1267,7 +1267,8 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
             case wgpu::TextureFormat::Depth16Unorm:
                 srvDesc.Format = DXGI_FORMAT_R16_UNORM;
                 break;
-            case wgpu::TextureFormat::Stencil8: {
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth24PlusStencil8: {
                 Aspect aspects = GetAspects();
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
@@ -1289,7 +1290,6 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
                 }
                 break;
             }
-            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8: {
                 Aspect aspects = GetAspects();
                 DAWN_ASSERT(aspects != Aspect::None);
