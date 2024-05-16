@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d0ac957_984862bb",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-16T19:04:27Z",
+      "side": 1,
+      "message": "übernit: To save duplication and to reduce risk of accidental diffs, perhaps we could do:\n\n```\nscript \u003d \"${tint_src_dir}/cmd/fuzz/wgsl/generate_wgsl_corpus.py\"\nsources \u003d [ \"${script}\" ]\n```\n\nSame thing below.",
+      "revId": "da7b8acb2602220e678a30159714c0999f2f4366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
