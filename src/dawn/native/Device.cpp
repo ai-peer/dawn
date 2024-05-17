@@ -644,6 +644,7 @@ void DeviceBase::Destroy() {
     mEmptyPipelineLayout = nullptr;
     mInternalPipelineStore = nullptr;
     mExternalTexturePlaceholderView = nullptr;
+    mTemporaryUniformBuffers.clear();
 
     // Note: mQueue is not released here since the application may still get it after calling
     // Destroy() via APIGetQueue.
@@ -2457,6 +2458,37 @@ void DeviceBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump) const {
     GetObjectTrackingList(ObjectType::Buffer)->ForEach([&](const ApiObjectBase* buffer) {
         static_cast<const BufferBase*>(buffer)->DumpMemoryStatistics(dump, prefix.c_str());
     });
+}
+
+ResultOrError<Ref<BufferBase>> DeviceBase::GetOrCreateTemporaryUniformBuffer(size_t size) {
+    for (size_t i = 0; i < mTemporaryUniformBuffers.size(); ++i) {
+        Ref<BufferBase> buffer = mTemporaryUniformBuffers[i];
+        if (buffer->GetSize() == size) {
+            if (i != 0) {
+                // Move the buffer to the front of the vector
+                std::rotate(mTemporaryUniformBuffers.begin(), mTemporaryUniformBuffers.begin() + i,
+                            mTemporaryUniformBuffers.begin() + i + 1);
+            }
+            return buffer;
+        }
+    }
+
+    BufferDescriptor desc;
+    desc.label = "Internal_TemporaryUniform";
+    desc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+    desc.size = size;
+    Ref<BufferBase> buffer;
+    DAWN_TRY_ASSIGN(buffer, CreateBuffer(&desc));
+
+    mTemporaryUniformBuffers.insert(mTemporaryUniformBuffers.begin(), buffer);
+
+    // Only cache 8 buffers.
+    constexpr size_t kMaxBuffers = 8;
+    if (mTemporaryUniformBuffers.size() > kMaxBuffers) {
+        mTemporaryUniformBuffers.resize(kMaxBuffers);
+    }
+
+    return buffer;
 }
 
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
