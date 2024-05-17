@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b5fe5e_eae1088d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c085bc3_4aa7c7a5",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57ee3989_7dfce40c",
@@ -71,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dda1872f_cfee2474",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c410cf3f_ddfb1867",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "180e9bc2_e7593e81",
@@ -84,6 +120,24 @@
       "writtenOn": "2024-05-16T19:16:24Z",
       "side": 1,
       "message": "```suggestion\n- A new `input_attachment` type that\u0027s only allowed on module-scoped variable declarations.\n```",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b125a196_e66b2998",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "180e9bc2_e7593e81",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +248,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c2aac9_c1d3b419",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ba8bb5d_82900fad",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29d336c_d89d8386",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7cdfb85_17dafa96",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "633b33b6_8612e14d",
@@ -225,6 +315,24 @@
       "side": 1,
       "message": "vec4\u003cT\u003e inputAttachmentLoad(input_attachment\u003cT\u003e)",
       "parentUuid": "633b33b6_8612e14d",
+      "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4060438c_e8c5cbaf",
+        "filename": "docs/tint/extensions/chromium_experimental_input_attachments.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-17T18:12:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4db67c97_26150879",
       "revId": "e20db575c68fe255303c476c9825d77cb011da7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
