@@ -190,7 +190,7 @@ Color GetClearColorValue(const RenderPassColorAttachment& attachment) {
 }
 
 ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
-    DeviceBase* device,
+    CommandEncoder* encoder,
     const RenderPassDescriptor* renderPassDescriptor,
     const KeyOfApplyClearColorValueWithDrawPipelines& key) {
     auto colorAttachments = ityp::SpanFromUntyped<ColorAttachmentIndex>(
@@ -235,13 +235,10 @@ ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
 
     DAWN_ASSERT(offset > 0);
 
-    Ref<BufferBase> outputBuffer;
-    DAWN_TRY_ASSIGN(
-        outputBuffer,
-        utils::CreateBufferFromData(device, wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform,
-                                    clearValues.data(), offset));
-
-    return std::move(outputBuffer);
+    Ref<BufferBase> buffer;
+    DAWN_TRY_ASSIGN(buffer, encoder->GetDevice()->GetUniformBufferWithClearColorValues());
+    encoder->APIWriteBuffer(buffer.Get(), 0, clearValues.data(), clearValues.size());
+    return std::move(buffer);
 }
 
 bool NeedsBigIntClear(const RenderPassColorAttachment& colorAttachmentInfo) {
@@ -389,28 +386,40 @@ bool KeyOfApplyClearColorValueWithDrawPipelinesEqualityFunc::operator()(
            key1.depthStencilFormat == key2.depthStencilFormat;
 }
 
-MaybeError ApplyClearWithDraw(RenderPassEncoder* renderPassEncoder,
-                              const RenderPassDescriptor* renderPassDescriptor) {
-    DeviceBase* device = renderPassEncoder->GetDevice();
-    std::optional<KeyOfApplyClearColorValueWithDrawPipelines> key =
-        GetKeyOfApplyClearColorValueWithDrawPipelines(device, renderPassDescriptor);
-    if (!key.has_value()) {
+ApplyClearWithDrawHelper::ApplyClearWithDrawHelper() = default;
+ApplyClearWithDrawHelper::~ApplyClearWithDrawHelper() = default;
+
+MaybeError ApplyClearWithDrawHelper::Initialize(CommandEncoder* encoder,
+                                                const RenderPassDescriptor* renderPassDescriptor) {
+    DeviceBase* device = encoder->GetDevice();
+    mKey = GetKeyOfApplyClearColorValueWithDrawPipelines(device, renderPassDescriptor);
+    if (!mKey.has_value()) {
         return {};
     }
 
+    DAWN_TRY_ASSIGN(
+        mUniformBufferWithClearColorValues,
+        CreateUniformBufferWithClearValues(encoder, renderPassDescriptor, mKey.value()));
+
+    return {};
+}
+
+MaybeError ApplyClearWithDrawHelper::Apply(RenderPassEncoder* renderPassEncoder) {
+    if (!mKey.has_value()) {
+        return {};
+    }
+
+    DeviceBase* device = renderPassEncoder->GetDevice();
+
     RenderPipelineBase* pipeline = nullptr;
-    DAWN_TRY_ASSIGN(pipeline, GetOrCreateApplyClearValueWithDrawPipeline(device, key.value()));
+    DAWN_TRY_ASSIGN(pipeline, GetOrCreateApplyClearValueWithDrawPipeline(device, mKey.value()));
 
     Ref<BindGroupLayoutBase> layout;
     DAWN_TRY_ASSIGN(layout, pipeline->GetBindGroupLayout(0));
 
-    Ref<BufferBase> uniformBufferWithClearColorValues;
-    DAWN_TRY_ASSIGN(uniformBufferWithClearColorValues,
-                    CreateUniformBufferWithClearValues(device, renderPassDescriptor, key.value()));
-
     Ref<BindGroupBase> bindGroup;
     DAWN_TRY_ASSIGN(bindGroup,
-                    utils::MakeBindGroup(device, layout, {{0, uniformBufferWithClearColorValues}},
+                    utils::MakeBindGroup(device, layout, {{0, mUniformBufferWithClearColorValues}},
                                          UsageValidationMode::Internal));
 
     renderPassEncoder->APISetBindGroup(0, bindGroup.Get());

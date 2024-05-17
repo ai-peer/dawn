@@ -446,6 +446,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
 
     void DumpMemoryStatistics(dawn::native::MemoryDump* dump) const;
 
+    ResultOrError<Ref<BufferBase>> GetUniformBufferWithClearColorValues();
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -590,6 +592,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     tint::wgsl::AllowedFeatures mWGSLAllowedFeatures;
 
     std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
+    Ref<BufferBase> mUniformBufferWithClearColorValues;
 
     Ref<CallbackTaskManager> mCallbackTaskManager;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
