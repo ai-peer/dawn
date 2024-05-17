@@ -16,6 +16,535 @@
       "message": "I thought about submitting this piecemeal but really it\u0027s a holistic thing; if any part of this is missing the library can\u0027t be used to make working Dawn ART apps.",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3ef930c_e3377c43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Sending the WIP review. I didn\u0027t finish looking at the .cpp files. Thank you for your patience as I stopped doing the review yesterday when Gerrit kept eating my comments when data was poor on the Eurostar.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d9f2d30_12677269",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "In a pre-CL can we add a GN target that generates the kotlin files? This would help test on CI that at least the code generation doesn\u0027t fail (and we could also browse the resulting code in Chromium code search after the CLs land)",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a99edcc_6ec4ed56",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "IMHO we could hardcode these in the templates. The reason why we have a bunch of this metadata with API and prefixes etc is because at some point we thought a second project would use the same set of generator (for WebNN) so we started making the templates not reference WebGPU or Dawn directly. But IMHO we should undo it, and not add metadata like this for new things like the Kotlin bindings.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c21a0c2_f744f629",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "We shouldn\u0027t mutate the data model after it has been created and linked together. We could easily start emitting multiple types of template in a single run of the generator and methods disappearing as a side effect of computing kotlin params would be really weird.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a46d6c2d_a92665c1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This seems like it should be in a dawn_kotlin.json file that contains a bunch of other things that are needed (similar to dawn_wire.json)",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a6d812_b642504d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "u-nit: object is a builtin variable in Python that we are shadowing here and messes up syntax coloring. Maybe rename to \"obj\" for that reason?",
+      "range": {
+        "startLine": 1482,
+        "startChar": 16,
+        "endLine": 1482,
+        "endChar": 22
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd0057a_18800837",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Commments on the .cpp files are going to be a bit more involved. WDYT of landing CLs in this order:\n\n - Adding a target that builds the kotlin bindings in some BUILD.gn.\n - Adding all the files but the .cpp/.h ones, \"Add complete initial version of the Kotlin API\"\n - Adding these files \"Add initial version of the ART JNI conversion\"?",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f79d59_922849f0",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Converter.h??",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a65d1d_dea0520b",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "nit: no need for the ternary, we already checked for nullptr above.",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6efec44_f54d3626",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This leaks, the doc for `GetStringUTFChars` says:\n\n\u003e Returns a pointer to an array of bytes representing the string in modified UTF-8 encoding. This array is valid until it is released by ReleaseStringUTFChars().\n\nCan we add a TODO? (oh and TODOs should be associated with an issue, even if it is a catchall issue).",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538dbc86_2f364460",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Please add a TODO to cache the JNI method queries in the future. There is certainly a hashmap lookup everytime and that\u0027s going to be expensive.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6781d7a_8b2c1611",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "1) Can we have a TODO to pass some kind of allocator that can be really simple to start, but at least it will avoid leaks. See for example how we do it in the node.js bindings https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/node/binding/Converter.h;drc\u003d54b4de24f7f1a819e7d684b468e2671bcd8c0e4a;l\u003d460 (perf doesn\u0027t matter as much to us there for now so it\u0027s a simple deallocator, but eventually here I\u0027d expect that we\u0027d use a linear allocator with data put on the stack or something)\n\n2) Having the name of the structure in the function name makes a few things inconvenient. We could take advantage of C++ overloading by making the methods have signatures of the type: `void/status ConvertIn(JNIenv, jobject, Struct* out)`. This way helper templates don\u0027t need to know about the name of the struct.\n\n3) We tend to capitalize functions as CamelCase.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d3aa99_5149a9aa",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This is very hard to read, some blank lines for breathing room, comments explaining what we\u0027re doing, and",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e8620d_b157ee65",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This is very hard to read, some blank lines for breathing room, comments explaining what the block of code does, and scopes would help. One scope per member would help avoid the need to prefix all variables with the member name. That\u0027s what we use in WireCmd.cpp and it keeps the code somewhat kinda readable.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e44c360_ddbbb458",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This is very hard to read, some blank lines for breathing room, comments explaining what the block of code does, and scopes would help. One scope per member would help avoid the need to prefix all variables with the member name. That\u0027s what we use in WireCmd.cpp and it keeps the code somewhat kinda readable.\n\nThe readability of the template is more important than having the generated code looking like what a smart human would have done because it is much harder to reason about an inscrutable pile of Jinja2 mess of curlies than a pedestrian looking C file.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abef5ba5_65fa7a4e",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "When does that happen? I coouldn\u0027t find it in dawn.json",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07452ebf_a10408bb",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "With the comment above about using overloading, this could be:\n\n```\ntemplate\u003cT\u003e\nT* ConvertOptional(env, object) {\n   if (!obj) {\n       return nullptr;\n   }\n   T* out \u003d new T;\n   ConvertIn(env, obj, out);\n   return out;\n}\n```\n\nThis is better because it avoids generating the optional / structure versions for all structures even if they don\u0027t use it.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b56b49_2727523c",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Please add a copyright header here, similar to WireCmd.cpp. //* are generator comments that don\u0027t get output.\n\nSame comment for all other template files, and existing art templates if they are missing them.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e33680_3ac3bd28",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "u-nit: we tend to use // for long comments like this.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dbc7570_72430575",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "nit: same TODO about reworking for WGPUFuture.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "807015fd_0ec776dd",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Filtering on userdata as a name is interesting and works, but I think in the future we\u0027ll need to have special handling for all methods that deal with callbacks because with WGPUFuture and friends it will become hard to autogenerate all the code. Might be worth having a TODO with a new issue explaining that we\u0027ll have to redo asynchrony (and figure out the ergonomics as well)\n\nNote also that IIRC in dawn.json there is one length argument (or structure member?) that\u0027s used for two different arguments. I think it will cause a lot of problems and we should change dawn.json + validate it out when parsing the model.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 83
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423633ee_2b5728a9",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "nit: kotlin supports trailing commas so we don\u0027t need this.",
+      "range": {
+        "startLine": 10,
+        "startChar": 71,
+        "endLine": 10,
+        "endChar": 98
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b5975b_845407c8",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "ditto, syntax coloring is weird because `object` is a keyword or builtin in Kotlin. Use `obj` maybe?",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7cf77dc_adae3150",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Note that we are going to need handwritten object parts. WDYT of making the template always output `\u003cObjectName\u003eGen` in that case and having handwritten files somewhere else that have the manually written part with `class \u003cObjectName\u003e : public \u003cObjectName\u003eGen` (or Kotlin equivalent).",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe21ccc9_d5063ac8",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "Can\u0027t this be done in render_method so we don\u0027t have to do the string building gymnastics?",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a67b9c88_ceb7c864",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "There are very few functions and they are simple, so IMHO it could be handled in separate template.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d1d78a_53409da4",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "The documentation needs updating. Also WDYT of separating it into two macros: `kotlin_declaration` and `kotlin_definition` that use a helper macro with `emit_defaults`? It would make users of these macros more clear (and avoid `kotlin_declaration(foo, dTrue)` which is weird, is it a declaration or a definition??)",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ff1f3c_8181e8e9",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "We have three booleans that control if the \u003d ... is output: `no_default` `definition` and `optional`. Would it be possible to go down to two for example by merging `no_default` and `definition` into one at the start of this macro?",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba2e73b9_ea196f1c",
+        "filename": "tools/android/webgpu/src/main/cpp/Native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T10:18:54Z",
+      "side": 1,
+      "message": "This is an empty file??",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
