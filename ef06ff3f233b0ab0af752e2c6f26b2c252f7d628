@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db0392ff_091302cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T08:26:44Z",
+      "side": 1,
+      "message": "Nit: next time we can use roll-dep to have the nice commit message with all the commits in the roll.",
+      "revId": "ef06ff3f233b0ab0af752e2c6f26b2c252f7d628",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca88a65_6cef306d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T08:26:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ef06ff3f233b0ab0af752e2c6f26b2c252f7d628",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
