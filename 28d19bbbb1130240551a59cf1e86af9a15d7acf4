@@ -22,6 +22,30 @@
       },
       "revId": "28d19bbbb1130240551a59cf1e86af9a15d7acf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c755d856_8c6de3c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-17T16:16:16Z",
+      "side": 1,
+      "message": "I just tried removing `PromoteInitializerToLet` from the AST version of our MSL backend (and adding the struct name to the initializers) and it still passes all of our E2E tests. So either it\u0027s not an issue any more or it\u0027s only an issue with the older MSL compilers as you say.\n\nI guess we\u0027ll deal with it in the IR backend if we hit this again.",
+      "parentUuid": "c0563741_2fb75227",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "28d19bbbb1130240551a59cf1e86af9a15d7acf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
