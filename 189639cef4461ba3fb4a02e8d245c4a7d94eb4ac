@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e73d6401_d839d249",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-17T08:25:24Z",
+      "side": 1,
+      "message": "Corentin: for review\nAustin, Saif, Nicolette: FYI\n\nThanks!",
+      "revId": "189639cef4461ba3fb4a02e8d245c4a7d94eb4ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
