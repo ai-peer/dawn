@@ -361,6 +361,10 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "pass. This works around another issue where Metal fails to set the stencil attachment "
       "correctly for a combined depth stencil format if the depth attachment is not also set.",
       "https://crbug.com/dawn/1389", ToggleStage::Device}},
+    {Toggle::MetalUseDepth24UnormStencil8Format,
+     {"metal_use_depth24_unorm_stencil8_format",
+      "Use MTLPixelFormatDepth24Unorm_Stencil8 Metal format for Depth24PlusStencil8 WGPU format.",
+      "https://crbug.com/341049605", ToggleStage::Device}},
     {Toggle::MetalUseBothDepthAndStencilAttachmentsForCombinedDepthStencilFormats,
      {"metal_use_both_depth_and_stencil_attachments_for_combined_depth_stencil_formats",
       "In Metal, depth and stencil attachments are set separately. Setting just one without the "

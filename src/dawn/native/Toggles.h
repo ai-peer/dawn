@@ -97,6 +97,7 @@ enum class Toggle {
     MetalUseMockBlitEncoderForWriteTimestamp,
     VulkanSplitCommandBufferOnComputePassAfterRenderPass,
     DisableSubAllocationFor2DTextureWithCopyDstOrRenderAttachment,
+    MetalUseDepth24UnormStencil8Format,
     MetalUseCombinedDepthStencilFormatForStencil8,
     MetalUseBothDepthAndStencilAttachmentsForCombinedDepthStencilFormats,
     MetalKeepMultisubresourceDepthStencilTexturesInitialized,
