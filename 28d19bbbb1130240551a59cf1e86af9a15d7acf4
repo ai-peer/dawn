@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0563741_2fb75227",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-17T11:29:41Z",
+      "side": 1,
+      "message": "I didn\u0027t think MSL allowed this - at least not in all cases where you want a structure sub-expression. That\u0027s why the AST path used the `ast::transform::PromoteInitializersToLet` transform.\nBut thinking about this, I don\u0027t know why it wouldn\u0027t work assuming MSL behaves like C++.\nPerhaps there was some issue with the old MSL 1.x compiler or something. *shrug*",
+      "range": {
+        "startLine": 9,
+        "startChar": 17,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "28d19bbbb1130240551a59cf1e86af9a15d7acf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
