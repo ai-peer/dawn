@@ -254,6 +254,9 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
         case wgpu::TextureFormat::Depth24Plus:
             return MTLPixelFormatDepth32Float;
         case wgpu::TextureFormat::Depth24PlusStencil8:
+            return device->IsToggleEnabled(Toggle::MetalUseDepth24UnormStencil8Format)
+                       ? MTLPixelFormatDepth24Unorm_Stencil8
+                       : MTLPixelFormatDepth32Float_Stencil8;
         case wgpu::TextureFormat::Depth32FloatStencil8:
             return MTLPixelFormatDepth32Float_Stencil8;
         case wgpu::TextureFormat::Depth16Unorm:
@@ -262,10 +265,9 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
             }
             DAWN_UNREACHABLE();
         case wgpu::TextureFormat::Stencil8:
-            if (device->IsToggleEnabled(Toggle::MetalUseCombinedDepthStencilFormatForStencil8)) {
-                return MTLPixelFormatDepth32Float_Stencil8;
-            }
-            return MTLPixelFormatStencil8;
+            return device->IsToggleEnabled(Toggle::MetalUseCombinedDepthStencilFormatForStencil8)
+                       ? MetalPixelFormat(device, wgpu::TextureFormat::Depth24PlusStencil8)
+                       : MTLPixelFormatStencil8;
 
 #if DAWN_PLATFORM_IS(MACOS)
         case wgpu::TextureFormat::BC1RGBAUnorm:

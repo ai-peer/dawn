@@ -745,7 +745,8 @@ MTLBlitOption Texture::ComputeMTLBlitOption(Aspect aspect) const {
     DAWN_ASSERT(HasOneBit(aspect));
     DAWN_ASSERT(GetFormat().aspects & aspect);
 
-    if (mMtlFormat == MTLPixelFormatDepth32Float_Stencil8) {
+    if (mMtlFormat == MTLPixelFormatDepth32Float_Stencil8 ||
+        mMtlFormat == MTLPixelFormatDepth24Unorm_Stencil8) {
         // We only provide a blit option if the format has both depth and stencil.
         // It is invalid to provide a blit option otherwise.
         switch (aspect) {
@@ -817,8 +818,17 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
         MTLPixelFormat textureFormat = MetalPixelFormat(device, GetTexture()->GetFormat().format);
 
         if (aspect == Aspect::Stencil && textureFormat != MTLPixelFormatStencil8) {
-            DAWN_ASSERT(textureFormat == MTLPixelFormatDepth32Float_Stencil8);
-            viewFormat = MTLPixelFormatX32_Stencil8;
+            switch (textureFormat) {
+                case MTLPixelFormatDepth24Unorm_Stencil8:
+                    viewFormat = MTLPixelFormatX24_Stencil8;
+                    break;
+                case MTLPixelFormatDepth32Float_Stencil8:
+                    viewFormat = MTLPixelFormatX32_Stencil8;
+                    break;
+                default:
+                    DAWN_UNREACHABLE();
+            }
+
         } else if (GetTexture()->GetFormat().HasDepth() && GetTexture()->GetFormat().HasStencil()) {
             // Depth-only views for depth/stencil textures in Metal simply use the original
             // texture's format.

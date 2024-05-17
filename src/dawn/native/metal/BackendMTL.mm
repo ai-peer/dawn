@@ -433,6 +433,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
             deviceToggles->Default(Toggle::MetalUseMockBlitEncoderForWriteTimestamp, true);
         }
 
+        if ([*mDevice isDepth24Stencil8PixelFormatSupported]) {
+            deviceToggles->Default(Toggle::MetalUseDepth24UnormStencil8Format, true);
+        }
+
 #if DAWN_PLATFORM_IS(MACOS)
         if (gpu_info::IsIntel(vendorId)) {
             deviceToggles->Default(
