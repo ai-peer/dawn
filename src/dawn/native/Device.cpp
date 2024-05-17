@@ -643,6 +643,7 @@ void DeviceBase::Destroy() {
     mEmptyBindGroupLayout = nullptr;
     mEmptyPipelineLayout = nullptr;
     mInternalPipelineStore = nullptr;
+    mUniformBufferWithClearColorValues = nullptr;
     mExternalTexturePlaceholderView = nullptr;
 
     // Note: mQueue is not released here since the application may still get it after calling
@@ -2457,6 +2458,18 @@ void DeviceBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump) const {
     GetObjectTrackingList(ObjectType::Buffer)->ForEach([&](const ApiObjectBase* buffer) {
         static_cast<const BufferBase*>(buffer)->DumpMemoryStatistics(dump, prefix.c_str());
     });
+}
+
+ResultOrError<Ref<BufferBase>> DeviceBase::GetUniformBufferWithClearColorValues() {
+    if (!mUniformBufferWithClearColorValues) {
+        BufferDescriptor desc;
+        desc.label = "Internal_ClearColorValues";
+        desc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+        desc.size = sizeof(uint32_t) * 4 * kMaxColorAttachments;
+        DAWN_TRY_ASSIGN(mUniformBufferWithClearColorValues, CreateBuffer(&desc));
+    }
+
+    return mUniformBufferWithClearColorValues;
 }
 
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
