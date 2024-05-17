@@ -16,6 +16,23 @@
       "message": "Thanks! Austin, PTAL.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/188240/2..4 is the diff.",
       "revId": "ffbf4d827e684fcebfcf2d77f2c23f55d4dad930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c05bd4c_7cf15c12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-17T07:18:45Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "ffbf4d827e684fcebfcf2d77f2c23f55d4dad930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
