@@ -344,7 +344,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseBufferRobustAccess2);
     req.tintOptions.polyfill_dot_4x8_packed =
         GetDevice()->IsToggleEnabled(Toggle::PolyFillPacked4x8DotProduct);
-    req.use_tint_ir = GetDevice()->IsToggleEnabled(Toggle::UseTintIR);
+    req.use_tint_ir = true;//GetDevice()->IsToggleEnabled(Toggle::UseTintIR);
     req.tintOptions.disable_polyfill_integer_div_mod =
         GetDevice()->IsToggleEnabled(Toggle::DisablePolyfillsOnIntegerDivisonAndModulo);
 
