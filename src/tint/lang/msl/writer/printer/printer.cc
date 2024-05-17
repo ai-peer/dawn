@@ -329,16 +329,27 @@ class Printer : public tint::TextGenerator {
                 }
 
                 if (auto binding_point = param->BindingPoint()) {
-                    auto ptr = param->Type()->As<core::type::Pointer>();
                     TINT_ASSERT(binding_point->group == 0);
-                    switch (ptr->AddressSpace()) {
-                        case core::AddressSpace::kStorage:
-                        case core::AddressSpace::kUniform:
-                            out << " [[buffer(" << binding_point->binding << ")]]";
-                            break;
-                        default:
-                            TINT_UNREACHABLE() << "invalid address space with binding point: "
-                                               << ptr->AddressSpace();
+                    if (auto ptr = param->Type()->As<core::type::Pointer>()) {
+                        switch (ptr->AddressSpace()) {
+                            case core::AddressSpace::kStorage:
+                            case core::AddressSpace::kUniform:
+                                out << " [[buffer(" << binding_point->binding << ")]]";
+                                break;
+                            default:
+                                TINT_UNREACHABLE() << "invalid address space with binding point: "
+                                                   << ptr->AddressSpace();
+                        }
+                    } else {
+                        // Handle types are declared by value instead of by pointer.
+                        if (param->Type()->Is<core::type::Texture>()) {
+                            out << " [[texture(" << binding_point->binding << ")]]";
+                        } else if (param->Type()->Is<core::type::Sampler>()) {
+                            out << " [[sampler(" << binding_point->binding << ")]]";
+                        } else {
+                            TINT_UNREACHABLE() << "invalid handle type with binding point: "
+                                               << param->Type()->TypeInfo().name;
+                        }
                     }
                 }
             }
@@ -1040,7 +1051,6 @@ class Printer : public tint::TextGenerator {
         switch (sc) {
             case core::AddressSpace::kFunction:
             case core::AddressSpace::kPrivate:
-            case core::AddressSpace::kHandle:
                 out << "thread";
                 break;
             case core::AddressSpace::kWorkgroup:
