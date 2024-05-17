@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c38708a8_cf1ffbf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-17T17:15:34Z",
+      "side": 1,
+      "message": "For some of the tests, I\u0027d try modifying some tolerances - hopefully that is that works.\n\nFor some of the other tests, things like:\n\u003e Expected stencil data to be (42, 42, 42, 42) or (42, 0, 0, 1). Got (42, 0, 0, 1065353216)\n\nare more concerning. that looks like packed bits reinterpreted as something unexpected.\n\n1065353216 is 0x3f800000 in hex, which is the hex float value for 1.0.",
+      "revId": "a4346dad5289edbc0ee6febdc9440b5710cdf9c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
