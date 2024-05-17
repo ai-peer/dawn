@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54adb7a4_f9e9dd57",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-17T17:10:41Z",
+      "side": 1,
+      "message": "to try to clarify some more:\n\nby putting wgpu::TextureFormat::External in the format table, we\u0027re going to get the entry produced by:\n\n```\nAddConditionalColorFormat(wgpu::TextureFormat::External, externalUnsupportedReason, Cap::None, ByteSize(4), SampleTypeBit::Uint, ComponentCount(4), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(1));\n```\n\nwhenever someone does `texture.GetFormat()` on the texture - which happens in very many places in Dawn.\nThe entry written here in the format table can\u0027t possibly be correct because we have no idea what the actual capabilities are. As Colin says, we need to get the capabilities from the AHB format props.\nWe need to have GetFormat() return correct things, or Dawn may perform or allow invalid things. For example, the `SampleTypeBit` needs to be correct based on whether the AHB allows Linear sampling, or it requires Nearest.",
+      "parentUuid": "fcafeba2_1f93035a",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -245,6 +269,30 @@
       "side": 1,
       "message": "So from Vasiliy my understanding is that it\u0027s *legal* to use YCbCr sampling for any AHB - it\u0027s just that if the Vk format of the AHB is UNDEFINED it\u0027s *necessary* to use YCbCr sampling. So it\u0027s totally legal for the client to do YCbCr sampling on an RGBA AHB. I think that this is the case that Saif is setting up for the test, and it\u0027s not actually a test-only situation (although AFAIK Chromium won\u0027t actually run into this, because we only do YCbCr sampling for video decoding where it\u0027s actually needed and thus the Vk format of those AHBs should indeed be UNDEFINED).",
       "parentUuid": "66eb68f5_bf4a0102",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fd7eaf3_d6846ac1",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-17T17:10:41Z",
+      "side": 1,
+      "message": "right, YCbCr sampling on an RGBA AHB should be legal. But if the STM is RGBA, then I think the texture created it must also be RGBA, not External. Otherwise, I think there\u0027s going to be a mismatch between the capabilities that Dawn thinks RGBA has, and what External has.",
+      "parentUuid": "196b541d_dbd41de6",
       "range": {
         "startLine": 167,
         "startChar": 0,
