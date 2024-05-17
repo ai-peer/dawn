@@ -2459,6 +2459,18 @@ void DeviceBase::DumpMemoryStatistics(dawn::native::MemoryDump* dump) const {
     });
 }
 
+ResultOrError<Ref<BufferBase>> DeviceBase::GetUniformBufferWithClearColorValues() {
+    if (!mUniformBufferWithClearColorValues) {
+        BufferDescriptor desc;
+        desc.label = "Internal_ClearColorValues";
+        desc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+        desc.size = sizeof(uint32_t) * 4 * kMaxColorAttachments;
+        DAWN_TRY_ASSIGN(mUniformBufferWithClearColorValues, CreateBuffer(&desc));
+    }
+
+    return mUniformBufferWithClearColorValues;
+}
+
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
     : mDevice(device), mLazyClearCountForTesting(device->mLazyClearCountForTesting) {}
 

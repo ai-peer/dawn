@@ -31,6 +31,7 @@
 #include <bitset>
 
 #include "absl/container/flat_hash_map.h"
+#include "dawn/common/Ref.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/Error.h"
@@ -38,6 +39,7 @@
 
 namespace dawn::native {
 class BufferBase;
+class CommandEncoder;
 class RenderPassEncoder;
 struct RenderPassDescriptor;
 
@@ -62,8 +64,19 @@ using ApplyClearColorValueWithDrawPipelinesCache =
                         KeyOfApplyClearColorValueWithDrawPipelinesHashFunc,
                         KeyOfApplyClearColorValueWithDrawPipelinesEqualityFunc>;
 
-MaybeError ApplyClearWithDraw(RenderPassEncoder* renderPassEncoder,
-                              const RenderPassDescriptor* renderPassDescriptor);
+class ApplyClearWithDrawHelper {
+  public:
+    ApplyClearWithDrawHelper();
+    ~ApplyClearWithDrawHelper();
+
+    MaybeError Initialize(CommandEncoder* encoder,
+                          const RenderPassDescriptor* renderPassDescriptor);
+    MaybeError Apply(RenderPassEncoder* renderPassEncoder);
+
+  private:
+    std::optional<KeyOfApplyClearColorValueWithDrawPipelines> mKey;
+    Ref<BufferBase> mUniformBufferWithClearColorValues;
+};
 
 }  // namespace dawn::native
 
