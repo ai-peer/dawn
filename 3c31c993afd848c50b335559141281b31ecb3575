@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ed4420_065a0a1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T09:15:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3c31c993afd848c50b335559141281b31ecb3575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77348e5d_6890ed7d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T09:15:28Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3c31c993afd848c50b335559141281b31ecb3575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c950cabe_330c583d",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 4124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-17T09:15:28Z",
+      "side": 1,
+      "message": "WDYT of using FilterMode defined at [1] instead? It\u0027s basically the same thing.",
+      "revId": "3c31c993afd848c50b335559141281b31ecb3575",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
