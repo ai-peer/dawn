@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcafeba2_1f93035a",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-17T11:23:45Z",
+      "side": 1,
+      "message": "FWIW: AFAIK the actual Vulkan external format is a magical opaque int that we can\u0027t know any information about other than what we get from the AHB format props, which we\u0027ll supply the needed info about via YCbCrVkDescriptor. I think that the only thing that we need the WGPU format for in this case is just to specify that we are in fact using YCbCr sampling, which we do by the WGPU format being EXTERNAL. So AFAIK the only thing that we need (and indeed really can do) with the WGPU format in this case is to be able to have this bit via which we\u0027re able to specify \"we\u0027re using YCbCr sampling.\"\n\nI\u0027m not familiar with all the details of this discussion, so just presenting this info in case it\u0027s useful - please feel free to disregard if not!",
+      "parentUuid": "a3fed67c_ec150983",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -197,6 +221,30 @@
       "side": 1,
       "message": "hm I think I don\u0027t understand. I think that if:\n\n mProperties.format \u003d\u003d rgba8unorm, then desc.format must also be rgba8unorm\n\nand if:\n\n mProperties.format \u003d\u003d external, then desc.format must also be external\n \n \nright now, it looks like you\u0027re allowing for:\n\n mProperties.format \u003d\u003d rgba8unorm \u0026\u0026 desc.format \u003d\u003d external",
       "parentUuid": "bb466f39_5a39eb13",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "196b541d_dbd41de6",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-17T11:23:45Z",
+      "side": 1,
+      "message": "So from Vasiliy my understanding is that it\u0027s *legal* to use YCbCr sampling for any AHB - it\u0027s just that if the Vk format of the AHB is UNDEFINED it\u0027s *necessary* to use YCbCr sampling. So it\u0027s totally legal for the client to do YCbCr sampling on an RGBA AHB. I think that this is the case that Saif is setting up for the test, and it\u0027s not actually a test-only situation (although AFAIK Chromium won\u0027t actually run into this, because we only do YCbCr sampling for video decoding where it\u0027s actually needed and thus the Vk format of those AHBs should indeed be UNDEFINED).",
+      "parentUuid": "66eb68f5_bf4a0102",
       "range": {
         "startLine": 167,
         "startChar": 0,
