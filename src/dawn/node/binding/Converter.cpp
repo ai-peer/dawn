@@ -1549,6 +1549,7 @@ bool Converter::Convert(interop::GPUFeatureName& out, wgpu::FeatureName in) {
         case wgpu::FeatureName::Undefined:
         case wgpu::FeatureName::YCbCrVulkanSamplers:
         case wgpu::FeatureName::DawnLoadResolveTexture:
+        case wgpu::FeatureName::DawnLoadResolveTextureFlexiblePipeline:
             return false;
     }
     return false;
