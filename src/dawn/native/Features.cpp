@@ -371,6 +371,12 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "dawn_load_resolve_texture.md",
       FeatureInfo::FeatureState::Stable}},
+    {Feature::DawnLoadResolveTextureFlexiblePipeline,
+     {"Any render pipeline can be used in a render pass having ExpandResolveTexture load op. As "
+      "long as their attachments' formats, sample count are compatible.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "dawn_load_resolve_texture.md",
+      FeatureInfo::FeatureState::Stable}},
 };
 
 }  // anonymous namespace
