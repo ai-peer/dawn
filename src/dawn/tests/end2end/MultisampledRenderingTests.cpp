@@ -1531,6 +1531,7 @@ TEST_P(MultisampledRenderToSingleSampledTest, DrawWithDepthTest) {
 }
 
 class DawnLoadResolveTextureTest : public MultisampledRenderingTest {
+  protected:
     void SetUp() override {
         MultisampledRenderingTest::SetUp();
 
@@ -2060,6 +2061,100 @@ TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawWithDepthTestColor0AndColor1) {
     VerifyResolveTarget(kGreen, singleSampledTexture2);
 }
 
+class DawnLoadResolveTextureCompatiblePipelineTest : public DawnLoadResolveTextureTest {
+  protected:
+    void SetUp() override {
+        DawnLoadResolveTextureTest::SetUp();
+
+        // Skip all tests if the DawnLoadResolveTextureCompatiblePipeline feature is not supported.
+        DAWN_TEST_UNSUPPORTED_IF(
+            !SupportsFeatures({wgpu::FeatureName::DawnLoadResolveTextureCompatiblePipeline}));
+    }
+
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures =
+            DawnLoadResolveTextureTest::GetRequiredFeatures();
+        if (SupportsFeatures({wgpu::FeatureName::DawnLoadResolveTextureCompatiblePipeline})) {
+            requiredFeatures.push_back(wgpu::FeatureName::DawnLoadResolveTextureCompatiblePipeline);
+        }
+        return requiredFeatures;
+    }
+};
+
+// Test ExpandResolveTexture load op rendering with depth test works correctly.
+// The render pipeline doesn't enable ExpandResolveTexture load op.
+TEST_P(DawnLoadResolveTextureCompatiblePipelineTest, DrawWithDepthTestUsingNormalPipeline) {
+    auto multiSampledTexture = CreateTextureForRenderAttachment(
+        kColorFormat, 4, 1, 1,
+        /*transientAttachment=*/device.HasFeature(wgpu::FeatureName::TransientAttachments),
+        /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView = multiSampledTexture.CreateView();
+
+    auto singleSampledTexture =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+
+    auto singleSampledTextureView = singleSampledTexture.CreateView();
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithOneOutputForTest(
+        /*testDepth=*/true, /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
+        /*flipTriangle=*/false, /*enableExpandResolveLoadOp=*/false);
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+
+    constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
+
+    // In first render pass we clear the render pass without drawing anything
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView}, {singleSampledTextureView}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
+            /*testDepth=*/true);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+
+        wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
+        renderPassEncoder.End();
+    }
+
+    // In 2nd render pass we draw a green triangle with depth value == 0.2f.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView}, {singleSampledTextureView},
+            wgpu::LoadOp::ExpandResolveTexture, wgpu::LoadOp::Clear,
+            /*testDepth=*/true);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+
+        std::array<float, 8> kUniformData = {kGreen.r, kGreen.g, kGreen.b, kGreen.a,  // Color
+                                             0.2f};                                   // depth
+        constexpr uint32_t kSize = sizeof(kUniformData);
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    // In 3rd render pass we draw a red triangle with depth value == 0.5f.
+    // This red triangle should not be displayed because it is behind the green one that is drawn in
+    // the last render pass.
+    {
+        utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
+            {multiSampledTextureView}, {singleSampledTextureView},
+            wgpu::LoadOp::ExpandResolveTexture, wgpu::LoadOp::Load,
+            /*testDepth=*/true);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+
+        std::array<float, 8> kUniformData = {kRed.r, kRed.g, kRed.b, kRed.a,  // color
+                                             0.5f};                           // depth
+        constexpr uint32_t kSize = sizeof(kUniformData);
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
+    }
+
+    wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    // The color of the pixel in the middle of mResolveTexture should be green if MSAA resolve runs
+    // correctly with depth test.
+    VerifyResolveTarget(kGreen, singleSampledTexture);
+}
+
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
                       D3D11Backend(),
                       D3D12Backend(),
@@ -2107,6 +2202,21 @@ DAWN_INSTANTIATE_TEST(MultisampledRenderToSingleSampledTest,
                                     "emulate_store_and_msaa_resolve"}));
 
 DAWN_INSTANTIATE_TEST(DawnLoadResolveTextureTest,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
+                      D3D12Backend({}, {"use_d3d12_render_pass"}),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend(),
+                      VulkanBackend({"always_resolve_into_zero_level_and_layer"}),
+                      MetalBackend({"emulate_store_and_msaa_resolve"}),
+                      MetalBackend({"always_resolve_into_zero_level_and_layer"}),
+                      MetalBackend({"always_resolve_into_zero_level_and_layer",
+                                    "emulate_store_and_msaa_resolve"}));
+
+DAWN_INSTANTIATE_TEST(DawnLoadResolveTextureCompatiblePipelineTest,
                       D3D11Backend(),
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
