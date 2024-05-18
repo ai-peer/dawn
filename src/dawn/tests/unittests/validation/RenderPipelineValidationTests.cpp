@@ -2576,6 +2576,49 @@ TEST_F(LoadResolveTexturePipelineDescriptorValidationTest, BindColorAttachmentAs
             "includes writable usage and another usage in the same synchronization scope"));
 }
 
+class LoadResolveTextureFlexiblePipelineDescriptorValidationTest
+    : public LoadResolveTexturePipelineDescriptorValidationTest {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        return {wgpu::FeatureName::DawnLoadResolveTexture,
+                wgpu::FeatureName::DawnLoadResolveTextureCompatiblePipeline};
+    }
+};
+
+// Using a normal render pipeline in a ExpandResolveTexture render pass should succeed.
+TEST_F(LoadResolveTextureFlexiblePipelineDescriptorValidationTest,
+       UseNormalPipelineInExpandResolveTextureRenderPassOK) {
+    constexpr uint32_t kSampleCount = 4;
+
+    // Create multi sampled texture.
+    auto msaaTexture = CreateTexture(wgpu::TextureUsage::RenderAttachment, kSampleCount);
+
+    // Create single sampled texture.
+    auto texture =
+        CreateTexture(wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding, 1);
+
+    // Create render pass (with ExpandResolveTexture load op).
+    utils::ComboRenderPassDescriptor renderPassDescriptor({msaaTexture.CreateView()});
+    renderPassDescriptor.cColorAttachments[0].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+    renderPassDescriptor.cColorAttachments[0].resolveTarget = texture.CreateView();
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+
+    // Create render pipeline (without ColorTargetStateExpandResolveTextureDawn)
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    pipelineDescriptor.vertex.module = vsModule;
+    pipelineDescriptor.cFragment.module = fsModule;
+
+    pipelineDescriptor.multisample.count = kSampleCount;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+    renderPass.SetPipeline(pipeline);
+    renderPass.End();
+
+    encoder.Finish();
+}
+
 class DualSourceBlendingFeatureTest : public RenderPipelineValidationTest {
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {

@@ -707,6 +707,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::R8UnormStorage);
     EnableFeature(Feature::ShaderModuleCompilationOptions);
     EnableFeature(Feature::DawnLoadResolveTexture);
+    EnableFeature(Feature::DawnLoadResolveTextureCompatiblePipeline);
 
     // SIMD-scoped permute operations is supported by GPU family Metal3, Apple6, Apple7, Apple8,
     // and Mac2.
