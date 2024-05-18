@@ -2331,7 +2331,8 @@
             {"value": 1207, "name": "y cb cr vulkan samplers", "tags": ["dawn"]},
             {"value": 1208, "name": "shader module compilation options", "tags": ["dawn"]},
 
-            {"value": 1209, "name": "dawn load resolve texture", "tags": ["dawn"]}
+            {"value": 1209, "name": "dawn load resolve texture", "tags": ["dawn"]},
+            {"value": 1210, "name": "dawn load resolve texture flexible pipeline", "tags": ["dawn"]}
         ]
     },
     "filter mode": {
