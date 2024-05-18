@@ -75,10 +75,14 @@ AttachmentState::AttachmentState(DeviceBase* device,
                 mColorAttachmentsSet.set(i);
                 mColorFormats[i] = format;
 
-                UnpackedPtr<ColorTargetState> unpackedTarget = Unpack(&target);
-                if (auto* expandResolveState =
-                        unpackedTarget.Get<ColorTargetStateExpandResolveTextureDawn>()) {
-                    mAttachmentsToExpandResolve.set(i, expandResolveState->enabled);
+                if (!device->HasFeature(Feature::DawnLoadResolveTextureFlexiblePipeline)) {
+                    // ExpandResolveTexture LoadOp only affects attachment state's compatibility if
+                    // DawnLoadResolveTextureFlexiblePipeline feature is not enabled.
+                    UnpackedPtr<ColorTargetState> unpackedTarget = Unpack(&target);
+                    if (auto* expandResolveState =
+                            unpackedTarget.Get<ColorTargetStateExpandResolveTextureDawn>()) {
+                        mAttachmentsToExpandResolve.set(i, expandResolveState->enabled);
+                    }
                 }
             }
         }
@@ -123,7 +127,10 @@ AttachmentState::AttachmentState(DeviceBase* device,
             DAWN_ASSERT(mSampleCount == attachmentSampleCount);
         }
 
-        if (colorAttachment.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+        if (!device->HasFeature(Feature::DawnLoadResolveTextureFlexiblePipeline) &&
+            colorAttachment.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+            // ExpandResolveTexture LoadOp only affects attachment state's compatibility if
+            // DawnLoadResolveTextureFlexiblePipeline feature is not enabled.
             mAttachmentsToExpandResolve.set(i);
         }
     }
