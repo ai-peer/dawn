@@ -308,9 +308,11 @@
                 WIRE_TRY(buffer->NextN(memberLength, &memberBuffer));
 
                 {% if member.type.is_wire_transparent %}
-                    memcpy(
-                        memberBuffer, record.{{memberName}},
-                        {{member_transfer_sizeof(member)}} * memberLength);
+                    if (memberLength != 0) {
+                        memcpy(
+                            memberBuffer, record.{{memberName}},
+                            {{member_transfer_sizeof(member)}} * memberLength);
+                    }
                 {% else %}
                     //* This loop cannot overflow because it iterates up to |memberLength|. Even if
                     //* memberLength were the maximum integer value, |i| would become equal to it
