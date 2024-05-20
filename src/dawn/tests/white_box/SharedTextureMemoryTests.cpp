@@ -864,6 +864,8 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after destroying the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     wgpu::SharedTextureMemory memory =
         GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
@@ -875,6 +877,8 @@ TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after losing the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     wgpu::SharedTextureMemory memory =
         GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 
@@ -885,6 +889,8 @@ TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
 
 // Test importing a shared fence when the device is destroyed
 TEST_P(SharedTextureMemoryTests, ImportSharedFenceDeviceDestroyed) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/8/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     // Create a shared texture memory and texture
     wgpu::SharedTextureMemory memory =
         GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
@@ -956,6 +962,8 @@ TEST_P(SharedTextureMemoryTests, GetPropertiesErrorMemory) {
 
 // Tests that a SharedTextureMemory supports expected texture usages.
 TEST_P(SharedTextureMemoryTests, TextureUsages) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/10/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     for (wgpu::SharedTextureMemory memory :
          GetParam().mBackend->CreateSharedTextureMemories(device, GetParam().mLayerCount)) {
         wgpu::SharedTextureMemoryProperties properties;
