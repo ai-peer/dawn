@@ -16,6 +16,23 @@
       "message": "I wanted to add a test and ended up moving a lot of code around to be able to reuse the Quad drawing fucntion.",
       "revId": "14758fd804584a6847deb289318bd24bd653de57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2d4a17_5f945367",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:24:01Z",
+      "side": 1,
+      "message": "nit: no need for parenthesis here and other ifs",
+      "revId": "14758fd804584a6847deb289318bd24bd653de57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
