@@ -51,6 +51,24 @@
       "parentUuid": "35db0d9b_d5f0c23f",
       "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f998e7e6_66d3b0d6",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:23:48Z",
+      "side": 1,
+      "message": "Thank you, with your pointers I was able to make this work in the latest patchset.\n\nI\u0027m surprised that there isn\u0027t an ir::Builder::Replace(instruction, replacement) that does all the following automatically.\n\nOr even better:\n\n```\ncall-\u003eReplaceWithBlock([\u0026] {\n  auto* vec2u \u003d ty.vec2\u003cu32\u003e();\n\n  auto* visible_size \u003d b.Access(vec2u, params, 12_u);\n  auto* vec2u_1_1 \u003d b.Construct(vec2u, 1_u, 1_u);\n\n  // The return value of the block would replace call-\u003eResult(0) (and ASSERTed it is the same number of results)\n  return {b.Add(vec2u, visible_size, vec2u_1_1)};\n});\n```",
+      "parentUuid": "7f1fd1aa_e51f4244",
+      "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
