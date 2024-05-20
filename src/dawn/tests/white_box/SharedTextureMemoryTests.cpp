@@ -117,6 +117,11 @@ void SharedTextureMemoryTests::SetUp() {
     DawnTestWithParams<SharedTextureMemoryTestParams>::SetUp();
     DAWN_TEST_UNSUPPORTED_IF(
         !SupportsFeatures(GetParam().mBackend->RequiredFeatures(GetAdapter().Get())));
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/8/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/10/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     GetParam().mBackend->SetUp();
 }
 
