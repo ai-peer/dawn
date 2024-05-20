@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac24772b_c3e5f8d5",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 3443809
+      },
+      "writtenOn": "2024-05-20T19:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03dad3d_100d1a44",
+      "revId": "83672081aad3a031a2e57e50bfd2fc0b58dae624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2260f082_5f6b6ad1",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-20T12:09:41Z",
       "side": 1,
       "message": "[1]",
+      "revId": "83672081aad3a031a2e57e50bfd2fc0b58dae624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f7a2937_88ce680c",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 3443809
+      },
+      "writtenOn": "2024-05-20T19:29:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2260f082_5f6b6ad1",
       "revId": "83672081aad3a031a2e57e50bfd2fc0b58dae624",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
