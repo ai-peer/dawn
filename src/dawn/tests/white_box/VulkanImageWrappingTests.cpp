@@ -80,6 +80,9 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsNvidia() && GetParam().mUseDedicatedAllocation &&
                               GetParam().mDetectDedicatedAllocation);
 
+        // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/12/infra
+        DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsIntel() && IsBackendValidationEnabled());
+
         switch (GetParam().mExternalImageType) {
             case ExternalImageType::OpaqueFD:
                 mBackend = CreateOpaqueFDBackend(device);

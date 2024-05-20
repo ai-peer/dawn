@@ -56,6 +56,11 @@ void VideoViewsTestsBase::SetUp() {
     DawnTestWithParams<Params>::SetUp();
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
     DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/2/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/8/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
 }
 
 std::vector<wgpu::FeatureName> VideoViewsTestsBase::GetRequiredFeatures() {
