@@ -16,6 +16,57 @@
       "message": "Hi Austin and Corentin, PTAL. Thanks.",
       "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26e04dc9_f02546df",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:35:56Z",
+      "side": 1,
+      "message": "Erhm, that\u0027s very D3D11 specific. IMHO we shouldn\u0027t care about this in the frontend and it should be something optimized on the D3D11 backend if needed. I know that Skia also does this to optimize D3D11 but instead we should really invest in fixing the D3D11 backend\u0027s performance somehow. For what\u0027s worth this could even be storage buffer and avoid the issue.",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7621595c_dfca3ee9",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:35:56Z",
+      "side": 1,
+      "message": "nit: slight preference for a mShouldRun boolean. The storage would be the same and the intent more clear. Also eventually we should have https://docs.google.com/document/d/1czI8vAzCCGx9SqpstRsJQ6C9Qlasu7ydMTRZa637_PI/edit?tab\u003dt.0#heading\u003dh.v81zpsaznbqh to not need to do this.",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6766769f_2020cf86",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:35:56Z",
+      "side": 1,
+      "message": "nit: GetOrCreate, but maybe we could make this slightly more generic and call it GetOrCreateTemporaryUniformBuffer(size_t requiredSize)",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
