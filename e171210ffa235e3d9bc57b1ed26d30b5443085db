@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d803a691_91177126",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-20T23:06:10Z",
+      "side": 1,
+      "message": "Q: Do we still override procs.instanceRequestAdapter to call AdapterSupported? Looks like we cannot pass it into lambda via capturing context.\n\n1. Can we pass AdapterSupported via userdata?\n2. Do we refactor Run to take the AdapterSupported callback to be RequestAdapter callback directly?\n3. Do we keep the static sAdapterSupport for ease of acccessing?",
+      "parentUuid": "990cb9fc_0a16767d",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "e171210ffa235e3d9bc57b1ed26d30b5443085db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba669f7a_3f6885d5",
         "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
         "patchSetId": 1
