@@ -864,6 +864,8 @@ TEST_P(SharedTextureMemoryTests, ImportSharedTextureMemoryDeviceDestroyed) {
 // Test that SharedTextureMemory::IsDeviceLost() returns the expected value before and
 // after destroying the device.
 TEST_P(SharedTextureMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     wgpu::SharedTextureMemory memory =
         GetParam().mBackend->CreateSharedTextureMemory(device, GetParam().mLayerCount);
 

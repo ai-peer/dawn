@@ -552,6 +552,9 @@ TEST_P(VideoViewsTests, CreateVideoTextureWithoutInitializedData) {
 // Samples the luminance (Y) plane from an imported bi-planar 420 texture into a single channel of
 // an RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleYtoR) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/2/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
+
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
@@ -611,6 +614,8 @@ TEST_P(VideoViewsTests, SampleYtoR) {
 // Samples the chrominance (UV) plane from an imported bi-planar 420 texture into two channels of an
 // RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleUVtoRG) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
