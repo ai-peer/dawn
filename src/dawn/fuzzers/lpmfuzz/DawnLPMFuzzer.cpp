@@ -75,14 +75,11 @@ static bool (*sAdapterSupported)(const dawn::native::Adapter&) = nullptr;
 namespace DawnLPMFuzzer {
 
 int Initialize(int* argc, char*** argv) {
-    // TODO(crbug.com/1038952): The Instance must be static because destructing the vkInstance with
-    // Swiftshader crashes libFuzzer. When this is fixed, move this into Run so that error injection
-    // for physical device discovery can be fuzzed.
-    sInstance = std::make_unique<dawn::native::Instance>();
     return 0;
 }
 
 int Run(const fuzzing::Program& program, bool (*AdapterSupported)(const dawn::native::Adapter&)) {
+    sInstance = std::make_unique<dawn::native::Instance>();
     sAdapterSupported = AdapterSupported;
 
     DawnProcTable procs = dawn::native::GetProcs();
@@ -126,6 +123,8 @@ int Run(const fuzzing::Program& program, bool (*AdapterSupported)(const dawn::na
     // Note: Deleting the server will release all created objects.
     // Deleted devices will wait for idle on destruction.
     mCommandBuffer->SetHandler(nullptr);
+    // Deleting the instance to call all callbacks with InstanceDropped.
+    sInstance.reset();
     wireServer = nullptr;
     return result == dawn::wire::WireResult::FatalError;
 }
