@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b68c5a57_c5c09dbe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:42:15Z",
+      "side": 1,
+      "message": "Shouldn\u0027t internal shader caching in Dawn be able to handle that? (of course Dawn frontend objects would still need to be created but that\u0027s somewhat cheap)",
+      "revId": "bffe471587652c0b42c719a133a19267001a0447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0528134_b332ef10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-20T12:42:15Z",
+      "side": 1,
+      "message": "LGTM but it\u0027d be nice to not need this, see comment.",
+      "revId": "bffe471587652c0b42c719a133a19267001a0447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
