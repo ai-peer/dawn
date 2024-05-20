@@ -22,6 +22,30 @@
       },
       "revId": "de33a70044ab7413485be911bfbbd9cdc8f4d923",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599d6491_9cc1a48c",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-20T22:22:56Z",
+      "side": 1,
+      "message": "Done (I didn\u0027t know compiler is ok with this. Last time I did this, it must be some other static_cast i forgot to delete that fail compiler)",
+      "parentUuid": "c1f19de4_f1b12c47",
+      "range": {
+        "startLine": 1172,
+        "startChar": 0,
+        "endLine": 1173,
+        "endChar": 54
+      },
+      "revId": "de33a70044ab7413485be911bfbbd9cdc8f4d923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
