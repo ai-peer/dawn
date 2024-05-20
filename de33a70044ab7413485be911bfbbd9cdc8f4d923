@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f19de4_f1b12c47",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-20T22:15:29Z",
+      "side": 1,
+      "message": "nit: i think you can also static_cast\u003cwgpu::TextureViewDimension\u003e(99u);",
+      "range": {
+        "startLine": 1172,
+        "startChar": 0,
+        "endLine": 1173,
+        "endChar": 54
+      },
+      "revId": "de33a70044ab7413485be911bfbbd9cdc8f4d923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
