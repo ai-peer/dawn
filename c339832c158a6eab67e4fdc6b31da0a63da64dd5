@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92eb5b18_af6ba010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3443809
+      },
+      "writtenOn": "2024-05-20T19:32:38Z",
+      "side": 1,
+      "message": "(Ah, sorry, didn\u0027t realize this was a CR+1 / CR+2 repository. Too many different Gerrit configurations. 😊)",
+      "revId": "c339832c158a6eab67e4fdc6b31da0a63da64dd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
