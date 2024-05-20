@@ -552,6 +552,9 @@ TEST_P(VideoViewsTests, CreateVideoTextureWithoutInitializedData) {
 // Samples the luminance (Y) plane from an imported bi-planar 420 texture into a single channel of
 // an RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleYtoR) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/2/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
+
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
@@ -611,6 +614,8 @@ TEST_P(VideoViewsTests, SampleYtoR) {
 // Samples the chrominance (UV) plane from an imported bi-planar 420 texture into two channels of an
 // RGBA output attachment and checks for the expected pixel value in the rendered quad.
 TEST_P(VideoViewsTests, SampleUVtoRG) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/6/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ false,
@@ -671,6 +676,8 @@ TEST_P(VideoViewsTests, SampleUVtoRG) {
 // Renders a "checkerboard" texture into a RGB quad, then checks the the entire
 // contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVtoRGB) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
@@ -749,6 +756,9 @@ TEST_P(VideoViewsTests, SampleYUVtoRGB) {
 // Renders a "checkerboard" texture into a RGBA quad, then checks the the entire
 // contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVAtoRGBA) {
+    // Assumed
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
@@ -838,6 +848,9 @@ TEST_P(VideoViewsTests, SampleYUVAtoRGBA) {
 // Renders a "checkerboard" texture into a RGB quad with two samplers, then checks the the
 // entire contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVtoRGBMultipleSamplers) {
+    // Assumed
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
@@ -919,6 +932,9 @@ TEST_P(VideoViewsTests, SampleYUVtoRGBMultipleSamplers) {
 // Renders a "checkerboard" texture into a RGBA quad with three samplers, then checks the the
 // entire contents to ensure the image has not been flipped.
 TEST_P(VideoViewsTests, SampleYUVAtoRGBAMultipleSamplers) {
+    // Assumed
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/7/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
@@ -1031,6 +1047,8 @@ TEST_P(VideoViewsValidationTests, ExplicitCreation) {
 
 // Test YUV texture view creation rules.
 TEST_P(VideoViewsValidationTests, CreateYUVViewValidation) {
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/8/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
@@ -1133,6 +1151,9 @@ TEST_P(VideoViewsValidationTests, CreateYUVViewValidation) {
 
 // Test YUVA texture view creation rules.
 TEST_P(VideoViewsValidationTests, CreateYUVAViewValidation) {
+    // Assumed
+    // https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-chromeos-volteer-rel/8/infra
+    DAWN_SUPPRESS_TEST_IF(IsChromeOS() && IsVulkan() && IsIntel() && IsBackendValidationEnabled());
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
         mBackend->CreateVideoTextureForTest(GetFormat(), wgpu::TextureUsage::TextureBinding,
                                             /*isCheckerboard*/ true,
