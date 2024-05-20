@@ -102,7 +102,7 @@ deps = {
   },
 
   'third_party/libc++/src': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@278060665f956b98b54922e3cb5e38b07884ce7d',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@043aad4c0d9aa7edd1e9a3057e9e985c18322940',
     'condition': 'dawn_standalone',
   },
 
