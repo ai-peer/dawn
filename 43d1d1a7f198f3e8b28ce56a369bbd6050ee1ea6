@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "443b6087_3c6a7c1a",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-20T13:22:35Z",
+      "side": 1,
+      "message": "ubernit: Can be: `b.Access\u003cvec2\u003cu32\u003e\u003e(params, 12_u)`",
+      "range": {
+        "startLine": 234,
+        "startChar": 45,
+        "endLine": 234,
+        "endChar": 75
+      },
+      "revId": "43d1d1a7f198f3e8b28ce56a369bbd6050ee1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc1af89b_61cb9948",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-20T13:22:35Z",
+      "side": 1,
+      "message": "This can be a constant value, which does not need insertion into a block.\nI think you can do: `b.Splat\u003cvec2\u003cu32\u003e\u003e(1_u)` or `b.Splat(vec2u, 1_u)` given that you\u0027ve constructed the type already.",
+      "range": {
+        "startLine": 237,
+        "startChar": 24,
+        "endLine": 238,
+        "endChar": 54
+      },
+      "revId": "43d1d1a7f198f3e8b28ce56a369bbd6050ee1ea6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

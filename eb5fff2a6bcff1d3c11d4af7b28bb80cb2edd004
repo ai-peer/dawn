@@ -87,6 +87,24 @@
       "parentUuid": "f998e7e6_66d3b0d6",
       "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0530992e_34a6f298",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-20T13:22:35Z",
+      "side": 1,
+      "message": "Yeah, a helper would be... helpful. I\u0027m thinking that maybe:\n\n```c\nb.Replace\u003c/* new instruction */ Binary\u003e(\n    /* instruction being replaced */ dimensions, \n    /* new instruction arguments\n       old instruction\u0027s result automatically passed as first\n       argument to the new instruction\u0027s ctor */ ...);\n```\n\nMight be a nice API. This would then be simplified to:\n\n```\nb.Replace\u003cBinary\u003e(call, BinaryOp::kAdd, visible_size, vec2u_1_1);\n```\n\n@jrprice@google.com for thoughts.",
+      "parentUuid": "32c51e29_b37c4fbb",
+      "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
