@@ -33,6 +33,24 @@
       "message": "The IR validation doesn\u0027t like this but I can\u0027t find how to make the call not happen. I tried replacing the reulst but the IR validation wasn\u0027t happy either. Any pointers on what to do here?",
       "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1fd1aa_e51f4244",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-20T12:03:43Z",
+      "side": 1,
+      "message": "I believe you want:\n\n```\n            call-\u003eResult(0)-\u003eReplaceAllUsesWith(dimensions-\u003eResult(0));\n            call-\u003eReplaceWith(dimensions);\n            call-\u003eDestroy();\n```\n\nJames has been trying to add new constructors \u0026 builder methods for instructions so you can reuse the result value of the old instruction and pass that to the new (without destroying the old value, allocating the new, fixing up usages), but I don\u0027t see one for `Binary` - so this is probably the best you have right now. See `ir::Builder::` _Blah_ `WithResult()`",
+      "parentUuid": "35db0d9b_d5f0c23f",
+      "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
