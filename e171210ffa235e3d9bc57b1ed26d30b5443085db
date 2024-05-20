@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b45f0ae7_d1bcf8fd",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-20T23:43:43Z",
+      "side": 1,
+      "message": "ah, yes we do need the static variable, nevermind\n\nyes, it should be the injected instance",
+      "parentUuid": "bbd421b4_a5b0b56e",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "e171210ffa235e3d9bc57b1ed26d30b5443085db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba669f7a_3f6885d5",
         "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
         "patchSetId": 1
