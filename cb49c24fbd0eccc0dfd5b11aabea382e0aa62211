@@ -16,6 +16,81 @@
       "message": "Please take a look, thanks",
       "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2de9792_cae82029",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-21T23:57:41Z",
+      "side": 1,
+      "message": "Looks good, assuming that Alan is happy with the proposed spec change on GitHub.",
+      "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b59737_60880f03",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-21T23:57:41Z",
+      "side": 1,
+      "message": "Should be able to use `entry_point-\u003ePipelineStage()` and compare to the `PipelineStage` enum instead.",
+      "range": {
+        "startLine": 1200,
+        "startChar": 16,
+        "endLine": 1202,
+        "endChar": 65
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "71d24af7_a6acc675",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/wgsl/resolver/uniformity.cc",
+              "range": {
+                "startLine": 1200,
+                "startChar": 0,
+                "endLine": 1203,
+                "endChar": 0
+              },
+              "replacement": "                if ((entry_point-\u003ePipelineStage() \u003d\u003d PipelineStage::kCompute) \u0026\u0026\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b96c933_84345e7c",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-21T23:57:41Z",
+      "side": 1,
+      "message": "Please also add test coverage for the fragment shader case.",
+      "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
