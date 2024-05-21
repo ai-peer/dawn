@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8076dc5_af4bdc1e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-21T01:23:30Z",
+      "side": 1,
+      "message": "`\u003e\u003d` would suffice I think\n\nthat said - might as well just keep one buffer around instead of 8? would make this code simpler as well. was there a reason you did it this way?",
+      "range": {
+        "startLine": 2466,
+        "startChar": 12,
+        "endLine": 2466,
+        "endChar": 37
+      },
+      "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
