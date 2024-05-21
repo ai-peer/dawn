@@ -50,6 +50,7 @@
 #include "src/tint/lang/glsl/writer/ast_raise/pad_structs.h"
 #include "src/tint/lang/glsl/writer/ast_raise/texture_1d_to_2d.h"
 #include "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.h"
+#include "src/tint/lang/glsl/writer/common/option_helpers.h"
 #include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/glsl/writer/common/printer_support.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
@@ -170,10 +171,58 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::Robustness>();
     }
 
+    if (!options.disable_workgroup_init) {
+        // ZeroInitWorkgroupMemory must come before CanonicalizeEntryPointIO as
+        // ZeroInitWorkgroupMemory may inject new builtin parameters.
+        manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
+    }
+
+    manager.Add<ast::transform::RemovePhonies>();
+
+    // TextureBuiltinsFromUniform must come before CombineSamplers to preserve texture binding point
+    // info, instead of combined sampler binding point. As a result, TextureBuiltinsFromUniform also
+    // comes before BindingRemapper so the binding point info it reflects is before remapping.
+    manager.Add<TextureBuiltinsFromUniform>();
+    data.Add<TextureBuiltinsFromUniform::Config>(
+        options.texture_builtins_from_uniform.ubo_binding,
+        options.texture_builtins_from_uniform.ubo_bindingpoint_ordering);
+
+    ExternalTextureOptions external_texture_options{};
+    RemapperData remapper_data{};
+    CombineSamplersInfo combined_info{};
+    PopulateBindingInfo(options, remapper_data, external_texture_options, combined_info);
+
+    data.Add<ast::transform::BindingRemapper::Remappings>(
+        remapper_data, std::unordered_map<BindingPoint, core::Access>{},
+        /* allow_collisions */ true);
+    manager.Add<ast::transform::BindingRemapper>();
+
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
     data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
+        external_texture_options.bindings_map);
     manager.Add<ast::transform::MultiplanarExternalTexture>();
+
+    // Must be after multiplanar
+    manager.Add<ast::transform::AddBlockAttribute>();
+
+    data.Add<ast::transform::OffsetFirstIndex::Config>(std::nullopt, options.first_instance_offset);
+    manager.Add<ast::transform::OffsetFirstIndex>();
+
+    // ClampFragDepth must come before CanonicalizeEntryPointIO, or the assignments to FragDepth are
+    // lost
+    data.Add<ast::transform::ClampFragDepth::Config>(options.depth_range_offsets);
+    manager.Add<ast::transform::ClampFragDepth>();
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
+        ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);
+    manager.Add<ast::transform::CanonicalizeEntryPointIO>();
+
+    // PadStructs must come after CanonicalizeEntryPointIO and CombineSamplers
+    manager.Add<PadStructs>();
+
+    // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
+    manager.Add<ast::transform::DemoteToHelper>();
 
     {  // Builtin polyfills
         ast::transform::BuiltinPolyfill::Builtins polyfills;
@@ -201,48 +250,11 @@ SanitizedResult Sanitize(const Program& in,
 
     manager.Add<ast::transform::DirectVariableAccess>();
 
-    if (!options.disable_workgroup_init) {
-        // ZeroInitWorkgroupMemory must come before CanonicalizeEntryPointIO as
-        // ZeroInitWorkgroupMemory may inject new builtin parameters.
-        manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
-    }
-
-    manager.Add<ast::transform::AddBlockAttribute>();
-
-    manager.Add<ast::transform::OffsetFirstIndex>();
-
-    // ClampFragDepth must come before CanonicalizeEntryPointIO, or the assignments to FragDepth are
-    // lost
-    manager.Add<ast::transform::ClampFragDepth>();
-
-    // CanonicalizeEntryPointIO must come after Robustness
-    manager.Add<ast::transform::CanonicalizeEntryPointIO>();
-
-    // PadStructs must come after CanonicalizeEntryPointIO
-    manager.Add<PadStructs>();
-
-    // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
-    manager.Add<ast::transform::DemoteToHelper>();
-
-    manager.Add<ast::transform::RemovePhonies>();
-
-    // TextureBuiltinsFromUniform must come before CombineSamplers to preserve texture binding point
-    // info, instead of combined sampler binding point. As a result, TextureBuiltinsFromUniform also
-    // comes before BindingRemapper so the binding point info it reflects is before remapping.
-    manager.Add<TextureBuiltinsFromUniform>();
-    data.Add<TextureBuiltinsFromUniform::Config>(
-        options.texture_builtins_from_uniform.ubo_binding,
-        options.texture_builtins_from_uniform.ubo_bindingpoint_ordering);
-
-    data.Add<CombineSamplersInfo>(options.combined_samplers_info);
+    // Must come after Builtin polyfills (specifially texture_sample_base_clamp_to_edge_2d_f32
+    data.Add<CombineSamplersInfo>(combined_info);
     manager.Add<CombineSamplers>();
 
-    data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        std::unordered_map<BindingPoint, core::Access>{},
-        /* allow_collisions */ true);
-    manager.Add<ast::transform::BindingRemapper>();
-
+    // Promite initializers must come after builtin polyfill
     manager.Add<ast::transform::PromoteInitializersToLet>();
     manager.Add<ast::transform::RemoveContinueInSwitch>();
     manager.Add<ast::transform::AddEmptyEntryPoint>();
@@ -253,13 +265,6 @@ SanitizedResult Sanitize(const Program& in,
     manager.Add<Texture1DTo2D>();
 
     manager.Add<ast::transform::SimplifyPointers>();
-
-    data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
-        ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);
-
-    data.Add<ast::transform::OffsetFirstIndex::Config>(std::nullopt, options.first_instance_offset);
-
-    data.Add<ast::transform::ClampFragDepth::Config>(options.depth_range_offsets);
 
     SanitizedResult result;
     ast::transform::DataMap outputs;
