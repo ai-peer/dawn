@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a369d149_7bd3eba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "Looks good to me. All nits.",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab0d9c9_8948b9b3",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "Note that all the AST transforms that use a Dawn-private UBO are likely moving to using some form of push-constant that share a single binding point / structure. @senorblanco@chromium.org has [added the `tint::ast::transform::PushConstantHelper`](https://dawn-review.googlesource.com/c/dawn/+/174120) for updating a single structure for these kinds of transforms.\n\nWhile it\u0027s fine to land this as is, we\u0027ll probably want something for the IR.",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cf11f7c_5c0db35c",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "übernit: Could use a compound if. (I\u0027m now just seeing how good the AI is)",
+      "fixSuggestions": [
+        {
+          "fixId": "a931e5b1_5a20b7a0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+              "range": {
+                "startLine": 83,
+                "startChar": 0,
+                "endLine": 85,
+                "endChar": 0
+              },
+              "replacement": "            if (auto* length \u003d GetComputedLength(call-\u003eArgs()[0])) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1318a9c_16dfd9fc",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "Suggest using a `tint::Switch` with the `TINT_ICE_ON_NO_MATCH`\nNote: I saw there was a recent request for breaking up small `Switch`s into if-else chains. I\u0027d strongly recommend using `Switch` unless there\u0027s a good reason not to. `Switch` has more context, and can be better optimized than as sequence of if-else chains. It also doesn\u0027t suffer from the variable shadowing issue which bit us many times before.",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "757b3b78_46379b50",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "While there\u0027s no validation for this right now, this will eventually need to check that the array-length var doesn\u0027t collide with an existing binding point.",
+      "fixSuggestions": [
+        {
+          "fixId": "5a95e0d4_21e645b6",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/transform/array_length_from_uniform_fuzz.cc",
+              "range": {
+                "startLine": 40,
+                "startChar": 0,
+                "endLine": 40,
+                "endChar": 0
+              },
+              "replacement": "    // TODO(crbug.com/tint/1896): Check that the array-length var doesn\u0027t collide\n    // with an existing binding point.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89b6897_8a9dc3f6",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:17:55Z",
+      "side": 1,
+      "message": "Bit confused by your test naming convention here. Isn\u0027t this a `ViaAccess` ?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
