@@ -96,6 +96,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4e3d9d_f0bd2c41",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-21T00:27:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b45f0ae7_d1bcf8fd",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 41
+      },
+      "revId": "e171210ffa235e3d9bc57b1ed26d30b5443085db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba669f7a_3f6885d5",
@@ -145,6 +169,24 @@
       "side": 1,
       "message": "yea - \n\nsInstance no longer needs to be a static global. It can be local to the Run function\n\nThen, you don\u0027t need to explicitly delete it either. It will be deleted by the unique_ptr at the end of the function. Same for wireServer actually. it will be deleted automatically at the end of the function",
       "parentUuid": "a20d1342_e46ce817",
+      "revId": "e171210ffa235e3d9bc57b1ed26d30b5443085db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb1050d_3fca11a1",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-21T00:27:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1debde32_b275c3c2",
       "revId": "e171210ffa235e3d9bc57b1ed26d30b5443085db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
