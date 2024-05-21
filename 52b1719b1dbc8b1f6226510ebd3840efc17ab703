@@ -139,6 +139,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7e5f2b9_d033d013",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-21T20:59:04Z",
+      "side": 1,
+      "message": "Hmm, so I talked to @vasilyt@chromium.org and realized we would also need External for creating TextureViews from the Texture. Skia currently has the skgpu::graphite::DawnTextureInfo (maybe similar the TextureDescriptor) and not have access to SharedTextureMemory. The question then arises what format would Skia have? Currently for Ganesh we do default to RGBA which isn\u0027t ideal and could do that here or use wgpu::Format::Undefined which is also not ideal.\n\nThe question of capabilities is a good question that I\u0027m not sure about.\n\nDefer to @enga@chromium.org @vasilyt@chromium.org @blundell@chromium.org for further thoughts on this.",
+      "parentUuid": "54adb7a4_f9e9dd57",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -317,6 +341,30 @@
       "side": 1,
       "message": "Would that then mean that we\u0027d allow clients to do YCbCr sampling on a Dawn RGBA texture? I had been under the naive assumption that YCbCr sampling would be restricted to Dawn textures of type External, in which case it would make sense to me that the client would request creation of a texture of type External if they wanted to use that texture with external sampling (regardless of what the underlying type of the AHB is). This is maybe analogous to what we enforce in Chromium here [1].\n\nI definitely defer to you here, just curious.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/ipc/common/vulkan_ycbcr_info.cc;l\u003d27-28",
       "parentUuid": "0fd7eaf3_d6846ac1",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6d4039c_b66a097a",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-21T20:59:04Z",
+      "side": 1,
+      "message": "Looking at this bit more and chatting with Vasiliy, we can have YCbCr sampling done on AHB which either return VkFormat Undefined or valid VkFormat eg. RGBA (or any other VkFormat) with externalFormat.\n\nIn these cases, the `properties.format` at [2] could be a valid wgpu::TextureFormat (other than External) but we could be requesting external sampling? Maybe I should instead set the mProperties.format to External if descriptor format is External and remove the conditional validation. \n\nLooking at `mProperties.format` though there aren\u0027t that many usages of it that would affect behavious so setting it isn\u0027t strictly necessary I think, but could get confusing.",
+      "parentUuid": "93c5a7ab_7df93ee6",
       "range": {
         "startLine": 167,
         "startChar": 0,
