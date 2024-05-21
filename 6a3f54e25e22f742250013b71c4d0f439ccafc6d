@@ -89,6 +89,159 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "278fbeef_8c6ed88a",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "Can drop the `else` as the if returns.\n```suggestion\n            } \n            \n            if (auto* result \u003d ptr-\u003eAs\u003cInstructionResult\u003e()) {\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "003f0626_11a97823",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "ditto\n```suggestion\n                } \n                \n                if (auto* access \u003d result-\u003eInstruction()-\u003eAs\u003cAccess\u003e()) {\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3e12c96_572a6e8b",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "Just to check `FunctionParam` will use Symbol to rename this to a numbered version if there are multiple `tint_array_length`\u0027s, yea?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "629c7680_8ffc5158",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "Why is this inside a `b.InsertBefore` as it doesn\u0027t insert anything? If it\u0027s because of the `GetComputedLength` it would be better if that function did the `insertBefore` so it\u0027s clearer what\u0027s happening",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae5bdc3_1c2b6c8a",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "This could use a couple more comments as to what is going on. So, if I\u0027m right, the `size_index` is the uint32_t index into the array. We extract a vec4 from the buffer, so we divide by 4, we then extract a single component from the vec4 so we %4.\n\nOut of curiousy, why do we go through the vec4 and not just access the buffer as an array at the given size_index ?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53dca1d3_de0e56c4",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "So, the size Dawn provides in the buffer includes the offset into the struct?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c66598a_b5267c27",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "```suggestion\n        if (buffer_sizes_var) {\n          return buffer_sizes_var-\u003eResult(0);\n        }\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efbc086f_61943a73",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "Which UBO requirement means we have to use vec4 instead of just floats?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd405eb2_18159294",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-21T15:26:32Z",
+      "side": 1,
+      "message": "```suggestion\n///\n/// @param module the IR module\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "757b3b78_46379b50",
         "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform_fuzz.cc",
         "patchSetId": 2
