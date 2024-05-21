@@ -4,9 +4,13 @@ struct PushConstants {
   uint first_instance;
 };
 
-layout(location=0) uniform PushConstants push_constants;
+struct push_constants_block {
+  PushConstants inner;
+};
+
+layout(location=0) uniform push_constants_block push_constants;
 vec4 tint_symbol(uint b) {
-  return vec4(float((b + push_constants.first_instance)));
+  return vec4(float((b + push_constants.inner.first_instance)));
 }
 
 void main() {
