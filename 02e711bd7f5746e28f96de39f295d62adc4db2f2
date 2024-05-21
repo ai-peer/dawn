@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccc1de5_3c470114",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-21T00:14:11Z",
+      "side": 1,
+      "message": "Done. Removed this logic",
+      "parentUuid": "26e04dc9_f02546df",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7621595c_dfca3ee9",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2a3588_9a31088d",
+        "filename": "src/dawn/native/ApplyClearColorValueWithDrawHelper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-21T00:14:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7621595c_dfca3ee9",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6766769f_2020cf86",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-05-20T12:35:56Z",
       "side": 1,
       "message": "nit: GetOrCreate, but maybe we could make this slightly more generic and call it GetOrCreateTemporaryUniformBuffer(size_t requiredSize)",
+      "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50ed7635_d3a5f6a4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2463,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-21T00:14:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6766769f_2020cf86",
       "revId": "02e711bd7f5746e28f96de39f295d62adc4db2f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
