@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1768d3d4_82de304b",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:22:50Z",
+      "side": 1,
+      "message": "Again - strongly recommend a `Switch` with `TINT_ICE_ON_NO_MATCH`.",
+      "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "413b0e35_da494ff0",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T14:22:50Z",
+      "side": 1,
+      "message": "Is this safe to do? `ForEachUse` does not do anything clever to prevent mutation of the vector its looping over.",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
