@@ -791,6 +791,10 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             ColorAttachmentIndex attachment(static_cast<uint8_t>(unsanitizedAttachment));
             metadata->fragmentOutputVariables[attachment] = variable;
             metadata->fragmentOutputMask.set(attachment);
+            if (outputVar.attributes.blend_src.has_value() &&
+                *outputVar.attributes.blend_src == 1u) {
+                metadata->blendSrc1ComponentCount = variable.componentCount;
+            }
         }
 
         // Fragment input reflection.
