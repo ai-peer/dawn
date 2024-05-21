@@ -140,6 +140,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b607bb7_32f8015b",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T18:07:36Z",
+      "side": 1,
+      "message": "The names in IR are just metadata, and are free to collide.\nIt\u0027s up to the raise transforms / writer to ensure that there are no collisions.",
+      "parentUuid": "f3e12c96_572a6e8b",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "629c7680_8ffc5158",
         "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
         "patchSetId": 2
@@ -168,6 +186,24 @@
       "writtenOn": "2024-05-21T15:26:32Z",
       "side": 1,
       "message": "This could use a couple more comments as to what is going on. So, if I\u0027m right, the `size_index` is the uint32_t index into the array. We extract a vec4 from the buffer, so we divide by 4, we then extract a single component from the vec4 so we %4.\n\nOut of curiousy, why do we go through the vec4 and not just access the buffer as an array at the given size_index ?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06b8e186_68b263a2",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T18:07:36Z",
+      "side": 1,
+      "message": "Tint says: \n\n```\nuniform storage requires that array elements are aligned to 16 bytes, but array element of type u32 has a stride of 4 bytes. Consider using a vector or struct as the element type instead.\n```",
+      "parentUuid": "4ae5bdc3_1c2b6c8a",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
