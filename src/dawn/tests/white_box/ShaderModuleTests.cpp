@@ -24,8 +24,10 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "dawn/native/ShaderModule.h"
@@ -149,19 +151,14 @@ class ShaderModuleTests : public DawnTest {
         csDesc.compute.module = module;
 
         device.CreateComputePipelineAsync(
-            &csDesc,
-            [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
-               const char* message, void* userdata) {
-                EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_Success,
-                          status);
-
-                CreatePipelineAsyncTask* currentTask =
-                    static_cast<CreatePipelineAsyncTask*>(userdata);
-                currentTask->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
-                currentTask->isCompleted = true;
-                currentTask->message = message;
-            },
-            &task);
+            &csDesc, wgpu::CallbackMode::AllowProcessEvents,
+            [this](wgpu::CreatePipelineAsyncStatus status, wgpu::ComputePipeline pipeline,
+                   const char* message) {
+                EXPECT_EQ(wgpu::CreatePipelineAsyncStatus::Success, status);
+                task.computePipeline = std::move(pipeline);
+                task.isCompleted = true;
+                task.message = message;
+            });
     }
 
     CreatePipelineAsyncTask task;
