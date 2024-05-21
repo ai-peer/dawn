@@ -162,14 +162,13 @@ struct CombineSamplers::State {
             const core::type::DepthTexture* depth = texture_type->As<core::type::DepthTexture>();
             if (depth && !sampler) {
                 return ctx.dst->ty.sampled_texture(depth->dim(), ctx.dst->ty.f32());
-            } else {
-                return CreateASTTypeFor(ctx, texture_type);
             }
-        } else {
-            TINT_ASSERT(sampler != nullptr);
-            const core::type::Type* sampler_type = sampler->Type()->UnwrapRef();
-            return CreateASTTypeFor(ctx, sampler_type);
+            return CreateASTTypeFor(ctx, texture_type);
         }
+
+        TINT_ASSERT(sampler != nullptr);
+        const core::type::Type* sampler_type = sampler->Type()->UnwrapRef();
+        return CreateASTTypeFor(ctx, sampler_type);
     }
 
     /// Insert a new texture/sampler pair into the combined samplers maps (global or local, as
@@ -316,6 +315,7 @@ struct CombineSamplers::State {
                     if (texture_index == -1) {
                         return nullptr;
                     }
+
                     const sem::ValueExpression* texture =
                         call->Arguments()[static_cast<size_t>(texture_index)];
                     // We don't want to combine storage textures with anything, since
@@ -323,6 +323,7 @@ struct CombineSamplers::State {
                     if (texture->Type()->UnwrapRef()->Is<core::type::StorageTexture>()) {
                         return nullptr;
                     }
+
                     const sem::ValueExpression* sampler =
                         sampler_index != -1 ? call->Arguments()[static_cast<size_t>(sampler_index)]
                                             : nullptr;
@@ -352,6 +353,7 @@ struct CombineSamplers::State {
                             args.Push(ctx.Clone(arg));
                         }
                     }
+
                     const ast::Expression* value = ctx.dst->Call(ctx.Clone(expr->target), args);
                     if (builtin->Fn() == wgsl::BuiltinFn::kTextureLoad &&
                         texture_var->Type()->UnwrapRef()->Is<core::type::DepthTexture>() &&
@@ -360,6 +362,7 @@ struct CombineSamplers::State {
                     }
                     return value;
                 }
+
                 // Replace all function calls.
                 if (auto* callee = call->Target()->As<sem::Function>()) {
                     auto make_arg = [&](const sem::Variable* texture_var,
