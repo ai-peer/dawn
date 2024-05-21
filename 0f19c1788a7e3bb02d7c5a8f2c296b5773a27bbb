@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdc6c93_0f459e9f",
+        "filename": "src/dawn/fuzzers/DawnWireServerFuzzer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-05-21T22:49:24Z",
+      "side": 1,
+      "message": "nit: if bots are happy with shadowing `callback` we are good",
+      "revId": "0f19c1788a7e3bb02d7c5a8f2c296b5773a27bbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
