@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38526c72_1a583df6",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1294,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-21T20:16:09Z",
+      "side": 1,
+      "message": "Nit: Missing tests for these checks.",
+      "range": {
+        "startLine": 1287,
+        "startChar": 0,
+        "endLine": 1294,
+        "endChar": 5
+      },
+      "revId": "9d93a96eae1a98c3ac98466debdc92cbdcb4b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
