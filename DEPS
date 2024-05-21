@@ -64,7 +64,7 @@ vars = {
 
 deps = {
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@48ab3bd053bfe2fef4635d7cb1861f8923167b96',
+    'url': '{chromium_git}/chromium/src/buildtools@efa920ce144e4dc1c1841e73179cd7e23b9f0d5e',
     'condition': 'dawn_standalone',
   },
   'third_party/clang-format/script': {
@@ -102,12 +102,12 @@ deps = {
   },
 
   'third_party/libc++/src': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@278060665f956b98b54922e3cb5e38b07884ce7d',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@043aad4c0d9aa7edd1e9a3057e9e985c18322940',
     'condition': 'dawn_standalone',
   },
 
   'third_party/libc++abi/src': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@0226cb1cdfe740b173394e1cebbd0dcf293e38ad',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@a37a3aa431f132b02a58656f13984d51098330a2',
     'condition': 'dawn_standalone',
   },
 
