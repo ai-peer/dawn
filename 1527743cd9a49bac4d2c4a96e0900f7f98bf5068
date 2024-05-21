@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e981fa0e_0586a018",
+        "filename": "src/tint/lang/core/ir/function_param.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-21T13:23:56Z",
+      "side": 1,
+      "message": "Please initialize to something. Suggest 0xffffffff.",
+      "fixSuggestions": [
+        {
+          "fixId": "8795a3b0_a65918ec",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/function_param.h",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": "    uint32_t index_ \u003d 0xffffffff;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1527743cd9a49bac4d2c4a96e0900f7f98bf5068",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
