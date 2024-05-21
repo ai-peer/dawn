@@ -12,9 +12,13 @@ struct PushConstants {
   float max_depth;
 };
 
-layout(location=0) uniform PushConstants push_constants;
+struct push_constants_block {
+  PushConstants inner;
+};
+
+layout(location=0) uniform push_constants_block push_constants;
 float clamp_frag_depth(float v) {
-  return clamp(v, push_constants.min_depth, push_constants.max_depth);
+  return clamp(v, push_constants.inner.min_depth, push_constants.inner.max_depth);
 }
 
 struct FragmentOutputs {
