@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-05-10 11:42:51AM
+# Last rolled: 2024-05-21 05:04:27AM
 
 # Flaky on all platforms
 # KEEP
@@ -154,15 +154,15 @@ crbug.com/dawn/2478 webgpu:api,validation,buffer,mapping:mapAsync,state,mappingP
 # Linux/Intel UHD 770 initial failures (crbug.com/329253685)
 ################################################################################
 
-crbug.com/341282603 [ linux intel-0x4680 ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;* [ Failure ]
-crbug.com/341327470 [ linux intel-0x4680 ] webgpu:shader,execution,expression,call,builtin,asin:f32:* [ Failure ]
-crbug.com/341327470 [ linux intel-0x4680 ] webgpu:shader,execution,expression,call,builtin,dpdxFine:f32:* [ Failure ]
-crbug.com/341327470 [ linux intel-0x4680 ] webgpu:shader,execution,expression,call,builtin,dpdyFine:f32:* [ Failure ]
-crbug.com/341327470 [ linux intel-0x4680 ] webgpu:shader,execution,expression,call,builtin,fwidthFine:f32:* [ Failure ]
-crbug.com/341282605 [ linux intel-0x4680 ] webgpu:shader,execution,limits:switch_case_selectors: [ Failure ]
-crbug.com/341327471 [ linux intel-0x4680 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
-crbug.com/341327471 [ linux intel-0x4680 ] webgpu:web_platform,canvas,getCurrentTexture:resize:canvasType="onscreen" [ Failure ]
-crbug.com/341327472 [ linux intel-0x4680 ] webgpu:api,validation,state,device_lost,destroy:* [ Failure ]
+crbug.com/341282603 [ intel-0x4680 linux ] webgpu:api,operation,command_buffer,queries,occlusionQuery:occlusion_query,alpha_to_coverage:writeMask=0;* [ Failure ]
+crbug.com/341327470 [ intel-0x4680 linux ] webgpu:shader,execution,expression,call,builtin,asin:f32:* [ Failure ]
+crbug.com/341327470 [ intel-0x4680 linux ] webgpu:shader,execution,expression,call,builtin,dpdxFine:f32:* [ Failure ]
+crbug.com/341327470 [ intel-0x4680 linux ] webgpu:shader,execution,expression,call,builtin,dpdyFine:f32:* [ Failure ]
+crbug.com/341327470 [ intel-0x4680 linux ] webgpu:shader,execution,expression,call,builtin,fwidthFine:f32:* [ Failure ]
+crbug.com/341282605 [ intel-0x4680 linux ] webgpu:shader,execution,limits:switch_case_selectors: [ Failure ]
+crbug.com/341327471 [ intel-0x4680 linux ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
+crbug.com/341327471 [ intel-0x4680 linux ] webgpu:web_platform,canvas,getCurrentTexture:resize:canvasType="onscreen" [ Failure ]
+crbug.com/341327472 [ intel-0x4680 linux ] webgpu:api,validation,state,device_lost,destroy:* [ Failure ]
 
 ### This section represents things that are probably fixable in Dawn.
 
