@@ -202,40 +202,12 @@ MaybeError ValidateSurfaceConfiguration(DeviceBase* device,
 
     DAWN_TRY(config->device->ValidateIsAlive());
 
-    const Format* format = nullptr;
-    DAWN_TRY_ASSIGN(format, device->GetInternalFormat(config->format));
-    DAWN_ASSERT(format != nullptr);
+    // Check that config matches capabilities, this implicitly validates the value of the enums.
+    DAWN_INVALID_IF(!IsSubset(config->usage, capabilities.usages),
+                    "Usages requested (%s) are not supported by the adapter (%s) which supports "
+                    "only %s for this surface.",
+                    config->usage, config->device->GetAdapter(), capabilities.usages);
 
-    if (device->HasFeature(Feature::SurfaceCapabilities)) {
-        wgpu::TextureUsage validUsage;
-        DAWN_TRY_ASSIGN(validUsage, device->GetSupportedSurfaceUsage(surface));
-        DAWN_INVALID_IF(
-            !IsSubset(config->usage, validUsage),
-            "Usage (%s) is not supported, %s are (currently) the only accepted usage flags.",
-            config->usage, validUsage);
-    } else {
-        DAWN_INVALID_IF(config->usage != wgpu::TextureUsage::RenderAttachment,
-                        "Usage (%s) is not %s, which is (currently) the only accepted usage. Other "
-                        "usage flags require enabling %s",
-                        config->usage, wgpu::TextureUsage::RenderAttachment,
-                        wgpu::FeatureName::SurfaceCapabilities);
-    }
-
-    for (size_t i = 0; i < config->viewFormatCount; ++i) {
-        const wgpu::TextureFormat apiViewFormat = config->viewFormats[i];
-        const Format* viewFormat = nullptr;
-        DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(apiViewFormat));
-        DAWN_ASSERT(viewFormat != nullptr);
-
-        DAWN_INVALID_IF(std::find(capabilities.formats.begin(), capabilities.formats.end(),
-                                  apiViewFormat) == capabilities.formats.end(),
-                        "View format (%s) is not supported by the adapter (%s) for this surface.",
-                        apiViewFormat, device->GetAdapter());
-    }
-
-    DAWN_TRY(ValidatePresentMode(config->presentMode));
-
-    // Check that config matches capabilities
     auto formatIt =
         std::find(capabilities.formats.begin(), capabilities.formats.end(), config->format);
     DAWN_INVALID_IF(formatIt == capabilities.formats.end(),
@@ -254,6 +226,15 @@ MaybeError ValidateSurfaceConfiguration(DeviceBase* device,
                     "Alpha mode (%s) is not supported by the adapter (%s) for this surface.",
                     config->format, config->device->GetAdapter());
 
+    // Validate the compatibility of view formats.
+    const Format& format = device->GetValidInternalFormat(config->format);
+    for (size_t i = 0; i < config->viewFormatCount; ++i) {
+        DAWN_TRY_CONTEXT(
+            ValidateTextureViewFormatCompatibility(device, format, config->viewFormats[i]),
+            "validating viewFormats[%u]", i);
+    }
+
+    // Validate the size of the surface.
     DAWN_INVALID_IF(config->width == 0 || config->height == 0,
                     "Surface configuration size (width: %u, height: %u) is empty.", config->width,
                     config->height);
@@ -541,6 +522,7 @@ MaybeError Surface::GetCapabilities(AdapterBase* adapter, SurfaceCapabilities* c
         adapter, this,
         [&capabilities](const PhysicalDeviceSurfaceCapabilities& caps) -> MaybeError {
             capabilities->nextInChain = nullptr;
+            capabilities->usages = caps.usages;
             DAWN_TRY(utils::AllocateApiSeqFromStdVector(capabilities->formats,
                                                         capabilities->formatCount, caps.formats));
             DAWN_TRY(utils::AllocateApiSeqFromStdVector(
