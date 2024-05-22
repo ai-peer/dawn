@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77f0b6c7_5fbee227",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Ack, will cross that bridge when we come to it.",
+      "parentUuid": "aab0d9c9_8948b9b3",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cf11f7c_5c0db35c",
@@ -70,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0182f5_65fb2d61",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cf11f7c_5c0db35c",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1318a9c_16dfd9fc",
@@ -83,6 +119,24 @@
       "writtenOn": "2024-05-21T14:17:55Z",
       "side": 1,
       "message": "Suggest using a `tint::Switch` with the `TINT_ICE_ON_NO_MATCH`\nNote: I saw there was a recent request for breaking up small `Switch`s into if-else chains. I\u0027d strongly recommend using `Switch` unless there\u0027s a good reason not to. `Switch` has more context, and can be better optimized than as sequence of if-else chains. It also doesn\u0027t suffer from the variable shadowing issue which bit us many times before.",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9fea31_66630cf8",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "In this particular case I don\u0027t like the `Switch()` pattern as some branches return from the function while others continue around the loop. We can\u0027t just return `nullptr` from the `Switch()` to indicate \"continue\" since `nullptr` is also a possible (valid) return value.",
+      "parentUuid": "a1318a9c_16dfd9fc",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c00238_618a2b58",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "278fbeef_8c6ed88a",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "003f0626_11a97823",
@@ -117,6 +189,24 @@
       "writtenOn": "2024-05-21T15:26:32Z",
       "side": 1,
       "message": "ditto\n```suggestion\n                } \n                \n                if (auto* access \u003d result-\u003eInstruction()-\u003eAs\u003cAccess\u003e()) {\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76439d09_aa8a1a8f",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "003f0626_11a97823",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +246,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f222e697_dbb68b64",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7b607bb7_32f8015b",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "629c7680_8ffc5158",
@@ -169,6 +277,24 @@
       "writtenOn": "2024-05-21T15:26:32Z",
       "side": 1,
       "message": "Why is this inside a `b.InsertBefore` as it doesn\u0027t insert anything? If it\u0027s because of the `GetComputedLength` it would be better if that function did the `insertBefore` so it\u0027s clearer what\u0027s happening",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dab804b_511af6cb",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "629c7680_8ffc5158",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -208,6 +334,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbe3826_ea98fac3",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Added more comments.",
+      "parentUuid": "06b8e186_68b263a2",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53dca1d3_de0e56c4",
@@ -221,6 +365,24 @@
       "writtenOn": "2024-05-21T15:26:32Z",
       "side": 1,
       "message": "So, the size Dawn provides in the buffer includes the offset into the struct?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bda6a69_a6bc8513",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Yes, it\u0027s the total size of the buffer, which is the information that Dawn has.",
+      "parentUuid": "53dca1d3_de0e56c4",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -242,6 +404,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2494a5a_9dec6cf3",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c66598a_b5267c27",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efbc086f_61943a73",
@@ -259,6 +439,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23cdfdf1_56ff979c",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Expanded the comment here.",
+      "parentUuid": "efbc086f_61943a73",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd405eb2_18159294",
@@ -272,6 +470,24 @@
       "writtenOn": "2024-05-21T15:26:32Z",
       "side": 1,
       "message": "```suggestion\n///\n/// @param module the IR module\n```",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cba6936_4fb3aef5",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd405eb2_18159294",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -311,6 +527,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5a2c9db_06ad0710",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "757b3b78_46379b50",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e89b6897_8a9dc3f6",
@@ -324,6 +558,24 @@
       "writtenOn": "2024-05-21T14:17:55Z",
       "side": 1,
       "message": "Bit confused by your test naming convention here. Isn\u0027t this a `ViaAccess` ?",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb2ab4d_18306f4f",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T22:19:10Z",
+      "side": 1,
+      "message": "Yeah I guess so. Moved and renamed.",
+      "parentUuid": "e89b6897_8a9dc3f6",
       "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
