@@ -508,6 +508,7 @@ config("common_config") {
     # MSVC
     warning_flags += [
       "/W0",  # Suppress most warnings
+      "/wd2666",  # 'identifier' : number overloads have similar conversions
       "/wd4267",  # conversion from 'size_t' to 'type', possible loss of data
       "/wd4996",  # std::iterator class template (used as a base class to
                   # provide typedefs) is deprecated in C++17
