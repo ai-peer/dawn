@@ -50,7 +50,12 @@ class InternalCompilerError {
     /// Destructor.
     /// Adds the internal compiler error message to the diagnostics list, calls the
     /// InternalCompilerErrorReporter if one is set, then terminates the process.
-    [[noreturn]] ~InternalCompilerError();
+#if defined(_MSC_VER) && !defined(__clang__)
+    __declspec(noreturn)
+#else
+    [[noreturn]]
+#endif
+    ~InternalCompilerError();
 
     /// Appends `arg` to the ICE message.
     /// @param arg the argument to append to the ICE message
