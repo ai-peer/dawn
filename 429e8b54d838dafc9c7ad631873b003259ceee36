@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e1a8f8_086db0c5",
+        "filename": "src/tint/lang/core/constant/splat_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T17:46:31Z",
+      "side": 1,
+      "message": "Nit: This test was previously checking that an OOB index of a splat returns `nullptr`. Maybe add an `sp-\u003eIndex(3)` case to cover that.",
+      "fixSuggestions": [
+        {
+          "fixId": "b494762a_f6265f77",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/constant/splat_test.cc",
+              "range": {
+                "startLine": 81,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "429e8b54d838dafc9c7ad631873b003259ceee36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
