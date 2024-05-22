@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1acc7fd4_0e0cb494",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T00:54:45Z",
+      "side": 1,
+      "message": "aside: should we switch it around so it is possible...?",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce2420b_a1e8af0c",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T00:54:45Z",
+      "side": 1,
+      "message": "Can this be:\n\n```\n        MaybeError error \u003d [\u0026]() {\n            DAWN_INVALID_IF(mState \u003d\u003d BufferState::PendingMap,\n                \"%s already has an outstanding map pending.\", this);\n            WGPUBufferMapAsyncStatus status;\n            DAWN_TRY(ValidateMapAsync(mode, offset, size, \u0026status));\n            DAWN_TRY(MapAsyncImpl(mode, offset, size));\n            return {};\n        }();\n```",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
