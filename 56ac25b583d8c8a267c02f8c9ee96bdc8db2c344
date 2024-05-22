@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "821d49e9_b3180b0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T12:54:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "56ac25b583d8c8a267c02f8c9ee96bdc8db2c344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dcfff60_19d18b41",
+        "filename": "src/tint/lang/core/constant/manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T12:54:14Z",
+      "side": 1,
+      "message": "nit: n is no longer used.",
+      "revId": "56ac25b583d8c8a267c02f8c9ee96bdc8db2c344",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
