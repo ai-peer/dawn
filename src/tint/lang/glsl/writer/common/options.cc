@@ -27,6 +27,8 @@
 
 #include "src/tint/lang/glsl/writer/common/options.h"
 
+TINT_INSTANTIATE_TYPEINFO(tint::glsl::writer::Bindings);
+
 namespace tint::glsl::writer {
 
 Options::Options() = default;
