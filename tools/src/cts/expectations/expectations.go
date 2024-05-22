@@ -188,7 +188,7 @@ func (e Expectation) Clone() Expectation {
 //	 1 if a should come after b
 //	 0 if a and b are identical
 //
-// Note: Only comparing bug, query, and tags (in that order).
+// Note: Only comparing bug, tags, and query (in that order).
 func (e Expectation) Compare(b Expectation) int {
 	switch strings.Compare(e.Bug, b.Bug) {
 	case -1:
