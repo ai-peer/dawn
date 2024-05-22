@@ -16,6 +16,23 @@
       "message": "Thanks for reviewing! Please take a look for the new patch.",
       "revId": "b8458a8b395a77b063eaefa7e7279debddacb33c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b4efc3_9f59e41d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T20:26:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b8458a8b395a77b063eaefa7e7279debddacb33c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
