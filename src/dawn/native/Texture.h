@@ -52,6 +52,9 @@ enum class AllowMultiPlanarTextureFormat {
     Yes,
 };
 
+MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
+                                                  const Format& format,
+                                                  wgpu::TextureFormat viewFormatEnum);
 MaybeError ValidateTextureDescriptor(
     const DeviceBase* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
