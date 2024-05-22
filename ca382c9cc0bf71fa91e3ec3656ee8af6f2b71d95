@@ -46,6 +46,30 @@
       },
       "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3f178ff_c4568575",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-22T01:10:35Z",
+      "side": 1,
+      "message": "I see. So the reason this isn\u0027t great is that it\u0027s not obvious, and the reason for the implementation is unintuitive unless you know it\u0027s for a specific d3d11 case.\n\nIt makes me think this is simply the wrong abstraction because it doesn\u0027t work well across backends. Perhaps a better alternative would be something like DynamicUploader, but specific for uniform buffers (or DynamicUploader with custom usages). I know dynamic uploader as written isn\u0027t ideal for d3d11 either, but that is also something that could be reworked. Improving that system would be better than adding this odd recycling mechanism.",
+      "parentUuid": "e0b237d8_7977b17d",
+      "range": {
+        "startLine": 2466,
+        "startChar": 12,
+        "endLine": 2466,
+        "endChar": 37
+      },
+      "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
