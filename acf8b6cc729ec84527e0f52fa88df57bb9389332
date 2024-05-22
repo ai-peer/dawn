@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19531f1a_e274b5b9",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-22T16:44:57Z",
+      "side": 1,
+      "message": "I patched in all the in-flight CLs in both Dawn and Chromium to do integration testing of video playback locally, seeing if we at least get the right info to Skia. Right now we fail this check when creating the STM from the AHB for the VideoFrame. Vasiliy had mentioned to me offline that we need to supply the VkImage with the external format rather than the vkFormat, which I\u0027m sure is at least part of the problem here.\n\nIt would be really valuable for us to be able to create AHBs that are external-format only if possible in Dawn to do testing of these cases, as otherwise we\u0027ll have to do a lot of this testing via actually running Clank, which will be really painful. Vasiliy, do you know if that\u0027s feasible?",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51e6b57a_290e1158",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 14
