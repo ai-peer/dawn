@@ -581,6 +581,11 @@ function(tint_target_add_external_dependencies TARGET KIND)
       target_link_libraries(${TARGET} PRIVATE Threads::Threads)
     elseif(${DEPENDENCY} STREQUAL "winsock")
       target_link_libraries(${TARGET} PRIVATE ws2_32)
+    elseif(${DEPENDENCY} STREQUAL "libprotobuf-mutator")
+      target_link_libraries(${TARGET} PRIVATE libprotobuf-mutator)
+      target_include_directories(${TARGET} PRIVATE
+              "${DAWN_LPM_DIR}"
+      )
     else()
       message(FATAL_ERROR "unhandled external dependency ${DEPENDENCY}")
     endif()
