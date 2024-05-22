@@ -50,6 +50,12 @@ config("tint_common_config") {
     "${tint_root_dir}",
     "${tint_gen_dir}",
   ]
+
+  if (is_win && !is_clang) {
+    cflags = [
+      "/wd4715",  # 'function' : not all control paths return a value.
+    ]
+  }
 }
 
 config("tint_public_config") {
