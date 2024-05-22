@@ -513,9 +513,6 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
         const SharedFenceDescriptor* descriptor);
     virtual void SetLabelImpl();
 
-    virtual ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
-        const Surface* surface) const = 0;
-
     virtual MaybeError TickImpl() = 0;
     void FlushCallbackTaskQueue();
 
