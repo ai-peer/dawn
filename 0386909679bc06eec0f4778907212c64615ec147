@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d133c20e_65a03795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T07:41:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0386909679bc06eec0f4778907212c64615ec147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3611f274_a2d1ce27",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T07:41:45Z",
+      "side": 1,
+      "message": "Small preference for having it in FragmentRenderAttachmentInfo and default to 0 (meaning no blend_src1) WDYT?",
+      "revId": "0386909679bc06eec0f4778907212c64615ec147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd54c2f3_475d7b89",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T07:41:45Z",
+      "side": 1,
+      "message": "nit: these seem unrelated to dual source blending?",
+      "range": {
+        "startLine": 2743,
+        "startChar": 0,
+        "endLine": 2767,
+        "endChar": 5
+      },
+      "revId": "0386909679bc06eec0f4778907212c64615ec147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
