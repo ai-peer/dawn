@@ -163,6 +163,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d206ee6e_b273ba2b",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-22T00:16:33Z",
+      "side": 1,
+      "message": "IIRC, I thought skia was going to hold a struct which holds the vulkan enums for ycbcr as well as the external format. So you should be able to pass that and TextureFormat::External into texture view creation.",
+      "parentUuid": "e7e5f2b9_d033d013",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -365,6 +389,30 @@
       "side": 1,
       "message": "Looking at this bit more and chatting with Vasiliy, we can have YCbCr sampling done on AHB which either return VkFormat Undefined or valid VkFormat eg. RGBA (or any other VkFormat) with externalFormat.\n\nIn these cases, the `properties.format` at [2] could be a valid wgpu::TextureFormat (other than External) but we could be requesting external sampling? Maybe I should instead set the mProperties.format to External if descriptor format is External and remove the conditional validation. \n\nLooking at `mProperties.format` though there aren\u0027t that many usages of it that would affect behavious so setting it isn\u0027t strictly necessary I think, but could get confusing.",
       "parentUuid": "93c5a7ab_7df93ee6",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2827bc03_0b96daff",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-22T00:16:33Z",
+      "side": 1,
+      "message": "I\u0027m getting lost about what we\u0027re discussing.\nAll I would like is to validate that `mProperties.format \u003d\u003d descriptor-\u003eformat`.\n\nAnd yes, I believe that technically lets you use YCbCr for a normal RGBA AHB. This matches what Colin says above:\n\u003e my understanding is that it\u0027s legal to use YCbCr sampling for any AHB - it\u0027s just that if the Vk format of the AHB is UNDEFINED it\u0027s necessary to use YCbCr sampling. So it\u0027s totally legal for the client to do YCbCr sampling on an RGBA AHB. I think that this is the case that Saif is setting up for the test, and it\u0027s not actually a test-only situation\n\nbut then that\u0027s inconsistent with what Colin says more recently\n\u003e Would that then mean that we\u0027d allow clients to do YCbCr sampling on a Dawn RGBA texture? I had been under the naive assumption that YCbCr sampling would be restricted to Dawn textures of type External\n\nIMO we should expose what is legal according to Vulkan. Ycbcr can be used for an AHB if its RGB if you would like to. And if the format is External, then you _must_ use Ycbcr.",
+      "parentUuid": "e6d4039c_b66a097a",
       "range": {
         "startLine": 167,
         "startChar": 0,
