@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87e6a13_cc8c4713",
+        "filename": "src/tint/lang/core/type/input_attachment.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-22T21:26:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5a748ee_76c7cd45",
+      "revId": "14377acc15930c43f1bdfd51866e4339d5916c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "931919aa_6ae4bbb5",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-22T21:11:59Z",
       "side": 1,
       "message": "is this needed?",
+      "revId": "14377acc15930c43f1bdfd51866e4339d5916c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee14672_84e9216e",
+        "filename": "src/tint/lang/core/type/sampled_texture.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-22T21:26:14Z",
+      "side": 1,
+      "message": "Not needed. I have removed it.",
+      "parentUuid": "931919aa_6ae4bbb5",
       "revId": "14377acc15930c43f1bdfd51866e4339d5916c32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
