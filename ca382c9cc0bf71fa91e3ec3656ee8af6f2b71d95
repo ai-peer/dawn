@@ -94,6 +94,30 @@
       },
       "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010441c7_c0873bb9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-22T02:00:15Z",
+      "side": 1,
+      "message": "For most common use cases, a render pass just has one attachment. Especially, GetOrCreateTemporaryUniformBuffer() will only be called with 16 for graphite [1].\n\nEven for edge cases, webgpu render pass can only have max 8 color attachments. It shouldn\u0027t cause any thing.\n\nFor D3D11_COPY_NO_OVERWRITE, I think it means the API user will guarantee, the UpdateSubresourc1() call will not overwrite buffer\u0027s range which is being used by GPU, so the call can update the buffer immediately without any synchronization.\n  \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/gpu/graphite/dawn/DawnCommandBuffer.cpp;l\u003d176;drc\u003dc0265133106c7647e90f9aaa4377d28190b1a6a9;bpv\u003d1;bpt\u003d1?q\u003ddawncommandbuffer.cpp\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fskia%2Fsrc%2Fgpu%2Fgraphite%2Fdawn%2F",
+      "parentUuid": "91c03b7e_7ffe9085",
+      "range": {
+        "startLine": 2466,
+        "startChar": 12,
+        "endLine": 2466,
+        "endChar": 37
+      },
+      "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
