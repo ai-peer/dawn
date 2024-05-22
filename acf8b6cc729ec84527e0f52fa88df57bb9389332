@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69071884_e0d86b3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003851
+      },
+      "writtenOn": "2024-05-22T17:52:44Z",
+      "side": 1,
+      "message": "I think there is some confusion around here. YCbCr sampling and external format are two separate (though related) concepts. \n\nAHardwareBuffer can be imported into Vulkan in two ways:\n\n\"Normal\" (same as on other platforms), this means we use VkFormat that _must_ be equivalent of AHB format and we either don\u0027t chain VkExternalFormatAndroid or external format in it _must_ be zero. \nIn this mode, format features are obtained using normal way from vkGetPhysicalDeviceFormatProperties.\nWe can use this mode only if AHB format has Vulkan equivalent format.\n\nUsing \"External format\". This means VkFormat in vkCreateImageInfo _must_ be VK_FORMAT_UNDEFINED and we must chain VkExternalFormatAndroid that has external format non-zero.\nIn this mode, format features come from `VkAndroidHardwareBufferFormatPropertiesANDROID::formatFeatures`. Those format features _are not_ AHB format featuers, they are \"external format\" format features.\nIn this mode because vkFormat is undefined everywhere, app must chain VkExternalFormatAndroid everywhere and use ycbcr sampler.\n\nIt\u0027s up to the app to pick the way it wants to import hardware buffers, but after that it must adhere to one of two completely different flows.\n\nNow, YCbCr sampler is a special sampler for some formats. It can be used only if format has `VK_FORMAT_FEATURE_MIDPOINT_CHROMA_SAMPLES_BIT` or `VK_FORMAT_FEATURE_COSITED_CHROMA_SAMPLES_BIT`.\nExternal format features are guaranteed to have one of those. vkGetPhysicalDeviceFormatProperties are not. \n\nThat means we can (and must because of the format constraint) always use YCbCr Sampler for external format, but can do it for RGBA only if vkGetPhysicalDeviceFormatProperties reports it.\n\nThis roughly means:\n* We need to tell dawn how to import AHB (e.g via bool on SharedTextureMemory descriptor). This would resolve mProperties discussion here.\n* We need a TextureFormat to use with this flow. Vulkan uses UNDEFINED, so we could use wgpu::Undefined, but seems External is a better choice.\n\nIf we want to allow everything that Vulkan do, we need YCbCr sampler capability per format. Vulkan exposes 3 relevant bits: MIDPOINT/COSITED. One of them _must_ be present to use YCbCr sampler. LINEAR -- if we can use linear or only nearest is supported and the explicit reconstruction bool. That would mean we need to extend dawn Format struct to handle those and update all validations. We also probably would need to stop using TextureFormat enum inside dawn and pass Format struct everywhere, so we can have struct per external format and not for enum.\n\nBut in reality:\n* Vulkan is the only backend that supports this.\n* Most of the use-cases will be for External Formats.\n* If someone wants to have ycbcr sampler behaviour without external format, it seems using Dawns ExternalTexture approach is a cross platform solution to this.\n* Only TextureBinding is supported (there are edge cases to support more)\n\nThis makes me think that we should limit our support of ycbcr stuff to External Formats only at this point and assume minimal required capabilities set. We can decide what portion of vulkan weirdness Dawn wants to adopt later, but it will never be cross platform and the complexity is high.\n\nThis still leaves an open question about how do we communicate linear filtering around.",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19531f1a_e274b5b9",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 14
@@ -65,6 +82,24 @@
       "writtenOn": "2024-05-22T16:44:57Z",
       "side": 1,
       "message": "I patched in all the in-flight CLs in both Dawn and Chromium to do integration testing of video playback locally, seeing if we at least get the right info to Skia. Right now we fail this check when creating the STM from the AHB for the VideoFrame. Vasiliy had mentioned to me offline that we need to supply the VkImage with the external format rather than the vkFormat, which I\u0027m sure is at least part of the problem here.\n\nIt would be really valuable for us to be able to create AHBs that are external-format only if possible in Dawn to do testing of these cases, as otherwise we\u0027ll have to do a lot of this testing via actually running Clank, which will be really painful. Vasiliy, do you know if that\u0027s feasible?",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "158f987c_62201b96",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1003851
+      },
+      "writtenOn": "2024-05-22T17:52:44Z",
+      "side": 1,
+      "message": "I\u0027m not aware of any easy way to create external-format only ahb. To do so, we\u0027d need to create AHB with format that doesn\u0027t have mapping to Vulkan format. Here is a list: https://developer.android.com/ndk/reference/group/a-hardware-buffer#ahardwarebuffer_format . AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420 doesn\u0027t have listed Vulkan format, but I definitely saw it being G8_R8_B8 in some places.\n\nBut we should make it regardless because at least some emulator will produce AHBs from VideoDecode that have both formats, but we want to use External one.",
+      "parentUuid": "19531f1a_e274b5b9",
       "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
