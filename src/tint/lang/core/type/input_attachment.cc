@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,9 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/type/sampled_texture.h"
-
-#include <string>
+#include "src/tint/lang/core/type/input_attachment.h"
 
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
@@ -36,33 +34,34 @@
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/text/string_stream.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::core::type::SampledTexture);
+TINT_INSTANTIATE_TYPEINFO(tint::core::type::InputAttachment);
 
 namespace tint::core::type {
 
-SampledTexture::SampledTexture(TextureDimension dim, const Type* type)
-    : Base(Hash(TypeCode::Of<SampledTexture>().bits, dim, type), dim), type_(type) {
+InputAttachment::InputAttachment(const Type* type)
+    : Base(Hash(TypeCode::Of<InputAttachment>().bits, type), TextureDimension::k2d), type_(type) {
     TINT_ASSERT(type_);
 }
 
-SampledTexture::~SampledTexture() = default;
+InputAttachment::~InputAttachment() = default;
 
-bool SampledTexture::Equals(const UniqueNode& other) const {
-    if (auto* o = other.As<SampledTexture>()) {
-        return o->dim() == dim() && o->type_ == type_;
+bool InputAttachment::Equals(const UniqueNode& other) const {
+    if (auto* o = other.As<InputAttachment>()) {
+        return o->type_ == type_;
     }
     return false;
 }
 
-std::string SampledTexture::FriendlyName() const {
+std::string InputAttachment::FriendlyName() const {
     StringStream out;
-    out << "texture_" << dim() << "<" << type_->FriendlyName() << ">";
+    out << "input_attachment"
+        << "<" << type_->FriendlyName() << ">";
     return out.str();
 }
 
-SampledTexture* SampledTexture::Clone(CloneContext& ctx) const {
+InputAttachment* InputAttachment::Clone(CloneContext& ctx) const {
     auto* ty = type_->Clone(ctx);
-    return ctx.dst.mgr->Get<SampledTexture>(dim(), ty);
+    return ctx.dst.mgr->Get<InputAttachment>(ty);
 }
 
 }  // namespace tint::core::type

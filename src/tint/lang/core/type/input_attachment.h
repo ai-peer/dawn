@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,44 +25,43 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/type/sampled_texture.h"
+#ifndef SRC_TINT_LANG_CORE_TYPE_INPUT_ATTACHMENT_H_
+#define SRC_TINT_LANG_CORE_TYPE_INPUT_ATTACHMENT_H_
 
 #include <string>
 
-#include "src/tint/lang/core/type/manager.h"
-#include "src/tint/lang/core/type/texture_dimension.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/ice/ice.h"
-#include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/string_stream.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::type::SampledTexture);
+#include "src/tint/lang/core/type/texture.h"
 
 namespace tint::core::type {
 
-SampledTexture::SampledTexture(TextureDimension dim, const Type* type)
-    : Base(Hash(TypeCode::Of<SampledTexture>().bits, dim, type), dim), type_(type) {
-    TINT_ASSERT(type_);
-}
+/// A texture type.
+class InputAttachment final : public Castable<InputAttachment, Texture> {
+  public:
+    /// Constructor
+    /// @param type the data type of the input attachment
+    explicit InputAttachment(const Type* type);
+    /// Destructor
+    ~InputAttachment() override;
 
-SampledTexture::~SampledTexture() = default;
+    /// @param other the other node to compare against
+    /// @returns true if the this type is equal to @p other
+    bool Equals(const UniqueNode& other) const override;
 
-bool SampledTexture::Equals(const UniqueNode& other) const {
-    if (auto* o = other.As<SampledTexture>()) {
-        return o->dim() == dim() && o->type_ == type_;
-    }
-    return false;
-}
+    /// @returns the subtype of the input attachment
+    Type* type() const { return const_cast<Type*>(type_); }
 
-std::string SampledTexture::FriendlyName() const {
-    StringStream out;
-    out << "texture_" << dim() << "<" << type_->FriendlyName() << ">";
-    return out.str();
-}
+    /// @returns the name for this type that closely resembles how it would be
+    /// declared in WGSL.
+    std::string FriendlyName() const override;
 
-SampledTexture* SampledTexture::Clone(CloneContext& ctx) const {
-    auto* ty = type_->Clone(ctx);
-    return ctx.dst.mgr->Get<SampledTexture>(dim(), ty);
-}
+    /// @param ctx the clone context
+    /// @returns a clone of this type
+    InputAttachment* Clone(CloneContext& ctx) const override;
+
+  private:
+    const Type* const type_;
+};
 
 }  // namespace tint::core::type
+
+#endif  // SRC_TINT_LANG_CORE_TYPE_INPUT_ATTACHMENT_H_
