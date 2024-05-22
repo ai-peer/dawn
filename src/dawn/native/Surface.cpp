@@ -570,6 +570,9 @@ MaybeError Surface::GetCurrentTexture(SurfaceTexture* surfaceTexture) const {
 }
 
 ResultOrError<wgpu::TextureFormat> Surface::GetPreferredFormat(AdapterBase* adapter) const {
+    GetDevice()->GetInstance()->EmitDeprecationWarning(
+        "GetPreferredFormat is deprecated, use GetCapabilities().format[0] instead as the preferred format.");
+
     wgpu::TextureFormat format = wgpu::TextureFormat::Undefined;
 
     DAWN_TRY(mCapabilityCache->WithAdapterCapabilities(
