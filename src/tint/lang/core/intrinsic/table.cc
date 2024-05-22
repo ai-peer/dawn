@@ -494,6 +494,7 @@ StyledText ErrAmbiguousOverload(Context& context,
         }
     }
     TINT_ICE() << err.Plain();
+    return err;
 }
 
 }  // namespace
