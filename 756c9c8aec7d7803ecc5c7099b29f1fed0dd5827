@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9471600f_c6e657e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-05-22T12:43:57Z",
+      "side": 1,
+      "message": "Shall we settle on https://github.com/webgpu-native/webgpu-headers/issues/290 first?",
+      "revId": "756c9c8aec7d7803ecc5c7099b29f1fed0dd5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
