@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13883f8f_25976d0e",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T01:35:57Z",
+      "side": 1,
+      "message": "Unknown seems appropriate to me, for wire deserialization errors. These sound like cases that are supposed to never happen in chromium?\n\nAn Error/OperationError I think should map to cases in the JS API where we would throw an OperationError.",
+      "parentUuid": "4468f68f_28e9514e",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccfccce0_da0ee468",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 2

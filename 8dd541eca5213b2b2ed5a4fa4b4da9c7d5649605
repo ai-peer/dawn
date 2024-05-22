@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9b0490c_f1f28f11",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T01:35:57Z",
+      "side": 1,
+      "message": "Did we decide to rename this? I thought we were usually using the full name (so WGPUBufferMapAsyncStatus even though that already exists)\n\nIf you unrename this (so there\u0027s only one status enum, and the new status are mixed with the old ones) I think it may also help with fixing the unmap issue [1]. For the new entry point you can just squash all the extra error codes down into \"OperationError\"/\"AbortError\" as appropriate.",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1acc7fd4_0e0cb494",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 5
@@ -31,6 +48,57 @@
       "writtenOn": "2024-05-22T00:54:45Z",
       "side": 1,
       "message": "Can this be:\n\n```\n        MaybeError error \u003d [\u0026]() {\n            DAWN_INVALID_IF(mState \u003d\u003d BufferState::PendingMap,\n                \"%s already has an outstanding map pending.\", this);\n            WGPUBufferMapAsyncStatus status;\n            DAWN_TRY(ValidateMapAsync(mode, offset, size, \u0026status));\n            DAWN_TRY(MapAsyncImpl(mode, offset, size));\n            return {};\n        }();\n```",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead964c2_b03777b3",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T01:35:57Z",
+      "side": 1,
+      "message": "I think it would be clearer for this state should change immediately in Unmap(), rather than buried inside ReadyHook. (This happens inside the call to Unmap() anyway, right, so it\u0027s basically the same?)\n\nThat said: [1] how does this case get triggered, anyway? Seems like Unmap() only handles the old mapping type. [2]",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ff3f89d_8f244508",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T01:35:57Z",
+      "side": 1,
+      "message": "It should be AbortError if the device was destroyed (which happens on the client), but OperationError if the device was lost (which happens on the server and propagates to the client). I\u0027m not sure if this code only happens in the first case, or in both.",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a559088e_fb9f3e0c",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T01:35:57Z",
+      "side": 1,
+      "message": "[2]",
       "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
