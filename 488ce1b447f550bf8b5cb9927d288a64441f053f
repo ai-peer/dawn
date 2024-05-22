@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9013f6c8_6ebade97",
+        "filename": "README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-22T18:26:07Z",
+      "side": 1,
+      "message": "I think use these saved searches:\nDawn https://issues.chromium.org/savedsearches/6783309\nTint https://issues.chromium.org/savedsearches/6783217\n(it\u0027s complicated to catch every issue properly)\n\nAnd we should have links for filing bugs too because external users will be funnelled into the Chromium issue wizard which I don\u0027t think can file bugs into Dawn/Tint.\n\nDawn https://issues.chromium.org/issues/new?noWizard\u003dtrue\u0026component\u003d1570784\nTint https://issues.chromium.org/issues/new?noWizard\u003dtrue\u0026component\u003d1571063\n(eventually can replace these with crbug.com/dawn/new and crbug.com/tint/new but those don\u0027t work right now)",
+      "revId": "488ce1b447f550bf8b5cb9927d288a64441f053f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
