@@ -187,6 +187,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "502cf338_2b57c6d1",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-22T11:09:12Z",
+      "side": 1,
+      "message": "Austin is correct. I believe that on the Skia side we should have all the information that we need to pass in, as Austin mentions.",
+      "parentUuid": "d206ee6e_b273ba2b",
+      "range": {
+        "startLine": 465,
+        "startChar": 99,
+        "endLine": 465,
+        "endChar": 215
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee22bf23_f5d2dbd3",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 13
@@ -413,6 +437,30 @@
       "side": 1,
       "message": "I\u0027m getting lost about what we\u0027re discussing.\nAll I would like is to validate that `mProperties.format \u003d\u003d descriptor-\u003eformat`.\n\nAnd yes, I believe that technically lets you use YCbCr for a normal RGBA AHB. This matches what Colin says above:\n\u003e my understanding is that it\u0027s legal to use YCbCr sampling for any AHB - it\u0027s just that if the Vk format of the AHB is UNDEFINED it\u0027s necessary to use YCbCr sampling. So it\u0027s totally legal for the client to do YCbCr sampling on an RGBA AHB. I think that this is the case that Saif is setting up for the test, and it\u0027s not actually a test-only situation\n\nbut then that\u0027s inconsistent with what Colin says more recently\n\u003e Would that then mean that we\u0027d allow clients to do YCbCr sampling on a Dawn RGBA texture? I had been under the naive assumption that YCbCr sampling would be restricted to Dawn textures of type External\n\nIMO we should expose what is legal according to Vulkan. Ycbcr can be used for an AHB if its RGB if you would like to. And if the format is External, then you _must_ use Ycbcr.",
       "parentUuid": "e6d4039c_b66a097a",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 170,
+        "endChar": 0
+      },
+      "revId": "52b1719b1dbc8b1f6226510ebd3840efc17ab703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a11f8976_0d4f13be",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-22T11:09:12Z",
+      "side": 1,
+      "message": "That SGTM. This would just mean that in the test that Saif mentions the texture descriptor should have its format set to RGBA rather than External.\n\nIt would be valuable to be able to create AHBs that have only external formats so that we could test that code path. Saif, could you chat with Vasiliy to see if he knows whether that\u0027s possible to do? It seems to me that we might have such AHBs in Chromium for media integration tests.",
+      "parentUuid": "2827bc03_0b96daff",
       "range": {
         "startLine": 167,
         "startChar": 0,
