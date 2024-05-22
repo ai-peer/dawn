@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "944c0203_c58c0f30",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-22T01:40:26Z",
+      "side": 1,
+      "message": "I suppose Unknown is fine too. Could we a nice message string instead of \"Unknown error in buffer mapping\"",
+      "parentUuid": "13883f8f_25976d0e",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccfccce0_da0ee468",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 2
