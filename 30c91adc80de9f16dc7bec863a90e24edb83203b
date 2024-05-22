@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ca0b58_6ec47523",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-22T21:03:23Z",
+      "side": 1,
+      "message": "+1 with a question about +1. 😊",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564b4547_9ed5f159",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-22T21:03:23Z",
+      "side": 1,
+      "message": "Why is it +1?",
+      "range": {
+        "startLine": 231,
+        "startChar": 52,
+        "endLine": 231,
+        "endChar": 63
+      },
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
