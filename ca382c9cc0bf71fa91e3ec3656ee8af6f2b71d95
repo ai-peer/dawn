@@ -118,6 +118,30 @@
       },
       "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db26f592_18e5f822",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-05-22T02:05:34Z",
+      "side": 1,
+      "message": "https://learn.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_map#meaning-of-d3d11-map-write-no-overwrite\n\nD3D11_COPY_NO_OVERWRITE document is not clear. I think it is similar to D3D11_MAP_WRITE_NO_OVERWRITE.",
+      "parentUuid": "010441c7_c0873bb9",
+      "range": {
+        "startLine": 2466,
+        "startChar": 12,
+        "endLine": 2466,
+        "endChar": 37
+      },
+      "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
