@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed21380_94bf70db",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-05-22T08:52:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3611f274_a2d1ce27",
+      "revId": "0386909679bc06eec0f4778907212c64615ec147",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd54c2f3_475d7b89",
