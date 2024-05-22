@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a4363e_280d831d",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-05-22T05:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88b59737_60880f03",
+      "range": {
+        "startLine": 1200,
+        "startChar": 16,
+        "endLine": 1202,
+        "endChar": 65
+      },
+      "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b96c933_84345e7c",
@@ -89,6 +113,24 @@
       "writtenOn": "2024-05-21T23:57:41Z",
       "side": 1,
       "message": "Please also add test coverage for the fragment shader case.",
+      "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dd70f07_13131a2a",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-05-22T05:28:41Z",
+      "side": 1,
+      "message": "As is tested in [this unittest], Tint subgroups implementation currently only allow `subgroup_size` used as as a compute shader input. So I am not sure how to handle it, since testing `subgroup_size` for fragment shader here will lead to a different error which is not related to uniformity analysis.\n\nIn the latest patch I change the condition into assertion, so it would works now and when we decide to implement `subgroup_size` for fragment shader input, that unit test would hit the assertion here if anything is missed.\n\n\n[this unittest]: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/lang/wgsl/resolver/subgroups_extension_test.cc;drc\u003d710b62fdf1227d0da9c890b4d43f3f1c447f7fc9;l\u003d102,",
+      "parentUuid": "4b96c933_84345e7c",
       "revId": "cb49c24fbd0eccc0dfd5b11aabea382e0aa62211",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
