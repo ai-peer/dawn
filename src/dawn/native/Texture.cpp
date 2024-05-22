@@ -49,23 +49,6 @@ namespace dawn::native {
 
 namespace {
 
-MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
-                                                  const Format& format,
-                                                  wgpu::TextureFormat viewFormatEnum) {
-    const Format* viewFormat;
-    DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(viewFormatEnum));
-
-    DAWN_INVALID_IF(!format.ViewCompatibleWith(*viewFormat),
-                    "The texture view format (%s) is not texture view format compatible "
-                    "with the texture format (%s).",
-                    viewFormatEnum, format.format);
-
-    DAWN_INVALID_IF(device->IsCompatibilityMode() && viewFormat->format != format.format,
-                    "viewFormat (%s) must match format (%s) in compatibility mode.",
-                    viewFormat->format, format.format);
-    return {};
-}
-
 MaybeError ValidateCanViewTextureAs(const DeviceBase* device,
                                     const TextureBase* texture,
                                     const Format& viewFormat,
@@ -510,6 +493,23 @@ wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension
 }
 
 }  // anonymous namespace
+
+MaybeError ValidateTextureViewFormatCompatibility(const DeviceBase* device,
+                                                  const Format& format,
+                                                  wgpu::TextureFormat viewFormatEnum) {
+    const Format* viewFormat;
+    DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(viewFormatEnum));
+
+    DAWN_INVALID_IF(!format.ViewCompatibleWith(*viewFormat),
+                    "The texture view format (%s) is not texture view format compatible "
+                    "with the texture format (%s).",
+                    viewFormatEnum, format.format);
+
+    DAWN_INVALID_IF(device->IsCompatibilityMode() && viewFormat->format != format.format,
+                    "viewFormat (%s) must match format (%s) in compatibility mode.",
+                    viewFormat->format, format.format);
+    return {};
+}
 
 MaybeError ValidateTextureDescriptor(
     const DeviceBase* device,
