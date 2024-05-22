@@ -105,6 +105,24 @@
       "parentUuid": "32c51e29_b37c4fbb",
       "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66799989_cc4a6d66",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-22T21:14:31Z",
+      "side": 1,
+      "message": "Yeah, we can certainly explore making instruction replacement simpler with more builder helpers.\n\nIn the meantime, you can use the insertion helper and the `SetResults()`+`DetachResult()` pattern to slightly improve what you have here:\n```\nb.InsertBefore(call, [\u0026] {\n  auto* visible_size \u003d b.Access\u003cvec2\u003cu32\u003e\u003e(params, 12_u);\n  auto* vec2u_1_1 \u003d b.Splat\u003cvec2\u003cu32\u003e\u003e(1_u);\n  auto* dimensions \u003d b.Add\u003cvec2\u003cu32\u003e\u003e(visible_size, vec2u_1_1);\n  dimensions-\u003eSetResults(Vector{call-\u003eDetachResult()});\n});\ncall-\u003eDestroy();\n```",
+      "parentUuid": "0530992e_34a6f298",
+      "revId": "eb5fff2a6bcff1d3c11d4af7b28bb80cb2edd004",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
