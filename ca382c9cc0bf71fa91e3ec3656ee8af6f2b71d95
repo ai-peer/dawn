@@ -70,6 +70,30 @@
       },
       "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c03b7e_7ffe9085",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 2466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-22T01:39:02Z",
+      "side": 1,
+      "message": "For now, I think the best short term solution is to have a single buffer.\nWriteBuffer should be improved on D3D11. Perhaps you can use D3D11_COPY_NO_OVERWRITE instead of going through the staging buffer. This would benefit other usages of uniform buffers as well - so there is broader positive impact.\n\nIf that improvement is not sufficient, then we could lookinto having a fancier DynamicUploader abstraction that supports uniform usage - or with WebGPU push constants when that is added.",
+      "parentUuid": "d3f178ff_c4568575",
+      "range": {
+        "startLine": 2466,
+        "startChar": 12,
+        "endLine": 2466,
+        "endChar": 37
+      },
+      "revId": "ca382c9cc0bf71fa91e3ec3656ee8af6f2b71d95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
