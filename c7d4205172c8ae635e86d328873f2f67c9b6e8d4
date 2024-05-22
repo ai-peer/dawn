@@ -16,6 +16,24 @@
       "message": "With this patch here the expectationRange is {12, 37, 75, 125} and {13, 38, 76, 126}, thus according to https://issues.chromium.org/issues/42241499 the value got on Vulkan_Mali_G78 ({13, 38, 75, 126}) is in this range.",
       "revId": "c7d4205172c8ae635e86d328873f2f67c9b6e8d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e44efb92_ccd03a07",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T08:06:48Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "1af68102_8623ed02",
+      "revId": "c7d4205172c8ae635e86d328873f2f67c9b6e8d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
