@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eda7e8b4_289cfa81",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T21:19:31Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "564b4547_9ed5f159",
         "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
         "patchSetId": 4
@@ -65,6 +82,30 @@
       "writtenOn": "2024-05-22T21:03:23Z",
       "side": 1,
       "message": "Why is it +1?",
+      "range": {
+        "startLine": 231,
+        "startChar": 52,
+        "endLine": 231,
+        "endChar": 63
+      },
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14df5e92_333c9ed3",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-22T21:19:31Z",
+      "side": 1,
+      "message": "Because of the -1 at [1]",
+      "parentUuid": "564b4547_9ed5f159",
       "range": {
         "startLine": 231,
         "startChar": 52,
