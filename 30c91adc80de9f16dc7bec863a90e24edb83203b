@@ -71,6 +71,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12201128_a039ae41",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-05-23T02:07:01Z",
+      "side": 1,
+      "message": "(Sry I should detect this in my CL but)\nI think this is not a real \"visibleSize\" but a \"loadBounds\". And it makes the following \"visibleSize + vec2(1,1)\" natural (e.g. It removes the wrong hints that we return the dimension size which is larger than \"visible size\"). WDYT?",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8131a43b_1435afef",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-05-23T02:07:01Z",
+      "side": 1,
+      "message": "Oh, that\u0027s why we don\u0027t catch the issue! (We always have square frame) But it seems cts also fail to catch this and that\u0027s not a square frame, which hints a enhancement in cts too 😎",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "564b4547_9ed5f159",
         "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
         "patchSetId": 4
