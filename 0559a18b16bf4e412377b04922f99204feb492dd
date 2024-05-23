@@ -34,6 +34,24 @@
       "parentUuid": "6df37b28_5f6f665e",
       "revId": "0559a18b16bf4e412377b04922f99204feb492dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7e3deb8_ffa62a76",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-23T20:29:54Z",
+      "side": 1,
+      "message": "I plan to add more validation (extension requirement, etc) and validation tests (wrong type passed to inputAtttachmentLoad, input_attachment requires `input_attachment_index` etc) in a separate CL.\n\nbtw, IIUC, it\u0027s not possible to add `input_attachment_extension_test.cc` before adding supports to `resolver.cc`, hence it will be added in the next CL.",
+      "parentUuid": "c87b0728_fc37cbf9",
+      "revId": "0559a18b16bf4e412377b04922f99204feb492dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
