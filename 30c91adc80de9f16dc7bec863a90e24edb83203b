@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49a467c9_a70891d6",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-23T09:13:00Z",
+      "side": 1,
+      "message": "I\u0027m still confused why we\u0027re passing in a non-dimension into the shader. The shader wants dimensions, and has to spend ALU to +1 to get dimensions. Why not just pass in dimensions?\n\nMaybe I\u0027m wrong, but isn\u0027t the only place that wants the -1 value at L340? Can\u0027t we just -1 there?",
+      "parentUuid": "12201128_a039ae41",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8131a43b_1435afef",
         "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
         "patchSetId": 4
