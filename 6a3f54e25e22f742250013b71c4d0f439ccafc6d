@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "124a6469_09c1d9c2",
+        "filename": "src/tint/lang/core/ir/transform/array_length_from_uniform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-23T09:14:55Z",
+      "side": 1,
+      "message": "That\u0027s a good reason. Fair enough.",
+      "parentUuid": "8d9fea31_66630cf8",
+      "revId": "6a3f54e25e22f742250013b71c4d0f439ccafc6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "278fbeef_8c6ed88a",
