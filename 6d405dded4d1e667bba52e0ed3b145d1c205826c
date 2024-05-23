@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3e6178_bd6f21b3",
+        "filename": "src/tint/lang/wgsl/ast/input_attachment_index_attribute.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-23T12:24:17Z",
+      "side": 1,
+      "message": "```suggestion\n/// A input attachment attribute (enabled with the input attachments extension)\n```",
+      "revId": "6d405dded4d1e667bba52e0ed3b145d1c205826c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
