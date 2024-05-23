@@ -511,6 +511,10 @@ config("common_config") {
       "/wd4267",  # conversion from 'size_t' to 'type', possible loss of data
       "/wd4996",  # std::iterator class template (used as a base class to
                   # provide typedefs) is deprecated in C++17
+
+      # TODO(b/341890053) Fix DXC and enable this warning:
+      # https://issues.chromium.org/issues/341890053#comment5
+      "/wd2666",
     ]
   }
 
