@@ -33,6 +33,23 @@
       "message": "Hmm, it looks like Chromium build of Dawn is misconfigured.\nWill look into fixing that Chromium-side.",
       "revId": "93cd312db5979714b320359bdd984e4e9e1f6a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca808268_7d313992",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-05-23T14:52:57Z",
+      "side": 1,
+      "message": "Should be fixed by https://chromium-review.googlesource.com/c/chromium/src/+/5563646.",
+      "revId": "93cd312db5979714b320359bdd984e4e9e1f6a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
