@@ -1395,10 +1395,11 @@ Result<Module> Decode(Slice<const std::byte> encoded) {
         return Failure{"failed to deserialize protobuf"};
     }
 
-    Module mod_out;
-    Decoder{mod_in, mod_out}.Decode();
+    return Decode(mod_in);
+}
 
-    return mod_out;
+Result<Module> Decode(const pb::Module& mod_in) {
+    return Decoder{mod_in}.Decode();
 }
 
 }  // namespace tint::core::ir::binary
