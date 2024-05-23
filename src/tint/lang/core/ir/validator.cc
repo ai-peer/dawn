@@ -728,7 +728,8 @@ void Validator::CheckOperandsNotNull(const Instruction* inst,
                                      size_t end_operand) {
     auto operands = inst->Operands();
     for (size_t i = start_operand; i <= end_operand; i++) {
-        CheckOperandNotNull(inst, operands[i], i);
+        auto* operand = i < operands.Length() ? operands[i] : nullptr;
+        CheckOperandNotNull(inst, operand, i);
     }
 }
 
