@@ -20,6 +20,13 @@
 # CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+import("//build/config/android/config.gni")
+import("//build/config/cast.gni")
+import("//build/config/chromeos/ui_mode.gni")
+import("//build/config/compiler/compiler.gni")
+import("//build/config/cronet/config.gni")
+import("//build/config/dcheck_always_on.gni")
+import("//build/config/logging.gni")
 import("//build/config/sanitizers/sanitizers.gni")
 
 # MSVC's cl.exe compiler is not supported.
@@ -48,3 +55,7 @@ enable_dangling_raw_ptr_checks_default = _supported
 raw_ptr_zero_on_construct_default = true
 raw_ptr_zero_on_move_default = true
 raw_ptr_zero_on_destruct_default = false
+
+# Allow embedders to opt-out of C++20 build which is set as default.
+# Set to true to use C++20 by default.
+assert_cpp20_default = true
