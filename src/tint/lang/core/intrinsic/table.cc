@@ -162,11 +162,11 @@ void PrintCandidates(StyledText& err,
                      VectorRef<const core::type::Type*> args);
 
 /// Raises an ICE when no overload is a clear winner of overload resolution
-StyledText ErrAmbiguousOverload(Context& context,
-                                std::string_view intrinsic_name,
-                                VectorRef<const core::type::Type*> template_args,
-                                VectorRef<const core::type::Type*> args,
-                                VectorRef<Candidate> candidates);
+[[noreturn]] void ErrAmbiguousOverload(Context& context,
+                                       std::string_view intrinsic_name,
+                                       VectorRef<const core::type::Type*> template_args,
+                                       VectorRef<const core::type::Type*> args,
+                                       VectorRef<Candidate> candidates);
 
 /// @return a string representing a call to a builtin with the given argument types.
 StyledText CallSignature(std::string_view intrinsic_name,
@@ -458,7 +458,7 @@ Result<Candidate, StyledText> ResolveCandidate(Context& context,
         // Re-sort the candidates with the most promising first
         SortCandidates(candidates);
         // Raise an error
-        return ErrAmbiguousOverload(context, intrinsic_name, template_args, args, candidates);
+        ErrAmbiguousOverload(context, intrinsic_name, template_args, args, candidates);
     }
 
     return std::move(*best);
@@ -477,11 +477,11 @@ void PrintCandidates(StyledText& ss,
     }
 }
 
-StyledText ErrAmbiguousOverload(Context& context,
-                                std::string_view intrinsic_name,
-                                VectorRef<const core::type::Type*> template_args,
-                                VectorRef<const core::type::Type*> args,
-                                VectorRef<Candidate> candidates) {
+[[noreturn]] void ErrAmbiguousOverload(Context& context,
+                                       std::string_view intrinsic_name,
+                                       VectorRef<const core::type::Type*> template_args,
+                                       VectorRef<const core::type::Type*> args,
+                                       VectorRef<Candidate> candidates) {
     StyledText err;
     err << "ambiguous overload while attempting to match "
         << CallSignature(intrinsic_name, template_args, args) << "\n";
