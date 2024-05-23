@@ -529,7 +529,8 @@ TEST_P(SurfaceTests, CopyTo) {
         !(caps.usages & (wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding)));
 
     wgpu::SurfaceConfiguration config = GetPreferredConfiguration(surface);
-    config.usage = caps.usages;
+    config.usage = caps.usages & (wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                  wgpu::TextureUsage::TextureBinding);
     config.width = 1;
     config.height = 1;
     surface.Configure(&config);
