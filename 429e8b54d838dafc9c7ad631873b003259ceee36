@@ -34,6 +34,24 @@
       ],
       "revId": "429e8b54d838dafc9c7ad631873b003259ceee36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda95ab6_5d37c0b9",
+        "filename": "src/tint/lang/core/constant/splat_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001736
+      },
+      "writtenOn": "2024-05-23T19:21:44Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/189714",
+      "parentUuid": "85e1a8f8_086db0c5",
+      "revId": "429e8b54d838dafc9c7ad631873b003259ceee36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
