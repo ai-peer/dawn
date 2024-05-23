@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75729e84_b091f86d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-23T11:30:00Z",
+      "side": 1,
+      "message": "Thanks, Vasiliy! Here are my suggestions based on my understanding, but I might be understanding something incorrectly/incompletely:\n\n1. We add `useExternalFormat` bool to SharedTextureMemoryAHardwareBufferDescriptor.\n2. We allow that bool to be specified regardless of the vkFormat of the AHB (apart from anything else, this will facilitate testing).\n3. We validate that if the `useExternalFormat` bool is set, the AHB\u0027s external format is non-zero (it\u0027s not 100% clear to me whether every AHB has a non-zero external format or not).\n4. We validate that if the vk format is zero, the `useExternalFormat` bool is set.\n5. If the `useExternalFormat` bool is set, we create the VkImage based on the external format rather than the vk format and make whatever other changes need to be made in that creation path.\n6. We validate that the texture descriptor for textures created from an AHB STM has format External iff `useExternalFormat` was specified on the AHB.\n7. We don\u0027t put format type External in the format table but rather deal with querying its properties/capabilities explicitly wherever we actually need to (based on either the STM or the YCbCr info depending on which is available/can be more easily made available). We can revisit this decision if it becomes unwieldy. AFAIK we wouldn\u0027t need to query any info from the format in either Chromium or Skia because we have the YCbCr info explicitly in both places. So that leaves only internal use cases in Dawn, and I would think that we\u0027ll be able to handle any use cases within Dawn if/as they arise.\n8. As Vasiliy highlighted, we support YCbCr sampling only for the use cases that currently arise in production (i.e., clients can set only the information that we\u0027ve already exposed, since that\u0027s all that\u0027s actually needed for Chromium/Skia and we don\u0027t have any other prospective use cases at the moment). Not 100% sure if this is at odds with the above \"We allow that bool to be specified regardless of the vkFormat of the AHB\" - if so, hopefully we could support this restriction while still facilitating testing, e.g. finding testing scenarios that match the use cases arising in production?\n\nWhat do folks think? Note that if we agree here, I think that we could limit this CL to the introduction of the External format type and have STMVk grow the ability to handle an AHB that the client wants to use external format with correctly in a followup CL.",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19531f1a_e274b5b9",
