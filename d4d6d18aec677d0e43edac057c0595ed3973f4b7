@@ -16,6 +16,24 @@
       "message": "Can we also delete the code that loads these functions?",
       "revId": "d4d6d18aec677d0e43edac057c0595ed3973f4b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ed5194_a16d8aa1",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-05-23T23:10:59Z",
+      "side": 0,
+      "message": "Almost. I\u0027ll remove them when baseVertex is cleaned up as well.",
+      "parentUuid": "d54c45f7_25e2f124",
+      "revId": "d4d6d18aec677d0e43edac057c0595ed3973f4b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
