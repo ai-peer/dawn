@@ -16,6 +16,24 @@
       "message": "```suggestion\n/// A input attachment attribute (enabled with the input attachments extension)\n```",
       "revId": "6d405dded4d1e667bba52e0ed3b145d1c205826c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82360ea6_1d674e89",
+        "filename": "src/tint/lang/wgsl/ast/input_attachment_index_attribute.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-23T12:39:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3e6178_bd6f21b3",
+      "revId": "6d405dded4d1e667bba52e0ed3b145d1c205826c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
