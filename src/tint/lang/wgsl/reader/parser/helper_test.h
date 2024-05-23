@@ -28,11 +28,6 @@
 #ifndef SRC_TINT_LANG_WGSL_READER_PARSER_HELPER_TEST_H_
 #define SRC_TINT_LANG_WGSL_READER_PARSER_HELPER_TEST_H_
 
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-
 #include "gtest/gtest.h"
 #include "src/tint/lang/wgsl/reader/parser/parser.h"
 
