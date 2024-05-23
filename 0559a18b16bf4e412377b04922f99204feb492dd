@@ -52,6 +52,24 @@
       "parentUuid": "c87b0728_fc37cbf9",
       "revId": "0559a18b16bf4e412377b04922f99204feb492dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bddd0682_f2e61500",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-23T20:31:40Z",
+      "side": 1,
+      "message": "That\u0027s fine, as long as it\u0027s done before you add any parsing support (otherwise it\u0027ll be exposed to non-internal users).",
+      "parentUuid": "a7e3deb8_ffa62a76",
+      "revId": "0559a18b16bf4e412377b04922f99204feb492dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
