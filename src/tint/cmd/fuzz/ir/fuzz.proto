@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,51 +25,13 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_CORE_IR_LOAD_H_
-#define SRC_TINT_LANG_CORE_IR_LOAD_H_
+syntax = "proto3";
 
-#include <string>
+package tint.cmd.fuzz.ir.pb;
 
-#include "src/tint/lang/core/ir/operand_instruction.h"
-#include "src/tint/utils/rtti/castable.h"
+import "src/tint/lang/core/ir/binary/ir.proto";
 
-namespace tint::core::ir {
-
-/// A load instruction in the IR.
-class Load final : public Castable<Load, OperandInstruction<1, 1>> {
-  public:
-    /// The offset in Operands() for the from value
-    static constexpr size_t kFromOperandOffset = 0;
-
-    /// The fixed number of results returned by this instruction
-    static constexpr size_t kNumResults = 1;
-
-    /// The fixed number of operands used by this instruction
-    static constexpr size_t kNumOperands = 1;
-
-    /// Constructor (no results, no operands)
-    Load();
-
-    /// Constructor
-    /// @param result the result value
-    /// @param from the value being loaded from
-    Load(InstructionResult* result, Value* from);
-
-    ~Load() override;
-
-    /// @copydoc Instruction::Clone()
-    Load* Clone(CloneContext& ctx) override;
-
-    /// @returns the value being loaded from
-    Value* From() { return Operand(kFromOperandOffset); }
-
-    /// @returns the value being loaded from
-    const Value* From() const { return Operand(kFromOperandOffset); }
-
-    /// @returns the friendly name for the instruction
-    std::string FriendlyName() const override { return "load"; }
-};
-
-}  // namespace tint::core::ir
-
-#endif  // SRC_TINT_LANG_CORE_IR_LOAD_H_
+message Root {
+    tint.core.ir.binary.pb.Module module = 1;
+    bytes data = 2;
+}
