@@ -52,9 +52,9 @@ class SurfaceTests : public DawnTest {
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // TODO(crbug.com/dawn/2531): Failing on newer Linux/Intel driver version.
-        // However, IsIntel() and IsMesa() don't work with the null backend.
-        DAWN_SUPPRESS_TEST_IF(IsLinux() && IsNull());
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsVulkan() && IsIntel() && IsMesa("23.2"));
+        DAWN_SUPPRESS_TEST_IF(IsMesaSoftware());
+        DAWN_SUPPRESS_TEST_IF(IsSwiftshader());
 
         glfwSetErrorCallback([](int code, const char* message) {
             ErrorLog() << "GLFW error " << code << " " << message;

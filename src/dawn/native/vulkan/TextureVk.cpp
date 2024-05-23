@@ -30,6 +30,7 @@
 #include <utility>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/DynamicUploader.h"
@@ -768,6 +769,7 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device,
                                             const UnpackedPtr<TextureDescriptor>& descriptor,
                                             VkImageUsageFlags extraUsages) {
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
+    DAWN_DEBUG() << absl::StrFormat("%s %s", descriptor->usage, descriptor->format);
     DAWN_TRY(texture->InitializeAsInternalTexture(extraUsages));
     return std::move(texture);
 }

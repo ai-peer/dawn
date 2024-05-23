@@ -176,6 +176,8 @@ ResultOrError<UnpackedPtr<SurfaceDescriptor>> ValidateSurfaceDescriptor(
             const X11Functions* x11 = instance->GetOrLoadX11Functions();
             DAWN_INVALID_IF(!x11->IsX11Loaded(), "Couldn't load libX11.");
 
+            SynchronouslyDebugX11(reinterpret_cast<Display*>(subDesc->display));
+
             XErrorHandler oldErrorHandler =
                 x11->xSetErrorHandler([](Display*, XErrorEvent*) { return 0; });
             XWindowAttributes attributes;
