@@ -16,6 +16,23 @@
       "message": "Austin, PTAL.\nThis is needed to resume vulkan-deps-\u003eDawn autoroll.\n\nI\u0027ve built with GN locally, but I don\u0027t know how to build CMake and Bazel.\nHopefully the CQ catches any problems.",
       "revId": "93cd312db5979714b320359bdd984e4e9e1f6a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b321cf6_d05dca0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-05-23T10:20:57Z",
+      "side": 1,
+      "message": "Hmm, it looks like Chromium build of Dawn is misconfigured.\nWill look into fixing that Chromium-side.",
+      "revId": "93cd312db5979714b320359bdd984e4e9e1f6a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
