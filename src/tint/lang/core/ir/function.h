@@ -158,10 +158,7 @@ class Function : public Castable<Function, Value> {
 
     /// Sets the root block for the function
     /// @param target the root block
-    void SetBlock(Block* target) {
-        TINT_ASSERT(target != nullptr);
-        block_ = target;
-    }
+    void SetBlock(Block* target) { block_ = target; }
 
     /// @returns the function root block
     ir::Block* Block() { return block_; }
