@@ -81,6 +81,30 @@
       },
       "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e94c542_44ff29d5",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-23T09:17:18Z",
+      "side": 1,
+      "message": "\u003e `Destroy()` doesn\u0027t actually remove the uses.\n\nReally? That\u0027s surprising, and sounds like it needs fixing.",
+      "parentUuid": "b13b8ee9_411606fb",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
