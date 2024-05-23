@@ -192,7 +192,7 @@ TEST_F(IR_ValidatorTest, Function_ParameterWithNullFunction) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
-              R"(:1:17 error: function parameter has nullptr parent function
+              R"(:1:17 error: function parameter has null parent function
 %my_func = func(%my_param:f32):void {
                 ^^^^^^^^^^^^^
 
@@ -274,6 +274,7 @@ note: # Disassembly
 TEST_F(IR_ValidatorTest, CallToEntryPointFunction) {
     auto* f = b.Function("f", ty.void_());
     auto* g = b.Function("g", ty.void_(), Function::PipelineStage::kCompute);
+    g->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
         b.Call(g);
@@ -284,7 +285,7 @@ TEST_F(IR_ValidatorTest, CallToEntryPointFunction) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
-              R"(:3:20 error: call: call target must not have a pipeline stage
+              R"(:3:20 error: call: target must not have a pipeline stage
     %2:void = call %g
                    ^^
 
@@ -299,7 +300,7 @@ note: # Disassembly
     ret
   }
 }
-%g = @compute func():void {
+%g = @compute @workgroup_size(1, 1, 1) func():void {
   $B2: {
     ret
   }
@@ -1878,7 +1879,7 @@ TEST_F(IR_ValidatorTest, ExitIf_NullIf) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(), R"(:5:9 error: exit_if: has no parent control instruction
-        exit_if  # undef
+        exit_if  # undef parent if
         ^^^^^^^
 
 :4:7 note: in block
@@ -1890,7 +1891,7 @@ note: # Disassembly
   $B1: {
     if true [t: $B2] {  # if_1
       $B2: {  # true
-        exit_if  # undef
+        exit_if  # undef parent if
       }
     }
     ret
@@ -2266,7 +2267,7 @@ TEST_F(IR_ValidatorTest, ExitSwitch_NullSwitch) {
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
               R"(:5:9 error: exit_switch: has no parent control instruction
-        exit_switch  # undef
+        exit_switch  # undef parent switch
         ^^^^^^^^^^^
 
 :4:7 note: in block
@@ -2278,7 +2279,7 @@ note: # Disassembly
   $B1: {
     switch true [c: (default, $B2)] {  # switch_1
       $B2: {  # case
-        exit_switch  # undef
+        exit_switch  # undef parent switch
       }
     }
     ret
@@ -3556,7 +3557,7 @@ TEST_F(IR_ValidatorTest, ExitLoop_NullLoop) {
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
               R"(:5:9 error: exit_loop: has no parent control instruction
-        exit_loop  # undef
+        exit_loop  # undef parent loop
         ^^^^^^^^^
 
 :4:7 note: in block
@@ -3568,7 +3569,7 @@ note: # Disassembly
   $B1: {
     loop [b: $B2, c: $B3] {  # loop_1
       $B2: {  # body
-        exit_loop  # undef
+        exit_loop  # undef parent loop
       }
       $B3: {  # continuing
         next_iteration  # -> $B2
@@ -4601,14 +4602,6 @@ TEST_F(IR_ValidatorTest, StoreVectorElement_NullIndex) {
   $B1: {
   ^^^
 
-:4:37 error: store_vector_element: value type 'i32' does not match vector pointer element type 'f32'
-    store_vector_element %2, undef, 2i
-                                    ^^
-
-:2:3 note: in block
-  $B1: {
-  ^^^
-
 note: # Disassembly
 %my_func = func():void {
   $B1: {
@@ -4772,7 +4765,7 @@ TEST_P(IR_ValidatorRefTypeTest, FnRet) {
     } else {
         ASSERT_NE(res, Success);
         EXPECT_THAT(res.Failure().reason.Str(),
-                    testing::HasSubstr("references are not permitted as return types"));
+                    testing::HasSubstr("return type is not constructable"));
     }
 }
 

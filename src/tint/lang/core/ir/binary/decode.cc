@@ -33,6 +33,7 @@
 #include <utility>
 
 #include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/control_instruction.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/type/depth_multisampled_texture.h"
 #include "src/tint/lang/core/type/depth_texture.h"
@@ -42,6 +43,7 @@
 #include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/storage_texture.h"
 #include "src/tint/lang/core/type/vector.h"
+#include "src/tint/utils/containers/hashset.h"
 #include "src/tint/utils/containers/transform.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/macros/compiler.h"
@@ -127,7 +129,12 @@ struct Decoder {
             PopulateBlock(blocks_[i], mod_in_.blocks()[static_cast<int>(i)]);
         }
 
-        if (CheckNoBlockCycles()) {
+        if (diags_.ContainsErrors()) {
+            // Note: Its not safe to call InferControlInstruction() with a broken IR.
+            return Failure{std::move(diags_)};
+        }
+
+        if (CheckBlocks()) {
             for (auto* exit : exit_ifs_) {
                 InferControlInstruction(exit, &ExitIf::SetIf);
             }
@@ -168,32 +175,49 @@ struct Decoder {
         return number;
     }
 
-    /// Traverses the parents of blocks looking for cycles.
-    /// @returns true if all blocks are acyclic
-    bool CheckNoBlockCycles() {
-        Hashset<ir::Block*, 8> checked;  // Confirmed to be acyclic
-        for (auto* block : blocks_) {
-            if (!checked.Contains(block)) {
-                Hashset<ir::Block*, 8> seen;
-                while (block) {
-                    checked.Add(block);
-                    if (!seen.Add(block)) {
-                        Error() << "cyclic nesting of blocks detected";
-                        return false;
-                    }
-                    auto* parent = block->Parent();
-                    if (!parent) {
-                        break;
-                    }
-                    block = parent->Block();
+    /// @returns true if all blocks are reachable, acyclic nesting depth is less than or equal to
+    /// kMaxBlockDepth.
+    bool CheckBlocks() {
+        const size_t kMaxBlockDepth = 64;
+        Vector<std::pair<const ir::Block*, size_t>, 32> pending;
+        pending.Push(std::make_pair(mod_out_.root_block, 0));
+        for (auto& fn : mod_out_.functions) {
+            pending.Push(std::make_pair(fn->Block(), 0));
+        }
+        Hashset<const ir::Block*, 32> seen;
+        while (!pending.IsEmpty()) {
+            const auto block_depth = pending.Pop();
+            const auto* block = block_depth.first;
+            const size_t depth = block_depth.second;
+            if (!seen.Add(block)) {
+                Error() << "cyclic nesting of blocks";
+                return false;
+            }
+            if (depth > kMaxBlockDepth) {
+                Error() << "block nesting exceeds " << kMaxBlockDepth;
+                return false;
+            }
+            for (auto* inst = block->Instructions(); inst; inst = inst->next) {
+                if (auto* ctrl = inst->As<ir::ControlInstruction>()) {
+                    ctrl->ForeachBlock([&](const ir::Block* child) {
+                        pending.Push(std::make_pair(child, depth + 1));
+                    });
                 }
             }
         }
+
+        for (auto* block : blocks_) {
+            if (!seen.Contains(block)) {
+                Error() << "unreachable block";
+                return false;
+            }
+        }
+
         return true;
     }
 
     template <typename EXIT, typename CTRL_INST>
-    void InferControlInstruction(EXIT* exit, void (EXIT::*set)(CTRL_INST*)) {
+    void InferControlInstruction(EXIT* exit, void (EXIT::* set)(CTRL_INST*)) {
         for (auto* block = exit->Block(); block;) {
             auto* parent = block->Parent();
             if (!parent) {
@@ -774,10 +798,15 @@ struct Decoder {
 
     const type::Type* CreateTypeArray(const pb::TypeArray& array_in) {
         auto* element = Type(array_in.element());
-        uint32_t stride = static_cast<uint32_t>(array_in.stride());
-        uint32_t count = static_cast<uint32_t>(array_in.count());
+        uint32_t stride = array_in.stride();
+        uint32_t count = array_in.count();
         if (element->Align() == 0 || element->Size() == 0) {
             Error() << "cannot create an array of an unsized type";
+            return mod_out_.Types().invalid();
+        }
+        uint32_t implicit_stride = tint::RoundUp(element->Align(), element->Size());
+        if (stride < implicit_stride) {
+            Error() << "array element stride is smaller than the implicit stride";
             return mod_out_.Types().invalid();
         }
         return count > 0 ? mod_out_.Types().array(element, count, stride)
@@ -981,25 +1010,45 @@ struct Decoder {
     const core::constant::Value* CreateConstantComposite(
         const pb::ConstantValueComposite& composite_in) {
         auto* type = Type(composite_in.type());
-        if (TINT_UNLIKELY(type->Elements().count == 0)) {
-            Error() << "cannot create a splat of type " << type->FriendlyName();
+        auto type_elements = type->Elements();
+        size_t num_values = static_cast<size_t>(composite_in.elements().size());
+        if (TINT_UNLIKELY(type_elements.count == 0)) {
+            Error() << "cannot create a composite of type " << type->FriendlyName();
+            return b.InvalidConstant()->Value();
+        }
+        if (TINT_UNLIKELY(type_elements.count != num_values)) {
+            Error() << "constant composite type " << type->FriendlyName() << " expects "
+                    << type_elements.count << " elements, but " << num_values << " values encoded";
             return b.InvalidConstant()->Value();
         }
         Vector<const core::constant::Value*, 8> elements_out;
         for (auto element_id : composite_in.elements()) {
-            elements_out.Push(ConstantValue(element_id));
+            uint32_t i = static_cast<uint32_t>(elements_out.Length());
+            auto* value = ConstantValue(element_id);
+            if (auto* el_type = type->Element(i); TINT_UNLIKELY(value->Type() != el_type)) {
+                Error() << "constant composite element value type " << value->Type()->FriendlyName()
+                        << " does not match element type " << el_type->FriendlyName();
+                return b.InvalidConstant()->Value();
+            }
+            elements_out.Push(value);
         }
         return mod_out_.constant_values.Composite(type, std::move(elements_out));
     }
 
     const core::constant::Value* CreateConstantSplat(const pb::ConstantValueSplat& splat_in) {
         auto* type = Type(splat_in.type());
-        if (TINT_UNLIKELY(type->Elements().count == 0)) {
+        auto elements = type->Elements();
+        if (TINT_UNLIKELY(!elements.type)) {
             Error() << "cannot create a splat of type " << type->FriendlyName();
             return b.InvalidConstant()->Value();
         }
-        auto* elem = ConstantValue(splat_in.elements());
-        return mod_out_.constant_values.Splat(type, elem);
+        auto* value = ConstantValue(splat_in.elements());
+        if (TINT_UNLIKELY(elements.type != value->Type())) {
+            Error() << "constant splat element value type " << value->Type()->FriendlyName()
+                    << " does not match element type " << elements.type->FriendlyName();
+            return b.InvalidConstant()->Value();
+        }
+        return mod_out_.constant_values.Splat(type, value);
     }
 
     const core::constant::Value* ConstantValue(uint32_t id) {

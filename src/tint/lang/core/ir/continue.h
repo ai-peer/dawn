@@ -47,6 +47,9 @@ class Continue final : public Castable<Continue, Terminator> {
     /// The base offset in Operands() for the args
     static constexpr size_t kArgsOperandOffset = 0;
 
+    /// The fixed number of results returned by this instruction
+    static constexpr size_t kNumResults = 0;
+
     /// Constructor (no operands, no loop)
     Continue();
 
