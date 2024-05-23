@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e4da66_a6de5b07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-23T09:37:54Z",
+      "side": 1,
+      "message": "CQing for now, will do the rename of visibleSize in a follow up if folks agree this is necessary.",
+      "revId": "09ce2c746a383159a3e2a1d0c2eba35ad01c154a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

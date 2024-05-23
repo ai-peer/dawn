@@ -139,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99ee0ab2_9cf2941f",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-23T09:37:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8131a43b_1435afef",
+      "revId": "30c91adc80de9f16dc7bec863a90e24edb83203b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564b4547_9ed5f159",
