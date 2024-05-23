@@ -49,6 +49,8 @@ libtint_source_set("constant") {
     "composite.h",
     "eval.cc",
     "eval.h",
+    "invalid.cc",
+    "invalid.h",
     "manager.cc",
     "manager.h",
     "node.cc",

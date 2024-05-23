@@ -44,6 +44,8 @@ tint_add_target(tint_lang_core_constant lib
   lang/core/constant/composite.h
   lang/core/constant/eval.cc
   lang/core/constant/eval.h
+  lang/core/constant/invalid.cc
+  lang/core/constant/invalid.h
   lang/core/constant/manager.cc
   lang/core/constant/manager.h
   lang/core/constant/node.cc
