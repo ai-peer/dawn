@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb55bee5_9f64eca3",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-23T09:05:23Z",
+      "side": 1,
+      "message": "Something the expectation updater now does that the formatter doesn\u0027t is move all the KEEP blocks above non-KEEP blocks. The reason for this is that KEEP blocks cannot be modified (that\u0027s why they\u0027re KEEP), so declaring those expectations first allows the non-KEEP to be modified around the pinned expectations.\n\nMaybe in the future the formatter should do this too.",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399b7e9f_f09cf97d",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-23T09:05:23Z",
+      "side": 1,
+      "message": "Creating files in unit tests like this is a bit icky, and I\u0027ve had trouble doing this sort of thing with sandboxed build systems (bazel) before.\nI\u0027d recommend moving the small formatting logic of the cmd out to `tools/src/cts/expectations/expectations.go` as `func (c *Content) Format() { ... }` and moving the tests there.",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
