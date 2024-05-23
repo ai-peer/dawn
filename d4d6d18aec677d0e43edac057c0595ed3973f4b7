@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d54c45f7_25e2f124",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-23T21:03:18Z",
+      "side": 0,
+      "message": "Can we also delete the code that loads these functions?",
+      "revId": "d4d6d18aec677d0e43edac057c0595ed3973f4b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
