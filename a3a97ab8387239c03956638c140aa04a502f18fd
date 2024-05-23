@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8306dec0_bbc6d744",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-23T18:05:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "eb55bee5_9f64eca3",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "399b7e9f_f09cf97d",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-23T09:05:23Z",
       "side": 1,
       "message": "Creating files in unit tests like this is a bit icky, and I\u0027ve had trouble doing this sort of thing with sandboxed build systems (bazel) before.\nI\u0027d recommend moving the small formatting logic of the cmd out to `tools/src/cts/expectations/expectations.go` as `func (c *Content) Format() { ... }` and moving the tests there.",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c405c6c_8c5b97ca",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-23T18:05:37Z",
+      "side": 1,
+      "message": "Done, I was hoping there was something like Python\u0027s `pyfakefs` that lets you transparently mock out the filesystem in tests, but sounds like no. All the solutions I found while looking seem like you need to modify non-test code.",
+      "parentUuid": "399b7e9f_f09cf97d",
       "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
