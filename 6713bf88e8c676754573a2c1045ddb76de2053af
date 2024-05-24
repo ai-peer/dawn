@@ -105,6 +105,30 @@
       },
       "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39d9b3f_698cf971",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-24T00:35:25Z",
+      "side": 1,
+      "message": "No I lied. I was looking at `Instruction::Destroy()`, but `OperandInstruction::Destroy()` takes care of clearing operands.\n\nI\u0027ve moved the `Destroy()` out of the callback. This is definitely broken in other transforms too though, so maybe we should change `ForEachUses` to do two passes.",
+      "parentUuid": "5e94c542_44ff29d5",
+      "range": {
+        "startLine": 103,
+        "startChar": 20,
+        "endLine": 103,
+        "endChar": 47
+      },
+      "revId": "6713bf88e8c676754573a2c1045ddb76de2053af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
