@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b7efc2_3b0bddfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-24T16:19:18Z",
+      "side": 1,
+      "message": "I added some more validation here. PTAL",
+      "revId": "fe9aadf03e1ccc127f1192805a64fd4ce9a3f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
