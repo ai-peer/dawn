@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4139d75c_1ccc1d21",
+        "filename": "src/tint/lang/core/ir/disassembly.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-24T14:18:27Z",
+      "side": 1,
+      "message": "I\u0027ve been using `null`. There\u0027s also `undef` which we\u0027ve used a bunch, but I\u0027m not sure if we actually went that direction or not.",
+      "range": {
+        "startLine": 323,
+        "startChar": 87,
+        "endLine": 323,
+        "endChar": 94
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "36deb3d2_230256c5",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/disassembly.cc",
+              "range": {
+                "startLine": 323,
+                "startChar": 0,
+                "endLine": 324,
+                "endChar": 0
+              },
+              "replacement": "        out_ \u003c\u003c NameOf(p) \u003c\u003c \":\" \u003c\u003c StyleType(p-\u003eType() ? p-\u003eType()-\u003eFriendlyName() : \"null\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "50f278f4a4f9db9854e700dfe74796882467e9a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
