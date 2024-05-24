@@ -16,6 +16,24 @@
       "message": "As with the `input_attachment` type, we should also check that `enabled_extensions_` contains `kChromiumInternalInputAttachements`, and add a test for that.",
       "revId": "2d257622230317ef0fad22d6bc63c741f831d31c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "523a4cc7_ca75e2a4",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 3896,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-24T08:57:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb2ef44b_870456df",
+      "revId": "2d257622230317ef0fad22d6bc63c741f831d31c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
