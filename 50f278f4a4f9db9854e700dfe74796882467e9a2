@@ -40,6 +40,30 @@
       ],
       "revId": "50f278f4a4f9db9854e700dfe74796882467e9a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba9c14b_d5fbc0bd",
+        "filename": "src/tint/lang/core/ir/disassembly.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-24T14:27:55Z",
+      "side": 1,
+      "message": "Went with `undef` as I couldn\u0027t see any `null` in the disassembler, but `undef` seems to be used plenty.",
+      "parentUuid": "4139d75c_1ccc1d21",
+      "range": {
+        "startLine": 323,
+        "startChar": 87,
+        "endLine": 323,
+        "endChar": 94
+      },
+      "revId": "50f278f4a4f9db9854e700dfe74796882467e9a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
