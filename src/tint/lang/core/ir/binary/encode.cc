@@ -74,6 +74,7 @@
 #include "src/tint/lang/core/type/f16.h"
 #include "src/tint/lang/core/type/f32.h"
 #include "src/tint/lang/core/type/i32.h"
+#include "src/tint/lang/core/type/input_attachment.h"
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/multisampled_texture.h"
 #include "src/tint/lang/core/type/pointer.h"
@@ -344,6 +345,9 @@ struct Encoder {
             auto& bp_out = *var_out.mutable_binding_point();
             BindingPoint(bp_out, *bp_in);
         }
+        if (auto iidx_in = var_in->InputAttachmentIndex()) {
+            var_out.set_input_attachment_index(iidx_in.value());
+        }
     }
 
     void InstructionUnreachable(pb::InstructionUnreachable&, const ir::Unreachable*) {}
@@ -390,6 +394,9 @@ struct Encoder {
                     TypeExternalTexture(*type_out.mutable_external_texture(), t);
                 },
                 [&](const core::type::Sampler* s) { TypeSampler(*type_out.mutable_sampler(), s); },
+                [&](const core::type::InputAttachment* i) {
+                    TypeInputAttachment(*type_out.mutable_input_attachment(), i);
+                },
                 TINT_ICE_ON_NO_MATCH);
 
             mod_out_.mutable_types()->Add(std::move(type_out));
@@ -490,6 +497,10 @@ struct Encoder {
     }
 
     void TypeExternalTexture(pb::TypeExternalTexture&, const core::type::ExternalTexture*) {}
+    void TypeInputAttachment(pb::TypeInputAttachment& input_attachment_out,
+                             const core::type::InputAttachment* input_attachment_in) {
+        input_attachment_out.set_sub_type(Type(input_attachment_in->type()));
+    }
 
     void TypeSampler(pb::TypeSampler& sampler_out, const core::type::Sampler* sampler_in) {
         sampler_out.set_kind(SamplerKind(sampler_in->kind()));
@@ -1129,8 +1140,7 @@ struct Encoder {
             case core::BuiltinFn::kSubgroupBroadcast:
                 return pb::BuiltinFn::subgroup_broadcast;
             case core::BuiltinFn::kInputAttachmentLoad:
-                // TODO(341117913): handle this function in IR pb.
-                break;
+                return pb::BuiltinFn::input_attachment_load;
             case core::BuiltinFn::kNone:
                 break;
         }

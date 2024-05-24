@@ -3314,5 +3314,21 @@ fn f() -> i32 {
 )");
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// chromium_internal_input_attachments
+////////////////////////////////////////////////////////////////////////////////
+TEST_F(IRToProgramRoundtripTest, Call_InputAttachmentLoad) {
+    RUN_TEST(R"(
+enable chromium_internal_input_attachments;
+
+@group(0) @binding(0) @input_attachment_index(3) var input_tex : input_attachment<f32>;
+
+@fragment
+fn main() -> @location(0) vec4<f32> {
+  return inputAttachmentLoad(input_tex);
+}
+)");
+}
+
 }  // namespace
 }  // namespace tint::wgsl
