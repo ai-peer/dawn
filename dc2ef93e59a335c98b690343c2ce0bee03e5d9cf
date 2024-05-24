@@ -16,6 +16,135 @@
       "message": "PTAL\n\nThe `results.txt` that is produced with this CL applied is identical to the one produced without the CL, so I don\u0027t believe there should be any changes to output.",
       "revId": "dc2ef93e59a335c98b690343c2ce0bee03e5d9cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d7370e_1af45487",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-24T09:39:39Z",
+      "side": 1,
+      "message": "Looks great. Fantastic job!",
+      "revId": "dc2ef93e59a335c98b690343c2ce0bee03e5d9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8df28d_5fa042fb",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-24T09:39:39Z",
+      "side": 1,
+      "message": "ubernit: Go style is cammelCase. Could just call this `tag`.",
+      "range": {
+        "startLine": 273,
+        "startChar": 11,
+        "endLine": 273,
+        "endChar": 21
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "821dedbf_59ac767c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/src/cmd/cts/common/results.go",
+              "range": {
+                "startLine": 273,
+                "startChar": 0,
+                "endLine": 277,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\tfor _, tag :\u003d range r.Tags {\n\t\t\t\t\tif tag.Key \u003d\u003d \"typ_tag\" {\n\t\t\t\t\t\ttags.Add(tag.Value)\n\t\t\t\t\t} else if tag.Key \u003d\u003d \"javascript_duration\" {\n"
+            },
+            {
+              "path": "tools/src/cmd/cts/common/results.go",
+              "range": {
+                "startLine": 278,
+                "startChar": 0,
+                "endLine": 279,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t\tif duration, err \u003d time.ParseDuration(tag.Value); err !\u003d nil {\n"
+            },
+            {
+              "path": "tools/src/cmd/cts/common/results.go",
+              "range": {
+                "startLine": 281,
+                "startChar": 0,
+                "endLine": 282,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t} else if tag.Key \u003d\u003d \"may_exonerate\" {\n"
+            },
+            {
+              "path": "tools/src/cmd/cts/common/results.go",
+              "range": {
+                "startLine": 283,
+                "startChar": 0,
+                "endLine": 284,
+                "endChar": 0
+              },
+              "replacement": "\t\t\t\t\t\tif mayExonerate, err \u003d strconv.ParseBool(tag.Value); err !\u003d nil {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dc2ef93e59a335c98b690343c2ce0bee03e5d9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6e3ce2_47adead7",
+        "filename": "tools/src/resultsdb/resultsdb.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-24T09:39:39Z",
+      "side": 1,
+      "message": "übernit: Can use backticks so you don\u0027t have to escape the double quotes",
+      "range": {
+        "startLine": 104,
+        "startChar": 42,
+        "endLine": 104,
+        "endChar": 56
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "78481fff_f3f10369",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/src/resultsdb/resultsdb.go",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "\t\tbuildIds \u003d append(buildIds, fmt.Sprintf(`\"build-%v\"`, id))\n"
+            }
+          ]
+        }
+      ],
+      "revId": "dc2ef93e59a335c98b690343c2ce0bee03e5d9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
