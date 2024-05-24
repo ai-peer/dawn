@@ -163,6 +163,9 @@ struct State {
 
         // Add a wrapper function to return either a single value or a struct.
         auto* wrapper = b.Function(ty.void_(), ep->Stage());
+        if (auto size = ep->WorkgroupSize()) {
+            wrapper->SetWorkgroupSize(*size);
+        }
         if (auto name = ir.NameOf(ep)) {
             ir.SetName(ep, name.Name() + "_inner");
             ir.SetName(wrapper, name);
