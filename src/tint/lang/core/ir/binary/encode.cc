@@ -1128,6 +1128,9 @@ struct Encoder {
                 return pb::BuiltinFn::subgroup_ballot;
             case core::BuiltinFn::kSubgroupBroadcast:
                 return pb::BuiltinFn::subgroup_broadcast;
+            case core::BuiltinFn::kInputAttachmentLoad:
+                // TODO(341117913): handle this function in IR pb.
+                break;
             case core::BuiltinFn::kNone:
                 break;
         }
