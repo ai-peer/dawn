@@ -45,6 +45,9 @@ BindingInfoType GetBindingInfoType(const BindingInfo& info) {
         },
         [](const StaticSamplerBindingInfo&) -> BindingInfoType {
             return BindingInfoType::StaticSampler;
+        },
+        [](const InputAttachmentBindingInfo&) -> BindingInfoType {
+            return BindingInfoType::InputAttachment;
         });
 }
 
@@ -87,7 +90,11 @@ void IncrementBindingCounts(BindingCounts* bindingCounts,
     } else if (entry->sampler.type != wgpu::SamplerBindingType::Undefined) {
         perStageBindingCountMember = &PerStageBindingCounts::samplerCount;
     } else if (entry->texture.sampleType != wgpu::TextureSampleType::Undefined) {
-        perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
+        if (entry->texture.viewDimension == kInternalInputAttachmentDim) {
+            perStageBindingCountMember = &PerStageBindingCounts::inputAttachmentCount;
+        } else {
+            perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
+        }
     } else if (entry->storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
         perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
     } else if (entry.Get<ExternalTextureBindingLayout>()) {
@@ -121,6 +128,8 @@ void AccumulateBindingCounts(BindingCounts* bindingCounts, const BindingCounts& 
         bindingCounts->perStage[stage].externalTextureCount +=
             rhs.perStage[stage].externalTextureCount;
         bindingCounts->perStage[stage].staticSamplerCount += rhs.perStage[stage].staticSamplerCount;
+        bindingCounts->perStage[stage].inputAttachmentCount +=
+            rhs.perStage[stage].inputAttachmentCount;
     }
 }
 
@@ -254,5 +263,9 @@ SamplerBindingInfo::SamplerBindingInfo(const SamplerBindingLayout& apiLayout)
 
 StaticSamplerBindingInfo::StaticSamplerBindingInfo(const StaticSamplerBindingLayout& apiLayout)
     : sampler(apiLayout.sampler) {}
+
+InputAttachmentBindingInfo::InputAttachmentBindingInfo() = default;
+InputAttachmentBindingInfo::InputAttachmentBindingInfo(wgpu::TextureSampleType sampleType)
+    : sampleType(sampleType) {}
 
 }  // namespace dawn::native
