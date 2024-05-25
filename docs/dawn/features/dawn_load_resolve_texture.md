@@ -69,3 +69,4 @@ Notes:
    - Similarly, a render pipeline created with `wgpu::ColorTargetStateExpandResolveTextureDawn`'s `enabled` flag = `true` won't be able to be used in render passes that don't use `ExpandResolveTexture` load op for the respective color attachment.
  - Currently the `ExpandResolveTexture` LoadOp only works on color attachment, this could be changed in future.
  - The texture is not supported if it is not resolvable by WebGPU standard. This means this feature currently doesn't work with integer textures.
+ - Using `ExpandResolveTexture` load op on a multiplanar texture's view is not supported currently.
