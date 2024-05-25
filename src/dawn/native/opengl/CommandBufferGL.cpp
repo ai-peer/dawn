@@ -401,7 +401,8 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                                         view->GetBaseArrayLayer(), access,
                                         texture->GetGLFormat().internalFormat);
                     texture->Touch();
-                });
+                },
+                [](const InputAttachmentBindingInfo&) { DAWN_UNREACHABLE(); });
         }
     }
 

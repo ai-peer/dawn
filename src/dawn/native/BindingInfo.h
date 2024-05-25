@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_BINDINGINFO_H_
 
 #include <cstdint>
+#include <map>
 #include <variant>
 #include <vector>
 
@@ -63,7 +64,9 @@ enum class BindingInfoType {
     Texture,
     StorageTexture,
     ExternalTexture,
-    StaticSampler
+    StaticSampler,
+    // Internal to vulkan only.
+    InputAttachment,
 };
 
 // A mirror of wgpu::BufferBindingLayout for use inside dawn::native.
@@ -120,6 +123,14 @@ struct StaticSamplerBindingInfo {
 // A mirror of wgpu::ExternalTextureBindingLayout for use inside dawn::native.
 struct ExternalTextureBindingInfo {};
 
+// Internal to vulkan only.
+struct InputAttachmentBindingInfo {
+    InputAttachmentBindingInfo();
+    explicit InputAttachmentBindingInfo(wgpu::TextureSampleType sampleType);
+
+    wgpu::TextureSampleType sampleType;
+};
+
 struct BindingInfo {
     BindingNumber binding;
     wgpu::ShaderStage visibility;
@@ -128,7 +139,8 @@ struct BindingInfo {
                  SamplerBindingInfo,
                  TextureBindingInfo,
                  StorageTextureBindingInfo,
-                 StaticSamplerBindingInfo>
+                 StaticSamplerBindingInfo,
+                 InputAttachmentBindingInfo>
         bindingLayout;
 };
 
@@ -147,6 +159,7 @@ struct PerStageBindingCounts {
     uint32_t uniformBufferCount;
     uint32_t externalTextureCount;
     uint32_t staticSamplerCount;
+    uint32_t inputAttachmentCount;
 };
 
 struct BindingCounts {
