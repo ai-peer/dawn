@@ -154,6 +154,11 @@ VkAccessFlags VulkanAccessFlags(wgpu::TextureUsage usage, const Format& format) 
         flags |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
     }
 
+    if (usage & kResolveAttachmentLoadingUsage) {
+        // The texture is read as subpass input in fragment shader
+        flags |= VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;
+    }
+
     if (usage & kPresentAcquireTextureUsage) {
         // The present acquire usage is only used internally by the swapchain and is never used in
         // combination with other usages.
@@ -233,6 +238,10 @@ VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage,
         if (shaderStage & wgpu::ShaderStage::Compute) {
             flags |= VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
         }
+    }
+    if (usage & kResolveAttachmentLoadingUsage) {
+        // The texture is read as subpass input in fragment shader
+        flags |= VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
     }
     if (usage & (wgpu::TextureUsage::RenderAttachment | kReadOnlyRenderAttachment)) {
         if (format.HasDepthOrStencil()) {
@@ -574,7 +583,9 @@ ResultOrError<wgpu::TextureFormat> FormatFromVkFormat(const Device* device, VkFo
 
 // Converts the Dawn usage flags to Vulkan usage flags. Also needs the format to choose
 // between color and depth attachment usages.
-VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& format) {
+VkImageUsageFlags VulkanImageUsage(DeviceBase* device,
+                                   wgpu::TextureUsage usage,
+                                   const Format& format) {
     VkImageUsageFlags flags = 0;
 
     if (usage & wgpu::TextureUsage::CopySrc) {
@@ -601,6 +612,12 @@ VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& forma
         } else {
             flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
         }
+    }
+
+    if (!format.IsMultiPlanar() &&
+        (usage & (wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) &&
+        device->HasFeature(Feature::DawnLoadResolveTexture)) {
+        flags |= VK_IMAGE_USAGE_INPUT_ATTACHMENT_BIT;
     }
 
     // Choosing Vulkan image usages should not know about kReadOnlyRenderAttachment because that's
@@ -643,6 +660,7 @@ VkImageLayout VulkanImageLayout(const Format& format, wgpu::TextureUsage usage) 
 
             // The layout returned here is the one that will be used at bindgroup creation time.
         case wgpu::TextureUsage::TextureBinding:
+        case kResolveAttachmentLoadingUsage:
             // The sampled image can be used as a readonly depth/stencil attachment at the same
             // time if it is a depth/stencil renderable format, so the image layout need to be
             // VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL.
@@ -834,7 +852,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
     createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
     createInfo.format = VulkanImageFormat(device, GetFormat().format);
     createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
-    createInfo.usage = VulkanImageUsage(GetInternalUsage(), GetFormat()) | extraUsages;
+    createInfo.usage = VulkanImageUsage(device, GetInternalUsage(), GetFormat()) | extraUsages;
     createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
     createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
@@ -954,7 +972,7 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
                                            external_memory::Service* externalMemoryService) {
     Device* device = ToBackend(GetDevice());
     VkFormat format = VulkanImageFormat(device, GetFormat().format);
-    VkImageUsageFlags usage = VulkanImageUsage(GetInternalUsage(), GetFormat());
+    VkImageUsageFlags usage = VulkanImageUsage(device, GetInternalUsage(), GetFormat());
 
     [[maybe_unused]] bool supportsDisjoint;
     DAWN_INVALID_IF(
@@ -1761,7 +1779,7 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
 
     VkImageViewUsageCreateInfo usageInfo = {};
     usageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO;
-    usageInfo.usage = VulkanImageUsage(usage, GetFormat());
+    usageInfo.usage = VulkanImageUsage(device, usage, GetFormat());
     createInfo.pNext = &usageInfo;
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
