@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a882a402_3154d75b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-25T00:24:05Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "f022f51e5ba80955f8b6f2af0306bbb0b736a848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e21b8521_45bce240",
+        "filename": "tools/src/cts/expectations/expectations_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-25T00:24:05Z",
+      "side": 1,
+      "message": "Seems like there should be a presubmit for `//tools/src` that enforces things are formatted since I was able to submit this using spaces instead of tabs.",
+      "revId": "f022f51e5ba80955f8b6f2af0306bbb0b736a848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
