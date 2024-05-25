@@ -18,6 +18,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd44b5dc_f4ca27bb",
+        "filename": "tools/src/cmd/cts/common/results_test.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-25T10:42:12Z",
+      "side": 1,
+      "message": "readability: It\u0027s idiomatic to use a compound if for this sort of code.",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "1280e788_a310d8ab",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "tools/src/cmd/cts/common/results_test.go",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 56,
+                "endChar": 0
+              },
+              "replacement": "\t\tif err :\u003d f(\u0026result); err !\u003d nil {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "f022f51e5ba80955f8b6f2af0306bbb0b736a848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e21b8521_45bce240",
