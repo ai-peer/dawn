@@ -75,7 +75,7 @@ class Device final : public d3d::Device {
     float GetTimestampPeriodInNS() const override;
     bool MayRequireDuplicationOfIndirectParameters() const override;
     uint64_t GetBufferCopyOffsetAlignmentForDepthStencil() const override;
-    bool IsResolveTextureBlitWithDrawSupported() const override;
+    bool CanTexureLoadResolveTargetInTheSameRenderpass() const override;
     void SetLabelImpl() override;
 
     void DisposeKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex) override;

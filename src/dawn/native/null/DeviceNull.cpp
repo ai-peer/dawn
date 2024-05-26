@@ -573,7 +573,7 @@ float Device::GetTimestampPeriodInNS() const {
     return 1.0f;
 }
 
-bool Device::IsResolveTextureBlitWithDrawSupported() const {
+bool Device::CanTexureLoadResolveTargetInTheSameRenderpass() const {
     return true;
 }
 
