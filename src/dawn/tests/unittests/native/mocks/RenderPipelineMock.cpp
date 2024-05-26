@@ -47,9 +47,10 @@ Ref<RenderPipelineMock> RenderPipelineMock::Create(
     DeviceMock* device,
     const UnpackedPtr<RenderPipelineDescriptor>& descriptor) {
     RenderPipelineDescriptor appliedDescriptor;
-    Ref<PipelineLayoutBase> layoutRef = ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
-                                            device, **descriptor, &appliedDescriptor)
-                                            .AcquireSuccess();
+    Ref<PipelineLayoutBase> layoutRef =
+        ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
+            device, **descriptor, &appliedDescriptor, /*allowInternalBinding=*/false)
+            .AcquireSuccess();
     return AcquireRef(new NiceMock<RenderPipelineMock>(device, Unpack(&appliedDescriptor)));
 }
 
