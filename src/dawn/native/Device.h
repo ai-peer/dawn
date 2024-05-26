@@ -396,9 +396,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // See https://crbug.com/dawn/161
     virtual bool ShouldApplyIndexBufferOffsetToFirstIndex() const;
 
-    // Whether the backend supports blitting the resolve texture with draw calls in the same render
-    // pass that it will be resolved into.
-    virtual bool IsResolveTextureBlitWithDrawSupported() const;
+    // Whether the backend wants to emulate ExpandResolveTexture load op by blitting the resolve
+    // texture with draw calls in the same render pass that it will be resolved into.
+    virtual bool UseResolveTextureBlitForExpandLoadOp() const;
 
     bool HasFeature(Feature feature) const;
 
@@ -464,6 +464,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    void EnableAdditionalWGSLExtension(tint::wgsl::Extension extension);
 
     // Device lost event needs to be protected for now because mock device needs it.
     // TODO(dawn:1702) Make this private and move the class in the implementation file when we mock
