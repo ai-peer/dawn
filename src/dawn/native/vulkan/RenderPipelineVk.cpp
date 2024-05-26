@@ -349,6 +349,7 @@ MaybeError RenderPipeline::InitializeImpl() {
                                             ->GetHandleAndSpirv(stage, programmableStage, layout,
                                                                 clampFragDepth, emitPointSize,
                                                                 /* fullSubgroups */ {}));
+        mHasInputAttachment = mHasInputAttachment || moduleAndSpirv.hasInputAttachment;
         // Record cache key for each shader since it will become inaccessible later on.
         StreamIn(&mCacheKey, stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
 
@@ -503,25 +504,40 @@ MaybeError RenderPipeline::InitializeImpl() {
     // Get a VkRenderPass that matches the attachment formats for this pipeline, load/store ops
     // don't matter so set them all to LoadOp::Load / StoreOp::Store. Whether the render pass
     // has resolve target and whether depth/stencil attachment is read-only also don't matter,
-    // so set them both to false.
-    VkRenderPass renderPass = VK_NULL_HANDLE;
+    // so set them both to false. Except when the render pass has ExpandResolveTexture load op then
+    // they matter.
+    RenderPassCache::RenderPassInfo renderPassInfo;
+    RenderPassCacheQuery renderPassQuery;
     {
-        RenderPassCacheQuery query;
+        ColorAttachmentMask resolveMask =
+            GetAttachmentState()->GetExpandResolveInfo().resolveTargetsMask;
+        ColorAttachmentMask expandResolveMask =
+            GetAttachmentState()->GetExpandResolveInfo().attachmentsToExpandResolve;
 
         for (auto i : IterateBitSet(GetColorAttachmentsMask())) {
-            query.SetColor(i, GetColorAttachmentFormat(i), wgpu::LoadOp::Load, wgpu::StoreOp::Store,
-                           false);
+            wgpu::LoadOp colorLoadOp = wgpu::LoadOp::Load;
+            bool hasResolveTarget = resolveMask.test(i);
+
+            if (expandResolveMask.test(i)) {
+                // ExpandResolveTexture will use 2 subpasses in a render pass so we have to create
+                // an appropriate query.
+                colorLoadOp = wgpu::LoadOp::ExpandResolveTexture;
+            }
+            renderPassQuery.SetColor(i, GetColorAttachmentFormat(i), colorLoadOp,
+                                     wgpu::StoreOp::Store, hasResolveTarget);
         }
 
         if (HasDepthStencilAttachment()) {
-            query.SetDepthStencil(GetDepthStencilFormat(), wgpu::LoadOp::Load, wgpu::StoreOp::Store,
-                                  false, wgpu::LoadOp::Load, wgpu::StoreOp::Store, false);
+            renderPassQuery.SetDepthStencil(GetDepthStencilFormat(), wgpu::LoadOp::Load,
+                                            wgpu::StoreOp::Store, false, wgpu::LoadOp::Load,
+                                            wgpu::StoreOp::Store, false);
         }
 
-        query.SetSampleCount(GetSampleCount());
+        renderPassQuery.SetSampleCount(GetSampleCount());
 
-        StreamIn(&mCacheKey, query);
-        DAWN_TRY_ASSIGN(renderPass, device->GetRenderPassCache()->GetRenderPass(query));
+        StreamIn(&mCacheKey, renderPassQuery);
+        DAWN_TRY_ASSIGN(renderPassInfo,
+                        device->GetRenderPassCache()->GetRenderPass(renderPassQuery));
     }
 
     // The create info chains in a bunch of things created on the stack here or inside state
@@ -543,10 +559,14 @@ MaybeError RenderPipeline::InitializeImpl() {
         (GetStageMask() & wgpu::ShaderStage::Fragment) ? &colorBlend : nullptr;
     createInfo.pDynamicState = &dynamic;
     createInfo.layout = ToBackend(GetLayout())->GetHandle();
-    createInfo.renderPass = renderPass;
-    createInfo.subpass = 0;
+    createInfo.renderPass = renderPassInfo.renderPass;
     createInfo.basePipelineHandle = VkPipeline{};
     createInfo.basePipelineIndex = -1;
+
+    // - If the pipeline uses input attachments in shader, currently this is only used by
+    //   ExpandResolveTexture subpass, hence we need to set the subpass to 0.
+    // - Otherwise, the pipeline will operate on the main subpass.
+    createInfo.subpass = mHasInputAttachment ? 0 : renderPassInfo.mainSubpass;
 
     // Record cache key information now since createInfo is not stored.
     StreamIn(&mCacheKey, createInfo, layout->GetCacheKey());

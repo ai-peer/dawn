@@ -138,7 +138,7 @@ class Device final : public DeviceBase {
 
     float GetTimestampPeriodInNS() const override;
 
-    bool IsResolveTextureBlitWithDrawSupported() const override;
+    bool CanTexureLoadResolveTargetInTheSameRenderpass() const override;
 
   private:
     using DeviceBase::DeviceBase;
