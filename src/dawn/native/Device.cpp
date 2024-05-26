@@ -1823,6 +1823,10 @@ const tint::wgsl::AllowedFeatures& DeviceBase::GetWGSLAllowedFeatures() const {
     return mWGSLAllowedFeatures;
 }
 
+void DeviceBase::EnableAdditionalWGSLExtension(tint::wgsl::Extension extension) {
+    mWGSLAllowedFeatures.extensions.insert(extension);
+}
+
 bool DeviceBase::IsValidationEnabled() const {
     return !IsToggleEnabled(Toggle::SkipValidation);
 }
