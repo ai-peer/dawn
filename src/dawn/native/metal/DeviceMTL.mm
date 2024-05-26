@@ -401,7 +401,7 @@ float Device::GetTimestampPeriodInNS() const {
     return mTimestampPeriod;
 }
 
-bool Device::IsResolveTextureBlitWithDrawSupported() const {
+bool Device::UseResolveTextureBlitForExpandLoadOp() const {
     return true;
 }
 
