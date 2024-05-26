@@ -84,5 +84,17 @@ TEST_F(TimestampQueryUnsafeAPIValidationTest, WriteTimestampOnCommandEncoder) {
     ASSERT_DEVICE_ERROR(encoder.Finish());
 }
 
+// Check 3D textures with BC compressed format is an unsafe API.
+TEST_F(UnsafeAPIValidationTest, BCCompressedTexture3D) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e3D;
+    descriptor.size.width = 4;
+    descriptor.size.height = 4;
+    descriptor.size.depthOrArrayLayers = 4;
+    descriptor.format = wgpu::TextureFormat::BC1RGBAUnorm;
+    descriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+}
+
 }  // anonymous namespace
 }  // namespace dawn
