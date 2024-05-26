@@ -27,6 +27,7 @@
 
 #include "dawn/native/vulkan/RenderPassCache.h"
 
+#include "absl/container/inlined_vector.h"
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Enumerator.h"
 #include "dawn/common/HashUtils.h"
@@ -45,9 +46,7 @@ VkAttachmentLoadOp VulkanAttachmentLoadOp(wgpu::LoadOp op) {
         case wgpu::LoadOp::Clear:
             return VK_ATTACHMENT_LOAD_OP_CLEAR;
         case wgpu::LoadOp::ExpandResolveTexture:
-            // TODO(dawn:1710): Implement this on vulkan.
-            DAWN_UNREACHABLE();
-            break;
+            return VK_ATTACHMENT_LOAD_OP_DONT_CARE;
         case wgpu::LoadOp::Undefined:
             DAWN_UNREACHABLE();
             break;
@@ -69,7 +68,37 @@ VkAttachmentStoreOp VulkanAttachmentStoreOp(wgpu::StoreOp op) {
     }
     DAWN_UNREACHABLE();
 }
+
+void InitializeLoadResolveSubpassDependencies(
+    absl::InlinedVector<VkSubpassDependency, 2>& subpassDependencies) {
+    // Dependency for resolve texture's read -> resolve texture's write.
+    subpassDependencies.push_back({});
+    VkSubpassDependency* dependency = &subpassDependencies.back();
+    dependency->srcSubpass = 0;
+    dependency->dstSubpass = 1;
+    dependency->srcStageMask = VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT;
+    dependency->dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency->srcAccessMask = VK_ACCESS_INPUT_ATTACHMENT_READ_BIT;
+    dependency->dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    dependency->dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
+
+    // Dependency for color write in subpass 0 -> color write in subpass 1
+    subpassDependencies.push_back({});
+    dependency = &subpassDependencies.back();
+    dependency->srcSubpass = 0;
+    dependency->dstSubpass = 1;
+    dependency->srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency->dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency->srcAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    dependency->dstAccessMask =
+        VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    dependency->dependencyFlags = VK_DEPENDENCY_BY_REGION_BIT;
+}
 }  // anonymous namespace
+
+uint32_t GetRenderPassMainSubpassIndex(const RenderPassCacheQuery& query) {
+    return query.expandResolveMask.any() ? 1 : 0;
+}
 
 // RenderPassCacheQuery
 
@@ -83,6 +112,7 @@ void RenderPassCacheQuery::SetColor(ColorAttachmentIndex index,
     colorLoadOp[index] = loadOp;
     colorStoreOp[index] = storeOp;
     resolveTargetMask[index] = hasResolveTarget;
+    expandResolveMask.set(index, loadOp == wgpu::LoadOp::ExpandResolveTexture);
 }
 
 void RenderPassCacheQuery::SetDepthStencil(wgpu::TextureFormat format,
@@ -140,14 +170,17 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
     // filled with VK_ATTACHMENT_UNUSED.
     PerColorAttachment<VkAttachmentReference> colorAttachmentRefs;
     PerColorAttachment<VkAttachmentReference> resolveAttachmentRefs;
+    PerColorAttachment<VkAttachmentReference> inputAttachmentRefs;
     VkAttachmentReference depthStencilAttachmentRef;
 
     for (auto i : Range(kMaxColorAttachmentsTyped)) {
         colorAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
         resolveAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
+        inputAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
         // The Khronos Vulkan validation layer will complain if not set
         colorAttachmentRefs[i].layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
         resolveAttachmentRefs[i].layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        inputAttachmentRefs[i].layout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
     }
 
     // Contains the attachment description that will be chained in the create info
@@ -208,27 +241,58 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
     }
 
     uint32_t resolveAttachmentCount = 0;
+    ColorAttachmentIndex highestInputAttachmentIndex(static_cast<uint8_t>(0));
+
     for (auto i : IterateBitSet(query.resolveTargetMask)) {
-        auto& attachmentRef = resolveAttachmentRefs[i];
-        auto& attachmentDesc = attachmentDescs[attachmentCount];
+        auto& resolveAttachmentRef = resolveAttachmentRefs[i];
+        auto& resolveAttachmentDesc = attachmentDescs[attachmentCount];
 
-        attachmentRef.attachment = attachmentCount;
-        attachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        resolveAttachmentRef.attachment = attachmentCount;
+        resolveAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
-        attachmentDesc.flags = 0;
-        attachmentDesc.format = VulkanImageFormat(mDevice, query.colorFormats[i]);
-        attachmentDesc.samples = VK_SAMPLE_COUNT_1_BIT;
-        attachmentDesc.loadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
-        attachmentDesc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
-        attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
-        attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        resolveAttachmentDesc.flags = 0;
+        resolveAttachmentDesc.format = VulkanImageFormat(mDevice, query.colorFormats[i]);
+        resolveAttachmentDesc.samples = VK_SAMPLE_COUNT_1_BIT;
+        resolveAttachmentDesc.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
+        if (query.expandResolveMask.test(i)) {
+            resolveAttachmentDesc.loadOp = VK_ATTACHMENT_LOAD_OP_LOAD;
+            resolveAttachmentDesc.initialLayout = VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
+
+            inputAttachmentRefs[i].attachment = resolveAttachmentRefs[i].attachment;
+
+            highestInputAttachmentIndex = i;
+        } else {
+            resolveAttachmentDesc.loadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+            resolveAttachmentDesc.initialLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+        }
+
+        resolveAttachmentDesc.finalLayout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
 
         attachmentCount++;
         resolveAttachmentCount++;
     }
 
+    absl::InlinedVector<VkSubpassDescription, 2> subpassDescs;
+    absl::InlinedVector<VkSubpassDependency, 2> subpassDependencies;
+    if (query.expandResolveMask.any()) {
+        // To simulate ExpandResolveTexture, we use two subpasses. The first subpass will read the
+        // resolve texture as input attachment.
+        subpassDescs.push_back({});
+        VkSubpassDescription& subpassDesc = subpassDescs.back();
+        subpassDesc.flags = 0;
+        subpassDesc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
+        subpassDesc.inputAttachmentCount = static_cast<uint8_t>(highestInputAttachmentIndex) + 1;
+        subpassDesc.pInputAttachments = inputAttachmentRefs.data();
+        subpassDesc.colorAttachmentCount = static_cast<uint8_t>(highestColorAttachmentIndexPlusOne);
+        subpassDesc.pColorAttachments = colorAttachmentRefs.data();
+        subpassDesc.pDepthStencilAttachment = depthStencilAttachment;
+
+        InitializeLoadResolveSubpassDependencies(subpassDependencies);
+    }
+
     // Create the VkSubpassDescription that will be chained in the VkRenderPassCreateInfo
-    VkSubpassDescription subpassDesc;
+    subpassDescs.push_back({});
+    VkSubpassDescription& subpassDesc = subpassDescs.back();
     subpassDesc.flags = 0;
     subpassDesc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
     subpassDesc.inputAttachmentCount = 0;
@@ -255,10 +319,10 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
     createInfo.flags = 0;
     createInfo.attachmentCount = attachmentCount;
     createInfo.pAttachments = attachmentDescs.data();
-    createInfo.subpassCount = 1;
-    createInfo.pSubpasses = &subpassDesc;
-    createInfo.dependencyCount = 0;
-    createInfo.pDependencies = nullptr;
+    createInfo.subpassCount = subpassDescs.size();
+    createInfo.pSubpasses = subpassDescs.data();
+    createInfo.dependencyCount = subpassDependencies.size();
+    createInfo.pDependencies = subpassDependencies.data();
 
     // Create the render pass from the zillion parameters
     VkRenderPass renderPass;
@@ -280,6 +344,7 @@ size_t RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& query
     for (auto i : IterateBitSet(query.colorMask)) {
         HashCombine(&hash, query.colorFormats[i], query.colorLoadOp[i], query.colorStoreOp[i]);
     }
+    HashCombine(&hash, query.expandResolveMask);
 
     HashCombine(&hash, query.hasDepthStencil);
     if (query.hasDepthStencil) {
@@ -312,6 +377,10 @@ bool RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& a,
             (a.colorStoreOp[i] != b.colorStoreOp[i])) {
             return false;
         }
+    }
+
+    if (a.expandResolveMask != b.expandResolveMask) {
+        return false;
     }
 
     if (a.hasDepthStencil != b.hasDepthStencil) {
