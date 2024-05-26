@@ -66,6 +66,7 @@ class AttachmentState final : public ObjectBase,
     bool HasDepthStencilAttachment() const;
     wgpu::TextureFormat GetDepthStencilFormat() const;
     uint32_t GetSampleCount() const;
+    ColorAttachmentMask GetResolveTargetsMask() const;
     ColorAttachmentMask GetExpandResolveUsingAttachmentsMask() const;
     bool HasPixelLocalStorage() const;
     const std::vector<wgpu::TextureFormat>& GetStorageAttachmentSlots() const;
@@ -86,7 +87,11 @@ class AttachmentState final : public ObjectBase,
     wgpu::TextureFormat mDepthStencilFormat = wgpu::TextureFormat::Undefined;
     uint32_t mSampleCount = 0;
 
+    // Mask indicates which attachments use `ExpandResolveTexture` load op.
     ColorAttachmentMask mAttachmentsToExpandResolve;
+    // Mask indicates which attachments have resolve target. Only enabled if
+    // mAttachmentsToExpandResolve has any bit set.
+    ColorAttachmentMask mResolveTargetsMask;
     bool mHasPLS = false;
     std::vector<wgpu::TextureFormat> mStorageAttachmentSlots;
 };
