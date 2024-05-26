@@ -802,6 +802,17 @@ TEST_F(CompressedTextureFormatsValidationTests, 2DArrayTexture) {
     }
 }
 
+// Test that it is allowed to create a 3D texture in BC compressed formats.
+TEST_F(CompressedTextureFormatsValidationTests, BC3DTexture) {
+    for (wgpu::TextureFormat format : utils::kBCFormats) {
+        wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+        descriptor.format = format;
+        descriptor.size.depthOrArrayLayers = 4;
+        descriptor.dimension = wgpu::TextureDimension::e3D;
+        device.CreateTexture(&descriptor);
+    }
+}
+
 // Test that it is not allowed to create a 1D texture in compressed formats.
 TEST_F(CompressedTextureFormatsValidationTests, 1DTexture) {
     for (wgpu::TextureFormat format : utils::kCompressedFormats) {
@@ -817,17 +828,6 @@ TEST_F(CompressedTextureFormatsValidationTests, 1DTexture) {
             device.CreateTexture(&descriptor),
             testing::HasSubstr(
                 "The dimension (TextureDimension::e1D) of a texture with a compressed format"));
-    }
-}
-
-// Test that it is not allowed to create a 3D texture in compressed formats.
-TEST_F(CompressedTextureFormatsValidationTests, 3DTexture) {
-    for (wgpu::TextureFormat format : utils::kCompressedFormats) {
-        wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
-        descriptor.format = format;
-        descriptor.size.depthOrArrayLayers = 4;
-        descriptor.dimension = wgpu::TextureDimension::e3D;
-        ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
     }
 }
 
