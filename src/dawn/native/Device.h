@@ -398,9 +398,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // See https://crbug.com/dawn/161
     virtual bool ShouldApplyIndexBufferOffsetToFirstIndex() const;
 
-    // Whether the backend supports blitting the resolve texture with draw calls in the same render
-    // pass that it will be resolved into.
-    virtual bool IsResolveTextureBlitWithDrawSupported() const;
+    // Whether the backend can use textureLoad() on a resolve target in the same render pass that it
+    // will be resolved into.
+    virtual bool CanTextureLoadResolveTargetInTheSameRenderpass() const;
 
     bool HasFeature(Feature feature) const;
 
@@ -466,6 +466,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    void EnableAdditionalWGSLExtension(tint::wgsl::Extension extension);
 
     virtual MaybeError GetAHardwareBufferPropertiesImpl(
         void* handle,

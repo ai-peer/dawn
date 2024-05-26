@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,31 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "dawn/native/BlitColorToColorWithDraw.h"
+#include "dawn/native/vulkan/ResolveTextureLoadingUtilsVk.h"
 
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include "absl/container/inlined_vector.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Enumerator.h"
-#include "dawn/common/HashUtils.h"
 #include "dawn/native/BindGroup.h"
-#include "dawn/native/CommandEncoder.h"
+#include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/InternalPipelineStore.h"
-#include "dawn/native/RenderPassEncoder.h"
-#include "dawn/native/RenderPipeline.h"
 #include "dawn/native/utils/WGPUHelpers.h"
+#include "dawn/native/vulkan/BindGroupLayoutVk.h"
+#include "dawn/native/vulkan/BindGroupVk.h"
+#include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/PipelineLayoutVk.h"
+#include "dawn/native/vulkan/RenderPipelineVk.h"
+#include "dawn/native/vulkan/TextureVk.h"
+#include "dawn/native/vulkan/UtilsVulkan.h"
+#include "dawn/native/vulkan/VulkanError.h"
 #include "dawn/native/webgpu_absl_format.h"
 
-namespace dawn::native {
+namespace dawn::native::vulkan {
 
 namespace {
 
@@ -65,19 +71,23 @@ std::string GenerateFS(const BlitColorToColorWithDrawPipelineKey& pipelineKey) {
     std::ostringstream assignOutputsStream;
     std::ostringstream finalStream;
 
+    finalStream << "enable chromium_internal_input_attachments;";
+
     for (auto i : IterateBitSet(pipelineKey.attachmentsToExpandResolve)) {
-        finalStream << absl::StrFormat("@group(0) @binding(%u) var srcTex%u : texture_2d<f32>;\n",
-                                       i, i);
+        finalStream << absl::StrFormat(
+            "@group(0) @binding(%u) @input_attachment_index(%u) var srcTex%u : "
+            "input_attachment<f32>;\n",
+            i, i, i);
 
         outputStructStream << absl::StrFormat("@location(%u) output%u : vec4f,\n", i, i);
 
         assignOutputsStream << absl::StrFormat(
-            "\toutputColor.output%u = textureLoad(srcTex%u, vec2u(position.xy), 0);\n", i, i);
+            "\toutputColor.output%u = inputAttachmentLoad(srcTex%u);\n", i, i);
     }
 
     finalStream << "struct OutputColor {\n" << outputStructStream.str() << "}\n\n";
     finalStream << R"(
-@fragment fn blit_to_color(@builtin(position) position : vec4f) -> OutputColor {
+@fragment fn blit_to_color() -> OutputColor {
     var outputColor : OutputColor;
 )" << assignOutputsStream.str()
                 << R"(
@@ -99,28 +109,21 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
         }
     }
 
-    // vertex shader's source.
-    ShaderModuleWGSLDescriptor wgslDesc = {};
-    ShaderModuleDescriptor shaderModuleDesc = {};
-    shaderModuleDesc.nextInChain = &wgslDesc;
-    wgslDesc.code = kBlitToColorVS;
-
+    // vertex shader.
     Ref<ShaderModuleBase> vshaderModule;
-    DAWN_TRY_ASSIGN(vshaderModule, device->CreateShaderModule(&shaderModuleDesc));
+    DAWN_TRY_ASSIGN(vshaderModule, utils::CreateShaderModule(device, kBlitToColorVS));
 
     // fragment shader's source will depend on pipeline key.
     std::string fsCode = GenerateFS(pipelineKey);
-    wgslDesc.code = fsCode.c_str();
     Ref<ShaderModuleBase> fshaderModule;
-    DAWN_TRY_ASSIGN(fshaderModule, device->CreateShaderModule(&shaderModuleDesc));
+    DAWN_TRY_ASSIGN(fshaderModule, utils::CreateShaderModule(device, fsCode.c_str()));
 
     FragmentState fragmentState = {};
     fragmentState.module = fshaderModule.Get();
-    fragmentState.entryPoint = "blit_to_color";
 
     // Color target states.
     PerColorAttachment<ColorTargetState> colorTargets = {};
-    PerColorAttachment<wgpu::ColorTargetStateExpandResolveTextureDawn> msaaExpandResolveStates;
+    PerColorAttachment<wgpu::ColorTargetStateExpandResolveTextureDawn> msaaExpandResolveStates{};
 
     for (auto [i, target] : Enumerate(colorTargets)) {
         target.format = pipelineKey.colorTargetFormats[i];
@@ -144,7 +147,6 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
     RenderPipelineDescriptor renderPipelineDesc = {};
     renderPipelineDesc.label = "blit_color_to_color";
     renderPipelineDesc.vertex.module = vshaderModule.Get();
-    renderPipelineDesc.vertex.entryPoint = "vert_fullscreen_quad";
     renderPipelineDesc.fragment = &fragmentState;
 
     // Depth stencil state.
@@ -168,8 +170,8 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
         auto& bglEntry = bglEntries.back();
         bglEntry.binding = static_cast<uint8_t>(colorIdx);
         bglEntry.visibility = wgpu::ShaderStage::Fragment;
-        bglEntry.texture.sampleType = kInternalResolveAttachmentSampleType;
-        bglEntry.texture.viewDimension = wgpu::TextureViewDimension::e2D;
+        bglEntry.texture.sampleType = wgpu::TextureSampleType::Float;
+        bglEntry.texture.viewDimension = kInternalInputAttachmentDim;
     }
     BindGroupLayoutDescriptor bglDesc = {};
     bglDesc.entries = bglEntries.data();
@@ -192,116 +194,127 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
 
 }  // namespace
 
-MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
-                                        RenderPassEncoder* renderEncoder,
-                                        const RenderPassDescriptor* renderPassDescriptor) {
+MaybeError BeginRenderPassAndExpandResolveTextureWithDraw(Device* device,
+                                                          CommandRecordingContext* commandContext,
+                                                          const BeginRenderPassCmd* renderPass,
+                                                          const VkRenderPassBeginInfo& beginInfo) {
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
-    DAWN_ASSERT(device->CanTextureLoadResolveTargetInTheSameRenderpass());
 
+    // Construct pipeline key
     BlitColorToColorWithDrawPipelineKey pipelineKey;
-    for (uint8_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
-        ColorAttachmentIndex colorIdx(i);
-        const auto& colorAttachment = renderPassDescriptor->colorAttachments[i];
-        TextureViewBase* view = colorAttachment.view;
-        if (!view) {
-            continue;
-        }
+    ColorAttachmentIndex colorAttachmentCount =
+        GetHighestBitIndexPlusOne(renderPass->attachmentState->GetColorAttachmentsMask());
+    for (ColorAttachmentIndex colorIdx :
+         IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+        const auto& colorAttachment = renderPass->colorAttachments[colorIdx];
+        const auto& view = colorAttachment.view;
+        DAWN_ASSERT(view != nullptr);
         const Format& format = view->GetFormat();
         TextureComponentType baseType = format.GetAspectInfo(Aspect::Color).baseType;
-        // TODO(dawn:1710): blitting integer textures are not currently supported.
+        // Blitting integer textures are not currently supported.
         DAWN_ASSERT(baseType == TextureComponentType::Float);
 
         if (colorAttachment.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+            // TODO(42240662): Handle the cases where resolveTarget is altered by workarounds such
+            // as ResolveMultipleAttachmentInSeparatePasses/AlwaysResolveIntoZeroLevelAndLayer. We
+            // need to careful handle such cases because the render pass' compatibility could be
+            // affected as well.
+            DAWN_ASSERT(colorAttachment.resolveTarget != nullptr);
             DAWN_ASSERT(colorAttachment.resolveTarget->GetLayerCount() == 1u);
             DAWN_ASSERT(colorAttachment.resolveTarget->GetDimension() ==
                         wgpu::TextureViewDimension::e2D);
             pipelineKey.attachmentsToExpandResolve.set(colorIdx);
         }
-        pipelineKey.resolveTargetsMask.set(colorIdx, colorAttachment.resolveTarget);
+        pipelineKey.resolveTargetsMask.set(colorIdx, colorAttachment.resolveTarget != nullptr);
 
         pipelineKey.colorTargetFormats[colorIdx] = format.format;
         pipelineKey.sampleCount = view->GetTexture()->GetSampleCount();
     }
 
-    if (!pipelineKey.attachmentsToExpandResolve.any()) {
-        return {};
-    }
+    DAWN_ASSERT(pipelineKey.attachmentsToExpandResolve.any());
 
     pipelineKey.depthStencilFormat = wgpu::TextureFormat::Undefined;
-    if (renderPassDescriptor->depthStencilAttachment != nullptr) {
+    if (renderPass->depthStencilAttachment.view != nullptr) {
         pipelineKey.depthStencilFormat =
-            renderPassDescriptor->depthStencilAttachment->view->GetFormat().format;
+            renderPass->depthStencilAttachment.view->GetFormat().format;
     }
 
     Ref<RenderPipelineBase> pipeline;
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateColorBlitPipeline(
-                                  device, pipelineKey, renderPassDescriptor->colorAttachmentCount));
+                                  device, pipelineKey, static_cast<uint8_t>(colorAttachmentCount)));
 
+    RenderPipeline* pipelineVk = ToBackend(pipeline.Get());
+    PipelineLayout* layoutVk = ToBackend(pipeline->GetLayout());
+    DAWN_ASSERT(layoutVk != nullptr);
+
+    // Construct bind group.
     Ref<BindGroupLayoutBase> bgl;
-    DAWN_TRY_ASSIGN(bgl, pipeline->GetBindGroupLayout(0));
+    DAWN_TRY_ASSIGN(bgl, pipelineVk->GetBindGroupLayout(0));
 
     Ref<BindGroupBase> bindGroup;
-    {
-        absl::InlinedVector<BindGroupEntry, kMaxColorAttachments> bgEntries = {};
+    absl::InlinedVector<BindGroupEntry, kMaxColorAttachments> bgEntries = {};
 
-        for (auto colorIdx : IterateBitSet(pipelineKey.attachmentsToExpandResolve)) {
-            uint8_t i = static_cast<uint8_t>(colorIdx);
-            const auto& colorAttachment = renderPassDescriptor->colorAttachments[i];
-            bgEntries.push_back({});
-            auto& bgEntry = bgEntries.back();
-            bgEntry.binding = i;
-            bgEntry.textureView = colorAttachment.resolveTarget;
-        }
+    for (auto colorIdx : IterateBitSet(pipelineKey.attachmentsToExpandResolve)) {
+        const auto& colorAttachment = renderPass->colorAttachments[colorIdx];
+        bgEntries.push_back({});
+        auto& bgEntry = bgEntries.back();
+        bgEntry.binding = static_cast<uint8_t>(colorIdx);
+        bgEntry.textureView = colorAttachment.resolveTarget.Get();
 
-        BindGroupDescriptor bgDesc = {};
-        bgDesc.layout = bgl.Get();
-        bgDesc.entryCount = bgEntries.size();
-        bgDesc.entries = bgEntries.data();
-        DAWN_TRY_ASSIGN(bindGroup, device->CreateBindGroup(&bgDesc, UsageValidationMode::Internal));
+        // Transition the resolve texture
+        auto* textureVk = static_cast<Texture*>(colorAttachment.resolveTarget->GetTexture());
+        textureVk->TransitionUsageNow(commandContext, kResolveAttachmentLoadingUsage,
+                                      wgpu::ShaderStage::Fragment,
+                                      colorAttachment.resolveTarget->GetSubresourceRange());
     }
 
+    BindGroupDescriptor bgDesc = {};
+    bgDesc.layout = bgl.Get();
+    bgDesc.entryCount = bgEntries.size();
+    bgDesc.entries = bgEntries.data();
+    DAWN_TRY_ASSIGN(bindGroup, device->CreateBindGroup(&bgDesc, UsageValidationMode::Internal));
+    BindGroup* bindGroupVk = ToBackend(bindGroup.Get());
+
+    // Start the render pass
+    VkCommandBuffer commandBuffer = commandContext->commandBuffer;
+
+    device->fn.CmdBeginRenderPass(commandBuffer, &beginInfo, VK_SUBPASS_CONTENTS_INLINE);
+
     // Draw to perform the blit.
-    renderEncoder->APISetBindGroup(0, bindGroup.Get(), 0, nullptr);
-    renderEncoder->APISetPipeline(pipeline.Get());
-    renderEncoder->APIDraw(3, 1, 0, 0);
+    VkViewport viewport{};
+    viewport.x = 0.0f;
+    viewport.y = 0.0f;
+    viewport.width = static_cast<float>(renderPass->width);
+    viewport.height = static_cast<float>(renderPass->height);
+    viewport.minDepth = 0.0f;
+    viewport.maxDepth = 1.0f;
+    device->fn.CmdSetViewport(commandBuffer, 0, 1, &viewport);
+
+    VkRect2D scissor{};
+    scissor.offset = {0, 0};
+    scissor.extent.width = renderPass->width;
+    scissor.extent.height = renderPass->height;
+    device->fn.CmdSetScissor(commandBuffer, 0, 1, &scissor);
+
+    device->fn.CmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                               *pipelineVk->GetHandle());
+    device->fn.CmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS,
+                                     *layoutVk->GetHandle(), 0, 1, &*bindGroupVk->GetHandle(), 0,
+                                     nullptr);
+    device->fn.CmdDraw(commandBuffer, 3, 1, 0, 0);
+
+    device->fn.CmdNextSubpass(commandBuffer, VK_SUBPASS_CONTENTS_INLINE);
+
+    // Subpass dependency automatically transitions the layouts of the resolve textures
+    // to RenderAttachment. So we need to notify TextureVk and don't need to use any explicit
+    // barriers.
+    for (auto colorIdx : IterateBitSet(pipelineKey.attachmentsToExpandResolve)) {
+        const auto& colorAttachment = renderPass->colorAttachments[colorIdx];
+        auto* textureVk = static_cast<Texture*>(colorAttachment.resolveTarget->GetTexture());
+        textureVk->UpdateUsage(wgpu::TextureUsage::RenderAttachment, wgpu::ShaderStage::Fragment,
+                               colorAttachment.resolveTarget->GetSubresourceRange());
+    }
 
     return {};
 }
-
-size_t BlitColorToColorWithDrawPipelineKey::HashFunc::operator()(
-    const BlitColorToColorWithDrawPipelineKey& key) const {
-    size_t hash = 0;
-
-    HashCombine(&hash, key.attachmentsToExpandResolve);
-    HashCombine(&hash, key.resolveTargetsMask);
-
-    for (auto format : key.colorTargetFormats) {
-        HashCombine(&hash, format);
-    }
-
-    HashCombine(&hash, key.depthStencilFormat);
-    HashCombine(&hash, key.sampleCount);
-
-    return hash;
-}
-
-bool BlitColorToColorWithDrawPipelineKey::EqualityFunc::operator()(
-    const BlitColorToColorWithDrawPipelineKey& a,
-    const BlitColorToColorWithDrawPipelineKey& b) const {
-    if (a.attachmentsToExpandResolve != b.attachmentsToExpandResolve) {
-        return false;
-    }
-    if (a.resolveTargetsMask != b.resolveTargetsMask) {
-        return false;
-    }
-
-    for (auto [i, format] : Enumerate(a.colorTargetFormats)) {
-        if (format != b.colorTargetFormats[i]) {
-            return false;
-        }
-    }
-
-    return a.depthStencilFormat == b.depthStencilFormat && a.sampleCount == b.sampleCount;
-}
-
-}  // namespace dawn::native
+}  // namespace dawn::native::vulkan
