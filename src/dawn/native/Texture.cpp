@@ -581,9 +581,18 @@ MaybeError ValidateTextureDescriptor(
                     "The texture size (%s) or mipLevelCount (%u) is empty.", &descriptor->size,
                     descriptor->mipLevelCount);
 
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D && format->isCompressed,
-                    "The dimension (%s) of a texture with a compressed format (%s) is not 2D.",
-                    descriptor->dimension, format->format);
+    DAWN_INVALID_IF(
+        descriptor->dimension == wgpu::TextureDimension::e3D && format->isCompressed &&
+            !device->IsToggleEnabled(Toggle::AllowUnsafeAPIs),
+        "The dimension (%s) of a texture with a compressed format (%s) is 3D. 3D textures with "
+        "compressed formats require enabling toggle allow_unsafe_apis.",
+        descriptor->dimension, format->format);
+
+    DAWN_INVALID_IF(
+        descriptor->dimension != wgpu::TextureDimension::e2D &&
+            descriptor->dimension != wgpu::TextureDimension::e3D && format->isCompressed,
+        "The dimension (%s) of a texture with a compressed format (%s) is not 2D or 3D.",
+        descriptor->dimension, format->format);
 
     // Depth/stencil formats are valid for 2D textures only. Metal has this limit. And D3D12
     // doesn't support depth/stencil formats on 3D textures.
