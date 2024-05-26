@@ -465,6 +465,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     void DestroyObjects();
     void Destroy();
 
+    void EnableAdditionalWGSLExtension(tint::wgsl::Extension extension);
+
     // Device lost event needs to be protected for now because mock device needs it.
     // TODO(dawn:1702) Make this private and move the class in the implementation file when we mock
     // the adapter.
