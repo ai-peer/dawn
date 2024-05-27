@@ -51,6 +51,24 @@
       "parentUuid": "af433796_9e36e575",
       "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b23ec2_94115333",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T19:30:11Z",
+      "side": 1,
+      "message": "It\u0027s true that Dawn always runs `SingleEntryPoint` before all of the backends, but we generally haven\u0027t been assuming that on the Tint side (yet).\n\nAFAICT, the only reason this assumption exists in `PixelLocal` is because of this line:\nhttps://dawn.googlesource.com/dawn/+/e2fdc9d794caa2319972fd559793a060f404783b/src/tint/lang/msl/writer/ast_raise/pixel_local.cc#226\n\nIt\u0027s not clear to me why that transform tries to remove the `@location` attributes from those structures. We don\u0027t need to remove them (they\u0027re always valid in structures even if not used by an entry point input/output), and the transform doesn\u0027t remove `@builtin` attributes either. `CanonicalizeEntryPointIO` will take care of removing all of the unnecessary attributes anyway.\n\nI tried removing that code from the transform and it seemed to work fine with multiple entry points, so unless there\u0027s a good reason to keep that requirement I think we should just remove it.",
+      "parentUuid": "09b3c326_33d55b76",
+      "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
