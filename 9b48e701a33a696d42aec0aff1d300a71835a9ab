@@ -232,6 +232,24 @@
       "parentUuid": "955d6ced_f144588f",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4178ef8_4ea780cd",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-27T18:43:54Z",
+      "side": 1,
+      "message": "Note: skipping where James suggested will not work once the new IR fuzzer is enabled.",
+      "parentUuid": "2a2f1679_0e819169",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
