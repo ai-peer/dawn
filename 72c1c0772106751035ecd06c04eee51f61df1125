@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3aa953b_da8eedaf",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-27T17:37:59Z",
+      "side": 1,
+      "message": "Create a `HasInputAttachmentIndex` on `var` so this ends up the same as the binding point case above?\n\n`var-\u003eHasInputAttachmentIndex()` ...",
+      "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
