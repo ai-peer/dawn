@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8da89e0_13c49940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-27T19:53:17Z",
+      "side": 1,
+      "message": "FYI, this is the next build side CL.\n\nYuly\u0027s changes to how vulkan-deps are laid out (to fix vulkan-deps -\u003e Dawn roll) have broken the CMake rules, so I will need to fix that, before working on this one.",
+      "revId": "d42128991b3361a144c8c474defa6e81ea7c8f04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
