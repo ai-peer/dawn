@@ -70,6 +70,24 @@
       "parentUuid": "209d923c_1b29541e",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b199c0_83ac348e",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-27T17:50:11Z",
+      "side": 1,
+      "message": "If 189860 gets landed first, does that mean this isn\u0027t needed as it\u0027s an ICE in the protobuf encoder?",
+      "parentUuid": "209d923c_1b29541e",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
