@@ -16,6 +16,23 @@
       "message": "The bot failure is not related to this CL. PTAL, thanks!",
       "revId": "478ba5e68747836c52e34db9fd90ab0bae42a64d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68dbf79_cbbfcd63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T08:05:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "478ba5e68747836c52e34db9fd90ab0bae42a64d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
