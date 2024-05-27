@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8c47f5_7ca757eb",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-27T12:59:08Z",
+      "side": 1,
+      "message": "This has two pointers at `offset(0)` that seems wrong?",
+      "revId": "e1f993a4ff704c3467cfda0fe9eb3a90caf2c7a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
