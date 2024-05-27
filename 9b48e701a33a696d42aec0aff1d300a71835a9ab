@@ -16,6 +16,24 @@
       "message": "I don\u0027t think you need this. You can have it generate input attachment load, and then generate-skip entries for all the other writers. Then as they get implement the skips are over-written with non-skip expectation files.",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ec2fce9_ebdd8fbf",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T17:38:30Z",
+      "side": 1,
+      "message": "Even if I add skip entries for the writers, the fuzzer still attempts to compile the generated wgsl with various backends, and it will crash.\n\nI don\u0027t know any way to skip the the tests in fuzzer. Only when I add some supports to IR, spv printer, etc (in subsequent CLs) then the fuzzer would be happy to compile the generated wgsl.\n\nHere is one of the previous patchsets\u0027 CQ failures: https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8746975760237887025/+/u/Check_fuzzers/stdout\n\n@bclayton@google.com if you have any suggestions.",
+      "parentUuid": "837e6316_a581f59e",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
