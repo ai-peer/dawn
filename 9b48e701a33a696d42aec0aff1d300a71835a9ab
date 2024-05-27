@@ -250,6 +250,24 @@
       "parentUuid": "2a2f1679_0e819169",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d66b565_8eb73362",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T19:47:17Z",
+      "side": 1,
+      "message": "Ack. I managed to create a dummy implementation in spirv writer with minimal code. So no need to skip the fuzzer. This CL will be closed and folded into https://dawn-review.googlesource.com/c/dawn/+/189860.",
+      "parentUuid": "f4178ef8_4ea780cd",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
