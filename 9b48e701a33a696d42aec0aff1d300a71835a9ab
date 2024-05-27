@@ -88,6 +88,24 @@
       "parentUuid": "209d923c_1b29541e",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a560959_560ae4eb",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T18:03:01Z",
+      "side": 1,
+      "message": "189860 is not enough to avoid fuzzer crash though. There is still another ICE crash in fuzzer like this:\n```\nout/DebugASan/tint_wgsl_fuzzer: Running 1 inputs 1 time(s) each.\nRunning: /Users/lehoangquyen/dawn/test/tint/builtins/gen/var/inputAttachmentLoad/315bf5.wgsl\nICE while running fuzzer: \u0027tint::spirv::writer::IRFuzzer\u0027\n../../src/tint/lang/spirv/writer/printer/printer.cc:615 internal compiler error: Switch() matched no cases. Type: tint::core::type::InputAttachment\nTrace/BPT trap: 5\n```\n\nit requires I add supports to spirv\u0027s printer as well. Though that would make this CL too big.",
+      "parentUuid": "e6b199c0_83ac348e",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
