@@ -16,6 +16,24 @@
       "message": "What is this used for? Is it for dawn or something else? We\u0027ve been trying to remove instances where Tint passes information back to Dawn and instead have Dawn tell Tint what it wants.\n\nCan we flip this around so Dawn provides the data?",
       "revId": "46086f3dad90ff85727d5560c95d9ee51d3b0675",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fad46ac_aa26ed2a",
+        "filename": "src/tint/lang/msl/writer/printer/printer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T17:03:24Z",
+      "side": 1,
+      "message": "Dawn needs to know how much memory to allocate. Dawn doesn\u0027t know what this number is, because it depends on how Tint packs the variables into a structure. So I don\u0027t think there\u0027s a reasonable way for Dawn to provide this information to Tint.",
+      "parentUuid": "498b56e1_01b8cffb",
+      "revId": "46086f3dad90ff85727d5560c95d9ee51d3b0675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
