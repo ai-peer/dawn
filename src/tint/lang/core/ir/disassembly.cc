@@ -386,12 +386,6 @@ void Disassembly::EmitValue(const Value* val) {
                 [&](const core::constant::Value* c) {
                     tint::Switch(
                         c,
-                        [&](const core::constant::Scalar<AFloat>* scalar) {
-                            out_ << StyleLiteral(scalar->ValueAs<AFloat>().value);
-                        },
-                        [&](const core::constant::Scalar<AInt>* scalar) {
-                            out_ << StyleLiteral(scalar->ValueAs<AInt>().value);
-                        },
                         [&](const core::constant::Scalar<i32>* scalar) {
                             out_ << StyleLiteral(scalar->ValueAs<i32>().value, "i");
                         },
