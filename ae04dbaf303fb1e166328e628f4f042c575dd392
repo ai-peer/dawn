@@ -122,6 +122,24 @@
       "parentUuid": "df5a97d9_dea80158",
       "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213af4f6_da3b1b97",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 3453757
+      },
+      "writtenOn": "2024-05-27T14:08:47Z",
+      "side": 1,
+      "message": "@Corentin understood, thank you! I\u0027ll wait and try to correspond quickly when Kai has an opportunity to review. Grateful for the guidance!",
+      "parentUuid": "8cd80ddc_a40b1039",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
