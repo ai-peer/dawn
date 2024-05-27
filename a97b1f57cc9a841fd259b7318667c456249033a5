@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f106eac3_340b0169",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-27T16:56:02Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nThis is still WIP. To compile on Mac, I need to wait for:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5573570\nThis will likely be available tomorrow.\n\nOutside of this, I believe every problem found a solution.",
+      "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
