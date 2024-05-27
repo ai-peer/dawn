@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b79c72d1_e35ae5d8",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1255,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T21:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3aa953b_da8eedaf",
+      "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d994096_61cc7448",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-27T18:13:12Z",
       "side": 1,
       "message": "```suggestion\n            attrs.Push(b.InputAttachmentIndex(u32(ii.value())));\n```",
+      "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21c9adcb_99204437",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T21:01:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d994096_61cc7448",
       "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
