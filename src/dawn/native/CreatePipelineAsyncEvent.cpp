@@ -31,6 +31,7 @@
 
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/Ref.h"
+#include "dawn/dawn_proc_table.h"
 #include "dawn/native/AsyncTask.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Device.h"
