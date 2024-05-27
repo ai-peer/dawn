@@ -16,6 +16,23 @@
       "message": "FYI. Thanks a lot!",
       "revId": "59f703c56e56e969a203487da1d33e7489f2edb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe942f92_60db35e1",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T13:22:35Z",
+      "side": 1,
+      "message": "The warning about allow_unsafe_apis in this error message might not be useful because DAWN_INVALID_IF returns when there is an error, meaning that if we get here, either the texture is 2D or the toggle is enabled.",
+      "revId": "59f703c56e56e969a203487da1d33e7489f2edb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
