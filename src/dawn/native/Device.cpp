@@ -1900,6 +1900,16 @@ void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
     }
 }
 
+wgpu::Status DeviceBase::APIGetAHardwareBufferProperties(
+    void* handle,
+    AHardwareBufferProperties* properties) const {
+    InstanceBase* instance = GetAdapter()->GetInstance();
+    if (instance->ConsumedError(GetAHardwareBufferPropertiesImpl(handle, properties))) {
+        return wgpu::Status::Error;
+    }
+    return wgpu::Status::Success;
+}
+
 wgpu::Status DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     DAWN_ASSERT(limits != nullptr);
     InstanceBase* instance = GetAdapter()->GetInstance();
