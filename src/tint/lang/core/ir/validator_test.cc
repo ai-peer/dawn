@@ -3158,6 +3158,40 @@ TEST_F(IR_ValidatorTest, NextIteration_MatchedTypes) {
     ASSERT_EQ(res, Success);
 }
 
+TEST_F(IR_ValidatorTest, LoopBodyParamsWithoutInitializer) {
+    auto* f = b.Function("my_func", ty.void_());
+    b.Append(f->Block(), [&] {
+        auto* loop = b.Loop();
+        loop->Body()->SetParams({b.BlockParam<i32>(), b.BlockParam<i32>()});
+        b.Append(loop->Body(), [&] { b.ExitLoop(loop); });
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_NE(res, Success);
+    EXPECT_EQ(res.Failure().reason.Str(),
+              R"(:3:5 error: loop: loop with body block parameters must have an initializer
+    loop [b: $B2] {  # loop_1
+    ^^^^^^^^^^^^^
+
+:2:3 note: in block
+  $B1: {
+  ^^^
+
+note: # Disassembly
+%my_func = func():void {
+  $B1: {
+    loop [b: $B2] {  # loop_1
+      $B2 (%2:i32, %3:i32): {  # body
+        exit_loop  # loop_1
+      }
+    }
+    ret
+  }
+}
+)");
+}
+
 TEST_F(IR_ValidatorTest, ContinuingUseValueBeforeContinue) {
     auto* f = b.Function("my_func", ty.void_());
     auto* value = b.Let("value", 1_i);
