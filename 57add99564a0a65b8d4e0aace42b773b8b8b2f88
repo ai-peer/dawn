@@ -33,6 +33,24 @@
       "message": "Can you elaborate on what the issues you\u0027ve hit are? This assumption is new to me and we definitely have E2E tests with multiple entry points that the MSL backend is passing.",
       "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b3c326_33d55b76",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-27T18:45:57Z",
+      "side": 1,
+      "message": "It was to address the bug linked in the CL description. It would appear there\u0027s an assumption Dawn has run the single entry point transform before the writer.",
+      "parentUuid": "af433796_9e36e575",
+      "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
