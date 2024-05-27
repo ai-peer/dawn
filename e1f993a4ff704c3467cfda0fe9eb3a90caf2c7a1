@@ -34,6 +34,24 @@
       "parentUuid": "5c8c47f5_7ca757eb",
       "revId": "e1f993a4ff704c3467cfda0fe9eb3a90caf2c7a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe9593a_d3ddb5d3",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-27T16:56:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b6c710aa_f34eac5e",
+      "revId": "e1f993a4ff704c3467cfda0fe9eb3a90caf2c7a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
