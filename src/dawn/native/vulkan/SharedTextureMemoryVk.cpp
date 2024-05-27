@@ -492,6 +492,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
 
     auto* aHardwareBuffer = static_cast<struct AHardwareBuffer*>(descriptor->handle);
 
+    bool useExternalFormat = descriptor->useExternalFormat;
+
     const VkExternalMemoryHandleTypeFlagBits handleType =
         VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID;
 
@@ -502,18 +504,28 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     SharedTextureMemoryProperties properties;
     properties.size = {aHardwareBufferDesc.width, aHardwareBufferDesc.height,
                        aHardwareBufferDesc.layers};
-    properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
-    if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER) {
-        properties.usage |= wgpu::TextureUsage::RenderAttachment;
-    }
-    if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE) {
-        properties.usage |= wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::StorageBinding;
+    if (useExternal) {
+        if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE) {
+            properties.usage = wgpu::TextureUsage::TextureBinding;
+        }
+    } else {
+        properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+        if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER) {
+            properties.usage |= wgpu::TextureUsage::RenderAttachment;
+        }
+        if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_SAMPLED_IMAGE) {
+            properties.usage |=
+                wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::StorageBinding;
+        }
     }
 
     VkFormat vkFormat;
     YCbCrVkDescriptor yCbCrAHBInfo;
     VkAndroidHardwareBufferPropertiesANDROID bufferProperties = {
         .sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
+    };
+    VkExternalFormatANDROID externalFormatAndroid = {
+        .sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
     };
 
     // Query the properties to find the appropriate VkFormat and memory type.
@@ -528,11 +540,20 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                                     vkDevice, aHardwareBuffer, &bufferProperties),
                                 "vkGetAndroidHardwareBufferPropertiesANDROID"));
 
-        vkFormat = bufferFormatProperties.format;
+        // Validate more as per
+        // https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html
+        if (useExternalFormat) {
+            DAWN_ASSERT(bufferFormatProperties.externalFormat != 0);
+            vkFormat = VK_FORMAT_UNDEFINED;
+            externalFormatAndroid.externalFormat = bufferFormatProperties.externalFormat;
+        } else {
+            vkFormat = bufferFormatProperties.format;
+            externalFormatAndroid.externalFormat = 0;
+        }
 
         // Populate the YCbCr info.
-        yCbCrAHBInfo.externalFormat = bufferFormatProperties.externalFormat;
-        yCbCrAHBInfo.vkFormat = bufferFormatProperties.format;
+        yCbCrAHBInfo.externalFormat = externalFormatAndroid.externalFormat;
+        yCbCrAHBInfo.vkFormat = vkFormat;
         yCbCrAHBInfo.vkYCbCrModel = bufferFormatProperties.suggestedYcbcrModel;
         yCbCrAHBInfo.vkYCbCrRange = bufferFormatProperties.suggestedYcbcrRange;
         yCbCrAHBInfo.vkComponentSwizzleRed =
@@ -596,53 +617,57 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
         imageFormatInfo.usage = vkUsageFlags;
         imageFormatInfo.flags = 0;
 
-        constexpr wgpu::TextureUsage kUsageRequiringView = wgpu::TextureUsage::RenderAttachment |
-                                                           wgpu::TextureUsage::TextureBinding |
-                                                           wgpu::TextureUsage::StorageBinding;
-        const bool mayNeedViewReinterpretation =
-            (properties.usage & kUsageRequiringView) != 0 && !compatibleViewFormats.empty();
-        const bool needsBGRA8UnormStoragePolyfill =
-            properties.format == wgpu::TextureFormat::BGRA8Unorm &&
-            (properties.usage & wgpu::TextureUsage::StorageBinding);
-        if (mayNeedViewReinterpretation || needsBGRA8UnormStoragePolyfill) {
-            // Add the mutable format bit for view reinterpretation.
-            imageFormatInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+        if (!useExternalFormat) {
+            constexpr wgpu::TextureUsage kUsageRequiringView =
+                wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding |
+                wgpu::TextureUsage::StorageBinding;
+            const bool mayNeedViewReinterpretation =
+                (properties.usage & kUsageRequiringView) != 0 && !compatibleViewFormats.empty();
+            const bool needsBGRA8UnormStoragePolyfill =
+                properties.format == wgpu::TextureFormat::BGRA8Unorm &&
+                (properties.usage & wgpu::TextureUsage::StorageBinding);
+            if (mayNeedViewReinterpretation || needsBGRA8UnormStoragePolyfill) {
+                // Add the mutable format bit for view reinterpretation.
+                imageFormatInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
 
-            if (properties.usage & wgpu::TextureUsage::StorageBinding) {
-                // Don't use an image format list because it becomes impossible to make an
-                // rgba8unorm storage texture which may be reinterpreted as rgba8unorm-srgb,
-                // because the srgb format doesn't support storage. Creation with an explicit
-                // format list that includes srgb will fail.
-                // This is the same issue seen with the DMA buf import path which has a workaround
-                // to bypass the support check.
-                // TODO(crbug.com/dawn/2304): If the dma buf import is resolved in a better way,
-                // apply the same fix here.
-            } else if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
-                // Set the list of view formats the image can be compatible with.
-                DAWN_ASSERT(compatibleViewFormats.size() == 1u);
-                viewFormats[0] = vkFormat;
-                viewFormats[1] = VulkanImageFormat(device, compatibleViewFormats[0]->format);
-                imageFormatListInfo.viewFormatCount = 2;
-                imageFormatListInfo.pViewFormats = viewFormats.data();
+                if (properties.usage & wgpu::TextureUsage::StorageBinding) {
+                    // Don't use an image format list because it becomes impossible to make an
+                    // rgba8unorm storage texture which may be reinterpreted as rgba8unorm-srgb,
+                    // because the srgb format doesn't support storage. Creation with an explicit
+                    // format list that includes srgb will fail.
+                    // This is the same issue seen with the DMA buf import path which has a
+                    // workaround to bypass the support check.
+                    // TODO(crbug.com/dawn/2304): If the dma buf import is resolved in a better way,
+                    // apply the same fix here.
+                } else if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
+                    // Set the list of view formats the image can be compatible with.
+                    DAWN_ASSERT(compatibleViewFormats.size() == 1u);
+                    viewFormats[0] = vkFormat;
+                    viewFormats[1] = VulkanImageFormat(device, compatibleViewFormats[0]->format);
+                    imageFormatListInfo.viewFormatCount = 2;
+                    imageFormatListInfo.pViewFormats = viewFormats.data();
+                }
             }
-        }
 
-        if (imageFormatListInfo.viewFormatCount > 0) {
-            DAWN_TRY_CONTEXT(CheckExternalImageFormatSupport(device, properties, &imageFormatInfo,
-                                                             handleType, &imageFormatListInfo),
-                             "checking import support of AHardwareBuffer");
-        } else {
-            DAWN_TRY_CONTEXT(
-                CheckExternalImageFormatSupport(device, properties, &imageFormatInfo, handleType),
-                "checking import support of AHardwareBuffer");
+            if (imageFormatListInfo.viewFormatCount > 0) {
+                DAWN_TRY_CONTEXT(
+                    CheckExternalImageFormatSupport(device, properties, &imageFormatInfo,
+                                                    handleType, &imageFormatListInfo),
+                    "checking import support of AHardwareBuffer");
+            } else {
+                DAWN_TRY_CONTEXT(CheckExternalImageFormatSupport(device, properties,
+                                                                 &imageFormatInfo, handleType),
+                                 "checking import support of AHardwareBuffer");
+            }
         }
     }
 
     // Create the VkImage for the import.
     {
         VkImage vkImage;
-        DAWN_TRY_ASSIGN(vkImage, CreateExternalVkImage(device, properties, imageFormatInfo,
-                                                       handleType, &imageFormatListInfo));
+        DAWN_TRY_ASSIGN(vkImage,
+                        CreateExternalVkImage(device, properties, imageFormatInfo, handleType,
+                                              &imageFormatListInfo, &externalFormatAndroid));
 
         sharedTextureMemory->mVkImage =
             AcquireRef(new RefCountedVkHandle<VkImage>(device, vkImage));
