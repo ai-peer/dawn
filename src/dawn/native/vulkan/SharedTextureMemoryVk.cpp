@@ -492,6 +492,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
 
     auto* aHardwareBuffer = static_cast<struct AHardwareBuffer*>(descriptor->handle);
 
+    bool useExternalFormat = descriptor->useExternalFormat;
+
     const VkExternalMemoryHandleTypeFlagBits handleType =
         VK_EXTERNAL_MEMORY_HANDLE_TYPE_ANDROID_HARDWARE_BUFFER_BIT_ANDROID;
 
@@ -502,6 +504,7 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     SharedTextureMemoryProperties properties;
     properties.size = {aHardwareBufferDesc.width, aHardwareBufferDesc.height,
                        aHardwareBufferDesc.layers};
+    // Should properties have these usages with TextureFormat::External?
     properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
     if (aHardwareBufferDesc.usage & AHARDWAREBUFFER_USAGE_GPU_FRAMEBUFFER) {
         properties.usage |= wgpu::TextureUsage::RenderAttachment;
@@ -514,6 +517,9 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     YCbCrVkDescriptor yCbCrAHBInfo;
     VkAndroidHardwareBufferPropertiesANDROID bufferProperties = {
         .sType = VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID,
+    };
+    VkExternalFormatANDROID externalFormatAndroid = {
+        .sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID,
     };
 
     // Query the properties to find the appropriate VkFormat and memory type.
@@ -528,11 +534,20 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                                     vkDevice, aHardwareBuffer, &bufferProperties),
                                 "vkGetAndroidHardwareBufferPropertiesANDROID"));
 
-        vkFormat = bufferFormatProperties.format;
+        // Validate more as per
+        // https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html
+        if (useExternalFormat) {
+            DAWN_ASSERT(bufferFormatProperties.externalFormat != 0);
+            vkFormat = VK_FORMAT_UNDEFINED;
+            externalFormatAndroid.externalFormat = bufferFormatProperties.externalFormat;
+        } else {
+            vkFormat = bufferFormatProperties.format;
+            externalFormatAndroid.externalFormat = 0;
+        }
 
         // Populate the YCbCr info.
-        yCbCrAHBInfo.externalFormat = bufferFormatProperties.externalFormat;
-        yCbCrAHBInfo.vkFormat = bufferFormatProperties.format;
+        yCbCrAHBInfo.externalFormat = externalFormatAndroid.externalFormat;
+        yCbCrAHBInfo.vkFormat = vkFormat;
         yCbCrAHBInfo.vkYCbCrModel = bufferFormatProperties.suggestedYcbcrModel;
         yCbCrAHBInfo.vkYCbCrRange = bufferFormatProperties.suggestedYcbcrRange;
         yCbCrAHBInfo.vkComponentSwizzleRed =
@@ -628,9 +643,10 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
         }
 
         if (imageFormatListInfo.viewFormatCount > 0) {
-            DAWN_TRY_CONTEXT(CheckExternalImageFormatSupport(device, properties, &imageFormatInfo,
-                                                             handleType, &imageFormatListInfo),
-                             "checking import support of AHardwareBuffer");
+            DAWN_TRY_CONTEXT(
+                CheckExternalImageFormatSupport(device, properties, &imageFormatInfo, handleType,
+                                                &imageFormatListInfo, &externalFormatAndroid),
+                "checking import support of AHardwareBuffer");
         } else {
             DAWN_TRY_CONTEXT(
                 CheckExternalImageFormatSupport(device, properties, &imageFormatInfo, handleType),
