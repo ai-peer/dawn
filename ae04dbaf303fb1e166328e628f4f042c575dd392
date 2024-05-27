@@ -86,6 +86,24 @@
       "parentUuid": "e2a4d1a6_99afb86f",
       "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df5a97d9_dea80158",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 3453757
+      },
+      "writtenOn": "2024-05-27T13:46:05Z",
+      "side": 1,
+      "message": "@Corentin thank you very much! Then I guess no further changes for this CL and I leave as-is for review or merge? For CTS, I\u0027ll try to follow-up in the repo itself once review arrives. Appreciated!",
+      "parentUuid": "f04f2316_d53e0410",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
