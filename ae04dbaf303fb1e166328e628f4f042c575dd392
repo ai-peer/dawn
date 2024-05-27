@@ -16,6 +16,40 @@
       "message": "I run the pre-commit and also test with Node, but there might be things that I overlooked structurally, and maybe there\u0027s an aspect about the commit that\u0027s not good for the review system here. Your guidance would be appreciated! Thank you!",
       "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48cb1086_ca832fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T08:21:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6deb6e9_89efe51b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T08:21:21Z",
+      "side": 1,
+      "message": "When adding new capabilities we always gate them first behind the AllowUnsafeAPIs toggle so 1) we don\u0027t ship feature before they are fully tested 2) we control when the feature becomes visible to developers and attackers.\n\nThis would involve adding a check using that Toggle here similar to [1] and a tiny test in [2]. I think for this feature we\u0027d like to at least have a few CTS tests before launching it, just to test that hardware support actually works.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandEncoder.cpp;drc\u003dc0265133106c7647e90f9aaa4377d28190b1a6a9;l\u003d2200\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
