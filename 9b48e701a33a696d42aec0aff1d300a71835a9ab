@@ -196,6 +196,24 @@
       "parentUuid": "71198623_9dcbf85d",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "955d6ced_f144588f",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T18:34:29Z",
+      "side": 1,
+      "message": "I think we should be able to disable the extension in the top-level WGSL fuzzer by removing it from the `allowed_features.extensions` set here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/cmd/fuzz/wgsl/fuzz.cc;l\u003d139?q\u003dfuzz.cc\u0026ss\u003dchromium",
+      "parentUuid": "dab1192a_3d4d1391",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
