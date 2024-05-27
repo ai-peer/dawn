@@ -104,6 +104,24 @@
       "parentUuid": "f04f2316_d53e0410",
       "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd80ddc_a40b1039",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T13:50:14Z",
+      "side": 1,
+      "message": "From my POV this CL is good as is. I gave you ACLs to use CQ+1 to run tests, and use CQ+2 when you have CodeReview+2 granted by Dawn committers. We tend to require two reviews for all non-trivial CLs, so let\u0027s wait for Kai\u0027s review as well.",
+      "parentUuid": "df5a97d9_dea80158",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
