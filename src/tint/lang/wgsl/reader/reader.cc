@@ -85,6 +85,7 @@ bool IsUnsupportedByIR(const ast::Enable* enable) {
             case tint::wgsl::Extension::kChromiumExperimentalPushConstant:
             case tint::wgsl::Extension::kChromiumInternalDualSourceBlending:
             case tint::wgsl::Extension::kChromiumInternalRelaxedUniformLayout:
+            case tint::wgsl::Extension::kDualSourceBlending:
                 return true;
             default:
                 break;
