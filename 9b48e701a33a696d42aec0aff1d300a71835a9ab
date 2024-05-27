@@ -160,6 +160,24 @@
       "parentUuid": "9f39f532_0ed8e76d",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71198623_9dcbf85d",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T18:23:13Z",
+      "side": 1,
+      "message": "Let me try to add stubs to spirv implementation. It would be nice to have a way to tell that a writer doesn\u0027t support this and skip the tests though.",
+      "parentUuid": "fd60fc79_e7c9ea84",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
