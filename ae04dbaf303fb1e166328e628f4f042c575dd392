@@ -68,6 +68,24 @@
       "parentUuid": "b6deb6e9_89efe51b",
       "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04f2316_d53e0410",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-27T13:21:20Z",
+      "side": 1,
+      "message": "Thanks, the Dawn code change looks good. The CTS change is just for validation, which means that it tests that the driver doesn\u0027t crash, but there is no checks that things actually work for 3D compressed textures. Tests could be enabled for copy between texture/buffers with 3D texture and compressed formats. Tests for 3D textures could be enabled for compressed formats etc.",
+      "parentUuid": "e2a4d1a6_99afb86f",
+      "revId": "ae04dbaf303fb1e166328e628f4f042c575dd392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
