@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af433796_9e36e575",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T14:08:50Z",
+      "side": 1,
+      "message": "Can you elaborate on what the issues you\u0027ve hit are? This assumption is new to me and we definitely have E2E tests with multiple entry points that the MSL backend is passing.",
+      "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
