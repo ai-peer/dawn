@@ -178,6 +178,24 @@
       "parentUuid": "fd60fc79_e7c9ea84",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dab1192a_3d4d1391",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T18:29:41Z",
+      "side": 1,
+      "message": "I tried adding code that emits dummy spirv\u0027s OpImageRead instruction for InputAttachmentLoad, then the fuzzer failed the spirv validation step. Guess I have to fully implement spirv writer? :/",
+      "parentUuid": "71198623_9dcbf85d",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
