@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b02be9_0455a5a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-27T18:47:34Z",
+      "side": 1,
+      "message": "FYI: you don\u0027t need the `chromium:` prefix any more.",
+      "revId": "3df2c9c6e722a0748388cff82da25dff8246fd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
