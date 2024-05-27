@@ -16,6 +16,29 @@
       "message": "Hi Corentin,\n\nThis is still WIP. To compile on Mac, I need to wait for:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5573570\nThis will likely be available tomorrow.\n\nOutside of this, I believe every problem found a solution.",
       "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9986db30_5c5816b0",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-27T16:57:50Z",
+      "side": 1,
+      "message": "Note: Those are now needed, because partition_alloc doesn\u0027t depend on \"//build/\", so the embedder needs to provide partition_alloc the dependency.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
