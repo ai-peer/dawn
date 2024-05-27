@@ -16,6 +16,24 @@
       "message": "This has two pointers at `offset(0)` that seems wrong?",
       "revId": "e1f993a4ff704c3467cfda0fe9eb3a90caf2c7a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c710aa_f34eac5e",
+        "filename": "src/tint/lang/msl/writer/raise/module_scope_vars_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T13:20:38Z",
+      "side": 1,
+      "message": "This isn\u0027t a new issue in this CL, so I\u0027ve opened crbug.com/343016774 to look into fixing this up. TL;DR I don\u0027t /think/ it actually matters right now.",
+      "parentUuid": "5c8c47f5_7ca757eb",
+      "revId": "e1f993a4ff704c3467cfda0fe9eb3a90caf2c7a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
