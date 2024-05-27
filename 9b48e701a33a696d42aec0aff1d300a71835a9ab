@@ -142,6 +142,24 @@
       "parentUuid": "5a560959_560ae4eb",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd60fc79_e7c9ea84",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-27T18:15:06Z",
+      "side": 1,
+      "message": "Does that mean the fuzzers already crash? We need to fixup the places causing crashes when we generate the tests such that we don\u0027t need this workaround in the tmpl file, so i\u0027m guessing a similar todo will be needed in other places.",
+      "parentUuid": "9f39f532_0ed8e76d",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
