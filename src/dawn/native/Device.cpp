@@ -37,6 +37,7 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/Version_autogen.h"
+#include "dawn/dawn_proc_table.h"
 #include "dawn/native/AsyncTask.h"
 #include "dawn/native/AttachmentState.h"
 #include "dawn/native/BindGroup.h"
