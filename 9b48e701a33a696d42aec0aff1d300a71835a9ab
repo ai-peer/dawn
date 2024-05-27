@@ -52,6 +52,24 @@
       "parentUuid": "2ec2fce9_ebdd8fbf",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5857bd0_18309dbe",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-27T17:49:48Z",
+      "side": 1,
+      "message": "We can\u0027t land the CL when it causes the compiler to ICE. If you\u0027ve added this to the IR, then you\u0027ll need to handle this in the IR encoder and decoder. It should be a matter of adding a new protobuf field and a new switch case for the encoder and decoder.\n\n+1 to adding a few SKIP expectations with `--generate-skip` instead of hacking the template.",
+      "parentUuid": "209d923c_1b29541e",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
