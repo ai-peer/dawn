@@ -34,6 +34,24 @@
       "parentUuid": "837e6316_a581f59e",
       "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209d923c_1b29541e",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-27T17:45:47Z",
+      "side": 1,
+      "message": "btw, I added the generated wgsl and expectations for all writers in this CL https://dawn-review.googlesource.com/c/dawn/+/189861",
+      "parentUuid": "2ec2fce9_ebdd8fbf",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
