@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "837e6316_a581f59e",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-27T17:29:40Z",
+      "side": 1,
+      "message": "I don\u0027t think you need this. You can have it generate input attachment load, and then generate-skip entries for all the other writers. Then as they get implement the skips are over-written with non-skip expectation files.",
+      "revId": "9b48e701a33a696d42aec0aff1d300a71835a9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
