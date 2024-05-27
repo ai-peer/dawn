@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "92d978e7215a0a81986a9b2b3c0c7cf3b0f08f96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00137fe3_4a18b513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T14:04:45Z",
+      "side": 1,
+      "message": "LGTM with one request",
+      "revId": "92d978e7215a0a81986a9b2b3c0c7cf3b0f08f96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bbb7f2d_20372ac1",
+        "filename": "src/tint/lang/wgsl/reader/reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T14:04:45Z",
+      "side": 1,
+      "message": "This will prevent the fuzzers from exercising this extension for the IR path. Please make a note somewhere to remove this line before we actually ship the extension. Or just remove it now and we\u0027ll address any issues that come up.",
+      "revId": "92d978e7215a0a81986a9b2b3c0c7cf3b0f08f96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
