@@ -71,6 +71,7 @@ enum class SampleTypeBit : uint8_t {
     Depth = 0x4,
     Sint = 0x8,
     Uint = 0x10,
+    External = 0x80,
 };
 
 // Converts a wgpu::TextureSampleType to its bitmask representation.
