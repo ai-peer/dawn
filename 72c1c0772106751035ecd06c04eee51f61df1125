@@ -16,6 +16,23 @@
       "message": "Create a `HasInputAttachmentIndex` on `var` so this ends up the same as the binding point case above?\n\n`var-\u003eHasInputAttachmentIndex()` ...",
       "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d994096_61cc7448",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 566,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-27T18:13:12Z",
+      "side": 1,
+      "message": "```suggestion\n            attrs.Push(b.InputAttachmentIndex(u32(ii.value())));\n```",
+      "revId": "72c1c0772106751035ecd06c04eee51f61df1125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
