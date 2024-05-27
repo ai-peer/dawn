@@ -1,0 +1,45 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ddbe335_ed7146ff",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-27T16:26:37Z",
+      "side": 1,
+      "message": "Please remove this, as discussed offline.",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 9
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "c12e639f_d5ede8bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+              "range": {
+                "startLine": 166,
+                "startChar": 0,
+                "endLine": 169,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "d4c12cee00e9a23e3f8d160d07d12f5700be3a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
