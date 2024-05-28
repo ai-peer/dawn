@@ -69,6 +69,24 @@
       "parentUuid": "64997664_10591869",
       "revId": "12b6ed31c9c8722d2375991a4320d166cef42f9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc63c253_47c9fcc5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-28T17:25:25Z",
+      "side": 1,
+      "message": "Yeah, that build time is definately an issue. I am going to file some more issues based on what is discussed here, to get the IR landed/working.",
+      "parentUuid": "1403edec_5bc96f21",
+      "revId": "12b6ed31c9c8722d2375991a4320d166cef42f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
