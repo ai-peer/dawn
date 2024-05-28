@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "469f3669_04ccb32d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-05-28T20:02:20Z",
+      "side": 1,
+      "message": "This is broken off of https://dawn-review.googlesource.com/c/dawn/+/189713",
+      "revId": "4596d3deb059bb5cd520013faa64c25f96423b93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
