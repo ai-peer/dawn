@@ -105,6 +105,24 @@
       "parentUuid": "4deae629_d7b2d315",
       "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87468eb9_73eb27f3",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T10:13:32Z",
+      "side": 1,
+      "message": "Thank you!",
+      "parentUuid": "23d986f0_ef3edd54",
+      "revId": "57add99564a0a65b8d4e0aace42b773b8b8b2f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
