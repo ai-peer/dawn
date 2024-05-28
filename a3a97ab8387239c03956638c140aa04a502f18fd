@@ -122,6 +122,24 @@
       "parentUuid": "fb344c08_c635e94c",
       "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ac534f_3e4b2aa7",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T17:26:50Z",
+      "side": 1,
+      "message": "That\u0027s right - it would involve changing the tested code. I agree this can wait. Thanks!",
+      "parentUuid": "8e515678_40667961",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
