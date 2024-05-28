@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62be9542_3c835a2d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-05-28T22:31:09Z",
+      "side": 1,
+      "message": "Nit: People like it when you wrap descriptions to 70 characters.",
+      "range": {
+        "startLine": 11,
+        "startChar": 76,
+        "endLine": 11,
+        "endChar": 124
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "150f7120_3f60c6ed",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-05-28T22:31:09Z",
+      "side": 1,
+      "message": "For Windows we want to use JUST the order returned by `EnumAdaptersByPowerPreference` or `EnumAdapters1` with no second guessing by Dawn. \n\n* End users can adjust the order of adapters in \"Settings \u003e System \u003e Display \u003e Graphics\".\n* On my desktop machine, I\u0027ve connected all of my monitors to the NVidia GPU even though there is an \"integrated\" Intel GPU available. \n\nSecond guessing means the incorrect adapter can be chosen in the above two instances.",
+      "range": {
+        "startLine": 421,
+        "startChar": 15,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab070ce_300eaded",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-05-28T22:31:09Z",
+      "side": 1,
+      "message": "Can the factory ever be nullptr?",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 27
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bc3763_eb5b7937",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-05-28T22:31:09Z",
+      "side": 1,
+      "message": "The notion of currency is an interesting one to take into account. \n\nFor our purposes, the important thing is to always use the SAME factory when deciding which adapter to give clients so that all Chromium systems use the same high powered GPU. Adapters can come and go if, for example, you log into a remote desktop session in a VM. The factory is no longer current but the adapters are still perfectly fine to use. \n\nFor Chromium, currency only really matters if there are no longer references any adapters, the factory is no longer current. But in practice, that tends not to happen at least for the primary adapter because the GPU process terminates when the device becomes removed. \n\nI\u0027m OK with leaving currency evaluation out for the initial CL.",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29b56e5a_67f92d8c",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-05-28T22:31:09Z",
+      "side": 1,
+      "message": "```suggestion\n        ComPtr\u003cIDXGIAdapter1\u003e dxgiAdapter;\n```\n\nThe constructor of ComPtr already initializes the pointer member variable to nullptr.",
+      "range": {
+        "startLine": 357,
+        "startChar": 42,
+        "endLine": 357,
+        "endChar": 51
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
