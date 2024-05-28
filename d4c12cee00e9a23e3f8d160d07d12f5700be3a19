@@ -40,6 +40,30 @@
       ],
       "revId": "d4c12cee00e9a23e3f8d160d07d12f5700be3a19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ed77b5f_3c05c263",
+        "filename": "src/tint/lang/spirv/reader/lower/shader_io.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T10:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ddbe335_ed7146ff",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 9
+      },
+      "revId": "d4c12cee00e9a23e3f8d160d07d12f5700be3a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
