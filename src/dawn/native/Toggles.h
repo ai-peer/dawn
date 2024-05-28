@@ -142,6 +142,7 @@ enum class Toggle {
     VulkanSkipDraw,
 
     D3D11UseUnmonitoredFence,
+    D3D11AllowDefaultTextureMapping,
 
     EnumCount,
     InvalidEnum = EnumCount,

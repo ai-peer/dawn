@@ -320,6 +320,9 @@ void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platfor
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
     deviceToggles->Default(Toggle::D3D11UseUnmonitoredFence, !mDeviceInfo.supportsMonitoredFence);
+    // Only use default texture mapping for UMA devices.
+    deviceToggles->Default(Toggle::D3D11AllowDefaultTextureMapping,
+                           mDeviceInfo.supportsDefaultTextureMapping && mDeviceInfo.isUMA);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
