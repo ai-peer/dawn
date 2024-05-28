@@ -86,6 +86,24 @@
       "parentUuid": "399b7e9f_f09cf97d",
       "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb344c08_c635e94c",
+        "filename": "tools/src/cmd/cts/format/format_test.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T08:54:45Z",
+      "side": 1,
+      "message": "There is: https://pkg.go.dev/io/fs and https://pkg.go.dev/testing/fstest.\nThese are fairly recent additions to the standard library, and I haven\u0027t used them yet.",
+      "parentUuid": "3c405c6c_8c5b97ca",
+      "revId": "a3a97ab8387239c03956638c140aa04a502f18fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
