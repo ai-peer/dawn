@@ -383,6 +383,9 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
 
                 DAWN_TRY(ToBackend(src.texture)
                              ->Read(commandContext, subresources, src.origin, copy->copySize,
+                                    scopedDstMap.GetMappedData() != nullptr
+                                        ? scopedDstMap.GetMappedData() + dst.offset
+                                        : nullptr,
                                     dst.bytesPerRow, dst.rowsPerImage, callback));
 
                 dst.buffer->MarkUsedInPendingCommands();
