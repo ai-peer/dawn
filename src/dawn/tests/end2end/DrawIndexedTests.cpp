@@ -156,6 +156,10 @@ TEST_P(DrawIndexedTest, Uint32) {
 // Test the parameter 'baseVertex' of DrawIndexed() works.
 TEST_P(DrawIndexedTest, BaseVertex) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_base_vertex"));
+
+    // TODO(crbug.com/343178421): SwANGLE fails with negative baseVertex.
+    DAWN_SUPPRESS_TEST_IF(IsANGLESwiftShader());
+
     utils::RGBA8 filled(0, 255, 0, 255);
     utils::RGBA8 notFilled(0, 0, 0, 0);
 
