@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a87dc1_685d0232",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-28T22:37:47Z",
+      "side": 1,
+      "message": "nit: Usually we just use the bug id here, Gerrit will still turn it into a hyperlink. It may also be necessary to get the Gitwatcher bot to auto-post the CL update on the bug.\n```suggestion\nBug: 342840940\n```",
+      "revId": "2e4807b286a3dafa8404222b038e01de43131085",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
