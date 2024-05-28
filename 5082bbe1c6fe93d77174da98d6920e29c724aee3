@@ -68,6 +68,24 @@
       "parentUuid": "917f2892_2326c50c",
       "revId": "5082bbe1c6fe93d77174da98d6920e29c724aee3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bdbc1b0_a88e488d",
+        "filename": "src/dawn/native/CreatePipelineAsyncEvent.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T13:58:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78772ddb_9dcea527",
+      "revId": "5082bbe1c6fe93d77174da98d6920e29c724aee3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
