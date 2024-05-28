@@ -1,0 +1,126 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9fe95f_d5429771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T17:40:50Z",
+      "side": 1,
+      "message": "looking good so far",
+      "revId": "c42dbc791b598d8bbc87a9694f0a219772ac9a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f73f02d6_94d6c23c",
+        "filename": "docs/tint/fuzzers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T17:40:50Z",
+      "side": 1,
+      "message": "Add an intro:\n\n\u003e There are two kinds of fuzzers:",
+      "fixSuggestions": [
+        {
+          "fixId": "4e139ccb_76029a55",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/fuzzers.md",
+              "range": {
+                "startLine": 3,
+                "startChar": 0,
+                "endLine": 3,
+                "endChar": 0
+              },
+              "replacement": "There are two kinds of fuzzers:\n\n* `tint::Program` fuzzers, which take WGSL source code as input.\n* `tint::core::ir::Module` fuzzers, which take an IR module as input.\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c42dbc791b598d8bbc87a9694f0a219772ac9a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6dae2c4_c99c021f",
+        "filename": "docs/tint/fuzzers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T17:40:50Z",
+      "side": 1,
+      "message": "Where is the WGSL input taken from?\nFrom stdin?  From a named file?\n\nPlease add an example usage",
+      "fixSuggestions": [
+        {
+          "fixId": "e92fae09_cae37d36",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/fuzzers.md",
+              "range": {
+                "startLine": 92,
+                "startChar": 0,
+                "endLine": 93,
+                "endChar": 0
+              },
+              "replacement": "This Tint fuzzer accepts WGSL textual input from stdin and parses line comments (`//`) as a base-64 binary encoded data stream for the [additional fuzzer parameters](additional-fuzzer-data).\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c42dbc791b598d8bbc87a9694f0a219772ac9a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae03f2d8_8c3b80f7",
+        "filename": "docs/tint/fuzzers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T17:40:50Z",
+      "side": 1,
+      "message": "Maybe it belongs elsewhere, but how are these wired up to Chrome\u0027s fuzzing infra?\nIs that done via executable or a libFuzzer integration?\n\n(Or maybe +rharrison will write this bit, elsewhere.)",
+      "fixSuggestions": [
+        {
+          "fixId": "85ec65e1_3f020589",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/fuzzers.md",
+              "range": {
+                "startLine": 115,
+                "startChar": 0,
+                "endLine": 116,
+                "endChar": 0
+              },
+              "replacement": "TODO: Document when landed. \\\nTODO: Document how the fuzzers are wired up to Chrome\u0027s fuzzing infra.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c42dbc791b598d8bbc87a9694f0a219772ac9a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
