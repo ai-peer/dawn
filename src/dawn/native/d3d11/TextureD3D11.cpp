@@ -238,7 +238,7 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
 }
 
 template <typename T>
-T Texture::GetD3D11TextureDesc() const {
+T Texture::GetD3D11TextureDesc() {
     T desc;
 
     if constexpr (std::is_same<T, D3D11_TEXTURE1D_DESC>::value) {
@@ -277,8 +277,16 @@ T Texture::GetD3D11TextureDesc() const {
                                       : d3d::DXGITextureFormat(GetFormat().format);
     desc.Usage = mKind == Kind::Staging ? D3D11_USAGE_STAGING : D3D11_USAGE_DEFAULT;
     desc.BindFlags = D3D11TextureBindFlags(GetInternalUsage(), GetFormat());
+    // If the texture is used for transfer, we use default texture mapping if available to reduce
+    // memory copy.
+    mUseDefaultTextureMapping =
+        ToBackend(GetDevice())->GetDeviceInfo().supportDefaultTextureMapping &&
+        (GetUsage() & (wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst));
+    mUseDefaultTextureMapping &= GetDimension() == wgpu::TextureDimension::e2D;
+    mUseDefaultTextureMapping &= GetFormat().IsColor();
     constexpr UINT kCPUReadWriteFlags = D3D11_CPU_ACCESS_READ | D3D11_CPU_ACCESS_WRITE;
-    desc.CPUAccessFlags = mKind == Kind::Staging ? kCPUReadWriteFlags : 0;
+    desc.CPUAccessFlags =
+        (mKind == Kind::Staging || mUseDefaultTextureMapping) ? kCPUReadWriteFlags : 0;
 
     return desc;
 }
@@ -978,10 +986,49 @@ MaybeError Texture::ReadStaging(const ScopedCommandRecordingContext* commandCont
     return {};
 }
 
+MaybeError Texture::ReadDefault(const ScopedCommandRecordingContext* commandContext,
+                                const SubresourceRange& subresources,
+                                const Origin3D& origin,
+                                Extent3D size,
+                                uint8_t* data,
+                                uint32_t dstBytesPerRow,
+                                uint32_t dstRowsPerImage) {
+    DAWN_ASSERT(size.width != 0 && size.height != 0 && size.depthOrArrayLayers != 0);
+
+    D3D11_BOX box;
+    box.left = origin.x;
+    box.right = origin.x + size.width;
+    box.top = origin.y;
+    box.bottom = origin.y + size.height;
+    box.front = 0;
+    box.back = 1;
+
+    for (uint32_t layer = 0; layer < subresources.layerCount;
+         ++layer, data += dstRowsPerImage * dstBytesPerRow) {
+        UINT d3d11Subresource =
+            GetSubresourceIndex(subresources.baseMipLevel, subresources.baseArrayLayer + layer,
+                                D3D11Aspect(subresources.aspects));
+
+        // Copy the staging texture to the buffer.
+        // The Map() will block until the GPU is done with the texture.
+        // TODO(dawn:1705): avoid blocking the CPU.
+        DAWN_TRY(CheckHRESULT(
+            commandContext->Map(GetD3D11Resource(), d3d11Subresource, D3D11_MAP_READ, 0, nullptr),
+            "D3D11 map default texture"));
+        ToBackend(GetDevice())
+            ->GetD3D11Device5()
+            ->ReadFromSubresource(data, dstBytesPerRow, dstBytesPerRow * dstRowsPerImage,
+                                  GetD3D11Resource(), d3d11Subresource, &box);
+        commandContext->Unmap(GetD3D11Resource(), d3d11Subresource);
+    }
+    return {};
+}
+
 MaybeError Texture::Read(const ScopedCommandRecordingContext* commandContext,
                          const SubresourceRange& subresources,
                          const Origin3D& origin,
                          Extent3D size,
+                         uint8_t* data,
                          uint32_t dstBytesPerRow,
                          uint32_t dstRowsPerImage,
                          Texture::ReadCallback callback) {
@@ -989,6 +1036,10 @@ MaybeError Texture::Read(const ScopedCommandRecordingContext* commandContext,
     DAWN_ASSERT(mKind != Kind::Staging);
 
     DAWN_TRY(EnsureSubresourceContentInitialized(commandContext, subresources));
+    if (mUseDefaultTextureMapping && data != nullptr) {
+        return ReadDefault(commandContext, subresources, origin, size, data, dstBytesPerRow,
+                           dstRowsPerImage);
+    }
     TextureDescriptor desc = {};
     desc.label = "CopyTextureToBufferStaging";
     desc.dimension = GetDimension();
@@ -1168,8 +1219,8 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
 
             // TODO(dawn:1705): Work out a way of GPU-GPU copy, rather than the CPU-GPU round trip.
             GetDevice()->EmitWarningOnce("Sampling the stencil component is rather slow now.");
-            DAWN_TRY(Read(commandContext, singleRange, {0, 0, 0}, size, bytesPerRow, rowsPerImage,
-                          callback));
+            DAWN_TRY(Read(commandContext, singleRange, {0, 0, 0}, size, nullptr, bytesPerRow,
+                          rowsPerImage, callback));
 
             DAWN_TRY(mTextureForStencilSampling->WriteInternal(commandContext, singleRange,
                                                                {0, 0, 0}, size, stagingData.data(),
