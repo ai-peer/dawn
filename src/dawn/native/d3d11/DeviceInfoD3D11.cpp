@@ -45,6 +45,8 @@ ResultOrError<DeviceInfo> GatherDeviceInfo(const ComPtr<IDXGIAdapter4>& adapter,
 
     info.isUMA = options2.UnifiedMemoryArchitecture;
     info.supportsROV = options2.ROVsSupported;
+    // Only use default texture mapping for UMA devices.
+    info.supportsDefaultTextureMapping = options2.MapOnDefaultTextures && info.isUMA;
 
     info.shaderModel = 50;
     // Profiles are always <stage>s_<minor>_<major> so we build the s_<minor>_major and add
