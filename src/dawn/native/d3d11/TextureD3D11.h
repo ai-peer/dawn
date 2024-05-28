@@ -97,6 +97,7 @@ class Texture final : public d3d::Texture {
                     const SubresourceRange& subresources,
                     const Origin3D& origin,
                     Extent3D size,
+                    uint8_t* data,
                     uint32_t bytesPerRow,
                     uint32_t rowsPerImage,
                     ReadCallback callback);
@@ -130,7 +131,7 @@ class Texture final : public d3d::Texture {
     ~Texture() override;
 
     template <typename T>
-    T GetD3D11TextureDesc() const;
+    T GetD3D11TextureDesc();
 
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Texture);
@@ -163,6 +164,13 @@ class Texture final : public d3d::Texture {
                            uint32_t bytesPerRow,
                            uint32_t rowsPerImage,
                            ReadCallback callback);
+    MaybeError ReadDefault(const ScopedCommandRecordingContext* commandContext,
+                           const SubresourceRange& subresources,
+                           const Origin3D& origin,
+                           Extent3D size,
+                           uint8_t* data,
+                           uint32_t dstBytesPerRow,
+                           uint32_t dstRowsPerImage);
 
     // Write the texture without the content initialization bookkeeping.
     MaybeError WriteInternal(const ScopedCommandRecordingContext* commandContext,
@@ -187,6 +195,9 @@ class Texture final : public d3d::Texture {
                                    CopyTextureToTextureCmd* copy);
 
     const Kind mKind = Kind::Normal;
+    // Use default texture mapping to reduce copying and memory usage for UMA GPU.
+    // https://learn.microsoft.com/en-us/windows/win32/direct3d11/default-texture-mapping
+    bool mUseDefaultTextureMapping = true;
     ComPtr<ID3D11Resource> mD3d11Resource;
     Ref<d3d::KeyedMutex> mKeyedMutex;
 

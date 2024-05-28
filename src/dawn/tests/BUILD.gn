@@ -898,6 +898,7 @@ dawn_test("dawn_perf_tests") {
     "perf_tests/MatrixVectorMultiplyPerf.cpp",
     "perf_tests/ShaderRobustnessPerf.cpp",
     "perf_tests/SubresourceTrackingPerf.cpp",
+    "perf_tests/TextureReadPerf.cpp",
     "perf_tests/UniformBufferUpdatePerf.cpp",
     "perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
   ]
