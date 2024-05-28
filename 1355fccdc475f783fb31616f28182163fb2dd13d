@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92cbf1fe_1ce5b5d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-05-28T18:35:38Z",
+      "side": 1,
+      "message": "+enga to stamp since it looks like bclayton has been removed from the OWNERS file",
+      "revId": "1355fccdc475f783fb31616f28182163fb2dd13d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
