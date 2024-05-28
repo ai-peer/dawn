@@ -22,6 +22,30 @@
       },
       "revId": "f709f1addb3c41ad744557564958b8a435618cea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ff9c8a_3d948790",
+        "filename": "src/tint/lang/msl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T13:56:06Z",
+      "side": 1,
+      "message": "Done. Sorry for the half-arsed fix.",
+      "parentUuid": "e9803f77_3ef69616",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 17
+      },
+      "revId": "f709f1addb3c41ad744557564958b8a435618cea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
