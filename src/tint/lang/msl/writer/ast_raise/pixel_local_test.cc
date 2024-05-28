@@ -793,7 +793,9 @@ struct PixelLocal {
 var<private> P : PixelLocal;
 
 struct Output {
+  @location(0)
   x : vec4f,
+  @location(2)
   y : vec4f,
 }
 

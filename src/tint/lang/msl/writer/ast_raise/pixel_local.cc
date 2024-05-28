@@ -217,14 +217,6 @@ struct PixelLocal::State {
                     auto& member_attrs = member->Declaration()->attributes;
                     add_member(member->Type(), ctx.Clone(member_attrs));
                     return_args.Push(b.MemberAccessor(call_result, ctx.Clone(member->Name())));
-                    if (auto* location = ast::GetAttribute<ast::LocationAttribute>(member_attrs)) {
-                        // Remove the @location attribute from the member of the inner function's
-                        // output structure.
-                        // Note: This will break other entry points that share the same output
-                        // structure, however this transform assumes that the SingleEntryPoint
-                        // transform will have already been run.
-                        ctx.Remove(member_attrs, location);
-                    }
                 }
             } else {
                 // The entry point returned a non-structure
