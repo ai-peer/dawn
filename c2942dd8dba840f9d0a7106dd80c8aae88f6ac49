@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5d4d768_f3ec93e9",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T12:55:47Z",
+      "side": 1,
+      "message": "Could just use operator `[]`, which creates the entry if it doesn\u0027t exist. That could remove the need for the code at L276 (and would also remove empty entries)",
+      "fixSuggestions": [
+        {
+          "fixId": "f0587275_c5496bae",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/msl/writer/printer/printer.cc",
+              "range": {
+                "startLine": 369,
+                "startChar": 0,
+                "endLine": 370,
+                "endChar": 0
+              },
+              "replacement": "                    auto\u0026 allocations \u003d result_.workgroup_allocations[func_name];\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c2942dd8dba840f9d0a7106dd80c8aae88f6ac49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
