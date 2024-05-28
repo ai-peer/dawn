@@ -16,6 +16,23 @@
       "message": "looks reasonable to me, but will let David have final approval",
       "revId": "f7d52540288e6c2b6e0b07beef138bf4df8c2198",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3edddebe_660fb532",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T18:58:45Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f7d52540288e6c2b6e0b07beef138bf4df8c2198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
