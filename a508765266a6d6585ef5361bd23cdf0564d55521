@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9990a3f0_c44ca165",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/builder.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 2269,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-28T17:48:40Z",
+      "side": 1,
+      "message": "I think we should change `IsTexture()` to return `true` for `kInputAttachmentLoad` instead.",
+      "revId": "a508765266a6d6585ef5361bd23cdf0564d55521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
