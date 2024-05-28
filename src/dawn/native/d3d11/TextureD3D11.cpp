@@ -283,6 +283,29 @@ T Texture::GetD3D11TextureDesc() const {
     return desc;
 }
 
+bool Texture::SupportsDefaultTextureMapping(const D3D11_TEXTURE2D_DESC& desc) {
+    // Try using default texture mapping if it's available and allowed.
+    bool result = GetDevice()->IsToggleEnabled(Toggle::D3D11AllowDefaultTextureMapping) &&
+                  ToBackend(GetDevice())->GetDeviceInfo().supportsDefaultTextureMapping &&
+                  desc.Usage == D3D11_USAGE_DEFAULT;
+
+    // Only use default texture mapping if the texture intends to be used for readback.
+    result &= GetUsage() & (wgpu::TextureUsage::CopySrc);
+
+    // If CPU access is requested on a D3D11_USAGE_DEFAULT Texture, then MSAA must be disabled.
+    result &= (desc.SampleDesc.Count == 1 && desc.SampleDesc.Quality == 0);
+
+    // The D3D11_RESOURCE_MISC_FLAG cannot be used when creating resources with D3D11_CPU_ACCESS
+    // flags.
+    result &= desc.MiscFlags == 0;
+    // Currently we only use default texture mapping for 2D color textures, although it's applicable
+    // for other textures.
+    result &= GetDimension() == wgpu::TextureDimension::e2D;
+    result &= GetFormat().IsColor();
+
+    return result;
+}
+
 MaybeError Texture::InitializeAsInternalTexture() {
     Device* device = ToBackend(GetDevice());
 
@@ -306,6 +329,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
         }
         case wgpu::TextureDimension::e2D: {
             D3D11_TEXTURE2D_DESC desc = GetD3D11TextureDesc<D3D11_TEXTURE2D_DESC>();
+            mUseDefaultTextureMapping = SupportsDefaultTextureMapping(desc);
+            desc.CPUAccessFlags |= mUseDefaultTextureMapping ? D3D11_CPU_ACCESS_READ : 0;
             ComPtr<ID3D11Texture2D> d3d11Texture2D;
             DAWN_TRY(CheckOutOfMemoryHRESULT(
                 device->GetD3D11Device()->CreateTexture2D(&desc, nullptr, &d3d11Texture2D),
@@ -978,10 +1003,50 @@ MaybeError Texture::ReadStaging(const ScopedCommandRecordingContext* commandCont
     return {};
 }
 
+MaybeError Texture::ReadDefault(const ScopedCommandRecordingContext* commandContext,
+                                const SubresourceRange& subresources,
+                                const Origin3D& origin,
+                                Extent3D size,
+                                uint8_t* data,
+                                uint32_t dstBytesPerRow,
+                                uint32_t dstRowsPerImage) {
+    DAWN_ASSERT(size.width != 0 && size.height != 0 && size.depthOrArrayLayers != 0);
+    DAWN_ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
+
+    D3D11_BOX box;
+    box.left = origin.x;
+    box.right = origin.x + size.width;
+    box.top = origin.y;
+    box.bottom = origin.y + size.height;
+    box.front = 0;
+    box.back = 1;
+
+    for (uint32_t layer = 0; layer < subresources.layerCount;
+         ++layer, data += dstRowsPerImage * dstBytesPerRow) {
+        UINT d3d11Subresource =
+            GetSubresourceIndex(subresources.baseMipLevel, subresources.baseArrayLayer + layer,
+                                D3D11Aspect(subresources.aspects));
+
+        // Copy the staging texture to the buffer.
+        // The Map() will block until the GPU is done with the texture.
+        // TODO(dawn:1705): avoid blocking the CPU.
+        DAWN_TRY(CheckHRESULT(
+            commandContext->Map(GetD3D11Resource(), d3d11Subresource, D3D11_MAP_READ, 0, nullptr),
+            "D3D11 map default texture"));
+        ToBackend(GetDevice())
+            ->GetD3D11Device5()
+            ->ReadFromSubresource(data, dstBytesPerRow, dstBytesPerRow * dstRowsPerImage,
+                                  GetD3D11Resource(), d3d11Subresource, &box);
+        commandContext->Unmap(GetD3D11Resource(), d3d11Subresource);
+    }
+    return {};
+}
+
 MaybeError Texture::Read(const ScopedCommandRecordingContext* commandContext,
                          const SubresourceRange& subresources,
                          const Origin3D& origin,
                          Extent3D size,
+                         uint8_t* data,
                          uint32_t dstBytesPerRow,
                          uint32_t dstRowsPerImage,
                          Texture::ReadCallback callback) {
@@ -989,6 +1054,10 @@ MaybeError Texture::Read(const ScopedCommandRecordingContext* commandContext,
     DAWN_ASSERT(mKind != Kind::Staging);
 
     DAWN_TRY(EnsureSubresourceContentInitialized(commandContext, subresources));
+    if (mUseDefaultTextureMapping && data != nullptr) {
+        return ReadDefault(commandContext, subresources, origin, size, data, dstBytesPerRow,
+                           dstRowsPerImage);
+    }
     TextureDescriptor desc = {};
     desc.label = "CopyTextureToBufferStaging";
     desc.dimension = GetDimension();
@@ -1168,8 +1237,8 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
 
             // TODO(dawn:1705): Work out a way of GPU-GPU copy, rather than the CPU-GPU round trip.
             GetDevice()->EmitWarningOnce("Sampling the stencil component is rather slow now.");
-            DAWN_TRY(Read(commandContext, singleRange, {0, 0, 0}, size, bytesPerRow, rowsPerImage,
-                          callback));
+            DAWN_TRY(Read(commandContext, singleRange, {0, 0, 0}, size, nullptr, bytesPerRow,
+                          rowsPerImage, callback));
 
             DAWN_TRY(mTextureForStencilSampling->WriteInternal(commandContext, singleRange,
                                                                {0, 0, 0}, size, stagingData.data(),

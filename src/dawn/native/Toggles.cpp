@@ -571,6 +571,9 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
     {Toggle::D3D11UseUnmonitoredFence,
      {"d3d11_use_unmonitored_fence", "Use d3d11 unmonitored fence.",
       "https://crbug.com/chromium/335553337", ToggleStage::Device}},
+    {Toggle::D3D11AllowDefaultTextureMapping,
+     {"d3d11_allow_default_texture_mapping", "Allow to use d3d11 default texture mapping.",
+      "https://crbug.com/chromium/344359532", ToggleStage::Device}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

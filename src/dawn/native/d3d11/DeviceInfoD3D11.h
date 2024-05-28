@@ -49,6 +49,7 @@ struct DeviceInfo {
     size_t sharedSystemMemory;
     bool supportsMonitoredFence;
     bool supportsNonMonitoredFence;
+    bool supportsDefaultTextureMapping;
 };
 
 ResultOrError<DeviceInfo> GatherDeviceInfo(const ComPtr<IDXGIAdapter4>& adapter,
