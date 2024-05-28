@@ -16,6 +16,23 @@
       "message": "This is broken off of https://dawn-review.googlesource.com/c/dawn/+/189713",
       "revId": "4596d3deb059bb5cd520013faa64c25f96423b93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c770f22_48277075",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T20:06:41Z",
+      "side": 1,
+      "message": "heh, I removed myself from OWNERS a bit too soon!",
+      "revId": "4596d3deb059bb5cd520013faa64c25f96423b93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
