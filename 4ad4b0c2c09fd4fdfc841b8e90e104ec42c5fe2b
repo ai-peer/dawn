@@ -133,6 +133,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cce50fd_29a54033",
+        "filename": "test/tint/builtins/gen/literal/inputAttachmentLoad/315bf5.wgsl.expected.glsl",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-28T15:02:01Z",
+      "side": 1,
+      "message": "No, that\u0027s fine, as long as we understand where it\u0027s coming from and know it\u0027s the GLSL backend specifically it\u0027s good to SKIP. It just seemed weird so wanted to make sure we understood what was the cause.",
+      "parentUuid": "2464cf94_c2e53558",
+      "revId": "4ad4b0c2c09fd4fdfc841b8e90e104ec42c5fe2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a72c5307_fb742bf4",
