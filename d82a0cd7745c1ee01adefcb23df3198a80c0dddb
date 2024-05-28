@@ -1,0 +1,91 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8947d779_50049f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T18:08:07Z",
+      "side": 1,
+      "message": "Based on our conversation I added suggested text.",
+      "revId": "d82a0cd7745c1ee01adefcb23df3198a80c0dddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619db8aa_f8fd0dc9",
+        "filename": "docs/tint/fuzzers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T18:08:07Z",
+      "side": 1,
+      "message": "Suggest adding:\n\n\u003e ## Chrome\u0027s ClusterFuzz\n\n\u003e Dawn is a part of Chrome. Tint fuzzers created as described above will automatically be discovered by the Chrome build, and automatically run by Google\u0027s ClusterFuzz project.\n\n\u003e  See [src/tint/tint.gni](../src/tint/tint.gni] for how the `tint_fuzzer_test` template maps Tint fuzzers to `fuzzer_test` ClusterFizz targets.",
+      "fixSuggestions": [
+        {
+          "fixId": "bc106686_f966469f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/fuzzers.md",
+              "range": {
+                "startLine": 86,
+                "startChar": 0,
+                "endLine": 86,
+                "endChar": 0
+              },
+              "replacement": "## Chrome\u0027s ClusterFuzz\n\nDawn is a part of Chrome. Tint fuzzers created as described above will\nautomatically be discovered by the Chrome build, and automatically run by\nGoogle\u0027s ClusterFuzz project.\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d82a0cd7745c1ee01adefcb23df3198a80c0dddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9db495db_5a802667",
+        "filename": "docs/tint/fuzzers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-28T18:08:07Z",
+      "side": 1,
+      "message": "Add\n\n\u003e These are useful for ad hoc local testing.",
+      "fixSuggestions": [
+        {
+          "fixId": "e620a71b_0e3be11e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/fuzzers.md",
+              "range": {
+                "startLine": 88,
+                "startChar": 0,
+                "endLine": 89,
+                "endChar": 0
+              },
+              "replacement": "Tint has two fuzzer executable targets, which are useful for ad hoc local testing:\n"
+            }
+          ]
+        }
+      ],
+      "revId": "d82a0cd7745c1ee01adefcb23df3198a80c0dddb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
