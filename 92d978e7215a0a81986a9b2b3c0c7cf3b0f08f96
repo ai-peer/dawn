@@ -67,6 +67,24 @@
       "message": "This will prevent the fuzzers from exercising this extension for the IR path. Please make a note somewhere to remove this line before we actually ship the extension. Or just remove it now and we\u0027ll address any issues that come up.",
       "revId": "92d978e7215a0a81986a9b2b3c0c7cf3b0f08f96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d449f2_81d33f7d",
+        "filename": "src/tint/lang/wgsl/reader/reader.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-05-28T01:33:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bbb7f2d_20372ac1",
+      "revId": "92d978e7215a0a81986a9b2b3c0c7cf3b0f08f96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
