@@ -7,12 +7,12 @@ struct PushConstants {
 
 layout(location=0) uniform PushConstants a;
 vec4 tint_symbol(uint b) {
-  return vec4((a.inner + float((b + a.first_instance))));
+  return vec4((a.inner + float(b)));
 }
 
 void main() {
   gl_PointSize = 1.0;
-  vec4 inner_result = tint_symbol(uint(gl_InstanceID));
+  vec4 inner_result = tint_symbol((uint(gl_InstanceID) + a.first_instance));
   gl_Position = inner_result;
   gl_Position.y = -(gl_Position.y);
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
