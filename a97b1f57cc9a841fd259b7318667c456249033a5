@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8eb87b84_66bb7747",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-28T12:44:11Z",
+      "side": 1,
+      "message": "I would like to reduce those, but for now, they are indeed all used.\n\nAlternatively, dawn could provide:\n```\nis_cast_android \u003d false\nis_castos \u003d false\nis_cronet_build \u003d false\n```\n\nIf you already know Dawn will never need to run on those config. WDYT?",
+      "parentUuid": "60af52b6_9616f7fb",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12d8a3bb_76a9d207",
         "filename": "build_overrides/partition_alloc.gni",
         "patchSetId": 12
@@ -95,6 +119,24 @@
       "writtenOn": "2024-05-27T21:34:49Z",
       "side": 1,
       "message": "Note that Skia doesn\u0027t use C++20 be default (or is not ready to raise the requirement?)",
+      "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a21696_95e51a82",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-28T12:44:11Z",
+      "side": 1,
+      "message": "ACK. For now, I think we can use both values in Dawn. It doesn\u0027t really matter.\nWhen I will try making Skia to depend on Dawn, if they have some bots configured for C++17, I will have to downgrade whatever change got accepted in partition_alloc",
+      "parentUuid": "12d8a3bb_76a9d207",
       "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

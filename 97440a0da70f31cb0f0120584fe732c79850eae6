@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d996f05f_506e128d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-28T12:44:11Z",
+      "side": 1,
+      "message": "The last failure will be fixed by:\nhttps://github.com/microsoft/DirectXShaderCompiler/pull/6648\n\nNo way to circumvent this, so I am going to wait a roll DXC separately when available.",
+      "revId": "97440a0da70f31cb0f0120584fe732c79850eae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
