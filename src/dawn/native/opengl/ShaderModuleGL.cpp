@@ -168,6 +168,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     const OpenGLFunctions& gl,
     const ProgrammableStage& programmableStage,
     SingleShaderStage stage,
+    bool usesVertexIndex,
     bool usesInstanceIndex,
     bool usesFragDepth,
     CombinedSamplerInfo* combinedSamplers,
@@ -294,6 +295,10 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     if (usesInstanceIndex) {
         req.tintOptions.first_instance_offset =
             4 * PipelineLayout::PushConstantLocation::FirstInstance;
+    }
+
+    if (usesVertexIndex) {
+        req.tintOptions.first_vertex_offset = 4 * PipelineLayout::PushConstantLocation::FirstVertex;
     }
 
     if (usesFragDepth) {
