@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9473ec4b_662e9ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-28T12:07:58Z",
+      "side": 1,
+      "message": "Austin: for review\nSaif, Nicolette: FYI\n\nThanks!",
+      "revId": "4bb019023bcbdcaf8bf35914a6b42c3c38907ffa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a31443f_4bf84341",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-28T12:07:58Z",
+      "side": 1,
+      "message": "AFAICT we don\u0027t have platform-specific tests of Device, so I just stuck this here as a convenient placeholder in order to ask you where you think it makes most sense to be (including potentially in a new test file).",
+      "revId": "4bb019023bcbdcaf8bf35914a6b42c3c38907ffa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
