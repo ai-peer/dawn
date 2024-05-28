@@ -52,6 +52,24 @@
       "parentUuid": "c5d4d768_f3ec93e9",
       "revId": "c2942dd8dba840f9d0a7106dd80c8aae88f6ac49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5a6366_58ee3fb2",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T14:15:52Z",
+      "side": 1,
+      "message": "Fair enough.",
+      "parentUuid": "f12de3ae_82abb4f1",
+      "revId": "c2942dd8dba840f9d0a7106dd80c8aae88f6ac49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
