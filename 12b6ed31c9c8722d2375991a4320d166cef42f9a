@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7cd925b_5968d79c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-28T17:11:11Z",
+      "side": 1,
+      "message": "I feel this is too large as a single CL, and is missing unit tests for the new validation. I suggest splitting it into the following CLs:\n* Build support for libprotobuf-mutator: `src/tint/externals.json`, `third_party/libprotobuf-mutator/BUILD.gn`, `tools/src/cmd/gen/build/BUILD.gn.tmpl`\n* Additional IR validation: `src/tint/lang/core/ir/*`. There\u0027s a bunch of unit tests that need adding here for the new validation.\n* The new IR fuzzer: `src/tint/BUILD.gn`, `src/tint/cmd/fuzz/ir/*`, `src/tint/tint.gni`\n\nBefore the new fuzzer can land, there\u0027s additional validation that\u0027s likely needed. Locally the fuzzer still finds stuff after about a minute of testing.",
+      "revId": "12b6ed31c9c8722d2375991a4320d166cef42f9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
