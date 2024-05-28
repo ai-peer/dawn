@@ -159,6 +159,9 @@ struct Options {
     /// Offset of the firstInstance push constant.
     std::optional<int32_t> first_instance_offset;
 
+    /// Offset of the firstVertex push constant.
+    std::optional<int32_t> first_vertex_offset;
+
     /// Offsets of the minDepth and maxDepth push constants.
     std::optional<DepthRangeOffsets> depth_range_offsets;
 
@@ -177,6 +180,7 @@ struct Options {
                  binding_remapper_options,
                  external_texture_options,
                  first_instance_offset,
+                 first_vertex_offset,
                  depth_range_offsets,
                  texture_builtins_from_uniform);
 };

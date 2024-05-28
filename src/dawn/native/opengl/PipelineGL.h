@@ -75,6 +75,7 @@ class PipelineGL {
                               const PipelineLayout* layout,
                               const PerStage<ProgrammableStage>& stages,
                               bool usesInstanceIndex,
+                              bool usesVertexIndex,
                               bool usesFragDepth);
     void DeleteProgram(const OpenGLFunctions& gl);
 

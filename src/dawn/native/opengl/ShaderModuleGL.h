@@ -90,6 +90,7 @@ class ShaderModule final : public ShaderModuleBase {
                                         const ProgrammableStage& programmableStage,
                                         SingleShaderStage stage,
                                         bool usesInstanceIndex,
+                                        bool usesVertexIndex,
                                         bool usesFragDepth,
                                         CombinedSamplerInfo* combinedSamplers,
                                         const PipelineLayout* layout,
