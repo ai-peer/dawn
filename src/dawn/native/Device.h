@@ -294,6 +294,8 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     AdapterBase* APIGetAdapter();
     QueueBase* APIGetQueue();
 
+    wgpu::Status APIGetAHardwareBufferProperties(void* handle,
+                                                 AHardwareBufferProperties* properties) const;
     wgpu::Status APIGetLimits(SupportedLimits* limits) const;
     bool APIHasFeature(wgpu::FeatureName feature) const;
     size_t APIEnumerateFeatures(wgpu::FeatureName* features) const;
@@ -554,6 +556,12 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
                                                     const TextureDataLayout& src,
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
+    virtual MaybeError GetAHardwareBufferPropertiesImpl(
+        void* handle,
+        AHardwareBufferProperties* properties) const {
+        return DAWN_VALIDATION_ERROR(
+            "Querying AHardwareBufferProperties is not supported on this platform.");
+    }
 
     UncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
 
