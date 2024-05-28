@@ -286,6 +286,24 @@
       "parentUuid": "a72c5307_fb742bf4",
       "revId": "4ad4b0c2c09fd4fdfc841b8e90e104ec42c5fe2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d0116fe_5defdee1",
+        "filename": "test/tint/builtins/gen/literal/inputAttachmentLoad/315bf5.wgsl.expected.msl",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-28T15:47:28Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3b210add_c0935a33",
+      "revId": "4ad4b0c2c09fd4fdfc841b8e90e104ec42c5fe2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
