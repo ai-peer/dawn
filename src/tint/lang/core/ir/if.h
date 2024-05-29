@@ -61,6 +61,9 @@ class If final : public Castable<If, ControlInstruction> {
     /// The index of the condition operand
     static constexpr size_t kConditionOperandOffset = 0;
 
+    /// The fixed number of operands used by this instruction
+    static constexpr size_t kNumOperands = 1;
+
     /// Constructor (no results, no operands, no blocks)
     If();
 

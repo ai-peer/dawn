@@ -192,7 +192,7 @@ TEST_F(IR_ValidatorTest, Function_ParameterWithNullFunction) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
-              R"(:1:17 error: function parameter has nullptr parent function
+              R"(:1:17 error: function parameter has null parent function
 %my_func = func(%my_param:f32):void {
                 ^^^^^^^^^^^^^
 
@@ -327,7 +327,7 @@ TEST_F(IR_ValidatorTest, CallToEntryPointFunction) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
-              R"(:3:20 error: call: call target must not have a pipeline stage
+              R"(:3:20 error: call: target must not have a pipeline stage
     %2:void = call %g
                    ^^
 
@@ -456,6 +456,77 @@ note: # Disassembly
 %f = func():void {
   $B2: {
     %6:void = call %g, 1i, 2.0f, 3i
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidatorTest, CallToBuiltInTooFewArguments) {
+    auto* f = b.Function("f", ty.void_());
+    b.Append(f->Block(), [&] {
+        b.Call(ty.f32(), BuiltinFn::kAtan2, 2_f);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_NE(res, Success);
+    EXPECT_EQ(res.Failure().reason.Str(),
+              R"(:3:14 error: atan2: no matching call to 'atan2(f32)'
+
+2 candidate functions:
+ • 'atan2(T  ✓ , T  ✗ ) -> T' where:
+      ✓  'T' is 'f32' or 'f16'
+ • 'atan2(vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<T>' where:
+      ✗  'T' is 'f32' or 'f16'
+
+    %2:f32 = atan2 2.0f
+             ^^^^^
+
+:2:3 note: in block
+  $B1: {
+  ^^^
+
+note: # Disassembly
+%f = func():void {
+  $B1: {
+    %2:f32 = atan2 2.0f
+    ret
+  }
+}
+)");
+}
+
+TEST_F(IR_ValidatorTest, CallToBuiltInTooManyArguments) {
+    auto* f = b.Function("f", ty.void_());
+    b.Append(f->Block(), [&] {
+        b.Call(ty.f32(), BuiltinFn::kAtan2, 1_f, 2_f, 3_f);
+        b.Return(f);
+    });
+
+    auto res = ir::Validate(mod);
+    ASSERT_NE(res, Success);
+    EXPECT_EQ(res.Failure().reason.Str(),
+              R"(:3:14 error: atan2: no matching call to 'atan2(f32, f32, f32)'
+
+2 candidate functions:
+ • 'atan2(T  ✓ , T  ✓ ) -> T' where:
+      ✗  overload expects 2 arguments, call passed 3 arguments
+      ✓  'T' is 'f32' or 'f16'
+ • 'atan2(vecN<T>  ✗ , vecN<T>  ✗ ) -> vecN<T>' where:
+      ✗  'T' is 'f32' or 'f16'
+
+    %2:f32 = atan2 1.0f, 2.0f, 3.0f
+             ^^^^^
+
+:2:3 note: in block
+  $B1: {
+  ^^^
+
+note: # Disassembly
+%f = func():void {
+  $B1: {
+    %2:f32 = atan2 1.0f, 2.0f, 3.0f
     ret
   }
 }
@@ -1933,7 +2004,7 @@ TEST_F(IR_ValidatorTest, ExitIf_NullIf) {
     auto res = ir::Validate(mod);
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(), R"(:5:9 error: exit_if: has no parent control instruction
-        exit_if  # undef
+        exit_if  # undef parent if
         ^^^^^^^
 
 :4:7 note: in block
@@ -1945,7 +2016,7 @@ note: # Disassembly
   $B1: {
     if true [t: $B2] {  # if_1
       $B2: {  # true
-        exit_if  # undef
+        exit_if  # undef parent if
       }
     }
     ret
@@ -2321,7 +2392,7 @@ TEST_F(IR_ValidatorTest, ExitSwitch_NullSwitch) {
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
               R"(:5:9 error: exit_switch: has no parent control instruction
-        exit_switch  # undef
+        exit_switch  # undef parent switch
         ^^^^^^^^^^^
 
 :4:7 note: in block
@@ -2333,7 +2404,7 @@ note: # Disassembly
   $B1: {
     switch true [c: (default, $B2)] {  # switch_1
       $B2: {  # case
-        exit_switch  # undef
+        exit_switch  # undef parent switch
       }
     }
     ret
@@ -3656,7 +3727,7 @@ TEST_F(IR_ValidatorTest, ExitLoop_NullLoop) {
     ASSERT_NE(res, Success);
     EXPECT_EQ(res.Failure().reason.Str(),
               R"(:5:9 error: exit_loop: has no parent control instruction
-        exit_loop  # undef
+        exit_loop  # undef parent loop
         ^^^^^^^^^
 
 :4:7 note: in block
@@ -3668,7 +3739,7 @@ note: # Disassembly
   $B1: {
     loop [b: $B2, c: $B3] {  # loop_1
       $B2: {  # body
-        exit_loop  # undef
+        exit_loop  # undef parent loop
       }
       $B3: {  # continuing
         next_iteration  # -> $B2
@@ -4701,14 +4772,6 @@ TEST_F(IR_ValidatorTest, StoreVectorElement_NullIndex) {
   $B1: {
   ^^^
 
-:4:37 error: store_vector_element: value type 'i32' does not match vector pointer element type 'f32'
-    store_vector_element %2, undef, 2i
-                                    ^^
-
-:2:3 note: in block
-  $B1: {
-  ^^^
-
 note: # Disassembly
 %my_func = func():void {
   $B1: {
@@ -4872,7 +4935,7 @@ TEST_P(IR_ValidatorRefTypeTest, FnRet) {
     } else {
         ASSERT_NE(res, Success);
         EXPECT_THAT(res.Failure().reason.Str(),
-                    testing::HasSubstr("references are not permitted as return types"));
+                    testing::HasSubstr("return type is not constructable"));
     }
 }
 

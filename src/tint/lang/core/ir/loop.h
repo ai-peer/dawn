@@ -72,6 +72,9 @@ namespace tint::core::ir {
 /// ```
 class Loop final : public Castable<Loop, ControlInstruction> {
   public:
+    /// The fixed number of operands used by this instruction
+    static constexpr size_t kNumOperands = 0;
+
     /// Constructor (no results, no operands, no blocks)
     Loop();
 
