@@ -243,5 +243,23 @@ TEST_F(DeviceTickValidationTest, DestroyDeviceBeforeAPITick) {
     device.Tick();
 }
 
+class DeviceGetAHardwareBufferPropertiesValidationTest : public ValidationTest {};
+
+// Test that calling GetAHardwareBufferProperties will generate an error
+// if the required feature is not present.
+TEST_F(DeviceGetAHardwareBufferPropertiesValidationTest,
+       GetAHardwareBufferPropertiesRequiresAHBFeature) {
+    // The parameter values should't matter, as the call should fail validation
+    // before calling into the implementation (verified by checking the error
+    // message).
+    void* handle = nullptr;
+    wgpu::AHardwareBufferProperties* properties = nullptr;
+
+    ASSERT_DEVICE_ERROR(
+        device.GetAHardwareBufferProperties(handle, properties),
+        testing::HasSubstr(
+            "without the FeatureName::SharedTextureMemoryAHardwareBuffer feature being set"));
+}
+
 }  // anonymous namespace
 }  // namespace dawn
