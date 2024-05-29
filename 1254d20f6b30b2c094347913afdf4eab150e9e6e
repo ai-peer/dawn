@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1bb84fe_8578476d",
+        "filename": "tools/setup-build",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T13:35:01Z",
+      "side": 1,
+      "message": "Also, we should build into a differently named directory if the fuzzer flag is specified.",
+      "revId": "1254d20f6b30b2c094347913afdf4eab150e9e6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce8eb57a_aaf08017",
         "filename": "tools/setup-build",
         "patchSetId": 1
