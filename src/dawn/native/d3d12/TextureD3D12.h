@@ -51,7 +51,8 @@ class SharedTextureMemory;
 class CommandRecordingContext;
 class Device;
 
-MaybeError ValidateTextureCanBeWrapped(ID3D12Resource* d3d12Resource,
+MaybeError ValidateTextureCanBeWrapped(const DeviceBase* device,
+                                       ID3D12Resource* d3d12Resource,
                                        const UnpackedPtr<TextureDescriptor>& descriptor);
 MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFormat);
 

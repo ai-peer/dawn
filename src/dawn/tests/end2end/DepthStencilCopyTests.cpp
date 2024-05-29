@@ -129,6 +129,12 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
 
         DAWN_TEST_UNSUPPORTED_IF(!mIsFormatSupported);
 
+        // Skip formats other than Depth24PlusStencil8 if we're specifically testing with the packed
+        // depth24_unorm_stencil8 toggle.
+        DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("use_packed_depth24_unorm_stencil8_format") &&
+                                 GetParam().mTextureFormat !=
+                                     wgpu::TextureFormat::Depth24PlusStencil8);
+
         // Draw a square in the bottom left quarter of the screen.
         mVertexModule = utils::CreateShaderModule(device, R"(
             @vertex
@@ -1571,7 +1577,8 @@ TEST_P(DepthStencilCopyTests_RegressionDawn1083, Run) {
 
 DAWN_INSTANTIATE_TEST_P(
     DepthStencilCopyTests,
-    {D3D11Backend(), D3D12Backend(),
+    {D3D11Backend(), D3D11Backend({"use_packed_depth24_unorm_stencil8_format"}), D3D12Backend(),
+     D3D12Backend({"use_packed_depth24_unorm_stencil8_format"}),
      D3D12Backend({"use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource"}),
      MetalBackend(),
      MetalBackend({"use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource"}),
@@ -1607,7 +1614,8 @@ DAWN_INSTANTIATE_TEST_P(DepthCopyFromBufferTests,
 
 DAWN_INSTANTIATE_TEST_P(
     StencilCopyTests,
-    {D3D11Backend(), D3D12Backend(),
+    {D3D11Backend(), D3D11Backend({"use_packed_depth24_unorm_stencil8_format"}), D3D12Backend(),
+     D3D12Backend({"use_packed_depth24_unorm_stencil8_format"}),
      D3D12Backend({"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_"
                    "copy_with_non_zero_buffer_offset"}),
      MetalBackend(), MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8"}),

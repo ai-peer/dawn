@@ -602,14 +602,14 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                      "validating that a D3D12 external image can be wrapped with %s",
                      textureDescriptor);
 
-    DAWN_TRY(ValidateTextureCanBeWrapped(d3d12Resource.Get(), textureDescriptor));
+    DAWN_TRY(ValidateTextureCanBeWrapped(this, d3d12Resource.Get(), textureDescriptor));
 
     // Shared handle is assumed to support resource sharing capability. The resource
     // shared capability tier must agree to share resources between D3D devices.
     const Format* format = GetInternalFormat(textureDescriptor->format).AcquireSuccess();
     if (format->IsMultiPlanar()) {
         DAWN_TRY(ValidateVideoTextureCanBeShared(
-            this, d3d::DXGITextureFormat(textureDescriptor->format)));
+            this, d3d::DXGITextureFormat(this, textureDescriptor->format)));
     }
 
     return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
