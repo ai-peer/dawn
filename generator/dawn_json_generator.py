@@ -796,6 +796,7 @@ def unreachable_code():
 def compute_kotlin_params(loaded_json, kotlin_json):
     params_kotlin = parse_json(loaded_json, enabled_tags=['art'])
     params_kotlin['kotlin_package'] = kotlin_json['kotlin_package']
+    params_kotlin['to_jni_type'] = kotlin_json['to_jni_type']
     kotlin_path = params_kotlin['kotlin_package'].replace('.', '/')
 
     # The 'length' members are removed as Kotlin can infer that from the container.
@@ -1500,6 +1501,15 @@ class MultiGeneratorFromDawnJSON(Generator):
             renders.append(
                 FileRender('art/api_kotlin_functions.kt',
                            'java/' + kotlin_path + '/Functions.kt',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/api_jni_converter.h', 'cpp/Converter.h',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/api_jni_converter.cpp', 'cpp/Converter.cpp',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/api_jni_native.cpp', 'cpp/Native.cpp',
                            [RENDER_PARAMS_BASE, params_kotlin]))
 
             for enum in (params_kotlin['by_category']['bitmask'] +
