@@ -325,7 +325,12 @@ void Disassembly::EmitFunction(const Function* func) {
 
         EmitParamAttributes(p);
     }
-    out_ << "):" << StyleType(func->ReturnType()->FriendlyName());
+    out_ << "):";
+    if (auto* ret = func->ReturnType()) {
+        out_ << StyleType(ret->FriendlyName());
+    } else {
+        out_ << StyleError("undef type");
+    }
 
     EmitReturnAttributes(func);
 
@@ -355,7 +360,11 @@ void Disassembly::EmitFunction(const Function* func) {
 
     {
         ScopedIndent si(indent_size_);
-        EmitBlock(func->Block());
+        if (auto* body = func->Block()) {
+            EmitBlock(body);
+        } else {
+            out_ << StyleError("undef body");
+        }
     }
     Indent() << "}";
     EmitLine();
@@ -807,20 +816,53 @@ void Disassembly::EmitTerminator(const Terminator* term) {
     tint::Switch(
         term,  //
         [&](const ir::BreakIf* bi) {
-            out_ << "  "
-                 << StyleComment("# -> [t: exit_loop ", NameOf(bi->Loop()),
-                                 ", f: ", NameOf(bi->Loop()->Body()), "]");
+            out_ << "  ";
+            if (auto* parent = bi->Loop()) {
+                out_ << StyleComment("# -> [t: exit_loop ", NameOf(parent),
+                                     ", f: ", NameOf(parent->Body()), "]");
+            } else {
+                out_ << StyleComment("# ") << StyleError("undef parent loop");
+            }
         },
         [&](const ir::Continue* c) {
-            out_ << "  " << StyleComment("# -> ", NameOf(c->Loop()->Continuing()));
-        },                                                                                  //
-        [&](const ir::ExitIf* e) { out_ << "  " << StyleComment("# ", NameOf(e->If())); },  //
+            out_ << "  ";
+            if (auto* parent = c->Loop()) {
+                out_ << StyleComment("# -> ", NameOf(parent->Continuing()));
+            } else {
+                out_ << StyleComment("# ") << StyleError("undef parent loop");
+            }
+        },  //
+        [&](const ir::ExitIf* e) {
+            out_ << "  ";
+            if (auto* parent = e->If()) {
+                out_ << StyleComment("# ", NameOf(parent));
+            } else {
+                out_ << StyleComment("# ") << StyleError("undef parent if");
+            }
+        },  //
         [&](const ir::ExitSwitch* e) {
-            out_ << "  " << StyleComment("# ", NameOf(e->Switch()));
-        },                                                                                      //
-        [&](const ir::ExitLoop* e) { out_ << "  " << StyleComment("# ", NameOf(e->Loop())); },  //
+            out_ << "  ";
+            if (auto* parent = e->Switch()) {
+                out_ << StyleComment("# ", NameOf(parent));
+            } else {
+                out_ << StyleComment("# ") << StyleError("undef parent switch");
+            }
+        },  //
+        [&](const ir::ExitLoop* e) {
+            out_ << "  ";
+            if (auto* parent = e->Loop()) {
+                out_ << StyleComment("# ", NameOf(parent));
+            } else {
+                out_ << StyleComment("# ") << StyleError("undef parent loop");
+            }
+        },  //
         [&](const ir::NextIteration* ni) {
-            out_ << "  " << StyleComment("# -> ", NameOf(ni->Loop()->Body()));
+            out_ << "  ";
+            if (auto* parent = ni->Loop()) {
+                out_ << StyleComment("# -> ", NameOf(parent->Body()));
+            } else {
+                out_ << StyleComment("# ") << StyleError("<undef parent loop>");
+            }
         });
 }
 
@@ -881,13 +923,17 @@ void Disassembly::EmitStructDecl(const core::type::Struct* str) {
 }
 
 StyledText Disassembly::NameOf(const Block* node) {
-    TINT_ASSERT(node);
+    if (TINT_UNLIKELY(!node)) {
+        return StyledText{} << StyleError("undef block");
+    }
     auto id = block_ids_.GetOrAdd(node, [&] { return block_ids_.Count(); });
     return StyledText{} << StyleLabel("$B", id);
 }
 
 StyledText Disassembly::NameOf(const Value* value) {
-    TINT_ASSERT(value);
+    if (TINT_UNLIKELY(!value)) {
+        return StyledText{} << StyleError("undef value");
+    }
     auto id = value_ids_.GetOrAdd(value, [&] {
         if (auto sym = mod_.NameOf(value)) {
             if (ids_.Add(sym.Name())) {
@@ -913,7 +959,7 @@ StyledText Disassembly::NameOf(const Value* value) {
 
 StyledText Disassembly::NameOf(const If* inst) {
     if (!inst) {
-        return StyledText{} << StyleError("undef");
+        return StyledText{} << StyleError("undef if");
     }
 
     auto name = if_names_.GetOrAdd(inst, [&] { return "if_" + std::to_string(if_names_.Count()); });
@@ -922,7 +968,7 @@ StyledText Disassembly::NameOf(const If* inst) {
 
 StyledText Disassembly::NameOf(const Loop* inst) {
     if (!inst) {
-        return StyledText{} << StyleError("undef");
+        return StyledText{} << StyleError("undef loop");
     }
 
     auto name =
@@ -932,7 +978,7 @@ StyledText Disassembly::NameOf(const Loop* inst) {
 
 StyledText Disassembly::NameOf(const Switch* inst) {
     if (!inst) {
-        return StyledText{} << StyleError("undef");
+        return StyledText{} << StyleError("undef switch");
     }
 
     auto name = switch_names_.GetOrAdd(
