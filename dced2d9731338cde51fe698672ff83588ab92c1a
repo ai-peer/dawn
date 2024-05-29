@@ -140,6 +140,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a177bbd6_c3994e3d",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003851
+      },
+      "writtenOn": "2024-05-29T14:01:11Z",
+      "side": 1,
+      "message": "[1] will not filter out CopySrc/CopyDst though, which also not available and it\u0027s sometimes not obvious from the spec.",
+      "parentUuid": "3b16dee7_b6db9852",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685a47f_eb3d425b",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 24
