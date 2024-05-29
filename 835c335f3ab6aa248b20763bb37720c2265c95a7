@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "793f4735_051f325d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-29T09:33:04Z",
+      "side": 1,
+      "message": "Thanks! Diff is https://dawn-review.googlesource.com/c/dawn/+/190140/4..7 .",
+      "revId": "835c335f3ab6aa248b20763bb37720c2265c95a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
