@@ -45,10 +45,11 @@ package {{ kotlin_package }}
 {% endmacro %}
 
 {% if obj %}
-    class {{ obj.name.CamelCase() }}(val handle: Long) {
+    class {{ obj.name.CamelCase() }}(val handle: Long): AutoCloseable  {
         {% for method in obj.methods if include_method(method) %}
             {{ render_method(method) }}
         {% endfor %}
+        external override fun close();
     }
 
 {% else %}
