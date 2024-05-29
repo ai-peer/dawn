@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd341cb7_7741c4b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Ah yes, I can add some leftover validations in follow-ups.",
+      "parentUuid": "3280e451_d5ba051a",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ef1ab9_3c1578e1",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-29T07:36:16Z",
       "side": 1,
       "message": "leave byte size and component count as 0. those are the default values, and see the comment in Format.h for them: \n// Only used for renderable color formats",
+      "range": {
+        "startLine": 466,
+        "startChar": 97,
+        "endLine": 466,
+        "endChar": 156
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24cf72d7_52f4ff0d",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "I was seeing some issues with ByteSize(0) with assert [here](https://dawn-review.googlesource.com/c/dawn/+/187361/25/src/dawn/native/Format.cpp#202). I\u0027ve updated to pass ByteSize(1) instead with ComponentCount(0).",
+      "parentUuid": "c1ef1ab9_3c1578e1",
       "range": {
         "startLine": 466,
         "startChar": 97,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "575aaaf0_aafee2ce",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e88ecfef_2ca10c3a",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5615c114_1e914cc7",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-05-29T07:36:16Z",
       "side": 1,
       "message": "do we need the early return?\n\ncould be:\n\n`DAWN_INVALID_IF(format.format \u003d\u003d wgpu::TextureFormat::External \u0026\u0026 viewFormat.format !\u003d wgpu::TextureFormat::External, ...)`\n\n\nExternal \u003d\u003d External so they should be view-compatible and the below code should work",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2abfc646_d0a4417e",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Updated to remove the early return. I think I had added this for testing earlier but now it should all work fine with useExternalFormat.",
+      "parentUuid": "5615c114_1e914cc7",
       "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a24917_dfe90b82",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ae962f8_ade34da6",
+      "range": {
+        "startLine": 623,
+        "startChar": 56,
+        "endLine": 624,
+        "endChar": 38
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c154c72b_76818efb",
@@ -111,6 +213,30 @@
       "writtenOn": "2024-05-29T07:36:16Z",
       "side": 1,
       "message": "you should be able to use \"%s\" and put the enum in the format args list",
+      "range": {
+        "startLine": 652,
+        "startChar": 52,
+        "endLine": 652,
+        "endChar": 75
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8372f5_c651ef7b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c154c72b_76818efb",
       "range": {
         "startLine": 652,
         "startChar": 52,
@@ -176,6 +302,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9554efc4_eb666a37",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Validating STM with External format is initialized sounds good. How should I check for initialization? If okay, I can add it in follow-up.",
+      "parentUuid": "9dc3f6aa_746eb15e",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685a47f_eb3d425b",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 24
@@ -187,6 +331,30 @@
       "writtenOn": "2024-05-29T07:36:16Z",
       "side": 1,
       "message": "\"FormatFromVkFormat\" sounds like a very general helper. I\u0027d rather handle the External case in ahardwarebuffer STM code and not here since VK_FORMAT_UNDEFINED could probably end up occurring for other reasons - like a variable is default-initialized to 0.",
+      "range": {
+        "startLine": 553,
+        "startChar": 35,
+        "endLine": 553,
+        "endChar": 53
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e296ee67_6c2e6e73",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Sounds good, updated to handle separately in STMVk.",
+      "parentUuid": "2685a47f_eb3d425b",
       "range": {
         "startLine": 553,
         "startChar": 35,
@@ -220,6 +388,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3078d3ed_4469689f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1798,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Ah good catch. Added validation to Texture.cpp while validating Format. Also updated to else if.",
+      "parentUuid": "276e53b6_06db8e43",
+      "range": {
+        "startLine": 1797,
+        "startChar": 6,
+        "endLine": 1798,
+        "endChar": 12
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f594188_c60696f2",
@@ -233,6 +425,30 @@
       "writtenOn": "2024-05-29T07:36:16Z",
       "side": 1,
       "message": "need to call AHardwareBuffer_release at the end?\n\nCreateTexture nor ImportSharedTextureMemory transfer ownership",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7934061_4a436aaf",
+        "filename": "src/dawn/tests/end2end/YCbCrInfoTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Updated to call AHardwareBuffer_release after CreateTexture.",
+      "parentUuid": "9f594188_c60696f2",
       "range": {
         "startLine": 57,
         "startChar": 14,

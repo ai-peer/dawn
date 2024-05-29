@@ -140,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca03a36_a6450685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69071884_e0d86b3f",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19531f1a_e274b5b9",
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "I\u0027m not aware of any easy way to create external-format only ahb. To do so, we\u0027d need to create AHB with format that doesn\u0027t have mapping to Vulkan format. Here is a list: https://developer.android.com/ndk/reference/group/a-hardware-buffer#ahardwarebuffer_format . AHARDWAREBUFFER_FORMAT_Y8Cb8Cr8_420 doesn\u0027t have listed Vulkan format, but I definitely saw it being G8_R8_B8 in some places.\n\nBut we should make it regardless because at least some emulator will produce AHBs from VideoDecode that have both formats, but we want to use External one.",
       "parentUuid": "19531f1a_e274b5b9",
+      "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1ceafa_3dfe59c1",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T20:52:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "158f987c_62201b96",
       "revId": "acf8b6cc729ec84527e0f52fa88df57bb9389332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
