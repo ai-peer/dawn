@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8d3fbfd_c485e67b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T13:33:40Z",
+      "side": 1,
+      "message": "nice! (someone is using setup-build 😊!)\nPlease can you add support for the GN path too?",
+      "revId": "1254d20f6b30b2c094347913afdf4eab150e9e6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8eb57a_aaf08017",
+        "filename": "tools/setup-build",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T13:33:40Z",
+      "side": 1,
+      "message": "For GN, we need to pass `use_libfuzzer\u003dtrue`",
+      "revId": "1254d20f6b30b2c094347913afdf4eab150e9e6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
