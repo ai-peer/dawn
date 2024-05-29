@@ -63,6 +63,9 @@ class Switch final : public Castable<Switch, ControlInstruction> {
     /// The offset in Operands() for the condition
     static constexpr size_t kConditionOperandOffset = 0;
 
+    /// The fixed number of operands used by this instruction
+    static constexpr size_t kNumOperands = 1;
+
     /// A case selector
     struct CaseSelector {
         /// @returns true if this is a default selector

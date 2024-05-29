@@ -51,6 +51,9 @@ class BreakIf final : public Castable<BreakIf, Exit> {
     /// The base offset in Operands() for the arguments
     static constexpr size_t kArgsOperandOffset = 1;
 
+    /// The fixed number of results returned by this instruction
+    static constexpr size_t kNumResults = 0;
+
     /// Constructor (no operands, no loop)
     BreakIf();
 

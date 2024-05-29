@@ -41,6 +41,9 @@ namespace tint::core::ir {
 /// The base class for all exit terminators.
 class Exit : public Castable<Exit, Terminator> {
   public:
+    /// The fixed number of results returned by this instruction
+    static constexpr size_t kNumResults = 0;
+
     ~Exit() override;
 
     /// @copydoc Value::Destroy
