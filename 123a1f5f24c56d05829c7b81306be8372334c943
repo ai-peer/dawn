@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3058c2_532b7597",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T18:00:06Z",
+      "side": 1,
+      "message": "Maybe add a comment that this must be called *after* `RemoveBlockParams()` as it clears the terminator\u0027s values, which are required by `RemoveBlockParams()`.\nI\u0027d personally move this below `RemoveBlockParams()` because I assume declaration order has some correlation to execution order.",
+      "fixSuggestions": [
+        {
+          "fixId": "50db5b27_7212697c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+              "range": {
+                "startLine": 75,
+                "startChar": 0,
+                "endLine": 75,
+                "endChar": 0
+              },
+              "replacement": "    /// This must be called after `RemoveBlockParams`.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018c1145_e7c91053",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T18:00:06Z",
+      "side": 1,
+      "message": "Exits can have undef (`nullptr`) values, no? We don\u0027t seem to be handling them in this transform.",
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6fc41bc_f11d5ea9",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-29T18:00:06Z",
+      "side": 1,
+      "message": "This makes the assumption that the next-iter values come before the exit-if args. This is subtle / fragile. At the very least, a comment would be good.",
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
