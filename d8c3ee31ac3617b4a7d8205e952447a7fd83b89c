@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f13a6b07_4a5ab20c",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/189700",
+      "parentUuid": "4d9f2d30_12677269",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a99edcc_6ec4ed56",
@@ -65,6 +83,30 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "IMHO we could hardcode these in the templates. The reason why we have a bunch of this metadata with API and prefixes etc is because at some point we thought a second project would use the same set of generator (for WebNN) so we started making the templates not reference WebGPU or Dawn directly. But IMHO we should undo it, and not add metadata like this for new things like the Kotlin bindings.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a10042_5b3db415",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "OK but I\u0027d still like to have the package name in a constant, so I\u0027ve moved it to dawn_kotlin.json",
+      "parentUuid": "9a99edcc_6ec4ed56",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff5ea1a_6abc9832",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 822,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done now by supplying custom macros; include_structure_member, include_method.",
+      "parentUuid": "0c21a0c2_f744f629",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a46d6c2d_a92665c1",
@@ -109,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ed427f_4fe8ad47",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a46d6c2d_a92665c1",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59a6d812_b642504d",
@@ -122,6 +200,30 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "u-nit: object is a builtin variable in Python that we are shadowing here and messes up syntax coloring. Maybe rename to \"obj\" for that reason?",
+      "range": {
+        "startLine": 1482,
+        "startChar": 16,
+        "endLine": 1482,
+        "endChar": 22
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "710b311b_d670a17f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59a6d812_b642504d",
       "range": {
         "startLine": 1482,
         "startChar": 16,
@@ -151,6 +253,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b59f12b3_fdba67b2",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "I will split up if you think it is still appropriate; since the thing is really a holistic unit I would prefer to submit as one. TAL at the CPP code and see if you think it is practically reviewable (I think it is).",
+      "parentUuid": "fdd0057a_18800837",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52f79d59_922849f0",
         "filename": "generator/templates/art/api_jni_converter.cpp",
         "patchSetId": 2
@@ -162,6 +282,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "Converter.h??",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b344b2_8cd8dabf",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "It\u0027s the associated header file",
+      "parentUuid": "52f79d59_922849f0",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -206,6 +344,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a28add33_d0cec883",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3a65d1d_dea0520b",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 21
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb4808d_4368fd8d",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6efec44_f54d3626",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "538dbc86_2f364460",
@@ -223,6 +403,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03c2c57_4a5e740c",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "538dbc86_2f364460",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6781d7a_8b2c1611",
@@ -236,6 +434,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "1) Can we have a TODO to pass some kind of allocator that can be really simple to start, but at least it will avoid leaks. See for example how we do it in the node.js bindings https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/node/binding/Converter.h;drc\u003d54b4de24f7f1a819e7d684b468e2671bcd8c0e4a;l\u003d460 (perf doesn\u0027t matter as much to us there for now so it\u0027s a simple deallocator, but eventually here I\u0027d expect that we\u0027d use a linear allocator with data put on the stack or something)\n\n2) Having the name of the structure in the function name makes a few things inconvenient. We could take advantage of C++ overloading by making the methods have signatures of the type: `void/status ConvertIn(JNIenv, jobject, Struct* out)`. This way helper templates don\u0027t need to know about the name of the struct.\n\n3) We tend to capitalize functions as CamelCase.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91450cdf_fdce746c",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "1) Done b/341918339\n\n2) Done\n\n3) Done",
+      "parentUuid": "e6781d7a_8b2c1611",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -291,6 +507,60 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06e629c_e94b8e29",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48e8620d_b157ee65",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05cf79b_66cb0550",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23d3aa99_5149a9aa",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f49a57_f71c5a82",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "The new version ought to be considerably more readable because of the single-pass design. I have added scopes to reduce the number of template-variable-based names.",
+      "parentUuid": "2e44c360_ddbbb458",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abef5ba5_65fa7a4e",
@@ -304,6 +574,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "When does that happen? I coouldn\u0027t find it in dawn.json",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ff69e8_b1b8b0c3",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "One example is BindGroupDescriptor.entries\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/dawn.json;l\u003d292;drc\u003d9009c08f043bc439abd1d87afb8f898f1778bc19",
+      "parentUuid": "abef5ba5_65fa7a4e",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -325,6 +613,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e6457e1_4880048d",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "07452ebf_a10408bb",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6b56b49_2727523c",
@@ -338,6 +644,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "Please add a copyright header here, similar to WireCmd.cpp. //* are generator comments that don\u0027t get output.\n\nSame comment for all other template files, and existing art templates if they are missing them.",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1a5fae_1e5a7fd2",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6b56b49_2727523c",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -359,6 +683,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2aff88_9b2448eb",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1e33680_3ac3bd28",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8dbc7570_72430575",
@@ -376,6 +718,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec71a8b_43f091f0",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "b/342171883",
+      "parentUuid": "8dbc7570_72430575",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "807015fd_0ec776dd",
@@ -389,6 +749,30 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "Filtering on userdata as a name is interesting and works, but I think in the future we\u0027ll need to have special handling for all methods that deal with callbacks because with WGPUFuture and friends it will become hard to autogenerate all the code. Might be worth having a TODO with a new issue explaining that we\u0027ll have to redo asynchrony (and figure out the ergonomics as well)\n\nNote also that IIRC in dawn.json there is one length argument (or structure member?) that\u0027s used for two different arguments. I think it will cause a lot of problems and we should change dawn.json + validate it out when parsing the model.",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 83
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "063ef86b_e1596aee",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Ack/Done",
+      "parentUuid": "807015fd_0ec776dd",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -422,6 +806,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b3e453_a3a18d4a",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "423633ee_2b5728a9",
+      "range": {
+        "startLine": 10,
+        "startChar": 71,
+        "endLine": 10,
+        "endChar": 98
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22b5975b_845407c8",
@@ -435,6 +843,30 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "ditto, syntax coloring is weird because `object` is a keyword or builtin in Kotlin. Use `obj` maybe?",
+      "range": {
+        "startLine": 15,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bea4d40_1a96ec18",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22b5975b_845407c8",
       "range": {
         "startLine": 15,
         "startChar": 6,
@@ -462,6 +894,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4863e19_091b755b",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "In that case, sure.",
+      "parentUuid": "e7cf77dc_adae3150",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe21ccc9_d5063ac8",
@@ -475,6 +925,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "Can\u0027t this be done in render_method so we don\u0027t have to do the string building gymnastics?",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "207b60da_85ab89c4",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe21ccc9_d5063ac8",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -496,6 +964,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bfa4738_aae9f29e",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a67b9c88_ceb7c864",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47d1d78a_53409da4",
@@ -509,6 +995,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "The documentation needs updating. Also WDYT of separating it into two macros: `kotlin_declaration` and `kotlin_definition` that use a helper macro with `emit_defaults`? It would make users of these macros more clear (and avoid `kotlin_declaration(foo, dTrue)` which is weird, is it a declaration or a definition??)",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47fdc2c_452e2e12",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47d1d78a_53409da4",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -530,6 +1034,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f2c45f2_68ffcc55",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "It seems that no_default isn\u0027t required at the moment so I removed it.",
+      "parentUuid": "78ff1f3c_8181e8e9",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba2e73b9_ea196f1c",
@@ -543,6 +1065,24 @@
       "writtenOn": "2024-05-17T10:18:54Z",
       "side": 1,
       "message": "This is an empty file??",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89823f40_5ee10440",
+        "filename": "tools/android/webgpu/src/main/cpp/Native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T12:35:44Z",
+      "side": 1,
+      "message": "Was included in error.",
+      "parentUuid": "ba2e73b9_ea196f1c",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
