@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01de2413_06f77a87",
+        "filename": "src/dawn/native/Subresource.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 0,
+      "message": "you\u0027ve removed this comment, but it also looks like you\u0027ve shuffled validation around to avoid calling SelectFormatAspects with TextureFormat::External.\nWhy? was the validation incorrect as-is?",
+      "revId": "fdc5c8d21d7f20ac10771498247c58ba2976372a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

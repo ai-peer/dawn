@@ -1,0 +1,210 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3280e451_d5ba051a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "LGTM overall\nI believe you\u0027re missing validation of SampleTypeBit::External compatiblity with the sampler - that can be a separate CL if you\u0027d like",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ef1ab9_3c1578e1",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "leave byte size and component count as 0. those are the default values, and see the comment in Format.h for them: \n// Only used for renderable color formats",
+      "range": {
+        "startLine": 466,
+        "startChar": 97,
+        "endLine": 466,
+        "endChar": 156
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e88ecfef_2ca10c3a",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "[1] maybe leave this code as is, right? all of the capabilities listed here shouldn\u0027t be available. we can only sample external format textures. and this is all about storage, render, copy",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5615c114_1e914cc7",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "do we need the early return?\n\ncould be:\n\n`DAWN_INVALID_IF(format.format \u003d\u003d wgpu::TextureFormat::External \u0026\u0026 viewFormat.format !\u003d wgpu::TextureFormat::External, ...)`\n\n\nExternal \u003d\u003d External so they should be view-compatible and the below code should work",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae962f8_ade34da6",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "nit: better to say exactly what it needed to be: \"the selected aspect (%s) is not %s, descriptor-\u003easpect, wgpu::TextureAspect::All\"",
+      "range": {
+        "startLine": 623,
+        "startChar": 56,
+        "endLine": 624,
+        "endChar": 38
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c154c72b_76818efb",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "you should be able to use \"%s\" and put the enum in the format args list",
+      "range": {
+        "startLine": 652,
+        "startChar": 52,
+        "endLine": 652,
+        "endChar": 75
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b16dee7_b6db9852",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "This is redundant with the code at [1]. Everything not supported by TextureFormat::External will be removed at [1].",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2685a47f_eb3d425b",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "\"FormatFromVkFormat\" sounds like a very general helper. I\u0027d rather handle the External case in ahardwarebuffer STM code and not here since VK_FORMAT_UNDEFINED could probably end up occurring for other reasons - like a variable is default-initialized to 0.",
+      "range": {
+        "startLine": 553,
+        "startChar": 35,
+        "endLine": 553,
+        "endChar": 53
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "276e53b6_06db8e43",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1798,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "dedent into an else-if block\n\nalso, I think you\u0027re missing validation for this case. create an externalFormat texture, and then CreateView with no YCbCrVkDescriptor",
+      "range": {
+        "startLine": 1797,
+        "startChar": 6,
+        "endLine": 1798,
+        "endChar": 12
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f594188_c60696f2",
+        "filename": "src/dawn/tests/end2end/YCbCrInfoTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:36:16Z",
+      "side": 1,
+      "message": "need to call AHardwareBuffer_release at the end?\n\nCreateTexture nor ImportSharedTextureMemory transfer ownership",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 57,
+        "endChar": 38
+      },
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
