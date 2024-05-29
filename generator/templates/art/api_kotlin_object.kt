@@ -46,4 +46,5 @@ class {{ obj.name.CamelCase() }}(val handle: Long): AutoCloseable  {
             val {{ name }} get() = {{ method.name.camelCase() }}()
         {% endif %}
     {% endfor %}
+    external override fun close();
 }
