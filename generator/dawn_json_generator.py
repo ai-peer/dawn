@@ -1503,6 +1503,15 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('art/api_kotlin_functions.kt',
                            'java/' + kt_file_path + '/Functions.kt',
                            [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/structures.h', 'cpp/structures.h',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/structures.cpp', 'cpp/structures.cpp',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
+            renders.append(
+                FileRender('art/methods.cpp', 'cpp/methods.cpp',
+                           [RENDER_PARAMS_BASE, params_kotlin]))
 
             for enum in (params_kotlin['by_category']['bitmask'] +
                          params_kotlin['by_category']['enum']):
