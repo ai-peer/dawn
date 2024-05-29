@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0a1ce32_898aa296",
+        "filename": "test/tint/bug/chromium/342840932.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-29T13:05:07Z",
+      "side": 1,
+      "message": "Ok,its good that the variable still has the decoration. It\u0027s a variable property in Vulkan SPIR-V not a type property like in WGSL.",
+      "range": {
+        "startLine": 14,
+        "startChar": 26,
+        "endLine": 14,
+        "endChar": 52
+      },
+      "revId": "b140ef6cf518fbcc0c4f7c1c13a0bdd5962433f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
