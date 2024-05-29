@@ -33,6 +33,24 @@
       "message": "Probably should snapshot the values before dropping the adapter, and then EXPECT they\u0027re still equal afterward. Otherwise I think it\u0027s possible these std::string constructions could be optimized out since they have no outside effect.",
       "revId": "f6d6bfd406d79511dbc6b055eb5da0c3193b10c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7e9a5d4_61191ec2",
+        "filename": "src/dawn/tests/end2end/AdapterCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-05-29T05:46:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba643a6c_fa1bda2f",
+      "revId": "f6d6bfd406d79511dbc6b055eb5da0c3193b10c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
