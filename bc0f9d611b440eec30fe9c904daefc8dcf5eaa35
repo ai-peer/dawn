@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7bcd24f_92a1bbb9",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T13:13:28Z",
+      "side": 0,
+      "message": "For the record I\u0027m omitting types that are not currently used for ease of review throughout this and the associated CL. Since they are not practically being tested ATM it would be misleading to leave them in anyway.",
+      "revId": "bc0f9d611b440eec30fe9c904daefc8dcf5eaa35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
