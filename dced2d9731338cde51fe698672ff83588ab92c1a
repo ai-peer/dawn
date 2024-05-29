@@ -158,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dc3f6aa_746eb15e",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T17:04:08Z",
+      "side": 1,
+      "message": "ah, you\u0027re right. I think this code is fine then.\n\nOne thing we should remember to add in this case then is that BeginAccess on a STM with TextureFormat::External *must* be initialized. There\u0027s no way for Dawn to lazy clear it.",
+      "parentUuid": "a177bbd6_c3994e3d",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685a47f_eb3d425b",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 24
