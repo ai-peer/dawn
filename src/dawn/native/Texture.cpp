@@ -87,6 +87,11 @@ MaybeError ValidateCanViewTextureAs(const DeviceBase* device,
         return {};
     }
 
+    DAWN_INVALID_IF(format.format == wgpu::TextureFormat::External &&
+                        viewFormat.format != wgpu::TextureFormat::External,
+                    "TextureView format (%s) is not (%s).", viewFormat.format,
+                    wgpu::TextureFormat::External);
+
     const FormatSet& compatibleViewFormats = texture->GetViewFormats();
     if (compatibleViewFormats[viewFormat]) {
         // Validation of this list is done on texture creation, so we don't need to
@@ -604,7 +609,6 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     DAWN_ASSERT(!texture->IsError());
 
     DAWN_TRY(ValidateTextureViewDimension(descriptor->dimension));
-    // TODO(crbug.com/dawn/2476): Add necessary validation for TextureFormat::External.
     DAWN_TRY(ValidateTextureFormat(descriptor->format));
     DAWN_TRY(ValidateTextureAspect(descriptor->aspect));
 
@@ -612,6 +616,10 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     const Format* viewFormat;
     DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(descriptor->format));
 
+    DAWN_INVALID_IF(format.format == wgpu::TextureFormat::External &&
+                        descriptor->aspect != wgpu::TextureAspect::All,
+                    "The selected aspect (%s) with Texture format (%s) is not (%s)",
+                    descriptor->aspect, wgpu::TextureFormat::External, wgpu::TextureAspect::All);
     const auto aspect = SelectFormatAspects(format, descriptor->aspect);
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "Texture format (%s) does not have the texture view's selected aspect (%s).",
@@ -635,15 +643,19 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
         "texture's mip level count (%u).",
         descriptor->baseMipLevel, descriptor->mipLevelCount, texture->GetNumMipLevels());
 
-    // TODO(crbug.com/dawn/2476): Add necessary validations to CanViewTextureAs for
-    // TextureFormat::External.
-    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
-    DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
-
     if (descriptor.Get<YCbCrVkDescriptor>()) {
         DAWN_INVALID_IF(!device->HasFeature(Feature::YCbCrVulkanSamplers), "%s is not enabled.",
                         wgpu::FeatureName::YCbCrVulkanSamplers);
+        DAWN_INVALID_IF(format.format != wgpu::TextureFormat::External,
+                        "Texture format (%s) is not (%s).", format.format,
+                        wgpu::TextureFormat::External);
+    } else if (format.format == wgpu::TextureFormat::External) {
+        return DAWN_VALIDATION_ERROR("Invalid TextureViewDescriptor with Texture format (%s).",
+                                     wgpu::TextureFormat::External);
     }
+
+    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
+    DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
 
     return {};
 }
@@ -683,7 +695,6 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
         }
     }
 
-    // TODO(crbug.com/dawn/2476): Add TextureFormat::External validation.
     if (desc.format == wgpu::TextureFormat::Undefined) {
         const Format& format = texture->GetFormat();
 
