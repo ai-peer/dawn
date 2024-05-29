@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8d3502f_9fc0070c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1907,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:48:21Z",
+      "side": 1,
+      "message": "this should validate that the AHArdwareBuffer feature is enabled.\n\nThen, the default GetAHardwareBufferPropertiesImpl and #else #undef cases you have an be DAWN_UNREACHABLE()",
+      "revId": "4bb019023bcbdcaf8bf35914a6b42c3c38907ffa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a31443f_4bf84341",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
         "patchSetId": 4
