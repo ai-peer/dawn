@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d2145a_3c590b21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T06:54:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6245d58664f07e93f5e436e00f12daeabeed736d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071cd1b6_7db7cf78",
+        "filename": "docs/dawn/features/dawn_load_resolve_texture.md",
+        "patchSetId": 18
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T06:54:13Z",
+      "side": 1,
+      "message": "duplicate word \"but\"",
+      "range": {
+        "startLine": 70,
+        "startChar": 60,
+        "endLine": 70,
+        "endChar": 67
+      },
+      "revId": "6245d58664f07e93f5e436e00f12daeabeed736d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e206628a_cc99008d",
+        "filename": "src/dawn/native/AttachmentState.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T06:54:13Z",
+      "side": 1,
+      "message": "it may be quite verbose, but I think we should clarify this name. Right now, it\u0027s not obvious to callers that this mask is only useful if any attachments use ExpandResolveTexture load op.\n\nMaybe we can nest the data so usage is more like:\n\nGetAttachmentExpandResolveInfo().attachmentsMask\nGetAttachmentExpandResolveInfo().resolveTargetsMask\n\n?",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "6245d58664f07e93f5e436e00f12daeabeed736d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
