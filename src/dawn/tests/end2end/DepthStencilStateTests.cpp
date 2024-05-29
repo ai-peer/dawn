@@ -858,7 +858,9 @@ TEST_P(DepthStencilStateTest, StencilReferenceInitialized) {
 
 DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       D3D11Backend(),
+                      D3D11Backend({"use_packed_depth24_unorm_stencil8_format"}),
                       D3D12Backend(),
+                      D3D12Backend({"use_packed_depth24_unorm_stencil8_format"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
