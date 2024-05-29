@@ -180,14 +180,6 @@ Texture::Texture(Device* device, const UnpackedPtr<TextureDescriptor>& descripto
     gl.TexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
 }
 
-void Texture::Touch() {
-    mGenID++;
-}
-
-uint32_t Texture::GetGenID() const {
-    return mGenID;
-}
-
 Texture::Texture(Device* device, const UnpackedPtr<TextureDescriptor>& descriptor, GLuint handle)
     : TextureBase(device, descriptor), mHandle(handle) {
     mTarget = TargetForTextureViewDimension(GetCompatibilityTextureBindingViewDimension(),
@@ -517,7 +509,6 @@ MaybeError Texture::ClearTexture(const SubresourceRange& range,
         SetIsSubresourceContentInitialized(true, range);
         device->IncrementLazyClearCountForTesting();
     }
-    Touch();
     return {};
 }
 
@@ -554,8 +545,6 @@ TextureView::TextureView(TextureBase* texture, const UnpackedPtr<TextureViewDesc
                            descriptor->baseArrayLayer, descriptor->arrayLayerCount);
             mOwnsHandle = true;
         } else {
-            // Simulate glTextureView() with texture-to-texture copies.
-            mUseCopy = true;
             mHandle = 0;
         }
     }
@@ -628,43 +617,6 @@ void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint dep
             gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
             break;
     }
-}
-
-void TextureView::CopyIfNeeded() {
-    if (!mUseCopy) {
-        return;
-    }
-
-    const Texture* texture = ToBackend(GetTexture());
-    if (mGenID == texture->GetGenID()) {
-        return;
-    }
-
-    Device* device = ToBackend(GetDevice());
-    const OpenGLFunctions& gl = device->GetGL();
-    uint32_t srcLevel = GetBaseMipLevel();
-    uint32_t numLevels = GetLevelCount();
-
-    uint32_t width = GetSingleSubresourceVirtualSize().width;
-    uint32_t height = GetSingleSubresourceVirtualSize().height;
-    Extent3D size{width, height, GetLayerCount()};
-
-    if (mHandle == 0) {
-        gl.GenTextures(1, &mHandle);
-        gl.BindTexture(mTarget, mHandle);
-        AllocateTexture(gl, mTarget, texture->GetSampleCount(), numLevels, GetInternalFormat(),
-                        size);
-        mOwnsHandle = true;
-    }
-
-    Origin3D src{0, 0, GetBaseArrayLayer()};
-    Origin3D dst{0, 0, 0};
-    for (GLuint level = 0; level < numLevels; ++level) {
-        CopyImageSubData(gl, GetAspects(), texture->GetHandle(), texture->GetGLTarget(),
-                         srcLevel + level, src, mHandle, mTarget, level, dst, size);
-    }
-
-    mGenID = texture->GetGenID();
 }
 
 GLenum TextureView::GetInternalFormat() const {
