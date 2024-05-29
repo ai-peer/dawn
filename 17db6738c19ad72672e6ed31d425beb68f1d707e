@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177be0ab_0f814e24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3455536
+      },
+      "writtenOn": "2024-05-29T12:22:53Z",
+      "side": 1,
+      "message": "Hi Corentin, here\u0027s the update to the docs to apply your fix for the segfault. Sorry for sending it out a bit late, I was a bit confused on how gerrit worked.",
+      "revId": "17db6738c19ad72672e6ed31d425beb68f1d707e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
