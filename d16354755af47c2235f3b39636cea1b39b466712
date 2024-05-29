@@ -33,6 +33,23 @@
       "message": "LGTM I think, left one question on https://github.com/webgpu-native/webgpu-headers/issues/24#issuecomment-2136286799",
       "revId": "d16354755af47c2235f3b39636cea1b39b466712",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b76d7d2_d59d56b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-29T09:34:57Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "d16354755af47c2235f3b39636cea1b39b466712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
