@@ -16,6 +16,24 @@
       "message": "übernit: could just cast straight to `core::type::InputAttachment` rather than casting to `core::type::Texture` first.",
       "revId": "e6978ce819fedf5bcd81e4494881ed31c09ee311",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ac7576f_30a61402",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-05-29T10:25:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc8dfa0d_e5b6dbe5",
+      "revId": "e6978ce819fedf5bcd81e4494881ed31c09ee311",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
