@@ -2137,7 +2137,8 @@ bool Validator::PipelineStages(VectorRef<sem::Function*> entry_points) const {
     };
 
     auto check_var_uses = [&](const sem::Function* func, const sem::Function* entry_point) {
-        auto err = [&](ast::PipelineStage stage, const sem::GlobalVariable* var) {
+        auto err = [&](ast::PipelineStage stage, const sem::GlobalVariable* var,
+                       const bool includeAccess = false) {
             Source source;
             for (auto* user : var->Users()) {
                 if (func == user->Stmt()->Function()) {
@@ -2145,8 +2146,15 @@ bool Validator::PipelineStages(VectorRef<sem::Function*> entry_points) const {
                     break;
                 }
             }
-            AddError(source) << "var with " << style::Enum(var->AddressSpace())
-                             << " address space cannot be used by " << stage << " pipeline stage";
+            if (includeAccess) {
+                AddError(source) << "var with " << style::Enum(var->AddressSpace())
+                                 << " address space and " << style::Enum(var->Access())
+                                 << " access mode cannot be used by " << stage << " pipeline stage";
+            } else {
+                AddError(source) << "var with " << style::Enum(var->AddressSpace())
+                                 << " address space cannot be used by " << stage
+                                 << " pipeline stage";
+            }
             AddNote(var->Declaration()->source) << "variable is declared here";
             backtrace(func, entry_point);
             return false;
@@ -2161,6 +2169,11 @@ bool Validator::PipelineStages(VectorRef<sem::Function*> entry_points) const {
             if (stage != ast::PipelineStage::kFragment &&
                 var->AddressSpace() == core::AddressSpace::kPixelLocal) {
                 return err(stage, var);
+            }
+            if (stage == ast::PipelineStage::kVertex &&
+                var->AddressSpace() == core::AddressSpace::kStorage &&
+                var->Access() != core::Access::kRead) {
+                return err(stage, var, /*includeAccess*/ true);
             }
         }
         return true;
