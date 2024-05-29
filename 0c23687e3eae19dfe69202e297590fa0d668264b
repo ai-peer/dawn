@@ -1,0 +1,49 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "627a8bed_cec3c151",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1004831
+      },
+      "writtenOn": "2024-05-29T17:59:28Z",
+      "side": 1,
+      "message": "Is there anything else in this function, either before or after the vkQueueSubmit, that you might think is a likely culprit for slowdowns and deserves it\u0027s own trace event? I guess also anything else in another function that I missed.",
+      "fixSuggestions": [
+        {
+          "fixId": "cdb47658_7ab6c0f0",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/vulkan/QueueVk.cpp",
+              "range": {
+                "startLine": 418,
+                "startChar": 0,
+                "endLine": 419,
+                "endChar": 0
+              },
+              "replacement": "    TRACE_EVENT_BEGIN0(device-\u003eGetPlatform(), Recording, \"QueueVk::SubmitPendingCommands\");\n"
+            },
+            {
+              "path": "src/dawn/native/vulkan/QueueVk.cpp",
+              "range": {
+                "startLine": 426,
+                "startChar": 0,
+                "endLine": 427,
+                "endChar": 0
+              },
+              "replacement": "    TRACE_EVENT_END0(device-\u003eGetPlatform(), Recording, \"QueueVk::SubmitPendingCommands\");\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0c23687e3eae19dfe69202e297590fa0d668264b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
