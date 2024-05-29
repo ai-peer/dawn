@@ -16,6 +16,76 @@
       "message": "Hi Corentin, here\u0027s the update to the docs to apply your fix for the segfault. Sorry for sending it out a bit late, I was a bit confused on how gerrit worked.",
       "revId": "17db6738c19ad72672e6ed31d425beb68f1d707e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e32874_3ef5bf4a",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-29T13:47:13Z",
+      "side": 1,
+      "message": "nit: switch the tabs to spaces",
+      "fixSuggestions": [
+        {
+          "fixId": "68bea417_fbadbac8",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/node/README.md",
+              "range": {
+                "startLine": 80,
+                "startChar": 0,
+                "endLine": 83,
+                "endChar": 0
+              },
+              "replacement": "  gpu: create([\n    \"enable-dawn-features\u003dallow_unsafe_apis,dump_shaders,disable_symbol_renaming\",\n  ]),\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17db6738c19ad72672e6ed31d425beb68f1d707e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e12fe6_c360a843",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-29T13:47:13Z",
+      "side": 1,
+      "message": "nit: can you change the tabs back to spaces?",
+      "fixSuggestions": [
+        {
+          "fixId": "2bfa4a6b_09de8b10",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/node/README.md",
+              "range": {
+                "startLine": 209,
+                "startChar": 0,
+                "endLine": 228,
+                "endChar": 0
+              },
+              "replacement": "    \"version\": \"0.2.0\",\n    \"configurations\": [\n        {\n            \"name\": \"Debug with node\",\n            \"type\": \"node\",\n            \"request\": \"launch\",\n            \"outFiles\": [\"./**/*.js\"],\n            \"args\": [\n                \"-e\",\n                \"require(\u0027./src/common/tools/setup-ts-in-node.js\u0027);require(\u0027./src/common/runtime/cmdline.ts\u0027);\",\n                \"--\",\n                \"placeholder-arg\",\n                \"--gpu-provider\",\n                \"[path-to-cts.js]\", // REPLACE: [path-to-cts.js]\n                \"[test-query]\" // REPLACE: [test-query]\n            ],\n            \"cwd\": \"[cts-root]\" // REPLACE: [cts-root]\n        }\n    ]\n"
+            }
+          ]
+        }
+      ],
+      "revId": "17db6738c19ad72672e6ed31d425beb68f1d707e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
