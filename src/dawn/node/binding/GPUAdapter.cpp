@@ -204,15 +204,4 @@ interop::Promise<interop::Interface<interop::GPUDevice>> GPUAdapter::requestDevi
     return promise;
 }
 
-interop::Promise<interop::Interface<interop::GPUAdapterInfo>> GPUAdapter::requestAdapterInfo(
-    Napi::Env env) {
-    interop::Promise<interop::Interface<interop::GPUAdapterInfo>> promise(env, PROMISE_INFO);
-
-    WGPUAdapterProperties adapterProperties = {};
-    adapter_.GetProperties(&adapterProperties);
-
-    promise.Resolve(interop::GPUAdapterInfo::Create<GPUAdapterInfo>(env, adapterProperties));
-    return promise;
-}
-
 }  // namespace wgpu::binding
