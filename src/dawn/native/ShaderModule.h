@@ -214,6 +214,7 @@ struct EntryPointMetadata {
         uint8_t blendSrc;
     };
     PerColorAttachment<FragmentRenderAttachmentInfo> fragmentOutputVariables;
+    std::optional<FragmentRenderAttachmentInfo> fragmentOutputBlendSrc1;
     ColorAttachmentMask fragmentOutputMask;
 
     PerColorAttachment<FragmentRenderAttachmentInfo> fragmentInputVariables;

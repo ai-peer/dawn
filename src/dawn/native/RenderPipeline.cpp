@@ -656,7 +656,6 @@ ResultOrError<ShaderModuleEntryPoint> ValidateFragmentState(DeviceBase* device,
 
     bool usesSrc1 = false;
     bool usesSrc1Alpha = false;
-    uint8_t blendSrc1ComponentCount = 0;
     ColorAttachmentFormats colorAttachmentFormats;
     for (auto i : IterateBitSet(targetMask)) {
         const Format* format;
@@ -667,10 +666,6 @@ ResultOrError<ShaderModuleEntryPoint> ValidateFragmentState(DeviceBase* device,
                              fragmentMetadata.fragmentOutputVariables[i], multisample),
                          "validating targets[%u] framebuffer output.", i);
         colorAttachmentFormats.push_back(&device->GetValidInternalFormat(targets[i].format));
-
-        if (fragmentMetadata.fragmentOutputVariables[i].blendSrc == 1u) {
-            blendSrc1ComponentCount = fragmentMetadata.fragmentOutputVariables[i].componentCount;
-        }
 
         if (fragmentMetadata.fragmentInputMask[i]) {
             DAWN_TRY_CONTEXT(ValidateFramebufferInput(device, format,
@@ -685,14 +680,15 @@ ResultOrError<ShaderModuleEntryPoint> ValidateFragmentState(DeviceBase* device,
     }
 
     if (usesSrc1) {
-        DAWN_INVALID_IF(blendSrc1ComponentCount == 0,
+        DAWN_INVALID_IF(!fragmentMetadata.fragmentOutputBlendSrc1.has_value(),
                         "One of the blend factor uses `blend_src(1)` while `blend_src(1)` is "
                         "missing from the fragment shader outputs.");
 
-        DAWN_INVALID_IF(usesSrc1Alpha && blendSrc1ComponentCount < 4u,
-                        "One of the blend factor is reading the alpha of the fragment shader "
-                        "output with `blend_src(1)` but it is missing from that fragment shader "
-                        "output.");
+        DAWN_INVALID_IF(
+            usesSrc1Alpha && fragmentMetadata.fragmentOutputBlendSrc1->componentCount < 4u,
+            "One of the blend factor is reading the alpha of the fragment shader "
+            "output with `blend_src(1)` but it is missing from that fragment shader "
+            "output.");
     }
 
     auto extraFramebufferInputs = fragmentMetadata.fragmentInputMask & ~targetMask;

@@ -62,6 +62,28 @@ class DualSourceBlendTests : public DawnTest {
                     return vec4f(pos[VertexIndex], 0.0, 1.0);
                 }
             )");
+        fsModuleWithSrc1Vec4 = utils::CreateShaderModule(device, R"(
+                enable dual_source_blending;
+
+                struct TestData {
+                    color : vec4f,
+                    blend : vec4f
+                }
+
+                @group(0) @binding(0) var<uniform> testData : TestData;
+
+                struct FragOut {
+                  @location(0) @blend_src(0) color : vec4<f32>,
+                  @location(0) @blend_src(1) blend : vec4<f32>,
+                }
+
+                @fragment fn main() -> FragOut {
+                  var output : FragOut;
+                  output.color = testData.color;
+                  output.blend = testData.blend;
+                  return output;
+                }
+            )");
 
         renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
         renderPass.renderPassInfo.cColorAttachments[0].loadOp = wgpu::LoadOp::Clear;
@@ -203,29 +225,8 @@ class DualSourceBlendTests : public DawnTest {
         return rgba8ExpectationRange;
     }
 
-    void RunTest(TestParams params) {
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
-                enable dual_source_blending;
-
-                struct TestData {
-                    color : vec4f,
-                    blend : vec4f
-                }
-
-                @group(0) @binding(0) var<uniform> testData : TestData;
-
-                struct FragOut {
-                  @location(0) @blend_src(0) color : vec4<f32>,
-                  @location(0) @blend_src(1) blend : vec4<f32>,
-                }
-
-                @fragment fn main() -> FragOut {
-                  var output : FragOut;
-                  output.color = testData.color;
-                  output.blend = testData.blend;
-                  return output;
-                }
-            )");
+    void RunTest(TestParams params, wgpu::ShaderModule fsTestModule = nullptr) {
+        wgpu::ShaderModule fsModule = fsTestModule == nullptr ? fsModuleWithSrc1Vec4 : fsTestModule;
 
         wgpu::BlendComponent blendComponent;
         blendComponent.operation = wgpu::BlendOperation::Add;
@@ -303,6 +304,7 @@ class DualSourceBlendTests : public DawnTest {
     wgpu::RenderPipeline basePipeline;
     wgpu::RenderPipeline testPipeline;
     wgpu::ShaderModule vsModule;
+    wgpu::ShaderModule fsModuleWithSrc1Vec4;
 };
 
 // Test that Src and Src1 BlendFactors work with dual source blending.
@@ -403,6 +405,53 @@ TEST_P(DualSourceBlendTests, BlendFactorOneMinusSrc1Alpha) {
     // Test destination blend factor with one minus source alpha index 1
     params.dstBlendFactor = wgpu::BlendFactor::OneMinusSrc1Alpha;
     RunTest(params);
+}
+
+TEST_P(DualSourceBlendTests, BlendSrc1Vec2BlendSrc0Vec4) {
+    wgpu::ShaderModule fsModuleWithSrc1Vec2 = utils::CreateShaderModule(device, R"(
+                enable dual_source_blending;
+
+                struct TestData {
+                    color : vec4f,
+                    blend : vec4f
+                }
+
+                @group(0) @binding(0) var<uniform> testData : TestData;
+
+                struct FragOut {
+                  @location(0) @blend_src(0) color : vec4f,
+                  @location(0) @blend_src(1) blend : vec2f,
+                }
+
+                @fragment fn main() -> FragOut {
+                  var output : FragOut;
+                  output.color = testData.color;
+                  output.blend = testData.blend.rg;
+                  return output;
+                }
+            )");
+
+    // Test source blend factor with source index 0
+    TestParams params;
+    params.srcBlendFactor = wgpu::BlendFactor::Src;
+    params.dstBlendFactor = wgpu::BlendFactor::Zero;
+    params.baseColor = utils::RGBA8(100, 150, 200, 250);
+    params.testColorIndex0 = utils::RGBA8(100, 150, 200, 250);
+    params.testColorIndex1 = utils::RGBA8(32, 64, 0, 0);
+    // RunTest(params, fsModuleWithSrc1Vec2);
+
+    // Test source blend factor with source index 1
+    params.srcBlendFactor = wgpu::BlendFactor::Src1;
+    RunTest(params, fsModuleWithSrc1Vec2);
+
+    // Test destination blend factor with source index 0
+    params.srcBlendFactor = wgpu::BlendFactor::Zero;
+    params.dstBlendFactor = wgpu::BlendFactor::Src;
+    // RunTest(params, fsModuleWithSrc1Vec2);
+
+    // Test destination blend factor with source index 1
+    params.dstBlendFactor = wgpu::BlendFactor::Src1;
+    // RunTest(params, fsModuleWithSrc1Vec2);
 }
 
 DAWN_INSTANTIATE_TEST(DualSourceBlendTests,

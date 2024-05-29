@@ -788,15 +788,16 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                 continue;
             }
 
-            if (outputVar.attributes.blend_src.has_value()) {
+            if (outputVar.attributes.blend_src.has_value() &&
+                *outputVar.attributes.blend_src == 1) {
                 variable.blendSrc = *outputVar.attributes.blend_src;
+                metadata->fragmentOutputBlendSrc1 = variable;
             } else {
                 variable.blendSrc = 0;
+                ColorAttachmentIndex attachment(static_cast<uint8_t>(unsanitizedAttachment));
+                metadata->fragmentOutputVariables[attachment] = variable;
+                metadata->fragmentOutputMask.set(attachment);
             }
-
-            ColorAttachmentIndex attachment(static_cast<uint8_t>(unsanitizedAttachment));
-            metadata->fragmentOutputVariables[attachment] = variable;
-            metadata->fragmentOutputMask.set(attachment);
         }
 
         // Fragment input reflection.
