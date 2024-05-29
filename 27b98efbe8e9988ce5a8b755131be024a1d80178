@@ -16,6 +16,29 @@
       "message": "Please take a look.",
       "revId": "27b98efbe8e9988ce5a8b755131be024a1d80178",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a8bef7_0372f944",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-29T07:03:11Z",
+      "side": 1,
+      "message": "why not 0x20? that\u0027s the next power of 2\n\ncould change these to:\n```\n \u003d 0,\n \u003d 1 \u003c\u003c 1,\n \u003d 1 \u003c\u003c 2,\n \u003d 1 \u003c\u003c 3,\n \u003d 1 \u003c\u003c 4,\n \u003d 1 \u003c\u003c 5\n```\nif it makes it clearer",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "27b98efbe8e9988ce5a8b755131be024a1d80178",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
