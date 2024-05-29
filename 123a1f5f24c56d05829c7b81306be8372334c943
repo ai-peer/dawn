@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0fba0c74_2fdd4b4f",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-29T20:06:45Z",
+      "side": 1,
+      "message": "I\u0027ve changed the logic for removing arguments to remove this dependency. Uses an extra vector to store terminators that need to be cleared, which is done after we are done adding variables/stores etc. PTAL.",
+      "parentUuid": "0a3058c2_532b7597",
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "018c1145_e7c91053",
         "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
         "patchSetId": 1
@@ -49,6 +67,24 @@
       "writtenOn": "2024-05-29T18:00:06Z",
       "side": 1,
       "message": "Exits can have undef (`nullptr`) values, no? We don\u0027t seem to be handling them in this transform.",
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef2b4a70_6c0b0925",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-29T20:06:45Z",
+      "side": 1,
+      "message": "Good catch, I assumed we allowed `undef` stores but apparently not. Fixed.",
+      "parentUuid": "018c1145_e7c91053",
       "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +102,24 @@
       "writtenOn": "2024-05-29T18:00:06Z",
       "side": 1,
       "message": "This makes the assumption that the next-iter values come before the exit-if args. This is subtle / fragile. At the very least, a comment would be good.",
+      "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b19df5b9_76f52162",
+        "filename": "src/tint/lang/core/ir/transform/remove_terminator_args.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-29T20:06:45Z",
+      "side": 1,
+      "message": "I\u0027ve added the special-casing for `BreakIf` to use `NextIterValues()`.",
+      "parentUuid": "a6fc41bc_f11d5ea9",
       "revId": "123a1f5f24c56d05829c7b81306be8372334c943",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
