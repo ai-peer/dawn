@@ -39,6 +39,30 @@
       },
       "revId": "27b98efbe8e9988ce5a8b755131be024a1d80178",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a35694_134c6aad",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-05-29T15:28:10Z",
+      "side": 1,
+      "message": "The idea was to leave some gap for future SampleBitTypes that have equivalent TextureSampleType where [this](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Format.cpp;drc\u003dc0265133106c7647e90f9aaa4377d28190b1a6a9;l\u003d97) would need to match. But in that case, future one can be 0x20 and can push this to a higher value as well so updated to 0x20. Also added a comment explicitly mentioning this.",
+      "parentUuid": "e4a8bef7_0372f944",
+      "range": {
+        "startLine": 74,
+        "startChar": 15,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "27b98efbe8e9988ce5a8b755131be024a1d80178",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
