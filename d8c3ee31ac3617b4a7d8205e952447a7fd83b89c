@@ -271,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cd232be_57e20b27",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-29T13:02:43Z",
+      "side": 1,
+      "message": "Change of plan, a new CL is incoming to cover the CPP functionality https://dawn-review.googlesource.com/c/dawn/+/190623  which I will now remove from this CL.",
+      "parentUuid": "b59f12b3_fdba67b2",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52f79d59_922849f0",
         "filename": "generator/templates/art/api_jni_converter.cpp",
         "patchSetId": 2
