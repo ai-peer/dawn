@@ -287,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69660589_f1c94b4d",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cd232be_57e20b27",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52f79d59_922849f0",

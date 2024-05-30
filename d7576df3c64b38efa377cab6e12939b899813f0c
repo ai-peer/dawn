@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "597ed01a_f374703b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76afa4f0_9f922ebe",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79812d08_127fcc11",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "The comment doesn\u0027t match the code. The code prevents any return value with `\"*\"`, or passing structures by value.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3c52220_a332cce5",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79812d08_127fcc11",
       "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "428b2563_495ce731",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "It\u0027s not return types (as you say the comment was wrong). It\u0027s seen in the FreeMembers methods added in https://dawn-review.googlesource.com/c/dawn/+/141501, which I gather is needed for methods that return structures (even though some aren\u0027t in webgpu.h for some reason).",
+      "parentUuid": "a001b6c4_b8bdb872",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15feae06_d35c48d6",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "These Python one liners are a bit hard to parse, esp. since Python is a secondary language for the team. Could we have more pedestrian code?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29b9f32_87d5b1af",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15feae06_d35c48d6",
       "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a1b902_dbaef93a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bedde16b_a882b8bb",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "350c2c2f_73cae421",
@@ -116,6 +206,30 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "Is that macro boing to be used for an actual JNI name in future CLs?  If not it could be kt_file_path?",
+      "range": {
+        "startLine": 1474,
+        "startChar": 12,
+        "endLine": 1474,
+        "endChar": 20
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "763969f7_740d4857",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "350c2c2f_73cae421",
       "range": {
         "startLine": 1474,
         "startChar": 12,
@@ -149,6 +263,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b6deb2_af4de306",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b02934e_9fb43a07",
+      "range": {
+        "startLine": 31,
+        "startChar": 53,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca9a9d8c_e38e8faa",
@@ -166,6 +304,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82e55ad5_28a5e3b4",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca9a9d8c_e38e8faa",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16745892_88cae5f3",
@@ -179,6 +335,30 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "nit: I believe that Kotlin has support for trailing commas so we can do this:\n```suggestion\n        {{ arg.name.camelCase() }}:{{ kotlin_declaration(arg) }},\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3705ecce_36c495ed",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16745892_88cae5f3",
       "range": {
         "startLine": 36,
         "startChar": 8,
@@ -214,6 +394,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9084bb86_9eb1a680",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Actually since one of the invocations was redundant and included in error (now handled in api_kotlin_functions.kt) I can inline the macro.",
+      "parentUuid": "73962259_270ab86a",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc856b57_40a29927",
         "filename": "generator/templates/art/api_kotlin_object.kt",
         "patchSetId": 11
@@ -225,6 +429,24 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "Note: This is a bit magic, and in the future we\u0027ll have more special cases so it might end up moving to a helper function in the Python file. But SGTM to wait and see.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3234d877_5dfa0738",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "bc856b57_40a29927",
       "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -252,6 +474,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9703043_43ae208d",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "Because other invocations supply argument parameters, I suggested a new version kotlin_type_declaration that does the dictionary building. PTAL.",
+      "parentUuid": "76970c6f_ad484be5",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 26
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cec1ecb_95451a16",
@@ -269,6 +515,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a22e85bb_ae50eb57",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "I added a comment to explain what\u0027s going on.",
+      "parentUuid": "5cec1ecb_95451a16",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09fc8c7b_2d7021fb",
@@ -282,6 +546,41 @@
       "writtenOn": "2024-05-30T09:36:41Z",
       "side": 1,
       "message": "Is the handle private by default here?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c809a7b4_a96f5d20",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "It\u0027s not private because clients have access to the handle, either to use as an ID for maps or because hybrid Kotlin / C apps might want to do for example set up textures and buffers in Kotlin, then pass the handles to A render loop in C (which uses the Dawn C API) (I used this approach myself in a GLES game I wrote).",
+      "parentUuid": "09fc8c7b_2d7021fb",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5f9fd8_aae520c6",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T15:21:34Z",
+      "side": 1,
+      "message": "FYI this redundant code was included in error and is now removed.",
       "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
