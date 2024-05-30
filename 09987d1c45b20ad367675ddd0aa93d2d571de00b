@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c66d6811_83c95364",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T10:58:26Z",
+      "side": 1,
+      "message": "Ah sorry did you look at https://dawn.googlesource.com/dawn/+/refs/heads/main/CONTRIBUTING.md#contributor-license-agreement if that\u0027s too much hassle we can have someone else write the doc.",
+      "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
