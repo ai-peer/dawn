@@ -65,7 +65,7 @@ std::string GenerateFS(const BlitColorToColorWithDrawPipelineKey& pipelineKey) {
     std::ostringstream assignOutputsStream;
     std::ostringstream finalStream;
 
-    for (auto i : IterateBitSet(pipelineKey.attachmentsToExpandResolve)) {
+    for (auto i : IterateBitSet(pipelineKey.blitSubsetMask)) {
         finalStream << absl::StrFormat("@group(0) @binding(%u) var srcTex%u : texture_2d<f32>;\n",
                                        i, i);
 
@@ -90,7 +90,8 @@ std::string GenerateFS(const BlitColorToColorWithDrawPipelineKey& pipelineKey) {
 ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
     DeviceBase* device,
     const BlitColorToColorWithDrawPipelineKey& pipelineKey,
-    uint8_t colorAttachmentCount) {
+    uint8_t colorAttachmentCount,
+    bool useSpecialSampleType) {
     InternalPipelineStore* store = device->GetInternalPipelineStore();
     {
         auto it = store->expandResolveTexturePipelines.find(pipelineKey);
@@ -128,7 +129,7 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
         if (pipelineKey.resolveTargetsMask[i]) {
             target.nextInChain = &msaaExpandResolveStates[i];
             msaaExpandResolveStates[i].enabled = pipelineKey.attachmentsToExpandResolve[i];
-            if (msaaExpandResolveStates[i].enabled) {
+            if (pipelineKey.blitSubsetMask.test(i)) {
                 target.writeMask = wgpu::ColorWriteMask::All;
             } else {
                 target.writeMask = wgpu::ColorWriteMask::None;
@@ -168,7 +169,8 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
         auto& bglEntry = bglEntries.back();
         bglEntry.binding = static_cast<uint8_t>(colorIdx);
         bglEntry.visibility = wgpu::ShaderStage::Fragment;
-        bglEntry.texture.sampleType = kInternalResolveAttachmentSampleType;
+        bglEntry.texture.sampleType = useSpecialSampleType ? kInternalResolveAttachmentSampleType
+                                                           : wgpu::TextureSampleType::Float;
         bglEntry.texture.viewDimension = wgpu::TextureViewDimension::e2D;
     }
     BindGroupLayoutDescriptor bglDesc = {};
@@ -194,9 +196,10 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateColorBlitPipeline(
 
 MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
                                         RenderPassEncoder* renderEncoder,
+                                        ColorAttachmentMask subsetMask,
+                                        bool useSpecialSampleType,
                                         const RenderPassDescriptor* renderPassDescriptor) {
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
-    DAWN_ASSERT(device->CanTextureLoadResolveTargetInTheSameRenderpass());
 
     BlitColorToColorWithDrawPipelineKey pipelineKey;
     for (uint8_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
@@ -227,6 +230,11 @@ MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
         return {};
     }
 
+    // This mask is separated from attachmentsToExpandResolve mask. It allows limiting number of
+    // attachments to blit in this function. While attachmentsToExpandResolve mask allows the
+    // pipeline to be compatible with the render pass.
+    pipelineKey.blitSubsetMask = subsetMask & pipelineKey.attachmentsToExpandResolve;
+
     pipelineKey.depthStencilFormat = wgpu::TextureFormat::Undefined;
     if (renderPassDescriptor->depthStencilAttachment != nullptr) {
         pipelineKey.depthStencilFormat =
@@ -235,7 +243,8 @@ MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
 
     Ref<RenderPipelineBase> pipeline;
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateColorBlitPipeline(
-                                  device, pipelineKey, renderPassDescriptor->colorAttachmentCount));
+                                  device, pipelineKey, renderPassDescriptor->colorAttachmentCount,
+                                  useSpecialSampleType));
 
     Ref<BindGroupLayoutBase> bgl;
     DAWN_TRY_ASSIGN(bgl, pipeline->GetBindGroupLayout(0));
@@ -274,6 +283,7 @@ size_t BlitColorToColorWithDrawPipelineKey::HashFunc::operator()(
 
     HashCombine(&hash, key.attachmentsToExpandResolve);
     HashCombine(&hash, key.resolveTargetsMask);
+    HashCombine(&hash, key.blitSubsetMask);
 
     for (auto format : key.colorTargetFormats) {
         HashCombine(&hash, format);
@@ -292,6 +302,9 @@ bool BlitColorToColorWithDrawPipelineKey::EqualityFunc::operator()(
         return false;
     }
     if (a.resolveTargetsMask != b.resolveTargetsMask) {
+        return false;
+    }
+    if (a.blitSubsetMask != b.blitSubsetMask) {
         return false;
     }
 

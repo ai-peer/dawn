@@ -65,6 +65,13 @@ class SyncScopeUsageTracker {
                             const SubresourceRange& range,
                             wgpu::TextureUsage usage,
                             wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
+    void UnsetTextureViewUsedAs(TextureViewBase* texture,
+                                wgpu::TextureUsage usage,
+                                wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
+    void UnsetTextureRangeUsedAs(TextureBase* texture,
+                                 const SubresourceRange& range,
+                                 wgpu::TextureUsage usage,
+                                 wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
     void AddRenderBundleTextureUsage(TextureBase* texture,
                                      const TextureSubresourceSyncInfo& textureSyncInfo);
 

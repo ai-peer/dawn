@@ -215,10 +215,6 @@ MaybeError BeginRenderPassAndExpandResolveTextureWithDraw(Device* device,
         DAWN_ASSERT(baseType == TextureComponentType::Float);
 
         if (colorAttachment.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
-            // TODO(42240662): Handle the cases where resolveTarget is altered by workarounds such
-            // as ResolveMultipleAttachmentInSeparatePasses/AlwaysResolveIntoZeroLevelAndLayer. We
-            // need to careful handle such cases because the render pass' compatibility could be
-            // affected as well.
             DAWN_ASSERT(colorAttachment.resolveTarget != nullptr);
             DAWN_ASSERT(colorAttachment.resolveTarget->GetLayerCount() == 1u);
             DAWN_ASSERT(colorAttachment.resolveTarget->GetDimension() ==
