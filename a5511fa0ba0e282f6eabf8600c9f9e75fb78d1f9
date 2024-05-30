@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41dba733_4c2281d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-30T23:19:55Z",
+      "side": 1,
+      "message": "not sure if the clang tidy thing needs to be fixed or not. the type should be forward declared I think.",
+      "revId": "a5511fa0ba0e282f6eabf8600c9f9e75fb78d1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
