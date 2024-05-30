@@ -1,0 +1,192 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7ce9889_6d7212e9",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "Also we should cache the lookups and move this comment about freeing resources everywhere it is needed so that we don\u0027t forget to add the freeing to one of the things?",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22edbf57_f69435aa",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "Does this compile? We seem to have many variables named mObj in the same C++ scope. I\u0027d suggest opening a scope for each member.",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c83ab38_f3347cb1",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "What if the length is constant? Do we need to validate and raise an exception?",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f3f7a89_28f639df",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "TBH I find this weird that we keep referring to this whole project as \"ART\". It is a Kotlin bridge to Dawn/WebGPU but not a part of the actual Android Runtime. Maybe just \"represented in Kotlin\".",
+      "range": {
+        "startLine": 83,
+        "startChar": 65,
+        "endLine": 83,
+        "endChar": 68
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047e95c7_966ae07e",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "```suggestion\n        {% if structure.chained %}\n```",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8af022_28431140",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "Note that we might have to change this depending on how we decide to handle chained structs.",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d00f4712_398db8c9",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "nit: It would be ideal to have a namespace so as to not clobber the glocal scope (even if C++ name mangling should prevent problems here). Also we tend to have function names be CamelCase.",
+      "range": {
+        "startLine": 33,
+        "startChar": 15,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66be6c7a_5ed192d4",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "`const void`?? Does that do something more than just `void`?",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dae7f74_9af8ca7c",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "Didn\u0027t take a look at this file yet.",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41025621_95db6711",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:16:32Z",
+      "side": 1,
+      "message": "Could we have the file names match the generated file\u0027s names since these are used to generate only a single file?",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
