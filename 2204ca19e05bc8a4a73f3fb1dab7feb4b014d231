@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d873679_ec3b77d0",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:41:55Z",
+      "side": 1,
+      "message": "What happens after if the object is used after has been closed? Do we need to raise an exception if it is used in any other call?",
+      "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
