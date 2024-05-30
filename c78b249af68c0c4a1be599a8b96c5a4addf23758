@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31a9adb9_a3eb8e3e",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "I have a bug open for JNI caching b/341889978, I don\u0027t want to do it in this CL as I want to combine it with performance measurement to ensure it actually improves things (I\u0027ve heard it suggested that JNI has its own internal cache).\n\nRegarding the resources comments I will add the comments to each site.",
+      "parentUuid": "d7ce9889_6d7212e9",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22edbf57_f69435aa",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a91368b_3231620c",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "The scope is opened on the line above.",
+      "parentUuid": "22edbf57_f69435aa",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c83ab38_f3347cb1",
@@ -48,6 +84,24 @@
       "writtenOn": "2024-05-30T11:16:32Z",
       "side": 1,
       "message": "What if the length is constant? Do we need to validate and raise an exception?",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68e4cd9c_7c640f4b",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c83ab38_f3347cb1",
       "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b19c21c_5b8e1a49",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "5f3f7a89_28f639df",
+      "range": {
+        "startLine": 83,
+        "startChar": 65,
+        "endLine": 83,
+        "endChar": 68
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "047e95c7_966ae07e",
@@ -92,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "604ba6ee_cc2c1ee0",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047e95c7_966ae07e",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8af022_28431140",
@@ -105,6 +201,24 @@
       "writtenOn": "2024-05-30T11:16:32Z",
       "side": 1,
       "message": "Note that we might have to change this depending on how we decide to handle chained structs.",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eecd6a69_8035c739",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "cd8af022_28431140",
       "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +269,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6be72212_3afeb39e",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Good catch, no idea where that came from.",
+      "parentUuid": "66be6c7a_5ed192d4",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8390dec6_7b4807cd",
+        "filename": "generator/templates/art/api_jni_converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Done, and Done.",
+      "parentUuid": "d00f4712_398db8c9",
+      "range": {
+        "startLine": 33,
+        "startChar": 15,
+        "endLine": 33,
+        "endChar": 22
+      },
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dae7f74_9af8ca7c",
@@ -185,6 +347,24 @@
       "writtenOn": "2024-05-30T11:16:32Z",
       "side": 1,
       "message": "Could we have the file names match the generated file\u0027s names since these are used to generate only a single file?",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e83ecf_26189417",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T16:44:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41025621_95db6711",
       "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
