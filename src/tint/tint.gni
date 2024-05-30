@@ -185,7 +185,12 @@ if (tint_has_fuzzers) {
       forward_variables_from(invoker, "*", [ "output_name" ])
       exclude_main = false
 
-      if (target_name == "wgsl") {
+      if (target_name == "dxc") {
+        libfuzzer_options = [
+          "only_ascii=1",
+          "max_len=10000",
+        ]
+      } else if (target_name == "wgsl") {
         dict = "dictionary.txt"
         libfuzzer_options = [
           # TODO(crbug.com/tint/2223): Remove this to fuzz unicode?

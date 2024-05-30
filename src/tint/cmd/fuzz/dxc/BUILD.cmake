@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -34,6 +34,40 @@
 #                       Do not modify this file directly
 ################################################################################
 
-include(cmd/fuzz/dxc/BUILD.cmake)
-include(cmd/fuzz/ir/BUILD.cmake)
-include(cmd/fuzz/wgsl/BUILD.cmake)
+if(TINT_BUILD_HLSL_WRITER)
+################################################################################
+# Target:    tint_cmd_fuzz_dxc_fuzz_cmd
+# Kind:      fuzz_cmd
+# Condition: TINT_BUILD_HLSL_WRITER
+################################################################################
+tint_add_target(tint_cmd_fuzz_dxc_fuzz_cmd fuzz_cmd
+)
+
+tint_target_add_dependencies(tint_cmd_fuzz_dxc_fuzz_cmd fuzz_cmd
+  tint_lang_wgsl_ast
+  tint_utils_cli
+  tint_utils_containers
+  tint_utils_diagnostic
+  tint_utils_ice
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_result
+  tint_utils_rtti
+  tint_utils_strconv
+  tint_utils_text
+  tint_utils_traits
+)
+
+if(TINT_BUILD_HLSL_WRITER)
+  tint_target_add_sources(tint_cmd_fuzz_dxc_fuzz_cmd fuzz_cmd
+    "cmd/fuzz/dxc/main_fuzz.cc"
+  )
+  tint_target_add_dependencies(tint_cmd_fuzz_dxc_fuzz_cmd fuzz_cmd
+    tint_lang_hlsl_validate
+  )
+endif(TINT_BUILD_HLSL_WRITER)
+
+tint_target_set_output_name(tint_cmd_fuzz_dxc_fuzz_cmd fuzz_cmd "dxc_fuzzer")
+
+endif(TINT_BUILD_HLSL_WRITER)
