@@ -83,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98c4113_97f288e8",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-30T14:18:06Z",
+      "side": 1,
+      "message": "Probably got it around the wrong way then! Nevermind!",
+      "parentUuid": "adfaf29c_21cc8044",
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8d9f7c4_973a7a24",
