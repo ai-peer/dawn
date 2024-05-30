@@ -100,7 +100,10 @@ class Resolver {
     /// Constructor
     /// @param builder the program builder
     /// @param allowed_features the extensions and features that are allowed to be used
-    explicit Resolver(ProgramBuilder* builder, const wgsl::AllowedFeatures& allowed_features);
+    /// @param compatibility_mode `true` to validate in compatibility mode
+    Resolver(ProgramBuilder* builder,
+             const wgsl::AllowedFeatures& allowed_features,
+             bool compatibility_mode = false);
 
     /// Destructor
     ~Resolver();

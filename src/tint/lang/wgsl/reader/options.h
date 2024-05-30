@@ -38,8 +38,11 @@ struct Options {
     /// The extensions and language features that are allowed to be used.
     AllowedFeatures allowed_features{};
 
+    /// Set to `true` if the WGSL frontend should validate in "compatibility mode".
+    bool compatibility_mode = false;
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField().
-    TINT_REFLECT(Options, allowed_features);
+    TINT_REFLECT(Options, allowed_features, compatibility_mode);
 };
 
 }  // namespace tint::wgsl::reader
