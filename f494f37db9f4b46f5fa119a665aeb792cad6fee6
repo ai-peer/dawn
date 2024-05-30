@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e8d04c_4f567b53",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "Just to check I understand why this is necessary, is it the case that each of the `jobject`, `jint`, etc are all typedefs to pointer types and we\u0027re checking here that they all actually point to something before using them?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c56c37d_7d03f64c",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "If `_{{ arg.name.camelCase() }}` ends up being false, does that mean we leave `arg.name.camelCase` unintialized? Should this be assiging a default value?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21e0b7b_6a76fe83",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "ditto default value needed?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c523846d_256a870f",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "Can this be combined with the array in 175 as it looks like the block is the same?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d555cb91_59845c4f",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "There are other return types then just integers (if I\u0027m reading this correctly) so, what does this do in the case of a `jobject` return?  (Oh, is it because `jobject` is secretly a pointer so this is essentually returning `0` as `NULL`?)",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ae70347_5587dcf3",
+        "filename": "generator/templates/art/structures.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "What does it mean if `mObj` was a `nullptr`? Is it that there was an error in the `CallObjectMethod` call, or is it that the member was `nullptr`? (I.e, is this an error and we should be doing something in the else case?)",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c671d01d_b618cfa6",
+        "filename": "generator/templates/art/structures.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-05-30T17:28:13Z",
+      "side": 1,
+      "message": "```suggestion\n                    //* This container type is represented in Kotlin as primitive array types.\n```",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
