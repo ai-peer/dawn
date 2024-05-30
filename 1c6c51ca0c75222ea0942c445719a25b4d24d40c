@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "058e4259_c558c231",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-05-30T04:38:39Z",
+      "side": 1,
+      "message": "I\u0027ll wait as it\u0027s not urgent.",
+      "parentUuid": "a856215c_dc8c31e0",
+      "revId": "1c6c51ca0c75222ea0942c445719a25b4d24d40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7618ecee_e436733a",
         "filename": "src/dawn/node/binding/GPUAdapter.cpp",
         "patchSetId": 7
@@ -48,6 +66,24 @@
       "writtenOn": "2024-05-30T01:48:08Z",
       "side": 1,
       "message": "Need to return the same object each time. Actually, we need CTS for that too",
+      "revId": "1c6c51ca0c75222ea0942c445719a25b4d24d40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5046b493_654ec3b1",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-05-30T04:38:39Z",
+      "side": 1,
+      "message": "features and limits follow the same pattern and they are both `[SameObject]`. Shall we also fix them?",
+      "parentUuid": "7618ecee_e436733a",
       "revId": "1c6c51ca0c75222ea0942c445719a25b4d24d40c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
