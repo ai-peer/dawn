@@ -1,0 +1,59 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39744d27_5c56d648",
+        "filename": "src/tint/lang/glsl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-05-30T17:48:22Z",
+      "side": 1,
+      "message": "I personally would put in .has_value() to be crystal clear about it, but this is fine.",
+      "fixSuggestions": [
+        {
+          "fixId": "413f8cf3_93c64872",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/glsl/writer/writer_ast_fuzz.cc",
+              "range": {
+                "startLine": 46,
+                "startChar": 0,
+                "endLine": 47,
+                "endChar": 0
+              },
+              "replacement": "    if (options.first_instance_offset.has_value() \u0026\u0026 options.first_instance_offset \u003e kMaxOffset) {\n"
+            },
+            {
+              "path": "src/tint/lang/glsl/writer/writer_ast_fuzz.cc",
+              "range": {
+                "startLine": 50,
+                "startChar": 0,
+                "endLine": 51,
+                "endChar": 0
+              },
+              "replacement": "    if (options.first_vertex_offset.has_value() \u0026\u0026 options.first_vertex_offset \u003e kMaxOffset) {\n"
+            },
+            {
+              "path": "src/tint/lang/glsl/writer/writer_ast_fuzz.cc",
+              "range": {
+                "startLine": 54,
+                "startChar": 0,
+                "endLine": 55,
+                "endChar": 0
+              },
+              "replacement": "    if (options.depth_range_offsets.has_value()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2b4978c6099b00a93ce1b9a6cd65b82c63d237df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
