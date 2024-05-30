@@ -77,6 +77,8 @@ void PrintInspectorBindings(tint::inspector::Inspector& inspector);
 struct LoadProgramOptions {
     /// The file to be loaded
     std::string filename;
+    /// Set to `true` to validate WGSL input using "compatibility mode".
+    bool compatibility_mode = false;
 #if TINT_BUILD_SPV_READER
     /// Spirv-reader options
     bool use_ir = false;
