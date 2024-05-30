@@ -70,6 +70,11 @@ func run() error {
 
 	allFuzzers := []fuzzerInfo{
 		{
+			name: "dxc",
+			path: "dxc_fuzzer",
+			ext:  ".dxc.hlsl",
+		},
+		{
 			name: "wgsl",
 			path: "tint_wgsl_fuzzer",
 			ext:  ".wgsl",
