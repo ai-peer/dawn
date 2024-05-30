@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d854f2f_ba228689",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-30T15:21:23Z",
+      "side": 1,
+      "message": "Add the `tint_ir_fuzzer` definition into here. You\u0027ll probably also want to add some code in to generate the tint binary files from the WGSL files.",
+      "revId": "36aab79533341066c3f2af225cdf6032bf17eaf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
