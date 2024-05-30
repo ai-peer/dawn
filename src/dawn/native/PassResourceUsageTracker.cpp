@@ -84,6 +84,31 @@ void SyncScopeUsageTracker::TextureRangeUsedAs(TextureBase* texture,
         });
 }
 
+void SyncScopeUsageTracker::UnsetTextureViewUsedAs(TextureViewBase* view,
+                                                   wgpu::TextureUsage usage,
+                                                   wgpu::ShaderStage shaderStages) {
+    UnsetTextureRangeUsedAs(view->GetTexture(), view->GetSubresourceRange(), usage, shaderStages);
+}
+
+void SyncScopeUsageTracker::UnsetTextureRangeUsedAs(TextureBase* texture,
+                                                    const SubresourceRange& range,
+                                                    wgpu::TextureUsage usage,
+                                                    wgpu::ShaderStage shaderStages) {
+    // Get or create a new TextureSubresourceSyncInfo for that texture (initially filled with
+    // wgpu::TextureUsage::None and WGPUShaderStage_None)
+    auto it = mTextureSyncInfos.try_emplace(
+        texture, texture->GetFormat().aspects, texture->GetArrayLayers(),
+        texture->GetNumMipLevels(),
+        TextureSyncInfo{wgpu::TextureUsage::None, wgpu::ShaderStage::None});
+    TextureSubresourceSyncInfo& textureSyncInfo = it.first->second;
+
+    textureSyncInfo.Update(
+        range, [usage, shaderStages](const SubresourceRange&, TextureSyncInfo* storedSyncInfo) {
+            storedSyncInfo->usage &= ~usage;
+            storedSyncInfo->shaderStages &= ~shaderStages;
+        });
+}
+
 void SyncScopeUsageTracker::AddRenderBundleTextureUsage(
     TextureBase* texture,
     const TextureSubresourceSyncInfo& textureSyncInfo) {
