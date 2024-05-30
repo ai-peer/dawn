@@ -16,6 +16,24 @@
       "message": "For the record I\u0027m omitting types that are not currently used for ease of review throughout this and the associated CL. Since they are not practically being tested ATM it would be misleading to leave them in anyway.",
       "revId": "bc0f9d611b440eec30fe9c904daefc8dcf5eaa35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df065f9c_9a2fb90e",
+        "filename": "generator/templates/art/api_kotlin_types.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "e7bcd24f_92a1bbb9",
+      "revId": "bc0f9d611b440eec30fe9c904daefc8dcf5eaa35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

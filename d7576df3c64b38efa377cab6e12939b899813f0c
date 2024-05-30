@@ -1,0 +1,289 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08ba6071_50ceea9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Some comments, but mostly nits. Adding Dan who was interested in being the second reviewer for these CLs. Dan please take a look after current comments are addressed.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76afa4f0_9f922ebe",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "```suggestion\n        if any((other.length \u003d\u003d member for other in structure.members )):\n```\n\nOr just an if in a for loop.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79812d08_127fcc11",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "The comment doesn\u0027t match the code. The code prevents any return value with `\"*\"`, or passing structures by value.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a001b6c4_b8bdb872",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "`value` cannot be used to return things. Which part of dawn.json hits this value check?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15feae06_d35c48d6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "These Python one liners are a bit hard to parse, esp. since Python is a secondary language for the team. Could we have more pedestrian code?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bedde16b_a882b8bb",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Could be this moved in the base_args? It would be useful for more than just Kotlin templates.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350c2c2f_73cae421",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Is that macro boing to be used for an actual JNI name in future CLs?  If not it could be kt_file_path?",
+      "range": {
+        "startLine": 1474,
+        "startChar": 12,
+        "endLine": 1474,
+        "endChar": 20
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b02934e_9fb43a07",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "```suggestion\n@Suppress(\"INAPPLICABLE_JVM_NAME\")  {# Required for @JvmName on global function #}\n```",
+      "range": {
+        "startLine": 31,
+        "startChar": 53,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9a9d8c_e38e8faa",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "u-nit: using `//*` comments instead of Jinja\u0027s `{# foo #}` is a bit nicer IMHO because it shows up correctly in .cpp/.h/.kt syntax coloring.\n\nHere and everywhere else :)",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16745892_88cae5f3",
+        "filename": "generator/templates/art/api_kotlin_function_pointer.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "nit: I believe that Kotlin has support for trailing commas so we can do this:\n```suggestion\n        {{ arg.name.camelCase() }}:{{ kotlin_declaration(arg) }},\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 8,
+        "endLine": 36,
+        "endChar": 36
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73962259_270ab86a",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "nit: Maybe `render_fun` since this is also used for functions. IMHO (but optional) we can still separate functions in their own files.",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 22
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc856b57_40a29927",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Note: This is a bit magic, and in the future we\u0027ll have more special cases so it might end up moving to a helper function in the Python file. But SGTM to wait and see.",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76970c6f_ad484be5",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "nit: Maybe we could always have declaration take a `Type` object, and have this dictionary building inside the `kotlin_declaration` macro.",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 26
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cec1ecb_95451a16",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "I have no clue what this line does. Can we have a comment, or find some simpler name remapping to do?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09fc8c7b_2d7021fb",
+        "filename": "generator/templates/art/api_kotlin_object.kt",
+        "patchSetId": 11
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Is the handle private by default here?",
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

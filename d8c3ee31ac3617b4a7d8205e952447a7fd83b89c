@@ -579,6 +579,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa5977e_65f831a6",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "WTF the same comment that I had to retype multiple times was posted N times xD",
+      "parentUuid": "d06e629c_e94b8e29",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abef5ba5_65fa7a4e",
@@ -610,6 +628,24 @@
       "side": 1,
       "message": "One example is BindGroupDescriptor.entries\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/dawn.json;l\u003d292;drc\u003d9009c08f043bc439abd1d87afb8f898f1778bc19",
       "parentUuid": "abef5ba5_65fa7a4e",
+      "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77505da_047b5c95",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T09:36:41Z",
+      "side": 1,
+      "message": "Duh ^^",
+      "parentUuid": "78ff69e8_b1b8b0c3",
       "revId": "d8c3ee31ac3617b4a7d8205e952447a7fd83b89c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
