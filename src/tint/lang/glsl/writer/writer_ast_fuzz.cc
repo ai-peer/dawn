@@ -47,6 +47,10 @@ bool CanRun(const tint::Program& program, const Options& options) {
         return false;
     }
 
+    if (options.first_vertex_offset > kMaxOffset) {
+        return false;
+    }
+
     if (options.depth_range_offsets) {
         if (options.depth_range_offsets->max > kMaxOffset ||
             options.depth_range_offsets->min > kMaxOffset) {
