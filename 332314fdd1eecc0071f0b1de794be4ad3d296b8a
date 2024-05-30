@@ -16,6 +16,23 @@
       "message": "Addressed feedback",
       "revId": "332314fdd1eecc0071f0b1de794be4ad3d296b8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51476643_ff273a57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-05-30T08:38:15Z",
+      "side": 1,
+      "message": "To get some early end-to-end testing, I patched in this CL locally and used it to create an STM using external format and query it for YCbCr info here [1] while doing video playback in Clank-Graphite. It succeeds and gives the same YCbCr info as that given by Ganesh and Graphite using the Device API. So we won\u0027t actually end up *using* STM there, but that test validates this code for creating STMs backing external-format-only AHBs \\o/.\n\n[1] https://chromium-review.googlesource.com/c/chromium/src/+/5537919",
+      "revId": "332314fdd1eecc0071f0b1de794be4ad3d296b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
