@@ -34,6 +34,24 @@
       "parentUuid": "9d873679_ec3b77d0",
       "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4641fbef_e22e2ceb",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T11:18:25Z",
+      "side": 1,
+      "message": "Dawn only checks `\"optional\": true` members for nullability internally. Setting any other member/argument as null is considered to be an application error. So in the vast majority of cases Dawn will just crash if Kotlin tries to use a closed object.",
+      "parentUuid": "c02cd460_6b2b5bc3",
+      "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
