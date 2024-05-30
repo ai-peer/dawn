@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e8786a_5626875a",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-30T14:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f877ece9_1d5714b3",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 12
+      },
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d30330a9_25d88d42",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "adfaf29c_21cc8044",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-30T14:12:23Z",
+      "side": 1,
+      "message": "It looks fine to me? `sample_mask` is a different color to the parentheses, if that\u0027s what you were concerned about.\n\nIn any case, I just copied this from the other errors produced by this function :shrug:",
+      "parentUuid": "d30330a9_25d88d42",
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8d9f7c4_973a7a24",
         "filename": "src/tint/lang/wgsl/resolver/validator.h",
         "patchSetId": 1
@@ -54,6 +96,24 @@
       "writtenOn": "2024-05-30T13:16:28Z",
       "side": 1,
       "message": "nit: initialize or make const",
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bb3523_f62f943b",
+        "filename": "src/tint/lang/wgsl/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-30T14:12:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8d9f7c4_973a7a24",
       "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

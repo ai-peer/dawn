@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41587c20_22e33855",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-30T14:12:23Z",
+      "side": 1,
+      "message": "Note: I expect we need https://github.com/gpuweb/cts/pull/3769 to land and roll before this will pass the bots.",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
