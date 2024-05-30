@@ -34,6 +34,24 @@
       "parentUuid": "c66d6811_83c95364",
       "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b273768e_e6691538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T12:36:30Z",
+      "side": 1,
+      "message": "Normally it shows up in the tool instantly. Did you sign it with the email address used to author this CL / connect to Gerrit? It doesn\u0027t show up in the tool :/",
+      "parentUuid": "26fab46a_312c08c4",
+      "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
