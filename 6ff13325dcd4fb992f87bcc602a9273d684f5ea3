@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57e181b5_6b9743cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-30T15:14:02Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nThis should pass the CQ thanks to the DXC change merged upstream.\nCan you take a look?",
+      "revId": "6ff13325dcd4fb992f87bcc602a9273d684f5ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

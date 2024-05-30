@@ -130,6 +130,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25600864_27e293c2",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-05-30T15:14:02Z",
+      "side": 1,
+      "message": "Then I will keep it this way. Who can do more can do less.\nWe can revisit this later.",
+      "parentUuid": "5a3c3dba_fdbf1c2a",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 0
+      },
+      "revId": "a97b1f57cc9a841fd259b7318667c456249033a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d8a3bb_76a9d207",
