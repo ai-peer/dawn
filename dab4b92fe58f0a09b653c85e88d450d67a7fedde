@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f877ece9_1d5714b3",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-30T13:16:28Z",
+      "side": 1,
+      "message": "nit: Can drop the explicit.",
+      "range": {
+        "startLine": 104,
+        "startChar": 4,
+        "endLine": 104,
+        "endChar": 12
+      },
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d30330a9_25d88d42",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-30T13:16:28Z",
+      "side": 1,
+      "message": "You might want to check whether the enum style is displayed correctly. I think `Code` will take precedence here. There\u0027s been a couple of places where I\u0027ve wondered if the precedence ordering should be flipped.",
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8d9f7c4_973a7a24",
+        "filename": "src/tint/lang/wgsl/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-30T13:16:28Z",
+      "side": 1,
+      "message": "nit: initialize or make const",
+      "revId": "dab4b92fe58f0a09b653c85e88d450d67a7fedde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
