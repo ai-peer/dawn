@@ -367,7 +367,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
     // Query a VkRenderPass from the cache
-    VkRenderPass renderPassVK = VK_NULL_HANDLE;
+    RenderPassCache::RenderPassInfo renderPassInfo;
     {
         RenderPassCacheQuery query;
 
@@ -390,9 +390,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
 
         query.SetSampleCount(renderPass->attachmentState->GetSampleCount());
 
-        RenderPassCache::RenderPassInfo renderPassInfo;
         DAWN_TRY_ASSIGN(renderPassInfo, device->GetRenderPassCache()->GetRenderPass(query));
-        renderPassVK = renderPassInfo.renderPass;
     }
 
     // Create a framebuffer that will be used once for the render pass and gather the clear
@@ -400,6 +398,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     std::array<VkClearValue, kMaxColorAttachments + 1> clearValues;
     VkFramebuffer framebuffer = VK_NULL_HANDLE;
     uint32_t attachmentCount = 0;
+    uint32_t actualResolveTargetsCount = 0;
     {
         // Fill in the attachment info that will be chained in the framebuffer create info.
         std::array<VkImageView, kMaxColorAttachments * 2 + 1> attachments;
@@ -468,6 +467,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
                 attachments[attachmentCount] = view->GetHandle();
 
                 attachmentCount++;
+                actualResolveTargetsCount++;
             }
         }
 
@@ -476,7 +476,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
         createInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
         createInfo.pNext = nullptr;
         createInfo.flags = 0;
-        createInfo.renderPass = renderPassVK;
+        createInfo.renderPass = renderPassInfo.renderPass;
         createInfo.attachmentCount = attachmentCount;
         createInfo.pAttachments = AsVkArray(attachments.data());
         createInfo.width = renderPass->width;
@@ -495,7 +495,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     VkRenderPassBeginInfo beginInfo;
     beginInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
     beginInfo.pNext = nullptr;
-    beginInfo.renderPass = renderPassVK;
+    beginInfo.renderPass = renderPassInfo.renderPass;
     beginInfo.framebuffer = framebuffer;
     beginInfo.renderArea.offset.x = 0;
     beginInfo.renderArea.offset.y = 0;
@@ -504,7 +504,10 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     beginInfo.clearValueCount = attachmentCount;
     beginInfo.pClearValues = clearValues.data();
 
-    if (renderPass->attachmentState->GetExpandResolveInfo().attachmentsToExpandResolve.any()) {
+    const auto& expandResolveInfo = renderPass->attachmentState->GetExpandResolveInfo();
+    if (expandResolveInfo.attachmentsToExpandResolve.any() && actualResolveTargetsCount > 0) {
+        // Note: ResolveMultipleAttachmentInSeparatePasses workaround can move the resolves to a
+        // separate pass so actualResolveTargetsCount could be zero.
         DAWN_TRY(BeginRenderPassAndExpandResolveTextureWithDraw(device, recordingContext,
                                                                 renderPass, beginInfo));
     } else {

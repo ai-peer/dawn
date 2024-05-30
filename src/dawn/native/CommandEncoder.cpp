@@ -931,17 +931,29 @@ MaybeError EncodeTimestampsToNanosecondsConversion(CommandEncoder* encoder,
 }
 
 // Load resolve texture to MSAA attachment if needed.
-MaybeError ApplyExpandResolveTextureLoadOp(DeviceBase* device,
-                                           RenderPassEncoder* renderPassEncoder,
-                                           const RenderPassDescriptor* renderPassDescriptor) {
-    // If backend doesn't support textureLoad on resolve targets, then it should handle the load op
-    // internally.
-    if (!device->CanTexureLoadResolveTargetInTheSameRenderpass()) {
-        return {};
+MaybeError ApplyExpandResolveTextureLoadOpWithBlit(DeviceBase* device,
+                                                   RenderPassEncoder* renderPassEncoder,
+                                                   const RenderPassDescriptor* renderPassDescriptor,
+                                                   ColorAttachmentMask modifiedResolveTargets) {
+    // If backend supports textureLoad() on resolve targets, then proceed to blit
+    // all resolve targets that have respective loadOp=ExpandResolveTexture.
+    if (device->CanTexureLoadResolveTargetInTheSameRenderpass()) {
+        return ExpandResolveTextureWithDraw(device, renderPassEncoder,
+                                            /*subsetMask=all*/ ~ColorAttachmentMask{},
+                                            /*useSpecialSampleType=*/true, renderPassDescriptor);
     }
 
-    // Read implicit resolve texture in fragment shader and copy to the implicit MSAA attachment.
-    return ExpandResolveTextureWithDraw(device, renderPassEncoder, renderPassDescriptor);
+    // If backend doesn't support textureLoad() on resolve targets. Then only blit the resolve
+    // targets that have been changed. It's valid even in vulkan because the resolve targets are no
+    // longer a RenderAttachment in the current render pass hence we can sample them in fragment
+    // shader directly.
+    if (modifiedResolveTargets.any()) {
+        return ExpandResolveTextureWithDraw(device, renderPassEncoder,
+                                            /*subsetMask=*/modifiedResolveTargets,
+                                            /*useSpecialSampleType=*/false, renderPassDescriptor);
+    }
+
+    return {};
 }
 
 // Tracks the temporary resolve attachments used when the AlwaysResolveIntoZeroLevelAndLayer toggle
@@ -1213,6 +1225,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
     UnpackedPtr<RenderPassDescriptor> descriptor;
     ClearWithDrawHelper clearWithDrawHelper;
+    ColorAttachmentMask modifiedResolveTargets;
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -1397,8 +1410,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 }
             }
 
-            DAWN_TRY_ASSIGN(passEndCallback,
-                            ApplyRenderPassWorkarounds(device, &usageTracker, cmd));
+            DAWN_TRY_ASSIGN(passEndCallback, ApplyRenderPassWorkarounds(device, &usageTracker, cmd,
+                                                                        &modifiedResolveTargets));
 
             return {};
         },
@@ -1414,7 +1427,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
         auto error = [&]() -> MaybeError {
             if (validationState.WillExpandResolveTexture()) {
-                DAWN_TRY(ApplyExpandResolveTextureLoadOp(device, passEncoder.Get(), *descriptor));
+                DAWN_TRY(ApplyExpandResolveTextureLoadOpWithBlit(
+                    device, passEncoder.Get(), *descriptor, modifiedResolveTargets));
             }
             // clearWithDrawHelper.Apply() applies clear with draw if clear_color_with_draw or
             // apply_clear_big_integer_color_value_with_draw toggle is enabled, and the render pass
@@ -1441,6 +1455,7 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
     DeviceBase* device,
     RenderPassResourceUsageTracker* usageTracker,
     BeginRenderPassCmd* cmd,
+    ColorAttachmentMask* modifiedResolveTargetsOut,
     std::function<void()> passEndCallback) {
     // dawn:1550
     // Handle toggle ResolveMultipleAttachmentInSeparatePasses. This identifies passes where there
@@ -1473,14 +1488,23 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                     // force the storeOp to Store.
                     temporaryResolveAttachments.emplace_back(attachmentInfo.view.Get(),
                                                              resolveTarget, attachmentInfo.storeOp);
+                    if (attachmentInfo.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+                        attachmentInfo.loadOp = wgpu::LoadOp::Clear;
+                    }
                     attachmentInfo.storeOp = wgpu::StoreOp::Store;
+
+                    // Stop using the resolveTarget as RenderAttachment in the current render pass.
+                    usageTracker->UnsetTextureViewUsedAs(resolveTarget,
+                                                         wgpu::TextureUsage::RenderAttachment);
                     attachmentInfo.resolveTarget = nullptr;
+
+                    modifiedResolveTargetsOut->set(i);
                 }
             }
 
             // Check for other workarounds that need to be applied recursively.
             return ApplyRenderPassWorkarounds(
-                device, usageTracker, cmd,
+                device, usageTracker, cmd, modifiedResolveTargetsOut,
                 [this, passEndCallback = std::move(passEndCallback),
                  temporaryResolveAttachments = std::move(temporaryResolveAttachments)]() -> void {
                     // Called once the render pass has been ended.
@@ -1558,14 +1582,19 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 // Replace the given resolve attachment with the temporary one.
                 usageTracker->TextureViewUsedAs(temporaryResolveView.Get(),
                                                 wgpu::TextureUsage::RenderAttachment);
+                // Stop using the resolveTarget as RenderAttachment in the current render pass.
+                usageTracker->UnsetTextureViewUsedAs(resolveTarget,
+                                                     wgpu::TextureUsage::RenderAttachment);
                 cmd->colorAttachments[index].resolveTarget = temporaryResolveView;
+
+                modifiedResolveTargetsOut->set(index);
             }
         }
 
         if (temporaryResolveAttachments.size()) {
             // Check for other workarounds that need to be applied recursively.
             return ApplyRenderPassWorkarounds(
-                device, usageTracker, cmd,
+                device, usageTracker, cmd, modifiedResolveTargetsOut,
                 [this, passEndCallback = std::move(passEndCallback),
                  temporaryResolveAttachments = std::move(temporaryResolveAttachments)]() -> void {
                     // Called once the render pass has been ended.
