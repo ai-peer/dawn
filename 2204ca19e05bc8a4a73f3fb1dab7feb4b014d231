@@ -16,6 +16,24 @@
       "message": "What happens after if the object is used after has been closed? Do we need to raise an exception if it is used in any other call?",
       "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c02cd460_6b2b5bc3",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-30T10:23:11Z",
+      "side": 1,
+      "message": "I haven\u0027t tested that. If Dawn raises an error that will surface in setUncapturedErrorCallback. I\u0027ve raised a bug b /343637336 to track.",
+      "parentUuid": "9d873679_ec3b77d0",
+      "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
