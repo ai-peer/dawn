@@ -39,10 +39,11 @@ namespace tint::resolver {
 
 /// Performs semantic analysis and validation on the program builder @p builder
 /// @param allowed_features the extensions and features that are allowed to be used
+/// @param compatibility_mode `true` to validate in compatibility mode
 /// @returns the resolved Program. Program.Diagnostics() may contain validation errors.
-Program Resolve(
-    ProgramBuilder& builder,
-    const wgsl::AllowedFeatures& allowed_features = wgsl::AllowedFeatures::Everything());
+Program Resolve(ProgramBuilder& builder,
+                const wgsl::AllowedFeatures& allowed_features = wgsl::AllowedFeatures::Everything(),
+                bool compatibility_mode = false);
 
 }  // namespace tint::resolver
 
