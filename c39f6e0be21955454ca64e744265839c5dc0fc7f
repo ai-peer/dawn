@@ -16,6 +16,24 @@
       "message": "Should we also file a bug to add validation that there is only a single terminator for the IR?",
       "revId": "c39f6e0be21955454ca64e744265839c5dc0fc7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "366885a7_69f19d59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-30T20:11:16Z",
+      "side": 1,
+      "message": "It\u0027s already caught by the IR validator, but the fuzzer in question was in release mode. I opened crbug.com/343756898 to look at making it possible to force IR validation on for Release mode.",
+      "parentUuid": "284e6361_67d6798c",
+      "revId": "c39f6e0be21955454ca64e744265839c5dc0fc7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
