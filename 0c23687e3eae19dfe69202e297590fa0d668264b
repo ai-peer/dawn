@@ -62,6 +62,24 @@
       "parentUuid": "627a8bed_cec3c151",
       "revId": "0c23687e3eae19dfe69202e297590fa0d668264b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d3d747_70258546",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1004831
+      },
+      "writtenOn": "2024-05-30T14:08:26Z",
+      "side": 1,
+      "message": "Yes, for example [this trace](https://storage.cloud.google.com/chrome-telemetry-output/exp_chromium_12fb250_extra_browser_args_enable_features_SkiaGraphite_extra_chrome_categories_cc_gpu_viz_disabled_by_default_gpu_graphite_dawn_disabled_by_default_skia_shaders_Variant_1_20240524T182643_57152/rendering.mobile/css_value_type_shadow/retry_0/trace.html) there are repeated ~200ms Queue::Submit events on CompositorGpuThread. I\u0027d kinda assume there is either some lock contention or the thread is blocked on vkQueueSubmit but I\u0027m just guessing.",
+      "parentUuid": "139e344c_39da8fb7",
+      "revId": "0c23687e3eae19dfe69202e297590fa0d668264b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
