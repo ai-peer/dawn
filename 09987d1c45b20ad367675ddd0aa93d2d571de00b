@@ -52,6 +52,24 @@
       "parentUuid": "26fab46a_312c08c4",
       "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b48b483_b13cd2fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3455536
+      },
+      "writtenOn": "2024-05-30T13:15:21Z",
+      "side": 1,
+      "message": "I\u0027ve signed it with my gmail account which is also the one I created and linked with gerrit. I then added my outlook email which I used to author the commit to gerrit. I couldn\u0027t find a way to specifically sign it directly with my outlook email. Should I re-submit a CL that\u0027s authored with my gmail? Thanks!",
+      "parentUuid": "b273768e_e6691538",
+      "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
