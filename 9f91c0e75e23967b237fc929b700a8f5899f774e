@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbfeb45_735fbe31",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-30T15:53:55Z",
+      "side": 1,
+      "message": "This and the check for 2D seem to just ask whether we are single-mipped textures and that all array layers are copied to. They could be folded inside the computation above the switch over the dimesnion. But also does UpdateSubresource1 with DISCARD clear the whole texture or just the specific subresource (the doc is not 100% precise and a little bit of searching didn\u0027t turn additional inforamtion).",
+      "revId": "9f91c0e75e23967b237fc929b700a8f5899f774e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
