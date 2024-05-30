@@ -140,6 +140,7 @@ class CommandEncoder final : public ApiObjectBase {
         DeviceBase* device,
         RenderPassResourceUsageTracker* usageTracker,
         BeginRenderPassCmd* cmd,
+        ColorAttachmentMask* modifiedResolveTargetsOut,
         std::function<void()> passEndCallback = nullptr);
 
     MaybeError ValidateFinish() const;
