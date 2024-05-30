@@ -346,9 +346,11 @@ ResultOrError<PixelLocalMemberType> FromTintPixelLocalMemberType(
 
 ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file,
                                        const tint::wgsl::AllowedFeatures& allowedFeatures,
+                                       bool isCompatibilityMode,
                                        OwnedCompilationMessages* outMessages) {
     tint::wgsl::reader::Options options;
     options.allowed_features = allowedFeatures;
+    options.compatibility_mode = isCompatibilityMode;
     tint::Program program = tint::wgsl::reader::Parse(file, options);
     if (outMessages != nullptr) {
         DAWN_TRY(outMessages->AddMessages(program.Diagnostics()));
@@ -759,7 +761,6 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             totalInterStageShaderComponents += 1;
         }
         metadata->usesSampleMaskOutput = entryPoint.output_sample_mask_used;
-        metadata->usesSampleIndex = entryPoint.sample_index_used;
         if (entryPoint.sample_index_used) {
             totalInterStageShaderComponents += 1;
         }
@@ -1122,8 +1123,8 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     }
 
     tint::Program program;
-    DAWN_TRY_ASSIGN(program,
-                    ParseWGSL(tintFile.get(), device->GetWGSLAllowedFeatures(), outMessages));
+    DAWN_TRY_ASSIGN(program, ParseWGSL(tintFile.get(), device->GetWGSLAllowedFeatures(),
+                                       device->IsCompatibilityMode(), outMessages));
 
     parseResult->tintProgram = AcquireRef(new TintProgram(std::move(program), std::move(tintFile)));
 
