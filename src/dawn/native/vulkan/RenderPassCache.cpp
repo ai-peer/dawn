@@ -240,7 +240,17 @@ ResultOrError<RenderPassCache::RenderPassInfo> RenderPassCache::CreateRenderPass
     uint32_t resolveAttachmentCount = 0;
     ColorAttachmentIndex highestInputAttachmentIndex(static_cast<uint8_t>(0));
 
-    for (auto i : IterateBitSet(query.resolveTargetMask)) {
+    ColorAttachmentMask overriddenResolveTargetMask = query.resolveTargetMask;
+    ColorAttachmentMask overriddenExpandResolveMask = query.expandResolveMask;
+    if (query.colorMask.count() > 1 && overriddenResolveTargetMask.any() &&
+        mDevice->IsToggleEnabled(Toggle::ResolveMultipleAttachmentInSeparatePasses)) {
+        // ResolveMultipleAttachmentInSeparatePasses moved all resolve targets to a separate pass so
+        // we actually don't have resolve targets here.
+        overriddenResolveTargetMask.reset();
+        overriddenExpandResolveMask.reset();
+    }
+
+    for (auto i : IterateBitSet(overriddenResolveTargetMask)) {
         auto& resolveAttachmentRef = resolveAttachmentRefs[i];
         auto& resolveAttachmentDesc = attachmentDescs[attachmentCount];
 
@@ -271,7 +281,7 @@ ResultOrError<RenderPassCache::RenderPassInfo> RenderPassCache::CreateRenderPass
 
     absl::InlinedVector<VkSubpassDescription, 2> subpassDescs;
     absl::InlinedVector<VkSubpassDependency, 2> subpassDependencies;
-    if (query.expandResolveMask.any()) {
+    if (overriddenExpandResolveMask.any()) {
         // To simulate ExpandResolveTexture, we use two subpasses. The first subpass will read the
         // resolve texture as input attachment.
         subpassDescs.push_back({});
