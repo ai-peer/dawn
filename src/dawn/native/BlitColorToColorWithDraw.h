@@ -51,6 +51,7 @@ struct BlitColorToColorWithDrawPipelineKey {
     PerColorAttachment<wgpu::TextureFormat> colorTargetFormats;
     ColorAttachmentMask attachmentsToExpandResolve;
     ColorAttachmentMask resolveTargetsMask;
+    ColorAttachmentMask disabledAttachmentsMask;
     wgpu::TextureFormat depthStencilFormat = wgpu::TextureFormat::Undefined;
     uint32_t sampleCount = 1;
 
@@ -75,9 +76,17 @@ using BlitColorToColorWithDrawPipelinesCache =
 //
 // The function assumes that the render pass is already started. It won't break the render pass,
 // just performing a draw call to blit.
-// This is only valid if the device's UseResolveTextureBlitForExpandLoadOp() is true.
+// - skipBlittingMasks parameter allows skipping a subset of the attachments from blitting.
+// Note: we don't change the render pass' list of attachments that have ExpandResolveTexture load
+// op. Because it's required for the compatibility between the generated pipeline and the render
+// pass.
+// - useSpecialSampleType: whether we should use kInternalResolveAttachmentSampleType for
+// BindGroupLayout or not. This will skip the validation that prevents a texture from being sampled
+// and resolved to in the same pass.
 MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
                                         RenderPassEncoder* renderEncoder,
+                                        ColorAttachmentMask skipBlittingMasks,
+                                        bool useSpecialSampleType,
                                         const RenderPassDescriptor* renderPassDescriptor);
 
 }  // namespace dawn::native
