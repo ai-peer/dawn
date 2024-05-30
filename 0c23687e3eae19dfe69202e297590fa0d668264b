@@ -44,6 +44,24 @@
       ],
       "revId": "0c23687e3eae19dfe69202e297590fa0d668264b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139e344c_39da8fb7",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-30T00:11:21Z",
+      "side": 1,
+      "message": "QueueBase::SubmitInternal but we already have a trace event there - does that show up in the existing traces?",
+      "parentUuid": "627a8bed_cec3c151",
+      "revId": "0c23687e3eae19dfe69202e297590fa0d668264b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
