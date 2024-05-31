@@ -25,12 +25,12 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/writer/raise/rename_conflicts.h"
+#include "src/tint/lang/core/ir/transform/rename_conflicts.h"
 
 #include "src/tint/cmd/fuzz/ir/fuzz.h"
 #include "src/tint/lang/core/ir/validator.h"
 
-namespace tint::wgsl::writer::raise {
+namespace tint::core::ir::transform {
 namespace {
 
 void RenameConflictsFuzzer(core::ir::Module& module) {
@@ -45,6 +45,6 @@ void RenameConflictsFuzzer(core::ir::Module& module) {
 }
 
 }  // namespace
-}  // namespace tint::wgsl::writer::raise
+}  // namespace tint::core::ir::transform
 
 TINT_IR_MODULE_FUZZER(tint::wgsl::writer::raise::RenameConflictsFuzzer);

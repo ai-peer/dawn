@@ -25,12 +25,9 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
-#define SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
+#ifndef SRC_TINT_LANG_CORE_IR_TRANSFORM_RENAME_CONFLICTS_H_
+#define SRC_TINT_LANG_CORE_IR_TRANSFORM_RENAME_CONFLICTS_H_
 
-#include <string>
-
-#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -38,7 +35,7 @@ namespace tint::core::ir {
 class Module;
 }
 
-namespace tint::wgsl::writer::raise {
+namespace tint::core::ir::transform {
 
 /// RenameConflicts is a transform that renames declarations which prevent identifiers from
 /// resolving to the correct declaration, and those with identical identifiers declared in the same
@@ -47,6 +44,6 @@ namespace tint::wgsl::writer::raise {
 /// @returns success or failure
 Result<SuccessType> RenameConflicts(core::ir::Module& module);
 
-}  // namespace tint::wgsl::writer::raise
+}  // namespace tint::core::ir::transform
 
-#endif  // SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
+#endif  // SRC_TINT_LANG_CORE_IR_TRANSFORM_RENAME_CONFLICTS_H_
