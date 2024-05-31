@@ -16,6 +16,57 @@
       "message": "Note: I expect we need https://github.com/gpuweb/cts/pull/3769 to land and roll before this will pass the bots.",
       "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72ded59c_4b768c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-05-31T02:37:50Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c4264f_48fde224",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-05-31T02:37:50Z",
+      "side": 1,
+      "message": "this comment doesn\u0027t seem true any more. Whether or not sample_mask is used it should fail right because it doesn\u0027t take entry point etc into account.",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac012638_922b0df6",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-05-31T02:37:50Z",
+      "side": 1,
+      "message": "this entry point is not needed",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
