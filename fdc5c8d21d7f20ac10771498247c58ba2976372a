@@ -34,6 +34,24 @@
       "parentUuid": "01de2413_06f77a87",
       "revId": "fdc5c8d21d7f20ac10771498247c58ba2976372a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82365db_10a593b7",
+        "filename": "src/dawn/native/Subresource.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T04:21:42Z",
+      "side": 0,
+      "message": "the one other one was at [1].\n\nsimilar to this thread:\nhttps://dawn-review.googlesource.com/c/dawn/+/187361/comment/5615c114_1e914cc7/\n\ndo we need the piece of validation? TextureFormat::External\u0027s aspect is wgpu::TextureAspect::All - so I believe that the below code would already check for the additional rule you added.",
+      "parentUuid": "ca135e5e_0381a23f",
+      "revId": "fdc5c8d21d7f20ac10771498247c58ba2976372a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

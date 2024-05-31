@@ -320,6 +320,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff72f93e_3d659535",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T04:21:42Z",
+      "side": 1,
+      "message": "Follow-up is fine. You would do it in vulkan::SharedTextureMemory::BeginAccessImpl and check descriptor-\u003einitialized",
+      "parentUuid": "9554efc4_eb666a37",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2685a47f_eb3d425b",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 24
