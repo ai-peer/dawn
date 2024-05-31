@@ -34,6 +34,7 @@ group("samples") {
     ":DawnInfo",
     ":HelloTriangle",
     ":ManualSurfaceTest",
+    ":Conv1x1",
   ]
 }
 
@@ -84,4 +85,8 @@ sample("ManualSurfaceTest") {
 
 sample("DawnInfo") {
   sources = [ "DawnInfo.cpp" ]
+}
+
+sample("Conv1x1") {
+  sources = [ "Conv1x1.cpp" ]
 }
