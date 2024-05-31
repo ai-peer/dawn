@@ -240,6 +240,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8823d019_c0bce969",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:07:09Z",
+      "side": 1,
+      "message": "Ah I mean `jni_name` not `kotlin_path`, the latter was ok ^^",
+      "parentUuid": "763969f7_740d4857",
+      "range": {
+        "startLine": 1474,
+        "startChar": 12,
+        "endLine": 1474,
+        "endChar": 20
+      },
+      "revId": "d7576df3c64b38efa377cab6e12939b899813f0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b02934e_9fb43a07",
