@@ -81,6 +81,30 @@
       },
       "revId": "2587b9878de269a76c4634664592a232c6e2214b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4ec7fe9_e5f0cc20",
+        "filename": "src/tint/lang/hlsl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-05-31T13:46:33Z",
+      "side": 1,
+      "message": "Changed",
+      "parentUuid": "670b0838_b514c1da",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 31
+      },
+      "revId": "2587b9878de269a76c4634664592a232c6e2214b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
