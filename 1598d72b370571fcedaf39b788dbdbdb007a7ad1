@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15744ffa_84f5a90f",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-31T17:42:45Z",
+      "side": 1,
+      "message": "Reduced this shader and the one below.",
+      "parentUuid": "f4c4264f_48fde224",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac012638_922b0df6",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-05-31T02:37:50Z",
       "side": 1,
       "message": "this entry point is not needed",
+      "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887a923f_9d4a72b6",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-31T17:42:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac012638_922b0df6",
       "revId": "1598d72b370571fcedaf39b788dbdbdb007a7ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
