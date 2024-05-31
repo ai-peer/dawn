@@ -1196,23 +1196,23 @@ TEST_F(RenderPipelineValidationTest, TextureViewDimensionCompatibility) {
     }
 }
 
-// Test that declaring a storage buffer in the vertex shader without setting pipeline layout won't
+// Test that declaring a storage buffer in the fragment shader without setting pipeline layout won't
 // cause crash.
-TEST_F(RenderPipelineValidationTest, StorageBufferInVertexShaderNoLayout) {
-    wgpu::ShaderModule vsModuleWithStorageBuffer = utils::CreateShaderModule(device, R"(
+TEST_F(RenderPipelineValidationTest, StorageBufferInFragmentShaderNoLayout) {
+    wgpu::ShaderModule fsModuleWithStorageBuffer = utils::CreateShaderModule(device, R"(
         struct Dst {
             data : array<u32, 100>
         }
         @group(0) @binding(0) var<storage, read_write> dst : Dst;
-        @vertex fn main(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
+        @fragment fn main() -> @location(0) vec4f {
             dst.data[VertexIndex] = 0x1234u;
             return vec4f();
         })");
 
     utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
-    descriptor.vertex.module = vsModuleWithStorageBuffer;
-    descriptor.cFragment.module = fsModule;
+    descriptor.vertex.module = vsModule;
+    descriptor.cFragment.module = fsModuleWithStorageBuffer;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
