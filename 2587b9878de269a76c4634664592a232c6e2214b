@@ -1,0 +1,62 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8d17e91_c85168df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-31T13:43:52Z",
+      "side": 1,
+      "message": "LGTM with once suggested change",
+      "revId": "2587b9878de269a76c4634664592a232c6e2214b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c275567_b19e5d0b",
+        "filename": "src/tint/lang/hlsl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-31T13:43:52Z",
+      "side": 1,
+      "message": "I think this condition should be `!context.options.dxc.empty()` now, since `must_validate` doesn\u0027t indicate whether a DXC path was explicitly specified or not?",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 31
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "ee712961_7cc992e2",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/hlsl/writer/writer_ast_fuzz.cc",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "    } else if (!context.options.dxc.empty()) {\n"
+            }
+          ]
+        }
+      ],
+      "revId": "2587b9878de269a76c4634664592a232c6e2214b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
