@@ -70,6 +70,24 @@
       "parentUuid": "b273768e_e6691538",
       "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7085855b_eacd6770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-05-31T01:40:10Z",
+      "side": 1,
+      "message": "I think re-uploading the change with your gmail as the author would be the easiest route. I\u0027m not sure if just amending the commit and modifying the author information will work or if you\u0027ll need to create a whole new CL. Maybe worth trying amending the author before re-creating the whole CL.",
+      "parentUuid": "6b48b483_b13cd2fd",
+      "revId": "09987d1c45b20ad367675ddd0aa93d2d571de00b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
