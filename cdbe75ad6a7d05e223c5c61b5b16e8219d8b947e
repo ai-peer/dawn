@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdae5679_c12f4cea",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:49:01Z",
+      "side": 1,
+      "message": "optional-nit: we could build the list of args to process in a separate loop to make it clear what each loop does.",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e77bf0b_cb582e93",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:49:01Z",
+      "side": 1,
+      "message": "Note that in Dawn wire we used the fact that the conversion of structures and methods is extremely similar to factor code like this one into one macro that handles converting \"records\" (structure or method args) to avoid code duplication. Do you think it could be done similarly here, or are there subtelties that would prevent it? (the handling of a method would ... ah the way to get the Kotlin data is different, maybe that doesn\u0027t work then).",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9753893b_61b7f451",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:49:01Z",
+      "side": 1,
+      "message": "This is nice as a first step but my intuition is that we will eventually want to hand-write most of the callback-taking methods, for ergonomics, memory freeing etc.",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8196887d_c4444cc2",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:49:01Z",
+      "side": 1,
+      "message": "The comment says early out, but this happens after calling Dawn. Did you mean to put this block of code before calling Dawn?",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b093286_471c38e8",
+        "filename": "generator/templates/art/api_jni_converter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-05-31T14:49:01Z",
+      "side": 1,
+      "message": "Ack!",
+      "parentUuid": "8a91368b_3231620c",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c83ab38_f3347cb1",
