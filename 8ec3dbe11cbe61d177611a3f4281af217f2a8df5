@@ -33,6 +33,103 @@
       "message": "LGTM",
       "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b207ea8_f84f007e",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "nit: Comment here what scenario this happens in. (Is it when the map has been aborted from the client side?)",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "218dde7d_ebbad122",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "nit: I think this is always Unknown (and should always be for any FatalError), and doesn\u0027t need to be an arg",
+      "range": {
+        "startLine": 250,
+        "startChar": 34,
+        "endLine": 250,
+        "endChar": 59
+      },
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b79a26_5971262b",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "nit: can this be `const auto\u0026`?",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "474f2656_c81528e1",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "nit: `mPendingMapRequest-\u003eisNewEntryPoint`? (I think this is valid, if not, `mPendingMapRequest.value().isNewEntryPoint` would still be nicer to reduce the pileup of symbols at the front)\n\nAlso maybe flip the if() so that the `!` isn\u0027t needed either.",
+      "range": {
+        "startLine": 465,
+        "startChar": 9,
+        "endLine": 465,
+        "endChar": 31
+      },
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2138be0_372d9902",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "nit: I\u0027m sure we won\u0027t forget about this, but attach a TODO here.",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

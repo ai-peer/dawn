@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2ff6b4_f6bef070",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "Offset just defaults to 0 so there\u0027s no need for a way to call with a size and no offset. In JS (mode, undefined, size) is the same as (mode, 0, size) which is shorter and clearer.\n\nActually, only C++ (not C) cares about optionals being at the end. Instead of switching it around to define defaults for args, one option would be to just use overloads:\n(mode, offset, size, callbackinfo)\n(mode, offset, callbackinfo)\n(mode, callbackinfo)",
+      "parentUuid": "f7b3df8f_b7ab1d64",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ce2420b_a1e8af0c",
@@ -172,6 +190,24 @@
       "side": 1,
       "message": "Hmm, I changed this so that we could do either, but I think right now, in native, device lost is also an aborted, so I want to keep the wire consistent w.r.t that for now.",
       "parentUuid": "6ff3f89d_8f244508",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad82955e_d991e330",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-05-31T05:37:03Z",
+      "side": 1,
+      "message": "Hm, OK. I was going to ask if we could fix both, but let\u0027s forget about it for the moment.\n\nThis prompted me to check and it turns out we do it wrong in Blink too:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_buffer.cc;l\u003d385-387;drc\u003d8b6aaad8027390ce6b32d82d57328e93f34bb8e5\nWhich makes sense because it\u0027s untested because we can\u0027t test it.\n\nWe should really do https://github.com/gpuweb/gpuweb/issues/4177, then we can test it.\n\nBut I am wondering a little bit if our current implementation makes more sense than the spec. It appears this is the only place in the whole spec where we use OperationError to surface anything other than a programming error.\n\nI\u0027ll take a note of this and try to get back to it.",
+      "parentUuid": "38e81b8b_16eaa1d0",
       "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
