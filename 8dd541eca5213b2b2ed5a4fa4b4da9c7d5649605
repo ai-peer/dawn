@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b127223a_63d11ce2",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Resolved in discussion in header group meeting.",
+      "parentUuid": "d9b0490c_f1f28f11",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1acc7fd4_0e0cb494",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-22T00:54:45Z",
       "side": 1,
       "message": "aside: should we switch it around so it is possible...?",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b3df8f_b7ab1d64",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 786,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "This is kind of hard since both size and offset could technically be default-able... So ordering is pretty annoying in this case... Something like kwargs would be nice for this but either way will defer to further changes later on after some more discussion.",
+      "parentUuid": "1acc7fd4_0e0cb494",
       "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60cfa557_e8ddcb73",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ce2420b_a1e8af0c",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ead964c2_b03777b3",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-22T01:35:57Z",
       "side": 1,
       "message": "I think it would be clearer for this state should change immediately in Unmap(), rather than buried inside ReadyHook. (This happens inside the call to Unmap() anyway, right, so it\u0027s basically the same?)\n\nThat said: [1] how does this case get triggered, anyway? Seems like Unmap() only handles the old mapping type. [2]",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a02631_18475816",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ead964c2_b03777b3",
       "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38e81b8b_16eaa1d0",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Hmm, I changed this so that we could do either, but I think right now, in native, device lost is also an aborted, so I want to keep the wire consistent w.r.t that for now.",
+      "parentUuid": "6ff3f89d_8f244508",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a559088e_fb9f3e0c",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 5
@@ -99,6 +189,24 @@
       "writtenOn": "2024-05-22T01:35:57Z",
       "side": 1,
       "message": "[2]",
+      "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ed01f3_485fd10f",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a559088e_fb9f3e0c",
       "revId": "8dd541eca5213b2b2ed5a4fa4b4da9c7d5649605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

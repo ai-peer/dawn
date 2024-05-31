@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c241bd_cade1cf3",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 598,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Given that we made the decisions for the enums today, I\u0027m just going to update it as per the meeting notes.",
+      "parentUuid": "4db7775c_d732d06f",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a471c65_a1239413",
@@ -65,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d005943f_dcdf5719",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Matched this to our discussions in the header group meeting.",
+      "parentUuid": "aa172724_bcdb2235",
+      "range": {
+        "startLine": 733,
+        "startChar": 0,
+        "endLine": 734,
+        "endChar": 48
+      },
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "022a89a0_73ebf303",
@@ -88,6 +130,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc7ecc6e_0ef6c736",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "I don\u0027t think it can be because it calls the virtual `Complete` function that would technically be gone if I put this in the base class dtor. (Otherwise I think we would\u0027ve put the `EnsureComplete` call in the `TrackedEvent` dtor to make sure it is always called.)",
+      "parentUuid": "022a89a0_73ebf303",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 81
+      },
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5038aba2_6505d39f",
@@ -101,6 +167,24 @@
       "writtenOn": "2024-05-21T19:07:04Z",
       "side": 1,
       "message": "EnsureComplete could be in the base class",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "972753b7_3c6af955",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "5038aba2_6505d39f",
       "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -158,6 +242,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d20fe3f4_ca86da6f",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "944c0203_c58c0f30",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccfccce0_da0ee468",
@@ -175,6 +277,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1ec0cac_b0e854f0",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccfccce0_da0ee468",
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7275f247_fc73bb43",
@@ -188,6 +308,30 @@
       "writtenOn": "2024-05-21T19:07:04Z",
       "side": 1,
       "message": "not sure what this is for: what other statuses?\n\nis it to handle arbitrary data the server sends back?",
+      "range": {
+        "startLine": 307,
+        "startChar": 12,
+        "endLine": 313,
+        "endChar": 13
+      },
+      "revId": "a468c01e4f5942c08b2ae2bd70dacb6090e1206f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2a0ed7_2d670639",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-05-31T01:08:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7275f247_fc73bb43",
       "range": {
         "startLine": 307,
         "startChar": 12,
