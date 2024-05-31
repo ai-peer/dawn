@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa588ea_60a02a83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T05:50:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655ee034_7d486de1",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T05:50:23Z",
+      "side": 1,
+      "message": "count isn\u0027t used in this CL - maybe you need to later?",
+      "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
