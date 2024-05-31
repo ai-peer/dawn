@@ -95,6 +95,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6aca8535_55d13b81",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T05:38:04Z",
+      "side": 1,
+      "message": "what happens if you use a factory that is not current ?",
+      "parentUuid": "b8bc3763_eb5b7937",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661a8f34_db39d936",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-05-31T05:38:04Z",
+      "side": 1,
+      "message": "indeed it should never be null, unless of course the new factory you make fails.\nWhat about only replacing `mFactory` if creating the new one succeeds?",
+      "parentUuid": "8ab070ce_300eaded",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 27
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29b56e5a_67f92d8c",
         "filename": "src/dawn/native/d3d/BackendD3D.cpp",
         "patchSetId": 4
