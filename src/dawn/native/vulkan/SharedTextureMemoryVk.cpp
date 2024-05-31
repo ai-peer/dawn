@@ -993,8 +993,10 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
     TextureBase* texture,
     const UnpackedPtr<BeginAccessDescriptor>& descriptor) {
     // TODO(dawn/2276): support concurrent read access.
-    // TODO(dawn/2476): Validate texture with TextureFormat::External is initialized.
     DAWN_INVALID_IF(descriptor->concurrentRead, "Vulkan backend doesn't support concurrent read.");
+    DAWN_INVALID_IF(
+        texture->GetFormat().format == wgpu::TextureFormat::External && !descriptor->initialized,
+        "BeginAccess with Texture format (%s) must be initialized", texture->GetFormat().format);
 
     wgpu::SType type;
     DAWN_TRY_ASSIGN(
