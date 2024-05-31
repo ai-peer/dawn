@@ -52,6 +52,24 @@
       "parentUuid": "c02cd460_6b2b5bc3",
       "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b6872c0_741891da",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:34:56Z",
+      "side": 1,
+      "message": "ACK. I will write a bunch of tests to check API misuse including use-after-free. Detecting use after close should be easy to add if needed.",
+      "parentUuid": "4641fbef_e22e2ceb",
+      "revId": "2204ca19e05bc8a4a73f3fb1dab7feb4b014d231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
