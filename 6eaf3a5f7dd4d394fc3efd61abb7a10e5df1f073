@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35760dd9_a6a4a89d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-05-31T13:46:25Z",
+      "side": 1,
+      "message": "I\u0027m assuming you\u0027ve run the fuzzer check locally since it won\u0027t be run by the bots :-)",
+      "revId": "6eaf3a5f7dd4d394fc3efd61abb7a10e5df1f073",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
