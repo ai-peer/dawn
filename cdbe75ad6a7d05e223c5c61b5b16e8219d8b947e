@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68dbebd_2763a69e",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T15:40:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdae5679_c12f4cea",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e77bf0b_cb582e93",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-31T14:49:01Z",
       "side": 1,
       "message": "Note that in Dawn wire we used the fact that the conversion of structures and methods is extremely similar to factor code like this one into one macro that handles converting \"records\" (structure or method args) to avoid code duplication. Do you think it could be done similarly here, or are there subtelties that would prevent it? (the handling of a method would ... ah the way to get the Kotlin data is different, maybe that doesn\u0027t work then).",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792b7a33_c51d0c51",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T15:40:25Z",
+      "side": 1,
+      "message": "I wanted to but the issue is that the form of the inputs and outputs differ so much (method parameters pre-converted to JNI types vs structure fields that have to be fetched by JNI) means that there would be almost as much code dealing with that as the conversion itself. I will continue to consider it though.",
+      "parentUuid": "6e77bf0b_cb582e93",
       "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be51c7e0_80caef40",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T15:40:25Z",
+      "side": 1,
+      "message": "ACK.",
+      "parentUuid": "9753893b_61b7f451",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8196887d_c4444cc2",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-31T14:49:01Z",
       "side": 1,
       "message": "The comment says early out, but this happens after calling Dawn. Did you mean to put this block of code before calling Dawn?",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ce87459_646f9c56",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T15:40:25Z",
+      "side": 1,
+      "message": "No because it\u0027s for dealing with exceptions that were thrown inside Kotlin client callbacks during the Dawn call. The biggest use case is Dawn throwing errors that the client catches with a setUncapturedErrorCallback callback and converts to a Kotlin exception. The flow ends up here but it is will crash if we call any more JNI methods before the exception has been caught.",
+      "parentUuid": "8196887d_c4444cc2",
       "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
