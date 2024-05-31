@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e543e0cf_9752124c",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Not all of them, but some of them are nullable. In this case trying to convert a string pointer that is null will crash (and isn\u0027t needed). Added a comment.",
+      "parentUuid": "e1e8d04c_4f567b53",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c56c37d_7d03f64c",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-30T17:28:13Z",
       "side": 1,
       "message": "If `_{{ arg.name.camelCase() }}` ends up being false, does that mean we leave `arg.name.camelCase` unintialized? Should this be assiging a default value?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f87d471e_242c419e",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "In practice the stack variables are zeroed. However I will add explicit nullptr initialization because perhaps we shouldn\u0027t rely on that.",
+      "parentUuid": "5c56c37d_7d03f64c",
       "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0a7865_382bc46a",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c21e0b7b_6a76fe83",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c523846d_256a870f",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-05-30T17:28:13Z",
       "side": 1,
       "message": "Can this be combined with the array in 175 as it looks like the block is the same?",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "962d0ab8_60facded",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Good spot. Done.",
+      "parentUuid": "c523846d_256a870f",
       "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0995e506_3bbe1f48",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "In practice the only types returned could take 0. Surprisingly, jobject can be set to 0. Probably because 0 can be synonymous with nullptr. It keeps it simple anyway.",
+      "parentUuid": "d555cb91_59845c4f",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ae70347_5587dcf3",
@@ -103,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2823e5e3_efa81c22",
+        "filename": "generator/templates/art/structures.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Some strings field are optional, if no supplied it will be null in Koltin and nullptr here by design. (If a non-optional field is set as null by the client, native Dawn checks will fire an error which will ultimately be converted to an exception.)",
+      "parentUuid": "6ae70347_5587dcf3",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c671d01d_b618cfa6",
@@ -116,6 +224,24 @@
       "writtenOn": "2024-05-30T17:28:13Z",
       "side": 1,
       "message": "```suggestion\n                    //* This container type is represented in Kotlin as primitive array types.\n```",
+      "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfafc69_19fe02d5",
+        "filename": "generator/templates/art/structures.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c671d01d_b618cfa6",
       "revId": "f494f37db9f4b46f5fa119a665aeb792cad6fee6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

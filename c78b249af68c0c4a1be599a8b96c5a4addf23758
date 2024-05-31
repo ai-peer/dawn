@@ -367,6 +367,24 @@
       "parentUuid": "41025621_95db6711",
       "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb59f9aa_5f055037",
+        "filename": "generator/templates/art/api_jni_native.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-05-31T13:30:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2dae7f74_9af8ca7c",
+      "revId": "c78b249af68c0c4a1be599a8b96c5a4addf23758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
