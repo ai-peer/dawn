@@ -52,6 +52,24 @@
       "parentUuid": "a2be4185_a0c12adb",
       "revId": "9f91c0e75e23967b237fc929b700a8f5899f774e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980d5777_e171361f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-01T00:32:02Z",
+      "side": 1,
+      "message": "D3D devs agree you should assume that passing `D3D11_COPY_DISCARD` to `UpdateSubResource1` discards all subresources.",
+      "parentUuid": "62e89aef_5286182c",
+      "revId": "9f91c0e75e23967b237fc929b700a8f5899f774e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
