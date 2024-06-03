@@ -17,6 +17,24 @@
       "parentUuid": "ae7ae1af_5a266d51",
       "revId": "e336d53b6336b09efbe3108e86a75af38cb157e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da99f9c6_6adaaeb7",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-03T16:38:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fdff4eb_c6da5765",
+      "revId": "e336d53b6336b09efbe3108e86a75af38cb157e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
