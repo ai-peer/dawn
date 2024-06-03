@@ -45,6 +45,7 @@
 #include "dawn/native/opengl/RenderPipelineGL.h"
 #include "dawn/native/opengl/SamplerGL.h"
 #include "dawn/native/opengl/ShaderModuleGL.h"
+#include "dawn/native/opengl/SwapChainGL.h"
 #include "dawn/native/opengl/TextureGL.h"
 #include "dawn/native/opengl/UtilsGL.h"
 #include "dawn/native/opengl/opengl_platform.h"
@@ -263,7 +264,7 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
 ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(Surface* surface,
                                                               SwapChainBase* previousSwapChain,
                                                               const SurfaceConfiguration* config) {
-    return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
+    return SwapChain::Create(this, surface, previousSwapChain, config);
 }
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
@@ -435,9 +436,9 @@ int Device::GetMaxTextureMaxAnisotropy() const {
     return mMaxTextureMaxAnisotropy;
 }
 
-const EGLFunctions& Device::GetEGL(bool makeCurrent) const {
+const EGLFunctions& Device::GetEGL(bool makeCurrent, EGLSurface surface) const {
     if (makeCurrent) {
-        mContext->MakeCurrent();
+        mContext->MakeCurrent(surface);
         ToBackend(GetQueue())->OnGLUsed();
     }
     return mContext->GetEGL();

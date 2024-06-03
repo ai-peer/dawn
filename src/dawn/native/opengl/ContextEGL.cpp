@@ -110,8 +110,8 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
 ContextEGL::ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLContext context)
     : mEgl(functions), mDisplay(display), mContext(context) {}
 
-void ContextEGL::MakeCurrent() {
-    EGLBoolean success = mEgl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+void ContextEGL::MakeCurrent(EGLSurface surface) {
+    EGLBoolean success = mEgl.MakeCurrent(mDisplay, surface, surface, mContext);
     DAWN_ASSERT(success == EGL_TRUE);
 }
 

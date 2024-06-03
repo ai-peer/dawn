@@ -58,7 +58,7 @@ class Device final : public DeviceBase {
     // Returns all the OpenGL entry points and ensures that the associated
     // Context is current.
     const OpenGLFunctions& GetGL() const;
-    const EGLFunctions& GetEGL(bool makeCurrent) const;
+    const EGLFunctions& GetEGL(bool makeCurrent, EGLSurface surface = EGL_NO_SURFACE) const;
     EGLDisplay GetEGLDisplay() const;
 
     const GLFormat& GetGLFormat(const Format& format);
@@ -99,7 +99,7 @@ class Device final : public DeviceBase {
     class Context {
       public:
         virtual ~Context() {}
-        virtual void MakeCurrent() = 0;
+        virtual void MakeCurrent(EGLSurface surface = EGL_NO_SURFACE) = 0;
         // TODO(dawn:2544) Abstract EGL-isms for use with desktop GL.
         virtual EGLDisplay GetEGLDisplay() const = 0;
         virtual const EGLFunctions& GetEGL() const = 0;
