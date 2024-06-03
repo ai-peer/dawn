@@ -53,7 +53,7 @@ vars = {
   # reclient CIPD package
   'reclient_package': 'infra/rbe/client/',
   # reclient CIPD package version
-  'reclient_version': 're_client_version:0.114.2.81e819b-gomaip',
+  'reclient_version': 're_client_version:0.143.0.518e369-gomaip',
 
   # 'magic' text to tell depot_tools that git submodules should be accepted
   # but parity with DEPS file is expected.
@@ -97,7 +97,7 @@ deps = {
   },
 
   'third_party/depot_tools': {
-    'url': '{chromium_git}/chromium/tools/depot_tools.git@6427b94bc2273c9e8a6ab04ef452c5e6c59137bd',
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@840e538154a92136133a68b33a050e99266f40fd',
     'condition': 'dawn_standalone',
   },
 
@@ -262,7 +262,7 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@7b2c62128d44228ce510745c535b4b3610e65b09',
+    'url': '{chromium_git}/angle/angle@42a61f6e70c95a95d92bf2d7d57a47939057a20b',
     'condition': 'dawn_standalone',
   },
 
@@ -272,7 +272,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@4a0e77c7168d97811ef70e6c7666151630ddd683',
+    'url': '{chromium_git}/vulkan-deps@975bd14542a42cd7957ed599cc6eb17ce12becd2',
     'condition': 'dawn_standalone',
   },
 
@@ -292,12 +292,12 @@ deps = {
   },
 
   'third_party/spirv-tools/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/SPIRV-Tools@142bf7de83b550b549b4049eb1f3dcb2ff007ec1',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/SPIRV-Tools@148c97f6876e427efd76d2328122c3075eab4b8f',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-headers/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@5677bafb820e476441e9e1f745371b72133407d3',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@192d051db3382e213f8bd9d8048fc9eaa78ed6ab',
     'condition': 'dawn_standalone',
   },
 
@@ -355,7 +355,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@bc6e04f05a935d7248de754eae81638e122f0c5b',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@5fb5afd133f01a5daf82197fee817e84663399aa',
     'condition': 'build_with_chromium',
   },
 
