@@ -50,6 +50,24 @@
       "message": "count isn\u0027t used in this CL - maybe you need to later?",
       "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a99d8c10_adeef067",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T12:20:32Z",
+      "side": 1,
+      "message": "I think it could be used in some input attachment count limit validations in future. However, those validations are not implemented/needed yet (in this and next CL), so this code is basically just following the existing pattern for `externalTextureCount`, `textureCount`, etc.",
+      "parentUuid": "655ee034_7d486de1",
+      "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
