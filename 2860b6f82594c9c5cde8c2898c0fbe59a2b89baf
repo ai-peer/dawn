@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecef1dfa_f9d01a7e",
+        "filename": "src/tint/lang/wgsl/writer/raise/raise.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-03T16:09:34Z",
+      "side": 1,
+      "message": "\u003e no header providing \"tint::Success\" is directly included (https://clang.llvm.org/extra/clang-tidy/checks/misc/include-cleaner.html)\n\u003e \n\u003e (Lint observed on `android-clang-tidy-rel` and `linux-clang-tidy-rel`)\n\nPlease fix.",
+      "parentUuid": "3b79dcdc_4af33027",
+      "revId": "2860b6f82594c9c5cde8c2898c0fbe59a2b89baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
