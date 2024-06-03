@@ -86,6 +86,19 @@
 # Last rolled: 2024-04-12 05:25:15AM
 
 ################################################################################
+# Failures on the M125 bots
+# KEEP
+################################################################################
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_store_store:accessValueType="f16";memType="non_atomic_storage";accessPair="ww";normalBarrier=true [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_load_store:accessValueType="u32";memType="non_atomic_workgroup";accessPair="rw";normalBarrier=true [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,memory_model,coherence:corw2:memType="atomic_workgroup";testType="intra_workgroup" [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,resource_compatibility:resource_compatibility:stage="fragment";apiResource="texture_uint_cube_false" [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="write";containerType="vector";shadowingMode="module-scope";isAtomic=false;baseType="i32" [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,validation,expression,call,builtin,pack2x16float:value_range:constantOrOverrideStage="override";value0=-65504;value1=-65504 [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,padding:matCx3:columns=2;use_struct=false [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,expression,call,builtin,determinant:abstract_float:inputSource="const";dim=2 [ Failure ]
+
+################################################################################
 # SharedImage interop failures on Linux
 # Skipped instead of just Crash because of the number of failures
 # KEEP
