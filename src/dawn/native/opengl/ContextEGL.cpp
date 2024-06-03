@@ -111,7 +111,7 @@ ContextEGL::ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLCon
     : mEgl(functions), mDisplay(display), mContext(context) {}
 
 void ContextEGL::MakeCurrent() {
-    EGLBoolean success = mEgl.MakeCurrent(mDisplay, EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+    EGLBoolean success = mEgl.MakeCurrent(mDisplay, mSurface, mSurface, mContext);
     DAWN_ASSERT(success == EGL_TRUE);
 }
 
