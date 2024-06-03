@@ -358,7 +358,15 @@ int main(int argc, const char* argv[]) {
 
     instance = std::make_unique<dawn::native::Instance>();
 
-    dawn::native::Adapter chosenAdapter = instance->EnumerateAdapters()[0];
+    dawn::native::Adapter chosenAdapter;
+    for (const auto& a : instance->EnumerateAdapters()) {
+        wgpu::AdapterProperties props;
+        a.GetProperties(&props);
+        if (props.backendType == wgpu::BackendType::OpenGLES) {
+            chosenAdapter = a;
+            dawn::InfoLog() << "Using adapter " << props.name;
+        }
+    }
     DAWN_ASSERT(chosenAdapter);
     adapter = wgpu::Adapter(chosenAdapter.Get());
 

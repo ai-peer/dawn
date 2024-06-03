@@ -42,7 +42,7 @@ class ContextEGL : public Device::Context {
                                                              EGLenum api,
                                                              EGLDisplay display,
                                                              bool useANGLETextureSharing);
-    void MakeCurrent() override;
+    void MakeCurrent(EGLSurface surface = EGL_NO_SURFACE) override;
     EGLDisplay GetEGLDisplay() const override;
     const EGLFunctions& GetEGL() const override;
     ~ContextEGL() override;

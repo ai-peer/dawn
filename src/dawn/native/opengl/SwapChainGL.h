@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,19 +25,51 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_OPENGL_UTILSEGL_H_
-#define SRC_DAWN_NATIVE_OPENGL_UTILSEGL_H_
+#ifndef SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_
+#define SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_
 
 #include "dawn/common/egl_platform.h"
-#include "dawn/native/Error.h"
+#include "dawn/native/SwapChain.h"
 
 namespace dawn::native::opengl {
 
+class Device;
 class EGLFunctions;
+class Texture;
+class TextureView;
 
-const char* EGLErrorAsString(EGLint error);
-MaybeError CheckEGL(const EGLFunctions& egl, EGLBoolean result, const char* context = "");
+class SwapChain final : public SwapChainBase {
+  public:
+    static ResultOrError<Ref<SwapChain>> Create(Device* device,
+                                                Surface* surface,
+                                                SwapChainBase* previousSwapChain,
+                                                const SurfaceConfiguration* config);
+
+    SwapChain(DeviceBase* device, Surface* surface, const SurfaceConfiguration* config);
+    ~SwapChain() override;
+
+  private:
+    void DestroyImpl() override;
+
+    using SwapChainBase::SwapChainBase;
+    MaybeError Initialize(SwapChainBase* previousSwapChain);
+
+    EGLSurface mEGLSurface = EGL_NO_SURFACE;
+    Ref<Texture> mTexture;
+    Ref<TextureView> mTextureView;
+
+    MaybeError PresentImpl() override;
+    ResultOrError<SwapChainTextureInfo> GetCurrentTextureImpl() override;
+    void DetachFromSurfaceImpl() override;
+};
+
+static constexpr EGLConfig kNoConfig = 0;
+EGLConfig ChooseConfig(const EGLFunctions& egl,
+                       EGLDisplay display,
+                       EGLint apiBit,
+                       wgpu::TextureFormat color,
+                       wgpu::TextureFormat depthStencil = wgpu::TextureFormat::Undefined);
 
 }  // namespace dawn::native::opengl
 
-#endif  // SRC_DAWN_NATIVE_OPENGL_UTILSEGL_H_
+#endif  // SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_

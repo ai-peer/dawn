@@ -1,0 +1,286 @@
+// Copyright 2024 The Dawn & Tint Authors
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this
+//    list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+//    this list of conditions and the following disclaimer in the documentation
+//    and/or other materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its
+//    contributors may be used to endorse or promote products derived from
+//    this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#include "dawn/native/opengl/SwapChainGL.h"
+
+#include "dawn/native/Surface.h"
+#include "dawn/native/opengl/DeviceGL.h"
+#include "dawn/native/opengl/TextureGL.h"
+#include "dawn/native/opengl/UtilsEGL.h"
+
+namespace dawn::native::opengl {
+
+namespace {
+
+ResultOrError<EGLSurface> CreateWindowSurface(const EGLFunctions& egl,
+                                              EGLDisplay display,
+                                              const Surface* surface,
+                                              EGLConfig config) {
+    EGLSurface eglSurface;
+
+    switch (surface->GetType()) {
+#if DAWN_PLATFORM_IS(ANDROID)
+        case Surface::Type::AndroidWindow:
+            eglSurface = egl.CreateWindowSurface(display, config, surface->GetAndroidNativeWindow(),
+                                                 nullptr);
+            break;
+#endif  // DAWN_PLATFORM_IS(ANDROID)
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+        case Surface::Type::MetalLayer:
+            eglSurface =
+                egl.CreateWindowSurface(display, config, surface->GetMetalLayer(), nullptr);
+            break;
+#endif  // defined(DAWN_ENABLE_BACKEND_METAL)
+#if DAWN_PLATFORM_IS(WIN32)
+        case Surface::Type::WindowsHWND:
+            eglSurface = egl.CreateWindowSurface(display, config, surface->GetHWND(), nullptr);
+            break;
+#endif  // DAWN_PLATFORM_IS(WIN32)
+#if defined(DAWN_USE_X11)
+        case Surface::Type::XlibWindow:
+            eglSurface = egl.CreateWindowSurface(display, config, surface->GetXWindow(), nullptr);
+            break;
+#endif  // defined(DAWN_USE_X11)
+
+        // TODO(344814083): Add support for creating surfaces using EGL_KHR_platform_base and
+        // friends.
+        case Surface::Type::WaylandSurface:
+
+        default:
+            return DAWN_FORMAT_INTERNAL_ERROR("%s cannot be supported on EGL.", surface);
+    }
+
+    if (eglSurface == EGL_NO_SURFACE) {
+        return DAWN_FORMAT_INTERNAL_ERROR("Couldn't create an EGLSurface for %s.", surface);
+    }
+    return eglSurface;
+}
+
+}  // namespace
+
+// static
+ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
+                                                Surface* surface,
+                                                SwapChainBase* previousSwapChain,
+                                                const SurfaceConfiguration* config) {
+    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, config));
+    DAWN_TRY(swapchain->Initialize(previousSwapChain));
+    return swapchain;
+}
+
+SwapChain::SwapChain(DeviceBase* dev, Surface* sur, const SurfaceConfiguration* config)
+    : SwapChainBase(dev, sur, config) {}
+
+SwapChain::~SwapChain() = default;
+
+void SwapChain::DestroyImpl() {
+    SwapChainBase::DestroyImpl();
+    DetachFromSurface();
+}
+
+MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
+    // DAWN_ASSERT(GetSurface()->GetType() == Surface::Type::MetalLayer);
+    const Device* device = ToBackend(GetDevice());
+
+    if (previousSwapChain != nullptr) {
+        // TODO(crbug.com/dawn/269): figure out what should happen when surfaces are used by
+        // multiple backends one after the other. It probably needs to block until the backend
+        // and GPU are completely finished with the previous swapchain.
+        DAWN_INVALID_IF(previousSwapChain->GetBackendType() != wgpu::BackendType::OpenGL,
+                        "OpenGL SwapChain cannot switch backend types from %s to %s.",
+                        previousSwapChain->GetBackendType(), wgpu::BackendType::OpenGL);
+
+        // TODO(crbug.com/dawn/269): figure out what should happen when surfaces are used by
+        // a different EGL display. We probably need to block untils the GPU is completely
+        // finished with the previous work, and then a bit more.
+        DAWN_INVALID_IF(
+            previousSwapChain->GetDevice()->GetPhysicalDevice() != device->GetPhysicalDevice(),
+            "OpenGL SwapChain cannot switch between contexts for %s and %s.",
+            previousSwapChain->GetDevice(), device);
+
+        SwapChain* previousGLSwapChain = ToBackend(previousSwapChain);
+        std::swap(previousGLSwapChain->mEGLSurface, mEGLSurface);
+
+        previousSwapChain->DetachFromSurface();
+    }
+
+    // Create the EGLSurface if needed.
+    const EGLFunctions& egl = device->GetEGL(false);
+    EGLDisplay display = device->GetEGLDisplay();
+
+    if (mEGLSurface == EGL_NO_SURFACE) {
+        EGLint apiBit =
+            GetBackendType() == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES3_BIT : EGL_OPENGL_BIT;
+        EGLConfig config = ChooseConfig(egl, display, apiBit, GetFormat());
+        if (config == kNoConfig) {
+            return DAWN_FORMAT_INTERNAL_ERROR("Couldn't find an EGLConfig for %s on %s.",
+                                              GetFormat(), GetSurface());
+        }
+        DAWN_TRY_ASSIGN(mEGLSurface, CreateWindowSurface(egl, display, GetSurface(), config));
+    }
+
+    egl.SwapInterval(display, GetPresentMode() == wgpu::PresentMode::Immediate ? 0 : 1);
+
+    return {};
+}
+
+MaybeError SwapChain::PresentImpl() {
+    // Make the GL context current on the surface.
+    Device* device = ToBackend(GetDevice());
+    const EGLFunctions& egl = device->GetEGL(true, mEGLSurface);
+    EGLDisplay display = device->GetEGLDisplay();
+
+    // Do the blit.
+    {
+        EGLint surfaceWidth;
+        EGLint surfaceHeight;
+        DAWN_TRY(CheckEGL(egl, egl.QuerySurface(display, mEGLSurface, EGL_WIDTH, &surfaceWidth)));
+        DAWN_TRY(CheckEGL(egl, egl.QuerySurface(display, mEGLSurface, EGL_HEIGHT, &surfaceHeight)));
+
+        const OpenGLFunctions& gl = device->GetGL();
+        GLuint readFbo = 0;
+        gl.GenFramebuffers(1, &readFbo);
+        gl.BindFramebuffer(GL_READ_FRAMEBUFFER, readFbo);
+        mTextureView->BindToFramebuffer(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0);
+
+        gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+        gl.BlitFramebuffer(0, 0, mTexture->GetWidth(Aspect::Color),
+                           mTexture->GetHeight(Aspect::Color), 0, 0, surfaceWidth, surfaceHeight,
+                           GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+        gl.DeleteFramebuffers(1, &readFbo);
+    }
+
+    egl.SwapBuffers(display, mEGLSurface);
+
+    mTexture->APIDestroy();
+    mTexture = nullptr;
+
+    return {};
+}
+
+ResultOrError<SwapChainTextureInfo> SwapChain::GetCurrentTextureImpl() {
+    // Create the fake surface texture that we'll blit from.
+    TextureDescriptor desc = GetSwapChainBaseTextureDescriptor(this);
+    Ref<TextureBase> texture;
+    Ref<TextureViewBase> view;
+    DAWN_TRY_ASSIGN(texture, GetDevice()->CreateTexture(&desc));
+    DAWN_TRY_ASSIGN(view, GetDevice()->CreateTextureView(mTexture.Get()));
+
+    mTexture = std::move(ToBackend(texture));
+    mTextureView = std::move(ToBackend(view));
+
+    SwapChainTextureInfo info;
+    info.texture = mTexture;
+    info.status = wgpu::SurfaceGetCurrentTextureStatus::Success;
+    // TODO(dawn:2320): Check for optimality
+    info.suboptimal = false;
+    return info;
+}
+
+void SwapChain::DetachFromSurfaceImpl() {
+    DAWN_ASSERT(mTexture == nullptr);
+
+    if (mEGLSurface != EGL_NO_SURFACE) {
+        Device* device = ToBackend(GetDevice());
+        device->GetEGL(false).DestroySurface(device->GetEGLDisplay(), mEGLSurface);
+        mEGLSurface = EGL_NO_SURFACE;
+    }
+
+    if (mTexture != nullptr) {
+        mTexture->APIDestroy();
+        mTexture = nullptr;
+        mTextureView = nullptr;
+    }
+}
+
+EGLConfig ChooseConfig(const EGLFunctions& egl,
+                       EGLDisplay display,
+                       EGLint apiBit,
+                       wgpu::TextureFormat color,
+                       wgpu::TextureFormat depthStencil) {
+    std::array<EGLint, 21> attribs;
+    size_t attribIndex = 0;
+    attribs.fill(EGL_NONE);
+
+    auto AddAttrib = [&](EGLint attrib, EGLint value) {
+        // We need two elements for the attrib and the final EGL_NONE
+        DAWN_ASSERT(attribIndex + 3 <= attribs.size());
+
+        attribs[attribIndex + 0] = attrib;
+        attribs[attribIndex + 1] = value;
+        attribIndex += 2;
+    };
+
+    AddAttrib(EGL_SURFACE_TYPE, EGL_WINDOW_BIT);
+    AddAttrib(EGL_RENDERABLE_TYPE, apiBit);
+    AddAttrib(EGL_CONFORMANT, apiBit);
+    AddAttrib(EGL_SAMPLES, 1);
+
+    switch (color) {
+        case wgpu::TextureFormat::RGBA8Unorm:
+            AddAttrib(EGL_RED_SIZE, 8);
+            AddAttrib(EGL_BLUE_SIZE, 8);
+            AddAttrib(EGL_GREEN_SIZE, 8);
+            AddAttrib(EGL_ALPHA_SIZE, 8);
+            break;
+
+            // TODO(XXX) support 16float and rgb565? and rgb10a2? What about srgb?
+            // Well maybe not because we need to create the GL context with a compatible config and
+            // we don't know what it could be beforehand. (Compatible means same color buffer
+            // basically, but depth/stencil is ok).
+
+        default:
+            return kNoConfig;
+    }
+
+    switch (depthStencil) {
+        case wgpu::TextureFormat::Depth24PlusStencil8:
+            AddAttrib(EGL_DEPTH_SIZE, 24);
+            AddAttrib(EGL_STENCIL_SIZE, 8);
+            break;
+        case wgpu::TextureFormat::Depth16Unorm:
+            AddAttrib(EGL_DEPTH_SIZE, 16);
+            break;
+        case wgpu::TextureFormat::Undefined:
+            break;
+
+        default:
+            return kNoConfig;
+    }
+
+    EGLConfig config = EGL_NO_CONFIG_KHR;
+    EGLint numConfigs = 0;
+    if (egl.ChooseConfig(display, attribs.data(), &config, 1, &numConfigs) == EGL_FALSE ||
+        numConfigs == 0) {
+        return kNoConfig;
+    }
+
+    return config;
+}
+
+}  // namespace dawn::native::opengl
