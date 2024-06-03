@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_OPENGL_CONTEXTEGL_H_
 
 #include <memory>
+#include <utility>
 
 #include "dawn/common/NonMovable.h"
 #include "dawn/common/egl_platform.h"
@@ -53,11 +54,19 @@ class ContextEGL : NonMovable {
                           bool useRobustness,
                           bool useANGLETextureSharing);
 
+    template <typename F>
+    auto WithSurfaceCurrent(EGLSurface surface, F&& f) {
+        mSurface = surface;
+        auto res = f();
+        mSurface = EGL_NO_SURFACE;
+        return std::move(res);
+    }
     void MakeCurrent();
 
   private:
     const DisplayEGL* mDisplay;
     EGLContext mContext = EGL_NO_CONTEXT;
+    EGLSurface mSurface = EGL_NO_SURFACE;
 };
 
 }  // namespace dawn::native::opengl
