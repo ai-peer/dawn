@@ -122,6 +122,24 @@
       "parentUuid": "79620b84_2f08e846",
       "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965a0fc6_97f01edc",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T16:41:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae8fafc5_4e31a74d",
+      "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
