@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdff4eb_c6da5765",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-03T16:17:19Z",
+      "side": 1,
+      "message": "\u003e variable \u0027si\u0027 of type \u0027ScopedIndent\u0027 can be declared \u0027const\u0027 (https://clang.llvm.org/extra/clang-tidy/checks/misc/const-correctness.html)\n\u003e \n\u003e (Lint observed on `android-clang-tidy-rel` and `linux-clang-tidy-rel`)\n\nPlease fix.",
+      "parentUuid": "ae7ae1af_5a266d51",
+      "revId": "e336d53b6336b09efbe3108e86a75af38cb157e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
