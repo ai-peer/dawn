@@ -167,16 +167,20 @@ MaybeError PipelineLayout::Initialize() {
     // Parameters are D3D12_ROOT_PARAMETER_TYPE which is either a root table, constant, or
     // descriptor.
     std::vector<D3D12_ROOT_PARAMETER1> rootParameters;
+    std::vector<D3D12_STATIC_SAMPLER_DESC> staticSamplers;
 
     size_t rangesCount = 0;
+    size_t staticSamplerCount = 0;
     for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bindGroupLayout = ToBackend(GetBindGroupLayout(group));
         rangesCount += bindGroupLayout->GetCbvUavSrvDescriptorRanges().size() +
                        bindGroupLayout->GetSamplerDescriptorRanges().size();
+        staticSamplerCount += bindGroupLayout->GetStaticSamplerCount();
     }
 
     // We are taking pointers to `ranges`, so we cannot let it resize while we're pushing to it.
     std::vector<D3D12_DESCRIPTOR_RANGE1> ranges(rangesCount);
+    staticSamplers.reserve(staticSamplerCount);
 
     uint32_t rangeIndex = 0;
 
@@ -216,6 +220,12 @@ MaybeError PipelineLayout::Initialize() {
         }
         if (SetRootDescriptorTable(bindGroupLayout->GetSamplerDescriptorRanges())) {
             mSamplerRootParameterInfo[group] = rootParameters.size() - 1;
+        }
+
+        // Combine the static samplers from the all of the bind group layouts to one vector.
+        for (auto& samplerDesc : bindGroupLayout->GetStaticSamplers()) {
+            auto& newSampler = staticSamplers.emplace_back(samplerDesc);
+            newSampler.RegisterSpace = static_cast<uint32_t>(group);
         }
 
         // Init root descriptors in root signatures for dynamic buffer bindings.
@@ -335,8 +345,8 @@ MaybeError PipelineLayout::Initialize() {
     versionedRootSignatureDescriptor.Version = D3D_ROOT_SIGNATURE_VERSION_1_1;
     versionedRootSignatureDescriptor.Desc_1_1.NumParameters = rootParameters.size();
     versionedRootSignatureDescriptor.Desc_1_1.pParameters = rootParameters.data();
-    versionedRootSignatureDescriptor.Desc_1_1.NumStaticSamplers = 0;
-    versionedRootSignatureDescriptor.Desc_1_1.pStaticSamplers = nullptr;
+    versionedRootSignatureDescriptor.Desc_1_1.NumStaticSamplers = staticSamplers.size();
+    versionedRootSignatureDescriptor.Desc_1_1.pStaticSamplers = staticSamplers.data();
     versionedRootSignatureDescriptor.Desc_1_1.Flags =
         D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
