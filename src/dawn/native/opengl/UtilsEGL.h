@@ -34,7 +34,7 @@
 
 namespace dawn::native::opengl {
 
-struct EGLFunctions;
+class EGLFunctions;
 
 const char* EGLErrorAsString(EGLint error);
 MaybeError CheckEGL(const EGLFunctions& egl, EGLBoolean result, const char* context);
