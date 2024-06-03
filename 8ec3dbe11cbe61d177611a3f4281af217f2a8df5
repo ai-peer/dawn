@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b714f640_8cf93672",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-03T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b207ea8_f84f007e",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "218dde7d_ebbad122",
@@ -65,6 +83,30 @@
       "writtenOn": "2024-05-31T05:37:03Z",
       "side": 1,
       "message": "nit: I think this is always Unknown (and should always be for any FatalError), and doesn\u0027t need to be an arg",
+      "range": {
+        "startLine": 250,
+        "startChar": 34,
+        "endLine": 250,
+        "endChar": 59
+      },
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "392f2f15_89b53e95",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-03T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "218dde7d_ebbad122",
       "range": {
         "startLine": 250,
         "startChar": 34,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aced4762_749dd9ac",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-03T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73b79a26_5971262b",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "474f2656_c81528e1",
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9b7022_ec74d435",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-03T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "474f2656_c81528e1",
+      "range": {
+        "startLine": 465,
+        "startChar": 9,
+        "endLine": 465,
+        "endChar": 31
+      },
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2138be0_372d9902",
@@ -128,6 +212,24 @@
       "writtenOn": "2024-05-31T05:37:03Z",
       "side": 1,
       "message": "nit: I\u0027m sure we won\u0027t forget about this, but attach a TODO here.",
+      "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a0ddc37_1dc222f2",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-03T17:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2138be0_372d9902",
       "revId": "8ec3dbe11cbe61d177611a3f4281af217f2a8df5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
