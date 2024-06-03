@@ -52,6 +52,24 @@
       "parentUuid": "ca135e5e_0381a23f",
       "revId": "fdc5c8d21d7f20ac10771498247c58ba2976372a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85289190_622ee64f",
+        "filename": "src/dawn/native/Subresource.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-06-03T17:40:53Z",
+      "side": 0,
+      "message": "Ah okay, yes with TextureFormat::External the Aspect is always Color so it should work. I\u0027ve removed that additional validation.",
+      "parentUuid": "e82365db_10a593b7",
+      "revId": "fdc5c8d21d7f20ac10771498247c58ba2976372a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

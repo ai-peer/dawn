@@ -336,6 +336,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2c5f0a_83437928",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-06-03T17:40:53Z",
+      "side": 1,
+      "message": "Added as part of follow-up",
+      "parentUuid": "ff72f93e_3d659535",
+      "revId": "dced2d9731338cde51fe698672ff83588ab92c1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2685a47f_eb3d425b",
