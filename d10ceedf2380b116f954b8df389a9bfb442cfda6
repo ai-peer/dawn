@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8b548b9_623e8c42",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "081b6a5c_114672a3",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f33b8caa_71d54fe0",
@@ -124,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efcf43a_adaaf1ce",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca7b3450_bdccd59b",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d264e31_a1c4b626",
@@ -137,6 +173,24 @@
       "writtenOn": "2024-05-11T14:51:55Z",
       "side": 1,
       "message": "This a slightly weird, maybe it could be device-\u003eUseResolveTextureBlitForLoadOp and comment that some backends need to handle it internally, instead that they must (otherwise they\u0027d just not expose the extension)",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c6f1e6f_c53c1361",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 946,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d264e31_a1c4b626",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -300,6 +354,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "528459a0_3f8005e0",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33914551_61ea4915",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5352a73_a747acc4",
@@ -317,6 +389,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c0838b9_4781b727",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5352a73_a747acc4",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48dfd656_a89e4701",
@@ -330,6 +420,24 @@
       "writtenOn": "2024-05-11T14:51:55Z",
       "side": 1,
       "message": "Maybe we could have a `ColorAttachmentMask GetExpandedResolveMask()` in `RenderPipelineBase` and add that mask to the query. It would still allow considering that all load/store ops are the same and simplify the code here and renderpasscache a bit.\n\nOut of curiiosity, what about render bundle compatibility with render passes that use ExpandToResolve? It looks like it might already work but maybe I\u0027m missing something.",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f09b98_4f85b337",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48dfd656_a89e4701",
       "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -368,6 +476,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e551267e_060e7627",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a283bd9_63e56279",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec51bfc_d191e0d6",
@@ -381,6 +507,30 @@
       "writtenOn": "2024-05-11T14:51:55Z",
       "side": 1,
       "message": "Did you mean `IsSubset(RenderAttachment | TextureBinding, usage)`?",
+      "range": {
+        "startLine": 631,
+        "startChar": 8,
+        "endLine": 631,
+        "endChar": 92
+      },
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be3b691_c3b58de0",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec51bfc_d191e0d6",
       "range": {
         "startLine": 631,
         "startChar": 8,
