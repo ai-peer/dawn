@@ -16,6 +16,23 @@
       "message": "PTAL this one too!",
       "revId": "b08c9a07320c4b644c8d6222a4df517fe6687ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83c8b375_815bb0d7",
+        "filename": "src/dawn/common/egl_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T19:11:10Z",
+      "side": 1,
+      "message": "Vulkan -\u003e OpenGL",
+      "revId": "b08c9a07320c4b644c8d6222a4df517fe6687ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
