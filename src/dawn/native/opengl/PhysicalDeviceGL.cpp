@@ -94,7 +94,7 @@ ResultOrError<Ref<PhysicalDevice>> PhysicalDevice::Create(wgpu::BackendType back
                                                           void* (*getProc)(const char*),
                                                           EGLDisplay display) {
     EGLFunctions egl;
-    egl.Init(getProc);
+    DAWN_TRY(egl.Init(display, getProc));
 
     EGLenum api = backendType == wgpu::BackendType::OpenGLES ? EGL_OPENGL_ES_API : EGL_OPENGL_API;
 
@@ -128,7 +128,7 @@ PhysicalDevice::PhysicalDevice(wgpu::BackendType backendType, EGLDisplay display
 
 MaybeError PhysicalDevice::InitializeGLFunctions(void* (*getProc)(const char*)) {
     // Use getProc to populate the dispatch table
-    mEGLFunctions.Init(getProc);
+    DAWN_TRY(mEGLFunctions.Init(mDisplay, getProc));
     return mFunctions.Initialize(getProc);
 }
 
