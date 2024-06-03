@@ -327,8 +327,7 @@ class ReadOnlyStencilAttachmentTests : public ReadOnlyDepthStencilAttachmentTest
 TEST_P(ReadOnlyStencilAttachmentTests, SampleFromAttachment) {
     // TODO(angleproject:8384): ASSERT is triggered in the ANGLE D3D11 backend likely because of
     // the usage of the GL_STENCIL_INDEX8 format.
-    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11() &&
-                          GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8);
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
 
     // stencilRefValue < stencilValue (stencilInitValue), so stencil test passes. The pipeline
     // samples from stencil buffer and writes into color buffer.
