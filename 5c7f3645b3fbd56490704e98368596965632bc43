@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef661e81_b167bd07",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-03T17:54:53Z",
+      "side": 1,
+      "message": "the read of the ID is not protected by the lock",
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f05c61_5178b608",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-03T17:54:53Z",
+      "side": 1,
+      "message": "this read is also not protected. Probably should make it atomic",
+      "range": {
+        "startLine": 477,
+        "startChar": 12,
+        "endLine": 477,
+        "endChar": 53
+      },
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71dad6d1_dc1b99d0",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-03T17:54:53Z",
+      "side": 1,
+      "message": "is this true? WaitAnyOnly events won\u0027t be captured by InstanceProcessEvents, right?",
+      "range": {
+        "startLine": 1673,
+        "startChar": 0,
+        "endLine": 1675,
+        "endChar": 0
+      },
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
