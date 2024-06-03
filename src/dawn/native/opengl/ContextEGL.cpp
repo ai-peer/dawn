@@ -125,7 +125,7 @@ MaybeError ContextEGL::Initialize(wgpu::BackendType backend,
 
 void ContextEGL::MakeCurrent() {
     EGLBoolean success =
-        mDisplay->egl.MakeCurrent(mDisplay->GetDisplay(), EGL_NO_SURFACE, EGL_NO_SURFACE, mContext);
+        mDisplay->egl.MakeCurrent(mDisplay->GetDisplay(), mSurface, mSurface, mContext);
     IgnoreErrors(CheckEGL(mDisplay->egl, success == EGL_TRUE, "eglMakeCurrent"));
 }
 
