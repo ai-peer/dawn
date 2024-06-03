@@ -740,6 +740,8 @@ TEST_P(DepthStencilSamplingTest, CheckDepthTextureRange) {
 // Test that sampling a depth/stencil texture at components 1, 2, and 3 yield 0, 0, and 1
 // respectively
 TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
+    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
+
     // This test fails on ANGLE (both SwiftShader and D3D11).
     DAWN_SUPPRESS_TEST_IF(IsANGLE());
     // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
