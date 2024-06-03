@@ -68,6 +68,24 @@
       "parentUuid": "655ee034_7d486de1",
       "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44fb7be3_b7522c89",
+        "filename": "src/dawn/native/BindingInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-03T13:13:47Z",
+      "side": 1,
+      "message": "is it ok to leave it? Or should we remove?",
+      "parentUuid": "a99d8c10_adeef067",
+      "revId": "2f83fc438d2c9402ec16e29f455507b32668a7dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
