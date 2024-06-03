@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b50c528_37d8a18f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdbaca4f_bb03b002",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "nit: It seems this could be folded in the check at [a] by adding the computation at [b].",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2588b71a_97b64107",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d3cc0e_9b1d5682",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "[c]",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e5271f_56f87d50",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "[b]",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cec43e_b85a4f71",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "Is that validated somewhere else in SI?",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c169e1e_17bf2dae",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1781,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "Isn\u0027t this validation guaranteed to pass when we are in this branch since we have validation that `YCbCrVkDescriptor` requires `TextureFormat::External` at [c]?",
+      "range": {
+        "startLine": 1776,
+        "startChar": 0,
+        "endLine": 1781,
+        "endChar": 9
+      },
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16721385_9b7d687f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1791,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "ditto [c] takes care of that.",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6c6d569_1ac5d9d5",
+        "filename": "src/dawn/tests/end2end/YCbCrInfoTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T15:19:34Z",
+      "side": 1,
+      "message": "Why doesn\u0027t this default to the texture\u0027s format, which is TextureFormat::External?",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
