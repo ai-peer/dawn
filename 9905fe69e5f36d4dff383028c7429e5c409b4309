@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804d843e_262f0ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-06-03T21:47:37Z",
+      "side": 1,
+      "message": "Looks like this fixes the issue on the bots, so this can be submitted if you believe the code is in a good state. Me uploading additional patchsets may have messed with LGTM permissions, though.",
+      "revId": "9905fe69e5f36d4dff383028c7429e5c409b4309",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
