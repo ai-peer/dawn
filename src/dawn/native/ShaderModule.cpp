@@ -1115,11 +1115,11 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
 
     auto tintFile = std::make_unique<tint::Source::File>("", wgslDesc->code);
 
-    if (device->IsToggleEnabled(Toggle::DumpShaders)) {
-        std::ostringstream dumpedMsg;
-        dumpedMsg << "// Dumped WGSL:" << std::endl << wgslDesc->code << std::endl;
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-    }
+    //   if (device->IsToggleEnabled(Toggle::DumpShaders)) {
+    std::ostringstream dumpedMsg;
+    dumpedMsg << "// Dumped WGSL:\n" << wgslDesc->code << "\n";
+    device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+    //   }
 
     tint::Program program;
     DAWN_TRY_ASSIGN(program,
