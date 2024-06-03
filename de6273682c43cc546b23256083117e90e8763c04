@@ -16,6 +16,24 @@
       "message": "Can you add a test case? One of the end2end files in test/tint/bug/tint/... ?\n\nYou should be able to run the `./tools/run tests --generate-expected test/tint/bug/tint/\u003cfilename\u003e.wgsl` to generate the expected results (assuming you\u0027ve enabled all the backends in your tint build)",
       "revId": "de6273682c43cc546b23256083117e90e8763c04",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e68f45d7_31483732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-03T18:19:17Z",
+      "side": 1,
+      "message": "From our OOB conversation, since the test is for rejecting a shader, I will add a unittest to the resolved instead.",
+      "parentUuid": "dc8fde20_84c57d64",
+      "revId": "de6273682c43cc546b23256083117e90e8763c04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
