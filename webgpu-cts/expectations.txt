@@ -80,6 +80,15 @@
 # Last rolled: 2024-03-15 06:17:47PM
 
 ################################################################################
+# Entries for the M124 bots
+# KEEP
+################################################################################
+[ intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,shader_module:invalid,vertex:isAsync=true;isVertexShaderValid=true [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,shader_module:invalid,fragment:isAsync=true;isFragmentShaderValid=true [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:api,validation,shader_module,entry_point:fragment_undefined_entry_point_and_extra_stage:isAsync=true;extraShaderModuleStage="compute" [ Failure ]
+[ intel-0x9bc5 ubuntu ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_load_store:accessValueType="u32";memType="non_atomic_workgroup";accessPair="rw";normalBarrier=true [ Failure ]
+
+################################################################################
 # SharedImage interop failures on Linux
 # Skipped instead of just Crash because of the number of failures
 # KEEP
