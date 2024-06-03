@@ -61,7 +61,7 @@ class Device final : public DeviceBase {
     const OpenGLFunctions& GetGL() const;
 
     // Helper functions to get access to relevant EGL objects.
-    const EGLFunctions& GetEGL(bool makeCurrent) const;
+    const EGLFunctions& GetEGL(bool makeCurrent, EGLSurface surface = EGL_NO_SURFACE) const;
     EGLDisplay GetEGLDisplay() const;
     ContextEGL* GetContext() const;
 

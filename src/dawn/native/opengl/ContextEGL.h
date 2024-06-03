@@ -45,7 +45,7 @@ class ContextEGL : NonMovable {
                                                              bool useANGLETextureSharing);
     ~ContextEGL();
 
-    void MakeCurrent();
+    void MakeCurrent(EGLSurface surface = EGL_NO_SURFACE);
     EGLDisplay GetEGLDisplay() const;
     const EGLFunctions& GetEGL() const;
 
