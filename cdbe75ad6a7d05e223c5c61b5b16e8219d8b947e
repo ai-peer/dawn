@@ -139,6 +139,24 @@
       "parentUuid": "8196887d_c4444cc2",
       "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5ff1962_37db3094",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-03T06:27:59Z",
+      "side": 1,
+      "message": "Ah makes sense. This is expensive to do on every call though. So maybe we could have an allowlist of calls that can trigger callback in the future. (but we can see that when we move the bindings to using WGPUFuture).",
+      "parentUuid": "2ce87459_646f9c56",
+      "revId": "cdbe75ad6a7d05e223c5c61b5b16e8219d8b947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
