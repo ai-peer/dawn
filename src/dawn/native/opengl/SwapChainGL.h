@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,47 +25,53 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_OPENGL_CONTEXTEGL_H_
-#define SRC_DAWN_NATIVE_OPENGL_CONTEXTEGL_H_
+#ifndef SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_
+#define SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_
 
-#include <memory>
-
-#include "dawn/common/NonMovable.h"
 #include "dawn/common/egl_platform.h"
-#include "dawn/native/opengl/DeviceGL.h"
-#include "dawn/native/opengl/EGLFunctions.h"
+#include "dawn/native/SwapChain.h"
 
 namespace dawn::native::opengl {
 
-class ContextEGL : NonMovable {
+class Device;
+class EGLFunctions;
+class Texture;
+class TextureView;
+
+class SwapChain final : public SwapChainBase {
   public:
-    static ResultOrError<std::unique_ptr<ContextEGL>> Create(const EGLFunctions& functions,
-                                                             EGLenum api,
-                                                             EGLDisplay display,
-                                                             bool useANGLETextureSharing);
-    ~ContextEGL();
+    static ResultOrError<Ref<SwapChain>> Create(Device* device,
+                                                Surface* surface,
+                                                SwapChainBase* previousSwapChain,
+                                                const SurfaceConfiguration* config);
 
-    template <typename F>
-    auto WithSurfaceCurrent(EGLSurface surface, F&& f) {
-        mSurface = surface;
-        auto res = f();
-        mSurface = EGL_NO_SURFACE;
-        return std::move(res);
-    }
-
-    void MakeCurrent();
-    EGLDisplay GetEGLDisplay() const;
-    const EGLFunctions& GetEGL() const;
+    SwapChain(DeviceBase* device, Surface* surface, const SurfaceConfiguration* config);
+    ~SwapChain() override;
 
   private:
-    ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLContext context);
+    void DestroyImpl() override;
 
-    const EGLFunctions mEgl;
-    EGLDisplay mDisplay;
-    EGLContext mContext;
-    EGLSurface mSurface = EGL_NO_SURFACE;
+    using SwapChainBase::SwapChainBase;
+    MaybeError Initialize(SwapChainBase* previousSwapChain);
+
+    MaybeError CreateEGLSurface(const EGLFunctions& egl, EGLDisplay display);
+
+    EGLSurface mEGLSurface = EGL_NO_SURFACE;
+    Ref<Texture> mTexture;
+    Ref<TextureView> mTextureView;
+
+    MaybeError PresentImpl() override;
+    ResultOrError<SwapChainTextureInfo> GetCurrentTextureImpl() override;
+    void DetachFromSurfaceImpl() override;
 };
+
+static constexpr EGLConfig kNoConfig = 0;
+EGLConfig ChooseConfig(const EGLFunctions& egl,
+                       EGLDisplay display,
+                       EGLint apiBit,
+                       wgpu::TextureFormat color,
+                       wgpu::TextureFormat depthStencil = wgpu::TextureFormat::Undefined);
 
 }  // namespace dawn::native::opengl
 
-#endif  // SRC_DAWN_NATIVE_OPENGL_CONTEXTEGL_H_
+#endif  // SRC_DAWN_NATIVE_OPENGL_SWAPCHAINGL_H_
