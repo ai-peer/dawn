@@ -17,6 +17,24 @@
       "parentUuid": "3b79dcdc_4af33027",
       "revId": "2860b6f82594c9c5cde8c2898c0fbe59a2b89baf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc4e90e_fd6a0e90",
+        "filename": "src/tint/lang/wgsl/writer/raise/raise.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-03T16:38:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecef1dfa_f9d01a7e",
+      "revId": "2860b6f82594c9c5cde8c2898c0fbe59a2b89baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
