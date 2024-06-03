@@ -16,6 +16,24 @@
       "message": "nit: Missing Bug: entry",
       "revId": "becf816abbfe4fff5c6d186f6d069520470e3dd7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9f981d_8338895d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-03T11:03:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb641cf2_75768f15",
+      "revId": "becf816abbfe4fff5c6d186f6d069520470e3dd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
