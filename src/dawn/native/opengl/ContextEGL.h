@@ -53,11 +53,19 @@ class ContextEGL : NonMovable {
                           bool useRobustness,
                           bool useANGLETextureSharing);
 
+    template <typename F>
+    auto WithSurfaceCurrent(EGLSurface surface, F&& f) {
+        mSurface = surface;
+        auto res = f();
+        mSurface = EGL_NO_SURFACE;
+        return std::move(res);
+    }
     void MakeCurrent();
 
   private:
     const DisplayEGL* mDisplay;
     EGLContext mContext = EGL_NO_CONTEXT;
+    EGLSurface mSurface = EGL_NO_SURFACE;
 };
 
 }  // namespace dawn::native::opengl
