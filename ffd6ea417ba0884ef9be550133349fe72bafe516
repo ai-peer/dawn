@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7db02dc_58c6498b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-03T17:47:08Z",
+      "side": 0,
+      "message": "nit: consider moving `mUseDefaultTextureMapping ` computation code out of this function.",
+      "range": {
+        "startLine": 241,
+        "startChar": 33,
+        "endLine": 241,
+        "endChar": 39
+      },
+      "revId": "ffd6ea417ba0884ef9be550133349fe72bafe516",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

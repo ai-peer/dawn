@@ -33,6 +33,52 @@
       "message": "The perf data on my UHD770 shows the improvement of CL looks significant.\n\n1. Without default texture mapping:\n```\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_SmallSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 517415.526316 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 515973.315789 ns\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 534898.473684 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 533450.631579 ns\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 498788.315789 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 497733.052632 ns\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_SmallSize (6188 ms)\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_MediumSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2183.596250 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2182.383500 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2284.103250 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2282.799000 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2238.457500 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 2229.524000 us\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_MediumSize (5927 ms)\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_LargeSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 15707.544000 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 15574.508000 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 16827.946000 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 16697.233000 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 16934.718000 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 16799.899000 us\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_LargeSize (9834 ms)\n[----------] 3 tests from TextureReadPerf (21951 ms total)\n```\n\n2. With default texture mapping:\n```\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_SmallSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 290540.550000 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 289913.000000 ns\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 296562.550000 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 295969.525000 ns\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 300140.025000 ns\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_SmallSize\u003d 299535.525000 ns\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_SmallSize (6583 ms)\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_MediumSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1284.670571 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1283.834143 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1337.909714 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1337.055286 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1352.721857 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_MediumSize\u003d 1351.848571 us\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_MediumSize (5865 ms)\n[ RUN      ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_LargeSize\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2535.760000 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2534.910000 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2566.327333 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2565.468000 us\nInfo: *RESULT TextureReadPerf.wall_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2543.791333 us\nInfo: *RESULT TextureReadPerf.cpu_time: Run_D3D11_Intel_R__UHD_Graphics_770_LargeSize\u003d 2542.927333 us\n[       OK ] TextureReadPerf.Run/D3D11_Intel_R__UHD_Graphics_770_LargeSize (5341 ms)\n[----------] 3 tests from TextureReadPerf (17791 ms total)\n```",
       "revId": "2a9bababe3062b7e91c8e55d27660c9e055ea273",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44a7580_dde39307",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-03T17:47:08Z",
+      "side": 1,
+      "message": "Should we only use it with `UnifiedMemoryArchitecture`? Does it improve performance with all kinds of GPUs?",
+      "range": {
+        "startLine": 244,
+        "startChar": 7,
+        "endLine": 244,
+        "endChar": 32
+      },
+      "revId": "2a9bababe3062b7e91c8e55d27660c9e055ea273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c44a66_7db3bf57",
+        "filename": "src/dawn/tests/perf_tests/TextureReadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-03T17:47:08Z",
+      "side": 1,
+      "message": "It should be nice to have a param so we can measure performance with both code paths easily.",
+      "range": {
+        "startLine": 90,
+        "startChar": 54,
+        "endLine": 90,
+        "endChar": 71
+      },
+      "revId": "2a9bababe3062b7e91c8e55d27660c9e055ea273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
