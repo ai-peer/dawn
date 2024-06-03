@@ -620,6 +620,8 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/SamplerGL.h"
         "opengl/ShaderModuleGL.cpp"
         "opengl/ShaderModuleGL.h"
+        "opengl/SwapChainGL.cpp"
+        "opengl/SwapChainGL.h"
         "opengl/TextureGL.cpp"
         "opengl/TextureGL.h"
         "opengl/UtilsEGL.cpp"
