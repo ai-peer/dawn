@@ -124,4 +124,68 @@ EGLint DisplayEGL::GetAPIBit() const {
     return mApiBit;
 }
 
+EGLConfig DisplayEGL::ChooseConfig(EGLint surfaceType,
+                                   wgpu::TextureFormat color,
+                                   wgpu::TextureFormat depthStencil) const {
+    std::array<EGLint, 21> attribs;
+    size_t attribIndex = 0;
+    attribs.fill(EGL_NONE);
+
+    auto AddAttrib = [&](EGLint attrib, EGLint value) {
+        // We need two elements for the attrib and the final EGL_NONE
+        DAWN_ASSERT(attribIndex + 3 <= attribs.size());
+
+        attribs[attribIndex + 0] = attrib;
+        attribs[attribIndex + 1] = value;
+        attribIndex += 2;
+    };
+
+    AddAttrib(EGL_SURFACE_TYPE, surfaceType);
+    // XXX ????
+    // AddAttrib(EGL_RENDERABLE_TYPE, apiBit);
+    // AddAttrib(EGL_CONFORMANT, apiBit);
+    // AddAttrib(EGL_SAMPLES, 1);
+
+    switch (color) {
+        case wgpu::TextureFormat::RGBA8Unorm:
+            AddAttrib(EGL_RED_SIZE, 8);
+            AddAttrib(EGL_BLUE_SIZE, 8);
+            AddAttrib(EGL_GREEN_SIZE, 8);
+            AddAttrib(EGL_ALPHA_SIZE, 8);
+            break;
+
+            // TODO(XXX) support 16float and rgb565? and rgb10a2? What about srgb?
+            // Well maybe not because we need to create the GL context with a compatible config and
+            // we don't know what it could be beforehand. (Compatible means same color buffer
+            // basically, but depth/stencil is ok).
+
+        default:
+            return kNoConfig;
+    }
+
+    switch (depthStencil) {
+        case wgpu::TextureFormat::Depth24PlusStencil8:
+            AddAttrib(EGL_DEPTH_SIZE, 24);
+            AddAttrib(EGL_STENCIL_SIZE, 8);
+            break;
+        case wgpu::TextureFormat::Depth16Unorm:
+            AddAttrib(EGL_DEPTH_SIZE, 16);
+            break;
+        case wgpu::TextureFormat::Undefined:
+            break;
+
+        default:
+            return kNoConfig;
+    }
+
+    EGLConfig config = EGL_NO_CONFIG_KHR;
+    EGLint numConfigs = 0;
+    if (egl.ChooseConfig(mDisplay, attribs.data(), &config, 1, &numConfigs) == EGL_FALSE ||
+        numConfigs == 0) {
+        return kNoConfig;
+    }
+
+    return config;
+}
+
 }  // namespace dawn::native::opengl
