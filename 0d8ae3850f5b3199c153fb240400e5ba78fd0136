@@ -377,6 +377,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb1d85ba_36fb0a00",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:25:08Z",
+      "side": 1,
+      "message": "Actually, I have modified DeviceBase::CreateRenderPipeline to allow internal bindings. PTAL.",
+      "parentUuid": "f3083a32_13c049db",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a7291c_6a27ec73",
         "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
         "patchSetId": 30
