@@ -33,6 +33,97 @@
       "message": "Additional note on this; there are instances (such as error handling) where callbacks are still appropriate. Therefore it makes sense not to hide the existing callback versions from the public API.",
       "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76a144bb_50b8728d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T13:14:25Z",
+      "side": 1,
+      "message": "Note that this will change at some point when we remove the \"callback\" based methods in Dawn to replace them with WGPUFuture ones that take callbackInfo structs. Detecting asynchrony will be much easier though: is the return type a WGPUFuture.",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66ffbe48_6d358ccf",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T13:14:25Z",
+      "side": 1,
+      "message": "What are the ones that don\u0027t end in Callback?",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6051f77a_66d397ed",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T13:14:25Z",
+      "side": 1,
+      "message": "```suggestion\n        //* Kotlin doesn\u0027t need userdata because of captures, so we omit it.\n```",
+      "range": {
+        "startLine": 40,
+        "startChar": 68,
+        "endLine": 40,
+        "endChar": 73
+      },
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1320f5_a15f30ff",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T13:14:25Z",
+      "side": 1,
+      "message": "That seems quite brittle, but should potentially get better with WGPUFuture since we\u0027ll be more explicit on what\u0027s a callback. Maybe at least add an assert here?",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "559e4c83_d007309f",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T13:14:25Z",
+      "side": 1,
+      "message": "I have no clue what\u0027s happening here in terms of Kotlin ^^",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
