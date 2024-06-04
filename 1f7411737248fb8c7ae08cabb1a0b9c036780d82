@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0c7e61_bef76680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-04T18:48:10Z",
+      "side": 1,
+      "message": "There are some clang-tidy include errors if you want to try to fix them up.",
+      "revId": "1f7411737248fb8c7ae08cabb1a0b9c036780d82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c787cd2c_527c9519",
+        "filename": "src/tint/lang/msl/writer/raise/builtin_polyfill_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-04T18:48:10Z",
+      "side": 1,
+      "message": "\u003e no header providing \"TEST_F\" is directly included (https://clang.llvm.org/extra/clang-tidy/checks/misc/include-cleaner.html)\n\u003e \n\u003e (Lint observed on `android-clang-tidy-rel` and `linux-clang-tidy-rel`)\n\nPlease fix.",
+      "parentUuid": "9c2fc4a4_2a0ece22",
+      "revId": "1f7411737248fb8c7ae08cabb1a0b9c036780d82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
