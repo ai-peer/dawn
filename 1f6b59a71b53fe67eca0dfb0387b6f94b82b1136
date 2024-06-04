@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8cdf6e3_c78b203e",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T09:54:57Z",
+      "side": 1,
+      "message": "Sorry, I meant STM and not SI. It would be ideal if there isn\u0027t a way to trigger the ASSERT from outside Dawn. But this is definitely and optional nit. Feel free to land and address in a follow-up if at all.",
+      "parentUuid": "fcd38850_06c05ba3",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c169e1e_17bf2dae",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 29
