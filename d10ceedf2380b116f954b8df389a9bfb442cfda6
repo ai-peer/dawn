@@ -459,6 +459,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36f878f5_3186010c",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7700ec12_f78f5d54",
+      "revId": "d10ceedf2380b116f954b8df389a9bfb442cfda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a283bd9_63e56279",

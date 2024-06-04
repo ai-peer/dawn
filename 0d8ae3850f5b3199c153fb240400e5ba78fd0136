@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5e07c2_b88c6403",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fad0a5f_444c3f4e",
+      "range": {
+        "startLine": 939,
+        "startChar": 17,
+        "endLine": 939,
+        "endChar": 62
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da0aa649_ba57c8d7",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "Won\u0027t this enable it for all users of that Dawn device? Could we scope it only to ShaderModules created internally instead? (IDK that we have a precedent though where Dawn needs to write WGSL with internal extensions).",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4d35414_097d82c5",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "I have changed to only enable this if DawnLoadResolveTexture is turned on for now. And also added TODO for adding a way to add additional extensions for internal shader modules.",
+      "parentUuid": "da0aa649_ba57c8d7",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "853234ba_da082513",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d51e4fe4_88c3d61c",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bf1fc7d_20535a79",
@@ -71,6 +131,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "The query is not used outside of that blcok so we could keep it short named and inside the block 😊",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58332209_1eb6b50f",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf1fc7d_20535a79",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -100,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3feba0a9_c20834c1",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Some attachments have resolve target, but don\u0027t use ExpandResolve load op. but we need to specify that they have resolve target to conform to render pass compatibility (for 2 subpasses cases).",
+      "parentUuid": "af2c6416_b7fec13c",
+      "range": {
+        "startLine": 527,
+        "startChar": 59,
+        "endLine": 527,
+        "endChar": 75
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d37cd3d_67c7347d",
         "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 30
@@ -111,6 +213,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "Can we add some TODO to not use this implicit signal to choose which subpass we\u0027re in but something more explicit? (it would mean we no longer need to reflect hasInputAttachment from ShaderModule compilation too).",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4692148_7859be5c",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d37cd3d_67c7347d",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -132,6 +252,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a05db6f_656ba17d",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4a01342_0ef8eafe",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45eb359d_af677179",
@@ -149,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e325fde_e0a5ca57",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45eb359d_af677179",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3199b072_0c1ad988",
@@ -162,6 +318,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "ditto",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3625ecd0_62dfca6a",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3199b072_0c1ad988",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +359,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3083a32_13c049db",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "This uses a special kInternalInputAttachmentDim value for view dimension. We need to explicitly create the BGL to skip the validation. If we allow such value to be used for default, users might accidentally use it. I don\u0027t know if there is cleaner way to create the default with internal values.",
+      "parentUuid": "c6abc836_172fe032",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f3a7291c_6a27ec73",
         "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
         "patchSetId": 30
@@ -196,6 +388,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "`for (ColorAttachmentIndex i : IterateBitSet(renderPass-\u003eattachmentState-\u003eGetColorAttachmentsMask()))` should be able to replace everything up to const Format\u0026 \u003d ...",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b883167_e731aab9",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3a7291c_6a27ec73",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +427,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b29da1_f08c3ca8",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done. Removed TODO.",
+      "parentUuid": "4ee045fc_6f618410",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b2d7ee3_721604f5",
@@ -234,6 +462,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60ea4b01_d76f51c0",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b2d7ee3_721604f5",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f508233_26629fa5",
@@ -247,6 +493,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "nit: This is used in a single place and could be inlined for less visual noise.",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3d874c4_dacc306e",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f508233_26629fa5",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -291,6 +555,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1234c06_e5439d4c",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a0a7c09_d673b749",
+      "range": {
+        "startLine": 321,
+        "startChar": 26,
+        "endLine": 321,
+        "endChar": 32
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdec16bb_c24efd06",
@@ -308,6 +596,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5137337_46dd654b",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Seems like git cl format bug, this is arranged by git cl format.",
+      "parentUuid": "fdec16bb_c24efd06",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ac4370b_d118aaa4",
@@ -321,6 +627,30 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "Why COLOR_ATTACHMENT_READ here?",
+      "range": {
+        "startLine": 159,
+        "startChar": 55,
+        "endLine": 159,
+        "endChar": 90
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7588b2f_0730dbe9",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Wrote an explanation in the comment. Due to Vulkan spec, the input attachment has to be loaded. And the loading will happen at \"Color Attachment Output\" stage.\nYes, it\u0027s a bit weird for \"input\" attachments. But it\u0027s written in the spec and required by validation layer.\n\n\u003e VK_ATTACHMENT_LOAD_OP_LOAD specifies that the previous contents of the image within the render area will be preserved as the initial values. For attachments with a depth/stencil format, this uses the access type VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT. For attachments with a color format, this uses the access type VK_ACCESS_COLOR_ATTACHMENT_READ_BIT.",
+      "parentUuid": "6ac4370b_d118aaa4",
       "range": {
         "startLine": 159,
         "startChar": 55,
@@ -354,6 +684,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d3a210_515de0cc",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Wrote a comment.",
+      "parentUuid": "6a09ee32_6bdb6aa4",
+      "range": {
+        "startLine": 245,
+        "startChar": 52,
+        "endLine": 245,
+        "endChar": 97
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25db1a05_7595175d",
@@ -371,6 +725,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32414ebf_87ae53fd",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25db1a05_7595175d",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee6ecb47_feb6f03c",
@@ -384,6 +756,24 @@
       "writtenOn": "2024-06-04T13:08:10Z",
       "side": 1,
       "message": "Aren\u0027t these always RenderAttachment since they are specified as a resolveTexture? So we could move that logic in [1]",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57a762b2_4a884c52",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-04T15:14:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee6ecb47_feb6f03c",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
