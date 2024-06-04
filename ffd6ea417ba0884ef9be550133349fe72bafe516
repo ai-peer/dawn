@@ -22,6 +22,30 @@
       },
       "revId": "ffd6ea417ba0884ef9be550133349fe72bafe516",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec2da27_5c27cbbd",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T06:41:55Z",
+      "side": 0,
+      "message": "Makes sense, done!",
+      "parentUuid": "f7db02dc_58c6498b",
+      "range": {
+        "startLine": 241,
+        "startChar": 33,
+        "endLine": 241,
+        "endChar": 39
+      },
+      "revId": "ffd6ea417ba0884ef9be550133349fe72bafe516",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

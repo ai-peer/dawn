@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fdd8676_0e22d4c9",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T06:41:55Z",
+      "side": 1,
+      "message": "You are right. I just tried it on GTX_1060. `D3D11_FEATURE_D3D11_OPTIONS2.MapOnDefaultTextures` was also reported, however the perf data got worse.",
+      "parentUuid": "c44a7580_dde39307",
+      "range": {
+        "startLine": 244,
+        "startChar": 7,
+        "endLine": 244,
+        "endChar": 32
+      },
+      "revId": "2a9bababe3062b7e91c8e55d27660c9e055ea273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81c44a66_7db3bf57",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-06-03T17:47:08Z",
       "side": 1,
       "message": "It should be nice to have a param so we can measure performance with both code paths easily.",
+      "range": {
+        "startLine": 90,
+        "startChar": 54,
+        "endLine": 90,
+        "endChar": 71
+      },
+      "revId": "2a9bababe3062b7e91c8e55d27660c9e055ea273",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22997712_379615f8",
+        "filename": "src/dawn/tests/perf_tests/TextureReadPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T06:41:55Z",
+      "side": 1,
+      "message": "It\u0027s hard to implement such a test param, however a toggle can be used for that purpose this way.\n\n```\ndawn_perf_tests.exe --backend\u003dd3d11 --disable-toggles\u003dd3d11_allow_default_texture_mapping --gtest_filter\u003dTextureRead*Intel*\n```",
+      "parentUuid": "81c44a66_7db3bf57",
       "range": {
         "startLine": 90,
         "startChar": 54,
