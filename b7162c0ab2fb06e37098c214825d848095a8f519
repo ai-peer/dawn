@@ -16,6 +16,63 @@
       "message": "PTAL again - thanks!",
       "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96141202_c5970dfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T23:01:26Z",
+      "side": 1,
+      "message": "LGTM, with minor comments",
+      "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0122d894_388de796",
+        "filename": "src/dawn/native/d3d/UtilsD3D.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T23:01:26Z",
+      "side": 1,
+      "message": "nit: can you leave a comment describing when it returns unknown? it\u0027s not obvious an enum like that may be returned",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 65
+      },
+      "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2ae7ba_5d65b31b",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T23:01:26Z",
+      "side": 1,
+      "message": "can you file an issue about this problem(s) and link here so it\u0027s not lost?",
+      "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
