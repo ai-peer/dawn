@@ -327,8 +327,7 @@ class ReadOnlyStencilAttachmentTests : public ReadOnlyDepthStencilAttachmentTest
 TEST_P(ReadOnlyStencilAttachmentTests, SampleFromAttachment) {
     // TODO(angleproject:8384): ASSERT is triggered in the ANGLE D3D11 backend likely because of
     // the usage of the GL_STENCIL_INDEX8 format.
-    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11() &&
-                          GetParam().mTextureFormat == wgpu::TextureFormat::Stencil8);
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
 
     // stencilRefValue < stencilValue (stencilInitValue), so stencil test passes. The pipeline
     // samples from stencil buffer and writes into color buffer.
@@ -387,6 +386,10 @@ class ReadOnlyDepthAndStencilAttachmentTests : public ReadOnlyDepthStencilAttach
 
 // Test that using stencilReadOnly while modifying the depth aspect works.
 TEST_P(ReadOnlyDepthAndStencilAttachmentTests, ModifyDepthSampleStencil) {
+    // TODO(dawn:2163): The texture reads zeroes, maybe ANGLE's TextureStorageD3D11 is missing a
+    // copy between the storages?
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
+
     // Stencil test is always true but the depth test passes only for the
     TestSpec spec1;
     spec1.readonlyAspects = wgpu::TextureAspect::StencilOnly;
@@ -476,6 +479,9 @@ TEST_P(ReadOnlyDepthAndStencilAttachmentTests, BothReadOnlySampleDepth) {
 
 // Test sampling stencil with both the depth and stencil readonly.
 TEST_P(ReadOnlyDepthAndStencilAttachmentTests, BothReadOnlySampleStencil) {
+    // TODO(dawn:2163): The texture reads zeroes, maybe ANGLE's TextureStorageD3D11 is missing a
+    // copy between the storages?
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
     // Sample the stencil while using both depth an stencil testing.
 
     // First render: depth test passes only for the bottom half, stencil passes.
