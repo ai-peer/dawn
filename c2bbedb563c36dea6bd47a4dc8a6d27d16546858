@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3ee0443_f8177b27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T00:50:49Z",
+      "side": 1,
+      "message": "FYI I had to do a small change for error calls and use a system event because getting the queue from the device can fail if the last external ref of the device has been dropped.\n\nThis does cause a bit of an annoying side effect where it\u0027s possible for a WaitAny call to return UnsupportedMixedSorces even if we are only doing MapAsyncs, but that should be fixed as we move along with implementing Spontaneous mode and mixed sources.",
+      "revId": "c2bbedb563c36dea6bd47a4dc8a6d27d16546858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
