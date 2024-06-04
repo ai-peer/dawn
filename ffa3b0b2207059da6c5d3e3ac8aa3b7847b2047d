@@ -136,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35859b31_6bc5c4e3",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T04:47:44Z",
+      "side": 1,
+      "message": "Ok gotcha! Thanks for the explanation!",
+      "parentUuid": "0ad7667a_1cb415ba",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 60
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d41c544_45d5be74",
