@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd966d8_8870064c",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1014,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-04T17:49:34Z",
+      "side": 1,
+      "message": "```suggestion\n    auto* str \u003d construct-\u003eResult(0)-\u003eType()-\u003eAs\u003ctype::Struct\u003e()\n    if (!str) {\n      return;\n    }\n```",
+      "revId": "462a6b5742e95d2633a0b6a40b97aefb9766c60a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cb5812_68118d27",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-04T17:49:34Z",
+      "side": 1,
+      "message": "not a big deal, but why does this mark the first element as the error instead of the last? (Or all of them)",
+      "revId": "462a6b5742e95d2633a0b6a40b97aefb9766c60a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
