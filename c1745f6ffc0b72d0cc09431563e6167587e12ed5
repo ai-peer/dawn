@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d568b968_a97a1029",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T22:35:48Z",
+      "side": 1,
+      "message": "I\u0027m a bit questionable about doing the copy like this. I think maybe if we can map BOTH the buffer AND the texture without waiting, then it seems reasonable to do, especially on UMA platforms.\n\nMapping waits for the GPU to complete.\nIn the general case, either the texture or the buffer will be in use. Shouldn\u0027t we have a solution that requires no CPU/GPU synchronization? Even if there\u0027s an intermediate resource, I think a blit from texture -\u003e intermediate -\u003e buffer would be better than stalling and mapping.\n\nDefault texture mapping also seems useful for WriteTexture - we can check if we can map without waiting, and if so, map and memcpy the data in.",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c6de188_985bcfd3",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T22:35:48Z",
+      "side": 1,
+      "message": "can be const",
+      "range": {
+        "startLine": 286,
+        "startChar": 39,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67d72d9_1a2c1aac",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T22:35:48Z",
+      "side": 1,
+      "message": "nit: it\u0027s odd to mutate the member variable here. I think it would be better to call a helper and say:\n\nmUseDefaultTextureMapping \u003d SupportsDefaultTextureMapping(device, GetFormat(), desc);",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 43
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "418ea0ab_dec129d1",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T22:35:48Z",
+      "side": 1,
+      "message": "overall, this method reads the data in 2 ways. It either writes to `data`, or it passes the data to the ReadCallback. IMO we should not do it this way because it\u0027s confusing to know where the data will end up. You should instead have two separate methods so the distinction is clear.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 0,
+        "endLine": 1060,
+        "endChar": 5
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
