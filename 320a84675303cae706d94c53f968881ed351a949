@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5fda1d_5b6a72d9",
+        "filename": "src/dawn/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T22:17:19Z",
+      "side": 1,
+      "message": "ah, ok makes sense",
+      "parentUuid": "580b44bb_d2002de6",
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fedb29d5_06a173ce",
