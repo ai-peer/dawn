@@ -387,6 +387,9 @@ class ReadOnlyDepthAndStencilAttachmentTests : public ReadOnlyDepthStencilAttach
 
 // Test that using stencilReadOnly while modifying the depth aspect works.
 TEST_P(ReadOnlyDepthAndStencilAttachmentTests, ModifyDepthSampleStencil) {
+    // TODO(anglebug.com/344950145): assert failed in rx::TextureStorage11::verifySwizzleExists
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
+
     // Stencil test is always true but the depth test passes only for the
     TestSpec spec1;
     spec1.readonlyAspects = wgpu::TextureAspect::StencilOnly;
@@ -476,6 +479,8 @@ TEST_P(ReadOnlyDepthAndStencilAttachmentTests, BothReadOnlySampleDepth) {
 
 // Test sampling stencil with both the depth and stencil readonly.
 TEST_P(ReadOnlyDepthAndStencilAttachmentTests, BothReadOnlySampleStencil) {
+    // TODO(anglebug.com/344950145): assert failed in rx::TextureStorage11::verifySwizzleExists
+    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
     // Sample the stencil while using both depth an stencil testing.
 
     // First render: depth test passes only for the bottom half, stencil passes.
