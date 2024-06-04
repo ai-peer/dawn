@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a55f577_18dd9230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-04T19:03:33Z",
+      "side": 1,
+      "message": "PTAL. This is the minimized end2end test version of the CTS test which is causing failures in my upcoming GLSL bindings CL.",
+      "revId": "08bc38b22081eb90aa4661e640a06f9d2166b0c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
