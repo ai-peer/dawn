@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f84fa78_321a8cd4",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-04T09:57:04Z",
+      "side": 1,
+      "message": "Oh yes I agree that failing to create the STM and returning an error message to the client in this case seems like a friendly thing to do. We\u0027ll pick it up here [1] in that case. Also agree that doing this in followup (if it\u0027s not already present here) is fine.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/video_image_reader_image_backing.cc;l\u003d429-431?q\u003dvideo_image_reader\u0026ss\u003dchromium",
+      "parentUuid": "c8cdf6e3_c78b203e",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c169e1e_17bf2dae",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 29
