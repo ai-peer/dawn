@@ -143,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1316d41d_ce2b046a",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-04T17:56:08Z",
+      "side": 1,
+      "message": "Creating a factory creates a snapshot of the state of the adapters currently on the system. If the factory is no longer current, it just means that the list has changed in some way. Adapters may have been added, others may have disappeared. You can keep using adapters in the non-current list who\u0027s status has not changed but you\u0027ll need to create a new factory to get an updated list.\n\nYou can poll the factory to determine whether it is current. You can also be notified, via an event, when the list changes.\n\nReasons for the factory becoming non-current include, but are not limited to:\n* Logging into a machine via remote desktop.\n* Driver updates. Only software will appear in lists while drivers are being installed.\n* Attaching the tablet portion of a Surface Book into its corresponding keyboard. The NVidia adapter is housed behind the keyboard and becomes accessible upon attach.\n* Detaching the tablet portion of the Surface Book from its corresponding keyboard. If applications happen to be using the NVidia adapter when the user requests a disconnect, the user will receive a warning before they\u0027re allowed to proceed. If the user proceeds, D3D devices on the NVidia GPU will become removed.",
+      "parentUuid": "6aca8535_55d13b81",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29b56e5a_67f92d8c",
         "filename": "src/dawn/native/d3d/BackendD3D.cpp",
         "patchSetId": 4
