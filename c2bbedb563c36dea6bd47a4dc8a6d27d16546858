@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce99aae7_a90ac8ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T01:54:00Z",
+      "side": 1,
+      "message": "Queue has a ref to Device, so it\u0027s a ref-cycle issue.",
+      "parentUuid": "72e62611_83bec6f4",
+      "revId": "c2bbedb563c36dea6bd47a4dc8a6d27d16546858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2942185c_302fac5e",
