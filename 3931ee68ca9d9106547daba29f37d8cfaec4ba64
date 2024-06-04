@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec54b5ab_99b81928",
+        "filename": "src/dawn/native/d3d11/DeviceInfoD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T11:52:55Z",
+      "side": 1,
+      "message": "Sounds fair!",
+      "parentUuid": "6ea23d13_c055b0b7",
+      "range": {
+        "startLine": 49,
+        "startChar": 70,
+        "endLine": 49,
+        "endChar": 84
+      },
+      "revId": "3931ee68ca9d9106547daba29f37d8cfaec4ba64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7412273_5e82de82",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c09cb815_a42c0e22",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T11:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7412273_5e82de82",
+      "range": {
+        "startLine": 323,
+        "startChar": 68,
+        "endLine": 323,
+        "endChar": 72
+      },
+      "revId": "3931ee68ca9d9106547daba29f37d8cfaec4ba64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6489dba_23ec4398",
@@ -60,6 +108,30 @@
       "writtenOn": "2024-06-04T10:30:48Z",
       "side": 1,
       "message": "`D3D11Backend({\"d3d11_allow_default_texture_mapping\"}, {}), D3D11Backend({},{\"d3d11_allow_default_texture_mapping\"})`\n\nI think you can use this way to test both code paths.",
+      "range": {
+        "startLine": 267,
+        "startChar": 25,
+        "endLine": 267,
+        "endChar": 39
+      },
+      "revId": "3931ee68ca9d9106547daba29f37d8cfaec4ba64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79661ef_ab2059af",
+        "filename": "src/dawn/tests/perf_tests/TextureReadPerf.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-04T11:52:55Z",
+      "side": 1,
+      "message": "Cool, thanks!",
+      "parentUuid": "e6489dba_23ec4398",
       "range": {
         "startLine": 267,
         "startChar": 25,
