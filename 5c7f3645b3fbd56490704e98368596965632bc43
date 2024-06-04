@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb735d3a_18e4ee4c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T00:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef661e81_b167bd07",
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72f05c61_5178b608",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee7d66d_874e3dd9",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T00:50:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72f05c61_5178b608",
+      "range": {
+        "startLine": 477,
+        "startChar": 12,
+        "endLine": 477,
+        "endChar": 53
+      },
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71dad6d1_dc1b99d0",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-06-03T17:54:53Z",
       "side": 1,
       "message": "is this true? WaitAnyOnly events won\u0027t be captured by InstanceProcessEvents, right?",
+      "range": {
+        "startLine": 1673,
+        "startChar": 0,
+        "endLine": 1675,
+        "endChar": 0
+      },
+      "revId": "5c7f3645b3fbd56490704e98368596965632bc43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59446b5_e37073cd",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1675,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T00:50:59Z",
+      "side": 1,
+      "message": "I think it\u0027s probably true for now since the test infra probably wouldn\u0027t be able to deal with WaitAnyOnly events like this anyways without more stuff like tracking the Futures and such.",
+      "parentUuid": "71dad6d1_dc1b99d0",
       "range": {
         "startLine": 1673,
         "startChar": 0,
