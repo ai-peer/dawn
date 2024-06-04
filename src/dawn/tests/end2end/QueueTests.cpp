@@ -274,10 +274,9 @@ class QueueWriteTextureTests : public DawnTestWithParams<WriteTextureFormatParam
   protected:
     void SetUp() override {
         DawnTestWithParams::SetUp();
-        // TODO(crbug.com/dawn/2391): Stencil format is failing on ANGLE + SwiftShader, needs
+        // TODO(crbug.com/dawn/2391): Stencil8 format is failing on OpenGLES; needs
         // investigation.
-        DAWN_SUPPRESS_TEST_IF(IsANGLESwiftShader() &&
-                              utils::IsDepthOrStencilFormat(GetParam().mTextureFormat));
+        DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && GetParam().mTextureFormat == TextureFormat::Stencil8);
     }
 
     static DataSpec MinimumDataSpec(wgpu::Extent3D writeSize,
@@ -586,13 +585,6 @@ TEST_P(QueueWriteTextureTests, VaryingBytesPerRow) {
 // Test with bytesPerRow greater than needed for cube textures.
 // Made for testing compat behavior.
 TEST_P(QueueWriteTextureTests, VaryingBytesPerRowCube) {
-    // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 4 OpenGLES
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
-    // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsARM());
-    // TODO(crbug.com/dawn/2131): diagnose this failure on Win Angle D3D11
-    DAWN_SUPPRESS_TEST_IF(IsANGLED3D11());
-
     constexpr uint32_t kWidth = 257;
     constexpr uint32_t kHeight = 257;
 
