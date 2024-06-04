@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9394bdf5_dc1c1988",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "\"and not\"?",
+      "range": {
+        "startLine": 11,
+        "startChar": 36,
+        "endLine": 11,
+        "endChar": 42
+      },
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a7fca34_674a8592",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "Other backends do this in SubmitPendingCommands. I guess it doesn\u0027t matter whether it\u0027s inside or outside that though, since we submit immediately in this backend?",
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1378f1a1_ff40e197",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1652,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "nit: why AllowProcessEvents if using WaitAny?",
+      "range": {
+        "startLine": 1652,
+        "startChar": 55,
+        "endLine": 1652,
+        "endChar": 73
+      },
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267b9b2d_ec16d24b",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 1653,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "I think some compiler configs might complain about implicitly casting -1 to unsigned? But if it passes CQ I guess it\u0027s fine.",
+      "range": {
+        "startLine": 1653,
+        "startChar": 49,
+        "endLine": 1653,
+        "endChar": 51
+      },
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f41af2_4e091e61",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "nit: Could you assert/expect the status is Success and then just pass Success to callback directly?",
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1e91f2_5ab2c006",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T03:18:35Z",
+      "side": 1,
+      "message": "If I understand this test correctly, it isn\u0027t supposed to generate a (device-level) error at all according to the spec. We check for a pending map before even issuing device timeline steps.",
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
