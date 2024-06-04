@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1cce54_e5f99038",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T16:36:29Z",
+      "side": 1,
+      "message": "Ditto prefixing with Kotlin: to give more context in the commit message.",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6462801b_8962a4e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T16:36:29Z",
+      "side": 1,
+      "message": "u-nit: wrap the commit message a bit? Like 70-80 characters?\n\nFWIW I still think we\u0027ll need some support for manually writing things in the future. But it\u0027s good to have the full API covered with a first autogened version.",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cd791be_ba411339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-04T16:36:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
