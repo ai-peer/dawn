@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a7f189_06ac4fdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T00:54:24Z",
+      "side": 1,
+      "message": "LGTM with a few more comments",
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3488029c_300cbe39",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T00:54:24Z",
+      "side": 1,
+      "message": "this can be .load(acquire)",
+      "range": {
+        "startLine": 380,
+        "startChar": 44,
+        "endLine": 380,
+        "endChar": 63
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a4e233_99758405",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T00:54:24Z",
+      "side": 1,
+      "message": "this defaults to sequential consistency. we probably want acq_rel\n\nalso, prefer to use compare_exchange_strong for this case. Docs say:\n\u003e When compare_exchange_weak would require a loop and compare_exchange_strong would not, compare_exchange_strong is preferable",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 60
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d41c544_45d5be74",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T00:54:24Z",
+      "side": 1,
+      "message": "ditto - .load(acquire), and below too",
+      "range": {
+        "startLine": 473,
+        "startChar": 34,
+        "endLine": 473,
+        "endChar": 53
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
