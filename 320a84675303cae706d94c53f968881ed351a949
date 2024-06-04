@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "580b44bb_d2002de6",
+        "filename": "src/dawn/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T22:04:46Z",
+      "side": 1,
+      "message": "I **think** this shouldn\u0027t be necessary since this is only called once per test, and each test creates an entirely new instance?",
+      "parentUuid": "aea3c5f1_1c33fad5",
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fedb29d5_06a173ce",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-06-04T21:30:01Z",
       "side": 1,
       "message": "leftover commented code",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 90
+      },
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "372f9b05_8652f9b3",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T22:04:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fedb29d5_06a173ce",
       "range": {
         "startLine": 44,
         "startChar": 0,

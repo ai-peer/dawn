@@ -221,6 +221,24 @@
       "parentUuid": "9a1e91f2_5ab2c006",
       "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711cf3ad_acdd2fb2",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T22:04:46Z",
+      "side": 1,
+      "message": "As per our conversation offline, reverted this to be the same for now and will update the wire side to inject an error as well to make it consistent.",
+      "parentUuid": "1145e8c7_a7804f6c",
+      "revId": "b4adbe18d4945ebc5eb1d1723ed61eb3b2f5fd03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
