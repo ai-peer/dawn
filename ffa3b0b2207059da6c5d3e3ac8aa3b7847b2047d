@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ad7667a_1cb415ba",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T02:51:21Z",
+      "side": 1,
+      "message": "as I was typing response, I realize I was wrong. First of all, the original code should be:\n\n```\nwhile (lastProcessedEventID \u003c futureID \u0026\u0026\n                   !mLastProcessEventID.compare_exchange_weak(lastProcessedEventID, futureID)) {\n```\n\nnotice the \"!\".\n\n\nThe doc is saying that if you do:\n```\nwhile (!mLastProcessEventID.compare_exchange_weak(lastProcessedEventID, futureID)) {}\n```\n\nprefer:\n```\nmLastProcessEventID.compare_exchange_strong(lastProcessedEventID, futureID);\n```\n\nMy original suggestion was wrong because you don\u0027t have a trivial loop like that. You\u0027re checking `lastProcessedEventID \u003c futureID` as well.\n\nThe difference between weak/strong is that weak may spuriously do nothing at all and return false. Strong will not be spurious. It still may return false if the comparison fails.",
+      "parentUuid": "8401c93d_877c126f",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 60
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d41c544_45d5be74",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 5
