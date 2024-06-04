@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcd38850_06c05ba3",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-04T07:31:54Z",
+      "side": 1,
+      "message": "We\u0027re going to use this API at [1] once it lands. I had thought about erroring out if the external format is 0 there, but I ended up not adding it because we don\u0027t have any such explicit early-out for Ganesh [2]. I don\u0027t have any problem with doing so though - I\u0027ll create a CL to do that and send it to Vasiliy for review.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/video_image_reader_image_backing.cc;l\u003d419-425?q\u003dvideo_image_reader\u0026ss\u003dchromium\n[2] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/video_image_reader_image_backing.cc;l\u003d574-597?q\u003dvideo_image_reader\u0026ss\u003dchromium",
+      "parentUuid": "2bc26a66_91bc3ecc",
+      "revId": "1f6b59a71b53fe67eca0dfb0387b6f94b82b1136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c169e1e_17bf2dae",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 29
