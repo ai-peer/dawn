@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb855417_aa9a96d5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T02:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3488029c_300cbe39",
+      "range": {
+        "startLine": 380,
+        "startChar": 44,
+        "endLine": 380,
+        "endChar": 63
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56a4e233_99758405",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8401c93d_877c126f",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T02:00:42Z",
+      "side": 1,
+      "message": "Done, but I\u0027m actually not certain I understand (1) whether I updated it correctly, and (2) what the difference between strong/weak in this case given that the loop is pretty much a no-op?",
+      "parentUuid": "56a4e233_99758405",
+      "range": {
+        "startLine": 382,
+        "startChar": 39,
+        "endLine": 382,
+        "endChar": 60
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d41c544_45d5be74",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 5
@@ -77,6 +125,30 @@
       "writtenOn": "2024-06-04T00:54:24Z",
       "side": 1,
       "message": "ditto - .load(acquire), and below too",
+      "range": {
+        "startLine": 473,
+        "startChar": 34,
+        "endLine": 473,
+        "endChar": 53
+      },
+      "revId": "ffa3b0b2207059da6c5d3e3ac8aa3b7847b2047d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe56b35_0c01b4af",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-04T02:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d41c544_45d5be74",
       "range": {
         "startLine": 473,
         "startChar": 34,
