@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4608cf1_75871c51",
+        "filename": "src/dawn/native/d3d/UtilsD3D.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-04T23:25:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0122d894_388de796",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 65
+      },
+      "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf2ae7ba_5d65b31b",
@@ -71,6 +95,24 @@
       "writtenOn": "2024-06-04T23:01:26Z",
       "side": 1,
       "message": "can you file an issue about this problem(s) and link here so it\u0027s not lost?",
+      "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f28c7362_ac6770fc",
+        "filename": "src/dawn/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-04T23:25:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf2ae7ba_5d65b31b",
       "revId": "b7162c0ab2fb06e37098c214825d848095a8f519",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
