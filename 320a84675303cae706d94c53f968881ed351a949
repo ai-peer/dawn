@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "965f9752_373a5987",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T21:30:01Z",
+      "side": 1,
+      "message": "LGTM, some comments",
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea3c5f1_1c33fad5",
+        "filename": "src/dawn/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T21:30:01Z",
+      "side": 1,
+      "message": "nit: one thing you could do is put some incrementing value inside the shader text - to bust any of Dawn\u0027s pipeline caches so that this really hits the backend.",
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fedb29d5_06a173ce",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-04T21:30:01Z",
+      "side": 1,
+      "message": "leftover commented code",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 90
+      },
+      "revId": "320a84675303cae706d94c53f968881ed351a949",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
