@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7e6a6f_aa30499f",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-04T02:08:41Z",
+      "side": 1,
+      "message": "nit (sorry didn\u0027t think about this before): Mixed sources will still be an instance-enableable feature, IIRC, and programs targeting both wasm and dawn might not enable it. In order to strictly adhere to the C API contract I think we\u0027ll eventually need to avoid using a SystemEvent here.",
+      "range": {
+        "startLine": 177,
+        "startChar": 23,
+        "endLine": 177,
+        "endChar": 84
+      },
+      "revId": "c73177de9c4df65d8a3e35ed04dd056db45b4314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
