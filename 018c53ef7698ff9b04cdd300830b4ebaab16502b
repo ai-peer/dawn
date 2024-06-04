@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6e11d8_764a8ae4",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-04T17:23:08Z",
+      "side": 1,
+      "message": "Note: These changes were made so that `fix-tests` works properly.",
+      "revId": "018c53ef7698ff9b04cdd300830b4ebaab16502b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
