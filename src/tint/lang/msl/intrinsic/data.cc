@@ -74,6 +74,34 @@ using TemplateTypeMatcher = tint::core::intrinsic::TemplateTypeMatcher<N>;
 
 // clang-format off
 
+/// TypeMatcher for 'type bool'
+constexpr TypeMatcher kBoolMatcher {
+/* match */ [](MatchState& state, const Type* ty) -> const Type* {
+    if (!MatchBool(state, ty)) {
+      return nullptr;
+    }
+    return BuildBool(state, ty);
+  },
+/* print */ []([[maybe_unused]] MatchState* state, StyledText& out) {
+    out << style::Type("bool");
+  }
+};
+
+
+/// TypeMatcher for 'type i32'
+constexpr TypeMatcher kI32Matcher {
+/* match */ [](MatchState& state, const Type* ty) -> const Type* {
+    if (!MatchI32(state, ty)) {
+      return nullptr;
+    }
+    return BuildI32(state, ty);
+  },
+/* print */ []([[maybe_unused]] MatchState* state, StyledText& out) {
+    out << style::Type("i32");
+  }
+};
+
+
 /// TypeMatcher for 'type u32'
 constexpr TypeMatcher kU32Matcher {
 /* match */ [](MatchState& state, const Type* ty) -> const Type* {
@@ -88,15 +116,152 @@ constexpr TypeMatcher kU32Matcher {
 };
 
 
+/// TypeMatcher for 'type atomic'
+constexpr TypeMatcher kAtomicMatcher {
+/* match */ [](MatchState& state, const Type* ty) -> const Type* {
+  const Type* T = nullptr;
+    if (!MatchAtomic(state, ty, T)) {
+      return nullptr;
+    }
+    T = state.Type(T);
+    if (T == nullptr) {
+      return nullptr;
+    }
+    return BuildAtomic(state, ty, T);
+  },
+/* print */ []([[maybe_unused]] MatchState* state, StyledText& out) {StyledText T;
+  state->PrintType(T);
+    out << style::Type("atomic", "<", T, ">");
+  }
+};
+
+
+/// TypeMatcher for 'type ptr'
+constexpr TypeMatcher kPtrMatcher {
+/* match */ [](MatchState& state, const Type* ty) -> const Type* {
+  Number S = Number::invalid;
+  const Type* T = nullptr;
+  Number A = Number::invalid;
+    if (!MatchPtr(state, ty, S, T, A)) {
+      return nullptr;
+    }
+    S = state.Num(S);
+    if (!S.IsValid()) {
+      return nullptr;
+    }
+    T = state.Type(T);
+    if (T == nullptr) {
+      return nullptr;
+    }
+    A = state.Num(A);
+    if (!A.IsValid()) {
+      return nullptr;
+    }
+    return BuildPtr(state, ty, S, T, A);
+  },
+/* print */ []([[maybe_unused]] MatchState* state, StyledText& out) {StyledText S;
+  state->PrintNum(S);StyledText T;
+  state->PrintType(T);StyledText A;
+  state->PrintNum(A);
+    out << style::Type("ptr", "<", S, ", ", T, ", ", A, ">");
+  }
+};
+
+
+/// TypeMatcher for 'match iu32'
+constexpr TypeMatcher kIu32Matcher {
+/* match */ [](MatchState& state, const Type* ty) -> const Type* {
+    if (MatchI32(state, ty)) {
+      return BuildI32(state, ty);
+    }
+    if (MatchU32(state, ty)) {
+      return BuildU32(state, ty);
+    }
+    return nullptr;
+  },
+/* print */ [](MatchState*, StyledText& out) {
+    // Note: We pass nullptr to the Matcher.print() functions, as matchers do not support
+    // template arguments, nor can they match sub-types. As such, they have no use for the MatchState.
+ kI32Matcher.print(nullptr, out); out << style::Plain(" or "); kU32Matcher.print(nullptr, out);}
+};
+
+/// EnumMatcher for 'match read_write'
+constexpr NumberMatcher kReadWriteMatcher {
+/* match */ [](MatchState&, Number number) -> Number {
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::Access::kReadWrite)) {
+      return Number(static_cast<uint32_t>(core::Access::kReadWrite));
+    }
+    return Number::invalid;
+  },
+/* print */ [](MatchState*, StyledText& out) {
+  out<< style::Enum("read_write");
+  }
+};
+
+/// EnumMatcher for 'match function'
+constexpr NumberMatcher kFunctionMatcher {
+/* match */ [](MatchState&, Number number) -> Number {
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::AddressSpace::kFunction)) {
+      return Number(static_cast<uint32_t>(core::AddressSpace::kFunction));
+    }
+    return Number::invalid;
+  },
+/* print */ [](MatchState*, StyledText& out) {
+  out<< style::Enum("function");
+  }
+};
+
+/// EnumMatcher for 'match workgroup_or_storage'
+constexpr NumberMatcher kWorkgroupOrStorageMatcher {
+/* match */ [](MatchState&, Number number) -> Number {
+    switch (static_cast<core::AddressSpace>(number.Value())) {
+      case core::AddressSpace::kWorkgroup:
+      case core::AddressSpace::kStorage:
+        return number;
+      default:
+        return Number::invalid;
+    }
+  },
+/* print */ [](MatchState*, StyledText& out) {
+  out<< style::Enum("workgroup")<< style::Plain(" or ") << style::Enum("storage");
+  }
+};
+
 /// Type and number matchers
 
 /// The template types, types, and type matchers
 constexpr TypeMatcher kTypeMatchers[] = {
-  /* [0] */ kU32Matcher,
+  /* [0] */ TemplateTypeMatcher<0>::matcher,
+  /* [1] */ TemplateTypeMatcher<1>::matcher,
+  /* [2] */ kBoolMatcher,
+  /* [3] */ kI32Matcher,
+  /* [4] */ kU32Matcher,
+  /* [5] */ kAtomicMatcher,
+  /* [6] */ kPtrMatcher,
+  /* [7] */ kIu32Matcher,
+};
+
+/// The template numbers, and number matchers
+constexpr NumberMatcher kNumberMatchers[] = {
+  /* [0] */ TemplateNumberMatcher<0>::matcher,
+  /* [1] */ TemplateNumberMatcher<1>::matcher,
+  /* [2] */ kReadWriteMatcher,
+  /* [3] */ kFunctionMatcher,
+  /* [4] */ kWorkgroupOrStorageMatcher,
 };
 
 constexpr MatcherIndex kMatcherIndices[] = {
-  /* [0] */ MatcherIndex(0),
+  /* [0] */ MatcherIndex(6),
+  /* [1] */ MatcherIndex(1),
+  /* [2] */ MatcherIndex(5),
+  /* [3] */ MatcherIndex(0),
+  /* [4] */ MatcherIndex(2),
+  /* [5] */ MatcherIndex(6),
+  /* [6] */ MatcherIndex(3),
+  /* [7] */ MatcherIndex(0),
+  /* [8] */ MatcherIndex(2),
+  /* [9] */ MatcherIndex(7),
+  /* [10] */ MatcherIndex(4),
 };
 
 static_assert(MatcherIndicesIndex::CanIndex(kMatcherIndices),
@@ -108,20 +273,127 @@ constexpr ParameterInfo kParameters[] = {
     /* usage */ core::ParameterUsage::kNone,
     /* matcher_indices */ MatcherIndicesIndex(0),
   },
+  {
+    /* [1] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(5),
+  },
+  {
+    /* [2] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(3),
+  },
+  {
+    /* [3] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(10),
+  },
+  {
+    /* [4] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(10),
+  },
+  {
+    /* [5] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(0),
+  },
+  {
+    /* [6] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(3),
+  },
+  {
+    /* [7] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(10),
+  },
+  {
+    /* [8] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(0),
+  },
+  {
+    /* [9] */
+    /* usage */ core::ParameterUsage::kNone,
+    /* matcher_indices */ MatcherIndicesIndex(10),
+  },
 };
 
 static_assert(ParameterIndex::CanIndex(kParameters),
               "ParameterIndex is not large enough to index kParameters");
 
+constexpr TemplateInfo kTemplates[] = {
+  {
+    /* [0] */
+    /* name */ "T",
+    /* matcher_indices */ MatcherIndicesIndex(9),
+    /* kind */ TemplateInfo::Kind::kType,
+  },
+  {
+    /* [1] */
+    /* name */ "S",
+    /* matcher_indices */ MatcherIndicesIndex(10),
+    /* kind */ TemplateInfo::Kind::kNumber,
+  },
+};
+
+static_assert(TemplateIndex::CanIndex(kTemplates),
+              "TemplateIndex is not large enough to index kTemplates");
+
 constexpr OverloadInfo kOverloads[] = {
   {
     /* [0] */
+    /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
+    /* num_parameters */ 5,
+    /* num_explicit_templates */ 0,
+    /* num_templates   */ 2,
+    /* templates */ TemplateIndex(0),
+    /* parameters */ ParameterIndex(0),
+    /* return_matcher_indices */ MatcherIndicesIndex(4),
+    /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
+  },
+  {
+    /* [1] */
+    /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
+    /* num_parameters */ 3,
+    /* num_explicit_templates */ 0,
+    /* num_templates   */ 2,
+    /* templates */ TemplateIndex(0),
+    /* parameters */ ParameterIndex(5),
+    /* return_matcher_indices */ MatcherIndicesIndex(3),
+    /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
+  },
+  {
+    /* [2] */
+    /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
+    /* num_parameters */ 2,
+    /* num_explicit_templates */ 0,
+    /* num_templates   */ 2,
+    /* templates */ TemplateIndex(0),
+    /* parameters */ ParameterIndex(8),
+    /* return_matcher_indices */ MatcherIndicesIndex(3),
+    /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
+  },
+  {
+    /* [3] */
+    /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
+    /* num_parameters */ 3,
+    /* num_explicit_templates */ 0,
+    /* num_templates   */ 2,
+    /* templates */ TemplateIndex(0),
+    /* parameters */ ParameterIndex(5),
+    /* return_matcher_indices */ MatcherIndicesIndex(/* invalid */),
+    /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
+  },
+  {
+    /* [4] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 1,
     /* num_explicit_templates */ 0,
     /* num_templates   */ 0,
     /* templates */ TemplateIndex(/* invalid */),
-    /* parameters */ ParameterIndex(0),
+    /* parameters */ ParameterIndex(3),
     /* return_matcher_indices */ MatcherIndicesIndex(/* invalid */),
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
@@ -133,9 +405,75 @@ static_assert(OverloadIndex::CanIndex(kOverloads),
 constexpr IntrinsicInfo kBuiltins[] = {
   {
     /* [0] */
-    /* fn threadgroup_barrier(u32) */
+    /* fn atomic_compare_exchange_weak_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, ptr<function, T, read_write>, T, u32, u32) -> bool */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(0),
+  },
+  {
+    /* [1] */
+    /* fn atomic_exchange_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [2] */
+    /* fn atomic_fetch_add_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [3] */
+    /* fn atomic_fetch_and_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [4] */
+    /* fn atomic_fetch_max_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [5] */
+    /* fn atomic_fetch_min_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [6] */
+    /* fn atomic_fetch_or_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [7] */
+    /* fn atomic_fetch_sub_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [8] */
+    /* fn atomic_fetch_xor_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(1),
+  },
+  {
+    /* [9] */
+    /* fn atomic_load_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, u32) -> T */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(2),
+  },
+  {
+    /* [10] */
+    /* fn atomic_store_explicit[T : iu32, S : workgroup_or_storage](ptr<S, atomic<T>, read_write>, T, u32) */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(3),
+  },
+  {
+    /* [11] */
+    /* fn threadgroup_barrier(u32) */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(4),
   },
 };
 
@@ -144,10 +482,10 @@ constexpr IntrinsicInfo kBuiltins[] = {
 }  // anonymous namespace
 
 const core::intrinsic::TableData Dialect::kData{
-    /* templates */ Empty,
+    /* templates */ kTemplates,
     /* type_matcher_indices */ kMatcherIndices,
     /* type_matchers */ kTypeMatchers,
-    /* number_matchers */ Empty,
+    /* number_matchers */ kNumberMatchers,
     /* parameters */ kParameters,
     /* overloads */ kOverloads,
     /* const_eval_functions */ Empty,

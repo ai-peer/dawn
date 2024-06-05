@@ -144,7 +144,7 @@ class ValidationTest : public testing::Test {
     bool UsesWire() const;
 
     void FlushWire();
-    void WaitForAllOperations(const wgpu::Device& device);
+    void WaitForAllOperations();
 
     // Helper functions to create objects to test validation.
 

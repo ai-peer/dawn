@@ -66,7 +66,7 @@
 #include "src/tint/lang/core/ir/terminate_invocation.h"
 #include "src/tint/lang/core/ir/unreachable.h"
 #include "src/tint/lang/core/ir/user_call.h"
-#include "src/tint/lang/core/ir/value.h"
+#include "src/tint/lang/core/ir/value.h"  // IWYU pragma: export
 #include "src/tint/lang/core/ir/var.h"
 #include "src/tint/lang/core/type/array.h"  // IWYU pragma: export
 #include "src/tint/lang/core/type/bool.h"   // IWYU pragma: export
@@ -76,6 +76,7 @@
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/memory_view.h"
 #include "src/tint/lang/core/type/pointer.h"  // IWYU pragma: export
+#include "src/tint/lang/core/type/type.h"     // IWYU pragma: export
 #include "src/tint/lang/core/type/u32.h"      // IWYU pragma: export
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"  // IWYU pragma: export

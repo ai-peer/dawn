@@ -257,22 +257,13 @@ void ValidationTest::FlushWire() {
     EXPECT_TRUE(mWireHelper->FlushServer());
 }
 
-void ValidationTest::WaitForAllOperations(const wgpu::Device& waitDevice) {
-    bool done = false;
-    waitDevice.GetQueue().OnSubmittedWorkDone(
-        [](WGPUQueueWorkDoneStatus, void* userdata) { *static_cast<bool*>(userdata) = true; },
-        &done);
-
-    // Force the currently submitted operations to completed.
-    while (!done) {
-        instance.ProcessEvents();
+void ValidationTest::WaitForAllOperations() {
+    do {
         FlushWire();
-    }
-
-    // TODO(cwallez@chromium.org): It's not clear why we need this additional tick. Investigate it
-    // once WebGPU has defined the ordering of callbacks firing.
-    waitDevice.Tick();
-    FlushWire();
+        if (UsesWire()) {
+            instance.ProcessEvents();
+        }
+    } while (dawn::native::InstanceProcessEvents(mDawnInstance->Get()) || !mWireHelper->IsIdle());
 }
 
 const dawn::native::ToggleInfo* ValidationTest::GetToggleInfo(const char* name) const {

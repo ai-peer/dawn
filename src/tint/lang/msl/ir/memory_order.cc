@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_UTILSD3D_H_
-#define SRC_DAWN_NATIVE_D3D_UTILSD3D_H_
+#include "src/tint/lang/msl/ir/memory_order.h"
 
-#include <string>
+#include "src/tint/lang/core/constant/value.h"
+#include "src/tint/utils/rtti/castable.h"
 
-#include "dawn/native/Error.h"
-#include "dawn/native/d3d/d3d_platform.h"
+TINT_INSTANTIATE_TYPEINFO(tint::msl::ir::MemoryOrder);
 
-namespace dawn::native::d3d {
+namespace tint::msl::ir {
 
-ResultOrError<std::wstring> ConvertStringToWstring(std::string_view s);
+MemoryOrder::MemoryOrder(const core::constant::Value* value) : Base(value) {}
 
-bool IsTypeless(DXGI_FORMAT format);
+MemoryOrder::~MemoryOrder() = default;
 
-bool IsDepthStencil(DXGI_FORMAT format);
-
-uint64_t MakeDXCVersion(uint64_t majorVersion, uint64_t minorVersion);
-
-DXGI_FORMAT DXGITypelessTextureFormat(const DeviceBase* device, wgpu::TextureFormat format);
-DXGI_FORMAT DXGITextureFormat(const DeviceBase* device, wgpu::TextureFormat format);
-
-ResultOrError<wgpu::TextureFormat> FromUncompressedColorDXGITextureFormat(DXGI_FORMAT format);
-
-DXGI_FORMAT DXGIVertexFormat(wgpu::VertexFormat format);
-
-// Returns the DXGI format to use as the SRV format for a texture view. Returns
-// DXGI_FORMAT_UNKNOWN if a single aspect is not selected.
-DXGI_FORMAT D3DShaderResourceViewFormat(const DeviceBase* device,
-                                        const Format& textureFormat,
-                                        const Format& viewFormat,
-                                        Aspect aspects);
-
-}  // namespace dawn::native::d3d
-
-#endif  // SRC_DAWN_NATIVE_D3D_UTILSD3D_H_
+}  // namespace tint::msl::ir
