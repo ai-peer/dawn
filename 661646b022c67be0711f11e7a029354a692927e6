@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f6f4b9_300f8836",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-05T07:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62be9542_3c835a2d",
+      "range": {
+        "startLine": 11,
+        "startChar": 76,
+        "endLine": 11,
+        "endChar": 124
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "150f7120_3f60c6ed",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-05-28T22:31:09Z",
       "side": 1,
       "message": "For Windows we want to use JUST the order returned by `EnumAdaptersByPowerPreference` or `EnumAdapters1` with no second guessing by Dawn. \n\n* End users can adjust the order of adapters in \"Settings \u003e System \u003e Display \u003e Graphics\".\n* On my desktop machine, I\u0027ve connected all of my monitors to the NVidia GPU even though there is an \"integrated\" Intel GPU available. \n\nSecond guessing means the incorrect adapter can be chosen in the above two instances.",
+      "range": {
+        "startLine": 421,
+        "startChar": 15,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e5946a_2a927c34",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-05T07:55:21Z",
+      "side": 1,
+      "message": "Is there any way in DXGI to determine whether an IDXGIAdapter is a discrete or integrated GPU? Ideally, we would set the [mAdapterType](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/PhysicalDevice.h?q\u003dsymbol%3A%5Cbdawn%3A%3Anative%3A%3APhysicalDeviceBase%3A%3AmAdapterType%5Cb%20case%3Ayes) correctly initially for cases where `EnumAdaptersByGpuPreference` is used, and then this function can be left as-is for a no-op since the `stable_sort` below would preserve the order.\n\nIf not, we would have to move the sorting into the Instance or the Backend so that we can avoid doing it for D3D. This complicates things for scenarios where there are multiple backends, since the current sorting sorts by the inferred power preference first, followed by the backend, which could end up interweaving adapters from different backends.",
+      "parentUuid": "150f7120_3f60c6ed",
       "range": {
         "startLine": 421,
         "startChar": 15,
@@ -191,6 +239,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81aca986_4f07801c",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-05T07:55:21Z",
+      "side": 1,
+      "message": "I have a follow-up change coming up that will check for whether an Adapter of the requested power preference from Dawn is currently being used and if so, return that instead of re-enumerating. This should prevent multiple users of Dawn from being given different adapters of the same power preference. For example, here\u0027s what would happen in this scenario (assuming same power preference requested):\n- WebGPU requests an adapter from Dawn.\n- Dawn enumerates and returns the first adapter matching the power preference.\n- Since WebGPU takes a strong reference on the adapter, it won\u0027t be cleaned up and still available in Dawn.\n- WebNN requests an adapter from Dawn.\n- Since there\u0027s a strong reference to an adapter, Dawn returns that adapter to WebNN instead of re-enumerating.\n\nWhat are your thoughts on that @Austin?",
+      "parentUuid": "5731bd78_2f2d0c73",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668d2523_7aedac84",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-05T07:55:21Z",
+      "side": 1,
+      "message": "Removing the IsCurrent check pending discussion in other thread.\n\nIf we add it back, I\u0027ll replace `mFactory` only if creating the new one succeeds - this seems fine since the adapters from an old `mFactory` are still valid.",
+      "parentUuid": "661a8f34_db39d936",
+      "range": {
+        "startLine": 138,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 27
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29b56e5a_67f92d8c",
         "filename": "src/dawn/native/d3d/BackendD3D.cpp",
         "patchSetId": 4
@@ -202,6 +298,30 @@
       "writtenOn": "2024-05-28T22:31:09Z",
       "side": 1,
       "message": "```suggestion\n        ComPtr\u003cIDXGIAdapter1\u003e dxgiAdapter;\n```\n\nThe constructor of ComPtr already initializes the pointer member variable to nullptr.",
+      "range": {
+        "startLine": 357,
+        "startChar": 42,
+        "endLine": 357,
+        "endChar": 51
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90203c3d_36501842",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-05T07:55:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29b56e5a_67f92d8c",
       "range": {
         "startLine": 357,
         "startChar": 42,
