@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,27 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_API_OPTIONS_BINDING_REMAPPER_H_
-#define SRC_TINT_API_OPTIONS_BINDING_REMAPPER_H_
+// CMake requires that targets contain at least on file. This file is used when we want to create
+// empty targets.
 
-#include <unordered_map>
-
-#include "src/tint/api/common/binding_point.h"
-
-namespace tint {
-
-/// Options used to specify mappings of binding points.
-struct BindingRemapperOptions {
-    /// BindingPoints is a map of old binding point to new binding point
-    using BindingPoints = std::unordered_map<BindingPoint, BindingPoint>;
-
-    /// A map of old binding point to new binding point
-    BindingPoints binding_points;
-
-    /// Reflect the fields of this class so that it can be used by tint::ForeachField()
-    TINT_REFLECT(BindingRemapperOptions, binding_points);
-};
-
-}  // namespace tint
-
-#endif  // SRC_TINT_API_OPTIONS_BINDING_REMAPPER_H_
+int someSymbolToMakeXCodeHappy = 0;
