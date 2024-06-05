@@ -39,6 +39,30 @@
       },
       "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a9f093e_55d61e9b",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-05T12:26:09Z",
+      "side": 1,
+      "message": "Now in Tint it is not allowed to only use `@blend_src(0)` without `@blend_src(1)`, so it is meaningless to reflect such shader module.",
+      "parentUuid": "6e4e6301_efab6362",
+      "range": {
+        "startLine": 810,
+        "startChar": 39,
+        "endLine": 810,
+        "endChar": 47
+      },
+      "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
