@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4dfb227_8cb0294d",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-05T14:00:36Z",
+      "side": 1,
+      "message": "Instead of using a `bool` flag, could we use an enum instead and pass that around? I find it easier to read `ValidationMode::kCompat` then `/* compat validation */ true`. We could pass the same enum flag through from the dawn side. It would be something like:\n\n```\nenum class ValidationMode : uint8_t {\n  kCompat \u003d 0,\n  kFull,\n}\n```\n\nOr some better name for full?",
+      "revId": "1c90012158b3c6b3b232dbefdc7a9158ee701f3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
