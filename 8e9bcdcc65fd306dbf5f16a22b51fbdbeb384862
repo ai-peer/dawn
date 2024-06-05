@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee93bca9_b8c29dc9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b1cce54_e5f99038",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6462801b_8962a4e8",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-04T16:36:29Z",
       "side": 1,
       "message": "u-nit: wrap the commit message a bit? Like 70-80 characters?\n\nFWIW I still think we\u0027ll need some support for manually writing things in the future. But it\u0027s good to have the full API covered with a first autogened version.",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ace2307_56238d07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6462801b_8962a4e8",
       "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
