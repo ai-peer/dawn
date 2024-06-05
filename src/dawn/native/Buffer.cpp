@@ -285,7 +285,12 @@ ResultOrError<UnpackedPtr<BufferDescriptor>> ValidateBufferDescriptor(
 
     DAWN_INVALID_IF(usage == wgpu::BufferUsage::None, "Buffer usages must not be 0.");
 
-    if (!device->HasFeature(Feature::BufferMapExtendedUsages)) {
+    if (device->HasFeature(Feature::BufferMapExtendedUsages)) {
+        DAWN_INVALID_IF(
+            IsSubset(wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::QueryResolve, usage),
+            "Buffer usages (%s) is invalid. If a buffer usage contains %s, it cannot contain %s.",
+            usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::QueryResolve);
+    } else {
         const wgpu::BufferUsage kMapWriteAllowedUsages =
             wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
         DAWN_INVALID_IF(
@@ -484,6 +489,10 @@ MaybeError BufferBase::MapAtCreationInternal() {
     // staging buffer, we will have issues when we try to destroy the buffer.
     mState = BufferState::MappedAtCreation;
     return {};
+}
+
+wgpu::MapMode BufferBase::GetMapMode() const {
+    return mMapMode;
 }
 
 MaybeError BufferBase::ValidateCanUseOnQueueNow() const {

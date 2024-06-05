@@ -291,6 +291,8 @@ MaybeError MonitoredQueue::Initialize() {
 MaybeError MonitoredQueue::NextSerial() {
     auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
 
+    DAWN_TRY(commandContext.ApplySyncingWithCPUForBuffers());
+
     IncrementLastSubmittedCommandSerial();
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
@@ -335,6 +337,8 @@ MaybeError UnmonitoredQueue::Initialize() {
 
 MaybeError UnmonitoredQueue::NextSerial() {
     auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+
+    DAWN_TRY(commandContext.ApplySyncingWithCPUForBuffers());
 
     IncrementLastSubmittedCommandSerial();
     ExecutionSerial lastSubmittedSerial = GetLastSubmittedCommandSerial();

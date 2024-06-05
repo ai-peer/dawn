@@ -146,6 +146,8 @@ class BufferBase : public SharedResource {
 
     MaybeError MapAtCreationInternal();
 
+    wgpu::MapMode GetMapMode() const;
+
     uint64_t mAllocatedSize = 0;
 
     ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
@@ -159,6 +161,7 @@ class BufferBase : public SharedResource {
     virtual void UnmapImpl() = 0;
 
     virtual bool IsCPUWritableAtCreation() const = 0;
+
     MaybeError CopyFromStagingBuffer();
 
     MaybeError ValidateMapAsync(wgpu::MapMode mode,
