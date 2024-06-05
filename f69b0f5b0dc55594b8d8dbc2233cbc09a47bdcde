@@ -16,6 +16,24 @@
       "message": "nit: async",
       "revId": "f69b0f5b0dc55594b8d8dbc2233cbc09a47bdcde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94389f00_01b962ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fab3c9d_5cb1f2a1",
+      "revId": "f69b0f5b0dc55594b8d8dbc2233cbc09a47bdcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

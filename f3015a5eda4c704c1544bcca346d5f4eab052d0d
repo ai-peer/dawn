@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7deff3df_13edb24b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "76a144bb_50b8728d",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66ffbe48_6d358ccf",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-06-04T13:14:25Z",
       "side": 1,
       "message": "What are the ones that don\u0027t end in Callback?",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "242752f0_df73dde5",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:56Z",
+      "side": 1,
+      "message": "One is just called \u0027proc\u0027.",
+      "parentUuid": "66ffbe48_6d358ccf",
       "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "462b7b0f_368cde7f",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6051f77a_66d397ed",
+      "range": {
+        "startLine": 40,
+        "startChar": 68,
+        "endLine": 40,
+        "endChar": 73
+      },
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d1320f5_a15f30ff",
@@ -105,6 +165,24 @@
       "writtenOn": "2024-06-04T13:14:25Z",
       "side": 1,
       "message": "That seems quite brittle, but should potentially get better with WGPUFuture since we\u0027ll be more explicit on what\u0027s a callback. Maybe at least add an assert here?",
+      "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "326f386d_17ff85cd",
+        "filename": "generator/templates/art/api_kotlin_async_helpers.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0d1320f5_a15f30ff",
       "revId": "f3015a5eda4c704c1544bcca346d5f4eab052d0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
