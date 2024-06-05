@@ -16,6 +16,24 @@
       "message": "In general can you prefix commit message with Kotlin? Otherwise it\u0027s really not clear in the commit log what this is.",
       "revId": "df83b044a15db1d4178a4873fb0247b5874727ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe4f4e11_0f880b0b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-05T12:20:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "333a243a_26c9e4fa",
+      "revId": "df83b044a15db1d4178a4873fb0247b5874727ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
