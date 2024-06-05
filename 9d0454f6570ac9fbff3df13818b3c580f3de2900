@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d391b94_0cac390f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T17:29:07Z",
+      "side": 1,
+      "message": "PTAL, I\u0027ll land this after https://chromium-review.googlesource.com/c/chromium/src/+/5600765 is landed in Chromium.",
+      "revId": "9d0454f6570ac9fbff3df13818b3c580f3de2900",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
