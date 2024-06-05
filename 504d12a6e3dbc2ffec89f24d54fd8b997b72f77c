@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ab43d2_7083ac84",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:03:40Z",
+      "side": 1,
+      "message": "is it possible to add a test for it?",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
