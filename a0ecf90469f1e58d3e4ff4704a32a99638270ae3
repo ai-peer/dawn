@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeb124f7_687aecf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-05T13:23:07Z",
+      "side": 1,
+      "message": "BTW, you could probably add https://issues.chromium.org/issues/42241384 to the bug list.",
+      "revId": "a0ecf90469f1e58d3e4ff4704a32a99638270ae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e8845ed_7b46bd94",
