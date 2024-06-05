@@ -98,9 +98,9 @@ static constexpr std::array<ExtensionInfo, kExtensionCount> kExtensionInfos{{
 
 #define GET_PROC(name) GET_PROC_WITH_NAME(name, "egl" #name)
 
-MaybeError EGLFunctions::LoadClientProcs(void* (*getProc)(const char*)) {
+MaybeError EGLFunctions::LoadClientProcs(EGLGetProcProc getProc) {
     // Load EGL 1.0
-    GetProcAddress = reinterpret_cast<decltype(GetProcAddress)>(getProc);
+    GetProcAddress = getProc;
 
     GET_PROC(ChooseConfig);
     GET_PROC(CopyBuffers);

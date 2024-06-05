@@ -65,7 +65,7 @@ enum class EGLExt {
 // (taking into account the ones that have been promoted to core EGL versions).
 class EGLFunctions {
   public:
-    MaybeError LoadClientProcs(void* (*getProc)(const char*));
+    MaybeError LoadClientProcs(EGLGetProcProc getProc);
     MaybeError LoadDisplayProcs(EGLDisplay display);
 
     uint32_t GetMajorVersion() const;
