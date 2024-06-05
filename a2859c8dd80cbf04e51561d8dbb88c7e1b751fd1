@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63bdb8dc_99d60089",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:34:29Z",
+      "side": 1,
+      "message": "nit: no need for \"dawn:\" now after the bug tracker migration",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "374b1acf_78ce4150",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:34:29Z",
+      "side": 1,
+      "message": "note that this is tested in StaticSamplerTest in src/dawn/tests/end2end/SamplerTests.cpp\n\nit should be possible to (try?) to make another test there which makes a ridiculous number of static samplers - and see if we can hit the max limit in D3D12.\nIt would be good to know if/where the driver surfaces the error - at CreateRootSignature ?\n\nThat can be a separate CL though",
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f43f7b5_73733226",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:34:29Z",
+      "side": 1,
+      "message": "why continue? the bind group layout could also have other bindings in it - like buffer bindings, or non-static sampler bindings, etc.\n\nwe should expand the tests to include other types of bindings so we\u0027re sure the layout is produced correctly",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 21
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc39e13d_3a9e8610",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:34:29Z",
+      "side": 1,
+      "message": "this TODO should probably be addressed",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
