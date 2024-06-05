@@ -953,5 +953,15 @@ TEST_F(CoreIntrinsicTableTest, Err257Arguments) {  // crbug.com/1323605
     ASSERT_THAT(result.Failure().Plain(), HasSubstr("no matching call"));
 }
 
+TEST_F(CoreIntrinsicTableTest, MismatchMemberFunction) {
+    auto* arr =
+        create<type::Array>(create<type::F32>(), create<type::RuntimeArrayCount>(), 4u, 4u, 4u, 4u);
+    auto result =
+        table.Lookup(BuiltinFn::kArrayLength, arr, Empty, Empty, EvaluationStage::kConstant);
+    ASSERT_NE(result, Success);
+    EXPECT_EQ(result.Failure().Plain(), R"(no matching call to 'arrayLength(array<f32>)'
+)");
+}
+
 }  // namespace
 }  // namespace tint::core::intrinsic
