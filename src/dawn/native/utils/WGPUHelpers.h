@@ -36,10 +36,14 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/UsageValidationMode.h"
 #include "dawn/native/dawn_platform.h"
+#include "tint/lang/wgsl/extension.h"
 
 namespace dawn::native::utils {
 
-ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(DeviceBase* device, const char* source);
+ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(
+    DeviceBase* device,
+    const char* source,
+    const std::vector<tint::wgsl::Extension>& internalExtensions = {});
 
 ResultOrError<Ref<BufferBase>> CreateBufferFromData(DeviceBase* device,
                                                     wgpu::BufferUsage usage,
