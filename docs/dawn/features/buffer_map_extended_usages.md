@@ -3,6 +3,9 @@
 ## Overview:
  - The `wgpu::Feature::BufferMapExtendedUsages` feature allows creating a buffer with `wgpu::BufferUsage::MapRead` and/or `wgpu::BufferUsage::MapWrite` and any other `wgpu::BufferUsage`.
 
+## Restrictons
+ - `wgpu::BufferUsage::MapWrite` cannot be used with `wgpu::BufferUsage::QueryResolve`.
+
 ### Example Usage:
 ```
 wgpu::BufferDescriptor descriptor;
