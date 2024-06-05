@@ -146,6 +146,18 @@ void ScopedCommandRecordingContext::SetNeedsFence() const {
     Get()->mNeedsFence = true;
 }
 
+void ScopedCommandRecordingContext::AddBufferForSyncingWithCPU(Buffer* buffer) const {
+    Get()->mBuffersToSyncWithCPU.push_back(buffer);
+}
+
+MaybeError ScopedCommandRecordingContext::ApplySyncingWithCPUForBuffers() const {
+    for (auto buffer : Get()->mBuffersToSyncWithCPU) {
+        DAWN_TRY(buffer->SyncD3D11CPUAccessibleBuffers(this));
+    }
+    Get()->mBuffersToSyncWithCPU.clear();
+    return {};
+}
+
 ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
     CommandRecordingContextGuard&& guard)
     : ScopedCommandRecordingContext(std::move(guard)),
