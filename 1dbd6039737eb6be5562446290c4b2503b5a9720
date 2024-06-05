@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "698ce225_819df113",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T15:59:48Z",
+      "side": 1,
+      "message": "I would need a +2 again. It\u0027s lost after latest patchset.",
+      "revId": "1dbd6039737eb6be5562446290c4b2503b5a9720",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
