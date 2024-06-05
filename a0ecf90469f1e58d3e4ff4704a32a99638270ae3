@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "a0ecf90469f1e58d3e4ff4704a32a99638270ae3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd3a781_a254243e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-05T13:22:11Z",
+      "side": 1,
+      "message": "Fantastic work! Thanks so much for taking this on.\n\nLGTM",
+      "revId": "a0ecf90469f1e58d3e4ff4704a32a99638270ae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8845ed_7b46bd94",
+        "filename": "src/dawn/native/opengl/EGLFunctions.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-05T13:22:11Z",
+      "side": 1,
+      "message": "Not required in this CL, but we should consider delcaring getProc as PFNEGLGETPROCADDRESSPROC. It allow us to skip the reinterpret_cast, and would avoid bugs like https://issues.chromium.org/issues/343870490.\n\nThe downside: it may require making a dependency on egl.h in OpenGLBackend.h.",
+      "revId": "a0ecf90469f1e58d3e4ff4704a32a99638270ae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
