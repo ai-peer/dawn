@@ -284,7 +284,6 @@ bool ASTPrinter::Generate() {
             Vector{
                 wgsl::Extension::kChromiumDisableUniformityAnalysis,
                 wgsl::Extension::kChromiumExperimentalPushConstant,
-                wgsl::Extension::kChromiumInternalDualSourceBlending,
                 wgsl::Extension::kChromiumInternalGraphite,
                 wgsl::Extension::kF16,
                 wgsl::Extension::kDualSourceBlending,
@@ -386,8 +385,7 @@ void ASTPrinter::RecordExtension(const ast::Enable* enable) {
         requires_f16_extension_ = true;
     }
 
-    if (enable->HasExtension(wgsl::Extension::kChromiumInternalDualSourceBlending) ||
-        enable->HasExtension(wgsl::Extension::kDualSourceBlending)) {
+    if (enable->HasExtension(wgsl::Extension::kDualSourceBlending)) {
         requires_dual_source_blending_extension_ = true;
     }
 }
