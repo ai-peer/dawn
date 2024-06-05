@@ -28,20 +28,29 @@
 #ifndef INCLUDE_DAWN_NATIVE_OPENGLBACKEND_H_
 #define INCLUDE_DAWN_NATIVE_OPENGLBACKEND_H_
 
-using EGLDisplay = void*;
-using EGLImage = void*;
-using GLuint = unsigned int;
-
 #include "dawn/native/DawnNative.h"
 #include "webgpu/webgpu_cpp_chained_struct.h"
 
 namespace dawn::native::opengl {
 
+using EGLDisplay = void*;
+using EGLImage = void*;
+using GLuint = unsigned int;
+
+// Define a GetProc function pointer that mirrors the one in egl.h
+using EGLFunctionPointerType = void (*)();
+#if defined(_WIN32)
+// NOLINTNEXTLINE(readability/casting): cpplint thinks this is a C-style cast but it isn't.
+using EGLGetProcProc = EGLFunctionPointerType(__stdcall*)(const char*);
+#else   // defined(_WIN32)
+using EGLGetProcProc = EGLFunctionPointerType (*)(const char*);
+#endif  // defined(_WIN32)
+
 // Can be chained in WGPURequestAdapterOptions
 struct DAWN_NATIVE_EXPORT RequestAdapterOptionsGetGLProc : wgpu::ChainedStruct {
     RequestAdapterOptionsGetGLProc();
 
-    void* (*getProc)(const char*);
+    EGLGetProcProc getProc;
     EGLDisplay display;
 };
 
@@ -49,7 +58,7 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorEGLImage : ExternalImageDescrip
   public:
     ExternalImageDescriptorEGLImage();
 
-    ::EGLImage image;
+    EGLImage image;
 };
 
 DAWN_NATIVE_EXPORT WGPUTexture
