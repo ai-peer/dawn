@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90973057_ba483d66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T17:52:44Z",
+      "side": 1,
+      "message": "I think there is a real issue here that I need to fix. Looks like the reported size changes now that I\u0027ve moved where I check the size. May just have to enable the toggle on Qualcomm as well.",
+      "revId": "ed2a5254f3568aa7ab837698b832bd52c6961c4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
