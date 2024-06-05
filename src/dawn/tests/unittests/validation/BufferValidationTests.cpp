@@ -1237,6 +1237,10 @@ TEST_F(BufferMapExtendedUsagesValidationTest, CreationMapUsageReadOrWriteNoRestr
         descriptor.size = 4;
 
         for (const auto otherUsage : kNonMapUsages) {
+            if (wgpu::BufferUsage::QueryResolve == otherUsage) {
+                // MapWrite + QueryResolve is not supported.
+                continue;
+            }
             descriptor.usage = wgpu::BufferUsage::MapWrite | otherUsage;
 
             device.CreateBuffer(&descriptor);
@@ -1249,10 +1253,24 @@ TEST_F(BufferMapExtendedUsagesValidationTest, CreationMapUsageReadOrWriteNoRestr
         descriptor.size = 4;
 
         for (const auto otherUsage : kNonMapUsages) {
+            if (wgpu::BufferUsage::QueryResolve == otherUsage) {
+                // MapWrite + QueryResolve is not supported.
+                continue;
+            }
             descriptor.usage =
                 wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite | otherUsage;
 
             device.CreateBuffer(&descriptor);
         }
     }
+}
+
+// Test that MapWrite + QueryResolve is not allowed.
+TEST_F(BufferMapExtendedUsagesValidationTest, CreationMapUsageWriteQueryResolveError) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::QueryResolve;
+
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }

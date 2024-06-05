@@ -315,7 +315,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 Ref<BufferBase> stagingBuffer;
                 // If the buffer is not mappable, we need to create a staging buffer and copy the
                 // data from the buffer to the staging buffer.
-                if (!(buffer->GetUsage() & kMappableBufferUsages)) {
+                if (!buffer->IsCPUReadable()) {
                     const TexelBlockInfo& blockInfo =
                         ToBackend(dst.texture)->GetFormat().GetAspectInfo(dst.aspect).block;
                     // TODO(dawn:1768): use compute shader to copy data from buffer to texture.
@@ -335,8 +335,9 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 }
 
                 Buffer::ScopedMap scopedMap;
-                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer));
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
+                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer,
+                                                                     wgpu::MapMode::Read));
 
                 Texture* texture = ToBackend(dst.texture.Get());
                 DAWN_TRY(texture->SynchronizeTextureBeforeUse(commandContext));
@@ -370,7 +371,8 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
 
                 Buffer* buffer = ToBackend(dst.buffer.Get());
                 Buffer::ScopedMap scopedDstMap;
-                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(commandContext, buffer));
+                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(commandContext, buffer,
+                                                                        wgpu::MapMode::Write));
 
                 DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
@@ -504,8 +506,11 @@ MaybeError CommandBuffer::ExecuteComputePass(
                                           0));
                 }
 
+                ID3D11Buffer* d3dBuffer;
+                DAWN_TRY_ASSIGN(d3dBuffer,
+                                indirectBuffer->GetAndSyncD3D11GPUReadBuffer(commandContext));
                 commandContext->GetD3D11DeviceContext4()->DispatchIndirect(
-                    indirectBuffer->GetD3D11NonConstantBuffer(), dispatch->indirectOffset);
+                    d3dBuffer, dispatch->indirectOffset);
 
                 break;
             }
@@ -684,8 +689,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                                           0));
                 }
 
+                ID3D11Buffer* d3dBuffer;
+                DAWN_TRY_ASSIGN(d3dBuffer,
+                                indirectBuffer->GetAndSyncD3D11GPUReadBuffer(commandContext));
                 commandContext->GetD3D11DeviceContext4()->DrawInstancedIndirect(
-                    indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
+                    d3dBuffer, draw->indirectOffset);
 
                 break;
             }
@@ -710,8 +718,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                                           0));
                 }
 
+                ID3D11Buffer* d3dBuffer;
+                DAWN_TRY_ASSIGN(d3dBuffer,
+                                indirectBuffer->GetAndSyncD3D11GPUReadBuffer(commandContext));
                 commandContext->GetD3D11DeviceContext4()->DrawIndexedInstancedIndirect(
-                    indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
+                    d3dBuffer, draw->indirectOffset);
 
                 break;
             }
@@ -745,17 +756,23 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                 UINT indexBufferBaseOffset = cmd->offset;
                 DXGI_FORMAT indexBufferFormat = DXGIIndexFormat(cmd->format);
 
+                ID3D11Buffer* d3dBuffer;
+                DAWN_TRY_ASSIGN(
+                    d3dBuffer,
+                    ToBackend(cmd->buffer)->GetAndSyncD3D11GPUReadBuffer(commandContext));
                 commandContext->GetD3D11DeviceContext4()->IASetIndexBuffer(
-                    ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer(), indexBufferFormat,
-                    indexBufferBaseOffset);
+                    d3dBuffer, indexBufferFormat, indexBufferBaseOffset);
 
                 break;
             }
 
             case Command::SetVertexBuffer: {
                 SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
-                ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer();
-                vertexBufferTracker.OnSetVertexBuffer(cmd->slot, buffer, cmd->offset);
+                ID3D11Buffer* d3dBuffer;
+                DAWN_TRY_ASSIGN(
+                    d3dBuffer,
+                    ToBackend(cmd->buffer)->GetAndSyncD3D11GPUReadBuffer(commandContext));
+                vertexBufferTracker.OnSetVertexBuffer(cmd->slot, d3dBuffer, cmd->offset);
                 break;
             }
 
