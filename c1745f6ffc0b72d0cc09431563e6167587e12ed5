@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "773c8018_860fed7e",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-05T07:41:53Z",
+      "side": 1,
+      "message": "Makes sense. Here are the things in my mind:\n1)current(default texture-\u003e staging texture -\u003e staging buffer): \u00271 GPU copy\u0027 + \u0027map stall\u0027 + \u00271 CPU copy\u0027\n2) this CL(default texture-\u003e staging buffer): \u0027map stall\u0027 + \u00271 CPU copy\u0027\n3) a follow CL likely(default texture-\u003e staging buffer): \u0027non-blocking map\u0027 + \u00271 CPU copy\u0027\n4) Compute shader T2B(default texture -\u003e default buffer -\u003e staging buffer): \u00272 GPU copies\u0027\n\nActually I have started to think about 3). To get rid of the map stall, we need to postpone the `ReadFromSubresource` call, after the src texture is done written, and before the dst buffer is used in next commands. Such tracking mechanism is needed, and may be a little complicated.\n\nFor WriteTexture, currently it has no map stall thanks to \u0027UpdateSubresource\u0027. We may use default texture mapping once we solve the map stall issue in 3), otherwise it would not be a worthwhile effort.",
+      "parentUuid": "d568b968_a97a1029",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c6de188_985bcfd3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 8
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-04T22:35:48Z",
       "side": 1,
       "message": "can be const",
+      "range": {
+        "startLine": 286,
+        "startChar": 39,
+        "endLine": 286,
+        "endChar": 65
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e3eced7_d752408e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-05T07:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c6de188_985bcfd3",
       "range": {
         "startLine": 286,
         "startChar": 39,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61ad6078_424922f7",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-05T07:41:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d67d72d9_1a2c1aac",
+      "range": {
+        "startLine": 333,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 43
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "418ea0ab_dec129d1",
@@ -77,6 +143,30 @@
       "writtenOn": "2024-06-04T22:35:48Z",
       "side": 1,
       "message": "overall, this method reads the data in 2 ways. It either writes to `data`, or it passes the data to the ReadCallback. IMO we should not do it this way because it\u0027s confusing to know where the data will end up. You should instead have two separate methods so the distinction is clear.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 0,
+        "endLine": 1060,
+        "endChar": 5
+      },
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e45c1692_4deafe31",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-05T07:41:53Z",
+      "side": 1,
+      "message": "My consideration was to make default texture mapping completely internal to `TextureD3D11`, so that client classes like `CommandBufferD3D11` just need to provide both `data` and `callback` to `TextureD3D11`, which can fully decide how to properly use them. Otherwise if there were 2 separate read methods, `CommandBufferD3D11` would be burdened with some conditions to use each read method. To some extent, `data` and `callback` are \u0027both\u0027 rather than \u0027either\u0027 to `Read`. Just my slight preference. I am okay either way.",
+      "parentUuid": "418ea0ab_dec129d1",
       "range": {
         "startLine": 1045,
         "startChar": 0,
