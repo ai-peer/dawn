@@ -50,6 +50,23 @@
       "message": "LGTM",
       "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c174ffb_4a70823d",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T09:52:46Z",
+      "side": 1,
+      "message": "Note that in the future we will want unmap to make this ByteBuffer no longer usable to match JS (and C++ technically) semantics.",
+      "revId": "8e9bcdcc65fd306dbf5f16a22b51fbdbeb384862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
