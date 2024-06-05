@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4e6301_efab6362",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:26:03Z",
+      "side": 1,
+      "message": "Maybe this should be a boolean hasBlendSrc1 and set only if @blend_src(1) is used. Right now I think the reflection will be broken for `@location(0) @blend_src(0) stuff` without a `@blend_src(1)` in the shader.",
+      "range": {
+        "startLine": 810,
+        "startChar": 39,
+        "endLine": 810,
+        "endChar": 47
+      },
+      "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
