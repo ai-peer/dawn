@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8842707_69a94684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T19:48:04Z",
+      "side": 1,
+      "message": "noticed that the tests are disabled for a bug that is supposed to be fixed.\n\nRemoving suppressions in https://dawn-review.googlesource.com/c/dawn/+/191940",
+      "parentUuid": "374b1acf_78ce4150",
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f43f7b5_73733226",
         "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 3
