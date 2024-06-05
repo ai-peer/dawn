@@ -60,7 +60,7 @@ D3D11_COMPARISON_FUNC ToD3D11ComparisonFunc(wgpu::CompareFunction func) {
 void SetDebugName(Device* device,
                   ID3D11DeviceChild* object,
                   const char* prefix,
-                  std::string label) {
+                  const std::string& label) {
     if (!device->IsToggleEnabled(Toggle::UseUserDefinedLabelsInBackend)) {
         return;
     }
