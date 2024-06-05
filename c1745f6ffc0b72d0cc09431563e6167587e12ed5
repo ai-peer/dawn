@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba66e54f_8319f863",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T16:25:58Z",
+      "side": 1,
+      "message": "(3) seems quite complicated. and ultimately while you may not be stalling immediately, if the dst buffer is used, Dawn will effectively need to artificially stall until the dst buffer is ready.\n\nSo I really think that we should have (4) as a general case that will cover most situations. (2) can be done when the texture and buffer are ready and not in use - but I think this will be a relatively rare situation.",
+      "parentUuid": "773c8018_860fed7e",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c6de188_985bcfd3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 8
