@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c5e3ef_58bef183",
+        "filename": "src/tint/lang/glsl/writer/common/options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-05T20:38:36Z",
+      "side": 1,
+      "message": "Nit: comment is not correct",
+      "revId": "1bb97d9496d9f49bceac634370a32493ef56225c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e2e556_b2e73b39",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-05T20:38:36Z",
+      "side": 1,
+      "message": "Nit: comment is not correct",
+      "fixSuggestions": [
+        {
+          "fixId": "8b028562_bd7a0116",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 70,
+                "endChar": 0
+              },
+              "replacement": "        /// The offset of the min_depth push constant\n"
+            },
+            {
+              "path": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+              "range": {
+                "startLine": 71,
+                "startChar": 0,
+                "endLine": 71,
+                "endChar": 0
+              },
+              "replacement": "        /// The offset of the max_depth push constant\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1bb97d9496d9f49bceac634370a32493ef56225c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
