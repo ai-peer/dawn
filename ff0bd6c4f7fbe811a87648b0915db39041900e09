@@ -16,6 +16,23 @@
       "message": "Rafael, is this the mode that all swapchains should use, or would you suggest instead adding flags for MakeWindowsAssociation as a parameter of `wgpu::SurfaceDescriptorFromWindowsHWND` ?",
       "revId": "ff0bd6c4f7fbe811a87648b0915db39041900e09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfb1730_f6d26c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-05T05:09:13Z",
+      "side": 1,
+      "message": "apologies for taking a long time to respond to this. I think it\u0027s better if the application can configure this themselves. I filed https://github.com/webgpu-native/webgpu-headers/issues/298 to add it to the HWND surface descriptor",
+      "revId": "ff0bd6c4f7fbe811a87648b0915db39041900e09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
