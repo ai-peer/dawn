@@ -735,8 +735,8 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipTextureLoadSinglePlaneNotSquare) {
           utils::RGBA8::kBlack, utils::RGBA8::kRed, utils::RGBA8::kGreen}}};
 
     wgpu::ShaderModule loadModule = utils::CreateShaderModule(device, R"(
-        @group(0) @binding(0) var<storage, read_write> dimension : vec2u;
-        @group(0) @binding(1) var t : texture_external;
+        @group(0) @binding(1) var<storage, read_write> dimension : vec2u;
+        @group(0) @binding(0) var t : texture_external;
 
         @fragment fn main(@builtin(position) FragCoord : vec4f)
                                  -> @location(0) vec4f {
@@ -770,7 +770,7 @@ TEST_P(ExternalTextureTests, RotateAndOrFlipTextureLoadSinglePlaneNotSquare) {
         // Import the external texture and make the bindgroup.
         wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
         wgpu::BindGroup bindGroup = utils::MakeBindGroup(
-            device, pipeline.GetBindGroupLayout(0), {{1, externalTexture}, {0, dimensionBuffer}});
+            device, pipeline.GetBindGroupLayout(0), {{0, externalTexture}, {1, dimensionBuffer}});
 
         // Run the shader, which should sample from the external texture and draw a triangle into
         // the upper left corner of the render texture.
