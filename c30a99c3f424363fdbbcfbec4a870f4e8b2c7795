@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8308a9c7_53c15b8b",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e18f2aaf_02ec6c72",
+      "range": {
+        "startLine": 223,
+        "startChar": 40,
+        "endLine": 223,
+        "endChar": 49
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dda2b742_112d8f06",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-05T03:29:23Z",
       "side": 1,
       "message": "a follow up is OK, but theoretically shouldn\u0027t be so hard to do now. add an arg for additional extensions to utils::CreateShaderModule at [c], forward to an arg on  DeviceBase::CreateShaderModule, forward into ValidateAndParseShaderModule, forward into ParseWGSL\n\ndefinitely want to get that in soon so we don\u0027t accidentally rely on input attachments elsewhere",
+      "range": {
+        "startLine": 175,
+        "startChar": 0,
+        "endLine": 175,
+        "endChar": 24
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139e018b_61bfc09c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Unfortunately, changing the way shader module is created requires too many changes in different parts of the code. We have to cache the additional extensions in ShaderModule as well, since we release tint program in shader module when it is not needed and could recreate it again when needs arise. This could change the way ShaderModule is created in various backends as well. I have created a separate CL for this https://dawn-review.googlesource.com/c/dawn/+/191781\n\nbtw, the kChromiumInternalInputAttachments extension has a doc. So users would know that this is an experimental extension and shouldn\u0027t use it.",
+      "parentUuid": "dda2b742_112d8f06",
       "range": {
         "startLine": 175,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2024-06-05T03:29:23Z",
       "side": 1,
       "message": "nit: in Dawn, prefer to pass mutable args by pointer, not reference\n\n```suggestion\n        InitializeLoadResolveSubpassDependencies(\u0026subpassDependencies);\n```\n\nThat said, I\u0027m not sure having the helper is useful. It might be more clear to inline it here because you have to reference the subpass indices - and the context that just above at [a] is subpass 0 and just below at [b] is subpass 1 is necessary to know that `InitializeLoadResolveSubpassDependencies` does what we want.",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 70
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1563632d_d53f9c6d",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "I think inlining the code here makes the function too large. It would reduce the readability for some.",
+      "parentUuid": "d0597ed4_f85604b4",
       "range": {
         "startLine": 287,
         "startChar": 0,
@@ -150,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d01a97ce_ed429fe4",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a915ae3a_4c8ba73f",
+      "range": {
+        "startLine": 156,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 0
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d889c0b_947e83ce",
@@ -163,6 +259,30 @@
       "writtenOn": "2024-06-05T03:29:23Z",
       "side": 1,
       "message": "since these asserts may be reachable if those workarounds get enabled, instead use DAWN_INVALID_IF ?",
+      "range": {
+        "startLine": 199,
+        "startChar": 13,
+        "endLine": 206,
+        "endChar": 57
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25d38d2_9b319033",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d889c0b_947e83ce",
       "range": {
         "startLine": 199,
         "startChar": 13,
@@ -196,6 +316,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f46c19_8725a041",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e084aaec_d478a306",
+      "range": {
+        "startLine": 591,
+        "startChar": 35,
+        "endLine": 591,
+        "endChar": 54
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ac4b39c_e600f2ea",
@@ -209,6 +353,30 @@
       "writtenOn": "2024-06-05T03:29:23Z",
       "side": 1,
       "message": "prefer public bug link\n\n```suggestion\n    // TODO(crbug.com/42240662): \"resolve_multiple_attachments_in_separate_passes\" is currently not working\n```",
+      "range": {
+        "startLine": 1671,
+        "startChar": 0,
+        "endLine": 1671,
+        "endChar": 99
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6214966_de568aa2",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ac4b39c_e600f2ea",
       "range": {
         "startLine": 1671,
         "startChar": 0,
@@ -242,6 +410,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0325006c_d5a52ab0",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10eb52f6_054f56f5",
+      "range": {
+        "startLine": 1752,
+        "startChar": 0,
+        "endLine": 1752,
+        "endChar": 99
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79d83a62_3e3cad6a",
@@ -265,6 +457,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bea0d6_2792b894",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1832,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79d83a62_3e3cad6a",
+      "range": {
+        "startLine": 1832,
+        "startChar": 0,
+        "endLine": 1832,
+        "endChar": 99
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e9bba45_28305684",
@@ -278,6 +494,30 @@
       "writtenOn": "2024-06-05T03:29:23Z",
       "side": 1,
       "message": "```suggestion\n    // TODO(crbug.com/42240662): \"resolve_multiple_attachments_in_separate_passes\" is currently not working\n```",
+      "range": {
+        "startLine": 1985,
+        "startChar": 0,
+        "endLine": 1985,
+        "endChar": 99
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f63f2d_7e7071ca",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1985,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-05T09:30:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e9bba45_28305684",
       "range": {
         "startLine": 1985,
         "startChar": 0,
