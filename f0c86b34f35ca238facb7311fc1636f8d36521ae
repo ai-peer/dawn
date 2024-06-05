@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea158b0_1f134c00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "LGTM, very minor comments left. Thank you for all the iterations!",
+      "revId": "f0c86b34f35ca238facb7311fc1636f8d36521ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab2ee91_72549bb6",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "I didn\u0027t get that this was for VK_ATTACHMENT_LOAD_OP_LOAD maybe mention it explicitly here and below.",
+      "range": {
+        "startLine": 159,
+        "startChar": 11,
+        "endLine": 159,
+        "endChar": 30
+      },
+      "revId": "f0c86b34f35ca238facb7311fc1636f8d36521ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04b2f391_5bc26200",
+        "filename": "src/dawn/tests/unittests/native/mocks/RenderPipelineMock.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "u-nit: no need to add that argument since it is the (reasonable) default.",
+      "range": {
+        "startLine": 52,
+        "startChar": 53,
+        "endLine": 52,
+        "endChar": 84
+      },
+      "revId": "f0c86b34f35ca238facb7311fc1636f8d36521ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

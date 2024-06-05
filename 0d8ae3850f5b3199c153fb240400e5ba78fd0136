@@ -83,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f001b3_c68def38",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a4d35414_097d82c5",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d51e4fe4_88c3d61c",
@@ -190,6 +208,30 @@
       "side": 1,
       "message": "Some attachments have resolve target, but don\u0027t use ExpandResolve load op. but we need to specify that they have resolve target to conform to render pass compatibility (for 2 subpasses cases).",
       "parentUuid": "af2c6416_b7fec13c",
+      "range": {
+        "startLine": 527,
+        "startChar": 59,
+        "endLine": 527,
+        "endChar": 75
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b694c0d_375c3097",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "It was a bit weird that we say resolvetarget is only used for expandResolveTarget but the name is generic. I don\u0027t think there\u0027s a much better solution though.",
+      "parentUuid": "3feba0a9_c20834c1",
       "range": {
         "startLine": 527,
         "startChar": 59,
@@ -389,6 +431,24 @@
       "side": 1,
       "message": "Actually, I have modified DeviceBase::CreateRenderPipeline to allow internal bindings. PTAL.",
       "parentUuid": "f3083a32_13c049db",
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a60eab5_671b4548",
+        "filename": "src/dawn/native/vulkan/ResolveTextureLoadingUtilsVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "Nice!",
+      "parentUuid": "eb1d85ba_36fb0a00",
       "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -669,6 +729,30 @@
       "side": 1,
       "message": "Wrote an explanation in the comment. Due to Vulkan spec, the input attachment has to be loaded. And the loading will happen at \"Color Attachment Output\" stage.\nYes, it\u0027s a bit weird for \"input\" attachments. But it\u0027s written in the spec and required by validation layer.\n\n\u003e VK_ATTACHMENT_LOAD_OP_LOAD specifies that the previous contents of the image within the render area will be preserved as the initial values. For attachments with a depth/stencil format, this uses the access type VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT. For attachments with a color format, this uses the access type VK_ACCESS_COLOR_ATTACHMENT_READ_BIT.",
       "parentUuid": "6ac4370b_d118aaa4",
+      "range": {
+        "startLine": 159,
+        "startChar": 55,
+        "endLine": 159,
+        "endChar": 90
+      },
+      "revId": "0d8ae3850f5b3199c153fb240400e5ba78fd0136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "396f73dc_b69be3a1",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "Ok thank you for the explanation.",
+      "parentUuid": "e7588b2f_0730dbe9",
       "range": {
         "startLine": 159,
         "startChar": 55,

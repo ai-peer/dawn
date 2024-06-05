@@ -159,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa4d88ab_8cb27bf2",
+        "filename": "src/dawn/native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-05T10:36:43Z",
+      "side": 1,
+      "message": "I was thinking about this as well and think having some builder struct with mutable state, where we later do all the changes for ExpandResolveTexture at once in a function could make things clearer. But no need to do this now or soon IMHO. Maybe when there\u0027s the next VkRenderPass twiddling CL.",
+      "parentUuid": "1563632d_d53f9c6d",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 287,
+        "endChar": 70
+      },
+      "revId": "c30a99c3f424363fdbbcfbec4a870f4e8b2c7795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3c880875_f954c5ea",
