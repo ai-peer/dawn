@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94953dae_1bfaef8f",
+        "filename": "src/tint/lang/glsl/writer/common/options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T02:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74c5e3ef_58bef183",
+      "revId": "1bb97d9496d9f49bceac634370a32493ef56225c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42e2e556_b2e73b39",
@@ -59,6 +77,24 @@
           ]
         }
       ],
+      "revId": "1bb97d9496d9f49bceac634370a32493ef56225c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d539d4d5_bb95ea3f",
+        "filename": "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T02:43:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42e2e556_b2e73b39",
       "revId": "1bb97d9496d9f49bceac634370a32493ef56225c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
