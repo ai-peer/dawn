@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74ff5ba1_4d2f4f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-06T07:17:34Z",
+      "side": 1,
+      "message": "Thanks, Saif!",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99a59972_51a20c14",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-06T07:17:34Z",
+      "side": 1,
+      "message": "I would make this DAWN_INVALID_IF as well and add a validation test for it.",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ab43d2_7083ac84",
