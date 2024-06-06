@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5346ead3_7027440a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T13:49:18Z",
+      "side": 1,
+      "message": "Rebased on top of the EGLFunctions revert. PTAL Stephen.",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
