@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2813aaa_1b4e53c9",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T19:30:19Z",
+      "side": 0,
+      "message": "Sorry Yuly! Will try to remember add bot that next time.",
+      "parentUuid": "96b033d6_dd474ee4",
+      "range": {
+        "startLine": 756,
+        "startChar": 0,
+        "endLine": 757,
+        "endChar": 66
+      },
+      "revId": "b900cf3da7c454b5216bc67d718b3796fd2fa0b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9bbdb49_8f03ed81",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-06T16:10:52Z",
       "side": 0,
       "message": "ditto",
+      "range": {
+        "startLine": 967,
+        "startChar": 0,
+        "endLine": 969,
+        "endChar": 0
+      },
+      "revId": "b900cf3da7c454b5216bc67d718b3796fd2fa0b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3bbf67_3f0c7dfe",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T19:30:19Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "c9bbdb49_8f03ed81",
       "range": {
         "startLine": 967,
         "startChar": 0,
