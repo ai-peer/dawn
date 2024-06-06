@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96b033d6_dd474ee4",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-06-06T16:10:52Z",
+      "side": 0,
+      "message": "Still fails https://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Android%20arm64%20Experimental%20Release%20(Pixel%206)/3045/overview.\nPlease use\nhttps://ci.chromium.org/ui/p/chromium/builders/try/android-dawn-arm64-exp-rel\nto verify Pixel 6 related changes.",
+      "range": {
+        "startLine": 756,
+        "startChar": 0,
+        "endLine": 757,
+        "endChar": 66
+      },
+      "revId": "b900cf3da7c454b5216bc67d718b3796fd2fa0b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9bbdb49_8f03ed81",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-06-06T16:10:52Z",
+      "side": 0,
+      "message": "ditto",
+      "range": {
+        "startLine": 967,
+        "startChar": 0,
+        "endLine": 969,
+        "endChar": 0
+      },
+      "revId": "b900cf3da7c454b5216bc67d718b3796fd2fa0b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
