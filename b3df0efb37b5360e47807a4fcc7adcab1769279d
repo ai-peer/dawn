@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "b3df0efb37b5360e47807a4fcc7adcab1769279d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c574d7_05e719d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T09:06:37Z",
+      "side": 1,
+      "message": "Great find! These are always super hard to figure out!",
+      "revId": "b3df0efb37b5360e47807a4fcc7adcab1769279d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f313364_12eaf431",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T09:06:37Z",
+      "side": 1,
+      "message": "Oooh we\u0027re going to have to redo this at some point to make the computation of the module take only the cache key so that we avoid bugs like this. Also uintptr_t(layout) seems ... not great because we can easily free and reallocate the layout. Can you open an issue for this and a TODO?",
+      "revId": "b3df0efb37b5360e47807a4fcc7adcab1769279d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
