@@ -633,15 +633,6 @@ void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platfor
     // Vulkan SPEC and drivers.
     deviceToggles->Default(Toggle::UseTemporaryBufferInCompressedTextureToTextureCopy, true);
 
-#if DAWN_PLATFORM_IS(ANDROID)
-    // Default to the IR backend on Android.
-    deviceToggles->Default(Toggle::UseTintIR, true);
-#else
-    // All other platforms default to the value corresponding to the feature flag.
-    deviceToggles->Default(Toggle::UseTintIR,
-                           platform->IsFeatureEnabled(platform::Features::kWebGPUUseTintIR));
-#endif
-
     if (IsAndroidQualcomm()) {
         // dawn:1564, dawn:1897: Recording a compute pass after a render pass in the same command
         // buffer frequently causes a crash on Qualcomm GPUs. To work around that bug, split the
