@@ -191,18 +191,22 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcWithNonZeroLocation_ReturnValue
 TEST_F(DualSourceBlendingExtensionTests, NoNonZeroCollisionsBetweenInAndOut) {
     // struct NonZeroLocation {
     //   @location(1) a : vec4<f32>,
+    //   @location(2) b : vec4<f32>,
     // };
     // struct NonZeroBlendSrc {
-    //   @location(0) @blend_src(1) a : vec4<f32>,
+    //   @location(0) @blend_src(0) a : vec4<f32>,
+    //   @location(0) @blend_src(1) b : vec4<f32>,
     // };
     // fn X(in : NonZeroLocation) -> NonZeroBlendSrc { return NonZeroBlendSrc(); }
     // fn Y(in : NonZeroBlendSrc) -> NonZeroLocation { return NonZeroLocation(); }
     Structure("NonZeroLocation", Vector{
                                      Member("a", ty.vec4<f32>(), Vector{Location(1_a)}),
+                                     Member("b", ty.vec4<f32>(), Vector{Location(2_a)}),
                                  });
     Structure("NonZeroBlendSrc",
               Vector{
-                  Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
+                  Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
+                  Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
               });
     Func("X", Vector{Param("in", ty("NonZeroLocation"))}, ty("NonZeroBlendSrc"),
          Vector{Return(Call("NonZeroBlendSrc"))}, Vector{Stage(ast::PipelineStage::kFragment)});
@@ -230,7 +234,7 @@ TEST_F(DualSourceBlendingExtensionTests, MixedBlendSrcAndNonBlendSrcOnLocationZe
 }
 
 TEST_F(DualSourceBlendingExtensionTests,
-       MixedBlendSrcAndNonBlendSrcOnLocationZero_StructUsedInEntryPoint) {
+       MixedBlendSrcAndNonBlendSrcOnLocationZero_StructUsedInEntryPoint_NoBlendSrc0) {
     // struct S {
     //   @location(0) a : vec4<f32>,
     //   @location(0) @blend_src(1) b : vec4<f32>,
@@ -243,6 +247,32 @@ TEST_F(DualSourceBlendingExtensionTests,
                               }),
                        Member("b", ty.vec4<f32>(),
                               Vector{Location(0_a), BlendSrc(Source{{56, 78}}, 1_a)}),
+                   });
+    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
+         Vector{Stage(ast::PipelineStage::kFragment)});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(
+        r()->error(),
+        R"(12:34 error: use of '@blend_src' requires all the output '@location' attributes of the entry point to be paired with a '@blend_src' attribute
+56:78 note: use of '@blend_src' here
+note: while analyzing entry point 'F')");
+}
+
+TEST_F(DualSourceBlendingExtensionTests,
+       MixedBlendSrcAndNonBlendSrcOnLocationZero_StructUsedInEntryPoint_NoBlendSrc1) {
+    // struct S {
+    //   @location(0) @blend_src(0) a : vec4<f32>,
+    //   @location(0) b : vec4<f32>,
+    // };
+    // fn F() -> S { return S(); }
+    Structure("S", Vector{
+                       Member("a", ty.vec4<f32>(),
+                              Vector{
+                                  Location(0_a),
+                                  BlendSrc(Source{{56, 78}}, 0_a),
+                              }),
+                       Member("b", ty.vec4<f32>(), Vector{Location(Source{{12, 34}}, 0_a)}),
                    });
     Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
          Vector{Stage(ast::PipelineStage::kFragment)});
@@ -291,6 +321,38 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcTypes_DifferentElementType) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(1:2 error: Use of '@blend_src' requires all outputs have same type
 note: while analyzing entry point 'F')");
+}
+
+TEST_F(DualSourceBlendingExtensionTests, MissBlendSrc0) {
+    // struct S {
+    //   @location(0) @blend_src(1) b : vec4<f32>,
+    // };
+    // @fragment fn F() -> S { return S(); }
+    Structure("S",
+              Vector{
+                  Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 1_a)}),
+              });
+    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
+         Vector{Stage(ast::PipelineStage::kFragment)});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), R"(1:2 error: '@blend_src(0)' is missing when '@blend_src' is used.)");
+}
+
+TEST_F(DualSourceBlendingExtensionTests, MissBlendSrc1) {
+    // struct S {
+    //   @location(0) @blend_src(0) a : vec4<f32>,
+    // };
+    // @fragment fn F() -> S { return S(); }
+    Structure("S",
+              Vector{
+                  Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 0_a)}),
+              });
+    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
+         Vector{Stage(ast::PipelineStage::kFragment)});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), R"(1:2 error: '@blend_src(1)' is missing when '@blend_src' is used.)");
 }
 
 class DualSourceBlendingExtensionTestWithParams : public ResolverTestWithParam<int> {
