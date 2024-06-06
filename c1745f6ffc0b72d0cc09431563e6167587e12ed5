@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c25617b_77138a81",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-06T13:11:06Z",
+      "side": 1,
+      "message": "I fully understand your concern. I would drop this CL and put 4) into my work queue.\nFrom the beginning, I was just curious about how much default-texture-mapping could improve. This CL has given me the impression basically. Maybe we can use it under some circumstance in future.\nAnyway, thank you all for the attention.",
+      "parentUuid": "8091bb09_e458ee4c",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c6de188_985bcfd3",
