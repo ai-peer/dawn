@@ -85,10 +85,11 @@ type rollerFlags struct {
 	cacheDir            string
 	ctsGitURL           string
 	ctsRevision         string
-	force               bool // Create a new roll, even if CTS is up to date
-	rebuild             bool // Rebuild the expectations file from scratch
-	preserve            bool // If false, abandon past roll changes
-	sendToGardener      bool // If true, automatically send to the gardener for review
+	force               bool   // Create a new roll, even if CTS is up to date
+	rebuild             bool   // Rebuild the expectations file from scratch
+	reuse_existing_cl   bool   // If true, reuse an existing CL number
+	reuse_cl_id         string // The ID of the change to use if `-reuse_existing_cl` is provided. Otherwise uses the first found roll.
+	sendToGardener      bool   // If true, automatically send to the gardener for review
 	verbose             bool
 	parentSwarmingRunID string
 	maxAttempts         int
@@ -118,7 +119,8 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 	flag.StringVar(&c.flags.ctsRevision, "revision", refMain, "revision of the CTS to roll")
 	flag.BoolVar(&c.flags.force, "force", false, "create a new roll, even if CTS is up to date")
 	flag.BoolVar(&c.flags.rebuild, "rebuild", false, "rebuild the expectation file from scratch")
-	flag.BoolVar(&c.flags.preserve, "preserve", false, "do not abandon existing rolls")
+	flag.BoolVar(&c.flags.reuse_existing_cl, "reuse-existing-cl", false, "reuse an existing roll CL number if possible")
+	flag.StringVar(&c.flags.reuse_cl_id, "reuse-cl-id", "", "id of the CL to for reuse")
 	flag.BoolVar(&c.flags.sendToGardener, "send-to-gardener", false, "send the CL to the WebGPU gardener for review")
 	flag.BoolVar(&c.flags.verbose, "verbose", false, "emit additional logging")
 	flag.StringVar(&c.flags.parentSwarmingRunID, "parent-swarming-run-id", "", "parent swarming run id. All triggered tasks will be children of this task and will be canceled if the parent is canceled.")
@@ -338,8 +340,18 @@ func (r *roller) roll(ctx context.Context) error {
 		return err
 	}
 
-	// Abandon existing rolls, if -preserve is false
-	if !r.flags.preserve && len(existingRolls) > 0 {
+	// Create a new gerrit change, if needed
+	changeID := ""
+	if len(existingRolls) > 0 {
+		if r.flags.reuse_existing_cl {
+			if len(r.flags.reuse_cl_id) > 0 {
+				changeID = r.flags.reuse_cl_id
+			} else {
+				changeID = existingRolls[0].ID
+			}
+			log.Printf("reusing existing gerrit change %v ...", changeID)
+		}
+	} else {
 		log.Printf("abandoning %v existing roll...", len(existingRolls))
 		for _, change := range existingRolls {
 			if err := r.gerrit.Abandon(change.ChangeID); err != nil {
@@ -349,9 +361,8 @@ func (r *roller) roll(ctx context.Context) error {
 		existingRolls = nil
 	}
 
-	// Create a new gerrit change, if needed
-	changeID := ""
-	if r.flags.preserve || len(existingRolls) == 0 {
+	// If we didn't get changeID above, then we must create one
+	if len(changeID) == 0 {
 		msg := r.rollCommitMessage(oldCTSHash, newCTSHash, ctsLog, "")
 		change, err := r.gerrit.CreateChange(r.cfg.Gerrit.Project, "main", msg, true)
 		if err != nil {
@@ -359,9 +370,6 @@ func (r *roller) roll(ctx context.Context) error {
 		}
 		changeID = change.ID
 		log.Printf("created gerrit change %v (%v)...", change.Number, change.URL)
-	} else {
-		changeID = existingRolls[0].ID
-		log.Printf("reusing existing gerrit change %v (%v)...", existingRolls[0].Number, existingRolls[0].URL)
 	}
 
 	// Update the DEPS, expectations, and other generated files.
