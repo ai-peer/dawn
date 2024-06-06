@@ -16,6 +16,57 @@
       "message": "Rebased on top of the EGLFunctions revert. PTAL Stephen.",
       "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39bf228_d7d8b6da",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T15:32:16Z",
+      "side": 1,
+      "message": "Needs more Procs",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c183fc28_e9bb8bad",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T15:32:16Z",
+      "side": 1,
+      "message": "Is the idea to put these inside the namespace so they don\u0027t conflict with the actual egl.h ones, if both were included? If so, a comment might be helpful.\n\nOn the other hand, maybe we should just bite the bullet and add a dependency on EGL/egl.h. VulkanBackend.h already depends on vulkan/vulkan.h, D3DBackend.h depends on windows.h, etc.",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b84dd33_d2b221e7",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T15:32:16Z",
+      "side": 1,
+      "message": "This would be more concise:\n\n```\n#if defined(_WIN32)\n#define STDCALL __stdcall\n#else\n#define STDCALL\n#endif\n\nusing EGLGetProcProc \u003d void (STDCALL *)(const char *);\n```",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
