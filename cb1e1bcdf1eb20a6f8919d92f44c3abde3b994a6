@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb510ac6_d4d237c1",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T19:57:12Z",
+      "side": 1,
+      "message": "Would these be able to be used inline, e.g. right at the texture call?\n\n  textureSample(t, sampler\u003c...\u003e(..), ...)\n  \nDo any of the other APIs allow that? That would put an extra burden on the implementation to deduplicate them, and then we\u0027d also have to ensure consistent slot counting. \nIs that a thing users might even want?  I would hope not.",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cf6ca0d_02f2b4c2",
         "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
         "patchSetId": 1
