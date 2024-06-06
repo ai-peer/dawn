@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "215b0b90_b10d64fa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-06T08:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63bdb8dc_99d60089",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "374b1acf_78ce4150",
@@ -59,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e75da44_b6085efc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-06T08:36:01Z",
+      "side": 1,
+      "message": "Sure, I\u0027ll file a new CL to do that in the future.",
+      "parentUuid": "f8842707_69a94684",
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f43f7b5_73733226",
@@ -84,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1633257_3552c136",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-06T08:36:01Z",
+      "side": 1,
+      "message": "This for loop iterates through all the bindings in the BGL. If a static sampler binding is detected, it handles it and moves onto the next binding. I don\u0027t think it skips any bindings.",
+      "parentUuid": "3f43f7b5_73733226",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 21
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc39e13d_3a9e8610",
         "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 3
@@ -95,6 +161,30 @@
       "writtenOn": "2024-06-05T19:34:29Z",
       "side": 1,
       "message": "this TODO should probably be addressed",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 35
+      },
+      "revId": "a2859c8dd80cbf04e51561d8dbb88c7e1b751fd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "431fd939_b5639e5d",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-06T08:36:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc39e13d_3a9e8610",
       "range": {
         "startLine": 155,
         "startChar": 0,
