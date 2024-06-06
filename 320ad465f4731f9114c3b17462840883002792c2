@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7f71544_6169e908",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:38:32Z",
+      "side": 1,
+      "message": "Nit: I\u0027m not an std::variant expert, but could this be inside the \"if (bufferBindingInfo) ...\" clause below?\n\n(I\u0027m assuming that if (std::holds_alternative() and std::get_if() have the same behaviour if you\u0027re just checking that the type matches.)",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62af57b9_4fae4d6b",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:38:32Z",
+      "side": 1,
+      "message": "Nit: a lot of repeated tint::glsl::writer::binding here and above; perhaps a `using` is in order?",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd090950_76be9c8a",
         "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 32
@@ -48,6 +82,40 @@
       "writtenOn": "2024-06-06T20:11:56Z",
       "side": 1,
       "message": "```suggestion\n        // the final expected values for those entry points. So, we end up using the original\n```",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d671e3f_496b3ee9",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:38:32Z",
+      "side": 1,
+      "message": "```suggestion\n                // the `sampler_texture_to_name` based on the external_texture value.\n```",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b654d1_cd5cdf2c",
+        "filename": "src/tint/lang/glsl/writer/common/option_helpers.cc",
+        "patchSetId": 32
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:38:32Z",
+      "side": 1,
+      "message": "```suggestion\n    // Both wgsl_seen and glsl_seen check to see if the pair of [src, dst] are unique. If\n```",
       "revId": "320ad465f4731f9114c3b17462840883002792c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
