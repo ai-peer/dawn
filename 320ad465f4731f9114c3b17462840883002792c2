@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be041cb3_bf62a414",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:11:56Z",
+      "side": 1,
+      "message": "This is a pretty big change, and added a fair bit of complexity to ShaderModuleGL.cpp. Sadly, I was only halfway through looking at it when it landed. I see now two followup changes have landed as well. Perhaps next time I\u0027ll try to give you a heads-up that I need more time.\n\nI\u0027m still looking, will add further comments if needed.",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd090950_76be9c8a",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:11:56Z",
+      "side": 1,
+      "message": "Maybe we should consider factoring all of the binding-related things out of this function. It was already out of control (not your fault) but just grew by 80 more lines.",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff09740c_293bcd05",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-06T20:11:56Z",
+      "side": 1,
+      "message": "```suggestion\n        // the final expected values for those entry points. So, we end up using the original\n```",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
