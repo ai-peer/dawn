@@ -33,6 +33,7 @@
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/str_split.h"
 #include "dawn/native/opengl/UtilsEGL.h"
+#include "dawn/common/Log.h"
 
 namespace dawn::native::opengl {
 
@@ -90,8 +91,10 @@ static constexpr std::array<ExtensionInfo, kExtensionCount> kExtensionInfos{{
 
 #define GET_PROC_WITH_NAME(member, name)                                          \
     do {                                                                          \
+        DAWN_DEBUG() << "Getting " << "name"; \
         member = reinterpret_cast<decltype(member)>(GetProcAddress(name));        \
         if (member == nullptr) {                                                  \
+        DAWN_DEBUG() << "Didn't get " << "name"; \
             return DAWN_INTERNAL_ERROR(std::string("Couldn't get proc ") + name); \
         }                                                                         \
     } while (0)
@@ -100,7 +103,9 @@ static constexpr std::array<ExtensionInfo, kExtensionCount> kExtensionInfos{{
 
 MaybeError EGLFunctions::LoadClientProcs(EGLGetProcProc getProc) {
     // Load EGL 1.0
+    DAWN_DEBUG();
     GetProcAddress = getProc;
+    DAWN_DEBUG();
 
     GET_PROC(ChooseConfig);
     GET_PROC(CopyBuffers);
@@ -128,16 +133,22 @@ MaybeError EGLFunctions::LoadClientProcs(EGLGetProcProc getProc) {
 
     // Get the EGL client extensions, if they are supported.
     {
+        DAWN_DEBUG();
         const char* rawExtensions = QueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS);
+        DAWN_DEBUG() << rawExtensions;
         absl::flat_hash_set<std::string_view> extensions = absl::StrSplit(rawExtensions, " ");
+        DAWN_DEBUG();
 
         for (const ExtensionInfo& ext : kExtensionInfos) {
+            DAWN_DEBUG() << "Checking " << ext.name;
             if (extensions.contains(ext.name) && ext.type == ExtType::Client) {
+            DAWN_DEBUG() << "Got! " << ext.name;
                 mExtensions.set(ext.index);
             }
         }
     }
 
+    DAWN_DEBUG();
     return LoadClientExtensions();
 }
 
@@ -247,12 +258,14 @@ bool EGLFunctions::HasExt(EGLExt extension) const {
 }
 
 MaybeError EGLFunctions::LoadClientExtensions() {
+    DAWN_DEBUG();
     if (HasExt(EGLExt::PlatformBase) && mMinorVersion < 5) {
         GET_PROC_WITH_NAME(GetPlatformDisplay, "eglGetPlatformDisplayEXT");
         GET_PROC_WITH_NAME(CreatePlatformWindowSurface, "eglCreatePlatformWindowSurfaceEXT");
         GET_PROC_WITH_NAME(CreatePlatformPixmapSurface, "eglCreatePlatformPixmapSurfaceEXT");
     }
 
+    DAWN_DEBUG();
     return {};
 }
 
