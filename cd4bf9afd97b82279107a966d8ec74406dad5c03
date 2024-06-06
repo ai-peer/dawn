@@ -16,6 +16,24 @@
       "message": "The case is wrong as it is using `@blend_src` as non-fragment output.",
       "revId": "cd4bf9afd97b82279107a966d8ec74406dad5c03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b02d061_f1255f8a",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-06T18:04:41Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "7ff41a2a_cd1a18e5",
+      "revId": "cd4bf9afd97b82279107a966d8ec74406dad5c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
