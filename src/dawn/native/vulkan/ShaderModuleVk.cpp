@@ -78,13 +78,16 @@ bool TransformedShaderModuleCacheKey::operator==(
     if (maxSubgroupSizeForFullSubgroups != other.maxSubgroupSizeForFullSubgroups) {
         return false;
     }
+    if (emitPointSize != other.emitPointSize) {
+        return false;
+    }
     return true;
 }
 
 size_t TransformedShaderModuleCacheKeyHashFunc::operator()(
     const TransformedShaderModuleCacheKey& key) const {
     size_t hash = 0;
-    HashCombine(&hash, key.layoutPtr, key.entryPoint);
+    HashCombine(&hash, key.layoutPtr, key.entryPoint, key.emitPointSize);
     for (const auto& entry : key.constants) {
         HashCombine(&hash, entry.first, entry.second);
     }
@@ -221,7 +224,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     // Check to see if we have the handle and spirv cached already.
     auto cacheKey = TransformedShaderModuleCacheKey{
         reinterpret_cast<uintptr_t>(layout), programmableStage.entryPoint.c_str(),
-        programmableStage.constants, maxSubgroupSizeForFullSubgroups};
+        programmableStage.constants, maxSubgroupSizeForFullSubgroups, emitPointSize};
     auto handleAndSpirv = mTransformedShaderModuleCache->Find(cacheKey);
     if (handleAndSpirv.has_value()) {
         return std::move(*handleAndSpirv);
