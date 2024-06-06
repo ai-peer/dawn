@@ -28,6 +28,7 @@
 #include "src/tint/lang/wgsl/resolver/validator.h"
 
 #include <algorithm>
+#include <bitset>
 #include <limits>
 #include <string_view>
 #include <tuple>
@@ -1209,6 +1210,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     const ast::BlendSrcAttribute* first_blend_src = nullptr;
     const core::type::Type* first_blend_src_type = nullptr;
     const ast::LocationAttribute* first_location_without_blend_src = nullptr;
+    std::bitset<2> blend_src_appear_mask;
     Hashset<uint32_t, 4> colors;
     enum class ParamOrRetType {
         kParameter,
@@ -1286,7 +1288,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                     if (TINT_UNLIKELY(!blend_src.has_value())) {
                         TINT_ICE() << "@blend_src has no value";
                     }
-
+                    blend_src_appear_mask.set(*blend_src);
                     return BlendSrcAttribute(blend_src_attr, stage);
                 },
                 [&](const ast::ColorAttribute* col_attr) {
@@ -1506,6 +1508,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     first_blend_src = nullptr;
     first_blend_src_type = nullptr;
     first_location_without_blend_src = nullptr;
+    blend_src_appear_mask.reset();
 
     if (!func->ReturnType()->Is<core::type::Void>()) {
         if (!validate_entry_point_attributes(decl->return_type_attributes, func->ReturnType(),
@@ -1541,6 +1544,20 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         if (!ast::HasAttribute<ast::WorkgroupAttribute>(decl->attributes)) {
             AddError(decl->source) << "a compute shader must include "
                                    << style::Attribute("@workgroup_size") << " in its attributes";
+            return false;
+        }
+    }
+
+    if (decl->PipelineStage() == ast::PipelineStage::kFragment) {
+        if (first_blend_src != nullptr && !blend_src_appear_mask.all()) {
+            for (uint32_t i = 0; i < blend_src_appear_mask.size(); ++i) {
+                if (!blend_src_appear_mask.test(i)) {
+                    AddError(first_blend_src->source)
+                        << style::Attribute("@blend_src")
+                        << style::Code("(", style::Literal(i), ")") << " is missing when "
+                        << style::Attribute("@blend_src") << " is used.";
+                }
+            }
             return false;
         }
     }
