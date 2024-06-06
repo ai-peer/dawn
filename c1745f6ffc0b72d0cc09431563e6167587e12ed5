@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7c645c3_66ea2b85",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-06T01:32:53Z",
+      "side": 1,
+      "message": "Okay, let\u0027s put (3) aside. Overall (4) should be the better one. In spite of the considerable implementation efforts, we will have to do that sooner or later.\n\nThis CL just serves as a short term improvement to (1) with 1 copy saved. According to TextureReadPerf data on both Intel Gen9 and Gen12, it\u0027s much faster than (1). I pasted the perf data in the previous comment.",
+      "parentUuid": "ba66e54f_8319f863",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c6de188_985bcfd3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 8
