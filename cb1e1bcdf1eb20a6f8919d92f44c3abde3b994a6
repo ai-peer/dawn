@@ -1,0 +1,100 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46dae1ce_e7828f93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T19:39:08Z",
+      "side": 1,
+      "message": "I\u0027d like folks from the API side of things to comment on whether these should have author-managed resource binding (allocations) vs. automatically managed.",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf6ca0d_02f2b4c2",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T19:39:08Z",
+      "side": 1,
+      "message": "Our WGSL team have been debating between two styles of declaring them.\n1. The application has to manage resource binding (group and number). In this case, declare a \u0027var\u0027 with @group and @binding attribute.\n2. The implementation manages resource binding.  In this case declare as a \u0027const\u0027 without @group and @binding attributes.\n\nWe wanted feedback from the Dawn API folks about what is more manageable.  If automatically-managed binding, will there be tetris-like pipeline layout compatibility issues?  Keep in mind we don\u0027t want to constantly recompile pipelines in case two different configurations cause the automatica allocation to be moved around a bunch.\n\nA second debate is: this would be the first time that enum values are used as function parameters.  That entails changing the spec around restrictions on function parameters https://gpuweb.github.io/gpuweb/wgsl/#function-restriction \nInstead, some of us think the enum parameters should be expressed as template parameters.\n\nExample:  sampler\u003cmirror_repeat,linear,mimap_linear\u003e(0.0, 16);\nExample:  sampler_comparison\u003cgreater_equal, ...\u003e(...);\n\n(I\u0027m not sure if that person wanted the float and integer parameters as template parameters as well).\n\nPlease show both options for \u0027var\u0027/\u0027const\u0027 and template-vs-normal parameters, and recommend one based on pros and cons.  Compare with how close it is to the corresponding feature in Metal, Vulkan, D3D. (OpenCL has them too, and Metal is basically the same as OpenCL here AFAIK). Compare their usability.",
+      "fixSuggestions": [
+        {
+          "fixId": "3e9ad5e6_eb0492bf",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+              "range": {
+                "startLine": 24,
+                "startChar": 0,
+                "endLine": 25,
+                "endChar": 0
+              },
+              "replacement": "# Example usage 1\n"
+            },
+            {
+              "path": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+              "range": {
+                "startLine": 32,
+                "startChar": 0,
+                "endLine": 32,
+                "endChar": 0
+              },
+              "replacement": "# Example usage 2\n\n```wgsl\n@group(0) @binding(0) var\u003cstorage, read_write\u003e mySampler : sampler;\n\n@group(0) @binding(1) var\u003cstorage, read_write\u003e myComparisonSampler : sampler_comparison;\n\nfn main() {\n  mySampler \u003d sampler(mirror_repeat, linear, mipmap_linear);\n  myComparisonSampler \u003d sampler_comparison(mirror_repeat, linear, mipmap_linear, less_equal);\n}\n```\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18fb3fd1_e8f61516",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T19:39:08Z",
+      "side": 1,
+      "message": "Please write down:\n- changes to function restrictions\n- If going with declaring by \u0027const\u0027, then that forces an update to the rule in the spec \"The type of a const-declaration must be a concrete or abstract constructible type.\"  From https://gpuweb.github.io/gpuweb/wgsl/#const-decls \n  - In this case, would it be possible to copy/alias a sampler, like:  \u0027const s0 \u003d sampler....;  const scopy \u003d s;\u0027 ? That seems reasonable. Is that expected to be an alias or occupy another resource binding?  Is that even detectable?",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8e42b6_baf311d9",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T19:39:08Z",
+      "side": 1,
+      "message": "Write down all the proposed enum names, and how they correspond to the API side string names. (Be concrete about this; it will help in the long run and expose overlaps and usability)",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
