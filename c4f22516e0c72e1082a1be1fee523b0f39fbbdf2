@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "c4f22516e0c72e1082a1be1fee523b0f39fbbdf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d723a7b_2fcef15c",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T14:17:33Z",
+      "side": 1,
+      "message": "Doesn\u0027t `first_blend_src` get set to `nullptr` on line 1511 and `blend_src_appear_mask` get cleared on line 1511? How does this end up happening?",
+      "revId": "c4f22516e0c72e1082a1be1fee523b0f39fbbdf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
