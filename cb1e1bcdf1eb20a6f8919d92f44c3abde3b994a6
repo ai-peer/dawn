@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47798972_b154f378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T20:43:38Z",
+      "side": 1,
+      "message": "I didn\u0027t mean to include the AI-suggested fix.",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb510ac6_d4d237c1",
@@ -76,6 +93,24 @@
           ]
         }
       ],
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45631aff_2ef1dbf8",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-06T20:43:38Z",
+      "side": 1,
+      "message": "Uh.  I didn\u0027t write that AI-suggested fix. Sorry about that.  I forgot to unclick the button...",
+      "parentUuid": "5cf6ca0d_02f2b4c2",
       "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
