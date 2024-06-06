@@ -121,6 +121,30 @@
       },
       "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8482e4_e5ca2290",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-06T07:59:43Z",
+      "side": 1,
+      "message": "I\u0027ve added the check and the tests in Tint:\nhttps://dawn-review.googlesource.com/c/dawn/+/191766",
+      "parentUuid": "80662105_e1acd59f",
+      "range": {
+        "startLine": 810,
+        "startChar": 39,
+        "endLine": 810,
+        "endChar": 47
+      },
+      "revId": "ebd72bf2a5670632ec9ed0e4bf1bb23bbbc609ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
