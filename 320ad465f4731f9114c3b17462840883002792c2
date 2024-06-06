@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72965dcf_0e9e52ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T22:52:52Z",
+      "side": 1,
+      "message": "Sorry about that. I\u0027ve had a lot of struggles with this CL and was trying to land it before anything more got in through CTS or merges that caused more complications.\n\nIt adds complexity to the ShaderModule but a bunch of that complexity matches the other backends now. So, updating the bindings for remapping and multiplaner has a very similar structure in all of the backends. So, more complex, but shared complexity instead of one-offs per ShaderModule.",
+      "parentUuid": "be041cb3_bf62a414",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7f71544_6169e908",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-06T20:38:32Z",
       "side": 1,
       "message": "Nit: I\u0027m not an std::variant expert, but could this be inside the \"if (bufferBindingInfo) ...\" clause below?\n\n(I\u0027m assuming that if (std::holds_alternative() and std::get_if() have the same behaviour if you\u0027re just checking that the type matches.)",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7a1760_b9c8b366",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T22:52:52Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I can try it on monday and see what happens.",
+      "parentUuid": "a7f71544_6169e908",
       "revId": "320ad465f4731f9114c3b17462840883002792c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8225b7ea_d4f54de6",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T22:52:52Z",
+      "side": 1,
+      "message": "I can add it, I\u0027m not usually a fan but it could be useful here to shorten things like the BindingInfo lines.",
+      "parentUuid": "62af57b9_4fae4d6b",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd090950_76be9c8a",
         "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 32
@@ -65,6 +119,24 @@
       "writtenOn": "2024-06-06T20:11:56Z",
       "side": 1,
       "message": "Maybe we should consider factoring all of the binding-related things out of this function. It was already out of control (not your fault) but just grew by 80 more lines.",
+      "revId": "320ad465f4731f9114c3b17462840883002792c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dcc2b49_f46734fa",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-06T22:52:52Z",
+      "side": 1,
+      "message": "Yea, this change makes it work similar to the other ShaderModule files now but they all are starting to get long. I can take a look at all of them and see if we can keep them looking similar but pulling bits out to functions.",
+      "parentUuid": "fd090950_76be9c8a",
       "revId": "320ad465f4731f9114c3b17462840883002792c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
