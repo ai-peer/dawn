@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8091bb09_e458ee4c",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T11:33:08Z",
+      "side": 1,
+      "message": "Strong agreement that we should do 4) and IMO drop 2) and 3). We keep trying to do optimizations using mapping and postponing 4) when we know that 4) would be the ideal solution to avoid stalls.\n\nOverall we\u0027re a bit unhappy with the state of the D3D11 backend that keep addings more and more code paths for shorter-term optimizations instead of doing the more complex by future looking solutions.",
+      "parentUuid": "e7c645c3_66ea2b85",
+      "revId": "c1745f6ffc0b72d0cc09431563e6167587e12ed5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c6de188_985bcfd3",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 8

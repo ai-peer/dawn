@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d139066_3998ff5b",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T11:33:08Z",
+      "side": 1,
+      "message": "The toggle is only enabled if supportsDefaultTextureMapping is true so we don\u0027t need to check it. If the toggle cannot be supported, then the physical device should force set it to false.",
+      "revId": "a3135ab2220a255ec69456e4372b94469d8e8b50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "932ab5b5_713c2ed0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T11:33:08Z",
+      "side": 1,
+      "message": "We only try to do default texture mapping in the 2D dimension case of the switch below. Do we plan to add for 1D or 3D? Otherwise we could just ASSERT here instead.",
+      "revId": "a3135ab2220a255ec69456e4372b94469d8e8b50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
