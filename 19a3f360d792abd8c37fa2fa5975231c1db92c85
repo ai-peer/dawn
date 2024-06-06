@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505e0b42_f87cf3ce",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T15:51:49Z",
+      "side": 1,
+      "message": "^^ closing as resolved as this was just a note?",
+      "parentUuid": "e39bf228_d7d8b6da",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c183fc28_e9bb8bad",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4398b6a9_26e36116",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T15:51:49Z",
+      "side": 1,
+      "message": "This was just to be slightly more clean to have everything defined in this header be in the namespace. It doesn\u0027t make a difference because AFAIK you can redefined the same type alias / typedef if it is to the same thing. If we don\u0027t need to expose egl.h here it\u0027d be nice because in the future we would also need to expose glx.h which is only available on some platforms. (or split in OpenGLBackend_EGL/GLX.h)\n\nGiven it is all very simple types it\u0027s basically free to add the typedefs.",
+      "parentUuid": "c183fc28_e9bb8bad",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b84dd33_d2b221e7",
         "filename": "include/dawn/native/OpenGLBackend.h",
         "patchSetId": 2
@@ -65,6 +101,24 @@
       "writtenOn": "2024-06-06T15:32:16Z",
       "side": 1,
       "message": "This would be more concise:\n\n```\n#if defined(_WIN32)\n#define STDCALL __stdcall\n#else\n#define STDCALL\n#endif\n\nusing EGLGetProcProc \u003d void (STDCALL *)(const char *);\n```",
+      "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e01a246_ad2b2687",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-06T15:51:49Z",
+      "side": 1,
+      "message": "But this leaks a macro, or we need to undef it, or prefix it with DAWN_. So I have a slight preference for conditionally adding a type alias.",
+      "parentUuid": "4b84dd33_d2b221e7",
       "revId": "19a3f360d792abd8c37fa2fa5975231c1db92c85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
