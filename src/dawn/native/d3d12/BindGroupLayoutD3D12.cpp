@@ -152,9 +152,7 @@ BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor
         range.Flags = MatchVariant(
             bindingInfo.bindingLayout,
             [](const StaticSamplerBindingInfo&) -> D3D12_DESCRIPTOR_RANGE_FLAGS {
-                // Static samplers are handled in the frontend.
-                // TODO(crbug.com/dawn/2483): Implement static samplers in the
-                // D3D12 backend.
+                // Static samplers should already be handled. This should never be reached.
                 DAWN_UNREACHABLE();
                 return D3D12_DESCRIPTOR_RANGE_FLAG_NONE;
             },
