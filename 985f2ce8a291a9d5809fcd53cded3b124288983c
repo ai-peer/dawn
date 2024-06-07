@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "806265f4_bd9aaff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "Thank you for your patience, I had trouble wrapping my head around what\u0027s going on here.",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b3592b_28b26238",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "```suggestion\n// - subsetMask parameter denotes a subset of the color attachments that will be blitted to.\n```",
+      "range": {
+        "startLine": 79,
+        "startChar": 73,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638174e9_0fa3a5a0",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "ColorAttachmentMask attachmentsToBlit maybe?",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cde8ff0_2362008e",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "Maybe we can ask the sampleType explicitly here?",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a75e3575_bc02fdec",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "The logic in this file is extremely difficult to get a grasp on. I believe that we could do thing differently in a way that\u0027s more composable. The problem in the current version is that a lot of places in Dawn have to replicate the logic of deciding which toggles and workarounds happen in one place. Instead we should write the code such that workaround are handled in one place in the code and only one.\n\nA suggestion on how this might be possible:\n\n 1) add a ExpandSingleToMultiSample method for use in workarounds.\n 2) in handling of ResolveMultipleAttachmentInSeparatePasses use that helper function to encode expansions when the loadOp is used.\n 3) in handling AlwaysResolveIntoZeroLevelAndLayer maybe copy from the resolve if needed? This is one additional copy, but it should basically never happen in practice.\n \nThis should help make sure that the Vulkan backend and the rest of the code don\u0027t need to know that these workarounds ran, because they handle the new loadOp internally.",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eadc6c72_3379768b",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T15:24:01Z",
+      "side": 1,
+      "message": "Maybe ASSERT that the usage is RenderAttachment as that\u0027s the only one that can be safely removed. (because all others can be added more than once, so if we wanted to unset, we\u0027d need to count how many times they are used)",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
