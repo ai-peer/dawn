@@ -32,9 +32,11 @@
 #include <utility>
 #include <vector>
 
+#include "absl/container/inlined_vector.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/Log.h"
+#include "dawn/common/ityp_span.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/IntegerTypes.h"
@@ -156,6 +158,7 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
                           std::vector<TrackedFutureWaitInfo>::iterator begin,
                           std::vector<TrackedFutureWaitInfo>::iterator end,
                           Nanoseconds timeout) {
+    DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
     bool success = false;
     if (device->ConsumedError([&]() -> MaybeError {
             if (waitSerial > queue->GetLastSubmittedCommandSerial()) {
@@ -163,7 +166,6 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
                 // TODO(dawn:1413): This doesn't need to be a full tick. It just needs to
                 // flush work up to `waitSerial`. This should be done after the
                 // ExecutionQueue / ExecutionContext refactor.
-                auto guard = device->GetScopedLock();
                 queue->ForceEventualFlushOfCommands();
                 DAWN_TRY(device->Tick());
             }
@@ -201,7 +203,9 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
 }
 
 // We can replace the std::vector& when std::span is available via C++20.
-wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanoseconds timeout) {
+wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures,
+                          Nanoseconds timeout,
+                          bool useDeviceLockWhenPossible) {
     auto begin = futures.begin();
     const auto end = futures.end();
     bool anySuccess = false;
@@ -255,6 +259,10 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
 
         bool success;
         if (waitDevice) {
+            // Use device's lock if it's available, since we are going to use device inside this
+            // function.
+            auto deviceLock(
+                GetDeviceScopedLockOrNull(useDeviceLockWhenPossible ? waitDevice : nullptr));
             success = WaitQueueSerialsImpl(waitDevice, std::get<QueueAndSerial>(first).queue.Get(),
                                            lowestWaitSerial, begin, mid, timeout);
         } else {
@@ -420,15 +428,13 @@ void EventManager::SetFutureReady(TrackedEvent* event) {
 bool EventManager::ProcessPollEvents() {
     DAWN_ASSERT(!IsShutDown());
 
-    std::vector<TrackedEvent::WaitRef> completable;
-    wgpu::WaitStatus waitStatus;
+    // Split the futures based on its parent device.
+    absl::flat_hash_map<Ref<DeviceBase>, absl::InlinedVector<FutureID, 1>> perDeviceFutures;
     bool hasProgressingEvents = false;
-    auto hasIncompleteEvents = mEvents.Use([&](auto events) {
+    mEvents.Use([&](auto events) {
         // Iterate all events and record poll events and spontaneous events since they are both
-        // allowed to be completed in the ProcessPoll call. Note that spontaneous events are allowed
-        // to trigger anywhere which is why we include them in the call.
-        std::vector<TrackedFutureWaitInfo> futures;
-        futures.reserve((*events)->size());
+        // allowed to be completed in the ProcessPoll call. Note that spontaneous events are
+        // allowed to trigger anywhere which is why we include them in the call.
         for (auto& [futureID, event] : **events) {
             if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
                 // Figure out if there are any progressing events. If we only have non-progressing
@@ -436,38 +442,78 @@ bool EventManager::ProcessPollEvents() {
                 // be done.
                 auto completionData = event->GetCompletionData();
                 if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+                    perDeviceFutures[nullptr].push_back(futureID);
                     hasProgressingEvents |=
                         std::get<Ref<SystemEvent>>(completionData)->IsProgressing();
                 } else {
+                    const auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+                    Ref<DeviceBase> device = queueAndSerial.queue->GetDevice();
+                    perDeviceFutures[device].push_back(futureID);
                     hasProgressingEvents = true;
                 }
+            }
+        }
+    });
+
+    std::vector<TrackedEvent::WaitRef> completable;
+    bool hasIncompleteEvents = false;
+
+    auto CollectCompletablePerDevice = [&](const Ref<DeviceBase>& device,
+                                           ityp::span<size_t, FutureID> futureIDs) {
+        // Use device lock if it's available, this is to protect device used inside WaitImpl.
+        // We have to lock before locking mEvents because that's locking order used by
+        // DeviceBase::Destroy() as well.
+        auto scopeLock(GetDeviceScopedLockOrNull(device.Get()));
+
+        hasIncompleteEvents |= mEvents.Use([&](auto events) {
+            std::vector<TrackedFutureWaitInfo> futures;
+            futures.reserve(futureIDs.size());
+            for (auto futureID : futureIDs) {
+                // Try to find the event.
+                auto it = (*events)->find(futureID);
+                if (it == (*events)->end()) {
+                    // Completed by another thread.
+                    continue;
+                }
+
+                auto& event = it->second;
+                DAWN_ASSERT(event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly);
 
                 futures.push_back(
                     TrackedFutureWaitInfo{futureID, TrackedEvent::WaitRef{event.Get()}, 0, false});
             }
-        }
 
-        // If there wasn't anything to wait on, we can skip the wait and just return the end.
-        if (futures.size() == 0) {
-            return false;
-        }
+            // If there wasn't anything to wait on, we can skip the wait and just return the end.
+            if (futures.size() == 0) {
+                return false;
+            }
 
-        waitStatus = WaitImpl(futures, Nanoseconds(0));
-        if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            return true;
-        }
-        DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
+            // device's lock is already used in outer scope so we don't need to lock inside this
+            // WaitImpl function.
+            wgpu::WaitStatus waitStatus = WaitImpl(futures, Nanoseconds(0), /*useDeviceLockWhenPossible=*/false);
+            if (waitStatus == wgpu::WaitStatus::TimedOut) {
+                return true;
+            }
+            DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
-        // Enforce callback ordering.
-        auto readyEnd = PrepareReadyCallbacks(futures);
+            // Enforce callback ordering.
+            auto readyEnd = PrepareReadyCallbacks(futures);
 
-        // For all the futures we are about to complete, first ensure they're untracked.
-        for (auto it = futures.begin(); it != readyEnd; ++it) {
-            (*events)->erase(it->futureID);
-            completable.emplace_back(std::move(it->event));
-        }
-        return readyEnd != futures.end();
-    });
+            // For all the futures we are about to complete, first ensure they're untracked.
+            for (auto it = futures.begin(); it != readyEnd; ++it) {
+                (*events)->erase(it->futureID);
+                completable.emplace_back(std::move(it->event));
+            }
+            return readyEnd != futures.end();
+        });
+    };
+
+    // Call collectCompletablePerDevice() for each device's futures. The device's global lock will
+    // be used in that function.
+    for (auto& [device, futures] : perDeviceFutures) {
+        CollectCompletablePerDevice(device,
+                                    ityp::SpanFromUntyped<size_t>(futures.data(), futures.size()));
+    }
 
     // Finally, call callbacks while comparing the last process event id with any new ones that may
     // have been created via the callbacks.
@@ -536,7 +582,7 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
     // Otherwise, we should have successfully looked up all of them.
     DAWN_ASSERT(futures.size() == count);
 
-    wgpu::WaitStatus waitStatus = WaitImpl(futures, timeout);
+    wgpu::WaitStatus waitStatus = WaitImpl(futures, timeout, /*useDeviceLockWhenPossible=*/true);
     if (waitStatus != wgpu::WaitStatus::Success) {
         return waitStatus;
     }
