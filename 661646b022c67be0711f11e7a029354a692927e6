@@ -335,6 +335,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec508965_7affd965",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-07T17:56:54Z",
+      "side": 1,
+      "message": "I think we could have global tracking in Chrome\u0027s GPU process somewhere? \nRight now, WebGPU is doing `gl::QueryD3D11DeviceObjectFromANGLE()`\n\nI\u0027m thinking we add something which queries the LUID. If using Graphite, it\u0027ll ask the graphite device. If not using Graphite, it\u0027ll ask ANGLE\n\n(in any case, I agree with the conclusion of this thread. Let\u0027s not deal with factory currency right now. eventually we may want to, but no need for now)",
+      "parentUuid": "bc2ed423_36e425ec",
+      "range": {
+        "startLine": 138,
+        "startChar": 32,
+        "endLine": 138,
+        "endChar": 53
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29b56e5a_67f92d8c",
         "filename": "src/dawn/native/d3d/BackendD3D.cpp",
         "patchSetId": 4
