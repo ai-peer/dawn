@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ea4e14d_f2ca6b4d",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T14:34:22Z",
+      "side": 1,
+      "message": "FYI: last I checked, the Desktop GL backend was not being tested on the bots anymore, for unknown reasons. Local testing would be appreciated, but not demanded. 😊",
+      "revId": "60bac13ca1023994d62e91dd2244ab3263163d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
