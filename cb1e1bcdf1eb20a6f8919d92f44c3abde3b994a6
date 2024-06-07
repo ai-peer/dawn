@@ -153,6 +153,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4c8bc91_06f103ad",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2024-06-07T18:38:36Z",
+      "side": 1,
+      "message": "Another option is predefined constant integer values that we validate as parameters instead of enums. E.g.\n\n```wgsl\nconst clamp_to_edge \u003d 0;\nconst mirror_repeat \u003d 1;\n...\n\nmySampler \u003d sampelr(mirror_repeat /* or 1 */, ...);\n```\n\nYes that means you could make confusing parameters, but it is lower impact in terms of specification.",
+      "parentUuid": "1da330dc_2b8fc0f5",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fb3fd1_e8f61516",
         "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
         "patchSetId": 1
