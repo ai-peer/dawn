@@ -161,6 +161,9 @@ MaybeError ValidateSampledTextureBinding(DeviceBase* device,
     TextureBase* texture = view->GetTexture();
 
     SampleTypeBit supportedTypes = texture->GetFormat().GetAspectInfo(aspect).supportedSampleTypes;
+    if (supportedTypes == SampleTypeBit::External) {
+        supportedTypes = texture->GetExternalFormatSupportedSampleTypes();
+    }
     DAWN_TRY(ValidateCanUseAs(texture, wgpu::TextureUsage::TextureBinding, mode));
 
     DAWN_INVALID_IF(texture->IsMultisampledTexture() != layout.multisampled,

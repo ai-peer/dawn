@@ -570,10 +570,13 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
         yCbCrAHBInfo.vkYChromaOffset = bufferFormatProperties.suggestedYChromaOffset;
 
         uint32_t formatFeatures = bufferFormatProperties.formatFeatures;
-        yCbCrAHBInfo.vkChromaFilter =
-            (formatFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT)
-                ? wgpu::FilterMode::Linear
-                : wgpu::FilterMode::Nearest;
+        if (formatFeatures & VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT) {
+            yCbCrAHBInfo.vkChromaFilter = wgpu::FilterMode::Linear;
+            mSampleTypeBit = wgpu::SampleTypeBit::UnfilterableFloat | wgpu::SampleTypeBit::Float;
+        } else {
+            yCbCrAHBInfo.vkChromaFilter = wgpu::FilterMode::Nearest;
+            mSampleTypeBit = wgpu::SampleTypeBit::UnfilterableFloat;
+        }
         yCbCrAHBInfo.forceExplicitReconstruction =
             formatFeatures &
             VK_FORMAT_FEATURE_SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT;
@@ -977,6 +980,10 @@ RefCountedVkHandle<VkImage>* SharedTextureMemory::GetVkImage() const {
 
 uint32_t SharedTextureMemory::GetQueueFamilyIndex() const {
     return mQueueFamilyIndex;
+}
+
+SampleTypeBit SharedTextureMemory::GetSupportedSampleTypeBit() const {
+    return mSampleTypeBit;
 }
 
 void SharedTextureMemory::DestroyImpl() {
