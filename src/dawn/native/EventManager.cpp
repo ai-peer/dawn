@@ -32,6 +32,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/container/inlined_vector.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/Log.h"
@@ -163,7 +164,6 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
                 // TODO(dawn:1413): This doesn't need to be a full tick. It just needs to
                 // flush work up to `waitSerial`. This should be done after the
                 // ExecutionQueue / ExecutionContext refactor.
-                auto guard = device->GetScopedLock();
                 queue->ForceEventualFlushOfCommands();
                 DAWN_TRY(device->Tick());
             }
@@ -420,17 +420,63 @@ void EventManager::SetFutureReady(TrackedEvent* event) {
 bool EventManager::ProcessPollEvents() {
     DAWN_ASSERT(!IsShutDown());
 
+    // Split the futures based on its parent device.
+    absl::flat_hash_map<Ref<DeviceBase>, absl::InlinedVector<FutureID, 1>> perDeviceFutures;
+    mEvents.Use([&](auto events) {
+        // Iterate all events and record poll events and spontaneous events since they are both
+        // allowed to be completed in the ProcessPoll call. Note that spontaneous events are
+        // allowed to trigger anywhere which is why we include them in the call.
+        for (auto& [futureID, event] : **events) {
+            if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
+                auto completionData = event->GetCompletionData();
+                if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+                    perDeviceFutures[nullptr].push_back(futureID);
+                } else {
+                    const auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+                    Ref<DeviceBase> device = queueAndSerial.queue->GetDevice();
+                    perDeviceFutures[device].push_back(futureID);
+                }
+            }
+        }
+    });
+
+    // Call ProcessPollEventsUniqueDevice() for each device's futures. The device's global lock will
+    // be used in that function.
+    bool hasEvents = !perDeviceFutures.empty();
+    for (auto& [device, futures] : perDeviceFutures) {
+        hasEvents |= ProcessPollEventsUniqueDevice(
+            device, ityp::SpanFromUntyped<size_t>(futures.data(), futures.size()));
+    }
+
+    return hasEvents;
+}
+
+bool EventManager::ProcessPollEventsUniqueDevice(const Ref<DeviceBase>& device,
+                                                 span<FutureID> futureIDs) {
     std::vector<TrackedEvent::WaitRef> completable;
     wgpu::WaitStatus waitStatus;
     bool hasProgressingEvents = false;
-    auto hasIncompleteEvents = mEvents.Use([&](auto events) {
-        // Iterate all events and record poll events and spontaneous events since they are both
-        // allowed to be completed in the ProcessPoll call. Note that spontaneous events are allowed
-        // to trigger anywhere which is why we include them in the call.
-        std::vector<TrackedFutureWaitInfo> futures;
-        futures.reserve((*events)->size());
-        for (auto& [futureID, event] : **events) {
-            if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
+    bool hasIncompleteEvents;
+
+    {
+        // Use device lock if it's available, this is to protect device used inside WaitImpl.
+        // We have to lock before locking mEvents because that's pattern used by
+        // DeviceBase::Destroy() as well.
+        auto scopeLock = device ? device->GetScopedLock() : Mutex::AutoLock();
+
+        hasIncompleteEvents = mEvents.Use([&](auto events) {
+            std::vector<TrackedFutureWaitInfo> futures;
+            futures.reserve((*events)->size());
+            for (auto futureID : futureIDs) {
+                // Try to find the event.
+                auto it = (*events)->find(futureID);
+                if (it == (*events)->end()) {
+                    // Expired between ProcessPollEvents() and this function.
+                    continue;
+                }
+
+                auto& event = it->second;
+                DAWN_ASSERT(event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly);
                 // Figure out if there are any progressing events. If we only have non-progressing
                 // events, we need to return false to indicate that there isn't any polling work to
                 // be done.
@@ -445,29 +491,29 @@ bool EventManager::ProcessPollEvents() {
                 futures.push_back(
                     TrackedFutureWaitInfo{futureID, TrackedEvent::WaitRef{event.Get()}, 0, false});
             }
-        }
 
-        // If there wasn't anything to wait on, we can skip the wait and just return the end.
-        if (futures.size() == 0) {
-            return false;
-        }
+            // If there wasn't anything to wait on, we can skip the wait and just return the end.
+            if (futures.size() == 0) {
+                return false;
+            }
 
-        waitStatus = WaitImpl(futures, Nanoseconds(0));
-        if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            return true;
-        }
-        DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
+            waitStatus = WaitImpl(futures, Nanoseconds(0));
+            if (waitStatus == wgpu::WaitStatus::TimedOut) {
+                return true;
+            }
+            DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
-        // Enforce callback ordering.
-        auto readyEnd = PrepareReadyCallbacks(futures);
+            // Enforce callback ordering.
+            auto readyEnd = PrepareReadyCallbacks(futures);
 
-        // For all the futures we are about to complete, first ensure they're untracked.
-        for (auto it = futures.begin(); it != readyEnd; ++it) {
-            (*events)->erase(it->futureID);
-            completable.emplace_back(std::move(it->event));
-        }
-        return readyEnd != futures.end();
-    });
+            // For all the futures we are about to complete, first ensure they're untracked.
+            for (auto it = futures.begin(); it != readyEnd; ++it) {
+                (*events)->erase(it->futureID);
+                completable.emplace_back(std::move(it->event));
+            }
+            return readyEnd != futures.end();
+        });
+    }
 
     // Finally, call callbacks while comparing the last process event id with any new ones that may
     // have been created via the callbacks.
@@ -499,10 +545,8 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
         return wgpu::WaitStatus::Success;
     }
 
-    // Look up all of the futures and build a list of `TrackedFutureWaitInfo`s.
-    std::vector<TrackedFutureWaitInfo> futures;
-    futures.reserve(count);
-    bool anyCompleted = false;
+    // Split the futures based on its parent device.
+    absl::flat_hash_map<Ref<DeviceBase>, absl::InlinedVector<FutureWaitInfo, 1>> perDeviceFutures;
     mEvents.Use([&](auto events) {
         FutureID firstInvalidFutureID = mNextFutureID;
         for (size_t i = 0; i < count; ++i) {
@@ -511,6 +555,48 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
             // Check for cases that are undefined behavior in the API contract.
             DAWN_ASSERT(futureID != 0);
             DAWN_ASSERT(futureID < firstInvalidFutureID);
+
+            // Try to find the event.
+            auto it = (*events)->find(futureID);
+            if (it != (*events)->end()) {
+                auto completionData = it->second->GetCompletionData();
+                if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+                    perDeviceFutures[nullptr].push_back(infos[i]);
+                } else {
+                    const auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+                    Ref<DeviceBase> device = queueAndSerial.queue->GetDevice();
+                    perDeviceFutures[device].push_back(infos[i]);
+                }
+            }
+        }
+    });
+
+    // Call WaitAnyUniqueDevice() for each device's futures. The device's global lock will be used
+    // in that function.
+    wgpu::WaitStatus finalWaitStatus = wgpu::WaitStatus::Success;
+    for (auto& [device, futures] : perDeviceFutures) {
+        auto waitStatus = WaitAnyUniqueDevice(
+            device, ityp::SpanFromUntyped<size_t>(futures.data(), futures.size()), timeout);
+        if (waitStatus != wgpu::WaitStatus::Success) {
+            finalWaitStatus = waitStatus;
+        }
+    }
+
+    return finalWaitStatus;
+}
+
+wgpu::WaitStatus EventManager::WaitAnyUniqueDevice(const Ref<DeviceBase>& device,
+                                                   span<FutureWaitInfo> infos,
+                                                   Nanoseconds timeout) {
+    // Look up all of the futures and build a list of `TrackedFutureWaitInfo`s.
+    std::vector<TrackedFutureWaitInfo> futures;
+    futures.reserve(infos.size());
+    bool anyCompleted = false;
+    mEvents.Use([&](auto events) {
+        FutureID firstInvalidFutureID = mNextFutureID;
+        for (size_t i = 0; i < infos.size(); ++i) {
+            FutureID futureID = infos[i].future.id;
+
             // TakeWaitRef below will catch if the future is waited twice at the
             // same time (unless it's already completed).
 
@@ -534,11 +620,16 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
         return wgpu::WaitStatus::Success;
     }
     // Otherwise, we should have successfully looked up all of them.
-    DAWN_ASSERT(futures.size() == count);
+    DAWN_ASSERT(futures.size() == infos.size());
 
-    wgpu::WaitStatus waitStatus = WaitImpl(futures, timeout);
-    if (waitStatus != wgpu::WaitStatus::Success) {
-        return waitStatus;
+    {
+        // Use device's global lock if it's available. We need this to protect the device used
+        // inside WaitImpl().
+        auto scopeLock = device ? device->GetScopedLock() : Mutex::AutoLock();
+        wgpu::WaitStatus waitStatus = WaitImpl(futures, timeout);
+        if (waitStatus != wgpu::WaitStatus::Success) {
+            return waitStatus;
+        }
     }
 
     // Enforce callback ordering
