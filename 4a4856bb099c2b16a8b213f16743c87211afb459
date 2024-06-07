@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d37e31_983cae20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T12:08:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4a4856bb099c2b16a8b213f16743c87211afb459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2e81cd8_358878e1",
+        "filename": "src/dawn/tests/end2end/AdapterCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T12:08:19Z",
+      "side": 1,
+      "message": "```suggestion\n        // TODO(345685638): these tests are timed out on TSAN bots.\n        DAWN_TEST_UNSUPPORTED_IF(IsTsan());\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "4a4856bb099c2b16a8b213f16743c87211afb459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
