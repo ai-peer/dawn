@@ -28,6 +28,7 @@
 #include "src/tint/lang/wgsl/resolver/validator.h"
 
 #include <algorithm>
+#include <bitset>
 #include <limits>
 #include <string_view>
 #include <tuple>
@@ -1222,7 +1223,8 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                                      bool is_struct_member,
                                                      std::optional<uint32_t> location,
                                                      std::optional<uint32_t> blend_src,
-                                                     std::optional<uint32_t> color) {
+                                                     std::optional<uint32_t> color,
+                                                     std::bitset<2>* blend_src_appear_mask) {
         // Scan attributes for pipeline IO attributes.
         // Check for overlap with attributes that have been seen previously.
         const ast::Attribute* pipeline_io_attribute = nullptr;
@@ -1288,7 +1290,21 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                     }
 
                     bool is_input = param_or_ret == ParamOrRetType::kParameter;
-                    return BlendSrcAttribute(blend_src_attr, stage, is_input);
+                    if (!BlendSrcAttribute(blend_src_attr, stage, is_input)) {
+                        return false;
+                    }
+
+                    if (!is_struct_member) {
+                        AddError(attr->source)
+                            << style::Attribute("@blend_src") << " must be used on a struct member";
+                        return false;
+                    }
+
+                    // *blend_src <= 1 has been checked in resolver.cc
+                    TINT_ASSERT(*blend_src <= 1);
+                    TINT_ASSERT(blend_src_appear_mask);
+                    blend_src_appear_mask->set(*blend_src);
+                    return true;
                 },
                 [&](const ast::ColorAttribute* col_attr) {
                     color_attribute = col_attr;
@@ -1461,6 +1477,22 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         return true;
     };
 
+    using BlendSrcAppearMask = std::bitset<2>;
+    auto validate_blend_src_appearance = [&](const BlendSrcAppearMask& blend_src_appear_mask) {
+        if (first_blend_src != nullptr && !blend_src_appear_mask.all()) {
+            for (uint32_t i = 0; i < blend_src_appear_mask.size(); ++i) {
+                if (!blend_src_appear_mask.test(i)) {
+                    AddError(first_blend_src->source)
+                        << style::Attribute("@blend_src")
+                        << style::Code("(", style::Literal(i), ")") << " is missing when "
+                        << style::Attribute("@blend_src") << " is used";
+                }
+            }
+            return false;
+        }
+        return true;
+    };
+
     // Outer lambda for validating the entry point attributes for a type.
     auto validate_entry_point_attributes =
         [&](VectorRef<const ast::Attribute*> attrs, const core::type::Type* ty, Source source,
@@ -1468,22 +1500,27 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             std::optional<uint32_t> index, std::optional<uint32_t> color) {
             if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
                                                        /*is_struct_member*/ false, location, index,
-                                                       color)) {
+                                                       color, /*blend_src_appear_mask*/ nullptr)) {
                 return false;
             }
 
+            BlendSrcAppearMask blend_src_appear_mask;
             if (auto* str = ty->As<sem::Struct>()) {
                 for (auto* member : str->Members()) {
                     if (!validate_entry_point_attributes_inner(
                             member->Declaration()->attributes, member->Type(),
                             member->Declaration()->source, param_or_ret,
                             /*is_struct_member*/ true, member->Attributes().location,
-                            member->Attributes().blend_src, member->Attributes().color)) {
+                            member->Attributes().blend_src, member->Attributes().color,
+                            &blend_src_appear_mask)) {
                         AddNote(decl->source) << "while analyzing entry point "
                                               << style::Function(decl->name->symbol.NameView());
                         return false;
                     }
                 }
+            }
+            if (!validate_blend_src_appearance(blend_src_appear_mask)) {
+                return false;
             }
 
             return true;
