@@ -39,6 +39,7 @@
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonMovable.h"
 #include "dawn/common/Ref.h"
+#include "dawn/common/ityp_span.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
@@ -46,6 +47,7 @@
 
 namespace dawn::native {
 
+class DeviceBase;
 struct InstanceDescriptor;
 
 // Subcomponent of the Instance which tracks callback events for the Future-based callback

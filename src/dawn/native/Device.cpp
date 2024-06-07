@@ -170,6 +170,13 @@ static constexpr UncapturedErrorCallbackInfo kEmptyUncapturedErrorCallbackInfo =
 
 }  // anonymous namespace
 
+Mutex::AutoLock GetDeviceScopedLockOrNull(DeviceBase* device) {
+    if (device) {
+        return device->GetScopedLock();
+    }
+    return Mutex::AutoLock();
+}
+
 DeviceBase::DeviceLostEvent::DeviceLostEvent(const DeviceLostCallbackInfo& callbackInfo)
     : TrackedEvent(callbackInfo.mode, SystemEvent::CreateNonProgressingEvent()),
       mCallback(callbackInfo.callback),
