@@ -33,6 +33,24 @@
       "message": "Doesn\u0027t `first_blend_src` get set to `nullptr` on line 1511 and `blend_src_appear_mask` get cleared on line 1511? How does this end up happening?",
       "revId": "c4f22516e0c72e1082a1be1fee523b0f39fbbdf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "703165da_80acb89f",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1552,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-07T12:11:15Z",
+      "side": 1,
+      "message": "I\u0027ve updated the CL to make the logic a bit clearer. In fact `blend_src_appear_mask` should only work with a struct so we just need to use the bitmask with structs.\n\nPTAL, thanks!",
+      "parentUuid": "9d723a7b_2fcef15c",
+      "revId": "c4f22516e0c72e1082a1be1fee523b0f39fbbdf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
