@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b7ce7f4_478ec913",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-07T16:08:12Z",
+      "side": 1,
+      "message": "This is expecting to pass, but the comment above the test says it should fail? \n\nPresumably the discrepancy comes from the fact that the struct is not actually used?",
+      "revId": "3b87871012e8843cd0f788e97edf9b6c901cd364",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
