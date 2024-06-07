@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64db431b_50046901",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-07T16:04:18Z",
+      "side": 1,
+      "message": "And at the point of creating render pipeline, vulkan doesn\u0027t have any way to know that the resolve attachments were removed. Ultimately, the render pipeline won\u0027t be compatible with the workaround-ed render pass.",
+      "parentUuid": "66a8d0b2_87c8f9a8",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eadc6c72_3379768b",
         "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
         "patchSetId": 13
