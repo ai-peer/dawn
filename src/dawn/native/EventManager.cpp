@@ -156,6 +156,7 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
                           std::vector<TrackedFutureWaitInfo>::iterator begin,
                           std::vector<TrackedFutureWaitInfo>::iterator end,
                           Nanoseconds timeout) {
+    auto guard = device->GetScopedLock();
     bool success = false;
     if (device->ConsumedError([&]() -> MaybeError {
             if (waitSerial > queue->GetLastSubmittedCommandSerial()) {
@@ -163,7 +164,6 @@ bool WaitQueueSerialsImpl(DeviceBase* device,
                 // TODO(dawn:1413): This doesn't need to be a full tick. It just needs to
                 // flush work up to `waitSerial`. This should be done after the
                 // ExecutionQueue / ExecutionContext refactor.
-                auto guard = device->GetScopedLock();
                 queue->ForceEventualFlushOfCommands();
                 DAWN_TRY(device->Tick());
             }
@@ -423,11 +423,11 @@ bool EventManager::ProcessPollEvents() {
     std::vector<TrackedEvent::WaitRef> completable;
     wgpu::WaitStatus waitStatus;
     bool hasProgressingEvents = false;
-    auto hasIncompleteEvents = mEvents.Use([&](auto events) {
+    std::vector<TrackedFutureWaitInfo> futures;
+    mEvents.Use([&](auto events) {
         // Iterate all events and record poll events and spontaneous events since they are both
         // allowed to be completed in the ProcessPoll call. Note that spontaneous events are allowed
         // to trigger anywhere which is why we include them in the call.
-        std::vector<TrackedFutureWaitInfo> futures;
         futures.reserve((*events)->size());
         for (auto& [futureID, event] : **events) {
             if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
@@ -446,28 +446,30 @@ bool EventManager::ProcessPollEvents() {
                     TrackedFutureWaitInfo{futureID, TrackedEvent::WaitRef{event.Get()}, 0, false});
             }
         }
+    });
 
-        // If there wasn't anything to wait on, we can skip the wait and just return the end.
-        if (futures.size() == 0) {
-            return false;
-        }
+    // If there wasn't anything to wait on, we can skip the wait and just return the end.
+    if (futures.size() == 0) {
+        return false;
+    }
 
-        waitStatus = WaitImpl(futures, Nanoseconds(0));
-        if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            return true;
-        }
-        DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
+    waitStatus = WaitImpl(futures, Nanoseconds(0));
+    if (waitStatus == wgpu::WaitStatus::TimedOut) {
+        return true;
+    }
+    DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
-        // Enforce callback ordering.
-        auto readyEnd = PrepareReadyCallbacks(futures);
+    // Enforce callback ordering.
+    auto readyEnd = PrepareReadyCallbacks(futures);
 
+    mEvents.Use([&](auto events) {
         // For all the futures we are about to complete, first ensure they're untracked.
         for (auto it = futures.begin(); it != readyEnd; ++it) {
             (*events)->erase(it->futureID);
             completable.emplace_back(std::move(it->event));
         }
-        return readyEnd != futures.end();
     });
+    const bool hasIncompleteEvents = readyEnd != futures.end();
 
     // Finally, call callbacks while comparing the last process event id with any new ones that may
     // have been created via the callbacks.
