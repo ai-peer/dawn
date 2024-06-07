@@ -47,6 +47,10 @@ using testing::SaveArg;
 class AdapterCreationTest : public ::testing::TestWithParam<std::optional<wgpu::CallbackMode>> {
   protected:
     void SetUp() override {
+#if defined(THREAD_SANITIZER)
+        // TODO(345685638): these tests are timed out on TSAN bots.
+        DAWN_TEST_UNSUPPORTED_IF(true);
+#endif
         dawnProcSetProcs(&native::GetProcs());
 
         {
