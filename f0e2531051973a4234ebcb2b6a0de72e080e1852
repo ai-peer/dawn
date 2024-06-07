@@ -16,6 +16,23 @@
       "message": "PTAL the diff between PS 1 and 4.",
       "revId": "f0e2531051973a4234ebcb2b6a0de72e080e1852",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3f8db5f_fae670d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T12:52:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f0e2531051973a4234ebcb2b6a0de72e080e1852",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
