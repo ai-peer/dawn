@@ -39,6 +39,7 @@
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonMovable.h"
 #include "dawn/common/Ref.h"
+#include "dawn/common/ityp_span.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
@@ -46,6 +47,7 @@
 
 namespace dawn::native {
 
+class DeviceBase;
 struct InstanceDescriptor;
 
 // Subcomponent of the Instance which tracks callback events for the Future-based callback
@@ -82,7 +84,12 @@ class EventManager final : NonMovable {
                                            Nanoseconds timeout);
 
   private:
+    template <typename T>
+    using span = ityp::span<size_t, T>;
+
     bool IsShutDown() const;
+    // This function process poll events owned by a single device or system events.
+    bool ProcessPollEventsUniqueDevice(const Ref<DeviceBase>& device, span<FutureID> futureIDs);
 
     bool mTimedWaitAnyEnable = false;
     size_t mTimedWaitAnyMaxCount = kTimedWaitAnyMaxCountDefault;
