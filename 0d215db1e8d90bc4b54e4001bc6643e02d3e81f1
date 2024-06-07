@@ -16,6 +16,23 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "0d215db1e8d90bc4b54e4001bc6643e02d3e81f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded8e177_a2cbea85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T16:40:25Z",
+      "side": 1,
+      "message": "Checking if rubberstamper can approve this.",
+      "revId": "0d215db1e8d90bc4b54e4001bc6643e02d3e81f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
