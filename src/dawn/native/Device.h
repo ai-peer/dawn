@@ -80,6 +80,8 @@ struct CallbackTask;
 struct InternalPipelineStore;
 struct ShaderModuleParseResult;
 
+[[nodiscard]] Mutex::AutoLock GetDeviceScopedLockOrNull(DeviceBase* device);
+
 class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
   public:
     struct DeviceLostEvent final : public EventManager::TrackedEvent {
