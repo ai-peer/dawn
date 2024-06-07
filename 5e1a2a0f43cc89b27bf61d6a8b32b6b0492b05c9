@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0076b0_ec1b45f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000181
+      },
+      "writtenOn": "2024-06-07T03:18:45Z",
+      "side": 1,
+      "message": "Chromium build gardener here--\n\nThere was a transient build failure [1] that closed the tree until the next build passed, which seemed to be related to this CL. There wasn\u0027t anything on the blamelist for the build that seemed related to Dawn though, so I wasn\u0027t sure why that particular build failed when others didn\u0027t. Just thought that I\u0027d let y\u0027all know, since you might have a better idea of what happened than I do.\n\n[1] https://cr-buildbucket.appspot.com/build/8745825628719973297",
+      "revId": "5e1a2a0f43cc89b27bf61d6a8b32b6b0492b05c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
