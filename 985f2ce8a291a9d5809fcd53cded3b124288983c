@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66a8d0b2_87c8f9a8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-07T16:02:57Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to avoid making vulkan backend know that there is a workaround. The ResolveMultipleAttachmentInSeparatePasses specifically removes the resolve attachments because its purpose is to fix the bug on Qualcomm GPUs when there are more than 1 resolve attachment. However, if vulkan backend doesn\u0027t know that, it will accidentally create a render pass with two subpasses and resolveAttachmentRef pointing to non-existent attachments.",
+      "parentUuid": "a75e3575_bc02fdec",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eadc6c72_3379768b",
         "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
         "patchSetId": 13
