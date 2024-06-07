@@ -25,32 +25,17 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-cmake_policy(SET CMP0048 NEW)
-project(webgpu VERSION 1.1.0 LANGUAGES CXX)
+DawnJSONGenerator(
+    TARGET "kotlin"
+    PRINT_NAME "Dawn Kotlin Bindings"
+    RESULT_VARIABLE "DAWN_KOTLIN_GEN_SOURCES"
+)
 
-cmake_minimum_required(VERSION 3.22.1)
+list(FILTER DAWN_KOTLIN_GEN_SOURCES EXCLUDE REGEX ".kt$")
 
-include(${CMAKE_CURRENT_LIST_DIR}/BundleLibraries.cmake)
-
-set(DAWN_BUILD_ANDROID_SAMPLES OFF)
-set(DAWN_BUILD_SAMPLES OFF)
-set(DAWN_ENABLE_INSTALL ON)
-set(TINT_BUILD_TESTS OFF)
-set(TINT_BUILD_CMD_TOOLS OFF)
-
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-
-add_subdirectory(../../../../../.. dawn)
-
-bundle_libraries(webgpu_c_bundled dawn_kotlin_bindings)
-
-find_library(log-lib log)
-
-target_link_libraries(webgpu_c_bundled ${log-lib} android)
-
-add_custom_command(DEPENDS webgpu_dawn POST_BUILD
-                   OUTPUT ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h
-                   COMMAND rm -r "${CMAKE_SOURCE_DIR}/gen" || echo
-                   COMMAND ${CMAKE_COMMAND} -E copy
-                           ${CMAKE_CURRENT_BINARY_DIR}/dawn/gen/include/dawn/webgpu.h
-                           ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
+add_library(dawn_kotlin_bindings)
+target_sources(dawn_kotlin_bindings PRIVATE
+    ${DAWN_KOTLIN_GEN_SOURCES}
+    "webgpu/src/main/cpp/Util.cpp"
+)
+target_link_libraries(dawn_kotlin_bindings webgpu_dawn absl::raw_hash_set nativewindow) # remove the hash set?

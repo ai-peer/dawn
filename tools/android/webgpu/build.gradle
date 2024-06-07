@@ -42,11 +42,16 @@ android {
                 version '3.22.1'
             }
         }
+        libraryVariants.all {
+            tasks.findByName("compile${name.capitalize()}Kotlin}")
+                ?.dependsOn(tasks.findByName("externalNativeBuild${name.capitalize()}"))
+        }
     }
 
     externalNativeBuild {
         cmake {
             path file('src/main/cpp/CMakeLists.txt')
+            buildStagingDirectory "./outputs/cmake"
         }
     }
 
@@ -56,7 +61,7 @@ android {
 
     prefab {
         webgpu_c_bundled {
-            headers "src/main/cpp/gen/include"
+            headers "$projectDir/outputs/dawn-cmake/src/main/cpp/gen/include"
         }
     }
     kotlinOptions {
@@ -64,6 +69,14 @@ android {
     }
     compileOptions {
         targetCompatibility JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs += '../../../out/Debug/gen/java'
+            }
+        }
     }
 }
 
