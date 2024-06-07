@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "31188c09240e8af8623da6e61c4ae3ce0ed1b91e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4ddbacf_e4d511af",
+        "filename": "src/dawn/tests/end2end/SurfaceTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-07T23:14:57Z",
+      "side": 1,
+      "message": "Perhaps test what happens if some unexpected sType is in the chain, that should also be an Error. Not sure if we actually handle that currently though.",
+      "revId": "31188c09240e8af8623da6e61c4ae3ce0ed1b91e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
