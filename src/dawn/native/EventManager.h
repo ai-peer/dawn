@@ -46,6 +46,7 @@
 
 namespace dawn::native {
 
+class DeviceBase;
 struct InstanceDescriptor;
 
 // Subcomponent of the Instance which tracks callback events for the Future-based callback
