@@ -33,6 +33,24 @@
       "message": "Nit: this doesn\u0027t seem to be used elsewhere. Could it be folded into the EGLGetProcProc definition, or am I missing something?",
       "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8dbd8a2_1fc1be7d",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T13:37:22Z",
+      "side": 1,
+      "message": "It could but I don\u0027t remember the syntax for function pointer returning a function pointer in C and IIRC it is horrible. Do you know?",
+      "parentUuid": "bf512a23_0d234c18",
+      "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
