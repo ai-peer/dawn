@@ -16,6 +16,24 @@
       "message": "fyi, you can also suppress it here:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/BackendVk.cpp;l\u003d89\n\nit may be necessary to do it that way as there can be other failures that come up in CTS tests (CI-only, or in the future), etc.",
       "revId": "cfab480f170d6cd52bcd95bd57cb32f934f4e08f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf54d48e_90cc96b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-07T18:19:21Z",
+      "side": 1,
+      "message": "Ah thanks, I didn\u0027t know about those suppressions. I enabled CI-only tests on the next CL and it passed CTS so hopefully there\u0027s no other failures, but if this comes up again before it\u0027s fixed upstream I\u0027ll move the suppressions over.",
+      "parentUuid": "6d12a2d3_67b18834",
+      "revId": "cfab480f170d6cd52bcd95bd57cb32f934f4e08f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
