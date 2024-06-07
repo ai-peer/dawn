@@ -51,6 +51,24 @@
       "parentUuid": "bf512a23_0d234c18",
       "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d361004_4fe1cc89",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T13:55:50Z",
+      "side": 1,
+      "message": "Ugh, never mind. I forgot that the old-style getProc was not even returning a function pointer (just a void*), while this one is. This is fine.",
+      "parentUuid": "b8dbd8a2_1fc1be7d",
+      "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
