@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d15278af_2bbc5a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-07T15:40:37Z",
+      "side": 1,
+      "message": "This change breaks CMake build with DAWN_FETCH_DEPENDENCIES\u003dON. \n\n`src/tint/cmd/fuzz/ir/BUILD.cmake:41` adds `fuzz.proto` that wants protobuf. \n\n```\nCMake Error at src/tint/CMakeLists.txt:676 (generate_protos):\n  Unknown CMake command \"generate_protos\".\n\n\n-- Configuring incomplete, errors occurred!\n```",
+      "revId": "5e1a2a0f43cc89b27bf61d6a8b32b6b0492b05c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2470b081_ead712f4",
         "filename": "src/tint/cmd/fuzz/ir/BUILD.gn",
         "patchSetId": 3
