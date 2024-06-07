@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a602b67_bb576e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T13:18:18Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf512a23_0d234c18",
+        "filename": "include/dawn/native/OpenGLBackend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-07T13:18:18Z",
+      "side": 1,
+      "message": "Nit: this doesn\u0027t seem to be used elsewhere. Could it be folded into the EGLGetProcProc definition, or am I missing something?",
+      "revId": "61801f93bbfba3b3b6aa2da788931261630ada30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
