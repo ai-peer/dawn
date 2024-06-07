@@ -39,6 +39,30 @@
       },
       "revId": "4a4856bb099c2b16a8b213f16743c87211afb459",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a136164_c633ed8e",
+        "filename": "src/dawn/tests/end2end/AdapterCreationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-07T12:09:10Z",
+      "side": 1,
+      "message": "Oh no, they aren\u0027t DawnTest based \u003e_\u003e Can we make these Asan and Tsan functions static methods?",
+      "parentUuid": "e2e81cd8_358878e1",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 6
+      },
+      "revId": "4a4856bb099c2b16a8b213f16743c87211afb459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
