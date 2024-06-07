@@ -90,6 +90,7 @@ if (NOT TARGET glfw AND DAWN_USE_GLFW)
 endif()
 
 if (NOT TARGET libabsl)
+    set(ABSL_RANDOM_RANDEN_COPTS_WARNING ON)
     message(STATUS "Dawn: using Abseil at ${DAWN_ABSEIL_DIR}")
     if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR
         ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang"))
@@ -103,7 +104,7 @@ if (NOT TARGET libabsl)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
 endif()
 
-if (NOT TARGET libprotobuf-mutator)
+if (DAWN_BUILD_PROTOBUF AND NOT TARGET libprotobuf-mutator)
     message(STATUS "Dawn: using LPM at ${DAWN_LPM_DIR}")
     include("libprotobuf-mutator/BUILD.cmake")
 endif()
