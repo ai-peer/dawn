@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0815a43_88173e27",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-08T00:46:45Z",
+      "side": 1,
+      "message": "+1, these should only be usable like normal samplers.",
+      "parentUuid": "5773858c_2c590314",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5cf6ca0d_02f2b4c2",
         "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
         "patchSetId": 1
@@ -165,6 +183,24 @@
       "side": 1,
       "message": "Another option is predefined constant integer values that we validate as parameters instead of enums. E.g.\n\n```wgsl\nconst clamp_to_edge \u003d 0;\nconst mirror_repeat \u003d 1;\n...\n\nmySampler \u003d sampelr(mirror_repeat /* or 1 */, ...);\n```\n\nYes that means you could make confusing parameters, but it is lower impact in terms of specification.",
       "parentUuid": "1da330dc_2b8fc0f5",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d58219f_a2bf2da1",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-08T00:46:45Z",
+      "side": 1,
+      "message": "1: Srijan is correct, so far we have decided that the layout has to be managed the same way as anything else, because D3D and Vulkan both require the static sampler definition in their equivalents of the bind group layout. So we can\u0027t make it magic without extending the magic all the way to bind group layouts (e.g. creating vulkan descriptor set layouts lazily, defeating the purpose of bind group layouts).\n\nBetween var and const I have no strong feeling but var makes sense. I think in WGSL static samplers should basically work exactly like non-static samplers, except that their parameters are written in the shader - so they shouldn\u0027t be copyable, etc any more than regular samplers. (For now we do expect this to be required, though it\u0027s possible we could have static samplers whose parameters are only defined in the bind group layout, kind of like a pipeline-override.)\n\n2: I think it\u0027s unlikely that the webgpu WG would stick with exactly the syntax we use in this prototype, so either \"hack\" seems fine (either mixing template parameters and value parameters, or making everything a numeric value parameter). It would also be easier to require all the parameters rather than implement defaulting - we may end up with a struct syntax for which the defaulting would be much simpler to implement (or no defaulting).",
+      "parentUuid": "d4c8bc91_06f103ad",
       "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
