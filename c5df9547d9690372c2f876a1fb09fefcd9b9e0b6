@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "c5df9547d9690372c2f876a1fb09fefcd9b9e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a20850ec_ceb1fa63",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-08T00:58:25Z",
+      "side": 1,
+      "message": "I think this should be populated from `bindingInfo.visibility`",
+      "revId": "c5df9547d9690372c2f876a1fb09fefcd9b9e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
