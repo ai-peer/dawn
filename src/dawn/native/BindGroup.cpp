@@ -93,6 +93,15 @@ MaybeError ValidateBufferBinding(const DeviceBase* device,
             requiredBindingAlignment = device->GetLimits().v1.minUniformBufferOffsetAlignment;
             break;
         case wgpu::BufferBindingType::Storage:
+            if (device->HasFeature(Feature::BufferMapWriteExtendedUsages)) {
+                DAWN_INVALID_IF(entry.buffer->GetUsageExternalOnly() & wgpu::BufferUsage::MapWrite,
+                                "%s usages (%s) contains %s, it is not allowed to be bound with "
+                                "%s. Use %s instead.",
+                                entry.buffer, entry.buffer->GetUsageExternalOnly(),
+                                wgpu::BufferUsage::MapWrite, layout.type,
+                                wgpu::BufferBindingType::ReadOnlyStorage);
+            }
+            [[fallthrough]];
         case wgpu::BufferBindingType::ReadOnlyStorage:
             requiredUsage = wgpu::BufferUsage::Storage;
             maxBindingSize = device->GetLimits().v1.maxStorageBufferBindingSize;
