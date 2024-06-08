@@ -336,6 +336,7 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                             deviceContext->CSSetConstantBuffers1(bindingSlot, 1, &d3d11Buffer,
                                                                  &firstConstant, &numConstants);
                         }
+                        binding.buffer->MarkUsedInPendingCommands();
                         break;
                     }
                     case wgpu::BufferBindingType::Storage:
@@ -351,6 +352,7 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                             ToBackend(binding.buffer)->MarkMutated();
                             deviceContext->CSSetUnorderedAccessViews(
                                 bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
+                            binding.buffer->MarkUsedInPendingCommands();
                         }
                         break;
                     }
@@ -371,6 +373,7 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                             deviceContext->CSSetShaderResources(bindingSlot, 1,
                                                                 d3d11SRV.GetAddressOf());
                         }
+                        binding.buffer->MarkUsedInPendingCommands();
                         break;
                     }
                     case wgpu::BufferBindingType::Undefined:

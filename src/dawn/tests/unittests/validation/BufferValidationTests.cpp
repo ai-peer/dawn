@@ -32,6 +32,7 @@
 #include "dawn/common/Platform.h"
 #include "dawn/tests/MockCallback.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
+#include "dawn/utils/WGPUHelpers.h"
 #include "gmock/gmock.h"
 
 using testing::_;
@@ -1255,4 +1256,129 @@ TEST_F(BufferMapExtendedUsagesValidationTest, CreationMapUsageReadOrWriteNoRestr
             device.CreateBuffer(&descriptor);
         }
     }
+}
+
+class BufferMapWriteExtendedUsagesValidationTest : public BufferValidationTest {
+  protected:
+    void SetUp() override {
+        DAWN_SKIP_TEST_IF(UsesWire());
+        BufferValidationTest::SetUp();
+    }
+
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        return {wgpu::FeatureName::BufferMapWriteExtendedUsages};
+    }
+};
+
+// Test that MapWrite can be combined with more usages.
+TEST_F(BufferMapWriteExtendedUsagesValidationTest, CreationMapWriteWithOtherUsages) {
+    constexpr wgpu::BufferUsage kAllowedUsages[] = {
+        wgpu::BufferUsage::CopySrc, wgpu::BufferUsage::Index, wgpu::BufferUsage::Vertex,
+        wgpu::BufferUsage::Uniform, wgpu::BufferUsage::Storage};
+
+    // MapWrite with above usage is ok.
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+
+        for (const auto otherUsage : kAllowedUsages) {
+            descriptor.usage = wgpu::BufferUsage::MapWrite | otherUsage;
+
+            device.CreateBuffer(&descriptor);
+        }
+    }
+
+    constexpr wgpu::BufferUsage kDisallowedUsages[] = {
+        wgpu::BufferUsage::CopyDst,
+        wgpu::BufferUsage::Indirect,
+        wgpu::BufferUsage::MapRead,
+        wgpu::BufferUsage::QueryResolve,
+    };
+
+    // MapWrite with above usage is NOT ok.
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+
+        for (const auto otherUsage : kDisallowedUsages) {
+            descriptor.usage = wgpu::BufferUsage::MapWrite | otherUsage;
+
+            ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+        }
+    }
+}
+
+// Test that uniform buffer with MapWrite cannot have other usage except CopySrc.
+TEST_F(BufferMapWriteExtendedUsagesValidationTest, MapWriteAndUniformUsageOnlyAllowsCopySrc) {
+    // Uniform + MapWrite + CopySrc is ok.
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+
+        descriptor.usage =
+            wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopySrc;
+
+        device.CreateBuffer(&descriptor);
+    }
+
+    constexpr wgpu::BufferUsage kDisallowedUsages[] = {
+        wgpu::BufferUsage::CopyDst, wgpu::BufferUsage::Index,    wgpu::BufferUsage::Vertex,
+        wgpu::BufferUsage::Storage, wgpu::BufferUsage::Indirect, wgpu::BufferUsage::QueryResolve,
+    };
+
+    // Uniform + MapWrite with above usage is NOT ok.
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+
+        for (const auto otherUsage : kDisallowedUsages) {
+            descriptor.usage =
+                wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Uniform | otherUsage;
+
+            ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+        }
+    }
+}
+
+// Test that storage buffer with MapWrite cannot be written on GPU.
+TEST_F(BufferMapWriteExtendedUsagesValidationTest, MapWriteAndStorageUsageDisallowsGPUWrite) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Storage;
+    wgpu::Buffer mappableSsbo = device.CreateBuffer(&descriptor);
+
+    descriptor.usage = wgpu::BufferUsage::Storage;
+    wgpu::Buffer pureSsbo = device.CreateBuffer(&descriptor);
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = dawn::utils::CreateShaderModule(device, R"(
+            struct SSBO {
+                value : u32
+            }
+            @group(0) @binding(0) var<storage, read> input : SSBO;
+            @group(0) @binding(1) var<storage, read_write> ouput : SSBO;
+
+            @compute @workgroup_size(1) fn main() {
+                ouput.value = input.value;
+            })");
+
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+
+    ASSERT_NE(nullptr, pipeline.Get());
+
+    // OK case: read from mappable SSBO on GPU.
+    dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                               {
+                                   {0, mappableSsbo, 0, descriptor.size},
+                                   {1, pureSsbo, 0, descriptor.size},
+                               });
+
+    // Error case: write to mappable SSBO on GPU.
+    ASSERT_DEVICE_ERROR(dawn::utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                   {
+                                                       {0, pureSsbo, 0, descriptor.size},
+                                                       {1, mappableSsbo, 0, descriptor.size},
+                                                   }),
+                        testing::HasSubstr("MapWrite"));
 }
