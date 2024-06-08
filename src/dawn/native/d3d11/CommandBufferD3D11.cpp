@@ -315,7 +315,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 Ref<BufferBase> stagingBuffer;
                 // If the buffer is not mappable, we need to create a staging buffer and copy the
                 // data from the buffer to the staging buffer.
-                if (!(buffer->GetUsage() & kMappableBufferUsages)) {
+                if (!buffer->IsCPUReadable()) {
                     const TexelBlockInfo& blockInfo =
                         ToBackend(dst.texture)->GetFormat().GetAspectInfo(dst.aspect).block;
                     // TODO(dawn:1768): use compute shader to copy data from buffer to texture.
@@ -335,7 +335,8 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 }
 
                 Buffer::ScopedMap scopedMap;
-                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer));
+                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer,
+                                                                     wgpu::MapMode::Read));
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
                 Texture* texture = ToBackend(dst.texture.Get());
@@ -370,7 +371,8 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
 
                 Buffer* buffer = ToBackend(dst.buffer.Get());
                 Buffer::ScopedMap scopedDstMap;
-                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(commandContext, buffer));
+                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(commandContext, buffer,
+                                                                        wgpu::MapMode::Write));
 
                 DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
@@ -507,6 +509,7 @@ MaybeError CommandBuffer::ExecuteComputePass(
                 commandContext->GetD3D11DeviceContext4()->DispatchIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), dispatch->indirectOffset);
 
+                DAWN_ASSERT(!indirectBuffer->IsCPUWritable());
                 break;
             }
 
@@ -687,6 +690,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                 commandContext->GetD3D11DeviceContext4()->DrawInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
+                DAWN_ASSERT(!indirectBuffer->IsCPUWritable());
+
                 break;
             }
 
@@ -712,6 +717,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(
 
                 commandContext->GetD3D11DeviceContext4()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
+
+                DAWN_ASSERT(!indirectBuffer->IsCPUWritable());
 
                 break;
             }
@@ -749,6 +756,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                     ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer(), indexBufferFormat,
                     indexBufferBaseOffset);
 
+                cmd->buffer->MarkUsedInPendingCommands();
+
                 break;
             }
 
@@ -756,6 +765,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                 SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
                 ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer();
                 vertexBufferTracker.OnSetVertexBuffer(cmd->slot, buffer, cmd->offset);
+
+                cmd->buffer->MarkUsedInPendingCommands();
                 break;
             }
 
