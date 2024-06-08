@@ -125,10 +125,10 @@ class Buffer : public BufferBase {
 
     ~Buffer() override;
 
-    virtual MaybeError InitializeInternal();
+    virtual MaybeError InitializeInternal() = 0;
 
-    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext);
-    virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext);
+    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
+    virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
 
     // Clear the buffer without checking if the buffer is initialized.
     virtual MaybeError ClearInternal(const ScopedCommandRecordingContext* commandContext,
@@ -139,6 +139,11 @@ class Buffer : public BufferBase {
     virtual uint8_t* GetUploadData();
 
     raw_ptr<uint8_t, AllowPtrArithmetic> mMappedData = nullptr;
+
+    // The buffer object for constant buffer usage.
+    ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
+    // The buffer object for non-constant buffer usages(e.g. storage buffer, vertex buffer, etc.)
+    ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
 
   private:
     MaybeError Initialize(bool mappedAtCreation,
@@ -163,10 +168,6 @@ class Buffer : public BufferBase {
                                    size_t size,
                                    Buffer* destination,
                                    uint64_t destinationOffset);
-    // The buffer object for constant buffer usage.
-    ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
-    // The buffer object for non-constant buffer usages(e.g. storage buffer, vertex buffer, etc.)
-    ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
     bool mConstantBufferIsUpdated = true;
     ExecutionSerial mMapReadySerial = kMaxExecutionSerial;
 };
