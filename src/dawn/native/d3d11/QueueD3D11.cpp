@@ -219,15 +219,18 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
 MaybeError Queue::CheckAndMapReadyBuffers(ExecutionSerial completedSerial) {
     auto commandContext = GetScopedPendingCommandContext(QueueBase::SubmitMode::Passive);
-    for (auto buffer : mPendingMapBuffers.IterateUpTo(completedSerial)) {
-        DAWN_TRY(buffer->FinalizeMap(&commandContext, completedSerial));
+    for (const auto& bufferEntry : mPendingMapBuffers.IterateUpTo(completedSerial)) {
+        DAWN_TRY(
+            bufferEntry.buffer->FinalizeMap(&commandContext, completedSerial, bufferEntry.mode));
     }
     mPendingMapBuffers.ClearUpTo(completedSerial);
     return {};
 }
 
-void Queue::TrackPendingMapBuffer(Ref<Buffer>&& buffer, ExecutionSerial readySerial) {
-    mPendingMapBuffers.Enqueue(buffer, readySerial);
+void Queue::TrackPendingMapBuffer(Ref<Buffer>&& buffer,
+                                  wgpu::MapMode mode,
+                                  ExecutionSerial readySerial) {
+    mPendingMapBuffers.Enqueue({buffer, mode}, readySerial);
 }
 
 MaybeError Queue::WriteBufferImpl(BufferBase* buffer,

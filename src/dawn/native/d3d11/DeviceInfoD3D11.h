@@ -49,6 +49,7 @@ struct DeviceInfo {
     size_t sharedSystemMemory;
     bool supportsMonitoredFence;
     bool supportsNonMonitoredFence;
+    bool supportsMapNoOverwriteDynamicBuffers;
 };
 
 ResultOrError<DeviceInfo> GatherDeviceInfo(const ComPtr<IDXGIAdapter4>& adapter,

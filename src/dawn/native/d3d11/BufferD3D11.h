@@ -90,14 +90,19 @@ class Buffer : public BufferBase {
 
     // Actually map the buffer when its last usage serial has passed.
     MaybeError FinalizeMap(ScopedCommandRecordingContext* commandContext,
-                           ExecutionSerial completedSerial);
+                           ExecutionSerial completedSerial,
+                           wgpu::MapMode mode);
+
+    bool IsCPUWritable() const;
+    bool IsCPUReadable() const;
 
     class ScopedMap : public NonCopyable {
       public:
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
         // scopedMap.GetMappedData() will return nullptr.
         static ResultOrError<ScopedMap> Create(const ScopedCommandRecordingContext* commandContext,
-                                               Buffer* buffer);
+                                               Buffer* buffer,
+                                               wgpu::MapMode mode);
 
         ScopedMap();
         ~ScopedMap();
@@ -127,7 +132,8 @@ class Buffer : public BufferBase {
 
     virtual MaybeError InitializeInternal();
 
-    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext);
+    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                   wgpu::MapMode mode);
     virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext);
 
     // Clear the buffer without checking if the buffer is initialized.
@@ -136,7 +142,7 @@ class Buffer : public BufferBase {
                                      uint64_t offset = 0,
                                      uint64_t size = 0);
 
-    virtual uint8_t* GetUploadData();
+    virtual uint8_t* GetUploadData() const;
 
     raw_ptr<uint8_t, AllowPtrArithmetic> mMappedData = nullptr;
 
@@ -149,6 +155,7 @@ class Buffer : public BufferBase {
     bool IsCPUWritableAtCreation() const override;
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
+    bool IsStagingBuffer() const;
 
     MaybeError InitializeToZero(const ScopedCommandRecordingContext* commandContext);
     // Write the buffer without checking if the buffer is initialized.
@@ -167,6 +174,12 @@ class Buffer : public BufferBase {
     ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
     // The buffer object for non-constant buffer usages(e.g. storage buffer, vertex buffer, etc.)
     ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
+
+    // These pointers point to either of the above buffer object.
+    ID3D11Buffer* mD3d11BufferForMapWrite = nullptr;
+    ID3D11Buffer* mD3d11BufferForMapRead = nullptr;
+    ID3D11Buffer* mD3d11MappedBuffer = nullptr;
+
     bool mConstantBufferIsUpdated = true;
     ExecutionSerial mMapReadySerial = kMaxExecutionSerial;
 };
