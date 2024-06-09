@@ -84,6 +84,27 @@ void SyncScopeUsageTracker::TextureRangeUsedAs(TextureBase* texture,
         });
 }
 
+void SyncScopeUsageTracker::UnsetTextureViewUsedAsRenderAttachment(TextureViewBase* view) {
+    UnsetTextureRangeUsedAsRenderAttachment(view->GetTexture(), view->GetSubresourceRange());
+}
+
+void SyncScopeUsageTracker::UnsetTextureRangeUsedAsRenderAttachment(TextureBase* texture,
+                                                                    const SubresourceRange& range) {
+    // Get or create a new TextureSubresourceSyncInfo for that texture (initially filled with
+    // wgpu::TextureUsage::None and WGPUShaderStage_None)
+    auto it = mTextureSyncInfos.try_emplace(
+        texture, texture->GetFormat().aspects, texture->GetArrayLayers(),
+        texture->GetNumMipLevels(),
+        TextureSyncInfo{wgpu::TextureUsage::None, wgpu::ShaderStage::None});
+    TextureSubresourceSyncInfo& textureSyncInfo = it.first->second;
+
+    textureSyncInfo.Update(range, [](const SubresourceRange&, TextureSyncInfo* storedSyncInfo) {
+        // Resource must be set to be used as RenderAttachment previously.
+        DAWN_ASSERT(storedSyncInfo->usage & wgpu::TextureUsage::RenderAttachment);
+        storedSyncInfo->usage &= ~wgpu::TextureUsage::RenderAttachment;
+    });
+}
+
 void SyncScopeUsageTracker::AddRenderBundleTextureUsage(
     TextureBase* texture,
     const TextureSubresourceSyncInfo& textureSyncInfo) {

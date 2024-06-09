@@ -1561,10 +1561,6 @@ class DawnLoadResolveTextureTest : public MultisampledRenderingTest {
         }
         return requiredFeatures;
     }
-
-    bool HasResolveMultipleAttachmentInSeparatePassesToggle() {
-        return HasToggleEnabled("resolve_multiple_attachments_in_separate_passes");
-    }
 };
 
 // Test rendering into a resolve texture then start another render pass with
@@ -1668,9 +1664,9 @@ TEST_P(DawnLoadResolveTextureTest, DrawThenLoadNonZeroIndexedAttachment) {
 // Test rendering into 2 attachments. The 1st attachment will use
 // LoadOp::ExpandResolveTexture.
 TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor0) {
-    // TODO(42240662): "resolve_multiple_attachments_in_separate_passes" is currently not working
-    // with DawnLoadResolveTexture feature if there are more than one attachment.
-    DAWN_TEST_UNSUPPORTED_IF(HasResolveMultipleAttachmentInSeparatePassesToggle());
+    // TODO(dawn:1550) Workaround introduces a bug on Qualcomm GPUs, but is necessary for ARM GPUs.
+    DAWN_TEST_UNSUPPORTED_IF(IsAndroid() && IsQualcomm() &&
+                             HasToggleEnabled("resolve_multiple_attachments_in_separate_passes"));
 
     auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
                                                                  /*transientAttachment=*/false,
@@ -1749,9 +1745,9 @@ TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor0) {
 // Test rendering into 2 attachments. The 2nd attachment will use
 // LoadOp::ExpandResolveTexture.
 TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor1) {
-    // TODO(42240662): "resolve_multiple_attachments_in_separate_passes" is currently not working
-    // with DawnLoadResolveTexture feature if there are more than one attachment.
-    DAWN_TEST_UNSUPPORTED_IF(HasResolveMultipleAttachmentInSeparatePassesToggle());
+    // TODO(dawn:1550) Workaround introduces a bug on Qualcomm GPUs, but is necessary for ARM GPUs.
+    DAWN_TEST_UNSUPPORTED_IF(IsAndroid() && IsQualcomm() &&
+                             HasToggleEnabled("resolve_multiple_attachments_in_separate_passes"));
 
     auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
                                                                  /*transientAttachment=*/false,
@@ -1829,9 +1825,9 @@ TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor1) {
 // Test rendering into 2 attachments. The both attachments will use
 // LoadOp::ExpandResolveTexture.
 TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoadColor0AndColor1) {
-    // TODO(42240662): "resolve_multiple_attachments_in_separate_passes" is currently not working
-    // with DawnLoadResolveTexture feature if there are more than one attachment.
-    DAWN_TEST_UNSUPPORTED_IF(HasResolveMultipleAttachmentInSeparatePassesToggle());
+    // TODO(dawn:1550) Workaround introduces a bug on Qualcomm GPUs, but is necessary for ARM GPUs.
+    DAWN_TEST_UNSUPPORTED_IF(IsAndroid() && IsQualcomm() &&
+                             HasToggleEnabled("resolve_multiple_attachments_in_separate_passes"));
 
     auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
                                                                  /*transientAttachment=*/false,
@@ -1982,9 +1978,9 @@ TEST_P(DawnLoadResolveTextureTest, DrawWithDepthTest) {
 // Test ExpandResolveTexture load op rendering with depth test works correctly with
 // two outputs both use ExpandResolveTexture load op.
 TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawWithDepthTestColor0AndColor1) {
-    // TODO(42240662): "resolve_multiple_attachments_in_separate_passes" is currently not working
-    // with DawnLoadResolveTexture feature if there are more than one attachment.
-    DAWN_TEST_UNSUPPORTED_IF(HasResolveMultipleAttachmentInSeparatePassesToggle());
+    // TODO(dawn:1550) Workaround introduces a bug on Qualcomm GPUs, but is necessary for ARM GPUs.
+    DAWN_TEST_UNSUPPORTED_IF(IsAndroid() && IsQualcomm() &&
+                             HasToggleEnabled("resolve_multiple_attachments_in_separate_passes"));
 
     auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
                                                                  /*transientAttachment=*/false,
@@ -2087,14 +2083,29 @@ TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawWithDepthTestColor0AndColor1) {
     VerifyResolveTarget(kGreen, singleSampledTexture2);
 }
 
-// Test rendering into a layer of a 2D array texture and load op=LoadOp::ExpandResolveTexture.
-TEST_P(DawnLoadResolveTextureTest, DrawThenLoad2DArrayTextureLayer) {
-    auto multiSampledTexture = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
-                                                                /*transientAttachment=*/false,
-                                                                /*supportsTextureBinding=*/false);
-    auto multiSampledTextureView = multiSampledTexture.CreateView();
+// Test rendering into 2 attachments. The 2nd attachment will use a layer of a 2D array texture and
+// load op=LoadOp::ExpandResolveTexture.
+TEST_P(DawnLoadResolveTextureTest, TwoOutputsDrawThenLoad2DArrayTextureLayerAsColor1) {
+    // TODO(dawn:1550) Workaround introduces a bug on Qualcomm GPUs, but is necessary for ARM GPUs.
+    DAWN_TEST_UNSUPPORTED_IF(IsAndroid() && IsQualcomm() &&
+                             HasToggleEnabled("resolve_multiple_attachments_in_separate_passes"));
 
-    auto singleSampledTexture = CreateTextureForRenderAttachment(
+    auto multiSampledTexture1 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
+                                                                 /*transientAttachment=*/false,
+                                                                 /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView1 = multiSampledTexture1.CreateView();
+
+    auto multiSampledTexture2 = CreateTextureForRenderAttachment(kColorFormat, 4, 1, 1,
+                                                                 /*transientAttachment=*/false,
+                                                                 /*supportsTextureBinding=*/false);
+    auto multiSampledTextureView2 = multiSampledTexture2.CreateView();
+
+    auto singleSampledTexture1 =
+        CreateTextureForRenderAttachment(kColorFormat, 1, 1, 1, /*transientAttachment=*/false,
+                                         /*supportsTextureBinding=*/true);
+    auto singleSampledTextureView1 = singleSampledTexture1.CreateView();
+
+    auto singleSampledTexture2 = CreateTextureForRenderAttachment(
         kColorFormat, 1, 1, /*arrayCount=*/2, /*transientAttachment=*/false,
         /*supportsTextureBinding=*/true);
     wgpu::TextureViewDescriptor resolveViewDescriptor2;
@@ -2102,33 +2113,50 @@ TEST_P(DawnLoadResolveTextureTest, DrawThenLoad2DArrayTextureLayer) {
     resolveViewDescriptor2.format = kColorFormat;
     resolveViewDescriptor2.baseArrayLayer = 1;
     resolveViewDescriptor2.baseMipLevel = 0;
-    auto singleSampledTextureView = singleSampledTexture.CreateView(&resolveViewDescriptor2);
+    auto singleSampledTextureView2 = singleSampledTexture2.CreateView(&resolveViewDescriptor2);
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
-    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithOneOutputForTest(
-        /*testDepth=*/false, /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false,
-        /*flipTriangle=*/false, /*enableExpandResolveLoadOp=*/false);
+    wgpu::RenderPipeline pipeline = CreateRenderPipelineWithTwoOutputsForTest(
+        /*sampleMask=*/0xFFFFFFFF, /*alphaToCoverageEnabled=*/false);
 
     constexpr wgpu::Color kGreen = {0.0f, 0.8f, 0.0f, 0.8f};
+    constexpr wgpu::Color kRed = {0.8f, 0.0f, 0.0f, 0.8f};
 
-    // In first render pass we draw a green triangle. StoreOp=Discard to discard the MSAA texture's
-    // content.
+    // In first render pass:
+    // - we draw a red triangle to attachment0. StoreOp=Store.
+    // - we draw a green triangle to attachment1. StoreOp=Discard.
     {
         utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-            {multiSampledTextureView}, {singleSampledTextureView}, wgpu::LoadOp::Clear,
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
             wgpu::LoadOp::Clear,
             /*testDepth=*/false);
-        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
-        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kGreen);
+        renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Store;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
+
+        std::array<float, 8> kUniformData = {
+            static_cast<float>(kRed.r),   static_cast<float>(kRed.g),
+            static_cast<float>(kRed.b),   static_cast<float>(kRed.a),
+            static_cast<float>(kGreen.r), static_cast<float>(kGreen.g),
+            static_cast<float>(kGreen.b), static_cast<float>(kGreen.a)};
+        constexpr uint32_t kSize = sizeof(kUniformData);
+
+        EncodeRenderPassForTest(commandEncoder, renderPass, pipeline, kUniformData.data(), kSize);
     }
 
-    // In second render pass, we only use LoadOp::ExpandResolveTexture with no draw call.
+    // In second render pass:
+    // - we only use LoadOp::Load for attachment0 with no draw call.
+    // - we only use LoadOp::ExpandResolveTexture for attachment1 with no draw call.
     {
         utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(
-            {multiSampledTextureView}, {singleSampledTextureView},
-            wgpu::LoadOp::ExpandResolveTexture, wgpu::LoadOp::Load,
+            {multiSampledTextureView1, multiSampledTextureView2},
+            {singleSampledTextureView1, singleSampledTextureView2}, wgpu::LoadOp::Clear,
+            wgpu::LoadOp::Clear,
             /*testDepth=*/false);
+        renderPass.cColorAttachments[0].loadOp = wgpu::LoadOp::Load;
         renderPass.cColorAttachments[0].storeOp = wgpu::StoreOp::Discard;
+        renderPass.cColorAttachments[1].loadOp = wgpu::LoadOp::ExpandResolveTexture;
+        renderPass.cColorAttachments[1].storeOp = wgpu::StoreOp::Discard;
         wgpu::RenderPassEncoder renderPassEncoder = commandEncoder.BeginRenderPass(&renderPass);
         renderPassEncoder.End();
     }
@@ -2136,7 +2164,8 @@ TEST_P(DawnLoadResolveTextureTest, DrawThenLoad2DArrayTextureLayer) {
     wgpu::CommandBuffer commandBuffer = commandEncoder.Finish();
     queue.Submit(1, &commandBuffer);
 
-    VerifyResolveTarget(kGreen, singleSampledTexture, 0, 1);
+    VerifyResolveTarget(kRed, singleSampledTexture1);
+    VerifyResolveTarget(kGreen, singleSampledTexture2, 0, 1);
 }
 
 DAWN_INSTANTIATE_TEST(MultisampledRenderingTest,
