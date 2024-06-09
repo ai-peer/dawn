@@ -745,8 +745,7 @@ void Buffer::TransitionMappableBuffersEagerly(const VulkanFunctions& fn,
     size_t originalBufferCount = buffers.size();
     for (const Ref<Buffer>& buffer : buffers) {
         wgpu::BufferUsage mapUsage = buffer->GetUsage() & kMappableBufferUsages;
-        DAWN_ASSERT(mapUsage == wgpu::BufferUsage::MapRead ||
-                    mapUsage == wgpu::BufferUsage::MapWrite);
+        DAWN_ASSERT(mapUsage != wgpu::BufferUsage::None);
         VkBufferMemoryBarrier barrier;
 
         if (buffer->TrackUsageAndGetResourceBarrier(recordingContext, mapUsage,

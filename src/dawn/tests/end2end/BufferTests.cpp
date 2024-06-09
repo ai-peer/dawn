@@ -1808,6 +1808,102 @@ TEST_P(BufferMapExtendedUsagesTests, MapWriteThenGPUWriteStorageBufferThenMapRea
     ssbo.Unmap();
 }
 
+// Test the follow scenario:
+// - map write a storage buffer
+// - modifying it on GPU.
+// - map write it again.
+// - draw using the buffer.
+TEST_P(BufferMapExtendedUsagesTests, MixMapWriteAndGPUWriteStorageBufferThenDraw) {
+    DAWN_TEST_UNSUPPORTED_IF(!device.HasFeature(wgpu::FeatureName::BufferMapExtendedUsages));
+
+    const float kRed[] = {1.0f, 0.0f, 0.0f, 1.0f};
+    const float kFinalColor[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    constexpr size_t kSize = sizeof(kFinalColor);
+
+    // Create buffer with initial red color data.
+    wgpu::Buffer ssbo;
+    {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = kSize;
+
+        descriptor.usage =
+            wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+        ssbo = device.CreateBuffer(&descriptor);
+
+        MapAsyncAndWait(ssbo, wgpu::MapMode::Write, 0, kSize);
+        ASSERT_NE(nullptr, ssbo.GetMappedRange());
+        memcpy(ssbo.GetMappedRange(), &kRed, kSize);
+        ssbo.Unmap();
+    }
+
+    // Compute pipeline
+    wgpu::ComputePipeline pipeline;
+    {
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = utils::CreateShaderModule(device, R"(
+            struct SSBO {
+                value : vec4f
+            }
+            @group(0) @binding(0) var<storage, read_write> ssbo : SSBO;
+
+            @compute @workgroup_size(1) fn main() {
+                ssbo.value.y = 1.0;
+            })");
+
+        pipeline = device.CreateComputePipeline(&csDesc);
+    }
+
+    // Modify the buffer's green channel in compute shader.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+
+        ASSERT_NE(nullptr, pipeline.Get());
+        wgpu::BindGroup ssboWritebindGroup =
+            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                 {
+                                     {0, ssbo, 0, kSize},
+                                 });
+        pass.SetBindGroup(0, ssboWritebindGroup);
+        pass.SetPipeline(pipeline);
+        pass.DispatchWorkgroups(1);
+        pass.End();
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+
+        queue.Submit(1, &commands);
+    }
+
+    // MapWrite and modify the buffer's blue channel
+    {
+        const float kOne = 1.0f;
+        constexpr size_t kBlueChannelOffset = 2 * sizeof(float);
+        MapAsyncAndWait(ssbo, wgpu::MapMode::Write, 0, kSize);
+        ASSERT_NE(nullptr, ssbo.GetMappedRange());
+        memcpy(ssbo.GetMappedRange(kBlueChannelOffset), &kOne, sizeof(kOne));
+        ssbo.Unmap();
+    }
+
+    // Draw using the color from the buffer.
+    {
+        // Render pipeline
+        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest(ColorSrc::StorageBuffer);
+        wgpu::BindGroup ssboReadBindGroup = utils::MakeBindGroup(
+            device, renderPipeline.GetBindGroupLayout(0), {{0, ssbo, 0, kSize}});
+
+        auto finalRenderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        EncodeAndSubmitRenderPassForTest(finalRenderPass.renderPassInfo, renderPipeline, nullptr,
+                                         nullptr, ssboReadBindGroup);
+
+        EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8::kWhite, finalRenderPass.color, 0, 0);
+    }
+
+    // Read the final value.
+    MapAsyncAndWait(ssbo, wgpu::MapMode::Read, 0, kSize);
+    CheckMapping(ssbo.GetConstMappedRange(0, kSize), &kFinalColor, kSize);
+    ssbo.Unmap();
+}
+
 DAWN_INSTANTIATE_TEST_P(BufferMapExtendedUsagesTests,
                         {D3D11Backend(), D3D12Backend(), MetalBackend(), OpenGLBackend(),
                          OpenGLESBackend(), VulkanBackend()},

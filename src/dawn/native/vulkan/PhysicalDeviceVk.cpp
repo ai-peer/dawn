@@ -370,6 +370,11 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::TransientAttachments);
     EnableFeature(Feature::AdapterPropertiesVk);
     EnableFeature(Feature::DawnLoadResolveTexture);
+    if (mDeviceInfo.memoryHeaps.size() == 1) {
+        // UMA system
+        EnableFeature(Feature::BufferMapExtendedUsages);
+        EnableFeature(Feature::BufferMapWriteExtendedUsages);
+    }
 
     // Enable ChromiumExperimentalSubgroups feature if:
     // 1. Vulkan API version is 1.1 or later, and
