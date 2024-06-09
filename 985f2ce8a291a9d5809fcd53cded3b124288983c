@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5cd8b86_d95f6fb6",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-09T20:23:23Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "85b3592b_28b26238",
+      "range": {
+        "startLine": 79,
+        "startChar": 73,
+        "endLine": 79,
+        "endChar": 76
+      },
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "638174e9_0fa3a5a0",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d2e018_e178dc21",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-09T20:23:23Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "638174e9_0fa3a5a0",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cde8ff0_2362008e",
@@ -71,6 +113,24 @@
       "writtenOn": "2024-06-07T15:24:01Z",
       "side": 1,
       "message": "Maybe we can ask the sampleType explicitly here?",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970623ac_7cfcf4bc",
+        "filename": "src/dawn/native/BlitColorToColorWithDraw.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-09T20:23:23Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "5cde8ff0_2362008e",
       "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +188,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e5387e_b61d04ca",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-09T20:23:23Z",
+      "side": 1,
+      "message": "I have moved all renderpass workarounds into single file. However, `ResolveMultipleAttachmentInSeparatePasses` will need a special handling and I have moved it to another CL. This CL will now only fix `AlwaysResolveIntoZeroLevelAndLayer` workaround.\n\nPTAL.",
+      "parentUuid": "64db431b_50046901",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eadc6c72_3379768b",
@@ -141,6 +219,24 @@
       "writtenOn": "2024-06-07T15:24:01Z",
       "side": 1,
       "message": "Maybe ASSERT that the usage is RenderAttachment as that\u0027s the only one that can be safely removed. (because all others can be added more than once, so if we wanted to unset, we\u0027d need to count how many times they are used)",
+      "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c58a456_acdc6356",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-09T20:23:23Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "eadc6c72_3379768b",
       "revId": "985f2ce8a291a9d5809fcd53cded3b124288983c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
