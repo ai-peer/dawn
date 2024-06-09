@@ -562,6 +562,9 @@ add_subdirectory(src/tint)
 set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_SAVED})
 add_subdirectory(generator)
 add_subdirectory(src/dawn)
+if (ANDROID)
+    add_subdirectory(tools/android)
+endif()
 
 ################################################################################
 # Samples
