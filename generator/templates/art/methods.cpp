@@ -25,7 +25,7 @@
 //* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <jni.h>
-#include "dawn/webgpu.h"
+#include "../include/dawn/webgpu.h"
 #include "structures.h"
 
 // Converts every method call from the Kotlin-hosted version to the native version, performing
