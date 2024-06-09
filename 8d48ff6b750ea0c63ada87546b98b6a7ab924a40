@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8858c0f_2621b76d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-09T23:33:58Z",
+      "side": 1,
+      "message": "As suggested on Friday this is most of what were were working on; without the change to how webgpu.h is handled (I can tackle that later; see the TODO).\n\nThe good news is this works and the whole library can now be made via Gradle.\n\nUnfortunately at present I see a CQ error that suggests the generated C file is attempting to be built on the host platform\n\n```\nFAILED: tools/android/CMakeFiles/dawn_kotlin_bindings.dir/__/__/gen/cpp/structures.cpp.o \n/b/s/w/ir/cache/builder/clang/bin/clang++ --sysroot\u003d/b/s/w/ir/cache/uncached/dawn/build/linux/debian_bullseye_amd64-sysroot   -g -fPIC -std\u003dgnu++17 -MD -MT tools/android/CMakeFiles/dawn_kotlin_bindings.dir/__/__/gen/cpp/structures.cpp.o -MF tools/android/CMakeFiles/dawn_kotlin_bindings.dir/__/__/gen/cpp/structures.cpp.o.d -o tools/android/CMakeFiles/dawn_kotlin_bindings.dir/__/__/gen/cpp/structures.cpp.o -c /b/s/w/ir/cache/uncached/dawn/cmake-build/gen/cpp/structures.cpp\n/b/s/w/ir/cache/uncached/dawn/cmake-build/gen/cpp/structures.cpp:1:10: fatal error: \u0027jni.h\u0027 file not found\n    1 | #include \u003cjni.h\u003e\n```\n\nI wouldn\u0027t mind that if it could be made to work as a check (e.g. if we could find a jni.h to include), but if not is there a way to exclude these files from whatever is attempting to build the file?",
+      "revId": "8d48ff6b750ea0c63ada87546b98b6a7ab924a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
