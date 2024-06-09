@@ -514,6 +514,15 @@ MaybeError RenderPipeline::InitializeImpl() {
             GetAttachmentState()->GetExpandResolveInfo().resolveTargetsMask;
         ColorAttachmentMask expandResolveMask =
             GetAttachmentState()->GetExpandResolveInfo().attachmentsToExpandResolve;
+        if (resolveMask.any() &&
+            GetAttachmentState()->DoesRenderPassRequireResolveSplitIntoSeperatePasses(
+                device,
+                /*renderPassHasResolveTargets=*/true)) {
+            // If the render pass requires splitting resolves into separate passes, we no longer
+            // have the resolve targets in this pass.
+            resolveMask.reset();
+            expandResolveMask.reset();
+        }
 
         for (auto i : IterateBitSet(GetColorAttachmentsMask())) {
             wgpu::LoadOp colorLoadOp = wgpu::LoadOp::Load;

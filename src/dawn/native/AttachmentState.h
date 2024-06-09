@@ -79,6 +79,12 @@ class AttachmentState final : public ObjectBase,
     const std::vector<wgpu::TextureFormat>& GetStorageAttachmentSlots() const;
     std::vector<ColorAttachmentIndex> ComputeStorageAttachmentPackingInColorAttachments() const;
 
+    // Check whether the render pass corresponding to this AttachmentState requires
+    // splitting resolves into separate passes.
+    bool DoesRenderPassRequireResolveSplitIntoSeperatePasses(
+        DeviceBase* device,
+        bool renderPassHasResolveTargets) const;
+
     struct EqualityFunc {
         bool operator()(const AttachmentState* a, const AttachmentState* b) const;
     };

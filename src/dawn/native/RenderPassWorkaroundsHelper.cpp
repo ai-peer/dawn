@@ -199,18 +199,22 @@ MaybeError RenderPassWorkaroundsHelper::Apply(
     // case then the resolves are deferred by removing the resolve targets and forcing the storeOp
     // to Store. After the pass has ended an new pass is recorded for each resolve target that
     // resolves it separately.
-    if (device->IsToggleEnabled(Toggle::ResolveMultipleAttachmentInSeparatePasses) &&
-        cmd->attachmentState->GetColorAttachmentsMask().count() > 1) {
-        bool splitResolvesIntoSeparatePasses = false;
+    bool splitResolvesIntoSeparatePasses = false;
+    if (device->IsToggleEnabled(Toggle::ResolveMultipleAttachmentInSeparatePasses)) {
+        bool hasResolveTarget = false;
 
         // This workaround needs to apply if there are multiple MSAA color targets (checked above)
         // and at least one resolve target.
         for (auto i : IterateBitSet(cmd->attachmentState->GetColorAttachmentsMask())) {
             if (cmd->colorAttachments[i].resolveTarget.Get() != nullptr) {
-                splitResolvesIntoSeparatePasses = true;
+                hasResolveTarget = true;
                 break;
             }
         }
+
+        splitResolvesIntoSeparatePasses =
+            cmd->attachmentState->DoesRenderPassRequireResolveSplitIntoSeperatePasses(
+                device, hasResolveTarget);
 
         if (splitResolvesIntoSeparatePasses) {
             std::vector<TemporaryResolveAttachment> temporaryResolveAttachments;
@@ -225,6 +229,11 @@ MaybeError RenderPassWorkaroundsHelper::Apply(
                     temporaryResolveAttachments.emplace_back(attachmentInfo.view.Get(),
                                                              resolveTarget, attachmentInfo.storeOp);
                     attachmentInfo.storeOp = wgpu::StoreOp::Store;
+                    if (attachmentInfo.loadOp == wgpu::LoadOp::ExpandResolveTexture) {
+                        attachmentInfo.loadOp = wgpu::LoadOp::Clear;
+                    }
+                    usageTracker->UnsetTextureViewUsedAsRenderAttachment(
+                        attachmentInfo.resolveTarget.Get());
                     attachmentInfo.resolveTarget = nullptr;
                 }
             }
@@ -255,10 +264,12 @@ MaybeError RenderPassWorkaroundsHelper::Apply(
     }
 
     if (cmd->attachmentState->GetExpandResolveInfo().attachmentsToExpandResolve.any() &&
-        device->CanTextureLoadResolveTargetInTheSameRenderpass()) {
+        (device->CanTextureLoadResolveTargetInTheSameRenderpass() ||
+         splitResolvesIntoSeparatePasses)) {
         // Perform ExpandResolveTexture load op's emulation after the render pass starts.
-        // Backend that doesn't support CanTextureLoadResolveTargetInTheSameRenderpass() can
-        // implement this load op internally.
+        // Only do this if backend can support CanTextureLoadResolveTargetInTheSameRenderpass() or
+        // we already split the resolves into separate passes. The latter case is safe because the
+        // resolve targets are no longer attached to the current render pass.
         *passStartCallbackOut = [](RenderPassEncoder* rpEncoder,
                                    const RenderPassDescriptor* rpDesc) -> MaybeError {
             // Read resolve texture in fragment shader and copy to the MSAA attachment.
