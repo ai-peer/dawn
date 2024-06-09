@@ -66,6 +66,8 @@ struct RenderPassCacheQuery {
                          bool stencilRendOnly);
     void SetSampleCount(uint32_t sampleCount);
 
+    bool HasExpandResolveTextureLoadOp() const { return expandResolveMask.any(); }
+
     ColorAttachmentMask colorMask;
     ColorAttachmentMask resolveTargetMask;
     PerColorAttachment<wgpu::TextureFormat> colorFormats;

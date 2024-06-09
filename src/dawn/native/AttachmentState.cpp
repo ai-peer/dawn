@@ -337,4 +337,11 @@ AttachmentState::ComputeStorageAttachmentPackingInColorAttachments() const {
     return result;
 }
 
+bool AttachmentState::RenderPassWillRequireResolveSplitIntoSeperatePasses(
+    DeviceBase* device,
+    bool renderPassHasResolveTargets) const {
+    return device->IsToggleEnabled(Toggle::ResolveMultipleAttachmentInSeparatePasses) &&
+           mColorAttachmentsSet.count() > 1 && renderPassHasResolveTargets;
+}
+
 }  // namespace dawn::native
