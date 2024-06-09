@@ -65,6 +65,13 @@ class SyncScopeUsageTracker {
                             const SubresourceRange& range,
                             wgpu::TextureUsage usage,
                             wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
+
+    // Certain workarounds can change the render attachments of a render pass, hence we can
+    // remove the RenderAttachment usage from those attachments' views.
+    void UnsetTextureViewUsedAsRenderAttachment(TextureViewBase* texture);
+    void UnsetTextureRangeUsedAsRenderAttachment(TextureBase* texture,
+                                                 const SubresourceRange& range);
+
     void AddRenderBundleTextureUsage(TextureBase* texture,
                                      const TextureSubresourceSyncInfo& textureSyncInfo);
 

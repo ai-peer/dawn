@@ -159,7 +159,10 @@ VkAccessFlags VulkanAccessFlags(wgpu::TextureUsage usage, const Format& format) 
         // VK_ATTACHMENT_LOAD_OP_LOAD. This requires VK_ACCESS_COLOR_ATTACHMENT_READ_BIT access.
         // - It will also be read as subpass input in fragment shader. This requires
         // VK_ACCESS_INPUT_ATTACHMENT_READ_BIT.
-        flags |= VK_ACCESS_INPUT_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT;
+        // - Sometimes the front might think that's it's safe to read the texture as sampled image,
+        // thus VK_ACCESS_SHADER_READ_BIT is also needed.
+        flags |= VK_ACCESS_INPUT_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_READ_BIT |
+                 VK_ACCESS_SHADER_READ_BIT;
     }
 
     if (usage & kPresentAcquireTextureUsage) {

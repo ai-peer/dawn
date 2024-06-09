@@ -366,6 +366,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
                                  BeginRenderPassCmd* renderPass) {
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
+    bool hasExpandResolveTextureLoadOp = false;
     // Query a VkRenderPass from the cache
     VkRenderPass renderPassVK = VK_NULL_HANDLE;
     {
@@ -393,6 +394,13 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
         RenderPassCache::RenderPassInfo renderPassInfo;
         DAWN_TRY_ASSIGN(renderPassInfo, device->GetRenderPassCache()->GetRenderPass(query));
         renderPassVK = renderPassInfo.renderPass;
+
+        // Note this might be false even if enderPass->attachmentState has non-zero
+        // GetExpandResolveInfo().attachmentsToExpandResolve. This could happen if front-end
+        // modifies the BeginRenderPassCmd such as ResolveMultipleAttachmentInSeparatePasses
+        // workaround. In that case we use hasExpandResolveTextureLoadOp flag to decide whether we
+        // should do ExpandResolveTexture step or not.
+        hasExpandResolveTextureLoadOp = query.HasExpandResolveTextureLoadOp();
     }
 
     // Create a framebuffer that will be used once for the render pass and gather the clear
@@ -504,7 +512,7 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
     beginInfo.clearValueCount = attachmentCount;
     beginInfo.pClearValues = clearValues.data();
 
-    if (renderPass->attachmentState->GetExpandResolveInfo().attachmentsToExpandResolve.any()) {
+    if (hasExpandResolveTextureLoadOp) {
         DAWN_TRY(BeginRenderPassAndExpandResolveTextureWithDraw(device, recordingContext,
                                                                 renderPass, beginInfo));
     } else {

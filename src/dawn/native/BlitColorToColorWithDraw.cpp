@@ -196,7 +196,6 @@ MaybeError ExpandResolveTextureWithDraw(DeviceBase* device,
                                         RenderPassEncoder* renderEncoder,
                                         const RenderPassDescriptor* renderPassDescriptor) {
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
-    DAWN_ASSERT(device->CanTextureLoadResolveTargetInTheSameRenderpass());
 
     BlitColorToColorWithDrawPipelineKey pipelineKey;
     for (uint8_t i = 0; i < renderPassDescriptor->colorAttachmentCount; ++i) {
