@@ -56,9 +56,9 @@ WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
     deviceLostUserdata->future = deviceLostFuture;
 
     WGPUDeviceDescriptor desc = *descriptor;
-    desc.deviceLostCallbackInfo.mode = WGPUCallbackMode_AllowProcessEvents;
-    desc.deviceLostCallbackInfo.callback = ForwardToServer<&Server::OnDeviceLost>;
-    desc.deviceLostCallbackInfo.userdata = deviceLostUserdata.release();
+    desc.deviceLostCallbackInfo2 = {nullptr, WGPUCallbackMode_AllowProcessEvents,
+                                    ForwardToServer2<&Server::OnDeviceLost>,
+                                    deviceLostUserdata.release(), nullptr};
 
     if (userdataCount == 1) {
         mProcs.adapterRequestDevice(adapter->handle, &desc,

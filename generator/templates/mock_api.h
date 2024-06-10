@@ -103,7 +103,7 @@ class ProcTableAsClass {
                     {%- endfor -%}
                 ) = 0;
                 {% set CallbackInfoType = (method.arguments|last).type %}
-                {% set CallbackType = (CallbackInfoType.members|first).type %}
+                {% set CallbackType = get_named_member(CallbackInfoType.members, "callback").type %}
                 void Call{{Suffix}}Callback(
                     {{-as_cType(type.name)}} {{as_varName(type.name)}}
                     {%- for arg in CallbackType.arguments -%}
@@ -173,16 +173,16 @@ class ProcTableAsClass {
                 {% endfor %}
                 {% for method in type.methods if has_callbackInfoStruct(method) %}
                     {% set CallbackInfoType = (method.arguments|last).type %}
-                    {% set CallbackType = (CallbackInfoType.members|first).type %}
+                    {% set CallbackType = get_named_member(CallbackInfoType.members, "callback").type %}
                     void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata1 = 0;
                     void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata2 = 0;
                     {{as_cType(CallbackType.name)}} m{{as_CppMethodSuffix(type.name, method.name)}}Callback = nullptr;
                 {% endfor %}
             {% endfor %}
             // Manually implement device lost related callback helpers for testing.
-            WGPUDeviceLostCallback mDeviceLostOldCallback = nullptr;
-            WGPUDeviceLostCallbackNew mDeviceLostCallback = nullptr;
-            void* mDeviceLostUserdata = 0;
+            WGPUDeviceLostCallback2 mDeviceLostCallback = nullptr;
+            void* mDeviceLostUserdata1 = 0;
+            void* mDeviceLostUserdata2 = 0;
         };
 
     private:

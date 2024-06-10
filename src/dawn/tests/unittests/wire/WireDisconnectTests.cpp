@@ -82,7 +82,7 @@ TEST_F(WireDisconnectTests, FlushAfterDisconnect) {
 // Check that disconnecting the wire client calls the device lost callback exacty once.
 TEST_F(WireDisconnectTests, CallsDeviceLostCallback) {
     // Disconnect the wire client. We should receive device lost only once.
-    EXPECT_CALL(deviceLostCallback, Call(_, WGPUDeviceLostReason_InstanceDropped, _, this))
+    EXPECT_CALL(deviceLostCallback, Call(_, WGPUDeviceLostReason_InstanceDropped, _, _, this))
         .Times(Exactly(1));
     GetWireClient()->Disconnect();
     GetWireClient()->Disconnect();
@@ -96,7 +96,7 @@ TEST_F(WireDisconnectTests, ServerLostThenDisconnect) {
 
     // Flush the device lost return command.
     EXPECT_CALL(deviceLostCallback,
-                Call(_, WGPUDeviceLostReason_Unknown, StrEq("some reason"), this))
+                Call(_, WGPUDeviceLostReason_Unknown, StrEq("some reason"), _, this))
         .Times(Exactly(1));
     FlushServer();
 

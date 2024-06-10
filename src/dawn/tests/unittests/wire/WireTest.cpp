@@ -143,9 +143,9 @@ void WireTest::SetUp() {
     // Create the device for testing.
     apiDevice = api.GetNewDevice();
     WGPUDeviceDescriptor deviceDesc = {};
-    deviceDesc.deviceLostCallbackInfo.mode = WGPUCallbackMode_WaitAnyOnly;
-    deviceDesc.deviceLostCallbackInfo.callback = deviceLostCallback.Callback();
-    deviceDesc.deviceLostCallbackInfo.userdata = deviceLostCallback.MakeUserdata(this);
+    deviceDesc.deviceLostCallbackInfo2 = {nullptr, WGPUCallbackMode_AllowSpontaneous,
+                                          deviceLostCallback.Callback(), nullptr,
+                                          deviceLostCallback.MakeUserdata(this)};
     EXPECT_CALL(deviceLostCallback, Call).Times(AtMost(1));
     deviceDesc.uncapturedErrorCallbackInfo.callback = uncapturedErrorCallback.Callback();
     deviceDesc.uncapturedErrorCallbackInfo.userdata = uncapturedErrorCallback.MakeUserdata(this);
@@ -164,8 +164,9 @@ void WireTest::SetUp() {
             // are no longer explicitly calling SetDeviceLostCallback anymore.
             ProcTableAsClass::Object* object =
                 reinterpret_cast<ProcTableAsClass::Object*>(apiDevice);
-            object->mDeviceLostCallback = desc->deviceLostCallbackInfo.callback;
-            object->mDeviceLostUserdata = desc->deviceLostCallbackInfo.userdata;
+            object->mDeviceLostCallback = desc->deviceLostCallbackInfo2.callback;
+            object->mDeviceLostUserdata1 = desc->deviceLostCallbackInfo2.userdata1;
+            object->mDeviceLostUserdata2 = desc->deviceLostCallbackInfo2.userdata2;
 
             EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
                 .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {

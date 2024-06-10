@@ -150,7 +150,7 @@ class WireTest : public testing::Test {
 
     testing::StrictMock<MockProcTable> api;
 
-    testing::MockCallback<WGPUDeviceLostCallbackNew> deviceLostCallback;
+    testing::MockCallback<WGPUDeviceLostCallback2> deviceLostCallback;
     testing::MockCallback<WGPUErrorCallback> uncapturedErrorCallback;
 
     WGPUInstance instance;

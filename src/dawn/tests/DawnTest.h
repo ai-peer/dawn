@@ -141,6 +141,11 @@
 
 #define ASSERT_DEVICE_ERROR(statement) ASSERT_DEVICE_ERROR_MSG(statement, testing::_)
 
+// Matcher for C++ types to verify that their internal C-handles are identical.
+MATCHER_P(CHandleIs, cType, "") {
+    return arg.Get() == cType;
+}
+
 struct GLFWwindow;
 
 void InitDawnEnd2EndTestEnvironment(int argc, char** argv);
@@ -338,7 +343,9 @@ class DawnTestBase {
     // device loss that aren't expected should result in test failures and not just some warnings
     // printed to stdout.
     testing::StrictMock<testing::MockCallback<WGPUErrorCallback>> mDeviceErrorCallback;
-    testing::StrictMock<testing::MockCallback<WGPUDeviceLostCallbackNew>> mDeviceLostCallback;
+    testing::StrictMock<testing::MockCppCallback<
+        void (*)(const wgpu::Device&, wgpu::DeviceLostReason, const char*)>>
+        mDeviceLostCallback;
 
     // Helper methods to implement the EXPECT_ macros
     std::ostringstream& AddBufferExpectation(const char* file,

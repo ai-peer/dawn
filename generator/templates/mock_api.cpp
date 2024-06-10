@@ -168,7 +168,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
                 return {mNextFutureID++};
             }
             {% set CallbackInfoType = (method.arguments|last).type %}
-            {% set CallbackType = (CallbackInfoType.members|first).type %}
+            {% set CallbackType = get_named_member(CallbackInfoType.members, "callback").type %}
             void ProcTableAsClass::Call{{Suffix}}Callback(
                 {{-as_cType(type.name)}} {{as_varName(type.name)}}
                 {%- for arg in CallbackType.arguments -%}
@@ -228,8 +228,16 @@ void ProcTableAsClass::DeviceSetDeviceLostCallback(WGPUDevice device,
                                                    WGPUDeviceLostCallback callback,
                                                    void* userdata) {
     ProcTableAsClass::Object* object = reinterpret_cast<ProcTableAsClass::Object*>(device);
-    object->mDeviceLostOldCallback = callback;
-    object->mDeviceLostUserdata = userdata;
+    object->mDeviceLostCallback = [](WGPUDevice const* device, WGPUDeviceLostReason reason,
+                                     char const* message, void* callback, void* userdata) {
+        if (callback == nullptr) {
+            return;
+        }
+        auto cb = reinterpret_cast<WGPUDeviceLostCallback>(callback);
+        cb(reason, message, userdata);
+    };
+    object->mDeviceLostUserdata1 = reinterpret_cast<void*>(callback);
+    object->mDeviceLostUserdata2 = userdata;
 
     OnDeviceSetDeviceLostCallback(device, callback, userdata);
 }
@@ -237,12 +245,8 @@ void ProcTableAsClass::CallDeviceSetDeviceLostCallbackCallback(WGPUDevice device
                                                                WGPUDeviceLostReason reason,
                                                                char const* message) {
     ProcTableAsClass::Object* object = reinterpret_cast<ProcTableAsClass::Object*>(device);
-    // If we have an old callback set, call that one, otherwise call the new one.
-    if (object->mDeviceLostOldCallback != nullptr) {
-        object->mDeviceLostOldCallback(reason, message, object->mDeviceLostUserdata);
-    } else {
-        object->mDeviceLostCallback(&device, reason, message, object->mDeviceLostUserdata);
-    }
+    object->mDeviceLostCallback(&device, reason, message, object->mDeviceLostUserdata1,
+                                object->mDeviceLostUserdata2);
 }
 
 {% for type in by_category["object"] %}

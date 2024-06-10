@@ -114,18 +114,15 @@ TEST_P(WireAdapterTests, RequestDeviceNullDescriptor) {
     });
 }
 
-static void DeviceLostCallback(WGPUDevice const* device,
-                               WGPUDeviceLostReason reason,
-                               const char* message,
-                               void* userdata) {}
+static void DeviceLostCallback(const wgpu::Device&,
+                               wgpu::DeviceLostReason reason,
+                               const char* message) {}
 
 // Test that the DeviceDescriptor is not allowed to pass a device lost callback from the client to
 // the server.
 TEST_P(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
-    int userdata = 1337;
     wgpu::DeviceDescriptor desc = {};
-    desc.deviceLostCallbackInfo.callback = DeviceLostCallback;
-    desc.deviceLostCallbackInfo.userdata = &userdata;
+    desc.SetDeviceLostCallback(wgpu::CallbackMode::AllowSpontaneous, DeviceLostCallback);
 
     AdapterRequestDevice(adapter, &desc);
 
@@ -134,10 +131,12 @@ TEST_P(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
             EXPECT_STREQ(apiDesc->label, desc.label);
 
             // The callback should not be passed through to the server, and it should be overridden.
-            ASSERT_NE(apiDesc->deviceLostCallbackInfo.callback, nullptr);
-            ASSERT_NE(apiDesc->deviceLostCallbackInfo.callback, &DeviceLostCallback);
-            ASSERT_NE(apiDesc->deviceLostCallbackInfo.userdata, nullptr);
-            ASSERT_NE(apiDesc->deviceLostCallbackInfo.userdata, &userdata);
+            WGPUDeviceDescriptor& inputDesc = *reinterpret_cast<WGPUDeviceDescriptor*>(&desc);
+            ASSERT_NE(apiDesc->deviceLostCallbackInfo2.callback,
+                      inputDesc.deviceLostCallbackInfo2.callback);
+            ASSERT_NE(apiDesc->deviceLostCallbackInfo2.callback, nullptr);
+            ASSERT_NE(apiDesc->deviceLostCallbackInfo2.userdata1, nullptr);
+            ASSERT_EQ(apiDesc->deviceLostCallbackInfo2.userdata2, nullptr);
 
             // Call the callback so the test doesn't wait indefinitely.
             api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Error, nullptr,
