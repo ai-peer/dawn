@@ -33,6 +33,23 @@
       "message": "Do we want this in core IR or just MSL IR? Do any of the other langauges have a similar object method syntax?",
       "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e513e6c_f72c1595",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:39:45Z",
+      "side": 1,
+      "message": "Why is this a `size_t` instead of like `BuiltinFn` or something?",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
