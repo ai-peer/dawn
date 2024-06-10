@@ -16,6 +16,40 @@
       "message": "what are the limitations from D3D11 which resulted in these differences from the other feature? I don\u0027t want to have two different features related but different features here.",
       "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec876ac_4901dbed",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-10T19:23:53Z",
+      "side": 1,
+      "message": "overall, what the backing of the buffer is is starting to get very complicated. I\u0027m thinking it might be wise to rewrite Buffer as multiple subclasses of Buffer which override methods accordingly. Then, the code within each subclass would be more straightforward, and it can well-document its constraints",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bfbb344_9d4cfbae",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-10T19:23:53Z",
+      "side": 1,
+      "message": "why is it a staging buffer if these two are equal? it needs some explanation as it is not very intuitive",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
