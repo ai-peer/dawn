@@ -33,6 +33,24 @@
       "message": "Can this while function just be:\n\n```\ndimension \u003d textureDimensions(t);\n```\n\nI don\u0027t think the `textureLoad` should be needed to repro the issue.",
       "revId": "aecbee8ba36c8a6646e63d6e866707f69f4bbb0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e31398_5938b3c7",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T13:27:35Z",
+      "side": 1,
+      "message": "It doesn\u0027t repro is I make the function just be that line and a `return vec4(1);`",
+      "parentUuid": "1103e8bc_4a9dfe40",
+      "revId": "aecbee8ba36c8a6646e63d6e866707f69f4bbb0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
