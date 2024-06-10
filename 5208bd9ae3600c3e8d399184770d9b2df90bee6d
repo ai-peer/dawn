@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe1dbe09_24bc3472",
+        "filename": "docs/dawn/features/buffer_map_extended_usages.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T23:15:15Z",
+      "side": 1,
+      "message": "There is a way to implement the general purpose mapping feature in D3D11 though. Which will be much more convoluted than this CL. It would be similar to how ANGLE implements general purpose buffers.",
+      "parentUuid": "f6721354_a029cdb1",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fec876ac_4901dbed",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
