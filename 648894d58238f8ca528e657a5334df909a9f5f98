@@ -16,6 +16,24 @@
       "message": "Looking at the CMake files of the absl version we use, both `flat_hash_set` and `flat_hash_map` (through raw_hash_map) have `raw_hash_set` as a dependency so why is this needed?",
       "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd37fa62_b97e83c2",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-10T16:55:07Z",
+      "side": 1,
+      "message": "The problem I was hoping to solve was removing the need to explicitly add `raw_hash_set` in the call to `bundle_libraries` in `tools/android/webgpu/src/main/cpp/CMakeLists.txt`. Part of the solution was using namespaced targets.\n\nUpon seeing your comment, I wanted to look deeper into why this was really necessary. Turns out it is unnecessary and the code in `bundle_libraries` should also iterate over the `INTERFACE_LINK_LIBRARIES` (in addition to `LINK_LIBRARIES` as currently done).\n\n`flat_hash_set` and `flat_hash_map` are both header only and don\u0027t have `raw_hash_set` in their `LINK_LIBRARIES`. Instead, it exists in the `INTERFACE_LINK_LIBRARIES`. Learned this by debugging how `absl_cc_library` created libraries.\n\nSo, I propose abandoning this CL and creating a new one which patches `tools/android/webgpu/src/main/cpp/BundleLibraries.cpp` to do the right thing.",
+      "parentUuid": "a512dc8c_04908fd1",
+      "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
