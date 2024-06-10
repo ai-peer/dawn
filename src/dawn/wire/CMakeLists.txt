@@ -113,6 +113,7 @@ target_link_libraries(dawn_wire
     PRIVATE
       absl::flat_hash_map
       absl::flat_hash_set
+      absl::raw_hash_set # for extern absl::container_internal::kEmptyGroup
       dawn_common
       dawn_internal_config
       partition_alloc
