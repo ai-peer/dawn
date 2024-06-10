@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34fe8bb_88a4b5ec",
+        "filename": "src/tint/lang/core/intrinsic/table_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:28:55Z",
+      "side": 1,
+      "message": "Does this test match the test name? It isn\u0027t calling anything to lookup a member is it?",
+      "revId": "70334fc4484650fa195e73fbcb7ef1ab241ba76b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
