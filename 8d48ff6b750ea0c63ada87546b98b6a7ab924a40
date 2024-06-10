@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b701c1a7_02708303",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T09:21:13Z",
+      "side": 1,
+      "message": "It worked, great suggestion!",
+      "parentUuid": "be77a39b_4fc3152b",
+      "revId": "8d48ff6b750ea0c63ada87546b98b6a7ab924a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bddf3974_c9132bd7",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e3d7390_ab99031b",
+        "filename": "tools/android/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T09:21:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bddf3974_c9132bd7",
+      "revId": "8d48ff6b750ea0c63ada87546b98b6a7ab924a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "921f3285_e7f672aa",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-06-10T07:21:50Z",
       "side": 1,
       "message": "nit: not needed, or it is a separate problem that we need to fix.",
+      "revId": "8d48ff6b750ea0c63ada87546b98b6a7ab924a40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af60b107_ae395fd7",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T09:21:13Z",
+      "side": 1,
+      "message": "I mentioned it in the description, it was an error I discovered that wasn\u0027t evident before. I will make a different CL.",
+      "parentUuid": "921f3285_e7f672aa",
       "revId": "8d48ff6b750ea0c63ada87546b98b6a7ab924a40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
