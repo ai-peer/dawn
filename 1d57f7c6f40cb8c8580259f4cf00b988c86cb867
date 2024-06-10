@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52a49fd_61b801bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-10T16:19:21Z",
+      "side": 1,
+      "message": "Apparently my rebasing onto ToT got pushed up to your CL, sorry about that.",
+      "revId": "1d57f7c6f40cb8c8580259f4cf00b988c86cb867",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
