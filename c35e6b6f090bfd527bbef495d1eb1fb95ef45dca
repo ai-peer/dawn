@@ -103,6 +103,24 @@
       "parentUuid": "452a0434_d65e3282",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32997044_fa96716c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-10T19:35:09Z",
+      "side": 1,
+      "message": "makes sense, it does increase the bundle size by 593 KB. Here\u0027s the demangled symbols from `absl::raw_hash_set` that were undefined. Hoping someone knowledgeable about `abseil` knows what\u0027s up.\n\n```\nabsl::hash_internal::MixingHashState::LowLevelHashImpl(unsigned char const*, unsigned long)\nabsl::hash_internal::MixingHashState::CombineLargeContiguousImpl64(unsigned long, unsigned char const*, unsigned long)\nabsl::hash_internal::MixingHashState::kSeed\nabsl::container_internal::kEmptyGroup\nabsl::container_internal::kSooControl\nabsl::container_internal::EraseMetaOnly(absl::container_internal::CommonFields\u0026, unsigned long, unsigned long)\nabsl::container_internal::ClearBackingArray(absl::container_internal::CommonFields\u0026, absl::container_internal::PolicyFunctions const\u0026, bool, bool)\nabsl::container_internal::HashSetResizeHelper::TransferSlotAfterSoo(absl::container_internal::CommonFields\u0026, unsigned long)\nabsl::container_internal::HashSetResizeHelper::InitControlBytesAfterSoo(absl::container_internal::ctrl_t*, absl::container_internal::ctrl_t, unsigned long)\nabsl::container_internal::HashSetResizeHelper::GrowSizeIntoSingleGroupTransferable(absl::container_internal::CommonFields\u0026, unsigned long)\nabsl::container_internal::PrepareInsertAfterSoo(unsigned long, unsigned long, absl::container_internal::CommonFields\u0026)\nabsl::container_internal::DropDeletesWithoutResize(absl::container_internal::CommonFields\u0026, void const*, absl::container_internal::PolicyFunctions const\u0026, void*)\nabsl::container_internal::find_first_non_full_outofline(absl::container_internal::CommonFields const\u0026, unsigned long)\nabsl::container_internal::HashSetResizeHelper::GrowIntoSingleGroupShuffleControlBytes(absl::container_internal::ctrl_t*, unsigned long) const\n```",
+      "parentUuid": "487600f2_d55d4971",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
