@@ -139,6 +139,24 @@
       "parentUuid": "32997044_fa96716c",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1945a331_d00fd3b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T20:40:54Z",
+      "side": 1,
+      "message": "Would it be possible to have a dump of the graph as BundleLibraries is adding them with both the source and destination of edges (as well as the type of the edge)? We\u0027d get to know why all those additional absl libs are added.\n\nIMHO we could take this for now, just to have a complete lib and keep iterating to reduce the number of libs included. We don\u0027t ship on Android using CMake yet so a temporary 500kb too much is fine.",
+      "parentUuid": "d5058558_497dbe3d",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
