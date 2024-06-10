@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a512dc8c_04908fd1",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T15:46:55Z",
+      "side": 1,
+      "message": "Looking at the CMake files of the absl version we use, both `flat_hash_set` and `flat_hash_map` (through raw_hash_map) have `raw_hash_set` as a dependency so why is this needed?",
+      "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
