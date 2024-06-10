@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d73290_c3b7c697",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T20:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "591c6aca_035daee7",
+      "revId": "7f5416be93e6779c96c71ff0d96834c72f18d3ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86a8c898_1119538f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-10T20:18:38Z",
       "side": 1,
       "message": "Nit: unused",
+      "revId": "7f5416be93e6779c96c71ff0d96834c72f18d3ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f879df03_901702dd",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T20:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a8c898_1119538f",
       "revId": "7f5416be93e6779c96c71ff0d96834c72f18d3ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
