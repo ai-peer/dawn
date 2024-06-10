@@ -38,7 +38,7 @@ ExecutionSerial ExecutionQueueBase::GetLastSubmittedCommandSerial() const {
 }
 
 ExecutionSerial ExecutionQueueBase::GetCompletedCommandSerial() const {
-    return mCompletedSerial;
+    return mCompletedSerial.load(std::memory_order_acquire);
 }
 
 MaybeError ExecutionQueueBase::CheckPassedSerials() {
@@ -47,14 +47,12 @@ MaybeError ExecutionQueueBase::CheckPassedSerials() {
 
     DAWN_ASSERT(completedSerial <=
                 ExecutionSerial(mLastSubmittedSerial.load(std::memory_order_acquire)));
-    // completedSerial should not be less than mCompletedSerial unless it is 0.
-    // It can be 0 when there's no fences to check.
-    DAWN_ASSERT(completedSerial >= mCompletedSerial || completedSerial == ExecutionSerial(0));
 
-    if (completedSerial > mCompletedSerial) {
-        mCompletedSerial = completedSerial;
+    // Atomically set mCompletedSerial to completedSerial if completedSerial is larger.
+    uint64_t current = mCompletedSerial.load(std::memory_order_acquire);
+    while (completedSerial > current && !mCompletedSerial.compare_exchange_weak(
+                                            current, completedSerial, std::memory_order_acq_rel)) {
     }
-
     return {};
 }
 
@@ -71,7 +69,7 @@ MaybeError ExecutionQueueBase::EnsureCommandsFlushed(ExecutionSerial serial) {
 void ExecutionQueueBase::AssumeCommandsComplete() {
     // Bump serials so any pending callbacks can be fired.
     uint64_t prev = mLastSubmittedSerial.fetch_add(1u, std::memory_order_release);
-    mCompletedSerial = ExecutionSerial(prev + 1);
+    mCompletedSerial.store(prev + 1u, std::memory_order_release);
 }
 
 void ExecutionQueueBase::IncrementLastSubmittedCommandSerial() {
@@ -79,8 +77,8 @@ void ExecutionQueueBase::IncrementLastSubmittedCommandSerial() {
 }
 
 bool ExecutionQueueBase::HasScheduledCommands() const {
-    return ExecutionSerial(mLastSubmittedSerial.load(std::memory_order_acquire)) >
-               mCompletedSerial ||
+    return mLastSubmittedSerial.load(std::memory_order_acquire) >
+               mCompletedSerial.load(std::memory_order_acquire) ||
            HasPendingCommands();
 }
 
