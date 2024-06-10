@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fad4d7_cb1305d9",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T18:55:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c37fe620_739d5d4c",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b3d3a3a_71213afb",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39b8dcfb_8998feaa",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T18:55:59Z",
+      "side": 1,
+      "message": "HLSL needs the same thing for atomics, and having it in core makes it easier to validate and disassemble.",
+      "parentUuid": "9b3d3a3a_71213afb",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e513e6c_f72c1595",
         "filename": "src/tint/lang/core/ir/member_builtin_call.h",
         "patchSetId": 4
@@ -48,6 +84,24 @@
       "writtenOn": "2024-06-10T17:39:45Z",
       "side": 1,
       "message": "Why is this a `size_t` instead of like `BuiltinFn` or something?",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0871be4_11bbec32",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T18:55:59Z",
+      "side": 1,
+      "message": "`FuncId()` is used for intrinsics table lookups in the Validator.\n\nWe can\u0027t return a `BuiltinFn` here because the per-dialect subclasses have different definitions of that enum, so there\u0027s a `Func()` in the subclasses that returns `BuiltinFn`. FWIW this mirrors `BuiltinCall`.",
+      "parentUuid": "3e513e6c_f72c1595",
       "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
