@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f6a523_827d24af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-10T11:22:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46dae1ce_e7828f93",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb510ac6_d4d237c1",
@@ -207,6 +225,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fec7fa89_f01b3b97",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-10T11:22:59Z",
+      "side": 1,
+      "message": "Since webgpu WG is not going to stick to the prototype design and instead favor the struct syntax, I think Alan\u0027s suggestion is good enough for a prototype implementation. Then depending on if the WG allows for the struct syntax we can discuss that. Would that be fine David?",
+      "parentUuid": "5d58219f_a2bf2da1",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fb3fd1_e8f61516",
         "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
         "patchSetId": 1
@@ -235,6 +271,24 @@
       "writtenOn": "2024-06-06T19:39:08Z",
       "side": 1,
       "message": "Write down all the proposed enum names, and how they correspond to the API side string names. (Be concrete about this; it will help in the long run and expose overlaps and usability)",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dff0d7b_ada45195",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-10T11:22:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d8e42b6_baf311d9",
       "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
