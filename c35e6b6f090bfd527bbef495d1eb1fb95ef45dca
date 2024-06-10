@@ -33,6 +33,23 @@
       "message": "Great fix! LGTM. Jim PTAL",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "280a0d4b_e9561b05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T19:06:09Z",
+      "side": 1,
+      "message": "Are the missing symbols only happening since https://dawn-review.googlesource.com/c/dawn/+/192561 ?\n\nWhen I tried this approach it nearly doubled the number of object files included in the bundle, many of which were not practically required.\n\nCan you measure the number of files in the bundle before and after these pairs of CLs?",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
