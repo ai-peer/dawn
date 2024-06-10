@@ -33,6 +33,24 @@
       "message": "PTAL. Ryan can you verify this works and the fuzzer still runs when the patch is applied? Preferrably it would default the PROTO code to off in Cmake but I wasn\u0027t sure if the build files were used on any bots at the moment.",
       "revId": "96e39119aa0eef96bae2dc81f04bd112402b553a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94daecbd_2e352663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-10T16:18:48Z",
+      "side": 1,
+      "message": "Overall this looks good. IR Binary support is the only thing that depends on PBs, and that should be default off, so I think it should be fine on the bots.\n\nI have uploaded https://dawn-review.googlesource.com/c/dawn/+/192683 which contains the additional changes I needed to get no pb builds working for me locally. It should be be integrated into this PR.",
+      "parentUuid": "0afabc04_a2055956",
+      "revId": "96e39119aa0eef96bae2dc81f04bd112402b553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
