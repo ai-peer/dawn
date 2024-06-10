@@ -192,7 +192,7 @@ option(DAWN_BUILD_SAMPLES "Enables building Dawn's samples" ${BUILD_SAMPLES})
 option(DAWN_BUILD_NODE_BINDINGS "Enables building Dawn's NodeJS bindings" OFF)
 option(DAWN_ENABLE_SWIFTSHADER "Enables building Swiftshader as part of the build and Vulkan adapter discovery" OFF)
 option(DAWN_BUILD_BENCHMARKS "Build Dawn benchmarks" OFF)
-option(DAWN_BUILD_PROTOBUF "Build the protobuf dependencies" ON)
+option(DAWN_BUILD_PROTOBUF "Build the protobuf dependencies" OFF)
 
 option(DAWN_WERROR "Build with -Werror (or equivalent)" OFF)
 option(DAWN_ENABLE_PIC "Build with Position-Independent-Code enabled" OFF)
