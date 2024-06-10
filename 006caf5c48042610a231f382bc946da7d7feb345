@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2851c0f_add91b62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T14:32:10Z",
+      "side": 1,
+      "message": "LGTM! BTW do you think it would make sense to make namespace targets for Dawn as well? I\u0027m not sure if there would be advantages to doing that.",
+      "revId": "006caf5c48042610a231f382bc946da7d7feb345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
