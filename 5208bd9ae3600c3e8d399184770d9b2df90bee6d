@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6721354_a029cdb1",
+        "filename": "docs/dawn/features/buffer_map_extended_usages.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T23:13:02Z",
+      "side": 1,
+      "message": "D3D11 have 3 kinds of buffer\u0027s usage:\n- Default: GPU read and GPU write only, CPU no access.\n- Dynamic: CPU write and GPU read only.\n- Staging: CPU read and write. GPU read and write are only allowed in Copy operations.\n\nSo you cannot have a general purposes buffers that can be read \u0026 write mappable and be used as index, uniform, storage buffers etc. Even if the GPU is UMA.\n\nWe need two classes of feature anw because the general purposes feature is still useful for some one need it (i.e. writing a buffer in compute and then map for readback, that\u0027s not possible with D3D11, even though on UMA systems it should be possible. There is no D3D usage that allows GPU write and CPU write at the same time).\n\nOr another example use case:\n- a buffer that is both CPU writable and GPU writable. Let say a vertex buffer that is partially filled on CPU via mapping and then later filled in compute.\n\nSuch use case is not possible with D3D11\u0027s limitations either.",
+      "parentUuid": "b0f92c7b_d8715923",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fec876ac_4901dbed",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-10T19:23:53Z",
       "side": 1,
       "message": "why is it a staging buffer if these two are equal? it needs some explanation as it is not very intuitive",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3669673_edbebe87",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T23:13:02Z",
+      "side": 1,
+      "message": "I was just thinking the top of this file already has a table explaining different D3D usages and their restrictions. With staging usage is the only one allowing CPU read and write.",
+      "parentUuid": "0bfbb344_9d4cfbae",
       "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
