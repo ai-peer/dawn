@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "5945d61b8f1ab904522ac0223c92d9263e358396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59dc9fd2_2480936b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-10T18:49:50Z",
+      "side": 1,
+      "message": "LGTM, I think you should be able to land this (\"CQ+2\") if ready. I\u0027ll go ahead and kick off the tests with \"CQ+1\" (hopefully it passes, I don\u0027t think it\u0027s been run yet)",
+      "revId": "5945d61b8f1ab904522ac0223c92d9263e358396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
