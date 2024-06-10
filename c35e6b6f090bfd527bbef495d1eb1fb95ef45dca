@@ -157,6 +157,24 @@
       "parentUuid": "d5058558_497dbe3d",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ba8831_78897e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T20:59:29Z",
+      "side": 1,
+      "message": "I recall analyzing the graph, I can\u0027t remember my findings, I can repeat my experiments.\n\nOne reason to take this patch would be that it looks neat and appears to solve the issue without a hack. However, I believe that (counter-intuitively) it is a disguised way to get the missing dependency into the graph.",
+      "parentUuid": "1945a331_d00fd3b3",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
