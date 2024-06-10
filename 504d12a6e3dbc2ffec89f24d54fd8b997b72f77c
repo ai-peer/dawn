@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6354795c_dd27c4ac",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-10T15:40:12Z",
+      "side": 1,
+      "message": "Makes sense, thanks!",
+      "parentUuid": "f769db6c_15a7fa44",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ab43d2_7083ac84",
