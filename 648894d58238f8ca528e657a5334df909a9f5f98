@@ -34,6 +34,24 @@
       "parentUuid": "a512dc8c_04908fd1",
       "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb832d0_694b6655",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T16:59:50Z",
+      "side": 1,
+      "message": "Oh that\u0027s a great find! It makes sense to do the fix you suggested. Also out of curiosity, how did you debug this? (my CMake debugging tends to be a LOT of `message(STATUS)` calls)",
+      "parentUuid": "dd37fa62_b97e83c2",
+      "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
