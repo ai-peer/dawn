@@ -1207,7 +1207,6 @@ TEST_P(BufferTests, ZeroSizedBuffer) {
 TEST_P(BufferTests, CreateBufferOOM) {
     // TODO(http://crbug.com/dawn/749): Missing support.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
     DAWN_TEST_UNSUPPORTED_IF(IsAsan());
     DAWN_TEST_UNSUPPORTED_IF(IsTsan());
 
@@ -1234,7 +1233,6 @@ TEST_P(BufferTests, BufferMappedAtCreationOOM) {
 
     // TODO(http://crbug.com/dawn/749): Missing support.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
     DAWN_TEST_UNSUPPORTED_IF(IsAsan());
     DAWN_TEST_UNSUPPORTED_IF(IsTsan());
 
@@ -1301,7 +1299,6 @@ TEST_P(BufferTests, BufferMappedAtCreationOOM) {
 TEST_P(BufferTests, CreateBufferOOMMapAsync) {
     // TODO(http://crbug.com/dawn/749): Missing support.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
     DAWN_TEST_UNSUPPORTED_IF(IsAsan());
     DAWN_TEST_UNSUPPORTED_IF(IsTsan());
 
