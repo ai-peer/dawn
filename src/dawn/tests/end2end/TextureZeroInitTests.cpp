@@ -806,9 +806,6 @@ TEST_P(TextureZeroInitTest, IndependentDepthStencilLoadAfterDiscard) {
 // Test that a stencil texture that is written via copy, then discarded, sees
 // zero contents when it is read by sampling.
 TEST_P(TextureZeroInitTest, StencilCopyThenDiscardAndReadBySampling) {
-    // Copies to a single aspect are unsupported on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     for (wgpu::TextureFormat format :
          {wgpu::TextureFormat::Stencil8, wgpu::TextureFormat::Depth24PlusStencil8}) {
         wgpu::Texture depthStencilTexture = CreateAndFillStencilTexture(format);
@@ -837,9 +834,6 @@ TEST_P(TextureZeroInitTest, StencilCopyThenDiscardAndReadBySampling) {
 // Test that a stencil texture that is written via copy, then discarded, sees
 // zero contents when it is read via copy.
 TEST_P(TextureZeroInitTest, StencilCopyThenDiscardAndReadByCopy) {
-    // Copies to a single aspect are unsupported on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     for (wgpu::TextureFormat format :
          {wgpu::TextureFormat::Stencil8, wgpu::TextureFormat::Depth24PlusStencil8}) {
         wgpu::Texture depthStencilTexture = CreateAndFillStencilTexture(format);
@@ -870,9 +864,6 @@ TEST_P(TextureZeroInitTest, StencilCopyThenDiscardAndReadByCopy) {
 // Test that a stencil texture that is written via copy, then discarded, then copied to
 // another texture, sees zero contents when it is read via copy.
 TEST_P(TextureZeroInitTest, StencilCopyThenDiscardAndCopyToTextureThenReadByCopy) {
-    // Copies to a single aspect are unsupported on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     for (wgpu::TextureFormat format :
          {wgpu::TextureFormat::Stencil8, wgpu::TextureFormat::Depth24PlusStencil8}) {
         // Create the texture.
@@ -2074,9 +2065,6 @@ TEST_P(CompressedTextureZeroInitTest, FullMipCopy) {
 
 // Test that 1 lazy clear count happens when we copy to half the texture
 TEST_P(CompressedTextureZeroInitTest, HalfCopyBufferToTexture) {
-    // TODO(crbug.com/dawn/643): diagnose and fix this failure on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
                               wgpu::TextureUsage::TextureBinding;
@@ -2094,9 +2082,6 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyBufferToTexture) {
 // Test that 0 lazy clear count happens when we copy buffer to texture to a nonzero mip level
 // (with physical size different from the virtual mip size)
 TEST_P(CompressedTextureZeroInitTest, FullCopyToNonZeroMipLevel) {
-    // TODO(crbug.com/dawn/1328): ES3.1 does not support subsetting of compressed textures.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
-
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
                               wgpu::TextureUsage::TextureBinding;
@@ -2119,9 +2104,6 @@ TEST_P(CompressedTextureZeroInitTest, FullCopyToNonZeroMipLevel) {
 // Test that 1 lazy clear count happens when we copy buffer to half texture to a nonzero mip level
 // (with physical size different from the virtual mip size)
 TEST_P(CompressedTextureZeroInitTest, HalfCopyToNonZeroMipLevel) {
-    // TODO(crbug.com/dawn/643): diagnose and fix this failure on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
                               wgpu::TextureUsage::TextureBinding;
@@ -2143,8 +2125,8 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyToNonZeroMipLevel) {
 
 // Test that 0 lazy clear count happens when we copy buffer to nonzero array layer
 TEST_P(CompressedTextureZeroInitTest, FullCopyToNonZeroArrayLayer) {
-    // TODO(crbug.com/dawn/1328): ES3.1 does not support subsetting of compressed textures.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    // Compatibility mode does not support sampling from a subset of array layers.
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
 
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
@@ -2163,8 +2145,8 @@ TEST_P(CompressedTextureZeroInitTest, FullCopyToNonZeroArrayLayer) {
 
 // Test that 1 lazy clear count happens when we copy buffer to half texture to a nonzero array layer
 TEST_P(CompressedTextureZeroInitTest, HalfCopyToNonZeroArrayLayer) {
-    // TODO(crbug.com/dawn/643): diagnose and fix this failure on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+    // Compatibility mode does not support sampling from a subset of array layers.
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
 
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
@@ -2183,8 +2165,8 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyToNonZeroArrayLayer) {
 
 // full copy texture to texture, 0 lazy clears are needed
 TEST_P(CompressedTextureZeroInitTest, FullCopyTextureToTextureMipLevel) {
-    // TODO(crbug.com/dawn/1328): ES3.1 does not support subsetting of compressed textures.
-    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    // Compatibility mode does not support compressed texture-to-texture copies.
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
 
     // create srcTexture and fill it with data
     wgpu::TextureDescriptor srcDescriptor =
@@ -2232,8 +2214,8 @@ TEST_P(CompressedTextureZeroInitTest, FullCopyTextureToTextureMipLevel) {
 
 // half copy texture to texture, lazy clears are needed for noncopied half
 TEST_P(CompressedTextureZeroInitTest, HalfCopyTextureToTextureMipLevel) {
-    // TODO(crbug.com/dawn/643): diagnose and fix this failure on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+    // Compatibility mode does not support compressed texture-to-texture copies.
+    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
 
     // create srcTexture with data
     wgpu::TextureDescriptor srcDescriptor =
@@ -2285,8 +2267,8 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyTextureToTextureMipLevel) {
 // was considered fully initialized even though there was a 256-byte
 // stride between images.
 TEST_P(CompressedTextureZeroInitTest, Copy2DArrayCompressedB2T2B) {
-    // TODO(crbug.com/dawn/643): diagnose and fix this failure on OpenGL.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+    // Compatibility mode does not support compressed texture-to-buffer copies.
+    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
 
     // create srcTexture with data
     wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor(
