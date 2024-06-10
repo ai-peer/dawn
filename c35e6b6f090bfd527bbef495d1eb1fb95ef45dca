@@ -210,6 +210,24 @@
       "message": "The link shows access denied.\n\nI made my own here -\u003e https://pastebin.com/mrkT11pG\n\nEDGE_TYPE:\n-\u003e LINK_LIBRARY\n\u003d\u003e INTERFACE_LINK_LIBRARY\n\n* prefix means already processed.\n\nI wonder if we ignoring deps from LINK_LIBRARIES of targets that were INTERFACE_LINK_LIBRARIES could help.",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa868c80_e79e9076",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-10T21:27:31Z",
+      "side": 1,
+      "message": "`* prefix` implies the target is already processed",
+      "parentUuid": "48596094_66de9221",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
