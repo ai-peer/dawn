@@ -57,6 +57,7 @@ class SharedTextureMemory final : public SharedTextureMemoryBase {
     RefCountedVkHandle<VkDeviceMemory>* GetVkDeviceMemory() const;
     RefCountedVkHandle<VkImage>* GetVkImage() const;
     uint32_t GetQueueFamilyIndex() const;
+    SampleTypeBit GetSupportedSampleTypeBit() const;
 
   private:
     static Ref<SharedTextureMemory> Create(Device* device,
@@ -87,6 +88,8 @@ class SharedTextureMemory final : public SharedTextureMemoryBase {
 
     // Populated if this instance was created from an AHardwareBuffer.
     YCbCrVkDescriptor mYCbCrAHBInfo;
+    // todo: better naming
+    SampleTypeBit mSampleTypeBit = SampleTypeBit::None;
 };
 
 }  // namespace dawn::native::vulkan
