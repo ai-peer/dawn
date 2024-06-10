@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ee5465e_f86a44ea",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T10:58:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "081f8cd1_c832e77a",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d40e798e_6241ec0d",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-10T08:10:30Z",
       "side": 1,
       "message": "nit: this one doesn\u0027t strictly need a callback as we know when it is gong to be called in this file. It could just be renderPassWorkaroundsHelper.OnPassStart()",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdc1c0cd_e3e8ae3e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T10:58:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d40e798e_6241ec0d",
       "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984e47ae_7ffa9019",
+        "filename": "src/dawn/native/RenderPassWorkaroundsHelper.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T10:58:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "67d83c9a_1c29d858",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bab0e2f6_89908d74",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-06-10T08:10:30Z",
       "side": 1,
       "message": "nit: : NonMovable",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0153752_be047149",
+        "filename": "src/dawn/native/RenderPassWorkaroundsHelper.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T10:58:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab0e2f6_89908d74",
       "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
