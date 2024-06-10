@@ -34,6 +34,23 @@
       "parentUuid": "d2851c0f_add91b62",
       "revId": "006caf5c48042610a231f382bc946da7d7feb345",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50415403_6e0ff0fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T14:46:26Z",
+      "side": 1,
+      "message": "I haven\u0027t had time to check the fix but LGTM, will get back to you if this doesn\u0027t fix the issue for me!",
+      "revId": "006caf5c48042610a231f382bc946da7d7feb345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
