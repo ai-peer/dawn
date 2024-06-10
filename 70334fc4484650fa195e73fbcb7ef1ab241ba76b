@@ -16,6 +16,24 @@
       "message": "Does this test match the test name? It isn\u0027t calling anything to lookup a member is it?",
       "revId": "70334fc4484650fa195e73fbcb7ef1ab241ba76b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d70985_8a0552cb",
+        "filename": "src/tint/lang/core/intrinsic/table_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T18:55:50Z",
+      "side": 1,
+      "message": "It\u0027s calling the version of `Lookup` that looks for a member function (using the `object` argument), which should not match the non-member overload.\n\nI made the test name more verbose.",
+      "parentUuid": "f34fe8bb_88a4b5ec",
+      "revId": "70334fc4484650fa195e73fbcb7ef1ab241ba76b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
