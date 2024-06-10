@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "e18ad037c87471b548fa7d359d459cd615fdab95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "763c2827_77fc5843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T20:09:55Z",
+      "side": 1,
+      "message": "¯\\_(ツ)_/¯",
+      "revId": "e18ad037c87471b548fa7d359d459cd615fdab95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9418f626_5b661e30",
+        "filename": "src/tint/lang/spirv/reader/reader_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T20:09:55Z",
+      "side": 1,
+      "message": "Heh, IMO all of these callsites actually read better with the `Disassemble()` function. But I don\u0027t quite care enough to make you change them all back.",
+      "revId": "e18ad037c87471b548fa7d359d459cd615fdab95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
