@@ -261,6 +261,7 @@ target_link_libraries(dawn_native
             absl::str_format_internal
             absl::flat_hash_map
             absl::flat_hash_set
+            absl::raw_hash_set # for extern absl::container_internal::kEmptyGroup
             absl::inlined_vector
 )
 
