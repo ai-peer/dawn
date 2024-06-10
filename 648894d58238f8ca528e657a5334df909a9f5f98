@@ -52,6 +52,24 @@
       "parentUuid": "dd37fa62_b97e83c2",
       "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52f65b78_c619b83a",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-10T17:04:33Z",
+      "side": 1,
+      "message": "`message(STATUS)` is a perfectly fine way to debug 😊 although, `cmake --trace` is useful if you know what to look for. There is an interactive cmake debugger available in VSCode and Visual Studio IDE that I\u0027ve not used, but will give a try some time - https://devblogs.microsoft.com/cppblog/cmake-debugger-allows-you-to-debug-your-cmake-scripts-and-more/",
+      "parentUuid": "eeb832d0_694b6655",
+      "revId": "648894d58238f8ca528e657a5334df909a9f5f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
