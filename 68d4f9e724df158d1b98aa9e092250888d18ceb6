@@ -16,6 +16,29 @@
       "message": "This fixes the race problem, but doesn\u0027t fix the potential deadlock problem (device.destroy() + ProcessEvents) - can look at that problem separately.\n\n\nit also looks like there is some flake found by the tests in libnvidia-glvkspirv.so.440.100\nI believe this is because TSAN doesn\u0027t have symbols from the driver, and we\u0027ll have to suppress that failure. We have similar suppressions already",
       "revId": "68d4f9e724df158d1b98aa9e092250888d18ceb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f506944a_ac282f7a",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-10T23:24:33Z",
+      "side": 1,
+      "message": "nit. Maybe an `optional\u003cResultOrError\u003cVkFence\u003e\u003e` is more appropriate for this to make it a bit more explicit that we can have no errors but no fence? Then below we could have a simple:\n\n```\nif (result) {\n    return *result;\n}\n```",
+      "range": {
+        "startLine": 467,
+        "startChar": 62,
+        "endLine": 467,
+        "endChar": 84
+      },
+      "revId": "68d4f9e724df158d1b98aa9e092250888d18ceb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
