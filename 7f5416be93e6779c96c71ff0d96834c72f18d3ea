@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "591c6aca_035daee7",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T20:18:38Z",
+      "side": 1,
+      "message": "Nit: unused (surprised `clang-tidy` didn\u0027t complain...)",
+      "revId": "7f5416be93e6779c96c71ff0d96834c72f18d3ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a8c898_1119538f",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T20:18:38Z",
+      "side": 1,
+      "message": "Nit: unused",
+      "revId": "7f5416be93e6779c96c71ff0d96834c72f18d3ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
