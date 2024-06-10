@@ -34,6 +34,24 @@
       "parentUuid": "3ba31a8f_227cca91",
       "revId": "29e640ff23aa0a0a0208d80a08a4f10991e9c6b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "240d23e6_ec658641",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2024-06-10T10:30:01Z",
+      "side": 1,
+      "message": "Umm.. that\u0027s what I meant. We should specify that the bindings will be generated only when we run `gradlew publishToMaven`. Cmake build steps themselves won\u0027t be sufficient to generate them",
+      "parentUuid": "bcac88b7_ad155903",
+      "revId": "29e640ff23aa0a0a0208d80a08a4f10991e9c6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
