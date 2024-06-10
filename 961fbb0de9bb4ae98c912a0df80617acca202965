@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "094a39db_c7039945",
+        "filename": "src/tint/lang/msl/ir/member_builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T19:09:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3df11c3d_c68c2c33",
+      "revId": "961fbb0de9bb4ae98c912a0df80617acca202965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b456e99_5e1765ad",
