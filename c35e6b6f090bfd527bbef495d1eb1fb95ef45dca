@@ -85,6 +85,24 @@
       "parentUuid": "280a0d4b_e9561b05",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "487600f2_d55d4971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T19:30:13Z",
+      "side": 1,
+      "message": "absl_hash ought to be included without traversing INTERFACE_LINK_LIBRARIES, and these other symbols are not required in our library. We don\u0027t want the transitory links in the bundle. This isn\u0027t the right fix for the absl_hash issue sadly.",
+      "parentUuid": "452a0434_d65e3282",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
