@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "653780b0_145a33e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T08:10:30Z",
+      "side": 1,
+      "message": "LGTM, this is much clearer and decoupled.",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "081f8cd1_c832e77a",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1394,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T08:10:30Z",
+      "side": 1,
+      "message": "optional nit: this can be moved as well.",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40e798e_6241ec0d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T08:10:30Z",
+      "side": 1,
+      "message": "nit: this one doesn\u0027t strictly need a callback as we know when it is gong to be called in this file. It could just be renderPassWorkaroundsHelper.OnPassStart()",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d83c9a_1c29d858",
+        "filename": "src/dawn/native/RenderPassWorkaroundsHelper.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T08:10:30Z",
+      "side": 1,
+      "message": "This is the only functional change right? (nit: in the future it might be easier to separate non-functional change and functional ones in two CLs, so that there is less risk when landing them, and so that reviewers don\u0027t need to look at the details of everything to know what\u0027s changed).",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab0e2f6_89908d74",
+        "filename": "src/dawn/native/RenderPassWorkaroundsHelper.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T08:10:30Z",
+      "side": 1,
+      "message": "nit: : NonMovable",
+      "revId": "4aa2dab4903fb7b4e3807d0701851ddc9ed0d259",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
