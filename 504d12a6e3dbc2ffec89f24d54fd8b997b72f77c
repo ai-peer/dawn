@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f769db6c_15a7fa44",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-06-10T14:00:18Z",
+      "side": 1,
+      "message": "Updated to DAWN_INVALID_IF. Not sure how to easily validate this as bufferFormatProperties in tests also come from AHB which has format.",
+      "parentUuid": "99a59972_51a20c14",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8ab43d2_7083ac84",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-06-05T19:03:40Z",
       "side": 1,
       "message": "is it possible to add a test for it?",
+      "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "753f0d8a_54e7f3f2",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-06-10T14:00:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8ab43d2_7083ac84",
       "revId": "504d12a6e3dbc2ffec89f24d54fd8b997b72f77c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
