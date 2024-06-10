@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3905b81a_1576d50c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-10T23:14:48Z",
+      "side": 1,
+      "message": "This fixes the race problem, but doesn\u0027t fix the potential deadlock problem (device.destroy() + ProcessEvents) - can look at that problem separately.\n\n\nit also looks like there is some flake found by the tests in libnvidia-glvkspirv.so.440.100\nI believe this is because TSAN doesn\u0027t have symbols from the driver, and we\u0027ll have to suppress that failure. We have similar suppressions already",
+      "revId": "68d4f9e724df158d1b98aa9e092250888d18ceb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
