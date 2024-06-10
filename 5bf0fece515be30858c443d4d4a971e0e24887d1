@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c651c279_0611097f",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T19:08:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "39b8dcfb_8998feaa",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e513e6c_f72c1595",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "`FuncId()` is used for intrinsics table lookups in the Validator.\n\nWe can\u0027t return a `BuiltinFn` here because the per-dialect subclasses have different definitions of that enum, so there\u0027s a `Func()` in the subclasses that returns `BuiltinFn`. FWIW this mirrors `BuiltinCall`.",
       "parentUuid": "3e513e6c_f72c1595",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95c784b_330b0019",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T19:08:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0871be4_11bbec32",
       "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
