@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37fe620_739d5d4c",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:32:38Z",
+      "side": 1,
+      "message": "```suggestion\n    AddOperand(MemberBuiltinCall::kObjectOperandOffset, object);\n```",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b3d3a3a_71213afb",
+        "filename": "src/tint/lang/core/ir/member_builtin_call.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:32:38Z",
+      "side": 1,
+      "message": "Do we want this in core IR or just MSL IR? Do any of the other langauges have a similar object method syntax?",
+      "revId": "5bf0fece515be30858c443d4d4a971e0e24887d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
