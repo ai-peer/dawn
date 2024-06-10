@@ -16,6 +16,23 @@
       "message": "Still LGTM",
       "revId": "fd49aee46fdc1bceb234aa268b8ff06bfacbb823",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ace7af2_f815d779",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T12:17:01Z",
+      "side": 1,
+      "message": "I\u0027ve just realized that the generated Kotlin files were not actually being included in the library; it was only working because I\u0027d accidentally left them in the test project so it was picking them up from there. My apologies. I will have to investigate and update the CL.",
+      "revId": "fd49aee46fdc1bceb234aa268b8ff06bfacbb823",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
