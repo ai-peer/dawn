@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d4bda4_3e2adb1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-10T07:13:15Z",
+      "side": 1,
+      "message": "LGTM, thank you for the fix! I added yo to the ACL to run trybos with CQ+1, and to submit your changes once they have CR+2 by doing CQ+2.",
+      "revId": "c4e4608a5f03afc9cc4e12b879c262b543d6486f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
