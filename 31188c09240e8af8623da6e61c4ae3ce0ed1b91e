@@ -51,6 +51,24 @@
       "parentUuid": "f4ddbacf_e4d511af",
       "revId": "31188c09240e8af8623da6e61c4ae3ce0ed1b91e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65d5e053_9eb72a6f",
+        "filename": "src/dawn/tests/end2end/SurfaceTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-10T18:54:37Z",
+      "side": 1,
+      "message": "Oh I just forgot we didn\u0027t add the chain yet - chain error is one of the error cases, but will have to wait until we actually have a chain (https://github.com/webgpu-native/webgpu-headers/issues/261)",
+      "parentUuid": "56285efa_cf71ec02",
+      "revId": "31188c09240e8af8623da6e61c4ae3ce0ed1b91e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
