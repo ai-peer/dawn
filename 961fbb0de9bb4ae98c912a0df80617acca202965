@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "943898b0_0ca54fe0",
+        "filename": "src/tint/lang/msl/ir/member_builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:44:04Z",
+      "side": 1,
+      "message": "What happens when this gets disassembled, do we emit the `func` anywhere?",
+      "revId": "961fbb0de9bb4ae98c912a0df80617acca202965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b456e99_5e1765ad",
+        "filename": "src/tint/lang/msl/ir/member_builtin_call.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T17:44:04Z",
+      "side": 1,
+      "message": "The base class does this, do we need it here as well?",
+      "revId": "961fbb0de9bb4ae98c912a0df80617acca202965",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
