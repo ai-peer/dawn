@@ -121,6 +121,24 @@
       "parentUuid": "487600f2_d55d4971",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5058558_497dbe3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-10T19:43:18Z",
+      "side": 1,
+      "message": "Thanks for your understanding. I did already spend a few days (!) trying to understand this issue and I did try the INTERFACE_LINK_LIBRARIES method but (1) wasn\u0027t convinced it should be needed and (2) noted the increase in the library size (which we are working hard to keep low). Still I couldn\u0027t explain the missing absl symbols, hence my workaround.",
+      "parentUuid": "32997044_fa96716c",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
