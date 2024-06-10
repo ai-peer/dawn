@@ -18,6 +18,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62a85dc_f0bca56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T23:40:18Z",
+      "side": 1,
+      "message": "Yes, we could add the suppression on NVIDIA linux, it would reduce the stderr noises in the tsan bots currently. I think we should add the suppression in this CL.",
+      "parentUuid": "3905b81a_1576d50c",
+      "revId": "68d4f9e724df158d1b98aa9e092250888d18ceb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b8dd992_f35cf84f",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-10T23:40:18Z",
+      "side": 1,
+      "message": "Is this function thread safe though? I feel like two threads storing at the same time would lead to wrong one being stored.\nIf it\u0027s not thread safe I guess we can add a TODO here?\n\nIt looks like this function is always used by Device, which is protected by device\u0027s lock in the MultithreadTests, hence it won\u0027t trigger TSAN.",
+      "revId": "68d4f9e724df158d1b98aa9e092250888d18ceb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f506944a_ac282f7a",
