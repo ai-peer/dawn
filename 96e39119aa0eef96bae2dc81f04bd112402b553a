@@ -16,6 +16,23 @@
       "message": "FWIW, i\u0027ve had success configuring and building with `DAWN_BUILD_PROTOBUF\u003dOFF`.\n\n```\n$ cmake -DDAWN_FETCH_DEPENDENCIES\u003dON -DCMAKE_BUILD_TYPE\u003dRelease -DDAWN_BUILD_PROTOBUF\u003dOFF -S . -B out/Release -GNinja\n$ cmake --build out/Release\n$ ctest --test-dir out/Release\n```\nTests from `tint_unittests` seem to pass",
       "revId": "96e39119aa0eef96bae2dc81f04bd112402b553a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0afabc04_a2055956",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-10T11:39:34Z",
+      "side": 1,
+      "message": "PTAL. Ryan can you verify this works and the fuzzer still runs when the patch is applied? Preferrably it would default the PROTO code to off in Cmake but I wasn\u0027t sure if the build files were used on any bots at the moment.",
+      "revId": "96e39119aa0eef96bae2dc81f04bd112402b553a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
