@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a31ebb6_8b5c37c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-10T20:12:57Z",
+      "side": 1,
+      "message": "Good catch, SPIR-V writer has the same.",
+      "revId": "9fc18a1ddc064504ecd49aa70a7d24708024942e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
