@@ -67,6 +67,24 @@
       "message": "LINK_LIBRARIES should be sufficient as the network is traversed recursively. I think this only fixes the absl::raw_hash_set issue as a side-effect, and the cost is many unnecessary other files going into the bundle.",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "452a0434_d65e3282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-10T19:25:44Z",
+      "side": 1,
+      "message": "The symbols from raw_hash_set were missing even before that. `raw_hash_set` was forcefully added on the link list. About the other extra symbols, they never turned up most likely because they don\u0027t have external linkage.\n\nHere\u0027s the diff -\n```\ndiff no-interface-link.list interface-link.list \n1c1\n\u003c webgpu_c_bundled depends on 88 objects\n---\n\u003e webgpu_c_bundled depends on 116 objects\n2a3,4\n\u003e absl_bad_optional_access\n\u003e absl_bad_variant_access\n3a6,22\n\u003e absl_city\n\u003e absl_civil_time\n\u003e absl_cord\n\u003e absl_cord_internal\n\u003e absl_cordz_functions\n\u003e absl_cordz_handle\n\u003e absl_cordz_info\n\u003e absl_crc_cord_state\n\u003e absl_crc_cpu_detect\n\u003e absl_crc_internal\n\u003e absl_crc32c\n\u003e absl_debugging_internal\n\u003e absl_demangle_internal\n\u003e absl_exponential_biased\n\u003e absl_graphcycles_internal\n\u003e absl_hash\n\u003e absl_hashtablez_sampler\n4a24\n\u003e absl_kernel_timeout_internal\n5a26,28\n\u003e absl_low_level_hash\n\u003e absl_malloc_internal\n\u003e absl_raw_hash_set\n7a31,32\n\u003e absl_stacktrace\n\u003e absl_str_format_internal\n10a36,37\n\u003e absl_symbolize\n\u003e absl_synchronization\n11a39,40\n\u003e absl_time\n\u003e absl_time_zone\n```\n\nYou can repro by using this snippet before adding the objects to the bundle in `BundleLibraries.cmake`\n\n```\n  message(STATUS \"${output_target} depends on ${number_of_objects} objects\")\n  foreach(object IN LISTS all_objects)\n    set(FILTER_STRING \"${object}\")\n    string(REGEX MATCH \"\\\\$\u003cTARGET_OBJECTS:([^\u003e]+)\u003e\" OBJECT_NAME ${FILTER_STRING})\n    if (CMAKE_MATCH_1)\n      message(STATUS \"${CMAKE_MATCH_1}\")\n    endif()\n  endforeach()\n```",
+      "parentUuid": "280a0d4b_e9561b05",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
