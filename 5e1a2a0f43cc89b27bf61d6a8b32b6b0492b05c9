@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2eac5c_c4d78252",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000255
+      },
+      "writtenOn": "2024-06-10T04:05:59Z",
+      "side": 1,
+      "message": "https://issuetracker.google.com/345639601 deps inputs have no dependencies from \"obj/third_party/dawn/src/tint/cmd/fuzz/ir/proto/fuzz.pb.o\": [\"gen/third_party/dawn/src/tint/lang/core/ir/binary/ir.pb.h\"]",
+      "parentUuid": "8c0076b0_ec1b45f5",
+      "revId": "5e1a2a0f43cc89b27bf61d6a8b32b6b0492b05c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2470b081_ead712f4",
