@@ -16,6 +16,24 @@
       "message": "The old code was conditionalized on `is_float_scalar_or_vector` and used `fabs` in that case. Is that something we need to deal with here, or is there a transform which adds a `fabs` MSL builtin?",
       "revId": "fc187e89dbf175e8dfc44e21bdaa60e6f65364aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10573dd_beab198e",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-11T20:38:02Z",
+      "side": 1,
+      "message": "Yeah I saw that, but MSL provides `abs` overloads for float and I don\u0027t think there\u0027s a chance for ambiguity since all the values that we emit are explicitly typed. We chose not to do that split for `min` and `max` this time round for the same reason.\n\nHappy to revisit if we hit any test failures though.",
+      "parentUuid": "00d66178_d3539b99",
+      "revId": "fc187e89dbf175e8dfc44e21bdaa60e6f65364aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
