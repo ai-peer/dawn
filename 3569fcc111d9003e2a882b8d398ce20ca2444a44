@@ -22,6 +22,30 @@
       },
       "revId": "3569fcc111d9003e2a882b8d398ce20ca2444a44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29b74ee_af2f7a85",
+        "filename": "src/dawn/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-11T14:14:45Z",
+      "side": 0,
+      "message": "Unfortunately, yes. Since it has an array layer count of 2, it must be of textureBindingViewDimension `2d-array` in Compat, but `CreateSampledTextureFragmentShaderForTest()` creates a `texture_2d` binding in WGSL, to which a `2d-array` texture can\u0027t be bound in Compat.\n\nThis could be fixed, by splitting CreateSampledTextureFragmentShaderForTest() into a `texture_2d` version and `texture_2d_array` version, but I thought it could be done in a followup. I\u0027ve logged crbug.com/346362367 to track that work.",
+      "parentUuid": "419a40fe_32dfec44",
+      "range": {
+        "startLine": 1542,
+        "startChar": 4,
+        "endLine": 1550,
+        "endChar": 0
+      },
+      "revId": "3569fcc111d9003e2a882b8d398ce20ca2444a44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
