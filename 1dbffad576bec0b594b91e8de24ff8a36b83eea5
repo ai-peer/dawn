@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d74b1602_96c9bf82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T18:30:01Z",
+      "side": 1,
+      "message": "LGTM, Loko PTAL as welL!",
+      "revId": "1dbffad576bec0b594b91e8de24ff8a36b83eea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
