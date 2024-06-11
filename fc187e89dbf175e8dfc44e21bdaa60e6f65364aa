@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d66178_d3539b99",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-11T20:31:42Z",
+      "side": 1,
+      "message": "The old code was conditionalized on `is_float_scalar_or_vector` and used `fabs` in that case. Is that something we need to deal with here, or is there a transform which adds a `fabs` MSL builtin?",
+      "revId": "fc187e89dbf175e8dfc44e21bdaa60e6f65364aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
