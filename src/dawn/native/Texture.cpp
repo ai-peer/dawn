@@ -987,6 +987,10 @@ wgpu::TextureUsage TextureBase::GetInternalUsage() const {
     DAWN_ASSERT(!IsError());
     return mInternalUsage;
 }
+SampleTypeBit TextureBase::GetExternalFormatSupportedSampleTypes() const {
+    DAWN_ASSERT(IsError());
+    return SampleTypeBit::None;
+}
 void TextureBase::AddInternalUsage(wgpu::TextureUsage usage) {
     DAWN_ASSERT(!IsError());
     mInternalUsage |= usage;
