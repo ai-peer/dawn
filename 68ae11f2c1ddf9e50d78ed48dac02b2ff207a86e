@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16b8b0c0_84c6f185",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T17:03:09Z",
+      "side": 1,
+      "message": "It seems that we could move these and a lot of other operations onto the child classes instead. The upload buffer doesn\u0027t need any D3D11 buffers, and the staging buffer only needs mD3d11NonConstantBuffer.\n\nOperations like CopyInternal also seem very different between the different buffer types and could be implemented separately for each of them? There\u0027s a lot of conditionals everywhere so it\u0027s a bit hard to know exactly what\u0027s happening but hopefully we can find more lines along which Buffer can be cut.",
+      "revId": "68ae11f2c1ddf9e50d78ed48dac02b2ff207a86e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
