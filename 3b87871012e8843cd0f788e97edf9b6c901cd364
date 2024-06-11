@@ -16,6 +16,24 @@
       "message": "This is expecting to pass, but the comment above the test says it should fail? \n\nPresumably the discrepancy comes from the fact that the struct is not actually used?",
       "revId": "3b87871012e8843cd0f788e97edf9b6c901cd364",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6539bddf_b67394f6",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-11T08:46:47Z",
+      "side": 1,
+      "message": "No it\u0027s my fault...\n\nToday I found many more things that need to be validated out so I have to hold this PR off. According to the latest SPEC PR (https://github.com/gpuweb/gpuweb/pull/4621, we are about to merge it) such struct declaration is not allowed whether it is used or not.",
+      "parentUuid": "8b7ce7f4_478ec913",
+      "revId": "3b87871012e8843cd0f788e97edf9b6c901cd364",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
