@@ -33,6 +33,24 @@
       "message": "Nit: also emit `const`",
       "revId": "375d457562fab6046ebe0d8b8d77f9abca94b401",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd995588_d66f41cb",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-11T21:01:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af76eef3_9a276778",
+      "revId": "375d457562fab6046ebe0d8b8d77f9abca94b401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
