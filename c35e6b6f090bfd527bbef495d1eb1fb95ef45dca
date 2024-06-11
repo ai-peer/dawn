@@ -246,6 +246,24 @@
       "parentUuid": "fa868c80_e79e9076",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a14e82_2aef58d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-11T09:42:26Z",
+      "side": 1,
+      "message": "\u003e ashmap_default_functions\u0027s interface requires cords\n\nDo you know why in this case the dependency is not stated with `LINK_LIBRARIES` rather than being set by `INTERFACE_LINK_LIBRARIES`?\n\nMy current understanding of `INTERFACE_LINK_LIBRARIES` is that it effectively states \u0027a references b but we\u0027re not supplying b, clients should do that themselves\u0027, Which is what adding `absl::raw_hash_set` explicitly does.",
+      "parentUuid": "fa868c80_e79e9076",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
