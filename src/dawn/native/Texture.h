@@ -113,6 +113,9 @@ class TextureBase : public SharedResource {
     wgpu::TextureUsage GetUsage() const;
     wgpu::TextureUsage GetInternalUsage() const;
 
+    // Get supported SampleTypeBit used for BindGroups with ExternalFormat.
+    virtual SampleTypeBit GetExternalFormatSupportedSampleTypes() const;
+
     // SharedResource implementation
     ExecutionSerial OnEndAccess() override;
     void OnBeginAccess() override;

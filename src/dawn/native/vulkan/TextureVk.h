@@ -96,6 +96,8 @@ class Texture final : public TextureBase {
     // Returns the aspects used for tracking of Vulkan state. These can be the combined aspects.
     Aspect GetDisjointVulkanAspects() const;
 
+    SampleTypeBit GetExternalFormatSupportedSampleTypes() const override;
+
     // Transitions the texture to be used as `usage`, recording any necessary barrier in
     // `commands`.
     // TODO(crbug.com/dawn/851): coalesce barriers and do them early when possible.
@@ -224,6 +226,9 @@ class Texture final : public TextureBase {
     ExternalSemaphoreHandle mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
 
     std::vector<VkSemaphore> mWaitRequirements;
+
+    // The SampleTypeBit from SharedTextureMemory.
+    SampleTypeBit mExternalSampleTypeBit;
 
     // Sometimes the WebGPU aspects don't directly map to Vulkan aspects:
     //

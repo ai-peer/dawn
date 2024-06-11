@@ -824,6 +824,7 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
     texture->mHandle = texture->mSharedTextureMemoryObjects.vkImage->Get();
     texture->mExternalAllocation = texture->mSharedTextureMemoryObjects.vkDeviceMemory->Get();
     texture->mExportQueueFamilyIndex = memory->GetQueueFamilyIndex();
+    texture->mExternalSampleTypeBit = memory->GetSupportedSampleTypeBit();
     return texture;
 }
 
@@ -1236,6 +1237,11 @@ void Texture::DestroyImpl() {
 
 VkImage Texture::GetHandle() const {
     return mHandle;
+}
+
+SampleTypeBit Texture::GetExternalFormatSupportedSampleTypes() const {
+    DAWN_ASSERT(GetFormat().format == wgpu::TextureFormat::External);
+    return mExternalSampleTypeBit;
 }
 
 void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recordingContext,
