@@ -287,6 +287,19 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcAsFragmentInput) {
 note: while analyzing entry point 'F')");
 }
 
+TEST_F(DualSourceBlendingExtensionTest, BlendSrcOnFragmentOutput) {
+    // @fragment fn F() -> @location(0) @blend_src(0) vec4<f32> {
+    //     return vec4<f32>();
+    // }
+    Enable(wgsl::Extension::kDualSourceBlending);
+    Func("F", Empty, ty.vec4<f32>(), Vector{Return(Call("vec4f"))},
+         Vector{Stage(ast::PipelineStage::kFragment)},
+         Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 0_a)});
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), R"(1:2 error: '@blend_src' must be used on a struct member)");
+}
+
 class DualSourceBlendingExtensionTestWithParams : public ResolverTestWithParam<int> {
   public:
     DualSourceBlendingExtensionTestWithParams() { Enable(wgsl::Extension::kDualSourceBlending); }

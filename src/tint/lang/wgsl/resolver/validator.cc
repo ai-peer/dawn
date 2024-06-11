@@ -1287,6 +1287,12 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                         TINT_ICE() << "@blend_src has no value";
                     }
 
+                    if (!is_struct_member) {
+                        AddError(attr->source)
+                            << style::Attribute("@blend_src") << " must be used on a struct member";
+                        return false;
+                    }
+
                     bool is_input = param_or_ret == ParamOrRetType::kParameter;
                     return BlendSrcAttribute(blend_src_attr, stage, is_input);
                 },
