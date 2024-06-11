@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590e4b65_23b04990",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-11T20:15:06Z",
+      "side": 1,
+      "message": "I think we should just `TINT_ASSERT()` here instead. This should never happen, and a ICE will trigger a fuzzer failure if it ever does.",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 9
+      },
+      "revId": "2d3ede7f36ba6d1c84d14637519561f1d49b4464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f8f7c2_abf3d55c",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-11T20:15:06Z",
+      "side": 1,
+      "message": "As above - I\u0027d prefer `TINT_ASSERT()` here.",
+      "range": {
+        "startLine": 351,
+        "startChar": 0,
+        "endLine": 355,
+        "endChar": 13
+      },
+      "revId": "2d3ede7f36ba6d1c84d14637519561f1d49b4464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c61da3e_9f18ca65",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-11T20:15:06Z",
+      "side": 1,
+      "message": "Nit: shouldn\u0027t need these checks since we assert the width in `core::type::Vector` constructor.",
+      "range": {
+        "startLine": 372,
+        "startChar": 50,
+        "endLine": 372,
+        "endChar": 74
+      },
+      "revId": "2d3ede7f36ba6d1c84d14637519561f1d49b4464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
