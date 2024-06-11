@@ -52,7 +52,10 @@ class ScopedCommandRecordingContext;
 
 namespace {
 
-constexpr wgpu::BufferUsage kD3D11AllowedUniformBufferUsages =
+constexpr wgpu::BufferUsage kD3D11DynamicUniformBufferUsages =
+    wgpu::BufferUsage::Uniform | wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+
+constexpr wgpu::BufferUsage kD3D11GPUOnlyUniformBufferUsages =
     wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
 
 constexpr wgpu::BufferUsage kCopyUsages = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
@@ -93,7 +96,9 @@ UINT D3D11BufferBindFlags(wgpu::BufferUsage usage) {
     if (usage & (wgpu::BufferUsage::Uniform)) {
         bindFlags |= D3D11_BIND_CONSTANT_BUFFER;
     }
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer) && !IsMappable(usage)) {
+        // Note: we don't allow mappable buffers to be used as UAV. D3D11 disallowes that. The
+        // front-end already prevents such use in BindGroup validation.
         bindFlags |= D3D11_BIND_UNORDERED_ACCESS;
     }
     if (usage & kReadOnlyStorageBuffer) {
@@ -142,11 +147,14 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
 // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory, and
 // then written into the dest GPU buffer via ID3D11DeviceContext::UpdateSubresource.
 class UploadBuffer final : public Buffer {
-    using Buffer::Buffer;
+  public:
+    UploadBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor);
     ~UploadBuffer() override;
 
+  private:
     MaybeError InitializeInternal() override;
-    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) override;
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                           wgpu::MapMode mode) override;
     void UnmapInternal(const ScopedCommandRecordingContext* commandContext) override;
 
     MaybeError ClearInternal(const ScopedCommandRecordingContext* commandContext,
@@ -175,13 +183,16 @@ class UploadBuffer final : public Buffer {
 
 // Buffer that supports mapping and copying.
 class StagingBuffer final : public Buffer {
-    using Buffer::Buffer;
+  public:
+    StagingBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor);
 
+  private:
     void DestroyImpl() override;
     void SetLabelImpl() override;
 
     MaybeError InitializeInternal() override;
-    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) override;
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                           wgpu::MapMode mode) override;
     void UnmapInternal(const ScopedCommandRecordingContext* commandContext) override;
 
     MaybeError CopyToInternal(const ScopedCommandRecordingContext* commandContext,
@@ -203,6 +214,39 @@ class StagingBuffer final : public Buffer {
     ComPtr<ID3D11Buffer> mD3d11Buffer;
 };
 
+// A subclass of Buffer that supports MapWrite on non-staging buffers
+class CPUWritableBuffer final : public GPUReadableBuffer {
+  public:
+    CPUWritableBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor);
+    ~CPUWritableBuffer() override;
+
+  private:
+    void DestroyImpl() override;
+
+    MaybeError InitializeInternal() override;
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                           wgpu::MapMode mode) override;
+    void UnmapInternal(const ScopedCommandRecordingContext* commandContext) override;
+
+    MaybeError CopyToInternal(const ScopedCommandRecordingContext* commandContext,
+                              uint64_t sourceOffset,
+                              size_t size,
+                              Buffer* destination,
+                              uint64_t destinationOffset) override;
+    MaybeError CopyFromD3DInternal(const ScopedCommandRecordingContext* commandContext,
+                                   ID3D11Buffer* srcD3D11Buffer,
+                                   uint64_t sourceOffset,
+                                   size_t size,
+                                   uint64_t destinationOffset) override;
+
+    MaybeError WriteInternal(const ScopedCommandRecordingContext* commandContext,
+                             uint64_t bufferOffset,
+                             const void* data,
+                             size_t size) override;
+
+    raw_ptr<ID3D11Buffer> mD3d11BufferForMapping;
+};
+
 // static
 ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
                                           const UnpackedPtr<BufferDescriptor>& descriptor,
@@ -217,12 +261,19 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
         buffer = AcquireRef(new UploadBuffer(device, descriptor));
     } else if (IsStaging(descriptor->usage)) {
         buffer = AcquireRef(new StagingBuffer(device, descriptor));
+    } else if (descriptor->usage & wgpu::BufferUsage::MapWrite) {
+        buffer = AcquireRef(new CPUWritableBuffer(device, descriptor));
     } else {
         buffer = AcquireRef(new GPUOnlyBuffer(device, descriptor));
     }
     DAWN_TRY(buffer->Initialize(descriptor->mappedAtCreation, commandContext));
     return buffer;
 }
+
+Buffer::Buffer(DeviceBase* device,
+               const UnpackedPtr<BufferDescriptor>& descriptor,
+               D3DUsage d3dUsage)
+    : BufferBase(device, descriptor), mD3dUsage(d3dUsage) {}
 
 MaybeError Buffer::Initialize(bool mappedAtCreation,
                               const ScopedCommandRecordingContext* commandContext) {
@@ -284,18 +335,36 @@ MaybeError Buffer::Initialize(bool mappedAtCreation,
 Buffer::~Buffer() = default;
 
 bool Buffer::IsCPUWritableAtCreation() const {
-    return IsMappable(GetUsage());
+    return IsCPUWritable();
+}
+
+bool Buffer::IsCPUWritable() const {
+    return IsStagingBuffer() || mD3dUsage == D3DUsage::Dynamic ||
+           mD3dUsage == D3DUsage::MemoryBufferOnly;
+}
+
+bool Buffer::IsCPUReadable() const {
+    return IsStagingBuffer() || mD3dUsage == D3DUsage::MemoryBufferOnly;
+}
+
+bool Buffer::SupportsGPUCopyDst() const {
+    return mD3dUsage == D3DUsage::Default || IsStagingBuffer();
+}
+
+bool Buffer::IsStagingBuffer() const {
+    return mD3dUsage == D3DUsage::Staging;
 }
 
 MaybeError Buffer::MapAtCreationImpl() {
-    DAWN_ASSERT(IsMappable(GetUsage()));
+    DAWN_ASSERT(IsCPUWritable());
     auto commandContext = ToBackend(GetDevice()->GetQueue())
                               ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
-    return MapInternal(&commandContext);
+    return MapInternal(&commandContext, wgpu::MapMode::Write);
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    DAWN_ASSERT(IsMappable(GetUsage()));
+    DAWN_ASSERT((mode == wgpu::MapMode::Write && IsCPUWritable()) ||
+                (mode == wgpu::MapMode::Read && IsCPUReadable()));
 
     mMapReadySerial = mLastUsageSerial;
     const ExecutionSerial completedSerial = GetDevice()->GetQueue()->GetCompletedCommandSerial();
@@ -303,22 +372,28 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // commands. To avoid that, instead we ask Queue to do the map later when mLastUsageSerial has
     // passed.
     if (mMapReadySerial > completedSerial) {
-        ToBackend(GetDevice()->GetQueue())->TrackPendingMapBuffer({this}, mMapReadySerial);
+        ToBackend(GetDevice()->GetQueue())->TrackPendingMapBuffer({this}, mode, mMapReadySerial);
     } else {
         auto commandContext = ToBackend(GetDevice()->GetQueue())
                                   ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
-        DAWN_TRY(FinalizeMap(&commandContext, completedSerial));
+        DAWN_TRY(FinalizeMap(&commandContext, completedSerial, mode));
     }
 
     return {};
 }
 
 MaybeError Buffer::FinalizeMap(ScopedCommandRecordingContext* commandContext,
-                               ExecutionSerial completedSerial) {
+                               ExecutionSerial completedSerial,
+                               wgpu::MapMode mode) {
     // Needn't map the buffer if this is for a previous mapAsync that was cancelled.
     if (completedSerial >= mMapReadySerial) {
+        // Map then initialize data using mapped pointer.
+        // The mapped pointer is always writable because:
+        // - If mode is Write, then it's already writable.
+        // - If mode is Read, it's only possible to map staging buffer. In that case,
+        // D3D11_MAP_READ_WRITE will be used, hence the mapped pointer will also be writable.
         // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
-        DAWN_TRY(MapInternal(commandContext));
+        DAWN_TRY(MapInternal(commandContext, mode));
 
         DAWN_TRY(EnsureDataInitialized(commandContext));
     }
@@ -421,7 +496,7 @@ MaybeError Buffer::Clear(const ScopedCommandRecordingContext* commandContext,
     // Map the buffer if it is possible, so EnsureDataInitializedAsDestination() and ClearInternal()
     // can write the mapped memory directly.
     ScopedMap scopedMap;
-    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this));
+    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this, wgpu::MapMode::Write));
 
     // For non-staging buffers, we can use UpdateSubresource to write the data.
     DAWN_TRY(EnsureDataInitializedAsDestination(commandContext, offset, size));
@@ -455,7 +530,7 @@ MaybeError Buffer::Write(const ScopedCommandRecordingContext* commandContext,
     // Map the buffer if it is possible, so EnsureDataInitializedAsDestination() and WriteInternal()
     // can write the mapped memory directly.
     ScopedMap scopedMap;
-    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this));
+    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this, wgpu::MapMode::Write));
 
     // For non-staging buffers, we can use UpdateSubresource to write the data.
     DAWN_TRY(EnsureDataInitializedAsDestination(commandContext, offset, size));
@@ -480,8 +555,12 @@ MaybeError Buffer::Copy(const ScopedCommandRecordingContext* commandContext,
 
 ResultOrError<Buffer::ScopedMap> Buffer::ScopedMap::Create(
     const ScopedCommandRecordingContext* commandContext,
-    Buffer* buffer) {
-    if (!IsMappable(buffer->GetUsage())) {
+    Buffer* buffer,
+    wgpu::MapMode mode) {
+    if (mode == wgpu::MapMode::Write && !buffer->IsCPUWritable()) {
+        return ScopedMap();
+    }
+    if (mode == wgpu::MapMode::Read && !buffer->IsCPUReadable()) {
         return ScopedMap();
     }
 
@@ -489,7 +568,7 @@ ResultOrError<Buffer::ScopedMap> Buffer::ScopedMap::Create(
         return ScopedMap(commandContext, buffer, /*needsUnmap=*/false);
     }
 
-    DAWN_TRY(buffer->MapInternal(commandContext));
+    DAWN_TRY(buffer->MapInternal(commandContext, mode));
     return ScopedMap(commandContext, buffer, /*needsUnmap=*/true);
 }
 
@@ -532,7 +611,9 @@ uint8_t* Buffer::ScopedMap::GetMappedData() const {
     return mBuffer ? mBuffer->mMappedData.get() : nullptr;
 }
 
-// UploadBuffer
+// UploadBuffer.
+UploadBuffer::UploadBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor)
+    : Buffer(device, descriptor, D3DUsage::MemoryBufferOnly) {}
 UploadBuffer::~UploadBuffer() = default;
 
 MaybeError UploadBuffer::InitializeInternal() {
@@ -543,7 +624,8 @@ MaybeError UploadBuffer::InitializeInternal() {
     return {};
 }
 
-MaybeError UploadBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext) {
+MaybeError UploadBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                     wgpu::MapMode) {
     mMappedData = mUploadData.get();
     return {};
 }
@@ -588,8 +670,8 @@ MaybeError UploadBuffer::WriteInternal(const ScopedCommandRecordingContext* comm
     return {};
 }
 
-// GPUOnlyBuffer
-void GPUOnlyBuffer::DestroyImpl() {
+// GPUReadableBuffer
+void GPUReadableBuffer::DestroyImpl() {
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
     // - It may be called if the buffer is explicitly destroyed with APIDestroy.
     //   This case is NOT thread-safe and needs proper synchronization with other
@@ -603,18 +685,60 @@ void GPUOnlyBuffer::DestroyImpl() {
     mD3d11NonConstantBuffer = nullptr;
 }
 
-void GPUOnlyBuffer::SetLabelImpl() {
+void GPUReadableBuffer::SetLabelImpl() {
     SetDebugName(ToBackend(GetDevice()), mD3d11NonConstantBuffer.Get(), "Dawn_Buffer", GetLabel());
     SetDebugName(ToBackend(GetDevice()), mD3d11ConstantBuffer.Get(), "Dawn_ConstantBuffer",
                  GetLabel());
 }
+
+void GPUReadableBuffer::EnsureConstantBufferIsUpdated(
+    const ScopedCommandRecordingContext* commandContext) {
+    if (mConstantBufferIsUpdated) {
+        return;
+    }
+
+    DAWN_ASSERT(SupportsGPUCopyDst());
+
+    DAWN_ASSERT(mD3d11NonConstantBuffer);
+    DAWN_ASSERT(mD3d11ConstantBuffer);
+    commandContext->CopyResource(mD3d11ConstantBuffer.Get(), mD3d11NonConstantBuffer.Get());
+    mConstantBufferIsUpdated = true;
+}
+
+ResultOrError<ComPtr<ID3D11ShaderResourceView>> GPUReadableBuffer::CreateD3D11ShaderResourceView(
+    uint64_t offset,
+    uint64_t size) const {
+    DAWN_ASSERT(IsAligned(offset, 4u));
+    DAWN_ASSERT(IsAligned(size, 4u));
+    UINT firstElement = static_cast<UINT>(offset / 4);
+    UINT numElements = static_cast<UINT>(size / 4);
+
+    D3D11_SHADER_RESOURCE_VIEW_DESC desc;
+    desc.Format = DXGI_FORMAT_R32_TYPELESS;
+    desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
+    desc.BufferEx.FirstElement = firstElement;
+    desc.BufferEx.NumElements = numElements;
+    desc.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
+    ComPtr<ID3D11ShaderResourceView> srv;
+    DAWN_TRY(
+        CheckHRESULT(ToBackend(GetDevice())
+                         ->GetD3D11Device()
+                         ->CreateShaderResourceView(mD3d11NonConstantBuffer.Get(), &desc, &srv),
+                     "ShaderResourceView creation"));
+
+    return srv;
+}
+
+// GPUOnlyBuffer
+GPUOnlyBuffer::GPUOnlyBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor)
+    : GPUReadableBuffer(device, descriptor, D3DUsage::Default) {}
 
 MaybeError GPUOnlyBuffer::InitializeInternal() {
     DAWN_ASSERT(!IsMappable(GetUsage()));
 
     bool needsConstantBuffer = GetUsage() & wgpu::BufferUsage::Uniform;
     bool onlyNeedsConstantBuffer =
-        needsConstantBuffer && IsSubset(GetUsage(), kD3D11AllowedUniformBufferUsages);
+        needsConstantBuffer && IsSubset(GetUsage(), kD3D11GPUOnlyUniformBufferUsages);
 
     if (!onlyNeedsConstantBuffer) {
         // Create mD3d11NonConstantBuffer
@@ -656,7 +780,8 @@ MaybeError GPUOnlyBuffer::InitializeInternal() {
     return {};
 }
 
-MaybeError GPUOnlyBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext) {
+MaybeError GPUOnlyBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                      wgpu::MapMode mode) {
     DAWN_UNREACHABLE();
 
     return {};
@@ -666,44 +791,8 @@ void GPUOnlyBuffer::UnmapInternal(const ScopedCommandRecordingContext* commandCo
     DAWN_UNREACHABLE();
 }
 
-void GPUOnlyBuffer::MarkMutated() {
+void GPUOnlyBuffer::MarkMutatedByShader() {
     mConstantBufferIsUpdated = false;
-}
-
-void GPUOnlyBuffer::EnsureConstantBufferIsUpdated(
-    const ScopedCommandRecordingContext* commandContext) {
-    if (mConstantBufferIsUpdated) {
-        return;
-    }
-
-    DAWN_ASSERT(mD3d11NonConstantBuffer);
-    DAWN_ASSERT(mD3d11ConstantBuffer);
-    commandContext->CopyResource(mD3d11ConstantBuffer.Get(), mD3d11NonConstantBuffer.Get());
-    mConstantBufferIsUpdated = true;
-}
-
-ResultOrError<ComPtr<ID3D11ShaderResourceView>> GPUOnlyBuffer::CreateD3D11ShaderResourceView(
-    uint64_t offset,
-    uint64_t size) const {
-    DAWN_ASSERT(IsAligned(offset, 4u));
-    DAWN_ASSERT(IsAligned(size, 4u));
-    UINT firstElement = static_cast<UINT>(offset / 4);
-    UINT numElements = static_cast<UINT>(size / 4);
-
-    D3D11_SHADER_RESOURCE_VIEW_DESC desc;
-    desc.Format = DXGI_FORMAT_R32_TYPELESS;
-    desc.ViewDimension = D3D11_SRV_DIMENSION_BUFFEREX;
-    desc.BufferEx.FirstElement = firstElement;
-    desc.BufferEx.NumElements = numElements;
-    desc.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
-    ComPtr<ID3D11ShaderResourceView> srv;
-    DAWN_TRY(
-        CheckHRESULT(ToBackend(GetDevice())
-                         ->GetD3D11Device()
-                         ->CreateShaderResourceView(mD3d11NonConstantBuffer.Get(), &desc, &srv),
-                     "ShaderResourceView creation"));
-
-    return srv;
 }
 
 ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> GPUOnlyBuffer::CreateD3D11UnorderedAccessView1(
@@ -874,6 +963,9 @@ MaybeError GPUOnlyBuffer::CopyFromD3DInternal(const ScopedCommandRecordingContex
 }
 
 // StagingBuffer
+StagingBuffer::StagingBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor)
+    : Buffer(device, descriptor, D3DUsage::Staging) {}
+
 void StagingBuffer::DestroyImpl() {
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
     // - It may be called if the buffer is explicitly destroyed with APIDestroy.
@@ -917,7 +1009,8 @@ MaybeError StagingBuffer::InitializeInternal() {
     return {};
 }
 
-MaybeError StagingBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext) {
+MaybeError StagingBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                      wgpu::MapMode) {
     DAWN_ASSERT(IsMappable(GetUsage()));
     DAWN_ASSERT(!mMappedData);
 
@@ -950,7 +1043,7 @@ MaybeError StagingBuffer::WriteInternal(const ScopedCommandRecordingContext* com
     }
 
     ScopedMap scopedMap;
-    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this));
+    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this, wgpu::MapMode::Write));
 
     DAWN_ASSERT(scopedMap.GetMappedData());
     memcpy(scopedMap.GetMappedData() + offset, data, size);
@@ -987,6 +1080,128 @@ MaybeError StagingBuffer::CopyFromD3DInternal(const ScopedCommandRecordingContex
                                           /*DstY=*/0,
                                           /*DstZ=*/0, d3d11SourceBuffer, /*SrcSubresource=*/0,
                                           &srcBox);
+
+    return {};
+}
+
+// CPUWritableBuffer
+CPUWritableBuffer::CPUWritableBuffer(DeviceBase* device,
+                                     const UnpackedPtr<BufferDescriptor>& descriptor)
+    : GPUReadableBuffer(device, descriptor, D3DUsage::Dynamic) {}
+
+CPUWritableBuffer::~CPUWritableBuffer() = default;
+
+void CPUWritableBuffer::DestroyImpl() {
+    GPUReadableBuffer::DestroyImpl();
+    mD3d11BufferForMapping = nullptr;
+}
+
+MaybeError CPUWritableBuffer::InitializeInternal() {
+    // Dynamic buffer is only CPU writable.
+    DAWN_ASSERT(!(GetUsage() & wgpu::BufferUsage::MapRead));
+    DAWN_ASSERT(GetUsage() & wgpu::BufferUsage::MapWrite);
+    // Dynamic buffer doesn't support CopyDst.
+    DAWN_ASSERT(!(GetUsage() & wgpu::BufferUsage::CopyDst));
+
+    D3D11_BUFFER_DESC bufferDescriptor;
+    bufferDescriptor.ByteWidth = mAllocatedSize;
+    bufferDescriptor.Usage = D3D11_USAGE_DYNAMIC;
+    bufferDescriptor.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+
+    if (GetUsage() & wgpu::BufferUsage::Uniform) {
+        // Only support pure uniform buffer to be mappable for now.
+        DAWN_ASSERT(IsSubset(GetUsage(), kD3D11DynamicUniformBufferUsages));
+
+        // Create mD3d11ConstantBuffer
+        bufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bufferDescriptor.MiscFlags = 0;
+        bufferDescriptor.StructureByteStride = 0;
+
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            ToBackend(GetDevice())
+                ->GetD3D11Device()
+                ->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11ConstantBuffer),
+            "ID3D11Device::CreateBuffer"));
+
+        mD3d11BufferForMapping = mD3d11ConstantBuffer.Get();
+    } else {
+        // Create mD3d11NonConstantBuffer
+        bufferDescriptor.BindFlags = D3D11BufferBindFlags(GetUsage());
+        bufferDescriptor.MiscFlags = D3D11BufferMiscFlags(GetUsage());
+        bufferDescriptor.StructureByteStride = 0;
+
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            ToBackend(GetDevice())
+                ->GetD3D11Device()
+                ->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11NonConstantBuffer),
+            "ID3D11Device::CreateBuffer"));
+
+        mD3d11BufferForMapping = mD3d11NonConstantBuffer.Get();
+    }
+    return {};
+}
+
+MaybeError CPUWritableBuffer::MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                          wgpu::MapMode mode) {
+    // Dynamic buffer only supports MapWrite
+    DAWN_ASSERT(mode == wgpu::MapMode::Write && IsCPUWritable());
+    DAWN_ASSERT(!mMappedData);
+
+    // Use D3D11_MAP_WRITE_NO_OVERWRITE to guarantee driver that we don't overwrite data in use
+    // by GPU. MapAsync() already ensures that any GPU commands using this buffer already finish. In
+    // return driver won't try to stall CPU for mapping access.
+    D3D11_MAPPED_SUBRESOURCE mappedResource;
+    DAWN_TRY(CheckHRESULT(commandContext->Map(mD3d11BufferForMapping,
+                                              /*Subresource=*/0, D3D11_MAP_WRITE_NO_OVERWRITE,
+                                              /*MapFlags=*/0, &mappedResource),
+                          "ID3D11DeviceContext::Map"));
+    mMappedData = reinterpret_cast<uint8_t*>(mappedResource.pData);
+
+    return {};
+}
+
+void CPUWritableBuffer::UnmapInternal(const ScopedCommandRecordingContext* commandContext) {
+    DAWN_ASSERT(mMappedData);
+    commandContext->Unmap(mD3d11BufferForMapping,
+                          /*Subresource=*/0);
+    mMappedData = nullptr;
+}
+
+MaybeError CPUWritableBuffer::WriteInternal(const ScopedCommandRecordingContext* commandContext,
+                                            uint64_t offset,
+                                            const void* data,
+                                            size_t size) {
+    if (size == 0) {
+        return {};
+    }
+
+    ScopedMap scopedMap;
+    DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(commandContext, this, wgpu::MapMode::Write));
+
+    DAWN_ASSERT(scopedMap.GetMappedData());
+    memcpy(scopedMap.GetMappedData() + offset, data, size);
+
+    return {};
+}
+
+MaybeError CPUWritableBuffer::CopyToInternal(const ScopedCommandRecordingContext* commandContext,
+                                             uint64_t sourceOffset,
+                                             size_t size,
+                                             Buffer* destination,
+                                             uint64_t destinationOffset) {
+    return destination->CopyFromD3DInternal(commandContext,
+                                            /*srcD3D11Buffer=*/mD3d11BufferForMapping, sourceOffset,
+                                            size, destinationOffset);
+}
+
+MaybeError CPUWritableBuffer::CopyFromD3DInternal(
+    const ScopedCommandRecordingContext* commandContext,
+    ID3D11Buffer* d3d11SourceBuffer,
+    uint64_t sourceOffset,
+    size_t size,
+    uint64_t destinationOffset) {
+    // CPU writable buffer doesn't support GPU write.
+    DAWN_UNREACHABLE();
 
     return {};
 }
