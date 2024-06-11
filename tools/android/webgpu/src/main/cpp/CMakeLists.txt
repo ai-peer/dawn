@@ -45,6 +45,8 @@ target_compile_definitions(webgpu_dawn PRIVATE WGPU_IMPLEMENTATION WGPU_SHARED_L
 
 add_library(native_dawn methods.cpp structures.cpp Util.cpp ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
 
+target_link_libraries(native_dawn webgpu_dawn)
+
 bundle_libraries(webgpu_c_bundled webgpu_dawn native_dawn)
 
 find_library(log-lib log)
