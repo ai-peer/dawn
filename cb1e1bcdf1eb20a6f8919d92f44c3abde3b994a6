@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd5d8fa_7e767cd1",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "Ok. Agreed then.",
+      "parentUuid": "a0815a43_88173e27",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5cf6ca0d_02f2b4c2",
@@ -241,6 +259,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e64c3f_a67b3164",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "I\u0027m ok with Alan\u0027s suggestion.\n\nAck on requiring group and binding attributes.\nI like \u0027var\u0027 too.\n\nI\u0027m ok not having the defaulting if that makes prototyping easier.",
+      "parentUuid": "fec7fa89_f01b3b97",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18fb3fd1_e8f61516",
@@ -254,6 +290,42 @@
       "writtenOn": "2024-06-06T19:39:08Z",
       "side": 1,
       "message": "Please write down:\n- changes to function restrictions\n- If going with declaring by \u0027const\u0027, then that forces an update to the rule in the spec \"The type of a const-declaration must be a concrete or abstract constructible type.\"  From https://gpuweb.github.io/gpuweb/wgsl/#const-decls \n  - In this case, would it be possible to copy/alias a sampler, like:  \u0027const s0 \u003d sampler....;  const scopy \u003d s;\u0027 ? That seems reasonable. Is that expected to be an alias or occupy another resource binding?  Is that even detectable?",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b4f7b46_cb5a3ea3",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "I think we\u0027ve settled on:\n- the function call is only usable as the initializer",
+      "parentUuid": "18fb3fd1_e8f61516",
+      "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b50c23c9_2fa26a25",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "I think we\u0027ve settled on:\n- the function call is only usable as the initializer for a sampler declaration. \n- taking Alan\u0027s suggestions, we don\u0027t need to change rules for function parameters.\n- update the function restrictions about return type: builtin functions can return samplers (but user-declared functions can\u0027t)\n-not declaring as const, so we don\u0027t need the thing I mentioned in the second bullet above.",
+      "parentUuid": "18fb3fd1_e8f61516",
       "revId": "cb1e1bcdf1eb20a6f8919d92f44c3abde3b994a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

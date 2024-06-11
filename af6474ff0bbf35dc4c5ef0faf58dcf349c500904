@@ -1,0 +1,79 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e553d5e_13c562f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "I think we\u0027ve settled on the details.\n\nThe text now needs to capture a couple of those details.",
+      "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02667954_1e7836ec",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "The proposal should say these functions are only usable as the initializer for a sampler declaration.   And hence they can\u0027t be used in the middle of another expression such as a texture call, i.e. they can\u0027t be used \u0027inline\u0027.",
+      "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef8263eb_b4a0264d",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-11T18:01:30Z",
+      "side": 1,
+      "message": "typo: equivalent",
+      "range": {
+        "startLine": 104,
+        "startChar": 11,
+        "endLine": 104,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "cba25ab5_a57ca2ba",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+              "range": {
+                "startLine": 104,
+                "startChar": 0,
+                "endLine": 105,
+                "endChar": 0
+              },
+              "replacement": "  - WebGPU equivalent: `\"clamp-to-edge\"`, `\"repeat\"`, `\"mirror-repeat\"`\n"
+            }
+          ]
+        }
+      ],
+      "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
