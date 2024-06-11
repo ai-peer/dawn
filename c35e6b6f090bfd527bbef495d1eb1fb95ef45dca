@@ -228,6 +228,24 @@
       "parentUuid": "48596094_66de9221",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34b79863_64d12c96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T08:33:28Z",
+      "side": 1,
+      "message": "Looking at the tree provided, it kind of makes sense, hashmap_default_functions\u0027s interface requires cords, which has a mutex and requires all of synchronization. So the addition of `INTERFACE_LINK_LIBRARIES` is needed for correctness, and if we don\u0027t do this CL, in the future we risk adding an absl dependency (or roll a version) that requires another manual inclusion of an internal target.\n\nUltimately if we don\u0027t end up using the timezone data for example, the linker should be able to remove it at link time. There are compiler options to separate every symbol in its own section `-ffunction-sections -fdata-sections` and then remove unused sections: `--gc-sections`. Does it help mitigate the binary size increase?\n\nIn general let\u0027s do the correct thing first and then optimize (things like binary size) second. If we start adding slightly hacky patches at the start of project we\u0027ll never stop doing it.",
+      "parentUuid": "fa868c80_e79e9076",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
