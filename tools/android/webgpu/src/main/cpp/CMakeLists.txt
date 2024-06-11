@@ -43,7 +43,9 @@ add_subdirectory(../../../../../.. dawn)
 
 target_compile_definitions(webgpu_dawn PRIVATE WGPU_IMPLEMENTATION WGPU_SHARED_LIBRARY)
 
-add_library(native_dawn methods.cpp structures.cpp Util.cpp ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
+set(C_BINDINGS_PATH ../../../build/generated/bindings/cpp)
+
+add_library(native_dawn ${C_BINDINGS_PATH}/methods.cpp ${C_BINDINGS_PATH}/structures.cpp Util.cpp ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
 
 target_link_libraries(native_dawn webgpu_dawn)
 
