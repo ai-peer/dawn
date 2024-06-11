@@ -264,6 +264,24 @@
       "parentUuid": "fa868c80_e79e9076",
       "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1871aa2e_3d8c1962",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T10:09:19Z",
+      "side": 1,
+      "message": "In general `INTERFACE_LINK_LIBRARIES` are the libraries needed to use the headers. They mean that the dependency needs to be propagated up the dependency chain for example to find include directories, have the correct defines, etc. They are transitive properties https://cmake.org/cmake/help/latest/manual/cmake-buildsystem.7.html#transitive-link-properties\n\nMaybe abseil shouldn\u0027t require linking against absl::cords but just access to its headers (or better use SFINAE to avoid the need to access the headers) but that would be an upstream fix.",
+      "parentUuid": "13a14e82_2aef58d2",
+      "revId": "c35e6b6f090bfd527bbef495d1eb1fb95ef45dca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
