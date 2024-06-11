@@ -514,3 +514,5 @@ crbug.com/dawn/0000 [ intel-0x9bc5 ] webgpu:shader,execution,expression,call,bui
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,limits:const_array_elements: [ Failure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,limits:function_variable_combined_byte_size:* [ Failure ]
 crbug.com/dawn/0000 [ nvidia-0x2184 ] webgpu:shader,execution,limits:private_array_combined_byte_size:* [ Failure ]
+crbug.com/dawn/0000 webgpu:api,validation,gpu_external_texture_expiration:import_and_use_in_different_task:sourceType="VideoFrame" [ Failure ]
+crbug.com/dawn/0000 webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
