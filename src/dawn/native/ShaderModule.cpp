@@ -1091,7 +1091,7 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
                     (descriptor.ValidateBranches<
                         Branch<ShaderModuleWGSLDescriptor, ShaderModuleCompilationOptions>>()));
 #endif
-    DAWN_ASSERT(moduleType != wgpu::SType::Invalid);
+    DAWN_ASSERT(moduleType != wgpu::SType(0u));
 
     ScopedTintICEHandler scopedICEHandler(device);
 
