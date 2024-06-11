@@ -419,13 +419,41 @@ ResultOrError<UnpackedPtr<BufferDescriptor>> ValidateBufferDescriptor(
     DAWN_INVALID_IF(usage == wgpu::BufferUsage::None, "Buffer usages must not be 0.");
 
     if (!device->HasFeature(Feature::BufferMapExtendedUsages)) {
-        const wgpu::BufferUsage kMapWriteAllowedUsages =
-            wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-        DAWN_INVALID_IF(
-            usage & wgpu::BufferUsage::MapWrite && !IsSubset(usage, kMapWriteAllowedUsages),
-            "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other allowed "
-            "usage is %s.",
-            usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::CopySrc);
+        if (device->HasFeature(Feature::BufferMapWriteExtendedUsages)) {
+            constexpr wgpu::BufferUsage kMapWriteAllowedOtherUsages =
+                wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Index | wgpu::BufferUsage::Vertex |
+                wgpu::BufferUsage::Uniform | wgpu::BufferUsage::Storage;
+            constexpr wgpu::BufferUsage kMapWriteAllowedUsages =
+                wgpu::BufferUsage::MapWrite | kMapWriteAllowedOtherUsages;
+            DAWN_INVALID_IF(
+                usage & wgpu::BufferUsage::MapWrite && !IsSubset(usage, kMapWriteAllowedUsages),
+                "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other "
+                "allowed "
+                "usages is %s.",
+                usage, wgpu::BufferUsage::MapWrite, kMapWriteAllowedOtherUsages);
+            if (IsSubset(wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Uniform, usage)) {
+                const wgpu::BufferUsage kMapWriteUniformAllowedUsages =
+                    wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Uniform |
+                    wgpu::BufferUsage::CopySrc;
+
+                DAWN_INVALID_IF(
+                    !IsSubset(usage, kMapWriteUniformAllowedUsages),
+                    "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other "
+                    "allowed "
+                    "usage is %s.",
+                    usage, wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::Uniform,
+                    wgpu::BufferUsage::CopySrc);
+            }
+        } else {
+            const wgpu::BufferUsage kMapWriteAllowedUsages =
+                wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+            DAWN_INVALID_IF(
+                usage & wgpu::BufferUsage::MapWrite && !IsSubset(usage, kMapWriteAllowedUsages),
+                "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other "
+                "allowed "
+                "usage is %s.",
+                usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::CopySrc);
+        }
 
         const wgpu::BufferUsage kMapReadAllowedUsages =
             wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;

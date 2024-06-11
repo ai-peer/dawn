@@ -91,6 +91,8 @@ MaybeError QuerySet::Resolve(const ScopedSwapStateCommandRecordingContext* comma
                              uint32_t queryCount,
                              Buffer* destination,
                              uint64_t offset) {
+    DAWN_ASSERT(!destination->IsCPUWritable());
+
     DAWN_TRY(destination->Clear(commandContext, 0, offset, queryCount * sizeof(uint64_t)));
     const auto& queryAvailability = GetQueryAvailability();
     ID3D11DeviceContext* d3d11DeviceContext = commandContext->GetD3D11DeviceContext4();
