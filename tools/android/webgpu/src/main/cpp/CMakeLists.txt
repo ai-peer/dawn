@@ -49,7 +49,8 @@ add_library(native_dawn ${C_BINDINGS_PATH}/methods.cpp ${C_BINDINGS_PATH}/struct
 
 target_link_libraries(native_dawn webgpu_dawn)
 
-bundle_libraries(webgpu_c_bundled webgpu_dawn native_dawn)
+# It is not clear why abs::raw_hash_set is not part of the bundled dependency tree naturally.
+bundle_libraries(webgpu_c_bundled webgpu_dawn native_dawn absl::raw_hash_set)
 
 find_library(log-lib log)
 
