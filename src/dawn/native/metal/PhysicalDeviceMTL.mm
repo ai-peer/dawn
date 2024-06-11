@@ -738,6 +738,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (@available(macOS 10.15, iOS 13.0, *)) {
         if ([*mDevice hasUnifiedMemory]) {
             EnableFeature(Feature::BufferMapExtendedUsages);
+            EnableFeature(Feature::BufferMapWriteExtendedUsages);
         }
     }
 #endif
