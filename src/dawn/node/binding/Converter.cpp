@@ -1502,6 +1502,7 @@ bool Converter::Convert(interop::GPUFeatureName& out, wgpu::FeatureName in) {
         case wgpu::FeatureName::AdapterPropertiesVk:
         case wgpu::FeatureName::ANGLETextureSharing:
         case wgpu::FeatureName::BufferMapExtendedUsages:
+        case wgpu::FeatureName::BufferMapWriteExtendedUsages:
         case wgpu::FeatureName::ChromiumExperimentalTimestampQueryInsidePasses:
         case wgpu::FeatureName::D3D11MultithreadProtected:
         case wgpu::FeatureName::DawnInternalUsages:

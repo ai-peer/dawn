@@ -90,14 +90,19 @@ class Buffer : public BufferBase {
 
     // Actually map the buffer when its last usage serial has passed.
     MaybeError FinalizeMap(ScopedCommandRecordingContext* commandContext,
-                           ExecutionSerial completedSerial);
+                           ExecutionSerial completedSerial,
+                           wgpu::MapMode mode);
+
+    bool IsCPUWritable() const;
+    bool IsCPUReadable() const;
 
     class ScopedMap : public NonCopyable {
       public:
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
         // scopedMap.GetMappedData() will return nullptr.
         static ResultOrError<ScopedMap> Create(const ScopedCommandRecordingContext* commandContext,
-                                               Buffer* buffer);
+                                               Buffer* buffer,
+                                               wgpu::MapMode mode);
 
         ScopedMap();
         ~ScopedMap();
@@ -121,13 +126,17 @@ class Buffer : public BufferBase {
     };
 
   protected:
-    using BufferBase::BufferBase;
-
+    Buffer(DeviceBase* device,
+           const UnpackedPtr<BufferDescriptor>& descriptor,
+           D3D11_USAGE d3d11Usage);
     ~Buffer() override;
+
+    void DestroyImpl() override;
 
     virtual MaybeError InitializeInternal() = 0;
 
-    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
+    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                   wgpu::MapMode mode) = 0;
     virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
 
     // Clear the buffer without checking if the buffer is initialized.
@@ -136,7 +145,12 @@ class Buffer : public BufferBase {
                                      uint64_t offset = 0,
                                      uint64_t size = 0);
 
-    virtual uint8_t* GetUploadData();
+    virtual uint8_t* GetUploadData() const;
+
+    bool IsStagingBuffer() const;
+
+    // Supports being used as a destination of a GPU copy.
+    bool SupportsGPUCopyDst() const;
 
     raw_ptr<uint8_t, AllowPtrArithmetic> mMappedData = nullptr;
 
@@ -150,7 +164,6 @@ class Buffer : public BufferBase {
                           const ScopedCommandRecordingContext* commandContext);
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
-    void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
@@ -168,6 +181,9 @@ class Buffer : public BufferBase {
                                    size_t size,
                                    Buffer* destination,
                                    uint64_t destinationOffset);
+
+    const D3D11_USAGE mD3d11Usage = D3D11_USAGE_DEFAULT;
+
     bool mConstantBufferIsUpdated = true;
     ExecutionSerial mMapReadySerial = kMaxExecutionSerial;
 };
