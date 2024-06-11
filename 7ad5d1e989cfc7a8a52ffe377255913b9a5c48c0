@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c550f3a_c91eb6b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T17:10:32Z",
+      "side": 1,
+      "message": "Looked at everything but tests and BufferD3D11.cpp (given the other CL)",
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b2ff7b_39ba116d",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T17:10:32Z",
+      "side": 1,
+      "message": "Maybe in Buffer.cpp\u0027s AddInternalUsages we could remove Storage(ReadWrite) and replace it with kReadOnlyUsage. It\u0027s colder code. Bindgroup creation is very common and should be very hot code. (and the method would need to be renamed to ComputeInternalUsages?)",
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b990d0_2f868bd2",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T17:10:32Z",
+      "side": 1,
+      "message": "nit: Maybe consider having an allow-list instead for when we add more usages in the future?",
+      "range": {
+        "startLine": 423,
+        "startChar": 63,
+        "endLine": 425,
+        "endChar": 96
+      },
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbd0e7f_e3feb6a2",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-11T17:10:32Z",
+      "side": 1,
+      "message": "Other backends do this during BeginRenderPass / Dispatch, it avoids tagging the same buffer many times. For example even OpenGL that doesn\u0027t need barriers does it here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/CommandBufferGL.cpp;drc\u003d5da3e004cb817f22367e498c16e317b9b6c0e62a;l\u003d571",
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
