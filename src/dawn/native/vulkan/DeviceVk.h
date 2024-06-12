@@ -86,7 +86,8 @@ class Device final : public DeviceBase {
     Ref<TextureBase> CreateTextureWrappingVulkanImage(
         const ExternalImageDescriptorVk* descriptor,
         ExternalMemoryHandle memoryHandle,
-        const std::vector<ExternalSemaphoreHandle>& waitHandles);
+        const std::vector<ExternalSemaphoreHandle>& waitHandles,
+        SemaphoreSelector semaphoreSelector);
     bool SignalAndExportExternalTexture(Texture* texture,
                                         VkImageLayout desiredLayout,
                                         ExternalImageExportInfoVk* info,
@@ -203,7 +204,8 @@ class Device final : public DeviceBase {
                                    VkImage image,
                                    const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                    VkDeviceMemory* outAllocation,
-                                   std::vector<VkSemaphore>* outWaitSemaphores);
+                                   std::vector<VkSemaphore>* outWaitSemaphores,
+                                   SemaphoreSelector semaphoreSelector);
 };
 
 }  // namespace dawn::native::vulkan

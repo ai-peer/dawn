@@ -1068,7 +1068,9 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
     DAWN_TRY_ASSIGN(fence,
                     SharedFence::Create(ToBackend(GetDevice()), "Internal VkSemaphore", &desc));
 #elif DAWN_PLATFORM_IS(LINUX)
-    if (GetDevice()->HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) {
+    // This is where we decide what to export.
+    if (!ToBackend(texture)->IsOpaqueExternalImageType()) {
+        DAWN_ASSERT(GetDevice()->HasFeature(Feature::SharedFenceVkSemaphoreSyncFD));
         SharedFenceVkSemaphoreSyncFDDescriptor desc;
         desc.handle = handle.Get();
 

@@ -77,7 +77,7 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
     bool Supported() override { return mSupported; }
 
     // Given an external handle, import it into a VkSemaphore
-    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle) override {
+    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle, SemaphoreSelector semaphoreSelector) override {
         DAWN_INVALID_IF(handle == ZX_HANDLE_INVALID,
                         "Importing a semaphore with an invalid handle.");
 
@@ -124,7 +124,7 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
     }
 
     // Create a VkSemaphore that is exportable into an external handle later
-    ResultOrError<VkSemaphore> CreateExportableSemaphore() override {
+    ResultOrError<VkSemaphore> CreateExportableSemaphore(SemaphoreSelector semaphoreSelector) override {
         VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
         exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
         exportSemaphoreInfo.pNext = nullptr;
@@ -145,7 +145,7 @@ class ServiceImplementationZirconHandle : public ServiceImplementation {
     }
 
     // Export a VkSemaphore into an external handle
-    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore) override {
+    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore,SemaphoreSelector semaphoreSelector) override {
         VkSemaphoreGetZirconHandleInfoFUCHSIA semaphoreGetHandleInfo;
         semaphoreGetHandleInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA;
         semaphoreGetHandleInfo.pNext = nullptr;

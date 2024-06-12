@@ -130,14 +130,19 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
 
     mExternalMemoryService = std::make_unique<external_memory::Service>(this);
 
-    if (uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) +
-            uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreSyncFD)) +
-            uint32_t(HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle)) >
-        1) {
-        return DAWN_VALIDATION_ERROR("At most one of %s, %s, and %s may be enabled.",
+    if (HasFeature(Feature::SharedFenceVkSemaphoreSyncFD) &&
+        HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) {
+        // Platform supports both and dynamically selects correct type.
+        mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
+            this, VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR,
+            VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT);
+    } else if (HasFeature(Feature::SharedFenceVkSemaphoreZirconHandle) &&
+               (HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD) ||
+                HasFeature(Feature::SharedFenceVkSemaphoreSyncFD))) {
+        return DAWN_VALIDATION_ERROR("Fence type %s, is incompatible with either %s or %s.",
+                                    wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle,
                                      wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD,
-                                     wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD,
-                                     wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle);
+                                     wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD);
     }
     if (HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD)) {
         mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(
@@ -668,7 +673,8 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
                                        VkImage image,
                                        const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                        VkDeviceMemory* outAllocation,
-                                       std::vector<VkSemaphore>* outWaitSemaphores) {
+                                       std::vector<VkSemaphore>* outWaitSemaphores,
+                                       SemaphoreSelector semaphoreSelector) {
     UnpackedPtr<TextureDescriptor> textureDescriptor;
     DAWN_TRY_ASSIGN(textureDescriptor, ValidateAndUnpack(FromAPI(descriptor->cTextureDescriptor)));
 
@@ -698,7 +704,8 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
     // Import semaphores we have to wait on before using the texture
     for (const ExternalSemaphoreHandle& handle : waitHandles) {
         VkSemaphore semaphore = VK_NULL_HANDLE;
-        DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+        DAWN_TRY_ASSIGN(semaphore,
+                        mExternalSemaphoreService->ImportSemaphore(handle, semaphoreSelector));
 
         // The legacy import mechanism transfers ownership to Dawn.
         // The new import mechanism dups the semaphore handle.
@@ -739,7 +746,8 @@ bool Device::SignalAndExportExternalTexture(
 Ref<TextureBase> Device::CreateTextureWrappingVulkanImage(
     const ExternalImageDescriptorVk* descriptor,
     ExternalMemoryHandle memoryHandle,
-    const std::vector<ExternalSemaphoreHandle>& waitHandles) {
+    const std::vector<ExternalSemaphoreHandle>& waitHandles,
+    SemaphoreSelector semaphoreSelector) {
     // Initial validation
     if (ConsumedError(ValidateIsAlive())) {
         return nullptr;
@@ -777,7 +785,8 @@ Ref<TextureBase> Device::CreateTextureWrappingVulkanImage(
                                                   mExternalMemoryService.get()),
                       &result) ||
         ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
-                                          waitHandles, &allocation, &waitSemaphores)) ||
+                                          waitHandles, &allocation, &waitSemaphores,
+                                          semaphoreSelector)) ||
         ConsumedError(result->BindExternalMemory(descriptor, allocation, waitSemaphores))) {
         // Delete the Texture if it was created
         result = nullptr;
