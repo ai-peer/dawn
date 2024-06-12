@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,49 +25,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
-#define SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
+#ifndef SRC_DAWN_NATIVE_VULKAN_SEMAPHORESELECTOR_H_
+#define SRC_DAWN_NATIVE_VULKAN_SEMAPHORESELECTOR_H_
 
-#include "dawn/common/Platform.h"
-#include "dawn/native/Error.h"
-#include "dawn/native/SharedFence.h"
-#include "dawn/native/SystemHandle.h"
+#include "dawn/common/vulkan_platform.h"
 
 namespace dawn::native::vulkan {
-
-class Device;
-
-class SharedFence final : public SharedFenceBase {
-  public:
-    static ResultOrError<Ref<SharedFence>> Create(
-        Device* device,
-        const char* label,
-        const SharedFenceVkSemaphoreOpaqueFDDescriptor* descriptor);
-
-    static ResultOrError<Ref<SharedFence>> Create(
-        Device* device,
-        const char* label,
-        const SharedFenceVkSemaphoreSyncFDDescriptor* descriptor);
-
-    static ResultOrError<Ref<SharedFence>> Create(
-        Device* device,
-        const char* label,
-        const SharedFenceVkSemaphoreZirconHandleDescriptor* descriptor);
-
-    const SystemHandle& GetHandle() const;
-
-    wgpu::SharedFenceType GetFenceType() const { return mType; }
-
-  private:
-    SharedFence(Device* device, const char* label, SystemHandle handle);
-    void DestroyImpl() override;
-
-    MaybeError ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info) const override;
-
-    wgpu::SharedFenceType mType;
-    SystemHandle mHandle;
-};
-
+    enum class SemaphoreSelector : uint8_t
+    {
+      kDefault,
+      kOpaque
+    };
 }  // namespace dawn::native::vulkan
 
-#endif  // SRC_DAWN_NATIVE_VULKAN_SHAREDTEXTUREFENCEVk_H_
+#endif  // SRC_DAWN_NATIVE_VULKAN_SEMAPHORESELECTOR_H_

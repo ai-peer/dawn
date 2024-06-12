@@ -143,6 +143,8 @@ class Texture final : public TextureBase {
                          VkImageLayout* releasedOldLayout,
                          VkImageLayout* releasedNewLayout);
 
+    bool IsOpaqueExternalImageType() const;
+
     void SetLabelHelper(const char* prefix);
 
     // Dawn API
@@ -190,6 +192,7 @@ class Texture final : public TextureBase {
 
     VkImage mHandle = VK_NULL_HANDLE;
     bool mOwnsHandle = false;
+    bool mIsOpaqueExternalImageType = false;
     ResourceMemoryAllocation mMemoryAllocation;
     VkDeviceMemory mExternalAllocation = VK_NULL_HANDLE;
     struct SharedTextureMemoryObjects {

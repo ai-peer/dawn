@@ -37,6 +37,7 @@
 #include "dawn/native/VulkanBackend.h"
 
 #include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/SemaphoreSelector.h"
 #include "dawn/native/vulkan/TextureVk.h"
 
 namespace dawn::native::vulkan {
@@ -96,7 +97,10 @@ WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* 
             const ExternalImageDescriptorFD* fdDescriptor =
                 static_cast<const ExternalImageDescriptorFD*>(descriptor);
             Ref<TextureBase> texture = backendDevice->CreateTextureWrappingVulkanImage(
-                fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+                fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs,
+                descriptor->GetType() == ExternalImageType::OpaqueFD
+                    ? SemaphoreSelector::kOpaque
+                    : SemaphoreSelector::kDefault);
             return ToAPI(ReturnToAPI(std::move(texture)));
         }
 #endif  // DAWN_PLATFORM_IS(LINUX)

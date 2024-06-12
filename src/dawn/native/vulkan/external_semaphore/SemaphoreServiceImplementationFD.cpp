@@ -48,9 +48,11 @@ namespace dawn::native::vulkan::external_semaphore {
 class ServiceImplementationFD : public ServiceImplementation {
   public:
     explicit ServiceImplementationFD(Device* device,
-                                     VkExternalSemaphoreHandleTypeFlagBits handleType)
+                                     VkExternalSemaphoreHandleTypeFlagBits handleType,
+                                     VkExternalSemaphoreHandleTypeFlagBits handleTypeOpaque)
         : ServiceImplementation(device),
           mHandleType(handleType),
+          mHandleTypeOpaque(handleType),
           mSupported(CheckSupport(device->GetDeviceInfo(),
                                   ToBackend(device->GetPhysicalDevice())->GetVkPhysicalDevice(),
                                   device->fn)) {}
@@ -86,7 +88,8 @@ class ServiceImplementationFD : public ServiceImplementation {
     bool Supported() override { return mSupported; }
 
     // Given an external handle, import it into a VkSemaphore
-    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle) override {
+    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle,
+                                               SemaphoreSelector semaphoreSelector) override {
         DAWN_INVALID_IF(handle < 0, "Importing a semaphore with an invalid handle.");
 
         VkSemaphore semaphore = VK_NULL_HANDLE;
@@ -115,7 +118,8 @@ class ServiceImplementationFD : public ServiceImplementation {
         // Multiple waiters can wait on the same semaphore and all be unblocked because after
         // one waiter is woken, the state resets back to signaled for the next waiter to be woken.
         importSemaphoreFdInfo.flags = VK_SEMAPHORE_IMPORT_TEMPORARY_BIT;
-        importSemaphoreFdInfo.handleType = mHandleType;
+        importSemaphoreFdInfo.handleType =
+            semaphoreSelector == SemaphoreSelector::kOpaque ? mHandleTypeOpaque : mHandleType;
         // vkImportSemaphoreFdKHR takes ownership, so make a dup of the handle.
         SystemHandle handleCopy;
         DAWN_TRY_ASSIGN(handleCopy, SystemHandle::Duplicate(handle));
@@ -135,11 +139,12 @@ class ServiceImplementationFD : public ServiceImplementation {
     }
 
     // Create a VkSemaphore that is exportable into an external handle later
-    ResultOrError<VkSemaphore> CreateExportableSemaphore() override {
+    ResultOrError<VkSemaphore> CreateExportableSemaphore(
+        SemaphoreSelector semaphoreSelector) override {
         VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
         exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
         exportSemaphoreInfo.pNext = nullptr;
-        exportSemaphoreInfo.handleTypes = mHandleType;
+        exportSemaphoreInfo.handleTypes =  semaphoreSelector == SemaphoreSelector::kOpaque ? mHandleTypeOpaque : mHandleType;
 
         VkSemaphoreCreateInfo semaphoreCreateInfo;
         semaphoreCreateInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
@@ -155,12 +160,15 @@ class ServiceImplementationFD : public ServiceImplementation {
     }
 
     // Export a VkSemaphore into an external handle
-    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore) override {
+    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(
+        VkSemaphore semaphore,
+        SemaphoreSelector semaphoreSelector) override {
         VkSemaphoreGetFdInfoKHR semaphoreGetFdInfo;
         semaphoreGetFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
         semaphoreGetFdInfo.pNext = nullptr;
         semaphoreGetFdInfo.semaphore = semaphore;
-        semaphoreGetFdInfo.handleType = mHandleType;
+        semaphoreGetFdInfo.handleType =
+            semaphoreSelector == SemaphoreSelector::kOpaque ? mHandleTypeOpaque : mHandleType;
 
         int fd = -1;
         DAWN_TRY(CheckVkSuccess(
@@ -185,13 +193,15 @@ class ServiceImplementationFD : public ServiceImplementation {
 
   private:
     const VkExternalSemaphoreHandleTypeFlagBits mHandleType;
+    const VkExternalSemaphoreHandleTypeFlagBits mHandleTypeOpaque;
     bool mSupported = false;
 };
 
 std::unique_ptr<ServiceImplementation> CreateFDService(
     Device* device,
-    VkExternalSemaphoreHandleTypeFlagBits handleType) {
-    return std::make_unique<ServiceImplementationFD>(device, handleType);
+    VkExternalSemaphoreHandleTypeFlagBits handleType,
+    VkExternalSemaphoreHandleTypeFlagBits handleTypeOpaque) {
+    return std::make_unique<ServiceImplementationFD>(device, handleType, handleTypeOpaque);
 }
 
 bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
