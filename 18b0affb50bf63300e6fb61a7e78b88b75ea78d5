@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97e16a0f_053d3539",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3471636
+      },
+      "writtenOn": "2024-06-12T09:57:56Z",
+      "side": 1,
+      "message": "this is the CL following our discussion on  https://issues.chromium.org/issues/345948285",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
