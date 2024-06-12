@@ -153,7 +153,7 @@ LogMessage ErrorLog() {
 }
 
 LogMessage DebugLog(const char* file, const char* function, int line) {
-    LogMessage message = DebugLog();
+    LogMessage message = ErrorLog();
     message << file << ":" << line << "(" << function << ")";
     return message;
 }

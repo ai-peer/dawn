@@ -417,8 +417,10 @@ Future AdapterBase::APIRequestDevice2(const DeviceDescriptor* descriptor,
         futureID = mInstance->GetEventManager()->TrackEvent(
             AcquireRef(new RequestDeviceEvent(callbackInfo, result.AcquireSuccess())));
     } else {
-        futureID = mInstance->GetEventManager()->TrackEvent(AcquireRef(
-            new RequestDeviceEvent(callbackInfo, result.AcquireError()->GetFormattedMessage())));
+        auto err = result.AcquireError();
+        DAWN_DEBUG() << err->GetFormattedMessage();
+        futureID = mInstance->GetEventManager()->TrackEvent(
+            AcquireRef(new RequestDeviceEvent(callbackInfo, err->GetFormattedMessage())));
     }
     mInstance->GetEventManager()->TrackEvent(std::move(lostEvent));
     return {futureID};

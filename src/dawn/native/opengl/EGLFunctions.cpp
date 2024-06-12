@@ -32,6 +32,7 @@
 
 #include "absl/container/flat_hash_set.h"
 #include "absl/strings/str_split.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/opengl/UtilsEGL.h"
 
 namespace dawn::native::opengl {
@@ -152,9 +153,11 @@ MaybeError EGLFunctions::LoadDisplayProcs(EGLDisplay display) {
         DAWN_INVALID_IF(major != 1, "EGL version (%u) is not 1.", major);
         mMajorVersion = major;
         mMinorVersion = minor;
+        DAWN_DEBUG() << "EGL version " << major << "." << minor;
     }
     {
         const char* rawExtensions = QueryString(display, EGL_EXTENSIONS);
+        DAWN_DEBUG() << "EGL extensions " << rawExtensions;
         absl::flat_hash_set<std::string_view> extensions = absl::StrSplit(rawExtensions, " ");
 
         for (const ExtensionInfo& ext : kExtensionInfos) {
