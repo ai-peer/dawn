@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d39df20_cde02a58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-06-12T16:16:41Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\n\nThis CL add a shader implementation (namely `WorkgroupShared`) that split input vector \u0026 matrix into blocks and each invocation within a workgroup compute multiplication of a block to get a partial result, and at the end add up all result using workgroup shared memory to output the final result of the workgroup. This schedule schema shows surprising performance when I try to optimize Mat-Vec-Mul kernels.\n\nThis CL also remove the suppression of subgroups implementation on D3D12 devices, since the issue chromium:42241412 seems no longer happen.\n\nData below show the testing result on Intel A770 GPU with `disable_robustness` enabled, cases with `Impl_WorkgroupShared` are added workgroup shared implementation. Such `WorkgroupShared` implementation shows comparable or better performance even over subgroups implementation.\n\n| Case | Avg GPU time (ms) |\n| - | - |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_Naive_Swizzle_0 | `1.2929628646666667` |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_Naive_Swizzle_1 | `1.5151195023333333` |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_Subgroup_Swizzle_0 | `1.581165226666667` |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_Subgroup_Swizzle_1 | `1.5630336` |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_WorkgroupShared_Swizzle_0 | `1.2738950096666668` |\n| Rows_32768_Cols_2048_StoreType_F32_AccType_F32_Impl_WorkgroupShared_Swizzle_1 | `0.6512093866666667` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_Naive_Swizzle_0 | `0.49447486877200003` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_Naive_Swizzle_1 | `0.7393805128203335` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_Subgroup_Swizzle_0 | `0.6051976533333333` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_Subgroup_Swizzle_1 | `0.8893433793936666` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_WorkgroupShared_Swizzle_0 | `0.7717228088890001` |\n| Rows_32768_Cols_2048_StoreType_F16_AccType_F16_Impl_WorkgroupShared_Swizzle_1 | `0.349023699753` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_Naive_Swizzle_0 | `0.2539431437836667` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_Naive_Swizzle_1 | `0.3103639324443333` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_Subgroup_Swizzle_0 | `0.32017248711100005` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_Subgroup_Swizzle_1 | `0.387936711111` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_WorkgroupShared_Swizzle_0 | `0.23162447089433333` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F32_Impl_WorkgroupShared_Swizzle_1 | `0.19202958222233332` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_Naive_Swizzle_0 | `0.2578113422223333` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_Naive_Swizzle_1 | `0.31960450844433336` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_Subgroup_Swizzle_0 | `0.333968335238` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_Subgroup_Swizzle_1 | `0.419354416232` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_WorkgroupShared_Swizzle_0 | `0.21963196527166665` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_F16_Impl_WorkgroupShared_Swizzle_1 | `0.18937674884366665` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_Naive_Swizzle_0 | `0.25169366486500006` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_Naive_Swizzle_1 | `0.3038403991396667` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_Subgroup_Swizzle_0 | `0.285386110707` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_Subgroup_Swizzle_1 | `0.3659765497433334` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_WorkgroupShared_Swizzle_0 | `0.1850605568` |\n| Rows_32768_Cols_2048_StoreType_U8_AccType_U8_Impl_WorkgroupShared_Swizzle_1 | `0.17736310153833335` |",
+      "revId": "961fd7a5269d69de7f6838678100229113720d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
