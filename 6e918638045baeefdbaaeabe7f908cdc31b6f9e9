@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54886c7b_03b23a6b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-12T08:17:34Z",
+      "side": 1,
+      "message": "Actually this method is not needed to be accessed from base class. So removed.",
+      "parentUuid": "922660bf_83202861",
+      "range": {
+        "startLine": 483,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 0
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dce6d5b1_d8bd14b4",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-12T05:27:25Z",
       "side": 1,
       "message": "minor: why std::copy vs memcpy?",
+      "range": {
+        "startLine": 597,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 59
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae1a8d7b_54abd410",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-12T08:17:34Z",
+      "side": 1,
+      "message": "I remember memcpy has bugs if size \u003d\u003d 0, whereas std::copy doesn\u0027t. This avoids size\u003d\u003d0 check before calling it.",
+      "parentUuid": "dce6d5b1_d8bd14b4",
       "range": {
         "startLine": 597,
         "startChar": 0,
@@ -83,6 +131,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0966ec51_6a0b2ecb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-12T08:17:34Z",
+      "side": 1,
+      "message": "The destination might have different backing D3D11Buffer, so we need polymorphism there. We need polymorphism for both source and destination hence two separate methods.",
+      "parentUuid": "86232797_37beba8f",
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7720e7c6_244a5e39",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
@@ -94,6 +160,30 @@
       "writtenOn": "2024-06-12T05:27:25Z",
       "side": 1,
       "message": "nit: only need static_cast",
+      "range": {
+        "startLine": 942,
+        "startChar": 18,
+        "endLine": 942,
+        "endChar": 34
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c070f7d3_16e56c51",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-12T08:17:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7720e7c6_244a5e39",
       "range": {
         "startLine": 942,
         "startChar": 18,
@@ -117,6 +207,30 @@
       "writtenOn": "2024-06-12T05:27:25Z",
       "side": 1,
       "message": "there is `std::move(buffer).Cast\u003cRef\u003cGPUOnlyBuffer\u003e\u003e();`",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 64
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc7dfe0_dfce8673",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-12T08:17:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c225ab66_a27db49f",
       "range": {
         "startLine": 221,
         "startChar": 0,
