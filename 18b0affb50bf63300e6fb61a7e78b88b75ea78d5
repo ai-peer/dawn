@@ -122,6 +122,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "703a39de_d92eb628",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "Even though `DXGI_ALPHA_MODE_STRAIGHT` is in the enum, attempting to create a \"straight\" swap chain will always return an error. We should consider disallowing this selection at the Dawn level and encourage people to use pre-multiplied instead.",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ff8bb5_25f8f0ff",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "Please use `DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL` here.\n\nThe Windows documentation has the following to say about `FLIP_DISCARD` swap chains.\n\n\u003e However, even when the application is not the only visible item on the screen, if the flip model is DXGI_SWAP_EFFECT_FLIP_DISCARD, the compositor can in some scenarios still perform this optimization, by drawing other content onto the application\u0027s back buffer.\n\nWe try hard to avoid having the GPU process get p00ed. However, when it does, would be good to provide another level of security and disallow this. \n\n`FLIP_SEQUENTIAL` swap chains have the added benefit that you can pass dirty regions and scroll rects to Present1 and minimize the amount of composition to the desktop.",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cafb75_6d7e2ff5",
         "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
         "patchSetId": 1
@@ -150,6 +196,98 @@
       "writtenOn": "2024-06-12T10:32:49Z",
       "side": 1,
       "message": "```suggestion\n                DCompositionCreateDevice(NULL, IID_PPV_ARGS(\u0026compositionDevice)),\n```",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b44da9f_510c97d1",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org will `InitializeSwapChainFromScratch` ever be called multiple times? If so, we should create these objects into local variables and `std::move` them to the member variables only if all of them succeed.  \n\nThe way the code is currently written, a failure part of the way through means you\u0027re left with a partially initialized, and difficult to debug, state.",
+      "range": {
+        "startLine": 241,
+        "startChar": 61,
+        "endLine": 241,
+        "endChar": 81
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d72a6b_ae207de3",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "Please check the return value of `SetContent`, `SetRoot` and `Commit`.",
+      "range": {
+        "startLine": 247,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 40
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d50f008a_2c2b48ee",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "Would be good to save the composition device to a member variable in case we need it in the future. \n\nEither way, the local variable smart pointer is cleaned up at the closed curly brace so no need for the explicit assignment to nullptr.",
+      "range": {
+        "startLine": 251,
+        "startChar": 12,
+        "endLine": 251,
+        "endChar": 29
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72015b9_dad96cba",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-12T21:19:39Z",
+      "side": 1,
+      "message": "Since you\u0027re now releasing more than just the swap chain, should rename this to `ReleaseResources` or similar name that encompasses everything you\u0027re releasing.",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 36
+      },
       "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
