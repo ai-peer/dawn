@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88aa4158_8e96ab83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "922660bf_83202861",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "I think this could be `virtual` `\u003d 0` in the base clase. And then the derived classes can define it as `DAWN_UNREACHABLE();`",
+      "range": {
+        "startLine": 483,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 0
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce6d5b1_d8bd14b4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "minor: why std::copy vs memcpy?",
+      "range": {
+        "startLine": 597,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 59
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86232797_37beba8f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "CopyFromD3DInternal is called exclusively in all classes by CopyToInternal. Why not merge them together?",
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7720e7c6_244a5e39",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "nit: only need static_cast",
+      "range": {
+        "startLine": 942,
+        "startChar": 18,
+        "endLine": 942,
+        "endChar": 34
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c225ab66_a27db49f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T05:27:25Z",
+      "side": 1,
+      "message": "there is `std::move(buffer).Cast\u003cRef\u003cGPUOnlyBuffer\u003e\u003e();`",
+      "range": {
+        "startLine": 221,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 64
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
