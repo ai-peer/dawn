@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93b7e0f_1d72594c",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T00:46:15Z",
+      "side": 1,
+      "message": "I think it would be better to structure this as something like:\n\n```\nstatic_cast\u003cRef\u003cSharedTextureMemoryContents\u003e\u003e(\n  texture-\u003eGetSharedResourceMemoryContents())-\u003eGetExternalFormatSupportedSampleTypes();\n```\n\nbecause the external format only needs to be stored for textures created from STM. Thus, we can store it on the STMContents.\n\n(Note that STMContents doesn\u0027t exist anymore. Only the base class SharedResourceMemoryContents, but you can re-introduce STMContents)\n\nSharedResourceMemory::CreateContents is virtual for this reason. The subclasses can generate their own contents objects.",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 74
+      },
+      "revId": "3269437d9598a026cc154879b8619a82dbd3e92e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
