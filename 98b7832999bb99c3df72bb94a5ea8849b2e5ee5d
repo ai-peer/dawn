@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd7433b_0eab07e3",
+        "filename": "src/tint/lang/hlsl/writer/helper_test.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-12T20:23:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc759c6b_f3bd1ac8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 3
+      },
+      "revId": "98b7832999bb99c3df72bb94a5ea8849b2e5ee5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a90fbf3_80b0eb02",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-12T20:17:05Z",
       "side": 1,
       "message": "Remove this.",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 58
+      },
+      "revId": "98b7832999bb99c3df72bb94a5ea8849b2e5ee5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "349c1f07_5e516839",
+        "filename": "src/tint/lang/hlsl/writer/helper_test.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-12T20:23:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a90fbf3_80b0eb02",
       "range": {
         "startLine": 92,
         "startChar": 0,
