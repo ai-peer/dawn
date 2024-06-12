@@ -998,7 +998,7 @@ MaybeError Texture::InitializeFromExternal(const ExternalImageDescriptorVk* desc
 
     mExternalState = ExternalState::PendingAcquire;
     mExportQueueFamilyIndex = externalMemoryService->GetQueueFamilyIndex(descriptor->GetType());
-
+    mIsOpaqueExternalImageType = descriptor->GetType() == ExternalImageType::OpaqueFD;
     mPendingAcquireOldLayout = descriptor->releasedOldLayout;
     mPendingAcquireNewLayout = descriptor->releasedNewLayout;
 
@@ -1118,6 +1118,10 @@ void Texture::SetPendingAcquire(VkImageLayout pendingAcquireOldLayout,
 
     mPendingAcquireOldLayout = pendingAcquireOldLayout;
     mPendingAcquireNewLayout = pendingAcquireNewLayout;
+}
+
+bool Texture::IsOpaqueExternalImageType() const{
+    return mIsOpaqueExternalImageType;
 }
 
 MaybeError Texture::EndAccess(ExternalSemaphoreHandle* handle,

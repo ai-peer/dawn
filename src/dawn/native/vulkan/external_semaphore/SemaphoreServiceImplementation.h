@@ -30,6 +30,7 @@
 
 #include "dawn/native/Error.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
+#include "dawn/native/vulkan/SemaphoreSelector.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::vulkan {
@@ -47,13 +48,15 @@ class ServiceImplementation {
     virtual bool Supported() = 0;
 
     // Given an external handle, import it into a VkSemaphore
-    virtual ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle) = 0;
+    virtual ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle,
+                                                       SemaphoreSelector semaphoreSelector) = 0;
 
     // Create a VkSemaphore that is exportable into an external handle later
-    virtual ResultOrError<VkSemaphore> CreateExportableSemaphore() = 0;
-
+    virtual ResultOrError<VkSemaphore> CreateExportableSemaphore(SemaphoreSelector semaphoreSelector) = 0;
     // Export a VkSemaphore into an external handle
-    virtual ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore) = 0;
+    virtual ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(
+        VkSemaphore semaphore,
+        SemaphoreSelector semaphoreSelector) = 0;
 
     // Duplicate a new external handle from the given one.
     virtual ExternalSemaphoreHandle DuplicateHandle(ExternalSemaphoreHandle handle) = 0;

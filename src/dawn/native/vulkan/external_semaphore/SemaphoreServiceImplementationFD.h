@@ -46,7 +46,8 @@ bool CheckFDSupport(const VulkanDeviceInfo& deviceInfo,
                     const VulkanFunctions& fn);
 std::unique_ptr<ServiceImplementation> CreateFDService(
     Device* device,
-    VkExternalSemaphoreHandleTypeFlagBits handleType);
+    VkExternalSemaphoreHandleTypeFlagBits handleType,
+    VkExternalSemaphoreHandleTypeFlagBits handleTypeOpaque);
 
 }  // namespace dawn::native::vulkan::external_semaphore
 
