@@ -49,14 +49,24 @@ struct State {
     Builder b{ir};
     /// The type manager.
     core::type::Manager& ty{ir.Types()};
-    /// The set of struct members that need to have their IO attributes stripped.
-    Hashset<const core::type::StructMember*, 8> members_to_strip{};
+    /// The list of structures that need to have their IO attributes stripped.
+    Vector<const type::Struct*, 16> structures_to_strip;
 
     /// The entry point currently being processed.
     Function* func = nullptr;
 
     /// The backend state object for the current entry point.
     std::unique_ptr<ShaderIOBackendState> backend{};
+
+    explicit State(Module& mod) : ir(mod) {
+        // Collect all structures before the transform has run, so that we can strip their shader IO
+        // attributes later.
+        for (auto* type : ir.Types()) {
+            if (auto* str = type->As<type::Struct>()) {
+                structures_to_strip.Push(str);
+            }
+        }
+    }
 
     /// Process an entry point.
     /// @param f the original entry point function
@@ -130,7 +140,6 @@ struct State {
                         attributes.interpolation = {};
                     }
                     backend->AddInput(ir.symbols.Register(name), member->Type(), attributes);
-                    members_to_strip.Add(member);
                 }
             } else {
                 // Pull out the IO attributes and remove them from the parameter.
@@ -168,7 +177,6 @@ struct State {
                     attributes.interpolation = {};
                 }
                 backend->AddOutput(ir.symbols.Register(name), member->Type(), attributes);
-                members_to_strip.Add(member);
             }
         } else {
             // Pull out the IO attributes and remove them from the original function.
@@ -229,9 +237,11 @@ struct State {
     /// Finalize any state needed to complete the transform.
     void Finalize() {
         // Remove IO attributes from all structure members that had them prior to this transform.
-        for (auto& member : members_to_strip) {
-            // TODO(crbug.com/tint/745): Remove the const_cast.
-            const_cast<core::type::StructMember*>(member.Value())->SetAttributes({});
+        for (auto* str : structures_to_strip) {
+            for (auto* member : str->Members()) {
+                // TODO(crbug.com/tint/745): Remove the const_cast.
+                const_cast<core::type::StructMember*>(member)->SetAttributes({});
+            }
         }
     }
 };
