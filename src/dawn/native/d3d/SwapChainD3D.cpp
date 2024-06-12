@@ -39,6 +39,8 @@
 #include "dawn/native/d3d/Forward.h"
 #include "dawn/native/d3d/UtilsD3D.h"
 
+#pragma comment(lib, "dcomp")
+
 namespace dawn::native::d3d {
 namespace {
 
@@ -92,6 +94,24 @@ DXGI_USAGE ToDXGIUsage(wgpu::TextureUsage usage) {
     return dxgiUsage;
 }
 
+DXGI_ALPHA_MODE ToDXGIAlphaMode(wgpu::CompositeAlphaMode mode) {
+    switch (mode) {
+        case wgpu::CompositeAlphaMode::Auto:
+            return DXGI_ALPHA_MODE_UNSPECIFIED;
+        case wgpu::CompositeAlphaMode::Opaque:
+            return DXGI_ALPHA_MODE_IGNORE;
+        case wgpu::CompositeAlphaMode::Premultiplied:
+            return DXGI_ALPHA_MODE_PREMULTIPLIED;
+        case wgpu::CompositeAlphaMode::Unpremultiplied:
+            return DXGI_ALPHA_MODE_STRAIGHT;
+        case wgpu::CompositeAlphaMode::Inherit:
+            return DXGI_ALPHA_MODE_UNSPECIFIED;
+        default:
+            break;
+    }
+    DAWN_UNREACHABLE();
+}
+
 }  // namespace
 
 SwapChain::~SwapChain() = default;
@@ -112,6 +132,7 @@ MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
     mConfig.format = d3d::DXGITextureFormat(GetDevice(), GetFormat());
     mConfig.swapChainFlags = PresentModeToSwapChainFlags(GetPresentMode());
     mConfig.usage = ToDXGIUsage(GetUsage());
+    mConfig.alphaMode = ToDXGIAlphaMode(GetAlphaMode());
 
     // There is no previous swapchain so we can create one directly and don't have anything else
     // to do.
@@ -194,7 +215,7 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     swapChainDesc.BufferCount = mConfig.bufferCount;
     swapChainDesc.Scaling = DXGI_SCALING_STRETCH;
     swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-    swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
+    swapChainDesc.AlphaMode = mConfig.alphaMode;
     swapChainDesc.Flags = mConfig.swapChainFlags;
 
     ComPtr<IDXGIFactory2> factory2 = nullptr;
@@ -205,10 +226,29 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     switch (GetSurface()->GetType()) {
         case Surface::Type::WindowsHWND: {
             DAWN_TRY(CheckHRESULT(
-                factory2->CreateSwapChainForHwnd(GetD3DDeviceForCreatingSwapChain(),
-                                                 static_cast<HWND>(GetSurface()->GetHWND()),
-                                                 &swapChainDesc, nullptr, nullptr, &swapChain1),
+                factory2->CreateSwapChainForComposition(GetD3DDeviceForCreatingSwapChain(),
+                                                        &swapChainDesc, nullptr, &swapChain1),
                 "Creating the IDXGISwapChain1"));
+
+            // Create composition
+            ComPtr<IDCompositionDevice> compositionDevice = nullptr;
+            DAWN_TRY(CheckHRESULT(
+                DCompositionCreateDevice(NULL, __uuidof(compositionDevice), &compositionDevice),
+                "Creating DCompositionDevice"));
+
+            DAWN_TRY(CheckHRESULT(
+                compositionDevice->CreateTargetForHwnd(static_cast<HWND>(GetSurface()->GetHWND()),
+                                                       TRUE, &mDCompositionTarget),
+                "Creating composition target"));
+
+            DAWN_TRY(CheckHRESULT(compositionDevice->CreateVisual(&mDCompositionVisual),
+                                  "Creating composition visual"));
+
+            mDCompositionVisual->SetContent(swapChain1.Get());
+            mDCompositionTarget->SetRoot(mDCompositionVisual.Get());
+            compositionDevice->Commit();
+
+            compositionDevice = nullptr;
             break;
         }
         case Surface::Type::WindowsCoreWindow: {
@@ -256,6 +296,8 @@ MaybeError SwapChain::PresentDXGISwapChain() {
 
 void SwapChain::ReleaseDXGISwapChain() {
     mDXGISwapChain = nullptr;
+    mDCompositionTarget = nullptr;
+    mDCompositionVisual = nullptr;
 }
 
 IDXGISwapChain3* SwapChain::GetDXGISwapChain() const {
