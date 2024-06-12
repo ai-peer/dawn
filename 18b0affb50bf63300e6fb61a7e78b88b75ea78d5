@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "72ba85c7_853cb0a5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "You\u0027ll need to sign the CLA as well, it is part of the one time setup: https://dawn.googlesource.com/dawn/+/refs/heads/main/CONTRIBUTING.md#contributor-license-agreement",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f755de7_e7d6e24d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "Did you test that the behavior is what you expect by running ManualSurfaceTests? See https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/samples/ManualSurfaceTest.cpp;drc\u003d358a8bc6e5a06cdeb5677d4e43632f753f6879e6;l\u003d28",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e9b9b84_66b55eec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "nit: Add a Bug: XXXXXX annotation to link this CL to the issue you reported.",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "97e16a0f_053d3539",
@@ -14,6 +65,91 @@
       "writtenOn": "2024-06-12T09:57:56Z",
       "side": 1,
       "message": "this is the CL following our discussion on  https://issues.chromium.org/issues/345948285",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c330ca_671c5fee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "LGTM overall, thank you for the contribution!",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c720da_3af751b9",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "We don\u0027t use these pragmas, does it not compile without? We\u0027ll need to modify the src/dawn/native/CMakeLists.txt/BUILD.gn to add this.",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e619a776_a8380576",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "nit: This auto alpha mode should be UNREACHABLE as well as it is handled in the Dawn frontend.",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22cafb75_6d7e2ff5",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "I\u0027ll let Rafael review the DComp logic here ^^\u0027",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ce7542_217baba4",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T10:32:49Z",
+      "side": 1,
+      "message": "```suggestion\n                DCompositionCreateDevice(NULL, IID_PPV_ARGS(\u0026compositionDevice)),\n```",
       "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
