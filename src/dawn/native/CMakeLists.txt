@@ -338,6 +338,7 @@ if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
         "d3d/UtilsD3D.h"
         "d3d/d3d_platform.h"
     )
+    target_link_libraries(dawn_native PRIVATE dcomp.lib)
 endif()
 
 if (DAWN_ENABLE_D3D11)
