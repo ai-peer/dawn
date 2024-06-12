@@ -91,7 +91,7 @@ void Queue::DestroyImpl() {
     mSharedFence = nullptr;
 }
 
-ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
+ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence(ExecutionSerial serial) {
     if (mSharedFence == nullptr) {
         DAWN_ASSERT(!IsAlive());
         return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);

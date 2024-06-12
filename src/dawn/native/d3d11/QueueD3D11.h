@@ -79,7 +79,7 @@ class Queue : public d3d::Queue {
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
 
-    ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
+    ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence(ExecutionSerial serial) override;
 
     // Check all pending map buffers, and actually map the ready ones.
     MaybeError CheckAndMapReadyBuffers(ExecutionSerial completedSerial);
@@ -89,6 +89,14 @@ class Queue : public d3d::Queue {
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
     SerialMap<ExecutionSerial, Ref<Buffer>> mPendingMapBuffers;
+
+    // Pending queries which will be checked with GetData().
+    std::deque<ComPtr<ID3D11Query>> mPendingQueries;
+
+    // Queries are available for reusing.
+    static constexpr size_t kMaxAvailableQueries = 16;
+    std::vector<ComPtr<ID3D11Query>> mAvailableQueries;
+    ExecutionSerial mLastExportDueSerial;
 };
 
 }  // namespace dawn::native::d3d11

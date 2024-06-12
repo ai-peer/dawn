@@ -237,6 +237,10 @@ MaybeError Buffer::Initialize(bool mappedAtCreation,
             if (paddingBytes > 0) {
                 uint32_t clearSize = paddingBytes;
                 uint64_t clearOffset = GetSize();
+                if (GetAllocatedSize() <= 2048) {
+                    clearSize = GetAllocatedSize();
+                    clearOffset = 0;
+                }
                 if (commandContext) {
                     DAWN_TRY(ClearInternal(commandContext, 0, clearOffset, clearSize));
 

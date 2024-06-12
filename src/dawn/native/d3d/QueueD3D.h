@@ -45,7 +45,7 @@ class Queue : public QueueBase {
     using QueueBase::QueueBase;
     ~Queue() override;
 
-    virtual ResultOrError<Ref<SharedFence>> GetOrCreateSharedFence() = 0;
+    virtual ResultOrError<Ref<SharedFence>> GetOrCreateSharedFence(ExecutionSerial serial) = 0;
 
   protected:
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;

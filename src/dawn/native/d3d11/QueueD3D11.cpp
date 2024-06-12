@@ -160,7 +160,8 @@ void Queue::DestroyImpl() {
     });
 }
 
-ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
+ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence(ExecutionSerial serial) {
+    mLastExportDueSerial = serial;
     if (mSharedFence == nullptr) {
         DAWN_ASSERT(!IsAlive());
         return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);
@@ -292,29 +293,51 @@ MaybeError MonitoredQueue::NextSerial() {
     auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
 
     IncrementLastSubmittedCommandSerial();
-    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
-                 uint64_t(GetLastSubmittedCommandSerial()));
-    DAWN_TRY(
-        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                     "D3D11 command queue signal fence"));
+    ComPtr<ID3D11Query> d3d11Query;
+    if (!mAvailableQueries.empty()) {
+        d3d11Query = std::move(mAvailableQueries.back());
+        mAvailableQueries.pop_back();
+    } else {
+        const D3D11_QUERY_DESC desc = {D3D11_QUERY_EVENT, 0};
+        DAWN_TRY(
+            CheckHRESULT(ToBackend(GetDevice())->GetD3D11Device()->CreateQuery(&desc, &d3d11Query),
+                         "D3D11 CreateQuery"));
+    }
+
+    commandContext.End(d3d11Query.Get());
+    mPendingQueries.push_back(std::move(d3d11Query));
 
     return {};
 }
 
 ResultOrError<ExecutionSerial> MonitoredQueue::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
-    if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
-        // GetCompletedValue returns UINT64_MAX if the device was removed.
-        // Try to query the failure reason.
-        ID3D11Device* d3d11Device = ToBackend(GetDevice())->GetD3D11Device();
-        DAWN_TRY(CheckHRESULT(d3d11Device->GetDeviceRemovedReason(),
-                              "ID3D11Device::GetDeviceRemovedReason"));
-        // Otherwise, return a generic device lost error.
-        return DAWN_DEVICE_LOST_ERROR("Device lost");
-    }
+    auto completedSerial = GetCompletedCommandSerial();
+    {
+        auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
 
-    if (completedSerial <= GetCompletedCommandSerial()) {
-        return ExecutionSerial(0);
+        while (!mPendingQueries.empty()) {
+            auto& d3d11Query = mPendingQueries.front();
+            HRESULT hr = commandContext.GetData(d3d11Query.Get(), nullptr, 0,
+                                                D3D11_ASYNC_GETDATA_DONOTFLUSH);
+            DAWN_TRY(CheckHRESULT(hr, "D3D11 get data of a query failed"));
+            if (hr != S_OK) {
+                break;
+            }
+            if (mAvailableQueries.size() < kMaxAvailableQueries) {
+                mAvailableQueries.push_back(std::move(d3d11Query));
+            }
+            mPendingQueries.pop_front();
+            ++completedSerial;
+        }
+        if (completedSerial <= GetCompletedCommandSerial()) {
+            return ExecutionSerial(0);
+        }
+        if (mLastExportDueSerial != ExecutionSerial(0)) {
+            commandContext.Signal(mFence.Get(), uint64_t(completedSerial));
+            if (mLastExportDueSerial <= completedSerial) {
+                mLastExportDueSerial = ExecutionSerial(0);
+            }
+        }
     }
 
     DAWN_TRY(CheckAndMapReadyBuffers(completedSerial));
@@ -325,7 +348,22 @@ ResultOrError<ExecutionSerial> MonitoredQueue::CheckAndUpdateCompletedSerials() 
 }
 
 void MonitoredQueue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {
-    mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event);
+    auto submittedSerial = GetLastSubmittedCommandSerial();
+    DAWN_ASSERT(submittedSerial >= serial);
+
+    for (;;) {
+        IgnoreErrors(CheckPassedSerials());
+        if (GetCompletedCommandSerial() >= serial) {
+            break;
+        }
+        std::this_thread::yield();
+    }
+    {
+        auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+        commandContext.Signal(mFence.Get(), uint64_t(GetCompletedCommandSerial()));
+    }
+
+    mFence->SetEventOnCompletion(uint64_t(GetCompletedCommandSerial()), event);
 }
 
 // UnmonitoredQueuer:

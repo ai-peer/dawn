@@ -52,7 +52,7 @@ class Queue final : public d3d::Queue {
     MaybeError WaitForSerial(ExecutionSerial serial);
     CommandRecordingContext* GetPendingCommandContext(SubmitMode submitMode = SubmitMode::Normal);
     ID3D12CommandQueue* GetCommandQueue() const;
-    ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
+    ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence(ExecutionSerial serial) override;
     ID3D12SharingContract* GetSharingContract() const;
     MaybeError SubmitPendingCommands() override;
 

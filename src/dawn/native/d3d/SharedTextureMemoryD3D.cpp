@@ -76,7 +76,8 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
                     wgpu::FeatureName::SharedFenceDXGISharedHandle);
 
     Ref<SharedFence> sharedFence;
-    DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
+    DAWN_TRY_ASSIGN(sharedFence,
+                    ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence(lastUsageSerial));
 
     return FenceAndSignalValue{std::move(sharedFence), static_cast<uint64_t>(lastUsageSerial)};
 }
