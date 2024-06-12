@@ -119,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa57cd6d_55f1c345",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 421,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T16:16:44Z",
+      "side": 1,
+      "message": "alright that seems workable and non-invasive enough for now",
+      "parentUuid": "a4f925d1_67a245a5",
+      "range": {
+        "startLine": 421,
+        "startChar": 15,
+        "endLine": 421,
+        "endChar": 37
+      },
+      "revId": "661646b022c67be0711f11e7a029354a692927e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ab070ce_300eaded",
