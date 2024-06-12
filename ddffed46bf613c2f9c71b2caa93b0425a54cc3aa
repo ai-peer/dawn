@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4579a9_3390c9d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T09:50:36Z",
+      "side": 1,
+      "message": "If this works it would be MUCH better :D",
+      "revId": "ddffed46bf613c2f9c71b2caa93b0425a54cc3aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50b6ad99_8bd3aa89",
+        "filename": "tools/android/webgpu/build.gradle",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-12T09:50:36Z",
+      "side": 1,
+      "message": "Nice! Maybe we could split the code generator between the C++ parts that are used in Dawn, and the Kotlin parts that are used here.",
+      "revId": "ddffed46bf613c2f9c71b2caa93b0425a54cc3aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
