@@ -51,9 +51,12 @@ class Backend : public BackendConnection {
                                                                           EGLDisplay display);
 
     Ref<PhysicalDevice> mPhysicalDevice = nullptr;
+    DynamicLib mLibEGL;
+
+    // Used to check that a single EGL context is used.
+    // TODO(42240456): Check if this limitation can be removed.
     EGLGetProcProc mGetProc;
     EGLDisplay mDisplay;
-    DynamicLib mLibEGL;
 };
 
 }  // namespace dawn::native::opengl

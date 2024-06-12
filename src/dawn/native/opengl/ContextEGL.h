@@ -39,22 +39,29 @@ namespace dawn::native::opengl {
 
 class ContextEGL : NonMovable {
   public:
-    static ResultOrError<std::unique_ptr<ContextEGL>> Create(const EGLFunctions& functions,
-                                                             EGLenum api,
-                                                             EGLDisplay display,
-                                                             bool useANGLETextureSharing);
+    static ResultOrError<std::unique_ptr<ContextEGL>> CreateFromDynamicLoading(wgpu::BackendType backend, std::string_view libName);
+    static ResultOrError<std::unique_ptr<ContextEGL>> CreateFromProcAndDisplay(wgpu::BackendType backend, EGLGetProcProc getProc, EGLDisplay display = EGL_NO_DISPLAU);
+
+    ContextEGL(wgpu::BackendType backend);
     ~ContextEGL();
+
+    MaybeError InitializeWithDynamicLoading(std::string_view libName);
+    MaybeError InitializeWithProcAndDisplay(EGLGetProcProc, EGLDisplay display = EGL_NO_DISPLAY);
 
     void MakeCurrent();
     EGLDisplay GetEGLDisplay() const;
     const EGLFunctions& GetEGL() const;
+    EGLint GetAPIEnum() const;
+    EGLint GetAPIBit() const;
 
   private:
-    ContextEGL(const EGLFunctions& functions, EGLDisplay display, EGLContext context);
 
     const EGLFunctions mEgl;
     EGLDisplay mDisplay;
     EGLContext mContext;
+
+    EGLint mApiEnum;
+    EGLint mApiBit;
 };
 
 }  // namespace dawn::native::opengl
