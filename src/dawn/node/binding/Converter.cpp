@@ -191,7 +191,7 @@ bool Converter::Convert(wgpu::TextureDataLayout& out, const interop::GPUImageDat
 
 bool Converter::Convert(wgpu::TextureFormat& out, const interop::GPUTextureFormat& in) {
     out = wgpu::TextureFormat::Undefined;
-    wgpu::FeatureName requiredFeature = wgpu::FeatureName::Undefined;
+    wgpu::FeatureName requiredFeature = wgpu::FeatureName(0u);
     switch (in) {
         case interop::GPUTextureFormat::kR8Unorm:
             out = wgpu::TextureFormat::R8Unorm;
@@ -539,7 +539,7 @@ bool Converter::Convert(wgpu::TextureFormat& out, const interop::GPUTextureForma
             return Throw(err.str());
     }
 
-    assert(requiredFeature != wgpu::FeatureName::Undefined);
+    assert(requiredFeature != wgpu::FeatureName(0u));
     if (!HasFeature(requiredFeature)) {
         std::stringstream err;
         err << "" << out << " requires feature '" << requiredFeature << "'";
@@ -1547,7 +1547,6 @@ bool Converter::Convert(interop::GPUFeatureName& out, wgpu::FeatureName in) {
         case wgpu::FeatureName::StaticSamplers:
         case wgpu::FeatureName::SurfaceCapabilities:
         case wgpu::FeatureName::TransientAttachments:
-        case wgpu::FeatureName::Undefined:
         case wgpu::FeatureName::YCbCrVulkanSamplers:
         case wgpu::FeatureName::DawnLoadResolveTexture:
             return false;
