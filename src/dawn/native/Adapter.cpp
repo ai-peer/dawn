@@ -156,6 +156,8 @@ wgpu::Status AdapterBase::APIGetInfo(AdapterInfo* info) const {
 }
 
 wgpu::Status AdapterBase::APIGetProperties(AdapterProperties* properties) const {
+    mInstance->EmitDeprecationWarning("GetProperties is deprecated, use GetInfo instead.");
+
     DAWN_ASSERT(properties != nullptr);
     UnpackedPtr<AdapterProperties> unpacked;
     if (mInstance->ConsumedError(ValidateAndUnpack(properties), &unpacked)) {
