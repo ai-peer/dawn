@@ -435,7 +435,7 @@ TEST_F(HlslASTPrinterTest_Function, Emit_Attribute_EntryPoint_With_UniformStruct
 };
 
 void frag_main() {
-  float v = uniforms.coord.x;
+  float v = asfloat(uniforms[0].x);
   return;
 }
 )");
