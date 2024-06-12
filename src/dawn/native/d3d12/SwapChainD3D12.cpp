@@ -148,7 +148,7 @@ void SwapChain::DetachFromSurfaceImpl() {
     }
     mBuffers.clear();
 
-    ReleaseDXGISwapChain();
+    ReleaseDXGIResources();
 }
 
 }  // namespace dawn::native::d3d12

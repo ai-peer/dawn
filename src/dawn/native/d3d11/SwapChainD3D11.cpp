@@ -109,7 +109,7 @@ void SwapChain::DetachFromSurfaceImpl() {
     }
 
     mBuffer = nullptr;
-    ReleaseDXGISwapChain();
+    ReleaseDXGIResources();
 }
 
 }  // namespace dawn::native::d3d11

@@ -32,6 +32,7 @@
 
 #include "dawn/native/SwapChain.h"
 
+#include <dcomp.h>
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
@@ -63,7 +64,7 @@ class SwapChain : public SwapChainBase {
     virtual MaybeError DetachAndWaitForDeallocation() = 0;
 
     MaybeError PresentDXGISwapChain();
-    void ReleaseDXGISwapChain();
+    void ReleaseDXGIResources();
 
     IDXGISwapChain3* GetDXGISwapChain() const;
 
@@ -73,6 +74,7 @@ class SwapChain : public SwapChainBase {
         UINT swapChainFlags;
         DXGI_FORMAT format;
         DXGI_USAGE usage;
+        DXGI_ALPHA_MODE alphaMode;
     };
     const Config& GetConfig() const;
 
@@ -82,6 +84,8 @@ class SwapChain : public SwapChainBase {
 
     Config mConfig;
     ComPtr<IDXGISwapChain3> mDXGISwapChain;
+    ComPtr<IDCompositionTarget> mDCompositionTarget;
+    ComPtr<IDCompositionVisual> mDCompositionVisual;
 };
 
 }  // namespace dawn::native::d3d

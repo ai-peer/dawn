@@ -92,6 +92,24 @@ DXGI_USAGE ToDXGIUsage(wgpu::TextureUsage usage) {
     return dxgiUsage;
 }
 
+DXGI_ALPHA_MODE ToDXGIAlphaMode(wgpu::CompositeAlphaMode mode) {
+    switch (mode) {
+        case wgpu::CompositeAlphaMode::Auto:
+            break;
+        case wgpu::CompositeAlphaMode::Opaque:
+            return DXGI_ALPHA_MODE_IGNORE;
+        case wgpu::CompositeAlphaMode::Premultiplied:
+            return DXGI_ALPHA_MODE_PREMULTIPLIED;
+        case wgpu::CompositeAlphaMode::Unpremultiplied:
+            break;
+        case wgpu::CompositeAlphaMode::Inherit:
+            return DXGI_ALPHA_MODE_UNSPECIFIED;
+        default:
+            break;
+    }
+    DAWN_UNREACHABLE();
+}
+
 }  // namespace
 
 SwapChain::~SwapChain() = default;
@@ -112,6 +130,7 @@ MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
     mConfig.format = d3d::DXGITextureFormat(GetDevice(), GetFormat());
     mConfig.swapChainFlags = PresentModeToSwapChainFlags(GetPresentMode());
     mConfig.usage = ToDXGIUsage(GetUsage());
+    mConfig.alphaMode = ToDXGIAlphaMode(GetAlphaMode());
 
     // There is no previous swapchain so we can create one directly and don't have anything else
     // to do.
@@ -138,8 +157,9 @@ MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
     // always possible. Because DXGI requires that a new swapchain be created if the
     // DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING flag is changed.
     bool canReuseSwapChain =
-        ((mConfig.swapChainFlags ^ previousD3DSwapChain->mConfig.swapChainFlags) &
-         DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING) == 0;
+        (mConfig.alphaMode == previousD3DSwapChain->mConfig.alphaMode) &&
+        (((mConfig.swapChainFlags ^ previousD3DSwapChain->mConfig.swapChainFlags) &
+          DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING) == 0);
 
     // We can't reuse the previous swapchain, so we destroy it and wait for all of its reference
     // to be forgotten (otherwise DXGI complains that there are outstanding references).
@@ -151,6 +171,8 @@ MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
     // After all this we know we can reuse the swapchain, see if it is possible to also reuse
     // the buffers.
     mDXGISwapChain = std::move(previousD3DSwapChain->mDXGISwapChain);
+    mDCompositionTarget = std::move(previousD3DSwapChain->mDCompositionTarget);
+    mDCompositionVisual = std::move(previousD3DSwapChain->mDCompositionVisual);
 
     bool canReuseBuffers = GetWidth() == previousSwapChain->GetWidth() &&
                            GetHeight() == previousSwapChain->GetHeight() &&
@@ -193,8 +215,8 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     swapChainDesc.BufferUsage = mConfig.usage;
     swapChainDesc.BufferCount = mConfig.bufferCount;
     swapChainDesc.Scaling = DXGI_SCALING_STRETCH;
-    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
-    swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
+    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
+    swapChainDesc.AlphaMode = mConfig.alphaMode;
     swapChainDesc.Flags = mConfig.swapChainFlags;
 
     ComPtr<IDXGIFactory2> factory2 = nullptr;
@@ -205,10 +227,31 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     switch (GetSurface()->GetType()) {
         case Surface::Type::WindowsHWND: {
             DAWN_TRY(CheckHRESULT(
-                factory2->CreateSwapChainForHwnd(GetD3DDeviceForCreatingSwapChain(),
-                                                 static_cast<HWND>(GetSurface()->GetHWND()),
-                                                 &swapChainDesc, nullptr, nullptr, &swapChain1),
+                factory2->CreateSwapChainForComposition(GetD3DDeviceForCreatingSwapChain(),
+                                                        &swapChainDesc, nullptr, &swapChain1),
                 "Creating the IDXGISwapChain1"));
+
+            // Create composition
+            ComPtr<IDCompositionDevice> compositionDevice = nullptr;
+            DAWN_TRY(CheckHRESULT(DCompositionCreateDevice(NULL, IID_PPV_ARGS(&compositionDevice)),
+                                  "Creating DCompositionDevice"));
+
+            DAWN_TRY(CheckHRESULT(
+                compositionDevice->CreateTargetForHwnd(static_cast<HWND>(GetSurface()->GetHWND()),
+                                                       TRUE, &mDCompositionTarget),
+                "Creating composition target"));
+
+            DAWN_TRY(CheckHRESULT(compositionDevice->CreateVisual(&mDCompositionVisual),
+                                  "Creating composition visual"));
+
+            DAWN_TRY(CheckHRESULT(mDCompositionVisual->SetContent(swapChain1.Get()),
+                                  "Setting content of composition visual"));
+
+            DAWN_TRY(CheckHRESULT(mDCompositionTarget->SetRoot(mDCompositionVisual.Get()),
+                                  "Setting root visual of composition target"));
+
+            DAWN_TRY(CheckHRESULT(compositionDevice->Commit(), "Committing composition"));
+
             break;
         }
         case Surface::Type::WindowsCoreWindow: {
@@ -254,8 +297,10 @@ MaybeError SwapChain::PresentDXGISwapChain() {
     return {};
 }
 
-void SwapChain::ReleaseDXGISwapChain() {
+void SwapChain::ReleaseDXGIResources() {
     mDXGISwapChain = nullptr;
+    mDCompositionTarget = nullptr;
+    mDCompositionVisual = nullptr;
 }
 
 IDXGISwapChain3* SwapChain::GetDXGISwapChain() const {
