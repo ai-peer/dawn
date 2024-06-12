@@ -1,0 +1,28 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd1b542_10f94966",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-12T18:30:23Z",
+      "side": 1,
+      "message": "\u003e \"construtor\" is a possible misspelling of \"constructor\".\n\nPlease fix.",
+      "parentUuid": "5fab7ca1_6a5ab61d",
+      "range": {
+        "startLine": 7,
+        "startChar": 23,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "4ee24b2c68f6512b0be411887c9ea0351708b5bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
