@@ -147,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a24fb508_8277a54c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-12T20:12:41Z",
+      "side": 1,
+      "message": "ah, I see. It\u0027s a little odd but I can\u0027t think of great alternatives",
+      "parentUuid": "0966ec51_6a0b2ecb",
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7720e7c6_244a5e39",
