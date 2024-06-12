@@ -26,9 +26,11 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+#include "dawn/native/vulkan/SemaphoreSelector.h"
 #include "dawn/native/vulkan/VulkanFunctions.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementation.h"
+#include "vulkan/vulkan_core.h"
 
 #if DAWN_PLATFORM_IS(FUCHSIA)
 #include "dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.h"
@@ -53,12 +55,14 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
 #endif
 }
 
-Service::Service(Device* device, VkExternalSemaphoreHandleTypeFlagBits handleType) {
+Service::Service(Device* device,
+                 VkExternalSemaphoreHandleTypeFlagBits handleType,
+                 VkExternalSemaphoreHandleTypeFlagBits handleTypeOpaque) {
 #if DAWN_PLATFORM_IS(FUCHSIA)  // Fuchsia
     DAWN_ASSERT(handleType == VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA);
     mServiceImpl = CreateZirconHandleService(device);
 #elif DAWN_PLATFORM_IS(LINUX) || DAWN_PLATFORM_IS(CHROMEOS)  // Android, ChromeOS and Linux
-    mServiceImpl = CreateFDService(device, handleType);
+    mServiceImpl = CreateFDService(device, handleType, handleTypeOpaque== VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM? handleType : handleTypeOpaque);
 #endif
 }
 
@@ -77,19 +81,22 @@ void Service::CloseHandle(ExternalSemaphoreHandle handle) {
     mServiceImpl->CloseHandle(handle);
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
+ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle,
+                                                    SemaphoreSelector semaphoreSelector) {
     DAWN_ASSERT(mServiceImpl);
-    return mServiceImpl->ImportSemaphore(handle);
+    return mServiceImpl->ImportSemaphore(handle, semaphoreSelector);
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
+ResultOrError<VkSemaphore> Service::CreateExportableSemaphore(SemaphoreSelector semaphoreSelector) {
     DAWN_ASSERT(mServiceImpl);
-    return mServiceImpl->CreateExportableSemaphore();
+    return mServiceImpl->CreateExportableSemaphore(semaphoreSelector);
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
+ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(
+    VkSemaphore semaphore,
+    SemaphoreSelector semaphoreSelector) {
     DAWN_ASSERT(mServiceImpl);
-    return mServiceImpl->ExportSemaphore(semaphore);
+    return mServiceImpl->ExportSemaphore(semaphore, semaphoreSelector);
 }
 
 ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {

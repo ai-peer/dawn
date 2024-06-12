@@ -32,6 +32,7 @@
 
 #include "dawn/native/Error.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
+#include "dawn/native/vulkan/SemaphoreSelector.h"
 
 namespace dawn::native::vulkan {
 class Device;
@@ -44,7 +45,9 @@ class ServiceImplementation;
 
 class Service {
   public:
-    Service(Device* device, VkExternalSemaphoreHandleTypeFlagBits handleType);
+    Service(Device* device,
+            VkExternalSemaphoreHandleTypeFlagBits handleType,
+            VkExternalSemaphoreHandleTypeFlagBits handleTypeOpaque = VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_FLAG_BITS_MAX_ENUM);
     ~Service();
 
     static bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
@@ -56,13 +59,15 @@ class Service {
     bool Supported();
 
     // Given an external handle, import it into a VkSemaphore
-    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle);
+    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle,
+                                               SemaphoreSelector semaphoreSelector);
 
     // Create a VkSemaphore that is exportable into an external handle later
-    ResultOrError<VkSemaphore> CreateExportableSemaphore();
+    ResultOrError<VkSemaphore> CreateExportableSemaphore(SemaphoreSelector semaphoreSelector);
 
     // Export a VkSemaphore into an external handle
-    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore);
+    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore,
+                                                           SemaphoreSelector semaphoreSelector);
 
     // Duplicate a new external handle from the given one.
     ExternalSemaphoreHandle DuplicateHandle(ExternalSemaphoreHandle handle);

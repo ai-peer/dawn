@@ -36,6 +36,7 @@
 #include "dawn/native/vulkan/CommandRecordingContext.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
+#include "dawn/native/vulkan/SemaphoreSelector.h"
 #include "dawn/native/vulkan/SharedFenceVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -348,13 +349,16 @@ MaybeError Queue::SubmitPendingCommands() {
             device->fn, &mRecordingContext, mRecordingContext.mappableBuffersForEagerTransition);
     }
     std::vector<ScopedSignalSemaphore> externalTextureSemaphores;
-    for (size_t i = 0; i < mRecordingContext.externalTexturesForEagerTransition.size(); ++i) {
+      for (auto* texture : mRecordingContext.externalTexturesForEagerTransition) {
         // Create an external semaphore for each external textures that have been used in the
         // pending submit.
+        
         auto& externalTextureSemaphore =
             externalTextureSemaphores.emplace_back(device, VK_NULL_HANDLE);
         DAWN_TRY_ASSIGN(*externalTextureSemaphore.InitializeInto(),
-                        device->GetExternalSemaphoreService()->CreateExportableSemaphore());
+                        device->GetExternalSemaphoreService()->CreateExportableSemaphore(
+                           texture->IsOpaqueExternalImageType()? SemaphoreSelector::Opaque : SemaphoreSelector::Default
+                        ));
     }
 
     // Transition eagerly all used external textures for export.
@@ -383,9 +387,20 @@ MaybeError Queue::SubmitPendingCommands() {
                     }
                 }();
 
+                wgpu::SharedFenceType semaphoreType = [&]() {
+                    if constexpr (std::is_same_v<ExternalSemaphoreHandle, SystemHandle::Handle>) {
+                        return ToBackend(fence.object)->GetFenceType();
+                    } else {
+                        DAWN_UNREACHABLE();
+                        return wgpu::SharedFenceType::Undefined;
+                    }
+                }();
+
                 VkSemaphore semaphore;
                 DAWN_TRY_ASSIGN(semaphore, device->GetExternalSemaphoreService()->ImportSemaphore(
-                                               semaphoreHandle));
+                                               semaphoreHandle,        semaphoreType == wgpu::SharedFenceType::VkSemaphoreOpaqueFD
+                    ? SemaphoreSelector::Opaque
+                    : SemaphoreSelector::Default));
                 mRecordingContext.waitSemaphores.push_back(semaphore);
             }
         }
@@ -445,7 +460,8 @@ MaybeError Queue::SubmitPendingCommands() {
         // Export the signal semaphore.
         ExternalSemaphoreHandle semaphoreHandle;
         DAWN_TRY_ASSIGN(semaphoreHandle, device->GetExternalSemaphoreService()->ExportSemaphore(
-                                             externalTextureSemaphoreIter->Get()));
+                                             externalTextureSemaphoreIter->Get(),
+                                             texture->IsOpaqueExternalImageType()? SemaphoreSelector::Opaque : SemaphoreSelector::Default));
         ++externalTextureSemaphoreIter;
 
         // Update all external textures, eagerly transitioned in the submit, with the exported
