@@ -2329,7 +2329,6 @@
         "category": "enum",
         "tags": ["dawn", "native"],
         "values": [
-            {"value": 0, "name": "undefined", "valid": false},
             {"value": 1, "name": "vk semaphore opaque FD"},
             {"value": 2, "name": "vk semaphore sync FD"},
             {"value": 3, "name": "vk semaphore zircon handle"},
@@ -2394,7 +2393,6 @@
     "feature name": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "undefined", "jsrepr": "undefined", "valid": false},
             {"value": 1, "name": "depth clip control"},
             {"value": 2, "name": "depth32 float stencil8"},
             {"value": 3, "name": "timestamp query"},
@@ -4319,7 +4317,6 @@
     "vertex format": {
         "category": "enum",
         "values": [
-            {"value": 0,  "name": "undefined", "jsrepr": "undefined", "valid": false},
             {"value": 1,  "name": "uint8x2"},
             {"value": 2,  "name": "uint8x4"},
             {"value": 3,  "name": "sint8x2"},
@@ -4356,7 +4353,6 @@
     "WGSL feature name": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "undefined", "valid": false, "jsrepr": "undefined"},
             {"value": 1, "name": "readonly and readwrite storage textures",  "jsrepr": "'readonly_and_readwrite_storage_textures'"},
             {"value": 2, "name": "packed 4x8 integer dot product", "jsrepr": "'packed_4x8_integer_dot_product'"},
             {"value": 3, "name": "unrestricted pointer parameters", "jsrepr": "'unrestricted_pointer_parameters'"},
@@ -4487,7 +4483,6 @@
         "category": "bitmask",
         "tags": ["dawn"],
         "values": [
-            {"value": 0, "name": "undefined", "valid": false},
             {"value": 1, "name": "device local"},
             {"value": 2, "name": "host visible"},
             {"value": 4, "name": "host coherent"},
