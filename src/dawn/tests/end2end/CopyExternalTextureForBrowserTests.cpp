@@ -300,7 +300,6 @@ class CopyExternalTextureForBrowserTests_Basic
     : public CopyExternalTextureForBrowserTestsBase<CopyTestParams> {};
 
 TEST_P(CopyExternalTextureForBrowserTests_Basic, Copy) {
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
 
     wgpu::CopyTextureForBrowserOptions options = {};
@@ -414,7 +413,6 @@ class CopyExternalTextureForBrowserTests_Aspect : public CopyExternalTextureForB
 };
 
 TEST_P(CopyExternalTextureForBrowserTests_Aspect, Copy) {
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
     DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
 
     wgpu::Origin3D srcOrigin = {};
