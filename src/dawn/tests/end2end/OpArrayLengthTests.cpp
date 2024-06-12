@@ -227,9 +227,8 @@ TEST_P(OpArrayLengthTest, Fragment) {
 // Test OpArrayLength in the vertex stage
 TEST_P(OpArrayLengthTest, Vertex) {
     // TODO(crbug.com/dawn/197): The computations for length() of unsized buffer is broken on
-    // Nvidia OpenGL. Also failing on all GLES (NV, Intel, SwANGLE).
-    DAWN_SUPPRESS_TEST_IF(IsNvidia() && IsOpenGL());
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+    // Nvidia OpenGL and OpenGLES.
+    DAWN_SUPPRESS_TEST_IF(IsNvidia() && (IsOpenGL() || IsOpenGLES()));
 
     // TODO(crbug.com/dawn/1292): Some Intel drivers don't seem to like the
     // (spurious but harmless) offset=64 that Tint/GLSL produces.
