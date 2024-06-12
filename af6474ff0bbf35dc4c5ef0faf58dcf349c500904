@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c97f4dc_3e03a737",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-12T09:30:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02667954_1e7836ec",
+      "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef8263eb_b4a0264d",
@@ -72,6 +90,30 @@
           ]
         }
       ],
+      "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2869ef_cede7e23",
+        "filename": "docs/tint/extensions/chromium_experimental_static_samplers.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003706
+      },
+      "writtenOn": "2024-06-12T09:30:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef8263eb_b4a0264d",
+      "range": {
+        "startLine": 104,
+        "startChar": 11,
+        "endLine": 104,
+        "endChar": 20
+      },
       "revId": "af6474ff0bbf35dc4c5ef0faf58dcf349c500904",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
