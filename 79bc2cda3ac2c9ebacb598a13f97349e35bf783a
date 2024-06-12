@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd3a33a_0e26d7e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-12T20:50:40Z",
+      "side": 1,
+      "message": "There was an important day of notes I forgot to post on this issue, or maybe it was before I started posting notes. I edited them in:\n\nhttps://github.com/webgpu-native/webgpu-headers/issues/45#issuecomment-1776319835\n\nWe had concluded there was no particular need to reserve undefined for output enums though I don\u0027t think there was any argument against it either.\n\nMaybe it is better to just reserve 0, it doesn\u0027t hurt anything and can be handy e.g. for \"uninitialized\" status variables.",
+      "revId": "79bc2cda3ac2c9ebacb598a13f97349e35bf783a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
