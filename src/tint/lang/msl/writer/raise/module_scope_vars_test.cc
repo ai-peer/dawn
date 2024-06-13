@@ -44,7 +44,7 @@ using MslWriter_ModuleScopeVarsTest = core::ir::transform::TransformTest;
 TEST_F(MslWriter_ModuleScopeVarsTest, NoModuleScopeVars) {
     auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
-        auto* var = b.Var<function, i32>("v");
+        auto* var = b.Var("v", function, ty.i32());
         b.Load(var);
         b.Return(func);
     });

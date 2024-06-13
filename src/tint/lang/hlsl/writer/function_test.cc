@@ -458,7 +458,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionEntryPointWithRWStorageBufferRead) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("Data"), std::move(members));
 
-    auto* coord = b.Var("coord", storage, strct, read_write);
+    auto* coord = b.Var("coord", storage, read_write, strct);
     coord->SetBindingPoint(1, 0);
     b.ir.root_block->Append(coord);
 
@@ -498,7 +498,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionEntryPointWithROStorageBufferRead) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("Data"), std::move(members));
 
-    auto* coord = b.Var("coord", storage, strct, core::Access::kRead);
+    auto* coord = b.Var("coord", storage, core::Access::kRead, strct);
     coord->SetBindingPoint(1, 0);
     b.ir.root_block->Append(coord);
 
@@ -537,7 +537,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionEntryPointWithWOStorageBufferStore) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("Data"), std::move(members));
 
-    auto* coord = b.Var("coord", storage, strct, core::Access::kWrite);
+    auto* coord = b.Var("coord", storage, core::Access::kWrite, strct);
     coord->SetBindingPoint(1, 0);
     b.ir.root_block->Append(coord);
 
@@ -574,7 +574,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionEntryPointWithStorageBufferStore) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("Data"), std::move(members));
 
-    auto* coord = b.Var("coord", storage, strct, read_write);
+    auto* coord = b.Var("coord", storage, read_write, strct);
     coord->SetBindingPoint(1, 0);
     b.ir.root_block->Append(coord);
 
@@ -660,7 +660,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionCalledByEntryPointWithStorageBuffer) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("S"), std::move(members));
 
-    auto* coord = b.Var("coord", storage, strct, core::Access::kReadWrite);
+    auto* coord = b.Var("coord", storage, core::Access::kReadWrite, strct);
     coord->SetBindingPoint(1, 0);
     b.ir.root_block->Append(coord);
 
@@ -834,7 +834,7 @@ TEST_F(HlslWriterTest, DISABLED_FunctionMultipleEntryPointWithSameModuleVar) {
                                                     core::type::StructMemberAttributes{})};
     auto* strct = ty.Struct(b.ir.symbols.New("Data"), std::move(members));
 
-    auto* data = b.Var("data", storage, strct, read_write);
+    auto* data = b.Var("data", storage, read_write, strct);
     data->SetBindingPoint(0, 0);
     b.ir.root_block->Append(data);
 

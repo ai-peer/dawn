@@ -76,7 +76,7 @@ TEST_F(WgslWriter_RaiseTest, BuiltinConversion) {
 }
 
 TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier) {
-    auto* W = b.Var<workgroup, i32, read_write>("W");
+    auto* W = b.Var("W", workgroup, ty.i32());
     b.ir.root_block->Append(W);
     auto* f = b.Function("f", ty.i32());
     b.Append(f->Block(), [&] {  //
@@ -122,7 +122,7 @@ $B1: {  # root
 }
 
 TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier_NoMatch) {
-    auto* W = b.Var<workgroup, i32, read_write>("W");
+    auto* W = b.Var("W", workgroup, read_write, ty.i32());
     b.ir.root_block->Append(W);
     auto* f = b.Function("f", ty.i32());
     b.Append(f->Block(), [&] {  //

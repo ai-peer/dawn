@@ -1259,10 +1259,10 @@ class Builder {
 
     /// Creates a new `var` declaration
     /// @param space the var's address space
-    /// @param subtype the storage pointer's element type
     /// @param access the var's access mode
+    /// @param subtype the storage pointer's element type
     /// @returns the instruction
-    ir::Var* Var(core::AddressSpace space, const core::type::Type* subtype, core::Access access) {
+    ir::Var* Var(core::AddressSpace space, core::Access access, const core::type::Type* subtype) {
         return Var(ir.Types().ptr(space, subtype, access));
     }
 
@@ -1275,28 +1275,24 @@ class Builder {
     }
 
     /// Creates a new `var` declaration with a name
-    /// @tparam SPACE the var's address space
-    /// @tparam T the storage pointer's element type
-    /// @tparam ACCESS the var's access mode
     /// @param name the var name
+    /// @param space the var's address space
+    /// @param subtype the storage pointer's element type
     /// @returns the instruction
-    template <core::AddressSpace SPACE,
-              typename T,
-              core::Access ACCESS = core::type::DefaultAccessFor(SPACE)>
-    ir::Var* Var(std::string_view name) {
-        return Var(name, ir.Types().ptr<SPACE, T, ACCESS>());
+    ir::Var* Var(std::string_view name, core::AddressSpace space, const core::type::Type* subtype) {
+        return Var(name, space, core::type::DefaultAccessFor(space), subtype);
     }
 
     /// Creates a new `var` declaration with a name
     /// @param name the var name
     /// @param space the var's address space
-    /// @param subtype the storage pointer's element type
     /// @param access the var's access mode
+    /// @param subtype the storage pointer's element type
     /// @returns the instruction
     ir::Var* Var(std::string_view name,
                  core::AddressSpace space,
-                 core::type::Type* subtype,
-                 core::Access access = core::Access::kUndefined) {
+                 core::Access access,
+                 const core::type::Type* subtype) {
         return Var(name, ir.Types().ptr(space, subtype, access));
     }
 

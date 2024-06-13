@@ -69,10 +69,10 @@ TEST_F(IR_ReferencedModuleVarsTest, EmptyRootBlock) {
 
 TEST_F(IR_ReferencedModuleVarsTest, DirectUse) {
     // Referenced.
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
-    auto* var_b = mod.root_block->Append(b.Var<workgroup, u32>("b"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
+    auto* var_b = mod.root_block->Append(b.Var("b", workgroup, ty.u32()));
     // Not referenced.
-    mod.root_block->Append(b.Var<workgroup, u32>("c"));
+    mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //
@@ -103,11 +103,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ReferencedModuleVarsTest, DirectUse_DeclarationOrder) {
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
-    auto* var_b = mod.root_block->Append(b.Var<workgroup, u32>("b"));
-    auto* var_c = mod.root_block->Append(b.Var<workgroup, u32>("c"));
-    auto* var_d = mod.root_block->Append(b.Var<workgroup, u32>("d"));
-    auto* var_e = mod.root_block->Append(b.Var<workgroup, u32>("e"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
+    auto* var_b = mod.root_block->Append(b.Var("b", workgroup, ty.u32()));
+    auto* var_c = mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
+    auto* var_d = mod.root_block->Append(b.Var("d", workgroup, ty.u32()));
+    auto* var_e = mod.root_block->Append(b.Var("e", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //
@@ -146,9 +146,9 @@ $B1: {  # root
 }
 
 TEST_F(IR_ReferencedModuleVarsTest, DirectUse_MultipleFunctions) {
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
-    auto* var_b = mod.root_block->Append(b.Var<workgroup, u32>("b"));
-    auto* var_c = mod.root_block->Append(b.Var<workgroup, u32>("c"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
+    auto* var_b = mod.root_block->Append(b.Var("b", workgroup, ty.u32()));
+    auto* var_c = mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //
@@ -205,10 +205,10 @@ $B1: {  # root
 }
 
 TEST_F(IR_ReferencedModuleVarsTest, DirectUse_NestedInControlFlow) {
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
-    auto* var_b = mod.root_block->Append(b.Var<workgroup, u32>("b"));
-    auto* var_c = mod.root_block->Append(b.Var<workgroup, u32>("c"));
-    auto* var_d = mod.root_block->Append(b.Var<workgroup, u32>("c"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
+    auto* var_b = mod.root_block->Append(b.Var("b", workgroup, ty.u32()));
+    auto* var_c = mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
+    auto* var_d = mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //
@@ -281,11 +281,11 @@ $B1: {  # root
 
 TEST_F(IR_ReferencedModuleVarsTest, IndirectUse) {
     // Directly used by foo.
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
     // Directly used by bar, called by zoo and foo.
-    auto* var_b = mod.root_block->Append(b.Var<workgroup, u32>("b"));
+    auto* var_b = mod.root_block->Append(b.Var("b", workgroup, ty.u32()));
     // Not used.
-    mod.root_block->Append(b.Var<workgroup, u32>("c"));
+    mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
 
     auto* bar = b.Function("bar", ty.void_());
     b.Append(bar->Block(), [&] {  //
@@ -342,11 +342,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ReferencedModuleVarsTest, NoFunctionVars) {
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //
-        auto* var_b = b.Var<function, u32>("b");
+        auto* var_b = b.Var("b", function, ty.u32());
         b.Load(var_a);
         b.Load(var_b);
         b.Return(foo);
@@ -373,11 +373,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ReferencedModuleVarsTest, Predicate) {
-    auto* var_a = mod.root_block->Append(b.Var<workgroup, u32>("a"));
-    auto* var_b = mod.root_block->Append(b.Var<private_, u32>("b"));
-    auto* var_c = mod.root_block->Append(b.Var<workgroup, u32>("c"));
-    auto* var_d = mod.root_block->Append(b.Var<private_, u32>("d"));
-    auto* var_e = mod.root_block->Append(b.Var<workgroup, u32>("e"));
+    auto* var_a = mod.root_block->Append(b.Var("a", workgroup, ty.u32()));
+    auto* var_b = mod.root_block->Append(b.Var("b", private_, ty.u32()));
+    auto* var_c = mod.root_block->Append(b.Var("c", workgroup, ty.u32()));
+    auto* var_d = mod.root_block->Append(b.Var("d", private_, ty.u32()));
+    auto* var_e = mod.root_block->Append(b.Var("e", workgroup, ty.u32()));
 
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {  //

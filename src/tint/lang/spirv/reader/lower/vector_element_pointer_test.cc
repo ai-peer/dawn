@@ -68,7 +68,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, NonPointerAccess) {
 TEST_F(SpirvReader_VectorElementPointerTest, Access_NoIndices) {
     auto* foo = b.Function("foo", ty.vec4<u32>());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access = b.Access<ptr<function, vec4<u32>>>(vec);
         b.Return(foo, b.Load(access));
     });
@@ -95,7 +95,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, Access_NoIndices) {
 TEST_F(SpirvReader_VectorElementPointerTest, Access_NoIndices_Chain) {
     auto* foo = b.Function("foo", ty.vec4<u32>());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access_1 = b.Access<ptr<function, vec4<u32>>>(vec);
         auto* access_2 = b.Access<ptr<function, vec4<u32>>>(access_1);
         auto* access_3 = b.Access<ptr<function, vec4<u32>>>(access_2);
@@ -126,7 +126,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, Access_NoIndices_Chain) {
 TEST_F(SpirvReader_VectorElementPointerTest, Access_Component_NoUse) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         b.Access<ptr<function, u32>>(vec, 2_u);
         b.Return(foo);
     });
@@ -159,7 +159,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, Access_Component_NoUse) {
 TEST_F(SpirvReader_VectorElementPointerTest, Load) {
     auto* foo = b.Function("foo", ty.u32());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access = b.Access<ptr<function, u32>>(vec, 2_u);
         auto* load = b.Load(access);
         b.Return(foo, load);
@@ -195,7 +195,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, Load) {
 TEST_F(SpirvReader_VectorElementPointerTest, Store) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access = b.Access<ptr<function, u32>>(vec, 2_u);
         b.Store(access, 42_u);
         b.Return(foo);
@@ -231,7 +231,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, Store) {
 TEST_F(SpirvReader_VectorElementPointerTest, AccessBeforeUse) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access_1 = b.Access<ptr<function, u32>>(vec, 2_u);
         auto* access_2 = b.Access<ptr<function, u32>>(access_1);
         b.Store(access_2, 42_u);
@@ -269,7 +269,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, AccessBeforeUse) {
 TEST_F(SpirvReader_VectorElementPointerTest, MultipleUses) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* vec = b.Var<function, vec4<u32>>("vec");
+        auto* vec = b.Var("vec", function, ty.vec4<u32>());
         auto* access = b.Access<ptr<function, u32>>(vec, 2_u);
         auto* load = b.Load(access);
         auto* add = b.Add<u32>(load, 1_u);
@@ -311,7 +311,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, MultipleUses) {
 TEST_F(SpirvReader_VectorElementPointerTest, ViaMatrix) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* mat = b.Var<function, mat4x4<f32>>("mat");
+        auto* mat = b.Var("mat", function, ty.mat4x4<f32>());
         auto* access = b.Access<ptr<function, f32>>(mat, 1_u, 2_u);
         b.Store(access, 42_f);
         b.Return(foo);
@@ -348,7 +348,7 @@ TEST_F(SpirvReader_VectorElementPointerTest, ViaMatrix) {
 TEST_F(SpirvReader_VectorElementPointerTest, ViaArray) {
     auto* foo = b.Function("foo", ty.void_());
     b.Append(foo->Block(), [&] {
-        auto* arr = b.Var<function, array<vec4<f32>, 4>>("arr");
+        auto* arr = b.Var("arr", function, ty.array<vec4<f32>, 4>());
         auto* access = b.Access<ptr<function, f32>>(arr, 1_u, 2_u);
         b.Store(access, 42_f);
         b.Return(foo);
