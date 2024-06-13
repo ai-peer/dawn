@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0da2c66_aff40d47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T15:51:42Z",
+      "side": 1,
+      "message": "Moved the UploadBuffer \u0026 StagingBuffer\u0027s member functions to be inlined. PTAL.",
+      "revId": "c1d8f4bfee2222de793138b848fe659c6fb0023b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

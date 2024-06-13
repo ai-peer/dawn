@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2b7687d_648b825d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T15:51:42Z",
+      "side": 1,
+      "message": "Unfortunately some of the methods in subclasses need to access these methods via a pointer of base class (not `this`). e.g in CopyToInternal:\n```\ndestination-\u003eCopyFromD3DInternal(...); // protected method\n```\n\nAccessing in this way would have been not allowed by standard spec, if the method had been protected.\n\nUnless you have other suggestions. Maybe declaring the subclasses the friend classes?",
+      "parentUuid": "3c91d895_50d60671",
+      "revId": "663491a64ddb8457aae3af7979dc0c35bda6d3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20136568_221b8a0f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.h",
         "patchSetId": 7
