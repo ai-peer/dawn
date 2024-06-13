@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d969f22b_7a301fa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T00:37:37Z",
+      "side": 1,
+      "message": "here\u0027s an idea\n\neven on UMA, based on the D3D11 restrictions, we can only map readonly GPU buffers.\nWe can\u0027t map storage buffers, etc. So there will need to be a bunch of workarounds on D3D11 to make that work in the same way that UMA will work on other platforms.\nAnd, those workarounds should be written so ideally we don\u0027t have two different UMA extensions.\n\nSo instead... what about not exposing extended map usages on D3D11 at all, and instead, do some frequency tracking on uniform/vertex/index buffers to measure how often they are updated? When updated very often, they could be replaced with a DYNAMIC d3d11 buffers. And DYNAMIC buffers can have a special path in WriteBuffer.\nThen, we don\u0027t need to do anything about other types of buffers which would have expensive emulation anyway.",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
