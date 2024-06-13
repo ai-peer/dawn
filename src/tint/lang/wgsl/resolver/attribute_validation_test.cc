@@ -1103,10 +1103,6 @@ INSTANTIATE_TEST_SUITE_P(
             R"(1:2 error: '@blend_src' is not valid for entry point return types)",
         },
         TestParams{
-            {AttributeKind::kBlendSrc, AttributeKind::kLocation},
-            R"(1:2 error: '@blend_src' is not valid for entry point return types)",
-        },
-        TestParams{
             {AttributeKind::kBuiltinPosition},
             R"(1:2 error: '@builtin(position)' cannot be used for fragment shader output)",
         },

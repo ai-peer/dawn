@@ -62,6 +62,7 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcF32Error) {
     Structure("Output", Vector{
                             Member(Source{{12, 34}}, "a", ty.vec4<f32>(),
                                    Vector{Location(0_a), BlendSrc(Source{{12, 34}}, 0_f)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
 
     EXPECT_FALSE(r()->Resolve());
@@ -73,34 +74,37 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcFloatValueError) {
     Structure("Output", Vector{
                             Member(Source{{12, 34}}, "a", ty.vec4<f32>(),
                                    Vector{Location(0_a), BlendSrc(Source{{12, 34}}, 1.0_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: '@blend_src' value must be 'i32' or 'u32'");
 }
 
-// Using a number less than zero as an index value should fail.
+// Using a number less than zero as a @blend_src value should fail.
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcNegativeValue) {
     Structure("Output", Vector{
                             Member(Source{{12, 34}}, "a", ty.vec4<f32>(),
                                    Vector{Location(0_a), BlendSrc(Source{{12, 34}}, -1_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: '@blend_src' value must be zero or one");
 }
 
-// Using a number greater than one as an index value should fail.
+// Using a number greater than one as a @blend_src value should fail.
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcValueAboveOne) {
     Structure("Output", Vector{
                             Member(Source{{12, 34}}, "a", ty.vec4<f32>(),
                                    Vector{Location(0_a), BlendSrc(Source{{12, 34}}, 2_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: '@blend_src' value must be zero or one");
 }
 
-// Using an index value at the same location multiple times should fail.
+// Using a @blend_src value at the same location multiple times should fail.
 TEST_F(DualSourceBlendingExtensionTests, DuplicateBlendSrces) {
     Structure("Output", Vector{
                             Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
@@ -112,31 +116,78 @@ TEST_F(DualSourceBlendingExtensionTests, DuplicateBlendSrces) {
     EXPECT_EQ(r()->error(), "12:34 error: '@location(0) @blend_src(0)' appears multiple times");
 }
 
-// Using the index attribute without a location attribute should fail.
+// Using the @blend_src attribute without a location attribute should fail.
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcWithMissingLocationAttribute_Struct) {
     Structure("Output", Vector{
                             Member(Source{{12, 34}}, "a", ty.vec4<f32>(),
                                    Vector{BlendSrc(Source{{12, 34}}, 1_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: '@blend_src' can only be used with '@location(0)'");
 }
 
-// Using an index attribute on a struct member should pass.
-TEST_F(DualSourceBlendingExtensionTests, StructMemberBlendSrcAttribute) {
+// Using a @blend_src attribute on a struct member while there is only one member in the struct
+// should fail.
+TEST_F(DualSourceBlendingExtensionTests, StructMemberBlendSrcAttribute_OnlyBlendSrc0) {
     Structure("Output", Vector{
                             Member("a", ty.vec4<f32>(),
                                    Vector{Location(0_a), BlendSrc(Source{{12, 34}}, 0_a)}),
                         });
 
-    EXPECT_TRUE(r()->Resolve()) << r()->error();
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: '@blend_src(1)' is missing when '@blend_src' is used");
 }
 
-// Using an index attribute on a global variable should pass. This is needed internally when using
-// @blend_src with the canonicalize_entry_point transform. This test uses an internal attribute to
-// ignore address space, which is how it is used with the canonicalize_entry_point transform.
-TEST_F(DualSourceBlendingExtensionTests, GlobalVariableBlendSrcAttribute) {
+// Using a @blend_src attribute on a struct member while there is only one member in the struct
+// should fail.
+TEST_F(DualSourceBlendingExtensionTests, StructMemberBlendSrcAttribute_OnlyBlendSrc1) {
+    Structure("Output", Vector{
+                            Member("a", ty.vec4<f32>(),
+                                   Vector{Location(0_a), BlendSrc(Source{{12, 34}}, 1_a)}),
+                        });
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: '@blend_src(0)' is missing when '@blend_src' is used");
+}
+
+// Using a @blend_src attribute on a struct member while there is another member that doesn't have
+// @blend_src attribute in the struct should fail.
+TEST_F(DualSourceBlendingExtensionTests, StructMemberBlendSrcAttribute_LastMemberNoBlendSrc) {
+    Structure("Output", Vector{
+                            Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
+                            Member(Source{{12, 34}}, "c", ty.vec4<f32>()),
+                        });
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "12:34 error: '@blend_src' is used on one member while another member doesn't use "
+              "'@blend_src'");
+}
+
+// Using a @blend_src attribute on a struct member while there is another member that doesn't have
+// @blend_src attribute in the struct should fail.
+TEST_F(DualSourceBlendingExtensionTests, StructMemberBlendSrcAttribute_FirstMemberNoBlendSrc) {
+    Structure("Output", Vector{
+                            Member("a", ty.vec4<f32>()),
+                            Member(Source{{12, 34}}, "b", ty.vec4<f32>(),
+                                   Vector{Location(0_a), BlendSrc(0_a)}),
+                            Member("c", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
+                        });
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "12:34 error: '@blend_src' is used on one member while another member doesn't use "
+              "'@blend_src'");
+}
+
+// Using a @blend_src attribute on a global variable should pass internally with
+// `DisabledValidation::kIgnoreAddressSpace`. This is needed internally when using @blend_src with
+// the canonicalize_entry_point transform. This test uses an internal attribute to ignore address
+// space, which is how it is used with the canonicalize_entry_point transform.
+TEST_F(DualSourceBlendingExtensionTests, GlobalVariableBlendSrcAttributeAfterInternalTransform) {
     GlobalVar(
         "var", ty.vec4<f32>(),
         Vector{Location(0_a), BlendSrc(0_a), Disable(ast::DisabledValidation::kIgnoreAddressSpace)},
@@ -145,18 +196,19 @@ TEST_F(DualSourceBlendingExtensionTests, GlobalVariableBlendSrcAttribute) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
-// Using the index attribute with a non-zero location should fail.
+// Using the @blend_src attribute with a non-zero location should fail.
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcWithNonZeroLocation_Struct) {
     Structure("Output", Vector{
                             Member("a", ty.vec4<f32>(),
                                    Vector{Location(1_a), BlendSrc(Source{{12, 34}}, 0_a)}),
+                            Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(1_a)}),
                         });
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: '@blend_src' can only be used with '@location(0)'");
 }
 
-TEST_F(DualSourceBlendingExtensionTests, MixedBlendSrcAndNonBlendSrcOnLocationZero_Struct) {
+TEST_F(DualSourceBlendingExtensionTests, MixedBlendSrcAndNonBlendSrcOnLocationZero) {
     // struct S {
     //   @location(0) a : vec4<f32>,
     //   @location(0) @blend_src(1) b : vec4<f32>,
@@ -164,39 +216,16 @@ TEST_F(DualSourceBlendingExtensionTests, MixedBlendSrcAndNonBlendSrcOnLocationZe
     Structure("S", Vector{
                        Member("a", ty.vec4<f32>(),
                               Vector{
-                                  Location(Source{{12, 34}}, 0_a),
+                                  Location(Source{{45, 56}}, 0_a),
                               }),
-                       Member("b", ty.vec4<f32>(),
-                              Vector{Location(0_a), BlendSrc(Source{{56, 78}}, 1_a)}),
+                       Member(Source{{12, 34}}, "b", ty.vec4<f32>(),
+                              Vector{Location(0_a), BlendSrc(Source{{67, 78}}, 1_a)}),
                    });
-
-    EXPECT_TRUE(r()->Resolve());
-}
-
-TEST_F(DualSourceBlendingExtensionTests,
-       MixedBlendSrcAndNonBlendSrcOnLocationZero_StructUsedInEntryPoint) {
-    // struct S {
-    //   @location(0) a : vec4<f32>,
-    //   @location(0) @blend_src(1) b : vec4<f32>,
-    // };
-    // fn F() -> S { return S(); }
-    Structure("S", Vector{
-                       Member("a", ty.vec4<f32>(),
-                              Vector{
-                                  Location(Source{{12, 34}}, 0_a),
-                              }),
-                       Member("b", ty.vec4<f32>(),
-                              Vector{Location(0_a), BlendSrc(Source{{56, 78}}, 1_a)}),
-                   });
-    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
-         Vector{Stage(ast::PipelineStage::kFragment)});
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        R"(12:34 error: use of '@blend_src' requires all the output '@location' attributes of the entry point to be paired with a '@blend_src' attribute
-56:78 note: use of '@blend_src' here
-note: while analyzing entry point 'F')");
+    EXPECT_EQ(r()->error(),
+              "12:34 error: '@blend_src' is used on one member while another member doesn't use "
+              "'@blend_src'");
 }
 
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcTypes_DifferentWidth) {
@@ -210,12 +239,10 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcTypes_DifferentWidth) {
                   Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
                   Member("b", ty.vec2<f32>(), Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 1_a)}),
               });
-    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
-         Vector{Stage(ast::PipelineStage::kFragment)});
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(1:2 error: Use of '@blend_src' requires all outputs have same type
-note: while analyzing entry point 'F')");
+    EXPECT_EQ(r()->error(),
+              R"(1:2 error: Use of '@blend_src' requires all outputs have same type)");
 }
 
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcTypes_DifferentElementType) {
@@ -229,12 +256,10 @@ TEST_F(DualSourceBlendingExtensionTests, BlendSrcTypes_DifferentElementType) {
                   Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
                   Member("b", ty.vec4<i32>(), Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 1_a)}),
               });
-    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
-         Vector{Stage(ast::PipelineStage::kFragment)});
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(1:2 error: Use of '@blend_src' requires all outputs have same type
-note: while analyzing entry point 'F')");
+    EXPECT_EQ(r()->error(),
+              R"(1:2 error: Use of '@blend_src' requires all outputs have same type)");
 }
 
 TEST_F(DualSourceBlendingExtensionTests, BlendSrcAsFragmentInput) {
@@ -268,66 +293,6 @@ TEST_F(DualSourceBlendingExtensionTest, BlendSrcOnNonStructFragmentOutput) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), R"(1:2 error: '@blend_src' is not valid for entry point return types)");
 }
-
-class DualSourceBlendingExtensionTestWithParams : public ResolverTestWithParam<int> {
-  public:
-    DualSourceBlendingExtensionTestWithParams() { Enable(wgsl::Extension::kDualSourceBlending); }
-};
-
-// Rendering to multiple render targets while using dual source blending should fail.
-TEST_P(DualSourceBlendingExtensionTestWithParams,
-       MultipleRenderTargetsNotAllowed_BlendSrcAndNoBlendSrc) {
-    // struct S {
-    //   @location(0) @blend_src(0) a : vec4<f32>,
-    //   @location(0) @blend_src(1) b : vec4<f32>,
-    //   @location(n)           c : vec4<f32>,
-    // };
-    // fn F() -> S { return S(); }
-    Structure("S",
-              Vector{
-                  Member("a", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
-                  Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(Source{{1, 2}}, 1_a)}),
-                  Member("c", ty.vec4<f32>(), Vector{Location(Source{{3, 4}}, AInt(GetParam()))}),
-              });
-    Func("F", Empty, ty("S"), Vector{Return(Call("S"))},
-         Vector{Stage(ast::PipelineStage::kFragment)});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        R"(3:4 error: use of '@blend_src' requires all the output '@location' attributes of the entry point to be paired with a '@blend_src' attribute
-1:2 note: use of '@blend_src' here
-note: while analyzing entry point 'F')");
-}
-
-TEST_P(DualSourceBlendingExtensionTestWithParams,
-       MultipleRenderTargetsNotAllowed_NonZeroLocationThenBlendSrc) {
-    // struct S {
-    //   @location(n)           a : vec4<f32>,
-    //   @location(0) @blend_src(0) b : vec4<f32>,
-    //   @location(0) @blend_src(1) c : vec4<f32>,
-    // };
-    // fn F() -> S { return S(); }
-    Structure("S",
-              Vector{
-                  Member("a", ty.vec4<f32>(), Vector{Location(Source{{1, 2}}, AInt(GetParam()))}),
-                  Member("b", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(0_a)}),
-                  Member("c", ty.vec4<f32>(), Vector{Location(0_a), BlendSrc(Source{{3, 4}}, 1_a)}),
-              });
-    Func(Source{{5, 6}}, "F", Empty, ty("S"), Vector{Return(Call("S"))},
-         Vector{Stage(ast::PipelineStage::kFragment)});
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        R"(1:2 error: use of '@blend_src' requires all the output '@location' attributes of the entry point to be paired with a '@blend_src' attribute
-note: use of '@blend_src' here
-5:6 note: while analyzing entry point 'F')");
-}
-
-INSTANTIATE_TEST_SUITE_P(DualSourceBlendingExtensionTests,
-                         DualSourceBlendingExtensionTestWithParams,
-                         testing::Values(1, 2, 3, 4, 5, 6, 7));
 
 }  // namespace
 }  // namespace tint::resolver
