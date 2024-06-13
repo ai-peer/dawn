@@ -216,6 +216,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2db315a2_b0fdf0e5",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-13T17:37:02Z",
+      "side": 1,
+      "message": "The problem is that specifying `FLIP_DISCARD` lets the OS write to textures in the swap chain behind your back. Dawn may lazy clear, sure, but if the process is p00ed, the attacker can do whatever they want. \n\nFWIW, Chromium uses dirty rects of Present1 to minimize composition costs and you can\u0027t use that with `FLIP_DISCARD`. But it also makes swap chains itself so doesn\u0027t go down this code path, at least for now.",
+      "parentUuid": "b4678ef2_248aa41c",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cafb75_6d7e2ff5",
         "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
         "patchSetId": 1
@@ -285,6 +309,30 @@
       "side": 1,
       "message": "It\u0027s a bit roundabout in the code but yes the objects are all freed immediately if the swapchain creation fails because the whole object gets destroyed.",
       "parentUuid": "6b44da9f_510c97d1",
+      "range": {
+        "startLine": 241,
+        "startChar": 61,
+        "endLine": 241,
+        "endChar": 81
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b843e00a_f753b6f3",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-13T17:37:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9fda45b1_36ce3759",
       "range": {
         "startLine": 241,
         "startChar": 61,
