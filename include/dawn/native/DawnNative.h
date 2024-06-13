@@ -95,7 +95,7 @@ class DAWN_NATIVE_EXPORT Adapter {
     wgpu::Status GetProperties(WGPUAdapterProperties* properties) const;
 
     std::vector<const char*> GetSupportedFeatures() const;
-    wgpu::ConvertibleStatus GetLimits(WGPUSupportedLimits* limits) const;
+    wgpu::Status GetLimits(WGPUSupportedLimits* limits) const;
 
     void SetUseTieredLimits(bool useTieredLimits);
 
