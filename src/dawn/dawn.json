@@ -217,7 +217,8 @@
             {"name": "backend type", "type": "backend type"},
             {"name": "adapter type", "type": "adapter type"},
             {"name": "vendor ID", "type": "uint32_t"},
-            {"name": "device ID", "type": "uint32_t"}
+            {"name": "device ID", "type": "uint32_t"},
+            {"name": "compatibility mode", "type": "bool", "default": "false", "tags": ["dawn", "emscripten"]}
         ]
     },
     "adapter properties": {
@@ -2442,6 +2443,9 @@
             {"value": 1036, "name": "multi planar format nv24", "tags": ["dawn"]},
             {"value": 1037, "name": "multi planar format p210", "tags": ["dawn"]},
             {"value": 1038, "name": "multi planar format p410", "tags": ["dawn"]},
+            {"value": 1039, "name": "adapter info memory heaps", "tags": ["dawn"]},
+            {"value": 1040, "name": "adapter info D3D", "tags": ["dawn"]},
+            {"value": 1041, "name": "adapter info vk", "tags": ["dawn"]},
 
             {"value": 1100, "name": "shared texture memory vk dedicated allocation", "tags": ["dawn", "native"]},
             {"value": 1101, "name": "shared texture memory a hardware buffer", "tags": ["dawn", "native"]},
@@ -3961,6 +3965,10 @@
             {"value": 1025, "name": "drm format capabilities", "tags": ["dawn"]},
             {"value": 1026, "name": "shader module compilation options", "tags": ["dawn"]},
             {"value": 1027, "name": "color target state expand resolve texture dawn", "tags": ["dawn"]},
+            {"value": 1028, "name": "dawn adapter info power preference", "tags": ["dawn", "native"]},
+            {"value": 1029, "name": "adapter info memory heaps", "tags": ["dawn"]},
+            {"value": 1030, "name": "adapter info D3D", "tags": ["dawn"]},
+            {"value": 1031, "name": "adapter info vk", "tags": ["dawn"]},
 
             {"value": 1101, "name": "shared texture memory vk dedicated allocation descriptor", "tags": ["dawn", "native"]},
             {"value": 1102, "name": "shared texture memory a hardware buffer descriptor", "tags": ["dawn", "native"]},
@@ -4475,6 +4483,15 @@
             {"name": "use internal usages", "type": "bool", "default": "false"}
         ]
     },
+    "dawn adapter info power preference": {
+        "category": "structure",
+        "chained": "out",
+        "chain roots": ["adapter info"],
+        "tags": ["dawn"],
+        "members": [
+            {"name": "power preference", "type": "power preference", "default": "undefined"}
+        ]
+    },
     "dawn adapter properties power preference": {
         "category": "structure",
         "chained": "out",
@@ -4503,6 +4520,34 @@
             {"name": "properties", "type": "heap property"},
             {"name": "size", "type": "uint64_t"}
         ]
+    },
+    "adapter info memory heaps": {
+        "category": "structure",
+        "chained": "out",
+        "chain roots": ["adapter info"],
+        "tags": ["dawn"],
+        "members": [
+            {"name": "heap count", "type": "size_t"},
+            {"name": "heap info", "type": "memory heap info", "annotation": "const*", "length": "heap count"}
+        ]
+    },
+    "adapter info D3D": {
+        "category": "structure",
+        "chained": "out",
+        "chain roots": ["adapter info"],
+        "tags": ["dawn"],
+        "members": [
+            {"name": "shader model", "type": "uint32_t"}
+        ]
+    },
+    "adapter info vk": {
+      "category": "structure",
+      "chained": "out",
+      "chain roots": ["adapter info"],
+      "tags": ["dawn"],
+      "members": [
+          {"name": "driver version", "type": "uint32_t"}
+      ]
     },
     "adapter properties memory heaps": {
         "category": "structure",

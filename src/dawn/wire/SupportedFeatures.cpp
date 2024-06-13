@@ -101,6 +101,9 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_Unorm16TextureFormats:
         case WGPUFeatureName_Snorm16TextureFormats:
         case WGPUFeatureName_FramebufferFetch:
+        case WGPUFeatureName_AdapterInfoMemoryHeaps:
+        case WGPUFeatureName_AdapterInfoD3D:
+        case WGPUFeatureName_AdapterInfoVk:
         case WGPUFeatureName_AdapterPropertiesMemoryHeaps:
         case WGPUFeatureName_AdapterPropertiesD3D:
         case WGPUFeatureName_AdapterPropertiesVk:

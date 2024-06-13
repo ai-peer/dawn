@@ -651,6 +651,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
 // TODO(dawn:2249): Enable on iOS. Some XCode or SDK versions seem to not match the docs.
 #if DAWN_PLATFORM_IS(MACOS)
     if (@available(macOS 10.12, iOS 16.0, *)) {
+        EnableFeature(Feature::AdapterInfoMemoryHeaps);
         EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
     }
 #endif

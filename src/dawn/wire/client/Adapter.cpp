@@ -407,6 +407,11 @@ DAWN_WIRE_EXPORT void wgpuDawnWireClientAdapterInfoFreeMembers(WGPUAdapterInfo i
     delete[] info.vendor;
 }
 
+DAWN_WIRE_EXPORT void wgpuDawnWireClientAdapterInfoMemoryHeapsFreeMembers(
+    WGPUAdapterInfoMemoryHeaps memoryHeapInfo) {
+    delete[] memoryHeapInfo.heapInfo;
+}
+
 DAWN_WIRE_EXPORT void wgpuDawnWireClientAdapterPropertiesFreeMembers(
     WGPUAdapterProperties properties) {
     // This single delete is enough because everything is a single allocation.

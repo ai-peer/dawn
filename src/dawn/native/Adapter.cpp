@@ -120,7 +120,43 @@ wgpu::Status AdapterBase::APIGetLimits(SupportedLimits* limits) const {
 }
 
 wgpu::Status AdapterBase::APIGetInfo(AdapterInfo* info) const {
+    dawn::InfoLog() << "APIGetInfo";
+
     DAWN_ASSERT(info != nullptr);
+    UnpackedPtr<AdapterInfo> unpacked;
+    if (mInstance->ConsumedError(ValidateAndUnpack(info), &unpacked)) {
+        return wgpu::Status::Error;
+    }
+
+    bool hadError = false;
+    if (unpacked.Get<AdapterInfoMemoryHeaps>() != nullptr &&
+        !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterInfoMemoryHeaps)) {
+        hadError |= mInstance->ConsumedError(
+            DAWN_VALIDATION_ERROR("Feature AdapterInfoMemoryHeaps is not available."));
+    }
+    if (unpacked.Get<AdapterInfoD3D>() != nullptr &&
+        !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterInfoD3D)) {
+        hadError |= mInstance->ConsumedError(
+            DAWN_VALIDATION_ERROR("Feature AdapterInfoD3D is not available."));
+    }
+    if (unpacked.Get<AdapterInfoVk>() != nullptr &&
+        !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterInfoVk)) {
+        hadError |= mInstance->ConsumedError(
+            DAWN_VALIDATION_ERROR("Feature AdapterInfoVk is not available."));
+    }
+    if (hadError) {
+        return wgpu::Status::Error;
+    }
+
+    if (auto* powerPreferenceDesc = unpacked.Get<DawnAdapterInfoPowerPreference>()) {
+        powerPreferenceDesc->powerPreference = mPowerPreference;
+    }
+
+    AdapterProperties properties = {};
+    properties.nextInChain = info->nextInChain;
+    if (APIGetProperties(&properties) == wgpu::Status::Error) {
+        return wgpu::Status::Error;
+    };
 
     // Get lengths, with null terminators.
     size_t vendorCLen = mPhysicalDevice->GetVendorName().length() + 1;
@@ -151,6 +187,7 @@ wgpu::Status AdapterBase::APIGetInfo(AdapterInfo* info) const {
     info->adapterType = mPhysicalDevice->GetAdapterType();
     info->vendorID = mPhysicalDevice->GetVendorId();
     info->deviceID = mPhysicalDevice->GetDeviceId();
+    info->compatibilityMode = mFeatureLevel == FeatureLevel::Compatibility;
 
     return wgpu::Status::Success;
 }
@@ -225,6 +262,11 @@ wgpu::Status AdapterBase::APIGetProperties(AdapterProperties* properties) const 
 void APIAdapterInfoFreeMembers(WGPUAdapterInfo info) {
     // This single delete is enough because everything is a single allocation.
     delete[] info.vendor;
+}
+
+void APIAdapterInfoMemoryHeapsFreeMembers(
+    WGPUAdapterInfoMemoryHeaps memoryHeapInfo) {
+    delete[] memoryHeapInfo.heapInfo;
 }
 
 void APIAdapterPropertiesFreeMembers(WGPUAdapterProperties properties) {
