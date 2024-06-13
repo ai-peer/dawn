@@ -183,9 +183,9 @@ wgpu::Device CreateCppDawnDevice() {
         return wgpu::Device();
     }
 
-    wgpu::AdapterProperties properties;
-    adapter.GetProperties(&properties);
-    dawn::InfoLog() << "Using adapter \"" << properties.name << "\"";
+    wgpu::AdapterInfo info;
+    adapter.GetInfo(&info);
+    dawn::InfoLog() << "Using adapter \"" << info.device << "\"";
 
     // Synchronously request the device.
     wgpu::DeviceDescriptor deviceDesc;

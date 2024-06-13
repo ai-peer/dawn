@@ -92,11 +92,6 @@ class DAWN_NATIVE_EXPORT Adapter {
     wgpu::Status GetInfo(wgpu::AdapterInfo* info) const;
     wgpu::Status GetInfo(WGPUAdapterInfo* info) const;
 
-    // Essentially webgpu.h's wgpuAdapterGetProperties while we don't have WGPUAdapter in
-    // dawn.json
-    wgpu::Status GetProperties(wgpu::AdapterProperties* properties) const;
-    wgpu::Status GetProperties(WGPUAdapterProperties* properties) const;
-
     std::vector<const char*> GetSupportedFeatures() const;
     wgpu::ConvertibleStatus GetLimits(WGPUSupportedLimits* limits) const;
 
