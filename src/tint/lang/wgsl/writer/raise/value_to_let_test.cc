@@ -54,7 +54,7 @@ TEST_F(WgslWriter_ValueToLetTest, Empty) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenStoreVar_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         b.Store(var, 2_i);
@@ -832,7 +832,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenCallVoidFn_ThenUseLoad) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         b.Call(ty.void_(), fn_a);
@@ -887,7 +887,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenCallUnusedi32Fn_ThenUseLoad) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         b.Call(ty.i32(), fn_a);
@@ -942,7 +942,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenCalli32Fn_ThenUseLoadBeforeCall) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* call = b.Call(ty.i32(), fn_a);
@@ -998,7 +998,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenCalli32Fn_ThenUseCallBeforeLoad) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* call = b.Call(ty.i32(), fn_a);
@@ -1059,7 +1059,7 @@ TEST_F(WgslWriter_ValueToLetTest, Access_ArrayOfArrayOfArray_XYZ) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* arr = b.Var<function, array<array<array<i32, 3>, 4>, 5>>();
+        auto* arr = b.Var(function, ty.array<array<array<i32, 3>, 4>, 5>());
         auto* x = b.Call(ty.i32(), fn_a, 1_i);
         auto* y = b.Call(ty.i32(), fn_a, 2_i);
         auto* z = b.Call(ty.i32(), fn_a, 3_i);
@@ -1119,7 +1119,7 @@ TEST_F(WgslWriter_ValueToLetTest, Access_ArrayOfArrayOfArray_YXZ) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* arr = b.Var<function, array<array<array<i32, 3>, 4>, 5>>();
+        auto* arr = b.Var(function, ty.array<array<array<i32, 3>, 4>, 5>());
         auto* y = b.Call(ty.i32(), fn_a, 2_i);
         auto* x = b.Call(ty.i32(), fn_a, 1_i);
         auto* z = b.Call(ty.i32(), fn_a, 3_i);
@@ -1180,7 +1180,7 @@ TEST_F(WgslWriter_ValueToLetTest, Access_ArrayOfArrayOfArray_ZXY) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* arr = b.Var<function, array<array<array<i32, 3>, 4>, 5>>();
+        auto* arr = b.Var(function, ty.array<array<array<i32, 3>, 4>, 5>());
         auto* z = b.Call(ty.i32(), fn_a, 3_i);
         auto* x = b.Call(ty.i32(), fn_a, 1_i);
         auto* y = b.Call(ty.i32(), fn_a, 2_i);
@@ -1241,7 +1241,7 @@ TEST_F(WgslWriter_ValueToLetTest, Access_ArrayOfArrayOfArray_ZYX) {
 
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* arr = b.Var<function, array<array<array<i32, 3>, 4>, 5>>();
+        auto* arr = b.Var(function, ty.array<array<array<i32, 3>, 4>, 5>());
         auto* z = b.Call(ty.i32(), fn_a, 3_i);
         auto* y = b.Call(ty.i32(), fn_a, 2_i);
         auto* x = b.Call(ty.i32(), fn_a, 1_i);
@@ -1570,7 +1570,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideIf) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideIf) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         var->SetInitializer(b.Constant(1_i));
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Add(ty.i32(), v_1, 2_i);
@@ -1666,7 +1666,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedUsedByIfCondition) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedUsedByIfCondition) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         var->SetInitializer(b.Constant(1_i));
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Equal(ty.bool_(), v_1, 2_i);
@@ -1717,7 +1717,7 @@ TEST_F(WgslWriter_ValueToLetTest, SequencedUsedByIfCondition) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInIf_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* if_ = b.If(true);
@@ -1809,7 +1809,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideSwitch) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideSwitch) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         var->SetInitializer(b.Constant(1_i));
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Add(ty.i32(), v_1, 2_i);
@@ -1907,7 +1907,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedUsedBySwitchCondition) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedUsedBySwitchCondition) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         var->SetInitializer(b.Constant(1_i));
         auto* v_1 = b.Load(var);
         auto* switch_ = b.Switch(v_1);
@@ -1956,7 +1956,7 @@ TEST_F(WgslWriter_ValueToLetTest, SequencedUsedBySwitchCondition) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInSwitch_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* switch_ = b.Switch(1_i);
@@ -2016,7 +2016,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInSwitch_ThenUseLoad) {
 TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideLoopInitializer) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         auto* v = b.Add(ty.i32(), 1_i, 2_i);
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] {
@@ -2058,7 +2058,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideLoopInitializer) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopInitializer) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Add(ty.i32(), v_1, 2_i);
         auto* loop = b.Loop();
@@ -2121,7 +2121,7 @@ TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopInitializer) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInLoopInitializer_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* loop = b.Loop();
@@ -2216,7 +2216,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideLoopBody) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopBody) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Add(ty.i32(), v_1, 2_i);
         auto* loop = b.Loop();
@@ -2267,7 +2267,7 @@ TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopBody) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInLoopBody_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* loop = b.Loop();
@@ -2360,7 +2360,7 @@ TEST_F(WgslWriter_ValueToLetTest, UnsequencedOutsideLoopContinuing) {
 TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopContinuing) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         auto* v_1 = b.Load(var);
         auto* v_2 = b.Add(ty.i32(), v_1, 2_i);
         auto* loop = b.Loop();
@@ -2420,7 +2420,7 @@ TEST_F(WgslWriter_ValueToLetTest, SequencedOutsideLoopContinuing) {
 TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInLoopContinuing_ThenUseLoad) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* load = b.Load(var);
         auto* loop = b.Loop();
@@ -2483,7 +2483,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVar_ThenWriteToVarInLoopContinuing_ThenUse
 TEST_F(WgslWriter_ValueToLetTest, LoadVarInLoopInitializer_ThenReadAndWriteToVarInLoopBody) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] {
@@ -2550,7 +2550,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVarInLoopInitializer_ThenReadAndWriteToVar
 TEST_F(WgslWriter_ValueToLetTest, LoadVarInLoopInitializer_ThenReadAndWriteToVarInLoopContinuing) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] {
@@ -2624,7 +2624,7 @@ TEST_F(WgslWriter_ValueToLetTest, LoadVarInLoopInitializer_ThenReadAndWriteToVar
 TEST_F(WgslWriter_ValueToLetTest, LoadVarInLoopBody_ThenReadAndWriteToVarInLoopContinuing) {
     auto* fn = b.Function("f", ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* var = b.Var<function, i32>();
+        auto* var = b.Var(function, ty.i32());
         b.Store(var, 1_i);
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {

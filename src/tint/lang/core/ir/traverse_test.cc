@@ -44,7 +44,7 @@ TEST_F(IR_TraverseTest, Blocks) {
 
     auto fn = b.Function("f", ty.void_());
     b.Append(fn->Block(), [&] {
-        expect.Push(b.Var<function, i32>());
+        expect.Push(b.Var(function, ty.i32()));
 
         auto* if_ = b.If(true);
         expect.Push(if_);
@@ -72,12 +72,12 @@ TEST_F(IR_TraverseTest, Blocks) {
         expect.Push(switch_);
 
         auto* case_0 = b.Case(switch_, {b.Constant(0_i)});
-        b.Append(case_0, [&] { expect.Push(b.Var<function, i32>()); });
+        b.Append(case_0, [&] { expect.Push(b.Var(function, ty.i32())); });
 
         auto* case_1 = b.Case(switch_, {b.Constant(1_i)});
-        b.Append(case_1, [&] { expect.Push(b.Var<function, i32>()); });
+        b.Append(case_1, [&] { expect.Push(b.Var(function, ty.i32())); });
 
-        expect.Push(b.Var<function, i32>());
+        expect.Push(b.Var(function, ty.i32()));
     });
 
     Vector<Instruction*, 8> got;
@@ -91,7 +91,7 @@ TEST_F(IR_TraverseTest, Filtered) {
 
     auto fn = b.Function("f", ty.void_());
     b.Append(fn->Block(), [&] {
-        b.Var<function, i32>();
+        b.Var(function, ty.i32());
 
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] {
@@ -114,12 +114,12 @@ TEST_F(IR_TraverseTest, Filtered) {
         auto* switch_ = b.Switch(1_i);
 
         auto* case_0 = b.Case(switch_, {b.Constant(0_i)});
-        b.Append(case_0, [&] { b.Var<function, i32>(); });
+        b.Append(case_0, [&] { b.Var(function, ty.i32()); });
 
         auto* case_1 = b.Case(switch_, {b.Constant(1_i)});
-        b.Append(case_1, [&] { b.Var<function, i32>(); });
+        b.Append(case_1, [&] { b.Var(function, ty.i32()); });
 
-        b.Var<function, i32>();
+        b.Var(function, ty.i32());
     });
 
     Vector<ExitIf*, 8> got;

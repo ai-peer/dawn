@@ -123,7 +123,7 @@ $B1: {  # root
 TEST_F(WgslWriter_PtrToRefTest, LoadVar) {
     auto fn = b.Function(ty.i32());
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var<function, i32>();
+        auto* v = b.Var(function, ty.i32());
         b.Return(fn, b.Load(v));
     });
 
@@ -156,7 +156,7 @@ TEST_F(WgslWriter_PtrToRefTest, LoadVar) {
 TEST_F(WgslWriter_PtrToRefTest, StoreVar) {
     auto fn = b.Function(ty.void_());
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var<function, i32>();
+        auto* v = b.Var(function, ty.i32());
         b.Store(v, 42_i);
         b.Return(fn);
     });
@@ -258,7 +258,7 @@ TEST_F(WgslWriter_PtrToRefTest, VarUsedAsPtrArg) {
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
     auto fn_b = b.Function(ty.void_());
     b.Append(fn_b->Block(), [&] {
-        auto* v = b.Var<function, i32>();
+        auto* v = b.Var(function, ty.i32());
         b.Call(fn_a, v);
         b.Return(fn_b);
     });

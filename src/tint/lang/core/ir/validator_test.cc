@@ -1617,7 +1617,7 @@ TEST_F(IR_ValidatorTest, Var_Init_WrongType) {
     auto* f = b.Function("my_func", ty.void_());
 
     b.Append(f->Block(), [&] {
-        auto* v = b.Var<function, f32>();
+        auto* v = b.Var(function, ty.f32());
         v->SetInitializer(b.Constant(1_i));
         b.Return(f);
     });
