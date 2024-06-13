@@ -33,6 +33,47 @@
       "message": "Looks good to me, and thanks!\n\nI\u0027ll leave it to Austin or Corentin to approve.\nAre there concerns about tests taking too long to run?   This increases the number of permutations by 50%",
       "revId": "961fd7a5269d69de7f6838678100229113720d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e80665a_75ae6675",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T17:14:35Z",
+      "side": 1,
+      "message": "It looks like we\u0027ve added a minute to the test time of dawn_perf_tests. It seems reasonable. I think we can go ahead and do something like shrink the matrix size if there is a capacity problem.",
+      "parentUuid": "31180777_39cb0c46",
+      "revId": "961fd7a5269d69de7f6838678100229113720d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae3fd1bc_f4983176",
+        "filename": "src/dawn/tests/perf_tests/MatrixVectorMultiplyPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T17:14:35Z",
+      "side": 1,
+      "message": "note: this could be a parallel reduction:\n(untested, but something like)\n\n```\nfor (var stride \u003d wg_size \u003e\u003e 1; stride \u003e 0; stride \u003d stride \u003e\u003e 1) {\n  workgroupBarrier();\n  if (local_id.x \u003c i) {\n    sum \u003d workgroup_sum[i] + workgroup_sum[i + stride];\n    workgroup_sum[i] \u003d sum;\n  }\n}\nif (local_id.x \u003d\u003d 0) {\n  writeResult\n}\n```\n\nWe should of course - test that this is actually faster. I believe it should be as it allows for more parallelism, at the cost of some extra stores to shared memory.\n\nIt could be made even faster with subgroupAdd. Each subgroup can perform the subgroupAdd of the `sum` variable and write that to shared memory. and then, sum up the results in shared memory.\nTint doesn\u0027t have subgroupAdd yet though (just fyi)",
+      "range": {
+        "startLine": 422,
+        "startChar": 2,
+        "endLine": 427,
+        "endChar": 3
+      },
+      "revId": "961fd7a5269d69de7f6838678100229113720d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
