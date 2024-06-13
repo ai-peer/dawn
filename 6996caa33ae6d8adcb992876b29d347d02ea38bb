@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ad1cd4e_0aa902f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-13T16:49:29Z",
+      "side": 1,
+      "message": "Dan, PTAL. Thanks!\n\n(Can\u0027t review it myself because I tweaked the expectations.)",
+      "revId": "6996caa33ae6d8adcb992876b29d347d02ea38bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
