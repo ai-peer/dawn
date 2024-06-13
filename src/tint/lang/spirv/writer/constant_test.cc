@@ -36,8 +36,8 @@ using namespace tint::core::fluent_types;     // NOLINT
 
 TEST_F(SpirvWriterTest, Constant_Bool) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", true);
-        b.Var<private_, read_write>("v", false);
+        b.Var("v", private_, read_write, true);
+        b.Var("v", private_, read_write, false);
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%true = OpConstantTrue %bool");
@@ -46,8 +46,8 @@ TEST_F(SpirvWriterTest, Constant_Bool) {
 
 TEST_F(SpirvWriterTest, Constant_I32) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", i32(42));
-        b.Var<private_, read_write>("v", i32(-1));
+        b.Var("v", private_, read_write, i32(42));
+        b.Var("v", private_, read_write, i32(-1));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%int_42 = OpConstant %int 42");
@@ -56,8 +56,8 @@ TEST_F(SpirvWriterTest, Constant_I32) {
 
 TEST_F(SpirvWriterTest, Constant_U32) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", u32(42));
-        b.Var<private_, read_write>("v", u32(4000000000));
+        b.Var("v", private_, read_write, u32(42));
+        b.Var("v", private_, read_write, u32(4000000000));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%uint_42 = OpConstant %uint 42");
@@ -66,8 +66,8 @@ TEST_F(SpirvWriterTest, Constant_U32) {
 
 TEST_F(SpirvWriterTest, Constant_F32) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", f32(42));
-        b.Var<private_, read_write>("v", f32(-1));
+        b.Var("v", private_, read_write, f32(42));
+        b.Var("v", private_, read_write, f32(-1));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%float_42 = OpConstant %float 42");
@@ -76,8 +76,8 @@ TEST_F(SpirvWriterTest, Constant_F32) {
 
 TEST_F(SpirvWriterTest, Constant_F16) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", f16(42));
-        b.Var<private_, read_write>("v", f16(-1));
+        b.Var("v", private_, read_write, f16(42));
+        b.Var("v", private_, read_write, f16(-1));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%half_0x1_5p_5 = OpConstant %half 0x1.5p+5");
@@ -86,7 +86,7 @@ TEST_F(SpirvWriterTest, Constant_F16) {
 
 TEST_F(SpirvWriterTest, Constant_Vec4Bool) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", b.Composite<vec4<bool>>(true, false, false, true));
+        b.Var("v", private_, read_write, b.Composite<vec4<bool>>(true, false, false, true));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %v4bool %true %false %false %true");
@@ -94,14 +94,14 @@ TEST_F(SpirvWriterTest, Constant_Vec4Bool) {
 
 TEST_F(SpirvWriterTest, Constant_Vec2i) {
     b.Append(b.ir.root_block,
-             [&] { b.Var<private_, read_write>("v", b.Composite<vec2<i32>>(42_i, -1_i)); });
+             [&] { b.Var("v", private_, read_write, b.Composite<vec2<i32>>(42_i, -1_i)); });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %v2int %int_42 %int_n1");
 }
 
 TEST_F(SpirvWriterTest, Constant_Vec3u) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", b.Composite<vec3<u32>>(42_u, 0_u, 4000000000_u));
+        b.Var("v", private_, read_write, b.Composite<vec3<u32>>(42_u, 0_u, 4000000000_u));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %v3uint %uint_42 %uint_0 %uint_4000000000");
@@ -109,7 +109,7 @@ TEST_F(SpirvWriterTest, Constant_Vec3u) {
 
 TEST_F(SpirvWriterTest, Constant_Vec4f) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", b.Composite<vec4<f32>>(42_f, 0_f, 0.25_f, -1_f));
+        b.Var("v", private_, read_write, b.Composite<vec4<f32>>(42_f, 0_f, 0.25_f, -1_f));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %v4float %float_42 %float_0 %float_0_25 %float_n1");
@@ -117,17 +117,17 @@ TEST_F(SpirvWriterTest, Constant_Vec4f) {
 
 TEST_F(SpirvWriterTest, Constant_Vec2h) {
     b.Append(b.ir.root_block,
-             [&] { b.Var<private_, read_write>("v", b.Composite<vec2<f16>>(42_h, 0.25_h)); });
+             [&] { b.Var("v", private_, read_write, b.Composite<vec2<f16>>(42_h, 0.25_h)); });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %v2half %half_0x1_5p_5 %half_0x1pn2");
 }
 
 TEST_F(SpirvWriterTest, Constant_Mat2x3f) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v",
-                                    b.Composite<mat2x3<f32>>(  //
-                                        b.Composite<vec3<f32>>(42_f, -1_f, 0.25_f),
-                                        b.Composite<vec3<f32>>(-42_f, 0_f, -0.25_f)));
+        b.Var("v", private_, read_write,
+              b.Composite<mat2x3<f32>>(  //
+                  b.Composite<vec3<f32>>(42_f, -1_f, 0.25_f),
+                  b.Composite<vec3<f32>>(-42_f, 0_f, -0.25_f)));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(R"(
@@ -145,11 +145,12 @@ TEST_F(SpirvWriterTest, Constant_Mat2x3f) {
 
 TEST_F(SpirvWriterTest, Constant_Mat4x2h) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", b.Composite<mat4x2<f16>>(                 //
-                                             b.Composite<vec2<f16>>(42_h, -1_h),   //
-                                             b.Composite<vec2<f16>>(0_h, 0.25_h),  //
-                                             b.Composite<vec2<f16>>(-42_h, 1_h),   //
-                                             b.Composite<vec2<f16>>(0.5_h, f16(-0))));
+        b.Var("v", private_, read_write,
+              b.Composite<mat4x2<f16>>(                 //
+                  b.Composite<vec2<f16>>(42_h, -1_h),   //
+                  b.Composite<vec2<f16>>(0_h, 0.25_h),  //
+                  b.Composite<vec2<f16>>(-42_h, 1_h),   //
+                  b.Composite<vec2<f16>>(0.5_h, f16(-0))));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(R"(
@@ -170,7 +171,7 @@ TEST_F(SpirvWriterTest, Constant_Mat4x2h) {
 
 TEST_F(SpirvWriterTest, Constant_Array_I32) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", b.Composite<array<i32, 4>>(1_i, 2_i, 3_i, 4_i));
+        b.Var("v", private_, read_write, b.Composite<array<i32, 4>>(1_i, 2_i, 3_i, 4_i));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %_arr_int_uint_4 %int_1 %int_2 %int_3 %int_4");
@@ -179,8 +180,8 @@ TEST_F(SpirvWriterTest, Constant_Array_I32) {
 TEST_F(SpirvWriterTest, Constant_Array_Array_I32) {
     b.Append(b.ir.root_block, [&] {
         auto* inner = b.Composite<array<i32, 4>>(1_i, 2_i, 3_i, 4_i);
-        b.Var<private_, read_write>(
-            "v", b.Composite<array<array<i32, 4>, 4>>(inner, inner, inner, inner));
+        b.Var("v", private_, read_write,
+              b.Composite<array<array<i32, 4>, 4>>(inner, inner, inner, inner));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(R"(
@@ -191,7 +192,7 @@ TEST_F(SpirvWriterTest, Constant_Array_Array_I32) {
 
 TEST_F(SpirvWriterTest, Constant_Array_LargeAllZero) {
     b.Append(b.ir.root_block,
-             [&] { b.Var<private_, read_write>("v", b.Zero(ty.array<i32, 65535>())); });
+             [&] { b.Var("v", private_, read_write, b.Zero(ty.array<i32, 65535>())); });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantNull %_arr_int_uint_65535");
 }
@@ -203,7 +204,7 @@ TEST_F(SpirvWriterTest, Constant_Struct) {
                                                                   {mod.symbols.New("b"), ty.u32()},
                                                                   {mod.symbols.New("c"), ty.f32()},
                                                               });
-        b.Var<private_, read_write>("v", b.Composite(str_ty, 1_i, 2_u, 3_f));
+        b.Var("v", private_, read_write, b.Composite(str_ty, 1_i, 2_u, 3_f));
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST(" = OpConstantComposite %MyStruct %int_1 %uint_2 %float_3");
@@ -212,9 +213,9 @@ TEST_F(SpirvWriterTest, Constant_Struct) {
 // Test that we do not emit the same constant more than once.
 TEST_F(SpirvWriterTest, Constant_Deduplicate) {
     b.Append(b.ir.root_block, [&] {
-        b.Var<private_, read_write>("v", 42_i);
-        b.Var<private_, read_write>("v", 42_i);
-        b.Var<private_, read_write>("v", 42_i);
+        b.Var("v", private_, read_write, 42_i);
+        b.Var("v", private_, read_write, 42_i);
+        b.Var("v", private_, read_write, 42_i);
     });
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%int_42 = OpConstant %int 42");

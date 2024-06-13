@@ -129,8 +129,8 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, Private_WithInitializers) {
-    auto* var_a = b.Var<private_>("a", 42_i);
-    auto* var_b = b.Var<private_>("b", -1_i);
+    auto* var_a = b.Var("a", private_, 42_i);
+    auto* var_b = b.Var("b", private_, -1_i);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 

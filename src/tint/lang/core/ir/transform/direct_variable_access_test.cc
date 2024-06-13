@@ -63,7 +63,7 @@ namespace remove_uncalled {
 using IR_DirectVariableAccessTest_RemoveUncalled = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrUniform) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* u = b.Function("u", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<uniform, i32>());
@@ -102,7 +102,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrStorage) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* s = b.Function("s", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<storage, i32, read>());
@@ -141,7 +141,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrWorkgroup) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* w = b.Function("w", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<workgroup, i32>());
@@ -180,7 +180,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrPrivate_Disabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* f = b.Function("f", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<private_, i32>());
@@ -214,7 +214,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrPrivate_Enabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* f = b.Function("f", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<private_, i32>());
@@ -252,7 +252,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrFunction_Disabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* f = b.Function("f", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<function, i32>());
@@ -286,7 +286,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrFunction_Enabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir.root_block, [&] { b.Var("keep_me", private_, 42_i); });
 
     auto* f = b.Function("f", ty.i32());
     auto* p = b.FunctionParam("p", ty.ptr<function, i32>());
@@ -3911,7 +3911,7 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_LocalPtr) {
     b.Append(fn->Block(), [&] {
         auto* v = b.Var("v", function, ty.i32());
         auto* p = b.Let("p", v);
-        b.Var<function>("x", b.Load(p));
+        b.Var("x", function, b.Load(p));
         b.Return(fn);
     });
 

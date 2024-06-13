@@ -78,18 +78,18 @@ TEST_F(IRBinaryRoundtripTest, EmptyModule) {
 // Root block
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRBinaryRoundtripTest, RootBlock_Var_private_i32_Unnamed) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, i32>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.i32()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, RootBlock_Var_workgroup_f32_Named) {
-    b.Append(b.ir.root_block, [&] { b.Var<workgroup, f32>("WG"); });
+    b.Append(b.ir.root_block, [&] { b.Var("WG", workgroup, ty.f32()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, RootBlock_Var_storage_binding) {
     b.Append(b.ir.root_block, [&] {
-        auto* v = b.Var<storage, f32>();
+        auto* v = b.Var(storage, ty.f32());
         v->SetBindingPoint(10, 20);
     });
     RUN_TEST();
@@ -179,52 +179,52 @@ TEST_F(IRBinaryRoundtripTest, Fn_ReturnInvariant) {
 // Types
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRBinaryRoundtripTest, bool) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, bool>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_ ty.bool()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, i32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, i32>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.i32()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, u32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, u32>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.u32()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, f32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, f32>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.f32()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, f16) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, f16>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.f16()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, vec2_f32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, vec2<f32>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.vec2<f32>()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, vec3_i32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, vec3<i32>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.vec3<i32>()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, vec4_bool) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, vec4<bool>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.vec4<bool>()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, mat4x2_f32) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, vec4<mat4x2<f32>>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.vec4<mat4x2<f32>>()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, mat2x4_f16) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, vec4<mat2x4<f16>>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.vec4<mat2x4<f16>>()); });
     RUN_TEST();
 }
 
@@ -245,12 +245,12 @@ TEST_F(IRBinaryRoundtripTest, ptr_workgroup_i32_read) {
 }
 
 TEST_F(IRBinaryRoundtripTest, array_i32_4) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_, array<i32, 4>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(private_, ty.array<i32, 4>()); });
     RUN_TEST();
 }
 
 TEST_F(IRBinaryRoundtripTest, array_i32_runtime_sized) {
-    b.Append(b.ir.root_block, [&] { b.Var<storage, array<i32>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(storage, ty.array<i32>()); });
     RUN_TEST();
 }
 
@@ -295,7 +295,7 @@ TEST_F(IRBinaryRoundtripTest, StructMemberAttributes) {
 }
 
 TEST_F(IRBinaryRoundtripTest, atomic_i32) {
-    b.Append(b.ir.root_block, [&] { b.Var<storage, atomic<i32>>(); });
+    b.Append(b.ir.root_block, [&] { b.Var(storage, ty.atomic<i32>()); });
     RUN_TEST();
 }
 
@@ -458,7 +458,7 @@ TEST_F(IRBinaryRoundtripTest, Let) {
 TEST_F(IRBinaryRoundtripTest, Var) {
     auto* fn = b.Function("Function", ty.void_());
     b.Append(fn->Block(), [&] {
-        b.Var<function>("Var", b.Constant(42_i));
+        b.Var("Var", function >, b.Constant(42_i));
         b.Return(fn);
     });
     RUN_TEST();

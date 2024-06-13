@@ -221,7 +221,7 @@ struct State {
             auto* func = b.Function(builtin->Result(0)->Type());
             func->SetParams({ptr, cmp, val});
             b.Append(func->Block(), [&] {
-                auto* old_value = b.Var<function>("old_value", cmp)->Result(0);
+                auto* old_value = b.Var("old_value", function, cmp)->Result(0);
                 auto* order = ir.allocators.values.Create<msl::ir::MemoryOrder>(
                     b.ConstantValue(u32(std::memory_order_relaxed)));
                 auto* call = b.Call<msl::ir::BuiltinCall>(

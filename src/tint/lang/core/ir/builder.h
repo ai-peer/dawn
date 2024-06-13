@@ -1234,27 +1234,54 @@ class Builder {
     ir::Var* Var(std::string_view name, const core::type::MemoryView* type);
 
     /// Creates a new `var` declaration with a name and initializer value
-    /// @tparam SPACE the var's address space
-    /// @tparam ACCESS the var's access mode
     /// @param name the var name
+    /// @param space the var's address space
+    /// @param access the var's access mode
     /// @param init the var initializer
     /// @returns the instruction
     template <
-        core::AddressSpace SPACE = core::AddressSpace::kFunction,
-        core::Access ACCESS = core::Access::kReadWrite,
         typename VALUE = void,
         typename = std::enable_if_t<
             !traits::IsTypeOrDerived<std::remove_pointer_t<std::decay_t<VALUE>>, core::type::Type>>>
-    ir::Var* Var(std::string_view name, VALUE&& init) {
+    ir::Var* Var(std::string_view name,
+                 core::AddressSpace space,
+                 core::Access access,
+                 VALUE&& init) {
         auto* val = Value(std::forward<VALUE>(init));
         if (TINT_UNLIKELY(!val)) {
             TINT_ASSERT(val);
             return nullptr;
         }
-        auto* var = Var(name, ir.Types().ptr(SPACE, val->Type(), ACCESS));
+        auto* var = Var(name, ir.Types().ptr(space, val->Type(), access));
         var->SetInitializer(val);
         ir.SetName(var->Result(0), name);
         return var;
+    }
+
+    /// Creates a new `var` declaration with a name and initializer value
+    /// @param name the var name
+    /// @param space the var's address space
+    /// @param init the var initializer
+    /// @returns the instruction
+    template <
+        typename VALUE = void,
+        typename = std::enable_if_t<
+            !traits::IsTypeOrDerived<std::remove_pointer_t<std::decay_t<VALUE>>, core::type::Type>>>
+    ir::Var* Var(std::string_view name, core::AddressSpace space, VALUE&& init) {
+        return Var(name, space, core::Access::kReadWrite, std::forward<VALUE>(init));
+    }
+
+    /// Creates a new `var` declaration with a name and initializer value
+    /// @param name the var name
+    /// @param init the var initializer
+    /// @returns the instruction
+    template <
+        typename VALUE = void,
+        typename = std::enable_if_t<
+            !traits::IsTypeOrDerived<std::remove_pointer_t<std::decay_t<VALUE>>, core::type::Type>>>
+    ir::Var* Var(std::string_view name, VALUE&& init) {
+        return Var(name, core::AddressSpace::kFunction, core::Access::kReadWrite,
+                   std::forward<VALUE>(init));
     }
 
     /// Creates a new `var` declaration
