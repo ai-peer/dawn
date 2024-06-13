@@ -96,6 +96,9 @@ class Buffer : public BufferBase {
                                            size_t size,
                                            uint64_t destinationOffset) = 0;
 
+    virtual ID3D11Buffer* GetD3D11ConstantBuffer() const { return nullptr; }
+    virtual ID3D11Buffer* GetD3D11NonConstantBuffer() const { return nullptr; }
+
     class ScopedMap : public NonCopyable {
       public:
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
@@ -132,6 +135,7 @@ class Buffer : public BufferBase {
     void DestroyImpl() override;
 
     virtual MaybeError InitializeInternal() = 0;
+    virtual MaybeError ClearInitialResource(const ScopedCommandRecordingContext* commandContext);
 
     virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
     virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
@@ -163,8 +167,10 @@ class Buffer : public BufferBase {
 // Buffer that doesn't support mapping.
 class GPUOnlyBuffer final : public Buffer {
   public:
-    ID3D11Buffer* GetD3D11ConstantBuffer() const { return mD3d11ConstantBuffer.Get(); }
-    ID3D11Buffer* GetD3D11NonConstantBuffer() const { return mD3d11NonConstantBuffer.Get(); }
+    ID3D11Buffer* GetD3D11ConstantBuffer() const override { return mD3d11ConstantBuffer.Get(); }
+    ID3D11Buffer* GetD3D11NonConstantBuffer() const override {
+        return mD3d11NonConstantBuffer.Get();
+    }
 
     // Mark the mD3d11NonConstantBuffer is mutated by shaders, if mD3d11ConstantBuffer exists,
     // it will be synced with mD3d11NonConstantBuffer before binding it to the constant buffer slot.

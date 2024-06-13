@@ -137,6 +137,8 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
     return 1;
 }
 
+constexpr size_t kConstantBufferUpdateAlignment = 16;
+
 }  // namespace
 
 // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory, and
@@ -371,36 +373,55 @@ MaybeError Buffer::Initialize(bool mappedAtCreation,
     SetLabelImpl();
 
     if (!mappedAtCreation) {
-        if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
             if (commandContext) {
-                DAWN_TRY(ClearWholeBuffer(commandContext, 1u));
+                DAWN_TRY(ClearInitialResource(commandContext));
             } else {
                 auto tmpCommandContext =
                     ToBackend(GetDevice()->GetQueue())
                         ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
-                DAWN_TRY(ClearWholeBuffer(&tmpCommandContext, 1u));
+                DAWN_TRY(ClearInitialResource(&tmpCommandContext));
             }
-        }
+    }
 
-        // Initialize the padding bytes to zero.
-        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
-            if (paddingBytes > 0) {
-                uint32_t clearSize = paddingBytes;
-                uint64_t clearOffset = GetSize();
-                if (commandContext) {
-                    DAWN_TRY(ClearInternal(commandContext, 0, clearOffset, clearSize));
+    return {};
+}
 
-                } else {
-                    auto tmpCommandContext =
-                        ToBackend(GetDevice()->GetQueue())
-                            ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
-                    DAWN_TRY(ClearInternal(&tmpCommandContext, 0, clearOffset, clearSize));
-                }
+MaybeError Buffer::ClearInitialResource(const ScopedCommandRecordingContext* commandContext) {
+    if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+        DAWN_TRY(ClearWholeBuffer(commandContext, 1u));
+    }
+
+    // Initialize the padding bytes to zero.
+    if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+        uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+        if (paddingBytes > 0) {
+            uint32_t clearSize = paddingBytes;
+            uint64_t clearOffset = GetSize();
+            // 'UpdateSubresource1' is more preferable for updating uniform buffers, as it incurs no
+            // GPU stall.
+            if (GetUsage() & wgpu::BufferUsage::Uniform && !GetD3D11NonConstantBuffer()) {
+                clearSize = Align(paddingBytes, kConstantBufferUpdateAlignment);
+                clearOffset = GetAllocatedSize() - clearSize;
+
+                D3D11_BOX dstBox;
+                dstBox.left = clearOffset;
+                dstBox.top = 0;
+                dstBox.front = 0;
+                dstBox.right = GetAllocatedSize();
+                dstBox.bottom = 1;
+                dstBox.back = 1;
+
+                std::vector<uint8_t> clearData(clearSize, 0);
+                commandContext->UpdateSubresource1(GetD3D11ConstantBuffer(),
+                                                   /*DstSubresource=*/0, &dstBox, clearData.data(),
+                                                   /*SrcRowPitch=*/0,
+                                                   /*SrcDepthPitch=*/0,
+                                                   /*CopyFlags=*/D3D11_COPY_DISCARD);
+            } else {
+                DAWN_TRY(ClearInternal(commandContext, 0, clearOffset, clearSize));
             }
         }
     }
-
     return {};
 }
 
@@ -847,7 +868,6 @@ MaybeError GPUOnlyBuffer::WriteInternal(const ScopedCommandRecordingContext* com
     if (size >= GetSize() && offset == 0) {
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
-        constexpr size_t kConstantBufferUpdateAlignment = 16;
         size_t alignedSize = Align(size, kConstantBufferUpdateAlignment);
         DAWN_ASSERT(alignedSize <= GetAllocatedSize());
         std::unique_ptr<uint8_t[]> alignedBuffer;
