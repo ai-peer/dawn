@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4232efcb_d72f251c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T13:24:37Z",
+      "side": 1,
+      "message": "LGTM too! It makes it a clearer the various types of buffers and cases to handle.",
+      "revId": "663491a64ddb8457aae3af7979dc0c35bda6d3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c91d895_50d60671",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T13:24:37Z",
+      "side": 1,
+      "message": "These seem like they could be protected.",
+      "revId": "663491a64ddb8457aae3af7979dc0c35bda6d3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20136568_221b8a0f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T13:24:37Z",
+      "side": 1,
+      "message": "Optional: I wonder if there\u0027s a way to make the handling of all mapping operations be handling in subclasses and mark UNREACHABLE()/noop by default in the base class. Though it duplicates the handling of the notification for mapping.",
+      "revId": "663491a64ddb8457aae3af7979dc0c35bda6d3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

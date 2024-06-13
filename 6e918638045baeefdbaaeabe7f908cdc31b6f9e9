@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42fca7b7_f37dc736",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T13:24:37Z",
+      "side": 1,
+      "message": "Yes until C++23 it is UB in practice to memcpy 0 bytes.",
+      "parentUuid": "ae1a8d7b_54abd410",
+      "range": {
+        "startLine": 597,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 59
+      },
+      "revId": "6e918638045baeefdbaaeabe7f908cdc31b6f9e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86232797_37beba8f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 4
