@@ -155,6 +155,8 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
     return 1;
 }
 
+constexpr size_t kConstantBufferUpdateAlignment = 16;
+
 }  // namespace
 
 // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory, and
@@ -237,6 +239,43 @@ MaybeError Buffer::Initialize(bool mappedAtCreation,
             if (paddingBytes > 0) {
                 uint32_t clearSize = paddingBytes;
                 uint64_t clearOffset = GetSize();
+                if (GetUsage() & wgpu::BufferUsage::Uniform) {
+                    if (!IsAligned(clearOffset, kConstantBufferUpdateAlignment)) {
+                        clearOffset = Align(clearOffset, kConstantBufferUpdateAlignment) -
+                                      kConstantBufferUpdateAlignment;
+                    }
+                    clearSize = GetAllocatedSize() - clearOffset;
+
+                    D3D11_BOX dstBox;
+                    dstBox.left = clearOffset;
+                    dstBox.top = 0;
+                    dstBox.front = 0;
+                    dstBox.right = static_cast<UINT>(clearOffset + clearSize);
+                    dstBox.bottom = 1;
+                    dstBox.back = 1;
+
+                    std::vector<uint8_t> clearData(clearSize, 0);
+                    auto updateSubresource =
+                        [&](const ScopedCommandRecordingContext* commandContext) -> MaybeError {
+                        commandContext->UpdateSubresource1(mD3d11ConstantBuffer.Get(),
+                                                           /*DstSubresource=*/0, &dstBox,
+                                                           clearData.data(),
+                                                           /*SrcRowPitch=*/0,
+                                                           /*SrcDepthPitch=*/0,
+                                                           /*CopyFlags=*/D3D11_COPY_DISCARD);
+                        return {};
+                    };
+
+                    if (commandContext) {
+                        return updateSubresource(commandContext);
+                    } else {
+                        auto tmpCommandContext =
+                            ToBackend(GetDevice()->GetQueue())
+                                ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
+                        return updateSubresource(&tmpCommandContext);
+                    }
+                }
+
                 if (commandContext) {
                     DAWN_TRY(ClearInternal(commandContext, 0, clearOffset, clearSize));
 
@@ -643,7 +682,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     if (size >= GetSize() && offset == 0) {
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
-        constexpr size_t kConstantBufferUpdateAlignment = 16;
         size_t alignedSize = Align(size, kConstantBufferUpdateAlignment);
         DAWN_ASSERT(alignedSize <= GetAllocatedSize());
         std::unique_ptr<uint8_t[]> alignedBuffer;
