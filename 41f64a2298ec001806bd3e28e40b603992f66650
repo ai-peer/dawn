@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a4fb5e8_76024427",
+        "filename": "src/tint/lang/core/ir/transform/shader_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T12:31:29Z",
+      "side": 1,
+      "message": "Why not just do this as the first step of `Process` ?",
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d990dcc2_f07aa68c",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T12:31:29Z",
+      "side": 1,
+      "message": "```suggestion\n    core::type::StructMemberAttributes pos_attrs{};\n    pos_attrs.builtin \u003d core::BuiltinValue::kPosition;\n\n    core::type::StructMemberAttributes loc_attrs{};\n    loc_attrs.location \u003d 0;\n    \n    auto* str_ty \u003d ty.Struct(mod.symbols.New(\"Outputs\"),\n                             {\n                                 {\n                                     mod.symbols.New(\"position\"),\n                                     vec4f,\n                                     pos_attrs,\n                                 },\n```",
+      "range": {
+        "startLine": 931,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 35
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48caf7ed_2f89c831",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T12:31:29Z",
+      "side": 1,
+      "message": "```suggestion\n                                     loc_attrs,\n```",
+      "range": {
+        "startLine": 948,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 39
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
