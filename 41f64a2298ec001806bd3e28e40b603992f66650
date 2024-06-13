@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b68800_a75debca",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T13:53:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ff118e43_f1a25476",
+      "range": {
+        "startLine": 931,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 35
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48caf7ed_2f89c831",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "As above.",
       "parentUuid": "48caf7ed_2f89c831",
+      "range": {
+        "startLine": 948,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 39
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ca84f16_342be955",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T13:53:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2898d0b2_ba640ae9",
       "range": {
         "startLine": 948,
         "startChar": 0,
