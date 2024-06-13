@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "5869e873cded46fd33b150a2031a8fdb84a08953",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d7674c_8efe266c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-13T14:20:25Z",
+      "side": 1,
+      "message": "Looks like we can call `UpdateSubresource1(clearData, /*offset\u003d*/GetSize(), paddingSize, ...)` here directly. In this case. So this optimization can be applied to buffers bigger than 2K as well, And It only writes padding area aligned up 16 bytes.",
+      "range": {
+        "startLine": 244,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 36
+      },
+      "revId": "5869e873cded46fd33b150a2031a8fdb84a08953",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
