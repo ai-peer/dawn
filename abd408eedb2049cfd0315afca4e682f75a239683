@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27f9d9e9_31310832",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T21:56:38Z",
+      "side": 1,
+      "message": "LGTM with a couple of nits.",
+      "revId": "abd408eedb2049cfd0315afca4e682f75a239683",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa47e5d3_8816aac8",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T21:56:38Z",
+      "side": 1,
+      "message": "Nit: unnecessary extra stream operator here?",
+      "range": {
+        "startLine": 1126,
+        "startChar": 49,
+        "endLine": 1126,
+        "endChar": 55
+      },
+      "revId": "abd408eedb2049cfd0315afca4e682f75a239683",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f413a266_2cec9cac",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T21:56:38Z",
+      "side": 1,
+      "message": "Nit: ditto",
+      "range": {
+        "startLine": 1134,
+        "startChar": 39,
+        "endLine": 1134,
+        "endChar": 41
+      },
+      "revId": "abd408eedb2049cfd0315afca4e682f75a239683",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
