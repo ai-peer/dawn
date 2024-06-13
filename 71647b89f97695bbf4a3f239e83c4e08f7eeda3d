@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c163dc0_2c4919ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3460112
+      },
+      "writtenOn": "2024-06-13T17:59:45Z",
+      "side": 1,
+      "message": "XXXL change. The manually modified file to primarily review is: test/tint/builtins/gen/gen.wgsl.tmpl",
+      "revId": "71647b89f97695bbf4a3f239e83c4e08f7eeda3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
