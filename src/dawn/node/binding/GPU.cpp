@@ -216,10 +216,10 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
 
     dawn::native::Adapter* adapter = nullptr;
     for (auto& a : adapters) {
-        wgpu::AdapterProperties props;
-        a.GetProperties(&props);
-        if (!adapterName.empty() && props.name &&
-            std::string(props.name).find(adapterName) == std::string::npos) {
+        wgpu::AdapterInfo info;
+        a.GetInfo(&info);
+        if (!adapterName.empty() && info.device &&
+            std::string(info.device).find(adapterName) == std::string::npos) {
             continue;
         }
         adapter = &a;
@@ -244,9 +244,9 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
         }
         msg << "\nAvailable adapters:";
         for (auto& a : adapters) {
-            wgpu::AdapterProperties props;
-            a.GetProperties(&props);
-            msg << "\n * backend: '" << BackendName(props.backendType) << "', name: '" << props.name
+            wgpu::AdapterInfo info;
+            a.GetInfo(&info);
+            msg << "\n * backend: '" << BackendName(info.backendType) << "', name: '" << props.name
                 << "'";
         }
         promise.Reject(msg.str());
@@ -254,9 +254,9 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
     }
 
     if (flags_.Get("verbose")) {
-        wgpu::AdapterProperties props;
-        adapter->GetProperties(&props);
-        printf("using GPU adapter: %s\n", props.name);
+        wgpu::AdapterInfo info;
+        adapter->GetInfo(&info);
+        printf("using GPU adapter: %s\n", info.device);
     }
 
     auto gpuAdapter = GPUAdapter::Create<GPUAdapter>(env, *adapter, flags_, async_);

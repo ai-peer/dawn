@@ -91,8 +91,12 @@ class DAWN_NATIVE_EXPORT Adapter {
     // those in webgpu_cpp.h. Update uses of these methods and remove them.
     wgpu::Status GetInfo(wgpu::AdapterInfo* info) const;
     wgpu::Status GetInfo(WGPUAdapterInfo* info) const;
+<<<<<<< PATCH SET (fb0fe7 Replace GPUAdapter GetProperties() with GetInfo())
+
+=======
     wgpu::Status GetProperties(wgpu::AdapterProperties* properties) const;
     wgpu::Status GetProperties(WGPUAdapterProperties* properties) const;
+>>>>>>> BASE      (2a26b1 Revert "Make a convenience cpp method for WaitAny with one f)
     std::vector<const char*> GetSupportedFeatures() const;
     wgpu::ConvertibleStatus GetLimits(WGPUSupportedLimits* limits) const;
 
