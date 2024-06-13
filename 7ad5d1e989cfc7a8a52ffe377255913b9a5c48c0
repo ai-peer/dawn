@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c94ba923_3d291d07",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:33:27Z",
+      "side": 1,
+      "message": "The error can be improved by turning the DAWN_INVALID_IF into more complicated logic to produce better messages. We do that in a bunch of places in Dawn to keep the success path fast but still have nice messages.\n\nWhile it would be nice for application to not recreate bindgroups, it is the one object in WebGPU that can still be created in the same order of magnitude as the number of draws. In Vulkan you can also preallocate bindgroups and overwrite them if needed. That\u0027s not currently possible in Dawn.",
+      "parentUuid": "289d5d17_97edf99d",
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "99b990d0_2f868bd2",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 9
@@ -131,6 +149,24 @@
       "side": 1,
       "message": "AFAIK, the metal backend also tracks resources per binding, command like this https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/CommandBufferMTL.mm;drc\u003d5a8f2327b3ada2951b0fe356d91ba600a3ed9a84;l\u003d593",
       "parentUuid": "5bbd0e7f_e3feb6a2",
+      "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e2918d4_8ee4ec87",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:33:27Z",
+      "side": 1,
+      "message": "It should probably do it during BeginRenderPass / Dispatch as well to avoid tagging the same buffer many times unnecessarily.",
+      "parentUuid": "d3db1e45_9fec5da5",
       "revId": "7ad5d1e989cfc7a8a52ffe377255913b9a5c48c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

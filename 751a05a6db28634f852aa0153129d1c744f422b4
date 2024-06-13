@@ -70,6 +70,63 @@
       "parentUuid": "04f3d094_49c378b0",
       "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e52e9d8_85ffb75f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:33:27Z",
+      "side": 1,
+      "message": "Given the comment do we need the check instead of an ASSERT?",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c1785a_bdae1d1c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:33:27Z",
+      "side": 1,
+      "message": "super-nit: in this CL and the previous one I find it slightly weird that we declare the class far before the members as finding their definition requires much jumping around in the file. Given how simple most members functions are we could just define them inline.",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8db2c0d5_e1de095c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:33:27Z",
+      "side": 1,
+      "message": "It seems that d3dUsage is only used for these helpers. Instead of passing an enum for the type of the child class, WDYT of passing a bitfield with the \"Capabilities\" of the child class?",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 352,
+        "endChar": 1
+      },
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
