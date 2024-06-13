@@ -50,6 +50,24 @@
       "message": "This old comment seems to be obsolete (I also don\u0027t think it applied to just the C++ overload so there\u0027s no reason we should copy it now). I think we can remove both copies of this comment.\n\nWe do now have WGPUAdapter in dawn.json. Maybe at the time this was written (https://dawn-review.googlesource.com/c/dawn/+/14541/5/src/include/dawn_native/DawnNative.h#101), we thought we would remove the DawnNative copy of entry points when they showed up in webgpu.h/webgpu_cpp.h, but since then we\u0027ve added a bunch more getters and it doesn\u0027t seem like we\u0027re necessarily trying to avoid them.\n\nAnyway, I\u0027m not an owner on this file, so maybe the second reviewer can decide if we need to leave a TODO here or just remove it.",
       "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4bad2d4_c9e495ab",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T19:49:33Z",
+      "side": 1,
+      "message": "yes, these could all probably be removed in favor of using the methods in webgpu{_cpp}.h",
+      "parentUuid": "0b43b11b_cb6dd39e",
+      "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
