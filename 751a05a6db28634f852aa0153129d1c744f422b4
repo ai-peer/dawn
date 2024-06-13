@@ -16,6 +16,24 @@
       "message": "here\u0027s an idea\n\neven on UMA, based on the D3D11 restrictions, we can only map readonly GPU buffers.\nWe can\u0027t map storage buffers, etc. So there will need to be a bunch of workarounds on D3D11 to make that work in the same way that UMA will work on other platforms.\nAnd, those workarounds should be written so ideally we don\u0027t have two different UMA extensions.\n\nSo instead... what about not exposing extended map usages on D3D11 at all, and instead, do some frequency tracking on uniform/vertex/index buffers to measure how often they are updated? When updated very often, they could be replaced with a DYNAMIC d3d11 buffers. And DYNAMIC buffers can have a special path in WriteBuffer.\nThen, we don\u0027t need to do anything about other types of buffers which would have expensive emulation anyway.",
       "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6141318d_d4955e38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T01:10:53Z",
+      "side": 1,
+      "message": "Majority of CPU map then GPU readonly buffers are still useful a lot to Graphite. That\u0027s the most common use case. Even storage buffers, Graphite also uses them as \"big\" uniform buffers, which only CPU write and GPU read. Also in the perf tests, it showed that mapping uniform/storage buffers are faster than current way we are doing:\n- i.e. mapping a memory buffer.\n- Then copy that memory buffer into D3D_USAGE_DEFAULT buffer.\n- we don\u0027t use queue.WriteBuffer in Graphite, we only use encoder.WriteBuffer and it requires another memory copy.\n\nEven so the current code only uses memory buffer for \u003c 1MB sized buffers. Larger than that, it switches to D3D_USAGE_STAGING buffers, which are even more slower than D3D_USAGE_DYNAMIC esp on UMA system like intel.\n\nThis CL doesn\u0027t change the behaviors much tbh, it just creates a new Buffer class that is useful for CPU write + GPU read cases.",
+      "parentUuid": "d969f22b_7a301fa9",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fba90240_0526c6d1",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T01:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fec876ac_4901dbed",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bfbb344_9d4cfbae",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "I was just thinking the top of this file already has a table explaining different D3D usages and their restrictions. With staging usage is the only one allowing CPU read and write.",
       "parentUuid": "0bfbb344_9d4cfbae",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954b5ab3_76f98e62",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T01:10:53Z",
+      "side": 1,
+      "message": "Moved.",
+      "parentUuid": "b3669673_edbebe87",
       "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
