@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "9acb45dbc5ec1de27094ae0e160b1b9b20ab00ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dacf0aa7_cea7e815",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-06-13T10:09:00Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a good idea until we\u0027ve found a solution for b/343875087.\nWouldn\u0027t want quarantined devices blocking CTS rolls.",
+      "revId": "9acb45dbc5ec1de27094ae0e160b1b9b20ab00ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
