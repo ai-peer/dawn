@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8d01e39_924f31af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-13T22:40:01Z",
+      "side": 1,
+      "message": "I think @cwallez@chromium.org expressed some desire to have all enums name the zero value (I thought it was on https://github.com/webgpu-native/webgpu-headers/issues/289 but that\u0027s tangential) but I\u0027m pretty sure this is fine. LGTM from my perspective",
+      "revId": "e6a6d71158cb587231f25e64c7d83a5ef6b1cba1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
