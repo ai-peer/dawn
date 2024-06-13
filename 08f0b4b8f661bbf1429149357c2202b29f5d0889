@@ -16,6 +16,23 @@
       "message": "WDYT? I got lazy from typing wgpu::FutureWaitInfo multiple times",
       "revId": "08f0b4b8f661bbf1429149357c2202b29f5d0889",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fdd2ce_7fd6baf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-13T23:10:08Z",
+      "side": 1,
+      "message": "I\u0027m fine with it!",
+      "revId": "08f0b4b8f661bbf1429149357c2202b29f5d0889",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
