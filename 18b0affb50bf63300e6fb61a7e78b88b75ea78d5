@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a7091e9_7c759dc8",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:13:46Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d/PhysicalDeviceD3D.cpp;drc\u003d48aa946c141b86e55a7ab1c955a98aa214a8d5f5;l\u003d73 is where the allowed modes are determined. We could make Unpremultiplied just break and go to the UNREACHABLE().",
+      "parentUuid": "703a39de_d92eb628",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5ff8bb5_25f8f0ff",
         "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
         "patchSetId": 1
@@ -156,6 +180,30 @@
       "writtenOn": "2024-06-12T21:19:39Z",
       "side": 1,
       "message": "Please use `DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL` here.\n\nThe Windows documentation has the following to say about `FLIP_DISCARD` swap chains.\n\n\u003e However, even when the application is not the only visible item on the screen, if the flip model is DXGI_SWAP_EFFECT_FLIP_DISCARD, the compositor can in some scenarios still perform this optimization, by drawing other content onto the application\u0027s back buffer.\n\nWe try hard to avoid having the GPU process get p00ed. However, when it does, would be good to provide another level of security and disallow this. \n\n`FLIP_SEQUENTIAL` swap chains have the added benefit that you can pass dirty regions and scroll rects to Present1 and minimize the amount of composition to the desktop.",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4678ef2_248aa41c",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:13:46Z",
+      "side": 1,
+      "message": "The swapchain textures are always marked as uninitialized (to be lazy-cleared) so we should be ok using `DXGI_SWAP_EFFECT_FLIP_DISCARD` to help the OS optimize things right?",
+      "parentUuid": "c5ff8bb5_25f8f0ff",
       "range": {
         "startLine": 217,
         "startChar": 31,
@@ -213,6 +261,30 @@
       "writtenOn": "2024-06-12T21:19:39Z",
       "side": 1,
       "message": "@cwallez@chromium.org will `InitializeSwapChainFromScratch` ever be called multiple times? If so, we should create these objects into local variables and `std::move` them to the member variables only if all of them succeed.  \n\nThe way the code is currently written, a failure part of the way through means you\u0027re left with a partially initialized, and difficult to debug, state.",
+      "range": {
+        "startLine": 241,
+        "startChar": 61,
+        "endLine": 241,
+        "endChar": 81
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fda45b1_36ce3759",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-13T14:13:46Z",
+      "side": 1,
+      "message": "It\u0027s a bit roundabout in the code but yes the objects are all freed immediately if the swapchain creation fails because the whole object gets destroyed.",
+      "parentUuid": "6b44da9f_510c97d1",
       "range": {
         "startLine": 241,
         "startChar": 61,
