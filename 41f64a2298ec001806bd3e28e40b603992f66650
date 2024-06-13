@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12991b65_0a2beefd",
+        "filename": "src/tint/lang/core/ir/transform/shader_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T13:49:30Z",
+      "side": 1,
+      "message": "`Process()` is called once per entry point, whereas we need to do this once at the start of the transform.\n\nThis is a deviation from a usual transform conventions though, so I appreciate that it\u0027s confusing. I\u0027ve refactored the `State` object to make it more like our other transforms. PTAL.",
+      "parentUuid": "8a4fb5e8_76024427",
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d990dcc2_f07aa68c",
         "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
         "patchSetId": 2
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff118e43_f1a25476",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T13:49:30Z",
+      "side": 1,
+      "message": "I agree that this is a lot nicer, but I\u0027d prefer to be consistent with the rest of the tests for now and then switch to designated initializers later (hopefully not too long now...).",
+      "parentUuid": "d990dcc2_f07aa68c",
+      "range": {
+        "startLine": 931,
+        "startChar": 0,
+        "endLine": 944,
+        "endChar": 35
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48caf7ed_2f89c831",
         "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
         "patchSetId": 2
@@ -54,6 +96,30 @@
       "writtenOn": "2024-06-13T12:31:29Z",
       "side": 1,
       "message": "```suggestion\n                                     loc_attrs,\n```",
+      "range": {
+        "startLine": 948,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 39
+      },
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2898d0b2_ba640ae9",
+        "filename": "src/tint/lang/msl/writer/raise/shader_io_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-13T13:49:30Z",
+      "side": 1,
+      "message": "As above.",
+      "parentUuid": "48caf7ed_2f89c831",
       "range": {
         "startLine": 948,
         "startChar": 0,
