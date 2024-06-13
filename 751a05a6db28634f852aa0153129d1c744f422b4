@@ -34,6 +34,24 @@
       "parentUuid": "d969f22b_7a301fa9",
       "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f3d094_49c378b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T01:14:15Z",
+      "side": 1,
+      "message": "If you prefer, probably we can remove the general purpose BufferMapExtendedUsages feature. It\u0027s not used that much by Graphite anw. We could add it in future but with another name like \"UMA\" feature which might contain additional functionalities for UMA systems.",
+      "parentUuid": "6141318d_d4955e38",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
