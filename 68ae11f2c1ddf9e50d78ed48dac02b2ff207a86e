@@ -34,6 +34,24 @@
       "parentUuid": "16b8b0c0_84c6f185",
       "revId": "68ae11f2c1ddf9e50d78ed48dac02b2ff207a86e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9152a87d_8d7dd9ea",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T17:21:50Z",
+      "side": 1,
+      "message": "cast is OK for now - we can see about virtual methods in the next CL.",
+      "parentUuid": "8c3de307_76dc6dd3",
+      "revId": "68ae11f2c1ddf9e50d78ed48dac02b2ff207a86e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

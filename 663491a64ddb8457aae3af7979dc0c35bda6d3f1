@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8587515a_86822e66",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T17:21:50Z",
+      "side": 1,
+      "message": "I don\u0027t have better ideas at this time",
+      "parentUuid": "e2b7687d_648b825d",
+      "revId": "663491a64ddb8457aae3af7979dc0c35bda6d3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "20136568_221b8a0f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.h",
         "patchSetId": 7
