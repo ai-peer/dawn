@@ -155,6 +155,8 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
     return 1;
 }
 
+constexpr size_t kConstantBufferUpdateAlignment = 16;
+
 }  // namespace
 
 // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory, and
@@ -237,6 +239,13 @@ MaybeError Buffer::Initialize(bool mappedAtCreation,
             if (paddingBytes > 0) {
                 uint32_t clearSize = paddingBytes;
                 uint64_t clearOffset = GetSize();
+                if (GetUsage() & wgpu::BufferUsage::Uniform) {
+                    if (!IsAligned(clearOffset, kConstantBufferUpdateAlignment)) {
+                        clearOffset = Align(clearOffset, kConstantBufferUpdateAlignment) -
+                                      kConstantBufferUpdateAlignment;
+                    }
+                    clearSize = GetAllocatedSize() - clearOffset;
+                }
                 if (commandContext) {
                     DAWN_TRY(ClearInternal(commandContext, 0, clearOffset, clearSize));
 
@@ -640,10 +649,10 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     // mD3d11ConstantBuffer.
     // WriteInternal() can be called with GetAllocatedSize(). We treat it as a full buffer write as
     // well.
-    if (size >= GetSize() && offset == 0) {
+    if (IsAligned(offset, kConstantBufferUpdateAlignment) &&
+        IsAligned(size, kConstantBufferUpdateAlignment)) {
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
-        constexpr size_t kConstantBufferUpdateAlignment = 16;
         size_t alignedSize = Align(size, kConstantBufferUpdateAlignment);
         DAWN_ASSERT(alignedSize <= GetAllocatedSize());
         std::unique_ptr<uint8_t[]> alignedBuffer;
@@ -654,10 +663,10 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         }
 
         D3D11_BOX dstBox;
-        dstBox.left = 0;
+        dstBox.left = static_cast<UINT>(offset);
         dstBox.top = 0;
         dstBox.front = 0;
-        dstBox.right = static_cast<UINT>(alignedSize);
+        dstBox.right = static_cast<UINT>(offset + alignedSize);
         dstBox.bottom = 1;
         dstBox.back = 1;
         // For full buffer write, D3D11_COPY_DISCARD is used to avoid GPU CPU synchronization.
