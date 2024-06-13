@@ -122,6 +122,12 @@ wgpu::Status AdapterBase::APIGetLimits(SupportedLimits* limits) const {
 wgpu::Status AdapterBase::APIGetInfo(AdapterInfo* info) const {
     DAWN_ASSERT(info != nullptr);
 
+    AdapterProperties properties = {};
+    properties.nextInChain = info->nextInChain;
+    if (APIGetProperties(&properties) == wgpu::Status::Error) {
+        return wgpu::Status::Error;
+    }
+
     // Get lengths, with null terminators.
     size_t vendorCLen = mPhysicalDevice->GetVendorName().length() + 1;
     size_t architectureCLen = mPhysicalDevice->GetArchitectureName().length() + 1;
@@ -151,6 +157,7 @@ wgpu::Status AdapterBase::APIGetInfo(AdapterInfo* info) const {
     info->adapterType = mPhysicalDevice->GetAdapterType();
     info->vendorID = mPhysicalDevice->GetVendorId();
     info->deviceID = mPhysicalDevice->GetDeviceId();
+    info->compatibilityMode = mFeatureLevel == FeatureLevel::Compatibility;
 
     return wgpu::Status::Success;
 }
@@ -187,6 +194,10 @@ wgpu::Status AdapterBase::APIGetProperties(AdapterProperties* properties) const 
     }
 
     mPhysicalDevice->PopulateBackendProperties(unpacked);
+
+    if (auto* memoryHeaps = unpacked.Get<AdapterPropertiesMemoryHeaps>()) {
+        dawn::InfoLog() << __func__ << " memoryHeaps heapCount: " << memoryHeaps->heapCount;
+    }
 
     properties->vendorID = mPhysicalDevice->GetVendorId();
     properties->deviceID = mPhysicalDevice->GetDeviceId();
