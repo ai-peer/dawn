@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8283a376_be7b6916",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-06-13T13:39:56Z",
+      "side": 1,
+      "message": "Hello Kai,\nPlease have a look at this CL.",
+      "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
