@@ -68,6 +68,47 @@
       "parentUuid": "0b43b11b_cb6dd39e",
       "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de86d73_8aedb4ab",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-13T21:49:44Z",
+      "side": 1,
+      "message": "sounds good, then IMO let\u0027s have one TODO comment for all of them.",
+      "parentUuid": "a4bad2d4_c9e495ab",
+      "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2311dda0_7ae35639",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-13T21:49:44Z",
+      "side": 1,
+      "message": "```suggestion\n    // TODO(crbug.com/347047627): These methods are historical duplicates of\n    // those in webgpu_cpp.h. Update uses of these methods and remove them.\n    wgpu::Status GetInfo(wgpu::AdapterInfo* info) const;\n    wgpu::Status GetInfo(WGPUAdapterInfo* info) const;\n    wgpu::Status GetProperties(wgpu::AdapterProperties* properties) const;\n    wgpu::Status GetProperties(WGPUAdapterProperties* properties) const;\n    std::vector\u003cconst char*\u003e GetSupportedFeatures() const;\n    wgpu::ConvertibleStatus GetLimits(WGPUSupportedLimits* limits) const;\n```\n\n(testing out the gerrit feature that lets me edit CLs online)",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 73
+      },
+      "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
