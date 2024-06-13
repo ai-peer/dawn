@@ -109,6 +109,30 @@
       },
       "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bf348cd_06f9bc92",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-13T21:50:40Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "2311dda0_7ae35639",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 73
+      },
+      "revId": "6861b0c6064f6fec0ec6bea41c35ea8f0e37aabd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
