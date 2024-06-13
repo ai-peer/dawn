@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78695518_89321226",
+        "filename": "src/tint/lang/core/ir/transform/shader_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-13T13:53:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "12991b65_0a2beefd",
+      "revId": "41f64a2298ec001806bd3e28e40b603992f66650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d990dcc2_f07aa68c",
