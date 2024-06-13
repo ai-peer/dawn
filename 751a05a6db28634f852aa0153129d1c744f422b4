@@ -52,6 +52,24 @@
       "parentUuid": "6141318d_d4955e38",
       "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46128a6_9c0c7577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-13T01:20:31Z",
+      "side": 1,
+      "message": "I meant the extra features in BufferMapExtendedUsages like CPU reading a storage buffer or allowing both CPU and GPU to write to a buffer are not used that much in Graphite. We can be fine by just exposing the same restrictions for D3D11 on all platforms for now. Those extras could be moved the theoretically future \"UMA\" feature instead.",
+      "parentUuid": "04f3d094_49c378b0",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
