@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b7927e_9c6c7406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-13T20:59:47Z",
+      "side": 1,
+      "message": "See crbug.com/346808588 - Kyle said this fixes the issue.",
+      "revId": "1bd0e6e9050339d22d5fe87352012124e922f506",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
