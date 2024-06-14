@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bce91dfc_3806c382",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T10:02:05Z",
+      "side": 1,
+      "message": "Is this still needed?",
+      "revId": "65af533c3e3b48533195cab123166289f2cd666e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2967bff5_03701bf1",
+        "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T10:02:05Z",
+      "side": 1,
+      "message": "```suggestion\nbundle_libraries(webgpu_c_bundled native_dawn)\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 34,
+        "endLine": 50,
+        "endChar": 45
+      },
+      "revId": "65af533c3e3b48533195cab123166289f2cd666e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
