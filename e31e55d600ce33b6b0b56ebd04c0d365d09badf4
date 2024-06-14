@@ -16,6 +16,23 @@
       "message": "Austin: PTAL. Thanks!",
       "revId": "e31e55d600ce33b6b0b56ebd04c0d365d09badf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1f7242_00eb691e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-14T18:20:06Z",
+      "side": 1,
+      "message": "LGTM though there seems to be an ANGLE d3d11 bug",
+      "revId": "e31e55d600ce33b6b0b56ebd04c0d365d09badf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
