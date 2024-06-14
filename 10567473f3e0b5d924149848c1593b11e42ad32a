@@ -83,6 +83,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6130245f_eec58830",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T12:32:48Z",
+      "side": 1,
+      "message": "I assume this is due to the 256 byte (64 rgba8unorm texels) alignment requirement of `bytesPerRow`.",
+      "parentUuid": "70331a16_c1efdbca",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c218061_abfa6d0b",
         "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
         "patchSetId": 3

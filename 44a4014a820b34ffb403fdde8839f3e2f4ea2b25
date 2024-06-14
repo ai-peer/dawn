@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89db618b_3be3e19a",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T12:32:48Z",
+      "side": 1,
+      "message": "Note we tend to avoid adding binary files to git repos because they never disappear. Is there a way to do without them? Or maybe we could reduce them further? (or we can choose to not do anything as well)",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa57b584_e4fcfc71",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T12:32:48Z",
+      "side": 1,
+      "message": "Why the `!!`?",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c6d08d_99f737af",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T12:32:48Z",
+      "side": 1,
+      "message": "nit: offscreen is a GLism for when rendering to things that aren\u0027t the screen was dark magic. Now that\u0027s where most rendering happen so it can just be texture or testTexture.",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 32
+      },
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b76563_55fa7133",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T12:32:48Z",
+      "side": 1,
+      "message": "This should be sufficient to free all the GPU resources.",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
