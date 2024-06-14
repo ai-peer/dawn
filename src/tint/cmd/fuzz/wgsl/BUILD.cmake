@@ -59,6 +59,7 @@ tint_target_add_dependencies(tint_cmd_fuzz_wgsl_fuzz_cmd fuzz_cmd
   tint_lang_wgsl_fuzz
   tint_utils_bytes
   tint_utils_cli
+  tint_utils_command
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_ice
@@ -75,6 +76,12 @@ tint_target_add_dependencies(tint_cmd_fuzz_wgsl_fuzz_cmd fuzz_cmd
   tint_utils_traits
 )
 
+if(DAWN_USE_BUILT_DXC AND TINT_BUILD_HLSL_WRITER)
+  tint_target_add_external_dependencies(tint_cmd_fuzz_wgsl_fuzz_cmd fuzz_cmd
+    "dxcompiler"
+  )
+endif(DAWN_USE_BUILT_DXC AND TINT_BUILD_HLSL_WRITER)
+
 if(TINT_BUILD_GLSL_WRITER)
   tint_target_add_dependencies(tint_cmd_fuzz_wgsl_fuzz_cmd fuzz_cmd
     tint_lang_glsl_writer_fuzz
@@ -83,6 +90,7 @@ endif(TINT_BUILD_GLSL_WRITER)
 
 if(TINT_BUILD_HLSL_WRITER)
   tint_target_add_dependencies(tint_cmd_fuzz_wgsl_fuzz_cmd fuzz_cmd
+    tint_lang_hlsl_validate
     tint_lang_hlsl_writer_fuzz
   )
 endif(TINT_BUILD_HLSL_WRITER)

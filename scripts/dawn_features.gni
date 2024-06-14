@@ -25,12 +25,12 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+import("//build/config/sanitizers/sanitizers.gni")
 import("//build_overrides/build.gni")
 import("dawn_overrides_with_defaults.gni")
 
 if (build_with_chromium) {
   import("//build/config/ozone.gni")
-  import("//build/config/sanitizers/sanitizers.gni")
 
   dawn_use_x11 = ozone_platform_x11
   dawn_use_wayland = false
@@ -57,7 +57,8 @@ declare_args() {
   # Whether we allow building DXC.
   # DXC requires SM6.0+ which is blocklisted on x86.
   # See crbug.com/tint/1753.
-  dawn_use_built_dxc = is_win && target_cpu != "x86"
+  # Also build DXC to fuzz it.
+  dawn_use_built_dxc = (is_win || use_libfuzzer) && target_cpu != "x86"
 }
 
 declare_args() {
