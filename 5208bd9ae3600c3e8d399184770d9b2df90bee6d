@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cef3990_8813acc0",
+        "filename": "docs/dawn/features/buffer_map_extended_usages.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-14T01:56:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fe1dbe09_24bc3472",
+      "revId": "5208bd9ae3600c3e8d399184770d9b2df90bee6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fec876ac_4901dbed",

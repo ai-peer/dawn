@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "848c4997_0418c680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-14T01:56:56Z",
+      "side": 1,
+      "message": "to be clear, I\u0027m not suggesting we continue with the current way of using a cpu memory buffer, and then copy that into the default buffer for usage.\n\nWebGPU will have an UMA feature, and it will support mapping for all types of buffers. I understand Graphite doesn\u0027t need mapping on all buffers, but I don\u0027t want to end up in a state where there are two eventual mapping features - where one of them is a subset that D3D11 supports. It doesn\u0027t help much to only expose the more restricted feature now, because we need to expose the full version in the future. So if we implement extended mapping usages in D3D11, it should work for all types of buffers, with emulation where needed.\nSo that means this CL plus even more buffer types and other copy paths.\n\nSo I\u0027m thinking about maybe there are alternative options for how graphite uploads data. when UMA is not supported, Graphite could use WriteBuffer to update draw buffers instead of mapping. In D3D11 this could write directly into a DYNAMIC vertex/uniform buffer.\nIf that\u0027s sufficient, then we don\u0027t need to implement extended map usages on d3d11 at all.\n\nIf some alternative approach in graphite doesn\u0027t work, this CL is fine but we need to implement mapping for the other usages too",
+      "parentUuid": "e46128a6_9c0c7577",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
@@ -124,6 +142,29 @@
         "startChar": 0,
         "endLine": 352,
         "endChar": 1
+      },
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d482f464_e064f6bc",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-14T01:56:56Z",
+      "side": 1,
+      "message": "if this is always initialized by the constructor, it doesn\u0027t need a default value",
+      "range": {
+        "startLine": 176,
+        "startChar": 29,
+        "endLine": 176,
+        "endChar": 49
       },
       "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
