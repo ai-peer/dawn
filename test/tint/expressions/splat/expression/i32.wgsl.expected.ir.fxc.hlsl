@@ -3,3 +3,7 @@ void f() {
   int3 v3 = (3).xxx;
   int4 v4 = (3).xxxx;
 }
+
+void unused_entry_point() {
+}
+

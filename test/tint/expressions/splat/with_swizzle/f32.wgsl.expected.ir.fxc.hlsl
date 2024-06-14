@@ -3,3 +3,7 @@ void f() {
   float b = 1.0f;
   float c = 1.0f;
 }
+
+void unused_entry_point() {
+}
+

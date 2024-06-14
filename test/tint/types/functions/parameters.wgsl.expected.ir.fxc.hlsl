@@ -1,4 +1,6 @@
 void foo() {
 }
+
 void main() {
 }
+

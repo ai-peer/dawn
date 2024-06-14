@@ -3,3 +3,7 @@ void f() {
   float3 v3 = (1.0f).xxx;
   float4 v4 = (1.0f).xxxx;
 }
+
+void unused_entry_point() {
+}
+
