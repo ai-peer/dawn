@@ -20,6 +20,9 @@
         ],
         "Condition": "tint_build_hlsl_writer"
     },
+    "dxcompiler": {
+        "Condition": "tint_build_hlsl_writer"
+    },
     "google-benchmark": {
         "IncludePatterns": [
             "benchmark/benchmark.h"
