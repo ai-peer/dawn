@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bbbe2a1_95996284",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Rounding.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-14T10:14:21Z",
+      "side": 1,
+      "message": "For clarity for the mathematicians amongst us, can we please name these \"round{Up,Down}ToNearestMultipleOf()\"?",
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978e1ec1_85e502cb",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-14T10:14:21Z",
+      "side": 1,
+      "message": "nit: I\u0027d call this createGpuTextureFromBitmap for clarity (\"image\" can mean a lot of things)",
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e405c3c_2589d3a9",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-14T10:14:21Z",
+      "side": 1,
+      "message": "same nit, I\u0027d call this createBitmapFromGpuTexture for clarity",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 33,
+        "endChar": 37
+      },
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70331a16_c1efdbca",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-14T10:14:21Z",
+      "side": 1,
+      "message": "do you want to round down, here?  Won\u0027t that chop off some columns from the image if you (weirdly, weirdly) get handle, like, a 63-column-wide image?\n\nalso I notice you don\u0027t round the number of rows to the nearest 64, should you?",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c218061_abfa6d0b",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-14T10:14:21Z",
+      "side": 1,
+      "message": "Style guide: try to avoid numbers in names unless the numeral has meaning in the purpose of the variable, and instead choose a name that conveys what the value is (https://engdoc.corp.google.com/eng/doc/devguide/java/practices/naming.md?cl\u003dhead, \"Focus on purpose instead of implementation\")\n\nIn this case, I\u0027d suggest \n`val sizeBytes \u003d useWidth * texture.height * Int.SIZE_BYTES.toLong()`",
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
