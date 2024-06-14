@@ -264,6 +264,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd21e91f_882786e6",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-14T23:19:05Z",
+      "side": 1,
+      "message": "With `SEQUENTIAL` the attacker only has access to browser content. With `DISCARD`, the attacker can additionally have access to texture content from another process.",
+      "parentUuid": "a66c38f8_8b07996b",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cafb75_6d7e2ff5",
         "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
         "patchSetId": 1
