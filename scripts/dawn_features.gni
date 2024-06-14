@@ -57,7 +57,8 @@ declare_args() {
   # Whether we allow building DXC.
   # DXC requires SM6.0+ which is blocklisted on x86.
   # See crbug.com/tint/1753.
-  dawn_use_built_dxc = is_win && target_cpu != "x86"
+  # Also build DXC to fuzz it.
+  dawn_use_built_dxc = (is_win || use_libfuzzer) && target_cpu != "x86"
 }
 
 declare_args() {

@@ -1,5 +1,6 @@
 
 import("{{Repeat "../" .Depth}}../../../scripts/tint_overrides_with_defaults.gni")
+import("{{Repeat "../" .Depth}}../../../scripts/dawn_features.gni")
 
 import("${tint_src_dir}/tint.gni")
 
@@ -167,6 +168,7 @@ tint_fuzzer_test("{{$.Directory.Name}}") {
 {{-        if eq $.Name "abseil"               -}}"${tint_src_dir}:abseil",
 {{-   else if eq $.Name "dl"                   -}}"${tint_src_dir}:dl",
 {{-   else if eq $.Name "dxc-include"          -}}"${tint_src_dir}:dxc-include",
+{{-   else if eq $.Name "dxcompiler"           -}}"${tint_root_dir}/third_party/gn/dxc:dxcompiler",
 {{-   else if eq $.Name "glslang-res-limits"   -}}"${tint_glslang_dir}:glslang_default_resource_limits_sources",
 {{-   else if eq $.Name "glslang"              -}}"${tint_glslang_dir}:glslang_lib_sources",
 {{-   else if eq $.Name "google-benchmark"     -}}"${tint_src_dir}:google_benchmark",
