@@ -40,6 +40,9 @@ tint_build_is_win = is_win
 tint_build_is_mac = is_mac
 tint_build_is_linux = is_linux
 
+# True if the current build environment supports building DXC
+tint_build_supports_dxc = target_cpu != "x86"
+
 ###############################################################################
 # Tint library target
 ###############################################################################
