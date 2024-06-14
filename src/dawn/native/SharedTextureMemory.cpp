@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "dawn/common/WeakRef.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Queue.h"
@@ -201,6 +202,14 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemoryBase::CreateTexture(
     return texture;
 }
 
+Ref<SharedResourceMemoryContents> SharedTextureMemoryBase::CreateContents() {
+    return AcquireRef(new SharedTextureMemoryContents(GetWeakRef(this)));
+}
+
+SharedTextureMemoryContents* SharedTextureMemoryBase::GetSTMContents() const {
+    return static_cast<SharedTextureMemoryContents*>(GetContents());
+}
+
 void APISharedTextureMemoryEndAccessStateFreeMembers(WGPUSharedTextureMemoryEndAccessState cState) {
     auto* state = reinterpret_cast<SharedTextureMemoryBase::EndAccessState*>(&cState);
     for (size_t i = 0; i < state->fenceCount; ++i) {
@@ -208,6 +217,28 @@ void APISharedTextureMemoryEndAccessStateFreeMembers(WGPUSharedTextureMemoryEndA
     }
     delete[] state->fences;
     delete[] state->signaledValues;
+}
+
+// SharedTextureMemoryContents
+
+SharedTextureMemoryContents::SharedTextureMemoryContents(
+    WeakRef<SharedTextureMemoryBase> sharedTextureMemory)
+    : SharedResourceMemoryContents(sharedTextureMemory),
+      mSharedTextureMemory(std::move(sharedTextureMemory)),
+      mSupportedExternalSampleTypes(SampleTypeBit::None) {}
+
+const WeakRef<SharedTextureMemoryBase>& SharedTextureMemoryContents::GetSharedTextureMemory()
+    const {
+    return mSharedTextureMemory;
+}
+
+SampleTypeBit SharedTextureMemoryContents::GetExternalFormatSupportedSampleTypes() const {
+    return mSupportedExternalSampleTypes;
+}
+
+void SharedTextureMemoryContents::SetExternalFormatSupportedSampleTypes(
+    SampleTypeBit supportedSampleType) {
+    mSupportedExternalSampleTypes = supportedSampleType;
 }
 
 }  // namespace dawn::native
