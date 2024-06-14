@@ -314,6 +314,16 @@ if (${TINT_BUILD_REGEX_FUZZER})
       set(TINT_BUILD_HLSL_WRITER ON CACHE BOOL "Build HLSL writer" FORCE)
 endif()
 
+if (TINT_BUILD_FUZZERS)
+  set(DAWN_USE_BUILT_DXC ON CACHE BOOL "" FORCE)
+endif()
+
+# True if the current build environment supports building DXC
+# TODO: Should match how 'tint_build_supports_dxc' is set in src/tint/tint.gni
+# but determining target CPU architecture is non-trivial in CMake. For now,
+# assume always true, as we don't use CMake to target x86.
+set(TINT_BUILD_SUPPORTS_DXC ON)
+
 message(STATUS "Dawn build D3D11 backend: ${DAWN_ENABLE_D3D11}")
 message(STATUS "Dawn build D3D12 backend: ${DAWN_ENABLE_D3D12}")
 message(STATUS "Dawn build Metal backend: ${DAWN_ENABLE_METAL}")

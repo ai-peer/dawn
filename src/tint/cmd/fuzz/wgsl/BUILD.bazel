@@ -63,6 +63,11 @@ alias(
 )
 
 alias(
+  name = "tint_build_supports_dxc",
+  actual = "//src/tint:tint_build_supports_dxc_true",
+)
+
+alias(
   name = "tint_build_wgsl_reader",
   actual = "//src/tint:tint_build_wgsl_reader_true",
 )
@@ -70,5 +75,13 @@ alias(
 alias(
   name = "tint_build_wgsl_writer",
   actual = "//src/tint:tint_build_wgsl_writer_true",
+)
+
+selects.config_setting_group(
+    name = "tint_build_supports_dxc_and_tint_build_hlsl_writer",
+    match_all = [
+        ":tint_build_supports_dxc",
+        ":tint_build_hlsl_writer",
+    ],
 )
 
