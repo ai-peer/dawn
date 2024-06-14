@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b1a5af_7dcd6bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-14T23:14:59Z",
+      "side": 1,
+      "message": "`WriteBuffer` is only great if we assume the client side always has another copy of the data ready. So the client would then only need to call `WriteBuffer(data)` to update the buffer.\n\nThat\u0027s not always the case. Sometimes Graphite needs to map a buffer, computes values on the fly then writes directly via the mapped pointer instead of writing to an intermediate memory buffer. The latter is basically the same as using CPU memory buffer then uploading anw.\n\nI feel like having tiered features is not that bad. D3D12, even metal which is supposed to be the simplest modern API also has that.\n\nOtherwise I can make general purposes mapping work in D3D11. The other mapping usages would need extra copies but theoretically they shouldn\u0027t be too bad.\nFor example,\n- For writing on GPU to a CPU writable buffer, we can issue a copy after GPU works. The MapAsync will guarantee that the mapping would only be ready by the time the GPU writes + GPU copy are completed -\u003e no stall.\n- Similarly, for supporting `CopyDst` on a CPU writable buffer, a intermediate staging buffer would be needed:\n  - CopyB2B(dst\u003ddynamic buffer) -\u003e Copy to a staging buffer -\u003e tracked by serial -\u003e MapAsync ready -\u003e map staging buffer for read -\u003e map dynamic buffer with DISCARD flag -\u003e copy data to dynamic buffer -\u003e there won\u0027t be any stall.",
+      "parentUuid": "848c4997_0418c680",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
