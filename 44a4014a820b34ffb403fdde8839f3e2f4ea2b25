@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad9b2644_d2fe5c02",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-14T14:03:33Z",
+      "side": 1,
+      "message": "They\u0027re only 2K. It\u0027s hard to think how to avoid reference images altogether.",
+      "parentUuid": "89db618b_3be3e19a",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa57b584_e4fcfc71",
         "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-14T12:32:48Z",
       "side": 1,
       "message": "Why the `!!`?",
+      "range": {
+        "startLine": 51,
+        "startChar": 40,
+        "endLine": 51,
+        "endChar": 42
+      },
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7e7abd_f332233b",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-14T14:03:33Z",
+      "side": 1,
+      "message": "Checking \u0027device\u0027 wasn\u0027t returned null as per the function contract. I will check it explicitly for clarity.",
+      "parentUuid": "fa57b584_e4fcfc71",
       "range": {
         "startLine": 51,
         "startChar": 40,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa9dd7e_31e46cee",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-14T14:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52c6d08d_99f737af",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 32
+      },
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1b76563_55fa7133",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-06-14T12:32:48Z",
       "side": 1,
       "message": "This should be sufficient to free all the GPU resources.",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c22f6c_7617eebc",
+        "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-14T14:03:33Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a1b76563_55fa7133",
       "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
