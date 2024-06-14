@@ -57,6 +57,30 @@
       },
       "revId": "3269437d9598a026cc154879b8619a82dbd3e92e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "768c7507_bb5560c2",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2024-06-14T19:51:37Z",
+      "side": 1,
+      "message": "Updated to add a SharedTextureMemoryContents and get the supported SampleTypeBit from there. It has an interesting inheritance going on but hopefully this works as expected.",
+      "parentUuid": "b93b7e0f_1d72594c",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 74
+      },
+      "revId": "3269437d9598a026cc154879b8619a82dbd3e92e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
