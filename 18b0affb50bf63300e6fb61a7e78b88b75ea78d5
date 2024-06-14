@@ -240,6 +240,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a66c38f8_8b07996b",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-14T10:14:42Z",
+      "side": 1,
+      "message": "Can the texture be modified behind our back between the time we acquire for rendering and the time we present it?\n\nI\u0027m not sure what the concern if the process is pwned, aren\u0027t we already pwned? Or do you mean that the other process that\u0027s writing garbage would still have access to our texture and could keep writing to it? In any case maybe we can change to SEQUENTIAL and change it back if someone finds it makes a perf difference in the future.",
+      "parentUuid": "2db315a2_b0fdf0e5",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22cafb75_6d7e2ff5",
         "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
         "patchSetId": 1
