@@ -78,9 +78,6 @@ class FirstIndexOffsetTests : public DawnTest {
         // TODO(crbug.com/dawn/1292): Some Intel OpenGL drivers don't seem to like
         // the offsets that Tint/GLSL produces.
         DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
-
-        // TODO(tint:451): Remove once "flat" is supported under OpenGL(ES).
-        DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
     }
 
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
