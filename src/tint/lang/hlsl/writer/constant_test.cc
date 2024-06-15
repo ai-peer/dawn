@@ -441,8 +441,7 @@ S a() {
 )");
 }
 
-// TODO(dsinclair): Needs `struct` constant emission
-TEST_F(HlslWriterTest, DISABLED_ConstantTypeStructEmpty) {
+TEST_F(HlslWriterTest, ConstantTypeStructEmpty) {
     Vector members{
         ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
                                          core::type::StructMemberAttributes{}),
@@ -457,19 +456,24 @@ TEST_F(HlslWriterTest, DISABLED_ConstantTypeStructEmpty) {
     b.Append(f->Block(), [&] { b.Return(f, b.Zero(strct)); });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
-    EXPECT_EQ(output_.hlsl, R"(struct S
+    EXPECT_EQ(output_.hlsl, R"(struct S {
   int a;
   float b;
   int3 c;
-}
+};
 
 S a() {
   return (S)0;
 }
+
+[numthreads(1, 1, 1)]
+void unused_entry_point() {
+}
+
 )");
 }
 
-// TODO(dsinclair): Needs `struct` constant emission
+// TODO(dsinclair): Needs `construct` emission
 TEST_F(HlslWriterTest, DISABLED_ConstantTypeStructStatic) {
     Vector members{
         ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
