@@ -27,18 +27,20 @@
 
 #include "src/tint/lang/hlsl/writer/raise/raise.h"
 
+#include "src/tint/lang/core/ir/transform/add_empty_entry_point.h"
+
 namespace tint::hlsl::writer {
 
-Result<SuccessType> Raise(core::ir::Module&, const Options&) {
-    /*
-  #define RUN_TRANSFORM(name, ...)                   \
-      do {                                           \
-          auto result = name(module, ##__VA_ARGS__); \
-          if (result != Success) {                   \
-              return result;                         \
-          }                                          \
-      } while (false)
-  */
+Result<SuccessType> Raise(core::ir::Module& module, const Options&) {
+#define RUN_TRANSFORM(name, ...)                   \
+    do {                                           \
+        auto result = name(module, ##__VA_ARGS__); \
+        if (result != Success) {                   \
+            return result;                         \
+        }                                          \
+    } while (false)
+
+    RUN_TRANSFORM(core::ir::transform::AddEmptyEntryPoint);
 
     return Success;
 }
