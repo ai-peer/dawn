@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5759452_1c507288",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-15T01:03:36Z",
+      "side": 1,
+      "message": "nit: You can compute clearSize first, and then use it to compute clearOffset.\n\n\n```suggestion\n                uint32_t clearSize \u003d Align(paddingBytes, kConstantBufferUpdateAlignment);\n                uint64_t clearOffset \u003d GetAllocatedSize() - clearSize;\n```",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 61
+      },
+      "revId": "f2282bee3d962703566b9cf030dcc420b3d772b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6f3222_c1746384",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-06-15T01:03:36Z",
+      "side": 1,
+      "message": "nit: GetAllocationSize().",
+      "range": {
+        "startLine": 413,
+        "startChar": 31,
+        "endLine": 413,
+        "endChar": 73
+      },
+      "revId": "f2282bee3d962703566b9cf030dcc420b3d772b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
