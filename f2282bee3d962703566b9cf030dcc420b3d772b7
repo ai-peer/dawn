@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec5a62de_96cb2472",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-15T06:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5759452_1c507288",
+      "range": {
+        "startLine": 403,
+        "startChar": 0,
+        "endLine": 407,
+        "endChar": 61
+      },
+      "revId": "f2282bee3d962703566b9cf030dcc420b3d772b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a6f3222_c1746384",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-15T01:03:36Z",
       "side": 1,
       "message": "nit: GetAllocationSize().",
+      "range": {
+        "startLine": 413,
+        "startChar": 31,
+        "endLine": 413,
+        "endChar": 73
+      },
+      "revId": "f2282bee3d962703566b9cf030dcc420b3d772b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d6a735_157572c5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-15T06:44:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a6f3222_c1746384",
       "range": {
         "startLine": 413,
         "startChar": 31,
