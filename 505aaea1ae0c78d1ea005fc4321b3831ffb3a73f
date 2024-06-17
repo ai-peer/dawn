@@ -22,6 +22,30 @@
       },
       "revId": "505aaea1ae0c78d1ea005fc4321b3831ffb3a73f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55ea1dba_2eeec209",
+        "filename": "src/tint/lang/msl/msl.def",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-17T16:16:30Z",
+      "side": 1,
+      "message": "Yeah, but without the underscores they exactly match the actual MSL type names that we emit, which is useful when searching for stuff.",
+      "parentUuid": "28a22e3c_aa2b9de3",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 17
+      },
+      "revId": "505aaea1ae0c78d1ea005fc4321b3831ffb3a73f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
