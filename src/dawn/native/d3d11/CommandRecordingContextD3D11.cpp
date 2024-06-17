@@ -285,4 +285,15 @@ bool CommandRecordingContext::AcquireNeedsFence() {
     return needsFence;
 }
 
+void ScopedCommandRecordingContext::End(ID3D11Asynchronous* pAsync) const {
+    Get()->mD3D11DeviceContext4->End(pAsync);
+}
+
+HRESULT ScopedCommandRecordingContext::GetData(ID3D11Asynchronous* pAsync,
+                                               void* pData,
+                                               UINT DataSize,
+                                               UINT GetDataFlags) {
+    return Get()->mD3D11DeviceContext4->GetData(pAsync, pData, DataSize, GetDataFlags);
+}
+
 }  // namespace dawn::native::d3d11
