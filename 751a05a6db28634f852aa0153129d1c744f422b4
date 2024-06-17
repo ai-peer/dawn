@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb65db7_d82230ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-17T23:40:55Z",
+      "side": 1,
+      "message": "What if we have a version of wgpuQueueWriteBuffer that gives you back the pointer to write into? wgpu-rs has something similar. https://wgpu.rs/doc/wgpu/struct.Queue.html#method.write_buffer_with",
+      "parentUuid": "e9b1a5af_7dcd6bdc",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
