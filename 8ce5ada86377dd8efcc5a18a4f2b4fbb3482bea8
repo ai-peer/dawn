@@ -16,6 +16,24 @@
       "message": "else?",
       "revId": "8ce5ada86377dd8efcc5a18a4f2b4fbb3482bea8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c54cb6_1029d2f3",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-17T15:43:07Z",
+      "side": 1,
+      "message": "Yea, more to come in a followup. There is a transform needed here to pull stuff out to globals, this is just the start of the struct constant emission.",
+      "parentUuid": "575df7ed_4fa84828",
+      "revId": "8ce5ada86377dd8efcc5a18a4f2b4fbb3482bea8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
