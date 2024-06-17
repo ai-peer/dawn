@@ -39,8 +39,6 @@
 #include "dawn/native/d3d/Forward.h"
 #include "dawn/native/d3d/UtilsD3D.h"
 
-#pragma comment(lib, "dcomp")
-
 namespace dawn::native::d3d {
 namespace {
 
