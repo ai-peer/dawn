@@ -34,6 +34,24 @@
       "parentUuid": "c37430ac_bce47f6a",
       "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf48eef_a9abc4f3",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-17T17:58:41Z",
+      "side": 1,
+      "message": "If it\u0027s only for the fuzzers, should it be in the `if (TINT_BUILD_FUZZERS)` block above?",
+      "parentUuid": "b104479a_7f9eead1",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
