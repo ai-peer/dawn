@@ -87,6 +87,24 @@
       "parentUuid": "aa3afdde_74f9daaf",
       "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a87c9c1_79eafc9b",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T14:25:42Z",
+      "side": 1,
+      "message": "I thought it was more clear this way. The top block just computes a default dxc path. This lower block just outputs whether it was found. I wanted to keep the reading of CLI args all together (in the middle).",
+      "parentUuid": "5f100060_9ee59161",
+      "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
