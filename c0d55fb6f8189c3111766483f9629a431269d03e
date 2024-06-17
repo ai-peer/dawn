@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10610023_73cf0a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-17T11:02:17Z",
+      "side": 1,
+      "message": "This mostly re-uses the code lines in Peng\u0027s previous attempting [CL](https://dawn-review.googlesource.com/c/dawn/+/180322). Instead of totally replacing Fence with Query, this only uses Query for completion serial pumping, and still keeps Fence for shared resource synchronization. Therefore the complexity is largely reduced, meantime Fence signaling can still be significantly avoided.",
+      "revId": "c0d55fb6f8189c3111766483f9629a431269d03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
