@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ae980d5_83fd9e8a",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-17T09:30:49Z",
+      "side": 1,
+      "message": "Would it be madness to depend on files elsewhere in Dawn instead?  Like,:\ndawn/third_party/webgpu-cts/src/resources/four_colors.png \nwould not be hard to recreate in webgpu code.  This one\u0027s not too hard to replicate either:\n/usr/local/google/home/bentonian/Documents/dev/dawn/tools/golang/src/image/png/testdata/pngsuite\n\nAlthough.  At this point, we\u0027re recreating something that\u0027s trivial to check for in software.  We really and don\u0027t need the image at all.  Jim, what would you think of drawing something predictable, then doing the check in memory instead of loading an image?",
+      "parentUuid": "ad08c134_67b5dcc3",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa57b584_e4fcfc71",
         "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
         "patchSetId": 4
