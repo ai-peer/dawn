@@ -51,6 +51,24 @@
       "message": "Can this block be moved into the `#if` block above, just change `options.dxc` to `default_dxc_path`?",
       "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3afdde_74f9daaf",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T14:21:35Z",
+      "side": 1,
+      "message": "No, because the user can override the default one by supplying one via `-dxc`.",
+      "parentUuid": "ee9f5ddd_c0d5d89b",
+      "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
