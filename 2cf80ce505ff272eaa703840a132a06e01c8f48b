@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c740a9_0787e353",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-17T09:48:49Z",
+      "side": 1,
+      "message": "+1. We already split the Buffer class into several specialized classes based on its usages. It would be better to avoid conditional logic in base Buffer class again. This logic could be placed in the subclasses instead.\n\nAlso placing the logic in subclasses could help avoiding making `GetD3D11ConstantBuffer` virtual as well.",
+      "parentUuid": "43fca588_2660c286",
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "016e87bc_779f17fb",
