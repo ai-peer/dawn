@@ -28,6 +28,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 
+#include <deque>
+#include <vector>
+
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SerialMap.h"
 #include "dawn/native/d3d/QueueD3D.h"
@@ -89,6 +92,13 @@ class Queue : public d3d::Queue {
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
     SerialMap<ExecutionSerial, Ref<Buffer>> mPendingMapBuffers;
+
+    // Pending queries which will be checked with GetData().
+    std::deque<ComPtr<ID3D11Query>> mPendingQueries;
+
+    // Queries are available for reusing.
+    static constexpr size_t kMaxAvailableQueries = 16;
+    std::vector<ComPtr<ID3D11Query>> mAvailableQueries;
 };
 
 }  // namespace dawn::native::d3d11
