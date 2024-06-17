@@ -34,6 +34,24 @@
       "parentUuid": "b4cb9f8b_47503400",
       "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970d41bf_7592b2c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-17T14:14:05Z",
+      "side": 1,
+      "message": "I don\u0027t consider the change to BundleLibraries to be a fix. I don\u0027t think that INTERFACE_LINK_LIBRARIES should be included in a bundle because those types of dependencies are intended for the client to include when the relevant functionality is needed. I think the missing absl symbols are because the absl dependency graph is not set up correctly with respect to absl::container_internal::kEmptyGroup",
+      "parentUuid": "59fa5dcb_deac8d99",
+      "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
