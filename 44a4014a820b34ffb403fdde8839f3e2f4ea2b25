@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f20c563e_9907f185",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3351543
+      },
+      "writtenOn": "2024-06-17T09:02:21Z",
+      "side": 1,
+      "message": "Would a single image be okay?  Jim\u0027s test could be reduced to check exactly one image for exact match.\n\nIf even one binary is one too many in your eyes, we could convert the triangle to a square and then check for a square in the image buffer with kotlin code rather than against an actual image, though I feel like that would be stepping away from the concept of a \"golden\" image test which we\u0027d liked.  But we can do that if you\u0027d prefer -- the motivation for this test is primarily to have something that exercises a live Dawn instance.",
+      "parentUuid": "37a52891_2c2a4ba7",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa57b584_e4fcfc71",
         "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
         "patchSetId": 4
