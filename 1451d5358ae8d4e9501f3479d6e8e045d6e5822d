@@ -105,6 +105,24 @@
       "parentUuid": "5f100060_9ee59161",
       "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41aa063d_5e5eba33",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T14:47:22Z",
+      "side": 1,
+      "message": "I factored out the code into two functions.",
+      "parentUuid": "6a87c9c1_79eafc9b",
+      "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
