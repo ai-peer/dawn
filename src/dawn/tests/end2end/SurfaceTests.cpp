@@ -288,6 +288,8 @@ TEST_P(SurfaceTests, SwitchPresentMode) {
     // Vulkan drivers.
     DAWN_SUPPRESS_TEST_IF(IsLinux() && IsVulkan() && IsIntel());
 
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsAMD());
+
     constexpr wgpu::PresentMode kAllPresentModes[] = {
         wgpu::PresentMode::Immediate,
         wgpu::PresentMode::Fifo,
@@ -350,6 +352,8 @@ TEST_P(SurfaceTests, ResizingSurfaceOnly) {
 TEST_P(SurfaceTests, ResizingWindowOnly) {
     // TODO(crbug.com/1503912): Failing new ValidateImageAcquireWait in Vulkan Validation Layer.
     DAWN_SUPPRESS_TEST_IF(IsBackendValidationEnabled() && IsWindows() && IsVulkan() && IsIntel());
+
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsAMD());
 
     wgpu::Surface surface = CreateTestSurface();
     wgpu::SurfaceConfiguration config = GetPreferredConfiguration(surface);
