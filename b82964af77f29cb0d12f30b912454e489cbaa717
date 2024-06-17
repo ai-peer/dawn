@@ -52,6 +52,24 @@
       "parentUuid": "b104479a_7f9eead1",
       "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20d81a08_06645bd8",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T17:59:47Z",
+      "side": 1,
+      "message": "No, because as written above, this flag will also be checked when the user sets `DAWN_USE_BUILT_DXC`.",
+      "parentUuid": "cbf48eef_a9abc4f3",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
