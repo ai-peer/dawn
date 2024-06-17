@@ -70,6 +70,24 @@
       "parentUuid": "cbf48eef_a9abc4f3",
       "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e0cb4d6_fa10deb6",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-17T18:02:09Z",
+      "side": 1,
+      "message": "I\u0027m confused. Why do we need two flags, can\u0027t we just change `DAWN_USE_BUILT_DXC` to not build DXC if not supported? Why is a second tint flag needed to say tint supports DXC?",
+      "parentUuid": "20d81a08_06645bd8",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
