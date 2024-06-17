@@ -16,6 +16,24 @@
       "message": "übernit (probably not worth rebasing this stack of changes for): \"sanitized\" doesn\u0027t mean anything in IR land. Should probably use \"generated\" instead.",
       "revId": "3f77fefd1193a9ad66190468b0c5c3dd12a9b84a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6366c490_17fe2699",
+        "filename": "src/tint/lang/hlsl/writer/writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-17T14:45:47Z",
+      "side": 1,
+      "message": "Ack, will followup with a fix.",
+      "parentUuid": "3f67c1a9_47ea4b12",
+      "revId": "3f77fefd1193a9ad66190468b0c5c3dd12a9b84a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
