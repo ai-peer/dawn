@@ -52,6 +52,24 @@
       "parentUuid": "59fa5dcb_deac8d99",
       "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5282a8c9_0ae521de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-17T14:38:46Z",
+      "side": 1,
+      "message": "I think you maybe right. There\u0027s a comment in abseil\u0027s cmake that suggests `absl::raw_hash_set` is an internal target - https://github.com/abseil/abseil-cpp/blob/master/absl/container/CMakeLists.txt#L731 and not to depend directly upon it. If it\u0027s internal, why does it export `kEmptyGroup` at https://github.com/abseil/abseil-cpp/blob/master/absl/container/internal/raw_hash_set.h#L537?",
+      "parentUuid": "970d41bf_7592b2c8",
+      "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
