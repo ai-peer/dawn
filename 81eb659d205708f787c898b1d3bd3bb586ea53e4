@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df02399_44984dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T10:26:22Z",
+      "side": 1,
+      "message": "As mentioned in the comments we can land with the two images here with the assumption that there is going to be a very finite amount of them.",
+      "revId": "81eb659d205708f787c898b1d3bd3bb586ea53e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

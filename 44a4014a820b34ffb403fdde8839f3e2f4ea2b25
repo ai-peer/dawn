@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67b456b4_4bacbcc3",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T10:26:22Z",
+      "side": 1,
+      "message": "It gets very complicated to depend on other directories like that. Ultimately the Kotlin tests don\u0027t need to check that rendering happens correctly because Dawn has two different test suites that to that extensively already. The testing for Kotlin needs to cover most of the codegen templates / manually written code, not for all of Dawn. So we should have a limited number of targeted tests. (ofc there\u0027s also running the Dawn tests on a variety of devices but that\u0027s orthogonal to Kotlin work).",
+      "parentUuid": "8ae980d5_83fd9e8a",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa57b584_e4fcfc71",
