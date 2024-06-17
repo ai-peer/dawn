@@ -88,6 +88,24 @@
       "parentUuid": "20d81a08_06645bd8",
       "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6767bc_bf2e4aa6",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T18:22:29Z",
+      "side": 1,
+      "message": "Reverted to patchset 2. Will change our build script to not build fuzzers on x86.",
+      "parentUuid": "7e0cb4d6_fa10deb6",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
