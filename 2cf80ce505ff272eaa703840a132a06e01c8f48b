@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43fca588_2660c286",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T09:04:43Z",
+      "side": 1,
+      "message": "It\u0027d be nice to not have to break the layering here. IIUC the current path is [1a][1b][1c]. Can\u0027t we replace the call at [1c] with `UpdateSubresource1` for the same effect?",
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "016e87bc_779f17fb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T09:04:43Z",
+      "side": 1,
+      "message": "[1b]",
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d7d5dbf_0a4d3aa5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T09:04:43Z",
+      "side": 1,
+      "message": "[1c]",
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
