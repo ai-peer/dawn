@@ -189,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4dbf83a_c2ce9306",
+        "filename": "tools/android/webgpu/src/main/java/android/dawn/helper/Textures.kt",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T07:57:22Z",
+      "side": 1,
+      "message": "If we want to expose that as the utility library provided by Google for Kotlin WebGPU, we should handle all the size formats etc, but if its just for test then we can impose the constraints we want.",
+      "parentUuid": "466ee384_9f003bc3",
+      "range": {
+        "startLine": 34,
+        "startChar": 33,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "10567473f3e0b5d924149848c1593b11e42ad32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c218061_abfa6d0b",

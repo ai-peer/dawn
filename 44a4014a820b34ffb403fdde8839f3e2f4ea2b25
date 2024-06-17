@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37a52891_2c2a4ba7",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T07:57:22Z",
+      "side": 1,
+      "message": "In Dawn we\u0027ve gotten away with not using a single image for tests, a couple are fine, but a proliferation of them would be very unfortunate. Note that piper (google3) isn\u0027t like Git where all developers have the whole history of the repo, so adding images doesn\u0027t forever increase the size for all devs.",
+      "parentUuid": "4361b858_989a62e3",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa57b584_e4fcfc71",
         "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
         "patchSetId": 4
