@@ -16,6 +16,24 @@
       "message": "The dawn bots don\u0027t use cmake on x86, but that doesn\u0027t mean other users won\u0027t. Should this instead be an option which defaults to off?",
       "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b104479a_7f9eead1",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-17T17:57:04Z",
+      "side": 1,
+      "message": "No, it should be true. Currently this flag is only used if you attempt to build fuzzers. After this lands, I will also make sure the user-facing option `DAWN_USE_BUILT_DXC` will error if `TINT_BUILD_SUPPORTS_DXC` is false, which will not fail for now. I will do the same with our GN build, but with `dawn_use_built_dxc` and `tint_build_supports_dxc`. Actually, I\u0027m realizing I should name this flag `dawn_build_supports_dxc` (not prefix with \"tint\").",
+      "parentUuid": "c37430ac_bce47f6a",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
