@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37430ac_bce47f6a",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-17T17:53:46Z",
+      "side": 1,
+      "message": "The dawn bots don\u0027t use cmake on x86, but that doesn\u0027t mean other users won\u0027t. Should this instead be an option which defaults to off?",
+      "revId": "b82964af77f29cb0d12f30b912454e489cbaa717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
