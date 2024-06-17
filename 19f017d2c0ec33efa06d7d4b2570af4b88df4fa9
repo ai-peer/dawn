@@ -70,6 +70,24 @@
       "parentUuid": "970d41bf_7592b2c8",
       "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f7b2c0_2f2ae627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-17T14:45:46Z",
+      "side": 1,
+      "message": "I have been taking a look at the documentation for INTERFACE_LINK_LIBRARIES that does in fact state that the effect would be automatic not optional for including clients.\n\nIn fact what might be happening is that absl simply doesn\u0027t internally use kEmptyGroup.\n\nMy concerns might ultimately stem from the fairly typical scenario that the libraries have more dependencies that would be required with splitting and dependency injection, so cause a clumping effect with the graphs are combined.\n\nIn practice not including the TARGET_LINK_LIBRARIES does allow a slimmer graph (which is critical for my project) but maybe that\u0027s not where the problem ultimately lies.\n\nI agree to drop this one and go with the other CL that includes INTEFACE_LINK_LIBRARIES.",
+      "parentUuid": "5282a8c9_0ae521de",
+      "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
