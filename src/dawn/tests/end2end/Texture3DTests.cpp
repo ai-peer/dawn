@@ -42,6 +42,8 @@ constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
 class Texture3DTests : public DawnTest {};
 
 TEST_P(Texture3DTests, Sampling) {
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsANGLED3D11() && IsAMD());
+
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     // Set up pipeline. Two triangles will be drawn via the pipeline. They will fill the entire
