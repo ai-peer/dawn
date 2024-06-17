@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad08c134_67b5dcc3",
+        "filename": "tools/android/webgpu/src/androidTest/assets/compare/green.png",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-17T09:07:14Z",
+      "side": 1,
+      "message": "If we just want to test a triangle and don\u0027t think we\u0027re going to add many more rendering tests that are image-based in the future than I think it\u0027s ok to add the images (, if 0.1% sad). On the other hand if we start adding dozens of them because we are building a full test suite, then it would be a problem.",
+      "parentUuid": "f20c563e_9907f185",
+      "revId": "44a4014a820b34ffb403fdde8839f3e2f4ea2b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa57b584_e4fcfc71",
         "filename": "tools/android/webgpu/src/androidTest/java/net/android/dawn/ImageTest.kt",
         "patchSetId": 4
