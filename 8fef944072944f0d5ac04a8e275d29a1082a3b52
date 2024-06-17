@@ -16,6 +16,24 @@
       "message": "Note that this suffers the same bug as MSL where not all calls will get emitted:\ncrbug.com/342650077\nE2E tests won\u0027t catch this and I don\u0027t know if we have CTS coverage that will either, so worth opening a bug to make sure we don\u0027t forget.",
       "revId": "8fef944072944f0d5ac04a8e275d29a1082a3b52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53b5ee1_4b6da7c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-17T14:44:16Z",
+      "side": 1,
+      "message": "https://issues.chromium.org/issues/347690530",
+      "parentUuid": "0bf864d4_cfdc3001",
+      "revId": "8fef944072944f0d5ac04a8e275d29a1082a3b52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
