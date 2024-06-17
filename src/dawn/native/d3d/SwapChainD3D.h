@@ -64,7 +64,7 @@ class SwapChain : public SwapChainBase {
     virtual MaybeError DetachAndWaitForDeallocation() = 0;
 
     MaybeError PresentDXGISwapChain();
-    void ReleaseDXGISwapChain();
+    void ReleaseDXGIResources();
 
     IDXGISwapChain3* GetDXGISwapChain() const;
 

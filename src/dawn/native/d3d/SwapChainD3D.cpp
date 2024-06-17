@@ -97,13 +97,13 @@ DXGI_USAGE ToDXGIUsage(wgpu::TextureUsage usage) {
 DXGI_ALPHA_MODE ToDXGIAlphaMode(wgpu::CompositeAlphaMode mode) {
     switch (mode) {
         case wgpu::CompositeAlphaMode::Auto:
-            return DXGI_ALPHA_MODE_UNSPECIFIED;
+            break;
         case wgpu::CompositeAlphaMode::Opaque:
             return DXGI_ALPHA_MODE_IGNORE;
         case wgpu::CompositeAlphaMode::Premultiplied:
             return DXGI_ALPHA_MODE_PREMULTIPLIED;
         case wgpu::CompositeAlphaMode::Unpremultiplied:
-            return DXGI_ALPHA_MODE_STRAIGHT;
+            break;
         case wgpu::CompositeAlphaMode::Inherit:
             return DXGI_ALPHA_MODE_UNSPECIFIED;
         default:
@@ -214,7 +214,7 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     swapChainDesc.BufferUsage = mConfig.usage;
     swapChainDesc.BufferCount = mConfig.bufferCount;
     swapChainDesc.Scaling = DXGI_SCALING_STRETCH;
-    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
+    swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_SEQUENTIAL;
     swapChainDesc.AlphaMode = mConfig.alphaMode;
     swapChainDesc.Flags = mConfig.swapChainFlags;
 
@@ -232,9 +232,8 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
 
             // Create composition
             ComPtr<IDCompositionDevice> compositionDevice = nullptr;
-            DAWN_TRY(CheckHRESULT(
-                DCompositionCreateDevice(NULL, __uuidof(compositionDevice), &compositionDevice),
-                "Creating DCompositionDevice"));
+            DAWN_TRY(CheckHRESULT(DCompositionCreateDevice(NULL, IID_PPV_ARGS(&compositionDevice)),
+                                  "Creating DCompositionDevice"));
 
             DAWN_TRY(CheckHRESULT(
                 compositionDevice->CreateTargetForHwnd(static_cast<HWND>(GetSurface()->GetHWND()),
@@ -244,11 +243,14 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
             DAWN_TRY(CheckHRESULT(compositionDevice->CreateVisual(&mDCompositionVisual),
                                   "Creating composition visual"));
 
-            mDCompositionVisual->SetContent(swapChain1.Get());
-            mDCompositionTarget->SetRoot(mDCompositionVisual.Get());
-            compositionDevice->Commit();
+            DAWN_TRY(CheckHRESULT(mDCompositionVisual->SetContent(swapChain1.Get()),
+                                  "Setting content of composition visual"));
 
-            compositionDevice = nullptr;
+            DAWN_TRY(CheckHRESULT(mDCompositionTarget->SetRoot(mDCompositionVisual.Get()),
+                                  "Setting root visual of composition target"));
+
+            DAWN_TRY(CheckHRESULT(compositionDevice->Commit(), "Committing composition"));
+
             break;
         }
         case Surface::Type::WindowsCoreWindow: {
@@ -294,7 +296,7 @@ MaybeError SwapChain::PresentDXGISwapChain() {
     return {};
 }
 
-void SwapChain::ReleaseDXGISwapChain() {
+void SwapChain::ReleaseDXGIResources() {
     mDXGISwapChain = nullptr;
     mDCompositionTarget = nullptr;
     mDCompositionVisual = nullptr;
