@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace1104a_78038cfa",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-17T11:26:23Z",
+      "side": 1,
+      "message": "\u003e Can\u0027t we replace the call at [1c] with UpdateSubresource1 for the same effect?\n\n\nPer my understanding we can\u0027t do that way. Currently we use `UpdateSubresource1` only for full size update, where we don\u0027t need to care the existing data in the buffer as it will be completely overwritten and useless. In the CL, we can also use it for partial update due to the fact that there is no valid data in the buffer when firstly creating the buffer. This is why I added a new test case in the CL to guard this.\n\nThe information from the validation layer:\n\n```ID3D11DeviceContext::UpdateSubresource1: When a Resource is created with the \nD3D11_BIND_CONSTANT_BUFFER flag, UpdateSubresource1 must pass NULL for pDstBox \n(partial update not allowed) unless the driver supports partial constant buffer \nupdates and CopyFlags is either D3D11_COPY_NO_OVERWRITE or D3D11_COPY_DISCARD. \n```",
+      "parentUuid": "72c740a9_0787e353",
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "016e87bc_779f17fb",
