@@ -69,6 +69,24 @@
       "parentUuid": "ee9f5ddd_c0d5d89b",
       "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f100060_9ee59161",
+        "filename": "src/tint/cmd/fuzz/wgsl/main_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-17T14:23:44Z",
+      "side": 1,
+      "message": "In which case, can\u0027t we just move the setting of options.dxc specifically into the above block? Having the two split blocks makes things harder to understand.",
+      "parentUuid": "aa3afdde_74f9daaf",
+      "revId": "1451d5358ae8d4e9501f3479d6e8e045d6e5822d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
