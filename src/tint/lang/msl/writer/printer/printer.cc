@@ -445,6 +445,9 @@ class Printer : public tint::TextGenerator {
             case core::UnaryOp::kComplement:
                 out << "~";
                 break;
+            case core::UnaryOp::kNot:
+                out << "!";
+                break;
             default:
                 TINT_UNIMPLEMENTED() << u->Op();
         }
