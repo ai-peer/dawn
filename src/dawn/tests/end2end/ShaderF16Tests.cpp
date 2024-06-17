@@ -301,6 +301,8 @@ fn FSMain(fsInput: FSInput) -> @location(0) vec4f {
 TEST_P(ShaderF16Tests, RenderPipelineIOF16_VertexAttribute) {
     // Skip if device don't support f16 extension.
     DAWN_TEST_UNSUPPORTED_IF(!device.HasFeature(wgpu::FeatureName::ShaderF16));
+    
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsAMD());
 
     const char* shader = R"(
 enable f16;

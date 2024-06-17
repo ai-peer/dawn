@@ -401,6 +401,8 @@ TEST_P(SwapChainWithAdditionalUsageTests, GetSurfaceSupportedUsage) {
 
 // Test that sampling from swapchain is supported.
 TEST_P(SwapChainWithAdditionalUsageTests, SamplingFromSwapChain) {
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsD3D12() && IsAMD());
+
     wgpu::TextureUsage supportedUsages;
     EXPECT_DEPRECATION_WARNING(supportedUsages = device.GetSupportedSurfaceUsage(surface));
 
