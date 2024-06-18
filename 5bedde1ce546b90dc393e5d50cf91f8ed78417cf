@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4884831_cf47d84a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-18T19:44:41Z",
+      "side": 1,
+      "message": "I pushed the original change as-is first, and made additional changes in patchset 2.",
+      "revId": "5bedde1ce546b90dc393e5d50cf91f8ed78417cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
