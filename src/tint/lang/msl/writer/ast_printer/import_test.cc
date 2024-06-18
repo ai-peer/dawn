@@ -130,7 +130,7 @@ INSTANTIATE_TEST_SUITE_P(MslASTPrinterTest,
                          testing::Values(MslImportData{"atan2", "atan2"},
                                          MslImportData{"max", "fmax"},
                                          MslImportData{"min", "fmin"},
-                                         MslImportData{"pow", "pow"},
+                                         MslImportData{"pow", "powr"},
                                          MslImportData{"step", "step"}));
 
 TEST_F(MslASTPrinterTest, MslImportData_DualParam_ScalarDistance) {
