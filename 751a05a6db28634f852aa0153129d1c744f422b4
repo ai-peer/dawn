@@ -198,6 +198,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2280df5_143b212c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T16:59:29Z",
+      "side": 1,
+      "message": "IMO I don\u0027t think we should leave a TODO. I feel like there are already too many half-implemented things in the D3D11 backend and I don\u0027t want to continue doing that. If we\u0027re going to have UMA mapping we should implement the feature fully, or we should implement another solution.",
+      "parentUuid": "007a1c72_e091bbcf",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
