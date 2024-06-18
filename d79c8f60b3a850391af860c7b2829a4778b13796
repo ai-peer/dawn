@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf6f1a6a_2cf2e645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-06-18T23:45:39Z",
+      "side": 1,
+      "message": "note: this validation was never implemented for create pipeline so there was nothing to remove.",
+      "revId": "d79c8f60b3a850391af860c7b2829a4778b13796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
