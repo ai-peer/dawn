@@ -50,6 +50,24 @@
       "message": "```suggestion\n            auto HandleTextureBinding \u003d [\u0026]() {\n```",
       "revId": "80573f41f5bef4cb485eeea197969a7189f39031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be668336_c459d1c2",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-18T18:47:19Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "46198a1f_c64769fa",
+      "revId": "80573f41f5bef4cb485eeea197969a7189f39031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
