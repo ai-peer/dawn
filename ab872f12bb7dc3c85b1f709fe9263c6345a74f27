@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22995323_302001bf",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-18T15:40:27Z",
+      "side": 1,
+      "message": "Nit: ShaderIO transform",
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c5cf7a5_2e858f94",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-18T15:40:27Z",
+      "side": 1,
+      "message": "The comment is inaccurate (these pointers /are/ now allowed in WGSL), but I also don\u0027t think that this case is actually reachable any more. I think DVA gets rid of them entirely. I tried replacing this with `TINT_UNREACHABLE` in the AST printer and all of our E2E and unit tests still pass.",
+      "range": {
+        "startLine": 204,
+        "startChar": 24,
+        "endLine": 213,
+        "endChar": 34
+      },
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee24e826_18433bfa",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-18T15:40:27Z",
+      "side": 1,
+      "message": "Nit: I\u0027d also drop the the `WGSL` from this comment, since technically the input IR could have come from a non-WGSL source (e.g. SPIR-V).",
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
