@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17e1c68_44d5a89d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-18T16:25:35Z",
+      "side": 1,
+      "message": "LGTM but needs E2E test expectations updates as Dan mentioned:\n\nShould be able to use the following command to do it:\n```\n./tools/run tests --tint /path/to/build/tint --format msl --generate-expected\n```",
+      "revId": "df2dbd20ff867011f943f7345d8ab04298d5b5a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
