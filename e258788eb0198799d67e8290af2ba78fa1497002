@@ -16,6 +16,24 @@
       "message": "This seems unrelated?",
       "revId": "e258788eb0198799d67e8290af2ba78fa1497002",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6123534_53de957f",
+        "filename": "src/tint/lang/wgsl/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-18T13:22:21Z",
+      "side": 1,
+      "message": "Nice catch. I have literally no idea how this got in here.",
+      "parentUuid": "e3edc9aa_648415d0",
+      "revId": "e258788eb0198799d67e8290af2ba78fa1497002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
