@@ -34,6 +34,8 @@ target_sources(dawn_utils PRIVATE
     "ComboRenderBundleEncoderDescriptor.h"
     "ComboRenderPipelineDescriptor.cpp"
     "ComboRenderPipelineDescriptor.h"
+    "CommandLineParser.cpp"
+    "CommandLineParser.h"
     "PlatformDebugLogger.h"
     "SystemUtils.cpp"
     "SystemUtils.h"
@@ -50,14 +52,21 @@ target_sources(dawn_utils PRIVATE
     "WireHelper.h"
 )
 target_link_libraries(dawn_utils
-    PUBLIC dawncpp_headers
-           partition_alloc
-    PRIVATE dawn_internal_config
-            dawn_common
-            dawn_native
-            dawn_proc
-            dawn_wire
-            SPIRV-Tools-opt
+    PUBLIC
+        dawncpp_headers
+        partition_alloc
+    INTERFACE
+        absl::span
+    PRIVATE
+        dawn_internal_config
+        dawn_common
+        dawn_native
+        dawn_proc
+        dawn_wire
+        SPIRV-Tools-opt
+        absl::strings
+        absl::str_format_internal
+        absl::flat_hash_map
 )
 
 # Needed by WGPUHelpers
