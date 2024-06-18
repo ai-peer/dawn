@@ -77,6 +77,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8406b77_c9d97378",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-18T05:13:15Z",
+      "side": 1,
+      "message": "Thank you, Quyen, for the comment. It makes sense to me.",
+      "parentUuid": "92127d6a_bb66d848",
+      "range": {
+        "startLine": 394,
+        "startChar": 4,
+        "endLine": 424,
+        "endChar": 5
+      },
+      "revId": "2cf80ce505ff272eaa703840a132a06e01c8f48b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "016e87bc_779f17fb",
