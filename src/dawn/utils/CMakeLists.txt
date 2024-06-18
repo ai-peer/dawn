@@ -34,6 +34,8 @@ target_sources(dawn_utils PRIVATE
     "ComboRenderBundleEncoderDescriptor.h"
     "ComboRenderPipelineDescriptor.cpp"
     "ComboRenderPipelineDescriptor.h"
+    "CommandLineParser.cpp"
+    "CommandLineParser.h"
     "PlatformDebugLogger.h"
     "SystemUtils.cpp"
     "SystemUtils.h"
@@ -58,6 +60,9 @@ target_link_libraries(dawn_utils
             dawn_proc
             dawn_wire
             SPIRV-Tools-opt
+            absl::strings
+            absl::str_format_internal
+            absl::flat_hash_map
 )
 
 # Needed by WGPUHelpers
