@@ -97,7 +97,7 @@ deps = {
   },
 
   'third_party/depot_tools': {
-    'url': '{chromium_git}/chromium/tools/depot_tools.git@43c6415bced9310c0aefabadaac2d405fbd5043d',
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@90d00845c5d8b128a0ae8d83e80a478284067962',
     'condition': 'dawn_standalone',
   },
 
@@ -262,22 +262,22 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@973e5261a0fde28384e2033e8c7fb314c4e77cf7',
+    'url': '{chromium_git}/angle/angle@7f70cd0da27c0fdcf09aa2bd57999c987d39bd59',
     'condition': 'dawn_standalone',
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@085997ddb08b9df39e55dd727f8145d1a7aa9ce4',
+    'url': '{swiftshader_git}/SwiftShader@cea33ab2d5ad50cd7f1881fb9c36ffcaecdd69fc',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@7db4057407f4a29aec29bd7fcce842120f3f1e9d',
+    'url': '{chromium_git}/vulkan-deps@7f05a36fb6d9c2c6283eaad78b0b9047e6eb19da',
     'condition': 'dawn_standalone',
   },
 
   'third_party/glslang/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/glslang@a92c61f8456fa9731c0b000a2c6fc52a740c2be7',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/glslang@19efb4ec60febf569ad3cf2f2fd71bbd20ff4617',
     'condition': 'dawn_standalone',
   },
 
@@ -297,27 +297,27 @@ deps = {
   },
 
   'third_party/vulkan-headers/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@d192041a2fc9c9fd8ae67d8ae3f32c5511541f04',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Headers@8f034f6b48fd2d30f711396a021e1dc050c8941c',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-loader/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Loader@03c0920555fc900b741f6eab0089cb6b52f9f506',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Loader@f23f8b7ae5adc4979ad8466e7ccdf024ec7c0c93',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-tools/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Tools@a9a1bcd709e185700847268eb4310f6484b027bc',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Tools@345af476e583366352e014ee8e43fc5ddf421ab9',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-utility-libraries/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Utility-Libraries@07759f04791dc3fbb390174f0d24d4a792e0d357',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-Utility-Libraries@1b07de9a3a174b853833f7f87a824f20604266b9',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-validation-layers/src': {
-    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-ValidationLayers@e130d5bd2cea031409a9481e3c85c4cd3ddc39fc',
+    'url': '{chromium_git}/external/github.com/KhronosGroup/Vulkan-ValidationLayers@8f3d3736ce1c4167958882c2b69dd4ba753457ee',
     'condition': 'dawn_standalone',
   },
 
@@ -332,7 +332,7 @@ deps = {
   },
 
   'third_party/dxc': {
-    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@56f3c40381591fcc7e9c0c0f43fd6142ff89f937',
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@8c3f40c0ae12cbc128832ff546eccc62c9945418',
   },
 
   'third_party/dxheaders': {

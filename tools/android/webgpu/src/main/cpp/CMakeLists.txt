@@ -41,11 +41,13 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 add_subdirectory(../../../../../.. dawn)
 
-target_compile_definitions(webgpu_dawn PRIVATE WGPU_IMPLEMENTATION WGPU_SHARED_LIBRARY)
+set(C_BINDINGS_PATH ../../../../../../out/Debug/gen/cpp)
 
-add_library(native_dawn methods.cpp structures.cpp Util.cpp ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
+add_library(native_dawn ${C_BINDINGS_PATH}/methods.cpp ${C_BINDINGS_PATH}/structures.cpp Util.cpp ${CMAKE_SOURCE_DIR}/gen/include/dawn/webgpu.h)
 
-bundle_libraries(webgpu_c_bundled webgpu_dawn native_dawn)
+target_link_libraries(native_dawn webgpu_dawn)
+
+bundle_libraries(webgpu_c_bundled native_dawn)
 
 find_library(log-lib log)
 
