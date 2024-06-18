@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "80573f41f5bef4cb485eeea197969a7189f39031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "124f75cc_9dd09a29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-18T09:12:59Z",
+      "side": 1,
+      "message": "LGTM! One very small nit.",
+      "revId": "80573f41f5bef4cb485eeea197969a7189f39031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46198a1f_c64769fa",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-18T09:12:59Z",
+      "side": 1,
+      "message": "```suggestion\n            auto HandleTextureBinding \u003d [\u0026]() {\n```",
+      "revId": "80573f41f5bef4cb485eeea197969a7189f39031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
