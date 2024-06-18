@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78478856_27f53966",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T00:03:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b70a81_d2372e94",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T00:03:21Z",
+      "side": 1,
+      "message": "u-nit: maybe \"find_by_name\" since reading this, you might ask if there\u0027s such a thing as an \"unnamed member\"",
+      "range": {
+        "startLine": 1017,
+        "startChar": 4,
+        "endLine": 1017,
+        "endChar": 20
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1c32b6_7c1c7ab6",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T00:03:21Z",
+      "side": 1,
+      "message": "hmm... what if we don\u0027t allow binding a binding lambda here either? then we don\u0027t have to worry about this allocation leaking if Set is called multiple times",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 0
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
