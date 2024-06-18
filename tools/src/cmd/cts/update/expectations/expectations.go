@@ -40,6 +40,7 @@ import (
 	"dawn.googlesource.com/dawn/tools/src/cts/expectations"
 	"dawn.googlesource.com/dawn/tools/src/cts/query"
 	"dawn.googlesource.com/dawn/tools/src/cts/result"
+	"dawn.googlesource.com/dawn/tools/src/resultsdb"
 	"go.chromium.org/luci/auth/client/authcli"
 )
 
@@ -107,6 +108,11 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 		return fmt.Errorf("failed to obtain authentication options: %w", err)
 	}
 
+	client, err := resultsdb.NewBigQueryClient(ctx, resultsdb.DefaultQueryProject)
+	if err != nil {
+		return err
+	}
+
 	// Fetch the results
 	log.Println("fetching results...")
 	resultsByExecutionMode, err := c.flags.results.GetResults(ctx, cfg, auth)
@@ -146,7 +152,33 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 		if strings.Contains(expectationsFilename, "compat") {
 			name = "compat"
 		}
-		diag, err := ex.Update(resultsByExecutionMode[name], testlist, c.flags.verbose)
+
+		// TODO: Move into helper?
+		numMatches := 0
+		var prefixes []string
+		for _, test := range cfg.Tests {
+			if test.ExecutionMode == name {
+				numMatches += 1
+				prefixes = test.Prefixes
+			}
+		}
+		if numMatches == 0 {
+			return fmt.Errorf("failed to find prefixes for execution mode '%s'", name)
+		}
+		if numMatches > 1 {
+			return fmt.Errorf("found multiple sets of prefixes for execution mode '%s", name)
+		}
+		variants := make([]result.Tags, 0)
+		for _, p := range prefixes {
+			v, err := client.QueryVariants(ctx, p)
+			if err != nil {
+				return err
+			}
+			variants = append(variants, v...)
+		}
+		variants = common.TrimVariants(variants, ex.Tags.GetKnownTags())
+
+		diag, err := ex.Update(resultsByExecutionMode[name], testlist, variants, c.flags.verbose)
 		if err != nil {
 			return err
 		}

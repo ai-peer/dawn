@@ -57,7 +57,7 @@ import (
 // Note: Validate() should be called before attempting to update the
 // expectations. If Validate() returns errors, then Update() behaviour is
 // undefined.
-func (c *Content) Update(results result.List, testlist []query.Query, verbose bool) (Diagnostics, error) {
+func (c *Content) Update(results result.List, testlist []query.Query, variants []result.Tags, verbose bool) (Diagnostics, error) {
 	// Make a copy of the results. This code mutates the list.
 	results = append(result.List{}, results...)
 
@@ -72,10 +72,6 @@ func (c *Content) Update(results result.List, testlist []query.Query, verbose bo
 	for i, s := range c.Tags.Sets {
 		tagSets[len(tagSets)-i-1] = s.Tags
 	}
-
-	// Scan the full result list to obtain all the test variants
-	// (unique tag combinations).
-	variants := results.Variants()
 
 	if verbose {
 		fmt.Println("result variants:")
