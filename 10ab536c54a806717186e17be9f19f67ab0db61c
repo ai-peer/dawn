@@ -1,0 +1,68 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd84116e_a5495463",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 3461520
+      },
+      "writtenOn": "2024-06-18T20:49:15Z",
+      "side": 1,
+      "message": ".fd",
+      "range": {
+        "startLine": 378,
+        "startChar": 31,
+        "endLine": 378,
+        "endChar": 35
+      },
+      "revId": "10ab536c54a806717186e17be9f19f67ab0db61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a998b1d5_4e1cc7a1",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 3461520
+      },
+      "writtenOn": "2024-06-18T20:49:15Z",
+      "side": 1,
+      "message": "i ,",
+      "range": {
+        "startLine": 382,
+        "startChar": 47,
+        "endLine": 382,
+        "endChar": 48
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "341ef282_de5e0a8b",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+              "range": {
+                "startLine": 382,
+                "startChar": 0,
+                "endLine": 383,
+                "endChar": 0
+              },
+              "replacement": "                        \"fds must be the same.\", i,\n"
+            }
+          ]
+        }
+      ],
+      "revId": "10ab536c54a806717186e17be9f19f67ab0db61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
