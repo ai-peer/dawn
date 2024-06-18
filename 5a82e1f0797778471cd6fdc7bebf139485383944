@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a50a10_500a8d01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T22:10:14Z",
+      "side": 1,
+      "message": "you can see that in \n\nhttps://chromium-swarm.appspot.com/task?id\u003d6a463004ce8a2811\u0026o\u003dtrue\u0026w\u003dtrue\n\nyou see all the logs, including the INFO logs printed:\n\u003e [10550:259:0618/150221.647139:INFO:CONSOLE(249)] \"Logs from webgpu:shader,validation,expression,binary,div_rem:scalar_vector_out_of_range:op\u003d\"div\";lhs\u003d\"vec2%3Cf16%3E\";rhs\u003d\"vec2%3Cf16%3E\"\", source: http://127.0.0.1:58054/webgpu-cts/test_runner.js (249)\n[10550:259:0618/150221.647406:INFO:CONSOLE(251)] \"INFO: subcase: swap\u003dfalse;nonOneIndex\u003d0;leftValue\u003d0;rightValue\u003d42;error\u003dfalse;leftRuntime\u003dfalse;stage\u003d\"override\"\nOK\", source: http://127.0.0.1:58054/webgpu-cts/test_runner.js (251)\n[10550:259:0618/150221.647596:INFO:CONSOLE(251)] \"INFO: subcase: swap\u003dfalse;nonOneIndex\u003d1;leftValue\u003d0;rightValue\u003d42;error\u003dfalse;leftRuntime\u003dfalse;stage\u003d\"override\"\nOK\", source: http://127.0.0.1:58054/webgpu-cts/test_runner.js (251)\n[10550:259:0618/150221.647733:INFO:CONSOLE(251)] \"EXPECTATION FAILED: subcase: swap\u003dfalse;nonOneIndex\u003d0;leftValue\u003d42;rightValue\u003d0;error\u003dtrue;leftRuntime\u003dtrue;stage\u003d\"constant\"\nExpected validation error\", source: http://127.0.0.1:58054/webgpu-cts/test_runner.js (251)\n[10550:259:0618/150221.647849:INFO:CONSOLE(251)] \"VALIDATION FAILED: subcase: swap\u003dfalse;nonOneIndex\u003d0;leftValue\u003d42;rightValue\u003d0;error\u003dtrue;leftRuntime\u003dtrue;stage\u003d\"constant\"\nMissing expected compilationInfo \u0027error\u0027 message.\n\nbut here: https://ci.chromium.org/ui/p/chromium/builders/try/mac-arm64-dawn-rel/6265/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3Awebgpu%3Ashader%2Cvalidation%2Cexpression%2Cbinary%2Cdiv_rem%3Ascalar_vector_out_of_range%3Aop%3D%22div%22%3Blhs%3D%22vec2%253Cf16%253E%22%3Brhs%3D%22vec2%253Cf16%253E%22\n\nthe INFO logs are not in the Failure Reason",
+      "revId": "5a82e1f0797778471cd6fdc7bebf139485383944",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
