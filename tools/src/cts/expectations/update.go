@@ -57,7 +57,7 @@ import (
 // Note: Validate() should be called before attempting to update the
 // expectations. If Validate() returns errors, then Update() behaviour is
 // undefined.
-func (c *Content) Update(results result.List, testlist []query.Query, verbose bool) (Diagnostics, error) {
+func (c *Content) Update(results result.List, testlist []query.Query, variants []result.Tags, verbose bool) (Diagnostics, error) {
 	// Make a copy of the results. This code mutates the list.
 	results = append(result.List{}, results...)
 
@@ -73,9 +73,8 @@ func (c *Content) Update(results result.List, testlist []query.Query, verbose bo
 		tagSets[len(tagSets)-i-1] = s.Tags
 	}
 
-	// Scan the full result list to obtain all the test variants
-	// (unique tag combinations).
-	variants := results.Variants()
+	// Remove any unknown tags from the given variants.
+	//variants = c.removeUnknownTags(variants)
 
 	if verbose {
 		fmt.Println("result variants:")
@@ -233,6 +232,9 @@ func buildResultQueryTree(results result.List) resultQueryTree {
 	// Build a map of query to result indices
 	queryToIndices := map[query.Query][]int{}
 	for i, r := range results {
+		/*if query.Parse("webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:*").Contains(r.Query) {
+			log.Printf("Got relevant result with tags %v and status %v\n", r.Tags, r.Status)
+		}*/
 		l := queryToIndices[r.Query]
 		l = append(l, i)
 		queryToIndices[r.Query] = l
@@ -366,6 +368,12 @@ func (u *updater) build() error {
 	for _, chunk := range u.in.Chunks {
 		// Does the chunk comment contain 'KEEP' or 'BEGIN TAG HEADER' ?
 		keep := false
+
+		/*for _, e := range chunk.Expectations {
+			if e.Query == "webgpu:shader,execution,expression,call,builtin,textureSample:sampled_2d_coords:*" {
+				fmt.Printf("Found expectation while iterating over chunks at start of build. Tags: %v Status: %v\n", e.Tags, e.Status)
+			}
+		}*/
 
 	comments:
 		for _, l := range chunk.Comments {
@@ -639,11 +647,96 @@ func (u *updater) expectationsForRoot(
 		return nil, false, false
 	}
 
+	// TODO: Move this logic into the caller so that we aren't re-creating the
+	// fake results every time.
+
+	// Figure out which variants are for tests/configurations which aren't run
+	// during CTS rolls.
+	resultsWithKnownTags := u.removeUnknownTags(results)
+	variantsFromResults := resultsWithKnownTags.Variants()
+	allVariants := u.in.removeUnknownTags(u.variants)
+	variantsWithoutResults := make([]result.Tags, 0)
+	for _, variant := range allVariants {
+		foundMatch := false
+		for _, vfr := range variantsFromResults {
+			if variant.Equal(vfr) {
+				foundMatch = true
+				break
+			}
+		}
+		if !foundMatch {
+			variantsWithoutResults = append(variantsWithoutResults, variant)
+		}
+	}
+
+	knownQueries := make(map[string]query.Query)
+	for _, res := range resultsWithKnownTags {
+		queryString := res.Query.String()
+		if _, found := knownQueries[queryString]; !found {
+			knownQueries[queryString] = res.Query
+		}
+	}
+
+	// Initially, create a fake Pass result for every combination of query and
+	// variantsWithoutResults. These will be updated to fake Failure results if
+	// any expectations match the query.
+	fakeResults := make(map[string]map[query.Query]result.Result)
+	for _, variant := range variantsWithoutResults {
+		variantString := result.TagsToString(variant)
+		fakeResults[variantString] = make(map[query.Query]result.Result)
+		for queryString := range knownQueries {
+			q := knownQueries[queryString]
+			fakeResults[variantString][q] = result.Result{
+				Query: q,
+				Tags: variant,
+				Status: result.Pass,
+				Duration: 0,
+				MayExonerate: false,
+			}
+		}
+	}
+
+	// Fill in fake Failure results so that MinimalVariantTags does not produce
+	// variants that will conflict with expectations for configurations that are
+	// not run as part of the CTS roll.
+	for _, chunk := range u.in.Chunks {
+		for _, e := range chunk.Expectations {
+			// Skip over any expectations that are not relevant to the given root.
+			q := query.Parse(e.Query)
+			if !root.Contains(q) {
+				continue
+			}
+			for _, variant := range variantsWithoutResults {
+				// If this variant applies to the expectation, update the result.
+				if variant.ContainsAll(e.Tags) {
+					variantString := result.TagsToString(variant)
+					res := fakeResults[variantString][q]
+					res.Status = result.Failure
+					fakeResults[variantString][q] = res
+				}
+			}
+		}
+	}
+
+	fakeResultsList := make(result.List, 0)
+	for variantString := range fakeResults {
+		for q := range fakeResults[variantString] {
+			fakeResultsList = append(fakeResultsList, fakeResults[variantString][q])
+		}
+	}
+	combinedResults := append(resultsWithKnownTags, fakeResultsList...)
+
 	// Using the full list of unfiltered tests, generate the minimal set of
 	// variants (tags) that uniquely classify the results with differing status.
-	minimalVariants := u.
+	/*minimalVariants := u.
 		removeUnknownTags(results).
-		MinimalVariantTags(u.tagSets)
+		MinimalVariantTags(u.tagSets, u.in.removeUnknownTags(u.variants))*/
+	minimalVariants := combinedResults.MinimalVariantTags(u.tagSets)
+
+	fmt.Println(fmt.Sprintf("\n\nMinimal variants for root: %v", root.String()))
+	for i, tags := range minimalVariants {
+		fmt.Printf(" (%.2d) %v\n", i, tags.List())
+	}
 
 	// For each minimized variant...
 	reduced := result.List{}
@@ -721,6 +814,29 @@ func (u *updater) resultsToExpectations(results result.List, bug, comment string
 	}
 
 	return out
+}
+
+func (c *Content) removeUnknownTags(variants []result.Tags) []result.Tags {
+	filtered_variants := make([]result.Tags, 0)
+	for _, v := range variants {
+		fv := result.NewTags()
+		for tag := range v {
+			if _, ok := c.Tags.ByName[tag]; ok {
+				fv.Add(tag)
+			}
+		}
+		foundMatch := false
+		for _, already_filtered := range filtered_variants {
+			if fv.Equal(already_filtered) {
+				foundMatch = true
+				break
+			}
+		}
+		if !foundMatch {
+			filtered_variants = append(filtered_variants, fv)
+		}
+	}
+	return filtered_variants
 }
 
 // removeUnknownTags returns a copy of the provided results with all tags not

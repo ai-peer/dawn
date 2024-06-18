@@ -33,6 +33,7 @@ import (
 	"dawn.googlesource.com/dawn/tools/src/container"
 	"dawn.googlesource.com/dawn/tools/src/cts/expectations"
 	"github.com/google/go-cmp/cmp"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestRemoveLowerPriorityTags(t *testing.T) {
@@ -83,4 +84,26 @@ func TestRemoveLowerPriorityTags(t *testing.T) {
 			t.Errorf("TestRemoveLowerPriorityTags(%v) returned %v:\n%v", test.in, got, diff)
 		}
 	}
+}
+
+func TestGetKnownTags(t *testing.T) {
+	tags := expectations.Tags{
+		Sets: []expectations.TagSet{
+			{
+				Tags: container.NewSet(
+					"a",
+					"b",
+				),
+			},
+			{
+				Tags: container.NewSet(
+					"b",
+					"c",
+				),
+			},
+		},
+	}
+	knownTags := tags.GetKnownTags()
+	expectedTags := container.NewSet("a", "b", "c")
+	assert.True(t, knownTags.Equal(expectedTags))
 }

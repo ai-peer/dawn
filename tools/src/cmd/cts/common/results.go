@@ -412,3 +412,26 @@ func CleanResults(cfg Config, results *result.List) {
 		return result.Failure
 	})
 }
+
+// TrimVariants returns a copy of the given variants that are limited to the
+// known tags. As a result, the length of the returned slice may be shorter than
+// the input if two variants become identical after trimming.
+func TrimVariants(untrimmedVariants []result.Tags, knownTags result.Tags) []result.Tags {
+	trimmedVariants := make([]result.Tags, 0)
+	for _, variant := range untrimmedVariants {
+		intersection := variant.Intersection(knownTags)
+		if !variantListContainsVariant(trimmedVariants, intersection) {
+			trimmedVariants = append(trimmedVariants, intersection)
+		}
+	}
+	return trimmedVariants
+}
+
+func variantListContainsVariant(variantList []result.Tags, variant result.Tags) bool {
+	for _, v := range variantList {
+		if variant.Equal(v) {
+			return true
+		}
+	}
+	return false
+}

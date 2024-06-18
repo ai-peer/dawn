@@ -100,3 +100,11 @@ func (t Tags) RemoveLowerPriorityTags(tags container.Set[string]) container.Set[
 	}
 	return out
 }
+
+func (t Tags) GetKnownTags() result.Tags {
+	knownTags := result.NewTags()
+	for _, tagSet := range t.Sets {
+		knownTags.AddAll(tagSet.Tags)
+	}
+	return knownTags
+}

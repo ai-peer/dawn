@@ -33,6 +33,7 @@ import (
 	"time"
 
 	"dawn.googlesource.com/dawn/tools/src/buildbucket"
+	"dawn.googlesource.com/dawn/tools/src/container"
 	"dawn.googlesource.com/dawn/tools/src/cts/query"
 	"dawn.googlesource.com/dawn/tools/src/cts/result"
 	"dawn.googlesource.com/dawn/tools/src/resultsdb"
@@ -63,6 +64,10 @@ func (bq mockedBigQueryClient) QueryTestResults(
 		}
 	}
 	return nil
+}
+
+func (bq mockedBigQueryClient) QueryVariants(ctx context.Context, testPrefix string) ([]container.Set[string], error) {
+	return make([]container.Set[string], 0), nil
 }
 
 /*******************************************************************************
@@ -490,4 +495,43 @@ func TestCleanResultsReplacEresultDefault(t *testing.T) {
 			assert.Equal(t, results, expectedResults)
 		}
 	}
+}
+
+func TestTrimVariants(t *testing.T) {
+	// No known tags.
+	variants := []result.Tags{
+		result.NewTags("os_a"),
+		result.NewTags("os_b"),
+	}
+	knownTags := result.NewTags()
+	expectedVariants := []result.Tags{result.NewTags()}
+	trimmedVariants := TrimVariants(variants, knownTags)
+	assert.Equal(t, trimmedVariants, expectedVariants)
+
+	// No variant combining.
+	variants = []result.Tags{
+		result.NewTags("os_a", "gpu", "unknown"),
+		result.NewTags("os_b", "gpu", "unknown"),
+	}
+	knownTags = result.NewTags("os_a", "os_b", "gpu")
+	expectedVariants = []result.Tags{
+		result.NewTags("os_a", "gpu"),
+		result.NewTags("os_b", "gpu"),
+	}
+	trimmedVariants = TrimVariants(variants, knownTags)
+	assert.Equal(t, trimmedVariants, expectedVariants)
+
+	// Variant combining.
+	variants = []result.Tags{
+		result.NewTags("os_a", "gpu", "unknown_a"),
+		result.NewTags("os_b", "gpu", "unknown_a"),
+		result.NewTags("os_a", "gpu", "unknown_b"),
+	}
+	knownTags = result.NewTags("os_a", "os_b", "gpu")
+	expectedVariants = []result.Tags{
+		result.NewTags("os_a", "gpu"),
+		result.NewTags("os_b", "gpu"),
+	}
+	trimmedVariants = TrimVariants(variants, knownTags)
+	assert.Equal(t, trimmedVariants, expectedVariants)
 }
