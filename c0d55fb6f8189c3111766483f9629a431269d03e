@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94dbf52c_3d090f78",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-18T06:03:15Z",
+      "side": 1,
+      "message": "Got it, thanks!",
+      "parentUuid": "26b9d02e_31a148fd",
+      "revId": "c0d55fb6f8189c3111766483f9629a431269d03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c7ba177c_6565c9d8",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 3
@@ -101,6 +119,24 @@
       "writtenOn": "2024-06-18T04:38:24Z",
       "side": 1,
       "message": "WebGPU needs to guarantee to make forward progress. Using the DONOTFLUSH flag makes it so that forward progress may never occur.\n\nSo overall, I don\u0027t think we can use this flag in the general case. Not using it causes a flush - which I suspect will make the code path have the same overhead as using a fence.",
+      "revId": "c0d55fb6f8189c3111766483f9629a431269d03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a76016_a170db70",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-06-18T06:03:15Z",
+      "side": 1,
+      "message": "Theoretically it could happen. In fact we don\u0027t need to worry about that too much. As far as I can see in the driver, there are a few cases where the driver implicitly flushes the command buffer:\n1) the current command buffer is full.\n2) RTV is changed.\n3) Swapchain present method is called.\nIn the worst situation, even all these methods don\u0027t work, we can have a timeout to force a flush when there is any pending work, however it has been too long since last completion progress.",
+      "parentUuid": "c7ba177c_6565c9d8",
       "revId": "c0d55fb6f8189c3111766483f9629a431269d03e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
