@@ -162,6 +162,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f60c996_10275d1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-18T16:05:40Z",
+      "side": 1,
+      "message": "\u003e If you think there are reasonable simple ways to add BufferMapWriteExtendedUsages in D3D11 IMHO we can do that\n\nDo you mean `BufferMapExtendedUsages`? `BufferMapWriteExtendedUsages` only requires this CL. But the former will require additional changes in D3D11.",
+      "parentUuid": "a812c21a_a4bc4da0",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
