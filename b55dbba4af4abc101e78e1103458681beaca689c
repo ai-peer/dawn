@@ -34,6 +34,24 @@
       "parentUuid": "0b411159_0105226b",
       "revId": "b55dbba4af4abc101e78e1103458681beaca689c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec43d17_d824cc0e",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T02:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d77c516_de328741",
+      "revId": "b55dbba4af4abc101e78e1103458681beaca689c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
