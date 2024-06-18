@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68b45990_8faa516d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-18T12:15:12Z",
+      "side": 1,
+      "message": "That would work. However we could need another special case for D3D11 if we go that route. WriteBuffer requires a buffer to have CopyDst usage. That doesn\u0027t work with D3D11_USAGE_DYNAMIC.\n\nIf we rely on heuristic such as frequency of WriteBuffer to convert a buffer to dynamic buffer, at some point after that, user might call CopyB2B to copy to the dynamic buffer. And it either wouldn\u0027t work or we would need another intermediate buffer to act as CopyDst proxy (yet one more special case).\n\nUnless we add another extension for WriteBuffer on D3D11 which doesn\u0027t require CopyDst. Then why not adding this BufferMapWriteExtendedUsages extension instead?",
+      "parentUuid": "bcb65db7_d82230ac",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
