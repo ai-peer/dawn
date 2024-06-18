@@ -34,6 +34,8 @@ target_sources(dawn_utils PRIVATE
     "ComboRenderBundleEncoderDescriptor.h"
     "ComboRenderPipelineDescriptor.cpp"
     "ComboRenderPipelineDescriptor.h"
+    "CommandLineParser.cpp"
+    "CommandLineParser.h"
     "PlatformDebugLogger.h"
     "SystemUtils.cpp"
     "SystemUtils.h"

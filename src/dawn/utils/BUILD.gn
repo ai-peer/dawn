@@ -47,6 +47,8 @@ static_library("utils") {
     "ComboRenderBundleEncoderDescriptor.h",
     "ComboRenderPipelineDescriptor.cpp",
     "ComboRenderPipelineDescriptor.h",
+    "CommandLineParser.cpp",
+    "CommandLineParser.h",
     "PlatformDebugLogger.h",
     "SystemUtils.cpp",
     "SystemUtils.h",
