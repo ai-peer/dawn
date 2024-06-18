@@ -74,6 +74,30 @@
       },
       "revId": "961fd7a5269d69de7f6838678100229113720d01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71d6220e_9b742cb6",
+        "filename": "src/dawn/tests/perf_tests/MatrixVectorMultiplyPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-06-18T09:30:13Z",
+      "side": 1,
+      "message": "Done changing to parallel sum-up, but no significant perf diff seen during local testing.",
+      "parentUuid": "ae3fd1bc_f4983176",
+      "range": {
+        "startLine": 422,
+        "startChar": 2,
+        "endLine": 427,
+        "endChar": 3
+      },
+      "revId": "961fd7a5269d69de7f6838678100229113720d01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
