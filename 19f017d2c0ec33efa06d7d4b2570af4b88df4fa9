@@ -88,6 +88,24 @@
       "parentUuid": "5282a8c9_0ae521de",
       "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b90fd41_b0e58751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-18T13:55:53Z",
+      "side": 1,
+      "message": "Cool with me, dropping this CL in favor of https://dawn-review.googlesource.com/c/dawn/+/192641",
+      "parentUuid": "93f7b2c0_2f2ae627",
+      "revId": "19f017d2c0ec33efa06d7d4b2570af4b88df4fa9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
