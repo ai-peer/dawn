@@ -34,6 +34,24 @@
       "parentUuid": "a7525273_ef5da7cc",
       "revId": "0fb193bb30efe37581b9a644f00aa212423f74bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e12be8e_404a3cf1",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-18T13:37:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6be16ec_98a0f836",
+      "revId": "0fb193bb30efe37581b9a644f00aa212423f74bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
