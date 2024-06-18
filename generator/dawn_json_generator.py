@@ -812,6 +812,9 @@ def compute_kotlin_params(loaded_json, kotlin_json):
                 return False
         return True
 
+    def include_argument(argument):
+        return argument.name.get() != 'userdata'
+
     def include_method(method):
         if method.return_type.category == 'function pointer':
             # Kotlin doesn't support returning functions.
@@ -852,6 +855,7 @@ def compute_kotlin_params(loaded_json, kotlin_json):
         for chain_root in structure.chain_roots:
             chain_children[chain_root.name.get()].append(structure)
     params_kotlin['chain_children'] = chain_children
+    params_kotlin['include_argument'] = include_argument
     params_kotlin['include_structure_member'] = include_structure_member
     params_kotlin['include_method'] = include_method
     params_kotlin['jni_name'] = jni_name
