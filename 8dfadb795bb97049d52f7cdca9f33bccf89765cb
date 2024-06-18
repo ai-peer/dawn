@@ -34,6 +34,24 @@
       "parentUuid": "cbbb2df8_cffd525c",
       "revId": "8dfadb795bb97049d52f7cdca9f33bccf89765cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b3f0270_3e4335ad",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-18T04:44:38Z",
+      "side": 1,
+      "message": "We\u0027ve been ignoring a lot of these warnings for existing code for now. I think it is a bit too pedantic IMO. If it\u0027s new code, then I\u0027d address it. And, if it mentions you\u0027re missing a system or stdlib header, then I\u0027d include it.",
+      "parentUuid": "156bdbc3_d4d0e5ee",
+      "revId": "8dfadb795bb97049d52f7cdca9f33bccf89765cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
