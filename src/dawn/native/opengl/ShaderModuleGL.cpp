@@ -259,54 +259,21 @@ std::pair<tint::glsl::writer::Bindings, BindingMap> generateBindingInfo(
     return {bindings, externalTextureExpansionMap};
 }
 
-ResultOrError<GLuint> ShaderModule::CompileShader(
-    const OpenGLFunctions& gl,
-    const ProgrammableStage& programmableStage,
-    SingleShaderStage stage,
-    bool usesVertexIndex,
-    bool usesInstanceIndex,
-    bool usesFragDepth,
-    CombinedSamplerInfo* combinedSamplers,
-    const PipelineLayout* layout,
-    bool* needsPlaceholderSampler,
-    bool* needsTextureBuiltinUniformBuffer,
-    BindingPointToFunctionAndOffset* bindingPointToData) const {
-    TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
+// Find all the sampler/texture pairs for this entry point, and create CombinedSamplers for them.
+// CombinedSampler records the binding points of the original texture and sampler, and generates a
+// unique name. The corresponding uniforms will be retrieved by these generated names in PipelineGL.
+// Any texture-only references will have "usePlaceholderSampler" set to true, and only the texture
+// binding point will be used in naming them. In addition, Dawn will bind a non-filtering sampler
+// for them (see PipelineGL).
+CombinedSamplerInfo generateCombinedSamplerInfo(tint::inspector::Inspector& inspector,
+                                                const std::string& entryPoint,
+                                                tint::glsl::writer::Bindings& bindings,
+                                                BindingMap externalTextureExpansionMap,
+                                                bool* needsPlaceholderSampler
 
-    const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
-
-    GLSLCompilationRequest req = {};
-
-    auto tintProgram = GetTintProgram();
-    req.inputProgram = &(tintProgram->program);
-
-    tint::inspector::Inspector inspector(*req.inputProgram);
-
-    // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
-    // mapping from the original group/binding pair to a binding-only
-    // value. This mapping will be used by Tint to remap all global
-    // variables to the 1D space.
-    const EntryPointMetadata& entryPointMetaData = GetEntryPoint(programmableStage.entryPoint);
-    const BindingInfoArray& moduleBindingInfo = entryPointMetaData.bindings;
-
-    auto [bindings, externalTextureExpansionMap] =
-        generateBindingInfo(stage, layout, moduleBindingInfo, req);
-
-    // When textures are accessed without a sampler (e.g., textureLoad()),
-    // GetSamplerTextureUses() will return this sentinel value.
-    bindings.placeholder_sampler_bind_point = {static_cast<uint32_t>(kMaxBindGroupsTyped), 0};
-
-    *needsPlaceholderSampler = false;
-    // Find all the sampler/texture pairs for this entry point, and create
-    // CombinedSamplers for them. CombinedSampler records the binding points
-    // of the original texture and sampler, and generates a unique name. The
-    // corresponding uniforms will be retrieved by these generated names
-    // in PipelineGL. Any texture-only references will have
-    // "usePlaceholderSampler" set to true, and only the texture binding point
-    // will be used in naming them. In addition, Dawn will bind a
-    // non-filtering sampler for them (see PipelineGL).
-    auto uses = inspector.GetSamplerTextureUses(programmableStage.entryPoint,
-                                                bindings.placeholder_sampler_bind_point);
+) {
+    auto uses =
+        inspector.GetSamplerTextureUses(entryPoint, bindings.placeholder_sampler_bind_point);
     CombinedSamplerInfo combinedSamplerInfo;
     for (const auto& use : uses) {
         tint::BindingPoint samplerBindPoint = use.sampler_binding_point;
@@ -375,6 +342,45 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                 plane1Info->GetName());
         }
     }
+    return combinedSamplerInfo;
+}
+
+ResultOrError<GLuint> ShaderModule::CompileShader(
+    const OpenGLFunctions& gl,
+    const ProgrammableStage& programmableStage,
+    SingleShaderStage stage,
+    bool usesVertexIndex,
+    bool usesInstanceIndex,
+    bool usesFragDepth,
+    CombinedSamplerInfo* combinedSamplers,
+    const PipelineLayout* layout,
+    bool* needsPlaceholderSampler,
+    bool* needsTextureBuiltinUniformBuffer,
+    BindingPointToFunctionAndOffset* bindingPointToData) const {
+    TRACE_EVENT0(GetDevice()->GetPlatform(), General, "TranslateToGLSL");
+
+    const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
+
+    GLSLCompilationRequest req = {};
+
+    auto tintProgram = GetTintProgram();
+    req.inputProgram = &(tintProgram->program);
+
+    tint::inspector::Inspector inspector(*req.inputProgram);
+
+    // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
+    // mapping from the original group/binding pair to a binding-only
+    // value. This mapping will be used by Tint to remap all global
+    // variables to the 1D space.
+    const EntryPointMetadata& entryPointMetaData = GetEntryPoint(programmableStage.entryPoint);
+    const BindingInfoArray& moduleBindingInfo = entryPointMetaData.bindings;
+
+    auto [bindings, externalTextureExpansionMap] =
+        generateBindingInfo(stage, layout, moduleBindingInfo, req);
+
+    // When textures are accessed without a sampler (e.g., textureLoad()),
+    // GetSamplerTextureUses() will return this sentinel value.
+    bindings.placeholder_sampler_bind_point = {static_cast<uint32_t>(kMaxBindGroupsTyped), 0};
 
     // Some texture builtin functions are unsupported on GLSL ES. These are emulated with internal
     // uniforms.
@@ -384,6 +390,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     bindings.uniform.emplace(
         bindings.texture_builtins_from_uniform.ubo_binding,
         tint::glsl::writer::binding::Uniform{layout->GetInternalUniformBinding()});
+
+    *needsPlaceholderSampler = false;
+    CombinedSamplerInfo combinedSamplerInfo =
+        generateCombinedSamplerInfo(inspector, programmableStage.entryPoint, bindings,
+                                    externalTextureExpansionMap, needsPlaceholderSampler);
 
     auto textureBuiltinsFromUniformData = inspector.GetTextureQueries(programmableStage.entryPoint);
     bool needsInternalUBO = false;
