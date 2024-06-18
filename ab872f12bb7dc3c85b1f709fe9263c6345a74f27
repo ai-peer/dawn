@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c469b8f_5e470ac3",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T18:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22995323_302001bf",
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c5cf7a5_2e858f94",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73c632b_d1df3453",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T18:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c5cf7a5_2e858f94",
+      "range": {
+        "startLine": 204,
+        "startChar": 24,
+        "endLine": 213,
+        "endChar": 34
+      },
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee24e826_18433bfa",
@@ -54,6 +96,24 @@
       "writtenOn": "2024-06-18T15:40:27Z",
       "side": 1,
       "message": "Nit: I\u0027d also drop the the `WGSL` from this comment, since technically the input IR could have come from a non-WGSL source (e.g. SPIR-V).",
+      "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d0561f_e09562d5",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T18:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee24e826_18433bfa",
       "revId": "ab872f12bb7dc3c85b1f709fe9263c6345a74f27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
