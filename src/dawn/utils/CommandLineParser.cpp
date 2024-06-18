@@ -1,0 +1,225 @@
+// Copyright 2024 The Dawn & Tint Authors
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// 1. Redistributions of source code must retain the above copyright notice, this
+//    list of conditions and the following disclaimer.
+//
+// 2. Redistributions in binary form must reproduce the above copyright notice,
+//    this list of conditions and the following disclaimer in the documentation
+//    and/or other materials provided with the distribution.
+//
+// 3. Neither the name of the copyright holder nor the names of its
+//    contributors may be used to endorse or promote products derived from
+//    this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#include "dawn/utils/CommandLineParser.h"
+
+#include "absl/container/flat_hash_map.h"
+#include "absl/strings/str_split.h"
+
+#include "dawn/common/Log.h"
+
+namespace dawn::utils {
+
+// OptionBase
+
+CommandLineParser::OptionBase::~OptionBase() = default;
+
+const std::string& CommandLineParser::OptionBase::GetName() const {
+    return mName;
+}
+
+std::string CommandLineParser::OptionBase::GetShortName() const {
+    return mShortName;
+}
+
+const std::string& CommandLineParser::OptionBase::GetDescription() const {
+    return mDescription;
+}
+
+bool CommandLineParser::OptionBase::IsDefined() const {
+    return mDefined;
+}
+
+CommandLineParser::OptionBase::ParseResult CommandLineParser::OptionBase::Parse(
+    std::span<std::string_view> args) {
+    auto result = ParseImpl(args);
+    if (result.success) {
+        mDefined = true;
+    }
+    return result;
+}
+
+// BoolOption
+
+CommandLineParser::BoolOption::~BoolOption() = default;
+
+bool CommandLineParser::BoolOption::GetValue() const {
+    return mValue;
+}
+
+CommandLineParser::OptionBase::ParseResult CommandLineParser::BoolOption::ParseImpl(
+    std::span<std::string_view> args) {
+    if (!args.empty()) {
+        if (args.front() == "true") {
+            mValue = true;
+            return {true, args.subspan(1)};
+        }
+        if (args.front() == "false") {
+            mValue = false;
+            return {true, args.subspan(1)};
+        }
+    }
+
+    // Assuming --option just means to set it to true.
+    mValue = true;
+    return {true, args};
+}
+
+// StringOption
+
+CommandLineParser::StringOption::~StringOption() = default;
+
+std::string CommandLineParser::StringOption::GetValue() const {
+    return mValue;
+}
+
+CommandLineParser::OptionBase::ParseResult CommandLineParser::StringOption::ParseImpl(
+    std::span<std::string_view> args) {
+    if (args.empty()) {
+        return {false, args, "expected a value"};
+    }
+
+    mValue = args.front();
+    return {true, args.subspan(1)};
+}
+
+// StringListOption
+
+CommandLineParser::StringListOption::~StringListOption() = default;
+
+std::span<const std::string> CommandLineParser::StringListOption::GetValue() const {
+    return mValue;
+}
+
+CommandLineParser::OptionBase::ParseResult CommandLineParser::StringListOption::ParseImpl(
+    std::span<std::string_view> args) {
+    if (args.empty()) {
+        return {false, args, "expected a value"};
+    }
+
+    mValue = absl::StrSplit(args.front(), ",");
+    return {true, args.subspan(1)};
+}
+
+// CommandLineParser
+
+CommandLineParser::BoolOption& CommandLineParser::AddBool() {
+    return AddOption(std::make_unique<BoolOption>());
+}
+
+CommandLineParser::StringOption& CommandLineParser::AddString() {
+    return AddOption(std::make_unique<StringOption>());
+}
+
+CommandLineParser::StringListOption& CommandLineParser::AddStringList() {
+    return AddOption(std::make_unique<StringListOption>());
+}
+
+CommandLineParser::ParseResult CommandLineParser::Parse(std::span<std::string_view> args,
+                                                        const ParseOptions& parseOptions) {
+    // Build the map of name to option.
+    absl::flat_hash_map<std::string, OptionBase*> nameToOption;
+
+    for (auto& option : mOptions) {
+        if (!nameToOption.emplace(option->GetName(), option.get()).second) {
+            return {false,
+                    absl::StrFormat("Duplicate options with name \"%s\"", option->GetName())};
+        }
+        if (!nameToOption.emplace(option->GetShortName(), option.get()).second) {
+            return {false,
+                    absl::StrFormat("Duplicate options with name \"%s\"", option->GetShortName())};
+        }
+    }
+
+    auto currentArgs = args;
+    while (!currentArgs.empty()) {
+        auto arg = currentArgs.front();
+
+        // Skip or error if it is not a flag.
+        if (arg.empty() || arg[0] != '-') {
+            if (parseOptions.unknownIsError) {
+                return {false, absl::StrFormat("Unknown option \"%s\"", currentArgs.front())};
+            } else {
+                currentArgs = currentArgs.subspan(1);
+                continue;
+            }
+        }
+
+        // Remove starting - or --
+        arg = arg.substr(1);
+        if (!arg.empty() && arg[0] == '-') {
+            arg = arg.substr(1);
+        }
+
+        // Skip or error if it is an unknown flag.
+        if (arg.empty() || !nameToOption.contains(arg)) {
+            if (parseOptions.unknownIsError) {
+                return {false, absl::StrFormat("Unknown option \"%s\"", currentArgs.front())};
+            } else {
+                currentArgs = currentArgs.subspan(1);
+                continue;
+            }
+        }
+
+        currentArgs = currentArgs.subspan(1);
+
+        // Try to parse the arg.
+        auto option = nameToOption[arg];
+        auto optionResult = option->Parse(currentArgs);
+        if (!optionResult.success) {
+            return {false, absl::StrFormat("Failure while parsing \"%s\": %s", option->GetName(),
+                                           optionResult.errorMessage)};
+        }
+
+        currentArgs = optionResult.remainingArgs;
+    }
+
+    return {true};
+}
+
+CommandLineParser::ParseResult CommandLineParser::Parse(const std::vector<std::string>& args,
+                                                        const ParseOptions& parseOptions) {
+    std::vector<std::string_view> viewArgs;
+    for (const auto& arg : args) {
+        viewArgs.push_back(arg);
+    }
+
+    return Parse(viewArgs, parseOptions);
+}
+
+CommandLineParser::ParseResult CommandLineParser::Parse(int argc,
+                                                        const char** argv,
+                                                        const ParseOptions& parseOptions) {
+    std::vector<std::string_view> args;
+    for (int i = 0; i < argc; i++) {
+        args.push_back(argv[i]);
+    }
+
+    return Parse(args, parseOptions);
+}
+
+}  // namespace dawn::utils
