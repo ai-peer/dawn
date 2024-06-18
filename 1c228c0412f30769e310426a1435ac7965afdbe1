@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6827a99_885440bc",
+        "filename": "src/tint/lang/hlsl/writer/if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T03:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0bb7a6_82d606f5",
+      "revId": "1c228c0412f30769e310426a1435ac7965afdbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "088a3523_503d770f",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-17T15:56:55Z",
       "side": 1,
       "message": "There shouldn\u0027t be any arguments if you\u0027ve run `RemoveTerminatorArgs`, so I\u0027d just `TINT_ASSERT` that instead.",
+      "range": {
+        "startLine": 263,
+        "startChar": 8,
+        "endLine": 263,
+        "endChar": 30
+      },
+      "revId": "1c228c0412f30769e310426a1435ac7965afdbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bb24756_06eb34c9",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T03:23:51Z",
+      "side": 1,
+      "message": "Just set `ExitIf` to be ignored in the switch above. (Fixed MSL in the same way.)",
+      "parentUuid": "088a3523_503d770f",
       "range": {
         "startLine": 263,
         "startChar": 8,
