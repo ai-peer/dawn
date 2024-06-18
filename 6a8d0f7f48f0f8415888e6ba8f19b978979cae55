@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc066bc_7ca19e7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-18T21:11:53Z",
+      "side": 1,
+      "message": "PTAL, this has passed the config stage on the CMake bots, so I am expecting this to pass.\n\nDisabling protobuf and the binary target builds fine (sans the binary and fuzzer targets). If you forcefully turn on the binary target without protobuf you hit the expected error.\n\nI have tested that this catches protobuf building being turned off, the directory not being available, and trying to build the fuzzer without the binary, with various combinations of flags toggled and directories set.",
+      "revId": "6a8d0f7f48f0f8415888e6ba8f19b978979cae55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
