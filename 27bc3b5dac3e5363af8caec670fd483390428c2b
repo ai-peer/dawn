@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f601aae9_8027c6c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-18T09:48:20Z",
+      "side": 1,
+      "message": "note: Gerrit doesn\u0027t work with branches but with individial commits, use git rebase -i or git commit --amend to and push again to update CLs.",
+      "revId": "27bc3b5dac3e5363af8caec670fd483390428c2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
