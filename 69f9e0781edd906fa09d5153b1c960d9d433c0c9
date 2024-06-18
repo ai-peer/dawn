@@ -16,6 +16,23 @@
       "message": "This still allows building with the third_party/protobuf library existing? (Like where dawn is a third_party dependency itself)",
       "revId": "69f9e0781edd906fa09d5153b1c960d9d433c0c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9beed050_9cb6f3f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-18T19:26:03Z",
+      "side": 1,
+      "message": "Ugh, that appears to be a load bearing mystery check.\n\nI am pretty sure it should be up in the top-level CMake files. WIll re-add reviewers once I have it working on the bots.",
+      "revId": "69f9e0781edd906fa09d5153b1c960d9d433c0c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
