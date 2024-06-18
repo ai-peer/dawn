@@ -144,6 +144,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a812c21a_a4bc4da0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-18T15:15:49Z",
+      "side": 1,
+      "message": "A WriteBufferWith is likely going to break down in multithreaded mode, and we don\u0027t have the RAII semantics that Rust has.\n\nIf you think there are reasonable simple ways to add `BufferMapWriteExtendedUsages` in D3D11 IMHO we can do that and use transfer buffers as needed. Though it seems that this CL would be step 1) and step 2) would be to add the two additional edges that you mentioned earlier.",
+      "parentUuid": "bcb65db7_d82230ac",
+      "revId": "751a05a6db28634f852aa0153129d1c744f422b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e52e9d8_85ffb75f",
