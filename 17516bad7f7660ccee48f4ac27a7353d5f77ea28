@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "043b4a4e_f31202a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-18T19:26:48Z",
+      "side": 1,
+      "message": "I will need to reapply this change, but limit the dxcompiler target to only Linux, MacOS, and Windows (we don\u0027t want it to apply to ChromeOS).",
+      "revId": "17516bad7f7660ccee48f4ac27a7353d5f77ea28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
