@@ -62,6 +62,30 @@
       },
       "revId": "737f85612d4f43a71a75b40be032c3362885096c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac40ccf6_95693404",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-18T01:11:37Z",
+      "side": 1,
+      "message": "Hmm yea, I wouldn\u0027t be opposed to this. Will see if Kai has any thoughts on this also.",
+      "parentUuid": "bd1c32b6_7c1c7ab6",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 0
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
