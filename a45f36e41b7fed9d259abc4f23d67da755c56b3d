@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e08fd7c_e386f43a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-18T23:50:19Z",
+      "side": 1,
+      "message": "Loko, I think you can take a first pass at this whenever, while we wait for help on how exactly to do the licensing.\n\nI guess we will replicate these build rules in g3, but it also might be possible to have these files generated as part of the copybara roll?",
+      "revId": "a45f36e41b7fed9d259abc4f23d67da755c56b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
