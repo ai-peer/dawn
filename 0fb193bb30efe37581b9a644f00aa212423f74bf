@@ -16,6 +16,24 @@
       "message": "Wait, does this mean I can _only_ build DXC if I build fuzzers now? This won\u0027t work for testing on OSX. On OSX I can\u0027t build fuzzers, they don\u0027t link correctly, but I can still build and generate expectations with DXC currently.",
       "revId": "0fb193bb30efe37581b9a644f00aa212423f74bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6be16ec_98a0f836",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-18T13:28:03Z",
+      "side": 1,
+      "message": "No, this just means that setting a dependency on `dxcompiler-for-fuzzer` will add a dep on the `dxcompiler` target (which builds `libdxcompiler.so`) only if `TINT_BUILD_FUZZERS` is enabled.\n\nYou can still build dxc by enabling `DAWN_USE_BUILT_DXC`.",
+      "parentUuid": "a7525273_ef5da7cc",
+      "revId": "0fb193bb30efe37581b9a644f00aa212423f74bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
