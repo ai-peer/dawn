@@ -1516,7 +1516,6 @@ std::string ASTPrinter::generate_builtin_name(const sem::BuiltinFn* builtin) {
         case wgsl::BuiltinFn::kMix:
         case wgsl::BuiltinFn::kModf:
         case wgsl::BuiltinFn::kNormalize:
-        case wgsl::BuiltinFn::kPow:
         case wgsl::BuiltinFn::kReflect:
         case wgsl::BuiltinFn::kRefract:
         case wgsl::BuiltinFn::kSaturate:
@@ -1532,6 +1531,9 @@ std::string ASTPrinter::generate_builtin_name(const sem::BuiltinFn* builtin) {
         case wgsl::BuiltinFn::kSign:
         case wgsl::BuiltinFn::kClamp:
             out += builtin->str();
+            break;
+        case wgsl::BuiltinFn::kPow:
+            out += "powr";
             break;
         case wgsl::BuiltinFn::kAbs:
             if (builtin->ReturnType()->is_float_scalar_or_vector()) {

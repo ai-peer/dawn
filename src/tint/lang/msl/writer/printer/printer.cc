@@ -899,7 +899,6 @@ class Printer : public tint::TextGenerator {
             case core::BuiltinFn::kMin:
             case core::BuiltinFn::kMix:
             case core::BuiltinFn::kNormalize:
-            case core::BuiltinFn::kPow:
             case core::BuiltinFn::kReflect:
             case core::BuiltinFn::kRefract:
             case core::BuiltinFn::kSaturate:
@@ -914,6 +913,9 @@ class Printer : public tint::TextGenerator {
             case core::BuiltinFn::kTranspose:
             case core::BuiltinFn::kTrunc:
                 out << func;
+                break;
+            case core::BuiltinFn::kPow:
+                out << "powr";
                 break;
             case core::BuiltinFn::kCountLeadingZeros:
                 out << "clz";

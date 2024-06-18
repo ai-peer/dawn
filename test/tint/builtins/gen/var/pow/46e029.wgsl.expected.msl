@@ -4,7 +4,7 @@ using namespace metal;
 void pow_46e029(device float* const tint_symbol_1) {
   float arg_0 = 1.0f;
   float arg_1 = 1.0f;
-  float res = pow(arg_0, arg_1);
+  float res = powr(arg_0, arg_1);
   *(tint_symbol_1) = res;
 }
 

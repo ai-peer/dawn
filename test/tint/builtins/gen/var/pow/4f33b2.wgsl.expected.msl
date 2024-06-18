@@ -4,7 +4,7 @@ using namespace metal;
 void pow_4f33b2(device half4* const tint_symbol_1) {
   half4 arg_0 = half4(1.0h);
   half4 arg_1 = half4(1.0h);
-  half4 res = pow(arg_0, arg_1);
+  half4 res = powr(arg_0, arg_1);
   *(tint_symbol_1) = res;
 }
 
