@@ -32,6 +32,7 @@ import (
 	"testing"
 
 	"dawn.googlesource.com/dawn/tools/src/container"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewEmptySet(t *testing.T) {
@@ -167,6 +168,28 @@ func TestSetContainsAny(t *testing.T) {
 	expectEq(t, `s.ContainsAny("b", "c")`, s.ContainsAny(S("b", "c")), true)
 	expectEq(t, `s.ContainsAny("c", "a")`, s.ContainsAny(S("c", "a")), true)
 	expectEq(t, `s.ContainsAny("c", "a", "b")`, s.ContainsAny(S("c", "a", "b")), true)
+}
+
+func TestSetEqual(t *testing.T) {
+	setA := container.NewSet[string]()
+	setB := container.NewSet[string]()
+
+	assert.True(t, setA.Equal(setA))
+	assert.True(t, setA.Equal(setB))
+	assert.True(t, setB.Equal(setA))
+	assert.True(t, setB.Equal(setB))
+
+	setA.Add("a")
+	assert.True(t, setA.Equal(setA))
+	assert.False(t, setA.Equal(setB))
+	assert.False(t, setB.Equal(setA))
+	assert.True(t, setB.Equal(setB))
+
+	setB.Add("a")
+	assert.True(t, setA.Equal(setA))
+	assert.True(t, setA.Equal(setB))
+	assert.True(t, setB.Equal(setA))
+	assert.True(t, setB.Equal(setB))
 }
 
 func TestSetIntersection(t *testing.T) {

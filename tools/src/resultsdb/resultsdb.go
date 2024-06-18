@@ -35,11 +35,13 @@ import (
 
 	"cloud.google.com/go/bigquery"
 	"dawn.googlesource.com/dawn/tools/src/buildbucket"
+	"dawn.googlesource.com/dawn/tools/src/container"
 	"google.golang.org/api/iterator"
 )
 
 type Querier interface {
 	QueryTestResults(ctx context.Context, builds []buildbucket.BuildID, testPrefix string, f func(*QueryResult) error) error
+	QueryVariants(ctx context.Context, testPrefix string) ([]container.Set[string], error)
 }
 
 // BigQueryClient is a wrapper around bigquery.Client so that we can define new
@@ -55,6 +57,12 @@ type QueryResult struct {
 	Status   string
 	Tags     []TagPair
 	Duration float64
+}
+
+// VariantResult contains all of the data for a single variant result from a
+// ResultDB BigQuery query.
+type VariantResult struct {
+	Variant []string
 }
 
 // TagPair is a key/value pair representing a ResultDB tag.
@@ -134,4 +142,66 @@ func (bq BigQueryClient) QueryTestResults(
 	}
 
 	return nil
+}
+
+// QueryVariants fetches the unique tag variants produced on CI builders in
+// recent history. Additional processing may be necessary to remove unknown
+// tags from the variants.
+//
+// testPrefix will be used to limit the results to only variants for the given
+// test suite.
+func (bq BigQueryClient) QueryVariants(ctx context.Context, testPrefix string) ([]container.Set[string], error) {
+	// Firsts gets all tag sets from the past 3 days from CI builders and orders
+	// them. Then converts those sets into strings so that we can get all distinct
+	// values before finally turning them back into arrays.
+	base_query := `
+	  WITH
+      tt AS (
+        SELECT
+          ARRAY(
+            SELECT x
+            FROM
+              UNNEST(
+                ARRAY(
+                  SELECT value
+                  FROM tr.tags
+                  WHERE key = "typ_tag")
+              ) AS x ORDER BY x
+          ) as ordered_typ_tags
+        FROM
+          ` + "chrome-luci-data.chromium.gpu_ci_test_results" + ` tr
+        WHERE
+          DATE(tr.partition_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 3 DAY)
+          AND STARTS_WITH(tr.test_id, "%v")
+      ),
+      sv AS (
+        SELECT
+          DISTINCT ARRAY_TO_STRING(ordered_typ_tags, ",") AS string_variant
+        FROM
+          tt
+      )
+    SELECT
+      SPLIT(string_variant, ",") as variant
+    FROM sv`
+	query := fmt.Sprintf(base_query, testPrefix)
+
+	q := bq.client.Query(query)
+	iter, err := q.Read(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	variants := make([]container.Set[string], 0)
+	var row VariantResult
+	for {
+		err := iter.Next(&row)
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			return nil, err
+		}
+		variants = append(variants, container.NewSet[string](row.Variant...))
+	}
+	return variants, nil
 }

@@ -104,7 +104,12 @@ func (s Set[T]) ContainsAny(o Set[T]) bool {
 	return false
 }
 
-// Intersection returns true if the set contains all the items in o
+// Equal returns true if the set's elements are identical to o's elements
+func (s Set[T]) Equal(o Set[T]) bool {
+	return s.ContainsAll(o) && o.ContainsAll(s)
+}
+
+// Intersection returns a new Set with all items that are in both s and o
 func (s Set[T]) Intersection(o Set[T]) Set[T] {
 	out := NewSet[T]()
 	for item := range o {

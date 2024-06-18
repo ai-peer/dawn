@@ -727,7 +727,9 @@ crbug.com/dawn/0000 a:b,c:29:* [ Failure ]
 		}
 
 		errMsg := ""
-		diagnostics, err := ex.Update(test.results, testList.Values() /* verbose */, false)
+		// Use the variants provided by the results until there is a known test case
+		// we can use for testing ResultDB-provided variants.
+		diagnostics, err := ex.Update(test.results, testList.Values(), test.results.Variants() /* verbose */, false)
 		if err != nil {
 			errMsg = err.Error()
 		}
