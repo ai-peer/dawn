@@ -1856,6 +1856,19 @@ bool Validator::TextureBuiltinFn(const sem::Call* call) const {
     std::string func_name = builtin->str();
     auto& signature = builtin->Signature();
 
+    if (mode_ == wgsl::ValidationMode::kCompat) {
+        if (builtin->Fn() == wgsl::BuiltinFn::kTextureLoad) {
+            auto* arg = call->Arguments()[0];
+            if (arg->Type()
+                    ->IsAnyOf<core::type::DepthTexture, core::type::DepthMultisampledTexture>()) {
+                AddError(arg->Declaration()->source)
+                    << "use of " << arg->Type()->FriendlyName()
+                    << " with textureLoad is not allowed in compatibility mode";
+                return false;
+            }
+        }
+    }
+
     auto check_arg_is_constexpr = [&](core::ParameterUsage usage, int min, int max) {
         auto signed_index = signature.IndexOf(usage);
         if (signed_index < 0) {
