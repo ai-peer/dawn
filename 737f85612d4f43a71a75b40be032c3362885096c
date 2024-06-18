@@ -43,6 +43,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e83dd93a_48e52c9d",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-18T23:22:26Z",
+      "side": 1,
+      "message": "Maybe we could put these static_asserts inside the struct definition instead of using this nested empty struct? (We used to put them in webgpu_cpp.cpp, but now that we\u0027ve made this header-only, it seems fine to have them earlier.)",
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd1c32b6_7c1c7ab6",
         "filename": "generator/templates/api_cpp.h",
         "patchSetId": 5
@@ -83,6 +100,53 @@
         "startChar": 0,
         "endLine": 773,
         "endChar": 0
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f063a9_1e99aedf",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-18T23:22:26Z",
+      "side": 1,
+      "message": "I think we should either do that or have all the setters assert `userdata1 \u003d\u003d nullptr`. Not sure how to assert but maybe just assert.h would work? I think I would prefer to allow a binding lambda.",
+      "parentUuid": "ac40ccf6_95693404",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 0
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83adc51_afe98ac6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-18T23:22:26Z",
+      "side": 1,
+      "message": "I hadn\u0027t thought about this before but `WGPUDevice const*` makes it possible for either the outer or inner pointer to be null. I think making the inner pointer null is the correct thing. Posted a note about it though: https://github.com/webgpu-native/webgpu-headers/issues/251#issuecomment-2177231261",
+      "range": {
+        "startLine": 280,
+        "startChar": 18,
+        "endLine": 280,
+        "endChar": 25
       },
       "revId": "737f85612d4f43a71a75b40be032c3362885096c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
