@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28c7277_b4a94f36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-18T19:20:59Z",
+      "side": 1,
+      "message": "This still allows building with the third_party/protobuf library existing? (Like where dawn is a third_party dependency itself)",
+      "revId": "69f9e0781edd906fa09d5153b1c960d9d433c0c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
