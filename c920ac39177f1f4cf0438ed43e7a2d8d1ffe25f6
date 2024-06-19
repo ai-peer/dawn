@@ -33,6 +33,24 @@
       "message": "This CL appears to be based off of https://dawn-review.googlesource.com/c/dawn/+/194260 which has to land first.",
       "revId": "c920ac39177f1f4cf0438ed43e7a2d8d1ffe25f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e9fb59_b046d02c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-19T12:30:45Z",
+      "side": 1,
+      "message": "makes sense, thanks! Trying now because that has been merged.",
+      "parentUuid": "537a7197_f57a69be",
+      "revId": "c920ac39177f1f4cf0438ed43e7a2d8d1ffe25f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
