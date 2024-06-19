@@ -103,6 +103,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d687b4c5_2df5cfda",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6c720da_3af751b9",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e619a776_a8380576",
@@ -116,6 +134,24 @@
       "writtenOn": "2024-06-12T10:32:49Z",
       "side": 1,
       "message": "nit: This auto alpha mode should be UNREACHABLE as well as it is handled in the Dawn frontend.",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2326060c_11a2c6a4",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e619a776_a8380576",
       "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +193,30 @@
       "side": 1,
       "message": "https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d/PhysicalDeviceD3D.cpp;drc\u003d48aa946c141b86e55a7ab1c955a98aa214a8d5f5;l\u003d73 is where the allowed modes are determined. We could make Unpremultiplied just break and go to the UNREACHABLE().",
       "parentUuid": "703a39de_d92eb628",
+      "range": {
+        "startLine": 106,
+        "startChar": 19,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8e13fa_4b4e2f9b",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a7091e9_7c759dc8",
       "range": {
         "startLine": 106,
         "startChar": 19,
@@ -286,6 +346,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13cc0022_c48e75c4",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd21e91f_882786e6",
+      "range": {
+        "startLine": 217,
+        "startChar": 31,
+        "endLine": 217,
+        "endChar": 60
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22cafb75_6d7e2ff5",
@@ -303,6 +387,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb256f62_dced606a",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22cafb75_6d7e2ff5",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ce7542_217baba4",
@@ -316,6 +418,24 @@
       "writtenOn": "2024-06-12T10:32:49Z",
       "side": 1,
       "message": "```suggestion\n                DCompositionCreateDevice(NULL, IID_PPV_ARGS(\u0026compositionDevice)),\n```",
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1353609d_c3d1fb36",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ce7542_217baba4",
       "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -414,6 +534,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef1fab5_99fd3138",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97d72a6b_ae207de3",
+      "range": {
+        "startLine": 247,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 40
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d50f008a_2c2b48ee",
@@ -437,6 +581,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42a70807_ccf0a3a7",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d50f008a_2c2b48ee",
+      "range": {
+        "startLine": 251,
+        "startChar": 12,
+        "endLine": 251,
+        "endChar": 29
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a72015b9_dad96cba",
@@ -450,6 +618,30 @@
       "writtenOn": "2024-06-12T21:19:39Z",
       "side": 1,
       "message": "Since you\u0027re now releasing more than just the swap chain, should rename this to `ReleaseResources` or similar name that encompasses everything you\u0027re releasing.",
+      "range": {
+        "startLine": 297,
+        "startChar": 16,
+        "endLine": 297,
+        "endChar": 36
+      },
+      "revId": "18b0affb50bf63300e6fb61a7e78b88b75ea78d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19dd1066_25cc78bc",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:23:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72015b9_dad96cba",
       "range": {
         "startLine": 297,
         "startChar": 16,
