@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a5ac8c_07373bf1",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T18:04:02Z",
+      "side": 1,
+      "message": "I think this might break cases where WebGPU does the following:\n\n```\nrequestAnimationFrame(() \u003d\u003e {\n  queue.writeTexture({\n     texture: canvasContext.getCurrentTexture()\n  }, {\n     // stuff\n  }, /**/);\n});\n```\n\nThe `writeTexture` operations will still be in the pending commands but Chromium will only call `WaitForCommandsToBeScheduled` leading to a race between WebGPU and CC for example.\n\nWe could add an enum of boolean that says whether we want to flush or not, but I think the best solution would be to explicitly say what object we wait for commands to be scheduled for (like the STM). The STM has the ExecutionSerial for its last use and we can decide whether to flush or not. Better, we could keep the previously submitted command buffers around until they are scheduled, so we can ask `waitUntilScheduled` on something that was 3 submits ago and will be scheduled sooner than the last one.\n\nAside from that the logic LGTM. How do you want to proceed?",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a64252_5c867675",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T18:04:02Z",
+      "side": 1,
+      "message": "```suggestion\n    // mLastSubmittedSerial so it is captured by value.\n```",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
