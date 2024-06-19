@@ -16,6 +16,24 @@
       "message": "note: this validation was never implemented for create pipeline so there was nothing to remove.",
       "revId": "d79c8f60b3a850391af860c7b2829a4778b13796",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b781f1e_cd5e7e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-06-19T06:42:02Z",
+      "side": 1,
+      "message": "Also the CTS tests need to get updated and roll https://github.com/gpuweb/cts/pull/3803",
+      "parentUuid": "cf6f1a6a_2cf2e645",
+      "revId": "d79c8f60b3a850391af860c7b2829a4778b13796",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
