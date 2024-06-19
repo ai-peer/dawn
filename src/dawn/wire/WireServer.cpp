@@ -59,6 +59,12 @@ bool WireServer::InjectSwapChain(WGPUSwapChain swapchain,
     return mImpl->InjectSwapChain(swapchain, handle, deviceHandle) == WireResult::Success;
 }
 
+bool WireServer::InjectSurface(WGPUSurface surface,
+                               const Handle& handle,
+                               const Handle& deviceHandle) {
+    return mImpl->InjectSurface(surface, handle, deviceHandle) == WireResult::Success;
+}
+
 bool WireServer::InjectInstance(WGPUInstance instance, const Handle& handle) {
     return mImpl->InjectInstance(instance, handle) == WireResult::Success;
 }

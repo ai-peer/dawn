@@ -25,37 +25,30 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_WIRE_CLIENT_SURFACE_H_
-#define SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+#include "dawn/wire/server/ObjectStorage.h"
+#include "dawn/wire/server/Server.h"
 
-#include "dawn/webgpu.h"
-#include "dawn/wire/client/ObjectBase.h"
+namespace dawn::wire::server {
 
-namespace dawn::wire::client {
 
-class Device;
 
-class Surface final : public ObjectBase {
-  public:
-    explicit Surface(const ObjectBaseParams& params, const WGPUSurfaceCapabilities* capabilities);
-    ~Surface() override;
+WireResult Server::DoInstanceRequestAdapter(Known<WGPUSurface> surface,
+                                            Known<WGPUDevice> configuredDevice,
+                                            ObjectHandle textureHandle) {
+    Reserved<WGPUTexture> texture;
+    WIRE_TRY(Objects<WGPUTexture>().Allocate(&texture, textureHandle, AllocationState::Reserved));
 
-    ObjectType GetObjectType() const override;
+    WGPUSurfaceTexture surfaceTexture;
+    mProcs.surfaceGetCurrentTexture(surface->handle);
 
-    void Configure(const WGPUSurfaceConfiguration* config);
-    WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
-    WGPUStatus GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
-    void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
+    if (surfaceTexture->texture != nullptr) {
+        texture = surfaceTexture->texture;
+    } else {
+        WGPUTextureDescriptor desc = WGPU_TEXTURE_DESCRIPTOR_INIT;
+        texture = mProcs.deviceCreateErrorTexture(configuredDevice, &desc);
+    }
 
-  private:
-    WGPUTextureUsageFlags mSupportedUsages;
-    std::vector<WGPUTextureFormat> mSupportedFormats;
-    std::vector<WGPUPresentMode> mSupportedPresentModes;
-    std::vector<WGPUCompositeAlphaMode> mSupportedAlphaModes;
+    return WireResult::Success;
+}
 
-    WGPUTextureDescriptor mTextureDescriptor;
-};
-
-}  // namespace dawn::wire::client
-
-#endif  // SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+}  // namespace dawn::wire::server
