@@ -52,6 +52,7 @@
 #include "src/tint/lang/core/ir/constant.h"
 #include "src/tint/lang/core/ir/construct.h"
 #include "src/tint/lang/core/ir/continue.h"
+#include "src/tint/lang/core/ir/convert.h"
 #include "src/tint/lang/core/ir/core_binary.h"
 #include "src/tint/lang/core/ir/core_builtin_call.h"
 #include "src/tint/lang/core/ir/core_unary.h"
@@ -603,6 +604,7 @@ class Printer : public tint::TextGenerator {
                     r->Instruction(),                                                          //
                     [&](const core::ir::Access* a) { EmitAccess(out, a); },                    //
                     [&](const core::ir::Construct* c) { EmitConstruct(out, c); },              //
+                    [&](const core::ir::Convert* c) { EmitConvert(out, c); },                  //
                     [&](const core::ir::CoreBinary* b) { EmitBinary(out, b); },                //
                     [&](const core::ir::CoreBuiltinCall* c) { EmitCoreBuiltinCall(out, c); },  //
                     [&](const core::ir::CoreUnary* u) { EmitUnary(out, u); },                  //
@@ -615,6 +617,14 @@ class Printer : public tint::TextGenerator {
             },
             [&](const core::ir::FunctionParam* p) { out << NameOf(p); },  //
             TINT_ICE_ON_NO_MATCH);
+    }
+
+    /// Emit a convert instruction
+    void EmitConvert(StringStream& out, const core::ir::Convert* c) {
+        EmitType(out, c->Result(0)->Type());
+        out << "(";
+        EmitValue(out, c->Operand(0));
+        out << ")";
     }
 
     /// Emit a constructor
