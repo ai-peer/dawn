@@ -106,9 +106,6 @@ void Queue::WaitForCommandsToBeScheduled() {
     if (!IsAlive()) {
         return;
     }
-    if (GetDevice()->ConsumedError(SubmitPendingCommandBuffer())) {
-        return;
-    }
 
     // Only lock the object while we take a reference to it, otherwise we could block further
     // progress if the driver calls the scheduled handler (which also acquires the lock) before
@@ -118,7 +115,10 @@ void Queue::WaitForCommandsToBeScheduled() {
         std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
         lastSubmittedCommands = mLastSubmittedCommands;
     }
-    [*lastSubmittedCommands waitUntilScheduled];
+    // The lastSubmittedCommands will be null if the scheduled handler has already run.
+    if (lastSubmittedCommands != nullptr) {
+        [*lastSubmittedCommands waitUntilScheduled];
+    }
 }
 
 CommandRecordingContext* Queue::GetPendingCommandContext(SubmitMode submitMode) {
@@ -141,35 +141,35 @@ MaybeError Queue::SubmitPendingCommandBuffer() {
     // Acquire the pending command buffer, which is retained. It must be released later.
     NSPRef<id<MTLCommandBuffer>> pendingCommands = mCommandContext.AcquireCommands();
 
-    // Replace mLastSubmittedCommands with the mutex held so we avoid races between the
-    // schedule handler and this code.
+    // Replace mLastSubmittedCommands with the mutex held so we avoid races between the scheduled
+    // handler and this code.
     {
         std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
         mLastSubmittedCommands = pendingCommands;
     }
 
-    // Make a local copy of the pointer to the commands because it's not clear how ObjC blocks
-    // handle types with copy / move constructors being referenced in the block.
-    id<MTLCommandBuffer> pendingCommandsPointer = pendingCommands.Get();
-    [*pendingCommands addScheduledHandler:^(id<MTLCommandBuffer>) {
-        // This is DRF because we hold the mutex for mLastSubmittedCommands and pendingCommands
-        // is a local value (and not the member itself).
+    // Update the completed serial once the completed handler is fired. Make a local copy of
+    // mLastSubmittedSerial so it iss captured by value.
+    ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+
+    // This ObjC block runs on a different thread.
+    [*pendingCommands addScheduledHandler:^(id<MTLCommandBuffer> scheduledCommands) {
+        TRACE_EVENT_ASYNC_STEP0(platform, GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
+                                uint64_t(pendingSerial), "Scheduled");
+        // This is DRF because we hold the mutex for mLastSubmittedCommands.
         std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
-        if (this->mLastSubmittedCommands.Get() == pendingCommandsPointer) {
+        if (this->mLastSubmittedCommands.Get() == scheduledCommands) {
             this->mLastSubmittedCommands = nullptr;
         }
     }];
 
-    // Update the completed serial once the completed handler is fired. Make a local copy of
-    // mLastSubmittedSerial so it is captured by value.
-    ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
-    // this ObjC block runs on a different thread
+    // This ObjC block runs on a different thread.
     [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
         TRACE_EVENT_ASYNC_END0(platform, GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                uint64_t(pendingSerial));
 
         // Do an atomic_max on mCompletedSerial since it might have been increased outside the
-        // CommandBufferMTL completed handlers if the device has been lost, or if they handlers fire
+        // CommandBufferMTL completed handlers if the device has been lost, or if the handlers fire
         // in an unordered way.
         uint64_t currentCompleted = mCompletedSerial.load();
         while (uint64_t(pendingSerial) > currentCompleted &&
