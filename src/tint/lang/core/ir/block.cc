@@ -198,6 +198,52 @@ void Block::Remove(Instruction* inst) {
     inst->next = nullptr;
 }
 
+void Block::SpliceRangeIntoBlock(Instruction* start, Instruction* end, Block* out) {
+    TINT_ASSERT(start);
+    TINT_ASSERT(end);
+    TINT_ASSERT(out);
+
+    // Fixup pointers for list we're leaving
+    if (start->prev) {
+        start->prev->next = end->next;
+    }
+    if (instructions_.first == start) {
+        instructions_.first = end->next;
+    }
+
+    if (end->next) {
+        end->next->prev = start->prev;
+    }
+    if (instructions_.last == end) {
+        instructions_.last = start->prev;
+    }
+
+    start->prev = nullptr;
+    end->next = nullptr;
+
+    // Update all of the block pointers to the new block
+    auto* i = start;
+    size_t count = 0;
+    while (i != nullptr) {
+        i->SetBlock(out);
+        i = i->next;
+
+        ++count;
+    }
+
+    instructions_.count -= count;
+    out->instructions_.count += count;
+
+    if (out->instructions_.first == nullptr) {
+        out->instructions_.first = start;
+        out->instructions_.last = end;
+    } else {
+        out->instructions_.last->next = start;
+        start->prev = out->instructions_.last;
+        out->instructions_.last = end;
+    }
+}
+
 void Block::Destroy() {
     while (instructions_.first) {
         instructions_.first->Destroy();
