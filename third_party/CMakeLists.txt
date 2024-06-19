@@ -47,21 +47,29 @@ if (${DAWN_FETCH_DEPENDENCIES})
     )
 endif ()
 
-if (NOT TARGET SPIRV-Headers)
-    set(SPIRV_HEADERS_SKIP_EXAMPLES ON CACHE BOOL "" FORCE)
-    set(SPIRV_HEADERS_SKIP_INSTALL ON CACHE BOOL "" FORCE)
+if(TINT_BUILD_SPV_READER OR TINT_BUILD_SPV_WRITER)
+    if (NOT TARGET SPIRV-Headers)
+        set(SPIRV_HEADERS_SKIP_EXAMPLES ON CACHE BOOL "" FORCE)
+        set(SPIRV_HEADERS_SKIP_INSTALL ON CACHE BOOL "" FORCE)
 
-    message(STATUS "Dawn: using SPIRV-Headers at ${DAWN_SPIRV_HEADERS_DIR}")
-    add_subdirectory(${DAWN_SPIRV_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/spirv-headers")
-endif()
+        message(STATUS "Dawn: using SPIRV-Headers at ${DAWN_SPIRV_HEADERS_DIR}")
+        add_subdirectory(${DAWN_SPIRV_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/spirv-headers")
+    endif()
+endif ()
 
-if (NOT TARGET SPIRV-Tools)
-    set(SPIRV_SKIP_TESTS ON CACHE BOOL "" FORCE)
+if (NOT TARGET SPIRV-Tools AND
+    (((DAWN_ENABLE_OPENGL OR DAWN_ENABLE_VULKAN)
+        AND DAWN_ENABLE_SPIRV_VALIDATION)
+        OR TINT_BUILD_SPV_READER
+        OR TINT_BUILD_SPV_WRITER))
+    set(SPIRV_SKIP_TESTS ON CACHE BOOL "Controls whether SPIR-V tests are run" FORCE)
     set(SPIRV_SKIP_EXECUTABLES ON CACHE BOOL "" FORCE)
+    set(SPIRV_TOOLS_BUILD_STATIC OFF)
+    # Consume spirv-tools as object library to avoid static/shared faux-pas upstream
+    set(SPIRV_TOOLS_LIBRARY_TYPE "OBJECT")
     set(SKIP_SPIRV_TOOLS_INSTALL ON CACHE BOOL "" FORCE)
 
     if(${TINT_BUILD_SPV_READER} OR ${TINT_BUILD_SPV_WRITER})
-        set(SPIRV_SKIP_TESTS ON CACHE BOOL "Controls whether SPIR-V tests are run" FORCE)
         set(SPIRV_WERROR OFF CACHE BOOL OFF FORCE)
     endif()
 
@@ -72,7 +80,13 @@ endif()
 if(NOT TARGET glslang AND (${TINT_BUILD_GLSL_WRITER} OR ${TINT_BUILD_GLSL_VALIDATOR}) AND ${TINT_BUILD_CMD_TOOLS})
     set(SKIP_GLSLANG_INSTALL ON CACHE BOOL "" FORCE)
     set(ENABLE_OPT OFF CACHE BOOL "" FORCE)
+
+    # https://github.com/KhronosGroup/glslang/issues/2283
+    # glslang does not export symbols properly when BUILD_SHARED_LIBS=1, so always build it as static for now.
+    set(BUILD_SHARED_LIBS_SAVED ${BUILD_SHARED_LIBS})
+    set(BUILD_SHARED_LIBS 0)
     add_subdirectory("${DAWN_THIRD_PARTY_DIR}/glslang/src" "${CMAKE_CURRENT_BINARY_DIR}/glslang" EXCLUDE_FROM_ALL)
+    set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_SAVED})
 endif()
 
 if (NOT TARGET glfw AND DAWN_USE_GLFW)
@@ -81,12 +95,14 @@ if (NOT TARGET glfw AND DAWN_USE_GLFW)
     set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
     set(GLFW_BUILD_X11 ${DAWN_USE_X11} CACHE BOOL "" FORCE)
     set(GLFW_BUILD_WAYLAND ${DAWN_USE_WAYLAND} CACHE BOOL "" FORCE)
+    set(GLFW_INSTALL OFF CACHE BOOL "" FORCE)
 
     message(STATUS "Dawn: using GLFW at ${DAWN_GLFW_DIR}")
     add_subdirectory(${DAWN_GLFW_DIR} "${CMAKE_CURRENT_BINARY_DIR}/glfw")
 endif()
 
 if (NOT TARGET libabsl)
+    set(ABSL_PROPAGATE_CXX_STD ON)
     message(STATUS "Dawn: using Abseil at ${DAWN_ABSEIL_DIR}")
     if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang") OR
         ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang"))
@@ -97,42 +113,50 @@ if (NOT TARGET libabsl)
         )
     endif()
 
+    # abseil does not export symbols meant for public consumption on platforms other than windows.
+    set(CMAKE_CXX_VISIBILITY_PRESET_SAVED "${CMAKE_CXX_VISIBILITY_PRESET}")
+    set(CMAKE_CXX_VISIBILITY_PRESET default)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED "${CMAKE_VISIBILITY_INLINES_HIDDEN}")
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
+    set(CMAKE_CXX_VISIBILITY_PRESET ${CMAKE_CXX_VISIBILITY_PRESET_SAVED})
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN ${CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED})
 endif()
 
-if (DAWN_BUILD_PROTOBUF AND NOT TARGET libprotobuf-mutator)
+if (NOT TARGET libprotobuf-mutator AND DAWN_BUILD_PROTOBUF)
     message(STATUS "Dawn: using LPM at ${DAWN_LPM_DIR}")
     include("libprotobuf-mutator/BUILD.cmake")
 endif()
 
 if (NOT TARGET Vulkan-Headers)
     message(STATUS "Dawn: using Vulkan-Headers at ${DAWN_VULKAN_HEADERS_DIR}")
+    set(VULKAN_HEADERS_ENABLE_MODULE OFF CACHE BOOL "" FORCE) # We do not use Vulkan-Module in dawn/native/CMakeLists.txt
     add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
 endif()
 
 # Header-only library for khrplatform.h
 add_library(dawn_khronos_platform INTERFACE)
-target_sources(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api/KHR/khrplatform.h")
-target_include_directories(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api")
-
-# Header-only library for Vulkan headers
-add_library(dawn_vulkan_headers INTERFACE)
-target_sources(dawn_vulkan_headers INTERFACE
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_icd.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_layer.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_platform.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_sdk_platform.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan_core.h"
+target_include_directories(dawn_khronos_platform INTERFACE
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api/KHR>"
+    "$<INSTALL_INTERFACE:include/khronos/EGL-Registry/api>"
 )
-target_include_directories(dawn_vulkan_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos")
 
 if (NOT TARGET vk_swiftshader AND ${DAWN_ENABLE_SWIFTSHADER})
     set(SWIFTSHADER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
     set(SWIFTSHADER_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
 
     message(STATUS "Dawn: using Swiftshader at ${DAWN_SWIFTSHADER_DIR}")
+    # SwiftShader cmake does not link with SPIRV-tools and SPIRV-headers
+    # Doesn't work because swiftshader does not export symbols meant for public consumption
+    set(CMAKE_CXX_VISIBILITY_PRESET_SAVED "${CMAKE_CXX_VISIBILITY_PRESET}")
+    set(CMAKE_CXX_VISIBILITY_PRESET default)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED "${CMAKE_VISIBILITY_INLINES_HIDDEN}")
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
     add_subdirectory(${DAWN_SWIFTSHADER_DIR} "${CMAKE_CURRENT_BINARY_DIR}/swiftshader")
+    set(CMAKE_CXX_VISIBILITY_PRESET ${CMAKE_CXX_VISIBILITY_PRESET_SAVED})
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN ${CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED})
+    target_link_libraries(vk_swiftshader PRIVATE SPIRV-Tools SPIRV-Tools-opt SPIRV-Headers)
 endif()
 
 if (${TINT_BUILD_BENCHMARKS} OR ${DAWN_BUILD_BENCHMARKS})

@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,20 +25,37 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-dawn_add_executable(
-  dawn_benchmarks
-  UTILITY_TARGET dawn::dawnbuild
-  SOURCES
-    "NullDeviceSetup.cpp"
-    "NullDeviceSetup.h"
-    "ObjectCreation.cpp"
-  DEPENDS
-    benchmark::benchmark
-    benchmark::benchmark_main
-    dawn::dawncpp_headers
-    dawn::dawn_common
-    dawn::dawn_utils
-    dawn::dawn_native
-    dawn::dawn_proc
-)
-set_target_properties(dawn_benchmarks PROPERTIES FOLDER "Benchmarks")
+# TODO: Figure out the minimum GCC
+# # Minimum compiler version check: GCC >= 9.0
+# if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND
+#     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0)
+#   message(FATAL_ERROR "GCC 9.0 or later is required.")
+# endif ()
+
+# TODO: Figure out the minimum clang
+# # Minimum compiler version check: LLVM Clang >= 14.0
+# if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND
+#     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 14.0)
+#   message(FATAL_ERROR "LLVM Clang 14.0 or later is required.")
+# endif ()
+
+# TODO: Figure out the minimum xcode
+# # Minimum compiler version check: Apple Clang >= 15.0 Xcode 15.0
+# if (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" AND
+#     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 15.0)
+#   message(FATAL_ERROR "Apple Clang 15.0 or later is required.")
+# endif ()
+
+# TODO: Figure out the minimum msvc
+# # Minimum compiler version check: Microsoft C/C++ >= 19.20 (aka VS 2019)
+# if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC" AND
+#     CMAKE_CXX_COMPILER_VERSION VERSION_LESS 19.20)
+#   message(FATAL_ERROR "Microsoft Visual Studio 2019 or later is required.")
+# endif ()
+
+# Make sure we have C++17 enabled.
+# Needed to make sure libraries and executables not built by the
+# dawn_add_library still have the C++17 compiler flags enabled
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_EXTENSIONS False)

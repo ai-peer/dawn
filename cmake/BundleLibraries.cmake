@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,20 +25,49 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-dawn_add_executable(
-  dawn_benchmarks
-  UTILITY_TARGET dawn::dawnbuild
-  SOURCES
-    "NullDeviceSetup.cpp"
-    "NullDeviceSetup.h"
-    "ObjectCreation.cpp"
-  DEPENDS
-    benchmark::benchmark
-    benchmark::benchmark_main
-    dawn::dawncpp_headers
-    dawn::dawn_common
-    dawn::dawn_utils
-    dawn::dawn_native
-    dawn::dawn_proc
-)
-set_target_properties(dawn_benchmarks PROPERTIES FOLDER "Benchmarks")
+function(bundle_libraries output_target)
+  function(get_dependencies input_target)
+    get_target_property(alias ${input_target} ALIASED_TARGET)
+    if(TARGET ${alias})
+      set(input_target ${alias})
+    endif()
+    if(${input_target} IN_LIST all_dependencies)
+      return()
+    endif()
+    list(APPEND all_dependencies ${input_target})
+
+    get_target_property(link_libraries ${input_target} LINK_LIBRARIES)
+    foreach(dependency IN LISTS link_libraries)
+      if(TARGET ${dependency})
+        get_dependencies(${dependency})
+      endif()
+    endforeach()
+
+    get_target_property(link_libraries ${input_target} INTERFACE_LINK_LIBRARIES)
+    foreach(dependency IN LISTS link_libraries)
+      if(TARGET ${dependency})
+        get_dependencies(${dependency})
+      endif()
+    endforeach()
+
+    set(all_dependencies ${all_dependencies} PARENT_SCOPE)
+  endfunction()
+
+  foreach(input_target IN LISTS ARGN)
+    get_dependencies(${input_target})
+  endforeach()
+
+  foreach(dependency IN LISTS all_dependencies)
+    get_target_property(type ${dependency} TYPE)
+    if(${type} STREQUAL "STATIC_LIBRARY")
+      list(APPEND all_objects $<TARGET_OBJECTS:${dependency}>)
+    elseif(${type} STREQUAL "OBJECT_LIBRARY")
+      list(APPEND all_objects $<TARGET_OBJECTS:${dependency}>)
+    endif()
+  endforeach()
+
+  add_library(${output_target} SHARED ${all_objects})
+
+  add_dependencies(${output_target} ${ARGN})
+
+endfunction()

@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,20 +25,41 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-dawn_add_executable(
-  dawn_benchmarks
-  UTILITY_TARGET dawn::dawnbuild
-  SOURCES
-    "NullDeviceSetup.cpp"
-    "NullDeviceSetup.h"
-    "ObjectCreation.cpp"
-  DEPENDS
-    benchmark::benchmark
-    benchmark::benchmark_main
-    dawn::dawncpp_headers
-    dawn::dawn_common
-    dawn::dawn_utils
-    dawn::dawn_native
-    dawn::dawn_proc
-)
-set_target_properties(dawn_benchmarks PROPERTIES FOLDER "Benchmarks")
+# CMake < 3.15 sets /W3 in CMAKE_CXX_FLAGS. Remove it if it's there.
+# See https://gitlab.kitware.com/cmake/cmake/-/issues/18317
+if (CMAKE_VERSION VERSION_LESS 3.15.0)
+  if (MSVC)
+    if (CMAKE_CXX_FLAGS MATCHES "/W3")
+      string(REPLACE "/W3" "" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+    endif ()
+  endif ()
+endif ()
+
+if (${TINT_CHECK_CHROMIUM_STYLE})
+  set(CMAKE_CXX_FLAGS
+    "${CMAKE_CXX_FLAGS} -Xclang -add-plugin -Xclang find-bad-constructs")
+endif ()
+
+if ((CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    AND (CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC"))
+  set(COMPILER_IS_CLANG_CL TRUE)
+endif ()
+
+if ((CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang") OR
+    ((CMAKE_CXX_COMPILER_ID STREQUAL "Clang") AND
+     (NOT COMPILER_IS_CLANG_CL)))
+  set(COMPILER_IS_CLANG TRUE)
+endif ()
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  set(COMPILER_IS_GNU TRUE)
+endif ()
+
+if ((CMAKE_CXX_COMPILER_ID STREQUAL "GNU") OR COMPILER_IS_CLANG)
+  set(COMPILER_IS_LIKE_GNU TRUE)
+endif ()
+
+# Enable msbuild multiprocessor builds
+if (MSVC AND NOT COMPILER_IS_CLANG_CL)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
+endif ()

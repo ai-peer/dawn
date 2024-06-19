@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,20 +25,16 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-dawn_add_executable(
-  dawn_benchmarks
-  UTILITY_TARGET dawn::dawnbuild
-  SOURCES
-    "NullDeviceSetup.cpp"
-    "NullDeviceSetup.h"
-    "ObjectCreation.cpp"
-  DEPENDS
-    benchmark::benchmark
-    benchmark::benchmark_main
-    dawn::dawncpp_headers
-    dawn::dawn_common
-    dawn::dawn_utils
-    dawn::dawn_native
-    dawn::dawn_proc
-)
-set_target_properties(dawn_benchmarks PROPERTIES FOLDER "Benchmarks")
+# set_if_not_defined(name value description)
+# Behaves like:
+#   set(${name} ${value} CACHE STRING ${description})
+# If a variable is not already defined with the given name, otherwise the
+# function does nothing.
+# Simplifies customization by projects that use Dawn as a dependency.
+# Usages of set_if_not_defined can be safely replaced with `set` after
+# the minimum cmake version is bumped to >= 3.20
+function(set_if_not_defined name value description)
+  if(NOT DEFINED ${name})
+    set(${name} ${value} CACHE STRING ${description})
+  endif()
+endfunction()
