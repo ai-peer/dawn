@@ -67,6 +67,24 @@
       "message": "Nit: could this param be `const DisplayEGL*`, as the member var is?\n\nIf we\u0027re assuming the display\u0027s lifetime always exceeds that of the context, could we use a const reference instead?",
       "revId": "767fba52f57ebfe57289d458574ba9920dfcf001",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffb5fe34_0f05f862",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:16:43Z",
+      "side": 1,
+      "message": "We usually don\u0027t use const-ref for this in Dawn though we could have. Done for the `const*`!",
+      "parentUuid": "6164ee5f_58abdc8e",
+      "revId": "767fba52f57ebfe57289d458574ba9920dfcf001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
