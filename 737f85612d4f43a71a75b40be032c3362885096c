@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48586540_c8623cb7",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-19T00:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84b70a81_d2372e94",
+      "range": {
+        "startLine": 1017,
+        "startChar": 4,
+        "endLine": 1017,
+        "endChar": 20
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e83dd93a_48e52c9d",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-06-18T23:22:26Z",
       "side": 1,
       "message": "Maybe we could put these static_asserts inside the struct definition instead of using this nested empty struct? (We used to put them in webgpu_cpp.cpp, but now that we\u0027ve made this header-only, it seems fine to have them earlier.)",
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8614ac_404fe7fe",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-19T00:26:05Z",
+      "side": 1,
+      "message": "I can\u0027t put the asserts in the namespace like the others because of the protected fields, but I was able to move them into the default ctor and remove the empty struct.",
+      "parentUuid": "e83dd93a_48e52c9d",
       "revId": "737f85612d4f43a71a75b40be032c3362885096c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -119,6 +161,30 @@
       "side": 1,
       "message": "I think we should either do that or have all the setters assert `userdata1 \u003d\u003d nullptr`. Not sure how to assert but maybe just assert.h would work? I think I would prefer to allow a binding lambda.",
       "parentUuid": "ac40ccf6_95693404",
+      "range": {
+        "startLine": 771,
+        "startChar": 0,
+        "endLine": 773,
+        "endChar": 0
+      },
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e696794_9b1d5eaa",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-19T00:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77f063a9_1e99aedf",
       "range": {
         "startLine": 771,
         "startChar": 0,
