@@ -37,20 +37,22 @@ class Device;
 
 class Surface final : public ObjectBase {
   public:
-    explicit Surface(const ObjectBaseParams& params);
+    explicit Surface(const ObjectBaseParams& params, const WGPUSurfaceCapabilities* capabilities);
     ~Surface() override;
 
     ObjectType GetObjectType() const override;
 
-    void Configure(WGPUSurfaceConfiguration const* config);
-
+    void Configure(const WGPUSurfaceConfiguration* config);
     WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
-
     WGPUStatus GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
-
     void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
 
   private:
+    WGPUTextureUsageFlags mSupportedUsages;
+    std::vector<WGPUTextureFormat> mSupportedFormats;
+    std::vector<WGPUPresentMode> mSupportedPresentModes;
+    std::vector<WGPUCompositeAlphaMode> mSupportedAlphaModes;
+
     WGPUTextureDescriptor mTextureDescriptor;
 };
 

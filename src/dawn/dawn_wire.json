@@ -105,6 +105,10 @@
             { "name": "event manager handle", "type": "ObjectHandle" },
             { "name": "future", "type": "future" }
         ],
+        "surface get current texture": [
+            { "name": "surface id", "type": "ObjectId", "id_type": "surface" },
+            { "name": "texture handle", "type": "ObjectHandle", "handle_type": "texture" }
+        ],
         "instance request adapter": [
             { "name": "instance id", "type": "ObjectId", "id_type": "instance" },
             { "name": "event manager handle", "type": "ObjectHandle" },
@@ -247,6 +251,7 @@
             "DeviceSetLoggingCallback",
             "InstanceEnumerateWGSLLanguageFeatures",
             "InstanceHasWGSLLanguageFeature",
+            "InstanceCreateSurface",
             "InstanceRequestAdapter",
             "InstanceRequestAdapterF",
             "InstanceRequestAdapter2",
@@ -261,6 +266,7 @@
             "QueueWriteBuffer",
             "QueueWriteTexture",
             "SurfaceGetCapabilities",
+            "SurfaceGetCurrentTexture",
             "SurfaceGetPreferredFormat",
             "TextureGetWidth",
             "TextureGetHeight",
@@ -282,7 +288,6 @@
             "InstanceProcessEvents",
             "InstanceWaitAny",
             "SurfaceConfigure",
-            "SurfaceGetCurrentTexture",
             "SwapChainGetCurrentTexture"
         ],
         "client_special_objects": [
@@ -300,7 +305,9 @@
         ],
         "server_custom_pre_handler_commands": [
             "BufferDestroy",
-            "BufferUnmap"
+            "BufferUnmap",
+            "SurfaceConfigure",
+            "SurfaceUnconfigure"
         ]
     }
 }

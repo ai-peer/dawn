@@ -36,7 +36,20 @@
 
 namespace dawn::wire::client {
 
-Surface::Surface(const ObjectBaseParams& params) : ObjectBase(params) {}
+Surface::Surface(const ObjectBaseParams& params, const WGPUSurfaceCapabilities* capabilities)
+    : ObjectBase(params) {
+    // Copy over the capabilities.
+    mSupportedUsages = capabilities->usages;
+    mSupportedFormats.assign(capabilities->formats,
+                             capabilities->formats + capabilities->formatCount);
+    mSupportedPresentModes.assign(capabilities->presentModes,
+                                  capabilities->presentModes + capabilities->presentModeCount);
+    mSupportedAlphaModes.assign(capabilities->alphaModes,
+                                capabilities->alphaModes + capabilities->alphaModeCount);
+
+    DAWN_ASSERT(!mSupportedFormats.empty() && !mSupportedPresentModes.empty() &&
+                !mSupportedAlphaModes.empty());
+}
 
 Surface::~Surface() = default;
 
@@ -44,7 +57,7 @@ ObjectType Surface::GetObjectType() const {
     return ObjectType::Surface;
 }
 
-void Surface::Configure(WGPUSurfaceConfiguration const* config) {
+void Surface::Configure(const WGPUSurfaceConfiguration* config) {
     mTextureDescriptor = {};
     mTextureDescriptor.size = {config->width, config->height, 1};
     mTextureDescriptor.format = config->format;
@@ -60,37 +73,54 @@ void Surface::Configure(WGPUSurfaceConfiguration const* config) {
 }
 
 WGPUTextureFormat Surface::GetPreferredFormat([[maybe_unused]] WGPUAdapter adapter) const {
-    // TODO(dawn:2320): Use the result of GetCapabilities
-    // This is the only supported format in native mode (see crbug.com/dawn/160).
-    return WGPUTextureFormat_BGRA8Unorm;
+    dawn::ErrorLog() << "Surface::GetPreferrredFormat is deprecated, use "
+                        "Surface::GetCapabilities().formats[0] instead.";
+    return mSupportedFormats[0];
 }
 
 WGPUStatus Surface::GetCapabilities(WGPUAdapter adapter,
                                     WGPUSurfaceCapabilities* capabilities) const {
-    // TODO(dawn:2320): Implement this
-    dawn::ErrorLog() << "surface.GetCapabilities not supported yet with dawn_wire.";
-    return WGPUStatus_Error;
+    // Return the capabilities that were provided when injecting the swapchain.
+    capabilities->nextInChain = nullptr;
+    capabilities->usages = mSupportedUsages;
+
+    capabilities->presentModeCount = mSupportedPresentModes.size();
+    WGPUPresentMode* presentModes = new WGPUPresentMode[capabilities->presentModeCount];
+    std::copy(mSupportedPresentModes.begin(), mSupportedPresentModes.end(), presentModes);
+    capabilities->presentModes = presentModes;
+
+    capabilities->formatCount = mSupportedFormats.size();
+    WGPUTextureFormat* formats = new WGPUTextureFormat[capabilities->formatCount];
+    std::copy(mSupportedFormats.begin(), mSupportedFormats.end(), formats);
+    capabilities->formats = formats;
+
+    capabilities->alphaModeCount = mSupportedAlphaModes.size();
+    WGPUCompositeAlphaMode* alphaModes = new WGPUCompositeAlphaMode[capabilities->alphaModeCount];
+    std::copy(mSupportedAlphaModes.begin(), mSupportedAlphaModes.end(), alphaModes);
+    capabilities->alphaModes = alphaModes;
+
+    return WGPUStatus_Success;
 }
 
 void Surface::GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture) {
-    // TODO(dawn:2320): Implement this
-    dawn::ErrorLog() << "surface.GetCurrentTexture not supported yet with dawn_wire.";
-
     Client* wireClient = GetClient();
     Texture* texture = wireClient->Make<Texture>(&mTextureDescriptor);
-    surfaceTexture->texture = ToAPI(texture);
 
     SurfaceGetCurrentTextureCmd cmd;
-    cmd.self = ToAPI(this);
-    cmd.selfId = GetWireId();
-    // cmd.result = texture->GetWireHandle(); // TODO(dawn:2320): Feed surfaceTexture to cmd
+    cmd.surfaceId = GetWireId();
+    cmd.textureHandle = texture->GetWireHandle();
     wireClient->SerializeCommand(cmd);
+
+    surfaceTexture->suboptimal = false;
+    surfaceTexture->status = WGPUSurfaceGetCurrentTextureStatus_Success;
+    surfaceTexture->texture = ToAPI(texture);
 }
 
 }  // namespace dawn::wire::client
 
 DAWN_WIRE_EXPORT void wgpuDawnWireClientSurfaceCapabilitiesFreeMembers(
     WGPUSurfaceCapabilities capabilities) {
-    // TODO(dawn:2320): Implement this
-    dawn::ErrorLog() << "surfaceCapabilities.FreeMembers not supported yet with dawn_wire.";
+    delete[] capabilities.presentModes;
+    delete[] capabilities.formats;
+    delete[] capabilities.alphaModes;
 }

@@ -203,6 +203,7 @@ class Server : public ServerBase {
     WireResult InjectSwapChain(WGPUSwapChain swapchain,
                                const Handle& handle,
                                const Handle& deviceHandle);
+    WireResult InjectSurface(WGPUSurface surface, const Handle& handle, const Handle& deviceHandle);
     WireResult InjectInstance(WGPUInstance instance, const Handle& handle);
 
     WGPUDevice GetDevice(uint32_t id, uint32_t generation);
