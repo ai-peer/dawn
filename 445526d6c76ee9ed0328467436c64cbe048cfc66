@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2783cd26_b6d3b424",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-19T18:12:53Z",
+      "side": 1,
+      "message": "In that case, I\u0027d like this to return a WGPUFuture that tracks the scheduled handler for pending (or last submitted if there are no pending) commands. Then we would call it in every Dawn EndAccess (instead of overlay BeginAccess), retrieve the future, and wait on the future(s) when we promote the IOSurface to a CoreAnimation overlay (in overlay BeginAccess).",
+      "parentUuid": "19a5ac8c_07373bf1",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a64252_5c867675",
         "filename": "src/dawn/native/metal/QueueMTL.mm",
         "patchSetId": 2
