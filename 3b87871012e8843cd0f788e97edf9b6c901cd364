@@ -52,6 +52,24 @@
       "parentUuid": "6539bddf_b67394f6",
       "revId": "3b87871012e8843cd0f788e97edf9b6c901cd364",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "055987af_07591aa3",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-19T10:20:49Z",
+      "side": 1,
+      "message": "I\u0027ve updated the CL to match this rule (there must be both `@blend_src(0)` and `@blend_src(1)`). PTAL, thanks!",
+      "parentUuid": "1d2734de_2029a2d4",
+      "revId": "3b87871012e8843cd0f788e97edf9b6c901cd364",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
