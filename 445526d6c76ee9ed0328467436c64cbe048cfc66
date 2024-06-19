@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "552a4164_1600d399",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T18:53:29Z",
+      "side": 1,
+      "message": "That\u0027d work, but would the WGPUFuture be per STM or on a per-device method like this one is?",
+      "parentUuid": "2783cd26_b6d3b424",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a64252_5c867675",
         "filename": "src/dawn/native/metal/QueueMTL.mm",
         "patchSetId": 2
