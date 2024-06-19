@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a9465f_656082a8",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T20:29:38Z",
+      "side": 1,
+      "message": "Looks like `register_space` is always non-null here?",
+      "range": {
+        "startLine": 515,
+        "startChar": 8,
+        "endLine": 515,
+        "endChar": 29
+      },
+      "revId": "eb60e9f64fc45a7b6a54460b819a102dab183a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4983d0_d4f5d63e",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T20:29:38Z",
+      "side": 1,
+      "message": "Can this not use `RegisterAndSpace`?",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 13
+      },
+      "revId": "eb60e9f64fc45a7b6a54460b819a102dab183a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
