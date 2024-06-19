@@ -1,0 +1,57 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30842fd8_92f94a57",
+        "filename": "src/tint/lang/hlsl/validate/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-19T16:54:58Z",
+      "side": 1,
+      "message": "These types are defined in `WinAdapter.h` that\u0027s included by `dxc/dxcapi.h`. This acts as a system header, but we don\u0027t use angle brackets to include it since it\u0027s a third-party dep. Is there a way to disable these? Or we can just ignore.",
+      "parentUuid": "011d901b_c1380d27",
+      "revId": "85cad78ee5bad3245638412608417b01fa215cea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23e5c39c_692023c9",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-06-19T16:54:58Z",
+      "side": 1,
+      "message": "These macros were cribbed from Dawn.",
+      "fixSuggestions": [
+        {
+          "fixId": "ec929272_3c1d5091",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/utils/macros/compiler.h",
+              "range": {
+                "startLine": 35,
+                "startChar": 0,
+                "endLine": 35,
+                "endChar": 0
+              },
+              "replacement": "// Cribbed from Dawn.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "85cad78ee5bad3245638412608417b01fa215cea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
