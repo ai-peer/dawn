@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052f2e3c_beb0d128",
+        "filename": "src/tint/lang/core/ir/block.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T21:51:42Z",
+      "side": 1,
+      "message": "Nit: included?",
+      "revId": "f8425f7c2f3a0f6ecb9db0eda24c14c012d34858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3146e65c_28ae9933",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T21:51:42Z",
+      "side": 1,
+      "message": "Nit: `s/End/Exit/` both times",
+      "revId": "f8425f7c2f3a0f6ecb9db0eda24c14c012d34858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2b0187_e3c0e29b",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T21:51:42Z",
+      "side": 1,
+      "message": "Nit: Slightly simpler with `exit-\u003eReplaceWith(b.ExitLoop(l));` ? Avoids the lambda at least.",
+      "revId": "f8425f7c2f3a0f6ecb9db0eda24c14c012d34858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0e0ad7_87fbd8be",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T21:51:42Z",
+      "side": 1,
+      "message": "If we used `if (true) {}` instead of a loop then you could just use `if_-\u003eSetTrue(body)` to move the whole block over, which would be more efficient then the splice approach.\n\nI assume the only reason that the AST printer uses `while` is because `break` statements then do the right thing, but that\u0027s not a concern in IR land.",
+      "revId": "f8425f7c2f3a0f6ecb9db0eda24c14c012d34858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
