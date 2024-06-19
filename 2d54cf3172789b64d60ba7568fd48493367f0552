@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ea6e61_c03bad19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-19T08:24:24Z",
+      "side": 1,
+      "message": "Thank you for addressing the comments and signing the CLA. I\u0027m doing a CI dry run to see what it looks like.",
+      "revId": "2d54cf3172789b64d60ba7568fd48493367f0552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
