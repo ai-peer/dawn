@@ -25,6 +25,8 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <tuple>
+
 #include "src/tint/lang/core/ir/block.h"
 #include "src/tint/lang/core/ir/ir_helper_test.h"
 
@@ -432,6 +434,289 @@ TEST_F(IR_BlockTest, Remove_OnlyNode) {
 
     EXPECT_TRUE(blk->IsEmpty());
     EXPECT_EQ(0u, blk->Length());
+}
+
+std::tuple<Block*, Instruction*, Instruction*> CreateSrcBlock(Builder& b) {
+    Instruction* s = nullptr;
+    Instruction* e = nullptr;
+
+    auto* src = b.Block();
+    for (size_t i = 0; i < 10; i++) {
+        auto* inst = src->Append(b.Loop());
+
+        if (i == 3) {
+            s = inst;
+        } else if (i == 6) {
+            e = inst;
+        }
+    }
+    return {src, s, e};
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIntoEmptyBlock) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(6u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(4u, dst->Length());
+
+    EXPECT_EQ(s, dst->Front());
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = s;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+    }
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIntoSingleElementBlock) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+    dst->Append(b.Loop());
+
+    auto* dst_front = dst->Front();
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(6u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(5u, dst->Length());
+
+    EXPECT_EQ(dst_front, dst->Front());
+    EXPECT_EQ(s, dst_front->next);
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIntoMultiElementBlock) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+    dst->Append(b.Loop());
+    dst->Append(b.Loop());
+    dst->Append(b.Loop());
+
+    auto dst_end = dst->Back();
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(6u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(7u, dst->Length());
+
+    EXPECT_EQ(s, dst_end->next);
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIsEntireBlock) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+
+    s = src->Front();
+    e = src->Back();
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_TRUE(src->IsEmpty());
+    EXPECT_EQ(0u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(10u, dst->Length());
+
+    EXPECT_EQ(s, dst->Front());
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    EXPECT_TRUE(src->Front() == nullptr);
+    EXPECT_TRUE(src->Back() == nullptr);
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIsStartNotEnd) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+
+    s = src->Front();
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(3u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(7u, dst->Length());
+
+    EXPECT_EQ(s, dst->Front());
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
+}
+
+TEST_F(IR_BlockTest, SpliceRangeIsEndNotStart) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+
+    e = src->Back();
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(3u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(7u, dst->Length());
+
+    EXPECT_EQ(s, dst->Front());
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
+}
+
+TEST_F(IR_BlockTest, SpliceIsOneElement) {
+    auto [src, s, e] = CreateSrcBlock(b);
+
+    auto* dst = b.Block();
+
+    e = s;
+
+    src->SpliceRangeIntoBlock(s, e, dst);
+
+    EXPECT_FALSE(src->IsEmpty());
+    EXPECT_EQ(9u, src->Length());
+
+    EXPECT_FALSE(dst->IsEmpty());
+    EXPECT_EQ(1u, dst->Length());
+
+    EXPECT_EQ(s, dst->Front());
+    EXPECT_EQ(e, dst->Back());
+
+    // Verify dst blocks all have dst as their parent
+    auto* inst = dst->Front();
+    size_t count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), dst);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, dst->Length());
+
+    // Verifty src instructions still have a src parent and all link together
+    inst = src->Front();
+    count = 0;
+    while (inst != nullptr) {
+        EXPECT_EQ(inst->Block(), src);
+        inst = inst->next;
+        ++count;
+    }
+    EXPECT_EQ(count, src->Length());
 }
 
 }  // namespace

@@ -159,6 +159,11 @@ class Block : public Castable<Block> {
     /// @param inst the instruction to remove
     void Remove(Instruction* inst);
 
+    /// Takes the instructions from `start` to `end` includes and appends to `out`.
+    /// @param start the start instruction
+    /// @param end the end instruction
+    void SpliceRangeIntoBlock(Instruction* start, Instruction* end, Block* out);
+
     /// @returns true if the block contains no instructions
     bool IsEmpty() const { return Length() == 0; }
 
