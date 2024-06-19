@@ -904,5 +904,26 @@ void unused_entry_point() {
 )");
 }
 
+TEST_F(HlslWriterTest, ConstantTypeConvertU32) {
+    auto* f = b.Function("a", ty.u32());
+    b.Append(f->Block(), [&] {
+        auto* v = b.Var("v", 2_i);
+        b.Return(f, b.Convert(ty.u32(), v));
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
+    EXPECT_EQ(output_.hlsl, R"(
+uint a() {
+  int v = 2;
+  return uint(v);
+}
+
+[numthreads(1, 1, 1)]
+void unused_entry_point() {
+}
+
+)");
+}
+
 }  // namespace
 }  // namespace tint::hlsl::writer
