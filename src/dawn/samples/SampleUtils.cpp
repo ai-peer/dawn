@@ -43,6 +43,7 @@
 #include "dawn/dawn_proc.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/utils/CommandLineParser.h"
+#include "dawn/utils/WGPUHelpers.h"
 #include "webgpu/webgpu_glfw.h"
 
 void PrintDeviceError(WGPUErrorType errorType, const char* message, void*) {
@@ -151,6 +152,7 @@ wgpu::Device CreateCppDawnDevice() {
     // Synchronously request the adapter.
     wgpu::RequestAdapterOptions options = {};
     options.backendType = backendType;
+    options.compatibilityMode = dawn::utils::BackendRequiresCompat(options.backendType);
     switch (adapterType) {
         case wgpu::AdapterType::CPU:
             options.forceFallbackAdapter = true;
@@ -284,16 +286,6 @@ bool InitSample(int argc, const char** argv) {
     adapterType = adapterTypeOpt.GetValue();
     enableToggles = enableTogglesOpt.GetOwnedValue();
     disableToggles = disableTogglesOpt.GetOwnedValue();
-
-    // TODO(dawn:810): Reenable once the OpenGL(ES) backend is able to create its own context such
-    // that it can use surface-based swapchains.
-    if (backendType == wgpu::BackendType::OpenGL || backendType == wgpu::BackendType::OpenGLES) {
-        fprintf(stderr,
-                "The OpenGL(ES) backend is temporarily not supported for samples. See "
-                "https://crbug.com/dawn/810\n");
-        return false;
-    }
-
     return true;
 }
 
