@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39587b85_6ac13e90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-19T13:45:22Z",
+      "side": 1,
+      "message": "LGTM. CC\u0027ing Antonio just as FYI.",
+      "revId": "02860a9c639eb7e933663f873a1f855d944a48e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
