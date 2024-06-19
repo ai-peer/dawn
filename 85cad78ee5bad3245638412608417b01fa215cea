@@ -21,6 +21,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea7bb9c9_9e8348c7",
+        "filename": "src/tint/lang/hlsl/validate/validate.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-19T16:58:13Z",
+      "side": 1,
+      "message": "There are ways to turn them off `// NOLINTNEXTLINE(misc-include-cleaner)` I think? But mostly we skip that and just ignore the ones that we want for now.",
+      "parentUuid": "30842fd8_92f94a57",
+      "revId": "85cad78ee5bad3245638412608417b01fa215cea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23e5c39c_692023c9",
         "filename": "src/tint/utils/macros/compiler.h",
         "patchSetId": 1
