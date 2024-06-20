@@ -39,6 +39,7 @@ project(
     DESCRIPTION "Dawn, a WebGPU implementation"
     LANGUAGES C CXX
     HOMEPAGE_URL "https://dawn.googlesource.com/dawn"
+    VERSION 0.0.0
 )
 enable_testing()
 
@@ -48,6 +49,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# Set up our directory structure for output libraries and binaries
+include(GNUInstallDirs)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
 set(CMAKE_DEBUG_POSTFIX "")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -466,3 +472,43 @@ if (DAWN_EMIT_COVERAGE)
     COMMENT "Generating tint coverage data"
     VERBATIM)
 endif()
+
+if (DAWN_ENABLE_INSTALL)
+  install(FILES
+    "${DAWN_BUILD_GEN_DIR}/include/dawn/webgpu.h"
+    "${DAWN_BUILD_GEN_DIR}/include/dawn/webgpu_cpp.h"
+    "${DAWN_BUILD_GEN_DIR}/include/dawn/webgpu_cpp_print.h"
+    DESTINATION
+      "${CMAKE_INSTALL_INCLUDEDIR}/dawn"
+  )
+  install(FILES
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu.h"
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
+    "${DAWN_BUILD_GEN_DIR}/include/webgpu/webgpu_cpp_chained_struct.h"
+    DESTINATION
+      "${CMAKE_INSTALL_INCLUDEDIR}/webgpu"
+  )
+
+  # installs helpful package info so that folks can locate us via cmake find_package or pkg-config.
+  install(EXPORT dawnTargets
+    FILE DawnTargets.cmake
+    NAMESPACE dawn::
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Dawn")
+  # Create a ConfigVersion.cmake file:
+  include(CMakePackageConfigHelpers)
+  write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/DawnConfigVersion.cmake"
+    COMPATIBILITY AnyNewerVersion)
+  # Configure config file
+  configure_package_config_file("${CMAKE_CURRENT_LIST_DIR}/src/cmake/DawnConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/DawnConfig.cmake"
+    INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Dawn"
+  )
+  # Install the fully generated config and configVersion files
+  install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/DawnConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/DawnConfigVersion.cmake"
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/Dawn"
+  )
+endif ()
