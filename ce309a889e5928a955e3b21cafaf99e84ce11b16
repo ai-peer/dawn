@@ -16,6 +16,24 @@
       "message": "Nit: These tests that use `Construct` are not really constant tests, since their arguments are not constants.",
       "revId": "ce309a889e5928a955e3b21cafaf99e84ce11b16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6715f39e_0e8e04f8",
+        "filename": "src/tint/lang/hlsl/writer/constant_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T15:32:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bdcd91a_2513c65a",
+      "revId": "ce309a889e5928a955e3b21cafaf99e84ce11b16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
