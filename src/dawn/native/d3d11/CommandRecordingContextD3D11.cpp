@@ -35,6 +35,7 @@
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/Forward.h"
+#include "dawn/native/d3d11/MappableBufferD3D11.h"
 #include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -144,6 +145,18 @@ MaybeError ScopedCommandRecordingContext::AcquireKeyedMutex(Ref<d3d::KeyedMutex>
 
 void ScopedCommandRecordingContext::SetNeedsFence() const {
     Get()->mNeedsFence = true;
+}
+
+void ScopedCommandRecordingContext::AddBufferForSyncingWithCPU(MappableBuffer* buffer) const {
+    Get()->mBuffersToSyncWithCPU.push_back(buffer);
+}
+
+MaybeError ScopedCommandRecordingContext::FlushBuffersForSyncingWithCPU() const {
+    for (auto buffer : Get()->mBuffersToSyncWithCPU) {
+        DAWN_TRY(buffer->SyncCPUAccessibleStorages(this));
+    }
+    Get()->mBuffersToSyncWithCPU.clear();
+    return {};
 }
 
 ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
