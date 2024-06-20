@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1094e4a4_2a211a71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-20T21:41:41Z",
+      "side": 1,
+      "message": "LGTM with nits.\n\nI\u0027m slightly worried that we\u0027ll find out the FXC optimizes away the extra selector and then hits the same bug anyway, but I guess we\u0027ll find out with CTS.",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354aeba0_1ba1a977",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-20T21:41:41Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t need to use a worklist anymore since there\u0027s no new instructions being created.",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9405cbe6_7e4ef133",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-20T21:41:41Z",
+      "side": 1,
+      "message": "Nit: `UnwrapPtrOrRef()` is unnecessary - a switch condition is always an integer scalar.",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
