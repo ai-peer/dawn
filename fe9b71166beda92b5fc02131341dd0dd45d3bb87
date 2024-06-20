@@ -50,6 +50,24 @@
       "message": "Tint has a command line parser as well  (https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/utils/cli/cli.h) should we consider creating a `src/utils` folder to be shared by dawn and tint at some point? We have various other macros and things that could probably be shared.\n\nBaring that for this cl, could we copy the tint option parser here so that if we do create a common folder the APIs already match?",
       "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e06994f_4ea5f27d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:08:19Z",
+      "side": 1,
+      "message": "The problem is that both Dawn utils and Tint utils are very integrated and pulling one part of them would require moving a lot more stuff. We discussed about it while planning the repo merge but it would require a lot of effort to make it happen.\n\nEven copying the Tint option parser is complicated because it depends on utilities that aren\u0027t replicated. IDK that we need to copy the API now, but instead if we do decide to merge utils then we can look at the APIs again. There are relatively few users of each command line parser.",
+      "parentUuid": "fb2ad06b_387db423",
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
