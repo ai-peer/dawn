@@ -16,6 +16,24 @@
       "message": "Nit: Again, not a constant test",
       "revId": "ad403f3355d2e018cc780f97ba1cf89e406e2f58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f43bc5db_59d49973",
+        "filename": "src/tint/lang/hlsl/writer/constant_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 907,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T15:48:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ad34d75_3043e187",
+      "revId": "ad403f3355d2e018cc780f97ba1cf89e406e2f58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
