@@ -859,6 +859,9 @@ if (DAWN_BUILD_MONOLITHIC_SHARED_LIBRARY)
             "DAWN_NATIVE_SHARED_LIBRARY"
             "DAWN_PLATFORM_SHARED_LIBRARY"
             "DAWN_WIRE_SHARED_LIBRARY")
+    if (DAWN_ENABLE_INSTALL)
+        dawn_install_target(dawn_public_config)
+        dawn_install_target(webgpu_dawn 
+            HEADERS ${webgpu_dawn_public_headers})
+    endif ()
 endif ()
-
-install_if_enabled(dawn_native)
