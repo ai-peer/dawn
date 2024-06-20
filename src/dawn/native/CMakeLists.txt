@@ -868,4 +868,11 @@ target_compile_definitions(webgpu_dawn PRIVATE "WGPU_IMPLEMENTATION")
 target_compile_definitions(webgpu_dawn PUBLIC "WGPU_SHARED_LIBRARY")
 
 install_if_enabled(dawn_native)
-install_if_enabled(webgpu_dawn)
+if (DAWN_ENABLE_INSTALL)
+  install(TARGETS webgpu_dawn
+    EXPORT dawnTargets
+    LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+    RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}"
+  )
+endif ()
