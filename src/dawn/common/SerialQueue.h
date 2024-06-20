@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_COMMON_SERIALQUEUE_H_
 #define SRC_DAWN_COMMON_SERIALQUEUE_H_
 
+#include <deque>
 #include <utility>
 #include <vector>
 
@@ -43,7 +44,7 @@ struct SerialStorageTraits<SerialQueue<SerialT, ValueT>> {
     using Serial = SerialT;
     using Value = ValueT;
     using SerialPair = std::pair<Serial, std::vector<Value>>;
-    using Storage = std::vector<SerialPair>;
+    using Storage = std::deque<SerialPair>;
     using StorageIterator = typename Storage::iterator;
     using ConstStorageIterator = typename Storage::const_iterator;
 };
@@ -60,6 +61,9 @@ class SerialQueue : public SerialStorage<SerialQueue<Serial, Value>> {
     void Enqueue(Value&& value, Serial serial);
     void Enqueue(const std::vector<Value>& values, Serial serial);
     void Enqueue(std::vector<Value>&& values, Serial serial);
+
+    // Remove the one item from first serial.
+    Value TakeOneFromFirstSerial();
 };
 
 // SerialQueue
@@ -96,6 +100,17 @@ void SerialQueue<Serial, Value>::Enqueue(std::vector<Value>&& values, Serial ser
     DAWN_ASSERT(values.size() > 0);
     DAWN_ASSERT(this->Empty() || this->mStorage.back().first <= serial);
     this->mStorage.emplace_back(serial, std::move(values));
+}
+
+template <typename Serial, typename Value>
+Value SerialQueue<Serial, Value>::TakeOneFromFirstSerial() {
+    DAWN_ASSERT(!this->Empty());
+    Value value = std::move(this->mStorage.front().second.back());
+    this->mStorage.front().second.pop_back();
+    if (this->mStorage.front().second.empty()) {
+        this->mStorage.pop_front();
+    }
+    return value;
 }
 
 }  // namespace dawn
