@@ -25,40 +25,28 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-add_library(dawn_sample_utils STATIC)
-common_compile_options(dawn_sample_utils)
-target_sources(dawn_sample_utils PRIVATE
-    "SampleUtils.cpp"
-    "SampleUtils.h"
-)
-target_link_libraries(dawn_sample_utils PUBLIC
-    dawn_internal_config
-    dawncpp
-    dawn_proc
-    dawn_common
-    dawn_glfw
-    dawn_native
-    dawn_wire
-    dawn_utils
-    glfw
-)
+function (dawn_add_sample name)
 
-add_executable(HelloTriangle "HelloTriangle.cpp")
-common_compile_options(HelloTriangle)
-target_link_libraries(HelloTriangle dawn_sample_utils)
+  dawn_add_executable(
+    ${name}
+    UTILITY_TARGET dawn_internal_config
+    SOURCES
+      "${name}.cpp"
+      "SampleUtils.cpp"
+      "SampleUtils.h"
+      ${extra_sources}
+    DEPENDS
+      dawn::dawn_glfw
+      dawn::dawn_native
+      dawn::dawn_proc
+      dawn::dawn_utils
+      dawn::dawncpp_headers
+      glfw
+  )
+endfunction ()
 
-add_executable(ComputeBoids "ComputeBoids.cpp")
-common_compile_options(ComputeBoids)
-target_link_libraries(ComputeBoids dawn_sample_utils)
-
-add_executable(Animometer "Animometer.cpp")
-common_compile_options(Animometer)
-target_link_libraries(Animometer dawn_sample_utils)
-
-add_executable(DawnInfo "DawnInfo.cpp")
-common_compile_options(DawnInfo)
-target_link_libraries(DawnInfo dawn_sample_utils)
-
-add_executable(ManualSurfaceTest "ManualSurfaceTest.cpp")
-common_compile_options(ManualSurfaceTest)
-target_link_libraries(ManualSurfaceTest dawn_sample_utils)
+dawn_add_sample(HelloTriangle)
+dawn_add_sample(ComputeBoids)
+dawn_add_sample(Animometer)
+dawn_add_sample(DawnInfo)
+dawn_add_sample(ManualSurfaceTest)
