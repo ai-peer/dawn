@@ -123,18 +123,6 @@ if (DAWN_ENABLE_VULKAN)
         set(VULKAN_HEADERS_ENABLE_MODULE OFF)
         add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
     endif()
-
-    # Header-only library for Vulkan headers
-    add_library(dawn_vulkan_headers INTERFACE)
-    target_sources(dawn_vulkan_headers INTERFACE
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_icd.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_layer.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_platform.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_sdk_platform.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan.h"
-        "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan_core.h"
-    )
-    target_include_directories(dawn_vulkan_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos")
 endif()
 
 if (DAWN_ENABLE_SWIFTSHADER AND NOT TARGET vk_swiftshader)
