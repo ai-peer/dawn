@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a30354_b7a0e777",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-20T15:07:38Z",
+      "side": 1,
+      "message": "I\u0027d like to initialize version to something. Open to suggestions.",
+      "revId": "1c85f29bfaa9d74d43ce9baa4a50403086e0a3d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
