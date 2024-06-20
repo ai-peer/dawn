@@ -339,6 +339,19 @@ int ResourceMemoryAllocator::FindBestTypeIndex(VkMemoryRequirements requirements
             continue;
         }
 
+        // Host-noncoherent memory is optimal for access from the GPU when the CPU will not
+        // read or write it. Generally, this means the memory is cached instead of write-combined.
+        bool currentHostNoncoherent =
+            !(info.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+        bool bestHostNoncoherent =
+            !(info.memoryTypes[bestType].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
+        if (!mappable && currentHostNoncoherent != bestHostNoncoherent) {
+            if (currentHostNoncoherent) {
+                bestType = static_cast<int>(i);
+            }
+            continue;
+        }
+
         // All things equal favor the memory in the biggest heap
         VkDeviceSize bestTypeHeapSize = info.memoryHeaps[info.memoryTypes[bestType].heapIndex].size;
         VkDeviceSize candidateHeapSize = info.memoryHeaps[info.memoryTypes[i].heapIndex].size;
