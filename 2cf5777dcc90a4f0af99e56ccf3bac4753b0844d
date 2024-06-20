@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f9da08_fd44f845",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b511ec82_c87c9955",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "```suggestion\n                 /*internalMappableFlags\u003d*/kMappableBufferUsages) {}\n```",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 39
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0fdf995_81e9b95c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "```suggestion\n        : Buffer(device, descriptor, /*internalMappableFlags\u003d*/kMappableBufferUsages) {}\n```",
+      "range": {
+        "startLine": 219,
+        "startChar": 39,
+        "endLine": 219,
+        "endChar": 59
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08cc919f_6d6c60ee",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "```suggestion\n        : GPUUsableBuffer(device, descriptor, /*internalMappableFlags\u003d*/wgpu::BufferUsage::None) {}\n```",
+      "range": {
+        "startLine": 348,
+        "startChar": 48,
+        "endLine": 348,
+        "endChar": 68
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e80fde_ed5dbff6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "nit: prefer to have these be pure virtual, and require subclasses to make then UNREACHABLE",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 1
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d90f04_9bf86d71",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:09:07Z",
+      "side": 1,
+      "message": "ditto on making it pure virtual",
+      "range": {
+        "startLine": 626,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 1
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
