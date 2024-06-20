@@ -101,7 +101,14 @@ if (NOT TARGET libabsl)
         )
     endif()
 
+    # abseil does not export symbols meant for public consumption on platforms other than windows.
+    set(CMAKE_CXX_VISIBILITY_PRESET_SAVED "${CMAKE_CXX_VISIBILITY_PRESET}")
+    set(CMAKE_CXX_VISIBILITY_PRESET default)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED "${CMAKE_VISIBILITY_INLINES_HIDDEN}")
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
+    set(CMAKE_CXX_VISIBILITY_PRESET ${CMAKE_CXX_VISIBILITY_PRESET_SAVED})
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN ${CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED})
 endif()
 
 if (DAWN_BUILD_PROTOBUF AND NOT TARGET libprotobuf-mutator)
@@ -130,7 +137,16 @@ if (DAWN_ENABLE_SWIFTSHADER AND NOT TARGET vk_swiftshader)
     set(SWIFTSHADER_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
 
     message(STATUS "Dawn: using Swiftshader at ${DAWN_SWIFTSHADER_DIR}")
+    # SwiftShader cmake does not link with SPIRV-tools and SPIRV-headers
+    # Doesn't work because swiftshader does not export symbols meant for public consumption
+    set(CMAKE_CXX_VISIBILITY_PRESET_SAVED "${CMAKE_CXX_VISIBILITY_PRESET}")
+    set(CMAKE_CXX_VISIBILITY_PRESET default)
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED "${CMAKE_VISIBILITY_INLINES_HIDDEN}")
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
     add_subdirectory(${DAWN_SWIFTSHADER_DIR} "${CMAKE_CURRENT_BINARY_DIR}/swiftshader")
+    set(CMAKE_CXX_VISIBILITY_PRESET ${CMAKE_CXX_VISIBILITY_PRESET_SAVED})
+    set(CMAKE_VISIBILITY_INLINES_HIDDEN ${CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED})
+    target_link_libraries(vk_swiftshader PRIVATE SPIRV-Tools SPIRV-Tools-opt SPIRV-Headers)
 endif()
 
 if (TINT_BUILD_BENCHMARKS OR DAWN_BUILD_BENCHMARKS)
