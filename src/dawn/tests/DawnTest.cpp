@@ -475,6 +475,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
     for (bool compatibilityMode : {false, true}) {
         wgpu::RequestAdapterOptions adapterOptions;
         adapterOptions.compatibilityMode = compatibilityMode;
+        adapterOptions.backendType = wgpu::BackendType::D3D11;
         for (const native::Adapter& adapter : instance->EnumerateAdapters(&adapterOptions)) {
             wgpu::AdapterProperties properties;
             adapter.GetProperties(&properties);

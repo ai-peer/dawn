@@ -33,10 +33,12 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Surface.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/KeyedMutex.h"
 #include "dawn/native/d3d/UtilsD3D.h"
@@ -61,6 +63,8 @@
 #include "dawn/native/d3d11/UtilsD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+
+#include <iostream>
 
 namespace dawn::native::d3d11 {
 namespace {
@@ -106,6 +110,69 @@ void AppendDebugLayerMessagesToError(ID3D11InfoQueue* infoQueue,
     infoQueue->ClearStoredMessages();
 }
 
+ResultOrError<Ref<Surface>> CreateDummySwapChain(Device* device) {
+    static Ref<Surface> sDummySwapchain;
+    if (sDummySwapchain) {
+        return sDummySwapchain;
+    }
+
+    HINSTANCE hInstance = GetModuleHandle(nullptr);
+
+    // Set up window class
+    WNDCLASS wnd;
+    wnd.cbClsExtra = 0;
+    wnd.cbWndExtra = 0;
+    wnd.hCursor = LoadCursor(0, IDC_ARROW);
+    wnd.hIcon = LoadIcon(0, IDI_WINLOGO);
+    wnd.lpszMenuName = 0;
+    wnd.style = 0;
+    wnd.hbrBackground = 0;
+    wnd.lpfnWndProc = DefWindowProc;
+    wnd.hInstance = hInstance;
+    wnd.lpszClassName = L"WindowClass";
+
+    // Register window class
+    RegisterClass(&wnd);
+
+    HWND hwnd = CreateWindowEx(0,                             // Optional window styles
+                               L"WindowClass",                // Window class name
+                               L"Direct3D Window",            // Window title
+                               WS_OVERLAPPEDWINDOW,           // Window style
+                               CW_USEDEFAULT, CW_USEDEFAULT,  // Initial position
+                               800, 600,                      // Initial size
+                               nullptr, nullptr, hInstance, nullptr);
+
+    ShowWindow(hwnd, SW_SHOWNORMAL);
+    UpdateWindow(hwnd);
+
+    SurfaceDescriptorFromWindowsHWND descWin;
+    descWin.hwnd = hwnd;
+    descWin.hinstance = hInstance;
+
+    SurfaceDescriptor surfaceDesc;
+    surfaceDesc.nextInChain = &descWin;
+    sDummySwapchain =
+        AcquireRef(device->GetAdapter()->GetInstance()->APICreateSurface(&surfaceDesc));
+
+    SurfaceConfiguration config;
+    config.device = device;
+    config.usage = wgpu::TextureUsage::RenderAttachment;
+    config.format = wgpu::TextureFormat::BGRA8Unorm;
+    config.alphaMode = wgpu::CompositeAlphaMode::Opaque;
+    config.presentMode = wgpu::PresentMode::Mailbox;
+    config.width = 800;
+    config.height = 600;
+
+    sDummySwapchain->APIConfigure(&config);
+
+    for (int i = 10; i >= 0; --i) {
+        InfoLog() << "Sleeping in " << i << " ...";
+        Sleep(1000);
+    }
+
+    return sDummySwapchain;
+}
+
 }  // namespace
 
 // static
@@ -137,6 +204,17 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
 
     DAWN_TRY(DeviceBase::Initialize(queue));
     DAWN_TRY(queue->InitializePendingContext());
+
+    {
+        auto re = CreateDummySwapChain(this);
+        if (re.IsSuccess()) {
+            Ref<Surface> swapChain = re.AcquireSuccess();
+            SurfaceTexture surfaceTexutre;
+            swapChain->APIGetCurrentTexture(&surfaceTexutre);
+            swapChain->APIPresent();
+            swapChain->APIGetCurrentTexture(&surfaceTexutre);
+        }
+    }
 
     SetLabelImpl();
 
@@ -366,6 +444,19 @@ void Device::AppendDeviceLostMessage(ErrorData* error) {
         error->AppendBackendMessage("Device removed reason: %s (0x%08X)",
                                     d3d::HRESULTAsString(result), result);
     }
+}
+
+void Device::WillDropLastExternalRef() {
+    auto re = CreateDummySwapChain(this);
+    if (re.IsSuccess()) {
+        Ref<Surface> swapChain = re.AcquireSuccess();
+        swapChain->APIPresent();
+
+        std::cout << "Press any key ..." << std::endl;
+        (void)fgetc(stdin);
+    }
+
+    DeviceBase::WillDropLastExternalRef();
 }
 
 void Device::DestroyImpl() {

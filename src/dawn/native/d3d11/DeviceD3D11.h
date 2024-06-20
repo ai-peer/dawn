@@ -99,6 +99,8 @@ class Device final : public d3d::Device {
     using Base::Base;
     static constexpr uint64_t kMaxStagingBufferSize = 512 * 1024;
 
+    void WillDropLastExternalRef() override;
+
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
     ResultOrError<Ref<BindGroupLayoutInternalBase>> CreateBindGroupLayoutImpl(

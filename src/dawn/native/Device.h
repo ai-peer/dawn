@@ -482,9 +482,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     // the adapter.
     Ref<DeviceLostEvent> mLostEvent = nullptr;
 
-  private:
     void WillDropLastExternalRef() override;
 
+  private:
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) = 0;
     virtual ResultOrError<Ref<BindGroupLayoutInternalBase>> CreateBindGroupLayoutImpl(
