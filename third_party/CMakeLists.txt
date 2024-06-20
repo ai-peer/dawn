@@ -122,6 +122,7 @@ endif()
 
 if (NOT TARGET Vulkan-Headers)
     message(STATUS "Dawn: using Vulkan-Headers at ${DAWN_VULKAN_HEADERS_DIR}")
+    set(VULKAN_HEADERS_ENABLE_MODULE OFF CACHE BOOL "" FORCE) # We do not use Vulkan-Module in dawn/native/CMakeLists.txt
     add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
 endif()
 
