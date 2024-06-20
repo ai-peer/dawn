@@ -65,6 +65,9 @@ if (NOT TARGET SPIRV-Tools AND
         OR DAWN_USE_BUILT_DXC))
     set(SPIRV_SKIP_TESTS ON CACHE BOOL "Controls whether SPIR-V tests are run" FORCE)
     set(SPIRV_SKIP_EXECUTABLES ON CACHE BOOL "" FORCE)
+    set(SPIRV_TOOLS_BUILD_STATIC OFF)
+    # Consume spirv-tools as object library to avoid static/shared faux-pas upstream
+    set(SPIRV_TOOLS_LIBRARY_TYPE "OBJECT")
     set(SKIP_SPIRV_TOOLS_INSTALL ON CACHE BOOL "" FORCE)
     set(SPIRV_WERROR OFF CACHE BOOL OFF FORCE)
 
