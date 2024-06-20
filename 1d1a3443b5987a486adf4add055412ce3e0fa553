@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99d1793c_94332182",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T22:51:20Z",
+      "side": 1,
+      "message": "some examples:\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/35470/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Ashader%2Cexecution%2Czero_init%3Acompute%2Czero_init%3AaddressSpace%3D%22workgroup%22%3BworkgroupSize%3D%5B1%2C47%2C1%5D%3Bbatch__%3D12+VHash%3A498f4d6d51abb135",
+      "revId": "1d1a3443b5987a486adf4add055412ce3e0fa553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
