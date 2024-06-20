@@ -273,6 +273,7 @@ endif()
 ################################################################################
 include(DawnCompilerExtraFlags)
 include(DawnCompilerPlatformFlags)
+include(DawnCompilerWarningFlags)
 
 message(STATUS "Dawn build D3D11 backend: ${DAWN_ENABLE_D3D11}")
 message(STATUS "Dawn build D3D12 backend: ${DAWN_ENABLE_D3D12}")
