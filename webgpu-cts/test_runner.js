@@ -225,6 +225,9 @@ async function runCtsTest(queryString) {
 
   const name = testcase.query.toString();
 
+  // Logs look like: " - EXPECTATION FAILED: subcase: foobar=2;foo=a;bar=2\n...."
+  const omitSubcaseLogRegex = /(^\s+-\s+.+?: )subcase: .+(\n[\S\s]*)/;
+
   const wpt_fn = async () => {
     sendMessageTestStarted();
     const [rec, res] = log.record(name);
@@ -252,7 +255,20 @@ async function runCtsTest(queryString) {
         }
       }
       // Report non-INFO logs to the harness so they don't show up in the LUCI failure reason.
-      sendMessageTestLog((res.logs || []).filter(l => l.name !== 'INFO'));
+      // Strip out subcase information for better clustering.
+      sendMessageTestLog((res.logs || [])
+        .filter(l => l.name !== 'INFO')
+        .map(prettyPrintLog)
+        .map(l => {
+          const m = l.match(omitSubcaseLogRegex);
+          if (m === null) {
+            // Regex didn't match. Return the original log.
+            return l;
+          }
+          // Regex matched. Return the parts of it that don't
+          // contain subcase information.
+          return m[1] + m[2];
+        }));
     }
     sendMessageTestFinished();
   };
@@ -304,7 +320,7 @@ function sendMessageTestLogOK() {
 }
 
 function sendMessageTestLog(logs) {
-  splitLogsForPayload(logs.map(prettyPrintLog).join('\n\n'))
+  splitLogsForPayload(logs.join('\n\n'))
     .forEach((piece) => {
       socket.send(JSON.stringify({
         'type': 'TEST_LOG',
