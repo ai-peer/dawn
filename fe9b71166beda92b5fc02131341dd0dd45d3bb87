@@ -68,6 +68,65 @@
       "parentUuid": "fb2ad06b_387db423",
       "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44a684ae_2232b635",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T19:34:57Z",
+      "side": 1,
+      "message": "why not use the absl one?\nhttps://abseil.io/docs/cpp/guides/flags\n\nyour enums look nicer but we can probably make a wrapper thing for it based on a list of conversions",
+      "parentUuid": "3e06994f_4ea5f27d",
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d5526a_d2234a25",
+        "filename": "src/dawn/tests/unittests/CommandLineParserTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T19:34:57Z",
+      "side": 1,
+      "message": "it could return string_view, I think",
+      "range": {
+        "startLine": 41,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 23
+      },
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38590e86_499ce7a7",
+        "filename": "src/dawn/tests/unittests/CommandLineParserTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T19:34:57Z",
+      "side": 1,
+      "message": "This one probably is worth fixing",
+      "parentUuid": "c0a1df92_1b10a3a0",
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
