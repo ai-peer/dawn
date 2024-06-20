@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb831f36_d019ac36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-20T13:54:01Z",
+      "side": 1,
+      "message": "CTS roll is happening now:\nhttps://dawn-review.googlesource.com/c/dawn/+/194542",
+      "revId": "9064a819888426f1b485c6703f982d9382e3fc79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
