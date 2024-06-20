@@ -124,19 +124,19 @@ endif()
 ###############################################################################
 
 DawnJSONGenerator(
-    TARGET "webgpu_headers"
-    PRINT_NAME "WebGPU headers"
-    RESULT_VARIABLE "WEBGPU_HEADERS_GEN_SOURCES"
+  TARGET "webgpu_headers"
+  PRINT_NAME "WebGPU headers"
+  RESULT_VARIABLE "WEBGPU_HEADERS_GEN_SOURCES"
 )
 add_custom_target(webgpu_headers_gen
-    DEPENDS ${WEBGPU_HEADERS_GEN_SOURCES}
+  DEPENDS ${WEBGPU_HEADERS_GEN_SOURCES}
 )
 
 DawnJSONGenerator(
-    TARGET "emscripten_bits"
-    PRINT_NAME "Emscripten WebGPU bits"
-    RESULT_VARIABLE "EMSCRIPTEN_BITS_GEN_SOURCES"
+  TARGET "emscripten_bits"
+  PRINT_NAME "Emscripten WebGPU bits"
+  RESULT_VARIABLE "EMSCRIPTEN_BITS_GEN_SOURCES"
 )
 add_custom_target(emscripten_bits_gen
-    DEPENDS ${EMSCRIPTEN_BITS_GEN_SOURCES}
+  DEPENDS ${EMSCRIPTEN_BITS_GEN_SOURCES}
 )
