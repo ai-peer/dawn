@@ -1,0 +1,203 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25484f63_88b1a2b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9242008c_d1caa82f",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: It could be \"UseAsUAV\" for short with documentation on the method detailing what happens.",
+      "range": {
+        "startLine": 352,
+        "startChar": 38,
+        "endLine": 352,
+        "endChar": 90
+      },
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed3808d2_0aa44b6f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: it seems that most of the child classes would have it marked as UNREACHABLE. WDYT of providing the default implementation that does UNREACHABLE in `d3d11::Buffer` directly?",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b8e261_734e614e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: ditto for mapping methods to be unreachable by default.",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "299ef989_e1158ec9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "```suggestion\n    ID3D11Buffer* buffer;\n    if (GetDevice()-\u003eConsumedError(GetD3D11ConstantBuffer(nullptr), \u0026buffer)) {\n        return nullptr;\n    }\n    return buffer;\n```",
+      "range": {
+        "startLine": 949,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 35
+      },
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80e35b3b_ddd581fd",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: As a future improvement we could track if we are using as readonly-storage or storage. Readonly storage doesn\u0027t dirty the constant buffer.",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c293f1d9_e25ede39",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "```suggestion\n    // Since UAV will modify the non-constant buffer\u0027s content, it\u0027s constant buffer\u0027s content would\n```",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ba4d61_c441e18d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: forward declarations are not used.",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6a479a_3983d820",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "```suggestion\n           wgpu::BufferUsage internalMappableFlags);\n```",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446484be_6e5391e9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "nit: Could be UseAsSRV",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c86cd22_12bf8cb7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:19:00Z",
+      "side": 1,
+      "message": "Does this class still need to be defined in the .h? It seems that the \"for testing\" methods could be on `GPUUsableBuffer`.",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
