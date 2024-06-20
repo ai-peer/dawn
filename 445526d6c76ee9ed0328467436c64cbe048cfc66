@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75827b59_a958570b",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T19:22:33Z",
+      "side": 1,
+      "message": "IMO either is fine. Putting it on STM gives you better precision for what exactly you want to wait for though, right? It would be exactly the last GPU usage of that texture, and not include any other pending commands enqueued since then. It could be a metal-only extension struct on wgpu::SharedTextureMemoryEndAccessState that way it is clearly separate from the fences.",
+      "parentUuid": "fc690f60_bc8b2896",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a64252_5c867675",
         "filename": "src/dawn/native/metal/QueueMTL.mm",
         "patchSetId": 2
