@@ -64,6 +64,9 @@ if (NOT TARGET SPIRV-Tools AND
         OR TINT_BUILD_SPV_WRITER))
     set(SPIRV_SKIP_TESTS ON CACHE BOOL "Controls whether SPIR-V tests are run" FORCE)
     set(SPIRV_SKIP_EXECUTABLES ON CACHE BOOL "" FORCE)
+    set(SPIRV_TOOLS_BUILD_STATIC OFF)
+    # Consume spirv-tools as object library to avoid static/shared faux-pas upstream
+    set(SPIRV_TOOLS_LIBRARY_TYPE "OBJECT")
     set(SKIP_SPIRV_TOOLS_INSTALL ON CACHE BOOL "" FORCE)
 
     if(${TINT_BUILD_SPV_READER} OR ${TINT_BUILD_SPV_WRITER})
