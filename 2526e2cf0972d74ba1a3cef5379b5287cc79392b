@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f032976_110be7cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T19:30:18Z",
+      "side": 1,
+      "message": "nit: into module",
+      "range": {
+        "startLine": 7,
+        "startChar": 24,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f59a40cd_abb4064d",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T19:30:18Z",
+      "side": 1,
+      "message": "Is `Dawn_SOURCE_DIR` different from `CMAKE_CURRENT_SOURCE_DIR` or `PROJECT_SOURCE_DIR` ?",
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61cf38ff_3699f187",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T19:30:18Z",
+      "side": 1,
+      "message": "why create a `dawn_cmake_dir` instead of just using the value directly?",
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
