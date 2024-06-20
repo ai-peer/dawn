@@ -1,0 +1,140 @@
+# Copyright 2024 The Dawn & Tint Authors
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+#
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+#[==[.rst:
+.. cmake:command:: dawn_add_library
+
+  Create a library.
+
+  .. code-block:: cmake
+
+  dawn_add_library(<name>
+    [FORCE_STATIC|FORCE_SHARED|FORCE_OBJECT]
+    [HEADER_ONLY]
+    [UTILITY_TARGET           <target>]
+    [HEADERS                  <header>...]
+    [SOURCES                  <source>...]
+    [DEPENDS                  <library>...]
+    [PRIVATE_DEPENDS          <library>...])
+
+  * ``FORCE_STATIC`` or ``FORCE_SHARED`` or ``FORCE_OBJECT``: For a
+    static (respectively, shared and object) library to be created.
+    If neither is provided, ``BUILD_SHARED_LIBS`` will control the library type.
+  * ``HEADER_ONLY``: The library only contains headers (or templates) and contains
+    no compilation steps. Mutually exclusive with ``FORCE_STATIC``.
+  * ``UTILITY_TARGET``: If specified, all libraries and executables made by the
+    Dawn library API will privately link to this target. This may be used to
+    provide things such as project-wide compilation flags or similar.
+  * ``HEADERS``: A list of header files.
+  * ``SOURCES``: A list of source files which require compilation.
+  * ``DEPENDS``: A list of libraries that this library must link against,
+    equivalent to PUBLIC/PRIVATE deps in target_link_libraries.
+#]==]
+function(dawn_add_library name)
+  set(kwargs)
+  cmake_parse_arguments(PARSE_ARGV 1 arg
+    "FORCE_STATIC;FORCE_SHARED;FORCE_OBJECT;HEADER_ONLY"
+    "UTILITY_TARGET"
+    "HEADERS;SOURCES;DEPENDS;PRIVATE_DEPENDS")
+
+  if (arg_UNPARSED_ARGUMENTS)
+    message(FATAL_ERROR
+      "Unparsed arguments for dawn_add_library: "
+      "${arg_UNPARSED_ARGUMENTS}")
+  endif ()
+
+  if (arg_HEADER_ONLY AND arg_FORCE_STATIC)
+    message(FATAL_ERROR
+      "The ${name} library cannot be header only yet forced static.")
+  endif ()
+
+  if (NOT (arg_SOURCES OR arg_HEADERS))
+    message(FATAL_ERROR
+      "The ${name} library needs atleast sources or headers.")
+  endif ()
+
+  if (arg_FORCE_SHARED AND arg_FORCE_STATIC)
+    message(FATAL_ERROR
+      "The ${name} library cannot be both shared and static.")
+  endif ()
+
+  # If a source file is found in HEADERS, move it to SOURCES
+  set(tmp_headers "${arg_HEADERS}")
+  foreach (header IN LISTS tmp_headers)
+    get_filename_component(extension "${header}" EXT)
+    if (extension MATCHES "(cpp|cxx|cc)")
+      # Move the source file from the list of headers to the list of sources.
+      list(APPEND arg_SOURCES "${header}")
+      list(REMOVE_ITEM arg_HEADERS "${header}")
+    endif ()
+  endforeach ()
+
+  if (NOT arg_SOURCES AND NOT arg_HEADER_ONLY)
+    message(AUTHOR_WARNING
+      "The ${name} library has no source files. Did you mean to "
+      "pass the `HEADER_ONLY` flag?")
+  endif ()
+
+  set(library_type)
+  if (arg_FORCE_STATIC)
+    set(library_type STATIC)
+  elseif (arg_FORCE_OBJECT)
+    set(library_type OBJECT)
+  elseif (arg_FORCE_SHARED)
+    get_cmake_property(target_has_shared TARGET_SUPPORTS_SHARED_LIBS)
+    if (target_has_shared)
+      set(library_type SHARED)
+    endif ()
+  elseif (BUILD_SHARED_LIBS)
+    set(library_type SHARED)
+  endif ()
+
+  if (arg_HEADER_ONLY)
+    add_library("${name}" INTERFACE)
+    target_link_libraries("${name}"
+      INTERFACE
+        ${arg_DEPENDS})
+    target_sources("${name}"
+      PRIVATE
+        ${arg_HEADERS})
+  else ()
+    add_library("${name}" ${library_type})
+    target_sources("${name}"
+      PRIVATE
+        ${arg_HEADERS}
+        ${arg_SOURCES})
+    target_link_libraries("${name}"
+      PUBLIC
+        ${arg_DEPENDS}
+      PRIVATE
+        ${arg_PRIVATE_DEPENDS}
+        ${arg_UTILITY_TARGET}
+      )
+    common_compile_options("${name}")
+  endif ()
+  add_library("dawn::${name}" ALIAS "${name}")
+endfunction()
