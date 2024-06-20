@@ -203,3 +203,49 @@ function(dawn_add_library name)
   endif ()
   add_library("dawn::${name}" ALIAS "${name}")
 endfunction()
+
+#[==[.rst:
+.. cmake:command:: dawn_add_executable
+
+  Create an executable.
+
+  .. code-block:: cmake
+
+  dawn_add_executable(<name>
+    [UTILITY_TARGET           <target>]
+    [SOURCES                  <source>...]
+    [OBJECT_TARGETS           <object_target>...]
+    [DEPENDS                  <library>...])
+
+  * ``UTILITY_TARGET``: If specified, all libraries and executables made by the
+    Dawn library API will privately link to this target. This may be used to
+    provide things such as project-wide compilation flags or similar.
+  * ``SOURCES``: A list of source files which require compilation.
+  * ``OBJECT_TARGETS``: A list of object libraries which will be referenced in the executable.
+  * ``DEPENDS``: A list of libraries that this executable must link against,
+    equivalent to PRIVATE deps in target_link_libraries.
+#]==]
+function(dawn_add_executable name)
+  cmake_parse_arguments(PARSE_ARGV 1 arg
+    ""
+    "UTILITY_TARGET"
+    "SOURCES;OBJECT_TARGETS;DEPENDS")
+  if (arg_UNPARSED_ARGUMENTS)
+    message(FATAL_ERROR
+      "Unparsed arguments for dawn_add_executable: "
+      "${arg_UNPARSED_ARGUMENTS}")
+  endif ()
+
+  set(objects)
+  if (arg_OBJECT_TARGETS)
+    _dawn_expand_object_libraries(
+      OUTPUT_OBJECTS   objects
+      OBJECT_TARGETS   ${arg_OBJECT_TARGETS})
+  endif ()
+  add_executable("${name}" ${objects} ${arg_SOURCES})
+  target_link_libraries("${name}"
+    PRIVATE
+      ${arg_DEPENDS}
+      ${arg_UTILITY_TARGET}
+  )
+endfunction()
