@@ -173,7 +173,8 @@ struct ShaderBindingInfo {
         bindingInfo;
 };
 
-using BindingGroupInfoMap = std::map<BindingNumber, ShaderBindingInfo>;
+using BindingGroupInfoMap =
+    absl::flat_hash_map<BindingNumber, ShaderBindingInfo, BindingNumber::HashFunc>;
 using BindingInfoArray = ityp::array<BindGroupIndex, BindingGroupInfoMap, kMaxBindGroups>;
 
 // The WebGPU override variables only support these scalar types

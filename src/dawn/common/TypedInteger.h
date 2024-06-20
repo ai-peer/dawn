@@ -220,6 +220,12 @@ class alignas(T) TypedIntegerImpl {
         static_assert(std::is_same<T, decltype(result)>::value, "Use ityp::Sub instead.");
         return TypedIntegerImpl(result);
     }
+
+    struct HashFunc {
+        size_t operator()(const TypedIntegerImpl<Tag, T>& typedInteger) const {
+            return std::hash<T>()(typedInteger.mValue);
+        }
+    };
 };
 
 }  // namespace detail
