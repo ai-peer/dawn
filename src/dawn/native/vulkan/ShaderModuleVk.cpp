@@ -305,13 +305,13 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                     const auto& bindingExpansion = expansion->second;
                     tint::spirv::writer::binding::BindingInfo plane0{
                         static_cast<uint32_t>(group),
-                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.plane0))};
+                        static_cast<uint32_t>(bindingExpansion.plane0)};
                     tint::spirv::writer::binding::BindingInfo plane1{
                         static_cast<uint32_t>(group),
-                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.plane1))};
+                        static_cast<uint32_t>(bindingExpansion.plane1)};
                     tint::spirv::writer::binding::BindingInfo metadata{
                         static_cast<uint32_t>(group),
-                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.params))};
+                        static_cast<uint32_t>(bindingExpansion.params)};
 
                     bindings.external_texture.emplace(
                         srcBindingPoint,
