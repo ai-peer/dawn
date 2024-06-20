@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45dd96c2_ea57a803",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9242008c_d1caa82f",
+      "range": {
+        "startLine": 352,
+        "startChar": 38,
+        "endLine": 352,
+        "endChar": 90
+      },
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed3808d2_0aa44b6f",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-06-20T15:19:00Z",
       "side": 1,
       "message": "nit: it seems that most of the child classes would have it marked as UNREACHABLE. WDYT of providing the default implementation that does UNREACHABLE in `d3d11::Buffer` directly?",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a02b0fd6_bdb4acf2",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed3808d2_0aa44b6f",
       "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2567c53d_416fa4fe",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8b8e261_734e614e",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "299ef989_e1158ec9",
@@ -88,6 +148,30 @@
       "writtenOn": "2024-06-20T15:19:00Z",
       "side": 1,
       "message": "```suggestion\n    ID3D11Buffer* buffer;\n    if (GetDevice()-\u003eConsumedError(GetD3D11ConstantBuffer(nullptr), \u0026buffer)) {\n        return nullptr;\n    }\n    return buffer;\n```",
+      "range": {
+        "startLine": 949,
+        "startChar": 0,
+        "endLine": 955,
+        "endChar": 35
+      },
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0c4bd24_fbd5e6eb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "299ef989_e1158ec9",
       "range": {
         "startLine": 949,
         "startChar": 0,
@@ -117,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0540648_91ce12f5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "UAV is for writable storage buffer anw. If buffer is used as read-only storage, the method `UseAsSRV` will be called instead.",
+      "parentUuid": "80e35b3b_ddd581fd",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c293f1d9_e25ede39",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 3
@@ -128,6 +230,24 @@
       "writtenOn": "2024-06-20T15:19:00Z",
       "side": 1,
       "message": "```suggestion\n    // Since UAV will modify the non-constant buffer\u0027s content, it\u0027s constant buffer\u0027s content would\n```",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5512996_62e7f58f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c293f1d9_e25ede39",
       "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +269,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b26d661f_4ae35d86",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done. They are used in the next patch. But seems a little bit confusing to be in this patch.",
+      "parentUuid": "63ba4d61_c441e18d",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f6a479a_3983d820",
@@ -162,6 +300,24 @@
       "writtenOn": "2024-06-20T15:19:00Z",
       "side": 1,
       "message": "```suggestion\n           wgpu::BufferUsage internalMappableFlags);\n```",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8b0e001_08a974c6",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f6a479a_3983d820",
       "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -183,6 +339,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf992458_0b487a0e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "446484be_6e5391e9",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c86cd22_12bf8cb7",
@@ -196,6 +370,24 @@
       "writtenOn": "2024-06-20T15:19:00Z",
       "side": 1,
       "message": "Does this class still need to be defined in the .h? It seems that the \"for testing\" methods could be on `GPUUsableBuffer`.",
+      "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c200e4c6_01c38c0f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-20T20:11:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c86cd22_12bf8cb7",
       "revId": "83b8e00bfcd9194b8861c21664c86095c276c9cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
