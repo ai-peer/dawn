@@ -35,6 +35,7 @@
 #include <utility>
 #include <vector>
 
+#include "absl/container/flat_hash_map.h"
 #include "absl/container/flat_hash_set.h"
 #include "dawn/common/ContentLessObjectCache.h"
 #include "dawn/common/Mutex.h"
@@ -73,6 +74,7 @@ class Blob;
 class BlobCache;
 class CallbackTaskManager;
 class DynamicUploader;
+class TempGPUBufferManager;
 class ErrorScopeStack;
 class SharedTextureMemory;
 class OwnedCompilationMessages;
@@ -329,6 +331,9 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
                                         const Extent3D& copySizePixels);
 
     DynamicUploader* GetDynamicUploader() const;
+    // Return temporary GPU buffers' manager that can allocate buffers to be used as storage buffers
+    // and/or in copies.
+    TempGPUBufferManager* GetTempGPUBufferManager() const;
 
     // The device state which is a combination of creation state and loss state.
     //
@@ -571,6 +576,7 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     Ref<TextureViewBase> mExternalTexturePlaceholderView;
 
     std::unique_ptr<DynamicUploader> mDynamicUploader;
+    std::unique_ptr<TempGPUBufferManager> mTempGPUBufferManager;
     Ref<QueueBase> mQueue;
 
     std::atomic<uint32_t> mEmittedCompilationLogCount = 0;
@@ -593,7 +599,11 @@ class DeviceBase : public ErrorSink, public RefCountedWithExternalCount {
     tint::wgsl::AllowedFeatures mWGSLAllowedFeatures;
 
     std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
-    Ref<BufferBase> mTemporaryUniformBuffer;
+    // List of temporary uniform buffers. TODO(341129591): Use LRU cache for this.
+    // Currently we will allocate unbounded number of temp uniform buffers.
+    // It's generally ok for now, because uniform buffers are small and only used by
+    // a small number of workarounds.
+    absl::flat_hash_map<size_t, Ref<BufferBase>> mTemporaryUniformBuffer;
 
     Ref<CallbackTaskManager> mCallbackTaskManager;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;

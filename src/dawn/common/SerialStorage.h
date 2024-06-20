@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_COMMON_SERIALSTORAGE_H_
 #define SRC_DAWN_COMMON_SERIALSTORAGE_H_
 
+#include <algorithm>
 #include <cstdint>
 #include <utility>
 
@@ -45,6 +46,7 @@ class SerialStorage {
     using Serial = typename SerialStorageTraits<Derived>::Serial;
     using Value = typename SerialStorageTraits<Derived>::Value;
     using Storage = typename SerialStorageTraits<Derived>::Storage;
+    using StorageValue = typename Storage::value_type;
     using StorageIterator = typename SerialStorageTraits<Derived>::StorageIterator;
     using ConstStorageIterator = typename SerialStorageTraits<Derived>::ConstStorageIterator;
 
@@ -188,20 +190,14 @@ typename SerialStorage<Derived>::Serial SerialStorage<Derived>::LastSerial() con
 template <typename Derived>
 typename SerialStorage<Derived>::ConstStorageIterator SerialStorage<Derived>::FindUpTo(
     Serial serial) const {
-    auto it = mStorage.begin();
-    while (it != mStorage.end() && it->first <= serial) {
-        it++;
-    }
-    return it;
+    const auto cmp = [](Serial lhs, const StorageValue& rhs) { return lhs < rhs.first; };
+    return std::upper_bound(mStorage.begin(), mStorage.end(), serial, cmp);
 }
 
 template <typename Derived>
 typename SerialStorage<Derived>::StorageIterator SerialStorage<Derived>::FindUpTo(Serial serial) {
-    auto it = mStorage.begin();
-    while (it != mStorage.end() && it->first <= serial) {
-        it++;
-    }
-    return it;
+    const auto cmp = [](Serial lhs, const StorageValue& rhs) { return lhs < rhs.first; };
+    return std::upper_bound(mStorage.begin(), mStorage.end(), serial, cmp);
 }
 
 // SerialStorage::BeginEnd
