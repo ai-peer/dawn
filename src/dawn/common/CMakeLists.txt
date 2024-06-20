@@ -42,12 +42,13 @@ DawnGenerator(
          "${Dawn_SOURCE_DIR}/src/dawn/gpu_info.json"
 )
 
-add_library(dawn_common STATIC)
-common_compile_options(dawn_common)
-target_sources(dawn_common PRIVATE
-    ${DAWN_VERSION_AUTOGEN_HEADERS}
-    ${DAWN_GPU_INFO_AUTOGEN_HEADERS}
-    ${DAWN_GPU_INFO_AUTOGEN_SOURCES}
+set(private_headers
+    "${DAWN_VERSION_AUTOGEN_HEADERS}"
+    "${DAWN_GPU_INFO_AUTOGEN_HEADERS}"
+)
+
+set(sources
+    "${DAWN_GPU_INFO_AUTOGEN_SOURCES}"
     "AlignedAlloc.cpp"
     "AlignedAlloc.h"
     "Alloc.h"
@@ -61,6 +62,7 @@ target_sources(dawn_common PRIVATE
     "CoreFoundationRef.h"
     "DynamicLib.cpp"
     "DynamicLib.h"
+    "egl_platform.h"
     "Enumerator.h"
     "FutureUtils.cpp"
     "FutureUtils.h"
@@ -68,6 +70,11 @@ target_sources(dawn_common PRIVATE
     "GPUInfo.h"
     "HashUtils.h"
     "IOKitRef.h"
+    "ityp_array.h"
+    "ityp_bitset.h"
+    "ityp_span.h"
+    "ityp_stack_vec.h"
+    "ityp_vector.h"
     "LinkedList.h"
     "Log.cpp"
     "Log.h"
@@ -77,9 +84,9 @@ target_sources(dawn_common PRIVATE
     "Mutex.cpp"
     "Mutex.h"
     "MutexProtected.h"
-    "NSRef.h"
     "NonCopyable.h"
     "NonMovable.h"
+    "NSRef.h"
     "Numeric.h"
     "PlacementAllocated.h"
     "Platform.h"
@@ -99,43 +106,57 @@ target_sources(dawn_common PRIVATE
     "StackAllocated.h"
     "SystemUtils.cpp"
     "SystemUtils.h"
-    "TypeTraits.h"
     "TypedInteger.h"
+    "TypeTraits.h"
     "UnderlyingType.h"
-    "WGSLFeatureMapping.h"
+    "vulkan_platform.h"
     "WeakRef.h"
     "WeakRefSupport.cpp"
     "WeakRefSupport.h"
-    "egl_platform.h"
-    "ityp_array.h"
-    "ityp_bitset.h"
-    "ityp_span.h"
-    "ityp_stack_vec.h"
-    "ityp_vector.h"
-    "vulkan_platform.h"
+    "WGSLFeatureMapping.h"
     "xlib_with_undefs.h"
 )
 
 if (WIN32)
-    target_sources(dawn_common PRIVATE
+    list(APPEND sources
+        "windows_with_undefs.h"
         "WindowsUtils.cpp"
         "WindowsUtils.h"
-        "windows_with_undefs.h"
     )
 elseif(APPLE)
-    target_sources(dawn_common PRIVATE
+    list(APPEND sources
         "IOSurfaceUtils.cpp"
         "IOSurfaceUtils.h"
         "SystemUtils_mac.mm"
     )
 endif()
 
-target_link_libraries(dawn_common
-    PUBLIC dawncpp_headers
-    PUBLIC partition_alloc
-    PRIVATE absl::inlined_vector
-    PRIVATE dawn_internal_config
-)
+set(conditional_private_depends)
 
-# TODO Android Log support
-# TODO Vulkan headers support
+if (CMAKE_SYSTEM_NAME STREQUAL "Android")
+    find_library(log_lib log)
+    list(APPEND conditional_private_depends
+        ${log_lib}
+        android)
+endif ()
+
+if (DAWN_ENABLE_VULKAN)
+    list(APPEND conditional_private_depends
+        Vulkan-Headers)
+endif ()
+
+dawn_add_library(
+    dawn_common
+    UTILITY_TARGET dawn_internal_config
+    PRIVATE_HEADERS
+        ${private_headers}
+    SOURCES
+        ${sources}
+    DEPENDS
+        dawn::dawn_headers
+        dawn::dawncpp_headers
+    PRIVATE_DEPENDS
+        absl::inlined_vector
+        dawn::partition_alloc
+        ${conditional_private_depends}
+)
