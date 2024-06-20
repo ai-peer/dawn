@@ -41,6 +41,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
+#include "dawn/native/d3d11/MappableBufferD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
 #include "dawn/native/d3d11/UtilsD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -78,7 +79,26 @@ bool IsUpload(wgpu::BufferUsage usage) {
     return usage == (wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite);
 }
 
-bool IsStaging(wgpu::BufferUsage usage) {
+size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
+    if (usage & wgpu::BufferUsage::Uniform) {
+        // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-vssetconstantbuffers1
+        // Each number of constants must be a multiple of 16 shader constants(sizeof(float) * 4 *
+        // 16).
+        return sizeof(float) * 4 * 16;
+    }
+
+    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+        // Unordered access buffers must be 4-byte aligned.
+        return sizeof(uint32_t);
+    }
+    return 1;
+}
+
+constexpr size_t kConstantBufferUpdateAlignment = 16;
+
+}  // namespace
+
+bool IsD3D11BufferUsageStaging(wgpu::BufferUsage usage) {
     // Must have at least MapWrite or MapRead bit
     return IsMappable(usage) && IsSubset(usage, kStagingUsages);
 }
@@ -124,25 +144,6 @@ UINT D3D11BufferMiscFlags(wgpu::BufferUsage usage) {
     }
     return miscFlags;
 }
-
-size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
-    if (usage & wgpu::BufferUsage::Uniform) {
-        // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-vssetconstantbuffers1
-        // Each number of constants must be a multiple of 16 shader constants(sizeof(float) * 4 *
-        // 16).
-        return sizeof(float) * 4 * 16;
-    }
-
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
-        // Unordered access buffers must be 4-byte aligned.
-        return sizeof(uint32_t);
-    }
-    return 1;
-}
-
-constexpr size_t kConstantBufferUpdateAlignment = 16;
-
-}  // namespace
 
 // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory, and
 // then written into the dest GPU buffer via ID3D11DeviceContext::UpdateSubresource.
@@ -237,7 +238,7 @@ class StagingBuffer final : public Buffer {
     }
 
     MaybeError InitializeInternal() override {
-        DAWN_ASSERT(IsStaging(GetUsage()));
+        DAWN_ASSERT(IsD3D11BufferUsageStaging(GetUsage()));
 
         D3D11_BUFFER_DESC bufferDescriptor;
         bufferDescriptor.ByteWidth = mAllocatedSize;
@@ -412,8 +413,10 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
     Ref<Buffer> buffer;
     if (useUploadBuffer) {
         buffer = AcquireRef(new UploadBuffer(device, descriptor));
-    } else if (IsStaging(descriptor->usage)) {
+    } else if (IsD3D11BufferUsageStaging(descriptor->usage)) {
         buffer = AcquireRef(new StagingBuffer(device, descriptor));
+    } else if (IsMappable(descriptor->usage)) {
+        buffer = AcquireRef(new MappableBuffer(device, descriptor));
     } else {
         buffer = AcquireRef(new GPUOnlyBuffer(device, descriptor));
     }
@@ -532,6 +535,11 @@ MaybeError Buffer::FinalizeMap(ScopedCommandRecordingContext* commandContext,
                                wgpu::MapMode mode) {
     // Needn't map the buffer if this is for a previous mapAsync that was cancelled.
     if (completedSerial >= mMapReadySerial) {
+        // Map then initialize data using mapped pointer.
+        // The mapped pointer is always writable because:
+        // - If mode is Write, then it's already writable.
+        // - If mode is Read, it's only possible to map staging buffer. In that case,
+        // D3D11_MAP_READ_WRITE will be used, hence the mapped pointer will also be writable.
         // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
         DAWN_TRY(MapInternal(commandContext, mode));
 
@@ -854,19 +862,29 @@ MaybeError GPUUsableBuffer::UpdateD3D11ConstantBuffer(
     // constant buffer.
     // WriteInternal() can be called with GetAllocatedSize(). We treat it as a full buffer write as
     // well.
-    bool fullSizeUpdate = size >= GetSize() && offset == 0;
+    const bool fullSizeUpdate = size >= GetSize() && offset == 0;
+    const bool canPartialUpdate =
+        ToBackend(GetDevice())->GetDeviceInfo().supportsPartialConstantBufferUpdate;
     if (fullSizeUpdate || firstTimeUpdate) {
+        const bool requiresFullAllocatedSizeWrite = !canPartialUpdate && !firstTimeUpdate;
+
         // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
         // buffer.
         size_t alignedOffset;
         if (offset < kConstantBufferUpdateAlignment - 1) {
             alignedOffset = 0;
         } else {
-            // For offset we align to value <= offset.
+            DAWN_ASSERT(firstTimeUpdate);
+            // For offset we align to lower value (<= offset).
             alignedOffset = Align(offset - (kConstantBufferUpdateAlignment - 1),
                                   kConstantBufferUpdateAlignment);
         }
-        size_t alignedEnd = Align(offset + size, kConstantBufferUpdateAlignment);
+        size_t alignedEnd;
+        if (requiresFullAllocatedSizeWrite) {
+            alignedEnd = GetAllocatedSize();
+        } else {
+            alignedEnd = Align(offset + size, kConstantBufferUpdateAlignment);
+        }
         size_t alignedSize = alignedEnd - alignedOffset;
 
         DAWN_ASSERT((alignedSize % kConstantBufferUpdateAlignment) == 0);
@@ -897,7 +915,8 @@ MaybeError GPUUsableBuffer::UpdateD3D11ConstantBuffer(
         dstBox.bottom = 1;
         dstBox.back = 1;
         // For full buffer write, D3D11_COPY_DISCARD is used to avoid GPU CPU synchronization.
-        commandContext->UpdateSubresource1(d3d11Buffer, /*DstSubresource=*/0, &dstBox, data,
+        commandContext->UpdateSubresource1(d3d11Buffer, /*DstSubresource=*/0,
+                                           requiresFullAllocatedSizeWrite ? nullptr : &dstBox, data,
                                            /*SrcRowPitch=*/0,
                                            /*SrcDepthPitch=*/0,
                                            /*CopyFlags=*/D3D11_COPY_DISCARD);
