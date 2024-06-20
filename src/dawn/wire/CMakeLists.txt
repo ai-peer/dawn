@@ -32,39 +32,25 @@ DawnJSONGenerator(
     OUTPUT_SOURCES DAWN_WIRE_GEN_SOURCES
 )
 
-add_library(dawn_wire)
-common_compile_options(dawn_wire)
-
-target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
-    target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_SHARED_LIBRARY")
-endif()
-
-target_sources(dawn_wire PRIVATE
-  INTERFACE
+set(headers
     "${DAWN_INCLUDE_DIR}/dawn/wire/Wire.h"
     "${DAWN_INCLUDE_DIR}/dawn/wire/WireClient.h"
     "${DAWN_INCLUDE_DIR}/dawn/wire/WireServer.h"
     "${DAWN_INCLUDE_DIR}/dawn/wire/dawn_wire_export.h"
-  PRIVATE
-    ${DAWN_WIRE_GEN_HEADERS}
-    ${DAWN_WIRE_GEN_SOURCES}
-    "BufferConsumer.h"
+)
+
+set(private_headers
+    "${DAWN_WIRE_GEN_HEADERS}"
+)
+
+set(sources
+    "${DAWN_WIRE_GEN_SOURCES}"
     "BufferConsumer_impl.h"
+    "BufferConsumer.h"
     "ChunkedCommandHandler.cpp"
     "ChunkedCommandHandler.h"
     "ChunkedCommandSerializer.cpp"
     "ChunkedCommandSerializer.h"
-    "ObjectHandle.cpp"
-    "ObjectHandle.h"
-    "SupportedFeatures.cpp"
-    "SupportedFeatures.h"
-    "Wire.cpp"
-    "WireClient.cpp"
-    "WireDeserializeAllocator.cpp"
-    "WireDeserializeAllocator.h"
-    "WireResult.h"
-    "WireServer.cpp"
     "client/Adapter.cpp"
     "client/Adapter.h"
     "client/ApiObjects.h"
@@ -82,10 +68,10 @@ target_sources(dawn_wire PRIVATE
     "client/Instance.h"
     "client/LimitsAndFeatures.cpp"
     "client/LimitsAndFeatures.h"
-    "client/ObjectStore.cpp"
-    "client/ObjectStore.h"
     "client/ObjectBase.cpp"
     "client/ObjectBase.h"
+    "client/ObjectStore.cpp"
+    "client/ObjectStore.h"
     "client/QuerySet.cpp"
     "client/QuerySet.h"
     "client/Queue.cpp"
@@ -98,6 +84,8 @@ target_sources(dawn_wire PRIVATE
     "client/SwapChain.h"
     "client/Texture.cpp"
     "client/Texture.h"
+    "ObjectHandle.cpp"
+    "ObjectHandle.h"
     "server/ObjectStorage.h"
     "server/Server.cpp"
     "server/Server.h"
@@ -108,17 +96,37 @@ target_sources(dawn_wire PRIVATE
     "server/ServerInstance.cpp"
     "server/ServerQueue.cpp"
     "server/ServerShaderModule.cpp"
+    "SupportedFeatures.cpp"
+    "SupportedFeatures.h"
+    "Wire.cpp"
+    "WireClient.cpp"
+    "WireDeserializeAllocator.cpp"
+    "WireDeserializeAllocator.h"
+    "WireResult.h"
+    "WireServer.cpp"
 )
-target_link_libraries(dawn_wire
-    PUBLIC
-      dawn_headers
-    PRIVATE
-      absl::flat_hash_map
-      absl::flat_hash_set
-      dawn_common
-      dawn_internal_config
-      partition_alloc
-      tint_lang_wgsl_features
+
+dawn_add_library(
+  dawn_wire
+  UTILITY_TARGET	dawn_internal_config
+  HEADERS
+    ${headers}
+  PRIVATE_HEADERS
+    ${private_headers}
+  SOURCES
+    ${sources}
+  DEPENDS
+    dawn::dawn_common
+    dawn::dawn_headers
+    dawn::partition_alloc
+  PRIVATE_DEPENDS
+    absl::flat_hash_map
+    absl::flat_hash_set
+    tint_lang_wgsl_features
 )
+target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_IMPLEMENTATION")
+if(BUILD_SHARED_LIBS)
+    target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_SHARED_LIBRARY")
+endif()
 
 install_if_enabled(dawn_wire)
