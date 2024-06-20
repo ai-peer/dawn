@@ -48,7 +48,7 @@ struct ProgrammableStage;
 namespace vulkan {
 
 struct TransformedShaderModuleCacheKey {
-    uintptr_t layoutPtr;
+    size_t pipelineLayoutContentHash;
     std::string entryPoint;
     PipelineConstantEntries constants;
     std::optional<uint32_t> maxSubgroupSizeForFullSubgroups;
