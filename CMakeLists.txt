@@ -55,6 +55,13 @@ include(GNUInstallDirs)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_BINDIR}")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${Dawn_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR}")
+
+# Dawn's symbols are hidden unless exported explicitly for public consumption.
+# Some third-parties don't export symbols correctly, so third-party/CMakeLists.txt
+# rolls it back to `default` temporarily, adds the third-party subproject and reverts back to `hidden`.
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
+
 set(CMAKE_DEBUG_POSTFIX "")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -380,7 +387,14 @@ add_subdirectory(third_party)
 # BUILD_SHARED_LIBS=1, so always build it as static for now.
 set(BUILD_SHARED_LIBS_SAVED ${BUILD_SHARED_LIBS})
 set(BUILD_SHARED_LIBS 0)
+# Doesn't work because tint does not export symbols meant for public consumption
+set(CMAKE_CXX_VISIBILITY_PRESET_SAVED "${CMAKE_CXX_VISIBILITY_PRESET}")
+set(CMAKE_CXX_VISIBILITY_PRESET default)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED "${CMAKE_VISIBILITY_INLINES_HIDDEN}")
+set(CMAKE_VISIBILITY_INLINES_HIDDEN 0)
 add_subdirectory(src/tint)
+set(CMAKE_CXX_VISIBILITY_PRESET ${CMAKE_CXX_VISIBILITY_PRESET_SAVED})
+set(CMAKE_VISIBILITY_INLINES_HIDDEN ${CMAKE_VISIBILITY_INLINES_HIDDEN_SAVED})
 set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS_SAVED})
 add_subdirectory(generator)
 add_subdirectory(src/dawn)
