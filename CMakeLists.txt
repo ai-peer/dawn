@@ -52,6 +52,9 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_DEBUG_POSTFIX "")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_library(dawnbuild INTERFACE)
+add_library(dawn::dawnbuild ALIAS dawnbuild)
+
 include(DawnSetIfNotDefined)
 
 set(DAWN_BUILD_GEN_DIR "${Dawn_BINARY_DIR}/gen")
@@ -277,6 +280,7 @@ include(DawnCompilerExtraFlags)
 include(DawnCompilerPlatformFlags)
 include(DawnCompilerWarningFlags)
 include(DawnInitializeBuildType)
+include(DawnLibrary)
 
 message(STATUS "Dawn build D3D11 backend: ${DAWN_ENABLE_D3D11}")
 message(STATUS "Dawn build D3D12 backend: ${DAWN_ENABLE_D3D12}")
@@ -339,61 +343,44 @@ string(TOUPPER "${CMAKE_BUILD_TYPE}" build_type)
 if ((NOT ${build_type} STREQUAL "RELEASE") AND (NOT ${build_type} STREQUAL "RELWITHDEBINFO"))
   set(IS_DEBUG_BUILD 1)
 endif()
-
-# The public config contains only the include paths for the Dawn headers.
-add_library(dawn_public_config INTERFACE)
-target_include_directories(dawn_public_config INTERFACE
-    "${DAWN_INCLUDE_DIR}"
-    "${DAWN_BUILD_GEN_DIR}/include"
-)
-
-# The internal config conatins additional path but includes the dawn_public_config include paths
-add_library(dawn_internal_config INTERFACE)
-target_include_directories(dawn_internal_config INTERFACE
-    "${DAWN_SRC_DIR}"
-    "${DAWN_BUILD_GEN_DIR}/src"
-)
-target_link_libraries(dawn_internal_config INTERFACE dawn_public_config)
-
-# Compile definitions for the internal config
 if (DAWN_ALWAYS_ASSERT OR IS_DEBUG_BUILD)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_ASSERTS")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_ASSERTS")
 endif()
 if (DAWN_ENABLE_D3D11)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D11")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_D3D11")
 endif()
 if (DAWN_ENABLE_D3D12)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
 endif()
 if (DAWN_ENABLE_METAL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_METAL")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_METAL")
 endif()
 if (DAWN_ENABLE_NULL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_NULL")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_NULL")
 endif()
 if (DAWN_ENABLE_DESKTOP_GL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_DESKTOP_GL")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_DESKTOP_GL")
 endif()
 if (DAWN_ENABLE_OPENGLES)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGLES")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_OPENGLES")
 endif()
 if (DAWN_ENABLE_OPENGL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGL")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_OPENGL")
 endif()
 if (DAWN_ENABLE_VULKAN)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_VULKAN")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_ENABLE_BACKEND_VULKAN")
 endif()
 if (DAWN_USE_WAYLAND)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WAYLAND")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_USE_WAYLAND")
 endif()
 if (DAWN_USE_X11)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_X11")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_USE_X11")
 endif()
 if (DAWN_USE_WINDOWS_UI)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WINDOWS_UI")
+  target_compile_definitions(dawnbuild INTERFACE "DAWN_USE_WINDOWS_UI")
 endif()
 if (WIN32)
-    target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
+  target_compile_definitions(dawnbuild INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
 
 ################################################################################
