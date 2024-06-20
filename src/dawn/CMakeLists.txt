@@ -59,13 +59,14 @@ DawnJSONGenerator(
     RESULT_VARIABLE "DAWN_HEADERS_GEN_SOURCES"
 )
 
-add_library(dawn_headers INTERFACE)
-target_sources(dawn_headers PUBLIC
-    "${DAWN_INCLUDE_DIR}/webgpu/webgpu.h"
-    ${DAWN_HEADERS_GEN_SOURCES}
+dawn_add_library(
+    dawn_headers
+    HEADER_ONLY
+    UTILITY_TARGET dawn_internal_config
+    HEADERS
+      ${DAWN_HEADERS_GEN_SOURCES}
+      "${DAWN_INCLUDE_DIR}/webgpu/webgpu.h"
 )
-target_link_libraries(dawn_headers INTERFACE dawn_public_config)
-install_if_enabled(dawn_headers)
 
 ###############################################################################
 # Dawn C++ headers
