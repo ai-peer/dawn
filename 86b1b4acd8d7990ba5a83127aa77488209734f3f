@@ -16,6 +16,24 @@
       "message": "We don\u0027t build SPIR-V with DXC, so are these required for DXC?",
       "revId": "86b1b4acd8d7990ba5a83127aa77488209734f3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2cda326_cd57808d",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-20T19:39:18Z",
+      "side": 1,
+      "message": "Added the DXC check recently. Before, it failed in the `CMake build disabled readers and writers` step where cmake was sad because dxc wanted to find spriv-tools https://ci.chromium.org/ui/p/dawn/builders/try/cmake-linux-clang-rel-x64/b8744590568626360353/overview",
+      "parentUuid": "0b9e4e31_ab5107f8",
+      "revId": "86b1b4acd8d7990ba5a83127aa77488209734f3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
