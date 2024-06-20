@@ -100,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7286893a_070030c8",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-20T21:30:44Z",
+      "side": 1,
+      "message": "nice, that\u0027s even better.",
+      "parentUuid": "7b8614ac_404fe7fe",
+      "revId": "737f85612d4f43a71a75b40be032c3362885096c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd1c32b6_7c1c7ab6",
