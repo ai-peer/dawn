@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "b83c9487b1e0ff9e0a0421ff63c89f94d4866b42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0614ab5_0b59699d",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T10:59:12Z",
+      "side": 1,
+      "message": "A content hash isn\u0027t enough to check for equality as it would be relatively easy to force hash collisions between two layouts. If we want to do something like this, we need cryptographic hash functions so collisions cannot be made. That would involve adding something to the dawn_platform so users can inject theirs, but also having a default implementation in Dawn. Quite a lot of work I\u0027d say.",
+      "revId": "b83c9487b1e0ff9e0a0421ff63c89f94d4866b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
