@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc690f60_bc8b2896",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-20T16:11:08Z",
+      "side": 1,
+      "message": "I was thinking a per-device method. I don\u0027t mind having it be per STM, but it seemed like a weird fit there given that STM implementations return GPU fences and this is basically like a CPU waitable event.\n\n+Austin for input",
+      "parentUuid": "552a4164_1600d399",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13a64252_5c867675",
         "filename": "src/dawn/native/metal/QueueMTL.mm",
         "patchSetId": 2
