@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68f1778b_74a82e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-20T23:30:29Z",
+      "side": 1,
+      "message": "PTAL\n\nThis achieves the same performance benefits as completely removing shared event synchronization in Chrome, but is a less invasive approach that keeps the possibility of using shared events on unified memory systems instead of waitUntilScheduled if that\u0027s desirable in the future (except for synchronizing with CoreAnimation which will unfortunately still need it).",
+      "revId": "6dd97f3770ea4922a66eedf094f1d9814f2dce91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
