@@ -25,9 +25,7 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-add_library(dawn_utils STATIC)
-common_compile_options(dawn_utils)
-target_sources(dawn_utils PRIVATE
+set(sources
     "BinarySemaphore.cpp"
     "BinarySemaphore.h"
     "ComboRenderBundleEncoderDescriptor.cpp"
@@ -49,39 +47,42 @@ target_sources(dawn_utils PRIVATE
     "WireHelper.cpp"
     "WireHelper.h"
 )
-target_link_libraries(dawn_utils
-    PUBLIC dawncpp_headers
-           partition_alloc
-    PRIVATE dawn_internal_config
-            dawn_common
-            dawn_native
-            dawn_proc
-            dawn_wire
-)
-
-# Needed by WGPUHelpers
-target_compile_definitions(dawn_utils PUBLIC -DTINT_BUILD_SPV_READER=$<BOOL:${TINT_BUILD_SPV_READER}>)
-if (TINT_BUILD_SPV_READER)
-    target_link_libraries(dawn_utils PRIVATE
-        SPIRV-Tools-opt
-    )
-endif ()
-
+set(conditional_private_depends)
 if(WIN32 AND NOT WINDOWS_STORE)
-    target_sources(dawn_utils PRIVATE "WindowsDebugLogger.cpp")
+  list(APPEND sources "WindowsDebugLogger.cpp")
 else()
-    target_sources(dawn_utils PRIVATE "EmptyDebugLogger.cpp")
+  list(APPEND sources "EmptyDebugLogger.cpp")
 endif()
 
 if(WIN32)
-    target_sources(dawn_utils PRIVATE "WindowsTimer.cpp")
+  list(APPEND sources "WindowsTimer.cpp")
 elseif(APPLE)
-    target_sources(dawn_utils PRIVATE
-        "OSXTimer.cpp"
+    list(APPEND sources
         "ObjCUtils.h"
         "ObjCUtils.mm"
+        "OSXTimer.cpp"
     )
-    target_link_libraries(dawn_utils PRIVATE "-framework QuartzCore")
+    list(APPEND conditional_private_depends "-framework QuartzCore")
 elseif(UNIX)
-    target_sources(dawn_utils PRIVATE "PosixTimer.cpp")
+    list(APPEND sources "PosixTimer.cpp")
 endif()
+
+if (TINT_BUILD_SPV_READER)
+    list(APPEND conditional_private_depends SPIRV-Tools-opt)
+endif ()
+dawn_add_library(
+  dawn_utils
+  UTILITY_TARGET dawn_internal_config
+  SOURCES
+    "${sources}"
+  DEPENDS
+    dawn::dawn_wire
+    dawn::dawncpp_headers
+    dawn::partition_alloc
+  PRIVATE_DEPENDS
+    ${conditional_private_depends}
+)
+# Needed by WGPUHelpers
+target_compile_definitions(dawn_utils
+  PUBLIC
+    "-DTINT_BUILD_SPV_READER=$<BOOL:${TINT_BUILD_SPV_READER}>")
