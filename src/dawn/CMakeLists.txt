@@ -103,29 +103,23 @@ DawnJSONGenerator(
     OUTPUT_SOURCES DAWNPROC_GEN_SOURCES
 )
 
-add_library(dawn_proc)
-common_compile_options(dawn_proc)
-target_compile_definitions(dawn_proc PRIVATE "WGPU_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
-    target_compile_definitions(dawn_proc PRIVATE "WGPU_SHARED_LIBRARY")
-endif()
-target_sources(dawn_proc
-  INTERFACE
-    ${DAWNPROC_GEN_HEADERS}
+dawn_add_library(
+  dawn_proc
+  UTILITY_TARGET dawn_internal_config
+  HEADERS
     "${DAWN_INCLUDE_DIR}/dawn/dawn_thread_dispatch_proc.h"
     "${DAWN_INCLUDE_DIR}/dawn/dawn_proc.h"
-  PRIVATE
-    ${DAWNPROC_GEN_SOURCES}
+    ${DAWNPROC_GEN_HEADERS}
+  SOURCES
+    "${DAWNPROC_GEN_SOURCES}"
+  DEPENDS
+    dawn::dawn_common
+    dawn::dawn_headers
 )
-target_link_libraries(dawn_proc
-  PUBLIC
-  dawn_headers
-  PRIVATE
-  dawn_common
-  dawn_internal_config
-)
-
-install_if_enabled(dawn_proc)
+target_compile_definitions(dawn_proc PRIVATE "WGPU_IMPLEMENTATION")
+if(BUILD_SHARED_LIBS)
+  target_compile_definitions(dawn_proc PUBLIC "WGPU_SHARED_LIBRARY")
+endif()
 
 ###############################################################################
 # Other generated files (upstream header, emscripten header, emscripten bits)
