@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b2ff71_afe4d9f9",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T16:23:42Z",
+      "side": 1,
+      "message": "Good catch, changed to an ASSERT",
+      "parentUuid": "71a9465f_656082a8",
+      "range": {
+        "startLine": 515,
+        "startChar": 8,
+        "endLine": 515,
+        "endChar": 29
+      },
+      "revId": "eb60e9f64fc45a7b6a54460b819a102dab183a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad4983d0_d4f5d63e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-06-19T20:29:38Z",
       "side": 1,
       "message": "Can this not use `RegisterAndSpace`?",
+      "range": {
+        "startLine": 516,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 13
+      },
+      "revId": "eb60e9f64fc45a7b6a54460b819a102dab183a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7777e774_d89f2cbc",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T16:23:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad4983d0_d4f5d63e",
       "range": {
         "startLine": 516,
         "startChar": 0,

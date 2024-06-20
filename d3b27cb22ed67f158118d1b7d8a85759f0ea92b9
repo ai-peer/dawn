@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3150bed_0dec4f02",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T16:23:42Z",
+      "side": 1,
+      "message": "This is `\u0027 \u0027` because `\u0027\u0027` is a warning `invalid-pp-token` apparently you can\u0027t have an empty character constant.",
+      "revId": "d3b27cb22ed67f158118d1b7d8a85759f0ea92b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
