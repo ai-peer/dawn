@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a2672f_0688127e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-20T19:48:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f032976_110be7cc",
+      "range": {
+        "startLine": 7,
+        "startChar": 24,
+        "endLine": 7,
+        "endChar": 34
+      },
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f59a40cd_abb4064d",
@@ -43,6 +67,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffec9d47_6c7f5035",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-20T19:48:08Z",
+      "side": 1,
+      "message": "In this context, it\u0027s the same as both of those. `CMAKE_CURRENT_SOURCE_DIR` transitions as we jump in and out of sub directories.\n\nI prefered `Dawn_SOURCE_DIR` because that\u0027s what is used in the rest of the file to define `DAWN_BUILD_GEN_DIR`, so on.",
+      "parentUuid": "f59a40cd_abb4064d",
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61cf38ff_3699f187",
         "filename": "CMakeLists.txt",
         "patchSetId": 1
@@ -54,6 +96,24 @@
       "writtenOn": "2024-06-20T19:30:18Z",
       "side": 1,
       "message": "why create a `dawn_cmake_dir` instead of just using the value directly?",
+      "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb9dee2c_75de23c9",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-20T19:48:08Z",
+      "side": 1,
+      "message": "using it directly now.",
+      "parentUuid": "61cf38ff_3699f187",
       "revId": "2526e2cf0972d74ba1a3cef5379b5287cc79392b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
