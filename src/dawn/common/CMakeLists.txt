@@ -26,116 +26,139 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 DawnGenerator(
-    SCRIPT "${Dawn_SOURCE_DIR}/generator/dawn_version_generator.py"
-    PRINT_NAME "Dawn version based utilities"
-    OUTPUT_HEADERS DAWN_VERSION_AUTOGEN_HEADERS
-    EXTRA_PARAMETERS "--dawn-dir"
-         "${Dawn_SOURCE_DIR}"
+  SCRIPT "${Dawn_SOURCE_DIR}/generator/dawn_version_generator.py"
+  PRINT_NAME "Dawn version based utilities"
+  OUTPUT_HEADERS DAWN_VERSION_AUTOGEN_HEADERS
+  EXTRA_PARAMETERS "--dawn-dir"
+      "${Dawn_SOURCE_DIR}"
 )
 
 DawnGenerator(
-    SCRIPT "${Dawn_SOURCE_DIR}/generator/dawn_gpu_info_generator.py"
-    PRINT_NAME "Dawn GPU info utilities"
-    OUTPUT_HEADERS DAWN_GPU_INFO_AUTOGEN_HEADERS
-    OUTPUT_SOURCES DAWN_GPU_INFO_AUTOGEN_SOURCES
-    EXTRA_PARAMETERS "--gpu-info-json"
-         "${Dawn_SOURCE_DIR}/src/dawn/gpu_info.json"
+  SCRIPT "${Dawn_SOURCE_DIR}/generator/dawn_gpu_info_generator.py"
+  PRINT_NAME "Dawn GPU info utilities"
+  OUTPUT_HEADERS DAWN_GPU_INFO_AUTOGEN_HEADERS
+  OUTPUT_SOURCES DAWN_GPU_INFO_AUTOGEN_SOURCES
+  EXTRA_PARAMETERS "--gpu-info-json"
+      "${Dawn_SOURCE_DIR}/src/dawn/gpu_info.json"
 )
 
-add_library(dawn_common STATIC)
-common_compile_options(dawn_common)
-target_sources(dawn_common PRIVATE
-    ${DAWN_VERSION_AUTOGEN_HEADERS}
-    ${DAWN_GPU_INFO_AUTOGEN_HEADERS}
-    ${DAWN_GPU_INFO_AUTOGEN_SOURCES}
-    "AlignedAlloc.cpp"
-    "AlignedAlloc.h"
-    "Alloc.h"
-    "Assert.cpp"
-    "Assert.h"
-    "BitSetIterator.h"
-    "Compiler.h"
-    "Constants.h"
-    "ContentLessObjectCache.h"
-    "ContentLessObjectCacheable.h"
-    "CoreFoundationRef.h"
-    "DynamicLib.cpp"
-    "DynamicLib.h"
-    "Enumerator.h"
-    "FutureUtils.cpp"
-    "FutureUtils.h"
-    "GPUInfo.cpp"
-    "GPUInfo.h"
-    "HashUtils.h"
-    "IOKitRef.h"
-    "LinkedList.h"
-    "Log.cpp"
-    "Log.h"
-    "MatchVariant.h"
-    "Math.cpp"
-    "Math.h"
-    "Mutex.cpp"
-    "Mutex.h"
-    "MutexProtected.h"
-    "NSRef.h"
-    "NonCopyable.h"
-    "NonMovable.h"
-    "Numeric.h"
-    "PlacementAllocated.h"
-    "Platform.h"
-    "Preprocessor.h"
-    "Range.h"
-    "Ref.h"
-    "RefBase.h"
-    "RefCounted.cpp"
-    "RefCounted.h"
-    "Result.cpp"
-    "Result.h"
-    "SerialMap.h"
-    "SerialQueue.h"
-    "SerialStorage.h"
-    "SlabAllocator.cpp"
-    "SlabAllocator.h"
-    "StackAllocated.h"
-    "SystemUtils.cpp"
-    "SystemUtils.h"
-    "TypeTraits.h"
-    "TypedInteger.h"
-    "UnderlyingType.h"
-    "WGSLFeatureMapping.h"
-    "WeakRef.h"
-    "WeakRefSupport.cpp"
-    "WeakRefSupport.h"
-    "egl_platform.h"
-    "ityp_array.h"
-    "ityp_bitset.h"
-    "ityp_span.h"
-    "ityp_stack_vec.h"
-    "ityp_vector.h"
-    "vulkan_platform.h"
-    "xlib_with_undefs.h"
+set(headers
+  "${DAWN_VERSION_AUTOGEN_HEADERS}"
+  "${DAWN_GPU_INFO_AUTOGEN_HEADERS}"
+)
+
+set(sources
+  "${DAWN_GPU_INFO_AUTOGEN_SOURCES}"
+  "AlignedAlloc.cpp"
+  "AlignedAlloc.h"
+  "Alloc.h"
+  "Assert.cpp"
+  "Assert.h"
+  "BitSetIterator.h"
+  "Compiler.h"
+  "Constants.h"
+  "ContentLessObjectCache.h"
+  "ContentLessObjectCacheable.h"
+  "CoreFoundationRef.h"
+  "DynamicLib.cpp"
+  "DynamicLib.h"
+  "egl_platform.h"
+  "Enumerator.h"
+  "FutureUtils.cpp"
+  "FutureUtils.h"
+  "GPUInfo.cpp"
+  "GPUInfo.h"
+  "HashUtils.h"
+  "IOKitRef.h"
+  "ityp_array.h"
+  "ityp_bitset.h"
+  "ityp_span.h"
+  "ityp_stack_vec.h"
+  "ityp_vector.h"
+  "LinkedList.h"
+  "Log.cpp"
+  "Log.h"
+  "MatchVariant.h"
+  "Math.cpp"
+  "Math.h"
+  "Mutex.cpp"
+  "Mutex.h"
+  "MutexProtected.h"
+  "NonCopyable.h"
+  "NonMovable.h"
+  "NSRef.h"
+  "Numeric.h"
+  "PlacementAllocated.h"
+  "Platform.h"
+  "Preprocessor.h"
+  "Range.h"
+  "Ref.h"
+  "RefBase.h"
+  "RefCounted.cpp"
+  "RefCounted.h"
+  "Result.cpp"
+  "Result.h"
+  "SerialMap.h"
+  "SerialQueue.h"
+  "SerialStorage.h"
+  "SlabAllocator.cpp"
+  "SlabAllocator.h"
+  "StackAllocated.h"
+  "SystemUtils.cpp"
+  "SystemUtils.h"
+  "TypedInteger.h"
+  "TypeTraits.h"
+  "UnderlyingType.h"
+  "vulkan_platform.h"
+  "WeakRef.h"
+  "WeakRefSupport.cpp"
+  "WeakRefSupport.h"
+  "WGSLFeatureMapping.h"
+  "xlib_with_undefs.h"
 )
 
 if (WIN32)
-    target_sources(dawn_common PRIVATE
-        "WindowsUtils.cpp"
-        "WindowsUtils.h"
-        "windows_with_undefs.h"
-    )
+  list(APPEND sources
+    "windows_with_undefs.h"
+    "WindowsUtils.cpp"
+    "WindowsUtils.h"
+  )
 elseif(APPLE)
-    target_sources(dawn_common PRIVATE
-        "IOSurfaceUtils.cpp"
-        "IOSurfaceUtils.h"
-        "SystemUtils_mac.mm"
-    )
+  list(APPEND sources
+    "IOSurfaceUtils.cpp"
+    "IOSurfaceUtils.h"
+    "SystemUtils_mac.mm"
+  )
 endif()
 
-target_link_libraries(dawn_common
-    PUBLIC dawncpp_headers
-    PUBLIC partition_alloc
-    PRIVATE absl::inlined_vector
-    PRIVATE dawn_internal_config
-)
+set(conditional_public_depends)
+set(conditional_private_depends)
 
-# TODO Android Log support
-# TODO Vulkan headers support
+if (CMAKE_SYSTEM_NAME STREQUAL "Android")
+  find_library(log_lib log)
+  list(APPEND conditional_private_depends
+      ${log_lib}
+      android)
+endif ()
+
+if (DAWN_ENABLE_VULKAN)
+  list(APPEND conditional_private_depends
+      Vulkan-Headers)
+endif ()
+
+dawn_add_library(
+  dawn_common
+  UTILITY_TARGET dawn_internal_config
+  HEADERS
+    ${headers}
+  SOURCES
+    ${sources}
+  DEPENDS
+    dawn::dawn_headers
+    dawn::dawncpp_headers
+    ${conditional_public_depends}
+  PRIVATE_DEPENDS
+    absl::inlined_vector
+    dawn::partition_alloc
+    ${conditional_private_depends}
+)
