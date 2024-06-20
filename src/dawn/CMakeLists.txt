@@ -37,16 +37,16 @@ add_subdirectory(wire)
 add_subdirectory(utils)
 
 if (DAWN_BUILD_BENCHMARKS)
-    add_subdirectory(tests/benchmarks)
+  add_subdirectory(tests/benchmarks)
 endif()
 if(DAWN_USE_GLFW)
-    add_subdirectory(glfw)
+  add_subdirectory(glfw)
 endif()
 if (DAWN_BUILD_SAMPLES)
-    add_subdirectory(samples)
+  add_subdirectory(samples)
 endif()
 if (DAWN_BUILD_NODE_BINDINGS)
-    add_subdirectory(node)
+  add_subdirectory(node)
 endif()
 
 ###############################################################################
@@ -54,9 +54,9 @@ endif()
 ###############################################################################
 
 DawnJSONGenerator(
-    TARGET "headers"
-    PRINT_NAME "Dawn headers"
-    OUTPUT_HEADERS DAWN_HEADERS_GEN_HEADERS
+  TARGET "headers"
+  PRINT_NAME "Dawn headers"
+  OUTPUT_HEADERS DAWN_HEADERS_GEN_HEADERS
 )
 
 dawn_add_library(
@@ -81,15 +81,15 @@ DawnJSONGenerator(
     OUTPUT_HEADERS DAWNCPP_HEADERS_GEN_HEADERS
 )
 dawn_add_library(
-    dawncpp_headers
-    HEADER_ONLY
-    UTILITY_TARGET dawn_internal_config
-    HEADERS
-        "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
-        "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
-        ${DAWNCPP_HEADERS_GEN_HEADERS}
-    DEPENDS
-        dawn::dawn_headers
+  dawncpp_headers
+  HEADER_ONLY
+  UTILITY_TARGET dawn_internal_config
+  HEADERS
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
+    ${DAWNCPP_HEADERS_GEN_HEADERS}
+  DEPENDS
+    dawn::dawn_headers
 )
 install_if_enabled(dawncpp_headers)
 
@@ -101,9 +101,9 @@ add_library(webgpu_cpp ALIAS dawncpp_headers)
 ###############################################################################
 
 DawnJSONGenerator(
-    TARGET "proc"
-    PRINT_NAME "Dawn C++ wrapper"
-    OUTPUT_SOURCES DAWNPROC_GEN_SOURCES
+  TARGET "proc"
+  PRINT_NAME "Dawn C++ wrapper"
+  OUTPUT_SOURCES DAWNPROC_GEN_SOURCES
 )
 
 dawn_add_library(
@@ -129,22 +129,23 @@ install_if_enabled(dawn_proc)
 ###############################################################################
 
 DawnJSONGenerator(
-    TARGET "webgpu_headers"
-    PRINT_NAME "WebGPU headers"
-    OUTPUT_HEADERS WEBGPU_HEADERS_GEN_HEADERS
+  TARGET "webgpu_headers"
+  PRINT_NAME "WebGPU headers"
+  OUTPUT_HEADERS WEBGPU_HEADERS_GEN_HEADERS
 )
 add_custom_target(webgpu_headers_gen
-    DEPENDS ${WEBGPU_HEADERS_GEN_HEADERS}
+  DEPENDS
+    ${WEBGPU_HEADERS_GEN_HEADERS}
 )
 
 DawnJSONGenerator(
-    TARGET "emscripten_bits"
-    PRINT_NAME "Emscripten WebGPU bits"
-    OUTPUT_HEADERS EMSCRIPTEN_BITS_GEN_HEADERS
-    OUTPUT_SOURCES EMSCRIPTEN_BITS_GEN_SOURCES
+  TARGET "emscripten_bits"
+  PRINT_NAME "Emscripten WebGPU bits"
+  OUTPUT_HEADERS EMSCRIPTEN_BITS_GEN_HEADERS
+  OUTPUT_SOURCES EMSCRIPTEN_BITS_GEN_SOURCES
 )
 add_custom_target(emscripten_bits_gen
-    DEPENDS
-        ${EMSCRIPTEN_BITS_GEN_HEADERS}
-        ${EMSCRIPTEN_BITS_GEN_SOURCES}
+  DEPENDS
+    ${EMSCRIPTEN_BITS_GEN_HEADERS}
+    ${EMSCRIPTEN_BITS_GEN_SOURCES}
 )

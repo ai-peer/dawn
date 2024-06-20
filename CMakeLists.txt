@@ -26,7 +26,7 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # As per https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 # - Since we are past CMake 3.12 we can add CONFIGURE_DEPENDS to DawnGenerator to rerun CMake
 #   in case any of the generator files changes. We should also remove the CACHE "" FORCE stuff to
@@ -35,11 +35,11 @@ cmake_minimum_required(VERSION 3.13)
 #   DawnGenerator. We should also use the path utilities in install_if_enabled.
 
 project(
-    Dawn
-    DESCRIPTION "Dawn, a WebGPU implementation"
-    LANGUAGES C CXX
-    HOMEPAGE_URL "https://dawn.googlesource.com/dawn"
-    VERSION 0.0.0
+  Dawn
+  DESCRIPTION "Dawn, a WebGPU implementation"
+  LANGUAGES C CXX
+  HOMEPAGE_URL "https://dawn.googlesource.com/dawn"
+  VERSION 0.0.0
 )
 enable_testing()
 
@@ -159,12 +159,12 @@ endif()
 set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING OFF)
 
 if ((WIN32 AND NOT WINDOWS_STORE) OR (UNIX AND NOT ANDROID))
-    set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
+  set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
 endif()
 
 # Current examples are depend on GLFW
 if (DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
-    set(BUILD_SAMPLES ON)
+  set(BUILD_SAMPLES ON)
 endif()
 
 option(DAWN_ENABLE_ASAN "Enable address sanitizer" OFF)
@@ -213,7 +213,7 @@ option(TINT_ENABLE_INSTALL "Enable install step for Tint libraries" OFF)
 option(TINT_BUILD_CMD_TOOLS "Build the Tint command line tools" ON)
 
 if (NOT DAWN_USE_GLFW AND DAWN_BUILD_SAMPLES)
-  message(SEND_ERROR "Dawn samples require GLFW")
+  message(FATAL_ERROR "Dawn samples require GLFW")
 endif()
 
 option(TINT_BUILD_SPV_READER "Build the SPIR-V input reader" ${DAWN_ENABLE_VULKAN})
@@ -275,11 +275,11 @@ option(DAWN_FETCH_DEPENDENCIES "Use fetch_dawn_dependencies.py as an alternative
 
 # Much of the backend code is shared among desktop OpenGL and OpenGL ES
 if (${DAWN_ENABLE_DESKTOP_GL} OR ${DAWN_ENABLE_OPENGLES})
-    set(DAWN_ENABLE_OPENGL ON)
+  set(DAWN_ENABLE_OPENGL ON)
 endif()
 
 if(DAWN_ENABLE_PIC)
-    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
 # The public config contains only the include paths for the Dawn headers.
@@ -372,43 +372,43 @@ endif()
 
 # Compile definitions for the internal config
 if (DAWN_ALWAYS_ASSERT OR IS_DEBUG_BUILD)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_ASSERTS")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_ASSERTS")
 endif()
 if (DAWN_ENABLE_D3D11)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D11")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D11")
 endif()
 if (DAWN_ENABLE_D3D12)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
 endif()
 if (DAWN_ENABLE_METAL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_METAL")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_METAL")
 endif()
 if (DAWN_ENABLE_NULL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_NULL")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_NULL")
 endif()
 if (DAWN_ENABLE_DESKTOP_GL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_DESKTOP_GL")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_DESKTOP_GL")
 endif()
 if (DAWN_ENABLE_OPENGLES)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGLES")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGLES")
 endif()
 if (DAWN_ENABLE_OPENGL)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGL")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_OPENGL")
 endif()
 if (DAWN_ENABLE_VULKAN)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_VULKAN")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_VULKAN")
 endif()
 if (DAWN_USE_WAYLAND)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WAYLAND")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WAYLAND")
 endif()
 if (DAWN_USE_X11)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_X11")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_X11")
 endif()
 if (DAWN_USE_WINDOWS_UI)
-    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WINDOWS_UI")
+  target_compile_definitions(dawn_internal_config INTERFACE "DAWN_USE_WINDOWS_UI")
 endif()
 if (WIN32)
-    target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
+  target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
 
 ################################################################################
@@ -456,7 +456,7 @@ if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12 OR DAWN_ENABLE_METAL OR DAWN_ENABLE_N
 endif()
 
 ################################################################################
-# Samples
+# Tint tools
 ################################################################################
 add_custom_target(tint-lint
   COMMAND ./tools/lint
