@@ -123,15 +123,32 @@ class EnumType(Type):
             if not is_enabled(m):
                 continue
             value = m['value']
-            name = m['name']
-            if name == "undefined":
+            value_name = m['name']
+            tags = m.get('tags', [])
+
+            prefix = 0
+            if 'compat' in tags:
+                assert prefix == 0
+                prefix = 0x0002_0000
+
+            if 'emscripten' in tags:
+                assert prefix == 0
+                prefix = 0x0004_0000
+
+            if 'dawn' in tags:
+                assert prefix == 0
+                prefix = 0x0005_0000
+
+            value += prefix
+
+            if value_name == "undefined":
                 assert value == 0
                 self.hasUndefined = True
             if value != lastValue + 1:
                 self.contiguousFromZero = False
             lastValue = value
             self.values.append(
-                EnumValue(Name(name), value, m.get('valid', True), m))
+                EnumValue(Name(value_name), value, m.get('valid', True), m))
 
         # Assert that all values are unique in enums
         all_values = set()
@@ -1178,8 +1195,9 @@ class MultiGeneratorFromDawnJSON(Generator):
 
         renders = []
 
-        params_dawn = parse_json(loaded_json,
-                                 enabled_tags=['dawn', 'native', 'deprecated'])
+        params_dawn = parse_json(
+            loaded_json,
+            enabled_tags=['compat', 'dawn', 'native', 'deprecated'])
         metadata = params_dawn['metadata']
         RENDER_PARAMS_BASE = make_base_render_params(metadata)
 
@@ -1243,17 +1261,18 @@ class MultiGeneratorFromDawnJSON(Generator):
                            [RENDER_PARAMS_BASE, params_dawn]))
 
         if 'webgpu_headers' in targets:
-            params_upstream = parse_json(loaded_json,
-                                         enabled_tags=['upstream', 'native'],
-                                         disabled_tags=['dawn'])
+            params_upstream = parse_json(
+                loaded_json,
+                enabled_tags=['compat', 'upstream', 'native'],
+                disabled_tags=['dawn'])
             renders.append(
                 FileRender('api.h', 'webgpu-headers/' + api + '.h',
                            [RENDER_PARAMS_BASE, params_upstream]))
 
         if 'emscripten_bits' in targets:
             assert api == 'webgpu'
-            params_emscripten = parse_json(loaded_json,
-                                           enabled_tags=['emscripten'])
+            params_emscripten = parse_json(
+                loaded_json, enabled_tags=['compat', 'emscripten'])
             # system/include/webgpu
             renders.append(
                 FileRender('api.h',
@@ -1373,9 +1392,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                            frontend_params))
 
         if 'wire' in targets:
-            params_dawn_wire = parse_json(loaded_json,
-                                          enabled_tags=['dawn', 'deprecated'],
-                                          disabled_tags=['native'])
+            params_dawn_wire = parse_json(
+                loaded_json,
+                enabled_tags=['compat', 'dawn', 'deprecated'],
+                disabled_tags=['native'])
             additional_params = compute_wire_params(params_dawn_wire,
                                                     wire_json)
 
@@ -1441,9 +1461,10 @@ class MultiGeneratorFromDawnJSON(Generator):
 
 
         if 'dawn_lpmfuzz_proto' in targets:
-            params_dawn_wire = parse_json(loaded_json,
-                                          enabled_tags=['dawn', 'deprecated'],
-                                          disabled_tags=['native'])
+            params_dawn_wire = parse_json(
+                loaded_json,
+                enabled_tags=['compat', 'dawn', 'deprecated'],
+                disabled_tags=['native'])
             api_and_wire_params = compute_wire_params(params_dawn_wire,
                                                       wire_json)
 
@@ -1469,9 +1490,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                     lpm_params))
 
         if 'dawn_lpmfuzz_cpp' in targets:
-            params_dawn_wire = parse_json(loaded_json,
-                                          enabled_tags=['dawn', 'deprecated'],
-                                          disabled_tags=['native'])
+            params_dawn_wire = parse_json(
+                loaded_json,
+                enabled_tags=['compat', 'dawn', 'deprecated'],
+                disabled_tags=['native'])
             api_and_wire_params = compute_wire_params(params_dawn_wire,
                                                       wire_json)
 
