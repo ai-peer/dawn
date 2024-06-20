@@ -41,6 +41,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
+#include "dawn/native/d3d11/MappableBufferD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
 #include "dawn/native/d3d11/UtilsD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -373,6 +374,8 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
         buffer = AcquireRef(new UploadBuffer(device, descriptor));
     } else if (IsD3D11BufferUsageStaging(descriptor->usage)) {
         buffer = AcquireRef(new StagingBuffer(device, descriptor));
+    } else if (IsMappable(descriptor->usage)) {
+        buffer = AcquireRef(new MappableBuffer(device, descriptor));
     } else {
         buffer = AcquireRef(new GPUOnlyBuffer(device, descriptor));
     }
@@ -480,6 +483,11 @@ MaybeError Buffer::FinalizeMap(ScopedCommandRecordingContext* commandContext,
                                wgpu::MapMode mode) {
     // Needn't map the buffer if this is for a previous mapAsync that was cancelled.
     if (completedSerial >= mMapReadySerial) {
+        // Map then initialize data using mapped pointer.
+        // The mapped pointer is always writable because:
+        // - If mode is Write, then it's already writable.
+        // - If mode is Read, it's only possible to map staging buffer. In that case,
+        // D3D11_MAP_READ_WRITE will be used, hence the mapped pointer will also be writable.
         // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
         DAWN_TRY(MapInternal(commandContext, mode));
 
