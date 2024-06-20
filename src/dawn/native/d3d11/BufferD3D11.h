@@ -43,6 +43,10 @@ class Device;
 class ScopedCommandRecordingContext;
 class ScopedSwapStateCommandRecordingContext;
 
+bool IsD3D11BufferUsageStaging(wgpu::BufferUsage usage);
+UINT D3D11BufferBindFlags(wgpu::BufferUsage usage);
+UINT D3D11BufferMiscFlags(wgpu::BufferUsage usage);
+
 class Buffer : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device,
