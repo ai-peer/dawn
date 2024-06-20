@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "317af57f81096d121d9965a5866d2525aff68151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce23a0de_4d7b15c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T09:18:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "317af57f81096d121d9965a5866d2525aff68151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29190d20_077f3e48",
+        "filename": "src/dawn/common/TypedInteger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T09:18:19Z",
+      "side": 1,
+      "message": "Is it an option to implement std::hash for `TypedIntegerImpl` or `AbslHashValue `for `detail::TypedIntegerImpl\u003cTag, T\u003e` so that we don\u0027t need to do more preprocessor control flow here?",
+      "revId": "317af57f81096d121d9965a5866d2525aff68151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
