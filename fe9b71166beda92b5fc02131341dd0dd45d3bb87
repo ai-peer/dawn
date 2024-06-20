@@ -33,6 +33,23 @@
       "message": "Actually PTAL the whole stack, it looks that both ends are passing CI.",
       "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2ad06b_387db423",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-20T14:27:12Z",
+      "side": 1,
+      "message": "Tint has a command line parser as well  (https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/utils/cli/cli.h) should we consider creating a `src/utils` folder to be shared by dawn and tint at some point? We have various other macros and things that could probably be shared.\n\nBaring that for this cl, could we copy the tint option parser here so that if we do create a common folder the APIs already match?",
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
