@@ -380,6 +380,8 @@ source_set("sources") {
     "SystemEvent.h",
     "SystemHandle.cpp",
     "SystemHandle.h",
+    "TempGPUBufferManager.cpp",
+    "TempGPUBufferManager.h",
     "Texture.cpp",
     "Texture.h",
     "TintUtils.cpp",
