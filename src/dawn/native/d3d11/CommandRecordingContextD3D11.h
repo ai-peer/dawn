@@ -84,7 +84,7 @@ class CommandRecordingContext {
     void Destroy();
 
     static ResultOrError<Ref<BufferBase>> CreateInternalUniformBuffer(DeviceBase* device);
-    void SetInternalUniformBuffer(Ref<BufferBase> uniformBuffer);
+    MaybeError SetInternalUniformBuffer(Ref<BufferBase> uniformBuffer);
 
     void ReleaseKeyedMutexes();
 

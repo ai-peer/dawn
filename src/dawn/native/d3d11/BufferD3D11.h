@@ -41,6 +41,11 @@ namespace dawn::native::d3d11 {
 
 class Device;
 class ScopedCommandRecordingContext;
+class ScopedSwapStateCommandRecordingContext;
+
+bool IsD3D11BufferUsageStaging(wgpu::BufferUsage usage);
+UINT D3D11BufferBindFlags(wgpu::BufferUsage usage);
+UINT D3D11BufferMiscFlags(wgpu::BufferUsage usage);
 
 class Buffer : public BufferBase {
   public:
@@ -76,7 +81,19 @@ class Buffer : public BufferBase {
 
     // Actually map the buffer when its last usage serial has passed.
     MaybeError FinalizeMap(ScopedCommandRecordingContext* commandContext,
-                           ExecutionSerial completedSerial);
+                           ExecutionSerial completedSerial,
+                           wgpu::MapMode mode);
+
+    bool IsCPUWritable() const;
+    bool IsCPUReadable() const;
+
+    // This performs GPU Clear. Unlike Clear(), this will always be affected by ID3D11Predicate.
+    // Whereas Clear() might be unaffected by ID3D11Predicate if it's pure CPU clear.
+    virtual MaybeError PredicatedClear(const ScopedSwapStateCommandRecordingContext* commandContext,
+                                       ID3D11Predicate* predicate,
+                                       uint8_t clearValue,
+                                       uint64_t offset,
+                                       uint64_t size) = 0;
 
     // Write the buffer without checking if the buffer is initialized.
     virtual MaybeError WriteInternal(const ScopedCommandRecordingContext* commandContext,
@@ -101,7 +118,8 @@ class Buffer : public BufferBase {
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
         // scopedMap.GetMappedData() will return nullptr.
         static ResultOrError<ScopedMap> Create(const ScopedCommandRecordingContext* commandContext,
-                                               Buffer* buffer);
+                                               Buffer* buffer,
+                                               wgpu::MapMode mode);
 
         ScopedMap();
         ~ScopedMap();
@@ -125,15 +143,17 @@ class Buffer : public BufferBase {
     };
 
   protected:
-    using BufferBase::BufferBase;
-
+    Buffer(DeviceBase* device,
+           const UnpackedPtr<BufferDescriptor>& descriptor,
+           wgpu::BufferUsage internaMappableFlags);
     ~Buffer() override;
 
     void DestroyImpl() override;
 
     virtual MaybeError InitializeInternal() = 0;
 
-    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
+    virtual MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                                   wgpu::MapMode mode) = 0;
     virtual void UnmapInternal(const ScopedCommandRecordingContext* commandContext) = 0;
 
     // Clear the buffer without checking if the buffer is initialized.
@@ -160,42 +180,88 @@ class Buffer : public BufferBase {
 
     MaybeError InitializeToZero(const ScopedCommandRecordingContext* commandContext);
 
+    // Internal usage indicating the native buffer supports mapping for read and/or write or not.
+    const wgpu::BufferUsage mInternalMappableFlags;
     ExecutionSerial mMapReadySerial = kMaxExecutionSerial;
 };
 
-// Buffer that doesn't support mapping.
-class GPUOnlyBuffer final : public Buffer {
+// Buffer that can be used by GPU.
+class GPUUsableBuffer : public Buffer {
   public:
-    ID3D11Buffer* GetD3D11ConstantBuffer() const { return mD3d11ConstantBuffer.Get(); }
-    ID3D11Buffer* GetD3D11NonConstantBuffer() const { return mD3d11NonConstantBuffer.Get(); }
+    virtual ResultOrError<ID3D11Buffer*> GetD3D11ConstantBuffer(
+        const ScopedCommandRecordingContext* commandContext) = 0;
+    virtual ResultOrError<ID3D11Buffer*> GetD3D11NonConstantBuffer(
+        const ScopedCommandRecordingContext* commandContext) = 0;
 
-    // Mark the mD3d11NonConstantBuffer is mutated by shaders, if mD3d11ConstantBuffer exists,
-    // it will be synced with mD3d11NonConstantBuffer before binding it to the constant buffer slot.
-    void MarkMutated();
-    // Update content of the mD3d11ConstantBuffer from mD3d11NonConstantBuffer if needed.
-    void EnsureConstantBufferIsUpdated(const ScopedCommandRecordingContext* commandContext);
-    ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView(
+    virtual ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView(
+        const ScopedCommandRecordingContext* commandContext,
         uint64_t offset,
-        uint64_t size) const;
-    ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> CreateD3D11UnorderedAccessView1(
-        uint64_t offset,
-        uint64_t size) const;
+        uint64_t size) = 0;
 
-  private:
+    virtual ResultOrError<ComPtr<ID3D11UnorderedAccessView1>>
+    CreateD3D11UnorderedAccessViewAndMarkMutatedByShader(
+        const ScopedCommandRecordingContext* commandContext,
+        uint64_t offset,
+        uint64_t size) = 0;
+
+  protected:
     using Buffer::Buffer;
 
+    ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceViewFromD3DBuffer(
+        ID3D11Buffer* d3d11Buffer,
+        uint64_t offset,
+        uint64_t size);
+    ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> CreateD3D11UnorderedAccessViewFromD3DBuffer(
+        ID3D11Buffer* d3d11Buffer,
+        uint64_t offset,
+        uint64_t size);
+
+    MaybeError UpdateD3D11ConstantBuffer(const ScopedCommandRecordingContext* commandContext,
+                                         ID3D11Buffer* d3d11Buffer,
+                                         bool firstTimeUpdate,
+                                         uint64_t bufferOffset,
+                                         const void* data,
+                                         size_t size);
+};
+
+// Buffer that can only be written/read by GPU.
+class GPUOnlyBuffer final : public GPUUsableBuffer {
+  public:
+    GPUOnlyBuffer(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor);
+
+    ResultOrError<ID3D11Buffer*> GetD3D11ConstantBuffer(
+        const ScopedCommandRecordingContext* commandContext) override;
+    ResultOrError<ID3D11Buffer*> GetD3D11NonConstantBuffer(
+        const ScopedCommandRecordingContext* commandContext) override;
+    ID3D11Buffer* GetD3D11ConstantBufferForTesting();
+    ID3D11Buffer* GetD3D11NonConstantBufferForTesting();
+
+    ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView(
+        const ScopedCommandRecordingContext* commandContext,
+        uint64_t offset,
+        uint64_t size) override;
+    ResultOrError<ComPtr<ID3D11UnorderedAccessView1>>
+    CreateD3D11UnorderedAccessViewAndMarkMutatedByShader(
+        const ScopedCommandRecordingContext* commandContext,
+        uint64_t offset,
+        uint64_t size) override;
+
+    MaybeError PredicatedClear(const ScopedSwapStateCommandRecordingContext* commandContext,
+                               ID3D11Predicate* predicate,
+                               uint8_t clearValue,
+                               uint64_t offset,
+                               uint64_t size) override;
+
+  private:
     // Dawn API
     void DestroyImpl() override;
     void SetLabelImpl() override;
 
-    // The buffer object for constant buffer usage.
-    ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
-    // The buffer object for non-constant buffer usages(e.g. storage buffer, vertex buffer, etc.)
-    ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
-
     MaybeError InitializeInternal() override;
-    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext) override;
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                           wgpu::MapMode mode) override;
     void UnmapInternal(const ScopedCommandRecordingContext* commandContext) override;
+
     MaybeError CopyToInternal(const ScopedCommandRecordingContext* commandContext,
                               uint64_t sourceOffset,
                               size_t size,
@@ -214,8 +280,17 @@ class GPUOnlyBuffer final : public Buffer {
 
     MaybeError ClearPaddingInternal(const ScopedCommandRecordingContext* commandContext) override;
 
+    // The buffer object for constant buffer usage.
+    ComPtr<ID3D11Buffer> mD3d11ConstantBuffer;
+    // The buffer object for non-constant buffer usages(e.g. storage buffer, vertex buffer, etc.)
+    ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
+
     bool mConstantBufferIsUpdated = true;
 };
+
+static inline GPUUsableBuffer* ToGPUUsableBuffer(BufferBase* buffer) {
+    return static_cast<GPUUsableBuffer*>(ToBackend(buffer));
+}
 
 static inline GPUOnlyBuffer* ToGPUOnlyBuffer(BufferBase* buffer) {
     return static_cast<GPUOnlyBuffer*>(ToBackend(buffer));
