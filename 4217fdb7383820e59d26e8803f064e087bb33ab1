@@ -16,6 +16,24 @@
       "message": "LGTM - could you file a follow-up bug (no need to work on it now) to use Spontaneous for more of these?\n\nthen we don\u0027t need to have the ProcessEvents loop in the bindings when everything supports spontaneous mode",
       "revId": "4217fdb7383820e59d26e8803f064e087bb33ab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05412d7_5a0bf4b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-20T21:23:31Z",
+      "side": 1,
+      "message": "Sg, since this uses native though, spontaneous wont work (for queue work) and we would still need to call process events. (which is why I just left everything as process events for now in the first place)",
+      "parentUuid": "8399dd5b_071069bb",
+      "revId": "4217fdb7383820e59d26e8803f064e087bb33ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
