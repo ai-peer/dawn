@@ -54,7 +54,7 @@ struct ExternalTextureBindingExpansion {
     BindingNumber params;
 };
 
-using ExternalTextureBindingExpansionMap = std::map<BindingNumber, ExternalTextureBindingExpansion>;
+using ExternalTextureBindingExpansionMap = BindingNumberMap<ExternalTextureBindingExpansion>;
 
 MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor,

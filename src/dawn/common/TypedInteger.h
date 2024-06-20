@@ -31,6 +31,7 @@
 #include <limits>
 #include <type_traits>
 
+#include "absl/container/flat_hash_map.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/UnderlyingType.h"
 
@@ -67,6 +68,9 @@ namespace dawn {
 namespace detail {
 template <typename Tag, typename T>
 class TypedIntegerImpl;
+
+template <typename Tag, typename T>
+struct TypedIntegerImplHashFunc;
 }  // namespace detail
 
 template <typename Tag, typename T, typename = std::enable_if_t<std::is_integral<T>::value>>
@@ -74,6 +78,18 @@ template <typename Tag, typename T, typename = std::enable_if_t<std::is_integral
 using TypedInteger = detail::TypedIntegerImpl<Tag, T>;
 #else
 using TypedInteger = T;
+#endif
+
+template <typename Tag,
+          typename T,
+          typename MapValueType,
+          typename = std::enable_if_t<std::is_integral<T>::value>>
+#if defined(DAWN_ENABLE_ASSERTS)
+using TypedIntegerMap = absl::flat_hash_map<detail::TypedIntegerImpl<Tag, T>,
+                                            MapValueType,
+                                            detail::TypedIntegerImplHashFunc<Tag, T>>;
+#else
+using TypedIntegerMap = absl::flat_hash_map<T, MapValueType>;
 #endif
 
 namespace detail {
@@ -219,6 +235,13 @@ class alignas(T) TypedIntegerImpl {
         auto result = SubImpl(*this, rhs);
         static_assert(std::is_same<T, decltype(result)>::value, "Use ityp::Sub instead.");
         return TypedIntegerImpl(result);
+    }
+};
+
+template <typename Tag, typename T>
+struct TypedIntegerImplHashFunc {
+    size_t operator()(const TypedIntegerImpl<Tag, T>& typedInteger) const {
+        return std::hash<T>()(T(typedInteger));
     }
 };
 

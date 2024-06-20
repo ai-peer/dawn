@@ -54,6 +54,8 @@ namespace dawn::native {
 // Binding numbers in the shader and BindGroup/BindGroupLayoutDescriptors
 using BindingNumber = TypedInteger<struct BindingNumberT, uint32_t>;
 constexpr BindingNumber kMaxBindingsPerBindGroupTyped = BindingNumber(kMaxBindingsPerBindGroup);
+template <typename MapValue>
+using BindingNumberMap = TypedIntegerMap<struct BindingNumberT, uint32_t, MapValue>;
 
 // Binding numbers get mapped to a packed range of indices
 using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;
