@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "add49166_81873d1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-06-20T10:12:07Z",
+      "side": 1,
+      "message": "Corentin, PTAL.\nTrying to ublock VVL roll https://chromium-review.googlesource.com/c/chromium/src/+/5643313",
+      "revId": "bca7d3d8c280f3d839334a2deb2ad2a047e8e31c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
