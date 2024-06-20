@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24f519f6_b27fa733",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:15:30Z",
+      "side": 1,
+      "message": "This is really really hard to review due to the breadth of change. Can we split things off? Like introducing src/cmake (instead of /cmake now) an starting to move things in there like DawnSetIfNotDefined etc. That DawnLibrary is used to rewrite EVERYTHING is also a lot to take at once.",
+      "revId": "1c85f29bfaa9d74d43ce9baa4a50403086e0a3d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "394a4002_c72de24c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T15:15:30Z",
+      "side": 1,
+      "message": "Can be an easy separate CL.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 0
+      },
+      "revId": "1c85f29bfaa9d74d43ce9baa4a50403086e0a3d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82a30354_b7a0e777",
         "filename": "CMakeLists.txt",
         "patchSetId": 1
