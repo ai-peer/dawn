@@ -227,6 +227,8 @@ target_sources(dawn_native
     "Surface.h"
     "SwapChain.cpp"
     "SwapChain.h"
+    "TempGPUBufferManager.cpp"
+    "TempGPUBufferManager.h"
     "Texture.cpp"
     "Texture.h"
     "TintUtils.cpp"
