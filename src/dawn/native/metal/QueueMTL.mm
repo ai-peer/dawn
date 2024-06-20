@@ -73,6 +73,10 @@ MaybeError Queue::Initialize() {
     }
 
     if (@available(macOS 10.14, iOS 12.0, *)) {
+        mMtlSharedEvent.Acquire([mtlDevice newSharedEvent]);
+        if (mMtlSharedEvent == nil) {
+            return DAWN_INTERNAL_ERROR("Failed to create MTLSharedEvent.");
+        }
         DAWN_TRY_ASSIGN(mSharedFence, GetOrCreateSharedFence());
     }
 
@@ -191,12 +195,13 @@ MaybeError Queue::SubmitPendingCommandBuffer() {
     return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
 }
 
+id<MTLSharedEvent> Queue::GetMTLSharedEvent() const {
+    return mMtlSharedEvent.Get();
+}
+
 ResultOrError<Ref<SharedFence>> Queue::GetOrCreateSharedFence() {
     if (mSharedFence) {
         return mSharedFence;
-    }
-    if (!mMtlSharedEvent) {
-        mMtlSharedEvent.Acquire([ToBackend(GetDevice())->GetMTLDevice() newSharedEvent]);
     }
     SharedFenceMTLSharedEventDescriptor desc;
     desc.sharedEvent = mMtlSharedEvent.Get();
