@@ -140,6 +140,24 @@
       "parentUuid": "6de958e9_df0ae774",
       "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9daf1a9_42cdb704",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T22:42:53Z",
+      "side": 1,
+      "message": "Oh, you\u0027re saying the IR is missing that validation, not that the HLSL printer is missing IR validation, heh. Got it.",
+      "parentUuid": "d4ce800d_b372be5d",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
