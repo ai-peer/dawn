@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb6ec448_be05b0ef",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T23:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9331ee4_452b2251",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9405cbe6_7e4ef133",
@@ -156,6 +174,24 @@
       "side": 1,
       "message": "Oh, you\u0027re saying the IR is missing that validation, not that the HLSL printer is missing IR validation, heh. Got it.",
       "parentUuid": "d4ce800d_b372be5d",
+      "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7fd7eec_abb02d1a",
+        "filename": "src/tint/lang/hlsl/writer/raise/fxc_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-20T23:46:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9daf1a9_42cdb704",
       "revId": "1d7cc9a56edbdf18d4e37b20e910ff4a358a9e06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
