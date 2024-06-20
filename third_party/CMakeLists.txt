@@ -117,18 +117,6 @@ add_library(dawn_khronos_platform INTERFACE)
 target_sources(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api/KHR/khrplatform.h")
 target_include_directories(dawn_khronos_platform INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos/EGL-Registry/api")
 
-# Header-only library for Vulkan headers
-add_library(dawn_vulkan_headers INTERFACE)
-target_sources(dawn_vulkan_headers INTERFACE
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_icd.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_layer.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_platform.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vk_sdk_platform.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/khronos/vulkan/vulkan_core.h"
-)
-target_include_directories(dawn_vulkan_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos")
-
 if (NOT TARGET vk_swiftshader AND ${DAWN_ENABLE_SWIFTSHADER})
     set(SWIFTSHADER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
     set(SWIFTSHADER_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)
