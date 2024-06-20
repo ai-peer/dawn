@@ -77,16 +77,18 @@ DawnJSONGenerator(
     PRINT_NAME "Dawn C++ headers"
     RESULT_VARIABLE "DAWNCPP_HEADERS_GEN_SOURCES"
 )
-
-add_library(dawncpp_headers INTERFACE)
-target_sources(dawncpp_headers PUBLIC
-    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
-    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
-    ${DAWNCPP_HEADERS_GEN_SOURCES}
+dawn_add_library(
+    dawncpp_headers
+    HEADER_ONLY
+    UTILITY_TARGET dawn::dawnbuild
+    HEADERS
+        ${DAWNCPP_HEADERS_GEN_SOURCES}
+        "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
+        "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
+        "${DAWN_INCLUDE_DIR}/webgpu/webgpu.h"
+    DEPENDS
+        dawn::dawn_headers
 )
-target_link_libraries(dawncpp_headers INTERFACE dawn_headers)
-install_if_enabled(dawncpp_headers)
-
 add_library(dawncpp ALIAS dawncpp_headers)
 add_library(webgpu_cpp ALIAS dawncpp_headers)
 
