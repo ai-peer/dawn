@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a320504_726c2489",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-20T14:18:03Z",
+      "side": 1,
+      "message": "Actually PTAL the whole stack, it looks that both ends are passing CI.",
+      "revId": "fe9b71166beda92b5fc02131341dd0dd45d3bb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
