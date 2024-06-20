@@ -50,6 +50,24 @@
       "message": "Is it an option to implement std::hash for `TypedIntegerImpl` or `AbslHashValue `for `detail::TypedIntegerImpl\u003cTag, T\u003e` so that we don\u0027t need to do more preprocessor control flow here?",
       "revId": "317af57f81096d121d9965a5866d2525aff68151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0200879a_a6712fb9",
+        "filename": "src/dawn/common/TypedInteger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-20T18:15:02Z",
+      "side": 1,
+      "message": "+1, then we wouldn\u0027t need the \"TypedIntegerMap\" alias either. It should be simple enough to just use absl::flat_hash_map\u003c\u003e directly",
+      "parentUuid": "29190d20_077f3e48",
+      "revId": "317af57f81096d121d9965a5866d2525aff68151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
