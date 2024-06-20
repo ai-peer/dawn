@@ -33,6 +33,7 @@
 #include <map>
 #include <string>
 
+#include "absl/container/flat_hash_map.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/ContentLessObjectCacheable.h"
 #include "dawn/common/SlabAllocator.h"
@@ -47,11 +48,10 @@
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
-// TODO(dawn:1082): Minor optimization to use BindingIndex instead of BindingNumber
 struct ExternalTextureBindingExpansion {
-    BindingNumber plane0;
-    BindingNumber plane1;
-    BindingNumber params;
+    BindingIndex plane0;
+    BindingIndex plane1;
+    BindingIndex params;
 };
 
 using ExternalTextureBindingExpansionMap = std::map<BindingNumber, ExternalTextureBindingExpansion>;

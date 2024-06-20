@@ -246,14 +246,11 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
 
                 const auto& bindingExpansion = expansion->second;
                 tint::hlsl::writer::binding::BindingInfo plane0{
-                    static_cast<uint32_t>(group),
-                    bgl->GetShaderRegister(bgl->GetBindingIndex(bindingExpansion.plane0))};
+                    static_cast<uint32_t>(group), bgl->GetShaderRegister(bindingExpansion.plane0)};
                 tint::hlsl::writer::binding::BindingInfo plane1{
-                    static_cast<uint32_t>(group),
-                    bgl->GetShaderRegister(bgl->GetBindingIndex(bindingExpansion.plane1))};
+                    static_cast<uint32_t>(group), bgl->GetShaderRegister(bindingExpansion.plane1)};
                 tint::hlsl::writer::binding::BindingInfo metadata{
-                    static_cast<uint32_t>(group),
-                    bgl->GetShaderRegister(bgl->GetBindingIndex(bindingExpansion.params))};
+                    static_cast<uint32_t>(group), bgl->GetShaderRegister(bindingExpansion.params)};
                 bindings.external_texture.emplace(
                     srcBindingPoint,
                     tint::hlsl::writer::binding::ExternalTexture{metadata, plane0, plane1});

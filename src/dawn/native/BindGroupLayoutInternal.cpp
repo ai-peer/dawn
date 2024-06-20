@@ -250,10 +250,16 @@ struct UnpackedExpandedBglEntries {
     std::vector<UnpackedPtr<BindGroupLayoutEntry>> unpackedEntries;
 };
 
+struct ExternalTextureBindingExpansionInternal {
+    BindingNumber entryAndPlane0;
+    BindingNumber plane1;
+    BindingNumber params;
+};
+
 UnpackedExpandedBglEntries ExtractAndExpandBglEntries(
     const BindGroupLayoutDescriptor* descriptor,
     BindingCounts* bindingCounts,
-    ExternalTextureBindingExpansionMap* externalTextureBindingExpansions) {
+    std::vector<ExternalTextureBindingExpansionInternal>* externalTextureBindingExpansions) {
     UnpackedExpandedBglEntries result;
     std::list<BindGroupLayoutEntry>& additionalEntries = result.additionalEntries;
     std::vector<UnpackedPtr<BindGroupLayoutEntry>>& expandedOutput = result.unpackedEntries;
@@ -285,11 +291,12 @@ UnpackedExpandedBglEntries ExtractAndExpandBglEntries(
                     kUnimplementedSamplersPerExternalTexture;
             }
 
-            dawn::native::ExternalTextureBindingExpansion bindingExpansion;
+            ExternalTextureBindingExpansionInternal bindingExpansion;
+            bindingExpansion.entryAndPlane0 = BindingNumber(entry->binding);
 
             BindGroupLayoutEntry plane0Entry =
                 CreateSampledTextureBindingForExternalTexture(entry->binding, entry->visibility);
-            bindingExpansion.plane0 = BindingNumber(plane0Entry.binding);
+            DAWN_ASSERT(BindingNumber(plane0Entry.binding) == bindingExpansion.entryAndPlane0);
             expandedOutput.push_back(Unpack(&additionalEntries.emplace_back(plane0Entry)));
 
             BindGroupLayoutEntry plane1Entry = CreateSampledTextureBindingForExternalTexture(
@@ -302,8 +309,7 @@ UnpackedExpandedBglEntries ExtractAndExpandBglEntries(
             bindingExpansion.params = BindingNumber(paramsEntry.binding);
             expandedOutput.push_back(Unpack(&additionalEntries.emplace_back(paramsEntry)));
 
-            externalTextureBindingExpansions->insert(
-                {BindingNumber(entry->binding), bindingExpansion});
+            externalTextureBindingExpansions->push_back(bindingExpansion);
         } else {
             expandedOutput.push_back(entry);
         }
@@ -570,8 +576,9 @@ BindGroupLayoutInternalBase::BindGroupLayoutInternalBase(
     const BindGroupLayoutDescriptor* descriptor,
     ApiObjectBase::UntrackedByDeviceTag tag)
     : ApiObjectBase(device, descriptor->label), mUnexpandedBindingCount(descriptor->entryCount) {
+    std::vector<ExternalTextureBindingExpansionInternal> unhandledExternalTextureBindingExpansions;
     auto unpackedBindings = ExtractAndExpandBglEntries(descriptor, &mBindingCounts,
-                                                       &mExternalTextureBindingExpansionMap);
+                                                       &unhandledExternalTextureBindingExpansions);
     auto& sortedBindings = unpackedBindings.unpackedEntries;
 
     std::sort(sortedBindings.begin(), sortedBindings.end(), SortBindingsCompare);
@@ -591,6 +598,14 @@ BindGroupLayoutInternalBase::BindGroupLayoutInternalBase(
     }
     DAWN_ASSERT(CheckBufferBindingsFirst({mBindingInfo.data(), GetBindingCount()}));
     DAWN_ASSERT(mBindingInfo.size() <= kMaxBindingsPerPipelineLayoutTyped);
+    for (const auto& unhandledExpansionInfo : unhandledExternalTextureBindingExpansions) {
+        ExternalTextureBindingExpansion expansionInfo;
+        expansionInfo.params = GetBindingIndex(unhandledExpansionInfo.params);
+        expansionInfo.plane0 = GetBindingIndex(unhandledExpansionInfo.entryAndPlane0);
+        expansionInfo.plane1 = GetBindingIndex(unhandledExpansionInfo.plane1);
+        mExternalTextureBindingExpansionMap.emplace(unhandledExpansionInfo.entryAndPlane0,
+                                                    expansionInfo);
+    }
 }
 
 BindGroupLayoutInternalBase::BindGroupLayoutInternalBase(

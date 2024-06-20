@@ -199,11 +199,11 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
 
                     const auto& bindingExpansion = expansion->second;
                     tint::msl::writer::binding::BindingInfo plane0{
-                        bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.plane0)]};
+                        bindingIndexInfo[bindingExpansion.plane0]};
                     tint::msl::writer::binding::BindingInfo plane1{
-                        bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.plane1)]};
+                        bindingIndexInfo[bindingExpansion.plane1]};
                     tint::msl::writer::binding::BindingInfo metadata{
-                        bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.params)]};
+                        bindingIndexInfo[bindingExpansion.params]};
 
                     bindings.external_texture.emplace(
                         srcBindingPoint,

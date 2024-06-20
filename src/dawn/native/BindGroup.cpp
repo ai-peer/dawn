@@ -488,9 +488,9 @@ BindGroupBase::BindGroupBase(DeviceBase* device,
 
             DAWN_ASSERT(it != expansions.end());
 
-            BindingIndex plane0BindingIndex = layout->GetBindingIndex(it->second.plane0);
-            BindingIndex plane1BindingIndex = layout->GetBindingIndex(it->second.plane1);
-            BindingIndex paramsBindingIndex = layout->GetBindingIndex(it->second.params);
+            BindingIndex plane0BindingIndex = it->second.plane0;
+            BindingIndex plane1BindingIndex = it->second.plane1;
+            BindingIndex paramsBindingIndex = it->second.params;
 
             DAWN_ASSERT(mBindingData.bindings[plane0BindingIndex] == nullptr);
 

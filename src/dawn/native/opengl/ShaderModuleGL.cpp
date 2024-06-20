@@ -263,11 +263,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
                 const auto& bindingExpansion = expansion->second;
                 tint::glsl::writer::binding::BindingInfo plane0{
-                    bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.plane0)]};
+                    bindingIndexInfo[bindingExpansion.plane0]};
                 tint::glsl::writer::binding::BindingInfo plane1{
-                    bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.plane1)]};
+                    bindingIndexInfo[bindingExpansion.plane1]};
                 tint::glsl::writer::binding::BindingInfo metadata{
-                    bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.params)]};
+                    bindingIndexInfo[bindingExpansion.params]};
 
                 tint::BindingPoint plane1WGSLBindingPoint{
                     static_cast<uint32_t>(group), static_cast<uint32_t>(bindingExpansion.plane1)};

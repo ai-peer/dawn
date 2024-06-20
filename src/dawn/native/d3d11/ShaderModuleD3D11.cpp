@@ -170,12 +170,12 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
                 DAWN_ASSERT(expansion != etBindingMap.end());
 
                 const auto& bindingExpansion = expansion->second;
-                tint::hlsl::writer::binding::BindingInfo plane0{
-                    0u, indices[bgl->GetBindingIndex(bindingExpansion.plane0)]};
-                tint::hlsl::writer::binding::BindingInfo plane1{
-                    0u, indices[bgl->GetBindingIndex(bindingExpansion.plane1)]};
-                tint::hlsl::writer::binding::BindingInfo metadata{
-                    0u, indices[bgl->GetBindingIndex(bindingExpansion.params)]};
+                tint::hlsl::writer::binding::BindingInfo plane0{0u,
+                                                                indices[bindingExpansion.plane0]};
+                tint::hlsl::writer::binding::BindingInfo plane1{0u,
+                                                                indices[bindingExpansion.plane1]};
+                tint::hlsl::writer::binding::BindingInfo metadata{0u,
+                                                                  indices[bindingExpansion.params]};
                 bindings.external_texture.emplace(
                     srcBindingPoint,
                     tint::hlsl::writer::binding::ExternalTexture{metadata, plane0, plane1});
