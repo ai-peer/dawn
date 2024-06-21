@@ -16,6 +16,23 @@
       "message": "CCing Austin in case he knows a better way, but LGTM.",
       "revId": "324b39824d41dd2a2c024d5786e27def90ff4a63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d7648c1_fd20f59e",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T17:53:44Z",
+      "side": 1,
+      "message": "you might be able to gate on `dawn_has_build` because that\u0027s where the definition of use_libfuzzer comes from. Skia doesn\u0027t have `build/` which is why it breaks there.\n\nLGTM though; this works too",
+      "revId": "324b39824d41dd2a2c024d5786e27def90ff4a63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
