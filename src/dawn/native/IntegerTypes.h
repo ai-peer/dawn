@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_INTEGERTYPES_H_
 
 #include <cstdint>
+#include <utility>
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/TypedInteger.h"
@@ -54,6 +55,10 @@ namespace dawn::native {
 // Binding numbers in the shader and BindGroup/BindGroupLayoutDescriptors
 using BindingNumber = TypedInteger<struct BindingNumberT, uint32_t>;
 constexpr BindingNumber kMaxBindingsPerBindGroupTyped = BindingNumber(kMaxBindingsPerBindGroup);
+template <typename H>
+H AbslHashValue(H h, const BindingNumber& bindingNumber) {
+    return H::combine(std::move(h), static_cast<uint32_t>(bindingNumber));
+}
 
 // Binding numbers get mapped to a packed range of indices
 using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;
