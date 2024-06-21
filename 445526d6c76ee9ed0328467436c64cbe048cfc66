@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f9c955_2f442fd2",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-21T00:02:58Z",
+      "side": 1,
+      "message": "I\u0027m going to abandon this CL now since it wasn\u0027t a contributor to the Motionmark paths performance issues - it was just something I noticed when debugging that. If we do this in the future, I\u0027ll pursue one of the two options discussed above.",
+      "parentUuid": "75827b59_a958570b",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13a64252_5c867675",
