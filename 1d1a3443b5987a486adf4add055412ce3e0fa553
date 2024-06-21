@@ -16,6 +16,23 @@
       "message": "some examples:\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/35470/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Ashader%2Cexecution%2Czero_init%3Acompute%2Czero_init%3AaddressSpace%3D%22workgroup%22%3BworkgroupSize%3D%5B1%2C47%2C1%5D%3Bbatch__%3D12+VHash%3A498f4d6d51abb135",
       "revId": "1d1a3443b5987a486adf4add055412ce3e0fa553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f8e56a_47bcd96c",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-21T19:33:13Z",
+      "side": 1,
+      "message": "Looks like for some reason in the EXCEPTION case it gets printed a bit differently (probably rarer but most likely to happen due to assert failures):\n\nhttps://gpuweb.github.io/cts/standalone/?runnow\u003d1\u0026q\u003ddemo:subcases:DOMException,subcases:\n\n```\nEXCEPTION: Name!: Message!\nsubcase: fail\u003dtrue\n```\n\nMaybe we could simply do:\n`l.replace(/subcase: .*$\\n?/m, \u0027\u0027)`",
+      "revId": "1d1a3443b5987a486adf4add055412ce3e0fa553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
