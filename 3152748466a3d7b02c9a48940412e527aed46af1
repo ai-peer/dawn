@@ -16,6 +16,23 @@
       "message": "needs: https://github.com/gpuweb/cts/pull/3805 to roll",
       "revId": "3152748466a3d7b02c9a48940412e527aed46af1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df3f48f8_38e01b97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:03:19Z",
+      "side": 1,
+      "message": "LGTM, will try and get another CTS roll in today.",
+      "revId": "3152748466a3d7b02c9a48940412e527aed46af1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
