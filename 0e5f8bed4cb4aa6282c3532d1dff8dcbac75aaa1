@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f64c8b_c7afaebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T00:13:06Z",
+      "side": 1,
+      "message": "LGTM some nits",
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c029f748_a37d03c3",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T00:13:06Z",
+      "side": 1,
+      "message": "nit: can the queue be const?\n\nwe use it to call GetMTLSharedEvent which is const",
+      "range": {
+        "startLine": 49,
+        "startChar": 37,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dbb38f8_d0c66113",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T00:13:06Z",
+      "side": 1,
+      "message": "I think this should be raw_ptr now that we have it in Dawn",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9bff802_08ebfd9c",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T00:13:06Z",
+      "side": 1,
+      "message": "why did this need to move?\n\nyou could also put the error checking in the old location",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
