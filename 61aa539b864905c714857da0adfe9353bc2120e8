@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49283965_7b685381",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T18:34:16Z",
+      "side": 1,
+      "message": "PTAL - assuming these parameters are supposed to be unused but LMK if that\u0027s not right.",
+      "revId": "61aa539b864905c714857da0adfe9353bc2120e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
