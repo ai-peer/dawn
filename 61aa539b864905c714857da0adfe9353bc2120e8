@@ -33,6 +33,24 @@
       "message": "Heh... sorry I literally just sent out https://dawn-review.googlesource.com/c/dawn/+/195095 for the same reason",
       "revId": "61aa539b864905c714857da0adfe9353bc2120e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9f47b7_b525bf18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T18:36:59Z",
+      "side": 1,
+      "message": "Aha but there are actually two places that have this error :-)",
+      "parentUuid": "970c4d3e_d4da70a3",
+      "revId": "61aa539b864905c714857da0adfe9353bc2120e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
