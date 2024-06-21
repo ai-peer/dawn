@@ -68,6 +68,24 @@
       "parentUuid": "29190d20_077f3e48",
       "revId": "317af57f81096d121d9965a5866d2525aff68151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86c5cf7_618da8cd",
+        "filename": "src/dawn/common/TypedInteger.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-06-21T03:29:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0200879a_a6712fb9",
+      "revId": "317af57f81096d121d9965a5866d2525aff68151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
