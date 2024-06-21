@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf50c016_c35fda24",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-21T08:18:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b511ec82_c87c9955",
+      "range": {
+        "startLine": 154,
+        "startChar": 19,
+        "endLine": 154,
+        "endChar": 39
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0fdf995_81e9b95c",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-20T22:09:07Z",
       "side": 1,
       "message": "```suggestion\n        : Buffer(device, descriptor, /*internalMappableFlags\u003d*/kMappableBufferUsages) {}\n```",
+      "range": {
+        "startLine": 219,
+        "startChar": 39,
+        "endLine": 219,
+        "endChar": 59
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8f89e22_8b38f0af",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-21T08:18:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0fdf995_81e9b95c",
       "range": {
         "startLine": 219,
         "startChar": 39,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10febc2e_a709bf5e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-21T08:18:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08cc919f_6d6c60ee",
+      "range": {
+        "startLine": 348,
+        "startChar": 48,
+        "endLine": 348,
+        "endChar": 68
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20e80fde_ed5dbff6",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-06-20T22:09:07Z",
       "side": 1,
       "message": "nit: prefer to have these be pure virtual, and require subclasses to make then UNREACHABLE",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 1
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19e42e5_473bc6dc",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-21T08:18:46Z",
+      "side": 1,
+      "message": "This seems to conflict with Corentin\u0027s suggestions. Now I\u0027m confused.",
+      "parentUuid": "20e80fde_ed5dbff6",
       "range": {
         "startLine": 499,
         "startChar": 0,
