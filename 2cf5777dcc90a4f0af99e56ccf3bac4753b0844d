@@ -232,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cf58b2f_ae9d0beb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T17:43:38Z",
+      "side": 1,
+      "message": "ah sorry for the noise then. either way is also ultimately fine with me",
+      "parentUuid": "1ba9dca0_ae44b839",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 1
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92d90f04_9bf86d71",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
