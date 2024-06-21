@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "425761ff_890eb753",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:48:09Z",
+      "side": 1,
+      "message": "```suggestion\noption(DAWN_ENABLE_SPIRV_VALIDATION \"Enable validation of SPIR-V\" ${ENABLE_SPIRV_VALIDATION})\n```\n\nThe OpenGL backend uses GLSL, not SPIR-V, so there is no validation. I think we can just drop the platform notes, as it will only validate spir-v when we generate spir-v.",
+      "revId": "069be5e9a2404d0442c69b1f6cdab3f847e40bcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5802caa1_62f94c9a",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:48:09Z",
+      "side": 1,
+      "message": "```suggestion\nmessage(STATUS \"Dawn enable SPIR-V validation: ${DAWN_ENABLE_SPIRV_VALIDATION}\")\n```",
+      "revId": "069be5e9a2404d0442c69b1f6cdab3f847e40bcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
