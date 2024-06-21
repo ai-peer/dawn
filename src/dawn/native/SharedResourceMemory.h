@@ -90,11 +90,6 @@ class SharedResourceMemory : public ApiObjectBase, public WeakRefSupport<SharedR
     // Returns true if access was released.
     wgpu::Status APIEndAccess(BufferBase* buffer, SharedBufferMemoryEndAccessState* state);
 
-    // Returns true iff the device passed to this object on creation is now lost.
-    // TODO(crbug.com/1506468): Eliminate this API once Chromium has been
-    // transitioned away from using it in favor of observing device lost events.
-    bool APIIsDeviceLost() const;
-
     SharedResourceMemoryContents* GetContents() const;
 
     // Validate that the resource was created from this SharedResourceMemory.
