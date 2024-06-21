@@ -1727,7 +1727,13 @@ INSTANTIATE_TEST_SUITE_P(
             InterpolationType::kLinear, InterpolationSampling::kCenter},
         InspectorGetEntryPointInterpolateTestParams{
             core::InterpolationType::kFlat, core::InterpolationSampling::kUndefined,
-            InterpolationType::kFlat, InterpolationSampling::kNone}));
+            InterpolationType::kFlat, InterpolationSampling::kFirst},
+        InspectorGetEntryPointInterpolateTestParams{
+            core::InterpolationType::kFlat, core::InterpolationSampling::kFirst,
+            InterpolationType::kFlat, InterpolationSampling::kFirst},
+        InspectorGetEntryPointInterpolateTestParams{
+            core::InterpolationType::kFlat, core::InterpolationSampling::kEither,
+            InterpolationType::kFlat, InterpolationSampling::kEither}));
 
 TEST_F(InspectorGetOverrideDefaultValuesTest, Bool) {
     GlobalConst("C", Expr(true));
