@@ -72,7 +72,7 @@ TEST_F(AdapterEnumerationTests, OnlyFallback) {
     const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::CPU);
@@ -90,7 +90,7 @@ TEST_F(AdapterEnumerationTests, OnlyVulkan) {
     const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
     }
@@ -106,7 +106,7 @@ TEST_F(AdapterEnumerationTests, OnlyD3D11) {
     const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D11);
     }
@@ -147,7 +147,7 @@ TEST_F(AdapterEnumerationTests, MatchingDXGIAdapterD3D11) {
         ASSERT_EQ(adapters.size(), 1u);
 
         wgpu::AdapterProperties properties;
-        adapters[0].GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapters[0].GetProperties(&properties));
         EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D11);
 
         // Test that enumeration again yields the same adapter device.
@@ -155,7 +155,7 @@ TEST_F(AdapterEnumerationTests, MatchingDXGIAdapterD3D11) {
         ASSERT_EQ(adaptersAgain.size(), 1u);
 
         wgpu::AdapterProperties propertiesAgain;
-        adaptersAgain[0].GetProperties(&propertiesAgain);
+        EXPECT_DEPRECATION_WARNING(adaptersAgain[0].GetProperties(&propertiesAgain));
 
         EXPECT_EQ(properties.vendorID, propertiesAgain.vendorID);
         EXPECT_STREQ(properties.vendorName, propertiesAgain.vendorName);
@@ -180,7 +180,7 @@ TEST_F(AdapterEnumerationTests, OnlyD3D12) {
     const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D12);
     }
@@ -221,7 +221,7 @@ TEST_F(AdapterEnumerationTests, MatchingDXGIAdapterD3D12) {
         ASSERT_EQ(adapters.size(), 1u);
 
         wgpu::AdapterProperties properties;
-        adapters[0].GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapters[0].GetProperties(&properties));
         EXPECT_EQ(properties.backendType, wgpu::BackendType::D3D12);
 
         // Test that enumeration again yields the same adapter device.
@@ -229,7 +229,7 @@ TEST_F(AdapterEnumerationTests, MatchingDXGIAdapterD3D12) {
         ASSERT_EQ(adaptersAgain.size(), 1u);
 
         wgpu::AdapterProperties propertiesAgain;
-        adaptersAgain[0].GetProperties(&propertiesAgain);
+        EXPECT_DEPRECATION_WARNING(adaptersAgain[0].GetProperties(&propertiesAgain));
 
         EXPECT_EQ(properties.vendorID, propertiesAgain.vendorID);
         EXPECT_STREQ(properties.vendorName, propertiesAgain.vendorName);
@@ -254,7 +254,7 @@ TEST_F(AdapterEnumerationTests, OnlyMetal) {
     const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
     for (const auto& adapter : adapters) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.backendType, wgpu::BackendType::Metal);
     }
@@ -275,7 +275,7 @@ TEST_F(AdapterEnumerationTests, OneBackendThenTheOther) {
         metalAdapterCount = adapters.size();
         for (const auto& adapter : adapters) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             ASSERT_EQ(properties.backendType, wgpu::BackendType::Metal);
         }
@@ -287,7 +287,7 @@ TEST_F(AdapterEnumerationTests, OneBackendThenTheOther) {
         const auto& adapters = instance.EnumerateAdapters(&adapterOptions);
         for (const auto& adapter : adapters) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             ASSERT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
         }
@@ -301,7 +301,7 @@ TEST_F(AdapterEnumerationTests, OneBackendThenTheOther) {
         uint32_t metalAdapterCount2 = adapters.size();
         for (const auto& adapter : adapters) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             ASSERT_EQ(properties.backendType, wgpu::BackendType::Metal);
         }

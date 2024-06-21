@@ -459,7 +459,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
                 for (const native::Adapter& adapter :
                      instance->EnumerateAdapters(&adapterOptions)) {
                     wgpu::AdapterProperties properties;
-                    adapter.GetProperties(&properties);
+                    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
                     if (properties.adapterType == devicePreference) {
                         // Found a matching preferred device type. Return to break out of all loops.
@@ -477,7 +477,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
         adapterOptions.compatibilityMode = compatibilityMode;
         for (const native::Adapter& adapter : instance->EnumerateAdapters(&adapterOptions)) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             // Skip non-OpenGLES compat adapters. Metal/Vulkan/D3D12 support
             // core WebGPU.
@@ -746,7 +746,7 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
         const auto& it =
             std::find_if(adapters.begin(), adapters.end(), [&](const native::Adapter& candidate) {
                 wgpu::AdapterProperties properties;
-                candidate.GetProperties(&properties);
+                EXPECT_DEPRECATION_WARNING(candidate.GetProperties(&properties));
 
                 const auto& param = gCurrentTest->mParam;
                 return (param.adapterProperties.selected &&

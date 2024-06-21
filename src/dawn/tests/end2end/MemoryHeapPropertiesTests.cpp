@@ -45,7 +45,7 @@ TEST_P(MemoryHeapPropertiesTest, GetMemoryHeapProperties) {
     wgpu::AdapterPropertiesMemoryHeaps memoryHeapProperties;
     properties.nextInChain = &memoryHeapProperties;
 
-    adapter.GetProperties(&properties);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
     EXPECT_GT(memoryHeapProperties.heapCount, 0u);
     for (size_t i = 0; i < memoryHeapProperties.heapCount; ++i) {
