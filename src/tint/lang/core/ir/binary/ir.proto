@@ -489,6 +489,8 @@ enum InterpolationSampling {
     center = 0;
     centroid = 1;
     sample = 2;
+    first = 3;
+    either = 4;
 }
 
 enum BuiltinValue {
