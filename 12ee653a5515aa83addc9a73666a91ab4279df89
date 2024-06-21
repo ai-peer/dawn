@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e279d24_9d2c72c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-21T16:39:56Z",
+      "side": 1,
+      "message": "PTAL. This is my current approach to support general purpose buffers in D3D11. It will require extra copies (but the CPU stalls are minimal) if the buffer is used in these situations:\n- Mixing CPU writes and GPU writes on a buffer.\n- Mixing CPU writes and using a buffer in query resolves or indirect draws.\n- Including MapRead with other GPU usages (vertex, index, uniform, storage, etc) and/or MapWrite.\n\nBut it won\u0027t require extra copies if the buffer is only used:\n- In CPU writes and GPU reads.\n- Either as uniform buffer or other GPU usages.\n\nI\u0027m open to suggestions since this CL might look like an overkill or too complicated for most of our use cases.",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
