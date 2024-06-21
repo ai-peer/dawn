@@ -208,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ba9dca0_ae44b839",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-21T13:42:55Z",
+      "side": 1,
+      "message": "Interesting, I didn\u0027t thing this would be controversial. This was a very minor comment so either way is actually fine with me.",
+      "parentUuid": "a19e42e5_473bc6dc",
+      "range": {
+        "startLine": 499,
+        "startChar": 0,
+        "endLine": 508,
+        "endChar": 1
+      },
+      "revId": "2cf5777dcc90a4f0af99e56ccf3bac4753b0844d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "92d90f04_9bf86d71",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 6
