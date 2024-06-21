@@ -33,6 +33,9 @@ declare_args() {
   # that Chromium uses
   use_system_xcode = ""
 
+  # Disable fuzzers by default
+  use_libfuzzer = false
+
   # Android 32-bit non-component, non-clang builds cannot have symbol_level=2
   # due to 4GiB file size limit, see https://crbug.com/648948.
   ignore_elf32_limitations = false
