@@ -89,7 +89,7 @@ TEST_F(DeviceInitializationTest, DeviceOutlivesInstance) {
         auto instance = std::make_unique<native::Instance>();
         for (const native::Adapter& adapter : instance->EnumerateAdapters()) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             if (properties.backendType == wgpu::BackendType::Null) {
                 continue;
@@ -105,7 +105,7 @@ TEST_F(DeviceInitializationTest, DeviceOutlivesInstance) {
         auto instance = std::make_unique<native::Instance>();
         for (native::Adapter& adapter : instance->EnumerateAdapters()) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             if (properties.deviceID == desiredProperties.deviceID &&
                 properties.vendorID == desiredProperties.vendorID &&
@@ -134,7 +134,7 @@ TEST_F(DeviceInitializationTest, AdapterOutlivesInstance) {
         auto instance = std::make_unique<native::Instance>();
         for (const native::Adapter& adapter : instance->EnumerateAdapters()) {
             wgpu::AdapterProperties properties;
-            adapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
             if (properties.backendType == wgpu::BackendType::Null) {
                 continue;
@@ -149,7 +149,7 @@ TEST_F(DeviceInitializationTest, AdapterOutlivesInstance) {
         auto instance = std::make_unique<native::Instance>();
         for (native::Adapter& nativeAdapter : instance->EnumerateAdapters()) {
             wgpu::AdapterProperties properties;
-            nativeAdapter.GetProperties(&properties);
+            EXPECT_DEPRECATION_WARNING(nativeAdapter.GetProperties(&properties));
 
             if (properties.deviceID == desiredProperties.deviceID &&
                 properties.vendorID == desiredProperties.vendorID &&

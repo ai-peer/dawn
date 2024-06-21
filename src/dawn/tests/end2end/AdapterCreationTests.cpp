@@ -59,7 +59,7 @@ class AdapterCreationTest : public ::testing::TestWithParam<std::optional<wgpu::
                 anyAdapterAvailable = true;
 
                 wgpu::AdapterProperties properties;
-                nativeAdapter.GetProperties(&properties);
+                EXPECT_DEPRECATION_WARNING(nativeAdapter.GetProperties(&properties));
                 if (properties.compatibilityMode) {
                     continue;
                 }
@@ -180,7 +180,7 @@ TEST_P(AdapterCreationTest, FallbackAdapter) {
     EXPECT_EQ(adapter != nullptr, swiftShaderAvailable);
     if (adapter != nullptr) {
         wgpu::AdapterProperties properties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::CPU);
         EXPECT_TRUE(gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
@@ -216,7 +216,7 @@ TEST_P(AdapterCreationTest, PreferHighPerformance) {
         wgpu::AdapterProperties properties;
         wgpu::DawnAdapterPropertiesPowerPreference powerPreferenceProperties;
         properties.nextInChain = &powerPreferenceProperties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::DiscreteGPU);
         EXPECT_EQ(powerPreferenceProperties.powerPreference, options.powerPreference);
 
@@ -249,7 +249,7 @@ TEST_P(AdapterCreationTest, PreferLowPower) {
         wgpu::AdapterProperties properties;
         wgpu::DawnAdapterPropertiesPowerPreference powerPreferenceProperties;
         properties.nextInChain = &powerPreferenceProperties;
-        adapter.GetProperties(&properties);
+        EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::IntegratedGPU);
         EXPECT_EQ(powerPreferenceProperties.powerPreference, options.powerPreference);
 
@@ -275,7 +275,7 @@ TEST_P(AdapterCreationTest, Compatibility) {
     EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
 
     wgpu::AdapterProperties properties;
-    adapter.GetProperties(&properties);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
     EXPECT_TRUE(properties.compatibilityMode);
 
     wgpu::AdapterInfo info;
@@ -298,7 +298,7 @@ TEST_P(AdapterCreationTest, NonCompatibility) {
     EXPECT_EQ(adapter != nullptr, anyAdapterAvailable);
 
     wgpu::AdapterProperties properties;
-    adapter.GetProperties(&properties);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
     EXPECT_FALSE(properties.compatibilityMode);
 
     wgpu::AdapterInfo info;
@@ -343,8 +343,8 @@ TEST_P(AdapterCreationTest, PropertiesUnique) {
 
     wgpu::AdapterProperties properties1;
     wgpu::AdapterProperties properties2;
-    adapter.GetProperties(&properties1);
-    adapter.GetProperties(&properties2);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties1));
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties2));
 
     EXPECT_NE(properties1.vendorName, properties2.vendorName);
     EXPECT_STREQ(properties1.vendorName, properties2.vendorName);
@@ -375,8 +375,8 @@ TEST_P(AdapterCreationTest, PropertiesMoveAssign) {
 
     wgpu::AdapterProperties properties1;
     wgpu::AdapterProperties properties2;
-    adapter.GetProperties(&properties1);
-    adapter.GetProperties(&properties2);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties1));
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties2));
 
     uint32_t vendorID = properties1.vendorID;
     std::string vendorName = properties1.vendorName;
@@ -431,7 +431,7 @@ TEST_P(AdapterCreationTest, PropertiesMoveConstruct) {
     }
 
     wgpu::AdapterProperties properties1;
-    adapter.GetProperties(&properties1);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties1));
 
     uint32_t vendorID = properties1.vendorID;
     std::string vendorName = properties1.vendorName;
@@ -486,7 +486,7 @@ TEST_P(AdapterCreationTest, PropertiesOutliveAdapter) {
     }
 
     wgpu::AdapterProperties properties;
-    adapter.GetProperties(&properties);
+    EXPECT_DEPRECATION_WARNING(adapter.GetProperties(&properties));
 
     // Make a copy of the properties.
     std::string vendorName = properties.vendorName;
