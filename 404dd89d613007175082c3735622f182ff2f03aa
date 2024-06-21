@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5352a5c1_ff2e83ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-21T13:24:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "404dd89d613007175082c3735622f182ff2f03aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c24c24_458ed1ad",
+        "filename": "src/cmake/DawnCompilerPlatformFlags.cmake",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-21T13:24:53Z",
+      "side": 1,
+      "message": "nit\n```suggestion\nif (TINT_CHECK_CHROMIUM_STYLE)\n```",
+      "revId": "404dd89d613007175082c3735622f182ff2f03aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
