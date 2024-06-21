@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e672382_de9a16ed",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:33:20Z",
+      "side": 1,
+      "message": "Looks like you already did?",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 55
+      },
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b3de27a_52f8b8bc",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:33:20Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a23b18_7bc99809",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:33:20Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8761b3ed_bf93a1f3",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:33:20Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc3a64ef_419a79db",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-21T15:33:20Z",
+      "side": 1,
+      "message": "These polyfills look involved enough that they\u0027d be good candidates to move to an IR transform. This works for now though, so maybe file a bug to consider moving later.",
+      "range": {
+        "startLine": 629,
+        "startChar": 0,
+        "endLine": 631,
+        "endChar": 56
+      },
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
