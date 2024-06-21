@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbaea556_bb07d4c9",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-21T18:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "425761ff_890eb753",
+      "revId": "069be5e9a2404d0442c69b1f6cdab3f847e40bcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5802caa1_62f94c9a",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-21T17:48:09Z",
       "side": 1,
       "message": "```suggestion\nmessage(STATUS \"Dawn enable SPIR-V validation: ${DAWN_ENABLE_SPIRV_VALIDATION}\")\n```",
+      "revId": "069be5e9a2404d0442c69b1f6cdab3f847e40bcf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe4582f_f3cb917c",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-21T18:07:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5802caa1_62f94c9a",
       "revId": "069be5e9a2404d0442c69b1f6cdab3f847e40bcf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
