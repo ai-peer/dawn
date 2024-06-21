@@ -57,6 +57,30 @@
       ],
       "revId": "0f6c2621ac684a5201fdfbfe08634dd4140411e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b247c1_780aef07",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-21T18:31:46Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "b67b7153_1e475fd2",
+      "range": {
+        "startLine": 377,
+        "startChar": 66,
+        "endLine": 377,
+        "endChar": 85
+      },
+      "revId": "0f6c2621ac684a5201fdfbfe08634dd4140411e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
