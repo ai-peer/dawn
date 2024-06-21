@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "919a067c_07171c5c",
+        "filename": "src/cmake/DawnCompilerWarningFlags.cmake",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:51:38Z",
+      "side": 1,
+      "message": "Note, there are two versions of these flags, the Dawn ones and the Tint ones (which are different). \n\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/CMakeLists.txt#102\n\nTint is much more aggressive by building with `-Weverything`.",
+      "revId": "321fcae307ab03ff478adf3b3bde920ac9bdee54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
