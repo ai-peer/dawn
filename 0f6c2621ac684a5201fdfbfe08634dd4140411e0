@@ -16,6 +16,47 @@
       "message": "LGTM!",
       "revId": "0f6c2621ac684a5201fdfbfe08634dd4140411e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67b7153_1e475fd2",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-21T18:19:57Z",
+      "side": 1,
+      "message": "nit. Could use new crbug.com/42240514",
+      "range": {
+        "startLine": 377,
+        "startChar": 66,
+        "endLine": 377,
+        "endChar": 85
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "8508dbd9_062f8123",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+              "range": {
+                "startLine": 377,
+                "startChar": 0,
+                "endLine": 378,
+                "endChar": 0
+              },
+              "replacement": "    // support use of VK_IMAGE_CREATE_DISJOINT_BIT currently. See crbug.com/42240514.\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0f6c2621ac684a5201fdfbfe08634dd4140411e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
