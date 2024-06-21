@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "139cc3e5_b4b3ad98",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-21T21:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c029f748_a37d03c3",
+      "range": {
+        "startLine": 49,
+        "startChar": 37,
+        "endLine": 49,
+        "endChar": 49
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dbb38f8_d0c66113",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ec11cd2_b919744e",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-21T21:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dbb38f8_d0c66113",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 16
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9bff802_08ebfd9c",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-06-21T00:13:06Z",
       "side": 1,
       "message": "why did this need to move?\n\nyou could also put the error checking in the old location",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 79,
+        "endChar": 9
+      },
+      "revId": "0e5f8bed4cb4aa6282c3532d1dff8dcbac75aaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "868b3c0f_ade43628",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-06-21T21:53:03Z",
+      "side": 1,
+      "message": "I did it so that we don\u0027t mixup creating the `MTLSharedEvent` and `SharedFence` wrapper. Specifically, we don\u0027t clear `mMtlSharedEvent` in `DestroyImpl()` so that future calls to `GetOrCreateSharedFence()` still work. Those calls won\u0027t create a new `mMtlSharedEvent` because it already exists. However, the call to `GetOrCreateSharedFence` in `Initialize()` will create the `mMtlSharedEvent` so it\u0027s a little confusing that the method has different behaviors when called at different times. If we had a bug and cleared the `mMtlSharedEvent` before the `Queue` is destructed, the code in this CL will catch it whereas the previous code would silently work but be incorrect.",
+      "parentUuid": "f9bff802_08ebfd9c",
       "range": {
         "startLine": 76,
         "startChar": 8,
