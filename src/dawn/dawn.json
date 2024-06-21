@@ -2025,11 +2025,6 @@
                     {"name": "buffer", "type": "buffer"},
                     {"name": "descriptor", "type": "shared buffer memory end access state", "annotation": "*"}
                 ]
-            },
-            {
-                "name": "is device lost",
-                "returns": "bool",
-                "args": []
             }
         ]
     },
@@ -2090,11 +2085,6 @@
                     {"name": "texture", "type": "texture"},
                     {"name": "descriptor", "type": "shared texture memory end access state", "annotation": "*"}
                 ]
-            },
-            {
-                "name": "is device lost",
-                "returns": "bool",
-                "args": []
             }
         ]
     },

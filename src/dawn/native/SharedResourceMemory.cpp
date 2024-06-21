@@ -230,10 +230,6 @@ ResultOrError<FenceAndSignalValue> SharedResourceMemory::EndAccessImpl(
     DAWN_UNREACHABLE();
 }
 
-bool SharedResourceMemory::APIIsDeviceLost() const {
-    return GetDevice()->IsLost();
-}
-
 template <typename Resource, typename EndAccessState>
 MaybeError SharedResourceMemory::EndAccess(Resource* resource, EndAccessState* state) {
     DAWN_TRY(GetDevice()->ValidateObject(resource));

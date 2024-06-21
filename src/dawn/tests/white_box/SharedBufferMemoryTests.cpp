@@ -118,28 +118,6 @@ TEST_P(SharedBufferMemoryTests, ImportSharedBufferMemoryDeviceDestroy) {
     wgpu::SharedBufferMemory memory = device.ImportSharedBufferMemory(&desc);
 }
 
-// Test that SharedBufferMemory::IsDeviceLost() returns the expected value before and
-// after destroying the device.
-TEST_P(SharedBufferMemoryTests, CheckIsDeviceLostBeforeAndAfterDestroyingDevice) {
-    wgpu::SharedBufferMemory memory =
-        GetParam().mBackend->CreateSharedBufferMemory(device, kMapWriteUsages, kBufferSize);
-
-    EXPECT_FALSE(memory.IsDeviceLost());
-    device.Destroy();
-    EXPECT_TRUE(memory.IsDeviceLost());
-}
-
-// Test that SharedBufferMemory::IsDeviceLost() returns the expected value before and
-// after losing the device.
-TEST_P(SharedBufferMemoryTests, CheckIsDeviceLostBeforeAndAfterLosingDevice) {
-    wgpu::SharedBufferMemory memory =
-        GetParam().mBackend->CreateSharedBufferMemory(device, kMapWriteUsages, kBufferSize);
-
-    EXPECT_FALSE(memory.IsDeviceLost());
-    LoseDeviceForTesting(device);
-    EXPECT_TRUE(memory.IsDeviceLost());
-}
-
 // Test calling GetProperties on SharedBufferMemory after an error.
 TEST_P(SharedBufferMemoryTests, GetPropertiesErrorMemory) {
     wgpu::SharedBufferMemoryDescriptor desc;
