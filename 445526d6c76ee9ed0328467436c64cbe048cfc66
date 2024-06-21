@@ -125,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1cfb388_8dd3afb2",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-21T13:49:41Z",
+      "side": 1,
+      "message": "Sounds good, thank you!",
+      "parentUuid": "12f9c955_2f442fd2",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13a64252_5c867675",
@@ -138,6 +156,24 @@
       "writtenOn": "2024-06-19T18:04:02Z",
       "side": 1,
       "message": "```suggestion\n    // mLastSubmittedSerial so it is captured by value.\n```",
+      "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c28a57a_b8ad4047",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-21T13:49:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "13a64252_5c867675",
       "revId": "445526d6c76ee9ed0328467436c64cbe048cfc66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
