@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e68ad61_880e57ca",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e672382_de9a16ed",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 55
+      },
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b3de27a_52f8b8bc",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-06-21T15:33:20Z",
       "side": 1,
       "message": "Ditto.",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b44c28de_497270cd",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b3de27a_52f8b8bc",
       "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb7b006_640e1622",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39a23b18_7bc99809",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8761b3ed_bf93a1f3",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d462db2f_be44ae38",
+        "filename": "src/tint/lang/hlsl/writer/bitcast_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:36:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8761b3ed_bf93a1f3",
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc3a64ef_419a79db",
@@ -88,6 +166,30 @@
       "writtenOn": "2024-06-21T15:33:20Z",
       "side": 1,
       "message": "These polyfills look involved enough that they\u0027d be good candidates to move to an IR transform. This works for now though, so maybe file a bug to consider moving later.",
+      "range": {
+        "startLine": 629,
+        "startChar": 0,
+        "endLine": 631,
+        "endChar": 56
+      },
+      "revId": "6cab051be05f4fcd1517d75d3f1e4ed8c72328c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d12a4c16_77b7d6f9",
+        "filename": "src/tint/lang/hlsl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-21T17:36:23Z",
+      "side": 1,
+      "message": "Yea, I was on the fence about moving them, this version came out much nicer then the AST version, but there might be some more benefit in splitting them out even more.  https://issues.chromium.org/issues/348590924",
+      "parentUuid": "dc3a64ef_419a79db",
       "range": {
         "startLine": 629,
         "startChar": 0,
