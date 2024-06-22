@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97705d3a_a04123f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-22T18:17:06Z",
+      "side": 1,
+      "message": "I did the quick way out: update the help.\n\nA more involved change would be to modify OptionSet so it can constrain parsing of value-based options, and make the help printing consistent with that.\nDefault would be: parse either equals-form and space-form and show help for space-form.\nAlternative is to parse only equals-form and show equals-form.",
+      "revId": "c8f49f7e0f1df19332568c7f32afb2c0310d89f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
