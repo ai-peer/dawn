@@ -34,6 +34,24 @@
       "parentUuid": "31c4ae3e_e0cd555a",
       "revId": "4660e725cb9277f6c62c3bde491769a98140398f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37afc7a9_0f5227a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-22T23:25:42Z",
+      "side": 1,
+      "message": "Well, it\u0027s because `dawn_native` and `dawn_utils` link unconditionally with `SPIRV-tools-opt`. I\u0027ve already fixed it in my subsequent CLs:\n\n- for dawn_native, https://dawn-review.googlesource.com/c/dawn/+/194920\n- for dawn_utils, https://dawn-review.googlesource.com/c/dawn/+/194922\n\nI know it\u0027s not great news to wait until those land, so I\u0027ll have a quick CL that fixes it on main branch.",
+      "parentUuid": "62f13d2a_ec7272b2",
+      "revId": "4660e725cb9277f6c62c3bde491769a98140398f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
