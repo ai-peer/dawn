@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c4ae3e_e0cd555a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3455536
+      },
+      "writtenOn": "2024-06-22T20:56:38Z",
+      "side": 1,
+      "message": "Hi! \n\nThis change appears to breaks the ability to build dawn on macOS only (Linux and Windows work fine), resulting in the following build error when following the build guide (https://dawn.googlesource.com/dawn/+/HEAD/docs/building.md): \n\n[780/780] Linking CXX shared library dawn.node\nFAILED: dawn.node \nld: library \u0027SPIRV-Tools-opt\u0027 not found\nclang: error: linker command failed with exit code 1 (use -v to see invocation)\nninja: build stopped: subcommand failed.",
+      "revId": "4660e725cb9277f6c62c3bde491769a98140398f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
