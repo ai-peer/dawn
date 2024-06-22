@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0211518d_71490cd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-22T02:15:37Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org friendly ping, can you please approve?",
+      "revId": "92a79c928434f5bec8f264fac7ac06e9ad7dfcf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
