@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36853f1_ae88bd25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-23T14:47:04Z",
+      "side": 1,
+      "message": "PTAL. That turned out to be surprisingly difficult. There were a few places I changed the output (HLSL can do `vec \u0026 float` which we don\u0027t allow). So, I think it\u0027s \"better\" in that it\u0027s closer to what we expect, but .... a good chunk of code to get there. Let me know if there are better ways to write any of bits in there.",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
