@@ -53,9 +53,11 @@ class ScopedCommandRecordingContext;
 namespace {
 
 constexpr wgpu::BufferUsage kD3D11GPUOnlyUniformBufferUsages =
-    wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
+    wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc |
+    kInternalCopySrcBuffer;
 
-constexpr wgpu::BufferUsage kCopyUsages = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+constexpr wgpu::BufferUsage kCopyUsages =
+    wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst | kInternalCopySrcBuffer;
 
 constexpr wgpu::BufferUsage kStagingUsages = kMappableBufferUsages | kCopyUsages;
 

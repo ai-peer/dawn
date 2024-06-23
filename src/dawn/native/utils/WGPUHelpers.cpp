@@ -150,25 +150,23 @@ BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
     const BindGroupLayoutEntry& entry)
     : BindGroupLayoutEntry(entry) {}
 
-BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
-                                                         const Ref<SamplerBase>& sampler)
-    : binding(binding), sampler(sampler) {}
+BindingInitializationHelper::BindingInitializationHelper(uint32_t binding, Ref<SamplerBase> sampler)
+    : binding(binding), sampler(std::move(sampler)) {}
 
 BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
-                                                         const Ref<TextureViewBase>& textureView)
-    : binding(binding), textureView(textureView) {}
-BindingInitializationHelper::BindingInitializationHelper(
-    uint32_t binding,
-    const Ref<ExternalTextureBase>& externalTexture)
-    : binding(binding), externalTexture(externalTexture) {
+                                                         Ref<TextureViewBase> textureView)
+    : binding(binding), textureView(std::move(textureView)) {}
+BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
+                                                         Ref<ExternalTextureBase> externalTexture)
+    : binding(binding), externalTexture(std::move(externalTexture)) {
     externalBindingEntry.externalTexture = externalTexture.Get();
 }
 
 BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
-                                                         const Ref<BufferBase>& buffer,
+                                                         Ref<BufferBase> buffer,
                                                          uint64_t offset,
                                                          uint64_t size)
-    : binding(binding), buffer(buffer), offset(offset), size(size) {}
+    : binding(binding), buffer(std::move(buffer)), offset(offset), size(size) {}
 
 BindingInitializationHelper::~BindingInitializationHelper() = default;
 

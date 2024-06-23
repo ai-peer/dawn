@@ -113,11 +113,11 @@ ResultOrError<Ref<BindGroupLayoutBase>> MakeBindGroupLayout(
 // Structure with one constructor per-type of bindings, so that the initializer_list accepts
 // bindings with the right type and no extra information.
 struct BindingInitializationHelper {
-    BindingInitializationHelper(uint32_t binding, const Ref<SamplerBase>& sampler);
-    BindingInitializationHelper(uint32_t binding, const Ref<TextureViewBase>& textureView);
-    BindingInitializationHelper(uint32_t binding, const Ref<ExternalTextureBase>& externalTexture);
+    BindingInitializationHelper(uint32_t binding, Ref<SamplerBase> sampler);
+    BindingInitializationHelper(uint32_t binding, Ref<TextureViewBase> textureView);
+    BindingInitializationHelper(uint32_t binding, Ref<ExternalTextureBase> externalTexture);
     BindingInitializationHelper(uint32_t binding,
-                                const Ref<BufferBase>& buffer,
+                                Ref<BufferBase> buffer,
                                 uint64_t offset = 0,
                                 uint64_t size = wgpu::kWholeSize);
     ~BindingInitializationHelper();
