@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,52 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_BLITTEXTURETOBUFFER_H_
-#define SRC_DAWN_NATIVE_BLITTEXTURETOBUFFER_H_
+#ifndef SRC_DAWN_NATIVE_TEMPGPUBUFFERMANAGER_H_
+#define SRC_DAWN_NATIVE_TEMPGPUBUFFERMANAGER_H_
 
-#include "dawn/native/Error.h"
+#include <memory>
+
+#include "dawn/common/Ref.h"
+#include "dawn/common/SerialQueue.h"
+#include "dawn/native/IntegerTypes.h"
+#include "dawn/native/BuddyMemoryAllocator.h"
+#include "dawn/native/ResourceMemoryAllocation.h"
 
 namespace dawn::native {
 
-struct Format;
-struct TextureCopy;
-struct BufferCopy;
+class BufferBase;
+class DeviceBase;
 
-bool IsFormatSuportedByTextureToBufferBlit(const Format& format);
+// We use suballocations for allocating temporary GPU buffers.
+class TempGPUBufferManager {
+  public:
+    struct Allocation {
+        raw_ptr<BufferBase> buffer = nullptr;
+        uint64_t offset = 0;
+        uint64_t size = 0;
+    };
 
-MaybeError BlitTextureToBuffer(DeviceBase* device,
-                               CommandEncoder* commandEncoder,
-                               const TextureCopy& src,
-                               const BufferCopy& dst,
-                               const Extent3D& copyExtent);
+    // Note: device must outlive this manager.
+    explicit TempGPUBufferManager(DeviceBase* device, wgpu::BufferUsage bufferUsage);
+    ~TempGPUBufferManager();
+
+    ResultOrError<Allocation> Allocate(uint64_t allocationSize,
+                                       ExecutionSerial useInSerial,
+                                       uint64_t offsetAlignment);
+
+    void Deallocate(ExecutionSerial completedSerial);
+
+  private:
+    class Allocator;
+
+    raw_ptr<DeviceBase> mDevice;
+
+    std::unique_ptr<Allocator> mAllocator;
+    BuddyMemoryAllocator mBuddySubAllocator;
+    SerialQueue<ExecutionSerial, ResourceMemoryAllocation> mInflightSubAllocations;
+    SerialQueue<ExecutionSerial, Ref<BufferBase>> mInflightAllocations;
+};
 
 }  // namespace dawn::native
 
-#endif  // SRC_DAWN_NATIVE_BLITTEXTURETOBUFFER_H_
+#endif
