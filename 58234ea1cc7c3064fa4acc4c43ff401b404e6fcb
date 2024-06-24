@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ba4690b_01552508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-24T23:07:11Z",
+      "side": 1,
+      "message": "PTAL! it\u0027s sorta nice this way, but it\u0027s also a little mysterious that dawn.json can have duplicate \"value\" for enums so long as the tags are different. Note that the generator still prevents collisions of the eventual enum value.",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
