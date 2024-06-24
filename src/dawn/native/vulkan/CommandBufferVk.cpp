@@ -1247,6 +1247,44 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 break;
             }
 
+            case Command::MultiDrawIndirect: {
+                MultiDrawIndirectCmd* cmd = iter->NextCommand<MultiDrawIndirectCmd>();
+
+                Buffer* indirectBuffer = ToBackend(cmd->indirectBuffer.Get());
+                DAWN_ASSERT(indirectBuffer != nullptr);
+
+                // Count buffer is optional
+                Buffer* countBuffer = ToBackend(cmd->drawCountBuffer.Get());
+
+                descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                device->fn.CmdDrawIndirectCount(
+                    commands, indirectBuffer->GetHandle(),
+                    static_cast<VkDeviceSize>(cmd->indirectOffset),
+                    countBuffer != nullptr ? countBuffer->GetHandle() : nullptr,
+                    static_cast<VkDeviceSize>(cmd->drawCountOffset), cmd->maxDrawCount,
+                    sizeof(VkDrawIndirectCommand));
+
+                break;
+            }
+            case Command::MultiDrawIndexedIndirect: {
+                MultiDrawIndexedIndirectCmd* cmd = iter->NextCommand<MultiDrawIndexedIndirectCmd>();
+
+                Buffer* indirectBuffer = ToBackend(cmd->indirectBuffer.Get());
+                DAWN_ASSERT(indirectBuffer != nullptr);
+
+                // Count buffer is optional
+                Buffer* countBuffer = ToBackend(cmd->drawCountBuffer.Get());
+
+                descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
+                device->fn.CmdDrawIndexedIndirectCount(
+                    commands, indirectBuffer->GetHandle(),
+                    static_cast<VkDeviceSize>(cmd->indirectOffset),
+                    countBuffer != nullptr ? countBuffer->GetHandle() : nullptr,
+                    static_cast<VkDeviceSize>(cmd->drawCountOffset), cmd->maxDrawCount,
+                    sizeof(VkDrawIndexedIndirectCommand));
+                break;
+            }
+
             case Command::InsertDebugMarker: {
                 if (device->GetGlobalInfo().HasExt(InstanceExt::DebugUtils)) {
                     InsertDebugMarkerCmd* cmd = iter->NextCommand<InsertDebugMarkerCmd>();

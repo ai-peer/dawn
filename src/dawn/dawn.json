@@ -2478,6 +2478,7 @@
             {"value": 1036, "name": "multi planar format nv24", "tags": ["dawn"]},
             {"value": 1037, "name": "multi planar format p210", "tags": ["dawn"]},
             {"value": 1038, "name": "multi planar format p410", "tags": ["dawn"]},
+            {"value": 1039, "name": "multi draw indirect", "tags": ["dawn"]},
 
             {"value": 1100, "name": "shared texture memory vk dedicated allocation", "tags": ["dawn", "native"]},
             {"value": 1101, "name": "shared texture memory a hardware buffer", "tags": ["dawn", "native"]},
@@ -3320,6 +3321,27 @@
                     {"name": "indirect buffer", "type": "buffer"},
                     {"name": "indirect offset", "type": "uint64_t"}
               ]
+            },
+            {
+                "name": "multi draw indirect",
+                "args": [
+                    {"name": "indirect buffer", "type": "buffer"},
+                    {"name": "indirect offset", "type": "uint64_t"},
+                    {"name": "max draw count", "type": "uint32_t"},
+                    {"name": "draw count buffer", "type": "buffer", "optional": true},
+                    {"name": "draw count buffer offset", "type": "uint64_t", "default": "0"}
+
+                ]
+            },
+            {
+                "name": "multi draw indexed indirect",
+                "args": [
+                    {"name": "indirect buffer", "type": "buffer"},
+                    {"name": "indirect offset", "type": "uint64_t"},
+                    {"name": "max draw count", "type": "uint32_t"},
+                    {"name": "draw count buffer", "type": "buffer", "optional": true},
+                    {"name": "draw count buffer offset", "type": "uint64_t", "default": "0"}
+                ]
             },
             {
               "name": "execute bundles",

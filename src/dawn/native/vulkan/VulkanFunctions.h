@@ -350,6 +350,10 @@ struct VulkanFunctions {
     VkFn<PFN_vkAcquireNextImageKHR> AcquireNextImageKHR = nullptr;
     VkFn<PFN_vkQueuePresentKHR> QueuePresentKHR = nullptr;
 
+    // VK_KHR_draw_indirect_count
+    VkFn<PFN_vkCmdDrawIndirectCountKHR> CmdDrawIndirectCount = nullptr;
+    VkFn<PFN_vkCmdDrawIndexedIndirectCountKHR> CmdDrawIndexedIndirectCount = nullptr;
+
 #if VK_USE_PLATFORM_FUCHSIA
     // VK_FUCHSIA_external_memory
     VkFn<PFN_vkGetMemoryZirconHandleFUCHSIA> GetMemoryZirconHandleFUCHSIA = nullptr;
