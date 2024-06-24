@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba7b619_1b340d81",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 15
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Dedented by 2 spaces to conform with the convention followed in the file. I could defer this to the final commit where I address all indentations, whitespaces and typos.",
+      "parentUuid": "a194eb78_0b19627d",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a8e0381_2ea59324",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df5c87ef_b65929bc",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a8e0381_2ea59324",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89ade8bf_7b789bbc",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-06-24T17:20:21Z",
       "side": 1,
       "message": "```suggestion\n    If none is provided, ``BUILD_SHARED_LIBS`` will control the library type.\n```",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e65bc6ac_01b3e337",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89ade8bf_7b789bbc",
       "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "287eb64b_925b4952",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "No. made it a separate argument for clarity.",
+      "parentUuid": "6a795402_b2c8214a",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "caf3a26f_04c47fb7",
         "filename": "src/cmake/DawnLibrary.cmake",
         "patchSetId": 15
@@ -99,6 +171,24 @@
       "writtenOn": "2024-06-24T17:20:21Z",
       "side": 1,
       "message": "nit: Doc for `DEPENDS` should be split between `DEPENDS` and `PRIVATE_DEPENDS`",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "624a2d50_c354d2d8",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "caf3a26f_04c47fb7",
       "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3798e6_b3301d73",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d51e582_c503c8db",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb629c9b_869d7753",
@@ -133,6 +241,24 @@
       "writtenOn": "2024-06-24T17:20:21Z",
       "side": 1,
       "message": "What about `arg_FORCE_OBJECT`?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b2852d0_7cfaee6a",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb629c9b_869d7753",
       "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b5c4bd_6f3fd194",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done. Removed the `foreach` block here. In a future CL, i\u0027ll get around to refactoring `DawnJsonGenerator`.",
+      "parentUuid": "13ec7f61_98106aba",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57c523bc_9876dda9",
@@ -213,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e45e3d_b540ee36",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57c523bc_9876dda9",
+      "range": {
+        "startLine": 108,
+        "startChar": 41,
+        "endLine": 108,
+        "endChar": 68
+      },
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f47256a4_77c766f5",
@@ -226,6 +394,24 @@
       "writtenOn": "2024-06-24T17:20:21Z",
       "side": 1,
       "message": "Maybe `else() set(library_type STATIC)`?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82dea597_fbc5bb7b",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T22:39:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f47256a4_77c766f5",
       "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
