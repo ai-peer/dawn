@@ -30,6 +30,8 @@
 
 #include <cstdint>
 
+#include "partition_alloc/pointers/raw_ptr.h"
+
 namespace dawn::native {
 
 class ResourceHeapBase;
@@ -84,8 +86,8 @@ class ResourceMemoryAllocation {
   private:
     AllocationInfo mInfo;
     uint64_t mOffset;
-    ResourceHeapBase* mResourceHeap;
-    uint8_t* mMappedPointer;
+    raw_ptr<ResourceHeapBase> mResourceHeap;
+    raw_ptr<uint8_t> mMappedPointer;
 };
 }  // namespace dawn::native
 
