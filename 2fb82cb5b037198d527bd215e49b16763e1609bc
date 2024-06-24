@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b21e90a_2ba46b97",
+        "filename": "generator/templates/art/api_jni_types.kt",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-24T10:53:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9266fc2_1975a4d0",
+      "revId": "2fb82cb5b037198d527bd215e49b16763e1609bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ff55fdc_788f7192",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-06-24T08:56:45Z",
       "side": 1,
       "message": "Why is this not `to_jni`? If it can be `to_jni` then we could fold both functions together.",
+      "range": {
+        "startLine": 68,
+        "startChar": 7,
+        "endLine": 68,
+        "endChar": 18
+      },
+      "revId": "2fb82cb5b037198d527bd215e49b16763e1609bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c2677c_36aa1daa",
+        "filename": "generator/templates/art/methods.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-24T10:53:28Z",
+      "side": 1,
+      "message": "It\u0027s because to_jni (now arg_to_jni_type) looks at \u0027length\u0027 and \u0027constant_length\u0027 which aren\u0027t present in Method.",
+      "parentUuid": "4ff55fdc_788f7192",
       "range": {
         "startLine": 68,
         "startChar": 7,
