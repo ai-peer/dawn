@@ -31,6 +31,7 @@
 #include <string>
 #include <type_traits>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/common/Assert.h"
 
 namespace dawn {
@@ -63,7 +64,7 @@ class DynamicLib {
     }
 
   private:
-    void* mHandle = nullptr;
+    raw_ptr<void> mHandle = nullptr;
 };
 
 }  // namespace dawn
