@@ -174,6 +174,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13ec7f61_98106aba",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:44:28Z",
+      "side": 1,
+      "message": "Thank you for the explanation. The fact that we have to list the files in GN is a GN limitation, we could make `DawnJsonGenerator` separate between headers and source itself, then the user of that macro would need to handle both variables. That said listing things out for symmetry with GN and removing this code also works. Either solution sounds good!",
+      "parentUuid": "ff87211a_7655ed8c",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57c523bc_9876dda9",
         "filename": "src/cmake/DawnLibrary.cmake",
         "patchSetId": 15
