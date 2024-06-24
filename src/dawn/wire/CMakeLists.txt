@@ -28,7 +28,8 @@
 DawnJSONGenerator(
     TARGET "wire"
     PRINT_NAME "Dawn wire"
-    RESULT_VARIABLE "DAWN_WIRE_GEN_SOURCES"
+    OUTPUT_HEADERS DAWN_WIRE_GEN_HEADERS
+    OUTPUT_SOURCES DAWN_WIRE_GEN_SOURCES
 )
 
 add_library(dawn_wire)
@@ -41,6 +42,7 @@ endif()
 
 target_sources(dawn_wire PRIVATE
   INTERFACE
+    ${DAWN_WIRE_GEN_HEADERS}
     "${DAWN_INCLUDE_DIR}/dawn/wire/Wire.h"
     "${DAWN_INCLUDE_DIR}/dawn/wire/WireClient.h"
     "${DAWN_INCLUDE_DIR}/dawn/wire/WireServer.h"
