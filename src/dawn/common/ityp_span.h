@@ -30,6 +30,7 @@
 
 #include <type_traits>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/UnderlyingType.h"
 
@@ -91,7 +92,7 @@ class span {
     Index size() const { return mSize; }
 
   private:
-    Value* mData;
+    raw_ptr<Value> mData;
     Index mSize;
 };
 
