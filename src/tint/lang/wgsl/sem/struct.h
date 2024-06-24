@@ -30,6 +30,7 @@
 
 #include <optional>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/type/struct.h"
 #include "src/tint/lang/core/type/type.h"
@@ -80,7 +81,7 @@ class Struct final : public Castable<Struct, core::type::Struct> {
     }
 
   private:
-    ast::Struct const* const declaration_;
+    const raw_ptr<const ast::Struct> declaration_;
 };
 
 /// StructMember holds the semantic information for structure members.
@@ -115,7 +116,7 @@ class StructMember final : public Castable<StructMember, core::type::StructMembe
     const sem::Struct* Struct() const { return static_cast<const sem::Struct*>(Base::Struct()); }
 
   private:
-    const ast::StructMember* const declaration_;
+    const raw_ptr<const ast::StructMember> declaration_;
 };
 
 }  // namespace tint::sem

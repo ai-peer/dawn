@@ -27,6 +27,7 @@
 
 #include <variant>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/construct.h"
 #include "src/tint/lang/core/ir/control_instruction.h"
 #include "src/tint/lang/core/ir/core_builtin_call.h"
@@ -69,22 +70,22 @@ struct State {
         RegisterModuleScopeDecls();
 
         // Process the types
-        for (auto* ty : ir.Types()) {
+        for (auto* ty : ir->Types()) {
             EnsureResolvable(ty);
         }
 
         // Process the module-scope variable declarations
-        for (auto* inst : *ir.root_block) {
+        for (auto* inst : *ir->root_block) {
             Process(inst);
         }
 
         // Process the functions
-        for (core::ir::Function* fn : ir.functions) {
+        for (core::ir::Function* fn : ir->functions) {
             scopes.Push(Scope{});
             TINT_DEFER(scopes.Pop());
             for (auto* param : fn->Params()) {
                 EnsureResolvable(param->Type());
-                if (auto symbol = ir.NameOf(param); symbol.IsValid()) {
+                if (auto symbol = ir->NameOf(param); symbol.IsValid()) {
                     Declare(scopes.Back(), param, symbol.NameView());
                 }
             }
@@ -98,7 +99,7 @@ struct State {
     using Scope = Hashmap<std::string_view, CastableBase*, 8>;
 
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// Stack of scopes
     Vector<Scope, 8> scopes{};
@@ -107,7 +108,7 @@ struct State {
     /// Duplicate declarations with the same name will renamed.
     void RegisterModuleScopeDecls() {
         // Declare all the user types
-        for (auto* ty : ir.Types()) {
+        for (auto* ty : ir->Types()) {
             if (auto* str = ty->As<core::type::Struct>()) {
                 auto name = str->Name().NameView();
                 if (!IsBuiltinStruct(str)) {
@@ -117,17 +118,17 @@ struct State {
         }
 
         // Declare all the module-scope vars
-        for (auto* inst : *ir.root_block) {
+        for (auto* inst : *ir->root_block) {
             for (auto* result : inst->Results()) {
-                if (auto symbol = ir.NameOf(result)) {
+                if (auto symbol = ir->NameOf(result)) {
                     Declare(scopes.Front(), result, symbol.NameView());
                 }
             }
         }
 
         // Declare all the functions
-        for (core::ir::Function* fn : ir.functions) {
-            if (auto symbol = ir.NameOf(fn); symbol.IsValid()) {
+        for (core::ir::Function* fn : ir->functions) {
+            if (auto symbol = ir->NameOf(fn); symbol.IsValid()) {
                 Declare(scopes.Back(), fn, symbol.NameView());
             }
         }
@@ -147,7 +148,7 @@ struct State {
         for (auto* operand : inst->Operands()) {
             if (operand) {
                 // Ensure that named operands can be resolved.
-                if (auto symbol = ir.NameOf(operand)) {
+                if (auto symbol = ir->NameOf(operand)) {
                     EnsureResolvesTo(symbol.NameView(), operand);
                 }
                 // If the operand is a constant, then ensure that type name can be resolved.
@@ -200,7 +201,7 @@ struct State {
 
         // Register new operands and check their types can resolve
         for (auto* result : inst->Results()) {
-            if (auto symbol = ir.NameOf(result); symbol.IsValid()) {
+            if (auto symbol = ir->NameOf(result); symbol.IsValid()) {
                 Declare(scopes.Back(), result, symbol.NameView());
             }
         }
@@ -262,7 +263,7 @@ struct State {
     /// renamed.
     void Declare(Scope& scope, CastableBase* thing, std::string_view name) {
         auto add = scope.Add(name, thing);
-        if (!add && add.value != thing) {
+        if (!add && *add.value != thing) {
             // Multiple declarations with the same name in the same scope.
             // Rename the later declaration.
             Rename(thing, name);
@@ -271,10 +272,10 @@ struct State {
 
     /// Rename changes the name of @p thing with the old name of @p old_name
     void Rename(CastableBase* thing, std::string_view old_name) {
-        Symbol new_name = ir.symbols.New(old_name);
+        Symbol new_name = ir->symbols.New(old_name);
         Switch(
             thing,  //
-            [&](core::ir::Value* value) { ir.SetName(value, new_name); },
+            [&](core::ir::Value* value) { ir->SetName(value, new_name); },
             [&](core::type::Struct* str) { str->SetName(new_name); },  //
             TINT_ICE_ON_NO_MATCH);
     }

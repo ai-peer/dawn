@@ -50,7 +50,7 @@ ReturnStatement::~ReturnStatement() = default;
 const ReturnStatement* ReturnStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* ret = ctx.Clone(value);
+    auto* ret = ctx.Clone(value.get());
     return ctx.dst->create<ReturnStatement>(src, ret);
 }
 

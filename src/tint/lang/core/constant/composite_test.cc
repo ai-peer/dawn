@@ -104,7 +104,8 @@ TEST_F(ConstantTest_Composite, Clone) {
     auto* composite = constants.Composite(vec2f, Vector{fPos1, fPos0});
 
     constant::Manager mgr;
-    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}}, mgr};
+    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}},
+                               raw_ref(mgr)};
 
     auto* r = composite->As<Composite>()->Clone(ctx);
     ASSERT_NE(r, nullptr);

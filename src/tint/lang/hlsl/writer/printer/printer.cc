@@ -37,6 +37,8 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/builtin_value.h"
@@ -150,16 +152,16 @@ class Printer : public tint::TextGenerator {
 
     /// @returns the generated HLSL shader
     tint::Result<PrintResult> Generate() {
-        auto valid = core::ir::ValidateAndDumpIfNeeded(ir_, "HLSL writer");
+        auto valid = core::ir::ValidateAndDumpIfNeeded(*ir_, "HLSL writer");
         if (valid != Success) {
             return std::move(valid.Failure());
         }
 
         // Emit module-scope declarations.
-        EmitRootBlock(ir_.root_block);
+        EmitRootBlock(ir_->root_block);
 
         // Emit functions.
-        for (auto* func : ir_.DependencyOrderedFunctions()) {
+        for (auto* func : ir_->DependencyOrderedFunctions()) {
             EmitFunction(func);
         }
 
@@ -174,7 +176,7 @@ class Printer : public tint::TextGenerator {
     /// The result of printing the module.
     PrintResult result_;
 
-    core::ir::Module& ir_;
+    const raw_ref<core::ir::Module> ir_;
 
     /// The buffer holding preamble text
     TextBuffer preamble_buffer_;
@@ -187,9 +189,9 @@ class Printer : public tint::TextGenerator {
     std::unordered_set<const core::type::Struct*> emitted_structs_;
 
     /// The current function being emitted
-    const core::ir::Function* current_function_ = nullptr;
+    raw_ptr<const core::ir::Function> current_function_ = nullptr;
     /// The current block being emitted
-    const core::ir::Block* current_block_ = nullptr;
+    raw_ptr<const core::ir::Block> current_block_ = nullptr;
 
     /// Block to emit for a continuing
     std::function<void()> emit_continuing_;
@@ -578,7 +580,7 @@ class Printer : public tint::TextGenerator {
     /// @param out the stream to emit too
     /// @param ty the type
     void EmitZeroValue(StringStream& out, const core::type::Type* ty) {
-        EmitConstant(out, ir_.constant_values.Zero(ty));
+        EmitConstant(out, ir_->constant_values.Zero(ty));
     }
 
     void EmitLet(const core::ir::Let* l) {
@@ -1579,7 +1581,7 @@ class Printer : public tint::TextGenerator {
     /// the module.
     std::string NameOf(const core::ir::Value* value) {
         return names_.GetOrAdd(value, [&] {
-            auto sym = ir_.NameOf(value);
+            auto sym = ir_->NameOf(value);
             return sym.IsValid() ? sym.Name() : UniqueIdentifier("v");
         });
     }
@@ -1588,7 +1590,7 @@ class Printer : public tint::TextGenerator {
     /// @param prefix optional prefix to apply to the generated identifier. If empty
     /// "tint_symbol" will be used.
     std::string UniqueIdentifier(const std::string& prefix /* = "" */) {
-        return ir_.symbols.New(prefix).Name();
+        return ir_->symbols.New(prefix).Name();
     }
 
     std::string StructName(const core::type::Struct* s) {

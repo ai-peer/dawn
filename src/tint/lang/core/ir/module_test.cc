@@ -42,28 +42,28 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_ModuleTest = IRTestHelper;
 
 TEST_F(IR_ModuleTest, NameOfUnnamed) {
-    auto* v = b.Var(ty.ptr<function, i32>());
+    auto* v = b.Var(ty->ptr<function, i32>());
     EXPECT_FALSE(mod.NameOf(v).IsValid());
 }
 
 TEST_F(IR_ModuleTest, SetName) {
-    auto* v = b.Var(ty.ptr<function, i32>());
+    auto* v = b.Var(ty->ptr<function, i32>());
     mod.SetName(v, "a");
     EXPECT_EQ(mod.NameOf(v).Name(), "a");
 }
 
 TEST_F(IR_ModuleTest, SetNameRename) {
-    auto* v = b.Var(ty.ptr<function, i32>());
+    auto* v = b.Var(ty->ptr<function, i32>());
     mod.SetName(v, "a");
     mod.SetName(v, "b");
     EXPECT_EQ(mod.NameOf(v).Name(), "b");
 }
 
 TEST_F(IR_ModuleTest, DependencyOrderedFunctions) {
-    auto* fa = b.Function("a", ty.void_());
-    auto* fb = b.Function("b", ty.void_());
-    auto* fc = b.Function("c", ty.void_());
-    auto* fd = b.Function("d", ty.void_());
+    auto* fa = b.Function("a", ty->void_());
+    auto* fb = b.Function("b", ty->void_());
+    auto* fc = b.Function("c", ty->void_());
+    auto* fd = b.Function("d", ty->void_());
     b.Append(fa->Block(), [&] {  //
         auto* ifelse = b.If(true);
         b.Append(ifelse->True(), [&] {

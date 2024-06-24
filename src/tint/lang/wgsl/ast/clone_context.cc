@@ -57,7 +57,7 @@ ast::FunctionList CloneContext::Clone(const ast::FunctionList& v) {
 }
 
 ast::Type CloneContext::Clone(const ast::Type& ty) {
-    return {Clone(ty.expr)};
+    return {Clone(ty.expr.get())};
 }
 
 const ast::Node* CloneContext::CloneNode(const ast::Node* node) {

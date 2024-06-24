@@ -72,7 +72,7 @@ inline bool MatchSampledImage(core::intrinsic::MatchState&,
 inline const core::type::Type* BuildSampledImage(core::intrinsic::MatchState& state,
                                                  const core::type::Type*,
                                                  const core::type::Type* T) {
-    return state.types.Get<type::SampledImage>(T);
+    return state.types->Get<type::SampledImage>(T);
 }
 
 }  // namespace tint::spirv::intrinsic

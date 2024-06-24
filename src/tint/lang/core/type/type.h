@@ -31,6 +31,7 @@
 #include <functional>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/clone_context.h"
 #include "src/tint/lang/core/type/unique_node.h"
 #include "src/tint/utils/containers/enum_set.h"
@@ -66,7 +67,7 @@ using Flags = tint::EnumSet<Flag>;
 /// TypeAndCount holds a type and count
 struct TypeAndCount {
     /// The type
-    const Type* type = nullptr;
+    raw_ptr<const Type> type = nullptr;
     /// The count
     uint32_t count = 0;
 };

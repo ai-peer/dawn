@@ -31,6 +31,8 @@
 #include <memory>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/type/manager.h"
 
@@ -100,16 +102,16 @@ struct ShaderIOBackendState {
 
   protected:
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The original entry point function.
-    Function* func = nullptr;
+    raw_ptr<Function> func = nullptr;
 
     /// The list of shader inputs.
     Vector<core::type::Manager::StructMemberDesc, 4> inputs;

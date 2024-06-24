@@ -34,7 +34,7 @@ namespace tint::msl::writer {
 namespace {
 
 TEST_F(MslWriterTest, Function_Empty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->Block()->Append(b.Return(func));
 
     ASSERT_TRUE(Generate()) << err_ << output_.msl;
@@ -45,14 +45,14 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EntryPointParameterBufferBindingPoint) {
-    auto* storage = b.Var("storage_var", ty.ptr(core::AddressSpace::kStorage, ty.i32()));
-    auto* uniform = b.Var("uniform_var", ty.ptr(core::AddressSpace::kUniform, ty.i32()));
+    auto* storage = b.Var("storage_var", ty->ptr(core::AddressSpace::kStorage, ty->i32()));
+    auto* uniform = b.Var("uniform_var", ty->ptr(core::AddressSpace::kUniform, ty->i32()));
     storage->SetBindingPoint(0, 1);
     uniform->SetBindingPoint(0, 2);
     mod.root_block->Append(storage);
     mod.root_block->Append(uniform);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         b.Load(storage);
         b.Load(uniform);
@@ -73,15 +73,15 @@ fragment void foo(device int* storage_var [[buffer(1)]], const constant int* uni
 }
 
 TEST_F(MslWriterTest, EntryPointParameterHandleBindingPoint) {
-    auto* t = ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
-    auto* texture = b.Var("texture", ty.ptr<handle>(t));
-    auto* sampler = b.Var("sampler", ty.ptr<handle>(ty.sampler()));
+    auto* t = ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
+    auto* texture = b.Var("texture", ty->ptr<handle>(t));
+    auto* sampler = b.Var("sampler", ty->ptr<handle>(ty->sampler()));
     texture->SetBindingPoint(0, 1);
     sampler->SetBindingPoint(0, 2);
     mod.root_block->Append(texture);
     mod.root_block->Append(sampler);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         b.Load(texture);
         b.Load(sampler);

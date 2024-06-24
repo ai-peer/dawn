@@ -71,8 +71,8 @@ TEST_F(ForStmtTest, InitializerStatementDecl) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer));
-    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable;
+    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer.get()));
+    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable.get();
     EXPECT_TRUE(var->Is<ast::Var>());
     EXPECT_EQ(var->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
@@ -89,8 +89,8 @@ TEST_F(ForStmtTest, InitializerStatementDeclEqual) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer));
-    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable;
+    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer.get()));
+    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable.get();
     EXPECT_TRUE(var->Is<ast::Var>());
     EXPECT_NE(var->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
@@ -106,8 +106,8 @@ TEST_F(ForStmtTest, InitializerStatementConstDecl) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer));
-    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable;
+    ASSERT_TRUE(Is<ast::VariableDeclStatement>(fl->initializer.get()));
+    auto* var = fl->initializer->As<ast::VariableDeclStatement>()->variable.get();
     EXPECT_TRUE(var->Is<ast::Let>());
     EXPECT_NE(var->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
@@ -123,7 +123,7 @@ TEST_F(ForStmtTest, InitializerStatementAssignment) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    EXPECT_TRUE(Is<ast::AssignmentStatement>(fl->initializer));
+    EXPECT_TRUE(Is<ast::AssignmentStatement>(fl->initializer.get()));
     EXPECT_EQ(fl->condition, nullptr);
     EXPECT_EQ(fl->continuing, nullptr);
     EXPECT_TRUE(fl->body->Empty());
@@ -137,7 +137,7 @@ TEST_F(ForStmtTest, InitializerStatementIncrement) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    EXPECT_TRUE(Is<ast::IncrementDecrementStatement>(fl->initializer));
+    EXPECT_TRUE(Is<ast::IncrementDecrementStatement>(fl->initializer.get()));
     EXPECT_EQ(fl->condition, nullptr);
     EXPECT_EQ(fl->continuing, nullptr);
     EXPECT_TRUE(fl->body->Empty());
@@ -151,7 +151,7 @@ TEST_F(ForStmtTest, InitializerStatementFuncCall) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
-    EXPECT_TRUE(Is<ast::CallStatement>(fl->initializer));
+    EXPECT_TRUE(Is<ast::CallStatement>(fl->initializer.get()));
     EXPECT_EQ(fl->condition, nullptr);
     EXPECT_EQ(fl->continuing, nullptr);
     EXPECT_TRUE(fl->body->Empty());
@@ -166,7 +166,7 @@ TEST_F(ForStmtTest, BreakCondition) {
     EXPECT_FALSE(fl.errored);
     ASSERT_TRUE(fl.matched);
     EXPECT_EQ(fl->initializer, nullptr);
-    EXPECT_TRUE(Is<ast::BinaryExpression>(fl->condition));
+    EXPECT_TRUE(Is<ast::BinaryExpression>(fl->condition.get()));
     EXPECT_EQ(fl->continuing, nullptr);
     EXPECT_TRUE(fl->body->Empty());
 }
@@ -181,7 +181,7 @@ TEST_F(ForStmtTest, ContinuingAssignment) {
     ASSERT_TRUE(fl.matched);
     EXPECT_EQ(fl->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
-    EXPECT_TRUE(Is<ast::AssignmentStatement>(fl->continuing));
+    EXPECT_TRUE(Is<ast::AssignmentStatement>(fl->continuing.get()));
     EXPECT_TRUE(fl->body->Empty());
 }
 
@@ -195,7 +195,7 @@ TEST_F(ForStmtTest, ContinuingIncrement) {
     ASSERT_TRUE(fl.matched);
     EXPECT_EQ(fl->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
-    EXPECT_TRUE(Is<ast::IncrementDecrementStatement>(fl->continuing));
+    EXPECT_TRUE(Is<ast::IncrementDecrementStatement>(fl->continuing.get()));
     EXPECT_TRUE(fl->body->Empty());
 }
 
@@ -209,7 +209,7 @@ TEST_F(ForStmtTest, ContinuingFuncCall) {
     ASSERT_TRUE(fl.matched);
     EXPECT_EQ(fl->initializer, nullptr);
     EXPECT_EQ(fl->condition, nullptr);
-    EXPECT_TRUE(Is<ast::CallStatement>(fl->continuing));
+    EXPECT_TRUE(Is<ast::CallStatement>(fl->continuing.get()));
     EXPECT_TRUE(fl->body->Empty());
 }
 

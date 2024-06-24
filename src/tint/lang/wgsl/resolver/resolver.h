@@ -36,6 +36,8 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/lang/core/constant/eval.h"
 #include "src/tint/lang/core/constant/value.h"
@@ -110,10 +112,10 @@ class Resolver {
     ~Resolver();
 
     /// @returns error messages from the resolver
-    std::string error() const { return diagnostics_.Str(); }
+    std::string error() const { return diagnostics_->Str(); }
 
     /// @returns the list of diagnostics raised by the generator.
-    const diag::List& Diagnostics() const { return diagnostics_; }
+    const diag::List& Diagnostics() const { return *diagnostics_; }
 
     /// @returns true if the resolver was successful
     bool Resolve();
@@ -702,8 +704,8 @@ class Resolver {
         Hashset<const sem::Variable*, 4> parameter_reads;
     };
 
-    ProgramBuilder& b;
-    diag::List& diagnostics_;
+    const raw_ref<ProgramBuilder> b;
+    const raw_ref<diag::List> diagnostics_;
     core::constant::Eval const_eval_;
     core::intrinsic::Table<wgsl::intrinsic::Dialect> intrinsic_table_;
     DependencyGraph dependencies_;
@@ -719,9 +721,9 @@ class Resolver {
     Hashmap<OverrideId, const sem::Variable*, 8> override_ids_;
     Hashmap<ArrayConstructorSig, sem::CallTarget*, 8> array_ctors_;
     Hashmap<StructConstructorSig, sem::CallTarget*, 8> struct_ctors_;
-    sem::Function* current_function_ = nullptr;
-    sem::Statement* current_statement_ = nullptr;
-    sem::CompoundStatement* current_compound_statement_ = nullptr;
+    raw_ptr<sem::Function> current_function_ = nullptr;
+    raw_ptr<sem::Statement> current_statement_ = nullptr;
+    raw_ptr<sem::CompoundStatement> current_compound_statement_ = nullptr;
     Vector<std::function<void(const sem::GlobalVariable*)>, 4> on_transitively_reference_global_;
     uint32_t current_scoping_depth_ = 0;
     Hashset<TypeAndAddressSpace, 8> valid_type_storage_layouts_;

@@ -36,6 +36,8 @@
 #include <type_traits>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+
 #if TINT_BUILD_MSL_WRITER
 #include "src/tint/lang/msl/validate/validate.h"
 #endif
@@ -84,7 +86,7 @@ enum SourceLanguage : uint8_t {
 /// Stream is a serialization wrapper around a socket
 struct Stream {
     /// The underlying socket
-    tint::socket::Socket* const socket;
+    const raw_ptr<tint::socket::Socket> socket;
     /// Error state
     std::string error;
 

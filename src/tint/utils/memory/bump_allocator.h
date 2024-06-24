@@ -34,6 +34,7 @@
 #include <cstring>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/memory/bitcast.h"
@@ -46,7 +47,7 @@ class BumpAllocator {
     /// BlockHeader is linked list of memory blocks.
     /// Blocks are allocated out of heap memory.
     struct BlockHeader {
-        BlockHeader* next;
+        raw_ptr<BlockHeader> next;
     };
 
   public:
@@ -85,7 +86,7 @@ class BumpAllocator {
         }
         if (data.current_offset + size_in_bytes > data.current_data_size) {
             // Allocate a new block from the heap
-            auto* prev_block = data.current;
+            auto* prev_block = data.current.get();
             size_t data_size = std::max(size_in_bytes, kDefaultBlockDataSize);
             data.current = Bitcast<BlockHeader*>(new (std::nothrow)
                                                      std::byte[sizeof(BlockHeader) + data_size]);
@@ -111,9 +112,9 @@ class BumpAllocator {
 
     /// Frees all allocations from the allocator.
     void Reset() {
-        auto* block = data.root;
+        auto* block = data.root.get();
         while (block != nullptr) {
-            auto* next = block->next;
+            auto* next = block->next.get();
             delete[] Bitcast<std::byte*>(block);
             block = next;
         }
@@ -129,10 +130,10 @@ class BumpAllocator {
 
     struct {
         /// The root block of the block linked list
-        BlockHeader* root = nullptr;
+        raw_ptr<BlockHeader> root = nullptr;
         /// The current (end) block of the blocked linked list.
         /// New allocations come from this block
-        BlockHeader* current = nullptr;
+        raw_ptr<BlockHeader> current = nullptr;
         /// The byte offset in #current for the next allocation.
         size_t current_offset = 0;
         /// The size of the #current, excluding the header size

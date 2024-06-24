@@ -44,7 +44,7 @@ DiagnosticDirective::~DiagnosticDirective() = default;
 
 const DiagnosticDirective* DiagnosticDirective::Clone(CloneContext& ctx) const {
     auto src = ctx.Clone(source);
-    auto rule = ctx.Clone(control.rule_name);
+    auto rule = ctx.Clone(control.rule_name.get());
     DiagnosticControl dc(control.severity, rule);
     return ctx.dst->create<DiagnosticDirective>(src, std::move(dc));
 }

@@ -41,9 +41,9 @@ namespace tint::ast::transform {
 
 PushConstantHelper::PushConstantHelper(program::CloneContext& c) : ctx(c) {
     // Find first existing push_constant, if any.
-    for (auto* global : ctx.src->AST().GlobalVariables()) {
+    for (auto* global : ctx->src->AST().GlobalVariables()) {
         if (auto* var = global->As<ast::Var>()) {
-            auto* v = ctx.src->Sem().Get(var);
+            auto* v = ctx->src->Sem().Get(var);
             if (v->AddressSpace() == core::AddressSpace::kPushConstant) {
                 push_constants_var = var;
                 auto* str = v->Type()->UnwrapRef()->As<sem::Struct>();
@@ -53,7 +53,8 @@ PushConstantHelper::PushConstantHelper(program::CloneContext& c) : ctx(c) {
                 }
                 // Clone all members from the existing block and insert them into the map.
                 for (auto* member : str->Members()) {
-                    member_map[member->Offset()] = ctx.CloneWithoutTransform(member->Declaration());
+                    member_map[member->Offset()] =
+                        ctx->CloneWithoutTransform(member->Declaration());
                 }
                 break;
             }
@@ -64,9 +65,9 @@ PushConstantHelper::PushConstantHelper(program::CloneContext& c) : ctx(c) {
 void PushConstantHelper::InsertMember(const char* name, ast::Type type, uint32_t offset) {
     auto& member = member_map[offset];
     if (TINT_UNLIKELY(member != nullptr)) {
-        ctx.dst->Diagnostics().AddError(Source{}) << "struct member offset collision";
+        ctx->dst->Diagnostics().AddError(Source{}) << "struct member offset collision";
     }
-    member = ctx.dst->Member(name, type, Vector{ctx.dst->MemberOffset(core::AInt(offset))});
+    member = ctx->dst->Member(name, type, Vector{ctx->dst->MemberOffset(core::AInt(offset))});
 }
 
 Symbol PushConstantHelper::Run() {
@@ -75,30 +76,31 @@ Symbol PushConstantHelper::Run() {
         members.Push(i.second);
     }
 
-    new_struct = ctx.dst->Structure(ctx.dst->Symbols().New("PushConstants"), std::move(members));
+    new_struct = ctx->dst->Structure(ctx->dst->Symbols().New("PushConstants"), std::move(members));
 
     Symbol buffer_name;
 
     // If this is the first use of push constants, create a global to hold them.
     if (!push_constants_var) {
-        ctx.dst->Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
+        ctx->dst->Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
 
-        buffer_name = ctx.dst->Symbols().New("push_constants");
-        ctx.dst->GlobalVar(buffer_name, ctx.dst->ty.Of(new_struct),
-                           core::AddressSpace::kPushConstant);
+        buffer_name = ctx->dst->Symbols().New("push_constants");
+        ctx->dst->GlobalVar(buffer_name, ctx->dst->ty.Of(new_struct),
+                            core::AddressSpace::kPushConstant);
     } else {
-        buffer_name = ctx.Clone(push_constants_var->name->symbol);
+        buffer_name = ctx->Clone(push_constants_var->name->symbol);
 
         // Replace all variable users of the old struct with the new struct.
-        ctx.ReplaceAll([this](const ast::Variable* var) -> const ast::Variable* {
-            if (ctx.src->Sem().Get(var)->AddressSpace() == core::AddressSpace::kPushConstant) {
+        ctx->ReplaceAll([this](const ast::Variable* var) -> const ast::Variable* {
+            if (ctx->src->Sem().Get(var)->AddressSpace() == core::AddressSpace::kPushConstant) {
                 if (var->As<ast::Parameter>()) {
-                    return ctx.dst->Param(ctx.Clone(var->name->symbol), ctx.dst->ty.Of(new_struct),
-                                          ctx.Clone(var->attributes));
+                    return ctx->dst->Param(ctx->Clone(var->name->symbol),
+                                           ctx->dst->ty.Of(new_struct),
+                                           ctx->Clone(var->attributes));
                 } else {
-                    return ctx.dst->Var(ctx.Clone(var->name->symbol), ctx.dst->ty.Of(new_struct),
-                                        ctx.Clone(var->attributes),
-                                        core::AddressSpace::kPushConstant);
+                    return ctx->dst->Var(ctx->Clone(var->name->symbol), ctx->dst->ty.Of(new_struct),
+                                         ctx->Clone(var->attributes),
+                                         core::AddressSpace::kPushConstant);
                 }
             }
             return nullptr;

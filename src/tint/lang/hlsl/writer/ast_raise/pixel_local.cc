@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
@@ -55,15 +56,15 @@ namespace tint::hlsl::writer {
 /// PIMPL state for the transform
 struct PixelLocal::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The semantic information of the source program
-    const sem::Info& sem;
+    const raw_ref<const sem::Info> sem;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// The transform config
-    const Config& cfg;
+    const raw_ref<const Config> cfg;
 
     /// Constructor
     /// @param program the source program
@@ -76,7 +77,7 @@ struct PixelLocal::State {
     ApplyResult Run() {
         // If the pixel local extension isn't enabled, then there must be no use of pixel_local
         // variables, and so there's nothing for this transform to do.
-        if (!sem.Module()->Extensions().Contains(
+        if (!sem->Module()->Extensions().Contains(
                 wgsl::Extension::kChromiumExperimentalPixelLocal)) {
             return SkipTransform;
         }
@@ -86,11 +87,12 @@ struct PixelLocal::State {
         // Change all module scope `var<pixel_local>` variables to `var<private>`.
         // We need to do this even if the variable is not referenced by the entry point as later
         // stages do not understand the pixel_local address space.
-        for (auto* global : src.AST().GlobalVariables()) {
+        for (auto* global : src->AST().GlobalVariables()) {
             if (auto* var = global->As<ast::Var>()) {
-                if (sem.Get(var)->AddressSpace() == core::AddressSpace::kPixelLocal) {
+                if (sem->Get(var)->AddressSpace() == core::AddressSpace::kPixelLocal) {
                     // Change the 'var<pixel_local>' to 'var<private>'
-                    ctx.Replace(var->declared_address_space, b.Expr(core::AddressSpace::kPrivate));
+                    ctx.Replace(var->declared_address_space.get(),
+                                b.Expr(core::AddressSpace::kPrivate));
                     made_changes = true;
                 }
             }
@@ -98,13 +100,13 @@ struct PixelLocal::State {
 
         // Find the single entry point
         const sem::Function* entry_point = nullptr;
-        for (auto* fn : src.AST().Functions()) {
+        for (auto* fn : src->AST().Functions()) {
             if (fn->IsEntryPoint()) {
                 if (entry_point != nullptr) {
                     TINT_ICE() << "PixelLocal transform requires that the SingleEntryPoint "
                                   "transform has already been run";
                 }
-                entry_point = sem.Get(fn);
+                entry_point = sem->Get(fn);
 
                 // Look for a `var<pixel_local>` used by the entry point...
                 const tint::sem::GlobalVariable* pixel_local_variable = nullptr;
@@ -159,7 +161,7 @@ struct PixelLocal::State {
                    ast::GetAttribute<ast::StageAttribute>(original_entry_point_fn->attributes));
         // Rename the entry point.
         auto inner_function_name = b.Symbols().New(entry_point_name + "_inner");
-        ctx.Replace(original_entry_point_fn->name, b.Ident(inner_function_name));
+        ctx.Replace(original_entry_point_fn->name.get(), b.Ident(inner_function_name));
 
         // Create a new function that wraps the entry point.
         // This function has all the existing entry point parameters and an additional
@@ -334,7 +336,7 @@ struct PixelLocal::State {
             auto rov_symbol_name = b.Symbols().New("pixel_local_" + member->Name().Name());
             b.GlobalVar(rov_symbol_name, rov_type,
                         tint::Vector{b.Binding(AInt(ROVRegisterIndex(member->Index()))),
-                                     b.Group(AInt(cfg.rov_group_index)), RasterizerOrderedView()});
+                                     b.Group(AInt(cfg->rov_group_index)), RasterizerOrderedView()});
 
             // The function body of loading from PLS
             // PLS_Private_Variable.member = textureLoad(pixel_local_member, rov_texcoord).x;
@@ -441,7 +443,7 @@ struct PixelLocal::State {
             // 2. `@builtin(position)` is declared as an individual input parameter
             if (auto* attribute = ast::GetAttribute<ast::BuiltinAttribute>(
                     parameter->Declaration()->attributes)) {
-                auto builtin = sem.Get(attribute)->Value();
+                auto builtin = sem->Get(attribute)->Value();
                 if (builtin == core::BuiltinValue::kPosition) {
                     return b.Decl(
                         b.Let(variable_with_position_symbol, b.Expr(new_entry_point_params[i])));
@@ -464,7 +466,7 @@ struct PixelLocal::State {
     /// @returns the register index for the pixel local field with the given index
     /// @param field_index the pixel local field index
     uint32_t ROVRegisterIndex(uint32_t field_index) {
-        auto idx = cfg.pls_member_to_rov_reg.Get(field_index);
+        auto idx = cfg->pls_member_to_rov_reg.Get(field_index);
         if (TINT_UNLIKELY(!idx)) {
             b.Diagnostics().AddError(Source{})
                 << "PixelLocal::Config::attachments missing entry for field " << field_index;
@@ -476,7 +478,7 @@ struct PixelLocal::State {
     /// @returns the texel format for the pixel local field with the given index
     /// @param field_index the pixel local field index
     Result<core::TexelFormat> ROVTexelFormat(uint32_t field_index) {
-        auto format = cfg.pls_member_to_rov_format.Get(field_index);
+        auto format = cfg->pls_member_to_rov_format.Get(field_index);
         if (TINT_UNLIKELY(!format)) {
             diag::Diagnostic err;
             err.severity = diag::Severity::Error;

@@ -605,7 +605,7 @@ void ASTPrinter::EmitVectorRelational(StringStream& out, const ast::BinaryExpres
 }
 
 void ASTPrinter::EmitBitwiseBoolOp(StringStream& out, const ast::BinaryExpression* expr) {
-    auto* bool_type = TypeOf(expr->lhs)->UnwrapRef();
+    auto* bool_type = TypeOf(expr->lhs.get())->UnwrapRef();
     auto* uint_type = BoolTypeToUint(bool_type);
 
     // Cast result to bool scalar or vector type.
@@ -639,8 +639,8 @@ void ASTPrinter::EmitBitwiseBoolOp(StringStream& out, const ast::BinaryExpressio
 void ASTPrinter::EmitFloatModulo(StringStream& out, const ast::BinaryExpression* expr) {
     std::string fn;
     auto* ret_ty = TypeOf(expr)->UnwrapRef();
-    auto* lhs_ty = TypeOf(expr->lhs)->UnwrapRef();
-    auto* rhs_ty = TypeOf(expr->rhs)->UnwrapRef();
+    auto* lhs_ty = TypeOf(expr->lhs.get())->UnwrapRef();
+    auto* rhs_ty = TypeOf(expr->rhs.get())->UnwrapRef();
     fn = tint::GetOrAdd(float_modulo_funcs_, BinaryOperandType{{lhs_ty, rhs_ty}},
                         [&]() -> std::string {
                             TextBuffer b;
@@ -654,11 +654,11 @@ void ASTPrinter::EmitFloatModulo(StringStream& out, const ast::BinaryExpression*
                                                 core::Access::kUndefined, fn_name);
                                 {
                                     ScopedParen sp(decl);
-                                    const auto* ty = TypeOf(expr->lhs)->UnwrapRef();
+                                    const auto* ty = TypeOf(expr->lhs.get())->UnwrapRef();
                                     EmitTypeAndName(decl, ty, core::AddressSpace::kUndefined,
                                                     core::Access::kUndefined, "lhs");
                                     decl << ", ";
-                                    ty = TypeOf(expr->rhs)->UnwrapRef();
+                                    ty = TypeOf(expr->rhs.get())->UnwrapRef();
                                     EmitTypeAndName(decl, ty, core::AddressSpace::kUndefined,
                                                     core::Access::kUndefined, "rhs");
                                 }
@@ -684,7 +684,7 @@ void ASTPrinter::EmitFloatModulo(StringStream& out, const ast::BinaryExpression*
 }
 
 void ASTPrinter::EmitBinary(StringStream& out, const ast::BinaryExpression* expr) {
-    if (IsRelational(expr->op) && !TypeOf(expr->lhs)->UnwrapRef()->Is<core::type::Scalar>()) {
+    if (IsRelational(expr->op) && !TypeOf(expr->lhs.get())->UnwrapRef()->Is<core::type::Scalar>()) {
         EmitVectorRelational(out, expr);
         return;
     }
@@ -720,14 +720,14 @@ void ASTPrinter::EmitBinary(StringStream& out, const ast::BinaryExpression* expr
     }
 
     if ((expr->op == core::BinaryOp::kAnd || expr->op == core::BinaryOp::kOr) &&
-        TypeOf(expr->lhs)->UnwrapRef()->is_bool_scalar_or_vector()) {
+        TypeOf(expr->lhs.get())->UnwrapRef()->is_bool_scalar_or_vector()) {
         EmitBitwiseBoolOp(out, expr);
         return;
     }
 
     if (expr->op == core::BinaryOp::kModulo &&
-        (TypeOf(expr->lhs)->UnwrapRef()->is_float_scalar_or_vector() ||
-         TypeOf(expr->rhs)->UnwrapRef()->is_float_scalar_or_vector())) {
+        (TypeOf(expr->lhs.get())->UnwrapRef()->is_float_scalar_or_vector() ||
+         TypeOf(expr->rhs.get())->UnwrapRef()->is_float_scalar_or_vector())) {
         EmitFloatModulo(out, expr);
         return;
     }
@@ -839,7 +839,7 @@ void ASTPrinter::EmitFunctionCall(StringStream& out,
                                   const sem::Call* call,
                                   const sem::Function* fn) {
     const auto& args = call->Arguments();
-    auto* ident = fn->Declaration()->name;
+    auto* ident = fn->Declaration()->name.get();
 
     out << ident->symbol.Name();
     ScopedParen sp(out);
@@ -2055,7 +2055,7 @@ void ASTPrinter::EmitPrivateVariable(const sem::Variable* var) {
     EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name);
 
     out << " = ";
-    if (auto* initializer = decl->initializer) {
+    if (auto* initializer = decl->initializer.get()) {
         EmitExpression(out, initializer);
     } else {
         EmitZeroValue(out, var->Type()->UnwrapRef());
@@ -2073,7 +2073,7 @@ void ASTPrinter::EmitWorkgroupVariable(const sem::Variable* var) {
     auto* type = var->Type()->UnwrapRef();
     EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name);
 
-    if (auto* initializer = decl->initializer) {
+    if (auto* initializer = decl->initializer.get()) {
         out << " = ";
         EmitExpression(out, initializer);
     }
@@ -2102,7 +2102,7 @@ void ASTPrinter::EmitIOVariable(const sem::GlobalVariable* var) {
     auto* type = var->Type()->UnwrapRef();
     EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name);
 
-    if (auto* initializer = decl->initializer) {
+    if (auto* initializer = decl->initializer.get()) {
         out << " = ";
         EmitExpression(out, initializer);
     }
@@ -2126,9 +2126,9 @@ void ASTPrinter::EmitInterpolationQualifiers(StringStream& out,
     for (auto* attr : attributes) {
         if (auto* interpolate = attr->As<ast::InterpolateAttribute>()) {
             auto& sem = builder_.Sem();
-            auto i_type =
-                sem.Get<sem::BuiltinEnumExpression<core::InterpolationType>>(interpolate->type)
-                    ->Value();
+            auto i_type = sem.Get<sem::BuiltinEnumExpression<core::InterpolationType>>(
+                                 interpolate->type.get())
+                              ->Value();
             switch (i_type) {
                 case core::InterpolationType::kPerspective:
                 case core::InterpolationType::kLinear:
@@ -2141,7 +2141,7 @@ void ASTPrinter::EmitInterpolationQualifiers(StringStream& out,
 
             if (interpolate->sampling) {
                 auto i_smpl = sem.Get<sem::BuiltinEnumExpression<core::InterpolationSampling>>(
-                                     interpolate->sampling)
+                                     interpolate->sampling.get())
                                   ->Value();
                 switch (i_smpl) {
                     case core::InterpolationSampling::kCentroid:
@@ -2443,20 +2443,20 @@ void ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     });
 
     TextBuffer init_buf;
-    if (auto* init = stmt->initializer) {
+    if (auto* init = stmt->initializer.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &init_buf);
         EmitStatement(init);
     }
 
     TextBuffer cond_pre;
     StringStream cond_buf;
-    if (auto* cond = stmt->condition) {
+    if (auto* cond = stmt->condition.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         EmitExpression(cond_buf, cond);
     }
 
     TextBuffer cont_buf;
-    if (auto* cont = stmt->continuing) {
+    if (auto* cont = stmt->continuing.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cont_buf);
         EmitStatement(cont);
     }
@@ -2527,7 +2527,7 @@ void ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     TextBuffer cond_pre;
     StringStream cond_buf;
     {
-        auto* cond = stmt->condition;
+        auto* cond = stmt->condition.get();
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         EmitExpression(cond_buf, cond);
     }
@@ -2617,7 +2617,7 @@ void ASTPrinter::EmitStatement(const ast::Statement* stmt) {
         [&](const ast::SwitchStatement* s) { EmitSwitch(s); },
         [&](const ast::VariableDeclStatement* v) {
             Switch(
-                v->variable,  //
+                v->variable.get(),  //
                 [&](const ast::Var* var) { EmitVar(var); },
                 [&](const ast::Let* let) { EmitLet(let); },
                 [&](const ast::Const*) {

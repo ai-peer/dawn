@@ -1298,7 +1298,7 @@ Transform::ApplyResult Renamer::Apply(const Program& src,
                 auto* sem = src.Sem().Get(accessor)->Unwrap();
                 if (sem->Is<sem::Swizzle>()) {
                     preserved_identifiers.Add(accessor->member);
-                } else if (auto* str_expr = src.Sem().GetVal(accessor->object)) {
+                } else if (auto* str_expr = src.Sem().GetVal(accessor->object.get())) {
                     if (auto* ty = str_expr->Type()->UnwrapPtrOrRef()->As<core::type::Struct>()) {
                         if (!ty->Is<sem::Struct>()) {  // Builtin structure
                             preserved_identifiers.Add(accessor->member);
@@ -1307,13 +1307,13 @@ Transform::ApplyResult Renamer::Apply(const Program& src,
                 }
             },
             [&](const DiagnosticAttribute* diagnostic) {
-                if (auto* category = diagnostic->control.rule_name->category) {
+                if (auto* category = diagnostic->control.rule_name->category.get()) {
                     preserved_identifiers.Add(category);
                 }
                 preserved_identifiers.Add(diagnostic->control.rule_name->name);
             },
             [&](const DiagnosticDirective* diagnostic) {
-                if (auto* category = diagnostic->control.rule_name->category) {
+                if (auto* category = diagnostic->control.rule_name->category.get()) {
                     preserved_identifiers.Add(category);
                 }
                 preserved_identifiers.Add(diagnostic->control.rule_name->name);

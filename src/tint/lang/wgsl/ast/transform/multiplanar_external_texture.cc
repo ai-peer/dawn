@@ -30,6 +30,8 @@
 #include <string>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/wgsl/ast/function.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
@@ -65,14 +67,14 @@ struct NewBindingSymbols {
 /// PIMPL state for the transform
 struct MultiplanarExternalTexture::State {
     /// The clone context.
-    program::CloneContext& ctx;
+    const raw_ref<program::CloneContext> ctx;
 
     /// Alias to `*ctx.dst`
-    ast::Builder& b;
+    const raw_ref<ast::Builder> b;
 
     /// Destination binding locations for the expanded texture_external provided
     /// as input into the transform.
-    const NewBindingPoints* new_binding_points;
+    raw_ptr<const NewBindingPoints> new_binding_points;
 
     /// Symbol for the GammaTransferParams
     Symbol gamma_transfer_struct_sym;
@@ -105,12 +107,12 @@ struct MultiplanarExternalTexture::State {
 
     /// Processes the module
     void Process() {
-        auto& sem = ctx.src->Sem();
+        auto& sem = ctx->src->Sem();
 
         // For each texture_external binding, we replace it with a texture_2d<f32> binding and
         // create two additional bindings (one texture_2d<f32> to represent the secondary plane and
         // one uniform buffer for the ExternalTextureParams struct).
-        for (auto* global : ctx.src->AST().GlobalVariables()) {
+        for (auto* global : ctx->src->AST().GlobalVariables()) {
             auto* sem_var = sem.Get<sem::GlobalVariable>(global);
             if (!sem_var->Type()->UnwrapRef()->Is<core::type::ExternalTexture>()) {
                 continue;
@@ -136,7 +138,7 @@ struct MultiplanarExternalTexture::State {
             const tint::transform::multiplanar::BindingsMap::const_iterator it =
                 new_binding_points->bindings_map.find(bp);
             if (it == new_binding_points->bindings_map.end()) {
-                b.Diagnostics().AddError(Source{})
+                b->Diagnostics().AddError(Source{})
                     << "missing new binding points for texture_external at binding {" << bp.group
                     << "," << bp.binding << "}";
                 continue;
@@ -149,48 +151,50 @@ struct MultiplanarExternalTexture::State {
             // with the texture_external binding that corresponds with the new destination bindings.
             // NewBindingSymbols new_binding_syms;
             auto& syms = new_binding_symbols[sem_var];
-            syms.plane_0 = ctx.Clone(global->name->symbol);
-            syms.plane_1 = b.Symbols().New("ext_tex_plane_1");
+            syms.plane_0 = ctx->Clone(global->name->symbol);
+            syms.plane_1 = b->Symbols().New("ext_tex_plane_1");
             if (new_binding_points->allow_collisions) {
-                b.GlobalVar(syms.plane_1,
-                            b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32()),
-                            b.Disable(DisabledValidation::kBindingPointCollision),
-                            b.Group(AInt(bps.plane_1.group)), b.Binding(AInt(bps.plane_1.binding)));
+                b->GlobalVar(syms.plane_1,
+                             b->ty.sampled_texture(core::type::TextureDimension::k2d, b->ty.f32()),
+                             b->Disable(DisabledValidation::kBindingPointCollision),
+                             b->Group(AInt(bps.plane_1.group)),
+                             b->Binding(AInt(bps.plane_1.binding)));
             } else {
-                b.GlobalVar(syms.plane_1,
-                            b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32()),
-                            b.Group(AInt(bps.plane_1.group)), b.Binding(AInt(bps.plane_1.binding)));
+                b->GlobalVar(syms.plane_1,
+                             b->ty.sampled_texture(core::type::TextureDimension::k2d, b->ty.f32()),
+                             b->Group(AInt(bps.plane_1.group)),
+                             b->Binding(AInt(bps.plane_1.binding)));
             }
-            syms.params = b.Symbols().New("ext_tex_params");
+            syms.params = b->Symbols().New("ext_tex_params");
             if (new_binding_points->allow_collisions) {
-                b.GlobalVar(syms.params, b.ty("ExternalTextureParams"),
-                            core::AddressSpace::kUniform,
-                            b.Disable(DisabledValidation::kBindingPointCollision),
-                            b.Group(AInt(bps.params.group)), b.Binding(AInt(bps.params.binding)));
+                b->GlobalVar(
+                    syms.params, b->ty("ExternalTextureParams"), core::AddressSpace::kUniform,
+                    b->Disable(DisabledValidation::kBindingPointCollision),
+                    b->Group(AInt(bps.params.group)), b->Binding(AInt(bps.params.binding)));
             } else {
-                b.GlobalVar(syms.params, b.ty("ExternalTextureParams"),
-                            core::AddressSpace::kUniform, b.Group(AInt(bps.params.group)),
-                            b.Binding(AInt(bps.params.binding)));
+                b->GlobalVar(syms.params, b->ty("ExternalTextureParams"),
+                             core::AddressSpace::kUniform, b->Group(AInt(bps.params.group)),
+                             b->Binding(AInt(bps.params.binding)));
             }
 
             // Replace the original texture_external binding with a texture_2d<f32> binding.
-            auto cloned_attributes = ctx.Clone(global->attributes);
+            auto cloned_attributes = ctx->Clone(global->attributes);
 
             // Allow the originating binding to have collisions.
             if (new_binding_points->allow_collisions) {
-                cloned_attributes.Push(b.Disable(DisabledValidation::kBindingPointCollision));
+                cloned_attributes.Push(b->Disable(DisabledValidation::kBindingPointCollision));
             }
 
-            const Expression* cloned_initializer = ctx.Clone(global->initializer);
+            const Expression* cloned_initializer = ctx->Clone(global->initializer);
 
-            auto* replacement = b.Var(
-                syms.plane_0, b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32()),
+            auto* replacement = b->Var(
+                syms.plane_0, b->ty.sampled_texture(core::type::TextureDimension::k2d, b->ty.f32()),
                 cloned_initializer, cloned_attributes);
-            ctx.Replace(global, replacement);
+            ctx->Replace(global, replacement);
         }
 
         // We must update all the texture_external parameters for user declared functions.
-        for (auto* fn : ctx.src->AST().Functions()) {
+        for (auto* fn : ctx->src->AST().Functions()) {
             for (const Variable* param : fn->params) {
                 if (auto* sem_var = sem.Get(param)) {
                     if (!sem_var->Type()->UnwrapRef()->Is<core::type::ExternalTexture>()) {
@@ -206,23 +210,24 @@ struct MultiplanarExternalTexture::State {
                     // into the transform state so they can be used when transforming function
                     // calls.
                     auto& syms = new_binding_symbols[sem_var];
-                    syms.plane_0 = ctx.Clone(param->name->symbol);
-                    syms.plane_1 = b.Symbols().New("ext_tex_plane_1");
-                    syms.params = b.Symbols().New("ext_tex_params");
+                    syms.plane_0 = ctx->Clone(param->name->symbol);
+                    syms.plane_1 = b->Symbols().New("ext_tex_plane_1");
+                    syms.params = b->Symbols().New("ext_tex_params");
                     auto tex2d_f32 = [&] {
-                        return b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32());
+                        return b->ty.sampled_texture(core::type::TextureDimension::k2d,
+                                                     b->ty.f32());
                     };
-                    ctx.Replace(param, b.Param(syms.plane_0, tex2d_f32()));
-                    ctx.InsertAfter(fn->params, param, b.Param(syms.plane_1, tex2d_f32()));
-                    ctx.InsertAfter(fn->params, param,
-                                    b.Param(syms.params, b.ty(params_struct_sym)));
+                    ctx->Replace(param, b->Param(syms.plane_0, tex2d_f32()));
+                    ctx->InsertAfter(fn->params, param, b->Param(syms.plane_1, tex2d_f32()));
+                    ctx->InsertAfter(fn->params, param,
+                                     b->Param(syms.params, b->ty(params_struct_sym)));
                 }
             }
         }
 
         // Transform the external texture builtin calls into calls to the external texture
         // functions.
-        ctx.ReplaceAll([&](const CallExpression* expr) -> const Expression* {
+        ctx->ReplaceAll([&](const CallExpression* expr) -> const Expression* {
             auto* call = sem.Get(expr)->UnwrapMaterialize()->As<sem::Call>();
             auto* builtin = call->Target()->As<sem::BuiltinFn>();
 
@@ -264,9 +269,9 @@ struct MultiplanarExternalTexture::State {
                             auto& syms = it->second;
                             // When we find a texture_external, we must unpack it into its
                             // components.
-                            ctx.Replace(arg, b.Expr(syms.plane_0));
-                            ctx.InsertAfter(expr->args, arg, b.Expr(syms.plane_1));
-                            ctx.InsertAfter(expr->args, arg, b.Expr(syms.params));
+                            ctx->Replace(arg, b->Expr(syms.plane_0));
+                            ctx->InsertAfter(expr->args, arg, b->Expr(syms.plane_1));
+                            ctx->InsertAfter(expr->args, arg, b->Expr(syms.params));
                         }
                     }
                 }
@@ -280,70 +285,72 @@ struct MultiplanarExternalTexture::State {
     void createExtTexParamsStructs() {
         // Create GammaTransferParams struct.
         tint::Vector gamma_transfer_member_list{
-            b.Member("G", b.ty.f32()), b.Member("A", b.ty.f32()),      b.Member("B", b.ty.f32()),
-            b.Member("C", b.ty.f32()), b.Member("D", b.ty.f32()),      b.Member("E", b.ty.f32()),
-            b.Member("F", b.ty.f32()), b.Member("padding", b.ty.u32())};
+            b->Member("G", b->ty.f32()), b->Member("A", b->ty.f32()),
+            b->Member("B", b->ty.f32()), b->Member("C", b->ty.f32()),
+            b->Member("D", b->ty.f32()), b->Member("E", b->ty.f32()),
+            b->Member("F", b->ty.f32()), b->Member("padding", b->ty.u32())};
 
-        gamma_transfer_struct_sym = b.Symbols().New("GammaTransferParams");
+        gamma_transfer_struct_sym = b->Symbols().New("GammaTransferParams");
 
-        b.Structure(gamma_transfer_struct_sym, gamma_transfer_member_list);
+        b->Structure(gamma_transfer_struct_sym, gamma_transfer_member_list);
 
         // Create ExternalTextureParams struct.
         tint::Vector ext_tex_params_member_list{
-            b.Member("numPlanes", b.ty.u32()),
-            b.Member("doYuvToRgbConversionOnly", b.ty.u32()),
-            b.Member("yuvToRgbConversionMatrix", b.ty.mat3x4<f32>()),
-            b.Member("gammaDecodeParams", b.ty("GammaTransferParams")),
-            b.Member("gammaEncodeParams", b.ty("GammaTransferParams")),
-            b.Member("gamutConversionMatrix", b.ty.mat3x3<f32>()),
-            b.Member("sampleTransform", b.ty.mat3x2<f32>()),
-            b.Member("loadTransform", b.ty.mat3x2<f32>()),
-            b.Member("samplePlane0RectMin", b.ty.vec2<f32>()),
-            b.Member("samplePlane0RectMax", b.ty.vec2<f32>()),
-            b.Member("samplePlane1RectMin", b.ty.vec2<f32>()),
-            b.Member("samplePlane1RectMax", b.ty.vec2<f32>()),
-            b.Member("visibleSize", b.ty.vec2<u32>()),
-            b.Member("plane1CoordFactor", b.ty.vec2<f32>())};
+            b->Member("numPlanes", b->ty.u32()),
+            b->Member("doYuvToRgbConversionOnly", b->ty.u32()),
+            b->Member("yuvToRgbConversionMatrix", b->ty.mat3x4<f32>()),
+            b->Member("gammaDecodeParams", b->ty("GammaTransferParams")),
+            b->Member("gammaEncodeParams", b->ty("GammaTransferParams")),
+            b->Member("gamutConversionMatrix", b->ty.mat3x3<f32>()),
+            b->Member("sampleTransform", b->ty.mat3x2<f32>()),
+            b->Member("loadTransform", b->ty.mat3x2<f32>()),
+            b->Member("samplePlane0RectMin", b->ty.vec2<f32>()),
+            b->Member("samplePlane0RectMax", b->ty.vec2<f32>()),
+            b->Member("samplePlane1RectMin", b->ty.vec2<f32>()),
+            b->Member("samplePlane1RectMax", b->ty.vec2<f32>()),
+            b->Member("visibleSize", b->ty.vec2<u32>()),
+            b->Member("plane1CoordFactor", b->ty.vec2<f32>())};
 
-        params_struct_sym = b.Symbols().New("ExternalTextureParams");
+        params_struct_sym = b->Symbols().New("ExternalTextureParams");
 
-        b.Structure(params_struct_sym, ext_tex_params_member_list);
+        b->Structure(params_struct_sym, ext_tex_params_member_list);
     }
 
     /// Creates the gammaCorrection function if needed and returns a call
     /// expression to it.
     void createGammaCorrectionFn() {
-        gamma_correction_sym = b.Symbols().New("gammaCorrection");
+        gamma_correction_sym = b->Symbols().New("gammaCorrection");
 
-        b.Func(gamma_correction_sym,
-               tint::Vector{
-                   b.Param("v", b.ty.vec3<f32>()),
-                   b.Param("params", b.ty(gamma_transfer_struct_sym)),
-               },
-               b.ty.vec3<f32>(),
-               tint::Vector{
-                   // let cond = abs(v) < vec3(params.D);
-                   b.Decl(b.Let("cond",
-                                b.LessThan(b.Call("abs", "v"),
-                                           b.Call<vec3<f32>>(b.MemberAccessor("params", "D"))))),
-                   // let t = sign(v) * ((params.C * abs(v)) + params.F);
-                   b.Decl(b.Let(
-                       "t", b.Mul(b.Call("sign", "v"),
-                                  b.Add(b.Mul(b.MemberAccessor("params", "C"), b.Call("abs", "v")),
-                                        b.MemberAccessor("params", "F"))))),
-                   // let f = (sign(v) * pow(((params.A * abs(v)) + params.B),
-                   // vec3(params.G))) + params.E;
-                   b.Decl(b.Let(
-                       "f", b.Mul(b.Call("sign", "v"),
-                                  b.Add(b.Call("pow",
-                                               b.Add(b.Mul(b.MemberAccessor("params", "A"),
-                                                           b.Call("abs", "v")),
-                                                     b.MemberAccessor("params", "B")),
-                                               b.Call<vec3<f32>>(b.MemberAccessor("params", "G"))),
-                                        b.MemberAccessor("params", "E"))))),
-                   // return select(f, t, cond);
-                   b.Return(b.Call("select", "f", "t", "cond")),
-               });
+        b->Func(gamma_correction_sym,
+                tint::Vector{
+                    b->Param("v", b->ty.vec3<f32>()),
+                    b->Param("params", b->ty(gamma_transfer_struct_sym)),
+                },
+                b->ty.vec3<f32>(),
+                tint::Vector{
+                    // let cond = abs(v) < vec3(params.D);
+                    b->Decl(b->Let(
+                        "cond", b->LessThan(b->Call("abs", "v"),
+                                            b->Call<vec3<f32>>(b->MemberAccessor("params", "D"))))),
+                    // let t = sign(v) * ((params.C * abs(v)) + params.F);
+                    b->Decl(b->Let("t", b->Mul(b->Call("sign", "v"),
+                                               b->Add(b->Mul(b->MemberAccessor("params", "C"),
+                                                             b->Call("abs", "v")),
+                                                      b->MemberAccessor("params", "F"))))),
+                    // let f = (sign(v) * pow(((params.A * abs(v)) + params.B),
+                    // vec3(params.G))) + params.E;
+                    b->Decl(b->Let(
+                        "f",
+                        b->Mul(b->Call("sign", "v"),
+                               b->Add(b->Call("pow",
+                                              b->Add(b->Mul(b->MemberAccessor("params", "A"),
+                                                            b->Call("abs", "v")),
+                                                     b->MemberAccessor("params", "B")),
+                                              b->Call<vec3<f32>>(b->MemberAccessor("params", "G"))),
+                                      b->MemberAccessor("params", "E"))))),
+                    // return select(f, t, cond);
+                    b->Return(b->Call("select", "f", "t", "cond")),
+                });
     }
 
     /// Constructs a StatementList containing all the statements making up the body of the texture
@@ -356,109 +363,111 @@ struct MultiplanarExternalTexture::State {
         const BlockStatement* multi_plane_block = nullptr;
         switch (call_type) {
             case wgsl::BuiltinFn::kTextureSampleBaseClampToEdge:
-                stmts.Push(b.Decl(
-                    b.Let("modifiedCoords", b.Mul(b.MemberAccessor("params", "sampleTransform"),
-                                                  b.Call<vec3<f32>>("coord", 1_a)))));
+                stmts.Push(b->Decl(
+                    b->Let("modifiedCoords", b->Mul(b->MemberAccessor("params", "sampleTransform"),
+                                                    b->Call<vec3<f32>>("coord", 1_a)))));
 
-                stmts.Push(b.Decl(b.Let(
-                    "plane0_clamped", b.Call("clamp", "modifiedCoords",
-                                             b.MemberAccessor("params", "samplePlane0RectMin"),
-                                             b.MemberAccessor("params", "samplePlane0RectMax")))));
+                stmts.Push(
+                    b->Decl(b->Let("plane0_clamped",
+                                   b->Call("clamp", "modifiedCoords",
+                                           b->MemberAccessor("params", "samplePlane0RectMin"),
+                                           b->MemberAccessor("params", "samplePlane0RectMax")))));
 
                 // var color: vec4<f32>;
-                stmts.Push(b.Decl(b.Var("color", b.ty.vec4(b.ty.f32()))));
+                stmts.Push(b->Decl(b->Var("color", b->ty.vec4(b->ty.f32()))));
 
-                single_plane_block = b.Block(
-                    b.Assign("color", b.MemberAccessor(b.Call("textureSampleLevel", "plane0", "smp",
-                                                              "plane0_clamped", 0_a),
-                                                       "rgba")));
+                single_plane_block = b->Block(
+                    b->Assign("color", b->MemberAccessor(b->Call("textureSampleLevel", "plane0",
+                                                                 "smp", "plane0_clamped", 0_a),
+                                                         "rgba")));
 
-                multi_plane_block = b.Block(
-                    b.Decl(b.Let("plane1_clamped",
-                                 b.Call("clamp", "modifiedCoords",
-                                        b.MemberAccessor("params", "samplePlane1RectMin"),
-                                        b.MemberAccessor("params", "samplePlane1RectMax")))),
+                multi_plane_block = b->Block(
+                    b->Decl(b->Let("plane1_clamped",
+                                   b->Call("clamp", "modifiedCoords",
+                                           b->MemberAccessor("params", "samplePlane1RectMin"),
+                                           b->MemberAccessor("params", "samplePlane1RectMax")))),
 
-                    b.Assign("color",
-                             b.Call<vec4<f32>>(
-                                 b.Mul(b.Call<vec4<f32>>(
-                                           b.MemberAccessor(b.Call("textureSampleLevel", "plane0",
-                                                                   "smp", "plane0_clamped", 0_a),
-                                                            "r"),
-                                           b.MemberAccessor(b.Call("textureSampleLevel", "plane1",
-                                                                   "smp", "plane1_clamped", 0_a),
-                                                            "rg"),
-                                           1_a),
-                                       b.MemberAccessor("params", "yuvToRgbConversionMatrix")),
-                                 1_a)));
+                    b->Assign(
+                        "color",
+                        b->Call<vec4<f32>>(
+                            b->Mul(b->Call<vec4<f32>>(
+                                       b->MemberAccessor(b->Call("textureSampleLevel", "plane0",
+                                                                 "smp", "plane0_clamped", 0_a),
+                                                         "r"),
+                                       b->MemberAccessor(b->Call("textureSampleLevel", "plane1",
+                                                                 "smp", "plane1_clamped", 0_a),
+                                                         "rg"),
+                                       1_a),
+                                   b->MemberAccessor("params", "yuvToRgbConversionMatrix")),
+                            1_a)));
                 break;
             case wgsl::BuiltinFn::kTextureLoad:
-                stmts.Push(b.Decl(
-                    b.Let("clampedCoords", b.Call("min", b.Call<vec2<u32>>("coord"),
-                                                  b.MemberAccessor("params", "visibleSize")))));
-                stmts.Push(b.Decl(b.Let(
+                stmts.Push(b->Decl(
+                    b->Let("clampedCoords", b->Call("min", b->Call<vec2<u32>>("coord"),
+                                                    b->MemberAccessor("params", "visibleSize")))));
+                stmts.Push(b->Decl(b->Let(
                     "plane0_clamped",
-                    b.Call<vec2<u32>>(b.Call(
+                    b->Call<vec2<u32>>(b->Call(
                         "round",
-                        b.Mul(b.MemberAccessor("params", "loadTransform"),
-                              b.Call<vec3<f32>>(b.Call<vec2<f32>>("clampedCoords"), 1_a)))))));
+                        b->Mul(b->MemberAccessor("params", "loadTransform"),
+                               b->Call<vec3<f32>>(b->Call<vec2<f32>>("clampedCoords"), 1_a)))))));
 
                 // var color: vec4<f32>;
-                stmts.Push(b.Decl(b.Var("color", b.ty.vec4(b.ty.f32()))));
+                stmts.Push(b->Decl(b->Var("color", b->ty.vec4(b->ty.f32()))));
 
-                single_plane_block = b.Block(b.Assign(
-                    "color", b.MemberAccessor(
-                                 b.Call("textureLoad", "plane0", "plane0_clamped", 0_a), "rgba")));
+                single_plane_block = b->Block(b->Assign(
+                    "color", b->MemberAccessor(
+                                 b->Call("textureLoad", "plane0", "plane0_clamped", 0_a), "rgba")));
 
-                multi_plane_block = b.Block(
-                    b.Decl(b.Let(
-                        "plane1_clamped",
-                        b.Call<vec2<u32>>(b.Mul(b.Call<vec2<f32>>("plane0_clamped"),
-                                                b.MemberAccessor("params", "plane1CoordFactor"))))),
+                multi_plane_block = b->Block(
+                    b->Decl(b->Let("plane1_clamped",
+                                   b->Call<vec2<u32>>(
+                                       b->Mul(b->Call<vec2<f32>>("plane0_clamped"),
+                                              b->MemberAccessor("params", "plane1CoordFactor"))))),
 
-                    b.Assign("color",
-                             b.Call<vec4<f32>>(
-                                 b.Mul(b.Call<vec4<f32>>(
-                                           b.MemberAccessor(b.Call("textureLoad", "plane0",
-                                                                   "plane0_clamped", 0_a),
-                                                            "r"),
-                                           b.MemberAccessor(b.Call("textureLoad", "plane1",
-                                                                   "plane1_clamped", 0_a),
-                                                            "rg"),
-                                           1_a),
-                                       b.MemberAccessor("params", "yuvToRgbConversionMatrix")),
-                                 1_a)));
+                    b->Assign("color",
+                              b->Call<vec4<f32>>(
+                                  b->Mul(b->Call<vec4<f32>>(
+                                             b->MemberAccessor(b->Call("textureLoad", "plane0",
+                                                                       "plane0_clamped", 0_a),
+                                                               "r"),
+                                             b->MemberAccessor(b->Call("textureLoad", "plane1",
+                                                                       "plane1_clamped", 0_a),
+                                                               "rg"),
+                                             1_a),
+                                         b->MemberAccessor("params", "yuvToRgbConversionMatrix")),
+                                  1_a)));
                 break;
             default:
                 TINT_ICE() << "unhandled builtin: " << call_type;
         }
 
         // if ((params.numPlanes == 1u))
-        stmts.Push(b.If(b.Equal(b.MemberAccessor("params", "numPlanes"), b.Expr(1_a)),
-                        single_plane_block, b.Else(multi_plane_block)));
+        stmts.Push(b->If(b->Equal(b->MemberAccessor("params", "numPlanes"), b->Expr(1_a)),
+                         single_plane_block, b->Else(multi_plane_block)));
 
         // if (params.doYuvToRgbConversionOnly == 0u)
-        stmts.Push(b.If(
-            b.Equal(b.MemberAccessor("params", "doYuvToRgbConversionOnly"), b.Expr(0_a)),
-            b.Block(
+        stmts.Push(b->If(
+            b->Equal(b->MemberAccessor("params", "doYuvToRgbConversionOnly"), b->Expr(0_a)),
+            b->Block(
                 // color = vec4<f32>(gammaConversion(color.rgb, gammaDecodeParams), color.a);
-                b.Assign("color", b.Call<vec4<f32>>(
-                                      b.Call("gammaCorrection", b.MemberAccessor("color", "rgb"),
-                                             b.MemberAccessor("params", "gammaDecodeParams")),
-                                      b.MemberAccessor("color", "a"))),
+                b->Assign("color", b->Call<vec4<f32>>(
+                                       b->Call("gammaCorrection", b->MemberAccessor("color", "rgb"),
+                                               b->MemberAccessor("params", "gammaDecodeParams")),
+                                       b->MemberAccessor("color", "a"))),
                 // color = vec4<f32>(params.gamutConversionMatrix * color.rgb), color.a);
-                b.Assign("color", b.Call<vec4<f32>>(
-                                      b.Mul(b.MemberAccessor("params", "gamutConversionMatrix"),
-                                            b.MemberAccessor("color", "rgb")),
-                                      b.MemberAccessor("color", "a"))),
+                b->Assign("color", b->Call<vec4<f32>>(
+                                       b->Mul(b->MemberAccessor("params", "gamutConversionMatrix"),
+                                              b->MemberAccessor("color", "rgb")),
+                                       b->MemberAccessor("color", "a"))),
                 // color = vec4<f32>(gammaConversion(color.rgb, gammaEncodeParams), color.a);
-                b.Assign("color", b.Call<vec4<f32>>(
-                                      b.Call("gammaCorrection", b.MemberAccessor("color", "rgb"),
-                                             b.MemberAccessor("params", "gammaEncodeParams")),
-                                      b.MemberAccessor("color", "a"))))));
+                b->Assign("color", b->Call<vec4<f32>>(
+                                       b->Call("gammaCorrection", b->MemberAccessor("color", "rgb"),
+                                               b->MemberAccessor("params", "gammaEncodeParams")),
+                                       b->MemberAccessor("color", "a"))))));
 
         // return color;
-        stmts.Push(b.Return("color"));
+        stmts.Push(b->Return("color"));
 
         return stmts;
     }
@@ -469,7 +478,7 @@ struct MultiplanarExternalTexture::State {
     /// @returns a call expression to textureSampleExternal
     const CallExpression* createTextureSampleBaseClampToEdge(const CallExpression* expr,
                                                              NewBindingSymbols syms) {
-        const Expression* plane_0_binding_param = ctx.Clone(expr->args[0]);
+        const Expression* plane_0_binding_param = ctx->Clone(expr->args[0]);
 
         if (TINT_UNLIKELY(expr->args.Length() != 3)) {
             TINT_ICE() << "expected textureSampleBaseClampToEdge call with a "
@@ -484,30 +493,30 @@ struct MultiplanarExternalTexture::State {
         }
 
         if (!texture_sample_external_sym.IsValid()) {
-            texture_sample_external_sym = b.Symbols().New("textureSampleExternal");
+            texture_sample_external_sym = b->Symbols().New("textureSampleExternal");
 
             // Emit the textureSampleExternal function.
-            b.Func(texture_sample_external_sym,
-                   tint::Vector{
-                       b.Param("plane0",
-                               b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("plane1",
-                               b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("smp", b.ty.sampler(core::type::SamplerKind::kSampler)),
-                       b.Param("coord", b.ty.vec2(b.ty.f32())),
-                       b.Param("params", b.ty(params_struct_sym)),
-                   },
-                   b.ty.vec4(b.ty.f32()),
-                   buildTextureBuiltinBody(wgsl::BuiltinFn::kTextureSampleBaseClampToEdge));
+            b->Func(texture_sample_external_sym,
+                    tint::Vector{
+                        b->Param("plane0", b->ty.sampled_texture(core::type::TextureDimension::k2d,
+                                                                 b->ty.f32())),
+                        b->Param("plane1", b->ty.sampled_texture(core::type::TextureDimension::k2d,
+                                                                 b->ty.f32())),
+                        b->Param("smp", b->ty.sampler(core::type::SamplerKind::kSampler)),
+                        b->Param("coord", b->ty.vec2(b->ty.f32())),
+                        b->Param("params", b->ty(params_struct_sym)),
+                    },
+                    b->ty.vec4(b->ty.f32()),
+                    buildTextureBuiltinBody(wgsl::BuiltinFn::kTextureSampleBaseClampToEdge));
         }
 
-        return b.Call(texture_sample_external_sym, tint::Vector{
-                                                       plane_0_binding_param,
-                                                       b.Expr(syms.plane_1),
-                                                       ctx.Clone(expr->args[1]),
-                                                       ctx.Clone(expr->args[2]),
-                                                       b.Expr(syms.params),
-                                                   });
+        return b->Call(texture_sample_external_sym, tint::Vector{
+                                                        plane_0_binding_param,
+                                                        b->Expr(syms.plane_1),
+                                                        ctx->Clone(expr->args[1]),
+                                                        ctx->Clone(expr->args[2]),
+                                                        b->Expr(syms.params),
+                                                    });
     }
 
     /// Creates the textureLoadExternal function if needed and returns a call expression to it.
@@ -532,28 +541,28 @@ struct MultiplanarExternalTexture::State {
             auto& sig = call->Target()->Signature();
             auto* coord_ty = sig.Parameter(core::ParameterUsage::kCoords)->Type();
 
-            auto name = b.Symbols().New("textureLoadExternal");
+            auto name = b->Symbols().New("textureLoadExternal");
 
             // Emit the textureLoadExternal() function.
-            b.Func(name,
-                   tint::Vector{
-                       b.Param("plane0",
-                               b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("plane1",
-                               b.ty.sampled_texture(core::type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("coord", CreateASTTypeFor(ctx, coord_ty)),
-                       b.Param("params", b.ty(params_struct_sym)),
-                   },
-                   b.ty.vec4(b.ty.f32()),  //
-                   buildTextureBuiltinBody(wgsl::BuiltinFn::kTextureLoad));
+            b->Func(name,
+                    tint::Vector{
+                        b->Param("plane0", b->ty.sampled_texture(core::type::TextureDimension::k2d,
+                                                                 b->ty.f32())),
+                        b->Param("plane1", b->ty.sampled_texture(core::type::TextureDimension::k2d,
+                                                                 b->ty.f32())),
+                        b->Param("coord", CreateASTTypeFor(*ctx, coord_ty)),
+                        b->Param("params", b->ty(params_struct_sym)),
+                    },
+                    b->ty.vec4(b->ty.f32()),  //
+                    buildTextureBuiltinBody(wgsl::BuiltinFn::kTextureLoad));
 
             return name;
         });
 
-        auto plane_0_binding_arg = ctx.Clone(args[0]->Declaration());
+        auto plane_0_binding_arg = ctx->Clone(args[0]->Declaration());
 
-        return b.Call(texture_load_external_sym, plane_0_binding_arg, syms.plane_1,
-                      ctx.Clone(args[1]->Declaration()), syms.params);
+        return b->Call(texture_load_external_sym, plane_0_binding_arg, syms.plane_1,
+                       ctx->Clone(args[1]->Declaration()), syms.params);
     }
 
     /// Returns the expression used to replace a textureDimensions call.
@@ -566,7 +575,7 @@ struct MultiplanarExternalTexture::State {
                           "arguments, found "
                        << call->Arguments().Length() << " arguments";
         }
-        return b.Add(b.MemberAccessor(syms.params, "visibleSize"), b.Call<vec2<u32>>(1_a));
+        return b->Add(b->MemberAccessor(syms.params, "visibleSize"), b->Call<vec2<u32>>(1_a));
     }
 };
 

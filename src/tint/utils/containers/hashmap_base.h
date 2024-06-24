@@ -34,6 +34,8 @@
 #include <tuple>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/math/hash.h"
@@ -385,14 +387,14 @@ class HashmapBase {
         }
 
         void SkipEmptySlots() {
-            while (!node_ && slot_ + 1 < map_.slots_.Length()) {
-                node_ = map_.slots_[++slot_].nodes;
+            while (!node_ && slot_ + 1 < map_->slots_.Length()) {
+                node_ = map_->slots_[++slot_].nodes;
             }
         }
 
-        MAP& map_;
+        const raw_ref<MAP> map_;
         size_t slot_ = 0;
-        NODE* node_ = nullptr;
+        raw_ptr<NODE> node_ = nullptr;
     };
 
     /// An immutable key and mutable value iterator
@@ -487,13 +489,13 @@ class HashmapBase {
     /// insertion.
     struct EditIndex {
         /// The HashmapBase that created this EditIndex
-        HashmapBase& map;
+        const raw_ref<HashmapBase<ENTRY, N>> map;
         /// The slot that will hold the edit.
-        Slot& slot;
+        const raw_ref<Slot> slot;
         /// The hash of the key, passed to EditAt().
         HashCode hash;
         /// The resolved node entry, or nullptr if EditAt() did not resolve to an existing entry.
-        Entry* entry = nullptr;
+        raw_ptr<Entry> entry = nullptr;
 
         /// Replace will replace the entry with a new Entry built from @p key and @p values.
         /// @note #entry must not be null before calling.
@@ -513,9 +515,9 @@ class HashmapBase {
         /// @param values optional additional values to pass to the Entry constructor.
         template <typename K, typename... V>
         void Insert(K&& key, V&&... values) {
-            auto* node = map.free_.Take();
-            slot.Add(node);
-            map.count_++;
+            auto* node = map->free_.Take();
+            slot->Add(node);
+            map->count_++;
             entry = &node->Entry();
             new (entry) Entry{Key{hash, std::forward<K>(key)}, std::forward<V>(values)...};
         }
@@ -537,7 +539,7 @@ class HashmapBase {
         HashCode hash = Hash{}(key);
         auto& slot = slots_[hash % slots_.Length()];
         auto* entry = slot.Find(hash, key);
-        return {*this, slot, hash, entry};
+        return {raw_ref(*this), raw_ref(slot), hash, entry};
     }
 
     /// Rehash resizes the slots vector proportionally to the map capacity, and then reinserts the
@@ -605,22 +607,22 @@ class HashmapBase {
         /// Allocation is the header of a block of memory that holds Nodes.
         struct Allocation {
             /// The linked list of allocations.
-            Allocation* next = nullptr;
+            raw_ptr<Allocation> next = nullptr;
             // Node[] array follows this structure.
         };
 
         /// The linked list of free nodes.
-        Node* nodes_ = nullptr;
+        raw_ptr<Node> nodes_ = nullptr;
 
         /// The linked list of allocations.
-        Allocation* allocations_ = nullptr;
+        raw_ptr<Allocation> allocations_ = nullptr;
 
         /// Destructor.
         /// Frees all the allocations made.
         ~FreeNodes() {
-            auto* allocation = allocations_;
+            auto* allocation = allocations_.get();
             while (allocation) {
-                auto* next = allocation->next;
+                auto* next = allocation->next.get();
                 free(allocation);
                 allocation = next;
             }
@@ -628,7 +630,7 @@ class HashmapBase {
 
         /// @returns the next free node in the list
         Node* Take() {
-            auto* node = nodes_;
+            auto* node = nodes_.get();
             nodes_ = node->next;
             node->next = nullptr;
             return node;

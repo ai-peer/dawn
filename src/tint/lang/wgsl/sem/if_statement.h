@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_IF_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_SEM_IF_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/statement.h"
 
 // Forward declarations
@@ -65,7 +66,7 @@ class IfStatement final : public Castable<IfStatement, CompoundStatement> {
     void SetCondition(const ValueExpression* condition) { condition_ = condition; }
 
   private:
-    const ValueExpression* condition_ = nullptr;
+    raw_ptr<const ValueExpression> condition_ = nullptr;
 };
 
 }  // namespace tint::sem

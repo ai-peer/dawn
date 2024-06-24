@@ -29,6 +29,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "gtest/gtest.h"
 
 namespace tint {
@@ -38,7 +39,7 @@ struct LifetimeCounter {
     explicit LifetimeCounter(size_t* count) : count_(count) { (*count)++; }
     ~LifetimeCounter() { (*count_)--; }
 
-    size_t* const count_;
+    const raw_ptr<size_t> count_;
 };
 
 using BlockAllocatorTest = testing::Test;

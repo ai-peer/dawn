@@ -35,6 +35,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/reader/parser/detail.h"
@@ -69,11 +70,11 @@ struct ForHeader {
     ~ForHeader();
 
     /// The for loop initializer
-    const ast::Statement* initializer = nullptr;
+    raw_ptr<const ast::Statement> initializer = nullptr;
     /// The for loop condition
-    const ast::Expression* condition = nullptr;
+    raw_ptr<const ast::Expression> condition = nullptr;
     /// The for loop continuing statement
-    const ast::Statement* continuing = nullptr;
+    raw_ptr<const ast::Statement> continuing = nullptr;
 };
 
 /// Parser for WGSL source data
@@ -231,7 +232,7 @@ class Parser {
         /// Parsed type. type.expr be nullptr for inferred types.
         ast::Type type;
         /// Parsed identifier.
-        const ast::Identifier* name = nullptr;
+        raw_ptr<const ast::Identifier> name = nullptr;
     };
 
     /// FunctionHeader contains the parsed information for a function header.
@@ -262,7 +263,7 @@ class Parser {
         /// Parsed header source
         Source source;
         /// Function name
-        const ast::Identifier* name;
+        raw_ptr<const ast::Identifier> name;
         /// Function parameters
         Vector<const ast::Parameter*, 8> params;
         /// Function return type
@@ -276,11 +277,11 @@ class Parser {
         /// Variable declaration source
         Source source;
         /// Variable name
-        const ast::Identifier* name = nullptr;
+        raw_ptr<const ast::Identifier> name = nullptr;
         /// Variable address space
-        const ast::Expression* address_space = nullptr;
+        raw_ptr<const ast::Expression> address_space = nullptr;
         /// Variable access control
-        const ast::Expression* access = nullptr;
+        raw_ptr<const ast::Expression> access = nullptr;
         /// Variable type
         ast::Type type;
     };
@@ -288,9 +289,9 @@ class Parser {
     /// VariableQualifier contains the parsed information for a variable qualifier
     struct VariableQualifier {
         /// The variable's address space
-        const ast::Expression* address_space = nullptr;
+        raw_ptr<const ast::Expression> address_space = nullptr;
         /// The variable's access control
-        const ast::Expression* access = nullptr;
+        raw_ptr<const ast::Expression> access = nullptr;
     };
 
     /// MatrixDimensions contains the column and row information for a matrix
@@ -910,7 +911,7 @@ class Parser {
         return builder_.create<T>(std::forward<ARGS>(args)...);
     }
 
-    Source::File const* const file_;
+    const raw_ptr<const Source::File> file_;
     std::vector<Token> tokens_;
     size_t next_token_idx_ = 0;
     size_t last_source_idx_ = 0;

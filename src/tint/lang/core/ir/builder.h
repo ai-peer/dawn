@@ -30,6 +30,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/constant/scalar.h"  // IWYU pragma: export
 #include "src/tint/lang/core/constant/splat.h"   // IWYU pragma: export
 #include "src/tint/lang/core/ir/access.h"
@@ -128,7 +130,7 @@ class Builder {
         /// Insertion point method that inserts the instruction to the end of #block
         struct AppendToBlock {
             /// The block to insert new instructions to the end of
-            ir::Block* block = nullptr;
+            raw_ptr<ir::Block> block = nullptr;
             /// The insertion point function
             /// @param i the instruction to insert
             void operator()(ir::Instruction* i) { block->Append(i); }
@@ -136,7 +138,7 @@ class Builder {
         /// Insertion point method that inserts the instruction to the front of #block
         struct PrependToBlock {
             /// The block to insert new instructions to the front of
-            ir::Block* block = nullptr;
+            raw_ptr<ir::Block> block = nullptr;
             /// The insertion point function
             /// @param i the instruction to insert
             void operator()(ir::Instruction* i) { block->Prepend(i); }
@@ -144,7 +146,7 @@ class Builder {
         /// Insertion point method that inserts the instruction after #after
         struct InsertAfter {
             /// The instruction to insert new instructions after
-            ir::Instruction* after = nullptr;
+            raw_ptr<ir::Instruction> after = nullptr;
             /// The insertion point function
             /// @param i the instruction to insert
             void operator()(ir::Instruction* i) { i->InsertAfter(after); }
@@ -152,7 +154,7 @@ class Builder {
         /// Insertion point method that inserts the instruction before #before
         struct InsertBefore {
             /// The instruction to insert new instructions before
-            ir::Instruction* before = nullptr;
+            raw_ptr<ir::Instruction> before = nullptr;
             /// The insertion point function
             /// @param i the instruction to insert
             void operator()(ir::Instruction* i) { i->InsertBefore(before); }
@@ -183,7 +185,7 @@ class Builder {
     /// Creates a new builder that will append to the given block
     /// @param b the block to append new instructions to
     /// @returns the builder
-    Builder Append(ir::Block* b) { return Builder(ir, b); }
+    Builder Append(ir::Block* b) { return Builder(*ir, b); }
 
     /// Calls @p cb with the builder appending to block @p b
     /// @param b the block to set as the block to append to
@@ -294,7 +296,7 @@ class Builder {
     template <typename T>
     ir::If* If(T&& condition) {
         auto* cond_val = Value(std::forward<T>(condition));
-        return Append(ir.allocators.instructions.Create<ir::If>(cond_val, Block(), Block()));
+        return Append(ir->allocators.instructions.Create<ir::If>(cond_val, Block(), Block()));
     }
 
     /// Creates a loop instruction
@@ -307,7 +309,7 @@ class Builder {
     template <typename T>
     ir::Switch* Switch(T&& condition) {
         auto* cond_val = Value(std::forward<T>(condition));
-        return Append(ir.allocators.instructions.Create<ir::Switch>(cond_val));
+        return Append(ir->allocators.instructions.Create<ir::Switch>(cond_val));
     }
 
     /// Creates a default case for the switch @p s
@@ -331,8 +333,8 @@ class Builder {
     /// @param val the constant value
     /// @returns the new constant
     ir::Constant* Constant(const core::constant::Value* val) {
-        return ir.constants.GetOrAdd(
-            val, [&] { return ir.allocators.values.Create<ir::Constant>(val); });
+        return ir->constants.GetOrAdd(
+            val, [&] { return ir->allocators.values.Create<ir::Constant>(val); });
     }
 
     /// Creates a ir::Constant for an i32 Scalar
@@ -365,7 +367,7 @@ class Builder {
 
     /// Creates a new invalid ir::Constant
     /// @returns the new constant
-    ir::Constant* InvalidConstant() { return Constant(ir.constant_values.Invalid()); }
+    ir::Constant* InvalidConstant() { return Constant(ir->constant_values.Invalid()); }
 
     /// Retrieves the inner constant from an ir::Constant
     /// @param constant the ir constant
@@ -375,29 +377,29 @@ class Builder {
     /// Creates a core::constant::Value for an i32 Scalar
     /// @param v the value
     /// @returns the new constant
-    const core::constant::Value* ConstantValue(core::i32 v) { return ir.constant_values.Get(v); }
+    const core::constant::Value* ConstantValue(core::i32 v) { return ir->constant_values.Get(v); }
 
     /// Creates a core::constant::Value for a u32 Scalar
     /// @param v the value
     /// @returns the new constant
-    const core::constant::Value* ConstantValue(core::u32 v) { return ir.constant_values.Get(v); }
+    const core::constant::Value* ConstantValue(core::u32 v) { return ir->constant_values.Get(v); }
 
     /// Creates a core::constant::Value for a f32 Scalar
     /// @param v the value
     /// @returns the new constant
-    const core::constant::Value* ConstantValue(core::f32 v) { return ir.constant_values.Get(v); }
+    const core::constant::Value* ConstantValue(core::f32 v) { return ir->constant_values.Get(v); }
 
     /// Creates a core::constant::Value for a f16 Scalar
     /// @param v the value
     /// @returns the new constant
-    const core::constant::Value* ConstantValue(core::f16 v) { return ir.constant_values.Get(v); }
+    const core::constant::Value* ConstantValue(core::f16 v) { return ir->constant_values.Get(v); }
 
     /// Creates a core::constant::Value for a bool Scalar
     /// @param v the value
     /// @returns the new constant
     template <typename BOOL, typename = std::enable_if_t<std::is_same_v<BOOL, bool>>>
     const core::constant::Value* ConstantValue(BOOL v) {
-        return ir.constant_values.Get(v);
+        return ir->constant_values.Get(v);
     }
 
     /// Creates a new ir::Constant
@@ -406,7 +408,7 @@ class Builder {
     /// @returns the new constant
     template <typename ARG>
     ir::Constant* Splat(const core::type::Type* ty, ARG&& value) {
-        return Constant(ir.constant_values.Splat(ty, ConstantValue(std::forward<ARG>(value))));
+        return Constant(ir->constant_values.Splat(ty, ConstantValue(std::forward<ARG>(value))));
     }
 
     /// Creates a new ir::Constant
@@ -415,7 +417,7 @@ class Builder {
     /// @returns the new constant
     template <typename TYPE, typename ARG>
     ir::Constant* Splat(ARG&& value) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Splat(type, std::forward<ARG>(value));
     }
 
@@ -425,8 +427,8 @@ class Builder {
     /// @returns the new constant
     template <typename... ARGS, typename = DisableIfVectorLike<ARGS...>>
     ir::Constant* Composite(const core::type::Type* ty, ARGS&&... values) {
-        return Constant(
-            ir.constant_values.Composite(ty, Vector{ConstantValue(std::forward<ARGS>(values))...}));
+        return Constant(ir->constant_values.Composite(
+            ty, Vector{ConstantValue(std::forward<ARGS>(values))...}));
     }
 
     /// Creates a new ir::Constant
@@ -435,7 +437,7 @@ class Builder {
     /// @returns the new constant
     template <typename TYPE, typename... ARGS, typename = DisableIfVectorLike<ARGS...>>
     ir::Constant* Composite(ARGS&&... values) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Composite(type, std::forward<ARGS>(values)...);
     }
 
@@ -444,13 +446,15 @@ class Builder {
     /// @returns the new constant
     template <typename TYPE>
     ir::Constant* Zero() {
-        return Constant(ir.constant_values.Zero(ir.Types().Get<TYPE>()));
+        return Constant(ir->constant_values.Zero(ir->Types().Get<TYPE>()));
     }
 
     /// Creates a new zero-value ir::Constant
     /// @param ty the constant type
     /// @returns the new constant
-    ir::Constant* Zero(const core::type::Type* ty) { return Constant(ir.constant_values.Zero(ty)); }
+    ir::Constant* Zero(const core::type::Type* ty) {
+        return Constant(ir->constant_values.Zero(ty));
+    }
 
     /// @param in the input value. One of: nullptr, ir::Value*, ir::Instruction* or a numeric value.
     /// @returns an ir::Value* from the given argument.
@@ -519,8 +523,8 @@ class Builder {
         CheckForNonDeterministicEvaluation<LHS, RHS>();
         auto* lhs_val = Value(std::forward<LHS>(lhs));
         auto* rhs_val = Value(std::forward<RHS>(rhs));
-        return Append(ir.allocators.instructions.Create<ir::CoreBinary>(InstructionResult(type), op,
-                                                                        lhs_val, rhs_val));
+        return Append(ir->allocators.instructions.Create<ir::CoreBinary>(InstructionResult(type),
+                                                                         op, lhs_val, rhs_val));
     }
 
     /// Creates an And operation
@@ -540,7 +544,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* And(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return And(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -561,7 +565,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Or(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Or(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -582,7 +586,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Xor(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Xor(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -603,7 +607,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Equal(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Equal(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -624,7 +628,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* NotEqual(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return NotEqual(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -645,7 +649,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* LessThan(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return LessThan(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -666,7 +670,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* GreaterThan(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return GreaterThan(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -688,7 +692,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* LessThanEqual(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return LessThanEqual(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -710,7 +714,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* GreaterThanEqual(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return GreaterThanEqual(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -731,7 +735,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* ShiftLeft(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return ShiftLeft(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -752,7 +756,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* ShiftRight(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return ShiftRight(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -773,7 +777,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Add(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Add(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -794,7 +798,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Subtract(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Subtract(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -815,7 +819,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Multiply(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Multiply(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -836,7 +840,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Divide(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Divide(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -857,7 +861,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename LHS, typename RHS>
     ir::CoreBinary* Modulo(LHS&& lhs, RHS&& rhs) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Modulo(type, std::forward<LHS>(lhs), std::forward<RHS>(rhs));
     }
 
@@ -870,7 +874,7 @@ class Builder {
     ir::CoreUnary* Unary(UnaryOp op, const core::type::Type* type, VAL&& val) {
         auto* value = Value(std::forward<VAL>(val));
         return Append(
-            ir.allocators.instructions.Create<ir::CoreUnary>(InstructionResult(type), op, value));
+            ir->allocators.instructions.Create<ir::CoreUnary>(InstructionResult(type), op, value));
     }
 
     /// Creates an op for `op val`
@@ -880,7 +884,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename VAL>
     ir::CoreUnary* Unary(UnaryOp op, VAL&& val) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Unary(op, type, std::forward<VAL>(val));
     }
 
@@ -899,7 +903,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename VAL>
     ir::CoreUnary* Complement(VAL&& val) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Complement(type, std::forward<VAL>(val));
     }
 
@@ -918,7 +922,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename VAL>
     ir::CoreUnary* Negation(VAL&& val) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Negation(type, std::forward<VAL>(val));
     }
 
@@ -937,7 +941,7 @@ class Builder {
     /// @returns the operation
     template <typename TYPE, typename VAL>
     ir::CoreUnary* Not(VAL&& val) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Not(type, std::forward<VAL>(val));
     }
 
@@ -949,7 +953,7 @@ class Builder {
     ir::Bitcast* Bitcast(const core::type::Type* type, VAL&& val) {
         auto* value = Value(std::forward<VAL>(val));
         return Append(
-            ir.allocators.instructions.Create<ir::Bitcast>(InstructionResult(type), value));
+            ir->allocators.instructions.Create<ir::Bitcast>(InstructionResult(type), value));
     }
 
     /// Creates a bitcast instruction
@@ -958,7 +962,7 @@ class Builder {
     /// @returns the instruction
     template <typename TYPE, typename VAL>
     ir::Bitcast* Bitcast(VAL&& val) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         auto* value = Value(std::forward<VAL>(val));
         return Bitcast(type, value);
     }
@@ -976,7 +980,7 @@ class Builder {
     ir::UserCall* CallWithResult(ir::InstructionResult* result,
                                  ir::Function* func,
                                  ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::UserCall>(
+        return Append(ir->allocators.instructions.Create<ir::UserCall>(
             result, func, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1006,7 +1010,7 @@ class Builder {
     /// @returns the instruction
     template <typename TYPE, typename... ARGS>
     ir::UserCall* Call(ir::Function* func, ARGS&&... args) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return CallWithResult(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
@@ -1019,7 +1023,7 @@ class Builder {
     ir::CoreBuiltinCall* CallWithResult(core::ir::InstructionResult* result,
                                         core::BuiltinFn func,
                                         ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::CoreBuiltinCall>(
+        return Append(ir->allocators.instructions.Create<ir::CoreBuiltinCall>(
             result, func, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1040,7 +1044,7 @@ class Builder {
     /// @returns the instruction
     template <typename TYPE, typename... ARGS>
     ir::CoreBuiltinCall* Call(core::BuiltinFn func, ARGS&&... args) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return CallWithResult(InstructionResult(type), func, Values(std::forward<ARGS>(args)...));
     }
 
@@ -1052,7 +1056,7 @@ class Builder {
     template <typename KLASS, typename FUNC, typename... ARGS>
     tint::traits::EnableIf<tint::traits::IsTypeOrDerived<KLASS, ir::BuiltinCall>, KLASS*>
     CallWithResult(ir::InstructionResult* result, FUNC func, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<KLASS>(
+        return Append(ir->allocators.instructions.Create<KLASS>(
             result, func, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1077,7 +1081,7 @@ class Builder {
     template <typename KLASS, typename FUNC, typename OBJ, typename... ARGS>
     tint::traits::EnableIf<tint::traits::IsTypeOrDerived<KLASS, ir::MemberBuiltinCall>, KLASS*>
     MemberCallWithResult(ir::InstructionResult* result, FUNC func, OBJ&& obj, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<KLASS>(
+        return Append(ir->allocators.instructions.Create<KLASS>(
             result, func, Value(std::forward<OBJ>(obj)), Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1102,7 +1106,7 @@ class Builder {
     template <typename VAL>
     ir::Convert* ConvertWithResult(ir::InstructionResult* result, VAL&& val) {
         return Append(
-            ir.allocators.instructions.Create<ir::Convert>(result, Value(std::forward<VAL>(val))));
+            ir->allocators.instructions.Create<ir::Convert>(result, Value(std::forward<VAL>(val))));
     }
 
     /// Creates a value conversion instruction to the template type T
@@ -1110,7 +1114,7 @@ class Builder {
     /// @returns the instruction
     template <typename T, typename VAL>
     ir::Convert* Convert(VAL&& val) {
-        auto* type = ir.Types().Get<T>();
+        auto* type = ir->Types().Get<T>();
         return Convert(type, std::forward<VAL>(val));
     }
 
@@ -1129,7 +1133,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::Construct* ConstructWithResult(ir::InstructionResult* result, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::Construct>(
+        return Append(ir->allocators.instructions.Create<ir::Construct>(
             result, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1138,7 +1142,7 @@ class Builder {
     /// @returns the instruction
     template <typename T, typename... ARGS>
     ir::Construct* Construct(ARGS&&... args) {
-        auto* type = ir.Types().Get<T>();
+        auto* type = ir->Types().Get<T>();
         return Construct(type, std::forward<ARGS>(args)...);
     }
 
@@ -1158,7 +1162,7 @@ class Builder {
     template <typename VAL>
     ir::Load* LoadWithResult(ir::InstructionResult* result, VAL&& from) {
         auto* value = Value(std::forward<VAL>(from));
-        return Append(ir.allocators.instructions.Create<ir::Load>(result, value));
+        return Append(ir->allocators.instructions.Create<ir::Load>(result, value));
     }
 
     /// Creates a load instruction
@@ -1179,7 +1183,7 @@ class Builder {
         CheckForNonDeterministicEvaluation<TO, FROM>();
         auto* to_val = Value(std::forward<TO>(to));
         auto* from_val = Value(std::forward<FROM>(from));
-        return Append(ir.allocators.instructions.Create<ir::Store>(to_val, from_val));
+        return Append(ir->allocators.instructions.Create<ir::Store>(to_val, from_val));
     }
 
     /// Creates a store vector element instruction
@@ -1193,8 +1197,8 @@ class Builder {
         auto* to_val = Value(std::forward<TO>(to));
         auto* index_val = Value(std::forward<INDEX>(index));
         auto* value_val = Value(std::forward<VALUE>(value));
-        return Append(ir.allocators.instructions.Create<ir::StoreVectorElement>(to_val, index_val,
-                                                                                value_val));
+        return Append(ir->allocators.instructions.Create<ir::StoreVectorElement>(to_val, index_val,
+                                                                                 value_val));
     }
 
     /// Creates a load vector element instruction with an existing instruction result
@@ -1210,7 +1214,7 @@ class Builder {
         auto* from_val = Value(std::forward<FROM>(from));
         auto* index_val = Value(std::forward<INDEX>(index));
         return Append(
-            ir.allocators.instructions.Create<ir::LoadVectorElement>(result, from_val, index_val));
+            ir->allocators.instructions.Create<ir::LoadVectorElement>(result, from_val, index_val));
     }
 
     /// Creates a load vector element instruction
@@ -1255,9 +1259,9 @@ class Builder {
             TINT_ASSERT(val);
             return nullptr;
         }
-        auto* var = Var(name, ir.Types().ptr(SPACE, val->Type(), ACCESS));
+        auto* var = Var(name, ir->Types().ptr(SPACE, val->Type(), ACCESS));
         var->SetInitializer(val);
-        ir.SetName(var->Result(0), name);
+        *ir->SetName(var->Result(0), name);
         return var;
     }
 
@@ -1270,7 +1274,7 @@ class Builder {
               typename T,
               core::Access ACCESS = core::type::DefaultAccessFor(SPACE)>
     ir::Var* Var() {
-        return Var(ir.Types().ptr<SPACE, T, ACCESS>());
+        return Var(ir->Types().ptr<SPACE, T, ACCESS>());
     }
 
     /// Creates a new `var` declaration with a name
@@ -1283,7 +1287,7 @@ class Builder {
               typename T,
               core::Access ACCESS = core::type::DefaultAccessFor(SPACE)>
     ir::Var* Var(std::string_view name) {
-        return Var(name, ir.Types().ptr<SPACE, T, ACCESS>());
+        return Var(name, ir->Types().ptr<SPACE, T, ACCESS>());
     }
 
     /// Creates a new `var` declaration with a name
@@ -1296,7 +1300,7 @@ class Builder {
                  core::AddressSpace space,
                  const core::type::Type* subtype,
                  core::Access access = core::Access::kUndefined) {
-        return Var(name, ir.Types().ptr(space, subtype, access));
+        return Var(name, ir->Types().ptr(space, subtype, access));
     }
 
     /// Creates a new `let` declaration
@@ -1310,9 +1314,9 @@ class Builder {
             TINT_ASSERT(val);
             return nullptr;
         }
-        auto* let =
-            Append(ir.allocators.instructions.Create<ir::Let>(InstructionResult(val->Type()), val));
-        ir.SetName(let->Result(0), name);
+        auto* let = Append(
+            ir->allocators.instructions.Create<ir::Let>(InstructionResult(val->Type()), val));
+        *ir->SetName(let->Result(0), name);
         return let;
     }
 
@@ -1320,7 +1324,7 @@ class Builder {
     /// @param type the let type
     /// @returns the instruction
     ir::Let* Let(const type::Type* type) {
-        auto* let = ir.allocators.instructions.Create<ir::Let>(InstructionResult(type), nullptr);
+        auto* let = ir->allocators.instructions.Create<ir::Let>(InstructionResult(type), nullptr);
         Append(let);
         return let;
     }
@@ -1329,7 +1333,7 @@ class Builder {
     /// @param func the function being returned
     /// @returns the instruction
     ir::Return* Return(ir::Function* func) {
-        return Append(ir.allocators.instructions.Create<ir::Return>(func));
+        return Append(ir->allocators.instructions.Create<ir::Return>(func));
     }
 
     /// Creates a return instruction
@@ -1340,11 +1344,11 @@ class Builder {
     ir::Return* Return(ir::Function* func, ARG&& value) {
         if constexpr (std::is_same_v<std::decay_t<ARG>, ir::Value*>) {
             if (value == nullptr) {
-                return Append(ir.allocators.instructions.Create<ir::Return>(func));
+                return Append(ir->allocators.instructions.Create<ir::Return>(func));
             }
         }
         auto* val = Value(std::forward<ARG>(value));
-        return Append(ir.allocators.instructions.Create<ir::Return>(func, val));
+        return Append(ir->allocators.instructions.Create<ir::Return>(func, val));
     }
 
     /// Creates a loop next iteration instruction
@@ -1353,7 +1357,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::NextIteration* NextIteration(ir::Loop* loop, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::NextIteration>(
+        return Append(ir->allocators.instructions.Create<ir::NextIteration>(
             loop, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1365,7 +1369,7 @@ class Builder {
     ir::BreakIf* BreakIf(ir::Loop* loop, CONDITION&& condition) {
         CheckForNonDeterministicEvaluation<CONDITION>();
         auto* cond_val = Value(std::forward<CONDITION>(condition));
-        return Append(ir.allocators.instructions.Create<ir::BreakIf>(cond_val, loop));
+        return Append(ir->allocators.instructions.Create<ir::BreakIf>(cond_val, loop));
     }
 
     /// Creates a loop break-if instruction
@@ -1383,7 +1387,7 @@ class Builder {
                          EXIT_VALUES&& exit_values) {
         CheckForNonDeterministicEvaluation<CONDITION, NEXT_ITER_VALUES, EXIT_VALUES>();
         auto* cond_val = Value(std::forward<CONDITION>(condition));
-        return Append(ir.allocators.instructions.Create<ir::BreakIf>(
+        return Append(ir->allocators.instructions.Create<ir::BreakIf>(
             cond_val, loop, Values(std::forward<NEXT_ITER_VALUES>(next_iter_values)),
             Values(std::forward<EXIT_VALUES>(exit_values))));
     }
@@ -1394,7 +1398,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::Continue* Continue(ir::Loop* loop, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::Continue>(
+        return Append(ir->allocators.instructions.Create<ir::Continue>(
             loop, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1404,7 +1408,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::ExitSwitch* ExitSwitch(ir::Switch* sw, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::ExitSwitch>(
+        return Append(ir->allocators.instructions.Create<ir::ExitSwitch>(
             sw, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1414,7 +1418,7 @@ class Builder {
     /// @returns the instruction
     template <typename... ARGS>
     ir::ExitLoop* ExitLoop(ir::Loop* loop, ARGS&&... args) {
-        return Append(ir.allocators.instructions.Create<ir::ExitLoop>(
+        return Append(ir->allocators.instructions.Create<ir::ExitLoop>(
             loop, Values(std::forward<ARGS>(args)...)));
     }
 
@@ -1425,7 +1429,7 @@ class Builder {
     template <typename... ARGS>
     ir::ExitIf* ExitIf(ir::If* i, ARGS&&... args) {
         return Append(
-            ir.allocators.instructions.Create<ir::ExitIf>(i, Values(std::forward<ARGS>(args)...)));
+            ir->allocators.instructions.Create<ir::ExitIf>(i, Values(std::forward<ARGS>(args)...)));
     }
 
     /// Creates an exit instruction for the given control instruction
@@ -1458,7 +1462,7 @@ class Builder {
     /// @returns the value
     template <typename TYPE>
     ir::BlockParam* BlockParam(std::string_view name) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return BlockParam(name, type);
     }
 
@@ -1467,7 +1471,7 @@ class Builder {
     /// @returns the value
     template <typename TYPE>
     ir::BlockParam* BlockParam() {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return BlockParam(type);
     }
 
@@ -1488,7 +1492,7 @@ class Builder {
     /// @returns the value
     template <typename TYPE>
     ir::FunctionParam* FunctionParam(std::string_view name) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return FunctionParam(name, type);
     }
 
@@ -1497,7 +1501,7 @@ class Builder {
     /// @returns the value
     template <typename TYPE>
     ir::FunctionParam* FunctionParam() {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return FunctionParam(type);
     }
 
@@ -1510,7 +1514,7 @@ class Builder {
     ir::Access* AccessWithResult(ir::InstructionResult* result, OBJ&& object, ARGS&&... indices) {
         CheckForNonDeterministicEvaluation<OBJ, ARGS...>();
         auto* obj_val = Value(std::forward<OBJ>(object));
-        return Append(ir.allocators.instructions.Create<ir::Access>(
+        return Append(ir->allocators.instructions.Create<ir::Access>(
             result, obj_val, Values(std::forward<ARGS>(indices)...)));
     }
 
@@ -1532,7 +1536,7 @@ class Builder {
     /// @returns the instruction
     template <typename TYPE, typename OBJ, typename... ARGS>
     ir::Access* Access(OBJ&& object, ARGS&&... indices) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Access(type, std::forward<OBJ>(object), std::forward<ARGS>(indices)...);
     }
 
@@ -1544,8 +1548,8 @@ class Builder {
     template <typename OBJ>
     ir::Swizzle* Swizzle(const core::type::Type* type, OBJ&& object, VectorRef<uint32_t> indices) {
         auto* obj_val = Value(std::forward<OBJ>(object));
-        return Append(ir.allocators.instructions.Create<ir::Swizzle>(InstructionResult(type),
-                                                                     obj_val, std::move(indices)));
+        return Append(ir->allocators.instructions.Create<ir::Swizzle>(InstructionResult(type),
+                                                                      obj_val, std::move(indices)));
     }
 
     /// Creates a new `Swizzle`
@@ -1555,7 +1559,7 @@ class Builder {
     /// @returns the instruction
     template <typename TYPE, typename OBJ>
     ir::Swizzle* Swizzle(OBJ&& object, VectorRef<uint32_t> indices) {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return Swizzle(type, std::forward<OBJ>(object), std::move(indices));
     }
 
@@ -1569,7 +1573,7 @@ class Builder {
                          OBJ&& object,
                          std::initializer_list<uint32_t> indices) {
         auto* obj_val = Value(std::forward<OBJ>(object));
-        return Append(ir.allocators.instructions.Create<ir::Swizzle>(
+        return Append(ir->allocators.instructions.Create<ir::Swizzle>(
             InstructionResult(type), obj_val, Vector<uint32_t, 4>(indices)));
     }
 
@@ -1579,7 +1583,7 @@ class Builder {
     /// @return @p object
     template <typename OBJECT>
     OBJECT* Name(std::string_view name, OBJECT* object) {
-        ir.SetName(object, name);
+        *ir->SetName(object, name);
         return object;
     }
 
@@ -1595,7 +1599,7 @@ class Builder {
     /// @param type the return type
     /// @returns the value
     ir::InstructionResult* InstructionResult(const core::type::Type* type) {
-        return ir.allocators.values.Create<ir::InstructionResult>(type);
+        return ir->allocators.values.Create<ir::InstructionResult>(type);
     }
 
     /// Creates a new runtime value
@@ -1603,7 +1607,7 @@ class Builder {
     /// @returns the value
     template <typename TYPE>
     ir::InstructionResult* InstructionResult() {
-        auto* type = ir.Types().Get<TYPE>();
+        auto* type = ir->Types().Get<TYPE>();
         return InstructionResult(type);
     }
 
@@ -1645,7 +1649,7 @@ class Builder {
     }
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
   private:
     /// @returns the element type of the vector-pointer type

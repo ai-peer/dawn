@@ -44,9 +44,9 @@ class WgslWriter_RaiseTest : public core::ir::transform::TransformTest {
 };
 
 TEST_F(WgslWriter_RaiseTest, BuiltinConversion) {
-    auto* f = b.Function("f", ty.void_());
+    auto* f = b.Function("f", ty->void_());
     b.Append(f->Block(), [&] {  //
-        b.Call(ty.i32(), core::BuiltinFn::kMax, i32(1), i32(2));
+        b.Call(ty->i32(), core::BuiltinFn::kMax, i32(1), i32(2));
         b.Return(f);
     });
 
@@ -77,12 +77,12 @@ TEST_F(WgslWriter_RaiseTest, BuiltinConversion) {
 
 TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier) {
     auto* W = b.Var<workgroup, i32, read_write>("W");
-    b.ir.root_block->Append(W);
-    auto* f = b.Function("f", ty.i32());
+    b.ir->root_block->Append(W);
+    auto* f = b.Function("f", ty->i32());
     b.Append(f->Block(), [&] {  //
-        b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
+        b.Call(ty->void_(), core::BuiltinFn::kWorkgroupBarrier);
         auto* load = b.Load(W);
-        b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
+        b.Call(ty->void_(), core::BuiltinFn::kWorkgroupBarrier);
         b.Return(f, load);
     });
 
@@ -123,13 +123,13 @@ $B1: {  # root
 
 TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier_NoMatch) {
     auto* W = b.Var<workgroup, i32, read_write>("W");
-    b.ir.root_block->Append(W);
-    auto* f = b.Function("f", ty.i32());
+    b.ir->root_block->Append(W);
+    auto* f = b.Function("f", ty->i32());
     b.Append(f->Block(), [&] {  //
-        b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
+        b.Call(ty->void_(), core::BuiltinFn::kWorkgroupBarrier);
         b.Store(W, 42_i);  // Prevents pattern match
         auto* load = b.Load(W);
-        b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
+        b.Call(ty->void_(), core::BuiltinFn::kWorkgroupBarrier);
         b.Return(f, load);
     });
 

@@ -33,6 +33,7 @@
 #include <string>
 #include <variant>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/array_count.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/containers/unique_vector.h"
@@ -122,8 +123,8 @@ class Array : public Castable<Array, Type> {
     Array* Clone(CloneContext& ctx) const override;
 
   private:
-    Type const* const element_;
-    const ArrayCount* count_;
+    const raw_ptr<const Type> element_;
+    raw_ptr<const ArrayCount> count_;
     const uint32_t align_;
     const uint32_t size_;
     const uint32_t stride_;

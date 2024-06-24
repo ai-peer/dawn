@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,18 +44,18 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
         // Find and replace matrix constructors that take scalar operands.
-        for (auto inst : ir.Instructions()) {
+        for (auto inst : ir->Instructions()) {
             if (auto* construct = inst->As<Construct>()) {
                 if (construct->Result(0)->Type()->As<type::Matrix>()) {
                     if (construct->Operands().Length() > 0 &&
@@ -99,7 +100,7 @@ Result<SuccessType> VectorizeScalarMatrixConstructors(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

@@ -28,6 +28,8 @@
 #include "src/tint/lang/wgsl/ast/transform/simplify_pointers.h"
 
 #include <unordered_set>
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/hashset.h"
 
 #include "src/tint/lang/wgsl/ast/transform/unshadow.h"
@@ -55,7 +57,7 @@ struct PointerOp {
     /// Zero: no pointer op on `expr`
     int indirections = 0;
     /// The expression being operated on
-    const Expression* expr = nullptr;
+    raw_ptr<const Expression> expr = nullptr;
 };
 
 }  // namespace
@@ -63,11 +65,11 @@ struct PointerOp {
 /// PIMPL state for the transform
 struct SimplifyPointers::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Set of accessor expression objects that are pointers, used to handle
     /// pointer-index/dot sugar syntax.
     Hashset<const Expression*, 4> is_accessor_object_pointer;
@@ -134,7 +136,7 @@ struct SimplifyPointers::State {
                         break;
                 }
             }
-            if (auto* user = ctx.src->Sem().Get<sem::VariableUser>(op.expr)) {
+            if (auto* user = ctx.src->Sem().Get<sem::VariableUser>(op.expr.get())) {
                 auto* var = user->Variable();
                 if (var->Is<sem::LocalVariable>() &&  //
                     var->Declaration()->Is<Let>() &&  //
@@ -173,7 +175,7 @@ struct SimplifyPointers::State {
                         return;  // Not a `let` declaration. Ignore.
                     }
 
-                    auto* var = ctx.src->Sem().Get(let->variable);
+                    auto* var = ctx.src->Sem().Get(let->variable.get());
                     if (!var->Type()->Is<core::type::Pointer>()) {
                         return;  // Not a pointer type. Ignore.
                     }
@@ -235,7 +237,8 @@ struct SimplifyPointers::State {
                     }
                 },
                 [&](const AccessorExpression* accessor) {
-                    if (auto* a = ctx.src->Sem().Get<sem::ValueExpression>(accessor->object)) {
+                    if (auto* a =
+                            ctx.src->Sem().Get<sem::ValueExpression>(accessor->object.get())) {
                         if (a->Type()->Is<core::type::Pointer>()) {
                             // Object is an implicitly dereferenced pointer (i.e. syntax sugar).
                             is_accessor_object_pointer.Add(accessor->object);

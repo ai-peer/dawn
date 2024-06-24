@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/node.h"
 
 // Forward declarations
@@ -70,10 +71,10 @@ class DiagnosticRuleName final : public Castable<DiagnosticRuleName, Node> {
     std::string String() const;
 
     /// The diagnostic rule category (category.name)
-    Identifier const* const category = nullptr;
+    const raw_ptr<const Identifier> category = nullptr;
 
     /// The diagnostic rule name.
-    Identifier const* const name;
+    const raw_ptr<const Identifier> name;
 };
 
 }  // namespace tint::ast

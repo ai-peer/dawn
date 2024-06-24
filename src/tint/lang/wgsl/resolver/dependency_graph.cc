@@ -32,6 +32,8 @@
 #include <variant>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_type.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/wgsl/ast/alias.h"
@@ -105,9 +107,9 @@ struct DependencyInfo {
 /// relationship.
 struct DependencyEdge {
     /// The Global that depends on #to
-    const Global* from;
+    raw_ptr<const Global> from;
     /// The Global that is depended on by #from
-    const Global* to;
+    raw_ptr<const Global> to;
 
     /// @returns the hash code of the DependencyEdge
     tint::HashCode HashCode() const { return Hash(from, to); }
@@ -124,7 +126,7 @@ struct Global {
     explicit Global(const ast::Node* n) : node(n) {}
 
     /// The declaration ast::Node
-    const ast::Node* node;
+    raw_ptr<const ast::Node> node;
     /// A list of dependencies that this global depends on
     Vector<Global*, 8> deps;
 };
@@ -162,7 +164,7 @@ class DependencyScanner {
           dependency_edges_(edges) {
         // Register all the globals at global-scope
         for (auto& it : globals_by_name) {
-            scope_stack_.Set(it.key, it.value->node);
+            scope_stack_.Set(it.key, it.value->node.get());
         }
     }
 
@@ -171,7 +173,7 @@ class DependencyScanner {
     void Scan(Global* global) {
         TINT_SCOPED_ASSIGNMENT(current_global_, global);
         Switch(
-            global->node,
+            global->node.get(),
             [&](const ast::Struct* str) {
                 Declare(str->name->symbol, str);
                 for (auto* member : str->members) {
@@ -238,7 +240,7 @@ class DependencyScanner {
 
         for (auto* param : func->params) {
             if (auto shadows = scope_stack_.Get(param->name->symbol)) {
-                graph_.shadows.Add(param, shadows);
+                graph_->shadows.Add(param, shadows);
             }
             Declare(param->name->symbol, param);
         }
@@ -312,7 +314,7 @@ class DependencyScanner {
             },
             [&](const ast::VariableDeclStatement* v) {
                 if (auto* shadows = scope_stack_.Get(v->variable->name->symbol)) {
-                    graph_.shadows.Add(v->variable, shadows);
+                    graph_->shadows.Add(v->variable, shadows);
                 }
                 TraverseVariable(v->variable);
                 Declare(v->variable->name->symbol, v->variable);
@@ -336,8 +338,8 @@ class DependencyScanner {
         auto* old = scope_stack_.Set(symbol, node);
         if (old != nullptr && node != old) {
             auto name = symbol.Name();
-            AddError(diagnostics_, node->source) << "redeclaration of '" << name << "'";
-            AddNote(diagnostics_, old->source) << "'" << name << "' previously declared here";
+            AddError(*diagnostics_, node->source) << "redeclaration of '" << name << "'";
+            AddNote(*diagnostics_, old->source) << "'" << name << "' previously declared here";
         }
     }
 
@@ -356,7 +358,7 @@ class DependencyScanner {
                 return ast::TraverseAction::Descend;
             });
             if (!ok) {
-                AddError(diagnostics_, next->source) << "TraverseExpressions failed";
+                AddError(*diagnostics_, next->source) << "TraverseExpressions failed";
                 return;
             }
         }
@@ -500,39 +502,39 @@ class DependencyScanner {
             auto builtin_info = GetBuiltinInfo(to);
             switch (builtin_info.type) {
                 case BuiltinType::kNone:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier::UnresolvedIdentifier{to.Name()});
                     break;
                 case BuiltinType::kFunction:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<wgsl::BuiltinFn>()));
                     break;
                 case BuiltinType::kBuiltin:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::BuiltinType>()));
                     break;
                 case BuiltinType::kBuiltinValue:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::BuiltinValue>()));
                     break;
                 case BuiltinType::kAddressSpace:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::AddressSpace>()));
                     break;
                 case BuiltinType::kTexelFormat:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::TexelFormat>()));
                     break;
                 case BuiltinType::kAccess:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::Access>()));
                     break;
                 case BuiltinType::kInterpolationType:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from, ResolvedIdentifier(builtin_info.Value<core::InterpolationType>()));
                     break;
                 case BuiltinType::kInterpolationSampling:
-                    graph_.resolved_identifiers.Add(
+                    graph_->resolved_identifiers.Add(
                         from,
                         ResolvedIdentifier(builtin_info.Value<core::InterpolationSampling>()));
                     break;
@@ -540,24 +542,24 @@ class DependencyScanner {
             return;
         }
 
-        if (auto global = globals_.Get(to); global && (*global)->node == resolved) {
-            if (dependency_edges_.Add(DependencyEdge{current_global_, *global},
-                                      DependencyInfo{from->source})) {
+        if (auto global = globals_->Get(to); global && (*global)->node == resolved) {
+            if (dependency_edges_->Add(DependencyEdge{current_global_, *global},
+                                       DependencyInfo{from->source})) {
                 current_global_->deps.Push(*global);
             }
         }
 
-        graph_.resolved_identifiers.Add(from, ResolvedIdentifier(resolved));
+        graph_->resolved_identifiers.Add(from, ResolvedIdentifier(resolved));
     }
 
     using VariableMap = Hashmap<Symbol, const ast::Variable*, 32>;
-    const GlobalMap& globals_;
-    diag::List& diagnostics_;
-    DependencyGraph& graph_;
-    DependencyEdges& dependency_edges_;
+    const raw_ref<const GlobalMap> globals_;
+    const raw_ref<diag::List> diagnostics_;
+    const raw_ref<DependencyGraph> graph_;
+    const raw_ref<DependencyEdges> dependency_edges_;
 
     ScopeStack<Symbol, const ast::Node*> scope_stack_;
-    Global* current_global_ = nullptr;
+    raw_ptr<Global> current_global_ = nullptr;
 
     Hashmap<Symbol, BuiltinInfo, 64> builtin_info_map;
 };
@@ -574,7 +576,7 @@ struct DependencyAnalysis {
     /// @returns true if analysis found no errors, otherwise false.
     bool Run(const ast::Module& module) {
         // Reserve container memory
-        graph_.resolved_identifiers.Reserve(module.GlobalDeclarations().Length());
+        graph_->resolved_identifiers.Reserve(module.GlobalDeclarations().Length());
         sorted_.Reserve(module.GlobalDeclarations().Length());
 
         // Collect all the named globals from the AST module
@@ -589,9 +591,9 @@ struct DependencyAnalysis {
         // Dump the dependency graph if TINT_DUMP_DEPENDENCY_GRAPH is non-zero
         DumpDependencyGraph();
 
-        graph_.ordered_globals = sorted_.Release();
+        graph_->ordered_globals = sorted_.Release();
 
-        return !diagnostics_.ContainsErrors();
+        return !diagnostics_->ContainsErrors();
     }
 
   private:
@@ -648,7 +650,7 @@ struct DependencyAnalysis {
     /// Walks the global declarations, determining the dependencies of each global
     /// and adding these to each global's Global::deps field.
     void DetermineDependencies() {
-        DependencyScanner scanner(globals_, diagnostics_, graph_, dependency_edges_);
+        DependencyScanner scanner(globals_, *diagnostics_, *graph_, dependency_edges_);
         for (auto* global : declaration_order_) {
             scanner.Scan(global);
         }
@@ -667,7 +669,7 @@ struct DependencyAnalysis {
         // Entry is a single entry in the traversal stack. Entry points to a
         // dep_idx'th dependency of Entry::global.
         struct Entry {
-            const Global* global;  // The parent global
+            raw_ptr<const Global> global;  // The parent global
             size_t dep_idx;        // The dependency index in `global->deps`
         };
 
@@ -705,7 +707,7 @@ struct DependencyAnalysis {
     /// SortGlobals sorts the globals into dependency order, erroring if cyclic
     /// dependencies are found. The sorted dependencies are assigned to #sorted.
     void SortGlobals() {
-        if (diagnostics_.ContainsErrors()) {
+        if (diagnostics_->ContainsErrors()) {
             return;  // This code assumes there are no undeclared identifiers.
         }
 
@@ -769,7 +771,7 @@ struct DependencyAnalysis {
     /// found in `stack`.
     /// @param stack is the global dependency stack that contains a loop.
     void CyclicDependencyFound(const Global* root, VectorRef<const Global*> stack) {
-        auto& err = AddError(diagnostics_, root->node->source);
+        auto& err = AddError(*diagnostics_, root->node->source);
         err << "cyclic dependency found: ";
         constexpr size_t kLoopNotStarted = ~0u;
         size_t loop_start = kLoopNotStarted;
@@ -788,7 +790,7 @@ struct DependencyAnalysis {
             auto* from = stack[i];
             auto* to = (i + 1 < stack.Length()) ? stack[i + 1] : stack[loop_start];
             auto info = DepInfoFor(from, to);
-            AddNote(diagnostics_, info.source)
+            AddNote(*diagnostics_, info.source)
                 << KindOf(from->node) + " '" << NameOf(from->node) << "' references "
                 << KindOf(to->node) << " '" << NameOf(to->node) << "' here";
         }
@@ -818,10 +820,10 @@ struct DependencyAnalysis {
     }
 
     /// Program diagnostics
-    diag::List& diagnostics_;
+    const raw_ref<diag::List> diagnostics_;
 
     /// The resulting dependency graph
-    DependencyGraph& graph_;
+    const raw_ref<DependencyGraph> graph_;
 
     /// Allocator of Globals
     BlockAllocator<Global> allocator_;

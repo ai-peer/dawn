@@ -86,7 +86,7 @@ Symbol SymbolTable::New(std::string_view prefix_view /* = "" */) {
 
     auto view = Allocate(name);
     auto id = name_to_symbol_.Add(view, next_symbol_++);
-    return Symbol{id.value, generation_id_, view};
+    return Symbol{*id.value, generation_id_, view};
 }
 
 std::string_view SymbolTable::Allocate(std::string_view name) {

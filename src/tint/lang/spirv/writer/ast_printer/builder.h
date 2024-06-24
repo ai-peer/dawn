@@ -34,6 +34,7 @@
 #include <unordered_set>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "spirv/unified1/spirv.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/type/storage_texture.h"
@@ -84,7 +85,7 @@ class Builder {
         uint32_t source_id;
         /// The type of the current chain source. This type matches the deduced
         /// result_type of the current source defined above.
-        const core::type::Type* source_type;
+        raw_ptr<const core::type::Type> source_type;
         /// A list of access chain indices to emit. Note, we _only_ have access
         /// chain indices if the source is reference.
         std::vector<uint32_t> access_chain_indices;
@@ -565,7 +566,7 @@ class Builder {
                        uint32_t loop_header_id,
                        uint32_t break_target_id);
         // The last statement in the continiung block.
-        const ast::Statement* const last_statement = nullptr;
+        const raw_ptr<const ast::Statement> last_statement = nullptr;
         // The ID of the loop header
         const uint32_t loop_header_id = 0u;
         // The ID of the merge block for the loop.

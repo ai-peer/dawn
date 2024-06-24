@@ -29,6 +29,7 @@
 #define SRC_TINT_LANG_CORE_CONSTANT_INVALID_H_
 
 #include <variant>
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/core/type/invalid.h"
@@ -69,7 +70,7 @@ class Invalid : public Castable<Invalid, Value> {
     const Invalid* Clone(CloneContext& ctx) const override;
 
     /// The Invalid type
-    core::type::Invalid const* const type;
+    const raw_ptr<const core::type::Invalid> type;
 
   protected:
     /// @returns a monostate variant.

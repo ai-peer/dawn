@@ -51,8 +51,8 @@ Function::~Function() = default;
 
 Function* Function::Clone(CloneContext& ctx) {
     auto* new_func =
-        ctx.ir.allocators.values.Create<Function>(return_.type, pipeline_stage_, workgroup_size_);
-    new_func->block_ = ctx.ir.blocks.Create<ir::Block>();
+        ctx.ir->allocators.values.Create<Function>(return_.type, pipeline_stage_, workgroup_size_);
+    new_func->block_ = ctx.ir->blocks.Create<ir::Block>();
     new_func->SetParams(ctx.Clone<1>(params_.Slice()));
     new_func->return_.builtin = return_.builtin;
     new_func->return_.location = return_.location;
@@ -61,7 +61,7 @@ Function* Function::Clone(CloneContext& ctx) {
     ctx.Replace(this, new_func);
     block_->CloneInto(ctx, new_func->block_);
 
-    ctx.ir.SetName(new_func, ctx.ir.NameOf(this).Name());
+    ctx.ir->SetName(new_func, ctx.ir->NameOf(this).Name());
     return new_func;
 }
 

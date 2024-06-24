@@ -32,6 +32,7 @@
 #include <optional>
 #include <string_view>
 
+#include "base/memory/raw_ref.h"
 #include "src//tint/lang/core/ir/unary.h"
 #include "src/tint/lang/core/binary_op.h"
 #include "src/tint/lang/core/constant/composite.h"
@@ -92,12 +93,12 @@ static constexpr auto StyleVariable = style::Variable + style::NoQuote;
 
 class ScopedIndent {
   public:
-    explicit ScopedIndent(uint32_t& indent) : indent_(indent) { indent_ += 2; }
+    explicit ScopedIndent(uint32_t& indent) : indent_(indent) { *indent_ += 2; }
 
-    ~ScopedIndent() { indent_ -= 2; }
+    ~ScopedIndent() { *indent_ -= 2; }
 
   private:
-    uint32_t& indent_;
+    const raw_ref<uint32_t> indent_;
 };
 
 }  // namespace
@@ -129,18 +130,18 @@ void Disassembler::Disassemble() {
     out_.Clear();
     out_ << StyleCode;
 
-    for (auto* ty : mod_.Types()) {
+    for (auto* ty : mod_->Types()) {
         if (auto* str = ty->As<core::type::Struct>()) {
             EmitStructDecl(str);
         }
     }
 
-    if (!mod_.root_block->IsEmpty()) {
-        EmitBlock(mod_.root_block, "root");
+    if (!mod_->root_block->IsEmpty()) {
+        EmitBlock(mod_->root_block, "root");
         EmitLine();
     }
 
-    for (auto& func : mod_.functions) {
+    for (auto& func : mod_->functions) {
         EmitFunction(func);
     }
 }
@@ -334,13 +335,13 @@ void Disassembler::EmitFunction(const Function* func) {
 
     {  // Add a comment if the function IDs or parameter IDs doesn't match their name
         Vector<std::string, 4> names;
-        if (auto name = mod_.NameOf(func); name.IsValid()) {
+        if (auto name = mod_->NameOf(func); name.IsValid()) {
             if ("%" + name.Name() != fn_id.Plain()) {
                 names.Push(fn_id.Plain() + ": '" + name.Name() + "'");
             }
         }
         for (auto* p : func->Params()) {
-            if (auto name = mod_.NameOf(p); name.IsValid()) {
+            if (auto name = mod_->NameOf(p); name.IsValid()) {
                 auto id = NameOf(p);
                 if ("%" + name.Name() != id.Plain()) {
                     names.Push(id.Plain() + ": '" + name.Name() + "'");
@@ -558,7 +559,7 @@ void Disassembler::EmitInstruction(const Instruction* inst) {
         Vector<std::string, 4> names;
         for (auto* result : inst->Results()) {
             if (result) {
-                if (auto name = mod_.NameOf(result); name.IsValid()) {
+                if (auto name = mod_->NameOf(result); name.IsValid()) {
                     auto id = NameOf(result).Plain();
                     if ("%" + name.Name() != id) {
                         names.Push(id + ": '" + name.Name() + "'");
@@ -901,7 +902,7 @@ StyledText Disassembler::NameOf(const Block* node) {
 StyledText Disassembler::NameOf(const Value* value) {
     TINT_ASSERT(value);
     auto id = value_ids_.GetOrAdd(value, [&] {
-        if (auto sym = mod_.NameOf(value)) {
+        if (auto sym = mod_->NameOf(value)) {
             if (ids_.Add(sym.Name())) {
                 return sym.Name();
             }

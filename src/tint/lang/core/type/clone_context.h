@@ -28,6 +28,8 @@
 #ifndef SRC_TINT_LANG_CORE_TYPE_CLONE_CONTEXT_H_
 #define SRC_TINT_LANG_CORE_TYPE_CLONE_CONTEXT_H_
 
+#include "base/memory/raw_ptr.h"
+
 // Forward Declarations
 namespace tint {
 class SymbolTable;
@@ -43,15 +45,15 @@ struct CloneContext {
     /// Source information
     struct {
         /// The source symbol table
-        const SymbolTable* st;
+        raw_ptr<const SymbolTable> st;
     } src;
 
     /// Destination information
     struct {
         /// The destination symbol table
-        SymbolTable* st;
+        raw_ptr<SymbolTable> st;
         /// The destination type manger
-        Manager* mgr;
+        raw_ptr<Manager> mgr;
     } dst;
 };
 

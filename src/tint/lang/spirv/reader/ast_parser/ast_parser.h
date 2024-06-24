@@ -35,6 +35,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/text/string_stream.h"
@@ -106,9 +107,9 @@ struct TypedExpression {
     explicit operator bool() const { return type && expr; }
 
     /// The type
-    const Type* type = nullptr;
+    raw_ptr<const Type> type = nullptr;
     /// The expression
-    const ast::Expression* expr = nullptr;
+    raw_ptr<const ast::Expression> expr = nullptr;
 };
 
 /// Info about the WorkgroupSize builtin.
@@ -686,7 +687,7 @@ class ASTParser {
     /// ModuleVariable describes a module scope variable
     struct ModuleVariable {
         /// The AST variable node.
-        const ast::Var* var = nullptr;
+        raw_ptr<const ast::Var> var = nullptr;
         /// The address space of the var
         core::AddressSpace address_space = core::AddressSpace::kUndefined;
         /// The access mode of the var
@@ -863,11 +864,11 @@ class ASTParser {
     // All the state is owned by ir_context_.
     std::unique_ptr<spvtools::opt::IRContext> ir_context_;
     // The following are borrowed pointers to the internal state of ir_context_.
-    spvtools::opt::Module* module_ = nullptr;
-    spvtools::opt::analysis::DefUseManager* def_use_mgr_ = nullptr;
-    spvtools::opt::analysis::ConstantManager* constant_mgr_ = nullptr;
-    spvtools::opt::analysis::TypeManager* type_mgr_ = nullptr;
-    spvtools::opt::analysis::DecorationManager* deco_mgr_ = nullptr;
+    raw_ptr<spvtools::opt::Module> module_ = nullptr;
+    raw_ptr<spvtools::opt::analysis::DefUseManager> def_use_mgr_ = nullptr;
+    raw_ptr<spvtools::opt::analysis::ConstantManager> constant_mgr_ = nullptr;
+    raw_ptr<spvtools::opt::analysis::TypeManager> type_mgr_ = nullptr;
+    raw_ptr<spvtools::opt::analysis::DecorationManager> deco_mgr_ = nullptr;
 
     // The functions ordered so that callees precede their callers.
     std::vector<const spvtools::opt::Function*> topologically_ordered_functions_;

@@ -31,6 +31,8 @@
 #include <tuple>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_type.h"
 #include "src/tint/lang/core/constant/splat.h"
 #include "src/tint/lang/core/fluent_types.h"
@@ -111,16 +113,16 @@ class State {
 
     Program Run(const ProgramOptions& options) {
         core::ir::Capabilities caps{core::ir::Capability::kAllowRefTypes};
-        if (auto res = core::ir::Validate(mod, caps); res != Success) {
+        if (auto res = core::ir::Validate(*mod, caps); res != Success) {
             // IR module failed validation.
             b.Diagnostics() = res.Failure().reason;
             return Program{resolver::Resolve(b)};
         }
 
-        RootBlock(mod.root_block);
+        RootBlock(mod->root_block);
 
         // TODO(crbug.com/tint/1902): Emit user-declared types
-        for (auto& fn : mod.functions) {
+        for (auto& fn : mod->functions) {
             Fn(fn);
         }
 
@@ -135,7 +137,7 @@ class State {
 
   private:
     /// The source IR module
-    const core::ir::Module& mod;
+    const raw_ref<const core::ir::Module> mod;
 
     /// The target ProgramBuilder
     ProgramBuilder b;
@@ -147,7 +149,7 @@ class State {
 
     /// The structure for an inlined value
     struct InlinedValue {
-        const ast::Expression* expr = nullptr;
+        raw_ptr<const ast::Expression> expr = nullptr;
     };
 
     /// Empty struct used as a sentinel value to indicate that an ast::Value has been consumed by
@@ -171,10 +173,10 @@ class State {
 
     using StatementList =
         Vector<const ast::Statement*, decltype(ast::BlockStatement::statements)::static_length>;
-    StatementList* statements_ = nullptr;
+    raw_ptr<StatementList> statements_ = nullptr;
 
     /// The current switch case block
-    const core::ir::Block* current_switch_case_ = nullptr;
+    raw_ptr<const core::ir::Block> current_switch_case_ = nullptr;
 
     /// Set of enable directives emitted.
     Hashset<wgsl::Extension, 4> enables_;
@@ -588,7 +590,7 @@ class State {
 
     void Let(const core::ir::Let* let) {
         auto* result = let->Result(0);
-        if (mod.NameOf(result).IsValid() || result->NumUsages() > 0) {
+        if (mod->NameOf(result).IsValid() || result->NumUsages() > 0) {
             Symbol name = NameFor(result);
             Append(b.Decl(b.Let(name, Expr(let->Value()))));
             Bind(result, name);
@@ -1055,7 +1057,7 @@ class State {
             if (!suggested.empty()) {
                 return b.Symbols().Register(suggested);
             }
-            if (auto sym = mod.NameOf(value)) {
+            if (auto sym = mod->NameOf(value)) {
                 return b.Symbols().Register(sym.NameView());
             }
             return b.Symbols().New("v");

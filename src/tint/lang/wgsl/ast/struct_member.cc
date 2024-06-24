@@ -58,7 +58,7 @@ StructMember::~StructMember() = default;
 const StructMember* StructMember::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto n = ctx.Clone(name);
+    auto n = ctx.Clone(name.get());
     auto ty = ctx.Clone(type);
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<StructMember>(src, n, ty, std::move(attrs));

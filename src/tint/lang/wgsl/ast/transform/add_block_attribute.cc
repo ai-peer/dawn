@@ -93,7 +93,7 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
                 ctx.InsertBefore(src.AST().GlobalDeclarations(), global, ret);
                 return ret;
             });
-            ctx.Replace(global->type.expr, b.Expr(wrapper->name->symbol));
+            ctx.Replace(global->type.expr.get(), b.Expr(wrapper->name->symbol));
 
             // Insert a member accessor to get the original type from the wrapper at
             // any usage of the original variable.

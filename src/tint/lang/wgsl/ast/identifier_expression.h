@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_IDENTIFIER_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_IDENTIFIER_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
 // Forward declarations
@@ -60,7 +61,7 @@ class IdentifierExpression final : public Castable<IdentifierExpression, Express
     const IdentifierExpression* Clone(CloneContext& ctx) const override;
 
     /// The identifier for the expression
-    Identifier const* const identifier;
+    const raw_ptr<const Identifier> identifier;
 };
 
 }  // namespace tint::ast

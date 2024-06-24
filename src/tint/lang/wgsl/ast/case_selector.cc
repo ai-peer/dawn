@@ -44,7 +44,7 @@ CaseSelector::~CaseSelector() = default;
 const CaseSelector* CaseSelector::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto ex = ctx.Clone(expr);
+    auto ex = ctx.Clone(expr.get());
     return ctx.dst->create<CaseSelector>(src, ex);
 }
 

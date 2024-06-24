@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/ir/location.h"
@@ -131,9 +132,9 @@ class FunctionParam : public Castable<FunctionParam, Value> {
     std::optional<struct BindingPoint> BindingPoint() const { return binding_point_; }
 
   private:
-    ir::Function* func_ = nullptr;
+    raw_ptr<ir::Function> func_ = nullptr;
     uint32_t index_ = 0xffffffff;
-    const core::type::Type* type_ = nullptr;
+    raw_ptr<const core::type::Type> type_ = nullptr;
     std::optional<core::BuiltinValue> builtin_;
     std::optional<struct Location> location_;
     std::optional<struct BindingPoint> binding_point_;

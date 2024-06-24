@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/constant.h"
@@ -64,13 +65,13 @@ using namespace tint::core::fluent_types;  // NOLINT
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// A map from an atomic pointer type to an atomicCompareExchangeWeak polyfill.
     Hashmap<const core::type::Type*, core::ir::Function*, 2> atomic_compare_exchange_polyfills{};
@@ -82,7 +83,7 @@ struct State {
     void Process() {
         // Find the builtins that need replacing.
         Vector<core::ir::CoreBuiltinCall*, 4> worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* builtin = inst->As<core::ir::CoreBuiltinCall>()) {
                 switch (builtin->Func()) {
                     case core::BuiltinFn::kAtomicAdd:
@@ -248,7 +249,7 @@ struct State {
     /// @param builtin the builtin call instruction
     void AtomicCall(core::ir::CoreBuiltinCall* builtin, msl::BuiltinFn intrinsic) {
         auto args = Vector<core::ir::Value*, 4>{builtin->Args()};
-        args.Push(ir.allocators.values.Create<msl::ir::MemoryOrder>(
+        args.Push(ir->allocators.values.Create<msl::ir::MemoryOrder>(
             b.ConstantValue(u32(std::memory_order_relaxed))));
         auto* call = b.CallWithResult<msl::ir::BuiltinCall>(builtin->DetachResult(), intrinsic,
                                                             std::move(args));
@@ -275,10 +276,10 @@ struct State {
             func->SetParams({ptr, cmp, val});
             b.Append(func->Block(), [&] {
                 auto* old_value = b.Var<function>("old_value", cmp)->Result(0);
-                auto* order = ir.allocators.values.Create<msl::ir::MemoryOrder>(
+                auto* order = ir->allocators.values.Create<msl::ir::MemoryOrder>(
                     b.ConstantValue(u32(std::memory_order_relaxed)));
                 auto* call = b.Call<msl::ir::BuiltinCall>(
-                    ty.bool_(), BuiltinFn::kAtomicCompareExchangeWeakExplicit,
+                    ty->bool_(), BuiltinFn::kAtomicCompareExchangeWeakExplicit,
                     Vector{ptr, old_value, val, order, order});
                 auto* result =
                     b.Construct(builtin->Result(0)->Type(), Vector{
@@ -376,9 +377,9 @@ struct State {
     void QuantizeToF16(core::ir::CoreBuiltinCall* builtin) {
         auto* arg = builtin->Args()[0];
         auto* type_f32 = arg->Type();
-        const core::type::Type* type_f16 = ty.f16();
+        const core::type::Type* type_f16 = ty->f16();
         if (auto* vec = type_f32->As<core::type::Vector>()) {
-            type_f16 = ty.vec(ty.f16(), vec->Width());
+            type_f16 = ty->vec(ty->f16(), vec->Width());
         }
 
         // Convert the argument to f16 and then back again.
@@ -414,7 +415,7 @@ struct State {
             // Call MSL member functions to get the dimensions of the image.
             Vector<core::ir::InstructionResult*, 4> values;
             auto get_dim = [&](msl::BuiltinFn fn) {
-                auto* call = b.MemberCall<msl::ir::MemberBuiltinCall>(ty.u32(), fn, tex);
+                auto* call = b.MemberCall<msl::ir::MemberBuiltinCall>(ty->u32(), fn, tex);
                 if (lod) {
                     call->AppendArg(lod);
                 }
@@ -464,7 +465,7 @@ struct State {
             if (component->Type()->Is<core::type::I32>()) {
                 component = b.Constant(component->Value()->ValueAs<u32>());
             }
-            args.Push(ir.allocators.values.Create<msl::ir::Component>(component->Value()));
+            args.Push(ir->allocators.values.Create<msl::ir::Component>(component->Value()));
         }
 
         // Call the `gather()` member function.
@@ -509,9 +510,9 @@ struct State {
             // Convert the coordinates to unsigned integers if necessary.
             if (coords->Type()->is_signed_integer_scalar_or_vector()) {
                 if (auto* vec = coords->Type()->As<core::type::Vector>()) {
-                    coords = b.Convert(ty.vec(ty.u32(), vec->Width()), coords)->Result(0);
+                    coords = b.Convert(ty->vec(ty->u32(), vec->Width()), coords)->Result(0);
                 } else {
-                    coords = b.Convert(ty.u32(), coords)->Result(0);
+                    coords = b.Convert(ty->u32(), coords)->Result(0);
                 }
             }
 
@@ -585,7 +586,7 @@ struct State {
                 tex_type->dim() == core::type::TextureDimension::kCubeArray) {
                 bias_idx = 3;
             }
-            args[bias_idx] = b.Construct(ty.Get<msl::type::Bias>(), args[bias_idx])->Result(0);
+            args[bias_idx] = b.Construct(ty->Get<msl::type::Bias>(), args[bias_idx])->Result(0);
 
             // Call the `sample()` member function.
             b.MemberCallWithResult<msl::ir::MemberBuiltinCall>(
@@ -619,7 +620,7 @@ struct State {
         b.InsertBefore(builtin, [&] {
             // Insert a constant zero LOD argument.
             // The LOD goes before the offset if there is one, otherwise at the end.
-            auto* lod = b.Construct(ty.Get<msl::type::Level>(), u32(0))->Result(0);
+            auto* lod = b.Construct(ty->Get<msl::type::Level>(), u32(0))->Result(0);
             if (has_offset) {
                 args.Insert(args.Length() - 1, lod);
             } else {
@@ -669,7 +670,7 @@ struct State {
                 case core::type::TextureDimension::kNone:
                     TINT_UNREACHABLE();
             }
-            args[grad_idx] = b.Construct(ty.Get<msl::type::Gradient>(dim), ddx, ddy)->Result(0);
+            args[grad_idx] = b.Construct(ty->Get<msl::type::Gradient>(dim), ddx, ddy)->Result(0);
 
             // Resize the argument list as the gradient argument only takes up one argument.
             // Move the offset argument back one place if present.
@@ -701,7 +702,7 @@ struct State {
                 tex_type->dim() == core::type::TextureDimension::kCubeArray) {
                 lod_idx = 3;
             }
-            args[lod_idx] = b.Construct(ty.Get<msl::type::Level>(), args[lod_idx])->Result(0);
+            args[lod_idx] = b.Construct(ty->Get<msl::type::Level>(), args[lod_idx])->Result(0);
 
             // Call the `sample()` member function.
             b.MemberCallWithResult<msl::ir::MemberBuiltinCall>(
@@ -731,9 +732,9 @@ struct State {
             // Convert the coordinates to unsigned integers if necessary.
             if (coords->Type()->is_signed_integer_scalar_or_vector()) {
                 if (auto* vec = coords->Type()->As<core::type::Vector>()) {
-                    coords = b.Convert(ty.vec(ty.u32(), vec->Width()), coords)->Result(0);
+                    coords = b.Convert(ty->vec(ty->u32(), vec->Width()), coords)->Result(0);
                 } else {
-                    coords = b.Convert(ty.u32(), coords)->Result(0);
+                    coords = b.Convert(ty->u32(), coords)->Result(0);
                 }
             }
 
@@ -744,13 +745,13 @@ struct State {
             if (index) {
                 args.Push(index);
             }
-            b.MemberCall<msl::ir::MemberBuiltinCall>(ty.void_(), msl::BuiltinFn::kWrite, tex,
+            b.MemberCall<msl::ir::MemberBuiltinCall>(ty->void_(), msl::BuiltinFn::kWrite, tex,
                                                      std::move(args));
 
             // If we are writing to a read-write texture, add a fence to ensure that the written
             // values are visible to subsequent reads from the same thread.
             if (tex_type->access() == core::Access::kReadWrite) {
-                b.MemberCall<msl::ir::MemberBuiltinCall>(ty.void_(), msl::BuiltinFn::kFence, tex);
+                b.MemberCall<msl::ir::MemberBuiltinCall>(ty->void_(), msl::BuiltinFn::kFence, tex);
             }
         });
         builtin->Destroy();
@@ -788,7 +789,7 @@ Result<SuccessType> BuiltinPolyfill(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

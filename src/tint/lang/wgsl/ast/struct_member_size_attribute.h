@@ -31,6 +31,7 @@
 #include <stddef.h>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -60,7 +61,7 @@ class StructMemberSizeAttribute final : public Castable<StructMemberSizeAttribut
     const StructMemberSizeAttribute* Clone(CloneContext& ctx) const override;
 
     /// The size expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

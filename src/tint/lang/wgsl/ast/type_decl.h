@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_TYPE_DECL_H_
 #define SRC_TINT_LANG_WGSL_AST_TYPE_DECL_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/node.h"
 
 // Forward declarations
@@ -51,7 +52,7 @@ class TypeDecl : public Castable<TypeDecl, Node> {
     ~TypeDecl() override;
 
     /// The name of the type declaration
-    const Identifier* const name;
+    const raw_ptr<const Identifier> name;
 };
 
 }  // namespace tint::ast

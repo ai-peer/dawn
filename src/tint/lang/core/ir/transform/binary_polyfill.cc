@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,19 +44,19 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The polyfill config.
-    const BinaryPolyfillConfig& config;
+    const raw_ref<const BinaryPolyfillConfig> config;
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// Map from integer type to its divide helper function.
     Hashmap<const type::Type*, Function*, 4> int_div_helpers{};
@@ -67,19 +68,19 @@ struct State {
     void Process() {
         // Find the binary instructions that need to be polyfilled.
         Vector<ir::CoreBinary*, 64> worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* binary = inst->As<ir::CoreBinary>()) {
                 switch (binary->Op()) {
                     case BinaryOp::kDivide:
                     case BinaryOp::kModulo:
-                        if (config.int_div_mod &&
+                        if (config->int_div_mod &&
                             binary->Result(0)->Type()->is_integer_scalar_or_vector()) {
                             worklist.Push(binary);
                         }
                         break;
                     case BinaryOp::kShiftLeft:
                     case BinaryOp::kShiftRight:
-                        if (config.bitshift_modulo) {
+                        if (config->bitshift_modulo) {
                             worklist.Push(binary);
                         }
                         break;
@@ -114,7 +115,7 @@ struct State {
     const core::type::Type* MatchWidth(const core::type::Type* el_ty,
                                        const core::type::Type* match) {
         if (auto* vec = match->As<core::type::Vector>()) {
-            return ty.vec(el_ty, vec->Width());
+            return ty->vec(el_ty, vec->Width());
         }
         return el_ty;
     }
@@ -169,7 +170,7 @@ struct State {
 
                 // Select either the RHS or a constant one value if the RHS is zero.
                 // If this is a signed operation, we also check for `INT_MIN / -1`.
-                auto* bool_ty = MatchWidth(ty.bool_(), result_ty);
+                auto* bool_ty = MatchWidth(ty->bool_(), result_ty);
                 auto* cond = b.Equal(bool_ty, rhs, zero);
                 if (is_signed) {
                     auto* lowest = MatchWidth(b.Constant(i32::Lowest()), result_ty);
@@ -233,7 +234,7 @@ Result<SuccessType> BinaryPolyfill(Module& ir, const BinaryPolyfillConfig& confi
         return result;
     }
 
-    State{config, ir}.Process();
+    State{raw_ref(config), raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

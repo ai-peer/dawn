@@ -114,7 +114,7 @@ void CheckIdentifier(const Identifier* ident, const TemplatedIdentifierMatcher<A
             CheckIdentifier(got_arg->As<IdentifierExpression>()->identifier, expected_arg);
         } else if constexpr (IsTemplatedIdentifierMatcher<T>::value) {
             ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
-            auto* got_ident = got_arg->As<IdentifierExpression>()->identifier;
+            auto* got_ident = got_arg->As<IdentifierExpression>()->identifier.get();
             ASSERT_TRUE(got_ident->Is<TemplatedIdentifier>());
             CheckIdentifier(got_ident->As<TemplatedIdentifier>(), expected_arg);
         } else if constexpr (std::is_same_v<T, bool>) {

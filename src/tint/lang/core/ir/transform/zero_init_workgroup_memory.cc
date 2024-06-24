@@ -30,6 +30,8 @@
 #include <map>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/transform/common/referenced_module_vars.h"
@@ -54,17 +56,17 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The mapping from functions to their transitively referenced workgroup variables.
     ReferencedModuleVars referenced_module_vars_{
-        ir, [](const Var* var) {
+        *ir, [](const Var* var) {
             auto* view = var->Result(0)->Type()->As<type::MemoryView>();
             return view && view->AddressSpace() == AddressSpace::kWorkgroup;
         }};
@@ -82,9 +84,9 @@ struct State {
     /// Store describes a store to a sub-element of a workgroup variable.
     struct Store {
         /// The workgroup variable.
-        Var* var = nullptr;
+        raw_ptr<Var> var = nullptr;
         /// The store type of the element.
-        const type::Type* store_type = nullptr;
+        raw_ptr<const type::Type> store_type = nullptr;
         /// The list of index operands to get to the element.
         Vector<Index, 4> indices;
     };
@@ -97,11 +99,11 @@ struct State {
 
     /// Process the module.
     void Process() {
-        if (ir.root_block->IsEmpty()) {
+        if (ir->root_block->IsEmpty()) {
             return;
         }
         // Process each entry point function.
-        for (auto& func : ir.functions) {
+        for (auto& func : ir->functions) {
             if (func->Stage() == Function::PipelineStage::kCompute) {
                 ProcessEntryPoint(func);
             }
@@ -142,7 +144,7 @@ struct State {
                 auto element_stores = stores.Get(count);
                 if (count == 1u) {
                     // Make the first invocation in the group perform all of the non-arrayed stores.
-                    auto* ifelse = b.If(b.Equal(ty.bool_(), local_index, 0_u));
+                    auto* ifelse = b.If(b.Equal(ty->bool_(), local_index, 0_u));
                     b.Append(ifelse->True(), [&] {
                         for (auto& store : *element_stores) {
                             GenerateStore(store, count, b.Constant(0_u));
@@ -151,14 +153,14 @@ struct State {
                     });
                 } else {
                     // Use a loop for arrayed stores.
-                    b.LoopRange(ty, local_index, u32(count), u32(wgsize), [&](Value* index) {
+                    b.LoopRange(*ty, local_index, u32(count), u32(wgsize), [&](Value* index) {
                         for (auto& store : *element_stores) {
                             GenerateStore(store, count, index);
                         }
                     });
                 }
             }
-            b.Call(ty.void_(), core::BuiltinFn::kWorkgroupBarrier);
+            b.Call(ty->void_(), core::BuiltinFn::kWorkgroupBarrier);
         });
     }
 
@@ -219,7 +221,7 @@ struct State {
                 for (auto* member : str->Members()) {
                     if (member->Attributes().builtin && member->Attributes().builtin.value() ==
                                                             BuiltinValue::kLocalInvocationIndex) {
-                        auto* access = b.Access(ty.u32(), param, u32(member->Index()));
+                        auto* access = b.Access(ty->u32(), param, u32(member->Index()));
                         access->InsertBefore(func->Block()->Front());
                         return access->Result(0);
                     }
@@ -234,7 +236,7 @@ struct State {
         }
 
         // No local invocation index was found, so add one to the parameter list and use that.
-        auto* param = b.FunctionParam("tint_local_index", ty.u32());
+        auto* param = b.FunctionParam("tint_local_index", ty->u32());
         func->AppendParam(param);
         param->SetBuiltin(BuiltinValue::kLocalInvocationIndex);
         return param;
@@ -259,10 +261,10 @@ struct State {
                     auto array_index = std::get<ArrayIndex>(idx);
                     Value* index = linear_index;
                     if (count > 1) {
-                        index = b.Divide(ty.u32(), index, u32(count))->Result(0);
+                        index = b.Divide(ty->u32(), index, u32(count))->Result(0);
                     }
                     if (total_count > count * array_index.count) {
-                        index = b.Modulo(ty.u32(), index, u32(array_index.count))->Result(0);
+                        index = b.Modulo(ty->u32(), index, u32(array_index.count))->Result(0);
                     }
                     indices.Push(index);
                     count *= array_index.count;
@@ -272,15 +274,15 @@ struct State {
                 }
             }
             indices.Reverse();
-            to = b.Access(ty.ptr(workgroup, store.store_type), to, indices)->Result(0);
+            to = b.Access(ty->ptr(workgroup, store.store_type), to, indices)->Result(0);
         }
 
         // Generate the store instruction.
         if (auto* atomic = store.store_type->As<type::Atomic>()) {
-            auto* zero = b.Constant(ir.constant_values.Zero(atomic->Type()));
-            b.Call(ty.void_(), core::BuiltinFn::kAtomicStore, to, zero);
+            auto* zero = b.Constant(ir->constant_values.Zero(atomic->Type()));
+            b.Call(ty->void_(), core::BuiltinFn::kAtomicStore, to, zero);
         } else {
-            auto* zero = b.Constant(ir.constant_values.Zero(store.store_type));
+            auto* zero = b.Constant(ir->constant_values.Zero(store.store_type));
             b.Store(to, zero);
         }
     }
@@ -312,7 +314,7 @@ Result<SuccessType> ZeroInitWorkgroupMemory(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

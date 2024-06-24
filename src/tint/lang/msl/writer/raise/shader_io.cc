@@ -30,6 +30,8 @@
 #include <memory>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/transform/shader_io.h"
@@ -45,7 +47,7 @@ namespace {
 /// State that persists across the whole module and can be shared between entry points.
 struct PerModuleState {
     /// The frag_depth clamp arguments.
-    core::ir::Value* frag_depth_clamp_args = nullptr;
+    raw_ptr<core::ir::Value> frag_depth_clamp_args = nullptr;
 };
 
 /// PIMPL state for the parts of the shader IO transform specific to MSL.
@@ -53,10 +55,10 @@ struct PerModuleState {
 /// passed as an entry point parameter, and wrap outputs in a structure returned by the entry point.
 struct StateImpl : core::ir::transform::ShaderIOBackendState {
     /// The configuration options.
-    const ShaderIOConfig& config;
+    const raw_ref<const ShaderIOConfig> config;
 
     /// The per-module state object.
-    PerModuleState& module_state;
+    const raw_ref<PerModuleState> module_state;
 
     /// The input parameters of the entry point.
     Vector<core::ir::FunctionParam*, 4> input_params;
@@ -69,7 +71,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     Vector<InputIndex, 4> input_indices;
 
     /// The output struct type.
-    core::type::Struct* output_struct = nullptr;
+    raw_ptr<core::type::Struct> output_struct = nullptr;
 
     /// The output values to return from the entry point.
     Vector<core::ir::Value*, 4> output_values;
@@ -111,8 +113,8 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
         }
 
         if (!input_struct_members.IsEmpty()) {
-            auto* input_struct =
-                ty.Struct(ir.symbols.New(ir.NameOf(func).Name() + "_inputs"), input_struct_members);
+            auto* input_struct = ty->Struct(ir->symbols.New(ir->NameOf(func).Name() + "_inputs"),
+                                            input_struct_members);
             switch (func->Stage()) {
                 case core::ir::Function::PipelineStage::kFragment:
                     input_struct->AddUsage(core::type::PipelineStageUsage::kFragmentInput);
@@ -133,9 +135,9 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     /// @copydoc ShaderIO::BackendState::FinalizeOutputs
     const core::type::Type* FinalizeOutputs() override {
         if (outputs.IsEmpty()) {
-            return ty.void_();
+            return ty->void_();
         }
-        output_struct = ty.Struct(ir.symbols.New(ir.NameOf(func).Name() + "_outputs"), outputs);
+        output_struct = ty->Struct(ir->symbols.New(ir->NameOf(func).Name() + "_outputs"), outputs);
         switch (func->Stage()) {
             case core::ir::Function::PipelineStage::kFragment:
                 output_struct->AddUsage(core::type::PipelineStageUsage::kFragmentOutput);
@@ -176,7 +178,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     }
 
     /// @copydoc ShaderIO::BackendState::NeedsVertexPointSize
-    bool NeedsVertexPointSize() const override { return config.emit_vertex_point_size; }
+    bool NeedsVertexPointSize() const override { return config->emit_vertex_point_size; }
 };
 }  // namespace
 

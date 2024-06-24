@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/builtin_fn.h"
 #include "src/tint/lang/wgsl/extension.h"
 #include "src/tint/lang/wgsl/features/language_feature.h"
@@ -126,7 +127,7 @@ class BuiltinFn final : public Castable<BuiltinFn, CallTarget> {
     wgsl::LanguageFeature RequiredLanguageFeature() const;
 
     /// @returns the builtin table overload info
-    const core::intrinsic::OverloadInfo& Overload() const { return overload_; }
+    const core::intrinsic::OverloadInfo& Overload() const { return *overload_; }
 
     /// @return the hash code for this object
     tint::HashCode HashCode() const {
@@ -136,7 +137,7 @@ class BuiltinFn final : public Castable<BuiltinFn, CallTarget> {
   private:
     const wgsl::BuiltinFn fn_;
     const PipelineStageSet supported_stages_;
-    const core::intrinsic::OverloadInfo& overload_;
+    const raw_ref<const core::intrinsic::OverloadInfo> overload_;
 };
 
 /// Constant value used by the degrees() builtin

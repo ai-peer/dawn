@@ -52,7 +52,7 @@ std::string DiagnosticAttribute::Name() const {
 const DiagnosticAttribute* DiagnosticAttribute::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto rule = ctx.Clone(control.rule_name);
+    auto rule = ctx.Clone(control.rule_name.get());
     DiagnosticControl dc(control.severity, rule);
     return ctx.dst->create<DiagnosticAttribute>(src, std::move(dc));
 }

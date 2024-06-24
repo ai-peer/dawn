@@ -38,8 +38,8 @@ using IR_ValueTest = IRTestHelper;
 using IR_ValueDeathTest = IR_ValueTest;
 
 TEST_F(IR_ValueTest, ReplaceAllUsesWith_Value) {
-    auto* val_old = b.InstructionResult(ty.i32());
-    auto* val_new = b.InstructionResult(ty.i32());
+    auto* val_old = b.InstructionResult(ty->i32());
+    auto* val_new = b.InstructionResult(ty->i32());
     auto* inst = b.Add(mod.Types().i32(), val_old, 1_i);
     EXPECT_EQ(inst->LHS(), val_old);
     val_old->ReplaceAllUsesWith(val_new);
@@ -47,8 +47,8 @@ TEST_F(IR_ValueTest, ReplaceAllUsesWith_Value) {
 }
 
 TEST_F(IR_ValueTest, ReplaceAllUsesWith_Fn) {
-    auto* val_old = b.InstructionResult(ty.i32());
-    auto* val_new = b.InstructionResult(ty.i32());
+    auto* val_old = b.InstructionResult(ty->i32());
+    auto* val_new = b.InstructionResult(ty->i32());
     auto* inst = b.Add(mod.Types().i32(), val_old, 1_i);
     EXPECT_EQ(inst->LHS(), val_old);
     val_old->ReplaceAllUsesWith([&](Usage use) {
@@ -60,7 +60,7 @@ TEST_F(IR_ValueTest, ReplaceAllUsesWith_Fn) {
 }
 
 TEST_F(IR_ValueTest, Destroy) {
-    auto* val = b.InstructionResult(ty.i32());
+    auto* val = b.InstructionResult(ty->i32());
     EXPECT_TRUE(val->Alive());
     val->Destroy();
     EXPECT_FALSE(val->Alive());

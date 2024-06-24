@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_SPIRV_READER_AST_PARSER_FAIL_STREAM_H_
 #define SRC_TINT_LANG_SPIRV_READER_AST_PARSER_FAIL_STREAM_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/text/string_stream.h"
 
 namespace tint::spirv::reader::ast_parser {
@@ -73,8 +74,8 @@ class FailStream {
     }
 
   private:
-    bool* status_ptr_;
-    StringStream* out_;
+    raw_ptr<bool> status_ptr_;
+    raw_ptr<StringStream> out_;
 };
 
 }  // namespace tint::spirv::reader::ast_parser

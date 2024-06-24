@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/interpolation_sampling.h"
 #include "src/tint/lang/core/interpolation_type.h"
@@ -300,7 +301,7 @@ class SemHelper {
     /// @returns a new note diagnostics
     diag::Diagnostic& AddNote(const Source& source) const;
 
-    ProgramBuilder* builder_;
+    raw_ptr<ProgramBuilder> builder_;
 };
 
 }  // namespace tint::resolver

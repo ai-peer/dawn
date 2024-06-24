@@ -66,7 +66,7 @@ const CaseStatement* CaseStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
     auto sel = ctx.Clone(selectors);
-    auto* b = ctx.Clone(body);
+    auto* b = ctx.Clone(body.get());
     return ctx.dst->create<CaseStatement>(src, std::move(sel), b);
 }
 

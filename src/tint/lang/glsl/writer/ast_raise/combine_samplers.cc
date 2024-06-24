@@ -32,6 +32,8 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -59,14 +61,14 @@ using namespace tint::core::number_suffixes;  // NOLINT
 /// PIMPL state for the transform
 struct CombineSamplers::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
 
     /// The binding information
-    const Bindings* bindings;
+    raw_ptr<const Bindings> bindings;
 
     /// Map from a texture/sampler pair to the corresponding combined sampler
     /// variable

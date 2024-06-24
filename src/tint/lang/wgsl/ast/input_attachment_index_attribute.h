@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 
 // Forward declarations
@@ -64,7 +65,7 @@ class InputAttachmentIndexAttribute final
     const InputAttachmentIndexAttribute* Clone(CloneContext& ctx) const override;
 
     /// The index value expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

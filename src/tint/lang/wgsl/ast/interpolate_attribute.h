@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 
 // Forward declarations
@@ -65,10 +66,10 @@ class InterpolateAttribute final : public Castable<InterpolateAttribute, Attribu
     const InterpolateAttribute* Clone(CloneContext& ctx) const override;
 
     /// The interpolation type
-    const Expression* const type;
+    const raw_ptr<const Expression> type;
 
     /// The interpolation sampling
-    const Expression* const sampling;
+    const raw_ptr<const Expression> sampling;
 };
 
 }  // namespace tint::ast

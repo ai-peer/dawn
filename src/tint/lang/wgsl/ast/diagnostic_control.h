@@ -31,6 +31,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/diagnostic_severity.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
 
@@ -59,7 +60,7 @@ struct DiagnosticControl {
     wgsl::DiagnosticSeverity severity = wgsl::DiagnosticSeverity::kUndefined;
 
     /// The diagnostic rule name.
-    const DiagnosticRuleName* rule_name = nullptr;
+    raw_ptr<const DiagnosticRuleName> rule_name = nullptr;
 };
 
 }  // namespace tint::ast

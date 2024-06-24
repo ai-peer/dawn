@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_BINARY_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_BINARY_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/binary_op.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -109,9 +110,9 @@ class BinaryExpression final : public Castable<BinaryExpression, Expression> {
     /// the binary op type
     const core::BinaryOp op;
     /// the left side expression
-    const Expression* const lhs;
+    const raw_ptr<const Expression> lhs;
     /// the right side expression
-    const Expression* const rhs;
+    const raw_ptr<const Expression> rhs;
 };
 
 /// @param op the operator

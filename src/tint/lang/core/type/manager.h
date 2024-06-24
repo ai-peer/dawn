@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/fluent_types.h"
@@ -498,7 +499,7 @@ class Manager final {
         /// The name of the struct member.
         Symbol name;
         /// The type of the struct member.
-        const core::type::Type* type = nullptr;
+        raw_ptr<const core::type::Type> type = nullptr;
         /// The optional struct member attributes.
         core::type::StructMemberAttributes attributes = {};
     };

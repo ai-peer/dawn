@@ -31,6 +31,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/ast/disable_validation_attribute.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -85,7 +86,7 @@ bool ContainsMatrix(const core::type::Type* type) {
 /// PIMPL state for the transform
 struct ModuleScopeVarToEntryPointParam::State {
     /// The clone context.
-    program::CloneContext& ctx;
+    const raw_ref<program::CloneContext> ctx;
 
     /// Constructor
     /// @param context the clone context
@@ -110,8 +111,8 @@ struct ModuleScopeVarToEntryPointParam::State {
             // Clone the struct and add it to the global declaration list.
             // Remove the old declaration.
             auto* ast_str = str->Declaration();
-            ctx.dst->AST().AddTypeDecl(ctx.Clone(ast_str));
-            ctx.Remove(ctx.src->AST().GlobalDeclarations(), ast_str);
+            ctx->dst->AST().AddTypeDecl(ctx->Clone(ast_str));
+            ctx->Remove(ctx->src->AST().GlobalDeclarations(), ast_str);
         } else if (auto* arr = ty->As<core::type::Array>()) {
             CloneStructTypes(arr->ElemType());
         }
@@ -137,7 +138,7 @@ struct ModuleScopeVarToEntryPointParam::State {
         auto* ty = var->Type()->UnwrapRef();
 
         // Helper to create an AST node for the store type of the variable.
-        auto store_type = [&] { return CreateASTTypeFor(ctx, ty); };
+        auto store_type = [&] { return CreateASTTypeFor(*ctx, ty); };
 
         core::AddressSpace sc = var->AddressSpace();
         switch (sc) {
@@ -145,11 +146,11 @@ struct ModuleScopeVarToEntryPointParam::State {
                 // For a texture or sampler variable, redeclare it as an entry point parameter.
                 // Disable entry point parameter validation.
                 auto* disable_validation =
-                    ctx.dst->Disable(ast::DisabledValidation::kEntryPointParameter);
-                auto attrs = ctx.Clone(var->Declaration()->attributes);
+                    ctx->dst->Disable(ast::DisabledValidation::kEntryPointParameter);
+                auto attrs = ctx->Clone(var->Declaration()->attributes);
                 attrs.Push(disable_validation);
-                auto* param = ctx.dst->Param(new_var_symbol, store_type(), attrs);
-                ctx.InsertFront(func->params, param);
+                auto* param = ctx->dst->Param(new_var_symbol, store_type(), attrs);
+                ctx->InsertFront(func->params, param);
 
                 break;
             }
@@ -157,9 +158,9 @@ struct ModuleScopeVarToEntryPointParam::State {
             case core::AddressSpace::kUniform: {
                 // Variables into the Storage and Uniform address spaces are redeclared as entry
                 // point parameters with a pointer type.
-                auto attributes = ctx.Clone(var->Declaration()->attributes);
-                attributes.Push(ctx.dst->Disable(ast::DisabledValidation::kEntryPointParameter));
-                attributes.Push(ctx.dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace));
+                auto attributes = ctx->Clone(var->Declaration()->attributes);
+                attributes.Push(ctx->dst->Disable(ast::DisabledValidation::kEntryPointParameter));
+                attributes.Push(ctx->dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace));
 
                 auto param_type = store_type();
                 if (auto* arr = ty->As<core::type::Array>();
@@ -168,19 +169,19 @@ struct ModuleScopeVarToEntryPointParam::State {
                     // them. Ideally we'd just emit the array itself as a pointer, but this is not
                     // representable in Tint's AST.
                     CloneStructTypes(ty);
-                    auto* wrapper = ctx.dst->Structure(
-                        ctx.dst->Sym(), tint::Vector{
-                                            ctx.dst->Member(kWrappedArrayMemberName, param_type),
-                                        });
-                    param_type = ctx.dst->ty.Of(wrapper);
+                    auto* wrapper = ctx->dst->Structure(
+                        ctx->dst->Sym(), tint::Vector{
+                                             ctx->dst->Member(kWrappedArrayMemberName, param_type),
+                                         });
+                    param_type = ctx->dst->ty.Of(wrapper);
                     is_wrapped = true;
                 }
 
                 param_type = sc == core::AddressSpace::kStorage
-                                 ? ctx.dst->ty.ptr(sc, param_type, var->Access())
-                                 : ctx.dst->ty.ptr(sc, param_type);
-                auto* param = ctx.dst->Param(new_var_symbol, param_type, attributes);
-                ctx.InsertFront(func->params, param);
+                                 ? ctx->dst->ty.ptr(sc, param_type, var->Access())
+                                 : ctx->dst->ty.ptr(sc, param_type);
+                auto* param = ctx->dst->Param(new_var_symbol, param_type, attributes);
+                ctx->InsertFront(func->params, param);
                 is_pointer = true;
 
                 break;
@@ -192,23 +193,23 @@ struct ModuleScopeVarToEntryPointParam::State {
                     // TODO(jrprice): Do this for all other workgroup variables too.
 
                     // Create a member in the workgroup parameter struct.
-                    auto member = ctx.Clone(var->Declaration()->name->symbol);
-                    workgroup_parameter_members.Push(ctx.dst->Member(member, store_type()));
+                    auto member = ctx->Clone(var->Declaration()->name->symbol);
+                    workgroup_parameter_members.Push(ctx->dst->Member(member, store_type()));
                     CloneStructTypes(var->Type()->UnwrapRef());
 
                     // Create a function-scope variable that is a pointer to the member.
-                    auto* member_ptr = ctx.dst->AddressOf(
-                        ctx.dst->MemberAccessor(ctx.dst->Deref(workgroup_param()), member));
-                    auto* local_var = ctx.dst->Let(new_var_symbol, member_ptr);
-                    ctx.InsertFront(func->body->statements, ctx.dst->Decl(local_var));
+                    auto* member_ptr = ctx->dst->AddressOf(
+                        ctx->dst->MemberAccessor(ctx->dst->Deref(workgroup_param()), member));
+                    auto* local_var = ctx->dst->Let(new_var_symbol, member_ptr);
+                    ctx->InsertFront(func->body->statements, ctx->dst->Decl(local_var));
                     is_pointer = true;
                 } else {
                     auto* disable_validation =
-                        ctx.dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace);
-                    auto* initializer = ctx.Clone(var->Declaration()->initializer);
-                    auto* local_var = ctx.dst->Var(new_var_symbol, store_type(), sc, initializer,
-                                                   tint::Vector{disable_validation});
-                    ctx.InsertFront(func->body->statements, ctx.dst->Decl(local_var));
+                        ctx->dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace);
+                    auto* initializer = ctx->Clone(var->Declaration()->initializer);
+                    auto* local_var = ctx->dst->Var(new_var_symbol, store_type(), sc, initializer,
+                                                    tint::Vector{disable_validation});
+                    ctx->InsertFront(func->body->statements, ctx->dst->Decl(local_var));
                 }
                 break;
             }
@@ -231,7 +232,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                                        Symbol new_var_symbol,
                                        bool& is_pointer) {
         auto* ty = var->Type()->UnwrapRef();
-        auto param_type = CreateASTTypeFor(ctx, ty);
+        auto param_type = CreateASTTypeFor(*ctx, ty);
         auto sc = var->AddressSpace();
         switch (sc) {
             case core::AddressSpace::kPrivate:
@@ -243,7 +244,7 @@ struct ModuleScopeVarToEntryPointParam::State {
             case core::AddressSpace::kWorkgroup:
                 break;
             case core::AddressSpace::kPushConstant: {
-                ctx.dst->Diagnostics().AddError(Source{})
+                ctx->dst->Diagnostics().AddError(Source{})
                     << "unhandled module-scope address space (" << sc << ")";
                 break;
             }
@@ -256,19 +257,19 @@ struct ModuleScopeVarToEntryPointParam::State {
         tint::Vector<const ast::Attribute*, 2> attributes;
         if (!ty->is_handle()) {
             param_type = sc == core::AddressSpace::kStorage
-                             ? ctx.dst->ty.ptr(sc, param_type, var->Access())
-                             : ctx.dst->ty.ptr(sc, param_type);
+                             ? ctx->dst->ty.ptr(sc, param_type, var->Access())
+                             : ctx->dst->ty.ptr(sc, param_type);
             is_pointer = true;
 
             // Disable validation of the parameter's address space and of arguments passed to it.
-            attributes.Push(ctx.dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace));
+            attributes.Push(ctx->dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace));
             attributes.Push(
-                ctx.dst->Disable(ast::DisabledValidation::kIgnoreInvalidPointerArgument));
+                ctx->dst->Disable(ast::DisabledValidation::kIgnoreInvalidPointerArgument));
         }
 
         // Redeclare the variable as a parameter.
-        ctx.InsertBack(func->params,
-                       ctx.dst->Param(new_var_symbol, param_type, std::move(attributes)));
+        ctx->InsertBack(func->params,
+                        ctx->dst->Param(new_var_symbol, param_type, std::move(attributes)));
     }
 
     /// Replace all uses of `var` in `func` with references to `new_var`.
@@ -284,23 +285,23 @@ struct ModuleScopeVarToEntryPointParam::State {
                                Symbol member_name) {
         for (auto* user : var->Users()) {
             if (user->Stmt()->Function()->Declaration() == func) {
-                const ast::Expression* expr = ctx.dst->Expr(new_var);
+                const ast::Expression* expr = ctx->dst->Expr(new_var);
                 if (is_pointer) {
                     // If this identifier is used by an address-of operator, just remove the
                     // address-of instead of adding a deref, since we already have a pointer.
                     auto* ident = user->Declaration()->As<ast::IdentifierExpression>();
                     if (ident_to_address_of_.count(ident) && !member_name.IsValid()) {
-                        ctx.Replace(ident_to_address_of_[ident], expr);
+                        ctx->Replace(ident_to_address_of_[ident], expr);
                         continue;
                     }
 
-                    expr = ctx.dst->Deref(expr);
+                    expr = ctx->dst->Deref(expr);
                 }
                 if (member_name.IsValid()) {
                     // Get the member from the containing structure.
-                    expr = ctx.dst->MemberAccessor(expr, member_name);
+                    expr = ctx->dst->MemberAccessor(expr, member_name);
                 }
-                ctx.Replace(user->Declaration(), expr);
+                ctx->Replace(user->Declaration(), expr);
             }
         }
     }
@@ -319,22 +320,22 @@ struct ModuleScopeVarToEntryPointParam::State {
         std::unordered_set<const ast::Function*> uses_privates;
 
         // Build a list of functions that transitively reference any module-scope variables.
-        for (auto* decl : ctx.src->Sem().Module()->DependencyOrderedDeclarations()) {
+        for (auto* decl : ctx->src->Sem().Module()->DependencyOrderedDeclarations()) {
             if (auto* var = decl->As<ast::Var>()) {
-                auto* sem_var = ctx.src->Sem().Get(var);
+                auto* sem_var = ctx->src->Sem().Get(var);
                 if (sem_var->AddressSpace() == core::AddressSpace::kPrivate) {
                     // Create a member in the private variable struct.
                     auto* ty = sem_var->Type()->UnwrapRef();
-                    auto name = ctx.Clone(var->name->symbol);
-                    private_struct_members.Push(ctx.dst->Member(name, CreateASTTypeFor(ctx, ty)));
+                    auto name = ctx->Clone(var->name->symbol);
+                    private_struct_members.Push(ctx->dst->Member(name, CreateASTTypeFor(*ctx, ty)));
                     CloneStructTypes(ty);
 
                     // Create a statement to assign the initializer if present.
                     if (var->initializer) {
                         private_initializers.Push([&, name, var] {
-                            return ctx.dst->Assign(
-                                ctx.dst->MemberAccessor(PrivateStructVariableName(), name),
-                                ctx.Clone(var->initializer));
+                            return ctx->dst->Assign(
+                                ctx->dst->MemberAccessor(PrivateStructVariableName(), name),
+                                ctx->Clone(var->initializer));
                         });
                     }
                 }
@@ -346,7 +347,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 continue;
             }
 
-            auto* func_sem = ctx.src->Sem().Get(func_ast);
+            auto* func_sem = ctx->src->Sem().Get(func_ast);
 
             bool needs_processing = false;
             for (auto* var : func_sem->TransitivelyReferencedGlobals()) {
@@ -370,7 +371,7 @@ struct ModuleScopeVarToEntryPointParam::State {
 
         if (!private_struct_members.IsEmpty()) {
             // Create the private variable struct.
-            ctx.dst->Structure(PrivateStructName(), std::move(private_struct_members));
+            ctx->dst->Structure(PrivateStructName(), std::move(private_struct_members));
         }
 
         // Build a list of `&ident` expressions. We'll use this later to avoid generating
@@ -378,7 +379,7 @@ struct ModuleScopeVarToEntryPointParam::State {
         // is passed to a function.
         // TODO(jrprice): We should add support for bidirectional SEM tree traversal so that we can
         // do this on the fly instead.
-        for (auto* node : ctx.src->ASTNodes().Objects()) {
+        for (auto* node : ctx->src->ASTNodes().Objects()) {
             auto* address_of = node->As<ast::UnaryOpExpression>();
             if (!address_of || address_of->op != core::UnaryOp::kAddressOf) {
                 continue;
@@ -389,7 +390,7 @@ struct ModuleScopeVarToEntryPointParam::State {
         }
 
         for (auto* func_ast : functions_to_process) {
-            auto* func_sem = ctx.src->Sem().Get(func_ast);
+            auto* func_sem = ctx->src->Sem().Get(func_ast);
             bool is_entry_point = func_ast->IsEntryPoint();
             bool needs_pointer_aliasing = false;
 
@@ -407,7 +408,7 @@ struct ModuleScopeVarToEntryPointParam::State {
             StructMemberList workgroup_parameter_members;
             auto workgroup_param = [&] {
                 if (!workgroup_parameter_symbol.IsValid()) {
-                    workgroup_parameter_symbol = ctx.dst->Sym();
+                    workgroup_parameter_symbol = ctx->dst->Sym();
                 }
                 return workgroup_parameter_symbol;
             };
@@ -417,23 +418,23 @@ struct ModuleScopeVarToEntryPointParam::State {
             if (uses_privates.count(func_ast)) {
                 if (is_entry_point) {
                     // Create a local declaration for the private variable struct.
-                    auto* var = ctx.dst->Var(
-                        PrivateStructVariableName(), ctx.dst->ty(PrivateStructName()),
+                    auto* var = ctx->dst->Var(
+                        PrivateStructVariableName(), ctx->dst->ty(PrivateStructName()),
                         core::AddressSpace::kPrivate,
                         tint::Vector{
-                            ctx.dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace),
+                            ctx->dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace),
                         });
-                    ctx.InsertFront(func_ast->body->statements, ctx.dst->Decl(var));
+                    ctx->InsertFront(func_ast->body->statements, ctx->dst->Decl(var));
 
                     // Initialize the members of that struct with the original initializers.
                     for (auto init : private_initializers) {
-                        ctx.InsertFront(func_ast->body->statements, init());
+                        ctx->InsertFront(func_ast->body->statements, init());
                     }
                 } else {
                     // Create a parameter that is a pointer to the private variable struct.
-                    auto ptr = ctx.dst->ty.ptr<private_>(ctx.dst->ty(PrivateStructName()));
-                    auto* param = ctx.dst->Param(PrivateStructVariableName(), ptr);
-                    ctx.InsertBack(func_ast->params, param);
+                    auto ptr = ctx->dst->ty.ptr<private_>(ctx->dst->ty(PrivateStructName()));
+                    auto* param = ctx->dst->Param(PrivateStructVariableName(), ptr);
+                    ctx->InsertBack(func_ast->params, param);
                 }
             }
 
@@ -447,12 +448,12 @@ struct ModuleScopeVarToEntryPointParam::State {
                     // pointer (handled above), so we just need to replace the uses here.
                     ReplaceUsesInFunction(func_ast, var, PrivateStructVariableName(),
                                           /* is_pointer */ !is_entry_point,
-                                          ctx.Clone(var->Declaration()->name->symbol));
+                                          ctx->Clone(var->Declaration()->name->symbol));
                     continue;
                 }
 
                 // This is the symbol for the variable that replaces the module-scope var.
-                auto new_var_symbol = ctx.dst->Sym();
+                auto new_var_symbol = ctx->dst->Sym();
 
                 // Track whether the new variable is a pointer or not.
                 bool is_pointer = false;
@@ -478,42 +479,42 @@ struct ModuleScopeVarToEntryPointParam::State {
                 // Replace all uses of the module-scope variable.
                 ReplaceUsesInFunction(
                     func_ast, var, new_var_symbol, is_pointer,
-                    is_wrapped ? ctx.dst->Sym(kWrappedArrayMemberName) : Symbol());
+                    is_wrapped ? ctx->dst->Sym(kWrappedArrayMemberName) : Symbol());
             }
 
             // Allow pointer aliasing if needed.
             if (needs_pointer_aliasing) {
-                ctx.InsertBack(func_ast->attributes,
-                               ctx.dst->Disable(ast::DisabledValidation::kIgnorePointerAliasing));
+                ctx->InsertBack(func_ast->attributes,
+                                ctx->dst->Disable(ast::DisabledValidation::kIgnorePointerAliasing));
             }
 
             if (!workgroup_parameter_members.IsEmpty()) {
                 // Create the workgroup memory parameter.
                 // The parameter is a struct that contains members for each workgroup variable.
                 auto* str =
-                    ctx.dst->Structure(ctx.dst->Sym(), std::move(workgroup_parameter_members));
-                auto param_type = ctx.dst->ty.ptr(workgroup, ctx.dst->ty.Of(str));
-                auto* param = ctx.dst->Param(
+                    ctx->dst->Structure(ctx->dst->Sym(), std::move(workgroup_parameter_members));
+                auto param_type = ctx->dst->ty.ptr(workgroup, ctx->dst->ty.Of(str));
+                auto* param = ctx->dst->Param(
                     workgroup_param(), param_type,
                     tint::Vector{
-                        ctx.dst->Disable(ast::DisabledValidation::kEntryPointParameter),
-                        ctx.dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace),
+                        ctx->dst->Disable(ast::DisabledValidation::kEntryPointParameter),
+                        ctx->dst->Disable(ast::DisabledValidation::kIgnoreAddressSpace),
                     });
-                ctx.InsertFront(func_ast->params, param);
+                ctx->InsertFront(func_ast->params, param);
             }
 
             // Pass the variables as pointers to any functions that need them.
             for (auto* call : calls_to_replace[func_ast]) {
-                auto* call_sem = ctx.src->Sem().Get(call)->Unwrap()->As<sem::Call>();
+                auto* call_sem = ctx->src->Sem().Get(call)->Unwrap()->As<sem::Call>();
                 auto* target_sem = call_sem->Target()->As<sem::Function>();
 
                 // Pass the private variable struct pointer if needed.
                 if (uses_privates.count(target_sem->Declaration())) {
-                    const ast::Expression* arg = ctx.dst->Expr(PrivateStructVariableName());
+                    const ast::Expression* arg = ctx->dst->Expr(PrivateStructVariableName());
                     if (is_entry_point) {
-                        arg = ctx.dst->AddressOf(arg);
+                        arg = ctx->dst->AddressOf(arg);
                     }
-                    ctx.InsertBack(call->args, arg);
+                    ctx->InsertBack(call->args, arg);
                 }
 
                 // Add new arguments for any variables that are needed by the callee.
@@ -532,27 +533,27 @@ struct ModuleScopeVarToEntryPointParam::State {
 
                     auto new_var = it->second;
                     bool is_handle = target_var->Type()->UnwrapRef()->is_handle();
-                    const ast::Expression* arg = ctx.dst->Expr(new_var.symbol);
+                    const ast::Expression* arg = ctx->dst->Expr(new_var.symbol);
                     if (new_var.is_wrapped) {
                         // The variable is wrapped in a struct, so we need to pass a pointer to the
                         // struct member instead.
-                        arg = ctx.dst->AddressOf(
-                            ctx.dst->MemberAccessor(ctx.dst->Deref(arg), kWrappedArrayMemberName));
+                        arg = ctx->dst->AddressOf(ctx->dst->MemberAccessor(
+                            ctx->dst->Deref(arg), kWrappedArrayMemberName));
                     } else if (is_entry_point && !is_handle && !new_var.is_pointer) {
                         // We need to pass a pointer and we don't already have one, so take
                         // the address of the new variable.
-                        arg = ctx.dst->AddressOf(arg);
+                        arg = ctx->dst->AddressOf(arg);
                     }
-                    ctx.InsertBack(call->args, arg);
+                    ctx->InsertBack(call->args, arg);
                 }
             }
         }
 
         // Now remove all module-scope variables with these address spaces.
-        for (auto* var_ast : ctx.src->AST().GlobalVariables()) {
-            auto* var_sem = ctx.src->Sem().Get(var_ast);
+        for (auto* var_ast : ctx->src->AST().GlobalVariables()) {
+            auto* var_sem = ctx->src->Sem().Get(var_ast);
             if (var_sem->AddressSpace() != core::AddressSpace::kUndefined) {
-                ctx.Remove(ctx.src->AST().GlobalDeclarations(), var_ast);
+                ctx->Remove(ctx->src->AST().GlobalDeclarations(), var_ast);
             }
         }
     }
@@ -560,7 +561,7 @@ struct ModuleScopeVarToEntryPointParam::State {
     /// @returns the name of the structure that contains all of the module-scope private variables
     Symbol PrivateStructName() {
         if (!private_struct_name.IsValid()) {
-            private_struct_name = ctx.dst->Symbols().New("tint_private_vars_struct");
+            private_struct_name = ctx->dst->Symbols().New("tint_private_vars_struct");
         }
         return private_struct_name;
     }
@@ -568,7 +569,7 @@ struct ModuleScopeVarToEntryPointParam::State {
     /// @returns the name of the variable that contains all of the module-scope private variables
     Symbol PrivateStructVariableName() {
         if (!private_struct_variable_name.IsValid()) {
-            private_struct_variable_name = ctx.dst->Symbols().New("tint_private_vars");
+            private_struct_variable_name = ctx->dst->Symbols().New("tint_private_vars");
         }
         return private_struct_variable_name;
     }

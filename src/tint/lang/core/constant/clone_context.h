@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_CONSTANT_CLONE_CONTEXT_H_
 #define SRC_TINT_LANG_CORE_CONSTANT_CLONE_CONTEXT_H_
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/clone_context.h"
 
 // Forward declarations
@@ -43,7 +44,7 @@ struct CloneContext {
     core::type::CloneContext type_ctx;
 
     /// Destination information
-    constant::Manager& dst;
+    const raw_ref<constant::Manager> dst;
 };
 
 }  // namespace tint::core::constant

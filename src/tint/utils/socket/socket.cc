@@ -27,6 +27,7 @@
 
 #include "src/tint/utils/socket/socket.h"
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/socket/rwmutex.h"
 
@@ -250,7 +251,7 @@ class Impl : public Socket {
     }
 
   private:
-    addrinfo* const info;
+    const raw_ptr<addrinfo> info;
     SOCKET s = InvalidSocket;
     RWMutex mutex;
 };

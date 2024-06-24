@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_MEMBER_ACCESSOR_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_MEMBER_ACCESSOR_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/accessor_expression.h"
 #include "src/tint/lang/wgsl/ast/identifier_expression.h"
 
@@ -59,7 +60,7 @@ class MemberAccessorExpression final
     const MemberAccessorExpression* Clone(CloneContext& ctx) const override;
 
     /// The member expression
-    const Identifier* const member;
+    const raw_ptr<const Identifier> member;
 };
 
 }  // namespace tint::ast

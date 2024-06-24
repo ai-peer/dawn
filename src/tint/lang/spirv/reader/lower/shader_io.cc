@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/transform/common/referenced_module_vars.h"
@@ -43,13 +44,13 @@ using namespace tint::core::fluent_types;  // NOLINT
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// A map from block to its containing function.
     Hashmap<core::ir::Block*, core::ir::Function*, 64> block_to_function{};
@@ -63,7 +64,7 @@ struct State {
 
     /// The mapping from functions to their transitively referenced output variables.
     core::ir::ReferencedModuleVars referenced_output_vars{
-        ir, [](const core::ir::Var* var) {
+        *ir, [](const core::ir::Var* var) {
             auto* view = var->Result(0)->Type()->As<core::type::MemoryView>();
             return view && view->AddressSpace() == core::AddressSpace::kOut;
         }};
@@ -84,7 +85,7 @@ struct State {
         // Update entry point functions to return their outputs, using a wrapper function.
         // Use a worklist as `ProcessEntryPointOutputs()` will add new functions.
         Vector<core::ir::Function*, 4> entry_points;
-        for (auto& func : ir.functions) {
+        for (auto& func : ir->functions) {
             if (func->Stage() != core::ir::Function::PipelineStage::kUndefined) {
                 entry_points.Push(func);
             }
@@ -110,13 +111,13 @@ struct State {
     /// Pass inputs down the call stack as parameters to any functions that need them.
     void ProcessInputs() {
         // Seed the block-to-function map with the function entry blocks.
-        for (auto& func : ir.functions) {
+        for (auto& func : ir->functions) {
             block_to_function.Add(func->Block(), func);
         }
 
         // Gather the list of all module-scope input variables.
         Vector<core::ir::Var*, 4> inputs;
-        for (auto* global : *ir.root_block) {
+        for (auto* global : *ir->root_block) {
             if (auto* var = global->As<core::ir::Var>()) {
                 auto addrspace = var->Result(0)->Type()->As<core::type::Pointer>()->AddressSpace();
                 if (addrspace == core::AddressSpace::kIn) {
@@ -137,7 +138,7 @@ struct State {
     void ReplaceOutputPointerAddressSpace(core::ir::InstructionResult* value) {
         // Change the address space to `private`.
         auto* old_ptr_type = value->Type();
-        auto* new_ptr_type = ty.ptr(core::AddressSpace::kPrivate, old_ptr_type->UnwrapPtr());
+        auto* new_ptr_type = ty->ptr(core::AddressSpace::kPrivate, old_ptr_type->UnwrapPtr());
         value->SetType(new_ptr_type);
 
         // Update all uses of the module-scope variable.
@@ -162,10 +163,10 @@ struct State {
         }
 
         // Add a wrapper function to return either a single value or a struct.
-        auto* wrapper = b.Function(ty.void_(), ep->Stage());
-        if (auto name = ir.NameOf(ep)) {
-            ir.SetName(ep, name.Name() + "_inner");
-            ir.SetName(wrapper, name);
+        auto* wrapper = b.Function(ty->void_(), ep->Stage());
+        if (auto name = ir->NameOf(ep)) {
+            ir->SetName(ep, name.Name() + "_inner");
+            ir->SetName(wrapper, name);
         }
 
         // Call the original entry point and make it a regular function.
@@ -181,7 +182,7 @@ struct State {
         auto add_output = [&](Symbol name, const core::type::Type* type,
                               core::type::StructMemberAttributes attributes) {
             if (!name) {
-                name = ir.symbols.New();
+                name = ir->symbols.New();
             }
             output_descriptors.Push(core::type::Manager::StructMemberDesc{name, type, attributes});
         };
@@ -219,7 +220,7 @@ struct State {
                     // Load the final result from the member of the original struct variable.
                     b.Append(wrapper->Block(), [&] {  //
                         auto* access =
-                            b.Access(ty.ptr<private_>(member->Type()), var, u32(member->Index()));
+                            b.Access(ty->ptr<private_>(member->Type()), var, u32(member->Index()));
                         results.Push(b.Load(access)->Result(0));
                     });
                 }
@@ -230,11 +231,11 @@ struct State {
 
                     // If we're dealing with sample_mask, extract the scalar from the array.
                     if (var_attributes.builtin == core::BuiltinValue::kSampleMask) {
-                        var_type = ty.u32();
-                        results.Back() = b.Access(ty.u32(), results.Back(), u32(0))->Result(0);
+                        var_type = ty->u32();
+                        results.Back() = b.Access(ty->u32(), results.Back(), u32(0))->Result(0);
                     }
                 });
-                add_output(ir.NameOf(var), var_type, std::move(var_attributes));
+                add_output(ir->NameOf(var), var_type, std::move(var_attributes));
             }
         }
 
@@ -258,7 +259,7 @@ struct State {
             });
         } else {
             // Create a struct to hold all of the output values.
-            auto* str = ty.Struct(ir.symbols.New(), std::move(output_descriptors));
+            auto* str = ty->Struct(ir->symbols.New(), std::move(output_descriptors));
             wrapper->SetReturnType(str);
 
             // Collect the output values and return them from the wrapper function.
@@ -282,7 +283,7 @@ struct State {
             }
 
             Switch(
-                use.instruction,
+                use.instruction.get(),
                 [&](core::ir::Load* l) {
                     // Fold the load away and replace its uses with the new parameter.
                     l->Result(0)->ReplaceAllUsesWith(object);
@@ -337,14 +338,14 @@ struct State {
             if (entry_point && var->Attributes().builtin == core::BuiltinValue::kSampleMask) {
                 TINT_ASSERT(var_type->Is<core::type::Array>());
                 TINT_ASSERT(var_type->As<core::type::Array>()->ConstantCount() == 1u);
-                var_type = ty.u32();
+                var_type = ty->u32();
             }
 
             // Create a new function parameter for the input.
             auto* param = b.FunctionParam(var_type);
             func->AppendParam(param);
-            if (auto name = ir.NameOf(var)) {
-                ir.SetName(param, name);
+            if (auto name = ir->NameOf(var)) {
+                ir->SetName(param, name);
             }
 
             // Add attributes to the parameter if this is an entry point function.
@@ -418,7 +419,7 @@ Result<SuccessType> ShaderIO(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

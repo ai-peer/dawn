@@ -50,7 +50,7 @@ TEST_F(IR_ValueToLetTest, Empty) {
 }
 
 TEST_F(IR_ValueToLetTest, NoModify_Blah) {
-    auto* func = b.Function("F", ty.void_());
+    auto* func = b.Function("F", ty->void_());
     b.Append(func->Block(), [&] { b.Return(func); });
 
     auto* src = R"(
@@ -70,7 +70,7 @@ TEST_F(IR_ValueToLetTest, NoModify_Blah) {
 }
 
 TEST_F(IR_ValueToLetTest, NoModify_Unsequenced) {
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* x = b.Let("x", 1_i);
         auto* y = b.Let("y", 2_i);
@@ -99,10 +99,10 @@ TEST_F(IR_ValueToLetTest, NoModify_Unsequenced) {
 }
 TEST_F(IR_ValueToLetTest, NoModify_SequencedValueUsedWithNonSequenced) {
     auto* i = b.Var<private_, i32>("i");
-    b.ir.root_block->Append(i);
+    b.ir->root_block->Append(i);
 
     auto* p = b.FunctionParam<i32>("p");
-    auto* rmw = b.Function("rmw", ty.i32());
+    auto* rmw = b.Function("rmw", ty->i32());
     rmw->SetParams({p});
     b.Append(rmw->Block(), [&] {
         auto* v = b.Let("v", b.Add<i32>(b.Load(i), p));
@@ -110,7 +110,7 @@ TEST_F(IR_ValueToLetTest, NoModify_SequencedValueUsedWithNonSequenced) {
         b.Return(rmw, v);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* x = b.Name("x", b.Call(rmw, 1_i));
         // select is called with one, inlinable sequenced operand and two non-sequenced values.
@@ -151,10 +151,10 @@ $B1: {  # root
 
 TEST_F(IR_ValueToLetTest, NoModify_Inlinable_NestedCalls) {
     auto* i = b.Var<private_, i32>("i");
-    b.ir.root_block->Append(i);
+    b.ir->root_block->Append(i);
 
     auto* p = b.FunctionParam<i32>("p");
-    auto* rmw = b.Function("rmw", ty.i32());
+    auto* rmw = b.Function("rmw", ty->i32());
     rmw->SetParams({p});
     b.Append(rmw->Block(), [&] {
         auto* v = b.Let("v", b.Add<i32>(b.Load(i), p));
@@ -162,7 +162,7 @@ TEST_F(IR_ValueToLetTest, NoModify_Inlinable_NestedCalls) {
         b.Return(rmw, v);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* x = b.Name("x", b.Call(rmw, 1_i));
         auto* y = b.Name("y", b.Call(rmw, x));
@@ -204,10 +204,10 @@ $B1: {  # root
 
 TEST_F(IR_ValueToLetTest, NoModify_LetUsedTwice) {
     auto* i = b.Var<private_, i32>("i");
-    b.ir.root_block->Append(i);
+    b.ir->root_block->Append(i);
 
     auto* p = b.FunctionParam<i32>("p");
-    auto* rmw = b.Function("rmw", ty.i32());
+    auto* rmw = b.Function("rmw", ty->i32());
     rmw->SetParams({p});
     b.Append(rmw->Block(), [&] {
         auto* v = b.Let("v", b.Add<i32>(b.Load(i), p));
@@ -215,7 +215,7 @@ TEST_F(IR_ValueToLetTest, NoModify_LetUsedTwice) {
         b.Return(rmw, v);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         // No need to create more lets, as these are already in lets
         auto* x = b.Let("x", b.Call(rmw, 1_i));
@@ -257,11 +257,11 @@ $B1: {  # root
 
 TEST_F(IR_ValueToLetTest, NoModify_VarUsedTwice) {
     auto* p = b.FunctionParam<ptr<function, i32, read_write>>("p");
-    auto* fn_g = b.Function("g", ty.i32());
+    auto* fn_g = b.Function("g", ty->i32());
     fn_g->SetParams({p});
     b.Append(fn_g->Block(), [&] { b.Return(fn_g, b.Load(p)); });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>("v");
         auto* x = b.Let("x", b.Call(fn_g, v));
@@ -298,7 +298,7 @@ TEST_F(IR_ValueToLetTest, NoModify_VarUsedTwice) {
 }
 
 TEST_F(IR_ValueToLetTest, VarLoadUsedTwice) {
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>("v");
         auto* l = b.Name("l", b.Load(v));
@@ -335,7 +335,7 @@ TEST_F(IR_ValueToLetTest, VarLoadUsedTwice) {
 }
 
 TEST_F(IR_ValueToLetTest, VarLoad_ThenStore_ThenUse) {
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>("v");
         auto* l = b.Name("l", b.Load(v));
@@ -376,13 +376,13 @@ TEST_F(IR_ValueToLetTest, Call_ThenLoad_ThenUseCallBeforeLoad) {
     auto* v = b.Var<private_, i32>("v");
     mod.root_block->Append(v);
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
     b.Append(foo->Block(), [&] {
         b.Store(v, 42_i);
         b.Return(foo, 1_i);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* c = b.Call<i32>(foo);
         auto* l = b.Name("l", b.Load(v));
@@ -443,13 +443,13 @@ TEST_F(IR_ValueToLetTest, Call_ThenLoad_ThenUseLoadBeforeCall) {
     auto* v = b.Var<private_, i32>("v");
     mod.root_block->Append(v);
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
     b.Append(foo->Block(), [&] {
         b.Store(v, 42_i);
         b.Return(foo, 1_i);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* c = b.Call<i32>(foo);
         auto* l = b.Name("l", b.Load(v));
@@ -508,10 +508,10 @@ $B1: {  # root
 
 TEST_F(IR_ValueToLetTest, TwoCalls_ThenUseReturnValues) {
     auto* i = b.Var<private_, i32>("i");
-    b.ir.root_block->Append(i);
+    b.ir->root_block->Append(i);
 
     auto* p = b.FunctionParam<i32>("p");
-    auto* rmw = b.Function("rmw", ty.i32());
+    auto* rmw = b.Function("rmw", ty->i32());
     rmw->SetParams({p});
     b.Append(rmw->Block(), [&] {
         auto* v = b.Let("v", b.Add<i32>(b.Load(i), p));
@@ -519,7 +519,7 @@ TEST_F(IR_ValueToLetTest, TwoCalls_ThenUseReturnValues) {
         b.Return(rmw, v);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* x = b.Name("x", b.Call(rmw, 1_i));
         auto* y = b.Name("y", b.Call(rmw, 2_i));
@@ -588,10 +588,10 @@ $B1: {  # root
 
 TEST_F(IR_ValueToLetTest, SequencedUsedInDifferentBlock) {
     auto* i = b.Var<private_, i32>("i");
-    b.ir.root_block->Append(i);
+    b.ir->root_block->Append(i);
 
     auto* p = b.FunctionParam<i32>("p");
-    auto* rmw = b.Function("rmw", ty.i32());
+    auto* rmw = b.Function("rmw", ty->i32());
     rmw->SetParams({p});
     b.Append(rmw->Block(), [&] {
         auto* v = b.Let("v", b.Add<i32>(b.Load(i), p));
@@ -599,7 +599,7 @@ TEST_F(IR_ValueToLetTest, SequencedUsedInDifferentBlock) {
         b.Return(rmw, v);
     });
 
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* x = b.Name("x", b.Call(rmw, 1_i));
         auto* if_ = b.If(true);
@@ -675,7 +675,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ValueToLetTest, NameMe1) {
-    auto* fn = b.Function("F", ty.i32());
+    auto* fn = b.Function("F", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>("v");
         auto* x = b.Load(v);
@@ -720,7 +720,7 @@ TEST_F(IR_ValueToLetTest, NameMe1) {
 }
 
 TEST_F(IR_ValueToLetTest, NameMe2) {
-    auto* fn = b.Function("F", ty.void_());
+    auto* fn = b.Function("F", ty->void_());
     b.Append(fn->Block(), [&] {
         auto* i = b.Name("i", b.Call<i32>(core::BuiltinFn::kMax, 1_i, 2_i));
         auto* v = b.Var<function>("v", i);

@@ -31,6 +31,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/statement.h"
 
 // Forward declarations
@@ -103,7 +104,7 @@ class LoopBlockStatement final : public Castable<LoopBlockStatement, BlockStatem
 
   private:
     /// The first continue statement in this loop block.
-    const ast::ContinueStatement* first_continue_ = nullptr;
+    raw_ptr<const ast::ContinueStatement> first_continue_ = nullptr;
 
     /// The number of variables declared before the first continue statement.
     size_t num_decls_at_first_continue_ = 0;

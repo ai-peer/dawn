@@ -180,7 +180,7 @@ TEST_F(ResolverCompoundStatementTest, Loop_EmptyContinuing) {
         EXPECT_EQ(s->Parent(), s->Block());
     }
     {
-        auto* s = Sem().Get(loop->continuing);
+        auto* s = Sem().Get(loop->continuing.get());
         ASSERT_NE(s, nullptr);
         EXPECT_TRUE(Is<sem::LoopContinuingBlockStatement>(s));
         EXPECT_TRUE(Is<sem::LoopStatement>(s->Parent()->Parent()));

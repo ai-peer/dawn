@@ -61,7 +61,7 @@ BuiltinFn::BuiltinFn(wgsl::BuiltinFn type,
 BuiltinFn::~BuiltinFn() = default;
 
 bool BuiltinFn::IsDeprecated() const {
-    return overload_.flags.Contains(core::intrinsic::OverloadFlag::kIsDeprecated);
+    return overload_->flags.Contains(core::intrinsic::OverloadFlag::kIsDeprecated);
 }
 
 bool BuiltinFn::IsCoarseDerivative() const {

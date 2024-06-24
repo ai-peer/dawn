@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_FOR_LOOP_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_FOR_LOOP_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 
 namespace tint::ast {
@@ -65,16 +66,16 @@ class ForLoopStatement final : public Castable<ForLoopStatement, Statement> {
     const ForLoopStatement* Clone(CloneContext& ctx) const override;
 
     /// The initializer statement
-    const Statement* const initializer;
+    const raw_ptr<const Statement> initializer;
 
     /// The condition expression
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 
     /// The continuing statement
-    const Statement* const continuing;
+    const raw_ptr<const Statement> continuing;
 
     /// The loop body block
-    const BlockStatement* const body;
+    const raw_ptr<const BlockStatement> body;
 
     /// The attribute list
     const tint::Vector<const Attribute*, 1> attributes;

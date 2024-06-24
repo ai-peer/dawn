@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_FUNCTION_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_SEM_FUNCTION_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/expression.h"
 
 // Forward declarations
@@ -62,7 +63,7 @@ class FunctionExpression : public Castable<FunctionExpression, Expression> {
     const sem::Function* Function() const { return function_; }
 
   private:
-    sem::Function const* const function_;
+    const raw_ptr<const sem::Function> function_;
 };
 
 }  // namespace tint::sem

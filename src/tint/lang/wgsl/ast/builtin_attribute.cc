@@ -53,7 +53,7 @@ std::string BuiltinAttribute::Name() const {
 const BuiltinAttribute* BuiltinAttribute::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto b = ctx.Clone(builtin);
+    auto b = ctx.Clone(builtin.get());
     return ctx.dst->create<BuiltinAttribute>(src, b);
 }
 

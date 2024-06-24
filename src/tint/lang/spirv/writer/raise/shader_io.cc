@@ -30,6 +30,8 @@
 #include <memory>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/transform/shader_io.h"
@@ -46,7 +48,7 @@ namespace {
 /// State that persists across the whole module and can be shared between entry points.
 struct PerModuleState {
     /// The frag_depth clamp arguments.
-    core::ir::Value* frag_depth_clamp_args = nullptr;
+    raw_ptr<core::ir::Value> frag_depth_clamp_args = nullptr;
 };
 
 /// PIMPL state for the parts of the shader IO transform specific to SPIR-V.
@@ -60,10 +62,10 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     Vector<core::ir::Var*, 4> output_vars;
 
     /// The configuration options.
-    const ShaderIOConfig& config;
+    const raw_ref<const ShaderIOConfig> config;
 
     /// The per-module state object.
-    PerModuleState& module_state;
+    const raw_ref<PerModuleState> module_state;
 
     /// Constructor
     StateImpl(core::ir::Module& mod,
@@ -88,12 +90,12 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
                   const char* name_suffix) {
         for (auto io : entries) {
             StringStream name;
-            name << ir.NameOf(func).Name();
+            name << ir->NameOf(func).Name();
 
             if (io.attributes.builtin) {
                 // SampleMask must be an array for Vulkan.
                 if (io.attributes.builtin.value() == core::BuiltinValue::kSampleMask) {
-                    io.type = ty.array<u32, 1>();
+                    io.type = ty->array<u32, 1>();
                 }
                 name << "_" << io.attributes.builtin.value();
 
@@ -113,18 +115,18 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
             name << name_suffix;
 
             // Replace f16 types with f32 types if necessary.
-            auto* store_type = io.type;
-            if (config.polyfill_f16_io) {
+            auto* store_type = io.type.get();
+            if (config->polyfill_f16_io) {
                 if (store_type->DeepestElement()->Is<core::type::F16>()) {
-                    store_type = ty.f32();
+                    store_type = ty->f32();
                     if (auto* vec = io.type->As<core::type::Vector>()) {
-                        store_type = ty.vec(store_type, vec->Width());
+                        store_type = ty->vec(store_type, vec->Width());
                     }
                 }
             }
 
             // Create an IO variable and add it to the root block.
-            auto* ptr = ty.ptr(addrspace, store_type, access);
+            auto* ptr = ty->ptr(addrspace, store_type, access);
             auto* var = b.Var(name.str(), ptr);
             var->SetAttributes(core::ir::IOAttributes{
                 io.attributes.location,
@@ -133,7 +135,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
                 io.attributes.interpolation,
                 io.attributes.invariant,
             });
-            ir.root_block->Append(var);
+            ir->root_block->Append(var);
             vars.Push(var);
         }
     }
@@ -147,13 +149,13 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     /// @copydoc ShaderIO::BackendState::FinalizeOutputs
     const core::type::Type* FinalizeOutputs() override {
         MakeVars(output_vars, outputs, core::AddressSpace::kOut, core::Access::kWrite, "_Output");
-        return ty.void_();
+        return ty->void_();
     }
 
     /// @copydoc ShaderIO::BackendState::GetInput
     core::ir::Value* GetInput(core::ir::Builder& builder, uint32_t idx) override {
         // Load the input from the global variable declared earlier.
-        auto* ptr = ty.ptr(core::AddressSpace::kIn, inputs[idx].type, core::Access::kRead);
+        auto* ptr = ty->ptr(core::AddressSpace::kIn, inputs[idx].type, core::Access::kRead);
         auto* from = input_vars[idx]->Result(0);
         if (inputs[idx].attributes.builtin) {
             if (inputs[idx].attributes.builtin.value() == core::BuiltinValue::kSampleMask) {
@@ -165,7 +167,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
         auto* value = builder.Load(from)->Result(0);
 
         // Convert f32 values to f16 values if needed.
-        if (config.polyfill_f16_io && inputs[idx].type->DeepestElement()->Is<core::type::F16>()) {
+        if (config->polyfill_f16_io && inputs[idx].type->DeepestElement()->Is<core::type::F16>()) {
             value = builder.Convert(inputs[idx].type, value)->Result(0);
         }
 
@@ -175,7 +177,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     /// @copydoc ShaderIO::BackendState::SetOutput
     void SetOutput(core::ir::Builder& builder, uint32_t idx, core::ir::Value* value) override {
         // Store the output to the global variable declared earlier.
-        auto* ptr = ty.ptr(core::AddressSpace::kOut, outputs[idx].type, core::Access::kWrite);
+        auto* ptr = ty->ptr(core::AddressSpace::kOut, outputs[idx].type, core::Access::kWrite);
         auto* to = output_vars[idx]->Result(0);
         if (outputs[idx].attributes.builtin) {
             if (outputs[idx].attributes.builtin.value() == core::BuiltinValue::kSampleMask) {
@@ -190,7 +192,7 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
         }
 
         // Convert f16 values to f32 values if needed.
-        if (config.polyfill_f16_io && value->Type()->DeepestElement()->Is<core::type::F16>()) {
+        if (config->polyfill_f16_io && value->Type()->DeepestElement()->Is<core::type::F16>()) {
             value = builder.Convert(to->Type()->UnwrapPtr(), value)->Result(0);
         }
 
@@ -202,14 +204,14 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
     /// @param frag_depth the incoming frag_depth value
     /// @returns the clamped value
     core::ir::Value* ClampFragDepth(core::ir::Builder& builder, core::ir::Value* frag_depth) {
-        if (!config.clamp_frag_depth) {
+        if (!config->clamp_frag_depth) {
             return frag_depth;
         }
 
         // Create the clamp args struct and variable.
-        if (!module_state.frag_depth_clamp_args) {
+        if (!module_state->frag_depth_clamp_args) {
             // Check that there are no push constants in the module already.
-            for (auto* inst : *ir.root_block) {
+            for (auto* inst : *ir->root_block) {
                 if (auto* var = inst->As<core::ir::Var>()) {
                     auto* ptr = var->Result(0)->Type()->As<core::type::Pointer>();
                     if (ptr->AddressSpace() == core::AddressSpace::kPushConstant) {
@@ -219,30 +221,30 @@ struct StateImpl : core::ir::transform::ShaderIOBackendState {
             }
 
             // Declare the struct.
-            auto* str = ty.Struct(ir.symbols.Register("FragDepthClampArgs"),
-                                  {
-                                      {ir.symbols.Register("min"), ty.f32()},
-                                      {ir.symbols.Register("max"), ty.f32()},
-                                  });
+            auto* str = ty->Struct(ir->symbols.Register("FragDepthClampArgs"),
+                                   {
+                                       {ir->symbols.Register("min"), ty->f32()},
+                                       {ir->symbols.Register("max"), ty->f32()},
+                                   });
             str->SetStructFlag(core::type::kBlock);
 
             // Declare the variable.
-            auto* var = b.Var("tint_frag_depth_clamp_args", ty.ptr(push_constant, str));
-            ir.root_block->Append(var);
-            module_state.frag_depth_clamp_args = var->Result(0);
+            auto* var = b.Var("tint_frag_depth_clamp_args", ty->ptr(push_constant, str));
+            ir->root_block->Append(var);
+            module_state->frag_depth_clamp_args = var->Result(0);
         }
 
         // Clamp the value.
-        auto* args = builder.Load(module_state.frag_depth_clamp_args);
-        auto* frag_depth_min = builder.Access(ty.f32(), args, 0_u);
-        auto* frag_depth_max = builder.Access(ty.f32(), args, 1_u);
+        auto* args = builder.Load(module_state->frag_depth_clamp_args);
+        auto* frag_depth_min = builder.Access(ty->f32(), args, 0_u);
+        auto* frag_depth_max = builder.Access(ty->f32(), args, 1_u);
         return builder
-            .Call(ty.f32(), core::BuiltinFn::kClamp, frag_depth, frag_depth_min, frag_depth_max)
+            .Call(ty->f32(), core::BuiltinFn::kClamp, frag_depth, frag_depth_min, frag_depth_max)
             ->Result(0);
     }
 
     /// @copydoc ShaderIO::BackendState::NeedsVertexPointSize
-    bool NeedsVertexPointSize() const override { return config.emit_vertex_point_size; }
+    bool NeedsVertexPointSize() const override { return config->emit_vertex_point_size; }
 };
 }  // namespace
 

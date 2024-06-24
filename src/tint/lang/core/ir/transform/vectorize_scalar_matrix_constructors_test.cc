@@ -41,7 +41,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_VectorizeScalarMatrixConstructorsTest = TransformTest;
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_NoOperands) {
-    auto* mat = ty.mat3x3<f32>();
+    auto* mat = ty->mat3x3<f32>();
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
         auto* construct = b.Construct(mat);
@@ -66,7 +66,7 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_NoOperands) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_Identity) {
-    auto* mat = ty.mat3x3<f32>();
+    auto* mat = ty->mat3x3<f32>();
     auto* value = b.FunctionParam("value", mat);
     auto* func = b.Function("foo", mat);
     func->SetParams({value});
@@ -93,7 +93,7 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_Identity) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_Vectors) {
-    auto* mat = ty.mat3x3<f32>();
+    auto* mat = ty->mat3x3<f32>();
     auto* v1 = b.FunctionParam("v1", mat->ColumnType());
     auto* v2 = b.FunctionParam("v2", mat->ColumnType());
     auto* v3 = b.FunctionParam("v3", mat->ColumnType());
@@ -122,11 +122,11 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, NoModify_Vectors) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x2) {
-    auto* mat = ty.mat2x2<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
+    auto* mat = ty->mat2x2<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4});
     b.Append(func->Block(), [&] {
@@ -161,13 +161,13 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x2) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x3) {
-    auto* mat = ty.mat2x3<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
+    auto* mat = ty->mat2x3<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6});
     b.Append(func->Block(), [&] {
@@ -202,15 +202,15 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x3) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x4) {
-    auto* mat = ty.mat2x4<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
+    auto* mat = ty->mat2x4<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8});
     b.Append(func->Block(), [&] {
@@ -245,13 +245,13 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat2x4) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x2) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
+    auto* mat = ty->mat3x2<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6});
     b.Append(func->Block(), [&] {
@@ -287,16 +287,16 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x2) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x3) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
-    auto* v9 = b.FunctionParam("v9", ty.f32());
+    auto* mat = ty->mat3x3<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
+    auto* v9 = b.FunctionParam("v9", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8, v9});
     b.Append(func->Block(), [&] {
@@ -332,19 +332,19 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x3) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x4) {
-    auto* mat = ty.mat3x4<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
-    auto* v9 = b.FunctionParam("v9", ty.f32());
-    auto* v10 = b.FunctionParam("v10", ty.f32());
-    auto* v11 = b.FunctionParam("v11", ty.f32());
-    auto* v12 = b.FunctionParam("v12", ty.f32());
+    auto* mat = ty->mat3x4<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
+    auto* v9 = b.FunctionParam("v9", ty->f32());
+    auto* v10 = b.FunctionParam("v10", ty->f32());
+    auto* v11 = b.FunctionParam("v11", ty->f32());
+    auto* v12 = b.FunctionParam("v12", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12});
     b.Append(func->Block(), [&] {
@@ -380,15 +380,15 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x4) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x2) {
-    auto* mat = ty.mat4x2<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
+    auto* mat = ty->mat4x2<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8});
     b.Append(func->Block(), [&] {
@@ -425,19 +425,19 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x2) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x3) {
-    auto* mat = ty.mat4x3<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
-    auto* v9 = b.FunctionParam("v9", ty.f32());
-    auto* v10 = b.FunctionParam("v10", ty.f32());
-    auto* v11 = b.FunctionParam("v11", ty.f32());
-    auto* v12 = b.FunctionParam("v12", ty.f32());
+    auto* mat = ty->mat4x3<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
+    auto* v9 = b.FunctionParam("v9", ty->f32());
+    auto* v10 = b.FunctionParam("v10", ty->f32());
+    auto* v11 = b.FunctionParam("v11", ty->f32());
+    auto* v12 = b.FunctionParam("v12", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12});
     b.Append(func->Block(), [&] {
@@ -474,23 +474,23 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x3) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x4) {
-    auto* mat = ty.mat4x4<f32>();
-    auto* v1 = b.FunctionParam("v1", ty.f32());
-    auto* v2 = b.FunctionParam("v2", ty.f32());
-    auto* v3 = b.FunctionParam("v3", ty.f32());
-    auto* v4 = b.FunctionParam("v4", ty.f32());
-    auto* v5 = b.FunctionParam("v5", ty.f32());
-    auto* v6 = b.FunctionParam("v6", ty.f32());
-    auto* v7 = b.FunctionParam("v7", ty.f32());
-    auto* v8 = b.FunctionParam("v8", ty.f32());
-    auto* v9 = b.FunctionParam("v9", ty.f32());
-    auto* v10 = b.FunctionParam("v10", ty.f32());
-    auto* v11 = b.FunctionParam("v11", ty.f32());
-    auto* v12 = b.FunctionParam("v12", ty.f32());
-    auto* v13 = b.FunctionParam("v13", ty.f32());
-    auto* v14 = b.FunctionParam("v14", ty.f32());
-    auto* v15 = b.FunctionParam("v15", ty.f32());
-    auto* v16 = b.FunctionParam("v16", ty.f32());
+    auto* mat = ty->mat4x4<f32>();
+    auto* v1 = b.FunctionParam("v1", ty->f32());
+    auto* v2 = b.FunctionParam("v2", ty->f32());
+    auto* v3 = b.FunctionParam("v3", ty->f32());
+    auto* v4 = b.FunctionParam("v4", ty->f32());
+    auto* v5 = b.FunctionParam("v5", ty->f32());
+    auto* v6 = b.FunctionParam("v6", ty->f32());
+    auto* v7 = b.FunctionParam("v7", ty->f32());
+    auto* v8 = b.FunctionParam("v8", ty->f32());
+    auto* v9 = b.FunctionParam("v9", ty->f32());
+    auto* v10 = b.FunctionParam("v10", ty->f32());
+    auto* v11 = b.FunctionParam("v11", ty->f32());
+    auto* v12 = b.FunctionParam("v12", ty->f32());
+    auto* v13 = b.FunctionParam("v13", ty->f32());
+    auto* v14 = b.FunctionParam("v14", ty->f32());
+    auto* v15 = b.FunctionParam("v15", ty->f32());
+    auto* v16 = b.FunctionParam("v16", ty->f32());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16});
     b.Append(func->Block(), [&] {
@@ -528,16 +528,16 @@ TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat4x4) {
 }
 
 TEST_F(IR_VectorizeScalarMatrixConstructorsTest, Mat3x3_F16) {
-    auto* mat = ty.mat3x3<f16>();
-    auto* v1 = b.FunctionParam("v1", ty.f16());
-    auto* v2 = b.FunctionParam("v2", ty.f16());
-    auto* v3 = b.FunctionParam("v3", ty.f16());
-    auto* v4 = b.FunctionParam("v4", ty.f16());
-    auto* v5 = b.FunctionParam("v5", ty.f16());
-    auto* v6 = b.FunctionParam("v6", ty.f16());
-    auto* v7 = b.FunctionParam("v7", ty.f16());
-    auto* v8 = b.FunctionParam("v8", ty.f16());
-    auto* v9 = b.FunctionParam("v9", ty.f16());
+    auto* mat = ty->mat3x3<f16>();
+    auto* v1 = b.FunctionParam("v1", ty->f16());
+    auto* v2 = b.FunctionParam("v2", ty->f16());
+    auto* v3 = b.FunctionParam("v3", ty->f16());
+    auto* v4 = b.FunctionParam("v4", ty->f16());
+    auto* v5 = b.FunctionParam("v5", ty->f16());
+    auto* v6 = b.FunctionParam("v6", ty->f16());
+    auto* v7 = b.FunctionParam("v7", ty->f16());
+    auto* v8 = b.FunctionParam("v8", ty->f16());
+    auto* v9 = b.FunctionParam("v9", ty->f16());
     auto* func = b.Function("foo", mat);
     func->SetParams({v1, v2, v3, v4, v5, v6, v7, v8, v9});
     b.Append(func->Block(), [&] {

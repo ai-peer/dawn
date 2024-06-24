@@ -33,7 +33,7 @@ namespace tint::msl::writer {
 namespace {
 
 TEST_F(MslWriterTest, Discard) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] {
@@ -43,7 +43,7 @@ TEST_F(MslWriterTest, Discard) {
         b.Return(func);
     });
 
-    auto* ep = b.Function("frag_main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* ep = b.Function("frag_main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(ep->Block(), [&] {
         b.Call(func);
         b.Return(ep);

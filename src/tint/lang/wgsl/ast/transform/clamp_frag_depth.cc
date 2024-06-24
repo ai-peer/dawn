@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/builtin_attribute.h"
@@ -53,15 +54,15 @@ namespace tint::ast::transform {
 /// PIMPL state for the transform
 struct ClampFragDepth::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b{};
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// The sem::Info of the program
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
     /// The symbols of the program
-    const SymbolTable& sym = src.Symbols();
+    const raw_ref<const SymbolTable> sym = src->Symbols();
 
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
@@ -128,7 +129,7 @@ struct ClampFragDepth::State {
                 //   fn clamp_frag_depth_S(s : S) -> S {
                 //       return S(s.first, s.second, clamp_frag_depth(s.frag_depth), s.last);
                 //   }
-                auto* struct_ty = sem.Get(fn)->ReturnType()->As<sem::Struct>()->Declaration();
+                auto* struct_ty = sem->Get(fn)->ReturnType()->As<sem::Struct>()->Declaration();
                 auto helper = io_structs_clamp_helpers.GetOrAdd(struct_ty, [&] {
                     auto return_ty = fn->return_type;
                     auto fn_sym =
@@ -180,7 +181,7 @@ struct ClampFragDepth::State {
     bool ContainsFragDepth(VectorRef<const ast::Attribute*> attrs) {
         for (auto* attribute : attrs) {
             if (auto* builtin_attr = attribute->As<ast::BuiltinAttribute>()) {
-                auto builtin = sem.Get(builtin_attr)->Value();
+                auto builtin = sem->Get(builtin_attr)->Value();
                 if (builtin == core::BuiltinValue::kFragDepth) {
                     return true;
                 }
@@ -200,7 +201,7 @@ struct ClampFragDepth::State {
     /// @returns true if @p fn has a return structure with a `@builtin(frag_depth)` attribute on one
     /// of the members
     bool ReturnsFragDepthInStruct(const ast::Function* fn) {
-        if (auto* struct_ty = sem.Get(fn)->ReturnType()->As<sem::Struct>()) {
+        if (auto* struct_ty = sem->Get(fn)->ReturnType()->As<sem::Struct>()) {
             for (auto* member : struct_ty->Members()) {
                 if (ContainsFragDepth(member->Declaration()->attributes)) {
                     return true;
@@ -218,7 +219,7 @@ ClampFragDepth::~ClampFragDepth() = default;
 ast::transform::Transform::ApplyResult ClampFragDepth::Apply(const Program& src,
                                                              const ast::transform::DataMap& inputs,
                                                              ast::transform::DataMap&) const {
-    return State{src}.Run(inputs);
+    return State{raw_ref(src)raw_ref(}).Run(inputs);
 }
 
 ClampFragDepth::Config::Config() = default;

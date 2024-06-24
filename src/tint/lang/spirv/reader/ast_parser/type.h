@@ -32,6 +32,7 @@
 #include <string>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/texel_format.h"
@@ -193,7 +194,7 @@ struct Pointer final : public Castable<Pointer, Type> {
     /// the pointer address space
     core::AddressSpace const address_space;
     /// the store type
-    Type const* const type;
+    const raw_ptr<const Type> type;
     /// the pointer declared access mode
     core::Access const access;
 };
@@ -224,7 +225,7 @@ struct Reference final : public Castable<Reference, Type> {
     /// the pointer address space
     core::AddressSpace const address_space;
     /// the store type
-    Type const* const type;
+    const raw_ptr<const Type> type;
     /// the pointer declared access mode
     core::Access const access;
 };
@@ -250,7 +251,7 @@ struct Vector final : public Castable<Vector, Type> {
 #endif  // NDEBUG
 
     /// the element type
-    Type const* const type;
+    const raw_ptr<const Type> type;
     /// the number of elements in the vector
     const uint32_t size;
 };
@@ -277,7 +278,7 @@ struct Matrix final : public Castable<Matrix, Type> {
 #endif  // NDEBUG
 
     /// the matrix element type
-    Type const* const type;
+    const raw_ptr<const Type> type;
     /// the number of columns in the matrix
     const uint32_t columns;
     /// the number of rows in the matrix
@@ -307,7 +308,7 @@ struct Array final : public Castable<Array, Type> {
 #endif  // NDEBUG
 
     /// the element type
-    Type const* const type;
+    const raw_ptr<const Type> type;
     /// the number of elements in the array. 0 represents runtime-sized array.
     const uint32_t size;
     /// the byte stride of the array
@@ -414,7 +415,7 @@ struct MultisampledTexture final : public Castable<MultisampledTexture, Texture>
 #endif  // NDEBUG
 
     /// the multisampled texture type
-    Type const* const type;
+    const raw_ptr<const Type> type;
 };
 
 /// `texture_D<T>` type
@@ -438,7 +439,7 @@ struct SampledTexture final : public Castable<SampledTexture, Texture> {
 #endif  // NDEBUG
 
     /// the sampled texture type
-    Type const* const type;
+    const raw_ptr<const Type> type;
 };
 
 /// `texture_storage_D<F>` type
@@ -507,7 +508,7 @@ struct Alias final : public Castable<Alias, Named> {
     ast::Type Build(ProgramBuilder& b) const override;
 
     /// the aliased type
-    Type const* const type;
+    const raw_ptr<const Type> type;
 };
 
 /// `struct N { ... };` type

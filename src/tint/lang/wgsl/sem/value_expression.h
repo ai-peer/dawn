@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_VALUE_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_SEM_VALUE_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/evaluation_stage.h"
 #include "src/tint/lang/wgsl/sem/behavior.h"
@@ -99,12 +100,12 @@ class ValueExpression : public Castable<ValueExpression, Expression> {
 
   protected:
     /// The root identifier for this semantic expression, or nullptr
-    const Variable* root_identifier_;
+    raw_ptr<const Variable> root_identifier_;
 
   private:
-    const core::type::Type* const type_;
+    const raw_ptr<const core::type::Type> type_;
     const core::EvaluationStage stage_;
-    const core::constant::Value* const constant_;
+    const raw_ptr<const core::constant::Value> constant_;
     sem::Behaviors behaviors_{sem::Behavior::kNext};
     const bool has_side_effects_;
 };

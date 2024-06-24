@@ -44,7 +44,7 @@ TEST_F(WGSLParserTest, DiagnosticDirective_Name) {
     ASSERT_EQ(ast.GlobalDeclarations().Length(), 1u);
     EXPECT_EQ(ast.GlobalDeclarations()[0], directive);
 
-    auto* r = directive->control.rule_name;
+    auto* r = directive->control.rule_name.get();
     ASSERT_NE(r, nullptr);
     EXPECT_EQ(r->category, nullptr);
     ast::CheckIdentifier(r->name, "foo");
@@ -61,7 +61,7 @@ TEST_F(WGSLParserTest, DiagnosticDirective_CategoryName) {
     ASSERT_EQ(ast.GlobalDeclarations().Length(), 1u);
     EXPECT_EQ(ast.GlobalDeclarations()[0], directive);
 
-    auto* r = directive->control.rule_name;
+    auto* r = directive->control.rule_name.get();
     ASSERT_NE(r, nullptr);
     ast::CheckIdentifier(r->category, "foo");
     ast::CheckIdentifier(r->name, "bar");

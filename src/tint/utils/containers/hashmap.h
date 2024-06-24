@@ -32,6 +32,8 @@
 #include <optional>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/hashmap_base.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/ice/ice.h"
@@ -87,7 +89,7 @@ struct GetResult {
     /// The value found in the map, or null if the entry was not found.
     /// This pointer is guaranteed to be valid until the owning entry is removed, the map is
     /// cleared, or the map is destructed.
-    T* value = nullptr;
+    raw_ptr<T> value = nullptr;
 
     /// @returns `true` if #value is not null.
     explicit operator bool() const { return value; }
@@ -123,7 +125,7 @@ struct AddResult {
     /// otherwise the value of the newly inserted entry.
     /// This reference is guaranteed to be valid until the owning entry is removed, the map is
     /// cleared, or the map is destructed.
-    T& value;
+    const raw_ref<T> value;
 
     /// True if an entry did not already exist in the map with the given key.
     bool added = false;
@@ -157,10 +159,10 @@ class Hashmap : public HashmapBase<HashmapEntry<HashmapKey<KEY, HASH, EQUAL>, VA
     template <typename K, typename V>
     AddResult<Value> Add(K&& key, V&& value) {
         if (auto idx = this->EditAt(key); idx.entry) {
-            return {idx.entry->value, /* added */ false};
+            return {raw_ref(idx.entry->value), /* added */ false};
         } else {
             idx.Insert(std::forward<K>(key), std::forward<V>(value));
-            return {idx.entry->value, /* added */ true};
+            return {raw_ref(idx.entry->value), /* added */ true};
         }
     }
 

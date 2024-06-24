@@ -45,7 +45,7 @@ Construct::Construct(const Construct* the_parent,
           // it's incidental which will appear on the stack first.
           the_kind == kLoop
               ? this
-              : ((parent && parent->depth < the_depth) ? parent->enclosing_loop : nullptr)),
+              : ((parent && parent->depth < the_depth) ? parent->enclosing_loop.get() : nullptr)),
       enclosing_continue(
           // Compute the enclosing continue construct. Doing this in the
           // constructor member list lets us make the member const.
@@ -53,7 +53,8 @@ Construct::Construct(const Construct* the_parent,
           // it's incidental which will appear on the stack first.
           the_kind == kContinue
               ? this
-              : ((parent && parent->depth < the_depth) ? parent->enclosing_continue : nullptr)),
+              : ((parent && parent->depth < the_depth) ? parent->enclosing_continue.get()
+                                                       : nullptr)),
       enclosing_loop_or_continue_or_switch(
           // Compute the enclosing loop or continue or switch construct.
           // Doing this in the constructor member list lets us make the
@@ -63,7 +64,7 @@ Construct::Construct(const Construct* the_parent,
           (the_kind == kLoop || the_kind == kContinue || the_kind == kSwitchSelection)
               ? this
               : ((parent && parent->depth < the_depth)
-                     ? parent->enclosing_loop_or_continue_or_switch
+                     ? parent->enclosing_loop_or_continue_or_switch.get()
                      : nullptr)),
       depth(the_depth),
       kind(the_kind),

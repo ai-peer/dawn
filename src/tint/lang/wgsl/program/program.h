@@ -31,6 +31,7 @@
 #include <string>
 #include <unordered_set>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/manager.h"
 #include "src/tint/lang/core/type/manager.h"
 #include "src/tint/lang/wgsl/ast/function.h"
@@ -181,7 +182,7 @@ class Program {
     core::constant::Manager constants_;
     ASTNodeAllocator ast_nodes_;
     SemNodeAllocator sem_nodes_;
-    ast::Module* ast_ = nullptr;
+    raw_ptr<ast::Module> ast_ = nullptr;
     sem::Info sem_;
     SymbolTable symbols_{id_};
     diag::List diagnostics_;

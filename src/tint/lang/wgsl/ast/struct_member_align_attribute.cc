@@ -51,7 +51,7 @@ std::string StructMemberAlignAttribute::Name() const {
 const StructMemberAlignAttribute* StructMemberAlignAttribute::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* expr_ = ctx.Clone(expr);
+    auto* expr_ = ctx.Clone(expr.get());
     return ctx.dst->create<StructMemberAlignAttribute>(src, expr_);
 }
 

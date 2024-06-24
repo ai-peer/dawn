@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,13 +44,13 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// A list of terminators that need to have their arguments cleared.
     Vector<Terminator*, 8> terminators_to_clear{};
@@ -57,7 +58,7 @@ struct State {
     /// Process the module.
     void Process() {
         // Loop over every instruction looking for control instructions.
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             tint::Switch(
                 inst,
                 [&](If* i) {  //
@@ -93,7 +94,7 @@ struct State {
             auto* result = ci->Result(i);
 
             // Create a variable to hold the result, and insert it before the control instruction.
-            auto* var = b.Var(ty.ptr<function>(result->Type()));
+            auto* var = b.Var(ty->ptr<function>(result->Type()));
             var->InsertBefore(ci);
 
             // Store to the variable before each exit instruction.
@@ -130,7 +131,7 @@ struct State {
             auto* param = block->Params()[i];
 
             // Create a variable to hold the parameter value, and insert it in the parent block.
-            auto* var = b.Var(ty.ptr<function>(param->Type()));
+            auto* var = b.Var(ty->ptr<function>(param->Type()));
             var->InsertBefore(var_insertion_point);
 
             // Store to the variable before each branch.
@@ -169,7 +170,7 @@ Result<SuccessType> RemoveTerminatorArgs(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

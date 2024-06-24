@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/wgsl/ast/assignment_statement.h"
 #include "src/tint/lang/wgsl/ast/transform/simplify_pointers.h"
@@ -64,7 +65,7 @@ struct LocalizeStructArrayAssignment::State {
 
         bool made_changes = false;
 
-        for (auto* node : src.ASTNodes().Objects()) {
+        for (auto* node : src->ASTNodes().Objects()) {
             if (auto* assign_stmt = node->As<ast::AssignmentStatement>()) {
                 // Process if it's an assignment statement to a dynamically indexed array
                 // within a struct on a function or private storage variable. This
@@ -167,11 +168,11 @@ struct LocalizeStructArrayAssignment::State {
 
   private:
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
 
     /// Returns true if `expr` contains an index accessor expression to a
     /// structure member of array type.
@@ -179,11 +180,11 @@ struct LocalizeStructArrayAssignment::State {
         bool result = false;
         TraverseExpressions(expr, [&](const ast::IndexAccessorExpression* ia) {
             // Indexing using a runtime value?
-            auto* idx_sem = src.Sem().GetVal(ia->index);
+            auto* idx_sem = src->Sem().GetVal(ia->index.get());
             if (!idx_sem->ConstantValue()) {
                 // Indexing a member access expr?
                 if (auto* ma = ia->object->As<ast::MemberAccessorExpression>()) {
-                    const auto* ma_ty = src.TypeOf(ma);
+                    const auto* ma_ty = src->TypeOf(ma);
                     if (TINT_UNLIKELY(ma_ty->Is<core::type::Pointer>())) {
                         TINT_ICE()
                             << "lhs of index accessor expression should not be a pointer. These "
@@ -207,7 +208,7 @@ struct LocalizeStructArrayAssignment::State {
     // See https://www.w3.org/TR/WGSL/#originating-variable-section
     std::pair<const core::type::Type*, core::AddressSpace> GetOriginatingTypeAndAddressSpace(
         const ast::AssignmentStatement* assign_stmt) {
-        auto* root_ident = src.Sem().GetVal(assign_stmt->lhs)->RootIdentifier();
+        auto* root_ident = src->Sem().GetVal(assign_stmt->lhs.get())->RootIdentifier();
         if (TINT_UNLIKELY(!root_ident)) {
             TINT_ICE() << "Unable to determine originating variable for lhs of assignment "
                           "statement";

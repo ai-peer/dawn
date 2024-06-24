@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_UNARY_OP_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_UNARY_OP_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/unary_op.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -61,7 +62,7 @@ class UnaryOpExpression final : public Castable<UnaryOpExpression, Expression> {
     const core::UnaryOp op;
 
     /// The expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

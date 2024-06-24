@@ -50,7 +50,7 @@ using namespace tint::core::intrinsic;  // NOLINT(build/namespaces)
 
 inline const core::type::AbstractFloat* BuildFa(intrinsic::MatchState& state,
                                                 const core::type::Type*) {
-    return state.types.AFloat();
+    return state.types->AFloat();
 }
 
 inline bool MatchFa(intrinsic::MatchState& state, const core::type::Type* ty) {
@@ -60,7 +60,7 @@ inline bool MatchFa(intrinsic::MatchState& state, const core::type::Type* ty) {
 
 inline const core::type::AbstractInt* BuildIa(intrinsic::MatchState& state,
                                               const core::type::Type*) {
-    return state.types.AInt();
+    return state.types->AInt();
 }
 
 inline bool MatchIa(intrinsic::MatchState& state, const core::type::Type* ty) {

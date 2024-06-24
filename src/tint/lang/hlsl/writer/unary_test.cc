@@ -36,7 +36,7 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, UnaryComplement) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Zero<i32>());
@@ -56,7 +56,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, UnaryNot) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Zero<bool>());
@@ -76,7 +76,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, UnaryNegation) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Zero<f32>());

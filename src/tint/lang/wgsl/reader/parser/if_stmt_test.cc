@@ -60,12 +60,12 @@ TEST_F(WGSLParserTest, IfStmt_WithElse) {
     ASSERT_TRUE(e->condition->Is<ast::BinaryExpression>());
     EXPECT_EQ(e->body->statements.Length(), 2u);
 
-    auto* elseif = As<ast::IfStatement>(e->else_statement);
+    auto* elseif = As<ast::IfStatement>(e->else_statement.get());
     ASSERT_NE(elseif, nullptr);
     ASSERT_TRUE(elseif->condition->Is<ast::IdentifierExpression>());
     EXPECT_EQ(elseif->body->statements.Length(), 1u);
 
-    auto* el = As<ast::BlockStatement>(elseif->else_statement);
+    auto* el = As<ast::BlockStatement>(elseif->else_statement.get());
     ASSERT_NE(el, nullptr);
     EXPECT_EQ(el->statements.Length(), 0u);
 }
@@ -84,12 +84,12 @@ TEST_F(WGSLParserTest, IfStmt_WithElse_WithParens) {
     ASSERT_TRUE(e->condition->Is<ast::BinaryExpression>());
     EXPECT_EQ(e->body->statements.Length(), 2u);
 
-    auto* elseif = As<ast::IfStatement>(e->else_statement);
+    auto* elseif = As<ast::IfStatement>(e->else_statement.get());
     ASSERT_NE(elseif, nullptr);
     ASSERT_TRUE(elseif->condition->Is<ast::IdentifierExpression>());
     EXPECT_EQ(elseif->body->statements.Length(), 1u);
 
-    auto* el = As<ast::BlockStatement>(elseif->else_statement);
+    auto* el = As<ast::BlockStatement>(elseif->else_statement.get());
     ASSERT_NE(el, nullptr);
     EXPECT_EQ(el->statements.Length(), 0u);
 }

@@ -32,6 +32,8 @@
 #include <variant>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -72,7 +74,7 @@ struct TextureBuiltinsFromUniform::State {
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
-        auto* cfg = inputs.Get<Config>();
+        auto* cfg = inputs->Get<Config>();
         if (cfg == nullptr) {
             b.Diagnostics().AddError(Source{})
                 << "missing transform data for "
@@ -94,8 +96,8 @@ struct TextureBuiltinsFromUniform::State {
         // 4. user function calls 3.
         // ...
         // n. entry point function.
-        for (auto* fn_decl : sem.Module()->DependencyOrderedDeclarations()) {
-            if (auto* fn = sem.Get<sem::Function>(fn_decl)) {
+        for (auto* fn_decl : sem->Module()->DependencyOrderedDeclarations()) {
+            if (auto* fn = sem->Get<sem::Function>(fn_decl)) {
                 for (auto* call : fn->DirectCalls()) {
                     auto* call_expr = call->Declaration();
 
@@ -118,7 +120,7 @@ struct TextureBuiltinsFromUniform::State {
                             }
 
                             auto* texture_expr = call->Declaration()->args[0];
-                            auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                            auto* texture_sem = sem->GetVal(texture_expr)->RootIdentifier();
                             TINT_ASSERT(texture_sem);
 
                             tint::Switch(
@@ -236,22 +238,22 @@ struct TextureBuiltinsFromUniform::State {
 
   private:
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The transform inputs
-    const ast::transform::DataMap& inputs;
+    const raw_ref<const ast::transform::DataMap> inputs;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Alias to the semantic info in ctx.src
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
 
     /// Ordered list of binding points for where they appear in the UBO
     std::vector<BindingPoint> ubo_bindingpoint_ordering;
 
     struct FunctionExtraParamInfo {
         // The extra passed in param that corresponds to the texture param.
-        const ast::Parameter* param = nullptr;
+        raw_ptr<const ast::Parameter> param = nullptr;
 
         // id of this extra param e.g. f(t0, foo, t1, e0, e1) e0 and e1 are extra params, their
         // extra_idx are 0 and 1. This is to help sort extra ids in the correct order.
@@ -290,7 +292,7 @@ struct TextureBuiltinsFromUniform::State {
     Hashmap<BindingPoint, Symbol, 16> bindpoint_to_syms;
 
     /// The internal uniform buffer
-    const ast::Variable* ubo = nullptr;
+    raw_ptr<const ast::Variable> ubo = nullptr;
 
     /// Get or create a UBO including u32 scalars for texture builtin values.
     /// @returns the symbol of the uniform buffer variable.
@@ -300,7 +302,7 @@ struct TextureBuiltinsFromUniform::State {
             return ubo->name->symbol;
         }
 
-        auto* cfg = inputs.Get<Config>();
+        auto* cfg = inputs->Get<Config>();
 
         Vector<const ast::StructMember*, 16> new_members;
         new_members.Resize(ubo_bindingpoint_ordering.size());
@@ -314,9 +316,9 @@ struct TextureBuiltinsFromUniform::State {
         }
 
         // Find if there's any existing global variable using the same cfg->ubo_binding
-        for (auto* var : src.AST().Globals<ast::Var>()) {
+        for (auto* var : src->AST().Globals<ast::Var>()) {
             if (var->HasBindingPoint()) {
-                auto* global_sem = sem.Get<sem::GlobalVariable>(var);
+                auto* global_sem = sem->Get<sem::GlobalVariable>(var);
 
                 // The original binding point
                 BindingPoint binding_point = *global_sem->Attributes().binding_point;

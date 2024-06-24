@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_CONSTANT_SPLAT_H_
 #define SRC_TINT_LANG_CORE_CONSTANT_SPLAT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/composite.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/containers/vector.h"
@@ -53,7 +54,7 @@ class Splat : public Castable<Splat, Value> {
     /// Retrieve item at index @p i
     /// @param i the index to retrieve
     /// @returns the element, or nullptr if out of bounds
-    const Value* Index(size_t i) const override { return i < count ? el : nullptr; }
+    const Value* Index(size_t i) const override { return i < count ? el.get() : nullptr; }
 
     /// @copydoc Value::NumElements()
     size_t NumElements() const override { return count; }
@@ -72,9 +73,9 @@ class Splat : public Castable<Splat, Value> {
     const Splat* Clone(CloneContext& ctx) const override;
 
     /// The type of the splat element
-    core::type::Type const* const type;
+    const raw_ptr<const core::type::Type> type;
     /// The element stored in the splat
-    const Value* el;
+    raw_ptr<const Value> el;
     /// The number of items in the splat
     const size_t count;
 

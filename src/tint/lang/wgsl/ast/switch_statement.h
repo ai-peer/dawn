@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_SWITCH_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_SWITCH_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/case_statement.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -62,7 +63,7 @@ class SwitchStatement final : public Castable<SwitchStatement, Statement> {
     const SwitchStatement* Clone(CloneContext& ctx) const override;
 
     /// The switch condition or nullptr if none set
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 
     /// The Switch body
     const tint::Vector<const CaseStatement*, 4> body;

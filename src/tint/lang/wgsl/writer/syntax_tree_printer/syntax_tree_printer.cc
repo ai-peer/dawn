@@ -90,7 +90,7 @@ SyntaxTreePrinter::~SyntaxTreePrinter() = default;
 
 bool SyntaxTreePrinter::Generate() {
     // Generate global declarations in the order they appear in the module.
-    for (auto* decl : program_.AST().GlobalDeclarations()) {
+    for (auto* decl : program_->AST().GlobalDeclarations()) {
         Switch(
             decl,  //
             [&](const ast::DiagnosticDirective* dd) { EmitDiagnosticControl(dd->control); },
@@ -101,7 +101,7 @@ bool SyntaxTreePrinter::Generate() {
             [&](const ast::ConstAssert* ca) { EmitConstAssert(ca); },  //
             TINT_ICE_ON_NO_MATCH);
 
-        if (decl != program_.AST().GlobalDeclarations().Back()) {
+        if (decl != program_->AST().GlobalDeclarations().Back()) {
             Line();
         }
     }
@@ -976,13 +976,13 @@ void SyntaxTreePrinter::EmitLoop(const ast::LoopStatement* stmt) {
 
 void SyntaxTreePrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     TextBuffer init_buf;
-    if (auto* init = stmt->initializer) {
+    if (auto* init = stmt->initializer.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &init_buf);
         EmitStatement(init);
     }
 
     TextBuffer cont_buf;
-    if (auto* cont = stmt->continuing) {
+    if (auto* cont = stmt->continuing.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cont_buf);
         EmitStatement(cont);
     }
@@ -1013,7 +1013,7 @@ void SyntaxTreePrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
         Line() << "condition: [";
         {
             ScopedIndent con(this);
-            if (auto* cond = stmt->condition) {
+            if (auto* cond = stmt->condition.get()) {
                 EmitExpression(cond);
             }
         }

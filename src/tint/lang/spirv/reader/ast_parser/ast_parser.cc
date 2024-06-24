@@ -32,6 +32,7 @@
 #include <string_view>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "source/opt/build_module.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/depth_texture.h"
@@ -80,10 +81,10 @@ class FunctionTraverser {
         visited_.clear();
         ordered_.clear();
         id_to_func_.clear();
-        for (const auto& f : module_) {
+        for (const auto& f : *module_) {
             id_to_func_[f.result_id()] = &f;
         }
-        for (const auto& f : module_) {
+        for (const auto& f : *module_) {
             Visit(f);
         }
         return ordered_;
@@ -109,7 +110,7 @@ class FunctionTraverser {
         ordered_.push_back(&f);
     }
 
-    const spvtools::opt::Module& module_;
+    const raw_ref<const spvtools::opt::Module> module_;
     std::unordered_set<const spvtools::opt::Function*> visited_;
     std::unordered_map<uint32_t, const spvtools::opt::Function*> id_to_func_;
     std::vector<const spvtools::opt::Function*> ordered_;

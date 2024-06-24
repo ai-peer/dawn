@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_CONSTANT_COMPOSITE_H_
 #define SRC_TINT_LANG_CORE_CONSTANT_COMPOSITE_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/core/type/type.h"
@@ -77,7 +78,7 @@ class Composite : public Castable<Composite, Value> {
     const Composite* Clone(CloneContext& ctx) const override;
 
     /// The composite type
-    core::type::Type const* const type;
+    const raw_ptr<const core::type::Type> type;
     /// The composite elements
     const Vector<const Value*, 4> elements;
     /// True if all elements are zero

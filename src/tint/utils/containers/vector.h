@@ -37,6 +37,8 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/slice.h"
 #include "src/tint/utils/ice/ice.h"
 #include "src/tint/utils/macros/compiler.h"
@@ -274,9 +276,9 @@ class VectorIterator {
     }
 
   private:
-    T* ptr_ = nullptr;
+    raw_ptr<T> ptr_ = nullptr;
 #if TINT_VECTOR_MUTATION_CHECKS_ENABLED
-    std::atomic<uint32_t>* iterator_count_ = nullptr;
+    raw_ptr<std::atomic<uint32_t>> iterator_count_ = nullptr;
 #endif
 };
 
@@ -388,7 +390,7 @@ class Vector {
 
     /// Copy constructor from an immutable vector reference
     /// @param other the vector reference to copy
-    Vector(const VectorRef<T>& other) { Copy(other.slice_); }  // NOLINT(runtime/explicit)
+    Vector(const VectorRef<T>& other) { Copy(*other.slice_); }  // NOLINT(runtime/explicit)
 
     /// Copy constructor from an immutable slice
     /// @param other the slice to copy
@@ -456,8 +458,8 @@ class Vector {
     /// @param other the vector reference to copy
     /// @returns this vector so calls can be chained
     Vector& operator=(const VectorRef<T>& other) {
-        if (&other.slice_ != &impl_.slice) {
-            Copy(other.slice_);
+        if (&*other.slice_ != &impl_.slice) {
+            Copy(*other.slice_);
         }
         return *this;
     }
@@ -466,7 +468,7 @@ class Vector {
     /// @param other the vector reference to copy
     /// @returns this vector so calls can be chained
     Vector& operator=(VectorRef<T>&& other) {
-        if (&other.slice_ != &impl_.slice) {
+        if (&*other.slice_ != &impl_.slice) {
             MoveOrCopy(std::move(other));
         }
         return *this;
@@ -844,10 +846,10 @@ class Vector {
         if (other.can_move_) {
             // Just steal the slice.
             ClearAndFree();
-            impl_.slice = other.slice_;
-            other.slice_ = {};
+            impl_.slice = *other.slice_;
+            (*other.slice_) = {};
         } else {
-            Copy(other.slice_);
+            Copy(*other.slice_);
         }
     }
 
@@ -1070,7 +1072,7 @@ class VectorRef {
 
     /// Copy constructor
     /// @param other the vector reference
-    VectorRef(const VectorRef& other) : slice_(other.slice_) {}
+    VectorRef(const VectorRef& other) : slice_(*other.slice_) {}
 
     /// Move constructor
     /// @param other the vector reference
@@ -1081,14 +1083,14 @@ class VectorRef {
     template <typename U,
               typename = std::enable_if_t<CanReinterpretSlice<ReinterpretMode::kSafe, T, U>>>
     VectorRef(const VectorRef<U>& other)  // NOLINT(runtime/explicit)
-        : slice_(other.slice_.template Reinterpret<T>()) {}
+        : slice_(other.slice_->Reinterpret<T>()) {}
 
     /// Move constructor with covariance / const conversion
     /// @param other the vector reference
     template <typename U,
               typename = std::enable_if_t<CanReinterpretSlice<ReinterpretMode::kSafe, T, U>>>
     VectorRef(VectorRef<U>&& other)  // NOLINT(runtime/explicit)
-        : slice_(other.slice_.template Reinterpret<T>()), can_move_(other.can_move_) {}
+        : slice_(other.slice_->Reinterpret<T>()), can_move_(other.can_move_) {}
 
     /// Constructor from a Vector with covariance / const conversion
     /// @param vector the vector to create a reference of
@@ -1111,46 +1113,46 @@ class VectorRef {
     /// Index operator
     /// @param i the element index. Must be less than `len`.
     /// @returns a reference to the i'th element.
-    const T& operator[](size_t i) const { return slice_[i]; }
+    const T& operator[](size_t i) const { return (*slice_)[i]; }
 
     /// @return the number of elements in the vector
-    size_t Length() const { return slice_.len; }
+    size_t Length() const { return slice_->len; }
 
     /// @return the number of elements that the vector could hold before a heap allocation needs to
     /// be made
-    size_t Capacity() const { return slice_.cap; }
+    size_t Capacity() const { return slice_->cap; }
 
     /// @return a reinterpretation of this VectorRef as elements of type U.
     /// @note this is doing a reinterpret_cast of elements. It is up to the caller to ensure that
     /// this is a safe operation.
     template <typename U>
     VectorRef<U> ReinterpretCast() const {
-        return {slice_.template Reinterpret<U, ReinterpretMode::kUnsafe>()};
+        return {slice_->Reinterpret<U, ReinterpretMode::kUnsafe>()};
     }
 
     /// @returns the internal slice of the vector
-    tint::Slice<T> Slice() { return slice_; }
+    tint::Slice<T> Slice() { return *slice_; }
 
     /// @returns true if the vector is empty.
-    bool IsEmpty() const { return slice_.len == 0; }
+    bool IsEmpty() const { return slice_->len == 0; }
 
     /// @returns a reference to the first element in the vector
-    const T& Front() const { return slice_.Front(); }
+    const T& Front() const { return slice_->Front(); }
 
     /// @returns a reference to the last element in the vector
-    const T& Back() const { return slice_.Back(); }
+    const T& Back() const { return slice_->Back(); }
 
     /// @returns a pointer to the first element in the vector
-    const T* begin() const { return slice_.begin(); }
+    const T* begin() const { return slice_->begin(); }
 
     /// @returns a pointer to one past the last element in the vector
-    const T* end() const { return slice_.end(); }
+    const T* end() const { return slice_->end(); }
 
     /// @returns a reverse iterator starting with the last element in the vector
-    auto rbegin() const { return slice_.rbegin(); }
+    auto rbegin() const { return slice_->rbegin(); }
 
     /// @returns the end for a reverse iterator
-    auto rend() const { return slice_.rend(); }
+    auto rend() const { return slice_->rend(); }
 
     /// @returns a hash code of the Vector
     tint::HashCode HashCode() const {
@@ -1175,7 +1177,7 @@ class VectorRef {
     friend class VectorRef;
 
     /// The slice of the vector being referenced.
-    tint::Slice<T>& slice_;
+    const raw_ref<tint::Slice<T>> slice_;
     /// Whether the slice data is passed by r-value reference, and can be moved.
     bool can_move_ = false;
 };

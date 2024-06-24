@@ -58,12 +58,12 @@ Loop::Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c)
 Loop::~Loop() = default;
 
 Loop* Loop::Clone(CloneContext& ctx) {
-    auto* new_init = ctx.ir.blocks.Create<MultiInBlock>();
-    auto* new_body = ctx.ir.blocks.Create<MultiInBlock>();
-    auto* new_continuing = ctx.ir.blocks.Create<MultiInBlock>();
+    auto* new_init = ctx.ir->blocks.Create<MultiInBlock>();
+    auto* new_body = ctx.ir->blocks.Create<MultiInBlock>();
+    auto* new_continuing = ctx.ir->blocks.Create<MultiInBlock>();
 
     auto* new_loop =
-        ctx.ir.allocators.instructions.Create<Loop>(new_init, new_body, new_continuing);
+        ctx.ir->allocators.instructions.Create<Loop>(new_init, new_body, new_continuing);
     ctx.Replace(this, new_loop);
 
     initializer_->CloneInto(ctx, new_init);

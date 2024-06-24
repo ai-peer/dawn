@@ -197,15 +197,15 @@ Validator::Validator(
 Validator::~Validator() = default;
 
 diag::Diagnostic& Validator::AddError(const Source& source) const {
-    return diagnostics_.AddError(source);
+    return diagnostics_->AddError(source);
 }
 
 diag::Diagnostic& Validator::AddWarning(const Source& source) const {
-    return diagnostics_.AddWarning(source);
+    return diagnostics_->AddWarning(source);
 }
 
 diag::Diagnostic& Validator::AddNote(const Source& source) const {
-    return diagnostics_.AddNote(source);
+    return diagnostics_->AddNote(source);
 }
 
 diag::Diagnostic* Validator::MaybeAddDiagnostic(wgsl::DiagnosticRule rule,
@@ -215,7 +215,7 @@ diag::Diagnostic* Validator::MaybeAddDiagnostic(wgsl::DiagnosticRule rule,
         diag::Diagnostic d{};
         d.severity = ToSeverity(severity);
         d.source = source;
-        return &diagnostics_.Add(std::move(d));
+        return &diagnostics_->Add(std::move(d));
     }
     return nullptr;
 }
@@ -325,7 +325,8 @@ bool Validator::Enables(VectorRef<const ast::Enable*> enables) const {
     };
 
     for (auto pair : incompatible) {
-        if (enabled_extensions_.Contains(pair.first) && enabled_extensions_.Contains(pair.second)) {
+        if (enabled_extensions_->Contains(pair.first) &&
+            enabled_extensions_->Contains(pair.second)) {
             AddError(source_of(pair.first))
                 << "extension " << style::Code(pair.first) << " cannot be used with extension "
                 << style::Code(pair.second);
@@ -379,7 +380,7 @@ bool Validator::Pointer(const ast::TemplatedIdentifier* a, const core::type::Poi
 
     if (auto* store_ty = s->StoreType(); !IsStorable(store_ty)) {
         AddError(a->arguments[1]->source)
-            << sem_.TypeNameOf(store_ty) + " cannot be used as the store type of a pointer";
+            << sem_->TypeNameOf(store_ty) + " cannot be used as the store type of a pointer";
         return false;
     }
 
@@ -390,7 +391,7 @@ bool Validator::Pointer(const ast::TemplatedIdentifier* a, const core::type::Poi
 bool Validator::StorageTexture(const core::type::StorageTexture* t, const Source& source) const {
     switch (t->access()) {
         case core::Access::kRead:
-            if (!allowed_features_.features.count(
+            if (!allowed_features_->features.count(
                     wgsl::LanguageFeature::kReadonlyAndReadwriteStorageTextures)) {
                 AddError(source) << "read-only storage textures require the "
                                     "readonly_and_readwrite_storage_textures language feature, "
@@ -399,7 +400,7 @@ bool Validator::StorageTexture(const core::type::StorageTexture* t, const Source
             }
             break;
         case core::Access::kReadWrite:
-            if (!allowed_features_.features.count(
+            if (!allowed_features_->features.count(
                     wgsl::LanguageFeature::kReadonlyAndReadwriteStorageTextures)) {
                 AddError(source) << "read-write storage textures require the "
                                     "readonly_and_readwrite_storage_textures language feature, "
@@ -415,7 +416,7 @@ bool Validator::StorageTexture(const core::type::StorageTexture* t, const Source
     }
 
     if (TINT_UNLIKELY(t->texel_format() == core::TexelFormat::kR8Unorm &&
-                      !enabled_extensions_.Contains(wgsl::Extension::kChromiumInternalGraphite))) {
+                      !enabled_extensions_->Contains(wgsl::Extension::kChromiumInternalGraphite))) {
         AddError(source) << style::Enum(core::TexelFormat::kR8Unorm) << " requires the "
                          << style::Code(wgsl::Extension::kChromiumInternalGraphite) << " extension";
         return false;
@@ -467,7 +468,7 @@ bool Validator::MultisampledTexture(const core::type::MultisampledTexture* t,
 }
 
 bool Validator::InputAttachment(const core::type::InputAttachment* t, const Source& source) const {
-    if (!enabled_extensions_.Contains(wgsl::Extension::kChromiumInternalInputAttachments)) {
+    if (!enabled_extensions_->Contains(wgsl::Extension::kChromiumInternalInputAttachments)) {
         AddError(source) << "use of " << style::Type("input_attachment")
                          << " requires enabling extension "
                          << style::Code("chromium_internal_input_attachments");
@@ -484,7 +485,7 @@ bool Validator::InputAttachment(const core::type::InputAttachment* t, const Sour
 bool Validator::InputAttachmentIndexAttribute(const ast::InputAttachmentIndexAttribute* attr,
                                               const core::type::Type* type,
                                               const Source& source) const {
-    if (!enabled_extensions_.Contains(wgsl::Extension::kChromiumInternalInputAttachments)) {
+    if (!enabled_extensions_->Contains(wgsl::Extension::kChromiumInternalInputAttachments)) {
         AddError(source) << "use of " << style::Attribute("@input_attachment_index")
                          << " requires enabling extension "
                          << style::Code("chromium_internal_input_attachments");
@@ -492,7 +493,7 @@ bool Validator::InputAttachmentIndexAttribute(const ast::InputAttachmentIndexAtt
     }
 
     if (!type->Is<core::type::InputAttachment>()) {
-        std::string invalid_type = sem_.TypeNameOf(type);
+        std::string invalid_type = sem_->TypeNameOf(type);
         AddError(source) << "cannot apply " << style::Attribute("@input_attachment_index")
                          << " to declaration of type " << style::Type(invalid_type);
         AddNote(attr->source) << style::Attribute("@input_attachment_index")
@@ -508,8 +509,8 @@ bool Validator::Materialize(const core::type::Type* to,
                             const core::type::Type* from,
                             const Source& source) const {
     if (core::type::Type::ConversionRank(from, to) == core::type::Type::kNoConversion) {
-        AddError(source) << "cannot convert value of type " << style::Type(sem_.TypeNameOf(from))
-                         << " to type " << style::Type(sem_.TypeNameOf(to));
+        AddError(source) << "cannot convert value of type " << style::Type(sem_->TypeNameOf(from))
+                         << " to type " << style::Type(sem_->TypeNameOf(to));
         return false;
     }
     return true;
@@ -524,8 +525,8 @@ bool Validator::VariableInitializer(const ast::Variable* v,
     // Value type has to match storage type
     if (storage_ty != value_type) {
         AddError(v->source) << "cannot initialize " << style::Keyword(v->Kind()) << " of type "
-                            << style::Type(sem_.TypeNameOf(storage_ty)) << " with value of type "
-                            << style::Type(sem_.TypeNameOf(initializer_ty));
+                            << style::Type(sem_->TypeNameOf(storage_ty)) << " with value of type "
+                            << style::Type(sem_->TypeNameOf(initializer_ty));
         return false;
     }
 
@@ -558,7 +559,7 @@ bool Validator::AddressSpaceLayout(const core::type::Type* store_ty,
     auto member_name_of = [](const core::type::StructMember* sm) { return sm->Name().Name(); };
 
     // Only validate the [type + address space] once
-    if (!valid_type_storage_layouts_.Add(TypeAndAddressSpace{store_ty, address_space})) {
+    if (!valid_type_storage_layouts_->Add(TypeAndAddressSpace{store_ty, address_space})) {
         return true;
     }
 
@@ -595,7 +596,7 @@ bool Validator::AddressSpaceLayout(const core::type::Type* store_ty,
 
             // Validate that member is at a valid byte offset
             if (m->Offset() % required_align != 0 &&
-                !enabled_extensions_.Contains(
+                !enabled_extensions_->Contains(
                     wgsl::Extension::kChromiumInternalRelaxedUniformLayout)) {
                 AddError(m->Declaration()->source)
                     << "the offset of a struct member of type "
@@ -624,7 +625,7 @@ bool Validator::AddressSpaceLayout(const core::type::Type* store_ty,
             if (prev_member && is_uniform_struct(prev_member->Type())) {
                 const uint32_t prev_to_curr_offset = m->Offset() - prev_member->Offset();
                 if (prev_to_curr_offset % 16 != 0 &&
-                    !enabled_extensions_.Contains(
+                    !enabled_extensions_->Contains(
                         wgsl::Extension::kChromiumInternalRelaxedUniformLayout)) {
                     AddError(m->Declaration()->source)
                         << style::Enum("uniform")
@@ -660,7 +661,8 @@ bool Validator::AddressSpaceLayout(const core::type::Type* store_ty,
         }
 
         if (address_space == core::AddressSpace::kUniform &&
-            !enabled_extensions_.Contains(wgsl::Extension::kChromiumInternalRelaxedUniformLayout)) {
+            !enabled_extensions_->Contains(
+                wgsl::Extension::kChromiumInternalRelaxedUniformLayout)) {
             // We already validated that this array member is itself aligned to 16 bytes above, so
             // we only need to validate that stride is a multiple of 16 bytes.
             if (arr->Stride() % 16 != 0) {
@@ -812,7 +814,7 @@ bool Validator::Var(const sem::Variable* v) const {
     auto* store_ty = v->Type()->UnwrapRef();
 
     if (!IsStorable(store_ty)) {
-        AddError(var->source) << sem_.TypeNameOf(store_ty)
+        AddError(var->source) << sem_->TypeNameOf(store_ty)
                               << " cannot be used as the type of a var";
         return false;
     }
@@ -821,7 +823,7 @@ bool Validator::Var(const sem::Variable* v) const {
         // https://gpuweb.github.io/gpuweb/wgsl/#module-scope-variables
         // If the store type is a texture type or a sampler type, then the variable declaration must
         // not have a address space attribute. The address space will always be handle.
-        AddError(var->source) << "variables of type " << style::Type(sem_.TypeNameOf(store_ty))
+        AddError(var->source) << "variables of type " << style::Type(sem_->TypeNameOf(store_ty))
                               << " must not specify an address space";
         return false;
     }
@@ -875,8 +877,8 @@ bool Validator::Let(const sem::Variable* v) const {
     auto* storage_ty = v->Type()->UnwrapRef();
 
     if (!(storage_ty->IsConstructible() || storage_ty->Is<core::type::Pointer>())) {
-        AddError(decl->source) << sem_.TypeNameOf(storage_ty) << " cannot be used as the type of a "
-                               << style::Keyword("let");
+        AddError(decl->source) << sem_->TypeNameOf(storage_ty)
+                               << " cannot be used as the type of a " << style::Keyword("let");
         return false;
     }
     return true;
@@ -904,8 +906,8 @@ bool Validator::Override(const sem::GlobalVariable* v,
     }
 
     if (!storage_ty->Is<core::type::Scalar>()) {
-        AddError(decl->source) << sem_.TypeNameOf(storage_ty) << " cannot be used as the type of a "
-                               << style::Keyword("override");
+        AddError(decl->source) << sem_->TypeNameOf(storage_ty)
+                               << " cannot be used as the type of a " << style::Keyword("override");
         return false;
     }
 
@@ -936,7 +938,7 @@ bool Validator::Parameter(const sem::Variable* var) const {
                 case core::AddressSpace::kStorage:
                 case core::AddressSpace::kUniform:
                 case core::AddressSpace::kWorkgroup:
-                    ok = allowed_features_.features.count(
+                    ok = allowed_features_->features.count(
                              wgsl::LanguageFeature::kUnrestrictedPointerParameters) != 0;
                     break;
                 default:
@@ -958,7 +960,7 @@ bool Validator::Parameter(const sem::Variable* var) const {
     } else if (!var->Type()
                     ->IsAnyOf<core::type::Texture, core::type::Sampler, core::type::Pointer>()) {
         AddError(decl->source) << "type of function parameter cannot be "
-                               << sem_.TypeNameOf(var->Type());
+                               << sem_->TypeNameOf(var->Type());
         return false;
     }
 
@@ -972,7 +974,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
     auto* type = storage_ty->UnwrapRef();
     bool is_stage_mismatch = false;
     bool is_output = !is_input;
-    auto builtin = sem_.Get(attr)->Value();
+    auto builtin = sem_->Get(attr)->Value();
 
     auto err_builtin_type = [&](std::string_view required) {
         AddError(attr->source) << "store type of " << style::Attribute("@builtin")
@@ -1082,7 +1084,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
             break;
         case core::BuiltinValue::kSubgroupInvocationId:
         case core::BuiltinValue::kSubgroupSize:
-            if (!enabled_extensions_.Contains(wgsl::Extension::kChromiumExperimentalSubgroups)) {
+            if (!enabled_extensions_->Contains(wgsl::Extension::kChromiumExperimentalSubgroups)) {
                 AddError(attr->source) << "use of " << style::Attribute("@builtin")
                                        << style::Code("(", style::Enum(builtin), ")")
                                        << " attribute requires enabling extension "
@@ -1126,7 +1128,7 @@ bool Validator::InterpolateAttribute(const ast::InterpolateAttribute* attr,
 
     auto* type = storage_ty->UnwrapRef();
 
-    auto i_type = sem_.AsInterpolationType(sem_.Get(attr->type));
+    auto i_type = sem_->AsInterpolationType(sem_->Get(attr->type.get()));
     if (TINT_UNLIKELY(!i_type)) {
         return false;
     }
@@ -1150,7 +1152,7 @@ bool Validator::InterpolateAttribute(const ast::InterpolateAttribute* attr,
         }
 
         if (attr->sampling) {
-            auto s_type = sem_.AsInterpolationSampling(sem_.Get(attr->sampling));
+            auto s_type = sem_->AsInterpolationSampling(sem_->Get(attr->sampling.get()));
             if (s_type->Value() == core::InterpolationSampling::kSample) {
                 AddError(attr->source)
                     << "use of '@interpolate(..., sample)' is not allowed in compatibility mode";
@@ -1216,7 +1218,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
         if (decl->body) {
             sem::Behaviors behaviors{sem::Behavior::kNext};
             if (auto* last = decl->body->Last()) {
-                behaviors = sem_.Get(last)->Behaviors();
+                behaviors = sem_->Get(last)->Behaviors();
             }
             if (behaviors.Contains(sem::Behavior::kNext)) {
                 auto end_source = decl->body->source.End();
@@ -1283,7 +1285,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             bool ok = Switch(
                 attr,  //
                 [&](const ast::BuiltinAttribute* builtin_attr) {
-                    auto builtin = sem_.Get(builtin_attr)->Value();
+                    auto builtin = sem_->Get(builtin_attr)->Value();
 
                     if (pipeline_io_attribute) {
                         AddError(attr->source) << "multiple entry point IO attributes";
@@ -1446,7 +1448,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 bool has_position = false;
                 if (pipeline_io_attribute) {
                     if (auto* builtin_attr = pipeline_io_attribute->As<ast::BuiltinAttribute>()) {
-                        auto builtin = sem_.Get(builtin_attr)->Value();
+                        auto builtin = sem_->Get(builtin_attr)->Value();
                         has_position = (builtin == core::BuiltinValue::kPosition);
                     }
                 }
@@ -1521,7 +1523,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         for (auto* global : func->TransitivelyReferencedGlobals()) {
             if (auto* builtin_attr =
                     ast::GetAttribute<ast::BuiltinAttribute>(global->Declaration()->attributes)) {
-                auto builtin = sem_.Get(builtin_attr)->Value();
+                auto builtin = sem_->Get(builtin_attr)->Value();
                 if (builtin == core::BuiltinValue::kPosition) {
                     found = true;
                     break;
@@ -1571,7 +1573,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 << style::Attribute("@group") << style::Code("(", style::Literal(bp->group), ")")
                 << ", " << style::Attribute("@binding")
                 << style::Code("(", style::Literal(bp->binding), ")");
-            AddNote(added.value->source) << "first resource binding usage declared here";
+            AddNote(*added.value->source) << "first resource binding usage declared here";
             return false;
         }
     }
@@ -1619,7 +1621,7 @@ bool Validator::EvaluationStage(const sem::ValueExpression* expr,
 
 bool Validator::Statements(VectorRef<const ast::Statement*> stmts) const {
     for (auto* stmt : stmts) {
-        if (!sem_.Get(stmt)->IsReachable()) {
+        if (!sem_->Get(stmt)->IsReachable()) {
             if (auto* d = MaybeAddDiagnostic(wgsl::ChromiumDiagnosticRule::kUnreachableCode,
                                              stmt->source)) {
                 *d << "code is unreachable";
@@ -1687,7 +1689,7 @@ bool Validator::Call(const sem::Call* call, sem::Statement* current_statement) c
                     << "ignoring return value of function "
                     << style::Function(fn->Declaration()->name->symbol.NameView())
                     << " annotated with " << style::Attribute("@must_use");
-                sem_.NoteDeclarationSource(fn->Declaration());
+                sem_->NoteDeclarationSource(fn->Declaration());
             },
             [&](const sem::BuiltinFn* b) {
                 AddError(call->Declaration()->source)
@@ -1725,7 +1727,7 @@ bool Validator::ForLoopStatement(const sem::ForLoopStatement* stmt) const {
         auto* cond_ty = cond->Type()->UnwrapRef();
         if (!cond_ty->Is<core::type::Bool>()) {
             AddError(stmt->Condition()->Declaration()->source)
-                << "for-loop condition must be bool, got " << sem_.TypeNameOf(cond_ty);
+                << "for-loop condition must be bool, got " << sem_->TypeNameOf(cond_ty);
             return false;
         }
     }
@@ -1741,7 +1743,7 @@ bool Validator::WhileStatement(const sem::WhileStatement* stmt) const {
         auto* cond_ty = cond->Type()->UnwrapRef();
         if (!cond_ty->Is<core::type::Bool>()) {
             AddError(stmt->Condition()->Declaration()->source)
-                << "while condition must be bool, got " << sem_.TypeNameOf(cond_ty);
+                << "while condition must be bool, got " << sem_->TypeNameOf(cond_ty);
             return false;
         }
     }
@@ -1753,7 +1755,7 @@ bool Validator::BreakIfStatement(const sem::BreakIfStatement* stmt,
     auto* cond_ty = stmt->Condition()->Type()->UnwrapRef();
     if (!cond_ty->Is<core::type::Bool>()) {
         AddError(stmt->Condition()->Declaration()->source)
-            << "break-if statement condition must be bool, got " << sem_.TypeNameOf(cond_ty);
+            << "break-if statement condition must be bool, got " << sem_->TypeNameOf(cond_ty);
         return false;
     }
 
@@ -1780,7 +1782,7 @@ bool Validator::IfStatement(const sem::IfStatement* stmt) const {
     auto* cond_ty = stmt->Condition()->Type()->UnwrapRef();
     if (!cond_ty->Is<core::type::Bool>()) {
         AddError(stmt->Condition()->Declaration()->source)
-            << "if statement condition must be bool, got " << sem_.TypeNameOf(cond_ty);
+            << "if statement condition must be bool, got " << sem_->TypeNameOf(cond_ty);
         return false;
     }
     return true;
@@ -1887,7 +1889,7 @@ bool Validator::WorkgroupUniformLoad(const sem::Call* call) const {
     TINT_ASSERT(ptr != nullptr);
     auto* ty = ptr->StoreType();
 
-    if (ty->Is<core::type::Atomic>() || atomic_composite_info_.Contains(ty)) {
+    if (ty->Is<core::type::Atomic>() || atomic_composite_info_->Contains(ty)) {
         AddError(arg->Declaration()->source)
             << "workgroupUniformLoad must not be called with an argument that "
                "contains an atomic type";
@@ -1922,7 +1924,7 @@ bool Validator::RequiredFeaturesForBuiltinFn(const sem::Call* call) const {
 
     const auto extension = builtin->RequiredExtension();
     if (extension != wgsl::Extension::kUndefined) {
-        if (!enabled_extensions_.Contains(extension)) {
+        if (!enabled_extensions_->Contains(extension)) {
             AddError(call->Declaration()->source)
                 << "cannot call built-in function " << style::Function(builtin->Fn())
                 << " without extension " << extension;
@@ -1932,7 +1934,7 @@ bool Validator::RequiredFeaturesForBuiltinFn(const sem::Call* call) const {
 
     const auto feature = builtin->RequiredLanguageFeature();
     if (feature != wgsl::LanguageFeature::kUndefined) {
-        if (!allowed_features_.features.count(feature)) {
+        if (!allowed_features_->features.count(feature)) {
             AddError(call->Declaration()->source)
                 << "built-in function " << style::Function(builtin->Fn()) << " requires the "
                 << style::Code(wgsl::ToString(feature))
@@ -1946,7 +1948,7 @@ bool Validator::RequiredFeaturesForBuiltinFn(const sem::Call* call) const {
 
 bool Validator::CheckF16Enabled(const Source& source) const {
     // Validate if f16 type is allowed.
-    if (!enabled_extensions_.Contains(wgsl::Extension::kF16)) {
+    if (!enabled_extensions_->Contains(wgsl::Extension::kF16)) {
         AddError(source) << style::Type("f16") << " type used without " << style::Code("f16")
                          << " extension enabled";
         return false;
@@ -1987,18 +1989,18 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
         const sem::Variable* param = target->Parameters()[i];
         const ast::Expression* arg_expr = decl->args[i];
         auto* param_type = param->Type();
-        auto* arg_type = sem_.TypeOf(arg_expr)->UnwrapRef();
+        auto* arg_type = sem_->TypeOf(arg_expr)->UnwrapRef();
 
         if (param_type != arg_type) {
             AddError(arg_expr->source) << "type mismatch for argument " << (i + 1) << " in call to "
                                        << style::Function(name) << ", expected "
-                                       << style::Type(sem_.TypeNameOf(param_type)) << ", got "
-                                       << style::Type(sem_.TypeNameOf(arg_type));
+                                       << style::Type(sem_->TypeNameOf(param_type)) << ", got "
+                                       << style::Type(sem_->TypeNameOf(arg_type));
             return false;
         }
 
         if (param_type->Is<core::type::Pointer>() &&
-            !allowed_features_.features.count(
+            !allowed_features_->features.count(
                 wgsl::LanguageFeature::kUnrestrictedPointerParameters)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-restriction
             // Each argument of pointer type to a user-defined function must have the same memory
@@ -2063,12 +2065,12 @@ bool Validator::StructureInitializer(const ast::CallExpression* ctor,
         }
         for (auto* member : struct_type->Members()) {
             auto* value = ctor->args[member->Index()];
-            auto* value_ty = sem_.TypeOf(value);
+            auto* value_ty = sem_->TypeOf(value);
             if (member->Type() != value_ty->UnwrapRef()) {
                 AddError(value->source)
                     << "type in structure constructor does not match struct member type: expected "
-                    << style::Type(sem_.TypeNameOf(member->Type())) << ", found "
-                    << style::Type(sem_.TypeNameOf(value_ty));
+                    << style::Type(sem_->TypeNameOf(member->Type())) << ", found "
+                    << style::Type(sem_->TypeNameOf(value_ty));
                 return false;
             }
         }
@@ -2081,12 +2083,12 @@ bool Validator::ArrayConstructor(const ast::CallExpression* ctor,
     auto& values = ctor->args;
     auto* elem_ty = array_type->ElemType();
     for (auto* value : values) {
-        auto* value_ty = sem_.TypeOf(value)->UnwrapRef();
+        auto* value_ty = sem_->TypeOf(value)->UnwrapRef();
         if (core::type::Type::ConversionRank(value_ty, elem_ty) ==
             core::type::Type::kNoConversion) {
-            AddError(value->source) << style::Type(sem_.TypeNameOf(value_ty))
+            AddError(value->source) << style::Type(sem_->TypeNameOf(value_ty))
                                     << " cannot be used to construct an array of "
-                                    << style::Type(sem_.TypeNameOf(elem_ty));
+                                    << style::Type(sem_->TypeNameOf(elem_ty));
             return false;
         }
     }
@@ -2257,7 +2259,7 @@ bool Validator::Array(const sem::Array* arr, const Source& el_source) const {
     auto* el_ty = arr->ElemType();
 
     if (!IsPlain(el_ty)) {
-        AddError(el_source) << sem_.TypeNameOf(el_ty)
+        AddError(el_source) << sem_->TypeNameOf(el_ty)
                             << " cannot be used as an element type of an array";
         return false;
     }
@@ -2362,7 +2364,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                                           /* is_input */ false)) {
                         return false;
                     }
-                    auto builtin = sem_.Get(builtin_attr)->Value();
+                    auto builtin = sem_->Get(builtin_attr)->Value();
                     if (builtin == core::BuiltinValue::kPosition) {
                         has_position = true;
                     }
@@ -2490,7 +2492,7 @@ bool Validator::LocationAttribute(const ast::LocationAttribute* attr,
     }
 
     if (!type->is_numeric_scalar_or_vector()) {
-        std::string invalid_type = sem_.TypeNameOf(type);
+        std::string invalid_type = sem_->TypeNameOf(type);
         AddError(source) << "cannot apply " << style::Attribute("@location")
                          << " to declaration of type " << style::Type(invalid_type);
         AddNote(attr->source)
@@ -2507,7 +2509,7 @@ bool Validator::ColorAttribute(const ast::ColorAttribute* attr,
                                ast::PipelineStage stage,
                                const Source& source,
                                const std::optional<bool> is_input) const {
-    if (!enabled_extensions_.Contains(wgsl::Extension::kChromiumExperimentalFramebufferFetch)) {
+    if (!enabled_extensions_->Contains(wgsl::Extension::kChromiumExperimentalFramebufferFetch)) {
         AddError(attr->source) << "use of " << style::Attribute("@color")
                                << " requires enabling extension "
                                << style::Code("chromium_experimental_framebuffer_fetch");
@@ -2524,7 +2526,7 @@ bool Validator::ColorAttribute(const ast::ColorAttribute* attr,
     }
 
     if (!type->is_numeric_scalar_or_vector()) {
-        std::string invalid_type = sem_.TypeNameOf(type);
+        std::string invalid_type = sem_->TypeNameOf(type);
         AddError(source) << "cannot apply " << style::Attribute("@color")
                          << " to declaration of type " << style::Type(invalid_type);
         AddNote(attr->source)
@@ -2539,7 +2541,7 @@ bool Validator::ColorAttribute(const ast::ColorAttribute* attr,
 bool Validator::BlendSrcAttribute(const ast::BlendSrcAttribute* attr,
                                   ast::PipelineStage stage,
                                   const std::optional<bool> is_input) const {
-    if (!enabled_extensions_.Contains(wgsl::Extension::kDualSourceBlending)) {
+    if (!enabled_extensions_->Contains(wgsl::Extension::kDualSourceBlending)) {
         AddError(attr->source) << "use of " << style::Attribute("@blend_src")
                                << " requires enabling extension "
                                << style::Code("dual_source_blending");
@@ -2565,12 +2567,12 @@ bool Validator::Return(const ast::ReturnStatement* ret,
     if (func_type->UnwrapRef() != ret_type) {
         AddError(ret->source)
             << "return statement type must match its function return type, returned "
-            << style::Type(sem_.TypeNameOf(ret_type)) << ", expected "
-            << style::Type(sem_.TypeNameOf(func_type));
+            << style::Type(sem_->TypeNameOf(ret_type)) << ", expected "
+            << style::Type(sem_->TypeNameOf(func_type));
         return false;
     }
 
-    auto* sem = sem_.Get(ret);
+    auto* sem = sem_->Get(ret);
     if (auto* continuing = ClosestContinuing(/*stop_at_loop*/ false, /* stop_at_switch */ false,
                                              current_statement)) {
         AddError(ret->source) << "continuing blocks must not contain a return statement";
@@ -2590,7 +2592,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
         return false;
     }
 
-    auto* cond_ty = sem_.TypeOf(s->condition);
+    auto* cond_ty = sem_->TypeOf(s->condition);
     if (!cond_ty->is_integer_scalar()) {
         AddError(s->condition->source)
             << "switch statement selector expression must be of a scalar integer type";
@@ -2601,7 +2603,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
     Hashmap<int64_t, Source, 4> selectors;
 
     for (auto* case_stmt : s->body) {
-        auto* case_sem = sem_.Get<sem::CaseStatement>(case_stmt);
+        auto* case_sem = sem_->Get<sem::CaseStatement>(case_stmt);
         for (auto* selector : case_sem->Selectors()) {
             if (selector->IsDefault()) {
                 if (default_selector != nullptr) {
@@ -2633,7 +2635,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
                 } else {
                     err << value;
                 }
-                AddNote(added.value) << "previous case declared here";
+                AddNote(*added.value) << "previous case declared here";
                 return false;
             }
         }
@@ -2668,7 +2670,7 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
             !ty->IsAnyOf<core::type::Pointer, core::type::Texture, core::type::Sampler,
                          core::type::AbstractNumeric>()) {
             AddError(rhs->source)
-                << "cannot assign " << style::Type(sem_.TypeNameOf(rhs_ty)) << " to "
+                << "cannot assign " << style::Type(sem_->TypeNameOf(rhs_ty)) << " to "
                 << style::Code("_") << ". " << style::Code("_")
                 << " can only be assigned a constructible, pointer, texture or sampler type";
             return false;
@@ -2677,13 +2679,13 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
     }
 
     // https://gpuweb.github.io/gpuweb/wgsl/#assignment-statement
-    auto const* lhs_sem = sem_.GetVal(lhs);
+    auto const* lhs_sem = sem_->GetVal(lhs);
     auto const* lhs_ty = lhs_sem->Type();
 
     auto* lhs_ref = lhs_ty->As<core::type::Reference>();
     if (!lhs_ref) {
         // LHS is not a reference, so it has no storage.
-        AddError(lhs->source) << "cannot assign to " << sem_.Describe(lhs_sem);
+        AddError(lhs->source) << "cannot assign to " << sem_->Describe(lhs_sem);
 
         auto* expr = lhs;
         while (expr) {
@@ -2691,27 +2693,27 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
                 expr,  //
                 [&](const ast::AccessorExpression* e) { return e->object; },
                 [&](const ast::IdentifierExpression* i) {
-                    if (auto user = sem_.Get<sem::VariableUser>(i)) {
+                    if (auto user = sem_->Get<sem::VariableUser>(i)) {
                         Switch(
                             user->Variable()->Declaration(),  //
                             [&](const ast::Let* v) {
                                 AddNote(user->Declaration()->source)
                                     << style::Variable("let") << " variables are immutable";
-                                sem_.NoteDeclarationSource(v);
+                                sem_->NoteDeclarationSource(v);
                             },
                             [&](const ast::Const* v) {
                                 AddNote(user->Declaration()->source)
                                     << style::Variable("const") << " variables are immutable";
-                                sem_.NoteDeclarationSource(v);
+                                sem_->NoteDeclarationSource(v);
                             },
                             [&](const ast::Override* v) {
                                 AddNote(user->Declaration()->source)
                                     << style::Variable("override") << " variables are immutable";
-                                sem_.NoteDeclarationSource(v);
+                                sem_->NoteDeclarationSource(v);
                             },
                             [&](const ast::Parameter* v) {
                                 AddNote(user->Declaration()->source) << "parameters are immutable";
-                                sem_.NoteDeclarationSource(v);
+                                sem_->NoteDeclarationSource(v);
                             });
                     }
                     return nullptr;
@@ -2726,8 +2728,8 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
 
     // Value type has to match storage type
     if (storage_ty != value_type) {
-        AddError(a->source) << "cannot assign " << style::Type(sem_.TypeNameOf(rhs_ty)) << " to "
-                            << style::Type(sem_.TypeNameOf(lhs_ty));
+        AddError(a->source) << "cannot assign " << style::Type(sem_->TypeNameOf(rhs_ty)) << " to "
+                            << style::Type(sem_->TypeNameOf(lhs_ty));
         return false;
     }
     if (!storage_ty->IsConstructible()) {
@@ -2736,7 +2738,7 @@ bool Validator::Assignment(const ast::Statement* a, const core::type::Type* rhs_
     }
     if (lhs_ref->Access() == core::Access::kRead) {
         AddError(a->source) << "cannot store into a read-only type "
-                            << style::Type(sem_.RawTypeNameOf(lhs_ty));
+                            << style::Type(sem_->RawTypeNameOf(lhs_ty));
         return false;
     }
     return true;
@@ -2747,7 +2749,7 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
 
     // https://gpuweb.github.io/gpuweb/wgsl/#increment-decrement
 
-    if (auto* var_user = sem_.Get<sem::VariableUser>(lhs)) {
+    if (auto* var_user = sem_->Get<sem::VariableUser>(lhs)) {
         auto* v = var_user->Variable()->Declaration();
         bool errored = Switch(
             v,  //
@@ -2764,17 +2766,17 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
                 return true;
             });
         if (errored) {
-            sem_.NoteDeclarationSource(v);
+            sem_->NoteDeclarationSource(v);
             return false;
         }
     }
 
-    auto const* lhs_ty = sem_.TypeOf(lhs);
+    auto const* lhs_ty = sem_->TypeOf(lhs);
     auto* lhs_ref = lhs_ty->As<core::type::Reference>();
     if (!lhs_ref) {
         // LHS is not a reference, so it has no storage.
         AddError(lhs->source) << "cannot modify value of type "
-                              << style::Type(sem_.TypeNameOf(lhs_ty));
+                              << style::Type(sem_->TypeNameOf(lhs_ty));
         return false;
     }
 
@@ -2786,7 +2788,7 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
 
     if (lhs_ref->Access() == core::Access::kRead) {
         AddError(inc->source) << "cannot modify read-only type "
-                              << style::Type(sem_.RawTypeNameOf(lhs_ty));
+                              << style::Type(sem_->RawTypeNameOf(lhs_ty));
         return false;
     }
     return true;
@@ -2803,7 +2805,7 @@ bool Validator::NoDuplicateAttributes(VectorRef<const ast::Attribute*> attribute
             auto added = seen.Add(&d->TypeInfo(), d->source);
             if (!added && !d->Is<ast::InternalAttribute>()) {
                 AddError(d->source) << "duplicate " << d->Name() << " attribute";
-                AddNote(added.value) << "first attribute declared here";
+                AddNote(*added.value) << "first attribute declared here";
                 return false;
             }
         }
@@ -2902,7 +2904,7 @@ bool Validator::CheckTypeAccessAddressSpace(const core::type::Type* store_ty,
             }
             break;
         case core::AddressSpace::kPushConstant:
-            if (TINT_UNLIKELY(!enabled_extensions_.Contains(
+            if (TINT_UNLIKELY(!enabled_extensions_->Contains(
                                   wgsl::Extension::kChromiumExperimentalPushConstant) &&
                               IsValidationEnabled(attributes,
                                                   ast::DisabledValidation::kIgnoreAddressSpace))) {
@@ -2944,10 +2946,10 @@ bool Validator::CheckTypeAccessAddressSpace(const core::type::Type* store_ty,
     };
 
     auto check_sub_atomics = [&] {
-        if (auto atomic_use = atomic_composite_info_.Get(store_ty)) {
+        if (auto atomic_use = atomic_composite_info_->Get(store_ty)) {
             if (TINT_UNLIKELY(atomic_error())) {
                 AddNote(**atomic_use)
-                    << "atomic sub-type of " << style::Type(sem_.TypeNameOf(store_ty))
+                    << "atomic sub-type of " << style::Type(sem_->TypeNameOf(store_ty))
                     << " is declared here";
                 return false;
             }

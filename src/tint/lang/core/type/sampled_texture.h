@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/texture.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 
@@ -51,7 +52,7 @@ class SampledTexture final : public Castable<SampledTexture, Texture> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the subtype of the sampled texture
-    Type* type() const { return const_cast<Type*>(type_); }
+    Type* type() const { return const_cast<Type*>(type_.get()); }
 
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -62,7 +63,7 @@ class SampledTexture final : public Castable<SampledTexture, Texture> {
     SampledTexture* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const type_;
+    const raw_ptr<const Type> type_;
 };
 
 }  // namespace tint::core::type

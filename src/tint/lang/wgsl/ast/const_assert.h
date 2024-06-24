@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_CONST_ASSERT_H_
 #define SRC_TINT_LANG_WGSL_AST_CONST_ASSERT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
 #include "src/tint/lang/wgsl/ast/variable.h"
 
@@ -52,7 +53,7 @@ class ConstAssert final : public Castable<ConstAssert, Statement> {
     const ConstAssert* Clone(CloneContext& ctx) const override;
 
     /// The assertion condition
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 };
 
 }  // namespace tint::ast

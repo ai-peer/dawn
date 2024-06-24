@@ -41,7 +41,7 @@ TEST_F(SpirvWriterTest, ModuleHeader) {
 }
 
 TEST_F(SpirvWriterTest, Unreachable) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {

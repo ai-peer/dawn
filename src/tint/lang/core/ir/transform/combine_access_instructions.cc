@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,12 +44,12 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// Process the module.
     void Process() {
         // Loop over every instruction looking for access instructions.
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* access = inst->As<ir::Access>()) {
                 // Look for places where the result of this access instruction is used as a base
                 // pointer for another access instruction.
@@ -85,7 +86,7 @@ Result<SuccessType> CombineAccessInstructions(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)}.Process();
 
     return Success;
 }

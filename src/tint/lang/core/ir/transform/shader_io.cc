@@ -30,6 +30,8 @@
 #include <memory>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/type/struct.h"
@@ -48,14 +50,14 @@ struct State {
     std::function<MakeBackendStateFunc> make_backend_state;
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The entry point currently being processed.
-    Function* ep = nullptr;
+    raw_ptr<Function> ep = nullptr;
 
     /// The backend state object for the current entry point.
     std::unique_ptr<ShaderIOBackendState> backend{};
@@ -65,7 +67,7 @@ struct State {
         // Collect all structures before the transform has run, so that we can strip their shader IO
         // attributes later.
         Vector<const type::Struct*, 16> structures_to_strip;
-        for (auto* type : ir.Types()) {
+        for (auto* type : ir->Types()) {
             if (auto* str = type->As<type::Struct>()) {
                 structures_to_strip.Push(str);
             }
@@ -73,7 +75,7 @@ struct State {
 
         // Process the entry points.
         // Take a copy of the function list since the transform adds new functions to the module.
-        auto functions = ir.functions;
+        auto functions = ir->functions;
         for (auto& func : functions) {
             // Only process entry points.
             if (func->Stage() == Function::PipelineStage::kUndefined) {
@@ -85,7 +87,7 @@ struct State {
                 continue;
             }
 
-            ProcessEntryPoint(func, make_backend_state(ir, func));
+            ProcessEntryPoint(func, make_backend_state((*ir), func));
         }
 
         // Remove IO attributes from all structure members that had them prior to this transform.
@@ -113,7 +115,7 @@ struct State {
         std::optional<uint32_t> vertex_point_size_index;
         if (ep->Stage() == Function::PipelineStage::kVertex && backend->NeedsVertexPointSize()) {
             vertex_point_size_index =
-                backend->AddOutput(ir.symbols.New("vertex_point_size"), ty.f32(),
+                backend->AddOutput(ir->symbols.New("vertex_point_size"), ty->f32(),
                                    core::type::StructMemberAttributes{
                                        /* location */ std::nullopt,
                                        /* index */ std::nullopt,
@@ -129,10 +131,10 @@ struct State {
 
         // Rename the old function and remove its pipeline stage and workgroup size, as we will be
         // wrapping it with a new entry point.
-        auto name = ir.NameOf(ep).Name();
+        auto name = ir->NameOf(ep).Name();
         auto stage = ep->Stage();
         auto wgsize = ep->WorkgroupSize();
-        ir.SetName(ep, name + "_inner");
+        ir->SetName(ep, name + "_inner");
         ep->SetStage(Function::PipelineStage::kUndefined);
         ep->ClearWorkgroupSize();
 
@@ -168,7 +170,7 @@ struct State {
                         ep->Stage() != Function::PipelineStage::kFragment) {
                         attributes.interpolation = {};
                     }
-                    backend->AddInput(ir.symbols.Register(name), member->Type(), attributes);
+                    backend->AddInput(ir->symbols.Register(name), member->Type(), attributes);
                 }
             } else {
                 // Pull out the IO attributes and remove them from the parameter.
@@ -186,7 +188,7 @@ struct State {
                 attributes.invariant = param->Invariant();
                 param->SetInvariant(false);
 
-                auto name = ir.NameOf(param);
+                auto name = ir->NameOf(param);
                 backend->AddInput(name, param->Type(), std::move(attributes));
             }
         }
@@ -205,7 +207,7 @@ struct State {
                 if (attributes.interpolation && ep->Stage() != Function::PipelineStage::kVertex) {
                     attributes.interpolation = {};
                 }
-                backend->AddOutput(ir.symbols.Register(name), member->Type(), attributes);
+                backend->AddOutput(ir->symbols.Register(name), member->Type(), attributes);
             }
         } else {
             // Pull out the IO attributes and remove them from the original function.
@@ -223,7 +225,7 @@ struct State {
             attributes.invariant = ep->ReturnInvariant();
             ep->SetReturnInvariant(false);
 
-            backend->AddOutput(ir.symbols.New(), ep->ReturnType(), std::move(attributes));
+            backend->AddOutput(ir->symbols.New(), ep->ReturnType(), std::move(attributes));
         }
     }
 
@@ -267,7 +269,7 @@ struct State {
 }  // namespace
 
 void RunShaderIOBase(Module& module, std::function<MakeBackendStateFunc> make_backend_state) {
-    State{make_backend_state, module}.Process();
+    State{make_backend_state, raw_ref(module)raw_ref(}).Process();
 }
 
 ShaderIOBackendState::~ShaderIOBackendState() = default;

@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -42,27 +44,27 @@ using namespace tint::core::fluent_types;  // NOLINT
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Access is an access instruction and the type of the vector that it produces a pointer to.
     struct Access {
         /// The access instruction.
-        core::ir::Access* inst;
+        raw_ptr<core::ir::Access> inst;
         /// The vector type being accessed.
-        const core::type::Type* type;
+        raw_ptr<const core::type::Type> type;
     };
 
     /// Process the module.
     void Process() {
         // Find the access instructions that need to be replaced.
         Vector<Access, 8> worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* access = inst->As<core::ir::Access>()) {
                 auto* source_ty = access->Object()->Type();
                 if (!source_ty->Is<core::type::Pointer>()) {
@@ -105,7 +107,8 @@ struct State {
             Vector<core::ir::Value*, 8> partial_indices{access.inst->Indices()};
             partial_indices.Pop();
             auto addrspace = object->Type()->As<core::type::Pointer>()->AddressSpace();
-            auto* access_to_vec = b.Access(ty.ptr(addrspace, access.type), object, partial_indices);
+            auto* access_to_vec =
+                b.Access(ty->ptr(addrspace, access.type), object, partial_indices);
             access_to_vec->InsertBefore(access.inst);
 
             object = access_to_vec->Result(0);
@@ -129,7 +132,7 @@ struct State {
         Vector<core::ir::Instruction*, 4> to_destroy;
         access->Result(0)->ForEachUse([&](core::ir::Usage use) {
             Switch(
-                use.instruction,
+                use.instruction.get(),
                 [&](core::ir::Load* load) {
                     auto* lve = b.LoadVectorElementWithResult(load->DetachResult(), object, index);
                     lve->InsertBefore(load);
@@ -166,7 +169,7 @@ Result<SuccessType> VectorElementPointer(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

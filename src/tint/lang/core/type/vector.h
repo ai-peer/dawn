@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/type.h"
 
 namespace tint::core::type {
@@ -89,7 +90,7 @@ class Vector : public Castable<Vector, Type> {
     Vector* Clone(CloneContext& ctx) const override;
 
   private:
-    Type const* const subtype_;
+    const raw_ptr<const Type> subtype_;
     const uint32_t width_;
     const bool packed_;
 };

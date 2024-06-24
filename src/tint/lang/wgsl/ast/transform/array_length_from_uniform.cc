@@ -33,6 +33,8 @@
 #include <string_view>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/unary_op.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
@@ -102,7 +104,7 @@ struct ArrayLengthFromUniform::State {
             return resolver::Resolve(b);
         }
 
-        if (cfg->bindpoint_to_size_index.empty() || !ShouldRun(src)) {
+        if (cfg->bindpoint_to_size_index.empty() || !ShouldRun(*src)) {
             return SkipTransform;
         }
 
@@ -110,8 +112,8 @@ struct ArrayLengthFromUniform::State {
         array_lengths_var = b.Symbols().New("tint_array_lengths");
 
         // Replace all the arrayLength() calls.
-        for (auto* fn : src.AST().Functions()) {
-            if (auto* sem_fn = sem.Get(fn)) {
+        for (auto* fn : src->AST().Functions()) {
+            if (auto* sem_fn = sem->Get(fn)) {
                 for (auto* call : sem_fn->DirectCalls()) {
                     if (auto* target = call->Target()->As<sem::BuiltinFn>()) {
                         if (target->Fn() == wgsl::BuiltinFn::kArrayLength) {
@@ -131,7 +133,7 @@ struct ArrayLengthFromUniform::State {
         // Add the tint_array_lengths module-scope uniform variable.
         AddArrayLengthsUniformVar();
 
-        outputs.Add<Result>(used_size_indices);
+        outputs->Add<Result>(used_size_indices);
 
         ctx.Clone();
         return resolver::Resolve(b);
@@ -168,7 +170,7 @@ struct ArrayLengthFromUniform::State {
                             switch (unary->op) {
                                 case core::UnaryOp::kAddressOf:
                                 case core::UnaryOp::kIndirection:
-                                    return sem.Get(unary->expr);  // Follow the object
+                                    return sem->Get(unary->expr.get());  // Follow the object
                                 default:
                                     TINT_ICE() << "unexpected unary op: " << unary->op;
                             }
@@ -301,17 +303,17 @@ struct ArrayLengthFromUniform::State {
     static constexpr std::string_view kArrayLengthsMemberName = "array_lengths";
 
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The transform outputs
-    DataMap& outputs;
+    const raw_ref<DataMap> outputs;
     /// The transform config
-    const Config* const cfg;
+    const raw_ptr<const Config> cfg;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Alias to src.Sem()
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
     /// Name of the uniform buffer variable that holds the array lengths
     Symbol array_lengths_var;
     /// A map of pointer-parameter to the name of the new array-length parameter.

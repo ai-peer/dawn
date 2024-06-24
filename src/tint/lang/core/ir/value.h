@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_VALUE_H_
 #define SRC_TINT_LANG_CORE_IR_VALUE_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/containers/hashset.h"
 #include "src/tint/utils/rtti/castable.h"
@@ -43,7 +44,7 @@ namespace tint::core::ir {
 /// A specific usage of a Value in the IR.
 struct Usage {
     /// The instruction that is using the value;
-    Instruction* instruction = nullptr;
+    raw_ptr<Instruction> instruction = nullptr;
     /// The index of the operand that is the value being used.
     size_t operand_index = 0u;
 

@@ -180,7 +180,8 @@ TEST_F(ConstantTest_Scalar, Clone) {
     auto* val = constants.Get(12_i);
 
     constant::Manager mgr;
-    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}}, mgr};
+    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}},
+                               raw_ref(mgr)};
 
     auto* r = val->Clone(ctx);
     ASSERT_NE(r, nullptr);

@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -50,80 +51,80 @@ static constexpr double kRadToDeg = 57.295779513082322865;
 /// PIMPL state for the transform.
 struct State {
     /// The polyfill config.
-    const BuiltinPolyfillConfig& config;
+    const raw_ref<const BuiltinPolyfillConfig> config;
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// Process the module.
     void Process() {
         // Find the builtin call instructions that may need to be polyfilled.
         Vector<ir::CoreBuiltinCall*, 4> worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* builtin = inst->As<ir::CoreBuiltinCall>()) {
                 switch (builtin->Func()) {
                     case core::BuiltinFn::kClamp:
-                        if (config.clamp_int &&
+                        if (config->clamp_int &&
                             builtin->Result(0)->Type()->is_integer_scalar_or_vector()) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kCountLeadingZeros:
-                        if (config.count_leading_zeros) {
+                        if (config->count_leading_zeros) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kCountTrailingZeros:
-                        if (config.count_trailing_zeros) {
+                        if (config->count_trailing_zeros) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kDegrees:
-                        if (config.degrees) {
+                        if (config->degrees) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kExtractBits:
-                        if (config.extract_bits != BuiltinPolyfillLevel::kNone) {
+                        if (config->extract_bits != BuiltinPolyfillLevel::kNone) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kFirstLeadingBit:
-                        if (config.first_leading_bit) {
+                        if (config->first_leading_bit) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kFirstTrailingBit:
-                        if (config.first_trailing_bit) {
+                        if (config->first_trailing_bit) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kInsertBits:
-                        if (config.insert_bits != BuiltinPolyfillLevel::kNone) {
+                        if (config->insert_bits != BuiltinPolyfillLevel::kNone) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kRadians:
-                        if (config.radians) {
+                        if (config->radians) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kSaturate:
-                        if (config.saturate) {
+                        if (config->saturate) {
                             worklist.Push(builtin);
                         }
                         break;
                     case core::BuiltinFn::kTextureSampleBaseClampToEdge:
-                        if (config.texture_sample_base_clamp_to_edge_2d_f32) {
+                        if (config->texture_sample_base_clamp_to_edge_2d_f32) {
                             auto* tex =
                                 builtin->Args()[0]->Type()->As<core::type::SampledTexture>();
                             if (tex && tex->dim() == core::type::TextureDimension::k2d &&
@@ -134,7 +135,7 @@ struct State {
                         break;
                     case core::BuiltinFn::kDot4U8Packed:
                     case core::BuiltinFn::kDot4I8Packed: {
-                        if (config.dot_4x8_packed) {
+                        if (config->dot_4x8_packed) {
                             worklist.Push(builtin);
                         }
                         break;
@@ -144,13 +145,13 @@ struct State {
                     case core::BuiltinFn::kPack4XI8Clamp:
                     case core::BuiltinFn::kUnpack4XI8:
                     case core::BuiltinFn::kUnpack4XU8: {
-                        if (config.pack_unpack_4x8) {
+                        if (config->pack_unpack_4x8) {
                             worklist.Push(builtin);
                         }
                         break;
                     }
                     case core::BuiltinFn::kPack4XU8Clamp: {
-                        if (config.pack_4xu8_clamp) {
+                        if (config->pack_4xu8_clamp) {
                             worklist.Push(builtin);
                         }
                         break;
@@ -235,7 +236,7 @@ struct State {
     const core::type::Type* MatchWidth(const core::type::Type* el_ty,
                                        const core::type::Type* match) {
         if (auto* vec = match->As<core::type::Vector>()) {
-            return ty.vec(el_ty, vec->Width());
+            return ty->vec(el_ty, vec->Width());
         }
         return el_ty;
     }
@@ -272,8 +273,8 @@ struct State {
     void CountLeadingZeros(ir::CoreBuiltinCall* call) {
         auto* input = call->Args()[0];
         auto* result_ty = input->Type();
-        auto* uint_ty = MatchWidth(ty.u32(), result_ty);
-        auto* bool_ty = MatchWidth(ty.bool_(), result_ty);
+        auto* uint_ty = MatchWidth(ty->u32(), result_ty);
+        auto* bool_ty = MatchWidth(ty->bool_(), result_ty);
 
         // Make an u32 constant with the same component count as result_ty.
         auto V = [&](uint32_t u) { return MatchWidth(b.Constant(u32(u)), result_ty); };
@@ -334,8 +335,8 @@ struct State {
     void CountTrailingZeros(ir::CoreBuiltinCall* call) {
         auto* input = call->Args()[0];
         auto* result_ty = input->Type();
-        auto* uint_ty = MatchWidth(ty.u32(), result_ty);
-        auto* bool_ty = MatchWidth(ty.bool_(), result_ty);
+        auto* uint_ty = MatchWidth(ty->u32(), result_ty);
+        auto* bool_ty = MatchWidth(ty->bool_(), result_ty);
 
         // Make an u32 constant with the same component count as result_ty.
         auto V = [&](uint32_t u) { return MatchWidth(b.Constant(u32(u)), result_ty); };
@@ -413,7 +414,7 @@ struct State {
         auto* offset = call->Args()[1];
         auto* count = call->Args()[2];
 
-        switch (config.extract_bits) {
+        switch (config->extract_bits) {
             case BuiltinPolyfillLevel::kClampOrRangeCheck: {
                 b.InsertBefore(call, [&] {
                     // Replace:
@@ -422,9 +423,9 @@ struct State {
                     //    let o = min(offset, 32);
                     //    let c = min(count, w - o);
                     //    extractBits(e, o, c);
-                    auto* o = b.Call(ty.u32(), core::BuiltinFn::kMin, offset, 32_u);
-                    auto* c = b.Call(ty.u32(), core::BuiltinFn::kMin, count,
-                                     b.Subtract(ty.u32(), 32_u, o));
+                    auto* o = b.Call(ty->u32(), core::BuiltinFn::kMin, offset, 32_u);
+                    auto* c = b.Call(ty->u32(), core::BuiltinFn::kMin, count,
+                                     b.Subtract(ty->u32(), 32_u, o));
                     call->SetOperand(ir::CoreBuiltinCall::kArgsOperandOffset + 1, o->Result(0));
                     call->SetOperand(ir::CoreBuiltinCall::kArgsOperandOffset + 2, c->Result(0));
                 });
@@ -440,8 +441,8 @@ struct State {
     void FirstLeadingBit(ir::CoreBuiltinCall* call) {
         auto* input = call->Args()[0];
         auto* result_ty = input->Type();
-        auto* uint_ty = MatchWidth(ty.u32(), result_ty);
-        auto* bool_ty = MatchWidth(ty.bool_(), result_ty);
+        auto* uint_ty = MatchWidth(ty->u32(), result_ty);
+        auto* bool_ty = MatchWidth(ty->bool_(), result_ty);
 
         // Make an u32 constant with the same component count as result_ty.
         auto V = [&](uint32_t u) { return MatchWidth(b.Constant(u32(u)), result_ty); };
@@ -502,8 +503,8 @@ struct State {
     void FirstTrailingBit(ir::CoreBuiltinCall* call) {
         auto* input = call->Args()[0];
         auto* result_ty = input->Type();
-        auto* uint_ty = MatchWidth(ty.u32(), result_ty);
-        auto* bool_ty = MatchWidth(ty.bool_(), result_ty);
+        auto* uint_ty = MatchWidth(ty->u32(), result_ty);
+        auto* bool_ty = MatchWidth(ty->bool_(), result_ty);
 
         // Make an u32 constant with the same component count as result_ty.
         auto V = [&](uint32_t u) { return MatchWidth(b.Constant(u32(u)), result_ty); };
@@ -561,7 +562,7 @@ struct State {
         auto* offset = call->Args()[2];
         auto* count = call->Args()[3];
 
-        switch (config.insert_bits) {
+        switch (config->insert_bits) {
             case BuiltinPolyfillLevel::kClampOrRangeCheck: {
                 b.InsertBefore(call, [&] {
                     // Replace:
@@ -570,9 +571,9 @@ struct State {
                     //    let o = min(offset, 32);
                     //    let c = min(count, w - o);
                     //    insertBits(e, o, c);
-                    auto* o = b.Call(ty.u32(), core::BuiltinFn::kMin, offset, 32_u);
-                    auto* c = b.Call(ty.u32(), core::BuiltinFn::kMin, count,
-                                     b.Subtract(ty.u32(), 32_u, o));
+                    auto* o = b.Call(ty->u32(), core::BuiltinFn::kMin, offset, 32_u);
+                    auto* c = b.Call(ty->u32(), core::BuiltinFn::kMin, count,
+                                     b.Subtract(ty->u32(), 32_u, o));
                     call->SetOperand(ir::CoreBuiltinCall::kArgsOperandOffset + 2, o->Result(0));
                     call->SetOperand(ir::CoreBuiltinCall::kArgsOperandOffset + 3, c->Result(0));
                 });
@@ -689,7 +690,7 @@ struct State {
         //   %result = dot(%x_u8, vec4u(1));
         auto* x = call->Args()[0];
         b.InsertBefore(call, [&] {
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(0)), b.Constant(u32(8)),
                                   b.Constant(u32(16)), b.Constant(u32(24)));
@@ -711,7 +712,7 @@ struct State {
         //   %result = dot(%x_i8, vec4u(1));
         auto* x = call->Args()[0];
         b.InsertBefore(call, [&] {
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(0)), b.Constant(u32(8)),
                                   b.Constant(u32(16)), b.Constant(u32(24)));
@@ -736,8 +737,8 @@ struct State {
         //   %result      = dot(%x_u8, vec4u(1));
         auto* x = call->Args()[0];
         b.InsertBefore(call, [&] {
-            auto* vec4i = ty.vec4<i32>();
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4i = ty->vec4<i32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(0)), b.Constant(u32(8)),
                                   b.Constant(u32(16)), b.Constant(u32(24)));
@@ -765,7 +766,7 @@ struct State {
         //   %result  = dot(%x_u8, vec4u(1));
         auto* x = call->Args()[0];
         b.InsertBefore(call, [&] {
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(0)), b.Constant(u32(8)),
                                   b.Constant(u32(16)), b.Constant(u32(24)));
@@ -790,8 +791,8 @@ struct State {
         //   %result  = %x_vec4i >> vec4u(24);
         ir::Instruction* result = nullptr;
         b.InsertBefore(call, [&] {
-            auto* vec4i = ty.vec4<i32>();
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4i = ty->vec4<i32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(24)), b.Constant(u32(16)),
                                   b.Constant(u32(8)), b.Constant(u32(0)));
@@ -821,7 +822,7 @@ struct State {
         //   %result  = %x_vec4u & vec4u(0xff);
         ir::Instruction* result = nullptr;
         b.InsertBefore(call, [&] {
-            auto* vec4u = ty.vec4<u32>();
+            auto* vec4u = ty->vec4<u32>();
 
             auto* n = b.Construct(vec4u, b.Constant(u32(0)), b.Constant(u32(8)),
                                   b.Constant(u32(16)), b.Constant(u32(24)));
@@ -849,7 +850,7 @@ Result<SuccessType> BuiltinPolyfill(Module& ir, const BuiltinPolyfillConfig& con
         return result;
     }
 
-    State{config, ir}.Process();
+    State{raw_ref(config), raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/variable.h"
 
 namespace tint::ast {
@@ -87,10 +88,10 @@ class Var final : public Castable<Var, Variable> {
     const Var* Clone(CloneContext& ctx) const override;
 
     /// The declared address space
-    const Expression* const declared_address_space = nullptr;
+    const raw_ptr<const Expression> declared_address_space = nullptr;
 
     /// The declared access control
-    const Expression* const declared_access = nullptr;
+    const raw_ptr<const Expression> declared_access = nullptr;
 };
 
 /// A list of `var` declarations

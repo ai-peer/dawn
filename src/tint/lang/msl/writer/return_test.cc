@@ -33,7 +33,7 @@ namespace tint::msl::writer {
 namespace {
 
 TEST_F(MslWriterTest, Return) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] { b.Return(func); });
@@ -51,7 +51,7 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, ReturnAtEndOfVoidDropped) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->Block()->Append(b.Return(func));
 
     ASSERT_TRUE(Generate()) << err_ << output_.msl;
@@ -62,7 +62,7 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, ReturnWithValue) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     func->Block()->Append(b.Return(func, 123_i));
 
     ASSERT_TRUE(Generate()) << err_ << output_.msl;

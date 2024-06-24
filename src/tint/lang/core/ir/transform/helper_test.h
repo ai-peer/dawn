@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "gtest/gtest.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/disassembler.h"
@@ -70,7 +71,7 @@ class TransformTestBase : public BASE {
     /// The test IR builder.
     ir::Builder b{mod};
     /// The type manager.
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
     /// IR validation capabilities
     Capabilities capabilities;
 };

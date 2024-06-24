@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/constant/splat.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/abstract_float.h"
@@ -115,9 +116,9 @@ struct State {
         return resolver::Resolve(b);
     }
 
-    const Program& src;
+    const raw_ref<const Program> src;
     ProgramBuilder b;
-    program::CloneContext ctx{&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx{&b, &*src, /* auto_clone_symbols */ true};
 };
 
 }  // namespace
@@ -127,7 +128,7 @@ FoldConstants::FoldConstants() = default;
 FoldConstants::~FoldConstants() = default;
 
 Transform::ApplyResult FoldConstants::Apply(const Program& src, const DataMap&, DataMap&) const {
-    State s{src, {}};
+    State s{raw_ref(src), {}};
     return s.Run();
 }
 

@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <limits>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/utils/containers/reverse.h"
@@ -41,19 +42,19 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
         // Process each block.
-        for (auto* block : ir.blocks.Objects()) {
-            if (block != ir.root_block) {
+        for (auto* block : ir->blocks.Objects()) {
+            if (block != ir->root_block) {
                 Process(block);
             }
         }
@@ -146,7 +147,7 @@ struct State {
     }
 
     bool CanInline(core::ir::InstructionResult* value) {
-        if (ir.NameOf(value).IsValid()) {
+        if (ir->NameOf(value).IsValid()) {
             // Named values should become lets
             return false;
         }
@@ -176,9 +177,9 @@ struct State {
         value->ReplaceAllUsesWith(let->Result(0));
         let->SetValue(value);
         let->InsertAfter(inst);
-        if (auto name = ir.NameOf(value); name.IsValid()) {
-            ir.SetName(let, name.Name());
-            ir.ClearName(value);
+        if (auto name = ir->NameOf(value); name.IsValid()) {
+            ir->SetName(let, name.Name());
+            ir->ClearName(value);
         }
     }
 };
@@ -191,7 +192,7 @@ Result<SuccessType> ValueToLet(core::ir::Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

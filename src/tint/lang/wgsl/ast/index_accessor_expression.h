@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_INDEX_ACCESSOR_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_INDEX_ACCESSOR_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/accessor_expression.h"
 
 namespace tint::ast {
@@ -57,7 +58,7 @@ class IndexAccessorExpression final : public Castable<IndexAccessorExpression, A
     const IndexAccessorExpression* Clone(CloneContext& ctx) const override;
 
     /// the index expression
-    const Expression* const index;
+    const raw_ptr<const Expression> index;
 };
 
 }  // namespace tint::ast

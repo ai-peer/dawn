@@ -30,6 +30,8 @@
 
 #include <iterator>
 
+#include "base/memory/raw_ref.h"
+
 namespace tint {
 
 namespace detail {
@@ -40,17 +42,17 @@ namespace detail {
 template <typename T>
 struct ReverseIterable {
     /// The wrapped iterable object.
-    T& iterable;
+    const raw_ref<T> iterable;
 };
 
 template <typename T>
 auto begin(ReverseIterable<T> r_it) {
-    return std::rbegin(r_it.iterable);
+    return std::rbegin(*r_it.iterable);
 }
 
 template <typename T>
 auto end(ReverseIterable<T> r_it) {
-    return std::rend(r_it.iterable);
+    return std::rend(*r_it.iterable);
 }
 }  // namespace detail
 
@@ -69,7 +71,7 @@ auto end(ReverseIterable<T> r_it) {
 /// @returns the reverse iterable object
 template <typename T>
 detail::ReverseIterable<T> Reverse(T&& iterable) {
-    return {iterable};
+    return {raw_ref(iterable)};
 }
 
 }  // namespace tint

@@ -31,6 +31,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_type.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/array.h"
@@ -371,8 +372,8 @@ struct PackedVec3::State {
     bool ShouldRun() {
         // Check for vec3s in the types of all uniform and storage buffer variables to determine
         // if the transform is necessary.
-        for (auto* decl : src.AST().GlobalVariables()) {
-            auto* var = sem.Get<sem::GlobalVariable>(decl);
+        for (auto* decl : src->AST().GlobalVariables()) {
+            auto* var = sem->Get<sem::GlobalVariable>(decl);
             if (var && core::IsHostShareable(var->AddressSpace()) &&
                 ContainsVec3(var->Type()->UnwrapRef())) {
                 return true;
@@ -404,9 +405,9 @@ struct PackedVec3::State {
         // Replace vec3 types in host-shareable address spaces with `__packed_vec3` types, and
         // collect expressions that need to be converted to or from values that use the
         // `__packed_vec3` type.
-        for (auto* node : src.ASTNodes().Objects()) {
+        for (auto* node : src->ASTNodes().Objects()) {
             Switch(
-                sem.Get(node),
+                sem->Get(node),
                 [&](const sem::TypeExpression* type) {
                     // Rewrite pointers to types that contain vec3s.
                     auto* ptr = type->Type()->As<core::type::Pointer>();
@@ -418,7 +419,7 @@ struct PackedVec3::State {
                                               : core::Access::kUndefined;
                             auto new_ptr_type =
                                 b.ty.ptr(ptr->AddressSpace(), new_store_type, access);
-                            ctx.Replace(node, new_ptr_type.expr);
+                            ctx.Replace(node, new_ptr_type.expr.get());
                         }
                     }
                 },
@@ -430,14 +431,14 @@ struct PackedVec3::State {
                     // Rewrite the var type, if it contains vec3s.
                     auto new_store_type = RewriteType(var->Type()->UnwrapRef());
                     if (new_store_type) {
-                        ctx.Replace(var->Declaration()->type.expr, new_store_type.expr);
+                        ctx.Replace(var->Declaration()->type.expr.get(), new_store_type.expr.get());
                     }
                 },
                 [&](const sem::Statement* stmt) {
                     // Pack the RHS of assignment statements that are writing to packed types.
                     if (auto* assign = stmt->Declaration()->As<ast::AssignmentStatement>()) {
-                        auto* lhs = sem.GetVal(assign->lhs);
-                        auto* rhs = sem.GetVal(assign->rhs);
+                        auto* lhs = sem->GetVal(assign->lhs.get());
+                        auto* rhs = sem->GetVal(assign->rhs.get());
                         if (!ContainsVec3(rhs->Type()) ||
                             !core::IsHostShareable(
                                 lhs->Type()->As<core::type::Reference>()->AddressSpace())) {
@@ -537,13 +538,13 @@ struct PackedVec3::State {
 
   private:
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Alias to the semantic info in ctx.src
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
 };
 
 PackedVec3::PackedVec3() = default;

@@ -34,10 +34,10 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, ConstructF32Var) {
-    auto* f = b.Function("a", ty.f32());
+    auto* f = b.Function("a", ty->f32());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_f);
-        b.Return(f, b.Construct(ty.f32(), v));
+        b.Return(f, b.Construct(ty->f32(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -55,10 +55,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructF16Var) {
-    auto* f = b.Function("a", ty.f16());
+    auto* f = b.Function("a", ty->f16());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_h);
-        b.Return(f, b.Construct(ty.f16(), v));
+        b.Return(f, b.Construct(ty->f16(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -76,10 +76,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructBoolVar) {
-    auto* f = b.Function("a", ty.bool_());
+    auto* f = b.Function("a", ty->bool_());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", false);
-        b.Return(f, b.Construct(ty.bool_(), v));
+        b.Return(f, b.Construct(ty->bool_(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -97,10 +97,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructI32Var) {
-    auto* f = b.Function("a", ty.i32());
+    auto* f = b.Function("a", ty->i32());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_i);
-        b.Return(f, b.Construct(ty.i32(), v));
+        b.Return(f, b.Construct(ty->i32(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -118,10 +118,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructU32) {
-    auto* f = b.Function("a", ty.u32());
+    auto* f = b.Function("a", ty->u32());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_u);
-        b.Return(f, b.Construct(ty.u32(), v));
+        b.Return(f, b.Construct(ty->u32(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -139,10 +139,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructMatrix) {
-    auto* f = b.Function("a", ty.mat2x2<f32>());
+    auto* f = b.Function("a", ty->mat2x2<f32>());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_f);
-        b.Return(f, b.Construct(ty.mat2x2<f32>(), v, v, v, v));
+        b.Return(f, b.Construct(ty->mat2x2<f32>(), v, v, v, v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -160,10 +160,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructVecSingleScalarF32Var) {
-    auto* f = b.Function("a", ty.vec3<f32>());
+    auto* f = b.Function("a", ty->vec3<f32>());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_f);
-        b.Return(f, b.Construct(ty.vec3<f32>(), v));
+        b.Return(f, b.Construct(ty->vec3<f32>(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -181,10 +181,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructVecSingleScalarF16Var) {
-    auto* f = b.Function("a", ty.vec3<f16>());
+    auto* f = b.Function("a", ty->vec3<f16>());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", 2_h);
-        b.Return(f, b.Construct(ty.vec3<f16>(), v));
+        b.Return(f, b.Construct(ty->vec3<f16>(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -202,10 +202,10 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructVecSingleScalarBoolVar) {
-    auto* f = b.Function("a", ty.vec3<bool>());
+    auto* f = b.Function("a", ty->vec3<bool>());
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", true);
-        b.Return(f, b.Construct(ty.vec3<bool>(), v));
+        b.Return(f, b.Construct(ty->vec3<bool>(), v));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
@@ -223,13 +223,14 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, ConstructArray) {
-    auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
-        b.Var("v", b.Construct(ty.array<vec3<f32>, 3>(), b.Composite(ty.vec3<f32>(), 1_f, 2_f, 3_f),
-                               b.Composite(ty.vec3<f32>(), 4_f, 5_f, 6_f),
-                               b.Composite(ty.vec3<f32>(), 7_f, 8_f, 9_f)));
+        b.Var("v",
+              b.Construct(ty->array<vec3<f32>, 3>(), b.Composite(ty->vec3<f32>(), 1_f, 2_f, 3_f),
+                          b.Composite(ty->vec3<f32>(), 4_f, 5_f, 6_f),
+                          b.Composite(ty->vec3<f32>(), 7_f, 8_f, 9_f)));
         b.Return(f);
     });
 
@@ -245,18 +246,18 @@ void a() {
 
 TEST_F(HlslWriterTest, ConstructStruct) {
     Vector members{
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("b"), ty.f32(), 1u, 4u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("c"), ty.vec3<i32>(), 2u, 8u, 16u, 16u,
-                                         core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("a"), ty->i32(), 0u, 0u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("b"), ty->f32(), 1u, 4u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("c"), ty->vec3<i32>(), 2u, 8u, 16u, 16u,
+                                          core::type::StructMemberAttributes{}),
     };
-    auto* strct = ty.Struct(b.ir.symbols.New("S"), std::move(members));
+    auto* strct = ty->Struct(b.ir->symbols.New("S"), std::move(members));
 
     auto* f = b.Function("a", strct);
     b.Append(f->Block(), [&] {
-        b.Return(f, b.Construct(strct, 1_i, 2_f, b.Composite(ty.vec3<i32>(), 3_i, 4_i, 5_i)));
+        b.Return(f, b.Construct(strct, 1_i, 2_f, b.Composite(ty->vec3<i32>(), 3_i, 4_i, 5_i)));
     });
 
     ASSERT_TRUE(Generate()) << err_ << output_.hlsl;

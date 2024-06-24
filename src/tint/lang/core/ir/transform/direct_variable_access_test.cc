@@ -63,14 +63,14 @@ namespace remove_uncalled {
 using IR_DirectVariableAccessTest_RemoveUncalled = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrUniform) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* u = b.Function("u", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<uniform, i32>());
+    auto* u = b.Function("u", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<uniform, i32>());
     u->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(u->Block(), [&] { b.Return(u, b.Load(p)); });
 
@@ -102,14 +102,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrStorage) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* s = b.Function("s", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<storage, i32, read>());
+    auto* s = b.Function("s", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<storage, i32, read>());
     s->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(s->Block(), [&] { b.Return(s, b.Load(p)); });
 
@@ -141,14 +141,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrWorkgroup) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* w = b.Function("w", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<workgroup, i32>());
+    auto* w = b.Function("w", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<workgroup, i32>());
     w->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(w->Block(), [&] { b.Return(w, b.Load(p)); });
 
@@ -180,14 +180,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrPrivate_Disabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* f = b.Function("f", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* f = b.Function("f", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<private_, i32>());
     f->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(f->Block(), [&] { b.Return(f, b.Load(p)); });
 
@@ -214,14 +214,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrPrivate_Enabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* f = b.Function("f", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* f = b.Function("f", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<private_, i32>());
     f->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(f->Block(), [&] { b.Return(f, b.Load(p)); });
 
@@ -252,14 +252,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrFunction_Disabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* f = b.Function("f", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* f = b.Function("f", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<function, i32>());
     f->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(f->Block(), [&] { b.Return(f, b.Load(p)); });
 
@@ -286,14 +286,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_RemoveUncalled, PtrFunction_Enabled) {
-    b.Append(b.ir.root_block, [&] { b.Var<private_>("keep_me", 42_i); });
+    b.Append(b.ir->root_block, [&] { b.Var<private_>("keep_me", 42_i); });
 
-    auto* f = b.Function("f", ty.i32());
-    auto* p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* f = b.Function("f", ty->i32());
+    auto* p = b.FunctionParam("p", ty->ptr<function, i32>());
     f->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(f->Block(), [&] { b.Return(f, b.Load(p)); });
 
@@ -334,52 +334,53 @@ using IR_DirectVariableAccessTest_PtrChains = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_PtrChains, ConstantIndices) {
     Var* U = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  U = b.Var<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>("U");
                  U->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.vec4<i32>());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<uniform, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->vec4<i32>());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<uniform, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* p0 = b.Let("p0", U);
-        auto* p1 = b.Access(ty.ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, 1_i);
-        b.ir.SetName(p1, "p1");
-        auto* p2 = b.Access(ty.ptr<uniform, array<vec4<i32>, 8>>(), p1, 2_i);
-        b.ir.SetName(p2, "p2");
-        auto* p3 = b.Access(ty.ptr<uniform, vec4<i32>>(), p2, 3_i);
-        b.ir.SetName(p3, "p3");
-        b.Call(ty.vec4<i32>(), fn_a, 10_i, p3, 20_i);
+        auto* p1 = b.Access(ty->ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, 1_i);
+        b.ir->SetName(p1, "p1");
+        auto* p2 = b.Access(ty->ptr<uniform, array<vec4<i32>, 8>>(), p1, 2_i);
+        b.ir->SetName(p2, "p2");
+        auto* p3 = b.Access(ty->ptr<uniform, vec4<i32>>(), p2, 3_i);
+        b.ir->SetName(p3, "p3");
+        b.Call(ty->vec4<i32>(), fn_a, 10_i, p3, 20_i);
         b.Return(fn_b);
     });
 
-    auto* fn_c = b.Function("c", ty.void_());
-    auto* fn_c_p = b.FunctionParam("p", ty.ptr<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>());
+    auto* fn_c = b.Function("c", ty->void_());
+    auto* fn_c_p =
+        b.FunctionParam("p", ty->ptr<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>());
     fn_c->SetParams({fn_c_p});
     b.Append(fn_c->Block(), [&] {
         auto* p0 = b.Let("p0", fn_c_p);
-        auto* p1 = b.Access(ty.ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, 1_i);
-        b.ir.SetName(p1, "p1");
-        auto* p2 = b.Access(ty.ptr<uniform, array<vec4<i32>, 8>>(), p1, 2_i);
-        b.ir.SetName(p2, "p2");
-        auto* p3 = b.Access(ty.ptr<uniform, vec4<i32>>(), p2, 3_i);
-        b.ir.SetName(p3, "p3");
-        b.Call(ty.vec4<i32>(), fn_a, 10_i, p3, 20_i);
+        auto* p1 = b.Access(ty->ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, 1_i);
+        b.ir->SetName(p1, "p1");
+        auto* p2 = b.Access(ty->ptr<uniform, array<vec4<i32>, 8>>(), p1, 2_i);
+        b.ir->SetName(p2, "p2");
+        auto* p3 = b.Access(ty->ptr<uniform, vec4<i32>>(), p2, 3_i);
+        b.ir->SetName(p3, "p3");
+        b.Call(ty->vec4<i32>(), fn_a, 10_i, p3, 20_i);
         b.Return(fn_c);
     });
 
-    auto* fn_d = b.Function("d", ty.void_());
+    auto* fn_d = b.Function("d", ty->void_());
     b.Append(fn_d->Block(), [&] {
-        b.Call(ty.void_(), fn_c, U);
+        b.Call(ty->void_(), fn_c, U);
         b.Return(fn_d);
     });
 
@@ -476,65 +477,66 @@ $B1: {  # root
 TEST_F(IR_DirectVariableAccessTest_PtrChains, DynamicIndices) {
     Var* U = nullptr;
     Var* i = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  U = b.Var<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>("U");
                  U->SetBindingPoint(0, 0);
                  i = b.Var<private_, i32>("i");
              });
 
-    auto* fn_first = b.Function("first", ty.i32());
-    auto* fn_second = b.Function("second", ty.i32());
-    auto* fn_third = b.Function("third", ty.i32());
+    auto* fn_first = b.Function("first", ty->i32());
+    auto* fn_second = b.Function("second", ty->i32());
+    auto* fn_third = b.Function("third", ty->i32());
     for (auto fn : {fn_first, fn_second, fn_third}) {
         b.Append(fn->Block(), [&] {
-            b.Store(i, b.Add(ty.i32(), b.Load(i), 1_i));
+            b.Store(i, b.Add(ty->i32(), b.Load(i), 1_i));
             b.Return(fn, b.Load(i));
         });
     }
 
-    auto* fn_a = b.Function("a", ty.vec4<i32>());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<uniform, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->vec4<i32>());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<uniform, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* p0 = b.Let("p0", U);
         auto* first = b.Call(fn_first);
-        auto* p1 = b.Access(ty.ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, first);
-        b.ir.SetName(p1, "p1");
+        auto* p1 = b.Access(ty->ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, first);
+        b.ir->SetName(p1, "p1");
         auto* second = b.Call(fn_second);
         auto* third = b.Call(fn_third);
-        auto* p2 = b.Access(ty.ptr<uniform, vec4<i32>>(), p1, second, third);
-        b.ir.SetName(p2, "p2");
-        b.Call(ty.vec4<i32>(), fn_a, 10_i, p2, 20_i);
+        auto* p2 = b.Access(ty->ptr<uniform, vec4<i32>>(), p1, second, third);
+        b.ir->SetName(p2, "p2");
+        b.Call(ty->vec4<i32>(), fn_a, 10_i, p2, 20_i);
         b.Return(fn_b);
     });
 
-    auto* fn_c = b.Function("c", ty.void_());
-    auto* fn_c_p = b.FunctionParam("p", ty.ptr<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>());
+    auto* fn_c = b.Function("c", ty->void_());
+    auto* fn_c_p =
+        b.FunctionParam("p", ty->ptr<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>>());
     fn_c->SetParams({fn_c_p});
     b.Append(fn_c->Block(), [&] {
         auto* p0 = b.Let("p0", fn_c_p);
         auto* first = b.Call(fn_first);
-        auto* p1 = b.Access(ty.ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, first);
-        b.ir.SetName(p1, "p1");
+        auto* p1 = b.Access(ty->ptr<uniform, array<array<vec4<i32>, 8>, 8>>(), p0, first);
+        b.ir->SetName(p1, "p1");
         auto* second = b.Call(fn_second);
         auto* third = b.Call(fn_third);
-        auto* p2 = b.Access(ty.ptr<uniform, vec4<i32>>(), p1, second, third);
-        b.ir.SetName(p2, "p2");
-        b.Call(ty.vec4<i32>(), fn_a, 10_i, p2, 20_i);
+        auto* p2 = b.Access(ty->ptr<uniform, vec4<i32>>(), p1, second, third);
+        b.ir->SetName(p2, "p2");
+        b.Call(ty->vec4<i32>(), fn_a, 10_i, p2, 20_i);
         b.Return(fn_c);
     });
 
-    auto* fn_d = b.Function("d", ty.void_());
+    auto* fn_d = b.Function("d", ty->void_());
     b.Append(fn_d->Block(), [&] {
-        b.Call(ty.void_(), fn_c, U);
+        b.Call(ty->void_(), fn_c, U);
         b.Return(fn_d);
     });
 
@@ -704,22 +706,22 @@ using IR_DirectVariableAccessTest_UniformAS = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_i32_read) {
     Var* U = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  U = b.Var<uniform, i32>("U");
                  U->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<uniform, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<uniform, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         b.Call(fn_a, 10_i, U, 20_i);
         b.Return(fn_b);
@@ -773,25 +775,25 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_vec4i32_Via_array_DynamicRead) {
     Var* U = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  U = b.Var<uniform, array<vec4<i32>, 8>>("U");
                  U->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.vec4<i32>());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<uniform, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->vec4<i32>());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<uniform, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* I = b.Let("I", 3_i);
-        auto* access = b.Access(ty.ptr<uniform, vec4<i32>>(), U, I);
+        auto* access = b.Access(ty->ptr<uniform, vec4<i32>>(), U, I);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -850,95 +852,95 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_UniformAS, CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     Var* U = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 U = b.Var("U", ty.ptr<uniform>(Outer));
+                 U = b.Var("U", ty->ptr<uniform>(Outer));
                  U->SetBindingPoint(0, 0);
              });
 
-    auto* fn_0 = b.Function("f0", ty.f32());
-    auto* fn_0_p = b.FunctionParam("p", ty.ptr<uniform, vec4<f32>>());
+    auto* fn_0 = b.Function("f0", ty->f32());
+    auto* fn_0_p = b.FunctionParam("p", ty->ptr<uniform, vec4<f32>>());
     fn_0->SetParams({fn_0_p});
     b.Append(fn_0->Block(), [&] { b.Return(fn_0, b.LoadVectorElement(fn_0_p, 0_u)); });
 
-    auto* fn_1 = b.Function("f1", ty.f32());
-    auto* fn_1_p = b.FunctionParam("p", ty.ptr<uniform, mat3x4<f32>>());
+    auto* fn_1 = b.Function("f1", ty->f32());
+    auto* fn_1_p = b.FunctionParam("p", ty->ptr<uniform, mat3x4<f32>>());
     fn_1->SetParams({fn_1_p});
     b.Append(fn_1->Block(), [&] {
         auto* res = b.Var<function, f32>("res");
         {
             // res += f0(&(*p)[1]);
-            auto* call_0 = b.Call(fn_0, b.Access(ty.ptr<uniform, vec4<f32>>(), fn_1_p, 1_i));
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            auto* call_0 = b.Call(fn_0, b.Access(ty->ptr<uniform, vec4<f32>>(), fn_1_p, 1_i));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &(*p)[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<uniform, vec4<f32>>(), fn_1_p, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<uniform, vec4<f32>>(), fn_1_p, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // res += f0(&U.arr[2].mat[1]);
-            auto* access = b.Access(ty.ptr<uniform, vec4<f32>>(), U, 0_u, 2_i, 0_u, 1_i);
+            auto* access = b.Access(ty->ptr<uniform, vec4<f32>>(), U, 0_u, 2_i, 0_u, 1_i);
             auto* call_0 = b.Call(fn_0, access);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &U.arr[2].mat[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<uniform, vec4<f32>>(), U, 0_u, 2_i, 0_u, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<uniform, vec4<f32>>(), U, 0_u, 2_i, 0_u, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
 
         b.Return(fn_1, b.Load(res));
     });
 
-    auto* fn_2 = b.Function("f2", ty.f32());
-    auto* fn_2_p = b.FunctionParam("p", ty.ptr<uniform>(Inner));
+    auto* fn_2 = b.Function("f2", ty->f32());
+    auto* fn_2_p = b.FunctionParam("p", ty->ptr<uniform>(Inner));
     fn_2->SetParams({fn_2_p});
     b.Append(fn_2->Block(), [&] {
-        auto* p_mat = b.Access(ty.ptr<uniform, mat3x4<f32>>(), fn_2_p, 0_u);
-        b.ir.SetName(p_mat, "p_mat");
+        auto* p_mat = b.Access(ty->ptr<uniform, mat3x4<f32>>(), fn_2_p, 0_u);
+        b.ir->SetName(p_mat, "p_mat");
         b.Return(fn_2, b.Call(fn_1, p_mat));
     });
 
-    auto* fn_3 = b.Function("f3", ty.f32());
-    auto* fn_3_p0 = b.FunctionParam("p0", ty.ptr<uniform>(ty.array(Inner, 4)));
-    auto* fn_3_p1 = b.FunctionParam("p1", ty.ptr<uniform, mat3x4<f32>>());
+    auto* fn_3 = b.Function("f3", ty->f32());
+    auto* fn_3_p0 = b.FunctionParam("p0", ty->ptr<uniform>(ty->array(Inner, 4)));
+    auto* fn_3_p1 = b.FunctionParam("p1", ty->ptr<uniform, mat3x4<f32>>());
     fn_3->SetParams({fn_3_p0, fn_3_p1});
     b.Append(fn_3->Block(), [&] {
-        auto* p0_inner = b.Access(ty.ptr<uniform>(Inner), fn_3_p0, 3_i);
-        b.ir.SetName(p0_inner, "p0_inner");
-        auto* call_0 = b.Call(ty.f32(), fn_2, p0_inner);
-        auto* call_1 = b.Call(ty.f32(), fn_1, fn_3_p1);
-        b.Return(fn_3, b.Add(ty.f32(), call_0, call_1));
+        auto* p0_inner = b.Access(ty->ptr<uniform>(Inner), fn_3_p0, 3_i);
+        b.ir->SetName(p0_inner, "p0_inner");
+        auto* call_0 = b.Call(ty->f32(), fn_2, p0_inner);
+        auto* call_1 = b.Call(ty->f32(), fn_1, fn_3_p1);
+        b.Return(fn_3, b.Add(ty->f32(), call_0, call_1));
     });
 
-    auto* fn_4 = b.Function("f4", ty.f32());
-    auto* fn_4_p = b.FunctionParam("p", ty.ptr<uniform>(Outer));
+    auto* fn_4 = b.Function("f4", ty->f32());
+    auto* fn_4_p = b.FunctionParam("p", ty->ptr<uniform>(Outer));
     fn_4->SetParams({fn_4_p});
     b.Append(fn_4->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<uniform>(ty.array(Inner, 4)), fn_4_p, 0_u);
-        auto* access_1 = b.Access(ty.ptr<uniform, mat3x4<f32>>(), U, 1_u);
-        b.Return(fn_4, b.Call(ty.f32(), fn_3, access_0, access_1));
+        auto* access_0 = b.Access(ty->ptr<uniform>(ty->array(Inner, 4)), fn_4_p, 0_u);
+        auto* access_1 = b.Access(ty->ptr<uniform, mat3x4<f32>>(), U, 1_u);
+        b.Return(fn_4, b.Call(ty->f32(), fn_3, access_0, access_1));
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        b.Call(ty.f32(), fn_4, U);
+        b.Call(ty->f32(), fn_4, U);
         b.Return(fn_b);
     });
 
@@ -1159,21 +1161,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_UniformAS, CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     Var* input = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 input = b.Var("U", ty.ptr<uniform>(T));
+                 input = b.Var("U", ty->ptr<uniform>(T));
                  input->SetBindingPoint(0, 0);
              });
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<uniform>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<uniform>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(),
                  [&] { b.Return(f2, b.Load(b.Access<ptr<uniform, vec4<i32>>>(p, 3_u))); });
@@ -1181,21 +1183,21 @@ TEST_F(IR_DirectVariableAccessTest_UniformAS, CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<uniform>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<uniform>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<uniform>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<uniform>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<uniform>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<uniform>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<uniform>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<uniform>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
         b.Call(f0, input);
         b.Return(main);
@@ -1290,29 +1292,29 @@ namespace storage_as_tests {
 using IR_DirectVariableAccessTest_StorageAS = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_StorageAS, Param_ptr_i32_Via_struct_read) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 S = b.Var("S", ty.ptr<storage, read>(str_));
+                 S = b.Var("S", ty->ptr<storage, read>(str_));
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<storage, i32, read>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<storage, i32, read>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<storage, i32, read>(), S, 0_u);
+        auto* access = b.Access(ty->ptr<storage, i32, read>(), S, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -1374,32 +1376,32 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_StorageAS, Param_ptr_arr_i32_Via_struct_write) {
     auto* str_ =
-        ty.Struct(mod.symbols.New("str"), {
-                                              {mod.symbols.Register("arr"), ty.array<i32, 4>()},
-                                          });
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("arr"), ty->array<i32, 4>()},
+                                           });
 
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 S = b.Var("S", ty.ptr<storage>(str_));
+                 S = b.Var("S", ty->ptr<storage>(str_));
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<storage, array<i32, 4>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<storage, array<i32, 4>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<array<i32, 4>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<storage, array<i32, 4>>(), S, 0_u);
+        auto* access = b.Access(ty->ptr<storage, array<i32, 4>>(), S, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -1461,28 +1463,28 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_StorageAS, Param_ptr_vec4i32_Via_array_DynamicWrite) {
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  S = b.Var<storage, array<vec4<i32>, 8>>("S");
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<storage, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<storage, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<vec4<i32>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* I = b.Let("I", 3_i);
-        auto* access = b.Access(ty.ptr<storage, vec4<i32>>(), S, I);
+        auto* access = b.Access(ty->ptr<storage, vec4<i32>>(), S, I);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -1541,95 +1543,95 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_StorageAS, CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 S = b.Var("S", ty.ptr<storage, read>(Outer));
+                 S = b.Var("S", ty->ptr<storage, read>(Outer));
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_0 = b.Function("f0", ty.f32());
-    auto* fn_0_p = b.FunctionParam("p", ty.ptr<storage, vec4<f32>, read>());
+    auto* fn_0 = b.Function("f0", ty->f32());
+    auto* fn_0_p = b.FunctionParam("p", ty->ptr<storage, vec4<f32>, read>());
     fn_0->SetParams({fn_0_p});
     b.Append(fn_0->Block(), [&] { b.Return(fn_0, b.LoadVectorElement(fn_0_p, 0_u)); });
 
-    auto* fn_1 = b.Function("f1", ty.f32());
-    auto* fn_1_p = b.FunctionParam("p", ty.ptr<storage, mat3x4<f32>, read>());
+    auto* fn_1 = b.Function("f1", ty->f32());
+    auto* fn_1_p = b.FunctionParam("p", ty->ptr<storage, mat3x4<f32>, read>());
     fn_1->SetParams({fn_1_p});
     b.Append(fn_1->Block(), [&] {
         auto* res = b.Var<function, f32>("res");
         {
             // res += f0(&(*p)[1]);
-            auto* call_0 = b.Call(fn_0, b.Access(ty.ptr<storage, vec4<f32>, read>(), fn_1_p, 1_i));
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            auto* call_0 = b.Call(fn_0, b.Access(ty->ptr<storage, vec4<f32>, read>(), fn_1_p, 1_i));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &(*p)[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<storage, vec4<f32>, read>(), fn_1_p, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<storage, vec4<f32>, read>(), fn_1_p, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // res += f0(&U.arr[2].mat[1]);
-            auto* access = b.Access(ty.ptr<storage, vec4<f32>, read>(), S, 0_u, 2_i, 0_u, 1_i);
+            auto* access = b.Access(ty->ptr<storage, vec4<f32>, read>(), S, 0_u, 2_i, 0_u, 1_i);
             auto* call_0 = b.Call(fn_0, access);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &U.arr[2].mat[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<storage, vec4<f32>, read>(), S, 0_u, 2_i, 0_u, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<storage, vec4<f32>, read>(), S, 0_u, 2_i, 0_u, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
 
         b.Return(fn_1, b.Load(res));
     });
 
-    auto* fn_2 = b.Function("f2", ty.f32());
-    auto* fn_2_p = b.FunctionParam("p", ty.ptr<storage, read>(Inner));
+    auto* fn_2 = b.Function("f2", ty->f32());
+    auto* fn_2_p = b.FunctionParam("p", ty->ptr<storage, read>(Inner));
     fn_2->SetParams({fn_2_p});
     b.Append(fn_2->Block(), [&] {
-        auto* p_mat = b.Access(ty.ptr<storage, mat3x4<f32>, read>(), fn_2_p, 0_u);
-        b.ir.SetName(p_mat, "p_mat");
+        auto* p_mat = b.Access(ty->ptr<storage, mat3x4<f32>, read>(), fn_2_p, 0_u);
+        b.ir->SetName(p_mat, "p_mat");
         b.Return(fn_2, b.Call(fn_1, p_mat));
     });
 
-    auto* fn_3 = b.Function("f3", ty.f32());
-    auto* fn_3_p0 = b.FunctionParam("p0", ty.ptr<storage, read>(ty.array(Inner, 4)));
-    auto* fn_3_p1 = b.FunctionParam("p1", ty.ptr<storage, mat3x4<f32>, read>());
+    auto* fn_3 = b.Function("f3", ty->f32());
+    auto* fn_3_p0 = b.FunctionParam("p0", ty->ptr<storage, read>(ty->array(Inner, 4)));
+    auto* fn_3_p1 = b.FunctionParam("p1", ty->ptr<storage, mat3x4<f32>, read>());
     fn_3->SetParams({fn_3_p0, fn_3_p1});
     b.Append(fn_3->Block(), [&] {
-        auto* p0_inner = b.Access(ty.ptr<storage, read>(Inner), fn_3_p0, 3_i);
-        b.ir.SetName(p0_inner, "p0_inner");
-        auto* call_0 = b.Call(ty.f32(), fn_2, p0_inner);
-        auto* call_1 = b.Call(ty.f32(), fn_1, fn_3_p1);
-        b.Return(fn_3, b.Add(ty.f32(), call_0, call_1));
+        auto* p0_inner = b.Access(ty->ptr<storage, read>(Inner), fn_3_p0, 3_i);
+        b.ir->SetName(p0_inner, "p0_inner");
+        auto* call_0 = b.Call(ty->f32(), fn_2, p0_inner);
+        auto* call_1 = b.Call(ty->f32(), fn_1, fn_3_p1);
+        b.Return(fn_3, b.Add(ty->f32(), call_0, call_1));
     });
 
-    auto* fn_4 = b.Function("f4", ty.f32());
-    auto* fn_4_p = b.FunctionParam("p", ty.ptr<storage, read>(Outer));
+    auto* fn_4 = b.Function("f4", ty->f32());
+    auto* fn_4_p = b.FunctionParam("p", ty->ptr<storage, read>(Outer));
     fn_4->SetParams({fn_4_p});
     b.Append(fn_4->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<storage, read>(ty.array(Inner, 4)), fn_4_p, 0_u);
-        auto* access_1 = b.Access(ty.ptr<storage, mat3x4<f32>, read>(), S, 1_u);
-        b.Return(fn_4, b.Call(ty.f32(), fn_3, access_0, access_1));
+        auto* access_0 = b.Access(ty->ptr<storage, read>(ty->array(Inner, 4)), fn_4_p, 0_u);
+        auto* access_1 = b.Access(ty->ptr<storage, mat3x4<f32>, read>(), S, 1_u);
+        b.Return(fn_4, b.Call(ty->f32(), fn_3, access_0, access_1));
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        b.Call(ty.f32(), fn_4, S);
+        b.Call(ty->f32(), fn_4, S);
         b.Return(fn_b);
     });
 
@@ -1850,21 +1852,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_StorageAS, CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     Var* input = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 input = b.Var("U", ty.ptr<storage>(T));
+                 input = b.Var("U", ty->ptr<storage>(T));
                  input->SetBindingPoint(0, 0);
              });
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<storage>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<storage>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(),
                  [&] { b.Return(f2, b.Load(b.Access<ptr<storage, vec4<i32>>>(p, 3_u))); });
@@ -1872,21 +1874,21 @@ TEST_F(IR_DirectVariableAccessTest_StorageAS, CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<storage>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<storage>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<storage>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<storage>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<storage>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<storage>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<storage>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<storage>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
         b.Call(f0, input);
         b.Return(main);
@@ -1982,23 +1984,23 @@ using IR_DirectVariableAccessTest_WorkgroupAS = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_StaticRead) {
     Var* W = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 W = b.Var("W", ty.ptr<workgroup, array<vec4<i32>, 8>>());
+                 W = b.Var("W", ty->ptr<workgroup, array<vec4<i32>, 8>>());
              });
 
-    auto* fn_a = b.Function("a", ty.vec4<i32>());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<workgroup, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->vec4<i32>());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<workgroup, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<workgroup, vec4<i32>>(), W, 3_i);
+        auto* access = b.Access(ty->ptr<workgroup, vec4<i32>>(), W, 3_i);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -2055,26 +2057,26 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_StaticWrite) {
     Var* W = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  W = b.Var<workgroup, array<vec4<i32>, 8>>("W");
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<workgroup, vec4<i32>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<workgroup, vec4<i32>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<vec4<i32>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<workgroup, vec4<i32>>(), W, 3_i);
+        auto* access = b.Access(ty->ptr<workgroup, vec4<i32>>(), W, 3_i);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -2131,94 +2133,94 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     Var* W = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 W = b.Var("W", ty.ptr<workgroup>(Outer));
+                 W = b.Var("W", ty->ptr<workgroup>(Outer));
              });
 
-    auto* fn_0 = b.Function("f0", ty.f32());
-    auto* fn_0_p = b.FunctionParam("p", ty.ptr<workgroup, vec4<f32>>());
+    auto* fn_0 = b.Function("f0", ty->f32());
+    auto* fn_0_p = b.FunctionParam("p", ty->ptr<workgroup, vec4<f32>>());
     fn_0->SetParams({fn_0_p});
     b.Append(fn_0->Block(), [&] { b.Return(fn_0, b.LoadVectorElement(fn_0_p, 0_u)); });
 
-    auto* fn_1 = b.Function("f1", ty.f32());
-    auto* fn_1_p = b.FunctionParam("p", ty.ptr<workgroup, mat3x4<f32>>());
+    auto* fn_1 = b.Function("f1", ty->f32());
+    auto* fn_1_p = b.FunctionParam("p", ty->ptr<workgroup, mat3x4<f32>>());
     fn_1->SetParams({fn_1_p});
     b.Append(fn_1->Block(), [&] {
         auto* res = b.Var<function, f32>("res");
         {
             // res += f0(&(*p)[1]);
-            auto* call_0 = b.Call(fn_0, b.Access(ty.ptr<workgroup, vec4<f32>>(), fn_1_p, 1_i));
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            auto* call_0 = b.Call(fn_0, b.Access(ty->ptr<workgroup, vec4<f32>>(), fn_1_p, 1_i));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &(*p)[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<workgroup, vec4<f32>>(), fn_1_p, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<workgroup, vec4<f32>>(), fn_1_p, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // res += f0(&U.arr[2].mat[1]);
-            auto* access = b.Access(ty.ptr<workgroup, vec4<f32>>(), W, 0_u, 2_i, 0_u, 1_i);
+            auto* access = b.Access(ty->ptr<workgroup, vec4<f32>>(), W, 0_u, 2_i, 0_u, 1_i);
             auto* call_0 = b.Call(fn_0, access);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &U.arr[2].mat[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<workgroup, vec4<f32>>(), W, 0_u, 2_i, 0_u, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<workgroup, vec4<f32>>(), W, 0_u, 2_i, 0_u, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
 
         b.Return(fn_1, b.Load(res));
     });
 
-    auto* fn_2 = b.Function("f2", ty.f32());
-    auto* fn_2_p = b.FunctionParam("p", ty.ptr<workgroup>(Inner));
+    auto* fn_2 = b.Function("f2", ty->f32());
+    auto* fn_2_p = b.FunctionParam("p", ty->ptr<workgroup>(Inner));
     fn_2->SetParams({fn_2_p});
     b.Append(fn_2->Block(), [&] {
-        auto* p_mat = b.Access(ty.ptr<workgroup, mat3x4<f32>>(), fn_2_p, 0_u);
-        b.ir.SetName(p_mat, "p_mat");
+        auto* p_mat = b.Access(ty->ptr<workgroup, mat3x4<f32>>(), fn_2_p, 0_u);
+        b.ir->SetName(p_mat, "p_mat");
         b.Return(fn_2, b.Call(fn_1, p_mat));
     });
 
-    auto* fn_3 = b.Function("f3", ty.f32());
-    auto* fn_3_p0 = b.FunctionParam("p0", ty.ptr<workgroup>(ty.array(Inner, 4)));
-    auto* fn_3_p1 = b.FunctionParam("p1", ty.ptr<workgroup, mat3x4<f32>>());
+    auto* fn_3 = b.Function("f3", ty->f32());
+    auto* fn_3_p0 = b.FunctionParam("p0", ty->ptr<workgroup>(ty->array(Inner, 4)));
+    auto* fn_3_p1 = b.FunctionParam("p1", ty->ptr<workgroup, mat3x4<f32>>());
     fn_3->SetParams({fn_3_p0, fn_3_p1});
     b.Append(fn_3->Block(), [&] {
-        auto* p0_inner = b.Access(ty.ptr<workgroup>(Inner), fn_3_p0, 3_i);
-        b.ir.SetName(p0_inner, "p0_inner");
-        auto* call_0 = b.Call(ty.f32(), fn_2, p0_inner);
-        auto* call_1 = b.Call(ty.f32(), fn_1, fn_3_p1);
-        b.Return(fn_3, b.Add(ty.f32(), call_0, call_1));
+        auto* p0_inner = b.Access(ty->ptr<workgroup>(Inner), fn_3_p0, 3_i);
+        b.ir->SetName(p0_inner, "p0_inner");
+        auto* call_0 = b.Call(ty->f32(), fn_2, p0_inner);
+        auto* call_1 = b.Call(ty->f32(), fn_1, fn_3_p1);
+        b.Return(fn_3, b.Add(ty->f32(), call_0, call_1));
     });
 
-    auto* fn_4 = b.Function("f4", ty.f32());
-    auto* fn_4_p = b.FunctionParam("p", ty.ptr<workgroup>(Outer));
+    auto* fn_4 = b.Function("f4", ty->f32());
+    auto* fn_4_p = b.FunctionParam("p", ty->ptr<workgroup>(Outer));
     fn_4->SetParams({fn_4_p});
     b.Append(fn_4->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<workgroup>(ty.array(Inner, 4)), fn_4_p, 0_u);
-        auto* access_1 = b.Access(ty.ptr<workgroup, mat3x4<f32>>(), W, 1_u);
-        b.Return(fn_4, b.Call(ty.f32(), fn_3, access_0, access_1));
+        auto* access_0 = b.Access(ty->ptr<workgroup>(ty->array(Inner, 4)), fn_4_p, 0_u);
+        auto* access_1 = b.Access(ty->ptr<workgroup, mat3x4<f32>>(), W, 1_u);
+        b.Return(fn_4, b.Call(ty->f32(), fn_3, access_0, access_1));
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        b.Call(ty.f32(), fn_4, W);
+        b.Call(ty->f32(), fn_4, W);
         b.Return(fn_b);
     });
 
@@ -2439,21 +2441,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     Var* input = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 input = b.Var("U", ty.ptr<workgroup>(T));
+                 input = b.Var("U", ty->ptr<workgroup>(T));
                  input->SetBindingPoint(0, 0);
              });
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<workgroup>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<workgroup>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(),
                  [&] { b.Return(f2, b.Load(b.Access<ptr<workgroup, vec4<i32>>>(p, 3_u))); });
@@ -2461,21 +2463,21 @@ TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<workgroup>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<workgroup>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<workgroup>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<workgroup>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<workgroup>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<workgroup>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<workgroup>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<workgroup>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
         b.Call(f0, input);
         b.Return(main);
@@ -2571,21 +2573,21 @@ using IR_DirectVariableAccessTest_PrivateAS = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_read) {
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_, i32>());
+                 P = b.Var("P", ty->ptr<private_, i32>());
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         b.Call(fn_a, 10_i, P, 20_i);
         b.Return(fn_b);
@@ -2639,24 +2641,24 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_write) {
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_, i32>());
+                 P = b.Var("P", ty->ptr<private_, i32>());
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, 42_i);
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         b.Call(fn_a, 10_i, P, 20_i);
         b.Return(fn_b);
@@ -2709,28 +2711,28 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_Via_struct_read) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(str_));
+                 P = b.Var("P", ty->ptr<private_>(str_));
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<private_, i32>(), P, 0_u);
+        auto* access = b.Access(ty->ptr<private_, i32>(), P, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -2791,28 +2793,28 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_Param_ptr_i32_Via_struct_read) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(str_));
+                 P = b.Var("P", ty->ptr<private_>(str_));
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<private_, i32>(), P, 0_u);
+        auto* access = b.Access(ty->ptr<private_, i32>(), P, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -2852,31 +2854,31 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* str_ =
-        ty.Struct(mod.symbols.New("str"), {
-                                              {mod.symbols.Register("arr"), ty.array<i32, 4>()},
-                                          });
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("arr"), ty->array<i32, 4>()},
+                                           });
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(str_));
+                 P = b.Var("P", ty->ptr<private_>(str_));
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, array<i32, 4>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, array<i32, 4>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<array<i32, 4>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<private_, array<i32, 4>>(), P, 0_u);
+        auto* access = b.Access(ty->ptr<private_, array<i32, 4>>(), P, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -2938,31 +2940,31 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* str_ =
-        ty.Struct(mod.symbols.New("str"), {
-                                              {mod.symbols.Register("arr"), ty.array<i32, 4>()},
-                                          });
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("arr"), ty->array<i32, 4>()},
+                                           });
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(str_));
+                 P = b.Var("P", ty->ptr<private_>(str_));
              });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, array<i32, 4>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, array<i32, 4>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<array<i32, 4>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* access = b.Access(ty.ptr<private_, array<i32, 4>>(), P, 0_u);
+        auto* access = b.Access(ty->ptr<private_, array<i32, 4>>(), P, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -3001,40 +3003,40 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_mixed) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
     Var* Pi = nullptr;
     Var* Ps = nullptr;
     Var* Pa = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 Pi = b.Var("Pi", ty.ptr<private_, i32>());
-                 Ps = b.Var("Ps", ty.ptr<private_>(str_));
-                 Pa = b.Var("Pa", ty.ptr<private_, array<i32, 4>>());
+                 Pi = b.Var("Pi", ty->ptr<private_, i32>());
+                 Ps = b.Var("Ps", ty->ptr<private_>(str_));
+                 Pa = b.Var("Pa", ty->ptr<private_, array<i32, 4>>());
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         {  // a(10, &Pi, 20);
             b.Call(fn_a, 10_i, Pi, 20_i);
         }
         {  // a(30, &Ps.i, 40);
-            auto* access = b.Access(ty.ptr<private_, i32>(), Ps, 0_u);
+            auto* access = b.Access(ty->ptr<private_, i32>(), Ps, 0_u);
             b.Call(fn_a, 30_i, access, 40_i);
         }
         {  // a(50, &Pa[2], 60);
-            auto* access = b.Access(ty.ptr<private_, i32>(), Pa, 2_i);
+            auto* access = b.Access(ty->ptr<private_, i32>(), Pa, 2_i);
             b.Call(fn_a, 50_i, access, 60_i);
         }
         b.Return(fn_b);
@@ -3122,40 +3124,40 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_Param_ptr_i32_mixed) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
     Var* Pi = nullptr;
     Var* Ps = nullptr;
     Var* Pa = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 Pi = b.Var("Pi", ty.ptr<private_, i32>());
-                 Ps = b.Var("Ps", ty.ptr<private_>(str_));
-                 Pa = b.Var("Pa", ty.ptr<private_, array<i32, 4>>());
+                 Pi = b.Var("Pi", ty->ptr<private_, i32>());
+                 Ps = b.Var("Ps", ty->ptr<private_>(str_));
+                 Pa = b.Var("Pa", ty->ptr<private_, array<i32, 4>>());
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<private_, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<private_, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         {  // a(10, &Pi, 20);
             b.Call(fn_a, 10_i, Pi, 20_i);
         }
         {  // a(30, &Ps.i, 40);
-            auto* access = b.Access(ty.ptr<private_, i32>(), Ps, 0_u);
+            auto* access = b.Access(ty->ptr<private_, i32>(), Ps, 0_u);
             b.Call(fn_a, 30_i, access, 40_i);
         }
         {  // a(50, &Pa[2], 60);
-            auto* access = b.Access(ty.ptr<private_, i32>(), Pa, 2_i);
+            auto* access = b.Access(ty->ptr<private_, i32>(), Pa, 2_i);
             b.Call(fn_a, 50_i, access, 60_i);
         }
         b.Return(fn_b);
@@ -3201,94 +3203,94 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(Outer));
+                 P = b.Var("P", ty->ptr<private_>(Outer));
              });
 
-    auto* fn_0 = b.Function("f0", ty.f32());
-    auto* fn_0_p = b.FunctionParam("p", ty.ptr<private_, vec4<f32>>());
+    auto* fn_0 = b.Function("f0", ty->f32());
+    auto* fn_0_p = b.FunctionParam("p", ty->ptr<private_, vec4<f32>>());
     fn_0->SetParams({fn_0_p});
     b.Append(fn_0->Block(), [&] { b.Return(fn_0, b.LoadVectorElement(fn_0_p, 0_u)); });
 
-    auto* fn_1 = b.Function("f1", ty.f32());
-    auto* fn_1_p = b.FunctionParam("p", ty.ptr<private_, mat3x4<f32>>());
+    auto* fn_1 = b.Function("f1", ty->f32());
+    auto* fn_1_p = b.FunctionParam("p", ty->ptr<private_, mat3x4<f32>>());
     fn_1->SetParams({fn_1_p});
     b.Append(fn_1->Block(), [&] {
         auto* res = b.Var<function, f32>("res");
         {
             // res += f0(&(*p)[1]);
-            auto* call_0 = b.Call(fn_0, b.Access(ty.ptr<private_, vec4<f32>>(), fn_1_p, 1_i));
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            auto* call_0 = b.Call(fn_0, b.Access(ty->ptr<private_, vec4<f32>>(), fn_1_p, 1_i));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &(*p)[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<private_, vec4<f32>>(), fn_1_p, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<private_, vec4<f32>>(), fn_1_p, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // res += f0(&U.arr[2].mat[1]);
-            auto* access = b.Access(ty.ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
+            auto* access = b.Access(ty->ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
             auto* call_0 = b.Call(fn_0, access);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &U.arr[2].mat[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
 
         b.Return(fn_1, b.Load(res));
     });
 
-    auto* fn_2 = b.Function("f2", ty.f32());
-    auto* fn_2_p = b.FunctionParam("p", ty.ptr<private_>(Inner));
+    auto* fn_2 = b.Function("f2", ty->f32());
+    auto* fn_2_p = b.FunctionParam("p", ty->ptr<private_>(Inner));
     fn_2->SetParams({fn_2_p});
     b.Append(fn_2->Block(), [&] {
-        auto* p_mat = b.Access(ty.ptr<private_, mat3x4<f32>>(), fn_2_p, 0_u);
-        b.ir.SetName(p_mat, "p_mat");
+        auto* p_mat = b.Access(ty->ptr<private_, mat3x4<f32>>(), fn_2_p, 0_u);
+        b.ir->SetName(p_mat, "p_mat");
         b.Return(fn_2, b.Call(fn_1, p_mat));
     });
 
-    auto* fn_3 = b.Function("f3", ty.f32());
-    auto* fn_3_p0 = b.FunctionParam("p0", ty.ptr<private_>(ty.array(Inner, 4)));
-    auto* fn_3_p1 = b.FunctionParam("p1", ty.ptr<private_, mat3x4<f32>>());
+    auto* fn_3 = b.Function("f3", ty->f32());
+    auto* fn_3_p0 = b.FunctionParam("p0", ty->ptr<private_>(ty->array(Inner, 4)));
+    auto* fn_3_p1 = b.FunctionParam("p1", ty->ptr<private_, mat3x4<f32>>());
     fn_3->SetParams({fn_3_p0, fn_3_p1});
     b.Append(fn_3->Block(), [&] {
-        auto* p0_inner = b.Access(ty.ptr<private_>(Inner), fn_3_p0, 3_i);
-        b.ir.SetName(p0_inner, "p0_inner");
-        auto* call_0 = b.Call(ty.f32(), fn_2, p0_inner);
-        auto* call_1 = b.Call(ty.f32(), fn_1, fn_3_p1);
-        b.Return(fn_3, b.Add(ty.f32(), call_0, call_1));
+        auto* p0_inner = b.Access(ty->ptr<private_>(Inner), fn_3_p0, 3_i);
+        b.ir->SetName(p0_inner, "p0_inner");
+        auto* call_0 = b.Call(ty->f32(), fn_2, p0_inner);
+        auto* call_1 = b.Call(ty->f32(), fn_1, fn_3_p1);
+        b.Return(fn_3, b.Add(ty->f32(), call_0, call_1));
     });
 
-    auto* fn_4 = b.Function("f4", ty.f32());
-    auto* fn_4_p = b.FunctionParam("p", ty.ptr<private_>(Outer));
+    auto* fn_4 = b.Function("f4", ty->f32());
+    auto* fn_4_p = b.FunctionParam("p", ty->ptr<private_>(Outer));
     fn_4->SetParams({fn_4_p});
     b.Append(fn_4->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<private_>(ty.array(Inner, 4)), fn_4_p, 0_u);
-        auto* access_1 = b.Access(ty.ptr<private_, mat3x4<f32>>(), P, 1_u);
-        b.Return(fn_4, b.Call(ty.f32(), fn_3, access_0, access_1));
+        auto* access_0 = b.Access(ty->ptr<private_>(ty->array(Inner, 4)), fn_4_p, 0_u);
+        auto* access_1 = b.Access(ty->ptr<private_, mat3x4<f32>>(), P, 1_u);
+        b.Return(fn_4, b.Call(ty->f32(), fn_3, access_0, access_1));
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        b.Call(ty.f32(), fn_4, P);
+        b.Call(ty->f32(), fn_4, P);
         b.Return(fn_b);
     });
 
@@ -3510,94 +3512,94 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(Outer));
+                 P = b.Var("P", ty->ptr<private_>(Outer));
              });
 
-    auto* fn_0 = b.Function("f0", ty.f32());
-    auto* fn_0_p = b.FunctionParam("p", ty.ptr<private_, vec4<f32>>());
+    auto* fn_0 = b.Function("f0", ty->f32());
+    auto* fn_0_p = b.FunctionParam("p", ty->ptr<private_, vec4<f32>>());
     fn_0->SetParams({fn_0_p});
     b.Append(fn_0->Block(), [&] { b.Return(fn_0, b.LoadVectorElement(fn_0_p, 0_u)); });
 
-    auto* fn_1 = b.Function("f1", ty.f32());
-    auto* fn_1_p = b.FunctionParam("p", ty.ptr<private_, mat3x4<f32>>());
+    auto* fn_1 = b.Function("f1", ty->f32());
+    auto* fn_1_p = b.FunctionParam("p", ty->ptr<private_, mat3x4<f32>>());
     fn_1->SetParams({fn_1_p});
     b.Append(fn_1->Block(), [&] {
         auto* res = b.Var<function, f32>("res");
         {
             // res += f0(&(*p)[1]);
-            auto* call_0 = b.Call(fn_0, b.Access(ty.ptr<private_, vec4<f32>>(), fn_1_p, 1_i));
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            auto* call_0 = b.Call(fn_0, b.Access(ty->ptr<private_, vec4<f32>>(), fn_1_p, 1_i));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &(*p)[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<private_, vec4<f32>>(), fn_1_p, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<private_, vec4<f32>>(), fn_1_p, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // res += f0(&U.arr[2].mat[1]);
-            auto* access = b.Access(ty.ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
+            auto* access = b.Access(ty->ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
             auto* call_0 = b.Call(fn_0, access);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
         {
             // let p_vec = &U.arr[2].mat[1];
             // res += f0(p_vec);
-            auto* p_vec = b.Access(ty.ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
-            b.ir.SetName(p_vec, "p_vec");
+            auto* p_vec = b.Access(ty->ptr<private_, vec4<f32>>(), P, 0_u, 2_i, 0_u, 1_i);
+            b.ir->SetName(p_vec, "p_vec");
             auto* call_0 = b.Call(fn_0, p_vec);
-            b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+            b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
         }
 
         b.Return(fn_1, b.Load(res));
     });
 
-    auto* fn_2 = b.Function("f2", ty.f32());
-    auto* fn_2_p = b.FunctionParam("p", ty.ptr<private_>(Inner));
+    auto* fn_2 = b.Function("f2", ty->f32());
+    auto* fn_2_p = b.FunctionParam("p", ty->ptr<private_>(Inner));
     fn_2->SetParams({fn_2_p});
     b.Append(fn_2->Block(), [&] {
-        auto* p_mat = b.Access(ty.ptr<private_, mat3x4<f32>>(), fn_2_p, 0_u);
-        b.ir.SetName(p_mat, "p_mat");
+        auto* p_mat = b.Access(ty->ptr<private_, mat3x4<f32>>(), fn_2_p, 0_u);
+        b.ir->SetName(p_mat, "p_mat");
         b.Return(fn_2, b.Call(fn_1, p_mat));
     });
 
-    auto* fn_3 = b.Function("f3", ty.f32());
-    auto* fn_3_p0 = b.FunctionParam("p0", ty.ptr<private_>(ty.array(Inner, 4)));
-    auto* fn_3_p1 = b.FunctionParam("p1", ty.ptr<private_, mat3x4<f32>>());
+    auto* fn_3 = b.Function("f3", ty->f32());
+    auto* fn_3_p0 = b.FunctionParam("p0", ty->ptr<private_>(ty->array(Inner, 4)));
+    auto* fn_3_p1 = b.FunctionParam("p1", ty->ptr<private_, mat3x4<f32>>());
     fn_3->SetParams({fn_3_p0, fn_3_p1});
     b.Append(fn_3->Block(), [&] {
-        auto* p0_inner = b.Access(ty.ptr<private_>(Inner), fn_3_p0, 3_i);
-        b.ir.SetName(p0_inner, "p0_inner");
-        auto* call_0 = b.Call(ty.f32(), fn_2, p0_inner);
-        auto* call_1 = b.Call(ty.f32(), fn_1, fn_3_p1);
-        b.Return(fn_3, b.Add(ty.f32(), call_0, call_1));
+        auto* p0_inner = b.Access(ty->ptr<private_>(Inner), fn_3_p0, 3_i);
+        b.ir->SetName(p0_inner, "p0_inner");
+        auto* call_0 = b.Call(ty->f32(), fn_2, p0_inner);
+        auto* call_1 = b.Call(ty->f32(), fn_1, fn_3_p1);
+        b.Return(fn_3, b.Add(ty->f32(), call_0, call_1));
     });
 
-    auto* fn_4 = b.Function("f4", ty.f32());
-    auto* fn_4_p = b.FunctionParam("p", ty.ptr<private_>(Outer));
+    auto* fn_4 = b.Function("f4", ty->f32());
+    auto* fn_4_p = b.FunctionParam("p", ty->ptr<private_>(Outer));
     fn_4->SetParams({fn_4_p});
     b.Append(fn_4->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<private_>(ty.array(Inner, 4)), fn_4_p, 0_u);
-        auto* access_1 = b.Access(ty.ptr<private_, mat3x4<f32>>(), P, 1_u);
-        b.Return(fn_4, b.Call(ty.f32(), fn_3, access_0, access_1));
+        auto* access_0 = b.Access(ty->ptr<private_>(ty->array(Inner, 4)), fn_4_p, 0_u);
+        auto* access_1 = b.Access(ty->ptr<private_, mat3x4<f32>>(), P, 1_u);
+        b.Return(fn_4, b.Call(ty->f32(), fn_3, access_0, access_1));
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        b.Call(ty.f32(), fn_4, P);
+        b.Call(ty->f32(), fn_4, P);
         b.Return(fn_b);
     });
 
@@ -3690,20 +3692,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(T));
+                 P = b.Var("P", ty->ptr<private_>(T));
              });
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
             b.Return(f2, b.Load(b.Access<ptr<private_, vec4<i32>, read_write>>(p, 3_u)));
@@ -3712,21 +3714,21 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<private_>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<private_>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<private_>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<private_>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
         b.Call(f0, P);
         b.Return(main);
@@ -3812,20 +3814,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     Var* P = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 P = b.Var("P", ty.ptr<private_>(T));
+                 P = b.Var("P", ty->ptr<private_>(T));
              });
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
             b.Return(f2, b.Load(b.Access<ptr<private_, vec4<i32>, read_write>>(p, 3_u)));
@@ -3834,21 +3836,21 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Disabled_CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<private_>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<private_>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<private_>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<private_>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<private_>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<private_>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
         b.Call(f0, P);
         b.Return(main);
@@ -3907,7 +3909,7 @@ namespace function_as_tests {
 using IR_DirectVariableAccessTest_FunctionAS = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_LocalPtr) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>("v");
         auto* p = b.Let("p", v);
@@ -3937,16 +3939,16 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_LocalPtr) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_read) {
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* F = b.Var<function, i32>("F");
         b.Call(fn_a, 10_i, F, 20_i);
@@ -3994,19 +3996,19 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_read) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_write) {
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, 42_i);
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* F = b.Var<function, i32>("F");
         b.Call(fn_a, 10_i, F, 20_i);
@@ -4054,23 +4056,23 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_write) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_Via_struct_read) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(str_));
-        auto* access = b.Access(ty.ptr<function, i32>(), F, 0_u);
+        auto* F = b.Var("F", ty->ptr<function>(str_));
+        auto* access = b.Access(ty->ptr<function, i32>(), F, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -4126,26 +4128,26 @@ str = struct @align(4) {
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* str_ =
-        ty.Struct(mod.symbols.New("str"), {
-                                              {mod.symbols.Register("arr"), ty.array<i32, 4>()},
-                                          });
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("arr"), ty->array<i32, 4>()},
+                                           });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, array<i32, 4>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, array<i32, 4>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<array<i32, 4>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(str_));
-        auto* access = b.Access(ty.ptr<function, array<i32, 4>>(), F, 0_u);
+        auto* F = b.Var("F", ty->ptr<function>(str_));
+        auto* access = b.Access(ty->ptr<function, array<i32, 4>>(), F, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -4200,33 +4202,33 @@ str = struct @align(4) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_mixed) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* Fi = b.Var("Fi", ty.ptr<function, i32>());
-        auto* Fs = b.Var("Fs", ty.ptr<function>(str_));
-        auto* Fa = b.Var("Fa", ty.ptr<function, array<i32, 4>>());
+        auto* Fi = b.Var("Fi", ty->ptr<function, i32>());
+        auto* Fs = b.Var("Fs", ty->ptr<function>(str_));
+        auto* Fa = b.Var("Fa", ty->ptr<function, array<i32, 4>>());
         {  // a(10, &Fi, 20);
             b.Call(fn_a, 10_i, Fi, 20_i);
         }
         {  // a(30, &Fs.i, 40);
-            auto* access = b.Access(ty.ptr<function, i32>(), Fs, 0_u);
+            auto* access = b.Access(ty->ptr<function, i32>(), Fs, 0_u);
             b.Call(fn_a, 30_i, access, 40_i);
         }
         {  // a(50, &Fa[2], 60);
-            auto* access = b.Access(ty.ptr<function, i32>(), Fa, 2_i);
+            auto* access = b.Access(ty->ptr<function, i32>(), Fa, 2_i);
             b.Call(fn_a, 50_i, access, 60_i);
         }
         b.Return(fn_b);
@@ -4308,23 +4310,23 @@ str = struct @align(4) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Disabled_Param_ptr_i32_Via_struct_read) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.i32()},
-                                                   });
+    auto* str_ = ty->Struct(mod.symbols.New("str"), {
+                                                        {mod.symbols.Register("i"), ty->i32()},
+                                                    });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, i32>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, i32>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(str_));
-        auto* access = b.Access(ty.ptr<function, i32>(), F, 0_u);
+        auto* F = b.Var("F", ty->ptr<function>(str_));
+        auto* access = b.Access(ty->ptr<function, i32>(), F, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -4361,26 +4363,26 @@ str = struct @align(4) {
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Disabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* str_ =
-        ty.Struct(mod.symbols.New("str"), {
-                                              {mod.symbols.Register("arr"), ty.array<i32, 4>()},
-                                          });
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("arr"), ty->array<i32, 4>()},
+                                           });
 
-    auto* fn_a = b.Function("a", ty.void_());
-    auto* fn_a_p = b.FunctionParam("p", ty.ptr<function, array<i32, 4>>());
+    auto* fn_a = b.Function("a", ty->void_());
+    auto* fn_a_p = b.FunctionParam("p", ty->ptr<function, array<i32, 4>>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_p,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] {
         b.Store(fn_a_p, b.Splat<array<i32, 4>>(0_i));
         b.Return(fn_a);
     });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(str_));
-        auto* access = b.Access(ty.ptr<function, array<i32, 4>>(), F, 0_u);
+        auto* F = b.Var("F", ty->ptr<function>(str_));
+        auto* access = b.Access(ty->ptr<function, array<i32, 4>>(), F, 0_u);
         b.Call(fn_a, 10_i, access, 20_i);
         b.Return(fn_b);
     });
@@ -4417,80 +4419,80 @@ str = struct @align(4) {
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
 
-    auto* f0 = b.Function("f0", ty.f32());
+    auto* f0 = b.Function("f0", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function, vec4<f32>>());
+        auto* p = b.FunctionParam("p", ty->ptr<function, vec4<f32>>());
         f0->SetParams({p});
         b.Append(f0->Block(), [&] { b.Return(f0, b.LoadVectorElement(p, 0_u)); });
     }
 
-    auto* f1 = b.Function("f1", ty.f32());
+    auto* f1 = b.Function("f1", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function, mat3x4<f32>>());
+        auto* p = b.FunctionParam("p", ty->ptr<function, mat3x4<f32>>());
         f1->SetParams({p});
         b.Append(f1->Block(), [&] {
             auto* res = b.Var<function, f32>("res");
             {
                 // res += f0(&(*p)[1]);
-                auto* call_0 = b.Call(f0, b.Access(ty.ptr<function, vec4<f32>>(), p, 1_i));
-                b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+                auto* call_0 = b.Call(f0, b.Access(ty->ptr<function, vec4<f32>>(), p, 1_i));
+                b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
             }
             {
                 // let p_vec = &(*p)[1];
                 // res += f0(p_vec);
-                auto* p_vec = b.Access(ty.ptr<function, vec4<f32>>(), p, 1_i);
-                b.ir.SetName(p_vec, "p_vec");
+                auto* p_vec = b.Access(ty->ptr<function, vec4<f32>>(), p, 1_i);
+                b.ir->SetName(p_vec, "p_vec");
                 auto* call_0 = b.Call(f0, p_vec);
-                b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+                b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
             }
             b.Return(f1, b.Load(res));
         });
     }
 
-    auto* f2 = b.Function("f2", ty.f32());
+    auto* f2 = b.Function("f2", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(Inner));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(Inner));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
-            auto* p_mat = b.Access(ty.ptr<function, mat3x4<f32>>(), p, 0_u);
-            b.ir.SetName(p_mat, "p_mat");
+            auto* p_mat = b.Access(ty->ptr<function, mat3x4<f32>>(), p, 0_u);
+            b.ir->SetName(p_mat, "p_mat");
             b.Return(f2, b.Call(f1, p_mat));
         });
     }
 
-    auto* f3 = b.Function("f3", ty.f32());
+    auto* f3 = b.Function("f3", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(ty.array(Inner, 4)));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(ty->array(Inner, 4)));
         f3->SetParams({p});
         b.Append(f3->Block(), [&] {
-            auto* p_inner = b.Access(ty.ptr<function>(Inner), p, 3_i);
-            b.ir.SetName(p_inner, "p_inner");
+            auto* p_inner = b.Access(ty->ptr<function>(Inner), p, 3_i);
+            b.ir->SetName(p_inner, "p_inner");
             b.Return(f3, b.Call(f2, p_inner));
         });
     }
 
-    auto* f4 = b.Function("f4", ty.f32());
+    auto* f4 = b.Function("f4", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(Outer));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(Outer));
         f4->SetParams({p});
         b.Append(f4->Block(), [&] {
-            auto* access = b.Access(ty.ptr<function>(ty.array(Inner, 4)), p, 0_u);
+            auto* access = b.Access(ty->ptr<function>(ty->array(Inner, 4)), p, 0_u);
             b.Return(f4, b.Call(f3, access));
         });
     }
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto F = b.Var("F", ty.ptr<function>(Outer));
+        auto F = b.Var("F", ty->ptr<function>(Outer));
         b.Call(f4, F);
         b.Return(fn_b);
     });
@@ -4637,80 +4639,80 @@ Outer = struct @align(16) {
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Disabled_CallChaining) {
     auto* Inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
     auto* Outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.Register("arr"), ty.array(Inner, 4)},
-                                                {mod.symbols.Register("mat"), ty.mat3x4<f32>()},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.Register("arr"), ty->array(Inner, 4)},
+                                                 {mod.symbols.Register("mat"), ty->mat3x4<f32>()},
+                                             });
 
-    auto* f0 = b.Function("f0", ty.f32());
+    auto* f0 = b.Function("f0", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function, vec4<f32>>());
+        auto* p = b.FunctionParam("p", ty->ptr<function, vec4<f32>>());
         f0->SetParams({p});
         b.Append(f0->Block(), [&] { b.Return(f0, b.LoadVectorElement(p, 0_u)); });
     }
 
-    auto* f1 = b.Function("f1", ty.f32());
+    auto* f1 = b.Function("f1", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function, mat3x4<f32>>());
+        auto* p = b.FunctionParam("p", ty->ptr<function, mat3x4<f32>>());
         f1->SetParams({p});
         b.Append(f1->Block(), [&] {
             auto* res = b.Var<function, f32>("res");
             {
                 // res += f0(&(*p)[1]);
-                auto* call_0 = b.Call(f0, b.Access(ty.ptr<function, vec4<f32>>(), p, 1_i));
-                b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+                auto* call_0 = b.Call(f0, b.Access(ty->ptr<function, vec4<f32>>(), p, 1_i));
+                b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
             }
             {
                 // let p_vec = &(*p)[1];
                 // res += f0(p_vec);
-                auto* p_vec = b.Access(ty.ptr<function, vec4<f32>>(), p, 1_i);
-                b.ir.SetName(p_vec, "p_vec");
+                auto* p_vec = b.Access(ty->ptr<function, vec4<f32>>(), p, 1_i);
+                b.ir->SetName(p_vec, "p_vec");
                 auto* call_0 = b.Call(f0, p_vec);
-                b.Store(res, b.Add(ty.f32(), b.Load(res), call_0));
+                b.Store(res, b.Add(ty->f32(), b.Load(res), call_0));
             }
             b.Return(f1, b.Load(res));
         });
     }
 
-    auto* f2 = b.Function("f2", ty.f32());
+    auto* f2 = b.Function("f2", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(Inner));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(Inner));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
-            auto* p_mat = b.Access(ty.ptr<function, mat3x4<f32>>(), p, 0_u);
-            b.ir.SetName(p_mat, "p_mat");
+            auto* p_mat = b.Access(ty->ptr<function, mat3x4<f32>>(), p, 0_u);
+            b.ir->SetName(p_mat, "p_mat");
             b.Return(f2, b.Call(f1, p_mat));
         });
     }
 
-    auto* f3 = b.Function("f3", ty.f32());
+    auto* f3 = b.Function("f3", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(ty.array(Inner, 4)));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(ty->array(Inner, 4)));
         f3->SetParams({p});
         b.Append(f3->Block(), [&] {
-            auto* p_inner = b.Access(ty.ptr<function>(Inner), p, 3_i);
-            b.ir.SetName(p_inner, "p_inner");
+            auto* p_inner = b.Access(ty->ptr<function>(Inner), p, 3_i);
+            b.ir->SetName(p_inner, "p_inner");
             b.Return(f3, b.Call(f2, p_inner));
         });
     }
 
-    auto* f4 = b.Function("f4", ty.f32());
+    auto* f4 = b.Function("f4", ty->f32());
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(Outer));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(Outer));
         f4->SetParams({p});
         b.Append(f4->Block(), [&] {
-            auto* access = b.Access(ty.ptr<function>(ty.array(Inner, 4)), p, 0_u);
+            auto* access = b.Access(ty->ptr<function>(ty->array(Inner, 4)), p, 0_u);
             b.Return(f4, b.Call(f3, access));
         });
     }
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
-        auto F = b.Var("F", ty.ptr<function>(Outer));
+        auto F = b.Var("F", ty->ptr<function>(Outer));
         b.Call(f4, F);
         b.Return(fn_b);
     });
@@ -4788,14 +4790,14 @@ Outer = struct @align(16) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
             b.Return(f2, b.Load(b.Access<ptr<function, vec4<i32>, read_write>>(p, 3_u)));
@@ -4804,23 +4806,23 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<function>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<function>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<function>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<function>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(T));
+        auto* F = b.Var("F", ty->ptr<function>(T));
         b.Call(f0, F);
         b.Return(main);
     });
@@ -4899,14 +4901,14 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_CallChaining2) {
 }
 
 TEST_F(IR_DirectVariableAccessTest_FunctionAS, Disabled_CallChaining2) {
-    auto* T3 = ty.vec4<i32>();
-    auto* T2 = ty.array(T3, 5);
-    auto* T1 = ty.array(T2, 5);
-    auto* T = ty.array(T1, 5);
+    auto* T3 = ty->vec4<i32>();
+    auto* T2 = ty->array(T3, 5);
+    auto* T1 = ty->array(T2, 5);
+    auto* T = ty->array(T1, 5);
 
     auto* f2 = b.Function("f2", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T2));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T2));
         f2->SetParams({p});
         b.Append(f2->Block(), [&] {
             b.Return(f2, b.Load(b.Access<ptr<function, vec4<i32>, read_write>>(p, 3_u)));
@@ -4915,23 +4917,23 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Disabled_CallChaining2) {
 
     auto* f1 = b.Function("f1", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T1));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T1));
         f1->SetParams({p});
         b.Append(f1->Block(),
-                 [&] { b.Return(f1, b.Call(f2, b.Access(ty.ptr<function>(T2), p, 2_u))); });
+                 [&] { b.Return(f1, b.Call(f2, b.Access(ty->ptr<function>(T2), p, 2_u))); });
     }
 
     auto* f0 = b.Function("f0", T3);
     {
-        auto* p = b.FunctionParam("p", ty.ptr<function>(T));
+        auto* p = b.FunctionParam("p", ty->ptr<function>(T));
         f0->SetParams({p});
         b.Append(f0->Block(),
-                 [&] { b.Return(f0, b.Call(f1, b.Access(ty.ptr<function>(T1), p, 1_u))); });
+                 [&] { b.Return(f0, b.Call(f1, b.Access(ty->ptr<function>(T1), p, 1_u))); });
     }
 
-    auto* main = b.Function("main", ty.void_());
+    auto* main = b.Function("main", ty->void_());
     b.Append(main->Block(), [&] {
-        auto* F = b.Var("F", ty.ptr<function>(T));
+        auto* F = b.Var("F", ty->ptr<function>(T));
         b.Call(f0, F);
         b.Return(main);
     });
@@ -4987,21 +4989,21 @@ using IR_DirectVariableAccessTest_BuiltinFn = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_BuiltinFn, ArrayLength) {
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  S = b.Var<storage, array<f32>>("S");
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_len = b.Function("len", ty.u32());
-    auto* fn_len_p = b.FunctionParam("p", ty.ptr<storage, array<f32>>());
+    auto* fn_len = b.Function("len", ty->u32());
+    auto* fn_len_p = b.FunctionParam("p", ty->ptr<storage, array<f32>>());
     fn_len->SetParams({fn_len_p});
     b.Append(fn_len->Block(),
              [&] {  //
-                 b.Return(fn_len, b.Call(ty.u32(), core::BuiltinFn::kArrayLength, fn_len_p));
+                 b.Return(fn_len, b.Call(ty->u32(), core::BuiltinFn::kArrayLength, fn_len_p));
              });
 
-    auto* fn_f = b.Function("b", ty.void_());
+    auto* fn_f = b.Function("b", ty->void_());
     b.Append(fn_f->Block(), [&] {
         b.Call(fn_len, S);
         b.Return(fn_f);
@@ -5055,20 +5057,20 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_BuiltinFn, AtomicLoad) {
     Var* W = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
-                 W = b.Var("W", ty.ptr<workgroup>(ty.atomic<i32>()));
+                 W = b.Var("W", ty->ptr<workgroup>(ty->atomic<i32>()));
              });
 
-    auto* fn_load = b.Function("load", ty.i32());
-    auto* fn_load_p = b.FunctionParam("p", ty.ptr<workgroup>(ty.atomic<i32>()));
+    auto* fn_load = b.Function("load", ty->i32());
+    auto* fn_load_p = b.FunctionParam("p", ty->ptr<workgroup>(ty->atomic<i32>()));
     fn_load->SetParams({fn_load_p});
     b.Append(fn_load->Block(),
              [&] {  //
-                 b.Return(fn_load, b.Call(ty.i32(), core::BuiltinFn::kAtomicLoad, fn_load_p));
+                 b.Return(fn_load, b.Call(ty->i32(), core::BuiltinFn::kAtomicLoad, fn_load_p));
              });
 
-    auto* fn_f = b.Function("b", ty.void_());
+    auto* fn_f = b.Function("b", ty->void_());
     b.Append(fn_f->Block(), [&] {
         b.Call(fn_load, W);
         b.Return(fn_f);
@@ -5130,9 +5132,10 @@ namespace complex_tests {
 using IR_DirectVariableAccessTest_Complex = TransformTest;
 
 TEST_F(IR_DirectVariableAccessTest_Complex, Param_ptr_mixed_vec4i32_ViaMultiple) {
-    auto* str_ = ty.Struct(mod.symbols.New("str"), {
-                                                       {mod.symbols.Register("i"), ty.vec4<i32>()},
-                                                   });
+    auto* str_ =
+        ty->Struct(mod.symbols.New("str"), {
+                                               {mod.symbols.Register("i"), ty->vec4<i32>()},
+                                           });
 
     Var* U = nullptr;
     Var* U_str = nullptr;
@@ -5146,11 +5149,11 @@ TEST_F(IR_DirectVariableAccessTest_Complex, Param_ptr_mixed_vec4i32_ViaMultiple)
     Var* W_str = nullptr;
     Var* W_arr = nullptr;
     Var* W_arr_arr = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  U = b.Var<uniform, vec4<i32>>("U");
                  U->SetBindingPoint(0, 0);
-                 U_str = b.Var("U_str", ty.ptr<uniform>(str_));
+                 U_str = b.Var("U_str", ty->ptr<uniform>(str_));
                  U_str->SetBindingPoint(0, 1);
                  U_arr = b.Var<uniform, array<vec4<i32>, 8>>("U_arr");
                  U_arr->SetBindingPoint(0, 2);
@@ -5159,7 +5162,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, Param_ptr_mixed_vec4i32_ViaMultiple)
 
                  S = b.Var<storage, vec4<i32>, read>("S");
                  S->SetBindingPoint(1, 0);
-                 S_str = b.Var("S_str", ty.ptr<storage, read>(str_));
+                 S_str = b.Var("S_str", ty->ptr<storage, read>(str_));
                  S_str->SetBindingPoint(1, 1);
                  S_arr = b.Var<storage, array<vec4<i32>, 8>, read>("S_arr");
                  S_arr->SetBindingPoint(1, 2);
@@ -5167,95 +5170,98 @@ TEST_F(IR_DirectVariableAccessTest_Complex, Param_ptr_mixed_vec4i32_ViaMultiple)
                  S_arr_arr->SetBindingPoint(1, 3);
 
                  W = b.Var<workgroup, vec4<i32>>("W");
-                 W_str = b.Var("W_str", ty.ptr<workgroup>(str_));
+                 W_str = b.Var("W_str", ty->ptr<workgroup>(str_));
                  W_arr = b.Var<workgroup, array<vec4<i32>, 8>>("W_arr");
                  W_arr_arr = b.Var<workgroup, array<array<vec4<i32>, 8>, 4>>("W_arr_arr");
              });
 
-    auto* fn_u = b.Function("fn_u", ty.vec4<i32>());
-    auto* fn_u_p = b.FunctionParam("p", ty.ptr<uniform, vec4<i32>, read>());
+    auto* fn_u = b.Function("fn_u", ty->vec4<i32>());
+    auto* fn_u_p = b.FunctionParam("p", ty->ptr<uniform, vec4<i32>, read>());
     fn_u->SetParams({fn_u_p});
     b.Append(fn_u->Block(), [&] { b.Return(fn_u, b.Load(fn_u_p)); });
 
-    auto* fn_s = b.Function("fn_s", ty.vec4<i32>());
-    auto* fn_s_p = b.FunctionParam("p", ty.ptr<storage, vec4<i32>, read>());
+    auto* fn_s = b.Function("fn_s", ty->vec4<i32>());
+    auto* fn_s_p = b.FunctionParam("p", ty->ptr<storage, vec4<i32>, read>());
     fn_s->SetParams({fn_s_p});
     b.Append(fn_s->Block(), [&] { b.Return(fn_s, b.Load(fn_s_p)); });
 
-    auto* fn_w = b.Function("fn_w", ty.vec4<i32>());
-    auto* fn_w_p = b.FunctionParam("p", ty.ptr<workgroup, vec4<i32>>());
+    auto* fn_w = b.Function("fn_w", ty->vec4<i32>());
+    auto* fn_w_p = b.FunctionParam("p", ty->ptr<workgroup, vec4<i32>>());
     fn_w->SetParams({fn_w_p});
     b.Append(fn_w->Block(), [&] { b.Return(fn_w, b.Load(fn_w_p)); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* I = b.Let("I", 3_i);
         auto* J = b.Let("J", 4_i);
 
         auto* u = b.Call(fn_u, U);
-        b.ir.SetName(u, "u");
-        auto* u_str = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_str, 0_u));
-        b.ir.SetName(u_str, "u_str");
-        auto* u_arr0 = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr, 0_i));
-        b.ir.SetName(u_arr0, "u_arr0");
-        auto* u_arr1 = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr, 1_i));
-        b.ir.SetName(u_arr1, "u_arr1");
-        auto* u_arrI = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr, I));
-        b.ir.SetName(u_arrI, "u_arrI");
+        b.ir->SetName(u, "u");
+        auto* u_str = b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_str, 0_u));
+        b.ir->SetName(u_str, "u_str");
+        auto* u_arr0 = b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr, 0_i));
+        b.ir->SetName(u_arr0, "u_arr0");
+        auto* u_arr1 = b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr, 1_i));
+        b.ir->SetName(u_arr1, "u_arr1");
+        auto* u_arrI = b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr, I));
+        b.ir->SetName(u_arrI, "u_arrI");
         auto* u_arr1_arr0 =
-            b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr_arr, 1_i, 0_i));
-        b.ir.SetName(u_arr1_arr0, "u_arr1_arr0");
-        auto* u_arr2_arrI = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr_arr, 2_i, I));
-        b.ir.SetName(u_arr2_arrI, "u_arr2_arrI");
-        auto* u_arrI_arr2 = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr_arr, I, 2_i));
-        b.ir.SetName(u_arrI_arr2, "u_arrI_arr2");
-        auto* u_arrI_arrJ = b.Call(fn_u, b.Access(ty.ptr<uniform, vec4<i32>>(), U_arr_arr, I, J));
-        b.ir.SetName(u_arrI_arrJ, "u_arrI_arrJ");
+            b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr_arr, 1_i, 0_i));
+        b.ir->SetName(u_arr1_arr0, "u_arr1_arr0");
+        auto* u_arr2_arrI =
+            b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr_arr, 2_i, I));
+        b.ir->SetName(u_arr2_arrI, "u_arr2_arrI");
+        auto* u_arrI_arr2 =
+            b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr_arr, I, 2_i));
+        b.ir->SetName(u_arrI_arr2, "u_arrI_arr2");
+        auto* u_arrI_arrJ = b.Call(fn_u, b.Access(ty->ptr<uniform, vec4<i32>>(), U_arr_arr, I, J));
+        b.ir->SetName(u_arrI_arrJ, "u_arrI_arrJ");
 
         auto* s = b.Call(fn_s, S);
-        b.ir.SetName(s, "s");
-        auto* s_str = b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_str, 0_u));
-        b.ir.SetName(s_str, "s_str");
-        auto* s_arr0 = b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr, 0_i));
-        b.ir.SetName(s_arr0, "s_arr0");
-        auto* s_arr1 = b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr, 1_i));
-        b.ir.SetName(s_arr1, "s_arr1");
-        auto* s_arrI = b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr, I));
-        b.ir.SetName(s_arrI, "s_arrI");
+        b.ir->SetName(s, "s");
+        auto* s_str = b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_str, 0_u));
+        b.ir->SetName(s_str, "s_str");
+        auto* s_arr0 = b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr, 0_i));
+        b.ir->SetName(s_arr0, "s_arr0");
+        auto* s_arr1 = b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr, 1_i));
+        b.ir->SetName(s_arr1, "s_arr1");
+        auto* s_arrI = b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr, I));
+        b.ir->SetName(s_arrI, "s_arrI");
         auto* s_arr1_arr0 =
-            b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr_arr, 1_i, 0_i));
-        b.ir.SetName(s_arr1_arr0, "s_arr1_arr0");
+            b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr_arr, 1_i, 0_i));
+        b.ir->SetName(s_arr1_arr0, "s_arr1_arr0");
         auto* s_arr2_arrI =
-            b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr_arr, 2_i, I));
-        b.ir.SetName(s_arr2_arrI, "s_arr2_arrI");
+            b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr_arr, 2_i, I));
+        b.ir->SetName(s_arr2_arrI, "s_arr2_arrI");
         auto* s_arrI_arr2 =
-            b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr_arr, I, 2_i));
-        b.ir.SetName(s_arrI_arr2, "s_arrI_arr2");
+            b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr_arr, I, 2_i));
+        b.ir->SetName(s_arrI_arr2, "s_arrI_arr2");
         auto* s_arrI_arrJ =
-            b.Call(fn_s, b.Access(ty.ptr<storage, vec4<i32>, read>(), S_arr_arr, I, J));
-        b.ir.SetName(s_arrI_arrJ, "s_arrI_arrJ");
+            b.Call(fn_s, b.Access(ty->ptr<storage, vec4<i32>, read>(), S_arr_arr, I, J));
+        b.ir->SetName(s_arrI_arrJ, "s_arrI_arrJ");
 
         auto* w = b.Call(fn_w, W);
-        b.ir.SetName(w, "w");
-        auto* w_str = b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_str, 0_u));
-        b.ir.SetName(w_str, "w_str");
-        auto* w_arr0 = b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr, 0_i));
-        b.ir.SetName(w_arr0, "w_arr0");
-        auto* w_arr1 = b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr, 1_i));
-        b.ir.SetName(w_arr1, "w_arr1");
-        auto* w_arrI = b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr, I));
-        b.ir.SetName(w_arrI, "w_arrI");
+        b.ir->SetName(w, "w");
+        auto* w_str = b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_str, 0_u));
+        b.ir->SetName(w_str, "w_str");
+        auto* w_arr0 = b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr, 0_i));
+        b.ir->SetName(w_arr0, "w_arr0");
+        auto* w_arr1 = b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr, 1_i));
+        b.ir->SetName(w_arr1, "w_arr1");
+        auto* w_arrI = b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr, I));
+        b.ir->SetName(w_arrI, "w_arrI");
         auto* w_arr1_arr0 =
-            b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr_arr, 1_i, 0_i));
-        b.ir.SetName(w_arr1_arr0, "w_arr1_arr0");
+            b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr_arr, 1_i, 0_i));
+        b.ir->SetName(w_arr1_arr0, "w_arr1_arr0");
         auto* w_arr2_arrI =
-            b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr_arr, 2_i, I));
-        b.ir.SetName(w_arr2_arrI, "w_arr2_arrI");
+            b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr_arr, 2_i, I));
+        b.ir->SetName(w_arr2_arrI, "w_arr2_arrI");
         auto* w_arrI_arr2 =
-            b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr_arr, I, 2_i));
-        b.ir.SetName(w_arrI_arr2, "w_arrI_arr2");
-        auto* w_arrI_arrJ = b.Call(fn_w, b.Access(ty.ptr<workgroup, vec4<i32>>(), W_arr_arr, I, J));
-        b.ir.SetName(w_arrI_arrJ, "w_arrI_arrJ");
+            b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr_arr, I, 2_i));
+        b.ir->SetName(w_arrI_arr2, "w_arrI_arr2");
+        auto* w_arrI_arrJ =
+            b.Call(fn_w, b.Access(ty->ptr<workgroup, vec4<i32>>(), W_arr_arr, I, J));
+        b.ir->SetName(w_arrI_arrJ, "w_arrI_arrJ");
 
         b.Return(fn_b);
     });
@@ -5570,41 +5576,42 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_Complex, Indexing) {
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  S = b.Var<storage, array<array<array<array<i32, 9>, 9>, 9>, 50>, read>("S");
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_i = b.FunctionParam("i", ty.i32());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_i = b.FunctionParam("i", ty->i32());
     fn_a->SetParams({fn_a_i});
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, fn_a_i); });
 
-    auto* fn_b = b.Function("b", ty.i32());
-    auto* fn_b_p = b.FunctionParam("p", ty.ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>());
+    auto* fn_b = b.Function("b", ty->i32());
+    auto* fn_b_p =
+        b.FunctionParam("p", ty->ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>());
     fn_b->SetParams({fn_b_p});
     b.Append(fn_b->Block(), [&] {
-        auto load_0 = b.Load(b.Access(ty.ptr<storage, i32, read>(), fn_b_p, 0_i, 1_i, 2_i));
+        auto load_0 = b.Load(b.Access(ty->ptr<storage, i32, read>(), fn_b_p, 0_i, 1_i, 2_i));
         auto call_0 = b.Call(fn_a, load_0);
         auto call_1 = b.Call(fn_a, 3_i);
-        auto load_1 = b.Load(b.Access(ty.ptr<storage, i32, read>(), fn_b_p, call_1, 4_i, 5_i));
+        auto load_1 = b.Load(b.Access(ty->ptr<storage, i32, read>(), fn_b_p, call_1, 4_i, 5_i));
         auto call_2 = b.Call(fn_a, load_1);
         auto call_3 = b.Call(fn_a, 7_i);
-        auto load_2 = b.Load(b.Access(ty.ptr<storage, i32, read>(), fn_b_p, 6_i, call_3, 8_i));
+        auto load_2 = b.Load(b.Access(ty->ptr<storage, i32, read>(), fn_b_p, 6_i, call_3, 8_i));
         auto call_4 = b.Call(fn_a, load_2);
         auto load_3 =
-            b.Load(b.Access(ty.ptr<storage, i32, read>(), fn_b_p, call_0, call_2, call_4));
+            b.Load(b.Access(ty->ptr<storage, i32, read>(), fn_b_p, call_0, call_2, call_4));
 
         b.Return(fn_b, load_3);
     });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] {
         auto* access =
-            b.Access(ty.ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>(), S, 42_i);
+            b.Access(ty->ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>(), S, 42_i);
         auto* v = b.Call(fn_b, access);
-        b.ir.SetName(v, "v");
+        b.ir->SetName(v, "v");
         b.Return(fn_c);
     });
 
@@ -5694,46 +5701,47 @@ $B1: {  # root
 
 TEST_F(IR_DirectVariableAccessTest_Complex, IndexingInPtrCall) {
     Var* S = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  S = b.Var<storage, array<array<array<array<i32, 9>, 9>, 9>, 50>, read>("S");
                  S->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_i = b.FunctionParam("i", ty.ptr<storage, i32, read>());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_i = b.FunctionParam("i", ty->ptr<storage, i32, read>());
     fn_a->SetParams({
-        b.FunctionParam("pre", ty.i32()),
+        b.FunctionParam("pre", ty->i32()),
         fn_a_i,
-        b.FunctionParam("post", ty.i32()),
+        b.FunctionParam("post", ty->i32()),
     });
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, b.Load(fn_a_i)); });
 
-    auto* fn_b = b.Function("b", ty.i32());
-    auto* fn_b_p = b.FunctionParam("p", ty.ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>());
+    auto* fn_b = b.Function("b", ty->i32());
+    auto* fn_b_p =
+        b.FunctionParam("p", ty->ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>());
     fn_b->SetParams({fn_b_p});
     b.Append(fn_b->Block(), [&] {
-        auto access_0 = b.Access(ty.ptr<storage, i32, read>(), fn_b_p, 0_i, 1_i, 2_i);
+        auto access_0 = b.Access(ty->ptr<storage, i32, read>(), fn_b_p, 0_i, 1_i, 2_i);
         auto call_0 = b.Call(fn_a, 20_i, access_0, 30_i);
 
-        auto access_1 = b.Access(ty.ptr<storage, i32, read>(), fn_b_p, 3_i, 4_i, 5_i);
+        auto access_1 = b.Access(ty->ptr<storage, i32, read>(), fn_b_p, 3_i, 4_i, 5_i);
         auto call_1 = b.Call(fn_a, 40_i, access_1, 50_i);
 
-        auto access_2 = b.Access(ty.ptr<storage, i32, read>(), fn_b_p, 6_i, 7_i, 8_i);
+        auto access_2 = b.Access(ty->ptr<storage, i32, read>(), fn_b_p, 6_i, 7_i, 8_i);
         auto call_2 = b.Call(fn_a, 60_i, access_2, 70_i);
 
-        auto access_3 = b.Access(ty.ptr<storage, i32, read>(), fn_b_p, call_0, call_1, call_2);
+        auto access_3 = b.Access(ty->ptr<storage, i32, read>(), fn_b_p, call_0, call_1, call_2);
         auto call_3 = b.Call(fn_a, 10_i, access_3, 80_i);
 
         b.Return(fn_b, call_3);
     });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] {
         auto* access =
-            b.Access(ty.ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>(), S, 42_i);
+            b.Access(ty->ptr<storage, array<array<array<i32, 9>, 9>, 9>, read>(), S, 42_i);
         auto* v = b.Call(fn_b, access);
-        b.ir.SetName(v, "v");
+        b.ir->SetName(v, "v");
         b.Return(fn_c);
     });
 
@@ -5832,7 +5840,7 @@ $B1: {  # root
 TEST_F(IR_DirectVariableAccessTest_Complex, IndexingDualPointers) {
     Var* S = nullptr;
     Var* U = nullptr;
-    b.Append(b.ir.root_block,
+    b.Append(b.ir->root_block,
              [&] {  //
                  S = b.Var<storage, array<array<array<i32, 9>, 9>, 50>, read>("S");
                  S->SetBindingPoint(0, 0);
@@ -5840,34 +5848,34 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingDualPointers) {
                  U->SetBindingPoint(0, 0);
              });
 
-    auto* fn_a = b.Function("a", ty.i32());
-    auto* fn_a_i = b.FunctionParam("i", ty.i32());
+    auto* fn_a = b.Function("a", ty->i32());
+    auto* fn_a_i = b.FunctionParam("i", ty->i32());
     fn_a->SetParams({fn_a_i});
     b.Append(fn_a->Block(), [&] { b.Return(fn_a, fn_a_i); });
 
-    auto* fn_b = b.Function("b", ty.i32());
-    auto* fn_b_s = b.FunctionParam("s", ty.ptr<storage, array<array<i32, 9>, 9>, read>());
-    auto* fn_b_u = b.FunctionParam("u", ty.ptr<uniform, array<array<vec4<i32>, 9>, 9>, read>());
+    auto* fn_b = b.Function("b", ty->i32());
+    auto* fn_b_s = b.FunctionParam("s", ty->ptr<storage, array<array<i32, 9>, 9>, read>());
+    auto* fn_b_u = b.FunctionParam("u", ty->ptr<uniform, array<array<vec4<i32>, 9>, 9>, read>());
     fn_b->SetParams({fn_b_s, fn_b_u});
     b.Append(fn_b->Block(), [&] {
-        auto access_0 = b.Access(ty.ptr<uniform, vec4<i32>, read>(), fn_b_u, 0_i, 1_i);
+        auto access_0 = b.Access(ty->ptr<uniform, vec4<i32>, read>(), fn_b_u, 0_i, 1_i);
         auto call_0 = b.Call(fn_a, b.LoadVectorElement(access_0, 0_u));
         auto call_1 = b.Call(fn_a, 3_i);
 
-        auto access_1 = b.Access(ty.ptr<uniform, vec4<i32>, read>(), fn_b_u, call_1, 4_i);
+        auto access_1 = b.Access(ty->ptr<uniform, vec4<i32>, read>(), fn_b_u, call_1, 4_i);
         auto call_2 = b.Call(fn_a, b.LoadVectorElement(access_1, 1_u));
 
-        auto access_2 = b.Access(ty.ptr<storage, i32, read>(), fn_b_s, call_0, call_2);
+        auto access_2 = b.Access(ty->ptr<storage, i32, read>(), fn_b_s, call_0, call_2);
 
         b.Return(fn_b, b.Load(access_2));
     });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] {
-        auto* access_0 = b.Access(ty.ptr<storage, array<array<i32, 9>, 9>, read>(), S, 42_i);
-        auto* access_1 = b.Access(ty.ptr<uniform, array<array<vec4<i32>, 9>, 9>, read>(), U, 24_i);
+        auto* access_0 = b.Access(ty->ptr<storage, array<array<i32, 9>, 9>, read>(), S, 42_i);
+        auto* access_1 = b.Access(ty->ptr<uniform, array<array<vec4<i32>, 9>, 9>, read>(), U, 24_i);
         auto* v = b.Call(fn_b, access_0, access_1);
-        b.ir.SetName(v, "v");
+        b.ir->SetName(v, "v");
         b.Return(fn_c);
     });
 

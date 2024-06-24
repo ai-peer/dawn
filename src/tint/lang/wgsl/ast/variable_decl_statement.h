@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_VARIABLE_DECL_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_VARIABLE_DECL_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
 #include "src/tint/lang/wgsl/ast/variable.h"
 
@@ -56,7 +57,7 @@ class VariableDeclStatement final : public Castable<VariableDeclStatement, State
     const VariableDeclStatement* Clone(CloneContext& ctx) const override;
 
     /// The variable
-    const Variable* const variable;
+    const raw_ptr<const Variable> variable;
 };
 
 }  // namespace tint::ast

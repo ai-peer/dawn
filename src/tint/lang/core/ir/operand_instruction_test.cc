@@ -38,7 +38,7 @@ using IR_OperandInstructionTest = IRTestHelper;
 
 TEST_F(IR_OperandInstructionTest, Destroy) {
     auto* block = b.Block();
-    auto* inst = b.Add(ty.i32(), 1_i, 2_i);
+    auto* inst = b.Add(ty->i32(), 1_i, 2_i);
     block->Append(inst);
     auto* lhs = inst->LHS();
     auto* rhs = inst->RHS();
@@ -58,7 +58,7 @@ TEST_F(IR_OperandInstructionTest, Destroy) {
 TEST_F(IR_OperandInstructionTest, ClearOperands_WithNullOperand) {
     auto* block = b.Block();
     // The var initializer is a nullptr
-    auto* inst = b.Var(ty.ptr<private_, f32>());
+    auto* inst = b.Var(ty->ptr<private_, f32>());
     block->Append(inst);
 
     inst->Destroy();
@@ -67,7 +67,7 @@ TEST_F(IR_OperandInstructionTest, ClearOperands_WithNullOperand) {
 }
 
 TEST_F(IR_OperandInstructionTest, SetOperands_WithNullOperand) {
-    auto* inst = b.Var(ty.ptr<private_, f32>());
+    auto* inst = b.Var(ty->ptr<private_, f32>());
     Vector<Value*, 1> ops;
     ops.Push(nullptr);
 

@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
@@ -46,15 +47,15 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// Process the module.
     void Process() {
         // Find and replace the instructions that need to be modified.
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* binary = inst->As<core::ir::CoreBinary>()) {
                 if (binary->LHS()->Type()->Is<core::type::Matrix>() ||
                     binary->RHS()->Type()->Is<core::type::Matrix>()) {
@@ -168,7 +169,7 @@ Result<SuccessType> HandleMatrixArithmetic(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)}.Process();
 
     return Success;
 }

@@ -88,7 +88,7 @@ TypeAndCount Matrix::Elements(const Type* /* type_if_invalid = nullptr */,
 }
 
 const Vector* Matrix::Element(uint32_t index) const {
-    return index < columns_ ? column_type_ : nullptr;
+    return index < columns_ ? column_type_.get() : nullptr;
 }
 
 Matrix* Matrix::Clone(CloneContext& ctx) const {

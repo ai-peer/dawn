@@ -46,7 +46,7 @@ TEST_F(WGSLParserTest, Statement_Call) {
     EXPECT_EQ(e->source.range.end.column, 2u);
 
     ASSERT_TRUE(e->Is<ast::CallStatement>());
-    auto* c = e->As<ast::CallStatement>()->expr;
+    auto* c = e->As<ast::CallStatement>()->expr.get();
 
     ast::CheckIdentifier(c->target, "a");
 
@@ -62,7 +62,7 @@ TEST_F(WGSLParserTest, Statement_Call_WithParams) {
     EXPECT_FALSE(e.errored);
 
     ASSERT_TRUE(e->Is<ast::CallStatement>());
-    auto* c = e->As<ast::CallStatement>()->expr;
+    auto* c = e->As<ast::CallStatement>()->expr.get();
 
     ast::CheckIdentifier(c->target, "a");
 
@@ -81,7 +81,7 @@ TEST_F(WGSLParserTest, Statement_Call_WithParams_TrailingComma) {
     EXPECT_FALSE(e.errored);
 
     ASSERT_TRUE(e->Is<ast::CallStatement>());
-    auto* c = e->As<ast::CallStatement>()->expr;
+    auto* c = e->As<ast::CallStatement>()->expr.get();
 
     ast::CheckIdentifier(c->target, "a");
 

@@ -34,7 +34,7 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, Switch) {
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
@@ -66,7 +66,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, SwitchMixedDefault) {
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
@@ -105,7 +105,7 @@ TEST_F(HlslWriterTest, SwitchOnlyDefaultCaseNoSideEffectsConditionDXC) {
     //   }
     // }
 
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
@@ -155,16 +155,16 @@ TEST_F(HlslWriterTest, SwitchOnlyDefaultCaseSideEffectsConditionDXC) {
 
     auto* global = b.Var<private_>("global", b.Zero<i32>());
     auto* a = b.Var<private_>("a", b.Zero<i32>());
-    b.ir.root_block->Append(global);
-    b.ir.root_block->Append(a);
+    b.ir->root_block->Append(global);
+    b.ir->root_block->Append(a);
 
-    auto* bar = b.Function("bar", ty.i32());
+    auto* bar = b.Function("bar", ty->i32());
     b.Append(bar->Block(), [&] {
         b.Store(global, 84_i);
         b.Return(bar, b.Load(global));
     });
 
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
@@ -213,7 +213,7 @@ TEST_F(HlslWriterTest, SwitchOnlyDefaultCaseNoSideEffectsConditionFXC) {
     //   }
     // }
 
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
@@ -267,16 +267,16 @@ TEST_F(HlslWriterTest, SwitchOnlyDefaultCaseSideEffectsConditionFXC) {
 
     auto* global = b.Var<private_>("global", b.Zero<i32>());
     auto* a = b.Var<private_>("a", b.Zero<i32>());
-    b.ir.root_block->Append(global);
-    b.ir.root_block->Append(a);
+    b.ir->root_block->Append(global);
+    b.ir->root_block->Append(a);
 
-    auto* bar = b.Function("bar", ty.i32());
+    auto* bar = b.Function("bar", ty->i32());
     b.Append(bar->Block(), [&] {
         b.Store(global, 84_i);
         b.Return(bar, b.Load(global));
     });
 
-    auto* f = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {

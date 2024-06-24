@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_INSTRUCTION_RESULT_H_
 #define SRC_TINT_LANG_CORE_IR_INSTRUCTION_RESULT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/ir/value.h"
 #include "src/tint/utils/text/string_stream.h"
 
@@ -67,8 +68,8 @@ class InstructionResult : public Castable<InstructionResult, Value> {
     const ir::Instruction* Instruction() const { return instruction_; }
 
   private:
-    ir::Instruction* instruction_ = nullptr;
-    const core::type::Type* type_ = nullptr;
+    raw_ptr<ir::Instruction> instruction_ = nullptr;
+    raw_ptr<const core::type::Type> type_ = nullptr;
 };
 
 }  // namespace tint::core::ir

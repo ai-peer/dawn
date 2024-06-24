@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
 #define SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/ir/value.h"
 #include "src/tint/utils/rtti/castable.h"
 
@@ -64,9 +65,9 @@ class BlockParam : public Castable<BlockParam, Value> {
 
   private:
     /// the type of the parameter
-    const core::type::Type* type_ = nullptr;
+    raw_ptr<const core::type::Type> type_ = nullptr;
     /// the block that the parameter belongs to
-    MultiInBlock* block_ = nullptr;
+    raw_ptr<MultiInBlock> block_ = nullptr;
 };
 
 }  // namespace tint::core::ir

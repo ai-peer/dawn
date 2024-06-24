@@ -32,6 +32,8 @@
 #include <string>
 #include <string_view>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/binary_op.h"
 #include "src/tint/lang/core/ir/binary.h"
 #include "src/tint/lang/core/ir/block.h"
@@ -58,7 +60,7 @@ class Disassembler {
     /// A reference to an instruction's operand or result.
     struct IndexedValue {
         /// The instruction that is using the value;
-        const Instruction* instruction = nullptr;
+        raw_ptr<const Instruction> instruction = nullptr;
         /// The index of the operand that is the value being used.
         size_t index = 0u;
 
@@ -178,7 +180,7 @@ class Disassembler {
         }
 
       private:
-        Disassembler* dis_ = nullptr;
+        raw_ptr<Disassembler> dis_ = nullptr;
         Source::Location begin_;
     };
 
@@ -250,7 +252,7 @@ class Disassembler {
     void EmitOperandList(const Instruction* inst, size_t start_index, size_t count);
     void EmitInstructionName(const Instruction* inst);
 
-    const Module& mod_;
+    const raw_ref<const Module> mod_;
     StyledText out_;
     std::shared_ptr<Source::File> file_;
     uint32_t indent_size_ = 0;

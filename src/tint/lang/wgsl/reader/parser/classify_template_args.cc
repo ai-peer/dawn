@@ -29,6 +29,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/ice/ice.h"
 
@@ -76,7 +77,7 @@ void ClassifyTemplateArguments(std::vector<Token>& tokens) {
     // A stack of '<' tokens.
     // Used to pair '<' and '>' tokens at the same expression depth.
     struct StackEntry {
-        Token* token;         // A pointer to the opening '<' token
+        raw_ptr<Token> token;  // A pointer to the opening '<' token
         uint64_t expr_depth;  // The value of 'expr_depth' for the opening '<'
     };
     Vector<StackEntry, 16> stack;

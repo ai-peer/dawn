@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_WRITER_AST_PRINTER_AST_PRINTER_H_
 #define SRC_TINT_LANG_WGSL_WRITER_AST_PRINTER_AST_PRINTER_H_
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/binary_op.h"
 #include "src/tint/utils/generator/text_generator.h"
 #include "src/tint/utils/text/string_stream.h"
@@ -229,7 +230,7 @@ class ASTPrinter : public tint::TextGenerator {
     void EmitAttributes(StringStream& out, VectorRef<const ast::Attribute*> attrs);
 
   private:
-    const Program& program_;
+    const raw_ref<const Program> program_;
 };
 
 }  // namespace tint::wgsl::writer

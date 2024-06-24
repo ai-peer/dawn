@@ -51,7 +51,7 @@ TEST_P(Arithmetic, Scalar) {
     auto params = GetParam();
 
     auto* arg = b.FunctionParam("arg", MakeScalarType(params.type));
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({arg});
     b.Append(func->Block(), [&] {
         auto* result = b.Unary(params.op, MakeScalarType(params.type), arg);
@@ -66,7 +66,7 @@ TEST_P(Arithmetic, Vector) {
     auto params = GetParam();
 
     auto* arg = b.FunctionParam("arg", MakeVectorType(params.type));
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({arg});
     b.Append(func->Block(), [&] {
         auto* result = b.Unary(params.op, MakeVectorType(params.type), arg);

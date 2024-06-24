@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_SEM_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 #include "src/tint/lang/wgsl/sem/node.h"
 
@@ -57,10 +58,10 @@ class Expression : public Castable<Expression, Node> {
 
   protected:
     /// The AST expression node for this semantic expression
-    const ast::Expression* const declaration_;
+    const raw_ptr<const ast::Expression> declaration_;
 
   private:
-    const Statement* const statement_;
+    const raw_ptr<const Statement> statement_;
 };
 
 }  // namespace tint::sem

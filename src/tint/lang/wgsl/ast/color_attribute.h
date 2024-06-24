@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 
 // Forward declarations
@@ -60,7 +61,7 @@ class ColorAttribute final : public Castable<ColorAttribute, Attribute> {
     const ColorAttribute* Clone(CloneContext& ctx) const override;
 
     /// The index value expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

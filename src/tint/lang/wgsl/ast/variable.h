@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
@@ -92,7 +93,7 @@ class Variable : public Castable<Variable, Node> {
     virtual const char* Kind() const = 0;
 
     /// The variable name
-    const Identifier* const name;
+    const raw_ptr<const Identifier> name;
 
     /// The declared variable type. This is null if the type is inferred, e.g.:
     ///   let f = 1.0;
@@ -100,7 +101,7 @@ class Variable : public Castable<Variable, Node> {
     const Type type;
 
     /// The initializer expression or nullptr if none set
-    const Expression* const initializer;
+    const raw_ptr<const Expression> initializer;
 
     /// The attributes attached to this variable
     const tint::Vector<const Attribute*, 2> attributes;

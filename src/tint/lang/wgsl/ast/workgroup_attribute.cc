@@ -53,9 +53,9 @@ std::string WorkgroupAttribute::Name() const {
 const WorkgroupAttribute* WorkgroupAttribute::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* x_ = ctx.Clone(x);
-    auto* y_ = ctx.Clone(y);
-    auto* z_ = ctx.Clone(z);
+    auto* x_ = ctx.Clone(x.get());
+    auto* y_ = ctx.Clone(y.get());
+    auto* z_ = ctx.Clone(z.get());
     return ctx.dst->create<WorkgroupAttribute>(src, x_, y_, z_);
 }
 

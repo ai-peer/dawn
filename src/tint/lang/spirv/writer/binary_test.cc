@@ -80,7 +80,7 @@ using Arithmetic_Bitwise = SpirvWriterTestWithParam<BinaryTestCase>;
 TEST_P(Arithmetic_Bitwise, Scalar) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* lhs = MakeScalarValue(params.lhs_type);
         auto* rhs = MakeScalarValue(params.rhs_type);
@@ -95,7 +95,7 @@ TEST_P(Arithmetic_Bitwise, Scalar) {
 TEST_P(Arithmetic_Bitwise, Vector) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* lhs = MakeVectorValue(params.lhs_type);
         auto* rhs = MakeVectorValue(params.rhs_type);
@@ -155,12 +155,12 @@ INSTANTIATE_TEST_SUITE_P(
                     BinaryTestCase{kBool, core::BinaryOp::kOr, "OpLogicalOr", "bool"}));
 
 TEST_F(SpirvWriterTest, Binary_ScalarTimesVector_F32) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({scalar, vector});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Multiply(ty->vec4<f32>(), scalar, vector);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -170,12 +170,12 @@ TEST_F(SpirvWriterTest, Binary_ScalarTimesVector_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_VectorTimesScalar_F32) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({scalar, vector});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Multiply(ty->vec4<f32>(), vector, scalar);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -185,12 +185,12 @@ TEST_F(SpirvWriterTest, Binary_VectorTimesScalar_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_ScalarTimesMatrix_F32) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* matrix = b.FunctionParam("matrix", ty.mat3x4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* matrix = b.FunctionParam("matrix", ty->mat3x4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({scalar, matrix});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.mat3x4<f32>(), scalar, matrix);
+        auto* result = b.Multiply(ty->mat3x4<f32>(), scalar, matrix);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -200,12 +200,12 @@ TEST_F(SpirvWriterTest, Binary_ScalarTimesMatrix_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_MatrixTimesScalar_F32) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* matrix = b.FunctionParam("matrix", ty.mat3x4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* matrix = b.FunctionParam("matrix", ty->mat3x4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({scalar, matrix});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.mat3x4<f32>(), matrix, scalar);
+        auto* result = b.Multiply(ty->mat3x4<f32>(), matrix, scalar);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -215,12 +215,12 @@ TEST_F(SpirvWriterTest, Binary_MatrixTimesScalar_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_VectorTimesMatrix_F32) {
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* matrix = b.FunctionParam("matrix", ty.mat3x4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* matrix = b.FunctionParam("matrix", ty->mat3x4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({vector, matrix});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec3<f32>(), vector, matrix);
+        auto* result = b.Multiply(ty->vec3<f32>(), vector, matrix);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -230,12 +230,12 @@ TEST_F(SpirvWriterTest, Binary_VectorTimesMatrix_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_MatrixTimesVector_F32) {
-    auto* vector = b.FunctionParam("vector", ty.vec3<f32>());
-    auto* matrix = b.FunctionParam("matrix", ty.mat3x4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* vector = b.FunctionParam("vector", ty->vec3<f32>());
+    auto* matrix = b.FunctionParam("matrix", ty->mat3x4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({vector, matrix});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<f32>(), matrix, vector);
+        auto* result = b.Multiply(ty->vec4<f32>(), matrix, vector);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -245,12 +245,12 @@ TEST_F(SpirvWriterTest, Binary_MatrixTimesVector_F32) {
 }
 
 TEST_F(SpirvWriterTest, Binary_MatrixTimesMatrix_F32) {
-    auto* mat1 = b.FunctionParam("mat1", ty.mat4x3<f32>());
-    auto* mat2 = b.FunctionParam("mat2", ty.mat3x4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* mat1 = b.FunctionParam("mat1", ty->mat4x3<f32>());
+    auto* mat2 = b.FunctionParam("mat2", ty->mat3x4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({mat1, mat2});
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.mat3x3<f32>(), mat1, mat2);
+        auto* result = b.Multiply(ty->mat3x3<f32>(), mat1, mat2);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -263,11 +263,11 @@ using Comparison = SpirvWriterTestWithParam<BinaryTestCase>;
 TEST_P(Comparison, Scalar) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* lhs = MakeScalarValue(params.lhs_type);
         auto* rhs = MakeScalarValue(params.rhs_type);
-        auto* result = b.Binary(params.op, ty.bool_(), lhs, rhs);
+        auto* result = b.Binary(params.op, ty->bool_(), lhs, rhs);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -279,11 +279,11 @@ TEST_P(Comparison, Scalar) {
 TEST_P(Comparison, Vector) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* lhs = MakeVectorValue(params.lhs_type);
         auto* rhs = MakeVectorValue(params.rhs_type);
-        auto* result = b.Binary(params.op, ty.vec2<bool>(), lhs, rhs);
+        auto* result = b.Binary(params.op, ty->vec2<bool>(), lhs, rhs);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -338,11 +338,11 @@ INSTANTIATE_TEST_SUITE_P(
                     BinaryTestCase{kBool, core::BinaryOp::kNotEqual, "OpLogicalNotEqual", "bool"}));
 
 TEST_F(SpirvWriterTest, Binary_Chain) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
-        auto* sub = b.Subtract(ty.i32(), 1_i, 2_i);
-        auto* add = b.Add(ty.i32(), sub, sub);
+        auto* sub = b.Subtract(ty->i32(), 1_i, 2_i);
+        auto* add = b.Add(ty->i32(), sub, sub);
         b.Return(func);
         mod.SetName(sub, "sub");
         mod.SetName(add, "add");
@@ -355,12 +355,12 @@ TEST_F(SpirvWriterTest, Binary_Chain) {
 
 TEST_F(SpirvWriterTest, Divide_u32_u32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.u32()));
-    args.Push(b.FunctionParam("rhs", ty.u32()));
-    auto* func = b.Function("foo", ty.u32());
+    args.Push(b.FunctionParam("lhs", ty->u32()));
+    args.Push(b.FunctionParam("rhs", ty->u32()));
+    auto* func = b.Function("foo", ty->u32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kDivide, ty.u32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty->u32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -391,12 +391,12 @@ TEST_F(SpirvWriterTest, Divide_u32_u32) {
 
 TEST_F(SpirvWriterTest, Divide_i32_i32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.i32()));
-    args.Push(b.FunctionParam("rhs", ty.i32()));
-    auto* func = b.Function("foo", ty.i32());
+    args.Push(b.FunctionParam("lhs", ty->i32()));
+    args.Push(b.FunctionParam("rhs", ty->i32()));
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kDivide, ty.i32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty->i32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -431,12 +431,12 @@ TEST_F(SpirvWriterTest, Divide_i32_i32) {
 
 TEST_F(SpirvWriterTest, Divide_i32_vec4i) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.i32()));
-    args.Push(b.FunctionParam("rhs", ty.vec4<i32>()));
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    args.Push(b.FunctionParam("lhs", ty->i32()));
+    args.Push(b.FunctionParam("rhs", ty->vec4<i32>()));
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty->vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -473,12 +473,12 @@ TEST_F(SpirvWriterTest, Divide_i32_vec4i) {
 
 TEST_F(SpirvWriterTest, Divide_vec4i_i32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.vec4<i32>()));
-    args.Push(b.FunctionParam("rhs", ty.i32()));
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    args.Push(b.FunctionParam("lhs", ty->vec4<i32>()));
+    args.Push(b.FunctionParam("rhs", ty->i32()));
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty->vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -515,12 +515,12 @@ TEST_F(SpirvWriterTest, Divide_vec4i_i32) {
 
 TEST_F(SpirvWriterTest, Modulo_u32_u32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.u32()));
-    args.Push(b.FunctionParam("rhs", ty.u32()));
-    auto* func = b.Function("foo", ty.u32());
+    args.Push(b.FunctionParam("lhs", ty->u32()));
+    args.Push(b.FunctionParam("rhs", ty->u32()));
+    auto* func = b.Function("foo", ty->u32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kModulo, ty.u32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty->u32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -553,12 +553,12 @@ TEST_F(SpirvWriterTest, Modulo_u32_u32) {
 
 TEST_F(SpirvWriterTest, Modulo_i32_i32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.i32()));
-    args.Push(b.FunctionParam("rhs", ty.i32()));
-    auto* func = b.Function("foo", ty.i32());
+    args.Push(b.FunctionParam("lhs", ty->i32()));
+    args.Push(b.FunctionParam("rhs", ty->i32()));
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kModulo, ty.i32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty->i32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -595,12 +595,12 @@ TEST_F(SpirvWriterTest, Modulo_i32_i32) {
 
 TEST_F(SpirvWriterTest, Modulo_i32_vec4i) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.i32()));
-    args.Push(b.FunctionParam("rhs", ty.vec4<i32>()));
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    args.Push(b.FunctionParam("lhs", ty->i32()));
+    args.Push(b.FunctionParam("rhs", ty->vec4<i32>()));
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty->vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -639,12 +639,12 @@ TEST_F(SpirvWriterTest, Modulo_i32_vec4i) {
 
 TEST_F(SpirvWriterTest, Modulo_vec4i_i32) {
     Vector<core::ir::FunctionParam*, 4> args;
-    args.Push(b.FunctionParam("lhs", ty.vec4<i32>()));
-    args.Push(b.FunctionParam("rhs", ty.i32()));
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    args.Push(b.FunctionParam("lhs", ty->vec4<i32>()));
+    args.Push(b.FunctionParam("rhs", ty->i32()));
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty->vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });

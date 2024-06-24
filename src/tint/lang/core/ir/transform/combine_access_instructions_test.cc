@@ -40,29 +40,29 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_CombineAccessInstructionsTest = TransformTest;
 
 TEST_F(IR_CombineAccessInstructionsTest, NoModify_NoChaining) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_root = b.Access(ty.ptr(uniform, structure), buffer);
+        auto* access_root = b.Access(ty->ptr(uniform, structure), buffer);
         b.Load(access_root);
 
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
         b.Load(access_arr);
 
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), buffer, 0_u, 1_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), buffer, 0_u, 1_u);
         b.Load(access_mat);
 
-        auto* access_vec = b.Access(ty.ptr(uniform, vec), buffer, 0_u, 1_u, 2_u);
+        auto* access_vec = b.Access(ty->ptr(uniform, vec), buffer, 0_u, 1_u, 2_u);
         b.Load(access_vec);
 
         b.Return(func);
@@ -101,22 +101,22 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, SimpleChain) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
-        auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 2_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
+        auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 2_u);
         b.Load(access_vec);
 
         b.Return(func);
@@ -167,20 +167,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, NoIndices_Root) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_root = b.Access(ty.ptr(uniform, structure), buffer);
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), access_root, 0_u);
+        auto* access_root = b.Access(ty->ptr(uniform, structure), buffer);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), access_root, 0_u);
         b.Load(access_arr);
 
         b.Return(func);
@@ -230,21 +230,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, NoIndices_Middle) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
-        auto* access_copy = b.Access(ty.ptr(uniform, arr), access_arr);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_copy, 1_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
+        auto* access_copy = b.Access(ty->ptr(uniform, arr), access_arr);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_copy, 1_u);
         b.Load(access_mat);
 
         b.Return(func);
@@ -295,21 +295,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, NoIndices_End) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
-        auto* access_copy = b.Access(ty.ptr(uniform, mat), access_mat);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
+        auto* access_copy = b.Access(ty->ptr(uniform, mat), access_mat);
         b.Load(access_copy);
 
         b.Return(func);
@@ -360,34 +360,34 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, MutipleChains_FromRoot) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
 
         {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 2_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 2_u);
             b.Load(access_vec);
         }
         {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 2_u);
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 0_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 2_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 0_u);
             b.Load(access_vec);
         }
         {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 3_u);
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 1_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 3_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 1_u);
             b.Load(access_vec);
         }
 
@@ -449,32 +449,32 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, MutipleChains_FromMiddle) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
 
         {
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 2_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 2_u);
             b.Load(access_vec);
         }
         {
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 0_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 0_u);
             b.Load(access_vec);
         }
         {
-            auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 1_u);
             b.Load(access_vec);
         }
 
@@ -534,23 +534,23 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, OtherUses_Root) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
         b.Load(access_arr);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
-        auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 2_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
+        auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 2_u);
         b.Load(access_vec);
 
         b.Return(func);
@@ -604,23 +604,23 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, OtherUses_Middle) {
-    auto* vec = ty.vec3<f32>();
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* vec = ty->vec3<f32>();
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
-        auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
+        auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
         b.Load(access_mat);
-        auto* access_vec = b.Access(ty.ptr(uniform, vec), access_mat, 2_u);
+        auto* access_vec = b.Access(ty->ptr(uniform, vec), access_mat, 2_u);
         b.Load(access_vec);
 
         b.Return(func);
@@ -674,13 +674,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, AccessResultUsesAsAccessIndex) {
-    auto* func = b.Function("foo", ty.f32());
-    auto* indices = b.FunctionParam("indices", ty.array<u32, 4>());
-    auto* values = b.FunctionParam("values", ty.array<f32, 4>());
+    auto* func = b.Function("foo", ty->f32());
+    auto* indices = b.FunctionParam("indices", ty->array<u32, 4>());
+    auto* values = b.FunctionParam("values", ty->array<f32, 4>());
     func->SetParams({indices, values});
     b.Append(func->Block(), [&] {
-        auto* access_index = b.Access(ty.u32(), indices, 1_u);
-        auto* access_value = b.Access(ty.f32(), values, access_index);
+        auto* access_index = b.Access(ty->u32(), indices, 1_u);
+        auto* access_value = b.Access(ty->f32(), values, access_index);
         b.Return(func, access_value);
     });
 
@@ -703,27 +703,27 @@ TEST_F(IR_CombineAccessInstructionsTest, AccessResultUsesAsAccessIndex) {
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, UseInDifferentBlock_If) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
         auto* ifelse = b.If(true);
         b.Append(ifelse->True(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 1_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 1_u);
             b.Load(access_mat);
             b.ExitIf(ifelse);
         });
         b.Append(ifelse->False(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 2_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 2_u);
             b.Load(access_mat);
             b.ExitIf(ifelse);
         });
@@ -794,27 +794,27 @@ $B1: {  # root
 }
 
 TEST_F(IR_CombineAccessInstructionsTest, UseInDifferentBlock_Loop) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* access_arr = b.Access(ty.ptr(uniform, arr), buffer, 0_u);
+        auto* access_arr = b.Access(ty->ptr(uniform, arr), buffer, 0_u);
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 2_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 2_u);
             b.Load(access_mat);
             b.Continue(loop);
         });
         b.Append(loop->Continuing(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat), access_arr, 3_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat), access_arr, 3_u);
             b.Load(access_mat);
             b.BreakIf(loop, true);
         });

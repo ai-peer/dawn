@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,16 +44,16 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// Map from a type to a helper function that will store a decomposed value.
     Hashmap<const core::type::Type*, Function*, 4> helpers{};
@@ -61,7 +62,7 @@ struct State {
     void Process() {
         // Find host-visible stores of types that contain padding bytes.
         Vector<Store*, 8> worklist;
-        for (auto inst : ir.Instructions()) {
+        for (auto inst : ir->Instructions()) {
             if (auto* store = inst->As<Store>()) {
                 auto* ptr = store->To()->Type()->As<core::type::Pointer>();
                 if (ptr->AddressSpace() == core::AddressSpace::kStorage &&
@@ -125,8 +126,8 @@ struct State {
 
         // The type contains padding bytes, so call a helper function that decomposes the accesses.
         auto* helper = helpers.GetOrAdd(store_type, [&] {
-            auto* func = b.Function("tint_store_and_preserve_padding", ty.void_());
-            auto* target = b.FunctionParam("target", ty.ptr(storage, store_type));
+            auto* func = b.Function("tint_store_and_preserve_padding", ty->void_());
+            auto* target = b.FunctionParam("target", ty->ptr(storage, store_type));
             auto* value_param = b.FunctionParam("value_param", store_type);
             func->SetParams({target, value_param});
 
@@ -135,9 +136,9 @@ struct State {
                     store_type,  //
                     [&](const type::Array* arr) {
                         b.LoopRange(
-                            ty, 0_u, u32(arr->ConstantCount().value()), 1_u, [&](Value* idx) {
+                            *ty, 0_u, u32(arr->ConstantCount().value()), 1_u, [&](Value* idx) {
                                 auto* el_ptr =
-                                    b.Access(ty.ptr(storage, arr->ElemType()), target, idx);
+                                    b.Access(ty->ptr(storage, arr->ElemType()), target, idx);
                                 auto* el_value = b.Access(arr->ElemType(), value_param, idx);
                                 MakeStore(el_ptr->Result(0), el_value->Result(0));
                             });
@@ -145,14 +146,14 @@ struct State {
                     [&](const type::Matrix* mat) {
                         for (uint32_t i = 0; i < mat->columns(); i++) {
                             auto* col_ptr =
-                                b.Access(ty.ptr(storage, mat->ColumnType()), target, u32(i));
+                                b.Access(ty->ptr(storage, mat->ColumnType()), target, u32(i));
                             auto* col_value = b.Access(mat->ColumnType(), value_param, u32(i));
                             MakeStore(col_ptr->Result(0), col_value->Result(0));
                         }
                     },
                     [&](const type::Struct* str) {
                         for (auto* member : str->Members()) {
-                            auto* sub_ptr = b.Access(ty.ptr(storage, member->Type()), target,
+                            auto* sub_ptr = b.Access(ty->ptr(storage, member->Type()), target,
                                                      u32(member->Index()));
                             auto* sub_value =
                                 b.Access(member->Type(), value_param, u32(member->Index()));
@@ -178,7 +179,7 @@ Result<SuccessType> PreservePadding(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

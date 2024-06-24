@@ -44,7 +44,7 @@ Alias::~Alias() = default;
 const Alias* Alias::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto sym = ctx.Clone(name);
+    auto sym = ctx.Clone(name.get());
     auto ty = ctx.Clone(type);
     return ctx.dst->create<Alias>(src, sym, ty);
 }

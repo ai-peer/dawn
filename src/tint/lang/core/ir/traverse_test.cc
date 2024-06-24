@@ -42,7 +42,7 @@ using IR_TraverseTest = IRTestHelper;
 TEST_F(IR_TraverseTest, Blocks) {
     Vector<Instruction*, 8> expect;
 
-    auto fn = b.Function("f", ty.void_());
+    auto fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         expect.Push(b.Var<function, i32>());
 
@@ -89,7 +89,7 @@ TEST_F(IR_TraverseTest, Blocks) {
 TEST_F(IR_TraverseTest, Filtered) {
     Vector<ExitIf*, 8> expect;
 
-    auto fn = b.Function("f", ty.void_());
+    auto fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         b.Var<function, i32>();
 

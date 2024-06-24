@@ -34,13 +34,13 @@ using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
 
 TEST_F(SpirvWriterTest, Discard) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(core::BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), core::ir::Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), core::ir::Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -86,13 +86,13 @@ TEST_F(SpirvWriterTest, Discard) {
 }
 
 TEST_F(SpirvWriterTest, DiscardBeforeAtomic) {
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.atomic<i32>()));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->atomic<i32>()));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(core::BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), core::ir::Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), core::ir::Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -102,7 +102,7 @@ TEST_F(SpirvWriterTest, DiscardBeforeAtomic) {
             b.Discard();
             b.ExitIf(ifelse);
         });
-        b.Call(ty.i32(), core::BuiltinFn::kAtomicAdd, buffer, 1_i);
+        b.Call(ty->i32(), core::BuiltinFn::kAtomicAdd, buffer, 1_i);
         b.Return(ep, 0.5_f);
     });
 

@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "spirv/unified1/GLSL.std.450.h"
 #include "spirv/unified1/spirv.h"
 
@@ -221,7 +223,7 @@ class Printer {
     }
 
   private:
-    core::ir::Module& ir_;
+    const raw_ref<core::ir::Module> ir_;
     core::ir::Builder b_;
     writer::Module module_;
     BinaryWriter writer_;
@@ -293,7 +295,7 @@ class Printer {
 
     /// Builds the SPIR-V from the IR
     Result<SuccessType> Generate() {
-        auto valid = core::ir::ValidateAndDumpIfNeeded(ir_, "SPIR-V writer");
+        auto valid = core::ir::ValidateAndDumpIfNeeded(*ir_, "SPIR-V writer");
         if (valid != Success) {
             return valid.Failure();
         }
@@ -303,10 +305,10 @@ class Printer {
                                                          U32Operand(SpvMemoryModelGLSL450)});
 
         // Emit module-scope declarations.
-        EmitRootBlock(ir_.root_block);
+        EmitRootBlock(ir_->root_block);
 
         // Emit functions.
-        for (core::ir::Function* func : ir_.functions) {
+        for (core::ir::Function* func : ir_->functions) {
             EmitFunction(func);
         }
 
@@ -377,7 +379,7 @@ class Printer {
         auto id = Constant(constant->Value());
 
         // Set the name for the SPIR-V result ID if provided in the module.
-        if (auto name = ir_.NameOf(constant)) {
+        if (auto name = ir_->NameOf(constant)) {
             module_.PushDebug(spv::Op::OpName, {id, Operand(name.Name())});
         }
 
@@ -479,7 +481,7 @@ class Printer {
     /// @param ty the type to get the ID for
     /// @returns the result ID of the type
     uint32_t Type(const core::type::Type* ty) {
-        ty = DedupType(ty, ir_.Types());
+        ty = DedupType(ty, ir_->Types());
         return types_.GetOrAdd(ty, [&] {
             auto id = module_.NextId();
             Switch(
@@ -698,7 +700,7 @@ class Printer {
         auto id = Value(func);
 
         // Emit the function name.
-        module_.PushDebug(spv::Op::OpName, {id, Operand(ir_.NameOf(func).Name())});
+        module_.PushDebug(spv::Op::OpName, {id, Operand(ir_->NameOf(func).Name())});
 
         // Emit OpEntryPoint and OpExecutionMode declarations if needed.
         if (func->Stage() != core::ir::Function::PipelineStage::kUndefined) {
@@ -718,7 +720,7 @@ class Printer {
             auto param_id = Value(param);
             params.push_back(Instruction(spv::Op::OpFunctionParameter, {param_type_id, param_id}));
             function_type.param_type_ids.Push(param_type_id);
-            if (auto name = ir_.NameOf(param)) {
+            if (auto name = ir_->NameOf(param)) {
                 module_.PushDebug(spv::Op::OpName, {param_id, Operand(name.Name())});
             }
         }
@@ -778,10 +780,10 @@ class Printer {
                 TINT_ICE() << "undefined pipeline stage for entry point";
         }
 
-        OperandList operands = {U32Operand(stage), id, ir_.NameOf(func).Name()};
+        OperandList operands = {U32Operand(stage), id, ir_->NameOf(func).Name()};
 
         // Add the list of all referenced shader IO variables.
-        for (auto* global : *ir_.root_block) {
+        for (auto* global : *ir_->root_block) {
             auto* var = global->As<core::ir::Var>();
             if (!var) {
                 continue;
@@ -908,7 +910,7 @@ class Printer {
 
             // Set the name for the SPIR-V result ID if provided in the module.
             if (inst->Result(0) && !inst->Is<core::ir::Var>()) {
-                if (auto name = ir_.NameOf(inst)) {
+                if (auto name = ir_->NameOf(inst)) {
                     module_.PushDebug(spv::Op::OpName, {Value(inst), Operand(name.Name())});
                 }
             }
@@ -1640,13 +1642,13 @@ class Printer {
             case core::BuiltinFn::kSubgroupBallot:
                 module_.PushCapability(SpvCapabilityGroupNonUniformBallot);
                 op = spv::Op::OpGroupNonUniformBallot;
-                operands.push_back(Constant(ir_.constant_values.Get(u32(spv::Scope::Subgroup))));
-                operands.push_back(Constant(ir_.constant_values.Get(true)));
+                operands.push_back(Constant(ir_->constant_values.Get(u32(spv::Scope::Subgroup))));
+                operands.push_back(Constant(ir_->constant_values.Get(true)));
                 break;
             case core::BuiltinFn::kSubgroupBroadcast:
                 module_.PushCapability(SpvCapabilityGroupNonUniformBallot);
                 op = spv::Op::OpGroupNonUniformBroadcast;
-                operands.push_back(Constant(ir_.constant_values.Get(u32(spv::Scope::Subgroup))));
+                operands.push_back(Constant(ir_->constant_values.Get(u32(spv::Scope::Subgroup))));
                 break;
             case core::BuiltinFn::kTan:
                 glsl_ext_inst(GLSLstd450Tan);
@@ -1829,7 +1831,7 @@ class Printer {
     void EmitLoadVectorElement(core::ir::LoadVectorElement* load) {
         auto* vec_ptr_ty = load->From()->Type()->As<core::type::Pointer>();
         auto* el_ty = load->Result(0)->Type();
-        auto* el_ptr_ty = ir_.Types().ptr(vec_ptr_ty->AddressSpace(), el_ty, vec_ptr_ty->Access());
+        auto* el_ptr_ty = ir_->Types().ptr(vec_ptr_ty->AddressSpace(), el_ty, vec_ptr_ty->Access());
         auto el_ptr_id = module_.NextId();
         current_function_.push_inst(
             spv::Op::OpAccessChain,
@@ -1958,7 +1960,7 @@ class Printer {
     void EmitStoreVectorElement(core::ir::StoreVectorElement* store) {
         auto* vec_ptr_ty = store->To()->Type()->As<core::type::Pointer>();
         auto* el_ty = store->Value()->Type();
-        auto* el_ptr_ty = ir_.Types().ptr(vec_ptr_ty->AddressSpace(), el_ty, vec_ptr_ty->Access());
+        auto* el_ptr_ty = ir_->Types().ptr(vec_ptr_ty->AddressSpace(), el_ty, vec_ptr_ty->Access());
         auto el_ptr_id = module_.NextId();
         current_function_.push_inst(
             spv::Op::OpAccessChain,
@@ -2160,7 +2162,7 @@ class Printer {
         }
 
         // Set the name if present.
-        if (auto name = ir_.NameOf(var)) {
+        if (auto name = ir_->NameOf(var)) {
             module_.PushDebug(spv::Op::OpName, {id, Operand(name.Name())});
         }
     }
@@ -2177,7 +2179,7 @@ class Printer {
     void EmitExitPhis(core::ir::ControlInstruction* inst) {
         struct Branch {
             uint32_t label = 0;
-            core::ir::Value* value = nullptr;
+            raw_ptr<core::ir::Value> value = nullptr;
             bool operator<(const Branch& other) const { return label < other.label; }
         };
 

@@ -40,21 +40,21 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_ArrayLengthFromUniformTest = TransformTest;
 
 TEST_F(IR_ArrayLengthFromUniformTest, NoModify_UserFunction) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* user_func = b.Function("arrayLength", ty.u32());
+    auto* user_func = b.Function("arrayLength", ty->u32());
     auto* param = b.FunctionParam("arr", arr_ptr);
     user_func->SetParams({param});
     b.Append(user_func->Block(), [&] {  //
         b.Return(user_func, 42_u);
     });
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         b.Call(user_func, buffer);
         b.Return(func);
@@ -89,14 +89,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, DirectUse) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, buffer);
         b.Return(func, len);
@@ -140,14 +140,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, DirectUse_NonZeroIndex) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, buffer);
         b.Return(func, len);
@@ -191,14 +191,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, DirectUse_NotInMap) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 1);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, buffer);
         b.Return(func, len);
@@ -239,14 +239,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaAccess) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, b.Access(arr_ptr, buffer));
         b.Return(func, len);
@@ -292,18 +292,18 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaAccess_StructMember) {
-    auto* arr = ty.array<i32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
-    auto* arr_ptr = ty.ptr<storage>(arr);
-    auto* structure_ptr = ty.ptr<storage>(structure);
+    auto* arr = ty->array<i32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), arr},
+                                                              });
+    auto* arr_ptr = ty->ptr<storage>(arr);
+    auto* structure_ptr = ty->ptr<storage>(structure);
 
     auto* buffer = b.Var("buffer", structure_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, b.Access(arr_ptr, buffer, 0_u));
         b.Return(func, len);
@@ -358,23 +358,24 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaAccess_StructMember_NonZeroOffset) {
-    auto* arr = ty.array<i32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("u1"), ty.u32()},
-                                                                 {mod.symbols.New("u2"), ty.u32()},
-                                                                 {mod.symbols.New("u3"), ty.u32()},
-                                                                 {mod.symbols.New("u4"), ty.u32()},
-                                                                 {mod.symbols.New("u5"), ty.u32()},
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
-    auto* arr_ptr = ty.ptr<storage>(arr);
-    auto* structure_ptr = ty.ptr<storage>(structure);
+    auto* arr = ty->array<i32>();
+    auto* structure =
+        ty->Struct(mod.symbols.New("MyStruct"), {
+                                                    {mod.symbols.New("u1"), ty->u32()},
+                                                    {mod.symbols.New("u2"), ty->u32()},
+                                                    {mod.symbols.New("u3"), ty->u32()},
+                                                    {mod.symbols.New("u4"), ty->u32()},
+                                                    {mod.symbols.New("u5"), ty->u32()},
+                                                    {mod.symbols.New("a"), arr},
+                                                });
+    auto* arr_ptr = ty->ptr<storage>(arr);
+    auto* structure_ptr = ty->ptr<storage>(structure);
 
     auto* buffer = b.Var("buffer", structure_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, b.Access(arr_ptr, buffer, 5_u));
         b.Return(func, len);
@@ -439,14 +440,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaLet) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, b.Let("let", buffer));
         b.Return(func, len);
@@ -492,14 +493,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* bar = b.Function("bar", ty.u32());
+    auto* bar = b.Function("bar", ty->u32());
     auto* param = b.FunctionParam("param", arr_ptr);
     bar->SetParams({param});
     b.Append(bar->Block(), [&] {
@@ -507,7 +508,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter) {
         b.Return(bar, len);
     });
 
-    auto* foo = b.Function("foo", ty.u32());
+    auto* foo = b.Function("foo", ty->u32());
     b.Append(foo->Block(), [&] {
         auto* len = b.Call<u32>(bar, buffer);
         b.Return(foo, len);
@@ -563,14 +564,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaParameterChain) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* zoo = b.Function("foo", ty.u32());
+    auto* zoo = b.Function("foo", ty->u32());
     auto* param_zoo = b.FunctionParam("param_zoo", arr_ptr);
     zoo->SetParams({param_zoo});
     b.Append(zoo->Block(), [&] {
@@ -578,7 +579,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaParameterChain) {
         b.Return(zoo, len);
     });
 
-    auto* bar = b.Function("foo", ty.u32());
+    auto* bar = b.Function("foo", ty->u32());
     auto* param_bar = b.FunctionParam("param_bar", arr_ptr);
     bar->SetParams({param_bar});
     b.Append(bar->Block(), [&] {
@@ -586,7 +587,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaParameterChain) {
         b.Return(bar, len);
     });
 
-    auto* foo = b.Function("foo", ty.u32());
+    auto* foo = b.Function("foo", ty->u32());
     b.Append(foo->Block(), [&] {
         auto* len = b.Call<u32>(bar, buffer);
         b.Return(foo, len);
@@ -655,14 +656,14 @@ $B1: {  # root
 
 // Test that we re-use the length parameter for multiple arrayLength calls on the same parameter.
 TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter_MultipleCallsSameParameter) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* bar = b.Function("bar", ty.u32());
+    auto* bar = b.Function("bar", ty->u32());
     auto* param = b.FunctionParam("param", arr_ptr);
     bar->SetParams({param});
     b.Append(bar->Block(), [&] {
@@ -672,7 +673,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter_MultipleCallsSameParameter) {
         b.Return(bar, b.Add<u32>(len_a, b.Add<u32>(len_b, len_c)));
     });
 
-    auto* foo = b.Function("foo", ty.u32());
+    auto* foo = b.Function("foo", ty->u32());
     b.Append(foo->Block(), [&] {
         auto* len = b.Call<u32>(bar, buffer);
         b.Return(foo, len);
@@ -734,14 +735,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter_MultipleCallsDifferentParameters) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* bar = b.Function("bar", ty.u32());
+    auto* bar = b.Function("bar", ty->u32());
     auto* param_a = b.FunctionParam("param_a", arr_ptr);
     auto* param_b = b.FunctionParam("param_b", arr_ptr);
     auto* param_c = b.FunctionParam("param_c", arr_ptr);
@@ -753,7 +754,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaParameter_MultipleCallsDifferentParamet
         b.Return(bar, b.Add<u32>(len_a, b.Add<u32>(len_b, len_c)));
     });
 
-    auto* foo = b.Function("foo", ty.u32());
+    auto* foo = b.Function("foo", ty->u32());
     b.Append(foo->Block(), [&] {
         auto* len = b.Call<u32>(bar, buffer, buffer, buffer);
         b.Return(foo, len);
@@ -821,19 +822,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ViaComplexChain) {
-    auto* arr = ty.array<i32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("u1"), ty.u32()},
-                                                                 {mod.symbols.New("a"), arr},
-                                                             });
-    auto* arr_ptr = ty.ptr<storage>(arr);
-    auto* structure_ptr = ty.ptr<storage>(structure);
+    auto* arr = ty->array<i32>();
+    auto* structure =
+        ty->Struct(mod.symbols.New("MyStruct"), {
+                                                    {mod.symbols.New("u1"), ty->u32()},
+                                                    {mod.symbols.New("a"), arr},
+                                                });
+    auto* arr_ptr = ty->ptr<storage>(arr);
+    auto* structure_ptr = ty->ptr<storage>(structure);
 
     auto* buffer = b.Var("buffer", structure_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* bar = b.Function("bar", ty.u32());
+    auto* bar = b.Function("bar", ty->u32());
     auto* param = b.FunctionParam("param", arr_ptr);
     bar->SetParams({param});
     b.Append(bar->Block(), [&] {
@@ -843,7 +845,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, ViaComplexChain) {
         b.Return(bar, len);
     });
 
-    auto* foo = b.Function("foo", ty.u32());
+    auto* foo = b.Function("foo", ty->u32());
     b.Append(foo->Block(), [&] {
         auto* access = b.Access(arr_ptr, buffer, 1_u);
         auto* let = b.Let("let", access);
@@ -920,14 +922,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, ElementStrideLargerThanSize) {
-    auto* arr = ty.array<vec3<i32>>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<vec3<i32>>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer = b.Var("buffer", arr_ptr);
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.u32());
+    auto* func = b.Function("foo", ty->u32());
     b.Append(func->Block(), [&] {
         auto* len = b.Call<u32>(BuiltinFn::kArrayLength, buffer);
         b.Return(func, len);
@@ -971,8 +973,8 @@ $B1: {  # root
 }
 
 TEST_F(IR_ArrayLengthFromUniformTest, MultipleVars) {
-    auto* arr = ty.array<i32>();
-    auto* arr_ptr = ty.ptr<storage>(arr);
+    auto* arr = ty->array<i32>();
+    auto* arr_ptr = ty->ptr<storage>(arr);
 
     auto* buffer_a = b.Var("buffer_a", arr_ptr);
     auto* buffer_b = b.Var("buffer_b", arr_ptr);
@@ -990,7 +992,7 @@ TEST_F(IR_ArrayLengthFromUniformTest, MultipleVars) {
     mod.root_block->Append(buffer_d);
     mod.root_block->Append(buffer_e);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         b.Call<u32>(BuiltinFn::kArrayLength, buffer_a);
         b.Call<u32>(BuiltinFn::kArrayLength, buffer_b);

@@ -34,6 +34,7 @@
 #include <string_view>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/intrinsic/table.h"
 #include "src/tint/lang/core/ir/access.h"
 #include "src/tint/lang/core/ir/binary.h"
@@ -493,7 +494,7 @@ class Validator {
         Vector<Hashset<const Value*, 8>, 4> stack_;
     };
 
-    const Module& mod_;
+    const raw_ref<const Module> mod_;
     Capabilities capabilities_;
     std::optional<ir::Disassembler> disassembler_;  // Use Disassemble()
     diag::List diagnostics_;
@@ -504,8 +505,8 @@ class Validator {
     Vector<const Block*, 8> block_stack_;
     ScopeStack scope_stack_;
     Vector<std::function<void()>, 16> tasks_;
-    SymbolTable symbols_ = SymbolTable::Wrap(mod_.symbols);
-    type::Manager type_mgr_ = type::Manager::Wrap(mod_.Types());
+    SymbolTable symbols_ = SymbolTable::Wrap(mod_->symbols);
+    type::Manager type_mgr_ = type::Manager::Wrap(mod_->Types());
 };
 
 Validator::Validator(const Module& mod, Capabilities capabilities)
@@ -515,7 +516,7 @@ Validator::~Validator() = default;
 
 Disassembler& Validator::Disassemble() {
     if (!disassembler_) {
-        disassembler_.emplace(ir::Disassembler(mod_));
+        disassembler_.emplace(ir::Disassembler(*mod_));
     }
     return *disassembler_;
 }
@@ -529,9 +530,9 @@ Result<SuccessType> Validator::Run() {
         TINT_ASSERT(control_stack_.IsEmpty());
         TINT_ASSERT(block_stack_.IsEmpty());
     });
-    CheckRootBlock(mod_.root_block);
+    CheckRootBlock(mod_->root_block);
 
-    for (auto& func : mod_.functions) {
+    for (auto& func : mod_->functions) {
         if (!all_functions_.Add(func.Get())) {
             AddError(func) << "function " << NameOf(func.Get())
                            << " added to module multiple times";
@@ -539,13 +540,13 @@ Result<SuccessType> Validator::Run() {
         scope_stack_.Add(func);
     }
 
-    for (auto& func : mod_.functions) {
+    for (auto& func : mod_->functions) {
         CheckFunction(func);
     }
 
     if (!diagnostics_.ContainsErrors()) {
         // Check for orphaned instructions.
-        for (auto* inst : mod_.Instructions()) {
+        for (auto* inst : mod_->Instructions()) {
             if (!visited_instructions_.Contains(inst)) {
                 AddError(inst) << "orphaned instruction: " << inst->FriendlyName();
             }
@@ -993,9 +994,9 @@ void Validator::CheckCall(const Call* call) {
 void Validator::CheckBuiltinCall(const BuiltinCall* call) {
     auto args = Transform<8>(call->Args(), [&](const ir::Value* v) { return v->Type(); });
     intrinsic::Context context{
-        call->TableData(),
-        type_mgr_,
-        symbols_,
+        raw_ref(call->TableData()),
+        raw_ref(type_mgr_),
+        raw_ref(symbols_),
     };
 
     auto result = core::intrinsic::LookupFn(context, call->FriendlyName().c_str(), call->FuncId(),
@@ -1016,9 +1017,9 @@ void Validator::CheckMemberBuiltinCall(const MemberBuiltinCall* call) {
         args.Push(arg->Type());
     }
     intrinsic::Context context{
-        call->TableData(),
-        type_mgr_,
-        symbols_,
+        raw_ref(call->TableData()),
+        raw_ref(type_mgr_),
+        raw_ref(symbols_),
     };
 
     auto result =
@@ -1159,7 +1160,7 @@ void Validator::CheckAccess(const Access* a) {
             }
             ty = el;
         } else {
-            auto* el = ty->Elements().type;
+            auto* el = ty->Elements().type.get();
             if (TINT_UNLIKELY(!el)) {
                 err() << "type " << desc_of(in_kind, ty) << " cannot be dynamically indexed";
                 return;
@@ -1193,7 +1194,7 @@ void Validator::CheckAccess(const Access* a) {
 void Validator::CheckBinary(const Binary* b) {
     CheckOperandsNotNull(b, Binary::kLhsOperandOffset, Binary::kRhsOperandOffset);
     if (b->LHS() && b->RHS()) {
-        intrinsic::Context context{b->TableData(), type_mgr_, symbols_};
+        intrinsic::Context context{raw_ref(b->TableData()), raw_ref(type_mgr_), raw_ref(symbols_)};
 
         auto overload =
             core::intrinsic::LookupBinary(context, b->Op(), b->LHS()->Type(), b->RHS()->Type(),
@@ -1217,7 +1218,7 @@ void Validator::CheckBinary(const Binary* b) {
 void Validator::CheckUnary(const Unary* u) {
     CheckOperandNotNull(u, u->Val(), Unary::kValueOperandOffset);
     if (u->Val()) {
-        intrinsic::Context context{u->TableData(), type_mgr_, symbols_};
+        intrinsic::Context context{raw_ref(u->TableData()), raw_ref(type_mgr_), raw_ref(symbols_)};
 
         auto overload = core::intrinsic::LookupUnary(context, u->Op(), u->Val()->Type(),
                                                      core::EvaluationStage::kRuntime);

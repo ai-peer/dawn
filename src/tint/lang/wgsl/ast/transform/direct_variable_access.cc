@@ -31,6 +31,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/abstract_int.h"
 #include "src/tint/lang/wgsl/ast/transform/hoist_to_decl_before.h"
@@ -65,10 +67,10 @@ struct AccessRoot {
     /// The pointer-unwrapped type of the *transformed* variable.
     /// This may be different for pointers in 'private' and 'function' address space, as the pointer
     /// parameter type is to the *base object* instead of the input pointer type.
-    tint::core::type::Type const* type = nullptr;
+    raw_ptr<const tint::core::type::Type> type = nullptr;
     /// The originating module-scope variable ('private', 'storage', 'uniform', 'workgroup'),
     /// function-scope variable ('function'), or pointer parameter in the source program.
-    tint::sem::Variable const* variable = nullptr;
+    raw_ptr<const tint::sem::Variable> variable = nullptr;
     /// The address space of the variable or pointer type.
     tint::core::AddressSpace address_space = tint::core::AddressSpace::kUndefined;
 
@@ -207,7 +209,7 @@ struct DirectVariableAccess::State {
         // are grown and moved up the expression tree. After this stage, we are left with all the
         // expression access chains to variables that we may need to transform.
         for (auto* node : ctx.src->ASTNodes().Objects()) {
-            if (auto* expr = sem.GetVal(node)) {
+            if (auto* expr = sem->GetVal(node)) {
                 AppendAccessChain(expr);
             }
         }
@@ -219,9 +221,9 @@ struct DirectVariableAccess::State {
         // will have the pointer parameters replaced with an array of u32s, used to perform the
         // pointer indexing in the variant.
         // Function call pointer arguments are replaced with an array of these dynamic indices.
-        auto decls = sem.Module()->DependencyOrderedDeclarations();
+        auto decls = sem->Module()->DependencyOrderedDeclarations();
         for (auto* decl : tint::Reverse(decls)) {
-            if (auto* fn = sem.Get<sem::Function>(decl)) {
+            if (auto* fn = sem->Get<sem::Function>(decl)) {
                 auto* fn_info = FnInfoFor(fn);
                 ProcessFunction(fn, fn_info);
                 TransformFunction(fn, fn_info);
@@ -371,11 +373,11 @@ struct DirectVariableAccess::State {
     /// The clone context
     program::CloneContext ctx;
     /// The transform options
-    const Options& opts;
+    const raw_ref<const Options> opts;
     /// Alias to the semantic info in ctx.src
-    const sem::Info& sem = ctx.src->Sem();
+    const raw_ref<const sem::Info> sem = ctx.src->Sem();
     /// Alias to the symbols in ctx.src
-    const SymbolTable& sym = ctx.src->Symbols();
+    const raw_ref<const SymbolTable> sym = ctx.src->Symbols();
     /// Map of semantic function to the function info
     Hashmap<const sem::Function*, FnInfo*, 8> fns;
     /// Map of AccessShape to the name of a type alias for the an array<u32, N> used for the
@@ -396,22 +398,22 @@ struct DirectVariableAccess::State {
     /// CloneState holds pointers to the current function, variant and variant's parameters.
     struct CloneState {
         /// The current function being cloned
-        FnInfo* current_function = nullptr;
+        raw_ptr<FnInfo> current_function = nullptr;
         /// The current function variant being built
-        FnVariant* current_variant = nullptr;
+        raw_ptr<FnVariant> current_variant = nullptr;
         /// The signature of the current function variant being built
-        const FnVariant::Signature* current_variant_sig = nullptr;
+        raw_ptr<const FnVariant::Signature> current_variant_sig = nullptr;
     };
 
     /// The clone state.
     /// Only valid during the lifetime of the program::CloneContext::Clone().
-    CloneState* clone_state = nullptr;
+    raw_ptr<CloneState> clone_state = nullptr;
 
     /// @returns true if any user functions have parameters of a pointer type.
     bool AnyPointerParameters() const {
         for (auto* fn : ctx.src->AST().Functions()) {
             for (auto* param : fn->params) {
-                if (sem.Get(param)->Type()->Is<core::type::Pointer>()) {
+                if (sem->Get(param)->Type()->Is<core::type::Pointer>()) {
                     return true;
                 }
             }
@@ -467,7 +469,7 @@ struct DirectVariableAccess::State {
                     [&](const Let*) {
                         if (variable->Type()->Is<core::type::Pointer>()) {
                             // variable is a pointer-let.
-                            auto* init = sem.GetVal(variable->Declaration()->initializer);
+                            auto* init = sem->GetVal(variable->Declaration()->initializer.get());
                             // Note: We do not use take_chain() here, as we need to preserve the
                             // AccessChain on the let's initializer, as the let needs its
                             // initializer updated, and the let may be used multiple times. Instead
@@ -501,7 +503,7 @@ struct DirectVariableAccess::State {
                     // If this is a '&' or '*', simply move the chain to the unary op expression.
                     if (unary->op == core::UnaryOp::kAddressOf ||
                         unary->op == core::UnaryOp::kIndirection) {
-                        take_chain(sem.GetVal(unary->expr));
+                        take_chain(sem->GetVal(unary->expr.get()));
                     }
                 }
             });
@@ -759,9 +761,9 @@ struct DirectVariableAccess::State {
             case core::AddressSpace::kWorkgroup:
                 return true;
             case core::AddressSpace::kPrivate:
-                return opts.transform_private;
+                return opts->transform_private;
             case core::AddressSpace::kFunction:
-                return opts.transform_function;
+                return opts->transform_function;
             default:
                 return false;
         }
@@ -993,7 +995,7 @@ struct DirectVariableAccess::State {
                 return nullptr;  // Just clone the expression.
             }
 
-            auto* expr = sem.GetVal(ast_expr);
+            auto* expr = sem->GetVal(ast_expr);
             if (!expr) {
                 // No semantic node for the expression.
                 return nullptr;  // Just clone the expression.

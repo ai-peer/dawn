@@ -30,6 +30,7 @@
 
 #include <type_traits>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/macros/concat.h"
 
 namespace tint {
@@ -51,13 +52,13 @@ class ScopedAssignment {
 
     /// Destructor
     /// Restores the original value of the variable.
-    ~ScopedAssignment() { ref_ = old_value_; }
+    ~ScopedAssignment() { *(*ref_) = old_value_; }
 
   private:
     ScopedAssignment(const ScopedAssignment&) = delete;
     ScopedAssignment& operator=(const ScopedAssignment&) = delete;
 
-    T& ref_;
+    const raw_ref<T> ref_;
     T old_value_;
 };
 

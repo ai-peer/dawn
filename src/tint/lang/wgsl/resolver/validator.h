@@ -32,6 +32,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/evaluation_stage.h"
 #include "src/tint/lang/core/type/input_attachment.h"
 #include "src/tint/lang/wgsl/ast/input_attachment_index_attribute.h"
@@ -90,7 +92,7 @@ namespace tint::resolver {
 /// TypeAndAddressSpace is a pair of type and address space
 struct TypeAndAddressSpace {
     /// The type
-    const core::type::Type* type;
+    raw_ptr<const core::type::Type> type;
     /// The address space
     core::AddressSpace address_space;
 
@@ -623,15 +625,15 @@ class Validator {
     bool CheckNoMultipleModuleScopeVarsOfAddressSpace(sem::Function* entry_point,
                                                       core::AddressSpace space) const;
 
-    SymbolTable& symbols_;
-    diag::List& diagnostics_;
-    SemHelper& sem_;
+    const raw_ref<SymbolTable> symbols_;
+    const raw_ref<diag::List> diagnostics_;
+    const raw_ref<SemHelper> sem_;
     DiagnosticFilterStack diagnostic_filters_;
-    const wgsl::Extensions& enabled_extensions_;
-    const wgsl::AllowedFeatures& allowed_features_;
+    const raw_ref<const wgsl::Extensions> enabled_extensions_;
+    const raw_ref<const wgsl::AllowedFeatures> allowed_features_;
     const wgsl::ValidationMode mode_;
-    const Hashmap<const core::type::Type*, const Source*, 8>& atomic_composite_info_;
-    Hashset<TypeAndAddressSpace, 8>& valid_type_storage_layouts_;
+    const raw_ref<const Hashmap<const core::type::Type*, const Source*, 8>> atomic_composite_info_;
+    const raw_ref<Hashset<TypeAndAddressSpace, 8>> valid_type_storage_layouts_;
 };
 
 }  // namespace tint::resolver

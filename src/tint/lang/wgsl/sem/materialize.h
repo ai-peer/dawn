@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_MATERIALIZE_H_
 #define SRC_TINT_LANG_WGSL_SEM_MATERIALIZE_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/value_expression.h"
 
 namespace tint::sem {
@@ -57,7 +58,7 @@ class Materialize final : public Castable<Materialize, ValueExpression> {
     const ValueExpression* Expr() const { return expr_; }
 
   private:
-    ValueExpression const* const expr_;
+    const raw_ptr<const ValueExpression> expr_;
 };
 
 }  // namespace tint::sem

@@ -30,6 +30,7 @@
 
 #include <functional>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/var.h"
 #include "src/tint/utils/containers/hashmap.h"
@@ -67,7 +68,7 @@ class ReferencedModuleVars {
     /// Note: @p pred is not stored by the class, so can be a lambda that captures by reference.
     explicit ReferencedModuleVars(Module& ir, Predicate&& pred = {}) : ir_(ir) {
         // Loop over module-scope variables, recording the blocks that they are referenced from.
-        for (auto inst : *ir_.root_block) {
+        for (auto inst : *ir_->root_block) {
             if (auto* var = inst->As<Var>()) {
                 if (!pred || pred(var)) {
                     var->Result(0)->ForEachUse([&](const Usage& use) {
@@ -86,7 +87,7 @@ class ReferencedModuleVars {
 
   private:
     /// The module.
-    Module& ir_;
+    const raw_ref<Module> ir_;
 
     /// A map from blocks to their directly referenced variables.
     Hashmap<Block*, VarSet, 64> block_to_direct_vars_{};

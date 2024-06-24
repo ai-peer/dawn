@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/clone_context.h"
 #include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -146,10 +147,10 @@ class CloneContext {
     inline operator ast::CloneContext&() { return ctx_; }
 
     /// The target Builder to clone into.
-    ProgramBuilder* const dst;
+    const raw_ptr<ProgramBuilder> dst;
 
     /// The source Program to clone from.
-    Program const* const src;
+    const raw_ptr<const Program> src;
 
   private:
     ast::CloneContext ctx_;

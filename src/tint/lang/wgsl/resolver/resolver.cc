@@ -34,6 +34,7 @@
 #include <string_view>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/builtin_type.h"
 #include "src/tint/lang/core/constant/scalar.h"
 #include "src/tint/lang/core/fluent_types.h"
@@ -137,7 +138,7 @@ Resolver::Resolver(ProgramBuilder* builder,
                    wgsl::ValidationMode mode)
     : b(*builder),
       diagnostics_(builder->Diagnostics()),
-      const_eval_(builder->constants, diagnostics_),
+      const_eval_(builder->constants, *diagnostics_),
       intrinsic_table_{builder->Types(), builder->Symbols()},
       sem_(builder),
       validator_(builder,
@@ -152,39 +153,39 @@ Resolver::Resolver(ProgramBuilder* builder,
 Resolver::~Resolver() = default;
 
 bool Resolver::Resolve() {
-    if (diagnostics_.ContainsErrors()) {
+    if (diagnostics_->ContainsErrors()) {
         return false;
     }
 
-    b.Sem().Reserve(b.LastAllocatedNodeID());
+    b->Sem().Reserve(b->LastAllocatedNodeID());
 
     // Pre-allocate the marked bitset with the total number of AST nodes.
-    marked_.Resize(b.ASTNodes().Count());
+    marked_.Resize(b->ASTNodes().Count());
 
-    if (!DependencyGraph::Build(b.AST(), diagnostics_, dependencies_)) {
+    if (!DependencyGraph::Build(b->AST(), *diagnostics_, dependencies_)) {
         return false;
     }
 
     bool result = ResolveInternal();
 
-    if (TINT_UNLIKELY(!result && !diagnostics_.ContainsErrors())) {
+    if (TINT_UNLIKELY(!result && !diagnostics_->ContainsErrors())) {
         TINT_ICE() << "resolving failed, but no error was raised";
     }
 
-    if (!validator_.Enables(b.AST().Enables())) {
+    if (!validator_.Enables(b->AST().Enables())) {
         return false;
     }
 
     // Create the semantic module. Don't be tempted to std::move() these, they're used below.
-    auto* mod = b.create<sem::Module>(dependencies_.ordered_globals, enabled_extensions_);
+    auto* mod = b->create<sem::Module>(dependencies_.ordered_globals, enabled_extensions_);
     ApplyDiagnosticSeverities(mod);
-    b.Sem().SetModule(mod);
+    b->Sem().SetModule(mod);
 
     const bool disable_uniformity_analysis =
         enabled_extensions_.Contains(wgsl::Extension::kChromiumDisableUniformityAnalysis);
     if (result && !disable_uniformity_analysis) {
         // Run the uniformity analysis, which requires a complete semantic module.
-        if (!AnalyzeUniformity(b, dependencies_)) {
+        if (!AnalyzeUniformity(*b, dependencies_)) {
             return false;
         }
     }
@@ -193,7 +194,7 @@ bool Resolver::Resolve() {
 }
 
 bool Resolver::ResolveInternal() {
-    Mark(&b.AST());
+    Mark(&b->AST());
 
     // Process all module-scope declarations in dependency order.
     Vector<const ast::DiagnosticControl*, 4> diagnostic_controls;
@@ -235,7 +236,7 @@ bool Resolver::ResolveInternal() {
     }
 
     bool result = true;
-    for (auto* node : b.ASTNodes().Objects()) {
+    for (auto* node : b->ASTNodes().Objects()) {
         if (TINT_UNLIKELY(!marked_[node->node_id.value])) {
             ICE(node->source) << "AST node '" << node->TypeInfo().name
                               << "' was not reached by the resolver\n"
@@ -259,9 +260,9 @@ sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
 }
 
 sem::Variable* Resolver::Let(const ast::Let* v) {
-    auto* sem = b.create<sem::LocalVariable>(v, current_statement_);
+    auto* sem = b->create<sem::LocalVariable>(v, current_statement_);
     sem->SetStage(core::EvaluationStage::kRuntime);
-    b.Sem().Add(v, sem);
+    b->Sem().Add(v, sem);
 
     // If the variable has a declared type, resolve it.
     if (v->type) {
@@ -318,8 +319,8 @@ sem::Variable* Resolver::Let(const ast::Let* v) {
 }
 
 sem::Variable* Resolver::Override(const ast::Override* v) {
-    auto* sem = b.create<sem::GlobalVariable>(v);
-    b.Sem().Add(v, sem);
+    auto* sem = b->create<sem::GlobalVariable>(v);
+    b->Sem().Add(v, sem);
     sem->SetStage(core::EvaluationStage::kOverride);
 
     on_transitively_reference_global_.Push([&](const sem::GlobalVariable* ref) {
@@ -430,12 +431,12 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
     sem::Variable* sem = nullptr;
     sem::GlobalVariable* global = nullptr;
     if (is_global) {
-        global = b.create<sem::GlobalVariable>(c);
+        global = b->create<sem::GlobalVariable>(c);
         sem = global;
     } else {
-        sem = b.create<sem::LocalVariable>(c, current_statement_);
+        sem = b->create<sem::LocalVariable>(c, current_statement_);
     }
-    b.Sem().Add(c, sem);
+    b->Sem().Add(c, sem);
 
     for (auto* attribute : c->attributes) {
         Mark(attribute);
@@ -508,13 +509,13 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
     sem::Variable* sem = nullptr;
     sem::GlobalVariable* global = nullptr;
     if (is_global) {
-        global = b.create<sem::GlobalVariable>(var);
+        global = b->create<sem::GlobalVariable>(var);
         sem = global;
     } else {
-        sem = b.create<sem::LocalVariable>(var, current_statement_);
+        sem = b->create<sem::LocalVariable>(var, current_statement_);
     }
     sem->SetStage(core::EvaluationStage::kRuntime);
-    b.Sem().Add(var, sem);
+    b->Sem().Add(var, sem);
 
     if (is_global) {
         on_transitively_reference_global_.Push([&](const sem::GlobalVariable* ref) {
@@ -600,7 +601,7 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
         sem->SetAccess(DefaultAccessForAddressSpace(sem->AddressSpace()));
     }
 
-    sem->SetType(b.create<core::type::Reference>(sem->AddressSpace(), storage_ty, sem->Access()));
+    sem->SetType(b->create<core::type::Reference>(sem->AddressSpace(), storage_ty, sem->Access()));
 
     if (sem->Initializer() &&
         !validator_.VariableInitializer(var, storage_ty, sem->Initializer())) {
@@ -749,8 +750,8 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param,
                                     uint32_t index) {
     Mark(param->name);
 
-    auto* sem = b.create<sem::Parameter>(param, index);
-    b.Sem().Add(param, sem);
+    auto* sem = b->create<sem::Parameter>(param, index);
+    b->Sem().Add(param, sem);
 
     auto add_note = [&] {
         AddNote(param->source) << "while instantiating parameter "
@@ -912,7 +913,7 @@ bool Resolver::AllocateOverridableConstantIds() {
     // deterministic.
     // TODO(crbug.com/tint/1192): If a transform changes the order or removes an
     // unused constant, the allocation may change on the next Resolver pass.
-    for (auto* decl : b.AST().GlobalDeclarations()) {
+    for (auto* decl : b->AST().GlobalDeclarations()) {
         auto* override = decl->As<ast::Override>();
         if (!override) {
             continue;
@@ -992,16 +993,17 @@ sem::Statement* Resolver::ConstAssert(const ast::ConstAssert* assertion) {
         AddError(assertion->source) << "const assertion failed";
         return nullptr;
     }
-    auto* sem = b.create<sem::Statement>(assertion, current_compound_statement_, current_function_);
-    b.Sem().Add(assertion, sem);
+    auto* sem =
+        b->create<sem::Statement>(assertion, current_compound_statement_, current_function_);
+    b->Sem().Add(assertion, sem);
     return sem;
 }
 
 sem::Function* Resolver::Function(const ast::Function* decl) {
     Mark(decl->name);
 
-    auto* func = b.create<sem::Function>(decl);
-    b.Sem().Add(decl, func);
+    auto* func = b->create<sem::Function>(decl);
+    b->Sem().Add(decl, func);
     TINT_SCOPED_ASSIGNMENT(current_function_, func);
 
     on_transitively_reference_global_.Push([&](const sem::GlobalVariable* ref) {  //
@@ -1050,7 +1052,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             if (auto added = parameter_names.Add(param->name->symbol, param->source); !added) {
                 auto name = param->name->symbol.NameView();
                 AddError(param->source) << "redefinition of parameter '" << name << "'";
-                AddNote(added.value) << "previous definition is here";
+                AddNote(*added.value) << "previous definition is here";
                 return nullptr;
             }
         }
@@ -1088,7 +1090,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             return nullptr;
         }
     } else {
-        return_type = b.create<core::type::Void>();
+        return_type = b->create<core::type::Void>();
     }
     func->SetReturnType(return_type);
 
@@ -1209,7 +1211,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             ICE(decl->body->source)
                 << "Resolver::Function() called with a current compound statement";
         }
-        auto* body = StatementScope(decl->body, b.create<sem::FunctionBlockStatement>(func),
+        auto* body = StatementScope(decl->body, b->create<sem::FunctionBlockStatement>(func),
                                     [&] { return Statements(decl->body->statements); });
         if (!body) {
             return nullptr;
@@ -1312,7 +1314,7 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
 
 sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt,
                                             const core::type::Type* ty) {
-    auto* sem = b.create<sem::CaseStatement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::CaseStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         sem->Selectors().reserve(stmt->selectors.Length());
         for (auto* sel : stmt->selectors) {
@@ -1325,7 +1327,7 @@ sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt,
             if (!sel->IsDefault()) {
                 // The sem statement was created in the switch when attempting to determine the
                 // common type.
-                auto* materialized = Materialize(sem_.GetVal(sel->expr), ty);
+                auto* materialized = Materialize(sem_.GetVal(sel->expr.get()), ty);
                 if (!materialized) {
                     return false;
                 }
@@ -1340,7 +1342,7 @@ sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt,
                 }
             }
 
-            sem->Selectors().emplace_back(b.create<sem::CaseSelector>(sel, const_value));
+            sem->Selectors().emplace_back(b->create<sem::CaseSelector>(sel, const_value));
         }
 
         Mark(stmt->body);
@@ -1355,7 +1357,7 @@ sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt,
 }
 
 sem::IfStatement* Resolver::IfStatement(const ast::IfStatement* stmt) {
-    auto* sem = b.create<sem::IfStatement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::IfStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
@@ -1366,8 +1368,8 @@ sem::IfStatement* Resolver::IfStatement(const ast::IfStatement* stmt) {
         sem->Behaviors().Remove(sem::Behavior::kNext);
 
         Mark(stmt->body);
-        auto* body = b.create<sem::BlockStatement>(stmt->body, current_compound_statement_,
-                                                   current_function_);
+        auto* body = b->create<sem::BlockStatement>(stmt->body, current_compound_statement_,
+                                                    current_function_);
         if (!StatementScope(stmt->body, body, [&] { return Statements(stmt->body->statements); })) {
             return false;
         }
@@ -1392,18 +1394,18 @@ sem::IfStatement* Resolver::IfStatement(const ast::IfStatement* stmt) {
 }
 
 sem::BlockStatement* Resolver::BlockStatement(const ast::BlockStatement* stmt) {
-    auto* sem = b.create<sem::BlockStatement>(stmt->As<ast::BlockStatement>(),
-                                              current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::BlockStatement>(stmt->As<ast::BlockStatement>(),
+                                               current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] { return Statements(stmt->statements); });
 }
 
 sem::LoopStatement* Resolver::LoopStatement(const ast::LoopStatement* stmt) {
-    auto* sem = b.create<sem::LoopStatement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::LoopStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         Mark(stmt->body);
 
-        auto* body = b.create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
-                                                       current_function_);
+        auto* body = b->create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
+                                                        current_function_);
         return StatementScope(stmt->body, body, [&] {
             if (!Statements(stmt->body->statements)) {
                 return false;
@@ -1415,7 +1417,7 @@ sem::LoopStatement* Resolver::LoopStatement(const ast::LoopStatement* stmt) {
                 Mark(stmt->continuing);
                 auto* continuing = StatementScope(
                     stmt->continuing,
-                    b.create<sem::LoopContinuingBlockStatement>(
+                    b->create<sem::LoopContinuingBlockStatement>(
                         stmt->continuing, current_compound_statement_, current_function_),
                     [&] { return Statements(stmt->continuing->statements); });
                 if (!continuing) {
@@ -1438,10 +1440,10 @@ sem::LoopStatement* Resolver::LoopStatement(const ast::LoopStatement* stmt) {
 
 sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* stmt) {
     auto* sem =
-        b.create<sem::ForLoopStatement>(stmt, current_compound_statement_, current_function_);
+        b->create<sem::ForLoopStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
-        if (auto* initializer = stmt->initializer) {
+        if (auto* initializer = stmt->initializer.get()) {
             Mark(initializer);
             auto* init = Statement(initializer);
             if (!init) {
@@ -1450,7 +1452,7 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
             behaviors.Add(init->Behaviors());
         }
 
-        if (auto* cond_expr = stmt->condition) {
+        if (auto* cond_expr = stmt->condition.get()) {
             auto* cond = Load(ValueExpression(cond_expr));
             if (!cond) {
                 return false;
@@ -1459,7 +1461,7 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
             behaviors.Add(cond->Behaviors());
         }
 
-        if (auto* continuing = stmt->continuing) {
+        if (auto* continuing = stmt->continuing.get()) {
             Mark(continuing);
             auto* cont = Statement(continuing);
             if (!cont) {
@@ -1470,8 +1472,8 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
 
         Mark(stmt->body);
 
-        auto* body = b.create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
-                                                       current_function_);
+        auto* body = b->create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
+                                                        current_function_);
         if (!StatementScope(stmt->body, body, [&] { return Statements(stmt->body->statements); })) {
             return false;
         }
@@ -1489,7 +1491,8 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
 }
 
 sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
-    auto* sem = b.create<sem::WhileStatement>(stmt, current_compound_statement_, current_function_);
+    auto* sem =
+        b->create<sem::WhileStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
@@ -1502,8 +1505,8 @@ sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
 
         Mark(stmt->body);
 
-        auto* body = b.create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
-                                                       current_function_);
+        auto* body = b->create<sem::LoopBlockStatement>(stmt->body, current_compound_statement_,
+                                                        current_function_);
         if (!StatementScope(stmt->body, body, [&] { return Statements(stmt->body->statements); })) {
             return false;
         }
@@ -1563,11 +1566,11 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
             [&](const ast::MemberAccessorExpression* member) { return MemberAccessor(member); },
             [&](const ast::UnaryOpExpression* unary) { return UnaryOp(unary); },
             [&](const ast::PhonyExpression*) {
-                return b.create<sem::ValueExpression>(expr, b.create<core::type::Void>(),
-                                                      core::EvaluationStage::kRuntime,
-                                                      current_statement_,
-                                                      /* constant_value */ nullptr,
-                                                      /* has_side_effects */ false);
+                return b->create<sem::ValueExpression>(expr, b->create<core::type::Void>(),
+                                                       core::EvaluationStage::kRuntime,
+                                                       current_statement_,
+                                                       /* constant_value */ nullptr,
+                                                       /* has_side_effects */ false);
             },  //
             TINT_ICE_ON_NO_MATCH);
         if (!sem_expr) {
@@ -1585,7 +1588,7 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
             }
         }
 
-        b.Sem().Add(expr, sem_expr);
+        b->Sem().Add(expr, sem_expr);
         if (expr == root) {
             return sem_expr;
         }
@@ -1730,7 +1733,7 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
 
     // Helper to generate an aliasing error diagnostic.
     struct Alias {
-        const sem::ValueExpression* expr;     // the "other expression"
+        raw_ptr<const sem::ValueExpression> expr;  // the "other expression"
         enum { Argument, ModuleScope } type;  // the type of the "other" expression
         std::string access;                   // the access performed for the "other" expression
     };
@@ -1827,12 +1830,12 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
 const core::type::Type* Resolver::ConcreteType(const core::type::Type* ty,
                                                const core::type::Type* target_ty,
                                                const Source& source) {
-    auto i32 = [&] { return b.create<core::type::I32>(); };
-    auto f32 = [&] { return b.create<core::type::F32>(); };
-    auto i32v = [&](uint32_t width) { return b.create<core::type::Vector>(i32(), width); };
-    auto f32v = [&](uint32_t width) { return b.create<core::type::Vector>(f32(), width); };
+    auto i32 = [&] { return b->create<core::type::I32>(); };
+    auto f32 = [&] { return b->create<core::type::F32>(); };
+    auto i32v = [&](uint32_t width) { return b->create<core::type::Vector>(i32(), width); };
+    auto f32v = [&](uint32_t width) { return b->create<core::type::Vector>(f32(), width); };
     auto f32m = [&](uint32_t columns, uint32_t rows) {
-        return b.create<core::type::Matrix>(f32v(rows), columns);
+        return b->create<core::type::Matrix>(f32v(rows), columns);
     };
 
     return Switch(
@@ -1884,9 +1887,9 @@ const sem::ValueExpression* Resolver::Load(const sem::ValueExpression* expr) {
         return expr;
     }
 
-    auto* load = b.create<sem::Load>(expr, current_statement_, expr->Stage());
+    auto* load = b->create<sem::Load>(expr, current_statement_, expr->Stage());
     load->Behaviors() = expr->Behaviors();
-    b.Sem().Replace(expr->Declaration(), load);
+    b->Sem().Replace(expr->Declaration(), load);
 
     // Register the load for the alias analysis.
     RegisterLoad(expr);
@@ -1934,9 +1937,9 @@ const sem::ValueExpression* Resolver::Materialize(
         }
     }
 
-    auto* m = b.create<sem::Materialize>(expr, current_statement_, concrete_ty, materialized_val);
+    auto* m = b->create<sem::Materialize>(expr, current_statement_, concrete_ty, materialized_val);
     m->Behaviors() = expr->Behaviors();
-    b.Sem().Replace(decl, m);
+    b->Sem().Replace(decl, m);
     return m;
 }
 
@@ -1994,11 +1997,11 @@ tint::Result<Vector<const core::constant::Value*, N>> Resolver::ConvertArguments
 }
 
 sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* expr) {
-    auto* idx = Load(Materialize(sem_.GetVal(expr->index)));
+    auto* idx = Load(Materialize(sem_.GetVal(expr->index.get())));
     if (!idx) {
         return nullptr;
     }
-    const auto* obj = sem_.GetVal(expr->object);
+    const auto* obj = sem_.GetVal(expr->object.get());
     if (idx->Stage() != core::EvaluationStage::kConstant) {
         // If the index is non-constant, then the resulting expression is non-constant, so we'll
         // have to materialize the object. For example, consider:
@@ -2027,7 +2030,7 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
         [&](const sem::Array* arr) { return arr->ElemType(); },
         [&](const core::type::Vector* vec) { return vec->type(); },
         [&](const core::type::Matrix* mat) {
-            return b.create<core::type::Vector>(mat->type(), mat->rows());
+            return b->create<core::type::Vector>(mat->type(), mat->rows());
         },
         [&](Default) {
             AddError(expr->source) << "cannot index type '" << sem_.TypeNameOf(storage_ty) << "'";
@@ -2046,8 +2049,8 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
 
     // If we're extracting from a memory view, we return a reference.
     if (memory_view) {
-        ty =
-            b.create<core::type::Reference>(memory_view->AddressSpace(), ty, memory_view->Access());
+        ty = b->create<core::type::Reference>(memory_view->AddressSpace(), ty,
+                                              memory_view->Access());
     }
 
     const core::constant::Value* val = nullptr;
@@ -2065,9 +2068,9 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
         }
     }
     bool has_side_effects = idx->HasSideEffects() || obj->HasSideEffects();
-    auto* sem = b.create<sem::IndexAccessorExpression>(expr, ty, stage, obj, idx,
-                                                       current_statement_, std::move(val),
-                                                       has_side_effects, obj->RootIdentifier());
+    auto* sem = b->create<sem::IndexAccessorExpression>(expr, ty, stage, obj, idx,
+                                                        current_statement_, std::move(val),
+                                                        has_side_effects, obj->RootIdentifier());
     sem->Behaviors() = idx->Behaviors() + obj->Behaviors();
     return sem;
 }
@@ -2078,7 +2081,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // * A builtin call.
     // * A value constructor.
     // * A value conversion.
-    auto* target = sem_.Get(expr->target);
+    auto* target = sem_.Get(expr->target.get());
     if (TINT_UNLIKELY(!target)) {
         return nullptr;
     }
@@ -2124,18 +2127,18 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             // Type constructor
             target_sem = constructors_.GetOrAdd(match.Get(), [&] {
                 auto params = Transform(match->parameters, [&](auto& p, size_t i) {
-                    return b.create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type,
-                                                    p.usage);
+                    return b->create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type,
+                                                     p.usage);
                 });
-                return b.create<sem::ValueConstructor>(match->return_type, std::move(params),
-                                                       overload_stage);
+                return b->create<sem::ValueConstructor>(match->return_type, std::move(params),
+                                                        overload_stage);
             });
         } else {
             // Type conversion
             target_sem = converters_.GetOrAdd(match.Get(), [&] {
-                auto* param = b.create<sem::Parameter>(nullptr, 0u, match->parameters[0].type,
-                                                       match->parameters[0].usage);
-                return b.create<sem::ValueConversion>(match->return_type, param, overload_stage);
+                auto* param = b->create<sem::Parameter>(nullptr, 0u, match->parameters[0].type,
+                                                        match->parameters[0].usage);
+                return b->create<sem::ValueConversion>(match->return_type, param, overload_stage);
             });
         }
 
@@ -2161,8 +2164,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             }
             value = r.Get();
         }
-        return b.create<sem::Call>(expr, target_sem, stage, std::move(args), current_statement_,
-                                   value, has_side_effects);
+        return b->create<sem::Call>(expr, target_sem, stage, std::move(args), current_statement_,
+                                    value, has_side_effects);
     };
 
     // arr_or_str_init is a helper for building a sem::ValueConstructor for an array or structure
@@ -2194,8 +2197,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             }
         }
 
-        return b.create<sem::Call>(expr, call_target, stage, std::move(args), current_statement_,
-                                   value, has_side_effects);
+        return b->create<sem::Call>(expr, call_target, stage, std::move(args), current_statement_,
+                                    value, has_side_effects);
     };
 
     auto ty_init_or_conv = [&](const core::type::Type* type) {
@@ -2226,11 +2229,11 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                     ArrayConstructorSig{{arr, args.Length(), args_stage}},
                     [&]() -> sem::ValueConstructor* {
                         auto params = tint::Transform(args, [&](auto, size_t i) {
-                            return b.create<sem::Parameter>(nullptr,  // declaration
-                                                            static_cast<uint32_t>(i),  // index
-                                                            arr->ElemType());
+                            return b->create<sem::Parameter>(nullptr,  // declaration
+                                                             static_cast<uint32_t>(i),  // index
+                                                             arr->ElemType());
                         });
-                        return b.create<sem::ValueConstructor>(arr, std::move(params), args_stage);
+                        return b->create<sem::ValueConstructor>(arr, std::move(params), args_stage);
                     });
 
                 if (TINT_UNLIKELY(!MaybeMaterializeAndLoadArguments(args, call_target))) {
@@ -2251,11 +2254,11 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                         params.Resize(std::min(args.Length(), str->Members().Length()));
                         for (size_t i = 0, n = params.Length(); i < n; i++) {
                             params[i] =
-                                b.create<sem::Parameter>(nullptr,                     // declaration
-                                                         static_cast<uint32_t>(i),    // index
-                                                         str->Members()[i]->Type());  // type
+                                b->create<sem::Parameter>(nullptr,                   // declaration
+                                                          static_cast<uint32_t>(i),  // index
+                                                          str->Members()[i]->Type());  // type
                         }
-                        return b.create<sem::ValueConstructor>(str, std::move(params), args_stage);
+                        return b->create<sem::ValueConstructor>(str, std::move(params), args_stage);
                     });
 
                 if (TINT_UNLIKELY(!MaybeMaterializeAndLoadArguments(args, call_target))) {
@@ -2304,7 +2307,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 return ctor_or_conv(CtorConvIntrinsic::kMat4x4, Empty);
             case core::BuiltinType::kArray: {
                 auto el_count =
-                    b.create<core::type::ConstantArrayCount>(static_cast<uint32_t>(args.Length()));
+                    b->create<core::type::ConstantArrayCount>(static_cast<uint32_t>(args.Length()));
                 auto arg_tys =
                     tint::Transform(args, [](auto* arg) { return arg->Type()->UnwrapRef(); });
                 auto el_ty = core::type::Type::Common(arg_tys);
@@ -2399,7 +2402,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     // De-duplicate builtins that are identical.
     auto* target = builtins_.GetOrAdd(std::make_pair(overload.Get(), fn), [&] {
         auto params = Transform(overload->parameters, [&](auto& p, size_t i) {
-            return b.create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type, p.usage);
+            return b->create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type, p.usage);
         });
         sem::PipelineStageSet supported_stages;
         auto flags = overload->info->flags;
@@ -2414,8 +2417,8 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         }
         auto eval_stage = overload->const_eval_fn ? core::EvaluationStage::kConstant
                                                   : core::EvaluationStage::kRuntime;
-        return b.create<sem::BuiltinFn>(fn, overload->return_type, std::move(params), eval_stage,
-                                        supported_stages, *overload->info);
+        return b->create<sem::BuiltinFn>(fn, overload->return_type, std::move(params), eval_stage,
+                                         supported_stages, *overload->info);
     });
 
     if (fn == wgsl::BuiltinFn::kTintMaterialize) {
@@ -2457,8 +2460,8 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     bool has_side_effects =
         target->HasSideEffects() ||
         std::any_of(args.begin(), args.end(), [](auto* e) { return e->HasSideEffects(); });
-    auto* call = b.create<sem::Call>(expr, target, stage, std::move(args), current_statement_,
-                                     value, has_side_effects);
+    auto* call = b->create<sem::Call>(expr, target, stage, std::move(args), current_statement_,
+                                      value, has_side_effects);
 
     if (current_function_) {
         current_function_->AddDirectlyCalledBuiltin(target);
@@ -2530,7 +2533,7 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
 
     switch (builtin_ty) {
         case core::BuiltinType::kBool:
-            return check_no_tmpl_args(b.create<core::type::Bool>());
+            return check_no_tmpl_args(b->create<core::type::Bool>());
         case core::BuiltinType::kI32:
             return check_no_tmpl_args(I32());
         case core::BuiltinType::kU32:
@@ -2538,7 +2541,7 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
         case core::BuiltinType::kF16:
             return check_no_tmpl_args(F16(ident));
         case core::BuiltinType::kF32:
-            return check_no_tmpl_args(b.create<core::type::F32>());
+            return check_no_tmpl_args(b->create<core::type::F32>());
         case core::BuiltinType::kVec2:
             return VecT(ident, builtin_ty, 2);
         case core::BuiltinType::kVec3:
@@ -2631,10 +2634,10 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
             return Ptr(ident);
         case core::BuiltinType::kSampler:
             return check_no_tmpl_args(
-                b.create<core::type::Sampler>(core::type::SamplerKind::kSampler));
+                b->create<core::type::Sampler>(core::type::SamplerKind::kSampler));
         case core::BuiltinType::kSamplerComparison:
             return check_no_tmpl_args(
-                b.create<core::type::Sampler>(core::type::SamplerKind::kComparisonSampler));
+                b->create<core::type::Sampler>(core::type::SamplerKind::kComparisonSampler));
         case core::BuiltinType::kTexture1D:
             return SampledTexture(ident, core::type::TextureDimension::k1d);
         case core::BuiltinType::kTexture2D:
@@ -2649,21 +2652,21 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
             return SampledTexture(ident, core::type::TextureDimension::kCubeArray);
         case core::BuiltinType::kTextureDepth2D:
             return check_no_tmpl_args(
-                b.create<core::type::DepthTexture>(core::type::TextureDimension::k2d));
+                b->create<core::type::DepthTexture>(core::type::TextureDimension::k2d));
         case core::BuiltinType::kTextureDepth2DArray:
             return check_no_tmpl_args(
-                b.create<core::type::DepthTexture>(core::type::TextureDimension::k2dArray));
+                b->create<core::type::DepthTexture>(core::type::TextureDimension::k2dArray));
         case core::BuiltinType::kTextureDepthCube:
             return check_no_tmpl_args(
-                b.create<core::type::DepthTexture>(core::type::TextureDimension::kCube));
+                b->create<core::type::DepthTexture>(core::type::TextureDimension::kCube));
         case core::BuiltinType::kTextureDepthCubeArray:
             return check_no_tmpl_args(
-                b.create<core::type::DepthTexture>(core::type::TextureDimension::kCubeArray));
+                b->create<core::type::DepthTexture>(core::type::TextureDimension::kCubeArray));
         case core::BuiltinType::kTextureDepthMultisampled2D:
             return check_no_tmpl_args(
-                b.create<core::type::DepthMultisampledTexture>(core::type::TextureDimension::k2d));
+                b->create<core::type::DepthMultisampledTexture>(core::type::TextureDimension::k2d));
         case core::BuiltinType::kTextureExternal:
-            return check_no_tmpl_args(b.create<core::type::ExternalTexture>());
+            return check_no_tmpl_args(b->create<core::type::ExternalTexture>());
         case core::BuiltinType::kTextureMultisampled2D:
             return MultisampledTexture(ident, core::type::TextureDimension::k2d);
         case core::BuiltinType::kTextureStorage1D:
@@ -2679,57 +2682,63 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
         case core::BuiltinType::kPackedVec3:
             return PackedVec3T(ident);
         case core::BuiltinType::kAtomicCompareExchangeResultI32:
-            return core::type::CreateAtomicCompareExchangeResult(b.Types(), b.Symbols(), I32());
+            return core::type::CreateAtomicCompareExchangeResult(b->Types(), b->Symbols(), I32());
         case core::BuiltinType::kAtomicCompareExchangeResultU32:
-            return core::type::CreateAtomicCompareExchangeResult(b.Types(), b.Symbols(), U32());
+            return core::type::CreateAtomicCompareExchangeResult(b->Types(), b->Symbols(), U32());
         case core::BuiltinType::kFrexpResultAbstract:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), AF());
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), AF());
         case core::BuiltinType::kFrexpResultF16:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), F16(ident));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), F16(ident));
         case core::BuiltinType::kFrexpResultF32:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), F32());
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), F32());
         case core::BuiltinType::kFrexpResultVec2Abstract:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, AF(), 2));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, AF(), 2));
         case core::BuiltinType::kFrexpResultVec2F16:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 2));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(),
+                                                 Vec(ident, F16(ident), 2));
         case core::BuiltinType::kFrexpResultVec2F32:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F32(), 2));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, F32(), 2));
         case core::BuiltinType::kFrexpResultVec3Abstract:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, AF(), 3));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, AF(), 3));
         case core::BuiltinType::kFrexpResultVec3F16:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 3));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(),
+                                                 Vec(ident, F16(ident), 3));
         case core::BuiltinType::kFrexpResultVec3F32:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F32(), 3));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, F32(), 3));
         case core::BuiltinType::kFrexpResultVec4Abstract:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, AF(), 4));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, AF(), 4));
         case core::BuiltinType::kFrexpResultVec4F16:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 4));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(),
+                                                 Vec(ident, F16(ident), 4));
         case core::BuiltinType::kFrexpResultVec4F32:
-            return core::type::CreateFrexpResult(b.Types(), b.Symbols(), Vec(ident, F32(), 4));
+            return core::type::CreateFrexpResult(b->Types(), b->Symbols(), Vec(ident, F32(), 4));
         case core::BuiltinType::kModfResultAbstract:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), AF());
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), AF());
         case core::BuiltinType::kModfResultF16:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), F16(ident));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), F16(ident));
         case core::BuiltinType::kModfResultF32:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), F32());
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), F32());
         case core::BuiltinType::kModfResultVec2Abstract:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, AF(), 2));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, AF(), 2));
         case core::BuiltinType::kModfResultVec2F16:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 2));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(),
+                                                Vec(ident, F16(ident), 2));
         case core::BuiltinType::kModfResultVec2F32:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F32(), 2));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, F32(), 2));
         case core::BuiltinType::kModfResultVec3Abstract:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, AF(), 3));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, AF(), 3));
         case core::BuiltinType::kModfResultVec3F16:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 3));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(),
+                                                Vec(ident, F16(ident), 3));
         case core::BuiltinType::kModfResultVec3F32:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F32(), 3));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, F32(), 3));
         case core::BuiltinType::kModfResultVec4Abstract:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, AF(), 4));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, AF(), 4));
         case core::BuiltinType::kModfResultVec4F16:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F16(ident), 4));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(),
+                                                Vec(ident, F16(ident), 4));
         case core::BuiltinType::kModfResultVec4F32:
-            return core::type::CreateModfResult(b.Types(), b.Symbols(), Vec(ident, F32(), 4));
+            return core::type::CreateModfResult(b->Types(), b->Symbols(), Vec(ident, F32(), 4));
         case core::BuiltinType::kUndefined:
             break;
     }
@@ -2738,23 +2747,23 @@ core::type::Type* Resolver::BuiltinType(core::BuiltinType builtin_ty,
 }
 
 core::type::AbstractFloat* Resolver::AF() {
-    return b.create<core::type::AbstractFloat>();
+    return b->create<core::type::AbstractFloat>();
 }
 
 core::type::F32* Resolver::F32() {
-    return b.create<core::type::F32>();
+    return b->create<core::type::F32>();
 }
 
 core::type::I32* Resolver::I32() {
-    return b.create<core::type::I32>();
+    return b->create<core::type::I32>();
 }
 
 core::type::U32* Resolver::U32() {
-    return b.create<core::type::U32>();
+    return b->create<core::type::U32>();
 }
 
 core::type::F16* Resolver::F16(const ast::Identifier* ident) {
-    return validator_.CheckF16Enabled(ident->source) ? b.create<core::type::F16>() : nullptr;
+    return validator_.CheckF16Enabled(ident->source) ? b->create<core::type::F16>() : nullptr;
 }
 
 core::type::Vector* Resolver::Vec(const ast::Identifier* ident, core::type::Type* el, uint32_t n) {
@@ -2764,7 +2773,7 @@ core::type::Vector* Resolver::Vec(const ast::Identifier* ident, core::type::Type
     if (TINT_UNLIKELY(!validator_.Vector(el, ident->source))) {
         return nullptr;
     }
-    return b.create<core::type::Vector>(el, n);
+    return b->create<core::type::Vector>(el, n);
 }
 
 core::type::Type* Resolver::VecT(const ast::Identifier* ident,
@@ -2773,7 +2782,7 @@ core::type::Type* Resolver::VecT(const ast::Identifier* ident,
     auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
     if (!tmpl_ident) {
         // 'vecN' has no template arguments, so return an incomplete type.
-        return b.create<IncompleteType>(builtin);
+        return b->create<IncompleteType>(builtin);
     }
 
     if (TINT_UNLIKELY(!CheckTemplatedIdentifierArgs(tmpl_ident, 1))) {
@@ -2802,7 +2811,7 @@ core::type::Matrix* Resolver::Mat(const ast::Identifier* ident,
     if (!column) {
         return nullptr;
     }
-    return b.create<core::type::Matrix>(column, num_columns);
+    return b->create<core::type::Matrix>(column, num_columns);
 }
 
 core::type::Type* Resolver::MatT(const ast::Identifier* ident,
@@ -2812,7 +2821,7 @@ core::type::Type* Resolver::MatT(const ast::Identifier* ident,
     auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
     if (!tmpl_ident) {
         // 'vecN' has no template arguments, so return an incomplete type.
-        return b.create<IncompleteType>(builtin);
+        return b->create<IncompleteType>(builtin);
     }
 
     if (TINT_UNLIKELY(!CheckTemplatedIdentifierArgs(tmpl_ident, 1))) {
@@ -2831,7 +2840,7 @@ core::type::Type* Resolver::Array(const ast::Identifier* ident) {
     auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
     if (!tmpl_ident) {
         // 'array' has no template arguments, so return an incomplete type.
-        return b.create<IncompleteType>(core::BuiltinType::kArray);
+        return b->create<IncompleteType>(core::BuiltinType::kArray);
     }
 
     if (TINT_UNLIKELY(!CheckTemplatedIdentifierArgs(tmpl_ident, 1, 2))) {
@@ -2846,7 +2855,7 @@ core::type::Type* Resolver::Array(const ast::Identifier* ident) {
     }
 
     const core::type::ArrayCount* el_count =
-        ast_count ? ArrayCount(ast_count) : b.create<core::type::RuntimeArrayCount>();
+        ast_count ? ArrayCount(ast_count) : b->create<core::type::RuntimeArrayCount>();
     if (!el_count) {
         return nullptr;
     }
@@ -2887,7 +2896,7 @@ core::type::Atomic* Resolver::Atomic(const ast::Identifier* ident) {
         return nullptr;
     }
 
-    auto* out = b.create<core::type::Atomic>(el_ty);
+    auto* out = b->create<core::type::Atomic>(el_ty);
     if (TINT_UNLIKELY(!validator_.Atomic(tmpl_ident, out))) {
         return nullptr;
     }
@@ -2920,7 +2929,7 @@ core::type::Pointer* Resolver::Ptr(const ast::Identifier* ident) {
         access = DefaultAccessForAddressSpace(address_space);
     }
 
-    auto* out = b.create<core::type::Pointer>(address_space, store_ty, access);
+    auto* out = b->create<core::type::Pointer>(address_space, store_ty, access);
     if (TINT_UNLIKELY(!validator_.Pointer(tmpl_ident, out))) {
         return nullptr;
     }
@@ -2944,7 +2953,7 @@ core::type::SampledTexture* Resolver::SampledTexture(const ast::Identifier* iden
         return nullptr;
     }
 
-    auto* out = b.create<core::type::SampledTexture>(dim, ty_expr);
+    auto* out = b->create<core::type::SampledTexture>(dim, ty_expr);
     return validator_.SampledTexture(out, ident->source) ? out : nullptr;
 }
 
@@ -2960,7 +2969,7 @@ core::type::MultisampledTexture* Resolver::MultisampledTexture(const ast::Identi
         return nullptr;
     }
 
-    auto* out = b.create<core::type::MultisampledTexture>(dim, ty_expr);
+    auto* out = b->create<core::type::MultisampledTexture>(dim, ty_expr);
     return validator_.MultisampledTexture(out, ident->source) ? out : nullptr;
 }
 
@@ -2981,8 +2990,8 @@ core::type::StorageTexture* Resolver::StorageTexture(const ast::Identifier* iden
         return nullptr;
     }
 
-    auto* subtype = core::type::StorageTexture::SubtypeFor(format, b.Types());
-    auto* tex = b.create<core::type::StorageTexture>(dim, format, access, subtype);
+    auto* subtype = core::type::StorageTexture::SubtypeFor(format, b->Types());
+    auto* tex = b->create<core::type::StorageTexture>(dim, format, access, subtype);
     if (!validator_.StorageTexture(tex, ident->source)) {
         return nullptr;
     }
@@ -3001,7 +3010,7 @@ core::type::InputAttachment* Resolver::InputAttachment(const ast::Identifier* id
         return nullptr;
     }
 
-    auto* out = b.create<core::type::InputAttachment>(ty_expr);
+    auto* out = b->create<core::type::InputAttachment>(ty_expr);
     return validator_.InputAttachment(out, ident->source) ? out : nullptr;
 }
 
@@ -3019,7 +3028,7 @@ core::type::Vector* Resolver::PackedVec3T(const ast::Identifier* ident) {
     if (TINT_UNLIKELY(!validator_.Vector(el_ty, ident->source))) {
         return nullptr;
     }
-    return b.create<core::type::Vector>(el_ty, 3u, true);
+    return b->create<core::type::Vector>(el_ty, 3u, true);
 }
 
 const ast::TemplatedIdentifier* Resolver::TemplatedIdentifier(const ast::Identifier* ident,
@@ -3120,8 +3129,8 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
 
     // TODO(crbug.com/tint/1420): For now, assume all function calls have side effects.
     bool has_side_effects = true;
-    auto* call = b.create<sem::Call>(expr, target, stage, std::move(args), current_statement_,
-                                     /* constant_value */ nullptr, has_side_effects);
+    auto* call = b->create<sem::Call>(expr, target, stage, std::move(args), current_statement_,
+                                      /* constant_value */ nullptr, has_side_effects);
 
     target->AddCallSite(call);
 
@@ -3215,27 +3224,28 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
         [&](const ast::IntLiteralExpression* i) -> core::type::Type* {
             switch (i->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                    return b.create<core::type::AbstractInt>();
+                    return b->create<core::type::AbstractInt>();
                 case ast::IntLiteralExpression::Suffix::kI:
-                    return b.create<core::type::I32>();
+                    return b->create<core::type::I32>();
                 case ast::IntLiteralExpression::Suffix::kU:
-                    return b.create<core::type::U32>();
+                    return b->create<core::type::U32>();
             }
             TINT_UNREACHABLE() << "Unhandled integer literal suffix: " << i->suffix;
         },
         [&](const ast::FloatLiteralExpression* f) -> core::type::Type* {
             switch (f->suffix) {
                 case ast::FloatLiteralExpression::Suffix::kNone:
-                    return b.create<core::type::AbstractFloat>();
+                    return b->create<core::type::AbstractFloat>();
                 case ast::FloatLiteralExpression::Suffix::kF:
-                    return b.create<core::type::F32>();
+                    return b->create<core::type::F32>();
                 case ast::FloatLiteralExpression::Suffix::kH:
-                    return validator_.CheckF16Enabled(literal->source) ? b.create<core::type::F16>()
-                                                                       : nullptr;
+                    return validator_.CheckF16Enabled(literal->source)
+                               ? b->create<core::type::F16>()
+                               : nullptr;
             }
             TINT_UNREACHABLE() << "Unhandled float literal suffix: " << f->suffix;
         },
-        [&](const ast::BoolLiteralExpression*) { return b.create<core::type::Bool>(); },  //
+        [&](const ast::BoolLiteralExpression*) { return b->create<core::type::Bool>(); },  //
         TINT_ICE_ON_NO_MATCH);
 
     if (ty == nullptr) {
@@ -3250,36 +3260,36 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
     if (stage == core::EvaluationStage::kConstant) {
         val = Switch(
             literal,
-            [&](const ast::BoolLiteralExpression* lit) { return b.constants.Get(lit->value); },
+            [&](const ast::BoolLiteralExpression* lit) { return b->constants.Get(lit->value); },
             [&](const ast::IntLiteralExpression* lit) -> const core::constant::Value* {
                 switch (lit->suffix) {
                     case ast::IntLiteralExpression::Suffix::kNone:
-                        return b.constants.Get(AInt(lit->value));
+                        return b->constants.Get(AInt(lit->value));
                     case ast::IntLiteralExpression::Suffix::kI:
-                        return b.constants.Get(i32(lit->value));
+                        return b->constants.Get(i32(lit->value));
                     case ast::IntLiteralExpression::Suffix::kU:
-                        return b.constants.Get(u32(lit->value));
+                        return b->constants.Get(u32(lit->value));
                 }
                 return nullptr;
             },
             [&](const ast::FloatLiteralExpression* lit) -> const core::constant::Value* {
                 switch (lit->suffix) {
                     case ast::FloatLiteralExpression::Suffix::kNone:
-                        return b.constants.Get(AFloat(lit->value));
+                        return b->constants.Get(AFloat(lit->value));
                     case ast::FloatLiteralExpression::Suffix::kF:
-                        return b.constants.Get(f32(lit->value));
+                        return b->constants.Get(f32(lit->value));
                     case ast::FloatLiteralExpression::Suffix::kH:
-                        return b.constants.Get(f16(lit->value));
+                        return b->constants.Get(f16(lit->value));
                 }
                 return nullptr;
             });
     }
-    return b.create<sem::ValueExpression>(literal, ty, stage, current_statement_, std::move(val),
-                                          /* has_side_effects */ false);
+    return b->create<sem::ValueExpression>(literal, ty, stage, current_statement_, std::move(val),
+                                           /* has_side_effects */ false);
 }
 
 sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
-    auto* ident = expr->identifier;
+    auto* ident = expr->identifier.get();
     Mark(ident);
 
     auto resolved = dependencies_.resolved_identifiers.Get(ident);
@@ -3305,7 +3315,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                     value = nullptr;
                 }
                 auto* user =
-                    b.create<sem::VariableUser>(expr, stage, current_statement_, value, variable);
+                    b->create<sem::VariableUser>(expr, stage, current_statement_, value, variable);
 
                 if (current_statement_) {
                     // If identifier is part of a loop continuing block, make sure it
@@ -3369,13 +3379,13 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                     }
                 }
 
-                return b.create<sem::TypeExpression>(expr, current_statement_, ty);
+                return b->create<sem::TypeExpression>(expr, current_statement_, ty);
             },
             [&](const sem::Function* fn) -> sem::FunctionExpression* {
                 if (!TINT_LIKELY(CheckNotTemplated("function", ident))) {
                     return nullptr;
                 }
-                return b.create<sem::FunctionExpression>(expr, current_statement_, fn);
+                return b->create<sem::FunctionExpression>(expr, current_statement_, fn);
             });
     }
 
@@ -3384,30 +3394,30 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
         if (!ty) {
             return nullptr;
         }
-        return b.create<sem::TypeExpression>(expr, current_statement_, ty);
+        return b->create<sem::TypeExpression>(expr, current_statement_, ty);
     }
 
     if (auto fn = resolved->BuiltinFn(); fn != wgsl::BuiltinFn::kNone) {
-        return b.create<sem::BuiltinEnumExpression<wgsl::BuiltinFn>>(expr, current_statement_, fn);
+        return b->create<sem::BuiltinEnumExpression<wgsl::BuiltinFn>>(expr, current_statement_, fn);
     }
 
     if (auto access = resolved->Access(); access != core::Access::kUndefined) {
         return CheckNotTemplated("access", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::Access>>(expr, current_statement_,
-                                                                        access)
+                   ? b->create<sem::BuiltinEnumExpression<core::Access>>(expr, current_statement_,
+                                                                         access)
                    : nullptr;
     }
 
     if (auto addr = resolved->AddressSpace(); addr != core::AddressSpace::kUndefined) {
         return CheckNotTemplated("address space", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::AddressSpace>>(
+                   ? b->create<sem::BuiltinEnumExpression<core::AddressSpace>>(
                          expr, current_statement_, addr)
                    : nullptr;
     }
 
     if (auto builtin = resolved->BuiltinValue(); builtin != core::BuiltinValue::kUndefined) {
         return CheckNotTemplated("builtin value", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::BuiltinValue>>(
+                   ? b->create<sem::BuiltinEnumExpression<core::BuiltinValue>>(
                          expr, current_statement_, builtin)
                    : nullptr;
     }
@@ -3415,7 +3425,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     if (auto i_smpl = resolved->InterpolationSampling();
         i_smpl != core::InterpolationSampling::kUndefined) {
         return CheckNotTemplated("interpolation sampling", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::InterpolationSampling>>(
+                   ? b->create<sem::BuiltinEnumExpression<core::InterpolationSampling>>(
                          expr, current_statement_, i_smpl)
                    : nullptr;
     }
@@ -3423,27 +3433,27 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     if (auto i_type = resolved->InterpolationType();
         i_type != core::InterpolationType::kUndefined) {
         return CheckNotTemplated("interpolation type", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::InterpolationType>>(
+                   ? b->create<sem::BuiltinEnumExpression<core::InterpolationType>>(
                          expr, current_statement_, i_type)
                    : nullptr;
     }
 
     if (auto fmt = resolved->TexelFormat(); fmt != core::TexelFormat::kUndefined) {
         return CheckNotTemplated("texel format", ident)
-                   ? b.create<sem::BuiltinEnumExpression<core::TexelFormat>>(
+                   ? b->create<sem::BuiltinEnumExpression<core::TexelFormat>>(
                          expr, current_statement_, fmt)
                    : nullptr;
     }
 
     if (resolved->Unresolved()) {
-        return b.create<UnresolvedIdentifier>(expr, current_statement_);
+        return b->create<UnresolvedIdentifier>(expr, current_statement_);
     }
 
     TINT_UNREACHABLE() << "unhandled resolved identifier: " << resolved->String();
 }
 
 sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* expr) {
-    auto* object = sem_.GetVal(expr->object);
+    auto* object = sem_.GetVal(expr->object.get());
     if (!object) {
         return nullptr;
     }
@@ -3494,16 +3504,16 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
 
             // If we're extracting from a memory view, we return a reference.
             if (memory_view) {
-                ty = b.create<core::type::Reference>(memory_view->AddressSpace(), ty,
-                                                     memory_view->Access());
+                ty = b->create<core::type::Reference>(memory_view->AddressSpace(), ty,
+                                                      memory_view->Access());
             }
 
             const core::constant::Value* val = nullptr;
             if (auto* obj_val = object->ConstantValue()) {
                 val = obj_val->Index(static_cast<size_t>(member->Index()));
             }
-            return b.create<sem::StructMemberAccess>(expr, ty, current_statement_, val, object,
-                                                     member, has_side_effects, root_ident);
+            return b->create<sem::StructMemberAccess>(expr, ty, current_statement_, val, object,
+                                                      member, has_side_effects, root_ident);
         },
 
         [&](const core::type::Vector* vec) -> sem::ValueExpression* {
@@ -3564,13 +3574,13 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
                 ty = vec->type();
                 // If we're extracting from a memory view, we return a reference.
                 if (memory_view) {
-                    ty = b.create<core::type::Reference>(memory_view->AddressSpace(), ty,
-                                                         memory_view->Access());
+                    ty = b->create<core::type::Reference>(memory_view->AddressSpace(), ty,
+                                                          memory_view->Access());
                 }
             } else {
                 // The vector will have a number of components equal to the length of
                 // the swizzle.
-                ty = b.create<core::type::Vector>(vec->type(), static_cast<uint32_t>(size));
+                ty = b->create<core::type::Vector>(vec->type(), static_cast<uint32_t>(size));
 
                 // The load rule is invoked before the swizzle, if necessary.
                 obj_expr = Load(object);
@@ -3583,8 +3593,8 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
                 }
                 val = res.Get();
             }
-            return b.create<sem::Swizzle>(expr, ty, current_statement_, val, obj_expr,
-                                          std::move(swizzle), has_side_effects, root_ident);
+            return b->create<sem::Swizzle>(expr, ty, current_statement_, val, obj_expr,
+                                           std::move(swizzle), has_side_effects, root_ident);
         },
 
         [&](Default) {
@@ -3595,8 +3605,8 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
 }
 
 sem::ValueExpression* Resolver::Binary(const ast::BinaryExpression* expr) {
-    const auto* lhs = sem_.GetVal(expr->lhs);
-    const auto* rhs = sem_.GetVal(expr->rhs);
+    const auto* lhs = sem_.GetVal(expr->lhs.get());
+    const auto* rhs = sem_.GetVal(expr->rhs.get());
     if (!lhs || !rhs) {
         return nullptr;
     }
@@ -3619,11 +3629,11 @@ sem::ValueExpression* Resolver::Binary(const ast::BinaryExpression* expr) {
         return nullptr;
     }
 
-    auto* res_ty = overload->return_type;
+    auto* res_ty = overload->return_type.get();
 
     // Parameter types
-    auto* lhs_ty = overload->parameters[0].type;
-    auto* rhs_ty = overload->parameters[1].type;
+    auto* lhs_ty = overload->parameters[0].type.get();
+    auto* rhs_ty = overload->parameters[1].type.get();
     if (ShouldMaterializeArgument(lhs_ty)) {
         lhs = Materialize(lhs, lhs_ty);
         if (!lhs) {
@@ -3674,15 +3684,15 @@ sem::ValueExpression* Resolver::Binary(const ast::BinaryExpression* expr) {
     }
 
     bool has_side_effects = lhs->HasSideEffects() || rhs->HasSideEffects();
-    auto* sem = b.create<sem::ValueExpression>(expr, res_ty, stage, current_statement_, value,
-                                               has_side_effects);
+    auto* sem = b->create<sem::ValueExpression>(expr, res_ty, stage, current_statement_, value,
+                                                has_side_effects);
     sem->Behaviors() = lhs->Behaviors() + rhs->Behaviors();
 
     return sem;
 }
 
 sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
-    const auto* expr = sem_.GetVal(unary->expr);
+    const auto* expr = sem_.GetVal(unary->expr.get());
     if (!expr) {
         return nullptr;
     }
@@ -3713,8 +3723,8 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     return nullptr;
                 }
 
-                ty = b.create<core::type::Pointer>(ref->AddressSpace(), ref->StoreType(),
-                                                   ref->Access());
+                ty = b->create<core::type::Pointer>(ref->AddressSpace(), ref->StoreType(),
+                                                    ref->Access());
 
                 root_ident = expr->RootIdentifier();
             } else {
@@ -3726,8 +3736,8 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
 
         case core::UnaryOp::kIndirection:
             if (auto* ptr = expr_ty->As<core::type::Pointer>()) {
-                ty = b.create<core::type::Reference>(ptr->AddressSpace(), ptr->StoreType(),
-                                                     ptr->Access());
+                ty = b->create<core::type::Reference>(ptr->AddressSpace(), ptr->StoreType(),
+                                                      ptr->Access());
                 root_ident = expr->RootIdentifier();
             } else {
                 AddError(unary->expr->source) << "cannot dereference expression of type "
@@ -3744,7 +3754,7 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                 return nullptr;
             }
             ty = overload->return_type;
-            auto* param_ty = overload->parameters[0].type;
+            auto* param_ty = overload->parameters[0].type.get();
             if (ShouldMaterializeArgument(param_ty)) {
                 expr = Materialize(expr, param_ty);
                 if (!expr) {
@@ -3775,8 +3785,8 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
         }
     }
 
-    auto* sem = b.create<sem::ValueExpression>(unary, ty, stage, current_statement_, value,
-                                               expr->HasSideEffects(), root_ident);
+    auto* sem = b->create<sem::ValueExpression>(unary, ty, stage, current_statement_, value,
+                                                expr->HasSideEffects(), root_ident);
     sem->Behaviors() = expr->Behaviors();
     return sem;
 }
@@ -3981,7 +3991,7 @@ tint::Result<sem::WorkgroupSize> Resolver::WorkgroupAttribute(const ast::Workgro
 
     // If all arguments are abstract-integers, then materialize to i32.
     if (common_ty->Is<core::type::AbstractInt>()) {
-        common_ty = b.create<core::type::I32>();
+        common_ty = b->create<core::type::I32>();
     }
 
     for (size_t i = 0; i < args.Length(); i++) {
@@ -4021,7 +4031,7 @@ tint::Result<tint::core::BuiltinValue> Resolver::BuiltinAttribute(
     }
     // Apply the resolved tint::sem::BuiltinEnumExpression<tint::core::BuiltinValue> to the
     // attribute.
-    b.Sem().Add(attr, builtin_expr);
+    b->Sem().Add(attr, builtin_expr);
     return builtin_expr->Value();
 }
 
@@ -4147,7 +4157,7 @@ core::type::Type* Resolver::TypeDecl(const ast::TypeDecl* named_type) {
         return nullptr;
     }
 
-    b.Sem().Add(named_type, result);
+    b->Sem().Add(named_type, result);
     return result;
 }
 
@@ -4163,17 +4173,17 @@ const core::type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_
             // Happens in expressions like:
             //    false && array<T, N>()[i]
             // The end result will not be used, so just make N=1.
-            return b.create<core::type::ConstantArrayCount>(static_cast<uint32_t>(1));
+            return b->create<core::type::ConstantArrayCount>(static_cast<uint32_t>(1));
 
         case core::EvaluationStage::kOverride: {
             // array count is an override expression.
             // Is the count a named 'override'?
             if (auto* user = count_sem->UnwrapMaterialize()->As<sem::VariableUser>()) {
                 if (auto* global = user->Variable()->As<sem::GlobalVariable>()) {
-                    return b.create<sem::NamedOverrideArrayCount>(global);
+                    return b->create<sem::NamedOverrideArrayCount>(global);
                 }
             }
-            return b.create<sem::UnnamedOverrideArrayCount>(count_sem);
+            return b->create<sem::UnnamedOverrideArrayCount>(count_sem);
         }
 
         case core::EvaluationStage::kConstant: {
@@ -4192,7 +4202,7 @@ const core::type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_
                 return nullptr;
             }
 
-            return b.create<core::type::ConstantArrayCount>(static_cast<uint32_t>(count));
+            return b->create<core::type::ConstantArrayCount>(static_cast<uint32_t>(count));
         }
 
         default: {
@@ -4262,9 +4272,9 @@ sem::Array* Resolver::Array(const Source& array_source,
     } else if (el_count->Is<core::type::RuntimeArrayCount>()) {
         size = stride;
     }
-    auto* out =
-        b.create<sem::Array>(el_ty, el_count, el_align, static_cast<uint32_t>(size),
-                             static_cast<uint32_t>(stride), static_cast<uint32_t>(implicit_stride));
+    auto* out = b->create<sem::Array>(el_ty, el_count, el_align, static_cast<uint32_t>(size),
+                                      static_cast<uint32_t>(stride),
+                                      static_cast<uint32_t>(implicit_stride));
 
     // Maximum nesting depth of composite types
     //  https://gpuweb.github.io/gpuweb/wgsl/#limits
@@ -4350,7 +4360,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         if (auto added = member_map.Add(member->name->symbol, member); !added) {
             AddError(member->source)
                 << "redefinition of " << style::Code(member->name->symbol.NameView());
-            AddNote(added.value->source) << "previous definition is here";
+            AddNote(*added.value->source) << "previous definition is here";
             return nullptr;
         }
 
@@ -4565,11 +4575,11 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
             return nullptr;
         }
 
-        auto* sem_member = b.create<sem::StructMember>(
+        auto* sem_member = b->create<sem::StructMember>(
             member, member->name->symbol, type, static_cast<uint32_t>(sem_members.Length()),
             static_cast<uint32_t>(offset), static_cast<uint32_t>(align),
             static_cast<uint32_t>(size), attributes);
-        b.Sem().Add(member, sem_member);
+        b->Sem().Add(member, sem_member);
         sem_members.Push(sem_member);
 
         struct_size = offset + size;
@@ -4588,7 +4598,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         ICE(str->source) << "calculated struct stride exceeds uint32";
     }
 
-    auto* out = b.create<sem::Struct>(
+    auto* out = b->create<sem::Struct>(
         str, str->name->symbol, std::move(sem_members), static_cast<uint32_t>(struct_align),
         static_cast<uint32_t>(struct_size), static_cast<uint32_t>(size_no_padding));
 
@@ -4628,13 +4638,13 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
 }
 
 sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = current_statement_->Behaviors();
         behaviors = sem::Behavior::kReturn;
 
         const core::type::Type* value_ty = nullptr;
-        if (auto* value = stmt->value) {
+        if (auto* value = stmt->value.get()) {
             const auto* expr = Load(ValueExpression(value));
             if (!expr) {
                 return false;
@@ -4649,7 +4659,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
 
             value_ty = expr->Type();
         } else {
-            value_ty = b.create<core::type::Void>();
+            value_ty = b->create<core::type::Void>();
         }
 
         // Validate after processing the return value expression so that its type
@@ -4661,7 +4671,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
 
 sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt) {
     auto* sem =
-        b.create<sem::SwitchStatement>(stmt, current_compound_statement_, current_function_);
+        b->create<sem::SwitchStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
@@ -4693,7 +4703,7 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
         if (!common_ty || !common_ty->is_integer_scalar()) {
             // No common type found or the common type was abstract.
             // Pick i32 and let validation deal with any mismatches.
-            common_ty = b.create<core::type::I32>();
+            common_ty = b->create<core::type::I32>();
         }
         cond = Materialize(cond, common_ty);
         if (!cond) {
@@ -4744,7 +4754,7 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
 }
 
 sem::Statement* Resolver::VariableDeclStatement(const ast::VariableDeclStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         Mark(stmt->variable);
 
@@ -4764,7 +4774,7 @@ sem::Statement* Resolver::VariableDeclStatement(const ast::VariableDeclStatement
 }
 
 sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
@@ -4805,7 +4815,7 @@ sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* st
 }
 
 sem::Statement* Resolver::BreakStatement(const ast::BreakStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         sem->Behaviors() = sem::Behavior::kBreak;
 
@@ -4815,7 +4825,7 @@ sem::Statement* Resolver::BreakStatement(const ast::BreakStatement* stmt) {
 
 sem::Statement* Resolver::BreakIfStatement(const ast::BreakIfStatement* stmt) {
     auto* sem =
-        b.create<sem::BreakIfStatement>(stmt, current_compound_statement_, current_function_);
+        b->create<sem::BreakIfStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
@@ -4830,7 +4840,7 @@ sem::Statement* Resolver::BreakIfStatement(const ast::BreakIfStatement* stmt) {
 }
 
 sem::Statement* Resolver::CallStatement(const ast::CallStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         if (auto* expr = ValueExpression(stmt->expr)) {
             sem->Behaviors() = expr->Behaviors();
@@ -4842,7 +4852,7 @@ sem::Statement* Resolver::CallStatement(const ast::CallStatement* stmt) {
 
 sem::Statement* Resolver::CompoundAssignmentStatement(
     const ast::CompoundAssignmentStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
@@ -4878,7 +4888,7 @@ sem::Statement* Resolver::CompoundAssignmentStatement(
 }
 
 sem::Statement* Resolver::ContinueStatement(const ast::ContinueStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         sem->Behaviors() = sem::Behavior::kContinue;
 
@@ -4895,7 +4905,7 @@ sem::Statement* Resolver::ContinueStatement(const ast::ContinueStatement* stmt) 
 }
 
 sem::Statement* Resolver::DiscardStatement(const ast::DiscardStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         current_function_->SetDiscardStatement(sem);
         return true;
@@ -4904,7 +4914,7 @@ sem::Statement* Resolver::DiscardStatement(const ast::DiscardStatement* stmt) {
 
 sem::Statement* Resolver::IncrementDecrementStatement(
     const ast::IncrementDecrementStatement* stmt) {
-    auto* sem = b.create<sem::Statement>(stmt, current_compound_statement_, current_function_);
+    auto* sem = b->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
         auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
@@ -4975,7 +4985,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(core::AddressSpace address_space,
 
 template <typename SEM, typename F>
 SEM* Resolver::StatementScope(const ast::Statement* ast, SEM* sem, F&& callback) {
-    b.Sem().Add(ast, sem);
+    b->Sem().Add(ast, sem);
 
     auto* as_compound =
         As<sem::CompoundStatement, tint::CastFlags::kDontErrorOnImpossibleCast>(sem);
@@ -5031,7 +5041,7 @@ SEM* Resolver::StatementScope(const ast::Statement* ast, SEM* sem, F&& callback)
 
     TINT_SCOPED_ASSIGNMENT(current_statement_, sem);
     TINT_SCOPED_ASSIGNMENT(current_compound_statement_,
-                           as_compound ? as_compound : current_compound_statement_);
+                           as_compound ? as_compound : current_compound_statement_.get());
     TINT_SCOPED_ASSIGNMENT(current_scoping_depth_, current_scoping_depth_ + 1);
 
     if (current_scoping_depth_ > kMaxStatementDepth) {
@@ -5087,15 +5097,15 @@ void Resolver::ErrorInvalidAttribute(const ast::Attribute* attr, StyledText use)
 }
 
 diag::Diagnostic& Resolver::AddError(const Source& source) const {
-    return diagnostics_.AddError(source);
+    return diagnostics_->AddError(source);
 }
 
 diag::Diagnostic& Resolver::AddWarning(const Source& source) const {
-    return diagnostics_.AddWarning(source);
+    return diagnostics_->AddWarning(source);
 }
 
 diag::Diagnostic& Resolver::AddNote(const Source& source) const {
-    return diagnostics_.AddNote(source);
+    return diagnostics_->AddNote(source);
 }
 
 }  // namespace tint::resolver

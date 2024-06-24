@@ -33,7 +33,7 @@ namespace tint::spirv::writer {
 namespace {
 
 TEST_F(SpirvWriterTest, Loop_BreakIf) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {  //
@@ -65,7 +65,7 @@ TEST_F(SpirvWriterTest, Loop_BreakIf) {
 
 // Test that we still emit the continuing block with a back-edge, even when it is unreachable.
 TEST_F(SpirvWriterTest, Loop_UnconditionalBreakInBody) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {  //
@@ -92,7 +92,7 @@ TEST_F(SpirvWriterTest, Loop_UnconditionalBreakInBody) {
 }
 
 TEST_F(SpirvWriterTest, Loop_ConditionalBreakInBody) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {
@@ -135,7 +135,7 @@ TEST_F(SpirvWriterTest, Loop_ConditionalBreakInBody) {
 }
 
 TEST_F(SpirvWriterTest, Loop_ConditionalContinueInBody) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {
@@ -180,7 +180,7 @@ TEST_F(SpirvWriterTest, Loop_ConditionalContinueInBody) {
 // Test that we still emit the continuing block with a back-edge, and the merge block, even when
 // they are unreachable.
 TEST_F(SpirvWriterTest, Loop_UnconditionalReturnInBody) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {  //
@@ -207,11 +207,11 @@ TEST_F(SpirvWriterTest, Loop_UnconditionalReturnInBody) {
 }
 
 TEST_F(SpirvWriterTest, Loop_UseResultFromBodyInContinuing) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {
-            auto* result = b.Equal(ty.bool_(), 1_i, 2_i);
+            auto* result = b.Equal(ty->bool_(), 1_i, 2_i);
             b.Continue(loop);
 
             b.Append(loop->Continuing(), [&] {  //
@@ -240,7 +240,7 @@ TEST_F(SpirvWriterTest, Loop_UseResultFromBodyInContinuing) {
 }
 
 TEST_F(SpirvWriterTest, Loop_NestedLoopInBody) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* outer_loop = b.Loop();
         b.Append(outer_loop->Body(), [&] {
@@ -289,7 +289,7 @@ TEST_F(SpirvWriterTest, Loop_NestedLoopInBody) {
 }
 
 TEST_F(SpirvWriterTest, Loop_NestedLoopInContinuing) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* outer_loop = b.Loop();
         b.Append(outer_loop->Body(), [&] {
@@ -337,7 +337,7 @@ TEST_F(SpirvWriterTest, Loop_NestedLoopInContinuing) {
 }
 
 TEST_F(SpirvWriterTest, Loop_Phi_SingleValue) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -346,18 +346,18 @@ TEST_F(SpirvWriterTest, Loop_Phi_SingleValue) {
             b.NextIteration(loop, 1_i);
         });
 
-        auto* loop_param = b.BlockParam(ty.i32());
+        auto* loop_param = b.BlockParam(ty->i32());
         loop->Body()->SetParams({loop_param});
 
         b.Append(loop->Body(), [&] {
-            auto* inc = b.Add(ty.i32(), loop_param, 1_i);
+            auto* inc = b.Add(ty->i32(), loop_param, 1_i);
             b.Continue(loop, inc);
         });
 
-        auto* cont_param = b.BlockParam(ty.i32());
+        auto* cont_param = b.BlockParam(ty->i32());
         loop->Continuing()->SetParams({cont_param});
         b.Append(loop->Continuing(), [&] {
-            auto* cmp = b.GreaterThan(ty.bool_(), cont_param, 5_i);
+            auto* cmp = b.GreaterThan(ty->bool_(), cont_param, 5_i);
             b.BreakIf(loop, cmp, /* next_iter */ Vector{cont_param}, /* exit */ Empty);
         });
 
@@ -386,7 +386,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_SingleValue) {
 }
 
 TEST_F(SpirvWriterTest, Loop_Phi_MultipleValue) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -395,21 +395,21 @@ TEST_F(SpirvWriterTest, Loop_Phi_MultipleValue) {
             b.NextIteration(loop, 1_i, false);
         });
 
-        auto* loop_param_a = b.BlockParam(ty.i32());
-        auto* loop_param_b = b.BlockParam(ty.bool_());
+        auto* loop_param_a = b.BlockParam(ty->i32());
+        auto* loop_param_b = b.BlockParam(ty->bool_());
         loop->Body()->SetParams({loop_param_a, loop_param_b});
 
         b.Append(loop->Body(), [&] {
-            auto* inc = b.Add(ty.i32(), loop_param_a, 1_i);
+            auto* inc = b.Add(ty->i32(), loop_param_a, 1_i);
             b.Continue(loop, inc, loop_param_b);
         });
 
-        auto* cont_param_a = b.BlockParam(ty.i32());
-        auto* cont_param_b = b.BlockParam(ty.bool_());
+        auto* cont_param_a = b.BlockParam(ty->i32());
+        auto* cont_param_b = b.BlockParam(ty->bool_());
         loop->Continuing()->SetParams({cont_param_a, cont_param_b});
         b.Append(loop->Continuing(), [&] {
-            auto* cmp = b.GreaterThan(ty.bool_(), cont_param_a, 5_i);
-            auto* not_b = b.Not(ty.bool_(), cont_param_b);
+            auto* cmp = b.GreaterThan(ty->bool_(), cont_param_a, 5_i);
+            auto* not_b = b.Not(ty->bool_(), cont_param_b);
             b.BreakIf(loop, cmp, b.Values(cont_param_a, not_b), Empty);
         });
 
@@ -441,7 +441,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_MultipleValue) {
 }
 
 TEST_F(SpirvWriterTest, Loop_Phi_NestedIf) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -449,11 +449,11 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedIf) {
             b.NextIteration(loop, 1_i);
         });
 
-        auto* loop_param = b.BlockParam(ty.i32());
+        auto* loop_param = b.BlockParam(ty->i32());
         loop->Body()->SetParams({loop_param});
         b.Append(loop->Body(), [&] {
             auto* inner = b.If(true);
-            inner->SetResults(b.InstructionResult(ty.i32()));
+            inner->SetResults(b.InstructionResult(ty->i32()));
             b.Append(inner->True(), [&] {  //
                 b.ExitIf(inner, 10_i);
             });
@@ -463,10 +463,10 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedIf) {
             b.Continue(loop, inner->Result(0));
         });
 
-        auto* cont_param = b.BlockParam(ty.i32());
+        auto* cont_param = b.BlockParam(ty->i32());
         loop->Continuing()->SetParams({cont_param});
         b.Append(loop->Continuing(), [&] {
-            auto* cmp = b.GreaterThan(ty.bool_(), cont_param, 5_i);
+            auto* cmp = b.GreaterThan(ty->bool_(), cont_param, 5_i);
             b.BreakIf(loop, cmp, /* next_iter */ Vector{cont_param}, /* exit */ Empty);
         });
 
@@ -504,7 +504,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedIf) {
 }
 
 TEST_F(SpirvWriterTest, Loop_Phi_NestedLoop) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* outer = b.Loop();
@@ -512,7 +512,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedLoop) {
             b.NextIteration(outer, 1_i);
         });
 
-        auto* outer_param = b.BlockParam(ty.i32());
+        auto* outer_param = b.BlockParam(ty->i32());
         outer->Body()->SetParams({outer_param});
         b.Append(outer->Body(), [&] {
             auto* inner = b.Loop();
@@ -529,10 +529,10 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedLoop) {
             b.Continue(outer, outer_param);
         });
 
-        auto* cont_param = b.BlockParam(ty.i32());
+        auto* cont_param = b.BlockParam(ty->i32());
         outer->Continuing()->SetParams({cont_param});
         b.Append(outer->Continuing(), [&] {
-            auto* cmp = b.GreaterThan(ty.bool_(), cont_param, 5_i);
+            auto* cmp = b.GreaterThan(ty->bool_(), cont_param, 5_i);
             b.BreakIf(outer, cmp, /* next_iter */ Vector{cont_param}, /* exit */ Empty);
         });
 
@@ -573,7 +573,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedLoop) {
 }
 
 TEST_F(SpirvWriterTest, Loop_Phi_NestedIfWithResultAndImplicitFalse_InContinuing) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -584,7 +584,7 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedIfWithResultAndImplicitFalse_InContinuing
 
         b.Append(loop->Continuing(), [&] {
             auto* if_ = b.If(true);
-            auto* cond = b.InstructionResult(ty.bool_());
+            auto* cond = b.InstructionResult(ty->bool_());
             if_->SetResults(Vector{cond});
             b.Append(if_->True(), [&] {  //
                 b.ExitIf(if_, true);
@@ -622,9 +622,9 @@ TEST_F(SpirvWriterTest, Loop_Phi_NestedIfWithResultAndImplicitFalse_InContinuing
 }
 
 TEST_F(SpirvWriterTest, Loop_ExitValue) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
-        auto* result = b.InstructionResult(ty.i32());
+        auto* result = b.InstructionResult(ty->i32());
         auto* loop = b.Loop();
         loop->SetResults(Vector{result});
         b.Append(loop->Body(), [&] {  //
@@ -665,9 +665,9 @@ TEST_F(SpirvWriterTest, Loop_ExitValue) {
 }
 
 TEST_F(SpirvWriterTest, Loop_ExitValue_BreakIf) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
-        auto* result = b.InstructionResult(ty.i32());
+        auto* result = b.InstructionResult(ty->i32());
         auto* loop = b.Loop();
         loop->SetResults(Vector{result});
         b.Append(loop->Body(), [&] {  //

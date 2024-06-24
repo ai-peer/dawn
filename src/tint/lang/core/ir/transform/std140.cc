@@ -30,6 +30,7 @@
 #include <cstdint>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/function_param.h"
@@ -55,16 +56,16 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// Map from original type to a new type with decomposed matrices.
     Hashmap<const core::type::Type*, const core::type::Type*, 4> rewritten_types{};
@@ -77,13 +78,13 @@ struct State {
 
     /// Process the module.
     void Process() {
-        if (ir.root_block->IsEmpty()) {
+        if (ir->root_block->IsEmpty()) {
             return;
         }
 
         // Find uniform buffers that contain matrices that need to be decomposed.
         Vector<std::pair<Var*, const core::type::Type*>, 8> buffer_variables;
-        for (auto inst : *ir.root_block) {
+        for (auto inst : *ir->root_block) {
             if (auto* var = inst->As<Var>()) {
                 auto* ptr = var->Result(0)->Type()->As<core::type::Pointer>();
                 if (!ptr || ptr->AddressSpace() != core::AddressSpace::kUniform) {
@@ -101,11 +102,11 @@ struct State {
         for (auto var_and_ty : buffer_variables) {
             // Create a new variable with the modified store type.
             auto* old_var = var_and_ty.first;
-            auto* new_var = b.Var(ty.ptr(uniform, var_and_ty.second));
+            auto* new_var = b.Var(ty->ptr(uniform, var_and_ty.second));
             const auto& bp = old_var->BindingPoint();
             new_var->SetBindingPoint(bp->group, bp->binding);
-            if (auto name = ir.NameOf(old_var)) {
-                ir.SetName(new_var->Result(0), name);
+            if (auto name = ir->NameOf(old_var)) {
+                ir->SetName(new_var->Result(0), name);
             }
 
             // Transform instructions that accessed the variable to use the decomposed var.
@@ -147,7 +148,7 @@ struct State {
                 type,
                 [&](const core::type::Array* arr) {
                     // Create a new array with element type potentially rewritten.
-                    return ty.array(RewriteType(arr->ElemType()), arr->ConstantCount().value());
+                    return ty->array(RewriteType(arr->ElemType()), arr->ConstantCount().value());
                 },
                 [&](const core::type::Struct* str) -> const core::type::Type* {
                     bool needs_rewrite = false;
@@ -162,8 +163,8 @@ struct State {
                             for (uint32_t i = 0; i < mat->columns(); i++) {
                                 StringStream ss;
                                 ss << member->Name().Name() << "_col" << std::to_string(i);
-                                new_members.Push(ty.Get<core::type::StructMember>(
-                                    sym.New(ss.str()), col, member_index, offset, col->Align(),
+                                new_members.Push(ty->Get<core::type::StructMember>(
+                                    sym->New(ss.str()), col, member_index, offset, col->Align(),
                                     col->Size(), core::type::StructMemberAttributes{}));
                                 offset += col->Align();
                                 member_index++;
@@ -172,7 +173,7 @@ struct State {
                         } else {
                             // For all other types, recursively rewrite them as necessary.
                             auto* new_member_ty = RewriteType(member->Type());
-                            new_members.Push(ty.Get<core::type::StructMember>(
+                            new_members.Push(ty->Get<core::type::StructMember>(
                                 member->Name(), new_member_ty, member_index, member->Offset(),
                                 member->Align(), member->Size(),
                                 core::type::StructMemberAttributes{}));
@@ -190,8 +191,8 @@ struct State {
                     }
 
                     // Create a new struct with the rewritten members.
-                    auto* new_str = ty.Get<core::type::Struct>(
-                        sym.New(str->Name().Name() + "_std140"), std::move(new_members),
+                    auto* new_str = ty->Get<core::type::Struct>(
+                        sym->New(str->Name().Name() + "_std140"), std::move(new_members),
                         str->Align(), str->Size(), str->SizeNoPadding());
                     for (auto flag : str->StructFlags()) {
                         new_str->SetStructFlag(flag);
@@ -212,15 +213,15 @@ struct State {
                     for (uint32_t i = 0; i < mat->columns(); i++) {
                         StringStream ss;
                         ss << "col" << std::to_string(i);
-                        members.Push(ty.Get<core::type::StructMember>(
-                            sym.New(ss.str()), col, i, offset, col->Align(), col->Size(),
+                        members.Push(ty->Get<core::type::StructMember>(
+                            sym->New(ss.str()), col, i, offset, col->Align(), col->Size(),
                             core::type::StructMemberAttributes{}));
                         offset += col->Align();
                     }
 
                     // Create a new struct with the rewritten members.
-                    return ty.Get<core::type::Struct>(
-                        sym.New(name.str()), std::move(members), col->Align(),
+                    return ty->Get<core::type::Struct>(
+                        sym->New(name.str()), std::move(members), col->Align(),
                         col->Align() * mat->columns(),
                         (col->Align() * (mat->columns() - 1)) + col->Size());
                 },
@@ -245,7 +246,7 @@ struct State {
         for (uint32_t i = 0; i < mat->columns(); i++) {
             column_indices.Back() = b.Constant(u32(first_column + i));
             if (is_ptr) {
-                auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), root, column_indices);
+                auto* access = b.Access(ty->ptr(uniform, mat->ColumnType()), root, column_indices);
                 args.Push(b.Load(access)->Result(0));
             } else {
                 auto* access = b.Access(mat->ColumnType(), root, column_indices);
@@ -301,11 +302,11 @@ struct State {
             },
             [&](const core::type::Array* arr) -> Value* {
                 // Create a loop that copies and converts each element of the array.
-                auto* el_ty = source->Type()->Elements().type;
-                auto* new_arr = b.Var(ty.ptr(function, arr));
-                b.LoopRange(ty, 0_u, u32(arr->ConstantCount().value()), 1_u, [&](Value* idx) {
+                auto* el_ty = source->Type()->Elements().type.get();
+                auto* new_arr = b.Var(ty->ptr(function, arr));
+                b.LoopRange(*ty, 0_u, u32(arr->ConstantCount().value()), 1_u, [&](Value* idx) {
                     // Convert arr[idx] and store to new_arr[idx];
-                    auto* to = b.Access(ty.ptr(function, arr->ElemType()), new_arr, idx);
+                    auto* to = b.Access(ty->ptr(function, arr->ElemType()), new_arr, idx);
                     auto* from = b.Access(el_ty, source, idx)->Result(0);
                     b.Store(to, Convert(from, arr->ElemType()));
                 });
@@ -402,7 +403,7 @@ struct State {
                     if (!indices.IsEmpty()) {
                         // Emit the access with the modified indices.
                         if (replacement->Type()->Is<core::type::Pointer>()) {
-                            current_type = ty.ptr(uniform, RewriteType(current_type));
+                            current_type = ty->ptr(uniform, RewriteType(current_type));
                         }
                         auto* new_access = b.Access(current_type, replacement, std::move(indices));
                         replacement = new_access->Result(0);
@@ -455,7 +456,7 @@ Result<SuccessType> Std140(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

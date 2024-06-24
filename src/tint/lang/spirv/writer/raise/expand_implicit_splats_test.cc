@@ -40,12 +40,12 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using SpirvWriter_ExpandImplicitSplatsTest = core::ir::transform::TransformTest;
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_VectorIdentity) {
-    auto* vector = b.FunctionParam("vector", ty.vec2<i32>());
-    auto* func = b.Function("foo", ty.vec2<i32>());
+    auto* vector = b.FunctionParam("vector", ty->vec2<i32>());
+    auto* func = b.Function("foo", ty->vec2<i32>());
     func->SetParams({vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec2<i32>(), vector);
+        auto* result = b.Construct(ty->vec2<i32>(), vector);
         b.Return(func, result);
     });
 
@@ -64,13 +64,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_VectorIdentity) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_MixedScalarVector) {
-    auto* scalar = b.FunctionParam("scalar", ty.i32());
-    auto* vector = b.FunctionParam("vector", ty.vec2<i32>());
-    auto* func = b.Function("foo", ty.vec3<i32>());
+    auto* scalar = b.FunctionParam("scalar", ty->i32());
+    auto* vector = b.FunctionParam("vector", ty->vec2<i32>());
+    auto* func = b.Function("foo", ty->vec3<i32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec3<i32>(), scalar, vector);
+        auto* result = b.Construct(ty->vec3<i32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -89,12 +89,12 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_MixedScalarVecto
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_AllScalars) {
-    auto* scalar = b.FunctionParam("scalar", ty.i32());
-    auto* func = b.Function("foo", ty.vec3<i32>());
+    auto* scalar = b.FunctionParam("scalar", ty->i32());
+    auto* func = b.Function("foo", ty->vec3<i32>());
     func->SetParams({scalar});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec3<i32>(), scalar, scalar, scalar);
+        auto* result = b.Construct(ty->vec3<i32>(), scalar, scalar, scalar);
         b.Return(func, result);
     });
 
@@ -113,12 +113,12 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, NoModify_Construct_AllScalars) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec2i) {
-    auto* scalar = b.FunctionParam("scalar", ty.i32());
-    auto* func = b.Function("foo", ty.vec2<i32>());
+    auto* scalar = b.FunctionParam("scalar", ty->i32());
+    auto* func = b.Function("foo", ty->vec2<i32>());
     func->SetParams({scalar});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec2<i32>(), scalar);
+        auto* result = b.Construct(ty->vec2<i32>(), scalar);
         b.Return(func, result);
     });
 
@@ -147,12 +147,12 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec2i) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec3u) {
-    auto* scalar = b.FunctionParam("scalar", ty.u32());
-    auto* func = b.Function("foo", ty.vec3<u32>());
+    auto* scalar = b.FunctionParam("scalar", ty->u32());
+    auto* func = b.Function("foo", ty->vec3<u32>());
     func->SetParams({scalar});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec3<u32>(), scalar);
+        auto* result = b.Construct(ty->vec3<u32>(), scalar);
         b.Return(func, result);
     });
 
@@ -181,12 +181,12 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec3u) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Construct(ty.vec4<f32>(), scalar);
+        auto* result = b.Construct(ty->vec4<f32>(), scalar);
         b.Return(func, result);
     });
 
@@ -215,13 +215,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Construct_Splat_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryAdd_VectorScalar_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Add(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Add(ty->vec4<f32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -251,13 +251,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryAdd_VectorScalar_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryAdd_ScalarVector_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Add(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Add(ty->vec4<f32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -287,13 +287,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryAdd_ScalarVector_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinarySubtract_VectorScalar_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Subtract(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Subtract(ty->vec4<f32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -323,13 +323,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinarySubtract_VectorScalar_Vec4f) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinarySubtract_ScalarVector_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Subtract(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Subtract(ty->vec4<f32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -359,13 +359,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinarySubtract_ScalarVector_Vec4f) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryDivide_VectorScalar_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Divide(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Divide(ty->vec4<f32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -395,13 +395,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryDivide_VectorScalar_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryDivide_ScalarVector_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Divide(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Divide(ty->vec4<f32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -431,13 +431,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryDivide_ScalarVector_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryModulo_VectorScalar_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Modulo(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Modulo(ty->vec4<f32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -467,13 +467,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryModulo_VectorScalar_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryModulo_ScalarVector_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Modulo(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Modulo(ty->vec4<f32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -503,13 +503,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryModulo_ScalarVector_Vec4f) {
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_VectorScalar_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<f32>(), vector, scalar);
+        auto* result = b.Multiply(ty->vec4<f32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -538,13 +538,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_VectorScalar_Vec4f) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_ScalarVector_Vec4f) {
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<f32>(), scalar, vector);
+        auto* result = b.Multiply(ty->vec4<f32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -573,13 +573,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_ScalarVector_Vec4f) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_VectorScalar_Vec4i) {
-    auto* scalar = b.FunctionParam("scalar", ty.i32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<i32>());
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    auto* scalar = b.FunctionParam("scalar", ty->i32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<i32>());
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<i32>(), vector, scalar);
+        auto* result = b.Multiply(ty->vec4<i32>(), vector, scalar);
         b.Return(func, result);
     });
 
@@ -609,13 +609,13 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_VectorScalar_Vec4i) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_ScalarVector_Vec4i) {
-    auto* scalar = b.FunctionParam("scalar", ty.i32());
-    auto* vector = b.FunctionParam("vector", ty.vec4<i32>());
-    auto* func = b.Function("foo", ty.vec4<i32>());
+    auto* scalar = b.FunctionParam("scalar", ty->i32());
+    auto* vector = b.FunctionParam("vector", ty->vec4<i32>());
+    auto* func = b.Function("foo", ty->vec4<i32>());
     func->SetParams({scalar, vector});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Multiply(ty.vec4<i32>(), scalar, vector);
+        auto* result = b.Multiply(ty->vec4<i32>(), scalar, vector);
         b.Return(func, result);
     });
 
@@ -645,14 +645,14 @@ TEST_F(SpirvWriter_ExpandImplicitSplatsTest, BinaryMultiply_ScalarVector_Vec4i) 
 }
 
 TEST_F(SpirvWriter_ExpandImplicitSplatsTest, Mix_VectorOperands_ScalarFactor) {
-    auto* arg1 = b.FunctionParam("arg1", ty.vec4<f32>());
-    auto* arg2 = b.FunctionParam("arg2", ty.vec4<f32>());
-    auto* factor = b.FunctionParam("factor", ty.f32());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* arg1 = b.FunctionParam("arg1", ty->vec4<f32>());
+    auto* arg2 = b.FunctionParam("arg2", ty->vec4<f32>());
+    auto* factor = b.FunctionParam("factor", ty->f32());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({arg1, arg2, factor});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kMix, arg1, arg2, factor);
+        auto* result = b.Call(ty->vec4<f32>(), core::BuiltinFn::kMix, arg1, arg2, factor);
         b.Return(func, result);
     });
 

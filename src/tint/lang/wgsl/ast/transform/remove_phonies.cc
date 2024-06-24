@@ -153,7 +153,7 @@ Transform::ApplyResult RemovePhonies::Apply(const Program& src, const DataMap&, 
             [&](const CallStatement* stmt) {
                 // Remove call statements to const value-returning functions.
                 // TODO(crbug.com/tint/1637): Remove if `stmt->expr` has no side-effects.
-                auto* sem_expr = sem.Get(stmt->expr);
+                auto* sem_expr = sem.Get(stmt->expr.get());
                 if ((sem_expr->ConstantValue() != nullptr) && !sem_expr->HasSideEffects()) {
                     made_changes = true;
                     ctx.Remove(sem.Get(stmt)->Block()->Declaration()->statements, stmt);

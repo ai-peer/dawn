@@ -57,7 +57,7 @@ TEST_F(WGSLParserTest, FunctionDecl) {
 
     EXPECT_EQ(f->return_type, nullptr);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }
@@ -103,7 +103,7 @@ TEST_F(WGSLParserTest, FunctionDecl_Unicode) {
 
     EXPECT_EQ(f->return_type, nullptr);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }
@@ -148,7 +148,7 @@ TEST_F(WGSLParserTest, FunctionDecl_AttributeList) {
     EXPECT_EQ(values[2]->As<ast::IntLiteralExpression>()->suffix,
               ast::IntLiteralExpression::Suffix::kNone);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }
@@ -198,7 +198,7 @@ fn main() { return; })");
     ASSERT_TRUE(attributes[1]->Is<ast::StageAttribute>());
     EXPECT_EQ(attributes[1]->As<ast::StageAttribute>()->stage, ast::PipelineStage::kCompute);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }
@@ -249,7 +249,7 @@ fn main() { return; })");
     ASSERT_TRUE(attrs[1]->Is<ast::StageAttribute>());
     EXPECT_EQ(attrs[1]->As<ast::StageAttribute>()->stage, ast::PipelineStage::kCompute);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }
@@ -288,7 +288,7 @@ TEST_F(WGSLParserTest, FunctionDecl_ReturnTypeAttributeList) {
     auto* exp = loc->expr->As<ast::IntLiteralExpression>();
     EXPECT_EQ(1u, exp->value);
 
-    auto* body = f->body;
+    auto* body = f->body.get();
     ASSERT_EQ(body->statements.Length(), 1u);
     EXPECT_TRUE(body->statements[0]->Is<ast::ReturnStatement>());
 }

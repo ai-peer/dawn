@@ -31,6 +31,7 @@
 #include <array>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 
 // Forward declarations
@@ -72,11 +73,11 @@ class WorkgroupAttribute final : public Castable<WorkgroupAttribute, Attribute> 
     const WorkgroupAttribute* Clone(CloneContext& ctx) const override;
 
     /// The workgroup x dimension.
-    const Expression* const x;
+    const raw_ptr<const Expression> x;
     /// The optional workgroup y dimension. May be null.
-    const Expression* const y = nullptr;
+    const raw_ptr<const Expression> y = nullptr;
     /// The optional workgroup z dimension. May be null.
-    const Expression* const z = nullptr;
+    const raw_ptr<const Expression> z = nullptr;
 };
 
 }  // namespace tint::ast

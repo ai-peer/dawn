@@ -55,9 +55,9 @@ const char* Let::Kind() const {
 
 const Let* Let::Clone(CloneContext& ctx) const {
     auto src = ctx.Clone(source);
-    auto* n = ctx.Clone(name);
+    auto* n = ctx.Clone(name.get());
     auto ty = ctx.Clone(type);
-    auto* init = ctx.Clone(initializer);
+    auto* init = ctx.Clone(initializer.get());
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<Let>(src, n, ty, init, std::move(attrs));
 }

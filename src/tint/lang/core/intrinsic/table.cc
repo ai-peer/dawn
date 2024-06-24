@@ -203,7 +203,7 @@ Result<Overload, StyledText> MatchIntrinsic(Context& context,
     Vector<Candidate, kNumFixedCandidates> candidates;
     candidates.Reserve(intrinsic.num_overloads);
     for (size_t overload_idx = 0; overload_idx < num_overloads; overload_idx++) {
-        auto& overload = context.data[intrinsic.overloads + overload_idx];
+        auto& overload = (*context.data)[intrinsic.overloads + overload_idx];
 
         // Check that the overload is a member function iff we expect one.
         if (overload.flags.Contains(OverloadFlag::kMemberFunction) != member_function) {
@@ -223,7 +223,7 @@ Result<Overload, StyledText> MatchIntrinsic(Context& context,
     if (TINT_UNLIKELY(num_matched == 0)) {
         // Perform the full scoring of each overload
         for (size_t overload_idx = 0; overload_idx < num_overloads; overload_idx++) {
-            auto& overload = context.data[intrinsic.overloads + overload_idx];
+            auto& overload = (*context.data)[intrinsic.overloads + overload_idx];
 
             // Check that the overload is a member function iff we expect one.
             if (overload.flags.Contains(OverloadFlag::kMemberFunction) != member_function) {
@@ -253,7 +253,7 @@ Result<Overload, StyledText> MatchIntrinsic(Context& context,
 
     // Build the return type
     const core::type::Type* return_type = nullptr;
-    if (auto* matcher_indices = context.data[match.overload->return_matcher_indices]) {
+    if (auto* matcher_indices = (*context.data)[match.overload->return_matcher_indices]) {
         Any any;
         return_type =
             context.Match(match.templates, *match.overload, matcher_indices, earliest_eval_stage)
@@ -264,11 +264,11 @@ Result<Overload, StyledText> MatchIntrinsic(Context& context,
             TINT_ICE() << err.Plain();
         }
     } else {
-        return_type = context.types.void_();
+        return_type = context.types->void_();
     }
 
     return Overload{match.overload, return_type, std::move(match.parameters),
-                    context.data[match.overload->const_eval_fn]};
+                    (*context.data)[match.overload->const_eval_fn]};
 }
 
 template <ScoreMode MODE>
@@ -322,9 +322,9 @@ Candidate ScoreOverload(Context& context,
     // just set the template type.
     auto num_tmpl_args = std::min<size_t>(overload.num_explicit_templates, template_args.Length());
     for (size_t i = 0; i < num_tmpl_args; ++i) {
-        auto& tmpl = context.data[overload.templates + i];
+        auto& tmpl = (*context.data)[overload.templates + i];
         auto* type = template_args[i];
-        if (auto* matcher_indices = context.data[tmpl.matcher_indices]) {
+        if (auto* matcher_indices = (*context.data)[tmpl.matcher_indices]) {
             // Ensure type matches the template's matcher.
             type =
                 context.Match(templates, overload, matcher_indices, earliest_eval_stage).Type(type);
@@ -346,8 +346,8 @@ Candidate ScoreOverload(Context& context,
     // Note that inferred template types are not tested against their matchers at this point.
     auto num_params = std::min(num_parameters, num_arguments);
     for (size_t p = 0; p < num_params; p++) {
-        auto& parameter = context.data[overload.parameters + p];
-        auto* matcher_indices = context.data[parameter.matcher_indices];
+        auto& parameter = (*context.data)[overload.parameters + p];
+        auto* matcher_indices = (*context.data)[parameter.matcher_indices];
         if (!context.Match(templates, overload, matcher_indices, earliest_eval_stage)
                  .Type(args[p])) {
             MATCH_FAILURE(kMismatchedParamTypePenalty);
@@ -357,8 +357,8 @@ Candidate ScoreOverload(Context& context,
     // Check each of the inferred types and numbers for the implicit templates match their
     // respective matcher.
     for (size_t i = overload.num_explicit_templates; i < overload.num_templates; i++) {
-        auto& tmpl = context.data[overload.templates + i];
-        auto* matcher_indices = context.data[tmpl.matcher_indices];
+        auto& tmpl = (*context.data)[overload.templates + i];
+        auto* matcher_indices = (*context.data)[tmpl.matcher_indices];
         if (!matcher_indices) {
             continue;
         }
@@ -382,7 +382,7 @@ Candidate ScoreOverload(Context& context,
                         continue;
                     }
                 }
-                templates.SetType(i, context.types.invalid());
+                templates.SetType(i, context.types->invalid());
                 MATCH_FAILURE(kMismatchedImplicitTemplateTypePenalty);
                 break;
             }
@@ -404,8 +404,8 @@ Candidate ScoreOverload(Context& context,
     Vector<Overload::Parameter, kNumFixedParameters> parameters;
     parameters.Reserve(num_params);
     for (size_t p = 0; p < num_params; p++) {
-        auto& parameter = context.data[overload.parameters + p];
-        auto* matcher_indices = context.data[parameter.matcher_indices];
+        auto& parameter = (*context.data)[overload.parameters + p];
+        auto* matcher_indices = (*context.data)[parameter.matcher_indices];
         auto* ty =
             context.Match(templates, overload, matcher_indices, earliest_eval_stage).Type(args[p]);
         parameters.Emplace(ty, parameter.usage);
@@ -536,11 +536,11 @@ void PrintCandidate(StyledText& ss,
     if (overload.num_explicit_templates > 0) {
         ss << "<";
         for (size_t i = 0; i < overload.num_explicit_templates; i++) {
-            const auto& tmpl = context.data[overload.templates + i];
+            const auto& tmpl = (*context.data)[overload.templates + i];
 
             bool matched = false;
             if (i < template_args.Length()) {
-                auto* matcher_indices = context.data[tmpl.matcher_indices];
+                auto* matcher_indices = (*context.data)[tmpl.matcher_indices];
                 matched = !matcher_indices ||
                           context.Match(templates, overload, matcher_indices, earliest_eval_stage)
                               .Type(template_args[i]);
@@ -562,8 +562,8 @@ void PrintCandidate(StyledText& ss,
     bool all_params_match = true;
     ss << "(";
     for (size_t i = 0; i < overload.num_parameters; i++) {
-        const auto& parameter = context.data[overload.parameters + i];
-        auto* matcher_indices = context.data[parameter.matcher_indices];
+        const auto& parameter = (*context.data)[overload.parameters + i];
+        auto* matcher_indices = (*context.data)[parameter.matcher_indices];
 
         bool matched = false;
         if (i < args.Length()) {
@@ -591,7 +591,7 @@ void PrintCandidate(StyledText& ss,
     ss << ")";
     if (overload.return_matcher_indices.IsValid()) {
         ss << " -> ";
-        auto* matcher_indices = context.data[overload.return_matcher_indices];
+        auto* matcher_indices = (*context.data)[overload.return_matcher_indices];
         context.Match(templates, overload, matcher_indices, earliest_eval_stage).PrintType(ss);
     }
 
@@ -618,8 +618,8 @@ void PrintCandidate(StyledText& ss,
     }
 
     for (size_t i = 0; i < overload.num_templates; i++) {
-        auto& tmpl = context.data[overload.templates + i];
-        if (auto* matcher_indices = context.data[tmpl.matcher_indices]) {
+        auto& tmpl = (*context.data)[overload.templates + i];
+        if (auto* matcher_indices = (*context.data)[tmpl.matcher_indices]) {
             separator();
             bool matched = false;
             if (tmpl.kind == TemplateInfo::Kind::kType) {
@@ -671,7 +671,7 @@ Result<Overload, StyledText> LookupFn(Context& context,
     };
 
     // Resolve the intrinsic overload
-    return MatchIntrinsic(context, context.data.builtins[function_id], intrinsic_name,
+    return MatchIntrinsic(context, context.data->builtins[function_id], intrinsic_name,
                           template_args, args, earliest_eval_stage, /* member_function */ false,
                           on_no_match);
 }
@@ -696,7 +696,7 @@ Result<Overload, StyledText> LookupMemberFn(Context& context,
     };
 
     // Resolve the intrinsic overload
-    return MatchIntrinsic(context, context.data.builtins[function_id], intrinsic_name,
+    return MatchIntrinsic(context, context.data->builtins[function_id], intrinsic_name,
                           template_args, args, earliest_eval_stage, /* member_function */ true,
                           on_no_match);
 }
@@ -709,23 +709,23 @@ Result<Overload, StyledText> LookupUnary(Context& context,
     std::string_view intrinsic_name;
     switch (op) {
         case core::UnaryOp::kComplement:
-            intrinsic_info = &context.data.unary_complement;
+            intrinsic_info = &context.data->unary_complement;
             intrinsic_name = "operator ~ ";
             break;
         case core::UnaryOp::kNegation:
-            intrinsic_info = &context.data.unary_minus;
+            intrinsic_info = &context.data->unary_minus;
             intrinsic_name = "operator - ";
             break;
         case core::UnaryOp::kAddressOf:
-            intrinsic_info = &context.data.unary_and;
+            intrinsic_info = &context.data->unary_and;
             intrinsic_name = "operator & ";
             break;
         case core::UnaryOp::kIndirection:
-            intrinsic_info = &context.data.unary_star;
+            intrinsic_info = &context.data->unary_star;
             intrinsic_name = "operator * ";
             break;
         case core::UnaryOp::kNot:
-            intrinsic_info = &context.data.unary_not;
+            intrinsic_info = &context.data->unary_not;
             intrinsic_name = "operator ! ";
             break;
     }
@@ -760,75 +760,75 @@ Result<Overload, StyledText> LookupBinary(Context& context,
     std::string_view intrinsic_name;
     switch (op) {
         case core::BinaryOp::kAnd:
-            intrinsic_info = &context.data.binary_and;
+            intrinsic_info = &context.data->binary_and;
             intrinsic_name = is_compound ? "operator &= " : "operator & ";
             break;
         case core::BinaryOp::kOr:
-            intrinsic_info = &context.data.binary_or;
+            intrinsic_info = &context.data->binary_or;
             intrinsic_name = is_compound ? "operator |= " : "operator | ";
             break;
         case core::BinaryOp::kXor:
-            intrinsic_info = &context.data.binary_xor;
+            intrinsic_info = &context.data->binary_xor;
             intrinsic_name = is_compound ? "operator ^= " : "operator ^ ";
             break;
         case core::BinaryOp::kLogicalAnd:
-            intrinsic_info = &context.data.binary_logical_and;
+            intrinsic_info = &context.data->binary_logical_and;
             intrinsic_name = "operator && ";
             break;
         case core::BinaryOp::kLogicalOr:
-            intrinsic_info = &context.data.binary_logical_or;
+            intrinsic_info = &context.data->binary_logical_or;
             intrinsic_name = "operator || ";
             break;
         case core::BinaryOp::kEqual:
-            intrinsic_info = &context.data.binary_equal;
+            intrinsic_info = &context.data->binary_equal;
             intrinsic_name = "operator == ";
             break;
         case core::BinaryOp::kNotEqual:
-            intrinsic_info = &context.data.binary_not_equal;
+            intrinsic_info = &context.data->binary_not_equal;
             intrinsic_name = "operator != ";
             break;
         case core::BinaryOp::kLessThan:
-            intrinsic_info = &context.data.binary_less_than;
+            intrinsic_info = &context.data->binary_less_than;
             intrinsic_name = "operator < ";
             break;
         case core::BinaryOp::kGreaterThan:
-            intrinsic_info = &context.data.binary_greater_than;
+            intrinsic_info = &context.data->binary_greater_than;
             intrinsic_name = "operator > ";
             break;
         case core::BinaryOp::kLessThanEqual:
-            intrinsic_info = &context.data.binary_less_than_equal;
+            intrinsic_info = &context.data->binary_less_than_equal;
             intrinsic_name = "operator <= ";
             break;
         case core::BinaryOp::kGreaterThanEqual:
-            intrinsic_info = &context.data.binary_greater_than_equal;
+            intrinsic_info = &context.data->binary_greater_than_equal;
             intrinsic_name = "operator >= ";
             break;
         case core::BinaryOp::kShiftLeft:
-            intrinsic_info = &context.data.binary_shift_left;
+            intrinsic_info = &context.data->binary_shift_left;
             intrinsic_name = is_compound ? "operator <<= " : "operator << ";
             break;
         case core::BinaryOp::kShiftRight:
-            intrinsic_info = &context.data.binary_shift_right;
+            intrinsic_info = &context.data->binary_shift_right;
             intrinsic_name = is_compound ? "operator >>= " : "operator >> ";
             break;
         case core::BinaryOp::kAdd:
-            intrinsic_info = &context.data.binary_plus;
+            intrinsic_info = &context.data->binary_plus;
             intrinsic_name = is_compound ? "operator += " : "operator + ";
             break;
         case core::BinaryOp::kSubtract:
-            intrinsic_info = &context.data.binary_minus;
+            intrinsic_info = &context.data->binary_minus;
             intrinsic_name = is_compound ? "operator -= " : "operator - ";
             break;
         case core::BinaryOp::kMultiply:
-            intrinsic_info = &context.data.binary_star;
+            intrinsic_info = &context.data->binary_star;
             intrinsic_name = is_compound ? "operator *= " : "operator * ";
             break;
         case core::BinaryOp::kDivide:
-            intrinsic_info = &context.data.binary_divide;
+            intrinsic_info = &context.data->binary_divide;
             intrinsic_name = is_compound ? "operator /= " : "operator / ";
             break;
         case core::BinaryOp::kModulo:
-            intrinsic_info = &context.data.binary_modulo;
+            intrinsic_info = &context.data->binary_modulo;
             intrinsic_name = is_compound ? "operator %= " : "operator % ";
             break;
     }
@@ -888,7 +888,7 @@ Result<Overload, StyledText> LookupCtorConv(Context& context,
     };
 
     // Resolve the intrinsic overload
-    return MatchIntrinsic(context, context.data.ctor_conv[type_id], type_name, template_args, args,
+    return MatchIntrinsic(context, context.data->ctor_conv[type_id], type_name, template_args, args,
                           earliest_eval_stage, /* member_function */ false, on_no_match);
 }
 

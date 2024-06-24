@@ -50,9 +50,9 @@ using IR_MslMemberBuiltinCallTest = core::ir::IRTestHelper;
 
 TEST_F(IR_MslMemberBuiltinCallTest, Clone) {
     auto* t = b.FunctionParam(
-        "t", ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32()));
-    auto* s = b.FunctionParam("s", ty.sampler());
-    auto* coords = b.FunctionParam("coords", ty.vec2<f32>());
+        "t", ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32()));
+    auto* s = b.FunctionParam("s", ty->sampler());
+    auto* coords = b.FunctionParam("coords", ty->vec2<f32>());
     auto* builtin =
         b.MemberCall<MemberBuiltinCall>(mod.Types().void_(), BuiltinFn::kSample, t, s, coords);
 
@@ -73,12 +73,12 @@ TEST_F(IR_MslMemberBuiltinCallTest, Clone) {
 }
 
 TEST_F(IR_MslMemberBuiltinCallTest, DoesNotMatchNonMemberFunction) {
-    auto* a = b.FunctionParam("t", ty.ptr<workgroup>(ty.atomic<u32>()));
-    auto* func = b.Function("foo", ty.u32());
+    auto* a = b.FunctionParam("t", ty->ptr<workgroup>(ty->atomic<u32>()));
+    auto* func = b.Function("foo", ty->u32());
     func->SetParams({a});
     b.Append(func->Block(), [&] {
         auto* result =
-            b.MemberCall<MemberBuiltinCall>(ty.u32(), msl::BuiltinFn::kAtomicLoadExplicit, a, 0_u);
+            b.MemberCall<MemberBuiltinCall>(ty->u32(), msl::BuiltinFn::kAtomicLoadExplicit, a, 0_u);
         b.Return(func, result);
     });
 

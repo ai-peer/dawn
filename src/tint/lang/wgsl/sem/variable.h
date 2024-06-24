@@ -32,6 +32,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/api/common/override_id.h"
 
 #include "src/tint/api/common/binding_point.h"
@@ -115,13 +116,13 @@ class Variable : public Castable<Variable, Node> {
     void AddUser(const VariableUser* user) { users_.Push(user); }
 
   private:
-    const ast::Variable* const declaration_ = nullptr;
-    const core::type::Type* type_ = nullptr;
+    const raw_ptr<const ast::Variable> declaration_ = nullptr;
+    raw_ptr<const core::type::Type> type_ = nullptr;
     core::EvaluationStage stage_ = core::EvaluationStage::kRuntime;
     core::AddressSpace address_space_ = core::AddressSpace::kUndefined;
     core::Access access_ = core::Access::kUndefined;
-    const core::constant::Value* constant_value_ = nullptr;
-    const ValueExpression* initializer_ = nullptr;
+    raw_ptr<const core::constant::Value> constant_value_ = nullptr;
+    raw_ptr<const ValueExpression> initializer_ = nullptr;
     tint::Vector<const VariableUser*, 8> users_;
 };
 
@@ -147,8 +148,8 @@ class LocalVariable final : public Castable<LocalVariable, Variable> {
     const CastableBase* Shadows() const { return shadows_; }
 
   private:
-    const sem::Statement* const statement_;
-    const CastableBase* shadows_ = nullptr;
+    const raw_ptr<const sem::Statement> statement_;
+    raw_ptr<const CastableBase> shadows_ = nullptr;
 };
 
 /// Attributes that can be applied to global variables
@@ -271,8 +272,8 @@ class Parameter final : public Castable<Parameter, Variable> {
   private:
     const uint32_t index_ = 0;
     core::ParameterUsage usage_ = core::ParameterUsage::kNone;
-    CallTarget const* owner_ = nullptr;
-    const CastableBase* shadows_ = nullptr;
+    raw_ptr<const CallTarget> owner_ = nullptr;
+    raw_ptr<const CastableBase> shadows_ = nullptr;
     ParameterAttributes attributes_;
 };
 
@@ -300,7 +301,7 @@ class VariableUser final : public Castable<VariableUser, ValueExpression> {
     const sem::Variable* Variable() const { return variable_; }
 
   private:
-    const sem::Variable* const variable_;
+    const raw_ptr<const sem::Variable> variable_;
 };
 
 /// A pair of sem::Variables. Can be hashed.

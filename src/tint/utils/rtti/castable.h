@@ -34,6 +34,7 @@
 #include <type_traits>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/math/crc32.h"
 #include "src/tint/utils/math/hash.h"
@@ -407,7 +408,7 @@ class CastableBase {
     CastableBase() = default;
 
     /// The type information for the object
-    const tint::TypeInfo* type_info_ = nullptr;
+    raw_ptr<const tint::TypeInfo> type_info_ = nullptr;
 };
 
 /// Castable is a helper to derive `CLASS` from `BASE`, automatically implementing the Is() and As()

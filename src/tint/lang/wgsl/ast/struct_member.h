@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/type.h"
 
@@ -67,7 +68,7 @@ class StructMember final : public Castable<StructMember, Node> {
     const StructMember* Clone(CloneContext& ctx) const override;
 
     /// The member name
-    const Identifier* const name;
+    const raw_ptr<const Identifier> name;
 
     /// The type
     const Type type;

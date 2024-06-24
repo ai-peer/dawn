@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_ACCESSOR_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_ACCESSOR_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
 namespace tint::ast {
@@ -49,7 +50,7 @@ class AccessorExpression : public Castable<AccessorExpression, Expression> {
     ~AccessorExpression() override;
 
     /// The object being accessed
-    const Expression* const object;
+    const raw_ptr<const Expression> object;
 };
 
 }  // namespace tint::ast

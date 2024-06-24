@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/call_expression.h"
 #include "src/tint/lang/wgsl/sem/builtin_fn.h"
 #include "src/tint/lang/wgsl/sem/value_expression.h"
@@ -72,7 +73,7 @@ class Call final : public Castable<Call, ValueExpression> {
     }
 
   private:
-    CallTarget const* const target_;
+    const raw_ptr<const CallTarget> target_;
     tint::Vector<const sem::ValueExpression*, 8> arguments_;
 };
 

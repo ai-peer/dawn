@@ -56,7 +56,7 @@ const CallExpression* CallExpression::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
     auto p = ctx.Clone(args);
-    auto t = ctx.Clone(target);
+    auto t = ctx.Clone(target.get());
     return ctx.dst->create<CallExpression>(src, t, std::move(p));
 }
 

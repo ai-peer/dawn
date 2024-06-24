@@ -68,10 +68,10 @@ const ForLoopStatement* ForLoopStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
 
-    auto* init = ctx.Clone(initializer);
-    auto* cond = ctx.Clone(condition);
-    auto* cont = ctx.Clone(continuing);
-    auto* b = ctx.Clone(body);
+    auto* init = ctx.Clone(initializer.get());
+    auto* cond = ctx.Clone(condition.get());
+    auto* cont = ctx.Clone(continuing.get());
+    auto* b = ctx.Clone(body.get());
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<ForLoopStatement>(src, init, cond, cont, b, std::move(attrs));
 }

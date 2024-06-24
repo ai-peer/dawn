@@ -35,6 +35,8 @@
 // RWMutex
 ////////////////////////////////////////////////////////////////////////////////
 
+#include "base/memory/raw_ptr.h"
+
 namespace tint::socket {
 
 /// A RWMutex is a reader/writer mutual exclusion lock.
@@ -126,7 +128,7 @@ class RLock {
     RLock(const RLock&) = delete;
     RLock& operator=(const RLock&) = delete;
 
-    RWMutex* m;
+    raw_ptr<RWMutex> m;
 };
 
 RLock::RLock(RWMutex& mutex) : m(&mutex) {
@@ -178,7 +180,7 @@ class WLock {
     WLock(const WLock&) = delete;
     WLock& operator=(const WLock&) = delete;
 
-    RWMutex* m;
+    raw_ptr<RWMutex> m;
 };
 
 WLock::WLock(RWMutex& mutex) : m(&mutex) {

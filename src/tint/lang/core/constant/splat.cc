@@ -55,7 +55,7 @@ Splat::~Splat() = default;
 const Splat* Splat::Clone(CloneContext& ctx) const {
     auto* ty = type->Clone(ctx.type_ctx);
     auto* element = el->Clone(ctx);
-    return ctx.dst.Splat(ty, element);
+    return ctx.dst->Splat(ty, element);
 }
 
 }  // namespace tint::core::constant

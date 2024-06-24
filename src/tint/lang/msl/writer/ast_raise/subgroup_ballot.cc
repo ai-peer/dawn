@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -48,11 +49,11 @@ namespace tint::msl::writer {
 /// PIMPL state for the transform
 struct SubgroupBallot::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
 
     /// The name of the `tint_subgroup_ballot` helper function.
     Symbol ballot_helper{};
@@ -70,7 +71,7 @@ struct SubgroupBallot::State {
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
-        auto& sem = src.Sem();
+        auto& sem = src->Sem();
 
         bool made_changes = false;
         for (auto* node : ctx.src->ASTNodes().Objects()) {
@@ -92,7 +93,7 @@ struct SubgroupBallot::State {
 
         // Set the subgroup size mask at the start of each entry point that transitively calls
         // `subgroupBallot()`.
-        for (auto* global : src.AST().GlobalDeclarations()) {
+        for (auto* global : src->AST().GlobalDeclarations()) {
             auto* func = global->As<ast::Function>();
             if (func && func->IsEntryPoint() && TransitvelyCallsSubgroupBallot(sem.Get(func))) {
                 SetSubgroupSizeMask(func);
@@ -158,8 +159,8 @@ struct SubgroupBallot::State {
         for (auto* param : ep->params) {
             auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(param->attributes);
             if (builtin &&
-                src.Sem()
-                        .Get<sem::BuiltinEnumExpression<core::BuiltinValue>>(builtin->builtin)
+                src->Sem()
+                        .Get<sem::BuiltinEnumExpression<core::BuiltinValue>>(builtin->builtin.get())
                         ->Value() == core::BuiltinValue::kSubgroupSize) {
                 subgroup_size = ctx.Clone(param->name->symbol);
             }

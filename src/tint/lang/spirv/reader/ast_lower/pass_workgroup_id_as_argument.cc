@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -45,13 +46,13 @@ namespace tint::spirv::reader {
 /// PIMPL state for the transform.
 struct PassWorkgroupIdAsArgument::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// The semantic info.
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
 
     /// Map from function to the name of its workgroup_id parameter.
     Hashmap<const ast::Function*, Symbol, 8> func_to_param;
@@ -65,12 +66,12 @@ struct PassWorkgroupIdAsArgument::State {
     ApplyResult Run() {
         // Process all entry points in the module, looking for workgroup_id builtin parameters.
         bool made_changes = false;
-        for (auto* func : src.AST().Functions()) {
+        for (auto* func : src->AST().Functions()) {
             if (func->IsEntryPoint()) {
                 for (auto* param : func->params) {
                     if (auto* builtin =
                             ast::GetAttribute<ast::BuiltinAttribute>(param->attributes)) {
-                        if (sem.Get(builtin)->Value() == core::BuiltinValue::kWorkgroupId) {
+                        if (sem->Get(builtin)->Value() == core::BuiltinValue::kWorkgroupId) {
                             ProcessBuiltin(func, param);
                             made_changes = true;
                         }
@@ -94,13 +95,13 @@ struct PassWorkgroupIdAsArgument::State {
         func_to_param.Add(ep, ctx.Clone(builtin->name->symbol));
 
         // The reader should only produce a single use of the parameter which assigns to a global.
-        const auto& users = sem.Get(builtin)->Users();
+        const auto& users = sem->Get(builtin)->Users();
         TINT_ASSERT(users.Length() == 1u);
         auto* assign = users[0]->Stmt()->Declaration()->As<ast::AssignmentStatement>();
         auto& stmts =
-            sem.Get(assign)->Parent()->Declaration()->As<ast::BlockStatement>()->statements;
-        auto* rhs = assign->rhs;
-        if (auto* call = sem.Get<sem::Call>(rhs)) {
+            sem->Get(assign)->Parent()->Declaration()->As<ast::BlockStatement>()->statements;
+        auto* rhs = assign->rhs.get();
+        if (auto* call = sem->Get<sem::Call>(rhs)) {
             if (auto* builtin_fn = call->Target()->As<sem::BuiltinFn>()) {
                 if (builtin_fn->Fn() == wgsl::BuiltinFn::kBitcast) {
                     // The RHS may be bitcast to a signed integer, so we capture that bitcast.
@@ -113,7 +114,7 @@ struct PassWorkgroupIdAsArgument::State {
             }
         }
         TINT_ASSERT(assign && rhs == users[0]->Declaration());
-        auto* lhs = sem.GetVal(assign->lhs)->As<sem::VariableUser>();
+        auto* lhs = sem->GetVal(assign->lhs.get())->As<sem::VariableUser>();
         TINT_ASSERT(lhs && lhs->Variable()->AddressSpace() == core::AddressSpace::kPrivate);
 
         // Replace all references to the global variable with a function parameter.
@@ -128,7 +129,7 @@ struct PassWorkgroupIdAsArgument::State {
         }
 
         // Remove the global variable and the assignment to it.
-        ctx.Remove(src.AST().GlobalDeclarations(), lhs->Variable()->Declaration());
+        ctx.Remove(src->AST().GlobalDeclarations(), lhs->Variable()->Declaration());
         ctx.Remove(stmts, assign);
     }
 
@@ -143,7 +144,7 @@ struct PassWorkgroupIdAsArgument::State {
             ctx.InsertBack(func->params, b.Param(name, ctx.Clone(type)));
 
             // Recursively update all callsites to pass the workgroup_id as an argument.
-            for (auto* callsite : sem.Get(func)->CallSites()) {
+            for (auto* callsite : sem->Get(func)->CallSites()) {
                 auto param = GetParameter(callsite->Stmt()->Function()->Declaration(), type);
                 ctx.InsertBack(callsite->Declaration()->args, b.Expr(param));
             }

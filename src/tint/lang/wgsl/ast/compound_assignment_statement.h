@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_COMPOUND_ASSIGNMENT_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_COMPOUND_ASSIGNMENT_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/binary_expression.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
@@ -61,10 +62,10 @@ class CompoundAssignmentStatement final : public Castable<CompoundAssignmentStat
     const CompoundAssignmentStatement* Clone(CloneContext& ctx) const override;
 
     /// left side expression
-    const Expression* const lhs;
+    const raw_ptr<const Expression> lhs;
 
     /// right side expression
-    const Expression* const rhs;
+    const raw_ptr<const Expression> rhs;
 
     /// the binary operator
     const core::BinaryOp op;

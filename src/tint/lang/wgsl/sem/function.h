@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/diagnostic_control.h"
 #include "src/tint/lang/wgsl/ast/variable.h"
 #include "src/tint/lang/wgsl/sem/call.h"
@@ -290,7 +291,7 @@ class Function final : public Castable<Function, CallTarget> {
     VariableBindings TransitivelyReferencedSamplerVariablesImpl(core::type::SamplerKind kind) const;
     VariableBindings TransitivelyReferencedSampledTextureVariablesImpl(bool multisampled) const;
 
-    const ast::Function* const declaration_;
+    const raw_ptr<const ast::Function> declaration_;
 
     sem::WorkgroupSize workgroup_size_;
     UniqueVector<const GlobalVariable*, 4> directly_referenced_globals_;
@@ -301,7 +302,7 @@ class Function final : public Castable<Function, CallTarget> {
     Vector<const Call*, 1> direct_calls_;
     Vector<const Call*, 1> callsites_;
     Vector<const Function*, 1> ancestor_entry_points_;
-    const Statement* discard_stmt_ = nullptr;
+    raw_ptr<const Statement> discard_stmt_ = nullptr;
     sem::Behaviors behaviors_{sem::Behavior::kNext};
     wgsl::DiagnosticRuleSeverities diagnostic_severities_;
 

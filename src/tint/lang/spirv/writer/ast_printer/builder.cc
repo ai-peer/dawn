@@ -373,7 +373,7 @@ bool Builder::GenerateLabel(uint32_t id) {
 
 bool Builder::GenerateAssignStatement(const ast::AssignmentStatement* assign) {
     if (assign->lhs->Is<ast::PhonyExpression>()) {
-        if (builder_.Sem().GetVal(assign->rhs)->ConstantValue()) {
+        if (builder_.Sem().GetVal(assign->rhs.get())->ConstantValue()) {
             // RHS of phony assignment is constant.
             // Constants can't have side-effects, so just drop this.
             return true;
@@ -715,7 +715,7 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
     auto* type = sem->Type()->UnwrapRef();
 
     uint32_t init_id = 0;
-    if (auto* ctor = v->initializer) {
+    if (auto* ctor = v->initializer.get()) {
         init_id = GenerateConstructorExpression(v, ctor);
         if (init_id == 0) {
             return false;
@@ -810,14 +810,14 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
             },
             [&](const ast::InterpolateAttribute* interpolate) {
                 auto& s = builder_.Sem();
-                auto i_type =
-                    s.Get<sem::BuiltinEnumExpression<core::InterpolationType>>(interpolate->type)
-                        ->Value();
+                auto i_type = s.Get<sem::BuiltinEnumExpression<core::InterpolationType>>(
+                                   interpolate->type.get())
+                                  ->Value();
 
                 auto i_smpl = core::InterpolationSampling::kUndefined;
                 if (interpolate->sampling) {
                     i_smpl = s.Get<sem::BuiltinEnumExpression<core::InterpolationSampling>>(
-                                  interpolate->sampling)
+                                  interpolate->sampling.get())
                                  ->Value();
                 }
 
@@ -892,7 +892,7 @@ bool Builder::GenerateIndexAccessor(const ast::IndexAccessorExpression* expr, Ac
     auto extract_id = std::get<uint32_t>(extract);
 
     // If the index is compile-time constant, we use OpCompositeExtract.
-    auto* idx = builder_.Sem().GetVal(expr->index);
+    auto* idx = builder_.Sem().GetVal(expr->index.get());
     if (auto idx_constval = idx->ConstantValue()) {
         if (!push_function_inst(spv::Op::OpCompositeExtract,
                                 {
@@ -995,7 +995,7 @@ bool Builder::GenerateMemberAccessor(const ast::MemberAccessorExpression* expr,
             }
 
             // Store the type away as it may change if we run the access chain
-            auto* incoming_type = info->source_type;
+            auto* incoming_type = info->source_type.get();
 
             // Multi-item extract is a VectorShuffle. We have to emit any existing
             // access chain data, then load the access chain and shuffle that.
@@ -2212,7 +2212,7 @@ uint32_t Builder::GenerateCallExpression(const ast::CallExpression* expr) {
 
 uint32_t Builder::GenerateFunctionCall(const sem::Call* call, const sem::Function* fn) {
     auto* expr = call->Declaration();
-    auto* ident = fn->Declaration()->name;
+    auto* ident = fn->Declaration()->name.get();
 
     auto type_id = GenerateTypeIfNeeded(call->Type());
     if (type_id == 0) {
@@ -2336,7 +2336,7 @@ uint32_t Builder::GenerateBuiltinCall(const sem::Call* call, const sem::BuiltinF
                 TINT_ICE() << "arrayLength() expected pointer to member access, got " +
                                   std::string(address_of->TypeInfo().name);
             }
-            auto* array_expr = address_of->expr;
+            auto* array_expr = address_of->expr.get();
 
             auto* accessor = array_expr->As<ast::MemberAccessorExpression>();
             if (!accessor) {
