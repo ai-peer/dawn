@@ -16,6 +16,24 @@
       "message": "Where are these logical operators coming from? I\u0027d hope that nothing would be generating them so I\u0027d prefer to ICE if they show up in this backend.",
       "revId": "f732111f8e92c2427881dabd4576a771269c4ce4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "899cb96e_5608bdba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-24T15:58:02Z",
+      "side": 1,
+      "message": "Doh, they\u0027re coming from my terrible memory. I created the unit tests which contained them, which then failed. I got tripped up by the IR re-using the core::BinaryOp list which includes them, even though the IR doesn\u0027t include them.\n\nI\u0027ll drop this CL, it does in fact ICE now if they come through as you get a no match switch error.",
+      "parentUuid": "6d55f992_1d6193c0",
+      "revId": "f732111f8e92c2427881dabd4576a771269c4ce4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
