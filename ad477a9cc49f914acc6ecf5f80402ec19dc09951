@@ -156,6 +156,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff87211a_7655ed8c",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T17:37:49Z",
+      "side": 1,
+      "message": "The reason I had to do this is because `DawnJsonGenerator` groups all .h and .cpp files into one output variable which is then passed on to `target_sources`. When I looked at the gn files you guys seem to list out the generated output files instead of using a variable. If it\u0027s okay, I propose we drop this `foreach` block and list the generated files by name distinctly as done in gn.",
+      "parentUuid": "ebf14bdb_897629cf",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57c523bc_9876dda9",
         "filename": "src/cmake/DawnLibrary.cmake",
         "patchSetId": 15
