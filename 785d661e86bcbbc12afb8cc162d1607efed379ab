@@ -33,6 +33,24 @@
       "message": "Does this work with CMake 3.13? (or 3.18 for when we upgrade soon?)",
       "revId": "785d661e86bcbbc12afb8cc162d1607efed379ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233840d2_a4a524f3",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-24T17:44:03Z",
+      "side": 1,
+      "message": "No. This module is a no-op for CMake \u003c 3.19.",
+      "parentUuid": "d471b62e_e7973468",
+      "revId": "785d661e86bcbbc12afb8cc162d1607efed379ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
