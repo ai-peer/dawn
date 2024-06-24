@@ -820,6 +820,21 @@ ResultOrError<Ref<ComputePipelineBase>> GetOrCreateTextureToBufferPipeline(
 
 }  // anonymous namespace
 
+bool IsFormatSuportedByColorTextureToBufferBlit(wgpu::TextureFormat format) {
+    // TODO(348654098): Eventually we should support all non-compressed formats. For now, just list
+    // a subset of them that we support.
+    switch (format) {
+        case wgpu::TextureFormat::R8Snorm:
+        case wgpu::TextureFormat::RG8Snorm:
+        case wgpu::TextureFormat::RGBA8Snorm:
+        case wgpu::TextureFormat::BGRA8Unorm:
+        case wgpu::TextureFormat::RGB9E5Ufloat:
+            return true;
+        default:
+            return false;
+    }
+}
+
 MaybeError BlitTextureToBuffer(DeviceBase* device,
                                CommandEncoder* commandEncoder,
                                const TextureCopy& src,
@@ -874,18 +889,18 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         // uint32_t extra = (dst.offset % 4 > 0) ? 1 : 0;
         uint32_t extraBytes = dst.offset % 4;
 
-        // Between rows and image (whether thread at end of each row needs read start of next row)
+        // Between rows and image (whether thread at end of each row needs read start of next
+        // row)
         readPreviousRow = ((copyExtent.width * bytesPerTexel) + extraBytes > dst.bytesPerRow);
 
         // numU32PerRowNeedsWriting = bytesPerTexel * copyExtent.width / 4 + (1 or 0)
-        // One more thread is needed when offset % 4 > 0 and the end of the buffer occupies one more
-        // 4-byte word.
-        // e.g. for R8Snorm copyWidth = 256, when offset = 0, 64 u32 needs writing;
-        // when offset = 1, 65 u32 needs writing;
-        // (The first u32 needs reading 3 texels and mix up with the original buffer value,
-        // the last u32 needs reading 1 texel and mix up with the original buffer value);
+        // One more thread is needed when offset % 4 > 0 and the end of the buffer occupies one
+        // more 4-byte word. e.g. for R8Snorm copyWidth = 256, when offset = 0, 64 u32 needs
+        // writing; when offset = 1, 65 u32 needs writing; (The first u32 needs reading 3 texels
+        // and mix up with the original buffer value, the last u32 needs reading 1 texel and mix
+        // up with the original buffer value);
         numU32PerRowNeedsWriting = (bytesPerTexel * copyExtent.width + extraBytes + 3) / 4;
-        workgroupCountX = numU32PerRowNeedsWriting;
+        workgroupCountX = (numU32PerRowNeedsWriting + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
     } else {
         switch (bytesPerTexel) {
             case 1:
@@ -906,29 +921,46 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         }
     }
 
+    // Allow internal usages since we need to use the source as a texture binding
+    // and buffer as a storage binding.
+    auto scope = commandEncoder->MakeInternalUsageScope();
+
     Ref<BufferBase> destinationBuffer = dst.buffer;
     bool useIntermediateCopyBuffer = false;
-    if (bytesPerTexel < 4 && dst.buffer->GetSize() % 4 != 0 &&
-        copyExtent.width % (4 / bytesPerTexel) != 0) {
-        // This path is made for OpenGL/GLES bliting a texture with an width % (4 / texelByteSize)
-        // != 0, to a compact buffer. When we copy the last texel, we inevitably need to access an
-        // out of bounds location given by dst.buffer.size as we use array<u32> in the shader for
-        // the storage buffer. Although the allocated size of dst.buffer is aligned to 4 bytes for
-        // OpenGL/GLES backend, the size of the storage buffer binding for the shader is not. Thus
-        // we make an intermediate buffer aligned to 4 bytes for the compute shader to safely
-        // access, and perform an additional buffer to buffer copy at the end. This path should be
-        // hit rarely.
+    if ((bytesPerTexel < 4 && dst.buffer->GetSize() % 4 != 0 &&
+         copyExtent.width % (4 / bytesPerTexel) != 0) ||
+        !(dst.buffer->GetUsage() & (kInternalStorageBuffer | wgpu::BufferUsage::Storage))) {
+        // This path is usually made for OpenGL/GLES bliting a texture with an width % (4 /
+        // texelByteSize)
+        // != 0, to a compact buffer. When we copy the last texel, we inevitably need to access
+        // an out of bounds location given by dst.buffer.size as we use array<u32> in the shader
+        // for the storage buffer. Although the allocated size of dst.buffer is aligned to 4
+        // bytes for OpenGL/GLES backend, the size of the storage buffer binding for the shader
+        // is not. Thus we make an intermediate buffer aligned to 4 bytes for the compute shader
+        // to safely access, and perform an additional buffer to buffer copy at the end. This
+        // path should be hit rarely.
+        //
+        // We also allocate an intermediate buffer if the backend doesn't support adding
+        // kInternalStorageBuffer usage to the destination buffer.
         useIntermediateCopyBuffer = true;
         BufferDescriptor descriptor = {};
         descriptor.size = Align(dst.buffer->GetSize(), 4);
         // TODO(dawn:1485): adding CopyDst usage to add kInternalStorageBuffer usage internally.
         descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
         DAWN_TRY_ASSIGN(destinationBuffer, device->CreateBuffer(&descriptor));
-    }
 
-    // Allow internal usages since we need to use the source as a texture binding
-    // and buffer as a storage binding.
-    auto scope = commandEncoder->MakeInternalUsageScope();
+        // Copy the bytes that we won't write in the shader (those before offset, padding bytes,
+        // etc)
+        if (dst.bytesPerRow != copyExtent.width * bytesPerTexel ||
+            dst.rowsPerImage != copyExtent.height) {
+            commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
+                dst.buffer.Get(), 0, destinationBuffer.Get(), 0, destinationBuffer->GetSize());
+        } else if (dst.offset > 0) {
+            // If the copy is compact, we only need to copy the first bytes before offset.
+            commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
+                dst.buffer.Get(), 0, destinationBuffer.Get(), 0, Align(dst.offset, 4));
+        }
+    }
 
     Ref<BufferBase> uniformBuffer;
     {
