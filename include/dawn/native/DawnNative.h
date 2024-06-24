@@ -128,7 +128,7 @@ class DAWN_NATIVE_EXPORT Adapter {
     void ResetInternalDeviceForTesting();
 
   private:
-    raw_ptr<AdapterBase> mImpl = nullptr;
+    raw_ptr<AdapterBase, DanglingUntriaged> mImpl = nullptr;
 };
 
 enum BackendValidationLevel { Full, Partial, Disabled };
@@ -189,7 +189,7 @@ class DAWN_NATIVE_EXPORT Instance {
     void DisconnectDawnPlatform();
 
   private:
-    raw_ptr<InstanceBase> mImpl = nullptr;
+    raw_ptr<InstanceBase, DanglingUntriaged> mImpl = nullptr;
 };
 
 // Backend-agnostic API for dawn_native

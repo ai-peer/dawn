@@ -86,7 +86,7 @@ class ResourceMemoryAllocation {
   private:
     AllocationInfo mInfo;
     uint64_t mOffset;
-    raw_ptr<ResourceHeapBase> mResourceHeap;
+    raw_ptr<ResourceHeapBase, DanglingUntriaged> mResourceHeap;
     raw_ptr<uint8_t> mMappedPointer;
 };
 }  // namespace dawn::native
