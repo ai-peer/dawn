@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30200b12_59d28ab0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T08:52:38Z",
+      "side": 1,
+      "message": "Alternatively we can fix generator_lib.py\u0027s regexes to not look for the end of control-flow tag.",
+      "revId": "0b8046d3aa97f819a2bf4f7d0bcb4bcc512b8925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f673b8_505694be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T08:52:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0b8046d3aa97f819a2bf4f7d0bcb4bcc512b8925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
