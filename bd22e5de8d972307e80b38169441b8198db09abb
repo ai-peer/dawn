@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c93b01f0_bc94b0f5",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-24T20:19:46Z",
+      "side": 1,
+      "message": "This doesn\u0027t look right - if the user has specified `either` then we probably want to reflect that?\n\nYou can probably remove this whole `if` statement and let the logic below handle this. I imagine this is here because we used to forbid `@interpolate` attributes on integer types, but now they are required.",
+      "revId": "bd22e5de8d972307e80b38169441b8198db09abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e320e7_b391ec7e",
+        "filename": "src/tint/lang/wgsl/resolver/compatibility_mode_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-24T20:19:46Z",
+      "side": 1,
+      "message": "Nit: Comment shows explicit `first` which isn\u0027t what the test does.",
+      "revId": "bd22e5de8d972307e80b38169441b8198db09abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17a1f0ec_8b873b21",
+        "filename": "src/tint/lang/wgsl/resolver/compatibility_mode_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-24T20:19:46Z",
+      "side": 1,
+      "message": "Nit: as above, remove `, first`",
+      "revId": "bd22e5de8d972307e80b38169441b8198db09abb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
