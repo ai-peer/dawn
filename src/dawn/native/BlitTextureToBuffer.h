@@ -32,8 +32,11 @@
 
 namespace dawn::native {
 
+struct Format;
 struct TextureCopy;
 struct BufferCopy;
+
+bool IsFormatSuportedByColorTextureToBufferBlit(const Format& format);
 
 MaybeError BlitTextureToBuffer(DeviceBase* device,
                                CommandEncoder* commandEncoder,
