@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df37f3f3_b6b918ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a194eb78_0b19627d",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 15
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "nit: unrelated dedent?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8e0381_2ea59324",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "```suggestion\n  * ``FORCE_STATIC`` or ``FORCE_SHARED`` or ``FORCE_OBJECT``: Forces a\n```",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89ade8bf_7b789bbc",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "```suggestion\n    If none is provided, ``BUILD_SHARED_LIBS`` will control the library type.\n```",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a795402_b2c8214a",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "Right not the implementation is exactly the same as `PRIVATE_DEPENDS` is there a future CL where `UTILITY_TARGET`\u0027s behavior is modified?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf3a26f_04c47fb7",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "nit: Doc for `DEPENDS` should be split between `DEPENDS` and `PRIVATE_DEPENDS`",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d51e582_c503c8db",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "```suggestion\n      \"The ${name} library needs at least one of sources or headers.\")\n```",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb629c9b_869d7753",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "What about `arg_FORCE_OBJECT`?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf14bdb_897629cf",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "Can it be an error instead? It seems to just be a programming error if this happens.",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c523bc_9876dda9",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "The doc seems to indicate that this is just for embedded systems so we could skip this.",
+      "range": {
+        "startLine": 108,
+        "startChar": 41,
+        "endLine": 108,
+        "endChar": 68
+      },
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47256a4_77c766f5",
+        "filename": "src/cmake/DawnLibrary.cmake",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:20:21Z",
+      "side": 1,
+      "message": "Maybe `else() set(library_type STATIC)`?",
+      "revId": "ad477a9cc49f914acc6ecf5f80402ec19dc09951",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
