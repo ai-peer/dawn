@@ -32,6 +32,7 @@
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/UnderlyingType.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::ityp {
 
@@ -60,9 +61,11 @@ class span {
 
     const Value* begin() const noexcept { return mData; }
 
-    Value* end() noexcept { return mData + static_cast<I>(mSize); }
+    Value* end() noexcept { return mData + static_cast<std::ptrdiff_t>(static_cast<I>(mSize)); }
 
-    const Value* end() const noexcept { return mData + static_cast<I>(mSize); }
+    const Value* end() const noexcept {
+        return mData + static_cast<std::ptrdiff_t>(static_cast<I>(mSize));
+    }
 
     Value& front() {
         DAWN_ASSERT(mData != nullptr);
@@ -79,19 +82,19 @@ class span {
     Value& back() {
         DAWN_ASSERT(mData != nullptr);
         DAWN_ASSERT(static_cast<I>(mSize) >= 0);
-        return *(mData + static_cast<I>(mSize) - 1);
+        return *(mData.get() + static_cast<std::ptrdiff_t>(static_cast<I>(mSize)) - 1);
     }
 
     const Value& back() const {
         DAWN_ASSERT(mData != nullptr);
         DAWN_ASSERT(static_cast<I>(mSize) >= 0);
-        return *(mData + static_cast<I>(mSize) - 1);
+        return *(mData + static_cast<std::ptrdiff_t>(static_cast<I>(mSize)) - 1);
     }
 
     Index size() const { return mSize; }
 
   private:
-    Value* mData;
+    raw_ptr<Value, AllowPtrArithmetic> mData;
     Index mSize;
 };
 
