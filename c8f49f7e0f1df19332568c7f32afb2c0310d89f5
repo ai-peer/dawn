@@ -39,6 +39,30 @@
       },
       "revId": "c8f49f7e0f1df19332568c7f32afb2c0310d89f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99639eaf_5b3b263c",
+        "filename": "src/tint/utils/cli/cli.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-24T13:42:51Z",
+      "side": 1,
+      "message": "We also sometimes use inline comments at the callsite to help with that, e.g.:\n`ShowHelp(std::cerr, /* show_equals_form */ true)`",
+      "parentUuid": "0df84cf4_e9a8b995",
+      "range": {
+        "startLine": 202,
+        "startChar": 37,
+        "endLine": 202,
+        "endChar": 67
+      },
+      "revId": "c8f49f7e0f1df19332568c7f32afb2c0310d89f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
