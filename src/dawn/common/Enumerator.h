@@ -61,7 +61,7 @@ class EnumerateRange final {
 
       private:
         Index mIndex;
-        raw_ptr<Value, AllowPtrArithmetic> mValue;
+        raw_ptr<Value, DanglingUntriaged | AllowPtrArithmetic> mValue;
     };
 
     Iterator begin() const { return Iterator(Index{}, mBegin.get()); }
@@ -71,7 +71,7 @@ class EnumerateRange final {
 
   private:
     Index mSize;
-    raw_ptr<Value> mBegin;
+    raw_ptr<Value, DanglingUntriaged> mBegin;
 };
 
 template <typename T,
