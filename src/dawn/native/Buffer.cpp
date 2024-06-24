@@ -149,13 +149,24 @@ wgpu::BufferUsage AddInternalUsages(const DeviceBase* device, wgpu::BufferUsage 
     }
 
     if (usage & wgpu::BufferUsage::CopyDst) {
-        if (device->IsToggleEnabled(Toggle::UseBlitForDepth16UnormTextureToBufferCopy) ||
+        bool useComputeForT2B =
+            device->IsToggleEnabled(Toggle::UseBlitForDepth16UnormTextureToBufferCopy) ||
             device->IsToggleEnabled(Toggle::UseBlitForDepth32FloatTextureToBufferCopy) ||
             device->IsToggleEnabled(Toggle::UseBlitForStencilTextureToBufferCopy) ||
             device->IsToggleEnabled(Toggle::UseBlitForSnormTextureToBufferCopy) ||
             device->IsToggleEnabled(Toggle::UseBlitForBGRA8UnormTextureToBufferCopy) ||
-            device->IsToggleEnabled(Toggle::UseBlitForRGB9E5UfloatTextureCopy)) {
-            usage |= kInternalStorageBuffer;
+            device->IsToggleEnabled(Toggle::UseBlitForRGB9E5UfloatTextureCopy) ||
+            device->IsToggleEnabled(Toggle::UseBlitForT2B);
+        if (useComputeForT2B) {
+            if (!(usage & kMappableBufferUsages) ||
+                device->HasFeature(Feature::BufferMapExtendedUsages)) {
+                // If buffer doesn't have mapping usage or BufferMapExtendedUsages is enabled, we
+                // can add Storage usage in order to write to it in compute shader.
+                usage |= kInternalStorageBuffer;
+            } else {
+                // Otherwise, we need CopySrc usage in order to copy to a temporary buffer
+                usage |= kInternalCopySrcBuffer;
+            }
         }
     }
 
