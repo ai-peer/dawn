@@ -970,7 +970,7 @@ class TraceEndOnScopeClose {
     // uninitialized accesses.
     struct Data {
         raw_ptr<Platform> platform;
-        const unsigned char* categoryEnabled;
+        raw_ptr<const unsigned char> categoryEnabled;
         const char* name;
     };
     raw_ptr<Data> m_pdata = nullptr;
