@@ -221,7 +221,7 @@ MaybeError InstanceBase::Initialize(const UnpackedPtr<InstanceDescriptor>& descr
         mBeginCaptureOnStartup = dawnDesc->beginCaptureOnStartup;
 
         mLoggingCallback = dawnDesc->loggingCallback;
-        mLoggingCallbackUserdata = dawnDesc->loggingCallbackUserdata;
+        mLoggingCallbackUserdata = dawnDesc->loggingCallbackUserdata.get();
     }
 
     if (!mLoggingCallback) {
