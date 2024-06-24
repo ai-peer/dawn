@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b036ec6_b34e6345",
+        "filename": "src/tint/lang/hlsl/intrinsic/dialect.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7b4d45f_579bb0cf",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7b006ed_fd0c1eca",
@@ -126,6 +144,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccc6ce4_56ba1ad2",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done. This was actually a copy of what the old code was doing.",
+      "parentUuid": "b7b006ed_fd0c1eca",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e159e576_5f1961a4",
@@ -139,6 +175,24 @@
       "writtenOn": "2024-06-24T14:42:02Z",
       "side": 1,
       "message": "Nit: s/As/Is/\n\nOne of the bots used to fail for this, but maybe that was GCC...",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca4638d_1962aa7e",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e159e576_5f1961a4",
       "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +214,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f37d145_7f6c1157",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ae9ba35_03a26160",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06be6fbd_1a05dc8b",
@@ -173,6 +245,24 @@
       "writtenOn": "2024-06-24T14:42:02Z",
       "side": 1,
       "message": "This is interesting enough to warrant a comment that shows the pseudo code for what it generates (when reviewing I had to use the printer tests as the reference).\n\ne.g.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/lang/msl/writer/raise/builtin_polyfill.cc;l\u003d329?q\u003dbuiltin_polyfill.cc\u0026ss\u003dchromium",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c9c0f2_239826c2",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06be6fbd_1a05dc8b",
       "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +284,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78f6b23a_cfed6a87",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65997aa9_a97dffda",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f8dea9f_86dfa4c7",
@@ -207,6 +315,24 @@
       "writtenOn": "2024-06-24T14:42:02Z",
       "side": 1,
       "message": "`s` is already a `u32`, so the convert shouldn\u0027t be necessary?",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b17f0ed1_dd44bccd",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f8dea9f_86dfa4c7",
       "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +354,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f057edb_8b6242c0",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec726d2f_62808fc6",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e96311b_c61b5f72",
@@ -241,6 +385,24 @@
       "writtenOn": "2024-06-24T14:42:02Z",
       "side": 1,
       "message": "As above, consider adding a pseudo-code comment to show what we\u0027re generating.",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a6f5ec_0472f757",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96311b_c61b5f72",
       "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -285,6 +447,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "999cf28d_42c10b46",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78e45068_6773f7ba",
+      "range": {
+        "startLine": 243,
+        "startChar": 54,
+        "endLine": 243,
+        "endChar": 88
+      },
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b5ea78_5f0bdc19",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d96cdb1_5f66c21a",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fdd381f_affa882b",
@@ -308,6 +512,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb123fdc_584f0210",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fdd381f_affa882b",
+      "range": {
+        "startLine": 246,
+        "startChar": 55,
+        "endLine": 246,
+        "endChar": 89
+      },
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8abab0f2_98260137",
@@ -321,6 +549,24 @@
       "writtenOn": "2024-06-24T14:42:02Z",
       "side": 1,
       "message": "It\u0027d be nice to have a couple of tests that cover the f16 conversion cases too.",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce3fec1_e3d5eed6",
+        "filename": "src/tint/lang/hlsl/writer/raise/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-24T19:05:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8abab0f2_98260137",
       "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
