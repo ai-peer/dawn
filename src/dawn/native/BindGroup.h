@@ -31,6 +31,7 @@
 #include <array>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/BindGroupLayout.h"
@@ -50,7 +51,7 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                                        UsageValidationMode mode);
 
 struct BufferBinding {
-    BufferBase* buffer;
+    raw_ptr<BufferBase> buffer;
     uint64_t offset;
     uint64_t size;
 };

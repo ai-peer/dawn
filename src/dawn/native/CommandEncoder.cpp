@@ -32,6 +32,7 @@
 #include <vector>
 
 #include "absl/container/inlined_vector.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Enumerator.h"
 #include "dawn/common/Math.h"
@@ -67,7 +68,7 @@ namespace {
 
 // Record the subresource range of a attachment used in render pass for checking overlaps.
 struct RecordedAttachment {
-    const TextureBase* texture;
+    raw_ptr<const TextureBase> texture;
     uint32_t mipLevel;
     // For 3d color attachment, it's the attachment's depthSlice.
     uint32_t depthOrArrayLayer;
