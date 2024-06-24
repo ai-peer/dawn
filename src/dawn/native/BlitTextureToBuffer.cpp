@@ -36,6 +36,7 @@
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
+#include "dawn/native/CommandValidation.h"
 #include "dawn/native/ComputePassEncoder.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Device.h"
@@ -901,7 +902,8 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
 
     const Format& format = src.texture->GetFormat();
 
-    uint32_t bytesPerTexel = format.GetAspectInfo(src.aspect).block.byteSize;
+    const auto& blockInfo = format.GetAspectInfo(src.aspect).block;
+    const uint32_t bytesPerTexel = blockInfo.byteSize;
     uint32_t workgroupCountX = 1;
     uint32_t workgroupCountY = (textureViewDimension == wgpu::TextureViewDimension::e1D)
                                    ? 1
@@ -909,9 +911,14 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     uint32_t workgroupCountZ = copyExtent.depthOrArrayLayers;
 
     uint32_t numU32PerRowNeedsWriting = 0;
+    const auto ssboAlignment = device->GetLimits().v1.minStorageBufferOffsetAlignment;
+    // shaderWriteOffset is the offset to start writing in shader.
+    const uint64_t shaderWriteOffset = dst.offset % ssboAlignment;
+    // alignedOffset is the aligned offset we will bind the buffer.
+    const uint64_t alignedOffset = dst.offset - shaderWriteOffset;
     bool readPreviousRow = false;
     if (bytesPerTexel < 4 && !format.HasDepthOrStencil()) {
-        uint32_t extraBytes = dst.offset % 4;
+        uint32_t extraBytes = shaderWriteOffset % 4;
 
         // Between rows and image (whether thread at end of each row needs read start of next
         // row)
@@ -954,8 +961,18 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     // Skip clearing the buffer if this is full size copy.
     dst.buffer->SetInitialized(fullSizeCopy || dst.buffer->IsInitialized());
 
-    Ref<BufferBase> destinationBuffer = dst.buffer;
-    uint64_t totalBindingSize = dst.buffer->GetSize();
+    Ref<BufferBase> destinationBuffer = dst.buffer.Get();
+    const uint32_t bytesPerRow = dst.bytesPerRow == wgpu::kCopyStrideUndefined
+                                     ? (copyExtent.width * bytesPerTexel)
+                                     : dst.bytesPerRow;
+    const uint32_t rowsPerImage =
+        dst.rowsPerImage == wgpu::kCopyStrideUndefined ? copyExtent.height : dst.rowsPerImage;
+    uint64_t totalBindingSize =
+        shaderWriteOffset +
+        ComputeRequiredBytesInCopy(blockInfo, copyExtent, bytesPerRow, rowsPerImage)
+            .AcquireSuccess();
+    uint64_t bindingOffset = alignedOffset;
+    DAWN_ASSERT(bindingOffset + totalBindingSize <= dst.buffer->GetSize());
     bool useIntermediateCopyBuffer = false;
     const bool needsTempForOOBU32Write =
         totalBindingSize % 4 != 0 && (copyExtent.width * bytesPerTexel) % 4 != 0;
@@ -974,6 +991,7 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         // usage.
         const auto pendingSerial = device->GetQueue()->GetPendingCommandSerial();
         useIntermediateCopyBuffer = true;
+        bindingOffset = 0;
         const uint64_t originalBindingSize = totalBindingSize;
         totalBindingSize = Align(totalBindingSize, 4);
         DAWN_TRY_ASSIGN(destinationBuffer, device->GetTempGPUBufferManager()->Allocate(
@@ -994,22 +1012,17 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         // Copy the bytes that we won't write in the shader (those before offset, padding bytes,
         // etc).
         if (!fullSizeCopy) {
-            const uint32_t bytesPerRow = dst.bytesPerRow == wgpu::kCopyStrideUndefined
-                                             ? (copyExtent.width * bytesPerTexel)
-                                             : dst.bytesPerRow;
-            const uint32_t rowsPerImage = dst.rowsPerImage == wgpu::kCopyStrideUndefined
-                                              ? copyExtent.height
-                                              : dst.rowsPerImage;
             if (bytesPerRow == copyExtent.width * bytesPerTexel &&
                 rowsPerImage == copyExtent.height) {
                 // If the copy is compact, we only need to copy the first bytes before offset.
-                if (dst.offset > 0) {
+                if (shaderWriteOffset > 0) {
                     commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
-                        dst.buffer.Get(), 0, destinationBuffer.Get(), 0, Align(dst.offset, 4));
+                        dst.buffer.Get(), alignedOffset, destinationBuffer.Get(), 0,
+                        Align(shaderWriteOffset, 4));
                 }
             } else {
                 commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
-                    dst.buffer.Get(), 0, destinationBuffer.Get(), 0, totalBindingSize);
+                    dst.buffer.Get(), alignedOffset, destinationBuffer.Get(), 0, totalBindingSize);
             }
         }
     }
@@ -1036,17 +1049,17 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
 
         params[7] = src.mipLevel;
 
-        params[8] = dst.bytesPerRow;
-        params[9] = dst.rowsPerImage;
-        params[10] = dst.offset;
+        params[8] = bytesPerRow;
+        params[9] = rowsPerImage;
+        params[10] = shaderWriteOffset;
 
         // These params are only used for R8Snorm and R8Snorm
-        params[11] = (dst.offset % 4) / bytesPerTexel;  // shift
+        params[11] = (shaderWriteOffset % 4) / bytesPerTexel;  // shift
 
         params[16] = bytesPerTexel;
         params[17] = numU32PerRowNeedsWriting;
         params[18] = readPreviousRow ? 1 : 0;
-        params[19] = dst.rowsPerImage == copyExtent.height ? 1 : 0;  // isCompactImage
+        params[19] = rowsPerImage == copyExtent.height ? 1 : 0;  // isCompactImage
 
         if (textureViewDimension == wgpu::TextureViewDimension::Cube) {
             // cube need texture size to convert texel coord to sample location
@@ -1093,14 +1106,14 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     Ref<BindGroupLayoutBase> bindGroupLayout0;
     DAWN_TRY_ASSIGN(bindGroupLayout0, pipeline->GetBindGroupLayout(0));
     Ref<BindGroupBase> bindGroup0;
-    DAWN_TRY_ASSIGN(bindGroup0,
-                    utils::MakeBindGroup(device, bindGroupLayout0,
-                                         {
-                                             {0, srcView},
-                                             {1, destinationBuffer, 0, totalBindingSize},
-                                             {2, uniformBuffer},
-                                         },
-                                         UsageValidationMode::Internal));
+    DAWN_TRY_ASSIGN(bindGroup0, utils::MakeBindGroup(
+                                    device, bindGroupLayout0,
+                                    {
+                                        {0, srcView},
+                                        {1, destinationBuffer, bindingOffset, totalBindingSize},
+                                        {2, uniformBuffer},
+                                    },
+                                    UsageValidationMode::Internal));
 
     Ref<BindGroupLayoutBase> bindGroupLayout1;
     Ref<BindGroupBase> bindGroup1;
@@ -1131,7 +1144,7 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     if (useIntermediateCopyBuffer) {
         DAWN_ASSERT(totalBindingSize <= dst.buffer->GetAllocatedSize());
         commandEncoder->InternalCopyBufferToBufferWithAllocatedSize(
-            destinationBuffer.Get(), 0, dst.buffer.Get(), 0, totalBindingSize);
+            destinationBuffer.Get(), 0, dst.buffer.Get(), alignedOffset, totalBindingSize);
     }
 
     return {};
