@@ -418,8 +418,7 @@ void foo() {
 )");
 }
 
-// TODO(dsinclair): Needs binary polyfill
-TEST_F(HlslWriterTest, DISABLED_BinaryLogicalAnd) {
+TEST_F(HlslWriterTest, BinaryLogicalAnd) {
     auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
@@ -438,18 +437,17 @@ TEST_F(HlslWriterTest, DISABLED_BinaryLogicalAnd) {
 void foo() {
   bool x = true;
   bool y = false;
-  bool tint_tmp = x;
-  if (tint_tmp) {
-    tint_tmp = y;
+  bool v = x;
+  if (v) {
+    v = y;
   }
-  bool c = (tint_tmp);
+  bool c = v;
 }
 
 )");
 }
 
-// TODO(dsinclair): Needs binary polyfill
-TEST_F(HlslWriterTest, DISABLED_BinaryLogicalOr) {
+TEST_F(HlslWriterTest, BinaryLogicalOr) {
     auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
@@ -466,13 +464,13 @@ TEST_F(HlslWriterTest, DISABLED_BinaryLogicalOr) {
     EXPECT_EQ(output_.hlsl, R"(
 [numthreads(1, 1, 1)]
 void foo() {
-  bool a = true;
-  bool b = false;
-  bool tint_tmp = x;
-  if (!tint_tmp) {
-    tint_tmp = y;
+  bool x = true;
+  bool y = false;
+  bool v = x;
+  if (!(v)) {
+    v = y;
   }
-  bool c = (tint_tmp);
+  bool c = v;
 }
 
 )");

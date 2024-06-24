@@ -46,6 +46,8 @@ struct BinaryPolyfillConfig {
     bool bitshift_modulo = false;
     /// Should integer divide and modulo be polyfilled to avoid DBZ and integer overflow?
     bool int_div_mod = false;
+    /// Should logical and and logical or be replaced by an if statement
+    bool logical_and_or = false;
 
     /// Reflection for this class
     TINT_REFLECT(BinaryPolyfillConfig, bitshift_modulo, int_div_mod);

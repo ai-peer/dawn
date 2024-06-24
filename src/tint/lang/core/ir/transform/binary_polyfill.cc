@@ -83,6 +83,11 @@ struct State {
                             worklist.Push(binary);
                         }
                         break;
+                    case BinaryOp::kLogicalAnd:
+                    case BinaryOp::kLogicalOr:
+                        if (config.logical_and_or) {
+                            worklist.Push(binary);
+                        }
                     default:
                         break;
                 }
@@ -99,6 +104,10 @@ struct State {
                 case BinaryOp::kShiftLeft:
                 case BinaryOp::kShiftRight:
                     MaskShiftAmount(binary);
+                    break;
+                case BinaryOp::kLogicalAnd:
+                case BinaryOp::kLogicalOr:
+                    ReplaceLogicalOp(binary);
                     break;
                 default:
                     break;
@@ -222,6 +231,30 @@ struct State {
         auto* masked = b.And(rhs->Type(), rhs, MatchWidth(mask, rhs->Type()));
         masked->InsertBefore(binary);
         binary->SetOperand(ir::CoreBinary::kRhsOperandOffset, masked->Result(0));
+    }
+
+    /// Replace a logical and or logical or instruction with an equivalent if structure.
+    /// @param binary the binary instruction
+    void ReplaceLogicalOp(ir::CoreBinary* binary) {
+        Var* tmp = nullptr;
+        b.InsertBefore(binary, [&] {
+            tmp = b.Var(ty.ptr<private_, bool>());
+            tmp->SetInitializer(binary->LHS());
+
+            core::ir::Instruction* cond = b.Load(tmp);
+            if (binary->Op() == core::BinaryOp::kLogicalOr) {
+                cond = b.Not(ty.bool_(), cond);
+            }
+
+            auto* if_ = b.If(cond);
+            b.Append(if_->True(), [&] {
+                b.Store(tmp, binary->RHS());
+                b.ExitIf(if_);
+            });
+
+            b.LoadWithResult(binary->DetachResult(), tmp);
+        });
+        binary->Destroy();
     }
 };
 

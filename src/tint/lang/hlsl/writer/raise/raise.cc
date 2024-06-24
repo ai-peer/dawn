@@ -50,6 +50,7 @@ Result<SuccessType> Raise(core::ir::Module& module, const Options& options) {
         core::ir::transform::BinaryPolyfillConfig binary_polyfills{};
         binary_polyfills.int_div_mod = !options.disable_polyfill_integer_div_mod;
         binary_polyfills.bitshift_modulo = true;
+        binary_polyfills.logical_and_or = true;
         RUN_TRANSFORM(core::ir::transform::BinaryPolyfill, binary_polyfills);
     }
 
