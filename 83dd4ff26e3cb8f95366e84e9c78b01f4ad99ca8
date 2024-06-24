@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0262b630_d8568b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-24T15:59:31Z",
+      "side": 1,
+      "message": "Yea, I considered that, but this seemed a bit nicer in that hte code is more like what you\u0027d see in WGSL. Doing the conversion tripped me up with the `vec \u0026 float` because I wasn\u0027t expecting it as you can\u0027t do it in WGSL.",
+      "parentUuid": "c9ae18a6_6b305f8e",
+      "revId": "83dd4ff26e3cb8f95366e84e9c78b01f4ad99ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7b4d45f_579bb0cf",
