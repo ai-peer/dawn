@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -36,128 +36,86 @@
 
 load("//src/tint:flags.bzl", "COPTS")
 load("@bazel_skylib//lib:selects.bzl", "selects")
-cc_library(
-  name = "text",
+cc_binary(
+  name = "cmd",
   srcs = [
-    "base64.cc",
-    "color_mode.cc",
-    "string.cc",
-    "string_stream.cc",
-    "styled_text.cc",
-    "styled_text_printer.cc",
-    "styled_text_printer_ansi.cc",
-    "styled_text_theme.cc",
-    "unicode.cc",
+    "main.cc",
+  ],
+  deps = [
+    "//src/tint/api",
+    "//src/tint/api/common",
+    "//src/tint/cmd/common",
+    "//src/tint/lang/core",
+    "//src/tint/lang/core/constant",
+    "//src/tint/lang/core/ir",
+    "//src/tint/lang/core/type",
+    "//src/tint/lang/wgsl",
+    "//src/tint/lang/wgsl/ast",
+    "//src/tint/lang/wgsl/ast/transform",
+    "//src/tint/lang/wgsl/common",
+    "//src/tint/lang/wgsl/features",
+    "//src/tint/lang/wgsl/helpers",
+    "//src/tint/lang/wgsl/inspector",
+    "//src/tint/lang/wgsl/program",
+    "//src/tint/lang/wgsl/sem",
+    "//src/tint/utils/cli",
+    "//src/tint/utils/command",
+    "//src/tint/utils/containers",
+    "//src/tint/utils/diagnostic",
+    "//src/tint/utils/ice",
+    "//src/tint/utils/id",
+    "//src/tint/utils/macros",
+    "//src/tint/utils/math",
+    "//src/tint/utils/memory",
+    "//src/tint/utils/reflection",
+    "//src/tint/utils/result",
+    "//src/tint/utils/rtti",
+    "//src/tint/utils/strconv",
+    "//src/tint/utils/symbol",
+    "//src/tint/utils/system",
+    "//src/tint/utils/text",
+    "//src/tint/utils/traits",
   ] + select({
-    ":_not_tint_build_is_linux__and__not_tint_build_is_mac__and__not_tint_build_is_win_": [
-      "styled_text_printer_other.cc",
+    ":tint_build_ir_binary": [
+      "//src/tint/lang/core/ir/binary",
     ],
     "//conditions:default": [],
   }) + select({
-    ":tint_build_is_linux_or_tint_build_is_mac": [
-      "styled_text_printer_posix.cc",
+    ":tint_build_spv_reader": [
+      "//src/tint/lang/spirv/reader/common",
     ],
     "//conditions:default": [],
   }) + select({
-    ":tint_build_is_win": [
-      "styled_text_printer_windows.cc",
+    ":tint_build_wgsl_reader": [
+      "//src/tint/lang/wgsl/reader",
+      "//src/tint/lang/wgsl/reader/program_to_ir",
     ],
     "//conditions:default": [],
   }),
-  hdrs = [
-    "base64.h",
-    "color_mode.h",
-    "string.h",
-    "string_stream.h",
-    "styled_text.h",
-    "styled_text_printer.h",
-    "styled_text_theme.h",
-    "text_style.h",
-    "unicode.h",
-  ],
-  deps = [
-    "//src/tint/utils/containers",
-    "//src/tint/utils/ice",
-    "//src/tint/utils/macros",
-    "//src/tint/utils/math",
-    "//src/tint/utils/memory",
-    "//src/tint/utils/rtti",
-    "//src/tint/utils/system",
-    "//src/tint/utils/traits",
-  ],
-  copts = COPTS,
-  visibility = ["//visibility:public"],
-)
-cc_library(
-  name = "test",
-  alwayslink = True,
-  srcs = [
-    "base64_test.cc",
-    "string_stream_test.cc",
-    "string_test.cc",
-    "styled_text_printer_test.cc",
-    "text_style_test.cc",
-    "unicode_test.cc",
-  ],
-  deps = [
-    "//src/tint/utils/containers",
-    "//src/tint/utils/ice",
-    "//src/tint/utils/macros",
-    "//src/tint/utils/math",
-    "//src/tint/utils/memory",
-    "//src/tint/utils/rtti",
-    "//src/tint/utils/text",
-    "//src/tint/utils/traits",
-    "@gtest",
-  ],
   copts = COPTS,
   visibility = ["//visibility:public"],
 )
 
 alias(
-  name = "tint_build_is_linux",
-  actual = "//src/tint:tint_build_is_linux_true",
+  name = "tint_build_ir_binary",
+  actual = "//src/tint:tint_build_ir_binary_true",
 )
 
 alias(
-  name = "_not_tint_build_is_linux_",
-  actual = "//src/tint:tint_build_is_linux_false",
+  name = "tint_build_spv_reader",
+  actual = "//src/tint:tint_build_spv_reader_true",
 )
 
 alias(
-  name = "tint_build_is_mac",
-  actual = "//src/tint:tint_build_is_mac_true",
-)
-
-alias(
-  name = "_not_tint_build_is_mac_",
-  actual = "//src/tint:tint_build_is_mac_false",
-)
-
-alias(
-  name = "tint_build_is_win",
-  actual = "//src/tint:tint_build_is_win_true",
-)
-
-alias(
-  name = "_not_tint_build_is_win_",
-  actual = "//src/tint:tint_build_is_win_false",
+  name = "tint_build_wgsl_reader",
+  actual = "//src/tint:tint_build_wgsl_reader_true",
 )
 
 selects.config_setting_group(
-    name = "tint_build_is_linux_or_tint_build_is_mac",
-    match_any = [
-        "tint_build_is_linux",
-        "tint_build_is_mac",
-    ],
-)
-
-selects.config_setting_group(
-    name = "_not_tint_build_is_linux__and__not_tint_build_is_mac__and__not_tint_build_is_win_",
+    name = "tint_build_ir_binary_and_tint_build_wgsl_reader",
     match_all = [
-        ":_not_tint_build_is_linux_",
-        ":_not_tint_build_is_mac_",
-        ":_not_tint_build_is_win_",
+        ":tint_build_ir_binary",
+        ":tint_build_wgsl_reader",
     ],
 )
 
