@@ -28,6 +28,7 @@
 #include <queue>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/tests/perf_tests/DawnPerfTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -143,7 +144,7 @@ class UniformBufferUpdatePerf : public DawnPerfTestWithParams<UniformBufferUpdat
   private:
     // Data needed for buffer returning.
     struct CallbackData {
-        UniformBufferUpdatePerf* self;
+        raw_ptr<UniformBufferUpdatePerf> self;
         wgpu::Buffer buffer;
     };
     void Step() override;
