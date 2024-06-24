@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14beff96_78a1cc41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:23:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "785d661e86bcbbc12afb8cc162d1607efed379ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d471b62e_e7973468",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T17:23:28Z",
+      "side": 1,
+      "message": "Does this work with CMake 3.13? (or 3.18 for when we upgrade soon?)",
+      "revId": "785d661e86bcbbc12afb8cc162d1607efed379ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
