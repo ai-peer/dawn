@@ -311,6 +311,106 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
         "encoding %s.DrawIndexedIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
 }
 
+void RenderEncoderBase::APIMultiDrawIndirect(BufferBase* indirectBuffer,
+                                             uint64_t indirectOffset,
+                                             uint32_t maxDrawCount,
+                                             BufferBase* drawCountBuffer,
+                                             uint64_t drawCountBufferOffset) {
+    mEncodingContext->TryEncode(
+        this,
+        [&](CommandAllocator* allocator) -> MaybeError {
+            if (IsValidationEnabled()) {
+                DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::MultiDrawIndirect),
+                                "%s is not enabled.", wgpu::FeatureName::MultiDrawIndirect);
+
+                DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
+                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+
+                // draw count buffer is optional
+                if (drawCountBuffer != nullptr) {
+                    DAWN_TRY(GetDevice()->ValidateObject(drawCountBuffer));
+                    DAWN_TRY(ValidateCanUseAs(drawCountBuffer, wgpu::BufferUsage::Indirect));
+
+                    DAWN_INVALID_IF(drawCountBufferOffset % 4 != 0,
+                                    "Draw count buffer offset (%u) is not a multiple of 4.",
+                                    drawCountBufferOffset);
+                }
+
+                DAWN_INVALID_IF(indirectOffset % 4 != 0,
+                                "Indirect offset (%u) is not a multiple of 4.", indirectOffset);
+
+                DAWN_TRY(mCommandBufferState.ValidateCanDraw());
+
+                if (GetDevice()->IsCompatibilityMode()) {
+                    DAWN_TRY(mCommandBufferState.ValidateNoDifferentTextureViewsOnSameTexture());
+                }
+            }
+
+            MultiDrawIndirectCmd* cmd =
+                allocator->Allocate<MultiDrawIndirectCmd>(Command::MultiDrawIndirect);
+
+            cmd->indirectBuffer = indirectBuffer;
+            cmd->indirectOffset = indirectOffset;
+            cmd->maxDrawCount = maxDrawCount;
+            cmd->drawCountBuffer = drawCountBuffer;
+            cmd->drawCountOffset = drawCountBufferOffset;
+
+            return {};
+        },
+        "encoding %s.MultiDrawIndirect(%s, %u, %u, %s, %u).", this, indirectBuffer, indirectOffset,
+        maxDrawCount, drawCountBuffer, drawCountBufferOffset);
+}
+
+void RenderEncoderBase::APIMultiDrawIndexedIndirect(BufferBase* indirectBuffer,
+                                                    uint64_t indirectOffset,
+                                                    uint32_t maxDrawCount,
+                                                    BufferBase* drawCountBuffer,
+                                                    uint64_t drawCountBufferOffset) {
+    mEncodingContext->TryEncode(
+        this,
+        [&](CommandAllocator* allocator) -> MaybeError {
+            if (IsValidationEnabled()) {
+                DAWN_INVALID_IF(!GetDevice()->HasFeature(Feature::MultiDrawIndirect),
+                                "%s is not enabled.", wgpu::FeatureName::MultiDrawIndirect);
+
+                DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
+                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+
+                // draw count buffer is optional
+                if (drawCountBuffer != nullptr) {
+                    DAWN_TRY(GetDevice()->ValidateObject(drawCountBuffer));
+                    DAWN_TRY(ValidateCanUseAs(drawCountBuffer, wgpu::BufferUsage::Indirect));
+
+                    DAWN_INVALID_IF(drawCountBufferOffset % 4 != 0,
+                                    "Draw count buffer offset (%u) is not a multiple of 4.",
+                                    drawCountBufferOffset);
+                }
+
+                DAWN_INVALID_IF(indirectOffset % 4 != 0,
+                                "Indirect offset (%u) is not a multiple of 4.", indirectOffset);
+
+                DAWN_TRY(mCommandBufferState.ValidateCanDraw());
+
+                if (GetDevice()->IsCompatibilityMode()) {
+                    DAWN_TRY(mCommandBufferState.ValidateNoDifferentTextureViewsOnSameTexture());
+                }
+            }
+
+            MultiDrawIndirectCmd* cmd =
+                allocator->Allocate<MultiDrawIndirectCmd>(Command::MultiDrawIndirect);
+
+            cmd->indirectBuffer = indirectBuffer;
+            cmd->indirectOffset = indirectOffset;
+            cmd->maxDrawCount = maxDrawCount;
+            cmd->drawCountBuffer = drawCountBuffer;
+            cmd->drawCountOffset = drawCountBufferOffset;
+
+            return {};
+        },
+        "encoding %s.MultiDrawIndexedIndirect(%s, %u, %u, %s, %u).", this, indirectBuffer,
+        indirectOffset, maxDrawCount, drawCountBuffer, drawCountBufferOffset);
+}
+
 void RenderEncoderBase::APISetPipeline(RenderPipelineBase* pipeline) {
     mEncodingContext->TryEncode(
         this,

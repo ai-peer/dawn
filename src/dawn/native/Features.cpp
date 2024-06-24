@@ -371,6 +371,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "dawn_load_resolve_texture.md",
       FeatureInfo::FeatureState::Stable}},
+    {Feature::MultiDrawIndirect,
+     {"Support MultiDrawIndirect and MultiDrawIndexedIndirect. Allows multiple indirect drawcalls "
+      "with only 1 indirect call.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace

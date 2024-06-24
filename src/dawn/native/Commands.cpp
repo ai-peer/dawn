@@ -109,6 +109,18 @@ void FreeCommands(CommandIterator* commands) {
                 draw->~DrawIndexedIndirectCmd();
                 break;
             }
+            case Command::MultiDrawIndirect: {
+                MultiDrawIndirectCmd* cmd = commands->NextCommand<MultiDrawIndirectCmd>();
+                cmd->~MultiDrawIndirectCmd();
+                break;
+            }
+            case Command::MultiDrawIndexedIndirect: {
+                MultiDrawIndexedIndirectCmd* cmd =
+                    commands->NextCommand<MultiDrawIndexedIndirectCmd>();
+                cmd->~MultiDrawIndexedIndirectCmd();
+                break;
+            }
+
             case Command::EndComputePass: {
                 EndComputePassCmd* cmd = commands->NextCommand<EndComputePassCmd>();
                 cmd->~EndComputePassCmd();
@@ -421,6 +433,9 @@ DispatchIndirectCmd::~DispatchIndirectCmd() = default;
 
 DrawIndirectCmd::DrawIndirectCmd() = default;
 DrawIndirectCmd::~DrawIndirectCmd() = default;
+
+MultiDrawIndirectCmd::MultiDrawIndirectCmd() = default;
+MultiDrawIndirectCmd::~MultiDrawIndirectCmd() = default;
 
 EndComputePassCmd::EndComputePassCmd() = default;
 EndComputePassCmd::~EndComputePassCmd() = default;
