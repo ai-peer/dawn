@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "8320d2641536d3096053f09b34bb97c60d454fb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bd40465_35659895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T15:27:51Z",
+      "side": 1,
+      "message": "LGTM! Arthur, do you know why a bunch of them weren\u0027t caught before? I don\u0027t think that all of these pointers are new.",
+      "revId": "8320d2641536d3096053f09b34bb97c60d454fb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0625fc_8647105b",
+        "filename": "src/dawn/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-24T15:27:51Z",
+      "side": 1,
+      "message": "The casts that we have to do are a bit annoying. Could we just remove the reference and do a copy everytime? It\u0027s test code so a small perf deopt like this is not an issue.",
+      "revId": "8320d2641536d3096053f09b34bb97c60d454fb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
