@@ -52,7 +52,7 @@ TEST_F(IR_VarDeathTest, Fail_NullType) {
 }
 
 TEST_F(IR_VarTest, Results) {
-    auto* var = b.Var(ty.ptr<function, f32>());
+    auto* var = b.Var(ty->ptr<function, f32>());
     EXPECT_EQ(var->Results().Length(), 1u);
     EXPECT_TRUE(var->Result(0)->Is<InstructionResult>());
     EXPECT_EQ(var->Result(0)->Instruction(), var);
@@ -61,7 +61,7 @@ TEST_F(IR_VarTest, Results) {
 TEST_F(IR_VarTest, Initializer_Usage) {
     Module mod;
     Builder b{mod};
-    auto* var = b.Var(ty.ptr<function, f32>());
+    auto* var = b.Var(ty->ptr<function, f32>());
     auto* init = b.Constant(1_f);
     var->SetInitializer(init);
 

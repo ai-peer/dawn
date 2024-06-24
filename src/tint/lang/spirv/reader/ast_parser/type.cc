@@ -32,6 +32,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -218,7 +219,7 @@ Vector::Vector(const Vector&) = default;
 ast::Type Vector::Build(ProgramBuilder& b) const {
     auto prefix = "vec" + std::to_string(size);
     return Switch(
-        type,  //
+        type.get(),  //
         [&](const I32*) { return b.ty(prefix + "i"); },
         [&](const U32*) { return b.ty(prefix + "u"); },
         [&](const F32*) { return b.ty(prefix + "f"); },
@@ -327,15 +328,15 @@ struct TypeManager::State {
     /// The allocator of primitive types
     BlockAllocator<Type> allocator_;
     /// The lazily-created Void type
-    ast_parser::Void const* void_ = nullptr;
+    raw_ptr<const ast_parser::Void> void_ = nullptr;
     /// The lazily-created Bool type
-    ast_parser::Bool const* bool_ = nullptr;
+    raw_ptr<const ast_parser::Bool> bool_ = nullptr;
     /// The lazily-created U32 type
-    ast_parser::U32 const* u32_ = nullptr;
+    raw_ptr<const ast_parser::U32> u32_ = nullptr;
     /// The lazily-created F32 type
-    ast_parser::F32 const* f32_ = nullptr;
+    raw_ptr<const ast_parser::F32> f32_ = nullptr;
     /// The lazily-created I32 type
-    ast_parser::I32 const* i32_ = nullptr;
+    raw_ptr<const ast_parser::I32> i32_ = nullptr;
     /// Unique Pointer instances
     UniqueAllocator<ast_parser::Pointer, PointerHasher> pointers_;
     /// Unique Reference instances
@@ -492,7 +493,7 @@ const Type* TypeManager::AsUnsigned(const Type* ty) {
         [&](const ast_parser::U32*) { return ty; },     //
         [&](const ast_parser::Vector* vec) {
             return Switch(
-                vec->type,                                                         //
+                vec->type.get(),                                                   //
                 [&](const ast_parser::I32*) { return Vector(U32(), vec->size); },  //
                 [&](const ast_parser::U32*) { return ty; }                         //
             );

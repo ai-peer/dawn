@@ -37,17 +37,17 @@ namespace tint::spirv::writer {
 namespace {
 
 TEST_F(SpirvWriterTest, AtomicAdd_Storage) {
-    auto* var = b.Var("var", ty.ptr(storage, ty.atomic(ty.i32())));
+    auto* var = b.Var("var", ty->ptr(storage, ty->atomic(ty->i32())));
     var->SetBindingPoint(0, 0);
     mod.root_block->Append(var);
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
         auto* ptr = b.Let("ptr", var);
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicAdd, ptr, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicAdd, ptr, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -57,14 +57,14 @@ TEST_F(SpirvWriterTest, AtomicAdd_Storage) {
 }
 
 TEST_F(SpirvWriterTest, AtomicAdd_Workgroup) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicAdd, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicAdd, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -74,14 +74,14 @@ TEST_F(SpirvWriterTest, AtomicAdd_Workgroup) {
 }
 
 TEST_F(SpirvWriterTest, AtomicAnd) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicAnd, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicAnd, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -91,18 +91,19 @@ TEST_F(SpirvWriterTest, AtomicAnd) {
 }
 
 TEST_F(SpirvWriterTest, AtomicCompareExchangeWeak) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* cmp = b.FunctionParam("cmp", ty.i32());
-    auto* val = b.FunctionParam("val", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cmp = b.FunctionParam("cmp", ty->i32());
+    auto* val = b.FunctionParam("val", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cmp, val});
 
     b.Append(func->Block(), [&] {
-        auto* result_ty = core::type::CreateAtomicCompareExchangeResult(ty, mod.symbols, ty.i32());
+        auto* result_ty =
+            core::type::CreateAtomicCompareExchangeResult(*ty, mod.symbols, ty->i32());
         auto* result =
             b.Call(result_ty, core::BuiltinFn::kAtomicCompareExchangeWeak, var, cmp, val);
-        auto* original = b.Access(ty.i32(), result, 0_u);
+        auto* original = b.Access(ty->i32(), result, 0_u);
         b.Return(func, original);
         mod.SetName(result, "result");
         mod.SetName(original, "original");
@@ -116,14 +117,14 @@ TEST_F(SpirvWriterTest, AtomicCompareExchangeWeak) {
 }
 
 TEST_F(SpirvWriterTest, AtomicExchange) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicExchange, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicExchange, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -133,12 +134,12 @@ TEST_F(SpirvWriterTest, AtomicExchange) {
 }
 
 TEST_F(SpirvWriterTest, AtomicLoad) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicLoad, var);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicLoad, var);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -148,14 +149,14 @@ TEST_F(SpirvWriterTest, AtomicLoad) {
 }
 
 TEST_F(SpirvWriterTest, AtomicMax_I32) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicMax, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicMax, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -165,14 +166,14 @@ TEST_F(SpirvWriterTest, AtomicMax_I32) {
 }
 
 TEST_F(SpirvWriterTest, AtomicMax_U32) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.u32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->u32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.u32());
-    auto* func = b.Function("foo", ty.u32());
+    auto* arg1 = b.FunctionParam("arg1", ty->u32());
+    auto* func = b.Function("foo", ty->u32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.u32(), core::BuiltinFn::kAtomicMax, var, arg1);
+        auto* result = b.Call(ty->u32(), core::BuiltinFn::kAtomicMax, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -182,14 +183,14 @@ TEST_F(SpirvWriterTest, AtomicMax_U32) {
 }
 
 TEST_F(SpirvWriterTest, AtomicMin_I32) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicMin, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicMin, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -199,14 +200,14 @@ TEST_F(SpirvWriterTest, AtomicMin_I32) {
 }
 
 TEST_F(SpirvWriterTest, AtomicMin_U32) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.u32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->u32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.u32());
-    auto* func = b.Function("foo", ty.u32());
+    auto* arg1 = b.FunctionParam("arg1", ty->u32());
+    auto* func = b.Function("foo", ty->u32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.u32(), core::BuiltinFn::kAtomicMin, var, arg1);
+        auto* result = b.Call(ty->u32(), core::BuiltinFn::kAtomicMin, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -216,14 +217,14 @@ TEST_F(SpirvWriterTest, AtomicMin_U32) {
 }
 
 TEST_F(SpirvWriterTest, AtomicOr) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicOr, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicOr, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -233,14 +234,14 @@ TEST_F(SpirvWriterTest, AtomicOr) {
 }
 
 TEST_F(SpirvWriterTest, AtomicStore) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.void_());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        b.Call(ty.void_(), core::BuiltinFn::kAtomicStore, var, arg1);
+        b.Call(ty->void_(), core::BuiltinFn::kAtomicStore, var, arg1);
         b.Return(func);
     });
 
@@ -249,14 +250,14 @@ TEST_F(SpirvWriterTest, AtomicStore) {
 }
 
 TEST_F(SpirvWriterTest, AtomicSub) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicSub, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicSub, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -266,14 +267,14 @@ TEST_F(SpirvWriterTest, AtomicSub) {
 }
 
 TEST_F(SpirvWriterTest, AtomicXor) {
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(workgroup, ty.atomic(ty.i32()))));
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(workgroup, ty->atomic(ty->i32()))));
 
-    auto* arg1 = b.FunctionParam("arg1", ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arg1 = b.FunctionParam("arg1", ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arg1});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.i32(), core::BuiltinFn::kAtomicXor, var, arg1);
+        auto* result = b.Call(ty->i32(), core::BuiltinFn::kAtomicXor, var, arg1);
         b.Return(func, result);
         mod.SetName(result, "result");
     });

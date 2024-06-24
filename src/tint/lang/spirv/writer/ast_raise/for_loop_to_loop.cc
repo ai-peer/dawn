@@ -66,7 +66,7 @@ ast::transform::Transform::ApplyResult ForLoopToLoop::Apply(const Program& src,
 
     ctx.ReplaceAll([&](const ast::ForLoopStatement* for_loop) -> const ast::Statement* {
         tint::Vector<const ast::Statement*, 8> stmts;
-        if (auto* cond = for_loop->condition) {
+        if (auto* cond = for_loop->condition.get()) {
             // !condition
             auto* not_cond = b.Not(ctx.Clone(cond));
 
@@ -81,14 +81,14 @@ ast::transform::Transform::ApplyResult ForLoopToLoop::Apply(const Program& src,
         }
 
         const ast::BlockStatement* continuing = nullptr;
-        if (auto* cont = for_loop->continuing) {
+        if (auto* cont = for_loop->continuing.get()) {
             continuing = b.Block(ctx.Clone(cont));
         }
 
         auto* body = b.Block(stmts);
         auto* loop = b.Loop(body, continuing);
 
-        if (auto* init = for_loop->initializer) {
+        if (auto* init = for_loop->initializer.get()) {
             return b.Block(ctx.Clone(init), loop);
         }
 

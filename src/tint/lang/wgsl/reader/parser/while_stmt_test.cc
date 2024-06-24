@@ -42,7 +42,7 @@ TEST_F(WhileStmtTest, Empty) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(wl.errored);
     ASSERT_TRUE(wl.matched);
-    EXPECT_TRUE(Is<ast::Expression>(wl->condition));
+    EXPECT_TRUE(Is<ast::Expression>(wl->condition.get()));
     EXPECT_TRUE(wl->body->Empty());
 }
 
@@ -54,7 +54,7 @@ TEST_F(WhileStmtTest, EmptyWithParentheses) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(wl.errored);
     ASSERT_TRUE(wl.matched);
-    EXPECT_TRUE(Is<ast::Expression>(wl->condition));
+    EXPECT_TRUE(Is<ast::Expression>(wl->condition.get()));
     EXPECT_TRUE(wl->body->Empty());
 }
 
@@ -66,7 +66,7 @@ TEST_F(WhileStmtTest, Body) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(wl.errored);
     ASSERT_TRUE(wl.matched);
-    EXPECT_TRUE(Is<ast::Expression>(wl->condition));
+    EXPECT_TRUE(Is<ast::Expression>(wl->condition.get()));
     ASSERT_EQ(wl->body->statements.Length(), 1u);
     EXPECT_TRUE(wl->body->statements[0]->Is<ast::DiscardStatement>());
 }
@@ -79,7 +79,7 @@ TEST_F(WhileStmtTest, ComplexCondition) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(wl.errored);
     ASSERT_TRUE(wl.matched);
-    EXPECT_TRUE(Is<ast::BinaryExpression>(wl->condition));
+    EXPECT_TRUE(Is<ast::BinaryExpression>(wl->condition.get()));
     EXPECT_TRUE(wl->body->Empty());
 }
 
@@ -91,7 +91,7 @@ TEST_F(WhileStmtTest, ComplexConditionWithParentheses) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_FALSE(wl.errored);
     ASSERT_TRUE(wl.matched);
-    EXPECT_TRUE(Is<ast::Expression>(wl->condition));
+    EXPECT_TRUE(Is<ast::Expression>(wl->condition.get()));
     EXPECT_TRUE(wl->body->Empty());
 }
 

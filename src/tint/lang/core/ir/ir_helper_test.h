@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_IR_HELPER_TEST_H_
 #define SRC_TINT_LANG_CORE_IR_IR_HELPER_TEST_H_
 
+#include "base/memory/raw_ref.h"
 #include "gtest/gtest.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/clone_context.h"
@@ -47,7 +48,7 @@ class IRTestHelperBase : public BASE {
     /// The IR builder
     Builder b{mod};
     /// The type manager
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
 
     /// CloneContext
     CloneContext clone_ctx{mod};

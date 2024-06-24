@@ -27,6 +27,7 @@
 
 #include "src/tint/lang/hlsl/writer/raise/fxc_polyfill.h"
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/block.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/exit.h"
@@ -46,17 +47,17 @@ using namespace tint::core::fluent_types;  // NOLINT
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* swtch = inst->As<core::ir::Switch>()) {
                 // BUG(crbug.com/tint/1188): work around default-only switches
                 //
@@ -80,7 +81,7 @@ Result<SuccessType> FxcPolyfill(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

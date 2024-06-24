@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/lang/core/constant/splat.h"
 #include "src/tint/lang/core/constant/value.h"
@@ -127,15 +128,15 @@ class ScopedBitCast {
         }
 
         // Bit cast
-        s << "as_type<";
-        generator->EmitType(s, target_type);
-        s << ">(";
+        (*s) << "as_type<";
+        generator->EmitType(*s, target_type);
+        (*s) << ">(";
     }
 
-    ~ScopedBitCast() { s << ")"; }
+    ~ScopedBitCast() { (*s) << ")"; }
 
   private:
-    StringStream& s;
+    const raw_ref<StringStream> s;
 };
 
 }  // namespace
@@ -530,8 +531,8 @@ bool ASTPrinter::EmitBinary(StringStream& out, const ast::BinaryExpression* expr
         return {};
     };
 
-    auto* lhs_type = TypeOf(expr->lhs)->UnwrapRef();
-    auto* rhs_type = TypeOf(expr->rhs)->UnwrapRef();
+    auto* lhs_type = TypeOf(expr->lhs.get())->UnwrapRef();
+    auto* rhs_type = TypeOf(expr->rhs.get())->UnwrapRef();
 
     // Handle fmod
     if (expr->op == core::BinaryOp::kModulo && lhs_type->is_float_scalar_or_vector()) {
@@ -2136,7 +2137,7 @@ bool ASTPrinter::EmitLoop(const ast::LoopStatement* stmt) {
 
 bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     TextBuffer init_buf;
-    if (auto* init = stmt->initializer) {
+    if (auto* init = stmt->initializer.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &init_buf);
         if (!EmitStatement(init)) {
             return false;
@@ -2145,7 +2146,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
 
     TextBuffer cond_pre;
     StringStream cond_buf;
-    if (auto* cond = stmt->condition) {
+    if (auto* cond = stmt->condition.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         if (!EmitExpression(cond_buf, cond)) {
             return false;
@@ -2153,7 +2154,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     }
 
     TextBuffer cont_buf;
-    if (auto* cont = stmt->continuing) {
+    if (auto* cont = stmt->continuing.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cont_buf);
         if (!EmitStatement(cont)) {
             return false;
@@ -2248,7 +2249,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     StringStream cond_buf;
 
     {
-        auto* cond = stmt->condition;
+        auto* cond = stmt->condition.get();
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         if (!EmitExpression(cond_buf, cond)) {
             return false;
@@ -2445,7 +2446,7 @@ bool ASTPrinter::EmitStatement(const ast::Statement* stmt) {
         },
         [&](const ast::VariableDeclStatement* v) {  //
             return Switch(
-                v->variable,  //
+                v->variable.get(),  //
                 [&](const ast::Var* var) { return EmitVar(var); },
                 [&](const ast::Let* let) { return EmitLet(let); },
                 [&](const ast::Const*) {
@@ -2866,7 +2867,7 @@ bool ASTPrinter::EmitStructType(TextBuffer* b, const core::type::Struct* str) {
 bool ASTPrinter::EmitUnaryOp(StringStream& out, const ast::UnaryOpExpression* expr) {
     // Handle `-e` when `e` is signed, so that we ensure that if `e` is the
     // largest negative value, it returns `e`.
-    auto* expr_type = TypeOf(expr->expr)->UnwrapRef();
+    auto* expr_type = TypeOf(expr->expr.get())->UnwrapRef();
     if (expr->op == core::UnaryOp::kNegation && expr_type->is_signed_integer_scalar_or_vector()) {
         auto fn = tint::GetOrAdd(unary_minus_funcs_, expr_type, [&]() -> std::string {
             // e.g.:

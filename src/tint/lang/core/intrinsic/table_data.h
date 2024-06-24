@@ -32,6 +32,8 @@
 #include <limits>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/constant/eval.h"
 #include "src/tint/lang/core/evaluation_stage.h"
 #include "src/tint/lang/core/parameter_usage.h"
@@ -397,19 +399,19 @@ class MatchState {
           matcher_indices_(matcher_indices) {}
 
     /// The type manager
-    core::type::Manager& types;
+    const raw_ref<core::type::Manager> types;
 
     /// The symbol manager
-    SymbolTable& symbols;
+    const raw_ref<SymbolTable> symbols;
 
     /// The template types and numbers
-    TemplateState& templates;
+    const raw_ref<TemplateState> templates;
 
     /// The table data
-    const TableData& data;
+    const raw_ref<const TableData> data;
 
     /// The current overload being evaluated
-    const OverloadInfo& overload;
+    const raw_ref<const OverloadInfo> overload;
 
     /// The earliest evaluation stage of the builtin call
     EvaluationStage earliest_eval_stage;
@@ -436,7 +438,7 @@ class MatchState {
     inline void PrintNum(StyledText& out);
 
   private:
-    const MatcherIndex* matcher_indices_ = nullptr;
+    raw_ptr<const MatcherIndex> matcher_indices_ = nullptr;
 };
 
 /// A TypeMatcher is the interface used to match an type used as part of an
@@ -603,25 +605,25 @@ struct TableData {
 
 const core::type::Type* MatchState::Type(const core::type::Type* ty) {
     TypeMatcherIndex matcher_index{(*matcher_indices_++).value};
-    auto& matcher = data[matcher_index];
+    auto& matcher = (*data)[matcher_index];
     return matcher.match(*this, ty);
 }
 
 Number MatchState::Num(Number number) {
     NumberMatcherIndex matcher_index{(*matcher_indices_++).value};
-    auto& matcher = data[matcher_index];
+    auto& matcher = (*data)[matcher_index];
     return matcher.match(*this, number);
 }
 
 void MatchState::PrintType(StyledText& out) {
     TypeMatcherIndex matcher_index{(*matcher_indices_++).value};
-    auto& matcher = data[matcher_index];
+    auto& matcher = (*data)[matcher_index];
     matcher.print(this, out);
 }
 
 void MatchState::PrintNum(StyledText& out) {
     NumberMatcherIndex matcher_index{(*matcher_indices_++).value};
-    auto& matcher = data[matcher_index];
+    auto& matcher = (*data)[matcher_index];
     matcher.print(this, out);
 }
 
@@ -636,16 +638,16 @@ struct TemplateTypeMatcher {
         /* match */
         [](MatchState& state, const core::type::Type* type) -> const core::type::Type* {
             if (type->Is<Any>()) {
-                return state.templates.Type(INDEX);
+                return state.templates->Type(INDEX);
             }
-            if (auto* templates = state.templates.Type(INDEX, type)) {
+            if (auto* templates = state.templates->Type(INDEX, type)) {
                 return templates;
             }
             return nullptr;
         },
         /* print */
         [](MatchState* state, StyledText& out) {
-            out << style::Type(state->data[state->overload.templates + INDEX].name);
+            out << style::Type((*state->data)[state->overload->templates + INDEX].name);
         },
     };
 };
@@ -660,13 +662,13 @@ struct TemplateNumberMatcher {
         /* match */
         [](MatchState& state, Number number) -> Number {
             if (number.IsAny()) {
-                return state.templates.Num(INDEX);
+                return state.templates->Num(INDEX);
             }
-            return state.templates.Num(INDEX, number) ? number : Number::invalid;
+            return state.templates->Num(INDEX, number) ? number : Number::invalid;
         },
         /* print */
         [](MatchState* state, StyledText& out) {
-            out << style::Variable(state->data[state->overload.templates + INDEX].name);
+            out << style::Variable((*state->data)[state->overload->templates + INDEX].name);
         },
     };
 };

@@ -53,7 +53,7 @@ Var::~Var() = default;
 
 Var* Var::Clone(CloneContext& ctx) {
     auto* new_result = ctx.Clone(Result(0));
-    auto* new_var = ctx.ir.allocators.instructions.Create<Var>(new_result);
+    auto* new_var = ctx.ir->allocators.instructions.Create<Var>(new_result);
 
     new_var->binding_point_ = binding_point_;
     new_var->attributes_ = attributes_;
@@ -62,9 +62,9 @@ Var* Var::Clone(CloneContext& ctx) {
         new_var->SetInitializer(ctx.Clone(init));
     }
 
-    auto name = ctx.ir.NameOf(this);
+    auto name = ctx.ir->NameOf(this);
     if (name.IsValid()) {
-        ctx.ir.SetName(new_var, name.Name());
+        ctx.ir->SetName(new_var, name.Name());
     }
     return new_var;
 }

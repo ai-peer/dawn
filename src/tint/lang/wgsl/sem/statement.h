@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_SEM_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/diagnostic_control.h"
 #include "src/tint/lang/wgsl/sem/behavior.h"
 #include "src/tint/lang/wgsl/sem/node.h"
@@ -134,9 +135,9 @@ class Statement : public Castable<Statement, Node> {
     }
 
   private:
-    const ast::Statement* const declaration_;
-    const CompoundStatement* const parent_;
-    const sem::Function* const function_;
+    const raw_ptr<const ast::Statement> declaration_;
+    const raw_ptr<const CompoundStatement> parent_;
+    const raw_ptr<const sem::Function> function_;
     sem::Behaviors behaviors_{sem::Behavior::kNext};
     bool is_reachable_ = true;
     wgsl::DiagnosticRuleSeverities diagnostic_severities_;
@@ -162,7 +163,7 @@ class CompoundStatement : public Castable<CompoundStatement, Statement> {
         /// The 0-based declaration order index of the variable
         size_t order;
         /// The variable
-        const LocalVariable* variable;
+        raw_ptr<const LocalVariable> variable;
     };
 
     /// @returns a map of variable name to variable declarations associated with this block
@@ -184,7 +185,7 @@ const CompoundStatement* Statement::FindFirstParent(Pred&& pred) const {
             return self;
         }
     }
-    const auto* curr = parent_;
+    const auto* curr = parent_.get();
     while (curr && !pred(curr)) {
         curr = curr->Parent();
     }
@@ -198,7 +199,7 @@ const sem::detail::FindFirstParentReturnType<TYPES...>* Statement::FindFirstPare
         if (auto* p = As<ReturnType>()) {
             return p;
         }
-        const auto* curr = parent_;
+        const auto* curr = parent_.get();
         while (curr) {
             if (auto* p = curr->As<ReturnType>()) {
                 return p;
@@ -209,7 +210,7 @@ const sem::detail::FindFirstParentReturnType<TYPES...>* Statement::FindFirstPare
         if (IsAnyOf<TYPES...>()) {
             return As<ReturnType>();
         }
-        const auto* curr = parent_;
+        const auto* curr = parent_.get();
         while (curr) {
             if (curr->IsAnyOf<TYPES...>()) {
                 return curr->As<ReturnType>();

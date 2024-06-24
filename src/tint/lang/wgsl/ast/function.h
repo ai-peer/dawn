@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/binding_attribute.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
@@ -90,7 +91,7 @@ class Function final : public Castable<Function, Node> {
     const Function* Clone(CloneContext& ctx) const override;
 
     /// The function name
-    const Identifier* const name;
+    const raw_ptr<const Identifier> name;
 
     /// The function params
     const tint::Vector<const Parameter*, 8> params;
@@ -99,7 +100,7 @@ class Function final : public Castable<Function, Node> {
     const Type return_type;
 
     /// The function body
-    const BlockStatement* const body;
+    const raw_ptr<const BlockStatement> body;
 
     /// The attributes attached to this function
     const tint::Vector<const Attribute*, 2> attributes;

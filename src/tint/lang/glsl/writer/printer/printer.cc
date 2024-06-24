@@ -30,6 +30,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/function.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/return.h"
@@ -55,7 +57,7 @@ class Printer : public tint::TextGenerator {
     /// @param version the GLSL version information
     /// @returns the generated GLSL shader
     tint::Result<std::string> Generate(const Version& version) {
-        auto valid = core::ir::ValidateAndDumpIfNeeded(ir_, "GLSL writer");
+        auto valid = core::ir::ValidateAndDumpIfNeeded(*ir_, "GLSL writer");
         if (valid != Success) {
             return std::move(valid.Failure());
         }
@@ -71,10 +73,10 @@ class Printer : public tint::TextGenerator {
         }
 
         // Emit module-scope declarations.
-        EmitBlockInstructions(ir_.root_block);
+        EmitBlockInstructions(ir_->root_block);
 
         // Emit functions.
-        for (auto& func : ir_.functions) {
+        for (auto& func : ir_->functions) {
             EmitFunction(func);
         }
 
@@ -84,15 +86,15 @@ class Printer : public tint::TextGenerator {
     }
 
   private:
-    const core::ir::Module& ir_;
+    const raw_ref<const core::ir::Module> ir_;
 
     /// The buffer holding preamble text
     TextBuffer preamble_buffer_;
 
     /// The current function being emitted
-    const core::ir::Function* current_function_ = nullptr;
+    raw_ptr<const core::ir::Function> current_function_ = nullptr;
     /// The current block being emitted
-    const core::ir::Block* current_block_ = nullptr;
+    raw_ptr<const core::ir::Block> current_block_ = nullptr;
 
     /// Emit the function
     /// @param func the function to emit
@@ -106,7 +108,7 @@ class Printer : public tint::TextGenerator {
             // TODO(dsinclair): Handle return type attributes
 
             EmitType(out, func->ReturnType());
-            out << " " << ir_.NameOf(func).Name() << "() {";
+            out << " " << ir_->NameOf(func).Name() << "() {";
 
             // TODO(dsinclair): Emit Function parameters
         }

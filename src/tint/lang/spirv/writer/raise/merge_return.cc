@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -46,24 +48,24 @@ namespace {
 /// PIMPL state for the transform, for a single function.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The "has not returned" flag.
-    core::ir::Var* continue_execution = nullptr;
+    raw_ptr<core::ir::Var> continue_execution = nullptr;
 
     /// The variable that holds the return value.
     /// Null when the function does not return a value.
-    core::ir::Var* return_val = nullptr;
+    raw_ptr<core::ir::Var> return_val = nullptr;
 
     /// The final return at the end of the function block.
     /// May be null when the function returns in all blocks of a control instruction.
-    core::ir::Return* fn_return = nullptr;
+    raw_ptr<core::ir::Return> fn_return = nullptr;
 
     /// A set of control instructions that transitively hold a return instruction
     Hashset<core::ir::ControlInstruction*, 8> holds_return_{};
@@ -84,13 +86,13 @@ struct State {
         }
 
         // Create a boolean variable that can be used to check whether the function is returning.
-        continue_execution = b.Var("continue_execution", ty.ptr<function, bool>());
+        continue_execution = b.Var("continue_execution", ty->ptr<function, bool>());
         continue_execution->SetInitializer(b.Constant(true));
         fn->Block()->Prepend(continue_execution);
 
         // Create a variable to hold the return value if needed.
         if (!fn->ReturnType()->Is<core::type::Void>()) {
-            return_val = b.Var("return_value", ty.ptr(function, fn->ReturnType()));
+            return_val = b.Var("return_value", ty->ptr(function, fn->ReturnType()));
             fn->Block()->Prepend(return_val);
         }
 
@@ -323,7 +325,7 @@ Result<SuccessType> MergeReturn(core::ir::Module& ir) {
 
     // Process each function.
     for (auto& fn : ir.functions) {
-        State{ir}.Process(fn);
+        State{raw_ref(ir)raw_ref(}).Process(fn);
     }
 
     return Success;

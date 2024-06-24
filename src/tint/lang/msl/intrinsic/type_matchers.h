@@ -45,7 +45,7 @@ inline bool MatchBias(core::intrinsic::MatchState&, const core::type::Type* ty) 
 
 inline const core::type::Type* BuildBias(core::intrinsic::MatchState& state,
                                          const core::type::Type*) {
-    return state.types.Get<type::Bias>();
+    return state.types->Get<type::Bias>();
 }
 
 inline bool MatchGradient2D(core::intrinsic::MatchState&, const core::type::Type* ty) {
@@ -57,7 +57,7 @@ inline bool MatchGradient2D(core::intrinsic::MatchState&, const core::type::Type
 
 inline const core::type::Type* BuildGradient2D(core::intrinsic::MatchState& state,
                                                const core::type::Type*) {
-    return state.types.Get<type::Gradient>(type::Gradient::Dim::k2d);
+    return state.types->Get<type::Gradient>(type::Gradient::Dim::k2d);
 }
 
 inline bool MatchGradient3D(core::intrinsic::MatchState&, const core::type::Type* ty) {
@@ -69,7 +69,7 @@ inline bool MatchGradient3D(core::intrinsic::MatchState&, const core::type::Type
 
 inline const core::type::Type* BuildGradient3D(core::intrinsic::MatchState& state,
                                                const core::type::Type*) {
-    return state.types.Get<type::Gradient>(type::Gradient::Dim::k3d);
+    return state.types->Get<type::Gradient>(type::Gradient::Dim::k3d);
 }
 
 inline bool MatchGradientcube(core::intrinsic::MatchState&, const core::type::Type* ty) {
@@ -81,7 +81,7 @@ inline bool MatchGradientcube(core::intrinsic::MatchState&, const core::type::Ty
 
 inline const core::type::Type* BuildGradientcube(core::intrinsic::MatchState& state,
                                                  const core::type::Type*) {
-    return state.types.Get<type::Gradient>(type::Gradient::Dim::kCube);
+    return state.types->Get<type::Gradient>(type::Gradient::Dim::kCube);
 }
 
 inline bool MatchLevel(core::intrinsic::MatchState&, const core::type::Type* ty) {
@@ -93,7 +93,7 @@ inline bool MatchLevel(core::intrinsic::MatchState&, const core::type::Type* ty)
 
 inline const core::type::Type* BuildLevel(core::intrinsic::MatchState& state,
                                           const core::type::Type*) {
-    return state.types.Get<type::Level>();
+    return state.types->Get<type::Level>();
 }
 
 }  // namespace tint::msl::intrinsic

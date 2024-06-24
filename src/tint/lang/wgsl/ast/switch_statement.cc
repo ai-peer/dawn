@@ -69,7 +69,7 @@ SwitchStatement::~SwitchStatement() = default;
 const SwitchStatement* SwitchStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* cond = ctx.Clone(condition);
+    auto* cond = ctx.Clone(condition.get());
     auto b = ctx.Clone(body);
     auto attrs = ctx.Clone(attributes);
     auto body_attrs = ctx.Clone(body_attributes);

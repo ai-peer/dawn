@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/type/type.h"
@@ -62,7 +63,7 @@ class MemoryView : public Castable<MemoryView, Type> {
     core::Access Access() const { return access_; }
 
   private:
-    Type const* const store_type_;
+    const raw_ptr<const Type> store_type_;
     core::AddressSpace const address_space_;
     core::Access const access_;
 };

@@ -106,7 +106,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program& src, const DataMap&,
     // Insert a conditional discard at the end of each entry point that does not end with a return.
     for (auto* func : functions_to_process) {
         if (func->Declaration()->IsEntryPoint()) {
-            auto* sem_body = sem.Get(func->Declaration()->body);
+            auto* sem_body = sem.Get(func->Declaration()->body.get());
             if (sem_body->Behaviors().Contains(sem::Behavior::kNext)) {
                 ctx.InsertBack(func->Declaration()->body->statements,
                                b.If(flag, b.Block(b.Discard())));
@@ -138,7 +138,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program& src, const DataMap&,
                 }
 
                 // Skip writes to invocation-private address spaces.
-                auto* ref = sem.GetVal(assign->lhs)->Type()->As<core::type::Reference>();
+                auto* ref = sem.GetVal(assign->lhs.get())->Type()->As<core::type::Reference>();
                 switch (ref->AddressSpace()) {
                     case core::AddressSpace::kStorage:
                         // Need to mask these.
@@ -155,7 +155,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program& src, const DataMap&,
 
                 // If the RHS has side effects (which may contain derivative operations), we need to
                 // hoist it out to a separate declaration so that it does not get masked.
-                auto* rhs = sem.GetVal(assign->rhs);
+                auto* rhs = sem.GetVal(assign->rhs.get());
                 if (rhs->HasSideEffects()) {
                     hoist_to_decl_before.Add(rhs, assign->rhs,
                                              HoistToDeclBefore::VariableKind::kLet);

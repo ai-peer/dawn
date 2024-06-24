@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_CONSTANT_SCALAR_H_
 #define SRC_TINT_LANG_CORE_CONSTANT_SCALAR_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/manager.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/number.h"
@@ -84,7 +85,7 @@ class Scalar : public Castable<Scalar<T>, ScalarBase> {
     /// @returns the cloned node
     const Scalar* Clone(CloneContext& ctx) const override {
         auto* ty = type->Clone(ctx.type_ctx);
-        return ctx.dst.Get<Scalar<T>>(ty, value);
+        return *ctx.dst->Get<Scalar<T>>(ty, value);
     }
 
     /// @returns `value` if `T` is not a Number, otherwise ValueOf returns the inner value of the
@@ -105,7 +106,7 @@ class Scalar : public Castable<Scalar<T>, ScalarBase> {
     }
 
     /// The scalar type
-    core::type::Type const* const type;
+    const raw_ptr<const core::type::Type> type;
     /// The scalar value
     const T value;
 

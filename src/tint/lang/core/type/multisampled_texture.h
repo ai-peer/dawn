@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/texture.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 
@@ -62,7 +63,7 @@ class MultisampledTexture final : public Castable<MultisampledTexture, Texture> 
     MultisampledTexture* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const type_;
+    const raw_ptr<const Type> type_;
 };
 
 }  // namespace tint::core::type

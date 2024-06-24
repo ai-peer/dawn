@@ -28,6 +28,8 @@
 #ifndef SRC_TINT_UTILS_CONTAINERS_CONST_PROPAGATING_PTR_H_
 #define SRC_TINT_UTILS_CONTAINERS_CONST_PROPAGATING_PTR_H_
 
+#include "base/memory/raw_ptr.h"
+
 namespace tint {
 
 /// ConstPropagatingPtr is a `const` propagating pointer - if the ConstPropagatingPtr is const, then
@@ -106,7 +108,7 @@ class ConstPropagatingPtr {
     ConstPropagatingPtr(const ConstPropagatingPtr&) = delete;
     ConstPropagatingPtr& operator=(const ConstPropagatingPtr&) = delete;
 
-    T* ptr_ = nullptr;
+    raw_ptr<T> ptr_ = nullptr;
 };
 
 }  // namespace tint

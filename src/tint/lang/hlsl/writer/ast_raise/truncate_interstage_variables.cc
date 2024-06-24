@@ -163,7 +163,7 @@ ast::transform::Transform::ApplyResult TruncateInterstageVariables::Apply(
             return TruncatedStructAndConverter{new_struct_sym, mapping_fn_sym};
         });
 
-        ctx.Replace(func_ast->return_type.expr, b.Expr(entry.truncated_struct));
+        ctx.Replace(func_ast->return_type.expr.get(), b.Expr(entry.truncated_struct));
 
         entry_point_functions_to_truncate_functions.Add(func_sem, entry.truncate_fn);
     }

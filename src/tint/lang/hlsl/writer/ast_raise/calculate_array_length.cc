@@ -30,6 +30,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/ast/disable_validation_attribute.h"
@@ -72,8 +73,8 @@ bool ShouldRun(const Program& program) {
 /// ArrayUsage describes a runtime array usage.
 /// It is used as a key by the array_length_by_usage map.
 struct ArrayUsage {
-    ast::BlockStatement const* const block;
-    sem::Variable const* const buffer;
+    const raw_ptr<const ast::BlockStatement> block;
+    const raw_ptr<const sem::Variable> buffer;
     bool operator==(const ArrayUsage& rhs) const {
         return block == rhs.block && buffer == rhs.buffer;
     }
@@ -168,7 +169,7 @@ ast::transform::Transform::ApplyResult CalculateArrayLength::Apply(const Program
                         TINT_ICE()
                             << "arrayLength() expected address-of, got " << arg->TypeInfo().name;
                     }
-                    auto* storage_buffer_expr = address_of->expr;
+                    auto* storage_buffer_expr = address_of->expr.get();
                     if (auto* accessor = storage_buffer_expr->As<ast::MemberAccessorExpression>()) {
                         storage_buffer_expr = accessor->object;
                     }

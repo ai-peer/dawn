@@ -31,6 +31,7 @@
 #include <algorithm>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/bytes/reader.h"
 #include "src/tint/utils/ice/ice.h"
 
@@ -70,7 +71,7 @@ class BufferReader final : public Reader {
 
   private:
     /// The data to read from
-    const std::byte* data_ = nullptr;
+    raw_ptr<const std::byte> data_ = nullptr;
 
     /// The number of bytes remaining
     size_t bytes_remaining_ = 0;

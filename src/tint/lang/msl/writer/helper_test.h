@@ -31,6 +31,7 @@
 #include <iostream>
 #include <string>
 
+#include "base/memory/raw_ref.h"
 #include "gtest/gtest.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -68,7 +69,7 @@ class MslWriterTestHelperBase : public BASE {
     /// The test builder.
     core::ir::Builder b{mod};
     /// The type manager.
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
 
   protected:
     /// Validation errors

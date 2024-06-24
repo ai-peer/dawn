@@ -30,6 +30,8 @@
 
 #include <map>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/symbol/symbol.h"
 
 namespace tint::program {
@@ -80,13 +82,13 @@ class PushConstantHelper {
     std::map<uint32_t, const tint::ast::StructMember*> member_map;
 
     /// The clone context to be used for node creation.
-    program::CloneContext& ctx;
+    const raw_ref<program::CloneContext> ctx;
 
     /// The new PushConstant struct type.
-    const ast::Struct* new_struct = nullptr;
+    raw_ptr<const ast::Struct> new_struct = nullptr;
 
     /// The old push_constant global variable, if any.
-    const ast::Variable* push_constants_var = nullptr;
+    raw_ptr<const ast::Variable> push_constants_var = nullptr;
 };
 
 }  // namespace tint::ast::transform

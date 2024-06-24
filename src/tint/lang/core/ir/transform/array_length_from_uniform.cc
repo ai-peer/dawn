@@ -30,6 +30,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -45,22 +47,22 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The binding point to use for the uniform buffer.
     BindingPoint ubo_binding;
 
     /// The map from binding point to the element index which holds the size of that buffer.
-    const std::unordered_map<BindingPoint, uint32_t>& bindpoint_to_size_index;
+    const raw_ref<const std::unordered_map<BindingPoint, uint32_t>> bindpoint_to_size_index;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The uniform buffer variable that holds the total size of each storage buffer.
-    Var* buffer_sizes_var = nullptr;
+    raw_ptr<Var> buffer_sizes_var = nullptr;
 
     /// A map from an array function parameter to the function parameter that holds its length.
     Hashmap<FunctionParam*, FunctionParam*, 8> array_param_to_length_param{};
@@ -68,7 +70,7 @@ struct State {
     /// Process the module.
     void Process() {
         // Look for and replace calls to the array length builtin.
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* call = inst->As<CoreBuiltinCall>()) {
                 if (call->Func() == BuiltinFn::kArrayLength) {
                     MaybeReplace(call);
@@ -153,8 +155,8 @@ struct State {
         auto binding = var->BindingPoint();
         TINT_ASSERT(binding);
 
-        auto idx_it = bindpoint_to_size_index.find(*binding);
-        if (idx_it == bindpoint_to_size_index.end()) {
+        auto idx_it = bindpoint_to_size_index->find(*binding);
+        if (idx_it == bindpoint_to_size_index->end()) {
             // If the bindpoint_to_size_index map does not contain an entry for the storage buffer,
             // then we preserve the arrayLength() call.
             return nullptr;
@@ -205,13 +207,13 @@ struct State {
         // The buffer sizes will be packed into vec4s to satisfy the 16-byte alignment requirement
         // for array elements in uniform buffers.
         uint32_t max_index = 0;
-        for (auto& entry : bindpoint_to_size_index) {
+        for (auto& entry : *bindpoint_to_size_index) {
             max_index = std::max(max_index, entry.second);
         }
         uint32_t num_elements = (max_index / 4) + 1;
-        b.Append(ir.root_block, [&] {
+        b.Append(ir->root_block, [&] {
             buffer_sizes_var = b.Var("tint_storage_buffer_sizes",
-                                     ty.ptr<uniform>(ty.array(ty.vec4<u32>(), num_elements)));
+                                     ty->ptr<uniform>(ty->array(ty->vec4<u32>(), num_elements)));
         });
         buffer_sizes_var->SetBindingPoint(ubo_binding.group, ubo_binding.binding);
         return buffer_sizes_var->Result(0);
@@ -232,7 +234,7 @@ Result<ArrayLengthFromUniformResult> ArrayLengthFromUniform(
         return validated.Failure();
     }
 
-    State state{ir, ubo_binding, bindpoint_to_size_index};
+    State state{raw_ref(ir), ubo_binding, raw_ref(bindpoint_to_size_index)raw_ref(});
     state.Process();
 
     ArrayLengthFromUniformResult result;

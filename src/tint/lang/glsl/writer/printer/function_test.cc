@@ -31,7 +31,7 @@ namespace tint::glsl::writer {
 namespace {
 
 TEST_F(GlslPrinterTest, Function_Empty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->Block()->Append(b.Return(func));
 
     ASSERT_TRUE(Generate()) << err_ << output_;

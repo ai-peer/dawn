@@ -34,12 +34,12 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, AccessArray) {
-    auto* func = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
 
     b.Append(func->Block(), [&] {
         auto* v = b.Var("v", b.Zero<array<f32, 3>>());
-        b.Let("x", b.Load(b.Access(ty.ptr<function, f32>(), v, 1_u)));
+        b.Let("x", b.Load(b.Access(ty->ptr<function, f32>(), v, 1_u)));
         b.Return(func);
     });
 
@@ -56,19 +56,19 @@ void a() {
 
 TEST_F(HlslWriterTest, AccessStruct) {
     Vector members{
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("b"), ty.f32(), 1u, 4u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("a"), ty->i32(), 0u, 0u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("b"), ty->f32(), 1u, 4u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
     };
-    auto* strct = ty.Struct(b.ir.symbols.New("S"), std::move(members));
+    auto* strct = ty->Struct(b.ir->symbols.New("S"), std::move(members));
 
-    auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", b.Zero(strct));
-        b.Let("x", b.Load(b.Access(ty.ptr<function, f32>(), v, 1_u)));
+        b.Let("x", b.Load(b.Access(ty->ptr<function, f32>(), v, 1_u)));
         b.Return(f);
     });
 
@@ -89,7 +89,7 @@ void a() {
 }
 
 TEST_F(HlslWriterTest, AccessVector) {
-    auto* func = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
 
     b.Append(func->Block(), [&] {
@@ -110,12 +110,12 @@ void a() {
 }
 
 TEST_F(HlslWriterTest, AccessMatrix) {
-    auto* func = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
 
     b.Append(func->Block(), [&] {
         auto* v = b.Var("v", b.Zero<mat4x4<f32>>());
-        auto* v1 = b.Access(ty.ptr<function, vec4<f32>>(), v, 1_u);
+        auto* v1 = b.Access(ty->ptr<function, vec4<f32>>(), v, 1_u);
         b.Let("x", b.LoadVectorElement(v1, 2_u));
         b.Return(func);
     });
@@ -132,9 +132,9 @@ void a() {
 }
 
 TEST_F(HlslWriterTest, AccessStoreVectorElementConstantIndex) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* vec_var = b.Var("vec", ty.ptr<function, vec4<i32>>());
+        auto* vec_var = b.Var("vec", ty->ptr<function, vec4<i32>>());
         b.StoreVectorElement(vec_var, 1_u, b.Constant(42_i));
         b.Return(func);
     });
@@ -154,11 +154,11 @@ void unused_entry_point() {
 }
 
 TEST_F(HlslWriterTest, AccessStoreVectorElementDynamicIndex) {
-    auto* idx = b.FunctionParam("idx", ty.i32());
-    auto* func = b.Function("foo", ty.void_());
+    auto* idx = b.FunctionParam("idx", ty->i32());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({idx});
     b.Append(func->Block(), [&] {
-        auto* vec_var = b.Var("vec", ty.ptr<function, vec4<i32>>());
+        auto* vec_var = b.Var("vec", ty->ptr<function, vec4<i32>>());
         b.StoreVectorElement(vec_var, idx, b.Constant(42_i));
         b.Return(func);
     });
@@ -179,29 +179,29 @@ void unused_entry_point() {
 
 TEST_F(HlslWriterTest, AccessNested) {
     Vector members_a{
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("d"), ty.i32(), 0u, 0u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("e"), ty.array<f32, 3>(), 1u, 4u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("d"), ty->i32(), 0u, 0u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("e"), ty->array<f32, 3>(), 1u, 4u, 4u,
+                                          4u, core::type::StructMemberAttributes{}),
     };
-    auto* a_strct = ty.Struct(b.ir.symbols.New("A"), std::move(members_a));
+    auto* a_strct = ty->Struct(b.ir->symbols.New("A"), std::move(members_a));
 
     Vector members_s{
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("b"), ty.f32(), 1u, 4u, 4u, 4u,
-                                         core::type::StructMemberAttributes{}),
-        ty.Get<core::type::StructMember>(b.ir.symbols.New("c"), a_strct, 2u, 8u, 8u, 8u,
-                                         core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("a"), ty->i32(), 0u, 0u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("b"), ty->f32(), 1u, 4u, 4u, 4u,
+                                          core::type::StructMemberAttributes{}),
+        ty->Get<core::type::StructMember>(b.ir->symbols.New("c"), a_strct, 2u, 8u, 8u, 8u,
+                                          core::type::StructMemberAttributes{}),
     };
-    auto* s_strct = ty.Struct(b.ir.symbols.New("S"), std::move(members_s));
+    auto* s_strct = ty->Struct(b.ir->symbols.New("S"), std::move(members_s));
 
-    auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", b.Zero(s_strct));
-        b.Let("x", b.Load(b.Access(ty.ptr<function, f32>(), v, 2_u, 1_u, 1_i)));
+        b.Let("x", b.Load(b.Access(ty->ptr<function, f32>(), v, 2_u, 1_u, 1_i)));
         b.Return(f);
     });
 
@@ -228,12 +228,12 @@ void a() {
 }
 
 TEST_F(HlslWriterTest, AccessSwizzle) {
-    auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", b.Zero<vec3<f32>>());
-        b.Let("b", b.Swizzle(ty.f32(), v, {1u}));
+        b.Let("b", b.Swizzle(ty->f32(), v, {1u}));
         b.Return(f);
     });
 
@@ -249,12 +249,12 @@ void a() {
 }
 
 TEST_F(HlslWriterTest, AccessSwizzleMulti) {
-    auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* f = b.Function("a", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
 
     b.Append(f->Block(), [&] {
         auto* v = b.Var("v", b.Zero<vec4<f32>>());
-        b.Let("b", b.Swizzle(ty.vec4<f32>(), v, {3u, 2u, 1u, 0u}));
+        b.Let("b", b.Swizzle(ty->vec4<f32>(), v, {3u, 2u, 1u, 0u}));
         b.Return(f);
     });
 

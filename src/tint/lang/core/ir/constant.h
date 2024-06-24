@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_CONSTANT_H_
 #define SRC_TINT_LANG_CORE_IR_CONSTANT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/constant/value.h"
 #include "src/tint/lang/core/ir/value.h"
 
@@ -51,7 +52,7 @@ class Constant : public Castable<Constant, Value> {
     Constant* Clone(CloneContext& ctx) override;
 
   private:
-    const core::constant::Value* const value_ = nullptr;
+    const raw_ptr<const core::constant::Value> value_ = nullptr;
 };
 
 }  // namespace tint::core::ir

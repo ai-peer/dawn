@@ -40,7 +40,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_BindingRemapperTest = TransformTest;
 
 TEST_F(IR_BindingRemapperTest, NoModify_NoRemappings) {
-    auto* buffer = b.Var("buffer", ty.ptr<uniform, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<uniform, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -61,7 +61,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, NoModify_RemappingDifferentBindingPoint) {
-    auto* buffer = b.Var("buffer", ty.ptr<uniform, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<uniform, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -83,7 +83,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, RemappingGroup) {
-    auto* buffer = b.Var("buffer", ty.ptr<uniform, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<uniform, i32>());
     buffer->SetBindingPoint(1, 2);
     mod.root_block->Append(buffer);
 
@@ -110,7 +110,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, RemappingBindingIndex) {
-    auto* buffer = b.Var("buffer", ty.ptr<uniform, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<uniform, i32>());
     buffer->SetBindingPoint(1, 2);
     mod.root_block->Append(buffer);
 
@@ -137,7 +137,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, RemappingGroupAndBindingIndex) {
-    auto* buffer = b.Var("buffer", ty.ptr<uniform, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<uniform, i32>());
     buffer->SetBindingPoint(1, 2);
     mod.root_block->Append(buffer);
 
@@ -164,10 +164,10 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, SwapTwoBindingPoints) {
-    auto* buffer_a = b.Var("buffer_a", ty.ptr<uniform, i32>());
+    auto* buffer_a = b.Var("buffer_a", ty->ptr<uniform, i32>());
     buffer_a->SetBindingPoint(1, 2);
     mod.root_block->Append(buffer_a);
-    auto* buffer_b = b.Var("buffer_b", ty.ptr<uniform, i32>());
+    auto* buffer_b = b.Var("buffer_b", ty->ptr<uniform, i32>());
     buffer_b->SetBindingPoint(3, 4);
     mod.root_block->Append(buffer_b);
 
@@ -197,10 +197,10 @@ $B1: {  # root
 }
 
 TEST_F(IR_BindingRemapperTest, BindingPointCollisionSameEntryPoint) {
-    auto* buffer_a = b.Var("buffer_a", ty.ptr<uniform, i32>());
+    auto* buffer_a = b.Var("buffer_a", ty->ptr<uniform, i32>());
     buffer_a->SetBindingPoint(1, 2);
     mod.root_block->Append(buffer_a);
-    auto* buffer_b = b.Var("buffer_b", ty.ptr<uniform, i32>());
+    auto* buffer_b = b.Var("buffer_b", ty->ptr<uniform, i32>());
     buffer_b->SetBindingPoint(3, 4);
     mod.root_block->Append(buffer_b);
 

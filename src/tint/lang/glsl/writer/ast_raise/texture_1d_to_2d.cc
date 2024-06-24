@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -81,11 +82,11 @@ bool ShouldRun(const Program& program) {
 /// PIMPL state for the transform
 struct Texture1DTo2D::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
 
     /// Constructor
     /// @param program the source program
@@ -94,9 +95,9 @@ struct Texture1DTo2D::State {
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
-        auto& sem = src.Sem();
+        auto& sem = src->Sem();
 
-        if (!ShouldRun(src)) {
+        if (!ShouldRun(*src)) {
             return SkipTransform;
         }
 

@@ -254,7 +254,7 @@ TEST_F(WgslIntrinsicTableTest, MatchArray) {
     ASSERT_EQ(result, Success);
     EXPECT_TRUE(result->return_type->Is<core::type::U32>());
     ASSERT_EQ(result->parameters.Length(), 1u);
-    auto* param_type = result->parameters[0].type;
+    auto* param_type = result->parameters[0].type.get();
     ASSERT_TRUE(param_type->Is<core::type::Pointer>());
     EXPECT_TRUE(param_type->As<core::type::Pointer>()->StoreType()->Is<core::type::Array>());
 }
@@ -1345,19 +1345,19 @@ TEST_P(IntrinsicTableAbstractTernaryTest, MatchClamp) {
     bool expected_match = GetParam().expected_match;
     EXPECT_EQ(builtin == Success, expected_match) << Diagnostics();
 
-    auto* result = builtin == Success ? builtin->return_type : nullptr;
+    auto* result = builtin == Success ? builtin->return_type.get() : nullptr;
     auto* expected_result = GetParam().expected_result(*this);
     EXPECT_TYPE(result, expected_result);
 
-    auto* param_a = builtin == Success ? builtin->parameters[0].type : nullptr;
+    auto* param_a = builtin == Success ? builtin->parameters[0].type.get() : nullptr;
     auto* expected_param_a = GetParam().expected_param_a(*this);
     EXPECT_TYPE(param_a, expected_param_a);
 
-    auto* param_b = builtin == Success ? builtin->parameters[1].type : nullptr;
+    auto* param_b = builtin == Success ? builtin->parameters[1].type.get() : nullptr;
     auto* expected_param_b = GetParam().expected_param_b(*this);
     EXPECT_TYPE(param_b, expected_param_b);
 
-    auto* param_c = builtin == Success ? builtin->parameters[2].type : nullptr;
+    auto* param_c = builtin == Success ? builtin->parameters[2].type.get() : nullptr;
     auto* expected_param_c = GetParam().expected_param_c(*this);
     EXPECT_TYPE(param_c, expected_param_c);
 }

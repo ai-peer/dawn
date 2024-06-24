@@ -48,7 +48,7 @@ BreakIfStatement::~BreakIfStatement() = default;
 const BreakIfStatement* BreakIfStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* cond = ctx.Clone(condition);
+    auto* cond = ctx.Clone(condition.get());
     return ctx.dst->create<BreakIfStatement>(src, cond);
 }
 

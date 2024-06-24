@@ -334,11 +334,11 @@ TEST_F(WGSLParserTest, TypeDecl_Array_ExpressionSize) {
     ASSERT_NE(count, nullptr);
     EXPECT_EQ(core::BinaryOp::kAdd, count->op);
 
-    auto* count_lhs = As<ast::IdentifierExpression>(count->lhs);
+    auto* count_lhs = As<ast::IdentifierExpression>(count->lhs.get());
     ASSERT_NE(count_lhs, nullptr);
     EXPECT_EQ(count_lhs->identifier->symbol.Name(), "size");
 
-    auto* count_rhs = As<ast::IntLiteralExpression>(count->rhs);
+    auto* count_rhs = As<ast::IntLiteralExpression>(count->rhs.get());
     ASSERT_NE(count_rhs, nullptr);
     EXPECT_EQ(count_rhs->value, static_cast<int64_t>(2));
 }

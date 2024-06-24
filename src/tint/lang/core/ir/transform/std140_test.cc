@@ -46,7 +46,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_Std140Test = TransformTest;
 
 TEST_F(IR_Std140Test, NoRootBlock) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->Block()->Append(b.Return(func));
 
     auto* expect = R"(
@@ -63,19 +63,19 @@ TEST_F(IR_Std140Test, NoRootBlock) {
 }
 
 TEST_F(IR_Std140Test, NoModify_Mat2x4) {
-    auto* mat = ty.mat2x4<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat2x4<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat), buffer, 0_u);
+        auto* access = b.Access(ty->ptr(uniform, mat), buffer, 0_u);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -107,19 +107,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, NoModify_Mat3x2_StorageBuffer) {
-    auto* mat = ty.mat2x4<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat2x4<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(storage, mat), buffer, 0_u);
+        auto* access = b.Access(ty->ptr(storage, mat), buffer, 0_u);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -151,20 +151,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Load_Mat2x2f_InArray) {
-    auto* mat = ty.mat2x2<f32>();
+    auto* mat = ty->mat2x2<f32>();
     auto* structure =
-        ty.Struct(mod.symbols.New("MyStruct"), {
-                                                   {mod.symbols.New("arr"), ty.array(mat, 4u)},
-                                               });
+        ty->Struct(mod.symbols.New("MyStruct"), {
+                                                    {mod.symbols.New("arr"), ty->array(mat, 4u)},
+                                                });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
-        auto* load = b.Load(b.Access(ty.ptr(uniform, mat), buffer, 0_u, 2_u));
+        auto* load = b.Load(b.Access(ty->ptr(uniform, mat), buffer, 0_u, 2_u));
         b.Return(func, load);
     });
 
@@ -223,19 +223,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadMatrix) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat), buffer, 0_u);
+        auto* access = b.Access(ty->ptr(uniform, mat), buffer, 0_u);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -294,19 +294,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadConstantColumn) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat->ColumnType());
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), buffer, 0_u, 1_u);
+        auto* access = b.Access(ty->ptr(uniform, mat->ColumnType()), buffer, 0_u, 1_u);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -360,13 +360,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadDynamicColumn) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -374,7 +374,7 @@ TEST_F(IR_Std140Test, Mat3x2_LoadDynamicColumn) {
     auto* column = b.FunctionParam<i32>("column");
     func->AppendParam(column);
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), buffer, 0_u, column);
+        auto* access = b.Access(ty->ptr(uniform, mat->ColumnType()), buffer, 0_u, column);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -434,19 +434,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadElement) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.f32());
+    auto* func = b.Function("foo", ty->f32());
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat->ColumnType()), buffer, 0_u, 1_u);
+        auto* access = b.Access(ty->ptr(uniform, mat->ColumnType()), buffer, 0_u, 1_u);
         auto* load = b.LoadVectorElement(access, 1_u);
         b.Return(func, load);
     });
@@ -500,13 +500,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadStruct) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -574,17 +574,17 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadArrayOfStruct) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), mat},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), mat},
+                                                       });
     auto* outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.New("arr"), ty.array(inner, 4u)},
-                                            });
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.New("arr"), ty->array(inner, 4u)},
+                                             });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -695,22 +695,22 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadNestedStruct) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), mat},
-                                                      });
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("inner"), inner},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), mat},
+                                                       });
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("inner"), inner},
+                                                       });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", inner);
     b.Append(func->Block(), [&] {
-        auto* load = b.Load(b.Access(ty.ptr(uniform, inner), buffer, 0_u));
+        auto* load = b.Load(b.Access(ty->ptr(uniform, inner), buffer, 0_u));
         b.Return(func, load);
     });
 
@@ -786,16 +786,18 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_LoadStruct_WithUnmodifedNestedStruct) {
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.mat4x4<f32>()},
-                                                      });
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("m"), ty.mat3x2<f32>()},
-                                                          {mod.symbols.New("inner"), inner},
-                                                      });
+    auto* inner =
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.New("a"), ty->mat4x4<f32>()},
+                                             });
+    auto* outer =
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.New("m"), ty->mat3x2<f32>()},
+                                                 {mod.symbols.New("inner"), inner},
+                                             });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -875,23 +877,24 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_Nested_AccessInstructionWithManyIndices_LoadMatrix) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("m"), ty.array(mat, 4)},
-                                                      });
-    auto* arr = ty.array(inner, 4u);
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("arr"), arr},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner =
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.New("m"), ty->array(mat, 4)},
+                                             });
+    auto* arr = ty->array(inner, 4u);
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("arr"), arr},
+                                                       });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* mat_ptr = b.Access(ty.ptr(uniform, mat), buffer, 0_u, 1_u, 0_u, 2_u);
+        auto* mat_ptr = b.Access(ty->ptr(uniform, mat), buffer, 0_u, 1_u, 0_u, 2_u);
         b.Let("mat", b.Load(mat_ptr));
         b.Return(func);
     });
@@ -968,30 +971,30 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_Nested_ChainOfAccessInstructions) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("m"), mat},
-                                                          {mod.symbols.New("b"), ty.i32()},
-                                                      });
-    auto* arr = ty.array(inner, 4u);
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("c"), ty.i32()},
-                                                          {mod.symbols.New("arr"), arr},
-                                                          {mod.symbols.New("d"), ty.i32()},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), ty->i32()},
+                                                           {mod.symbols.New("m"), mat},
+                                                           {mod.symbols.New("b"), ty->i32()},
+                                                       });
+    auto* arr = ty->array(inner, 4u);
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("c"), ty->i32()},
+                                                           {mod.symbols.New("arr"), arr},
+                                                           {mod.symbols.New("d"), ty->i32()},
+                                                       });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* arr_ptr = b.Access(ty.ptr(uniform, arr), buffer, 1_u);
-        auto* inner_ptr = b.Access(ty.ptr(uniform, inner), arr_ptr, 2_u);
-        auto* mat_ptr = b.Access(ty.ptr(uniform, mat), inner_ptr, 1_u);
-        auto* col_ptr = b.Access(ty.ptr(uniform, mat->ColumnType()), mat_ptr, 2_u);
+        auto* arr_ptr = b.Access(ty->ptr(uniform, arr), buffer, 1_u);
+        auto* inner_ptr = b.Access(ty->ptr(uniform, inner), arr_ptr, 2_u);
+        auto* mat_ptr = b.Access(ty->ptr(uniform, mat), inner_ptr, 1_u);
+        auto* col_ptr = b.Access(ty->ptr(uniform, mat->ColumnType()), mat_ptr, 2_u);
         b.Let("arr", b.Load(arr_ptr));
         b.Let("inner", b.Load(inner_ptr));
         b.Let("mat", b.Load(mat_ptr));
@@ -1138,31 +1141,31 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_Nested_ChainOfAccessInstructions_ViaLets) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("m"), mat},
-                                                          {mod.symbols.New("b"), ty.i32()},
-                                                      });
-    auto* arr = ty.array(inner, 4u);
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("c"), ty.i32()},
-                                                          {mod.symbols.New("arr"), arr},
-                                                          {mod.symbols.New("d"), ty.i32()},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), ty->i32()},
+                                                           {mod.symbols.New("m"), mat},
+                                                           {mod.symbols.New("b"), ty->i32()},
+                                                       });
+    auto* arr = ty->array(inner, 4u);
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("c"), ty->i32()},
+                                                           {mod.symbols.New("arr"), arr},
+                                                           {mod.symbols.New("d"), ty->i32()},
+                                                       });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* arr_ptr = b.Let("arr_ptr", b.Access(ty.ptr(uniform, arr), buffer, 1_u));
-        auto* inner_ptr = b.Let("inner_ptr", b.Access(ty.ptr(uniform, inner), arr_ptr, 2_u));
-        auto* mat_ptr = b.Let("mat_ptr", b.Access(ty.ptr(uniform, mat), inner_ptr, 1_u));
+        auto* arr_ptr = b.Let("arr_ptr", b.Access(ty->ptr(uniform, arr), buffer, 1_u));
+        auto* inner_ptr = b.Let("inner_ptr", b.Access(ty->ptr(uniform, inner), arr_ptr, 2_u));
+        auto* mat_ptr = b.Let("mat_ptr", b.Access(ty->ptr(uniform, mat), inner_ptr, 1_u));
         auto* col_ptr =
-            b.Let("col_ptr", b.Access(ty.ptr(uniform, mat->ColumnType()), mat_ptr, 2_u));
+            b.Let("col_ptr", b.Access(ty->ptr(uniform, mat->ColumnType()), mat_ptr, 2_u));
         b.Let("arr", b.Load(arr_ptr));
         b.Let("inner", b.Load(inner_ptr));
         b.Let("mat", b.Load(mat_ptr));
@@ -1313,34 +1316,34 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x2_Nested_ChainOfAccessInstructions_DynamicIndices) {
-    auto* mat = ty.mat3x2<f32>();
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("m"), mat},
-                                                          {mod.symbols.New("b"), ty.i32()},
-                                                      });
-    auto* arr = ty.array(inner, 4u);
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("c"), ty.i32()},
-                                                          {mod.symbols.New("arr"), arr},
-                                                          {mod.symbols.New("d"), ty.i32()},
-                                                      });
+    auto* mat = ty->mat3x2<f32>();
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), ty->i32()},
+                                                           {mod.symbols.New("m"), mat},
+                                                           {mod.symbols.New("b"), ty->i32()},
+                                                       });
+    auto* arr = ty->array(inner, 4u);
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("c"), ty->i32()},
+                                                           {mod.symbols.New("arr"), arr},
+                                                           {mod.symbols.New("d"), ty->i32()},
+                                                       });
     outer->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
-    auto* arr_idx = b.FunctionParam("arr_idx", ty.i32());
-    auto* col_idx = b.FunctionParam("col_idx", ty.i32());
-    auto* el_idx = b.FunctionParam("el_idx", ty.i32());
+    auto* func = b.Function("foo", ty->void_());
+    auto* arr_idx = b.FunctionParam("arr_idx", ty->i32());
+    auto* col_idx = b.FunctionParam("col_idx", ty->i32());
+    auto* el_idx = b.FunctionParam("el_idx", ty->i32());
     func->SetParams({arr_idx, col_idx, el_idx});
     b.Append(func->Block(), [&] {
-        auto* arr_ptr = b.Access(ty.ptr(uniform, arr), buffer, 1_u);
-        auto* inner_ptr = b.Access(ty.ptr(uniform, inner), arr_ptr, arr_idx);
-        auto* mat_ptr = b.Access(ty.ptr(uniform, mat), inner_ptr, 1_u);
-        auto* col_ptr = b.Access(ty.ptr(uniform, mat->ColumnType()), mat_ptr, col_idx);
+        auto* arr_ptr = b.Access(ty->ptr(uniform, arr), buffer, 1_u);
+        auto* inner_ptr = b.Access(ty->ptr(uniform, inner), arr_ptr, arr_idx);
+        auto* mat_ptr = b.Access(ty->ptr(uniform, mat), inner_ptr, 1_u);
+        auto* col_ptr = b.Access(ty->ptr(uniform, mat->ColumnType()), mat_ptr, col_idx);
         b.Let("arr", b.Load(arr_ptr));
         b.Let("inner", b.Load(inner_ptr));
         b.Let("mat", b.Load(mat_ptr));
@@ -1487,31 +1490,31 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, NonDefaultAlignAndSize) {
-    auto* mat = ty.mat4x2<f32>();
-    auto* structure = ty.Get<core::type::Struct>(
+    auto* mat = ty->mat4x2<f32>();
+    auto* structure = ty->Get<core::type::Struct>(
         mod.symbols.New("MyStruct"),
         Vector{
-            ty.Get<core::type::StructMember>(mod.symbols.New("a"), ty.i32(), 0u, 0u, 0u, 16u,
-                                             core::type::StructMemberAttributes{}),
-            ty.Get<core::type::StructMember>(mod.symbols.New("m"), mat, 1u, 64u, 32u, 64u,
-                                             core::type::StructMemberAttributes{}),
-            ty.Get<core::type::StructMember>(mod.symbols.New("b"), ty.i32(), 2u, 128u, 8u, 32u,
-                                             core::type::StructMemberAttributes{}),
+            ty->Get<core::type::StructMember>(mod.symbols.New("a"), ty->i32(), 0u, 0u, 0u, 16u,
+                                              core::type::StructMemberAttributes{}),
+            ty->Get<core::type::StructMember>(mod.symbols.New("m"), mat, 1u, 64u, 32u, 64u,
+                                              core::type::StructMemberAttributes{}),
+            ty->Get<core::type::StructMember>(mod.symbols.New("b"), ty->i32(), 2u, 128u, 8u, 32u,
+                                              core::type::StructMemberAttributes{}),
         },
         128u, 256u, 160u);
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* a_access = b.Access(ty.ptr(uniform, ty.i32()), buffer, 0_u);
+        auto* a_access = b.Access(ty->ptr(uniform, ty->i32()), buffer, 0_u);
         b.Let("a", b.Load(a_access));
-        auto* m_access = b.Access(ty.ptr(uniform, mat), buffer, 1_u);
+        auto* m_access = b.Access(ty->ptr(uniform, mat), buffer, 1_u);
         b.Let("m", b.Load(m_access));
-        auto* b_access = b.Access(ty.ptr(uniform, ty.i32()), buffer, 2_u);
+        auto* b_access = b.Access(ty->ptr(uniform, ty->i32()), buffer, 2_u);
         b.Let("b", b.Load(b_access));
         b.Return(func);
     });
@@ -1593,19 +1596,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat4x3_LoadMatrix) {
-    auto* mat = ty.mat4x3<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                             });
+    auto* mat = ty->mat4x3<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* func = b.Function("foo", mat);
     b.Append(func->Block(), [&] {
-        auto* access = b.Access(ty.ptr(uniform, mat), buffer, 0_u);
+        auto* access = b.Access(ty->ptr(uniform, mat), buffer, 0_u);
         auto* load = b.Load(access);
         b.Return(func, load);
     });
@@ -1667,15 +1670,15 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, NotAllMatricesDecomposed) {
-    auto* mat4x4 = ty.mat4x4<f32>();
-    auto* mat3x2 = ty.mat3x2<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat4x4},
-                                                                 {mod.symbols.New("b"), mat3x2},
-                                                             });
+    auto* mat4x4 = ty->mat4x4<f32>();
+    auto* mat3x2 = ty->mat3x2<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat4x4},
+                                                                  {mod.symbols.New("b"), mat3x2},
+                                                              });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -1698,58 +1701,58 @@ TEST_F(IR_Std140Test, NotAllMatricesDecomposed) {
     }
 
     {
-        auto* func = b.Function("load_mat_a", ty.vec4<f32>());
+        auto* func = b.Function("load_mat_a", ty->vec4<f32>());
         b.Append(func->Block(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat4x4), buffer, 0_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat4x4), buffer, 0_u);
             auto* load_mat = b.Load(access_mat);
-            auto* extract_vec = b.Access(ty.vec4<f32>(), load_mat, 0_u);
+            auto* extract_vec = b.Access(ty->vec4<f32>(), load_mat, 0_u);
             b.Return(func, extract_vec);
         });
     }
 
     {
-        auto* func = b.Function("load_mat_b", ty.vec2<f32>());
+        auto* func = b.Function("load_mat_b", ty->vec2<f32>());
         b.Append(func->Block(), [&] {
-            auto* access_mat = b.Access(ty.ptr(uniform, mat3x2), buffer, 1_u);
+            auto* access_mat = b.Access(ty->ptr(uniform, mat3x2), buffer, 1_u);
             auto* load_mat = b.Load(access_mat);
-            auto* extract_vec = b.Access(ty.vec2<f32>(), load_mat, 0_u);
+            auto* extract_vec = b.Access(ty->vec2<f32>(), load_mat, 0_u);
             b.Return(func, extract_vec);
         });
     }
 
     {
-        auto* func = b.Function("load_vec_a", ty.f32());
+        auto* func = b.Function("load_vec_a", ty->f32());
         b.Append(func->Block(), [&] {
-            auto* access_vec = b.Access(ty.ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
             auto* load_vec = b.Load(access_vec);
-            auto* extract_el = b.Access(ty.f32(), load_vec, 1_u);
+            auto* extract_el = b.Access(ty->f32(), load_vec, 1_u);
             b.Return(func, extract_el);
         });
     }
 
     {
-        auto* func = b.Function("load_vec_b", ty.f32());
+        auto* func = b.Function("load_vec_b", ty->f32());
         b.Append(func->Block(), [&] {
-            auto* access_vec = b.Access(ty.ptr(uniform, mat3x2->ColumnType()), buffer, 1_u, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, mat3x2->ColumnType()), buffer, 1_u, 1_u);
             auto* load_vec = b.Load(access_vec);
-            auto* extract_el = b.Access(ty.f32(), load_vec, 1_u);
+            auto* extract_el = b.Access(ty->f32(), load_vec, 1_u);
             b.Return(func, extract_el);
         });
     }
 
     {
-        auto* func = b.Function("lve_a", ty.f32());
+        auto* func = b.Function("lve_a", ty->f32());
         b.Append(func->Block(), [&] {
-            auto* access_vec = b.Access(ty.ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
             auto* lve = b.LoadVectorElement(access_vec, 1_u);
             b.Return(func, lve);
         });
     }
 
     {
-        auto* func = b.Function("lve_b", ty.f32());
+        auto* func = b.Function("lve_b", ty->f32());
         b.Append(func->Block(), [&] {
-            auto* access_vec = b.Access(ty.ptr(uniform, mat3x2->ColumnType()), buffer, 1_u, 1_u);
+            auto* access_vec = b.Access(ty->ptr(uniform, mat3x2->ColumnType()), buffer, 1_u, 1_u);
             auto* lve = b.LoadVectorElement(access_vec, 1_u);
             b.Return(func, lve);
         });
@@ -1932,25 +1935,25 @@ $B1: {  # root
 
 TEST_F(IR_Std140Test, F16) {
     auto* structure =
-        ty.Struct(mod.symbols.New("MyStruct"), {
-                                                   {mod.symbols.New("a"), ty.mat2x2<f16>()},
-                                                   {mod.symbols.New("b"), ty.mat2x4<f16>()},
-                                                   {mod.symbols.New("c"), ty.mat4x3<f16>()},
-                                                   {mod.symbols.New("d"), ty.mat4x4<f16>()},
-                                               });
+        ty->Struct(mod.symbols.New("MyStruct"), {
+                                                    {mod.symbols.New("a"), ty->mat2x2<f16>()},
+                                                    {mod.symbols.New("b"), ty->mat2x4<f16>()},
+                                                    {mod.symbols.New("c"), ty->mat4x3<f16>()},
+                                                    {mod.symbols.New("d"), ty->mat4x4<f16>()},
+                                                });
     structure->SetStructFlag(core::type::kBlock);
 
-    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(uniform, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         b.Let("struct", b.Load(buffer));
-        b.Let("mat", b.Load(b.Access(ty.ptr(uniform, ty.mat4x4<f16>()), buffer, 3_u)));
-        b.Let("col", b.Load(b.Access(ty.ptr(uniform, ty.vec3<f16>()), buffer, 2_u, 1_u)));
-        b.Let("el", b.LoadVectorElement(b.Access(ty.ptr(uniform, ty.vec4<f16>()), buffer, 1_u, 0_u),
-                                        3_u));
+        b.Let("mat", b.Load(b.Access(ty->ptr(uniform, ty->mat4x4<f16>()), buffer, 3_u)));
+        b.Let("col", b.Load(b.Access(ty->ptr(uniform, ty->vec3<f16>()), buffer, 2_u, 1_u)));
+        b.Let("el", b.LoadVectorElement(
+                        b.Access(ty->ptr(uniform, ty->vec4<f16>()), buffer, 1_u, 0_u), 3_u));
         b.Return(func);
     });
 
@@ -2067,17 +2070,17 @@ $B1: {  # root
 
 TEST_F(IR_Std140Test, Mat3x3f_And_ArrayMat4x3f) {  // crbug.com/338727551
     auto* s =
-        ty.Struct(mod.symbols.New("S"), {
-                                            {mod.symbols.New("a"), ty.mat3x3<f32>()},
-                                            {mod.symbols.New("b"), ty.array<mat4x3<f32>, 3>()},
-                                        });
+        ty->Struct(mod.symbols.New("S"), {
+                                             {mod.symbols.New("a"), ty->mat3x3<f32>()},
+                                             {mod.symbols.New("b"), ty->array<mat4x3<f32>, 3>()},
+                                         });
     s->SetStructFlag(core::type::kBlock);
 
-    auto* u = b.Var("u", ty.ptr(uniform, s));
+    auto* u = b.Var("u", ty->ptr(uniform, s));
     u->SetBindingPoint(0, 0);
     mod.root_block->Append(u);
 
-    auto* f = b.Function("F", ty.f32());
+    auto* f = b.Function("F", ty->f32());
     b.Append(f->Block(), [&] {
         auto* p = b.Access<ptr<uniform, vec3<f32>, read>>(u, 1_u, 0_u, 0_u);
         auto* x = b.LoadVectorElement(p, 0_u);
@@ -2144,21 +2147,21 @@ $B1: {  # root
 
 TEST_F(IR_Std140Test, Mat3x3f_And_ArrayStructMat4x3f) {
     auto* s1 =
-        ty.Struct(mod.symbols.New("S1"), {
-                                             {mod.symbols.New("c"), ty.mat3x3<f32>()},
-                                             {mod.symbols.New("d"), ty.array<mat4x3<f32>, 3>()},
-                                         });
-    auto* s2 = ty.Struct(mod.symbols.New("S2"), {
-                                                    {mod.symbols.New("a"), ty.mat3x3<f32>()},
-                                                    {mod.symbols.New("b"), s1},
-                                                });
+        ty->Struct(mod.symbols.New("S1"), {
+                                              {mod.symbols.New("c"), ty->mat3x3<f32>()},
+                                              {mod.symbols.New("d"), ty->array<mat4x3<f32>, 3>()},
+                                          });
+    auto* s2 = ty->Struct(mod.symbols.New("S2"), {
+                                                     {mod.symbols.New("a"), ty->mat3x3<f32>()},
+                                                     {mod.symbols.New("b"), s1},
+                                                 });
     s2->SetStructFlag(core::type::kBlock);
 
-    auto* u = b.Var("u", ty.ptr(uniform, s2));
+    auto* u = b.Var("u", ty->ptr(uniform, s2));
     u->SetBindingPoint(0, 0);
     mod.root_block->Append(u);
 
-    auto* f = b.Function("F", ty.f32());
+    auto* f = b.Function("F", ty->f32());
     b.Append(f->Block(), [&] {
         auto* p = b.Access<ptr<uniform, vec3<f32>, read>>(u, 1_u, 1_u, 0_u, 0_u);
         auto* x = b.LoadVectorElement(p, 0_u);
@@ -2241,20 +2244,20 @@ $B1: {  # root
 }
 
 TEST_F(IR_Std140Test, Mat3x3f_And_ArrayStructMat2x2f) {
-    auto* s1 = ty.Struct(mod.symbols.New("S1"), {
-                                                    {mod.symbols.New("c"), ty.mat2x2<f32>()},
-                                                });
-    auto* s2 = ty.Struct(mod.symbols.New("S2"), {
-                                                    {mod.symbols.New("a"), ty.mat3x3<f32>()},
-                                                    {mod.symbols.New("b"), s1},
-                                                });
+    auto* s1 = ty->Struct(mod.symbols.New("S1"), {
+                                                     {mod.symbols.New("c"), ty->mat2x2<f32>()},
+                                                 });
+    auto* s2 = ty->Struct(mod.symbols.New("S2"), {
+                                                     {mod.symbols.New("a"), ty->mat3x3<f32>()},
+                                                     {mod.symbols.New("b"), s1},
+                                                 });
     s2->SetStructFlag(core::type::kBlock);
 
-    auto* u = b.Var("u", ty.ptr(uniform, s2));
+    auto* u = b.Var("u", ty->ptr(uniform, s2));
     u->SetBindingPoint(0, 0);
     mod.root_block->Append(u);
 
-    auto* f = b.Function("F", ty.f32());
+    auto* f = b.Function("F", ty->f32());
     b.Append(f->Block(), [&] {
         auto* p = b.Access<ptr<uniform, vec2<f32>, read>>(u, 1_u, 0_u, 0_u);
         auto* x = b.LoadVectorElement(p, 0_u);

@@ -44,7 +44,7 @@ TEST_P(DiagnosticControlParserTest, DiagnosticControl_Name) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_EQ(e->severity, params.second);
 
-    auto* r = e->rule_name;
+    auto* r = e->rule_name.get();
     ASSERT_NE(r, nullptr);
     EXPECT_EQ(r->category, nullptr);
     ast::CheckIdentifier(r->name, "foo");
@@ -57,7 +57,7 @@ TEST_P(DiagnosticControlParserTest, DiagnosticControl_CategoryAndName) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_EQ(e->severity, params.second);
 
-    auto* r = e->rule_name;
+    auto* r = e->rule_name.get();
     ASSERT_NE(r, nullptr);
     ast::CheckIdentifier(r->category, "foo");
     ast::CheckIdentifier(r->name, "bar");
@@ -77,7 +77,7 @@ TEST_F(WGSLParserTest, DiagnosticControl_Name_TrailingComma) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_EQ(e->severity, wgsl::DiagnosticSeverity::kError);
 
-    auto* r = e->rule_name;
+    auto* r = e->rule_name.get();
     ASSERT_NE(r, nullptr);
     EXPECT_EQ(r->category, nullptr);
     ast::CheckIdentifier(r->name, "foo");
@@ -90,7 +90,7 @@ TEST_F(WGSLParserTest, DiagnosticControl_CategoryAndName_TrailingComma) {
     EXPECT_FALSE(p->has_error()) << p->error();
     EXPECT_EQ(e->severity, wgsl::DiagnosticSeverity::kError);
 
-    auto* r = e->rule_name;
+    auto* r = e->rule_name.get();
     ASSERT_NE(r, nullptr);
     ast::CheckIdentifier(r->category, "foo");
     ast::CheckIdentifier(r->name, "bar");

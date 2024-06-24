@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/api/common/override_id.h"
 
 #include "src/tint/lang/core/fluent_types.h"
@@ -199,9 +200,9 @@ class Builder {
         ~VarOptions();
 
         ast::Type type;
-        const ast::Expression* address_space = nullptr;
-        const ast::Expression* access = nullptr;
-        const ast::Expression* initializer = nullptr;
+        raw_ptr<const ast::Expression> address_space = nullptr;
+        raw_ptr<const ast::Expression> access = nullptr;
+        raw_ptr<const ast::Expression> initializer = nullptr;
         Vector<const ast::Attribute*, 4> attributes;
 
       private:
@@ -234,7 +235,7 @@ class Builder {
         ~LetOptions();
 
         ast::Type type;
-        const ast::Expression* initializer = nullptr;
+        raw_ptr<const ast::Expression> initializer = nullptr;
         Vector<const ast::Attribute*, 4> attributes;
 
       private:
@@ -257,7 +258,7 @@ class Builder {
         ~ConstOptions();
 
         ast::Type type;
-        const ast::Expression* initializer = nullptr;
+        raw_ptr<const ast::Expression> initializer = nullptr;
         Vector<const ast::Attribute*, 4> attributes;
 
       private:
@@ -277,7 +278,7 @@ class Builder {
         ~OverrideOptions();
 
         ast::Type type;
-        const ast::Expression* initializer = nullptr;
+        raw_ptr<const ast::Expression> initializer = nullptr;
         Vector<const ast::Attribute*, 4> attributes;
 
       private:
@@ -1300,7 +1301,7 @@ class Builder {
         ast::Type Of(const ast::TypeDecl* type) const { return (*this)(type->name->symbol); }
 
         /// The Builder
-        Builder* const builder;
+        const raw_ptr<Builder> builder;
 
       private:
         /// CToAST<T> is specialized for various `T` types and each specialization
@@ -2676,7 +2677,7 @@ class Builder {
         /// @param s The else statement
         explicit ElseStmt(const ast::Statement* s) : stmt(s) {}
         /// The else statement, or nullptr.
-        const ast::Statement* stmt;
+        raw_ptr<const ast::Statement> stmt;
     };
 
     /// Creates a ast::IfStatement with input condition, body, and optional
@@ -3523,7 +3524,7 @@ class Builder {
     ASTNodeAllocator ast_nodes_;
 
     /// The AST node module
-    ast::Module* ast_ = nullptr;
+    raw_ptr<ast::Module> ast_ = nullptr;
 
     /// The symbol table
     SymbolTable symbols_{id_};

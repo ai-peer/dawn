@@ -31,6 +31,7 @@
 #include <limits>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/memory_view.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/wgsl/ast/transform/hoist_to_decl_before.h"
@@ -78,7 +79,7 @@ struct Robustness::State {
                 [&](const IndexAccessorExpression* e) {
                     // obj[idx]
                     // Array, matrix and vector indexing may require robustness transformation.
-                    auto* expr = sem.Get(e)->Unwrap()->As<sem::IndexAccessorExpression>();
+                    auto* expr = sem->Get(e)->Unwrap()->As<sem::IndexAccessorExpression>();
                     if (IsIgnoredResourceBinding(expr->Object()->RootIdentifier())) {
                         return;
                     }
@@ -87,7 +88,7 @@ struct Robustness::State {
                         // Ensure the index is always u32 as using a negative index is an undefined
                         // behavior in SPIRV.
                         auto* idx = CastToU32(expr->Index());
-                        ctx.Replace(expr->Declaration()->index, idx);
+                        ctx.Replace(expr->Declaration()->index.get(), idx);
                         return;
                     }
                     switch (ActionFor(expr)) {
@@ -104,7 +105,7 @@ struct Robustness::State {
                 [&](const IdentifierExpression* e) {
                     // Identifiers may resolve to pointer lets, which may be predicated.
                     // Inspect.
-                    if (auto* user = sem.Get<sem::VariableUser>(e)) {
+                    if (auto* user = sem->Get<sem::VariableUser>(e)) {
                         auto* v = user->Variable();
                         if (v->Type()->Is<core::type::Pointer>()) {
                             // Propagate predicate from pointer
@@ -150,7 +151,7 @@ struct Robustness::State {
                     }
                 },
                 [&](const CallExpression* e) {
-                    if (auto* call = sem.Get<sem::Call>(e)) {
+                    if (auto* call = sem->Get<sem::Call>(e)) {
                         Switch(
                             call->Target(),  //
                             [&](const sem::BuiltinFn* builtin) {
@@ -194,7 +195,7 @@ struct Robustness::State {
             if (auto* expr = node->As<Expression>()) {
                 if (auto pred = predicates.Get(expr)) {
                     // Expression is predicated
-                    auto* sem_expr = sem.GetVal(expr);
+                    auto* sem_expr = sem->GetVal(expr);
                     if (!sem_expr->Type()->Is<core::type::MemoryView>()) {
                         auto pred_load = b.Symbols().New("predicated_expr");
                         auto ty = CreateASTTypeFor(ctx, sem_expr->Type());
@@ -218,17 +219,17 @@ struct Robustness::State {
 
   private:
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The transform's config
     Config cfg;
     /// The target program builder
     ProgramBuilder b{};
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Helper for hoisting declarations
     HoistToDeclBefore hoist{ctx};
     /// Alias to the source program's semantic info
-    const sem::Info& sem = ctx.src->Sem();
+    const raw_ref<const sem::Info> sem = ctx.src->Sem();
     /// Map of expression to predicate condition
     Hashmap<const Expression*, Symbol, 32> predicates{};
 
@@ -281,9 +282,9 @@ struct Robustness::State {
     /// Transform the program to insert additional predicate parameters to all user functions that
     /// have a pointer parameter type in an address space that has predicate action.
     void AddPredicateParameters() {
-        for (auto* fn : src.AST().Functions()) {
+        for (auto* fn : src->AST().Functions()) {
             for (auto* param : fn->params) {
-                auto* sem_param = sem.Get(param);
+                auto* sem_param = sem->Get(param);
                 if (auto* ptr = sem_param->Type()->As<core::type::Pointer>()) {
                     if (ActionFor(ptr->AddressSpace()) == Action::kPredicate) {
                         auto name = b.Symbols().New(param->name->symbol.Name() + "_predicate");
@@ -362,7 +363,7 @@ struct Robustness::State {
         auto* expr_sem = expr->Unwrap()->As<sem::IndexAccessorExpression>();
         auto idx = CastToU32(expr_sem->Index());
         auto* clamped_idx = b.Call(wgsl::BuiltinFn::kMin, idx, max);
-        ctx.Replace(expr->Declaration()->index, clamped_idx);
+        ctx.Replace(expr->Declaration()->index.get(), clamped_idx);
     }
 
     /// Applies predication to the non-texture builtin call, if required.

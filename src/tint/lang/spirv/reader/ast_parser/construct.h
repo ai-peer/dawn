@@ -31,6 +31,7 @@
 #include <memory>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/text/string_stream.h"
 
@@ -126,19 +127,19 @@ struct Construct {
 
     /// The nearest enclosing construct other than itself, or nullptr if
     /// this construct represents the entire function.
-    const Construct* const parent = nullptr;
+    const raw_ptr<const Construct> parent = nullptr;
     /// The nearest enclosing loop construct, if one exists.  Points to `this`
     /// when this is a loop construct.
-    const Construct* const enclosing_loop = nullptr;
+    const raw_ptr<const Construct> enclosing_loop = nullptr;
     /// The nearest enclosing continue construct, if one exists.  Points to
     /// `this` when this is a contnue construct.
-    const Construct* const enclosing_continue = nullptr;
+    const raw_ptr<const Construct> enclosing_continue = nullptr;
     /// The nearest enclosing loop construct or continue construct or
     /// switch-selection construct, if one exists. The signficance is
     /// that a high level language "break" will branch to the merge block
     /// of such an enclosing construct. Points to `this` when this is
     /// a loop construct, a continue construct, or a switch-selection construct.
-    const Construct* const enclosing_loop_or_continue_or_switch = nullptr;
+    const raw_ptr<const Construct> enclosing_loop_or_continue_or_switch = nullptr;
 
     /// Control flow nesting depth. The entry block is at nesting depth 0.
     const int depth = 0;

@@ -34,7 +34,7 @@ using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
 
 TEST_F(SpirvWriterTest, Function_Empty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {  //
         b.Return(func);
     });
@@ -50,15 +50,15 @@ TEST_F(SpirvWriterTest, Function_Empty) {
 
 // Test that we do not emit the same function type more than once.
 TEST_F(SpirvWriterTest, Function_DeduplicateType) {
-    auto* func_a = b.Function("func_a", ty.void_());
+    auto* func_a = b.Function("func_a", ty->void_());
     b.Append(func_a->Block(), [&] {  //
         b.Return(func_a);
     });
-    auto* func_b = b.Function("func_b", ty.void_());
+    auto* func_b = b.Function("func_b", ty->void_());
     b.Append(func_b->Block(), [&] {  //
         b.Return(func_b);
     });
-    auto* func_c = b.Function("func_c", ty.void_());
+    auto* func_c = b.Function("func_c", ty->void_());
     b.Append(func_c->Block(), [&] {  //
         b.Return(func_c);
     });
@@ -91,7 +91,7 @@ TEST_F(SpirvWriterTest, Function_DeduplicateType) {
 
 TEST_F(SpirvWriterTest, Function_EntryPoint_Compute) {
     auto* func =
-        b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
+        b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
     b.Append(func->Block(), [&] {  //
         b.Return(func);
     });
@@ -117,7 +117,7 @@ TEST_F(SpirvWriterTest, Function_EntryPoint_Compute) {
 }
 
 TEST_F(SpirvWriterTest, Function_EntryPoint_Fragment) {
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {  //
         b.Return(func);
     });
@@ -143,7 +143,7 @@ TEST_F(SpirvWriterTest, Function_EntryPoint_Fragment) {
 }
 
 TEST_F(SpirvWriterTest, Function_EntryPoint_Vertex) {
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kVertex);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kVertex);
     b.Append(func->Block(), [&] {  //
         b.Return(func);
     });
@@ -169,18 +169,18 @@ TEST_F(SpirvWriterTest, Function_EntryPoint_Vertex) {
 
 TEST_F(SpirvWriterTest, Function_EntryPoint_Multiple) {
     auto* f1 =
-        b.Function("main1", ty.void_(), core::ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
+        b.Function("main1", ty->void_(), core::ir::Function::PipelineStage::kCompute, {{32, 4, 1}});
     b.Append(f1->Block(), [&] {  //
         b.Return(f1);
     });
 
     auto* f2 =
-        b.Function("main2", ty.void_(), core::ir::Function::PipelineStage::kCompute, {{8, 2, 16}});
+        b.Function("main2", ty->void_(), core::ir::Function::PipelineStage::kCompute, {{8, 2, 16}});
     b.Append(f2->Block(), [&] {  //
         b.Return(f2);
     });
 
-    auto* f3 = b.Function("main3", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* f3 = b.Function("main3", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(f3->Block(), [&] {  //
         b.Return(f3);
     });
@@ -224,7 +224,7 @@ TEST_F(SpirvWriterTest, Function_EntryPoint_Multiple) {
 }
 
 TEST_F(SpirvWriterTest, Function_ReturnValue) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {  //
         b.Return(func, 42_i);
     });
@@ -245,7 +245,7 @@ TEST_F(SpirvWriterTest, Function_ReturnValue) {
 }
 
 TEST_F(SpirvWriterTest, Function_Parameters) {
-    auto* i32 = ty.i32();
+    auto* i32 = ty->i32();
     auto* x = b.FunctionParam("x", i32);
     auto* y = b.FunctionParam("y", i32);
     auto* func = b.Function("foo", i32);
@@ -274,7 +274,7 @@ TEST_F(SpirvWriterTest, Function_Parameters) {
 }
 
 TEST_F(SpirvWriterTest, Function_Call) {
-    auto* i32 = ty.i32();
+    auto* i32 = ty->i32();
     auto* x = b.FunctionParam("x", i32);
     auto* y = b.FunctionParam("y", i32);
     auto* foo = b.Function("foo", i32);
@@ -285,7 +285,7 @@ TEST_F(SpirvWriterTest, Function_Call) {
         b.Return(foo, result);
     });
 
-    auto* bar = b.Function("bar", ty.void_());
+    auto* bar = b.Function("bar", ty->void_());
     b.Append(bar->Block(), [&] {
         auto* result = b.Call(i32, foo, 2_i, 3_i);
         b.Return(bar);
@@ -297,14 +297,14 @@ TEST_F(SpirvWriterTest, Function_Call) {
 }
 
 TEST_F(SpirvWriterTest, Function_Call_Void) {
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     b.Append(foo->Block(), [&] {  //
         b.Return(foo);
     });
 
-    auto* bar = b.Function("bar", ty.void_());
+    auto* bar = b.Function("bar", ty->void_());
     b.Append(bar->Block(), [&] {
-        auto* result = b.Call(ty.void_(), foo);
+        auto* result = b.Call(ty->void_(), foo);
         b.Return(bar);
         mod.SetName(result, "result");
     });
@@ -314,10 +314,10 @@ TEST_F(SpirvWriterTest, Function_Call_Void) {
 }
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_VertexPointSize) {
-    auto* func = b.Function("main", ty.vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
+    auto* func = b.Function("main", ty->vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
     func->SetReturnBuiltin(core::BuiltinValue::kPosition);
     b.Append(func->Block(), [&] {  //
-        b.Return(func, b.Construct(ty.vec4<f32>(), 0.5_f));
+        b.Return(func, b.Construct(ty->vec4<f32>(), 0.5_f));
     });
 
     Options options;
@@ -347,13 +347,13 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_VertexPointSize) {
 }
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Input_WithCapability) {
-    auto* input = b.FunctionParam("input", ty.vec4<f16>());
+    auto* input = b.FunctionParam("input", ty->vec4<f16>());
     input->SetLocation(1, std::nullopt);
-    auto* func = b.Function("main", ty.vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
     func->SetReturnLocation(2, std::nullopt);
     func->SetParams({input});
     b.Append(func->Block(), [&] {  //
-        b.Return(func, b.Convert(ty.vec4<f32>(), input));
+        b.Return(func, b.Convert(ty->vec4<f32>(), input));
     });
 
     Options options;
@@ -375,13 +375,13 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Input_WithCapability) {
 }
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Input_WithoutCapability) {
-    auto* input = b.FunctionParam("input", ty.vec4<f16>());
+    auto* input = b.FunctionParam("input", ty->vec4<f16>());
     input->SetLocation(1, std::nullopt);
-    auto* func = b.Function("main", ty.vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
     func->SetReturnLocation(2, std::nullopt);
     func->SetParams({input});
     b.Append(func->Block(), [&] {  //
-        b.Return(func, b.Convert(ty.vec4<f32>(), input));
+        b.Return(func, b.Convert(ty->vec4<f32>(), input));
     });
 
     Options options;
@@ -403,13 +403,13 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Input_WithoutCapability) {
 }
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Output_WithCapability) {
-    auto* input = b.FunctionParam("input", ty.vec4<f32>());
+    auto* input = b.FunctionParam("input", ty->vec4<f32>());
     input->SetLocation(1, std::nullopt);
-    auto* func = b.Function("main", ty.vec4<f16>(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->vec4<f16>(), core::ir::Function::PipelineStage::kFragment);
     func->SetReturnLocation(2, std::nullopt);
     func->SetParams({input});
     b.Append(func->Block(), [&] {  //
-        b.Return(func, b.Convert(ty.vec4<f16>(), input));
+        b.Return(func, b.Convert(ty->vec4<f16>(), input));
     });
 
     Options options;
@@ -431,13 +431,13 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Output_WithCapability) {
 }
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Output_WithoutCapability) {
-    auto* input = b.FunctionParam("input", ty.vec4<f32>());
+    auto* input = b.FunctionParam("input", ty->vec4<f32>());
     input->SetLocation(1, std::nullopt);
-    auto* func = b.Function("main", ty.vec4<f16>(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->vec4<f16>(), core::ir::Function::PipelineStage::kFragment);
     func->SetReturnLocation(2, std::nullopt);
     func->SetParams({input});
     b.Append(func->Block(), [&] {  //
-        b.Return(func, b.Convert(ty.vec4<f16>(), input));
+        b.Return(func, b.Convert(ty->vec4<f16>(), input));
     });
 
     Options options;
@@ -460,32 +460,32 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_F16_Output_WithoutCapability) {
 
 TEST_F(SpirvWriterTest, Function_ShaderIO_DualSourceBlend) {
     auto* outputs =
-        ty.Struct(mod.symbols.New("Outputs"), {
-                                                  {
-                                                      mod.symbols.Register("a"),
-                                                      ty.f32(),
-                                                      core::type::StructMemberAttributes{
-                                                          /* location */ 0u,
-                                                          /* index */ 0u,
-                                                          /* color */ std::nullopt,
-                                                          /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
-                                                          /* invariant */ false,
-                                                      },
-                                                  },
-                                                  {
-                                                      mod.symbols.Register("b"),
-                                                      ty.f32(),
-                                                      core::type::StructMemberAttributes{
-                                                          /* location */ 0u,
-                                                          /* index */ 1u,
-                                                          /* color */ std::nullopt,
-                                                          /* builtin */ std::nullopt,
-                                                          /* interpolation */ std::nullopt,
-                                                          /* invariant */ false,
-                                                      },
-                                                  },
-                                              });
+        ty->Struct(mod.symbols.New("Outputs"), {
+                                                   {
+                                                       mod.symbols.Register("a"),
+                                                       ty->f32(),
+                                                       core::type::StructMemberAttributes{
+                                                           /* location */ 0u,
+                                                           /* index */ 0u,
+                                                           /* color */ std::nullopt,
+                                                           /* builtin */ std::nullopt,
+                                                           /* interpolation */ std::nullopt,
+                                                           /* invariant */ false,
+                                                       },
+                                                   },
+                                                   {
+                                                       mod.symbols.Register("b"),
+                                                       ty->f32(),
+                                                       core::type::StructMemberAttributes{
+                                                           /* location */ 0u,
+                                                           /* index */ 1u,
+                                                           /* color */ std::nullopt,
+                                                           /* builtin */ std::nullopt,
+                                                           /* interpolation */ std::nullopt,
+                                                           /* invariant */ false,
+                                                       },
+                                                   },
+                                               });
 
     auto* func = b.Function("main", outputs, core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {  //
@@ -519,12 +519,12 @@ TEST_F(SpirvWriterTest, Function_ShaderIO_DualSourceBlend) {
 }
 
 TEST_F(SpirvWriterTest, Function_PassMatrixByPointer) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* arr = mod.root_block->Append(b.Var("var", ty.ptr(private_, ty.array(mat_ty, 4))));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* arr = mod.root_block->Append(b.Var("var", ty->ptr(private_, ty->array(mat_ty, 4))));
 
     auto* target = b.Function("target", mat_ty);
     auto* value_a = b.FunctionParam("value_a", mat_ty);
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
     auto* value_b = b.FunctionParam("value_b", mat_ty);
     target->SetParams({value_a, scalar, value_b});
     b.Append(target->Block(), [&] {
@@ -535,7 +535,7 @@ TEST_F(SpirvWriterTest, Function_PassMatrixByPointer) {
 
     auto* caller = b.Function("caller", mat_ty);
     b.Append(caller->Block(), [&] {
-        auto* mat_ptr = ty.ptr(private_, mat_ty);
+        auto* mat_ptr = ty->ptr(private_, mat_ty);
         auto* ma = b.Load(b.Access(mat_ptr, arr, 0_u));
         auto* mb = b.Load(b.Access(mat_ptr, arr, 1_u));
         auto* result = b.Call(mat_ty, target, ma, b.Constant(2_f), mb);

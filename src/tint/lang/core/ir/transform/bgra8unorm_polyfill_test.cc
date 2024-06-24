@@ -41,7 +41,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_Bgra8UnormPolyfillTest = TransformTest;
 
 TEST_F(IR_Bgra8UnormPolyfillTest, NoRootBlock) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->Block()->Append(b.Return(func));
 
     auto* expect = R"(
@@ -60,20 +60,20 @@ TEST_F(IR_Bgra8UnormPolyfillTest, NoRootBlock) {
 TEST_F(IR_Bgra8UnormPolyfillTest, NoModify_ModuleScopeVariable_Rgba) {
     auto format = core::TexelFormat::kRgba8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.void_());
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
     func->SetParams({value, coords});
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, load, coords, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, load, coords, value);
         b.Return(func);
     });
 
@@ -101,16 +101,16 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, NoModify_UserFunctionParameter_Rgba) {
     auto format = core::TexelFormat::kRgba8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     auto* texture = b.FunctionParam("texture", texture_ty);
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
     func->SetParams({texture, coords, value});
     b.Append(func->Block(), [&] {
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
         b.Return(func);
     });
 
@@ -133,20 +133,20 @@ TEST_F(IR_Bgra8UnormPolyfillTest, NoModify_UserFunctionParameter_Rgba) {
 TEST_F(IR_Bgra8UnormPolyfillTest, ModuleScopeVariable) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.void_());
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
     func->SetParams({value, coords});
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, load, coords, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, load, coords, value);
         b.Return(func);
     });
 
@@ -187,16 +187,16 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, UserFunctionParameter) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     auto* texture = b.FunctionParam("texture", texture_ty);
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
     func->SetParams({texture, coords, value});
     b.Append(func->Block(), [&] {
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
         b.Return(func);
     });
 
@@ -227,33 +227,33 @@ TEST_F(IR_Bgra8UnormPolyfillTest, UserFunctionParameter) {
 TEST_F(IR_Bgra8UnormPolyfillTest, ModuleScopePassedToUserFunction) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* bar = b.Function("bar", ty.void_());
+    auto* bar = b.Function("bar", ty->void_());
     {
         auto* texture = b.FunctionParam("texture", texture_ty);
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         bar->SetParams({texture, coords, value});
         b.Append(bar->Block(), [&] {
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
             b.Return(bar);
         });
     }
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     {
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         foo->SetParams({coords, value});
         b.Append(foo->Block(), [&] {
             auto* load = b.Load(var->Result(0));
-            b.Call(ty.void_(), bar, load, coords, value);
+            b.Call(ty->void_(), bar, load, coords, value);
             b.Return(foo);
         });
     }
@@ -307,12 +307,12 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, ModuleScopePassedToUserFunction_MultipleTextures) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var_a = b.Var("texture_a", ty.ptr(handle, texture_ty));
-    auto* var_b = b.Var("texture_b", ty.ptr(handle, texture_ty));
-    auto* var_c = b.Var("texture_c", ty.ptr(handle, texture_ty));
+    auto* var_a = b.Var("texture_a", ty->ptr(handle, texture_ty));
+    auto* var_b = b.Var("texture_b", ty->ptr(handle, texture_ty));
+    auto* var_c = b.Var("texture_c", ty->ptr(handle, texture_ty));
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(1, 3);
     var_c->SetBindingPoint(1, 4);
@@ -320,32 +320,32 @@ TEST_F(IR_Bgra8UnormPolyfillTest, ModuleScopePassedToUserFunction_MultipleTextur
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* bar = b.Function("bar", ty.void_());
+    auto* bar = b.Function("bar", ty->void_());
     {
         auto* texture_a = b.FunctionParam("texture_a", texture_ty);
         auto* texture_b = b.FunctionParam("texture_b", texture_ty);
         auto* texture_c = b.FunctionParam("texture_b", texture_ty);
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         bar->SetParams({texture_a, texture_b, texture_c, coords, value});
         b.Append(bar->Block(), [&] {
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture_a, coords, value);
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture_b, coords, value);
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture_c, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture_a, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture_b, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture_c, coords, value);
             b.Return(bar);
         });
     }
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     {
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         foo->SetParams({coords, value});
         b.Append(foo->Block(), [&] {
             auto* load_a = b.Load(var_a->Result(0));
             auto* load_b = b.Load(var_b->Result(0));
             auto* load_c = b.Load(var_c->Result(0));
-            b.Call(ty.void_(), bar, load_a, load_b, load_c, coords, value);
+            b.Call(ty->void_(), bar, load_a, load_b, load_c, coords, value);
             b.Return(foo);
         });
     }
@@ -413,39 +413,39 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, MutipleUsesOfOneTexture) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var_a = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var_a = b.Var("texture", ty->ptr(handle, texture_ty));
     var_a->SetBindingPoint(1, 2);
     mod.root_block->Append(var_a);
 
-    auto* bar = b.Function("bar", ty.void_());
+    auto* bar = b.Function("bar", ty->void_());
     {
         auto* texture = b.FunctionParam("texture", texture_ty);
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         bar->SetParams({texture, coords, value});
         b.Append(bar->Block(), [&] {
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
             b.Return(bar);
         });
     }
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     {
-        auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-        auto* value = b.FunctionParam("value", ty.vec4<f32>());
+        auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+        auto* value = b.FunctionParam("value", ty->vec4<f32>());
         foo->SetParams({coords, value});
         b.Append(foo->Block(), [&] {
             auto* load_a = b.Load(var_a->Result(0));
-            b.Call(ty.void_(), core::BuiltinFn::kTextureStore, load_a, coords, value);
+            b.Call(ty->void_(), core::BuiltinFn::kTextureStore, load_a, coords, value);
             auto* load_b = b.Load(var_a->Result(0));
-            b.Call(ty.void_(), bar, load_b, coords, value);
+            b.Call(ty->void_(), bar, load_b, coords, value);
             auto* load_c = b.Load(var_a->Result(0));
-            b.Call(ty.void_(), bar, load_c, coords, value);
+            b.Call(ty->void_(), bar, load_c, coords, value);
             b.Return(foo);
         });
     }
@@ -514,21 +514,21 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, ArrayedImage) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2dArray, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2dArray, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.void_());
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* index = b.FunctionParam("index", ty.u32());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* index = b.FunctionParam("index", ty->u32());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
     func->SetParams({value, coords, index, value});
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, load, coords, index, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, load, coords, index, value);
         b.Return(func);
     });
 
@@ -569,17 +569,17 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, TextureDimensions) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.vec2<u32>());
+    auto* func = b.Function("foo", ty->vec2<u32>());
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        auto* dims = b.Call(ty.vec2<u32>(), core::BuiltinFn::kTextureDimensions, load);
+        auto* dims = b.Call(ty->vec2<u32>(), core::BuiltinFn::kTextureDimensions, load);
         b.Return(func, dims);
         mod.SetName(dims, "dims");
     });
@@ -620,19 +620,19 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, TextureLoad) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, read,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, read,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.vec4<f32>());
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
     func->SetParams({coords});
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureLoad, load, coords);
+        auto* result = b.Call(ty->vec4<f32>(), core::BuiltinFn::kTextureLoad, load, coords);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -674,20 +674,20 @@ $B1: {  # root
 TEST_F(IR_Bgra8UnormPolyfillTest, TextureLoadAndStore) {
     auto format = core::TexelFormat::kBgra8Unorm;
     auto* texture_ty =
-        ty.Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, read_write,
-                                           core::type::StorageTexture::SubtypeFor(format, ty));
+        ty->Get<core::type::StorageTexture>(core::type::TextureDimension::k2d, format, read_write,
+                                            core::type::StorageTexture::SubtypeFor(format, *ty));
 
-    auto* var = b.Var("texture", ty.ptr(handle, texture_ty));
+    auto* var = b.Var("texture", ty->ptr(handle, texture_ty));
     var->SetBindingPoint(1, 2);
     mod.root_block->Append(var);
 
-    auto* func = b.Function("foo", ty.void_());
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
+    auto* func = b.Function("foo", ty->void_());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
     func->SetParams({coords});
     b.Append(func->Block(), [&] {
         auto* load = b.Load(var->Result(0));
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureLoad, load, coords);
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, load, coords, result);
+        auto* result = b.Call(ty->vec4<f32>(), core::BuiltinFn::kTextureLoad, load, coords);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, load, coords, result);
         b.Return(func);
         mod.SetName(result, "result");
     });

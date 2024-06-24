@@ -37,7 +37,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_ReturnTest = IRTestHelper;
 
 TEST_F(IR_ReturnTest, ImplicitNoValue) {
-    auto* func = b.Function("myfunc", ty.void_());
+    auto* func = b.Function("myfunc", ty->void_());
     auto* ret = b.Return(func);
     ASSERT_EQ(ret->Func(), func);
     EXPECT_TRUE(ret->Args().IsEmpty());
@@ -46,7 +46,7 @@ TEST_F(IR_ReturnTest, ImplicitNoValue) {
 }
 
 TEST_F(IR_ReturnTest, WithValue) {
-    auto* func = b.Function("myfunc", ty.i32());
+    auto* func = b.Function("myfunc", ty->i32());
     auto* val = b.Constant(42_i);
     auto* ret = b.Return(func, val);
     ASSERT_EQ(ret->Func(), func);
@@ -58,8 +58,8 @@ TEST_F(IR_ReturnTest, WithValue) {
 }
 
 TEST_F(IR_ReturnTest, Result) {
-    auto* vfunc = b.Function("vfunc", ty.void_());
-    auto* ifunc = b.Function("ifunc", ty.i32());
+    auto* vfunc = b.Function("vfunc", ty->void_());
+    auto* ifunc = b.Function("ifunc", ty->i32());
 
     {
         auto* ret1 = b.Return(vfunc);
@@ -73,7 +73,7 @@ TEST_F(IR_ReturnTest, Result) {
 }
 
 TEST_F(IR_ReturnTest, Clone) {
-    auto* func = b.Function("func", ty.i32());
+    auto* func = b.Function("func", ty->i32());
     auto* ret = b.Return(func, b.Constant(1_i));
 
     auto* new_func = clone_ctx.Clone(func);
@@ -90,7 +90,7 @@ TEST_F(IR_ReturnTest, Clone) {
 }
 
 TEST_F(IR_ReturnTest, CloneWithoutArgs) {
-    auto* func = b.Function("func", ty.i32());
+    auto* func = b.Function("func", ty->i32());
     auto* ret = b.Return(func);
 
     auto* new_func = clone_ctx.Clone(func);

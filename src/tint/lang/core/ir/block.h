@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/ir/instruction.h"
 #include "src/tint/lang/core/ir/terminator.h"
 #include "src/tint/utils/containers/const_propagating_ptr.h"
@@ -106,7 +107,7 @@ class Block : public Castable<Block> {
         }
 
       private:
-        T* inst_ = nullptr;
+        raw_ptr<T> inst_ = nullptr;
     };
 
     /// @returns the iterator pointing to the start of the instruction list

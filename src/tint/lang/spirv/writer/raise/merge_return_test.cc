@@ -40,11 +40,11 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using SpirvWriter_MergeReturnTest = core::ir::transform::TransformTest;
 
 TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInRootBlock) {
-    auto* in = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* in = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({in});
 
-    b.Append(func->Block(), [&] { b.Return(func, b.Add(ty.i32(), in, 1_i)); });
+    b.Append(func->Block(), [&] { b.Return(func, b.Add(ty->i32(), in, 1_i)); });
 
     auto* src = R"(
 %foo = func(%2:i32):i32 {
@@ -64,16 +64,16 @@ TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInRootBlock) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInMergeBlock) {
-    auto* in = b.FunctionParam(ty.i32());
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* in = b.FunctionParam(ty->i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({in, cond});
 
     b.Append(func->Block(), [&] {
         auto* ifelse = b.If(cond);
-        ifelse->SetResults(b.InstructionResult(ty.i32()));
-        b.Append(ifelse->True(), [&] { b.ExitIf(ifelse, b.Add(ty.i32(), in, 1_i)); });
-        b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, b.Add(ty.i32(), in, 2_i)); });
+        ifelse->SetResults(b.InstructionResult(ty->i32()));
+        b.Append(ifelse->True(), [&] { b.ExitIf(ifelse, b.Add(ty->i32(), in, 1_i)); });
+        b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, b.Add(ty->i32(), in, 2_i)); });
 
         b.Return(func, ifelse->Result(0));
     });
@@ -104,9 +104,9 @@ TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInMergeBlock) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInNestedMergeBlock) {
-    auto* in = b.FunctionParam(ty.i32());
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* in = b.FunctionParam(ty->i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({in, cond});
 
     b.Append(func->Block(), [&] {
@@ -117,9 +117,9 @@ TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInNestedMergeBlock) {
         b.Append(l->Body(), [&] { b.ExitLoop(l); });
 
         auto* ifelse = b.If(cond);
-        ifelse->SetResults(b.InstructionResult(ty.i32()));
-        b.Append(ifelse->True(), [&] { b.ExitIf(ifelse, b.Add(ty.i32(), in, 1_i)); });
-        b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, b.Add(ty.i32(), in, 2_i)); });
+        ifelse->SetResults(b.InstructionResult(ty->i32()));
+        b.Append(ifelse->True(), [&] { b.ExitIf(ifelse, b.Add(ty->i32(), in, 1_i)); });
+        b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, b.Add(ty->i32(), in, 2_i)); });
 
         b.Return(func, ifelse->Result(0));
     });
@@ -161,8 +161,8 @@ TEST_F(SpirvWriter_MergeReturnTest, NoModify_SingleReturnInNestedMergeBlock) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -214,8 +214,8 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns) {
 // This is the same as the above tests, but we create the return instructions in a different order
 // to make sure that creation order doesn't matter.
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_ReturnsCreatedInDifferentOrder) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -265,8 +265,8 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_ReturnsCreatedInDiffer
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_WithValue) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -328,13 +328,13 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_WithValue) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_WithValue_MergeHasBasicBlockArguments) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* ifelse = b.If(cond);
-        ifelse->SetResults(b.InstructionResult(ty.i32()));
+        ifelse->SetResults(b.InstructionResult(ty->i32()));
         b.Append(ifelse->True(), [&] { b.Return(func, 1_i); });
         b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, 2_i); });
 
@@ -393,13 +393,13 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_OneSideReturns_WithValue_MergeHasBasi
 
 TEST_F(SpirvWriter_MergeReturnTest,
        IfElse_OneSideReturns_WithValue_MergeHasUndefBasicBlockArguments) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* ifelse = b.If(cond);
-        ifelse->SetResults(b.InstructionResult(ty.i32()));
+        ifelse->SetResults(b.InstructionResult(ty->i32()));
         b.Append(ifelse->True(), [&] { b.Return(func, 1_i); });
         b.Append(ifelse->False(), [&] { b.ExitIf(ifelse, nullptr); });
 
@@ -457,8 +457,8 @@ TEST_F(SpirvWriter_MergeReturnTest,
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -509,13 +509,13 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn_NestedInAnotherIfWithResults) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* outer = b.If(cond);
-        outer->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.f32()));
+        outer->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->f32()));
         b.Append(outer->True(), [&] {
             auto* inner = b.If(cond);
             b.Append(inner->True(), [&] {  //
@@ -588,8 +588,8 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn_NestedInAnotherIfWith
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn_NestedInLoop) {
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -657,11 +657,11 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_BothSidesReturn_NestedInLoop) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_ThenStatements) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -733,11 +733,11 @@ $B1: {  # root
 // This is the same as the above tests, but we create the return instructions in a different order
 // to make sure that creation order doesn't matter.
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_ThenStatements_ReturnsCreatedInDifferentOrder) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -807,13 +807,13 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_Nested) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* func = b.Function("foo", ty.i32());
-    auto* condA = b.FunctionParam("condA", ty.bool_());
-    auto* condB = b.FunctionParam("condB", ty.bool_());
-    auto* condC = b.FunctionParam("condC", ty.bool_());
+    auto* func = b.Function("foo", ty->i32());
+    auto* condA = b.FunctionParam("condA", ty->bool_());
+    auto* condB = b.FunctionParam("condB", ty->bool_());
+    auto* condC = b.FunctionParam("condC", ty->bool_());
     func->SetParams({condA, condB, condC});
 
     b.Append(func->Block(), [&] {
@@ -834,7 +834,7 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_Nested) {
             b.ExitIf(ifelse_outer);
         });
         b.Store(global, 3_i);
-        b.Return(func, b.Add(ty.i32(), 5_i, 6_i));
+        b.Return(func, b.Add(ty->i32(), 5_i, 6_i));
     });
 
     auto* src = R"(
@@ -953,13 +953,13 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_Nested_TrivialMerge) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* func = b.Function("foo", ty.i32());
-    auto* condA = b.FunctionParam("condA", ty.bool_());
-    auto* condB = b.FunctionParam("condB", ty.bool_());
-    auto* condC = b.FunctionParam("condC", ty.bool_());
+    auto* func = b.Function("foo", ty->i32());
+    auto* condA = b.FunctionParam("condA", ty->bool_());
+    auto* condB = b.FunctionParam("condB", ty->bool_());
+    auto* condC = b.FunctionParam("condC", ty->bool_());
     func->SetParams({condA, condB, condC});
 
     b.Append(func->Block(), [&] {
@@ -1074,36 +1074,36 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_Nested_WithBasicBlockArguments) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* func = b.Function("foo", ty.i32());
-    auto* condA = b.FunctionParam("condA", ty.bool_());
-    auto* condB = b.FunctionParam("condB", ty.bool_());
-    auto* condC = b.FunctionParam("condC", ty.bool_());
+    auto* func = b.Function("foo", ty->i32());
+    auto* condA = b.FunctionParam("condA", ty->bool_());
+    auto* condB = b.FunctionParam("condB", ty->bool_());
+    auto* condC = b.FunctionParam("condC", ty->bool_());
     func->SetParams({condA, condB, condC});
 
     b.Append(func->Block(), [&] {
         auto* ifelse_outer = b.If(condA);
-        ifelse_outer->SetResults(b.InstructionResult(ty.i32()));
+        ifelse_outer->SetResults(b.InstructionResult(ty->i32()));
         b.Append(ifelse_outer->True(), [&] { b.Return(func, 3_i); });
         b.Append(ifelse_outer->False(), [&] {
             auto* ifelse_middle = b.If(condB);
-            ifelse_middle->SetResults(b.InstructionResult(ty.i32()));
+            ifelse_middle->SetResults(b.InstructionResult(ty->i32()));
             b.Append(ifelse_middle->True(), [&] {
                 auto* ifelse_inner = b.If(condC);
 
                 b.Append(ifelse_inner->True(), [&] { b.Return(func, 1_i); });
                 b.Append(ifelse_inner->False(), [&] { b.ExitIf(ifelse_inner); });
 
-                b.ExitIf(ifelse_middle, b.Add(ty.i32(), 42_i, 1_i));
+                b.ExitIf(ifelse_middle, b.Add(ty->i32(), 42_i, 1_i));
             });
             b.Append(ifelse_middle->False(),
-                     [&] { b.ExitIf(ifelse_middle, b.Add(ty.i32(), 43_i, 2_i)); });
-            b.ExitIf(ifelse_outer, b.Add(ty.i32(), ifelse_middle->Result(0), 1_i));
+                     [&] { b.ExitIf(ifelse_middle, b.Add(ty->i32(), 43_i, 2_i)); });
+            b.ExitIf(ifelse_outer, b.Add(ty->i32(), ifelse_middle->Result(0), 1_i));
         });
 
-        b.Return(func, b.Add(ty.i32(), ifelse_outer->Result(0), 1_i));
+        b.Return(func, b.Add(ty->i32(), ifelse_outer->Result(0), 1_i));
     });
 
     auto* src = R"(
@@ -1222,21 +1222,21 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_Consecutive) {
-    auto* value = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* value = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({value});
 
     b.Append(func->Block(), [&] {
         {
-            auto* ifelse = b.If(b.Equal(ty.bool_(), value, 1_i));
+            auto* ifelse = b.If(b.Equal(ty->bool_(), value, 1_i));
             b.Append(ifelse->True(), [&] { b.Return(func, 101_i); });
         }
         {
-            auto* ifelse = b.If(b.Equal(ty.bool_(), value, 2_i));
+            auto* ifelse = b.If(b.Equal(ty->bool_(), value, 2_i));
             b.Append(ifelse->True(), [&] { b.Return(func, 202_i); });
         }
         {
-            auto* ifelse = b.If(b.Equal(ty.bool_(), value, 3_i));
+            auto* ifelse = b.If(b.Equal(ty->bool_(), value, 3_i));
             b.Append(ifelse->True(), [&] { b.Return(func, 303_i); });
         }
         b.Return(func, 404_i);
@@ -1329,17 +1329,17 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_Consecutive) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_Consecutive_ThenUnreachable) {
-    auto* value = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* value = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({value});
 
     b.Append(func->Block(), [&] {
         {
-            auto* if_ = b.If(b.Equal(ty.bool_(), value, 1_i));
+            auto* if_ = b.If(b.Equal(ty->bool_(), value, 1_i));
             b.Append(if_->True(), [&] { b.Return(func, 101_i); });
         }
         {
-            auto* ifelse = b.If(b.Equal(ty.bool_(), value, 2_i));
+            auto* ifelse = b.If(b.Equal(ty->bool_(), value, 2_i));
             b.Append(ifelse->True(), [&] { b.Return(func, 202_i); });
             b.Append(ifelse->False(), [&] { b.Return(func, 303_i); });
         }
@@ -1414,26 +1414,26 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_Consecutive_ThenUnreachable) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_NestedConsecutives) {
-    auto* value = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* value = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({value});
 
     b.Append(func->Block(), [&] {
-        auto* outer = b.If(b.Equal(ty.bool_(), value, 1_i));
+        auto* outer = b.If(b.Equal(ty->bool_(), value, 1_i));
         b.Append(outer->True(), [&] {
-            auto* middle_first = b.If(b.Equal(ty.bool_(), value, 2_i));
+            auto* middle_first = b.If(b.Equal(ty->bool_(), value, 2_i));
             b.Append(middle_first->True(), [&] {  //
                 b.Return(func, 202_i);
             });
 
-            auto* middle_second = b.If(b.Equal(ty.bool_(), value, 3_i));
+            auto* middle_second = b.If(b.Equal(ty->bool_(), value, 3_i));
             b.Append(middle_second->True(), [&] {
-                auto* inner_first = b.If(b.Equal(ty.bool_(), value, 4_i));
+                auto* inner_first = b.If(b.Equal(ty->bool_(), value, 4_i));
                 b.Append(inner_first->True(), [&] {  //
                     b.Return(func, 404_i);
                 });
 
-                auto* inner_second = b.If(b.Equal(ty.bool_(), value, 5_i));
+                auto* inner_second = b.If(b.Equal(ty->bool_(), value, 5_i));
                 b.Append(inner_second->True(), [&] {  //
                     b.Return(func, 505_i);
                 });
@@ -1558,31 +1558,31 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_NestedConsecutives) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, IfElse_NestedConsecutives_WithResults) {
-    auto* value = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* value = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({value});
 
     b.Append(func->Block(), [&] {
-        auto* outer_result = b.InstructionResult(ty.i32());
-        auto* outer = b.If(b.Equal(ty.bool_(), value, 1_i));
+        auto* outer_result = b.InstructionResult(ty->i32());
+        auto* outer = b.If(b.Equal(ty->bool_(), value, 1_i));
         outer->SetResults(Vector{outer_result});
         b.Append(outer->True(), [&] {
-            auto* middle_first = b.If(b.Equal(ty.bool_(), value, 2_i));
+            auto* middle_first = b.If(b.Equal(ty->bool_(), value, 2_i));
             b.Append(middle_first->True(), [&] {  //
                 b.Return(func, 202_i);
             });
 
-            auto middle_result = b.InstructionResult(ty.i32());
-            auto* middle_second = b.If(b.Equal(ty.bool_(), value, 3_i));
+            auto middle_result = b.InstructionResult(ty->i32());
+            auto* middle_second = b.If(b.Equal(ty->bool_(), value, 3_i));
             middle_second->SetResults(Vector{middle_result});
             b.Append(middle_second->True(), [&] {
-                auto* inner_first = b.If(b.Equal(ty.bool_(), value, 4_i));
+                auto* inner_first = b.If(b.Equal(ty->bool_(), value, 4_i));
                 b.Append(inner_first->True(), [&] {  //
                     b.Return(func, 404_i);
                 });
 
-                auto inner_result = b.InstructionResult(ty.i32());
-                auto* inner_second = b.If(b.Equal(ty.bool_(), value, 5_i));
+                auto inner_result = b.InstructionResult(ty->i32());
+                auto* inner_second = b.If(b.Equal(ty->bool_(), value, 5_i));
                 inner_second->SetResults(Vector{inner_result});
                 b.Append(inner_second->True(), [&] {  //
                     b.ExitIf(inner_second, 505_i);
@@ -1714,7 +1714,7 @@ TEST_F(SpirvWriter_MergeReturnTest, IfElse_NestedConsecutives_WithResults) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Loop_UnconditionalReturnInBody) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -1758,11 +1758,11 @@ TEST_F(SpirvWriter_MergeReturnTest, Loop_UnconditionalReturnInBody) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Loop_ConditionalReturnInBody) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -1872,11 +1872,11 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Loop_ConditionalReturnInBody_UnreachableMerge) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -1977,16 +1977,16 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, DISABLED_Loop_WithBasicBlockArgumentsOnMerge) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
-        loop->SetResults(b.InstructionResult(ty.i32()));
+        loop->SetResults(b.InstructionResult(ty->i32()));
         b.Append(loop->Body(), [&] {
             auto* ifelse = b.If(cond);
             b.Append(ifelse->True(), [&] { b.Return(func, 42_i); });
@@ -2091,8 +2091,8 @@ TEST_F(SpirvWriter_MergeReturnTest, DISABLED_Loop_WithBasicBlockArgumentsOnMerge
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Switch_UnconditionalReturnInCase) {
-    auto* cond = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
@@ -2154,17 +2154,17 @@ TEST_F(SpirvWriter_MergeReturnTest, Switch_UnconditionalReturnInCase) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Switch_ConditionalReturnInBody) {
-    auto* global = b.Var(ty.ptr<private_, i32>());
+    auto* global = b.Var(ty->ptr<private_, i32>());
     mod.root_block->Append(global);
 
-    auto* cond = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* sw = b.Switch(cond);
         b.Append(b.Case(sw, {b.Constant(1_i)}), [&] {
-            auto* ifcond = b.Equal(ty.bool_(), cond, 1_i);
+            auto* ifcond = b.Equal(ty->bool_(), cond, 1_i);
             auto* ifelse = b.If(ifcond);
             b.Append(ifelse->True(), [&] { b.Return(func, 42_i); });
             b.Append(ifelse->False(), [&] { b.ExitIf(ifelse); });
@@ -2263,13 +2263,13 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, Switch_WithBasicBlockArgumentsOnMerge) {
-    auto* cond = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* cond = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({cond});
 
     b.Append(func->Block(), [&] {
         auto* sw = b.Switch(cond);
-        sw->SetResults(b.InstructionResult(ty.i32()));  // NOLINT: false detection of std::tuple
+        sw->SetResults(b.InstructionResult(ty->i32()));  // NOLINT: false detection of std::tuple
         b.Append(b.Case(sw, {b.Constant(1_i)}), [&] { b.Return(func, 42_i); });
         b.Append(b.Case(sw, {b.Constant(2_i)}), [&] { b.Return(func, 99_i); });
         b.Append(b.Case(sw, {b.Constant(3_i)}), [&] { b.ExitSwitch(sw, 1_i); });
@@ -2343,7 +2343,7 @@ TEST_F(SpirvWriter_MergeReturnTest, Switch_WithBasicBlockArgumentsOnMerge) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, LoopIfReturnThenContinue) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
 
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
@@ -2405,7 +2405,7 @@ TEST_F(SpirvWriter_MergeReturnTest, LoopIfReturnThenContinue) {
 }
 
 TEST_F(SpirvWriter_MergeReturnTest, NestedIfsWithReturns) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
 
     b.Append(func->Block(), [&] {
         b.Append(b.If(true)->True(), [&] {

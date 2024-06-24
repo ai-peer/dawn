@@ -57,8 +57,8 @@ LoopStatement::~LoopStatement() = default;
 const LoopStatement* LoopStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* b = ctx.Clone(body);
-    auto* cont = ctx.Clone(continuing);
+    auto* b = ctx.Clone(body.get());
+    auto* cont = ctx.Clone(continuing.get());
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<LoopStatement>(src, b, cont, std::move(attrs));
 }

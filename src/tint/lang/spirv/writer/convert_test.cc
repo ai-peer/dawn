@@ -110,10 +110,10 @@ INSTANTIATE_TEST_SUITE_P(SpirvWriterTest,
                          PrintCase);
 
 TEST_F(SpirvWriterTest, Convert_Mat2x3_F16_to_F32) {
-    auto* func = b.Function("foo", ty.mat2x3<f32>());
-    func->SetParams({b.FunctionParam("arg", ty.mat2x3<f16>())});
+    auto* func = b.Function("foo", ty->mat2x3<f32>());
+    func->SetParams({b.FunctionParam("arg", ty->mat2x3<f16>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.mat2x3<f32>(), func->Params()[0]);
+        auto* result = b.Convert(ty->mat2x3<f32>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -129,10 +129,10 @@ TEST_F(SpirvWriterTest, Convert_Mat2x3_F16_to_F32) {
 }
 
 TEST_F(SpirvWriterTest, Convert_Mat4x2_F32_to_F16) {
-    auto* func = b.Function("foo", ty.mat4x2<f16>());
-    func->SetParams({b.FunctionParam("arg", ty.mat4x2<f32>())});
+    auto* func = b.Function("foo", ty->mat4x2<f16>());
+    func->SetParams({b.FunctionParam("arg", ty->mat4x2<f32>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.mat4x2<f16>(), func->Params()[0]);
+        auto* result = b.Convert(ty->mat4x2<f16>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -152,10 +152,10 @@ TEST_F(SpirvWriterTest, Convert_Mat4x2_F32_to_F16) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F32_to_I32) {
-    auto* func = b.Function("foo", ty.i32());
-    func->SetParams({b.FunctionParam("arg", ty.f32())});
+    auto* func = b.Function("foo", ty->i32());
+    func->SetParams({b.FunctionParam("arg", ty->f32())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.i32(), func->Params()[0]);
+        auto* result = b.Convert(ty->i32(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -185,10 +185,10 @@ TEST_F(SpirvWriterTest, Convert_F32_to_I32) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F32_to_U32) {
-    auto* func = b.Function("foo", ty.u32());
-    func->SetParams({b.FunctionParam("arg", ty.f32())});
+    auto* func = b.Function("foo", ty->u32());
+    func->SetParams({b.FunctionParam("arg", ty->f32())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.u32(), func->Params()[0]);
+        auto* result = b.Convert(ty->u32(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -218,10 +218,10 @@ TEST_F(SpirvWriterTest, Convert_F32_to_U32) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F16_to_I32) {
-    auto* func = b.Function("foo", ty.i32());
-    func->SetParams({b.FunctionParam("arg", ty.f16())});
+    auto* func = b.Function("foo", ty->i32());
+    func->SetParams({b.FunctionParam("arg", ty->f16())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.i32(), func->Params()[0]);
+        auto* result = b.Convert(ty->i32(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -251,10 +251,10 @@ TEST_F(SpirvWriterTest, Convert_F16_to_I32) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F16_to_U32) {
-    auto* func = b.Function("foo", ty.u32());
-    func->SetParams({b.FunctionParam("arg", ty.f16())});
+    auto* func = b.Function("foo", ty->u32());
+    func->SetParams({b.FunctionParam("arg", ty->f16())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.u32(), func->Params()[0]);
+        auto* result = b.Convert(ty->u32(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -284,10 +284,10 @@ TEST_F(SpirvWriterTest, Convert_F16_to_U32) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F32_to_I32_Vec2) {
-    auto* func = b.Function("foo", ty.vec2<i32>());
-    func->SetParams({b.FunctionParam("arg", ty.vec2<f32>())});
+    auto* func = b.Function("foo", ty->vec2<i32>());
+    func->SetParams({b.FunctionParam("arg", ty->vec2<f32>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.vec2<i32>(), func->Params()[0]);
+        auto* result = b.Convert(ty->vec2<i32>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -330,10 +330,10 @@ TEST_F(SpirvWriterTest, Convert_F32_to_I32_Vec2) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F32_to_U32_Vec3) {
-    auto* func = b.Function("foo", ty.vec3<u32>());
-    func->SetParams({b.FunctionParam("arg", ty.vec3<f32>())});
+    auto* func = b.Function("foo", ty->vec3<u32>());
+    func->SetParams({b.FunctionParam("arg", ty->vec3<f32>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.vec3<u32>(), func->Params()[0]);
+        auto* result = b.Convert(ty->vec3<u32>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -370,10 +370,10 @@ TEST_F(SpirvWriterTest, Convert_F32_to_U32_Vec3) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F16_to_I32_Vec2) {
-    auto* func = b.Function("foo", ty.vec2<i32>());
-    func->SetParams({b.FunctionParam("arg", ty.vec2<f16>())});
+    auto* func = b.Function("foo", ty->vec2<i32>());
+    func->SetParams({b.FunctionParam("arg", ty->vec2<f16>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.vec2<i32>(), func->Params()[0]);
+        auto* result = b.Convert(ty->vec2<i32>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -416,10 +416,10 @@ TEST_F(SpirvWriterTest, Convert_F16_to_I32_Vec2) {
 }
 
 TEST_F(SpirvWriterTest, Convert_F16_to_U32_Vec4) {
-    auto* func = b.Function("foo", ty.vec4<u32>());
-    func->SetParams({b.FunctionParam("arg", ty.vec4<f16>())});
+    auto* func = b.Function("foo", ty->vec4<u32>());
+    func->SetParams({b.FunctionParam("arg", ty->vec4<f16>())});
     b.Append(func->Block(), [&] {
-        auto* result = b.Convert(ty.vec4<u32>(), func->Params()[0]);
+        auto* result = b.Convert(ty->vec4<u32>(), func->Params()[0]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });

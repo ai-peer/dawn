@@ -52,7 +52,7 @@ const Composite* Composite::Clone(CloneContext& ctx) const {
     for (const auto* el : elements) {
         els.Push(el->Clone(ctx));
     }
-    return ctx.dst.Get<Composite>(ty, std::move(els), all_zero, any_zero);
+    return ctx.dst->Get<Composite>(ty, std::move(els), all_zero, any_zero);
 }
 
 }  // namespace tint::core::constant

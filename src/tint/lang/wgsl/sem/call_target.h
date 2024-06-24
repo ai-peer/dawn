@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/sampler.h"
 #include "src/tint/lang/wgsl/sem/node.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
@@ -76,7 +77,7 @@ struct CallTargetSignature {
     }
 
     /// The type of the call target return value
-    const core::type::Type* return_type = nullptr;
+    raw_ptr<const core::type::Type> return_type = nullptr;
 
     /// The parameters of the call target
     tint::Vector<const sem::Parameter*, 8> parameters;

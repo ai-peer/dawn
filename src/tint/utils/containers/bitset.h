@@ -30,6 +30,7 @@
 
 #include <stdint.h>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/vector.h"
 
 namespace tint {
@@ -60,7 +61,7 @@ class Bitset {
     /// Accessor for a single bit
     struct Bit {
         /// The word that contains the bit
-        Word& word;
+        const raw_ref<Word> word;
         /// A word with a single bit set, which masks the targetted bit
         Word const mask;
 
@@ -69,16 +70,16 @@ class Bitset {
         /// @returns this Bit so calls can be chained
         const Bit& operator=(bool value) const {
             if (value) {
-                word = word | mask;
+                *word = *word | mask;
             } else {
-                word = word & ~mask;
+                *word = *word & ~mask;
             }
             return *this;
         }
 
         /// Conversion operator
         /// @returns the bit value
-        operator bool() const { return (word & mask) != 0; }
+        operator bool() const { return (*word & mask) != 0; }
     };
 
     /// @param new_len the new size of the bitmap, in bits.
@@ -102,7 +103,7 @@ class Bitset {
     Bit operator[](size_t index) {
         auto& word = vec_[index / kWordBits];
         auto mask = static_cast<Word>(1) << (index % kWordBits);
-        return Bit{word, mask};
+        return Bit{raw_ref(word), mask};
     }
 
     /// Const index operator

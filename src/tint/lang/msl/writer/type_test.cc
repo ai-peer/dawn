@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "base/memory/raw_ptr.h"
 #include "gmock/gmock.h"
 
 #include "src/tint/lang/core/type/array.h"
@@ -45,9 +46,9 @@ using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
 
 TEST_F(MslWriterTest, EmitType_Array) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.array<bool, 4>()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->array<bool, 4>()));
         b.Return(func);
     });
 
@@ -60,9 +61,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_ArrayOfArray) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.array(ty.array<bool, 4>(), 5)));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->array(ty->array<bool, 4>(), 5)));
         b.Return(func);
     });
 
@@ -75,10 +76,10 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_ArrayOfArrayOfArray) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a",
-              ty.ptr(core::AddressSpace::kPrivate, ty.array(ty.array(ty.array<bool, 4>(), 5), 6)));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate,
+                           ty->array(ty->array(ty->array<bool, 4>(), 5), 6)));
         b.Return(func);
     });
 
@@ -91,9 +92,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_RuntimeArray) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.array<bool, 0>()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->array<bool, 0>()));
         b.Return(func);
     });
 
@@ -106,9 +107,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Bool) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.bool_()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->bool_()));
         b.Return(func);
     });
 
@@ -121,9 +122,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_F32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.f32()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->f32()));
         b.Return(func);
     });
 
@@ -136,9 +137,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_F16) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.f16()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->f16()));
         b.Return(func);
     });
 
@@ -151,9 +152,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_I32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.i32()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->i32()));
         b.Return(func);
     });
 
@@ -166,9 +167,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Matrix_F32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.mat2x3<f32>()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->mat2x3<f32>()));
         b.Return(func);
     });
 
@@ -181,9 +182,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Matrix_F16) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.mat2x3<f16>()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->mat2x3<f16>()));
         b.Return(func);
     });
 
@@ -195,9 +196,9 @@ void foo() {
 )");
 }
 TEST_F(MslWriterTest, EmitType_U32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.u32()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->u32()));
         b.Return(func);
     });
 
@@ -210,8 +211,8 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Atomic_U32) {
-    auto* func = b.Function("foo", ty.void_());
-    auto* param = b.FunctionParam("a", ty.ptr(core::AddressSpace::kWorkgroup, ty.atomic<u32>()));
+    auto* func = b.Function("foo", ty->void_());
+    auto* param = b.FunctionParam("a", ty->ptr(core::AddressSpace::kWorkgroup, ty->atomic<u32>()));
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
         b.Return(func);
@@ -225,8 +226,8 @@ void foo(threadgroup atomic_uint* const a) {
 }
 
 TEST_F(MslWriterTest, EmitType_Atomic_I32) {
-    auto* func = b.Function("foo", ty.void_());
-    auto* param = b.FunctionParam("a", ty.ptr(core::AddressSpace::kWorkgroup, ty.atomic<i32>()));
+    auto* func = b.Function("foo", ty->void_());
+    auto* param = b.FunctionParam("a", ty->ptr(core::AddressSpace::kWorkgroup, ty->atomic<i32>()));
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
         b.Return(func);
@@ -240,9 +241,9 @@ void foo(threadgroup atomic_int* const a) {
 }
 
 TEST_F(MslWriterTest, EmitType_Vector) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, ty.vec3<f32>()));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, ty->vec3<f32>()));
         b.Return(func);
     });
 
@@ -255,9 +256,9 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_VectorPacked) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kFunction, ty.packed_vec(ty.f32(), 3)));
+        b.Var("a", ty->ptr(core::AddressSpace::kFunction, ty->packed_vec(ty->f32(), 3)));
         b.Return(func);
     });
 
@@ -271,7 +272,7 @@ void foo() {
 
 TEST_F(MslWriterTest, EmitType_Void) {
     // Tested via the function return type.
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {  //
         b.Return(func);
     });
@@ -285,9 +286,9 @@ void foo() {
 
 // TODO(dsinclair): How do we create a pointer type ... ?
 TEST_F(MslWriterTest, DISABLED_EmitType_Pointer_Workgroup) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr<workgroup, f32, read_write>());
+        b.Var("a", ty->ptr<workgroup, f32, read_write>());
         b.Return(func);
     });
 
@@ -301,9 +302,9 @@ void foo() {
 
 // TODO(dsinclair): How do we create a pointer type ... ?
 TEST_F(MslWriterTest, DISABLED_EmitType_Pointer_Const) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr<function, f32>());
+        b.Var("a", ty->ptr<function, f32>());
         b.Return(func);
     });
 
@@ -316,13 +317,13 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Struct) {
-    auto* s = ty.Struct(mod.symbols.New("S"), {
-                                                  {mod.symbols.Register("a"), ty.i32()},
-                                                  {mod.symbols.Register("b"), ty.f32()},
-                                              });
-    auto* func = b.Function("foo", ty.void_());
+    auto* s = ty->Struct(mod.symbols.New("S"), {
+                                                   {mod.symbols.Register("a"), ty->i32()},
+                                                   {mod.symbols.Register("b"), ty->f32()},
+                                               });
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -340,14 +341,14 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Struct_Dedup) {
-    auto* s = ty.Struct(mod.symbols.New("S"), {
-                                                  {mod.symbols.Register("a"), ty.i32()},
-                                                  {mod.symbols.Register("b"), ty.f32()},
-                                              });
-    auto* func = b.Function("foo", ty.void_());
+    auto* s = ty->Struct(mod.symbols.New("S"), {
+                                                   {mod.symbols.Register("a"), ty->i32()},
+                                                   {mod.symbols.Register("b"), ty->f32()},
+                                               });
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
-        b.Var("b", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
+        b.Var("b", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -421,7 +422,7 @@ using uint = unsigned int;
 
 struct MemberData {
     Symbol name;
-    const core::type::Type* type;
+    raw_ptr<const core::type::Type> type;
     uint32_t size = 0;
     uint32_t align = 0;
 };
@@ -451,34 +452,34 @@ core::type::Struct* MkStruct(core::ir::Module& mod,
 }
 
 TEST_F(MslWriterTest, EmitType_Struct_Layout_NonComposites) {
-    Vector<MemberData, 26> data = {{mod.symbols.Register("a"), ty.i32(), 32},        //
-                                   {mod.symbols.Register("b"), ty.f32(), 128, 128},  //
-                                   {mod.symbols.Register("c"), ty.vec2<f32>()},      //
-                                   {mod.symbols.Register("d"), ty.u32()},            //
-                                   {mod.symbols.Register("e"), ty.vec3<f32>()},      //
-                                   {mod.symbols.Register("f"), ty.u32()},            //
-                                   {mod.symbols.Register("g"), ty.vec4<f32>()},      //
-                                   {mod.symbols.Register("h"), ty.u32()},            //
-                                   {mod.symbols.Register("i"), ty.mat2x2<f32>()},    //
-                                   {mod.symbols.Register("j"), ty.u32()},            //
-                                   {mod.symbols.Register("k"), ty.mat2x3<f32>()},    //
-                                   {mod.symbols.Register("l"), ty.u32()},            //
-                                   {mod.symbols.Register("m"), ty.mat2x4<f32>()},    //
-                                   {mod.symbols.Register("n"), ty.u32()},            //
-                                   {mod.symbols.Register("o"), ty.mat3x2<f32>()},    //
-                                   {mod.symbols.Register("p"), ty.u32()},            //
-                                   {mod.symbols.Register("q"), ty.mat3x3<f32>()},    //
-                                   {mod.symbols.Register("r"), ty.u32()},            //
-                                   {mod.symbols.Register("s"), ty.mat3x4<f32>()},    //
-                                   {mod.symbols.Register("t"), ty.u32()},            //
-                                   {mod.symbols.Register("u"), ty.mat4x2<f32>()},    //
-                                   {mod.symbols.Register("v"), ty.u32()},            //
-                                   {mod.symbols.Register("w"), ty.mat4x3<f32>()},    //
-                                   {mod.symbols.Register("x"), ty.u32()},            //
-                                   {mod.symbols.Register("y"), ty.mat4x4<f32>()},    //
-                                   {mod.symbols.Register("z"), ty.f32()}};
+    Vector<MemberData, 26> data = {{mod.symbols.Register("a"), ty->i32(), 32},        //
+                                   {mod.symbols.Register("b"), ty->f32(), 128, 128},  //
+                                   {mod.symbols.Register("c"), ty->vec2<f32>()},      //
+                                   {mod.symbols.Register("d"), ty->u32()},            //
+                                   {mod.symbols.Register("e"), ty->vec3<f32>()},      //
+                                   {mod.symbols.Register("f"), ty->u32()},            //
+                                   {mod.symbols.Register("g"), ty->vec4<f32>()},      //
+                                   {mod.symbols.Register("h"), ty->u32()},            //
+                                   {mod.symbols.Register("i"), ty->mat2x2<f32>()},    //
+                                   {mod.symbols.Register("j"), ty->u32()},            //
+                                   {mod.symbols.Register("k"), ty->mat2x3<f32>()},    //
+                                   {mod.symbols.Register("l"), ty->u32()},            //
+                                   {mod.symbols.Register("m"), ty->mat2x4<f32>()},    //
+                                   {mod.symbols.Register("n"), ty->u32()},            //
+                                   {mod.symbols.Register("o"), ty->mat3x2<f32>()},    //
+                                   {mod.symbols.Register("p"), ty->u32()},            //
+                                   {mod.symbols.Register("q"), ty->mat3x3<f32>()},    //
+                                   {mod.symbols.Register("r"), ty->u32()},            //
+                                   {mod.symbols.Register("s"), ty->mat3x4<f32>()},    //
+                                   {mod.symbols.Register("t"), ty->u32()},            //
+                                   {mod.symbols.Register("u"), ty->mat4x2<f32>()},    //
+                                   {mod.symbols.Register("v"), ty->u32()},            //
+                                   {mod.symbols.Register("w"), ty->mat4x3<f32>()},    //
+                                   {mod.symbols.Register("x"), ty->u32()},            //
+                                   {mod.symbols.Register("y"), ty->mat4x4<f32>()},    //
+                                   {mod.symbols.Register("z"), ty->f32()}};
 
-    auto* s = MkStruct(mod, ty, "S", data);
+    auto* s = MkStruct(mod, *ty, "S", data);
     s->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
@@ -538,9 +539,9 @@ void foo() {
 }
 )";
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -572,21 +573,21 @@ void foo() {
 
 TEST_F(MslWriterTest, EmitType_Struct_Layout_Structures) {
     // inner_x: size(1024), align(512)
-    Vector<MemberData, 2> inner_x_data = {{{mod.symbols.Register("a"), ty.i32()},  //
-                                           {mod.symbols.Register("b"), ty.f32(), 0, 512}}};
-    auto* inner_x = MkStruct(mod, ty, "inner_x", inner_x_data);
+    Vector<MemberData, 2> inner_x_data = {{{mod.symbols.Register("a"), ty->i32()},  //
+                                           {mod.symbols.Register("b"), ty->f32(), 0, 512}}};
+    auto* inner_x = MkStruct(mod, *ty, "inner_x", inner_x_data);
 
     // inner_y: size(516), align(4)
-    Vector<MemberData, 2> inner_y_data = {{mod.symbols.Register("a"), ty.i32(), 512},
-                                          {mod.symbols.Register("b"), ty.f32()}};
+    Vector<MemberData, 2> inner_y_data = {{mod.symbols.Register("a"), ty->i32(), 512},
+                                          {mod.symbols.Register("b"), ty->f32()}};
 
-    auto* inner_y = MkStruct(mod, ty, "inner_y", inner_y_data);
+    auto* inner_y = MkStruct(mod, *ty, "inner_y", inner_y_data);
 
-    auto* s = ty.Struct(mod.symbols.New("S"), {{mod.symbols.Register("a"), ty.i32()},
-                                               {mod.symbols.Register("b"), inner_x},
-                                               {mod.symbols.Register("c"), ty.f32()},
-                                               {mod.symbols.Register("d"), inner_y},
-                                               {mod.symbols.Register("e"), ty.f32()}});
+    auto* s = ty->Struct(mod.symbols.New("S"), {{mod.symbols.Register("a"), ty->i32()},
+                                                {mod.symbols.Register("b"), inner_x},
+                                                {mod.symbols.Register("c"), ty->f32()},
+                                                {mod.symbols.Register("d"), inner_y},
+                                                {mod.symbols.Register("e"), ty->f32()}});
     const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
 // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
@@ -627,9 +628,9 @@ void foo() {
 }
 )";
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -674,26 +675,26 @@ void foo() {
 
 TEST_F(MslWriterTest, EmitType_Struct_Layout_ArrayDefaultStride) {
     // inner: size(1024), align(512)
-    Vector<MemberData, 2> inner_data = {{mod.symbols.Register("a"), ty.i32()},
-                                        {mod.symbols.Register("b"), ty.f32(), 0, 512}};
+    Vector<MemberData, 2> inner_data = {{mod.symbols.Register("a"), ty->i32()},
+                                        {mod.symbols.Register("b"), ty->f32(), 0, 512}};
 
-    auto* inner = MkStruct(mod, ty, "inner", inner_data);
+    auto* inner = MkStruct(mod, *ty, "inner", inner_data);
 
     // array_x: size(28), align(4)
-    auto array_x = ty.array<f32, 7>();
+    auto array_x = ty->array<f32, 7>();
 
     // array_y: size(4096), align(512)
-    auto array_y = ty.array(inner, 4_u);
+    auto array_y = ty->array(inner, 4_u);
 
     // array_z: size(4), align(4)
-    auto array_z = ty.array<f32>();
+    auto array_z = ty->array<f32>();
 
-    auto* s = ty.Struct(mod.symbols.New("S"), {{mod.symbols.Register("a"), ty.i32()},
-                                               {mod.symbols.Register("b"), array_x},
-                                               {mod.symbols.Register("c"), ty.f32()},
-                                               {mod.symbols.Register("d"), array_y},
-                                               {mod.symbols.Register("e"), ty.f32()},
-                                               {mod.symbols.Register("f"), array_z}});
+    auto* s = ty->Struct(mod.symbols.New("S"), {{mod.symbols.Register("a"), ty->i32()},
+                                                {mod.symbols.Register("b"), array_x},
+                                                {mod.symbols.Register("c"), ty->f32()},
+                                                {mod.symbols.Register("d"), array_y},
+                                                {mod.symbols.Register("e"), ty->f32()},
+                                                {mod.symbols.Register("f"), array_z}});
     const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
@@ -731,9 +732,9 @@ void foo() {
 }
 )";
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -784,13 +785,13 @@ void foo() {
 
 TEST_F(MslWriterTest, EmitType_Struct_Layout_ArrayVec3DefaultStride) {
     // array: size(64), align(16)
-    auto array = ty.array<vec3<f32>, 4>();
+    auto array = ty->array<vec3<f32>, 4>();
 
-    auto* s = ty.Struct(mod.symbols.New("S"), {
-                                                  {mod.symbols.Register("a"), ty.i32()},
-                                                  {mod.symbols.Register("b"), array},
-                                                  {mod.symbols.Register("c"), ty.i32()},
-                                              });
+    auto* s = ty->Struct(mod.symbols.New("S"), {
+                                                   {mod.symbols.Register("a"), ty->i32()},
+                                                   {mod.symbols.Register("b"), array},
+                                                   {mod.symbols.Register("c"), ty->i32()},
+                                               });
     const_cast<core::type::Struct*>(s)->AddUsage(core::AddressSpace::kStorage);
 
     // ALL_FIELDS() calls the macro FIELD(ADDR, TYPE, ARRAY_COUNT, NAME)
@@ -817,9 +818,9 @@ void foo() {
 }
 )";
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -829,34 +830,34 @@ void foo() {
 
 TEST_F(MslWriterTest, AttemptTintPadSymbolCollision) {
     Vector<MemberData, 26> data = {// uses symbols tint_pad_[0..9] and tint_pad_[20..35]
-                                   {mod.symbols.Register("tint_pad_2"), ty.i32(), 32},         //
-                                   {mod.symbols.Register("tint_pad_20"), ty.f32(), 128, 128},  //
-                                   {mod.symbols.Register("tint_pad_33"), ty.vec2<f32>()},      //
-                                   {mod.symbols.Register("tint_pad_1"), ty.u32()},             //
-                                   {mod.symbols.Register("tint_pad_3"), ty.vec3<f32>()},       //
-                                   {mod.symbols.Register("tint_pad_7"), ty.u32()},             //
-                                   {mod.symbols.Register("tint_pad_25"), ty.vec4<f32>()},      //
-                                   {mod.symbols.Register("tint_pad_5"), ty.u32()},             //
-                                   {mod.symbols.Register("tint_pad_27"), ty.mat2x2<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_24"), ty.u32()},            //
-                                   {mod.symbols.Register("tint_pad_23"), ty.mat2x3<f32>()},    //
-                                   {mod.symbols.Register("tint_pad"), ty.u32()},               //
-                                   {mod.symbols.Register("tint_pad_8"), ty.mat2x4<f32>()},     //
-                                   {mod.symbols.Register("tint_pad_26"), ty.u32()},            //
-                                   {mod.symbols.Register("tint_pad_29"), ty.mat3x2<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_6"), ty.u32()},             //
-                                   {mod.symbols.Register("tint_pad_22"), ty.mat3x3<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_32"), ty.u32()},            //
-                                   {mod.symbols.Register("tint_pad_34"), ty.mat3x4<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_35"), ty.u32()},            //
-                                   {mod.symbols.Register("tint_pad_30"), ty.mat4x2<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_9"), ty.u32()},             //
-                                   {mod.symbols.Register("tint_pad_31"), ty.mat4x3<f32>()},    //
-                                   {mod.symbols.Register("tint_pad_28"), ty.u32()},            //
-                                   {mod.symbols.Register("tint_pad_4"), ty.mat4x4<f32>()},     //
-                                   {mod.symbols.Register("tint_pad_21"), ty.f32()}};
+                                   {mod.symbols.Register("tint_pad_2"), ty->i32(), 32},         //
+                                   {mod.symbols.Register("tint_pad_20"), ty->f32(), 128, 128},  //
+                                   {mod.symbols.Register("tint_pad_33"), ty->vec2<f32>()},      //
+                                   {mod.symbols.Register("tint_pad_1"), ty->u32()},             //
+                                   {mod.symbols.Register("tint_pad_3"), ty->vec3<f32>()},       //
+                                   {mod.symbols.Register("tint_pad_7"), ty->u32()},             //
+                                   {mod.symbols.Register("tint_pad_25"), ty->vec4<f32>()},      //
+                                   {mod.symbols.Register("tint_pad_5"), ty->u32()},             //
+                                   {mod.symbols.Register("tint_pad_27"), ty->mat2x2<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_24"), ty->u32()},            //
+                                   {mod.symbols.Register("tint_pad_23"), ty->mat2x3<f32>()},    //
+                                   {mod.symbols.Register("tint_pad"), ty->u32()},               //
+                                   {mod.symbols.Register("tint_pad_8"), ty->mat2x4<f32>()},     //
+                                   {mod.symbols.Register("tint_pad_26"), ty->u32()},            //
+                                   {mod.symbols.Register("tint_pad_29"), ty->mat3x2<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_6"), ty->u32()},             //
+                                   {mod.symbols.Register("tint_pad_22"), ty->mat3x3<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_32"), ty->u32()},            //
+                                   {mod.symbols.Register("tint_pad_34"), ty->mat3x4<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_35"), ty->u32()},            //
+                                   {mod.symbols.Register("tint_pad_30"), ty->mat4x2<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_9"), ty->u32()},             //
+                                   {mod.symbols.Register("tint_pad_31"), ty->mat4x3<f32>()},    //
+                                   {mod.symbols.Register("tint_pad_28"), ty->u32()},            //
+                                   {mod.symbols.Register("tint_pad_4"), ty->mat4x4<f32>()},     //
+                                   {mod.symbols.Register("tint_pad_21"), ty->f32()}};
 
-    auto* s = MkStruct(mod, ty, "S", data);
+    auto* s = MkStruct(mod, *ty, "S", data);
     s->AddUsage(core::AddressSpace::kStorage);
 
     auto expect = MetalHeader() + MetalArray() + R"(
@@ -907,9 +908,9 @@ void foo() {
 }
 )";
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        b.Var("a", ty.ptr(core::AddressSpace::kPrivate, s));
+        b.Var("a", ty->ptr(core::AddressSpace::kPrivate, s));
         b.Return(func);
     });
 
@@ -918,8 +919,8 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, EmitType_Sampler) {
-    auto* func = b.Function("foo", ty.void_());
-    auto* param = b.FunctionParam("a", ty.sampler());
+    auto* func = b.Function("foo", ty->void_());
+    auto* param = b.FunctionParam("a", ty->sampler());
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
         b.Return(func);
@@ -933,8 +934,8 @@ void foo(sampler a) {
 }
 
 TEST_F(MslWriterTest, EmitType_SamplerComparison) {
-    auto* func = b.Function("foo", ty.void_());
-    auto* param = b.FunctionParam("a", ty.comparison_sampler());
+    auto* func = b.Function("foo", ty->void_());
+    auto* param = b.FunctionParam("a", ty->comparison_sampler());
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
         b.Return(func);
@@ -961,8 +962,8 @@ using MslWriterDepthTexturesTest = MslWriterTestWithParam<MslDepthTextureData>;
 TEST_P(MslWriterDepthTexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* t = ty.Get<core::type::DepthTexture>(params.dim);
-    auto* func = b.Function("foo", ty.void_());
+    auto* t = ty->Get<core::type::DepthTexture>(params.dim);
+    auto* func = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam("a", t);
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
@@ -989,8 +990,8 @@ INSTANTIATE_TEST_SUITE_P(
                                         "depthcube_array<float, access::sample>"}));
 
 TEST_F(MslWriterTest, EmitType_DepthMultisampledTexture) {
-    auto* t = ty.Get<core::type::DepthMultisampledTexture>(core::type::TextureDimension::k2d);
-    auto* func = b.Function("foo", ty.void_());
+    auto* t = ty->Get<core::type::DepthMultisampledTexture>(core::type::TextureDimension::k2d);
+    auto* func = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam("a", t);
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
@@ -1018,8 +1019,8 @@ using MslWriterSampledtexturesTest = MslWriterTestWithParam<MslTextureData>;
 TEST_P(MslWriterSampledtexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* t = ty.Get<core::type::SampledTexture>(params.dim, ty.f32());
-    auto* func = b.Function("foo", ty.void_());
+    auto* t = ty->Get<core::type::SampledTexture>(params.dim, ty->f32());
+    auto* func = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam("a", t);
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
@@ -1047,8 +1048,9 @@ INSTANTIATE_TEST_SUITE_P(
                        "texturecube_array<float, access::sample>"}));
 
 TEST_F(MslWriterTest, EmitType_MultisampledTexture) {
-    auto* ms = ty.Get<core::type::MultisampledTexture>(core::type::TextureDimension::k2d, ty.u32());
-    auto* func = b.Function("foo", ty.void_());
+    auto* ms =
+        ty->Get<core::type::MultisampledTexture>(core::type::TextureDimension::k2d, ty->u32());
+    auto* func = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam("a", ms);
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //
@@ -1075,10 +1077,10 @@ using MslWriterStorageTexturesTest = MslWriterTestWithParam<MslStorageTextureDat
 TEST_P(MslWriterStorageTexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* f32 = const_cast<core::type::F32*>(ty.f32());
-    auto s = ty.Get<core::type::StorageTexture>(params.dim, core::TexelFormat::kR32Float,
-                                                core::Access::kWrite, f32);
-    auto* func = b.Function("foo", ty.void_());
+    auto* f32 = const_cast<core::type::F32*>(ty->f32());
+    auto s = ty->Get<core::type::StorageTexture>(params.dim, core::TexelFormat::kR32Float,
+                                                 core::Access::kWrite, f32);
+    auto* func = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam("a", s);
     func->SetParams({param});
     b.Append(func->Block(), [&] {  //

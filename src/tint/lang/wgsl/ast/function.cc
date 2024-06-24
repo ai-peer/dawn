@@ -84,10 +84,10 @@ PipelineStage Function::PipelineStage() const {
 const Function* Function::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto n = ctx.Clone(name);
+    auto n = ctx.Clone(name.get());
     auto p = ctx.Clone(params);
     auto ret = ctx.Clone(return_type);
-    auto* b = ctx.Clone(body);
+    auto* b = ctx.Clone(body.get());
     auto attrs = ctx.Clone(attributes);
     auto ret_attrs = ctx.Clone(return_type_attributes);
     return ctx.dst->create<Function>(src, n, p, ret, b, attrs, ret_attrs);

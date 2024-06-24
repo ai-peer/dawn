@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 #include "src/tint/lang/wgsl/ast/case_selector.h"
 
@@ -66,7 +67,7 @@ class CaseStatement final : public Castable<CaseStatement, Statement> {
     const tint::Vector<const CaseSelector*, 4> selectors;
 
     /// The case body
-    const BlockStatement* const body;
+    const raw_ptr<const BlockStatement> body;
 };
 
 }  // namespace tint::ast

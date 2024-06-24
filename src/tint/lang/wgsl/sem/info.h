@@ -33,6 +33,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/diagnostic_control.h"
 #include "src/tint/lang/wgsl/ast/node.h"
 #include "src/tint/lang/wgsl/sem/node.h"
@@ -159,7 +160,7 @@ class Info {
     // AST node index to semantic node
     tint::Vector<const CastableBase*, 0> nodes_;
     // The semantic module
-    sem::Module* module_ = nullptr;
+    raw_ptr<sem::Module> module_ = nullptr;
 };
 
 }  // namespace tint::sem

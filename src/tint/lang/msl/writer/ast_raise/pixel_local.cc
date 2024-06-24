@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -49,13 +50,13 @@ namespace tint::msl::writer {
 /// PIMPL state for the transform
 struct PixelLocal::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// The transform config
-    const Config& cfg;
+    const raw_ref<const Config> cfg;
 
     /// Constructor
     /// @param program the source program
@@ -65,7 +66,7 @@ struct PixelLocal::State {
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
-        auto& sem = src.Sem();
+        auto& sem = src->Sem();
 
         // If the pixel local extension isn't enabled, then there must be no use of pixel_local
         // variables, and so there's nothing for this transform to do.
@@ -79,11 +80,12 @@ struct PixelLocal::State {
         // Change all module scope `var<pixel_local>` variables to `var<private>`.
         // We need to do this even if the variable is not referenced by the entry point as later
         // stages do not understand the pixel_local address space.
-        for (auto* global : src.AST().GlobalVariables()) {
+        for (auto* global : src->AST().GlobalVariables()) {
             if (auto* var = global->As<ast::Var>()) {
                 if (sem.Get(var)->AddressSpace() == core::AddressSpace::kPixelLocal) {
                     // Change the 'var<pixel_local>' to 'var<private>'
-                    ctx.Replace(var->declared_address_space, b.Expr(core::AddressSpace::kPrivate));
+                    ctx.Replace(var->declared_address_space.get(),
+                                b.Expr(core::AddressSpace::kPrivate));
                     made_changes = true;
                 }
             }
@@ -93,7 +95,7 @@ struct PixelLocal::State {
         Hashset<const sem::Struct*, 1> pixel_local_structs;
 
         // Find the entry points
-        for (auto* fn : src.AST().Functions()) {
+        for (auto* fn : src->AST().Functions()) {
             if (!fn->IsEntryPoint()) {
                 continue;
             }
@@ -132,7 +134,7 @@ struct PixelLocal::State {
         // the entry point will use `@color`, which requires the framebuffer fetch extension.
         // Replace the `chromium_experimental_pixel_local` enable with
         // `chromium_experimental_framebuffer_fetch`.
-        for (auto* enable : src.AST().Enables()) {
+        for (auto* enable : src->AST().Enables()) {
             for (auto* ext : enable->extensions) {
                 if (ext->name == wgsl::Extension::kChromiumExperimentalPixelLocal) {
                     ctx.Replace(ext, b.create<ast::Extension>(
@@ -162,7 +164,7 @@ struct PixelLocal::State {
         ctx.Remove(fn->attributes, ast::GetAttribute<ast::StageAttribute>(fn->attributes));
         // Rename the entry point
         auto inner_name = b.Symbols().New(fn_name + "_inner");
-        ctx.Replace(fn->name, b.Ident(inner_name));
+        ctx.Replace(fn->name.get(), b.Ident(inner_name));
 
         // Create a new function that wraps the entry point.
         // This function has all the existing entry point parameters and an additional
@@ -246,7 +248,7 @@ struct PixelLocal::State {
     /// @returns the attachment index for the pixel local field with the given index
     /// @param field_index the pixel local field index
     uint32_t AttachmentIndex(uint32_t field_index) {
-        auto idx = cfg.attachments.Get(field_index);
+        auto idx = cfg->attachments.Get(field_index);
         if (TINT_UNLIKELY(!idx)) {
             b.Diagnostics().AddError(Source{})
                 << "PixelLocal::Config::attachments missing entry for field " << field_index;

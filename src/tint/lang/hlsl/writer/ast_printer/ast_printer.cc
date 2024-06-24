@@ -639,7 +639,7 @@ bool ASTPrinter::EmitDynamicMatrixScalarAssignment(const ast::AssignmentStatemen
                                         << vec_name << ";";
                                     break;
                                 default: {
-                                    auto* vec = TypeOf(lhs_row_access->object)
+                                    auto* vec = TypeOf(lhs_row_access->object.get())
                                                     ->UnwrapPtrOrRef()
                                                     ->As<core::type::Vector>();
                                     TINT_UNREACHABLE() << "invalid vector size " << vec->Width();
@@ -908,13 +908,13 @@ bool ASTPrinter::EmitAssign(const ast::AssignmentStatement* stmt) {
         // BUG(crbug.com/tint/1333): work around assignment of scalar to matrices
         // with at least one dynamic index
         if (auto* lhs_sub_access = lhs_access->object->As<ast::IndexAccessorExpression>()) {
-            const auto* lhs_sub_access_type = TypeOf(lhs_sub_access->object);
+            const auto* lhs_sub_access_type = TypeOf(lhs_sub_access->object.get());
             if (!validate_obj_not_pointer(lhs_sub_access_type)) {
                 return false;
             }
             if (auto* mat = lhs_sub_access_type->UnwrapRef()->As<core::type::Matrix>()) {
-                auto* rhs_row_idx_sem = builder_.Sem().GetVal(lhs_access->index);
-                auto* rhs_col_idx_sem = builder_.Sem().GetVal(lhs_sub_access->index);
+                auto* rhs_row_idx_sem = builder_.Sem().GetVal(lhs_access->index.get());
+                auto* rhs_col_idx_sem = builder_.Sem().GetVal(lhs_sub_access->index.get());
                 if (!rhs_row_idx_sem->ConstantValue() || !rhs_col_idx_sem->ConstantValue()) {
                     return EmitDynamicMatrixScalarAssignment(stmt, mat);
                 }
@@ -922,12 +922,12 @@ bool ASTPrinter::EmitAssign(const ast::AssignmentStatement* stmt) {
         }
         // BUG(crbug.com/tint/1333): work around assignment of vector to matrices
         // with dynamic indices
-        const auto* lhs_access_type = TypeOf(lhs_access->object);
+        const auto* lhs_access_type = TypeOf(lhs_access->object.get());
         if (!validate_obj_not_pointer(lhs_access_type)) {
             return false;
         }
         if (auto* mat = lhs_access_type->UnwrapRef()->As<core::type::Matrix>()) {
-            auto* lhs_index_sem = builder_.Sem().GetVal(lhs_access->index);
+            auto* lhs_index_sem = builder_.Sem().GetVal(lhs_access->index.get());
             if (!lhs_index_sem->ConstantValue()) {
                 return EmitDynamicMatrixVectorAssignment(stmt, mat);
             }
@@ -935,7 +935,7 @@ bool ASTPrinter::EmitAssign(const ast::AssignmentStatement* stmt) {
         // BUG(crbug.com/tint/534): work around assignment to vectors with dynamic
         // indices
         if (auto* vec = lhs_access_type->UnwrapRef()->As<core::type::Vector>()) {
-            auto* rhs_sem = builder_.Sem().GetVal(lhs_access->index);
+            auto* rhs_sem = builder_.Sem().GetVal(lhs_access->index.get());
             if (!rhs_sem->ConstantValue()) {
                 return EmitDynamicVectorAssignment(stmt, vec);
             }
@@ -989,8 +989,8 @@ bool ASTPrinter::EmitBinary(StringStream& out, const ast::BinaryExpression* expr
         return true;
     }
 
-    auto* lhs_type = TypeOf(expr->lhs)->UnwrapRef();
-    auto* rhs_type = TypeOf(expr->rhs)->UnwrapRef();
+    auto* lhs_type = TypeOf(expr->lhs.get())->UnwrapRef();
+    auto* rhs_type = TypeOf(expr->rhs.get())->UnwrapRef();
     // Multiplying by a matrix requires the use of `mul` in order to get the
     // type of multiply we desire.
     if (expr->op == core::BinaryOp::kMultiply &&
@@ -3483,7 +3483,7 @@ bool ASTPrinter::EmitPrivateVariable(const sem::Variable* var) {
     }
 
     out << " = ";
-    if (auto* initializer = decl->initializer) {
+    if (auto* initializer = decl->initializer.get()) {
         if (!EmitExpression(out, initializer)) {
             return false;
         }
@@ -3509,7 +3509,7 @@ bool ASTPrinter::EmitWorkgroupVariable(const sem::Variable* var) {
         return false;
     }
 
-    if (auto* initializer = decl->initializer) {
+    if (auto* initializer = decl->initializer.get()) {
         out << " = ";
         if (!EmitExpression(out, initializer)) {
             return false;
@@ -3960,7 +3960,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     });
 
     TextBuffer init_buf;
-    if (auto* init = stmt->initializer) {
+    if (auto* init = stmt->initializer.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &init_buf);
         if (!EmitStatement(init)) {
             return false;
@@ -3969,7 +3969,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
 
     TextBuffer cond_pre;
     StringStream cond_buf;
-    if (auto* cond = stmt->condition) {
+    if (auto* cond = stmt->condition.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         if (!EmitExpression(cond_buf, cond)) {
             return false;
@@ -3977,7 +3977,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
     }
 
     TextBuffer cont_buf;
-    if (auto* cont = stmt->continuing) {
+    if (auto* cont = stmt->continuing.get()) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cont_buf);
         if (!EmitStatement(cont)) {
             return false;
@@ -4062,7 +4062,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     TextBuffer cond_pre;
     StringStream cond_buf;
     {
-        auto* cond = stmt->condition;
+        auto* cond = stmt->condition.get();
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
         if (!EmitExpression(cond_buf, cond)) {
             return false;
@@ -4193,7 +4193,7 @@ bool ASTPrinter::EmitStatement(const ast::Statement* stmt) {
         },
         [&](const ast::VariableDeclStatement* v) {  //
             return Switch(
-                v->variable,  //
+                v->variable.get(),  //
                 [&](const ast::Var* var) { return EmitVar(var); },
                 [&](const ast::Let* let) { return EmitLet(let); },
                 [&](const ast::Const*) {
@@ -4216,7 +4216,7 @@ bool ASTPrinter::EmitDefaultOnlySwitch(const ast::SwitchStatement* stmt) {
 
     // Emit the switch condition as-is if it has side-effects (e.g.
     // function call). Note that we can ignore the result of the expression (if any).
-    if (auto* sem_cond = builder_.Sem().GetVal(stmt->condition); sem_cond->HasSideEffects()) {
+    if (auto* sem_cond = builder_.Sem().GetVal(stmt->condition.get()); sem_cond->HasSideEffects()) {
         auto out = Line();
         if (!EmitExpression(out, stmt->condition)) {
             return false;

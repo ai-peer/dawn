@@ -30,6 +30,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/clone_context.h"
 #include "src/tint/lang/core/ir/module.h"
@@ -50,7 +52,7 @@ namespace {
 /// directly.
 struct RootModuleScopeVar {
     /// The module-scope var
-    Var* var = nullptr;
+    raw_ptr<Var> var = nullptr;
 
     /// @return a hash value for this object
     tint::HashCode HashCode() const { return Hash(var); }
@@ -63,7 +65,7 @@ struct RootModuleScopeVar {
 /// These roots are passed by pointer parameter.
 struct RootPtrParameter {
     /// The parameter pointer type
-    const type::Pointer* type = nullptr;
+    raw_ptr<const type::Pointer> type = nullptr;
 
     /// @return a hash value for this object
     tint::HashCode HashCode() const { return Hash(type); }
@@ -78,7 +80,7 @@ using AccessRoot = std::variant<RootModuleScopeVar, RootPtrParameter>;
 /// MemberAccess is an access operator to a struct member.
 struct MemberAccess {
     /// The member being accessed
-    const type::StructMember* member;
+    raw_ptr<const type::StructMember> member;
 
     /// @return a hash member for this object
     tint::HashCode HashCode() const { return Hash(member); }
@@ -179,7 +181,7 @@ struct AccessChain {
     /// The shape of the access chain
     AccessShape shape;
     /// The originating pointer
-    Value* root_ptr = nullptr;
+    raw_ptr<Value> root_ptr = nullptr;
     /// The array of dynamic indices
     Vector<Value*, 8> indices;
 };
@@ -204,27 +206,27 @@ struct FnVariant {
     /// The signature of the variant.
     VariantSignature signature;
     /// The IR function for this variant.
-    Function* fn = nullptr;
+    raw_ptr<Function> fn = nullptr;
     /// The function information of the original function that this variant is based off.
-    FnInfo* info = nullptr;
+    raw_ptr<FnInfo> info = nullptr;
 };
 
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The transform options
-    const DirectVariableAccessOptions& options;
+    const raw_ref<const DirectVariableAccessOptions> options;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// The functions that have pointer parameters that need transforming.
     /// These functions will be replaced with zero, one or many forked variants.
@@ -240,7 +242,7 @@ struct State {
     void Process() {
         // Make a copy of all the functions in the IR module.
         // Use transform to convert from ConstPropagatingPtr<Function> to Function*
-        auto input_fns = Transform<8>(ir.functions.Slice(), [](auto& fn) { return fn.Get(); });
+        auto input_fns = Transform<8>(ir->functions.Slice(), [](auto& fn) { return fn.Get(); });
 
         // Populate #need_forking
         GatherFnsThatNeedForking();
@@ -259,7 +261,7 @@ struct State {
     /// Populates #need_forking with all the functions that have pointer parameters which need
     /// transforming. These functions will be replaced with variants based on the access shapes.
     void GatherFnsThatNeedForking() {
-        for (auto& fn : ir.functions) {
+        for (auto& fn : ir->functions) {
             if (fn->Alive()) {
                 for (auto* param : fn->Params()) {
                     if (ParamNeedsTransforming(param)) {
@@ -274,7 +276,7 @@ struct State {
     /// Adjusts the calls of all the functions that make calls to #need_forking, which aren't in
     /// #need_forking themselves. This populates #variants_to_build with the called functions.
     void BuildRootFns() {
-        for (auto& fn : ir.functions) {
+        for (auto& fn : ir->functions) {
             if (!need_forking.Contains(fn)) {
                 TransformCalls(fn);
             }
@@ -331,7 +333,7 @@ struct State {
                         }
                         // If the chain access contains indices, then pass these as an array of u32.
                         if (size_t array_len = chain.indices.Length(); array_len > 0) {
-                            auto* array = ty.array(ty.u32(), static_cast<uint32_t>(array_len));
+                            auto* array = ty->array(ty->u32(), static_cast<uint32_t>(array_len));
                             auto* indices = b.Construct(array, std::move(chain.indices));
                             new_args.Push(indices->Result(0));
                         }
@@ -360,12 +362,12 @@ struct State {
                 // New signature.
 
                 // Clone the original function to seed the new variant.
-                auto* variant_fn = CloneContext{ir}.Clone(target);
+                auto* variant_fn = CloneContext{*ir}.Clone(target);
                 (*target_info)->ordered_variants.Push(variant_fn);
 
                 // Copy the original name for the variant
-                if (auto fn_name = ir.NameOf(fn)) {
-                    ir.SetName(fn, fn_name);
+                if (auto fn_name = ir->NameOf(fn)) {
+                    ir->SetName(fn, fn_name);
                 }
 
                 // Create an entry for the variant, and add it to the queue of variants that need to
@@ -433,7 +435,7 @@ struct State {
                                 // Array or matrix access.
                                 // Convert index to u32 if it isn't already.
                                 if (!idx->Type()->Is<type::U32>()) {
-                                    idx = b.Convert(ty.u32(), idx)->Result(0);
+                                    idx = b.Convert(ty->u32(), idx)->Result(0);
                                 }
 
                                 ops.Push(IndexAccess{});
@@ -457,7 +459,7 @@ struct State {
                         },
                         [&](Var* var) {
                             // A 'var' is a pointer root.
-                            if (var->Block() == ir.root_block) {
+                            if (var->Block() == ir->root_block) {
                                 // Root pointer is a module-scope 'var'
                                 chain.shape.root = RootModuleScopeVar{var};
                             } else {
@@ -530,18 +532,18 @@ struct State {
                 ir::FunctionParam* indices_param = nullptr;
                 if (uint32_t n = shape->NumIndexAccesses(); n > 0) {
                     // Indices are passed as an array of u32
-                    indices_param = b.FunctionParam(ty.array(ty.u32(), n));
+                    indices_param = b.FunctionParam(ty->array(ty->u32(), n));
                     new_params.Push(indices_param);
                 }
 
                 // Generate names for the new parameter(s) based on the replaced parameter name.
-                if (auto param_name = ir.NameOf(old_param); param_name.IsValid()) {
+                if (auto param_name = ir->NameOf(old_param); param_name.IsValid()) {
                     // Propagate old parameter name to the new parameters
                     if (root_ptr_param) {
-                        ir.SetName(root_ptr_param, param_name.Name() + "_root");
+                        ir->SetName(root_ptr_param, param_name.Name() + "_root");
                     }
                     if (indices_param) {
-                        ir.SetName(indices_param, param_name.Name() + "_indices");
+                        ir->SetName(indices_param, param_name.Name() + "_indices");
                     }
                 }
 
@@ -551,7 +553,7 @@ struct State {
                     if (auto* m = std::get_if<MemberAccess>(&op)) {
                         return b.Constant(u32(m->member->Index()));
                     }
-                    auto* access = b.Access(ty.u32(), indices_param, u32(index_index++));
+                    auto* access = b.Access(ty->u32(), indices_param, u32(index_index++));
                     return access->Result(0);
                 });
                 auto* access = b.Access(old_param->Type(), root_ptr, std::move(chain));
@@ -570,15 +572,15 @@ struct State {
     /// variants.
     /// @param input_fns the content of #ir.functions before transformation began.
     void EmitFunctions(VectorRef<Function*> input_fns) {
-        ir.functions.Clear();
+        ir->functions.Clear();
         for (auto& fn : input_fns) {
             if (auto info = need_forking.Get(fn)) {
                 fn->Destroy();
                 for (auto variant : (*info)->ordered_variants) {
-                    ir.functions.Push(variant);
+                    ir->functions.Push(variant);
                 }
             } else {
-                ir.functions.Push(fn);
+                ir->functions.Push(fn);
             }
         }
     }
@@ -594,9 +596,9 @@ struct State {
                 case core::AddressSpace::kWorkgroup:
                     return true;
                 case core::AddressSpace::kFunction:
-                    return options.transform_function;
+                    return options->transform_function;
                 case core::AddressSpace::kPrivate:
-                    return options.transform_private;
+                    return options->transform_private;
                 default:
                     break;
             }
@@ -635,7 +637,7 @@ Result<SuccessType> DirectVariableAccess(Module& ir, const DirectVariableAccessO
         return result;
     }
 
-    State{ir, options}.Process();
+    State{raw_ref(ir), raw_ref(options)raw_ref(}).Process();
 
     return Success;
 }

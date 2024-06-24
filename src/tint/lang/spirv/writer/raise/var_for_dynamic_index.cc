@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
@@ -49,31 +51,31 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// An access that needs replacing.
     struct AccessToReplace {
         /// The access instruction.
-        core::ir::Access* access = nullptr;
+        raw_ptr<core::ir::Access> access = nullptr;
         /// The index of the first dynamic index.
         size_t first_dynamic_index = 0;
         /// The object type that corresponds to the source of the first dynamic index.
-        const core::type::Type* dynamic_index_source_type = nullptr;
+        raw_ptr<const core::type::Type> dynamic_index_source_type = nullptr;
         /// If the access indexes a vector, then the type of that vector
-        const core::type::Vector* vector_access_type = nullptr;
+        raw_ptr<const core::type::Vector> vector_access_type = nullptr;
     };
 
     /// A partial access chain that uses constant indices to get to an object that will be
     /// dynamically indexed.
     struct PartialAccess {
         /// The base object.
-        core::ir::Value* base = nullptr;
+        raw_ptr<core::ir::Value> base = nullptr;
         /// The list of constant indices to get from the base to the source object.
         Vector<core::ir::Value*, 4> indices;
 
@@ -100,7 +102,7 @@ struct State {
             }
             auto* const_idx = indices[i]->As<core::ir::Constant>();
             type = const_idx ? type->Element(const_idx->Value()->ValueAs<u32>())
-                             : type->Elements().type;
+                             : type->Elements().type.get();
         }
     }
 
@@ -143,7 +145,7 @@ struct State {
     void Process() {
         // Find the access instructions that need replacing.
         Vector<AccessToReplace, 4> worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* access = inst->As<core::ir::Access>()) {
                 if (auto to_replace = ShouldReplace(access)) {
                     worklist.Push(to_replace.value());
@@ -155,7 +157,7 @@ struct State {
         Hashmap<core::ir::Value*, core::ir::Value*, 4> object_to_var;
         Hashmap<PartialAccess, core::ir::Value*, 4> source_object_to_value;
         for (const auto& to_replace : worklist) {
-            auto* access = to_replace.access;
+            auto* access = to_replace.access.get();
             auto* source_object = access->Object();
 
             // If the access starts with at least one constant index, extract the source of the
@@ -195,18 +197,18 @@ struct State {
                 // immediately after the definition of the source object.
                 core::ir::Var* decl = nullptr;
                 if (source_object->Is<core::ir::Constant>()) {
-                    decl = b.Var(ty.ptr(core::AddressSpace::kPrivate, source_object->Type(),
-                                        core::Access::kReadWrite));
-                    ir.root_block->Append(decl);
+                    decl = b.Var(ty->ptr(core::AddressSpace::kPrivate, source_object->Type(),
+                                         core::Access::kReadWrite));
+                    ir->root_block->Append(decl);
                 } else {
                     b.InsertAfter(source_object, [&] {
-                        decl = b.Var(ty.ptr(core::AddressSpace::kFunction, source_object->Type(),
-                                            core::Access::kReadWrite));
+                        decl = b.Var(ty->ptr(core::AddressSpace::kFunction, source_object->Type(),
+                                             core::Access::kReadWrite));
 
                         // If we ever support value declarations at module-scope, we will need to
                         // modify the partial access logic above since `access` instructions cannot
                         // be used in the root block.
-                        TINT_ASSERT(decl->Block() != ir.root_block);
+                        TINT_ASSERT(decl->Block() != ir->root_block);
                     });
                 }
 
@@ -232,7 +234,7 @@ struct State {
 
             auto addrspace = var->Type()->As<core::type::Pointer>()->AddressSpace();
             core::ir::Instruction* new_access =
-                b.Access(ty.ptr(addrspace, access_type, core::Access::kReadWrite), var, indices);
+                b.Access(ty->ptr(addrspace, access_type, core::Access::kReadWrite), var, indices);
             new_access->InsertBefore(access);
 
             core::ir::Instruction* load = nullptr;
@@ -256,7 +258,7 @@ Result<SuccessType> VarForDynamicIndex(core::ir::Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

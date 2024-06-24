@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_WHILE_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_WHILE_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 
 namespace tint::ast {
@@ -61,10 +62,10 @@ class WhileStatement final : public Castable<WhileStatement, Statement> {
     const WhileStatement* Clone(CloneContext& ctx) const override;
 
     /// The condition expression
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 
     /// The loop body block
-    const BlockStatement* const body;
+    const raw_ptr<const BlockStatement> body;
 
     /// The attribute list
     const tint::Vector<const Attribute*, 1> attributes;

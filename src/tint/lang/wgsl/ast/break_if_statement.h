@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -54,7 +55,7 @@ class BreakIfStatement final : public Castable<BreakIfStatement, Statement> {
     const BreakIfStatement* Clone(CloneContext& ctx) const override;
 
     /// The if condition or nullptr if none set
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 };
 
 }  // namespace tint::ast

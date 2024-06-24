@@ -33,7 +33,7 @@ namespace tint::spirv::writer {
 namespace {
 
 TEST_F(SpirvWriterTest, If_TrueEmpty_FalseEmpty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
         b.Append(i->True(), [&] {  //
@@ -56,11 +56,11 @@ TEST_F(SpirvWriterTest, If_TrueEmpty_FalseEmpty) {
 }
 
 TEST_F(SpirvWriterTest, If_FalseEmpty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
         b.Append(i->True(), [&] {
-            b.Add(ty.i32(), 1_i, 1_i);
+            b.Add(ty->i32(), 1_i, 1_i);
             b.ExitIf(i);
         });
         b.Append(i->False(), [&] {  //
@@ -83,14 +83,14 @@ TEST_F(SpirvWriterTest, If_FalseEmpty) {
 }
 
 TEST_F(SpirvWriterTest, If_TrueEmpty) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
         b.Append(i->True(), [&] {  //
             b.ExitIf(i);
         });
         b.Append(i->False(), [&] {
-            b.Add(ty.i32(), 1_i, 1_i);
+            b.Add(ty->i32(), 1_i, 1_i);
             b.ExitIf(i);
         });
         b.Return(func);
@@ -110,7 +110,7 @@ TEST_F(SpirvWriterTest, If_TrueEmpty) {
 }
 
 TEST_F(SpirvWriterTest, If_BothBranchesReturn) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
         b.Append(i->True(), [&] {  //
@@ -133,10 +133,10 @@ TEST_F(SpirvWriterTest, If_BothBranchesReturn) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_SingleValue) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i);
         });
@@ -162,10 +162,10 @@ TEST_F(SpirvWriterTest, If_Phi_SingleValue) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_SingleValue_TrueReturn) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.Return(func, 42_i);
         });
@@ -202,10 +202,10 @@ TEST_F(SpirvWriterTest, If_Phi_SingleValue_TrueReturn) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_SingleValue_FalseReturn) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i);
         });
@@ -242,10 +242,10 @@ TEST_F(SpirvWriterTest, If_Phi_SingleValue_FalseReturn) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_SingleValue_ImplicitFalse) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i);
         });
@@ -270,10 +270,10 @@ TEST_F(SpirvWriterTest, If_Phi_SingleValue_ImplicitFalse) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_MultipleValue_0) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -300,10 +300,10 @@ TEST_F(SpirvWriterTest, If_Phi_MultipleValue_0) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_MultipleValue_1) {
-    auto* func = b.Function("foo", ty.bool_());
+    auto* func = b.Function("foo", ty->bool_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -330,13 +330,13 @@ TEST_F(SpirvWriterTest, If_Phi_MultipleValue_1) {
 }
 
 TEST_F(SpirvWriterTest, If_Phi_Nested) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* outer = b.If(true);
-        outer->SetResults(b.InstructionResult(ty.i32()));
+        outer->SetResults(b.InstructionResult(ty->i32()));
         b.Append(outer->True(), [&] {  //
             auto* inner = b.If(true);
-            inner->SetResults(b.InstructionResult(ty.i32()));
+            inner->SetResults(b.InstructionResult(ty->i32()));
             b.Append(inner->True(), [&] {  //
                 b.ExitIf(inner, 10_i);
             });

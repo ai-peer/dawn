@@ -30,6 +30,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -64,13 +65,13 @@ class IfStatement final : public Castable<IfStatement, Statement> {
     const IfStatement* Clone(CloneContext& ctx) const override;
 
     /// The if condition or nullptr if none set
-    const Expression* const condition;
+    const raw_ptr<const Expression> condition;
 
     /// The if body
-    const BlockStatement* const body;
+    const raw_ptr<const BlockStatement> body;
 
     /// The optional else statement, or nullptr
-    const Statement* const else_statement;
+    const raw_ptr<const Statement> else_statement;
 
     /// The attribute list
     const tint::Vector<const Attribute*, 1> attributes;

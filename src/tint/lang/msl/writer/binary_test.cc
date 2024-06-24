@@ -51,11 +51,11 @@ using MslWriterBinaryTest = MslWriterTestWithParam<BinaryData>;
 TEST_P(MslWriterBinaryTest, Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(params.op, ty.u32(), l, r);
+        auto* bin = b.Binary(params.op, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -80,11 +80,11 @@ INSTANTIATE_TEST_SUITE_P(MslWriterTest,
                                          BinaryData{"(left ^ right)", core::BinaryOp::kXor}));
 
 TEST_F(MslWriterTest, BinaryDivU32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kDivide, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kDivide, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -104,11 +104,11 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, BinaryModU32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kModulo, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kModulo, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -129,11 +129,11 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, BinaryShiftLeft) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kShiftLeft, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kShiftLeft, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -149,11 +149,11 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, BinaryShiftRight) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kShiftRight, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kShiftRight, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -172,11 +172,11 @@ using MslWriterBinaryBoolTest = MslWriterTestWithParam<BinaryData>;
 TEST_P(MslWriterBinaryBoolTest, Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(params.op, ty.bool_(), l, r);
+        auto* bin = b.Binary(params.op, ty->bool_(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -205,12 +205,12 @@ using MslWriterBinaryTest_SignedOverflowDefinedBehaviour = MslWriterTestWithPara
 TEST_P(MslWriterBinaryTest_SignedOverflowDefinedBehaviour, DISABLED_Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("a", b.Constant(1_i));
         auto* r = b.Let("b", b.Constant(3_i));
 
-        auto* bin = b.Binary(params.op, ty.i32(), l, r);
+        auto* bin = b.Binary(params.op, ty->i32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -238,11 +238,11 @@ using MslWriterBinaryTest_ShiftSignedOverflowDefinedBehaviour = MslWriterTestWit
 TEST_P(MslWriterBinaryTest_ShiftSignedOverflowDefinedBehaviour, DISABLED_Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* l = b.Let("a", b.Constant(1_i));
         auto* r = b.Let("b", b.Constant(2_u));
-        auto* bin = b.Binary(params.op, ty.i32(), l, r);
+        auto* bin = b.Binary(params.op, ty->i32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -270,15 +270,15 @@ using MslWriterBinaryTest_SignedOverflowDefinedBehaviour_Chained =
 TEST_P(MslWriterBinaryTest_SignedOverflowDefinedBehaviour_Chained, DISABLED_Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, i32>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, i32>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, i32>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, i32>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(params.op, ty.i32(), l, r);
-        auto* expr2 = b.Binary(params.op, ty.i32(), expr1, r);
+        auto* expr1 = b.Binary(params.op, ty->i32(), l, r);
+        auto* expr2 = b.Binary(params.op, ty->i32(), expr1, r);
 
         b.Let("val", expr2);
         b.Return(func);
@@ -313,15 +313,15 @@ using MslWriterBinaryTest_ShiftSignedOverflowDefinedBehaviour_Chained =
 TEST_P(MslWriterBinaryTest_ShiftSignedOverflowDefinedBehaviour_Chained, DISABLED_Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, i32>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, u32>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, i32>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, u32>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(params.op, ty.i32(), l, r);
-        auto* expr2 = b.Binary(params.op, ty.i32(), expr1, r);
+        auto* expr1 = b.Binary(params.op, ty->i32(), l, r);
+        auto* expr2 = b.Binary(params.op, ty->i32(), expr1, r);
 
         b.Let("val", expr2);
         b.Return(func);
@@ -347,14 +347,14 @@ INSTANTIATE_TEST_SUITE_P(MslWriterTest,
                          testing::ValuesIn(shift_signed_overflow_defined_behaviour_chained_cases));
 
 TEST_F(MslWriterTest, DISABLED_BinaryModF32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, f32>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, f32>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, f32>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, f32>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.f32(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->f32(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -370,14 +370,14 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, DISABLED_BinaryModF16) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, f16>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, f16>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, f16>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, f16>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.f16(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->f16(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -393,14 +393,14 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, DISABLED_BinaryModVec3F32) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f32>()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f32>()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f32>()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f32>()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.vec3<f32>(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->vec3<f32>(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -416,14 +416,14 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, DISABLED_BinaryModVec3F16) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f16>()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f16>()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f16>()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f16>()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.vec3<f16>(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->vec3<f16>(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);

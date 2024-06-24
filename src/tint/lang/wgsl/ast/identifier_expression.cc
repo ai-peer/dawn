@@ -48,7 +48,7 @@ IdentifierExpression::~IdentifierExpression() = default;
 const IdentifierExpression* IdentifierExpression::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto ident = ctx.Clone(identifier);
+    auto ident = ctx.Clone(identifier.get());
     return ctx.dst->create<IdentifierExpression>(src, ident);
 }
 

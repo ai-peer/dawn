@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_TYPE_H_
 #define SRC_TINT_LANG_WGSL_AST_TYPE_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/id/generation_id.h"
 
 // Forward declarations
@@ -41,7 +42,7 @@ namespace tint::ast {
 /// type expressions from other expressions.
 struct Type {
     /// The type expression
-    const IdentifierExpression* expr = nullptr;
+    raw_ptr<const IdentifierExpression> expr = nullptr;
 
     /// Indirection operator for accessing the type's expression
     /// @return #expr

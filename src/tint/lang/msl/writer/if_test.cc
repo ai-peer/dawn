@@ -33,7 +33,7 @@ namespace tint::msl::writer {
 namespace {
 
 TEST_F(MslWriterTest, If) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] { b.ExitIf(if_); });
@@ -50,7 +50,7 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfWithElseIf) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] { b.ExitIf(if_); });
@@ -75,7 +75,7 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfWithElse) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] { b.ExitIf(if_); });
@@ -95,7 +95,7 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfBothBranchesReturn) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] { b.Return(func); });
@@ -117,10 +117,10 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfWithSinglePhi) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i);
         });
@@ -144,10 +144,10 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfWithMultiPhi) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -174,10 +174,10 @@ void foo() {
 }
 
 TEST_F(MslWriterTest, IfWithMultiPhiReturn1) {
-    auto* func = b.Function("foo", ty.i32());
+    auto* func = b.Function("foo", ty->i32());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -205,10 +205,10 @@ int foo() {
 }
 
 TEST_F(MslWriterTest, IfWithMultiPhiReturn2) {
-    auto* func = b.Function("foo", ty.bool_());
+    auto* func = b.Function("foo", ty->bool_());
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });

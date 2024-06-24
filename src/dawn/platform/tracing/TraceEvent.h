@@ -168,6 +168,7 @@
 #include <atomic>
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/platform/tracing/EventTracer.h"
 #include "partition_alloc/pointers/raw_ptr.h"
 
@@ -970,7 +971,7 @@ class TraceEndOnScopeClose {
     // uninitialized accesses.
     struct Data {
         raw_ptr<Platform> platform;
-        const unsigned char* categoryEnabled;
+        raw_ptr<const unsigned char> categoryEnabled;
         const char* name;
     };
     raw_ptr<Data> m_pdata = nullptr;

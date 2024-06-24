@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 
 // Forward declarations
@@ -60,7 +61,7 @@ class BuiltinAttribute final : public Castable<BuiltinAttribute, Attribute> {
     const BuiltinAttribute* Clone(CloneContext& ctx) const override;
 
     /// The builtin value
-    const Expression* const builtin;
+    const raw_ptr<const Expression> builtin;
 };
 
 }  // namespace tint::ast

@@ -70,8 +70,8 @@ DiagnosticRuleName::DiagnosticRuleName(GenerationID pid,
 
 const DiagnosticRuleName* DiagnosticRuleName::Clone(CloneContext& ctx) const {
     auto src = ctx.Clone(source);
-    auto n = ctx.Clone(name);
-    if (auto c = ctx.Clone(category)) {
+    auto n = ctx.Clone(name.get());
+    if (auto c = ctx.Clone(category.get())) {
         return ctx.dst->create<DiagnosticRuleName>(src, c, n);
     }
     return ctx.dst->create<DiagnosticRuleName>(src, n);

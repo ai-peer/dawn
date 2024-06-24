@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_INCREMENT_DECREMENT_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_INCREMENT_DECREMENT_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
 
@@ -58,7 +59,7 @@ class IncrementDecrementStatement final : public Castable<IncrementDecrementStat
     const IncrementDecrementStatement* Clone(CloneContext& ctx) const override;
 
     /// The LHS expression.
-    const Expression* const lhs;
+    const raw_ptr<const Expression> lhs;
 
     /// `true` for increment, `false` for decrement.
     bool increment;

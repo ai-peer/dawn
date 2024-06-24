@@ -27,6 +27,7 @@
 
 #include <cstring>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/system/terminal.h"
 #include "src/tint/utils/text/styled_text_printer.h"
 
@@ -43,7 +44,7 @@ class Plain : public StyledTextPrinter {
     }
 
   private:
-    FILE* const file_;
+    const raw_ptr<FILE> file_;
 };
 
 }  // namespace

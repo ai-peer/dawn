@@ -96,7 +96,7 @@ TypeAndCount Vector::Elements(const Type* /* type_if_invalid = nullptr */,
 }
 
 const Type* Vector::Element(uint32_t index) const {
-    return index < width_ ? subtype_ : nullptr;
+    return index < width_ ? subtype_.get() : nullptr;
 }
 
 }  // namespace tint::core::type

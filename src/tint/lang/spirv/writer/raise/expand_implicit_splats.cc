@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -44,15 +45,15 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// Process the module.
     void Process() {
         // Find the instructions that use implicit splats and modify or replace them.
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* construct = inst->As<core::ir::Construct>()) {
                 // A vector constructor with a single scalar argument needs to be modified to
                 // replicate the argument N times.
@@ -116,8 +117,8 @@ struct State {
                 vts->AppendArg(binary->LHS());
                 vts->AppendArg(binary->RHS());
             }
-            if (auto name = ir.NameOf(binary)) {
-                ir.SetName(vts->Result(0), name);
+            if (auto name = ir->NameOf(binary)) {
+                ir->SetName(vts->Result(0), name);
             }
             binary->ReplaceWith(vts);
             binary->Destroy();
@@ -140,7 +141,7 @@ Result<SuccessType> ExpandImplicitSplats(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)}.Process();
 
     return Success;
 }

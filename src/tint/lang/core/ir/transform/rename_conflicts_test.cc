@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "gtest/gtest.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/disassembler.h"
@@ -73,11 +74,11 @@ class IRToProgramRenameConflictsTest : public testing::Test {
     /// The test IR builder.
     core::ir::Builder b{mod};
     /// The type manager.
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
 };
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_SingleNamedRootBlockVar) {
-    b.Append(mod.root_block, [&] { b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "v"); });
+    b.Append(mod.root_block, [&] { b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "v"); });
 
     auto* src = R"(
 $B1: {  # root
@@ -96,8 +97,8 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_TwoRootBlockVarsWithSameName) {
     b.Append(mod.root_block, [&] {
-        b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "v");
-        b.ir.SetName(b.Var(ty.ptr<private_, u32>()), "v");
+        b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "v");
+        b.ir->SetName(b.Var(ty->ptr<private_, u32>()), "v");
     });
 
     auto* src = R"(
@@ -123,8 +124,8 @@ $B1: {  # root
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_RootBlockVarAndStructWithSameName) {
-    auto* s = ty.Struct(b.ir.symbols.New("v"), {{b.ir.symbols.New("x"), ty.i32()}});
-    b.Append(mod.root_block, [&] { b.ir.SetName(b.Var(ty.ptr(function, s)), "v"); });
+    auto* s = ty->Struct(b.ir->symbols.New("v"), {{b.ir->symbols.New("x"), ty->i32()}});
+    b.Append(mod.root_block, [&] { b.ir->SetName(b.Var(ty->ptr(function, s)), "v"); });
 
     auto* src = R"(
 v = struct @align(4) {
@@ -155,9 +156,9 @@ $B1: {  # root
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_RootBlockVarAndFnWithSameName) {
-    b.Append(mod.root_block, [&] { b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "v"); });
+    b.Append(mod.root_block, [&] { b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "v"); });
 
-    auto* fn = b.Function("v", ty.void_());
+    auto* fn = b.Function("v", ty->void_());
     b.Append(fn->Block(), [&] { b.Return(fn); });
 
     auto* src = R"(
@@ -192,18 +193,18 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_RootBlockVar_ShadowedBy_FnVar) {
     b.Append(mod.root_block, [&] {
-        auto* outer = b.Var(ty.ptr<private_, i32>());
-        b.ir.SetName(outer, "v");
+        auto* outer = b.Var(ty->ptr<private_, i32>());
+        b.ir->SetName(outer, "v");
 
-        auto* fn = b.Function("f", ty.i32());
+        auto* fn = b.Function("f", ty->i32());
         b.Append(fn->Block(), [&] {
             auto* load_outer = b.Load(outer);
 
-            auto* inner = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(inner, "v");
+            auto* inner = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(inner, "v");
 
             auto* load_inner = b.Load(inner);
-            b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+            b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
         });
     });
 
@@ -233,17 +234,17 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_RootBlockVar_ShadowedBy_FnVar) {
     b.Append(mod.root_block, [&] {
-        auto* outer = b.Var(ty.ptr<private_, i32>());
-        b.ir.SetName(outer, "v");
+        auto* outer = b.Var(ty->ptr<private_, i32>());
+        b.ir->SetName(outer, "v");
 
-        auto* fn = b.Function("f", ty.i32());
+        auto* fn = b.Function("f", ty->i32());
         b.Append(fn->Block(), [&] {
-            auto* inner = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(inner, "v");
+            auto* inner = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(inner, "v");
 
             auto* load_outer = b.Load(outer);
             auto* load_inner = b.Load(inner);
-            b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+            b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
         });
     });
 
@@ -286,20 +287,20 @@ $B1: {  # root
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_FnVar_ShadowedBy_IfVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
-        auto* outer = b.Var(ty.ptr<function, i32>());
-        b.ir.SetName(outer, "v");
+        auto* outer = b.Var(ty->ptr<function, i32>());
+        b.ir->SetName(outer, "v");
 
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] {
             auto* load_outer = b.Load(outer);
 
-            auto* inner = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(inner, "v");
+            auto* inner = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(inner, "v");
 
             auto* load_inner = b.Load(inner);
-            b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+            b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
         });
 
         b.Unreachable();
@@ -332,19 +333,19 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_FnVar_ShadowedBy_IfVar) {
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_FnVar_ShadowedBy_IfVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
-        auto* outer = b.Var(ty.ptr<function, i32>());
-        b.ir.SetName(outer, "v");
+        auto* outer = b.Var(ty->ptr<function, i32>());
+        b.ir->SetName(outer, "v");
 
         auto* if_ = b.If(true);
         b.Append(if_->True(), [&] {
-            auto* inner = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(inner, "v");
+            auto* inner = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(inner, "v");
 
             auto* load_outer = b.Load(outer);
             auto* load_inner = b.Load(inner);
-            b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+            b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
         });
 
         b.Unreachable();
@@ -393,22 +394,22 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_FnVar_ShadowedBy_IfVar) {
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_LoopInitVar_ShadowedBy_LoopBodyVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] {
-            auto* outer = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(outer, "v");
+            auto* outer = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(outer, "v");
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
                 auto* load_outer = b.Load(outer);
 
-                auto* inner = b.Var(ty.ptr<function, i32>());
-                b.ir.SetName(inner, "v");
+                auto* inner = b.Var(ty->ptr<function, i32>());
+                b.ir->SetName(inner, "v");
 
                 auto* load_inner = b.Load(inner);
-                b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+                b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
             });
         });
 
@@ -445,21 +446,21 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_LoopInitVar_ShadowedBy_LoopBodyV
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_LoopInitVar_ShadowedBy_LoopBodyVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] {
-            auto* outer = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(outer, "v");
+            auto* outer = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(outer, "v");
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
-                auto* inner = b.Var(ty.ptr<function, i32>());
-                b.ir.SetName(inner, "v");
+                auto* inner = b.Var(ty->ptr<function, i32>());
+                b.ir->SetName(inner, "v");
 
                 auto* load_outer = b.Load(outer);
                 auto* load_inner = b.Load(inner);
-                b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+                b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
             });
         });
 
@@ -515,23 +516,23 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_LoopInitVar_ShadowedBy_LoopBodyV
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_LoopBodyVar_ShadowedBy_LoopContVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] { b.NextIteration(loop); });
         b.Append(loop->Body(), [&] {
-            auto* outer = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(outer, "v");
+            auto* outer = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(outer, "v");
             b.Continue(loop);
 
             b.Append(loop->Continuing(), [&] {
                 auto* load_outer = b.Load(outer);
 
-                auto* inner = b.Var(ty.ptr<function, i32>());
-                b.ir.SetName(inner, "v");
+                auto* inner = b.Var(ty->ptr<function, i32>());
+                b.ir->SetName(inner, "v");
 
                 auto* load_inner = b.Load(inner);
-                b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+                b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
             });
         });
 
@@ -571,22 +572,22 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_LoopBodyVar_ShadowedBy_LoopContV
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_LoopBodyVar_ShadowedBy_LoopContVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
         b.Append(loop->Initializer(), [&] { b.NextIteration(loop); });
         b.Append(loop->Body(), [&] {
-            auto* outer = b.Var(ty.ptr<function, i32>());
-            b.ir.SetName(outer, "v");
+            auto* outer = b.Var(ty->ptr<function, i32>());
+            b.ir->SetName(outer, "v");
             b.Continue(loop);
 
             b.Append(loop->Continuing(), [&] {
-                auto* inner = b.Var(ty.ptr<function, i32>());
-                b.ir.SetName(inner, "v");
+                auto* inner = b.Var(ty->ptr<function, i32>());
+                b.ir->SetName(inner, "v");
 
                 auto* load_outer = b.Load(outer);
                 auto* load_inner = b.Load(inner);
-                b.Return(fn, b.Add(ty.i32(), load_outer, load_inner));
+                b.Return(fn, b.Add(ty->i32(), load_outer, load_inner));
             });
         });
 
@@ -648,13 +649,13 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_LoopBodyVar_ShadowedBy_LoopContV
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_Param) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* p = b.FunctionParam(ty.i32());
-    b.ir.SetName(p, "i32");
+    auto* fn = b.Function("f", ty->void_());
+    auto* p = b.FunctionParam(ty->i32());
+    b.ir->SetName(p, "i32");
     fn->SetParams({p});
 
     b.Append(fn->Block(), [&] {
-        b.Var(ty.ptr<function, i32>());
+        b.Var(ty->ptr<function, i32>());
         b.Return(fn);
     });
 
@@ -683,13 +684,13 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_Param) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinVector_ShadowedBy_Param) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* p = b.FunctionParam(ty.i32());
-    b.ir.SetName(p, "vec2");
+    auto* fn = b.Function("f", ty->void_());
+    auto* p = b.FunctionParam(ty->i32());
+    b.ir->SetName(p, "vec2");
     fn->SetParams({p});
 
     b.Append(fn->Block(), [&] {
-        b.Var(ty.ptr<function, vec3<i32>>());
+        b.Var(ty->ptr<function, vec3<i32>>());
         b.Return(fn);
     });
 
@@ -711,13 +712,13 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinVector_ShadowedBy_Param) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinVector_ShadowedBy_Param) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* p = b.FunctionParam(ty.i32());
-    b.ir.SetName(p, "vec3");
+    auto* fn = b.Function("f", ty->void_());
+    auto* p = b.FunctionParam(ty->i32());
+    b.ir->SetName(p, "vec3");
     fn->SetParams({p});
 
     b.Append(fn->Block(), [&] {
-        b.Var(ty.ptr<function, vec3<i32>>());
+        b.Var(ty->ptr<function, vec3<i32>>());
         b.Return(fn);
     });
 
@@ -746,13 +747,13 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinVector_ShadowedBy_Param) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinMatrix_ShadowedBy_Param) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* p = b.FunctionParam(ty.i32());
-    b.ir.SetName(p, "mat3x2");
+    auto* fn = b.Function("f", ty->void_());
+    auto* p = b.FunctionParam(ty->i32());
+    b.ir->SetName(p, "mat3x2");
     fn->SetParams({p});
 
     b.Append(fn->Block(), [&] {
-        b.Var(ty.ptr<function, mat2x4<f32>>());
+        b.Var(ty->ptr<function, mat2x4<f32>>());
         b.Return(fn);
     });
 
@@ -774,13 +775,13 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinMatrix_ShadowedBy_Param) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinMatrix_ShadowedBy_Param) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* p = b.FunctionParam(ty.i32());
-    b.ir.SetName(p, "mat2x4");
+    auto* fn = b.Function("f", ty->void_());
+    auto* p = b.FunctionParam(ty->i32());
+    b.ir->SetName(p, "mat2x4");
     fn->SetParams({p});
 
     b.Append(fn->Block(), [&] {
-        b.Var(ty.ptr<function, mat2x4<f32>>());
+        b.Var(ty->ptr<function, mat2x4<f32>>());
         b.Return(fn);
     });
 
@@ -809,12 +810,12 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinMatrix_ShadowedBy_Param) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinScalar_ShadowedBy_FnVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var(ty.ptr<function, i32>());
-        b.ir.SetName(v, "f32");
+        auto* v = b.Var(ty->ptr<function, i32>());
+        b.ir->SetName(v, "f32");
 
-        b.Return(fn, b.Construct(ty.i32()));
+        b.Return(fn, b.Construct(ty->i32()));
     });
 
     auto* src = R"(
@@ -836,12 +837,12 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinScalar_ShadowedBy_FnVar) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_FnVar) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var(ty.ptr<function, i32>());
-        b.ir.SetName(v, "i32");
+        auto* v = b.Var(ty->ptr<function, i32>());
+        b.ir->SetName(v, "i32");
 
-        b.Return(fn, b.Construct(ty.i32()));
+        b.Return(fn, b.Construct(ty->i32()));
     });
 
     auto* src = R"(
@@ -871,10 +872,10 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_FnVar) 
 }
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinScalar_ShadowedBy_NamedInst) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {
-        auto* i = b.Add(ty.i32(), 1_i, 2_i);
-        b.ir.SetName(i, "i32");
+        auto* i = b.Add(ty->i32(), 1_i, 2_i);
+        b.ir->SetName(i, "i32");
 
         b.Return(fn, i);
     });
@@ -897,12 +898,12 @@ TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinScalar_ShadowedBy_NamedIn
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_NamedInst) {
-    auto* fn = b.Function("f", ty.f32());
+    auto* fn = b.Function("f", ty->f32());
     b.Append(fn->Block(), [&] {
-        auto* i = b.Add(ty.i32(), 1_i, 2_i);
-        b.ir.SetName(i, "f32");
+        auto* i = b.Add(ty->i32(), 1_i, 2_i);
+        b.ir->SetName(i, "f32");
 
-        b.Return(fn, b.Construct(ty.f32(), i));
+        b.Return(fn, b.Construct(ty->f32(), i));
     });
 
     auto* src = R"(
@@ -933,7 +934,7 @@ TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinScalar_ShadowedBy_NamedIn
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinAddressSpace_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "function");
+        b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "function");
     });
 
     auto* src = R"(
@@ -953,7 +954,7 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinAddressSpace_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "private");
+        b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "private");
     });
 
     auto* src = R"(
@@ -978,7 +979,7 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinAccess_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "read");
+        b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "read");
     });
 
     auto* src = R"(
@@ -998,7 +999,7 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinAccess_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        b.ir.SetName(b.Var(ty.ptr<private_, i32>()), "read_write");
+        b.ir->SetName(b.Var(ty->ptr<private_, i32>()), "read_write");
     });
 
     auto* src = R"(
@@ -1023,13 +1024,13 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, NoModify_BuiltinFn_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        auto* v = b.Var(ty.ptr<private_, i32>());
-        b.ir.SetName(v, "min");
+        auto* v = b.Var(ty->ptr<private_, i32>());
+        b.ir->SetName(v, "min");
     });
 
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {  //
-        auto* res = b.Call(ty.i32(), core::BuiltinFn::kMax, 1_i, 2_i)->Result(0);
+        auto* res = b.Call(ty->i32(), core::BuiltinFn::kMax, 1_i, 2_i)->Result(0);
         b.Return(fn, res);
     });
 
@@ -1056,13 +1057,13 @@ $B1: {  # root
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_BuiltinFn_ShadowedBy_RootBlockVar) {
     b.Append(mod.root_block, [&] {  //
-        auto* v = b.Var(ty.ptr<private_, i32>());
-        b.ir.SetName(v, "max");
+        auto* v = b.Var(ty->ptr<private_, i32>());
+        b.ir->SetName(v, "max");
     });
 
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
     b.Append(fn->Block(), [&] {  //
-        auto* res = b.Call(ty.i32(), core::BuiltinFn::kMax, 1_i, 2_i)->Result(0);
+        auto* res = b.Call(ty->i32(), core::BuiltinFn::kMax, 1_i, 2_i)->Result(0);
         b.Return(fn, res);
     });
 
@@ -1099,13 +1100,13 @@ $B1: {  # root
 }
 
 TEST_F(IRToProgramRenameConflictsTest, Conflict_StructMember_ShadowedBy_Fn) {
-    auto* s = ty.Struct(b.ir.symbols.New("s"), {{b.ir.symbols.New("f"), ty.f32()}});
+    auto* s = ty->Struct(b.ir->symbols.New("s"), {{b.ir->symbols.New("f"), ty->f32()}});
 
     b.Append(mod.root_block, [&] {  //
-        b.Var(ty.ptr<private_>(s));
+        b.Var(ty->ptr<private_>(s));
     });
 
-    auto* fn = b.Function("f32", ty.void_());
+    auto* fn = b.Function("f32", ty->void_());
     b.Append(fn->Block(), [&] {  //
         b.Return(fn);
     });

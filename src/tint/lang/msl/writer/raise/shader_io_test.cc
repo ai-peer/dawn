@@ -40,7 +40,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using MslWriter_ShaderIOTest = core::ir::transform::TransformTest;
 
 TEST_F(MslWriter_ShaderIOTest, NoInputsOrOutputs) {
-    auto* ep = b.Function("foo", ty.void_());
+    auto* ep = b.Function("foo", ty->void_());
     ep->SetStage(core::ir::Function::PipelineStage::kCompute);
     ep->SetWorkgroupSize(1, 1, 1);
 
@@ -66,15 +66,15 @@ TEST_F(MslWriter_ShaderIOTest, NoInputsOrOutputs) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, Parameters_NonStruct) {
-    auto* ep = b.Function("foo", ty.void_());
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* ep = b.Function("foo", ty->void_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(core::BuiltinValue::kFrontFacing);
-    auto* position = b.FunctionParam("position", ty.vec4<f32>());
+    auto* position = b.FunctionParam("position", ty->vec4<f32>());
     position->SetBuiltin(core::BuiltinValue::kPosition);
     position->SetInvariant(true);
-    auto* color1 = b.FunctionParam("color1", ty.f32());
+    auto* color1 = b.FunctionParam("color1", ty->f32());
     color1->SetLocation(0, {});
-    auto* color2 = b.FunctionParam("color2", ty.f32());
+    auto* color2 = b.FunctionParam("color2", ty->f32());
     color2->SetLocation(1, core::Interpolation{core::InterpolationType::kLinear,
                                                core::InterpolationSampling::kSample});
 
@@ -84,7 +84,7 @@ TEST_F(MslWriter_ShaderIOTest, Parameters_NonStruct) {
     b.Append(ep->Block(), [&] {
         auto* ifelse = b.If(front_facing);
         b.Append(ifelse->True(), [&] {
-            b.Multiply(ty.vec4<f32>(), position, b.Add(ty.f32(), color1, color2));
+            b.Multiply(ty->vec4<f32>(), position, b.Add(ty->f32(), color1, color2));
             b.ExitIf(ifelse);
         });
         b.Return(ep);
@@ -141,74 +141,74 @@ foo_inputs = struct @align(4) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, Parameters_Struct) {
-    auto* str_ty = ty.Struct(mod.symbols.New("Inputs"),
-                             {
-                                 {
-                                     mod.symbols.New("front_facing"),
-                                     ty.bool_(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kFrontFacing,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("position"),
-                                     ty.vec4<f32>(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ true,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color1"),
-                                     ty.f32(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color2"),
-                                     ty.f32(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 1u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */
-                                         core::Interpolation{
-                                             core::InterpolationType::kLinear,
-                                             core::InterpolationSampling::kSample,
-                                         },
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* str_ty = ty->Struct(mod.symbols.New("Inputs"),
+                              {
+                                  {
+                                      mod.symbols.New("front_facing"),
+                                      ty->bool_(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kFrontFacing,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("position"),
+                                      ty->vec4<f32>(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ true,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color1"),
+                                      ty->f32(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color2"),
+                                      ty->f32(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 1u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */
+                                          core::Interpolation{
+                                              core::InterpolationType::kLinear,
+                                              core::InterpolationSampling::kSample,
+                                          },
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
-    auto* ep = b.Function("foo", ty.void_());
+    auto* ep = b.Function("foo", ty->void_());
     auto* str_param = b.FunctionParam("inputs", str_ty);
     ep->SetParams({str_param});
     ep->SetStage(core::ir::Function::PipelineStage::kFragment);
 
     b.Append(ep->Block(), [&] {
-        auto* ifelse = b.If(b.Access(ty.bool_(), str_param, 0_i));
+        auto* ifelse = b.If(b.Access(ty->bool_(), str_param, 0_i));
         b.Append(ifelse->True(), [&] {
-            auto* position = b.Access(ty.vec4<f32>(), str_param, 1_i);
-            auto* color1 = b.Access(ty.f32(), str_param, 2_i);
-            auto* color2 = b.Access(ty.f32(), str_param, 3_i);
-            b.Multiply(ty.vec4<f32>(), position, b.Add(ty.f32(), color1, color2));
+            auto* position = b.Access(ty->vec4<f32>(), str_param, 1_i);
+            auto* color1 = b.Access(ty->f32(), str_param, 2_i);
+            auto* color2 = b.Access(ty->f32(), str_param, 3_i);
+            b.Multiply(ty->vec4<f32>(), position, b.Add(ty->f32(), color1, color2));
             b.ExitIf(ifelse);
         });
         b.Return(ep);
@@ -288,39 +288,39 @@ foo_inputs = struct @align(4) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, Parameters_Mixed) {
-    auto* str_ty = ty.Struct(mod.symbols.New("Inputs"),
-                             {
-                                 {
-                                     mod.symbols.New("position"),
-                                     ty.vec4<f32>(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ true,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color1"),
-                                     ty.f32(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* str_ty = ty->Struct(mod.symbols.New("Inputs"),
+                              {
+                                  {
+                                      mod.symbols.New("position"),
+                                      ty->vec4<f32>(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ true,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color1"),
+                                      ty->f32(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
-    auto* ep = b.Function("foo", ty.void_());
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* ep = b.Function("foo", ty->void_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(core::BuiltinValue::kFrontFacing);
     auto* str_param = b.FunctionParam("inputs", str_ty);
-    auto* color2 = b.FunctionParam("color2", ty.f32());
+    auto* color2 = b.FunctionParam("color2", ty->f32());
     color2->SetLocation(1, core::Interpolation{core::InterpolationType::kLinear,
                                                core::InterpolationSampling::kSample});
 
@@ -330,9 +330,9 @@ TEST_F(MslWriter_ShaderIOTest, Parameters_Mixed) {
     b.Append(ep->Block(), [&] {
         auto* ifelse = b.If(front_facing);
         b.Append(ifelse->True(), [&] {
-            auto* position = b.Access(ty.vec4<f32>(), str_param, 0_i);
-            auto* color1 = b.Access(ty.f32(), str_param, 1_i);
-            b.Multiply(ty.vec4<f32>(), position, b.Add(ty.f32(), color1, color2));
+            auto* position = b.Access(ty->vec4<f32>(), str_param, 0_i);
+            auto* color1 = b.Access(ty->f32(), str_param, 1_i);
+            b.Multiply(ty->vec4<f32>(), position, b.Add(ty->f32(), color1, color2));
             b.ExitIf(ifelse);
         });
         b.Return(ep);
@@ -404,13 +404,13 @@ foo_inputs = struct @align(4) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, ReturnValue_NonStructBuiltin) {
-    auto* ep = b.Function("foo", ty.vec4<f32>());
+    auto* ep = b.Function("foo", ty->vec4<f32>());
     ep->SetReturnBuiltin(core::BuiltinValue::kPosition);
     ep->SetReturnInvariant(true);
     ep->SetStage(core::ir::Function::PipelineStage::kVertex);
 
     b.Append(ep->Block(), [&] {  //
-        b.Return(ep, b.Construct(ty.vec4<f32>(), 0.5_f));
+        b.Return(ep, b.Construct(ty->vec4<f32>(), 0.5_f));
     });
 
     auto* src = R"(
@@ -450,12 +450,12 @@ foo_outputs = struct @align(16) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, ReturnValue_NonStructLocation) {
-    auto* ep = b.Function("foo", ty.vec4<f32>());
+    auto* ep = b.Function("foo", ty->vec4<f32>());
     ep->SetReturnLocation(1u, {});
     ep->SetStage(core::ir::Function::PipelineStage::kFragment);
 
     b.Append(ep->Block(), [&] {  //
-        b.Return(ep, b.Construct(ty.vec4<f32>(), 0.5_f));
+        b.Return(ep, b.Construct(ty->vec4<f32>(), 0.5_f));
     });
 
     auto* src = R"(
@@ -495,55 +495,55 @@ foo_outputs = struct @align(16) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, ReturnValue_Struct) {
-    auto* str_ty = ty.Struct(mod.symbols.New("Outputs"),
-                             {
-                                 {
-                                     mod.symbols.New("position"),
-                                     ty.vec4<f32>(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ true,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color1"),
-                                     ty.f32(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color2"),
-                                     ty.f32(),
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 1u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */
-                                         core::Interpolation{
-                                             core::InterpolationType::kLinear,
-                                             core::InterpolationSampling::kSample,
-                                         },
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* str_ty = ty->Struct(mod.symbols.New("Outputs"),
+                              {
+                                  {
+                                      mod.symbols.New("position"),
+                                      ty->vec4<f32>(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ true,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color1"),
+                                      ty->f32(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color2"),
+                                      ty->f32(),
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 1u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */
+                                          core::Interpolation{
+                                              core::InterpolationType::kLinear,
+                                              core::InterpolationSampling::kSample,
+                                          },
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
     auto* ep = b.Function("foo", str_ty);
     ep->SetStage(core::ir::Function::PipelineStage::kVertex);
 
     b.Append(ep->Block(), [&] {  //
-        b.Return(ep, b.Construct(str_ty, b.Construct(ty.vec4<f32>(), 0_f), 0.25_f, 0.75_f));
+        b.Return(ep, b.Construct(str_ty, b.Construct(ty->vec4<f32>(), 0_f), 0.25_f, 0.75_f));
     });
 
     auto* src = R"(
@@ -603,32 +603,32 @@ foo_outputs = struct @align(16) {
 
 TEST_F(MslWriter_ShaderIOTest, ReturnValue_DualSourceBlending) {
     auto* str_ty =
-        ty.Struct(mod.symbols.New("Output"), {
-                                                 {
-                                                     mod.symbols.New("color1"),
-                                                     ty.f32(),
-                                                     core::type::StructMemberAttributes{
-                                                         /* location */ 0u,
-                                                         /* blend_src */ 0u,
-                                                         /* color */ std::nullopt,
-                                                         /* builtin */ std::nullopt,
-                                                         /* interpolation */ std::nullopt,
-                                                         /* invariant */ false,
-                                                     },
-                                                 },
-                                                 {
-                                                     mod.symbols.New("color2"),
-                                                     ty.f32(),
-                                                     core::type::StructMemberAttributes{
-                                                         /* location */ 0u,
-                                                         /* blend_src */ 1u,
-                                                         /* color */ std::nullopt,
-                                                         /* builtin */ std::nullopt,
-                                                         /* interpolation */ std::nullopt,
-                                                         /* invariant */ false,
-                                                     },
-                                                 },
-                                             });
+        ty->Struct(mod.symbols.New("Output"), {
+                                                  {
+                                                      mod.symbols.New("color1"),
+                                                      ty->f32(),
+                                                      core::type::StructMemberAttributes{
+                                                          /* location */ 0u,
+                                                          /* blend_src */ 0u,
+                                                          /* color */ std::nullopt,
+                                                          /* builtin */ std::nullopt,
+                                                          /* interpolation */ std::nullopt,
+                                                          /* invariant */ false,
+                                                      },
+                                                  },
+                                                  {
+                                                      mod.symbols.New("color2"),
+                                                      ty->f32(),
+                                                      core::type::StructMemberAttributes{
+                                                          /* location */ 0u,
+                                                          /* blend_src */ 1u,
+                                                          /* color */ std::nullopt,
+                                                          /* builtin */ std::nullopt,
+                                                          /* interpolation */ std::nullopt,
+                                                          /* invariant */ false,
+                                                      },
+                                                  },
+                                              });
 
     auto* ep = b.Function("foo", str_ty);
     ep->SetStage(core::ir::Function::PipelineStage::kFragment);
@@ -687,34 +687,34 @@ foo_outputs = struct @align(4) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, Struct_SharedByVertexAndFragment) {
-    auto* vec4f = ty.vec4<f32>();
-    auto* str_ty = ty.Struct(mod.symbols.New("Interface"),
-                             {
-                                 {
-                                     mod.symbols.New("position"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* vec4f = ty->vec4<f32>();
+    auto* str_ty = ty->Struct(mod.symbols.New("Interface"),
+                              {
+                                  {
+                                      mod.symbols.New("position"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
     // Vertex shader.
     {
@@ -830,36 +830,36 @@ frag_outputs = struct @align(16) {
 }
 
 TEST_F(MslWriter_ShaderIOTest, Struct_SharedWithBuffer) {
-    auto* vec4f = ty.vec4<f32>();
-    auto* str_ty = ty.Struct(mod.symbols.New("Outputs"),
-                             {
-                                 {
-                                     mod.symbols.New("position"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* vec4f = ty->vec4<f32>();
+    auto* str_ty = ty->Struct(mod.symbols.New("Outputs"),
+                              {
+                                  {
+                                      mod.symbols.New("position"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
-    auto* buffer = mod.root_block->Append(b.Var(ty.ptr(storage, str_ty, read)));
+    auto* buffer = mod.root_block->Append(b.Var(ty->ptr(storage, str_ty, read)));
 
     auto* ep = b.Function("vert", str_ty);
     ep->SetStage(core::ir::Function::PipelineStage::kVertex);
@@ -927,38 +927,38 @@ $B1: {  # root
 
 // Test that IO attributes are stripped from structures that are not used for the shader interface.
 TEST_F(MslWriter_ShaderIOTest, StructWithAttributes_NotUsedForInterface) {
-    auto* vec4f = ty.vec4<f32>();
-    auto* str_ty = ty.Struct(mod.symbols.New("Outputs"),
-                             {
-                                 {
-                                     mod.symbols.New("position"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ std::nullopt,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ core::BuiltinValue::kPosition,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                                 {
-                                     mod.symbols.New("color"),
-                                     vec4f,
-                                     core::type::StructMemberAttributes{
-                                         /* location */ 0u,
-                                         /* blend_src */ std::nullopt,
-                                         /* color */ std::nullopt,
-                                         /* builtin */ std::nullopt,
-                                         /* interpolation */ std::nullopt,
-                                         /* invariant */ false,
-                                     },
-                                 },
-                             });
+    auto* vec4f = ty->vec4<f32>();
+    auto* str_ty = ty->Struct(mod.symbols.New("Outputs"),
+                              {
+                                  {
+                                      mod.symbols.New("position"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ std::nullopt,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ core::BuiltinValue::kPosition,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                                  {
+                                      mod.symbols.New("color"),
+                                      vec4f,
+                                      core::type::StructMemberAttributes{
+                                          /* location */ 0u,
+                                          /* blend_src */ std::nullopt,
+                                          /* color */ std::nullopt,
+                                          /* builtin */ std::nullopt,
+                                          /* interpolation */ std::nullopt,
+                                          /* invariant */ false,
+                                      },
+                                  },
+                              });
 
-    auto* buffer = mod.root_block->Append(b.Var(ty.ptr(storage, str_ty, read)));
+    auto* buffer = mod.root_block->Append(b.Var(ty->ptr(storage, str_ty, read)));
 
-    auto* ep = b.Function("frag", ty.void_());
+    auto* ep = b.Function("frag", ty->void_());
     ep->SetStage(core::ir::Function::PipelineStage::kFragment);
 
     b.Append(ep->Block(), [&] {  //
@@ -1012,12 +1012,12 @@ $B1: {  # root
 }
 
 TEST_F(MslWriter_ShaderIOTest, EmitVertexPointSize) {
-    auto* ep = b.Function("foo", ty.vec4<f32>());
+    auto* ep = b.Function("foo", ty->vec4<f32>());
     ep->SetStage(core::ir::Function::PipelineStage::kVertex);
     ep->SetReturnBuiltin(core::BuiltinValue::kPosition);
 
     b.Append(ep->Block(), [&] {  //
-        b.Return(ep, b.Construct(ty.vec4<f32>(), 0.5_f));
+        b.Return(ep, b.Construct(ty->vec4<f32>(), 0.5_f));
     });
 
     auto* src = R"(

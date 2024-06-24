@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/texture.h"
 
 namespace tint::core::type {
@@ -48,7 +49,7 @@ class InputAttachment final : public Castable<InputAttachment, Texture> {
     bool Equals(const UniqueNode& other) const override;
 
     /// @returns the subtype of the input attachment
-    Type* type() const { return const_cast<Type*>(type_); }
+    Type* type() const { return const_cast<Type*>(type_.get()); }
 
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -59,7 +60,7 @@ class InputAttachment final : public Castable<InputAttachment, Texture> {
     InputAttachment* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const type_;
+    const raw_ptr<const Type> type_;
 };
 
 }  // namespace tint::core::type

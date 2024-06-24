@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/ir/constant.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/result/result.h"
@@ -58,7 +59,7 @@ class SampledImage final : public Castable<SampledImage, core::type::Type> {
     const core::type::Type* Image() const { return image_; }
 
   private:
-    const core::type::Type* image_;
+    raw_ptr<const core::type::Type> image_;
 };
 
 }  // namespace tint::spirv::type

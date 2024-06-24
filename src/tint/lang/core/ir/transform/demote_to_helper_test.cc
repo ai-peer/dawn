@@ -43,11 +43,11 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_DemoteToHelperTest = TransformTest;
 
 TEST_F(IR_DemoteToHelperTest, NoModify_NoDiscard) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetReturnLocation(0_u, {});
 
     b.Append(ep->Block(), [&] {  //
@@ -77,13 +77,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, DiscardInEntryPoint_WriteInEntryPoint) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -156,19 +156,19 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, DiscardInEntryPoint_WriteInHelper) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* helper = b.Function("foo", ty.void_());
+    auto* helper = b.Function("foo", ty->void_());
     b.Append(helper->Block(), [&] {
         b.Store(buffer, 42_i);
         b.Return(helper);
     });
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -178,7 +178,7 @@ TEST_F(IR_DemoteToHelperTest, DiscardInEntryPoint_WriteInHelper) {
             b.Discard();
             b.ExitIf(ifelse);
         });
-        b.Call(ty.void_(), helper);
+        b.Call(ty->void_(), helper);
         b.Return(ep, 0.5_f);
     });
 
@@ -253,12 +253,12 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, DiscardInHelper_WriteInEntryPoint) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* cond = b.FunctionParam("cond", ty.bool_());
-    auto* helper = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
+    auto* helper = b.Function("foo", ty->void_());
     helper->SetParams({cond});
     b.Append(helper->Block(), [&] {
         auto* ifelse = b.If(cond);
@@ -269,14 +269,14 @@ TEST_F(IR_DemoteToHelperTest, DiscardInHelper_WriteInEntryPoint) {
         b.Return(helper);
     });
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
     b.Append(ep->Block(), [&] {
-        b.Call(ty.void_(), helper, front_facing);
+        b.Call(ty->void_(), helper, front_facing);
         b.Store(buffer, 42_i);
         b.Return(ep, 0.5_f);
     });
@@ -352,12 +352,12 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, DiscardInHelper_WriteInHelper) {
-    auto* buffer = b.Var("buffer", ty.ptr<storage, i32>());
+    auto* buffer = b.Var("buffer", ty->ptr<storage, i32>());
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* cond = b.FunctionParam("cond", ty.bool_());
-    auto* helper = b.Function("foo", ty.void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
+    auto* helper = b.Function("foo", ty->void_());
     helper->SetParams({cond});
     b.Append(helper->Block(), [&] {
         auto* ifelse = b.If(cond);
@@ -369,14 +369,14 @@ TEST_F(IR_DemoteToHelperTest, DiscardInHelper_WriteInHelper) {
         b.Return(helper);
     });
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
     b.Append(ep->Block(), [&] {
-        b.Call(ty.void_(), helper, front_facing);
+        b.Call(ty->void_(), helper, front_facing);
         b.Return(ep, 0.5_f);
     });
 
@@ -451,15 +451,15 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, WriteToInvocationPrivateAddressSpace) {
-    auto* priv = mod.root_block->Append(b.Var("priv", ty.ptr<private_, i32>()));
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* priv = mod.root_block->Append(b.Var("priv", ty->ptr<private_, i32>()));
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
     b.Append(ep->Block(), [&] {
-        auto* func = b.Var("func", ty.ptr<function, i32>());
+        auto* func = b.Var("func", ty->ptr<function, i32>());
         auto* ifelse = b.If(front_facing);
         b.Append(ifelse->True(), [&] {  //
             b.Discard();
@@ -528,18 +528,18 @@ $B1: {  # root
 
 TEST_F(IR_DemoteToHelperTest, TextureStore) {
     auto format = core::TexelFormat::kR32Float;
-    auto* texture =
-        b.Var("texture", ty.ptr(core::AddressSpace::kHandle,
-                                ty.Get<core::type::StorageTexture>(
-                                    core::type::TextureDimension::k2d, format, core::Access::kWrite,
-                                    core::type::StorageTexture::SubtypeFor(format, ty))));
+    auto* texture = b.Var(
+        "texture", ty->ptr(core::AddressSpace::kHandle,
+                           ty->Get<core::type::StorageTexture>(
+                               core::type::TextureDimension::k2d, format, core::Access::kWrite,
+                               core::type::StorageTexture::SubtypeFor(format, *ty))));
     texture->SetBindingPoint(0, 0);
     mod.root_block->Append(texture);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* coord = b.FunctionParam("coord", ty.vec2<i32>());
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* coord = b.FunctionParam("coord", ty->vec2<i32>());
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing, coord});
     ep->SetReturnLocation(0_u, {});
 
@@ -549,8 +549,8 @@ TEST_F(IR_DemoteToHelperTest, TextureStore) {
             b.Discard();
             b.ExitIf(ifelse);
         });
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, b.Load(texture), coord,
-               b.Splat(b.ir.Types().vec4<f32>(), 0.5_f));
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, b.Load(texture), coord,
+               b.Splat(b.ir->Types().vec4<f32>(), 0.5_f));
         b.Return(ep, 0.5_f);
     });
 
@@ -615,13 +615,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, AtomicStore) {
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.atomic<i32>()));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->atomic<i32>()));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -631,7 +631,7 @@ TEST_F(IR_DemoteToHelperTest, AtomicStore) {
             b.Discard();
             b.ExitIf(ifelse);
         });
-        b.Call(ty.void_(), core::BuiltinFn::kAtomicStore, buffer, 42_i);
+        b.Call(ty->void_(), core::BuiltinFn::kAtomicStore, buffer, 42_i);
         b.Return(ep, 0.5_f);
     });
 
@@ -694,13 +694,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, AtomicAdd) {
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.atomic<i32>()));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->atomic<i32>()));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -710,8 +710,8 @@ TEST_F(IR_DemoteToHelperTest, AtomicAdd) {
             b.Discard();
             b.ExitIf(ifelse);
         });
-        auto* old = b.Call(ty.i32(), core::BuiltinFn::kAtomicAdd, buffer, 42_i);
-        b.Add(ty.i32(), old, 1_i);
+        auto* old = b.Call(ty->i32(), core::BuiltinFn::kAtomicAdd, buffer, 42_i);
+        b.Add(ty->i32(), old, 1_i);
         b.Return(ep, 0.5_f);
     });
 
@@ -777,13 +777,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_DemoteToHelperTest, AtomicCompareExchange) {
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.atomic<i32>()));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->atomic<i32>()));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* front_facing = b.FunctionParam("front_facing", ty.bool_());
+    auto* front_facing = b.FunctionParam("front_facing", ty->bool_());
     front_facing->SetBuiltin(BuiltinValue::kFrontFacing);
-    auto* ep = b.Function("ep", ty.f32(), Function::PipelineStage::kFragment);
+    auto* ep = b.Function("ep", ty->f32(), Function::PipelineStage::kFragment);
     ep->SetParams({front_facing});
     ep->SetReturnLocation(0_u, {});
 
@@ -794,9 +794,9 @@ TEST_F(IR_DemoteToHelperTest, AtomicCompareExchange) {
             b.ExitIf(ifelse);
         });
         auto* result =
-            b.Call(core::type::CreateAtomicCompareExchangeResult(ty, mod.symbols, ty.i32()),
+            b.Call(core::type::CreateAtomicCompareExchangeResult(*ty, mod.symbols, ty->i32()),
                    core::BuiltinFn::kAtomicCompareExchangeWeak, buffer, 0_i, 42_i);
-        b.Add(ty.i32(), b.Access(ty.i32(), result, 0_i), 1_i);
+        b.Add(ty->i32(), b.Access(ty->i32(), result, 0_i), 1_i);
         b.Return(ep, 0.5_f);
     });
 
@@ -875,7 +875,7 @@ $B1: {  # root
 
 // Test that we transform unreachable functions that discard (see crbug.com/tint/2052).
 TEST_F(IR_DemoteToHelperTest, UnreachableHelperThatDiscards) {
-    auto* helper = b.Function("foo", ty.void_());
+    auto* helper = b.Function("foo", ty->void_());
     b.Append(helper->Block(), [&] {
         b.Discard();
         b.Return(helper);

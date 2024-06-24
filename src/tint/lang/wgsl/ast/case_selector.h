@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/block_statement.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -57,7 +58,7 @@ class CaseSelector final : public Castable<CaseSelector, Node> {
     const CaseSelector* Clone(CloneContext& ctx) const override;
 
     /// The selector, nullptr for a default selector
-    const Expression* const expr = nullptr;
+    const raw_ptr<const Expression> expr = nullptr;
 };
 
 }  // namespace tint::ast

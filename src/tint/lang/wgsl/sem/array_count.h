@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/array_count.h"
 #include "src/tint/lang/wgsl/sem/value_expression.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
@@ -62,7 +63,7 @@ class NamedOverrideArrayCount final
     core::type::ArrayCount* Clone(core::type::CloneContext& ctx) const override;
 
     /// The `override` variable.
-    const GlobalVariable* variable;
+    raw_ptr<const GlobalVariable> variable;
 };
 
 /// The variant of an ArrayCount when the count is an unnamed override variable.
@@ -102,7 +103,7 @@ class UnnamedOverrideArrayCount final
     /// ```
     // The array count for `a` and `b` have equivalent AST expressions, but the types for `a` and
     // `b` must not compare equal.
-    const ValueExpression* expr;
+    raw_ptr<const ValueExpression> expr;
 };
 
 }  // namespace tint::sem

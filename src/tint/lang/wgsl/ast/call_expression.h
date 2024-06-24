@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_CALL_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_AST_CALL_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 #include "src/tint/utils/containers/vector.h"
 
@@ -67,7 +68,7 @@ class CallExpression final : public Castable<CallExpression, Expression> {
     const CallExpression* Clone(CloneContext& ctx) const override;
 
     /// The target function or type
-    const IdentifierExpression* target;
+    raw_ptr<const IdentifierExpression> target;
 
     /// The arguments
     const tint::Vector<const Expression*, 8> args;

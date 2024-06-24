@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -68,7 +69,7 @@ class StructMemberOffsetAttribute final : public Castable<StructMemberOffsetAttr
     const StructMemberOffsetAttribute* Clone(CloneContext& ctx) const override;
 
     /// The offset expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

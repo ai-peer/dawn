@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/index_accessor_expression.h"
 #include "src/tint/lang/wgsl/sem/accessor_expression.h"
 
@@ -70,7 +71,7 @@ class IndexAccessorExpression final : public Castable<IndexAccessorExpression, A
     ValueExpression const* Index() const { return index_; }
 
   private:
-    ValueExpression const* const index_;
+    const raw_ptr<const ValueExpression> index_;
 };
 
 }  // namespace tint::sem

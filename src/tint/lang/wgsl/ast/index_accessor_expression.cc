@@ -49,8 +49,8 @@ IndexAccessorExpression::~IndexAccessorExpression() = default;
 const IndexAccessorExpression* IndexAccessorExpression::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* obj = ctx.Clone(object);
-    auto* idx = ctx.Clone(index);
+    auto* obj = ctx.Clone(object.get());
+    auto* idx = ctx.Clone(index.get());
     return ctx.dst->create<IndexAccessorExpression>(src, obj, idx);
 }
 

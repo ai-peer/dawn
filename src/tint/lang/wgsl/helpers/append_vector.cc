@@ -30,6 +30,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/call.h"
 #include "src/tint/lang/wgsl/sem/value_constructor.h"
 #include "src/tint/lang/wgsl/sem/value_conversion.h"
@@ -43,8 +44,8 @@ namespace tint::wgsl {
 namespace {
 
 struct VectorConstructorInfo {
-    const sem::Call* call = nullptr;
-    const sem::ValueConstructor* ctor = nullptr;
+    raw_ptr<const sem::Call> call = nullptr;
+    raw_ptr<const sem::ValueConstructor> ctor = nullptr;
     explicit operator bool() const { return call != nullptr; }
 };
 VectorConstructorInfo AsVectorConstructor(const sem::ValueExpression* expr) {

@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_fn.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/constant/composite.h"
@@ -93,8 +94,8 @@ TINT_END_DISABLE_PROTOBUF_WARNINGS();
 namespace tint::core::ir::binary {
 namespace {
 struct Encoder {
-    const Module& mod_in_;
-    pb::Module& mod_out_;
+    const raw_ref<const Module> mod_in_;
+    const raw_ref<pb::Module> mod_out_;
     Hashmap<const core::ir::Function*, uint32_t, 32> functions_{};
     Hashmap<const core::ir::Block*, uint32_t, 32> blocks_{};
     Hashmap<const core::type::Type*, uint32_t, 32> types_{};
@@ -104,28 +105,28 @@ struct Encoder {
     void Encode() {
         // Encode all user-declared structures first. This is to ensure that the IR disassembly
         // (which prints structure types first) does not reorder after encoding and decoding.
-        for (auto* ty : mod_in_.Types()) {
+        for (auto* ty : mod_in_->Types()) {
             if (auto* str = ty->As<core::type::Struct>()) {
                 Type(str);
             }
         }
         Vector<pb::Function*, 8> fns_out;
-        for (auto& fn_in : mod_in_.functions) {
-            uint32_t id = static_cast<uint32_t>(mod_out_.functions().size());
-            fns_out.Push(mod_out_.add_functions());
+        for (auto& fn_in : mod_in_->functions) {
+            uint32_t id = static_cast<uint32_t>(mod_out_->functions().size());
+            fns_out.Push(mod_out_->add_functions());
             functions_.Add(fn_in, id);
         }
-        for (size_t i = 0, n = mod_in_.functions.Length(); i < n; i++) {
-            PopulateFunction(fns_out[i], mod_in_.functions[i]);
+        for (size_t i = 0, n = mod_in_->functions.Length(); i < n; i++) {
+            PopulateFunction(fns_out[i], mod_in_->functions[i]);
         }
-        mod_out_.set_root_block(Block(mod_in_.root_block));
+        mod_out_->set_root_block(Block(mod_in_->root_block));
     }
 
     ////////////////////////////////////////////////////////////////////////////
     // Functions
     ////////////////////////////////////////////////////////////////////////////
     void PopulateFunction(pb::Function* fn_out, const ir::Function* fn_in) {
-        if (auto name = mod_in_.NameOf(fn_in)) {
+        if (auto name = mod_in_->NameOf(fn_in)) {
             fn_out->set_name(name.Name());
         }
         fn_out->set_return_type(Type(fn_in->ReturnType()));
@@ -177,8 +178,8 @@ struct Encoder {
         TINT_ASSERT(block_in != nullptr);
 
         return blocks_.GetOrAdd(block_in, [&]() -> uint32_t {
-            auto id = static_cast<uint32_t>(mod_out_.blocks().size());
-            auto& block_out = *mod_out_.add_blocks();
+            auto id = static_cast<uint32_t>(mod_out_->blocks().size());
+            auto& block_out = *mod_out_->add_blocks();
             for (auto* inst : *block_in) {
                 Instruction(*block_out.add_instructions(), inst);
             }
@@ -396,8 +397,8 @@ struct Encoder {
                 },
                 TINT_ICE_ON_NO_MATCH);
 
-            mod_out_.mutable_types()->Add(std::move(type_out));
-            return static_cast<uint32_t>(mod_out_.types().size() - 1);
+            mod_out_->mutable_types()->Add(std::move(type_out));
+            return static_cast<uint32_t>(mod_out_->types().size() - 1);
         });
     }
 
@@ -511,8 +512,8 @@ struct Encoder {
             return 0;
         }
         return values_.GetOrAdd(value_in, [&] {
-            auto& value_out = *mod_out_.add_values();
-            auto id = static_cast<uint32_t>(mod_out_.values().size());
+            auto& value_out = *mod_out_->add_values();
+            auto id = static_cast<uint32_t>(mod_out_->values().size());
 
             tint::Switch(
                 value_in,
@@ -535,14 +536,14 @@ struct Encoder {
 
     void InstructionResult(pb::InstructionResult& res_out, const ir::InstructionResult* res_in) {
         res_out.set_type(Type(res_in->Type()));
-        if (auto name = mod_in_.NameOf(res_in); name.IsValid()) {
+        if (auto name = mod_in_->NameOf(res_in); name.IsValid()) {
             res_out.set_name(name.Name());
         }
     }
 
     void FunctionParameter(pb::FunctionParameter& param_out, const ir::FunctionParam* param_in) {
         param_out.set_type(Type(param_in->Type()));
-        if (auto name = mod_in_.NameOf(param_in); name.IsValid()) {
+        if (auto name = mod_in_->NameOf(param_in); name.IsValid()) {
             param_out.set_name(name.Name());
         }
         if (auto bp_in = param_in->BindingPoint()) {
@@ -563,7 +564,7 @@ struct Encoder {
 
     void BlockParameter(pb::BlockParameter& param_out, const ir::BlockParam* param_in) {
         param_out.set_type(Type(param_in->Type()));
-        if (auto name = mod_in_.NameOf(param_in); name.IsValid()) {
+        if (auto name = mod_in_->NameOf(param_in); name.IsValid()) {
             param_out.set_name(name.Name());
         }
     }
@@ -600,8 +601,8 @@ struct Encoder {
                 },
                 TINT_ICE_ON_NO_MATCH);
 
-            mod_out_.mutable_constant_values()->Add(std::move(constant_out));
-            return static_cast<uint32_t>(mod_out_.constant_values().size() - 1);
+            mod_out_->mutable_constant_values()->Add(std::move(constant_out));
+            return static_cast<uint32_t>(mod_out_->constant_values().size() - 1);
         });
     }
 
@@ -1149,7 +1150,7 @@ Result<Vector<std::byte, 0>> Encode(const Module& mod_in) {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     pb::Module mod_out;
-    Encoder{mod_in, mod_out}.Encode();
+    Encoder{raw_ref(mod_in), raw_ref(mod_out)}.Encode();
 
     Vector<std::byte, 0> buffer;
     size_t len = mod_out.ByteSizeLong();
@@ -1166,7 +1167,7 @@ Result<std::string> EncodeDebug(const Module& mod_in) {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     pb::Module mod_out;
-    Encoder{mod_in, mod_out}.Encode();
+    Encoder{raw_ref(mod_in), raw_ref(mod_out)}.Encode();
 
     return mod_out.DebugString();
 }

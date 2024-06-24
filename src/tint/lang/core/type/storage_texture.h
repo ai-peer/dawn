@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/texel_format.h"
 #include "src/tint/lang/core/type/texture.h"
@@ -87,7 +88,7 @@ class StorageTexture final : public Castable<StorageTexture, Texture> {
   private:
     core::TexelFormat const texel_format_;
     core::Access const access_;
-    const Type* const subtype_;
+    const raw_ptr<const Type> subtype_;
 };
 
 }  // namespace tint::core::type

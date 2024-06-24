@@ -42,11 +42,11 @@ BlockParam::BlockParam(const core::type::Type* ty) : type_(ty) {
 BlockParam::~BlockParam() = default;
 
 BlockParam* BlockParam::Clone(CloneContext& ctx) {
-    auto* new_bp = ctx.ir.allocators.values.Create<BlockParam>(type_);
+    auto* new_bp = ctx.ir->allocators.values.Create<BlockParam>(type_);
 
-    auto name = ctx.ir.NameOf(this);
+    auto name = ctx.ir->NameOf(this);
     if (name.IsValid()) {
-        ctx.ir.SetName(new_bp, ctx.ir.NameOf(this).Name());
+        ctx.ir->SetName(new_bp, ctx.ir->NameOf(this).Name());
     }
     return new_bp;
 }

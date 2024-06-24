@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -47,16 +48,16 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The robustness config.
-    const RobustnessConfig& config;
+    const raw_ref<const RobustnessConfig> config;
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
@@ -65,7 +66,7 @@ struct State {
         Vector<ir::LoadVectorElement*, 64> vector_loads;
         Vector<ir::StoreVectorElement*, 64> vector_stores;
         Vector<ir::CoreBuiltinCall*, 64> texture_calls;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             tint::Switch(
                 inst,  //
                 [&](ir::Access* access) {
@@ -76,7 +77,7 @@ struct State {
                             accesses.Push(access);
                         }
                     } else {
-                        if (config.clamp_value) {
+                        if (config->clamp_value) {
                             accesses.Push(access);
                         }
                     }
@@ -97,7 +98,7 @@ struct State {
                 },
                 [&](ir::CoreBuiltinCall* call) {
                     // Check if this is a texture builtin that needs to be clamped.
-                    if (config.clamp_texture) {
+                    if (config->clamp_texture) {
                         if (call->Func() == core::BuiltinFn::kTextureDimensions ||
                             call->Func() == core::BuiltinFn::kTextureLoad) {
                             texture_calls.Push(call);
@@ -139,7 +140,7 @@ struct State {
         }
 
         // TODO(jrprice): Handle config.bindings_ignored.
-        if (!config.bindings_ignored.empty()) {
+        if (!config->bindings_ignored.empty()) {
             // Also update robustness_fuzz.cc
             TINT_UNIMPLEMENTED();
         }
@@ -151,17 +152,17 @@ struct State {
     bool ShouldClamp(AddressSpace addrspace) {
         switch (addrspace) {
             case AddressSpace::kFunction:
-                return config.clamp_function;
+                return config->clamp_function;
             case AddressSpace::kPrivate:
-                return config.clamp_private;
+                return config->clamp_private;
             case AddressSpace::kPushConstant:
-                return config.clamp_push_constant;
+                return config->clamp_push_constant;
             case AddressSpace::kStorage:
-                return config.clamp_storage;
+                return config->clamp_storage;
             case AddressSpace::kUniform:
-                return config.clamp_uniform;
+                return config->clamp_uniform;
             case AddressSpace::kWorkgroup:
-                return config.clamp_workgroup;
+                return config->clamp_workgroup;
             case AddressSpace::kUndefined:
             case AddressSpace::kPixelLocal:
             case AddressSpace::kHandle:
@@ -180,9 +181,9 @@ struct State {
             return value;
         }
 
-        const type::Type* type = ty.u32();
+        const type::Type* type = ty->u32();
         if (auto* vec = value->Type()->As<type::Vector>()) {
-            type = ty.vec(type, vec->Width());
+            type = ty->vec(type, vec->Width());
         }
         return b.Convert(type, value)->Result(0);
     }
@@ -203,7 +204,8 @@ struct State {
                                                   const_limit->Value()->ValueAs<uint32_t>())));
         } else {
             // Clamp it to the dynamic limit.
-            clamped_idx = b.Call(ty.u32(), core::BuiltinFn::kMin, CastToU32(idx), limit)->Result(0);
+            clamped_idx =
+                b.Call(ty->u32(), core::BuiltinFn::kMin, CastToU32(idx), limit)->Result(0);
         }
 
         // Replace the index operand with the clamped version.
@@ -236,7 +238,7 @@ struct State {
                     TINT_ASSERT(arr->Count()->Is<type::RuntimeArrayCount>());
 
                     // Skip clamping runtime-sized array indices if requested.
-                    if (config.disable_runtime_sized_array_index_clamping) {
+                    if (config->disable_runtime_sized_array_index_clamping) {
                         return nullptr;
                     }
 
@@ -247,13 +249,13 @@ struct State {
                         auto* base_ptr = object->Type()->As<type::Pointer>();
                         TINT_ASSERT(base_ptr != nullptr);
                         TINT_ASSERT(i == 1);
-                        auto* arr_ptr = ty.ptr(base_ptr->AddressSpace(), arr, base_ptr->Access());
+                        auto* arr_ptr = ty->ptr(base_ptr->AddressSpace(), arr, base_ptr->Access());
                         object = b.Access(arr_ptr, object, indices[0])->Result(0);
                     }
 
                     // Use the `arrayLength` builtin to get the limit of a runtime-sized array.
-                    auto* length = b.Call(ty.u32(), core::BuiltinFn::kArrayLength, object);
-                    return b.Subtract(ty.u32(), length, b.Constant(1_u))->Result(0);
+                    auto* length = b.Call(ty->u32(), core::BuiltinFn::kArrayLength, object);
+                    return b.Subtract(ty->u32(), length, b.Constant(1_u))->Result(0);
                 });
 
             // If there's a dynamic limit that needs enforced, clamp the index operand.
@@ -263,7 +265,7 @@ struct State {
 
             // Get the type that this index produces.
             type = const_idx ? type->Element(const_idx->Value()->ValueAs<u32>())
-                             : type->Elements().type;
+                             : type->Elements().type.get();
         }
     }
 
@@ -278,19 +280,19 @@ struct State {
         // Keep hold of the clamped value to use for clamping the coordinates.
         Value* clamped_level = nullptr;
         auto clamp_level = [&](uint32_t idx) {
-            auto* num_levels = b.Call(ty.u32(), core::BuiltinFn::kTextureNumLevels, args[0]);
-            auto* limit = b.Subtract(ty.u32(), num_levels, 1_u);
+            auto* num_levels = b.Call(ty->u32(), core::BuiltinFn::kTextureNumLevels, args[0]);
+            auto* limit = b.Subtract(ty->u32(), num_levels, 1_u);
             clamped_level =
-                b.Call(ty.u32(), core::BuiltinFn::kMin, CastToU32(args[idx]), limit)->Result(0);
+                b.Call(ty->u32(), core::BuiltinFn::kMin, CastToU32(args[idx]), limit)->Result(0);
             call->SetOperand(CoreBuiltinCall::kArgsOperandOffset + idx, clamped_level);
         };
 
         // Helper for clamping the coordinates.
         auto clamp_coords = [&](uint32_t idx) {
-            const type::Type* type = ty.u32();
+            const type::Type* type = ty->u32();
             auto* one = b.Constant(1_u);
             if (auto* vec = args[idx]->Type()->As<type::Vector>()) {
-                type = ty.vec(type, vec->Width());
+                type = ty->vec(type, vec->Width());
                 one = b.Splat(type, one);
             }
             auto* dims = clamped_level ? b.Call(type, core::BuiltinFn::kTextureDimensions, args[0],
@@ -304,11 +306,11 @@ struct State {
 
         // Helper for clamping the array index.
         auto clamp_array_index = [&](uint32_t idx) {
-            auto* num_layers = b.Call(ty.u32(), core::BuiltinFn::kTextureNumLayers, args[0]);
-            auto* limit = b.Subtract(ty.u32(), num_layers, 1_u);
+            auto* num_layers = b.Call(ty->u32(), core::BuiltinFn::kTextureNumLayers, args[0]);
+            auto* limit = b.Subtract(ty->u32(), num_layers, 1_u);
             call->SetOperand(
                 CoreBuiltinCall::kArgsOperandOffset + idx,
-                b.Call(ty.u32(), core::BuiltinFn::kMin, CastToU32(args[idx]), limit)->Result(0));
+                b.Call(ty->u32(), core::BuiltinFn::kMin, CastToU32(args[idx]), limit)->Result(0));
         };
 
         // Select which arguments to clamp based on the function overload.
@@ -351,7 +353,7 @@ Result<SuccessType> Robustness(Module& ir, const RobustnessConfig& config) {
         return result;
     }
 
-    State{config, ir}.Process();
+    State{raw_ref(config), raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

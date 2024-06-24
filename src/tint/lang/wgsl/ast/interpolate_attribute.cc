@@ -52,8 +52,8 @@ std::string InterpolateAttribute::Name() const {
 const InterpolateAttribute* InterpolateAttribute::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* ty = ctx.Clone(type);
-    auto* smpl = ctx.Clone(sampling);
+    auto* ty = ctx.Clone(type.get());
+    auto* smpl = ctx.Clone(sampling.get());
     return ctx.dst->create<InterpolateAttribute>(src, ty, smpl);
 }
 

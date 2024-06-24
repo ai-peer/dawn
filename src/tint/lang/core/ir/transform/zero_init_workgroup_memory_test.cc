@@ -43,13 +43,13 @@ class IR_ZeroInitWorkgroupMemoryTest : public TransformTest {
                              uint32_t wgsize_x,
                              uint32_t wgsize_y,
                              uint32_t wgsize_z) {
-        auto* func = b.Function(name, ty.void_(), Function::PipelineStage::kCompute);
+        auto* func = b.Function(name, ty->void_(), Function::PipelineStage::kCompute);
         func->SetWorkgroupSize(wgsize_x, wgsize_y, wgsize_z);
         return func;
     }
 
     Var* MakeVar(const char* name, const type::Type* store_type) {
-        auto* var = b.Var(name, ty.ptr(workgroup, store_type));
+        auto* var = b.Var(name, ty->ptr(workgroup, store_type));
         mod.root_block->Append(var);
         return var;
     }
@@ -75,7 +75,7 @@ TEST_F(IR_ZeroInitWorkgroupMemoryTest, NoRootBlock) {
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, WorkgroupVarUnused) {
-    MakeVar("wgvar", ty.i32());
+    MakeVar("wgvar", ty->i32());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -103,7 +103,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NonWorkgroupVar) {
-    auto* var = b.Var("pvar", ty.ptr(private_, ty.bool_()));
+    auto* var = b.Var("pvar", ty->ptr(private_, ty->bool_()));
     mod.root_block->Append(var);
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
@@ -145,7 +145,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarBool) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -194,7 +194,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarI32) {
-    auto* var = MakeVar("wgvar", ty.i32());
+    auto* var = MakeVar("wgvar", ty->i32());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -243,7 +243,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarU32) {
-    auto* var = MakeVar("wgvar", ty.u32());
+    auto* var = MakeVar("wgvar", ty->u32());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -292,7 +292,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarF32) {
-    auto* var = MakeVar("wgvar", ty.f32());
+    auto* var = MakeVar("wgvar", ty->f32());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -341,7 +341,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarF16) {
-    auto* var = MakeVar("wgvar", ty.f16());
+    auto* var = MakeVar("wgvar", ty->f16());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -390,11 +390,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, AtomicI32) {
-    auto* var = MakeVar("wgvar", ty.atomic<i32>());
+    auto* var = MakeVar("wgvar", ty->atomic<i32>());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
-        b.Call(ty.i32(), core::BuiltinFn::kAtomicLoad, var);
+        b.Call(ty->i32(), core::BuiltinFn::kAtomicLoad, var);
         b.Return(func);
     });
 
@@ -439,11 +439,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, AtomicU32) {
-    auto* var = MakeVar("wgvar", ty.atomic<u32>());
+    auto* var = MakeVar("wgvar", ty->atomic<u32>());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
-        b.Call(ty.u32(), core::BuiltinFn::kAtomicLoad, var);
+        b.Call(ty->u32(), core::BuiltinFn::kAtomicLoad, var);
         b.Return(func);
     });
 
@@ -488,7 +488,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ArrayOfI32) {
-    auto* var = MakeVar("wgvar", ty.array<i32, 4>());
+    auto* var = MakeVar("wgvar", ty->array<i32, 4>());
 
     auto* func = MakeEntryPoint("main", 11, 2, 3);
     b.Append(func->Block(), [&] {  //
@@ -550,7 +550,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ArrayOfArrayOfU32) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array<u32, 5>(), 7));
+    auto* var = MakeVar("wgvar", ty->array(ty->array<u32, 5>(), 7));
 
     auto* func = MakeEntryPoint("main", 11, 2, 3);
     b.Append(func->Block(), [&] {  //
@@ -614,7 +614,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ArrayOfArrayOfArray) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array(ty.array<i32, 7>(), 5), 3));
+    auto* var = MakeVar("wgvar", ty->array(ty->array(ty->array<i32, 7>(), 5), 3));
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -680,7 +680,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedArrayInnerSizeOne) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array(ty.array<i32, 1>(), 5), 3));
+    auto* var = MakeVar("wgvar", ty->array(ty->array(ty->array<i32, 1>(), 5), 3));
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -744,7 +744,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedArrayMiddleSizeOne) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array(ty.array<i32, 3>(), 1), 5));
+    auto* var = MakeVar("wgvar", ty->array(ty->array(ty->array<i32, 3>(), 1), 5));
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -808,7 +808,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedArrayOuterSizeOne) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array(ty.array<i32, 3>(), 5), 1));
+    auto* var = MakeVar("wgvar", ty->array(ty->array(ty->array<i32, 3>(), 5), 1));
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -872,7 +872,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedArrayTotalSizeOne) {
-    auto* var = MakeVar("wgvar", ty.array(ty.array<i32, 1>(), 1));
+    auto* var = MakeVar("wgvar", ty->array(ty->array<i32, 1>(), 1));
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -922,11 +922,11 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, StructOfScalars) {
-    auto* s = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                         {mod.symbols.New("a"), ty.i32()},
-                                                         {mod.symbols.New("b"), ty.u32()},
-                                                         {mod.symbols.New("c"), ty.f32()},
-                                                     });
+    auto* s = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                          {mod.symbols.New("a"), ty->i32()},
+                                                          {mod.symbols.New("b"), ty->u32()},
+                                                          {mod.symbols.New("c"), ty->f32()},
+                                                      });
     auto* var = MakeVar("wgvar", s);
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
@@ -988,15 +988,15 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedStructOfScalars) {
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("b"), ty.u32()},
-                                                      });
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("c"), ty.f32()},
-                                                          {mod.symbols.New("inner"), inner},
-                                                          {mod.symbols.New("d"), ty.bool_()},
-                                                      });
+    auto* inner = ty->Struct(mod.symbols.New("Inner"), {
+                                                           {mod.symbols.New("a"), ty->i32()},
+                                                           {mod.symbols.New("b"), ty->u32()},
+                                                       });
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("c"), ty->f32()},
+                                                           {mod.symbols.New("inner"), inner},
+                                                           {mod.symbols.New("d"), ty->bool_()},
+                                                       });
     auto* var = MakeVar("wgvar", outer);
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
@@ -1068,15 +1068,16 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, NestedStructOfScalarsWithAtomic) {
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("b"), ty.atomic<u32>()},
-                                                      });
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("c"), ty.f32()},
-                                                          {mod.symbols.New("inner"), inner},
-                                                          {mod.symbols.New("d"), ty.bool_()},
-                                                      });
+    auto* inner =
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.New("a"), ty->i32()},
+                                                 {mod.symbols.New("b"), ty->atomic<u32>()},
+                                             });
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("c"), ty->f32()},
+                                                           {mod.symbols.New("inner"), inner},
+                                                           {mod.symbols.New("d"), ty->bool_()},
+                                                       });
     auto* var = MakeVar("wgvar", outer);
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
@@ -1155,17 +1156,18 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ArrayOfStructOfArrayOfStructWithAtomic) {
-    auto* inner = ty.Struct(mod.symbols.New("Inner"), {
-                                                          {mod.symbols.New("a"), ty.i32()},
-                                                          {mod.symbols.New("b"), ty.atomic<u32>()},
-                                                      });
+    auto* inner =
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.New("a"), ty->i32()},
+                                                 {mod.symbols.New("b"), ty->atomic<u32>()},
+                                             });
     auto* outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.New("c"), ty.f32()},
-                                                {mod.symbols.New("inner"), ty.array(inner, 13)},
-                                                {mod.symbols.New("d"), ty.bool_()},
-                                            });
-    auto* var = MakeVar("wgvar", ty.array(outer, 7));
+        ty->Struct(mod.symbols.New("Outer"), {
+                                                 {mod.symbols.New("c"), ty->f32()},
+                                                 {mod.symbols.New("inner"), ty->array(inner, 13)},
+                                                 {mod.symbols.New("d"), ty->bool_()},
+                                             });
+    auto* var = MakeVar("wgvar", ty->array(outer, 7));
 
     auto* func = MakeEntryPoint("main", 7, 3, 2);
     b.Append(func->Block(), [&] {  //
@@ -1277,9 +1279,9 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, MultipleVariables_DifferentIterationCounts) {
-    auto* var_a = MakeVar("var_a", ty.bool_());
-    auto* var_b = MakeVar("var_b", ty.array<i32, 4>());
-    auto* var_c = MakeVar("var_c", ty.array(ty.array<u32, 5>(), 7));
+    auto* var_a = MakeVar("var_a", ty->bool_());
+    auto* var_b = MakeVar("var_b", ty->array<i32, 4>());
+    auto* var_c = MakeVar("var_c", ty->array(ty->array<u32, 5>(), 7));
 
     auto* func = MakeEntryPoint("main", 11, 2, 3);
     b.Append(func->Block(), [&] {  //
@@ -1380,10 +1382,10 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, MultipleVariables_SharedIterationCounts) {
-    auto* var_a = MakeVar("var_a", ty.bool_());
-    auto* var_b = MakeVar("var_b", ty.i32());
-    auto* var_c = MakeVar("var_c", ty.array<i32, 42>());
-    auto* var_d = MakeVar("var_d", ty.array(ty.array<u32, 6>(), 7));
+    auto* var_a = MakeVar("var_a", ty->bool_());
+    auto* var_b = MakeVar("var_b", ty->i32());
+    auto* var_c = MakeVar("var_c", ty->array<i32, 42>());
+    auto* var_d = MakeVar("var_d", ty->array(ty->array<u32, 6>(), 7));
 
     auto* func = MakeEntryPoint("main", 11, 2, 3);
     b.Append(func->Block(), [&] {  //
@@ -1472,12 +1474,12 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ExistingLocalInvocationIndex) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
-    auto* global_id = b.FunctionParam("global_id", ty.vec4<u32>());
+    auto* global_id = b.FunctionParam("global_id", ty->vec4<u32>());
     global_id->SetBuiltin(BuiltinValue::kGlobalInvocationId);
-    auto* index = b.FunctionParam("index", ty.u32());
+    auto* index = b.FunctionParam("index", ty->u32());
     index->SetBuiltin(BuiltinValue::kLocalInvocationIndex);
     func->SetParams({global_id, index});
     b.Append(func->Block(), [&] {  //
@@ -1526,35 +1528,36 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ExistingLocalInvocationIndexInStruct) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"),
-                                {
-                                    {
-                                        mod.symbols.New("global_id"),
-                                        ty.vec3<u32>(),
-                                        core::type::StructMemberAttributes{
-                                            /* location */ std::nullopt,
-                                            /* index */ std::nullopt,
-                                            /* color */ std::nullopt,
-                                            /* builtin */ core::BuiltinValue::kGlobalInvocationId,
-                                            /* interpolation */ std::nullopt,
-                                            /* invariant */ false,
-                                        },
-                                    },
-                                    {
-                                        mod.symbols.New("index"),
-                                        ty.u32(),
-                                        core::type::StructMemberAttributes{
-                                            /* location */ std::nullopt,
-                                            /* index */ std::nullopt,
-                                            /* color */ std::nullopt,
-                                            /* builtin */ core::BuiltinValue::kLocalInvocationIndex,
-                                            /* interpolation */ std::nullopt,
-                                            /* invariant */ false,
-                                        },
-                                    },
-                                });
+    auto* structure =
+        ty->Struct(mod.symbols.New("MyStruct"),
+                   {
+                       {
+                           mod.symbols.New("global_id"),
+                           ty->vec3<u32>(),
+                           core::type::StructMemberAttributes{
+                               /* location */ std::nullopt,
+                               /* index */ std::nullopt,
+                               /* color */ std::nullopt,
+                               /* builtin */ core::BuiltinValue::kGlobalInvocationId,
+                               /* interpolation */ std::nullopt,
+                               /* invariant */ false,
+                           },
+                       },
+                       {
+                           mod.symbols.New("index"),
+                           ty->u32(),
+                           core::type::StructMemberAttributes{
+                               /* location */ std::nullopt,
+                               /* index */ std::nullopt,
+                               /* color */ std::nullopt,
+                               /* builtin */ core::BuiltinValue::kLocalInvocationIndex,
+                               /* interpolation */ std::nullopt,
+                               /* invariant */ false,
+                           },
+                       },
+                   });
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     func->SetParams({b.FunctionParam("params", structure)});
     b.Append(func->Block(), [&] {  //
@@ -1614,7 +1617,7 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, UseInsideNestedBlock) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
     auto* func = MakeEntryPoint("main", 1, 1, 1);
     b.Append(func->Block(), [&] {  //
@@ -1715,9 +1718,9 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, UseInsideIndirectFunctionCall) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     b.Append(foo->Block(), [&] {  //
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {  //
@@ -1730,11 +1733,11 @@ TEST_F(IR_ZeroInitWorkgroupMemoryTest, UseInsideIndirectFunctionCall) {
         b.Return(foo);
     });
 
-    auto* bar = b.Function("foo", ty.void_());
+    auto* bar = b.Function("foo", ty->void_());
     b.Append(bar->Block(), [&] {  //
         auto* ifelse = b.If(true);
         b.Append(ifelse->True(), [&] {  //
-            b.Call(ty.void_(), foo);
+            b.Call(ty->void_(), foo);
             b.ExitIf(ifelse);
         });
         b.Return(bar);
@@ -1751,7 +1754,7 @@ TEST_F(IR_ZeroInitWorkgroupMemoryTest, UseInsideIndirectFunctionCall) {
                 b.Append(loop->Body(), [&] {  //
                     b.Continue(loop);
                     b.Append(loop->Continuing(), [&] {  //
-                        b.Call(ty.void_(), bar);
+                        b.Call(ty->void_(), bar);
                         b.BreakIf(loop, true);
                     });
                 });
@@ -1889,9 +1892,9 @@ $B1: {  # root
 }
 
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, MultipleEntryPoints_SameVarViaHelper) {
-    auto* var = MakeVar("wgvar", ty.bool_());
+    auto* var = MakeVar("wgvar", ty->bool_());
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     b.Append(foo->Block(), [&] {  //
         auto* loop = b.Loop();
         b.Append(loop->Body(), [&] {  //
@@ -1906,13 +1909,13 @@ TEST_F(IR_ZeroInitWorkgroupMemoryTest, MultipleEntryPoints_SameVarViaHelper) {
 
     auto* ep1 = MakeEntryPoint("ep1", 1, 1, 1);
     b.Append(ep1->Block(), [&] {  //
-        b.Call(ty.void_(), foo);
+        b.Call(ty->void_(), foo);
         b.Return(ep1);
     });
 
     auto* ep2 = MakeEntryPoint("ep2", 1, 1, 1);
     b.Append(ep2->Block(), [&] {  //
-        b.Call(ty.void_(), foo);
+        b.Call(ty->void_(), foo);
         b.Return(ep2);
     });
 

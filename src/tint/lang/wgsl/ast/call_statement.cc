@@ -48,7 +48,7 @@ CallStatement::~CallStatement() = default;
 const CallStatement* CallStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* call = ctx.Clone(expr);
+    auto* call = ctx.Clone(expr.get());
     return ctx.dst->create<CallStatement>(src, call);
 }
 

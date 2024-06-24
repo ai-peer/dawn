@@ -65,9 +65,9 @@ IfStatement::~IfStatement() = default;
 const IfStatement* IfStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* cond = ctx.Clone(condition);
-    auto* b = ctx.Clone(body);
-    auto* el = ctx.Clone(else_statement);
+    auto* cond = ctx.Clone(condition.get());
+    auto* b = ctx.Clone(body.get());
+    auto* el = ctx.Clone(else_statement.get());
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<IfStatement>(src, cond, b, el, std::move(attrs));
 }

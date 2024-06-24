@@ -36,12 +36,12 @@ using namespace tint::core::fluent_types;     // NOLINT
 using namespace tint::core::number_suffixes;  // NOLINT
 
 TEST_F(MslWriterTest, WorkgroupAllocations) {
-    auto* var_a = b.Var("a", ty.ptr<workgroup, i32>());
-    auto* var_b = b.Var("b", ty.ptr<workgroup, i32>());
+    auto* var_a = b.Var("a", ty->ptr<workgroup, i32>());
+    auto* var_b = b.Var("b", ty->ptr<workgroup, i32>());
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* foo = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* foo = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                            std::array<uint32_t, 3>{1u, 1u, 1u});
     b.Append(foo->Block(), [&] {
         auto* load_a = b.Load(var_a);
@@ -51,7 +51,7 @@ TEST_F(MslWriterTest, WorkgroupAllocations) {
     });
 
     // No allocations, but still needs an entry in the map.
-    auto* bar = b.Function("bar", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* bar = b.Function("bar", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                            std::array<uint32_t, 3>{1u, 1u, 1u});
     b.Append(bar->Block(), [&] { b.Return(bar); });
 
@@ -94,11 +94,11 @@ kernel void foo(uint tint_local_index [[thread_index_in_threadgroup]], threadgro
 }
 
 TEST_F(MslWriterTest, NeedsStorageBufferSizes_False) {
-    auto* var = b.Var("a", ty.ptr<storage, array<u32>>());
+    auto* var = b.Var("a", ty->ptr<storage, array<u32>>());
     var->SetBindingPoint(0, 0);
     mod.root_block->Append(var);
 
-    auto* foo = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* foo = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                            std::array<uint32_t, 3>{1u, 1u, 1u});
     b.Append(foo->Block(), [&] {
         b.Store(b.Access<ptr<storage, u32>>(var, 0_u), 42_u);
@@ -138,11 +138,11 @@ kernel void foo(device tint_array<uint, 1>* a [[buffer(0)]]) {
 }
 
 TEST_F(MslWriterTest, NeedsStorageBufferSizes_True) {
-    auto* var = b.Var("a", ty.ptr<storage, array<u32>>());
+    auto* var = b.Var("a", ty->ptr<storage, array<u32>>());
     var->SetBindingPoint(0, 0);
     mod.root_block->Append(var);
 
-    auto* foo = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* foo = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                            std::array<uint32_t, 3>{1u, 1u, 1u});
     b.Append(foo->Block(), [&] {
         auto* length = b.Call<u32>(core::BuiltinFn::kArrayLength, var);

@@ -84,7 +84,7 @@ TEST_F(IRToProgramTest, EmptyModule) {
 }
 
 TEST_F(IRToProgramTest, SingleFunction_Return) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     fn->Block()->Append(b.Return(fn));
 
@@ -95,7 +95,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, SingleFunction_Return_i32) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
 
     fn->Block()->Append(b.Return(fn, 42_i));
 
@@ -107,9 +107,9 @@ fn f() -> i32 {
 }
 
 TEST_F(IRToProgramTest, SingleFunction_Parameters) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* i = b.FunctionParam("i", ty.i32());
-    auto* u = b.FunctionParam("u", ty.u32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* i = b.FunctionParam("i", ty->i32());
+    auto* u = b.FunctionParam("u", ty->u32());
     fn->SetParams({i, u});
 
     fn->Block()->Append(b.Return(fn, i));
@@ -122,7 +122,7 @@ fn f(i : i32, u : u32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_Compute) {
-    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* fn = b.Function("f", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                           std::array{3u, 4u, 5u});
 
     fn->Block()->Append(b.Return(fn));
@@ -135,7 +135,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_Fragment) {
-    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* fn = b.Function("f", ty->void_(), core::ir::Function::PipelineStage::kFragment);
 
     fn->Block()->Append(b.Return(fn));
 
@@ -147,7 +147,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_Vertex) {
-    auto* fn = b.Function("f", ty.vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
+    auto* fn = b.Function("f", ty->vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
     fn->SetReturnBuiltin(core::BuiltinValue::kPosition);
 
     fn->Block()->Append(b.Return(fn, b.Splat<vec4<f32>>(0_f)));
@@ -161,7 +161,7 @@ fn f() -> @builtin(position) vec4<f32> {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_FragDepth) {
-    auto* fn = b.Function("f", ty.f32(), core::ir::Function::PipelineStage::kFragment);
+    auto* fn = b.Function("f", ty->f32(), core::ir::Function::PipelineStage::kFragment);
     fn->SetReturnBuiltin(core::BuiltinValue::kFragDepth);
 
     fn->Block()->Append(b.Return(fn, b.Constant(0.5_f)));
@@ -175,7 +175,7 @@ fn f() -> @builtin(frag_depth) f32 {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_SampleMask) {
-    auto* fn = b.Function("f", ty.u32(), core::ir::Function::PipelineStage::kFragment);
+    auto* fn = b.Function("f", ty->u32(), core::ir::Function::PipelineStage::kFragment);
     fn->SetReturnBuiltin(core::BuiltinValue::kSampleMask);
 
     fn->Block()->Append(b.Return(fn, b.Constant(3_u)));
@@ -189,7 +189,7 @@ fn f() -> @builtin(sample_mask) u32 {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_Invariant) {
-    auto* fn = b.Function("f", ty.vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
+    auto* fn = b.Function("f", ty->vec4<f32>(), core::ir::Function::PipelineStage::kVertex);
     fn->SetReturnBuiltin(core::BuiltinValue::kPosition);
     fn->SetReturnInvariant(true);
 
@@ -204,7 +204,7 @@ fn f() -> @builtin(position) @invariant vec4<f32> {
 }
 
 TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_Location) {
-    auto* fn = b.Function("f", ty.vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
+    auto* fn = b.Function("f", ty->vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
     fn->SetReturnLocation(1, std::nullopt);
 
     fn->Block()->Append(b.Return(fn, b.Splat<vec4<f32>>(0_f)));
@@ -228,16 +228,16 @@ core::ir::FunctionParam* MakeBuiltinParam(core::ir::Builder& b,
 }  // namespace
 
 TEST_F(IRToProgramTest, EntryPoint_ParameterAttribute_Compute) {
-    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* fn = b.Function("f", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                           std::array{3u, 4u, 5u});
     fn->SetParams({
-        MakeBuiltinParam(b, ty.vec3<u32>(), core::BuiltinValue::kLocalInvocationId),
-        MakeBuiltinParam(b, ty.u32(), core::BuiltinValue::kLocalInvocationIndex),
-        MakeBuiltinParam(b, ty.vec3<u32>(), core::BuiltinValue::kGlobalInvocationId),
-        MakeBuiltinParam(b, ty.vec3<u32>(), core::BuiltinValue::kWorkgroupId),
-        MakeBuiltinParam(b, ty.vec3<u32>(), core::BuiltinValue::kNumWorkgroups),
-        MakeBuiltinParam(b, ty.u32(), core::BuiltinValue::kSubgroupInvocationId),
-        MakeBuiltinParam(b, ty.u32(), core::BuiltinValue::kSubgroupSize),
+        MakeBuiltinParam(b, ty->vec3<u32>(), core::BuiltinValue::kLocalInvocationId),
+        MakeBuiltinParam(b, ty->u32(), core::BuiltinValue::kLocalInvocationIndex),
+        MakeBuiltinParam(b, ty->vec3<u32>(), core::BuiltinValue::kGlobalInvocationId),
+        MakeBuiltinParam(b, ty->vec3<u32>(), core::BuiltinValue::kWorkgroupId),
+        MakeBuiltinParam(b, ty->vec3<u32>(), core::BuiltinValue::kNumWorkgroups),
+        MakeBuiltinParam(b, ty->u32(), core::BuiltinValue::kSubgroupInvocationId),
+        MakeBuiltinParam(b, ty->u32(), core::BuiltinValue::kSubgroupSize),
     });
 
     fn->Block()->Append(b.Return(fn));
@@ -252,11 +252,11 @@ fn f(@builtin(local_invocation_id) v : vec3<u32>, @builtin(local_invocation_inde
 }
 
 TEST_F(IRToProgramTest, EntryPoint_ParameterAttribute_Fragment) {
-    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* fn = b.Function("f", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     fn->SetParams({
-        MakeBuiltinParam(b, ty.bool_(), core::BuiltinValue::kFrontFacing),
-        MakeBuiltinParam(b, ty.u32(), core::BuiltinValue::kSampleIndex),
-        MakeBuiltinParam(b, ty.u32(), core::BuiltinValue::kSampleMask),
+        MakeBuiltinParam(b, ty->bool_(), core::BuiltinValue::kFrontFacing),
+        MakeBuiltinParam(b, ty->u32(), core::BuiltinValue::kSampleIndex),
+        MakeBuiltinParam(b, ty->u32(), core::BuiltinValue::kSampleMask),
     });
 
     fn->Block()->Append(b.Return(fn));
@@ -272,11 +272,11 @@ fn f(@builtin(front_facing) v : bool, @builtin(sample_index) v_1 : u32, @builtin
 // Unary ops
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, UnaryOp_Negate) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Negation(ty.i32(), i)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Negation(ty->i32(), i)); });
 
     EXPECT_WGSL(R"(
 fn f(i : i32) -> i32 {
@@ -286,11 +286,11 @@ fn f(i : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, UnaryOp_Complement) {
-    auto* fn = b.Function("f", ty.u32());
-    auto* i = b.FunctionParam("i", ty.u32());
+    auto* fn = b.Function("f", ty->u32());
+    auto* i = b.FunctionParam("i", ty->u32());
     fn->SetParams({i});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Complement(ty.u32(), i)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Complement(ty->u32(), i)); });
 
     EXPECT_WGSL(R"(
 fn f(i : u32) -> u32 {
@@ -300,11 +300,11 @@ fn f(i : u32) -> u32 {
 }
 
 TEST_F(IRToProgramTest, UnaryOp_Not) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* i = b.FunctionParam("b", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* i = b.FunctionParam("b", ty->bool_());
     fn->SetParams({i});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Not(ty.bool_(), i)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Not(ty->bool_(), i)); });
 
     EXPECT_WGSL(R"(
 fn f(b : bool) -> bool {
@@ -317,12 +317,12 @@ fn f(b : bool) -> bool {
 // Binary ops
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, BinaryOp_Add) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Add(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Add(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -332,12 +332,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Subtract) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Subtract(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Subtract(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -347,12 +347,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Multiply) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Multiply(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Multiply(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -362,12 +362,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Divide) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Divide(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Divide(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -377,12 +377,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Modulo) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Modulo(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Modulo(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -392,12 +392,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_And) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.And(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.And(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -407,12 +407,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Or) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Or(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Or(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -422,12 +422,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Xor) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Xor(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Xor(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> i32 {
@@ -437,12 +437,12 @@ fn f(a : i32, b : i32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_Equal) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.Equal(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.Equal(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -452,12 +452,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_NotEqual) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.NotEqual(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.NotEqual(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -467,12 +467,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_LessThan) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.LessThan(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.LessThan(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -482,12 +482,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_GreaterThan) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.GreaterThan(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.GreaterThan(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -497,12 +497,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_LessThanEqual) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.LessThanEqual(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.LessThanEqual(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -512,12 +512,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_GreaterThanEqual) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.i32());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->i32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.GreaterThanEqual(ty.bool_(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.GreaterThanEqual(ty->bool_(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : i32) -> bool {
@@ -527,12 +527,12 @@ fn f(a : i32, b : i32) -> bool {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_ShiftLeft) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.u32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->u32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.ShiftLeft(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.ShiftLeft(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : u32) -> i32 {
@@ -542,12 +542,12 @@ fn f(a : i32, b : u32) -> i32 {
 }
 
 TEST_F(IRToProgramTest, BinaryOp_ShiftRight) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* pa = b.FunctionParam("a", ty.i32());
-    auto* pb = b.FunctionParam("b", ty.u32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* pa = b.FunctionParam("a", ty->i32());
+    auto* pb = b.FunctionParam("b", ty->u32());
     fn->SetParams({pa, pb});
 
-    b.Append(fn->Block(), [&] { b.Return(fn, b.ShiftRight(ty.i32(), pa, pb)); });
+    b.Append(fn->Block(), [&] { b.Return(fn, b.ShiftRight(ty->i32(), pa, pb)); });
 
     EXPECT_WGSL(R"(
 fn f(a : i32, b : u32) -> i32 {
@@ -560,8 +560,8 @@ fn f(a : i32, b : u32) -> i32 {
 // Type Construct
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, TypeConstruct_i32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -577,8 +577,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_u32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -594,8 +594,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_f32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -611,8 +611,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_bool) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -628,16 +628,16 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_struct) {
-    auto* S = ty.Struct(mod.symbols.New("S"), {
-                                                  {mod.symbols.New("a"), ty.i32()},
-                                                  {mod.symbols.New("b"), ty.u32()},
-                                                  {mod.symbols.New("c"), ty.f32()},
-                                              });
+    auto* S = ty->Struct(mod.symbols.New("S"), {
+                                                   {mod.symbols.New("a"), ty->i32()},
+                                                   {mod.symbols.New("b"), ty->u32()},
+                                                   {mod.symbols.New("c"), ty->f32()},
+                                               });
 
-    auto* fn = b.Function("f", ty.void_());
-    auto* x = b.FunctionParam("x", ty.i32());
-    auto* y = b.FunctionParam("y", ty.u32());
-    auto* z = b.FunctionParam("z", ty.f32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* x = b.FunctionParam("x", ty->i32());
+    auto* y = b.FunctionParam("y", ty->u32());
+    auto* z = b.FunctionParam("z", ty->f32());
     fn->SetParams({x, y, z});
 
     b.Append(fn->Block(), [&] {
@@ -659,8 +659,8 @@ fn f(x : i32, y : u32, z : f32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_array) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -676,8 +676,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_vec3i_Splat) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -693,8 +693,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_vec3i_Scalars) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -710,8 +710,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_mat2x3f_Scalars) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.f32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->f32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -727,8 +727,8 @@ fn f(i : f32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_mat2x3f_Columns) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.f32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->f32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -746,13 +746,13 @@ fn f(i : f32) {
 }
 
 TEST_F(IRToProgramTest, TypeConstruct_Inlining) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i0 = b.FunctionParam("i0", ty.i32());
-    auto* i1 = b.FunctionParam("i1", ty.i32());
-    auto* i2 = b.FunctionParam("i2", ty.i32());
-    auto* i3 = b.FunctionParam("i3", ty.i32());
-    auto* i4 = b.FunctionParam("i4", ty.i32());
-    auto* i5 = b.FunctionParam("i5", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i0 = b.FunctionParam("i0", ty->i32());
+    auto* i1 = b.FunctionParam("i1", ty->i32());
+    auto* i2 = b.FunctionParam("i2", ty->i32());
+    auto* i3 = b.FunctionParam("i3", ty->i32());
+    auto* i4 = b.FunctionParam("i4", ty->i32());
+    auto* i5 = b.FunctionParam("i5", ty->i32());
     fn->SetParams({i0, i1, i2, i3, i4, i5});
 
     b.Append(fn->Block(), [&] {
@@ -777,8 +777,8 @@ fn f(i0 : i32, i1 : i32, i2 : i32, i3 : i32, i4 : i32, i5 : i32) {
 // Type Convert
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, TypeConvert_i32_to_u32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -794,8 +794,8 @@ fn f(i : i32) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_u32_to_f32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.u32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->u32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -811,8 +811,8 @@ fn f(i : u32) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_f32_to_i32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.f32());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->f32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -828,8 +828,8 @@ fn f(i : f32) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_bool_to_u32) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->bool_());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -845,8 +845,8 @@ fn f(i : bool) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_vec3i_to_vec3u) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.vec3<i32>());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->vec3<i32>());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -862,8 +862,8 @@ fn f(i : vec3<i32>) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_vec3u_to_vec3f) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.vec3<u32>());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->vec3<u32>());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -879,8 +879,8 @@ fn f(i : vec3<u32>) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_mat2x3f_to_mat2x3h) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* i = b.FunctionParam("i", ty.mat2x3<f32>());
+    auto* fn = b.Function("f", ty->void_());
+    auto* i = b.FunctionParam("i", ty->mat2x3<f32>());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
@@ -898,16 +898,16 @@ fn f(i : mat2x3<f32>) {
 }
 
 TEST_F(IRToProgramTest, TypeConvert_Inlining) {
-    auto* fn_g = b.Function("g", ty.void_());
+    auto* fn_g = b.Function("g", ty->void_());
     fn_g->SetParams({
-        b.FunctionParam("a", ty.i32()),
-        b.FunctionParam("b", ty.u32()),
-        b.FunctionParam("c", ty.f32()),
+        b.FunctionParam("a", ty->i32()),
+        b.FunctionParam("b", ty->u32()),
+        b.FunctionParam("c", ty->f32()),
     });
     b.Append(fn_g->Block(), [&] { b.Return(fn_g); });
 
-    auto* fn_f = b.Function("f", ty.void_());
-    auto* v = b.FunctionParam("v", ty.i32());
+    auto* fn_f = b.Function("f", ty->void_());
+    auto* v = b.FunctionParam("v", ty->i32());
     fn_f->SetParams({v});
     b.Append(fn_f->Block(), [&] {
         auto* u = b.Convert<u32>(v);
@@ -931,14 +931,14 @@ fn f(v : i32) {
 // Short-circuiting binary ops
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, ShortCircuit_And_2) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
     fn->SetParams({pa, pb});
 
     b.Append(fn->Block(), [&] {
         auto* if_ = b.If(pa);
-        if_->SetResults(b.InstructionResult(ty.bool_()));
+        if_->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if_->True(), [&] { b.ExitIf(if_, pb); });
         b.Append(if_->False(), [&] { b.ExitIf(if_, false); });
 
@@ -953,20 +953,20 @@ fn f(a : bool, b : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_And_3_ab_c) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
     fn->SetParams({pa, pb, pc});
 
     b.Append(fn->Block(), [&] {
         auto* if1 = b.If(pa);
-        if1->SetResults(b.InstructionResult(ty.bool_()));
+        if1->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if1->True(), [&] { b.ExitIf(if1, pb); });
         b.Append(if1->False(), [&] { b.ExitIf(if1, false); });
 
         auto* if2 = b.If(if1);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
+        if2->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if2->True(), [&] { b.ExitIf(if2, pc); });
         b.Append(if2->False(), [&] { b.ExitIf(if2, false); });
 
@@ -981,18 +981,18 @@ fn f(a : bool, b : bool, c : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_And_3_a_bc) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
     fn->SetParams({pa, pb, pc});
 
     b.Append(fn->Block(), [&] {
         auto* if1 = b.If(pa);
-        if1->SetResults(b.InstructionResult(ty.bool_()));
+        if1->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if1->True(), [&] {
             auto* if2 = b.If(pb);
-            if2->SetResults(b.InstructionResult(ty.bool_()));
+            if2->SetResults(b.InstructionResult(ty->bool_()));
             b.Append(if2->True(), [&] { b.ExitIf(if2, pc); });
             b.Append(if2->False(), [&] { b.ExitIf(if2, false); });
 
@@ -1010,14 +1010,14 @@ fn f(a : bool, b : bool, c : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_Or_2) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
     fn->SetParams({pa, pb});
 
     b.Append(fn->Block(), [&] {
         auto* if_ = b.If(pa);
-        if_->SetResults(b.InstructionResult(ty.bool_()));
+        if_->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if_->True(), [&] { b.ExitIf(if_, true); });
         b.Append(if_->False(), [&] { b.ExitIf(if_, pb); });
 
@@ -1032,20 +1032,20 @@ fn f(a : bool, b : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_Or_3_ab_c) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
     fn->SetParams({pa, pb, pc});
 
     b.Append(fn->Block(), [&] {
         auto* if1 = b.If(pa);
-        if1->SetResults(b.InstructionResult(ty.bool_()));
+        if1->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if1->True(), [&] { b.ExitIf(if1, true); });
         b.Append(if1->False(), [&] { b.ExitIf(if1, pb); });
 
         auto* if2 = b.If(if1);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
+        if2->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if2->True(), [&] { b.ExitIf(if2, true); });
         b.Append(if2->False(), [&] { b.ExitIf(if2, pc); });
 
@@ -1060,19 +1060,19 @@ fn f(a : bool, b : bool, c : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_Or_3_a_bc) {
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
     fn->SetParams({pa, pb, pc});
 
     b.Append(fn->Block(), [&] {
         auto* if1 = b.If(pa);
-        if1->SetResults(b.InstructionResult(ty.bool_()));
+        if1->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if1->True(), [&] { b.ExitIf(if1, true); });
         b.Append(if1->False(), [&] {
             auto* if2 = b.If(pb);
-            if2->SetResults(b.InstructionResult(ty.bool_()));
+            if2->SetResults(b.InstructionResult(ty->bool_()));
             b.Append(if2->True(), [&] { b.ExitIf(if2, true); });
             b.Append(if2->False(), [&] { b.ExitIf(if2, pc); });
 
@@ -1090,30 +1090,30 @@ fn f(a : bool, b : bool, c : bool) -> bool {
 }
 
 TEST_F(IRToProgramTest, ShortCircuit_Mixed) {
-    auto* fn_b = b.Function("b", ty.bool_());
+    auto* fn_b = b.Function("b", ty->bool_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b, true); });
 
-    auto* fn_d = b.Function("d", ty.bool_());
+    auto* fn_d = b.Function("d", ty->bool_());
     b.Append(fn_d->Block(), [&] { b.Return(fn_d, true); });
 
-    auto* fn = b.Function("f", ty.bool_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
+    auto* fn = b.Function("f", ty->bool_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
     fn->SetParams({pa, pc});
 
     b.Append(fn->Block(), [&] {
         auto* if1 = b.If(pa);
-        if1->SetResults(b.InstructionResult(ty.bool_()));
+        if1->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if1->True(), [&] { b.ExitIf(if1, true); });
-        b.Append(if1->False(), [&] { b.ExitIf(if1, b.Call(ty.bool_(), fn_b)); });
+        b.Append(if1->False(), [&] { b.ExitIf(if1, b.Call(ty->bool_(), fn_b)); });
 
         auto* if2 = b.If(if1);
-        if2->SetResults(b.InstructionResult(ty.bool_()));
+        if2->SetResults(b.InstructionResult(ty->bool_()));
         b.Append(if2->True(), [&] {
             auto* if3 = b.If(pc);
-            if3->SetResults(b.InstructionResult(ty.bool_()));
+            if3->SetResults(b.InstructionResult(ty->bool_()));
             b.Append(if3->True(), [&] { b.ExitIf(if3, true); });
-            b.Append(if3->False(), [&] { b.ExitIf(if3, b.Call(ty.bool_(), fn_d)); });
+            b.Append(if3->False(), [&] { b.ExitIf(if3, b.Call(ty->bool_(), fn_d)); });
 
             b.ExitIf(if2, if3);
         });
@@ -1142,11 +1142,11 @@ fn f(a : bool, c : bool) -> bool {
 // Compound assignment
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, CompoundAssign_Increment) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Add(ty.i32(), b.Load(v), 1_i));
+        b.Store(v, b.Add(ty->i32(), b.Load(v), 1_i));
 
         b.Return(fn);
     });
@@ -1160,11 +1160,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Decrement) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Subtract(ty.i32(), b.Load(v), 1_i));
+        b.Store(v, b.Subtract(ty->i32(), b.Load(v), 1_i));
 
         b.Return(fn);
     });
@@ -1178,11 +1178,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Add) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Add(ty.i32(), b.Load(v), 8_i));
+        b.Store(v, b.Add(ty->i32(), b.Load(v), 8_i));
 
         b.Return(fn);
     });
@@ -1196,11 +1196,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Subtract) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Subtract(ty.i32(), b.Load(v), 8_i));
+        b.Store(v, b.Subtract(ty->i32(), b.Load(v), 8_i));
 
         b.Return(fn);
     });
@@ -1214,11 +1214,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Multiply) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Multiply(ty.i32(), b.Load(v), 8_i));
+        b.Store(v, b.Multiply(ty->i32(), b.Load(v), 8_i));
 
         b.Return(fn);
     });
@@ -1232,11 +1232,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Divide) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Divide(ty.i32(), b.Load(v), 8_i));
+        b.Store(v, b.Divide(ty->i32(), b.Load(v), 8_i));
 
         b.Return(fn);
     });
@@ -1250,11 +1250,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, CompoundAssign_Xor) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var<function, i32>("v");
-        b.Store(v, b.Xor(ty.i32(), b.Load(v), 8_i));
+        b.Store(v, b.Xor(ty->i32(), b.Load(v), 8_i));
 
         b.Return(fn);
     });
@@ -1271,12 +1271,12 @@ fn f() {
 // let
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, LetUsedOnce) {
-    auto* fn = b.Function("f", ty.u32());
-    auto* i = b.FunctionParam("i", ty.u32());
+    auto* fn = b.Function("f", ty->u32());
+    auto* i = b.FunctionParam("i", ty->u32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Let("v", b.Complement(ty.u32(), i));
+        auto* v = b.Let("v", b.Complement(ty->u32(), i));
         b.Return(fn, v);
     });
 
@@ -1289,13 +1289,13 @@ fn f(i : u32) -> u32 {
 }
 
 TEST_F(IRToProgramTest, LetUsedTwice) {
-    auto* fn = b.Function("f", ty.i32());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
+    auto* i = b.FunctionParam("i", ty->i32());
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Let("v", b.Multiply(ty.i32(), i, 2_i));
-        b.Return(fn, b.Add(ty.i32(), v, v));
+        auto* v = b.Let("v", b.Multiply(ty->i32(), i, 2_i));
+        b.Return(fn, b.Add(ty->i32(), v, v));
     });
 
     EXPECT_WGSL(R"(
@@ -1310,7 +1310,7 @@ fn f(i : i32) -> i32 {
 // Function-scope var
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, FunctionScopeVar_i32) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {  //
         Var<function, i32>("i");
@@ -1326,7 +1326,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, FunctionScopeVar_i32_InitLiteral) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         Var("i", 42_i);
@@ -1342,7 +1342,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, FunctionScopeVar_Chained) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* va = Var("a", 42_i);
@@ -1367,17 +1367,17 @@ fn f() {
 // If
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, If_CallFn) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
         auto* if_ = b.If(cond);
         b.Append(if_->True(), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitIf(if_);
         });
 
@@ -1397,8 +1397,8 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, If_Return) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -1418,7 +1418,7 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, If_Return_i32) {
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
 
     b.Append(fn->Block(), [&] {
         auto* cond = Var("cond", true);
@@ -1440,24 +1440,24 @@ fn f() -> i32 {
 }
 
 TEST_F(IRToProgramTest, If_CallFn_Else_CallFn) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b); });
 
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
         auto if_ = b.If(cond);
         b.Append(if_->True(), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitIf(if_);
         });
         b.Append(if_->False(), [&] {
-            b.Call(ty.void_(), fn_b);
+            b.Call(ty->void_(), fn_b);
             b.ExitIf(if_);
         });
 
@@ -1482,7 +1482,7 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, If_Return_f32_Else_Return_f32) {
-    auto* fn = b.Function("f", ty.f32());
+    auto* fn = b.Function("f", ty->f32());
 
     b.Append(fn->Block(), [&] {
         auto* cond = Var("cond", true);
@@ -1506,23 +1506,23 @@ fn f() -> f32 {
 }
 
 TEST_F(IRToProgramTest, If_Return_u32_Else_CallFn) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b); });
 
-    auto* fn = b.Function("f", ty.u32());
+    auto* fn = b.Function("f", ty->u32());
 
     b.Append(fn->Block(), [&] {
         auto* cond = Var("cond", true);
         auto if_ = b.If(b.Load(cond));
         b.Append(if_->True(), [&] { b.Return(fn, 1_u); });
         b.Append(if_->False(), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitIf(if_);
         });
-        b.Call(ty.void_(), fn_b);
+        b.Call(ty->void_(), fn_b);
         b.Return(fn, 2_u);
     });
 
@@ -1547,33 +1547,33 @@ fn f() -> u32 {
 }
 
 TEST_F(IRToProgramTest, If_CallFn_ElseIf_CallFn) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b); });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] { b.Return(fn_c); });
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* cond = Var("cond", true);
         auto if1 = b.If(b.Load(cond));
         b.Append(if1->True(), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitIf(if1);
         });
         b.Append(if1->False(), [&] {
             auto* if2 = b.If(b.Constant(false));
             b.Append(if2->True(), [&] {
-                b.Call(ty.void_(), fn_b);
+                b.Call(ty->void_(), fn_b);
                 b.ExitIf(if2);
             });
             b.ExitIf(if1);
         });
-        b.Call(ty.void_(), fn_c);
+        b.Call(ty->void_(), fn_c);
 
         b.Return(fn);
     });
@@ -1601,38 +1601,38 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, If_Else_Chain) {
-    auto* x = b.Function("x", ty.bool_());
-    auto* i = b.FunctionParam("i", ty.i32());
+    auto* x = b.Function("x", ty->bool_());
+    auto* i = b.FunctionParam("i", ty->i32());
     x->SetParams({i});
     b.Append(x->Block(), [&] { b.Return(x, true); });
 
-    auto* fn = b.Function("f", ty.void_());
-    auto* pa = b.FunctionParam("a", ty.bool_());
-    auto* pb = b.FunctionParam("b", ty.bool_());
-    auto* pc = b.FunctionParam("c", ty.bool_());
-    auto* pd = b.FunctionParam("d", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* pa = b.FunctionParam("a", ty->bool_());
+    auto* pb = b.FunctionParam("b", ty->bool_());
+    auto* pc = b.FunctionParam("c", ty->bool_());
+    auto* pd = b.FunctionParam("d", ty->bool_());
     fn->SetParams({pa, pb, pc, pd});
 
     b.Append(fn->Block(), [&] {
         auto if1 = b.If(pa);
         b.Append(if1->True(), [&] {
-            b.Call(ty.void_(), x, 0_i);
+            b.Call(ty->void_(), x, 0_i);
             b.ExitIf(if1);
         });
         b.Append(if1->False(), [&] {
             auto* if2 = b.If(pb);
             b.Append(if2->True(), [&] {
-                b.Call(ty.void_(), x, 1_i);
+                b.Call(ty->void_(), x, 1_i);
                 b.ExitIf(if2);
             });
             b.Append(if2->False(), [&] {
                 auto* if3 = b.If(pc);
                 b.Append(if3->True(), [&] {
-                    b.Call(ty.void_(), x, 2_i);
+                    b.Call(ty->void_(), x, 2_i);
                     b.ExitIf(if3);
                 });
                 b.Append(if3->False(), [&] {
-                    b.Call(ty.void_(), x, 3_i);
+                    b.Call(ty->void_(), x, 3_i);
                     b.ExitIf(if3);
                 });
                 b.ExitIf(if2);
@@ -1665,17 +1665,17 @@ fn f(a : bool, b : bool, c : bool, d : bool) {
 // Switch
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, Switch_Default) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var("v", 42_i);
 
         auto s = b.Switch(b.Load(v));
         b.Append(b.DefaultCase(s), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitSwitch(s);
         });
 
@@ -1698,31 +1698,31 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Switch_3_Cases) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b); });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] { b.Return(fn_c); });
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var("v", 42_i);
 
         auto s = b.Switch(b.Load(v));
         b.Append(b.Case(s, {b.Constant(0_i)}), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitSwitch(s);
         });
         b.Append(b.Case(s, {b.Constant(1_i), nullptr}), [&] {
-            b.Call(ty.void_(), fn_b);
+            b.Call(ty->void_(), fn_b);
             b.ExitSwitch(s);
         });
         b.Append(b.Case(s, {b.Constant(2_i)}), [&] {
-            b.Call(ty.void_(), fn_c);
+            b.Call(ty->void_(), fn_c);
             b.ExitSwitch(s);
         });
 
@@ -1757,10 +1757,10 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Switch_3_Cases_AllReturn) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* v = Var("v", 42_i);
@@ -1770,7 +1770,7 @@ TEST_F(IRToProgramTest, Switch_3_Cases_AllReturn) {
         b.Append(b.Case(s, {b.Constant(1_i), nullptr}), [&] { b.Return(fn); });
         b.Append(b.Case(s, {b.Constant(2_i)}), [&] { b.Return(fn); });
 
-        b.Call(ty.void_(), fn_a);
+        b.Call(ty->void_(), fn_a);
         b.Return(fn);
     });
 
@@ -1797,16 +1797,16 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Switch_Nested) {
-    auto* fn_a = b.Function("a", ty.void_());
+    auto* fn_a = b.Function("a", ty->void_());
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
 
-    auto* fn_b = b.Function("b", ty.void_());
+    auto* fn_b = b.Function("b", ty->void_());
     b.Append(fn_b->Block(), [&] { b.Return(fn_b); });
 
-    auto* fn_c = b.Function("c", ty.void_());
+    auto* fn_c = b.Function("c", ty->void_());
     b.Append(fn_c->Block(), [&] { b.Return(fn_c); });
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         auto* v1 = Var("v1", 42_i);
 
@@ -1814,7 +1814,7 @@ TEST_F(IRToProgramTest, Switch_Nested) {
 
         auto s1 = b.Switch(b.Load(v1));
         b.Append(b.Case(s1, {b.Constant(0_i)}), [&] {
-            b.Call(ty.void_(), fn_a);
+            b.Call(ty->void_(), fn_a);
             b.ExitSwitch(s1);
         });
         b.Append(b.Case(s1, {b.Constant(1_i), nullptr}), [&] {
@@ -1825,7 +1825,7 @@ TEST_F(IRToProgramTest, Switch_Nested) {
             b.ExitSwitch(s1);
         });
         b.Append(b.Case(s1, {b.Constant(2_i)}), [&] {
-            b.Call(ty.void_(), fn_c);
+            b.Call(ty->void_(), fn_c);
             b.ExitSwitch(s1);
         });
 
@@ -1869,7 +1869,7 @@ fn f() {
 // For
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, For_Empty) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -1879,14 +1879,14 @@ TEST_F(IRToProgramTest, For_Empty) {
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
-                auto* if_ = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+                auto* if_ = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
                 b.Append(if_->True(), [&] { b.ExitIf(if_); });
                 b.Append(if_->False(), [&] { b.ExitLoop(loop); });
                 b.Continue(loop);
             });
 
             b.Append(loop->Continuing(), [&] {
-                b.Store(i, b.Add(ty.i32(), b.Load(i), 1_i));
+                b.Store(i, b.Add(ty->i32(), b.Load(i), 1_i));
                 b.NextIteration(loop);
             });
         });
@@ -1903,7 +1903,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, For_Empty_NoInit) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* i = Var("i", 0_i);
@@ -1911,14 +1911,14 @@ TEST_F(IRToProgramTest, For_Empty_NoInit) {
         auto* loop = b.Loop();
 
         b.Append(loop->Body(), [&] {
-            auto* if_ = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+            auto* if_ = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
             b.Append(if_->True(), [&] { b.ExitIf(if_); });
             b.Append(if_->False(), [&] { b.ExitLoop(loop); });
             b.Continue(loop);
         });
 
         b.Append(loop->Continuing(), [&] {
-            b.Store(i, b.Add(ty.i32(), b.Load(i), 1_i));
+            b.Store(i, b.Add(ty->i32(), b.Load(i), 1_i));
             b.NextIteration(loop);
         });
 
@@ -1935,7 +1935,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, For_Empty_NoCont) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -1945,7 +1945,7 @@ TEST_F(IRToProgramTest, For_Empty_NoCont) {
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
-                auto* if_ = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+                auto* if_ = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
                 b.Append(if_->True(), [&] { b.ExitIf(if_); });
                 b.Append(if_->False(), [&] { b.ExitLoop(loop); });
                 b.Continue(loop);
@@ -1964,12 +1964,12 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, For_ComplexBody) {
-    auto* a = b.Function("a", ty.bool_());
-    auto* v = b.FunctionParam("v", ty.i32());
+    auto* a = b.Function("a", ty->bool_());
+    auto* v = b.FunctionParam("v", ty->i32());
     a->SetParams({v});
-    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty.bool_(), v, 1_i)); });
+    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty->bool_(), v, 1_i)); });
 
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -1979,18 +1979,18 @@ TEST_F(IRToProgramTest, For_ComplexBody) {
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
-                auto* if1 = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+                auto* if1 = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
                 b.Append(if1->True(), [&] { b.ExitIf(if1); });
                 b.Append(if1->False(), [&] { b.ExitLoop(loop); });
 
-                auto* if2 = b.If(b.Call(ty.bool_(), a, 42_i));
+                auto* if2 = b.If(b.Call(ty->bool_(), a, 42_i));
                 b.Append(if2->True(), [&] { b.Return(fn, 1_i); });
                 b.Append(if2->False(), [&] { b.Return(fn, 2_i); });
                 b.Unreachable();
             });
 
             b.Append(loop->Continuing(), [&] {
-                b.Store(i, b.Add(ty.i32(), b.Load(i), 1_i));
+                b.Store(i, b.Add(ty->i32(), b.Load(i), 1_i));
                 b.NextIteration(loop);
             });
         });
@@ -2017,12 +2017,12 @@ fn f() -> i32 {
 }
 
 TEST_F(IRToProgramTest, For_ComplexBody_NoInit) {
-    auto* a = b.Function("a", ty.bool_());
-    auto* v = b.FunctionParam("v", ty.i32());
+    auto* a = b.Function("a", ty->bool_());
+    auto* v = b.FunctionParam("v", ty->i32());
     a->SetParams({v});
-    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty.bool_(), v, 1_i)); });
+    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty->bool_(), v, 1_i)); });
 
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
 
     b.Append(fn->Block(), [&] {
         auto* i = Var("i", 0_i);
@@ -2030,11 +2030,11 @@ TEST_F(IRToProgramTest, For_ComplexBody_NoInit) {
         auto* loop = b.Loop();
 
         b.Append(loop->Body(), [&] {
-            auto* if1 = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+            auto* if1 = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
             b.Append(if1->True(), [&] { b.ExitIf(if1); });
             b.Append(if1->False(), [&] { b.ExitLoop(loop); });
 
-            auto* if2 = b.If(b.Call(ty.bool_(), a, 42_i));
+            auto* if2 = b.If(b.Call(ty->bool_(), a, 42_i));
             b.Append(if2->True(), [&] { b.Return(fn, 1_i); });
             b.Append(if2->False(), [&] { b.Return(fn, 2_i); });
 
@@ -2042,7 +2042,7 @@ TEST_F(IRToProgramTest, For_ComplexBody_NoInit) {
         });
 
         b.Append(loop->Continuing(), [&] {
-            b.Store(i, b.Add(ty.i32(), b.Load(i), 1_i));
+            b.Store(i, b.Add(ty->i32(), b.Load(i), 1_i));
             b.NextIteration(loop);
         });
 
@@ -2069,12 +2069,12 @@ fn f() -> i32 {
 }
 
 TEST_F(IRToProgramTest, For_ComplexBody_NoCont) {
-    auto* a = b.Function("a", ty.bool_());
-    auto* v = b.FunctionParam("v", ty.i32());
+    auto* a = b.Function("a", ty->bool_());
+    auto* v = b.FunctionParam("v", ty->i32());
     a->SetParams({v});
-    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty.bool_(), v, 1_i)); });
+    b.Append(a->Block(), [&] { b.Return(a, b.Equal(ty->bool_(), v, 1_i)); });
 
-    auto* fn = b.Function("f", ty.i32());
+    auto* fn = b.Function("f", ty->i32());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -2084,11 +2084,11 @@ TEST_F(IRToProgramTest, For_ComplexBody_NoCont) {
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
-                auto* if1 = b.If(b.LessThan(ty.bool_(), b.Load(i), 5_i));
+                auto* if1 = b.If(b.LessThan(ty->bool_(), b.Load(i), 5_i));
                 b.Append(if1->True(), [&] { b.ExitIf(if1); });
                 b.Append(if1->False(), [&] { b.ExitLoop(loop); });
 
-                auto* if2 = b.If(b.Call(ty.bool_(), a, 42_i));
+                auto* if2 = b.If(b.Call(ty->bool_(), a, 42_i));
                 b.Append(if2->True(), [&] { b.Return(fn, 1_i); });
                 b.Append(if2->False(), [&] { b.Return(fn, 2_i); });
 
@@ -2118,24 +2118,24 @@ fn f() -> i32 {
 }
 
 TEST_F(IRToProgramTest, For_CallInInitCondCont) {
-    auto* fn_n = b.Function("n", ty.i32());
-    auto* v = b.FunctionParam("v", ty.i32());
+    auto* fn_n = b.Function("n", ty->i32());
+    auto* v = b.FunctionParam("v", ty->i32());
     fn_n->SetParams({v});
-    b.Append(fn_n->Block(), [&] { b.Return(fn_n, b.Add(ty.i32(), v, 1_i)); });
+    b.Append(fn_n->Block(), [&] { b.Return(fn_n, b.Add(ty->i32(), v, 1_i)); });
 
-    auto* fn_f = b.Function("f", ty.void_());
+    auto* fn_f = b.Function("f", ty->void_());
 
     b.Append(fn_f->Block(), [&] {
         auto* loop = b.Loop();
 
         b.Append(loop->Initializer(), [&] {
-            auto* i = Var("i", b.Call(ty.i32(), fn_n, 0_i));
+            auto* i = Var("i", b.Call(ty->i32(), fn_n, 0_i));
             b.NextIteration(loop);
 
             b.Append(loop->Body(), [&] {
                 auto* load = b.Load(i);
-                auto* call = b.Call(ty.i32(), fn_n, 1_i);
-                auto* if_ = b.If(b.LessThan(ty.bool_(), load, call));
+                auto* call = b.Call(ty->i32(), fn_n, 1_i);
+                auto* if_ = b.If(b.LessThan(ty->bool_(), load, call));
                 b.Append(if_->True(), [&] { b.ExitIf(if_); });
                 b.Append(if_->False(), [&] { b.ExitLoop(loop); });
 
@@ -2143,7 +2143,7 @@ TEST_F(IRToProgramTest, For_CallInInitCondCont) {
             });
 
             b.Append(loop->Continuing(), [&] {
-                b.Store(i, b.Call(ty.i32(), fn_n, b.Load(i)));
+                b.Store(i, b.Call(ty->i32(), fn_n, b.Load(i)));
                 b.NextIteration(loop);
             });
         });
@@ -2199,21 +2199,21 @@ TEST_F(IRToProgramTest, For_IncInInit_Cmp) {
         auto* i = Var<storage, u32, read_write>();
         i->SetBindingPoint(0, 0);
 
-        auto* fn_f = b.Function("f", ty.void_());
+        auto* fn_f = b.Function("f", ty->void_());
 
         b.Append(fn_f->Block(), [&] {
             auto* loop = b.Loop();
 
             b.Append(loop->Initializer(), [&] {
                 auto* load_i = b.Load(i);
-                auto* inc_i = b.Add(ty.u32(), load_i, 1_u);
+                auto* inc_i = b.Add(ty->u32(), load_i, 1_u);
                 b.Store(i, inc_i);
                 b.NextIteration(loop);
             });
 
             b.Append(loop->Body(), [&] {
                 auto* load_i = b.Load(i);
-                auto* cmp = b.LessThan(ty.bool_(), load_i, 10_u);
+                auto* cmp = b.LessThan(ty->bool_(), load_i, 10_u);
                 auto* if_ = b.If(cmp);
                 b.Append(if_->True(), [&] { b.ExitIf(if_); });
                 b.Append(if_->False(), [&] { b.ExitLoop(loop); });
@@ -2238,7 +2238,7 @@ fn f() {
 // While
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, While_Empty) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -2263,8 +2263,8 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, While_Cond) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -2290,7 +2290,7 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, While_Break) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -2316,8 +2316,8 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, While_IfBreak) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -2349,8 +2349,8 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, While_IfReturn) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -2385,7 +2385,7 @@ fn f(cond : bool) {
 // Loop
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, Loop_Break) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* loop = b.Loop();
@@ -2405,8 +2405,8 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Loop_IfBreak) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -2432,8 +2432,8 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, Loop_IfReturn) {
-    auto* fn = b.Function("f", ty.void_());
-    auto* cond = b.FunctionParam("cond", ty.bool_());
+    auto* fn = b.Function("f", ty->void_());
+    auto* cond = b.FunctionParam("cond", ty->bool_());
     fn->SetParams({cond});
 
     b.Append(fn->Block(), [&] {
@@ -2460,7 +2460,7 @@ fn f(cond : bool) {
 }
 
 TEST_F(IRToProgramTest, Loop_IfContinuing) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* cond = Var("cond", false);
@@ -2497,7 +2497,7 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Loop_VarsDeclaredOutsideAndInside) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
 
     b.Append(fn->Block(), [&] {
         auto* var_b = Var("b", 1_i);
@@ -2509,7 +2509,7 @@ TEST_F(IRToProgramTest, Loop_VarsDeclaredOutsideAndInside) {
 
             auto* body_load_a = b.Load(var_a);
             auto* body_load_b = b.Load(var_b);
-            auto* if_ = b.If(b.Equal(ty.bool_(), body_load_a, body_load_b));
+            auto* if_ = b.If(b.Equal(ty->bool_(), body_load_a, body_load_b));
             b.Append(if_->True(), [&] { b.Return(fn); });
             b.Append(if_->False(), [&] { b.ExitIf(if_); });
             b.Continue(loop);
@@ -2517,7 +2517,7 @@ TEST_F(IRToProgramTest, Loop_VarsDeclaredOutsideAndInside) {
             b.Append(loop->Continuing(), [&] {
                 auto* cont_load_a = b.Load(var_a);
                 auto* cont_load_b = b.Load(var_b);
-                b.Store(var_b, b.Add(ty.i32(), cont_load_a, cont_load_b));
+                b.Store(var_b, b.Add(ty->i32(), cont_load_a, cont_load_b));
                 b.NextIteration(loop);
             });
         });
@@ -2546,10 +2546,10 @@ fn f() {
 // chromium_experimental_subgroups
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, Enable_ChromiumExperimentalSubgroups_SubgroupBallot) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         auto* call = b.Append(mod.allocators.instructions.Create<wgsl::ir::BuiltinCall>(
-            b.InstructionResult(ty.vec4<u32>()), wgsl::BuiltinFn::kSubgroupBallot, Empty));
+            b.InstructionResult(ty->vec4<u32>()), wgsl::BuiltinFn::kSubgroupBallot, Empty));
         b.Let("v", call);
         b.Return(fn);
     });
@@ -2564,11 +2564,11 @@ fn f() {
 }
 
 TEST_F(IRToProgramTest, Enable_ChromiumExperimentalSubgroups_SubgroupBroadcast) {
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     b.Append(fn->Block(), [&] {
         auto* one = b.Value(1_u);
         auto* call = b.Append(mod.allocators.instructions.Create<wgsl::ir::BuiltinCall>(
-            b.InstructionResult(ty.u32()), wgsl::BuiltinFn::kSubgroupBroadcast, Vector{one, one}));
+            b.InstructionResult(ty->u32()), wgsl::BuiltinFn::kSubgroupBroadcast, Vector{one, one}));
         b.Let("v", call);
         b.Return(fn);
     });
@@ -2585,12 +2585,12 @@ fn f() {
 TEST_F(IRToProgramTest, Enable_ChromiumExperimentalSubgroups_StructBuiltin_SubgroupInvocationId) {
     core::type::Manager::StructMemberDesc member;
     member.name = mod.symbols.New("a");
-    member.type = ty.u32();
+    member.type = ty->u32();
     member.attributes.builtin = core::BuiltinValue::kSubgroupInvocationId;
 
-    auto* S = ty.Struct(mod.symbols.New("S"), {member});
+    auto* S = ty->Struct(mod.symbols.New("S"), {member});
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     fn->SetParams({b.FunctionParam(S)});
     b.Append(fn->Block(), [&] { b.Return(fn); });
 
@@ -2610,12 +2610,12 @@ fn f(v : S) {
 TEST_F(IRToProgramTest, Enable_ChromiumExperimentalSubgroups_StructBuiltin_SubgroupSize) {
     core::type::Manager::StructMemberDesc member;
     member.name = mod.symbols.New("a");
-    member.type = ty.u32();
+    member.type = ty->u32();
     member.attributes.builtin = core::BuiltinValue::kSubgroupSize;
 
-    auto* S = ty.Struct(mod.symbols.New("S"), {member});
+    auto* S = ty->Struct(mod.symbols.New("S"), {member});
 
-    auto* fn = b.Function("f", ty.void_());
+    auto* fn = b.Function("f", ty->void_());
     fn->SetParams({b.FunctionParam(S)});
     b.Append(fn->Block(), [&] { b.Return(fn); });
 
@@ -2636,10 +2636,11 @@ fn f(v : S) {
 // chromium_internal_graphite
 ////////////////////////////////////////////////////////////////////////////////
 TEST_F(IRToProgramTest, Enable_ChromiumInternalGraphite_SubgroupBallot) {
-    b.Append(b.ir.root_block, [&] {
-        auto t = b.Var("T", ty.ref<core::AddressSpace::kHandle>(ty.Get<core::type::StorageTexture>(
-                                core::type::TextureDimension::k2d, core::TexelFormat::kR8Unorm,
-                                core::Access::kRead, ty.f32())));
+    b.Append(b.ir->root_block, [&] {
+        auto t =
+            b.Var("T", ty->ref<core::AddressSpace::kHandle>(ty->Get<core::type::StorageTexture>(
+                           core::type::TextureDimension::k2d, core::TexelFormat::kR8Unorm,
+                           core::Access::kRead, ty->f32())));
         t->SetBindingPoint(0, 0);
     });
 

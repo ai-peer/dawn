@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/block_statement.h"
 
 // Forward declarations
@@ -106,7 +107,7 @@ class CaseStatement final : public Castable<CaseStatement, CompoundStatement> {
     const std::vector<const CaseSelector*>& Selectors() const { return selectors_; }
 
   private:
-    const BlockStatement* body_ = nullptr;
+    raw_ptr<const BlockStatement> body_ = nullptr;
     std::vector<const CaseSelector*> selectors_;
 };
 
@@ -132,8 +133,8 @@ class CaseSelector final : public Castable<CaseSelector, Node> {
     const core::constant::Value* Value() const { return val_; }
 
   private:
-    const ast::CaseSelector* const decl_;
-    const core::constant::Value* const val_;
+    const raw_ptr<const ast::CaseSelector> decl_;
+    const raw_ptr<const core::constant::Value> val_;
 };
 
 }  // namespace tint::sem

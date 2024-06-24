@@ -39,7 +39,7 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, BitcastIdentityNumeric) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", 1_i);
         b.Let("bc", b.Bitcast<i32>(b.Load(a)));
@@ -57,7 +57,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastIdentityVec) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Construct<vec2<f32>>(1_f, 2_f));
         b.Let("bc", b.Bitcast<vec2<f32>>(b.Load(a)));
@@ -75,7 +75,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastToFloat) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", 1_i);
         b.Let("bc", b.Bitcast<f32>(b.Load(a)));
@@ -93,7 +93,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastToInt) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", 1_u);
         b.Let("bc", b.Bitcast<i32>(b.Load(a)));
@@ -111,7 +111,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastToUint) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", 1_i);
         b.Let("bc", b.Bitcast<u32>(b.Load(a)));
@@ -129,7 +129,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastFromVec2F16) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Construct<vec2<f16>>(1_h, 2_h));
         auto* z = b.Load(a);
@@ -167,7 +167,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastToVec2F16) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", 1_i);
         b.Let("b", b.Bitcast<vec2<f16>>(b.Load(a)));
@@ -216,7 +216,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastFromVec4F16) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Construct<vec4<f16>>(1_h, 2_h, 3_h, 4_h));
         auto* z = b.Load(a);
@@ -254,7 +254,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BitcastToVec4F16) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* a = b.Var("a", b.Construct<vec2<i32>>(1_i, 2_i));
         b.Let("b", b.Bitcast<vec4<f16>>(b.Load(a)));

@@ -27,6 +27,7 @@
 
 #include "src/tint/lang/wgsl/sem/value_expression.h"
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/sem/helper_test.h"
 #include "src/tint/lang/wgsl/sem/materialize.h"
@@ -53,7 +54,7 @@ class MockConstant : public core::constant::Value {
     std::variant<std::monostate, AInt, AFloat> InternalValue() const override { return {}; }
 
   private:
-    const core::type::Type* type;
+    raw_ptr<const core::type::Type> type;
 };
 
 using ValueExpressionTest = TestHelper;

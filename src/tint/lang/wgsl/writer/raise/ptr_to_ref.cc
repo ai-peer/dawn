@@ -26,6 +26,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "src/tint/lang/wgsl/writer/raise/ptr_to_ref.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/function.h"
 #include "src/tint/lang/core/ir/let.h"
@@ -40,15 +41,15 @@ namespace tint::wgsl::writer::raise {
 namespace {
 
 struct Impl {
-    core::ir::Module& mod;
-    core::ir::Builder b{mod};
+    const raw_ref<core::ir::Module> mod;
+    core::ir::Builder b{*mod};
 
     Result<SuccessType> Run() {
         Vector<core::ir::Block*, 32> blocks;
-        for (auto fn : mod.functions) {
+        for (auto fn : mod->functions) {
             blocks.Push(fn->Block());
         }
-        blocks.Push(mod.root_block);
+        blocks.Push(mod->root_block);
 
         while (!blocks.IsEmpty()) {
             auto* block = blocks.Pop();
@@ -100,7 +101,7 @@ struct Impl {
         TINT_ASSERT(operand);
         if (auto* ref_ty = As<core::type::Reference>(operand->Type())) {
             auto* as_ptr = b.InstructionResult(RefToPtr(ref_ty));
-            mod.allocators.instructions
+            mod->allocators.instructions
                 .Create<wgsl::ir::Unary>(as_ptr, core::UnaryOp::kAddressOf, operand)
                 ->InsertBefore(use.instruction);
             use.instruction->SetOperand(use.operand_index, as_ptr);
@@ -108,15 +109,15 @@ struct Impl {
     }
 
     const core::type::Pointer* RefToPtr(const core::type::Reference* ref_ty) {
-        return mod.Types().Get<core::type::Pointer>(ref_ty->AddressSpace(), ref_ty->StoreType(),
-                                                    ref_ty->Access());
+        return mod->Types().Get<core::type::Pointer>(ref_ty->AddressSpace(), ref_ty->StoreType(),
+                                                     ref_ty->Access());
     }
 
     void OperandPtrToRef(const core::ir::Usage& use) {
         auto* operand = use.instruction->Operand(use.operand_index);
         if (auto* ptr_ty = As<core::type::Pointer>(operand->Type())) {
             auto* as_ptr = b.InstructionResult(PtrToRef(ptr_ty));
-            mod.allocators.instructions
+            mod->allocators.instructions
                 .Create<wgsl::ir::Unary>(as_ptr, core::UnaryOp::kIndirection, operand)
                 ->InsertBefore(use.instruction);
             use.instruction->SetOperand(use.operand_index, as_ptr);
@@ -131,15 +132,15 @@ struct Impl {
     }
 
     const core::type::Reference* PtrToRef(const core::type::Pointer* ptr_ty) {
-        return mod.Types().Get<core::type::Reference>(ptr_ty->AddressSpace(), ptr_ty->StoreType(),
-                                                      ptr_ty->Access());
+        return mod->Types().Get<core::type::Reference>(ptr_ty->AddressSpace(), ptr_ty->StoreType(),
+                                                       ptr_ty->Access());
     }
 };
 
 }  // namespace
 
 Result<SuccessType> PtrToRef(core::ir::Module& mod) {
-    return Impl{mod}.Run();
+    return Impl{raw_ref(mod)}.Run();
 }
 
 }  // namespace tint::wgsl::writer::raise

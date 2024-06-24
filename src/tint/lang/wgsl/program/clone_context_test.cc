@@ -28,6 +28,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
@@ -61,18 +62,18 @@ struct Node : public Castable<Node, ast::Node> {
           b(node_b),
           c(node_c) {}
     Node(Node&&) = delete;
-    Allocator* const allocator;
+    const raw_ptr<Allocator> allocator;
     Symbol name;
-    const Node* a = nullptr;
-    const Node* b = nullptr;
-    const Node* c = nullptr;
+    raw_ptr<const Node> a = nullptr;
+    raw_ptr<const Node> b = nullptr;
+    raw_ptr<const Node> c = nullptr;
     Vector<const Node*, 8> vec;
 
     Node* Clone(ast::CloneContext& ctx) const override {
         auto* out = allocator->Create<Node>(ctx.Clone(name));
-        out->a = ctx.Clone(a);
-        out->b = ctx.Clone(b);
-        out->c = ctx.Clone(c);
+        out->a = ctx.Clone(a.get());
+        out->b = ctx.Clone(b.get());
+        out->c = ctx.Clone(c.get());
         out->vec = ctx.Clone(vec);
         return out;
     }
@@ -95,7 +96,7 @@ struct IDNode : public Castable<IDNode, ast::Node> {
     IDNode(Allocator* alloc, GenerationID program_id, GenerationID cid)
         : Base(program_id, ast::NodeID{}, Source{}), allocator(alloc), cloned_id(cid) {}
 
-    Allocator* const allocator;
+    const raw_ptr<Allocator> allocator;
     const GenerationID cloned_id;
 
     IDNode* Clone(ast::CloneContext&) const override {
@@ -250,11 +251,11 @@ TEST_F(ProgramCloneContextNodeTest, CloneWithReplaceAll_Node) {
     EXPECT_EQ(cloned_root->b->c->name, cloned_root->a->name);
     EXPECT_EQ(cloned_root->c->name, cloned_root->b->name);
 
-    EXPECT_FALSE(Is<Replacement>(cloned_root->a));
-    EXPECT_TRUE(Is<Replacement>(cloned_root->a->b));
-    EXPECT_FALSE(Is<Replacement>(cloned_root->a->b->b));
-    EXPECT_TRUE(Is<Replacement>(cloned_root->b));
-    EXPECT_FALSE(Is<Replacement>(cloned_root->b->b));
+    EXPECT_FALSE(Is<Replacement>(cloned_root->a.get()));
+    EXPECT_TRUE(Is<Replacement>(cloned_root->a->b.get()));
+    EXPECT_FALSE(Is<Replacement>(cloned_root->a->b->b.get()));
+    EXPECT_TRUE(Is<Replacement>(cloned_root->b.get()));
+    EXPECT_FALSE(Is<Replacement>(cloned_root->b->b.get()));
 }
 
 TEST_F(ProgramCloneContextNodeTest, CloneWithReplaceAll_Symbols) {
@@ -336,7 +337,7 @@ TEST_F(ProgramCloneContextNodeTest, CloneWithReplacePointer) {
     auto* replacement = a.Create<Node>(cloned.Symbols().New("replacement"));
 
     auto* cloned_root = CloneContext(&cloned, &original)
-                            .Replace(original_root->b, replacement)
+                            .Replace(original_root->b.get(), replacement)
                             .Clone(original_root);
 
     EXPECT_NE(cloned_root->a, replacement);
@@ -368,15 +369,15 @@ TEST_F(ProgramCloneContextNodeTest, CloneWithRepeatedImmediateReplacePointer) {
 
     auto* replacement_x =
         a.Create<Node>(cloned.Symbols().New("replacement_x"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, replacement_x);
+    ctx.Replace(original_root->b.get(), replacement_x);
 
     auto* replacement_y =
         a.Create<Node>(cloned.Symbols().New("replacement_y"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, replacement_y);
+    ctx.Replace(original_root->b.get(), replacement_y);
 
     auto* replacement_z =
         a.Create<Node>(cloned.Symbols().New("replacement_z"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, replacement_z);
+    ctx.Replace(original_root->b.get(), replacement_z);
 
     auto* cloned_root = ctx.Clone(original_root);
 
@@ -407,7 +408,7 @@ TEST_F(ProgramCloneContextNodeTest, CloneWithReplaceFunction) {
     auto* replacement = a.Create<Node>(cloned.Symbols().New("replacement"));
 
     auto* cloned_root = CloneContext(&cloned, &original)
-                            .Replace(original_root->b, [=] { return replacement; })
+                            .Replace(original_root->b.get(), [=] { return replacement; })
                             .Clone(original_root);
 
     EXPECT_NE(cloned_root->a, replacement);
@@ -439,15 +440,15 @@ TEST_F(ProgramCloneContextNodeTest, CloneWithRepeatedImmediateReplaceFunction) {
 
     Node* replacement_x =
         a.Create<Node>(cloned.Symbols().New("replacement_x"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, [&] { return replacement_x; });
+    ctx.Replace(original_root->b.get(), [&] { return replacement_x; });
 
     Node* replacement_y =
         a.Create<Node>(cloned.Symbols().New("replacement_y"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, [&] { return replacement_y; });
+    ctx.Replace(original_root->b.get(), [&] { return replacement_y; });
 
     Node* replacement_z =
         a.Create<Node>(cloned.Symbols().New("replacement_z"), ctx.Clone(original_root->b));
-    ctx.Replace(original_root->b, [&] { return replacement_z; });
+    ctx.Replace(original_root->b.get(), [&] { return replacement_z; });
 
     auto* cloned_root = ctx.Clone(original_root);
 

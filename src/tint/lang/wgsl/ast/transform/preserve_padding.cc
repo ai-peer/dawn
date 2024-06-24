@@ -30,6 +30,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -64,7 +65,7 @@ struct PreservePadding::State {
         for (auto* node : ctx.src->ASTNodes().Objects()) {
             Switch(node,  //
                    [&](const AssignmentStatement* assign) {
-                       auto* ty = sem.GetVal(assign->lhs)->Type();
+                       auto* ty = sem->GetVal(assign->lhs.get())->Type();
                        if (assign->lhs->Is<PhonyExpression>()) {
                            // Ignore phony assignment.
                            return;
@@ -91,7 +92,7 @@ struct PreservePadding::State {
             if (!assignments_to_transform.count(assign)) {
                 return nullptr;
             }
-            auto* ty = sem.GetVal(assign->lhs)->Type()->UnwrapRef();
+            auto* ty = sem->GetVal(assign->lhs.get())->Type()->UnwrapRef();
             return MakeAssignment(ty, ctx.Clone(assign->lhs), ctx.Clone(assign->rhs));
         });
 
@@ -222,9 +223,9 @@ struct PreservePadding::State {
     /// The clone context
     program::CloneContext ctx;
     /// Alias to the semantic info in ctx.src
-    const sem::Info& sem = ctx.src->Sem();
+    const raw_ref<const sem::Info> sem = ctx.src->Sem();
     /// Alias to the symbols in ctx.src
-    const SymbolTable& sym = ctx.src->Symbols();
+    const raw_ref<const SymbolTable> sym = ctx.src->Symbols();
     /// Map of semantic types to their assignment helper functions.
     Hashmap<const core::type::Type*, Symbol, 8> helpers;
 };

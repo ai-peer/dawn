@@ -31,6 +31,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/ast/transform/simplify_pointers.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
@@ -53,7 +54,7 @@ struct MatrixInfo {
     /// The stride in bytes between columns of the matrix
     uint32_t stride = 0;
     /// The type of the matrix
-    const core::type::Matrix* matrix = nullptr;
+    raw_ptr<const core::type::Matrix> matrix = nullptr;
 
     /// @returns the identifier of an array that holds an vector column for each row of the matrix.
     ast::Type array(ast::Builder* b) const {
@@ -132,7 +133,7 @@ ast::transform::Transform::ApplyResult DecomposeStridedMatrix::Apply(
     //   ssbo.mat[2] -> ssbo.mat[2]
     ctx.ReplaceAll(
         [&](const ast::IndexAccessorExpression* expr) -> const ast::IndexAccessorExpression* {
-            if (auto* access = src.Sem().Get<sem::StructMemberAccess>(expr->object)) {
+            if (auto* access = src.Sem().Get<sem::StructMemberAccess>(expr->object.get())) {
                 if (decomposed.Contains(access->Member())) {
                     auto* obj = ctx.CloneWithoutTransform(expr->object);
                     auto* idx = ctx.Clone(expr->index);
@@ -149,7 +150,7 @@ ast::transform::Transform::ApplyResult DecomposeStridedMatrix::Apply(
     //   ssbo.mat = mat_to_arr(m)
     std::unordered_map<MatrixInfo, Symbol, MatrixInfo::Hasher> mat_to_arr;
     ctx.ReplaceAll([&](const ast::AssignmentStatement* stmt) -> const ast::Statement* {
-        if (auto* access = src.Sem().Get<sem::StructMemberAccess>(stmt->lhs)) {
+        if (auto* access = src.Sem().Get<sem::StructMemberAccess>(stmt->lhs.get())) {
             if (auto info = decomposed.Get(access->Member())) {
                 auto fn = tint::GetOrAdd(mat_to_arr, *info, [&] {
                     auto name =

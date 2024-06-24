@@ -30,6 +30,8 @@
 #include <cmath>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -44,19 +46,19 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The polyfill config.
-    const ConversionPolyfillConfig& config;
+    const raw_ref<const ConversionPolyfillConfig> config;
 
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The symbol table.
-    SymbolTable& sym{ir.symbols};
+    const raw_ref<SymbolTable> sym{ir->symbols};
 
     /// Map from integer type to its f32toi helper function.
     Hashmap<const type::Type*, Function*, 4> f32toi_helpers{};
@@ -68,11 +70,11 @@ struct State {
     void Process() {
         // Find the conversion instructions that need to be polyfilled.
         Vector<ir::Convert*, 64> ftoi_worklist;
-        for (auto* inst : ir.Instructions()) {
+        for (auto* inst : ir->Instructions()) {
             if (auto* convert = inst->As<ir::Convert>()) {
                 auto* src_ty = convert->Args()[0]->Type();
                 auto* res_ty = convert->Result(0)->Type();
-                if (config.ftoi &&                          //
+                if (config->ftoi &&                         //
                     src_ty->is_float_scalar_or_vector() &&  //
                     res_ty->is_integer_scalar_or_vector()) {
                     ftoi_worklist.Push(convert);
@@ -114,10 +116,10 @@ struct State {
 
             // Generate constants for the limits.
             struct {
-                ir::Constant* low_limit_f = nullptr;
-                ir::Constant* high_limit_f = nullptr;
-                ir::Constant* low_limit_i = nullptr;
-                ir::Constant* high_limit_i = nullptr;
+                raw_ptr<ir::Constant> low_limit_f = nullptr;
+                raw_ptr<ir::Constant> high_limit_f = nullptr;
+                raw_ptr<ir::Constant> low_limit_i = nullptr;
+                raw_ptr<ir::Constant> high_limit_i = nullptr;
             } limits;
 
             // Integer limits.
@@ -163,7 +165,7 @@ struct State {
             auto* value = b.FunctionParam("value", src_ty);
             func->SetParams({value});
             b.Append(func->Block(), [&] {
-                auto* bool_ty = MatchWidth(ty.bool_(), res_ty);
+                auto* bool_ty = MatchWidth(ty->bool_(), res_ty);
 
                 auto* converted = b.Convert(res_ty, value);
 
@@ -195,7 +197,7 @@ struct State {
     const core::type::Type* MatchWidth(const core::type::Type* el_ty,
                                        const core::type::Type* match) {
         if (auto* vec = match->As<core::type::Vector>()) {
-            return ty.vec(el_ty, vec->Width());
+            return ty->vec(el_ty, vec->Width());
         }
         return el_ty;
     }
@@ -221,7 +223,7 @@ Result<SuccessType> ConversionPolyfill(Module& ir, const ConversionPolyfillConfi
         return result;
     }
 
-    State{config, ir}.Process();
+    State{raw_ref(config), raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

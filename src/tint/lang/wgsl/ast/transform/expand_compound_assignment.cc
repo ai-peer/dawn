@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/ast/compound_assignment_statement.h"
 #include "src/tint/lang/wgsl/ast/increment_decrement_statement.h"
 #include "src/tint/lang/wgsl/ast/transform/hoist_to_decl_before.h"
@@ -64,7 +65,7 @@ struct ExpandCompoundAssignment::State {
     /// Constructor
     /// @param context the clone context
     explicit State(program::CloneContext& context)
-        : ctx(context), b(*ctx.dst), hoist_to_decl_before(ctx) {}
+        : ctx(context), b(*ctx->dst), hoist_to_decl_before(*ctx) {}
 
     /// Replace `stmt` with a regular assignment statement of the form:
     ///     lhs = lhs op rhs
@@ -86,25 +87,25 @@ struct ExpandCompoundAssignment::State {
         // Helper function to create a variable that is a pointer to `expr`.
         auto hoist_pointer_to = [&](const Expression* expr) {
             // Lhs may already be a pointer, in which case we don't take it's address
-            bool is_pointer = ctx.src->Sem().GetVal(expr)->Type()->Is<core::type::Pointer>();
-            auto name = b.Sym();
-            auto* ptr = is_pointer ? ctx.Clone(expr) : b.AddressOf(ctx.Clone(expr));
-            auto* decl = b.Decl(b.Let(name, ptr));
-            hoist_to_decl_before.InsertBefore(ctx.src->Sem().Get(stmt), decl);
+            bool is_pointer = ctx->src->Sem().GetVal(expr)->Type()->Is<core::type::Pointer>();
+            auto name = b->Sym();
+            auto* ptr = is_pointer ? ctx->Clone(expr) : b->AddressOf(ctx->Clone(expr));
+            auto* decl = b->Decl(b->Let(name, ptr));
+            hoist_to_decl_before.InsertBefore(ctx->src->Sem().Get(stmt), decl);
             return name;
         };
 
         // Helper function to hoist `expr` to a let declaration.
         auto hoist_expr_to_let = [&](const Expression* expr) {
-            auto name = b.Sym();
-            auto* decl = b.Decl(b.Let(name, ctx.Clone(expr)));
-            hoist_to_decl_before.InsertBefore(ctx.src->Sem().Get(stmt), decl);
+            auto name = b->Sym();
+            auto* decl = b->Decl(b->Let(name, ctx->Clone(expr)));
+            hoist_to_decl_before.InsertBefore(ctx->src->Sem().Get(stmt), decl);
             return name;
         };
 
         // Helper function that returns `true` if the type of `expr` is a vector.
         auto is_vec = [&](const Expression* expr) {
-            if (auto* val_expr = ctx.src->Sem().GetVal(expr)) {
+            if (auto* val_expr = ctx->src->Sem().GetVal(expr)) {
                 return val_expr->Type()->UnwrapPtrOrRef()->Is<core::type::Vector>();
             }
             return false;
@@ -126,7 +127,7 @@ struct ExpandCompoundAssignment::State {
             //     foo.bar += rhs;
             // After:
             //     foo.bar = foo.bar + rhs;
-            new_lhs = [&] { return ctx.Clone(lhs); };
+            new_lhs = [&] { return ctx->Clone(lhs); };
         } else if (index_accessor && is_vec(index_accessor->object)) {
             // This is the case for vector component via an array accessor. We need
             // to capture a pointer to the vector and also the index value.
@@ -138,7 +139,7 @@ struct ExpandCompoundAssignment::State {
             //     (*vec_ptr)[index] = (*vec_ptr)[index] + rhs;
             auto lhs_ptr = hoist_pointer_to(index_accessor->object);
             auto index = hoist_expr_to_let(index_accessor->index);
-            new_lhs = [&, lhs_ptr, index] { return b.IndexAccessor(b.Deref(lhs_ptr), index); };
+            new_lhs = [&, lhs_ptr, index] { return b->IndexAccessor(b->Deref(lhs_ptr), index); };
         } else if (member_accessor && is_vec(member_accessor->object)) {
             // This is the case for vector component via a member accessor. We just
             // need to capture a pointer to the vector.
@@ -149,7 +150,7 @@ struct ExpandCompoundAssignment::State {
             //     (*vec_ptr).y = (*vec_ptr).y + rhs;
             auto lhs_ptr = hoist_pointer_to(member_accessor->object);
             new_lhs = [&, lhs_ptr] {
-                return b.MemberAccessor(b.Deref(lhs_ptr), ctx.Clone(member_accessor->member));
+                return b->MemberAccessor(b->Deref(lhs_ptr), ctx->Clone(member_accessor->member));
             };
         } else {
             // For all other statements that may have side-effecting expressions, we
@@ -160,20 +161,20 @@ struct ExpandCompoundAssignment::State {
             //     let lhs_ptr = &a[idx()];
             //     (*lhs_ptr) = (*lhs_ptr) + rhs;
             auto lhs_ptr = hoist_pointer_to(lhs);
-            new_lhs = [&, lhs_ptr] { return b.Deref(lhs_ptr); };
+            new_lhs = [&, lhs_ptr] { return b->Deref(lhs_ptr); };
         }
 
         // Replace the statement with a regular assignment statement.
-        auto* value = b.create<BinaryExpression>(op, new_lhs(), rhs);
-        ctx.Replace(stmt, b.Assign(new_lhs(), value));
+        auto* value = b->create<BinaryExpression>(op, new_lhs(), rhs);
+        ctx->Replace(stmt, b->Assign(new_lhs(), value));
     }
 
   private:
     /// The clone context.
-    program::CloneContext& ctx;
+    const raw_ref<program::CloneContext> ctx;
 
     /// The AST builder.
-    ast::Builder& b;
+    const raw_ref<ast::Builder> b;
 
     /// The HoistToDeclBefore helper instance.
     HoistToDeclBefore hoist_to_decl_before;

@@ -37,6 +37,8 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/spirv/reader/ast_parser/ast_parser.h"
 #include "src/tint/lang/spirv/reader/ast_parser/attributes.h"
 #include "src/tint/lang/spirv/reader/ast_parser/construct.h"
@@ -95,7 +97,7 @@ struct BlockInfo {
     ~BlockInfo();
 
     /// The internal representation of the basic block.
-    const spvtools::opt::BasicBlock* basic_block;
+    raw_ptr<const spvtools::opt::BasicBlock> basic_block;
 
     /// The ID of the OpLabel instruction that starts this block.
     uint32_t id = 0;
@@ -121,7 +123,7 @@ struct BlockInfo {
 
     /// The immediately enclosing structured construct. If this block is not
     /// in the block order at all, then this is still nullptr.
-    const Construct* construct = nullptr;
+    raw_ptr<const Construct> construct = nullptr;
 
     /// Maps the ID of a successor block (in the CFG) to its edge classification.
     std::unordered_map<uint32_t, EdgeKind> succ_edge;
@@ -132,11 +134,11 @@ struct BlockInfo {
     /// If not null, then the pointed-at construct is a selection for an OpSwitch,
     /// and this block is a case target for it.  We say this block "heads" the
     /// case construct.
-    const Construct* case_head_for = nullptr;
+    raw_ptr<const Construct> case_head_for = nullptr;
     /// If not null, then the pointed-at construct is a selection for an OpSwitch,
     /// and this block is the default target for it.  We say this block "heads"
     /// the default case construct.
-    const Construct* default_head_for = nullptr;
+    raw_ptr<const Construct> default_head_for = nullptr;
     /// Is this a default target for a switch, and is it also the merge for its
     /// switch?
     bool default_is_merge = false;
@@ -275,7 +277,7 @@ struct DefInfo {
     const size_t index = 0;
 
     /// The SPIR-V instruction that defines the ID.
-    const spvtools::opt::Instruction& inst;
+    const raw_ref<const spvtools::opt::Instruction> inst;
 
     /// Information about a definition created inside a function.
     struct Local {
@@ -374,7 +376,7 @@ struct DefInfo {
 /// @returns the stream so calls can be chained
 template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
 auto& operator<<(STREAM& o, const DefInfo& di) {
-    o << "DefInfo{" << " inst.result_id: " << di.inst.result_id();
+    o << "DefInfo{" << " inst.result_id: " << di.inst->result_id();
     if (di.local.has_value()) {
         const auto& dil = di.local.value();
         o << " block_pos: " << dil.block_pos << " num_uses: " << dil.num_uses
@@ -466,7 +468,7 @@ class FunctionEmitter {
     bool Emit();
 
     /// @returns true if emission has not yet failed.
-    bool success() const { return fail_stream_.status(); }
+    bool success() const { return fail_stream_->status(); }
     /// @returns true if emission has failed.
     bool failed() const { return !success(); }
 
@@ -477,10 +479,10 @@ class FunctionEmitter {
 
     /// Records failure.
     /// @returns a FailStream on which to emit diagnostics.
-    FailStream& Fail() { return fail_stream_.Fail(); }
+    FailStream& Fail() { return fail_stream_->Fail(); }
 
     /// @returns the parser implementation
-    ASTParser* parser() { return &parser_impl_; }
+    ASTParser* parser() { return &*parser_impl_; }
 
     /// Emits the entry point as a wrapper around its implementation function.
     /// Pipeline inputs become formal parameters, and pipeline outputs become
@@ -994,7 +996,7 @@ class FunctionEmitter {
         /// Function parameters
         ParameterList params;
         /// Function return type
-        const Type* return_type;
+        raw_ptr<const Type> return_type;
         /// Function attributes
         Attributes attributes;
     };
@@ -1241,7 +1243,7 @@ class FunctionEmitter {
 
       private:
         /// The construct to which this construct constributes.
-        const Construct* construct_;
+        raw_ptr<const Construct> construct_;
         /// The ID of the block at which the completion action should be triggered
         /// and this statement block discarded. This is often the `end_id` of
         /// `construct` itself.
@@ -1304,21 +1306,21 @@ class FunctionEmitter {
     /// @returns the node pointer
     template <typename T, typename... ARGS>
     T* create(ARGS&&... args) const {
-        return builder_.create<T>(std::forward<ARGS>(args)...);
+        return *builder_->create<T>(std::forward<ARGS>(args)...);
     }
 
     using PtrAs = ASTParser::PtrAs;
 
-    ASTParser& parser_impl_;
-    TypeManager& ty_;
-    ProgramBuilder& builder_;
-    spvtools::opt::IRContext& ir_context_;
-    spvtools::opt::analysis::DefUseManager* def_use_mgr_;
-    spvtools::opt::analysis::ConstantManager* constant_mgr_;
-    spvtools::opt::analysis::TypeManager* type_mgr_;
-    FailStream& fail_stream_;
-    Namer& namer_;
-    const spvtools::opt::Function& function_;
+    const raw_ref<ASTParser> parser_impl_;
+    const raw_ref<TypeManager> ty_;
+    const raw_ref<ProgramBuilder> builder_;
+    const raw_ref<spvtools::opt::IRContext> ir_context_;
+    raw_ptr<spvtools::opt::analysis::DefUseManager> def_use_mgr_;
+    raw_ptr<spvtools::opt::analysis::ConstantManager> constant_mgr_;
+    raw_ptr<spvtools::opt::analysis::TypeManager> type_mgr_;
+    const raw_ref<FailStream> fail_stream_;
+    const raw_ref<Namer> namer_;
+    const raw_ref<const spvtools::opt::Function> function_;
 
     // The SPIR-V ID for the SampleMask input variable.
     uint32_t sample_mask_in_id;
@@ -1354,7 +1356,7 @@ class FunctionEmitter {
     ConstructList constructs_;
 
     // Information about entry point, if this function is referenced by one
-    const EntryPointInfo* ep_info_ = nullptr;
+    raw_ptr<const EntryPointInfo> ep_info_ = nullptr;
 };
 
 }  // namespace tint::spirv::reader::ast_parser

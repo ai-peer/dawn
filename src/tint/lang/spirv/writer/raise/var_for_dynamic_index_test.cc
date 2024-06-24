@@ -43,12 +43,12 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using SpirvWriter_VarForDynamicIndexTest = core::ir::transform::TransformTest;
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_ConstantIndex_ArrayValue) {
-    auto* arr = b.FunctionParam(ty.array<i32, 4u>());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array<i32, 4u>());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.i32(), arr, 1_i));
+    auto* access = block->Append(b.Access(ty->i32(), arr, 1_i));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -66,12 +66,12 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_ConstantIndex_ArrayValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_ConstantIndex_MatrixValue) {
-    auto* mat = b.FunctionParam(ty.mat2x2<f32>());
-    auto* func = b.Function("foo", ty.f32());
+    auto* mat = b.FunctionParam(ty->mat2x2<f32>());
+    auto* func = b.Function("foo", ty->f32());
     func->SetParams({mat});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.f32(), mat, 1_i, 0_i));
+    auto* access = block->Append(b.Access(ty->f32(), mat, 1_i, 0_i));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -89,13 +89,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_ConstantIndex_MatrixValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_ArrayPointer) {
-    auto* arr = b.FunctionParam(ty.ptr<function, array<i32, 4u>>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->ptr<function, array<i32, 4u>>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.ptr<function, i32>(), arr, idx));
+    auto* access = block->Append(b.Access(ty->ptr<function, i32>(), arr, idx));
     auto* load = block->Append(b.Load(access));
     block->Append(b.Return(func, load));
 
@@ -115,13 +115,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_ArrayPointer) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_MatrixPointer) {
-    auto* mat = b.FunctionParam(ty.ptr<function, mat2x2<f32>>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.f32());
+    auto* mat = b.FunctionParam(ty->ptr<function, mat2x2<f32>>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->f32());
     func->SetParams({mat, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.ptr<function, vec2<f32>>(), mat, idx));
+    auto* access = block->Append(b.Access(ty->ptr<function, vec2<f32>>(), mat, idx));
     auto* load = block->Append(b.LoadVectorElement(access, idx));
     block->Append(b.Return(func, load));
 
@@ -141,13 +141,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_MatrixPointer) 
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_VectorValue) {
-    auto* vec = b.FunctionParam(ty.vec4<f32>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.f32());
+    auto* vec = b.FunctionParam(ty->vec4<f32>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->f32());
     func->SetParams({vec, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.f32(), vec, idx));
+    auto* access = block->Append(b.Access(ty->f32(), vec, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -165,13 +165,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, NoModify_DynamicIndex_VectorValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_ArrayValue) {
-    auto* arr = b.FunctionParam(ty.array<i32, 4u>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array<i32, 4u>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.i32(), arr, idx));
+    auto* access = block->Append(b.Access(ty->i32(), arr, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -191,13 +191,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_ArrayValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_MatrixValue) {
-    auto* mat = b.FunctionParam(ty.mat2x2<f32>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.vec2<f32>());
+    auto* mat = b.FunctionParam(ty->mat2x2<f32>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->vec2<f32>());
     func->SetParams({mat, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.vec2<f32>(), mat, idx));
+    auto* access = block->Append(b.Access(ty->vec2<f32>(), mat, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -217,13 +217,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_MatrixValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_VectorValue) {
-    auto* mat = b.FunctionParam(ty.mat2x2<f32>());
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.f32());
+    auto* mat = b.FunctionParam(ty->mat2x2<f32>());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->f32());
     func->SetParams({mat, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.f32(), mat, idx, idx));
+    auto* access = block->Append(b.Access(ty->f32(), mat, idx, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -243,13 +243,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, DynamicIndex_VectorValue) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain) {
-    auto* arr = b.FunctionParam(ty.array(ty.array(ty.array<i32, 4u>(), 4u), 4u));
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array(ty->array(ty->array<i32, 4u>(), 4u), 4u));
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.i32(), arr, idx, 1_u, idx));
+    auto* access = block->Append(b.Access(ty->i32(), arr, idx, 1_u, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -269,13 +269,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain_SkipConstantIndices) {
-    auto* arr = b.FunctionParam(ty.array(ty.array(ty.array<i32, 4u>(), 4u), 4u));
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array(ty->array(ty->array<i32, 4u>(), 4u), 4u));
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.i32(), arr, 1_u, 2_u, idx));
+    auto* access = block->Append(b.Access(ty->i32(), arr, 1_u, 2_u, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -296,13 +296,13 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain_SkipConstantIndices) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain_SkipConstantIndices_Interleaved) {
-    auto* arr = b.FunctionParam(ty.array(ty.array(ty.array(ty.array<i32, 4u>(), 4u), 4u), 4u));
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array(ty->array(ty->array(ty->array<i32, 4u>(), 4u), 4u), 4u));
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.i32(), arr, 1_u, idx, 2_u, idx));
+    auto* access = block->Append(b.Access(ty->i32(), arr, 1_u, idx, 2_u, idx));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -323,19 +323,19 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain_SkipConstantIndices_Inter
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, AccessChain_SkipConstantIndices_Struct) {
-    auto* str_ty = ty.Struct(mod.symbols.Register("MyStruct"),
-                             {
-                                 {mod.symbols.Register("arr1"), ty.array<f32, 1024>()},
-                                 {mod.symbols.Register("mat"), ty.mat4x4<f32>()},
-                                 {mod.symbols.Register("arr2"), ty.array<f32, 1024>()},
-                             });
+    auto* str_ty = ty->Struct(mod.symbols.Register("MyStruct"),
+                              {
+                                  {mod.symbols.Register("arr1"), ty->array<f32, 1024>()},
+                                  {mod.symbols.Register("mat"), ty->mat4x4<f32>()},
+                                  {mod.symbols.Register("arr2"), ty->array<f32, 1024>()},
+                              });
     auto* str_val = b.FunctionParam(str_ty);
-    auto* idx = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.f32());
+    auto* idx = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->f32());
     func->SetParams({str_val, idx});
 
     auto* block = func->Block();
-    auto* access = block->Append(b.Access(ty.f32(), str_val, 1_u, idx, 0_u));
+    auto* access = block->Append(b.Access(ty->f32(), str_val, 1_u, idx, 0_u));
     block->Append(b.Return(func, access));
 
     auto* expect = R"(
@@ -362,17 +362,17 @@ MyStruct = struct @align(16) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesFromSameSource) {
-    auto* arr = b.FunctionParam(ty.array<i32, 4u>());
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* idx_c = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array<i32, 4u>());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* idx_c = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx_a, idx_b, idx_c});
 
     auto* block = func->Block();
-    block->Append(b.Access(ty.i32(), arr, idx_a));
-    block->Append(b.Access(ty.i32(), arr, idx_b));
-    auto* access_c = block->Append(b.Access(ty.i32(), arr, idx_c));
+    block->Append(b.Access(ty->i32(), arr, idx_a));
+    block->Append(b.Access(ty->i32(), arr, idx_b));
+    auto* access_c = block->Append(b.Access(ty->i32(), arr, idx_c));
     block->Append(b.Return(func, access_c));
 
     auto* expect = R"(
@@ -396,17 +396,17 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesFromSameSource) {
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesFromSameSource_SkipConstantIndices) {
-    auto* arr = b.FunctionParam(ty.array(ty.array(ty.array<i32, 4u>(), 4u), 4u));
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* idx_c = b.FunctionParam(ty.i32());
-    auto* func = b.Function("foo", ty.i32());
+    auto* arr = b.FunctionParam(ty->array(ty->array(ty->array<i32, 4u>(), 4u), 4u));
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* idx_c = b.FunctionParam(ty->i32());
+    auto* func = b.Function("foo", ty->i32());
     func->SetParams({arr, idx_a, idx_b, idx_c});
 
     auto* block = func->Block();
-    block->Append(b.Access(ty.i32(), arr, 1_u, 2_u, idx_a));
-    block->Append(b.Access(ty.i32(), arr, 1_u, 2_u, idx_b));
-    auto* access_c = block->Append(b.Access(ty.i32(), arr, 1_u, 2_u, idx_c));
+    block->Append(b.Access(ty->i32(), arr, 1_u, 2_u, idx_a));
+    block->Append(b.Access(ty->i32(), arr, 1_u, 2_u, idx_b));
+    auto* access_c = block->Append(b.Access(ty->i32(), arr, 1_u, 2_u, idx_c));
     block->Append(b.Return(func, access_c));
 
     auto* expect = R"(
@@ -431,19 +431,19 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesFromSameSource_SkipCo
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToFuncParam_FromDifferentBlocks) {
-    auto* arr = b.FunctionParam(ty.array<i32, 4>());
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func = b.Function("func", ty.i32());
+    auto* arr = b.FunctionParam(ty->array<i32, 4>());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func = b.Function("func", ty->i32());
     func->SetParams({arr, cond, idx_a, idx_b});
     b.Append(func->Block(), [&] {  //
         auto* if_ = b.If(cond);
         b.Append(if_->True(), [&] {  //
-            b.Return(func, b.Access(ty.i32(), arr, idx_a));
+            b.Return(func, b.Access(ty->i32(), arr, idx_a));
         });
         b.Append(if_->False(), [&] {  //
-            b.Return(func, b.Access(ty.i32(), arr, idx_b));
+            b.Return(func, b.Access(ty->i32(), arr, idx_b));
         });
         b.Unreachable();
     });
@@ -495,19 +495,19 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToFuncParam_FromDiffe
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest,
        MultipleAccessesToFuncParam_FromDifferentBlocks_WithLeadingConstantIndex) {
-    auto* arr = b.FunctionParam(ty.array(ty.array<i32, 4>(), 4));
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func = b.Function("func", ty.i32());
+    auto* arr = b.FunctionParam(ty->array(ty->array<i32, 4>(), 4));
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func = b.Function("func", ty->i32());
     func->SetParams({arr, cond, idx_a, idx_b});
     b.Append(func->Block(), [&] {  //
         auto* if_ = b.If(cond);
         b.Append(if_->True(), [&] {  //
-            b.Return(func, b.Access(ty.i32(), arr, 0_u, idx_a));
+            b.Return(func, b.Access(ty->i32(), arr, 0_u, idx_a));
         });
         b.Append(if_->False(), [&] {  //
-            b.Return(func, b.Access(ty.i32(), arr, 0_u, idx_b));
+            b.Return(func, b.Access(ty->i32(), arr, 0_u, idx_b));
         });
         b.Unreachable();
     });
@@ -558,11 +558,11 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest,
     EXPECT_EQ(expect, str());
 }
 TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToBlockParam_FromDifferentBlocks) {
-    auto* arr = b.BlockParam(ty.array<i32, 4>());
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func = b.Function("func", ty.i32());
+    auto* arr = b.BlockParam(ty->array<i32, 4>());
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func = b.Function("func", ty->i32());
     func->SetParams({cond, idx_a, idx_b});
     b.Append(func->Block(), [&] {  //
         auto* loop = b.Loop();
@@ -573,10 +573,10 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToBlockParam_FromDiff
         b.Append(loop->Body(), [&] {
             auto* if_ = b.If(cond);
             b.Append(if_->True(), [&] {  //
-                b.Return(func, b.Access(ty.i32(), arr, idx_a));
+                b.Return(func, b.Access(ty->i32(), arr, idx_a));
             });
             b.Append(if_->False(), [&] {  //
-                b.Return(func, b.Access(ty.i32(), arr, idx_b));
+                b.Return(func, b.Access(ty->i32(), arr, idx_b));
             });
             b.Unreachable();
         });
@@ -646,12 +646,12 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToBlockParam_FromDiff
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest,
        MultipleAccessesToBlockParam_FromDifferentBlocks_WithLeadingConstantIndex) {
-    auto* inner_ty = ty.array<i32, 4>();
-    auto* arr = b.BlockParam(ty.array(inner_ty, 4));
-    auto* cond = b.FunctionParam(ty.bool_());
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func = b.Function("func", ty.i32());
+    auto* inner_ty = ty->array<i32, 4>();
+    auto* arr = b.BlockParam(ty->array(inner_ty, 4));
+    auto* cond = b.FunctionParam(ty->bool_());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func = b.Function("func", ty->i32());
     func->SetParams({cond, idx_a, idx_b});
     b.Append(func->Block(), [&] {  //
         auto* loop = b.Loop();
@@ -662,10 +662,10 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest,
         b.Append(loop->Body(), [&] {
             auto* if_ = b.If(cond);
             b.Append(if_->True(), [&] {  //
-                b.Return(func, b.Access(ty.i32(), arr, 0_u, idx_a));
+                b.Return(func, b.Access(ty->i32(), arr, 0_u, idx_a));
             });
             b.Append(if_->False(), [&] {  //
-                b.Return(func, b.Access(ty.i32(), arr, 0_u, idx_b));
+                b.Return(func, b.Access(ty->i32(), arr, 0_u, idx_b));
             });
             b.Unreachable();
         });
@@ -735,27 +735,27 @@ TEST_F(SpirvWriter_VarForDynamicIndexTest,
 }
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest, MultipleAccessesToConstant_FromDifferentFunctions) {
-    auto* arr = b.Constant(mod.constant_values.Zero(ty.array<i32, 4>()));
+    auto* arr = b.Constant(mod.constant_values.Zero(ty->array<i32, 4>()));
 
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* func_a = b.Function("func_a", ty.i32());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* func_a = b.Function("func_a", ty->i32());
     func_a->SetParams({idx_a});
     b.Append(func_a->Block(), [&] {  //
-        b.Return(func_a, b.Access(ty.i32(), arr, idx_a));
+        b.Return(func_a, b.Access(ty->i32(), arr, idx_a));
     });
 
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func_b = b.Function("func_b", ty.i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func_b = b.Function("func_b", ty->i32());
     func_b->SetParams({idx_b});
     b.Append(func_b->Block(), [&] {  //
-        b.Return(func_b, b.Access(ty.i32(), arr, idx_b));
+        b.Return(func_b, b.Access(ty->i32(), arr, idx_b));
     });
 
-    auto* idx_c = b.FunctionParam(ty.i32());
-    auto* func_c = b.Function("func_c", ty.i32());
+    auto* idx_c = b.FunctionParam(ty->i32());
+    auto* func_c = b.Function("func_c", ty->i32());
     func_c->SetParams({idx_c});
     b.Append(func_c->Block(), [&] {  //
-        b.Return(func_c, b.Access(ty.i32(), arr, idx_c));
+        b.Return(func_c, b.Access(ty->i32(), arr, idx_c));
     });
 
     auto* src = R"(
@@ -815,27 +815,27 @@ $B1: {  # root
 
 TEST_F(SpirvWriter_VarForDynamicIndexTest,
        MultipleAccessesToConstant_FromDifferentFunctions_WithLeadingConstantIndex) {
-    auto* arr = b.Constant(mod.constant_values.Zero(ty.array(ty.array<i32, 4>(), 4)));
+    auto* arr = b.Constant(mod.constant_values.Zero(ty->array(ty->array<i32, 4>(), 4)));
 
-    auto* idx_a = b.FunctionParam(ty.i32());
-    auto* func_a = b.Function("func_a", ty.i32());
+    auto* idx_a = b.FunctionParam(ty->i32());
+    auto* func_a = b.Function("func_a", ty->i32());
     func_a->SetParams({idx_a});
     b.Append(func_a->Block(), [&] {  //
-        b.Return(func_a, b.Access(ty.i32(), arr, 0_u, idx_a));
+        b.Return(func_a, b.Access(ty->i32(), arr, 0_u, idx_a));
     });
 
-    auto* idx_b = b.FunctionParam(ty.i32());
-    auto* func_b = b.Function("func_b", ty.i32());
+    auto* idx_b = b.FunctionParam(ty->i32());
+    auto* func_b = b.Function("func_b", ty->i32());
     func_b->SetParams({idx_b});
     b.Append(func_b->Block(), [&] {  //
-        b.Return(func_b, b.Access(ty.i32(), arr, 0_u, idx_b));
+        b.Return(func_b, b.Access(ty->i32(), arr, 0_u, idx_b));
     });
 
-    auto* idx_c = b.FunctionParam(ty.i32());
-    auto* func_c = b.Function("func_c", ty.i32());
+    auto* idx_c = b.FunctionParam(ty->i32());
+    auto* func_c = b.Function("func_c", ty->i32());
     func_c->SetParams({idx_c});
     b.Append(func_c->Block(), [&] {  //
-        b.Return(func_c, b.Access(ty.i32(), arr, 0_u, idx_c));
+        b.Return(func_c, b.Access(ty->i32(), arr, 0_u, idx_c));
     });
 
     auto* src = R"(

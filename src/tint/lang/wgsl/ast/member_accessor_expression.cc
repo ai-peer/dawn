@@ -54,8 +54,8 @@ MemberAccessorExpression::~MemberAccessorExpression() = default;
 const MemberAccessorExpression* MemberAccessorExpression::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* obj = ctx.Clone(object);
-    auto* mem = ctx.Clone(member);
+    auto* obj = ctx.Clone(object.get());
+    auto* mem = ctx.Clone(member.get());
     return ctx.dst->create<MemberAccessorExpression>(src, obj, mem);
 }
 

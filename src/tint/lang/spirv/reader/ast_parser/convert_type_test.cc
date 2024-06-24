@@ -373,7 +373,7 @@ TEST_F(SpirvASTParserTest, ConvertType_RuntimeArray) {
     ASSERT_NE(arr_type, nullptr);
     EXPECT_EQ(arr_type->size, 0u);
     EXPECT_EQ(arr_type->stride, 0u);
-    auto* elem_type = arr_type->type;
+    auto* elem_type = arr_type->type.get();
     ASSERT_NE(elem_type, nullptr);
     EXPECT_TRUE(elem_type->Is<U32>());
     EXPECT_TRUE(p->error().empty());
@@ -434,7 +434,7 @@ TEST_F(SpirvASTParserTest, ConvertType_Array) {
     ASSERT_NE(arr_type, nullptr);
     EXPECT_EQ(arr_type->size, 42u);
     EXPECT_EQ(arr_type->stride, 0u);
-    auto* elem_type = arr_type->type;
+    auto* elem_type = arr_type->type.get();
     ASSERT_NE(elem_type, nullptr);
     EXPECT_TRUE(elem_type->Is<U32>());
     EXPECT_TRUE(p->error().empty());

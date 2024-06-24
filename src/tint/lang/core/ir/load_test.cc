@@ -38,8 +38,8 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_LoadTest = IRTestHelper;
 
 TEST_F(IR_LoadTest, Create) {
-    auto* store_type = ty.i32();
-    auto* var = b.Var(ty.ptr<function, i32>());
+    auto* store_type = ty->i32();
+    auto* var = b.Var(ty->ptr<function, i32>());
     auto* inst = b.Load(var);
 
     ASSERT_TRUE(inst->Is<Load>());
@@ -53,7 +53,7 @@ TEST_F(IR_LoadTest, Create) {
 }
 
 TEST_F(IR_LoadTest, Usage) {
-    auto* var = b.Var(ty.ptr<function, i32>());
+    auto* var = b.Var(ty->ptr<function, i32>());
     auto* inst = b.Load(var);
 
     ASSERT_NE(inst->From(), nullptr);
@@ -61,7 +61,7 @@ TEST_F(IR_LoadTest, Usage) {
 }
 
 TEST_F(IR_LoadTest, Results) {
-    auto* var = b.Var(ty.ptr<function, i32>());
+    auto* var = b.Var(ty->ptr<function, i32>());
     auto* inst = b.Load(var);
 
     EXPECT_EQ(inst->Results().Length(), 1u);
@@ -70,7 +70,7 @@ TEST_F(IR_LoadTest, Results) {
 }
 
 TEST_F(IR_LoadTest, Clone) {
-    auto* var = b.Var(ty.ptr<function, i32>());
+    auto* var = b.Var(ty->ptr<function, i32>());
     auto* inst = b.Load(var);
 
     auto* new_var = clone_ctx.Clone(var);

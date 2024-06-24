@@ -30,6 +30,8 @@
 #include <algorithm>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/wgsl/ast/assignment_statement.h"
 #include "src/tint/lang/wgsl/ast/variable_decl_statement.h"
@@ -257,7 +259,7 @@ struct VertexPulling::State {
     ApplyResult Run() {
         // Find entry point
         const Function* func = nullptr;
-        for (auto* fn : src.AST().Functions()) {
+        for (auto* fn : src->AST().Functions()) {
             if (fn->PipelineStage() == PipelineStage::kVertex) {
                 if (func != nullptr) {
                     b.Diagnostics().AddError(Source{})
@@ -283,9 +285,9 @@ struct VertexPulling::State {
     /// LocationReplacement describes an Variable replacement for a location input.
     struct LocationReplacement {
         /// The variable to replace in the source Program
-        Variable* from;
+        raw_ptr<Variable> from;
         /// The replacement to use in the target ProgramBuilder
-        Variable* to;
+        raw_ptr<Variable> to;
     };
 
     /// LocationInfo describes an input location
@@ -293,17 +295,17 @@ struct VertexPulling::State {
         /// A builder that builds the expression that resolves to the (transformed) input location
         std::function<const Expression*()> expr;
         /// The store type of the location variable
-        const core::type::Type* type;
+        raw_ptr<const core::type::Type> type;
     };
 
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The transform config
     VertexPulling::Config const cfg;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     std::unordered_map<uint32_t, LocationInfo> location_info;
     std::function<const Expression*()> vertex_index_expr = nullptr;
     std::function<const Expression*()> instance_index_expr = nullptr;
@@ -783,7 +785,7 @@ struct VertexPulling::State {
             LocationInfo info;
             info.expr = [this, func_var] { return b.Expr(func_var); };
 
-            auto* sem = src.Sem().Get(param);
+            auto* sem = src->Sem().Get(param);
             info.type = sem->Type();
 
             if (TINT_UNLIKELY(!sem->Attributes().location.has_value())) {
@@ -795,7 +797,7 @@ struct VertexPulling::State {
             if (TINT_UNLIKELY(!builtin_attr)) {
                 TINT_ICE() << "Invalid entry point parameter";
             }
-            auto builtin = src.Sem().Get(builtin_attr)->Value();
+            auto builtin = src->Sem().Get(builtin_attr)->Value();
             // Check for existing vertex_index and instance_index builtins.
             if (builtin == core::BuiltinValue::kVertexIndex) {
                 vertex_index_expr = [this, param] {
@@ -837,7 +839,7 @@ struct VertexPulling::State {
                 LocationInfo info;
                 info.expr = member_expr;
 
-                auto* sem = src.Sem().Get(member);
+                auto* sem = src->Sem().Get(member);
                 info.type = sem->Type();
 
                 TINT_ASSERT(sem->Attributes().location.has_value());
@@ -848,7 +850,7 @@ struct VertexPulling::State {
                 if (TINT_UNLIKELY(!builtin_attr)) {
                     TINT_ICE() << "Invalid entry point parameter";
                 }
-                auto builtin = src.Sem().Get(builtin_attr)->Value();
+                auto builtin = src->Sem().Get(builtin_attr)->Value();
                 // Check for existing vertex_index and instance_index builtins.
                 if (builtin == core::BuiltinValue::kVertexIndex) {
                     vertex_index_expr = member_expr;
@@ -903,7 +905,7 @@ struct VertexPulling::State {
 
         // Process entry point parameters.
         for (auto* param : func->params) {
-            auto* sem = src.Sem().Get(param);
+            auto* sem = src->Sem().Get(param);
             if (auto* str = sem->Type()->As<sem::Struct>()) {
                 ProcessStructParameter(func, param, str->Declaration());
             } else {

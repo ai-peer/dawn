@@ -44,7 +44,7 @@ using HlslWriterFxcPolyfillTest = core::ir::transform::TransformTest;
 
 // No change, no switch
 TEST_F(HlslWriterFxcPolyfillTest, NoSwitch) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] { b.Return(func); });
 
     auto* src = R"(
@@ -64,7 +64,7 @@ TEST_F(HlslWriterFxcPolyfillTest, NoSwitch) {
 
 // No change, switch with case and default
 TEST_F(HlslWriterFxcPolyfillTest, SwitchCaseAndDefault) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);
         b.Append(b.Case(s, {b.Constant(0_i)}), [&] { b.ExitSwitch(s); });
@@ -98,7 +98,7 @@ TEST_F(HlslWriterFxcPolyfillTest, SwitchCaseAndDefault) {
 
 // No change, switch with multi-selector default case
 TEST_F(HlslWriterFxcPolyfillTest, SwitchMultiSelectorDefault) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);
         b.Append(b.Case(s, {b.Constant(0_i), nullptr}), [&] { b.ExitSwitch(s); });
@@ -127,7 +127,7 @@ TEST_F(HlslWriterFxcPolyfillTest, SwitchMultiSelectorDefault) {
 
 // Switch body just has a ExitSwitch
 TEST_F(HlslWriterFxcPolyfillTest, Switch) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);
         b.Append(b.DefaultCase(s), [&] { b.ExitSwitch(s); });
@@ -169,10 +169,10 @@ TEST_F(HlslWriterFxcPolyfillTest, Switch) {
 
 // Switch body with assignment
 TEST_F(HlslWriterFxcPolyfillTest, SwitchWithAssignment) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
 
     auto* a = b.Var<private_>("a", b.Zero<i32>());
-    b.ir.root_block->Append(a);
+    b.ir->root_block->Append(a);
 
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);
@@ -228,10 +228,10 @@ $B1: {  # root
 
 // Switch with if with break
 TEST_F(HlslWriterFxcPolyfillTest, SwitchWithIfBreak) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
 
     auto* a = b.Var<private_>("a", b.Zero<i32>());
-    b.ir.root_block->Append(a);
+    b.ir->root_block->Append(a);
 
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);
@@ -301,10 +301,10 @@ $B1: {  # root
 
 // Switch with loop with break
 TEST_F(HlslWriterFxcPolyfillTest, SwitchWithLoopBreak) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
 
     auto* a = b.Var<private_>("a", b.Zero<i32>());
-    b.ir.root_block->Append(a);
+    b.ir->root_block->Append(a);
 
     b.Append(func->Block(), [&] {
         auto* s = b.Switch(1_i);

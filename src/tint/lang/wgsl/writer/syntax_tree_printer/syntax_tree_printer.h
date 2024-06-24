@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_WRITER_SYNTAX_TREE_PRINTER_SYNTAX_TREE_PRINTER_H_
 #define SRC_TINT_LANG_WGSL_WRITER_SYNTAX_TREE_PRINTER_SYNTAX_TREE_PRINTER_H_
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/utils/generator/text_generator.h"
 
@@ -208,7 +209,7 @@ class SyntaxTreePrinter : public tint::TextGenerator {
     void EmitAttributes(VectorRef<const ast::Attribute*> attrs);
 
   private:
-    const Program& program_;
+    const raw_ref<const Program> program_;
 };
 
 }  // namespace tint::wgsl::writer

@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_MEMBER_ACCESSOR_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_SEM_MEMBER_ACCESSOR_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/accessor_expression.h"
 #include "src/tint/utils/containers/vector.h"
 
@@ -101,7 +102,7 @@ class StructMemberAccess final : public Castable<StructMemberAccess, MemberAcces
     core::type::StructMember const* Member() const { return member_; }
 
   private:
-    core::type::StructMember const* const member_;
+    const raw_ptr<const core::type::StructMember> member_;
 };
 
 /// Swizzle holds the semantic information for a ast::MemberAccessorExpression

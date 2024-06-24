@@ -33,7 +33,7 @@ namespace tint::hlsl::writer {
 namespace {
 
 TEST_F(HlslWriterTest, If) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
@@ -53,7 +53,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithElseIf) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
@@ -81,7 +81,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithElse) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
@@ -104,7 +104,7 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfBothBranchesReturn) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* if_ = b.If(true);
@@ -129,11 +129,11 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithSinglePhi) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()));
+        i->SetResults(b.InstructionResult(ty->i32()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i);
         });
@@ -159,11 +159,11 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithMultiPhi) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -192,11 +192,11 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithMultiPhiReturn1) {
-    auto* func = b.Function("foo", ty.i32(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->i32(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });
@@ -226,11 +226,11 @@ int foo() {
 }
 
 TEST_F(HlslWriterTest, IfWithMultiPhiReturn2) {
-    auto* func = b.Function("foo", ty.bool_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->bool_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* i = b.If(true);
-        i->SetResults(b.InstructionResult(ty.i32()), b.InstructionResult(ty.bool_()));
+        i->SetResults(b.InstructionResult(ty->i32()), b.InstructionResult(ty->bool_()));
         b.Append(i->True(), [&] {  //
             b.ExitIf(i, 10_i, true);
         });

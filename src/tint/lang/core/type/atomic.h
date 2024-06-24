@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/type.h"
 
 namespace tint::core::type {
@@ -66,7 +67,7 @@ class Atomic final : public Castable<Atomic, Type> {
     Atomic* Clone(CloneContext& ctx) const override;
 
   private:
-    core::type::Type const* const subtype_;
+    const raw_ptr<const core::type::Type> subtype_;
 };
 
 }  // namespace tint::core::type

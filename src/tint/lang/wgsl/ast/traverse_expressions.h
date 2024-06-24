@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/binary_expression.h"
 #include "src/tint/lang/wgsl/ast/call_expression.h"
 #include "src/tint/lang/wgsl/ast/index_accessor_expression.h"
@@ -78,7 +79,7 @@ bool TraverseExpressions(const Expression* root, CALLBACK&& callback) {
     constexpr static bool kHasDepthArg = traits::SignatureOfT<CALLBACK>::parameter_count == 2;
 
     struct Pending {
-        const Expression* expr;
+        raw_ptr<const Expression> expr;
         size_t depth;
     };
 

@@ -27,6 +27,7 @@
 
 #include "src/tint/lang/core/ir/transform/value_to_let.h"
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/validator.h"
 
@@ -59,18 +60,18 @@ Accesses AccessesFor(ir::Instruction* inst) {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// The IR builder.
-    Builder b{ir};
+    Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
         // Process each block.
-        for (auto* block : ir.blocks.Objects()) {
+        for (auto* block : ir->blocks.Objects()) {
             Process(block);
         }
     }
@@ -163,9 +164,9 @@ struct State {
         value->ReplaceAllUsesWith(let->Result(0));
         let->SetValue(value);
         let->InsertAfter(inst);
-        if (auto name = b.ir.NameOf(value); name.IsValid()) {
-            b.ir.SetName(let->Result(0), name);
-            b.ir.ClearName(value);
+        if (auto name = b.ir->NameOf(value); name.IsValid()) {
+            b.ir->SetName(let->Result(0), name);
+            b.ir->ClearName(value);
         }
         return let;
     }
@@ -179,7 +180,7 @@ Result<SuccessType> ValueToLet(Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

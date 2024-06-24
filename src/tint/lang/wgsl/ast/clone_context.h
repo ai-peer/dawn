@@ -34,6 +34,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/builder.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/containers/hashset.h"
@@ -507,7 +508,7 @@ class CloneContext {
     }
 
     /// The target Builder to clone into.
-    Builder* const dst;
+    const raw_ptr<Builder> dst;
 
     /// The source Program generation identifier.
     GenerationID const src_id;
@@ -523,7 +524,7 @@ class CloneContext {
         ~CloneableTransform();
 
         // TypeInfo of the Node that the transform operates on
-        const TypeInfo* typeinfo;
+        raw_ptr<const TypeInfo> typeinfo;
         std::function<const ast::Node*(const ast::Node*)> function;
     };
 

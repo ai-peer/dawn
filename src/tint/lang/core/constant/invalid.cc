@@ -39,7 +39,7 @@ Invalid::Invalid(const core::type::Invalid* ty) : type(ty) {}
 Invalid::~Invalid() = default;
 
 const Invalid* Invalid::Clone(CloneContext& ctx) const {
-    return ctx.dst.Invalid();
+    return ctx.dst->Invalid();
 }
 
 }  // namespace tint::core::constant

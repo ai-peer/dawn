@@ -61,7 +61,8 @@ TEST_F(ConstantTest_Invalid, Clone) {
     auto* invalid = constants.Invalid();
 
     constant::Manager mgr;
-    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}}, mgr};
+    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}},
+                               raw_ref(mgr)};
 
     auto* cloned = invalid->Clone(ctx);
     EXPECT_NE(cloned, invalid);

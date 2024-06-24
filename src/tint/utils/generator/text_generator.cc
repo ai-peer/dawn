@@ -115,11 +115,11 @@ std::string TextGenerator::TextBuffer::String(uint32_t indent /* = 0 */) const {
 }
 
 TextGenerator::ScopedParen::ScopedParen(StringStream& stream) : s(stream) {
-    s << "(";
+    (*s) << "(";
 }
 
 TextGenerator::ScopedParen::~ScopedParen() {
-    s << ")";
+    (*s) << ")";
 }
 
 TextGenerator::ScopedIndent::ScopedIndent(TextGenerator* generator)

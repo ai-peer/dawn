@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/type/vector.h"
 
 // Forward declarations
@@ -90,8 +91,8 @@ class Matrix final : public Castable<Matrix, Type> {
     Matrix* Clone(CloneContext& ctx) const override;
 
   private:
-    const Type* const subtype_;
-    const Vector* const column_type_;
+    const raw_ptr<const Type> subtype_;
+    const raw_ptr<const Vector> column_type_;
     const uint32_t rows_;
     const uint32_t columns_;
 };

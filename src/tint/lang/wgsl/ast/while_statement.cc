@@ -60,8 +60,8 @@ const WhileStatement* WhileStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
 
-    auto* cond = ctx.Clone(condition);
-    auto* b = ctx.Clone(body);
+    auto* cond = ctx.Clone(condition.get());
+    auto* b = ctx.Clone(body.get());
     auto attrs = ctx.Clone(attributes);
     return ctx.dst->create<WhileStatement>(src, cond, b, std::move(attrs));
 }

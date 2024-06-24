@@ -66,7 +66,7 @@ ast::transform::Transform::ApplyResult WhileToLoop::Apply(const Program& src,
 
     ctx.ReplaceAll([&](const ast::WhileStatement* w) -> const ast::Statement* {
         tint::Vector<const ast::Statement*, 16> stmts;
-        auto* cond = w->condition;
+        auto* cond = w->condition.get();
 
         // !condition
         auto* not_cond = b.Not(ctx.Clone(cond));

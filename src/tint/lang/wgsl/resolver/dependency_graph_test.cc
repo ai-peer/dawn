@@ -29,6 +29,7 @@
 #include <tuple>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "gmock/gmock.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
@@ -389,7 +390,7 @@ int ScopeDepth(SymbolUseKind kind) {
 /// A helper for building programs that exercise symbol declaration tests.
 struct SymbolTestHelper {
     /// The program builder
-    ProgramBuilder* const builder;
+    const raw_ptr<ProgramBuilder> builder;
     /// Parameters to a function that may need to be built
     Vector<const ast::Parameter*, 8> parameters;
     /// Shallow function var / let declaration statements
@@ -1527,11 +1528,12 @@ TEST_P(ResolverDependencyGraphShadowScopeTest, Test) {
     SymbolTestHelper helper(this);
     auto* outer = helper.Add(outer_kind, symbol, Source{{12, 34}});
     helper.Add(inner_kind, symbol, Source{{56, 78}});
-    auto* inner_var = helper.nested_statements.Length()
-                          ? helper.nested_statements[0]->As<ast::VariableDeclStatement>()->variable
-                      : helper.statements.Length()
-                          ? helper.statements[0]->As<ast::VariableDeclStatement>()->variable
-                          : helper.parameters[0];
+    auto* inner_var =
+        helper.nested_statements.Length()
+            ? helper.nested_statements[0]->As<ast::VariableDeclStatement>()->variable.get()
+        : helper.statements.Length()
+            ? helper.statements[0]->As<ast::VariableDeclStatement>()->variable.get()
+            : helper.parameters[0];
     helper.Build();
 
     auto shadows = Build().shadows;
@@ -1671,8 +1673,8 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
     const auto* func_decl = Func(func_sym, tint::Empty, ty.void_(), tint::Empty);
 
     struct SymbolUse {
-        const ast::Node* decl = nullptr;
-        const ast::Identifier* use = nullptr;
+        raw_ptr<const ast::Node> decl = nullptr;
+        raw_ptr<const ast::Identifier> use = nullptr;
         std::string where;
     };
 

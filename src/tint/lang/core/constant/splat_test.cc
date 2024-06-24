@@ -93,7 +93,8 @@ TEST_F(ConstantTest_Splat, Clone) {
     auto* sp = constants.Splat(vec2i, val);
 
     constant::Manager mgr;
-    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}}, mgr};
+    constant::CloneContext ctx{core::type::CloneContext{{nullptr}, {nullptr, &mgr.types}},
+                               raw_ref(mgr)};
 
     auto* r = sp->Clone(ctx);
     EXPECT_NE(r, sp);

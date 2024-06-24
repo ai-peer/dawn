@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -43,18 +44,18 @@ namespace {
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// Process the module.
     void Process() {
         // Find user-declared functions that have value arguments containing matrices.
-        for (auto& func : ir.functions) {
+        for (auto& func : ir->functions) {
             for (auto* param : func->Params()) {
                 if (ContainsMatrix(param->Type())) {
                     TransformFunction(func);
@@ -90,7 +91,7 @@ struct State {
         for (auto* param : func->Params()) {
             if (ContainsMatrix(param->Type())) {
                 // Replace the value parameter with a pointer.
-                auto* new_param = b.FunctionParam(ty.ptr(function, param->Type()));
+                auto* new_param = b.FunctionParam(ty->ptr(function, param->Type()));
 
                 // Load from the pointer to get the value.
                 auto* load = b.Load(new_param);
@@ -117,7 +118,7 @@ struct State {
     void ReplaceCallArgument(core::ir::UserCall* call, size_t arg_index) {
         // Copy the argument to a locally declared variable.
         auto* arg = call->Args()[arg_index];
-        auto* local_var = b.Var(ty.ptr(function, arg->Type()));
+        auto* local_var = b.Var(ty->ptr(function, arg->Type()));
         local_var->SetInitializer(arg);
         local_var->InsertBefore(call);
 
@@ -133,7 +134,7 @@ Result<SuccessType> PassMatrixByPointer(core::ir::Module& ir) {
         return result;
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

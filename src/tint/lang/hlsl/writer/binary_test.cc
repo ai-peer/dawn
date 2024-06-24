@@ -50,12 +50,12 @@ using HlslWriterBinaryU32Test = HlslWriterTestWithParam<BinaryData>;
 TEST_P(HlslWriterBinaryU32Test, Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(params.op, ty.u32(), l, r);
+        auto* bin = b.Binary(params.op, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -83,12 +83,12 @@ INSTANTIATE_TEST_SUITE_P(HlslWriterTest,
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryU32Div) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kDivide, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kDivide, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -111,12 +111,12 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryU32Mod) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kModulo, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kModulo, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -139,12 +139,12 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryU32ShiftLeft) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kShiftLeft, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kShiftLeft, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -163,12 +163,12 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryU32ShiftRight) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(core::BinaryOp::kShiftRight, ty.u32(), l, r);
+        auto* bin = b.Binary(core::BinaryOp::kShiftRight, ty->u32(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -189,12 +189,12 @@ using HlslWriterBinaryBoolTest = HlslWriterTestWithParam<BinaryData>;
 TEST_P(HlslWriterBinaryBoolTest, Emit) {
     auto params = GetParam();
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* l = b.Let("left", b.Constant(1_u));
         auto* r = b.Let("right", b.Constant(2_u));
-        auto* bin = b.Binary(params.op, ty.bool_(), l, r);
+        auto* bin = b.Binary(params.op, ty->bool_(), l, r);
         b.Let("val", bin);
         b.Return(func);
     });
@@ -223,15 +223,15 @@ INSTANTIATE_TEST_SUITE_P(
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryF32Mod) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, f32>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, f32>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, f32>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, f32>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.f32(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->f32(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -259,15 +259,15 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryF16Mod) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr<core::AddressSpace::kFunction, f16>());
-        auto* right = b.Var("right", ty.ptr<core::AddressSpace::kFunction, f16>());
+        auto* left = b.Var("left", ty->ptr<core::AddressSpace::kFunction, f16>());
+        auto* right = b.Var("right", ty->ptr<core::AddressSpace::kFunction, f16>());
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.f16(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->f16(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -295,15 +295,15 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryF32ModVec3) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f32>()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f32>()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f32>()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f32>()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.vec3<f32>(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->vec3<f32>(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -331,15 +331,15 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryF16ModVec3) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f16>()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.vec3<f16>()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f16>()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->vec3<f16>()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty.vec3<f16>(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kModulo, ty->vec3<f16>(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -366,15 +366,15 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BinaryBoolAnd) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.bool_()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.bool_()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->bool_()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->bool_()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kAnd, ty.bool_(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kAnd, ty->bool_(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -393,15 +393,15 @@ void foo() {
 }
 
 TEST_F(HlslWriterTest, BinaryBoolOr) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
-        auto* left = b.Var("left", ty.ptr(core::AddressSpace::kFunction, ty.bool_()));
-        auto* right = b.Var("right", ty.ptr(core::AddressSpace::kFunction, ty.bool_()));
+        auto* left = b.Var("left", ty->ptr(core::AddressSpace::kFunction, ty->bool_()));
+        auto* right = b.Var("right", ty->ptr(core::AddressSpace::kFunction, ty->bool_()));
 
         auto* l = b.Load(left);
         auto* r = b.Load(right);
-        auto* expr1 = b.Binary(core::BinaryOp::kOr, ty.bool_(), l, r);
+        auto* expr1 = b.Binary(core::BinaryOp::kOr, ty->bool_(), l, r);
 
         b.Let("val", expr1);
         b.Return(func);
@@ -421,7 +421,7 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryLogicalAnd) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* x = b.Var("x", true);
@@ -429,7 +429,7 @@ TEST_F(HlslWriterTest, DISABLED_BinaryLogicalAnd) {
 
         auto* l = b.Load(x);
         auto* r = b.Load(y);
-        b.Var("c", b.Binary(core::BinaryOp::kLogicalAnd, ty.bool_(), l, r));
+        b.Var("c", b.Binary(core::BinaryOp::kLogicalAnd, ty->bool_(), l, r));
         b.Return(func);
     });
 
@@ -451,7 +451,7 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryLogicalOr) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* x = b.Var("x", true);
@@ -459,7 +459,7 @@ TEST_F(HlslWriterTest, DISABLED_BinaryLogicalOr) {
 
         auto* l = b.Load(x);
         auto* r = b.Load(y);
-        b.Var("c", b.Binary(core::BinaryOp::kLogicalOr, ty.bool_(), l, r));
+        b.Var("c", b.Binary(core::BinaryOp::kLogicalOr, ty->bool_(), l, r));
         b.Return(func);
     });
 
@@ -481,14 +481,14 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryMulMatVec) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* x = b.Var("x", b.Zero<mat4x4<f32>>());
         auto* y = b.Var("y", b.Zero<vec4<f32>>());
         auto* l = b.Load(x);
         auto* r = b.Load(y);
-        b.Var("c", b.Multiply(ty.vec4<f32>(), l, r));
+        b.Var("c", b.Multiply(ty->vec4<f32>(), l, r));
         b.Return(func);
     });
 
@@ -506,14 +506,14 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryMulVecMat) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* x = b.Var("x", b.Zero<mat4x4<f32>>());
         auto* y = b.Var("y", b.Zero<vec4<f32>>());
         auto* l = b.Load(x);
         auto* r = b.Load(y);
-        b.Var("c", b.Multiply(ty.vec4<f32>(), r, l));
+        b.Var("c", b.Multiply(ty->vec4<f32>(), r, l));
         b.Return(func);
     });
 
@@ -531,14 +531,14 @@ void foo() {
 
 // TODO(dsinclair): Needs binary polyfill
 TEST_F(HlslWriterTest, DISABLED_BinaryMulMatMat) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute);
     func->SetWorkgroupSize(1, 1, 1);
     b.Append(func->Block(), [&] {
         auto* x = b.Var("x", b.Zero<mat4x4<f32>>());
         auto* y = b.Var("y", b.Zero<mat4x4<f32>>());
         auto* l = b.Load(x);
         auto* r = b.Load(y);
-        b.Var("c", b.Multiply(ty.mat4x4<f32>(), l, r));
+        b.Var("c", b.Multiply(ty->mat4x4<f32>(), l, r));
         b.Return(func);
     });
 

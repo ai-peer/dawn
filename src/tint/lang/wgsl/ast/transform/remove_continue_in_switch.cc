@@ -30,6 +30,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/ast/continue_statement.h"
 #include "src/tint/lang/wgsl/ast/switch_statement.h"
 #include "src/tint/lang/wgsl/ast/transform/get_insertion_point.h"
@@ -56,21 +58,21 @@ struct RemoveContinueInSwitch::State {
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
         // First collect all switch statements within loops that contain a continue statement.
-        for (auto* node : src.ASTNodes().Objects()) {
+        for (auto* node : src->ASTNodes().Objects()) {
             auto* cont = node->As<ast::ContinueStatement>();
             if (!cont) {
                 continue;
             }
 
             // If first parent is not a switch within a loop, skip
-            auto* switch_stmt = GetParentSwitchInLoop(sem, cont);
+            auto* switch_stmt = GetParentSwitchInLoop(*sem, cont);
             if (!switch_stmt) {
                 continue;
             }
 
             auto& info = switch_infos.GetOrAdd(switch_stmt, [&] {
                 switch_stmts.Push(switch_stmt);
-                auto* block = sem.Get(switch_stmt)->FindFirstParent<sem::LoopBlockStatement>();
+                auto* block = sem->Get(switch_stmt)->FindFirstParent<sem::LoopBlockStatement>();
                 return SwitchInfo{/* loop_block */ block, /* continues */ Empty};
             });
             info.continues.Push(cont);
@@ -107,16 +109,16 @@ struct RemoveContinueInSwitch::State {
             for (auto& c : info->continues) {
                 // Replace 'continue;' with 'tint_continue = true; break;'
                 ctx.Replace(c, b.Assign(b.Expr(var_name), true));
-                ctx.InsertAfter(sem.Get(c)->Block()->Declaration()->statements, c, b.Break());
+                ctx.InsertAfter(sem->Get(c)->Block()->Declaration()->statements, c, b.Break());
             }
 
             // Insert 'if (tint_continue) { break; }' after switch, and all parent switches,
             // except for the parent-most, for which we insert 'if (tint_continue) { continue; }'
             auto* curr_switch = switch_stmt;
             while (curr_switch) {
-                auto* curr_switch_sem = sem.Get(curr_switch);
+                auto* curr_switch_sem = sem->Get(curr_switch);
                 auto* parent = curr_switch_sem->Parent()->Declaration();
-                auto* next_switch = GetParentSwitchInLoop(sem, parent);
+                auto* next_switch = GetParentSwitchInLoop(*sem, parent);
 
                 if (switch_handles_continue.Add(curr_switch)) {
                     const ast::IfStatement* if_stmt = nullptr;
@@ -139,13 +141,13 @@ struct RemoveContinueInSwitch::State {
 
   private:
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Alias to src.sem
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
 
     // Vector of switch statements within a loop that contains at least one continue statement.
     Vector<const ast::SwitchStatement*, 4> switch_stmts;
@@ -153,7 +155,7 @@ struct RemoveContinueInSwitch::State {
     // Info for each switch statement within a loop that contains at least one continue statement.
     struct SwitchInfo {
         // Loop block containing this switch
-        const sem::LoopBlockStatement* loop_block;
+        raw_ptr<const sem::LoopBlockStatement> loop_block;
         // Continue statements within this switch
         Vector<const ast::ContinueStatement*, 4> continues;
     };

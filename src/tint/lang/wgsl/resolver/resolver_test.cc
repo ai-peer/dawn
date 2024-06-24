@@ -294,7 +294,7 @@ TEST_F(ResolverTest, Stmt_Call) {
 
 TEST_F(ResolverTest, Stmt_VariableDecl) {
     auto* var = Var("my_var", ty.i32(), Expr(2_i));
-    auto* init = var->initializer;
+    auto* init = var->initializer.get();
 
     auto* decl = Decl(var);
     WrapInFunction(decl);
@@ -308,7 +308,7 @@ TEST_F(ResolverTest, Stmt_VariableDecl) {
 TEST_F(ResolverTest, Stmt_VariableDecl_Alias) {
     auto* my_int = Alias("MyInt", ty.i32());
     auto* var = Var("my_var", ty.Of(my_int), Expr(2_i));
-    auto* init = var->initializer;
+    auto* init = var->initializer.get();
 
     auto* decl = Decl(var);
     WrapInFunction(decl);
@@ -342,24 +342,24 @@ TEST_F(ResolverTest, Stmt_VariableDecl_OuterScopeAfterInnerScope) {
 
     // Declare i32 "foo" inside a block
     auto* foo_i32 = Var("foo", ty.i32(), Expr(2_i));
-    auto* foo_i32_init = foo_i32->initializer;
+    auto* foo_i32_init = foo_i32->initializer.get();
     auto* foo_i32_decl = Decl(foo_i32);
 
     // Reference "foo" inside the block
     auto* bar_i32 = Var("bar", ty.i32(), Expr("foo"));
-    auto* bar_i32_init = bar_i32->initializer;
+    auto* bar_i32_init = bar_i32->initializer.get();
     auto* bar_i32_decl = Decl(bar_i32);
 
     auto* inner = Block(foo_i32_decl, bar_i32_decl);
 
     // Declare f32 "foo" at function scope
     auto* foo_f32 = Var("foo", ty.f32(), Expr(2_f));
-    auto* foo_f32_init = foo_f32->initializer;
+    auto* foo_f32_init = foo_f32->initializer.get();
     auto* foo_f32_decl = Decl(foo_f32);
 
     // Reference "foo" at function scope
     auto* bar_f32 = Var("bar", ty.f32(), Expr("foo"));
-    auto* bar_f32_init = bar_f32->initializer;
+    auto* bar_f32_init = bar_f32->initializer.get();
     auto* bar_f32_decl = Decl(bar_f32);
 
     Func("func", tint::Empty, ty.void_(), Vector{inner, foo_f32_decl, bar_f32_decl});
@@ -396,18 +396,18 @@ TEST_F(ResolverTest, Stmt_VariableDecl_ModuleScopeAfterFunctionScope) {
 
     // Declare i32 "foo" inside a function
     auto* fn_i32 = Var("foo", ty.i32(), Expr(2_i));
-    auto* fn_i32_init = fn_i32->initializer;
+    auto* fn_i32_init = fn_i32->initializer.get();
     auto* fn_i32_decl = Decl(fn_i32);
     Func("func_i32", tint::Empty, ty.void_(), Vector{fn_i32_decl});
 
     // Declare f32 "foo" at module scope
     auto* mod_f32 = Var("foo", ty.f32(), core::AddressSpace::kPrivate, Expr(2_f));
-    auto* mod_init = mod_f32->initializer;
+    auto* mod_init = mod_f32->initializer.get();
     AST().AddGlobalVariable(mod_f32);
 
     // Reference "foo" in another function
     auto* fn_f32 = Var("bar", ty.f32(), Expr("foo"));
-    auto* fn_f32_init = fn_f32->initializer;
+    auto* fn_f32_init = fn_f32->initializer.get();
     auto* fn_f32_decl = Decl(fn_f32);
     Func("func_f32", tint::Empty, ty.void_(), Vector{fn_f32_decl});
 

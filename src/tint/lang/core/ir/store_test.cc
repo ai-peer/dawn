@@ -39,7 +39,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_StoreTest = IRTestHelper;
 
 TEST_F(IR_StoreTest, CreateStore) {
-    auto* to = b.Var(ty.ptr<private_, i32>());
+    auto* to = b.Var(ty->ptr<private_, i32>());
     auto* inst = b.Store(to, 4_i);
 
     ASSERT_TRUE(inst->Is<Store>());
@@ -52,7 +52,7 @@ TEST_F(IR_StoreTest, CreateStore) {
 }
 
 TEST_F(IR_StoreTest, Usage) {
-    auto* to = b.Var(ty.ptr<private_, i32>());
+    auto* to = b.Var(ty->ptr<private_, i32>());
     auto* inst = b.Store(to, 4_i);
 
     ASSERT_NE(inst->To(), nullptr);
@@ -63,7 +63,7 @@ TEST_F(IR_StoreTest, Usage) {
 }
 
 TEST_F(IR_StoreTest, Result) {
-    auto* to = b.Var(ty.ptr<private_, i32>());
+    auto* to = b.Var(ty->ptr<private_, i32>());
     auto* inst = b.Store(to, 4_i);
 
     EXPECT_TRUE(inst->Results().IsEmpty());

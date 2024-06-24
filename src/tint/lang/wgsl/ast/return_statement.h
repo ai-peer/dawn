@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_RETURN_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_RETURN_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
 
@@ -59,7 +60,7 @@ class ReturnStatement final : public Castable<ReturnStatement, Statement> {
     const ReturnStatement* Clone(CloneContext& ctx) const override;
 
     /// The value returned. May be null.
-    const Expression* const value;
+    const raw_ptr<const Expression> value;
 };
 
 }  // namespace tint::ast

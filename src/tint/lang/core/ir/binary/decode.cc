@@ -32,6 +32,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/control_instruction.h"
 #include "src/tint/lang/core/ir/module.h"
@@ -62,7 +63,7 @@ namespace tint::core::ir::binary {
 namespace {
 
 struct Decoder {
-    const pb::Module& mod_in_;
+    const raw_ref<const pb::Module> mod_in_;
 
     Module mod_out_{};
     Vector<ir::Block*, 32> blocks_{};
@@ -83,51 +84,51 @@ struct Decoder {
 
     Result<Module> Decode() {
         {
-            const size_t n = static_cast<size_t>(mod_in_.types().size());
+            const size_t n = static_cast<size_t>(mod_in_->types().size());
             types_.Reserve(n);
-            for (auto& type_in : mod_in_.types()) {
+            for (auto& type_in : mod_in_->types()) {
                 types_.Push(CreateType(type_in));
             }
         }
         {
-            const size_t n = static_cast<size_t>(mod_in_.functions().size());
+            const size_t n = static_cast<size_t>(mod_in_->functions().size());
             mod_out_.functions.Reserve(n);
-            for (auto& fn_in : mod_in_.functions()) {
+            for (auto& fn_in : mod_in_->functions()) {
                 mod_out_.functions.Push(CreateFunction(fn_in));
             }
         }
         {
-            const size_t n = static_cast<size_t>(mod_in_.blocks().size());
+            const size_t n = static_cast<size_t>(mod_in_->blocks().size());
             blocks_.Reserve(n);
             for (size_t i = 0; i < n; i++) {
                 auto id = static_cast<uint32_t>(i);
-                if (id == mod_in_.root_block()) {
+                if (id == mod_in_->root_block()) {
                     blocks_.Push(mod_out_.root_block);
                 } else {
-                    auto& block_in = mod_in_.blocks()[static_cast<int>(i)];
+                    auto& block_in = mod_in_->blocks()[static_cast<int>(i)];
                     blocks_.Push(CreateBlock(block_in));
                 }
             }
         }
         {
-            const size_t n = static_cast<size_t>(mod_in_.constant_values().size());
+            const size_t n = static_cast<size_t>(mod_in_->constant_values().size());
             constant_values_.Reserve(n);
-            for (auto& value_in : mod_in_.constant_values()) {
+            for (auto& value_in : mod_in_->constant_values()) {
                 constant_values_.Push(CreateConstantValue(value_in));
             }
         }
         {
-            const size_t n = static_cast<size_t>(mod_in_.values().size());
+            const size_t n = static_cast<size_t>(mod_in_->values().size());
             values_.Reserve(n);
-            for (auto& value_in : mod_in_.values()) {
+            for (auto& value_in : mod_in_->values()) {
                 values_.Push(CreateValue(value_in));
             }
         }
-        for (size_t i = 0, n = static_cast<size_t>(mod_in_.functions().size()); i < n; i++) {
-            PopulateFunction(mod_out_.functions[i], mod_in_.functions()[static_cast<int>(i)]);
+        for (size_t i = 0, n = static_cast<size_t>(mod_in_->functions().size()); i < n; i++) {
+            PopulateFunction(mod_out_.functions[i], mod_in_->functions()[static_cast<int>(i)]);
         }
-        for (size_t i = 0, n = static_cast<size_t>(mod_in_.blocks().size()); i < n; i++) {
-            PopulateBlock(blocks_[i], mod_in_.blocks()[static_cast<int>(i)]);
+        for (size_t i = 0, n = static_cast<size_t>(mod_in_->blocks().size()); i < n; i++) {
+            PopulateBlock(blocks_[i], mod_in_->blocks()[static_cast<int>(i)]);
         }
 
         if (diags_.ContainsErrors()) {
@@ -857,7 +858,7 @@ struct Decoder {
         auto access = AccessControl(texture_in.access());
         return mod_out_.Types().Get<type::StorageTexture>(
             dimension, texel_format, access,
-            type::StorageTexture::SubtypeFor(texel_format, b.ir.Types()));
+            type::StorageTexture::SubtypeFor(texel_format, b.ir->Types()));
     }
 
     const type::ExternalTexture* CreateTypeExternalTexture(const pb::TypeExternalTexture&) {
@@ -1632,7 +1633,7 @@ Result<Module> Decode(Slice<const std::byte> encoded) {
 }
 
 Result<Module> Decode(const pb::Module& mod_in) {
-    return Decoder{mod_in}.Decode();
+    return Decoder{raw_ref(mod_in)}.Decode();
 }
 
 }  // namespace tint::core::ir::binary

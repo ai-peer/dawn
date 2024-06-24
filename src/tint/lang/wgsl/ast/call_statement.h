@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_CALL_STATEMENT_H_
 #define SRC_TINT_LANG_WGSL_AST_CALL_STATEMENT_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/call_expression.h"
 #include "src/tint/lang/wgsl/ast/statement.h"
 
@@ -53,7 +54,7 @@ class CallStatement final : public Castable<CallStatement, Statement> {
     const CallStatement* Clone(CloneContext& ctx) const override;
 
     /// The call expression
-    const CallExpression* const expr;
+    const raw_ptr<const CallExpression> expr;
 };
 
 }  // namespace tint::ast

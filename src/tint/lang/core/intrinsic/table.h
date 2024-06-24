@@ -32,6 +32,8 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/binary_op.h"
 #include "src/tint/lang/core/builtin_fn.h"
 #include "src/tint/lang/core/evaluation_stage.h"
@@ -58,7 +60,7 @@ struct Overload {
     /// Parameter describes a single parameter
     struct Parameter {
         /// Parameter type
-        const core::type::Type* const type;
+        const raw_ptr<const core::type::Type> type;
         /// Parameter usage
         core::ParameterUsage const usage = core::ParameterUsage::kNone;
 
@@ -76,10 +78,10 @@ struct Overload {
     };
 
     /// The overload information
-    const OverloadInfo* info = nullptr;
+    raw_ptr<const OverloadInfo> info = nullptr;
 
     /// The resolved overload return type
-    core::type::Type const* return_type = nullptr;
+    raw_ptr<const core::type::Type> return_type = nullptr;
 
     /// The resolved overload parameters
     Vector<Parameter, kNumFixedParameters> parameters;
@@ -104,11 +106,11 @@ struct Overload {
 /// The context data used to lookup intrinsic information
 struct Context {
     /// The table table
-    const TableData& data;
+    const raw_ref<const TableData> data;
     /// The type manager
-    core::type::Manager& types;
+    const raw_ref<core::type::Manager> types;
     /// The symbol table
-    SymbolTable& symbols;
+    const raw_ref<SymbolTable> symbols;
 
     /// @returns a MatchState from the context and arguments.
     /// @param templates the template state used for matcher evaluation
@@ -118,7 +120,7 @@ struct Context {
                      const OverloadInfo& overload,
                      const MatcherIndex* matcher_indices,
                      EvaluationStage earliest_eval_stage) {
-        return MatchState(types, symbols, templates, data, overload, matcher_indices,
+        return MatchState(*types, *symbols, templates, *data, overload, matcher_indices,
                           earliest_eval_stage);
     }
 };
@@ -131,7 +133,7 @@ struct Candidate {
     /// Lower scores are displayed first (top-most).
     size_t score = 0;
     /// The candidate overload
-    const OverloadInfo* overload = nullptr;
+    raw_ptr<const OverloadInfo> overload = nullptr;
     /// The template types and numbers
     TemplateState templates{};
     /// The parameter types for the candidate overload
@@ -261,7 +263,7 @@ struct Table {
     /// @param types The type manager
     /// @param symbols The symbol table
     Table(core::type::Manager& types, SymbolTable& symbols)
-        : context{DIALECT::kData, types, symbols} {}
+        : context{raw_ref(DIALECT::kData), raw_ref(types), raw_ref(symbols)} {}
 
     /// Lookup looks for the builtin overload with the given signature, raising an error diagnostic
     /// if the builtin was not found.

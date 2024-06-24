@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/ast/builder.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/sem/block_statement.h"
@@ -51,15 +52,15 @@ struct HoistToDeclBefore::State {
              const Expression* expr,
              VariableKind kind,
              const char* decl_name) {
-        auto name = b.Symbols().New(decl_name);
+        auto name = b->Symbols().New(decl_name);
 
         switch (kind) {
             case VariableKind::kLet: {
-                auto* ty = ctx.src->Sem().GetVal(expr)->Type();
+                auto* ty = ctx->src->Sem().GetVal(expr)->Type();
                 TINT_ASSERT(!ty->HoldsAbstract());
                 auto builder = [this, expr, name, ty] {
-                    return b.Decl(b.Let(name, Transform::CreateASTTypeFor(ctx, ty),
-                                        ctx.CloneWithoutTransform(expr)));
+                    return b->Decl(b->Let(name, Transform::CreateASTTypeFor(*ctx, ty),
+                                          ctx->CloneWithoutTransform(expr)));
                 };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
@@ -68,11 +69,11 @@ struct HoistToDeclBefore::State {
             }
 
             case VariableKind::kVar: {
-                auto* ty = ctx.src->Sem().GetVal(expr)->Type();
+                auto* ty = ctx->src->Sem().GetVal(expr)->Type();
                 TINT_ASSERT(!ty->HoldsAbstract());
                 auto builder = [this, expr, name, ty] {
-                    return b.Decl(b.Var(name, Transform::CreateASTTypeFor(ctx, ty),
-                                        ctx.CloneWithoutTransform(expr)));
+                    return b->Decl(b->Var(name, Transform::CreateASTTypeFor(*ctx, ty),
+                                          ctx->CloneWithoutTransform(expr)));
                 };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
@@ -82,7 +83,7 @@ struct HoistToDeclBefore::State {
 
             case VariableKind::kConst: {
                 auto builder = [this, expr, name] {
-                    return b.Decl(b.Const(name, ctx.CloneWithoutTransform(expr)));
+                    return b->Decl(b->Const(name, ctx->CloneWithoutTransform(expr)));
                 };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
@@ -92,7 +93,7 @@ struct HoistToDeclBefore::State {
         }
 
         // Replace the source expression with a reference to the hoisted declaration.
-        ctx.Replace(expr, b.Expr(name));
+        ctx->Replace(expr, b->Expr(name));
         return true;
     }
 
@@ -121,7 +122,7 @@ struct HoistToDeclBefore::State {
         if (!InsertBeforeImpl(what, Decompose{})) {
             return false;
         }
-        ctx.Replace(what->Declaration(), with);
+        ctx->Replace(what->Declaration(), with);
         return true;
     }
 
@@ -131,8 +132,8 @@ struct HoistToDeclBefore::State {
     }
 
   private:
-    program::CloneContext& ctx;
-    ast::Builder& b;
+    const raw_ref<program::CloneContext> ctx;
+    const raw_ref<ast::Builder> b;
 
     /// Holds information about a for-loop that needs to be decomposed into a
     /// loop, so that declaration statements can be inserted before the
@@ -201,8 +202,8 @@ struct HoistToDeclBefore::State {
 
     /// Registers the handler for transforming for-loops based on the content of the #for_loops map.
     void RegisterForLoopTransform() const {
-        ctx.ReplaceAll([&](const ForLoopStatement* stmt) -> const Statement* {
-            auto& sem = ctx.src->Sem();
+        ctx->ReplaceAll([&](const ForLoopStatement* stmt) -> const Statement* {
+            auto& sem = ctx->src->Sem();
 
             if (auto* fl = sem.Get(stmt)) {
                 if (auto info = for_loops.Get(fl)) {
@@ -213,41 +214,41 @@ struct HoistToDeclBefore::State {
                     auto body_stmts = Build(info->cond_decls);
                     // If the for-loop has a condition, emit this next as:
                     //   if (!cond) { break; }
-                    if (auto* cond = for_loop->condition) {
+                    if (auto* cond = for_loop->condition.get()) {
                         // !condition
                         auto* not_cond =
-                            b.create<UnaryOpExpression>(core::UnaryOp::kNot, ctx.Clone(cond));
+                            b->create<UnaryOpExpression>(core::UnaryOp::kNot, ctx->Clone(cond));
                         // { break; }
-                        auto* break_body = b.Block(b.create<BreakStatement>());
+                        auto* break_body = b->Block(b->create<BreakStatement>());
                         // if (!condition) { break; }
-                        body_stmts.Push(b.If(not_cond, break_body));
+                        body_stmts.Push(b->If(not_cond, break_body));
                     }
                     // Next emit the for-loop body
-                    body_stmts.Push(ctx.Clone(for_loop->body));
+                    body_stmts.Push(ctx->Clone(for_loop->body));
 
                     // Create the continuing block if there was one.
                     const BlockStatement* continuing = nullptr;
-                    if (auto* cont = for_loop->continuing) {
+                    if (auto* cont = for_loop->continuing.get()) {
                         // Continuing block starts with any let declarations used by
                         // the continuing.
                         auto cont_stmts = Build(info->cont_decls);
-                        cont_stmts.Push(ctx.Clone(cont));
-                        continuing = b.Block(cont_stmts);
+                        cont_stmts.Push(ctx->Clone(cont));
+                        continuing = b->Block(cont_stmts);
                     }
 
-                    auto* body = b.Block(body_stmts);
-                    auto* loop = b.Loop(body, continuing);
+                    auto* body = b->Block(body_stmts);
+                    auto* loop = b->Loop(body, continuing);
 
                     // If the loop has no initializer statements, then we're done.
                     // Otherwise, wrap loop with another block, prefixed with the initializer
                     // statements
                     if (!info->init_decls.IsEmpty() || for_loop->initializer) {
                         auto stmts = Build(info->init_decls);
-                        if (auto* init = for_loop->initializer) {
-                            stmts.Push(ctx.Clone(init));
+                        if (auto* init = for_loop->initializer.get()) {
+                            stmts.Push(ctx->Clone(init));
                         }
                         stmts.Push(loop);
-                        return b.Block(std::move(stmts));
+                        return b->Block(std::move(stmts));
                     }
                     return loop;
                 }
@@ -260,8 +261,8 @@ struct HoistToDeclBefore::State {
     /// map.
     void RegisterWhileLoopTransform() const {
         // At least one while needs to be transformed into a loop.
-        ctx.ReplaceAll([&](const WhileStatement* stmt) -> const Statement* {
-            auto& sem = ctx.src->Sem();
+        ctx->ReplaceAll([&](const WhileStatement* stmt) -> const Statement* {
+            auto& sem = ctx->src->Sem();
 
             if (auto* w = sem.Get(stmt)) {
                 if (auto info = while_loops.Get(w)) {
@@ -274,21 +275,21 @@ struct HoistToDeclBefore::State {
                         tint::Transform(info->cond_decls, [&](auto& builder) { return builder(); });
                     // Emit the condition as:
                     //   if (!cond) { break; }
-                    auto* cond = while_loop->condition;
+                    auto* cond = while_loop->condition.get();
                     // !condition
-                    auto* not_cond = b.Not(ctx.Clone(cond));
+                    auto* not_cond = b->Not(ctx->Clone(cond));
                     // { break; }
-                    auto* break_body = b.Block(b.Break());
+                    auto* break_body = b->Block(b->Break());
                     // if (!condition) { break; }
-                    body_stmts.Push(b.If(not_cond, break_body));
+                    body_stmts.Push(b->If(not_cond, break_body));
 
                     // Next emit the body
-                    body_stmts.Push(ctx.Clone(while_loop->body));
+                    body_stmts.Push(ctx->Clone(while_loop->body));
 
                     const BlockStatement* continuing = nullptr;
 
-                    auto* body = b.Block(body_stmts);
-                    auto* loop = b.Loop(body, continuing);
+                    auto* body = b->Block(body_stmts);
+                    auto* loop = b->Loop(body, continuing);
                     return loop;
                 }
             }
@@ -300,20 +301,20 @@ struct HoistToDeclBefore::State {
     /// map.
     void RegisterElseIfTransform() const {
         // Decompose 'else-if' statements into 'else { if }' blocks.
-        ctx.ReplaceAll([&](const IfStatement* stmt) -> const Statement* {
+        ctx->ReplaceAll([&](const IfStatement* stmt) -> const Statement* {
             if (auto info = else_ifs.Get(stmt)) {
                 // Build the else block's body statements, starting with let decls for the
                 // conditional expression.
                 auto body_stmts = Build(info->cond_decls);
 
                 // Move the 'else-if' into the new `else` block as a plain 'if'.
-                auto* cond = ctx.Clone(stmt->condition);
-                auto* body = ctx.Clone(stmt->body);
-                auto* new_if = b.If(cond, body, b.Else(ctx.Clone(stmt->else_statement)));
+                auto* cond = ctx->Clone(stmt->condition);
+                auto* body = ctx->Clone(stmt->body);
+                auto* new_if = b->If(cond, body, b->Else(ctx->Clone(stmt->else_statement)));
                 body_stmts.Push(new_if);
 
                 // Replace the 'else-if' with the new 'else' block.
-                return b.Block(body_stmts);
+                return b->Block(body_stmts);
             }
             return nullptr;
         });
@@ -372,8 +373,8 @@ struct HoistToDeclBefore::State {
             // Insert point sits in a block. Simple case.
             // Insert the stmt before the parent statement.
             if constexpr (!std::is_same_v<BUILDER, Decompose>) {
-                ctx.InsertBefore(block->Declaration()->statements, ip,
-                                 std::forward<BUILDER>(builder));
+                ctx->InsertBefore(block->Declaration()->statements, ip,
+                                  std::forward<BUILDER>(builder));
             }
             return true;
         }

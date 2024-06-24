@@ -32,6 +32,8 @@
 #include <utility>
 #include <variant>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -144,7 +146,7 @@ struct Std140::State {
         };
 
         // Scan structures for members that need forking
-        for (auto* ty : src.Types()) {
+        for (auto* ty : src->Types()) {
             if (auto* str = ty->As<core::type::Struct>()) {
                 if (str->UsedAs(core::AddressSpace::kUniform)) {
                     for (auto* member : str->Members()) {
@@ -157,8 +159,8 @@ struct Std140::State {
         }
 
         // Scan uniform variables that have types that need forking
-        for (auto* decl : src.AST().GlobalVariables()) {
-            auto* global = src.Sem().Get(decl);
+        for (auto* decl : src->AST().GlobalVariables()) {
+            auto* global = src->Sem().Get(decl);
             if (global->AddressSpace() == core::AddressSpace::kUniform) {
                 if (needs_fork(global->Type()->UnwrapRef())) {
                     return true;
@@ -188,7 +190,7 @@ struct Std140::State {
     /// A key used to cache load functions for an access chain.
     struct LoadFnKey {
         /// The root uniform buffer variable for the access chain.
-        const sem::GlobalVariable* var;
+        raw_ptr<const sem::GlobalVariable> var;
 
         /// The chain of accesses indices.
         AccessIndices indices;
@@ -203,15 +205,15 @@ struct Std140::State {
     };
 
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// Alias to the semantic info in src
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
     /// Alias to the symbols in src
-    const SymbolTable& sym = src.Symbols();
+    const raw_ref<const SymbolTable> sym = src->Symbols();
 
     /// Map of load function signature, to the generated function
     Hashmap<LoadFnKey, Symbol, 8> load_fns;
@@ -245,14 +247,14 @@ struct Std140::State {
     /// AccessChain describes a chain of access expressions to uniform buffer variable.
     struct AccessChain {
         /// The uniform buffer variable.
-        const sem::GlobalVariable* var;
+        raw_ptr<const sem::GlobalVariable> var;
         /// The chain of access indices, starting with the first access on #var.
         AccessIndices indices;
         /// The runtime-evaluated expressions. This vector is indexed by the DynamicIndex::slot
         tint::Vector<const sem::ValueExpression*, 8> dynamic_indices;
         /// The type of the std140-decomposed matrix being accessed.
         /// May be nullptr if the chain does not pass through a std140-decomposed matrix.
-        const core::type::Matrix* std140_mat_ty = nullptr;
+        raw_ptr<const core::type::Matrix> std140_mat_ty = nullptr;
         /// The index in #indices of the access that resolves to the std140-decomposed matrix.
         /// May hold no value if the chain does not pass through a std140-decomposed matrix.
         std::optional<size_t> std140_mat_idx;
@@ -275,9 +277,9 @@ struct Std140::State {
     /// map (via Std140Type()).
     void ForkTypes() {
         // For each module scope declaration...
-        for (auto* global : src.Sem().Module()->DependencyOrderedDeclarations()) {
+        for (auto* global : src->Sem().Module()->DependencyOrderedDeclarations()) {
             // Check to see if this is a structure used by a uniform buffer...
-            auto* str = sem.Get<sem::Struct>(global);
+            auto* str = sem->Get<sem::Struct>(global);
             if (str && str->UsedAs(core::AddressSpace::kUniform)) {
                 // Should this uniform buffer be forked for std140 usage?
                 bool fork_std140 = false;
@@ -325,7 +327,7 @@ struct Std140::State {
                 if (fork_std140) {
                     // Clone any members that have not already been cloned.
                     for (auto& member : members) {
-                        if (member->generation_id == src.ID()) {
+                        if (member->generation_id == src->ID()) {
                             member = ctx.Clone(member);
                         }
                     }
@@ -334,7 +336,7 @@ struct Std140::State {
                     auto name = b.Symbols().New(str->Name().Name() + "_std140");
                     auto* std140 = b.create<Struct>(b.Ident(name), std::move(members),
                                                     ctx.Clone(str->Declaration()->attributes));
-                    ctx.InsertAfter(src.AST().GlobalDeclarations(), global, std140);
+                    ctx.InsertAfter(src->AST().GlobalDeclarations(), global, std140);
                     std140_structs.Add(str, name);
                 }
             }
@@ -345,12 +347,12 @@ struct Std140::State {
     /// type that has been forked for std140-layout.
     /// Populates the #std140_uniforms set.
     void ReplaceUniformVarTypes() {
-        for (auto* global : src.AST().GlobalVariables()) {
+        for (auto* global : src->AST().GlobalVariables()) {
             if (auto* var = global->As<Var>()) {
-                auto* v = sem.Get(var);
+                auto* v = sem->Get(var);
                 if (v->AddressSpace() == core::AddressSpace::kUniform) {
                     if (auto std140_ty = Std140Type(v->Type()->UnwrapRef())) {
-                        ctx.Replace(global->type.expr, b.Expr(std140_ty));
+                        ctx.Replace(global->type.expr.get(), b.Expr(std140_ty));
                         std140_uniforms.Add(v);
                     }
                 }
@@ -492,7 +494,7 @@ struct Std140::State {
     /// @returns an AccessChain if the expression is an access to a std140-forked uniform buffer,
     ///          otherwise returns a std::nullopt.
     std::optional<AccessChain> AccessChainFor(const Expression* ast_expr) {
-        auto* expr = sem.GetVal(ast_expr);
+        auto* expr = sem->GetVal(ast_expr);
         if (!expr) {
             return std::nullopt;
         }
@@ -576,7 +578,7 @@ struct Std140::State {
                                       switch (u->op) {
                                           case core::UnaryOp::kAddressOf:
                                           case core::UnaryOp::kIndirection:
-                                              expr = sem.GetVal(u->expr);
+                                              expr = sem->GetVal(u->expr.get());
                                               return Action::kContinue;
                                           default:
                                               TINT_ICE() << "unhandled unary op for access chain: "
@@ -1035,9 +1037,9 @@ struct Std140::State {
     /// Return type of BuildAccessExpr()
     struct ExprTypeName {
         /// The new, post-access expression
-        const Expression* expr;
+        raw_ptr<const Expression> expr;
         /// The type of #expr
-        const core::type::Type* type;
+        raw_ptr<const core::type::Type> type;
         /// A name segment which can be used to build sensible names for helper functions
         std::string name;
     };
@@ -1096,7 +1098,7 @@ struct Std140::State {
                     for (auto el : *swizzle) {
                         rhs += xyzw[el];
                     }
-                    auto swizzle_ty = src.Types().Find<core::type::Vector>(
+                    auto swizzle_ty = src->Types().Find<core::type::Vector>(
                         vec->type(), static_cast<uint32_t>(swizzle->Length()));
                     auto* expr = b.MemberAccessor(lhs, rhs);
                     return {expr, swizzle_ty, rhs};

@@ -28,6 +28,8 @@
 #include <array>
 #include <cstring>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/text/styled_text.h"
 #include "src/tint/utils/text/styled_text_printer.h"
@@ -58,54 +60,54 @@ class Printer24Bit : public StyledTextPrinter {
         StyledTextTheme::Attributes current;
 
         style_text.Walk([&](std::string_view text, TextStyle text_style) {
-            auto style = theme_.Get(text_style);
+            auto style = theme_->Get(text_style);
             if (!Equal(current.foreground, style.foreground)) {
                 current.foreground = style.foreground;
                 if (current.foreground.has_value()) {
-                    fprintf(file_, ESCAPE "[38;2;%d;%d;%dm",  //
+                    fprintf(file_.get(), ESCAPE "[38;2;%d;%d;%dm",  //
                             static_cast<int>(style.foreground->r),
                             static_cast<int>(style.foreground->g),
                             static_cast<int>(style.foreground->b));
                 } else {
-                    fprintf(file_, ESCAPE "[39m");
+                    fprintf(file_.get(), ESCAPE "[39m");
                 }
             }
             if (!Equal(current.background, style.background)) {
                 current.background = style.background;
                 if (current.background.has_value()) {
-                    fprintf(file_, ESCAPE "[48;2;%d;%d;%dm",  //
+                    fprintf(file_.get(), ESCAPE "[48;2;%d;%d;%dm",  //
                             static_cast<int>(style.background->r),
                             static_cast<int>(style.background->g),
                             static_cast<int>(style.background->b));
                 } else {
-                    fprintf(file_, ESCAPE "[49m");
+                    fprintf(file_.get(), ESCAPE "[49m");
                 }
             }
             if (!Equal(current.underlined, style.underlined)) {
                 current.underlined = style.underlined;
                 if (current.underlined == true) {
-                    fprintf(file_, ESCAPE "[4m");
+                    fprintf(file_.get(), ESCAPE "[4m");
                 } else {
-                    fprintf(file_, ESCAPE "[24m");
+                    fprintf(file_.get(), ESCAPE "[24m");
                 }
             }
             if (!Equal(current.bold, style.bold)) {
                 current.bold = style.bold;
                 if (current.bold == true) {
-                    fprintf(file_, ESCAPE "[1m");
+                    fprintf(file_.get(), ESCAPE "[1m");
                 } else {
-                    fprintf(file_, ESCAPE "[22m");
+                    fprintf(file_.get(), ESCAPE "[22m");
                 }
             }
             fwrite(text.data(), 1, text.size(), file_);
         });
-        fprintf(file_, ESCAPE "[m");
+        fprintf(file_.get(), ESCAPE "[m");
         fflush(file_);
     }
 
   private:
-    FILE* const file_;
-    const StyledTextTheme& theme_;
+    const raw_ptr<FILE> file_;
+    const raw_ref<const StyledTextTheme> theme_;
 };
 
 class Printer8Bit : public StyledTextPrinter {
@@ -148,44 +150,44 @@ class Printer8Bit : public StyledTextPrinter {
         StyledTextTheme::Attributes current;
 
         style_text.Walk([&](std::string_view text, TextStyle text_style) {
-            auto style = theme_.Get(text_style);
+            auto style = theme_->Get(text_style);
             if (!Equal(current.foreground, style.foreground)) {
                 current.foreground = style.foreground;
                 if (current.foreground.has_value()) {
                     uint8_t color = Quantize(*style.foreground);
-                    fprintf(file_, ESCAPE "[38;5;%dm", static_cast<int>(color));
+                    fprintf(file_.get(), ESCAPE "[38;5;%dm", static_cast<int>(color));
                 } else {
-                    fprintf(file_, ESCAPE "[39m");
+                    fprintf(file_.get(), ESCAPE "[39m");
                 }
             }
             if (!Equal(current.background, style.background)) {
                 current.background = style.background;
                 if (current.background.has_value()) {
                     uint8_t color = Quantize(*style.background);
-                    fprintf(file_, ESCAPE "[48;5;%dm", static_cast<int>(color));
+                    fprintf(file_.get(), ESCAPE "[48;5;%dm", static_cast<int>(color));
                 } else {
-                    fprintf(file_, ESCAPE "[49m");
+                    fprintf(file_.get(), ESCAPE "[49m");
                 }
             }
             if (!Equal(current.underlined, style.underlined)) {
                 current.underlined = style.underlined;
                 if (current.underlined == true) {
-                    fprintf(file_, ESCAPE "[4m");
+                    fprintf(file_.get(), ESCAPE "[4m");
                 } else {
-                    fprintf(file_, ESCAPE "[24m");
+                    fprintf(file_.get(), ESCAPE "[24m");
                 }
             }
             if (!Equal(current.bold, style.bold)) {
                 current.bold = style.bold;
                 if (current.bold == true) {
-                    fprintf(file_, ESCAPE "[1m");
+                    fprintf(file_.get(), ESCAPE "[1m");
                 } else {
-                    fprintf(file_, ESCAPE "[22m");
+                    fprintf(file_.get(), ESCAPE "[22m");
                 }
             }
             fwrite(text.data(), 1, text.size(), file_);
         });
-        fprintf(file_, ESCAPE "[m");
+        fprintf(file_.get(), ESCAPE "[m");
         fflush(file_);
     }
 
@@ -213,8 +215,8 @@ class Printer8Bit : public StyledTextPrinter {
         });
     }
 
-    FILE* const file_;
-    const StyledTextTheme& theme_;
+    const raw_ptr<FILE> file_;
+    const raw_ref<const StyledTextTheme> theme_;
     Hashmap<StyledTextTheme::Color, uint8_t, 16> colors_;
 };
 }  // namespace

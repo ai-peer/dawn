@@ -32,6 +32,7 @@
 #include <optional>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/ir/function_param.h"
 #include "src/tint/lang/core/ir/location.h"
 #include "src/tint/lang/core/ir/value.h"
@@ -181,7 +182,7 @@ class Function : public Castable<Function, Value> {
     std::optional<std::array<uint32_t, 3>> workgroup_size_;
 
     struct {
-        const core::type::Type* type = nullptr;
+        raw_ptr<const core::type::Type> type = nullptr;
         std::optional<BuiltinValue> builtin;
         std::optional<Location> location;
         bool invariant = false;

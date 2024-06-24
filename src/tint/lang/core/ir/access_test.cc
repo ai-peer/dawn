@@ -41,20 +41,20 @@ using IR_AccessTest = IRTestHelper;
 using IR_AccessDeathTest = IR_AccessTest;
 
 TEST_F(IR_AccessTest, SetsUsage) {
-    auto* type = ty.ptr<function, i32>();
+    auto* type = ty->ptr<function, i32>();
     auto* var = b.Var(type);
     auto* idx = b.Constant(u32(1));
-    auto* a = b.Access(ty.i32(), var, idx);
+    auto* a = b.Access(ty->i32(), var, idx);
 
     EXPECT_THAT(var->Result(0)->Usages(), testing::UnorderedElementsAre(Usage{a, 0u}));
     EXPECT_THAT(idx->Usages(), testing::UnorderedElementsAre(Usage{a, 1u}));
 }
 
 TEST_F(IR_AccessTest, Result) {
-    auto* type = ty.ptr<function, i32>();
+    auto* type = ty->ptr<function, i32>();
     auto* var = b.Var(type);
     auto* idx = b.Constant(u32(1));
-    auto* a = b.Access(ty.i32(), var, idx);
+    auto* a = b.Access(ty->i32(), var, idx);
 
     EXPECT_EQ(a->Results().Length(), 1u);
 
@@ -75,7 +75,7 @@ TEST_F(IR_AccessDeathTest, Fail_NullType) {
 }
 
 TEST_F(IR_AccessTest, Clone) {
-    auto* type = ty.ptr<function, i32>();
+    auto* type = ty->ptr<function, i32>();
     auto* var = b.Var(type);
     auto* idx1 = b.Constant(u32(1));
     auto* idx2 = b.Constant(u32(2));
@@ -102,7 +102,7 @@ TEST_F(IR_AccessTest, Clone) {
 }
 
 TEST_F(IR_AccessTest, CloneNoIndices) {
-    auto* type = ty.ptr<function, i32>();
+    auto* type = ty->ptr<function, i32>();
     auto* var = b.Var(type);
     auto* a = b.Access(type, var);
 

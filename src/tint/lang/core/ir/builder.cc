@@ -44,19 +44,19 @@ Builder::Builder(Module& mod, ir::Block* block)
 Builder::~Builder() = default;
 
 Block* Builder::Block() {
-    return ir.blocks.Create<ir::Block>();
+    return ir->blocks.Create<ir::Block>();
 }
 
 MultiInBlock* Builder::MultiInBlock() {
-    return ir.blocks.Create<ir::MultiInBlock>();
+    return ir->blocks.Create<ir::MultiInBlock>();
 }
 
 Function* Builder::Function(const core::type::Type* return_type,
                             Function::PipelineStage stage,
                             std::optional<std::array<uint32_t, 3>> wg_size) {
-    auto* ir_func = ir.allocators.values.Create<ir::Function>(return_type, stage, wg_size);
+    auto* ir_func = ir->allocators.values.Create<ir::Function>(return_type, stage, wg_size);
     ir_func->SetBlock(Block());
-    ir.functions.Push(ir_func);
+    ir->functions.Push(ir_func);
     return ir_func;
 }
 
@@ -65,13 +65,13 @@ Function* Builder::Function(std::string_view name,
                             Function::PipelineStage stage,
                             std::optional<std::array<uint32_t, 3>> wg_size) {
     auto* ir_func = Function(return_type, stage, wg_size);
-    ir.SetName(ir_func, name);
+    ir->SetName(ir_func, name);
     return ir_func;
 }
 
 ir::Loop* Builder::Loop() {
     return Append(
-        ir.allocators.instructions.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock()));
+        ir->allocators.instructions.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock()));
 }
 
 Block* Builder::Case(ir::Switch* s, VectorRef<ir::Constant*> values) {
@@ -96,45 +96,45 @@ Block* Builder::Case(ir::Switch* s, std::initializer_list<ir::Constant*> selecto
 }
 
 ir::Discard* Builder::Discard() {
-    return Append(ir.allocators.instructions.Create<ir::Discard>());
+    return Append(ir->allocators.instructions.Create<ir::Discard>());
 }
 
 ir::Var* Builder::Var(const core::type::MemoryView* type) {
-    return Append(ir.allocators.instructions.Create<ir::Var>(InstructionResult(type)));
+    return Append(ir->allocators.instructions.Create<ir::Var>(InstructionResult(type)));
 }
 
 ir::Var* Builder::Var(std::string_view name, const core::type::MemoryView* type) {
     auto* var = Var(type);
-    ir.SetName(var, name);
+    ir->SetName(var, name);
     return var;
 }
 
 ir::BlockParam* Builder::BlockParam(const core::type::Type* type) {
-    return ir.allocators.values.Create<ir::BlockParam>(type);
+    return ir->allocators.values.Create<ir::BlockParam>(type);
 }
 
 ir::BlockParam* Builder::BlockParam(std::string_view name, const core::type::Type* type) {
-    auto* param = ir.allocators.values.Create<ir::BlockParam>(type);
-    ir.SetName(param, name);
+    auto* param = ir->allocators.values.Create<ir::BlockParam>(type);
+    ir->SetName(param, name);
     return param;
 }
 
 ir::FunctionParam* Builder::FunctionParam(const core::type::Type* type) {
-    return ir.allocators.values.Create<ir::FunctionParam>(type);
+    return ir->allocators.values.Create<ir::FunctionParam>(type);
 }
 
 ir::FunctionParam* Builder::FunctionParam(std::string_view name, const core::type::Type* type) {
-    auto* param = ir.allocators.values.Create<ir::FunctionParam>(type);
-    ir.SetName(param, name);
+    auto* param = ir->allocators.values.Create<ir::FunctionParam>(type);
+    ir->SetName(param, name);
     return param;
 }
 
 ir::TerminateInvocation* Builder::TerminateInvocation() {
-    return Append(ir.allocators.instructions.Create<ir::TerminateInvocation>());
+    return Append(ir->allocators.instructions.Create<ir::TerminateInvocation>());
 }
 
 ir::Unreachable* Builder::Unreachable() {
-    return Append(ir.allocators.instructions.Create<ir::Unreachable>());
+    return Append(ir->allocators.instructions.Create<ir::Unreachable>());
 }
 
 const core::type::Type* Builder::VectorPtrElementType(const core::type::Type* type) {
@@ -147,7 +147,7 @@ const core::type::Type* Builder::VectorPtrElementType(const core::type::Type* ty
             return vec_ty->type();
         }
     }
-    return ir.Types().i32();
+    return ir->Types().i32();
 }
 
 }  // namespace tint::core::ir

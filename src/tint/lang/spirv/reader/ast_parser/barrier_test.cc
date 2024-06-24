@@ -82,7 +82,7 @@ TEST_F(SpirvASTParserTest, WorkgroupBarrier) {
     auto* call = helper->body->statements[0]->As<ast::CallStatement>();
     ASSERT_NE(call, nullptr);
     EXPECT_EQ(call->expr->args.Length(), 0u);
-    auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+    auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
     ASSERT_NE(sem_call, nullptr);
     auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
     ASSERT_NE(builtin, nullptr);
@@ -115,7 +115,7 @@ TEST_F(SpirvASTParserTest, StorageBarrier) {
     auto* call = helper->body->statements[0]->As<ast::CallStatement>();
     ASSERT_NE(call, nullptr);
     EXPECT_EQ(call->expr->args.Length(), 0u);
-    auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+    auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
     ASSERT_NE(sem_call, nullptr);
     auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
     ASSERT_NE(builtin, nullptr);
@@ -148,7 +148,7 @@ TEST_F(SpirvASTParserTest, TextureBarrier) {
     auto* call = helper->body->statements[0]->As<ast::CallStatement>();
     ASSERT_NE(call, nullptr);
     EXPECT_EQ(call->expr->args.Length(), 0u);
-    auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+    auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
     ASSERT_NE(sem_call, nullptr);
     auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
     ASSERT_NE(builtin, nullptr);
@@ -184,7 +184,7 @@ TEST_F(SpirvASTParserTest, WorkgroupAndTextureAndStorageBarrier) {
         auto* call = helper->body->statements[0]->As<ast::CallStatement>();
         ASSERT_NE(call, nullptr);
         EXPECT_EQ(call->expr->args.Length(), 0u);
-        auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+        auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
         ASSERT_NE(sem_call, nullptr);
         auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
         ASSERT_NE(builtin, nullptr);
@@ -194,7 +194,7 @@ TEST_F(SpirvASTParserTest, WorkgroupAndTextureAndStorageBarrier) {
         auto* call = helper->body->statements[1]->As<ast::CallStatement>();
         ASSERT_NE(call, nullptr);
         EXPECT_EQ(call->expr->args.Length(), 0u);
-        auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+        auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
         ASSERT_NE(sem_call, nullptr);
         auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
         ASSERT_NE(builtin, nullptr);
@@ -204,7 +204,7 @@ TEST_F(SpirvASTParserTest, WorkgroupAndTextureAndStorageBarrier) {
         auto* call = helper->body->statements[2]->As<ast::CallStatement>();
         ASSERT_NE(call, nullptr);
         EXPECT_EQ(call->expr->args.Length(), 0u);
-        auto* sem_call = program.Sem().Get<sem::Call>(call->expr);
+        auto* sem_call = program.Sem().Get<sem::Call>(call->expr.get());
         ASSERT_NE(sem_call, nullptr);
         auto* builtin = sem_call->Target()->As<sem::BuiltinFn>();
         ASSERT_NE(builtin, nullptr);

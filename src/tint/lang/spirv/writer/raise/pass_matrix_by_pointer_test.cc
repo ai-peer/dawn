@@ -40,20 +40,20 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using SpirvWriter_PassMatrixByPointerTest = core::ir::transform::TransformTest;
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, NoModify_ArrayValue) {
-    auto* arr_ty = ty.array<f32, 4u>();
-    auto* arr = mod.root_block->Append(b.Var("var", ty.ptr(private_, arr_ty)));
+    auto* arr_ty = ty->array<f32, 4u>();
+    auto* arr = mod.root_block->Append(b.Var("var", ty->ptr(private_, arr_ty)));
 
-    auto* target = b.Function("target", ty.f32());
+    auto* target = b.Function("target", ty->f32());
     auto* value = b.FunctionParam("value", arr_ty);
     target->SetParams({value});
     b.Append(target->Block(), [&] {
-        auto* access = b.Access(ty.f32(), value, 1_i);
+        auto* access = b.Access(ty->f32(), value, 1_i);
         b.Return(target, access);
     });
 
-    auto* caller = b.Function("caller", ty.f32());
+    auto* caller = b.Function("caller", ty->f32());
     b.Append(caller->Block(), [&] {
-        auto* result = b.Call(ty.f32(), target, b.Load(arr));
+        auto* result = b.Call(ty->f32(), target, b.Load(arr));
         b.Return(caller, result);
     });
 
@@ -86,20 +86,20 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, NoModify_MatrixPointer) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* mat = mod.root_block->Append(b.Var("var", ty.ptr(private_, mat_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* mat = mod.root_block->Append(b.Var("var", ty->ptr(private_, mat_ty)));
 
-    auto* target = b.Function("target", ty.vec3<f32>());
-    auto* value = b.FunctionParam("value", ty.ptr(private_, mat_ty));
+    auto* target = b.Function("target", ty->vec3<f32>());
+    auto* value = b.FunctionParam("value", ty->ptr(private_, mat_ty));
     target->SetParams({value});
     b.Append(target->Block(), [&] {
-        auto* access = b.Access(ty.ptr<private_, vec3<f32>>(), value, 1_i);
+        auto* access = b.Access(ty->ptr<private_, vec3<f32>>(), value, 1_i);
         b.Return(target, b.Load(access));
     });
 
-    auto* caller = b.Function("caller", ty.vec3<f32>());
+    auto* caller = b.Function("caller", ty->vec3<f32>());
     b.Append(caller->Block(), [&] {
-        auto* result = b.Call(ty.vec3<f32>(), target, mat);
+        auto* result = b.Call(ty->vec3<f32>(), target, mat);
         b.Return(caller, result);
     });
 
@@ -132,12 +132,12 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MatrixValuePassedToBuiltin) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* mat = mod.root_block->Append(b.Var("var", ty.ptr(private_, mat_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* mat = mod.root_block->Append(b.Var("var", ty->ptr(private_, mat_ty)));
 
-    auto* caller = b.Function("caller", ty.f32());
+    auto* caller = b.Function("caller", ty->f32());
     b.Append(caller->Block(), [&] {
-        auto* result = b.Call(ty.f32(), core::BuiltinFn::kDeterminant, b.Load(mat));
+        auto* result = b.Call(ty->f32(), core::BuiltinFn::kDeterminant, b.Load(mat));
         b.Return(caller, result);
     });
 
@@ -164,8 +164,8 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, SingleMatrixValue) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* mat = mod.root_block->Append(b.Var("var", ty.ptr(private_, mat_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* mat = mod.root_block->Append(b.Var("var", ty->ptr(private_, mat_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", mat_ty);
@@ -230,12 +230,12 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MultipleMatrixValues) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* arr = mod.root_block->Append(b.Var("var", ty.ptr(private_, ty.array(mat_ty, 4))));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* arr = mod.root_block->Append(b.Var("var", ty->ptr(private_, ty->array(mat_ty, 4))));
 
     auto* target = b.Function("target", mat_ty);
     auto* value_a = b.FunctionParam("value_a", mat_ty);
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
     auto* value_b = b.FunctionParam("value_b", mat_ty);
     target->SetParams({value_a, scalar, value_b});
     b.Append(target->Block(), [&] {
@@ -246,7 +246,7 @@ TEST_F(SpirvWriter_PassMatrixByPointerTest, MultipleMatrixValues) {
 
     auto* caller = b.Function("caller", mat_ty);
     b.Append(caller->Block(), [&] {
-        auto* mat_ptr = ty.ptr(private_, mat_ty);
+        auto* mat_ptr = ty->ptr(private_, mat_ty);
         auto* ma = b.Load(b.Access(mat_ptr, arr, 0_u));
         auto* mb = b.Load(b.Access(mat_ptr, arr, 1_u));
         auto* result = b.Call(mat_ty, target, ma, b.Constant(2_f), mb);
@@ -312,8 +312,8 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MultipleParamUses) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* mat = mod.root_block->Append(b.Var("var", ty.ptr(private_, mat_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* mat = mod.root_block->Append(b.Var("var", ty->ptr(private_, mat_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", mat_ty);
@@ -381,12 +381,12 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MultipleCallsites) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* mat = mod.root_block->Append(b.Var("var", ty.ptr(private_, mat_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* mat = mod.root_block->Append(b.Var("var", ty->ptr(private_, mat_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", mat_ty);
-    auto* scalar = b.FunctionParam("scalar", ty.f32());
+    auto* scalar = b.FunctionParam("scalar", ty->f32());
     target->SetParams({value, scalar});
     b.Append(target->Block(), [&] {
         auto* scale = b.Multiply(mat_ty, value, scalar);
@@ -490,9 +490,9 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MatrixInArray) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* arr_ty = ty.array(mat_ty, 2);
-    auto* arr = mod.root_block->Append(b.Var("var", ty.ptr(private_, arr_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* arr_ty = ty->array(mat_ty, 2);
+    auto* arr = mod.root_block->Append(b.Var("var", ty->ptr(private_, arr_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", arr_ty);
@@ -563,19 +563,19 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MatrixInStruct) {
-    auto* mat_ty = ty.mat3x3<f32>();
-    auto* str_ty = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                              {mod.symbols.New("m"), mat_ty},
-                                                              {mod.symbols.New("s"), ty.f32()},
-                                                          });
-    auto* structure = mod.root_block->Append(b.Var("var", ty.ptr(private_, str_ty)));
+    auto* mat_ty = ty->mat3x3<f32>();
+    auto* str_ty = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                               {mod.symbols.New("m"), mat_ty},
+                                                               {mod.symbols.New("s"), ty->f32()},
+                                                           });
+    auto* structure = mod.root_block->Append(b.Var("var", ty->ptr(private_, str_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", str_ty);
     target->SetParams({value});
     b.Append(target->Block(), [&] {
         auto* m = b.Access(mat_ty, value, 0_u);
-        auto* s = b.Access(ty.f32(), value, 1_u);
+        auto* s = b.Access(ty->f32(), value, 1_u);
         auto* mul = b.Multiply(mat_ty, m, s);
         b.Return(target, mul);
     });
@@ -649,14 +649,14 @@ $B1: {  # root
 }
 
 TEST_F(SpirvWriter_PassMatrixByPointerTest, MatrixArrayOfStructOfArray) {
-    auto* mat_ty = ty.mat3x3<f32>();
+    auto* mat_ty = ty->mat3x3<f32>();
     auto* str_ty =
-        ty.Struct(mod.symbols.New("MyStruct"), {
-                                                   {mod.symbols.New("m"), ty.array(mat_ty, 2)},
-                                                   {mod.symbols.New("s"), ty.f32()},
-                                               });
-    auto* arr_ty = ty.array(str_ty, 4);
-    auto* var = mod.root_block->Append(b.Var("var", ty.ptr(private_, arr_ty)));
+        ty->Struct(mod.symbols.New("MyStruct"), {
+                                                    {mod.symbols.New("m"), ty->array(mat_ty, 2)},
+                                                    {mod.symbols.New("s"), ty->f32()},
+                                                });
+    auto* arr_ty = ty->array(str_ty, 4);
+    auto* var = mod.root_block->Append(b.Var("var", ty->ptr(private_, arr_ty)));
 
     auto* target = b.Function("target", mat_ty);
     auto* value = b.FunctionParam("value", arr_ty);
@@ -664,7 +664,7 @@ TEST_F(SpirvWriter_PassMatrixByPointerTest, MatrixArrayOfStructOfArray) {
     b.Append(target->Block(), [&] {
         auto* ma = b.Access(mat_ty, value, 2_u, 0_u, 0_u);
         auto* mb = b.Access(mat_ty, value, 2_u, 0_u, 1_u);
-        auto* s = b.Access(ty.f32(), value, 2_u, 1_u);
+        auto* s = b.Access(ty->f32(), value, 2_u, 1_u);
         auto* add = b.Add(mat_ty, ma, mb);
         auto* mul = b.Multiply(mat_ty, add, s);
         b.Return(target, mul);

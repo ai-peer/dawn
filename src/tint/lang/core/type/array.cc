@@ -129,7 +129,7 @@ TypeAndCount Array::Elements(const Type* /* type_if_invalid = nullptr */,
 
 const Type* Array::Element(uint32_t index) const {
     if (auto* count = count_->As<ConstantArrayCount>()) {
-        return index < count->value ? element_ : nullptr;
+        return index < count->value ? element_.get() : nullptr;
     }
     return element_;
 }

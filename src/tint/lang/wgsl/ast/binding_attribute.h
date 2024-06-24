@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/ast/attribute.h"
 #include "src/tint/lang/wgsl/ast/expression.h"
 
@@ -56,7 +57,7 @@ class BindingAttribute final : public Castable<BindingAttribute, Attribute> {
     const BindingAttribute* Clone(CloneContext& ctx) const override;
 
     /// the binding expression
-    const Expression* const expr;
+    const raw_ptr<const Expression> expr;
 };
 
 }  // namespace tint::ast

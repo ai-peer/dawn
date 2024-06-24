@@ -51,8 +51,8 @@ AssignmentStatement::~AssignmentStatement() = default;
 const AssignmentStatement* AssignmentStatement::Clone(CloneContext& ctx) const {
     // Clone arguments outside of create() call to have deterministic ordering
     auto src = ctx.Clone(source);
-    auto* l = ctx.Clone(lhs);
-    auto* r = ctx.Clone(rhs);
+    auto* l = ctx.Clone(lhs.get());
+    auto* r = ctx.Clone(rhs.get());
     return ctx.dst->create<AssignmentStatement>(src, l, r);
 }
 

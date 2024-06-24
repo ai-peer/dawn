@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/transform/common/referenced_module_vars.h"
 #include "src/tint/lang/core/ir/validator.h"
@@ -41,16 +43,16 @@ using namespace tint::core::fluent_types;  // NOLINT
 /// PIMPL state for the transform.
 struct State {
     /// The IR module.
-    core::ir::Module& ir;
+    const raw_ref<core::ir::Module> ir;
 
     /// The IR builder.
-    core::ir::Builder b{ir};
+    core::ir::Builder b{*ir};
 
     /// The type manager.
-    core::type::Manager& ty{ir.Types()};
+    const raw_ref<core::type::Manager> ty{ir->Types()};
 
     /// The type of the structure that will contain all of the module-scope variables.
-    const core::type::Struct* struct_type = nullptr;
+    raw_ptr<const core::type::Struct> struct_type = nullptr;
 
     /// The list of module-scope variables.
     Vector<core::ir::Var*, 8> module_vars{};
@@ -62,7 +64,7 @@ struct State {
     Hashmap<core::ir::Block*, core::ir::Function*, 64> block_to_function{};
 
     /// The mapping from functions to their transitively referenced workgroup variables.
-    core::ir::ReferencedModuleVars referenced_module_vars{ir};
+    core::ir::ReferencedModuleVars referenced_module_vars{*ir};
 
     // The name of the module-scope variables structure.
     static constexpr const char* kModuleVarsName = "tint_module_vars";
@@ -71,7 +73,7 @@ struct State {
     void Process() {
         // Seed the block-to-function map with the function entry blocks.
         // This is used to determine the owning function for any given instruction.
-        for (auto& func : ir.functions) {
+        for (auto& func : ir->functions) {
             block_to_function.Add(func->Block(), func);
         }
 
@@ -83,7 +85,7 @@ struct State {
         // Process functions in reverse-dependency order (i.e. root to leaves).
         // This is so that when we update the callsites for a function to add the new argument, we
         // will have already added the necessary structure to the callers.
-        auto functions = ir.DependencyOrderedFunctions();
+        auto functions = ir->DependencyOrderedFunctions();
         for (auto func = functions.rbegin(); func != functions.rend(); func++) {
             ProcessFunction(*func);
         }
@@ -121,7 +123,7 @@ struct State {
     void CreateStruct() {
         // Collect a list of struct members for the variable declarations.
         Vector<core::type::Manager::StructMemberDesc, 8> struct_members;
-        for (auto* global : *ir.root_block) {
+        for (auto* global : *ir->root_block) {
             if (auto* var = global->As<core::ir::Var>()) {
                 auto* type = var->Result(0)->Type();
 
@@ -131,9 +133,9 @@ struct State {
                     type = ptr->StoreType();
                 }
 
-                auto name = ir.NameOf(var);
+                auto name = ir->NameOf(var);
                 if (!name) {
-                    name = ir.symbols.New();
+                    name = ir->symbols.New();
                 }
                 module_vars.Push(var);
                 struct_members.Push(core::type::Manager::StructMemberDesc{name, type});
@@ -144,8 +146,8 @@ struct State {
         }
 
         // Create the structure.
-        auto name = ir.symbols.New("tint_module_vars_struct");
-        struct_type = ty.Struct(name, std::move(struct_members));
+        auto name = ir->symbols.New("tint_module_vars_struct");
+        struct_type = ty->Struct(name, std::move(struct_members));
     }
 
     /// Process a function.
@@ -222,7 +224,7 @@ struct State {
                                         u32(workgroup_struct_members.Length()))
                                    ->Result(0);
                         workgroup_struct_members.Push(core::type::Manager::StructMemberDesc{
-                            ir.symbols.New(),
+                            ir->symbols.New(),
                             ptr->StoreType(),
                         });
                         break;
@@ -240,8 +242,8 @@ struct State {
                 }
 
                 // Copy an existing name over to the new declaration if present.
-                if (auto name = ir.NameOf(var)) {
-                    ir.SetName(decl, name);
+                if (auto name = ir->NameOf(var)) {
+                    ir->SetName(decl, name);
                 }
                 construct_args.Push(decl);
             }
@@ -255,8 +257,8 @@ struct State {
         // Create the workgroup variable structure if needed.
         if (!workgroup_struct_members.IsEmpty()) {
             auto* workgroup_struct =
-                ty.Struct(ir.symbols.New(), std::move(workgroup_struct_members));
-            workgroup_allocation_param->SetType(ty.ptr<workgroup>(workgroup_struct));
+                ty->Struct(ir->symbols.New(), std::move(workgroup_struct_members));
+            workgroup_allocation_param->SetType(ty->ptr<workgroup>(workgroup_struct));
         }
 
         return module_var_struct;
@@ -322,7 +324,7 @@ Result<SuccessType> ModuleScopeVars(core::ir::Module& ir) {
         return result.Failure();
     }
 
-    State{ir}.Process();
+    State{raw_ref(ir)raw_ref(}).Process();
 
     return Success;
 }

@@ -36,6 +36,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/api/common/override_id.h"
 
 #include "src/tint/lang/core/builtin_value.h"
@@ -189,7 +190,7 @@ class Inspector {
     std::vector<LevelSampleInfo> GetTextureQueries(const std::string& ep);
 
   private:
-    const Program& program_;
+    const raw_ref<const Program> program_;
     diag::List diagnostics_;
     std::unique_ptr<std::unordered_map<std::string, UniqueVector<SamplerTexturePair, 4>>>
         sampler_targets_;

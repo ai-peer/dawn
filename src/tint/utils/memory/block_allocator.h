@@ -32,6 +32,7 @@
 #include <cstring>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/utils/math/math.h"
 #include "src/tint/utils/memory/bitcast.h"
 
@@ -51,8 +52,8 @@ class BlockAllocator {
     struct Pointers {
         static constexpr size_t kMax = 32;
         std::array<T*, kMax> ptrs;
-        Pointers* next;
-        Pointers* prev;
+        raw_ptr<Pointers> next;
+        raw_ptr<Pointers> prev;
         size_t count;
     };
 
@@ -62,7 +63,7 @@ class BlockAllocator {
     /// Note: We're not using std::aligned_storage here as this warns / errors on MSVC.
     struct alignas(BLOCK_ALIGNMENT) Block {
         uint8_t data[BLOCK_SIZE];
-        Block* next = nullptr;
+        raw_ptr<Block> next = nullptr;
     };
 
     // Forward declaration
@@ -121,7 +122,7 @@ class BlockAllocator {
         explicit TIterator(const Pointers* p, size_t i) : ptrs(p), idx(i) {}
 
         /// The current Pointers
-        const Pointers* ptrs = nullptr;
+        raw_ptr<const Pointers> ptrs = nullptr;
         /// The current index within #ptrs
         size_t idx = 0;
     };
@@ -145,7 +146,7 @@ class BlockAllocator {
       private:
         friend BlockAllocator;  // For BlockAllocator::operator View()
         explicit TView(BlockAllocator const* allocator) : allocator_(allocator) {}
-        BlockAllocator const* const allocator_;
+        const raw_ptr<const BlockAllocator<T, BLOCK_SIZE, BLOCK_ALIGNMENT>> allocator_;
     };
 
   public:
@@ -215,9 +216,9 @@ class BlockAllocator {
         for (auto ptr : Objects()) {
             ptr->~T();
         }
-        auto* block = data.block.root;
+        auto* block = data.block.root.get();
         while (block != nullptr) {
-            auto* next = block->next;
+            auto* next = block->next.get();
             delete block;
             block = next;
         }
@@ -244,7 +245,7 @@ class BlockAllocator {
         block.current_offset = tint::RoundUp(alignof(TYPE), block.current_offset);
         if (block.current_offset + sizeof(TYPE) > BLOCK_SIZE) {
             // Allocate a new block from the heap
-            auto* prev_block = block.current;
+            auto* prev_block = block.current.get();
             block.current = new Block;
             if (!block.current) {
                 return nullptr;  // out of memory
@@ -270,7 +271,7 @@ class BlockAllocator {
         auto& pointers = data.pointers;
 
         if (!pointers.current || pointers.current->count == Pointers::kMax) {
-            auto* prev_pointers = pointers.current;
+            auto* prev_pointers = pointers.current.get();
             pointers.current = Allocate<Pointers>();
             if (!pointers.current) {
                 return;  // out of memory
@@ -292,10 +293,10 @@ class BlockAllocator {
     struct {
         struct {
             /// The root block of the block linked list
-            Block* root = nullptr;
+            raw_ptr<Block> root = nullptr;
             /// The current (end) block of the blocked linked list.
             /// New allocations come from this block
-            Block* current = nullptr;
+            raw_ptr<Block> current = nullptr;
             /// The byte offset in #current for the next allocation.
             /// Initialized with BLOCK_SIZE so that the first allocation triggers a block
             /// allocation.
@@ -304,10 +305,10 @@ class BlockAllocator {
 
         struct {
             /// The root Pointers structure of the pointers linked list
-            Pointers* root = nullptr;
+            raw_ptr<Pointers> root = nullptr;
             /// The current (end) Pointers structure of the pointers linked list.
             /// AddObjectPointer() adds to this structure.
-            Pointers* current = nullptr;
+            raw_ptr<Pointers> current = nullptr;
         } pointers;
 
         size_t count = 0;

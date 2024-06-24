@@ -114,13 +114,13 @@ class TextureBuiltinTest : public SpirvWriterTestWithParam<TextureBuiltinTestCas
                                                TestElementType texel_type) {
         switch (type) {
             case kSampledTexture:
-                return ty.Get<core::type::SampledTexture>(dim, MakeScalarType(texel_type));
+                return ty->Get<core::type::SampledTexture>(dim, MakeScalarType(texel_type));
             case kMultisampledTexture:
-                return ty.Get<core::type::MultisampledTexture>(dim, MakeScalarType(texel_type));
+                return ty->Get<core::type::MultisampledTexture>(dim, MakeScalarType(texel_type));
             case kDepthTexture:
-                return ty.Get<core::type::DepthTexture>(dim);
+                return ty->Get<core::type::DepthTexture>(dim);
             case kDepthMultisampledTexture:
-                return ty.Get<core::type::DepthMultisampledTexture>(dim);
+                return ty->Get<core::type::DepthMultisampledTexture>(dim);
             case kStorageTexture:
                 core::TexelFormat format;
                 switch (texel_type) {
@@ -136,9 +136,9 @@ class TextureBuiltinTest : public SpirvWriterTestWithParam<TextureBuiltinTestCas
                     default:
                         return nullptr;
                 }
-                return ty.Get<core::type::StorageTexture>(
+                return ty->Get<core::type::StorageTexture>(
                     dim, format, core::Access::kWrite,
-                    core::type::StorageTexture::SubtypeFor(format, ty));
+                    core::type::StorageTexture::SubtypeFor(format, *ty));
         }
         return nullptr;
     }
@@ -148,10 +148,10 @@ class TextureBuiltinTest : public SpirvWriterTestWithParam<TextureBuiltinTestCas
 
         auto* result_ty = MakeScalarType(params.result.type);
         if (function == core::BuiltinFn::kTextureStore) {
-            result_ty = ty.void_();
+            result_ty = ty->void_();
         }
         if (params.result.width > 1) {
-            result_ty = ty.vec(result_ty, params.result.width);
+            result_ty = ty->vec(result_ty, params.result.width);
         }
 
         Vector<core::ir::FunctionParam*, 4> func_params;
@@ -161,10 +161,10 @@ class TextureBuiltinTest : public SpirvWriterTestWithParam<TextureBuiltinTestCas
         func_params.Push(t);
         core::ir::FunctionParam* s = nullptr;
         if (sampler == kSampler) {
-            s = b.FunctionParam("s", ty.sampler());
+            s = b.FunctionParam("s", ty->sampler());
             func_params.Push(s);
         } else if (sampler == kComparisonSampler) {
-            s = b.FunctionParam("s", ty.comparison_sampler());
+            s = b.FunctionParam("s", ty->comparison_sampler());
             func_params.Push(s);
         }
 
@@ -190,7 +190,7 @@ class TextureBuiltinTest : public SpirvWriterTestWithParam<TextureBuiltinTestCas
             for (const auto& arg : params.args) {
                 auto* value = MakeScalarValue(arg.type, arg_value++);
                 if (arg.width > 1) {
-                    value = b.Splat(ty.vec(value->Type(), arg.width), value);
+                    value = b.Splat(ty->vec(value->Type(), arg.width), value);
                 }
                 args.Push(value);
                 mod.SetName(value, arg.name);
@@ -1894,17 +1894,18 @@ INSTANTIATE_TEST_SUITE_P(SpirvWriterTest,
 
 TEST_F(SpirvWriterTest, TextureSampleBaseClampToEdge_2d_f32) {
     auto* texture_ty =
-        ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
+        ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
 
     Vector<core::ir::FunctionParam*, 4> args;
     args.Push(b.FunctionParam("texture", texture_ty));
-    args.Push(b.FunctionParam("sampler", ty.sampler()));
-    args.Push(b.FunctionParam("coords", ty.vec2<f32>()));
+    args.Push(b.FunctionParam("sampler", ty->sampler()));
+    args.Push(b.FunctionParam("coords", ty->vec2<f32>()));
 
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureSampleBaseClampToEdge, args);
+        auto* result =
+            b.Call(ty->vec4<f32>(), core::BuiltinFn::kTextureSampleBaseClampToEdge, args);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -1929,17 +1930,17 @@ TEST_F(SpirvWriterTest, TextureSampleBaseClampToEdge_2d_f32) {
 
 TEST_F(SpirvWriterTest, Bgra8Unorm_textureStore) {
     auto format = core::TexelFormat::kBgra8Unorm;
-    auto* texture_ty = ty.Get<core::type::StorageTexture>(
+    auto* texture_ty = ty->Get<core::type::StorageTexture>(
         core::type::TextureDimension::k2d, format, core::Access::kWrite,
-        core::type::StorageTexture::SubtypeFor(format, ty));
+        core::type::StorageTexture::SubtypeFor(format, *ty));
 
     auto* texture = b.FunctionParam("texture", texture_ty);
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* value = b.FunctionParam("value", ty.vec4<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* value = b.FunctionParam("value", ty->vec4<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({texture, coords, value});
     b.Append(func->Block(), [&] {
-        b.Call(ty.void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
+        b.Call(ty->void_(), core::BuiltinFn::kTextureStore, texture, coords, value);
         b.Return(func);
     });
 
@@ -1958,14 +1959,14 @@ TEST_F(SpirvWriterTest, Bgra8Unorm_textureStore) {
 
 TEST_F(SpirvWriterTest, TextureDimensions_WithRobustness) {
     auto* texture_ty =
-        ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
+        ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
 
     auto* texture = b.FunctionParam("texture", texture_ty);
-    auto* level = b.FunctionParam("level", ty.i32());
-    auto* func = b.Function("foo", ty.vec2<u32>());
+    auto* level = b.FunctionParam("level", ty->i32());
+    auto* func = b.Function("foo", ty->vec2<u32>());
     func->SetParams({texture, level});
     b.Append(func->Block(), [&] {
-        auto* dims = b.Call(ty.vec2<u32>(), core::BuiltinFn::kTextureDimensions, texture, level);
+        auto* dims = b.Call(ty->vec2<u32>(), core::BuiltinFn::kTextureDimensions, texture, level);
         b.Return(func, dims);
         mod.SetName(dims, "dims");
     });
@@ -1982,16 +1983,16 @@ TEST_F(SpirvWriterTest, TextureDimensions_WithRobustness) {
 
 TEST_F(SpirvWriterTest, TextureLoad_WithRobustness) {
     auto* texture_ty =
-        ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
+        ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
 
     auto* texture = b.FunctionParam("texture", texture_ty);
-    auto* coords = b.FunctionParam("coords", ty.vec2<u32>());
-    auto* level = b.FunctionParam("level", ty.i32());
-    auto* func = b.Function("foo", ty.vec4<f32>());
+    auto* coords = b.FunctionParam("coords", ty->vec2<u32>());
+    auto* level = b.FunctionParam("level", ty->i32());
+    auto* func = b.Function("foo", ty->vec4<f32>());
     func->SetParams({texture, coords, level});
     b.Append(func->Block(), [&] {
         auto* result =
-            b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureLoad, texture, coords, level);
+            b.Call(ty->vec4<f32>(), core::BuiltinFn::kTextureLoad, texture, coords, level);
         b.Return(func, result);
         mod.SetName(result, "result");
     });

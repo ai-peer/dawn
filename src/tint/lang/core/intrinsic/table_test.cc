@@ -239,7 +239,7 @@ TEST_F(CoreIntrinsicTableTest, MatchArray) {
     ASSERT_EQ(result, Success);
     EXPECT_TRUE(result->return_type->Is<type::U32>());
     ASSERT_EQ(result->parameters.Length(), 1u);
-    auto* param_type = result->parameters[0].type;
+    auto* param_type = result->parameters[0].type.get();
     ASSERT_TRUE(param_type->Is<type::Pointer>());
     EXPECT_TRUE(param_type->As<type::Pointer>()->StoreType()->Is<type::Array>());
 }

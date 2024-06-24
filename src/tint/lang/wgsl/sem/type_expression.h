@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_SEM_TYPE_EXPRESSION_H_
 #define SRC_TINT_LANG_WGSL_SEM_TYPE_EXPRESSION_H_
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/sem/expression.h"
 
 // Forward declarations
@@ -59,7 +60,7 @@ class TypeExpression : public Castable<TypeExpression, Expression> {
     void SetType(const core::type::Type* type) { type_ = type; }
 
   private:
-    const core::type::Type* type_ = nullptr;
+    raw_ptr<const core::type::Type> type_ = nullptr;
 };
 
 }  // namespace tint::sem

@@ -33,6 +33,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/address_space.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/interpolation.h"
@@ -279,8 +280,8 @@ class StructMember : public Castable<StructMember, Node> {
 
   private:
     const Symbol name_;
-    const core::type::Struct* struct_;
-    const core::type::Type* type_;
+    raw_ptr<const core::type::Struct> struct_;
+    raw_ptr<const core::type::Type> type_;
     const uint32_t index_;
     const uint32_t offset_;
     const uint32_t align_;

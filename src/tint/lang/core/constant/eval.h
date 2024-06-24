@@ -32,6 +32,7 @@
 #include <algorithm>
 #include <string>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/utils/containers/vector.h"
@@ -1350,8 +1351,8 @@ class Eval {
     Result Sub(const Source& source, const core::type::Type* ty, const Value* v1, const Value* v2);
 
   private:
-    Manager& mgr;
-    diag::List& diags;
+    const raw_ref<Manager> mgr;
+    const raw_ref<diag::List> diags;
     bool use_runtime_semantics_ = false;
 };
 

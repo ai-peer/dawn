@@ -32,6 +32,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include "spirv-tools/libspirv.hpp"
@@ -95,7 +96,7 @@ class SpirvWriterTestHelperBase : public BASE {
     /// The test builder.
     core::ir::Builder b{mod};
     /// The type manager.
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
 
   protected:
     /// Errors produced during codegen or SPIR-V validation.
@@ -184,15 +185,15 @@ class SpirvWriterTestHelperBase : public BASE {
     const core::type::Type* MakeScalarType(TestElementType type) {
         switch (type) {
             case kBool:
-                return ty.bool_();
+                return ty->bool_();
             case kI32:
-                return ty.i32();
+                return ty->i32();
             case kU32:
-                return ty.u32();
+                return ty->u32();
             case kF32:
-                return ty.f32();
+                return ty->f32();
             case kF16:
-                return ty.f16();
+                return ty->f16();
         }
         return nullptr;
     }
@@ -201,7 +202,7 @@ class SpirvWriterTestHelperBase : public BASE {
     /// @param type the element type
     /// @returns the vector type
     const core::type::Type* MakeVectorType(TestElementType type) {
-        return ty.vec2(MakeScalarType(type));
+        return *ty->vec2(MakeScalarType(type));
     }
 
     /// Helper to make a scalar value with the scalar type `type`.

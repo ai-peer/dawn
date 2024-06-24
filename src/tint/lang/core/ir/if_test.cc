@@ -106,8 +106,8 @@ TEST_F(IR_IfTest, CloneWithExits) {
 
 TEST_F(IR_IfTest, CloneWithResults) {
     If* new_if = nullptr;
-    auto* r0 = b.InstructionResult(ty.i32());
-    auto* r1 = b.InstructionResult(ty.f32());
+    auto* r0 = b.InstructionResult(ty->i32());
+    auto* r1 = b.InstructionResult(ty->f32());
     {
         auto* if_ = b.If(true);
         if_->SetResults(Vector{r0, r1});
@@ -119,11 +119,11 @@ TEST_F(IR_IfTest, CloneWithResults) {
     auto* new_r0 = new_if->Results()[0]->As<InstructionResult>();
     ASSERT_NE(new_r0, nullptr);
     ASSERT_NE(new_r0, r0);
-    EXPECT_EQ(new_r0->Type(), ty.i32());
+    EXPECT_EQ(new_r0->Type(), ty->i32());
     auto* new_r1 = new_if->Results()[1]->As<InstructionResult>();
     ASSERT_NE(new_r1, nullptr);
     ASSERT_NE(new_r1, r1);
-    EXPECT_EQ(new_r1->Type(), ty.f32());
+    EXPECT_EQ(new_r1->Type(), ty->f32());
 }
 
 }  // namespace

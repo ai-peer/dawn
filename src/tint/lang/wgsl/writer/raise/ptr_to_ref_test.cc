@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "gtest/gtest.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/disassembler.h"
@@ -73,12 +74,12 @@ class WgslWriter_PtrToRefTest : public testing::Test {
     /// The test IR builder.
     core::ir::Builder b{mod};
     /// The type manager.
-    core::type::Manager& ty{mod.Types()};
+    const raw_ref<core::type::Manager> ty{mod.Types()};
 };
 
 TEST_F(WgslWriter_PtrToRefTest, PtrParam_NoChange) {
-    auto fn = b.Function(ty.void_());
-    fn->SetParams({b.FunctionParam(ty.ptr<function, i32, read_write>())});
+    auto fn = b.Function(ty->void_());
+    fn->SetParams({b.FunctionParam(ty->ptr<function, i32, read_write>())});
     b.Append(fn->Block(), [&] { b.Return(fn); });
 
     auto* src = R"(
@@ -98,7 +99,7 @@ TEST_F(WgslWriter_PtrToRefTest, PtrParam_NoChange) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, Var) {
-    b.Append(mod.root_block, [&] { b.Var(ty.ptr<private_, i32>()); });
+    b.Append(mod.root_block, [&] { b.Var(ty->ptr<private_, i32>()); });
 
     auto* src = R"(
 $B1: {  # root
@@ -121,7 +122,7 @@ $B1: {  # root
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadVar) {
-    auto fn = b.Function(ty.i32());
+    auto fn = b.Function(ty->i32());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>();
         b.Return(fn, b.Load(v));
@@ -154,7 +155,7 @@ TEST_F(WgslWriter_PtrToRefTest, LoadVar) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StoreVar) {
-    auto fn = b.Function(ty.void_());
+    auto fn = b.Function(ty->void_());
     b.Append(fn->Block(), [&] {
         auto* v = b.Var<function, i32>();
         b.Store(v, 42_i);
@@ -188,8 +189,8 @@ TEST_F(WgslWriter_PtrToRefTest, StoreVar) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadPtrParam) {
-    auto fn = b.Function(ty.i32());
-    auto* ptr = b.FunctionParam(ty.ptr<function, i32, read_write>());
+    auto fn = b.Function(ty->i32());
+    auto* ptr = b.FunctionParam(ty->ptr<function, i32, read_write>());
     fn->SetParams({ptr});
     b.Append(fn->Block(), [&] { b.Return(fn, b.Load(ptr)); });
 
@@ -219,8 +220,8 @@ TEST_F(WgslWriter_PtrToRefTest, LoadPtrParam) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StorePtrParam) {
-    auto fn = b.Function(ty.void_());
-    auto* ptr = b.FunctionParam(ty.ptr<function, i32, read_write>());
+    auto fn = b.Function(ty->void_());
+    auto* ptr = b.FunctionParam(ty->ptr<function, i32, read_write>());
     fn->SetParams({ptr});
     b.Append(fn->Block(), [&] {
         b.Store(ptr, 42_i);
@@ -253,10 +254,10 @@ TEST_F(WgslWriter_PtrToRefTest, StorePtrParam) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, VarUsedAsPtrArg) {
-    auto fn_a = b.Function(ty.void_());
+    auto fn_a = b.Function(ty->void_());
     fn_a->SetParams({b.FunctionParam<ptr<function, i32, read_write>>("p")});
     b.Append(fn_a->Block(), [&] { b.Return(fn_a); });
-    auto fn_b = b.Function(ty.void_());
+    auto fn_b = b.Function(ty->void_());
     b.Append(fn_b->Block(), [&] {
         auto* v = b.Var<function, i32>();
         b.Call(fn_a, v);
@@ -301,8 +302,8 @@ TEST_F(WgslWriter_PtrToRefTest, VarUsedAsPtrArg) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadPtrParamViaLet) {
-    auto fn = b.Function(ty.i32());
-    auto* ptr = b.FunctionParam(ty.ptr<function, i32, read_write>());
+    auto fn = b.Function(ty->i32());
+    auto* ptr = b.FunctionParam(ty->ptr<function, i32, read_write>());
     fn->SetParams({ptr});
     b.Append(fn->Block(), [&] {
         auto let = b.Let("l", ptr);
@@ -337,8 +338,8 @@ TEST_F(WgslWriter_PtrToRefTest, LoadPtrParamViaLet) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StorePtrParamViaLet) {
-    auto fn = b.Function(ty.void_());
-    auto* ptr = b.FunctionParam(ty.ptr<function, i32, read_write>());
+    auto fn = b.Function(ty->void_());
+    auto* ptr = b.FunctionParam(ty->ptr<function, i32, read_write>());
     fn->SetParams({ptr});
     b.Append(fn->Block(), [&] {
         auto let = b.Let("l", ptr);
@@ -374,8 +375,8 @@ TEST_F(WgslWriter_PtrToRefTest, StorePtrParamViaLet) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadAccessFromPtrArrayParam) {
-    auto fn = b.Function(ty.i32());
-    auto* param = b.FunctionParam(ty.ptr<function, array<i32, 4>, read_write>());
+    auto fn = b.Function(ty->i32());
+    auto* param = b.FunctionParam(ty->ptr<function, array<i32, 4>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] {
         auto access = b.Access<ptr<function, i32, read_write>>(param, 2_i);
@@ -410,8 +411,8 @@ TEST_F(WgslWriter_PtrToRefTest, LoadAccessFromPtrArrayParam) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StoreAccessFromPtrArrayParam) {
-    auto fn = b.Function(ty.void_());
-    auto* param = b.FunctionParam(ty.ptr<function, array<i32, 4>, read_write>());
+    auto fn = b.Function(ty->void_());
+    auto* param = b.FunctionParam(ty->ptr<function, array<i32, 4>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] {
         auto access = b.Access<ptr<function, i32, read_write>>(param, 2_i);
@@ -447,8 +448,8 @@ TEST_F(WgslWriter_PtrToRefTest, StoreAccessFromPtrArrayParam) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadAccessFromPtrArrayParamViaLet) {
-    auto fn = b.Function(ty.i32());
-    auto* param = b.FunctionParam(ty.ptr<function, array<i32, 4>, read_write>());
+    auto fn = b.Function(ty->i32());
+    auto* param = b.FunctionParam(ty->ptr<function, array<i32, 4>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] {
         auto access = b.Access<ptr<function, i32, read_write>>(param, 2_i);
@@ -488,8 +489,8 @@ TEST_F(WgslWriter_PtrToRefTest, LoadAccessFromPtrArrayParamViaLet) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StoreAccessFromPtrArrayParamViaLet) {
-    auto fn = b.Function(ty.void_());
-    auto* param = b.FunctionParam(ty.ptr<function, array<i32, 4>, read_write>());
+    auto fn = b.Function(ty->void_());
+    auto* param = b.FunctionParam(ty->ptr<function, array<i32, 4>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] {
         auto access = b.Access<ptr<function, i32, read_write>>(param, 2_i);
@@ -530,8 +531,8 @@ TEST_F(WgslWriter_PtrToRefTest, StoreAccessFromPtrArrayParamViaLet) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, LoadVectorElementFromPtrParam) {
-    auto fn = b.Function(ty.i32());
-    auto* param = b.FunctionParam(ty.ptr<function, vec3<i32>, read_write>());
+    auto fn = b.Function(ty->i32());
+    auto* param = b.FunctionParam(ty->ptr<function, vec3<i32>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] { b.Return(fn, b.LoadVectorElement(param, 2_i)); });
 
@@ -561,8 +562,8 @@ TEST_F(WgslWriter_PtrToRefTest, LoadVectorElementFromPtrParam) {
 }
 
 TEST_F(WgslWriter_PtrToRefTest, StoreVectorElementFromPtrParam) {
-    auto fn = b.Function(ty.void_());
-    auto* param = b.FunctionParam(ty.ptr<function, vec3<i32>, read_write>());
+    auto fn = b.Function(ty->void_());
+    auto* param = b.FunctionParam(ty->ptr<function, vec3<i32>, read_write>());
     fn->SetParams({param});
     b.Append(fn->Block(), [&] {
         b.StoreVectorElement(param, 2_i, 42_i);

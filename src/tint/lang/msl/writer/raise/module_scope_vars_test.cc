@@ -42,7 +42,7 @@ namespace {
 using MslWriter_ModuleScopeVarsTest = core::ir::transform::TransformTest;
 
 TEST_F(MslWriter_ModuleScopeVarsTest, NoModuleScopeVars) {
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* var = b.Var<function, i32>("v");
         b.Load(var);
@@ -68,12 +68,12 @@ TEST_F(MslWriter_ModuleScopeVarsTest, NoModuleScopeVars) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, Private) {
-    auto* var_a = b.Var("a", ty.ptr<private_, i32>());
-    auto* var_b = b.Var("b", ty.ptr<private_, i32>());
+    auto* var_a = b.Var("a", ty->ptr<private_, i32>());
+    auto* var_b = b.Var("b", ty->ptr<private_, i32>());
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -134,7 +134,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, Private_WithInitializers) {
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -190,14 +190,14 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, Storage) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -251,14 +251,14 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, Uniform) {
-    auto* var_a = b.Var("a", ty.ptr<uniform, i32>());
-    auto* var_b = b.Var("b", ty.ptr<uniform, i32>());
+    auto* var_a = b.Var("a", ty->ptr<uniform, i32>());
+    auto* var_b = b.Var("b", ty->ptr<uniform, i32>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -309,15 +309,15 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, HandleTypes) {
-    auto* t = ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
-    auto* var_t = b.Var("t", ty.ptr<handle>(t));
-    auto* var_s = b.Var("s", ty.ptr<handle>(ty.sampler()));
+    auto* t = ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
+    auto* var_t = b.Var("t", ty->ptr<handle>(t));
+    auto* var_s = b.Var("s", ty->ptr<handle>(ty->sampler()));
     var_t->SetBindingPoint(1, 2);
     var_s->SetBindingPoint(3, 4);
     mod.root_block->Append(var_t);
     mod.root_block->Append(var_s);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_t = b.Load(var_t);
         auto* load_s = b.Load(var_s);
@@ -366,12 +366,12 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, Workgroup) {
-    auto* var_a = b.Var("a", ty.ptr<workgroup, i32>());
-    auto* var_b = b.Var("b", ty.ptr<workgroup, i32>());
+    auto* var_a = b.Var("a", ty->ptr<workgroup, i32>());
+    auto* var_b = b.Var("b", ty->ptr<workgroup, i32>());
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kCompute,
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kCompute,
                             std::array<uint32_t, 3>{1u, 1u, 1u});
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
@@ -433,16 +433,16 @@ tint_symbol_2 = struct @align(4) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, MultipleAddressSpaces) {
-    auto* var_a = b.Var("a", ty.ptr<uniform, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
-    auto* var_c = b.Var("c", ty.ptr<private_, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<uniform, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_c = b.Var("c", ty->ptr<private_, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -505,14 +505,14 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, EntryPointHasExistingParameters) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     auto* param = b.FunctionParam<i32>("param");
     param->SetLocation(
         core::ir::Location{1_u, core::Interpolation{core::InterpolationType::kFlat}});
@@ -572,14 +572,14 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_NoArgs) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     b.Append(foo->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -587,7 +587,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_NoArgs) {
         b.Return(foo);
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         b.Call(foo);
         b.Return(func);
@@ -651,14 +651,14 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_WithExistingParameters) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     auto* param = b.FunctionParam<i32>("param");
     foo->SetParams({param});
     b.Append(foo->Block(), [&] {
@@ -668,7 +668,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_WithExistingParam
         b.Return(foo);
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         b.Call(foo, 42_i);
         b.Return(func);
@@ -734,15 +734,15 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_HandleTypes) {
-    auto* t = ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty.f32());
-    auto* var_t = b.Var("t", ty.ptr<handle>(t));
-    auto* var_s = b.Var("s", ty.ptr<handle>(ty.sampler()));
+    auto* t = ty->Get<core::type::SampledTexture>(core::type::TextureDimension::k2d, ty->f32());
+    auto* var_t = b.Var("t", ty->ptr<handle>(t));
+    auto* var_s = b.Var("s", ty->ptr<handle>(ty->sampler()));
     var_t->SetBindingPoint(1, 2);
     var_s->SetBindingPoint(3, 4);
     mod.root_block->Append(var_t);
     mod.root_block->Append(var_s);
 
-    auto* foo = b.Function("foo", ty.vec4<f32>());
+    auto* foo = b.Function("foo", ty->vec4<f32>());
     auto* param = b.FunctionParam<i32>("param");
     foo->SetParams({param});
     b.Append(foo->Block(), [&] {
@@ -753,7 +753,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_HandleTypes) {
         b.Return(foo, result);
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         b.Call(foo, 42_i);
         b.Return(func);
@@ -812,16 +812,16 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatUsesVars_OutOfOrder) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
 
-    auto* foo = b.Function("foo", ty.void_());
+    auto* foo = b.Function("foo", ty->void_());
     b.Append(foo->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -893,19 +893,19 @@ tint_module_vars_struct = struct @align(1) {
 
 // Test that we do not add the structure to functions that do not need it.
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionThatDoesNotUseVars) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
     b.Append(foo->Block(), [&] {  //
         b.Return(foo, 42_i);
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -974,24 +974,24 @@ tint_module_vars_struct = struct @align(1) {
 
 // Test that we *do* add the structure to functions that only have transitive uses.
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionWithOnlyTransitiveUses) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* bar = b.Function("bar", ty.i32());
+    auto* bar = b.Function("bar", ty->i32());
     b.Append(bar->Block(), [&] {  //
         b.Return(bar, b.Load(var_a));
     });
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
     b.Append(foo->Block(), [&] {  //
         b.Return(foo, b.Call(bar));
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -1076,16 +1076,16 @@ tint_module_vars_struct = struct @align(1) {
 // Test that we *do* add the structure to functions that only have transitive uses, where that
 // function is declared first.
 TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionWithOnlyTransitiveUses_OutOfOrder) {
-    auto* var_a = b.Var("a", ty.ptr<storage, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<storage, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
 
-    auto* bar = b.Function("bar", ty.i32());
+    auto* bar = b.Function("bar", ty->i32());
     b.Append(bar->Block(), [&] {  //
         b.Return(bar, b.Load(var_a));
     });
@@ -1094,7 +1094,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, CallFunctionWithOnlyTransitiveUses_OutOfOr
         b.Return(foo, b.Call(bar));
     });
 
-    auto* func = b.Function("main", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("main", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -1177,16 +1177,16 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, MultipleEntryPoints) {
-    auto* var_a = b.Var("a", ty.ptr<uniform, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
-    auto* var_c = b.Var("c", ty.ptr<private_, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<uniform, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_c = b.Var("c", ty->ptr<private_, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* main_a = b.Function("main_a", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_a = b.Function("main_a", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_a->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -1195,7 +1195,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, MultipleEntryPoints) {
         b.Return(main_a);
     });
 
-    auto* main_b = b.Function("main_b", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_b = b.Function("main_b", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_b->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -1287,16 +1287,16 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, MultipleEntryPoints_DifferentUsageSets) {
-    auto* var_a = b.Var("a", ty.ptr<uniform, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
-    auto* var_c = b.Var("c", ty.ptr<private_, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<uniform, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_c = b.Var("c", ty->ptr<private_, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* main_a = b.Function("main_a", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_a = b.Function("main_a", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_a->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);
@@ -1304,7 +1304,7 @@ TEST_F(MslWriter_ModuleScopeVarsTest, MultipleEntryPoints_DifferentUsageSets) {
         b.Return(main_a);
     });
 
-    auto* main_b = b.Function("main_b", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_b = b.Function("main_b", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_b->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_c = b.Load(var_c);
@@ -1384,28 +1384,28 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, MultipleEntryPoints_DifferentUsageSets_CommonHelper) {
-    auto* var_a = b.Var("a", ty.ptr<uniform, i32, core::Access::kRead>());
-    auto* var_b = b.Var("b", ty.ptr<storage, i32, core::Access::kReadWrite>());
-    auto* var_c = b.Var("c", ty.ptr<private_, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var("a", ty->ptr<uniform, i32, core::Access::kRead>());
+    auto* var_b = b.Var("b", ty->ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_c = b.Var("c", ty->ptr<private_, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* foo = b.Function("foo", ty.i32());
+    auto* foo = b.Function("foo", ty->i32());
     b.Append(foo->Block(), [&] {  //
         b.Return(foo, b.Load(var_a));
     });
 
-    auto* main_a = b.Function("main_a", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_a = b.Function("main_a", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_a->Block(), [&] {
         auto* load_b = b.Load(var_b);
         b.Store(var_b, b.Add<i32>(b.Call(foo), load_b));
         b.Return(main_a);
     });
 
-    auto* main_b = b.Function("main_b", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* main_b = b.Function("main_b", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(main_b->Block(), [&] {
         auto* load_c = b.Load(var_c);
         b.Store(var_c, b.Multiply<i32>(b.Call(foo), load_c));
@@ -1495,16 +1495,16 @@ tint_module_vars_struct = struct @align(1) {
 }
 
 TEST_F(MslWriter_ModuleScopeVarsTest, VarsWithNoNames) {
-    auto* var_a = b.Var(ty.ptr<uniform, i32, core::Access::kRead>());
-    auto* var_b = b.Var(ty.ptr<storage, i32, core::Access::kReadWrite>());
-    auto* var_c = b.Var(ty.ptr<private_, i32, core::Access::kReadWrite>());
+    auto* var_a = b.Var(ty->ptr<uniform, i32, core::Access::kRead>());
+    auto* var_b = b.Var(ty->ptr<storage, i32, core::Access::kReadWrite>());
+    auto* var_c = b.Var(ty->ptr<private_, i32, core::Access::kReadWrite>());
     var_a->SetBindingPoint(1, 2);
     var_b->SetBindingPoint(3, 4);
     mod.root_block->Append(var_a);
     mod.root_block->Append(var_b);
     mod.root_block->Append(var_c);
 
-    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    auto* func = b.Function("foo", ty->void_(), core::ir::Function::PipelineStage::kFragment);
     b.Append(func->Block(), [&] {
         auto* load_a = b.Load(var_a);
         auto* load_b = b.Load(var_b);

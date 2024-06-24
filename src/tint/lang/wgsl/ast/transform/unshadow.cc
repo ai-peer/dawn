@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -47,11 +48,11 @@ namespace tint::ast::transform {
 /// PIMPL state for the transform
 struct Unshadow::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
 
     /// Constructor
     /// @param program the source program
@@ -60,7 +61,7 @@ struct Unshadow::State {
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     Transform::ApplyResult Run() {
-        auto& sem = src.Sem();
+        auto& sem = src->Sem();
 
         // Maps a variable to its new name.
         Hashmap<const sem::Variable*, Symbol, 8> renamed_to;

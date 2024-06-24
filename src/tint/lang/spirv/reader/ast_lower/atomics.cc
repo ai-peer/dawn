@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
@@ -66,11 +67,11 @@ struct Atomics::State {
     };
 
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     std::unordered_map<const core::type::Struct*, ForkedStruct> forked_structs;
     std::unordered_set<const sem::Variable*> atomic_variables;
     UniqueVector<const sem::ValueExpression*, 8> atomic_expressions;
@@ -188,7 +189,8 @@ struct Atomics::State {
                 [&](const sem::VariableUser* user) {
                     auto* v = user->Variable()->Declaration();
                     if (v->type && atomic_variables.emplace(user->Variable()).second) {
-                        ctx.Replace(v->type.expr, b.Expr(AtomicTypeFor(user->Variable()->Type())));
+                        ctx.Replace(v->type.expr.get(),
+                                    b.Expr(AtomicTypeFor(user->Variable()->Type())));
                     }
                     if (auto* ctor = user->Variable()->Initializer()) {
                         atomic_expressions.Add(ctor);
@@ -206,7 +208,7 @@ struct Atomics::State {
                 },
                 [&](const sem::ValueExpression* e) {
                     if (auto* unary = e->Declaration()->As<ast::UnaryOpExpression>()) {
-                        atomic_expressions.Add(ctx.src->Sem().GetVal(unary->expr));
+                        atomic_expressions.Add(ctx.src->Sem().GetVal(unary->expr.get()));
                     }
                 });
         }
@@ -268,7 +270,7 @@ struct Atomics::State {
                     });
                 }
             } else if (auto* assign = node->As<ast::AssignmentStatement>()) {
-                auto* sem_lhs = ctx.src->Sem().GetVal(assign->lhs);
+                auto* sem_lhs = ctx.src->Sem().GetVal(assign->lhs.get());
                 if (is_ref_to_atomic_var(sem_lhs)) {
                     ctx.Replace(assign, [=] {
                         auto* lhs = ctx.CloneWithoutTransform(assign->lhs);

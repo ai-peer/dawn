@@ -33,6 +33,7 @@
 #include <string>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/common/validation_mode.h"
 #include "src/tint/lang/wgsl/inspector/inspector.h"
 #include "src/tint/utils/diagnostic/source.h"
@@ -86,7 +87,7 @@ struct LoadProgramOptions {
     tint::spirv::reader::Options spirv_reader_options;
 #endif
     /// The text printer to use for output
-    StyledTextPrinter* printer = nullptr;
+    raw_ptr<StyledTextPrinter> printer = nullptr;
 };
 
 /// Loads the source and program information for the given file.

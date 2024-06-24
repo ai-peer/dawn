@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -87,13 +89,13 @@ namespace {
 class State {
   private:
     /// The clone context.
-    program::CloneContext& ctx;
+    const raw_ref<program::CloneContext> ctx;
 
     /// Alias to `*ctx.dst`
-    ast::Builder& b;
+    const raw_ref<ast::Builder> b;
 
     /// The function.
-    const ast::Function* function;
+    raw_ptr<const ast::Function> function;
 
     /// The symbol for the return flag variable.
     Symbol flag;
@@ -108,11 +110,11 @@ class State {
     /// Constructor
     /// @param context the clone context
     State(program::CloneContext& context, const ast::Function* func)
-        : ctx(context), b(*ctx.dst), function(func) {}
+        : ctx(context), b(*ctx->dst), function(func) {}
 
     /// Process a statement (recursively).
     void ProcessStatement(const ast::Statement* stmt) {
-        if (stmt == nullptr || !HasBehavior(*ctx.src, stmt, sem::Behavior::kReturn)) {
+        if (stmt == nullptr || !HasBehavior(*ctx->src, stmt, sem::Behavior::kReturn)) {
             return;
         }
 
@@ -134,16 +136,16 @@ class State {
             [&](const ast::ReturnStatement* r) {
                 Vector<const ast::Statement*, 3> stmts;
                 // Set the return flag to signal that we have hit a return.
-                stmts.Push(b.Assign(b.Expr(flag), true));
+                stmts.Push(b->Assign(b->Expr(flag), true));
                 if (r->value) {
                     // Set the return value if necessary.
-                    stmts.Push(b.Assign(b.Expr(retval), ctx.Clone(r->value)));
+                    stmts.Push(b->Assign(b->Expr(retval), ctx->Clone(r->value)));
                 }
                 if (is_in_loop_or_switch) {
                     // If we are in a loop or switch statement, break out of it.
-                    stmts.Push(b.Break());
+                    stmts.Push(b->Break());
                 }
-                ctx.Replace(r, b.Block(std::move(stmts)));
+                ctx->Replace(r, b->Block(std::move(stmts)));
             },
             [&](const ast::SwitchStatement* s) {
                 TINT_SCOPED_ASSIGNMENT(is_in_loop_or_switch, true);
@@ -167,24 +169,24 @@ class State {
 
         // Insert variables for the return flag and return value at the top of the function.
         if (block == function->body) {
-            flag = b.Symbols().New("tint_return_flag");
-            new_stmts[0].Push(b.Decl(b.Var(flag, b.ty.bool_())));
+            flag = b->Symbols().New("tint_return_flag");
+            new_stmts[0].Push(b->Decl(b->Var(flag, b->ty.bool_())));
 
             if (function->return_type) {
-                retval = b.Symbols().New("tint_return_value");
-                new_stmts[0].Push(b.Decl(b.Var(retval, ctx.Clone(function->return_type))));
+                retval = b->Symbols().New("tint_return_value");
+                new_stmts[0].Push(b->Decl(b->Var(retval, ctx->Clone(function->return_type))));
             }
         }
 
         for (auto* s : block->statements) {
             // Process the statement and add it to the current block.
             ProcessStatement(s);
-            new_stmts.Back().Push(ctx.Clone(s));
+            new_stmts.Back().Push(ctx->Clone(s));
 
             // Check if the statement is or contains a return statement.
             // We need to make sure any statements that follow this one do not get executed if the
             // return flag has been set.
-            if (HasBehavior(*ctx.src, s, sem::Behavior::kReturn)) {
+            if (HasBehavior(*ctx->src, s, sem::Behavior::kReturn)) {
                 if (is_in_loop_or_switch) {
                     // We're in a loop/switch, and so we would have inserted a `break`.
                     // If we've just come out of a loop/switch statement, we need to `break` again.
@@ -192,10 +194,11 @@ class State {
                                    ast::SwitchStatement>()) {
                         // If the loop only has the 'Return' behavior, we can just unconditionally
                         // break. Otherwise check the return flag.
-                        if (HasBehavior(*ctx.src, s, sem::Behavior::kNext)) {
-                            new_stmts.Back().Push(b.If(b.Expr(flag), b.Block(Vector{b.Break()})));
+                        if (HasBehavior(*ctx->src, s, sem::Behavior::kNext)) {
+                            new_stmts.Back().Push(
+                                b->If(b->Expr(flag), b->Block(Vector{b->Break()})));
                         } else {
-                            new_stmts.Back().Push(b.Break());
+                            new_stmts.Back().Push(b->Break());
                         }
                     }
                 } else {
@@ -210,7 +213,7 @@ class State {
         while (new_stmts.Length() > 1) {
             const ast::IfStatement* i = nullptr;
             if (new_stmts.Back().Length() > 0) {
-                i = b.If(b.Not(b.Expr(flag)), b.Block(new_stmts.Back()));
+                i = b->If(b->Not(b->Expr(flag)), b->Block(new_stmts.Back()));
             }
             new_stmts.Pop();
             if (i) {
@@ -220,10 +223,10 @@ class State {
 
         // Insert the final return statement at the end of the function body.
         if (block == function->body && retval.IsValid()) {
-            new_stmts[0].Push(b.Return(b.Expr(retval)));
+            new_stmts[0].Push(b->Return(b->Expr(retval)));
         }
 
-        ctx.Replace(block, b.Block(new_stmts[0]));
+        ctx->Replace(block, b->Block(new_stmts[0]));
     }
 };
 

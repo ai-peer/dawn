@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_CORE_IR_CLONE_CONTEXT_H_
 #define SRC_TINT_LANG_CORE_IR_CLONE_CONTEXT_H_
 
+#include "base/memory/raw_ref.h"
 #include "src/tint/utils/containers/const_propagating_ptr.h"
 #include "src/tint/utils/containers/hashmap.h"
 #include "src/tint/utils/containers/transform.h"
@@ -49,7 +50,7 @@ class CloneContext {
     explicit CloneContext(Module& module);
 
     /// The IR module
-    Module& ir;
+    const raw_ref<Module> ir;
 
     /// Performs a clone of @p what.
     /// @param what the item to clone

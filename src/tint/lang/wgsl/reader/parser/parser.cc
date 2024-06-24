@@ -30,6 +30,7 @@
 #include <limits>
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/core/attribute.h"
 #include "src/tint/lang/core/type/depth_texture.h"
 #include "src/tint/lang/core/type/external_texture.h"
@@ -188,7 +189,7 @@ class Parser::MultiTokenSource {
     }
 
   private:
-    Parser* parser_;
+    raw_ptr<Parser> parser_;
     tint::Source start_;
 };
 
@@ -1561,8 +1562,8 @@ Maybe<const ast::IfStatement*> Parser::if_statement(AttributeList& attrs) {
 
     struct IfInfo {
         Source source;
-        const ast::Expression* condition;
-        const ast::BlockStatement* body;
+        raw_ptr<const ast::Expression> condition;
+        raw_ptr<const ast::BlockStatement> body;
         AttributeList attributes;
     };
 

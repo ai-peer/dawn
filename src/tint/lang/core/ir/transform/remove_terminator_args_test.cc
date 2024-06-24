@@ -40,7 +40,7 @@ using namespace tint::core::number_suffixes;  // NOLINT
 using IR_RemoveTerminatorArgsTest = TransformTest;
 
 TEST_F(IR_RemoveTerminatorArgsTest, NoModify_If) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* ifelse = b.If(true);
         b.Append(ifelse->True(), [&] {  //
@@ -77,7 +77,7 @@ TEST_F(IR_RemoveTerminatorArgsTest, NoModify_If) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, NoModify_Switch) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* swtch = b.Switch(42_i);
 
@@ -127,7 +127,7 @@ TEST_F(IR_RemoveTerminatorArgsTest, NoModify_Switch) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, NoModify_Loop) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
         auto* loop = b.Loop();
 
@@ -181,10 +181,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, NoModify_Loop) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, IfResults) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* res_a = b.InstructionResult(ty.i32());
-        auto* res_b = b.InstructionResult(ty.u32());
+        auto* res_a = b.InstructionResult(ty->i32());
+        auto* res_b = b.InstructionResult(ty->u32());
 
         auto* ifelse = b.If(true);
         ifelse->SetResults(Vector{res_a, res_b});
@@ -253,10 +253,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, IfResults) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, SwitchResults) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* res_a = b.InstructionResult(ty.i32());
-        auto* res_b = b.InstructionResult(ty.u32());
+        auto* res_a = b.InstructionResult(ty->i32());
+        auto* res_b = b.InstructionResult(ty->u32());
 
         auto* swtch = b.Switch(42_i);
         swtch->SetResults(Vector{res_a, res_b});
@@ -342,10 +342,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, SwitchResults) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, Loop_Results) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* res_a = b.InstructionResult(ty.i32());
-        auto* res_b = b.InstructionResult(ty.u32());
+        auto* res_a = b.InstructionResult(ty->i32());
+        auto* res_b = b.InstructionResult(ty->u32());
 
         auto* loop = b.Loop();
         loop->SetResults(Vector{res_a, res_b});
@@ -438,10 +438,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, Loop_Results) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, Loop_BodyParams) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* param_a = b.BlockParam(ty.i32());
-        auto* param_b = b.BlockParam(ty.u32());
+        auto* param_a = b.BlockParam(ty->i32());
+        auto* param_b = b.BlockParam(ty->u32());
 
         auto* loop = b.Loop();
         loop->Body()->SetParams(Vector{param_a, param_b});
@@ -534,10 +534,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, Loop_BodyParams) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, Loop_ContinuingParams) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* param_a = b.BlockParam(ty.i32());
-        auto* param_b = b.BlockParam(ty.u32());
+        auto* param_a = b.BlockParam(ty->i32());
+        auto* param_b = b.BlockParam(ty->u32());
 
         auto* loop = b.Loop();
         loop->Continuing()->SetParams(Vector{param_a, param_b});
@@ -628,12 +628,12 @@ TEST_F(IR_RemoveTerminatorArgsTest, Loop_ContinuingParams) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, Loop_BreakIfWithTwoArgLists) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* res_a = b.InstructionResult(ty.i32());
-        auto* res_b = b.InstructionResult(ty.u32());
-        auto* param_a = b.BlockParam(ty.f32());
-        auto* param_b = b.BlockParam(ty.i32());
+        auto* res_a = b.InstructionResult(ty->i32());
+        auto* res_b = b.InstructionResult(ty->u32());
+        auto* param_a = b.BlockParam(ty->f32());
+        auto* param_b = b.BlockParam(ty->i32());
 
         auto* loop = b.Loop();
         loop->SetResults(Vector{res_a, res_b});
@@ -744,10 +744,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, Loop_BreakIfWithTwoArgLists) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, UndefResults) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* res_a = b.InstructionResult(ty.i32());
-        auto* res_b = b.InstructionResult(ty.u32());
+        auto* res_a = b.InstructionResult(ty->i32());
+        auto* res_b = b.InstructionResult(ty->u32());
 
         auto* ifelse = b.If(true);
         ifelse->SetResults(Vector{res_a, res_b});
@@ -814,10 +814,10 @@ TEST_F(IR_RemoveTerminatorArgsTest, UndefResults) {
 }
 
 TEST_F(IR_RemoveTerminatorArgsTest, UndefBlockParams) {
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     b.Append(func->Block(), [&] {
-        auto* param_a = b.BlockParam(ty.i32());
-        auto* param_b = b.BlockParam(ty.u32());
+        auto* param_a = b.BlockParam(ty->i32());
+        auto* param_b = b.BlockParam(ty->u32());
 
         auto* loop = b.Loop();
         loop->Body()->SetParams(Vector{param_a, param_b});

@@ -61,7 +61,7 @@ wgsl::DiagnosticSeverity Info::DiagnosticSeverity(const ast::Node* ast_node,
         }
 
         // No severity set on the function, so check the module instead.
-        return check(module_);
+        return check(module_.get());
     };
 
     // Get the diagnostic severity modification for a statement.
@@ -92,7 +92,7 @@ wgsl::DiagnosticSeverity Info::DiagnosticSeverity(const ast::Node* ast_node,
         [&](const sem::Function* func) { return check_func(func); },
         [&](Default) {
             // Use the global severity set on the module.
-            return check(module_);
+            return check(module_.get());
         });
     TINT_ASSERT(severity != wgsl::DiagnosticSeverity::kUndefined);
     return severity;

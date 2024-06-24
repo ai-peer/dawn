@@ -31,6 +31,7 @@
 #include <optional>
 #include <vector>
 
+#include "base/memory/raw_ptr.h"
 #include "src/tint/lang/wgsl/reader/parser/token.h"
 
 namespace tint::wgsl::reader {
@@ -119,7 +120,7 @@ class Lexer {
     /// @returns true if char at `pos` matches `ch`
     bool matches(uint32_t pos, char ch);
     /// The source file content
-    Source::File const* const file_;
+    const raw_ptr<const Source::File> file_;
     /// The current location within the input
     Source::Location location_;
 };

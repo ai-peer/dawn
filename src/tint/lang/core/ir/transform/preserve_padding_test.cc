@@ -45,41 +45,41 @@ class IR_PreservePaddingTest : public TransformTest {
   protected:
     const type::Struct* MakeStructWithoutPadding() {
         auto* structure =
-            ty.Struct(mod.symbols.New("MyStruct"), {
-                                                       {mod.symbols.New("a"), ty.vec4<u32>()},
-                                                       {mod.symbols.New("b"), ty.vec4<u32>()},
-                                                       {mod.symbols.New("c"), ty.vec4<u32>()},
-                                                   });
+            ty->Struct(mod.symbols.New("MyStruct"), {
+                                                        {mod.symbols.New("a"), ty->vec4<u32>()},
+                                                        {mod.symbols.New("b"), ty->vec4<u32>()},
+                                                        {mod.symbols.New("c"), ty->vec4<u32>()},
+                                                    });
         return structure;
     }
 
     const type::Struct* MakeStructWithTrailingPadding() {
         auto* structure =
-            ty.Struct(mod.symbols.New("MyStruct"), {
-                                                       {mod.symbols.New("a"), ty.vec4<u32>()},
-                                                       {mod.symbols.New("b"), ty.u32()},
-                                                   });
+            ty->Struct(mod.symbols.New("MyStruct"), {
+                                                        {mod.symbols.New("a"), ty->vec4<u32>()},
+                                                        {mod.symbols.New("b"), ty->u32()},
+                                                    });
         return structure;
     }
 
     const type::Struct* MakeStructWithInternalPadding() {
         auto* structure =
-            ty.Struct(mod.symbols.New("MyStruct"), {
-                                                       {mod.symbols.New("a"), ty.vec4<u32>()},
-                                                       {mod.symbols.New("b"), ty.u32()},
-                                                       {mod.symbols.New("c"), ty.vec4<u32>()},
-                                                   });
+            ty->Struct(mod.symbols.New("MyStruct"), {
+                                                        {mod.symbols.New("a"), ty->vec4<u32>()},
+                                                        {mod.symbols.New("b"), ty->u32()},
+                                                        {mod.symbols.New("c"), ty->vec4<u32>()},
+                                                    });
         return structure;
     }
 };
 
 TEST_F(IR_PreservePaddingTest, NoModify_Workgroup) {
     auto* structure = MakeStructWithTrailingPadding();
-    auto* buffer = b.Var("buffer", ty.ptr(workgroup, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(workgroup, structure));
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -114,11 +114,11 @@ $B1: {  # root
 
 TEST_F(IR_PreservePaddingTest, NoModify_Private) {
     auto* structure = MakeStructWithTrailingPadding();
-    auto* buffer = b.Var("buffer", ty.ptr(private_, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(private_, structure));
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -155,10 +155,10 @@ TEST_F(IR_PreservePaddingTest, NoModify_Function) {
     auto* structure = MakeStructWithTrailingPadding();
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
-        auto* buffer = b.Var("buffer", ty.ptr(function, structure));
+        auto* buffer = b.Var("buffer", ty->ptr(function, structure));
         b.Store(buffer, value);
         b.Return(func);
     });
@@ -188,12 +188,12 @@ MyStruct = struct @align(16) {
 
 TEST_F(IR_PreservePaddingTest, NoModify_StructWithoutPadding) {
     auto* structure = MakeStructWithoutPadding();
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -228,13 +228,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, NoModify_MatrixWithoutPadding) {
-    auto* mat = ty.mat4x4<f32>();
-    auto* buffer = b.Var("buffer", ty.ptr(storage, mat));
+    auto* mat = ty->mat4x4<f32>();
+    auto* buffer = b.Var("buffer", ty->ptr(storage, mat));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", mat);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -263,13 +263,13 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, NoModify_ArrayWithoutPadding) {
-    auto* arr = ty.array<vec4<f32>>();
-    auto* buffer = b.Var("buffer", ty.ptr(storage, arr));
+    auto* arr = ty->array<vec4<f32>>();
+    auto* buffer = b.Var("buffer", ty->ptr(storage, arr));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", arr);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -298,12 +298,12 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, NoModify_Vec3) {
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.vec3<f32>()));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->vec3<f32>()));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* value = b.FunctionParam("value", ty.vec3<f32>());
-    auto* func = b.Function("foo", ty.void_());
+    auto* value = b.FunctionParam("value", ty->vec3<f32>());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -334,7 +334,7 @@ $B1: {  # root
 TEST_F(IR_PreservePaddingTest, NoModify_LoadStructWithTrailingPadding) {
     auto* structure = MakeStructWithTrailingPadding();
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
@@ -373,12 +373,12 @@ $B1: {  # root
 TEST_F(IR_PreservePaddingTest, Struct_TrailingPadding) {
     auto* structure = MakeStructWithTrailingPadding();
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -441,12 +441,12 @@ $B1: {  # root
 TEST_F(IR_PreservePaddingTest, Struct_InternalPadding) {
     auto* structure = MakeStructWithInternalPadding();
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -513,16 +513,16 @@ $B1: {  # root
 
 TEST_F(IR_PreservePaddingTest, NestedStructWithPadding) {
     auto* inner = MakeStructWithInternalPadding();
-    auto* outer = ty.Struct(mod.symbols.New("Outer"), {
-                                                          {mod.symbols.New("inner"), inner},
-                                                      });
+    auto* outer = ty->Struct(mod.symbols.New("Outer"), {
+                                                           {mod.symbols.New("inner"), inner},
+                                                       });
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, outer));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, outer));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", outer);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -605,14 +605,14 @@ $B1: {  # root
 
 TEST_F(IR_PreservePaddingTest, StructWithPadding_InArray) {
     auto* structure = MakeStructWithTrailingPadding();
-    auto* arr = ty.array(structure, 4);
+    auto* arr = ty->array(structure, 4);
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, arr));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, arr));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", arr);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -699,14 +699,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, Mat3x3) {
-    auto* mat = ty.mat3x3<f32>();
+    auto* mat = ty->mat3x3<f32>();
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, mat));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, mat));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", mat);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -760,18 +760,18 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, Mat3x3_InStruct) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
-                                                                 {mod.symbols.New("a"), mat},
-                                                                 {mod.symbols.New("b"), mat},
-                                                             });
+    auto* mat = ty->mat3x3<f32>();
+    auto* structure = ty->Struct(mod.symbols.New("MyStruct"), {
+                                                                  {mod.symbols.New("a"), mat},
+                                                                  {mod.symbols.New("b"), mat},
+                                                              });
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, structure));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, structure));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", structure);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -846,15 +846,15 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, Mat3x3_Array) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, arr));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, arr));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", arr);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -934,14 +934,14 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, Vec3_Array) {
-    auto* arr = ty.array(ty.vec3<f32>(), 4);
+    auto* arr = ty->array(ty->vec3<f32>(), 4);
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, arr));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, arr));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", arr);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -1008,27 +1008,27 @@ $B1: {  # root
 
 TEST_F(IR_PreservePaddingTest, ComplexNesting) {
     auto* inner =
-        ty.Struct(mod.symbols.New("Inner"), {
-                                                {mod.symbols.New("a"), ty.u32()},
-                                                {mod.symbols.New("b"), ty.array<vec3<f32>, 4>()},
-                                                {mod.symbols.New("c"), ty.mat3x3<f32>()},
-                                                {mod.symbols.New("d"), ty.u32()},
-                                            });
+        ty->Struct(mod.symbols.New("Inner"), {
+                                                 {mod.symbols.New("a"), ty->u32()},
+                                                 {mod.symbols.New("b"), ty->array<vec3<f32>, 4>()},
+                                                 {mod.symbols.New("c"), ty->mat3x3<f32>()},
+                                                 {mod.symbols.New("d"), ty->u32()},
+                                             });
 
-    auto* outer =
-        ty.Struct(mod.symbols.New("Outer"), {
-                                                {mod.symbols.New("a"), ty.u32()},
-                                                {mod.symbols.New("inner"), inner},
-                                                {mod.symbols.New("inner_arr"), ty.array(inner, 4)},
-                                                {mod.symbols.New("b"), ty.u32()},
-                                            });
+    auto* outer = ty->Struct(mod.symbols.New("Outer"),
+                             {
+                                 {mod.symbols.New("a"), ty->u32()},
+                                 {mod.symbols.New("inner"), inner},
+                                 {mod.symbols.New("inner_arr"), ty->array(inner, 4)},
+                                 {mod.symbols.New("b"), ty->u32()},
+                             });
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, ty.array(outer, 3)));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, ty->array(outer, 3)));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
-    auto* value = b.FunctionParam("value", ty.array(outer, 3));
-    auto* func = b.Function("foo", ty.void_());
+    auto* value = b.FunctionParam("value", ty->array(outer, 3));
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
         b.Store(buffer, value);
@@ -1222,21 +1222,21 @@ $B1: {  # root
 }
 
 TEST_F(IR_PreservePaddingTest, MultipleStoresSameType) {
-    auto* mat = ty.mat3x3<f32>();
-    auto* arr = ty.array(mat, 4);
+    auto* mat = ty->mat3x3<f32>();
+    auto* arr = ty->array(mat, 4);
 
-    auto* buffer = b.Var("buffer", ty.ptr(storage, arr));
+    auto* buffer = b.Var("buffer", ty->ptr(storage, arr));
     buffer->SetBindingPoint(0, 0);
     mod.root_block->Append(buffer);
 
     auto* value = b.FunctionParam("value", mat);
-    auto* func = b.Function("foo", ty.void_());
+    auto* func = b.Function("foo", ty->void_());
     func->SetParams({value});
     b.Append(func->Block(), [&] {
-        b.Store(b.Access(ty.ptr(storage, mat), buffer, 0_u), value);
-        b.Store(b.Access(ty.ptr(storage, mat), buffer, 1_u), value);
-        b.Store(b.Access(ty.ptr(storage, mat), buffer, 2_u), value);
-        b.Store(b.Access(ty.ptr(storage, mat), buffer, 3_u), value);
+        b.Store(b.Access(ty->ptr(storage, mat), buffer, 0_u), value);
+        b.Store(b.Access(ty->ptr(storage, mat), buffer, 1_u), value);
+        b.Store(b.Access(ty->ptr(storage, mat), buffer, 2_u), value);
+        b.Store(b.Access(ty->ptr(storage, mat), buffer, 3_u), value);
         b.Return(func);
     });
 

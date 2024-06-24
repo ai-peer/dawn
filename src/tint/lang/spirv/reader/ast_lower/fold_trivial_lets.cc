@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "base/memory/raw_ptr.h"
+#include "base/memory/raw_ref.h"
 #include "src/tint/lang/wgsl/ast/traverse_expressions.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
@@ -43,13 +45,13 @@ namespace tint::spirv::reader {
 /// PIMPL state for the transform.
 struct FoldTrivialLets::State {
     /// The source program
-    const Program& src;
+    const raw_ref<const Program> src;
     /// The target program builder
     ProgramBuilder b;
     /// The clone context
-    program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
+    program::CloneContext ctx = {&b, &*src, /* auto_clone_symbols */ true};
     /// The semantic info.
-    const sem::Info& sem = src.Sem();
+    const raw_ref<const sem::Info> sem = src->Sem();
 
     /// Constructor
     /// @param program the source program
@@ -61,7 +63,7 @@ struct FoldTrivialLets::State {
         // PendingLet describes a let declaration that might be inlined.
         struct PendingLet {
             // The let declaration.
-            const ast::VariableDeclStatement* decl = nullptr;
+            raw_ptr<const ast::VariableDeclStatement> decl = nullptr;
             // The number of uses that have not yet been inlined.
             size_t remaining_uses = 0;
         };
@@ -72,7 +74,7 @@ struct FoldTrivialLets::State {
         // Helper that folds pending let declarations into `expr` if possible.
         auto fold_lets = [&](const ast::Expression* expr) {
             ast::TraverseExpressions(expr, [&](const ast::IdentifierExpression* ident) {
-                if (auto* user = sem.Get<sem::VariableUser>(ident)) {
+                if (auto* user = sem->Get<sem::VariableUser>(ident)) {
                     if (auto itr = pending_lets.Get(user->Variable())) {
                         TINT_ASSERT(itr->remaining_uses > 0);
 
@@ -97,8 +99,8 @@ struct FoldTrivialLets::State {
             if (auto* decl = stmt->As<ast::VariableDeclStatement>()) {
                 if (auto* let = decl->variable->As<ast::Let>()) {
                     // If the initializer doesn't have side effects, we might be able to inline it.
-                    if (!sem.GetVal(let->initializer)->HasSideEffects()) {  //
-                        auto num_users = sem.Get(let)->Users().Length();
+                    if (!sem->GetVal(let->initializer.get())->HasSideEffects()) {  //
+                        auto num_users = sem->Get(let)->Users().Length();
                         if (let->initializer->Is<ast::IdentifierExpression>()) {
                             // The initializer is a single identifier expression.
                             // We can fold it into multiple uses in the next non-let statement.
@@ -108,14 +110,14 @@ struct FoldTrivialLets::State {
                             if (num_users == 1) {
                                 fold_lets(let->initializer);
                             }
-                            pending_lets.Add(sem.Get(let), PendingLet{decl, num_users});
+                            pending_lets.Add(sem->Get(let), PendingLet{decl, num_users});
                         } else {
                             // The initializer is something more complex, so we only want to inline
                             // it if it's only used once.
                             // We also fold previous pending lets into this one.
                             fold_lets(let->initializer);
                             if (num_users == 1) {
-                                pending_lets.Add(sem.Get(let), PendingLet{decl, 1});
+                                pending_lets.Add(sem->Get(let), PendingLet{decl, 1});
                             }
                         }
                         continue;
@@ -128,14 +130,14 @@ struct FoldTrivialLets::State {
             if (auto* assign = stmt->As<ast::AssignmentStatement>()) {
                 // We can fold into the RHS of an assignment statement if the RHS and LHS
                 // expressions have no side effects.
-                if (!sem.GetVal(assign->lhs)->HasSideEffects() &&
-                    !sem.GetVal(assign->rhs)->HasSideEffects()) {
+                if (!sem->GetVal(assign->lhs.get())->HasSideEffects() &&
+                    !sem->GetVal(assign->rhs.get())->HasSideEffects()) {
                     fold_lets(assign->rhs);
                 }
             } else if (auto* ifelse = stmt->As<ast::IfStatement>()) {
                 // We can fold into the condition of an if statement if the condition expression has
                 // no side effects.
-                if (!sem.GetVal(ifelse->condition)->HasSideEffects()) {
+                if (!sem->GetVal(ifelse->condition.get())->HasSideEffects()) {
                     fold_lets(ifelse->condition);
                 }
             }
@@ -150,7 +152,7 @@ struct FoldTrivialLets::State {
     /// @returns the new program
     ApplyResult Run() {
         // Process all blocks in the module.
-        for (auto* node : src.ASTNodes().Objects()) {
+        for (auto* node : src->ASTNodes().Objects()) {
             if (auto* block = node->As<ast::BlockStatement>()) {
                 ProcessBlock(block);
             }
