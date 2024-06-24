@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "9a4383782e5269bb0408477c9b623157be52f5fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0bdd297_c9dfb417",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-24T20:04:50Z",
+      "side": 1,
+      "message": "... apparently this breaks the bots, will investigate and re-add reviewers once it passes",
+      "revId": "9a4383782e5269bb0408477c9b623157be52f5fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
