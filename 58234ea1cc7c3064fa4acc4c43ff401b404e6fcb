@@ -16,6 +16,57 @@
       "message": "PTAL! it\u0027s sorta nice this way, but it\u0027s also a little mysterious that dawn.json can have duplicate \"value\" for enums so long as the tags are different. Note that the generator still prevents collisions of the eventual enum value.",
       "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d40aa557_80c9ee0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T08:39:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b12937b_001d9529",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T08:39:30Z",
+      "side": 1,
+      "message": "I think we might want to add \u0027native\u0027 already for things like `SurfaceDescriptor` sTypes. (or \u0027native upstream\u0027 to differentiate with the tag to not add to the wire)",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4c78cb_cd652ca4",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T08:39:30Z",
+      "side": 1,
+      "message": "This change LGTM as a nice automatic way to add prefixes that doesn\u0027t require too much work from developers. Can we document it in codegen.md?",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
