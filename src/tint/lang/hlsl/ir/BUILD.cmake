@@ -41,6 +41,8 @@
 tint_add_target(tint_lang_hlsl_ir lib
   lang/hlsl/ir/builtin_call.cc
   lang/hlsl/ir/builtin_call.h
+  lang/hlsl/ir/const.cc
+  lang/hlsl/ir/const.h
   lang/hlsl/ir/ternary.cc
   lang/hlsl/ir/ternary.h
 )

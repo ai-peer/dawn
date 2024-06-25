@@ -25,24 +25,28 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
-#define SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+#ifndef SRC_TINT_LANG_HLSL_IR_CONST_H_
+#define SRC_TINT_LANG_HLSL_IR_CONST_H_
 
-#include "src/tint/utils/result/result.h"
+#include "src/tint/lang/core/ir/var.h"
+#include "src/tint/utils/rtti/castable.h"
 
-// Forward declarations.
-namespace tint::core::ir {
-class Module;
-}  // namespace tint::core::ir
+namespace tint::hlsl::ir {
 
-namespace tint::hlsl::writer::raise {
+/// A const value in the IR.
+class Const final : public Castable<Const, core::ir::Var> {
+  public:
+    Const();
 
-/// FxcPollyfill is a transform that replaces code constructs which cause FXC mis-compiles with
-/// safer constructs.
-/// @param module the module to transform
-/// @returns success or failure
-Result<SuccessType> FxcPolyfill(core::ir::Module& module);
+    /// Constructor
+    /// @param result the result value
+    explicit Const(core::ir::InstructionResult* result);
+    ~Const() override;
 
-}  // namespace tint::hlsl::writer::raise
+    /// @copydoc Instruction::Clone()
+    Const* Clone(core::ir::CloneContext& ctx) override;
+};
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+}  // namespace tint::hlsl::ir
+
+#endif  // SRC_TINT_LANG_HLSL_IR_CONST_H_

@@ -25,24 +25,31 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
-#define SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+#include "src/tint/lang/hlsl/ir/const.h"
 
-#include "src/tint/utils/result/result.h"
+#include "src/tint/lang/core/ir/clone_context.h"
+#include "src/tint/lang/core/ir/module.h"
 
-// Forward declarations.
-namespace tint::core::ir {
-class Module;
-}  // namespace tint::core::ir
+TINT_INSTANTIATE_TYPEINFO(tint::hlsl::ir::Const);
 
-namespace tint::hlsl::writer::raise {
+namespace tint::hlsl::ir {
 
-/// FxcPollyfill is a transform that replaces code constructs which cause FXC mis-compiles with
-/// safer constructs.
-/// @param module the module to transform
-/// @returns success or failure
-Result<SuccessType> FxcPolyfill(core::ir::Module& module);
+Const::Const() = default;
 
-}  // namespace tint::hlsl::writer::raise
+/// Constructor
+/// @param result the result value
+Const::Const(core::ir::InstructionResult* result) : Base(result) {}
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+Const::~Const() = default;
+
+/// @copydoc Instruction::Clone()
+Const* Const::Clone(core::ir::CloneContext& ctx) {
+    auto* new_result = ctx.Clone(Result(0));
+    auto* new_var = ctx.ir.allocators.instructions.Create<Const>(new_result);
+
+    CloneInto(ctx, new_var);
+
+    return new_var;
+}
+
+}  // namespace tint::hlsl::ir

@@ -25,8 +25,8 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
-#define SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_GLOBAL_PRIVATE_STRUCT_TO_CONST_H_
+#define SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_GLOBAL_PRIVATE_STRUCT_TO_CONST_H_
 
 #include "src/tint/utils/result/result.h"
 
@@ -37,12 +37,18 @@ class Module;
 
 namespace tint::hlsl::writer::raise {
 
-/// FxcPollyfill is a transform that replaces code constructs which cause FXC mis-compiles with
-/// safer constructs.
+/// Converts a global private structure initializer to a Const.
+///
+/// HLSL requires structure initializers to be assigned directly to a variable.
+/// For these constants use 'static const' at global-scope. 'const' at global scope
+/// creates a variable who's initializer is ignored, and the value is expected to be
+/// provided in a cbuffer. 'static const' is a true value-embedded-in-the-shader-code
+/// constant.
+///
 /// @param module the module to transform
 /// @returns success or failure
-Result<SuccessType> FxcPolyfill(core::ir::Module& module);
+Result<SuccessType> PromoteGlobalPrivateStructToConst(core::ir::Module& module);
 
 }  // namespace tint::hlsl::writer::raise
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_GLOBAL_PRIVATE_STRUCT_TO_CONST_H_

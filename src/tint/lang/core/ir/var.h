@@ -53,7 +53,7 @@ struct IOAttributes {
 };
 
 /// A var instruction in the IR.
-class Var final : public Castable<Var, OperandInstruction<1, 1>> {
+class Var : public Castable<Var, OperandInstruction<1, 1>> {
   public:
     /// The offset in Operands() for the initializer
     static constexpr size_t kInitializerOperandOffset = 0;
@@ -101,6 +101,9 @@ class Var final : public Castable<Var, OperandInstruction<1, 1>> {
 
     /// @returns the friendly name for the instruction
     std::string FriendlyName() const override { return "var"; }
+
+  protected:
+    void CloneInto(CloneContext& ctx, Var* new_var);
 
   private:
     std::optional<struct BindingPoint> binding_point_;

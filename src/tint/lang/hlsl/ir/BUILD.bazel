@@ -40,10 +40,12 @@ cc_library(
   name = "ir",
   srcs = [
     "builtin_call.cc",
+    "const.cc",
     "ternary.cc",
   ],
   hdrs = [
     "builtin_call.h",
+    "const.h",
     "ternary.h",
   ],
   deps = [

@@ -55,6 +55,12 @@ Var* Var::Clone(CloneContext& ctx) {
     auto* new_result = ctx.Clone(Result(0));
     auto* new_var = ctx.ir.allocators.instructions.Create<Var>(new_result);
 
+    CloneInto(ctx, new_var);
+
+    return new_var;
+}
+
+void Var::CloneInto(CloneContext& ctx, Var* new_var) {
     new_var->binding_point_ = binding_point_;
     new_var->attributes_ = attributes_;
 
@@ -66,7 +72,6 @@ Var* Var::Clone(CloneContext& ctx) {
     if (name.IsValid()) {
         ctx.ir.SetName(new_var, name.Name());
     }
-    return new_var;
 }
 
 void Var::SetInitializer(Value* initializer) {

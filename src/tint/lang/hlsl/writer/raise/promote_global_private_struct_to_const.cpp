@@ -25,24 +25,53 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
-#define SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
+#include "src/tint/lang/hlsl/writer/raise/promote_global_private_struct_to_const.h"
 
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/validator.h"
+#include "src/tint/lang/core/type/manager.h"
+#include "src/tint/lang/hlsl/ir/const.h"
 #include "src/tint/utils/result/result.h"
 
-// Forward declarations.
-namespace tint::core::ir {
-class Module;
-}  // namespace tint::core::ir
-
 namespace tint::hlsl::writer::raise {
+namespace {
 
-/// FxcPollyfill is a transform that replaces code constructs which cause FXC mis-compiles with
-/// safer constructs.
-/// @param module the module to transform
-/// @returns success or failure
-Result<SuccessType> FxcPolyfill(core::ir::Module& module);
+using namespace tint::core::fluent_types;  // NOLINT
+
+/// PIMPL state for the transform.
+struct State {
+    /// The IR module.
+    core::ir::Module& ir;
+
+    /// The IR builder.
+    core::ir::Builder b{ir};
+
+    /// The type manager.
+    core::type::Manager& ty{ir.Types()};
+
+    /// Process the module.
+    void Process() {
+        for (auto* inst : *ir.root_block) {
+            if (auto* var = inst->As<core::ir::Var>()) {
+                if (var->Initializer() && var->Initializer()->Is<ir::Constant>()) {
+                    b.ir.allocators.instructions.Create<hlsl::ir::Const>(b.InstructionResult());
+                }
+            }
+        }
+    }
+};
+
+}  // namespace
+
+Result<SuccessType> PromoteGlobalPrivateStructToConst(core::ir::Module& ir) {
+    auto result = ValidateAndDumpIfNeeded(ir, "PromoteGlobalPrivateStructToConst transform");
+    if (result != Success) {
+        return result.Failure();
+    }
+
+    State{ir}.Process();
+
+    return Success;
+}
 
 }  // namespace tint::hlsl::writer::raise
-
-#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_FXC_POLYFILL_H_
