@@ -83,7 +83,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-06-21 05:50:06PM
+# Last rolled: 2024-06-25 12:12:30AM
 
 ################################################################################
 # SharedImage interop failures on Linux
@@ -224,7 +224,6 @@ crbug.com/dawn/2269 webgpu:api,validation,capability_checks,features,query_types
 # KEEP
 ################################################################################
 crbug.com/dawn/2327 [ intel-0x3e9b mac ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="workgroup";* [ RetryOnFailure ]
-
 
 ################################################################################
 # D3D12 create command queue failed with DXGI_ERROR_DEVICE_REMOVED. Skipped because these tests likely cause downstream flakes.
