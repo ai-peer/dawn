@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b66a4102_c27de5ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T13:09:53Z",
+      "side": 1,
+      "message": "PTAL, I tried using absl flags for SampleUtils to see what it would be like. It\u0027s not terrible but has some drawbacks. Let me know how you\u0027d like to proceed.",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818ec0d2_15d07032",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T13:09:53Z",
+      "side": 1,
+      "message": "This would be put something like in `src/dawn/utils/AbslFlags.h/.cpp`.",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029b4538_8d4bd98a",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T13:09:53Z",
+      "side": 1,
+      "message": "Drawbacks from absl flags are:\n\n - No short form flags.\n - Flags must be a valid C++ identifier (so we\u0027ll need to change some things from `--enable-toggles` to `--enable_toggles` if we port test binaries to absl).\n - The help is only shown with helpfull. (can be changed with [usage_config.h](https://source.chromium.org/chromium/chromium/src/+/main:third_party/abseil-cpp/absl/flags/usage_config.h;drc\u003dde6be036b973630be07359349fd5f40d6f2ee1e3;l\u003d114))",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e664323_267fa110",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T13:09:53Z",
+      "side": 1,
+      "message": "Changes to this file would be in a separate CL.",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
