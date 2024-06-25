@@ -33,6 +33,23 @@
       "message": "I don\u0027t think this is a good idea until we\u0027ve found a solution for b/343875087.\nWouldn\u0027t want quarantined devices blocking CTS rolls.",
       "revId": "9acb45dbc5ec1de27094ae0e160b1b9b20ab00ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9462a15b_74c23416",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-06-25T20:32:30Z",
+      "side": 1,
+      "message": "Capacity graphs from the past few days are looking good now that there\u0027s a workaround for the quarantining issue. Should be okay to submit this now?",
+      "revId": "9acb45dbc5ec1de27094ae0e160b1b9b20ab00ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
