@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d09917d_1c26015f",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:02:52Z",
+      "side": 1,
+      "message": "Why was webgpu.h added? It\u0027s part of the \"headers\" target, no the C++ headers.",
+      "revId": "5fb45eac2422bd4ea8acbc2320f2f571f69e3858",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
