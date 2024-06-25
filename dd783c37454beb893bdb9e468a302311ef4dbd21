@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e980ae6b_0de096a1",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-25T13:28:06Z",
+      "side": 1,
+      "message": "From the Tint side, those drawbacks seems large. We use both short forms and non-identifier tag names. The `tint` binary is used in a bunch of places so I\u0027d be very hesitant about changing all the flag names.\n\nSo, this may work for Dawn, but we\u0027ll probably continue to have our own parser on the Tint side.",
+      "parentUuid": "029b4538_8d4bd98a",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
