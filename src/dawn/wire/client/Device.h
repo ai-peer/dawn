@@ -123,7 +123,7 @@ class Device final : public ObjectWithEventsBase {
     WGPULoggingCallback mLoggingCallback = nullptr;
     raw_ptr<void> mLoggingUserdata = nullptr;
 
-    raw_ptr<Queue> mQueue = nullptr;
+    Ref<Queue> mQueue;
 
     std::shared_ptr<bool> mIsAlive;
 };

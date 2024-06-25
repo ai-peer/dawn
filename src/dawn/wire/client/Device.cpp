@@ -92,12 +92,12 @@ class CreatePipelineEventBase : public TrackedEvent {
 
     static constexpr EventType kType = Type;
 
-    CreatePipelineEventBase(const CallbackInfo& callbackInfo, Pipeline* pipeline)
+    CreatePipelineEventBase(const CallbackInfo& callbackInfo, Ref<Pipeline> pipeline)
         : TrackedEvent(callbackInfo.mode),
           mCallback(callbackInfo.callback),
           mUserdata1(callbackInfo.userdata1),
           mUserdata2(callbackInfo.userdata2),
-          mPipeline(pipeline) {
+          mPipeline(std::move(pipeline)) {
         DAWN_ASSERT(mPipeline != nullptr);
     }
 
@@ -118,7 +118,7 @@ class CreatePipelineEventBase : public TrackedEvent {
     void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
         auto userdata1 = mUserdata1.ExtractAsDangling();
         auto userdata2 = mUserdata2.ExtractAsDangling();
-        Pipeline* pipeline = mPipeline.ExtractAsDangling();
+        Pipeline* pipeline = mPipeline.Detach();
 
         if (mCallback == nullptr) {
             return;
@@ -144,7 +144,7 @@ class CreatePipelineEventBase : public TrackedEvent {
     WGPUCreatePipelineAsyncStatus mStatus = WGPUCreatePipelineAsyncStatus_Success;
     std::optional<std::string> mMessage;
 
-    raw_ptr<Pipeline> mPipeline = nullptr;
+    Ref<Pipeline> mPipeline = nullptr;
 };
 
 using CreateComputePipelineEvent =
@@ -201,17 +201,14 @@ class Device::DeviceLostEvent : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::DeviceLost;
 
-    DeviceLostEvent(const WGPUDeviceLostCallbackInfo2& callbackInfo, Device* device)
-        : TrackedEvent(callbackInfo.mode), mDevice(device) {
+    DeviceLostEvent(const WGPUDeviceLostCallbackInfo2& callbackInfo, Ref<Device> device)
+        : TrackedEvent(callbackInfo.mode), mDevice(std::move(device)) {
         DAWN_ASSERT(device != nullptr);
-        mDevice->AddRef();
 
         mDevice->mDeviceLostInfo.callback = callbackInfo.callback;
         mDevice->mDeviceLostInfo.userdata1 = callbackInfo.userdata1;
         mDevice->mDeviceLostInfo.userdata2 = callbackInfo.userdata2;
     }
-
-    ~DeviceLostEvent() override { mDevice.ExtractAsDangling()->Release(); }
 
     EventType GetType() override { return kType; }
 
@@ -235,7 +232,8 @@ class Device::DeviceLostEvent : public TrackedEvent {
         void* userdata2 = mDevice->mDeviceLostInfo.userdata2.ExtractAsDangling();
 
         if (mDevice->mDeviceLostInfo.callback != nullptr) {
-            auto device = mReason != WGPUDeviceLostReason_FailedCreation ? ToAPI(mDevice) : nullptr;
+            auto device =
+                mReason != WGPUDeviceLostReason_FailedCreation ? ToAPI(mDevice.Get()) : nullptr;
             mDevice->mDeviceLostInfo.callback(
                 &device, mReason, mMessage ? mMessage->c_str() : nullptr, userdata1, userdata2);
         }
@@ -248,7 +246,7 @@ class Device::DeviceLostEvent : public TrackedEvent {
     std::optional<std::string> mMessage;
 
     // Strong reference to the device so that when we call the callback we can pass the device.
-    raw_ptr<Device> mDevice;
+    Ref<Device> mDevice;
 };
 
 Device::Device(const ObjectBaseParams& params,
@@ -319,9 +317,6 @@ Device::Device(const ObjectBaseParams& params,
 }
 
 Device::~Device() {
-    if (mQueue != nullptr) {
-        mQueue.ExtractAsDangling()->Release();
-    }
 }
 
 ObjectType Device::GetObjectType() const {
@@ -504,7 +499,7 @@ WGPUQueue Device::GetQueue() {
     }
 
     mQueue->AddRef();
-    return ToAPI(mQueue);
+    return ToAPI(mQueue.Get());
 }
 
 template <typename Event, typename Cmd, typename CallbackInfo, typename Descriptor>
@@ -513,7 +508,7 @@ WGPUFuture Device::CreatePipelineAsyncF(Descriptor const* descriptor,
     using Pipeline = typename Event::Pipeline;
 
     Client* client = GetClient();
-    Pipeline* pipeline = client->Make<Pipeline>();
+    Ref<Pipeline> pipeline = client->Make<Pipeline>();
     auto [futureIDInternal, tracked] =
         GetEventManager().TrackEvent(std::make_unique<Event>(callbackInfo, pipeline));
     if (!tracked) {
