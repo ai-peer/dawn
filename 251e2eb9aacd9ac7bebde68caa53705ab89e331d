@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9527e2d_b18eb8e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-25T17:01:03Z",
+      "side": 1,
+      "message": "linux check failed. reordered CL chain so that the public/private header fix comes before.",
+      "revId": "251e2eb9aacd9ac7bebde68caa53705ab89e331d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
