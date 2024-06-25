@@ -30,7 +30,7 @@
 
 #include "dawn/webgpu_cpp.h"
 
-bool InitSample(int argc, const char** argv);
+bool InitSample(int argc, char** argv);
 void DoFlush();
 bool ShouldQuit();
 

@@ -323,7 +323,7 @@ void frame() {
     pingpong = (pingpong + 1) % 2;
 }
 
-int main(int argc, const char* argv[]) {
+int main(int argc, char* argv[]) {
     if (!InitSample(argc, argv)) {
         return 1;
     }

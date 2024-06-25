@@ -35,6 +35,8 @@
 #include <vector>
 
 #include "GLFW/glfw3.h"
+#include "absl/flags/flag.h"
+#include "absl/flags/parse.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
@@ -236,120 +238,126 @@ wgpu::SwapChain GetSwapChain() {
     return swapChain;
 }
 
-bool InitSample(int argc, const char** argv) {
-    for (int i = 1; i < argc; i++) {
-        std::string_view arg(argv[i]);
-        std::string_view opt, value;
+namespace wgpu {
 
-        static constexpr struct Option {
-            const char* shortOpt;
-            const char* longOpt;
-            bool hasValue;
-        } options[] = {
-            {"-b", "--backend=", true},       {"-c", "--cmd-buf=", true},
-            {"-e", "--enable-toggle=", true}, {"-d", "--disable-toggle=", true},
-            {"-a", "--adapter-type=", true},  {"-h", "--help", false},
-        };
-
-        for (const Option& option : options) {
-            if (!option.hasValue) {
-                if (arg == option.shortOpt || arg == option.longOpt) {
-                    opt = option.shortOpt;
-                    break;
-                }
-                continue;
-            }
-
-            if (arg == option.shortOpt) {
-                opt = option.shortOpt;
-                if (++i < argc) {
-                    value = argv[i];
-                }
-                break;
-            }
-
-            if (arg.rfind(option.longOpt, 0) == 0) {
-                opt = option.shortOpt;
-                if (option.hasValue) {
-                    value = arg.substr(strlen(option.longOpt));
-                }
-                break;
-            }
-        }
-
-        if (opt == "-b") {
-            if (value == "d3d11") {
-                backendType = wgpu::BackendType::D3D11;
-                continue;
-            }
-            if (value == "d3d12") {
-                backendType = wgpu::BackendType::D3D12;
-                continue;
-            }
-            if (value == "metal") {
-                backendType = wgpu::BackendType::Metal;
-                continue;
-            }
-            if (value == "null") {
-                backendType = wgpu::BackendType::Null;
-                continue;
-            }
-            if (value == "opengl") {
-                backendType = wgpu::BackendType::OpenGL;
-                continue;
-            }
-            if (value == "opengles") {
-                backendType = wgpu::BackendType::OpenGLES;
-                continue;
-            }
-            if (value == "vulkan") {
-                backendType = wgpu::BackendType::Vulkan;
-                continue;
-            }
-            fprintf(stderr,
-                    "--backend expects a backend name (opengl, opengles, metal, d3d11, d3d12, "
-                    "null, vulkan)\n");
-            return false;
-        }
-
-        if (opt == "-e") {
-            enableToggles.push_back(std::string(value));
-            continue;
-        }
-
-        if (opt == "-d") {
-            disableToggles.push_back(std::string(value));
-            continue;
-        }
-
-        if (opt == "-a") {
-            if (value == "discrete") {
-                adapterType = wgpu::AdapterType::DiscreteGPU;
-                continue;
-            }
-            if (value == "integrated") {
-                adapterType = wgpu::AdapterType::IntegratedGPU;
-                continue;
-            }
-            if (value == "cpu") {
-                adapterType = wgpu::AdapterType::CPU;
-                continue;
-            }
-            fprintf(stderr, "--adapter-type expects an adapter type (discrete, integrated, cpu)\n");
-            return false;
-        }
-
-        if (opt == "-h") {
-            printf(
-                "Usage: %s [-b BACKEND] [-e TOGGLE] [-d TOGGLE] [-a "
-                "ADAPTER]\n",
-                argv[0]);
-            printf("  BACKEND is one of: d3d12, metal, null, opengl, opengles, vulkan\n");
-            printf("  TOGGLE is device toggle name to enable or disable\n");
-            printf("  ADAPTER is one of: discrete, integrated, cpu\n");
-            return false;
-        }
+std::string AbslUnparseFlag(BackendType b) {
+    switch (b) {
+        case BackendType::D3D11:
+            return "d3d11";
+        case BackendType::D3D12:
+            return "d3d12";
+        case BackendType::Metal:
+            return "metal";
+        case BackendType::Null:
+            return "null";
+        case BackendType::OpenGL:
+            return "opengl";
+        case BackendType::OpenGLES:
+            return "opengles";
+        case BackendType::Vulkan:
+            return "vulkan";
+        case BackendType::WebGPU:
+            return "webgpu";
+        case BackendType::Undefined:
+            return "undefined";
     }
+}
+
+bool AbslParseFlag(absl::string_view text, BackendType* type, std::string* error) {
+    if (text == "d3d11") {
+        *type = BackendType::D3D11;
+        return true;
+    }
+    if (text == "d3d12") {
+        *type = BackendType::D3D12;
+        return true;
+    }
+    if (text == "metal") {
+        *type = BackendType::Metal;
+        return true;
+    }
+    if (text == "null") {
+        *type = BackendType::Null;
+        return true;
+    }
+    if (text == "opengl") {
+        *type = BackendType::OpenGL;
+        return true;
+    }
+    if (text == "opengles") {
+        *type = BackendType::OpenGLES;
+        return true;
+    }
+    if (text == "vulkan") {
+        *type = BackendType::Vulkan;
+        return true;
+    }
+    if (text == "webgpu") {
+        *type = BackendType::WebGPU;
+        return true;
+    }
+
+    *error = "expected one of d3d11, d3d12, metal, null, opengl, opengles, vulkan, webgpu";
+    return false;
+}
+
+std::string AbslUnparseFlag(AdapterType t) {
+    switch (t) {
+        case AdapterType::DiscreteGPU:
+            return "discrete";
+        case AdapterType::IntegratedGPU:
+            return "integrated";
+        case AdapterType::CPU:
+            return "CPU";
+        case AdapterType::Unknown:
+            return "unknown";
+    }
+}
+
+bool AbslParseFlag(absl::string_view text, AdapterType* type, std::string* error) {
+    if (text == "discrete") {
+        *type = AdapterType::DiscreteGPU;
+        return true;
+    }
+    if (text == "integrated") {
+        *type = AdapterType::IntegratedGPU;
+        return true;
+    }
+    if (text == "CPU") {
+        *type = AdapterType::CPU;
+        return true;
+    }
+
+    *error = "expected one of discrete, integrated, cpu";
+    return false;
+}
+
+}  // namespace wgpu
+
+ABSL_FLAG(std::vector<std::string>,
+          enable_toggles,
+          {},
+          "comma=separated list of toggles to enable");
+ABSL_FLAG(std::vector<std::string>,
+          disable_toggles,
+          {},
+          "comma=separated list of toggles to enable");
+ABSL_FLAG(wgpu::BackendType,
+          backend,
+          wgpu::BackendType::Undefined,
+          "the backend to get an adapter from");
+ABSL_FLAG(wgpu::AdapterType,
+          adapter_type,
+          wgpu::AdapterType::Unknown,
+          "the type of adapter to request");
+
+bool InitSample(int argc, char** argv) {
+    absl::ParseCommandLine(argc, argv);
+
+    backendType = absl::GetFlag(FLAGS_backend);
+    adapterType = absl::GetFlag(FLAGS_adapter_type);
+    enableToggles = absl::GetFlag(FLAGS_enable_toggles);
+    disableToggles = absl::GetFlag(FLAGS_disable_toggles);
 
     // TODO(dawn:810): Reenable once the OpenGL(ES) backend is able to create its own context such
     // that it can use surface-based swapchains.

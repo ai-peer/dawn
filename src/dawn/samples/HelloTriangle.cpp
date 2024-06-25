@@ -93,7 +93,7 @@ void frame() {
     DoFlush();
 }
 
-int main(int argc, const char* argv[]) {
+int main(int argc, char* argv[]) {
     if (!InitSample(argc, argv)) {
         return 1;
     }
