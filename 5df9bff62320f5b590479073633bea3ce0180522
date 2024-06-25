@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "017fcf01_fafbec41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ccf2096_97bf787a",
+        "filename": "generator/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "Maybe one of these two macros could error if an output variable is not set while the list is not empty.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e8c9db_3eb76558",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "ditto there are no headers in this target.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e00b4097_183e3637",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "There shouldn\u0027t be sources in this generator.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e69e3b7_d0bb7905",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "These happen to be 100% private so we could move to PRIVATE.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "203a79d0_244252fe",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "These happen to be 100% private so we could move to PRIVATE.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab5fb846_f0f386af",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "nit: these should have no headers.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69396352_72291327",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:55:59Z",
+      "side": 1,
+      "message": "These happen to be 100% private so we could move to PRIVATE.",
+      "revId": "5df9bff62320f5b590479073633bea3ce0180522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
