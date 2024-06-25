@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ef32702_2e7553a5",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:25:45Z",
+      "side": 1,
+      "message": "Ok, for now let\u0027s try to minimize the diff if that\u0027s ok, but we can run an autoformatter later if there\u0027s one!",
+      "parentUuid": "3e6faffb_f922b179",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2829d7cc_a76ceaf2",
