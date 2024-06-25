@@ -16,6 +16,154 @@
       "message": "PRAL",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a5d3d4_d250a0f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "High level looks good but I think there\u0027s probably a bunch more that we can strip from the new tool, unless I\u0027ve missed some subtleties in the generation process.",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935f74ae_ae10a62f",
+        "filename": "src/tint/cmd/fuzz/ir/as/BUILD.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "übernit that you can definitely ignore as I\u0027m not the main person going to be using this tool:\nI find the mix of `_` and `-` in the executable name a little awkward, could we just do `ir-fuzz-as` instead?",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4202d41e_8019abe1",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "Nit: 2024",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f896d6b0_45d4787b",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "For the purposes of IR corpus generation, I don\u0027t /think/ we need any of these options?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 28
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ce4626_debe70ad",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to be able to support running arbitrary transforms either?",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 50
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b6785dd_45e1f13b",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "I\u0027m on the fence about overrides. In the future, the IR will support overrides, so we wouldn\u0027t want to fold them all away when generating the corpus. I think you could probably strip this out too and just skip over inputs that have overrides for now, until the IR gets the support.\n\nIf you prefer to leave this in for now though then that\u0027s fine, but let\u0027s open a bug to make sure we remember to remove this (or do something else) when we add support or overrides in the IR.",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5ade275_e7a63fac",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "Nit: `[[maybe_unused]]` if unnecessary here and in the other functions below.",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60bd5382_7b8d14b8",
+        "filename": "src/tint/utils/text/color_mode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T18:57:38Z",
+      "side": 1,
+      "message": "Nit: \"the an\"",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
