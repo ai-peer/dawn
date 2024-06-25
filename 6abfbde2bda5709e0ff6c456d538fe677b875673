@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51614034_5de26741",
+        "filename": "docs/dawn/codegen.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-25T19:09:11Z",
+      "side": 1,
+      "message": "nit: use `_` or `\u0027` separators in hex numbers for readability",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8dd328d_c7745397",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-25T19:09:11Z",
+      "side": 1,
+      "message": "what does `\"tags\": [\"dawn\", \"native\"]` do different from just `[\"dawn\"]`? I thought it would generate these into `webgpu-headers/webgpu.h` but that doesn\u0027t seem to be the case?",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

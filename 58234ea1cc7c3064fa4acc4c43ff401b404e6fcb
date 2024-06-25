@@ -121,6 +121,47 @@
       "parentUuid": "1d97bff6_d9d6ebc4",
       "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2afdb659_51e0d029",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-25T19:09:11Z",
+      "side": 1,
+      "message": "The 0x0001_xxxx prefix is \"multi-implementation native-only extensions\". The OS-specific surface descriptors probably belong in that block (though not totally clear - we also don\u0027t have a block for \"multi-implementation wasm-only extensions\" where `WGPUSType_SurfaceDescriptorFromCanvasHTMLSelector` would probably go, but that could go in the Emscripten block for now because it does have some Emscripten-specific behavior anyway.)",
+      "parentUuid": "1d97bff6_d9d6ebc4",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebff482_96e06d03",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-25T19:09:11Z",
+      "side": 1,
+      "message": "nit: `formatValue`",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 41
+      },
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
