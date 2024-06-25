@@ -33,6 +33,24 @@
       "message": "Looks like for some reason in the EXCEPTION case it gets printed a bit differently (probably rarer but most likely to happen due to assert failures):\n\nhttps://gpuweb.github.io/cts/standalone/?runnow\u003d1\u0026q\u003ddemo:subcases:DOMException,subcases:\n\n```\nEXCEPTION: Name!: Message!\nsubcase: fail\u003dtrue\n```\n\nMaybe we could simply do:\n`l.replace(/subcase: .*$\\n?/m, \u0027\u0027)`",
       "revId": "1d1a3443b5987a486adf4add055412ce3e0fa553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5bd18d0_647ea32f",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T00:01:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f8e56a_47bcd96c",
+      "revId": "1d1a3443b5987a486adf4add055412ce3e0fa553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
