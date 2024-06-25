@@ -135,8 +135,10 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
         return sizeof(float) * 4 * 16;
     }
 
-    if (usage & (wgpu::BufferUsage::Storage | kInternalStorageBuffer)) {
+    if (usage &
+        (wgpu::BufferUsage::Storage | kInternalStorageBuffer | wgpu::BufferUsage::CopyDst)) {
         // Unordered access buffers must be 4-byte aligned.
+        // We also align 4 bytes for CopyDst buffer since copy size is always multiple of 4.
         return sizeof(uint32_t);
     }
     return 1;
