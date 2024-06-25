@@ -229,8 +229,8 @@ T Texture::GetD3D11TextureDesc() const {
 
     desc.MipLevels = static_cast<UINT16>(GetNumMipLevels());
     // To sample from a depth or stencil texture, we need to create a typeless texture.
-    bool needsTypelessFormat =
-        GetFormat().HasDepthOrStencil() && (GetUsage() & wgpu::TextureUsage::TextureBinding);
+    bool needsTypelessFormat = GetFormat().HasDepthOrStencil() &&
+                               (GetInternalUsage() & wgpu::TextureUsage::TextureBinding);
     // We need to use the typeless format if view format reinterpretation is required.
     needsTypelessFormat |= GetViewFormats().any();
     // We need to use the typeless format if it's a staging texture for writting to depth-stencil
