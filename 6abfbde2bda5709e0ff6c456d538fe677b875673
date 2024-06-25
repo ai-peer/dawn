@@ -69,6 +69,24 @@
       "parentUuid": "b8dd328d_c7745397",
       "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c3142b_fada2ae5",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:52:14Z",
+      "side": 1,
+      "message": "or - everything gets generated in the header. it\u0027s just the implementation bits that we don\u0027t generate. This probably makes more sense if it\u0027s possible.",
+      "parentUuid": "e55081fc_5bc586ff",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
