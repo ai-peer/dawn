@@ -543,10 +543,12 @@
     {% set ChainedStruct = "WGPUChainedStructOut" if out else "WGPUChainedStruct" %}
     //* Generate the list of sTypes that we need to handle.
     {% set sTypes = [] %}
-    {% for sType in types["s type"].values %}
+    {% for sType in types["s type"].values if sType.name.get() in types %}
         {% if not sType.valid %}
             {% continue %}
         {% elif sType.name.CamelCase() in client_side_structures %}
+            {% continue %}
+        {% elif not is_wire_serializable(types[sType.name.get()]) %}
             {% continue %}
         {% elif types[sType.name.get()].output != out %}
             {% continue %}
@@ -559,7 +561,7 @@
         size_t result = 0;
         while (chainedStruct != nullptr) {
             switch (chainedStruct->sType) {
-                {% for sType in sTypes %}
+                {% for sType in sTypes if types[sType.name.get()].chained %}
                     case {{as_cEnum(types["s type"].name, sType.name)}}: {
                         const auto& typedStruct = *reinterpret_cast<{{as_cType(sType.name)}} const *>(chainedStruct);
                         result += WireAlignSizeof<{{as_cType(sType.name)}}Transfer>();
@@ -585,7 +587,7 @@
         DAWN_ASSERT(buffer != nullptr);
         do {
             switch (chainedStruct->sType) {
-                {% for sType in sTypes %}
+                {% for sType in sTypes if types[sType.name.get()].chained %}
                     {% set CType = as_cType(sType.name) %}
                     case {{as_cEnum(types["s type"].name, sType.name)}}: {
                         {{CType}}Transfer* transfer;
@@ -633,7 +635,7 @@
             WIRE_TRY(deserializeBuffer->Peek(&header));
             WGPUSType sType = header->sType;
             switch (sType) {
-                {% for sType in sTypes %}
+                {% for sType in sTypes if types[sType.name.get()].chained %}
                     {% set CType = as_cType(sType.name) %}
                     case {{as_cEnum(types["s type"].name, sType.name)}}: {
                         const volatile {{CType}}Transfer* transfer;
@@ -740,7 +742,7 @@ WireResult DeserializeChainedStruct(WGPUChainedStructOut** outChainNext,
                                     const ObjectIdResolver& resolver);
 
 //* Output structure [de]serialization first because it is used by commands.
-{% for type in by_category["structure"] %}
+{% for type in by_category["structure"] if is_wire_serializable(type) %}
     {%- set name = as_cType(type.name) -%}
     {% if type.name.CamelCase() not in client_side_structures -%}
         {{write_record_serialization_helpers(type, name, type.members, is_cmd=False)}}

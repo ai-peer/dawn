@@ -137,6 +137,7 @@ class EnumType(Type):
 
             if 'dawn' in tags:
                 assert prefix == 0
+                assert 'native' not in tags, "`native` tag must not be used for enum value with `dawn` tag"
                 prefix = 0x0005_0000
 
             if prefix == 0 and 'native' in tags:
@@ -1076,6 +1077,11 @@ def has_callbackInfoStruct(method):
 def is_wire_serializable(type):
     # Function pointers, callback functions, and "void *" types (i.e. userdata) cannot
     # be serialized.
+    if type.category == 'structure':
+        for member in type.members:
+            if member.annotation == 'const*const*':
+                return False
+
     return (type.category != 'function pointer'
             and type.category != 'callback info'
             and type.category != 'callback function'
