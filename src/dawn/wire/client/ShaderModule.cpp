@@ -38,17 +38,15 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::CompilationInfo;
 
-    CompilationInfoEvent(const WGPUCompilationInfoCallbackInfo2& callbackInfo, ShaderModule* shader)
+    CompilationInfoEvent(const WGPUCompilationInfoCallbackInfo2& callbackInfo,
+                         Ref<ShaderModule> shader)
         : TrackedEvent(callbackInfo.mode),
           mCallback(callbackInfo.callback),
           mUserdata1(callbackInfo.userdata1),
           mUserdata2(callbackInfo.userdata2),
-          mShader(shader) {
+          mShader(std::move(shader)) {
         DAWN_ASSERT(mShader != nullptr);
-        mShader->AddRef();
     }
-
-    ~CompilationInfoEvent() override { mShader.ExtractAsDangling()->Release(); }
 
     EventType GetType() override { return kType; }
 
@@ -107,7 +105,7 @@ class ShaderModule::CompilationInfoEvent final : public TrackedEvent {
 
     // Strong reference to the shader so that when we call the callback we can pass the
     // compilation info from `mShader`.
-    raw_ptr<ShaderModule> mShader;
+    Ref<ShaderModule> mShader;
 };
 
 ObjectType ShaderModule::GetObjectType() const {
