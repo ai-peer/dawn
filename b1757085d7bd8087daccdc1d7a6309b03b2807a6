@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409485cd_6c8b1d96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:05:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a97ff559_a687639c",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:05:17Z",
+      "side": 1,
+      "message": "Q: Is it the convention to use 2 indents in CMake files?",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2829d7cc_a76ceaf2",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:05:17Z",
+      "side": 1,
+      "message": "nit: unused.",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
