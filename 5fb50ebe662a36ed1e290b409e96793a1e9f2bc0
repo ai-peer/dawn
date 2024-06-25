@@ -16,6 +16,23 @@
       "message": "James could you take a look at this? I don\u0027t know the Tint internals well enough to be comfortable +2\u0027ing this.",
       "revId": "5fb50ebe662a36ed1e290b409e96793a1e9f2bc0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da30303e_a246b34d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T21:40:38Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "5fb50ebe662a36ed1e290b409e96793a1e9f2bc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
