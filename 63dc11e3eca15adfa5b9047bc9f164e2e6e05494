@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40d75d2_b28a5dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:03:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "63dc11e3eca15adfa5b9047bc9f164e2e6e05494",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62dbe459_b9936832",
+        "filename": "src/dawn/partition_alloc/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:03:28Z",
+      "side": 1,
+      "message": "nit: It seems we forgot to add the license block, could you add it?",
+      "revId": "63dc11e3eca15adfa5b9047bc9f164e2e6e05494",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
