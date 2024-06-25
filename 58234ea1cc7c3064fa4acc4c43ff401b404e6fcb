@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8051c281_f202c79a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:51:16Z",
+      "side": 1,
+      "message": "added 0x0001 prefix for native-only if there aren\u0027t other tags that would impact it (so no Dawn, no emscripten, etc.)\n\nI\u0027ve left WGPUSType_SurfaceDescriptorFromCanvasHTMLSelector alone for now, due to the other [comment thread](https://dawn-review.googlesource.com/c/dawn/+/195035/comment/b8dd328d_c7745397/), but will follow-up about that.",
+      "parentUuid": "2afdb659_51e0d029",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cebff482_96e06d03",
         "filename": "src/dawn/native/Format.cpp",
         "patchSetId": 3
@@ -154,6 +172,30 @@
       "writtenOn": "2024-06-25T19:09:11Z",
       "side": 1,
       "message": "nit: `formatValue`",
+      "range": {
+        "startLine": 180,
+        "startChar": 12,
+        "endLine": 180,
+        "endChar": 41
+      },
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7016ff_cd6ed0e1",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cebff482_96e06d03",
       "range": {
         "startLine": 180,
         "startChar": 12,

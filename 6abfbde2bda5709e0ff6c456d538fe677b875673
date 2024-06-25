@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50781c8e_d3b594d1",
+        "filename": "docs/dawn/codegen.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51614034_5de26741",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8dd328d_c7745397",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-25T19:09:11Z",
       "side": 1,
       "message": "what does `\"tags\": [\"dawn\", \"native\"]` do different from just `[\"dawn\"]`? I thought it would generate these into `webgpu-headers/webgpu.h` but that doesn\u0027t seem to be the case?",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55081fc_5bc586ff",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:51:16Z",
+      "side": 1,
+      "message": "Basically, this is mirrored from the struct which is not serializable, because it needs native.\n\nI think what I can probably do is drop \"native\" from the sTypes, as it\u0027s probably not necessary. I\u0027ll look into that in a follow-up CL?\n\nAlso, I can probably *always* generate enum values regardless of what is enabled - because they should all get prefixed. It\u0027s the structs / methods which maybe we don\u0027t want existing if they are wire-only or native-only..? Can look at that in a follow-up as well",
+      "parentUuid": "b8dd328d_c7745397",
       "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
