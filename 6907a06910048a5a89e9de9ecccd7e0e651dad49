@@ -1,6 +1,53 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "07725306_09c2baa9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "\u003e \"Seperate\" is a possible misspelling of \"Separate\".\n\nPlease fix.",
+      "parentUuid": "810f115a_224a2fdc",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e16e956f_bbef5b84",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "Can we make this either `ir_fuzz_as` or `ir-fuzz-as` ? The mixed `_` and `-` is going to be ... annoying",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f526613d_bb2c786b",
@@ -71,6 +118,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66cb3824_c74c486a",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db1fec16_41a97230",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "nit: remove blank line",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7938c92_4404cd09",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "nit : remove blank line",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f896d6b0_45d4787b",
         "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
         "patchSetId": 2
@@ -88,6 +192,40 @@
         "endLine": 88,
         "endChar": 28
       },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317f6801_c619d195",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "Do we need a single-entry-point ability in the assembler?",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01701ad2_ffbaac7a",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "Probalby don\u0027t need this one?",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -134,6 +272,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a44a0d31_af31cbfd",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "If this is the same as the `tint` version can move it into `src/tint/cmd/common/helper` and share the implementation",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5ade275_e7a63fac",
         "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
         "patchSetId": 2
@@ -145,6 +300,126 @@
       "writtenOn": "2024-06-25T18:57:38Z",
       "side": 1,
       "message": "Nit: `[[maybe_unused]]` if unnecessary here and in the other functions below.",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3de4b509_4ac3b5c7",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "nit: Program and options are both used\n\n\n```suggestion\nbool GenerateIr(const tint::Program\u0026 program, const Options\u0026 options) {\n```",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 58
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288adb5f_4b74e959",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "Does this mean it alawys prints the IR to console?",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f1ecca_3e23ad65",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "nit: program is used\n```suggestion\ntint::Result\u003ctint::core::ir::Module\u003e GenerateIrModule(const tint::Program\u0026 program,\n```",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86828669_62f36add",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "```suggestion\nbool GenerateIrProtoBinary(const tint::Program\u0026 program, const Options\u0026 options) {\n```",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 67
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd676247_1f186f4e",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "```suggestion\nbool GenerateIrProtoDebug(const tint::Program\u0026 program, const Options\u0026 options) {\n```",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 68
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7408b56_cd6b5c28",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-25T19:06:57Z",
+      "side": 1,
+      "message": "nit: Don\u0027t think this comment is relevant",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
