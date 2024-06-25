@@ -25,6 +25,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb753e66_7f84d2c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07725306_09c2baa9",
+      "range": {
+        "startLine": 7,
+        "startChar": 13,
+        "endLine": 7,
+        "endChar": 21
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e16e956f_bbef5b84",
@@ -38,6 +62,30 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "Can we make this either `ir_fuzz_as` or `ir-fuzz-as` ? The mixed `_` and `-` is going to be ... annoying",
+      "range": {
+        "startLine": 9,
+        "startChar": 35,
+        "endLine": 9,
+        "endChar": 45
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5757b82e_09261e24",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e16e956f_bbef5b84",
       "range": {
         "startLine": 9,
         "startChar": 35,
@@ -99,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3f51ac_cf248879",
+        "filename": "src/tint/cmd/fuzz/ir/as/BUILD.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done, changed to `ir_fuzz_as` to be consistent with other bins like `tint_ir_fuzzer`",
+      "parentUuid": "935f74ae_ae10a62f",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4202d41e_8019abe1",
@@ -139,6 +205,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a510b9ec_7b3f0d69",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4202d41e_8019abe1",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d500cf8_1c5bc13a",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66cb3824_c74c486a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db1fec16_41a97230",
@@ -156,6 +264,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e3d4014_2faa7fd8",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db1fec16_41a97230",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7938c92_4404cd09",
@@ -169,6 +295,24 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "nit : remove blank line",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd618dbd_adabf3d0",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7938c92_4404cd09",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -196,6 +340,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf00feb2_0c15b71e",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "I initially removed the obviously not used flags, but left the flags that were not guarded by anything. I have removed these now, since they are not needed..",
+      "parentUuid": "f896d6b0_45d4787b",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 28
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "317f6801_c619d195",
@@ -213,6 +381,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0d877c_8bc4c90b",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "See above",
+      "parentUuid": "317f6801_c619d195",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01701ad2_ffbaac7a",
@@ -226,6 +412,24 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "Probalby don\u0027t need this one?",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c1332b9_3692d612",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01701ad2_ffbaac7a",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +457,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff8db36_4057e4e4",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ce4626_debe70ad",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 50
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b6785dd_45e1f13b",
@@ -270,6 +498,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b53920b9_3c8681a3",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "I am leaning to removing it, since it isn\u0027t needed at the moment, and if we need it in the future we can crib it back from the Tint CLI.",
+      "parentUuid": "6b6785dd_45e1f13b",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a44a0d31_af31cbfd",
@@ -283,6 +529,24 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "If this is the same as the `tint` version can move it into `src/tint/cmd/common/helper` and share the implementation",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbe0208_29b734f1",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a44a0d31_af31cbfd",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -327,6 +591,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efd989df_b077c49f",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3de4b509_4ac3b5c7",
+      "range": {
+        "startLine": 257,
+        "startChar": 0,
+        "endLine": 258,
+        "endChar": 58
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb19683_15ba05c9",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5ade275_e7a63fac",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "288adb5f_4b74e959",
@@ -340,6 +646,24 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "Does this mean it alawys prints the IR to console?",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ebd5d08_7bf92e88",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "only if --dump-ir is passed in, renamed to DumpIR to make it clearer what it was doing.",
+      "parentUuid": "288adb5f_4b74e959",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -361,6 +685,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46afaf0_96fbf024",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f1ecca_3e23ad65",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86828669_62f36add",
@@ -374,6 +716,30 @@
       "writtenOn": "2024-06-25T19:06:57Z",
       "side": 1,
       "message": "```suggestion\nbool GenerateIrProtoBinary(const tint::Program\u0026 program, const Options\u0026 options) {\n```",
+      "range": {
+        "startLine": 304,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 67
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d400c805_7959a0df",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86828669_62f36add",
       "range": {
         "startLine": 304,
         "startChar": 0,
@@ -407,6 +773,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "944b018f_fd185f41",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd676247_1f186f4e",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 68
+      },
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7408b56_cd6b5c28",
@@ -424,6 +814,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1190a6_7240eae4",
+        "filename": "src/tint/cmd/fuzz/ir/as/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7408b56_cd6b5c28",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60bd5382_7b8d14b8",
@@ -437,6 +845,24 @@
       "writtenOn": "2024-06-25T18:57:38Z",
       "side": 1,
       "message": "Nit: \"the an\"",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d4a75a_2077c76e",
+        "filename": "src/tint/utils/text/color_mode.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:18:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60bd5382_7b8d14b8",
       "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
