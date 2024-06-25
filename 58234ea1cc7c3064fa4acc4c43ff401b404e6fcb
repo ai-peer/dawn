@@ -103,6 +103,24 @@
       "parentUuid": "4d4c78cb_cd652ca4",
       "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e009680_dd5c7d6d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T19:03:15Z",
+      "side": 1,
+      "message": "oh jk, the github issue says we are supposed to do 0x0001_ for native-only enums",
+      "parentUuid": "1d97bff6_d9d6ebc4",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
