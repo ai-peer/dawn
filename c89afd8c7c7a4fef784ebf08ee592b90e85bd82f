@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17808d18_86234580",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:30:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c89afd8c7c7a4fef784ebf08ee592b90e85bd82f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33eb10a_4da366f9",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 25
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T16:30:21Z",
+      "side": 1,
+      "message": "nit: extra whitespace.",
+      "revId": "c89afd8c7c7a4fef784ebf08ee592b90e85bd82f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
