@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e0f934_5e79f90d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-25T11:57:46Z",
+      "side": 1,
+      "message": "PTAL the diff between patchset 1 and 7! The bots that were failing previously pass with that patchset, see https://chromium-review.googlesource.com/c/chromium/src/+/5645044?tab\u003dchecks",
+      "revId": "301c656c39aa5691242c1b12ec6d1b3f5e905bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
