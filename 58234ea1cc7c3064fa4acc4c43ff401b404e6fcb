@@ -67,6 +67,42 @@
       "message": "This change LGTM as a nice automatic way to add prefixes that doesn\u0027t require too much work from developers. Can we document it in codegen.md?",
       "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d97bff6_d9d6ebc4",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T18:59:04Z",
+      "side": 1,
+      "message": "not sure what you mean - at least right now, in the upstream header, the surface descriptor sTypes don\u0027t have a prefix. we don\u0027t really differentiate wire/native in the header. I think stuff not supported in the wire should look like normal upstream webgpu things that are protected by a feature / ability to feature-check",
+      "parentUuid": "4b12937b_001d9529",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9c6505_60279029",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-25T18:59:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d4c78cb_cd652ca4",
+      "revId": "58234ea1cc7c3064fa4acc4c43ff401b404e6fcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
