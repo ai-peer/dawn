@@ -16,6 +16,23 @@
       "message": "Bit of a weird case that these fail for debug only but don\u0027t appear to be indicative of a real problem in release. There\u0027s been no movement on the issue to fix though, so I\u0027m leaning towards silencing them for now.",
       "revId": "6249c377875bb98f660ba1ca974713332a16a18c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8deb8b06_51debe54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-25T19:28:35Z",
+      "side": 1,
+      "message": "LGTM. We could look at using `Release+Asserts` on the CMake+Windows bots if it doesn\u0027t make things too much slower.",
+      "revId": "6249c377875bb98f660ba1ca974713332a16a18c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
