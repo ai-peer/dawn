@@ -130,6 +130,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80be225b_895c80a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-25T21:19:19Z",
+      "side": 1,
+      "message": "Stripped the unused functionality as suggested.",
+      "parentUuid": "98a5d3d4_d250a0f3",
+      "revId": "6907a06910048a5a89e9de9ecccd7e0e651dad49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "935f74ae_ae10a62f",
