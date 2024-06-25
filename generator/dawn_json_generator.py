@@ -137,6 +137,7 @@ class EnumType(Type):
 
             if 'dawn' in tags:
                 assert prefix == 0
+                assert 'native' not in tags, "`native` tag must not be used for enum value with `dawn` tag"
                 prefix = 0x0005_0000
 
             if prefix == 0 and 'native' in tags:

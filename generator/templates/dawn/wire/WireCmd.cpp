@@ -543,7 +543,7 @@
     {% set ChainedStruct = "WGPUChainedStructOut" if out else "WGPUChainedStruct" %}
     //* Generate the list of sTypes that we need to handle.
     {% set sTypes = [] %}
-    {% for sType in types["s type"].values %}
+    {% for sType in types["s type"].values if sType.name.get() in types %}
         {% if not sType.valid %}
             {% continue %}
         {% elif sType.name.CamelCase() in client_side_structures %}
