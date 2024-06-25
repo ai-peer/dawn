@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6faffb_f922b179",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-25T16:10:41Z",
+      "side": 1,
+      "message": "It\u0027s upto the project really but should be consistent. I\u0027ve seen that the root CMakeLists.txt file uses a 2-space indent for the most part.",
+      "parentUuid": "a97ff559_a687639c",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2829d7cc_a76ceaf2",
