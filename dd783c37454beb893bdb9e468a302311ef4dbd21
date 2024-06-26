@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b6ec607_87f2b1e5",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T12:49:56Z",
+      "side": 1,
+      "message": "Dan, chatting with Austin, he has a small preferences for Absl. What do you think of having a small wrapper around Absl that knows to replaces some flags by tweaking argv directly? Something like:\n\n```\nParseCommandLineWithAliases(argc, argv, {\n   {\"-a\", \"--adapter_type\"},\n   {\"-b\", \"--backend\"},\n});\n```",
+      "parentUuid": "e980ae6b_0de096a1",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
