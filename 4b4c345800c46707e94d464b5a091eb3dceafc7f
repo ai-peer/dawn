@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8606c07c_7d889a05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:35:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4b4c345800c46707e94d464b5a091eb3dceafc7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfd8f6a_8aeaf1bb",
+        "filename": "src/dawn/wire/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:35:38Z",
+      "side": 1,
+      "message": "```suggestion\n  UTILITY_TARGET dawn_internal_config\n```",
+      "revId": "4b4c345800c46707e94d464b5a091eb3dceafc7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
