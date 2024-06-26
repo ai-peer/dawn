@@ -143,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "884a350f_a809d9b1",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:40:34Z",
+      "side": 1,
+      "message": "If it is not `PUBLIC`, then consumers will get undefined symbol errors because symbols won\u0027t be imported. I\u0027ve made the fix to `PUBLIC` in all other libs as well. Normally, one would use https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html which auto generates the export header and populates flags correctly. We cannot use it because `gn` will also need something that generates export files.",
+      "parentUuid": "9b2cd72a_8bbd14cd",
+      "range": {
+        "startLine": 805,
+        "startChar": 43,
+        "endLine": 805,
+        "endChar": 49
+      },
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "267dda16_bb4c814b",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 32
