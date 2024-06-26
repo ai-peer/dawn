@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1705d09_c46ebed5",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T08:50:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a0e4a3_7016a4f6",
+      "revId": "2d54cf3172789b64d60ba7568fd48493367f0552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "921c37e4_e1ed6867",
@@ -65,6 +83,30 @@
       "writtenOn": "2024-06-19T14:06:36Z",
       "side": 1,
       "message": "CppLint complains of:\n\n\u003e /b/s/w/ir/cache/builder/presubmit/dawn/src/dawn/native/d3d/SwapChainD3D.h:35:  (cpplint) Found C system header after other header. Should be: SwapChainD3D.h, c system, c++ system, other.  [build/include_order] [4]\n\n\n\n```suggestion\n\n#include \u003cvector\u003e\n\n#include \"dawn/native/IntegerTypes.h\"\n#include \"dawn/native/SwapChain.h\"\n#include \"dawn/native/d3d/d3d_platform.h\"\n\n// Include after d3d_platform.h to avoid including an unprotected windows.h\n#include \u003cdcomp.h\u003e // NOLINT(build/include_order)\n\nnamespace dawn::native::d3d {\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 1
+      },
+      "revId": "2d54cf3172789b64d60ba7568fd48493367f0552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e753c9d_eab9940f",
+        "filename": "src/dawn/native/d3d/SwapChainD3D.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T08:50:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "921c37e4_e1ed6867",
       "range": {
         "startLine": 30,
         "startChar": 0,
