@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd7db684_c2756905",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:53:25Z",
+      "side": 1,
+      "message": "nit \"pbuffer\"",
+      "revId": "74f3d88b45c49a5ef69387a641815daf838f38c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
