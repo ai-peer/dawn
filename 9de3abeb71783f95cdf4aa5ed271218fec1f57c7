@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae23724_648843b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T01:18:17Z",
+      "side": 1,
+      "message": "Forgot to link `dawn_headers` publicly with `dawn_public_config`. This caused the cmake try jobs to fail when building `webgpu_dawn` target because it couldn\u0027t find \"dawn/webgpu.h\". It should be fixed now.",
+      "revId": "9de3abeb71783f95cdf4aa5ed271218fec1f57c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
