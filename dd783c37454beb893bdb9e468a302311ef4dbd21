@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e9bf589_81cc2201",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-26T14:15:59Z",
+      "side": 1,
+      "message": "Converted `tint_info` to see what it felt like: https://dawn-review.googlesource.com/c/dawn/+/195874 there is some weirdness around help messages but it isn\u0027t terrible. Converting `tint` will be interesting due to the compile time options it supports but seems plausable.\n\n@jrprice do you have a preference?",
+      "parentUuid": "3ecb568a_f092aeb1",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
