@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b2df21_dd1fab79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T14:40:59Z",
+      "side": 1,
+      "message": "PTAL at the diff between patchsets 1 and 2. I tested a fake roll in Chromium and it passes bots. https://chromium-review.googlesource.com/c/chromium/src/+/5645044",
+      "revId": "731ee3dece2f95246104898612b598b1d3426760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
