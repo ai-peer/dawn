@@ -125,7 +125,7 @@ dawn_add_library(
     tint_lang_wgsl_features
 )
 target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
+if(BUILD_SHARED_LIBS OR DAWN_BUILD_MONOLITHIC_SHARED_LIBRARY)
     target_compile_definitions(dawn_wire PRIVATE "DAWN_WIRE_SHARED_LIBRARY")
 endif()
 
