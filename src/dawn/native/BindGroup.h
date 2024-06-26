@@ -38,6 +38,7 @@
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/UsageValidationMode.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 #include "dawn/native/dawn_platform.h"
 
@@ -50,7 +51,7 @@ MaybeError ValidateBindGroupDescriptor(DeviceBase* device,
                                        UsageValidationMode mode);
 
 struct BufferBinding {
-    BufferBase* buffer;
+    raw_ptr<BufferBase> buffer;
     uint64_t offset;
     uint64_t size;
 };
