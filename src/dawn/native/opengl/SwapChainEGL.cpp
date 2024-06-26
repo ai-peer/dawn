@@ -188,30 +188,43 @@ MaybeError SwapChainEGL::CreateEGLSurface(const DisplayEGL* display) {
     EGLDisplay eglDisplay = display->GetDisplay();
     Surface* surface = GetSurface();
 
+    absl::InlinedVector<EGLint, 3> attribs;
+    auto AddAttrib = [&](EGLint attrib, EGLint value) {
+        attribs.push_back(attrib);
+        attribs.push_back(value);
+    };
+
+    if (GetFormat() == wgpu::TextureFormat::RGBA8UnormSrgb) {
+        DAWN_ASSERT(egl.HasExt(EGLExt::GLColorspace));
+        AddAttrib(EGL_GL_COLORSPACE_KHR, EGL_GL_COLORSPACE_SRGB_KHR);
+    }
+
+    attribs.push_back(EGL_NONE);
+
     switch (surface->GetType()) {
 #if DAWN_PLATFORM_IS(ANDROID)
         case Surface::Type::AndroidWindow:
             mEGLSurface = egl.CreateWindowSurface(
                 eglDisplay, config, static_cast<ANativeWindow*>(surface->GetAndroidNativeWindow()),
-                nullptr);
+                attribs.data());
             break;
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 #if defined(DAWN_ENABLE_BACKEND_METAL)
         case Surface::Type::MetalLayer:
-            mEGLSurface =
-                egl.CreateWindowSurface(eglDisplay, config, surface->GetMetalLayer(), nullptr);
+            mEGLSurface = egl.CreateWindowSurface(eglDisplay, config, surface->GetMetalLayer(),
+                                                  attribs.data());
             break;
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 #if DAWN_PLATFORM_IS(WIN32)
         case Surface::Type::WindowsHWND:
-            mEGLSurface = egl.CreateWindowSurface(eglDisplay, config,
-                                                  static_cast<HWND>(surface->GetHWND()), nullptr);
+            mEGLSurface = egl.CreateWindowSurface(
+                eglDisplay, config, static_cast<HWND>(surface->GetHWND()), attribs.data());
             break;
 #endif  // DAWN_PLATFORM_IS(WIN32)
 #if defined(DAWN_USE_X11)
         case Surface::Type::XlibWindow:
             mEGLSurface =
-                egl.CreateWindowSurface(eglDisplay, config, surface->GetXWindow(), nullptr);
+                egl.CreateWindowSurface(eglDisplay, config, surface->GetXWindow(), attribs.data());
             break;
 #endif  // defined(DAWN_USE_X11)
 
