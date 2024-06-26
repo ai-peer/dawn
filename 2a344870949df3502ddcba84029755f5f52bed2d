@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d3b6cf_32c09f27",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-26T14:52:12Z",
+      "side": 1,
+      "message": "Nit: could this be in an unnamed namespace?",
+      "revId": "2a344870949df3502ddcba84029755f5f52bed2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
