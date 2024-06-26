@@ -117,6 +117,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca4667ea_4faa3cfa",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T19:32:43Z",
+      "side": 1,
+      "message": "The subdir of `third_party/vulkan-utility-libraries` is not added in `third_party/CMakeLists.txt`. I suspect it was left out in order to not deal with that trying to find vulkan-headers?",
+      "parentUuid": "387cd40c_ccb94845",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a15ea92_7c3a30c5",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 32
