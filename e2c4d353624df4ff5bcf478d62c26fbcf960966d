@@ -16,6 +16,23 @@
       "message": "PTAL\n\nNB: I attempted to extract the proto serialization code that is used to different places into a common utility function, but was more complex then I expected due to the build system tying the libprotobuf dependency to generating a proto. This could be changed, but I think it would mean more LoC of build infra changes then code that is duplicated.",
       "revId": "e2c4d353624df4ff5bcf478d62c26fbcf960966d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ab77f2_698a29d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-26T23:10:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e2c4d353624df4ff5bcf478d62c26fbcf960966d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
