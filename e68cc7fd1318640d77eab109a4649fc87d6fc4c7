@@ -34,6 +34,24 @@
       "parentUuid": "8c099742_191201b9",
       "revId": "e68cc7fd1318640d77eab109a4649fc87d6fc4c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72bcdb2_6f4e39b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T12:30:15Z",
+      "side": 1,
+      "message": "Because I really want this I went digging. https://chromium-review.googlesource.com/c/chromium/src/+/5633304?tab\u003dchecks\n\n```\n[3968/11346] CXX obj/third_party/blink/renderer/modules/webgpu/webgpu/gpu_programmable_stage.o\n../../third_party/llvm-build/Release+Asserts/bin/clang++ -MMD -MF obj/third_party/blink/renderer/mod...(too long)\nIn file included from ../../third_party/blink/renderer/modules/webgpu/gpu_programmable_stage.cc:5:\nIn file included from ../../third_party/blink/renderer/modules/webgpu/gpu_programmable_stage.h:12:\nIn file included from ../../third_party/blink/renderer/platform/graphics/gpu/webgpu_cpp.h:15:\ngen/third_party/dawn/include/dawn/wire/client/webgpu_cpp.h:1539:37: error: no type named \u0027Future\u0027 in namespace \u0027wgpu\u0027; did you mean simply \u0027Future\u0027?\n```\n\nIt seems that it\u0027s all the extraneous `wgpu::` in api_cpp.h",
+      "parentUuid": "9c348a74_f3be4cdd",
+      "revId": "e68cc7fd1318640d77eab109a4649fc87d6fc4c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
