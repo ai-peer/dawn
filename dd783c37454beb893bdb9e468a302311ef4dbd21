@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f82099f_84c9cd27",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T13:38:20Z",
+      "side": 1,
+      "message": "Yes it\u0027s supposed to support them: https://github.com/google/oss-policies-info/blob/main/foundational-cxx-support-matrix.md",
+      "parentUuid": "3ecb568a_f092aeb1",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
