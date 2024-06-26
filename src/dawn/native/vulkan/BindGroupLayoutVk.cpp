@@ -86,7 +86,14 @@ VkDescriptorType VulkanDescriptorType(const BindingInfo& bindingInfo) {
             }
         },
         [](const SamplerBindingInfo&) { return VK_DESCRIPTOR_TYPE_SAMPLER; },
-        [](const StaticSamplerBindingInfo&) { return VK_DESCRIPTOR_TYPE_SAMPLER; },
+        [](const StaticSamplerBindingInfo&) {
+            return
+                // External samplers *must* have descriptor type
+                // COMBINED_IMAGE_SAMPLER per the Vulkan spec.
+                // TODO(blundell): Do we need to use SAMPLER if the static sampler
+                // isn't an external sampler?
+                VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
+        },
         [](const TextureBindingInfo&) { return VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE; },
         [](const StorageTextureBindingInfo&) { return VK_DESCRIPTOR_TYPE_STORAGE_IMAGE; },
         [](const InputAttachmentBindingInfo&) { return VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT; });

@@ -29,6 +29,7 @@
 
 #include <algorithm>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
@@ -122,7 +123,9 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     }
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+    ErrorLog() << "blundell: Checking whether to create YCbCrInfo for sampler";
     if (auto* yCbCrVkDescriptor = Unpack(descriptor).Get<YCbCrVkDescriptor>()) {
+        ErrorLog() << "blundell: Creating YCbCrInfo for sampler";
         mYCbCrVkDescriptor = *yCbCrVkDescriptor;
         mYCbCrVkDescriptor.nextInChain = nullptr;
         DAWN_TRY_ASSIGN(mSamplerYCbCrConversion,
@@ -133,6 +136,17 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
         samplerYCbCrInfo.conversion = mSamplerYCbCrConversion;
 
         createInfo.pNext = &samplerYCbCrInfo;
+
+        // TODO(blundell): Update this to map from the Dawn Linear/Nearest type.
+        createInfo.magFilter = VK_FILTER_LINEAR;
+        createInfo.minFilter = VK_FILTER_LINEAR;
+
+        // These values are mandatory when using external sampling.
+        createInfo.addressModeU = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        createInfo.addressModeV = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        createInfo.addressModeW = VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        createInfo.anisotropyEnable = VK_FALSE;
+        createInfo.unnormalizedCoordinates = VK_FALSE;
     }
 
     DAWN_TRY(CheckVkSuccess(
