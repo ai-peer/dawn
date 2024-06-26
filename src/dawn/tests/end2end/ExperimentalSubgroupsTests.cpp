@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <string>
 #include <vector>
 
 #include "dawn/common/Math.h"
@@ -34,29 +35,67 @@
 namespace dawn {
 namespace {
 
-class ExperimentalSubgroupsTests : public DawnTest {
+template <bool useChromiumExperimentalSubgroups>
+class ExperimentalSubgroupsTestsTmpl : public DawnTest {
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        // Always require ChromiumExperimentalSubgroups feature if available.
-        if (SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalSubgroups})) {
-            mRequiredSubgroupsFeature = true;
-            return {wgpu::FeatureName::ChromiumExperimentalSubgroups};
+        // Always require related features if available.
+        std::vector<wgpu::FeatureName> requiredFeatures;
+        if (SupportsFeatures({wgpu::FeatureName::ShaderF16})) {
+            mRequiredShaderF16 = true;
+            requiredFeatures.push_back(wgpu::FeatureName::ShaderF16);
+        }
+        if (useChromiumExperimentalSubgroups) {
+            if (SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalSubgroups})) {
+                mRequiredSubgroups = true;
+                mRequiredSubgroupsF16 = true;
+                requiredFeatures.push_back(wgpu::FeatureName::ChromiumExperimentalSubgroups);
+            }
+        } else {
+            if (SupportsFeatures({wgpu::FeatureName::Subgroups})) {
+                mRequiredSubgroups = true;
+                requiredFeatures.push_back(wgpu::FeatureName::Subgroups);
+            }
+            if (SupportsFeatures({wgpu::FeatureName::SubgroupsF16})) {
+                // SubgroupsF16 feature could be supported only if ShaderF16 and Subgroups features
+                // are also supported.
+                DAWN_ASSERT(mRequiredShaderF16 && mRequiredSubgroups);
+                mRequiredSubgroupsF16 = true;
+                requiredFeatures.push_back(wgpu::FeatureName::SubgroupsF16);
+            }
         }
 
-        return {};
+        return requiredFeatures;
+    }
+
+    // Helper function that write enable directives for all required features into WGSL code
+    std::stringstream& EnableExtensions(std::stringstream& code) {
+        if (useChromiumExperimentalSubgroups) {
+            code << "enable chromium_experimental_subgroups;";
+        } else {
+            if (mRequiredShaderF16) {
+                code << "enable f16;";
+            }
+            if (mRequiredSubgroups) {
+                code << "enable subgroups;";
+            }
+            if (mRequiredSubgroupsF16) {
+                code << "enable subgroups_f16;";
+            }
+        }
+        return code;
     }
 
     // Helper function that create shader module with subgroups extension required and a empty
     // compute entry point, named main, of given workgroup size
-    wgpu::ShaderModule CreateShaderModuleWithSubgroupsRequired(  //
-        WGPUExtent3D workgroupSize = {1, 1, 1}) {
+    wgpu::ShaderModule CreateShaderModuleWithSubgroupsRequired(WGPUExtent3D workgroupSize = {1, 1,
+                                                                                             1}) {
         std::stringstream code;
-        code << R"(
-        enable chromium_experimental_subgroups;
 
+        EnableExtensions(code) << R"(
         @compute @workgroup_size()"
-             << workgroupSize.width << ", " << workgroupSize.height << ", "
-             << workgroupSize.depthOrArrayLayers << R"()
+                               << workgroupSize.width << ", " << workgroupSize.height << ", "
+                               << workgroupSize.depthOrArrayLayers << R"()
         fn main() {}
 )";
         return utils::CreateShaderModule(device, code.str().c_str());
@@ -66,9 +105,7 @@ class ExperimentalSubgroupsTests : public DawnTest {
     // compute entry point, named main, of workgroup size that are override constants.
     wgpu::ShaderModule CreateShaderModuleWithOverrideWorkgroupSize() {
         std::stringstream code;
-        code << R"(
-        enable chromium_experimental_subgroups;
-
+        EnableExtensions(code) << R"(
         override wgs_x: u32;
         override wgs_y: u32;
         override wgs_z: u32;
@@ -122,17 +159,224 @@ class ExperimentalSubgroupsTests : public DawnTest {
         return cases;
     }
 
-    bool IsSubgroupsFeatureRequired() const { return mRequiredSubgroupsFeature; }
+    // Helper function that create shader module for testing broadcasting subgroup_size. The shader
+    // declares a workgroup size of [workgroupSize, 1, 1], in which each invocation hold a
+    // -1-initialized register, then sets the register of invocation 0 to value of subgroup_size,
+    // broadcasts the register's value of subgroup_id 0 for all subgroups, and writes back each
+    // invocation's register to buffer broadcastOutput. After dispatching, it is expected that
+    // broadcastOutput contains exactly [subgroup_size] elements being of value [subgroup_size] and
+    // all other elements being -1. Note that although we assume invocation 0 of the workgroup has a
+    // subgroup_id of 0 in its subgroup, we don't assume any other particular subgroups layout
+    // property.
+    wgpu::ShaderModule CreateShaderModuleForBroadcastSubgroupSize(uint32_t workgroupSize,
+                                                                  std::string broadcastingType) {
+        DAWN_ASSERT((1 <= workgroupSize) && (workgroupSize <= 256));
+        std::stringstream code;
+        EnableExtensions(code) << R"(
+const workgroupSize = )" << workgroupSize
+                               << R"(u;
+alias BroadcastingType = )" << broadcastingType
+                               << R"(;
+
+struct Output {
+    subgroupSizeOutput : u32,
+    broadcastOutput : array<i32, workgroupSize>,
+};
+@group(0) @binding(0) var<storage, read_write> output : Output;
+
+@compute @workgroup_size(workgroupSize, 1, 1)
+fn main(
+    @builtin(local_invocation_id) local_id : vec3u,
+    @builtin(subgroup_size) sg_size : u32
+) {
+    // Initialize the register of BroadcastingType to -1.
+    var reg: BroadcastingType = BroadcastingType(-1);
+    // Set the register value to subgroup size for invocation 0, and also output the subgroup size.
+    if (all(local_id == vec3u())) {
+        reg = BroadcastingType(sg_size);
+        output.subgroupSizeOutput = sg_size;
+    }
+    workgroupBarrier();
+    // Broadcast the register value of subgroup_id 0 in each subgroup.
+    reg = subgroupBroadcast(reg, 0u);
+    // Write back the register value in i32.
+    output.broadcastOutput[local_id.x] = i32(reg);
+}
+)";
+        return utils::CreateShaderModule(device, code.str().c_str());
+    }
+
+    void TestBroadcastSubgroupSize(uint32_t workgroupSize, std::string broadcastingType) {
+        auto shaderModule = CreateShaderModuleForBroadcastSubgroupSize(workgroupSize, "i32");
+
+        wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.compute.module = shaderModule;
+        auto pipeline = device.CreateComputePipeline(&csDesc);
+
+        uint32_t outputBufferSizeInBytes = (1 + workgroupSize) * sizeof(uint32_t);
+        wgpu::BufferDescriptor outputBufferDesc;
+        outputBufferDesc.size = outputBufferSizeInBytes;
+        outputBufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+        wgpu::Buffer outputBuffer = device.CreateBuffer(&outputBufferDesc);
+
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {
+                                                             {0, outputBuffer},
+                                                         });
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.DispatchWorkgroups(1);
+        pass.End();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER(outputBuffer, 0, outputBufferSizeInBytes,
+                      new ExpectBoardcastSubgroupSizeOutput(workgroupSize));
+    }
+
+    bool IsShaderF16FeatureRequired() const { return mRequiredShaderF16; }
+    bool IsSubgroupsRequired() const { return mRequiredSubgroups; }
+    bool IsSubgroupsF16Required() const { return mRequiredSubgroupsF16; }
 
   private:
-    bool mRequiredSubgroupsFeature = false;
+    class ExpectBoardcastSubgroupSizeOutput : public dawn::detail::Expectation {
+      public:
+        explicit ExpectBoardcastSubgroupSizeOutput(uint32_t workgroupSize)
+            : mWorkgroupSize(workgroupSize) {}
+
+        testing::AssertionResult Check(const void* data, size_t size) override {
+            DAWN_ASSERT(size == sizeof(int32_t) * (1 + mWorkgroupSize));
+            const int32_t* actual = static_cast<const int32_t*>(data);
+
+            int32_t outputSubgroupSize = actual[0];
+            if (!(
+                    // subgroup_size should be at least 1
+                    (1 <= outputSubgroupSize) &&
+                    // subgroup_size should be no larger than 128
+                    (outputSubgroupSize <= 128) &&
+                    // subgroup_size should be a power of 2
+                    ((outputSubgroupSize & (outputSubgroupSize - 1)) == 0))) {
+                testing::AssertionResult result = testing::AssertionFailure()
+                                                  << "Got invalid subgroup_size output: "
+                                                  << outputSubgroupSize;
+                return result;
+            }
+
+            // Expected that broadcastOutput contains exactly [subgroup_size] elements being of
+            // value [subgroup_size] and all other elements being -1 (placeholder). Note that
+            // although we assume invocation 0 of the workgroup has a subgroup_id of 0 in its
+            // subgroup, we don't assume any other particular subgroups layout property.
+            uint32_t subgroupSizeCount = 0;
+            uint32_t placeholderCount = 0;
+            for (uint32_t i = 0; i < mWorkgroupSize; i++) {
+                int32_t broadcastOutput = actual[i + 1];
+                if (broadcastOutput == outputSubgroupSize) {
+                    subgroupSizeCount++;
+                } else if (broadcastOutput == -1) {
+                    placeholderCount++;
+                } else {
+                    testing::AssertionResult result = testing::AssertionFailure()
+                                                      << "Got invalid broadcastOutput[" << i
+                                                      << "] : " << broadcastOutput << ", expected "
+                                                      << outputSubgroupSize << " or -1.";
+                    return result;
+                }
+            }
+
+            uint32_t expectedSubgroupSizeCount =
+                (static_cast<int32_t>(mWorkgroupSize) < outputSubgroupSize) ? mWorkgroupSize
+                                                                            : outputSubgroupSize;
+            uint32_t expectedPlaceholderCount = mWorkgroupSize - expectedSubgroupSizeCount;
+            if ((subgroupSizeCount != expectedSubgroupSizeCount) ||
+                (placeholderCount != expectedPlaceholderCount)) {
+                testing::AssertionResult result =
+                    testing::AssertionFailure()
+                    << "Unexpected broadcastOutput, got " << subgroupSizeCount
+                    << " elements of value " << outputSubgroupSize << " and " << placeholderCount
+                    << " elements of value -1, expected " << expectedSubgroupSizeCount
+                    << " elements of value " << outputSubgroupSize << " and "
+                    << expectedPlaceholderCount << " elements of value -1.";
+                return result;
+            }
+
+            return testing::AssertionSuccess();
+        }
+
+      private:
+        uint32_t mWorkgroupSize;
+    };
+
+    bool mRequiredShaderF16 = false;
+    bool mRequiredSubgroups = false;
+    bool mRequiredSubgroupsF16 = false;
 };
 
-// Test that creating compute pipeline with full subgroups required will validate the workgroup size
-// as expected, when using compute shader with literal workgroup size.
-TEST_P(ExperimentalSubgroupsTests, ComputePipelineRequiringFullSubgroupsWithLiteralWorkgroupSize) {
-    if (!IsSubgroupsFeatureRequired()) {
-        return;
+typedef ExperimentalSubgroupsTestsTmpl<false> ExperimentalSubgroupsTests;
+
+// Test that subgroup_size builtin attribute and subgroupBroadcast builtin function works as
+// expected for any workgroup size between 1 and 256.
+// Note that although we assume invocation 0 of the workgroup has a subgroup_id of 0 in its
+// subgroup, we don't assume any other particular subgroups layout property.
+TEST_P(ExperimentalSubgroupsTests, BroadcastSubgroupSize) {
+    if (!IsSubgroupsRequired()) {
+        GTEST_SKIP();
+    }
+
+    for (uint32_t workgroupSize : {1, 2, 3, 4, 7, 8, 15, 16, 31, 32, 63, 64, 127, 128, 255, 256}) {
+        TestBroadcastSubgroupSize(workgroupSize, "i32");
+    }
+}
+
+// Test that subgroupBroadcast builtin function works as expected for f16 type.
+TEST_P(ExperimentalSubgroupsTests, BroadcastSubgroupSizeF16) {
+    if (!IsSubgroupsF16Required()) {
+        GTEST_SKIP();
+    }
+
+    for (uint32_t workgroupSize : {1, 2, 3, 4, 7, 8, 15, 16, 31, 32, 63, 64, 127, 128, 255, 256}) {
+        TestBroadcastSubgroupSize(workgroupSize, "f16");
+    }
+}
+
+typedef ExperimentalSubgroupsTestsTmpl<true>
+    ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature;
+
+// Test that subgroup_size builtin attribute and subgroupBroadcast builtin function works as
+// expected for any workgroup size between 1 and 256.
+// Note that although we assume invocation 0 of the workgroup has a subgroup_id of 0 in its
+// subgroup, we don't assume any other particular subgroups layout property.
+TEST_P(ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature, BroadcastSubgroupSize) {
+    if (!IsSubgroupsRequired()) {
+        GTEST_SKIP();
+    }
+
+    for (uint32_t workgroupSize : {1, 2, 3, 4, 7, 8, 15, 16, 31, 32, 63, 64, 127, 128, 255, 256}) {
+        TestBroadcastSubgroupSize(workgroupSize, "i32");
+    }
+}
+
+// Test that subgroupBroadcast builtin function works as expected for f16 type.
+TEST_P(ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature, BroadcastSubgroupSizeF16) {
+    if (!IsSubgroupsF16Required()) {
+        GTEST_SKIP();
+    }
+
+    for (uint32_t workgroupSize : {1, 2, 3, 4, 7, 8, 15, 16, 31, 32, 63, 64, 127, 128, 255, 256}) {
+        TestBroadcastSubgroupSize(workgroupSize, "f16");
+    }
+}
+
+// Note that currently DawnComputePipelineFullSubgroups only supported with
+// ChromiumExperimentalSubgroups enabled. Test that creating compute pipeline with full subgroups
+// required will validate the workgroup size as expected, when using compute shader with literal
+// workgroup size.
+TEST_P(ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature,
+       ComputePipelineRequiringFullSubgroupsWithLiteralWorkgroupSize) {
+    if (!IsSubgroupsRequired()) {
+        GTEST_SKIP();
     }
 
     // Keep all success compute pipeline alive, so that we can test the compute pipeline cache.
@@ -163,9 +407,10 @@ TEST_P(ExperimentalSubgroupsTests, ComputePipelineRequiringFullSubgroupsWithLite
 }
 // Test that creating compute pipeline with full subgroups required will validate the workgroup size
 // as expected, when using compute shader with override constants workgroup size.
-TEST_P(ExperimentalSubgroupsTests, ComputePipelineRequiringFullSubgroupsWithOverrideWorkgroupSize) {
-    if (!IsSubgroupsFeatureRequired()) {
-        return;
+TEST_P(ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature,
+       ComputePipelineRequiringFullSubgroupsWithOverrideWorkgroupSize) {
+    if (!IsSubgroupsRequired()) {
+        GTEST_SKIP();
     }
     // Reuse the same shader module for all case to test the validation happened as expected.
     auto shaderModule = CreateShaderModuleWithOverrideWorkgroupSize();
@@ -203,6 +448,11 @@ TEST_P(ExperimentalSubgroupsTests, ComputePipelineRequiringFullSubgroupsWithOver
 
 // DawnTestBase::CreateDeviceImpl always enables allow_unsafe_apis toggle.
 DAWN_INSTANTIATE_TEST(ExperimentalSubgroupsTests,
+                      D3D12Backend(),
+                      D3D12Backend({}, {"use_dxc"}),
+                      MetalBackend(),
+                      VulkanBackend());
+DAWN_INSTANTIATE_TEST(ExperimentalSubgroupsTestsUsingChromiumExperimentalFeature,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_dxc"}),
                       MetalBackend(),
