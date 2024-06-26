@@ -87,6 +87,24 @@
       "parentUuid": "e55081fc_5bc586ff",
       "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ab9d766_f6cec1f6",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 2482,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-26T00:44:08Z",
+      "side": 1,
+      "message": "\u003e I think what I can probably do is drop \"native\" from the sTypes, as it\u0027s probably not necessary. I\u0027ll look into that in a follow-up CL?\n\nDoesn\u0027t really matter, and makes sense for them to be used the same way on the structs. I figured out it doesn\u0027t show up in the webgpu-headers version because of `disabled_tags\u003d[\u0027dawn\u0027]`.\n\nStill confusing what `\"tags\": [\"dawn\", \"native\"]` is supposed to mean though, would not have guessed it had anything to do with serialization.",
+      "parentUuid": "33c3142b_fada2ae5",
+      "revId": "6abfbde2bda5709e0ff6c456d538fe677b875673",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
