@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41723a64_3bd09afe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:17:38Z",
+      "side": 1,
+      "message": "PTAL also all the other \"opengl:\" CLs in the stack!",
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
