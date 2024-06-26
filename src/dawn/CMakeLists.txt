@@ -32,8 +32,8 @@
 add_subdirectory(partition_alloc)
 add_subdirectory(common)
 add_subdirectory(platform)
-add_subdirectory(native)
 add_subdirectory(wire)
+add_subdirectory(native)
 add_subdirectory(utils)
 
 if (DAWN_BUILD_BENCHMARKS)
