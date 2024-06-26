@@ -786,7 +786,7 @@ dawn_add_library(
 )
 
 target_compile_definitions(dawn_native PRIVATE "DAWN_NATIVE_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
+if(BUILD_SHARED_LIBS OR DAWN_BUILD_MONOLITHIC_SHARED_LIBRARY)
     target_compile_definitions(dawn_native PUBLIC "DAWN_NATIVE_SHARED_LIBRARY")
 endif()
 
@@ -809,34 +809,59 @@ if (DAWN_ENABLE_SWIFTSHADER)
     target_compile_definitions(dawn_native PRIVATE "DAWN_ENABLE_SWIFTSHADER")
 endif()
 
-###############################################################################
-# Do the 'complete_lib' build.
-# A convenience target that bundles dawn_native and procs calling it directly so that
-# applications link against it and have WebGPU work without jumping through more hoops.
-# Note that this library name is referenced in several places, search for it and things like:
-# "{{.*}}_dawn" when you rename it.
-###############################################################################
+if (DAWN_BUILD_MONOLITHIC_SHARED_LIBRARY)
+    ###############################################################################
+    # Do the 'complete_lib' build.
+    # A convenience target that bundles dawn_native and procs calling it directly so that
+    # applications link against it and have WebGPU work without jumping through more hoops.
+    # Note that this library name is referenced in several places, search for it and things like:
+    # "{{.*}}_dawn" when you rename it.
+    ###############################################################################
 
-DawnJSONGenerator(
-  TARGET "webgpu_dawn_native_proc"
-  PRINT_NAME "Dawn native WebGPU procs"
-  OUTPUT_SOURCES WEBGPU_DAWN_NATIVE_PROC_GEN_SOURCES
-)
+    DawnJSONGenerator(
+        TARGET "webgpu_dawn_native_proc"
+        PRINT_NAME "Dawn native WebGPU procs"
+        OUTPUT_SOURCES WEBGPU_DAWN_NATIVE_PROC_GEN_SOURCES
+    )
 
-include(BundleLibraries)
-bundle_libraries(webgpu_dawn dawn_native)
-add_library(dawn::webgpu ALIAS webgpu_dawn)
-target_sources(webgpu_dawn
-  PRIVATE
-    ${WEBGPU_DAWN_NATIVE_PROC_GEN_SOURCES}
-)
-target_link_libraries(webgpu_dawn
-  PRIVATE
-    dawn_internal_config
-    ${conditional_private_platform_depends}
-)
-target_compile_definitions(webgpu_dawn PRIVATE "WGPU_IMPLEMENTATION")
-target_compile_definitions(webgpu_dawn PUBLIC "WGPU_SHARED_LIBRARY")
+    include(BundleLibraries)
+    bundle_libraries(webgpu_dawn dawn_native dawn_platform dawn_wire)
+    add_library(dawn::webgpu_dawn ALIAS webgpu_dawn)
+    target_sources(webgpu_dawn
+        PRIVATE
+        ${WEBGPU_DAWN_NATIVE_PROC_GEN_SOURCES}
+    )
+    target_link_libraries(webgpu_dawn
+        PUBLIC
+            dawn_public_config
+        PRIVATE
+            ${conditional_private_platform_depends}
+    )
+
+    set(webgpu_dawn_public_headers)
+    foreach(dawn_target_name IN ITEMS dawn_headers dawncpp_headers dawn_native dawn_platform dawn_wire)
+        get_target_property(headers "${dawn_target_name}" INTERFACE_SOURCES)
+        list(INSERT webgpu_dawn_public_headers 0 "${headers}")
+    endforeach()
+  
+    target_compile_definitions(webgpu_dawn
+        PRIVATE
+            "WGPU_IMPLEMENTATION"
+            "DAWN_NATIVE_IMPLEMENTATION"
+            "DAWN_PLATFORM_IMPLEMENTATION"
+            "DAWN_WIRE_IMPLEMENTATION")
+    target_compile_definitions(webgpu_dawn
+        PUBLIC
+            "WGPU_SHARED_LIBRARY"
+            "DAWN_NATIVE_SHARED_LIBRARY"
+            "DAWN_PLATFORM_SHARED_LIBRARY"
+            "DAWN_WIRE_SHARED_LIBRARY")
+    if (DAWN_ENABLE_INSTALL)
+        dawn_install_target(dawn_public_config)
+        dawn_install_target(webgpu_dawn 
+            HEADERS ${webgpu_dawn_public_headers})
+    endif ()
+endif ()
 
 # Linking with dxcompiler after bundling so that the bundling process
 # doesn't see the dxcompiler and end up with unresolved linker errors.
@@ -846,6 +871,3 @@ if (DAWN_USE_BUILT_DXC)
     target_link_libraries(dawn_native PRIVATE dxcompiler)
     target_link_libraries(webgpu_dawn PRIVATE dxcompiler)
 endif()
-
-install_if_enabled(dawn_native)
-install_if_enabled(webgpu_dawn)
