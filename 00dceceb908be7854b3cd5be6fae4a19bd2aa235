@@ -16,6 +16,46 @@
       "message": "PTAL also all the other \"opengl:\" CLs in the stack!",
       "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c24d7f_6bd26b0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-26T18:45:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2703d01d_149f11c8",
+        "filename": "src/dawn/native/opengl/UtilsEGL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-26T18:45:48Z",
+      "side": 1,
+      "message": "nit: we probably don\u0027t want to default to an empty context. In part because now the error message will say \"\u003cblank\u003e failed with ...\" but also because it\u0027s probably better for our sanity in the future to provide more information ?\n\nI think you only need to add the context to egl.QuerySurface, then we don\u0027t need the default arg",
+      "range": {
+        "startLine": 39,
+        "startChar": 64,
+        "endLine": 39,
+        "endChar": 83
+      },
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
