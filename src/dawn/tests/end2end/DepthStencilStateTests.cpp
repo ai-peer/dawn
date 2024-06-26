@@ -104,7 +104,7 @@ class DepthStencilStateTest : public DawnTest {
     }
 
     struct TestSpec {
-        const wgpu::DepthStencilState& depthStencil;
+        const wgpu::DepthStencilState depthStencil;
         utils::RGBA8 color;
         float depth;
         uint32_t stencil;
