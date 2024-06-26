@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c04a8c59_8db4f5f5",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "This is new and should be added to `conditional_private_depends`",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c9ecdd_325a0c40",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "This was moved.",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9049301_2e7dd2e8",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "This could be moved to their respective lists above. They are split in the GN build so we can build both the static and shared libraries for dawn_native by recompiling only these N files. But CMake doesn\u0027t care about that.",
+      "range": {
+        "startLine": 754,
+        "startChar": 0,
+        "endLine": 776,
+        "endChar": 0
+      },
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b2cd72a_8bbd14cd",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "I\u0027m actually a bit surprised that other libs with these macros don\u0027t set the DAWN_X_SHARED_LIBRARY in the PUBLIC compile definitions.",
+      "range": {
+        "startLine": 805,
+        "startChar": 43,
+        "endLine": 805,
+        "endChar": 49
+      },
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "267dda16_bb4c814b",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "Why is this needed? Shouldn\u0027t dawn_khronos_platform have it as a PUBLIC include dir?",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "387cd40c_ccb94845",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a15ea92_7c3a30c5",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T18:45:09Z",
+      "side": 1,
+      "message": "```suggestion\nadd_library(dawn::webgpu ALIAS webgpu_dawn)\n```",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
