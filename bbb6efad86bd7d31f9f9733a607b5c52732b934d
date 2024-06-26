@@ -135,6 +135,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "610d6f77_1b201d76",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T19:42:40Z",
+      "side": 1,
+      "message": "Seems to be an oversight in https://dawn-review.googlesource.com/c/dawn/+/153180",
+      "parentUuid": "ca4667ea_4faa3cfa",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1a15ea92_7c3a30c5",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 32
