@@ -25,34 +25,5 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-dawn_add_library(
-  dawn_platform
-  UTILITY_TARGET dawn_internal_config
-  HEADERS
-    "${DAWN_INCLUDE_DIR}/dawn/platform/DawnPlatform.h"
-    "${DAWN_INCLUDE_DIR}/dawn/platform/dawn_platform_export.h"
-  PRIVATE_HEADERS
-    "WorkerThread.h"
-    "metrics/HistogramMacros.h"
-    "tracing/EventTracer.h"
-    "tracing/TraceEvent.h"
-  SOURCES
-    "DawnPlatform.cpp"
-    "WorkerThread.cpp"
-    "metrics/HistogramMacros.cpp"
-    "tracing/EventTracer.cpp"
-  DEPENDS
-    dawn::dawn_headers
-    dawn::partition_alloc
-  PRIVATE_DEPENDS
-    dawn::dawn_common
-)
-
-target_compile_definitions(dawn_platform PRIVATE "DAWN_PLATFORM_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
-  target_compile_definitions(dawn_platform PUBLIC "DAWN_PLATFORM_SHARED_LIBRARY")
-endif()
-
-if (DAWN_USE_BUILT_DXC)
-  target_compile_definitions(dawn_platform PRIVATE "DAWN_USE_BUILT_DXC")
-endif()
+add_executable(AdapterTest "AdapterTest.cpp")
+target_link_libraries(AdapterTest PRIVATE dawn::webgpu_dawn)
