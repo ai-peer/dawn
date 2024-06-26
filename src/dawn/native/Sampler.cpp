@@ -139,7 +139,8 @@ bool SamplerBase::IsYCbCr() const {
 size_t SamplerBase::ComputeContentHash() {
     ObjectContentHasher recorder;
     recorder.Record(mAddressModeU, mAddressModeV, mAddressModeW, mMagFilter, mMinFilter,
-                    mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction, mMaxAnisotropy);
+                    mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction, mMaxAnisotropy,
+                    mIsYCbCr);
     return recorder.GetContentHash();
 }
 

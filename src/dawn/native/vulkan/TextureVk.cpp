@@ -30,6 +30,7 @@
 #include <utility>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/DynamicUploader.h"
@@ -1810,6 +1811,7 @@ MaybeError TextureView::Initialize(const UnpackedPtr<TextureViewDescriptor>& des
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
     if (auto* yCbCrVkDescriptor = descriptor.Get<YCbCrVkDescriptor>()) {
+        ErrorLog() << "blundell: Using yCbCr sampling on TextureView";
         mYCbCrVkDescriptor = *yCbCrVkDescriptor;
         mYCbCrVkDescriptor.nextInChain = nullptr;
 
