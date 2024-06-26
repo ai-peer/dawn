@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "912f92cf_add08f6f",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-26T12:55:09Z",
+      "side": 1,
+      "message": "It provides consistency with the rest of Google projects, and the aliasing is fairly simple to implement. I don\u0027t have a strong opinion either way, but it\u0027d be nice to have a way forward that could eventually work for both Tint and Dawn (so we can share that code in `src/utils`).",
+      "parentUuid": "c569b6db_681eb6c1",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
