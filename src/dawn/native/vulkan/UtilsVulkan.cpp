@@ -28,6 +28,7 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Pipeline.h"
@@ -347,6 +348,8 @@ ResultOrError<VkSamplerYcbcrConversion> CreateSamplerYCbCrConversionCreateInfo(
     vulkanYCbCrCreateInfo.format = vulkanFormat;
     vulkanYCbCrCreateInfo.ycbcrModel =
         static_cast<VkSamplerYcbcrModelConversion>(yCbCrDescriptor.vkYCbCrModel);
+    // vulkanYCbCrCreateInfo.ycbcrModel = VK_SAMPLER_YCBCR_MODEL_CONVERSION_RGB_IDENTITY;
+    ErrorLog() << "blundell: Setting model to " << vulkanYCbCrCreateInfo.ycbcrModel;
     vulkanYCbCrCreateInfo.ycbcrRange =
         static_cast<VkSamplerYcbcrRange>(yCbCrDescriptor.vkYCbCrRange);
     vulkanYCbCrCreateInfo.components = vulkanComponent;
@@ -354,7 +357,10 @@ ResultOrError<VkSamplerYcbcrConversion> CreateSamplerYCbCrConversionCreateInfo(
         static_cast<VkChromaLocation>(yCbCrDescriptor.vkXChromaOffset);
     vulkanYCbCrCreateInfo.yChromaOffset =
         static_cast<VkChromaLocation>(yCbCrDescriptor.vkYChromaOffset);
-    vulkanYCbCrCreateInfo.chromaFilter = static_cast<VkFilter>(yCbCrDescriptor.vkChromaFilter);
+    // TODO(blundell): Need to map from Dawn's Nearest/Linear (starts at 1) to
+    // Vulkan's Nearest/Linear (starts at 0).
+    // vulkanYCbCrCreateInfo.chromaFilter = static_cast<VkFilter>(yCbCrDescriptor.vkChromaFilter);
+    vulkanYCbCrCreateInfo.chromaFilter = VK_FILTER_LINEAR;
     vulkanYCbCrCreateInfo.forceExplicitReconstruction =
         static_cast<VkBool32>(yCbCrDescriptor.forceExplicitReconstruction);
 
@@ -362,6 +368,7 @@ ResultOrError<VkSamplerYcbcrConversion> CreateSamplerYCbCrConversionCreateInfo(
     VkExternalFormatANDROID vulkanExternalFormat;
     // Chain VkExternalFormatANDROID only if needed.
     if (externalFormat != 0) {
+        ErrorLog() << "blundell: Setting external format to " << externalFormat;
         vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
         vulkanExternalFormat.pNext = nullptr;
         vulkanExternalFormat.externalFormat = externalFormat;
