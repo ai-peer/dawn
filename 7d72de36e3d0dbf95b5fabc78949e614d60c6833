@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c76f09_cc9fd24d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-26T19:13:46Z",
+      "side": 1,
+      "message": "LGTM though I think eventually we should be making internal usages for buffers work the same way they do for textures (or vice versa). In general it would be nice not to make a new version of the enum every time we want to add a new internal usage.",
+      "revId": "7d72de36e3d0dbf95b5fabc78949e614d60c6833",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
