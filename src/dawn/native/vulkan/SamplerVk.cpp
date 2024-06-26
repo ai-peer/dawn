@@ -29,6 +29,7 @@
 
 #include <algorithm>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
@@ -122,7 +123,9 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     }
 
     VkSamplerYcbcrConversionInfo samplerYCbCrInfo = {};
+    ErrorLog() << "blundell: Checking whether to create YCbCrInfo for sampler";
     if (auto* yCbCrVkDescriptor = Unpack(descriptor).Get<YCbCrVkDescriptor>()) {
+        ErrorLog() << "blundell: Creating YCbCrInfo for sampler";
         mYCbCrVkDescriptor = *yCbCrVkDescriptor;
         mYCbCrVkDescriptor.nextInChain = nullptr;
         DAWN_TRY_ASSIGN(mSamplerYCbCrConversion,

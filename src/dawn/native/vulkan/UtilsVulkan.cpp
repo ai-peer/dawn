@@ -28,6 +28,7 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Pipeline.h"
@@ -362,6 +363,7 @@ ResultOrError<VkSamplerYcbcrConversion> CreateSamplerYCbCrConversionCreateInfo(
     VkExternalFormatANDROID vulkanExternalFormat;
     // Chain VkExternalFormatANDROID only if needed.
     if (externalFormat != 0) {
+        ErrorLog() << "blundell: Setting external format to " << externalFormat;
         vulkanExternalFormat.sType = VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID;
         vulkanExternalFormat.pNext = nullptr;
         vulkanExternalFormat.externalFormat = externalFormat;
