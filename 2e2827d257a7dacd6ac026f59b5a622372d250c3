@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1368eb49_923aace1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-26T14:54:07Z",
+      "side": 1,
+      "message": "LGTM.\n\nThanks for this cleanup! Much appreciated.",
+      "revId": "2e2827d257a7dacd6ac026f59b5a622372d250c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e66c9df_3de04015",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-26T14:54:07Z",
+      "side": 1,
+      "message": "Nit: could this be in an unnamed namespace?",
+      "revId": "2e2827d257a7dacd6ac026f59b5a622372d250c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
