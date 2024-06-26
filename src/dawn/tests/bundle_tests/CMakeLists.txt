@@ -1,4 +1,4 @@
-# Copyright 2022 The Dawn & Tint Authors
+# Copyright 2020 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,35 +25,22 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-set(headers
-    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_glfw.h"
-)
-set(sources
-    "utils.cpp"
-)
-set(conditional_private_depends)
-if (DAWN_ENABLE_METAL)
-    list(APPEND sources "utils_metal.mm")
-    list(APPEND conditional_private_depends "-framework Metal")
-endif ()
-
-dawn_add_library(
-  dawn_glfw
+dawn_add_executable(AdapterTest
   UTILITY_TARGET dawn_internal_config
-  HEADERS
-    "${headers}"
   SOURCES
-    "${sources}"
+    "AdapterTest.cpp"
   DEPENDS
-    dawn::dawn_common
-    dawn::dawncpp_headers
-  PRIVATE_DEPENDS
-    glfw
-    ${conditional_private_depends}
+    dawn::webgpu_dawn
 )
-target_compile_definitions(dawn_glfw PRIVATE "WGPU_GLFW_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
-    target_compile_definitions(dawn_glfw PUBLIC "WGPU_GLFW_SHARED_LIBRARY")
-endif()
+add_test(NAME Dawn::BundleTests-AdapterTest COMMAND "$<TARGET_FILE:AdapterTest>")
 
-add_library(webgpu_glfw ALIAS dawn_glfw)
+dawn_add_executable(TriangleTest
+  UTILITY_TARGET dawn_internal_config
+  SOURCES
+    "TriangleTest.cpp"
+  DEPENDS
+    dawn::webgpu_dawn
+    dawn::dawn_glfw
+)
+add_test(NAME Dawn::BundleTests-TriangleTest COMMAND "$<TARGET_FILE:TriangleTest>")
+
