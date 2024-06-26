@@ -184,6 +184,24 @@
       "parentUuid": "1a15ea92_7c3a30c5",
       "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4b48c2d_59b3f89c",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T19:53:09Z",
+      "side": 1,
+      "message": "Also want to weigh in here that the final library name will become `libwebgpu.so`/`webgpu.dll`/`libwebgpu.dylib`. I think you definitely want a touch of `dawn` in there.",
+      "parentUuid": "9f1f8298_378bdf2f",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
