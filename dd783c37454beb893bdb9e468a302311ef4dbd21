@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b22b5a4_1ca667e4",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-26T12:59:48Z",
+      "side": 1,
+      "message": "Would this mean we deprecate the old flag names? Tint has ~27 flags at the moment which are either `-a` or `--a-b-c` format. We\u0027d end up with `--a_b_c` format variants as well now. When we add new flags, do we add `--a-b-c` format?\n\nLet me try it and see what it looks like ...",
+      "parentUuid": "912f92cf_add08f6f",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
