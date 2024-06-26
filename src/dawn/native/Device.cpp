@@ -1845,9 +1845,26 @@ void DeviceBase::SetWGSLExtensionAllowList() {
     if (mEnabledFeatures.IsEnabled(Feature::ShaderF16)) {
         mWGSLAllowedFeatures.extensions.insert(tint::wgsl::Extension::kF16);
     }
+    // TODO(349125474): Remove deprecated ChromiumExperimentalSubgroups.
     if (mEnabledFeatures.IsEnabled(Feature::ChromiumExperimentalSubgroups)) {
+        mWGSLAllowedFeatures.extensions.insert(tint::wgsl::Extension::kSubgroups);
         mWGSLAllowedFeatures.extensions.insert(
             tint::wgsl::Extension::kChromiumExperimentalSubgroups);
+    }
+    if (mEnabledFeatures.IsEnabled(Feature::Subgroups)) {
+        mWGSLAllowedFeatures.extensions.insert(tint::wgsl::Extension::kSubgroups);
+        // TODO(349125474): Remove deprecated ChromiumExperimentalSubgroups.
+        mWGSLAllowedFeatures.extensions.insert(
+            tint::wgsl::Extension::kChromiumExperimentalSubgroups);
+    }
+    if (mEnabledFeatures.IsEnabled(Feature::SubgroupsF16)) {
+        // TODO:
+        /*
+        // SubgroupsF16 feature must be enabled together with ShaderF16 and Subgroups features.
+        DAWN_ASSERT(mWGSLAllowedFeatures.extensions.contains(tint::wgsl::Extension::kF16) &&
+                    mWGSLAllowedFeatures.extensions.contains(tint::wgsl::Extension::kSubgroups));
+        */
+        mWGSLAllowedFeatures.extensions.insert(tint::wgsl::Extension::kSubgroupsF16);
     }
     if (IsToggleEnabled(Toggle::AllowUnsafeAPIs)) {
         mWGSLAllowedFeatures.extensions.insert(
