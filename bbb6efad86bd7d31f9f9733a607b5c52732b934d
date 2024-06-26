@@ -166,6 +166,24 @@
       "message": "```suggestion\nadd_library(dawn::webgpu ALIAS webgpu_dawn)\n```",
       "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f1f8298_378bdf2f",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T19:51:50Z",
+      "side": 1,
+      "message": "Did you want to drop the `_dawn` entirely or only for the ALIAS? Dropping it just for the alias can cause confusion because downstream users will still see `dawn::webgpu_dawn` irrespective of how the alias is named.",
+      "parentUuid": "1a15ea92_7c3a30c5",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
