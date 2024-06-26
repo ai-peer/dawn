@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c569b6db_681eb6c1",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-26T12:52:06Z",
+      "side": 1,
+      "message": "Does absl really provide that much when you\u0027ve now got to parse and re-write the flags? For Tint, where we already have a parser, the effort of switching doesn\u0027t seem worth the benefit.",
+      "parentUuid": "8b6ec607_87f2b1e5",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
