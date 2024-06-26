@@ -49,7 +49,7 @@ dawn_add_library(
 )
 
 target_compile_definitions(dawn_platform PRIVATE "DAWN_PLATFORM_IMPLEMENTATION")
-if(BUILD_SHARED_LIBS)
+if(BUILD_SHARED_LIBS OR DAWN_BUILD_MONOLITHIC_SHARED_LIBRARY)
   target_compile_definitions(dawn_platform PUBLIC "DAWN_PLATFORM_SHARED_LIBRARY")
 endif()
 
