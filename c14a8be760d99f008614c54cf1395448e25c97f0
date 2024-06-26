@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ff6ba4_4a4426e8",
+        "filename": "src/dawn/native/opengl/SwapChainEGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-26T18:50:31Z",
+      "side": 1,
+      "message": "nit: this one doesn\u0027t need 20 stack slots",
+      "range": {
+        "startLine": 189,
+        "startChar": 32,
+        "endLine": 189,
+        "endChar": 34
+      },
+      "revId": "c14a8be760d99f008614c54cf1395448e25c97f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
