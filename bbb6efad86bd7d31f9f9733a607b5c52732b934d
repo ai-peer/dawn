@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6d4922_1a5be7e0",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c04a8c59_8db4f5f5",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59c9ecdd_325a0c40",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d453f468_985ff85a",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:17:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "59c9ecdd_325a0c40",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9049301_2e7dd2e8",
@@ -48,6 +84,30 @@
       "writtenOn": "2024-06-26T18:45:09Z",
       "side": 1,
       "message": "This could be moved to their respective lists above. They are split in the GN build so we can build both the static and shared libraries for dawn_native by recompiling only these N files. But CMake doesn\u0027t care about that.",
+      "range": {
+        "startLine": 754,
+        "startChar": 0,
+        "endLine": 776,
+        "endChar": 0
+      },
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64f1bffd_5b05a86b",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:17:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9049301_2e7dd2e8",
       "range": {
         "startLine": 754,
         "startChar": 0,
@@ -94,6 +154,24 @@
       "writtenOn": "2024-06-26T18:45:09Z",
       "side": 1,
       "message": "Why is this needed? Shouldn\u0027t dawn_khronos_platform have it as a PUBLIC include dir?",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f8e038_323ad7a7",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:17:40Z",
+      "side": 1,
+      "message": "Not required. Removed",
+      "parentUuid": "267dda16_bb4c814b",
       "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -147,6 +225,24 @@
       "side": 1,
       "message": "Seems to be an oversight in https://dawn-review.googlesource.com/c/dawn/+/153180",
       "parentUuid": "ca4667ea_4faa3cfa",
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9128e24_a1759e63",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T20:17:40Z",
+      "side": 1,
+      "message": "Fixed it by adding vul in third_party CMake",
+      "parentUuid": "610d6f77_1b201d76",
       "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
