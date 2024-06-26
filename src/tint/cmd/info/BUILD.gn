@@ -42,6 +42,7 @@ tint_executable("info") {
   output_name = "tint_info"
   sources = [ "main.cc" ]
   deps = [
+    "${tint_src_dir}:abseil",
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/cmd/common",
     "${tint_src_dir}/lang/core",

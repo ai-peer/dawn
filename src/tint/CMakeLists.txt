@@ -526,6 +526,7 @@ function(tint_target_add_external_dependencies TARGET KIND)
     if(${DEPENDENCY} STREQUAL "abseil")
       target_link_libraries(${TARGET} PRIVATE
         absl::strings
+        absl::flags_parse
       )
     elseif(${DEPENDENCY} STREQUAL "dl")
       target_link_libraries(${TARGET} PRIVATE ${CMAKE_DL_LIBS})

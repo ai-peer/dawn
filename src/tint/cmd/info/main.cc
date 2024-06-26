@@ -34,6 +34,17 @@
 #include "spirv-tools/libspirv.hpp"
 #endif  // TINT_BUILD_SPV_READER
 
+TINT_BEGIN_DISABLE_WARNING(RESERVED_IDENTIFIER);
+TINT_BEGIN_DISABLE_WARNING(GCC_COMPAT);
+
+#include "absl/flags/flag.h"
+
+TINT_END_DISABLE_WARNING(GCC_COMPAT);
+TINT_END_DISABLE_WARNING(RESERVED_IDENTIFIER);
+
+#include "absl/flags/parse.h"
+#include "absl/flags/usage.h"
+#include "absl/flags/usage_config.h"
 #include "src/tint/cmd/common/helper.h"
 #include "src/tint/lang/core/type/struct.h"
 #include "src/tint/lang/wgsl/ast/module.h"
@@ -42,11 +53,15 @@
 #include "src/tint/utils/containers/transform.h"
 #include "src/tint/utils/text/string.h"
 
+TINT_BEGIN_DISABLE_WARNING(GLOBAL_CONSTRUCTORS);
+
+ABSL_FLAG(bool, json, false, "emit JSON");
+
+TINT_END_DISABLE_WARNING(GLOBAL_CONSTRUCTORS);
+
 namespace {
 
 struct Options {
-    bool show_help = false;
-
 #if TINT_BUILD_SPV_READER
     tint::spirv::reader::Options spirv_reader_options;
 #endif
@@ -55,33 +70,33 @@ struct Options {
     bool emit_json = false;
 };
 
-const char kUsage[] = R"(Usage: tint [options] <input-file>
+const char kUsage[] = "Usage: tint_info [options] <input-file>";
 
- options:
-   --json                    -- Emit JSON
-   -h                        -- This help text
-
-)";
-
-bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
-    for (size_t i = 1; i < args.size(); ++i) {
-        const std::string& arg = args[i];
-        if (arg == "-h" || arg == "--help") {
-            opts->show_help = true;
-        } else if (arg == "--json") {
-            opts->emit_json = true;
-        } else if (!arg.empty()) {
-            if (arg[0] == '-') {
-                std::cerr << "Unrecognized option: " << arg << "\n";
-                return false;
-            }
-            if (!opts->input_filename.empty()) {
-                std::cerr << "More than one input file specified: '" << opts->input_filename
-                          << "' and '" << arg << "'\n";
-                return false;
-            }
-            opts->input_filename = arg;
+bool ParseArgs(int argc, char** argv, Options* opts) {
+    absl::FlagsUsageConfig usage_config;
+    usage_config.contains_help_flags = [](absl::string_view) { return true; };
+    usage_config.contains_helpshort_flags = usage_config.contains_help_flags;
+    usage_config.version_string = []() -> std::string { return "0.0.1\n"; };
+    usage_config.normalize_filename = [](absl::string_view view) -> std::string {
+        if (view.find("abseil-cpp") != std::string::npos) {
+            return "2. abseil";
         }
+        return "1. tint";
+    };
+
+    absl::SetFlagsUsageConfig(usage_config);
+    absl::SetProgramUsageMessage(kUsage);
+
+    auto positional = absl::ParseCommandLine(argc, argv);
+
+    opts->emit_json = absl::GetFlag(FLAGS_json);
+
+    if (positional.size() == 1) {
+        std::cerr << "No input file provided\n";
+    } else if (positional.size() > 2) {
+        std::cerr << "More than one input file specified\n";
+    } else {
+        opts->input_filename = positional[1];
     }
     return true;
 }
@@ -299,20 +314,13 @@ void EmitText(const tint::Program& program) {
 
 }  // namespace
 
-int main(int argc, const char** argv) {
-    std::vector<std::string> args(argv, argv + argc);
-    Options options;
-
+int main(int argc, char** argv) {
     tint::SetInternalCompilerErrorReporter(&tint::cmd::TintInternalCompilerErrorReporter);
 
-    if (!ParseArgs(args, &options)) {
+    Options options;
+    if (!ParseArgs(argc, argv, &options)) {
         std::cerr << "Failed to parse arguments.\n";
         return 1;
-    }
-
-    if (options.show_help) {
-        std::cout << kUsage << "\n";
-        return 0;
     }
 
     tint::cmd::LoadProgramOptions opts;

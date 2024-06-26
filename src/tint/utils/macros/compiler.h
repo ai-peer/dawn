@@ -52,8 +52,10 @@
 #define TINT_DISABLE_WARNING_CONSTANT_OVERFLOW __pragma(warning(disable : 4756))
 #define TINT_DISABLE_WARNING_DEPRECATED __pragma(warning(disable : 4996))
 #define TINT_DISABLE_WARNING_DESTRUCTOR_NEVER_RETURNS __pragma(warning(disable : 4722))
-#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON /* currently no-op */
-#define TINT_DISABLE_WARNING_FLOAT_EQUAL     /* currently no-op */
+#define TINT_DISABLE_WARNING_EXTRA_SEMICOLON     /* currently no-op */
+#define TINT_DISABLE_WARNING_FLOAT_EQUAL         /* currently no-op */
+#define TINT_DISABLE_WARNING_GCC_COMPAT          /* currently no-op */
+#define TINT_DISABLE_WARNING_GLOBAL_CONSTRUCTORS /* currently no-op */
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED __pragma(warning(disable : 4701))
 #define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE /* currently no-op */
 #define TINT_DISABLE_WARNING_NEWLINE_EOF                 /* currently no-op */
@@ -106,6 +108,9 @@
 #define TINT_DISABLE_WARNING_EXTRA_SEMICOLON \
     _Pragma("clang diagnostic ignored \"-Wextra-semi-stmt\"")
 #define TINT_DISABLE_WARNING_FLOAT_EQUAL _Pragma("clang diagnostic ignored \"-Wfloat-equal\"")
+#define TINT_DISABLE_WARNING_GCC_COMPAT _Pragma("clang diagnostic ignored \"-Wgcc-compat\"")
+#define TINT_DISABLE_WARNING_GLOBAL_CONSTRUCTORS \
+    _Pragma("clang diagnostic ignored \"-Wglobal-constructors\"")
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED \
     _Pragma("clang diagnostic ignored \"-Wconditional-uninitialized\"")
 #define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE                  \
@@ -188,6 +193,8 @@
 #define TINT_DISABLE_WARNING_DESTRUCTOR_NEVER_RETURNS /* currently no-op */
 #define TINT_DISABLE_WARNING_EXTRA_SEMICOLON          /* currently no-op */
 #define TINT_DISABLE_WARNING_FLOAT_EQUAL              /* currently no-op */
+#define TINT_DISABLE_WARNING_GCC_COMPAT               /* currently no-op */
+#define TINT_DISABLE_WARNING_GLOBAL_CONSTRUCTORS      /* currently no-op */
 #define TINT_DISABLE_WARNING_MAYBE_UNINITIALIZED \
     _Pragma("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
 #define TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE /* currently no-op */
@@ -231,6 +238,8 @@
     TINT_DISABLE_WARNING_EXTRA_SEMICOLON              \
     TINT_DISABLE_WARNING_ZERO_AS_NULLPTR              \
     TINT_DISABLE_WARNING_MISSING_DESTRUCTOR_OVERRIDE  \
+    TINT_DISABLE_WARNING_GCC_COMPAT                   \
+    TINT_DISABLE_WARNING_GLOBAL_CONSTRUCTORS          \
     TINT_REQUIRE_SEMICOLON
 // clang-format on
 
