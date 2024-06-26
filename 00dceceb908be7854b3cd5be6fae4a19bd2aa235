@@ -35,6 +35,58 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abee92f8_79bf256f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2024-06-26T20:16:48Z",
+      "side": 1,
+      "message": "LGTM2. This is awesome. Thanks for taking it on!",
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32aaa8f2_72e6c7bf",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2024-06-26T20:16:48Z",
+      "side": 1,
+      "message": "Nit: rather than passing a lambda and calling back out to it, could we implement a scoper instead? It seems more idiomatic in Dawn.\n\n(Whoa, that AI-suggested code is actually pretty close.)",
+      "fixSuggestions": [
+        {
+          "fixId": "0bf50ec4_0a66c322",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/opengl/ContextEGL.h",
+              "range": {
+                "startLine": 57,
+                "startChar": 0,
+                "endLine": 64,
+                "endChar": 0
+              },
+              "replacement": "    class ScopedSurfaceCurrent {\n      public:\n        ScopedSurfaceCurrent(ContextEGL* context, EGLSurface surface)\n            : mContext(context), mSurface(surface) {\n            mContext-\u003emSurface \u003d surface;\n        }\n        ~ScopedSurfaceCurrent() { mContext-\u003emSurface \u003d EGL_NO_SURFACE; }\n\n      private:\n        ContextEGL* mContext;\n        EGLSurface mSurface;\n    };\n\n"
+            }
+          ]
+        }
+      ],
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2703d01d_149f11c8",
