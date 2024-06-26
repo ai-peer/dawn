@@ -189,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15eee1f2_4cf192eb",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 32
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-26T22:03:26Z",
+      "side": 1,
+      "message": "Ah. Well all the targets were built as static libs, so the bug never got a chance to show up.",
+      "parentUuid": "6cadf2e3_270f4681",
+      "range": {
+        "startLine": 805,
+        "startChar": 43,
+        "endLine": 805,
+        "endChar": 49
+      },
+      "revId": "bbb6efad86bd7d31f9f9733a607b5c52732b934d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "267dda16_bb4c814b",
