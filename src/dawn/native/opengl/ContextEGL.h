@@ -56,9 +56,9 @@ class ContextEGL : NonMovable {
 
     template <typename F>
     auto WithSurfaceCurrent(EGLSurface surface, F&& f) {
-        mSurface = surface;
+        mCurrentSurface = surface;
         auto res = f();
-        mSurface = EGL_NO_SURFACE;
+        mCurrentSurface = mOffscreenSurface;
         return std::move(res);
     }
     void MakeCurrent();
@@ -66,7 +66,8 @@ class ContextEGL : NonMovable {
   private:
     const DisplayEGL* mDisplay;
     EGLContext mContext = EGL_NO_CONTEXT;
-    EGLSurface mSurface = EGL_NO_SURFACE;
+    EGLSurface mCurrentSurface = EGL_NO_SURFACE;
+    EGLSurface mOffscreenSurface = EGL_NO_SURFACE;
 };
 
 }  // namespace dawn::native::opengl
