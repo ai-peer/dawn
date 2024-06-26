@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3854a89f_bd8ea00d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003787
+      },
+      "writtenOn": "2024-06-26T19:54:42Z",
+      "side": 1,
+      "message": "Hi @Corentin, Rafael mentioned that you think there are some unnecessary re-enumeration of adapters in the test infrastructure, which might have caused this to be reverted. Can you point out where in the tests this might be happening? Thank you!",
+      "revId": "5af9bb9db86ab0c72956aed52fcbabe2e692f8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
