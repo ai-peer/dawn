@@ -22,6 +22,30 @@
       },
       "revId": "7a9fc076cb75f7cb9ce3ce179a62ee03698ff89d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3601d6e9_022cd302",
+        "filename": "src/dawn/native/opengl/SwapChainEGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-27T23:08:52Z",
+      "side": 1,
+      "message": "good catch; tested in a local build this one is fine.",
+      "parentUuid": "caf5a274_7c4964a2",
+      "range": {
+        "startLine": 187,
+        "startChar": 30,
+        "endLine": 187,
+        "endChar": 37
+      },
+      "revId": "7a9fc076cb75f7cb9ce3ce179a62ee03698ff89d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
