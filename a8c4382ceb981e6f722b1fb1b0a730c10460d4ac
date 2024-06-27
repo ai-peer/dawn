@@ -16,6 +16,24 @@
       "message": "TODO: Exercice the monolithic shared lib with a basic unit test. It could be a simple executable that creates an instance, device, requests adapter and prints adapter information. I want to be sure that important symbols are correctly exported on all platforms.",
       "revId": "a8c4382ceb981e6f722b1fb1b0a730c10460d4ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba1edc72_f6e25ae6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-27T16:46:48Z",
+      "side": 1,
+      "message": "Done. Added new `bundle_tests/TriangleTest.cpp` and `bundle_tests/AdapterTest.cpp`",
+      "parentUuid": "b87dd64b_b9787a53",
+      "revId": "a8c4382ceb981e6f722b1fb1b0a730c10460d4ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
