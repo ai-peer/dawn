@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbd5d27_8f5a6c03",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like you ever use the `let` field, so you don\u0027t really need a struct here?",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5006a84e_c952fea9",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "I think this check breaks the transform for constants that are used multiple times, now that you\u0027ve stopped replacing all uses when you create the let. It only replaces the first use.\n\nThe `DuplicateConstant` unit test doesn\u0027t quite capture this, because one of the uses is already a let.",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed119e92_6de5edac",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Nit: PascalCase for functions",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b92a27e_5f0b4b05",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Maybe just `TINT_ASSERT`, so fuzzers tell us if we ever have a non-const arg at module-scope.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 9
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd68cc17_69285bf1",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Array too? Presumably missing tests if so.",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b618b3ad_ef4c0199",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "No action needed here, but we should add a builder method for creating a Let for a value without a name. Creating it with the type and then setting the value afterwards feels a little awkward.",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83857a75_ead9134a",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Nit: PascalCase\n\nAlso, I found it a little hard to understand what the function was doing at the callsite. Maybe rename to something a bit more descriptive, e.g. `HoistModuleScopeLetToConstruct` (or something better).",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0453263_414e258c",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Comment says struct and array, but code only does struct? Presumably missing tests if we need to do array as well.",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b41b2f_9a8f7cba",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:02:28Z",
+      "side": 1,
+      "message": "Nit: PascalCase",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
