@@ -34,6 +34,24 @@
       ],
       "revId": "0b2218a2eb9f6a1f107a3d881bbfa43591a3d856",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a648a5f2_2a9065ed",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:21:51Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "baba02e3_bf6662e7",
+      "revId": "0b2218a2eb9f6a1f107a3d881bbfa43591a3d856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
