@@ -46,6 +46,47 @@
       },
       "revId": "1156415d485bda5d6d9e05b1969170822806b563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd28e453_11d9abcf",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3956,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-27T20:39:24Z",
+      "side": 1,
+      "message": "Agree I don\u0027t think we need to reserve 0 in each block, though it is a little hard to read (and sort) because the tags are at the end. Think it\u0027s fine though.",
+      "parentUuid": "e00fa681_dffda55b",
+      "range": {
+        "startLine": 3956,
+        "startChar": 22,
+        "endLine": 3956,
+        "endChar": 23
+      },
+      "revId": "1156415d485bda5d6d9e05b1969170822806b563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d3b877f_2855c500",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3958,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-27T20:39:24Z",
+      "side": 1,
+      "message": "Remembered to file the question about how to number this: https://github.com/webgpu-native/webgpu-headers/issues/214#issuecomment-2195624598",
+      "revId": "1156415d485bda5d6d9e05b1969170822806b563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
