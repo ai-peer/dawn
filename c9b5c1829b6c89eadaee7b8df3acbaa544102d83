@@ -61,6 +61,24 @@
       ],
       "revId": "c9b5c1829b6c89eadaee7b8df3acbaa544102d83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ef377e_dc0535bd",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T13:50:09Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "37c5089d_7088c789",
+      "revId": "c9b5c1829b6c89eadaee7b8df3acbaa544102d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
