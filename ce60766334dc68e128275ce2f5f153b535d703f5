@@ -299,6 +299,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09af244b_8115c442",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T13:34:15Z",
+      "side": 1,
+      "message": "Discussed offline - MSL doesn\u0027t use struct for builtin inputs so we should never have a struct for compute shaders.",
+      "parentUuid": "5b80b949_dfb6560e",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00190e43_74022a5b",

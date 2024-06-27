@@ -1,0 +1,66 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f557f4d5_a787430d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T13:34:15Z",
+      "side": 1,
+      "message": "LGTM with one small suggested change.",
+      "revId": "c9b5c1829b6c89eadaee7b8df3acbaa544102d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c5089d_7088c789",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T13:34:15Z",
+      "side": 1,
+      "message": "Could just do the return here to avoid the extra if below.",
+      "fixSuggestions": [
+        {
+          "fixId": "0d982ad4_1455108f",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+              "range": {
+                "startLine": 201,
+                "startChar": 0,
+                "endLine": 201,
+                "endChar": 0
+              },
+              "replacement": "            return {input_param};\n"
+            },
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+              "range": {
+                "startLine": 203,
+                "startChar": 0,
+                "endLine": 207,
+                "endChar": 0
+              },
+              "replacement": "        return tint::Empty;\n"
+            }
+          ]
+        }
+      ],
+      "revId": "c9b5c1829b6c89eadaee7b8df3acbaa544102d83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
