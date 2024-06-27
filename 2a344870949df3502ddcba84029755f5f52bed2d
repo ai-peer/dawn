@@ -16,6 +16,24 @@
       "message": "Nit: could this be in an unnamed namespace?",
       "revId": "2a344870949df3502ddcba84029755f5f52bed2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34fc65f1_0cc31d7e",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T04:13:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2d3b6cf_32c09f27",
+      "revId": "2a344870949df3502ddcba84029755f5f52bed2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
