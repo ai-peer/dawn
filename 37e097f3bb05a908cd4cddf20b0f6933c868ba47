@@ -52,6 +52,24 @@
       "parentUuid": "0c70cb1d_0c3c2480",
       "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f571e2_5de1b43b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-27T11:07:45Z",
+      "side": 1,
+      "message": "Ah, thanks for clarifying. These two facts made me think it was an experimental/optional feature and not so important:\n\n1. it\u0027s turned off by default in cmake\n2. third_party/dxc is never fetched by fetch_dawn_depdencies.\n\nWas that an oversight in https://dawn-review.googlesource.com/c/dawn/+/161420?",
+      "parentUuid": "082ff89f_40a789e5",
+      "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
