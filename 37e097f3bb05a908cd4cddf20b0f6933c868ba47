@@ -16,6 +16,24 @@
       "message": "Turned out that `DAWN_USE_BUILT_DXC` doesn\u0027t play well with bundling (cmake-win-* jobs failed). Had to push fixes to `third_party/CMakeLists.txt`. Can someone please explain what dxcompiler actually brings and how important it is?",
       "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c70cb1d_0c3c2480",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-27T02:10:37Z",
+      "side": 1,
+      "message": "Marking as unresolved",
+      "parentUuid": "9478aad8_dd4d6200",
+      "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
