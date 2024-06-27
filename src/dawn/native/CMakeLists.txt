@@ -281,6 +281,14 @@ if (WIN32 AND NOT WINDOWS_STORE)
   list(APPEND conditional_private_platform_depends user32.lib)
 endif()
 
+# Only UNIX app needs to link with DL and pthread libs
+if (UNIX)
+    list(APPEND conditional_private_platform_depends 
+        pthread
+        ${CMAKE_DL_LIBS}
+    )
+endif ()
+
 # DXGIGetDebugInterface1 is defined in dxgi.lib
 # But this API is tagged as a development-only capability
 # which implies that linking to this function will cause
