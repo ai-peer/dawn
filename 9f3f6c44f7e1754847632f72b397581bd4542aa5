@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac7d492_f5783e2b",
+        "filename": "src/tint/cmd/fuzz/ir/dis/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T20:46:15Z",
+      "side": 1,
+      "message": "```suggestion\n        return tint::Failure{\"Unable to parse bytes into test case protobuf\"};\n```",
+      "revId": "9f3f6c44f7e1754847632f72b397581bd4542aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
