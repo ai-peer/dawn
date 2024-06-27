@@ -22,6 +22,30 @@
       },
       "revId": "1156415d485bda5d6d9e05b1969170822806b563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e00fa681_dffda55b",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3956,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-27T19:49:20Z",
+      "side": 1,
+      "message": "IMO probably not because I think the point of the 0 is for zero-init reasons, and these values aren\u0027t actually zero in the generated code",
+      "parentUuid": "2bcad28f_685a1737",
+      "range": {
+        "startLine": 3956,
+        "startChar": 22,
+        "endLine": 3956,
+        "endChar": 23
+      },
+      "revId": "1156415d485bda5d6d9e05b1969170822806b563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
