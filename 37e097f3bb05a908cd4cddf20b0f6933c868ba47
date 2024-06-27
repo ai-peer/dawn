@@ -106,6 +106,24 @@
       "parentUuid": "522c29be_acdc68dd",
       "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aae7c1b_f166fb5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-27T12:33:50Z",
+      "side": 1,
+      "message": "It should be possible to build the HLSL backend without DXC, but there is a bug: https://issues.chromium.org/issues/348199046",
+      "parentUuid": "94369480_40832561",
+      "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
