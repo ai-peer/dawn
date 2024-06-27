@@ -24,6 +24,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2592eee_5d6d4a12",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T08:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57e54df5_e82d22ac",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 51
+      },
+      "revId": "74f3d88b45c49a5ef69387a641815daf838f38c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca8d4eb_88134782",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T08:54:53Z",
+      "side": 1,
+      "message": "Stephen PTAL as well!",
+      "revId": "74f3d88b45c49a5ef69387a641815daf838f38c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44f63782_8f66376c",
@@ -37,6 +78,30 @@
       "writtenOn": "2024-06-26T18:54:14Z",
       "side": 1,
       "message": "```suggestion\n    // When EGL_KHR_surfaceless_context is not supported, we need to create a pbuffer to act\n```",
+      "range": {
+        "startLine": 133,
+        "startChar": 12,
+        "endLine": 133,
+        "endChar": 38
+      },
+      "revId": "74f3d88b45c49a5ef69387a641815daf838f38c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e5669e2_6e1dbd11",
+        "filename": "src/dawn/native/opengl/ContextEGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T08:54:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44f63782_8f66376c",
       "range": {
         "startLine": 133,
         "startChar": 12,
