@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b39af3f9_07c9fd18",
+        "filename": "src/dawn/native/opengl/ContextEGL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T08:56:03Z",
+      "side": 1,
+      "message": "I did the change in the latest patchset, I think I like it a bit less than the more modern looking and safer lambda variant, but let me know which you prefer between the two patchsets!",
+      "parentUuid": "32aaa8f2_72e6c7bf",
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2703d01d_149f11c8",
         "filename": "src/dawn/native/opengl/UtilsEGL.h",
         "patchSetId": 23
@@ -100,6 +118,30 @@
       "writtenOn": "2024-06-26T18:45:48Z",
       "side": 1,
       "message": "nit: we probably don\u0027t want to default to an empty context. In part because now the error message will say \"\u003cblank\u003e failed with ...\" but also because it\u0027s probably better for our sanity in the future to provide more information ?\n\nI think you only need to add the context to egl.QuerySurface, then we don\u0027t need the default arg",
+      "range": {
+        "startLine": 39,
+        "startChar": 64,
+        "endLine": 39,
+        "endChar": 83
+      },
+      "revId": "00dceceb908be7854b3cd5be6fae4a19bd2aa235",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e55239_c0a76049",
+        "filename": "src/dawn/native/opengl/UtilsEGL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T08:56:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2703d01d_149f11c8",
       "range": {
         "startLine": 39,
         "startChar": 64,
