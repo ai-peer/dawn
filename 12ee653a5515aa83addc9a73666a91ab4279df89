@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fd431af_e14d01eb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "That seems like it could be a pessimization in the current code. But we can see later.",
+      "parentUuid": "2112794b_92259d2b",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "201ebb65_2f40c05d",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "This doesn\u0027t work because enum class doesn\u0027t support ++ operator",
       "parentUuid": "201ebb65_2f40c05d",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ab962cd_924cfa75",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Oh, maybe we didn\u0027t really do ityp containers with enum indices before. We could eventually fix Range() to use the underlying type for that.",
+      "parentUuid": "8f26d8e1_c5a3da91",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -271,6 +307,24 @@
       "side": 1,
       "message": "I added a comment in the header.\n- MapWrite: `CPUWritableConstBuffer` gets updated.\n- write on GPU:\n  - UsedAsUAV -\u003e `CPUWritableConstBuffer` is copied to `GPUWritableNonConstBuffer`\n  - GPU modifies `GPUWritableNonConstBuffer`.\n  - commandContext-\u003eAddBufferForSyncingWithCPU.\n  - Queue::Submit\n    - commandContext-\u003eFlushBuffersForSyncingWithCPU\n    - `GPUWritableNonConstBuffer` is copied to `Staging`.\n- MapWrite:\n  - `Staging` is copied to `CPUWritableConstBuffer` with DISCARD flag (`CPUWritableConstBuffer` old content will be discarded, so it avoids stall).",
       "parentUuid": "7b72eb11_87c30cbc",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d746f5f8_713998be",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e847820_d4faa443",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -429,6 +483,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dea9ac28_7ba13dfd",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Sorry my comment wasn\u0027t super clear. Why do we need to Unmap in the error case since it will result in a device loss? It seems we could just inline `MapAndCopy` inside this function and if an unexpected error happens, a device loss will happen which destroys (and unmaps) all resources anyway.",
+      "parentUuid": "6b6ecdbd_9ea1a925",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8548b364_1845c4a6",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -499,6 +571,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d554cabd_87c5b0a5",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Ah ok makes sense! Can we have a comment that explains that it is to prevent the stall and not for correctness?",
+      "parentUuid": "167e6ca8_e2a38c77",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26c84ebe_04183df8",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -528,6 +618,24 @@
       "side": 1,
       "message": "Do you mean we need to check whether the last update is actually a GPU operation or not?\n\nActually the main point is that if we sync the CPU writable buffer here, it would need a stall because we cannot use `CopyResource` to copy `lastUpdatedStorage` -\u003e `CPUWritableConstantBuffer` directly.\n\nWe could only copy indirectly via:\n- `lastUpdatedStorage` -\u003e `stagingStorage`\n- `stagingStorage` -\u003e `CPUWritableConstantBuffer`.\nThe 2nd copy has to be done via mapping and it\u0027s a stall. So it\u0027s better to sync the GPU counterpart of constant buffer here. It will only need one `CopyResource` call.\n\nNo matter what the last update storage is, it will always be able to used as the source of `CopyResource`.\n\nSo if `CPUWritableConstantBuffer` is out of date, we sync its GPU counterpart instead:\n- `lastUpdatedStorage` -\u003e `GPUCopyDstConstantBuffer`",
       "parentUuid": "26c84ebe_04183df8",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2565ba3_1f5f7dfa",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Let me rephrase to see if I understand correctly.\n\n`CPUWritableConstantBuffer` is the only storage that cannot be updated with `CopyResource`. So unless it is up to date, we always prefer `GPUCopyDstConstantBuffer` so that we can update it with a GPU copy instead of a mapping+stall+memcpy (very bad) or a memcpy (still kinda bad).\n\nWhat do you think of using an early out in this case to make things more clear.\n\n```\nif (auto storage \u003d mStorages[StorageType::CPUWritableConstantBuffer].Get(); storage-\u003eGetRevision() !\u003d mLastUpdatedStorage-\u003eGetRevision()) {\n    // The CPUWritableConstantBuffer is up to date, use it directly.\n    return storage-\u003eGetD3D11Buffer();\n}\n\n// In all other cases we are going to use the GPUCopyDstConstantBuffer because, either it is up to date, or we need to update the ConstantBuffer data and doing a CopyResource on the GPU is always more efficient than paths involving a memcpy (or potentially a stall).\nDAWN_TRY_ASSIGN(storage, AllocateStorageIfNeeded(StorageType::GPUCopyDstConstantBuffer));\nDAWN_TRY(SyncStorage(commandContext, storage));\nreturn storage-\u003eGetD3D11Buffer();\n```",
+      "parentUuid": "c49d7c7b_09308d41",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -732,6 +840,24 @@
       "side": 1,
       "message": "I have replaced GPUUsableBuffer with the new class.",
       "parentUuid": "4116727c_11d621ba",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9c9c4e_a4f5d058",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "43749cc6_83a4f9e9",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1106,6 +1232,30 @@
       "side": 1,
       "message": "There is a bug in DawnTest. It would return that this feature is supported in wire.",
       "parentUuid": "88a2ba92_00ed663b",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 19
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cfb506_fb44d3dc",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T10:55:38Z",
+      "side": 1,
+      "message": "What would it take to fix DawnTest?",
+      "parentUuid": "afdcd451_ce7c0e54",
       "range": {
         "startLine": 180,
         "startChar": 8,
