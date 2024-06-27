@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6248157f_8b5e661c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-27T21:21:34Z",
+      "side": 1,
+      "message": "I think we determined we couldn\u0027t do this anymore because we want to switch the bitmasks all to 64 bits, and enums can\u0027t be 64 bits. Fortunately we should be able use `enum class : uint64_t` in C++ so we keep the type safety.\n\nhttps://github.com/webgpu-native/webgpu-headers/issues/159#issuecomment-2000818819 (sorry, forgot to update the dawn issue)",
+      "revId": "ec179de6af1d917f722535bfc073e1a38eda8c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
