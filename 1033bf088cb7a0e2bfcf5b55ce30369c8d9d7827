@@ -1,0 +1,116 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9847c8cc_deae0495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T16:31:11Z",
+      "side": 1,
+      "message": "LGTM with nits",
+      "revId": "1033bf088cb7a0e2bfcf5b55ce30369c8d9d7827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea081b3d_c1a02c33",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T16:31:11Z",
+      "side": 1,
+      "message": "Nit: The Struct/Array check is independent of the operand type, so you could do check on `operand-\u003eType()` instead and then use `IsAnyOf` to combine the `InstructionResult` and `Constant` cases.\n\ne.g.\n```\nif (!operand-\u003eType()-\u003eIsAnyOf\u003ccore::type::Struct, core::type::Array\u003e()) {\n  continue;\n}\nif (operand-\u003eIsAnyOf\u003ccore::ir::InstructionResult, core::ir::Constant\u003e()) {\n    seen.Add(res);\n    worklist.Push({inst, operand});\n}\n```",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 17
+      },
+      "revId": "1033bf088cb7a0e2bfcf5b55ce30369c8d9d7827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7cc5dab_8a9cf69e",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T16:31:11Z",
+      "side": 1,
+      "message": "Nit: Seems like an unnecessary abbreviation?",
+      "fixSuggestions": [
+        {
+          "fixId": "3ae37aef_21819512",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+              "range": {
+                "startLine": 111,
+                "startChar": 0,
+                "endLine": 112,
+                "endChar": 0
+              },
+              "replacement": "    core::ir::Let* MakeLet(core::ir::Value* value) {\n"
+            },
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+              "range": {
+                "startLine": 125,
+                "startChar": 0,
+                "endLine": 126,
+                "endChar": 0
+              },
+              "replacement": "        auto* let \u003d MakeLet(value);\n"
+            },
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+              "range": {
+                "startLine": 131,
+                "startChar": 0,
+                "endLine": 132,
+                "endChar": 0
+              },
+              "replacement": "        auto* let \u003d MakeLet(value);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "1033bf088cb7a0e2bfcf5b55ce30369c8d9d7827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82a2349_25acfcf5",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T16:31:11Z",
+      "side": 1,
+      "message": "Why `[[maybe_unused]]` here?",
+      "revId": "1033bf088cb7a0e2bfcf5b55ce30369c8d9d7827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
