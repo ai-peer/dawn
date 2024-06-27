@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a66436_66b27aa8",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Left over from a previous iteration, removed and struct dropped.",
+      "parentUuid": "bdbd5d27_8f5a6c03",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5006a84e_c952fea9",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-06-27T21:02:28Z",
       "side": 1,
       "message": "I think this check breaks the transform for constants that are used multiple times, now that you\u0027ve stopped replacing all uses when you create the let. It only replaces the first use.\n\nThe `DuplicateConstant` unit test doesn\u0027t quite capture this, because one of the uses is already a let.",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da737db6_b1c651fc",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Nice catch. I kept the `seen` hash but now it\u0027s per block. This fixes an issue that comes up if you have the same constant multiple times it in a call it only outputs once. (HlslWriterTest.FunctionEntryPointSharedStructDifferentStages does this.)",
+      "parentUuid": "5006a84e_c952fea9",
       "range": {
         "startLine": 95,
         "startChar": 32,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05643a13_d5b6ba20",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed119e92_6de5edac",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b92a27e_5f0b4b05",
@@ -71,6 +131,30 @@
       "writtenOn": "2024-06-27T21:02:28Z",
       "side": 1,
       "message": "Maybe just `TINT_ASSERT`, so fuzzers tell us if we ever have a non-const arg at module-scope.",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 142,
+        "endChar": 9
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f39273_3abcc3e5",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b92a27e_5f0b4b05",
       "range": {
         "startLine": 140,
         "startChar": 0,
@@ -116,6 +200,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe3d2ba_f111f344",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca6a840_9c63d454",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b618b3ad_ef4c0199",
@@ -133,6 +235,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0f1be06_e53b3daf",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b618b3ad_ef4c0199",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83857a75_ead9134a",
@@ -146,6 +266,24 @@
       "writtenOn": "2024-06-27T21:02:28Z",
       "side": 1,
       "message": "Nit: PascalCase\n\nAlso, I found it a little hard to understand what the function was doing at the callsite. Maybe rename to something a bit more descriptive, e.g. `HoistModuleScopeLetToConstruct` (or something better).",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99b483be_1742f7c3",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done. HoistModuleScopeLetToConstruct seems good to me.",
+      "parentUuid": "83857a75_ead9134a",
       "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +323,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ef3e48_ff4b2067",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907b1100_17f5becb",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31b41b2f_9a8f7cba",
@@ -216,6 +372,24 @@
       "side": 1,
       "message": "why_do_people_not_like_the_good_way_of_naming_things?",
       "parentUuid": "31b41b2f_9a8f7cba",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62fbd80_0b1f7ca7",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e288a7db_63638b11",
       "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

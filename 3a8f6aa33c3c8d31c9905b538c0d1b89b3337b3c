@@ -42,6 +42,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c356841_f745b50f",
+        "filename": "src/tint/lang/core/ir/call.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done. Missed that method, saw `AddOperand` which took a `size` and assumed it was supposed to be what this is doing. Thanks.",
+      "parentUuid": "356620df_1530453e",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 35
+      },
+      "revId": "3a8f6aa33c3c8d31c9905b538c0d1b89b3337b3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4e53adf_ab68b97d",
@@ -55,6 +79,24 @@
       "writtenOn": "2024-06-27T21:02:28Z",
       "side": 1,
       "message": "Please add validator unit tests to make sure that we only accept Let and Construct iff the capability is enabled.",
+      "revId": "3a8f6aa33c3c8d31c9905b538c0d1b89b3337b3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7f0641_031e087c",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 777,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T22:54:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4e53adf_ab68b97d",
       "revId": "3a8f6aa33c3c8d31c9905b538c0d1b89b3337b3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
