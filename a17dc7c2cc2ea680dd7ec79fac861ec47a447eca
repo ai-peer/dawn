@@ -100,6 +100,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cca6a840_9c63d454",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T21:09:41Z",
+      "side": 1,
+      "message": "No, turns out not array. I had that originally and then compared to AST printer it dosen\u0027t substitute arrays recursively (and generates some fun results if you do)",
+      "parentUuid": "dd68cc17_69285bf1",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b618b3ad_ef4c0199",
         "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
         "patchSetId": 10
@@ -151,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "907b1100_17f5becb",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T21:09:41Z",
+      "side": 1,
+      "message": "Comment out of date, will fix.",
+      "parentUuid": "d0453263_414e258c",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31b41b2f_9a8f7cba",
         "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
         "patchSetId": 10
@@ -162,6 +198,24 @@
       "writtenOn": "2024-06-27T21:02:28Z",
       "side": 1,
       "message": "Nit: PascalCase",
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e288a7db_63638b11",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T21:09:41Z",
+      "side": 1,
+      "message": "why_do_people_not_like_the_good_way_of_naming_things?",
+      "parentUuid": "31b41b2f_9a8f7cba",
       "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
