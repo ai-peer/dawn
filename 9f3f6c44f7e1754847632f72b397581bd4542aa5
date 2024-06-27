@@ -16,6 +16,24 @@
       "message": "```suggestion\n        return tint::Failure{\"Unable to parse bytes into test case protobuf\"};\n```",
       "revId": "9f3f6c44f7e1754847632f72b397581bd4542aa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40dd8382_342124db",
+        "filename": "src/tint/cmd/fuzz/ir/dis/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-27T20:52:12Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "aac7d492_f5783e2b",
+      "revId": "9f3f6c44f7e1754847632f72b397581bd4542aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
