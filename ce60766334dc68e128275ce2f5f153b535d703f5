@@ -16,6 +16,200 @@
       "message": "PTAL.",
       "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d041d66c_73b5b426",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "This struct looks like it\u0027s not really used?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 2
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d064b97c_b176a1f5",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "I think for HLSL we actually move all inputs to a structure.",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 99
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab08f1da_33b78d7a",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "Seems unused.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a24b4f_ea8c142c",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "As mentioned elsewhere, there will be at most one parameter (a struct), so you don\u0027t need a vector here.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96d6a67_dfef7f81",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "I don\u0027t think you actually need a pair of indices here. For both inputs and outputs there is just a single struct, so you should only need to have the member index.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 6
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ca4482_7bceeb4d",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "As mentioned above, I think you can simplify some of this logic since everything goes into a struct and there will only be one. So there\u0027s no need for `input_struct_param_index` for example.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f893457_0269d099",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "Compute shaders can have inputs, why is this `TINT_UNREACHABLE`?",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00190e43_74022a5b",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "It\u0027s always a struct.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c712f08_d6ec6c68",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "Remove this, HLSL doesn\u0027t need it.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24928468_23617a65",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T00:50:54Z",
+      "side": 1,
+      "message": "I don\u0027t think HLSL needs this.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
