@@ -48,6 +48,9 @@ struct State {
     /// The type manager.
     core::type::Manager& ty{ir.Types()};
 
+    /// Values we've seen and processed already
+    Hashset<core::ir::Value*, 4> seen{};
+
     /// Process the module.
     void Process() {
         for (auto* block : ir.blocks.Objects()) {
@@ -63,21 +66,28 @@ struct State {
         core::ir::Value* val;
     };
 
+    struct ConstInfo {
+        core::ir::Let* let;
+        core::ir::Construct* value;
+    };
+
     void Process(core::ir::Block* block, bool is_root_block) {
         Vector<ValueInfo, 4> worklist;
-        Hashset<core::ir::Value*, 4> seen;
 
         for (auto* inst : *block) {
             if (inst->Is<core::ir::Let>()) {
+                seen.Add(inst->Result(0));
                 continue;
             }
             if (inst->Is<core::ir::Var>()) {
-                if (is_root_block) {
-                    // split root var if needed ...
+                // In the root block we need to split struct and array vars out to turn them into
+                // `static const` variables.
+                if (!is_root_block) {
+                    continue;
                 }
-                continue;
             }
 
+            // Check each operand of the instruction to determine if it's a struct or array.
             for (auto* operand : inst->Operands()) {
                 if (!operand || seen.Contains(operand)) {
                     continue;
@@ -99,13 +109,106 @@ struct State {
             }
         }
 
+        Vector<ConstInfo, 4> const_worklist;
         for (auto& item : worklist) {
             if (auto* res = As<core::ir::InstructionResult>(item.val)) {
                 PutInLet(res);
             } else if (auto* val = As<core::ir::Constant>(item.val)) {
-                PutInLet(item.inst, val);
+                auto* let = PutInLet(item.inst, val);
+                auto ret = process_instruction(is_root_block, item.inst, let, val);
+                if (ret.has_value()) {
+                    const_worklist.Insert(0, *ret);
+                }
             }
         }
+
+        // If any element in the constant is `struct` or `array` it needs to be pulled out
+        // into it's own `let`. That also means the `constant` value needs to turn into a
+        // `Construct`.
+        while (!const_worklist.IsEmpty()) {
+            auto item = const_worklist.Pop();
+
+            tint::Slice<core::ir::Value* const> args = item.value->Args();
+            for (size_t i = 0; i < args.Length(); ++i) {
+                auto ret = process_constant(args[i], item.value, i);
+                if (ret.has_value()) {
+                    const_worklist.Insert(0, *ret);
+                }
+            }
+        }
+    }
+
+    // Process a constant operand and replace if it's a struct or array initializer
+    std::optional<ConstInfo> process_constant(core::ir::Value* operand,
+                                              core::ir::Construct* parent,
+                                              size_t idx) {
+        auto* const_val = operand->As<core::ir::Constant>();
+        if (!const_val) {
+            return std::nullopt;
+        }
+
+        if (!const_val->Type()->Is<core::type::Struct>()) {
+            return std::nullopt;
+        }
+
+        auto* let = b.Let(const_val->Type());
+
+        Vector<core::ir::Value*, 4> new_args = gather_args(const_val);
+
+        auto* construct = b.Construct(const_val->Type(), new_args);
+        let->SetValue(construct->Result(0));
+
+        // Put the `let` in before the `construct` value that we're based off of
+        let->InsertBefore(parent);
+        // Put the new `construct` in before the `let`.
+        construct->InsertBefore(let);
+
+        // Replace the argument in the originating `construct` with the new `let`.
+        parent->SetArg(idx, let->Result(0));
+
+        return {ConstInfo{let, construct}};
+    }
+
+    // Determine if this is a root block var which contains a struct or array initializer and, if
+    // so, setup the instruction for the needed replacement.
+    std::optional<ConstInfo> process_instruction(bool is_root_block,
+                                                 core::ir::Instruction* inst,
+                                                 core::ir::Let* let,
+                                                 core::ir::Constant* val) {
+        // Only care about root-block variables
+        if (!is_root_block || !inst->Is<core::ir::Var>()) {
+            return std::nullopt;
+        }
+        // Only care about struct and array constants
+        if (!val->Type()->Is<core::type::Struct>()) {
+            return std::nullopt;
+        }
+
+        // This may not actually need to be a `construct` but pull it out now to
+        // make further changes, if they're necessary, easier.
+        Vector<core::ir::Value*, 4> args = gather_args(val);
+
+        // Turn the `constant` into a `construct` call and replace the value of the `let` that
+        // was created.
+        auto* construct = b.Construct(val->Type(), args);
+        let->SetValue(construct->Result(0));
+        construct->InsertBefore(let);
+
+        return {ConstInfo{let, construct}};
+    }
+
+    // Gather the arguments to the constant and create a `ir::Value` array from them which can
+    // be used in a `construct`.
+    Vector<core::ir::Value*, 4> gather_args(core::ir::Constant* val) {
+        Vector<core::ir::Value*, 4> args;
+        if (auto* const_val = val->Value()->As<core::constant::Composite>()) {
+            for (auto v : const_val->elements) {
+                args.Push(b.Constant(v));
+            }
+        } else if (auto* splat_val = val->Value()->As<core::constant::Splat>()) {
+            args.Push(b.Constant(splat_val->el));
+        }
+        return args;
     }
 
     core::ir::Let* MkLet(core::ir::Value* value) {
@@ -121,15 +224,41 @@ struct State {
         return let;
     }
 
-    void PutInLet(core::ir::Instruction* inst, core::ir::Value* value) {
-        auto* let = MkLet(value);
-        let->InsertBefore(inst);
+    bool has_multi_block_usage(core::ir::Instruction* inst) {
+        core::ir::Block* blk = nullptr;
+        for (const auto& usage : inst->Result(0)->Usages()) {
+            if (blk == nullptr) {
+                blk = usage->instruction->Block();
+                continue;
+            }
+            if (blk != usage->instruction->Block()) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    [[maybe_unused]] void PutInLet(core::ir::InstructionResult* value) {
+    core::ir::Let* PutInLet(core::ir::Instruction* inst, core::ir::Value* value) {
+        auto* let = MkLet(value);
+
+        bool has_usage_in_multiple_blocks = has_multi_block_usage(let);
+        if (inst->Block() == b.ir.root_block || !has_usage_in_multiple_blocks) {
+            let->InsertBefore(inst);
+        } else {
+            b.ir.root_block->Append(let);
+        }
+        return let;
+    }
+
+    void PutInLet(core::ir::InstructionResult* value) {
         auto* inst = value->Instruction();
         auto* let = MkLet(value);
-        let->InsertAfter(inst);
+        bool has_usage_in_multiple_blocks = has_multi_block_usage(let);
+        if (has_usage_in_multiple_blocks) {
+            b.ir.root_block->Append(let);
+        } else {
+            let->InsertAfter(inst);
+        }
     }
 };
 

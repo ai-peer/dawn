@@ -19,61 +19,33 @@
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
 // DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
 // FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT\ OF SUBSTITUTE GOODS OR
 // SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_INITIALIZERS_H_
-#define SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_INITIALIZERS_H_
+#include "src/tint/lang/hlsl/writer/raise/promote_initializers.h"
 
-#include "src/tint/utils/result/result.h"
-
-// Forward declarations.
-namespace tint::core::ir {
-class Module;
-}
+#include "src/tint/cmd/fuzz/ir/fuzz.h"
+#include "src/tint/lang/core/ir/module.h"
+#include "src/tint/lang/core/ir/validator.h"
 
 namespace tint::hlsl::writer::raise {
+namespace {
 
-/// PromoteInitializers is a transform that moves inline struct and array initializers to a `let`
-/// unless the initializer is already in a `let ` or `var`. For any `var` at the module scope it
-/// will recursively break any array or struct initializers out of the constant into their own
-/// `let`.
-///
-/// After this transform the `Capability::kAllowModuleScopeLets` must be enabled and any downstream
-/// transform/printer must under stand `let` and `construct` instructions at the module scope.
-/// (`construct` can just be skipped as they will be inlined, but the instruction still has to be
-/// handled.)
-///
-/// For example:
-///
-/// ```wgsl
-/// struct A {
-///   b: f32,
-/// }
-/// struct S {
-///   a: A
-/// }
-/// var<private> p = S(A(1.f));
-/// ```
-///
-/// Essentially creates:
-///
-/// ```wgsl
-/// struct S {
-///   a: i32,
-/// }
-/// let v: A = A(1.f);
-/// let v_1: S = S(v);
-/// var p = v_1;
-/// ```
-///
-/// @param module the module to transform
-/// @returns error diagnostics on failure
-Result<SuccessType> PromoteInitializers(core::ir::Module& module);
+void PromoteInitializersFuzzer(core::ir::Module& module) {
+    if (auto res = PromoteInitializers(module); res != Success) {
+        return;
+    }
 
+    core::ir::Capabilities capabilities{core::ir::Capability::kAllowModuleScopeLets};
+    if (auto res = Validate(module, capabilities); res != Success) {
+        TINT_ICE() << "result of PromoteInitializers failed IR validation\n" << res.Failure();
+    }
+}
+
+}  // namespace
 }  // namespace tint::hlsl::writer::raise
 
-#endif  // SRC_TINT_LANG_HLSL_WRITER_RAISE_PROMOTE_INITIALIZERS_H_
+TINT_IR_MODULE_FUZZER(tint::hlsl::writer::raise::PromoteInitializersFuzzer);
