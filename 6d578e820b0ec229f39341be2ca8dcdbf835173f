@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fa53c59_1e38cbf3",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-27T22:55:06Z",
+      "side": 0,
+      "message": "idk if we will need ENUM_ATTRIBUTE for this? if we need it, I expect it will probably end up being a different attribute though",
+      "range": {
+        "startLine": 112,
+        "startChar": 57,
+        "endLine": 112,
+        "endChar": 81
+      },
+      "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
