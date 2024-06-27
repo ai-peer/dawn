@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b142e75_d20d6e0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-27T14:25:52Z",
+      "side": 1,
+      "message": "LGTM. Thanks!\n\n(please update the CL desc to reflect the scoper change)",
+      "revId": "96ad75ed9494c1b2003b87fd5e241508af26670d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
