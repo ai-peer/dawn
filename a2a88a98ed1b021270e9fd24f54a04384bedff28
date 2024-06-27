@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f23685f_13d290a2",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-06-27T19:43:22Z",
+      "side": 1,
+      "message": "Remove this trailing comment (Yeah that was my mistake)",
+      "fixSuggestions": [
+        {
+          "fixId": "c4052f74_a682e68e",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/dawn/native/BlitTextureToBuffer.cpp",
+              "range": {
+                "startLine": 894,
+                "startChar": 0,
+                "endLine": 895,
+                "endChar": 0
+              },
+              "replacement": ""
+            }
+          ]
+        }
+      ],
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f444c9_a002cf17",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-06-27T19:43:22Z",
+      "side": 1,
+      "message": "Thanks for catching this!",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69e92406_848be26e",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-06-27T19:43:22Z",
+      "side": 1,
+      "message": "nit: `DAWN_ASSERT(paddingSize \u003c 4);`",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b89b742_40b2a069",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-06-27T19:43:22Z",
+      "side": 1,
+      "message": "Does this need to align with kTextureBytesPerRowAlignment?\n```\n? Align(copyExtent.width * bytesPerTexel, kTextureBytesPerRowAlignment)\n```",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
