@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcad28f_685a1737",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3956,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-06-27T19:43:04Z",
+      "side": 1,
+      "message": "These 0s are technically under a reserved range thing (so they aren\u0027t really 0 right?), but do we think it would make sense to start these at 1 also?",
+      "range": {
+        "startLine": 3956,
+        "startChar": 22,
+        "endLine": 3956,
+        "endChar": 23
+      },
+      "revId": "1156415d485bda5d6d9e05b1969170822806b563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
