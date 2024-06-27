@@ -985,5 +985,30 @@ void b() {
 )");
 }
 
+TEST_F(HlslWriterTest, DuplicateConstant) {
+    auto* ret_arr = b.Function("ret_arr", ty.array<vec4<i32>, 4>());
+    b.Append(ret_arr->Block(), [&] { b.Return(ret_arr, b.Zero<array<vec4<i32>, 4>>()); });
+
+    auto* func = b.Function("foo", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    b.Append(func->Block(), [&] {
+        b.Let("src_let", b.Zero<array<vec4<i32>, 4>>());
+        b.Return(func);
+    });
+
+    ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
+    EXPECT_EQ(output_.hlsl, R"(
+typedef int4 ary_ret[4];
+ary_ret ret_arr() {
+  int4 v[4] = (int4[4])0;
+  return v;
+}
+
+void foo() {
+  int4 src_let[4] = (int4[4])0;
+}
+
+)");
+}
+
 }  // namespace
 }  // namespace tint::hlsl::writer
