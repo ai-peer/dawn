@@ -16,6 +16,24 @@
       "message": "Hi @Corentin, Rafael mentioned that you think there are some unnecessary re-enumeration of adapters in the test infrastructure, which might have caused this to be reverted. Can you point out where in the tests this might be happening? Thank you!",
       "revId": "5af9bb9db86ab0c72956aed52fcbabe2e692f8ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b18e0ef_91c8cc88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T09:28:34Z",
+      "side": 1,
+      "message": "The revert says:\n\n```\nReason for revert: slows dawn_end2end_tests by 1.4\nhttps://ci.chromium.org/ui/p/chromium/builders/try/win-dawn-rel/34838/overview\ndawn_end2end_tests on NVIDIA GPU on Windows (with patch) on Windows-10-18363\nShard runtime (19m 24s) + overhead (10s): 19m 34s\n\nvs.\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Win10%20x64%20Release%20(NVIDIA)/83040/overview\nShard runtime (13m 58s) + overhead (9s): 14m 7s\n```\n\nso that\u0027s what we\u0027ll need to measure to feel comfortable relanding this change.\n\nMy belief is that the problem comes from the constant `EnumerateAdapters` calls in src/dawn/tests/DawnTest.cpp. Every time that we enumerate adapters but don\u0027t keep them around, the weak_ptr causes the PhysicalDevice to be destroyed and re-created / re-enumarated the next time.\n\nThere are two places where `EnumerateAdapters` is called: `DawnTestEnvironment::SelectPreferredAdapterProperties` and `DawnTestBase::DawnTestBase`. The former is ok because it\u0027s done once when the test executable start, the latter is done on every individual test. My suggestion would be to keep all the wgpu::Adapter alive in the DawnTestEnvironment to force the weak_ptr to stay valid, such that `DawnTest` doesn\u0027t end up recreating the underlying PhysicalDevice.",
+      "parentUuid": "3854a89f_bd8ea00d",
+      "revId": "5af9bb9db86ab0c72956aed52fcbabe2e692f8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
