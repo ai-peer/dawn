@@ -539,6 +539,20 @@ void a() {
 )");
 }
 
+TEST_F(HlslWriterTest, ConstantTypeArrayModuleScopeZero) {
+    b.ir.root_block->Append(b.Var<private_>("v", b.Zero<array<f32, 65536>>()));
+
+    ASSERT_TRUE(Generate()) << err_ << output_.hlsl;
+    EXPECT_EQ(output_.hlsl, R"(
+static const float v_1[65536] = (float[65536])0;
+static float v[65536] = v_1;
+[numthreads(1, 1, 1)]
+void unused_entry_point() {
+}
+
+)");
+}
+
 TEST_F(HlslWriterTest, ConstantTypeArrayEmpty) {
     auto* f = b.Function("a", ty.void_(), core::ir::Function::PipelineStage::kCompute);
     f->SetWorkgroupSize(1, 1, 1);
@@ -687,8 +701,7 @@ void unused_entry_point() {
 )");
 }
 
-// TODO(dsinclair): Need support for `static const` variables
-TEST_F(HlslWriterTest, DISABLED_ConstantTypeLetStructCompositeModuleScoped) {
+TEST_F(HlslWriterTest, ConstantTypeLetStructCompositeModuleScoped) {
     Vector members_a{
         ty.Get<core::type::StructMember>(b.ir.symbols.New("e"), ty.vec4<f32>(), 0u, 0u, 16u, 16u,
                                          core::type::StructMemberAttributes{}),
@@ -720,11 +733,12 @@ struct S {
   A c;
 };
 
-static const A c_1 = {(1.f).xxxx};
-static const S c_2 = {c_1};
-static S z = c_2;
+
+static const A v = {(1.0f).xxxx};
+static const S v_1 = {v};
+static S z = v_1;
 float a() {
-  S t = {{(1.0f).xxxx}};
+  S t = v_1;
   return 1.0f;
 }
 
@@ -868,8 +882,8 @@ TEST_F(HlslWriterTest, ConstantTypeStructStaticEmpty) {
 };
 
 
-static
-S p = (S)0;
+static const S v = {0};
+static S p = v;
 [numthreads(1, 1, 1)]
 void unused_entry_point() {
 }
@@ -877,8 +891,7 @@ void unused_entry_point() {
 )");
 }
 
-// TODO(dsinclair): Need suppport for `static const` variables
-TEST_F(HlslWriterTest, DISABLED_ConstantTypeStructStatic) {
+TEST_F(HlslWriterTest, ConstantTypeStructStatic) {
     Vector members{
         ty.Get<core::type::StructMember>(b.ir.symbols.New("a"), ty.i32(), 0u, 0u, 4u, 4u,
                                          core::type::StructMemberAttributes{}),
@@ -893,8 +906,8 @@ TEST_F(HlslWriterTest, DISABLED_ConstantTypeStructStatic) {
 };
 
 
-static const
-S p = {3};
+static const S v = {3};
+static S p = v;
 [numthreads(1, 1, 1)]
 void unused_entry_point() {
 }
