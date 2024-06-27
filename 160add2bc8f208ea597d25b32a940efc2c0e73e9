@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82bdec01_fdb5285b",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "nit: This could use Align from Math.h",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdbb8f2_98668d78",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "Isn\u0027t that zero-init always done by the caller code already?",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1d7c97_76bdd6a5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "This condition is hard to read, can we separate it in named booleans?",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fcd3650_1959330f",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "nit: comment needs reflow.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b84c9d05_d847dbf5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "didn\u0027t look at this part yet.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e3526f_5d21c50a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "```suggestion\nbool IsFormatSupportedByTextureToBufferBlit(wgpu::TextureFormat format);\n```",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee9911ff_def31268",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "Doesn\u0027t GL use compute to copy to mappable buffers? So this would regress the GL backend. At the same time tests seem to pass so maybe it\u0027s ok.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51dcc509_5b92cd38",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "Can the comment be a bit more clear?\n\nIt seems to be that we need this because we need to be able to address the whole buffer as a UAV for the T2B copy workaround, or do a copy from a temporary buffer, so even if a 1-byte texel could be copied for a texture we need to be able to address it as a 4-byte chunk.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd9068d4_7cafc14c",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-27T16:06:01Z",
+      "side": 1,
+      "message": "That\u0027s just the baseArrayLayer that was removed because there are no 2D array stencil views?",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
