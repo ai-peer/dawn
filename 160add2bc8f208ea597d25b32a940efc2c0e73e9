@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06adfbc6_80bf9d8c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82bdec01_fdb5285b",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cdbb8f2_98668d78",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-27T16:06:01Z",
       "side": 1,
       "message": "Isn\u0027t that zero-init always done by the caller code already?",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0032377c_e845e46a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "AFAIK, the zero-init is always done by backends https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/BufferMTL.mm;drc\u003d1f14cc876cc5bf899d13284a12c451498219bb2d;l\u003d232\n\nSo we should tell it to stop doing that here. This is particularly important for some tests that count how many times we clear.",
+      "parentUuid": "0cdbb8f2_98668d78",
       "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1c261b_4130f546",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e1d7c97_76bdd6a5",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fcd3650_1959330f",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-06-27T16:06:01Z",
       "side": 1,
       "message": "nit: comment needs reflow.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e30fb3_0dac88f4",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fcd3650_1959330f",
       "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63bae762_4c4ec365",
+        "filename": "src/dawn/native/BlitTextureToBuffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7e3526f_5d21c50a",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee9911ff_def31268",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-06-27T16:06:01Z",
       "side": 1,
       "message": "Doesn\u0027t GL use compute to copy to mappable buffers? So this would regress the GL backend. At the same time tests seem to pass so maybe it\u0027s ok.",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90cf0584_ab65ca41",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Previously GL backend didn\u0027t need a temp buffer for this. But now it will need. It will still work, just need extra buffers.\n\nI already have a CL to reuse temp buffers.\n\nFurthermore, in future GL backend could just advertise that it supports extended map usages.",
+      "parentUuid": "ee9911ff_def31268",
       "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb2318d_6dffab5f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "Done. Makes sense. I always thought that CopyB2B always requires 4 bytes alignment so it\u0027s natural to align the buffer size here.",
+      "parentUuid": "51dcc509_5b92cd38",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd9068d4_7cafc14c",
@@ -150,6 +276,24 @@
       "writtenOn": "2024-06-27T16:06:01Z",
       "side": 1,
       "message": "That\u0027s just the baseArrayLayer that was removed because there are no 2D array stencil views?",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a3b278_1a4beb47",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T17:23:20Z",
+      "side": 1,
+      "message": "There was a bug in this code. It was trying to copy one layer but actually the `GetMipLevelSubresourceVirtualSize` call below returns a full mip\u0027s size. Nevertheless we don\u0027t need to copy layer by layer, we can copy the whole mip instead.\n\nThe bug only now surfaces after I enable T2B compute copy for depth stencil textures.",
+      "parentUuid": "bd9068d4_7cafc14c",
       "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
