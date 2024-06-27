@@ -70,6 +70,24 @@
       "parentUuid": "082ff89f_40a789e5",
       "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "522c29be_acdc68dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-06-27T12:15:34Z",
+      "side": 1,
+      "message": "DXC is really big, so it\u0027s  better to skip it if desired. Folks using CMake maybe building specific backends (MSL, GLSL, etc) and not care about HLSL. They may also already be using a DXC installed from the system.\n\nChromium, doesn\u0027t use the Cmake build, it uses the GN build and uses gclient to check the dependencies, not `fetch_dawn_dependencies`.\n\nIt\u0027s also used by the `--validate` flag to tint in combination with `--dxc` so we can test the combined HLSL without needing DXC which may not be available.",
+      "parentUuid": "80f571e2_5de1b43b",
+      "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
