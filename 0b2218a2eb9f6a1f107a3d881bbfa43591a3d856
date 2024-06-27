@@ -1,0 +1,39 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baba02e3_bf6662e7",
+        "filename": "src/tint/lang/hlsl/writer/raise/raise.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-27T21:30:39Z",
+      "side": 1,
+      "message": "Missing ArrayLengthFromUniform?",
+      "fixSuggestions": [
+        {
+          "fixId": "0c5392fb_177c1c4c",
+          "description": "prompt_to_edit API",
+          "replacements": [
+            {
+              "path": "src/tint/lang/hlsl/writer/raise/raise.cc",
+              "range": {
+                "startLine": 69,
+                "startChar": 0,
+                "endLine": 69,
+                "endChar": 0
+              },
+              "replacement": "    RUN_TRANSFORM(core::ir::transform::ArrayLengthFromUniform,\n                  array_length_from_uniform_options);\n"
+            }
+          ]
+        }
+      ],
+      "revId": "0b2218a2eb9f6a1f107a3d881bbfa43591a3d856",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
