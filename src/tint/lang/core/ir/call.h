@@ -49,6 +49,19 @@ class Call : public Castable<Call, OperandInstruction<4, 1>> {
         return operands_.Slice().Offset(ArgsOperandOffset());
     }
 
+    /// Sets the argument at `idx` of `arg`. `idx` must be within bounds of the current argument
+    /// set.
+    void SetArg(size_t idx, ir::Value* arg) {
+        idx += ArgsOperandOffset();
+        TINT_ASSERT(operands_.Length() > idx);
+
+        if (operands_[idx]) {
+            operands_[idx]->RemoveUsage({this, idx});
+        }
+        operands_[idx] = arg;
+        arg->AddUsage({this, idx});
+    }
+
     /// Append a new argument to the argument list for this call instruction.
     /// @param arg the argument value to append
     void AppendArg(ir::Value* arg) { AddOperand(operands_.Length(), arg); }
