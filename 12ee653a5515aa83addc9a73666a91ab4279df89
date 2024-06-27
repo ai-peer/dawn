@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2112794b_92259d2b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "kConstantBufferUpdateAlignment is not sufficient to get full allocated size though.\n\n- kConstantBufferUpdateAlignment is 16.\n- Whereas the constant buffer\u0027s size alignment is 256 [1]. I\u0027m not sure this is a bug in the old code or not.\n\nAlso because of that, sometimes user allocated a buffer with size\u003d16 but the actual size is 256. We don\u0027t need to write the whole 256 bytes if partial update is supported.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/BufferD3D11.cpp;drc\u003d90cac1911508d3d682a67c97aa62483eb712f69a;l\u003d148",
+      "parentUuid": "0ca9ebbd_70e3c2b3",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "201ebb65_2f40c05d",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -83,6 +101,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "```suggestion\n    for (auto i : Range(mStorages.size())) {\n        SetStorageLabel(i);\n```",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f26d8e1_c5a3da91",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t work because enum class doesn\u0027t support ++ operator",
+      "parentUuid": "201ebb65_2f40c05d",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08b0cef_6d2b769b",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done. No specific reason why constant buffer is handled first. It\u0027s just that if a buffer is created with `MapWrite | Uniform | other usage`, it\u0027s mostly that users want to modify the uniform data on CPU, so CPU writable is created first for uniform usage.\n\nAlso we also need to make sure that if the usage is `Uniform | CopyDst` or `Uniform | MapWrite | CopySrc`, we don\u0027t need to create other storages.",
+      "parentUuid": "583fe7cd_b4c1e401",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c54cca1_3c4bc877",
@@ -121,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4855b44_89b36c78",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c54cca1_3c4bc877",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3b303ad_eb9ad84b",
@@ -134,6 +206,30 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "nit: this could be `GetOrAllocate`",
+      "range": {
+        "startLine": 157,
+        "startChar": 28,
+        "endLine": 157,
+        "endChar": 51
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca73bcfe_fef0f9bf",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3b303ad_eb9ad84b",
       "range": {
         "startLine": 157,
         "startChar": 28,
@@ -163,6 +259,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e847820_d4faa443",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "I added a comment in the header.\n- MapWrite: `CPUWritableConstBuffer` gets updated.\n- write on GPU:\n  - UsedAsUAV -\u003e `CPUWritableConstBuffer` is copied to `GPUWritableNonConstBuffer`\n  - GPU modifies `GPUWritableNonConstBuffer`.\n  - commandContext-\u003eAddBufferForSyncingWithCPU.\n  - Queue::Submit\n    - commandContext-\u003eFlushBuffersForSyncingWithCPU\n    - `GPUWritableNonConstBuffer` is copied to `Staging`.\n- MapWrite:\n  - `Staging` is copied to `CPUWritableConstBuffer` with DISCARD flag (`CPUWritableConstBuffer` old content will be discarded, so it avoids stall).",
+      "parentUuid": "7b72eb11_87c30cbc",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cffa9ea_fae3356d",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -174,6 +288,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Can we detail why?",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1128bedd_deb20bf6",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cffa9ea_fae3356d",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +333,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f96805b_d7cf0d4a",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "360efb19_9a00ec90",
+      "range": {
+        "startLine": 271,
+        "startChar": 56,
+        "endLine": 271,
+        "endChar": 90
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6851c62_c08787ce",
@@ -214,6 +370,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "nit: We could SetRevision and return early.",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75868429_4fdb1f4f",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6851c62_c08787ce",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -237,6 +411,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b6ecdbd_9ea1a925",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "This is nested mapping though? Apologise, I don\u0027t fully understand your comment.\n- map(staging);\n  - map(dst);\n  - copy staging -\u003e dst.\n  - unmap(dst);\n- unmap(staging)",
+      "parentUuid": "1a67d282_0a1dd15d",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8548b364_1845c4a6",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -248,6 +440,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Isn\u0027t this whole function the same as:\n\n```\nif (!any map usage) {\n    return {};\n}\n\n// The big comment\nStorage* stagingBuffer;\nDAWN_TRY_ASSIGN(stagingBuffer, AllocateStorageIfNeeded(StorageType::Staging));\nreturn SyncStorage(commandContext, stagingStorage);\n```",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6106fde_514abd04",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8548b364_1845c4a6",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -271,6 +481,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "167e6ca8_e2a38c77",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "This is just to initiate the copy from CPUWritableStorage to Staging storage as early as possible so that later when user calls MapRead, the stall might not be severe. Though this is not common use case though.",
+      "parentUuid": "ba80f971_ec9cb1d0",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26c84ebe_04183df8",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -282,6 +510,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Could we check with mLastUpdateStorage directly if it is a GPU usage or not? It would avoid hardcoding the assumption that it is, which I\u0027m finding very hard to make 100% sure of.",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c49d7c7b_09308d41",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Do you mean we need to check whether the last update is actually a GPU operation or not?\n\nActually the main point is that if we sync the CPU writable buffer here, it would need a stall because we cannot use `CopyResource` to copy `lastUpdatedStorage` -\u003e `CPUWritableConstantBuffer` directly.\n\nWe could only copy indirectly via:\n- `lastUpdatedStorage` -\u003e `stagingStorage`\n- `stagingStorage` -\u003e `CPUWritableConstantBuffer`.\nThe 2nd copy has to be done via mapping and it\u0027s a stall. So it\u0027s better to sync the GPU counterpart of constant buffer here. It will only need one `CopyResource` call.\n\nNo matter what the last update storage is, it will always be able to used as the source of `CopyResource`.\n\nSo if `CPUWritableConstantBuffer` is out of date, we sync its GPU counterpart instead:\n- `lastUpdatedStorage` -\u003e `GPUCopyDstConstantBuffer`",
+      "parentUuid": "26c84ebe_04183df8",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -320,6 +566,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24da3f47_5417c0e8",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "That makes sense. Done.",
+      "parentUuid": "bd7add68_c3be4e30",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76f182a9_c45fed1d",
@@ -333,6 +597,30 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "nit: \"when the commands are flushed.\"",
+      "range": {
+        "startLine": 528,
+        "startChar": 85,
+        "endLine": 529,
+        "endChar": 37
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc659655_ed2dbedd",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f182a9_c45fed1d",
       "range": {
         "startLine": 528,
         "startChar": 85,
@@ -360,6 +648,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a2e52e3_ca3b36aa",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done. I think your suggestion makes sense.",
+      "parentUuid": "3c31f8d7_7fcf3f20",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c31c9833_961b1a3d",
@@ -377,6 +683,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ba586f_6319ea7f",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c31c9833_961b1a3d",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4116727c_11d621ba",
@@ -390,6 +714,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Yes!!! This is what I had hoped d3d11::Buffer did. Is there any way to make this class replace d3d11::Buffer or is there a set of restrictions that\u0027s too complex to fit in this framework?",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43749cc6_83a4f9e9",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "I have replaced GPUUsableBuffer with the new class.",
+      "parentUuid": "4116727c_11d621ba",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -417,6 +759,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2be1903_8fc5e39a",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4acfdfd_1992e943",
+      "range": {
+        "startLine": 76,
+        "startChar": 15,
+        "endLine": 76,
+        "endChar": 40
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7782f3f8_c0c4a647",
@@ -430,6 +796,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Can we have a much larger comment explaining why we split storages like this? It would help future readers of the class a LOT. Something like:\n\n\u003e D3D11 doesn\u0027t allow any GPU usage to be used in combination with CONSTANT_BUFFER so we split storage types between ConstantBuffer vs. NonConstantBuffer.\n\u003e\n\u003e D3D11 also doesn\u0027t allow buffers to be both GPU writable and CPU writable so we split storage types between GPUWritable and CPUWritable.\n\nI\u0027m not 100% why staging is separate though ^^. Is there another constraint that\u0027s not listed wrt. readbacks?",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39cc1dfd_af33d488",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done. Staging is needed for MapRead (it\u0027s only possible on staging buffer). I added a comment.",
+      "parentUuid": "7782f3f8_c0c4a647",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -468,6 +852,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a78a7c8_cef441fd",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1672,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32a38202_3e5a01ee",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35afea05_ace604ac",
@@ -481,6 +883,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Isn\u0027t that what CreateFromData does?",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19fcc479_ee1a31b4",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1699,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done. Yes, though I thought doing a map here could be more obvious to readers.",
+      "parentUuid": "35afea05_ace604ac",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -508,6 +928,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6579141_b1234ca7",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1927,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb212187_bf9daa12",
+      "range": {
+        "startLine": 1920,
+        "startChar": 0,
+        "endLine": 1927,
+        "endChar": 17
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa49dc63_76f8aab9",
@@ -521,6 +965,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "ditto",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48601928_2db87773",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa49dc63_76f8aab9",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -550,6 +1012,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af1dc6b9_73107053",
+        "filename": "src/dawn/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "There is a bug in DawnTest. It would return that this feature is supported in wire.",
+      "parentUuid": "1fa03c7f_fab1be67",
+      "range": {
+        "startLine": 198,
+        "startChar": 8,
+        "endLine": 198,
+        "endChar": 19
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "458ee1b5_e7d1b107",
         "filename": "src/dawn/tests/perf_tests/BufferUploadPerf.cpp",
         "patchSetId": 29
@@ -561,6 +1047,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "ditto",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe7c2b29_fd6d4e8a",
+        "filename": "src/dawn/tests/perf_tests/BufferUploadPerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "458ee1b5_e7d1b107",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -590,6 +1094,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "afdcd451_ce7c0e54",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "There is a bug in DawnTest. It would return that this feature is supported in wire.",
+      "parentUuid": "88a2ba92_00ed663b",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 19
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a13e3d8_1a714769",
         "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
         "patchSetId": 29
@@ -601,6 +1129,24 @@
       "writtenOn": "2024-06-24T20:15:26Z",
       "side": 1,
       "message": "Don\u0027t we want to test with the wire sometimes at least?",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb450dcf_acf7ef41",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a13e3d8_1a714769",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

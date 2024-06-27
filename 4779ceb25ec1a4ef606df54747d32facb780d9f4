@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ac7859_cdd4bb4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-27T08:05:50Z",
+      "side": 1,
+      "message": "I have replaced GPUUsableBuffer with the new class, There is no more separate GPUOnlyBuffer class. Apologize if it\u0027s a bit hard to read.",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
