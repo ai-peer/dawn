@@ -107,7 +107,7 @@ static T& AsNonConstReference(const T& value) {
 
 {% for type in by_category["bitmask"] %}
     {% set CppType = as_cppType(type.name) %}
-    {% set CType = as_cType(type.name) + "Flags" %}
+    {% set CType = as_cType(type.name) %}
     enum class {{CppType}} : uint32_t {
         {% for value in type.values %}
             {{as_cppEnum(value.name)}} = {{as_cEnum(type.name, value.name)}},

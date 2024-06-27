@@ -914,10 +914,7 @@ def as_cType(c_prefix, name):
 
 
 def as_cReturnType(c_prefix, typ):
-    if typ.category != 'bitmask':
-        return as_cType(c_prefix, typ.name)
-    else:
-        return as_cType(c_prefix, typ.name) + 'Flags'
+    return as_cType(c_prefix, typ.name)
 
 
 def as_cppType(name):
@@ -1086,8 +1083,6 @@ def make_base_render_params(metadata):
     c_prefix = metadata.c_prefix
 
     def as_cTypeEnumSpecialCase(typ):
-        if typ.category == 'bitmask':
-            return as_cType(c_prefix, typ.name) + 'Flags'
         return as_cType(c_prefix, typ.name)
 
     def as_cEnum(type_name, value_name):

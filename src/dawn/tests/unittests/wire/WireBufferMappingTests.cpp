@@ -93,7 +93,7 @@ class WireBufferMappingTests : public WireBufferMappingTestBase {
     }
 
     void SetupBuffer(WGPUMapMode mapMode) {
-        WGPUBufferUsageFlags usage = WGPUBufferUsage_MapRead;
+        WGPUBufferUsage usage = WGPUBufferUsage_MapRead;
         if (mapMode == WGPUMapMode_Read) {
             usage = WGPUBufferUsage_MapRead;
         } else if (mapMode == WGPUMapMode_Write) {
@@ -542,7 +542,7 @@ TEST_F(WireBufferMappedAtCreationTests, ReleaseBeforeUnmap) {
 TEST_P(WireBufferMappedAtCreationTests, MapSuccess) {
     WGPUBufferDescriptor descriptor = {};
     descriptor.size = 4;
-    descriptor.usage = WGPUMapMode_Write;
+    descriptor.usage = WGPUBufferUsage_MapWrite;
     descriptor.mappedAtCreation = true;
 
     WGPUBuffer apiBuffer = api.GetNewBuffer();

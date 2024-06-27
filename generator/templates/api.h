@@ -89,7 +89,6 @@
     #define {{API}}_{{constant.name.SNAKE_CASE()}} {{constant.value}}
 {% endfor %}
 
-typedef uint32_t {{API}}Flags;
 typedef uint32_t {{API}}Bool;
 
 {% for type in by_category["object"] %}
@@ -108,9 +107,6 @@ typedef uint32_t {{API}}Bool;
         {% endfor %}
         {{as_cEnum(type.name, Name("force32"))}} = 0x7FFFFFFF
     } {{as_cType(type.name)}} {{API}}_ENUM_ATTRIBUTE;
-    {% if type.category == "bitmask" %}
-        typedef {{API}}Flags {{as_cType(type.name)}}Flags {{API}}_ENUM_ATTRIBUTE;
-    {% endif %}
 
 {% endfor -%}
 {% for type in by_category["function pointer"] %}
@@ -290,6 +286,21 @@ extern "C" {
 
 #ifdef __cplusplus
 } // extern "C"
-#endif
+
+extern "C++" {
+
+{% for type in by_category["bitmask"] %}
+    inline {{as_cType(type.name)}} operator|({{as_cType(type.name)}} a, {{as_cType(type.name)}} b) { return {{as_cType(type.name)}}(((int)a) | ((int)b)); }
+    inline {{as_cType(type.name)}} operator&({{as_cType(type.name)}} a, {{as_cType(type.name)}} b) { return {{as_cType(type.name)}}(((int)a) & ((int)b)); }
+    inline {{as_cType(type.name)}} operator^({{as_cType(type.name)}} a, {{as_cType(type.name)}} b) { return {{as_cType(type.name)}}(((int)a) ^ ((int)b)); }
+    inline {{as_cType(type.name)}} operator~({{as_cType(type.name)}} a) { return {{as_cType(type.name)}}(~(int)a); }
+    inline {{as_cType(type.name)}}& operator|=({{as_cType(type.name)}}& a, {{as_cType(type.name)}} b) { a = a | b; return a; }
+    inline {{as_cType(type.name)}}& operator&=({{as_cType(type.name)}}& a, {{as_cType(type.name)}} b) { a = a & b; return a; }
+    inline {{as_cType(type.name)}}& operator^=({{as_cType(type.name)}}& a, {{as_cType(type.name)}} b) { a = a ^ b; return a; }
+
+{% endfor %}
+}  // extern "C++"
+
+#endif  // __cplusplus
 
 #endif // {{metadata.api.upper()}}_H_
