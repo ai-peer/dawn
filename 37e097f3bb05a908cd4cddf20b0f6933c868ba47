@@ -88,6 +88,24 @@
       "parentUuid": "80f571e2_5de1b43b",
       "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94369480_40832561",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-27T12:31:51Z",
+      "side": 1,
+      "message": "Got it. Once again, thanks for the explaination. I was wondering about the implications this might have on the prebuilt binaries I planned to eventually get to. Looking into the code, `src/dawn/native/d3d/PlatformFunctions.cpp` dynamically loads symbols from `dxil.dll` and `dxcompiler.dll`, so it\u0027s not absolutely necessary to distribute `dxc` with the prebuilt dawn binaries. It\u0027s quite convenient that dawn can use a DXC already installed in the system!",
+      "parentUuid": "522c29be_acdc68dd",
+      "revId": "37e097f3bb05a908cd4cddf20b0f6933c868ba47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
