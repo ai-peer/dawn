@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee75012d_f1984a79",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d041d66c_73b5b426",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 2
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d064b97c_b176a1f5",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-06-27T00:50:54Z",
       "side": 1,
       "message": "I think for HLSL we actually move all inputs to a structure.",
+      "range": {
+        "startLine": 53,
+        "startChar": 14,
+        "endLine": 53,
+        "endChar": 99
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf91989_01d85ae6",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d064b97c_b176a1f5",
       "range": {
         "startLine": 53,
         "startChar": 14,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c197274_3991b5aa",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab08f1da_33b78d7a",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3a24b4f_ea8c142c",
@@ -94,6 +160,24 @@
       "writtenOn": "2024-06-27T00:50:54Z",
       "side": 1,
       "message": "As mentioned elsewhere, there will be at most one parameter (a struct), so you don\u0027t need a vector here.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1306c0da_6c8e15dd",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done. Have to do a dance at the end of `FinalizeInputs` as the ir ShaderIO wants a vector back, and gets really sad if that vector contains a `nullptr`.",
+      "parentUuid": "d3a24b4f_ea8c142c",
       "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "338ae345_fbf28645",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96d6a67_dfef7f81",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 6
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8ca4482_7bceeb4d",
@@ -134,6 +242,24 @@
       "writtenOn": "2024-06-27T00:50:54Z",
       "side": 1,
       "message": "As mentioned above, I think you can simplify some of this logic since everything goes into a struct and there will only be one. So there\u0027s no need for `input_struct_param_index` for example.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e8fb8e_be9f0cba",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8ca4482_7bceeb4d",
       "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -157,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b80b949_dfb6560e",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Copied from MSL, shouldn\u0027t it match what MSL does?",
+      "parentUuid": "8f893457_0269d099",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00190e43_74022a5b",
         "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
         "patchSetId": 3
@@ -168,6 +312,24 @@
       "writtenOn": "2024-06-27T00:50:54Z",
       "side": 1,
       "message": "It\u0027s always a struct.",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ed96f76_a9ff581f",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Depends how paranoid you are, heh. Done.",
+      "parentUuid": "00190e43_74022a5b",
       "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "675c4aff_5d9ac456",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c712f08_d6ec6c68",
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24928468_23617a65",
@@ -202,6 +382,30 @@
       "writtenOn": "2024-06-27T00:50:54Z",
       "side": 1,
       "message": "I don\u0027t think HLSL needs this.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 40
+      },
+      "revId": "ce60766334dc68e128275ce2f5f153b535d703f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "409e2c88_0124faba",
+        "filename": "src/tint/lang/hlsl/writer/raise/shader_io.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-27T02:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24928468_23617a65",
       "range": {
         "startLine": 42,
         "startChar": 0,
