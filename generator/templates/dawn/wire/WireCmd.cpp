@@ -60,7 +60,7 @@
     {%- elif member.type.category == "structure" -%}
         {{as_cType(member.type.name)}}Transfer
     {%- elif member.type.category == "bitmask" -%}
-        {{as_cType(member.type.name)}}Flags
+        {{as_cType(member.type.name)}}
     {%- elif as_cType(member.type.name) == "size_t" -%}
         {{as_cType(types["uint64_t"].name)}}
     {%- else -%}
