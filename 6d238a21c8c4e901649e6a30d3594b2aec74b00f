@@ -16,6 +16,23 @@
       "message": "This fix is needed (or something) to unblock the Dawn roller into Chromium.",
       "revId": "6d238a21c8c4e901649e6a30d3594b2aec74b00f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eab1189_5f8775b6",
+        "filename": "src/dawn/native/opengl/SwapChainEGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-27T21:48:49Z",
+      "side": 1,
+      "message": "If I didn\u0027t move at least one of these ifdefs, then the copmiler errors out, complaining that the code at line 227 is unreachable.",
+      "revId": "6d238a21c8c4e901649e6a30d3594b2aec74b00f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
