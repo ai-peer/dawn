@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d73fbe1_f6ded5f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-27T19:50:02Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "32bcce8e23e65809ab438e6d44513201c4a70a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5415af8_35c57a2a",
+        "filename": "src/dawn/native/opengl/SwapChainEGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-06-27T19:50:02Z",
+      "side": 1,
+      "message": "uNit: comma splice\n```suggestion\n        // The EGLSurface created depends on the format; only reuse it if we have the same one.\n```",
+      "revId": "32bcce8e23e65809ab438e6d44513201c4a70a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
