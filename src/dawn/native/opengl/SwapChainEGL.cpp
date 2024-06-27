@@ -181,40 +181,41 @@ MaybeError SwapChainEGL::CreateEGLSurface(const DisplayEGL* display) {
                                           GetSurface());
     }
 
-    const EGLFunctions& egl = display->egl;
-    EGLDisplay eglDisplay = display->GetDisplay();
-    Surface* surface = GetSurface();
+    [[maybe_unused]] const EGLFunctions& egl = display->egl;
+    [[maybe_unused]] EGLDisplay eglDisplay = display->GetDisplay();
+    [[maybe_unused]] Surface* surface = GetSurface();
 
     switch (surface->GetType()) {
-#if DAWN_PLATFORM_IS(ANDROID)
         case Surface::Type::AndroidWindow:
+#if DAWN_PLATFORM_IS(ANDROID)
             mEGLSurface = egl.CreateWindowSurface(
                 eglDisplay, config, static_cast<ANativeWindow*>(surface->GetAndroidNativeWindow()),
                 nullptr);
-            break;
 #endif  // DAWN_PLATFORM_IS(ANDROID)
-#if defined(DAWN_ENABLE_BACKEND_METAL)
+            break;
         case Surface::Type::MetalLayer:
+#if defined(DAWN_ENABLE_BACKEND_METAL)
             mEGLSurface =
                 egl.CreateWindowSurface(eglDisplay, config, surface->GetMetalLayer(), nullptr);
-            break;
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
-#if DAWN_PLATFORM_IS(WIN32)
+            break;
         case Surface::Type::WindowsHWND:
+#if DAWN_PLATFORM_IS(WIN32)
             mEGLSurface = egl.CreateWindowSurface(eglDisplay, config,
                                                   static_cast<HWND>(surface->GetHWND()), nullptr);
-            break;
 #endif  // DAWN_PLATFORM_IS(WIN32)
-#if defined(DAWN_USE_X11)
+            break;
         case Surface::Type::XlibWindow:
+#if defined(DAWN_USE_X11)
             mEGLSurface =
                 egl.CreateWindowSurface(eglDisplay, config, surface->GetXWindow(), nullptr);
-            break;
 #endif  // defined(DAWN_USE_X11)
+            break;
 
         // TODO(344814083): Add support for creating surfaces using EGL_KHR_platform_base and
         // friends.
         case Surface::Type::WaylandSurface:
+            [[fallthrough]];
 
         default:
             return DAWN_FORMAT_INTERNAL_ERROR("%s cannot be supported on EGL.", surface);
