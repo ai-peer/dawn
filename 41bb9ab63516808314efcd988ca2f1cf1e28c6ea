@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a057dcb5_6fa88e2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-27T18:22:39Z",
+      "side": 1,
+      "message": "PTAL\n\nI decided to go with passing in a directory instead of the streaming filenames approach I was originally discussing, since it was easier to integrate with the Python runner script.",
+      "revId": "41bb9ab63516808314efcd988ca2f1cf1e28c6ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
