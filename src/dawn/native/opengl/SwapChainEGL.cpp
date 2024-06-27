@@ -181,8 +181,8 @@ MaybeError SwapChainEGL::CreateEGLSurface(const DisplayEGL* display) {
                                           GetSurface());
     }
 
-    const EGLFunctions& egl = display->egl;
-    EGLDisplay eglDisplay = display->GetDisplay();
+    [[maybe_unused]] const EGLFunctions& egl = display->egl;
+    [[maybe_unused]] EGLDisplay eglDisplay = display->GetDisplay();
     Surface* surface = GetSurface();
 
     switch (surface->GetType()) {
