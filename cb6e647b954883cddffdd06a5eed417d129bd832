@@ -16,6 +16,24 @@
       "message": "LGTM.\n\nFWIW, I think the `dump-ir` option would probably be the more useful default here, because when debugging fuzzer issues I\u0027d imagine you\u0027d usually want to see the actual IR. Dumping the WGSL will run some transforms that do various things (e.g. inlining) that would make it harder to see the actual details of the test case. But this supports both formats anyway, so NBD.",
       "revId": "cb6e647b954883cddffdd06a5eed417d129bd832",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69ec504_03513026",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2024-06-27T23:31:49Z",
+      "side": 1,
+      "message": "I don\u0027t feel particularly strongly about what the default is here. Feel free to file an issue about swapping it and I can probably knock it out quickly whenI am back.",
+      "parentUuid": "17e57acd_fb418354",
+      "revId": "cb6e647b954883cddffdd06a5eed417d129bd832",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
