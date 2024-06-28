@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6891489f_27370e1f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T23:19:54Z",
+      "side": 1,
+      "message": "sample stdout: https://gist.github.com/kainino0x/945106754ef3d0a230dc0c3cda89cba2",
+      "revId": "fce606decd261245251624861d18dbac96fb33c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
