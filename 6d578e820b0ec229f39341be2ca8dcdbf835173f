@@ -22,6 +22,53 @@
       },
       "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a37c7c_2bd47e9a",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T01:45:51Z",
+      "side": 0,
+      "message": "Swift bindings would probably want to use `NS_REFINED_FOR_SWIFT` here (for both the types and the consts) but I\u0027m not really sure how it works, in particular whether you can even use `NS_REFINED_FOR_SWIFT` to separately refine different typedefs of the same thing and what the syntax is for refining static consts (if any). IMO no need to deal with this until someone is actively trying to make Swift bindings again.",
+      "parentUuid": "3fa53c59_1e38cbf3",
+      "range": {
+        "startLine": 112,
+        "startChar": 57,
+        "endLine": 112,
+        "endChar": 81
+      },
+      "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71d8269_12cebe6b",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T01:45:51Z",
+      "side": 0,
+      "message": "Seems fine to remove \"Flags\" from the name, but surely we need a deprecated typedef with the old names to avoid breaking rolls?\n\nAlso we can raise this since I don\u0027t think we ever decided.\nhttps://github.com/webgpu-native/webgpu-headers/issues/273#issuecomment-2195951806",
+      "range": {
+        "startLine": 96,
+        "startChar": 23,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

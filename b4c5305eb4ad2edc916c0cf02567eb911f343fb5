@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29d26524_4e85b153",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T01:45:51Z",
+      "side": 1,
+      "message": "I\u0027m reminded that until now we\u0027ve only used `#define` and not `static const` but since Vulkan uses `static const` it seems fine to use here too. Commented on GitHub about it anyway.\nhttps://github.com/webgpu-native/webgpu-headers/issues/273#issuecomment-2195935676",
+      "revId": "b4c5305eb4ad2edc916c0cf02567eb911f343fb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3465dc86_13d54fd9",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T01:45:51Z",
+      "side": 1,
+      "message": "TODO to remove Force32",
+      "revId": "b4c5305eb4ad2edc916c0cf02567eb911f343fb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbfec21e_35905000",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-28T01:45:51Z",
+      "side": 1,
+      "message": "nit: shouldn\u0027t matter in practice but perhaps use UINT64_MAX since that\u0027s guaranteed to be the correct type.",
+      "revId": "b4c5305eb4ad2edc916c0cf02567eb911f343fb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
