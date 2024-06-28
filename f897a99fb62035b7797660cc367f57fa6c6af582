@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01e1c693_9ba1784a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:32:58Z",
+      "side": 1,
+      "message": "+CC Jaswant\n\nFYI I will be AFK next week so please work with Brandon and Jaswant to land this.",
+      "revId": "f897a99fb62035b7797660cc367f57fa6c6af582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c76ee4f_f4638714",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:32:58Z",
+      "side": 1,
+      "message": "```suggestion\n    list(APPEND conditional_private_depends\n         ${CMAKE_DL_LIBS})\n```",
+      "revId": "f897a99fb62035b7797660cc367f57fa6c6af582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "504606a5_684955e1",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:32:58Z",
+      "side": 1,
+      "message": "```suggestion\n    list(APPEND conditional_private_platform_depends\n        pthread\n        ${CMAKE_DL_LIBS}\n    )\nendif ()\n```\n\nBut also I think this should be moved to just be in dawn/common with pthread being a public dependency and DL a private one. It should be sufficient to fix the compilation I believe.",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 0
+      },
+      "revId": "f897a99fb62035b7797660cc367f57fa6c6af582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
