@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "751697cd_fb27b176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T14:52:41Z",
+      "side": 1,
+      "message": "Austin, I think the CL is ready for a second review now!",
+      "revId": "6ca5dbc5eec139d2309ccdd4735449c546e1f579",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
