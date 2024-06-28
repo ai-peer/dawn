@@ -36,6 +36,7 @@
 #include "VideoViewsTests.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/VulkanBackend.h"
+#include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
 namespace dawn {
 namespace {
@@ -241,7 +242,8 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
     }
 
     WGPUDevice mWGPUDevice = nullptr;
-    gbm_device* mGbmDevice = nullptr;
+    // RAW_PTR_EXCLUSION: #global-scope
+    RAW_PTR_EXCLUSION gbm_device* mGbmDevice = nullptr;
     int mRenderNodeFd = -1;
 };
 

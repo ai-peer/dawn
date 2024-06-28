@@ -34,6 +34,7 @@
 #include "dawn/tests/DawnTest.h"
 #include "dawn/webgpu.h"
 #include "gmock/gmock.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn {
 namespace {
