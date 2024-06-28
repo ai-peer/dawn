@@ -69,6 +69,30 @@
       },
       "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ed9673_445cc25a",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-28T17:59:11Z",
+      "side": 0,
+      "message": "ok, added an alias in the header",
+      "parentUuid": "e71d8269_12cebe6b",
+      "range": {
+        "startLine": 96,
+        "startChar": 23,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "6d578e820b0ec229f39341be2ca8dcdbf835173f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
