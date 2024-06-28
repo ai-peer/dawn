@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3d3124_3980cc07",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:47:43Z",
+      "side": 1,
+      "message": "Thank you for pushing this :) LGTM",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc4e3412_7df6b964",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:47:43Z",
+      "side": 1,
+      "message": "Do we need this include this early in the file?",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4efbeab_532ca33e",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:47:43Z",
+      "side": 1,
+      "message": "Couldn\u0027t we create this file in our build tree directly, and then install it in the correct place with the install call below?",
+      "range": {
+        "startLine": 442,
+        "startChar": 9,
+        "endLine": 442,
+        "endChar": 20
+      },
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa10a8e_fa0bf9b5",
+        "filename": "src/cmake/DawnConfig.cmake.in",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:47:43Z",
+      "side": 1,
+      "message": "Do you have documentation on how this work that we could point to in comments (or give a brief overview in comments)?",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6551d55_c626bcfa",
+        "filename": "src/dawn/tests/bundle_tests/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:47:43Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be better to not use any Dawn-specific macros or targets (except the exported ones) in this test file? But also what coverage are we looking to get out of these files?",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
