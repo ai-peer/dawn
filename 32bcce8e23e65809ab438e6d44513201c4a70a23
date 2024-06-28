@@ -33,6 +33,24 @@
       "message": "uNit: comma splice\n```suggestion\n        // The EGLSurface created depends on the format; only reuse it if we have the same one.\n```",
       "revId": "32bcce8e23e65809ab438e6d44513201c4a70a23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b493287_f62161b1",
+        "filename": "src/dawn/native/opengl/SwapChainEGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T14:53:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5415af8_35c57a2a",
+      "revId": "32bcce8e23e65809ab438e6d44513201c4a70a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
