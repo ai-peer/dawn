@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "260fda54c9756213759155ee0f4edfb568e91011",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2580cf2_c58b2134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T17:53:03Z",
+      "side": 1,
+      "message": "Holding off on a review here because I think this will need a bunch of extra work for `uniform` buffers, as per my comments on the previous CL.",
+      "revId": "260fda54c9756213759155ee0f4edfb568e91011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
