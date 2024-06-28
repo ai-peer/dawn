@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36aeeed8_e385a612",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-28T00:10:27Z",
+      "side": 1,
+      "message": "should be superseded by https://dawn-review.googlesource.com/c/dawn/+/196195",
+      "revId": "81efd02776b2e7f24f1ca8cb0116fe9df6ba0c6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
