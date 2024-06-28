@@ -16,6 +16,24 @@
       "message": "Thanks!",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e53d42e0_296f604e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T22:25:26Z",
+      "side": 1,
+      "message": "I\u0027ve updated my bundle CL https://dawn-review.googlesource.com/c/dawn/+/195996/22 to turn OFF `CXX_EXTENSIONS` only for the `webgpu_dawn` target.",
+      "parentUuid": "7df111c1_106eb57f",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
