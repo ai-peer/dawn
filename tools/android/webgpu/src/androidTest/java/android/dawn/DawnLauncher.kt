@@ -25,6 +25,11 @@ fun dawnLauncher(
         val adapter =
             instance.requestAdapter().adapter ?: throw DawnException("No adapter available")
 
+        val adapterFeatures = adapter.enumerateFeatures()
+        requiredFeatures.forEach {
+            assert(adapterFeatures.contains(it)) { "Requested feature $it available on adapter" }
+        }
+
         val device = adapter.requestDevice(
             DeviceDescriptor(requiredFeatures = requiredFeatures)
         ).device ?: throw DawnException("No device available")
