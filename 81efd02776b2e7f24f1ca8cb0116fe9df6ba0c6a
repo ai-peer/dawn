@@ -33,6 +33,23 @@
       "message": "Note that James also has a fix uploaded here https://dawn-review.googlesource.com/c/dawn/+/196214",
       "revId": "81efd02776b2e7f24f1ca8cb0116fe9df6ba0c6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb091217_5cf7a988",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T11:51:54Z",
+      "side": 1,
+      "message": "Thank you both for pushing fixes to this!",
+      "revId": "81efd02776b2e7f24f1ca8cb0116fe9df6ba0c6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
