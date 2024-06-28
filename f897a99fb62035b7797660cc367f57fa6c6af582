@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceae25d4_6a6d177e",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-06-28T19:55:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3deca9ee_f3088037",
+      "revId": "f897a99fb62035b7797660cc367f57fa6c6af582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "504606a5_684955e1",
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "`if (UNIX)` is not necessary. Can you please make this cross-platform? `CMAKE_DL_LIBS` does the right thing on either platform. It resolves to empty string on platforms like windows.\n\n```suggestion\nfind_package(Threads REQUIRED)\nlist(APPEND conditional_private_platform_depends\n    Threads::Threads\n    ${CMAKE_DL_LIBS}\n)\n```",
       "parentUuid": "504606a5_684955e1",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 0
+      },
+      "revId": "f897a99fb62035b7797660cc367f57fa6c6af582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdfb94c0_b815f732",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-06-28T19:55:35Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org:\nI had to add CMAKE_DL_LIBS to both dawn/common and dawn/native to fix linking issues for the two examples I\u0027m working on. I also tried adding Thread as a public dependency, but it didn\u0027t work. (Maybe due to the order of linking?)",
+      "parentUuid": "ed537c44_96df3616",
       "range": {
         "startLine": 286,
         "startChar": 0,
