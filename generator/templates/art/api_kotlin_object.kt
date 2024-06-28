@@ -27,7 +27,7 @@
 package {{ kotlin_package }}
 
 import java.nio.ByteBuffer
-{% from 'art/api_kotlin_types.kt' import kotlin_type_declaration, kotlin_definition with context %}
+{% from 'art/api_kotlin_types.kt' import kotlin_declaration, kotlin_definition with context %}
 
 class {{ obj.name.CamelCase() }}(val handle: Long): AutoCloseable {
     {% for method in obj.methods if include_method(method) %}
@@ -36,7 +36,7 @@ class {{ obj.name.CamelCase() }}(val handle: Long): AutoCloseable {
         {%- for arg in filter_arguments(method.arguments) %}
             {{- as_varName(arg.name) }}: {{ kotlin_definition(arg) }},
         {%- endfor -%}):
-        {{- kotlin_type_declaration(method.return_type) -}}
+        {{- kotlin_declaration(kotlin_return(method)) -}}
         {% if method.name.chunks[0] == 'get' and not method.arguments %}
             //* For the Kotlin getter, strip word 'get' from name and convert the remainder to
             //* camelCase() (lower case first word). E.g. "get foo bar" translated to fooBar.

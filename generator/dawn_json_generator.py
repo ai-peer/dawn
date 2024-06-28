@@ -822,16 +822,30 @@ def compute_kotlin_params(loaded_json, kotlin_json):
             if argument.name.get() == 'userdata':
                 continue
 
+            # Dawn uses 'annotation = *' for output parameters, for example to return arrays.
+            # We convert the return type and strip out the parameters.
+            if argument.annotation == '*':
+                continue
+
             yield argument
+
+    def kotlin_return(method):
+        for argument in method.arguments:
+            if argument.annotation == '*':
+                if method.return_type.name.get() == 'size_t':
+                    return argument
+
+        return {"type": method.return_type}
 
     def include_method(method):
         if method.return_type.category == 'function pointer':
             # Kotlin doesn't support returning functions.
             return False
         for argument in method.arguments:
-            if argument.annotation == '*':
+            if argument.annotation == '*' and method.return_type.name.get(
+            ) != 'size_t':
                 # Dawn uses 'annotation = *' for output parameters, for example to return arrays.
-                # Kotlin doesn't support that at the moment
+                # Kotlin doesn't support that at the moment, unless a container is returned.
                 return False
             if argument.type.category == 'callback info':
                 # We don't handle this yet.
@@ -869,6 +883,7 @@ def compute_kotlin_params(loaded_json, kotlin_json):
     params_kotlin['chain_children'] = chain_children
     params_kotlin['filter_arguments'] = filter_arguments
     params_kotlin['include_structure_member'] = include_structure_member
+    params_kotlin['kotlin_return'] = kotlin_return
     params_kotlin['include_method'] = include_method
     params_kotlin['jni_name'] = jni_name
     params_kotlin['is_async_method'] = is_async_method
