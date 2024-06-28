@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dacb5d67_9f2c02f5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "nit: Bug?",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e564d74_e25b337b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "LGTM, very nice!",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a22b5d_4fdd982a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "Wasn\u0027t it sufficient to put this check in the loop below?",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66659044_84453803",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "```suggestion\n    bool shaderF16Enabled \u003d false;\n```\n\nBut also we can likely call `HasFeature(ShaderF16)` instead of having an extra boolean here.",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c731774e_c106e53d",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c9e146_172d3d6c",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T12:47:01Z",
+      "side": 1,
+      "message": "Instead of a template, would it make sense to use DAWN_PARAM_STRUCT etc to make the tests parametrized on a bool UseChromiumExperimentalSubGroups?",
+      "revId": "2710875c5dc6d2688ab16e875473a6be2ec9ee65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
