@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d49b96e_e048bac0",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 935,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "Ah I got confused because I thought backends were calling this helper themselves when instead it is done at command recording time.",
+      "parentUuid": "0032377c_e845e46a",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e1d7c97_76bdd6a5",
@@ -158,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3b63f6_aa7db4cf",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b84c9d05_d847dbf5",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7e3526f_5d21c50a",
@@ -230,6 +266,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29a15769_5563f64a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "There\u0027s multiple things I don\u0027t understand here: why is Uniform special cased? It is valid in WebGPU without any extra feature to use a Storage | Uniform buffer. Here we are also working with internal usages, so it shouldn\u0027t matter what extensions the user created the device with, but what the API or device support. So a device query with \"SupportsMappableAsStorage\" on the device would be better IMHO. It would avoid regressing the GL backend.",
+      "parentUuid": "90cf0584_ab65ca41",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "51dcc509_5b92cd38",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 9
@@ -294,6 +348,24 @@
       "side": 1,
       "message": "There was a bug in this code. It was trying to copy one layer but actually the `GetMipLevelSubresourceVirtualSize` call below returns a full mip\u0027s size. Nevertheless we don\u0027t need to copy layer by layer, we can copy the whole mip instead.\n\nThe bug only now surfaces after I enable T2B compute copy for depth stencil textures.",
       "parentUuid": "bd9068d4_7cafc14c",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9cc2e2_211ba6fb",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "44a3b278_1a4beb47",
       "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

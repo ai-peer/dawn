@@ -55,6 +55,63 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b2e8a01_ef1116bc",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "```suggestion\n    const bool needsTempForOOBU32Write \u003d dst.buffer-\u003eGetSize() % 4 !\u003d 0 \u0026\u0026 (copyExtent.width * byptesPerTexel) % 4 !\u003d 0;\n    const bool needsTempForStorageUsage \u003d !(dst.buffer-\u003eGetUsage() \u0026 (kInternalStorageBuffer | wgpu::BufferUsage::Storage);\n    if (needsTempForOOBU32Write || needsTempForStorageUsage) {\n```",
+      "range": {
+        "startLine": 939,
+        "startChar": 0,
+        "endLine": 943,
+        "endChar": 0
+      },
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bced68c3_913089f9",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "The comment could shortened to be a bit more to the point, moved next to the `needs....` boolean and reworded to not mention OpenGL/ES because this code is backend agnostic.",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a9c7a13_c5772c65",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "Can\u0027t we allocate a buffer just big enough to contain the copied region?",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "69e92406_848be26e",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 10
@@ -72,6 +129,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da628c22_db58e835",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "Why do we need to initialize the last 4 bytes? In the case for U32 OOB the extra padding garbage will be copied around but ultimately not visible to the user of Dawn so it\u0027s ok. In the copying for storage usage, likewise.",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8b89b742_40b2a069",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 10
@@ -83,6 +157,41 @@
       "writtenOn": "2024-06-27T19:43:22Z",
       "side": 1,
       "message": "Does this need to align with kTextureBytesPerRowAlignment?\n```\n? Align(copyExtent.width * bytesPerTexel, kTextureBytesPerRowAlignment)\n```",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c34b4f2_e29f235a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "It\u0027s not needed as that the spec default, that will later get checked against the 256 alignment during validation. Since we passed validation, either it is 256 aligned, or a single row is copied.",
+      "parentUuid": "8b89b742_40b2a069",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1e6c5e3_3ea7d005",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T15:15:23Z",
+      "side": 1,
+      "message": "With the allocation of the temp buffer just big enough for the copy, I believe that this whole  if{if{}}else{} because a single check for if (!compact) {copy}.",
       "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
