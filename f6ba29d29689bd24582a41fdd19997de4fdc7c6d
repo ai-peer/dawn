@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d670b21_09092ad2",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T19:16:29Z",
+      "side": 1,
+      "message": "Moved to right before where it\u0027s needed.",
+      "parentUuid": "cc4e3412_7df6b964",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4efbeab_532ca33e",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-06-28T15:47:43Z",
       "side": 1,
       "message": "Couldn\u0027t we create this file in our build tree directly, and then install it in the correct place with the install call below?",
+      "range": {
+        "startLine": 442,
+        "startChar": 9,
+        "endLine": 442,
+        "endChar": 20
+      },
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07627eb9_22ba1c82",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T19:16:29Z",
+      "side": 1,
+      "message": "No, this `install` command generates a `DawnTargets.cmake` that can work even if the install tree was relocated because hard coded paths are avoided for the libraries.\n\nWhereas, the `export` command below generates paths hardcoded to the build tree. That serves a different purpose.\n\nWhat this allows is users can only do `find_package(Dawn)` and easily switch where dawn gets picked up from. Consumers can control it by setting `-DDawn_DIR\u003d/path/dawn/build` or `-DDawn_DIR\u003d/path/where/dawn/installed` during configure.",
+      "parentUuid": "d4efbeab_532ca33e",
       "range": {
         "startLine": 442,
         "startChar": 9,
@@ -93,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81aab12a_30ac82a5",
+        "filename": "src/cmake/DawnConfig.cmake.in",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T19:16:29Z",
+      "side": 1,
+      "message": "Added comment with links to doc and purpose of this file.",
+      "parentUuid": "7b572913_da482069",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6551d55_c626bcfa",
@@ -106,6 +166,24 @@
       "writtenOn": "2024-06-28T15:47:43Z",
       "side": 1,
       "message": "Wouldn\u0027t it be better to not use any Dawn-specific macros or targets (except the exported ones) in this test file? But also what coverage are we looking to get out of these files?",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "026c8ec3_210712db",
+        "filename": "src/dawn/tests/bundle_tests/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T19:16:29Z",
+      "side": 1,
+      "message": "Removed dawn-specific macros and removed the TriangleTest which uses un-exported targets. I thought it was a good exercise to render a triangle using pure webgpu_cpp classes, but I realize it\u0027s not necessary here.\n\nMy intention with `AdapterTest` is insurance against future breakage of the cmake/bundling steps. As long as this test compiles and links, everything should be okay.",
+      "parentUuid": "b6551d55_c626bcfa",
       "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
