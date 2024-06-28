@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12072c9_63a54f45",
+        "filename": "src/cmake/DawnCompilerChecks.cmake",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-06-28T21:08:42Z",
+      "side": 1,
+      "message": "(Bug filed at https://g-issues.chromium.org/issues/350081480)\n\nIn case in cannot see the bug:\n\nIs there an intentional reason we want to set `CMAKE_CXX_EXTENSIONS` to false?\nThis flag seems to fail tint target to compile.",
+      "revId": "064f544587d8776f109a7be699ef7a2017325bbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
