@@ -34,6 +34,23 @@
       "parentUuid": "7df111c1_106eb57f",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb5acf9_72c72eda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-06-28T22:33:51Z",
+      "side": 1,
+      "message": "I suggest filing a bug in the Tint component to see if we can get the functionality without needing an extension.",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
