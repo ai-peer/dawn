@@ -194,6 +194,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b47e3ca_5f812ca3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T14:52:21Z",
+      "side": 1,
+      "message": "My suggestion is mostly about merging the two functions so that things are as automatic as possible instead of having to think every time.\n\nWhat is the `CopyResource` call useful for in the snippet above?",
+      "parentUuid": "62a535c4_8e1ae714",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "234f31e6_7dd7c99f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 36
