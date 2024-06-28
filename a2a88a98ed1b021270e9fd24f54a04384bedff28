@@ -38,6 +38,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9fc3cde3_76b905a1",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f23685f_13d290a2",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e2f444c9_a002cf17",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 10
@@ -76,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6830734_b9dca8a9",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b2e8a01_ef1116bc",
+      "range": {
+        "startLine": 939,
+        "startChar": 0,
+        "endLine": 943,
+        "endChar": 0
+      },
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bced68c3_913089f9",
@@ -93,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc9701c_541bca24",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bced68c3_913089f9",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a9c7a13_c5772c65",
@@ -106,6 +166,24 @@
       "writtenOn": "2024-06-28T15:15:23Z",
       "side": 1,
       "message": "Can\u0027t we allocate a buffer just big enough to contain the copied region?",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61328b63_a5fe3f21",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "I already has another CL to do that. I would prefer to not change the existing algorithm in this CL, it would make the CL more complicated.",
+      "parentUuid": "3a9c7a13_c5772c65",
       "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +218,42 @@
       "writtenOn": "2024-06-28T15:15:23Z",
       "side": 1,
       "message": "Why do we need to initialize the last 4 bytes? In the case for U32 OOB the extra padding garbage will be copied around but ultimately not visible to the user of Dawn so it\u0027s ok. In the copying for storage usage, likewise.",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e759456_131ac71c",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "We still want to clear the padding bytes because that\u0027s for security as we already do for other buffers, right?\n\nLet\u0027s say we have this scenario:\n- a buffer is created with size \u003d 3.\n- A texture with size\u003d3x1 is copied to the above buffer.\n\nIn normal flow, the final buffer would contain ttt0. The last byte is cleared by the backend.\n\nHowever, in this T2B emulation path, we tell the backend to not clear the buffer. So we have to manually clear it here.",
+      "parentUuid": "da628c22_db58e835",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c9af55_87c82293",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69e92406_848be26e",
       "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -192,6 +306,24 @@
       "writtenOn": "2024-06-28T15:15:23Z",
       "side": 1,
       "message": "With the allocation of the temp buffer just big enough for the copy, I believe that this whole  if{if{}}else{} because a single check for if (!compact) {copy}.",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b2ad50_4bd43fd3",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T17:54:55Z",
+      "side": 1,
+      "message": "You meant we could allocate a buffer such that we don\u0027t need to copy the offset bytes? I\u0027m not sure that\u0027s possible.\n\nWith unusual offset such as 3. The first 4 bytes still need to be copied. There is no way we could legally copy the temp buffer to the final buffer at offset\u003d3 afaict.\n\nIf you meant maybe we should consider offset\u003e0 \"not compact\", and always copy the whole buffer. Idk, seems like a waste in some cases.",
+      "parentUuid": "e1e6c5e3_3ea7d005",
       "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
