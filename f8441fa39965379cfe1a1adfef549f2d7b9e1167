@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3edc7e6b_76ddf81b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-06-28T15:25:57Z",
+      "side": 1,
+      "message": "Austin: Corentin and I discussed this earlier today. We were both surprised that it\u0027s not required to set the image handle in this case explicitly to nullptr, but I didn\u0027t see anything in either the spec or code snippets online/in Ganesh-Vulkan that do so (and YCbCr sampling works on my Pixel 4a without doing so). WDYT?\n\nAdditionally, Corentin suggested testing this via a test of YCbCr sampling, relying on VVL to detect the error. However, I turned on VVL locally and saw that there is no validation error without this change :\\. Do we already have end2end tests that use YCbCr sampling in Dawn? That would be further evidence that this problem isn\u0027t caught by VVL.",
+      "revId": "f8441fa39965379cfe1a1adfef549f2d7b9e1167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
