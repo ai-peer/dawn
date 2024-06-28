@@ -210,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4626c027_4ea3d007",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T15:56:41Z",
+      "side": 1,
+      "message": "I\u0027m starting to understand you suggestion now. I originally thought that you want the two sync paths:\n  a. make latest\n  b. Copy from CPUWritableStorage to Staging.\nand:\n  c. make latest\n  d. enqueue sync to Staging.\nto become one.\n\nBut looks like we can merge a and cd into one instead. Already done.",
+      "parentUuid": "5b47e3ca_5f812ca3",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "234f31e6_7dd7c99f",
