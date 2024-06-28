@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b572913_da482069",
+        "filename": "src/cmake/DawnConfig.cmake.in",
+        "patchSetId": 19
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T16:55:02Z",
+      "side": 1,
+      "message": "There are tutorials:\n\n1. https://cmake.org/cmake/help/latest/guide/tutorial/Installing%20and%20Testing.html\n\n2. https://cmake.org/cmake/help/latest/guide/tutorial/Adding%20Export%20Configuration.html",
+      "parentUuid": "daa10a8e_fa0bf9b5",
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b6551d55_c626bcfa",
         "filename": "src/dawn/tests/bundle_tests/CMakeLists.txt",
         "patchSetId": 19
