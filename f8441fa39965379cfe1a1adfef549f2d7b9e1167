@@ -16,6 +16,24 @@
       "message": "Austin: Corentin and I discussed this earlier today. We were both surprised that it\u0027s not required to set the image handle in this case explicitly to nullptr, but I didn\u0027t see anything in either the spec or code snippets online/in Ganesh-Vulkan that do so (and YCbCr sampling works on my Pixel 4a without doing so). WDYT?\n\nAdditionally, Corentin suggested testing this via a test of YCbCr sampling, relying on VVL to detect the error. However, I turned on VVL locally and saw that there is no validation error without this change :\\. Do we already have end2end tests that use YCbCr sampling in Dawn? That would be further evidence that this problem isn\u0027t caught by VVL.",
       "revId": "f8441fa39965379cfe1a1adfef549f2d7b9e1167",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79009c21_7845a09b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-28T18:44:22Z",
+      "side": 1,
+      "message": "No, I\u0027m pretty sure we don\u0027t have such tests. Didn\u0027t we discuss at some point adding them, but that was difficult because it was necessary to do the setup to import a ycbcr AHB on android?\n\nTheoretically, I do think it would be possible to make a normal texture, and set it up to use ycbcr, with no AHB involved. But we added validation that ycbcr requires TextureFormat::External to simplify things since Chrome didn\u0027t need normal textures to use ycbcr. See [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.cpp;l\u003d640?q\u003d%22Format::External%22%20f:dawn%20f:native\u0026ss\u003dchromium%2Fchromium%2Fsrc). Either you, Saif, or Vasiliy advocated for this restriction; don\u0027t remember exactly",
+      "parentUuid": "3edc7e6b_76ddf81b",
+      "revId": "f8441fa39965379cfe1a1adfef549f2d7b9e1167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
