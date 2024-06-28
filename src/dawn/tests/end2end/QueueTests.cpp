@@ -320,13 +320,6 @@ void FillData(uint8_t* data, size_t count) {
 
 class QueueWriteTextureTests : public DawnTestWithParams<WriteTextureFormatParams> {
   protected:
-    void SetUp() override {
-        DawnTestWithParams::SetUp();
-        // TODO(crbug.com/dawn/2391): Stencil8 format is failing on OpenGLES; needs
-        // investigation.
-        DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && GetParam().mTextureFormat == TextureFormat::Stencil8);
-    }
-
     static DataSpec MinimumDataSpec(wgpu::Extent3D writeSize,
                                     uint32_t overrideBytesPerRow = kStrideComputeDefault,
                                     uint32_t overrideRowsPerImage = kStrideComputeDefault) {
