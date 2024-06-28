@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c0b1b8_ec3bb54c",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-28T15:49:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "217db960_c1a22625",
+      "revId": "fe6b6afc73ead1a16e19c7ac684b6fea5ad06a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2690c149_ea2badf2",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-28T15:02:19Z",
       "side": 1,
       "message": "Nit: This comment still says array",
+      "revId": "fe6b6afc73ead1a16e19c7ac684b6fea5ad06a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37f2ae3_aee6a85b",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-28T15:49:35Z",
+      "side": 1,
+      "message": "Done. My punishment for dilligently writting comments as I wrote the code, and then forgetting the comments when I made everything work correctly.",
+      "parentUuid": "2690c149_ea2badf2",
       "revId": "fe6b6afc73ead1a16e19c7ac684b6fea5ad06a80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -107,6 +107,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b74320f_665f9517",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-28T15:49:35Z",
+      "side": 1,
+      "message": "K, I removed the seen check, it generates duplicate lets (you can see this in the `function_test` which changed. Duplicates seems better then broken code. We can always make a pass which combines duplicate `lets` if they\u0027re within the same scope.",
+      "parentUuid": "36a46869_de7aed19",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed119e92_6de5edac",
