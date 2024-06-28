@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de78ae1_78905de4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T21:04:58Z",
+      "side": 1,
+      "message": "The grossness here around faking pass-by-reference was the only compelling argument I heard for having reference types in the IR. That said, I personally think this special-case is still preferable to introducing ref.",
+      "revId": "4f1e6a22af726bdb73b99a62f782e46c88173d37",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
