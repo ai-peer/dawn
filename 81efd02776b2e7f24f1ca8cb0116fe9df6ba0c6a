@@ -16,6 +16,23 @@
       "message": "should be superseded by https://dawn-review.googlesource.com/c/dawn/+/196195",
       "revId": "81efd02776b2e7f24f1ca8cb0116fe9df6ba0c6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd37ea0c_86ff7d24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-28T11:51:31Z",
+      "side": 1,
+      "message": "Note that James also has a fix uploaded here https://dawn-review.googlesource.com/c/dawn/+/196214",
+      "revId": "81efd02776b2e7f24f1ca8cb0116fe9df6ba0c6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
