@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fc7bc82_cca7c29e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "I agree that this might perform worse than the old code. But I think the old code is incorrect. It always assumed the buffer could be updated with size \u003c allocated size.",
+      "parentUuid": "5fd431af_e14d01eb",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "201ebb65_2f40c05d",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Oh, maybe we didn\u0027t really do ityp containers with enum indices before. We could eventually fix Range() to use the underlying type for that.",
       "parentUuid": "8f26d8e1_c5a3da91",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "431b42ec_1509111f",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Fixing Range() requires too many changes due to TypedInteger complications. I leave it for now.",
+      "parentUuid": "8ab962cd_924cfa75",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -501,6 +537,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c075515_e923ad79",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure it\u0027s valid to leave a D3D resource unmapped before destruction. Let\u0027s leave it as that for now. I think compiler can inline the MapAndCopy if needed.",
+      "parentUuid": "dea9ac28_7ba13dfd",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8548b364_1845c4a6",
         "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
         "patchSetId": 29
@@ -587,6 +641,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f60d7be4_27a111d7",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Done. Already added a comment.",
+      "parentUuid": "d554cabd_87c5b0a5",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26c84ebe_04183df8",
@@ -636,6 +708,24 @@
       "side": 1,
       "message": "Let me rephrase to see if I understand correctly.\n\n`CPUWritableConstantBuffer` is the only storage that cannot be updated with `CopyResource`. So unless it is up to date, we always prefer `GPUCopyDstConstantBuffer` so that we can update it with a GPU copy instead of a mapping+stall+memcpy (very bad) or a memcpy (still kinda bad).\n\nWhat do you think of using an early out in this case to make things more clear.\n\n```\nif (auto storage \u003d mStorages[StorageType::CPUWritableConstantBuffer].Get(); storage-\u003eGetRevision() !\u003d mLastUpdatedStorage-\u003eGetRevision()) {\n    // The CPUWritableConstantBuffer is up to date, use it directly.\n    return storage-\u003eGetD3D11Buffer();\n}\n\n// In all other cases we are going to use the GPUCopyDstConstantBuffer because, either it is up to date, or we need to update the ConstantBuffer data and doing a CopyResource on the GPU is always more efficient than paths involving a memcpy (or potentially a stall).\nDAWN_TRY_ASSIGN(storage, AllocateStorageIfNeeded(StorageType::GPUCopyDstConstantBuffer));\nDAWN_TRY(SyncStorage(commandContext, storage));\nreturn storage-\u003eGetD3D11Buffer();\n```",
       "parentUuid": "c49d7c7b_09308d41",
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b72e04a_e1b2fee4",
+        "filename": "src/dawn/native/d3d11/MappableBufferD3D11.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2565ba3_1f5f7dfa",
       "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1256,6 +1346,30 @@
       "side": 1,
       "message": "What would it take to fix DawnTest?",
       "parentUuid": "afdcd451_ce7c0e54",
+      "range": {
+        "startLine": 180,
+        "startChar": 8,
+        "endLine": 180,
+        "endChar": 19
+      },
+      "revId": "12ee653a5515aa83addc9a73666a91ab4279df89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539d544a_690e3624",
+        "filename": "src/dawn/tests/perf_tests/UniformBufferUpdatePerf.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "DawnTestBase::SupportsFeatures uses native function table even if the adapter is wire version AFAIK. We could create an issue for that.",
+      "parentUuid": "88cfb506_fb44d3dc",
       "range": {
         "startLine": 180,
         "startChar": 8,

@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b7f4a98_b68fbeaf",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Can remove `CopySrc` when we handle Uniform, and remove `CopyDst` when we handle GPUCopyDstConstantBuffer.\n\nWe shouldn\u0027t remove `CopySrc` before that though. Because if that\u0027s only usage, nothing could be created. Or maybe it\u0027s valid to do so.",
+      "parentUuid": "90e21660_83f1a1b4",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e277447_2b0c3f41",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c59251_f1acc6cb",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Yes, I think removing CopySrc or Dst could be sufficient.",
+      "parentUuid": "7e277447_2b0c3f41",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f50217f_99d97c8c",
@@ -82,6 +118,24 @@
       "writtenOn": "2024-06-27T10:55:38Z",
       "side": 1,
       "message": "Isn\u0027t that handled below? We could check for any remaining GPU usages before entering the if-else at [3].",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cce80be8_e04c9e72",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f50217f_99d97c8c",
       "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +176,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62a535c4_8e1ae714",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "storage-\u003eIsGPUWrtiable() is technically equivalent to !storage-\u003eIsMappable(). I think you meant the `dstStorage` could be CPU writable or GPU writable, and we want to do deferred sync to the staging storage?\n\nI already have another comment on why we shouldn\u0027t do that.\nAlternatively, we could change this to:\n```\nif (IsMappable(usage)) {\n    if (dst-\u003eIsGPUWrtiable()) {\n       commandContext-\u003eAddBufferForSyncingWithCPU(this);\n    }\n    else if (dst-\u003eIsCPUWritable() \u0026\u0026 usage \u0026 MapRead) {\n       CopyResource(...)\n    }\n}\n```",
+      "parentUuid": "1bfc3249_0152815b",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "234f31e6_7dd7c99f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 36
@@ -133,6 +205,24 @@
       "writtenOn": "2024-06-27T10:55:38Z",
       "side": 1,
       "message": "That should always be the case with the check at [1] so we could ASSERT at most.",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b66e8e_a592dcca",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Actually you are right. `storage-\u003eIsGPUWritable` is actually equivalent to `!storage-\u003eIsMappable` already. So this check should be an assert.\n\nEven stronger argument is that `IsMappable(GetUsage())` half of [1] alone would prevent this function from being enqueued.",
+      "parentUuid": "234f31e6_7dd7c99f",
       "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +244,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d8081a2_08099e3e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "438f66db_8b63f6f4",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6285bb9b_310fad7f",
@@ -171,6 +279,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "276cfeb0_b08b52db",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6285bb9b_310fad7f",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ba47a2e_44545227",
@@ -184,6 +310,24 @@
       "writtenOn": "2024-06-27T10:55:38Z",
       "side": 1,
       "message": "Any reason this is not merged with `IncrStorageRevAndMakeLatest` if we do [1]? And maybe it\u0027s just `MarkStorageWritten` or `OnStorageWritten`.",
+      "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f1d57f_a598822a",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2024-06-28T04:51:40Z",
+      "side": 1,
+      "message": "The first version is used in `Unmap()`: Considering that we are not encoding any command buffer in `Unmap`, I think we shouldn\u0027t defer the \"copy to staging\" operation. We should call `CopyRessource` directly. Otherwise if we delay the copy, next MapRead call would stall.\n\nThe 2nd version is for places where we are \"encoding\" a pending D3D11 command buffer. And it\u0027s valid to enqueue a \"sync\" there so that the copy will be issued just before the command buffer is flushed.",
+      "parentUuid": "8ba47a2e_44545227",
       "revId": "4779ceb25ec1a4ef606df54747d32facb780d9f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
