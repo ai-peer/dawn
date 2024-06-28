@@ -34,6 +34,24 @@
       "parentUuid": "26d2b603_9d3da020",
       "revId": "019cfaa9ee2aefc275ed753deb4be575dfef8fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3a1900c_306ce39e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-06-28T20:28:19Z",
+      "side": 1,
+      "message": "@Austin I was planning on splitting the work into 3 CLs:\n1. Disable render passes\n2. Add third party dependency to Dawn\n3. Re-enable render passes with updated header file and code.\n\nThe current state of render passes is causing real test breakages so it would be good to disable that separately from the others, as #2 might be non-trivial to do.\n\nWDYT?",
+      "parentUuid": "fd985d95_d67ed13c",
+      "revId": "019cfaa9ee2aefc275ed753deb4be575dfef8fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
