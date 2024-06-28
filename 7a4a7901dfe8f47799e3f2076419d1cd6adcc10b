@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e85b80a_75606d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T15:02:52Z",
+      "side": 1,
+      "message": "Looks like a bad rebase has pulled in the PromoteInitializers changes?",
+      "revId": "7a4a7901dfe8f47799e3f2076419d1cd6adcc10b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
