@@ -16,6 +16,24 @@
       "message": "LGTM; will you be upgrading things to use the new header soon?",
       "revId": "019cfaa9ee2aefc275ed753deb4be575dfef8fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd985d95_d67ed13c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-28T17:48:11Z",
+      "side": 1,
+      "message": "if possible, it would be nice to do that at the same time as this CL",
+      "parentUuid": "26d2b603_9d3da020",
+      "revId": "019cfaa9ee2aefc275ed753deb4be575dfef8fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
