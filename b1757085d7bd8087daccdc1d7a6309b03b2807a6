@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d135a574_03091103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-28T20:16:03Z",
+      "side": 1,
+      "message": "@jaswant.panchumarti@kitware.com I tried this PR and I am running into the following error:\n[ios_arm64_iphoneos ERROR]: CMake Error at src/dawn/native/CMakeLists.txt:850 (get_target_property):\n  get_target_property() called with non-existent target \"dawn_headers\".\n\nThis is the full CMake log: https://gist.github.com/wcandillon/d85f6a3c78648cfcb2d4a4139f57e152",
+      "parentUuid": "409485cd_6c8b1d96",
+      "revId": "b1757085d7bd8087daccdc1d7a6309b03b2807a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a97ff559_a687639c",
