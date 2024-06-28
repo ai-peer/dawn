@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f8e25d2_ce8c1256",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T15:42:45Z",
+      "side": 1,
+      "message": "Given that drawbacks listed in thread, my preference is to leave Tint\u0027s command-line parsing alone for now. It sounds like there wouldn\u0027t be much code to share anyway (just that small aliasing util?).\n\nWe can always revisit this on the Tint side later if it seems like an overall win for Dawn.",
+      "parentUuid": "9e9bf589_81cc2201",
+      "revId": "dd783c37454beb893bdb9e468a302311ef4dbd21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e664323_267fa110",
         "filename": "third_party/gn/abseil-cpp/BUILD.gn",
         "patchSetId": 1
