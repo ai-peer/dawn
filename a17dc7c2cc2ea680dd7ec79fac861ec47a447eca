@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "36a46869_de7aed19",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T15:02:19Z",
+      "side": 1,
+      "message": "This still only hoists the first instance of the constant if there are duplicates in the same block. Here\u0027s the WGSL I\u0027m testing with:\n\n```\nstruct Inner {\n  a : i32,\n  b : i32,\n}\n\nstruct Outer {\n  a : Inner,\n}\n\nfn bar(o : Outer) -\u003e i32 {\n  return o.a.a;\n}\n\nfn foo(a : i32) {\n  let y \u003d a;\n  var p \u003d bar(Outer(Inner(1, 2)));\n  var l \u003d bar(Outer(Inner(1, 2)));\n  let x \u003d p;\n}\n```\n\nWith this patchset, I get:\n```\nvoid foo(int a) {\n  int y \u003d a;\n  Outer v \u003d {{1, 2}};\n  int p \u003d bar(v);\n  int l \u003d bar({{1, 2}});\n  int x \u003d p;\n}\n```\nNote that the second call to bar still has the constructor inlined, and DXC rejects it.",
+      "parentUuid": "da737db6_b1c651fc",
+      "range": {
+        "startLine": 95,
+        "startChar": 32,
+        "endLine": 95,
+        "endChar": 54
+      },
+      "revId": "a17dc7c2cc2ea680dd7ec79fac861ec47a447eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed119e92_6de5edac",
         "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
         "patchSetId": 10

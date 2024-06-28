@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217db960_c1a22625",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T15:02:19Z",
+      "side": 1,
+      "message": "Nit: this comment still says array",
+      "revId": "fe6b6afc73ead1a16e19c7ac684b6fea5ad06a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2690c149_ea2badf2",
+        "filename": "src/tint/lang/hlsl/writer/raise/promote_initializers.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T15:02:19Z",
+      "side": 1,
+      "message": "Nit: This comment still says array",
+      "revId": "fe6b6afc73ead1a16e19c7ac684b6fea5ad06a80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
