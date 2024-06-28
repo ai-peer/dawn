@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53a69d67_9af41e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2024-06-28T09:26:30Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\n\nThis CL add WebGPU feature `subgroups` and `subgroups-f16` in Dawn (currently as experimental state, behind the unsafe toggle), and deprecate the `chromium-experimental-subgroups` feature.\n\nThis CL add/updates related Dawn unit tests and end-to-end tests, including an end-to-end tests that test subgroup-broadcasting subgroup size and check the result. This Cl update the `MatrixVectorMultiply` perf test to use new features.\n\nThis CL also change the `DawnTest` and `ValidationTest` infra to handle the deprecation warnings emitted by creating devices during `SetUp`, e.g. when creating device with deprecated `chromium-experimental-subgroups` feature required.",
+      "revId": "a57f2ed0947bc92ae88fe635583c3879111e0231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
