@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c538eb_267bf6f9",
+        "filename": "src/tint/lang/hlsl/hlsl.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T17:50:09Z",
+      "side": 1,
+      "message": "`uniform` buffers get mapped to `cbuffer` in HLSL, and then use regular array accesses instead of these intrinsics. So no need for `uniform` overloads here.\n\nAs per my other comment, I think you should use a single `ByteAddressBuffer` and parameterize it with an access mode and store type.",
+      "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "130abe5d_6213e842",
+        "filename": "src/tint/lang/hlsl/type/byte_address_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-06-28T17:50:09Z",
+      "side": 1,
+      "message": "The only difference between `ByteAddressBuffer` and `RwByteAddressBuffer` is the access mode, so it seem unnecessary to have both?\n\nI think you can just have `ByteAddressBuffer` with an access mode and store type (skip the pointer, since you know it\u0027s always `storage`).",
+      "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
