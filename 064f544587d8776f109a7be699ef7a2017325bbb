@@ -16,6 +16,24 @@
       "message": "(Bug filed at https://g-issues.chromium.org/issues/350081480)\n\nIn case in cannot see the bug:\n\nIs there an intentional reason we want to set `CMAKE_CXX_EXTENSIONS` to false?\nThis flag seems to fail tint target to compile.",
       "revId": "064f544587d8776f109a7be699ef7a2017325bbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "253fb5e2_d11b0d10",
+        "filename": "src/cmake/DawnCompilerChecks.cmake",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-28T21:37:51Z",
+      "side": 1,
+      "message": "My intention was to set it on the final bundle `webgpu_dawn` so that consumers are not locked into using the same compiler used in dawn. I believe this line can be deleted and later do\n\n```\nset_target_properties(webgpu_dawn PROPERTIES\n    CXX_EXTENSIONS NO\n)\n```",
+      "parentUuid": "a12072c9_63a54f45",
+      "revId": "064f544587d8776f109a7be699ef7a2017325bbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
