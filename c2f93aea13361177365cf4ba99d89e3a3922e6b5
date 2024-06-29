@@ -52,6 +52,24 @@
       "parentUuid": "35d2803e_cfacc5fb",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56483ec_8778697f",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-29T14:18:43Z",
+      "side": 0,
+      "message": "Try latest patchset `git pull https://dawn.googlesource.com/dawn refs/changes/96/195996/23` instead. I may push more commits, so you can get the command from the 3 dots button on the top left -\u003e Download patch",
+      "parentUuid": "fed1e501_e0d8996d",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
