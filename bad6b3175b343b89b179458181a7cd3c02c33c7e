@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcedbb74_7cf4897a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T08:41:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bad6b3175b343b89b179458181a7cd3c02c33c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faeb6643_5522596b",
+        "filename": "src/dawn/common/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T08:41:29Z",
+      "side": 1,
+      "message": "```suggestion\nlist(APPEND conditional_private_depends\n```",
+      "revId": "bad6b3175b343b89b179458181a7cd3c02c33c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
