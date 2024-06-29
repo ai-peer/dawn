@@ -34,6 +34,24 @@
       "parentUuid": "66327cee_08c59bdc",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fed1e501_e0d8996d",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-29T13:54:56Z",
+      "side": 0,
+      "message": "Since this CL hasn\u0027t landed yet, after step 2, you need to pull this CL.\n\n`git pull https://dawn.googlesource.com/dawn refs/changes/96/195996/22`",
+      "parentUuid": "35d2803e_cfacc5fb",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
