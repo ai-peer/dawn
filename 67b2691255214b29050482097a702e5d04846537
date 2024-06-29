@@ -33,6 +33,24 @@
       "message": "See my comment on the relevant issue, that\u0027s likely something we want to fix in Tint so all of Dawn/Tint can be compiled without extensions. Can we have a TODO pointing at the issue here?",
       "revId": "67b2691255214b29050482097a702e5d04846537",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b085c3d3_3191c91e",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-29T14:17:20Z",
+      "side": 1,
+      "message": "Good idea. Added TODO. I will need more information like the compiler version, platform, build logs, `build.ninja` from @shrekshao@google.com to actually fix it because I am unable to reprod on my end.",
+      "parentUuid": "57d69558_cc1b7e9d",
+      "revId": "67b2691255214b29050482097a702e5d04846537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
