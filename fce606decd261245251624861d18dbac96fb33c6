@@ -16,6 +16,23 @@
       "message": "sample stdout: https://gist.github.com/kainino0x/945106754ef3d0a230dc0c3cda89cba2",
       "revId": "fce606decd261245251624861d18dbac96fb33c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1afb54ea_45db229f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-06-29T00:01:42Z",
+      "side": 1,
+      "message": "This flake in the dry run seems to have done what I want - the error is in the first line of the logs.\nhttps://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/35840/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Ashader%2Cexecution%2Czero_init%3Acompute%2Czero_init%3AaddressSpace%3D%22workgroup%22%3BworkgroupSize%3D%5B1%2C1%2C48%5D%3Bbatch__%3D12+VHash%3A498f4d6d51abb135",
+      "revId": "fce606decd261245251624861d18dbac96fb33c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
