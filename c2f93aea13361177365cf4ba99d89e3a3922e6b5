@@ -16,6 +16,24 @@
       "message": "@jaswant.panchumarti@kitware.com this is big thank you. I tests this on Android and iOS.\nOn Android: everything ok. The library size is huge (450mb) but I will file a separate issue for it since this is unrelated to this PR.\nOn iOS: I am missing the following for it to work:\n target_link_libraries(webgpu_c_bundled \"-framework CoreFoundation\" \"-framework IOSurface\" \"-framework Metal\" \"-framework QuartzCore\" \"-framework Foundation\")",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35d2803e_cfacc5fb",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-29T13:53:46Z",
+      "side": 0,
+      "message": "Hey. Any reason to still build `webgpu_c_bundled` from `tools/android`? Please build the project normally and you should get a `libwebgpu_dawn` shared library.\n\nHere\u0027s a summary (I will get around to updating the docs with install step soon)\n\n1. git clone https://dawn.googlesource.com/dawn\n2. cd dawn\n3. cmake -S . -B out -DDAWN_FETCH_DEPENDENCIES\u003dON\n4. cmake --build out\n5. cmake --install out --prefix install\n6. ls install\n   should show libwebgpu_dawn.so/dylib",
+      "parentUuid": "66327cee_08c59bdc",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
