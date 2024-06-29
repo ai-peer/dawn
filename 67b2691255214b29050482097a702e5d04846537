@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "789401c4_00c41d54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T08:49:03Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "67b2691255214b29050482097a702e5d04846537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57d69558_cc1b7e9d",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T08:49:03Z",
+      "side": 1,
+      "message": "See my comment on the relevant issue, that\u0027s likely something we want to fix in Tint so all of Dawn/Tint can be compiled without extensions. Can we have a TODO pointing at the issue here?",
+      "revId": "67b2691255214b29050482097a702e5d04846537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

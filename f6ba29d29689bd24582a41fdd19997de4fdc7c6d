@@ -100,6 +100,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5048b20_0918ccae",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T08:49:03Z",
+      "side": 1,
+      "message": "Thank you for the explanation, I think I understand now.",
+      "parentUuid": "07627eb9_22ba1c82",
+      "range": {
+        "startLine": 442,
+        "startChar": 9,
+        "endLine": 442,
+        "endChar": 20
+      },
+      "revId": "f6ba29d29689bd24582a41fdd19997de4fdc7c6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daa10a8e_fa0bf9b5",
