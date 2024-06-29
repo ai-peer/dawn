@@ -300,6 +300,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a31cb41_95734990",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T09:04:59Z",
+      "side": 1,
+      "message": "I agree that we should have backends fill a structure instead of having one virtual method per capabilitiy. We have a TODO and an issue for this. IMHO we can go past the recommended method with a default that returns false for this one, as we know we want to get rid of them eventually. Thank you for the fix here!",
+      "parentUuid": "38fbb4ba_9aa66543",
+      "revId": "160add2bc8f208ea597d25b32a940efc2c0e73e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51dcc509_5b92cd38",

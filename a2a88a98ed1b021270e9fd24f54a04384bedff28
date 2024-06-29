@@ -188,6 +188,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71790026_7eaf1c2b",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T09:04:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "61328b63_a5fe3f21",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69e92406_848be26e",
@@ -258,6 +276,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb456b1_0e413d90",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T09:04:59Z",
+      "side": 1,
+      "message": "I was thinking that the user can never access the contents of the padding of the buffer, but actually with robust buffer access for vertex buffers it technically could, so we indeed need to clear the padding, nvm.",
+      "parentUuid": "9e759456_131ac71c",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b89b742_40b2a069",
@@ -324,6 +360,24 @@
       "side": 1,
       "message": "You meant we could allocate a buffer such that we don\u0027t need to copy the offset bytes? I\u0027m not sure that\u0027s possible.\n\nWith unusual offset such as 3. The first 4 bytes still need to be copied. There is no way we could legally copy the temp buffer to the final buffer at offset\u003d3 afaict.\n\nIf you meant maybe we should consider offset\u003e0 \"not compact\", and always copy the whole buffer. Idk, seems like a waste in some cases.",
       "parentUuid": "e1e6c5e3_3ea7d005",
+      "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7758b4e2_4a34e09d",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 984,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-06-29T09:04:59Z",
+      "side": 1,
+      "message": "Makes sense!",
+      "parentUuid": "59b2ad50_4bd43fd3",
       "revId": "a2a88a98ed1b021270e9fd24f54a04384bedff28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
