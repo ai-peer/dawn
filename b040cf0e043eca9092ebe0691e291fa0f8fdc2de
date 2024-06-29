@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0da14748_e1d2a2b1",
+        "filename": "src/tint/lang/hlsl/hlsl.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-29T19:30:12Z",
+      "side": 1,
+      "message": "Fun, I hadn\u0027t gotten to uniform yet, and from reading the transform I _thought_ it was doing the same thing, but now I see that the magic behind `intrinsic_uniform_load` attribute is different at the point you get into the printer.",
+      "parentUuid": "f5c538eb_267bf6f9",
+      "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "130abe5d_6213e842",
         "filename": "src/tint/lang/hlsl/type/byte_address_buffer.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-28T17:50:09Z",
       "side": 1,
       "message": "The only difference between `ByteAddressBuffer` and `RwByteAddressBuffer` is the access mode, so it seem unnecessary to have both?\n\nI think you can just have `ByteAddressBuffer` with an access mode and store type (skip the pointer, since you know it\u0027s always `storage`).",
+      "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9957f677_48abd26e",
+        "filename": "src/tint/lang/hlsl/type/byte_address_buffer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-29T19:30:12Z",
+      "side": 1,
+      "message": "The methods are different. You can\u0027t call `Store` on a `ByteAddressBuffer`, only a `RwByteAddressBuffer`. Having the distinction between the two types lets us have separate `def` entries for them and to validatate that we dont\u0027 accidentally add a `Store` to a `ByteAddressBuffer` which I think is useful.\n\nHaving `uniform` as a seprate thing makes it a bit more interesting and I\u0027ll have to play with that to see what shakes out (maybe that uniforms just exist as pointers and we fixup the IR before the printer, will have to play with that).\n\nTo that end, I\u0027d like to keep this distinction for now and see if it helps or hinders as I go forward. I\u0027ll remove `uniform` as it\u0027s wrong for what it\u0027s doing, but I think the storage writable vs readable distinction could be useful.",
+      "parentUuid": "130abe5d_6213e842",
       "revId": "b040cf0e043eca9092ebe0691e291fa0f8fdc2de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
