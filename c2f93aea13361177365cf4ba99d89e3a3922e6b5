@@ -88,6 +88,24 @@
       "parentUuid": "e56483ec_8778697f",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9affcc1b_8a8ea16d",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-29T17:48:25Z",
+      "side": 0,
+      "message": "My apologies for the last command. My build command for iOS was wrong. It is now `cmake .. -DDAWN_FETCH_DEPENDENCIES\u003dON -DCMAKE_TOOLCHAIN_FILE\u003d/Users/wcandillon/.../ios.toolchain.cmake -DPLATFORM\u003dOS64 -DDAWN_BUILD_MONOLITHIC_LIBRARY\u003dON -DDAWN_USE_GLFW\u003dOFF -DBUILD_SAMPLES\u003dOFF -DTINT_BUILD_IR_BINARY\u003dOFF -DTINT_BUILD_CMD_TOOLS\u003dOFF -DTINT_BUILD_TESTS\u003dOFF -DDAWN_BUILD_SAMPLES\u003dOFF -DCMAKE_BUILD_TYPE\u003dRelease` however I still get the same linking issues due to the following missing:\n```\nif(IOS)\n  target_link_libraries(${not sure the name anymore?} \"-framework CoreFoundation\" \"-framework IOSurface\" \"-framework Metal\" \"-framework QuartzCore\" \"-framework Foundation\")\nendif()\n```\n\nthis is the cmake error:\nhttps://gist.github.com/wcandillon/468e65f083f0755eb110416ff32795d8",
+      "parentUuid": "4d293a7a_a1cc7f35",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
