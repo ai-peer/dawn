@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66327cee_08c59bdc",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-29T09:53:15Z",
+      "side": 0,
+      "message": "@jaswant.panchumarti@kitware.com this is big thank you. I tests this on Android and iOS.\nOn Android: everything ok. The library size is huge (450mb) but I will file a separate issue for it since this is unrelated to this PR.\nOn iOS: I am missing the following for it to work:\n target_link_libraries(webgpu_c_bundled \"-framework CoreFoundation\" \"-framework IOSurface\" \"-framework Metal\" \"-framework QuartzCore\" \"-framework Foundation\")",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
