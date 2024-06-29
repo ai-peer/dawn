@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c27bc0e_4933846d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 39
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-29T23:23:18Z",
+      "side": 1,
+      "message": "LGTM! only minor comments - thanks for implementing the full mapping feature",
+      "revId": "1281b160881384843a2d878365149264fdd1199d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f485b74_7910fff8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-29T23:23:18Z",
+      "side": 1,
+      "message": "nit: all other prefixes Dawn uses start with \"Dawn_\" so they can be differentiated against other uses of D3D on the system.",
+      "range": {
+        "startLine": 807,
+        "startChar": 0,
+        "endLine": 811,
+        "endChar": 22
+      },
+      "revId": "1281b160881384843a2d878365149264fdd1199d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfc136cd_cdf7aaae",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-29T23:23:18Z",
+      "side": 1,
+      "message": "nit: static_cast is sufficient since pData is void*\n```suggestion\n    mMappedData \u003d static_cast\u003cuint8_t*\u003e(mappedResource.pData);\n```",
+      "range": {
+        "startLine": 1090,
+        "startChar": 18,
+        "endLine": 1090,
+        "endChar": 34
+      },
+      "revId": "1281b160881384843a2d878365149264fdd1199d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c158fb50_d7d702d3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-29T23:23:18Z",
+      "side": 1,
+      "message": "if it should be impossible, `DAWN_ASSERT(!hadError)`",
+      "range": {
+        "startLine": 1110,
+        "startChar": 63,
+        "endLine": 1110,
+        "endChar": 90
+      },
+      "revId": "1281b160881384843a2d878365149264fdd1199d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e44049_43630a1e",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-06-29T23:23:18Z",
+      "side": 1,
+      "message": "std::array and .fill(..) is probably sufficient here",
+      "range": {
+        "startLine": 1482,
+        "startChar": 0,
+        "endLine": 1482,
+        "endChar": 79
+      },
+      "revId": "1281b160881384843a2d878365149264fdd1199d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
