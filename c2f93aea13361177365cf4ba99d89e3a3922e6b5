@@ -70,6 +70,24 @@
       "parentUuid": "fed1e501_e0d8996d",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d293a7a_a1cc7f35",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-29T17:26:41Z",
+      "side": 0,
+      "message": "Sorry for the confusion with the \"bundled\" naming. For Android I am running:\n`cmake .. -DCMAKE_TOOLCHAIN_FILE\u003d$ANDROID_NDK/build/cmake/android.toolchain.cmake -DANDROID_PLATFORM\u003dandroid-26 -DDAWN_BUILD_MONOLITHIC_LIBRARY\u003dON`\nEverything works great but I have a huge .so file (600MB). I filed a bug report for it. I will also try with a newer NDK version just in case.\n\nFor iOS, I have two ways to do it. Both lead to the same error:\n`cmake .. -DCMAKE_TOOLCHAIN_FILE\u003d/Users/wcandillon/.../ios.toolchain.cmake -DPLATFORM\u003dSIMULATOR64 -DDAWN_BUILD_MONOLITHIC_LIBRARY\u003dON` \nyields:\n```\ncocoa_platform.h:29:10: fatal error: \u0027Carbon/Carbon.h\u0027 file not found\n#include \u003cCarbon/Carbon.h\u003e\n         ^~~~~~~~~~~~~~~~~\n```\n\nThis is the second command I try: `cmake .. -DCMAKE_OSX_ARCHITECTURES\u003darm64 -DPLATFORM\u003dOS64 -DCMAKE_OSX_SYSROOT\u003d$(xcrun --sdk iphoneos --show-sdk-path) -DDAWN_BUILD_MONOLITHIC_LIBRARY\u003dON`\n\n`ios.toolchain.cmake` is taken from https://github.com/leetal/ios-cmake",
+      "parentUuid": "e56483ec_8778697f",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
