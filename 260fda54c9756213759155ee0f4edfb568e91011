@@ -33,6 +33,24 @@
       "message": "Holding off on a review here because I think this will need a bunch of extra work for `uniform` buffers, as per my comments on the previous CL.",
       "revId": "260fda54c9756213759155ee0f4edfb568e91011",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d402009d_43f56644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-06-29T19:31:24Z",
+      "side": 1,
+      "message": "I\u0027m probably going to just strip any `uniform` changes out of this CL and do a separate CL for `uniform` keeps the CLs simpler (and it really doesn\u0027t matter if I emit wrong code, as most of the code I\u0027m emitting is already wrong, heh)",
+      "parentUuid": "f2580cf2_c58b2134",
+      "revId": "260fda54c9756213759155ee0f4edfb568e91011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
