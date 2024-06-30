@@ -33,6 +33,24 @@
       "message": "Cocoa doesn\u0027t exit on iOS",
       "revId": "cc8cdc97d6a1b2f2e2430eb9aaa0f791ed3edbe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10417559_8f366adb",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 26
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-30T15:13:42Z",
+      "side": 1,
+      "message": "Removed IOS check",
+      "parentUuid": "074376bd_c6fa7e2b",
+      "revId": "cc8cdc97d6a1b2f2e2430eb9aaa0f791ed3edbe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
