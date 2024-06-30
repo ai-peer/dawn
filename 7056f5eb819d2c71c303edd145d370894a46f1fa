@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8212a6b_41c6b495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-30T21:59:50Z",
+      "side": 1,
+      "message": "I get this link error in the Kotlin Android library after this CL.\n\n```\nld: error: undefined symbol: __android_log_print\n\u003e\u003e\u003e referenced by Log.cpp:111 (/Users/jimblackler/code/dawn/src/dawn/common/Log.cpp:111)\n\u003e\u003e\u003e               dawn/src/dawn/common/CMakeFiles/dawn_common.dir/Log.cpp.o:(dawn::LogMessage::~LogMessage())\n````\n\nI logged b/350349348",
+      "revId": "7056f5eb819d2c71c303edd145d370894a46f1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
