@@ -33,6 +33,24 @@
       "message": "Could I ask for assistance in fixing this ASAP as my project is broken at present.\n\nThe errors can be seen with:\n\n```\ncd android/tools\n(path to gradle)/gradlew :webgpu:buildCMakeDebug\n```",
       "revId": "7056f5eb819d2c71c303edd145d370894a46f1fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2e114b_95b18f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-06-30T22:39:55Z",
+      "side": 1,
+      "message": "(You will need to patch https://dawn-review.googlesource.com/c/dawn/+/196334 first if it hasn\u0027t landed)",
+      "parentUuid": "6e0ec533_9f723fd6",
+      "revId": "7056f5eb819d2c71c303edd145d370894a46f1fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
