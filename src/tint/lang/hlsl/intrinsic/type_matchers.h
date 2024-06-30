@@ -39,7 +39,8 @@ inline bool MatchByteAddressBuffer(core::intrinsic::MatchState&,
                                    const core::type::Type* ty,
                                    const core::type::Type*& T) {
     if (auto* buf = ty->As<type::ByteAddressBuffer>()) {
-        return buf->Source() == T;
+        T = buf->Source();
+        return true;
     }
     return false;
 }
@@ -54,7 +55,8 @@ inline bool MatchRwByteAddressBuffer(core::intrinsic::MatchState&,
                                      const core::type::Type* ty,
                                      const core::type::Type*& T) {
     if (auto* buf = ty->As<type::RwByteAddressBuffer>()) {
-        return buf->Source() == T;
+        T = buf->Source();
+        return true;
     }
     return false;
 }
