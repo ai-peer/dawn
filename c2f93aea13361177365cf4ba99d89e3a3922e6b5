@@ -160,6 +160,24 @@
       "parentUuid": "6a5e03d0_29764df8",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c873569_c09a155c",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-30T07:02:51Z",
+      "side": 0,
+      "message": "The problem is that Cocoa doesn\u0027t exists on iOS.\nThe following works however:\n```\n    if (DAWN_TARGET_MACOS)\n        list(APPEND conditional_private_platform_depends \"-framework Cocoa\")\n    endif()\n    list(APPEND conditional_private_platform_depends\n        \"-framework Foundation\"\n        \"-framework IOKit\"\n        \"-framework IOSurface\"\n        \"-framework QuartzCore\"\n        \"-framework Metal\"\n    )\n```\nAlternatively, you can add `-framework Foundation` only for iOS, and that will work too.\n\nBig thank you again for making this patch :)",
+      "parentUuid": "7ff64861_f758edb9",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
