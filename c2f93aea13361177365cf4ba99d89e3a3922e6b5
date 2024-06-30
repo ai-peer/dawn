@@ -124,6 +124,24 @@
       "parentUuid": "9affcc1b_8a8ea16d",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a5e03d0_29764df8",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-30T00:28:44Z",
+      "side": 0,
+      "message": "Most of these are already added in lines 529-537 of src/dawn/native/CMakeLists.txt. The only framework if\u0027ed out is \"-framework Cocoa\". It\u0027s conditionally added when `DAWN_TARGET_MACOS\u003dtrue`. Unfortunately, this variable is set to true in root `CMakeLists.txt` only for CMAKE_SYSTEM_NAME \u003d\u003d \"Darwin\" | \"MacOS\". I believe we need another variable `DAWN_TARGET_IOS`.",
+      "parentUuid": "56227615_1eb5d7fc",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
