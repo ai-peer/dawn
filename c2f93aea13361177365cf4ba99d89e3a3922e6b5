@@ -142,6 +142,24 @@
       "parentUuid": "56227615_1eb5d7fc",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff64861_f758edb9",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-30T00:35:56Z",
+      "side": 0,
+      "message": "Updated to add `-framework Cocoa` to link list for iOS as well. Hopefully that is sufficient and brings in the rest like `CoreFoundation`, etc. Please try latest patchset and let me know if it works!",
+      "parentUuid": "6a5e03d0_29764df8",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
