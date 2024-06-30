@@ -196,6 +196,24 @@
       "parentUuid": "4c873569_c09a155c",
       "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f26f8d3b_f50cfe4a",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 22
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2024-06-30T13:52:27Z",
+      "side": 0,
+      "message": "Strange. Can you please share complete error logs and CMakeLists.txt that you used in your app?",
+      "parentUuid": "7635e322_84225359",
+      "revId": "c2f93aea13361177365cf4ba99d89e3a3922e6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
