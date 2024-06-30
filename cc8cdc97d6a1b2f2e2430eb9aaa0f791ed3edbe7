@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b44169_7df8e32c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-30T14:31:51Z",
+      "side": 1,
+      "message": "Thank you for this. Left a comment",
+      "revId": "cc8cdc97d6a1b2f2e2430eb9aaa0f791ed3edbe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "074376bd_c6fa7e2b",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 26
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 3498813
+      },
+      "writtenOn": "2024-06-30T14:31:51Z",
+      "side": 1,
+      "message": "Cocoa doesn\u0027t exit on iOS",
+      "revId": "cc8cdc97d6a1b2f2e2430eb9aaa0f791ed3edbe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
